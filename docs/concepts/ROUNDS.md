@@ -4009,3 +4009,193 @@ tape-spool-humeral, telescopes and tripods are translations (0 fold takes) or pa
 
 - The 3-DOF ceiling and the 4-joint answer (round 15 lens A's table, then the blocker message).
 - The transmission guard, the J1 seat rule and the 5-deg fold margin stay; no lens relaxes them.
+
+## Round 104 results (Round J4, track jump; 2026-10-18 ~04:00 - ~08:50 UTC, closer)
+
+I re-read the ledger with `tools/alignment_ledger.py get <id>` at 08:47 UTC, just before naming the winner:
+- freek-oracle-route-knuckle-4r exits 0, verdict **WATCH** (skeptic 08:43:54Z; it was GAMED P1 at 07:37 when its
+  verifier ran, the auditor lowered it to WATCH at 08:29 and the skeptic kept WATCH);
+- armarc-relay-knuckle-4r, kfree-armarc-relay-4r and desmo-window-knuckle-3r exit 2 (no entry: dead rows, never
+  audited);
+- the lead, conecut-knee-knuckle-3r, exits 0, verdict WATCH (skeptic 2026-10-17 20:15 UTC).
+
+No design is gamed now. 0 of 4 verifications refuted. The farm was closed: everything ran locally (<= 2 niced
+processes). "Fast" is Bench(60,160) fast with kit checks; "frozen" is frozen exact Bench(110,360), the verification
+protocol. Complexity is tools/simplicity.py v2.2. The bar was 18.28 (the lead); every verifier stated it by hand.
+
+The four rows do not map one-to-one on the plan's lenses: lens A (guide-price-close) closed the straight-guide class at
+step 0 and its one survivor was the cuff arm-arc relay (armarc), with kfree-armarc as its K-free sibling; lens B
+(second-wall-route) ran as the free-K oracle and its cell B (freek-oracle); desmo-window is a buildable desmo stack (lens
+C's complexity column; it is not the dog drive the plan priced, and the dog drive was not screened).
+
+| design (lens) | verified number (frozen) | fast | reach / contacts | act / P / cx | ledger | outcome |
+|---|---|---|---|---|---|---|
+| freek-oracle-route-knuckle-4r (B: free-K oracle at the k33 seats; cell B = sensed K + a dowel on J3's own angle, K opening to hold it) | **16.20** (score 94.11) one reading, held 21.89; family reading 20.68 / 24.56; claim's mixed reading 17.35 / 22.67 | 9.56 (best of 8, 1-D sweep) | 0.7778 / 15 contacts (0.0375), follow 0.9545, ib14 0.8977 | 4 / 0 / 33.25 | WATCH | **round winner**; not a lead (4 joints; paired coin flip) |
+| armarc-relay-knuckle-4r (A survivor: one-sided spring arm-arc relay at the cuff on the frozen lead) | **18.01** (93.45); continuity on contacts 17.76 | 8.79 | 0.7639 (275/360) / 11 contacts (0.0278), ib14 0.8838 (chain only 0.8466) | 4 / 0 / 52.0 | exit 2 | dead at the pre-registered kill (> 17.5) |
+| desmo-window-knuckle-3r (C column: desmo drive, J2-first stop order, insert at link 1b plate top + 0.15) | **19.01** (93.09) at kit sampling density (18.80 area-exact; screened 20.43 over-dense); held 23.00-23.20 | 14.68 | 0.7278 (262/360) / 4 contacts, ib14 0.8927 | 3 / 0 / 16.25 | exit 2 | dead on the held kill line (+0.62..0.82 over the lead) |
+| kfree-armarc-relay-4r (A sibling: K welded, plain O20 3R + cuff relay) | **26.42** (90.39); near-touch 27.53 | 18.45 | 0.6722 (242/360) / 9 contacts (0.0249) | 4 / 0 / 29.0 | exit 2 | dead at the kill; perfect-metal bound >= 19.72 |
+| conecut-knee-knuckle-3r (the lead, for reference) | 18.28 (93.35), held 22.38 (22.43 at kit density) | 12.50 | 0.7278 (262/360) / 4 contacts | 3 / 0 / 18.5 | WATCH | stays the verified lead |
+
+**Winner (by the rule): freek-oracle-route-knuckle-4r.** v_gap 16.20 frozen exact (score 94.11), held 21.89, 4 counted
+joints (K is a sensed joint), 0 passive translations, complexity 33.25, ledger WATCH. It is the best number an
+independent verifier confirmed this round and the first 4-DOF verified number under the 3-joint lead's 18.28, and the
+best 4-DOF row on file (minarc-stop-knuckle-4r 19.54, skinnormal-shortk 18.58). **It does not replace the verified
+lead.** (1) Under the user's 2026-10-17 ruling the 3-joint leaders are the real leaders, and this row has 4 joints at
+complexity 33.25 against 18.5. (2) The paired difference against the lead is a coin flip on both benches: -2.08 bench
+(CI90 [-4.99, 2.98], P 0.745), -0.49 held (CI90 [-2.70, 2.13], P 0.622). (3) The 2.08 bench lead is reach bought with
+contact: 15 contact poses against 4 (13 only it has, 2 only the lead has). (4) It reads 16.20 only on the verifier's
+model reading of the fold margin; on the family reading applied consistently it is 20.68 / 24.56, behind the lead.
+(5) It failed lens B's pre-registered gate (>= 279 takes at <= 4 contacts, binders cleared by >= 0.2 mm): the oracle
+reaches 280 connected takes with ~21 contacts and 5 binders touch at every legal K. Passed over as gamed: none. Its
+row still reads `screened` (the verifier held it there under GAMED P1 at 07:41); the ledger no longer blocks calling it
+verified, and the status flip is the lead's call. The generation CAD rule names it as J4's winner; before any CAD its
+open items are the J3 dowel force, the K-spring hold (R17), the cuff twist with the stop engaged and a converged
+search (q3max is a 1-D, 8-point fast sweep), and the groove goes at J3's own angle q3' 96.87 deg, not 86. No design
+reached judge_all this round, so no EVOLUTION row; the generation CAD of record stays the lead's (gen-9 desmo-conecut).
+
+**Alignment.** freek-oracle-route-knuckle-4r carries these WATCH reasons (auditor 08:29, skeptic 08:43; all numbers from
+the saved per-pose dumps):
+- *contact_depth / T5:* bench 15 contact poses, 78.55 mm summed, deepest 20.88 mm at ws 15/165/-60 (overhead); the
+  lead has 4 and 20.24 mm (x3.88). Held 47 poses, 232.2 mm against 14 and 60.97 mm (x3.81). Contacts only this design
+  has vs only the lead has: 13 vs 2 bench, 37 vs 4 held.
+- *P1 (lowered from gamed):* the J3 stop was placed from claim-bench binders (binder_q3.json, poses 316 / 343 / 369 /
+  423); the bench lead over the 3-joint lead is -2.08 (P 0.745) and held -0.49 (P 0.622), so about 24 % survives held
+  out.
+- *P4:* after the GAMED audit the verifier swapped the shared flood reading for a design-specific kin_nodes_model; the
+  row moved 17.35 / 22.67 -> 16.20 / 21.89 and the held-out rank flipped. Stated openly and supported by the audit's
+  measurement, but there is no change-log entry and judge_change cannot see it.
+- *NEW-mixed-reading:* the row carries v_gap 16.20 (one reading) beside frozen_gap 17.35 and held_out_gap 22.67 (family
+  reading).
+- *NEW-stop-refusal:* the dowel refuses poses 343 and 423, which were kit contacts (-2.67 / -1.66 mm); read as contacts
+  the claim is 16.68, so 0.48 of the 2.08 lead is these two poses.
+- *M5:* in state 2 (32 bench / 61 held taken poses) J1 and J2 are free; per unit of K spring torque the cuff carries
+  1.89-3.11x as a moment and the dowel 1.13-2.00x (0.08-0.25 N.m on the cuff at pick1's 0.04-0.08 N.m preload). The
+  skeptic adds that state 1 also puts 1.9-2.6x on the cuff, so the load acts on 102 bench / 234 held poses (the whole
+  knuckle-4r family). R17, the preload sweep and the dowel force are not run.
+- *G1 (reported only):* gap 21.01 at 1 mm and 46.22 at 2 mm against the lead's 19.92 / 34.84; held at 2 mm 48.10 vs
+  37.11; taken poses with metal under 2 mm 46 vs 33 bench, 91 vs 71 held; overhead p10 metal 1.08 mm bench, 0.18 mm held.
+- *G6:* best v_gap of any 4-DOF row, 2.08 under the 3-joint lead, at 4 joints vs 3, complexity 33.25 vs 18.5, overhead
+  15 vs 18 of 71 held.
+- *NEW-stop-angle-label:* "q3max 86" is the model's q3 (cuff vs link 2); J3's own angle is q3' = 96.87 (phi 10.87 at
+  every engaged pose). A groove cut at own angle 86 reads 11.22 fast instead of 9.56.
+- *reporting / R4:* the dashboard still shows gap / sweep_gap 9.56 (score 96.52), the best of 8 fast fit-bench runs,
+  6.64 below the verified 16.20 and above the 95 line.
+- *sampling:* no per-part in-band record, so unsampled bodies cannot be ruled out.
+- *dominance:* ahead on the plain gap, behind by about 11 at 2 mm (A1 gate retired; reported only).
+- *Skeptic, missed by the audit:* the 5 lost bench clip frames (8 held) are one continuous run of overhead contact that
+  follow does not price (v_follow 0.9545, half a frame above the 0.95 cutoff; the lead loses none); the consistent held
+  overhead-contact count is 20 against the lead's 7; in state 2 J2 comes within 1 deg of its own stop at three poses.
+- *Skeptic, refuted with measurements:* held_out (each reading against itself drops +5.68 / +5.31, under the 6.0 watch
+  line), fold_margin and T3 (min th 5.91 bench / 6.50 held on every moving chain; where the family term binds J2 is free
+  and >= 28 deg from its stop).
+
+The three dead rows have no ledger entry; their verifiers' findings are carried here at watch level:
+- **armarc-relay-knuckle-4r:** v_gap 18.01 reproduced exactly from the saved per-pose results, not re-run (2 other
+  agents' processes on the box); continuity applied to contacts makes pose 206 (phi 0 -> 17 between neighbours) a
+  blocked island: 17.76; an end dowel at PHI 10 reads 17.36-17.75 but PHI was picked on the claim bench (P1 class), not
+  admissible; *dilution:* the relay shell is 24 % of the in-band samples, all in band, lifting 0.8466 to 0.8838 (chain
+  only 21.73; same class as the lead's NEW-strap-dilution); near-touch 21.72 vs the lead's 19.92; the 11 contacts are
+  the chain's own member 3 / hub 3 / neck (same with the ideal relay); *process:* the author used `pkill -f` once,
+  against the rule (it matched only the author's own held-out run).
+- **kfree-armarc-relay-4r:** v_* re-tallied from the author's frozen dump (the exact wear took 2337 s), not re-run;
+  the model keeps hub K + links 1a / 1b as metal while the morphology is one bent bar (cannot matter: perfect-metal
+  bound >= 19.72); the headline in-band counts the relay shell 100 % in band (chain only 30.6); the sweep was thin at
+  PHI 25-40 / psi2 -13..-16 (verifier probes 23.93-30.54 fast) and sense -1 is not a missed region (21.39-29.06 fast,
+  ideal); *red team:* the optimum sits on a jam cliff, 25 of 68 neighbours 0.3-2 deg away jam (7-76 jams, 34.6-132.1
+  fast); continuity flood and gravity check not run (neither can lower the gap).
+- **desmo-window-knuckle-3r:** *sampling density (a measurement change, not a design change):* the ring2 insert sector
+  is sampled at 1 pt / 1 mm2, 4x the kit's 1 pt / 4 mm2, so the screened 20.43 / 24.61 over-weighted it; at kit
+  density 18.80-19.01 / 23.00-23.20 (re-weighted from parts_ib14; the fast run backs it, near-touch 20.52 -> 19.02
+  measured). The exact re-wear at kit density was stopped (~55 min projected at load 18). The honesty audit flagged only
+  sparse sampling; the lead's cross-row density audit (tools/sample_density.py, 07:41Z) then found 9 of 13 rows over
+  2x and re-weighted them: the lead 18.28 / 22.38 -> 18.28 / 22.43; desmo-conecut 18.98 -> 18.68; desmo-slipper 18.95
+  -> 18.81; no row moves under the lead. v_inband10 is the screened value.
+- **The lead's WATCH reasons** (reporting 12.5 shown as 95.45; T1, 16.56 points in the 1-2 mm shell; T3, held th margin
+  5.006; NEW-strap-dilution 18.67; M5; NEW-self-reference; G4) stand; armarc wore the lead frozen and inherits them.
+- **Process, all rows:** all four verifiers again stated the bar by hand: tools/workflows/exo-screen.js line 24 still
+  reads BASE 68.93 / BIG 75.94 / LEAD default 30.35 (stale now in 11 of 12 verifications over J2-J4; the planner can pass
+  `lead: 18.28` in the args). The near-touch objective was used in kfree-armarc's and desmo-window's searches. The
+  auditor wrote ledger entries for the round winner (audit + skeptic) but none for the three dead rows.
+
+**What the round measured (lessons).**
+1. **A straight guide adds 0 fold takes, wherever it sits** (inside link 2, as the counted cuff slide, as a radial
+   guide for hub 2): th is identical to 0.000 deg on 470 poses with the guide, and the rail costs ~+0.6 / 1.1 / 1.6 gap
+   at travel 0 / 10 / 20 mm. A rail normal to J3 forms a planar 4-DOF group with J3 and the two knee pins, leaving one
+   coordinate undetermined. The length-changing class is closed; only angle-changing variants touch the fold, and they
+   are relays (lesson 2-4) or K laws (lesson 5).
+2. **Relaying past the stretched wall from the arm side meets the same second wall as opening K from the scapula
+   side.** armarc parks the chain at its wall posture with the arm turned further: 20 relayed bench poses, 13 taken at a
+   median 1.81 mm (lead 3.5), 7 contacts, the same with the ideal relay. A one-sided spring relay cannot choose its wall,
+   so it also relays folded-side poses into the skin (262 at -9.79 to -11.44 mm, 206 at -6.07). Kit-metal clearances
+   run ~4 mm optimistic against the lead's real metal (relayed median 7.6-8.3 kit vs 3.25 real).
+3. **The relay range is invisible on the fast bench and capped by the track's metal.** Ideal relay on the lead, frozen
+   exact: 16.39 / 13.78 / 12.37 at PHI 20 / 30 / 45 (Bench(60,160) reads 4.89 at both 20 and 25). The real circular
+   shell at PHI 30 reads 19.86 (worse than PHI 20's 18.01): a one-radius arc fits the arm only near the pad and touches at
+   arm-down poses. On the K-free 3R the torso caps an arm-fixed arc at ~45 deg (9 of 14 fast contacts at PHI 45 are the
+   un-relayed track in the chest, to -10.1 mm). The knee stack's 4.59-5.4 mm climb onto a carriage costs the chain
+   0.055-0.07 of in-band.
+4. **A K-free cuff relay is kinematically worth 8 points over the knuckle lead, with no hardware:** an ideal 75-deg
+   relay on a plain O20 3R at the lead's seats reads 10.22 frozen exact (304/360, overhead 14/28). It is the only bound
+   on file under 13.75. Every real arm-fixed track long enough to reach it has hit the torso or the arm-down skin. The
+   J2 window shift psi2 (J2's rest axis turned about J1, a2 57.2 -> 62-64.5) is worth 8-16 fast points on the welded
+   plain 3R alone (39.80 -> 23.65-31.83).
+5. **Every K-side lever at the k33 seats is bounded at 17.25 connected plain / 21.46 near-touch** (per-pose oracle K on
+   the legal self-motion, every model check run per sample; frozen exact Bench(110,360)). The second wall is
+   seat-level parking of link 2 / hub 2 at the external-rotation binders 117 / 119 / 129 (plane -90..-75, elev 45-60,
+   axial 120-135): they touch at every legal K (best -1.14 / -10.74 / -5.87 mm). An anterior link-2 corridor (+12 deg)
+   lifts them only 0.7-2.3 mm and costs in-band (18.71 connected). ER binders want less K, IR binders (343 / 423) want
+   K at stop B, so a J3 own-angle stop serves only the IR side. A stop can beat a static oracle by refusing poses, and
+   that bench gain did not hold out (cell B +1.26 connected bench, +0.70 held over its own kit).
+6. **Oracle hazard:** if "lost" outranks "contact", a per-pose oracle parks contact poses at refused configurations and
+   reads ~1.7 points optimistic (15.27 vs 16.96 here). Only legal configurations may compete, and member 3 / the knee
+   move with K (J3's line misses GH by ~15 mm).
+7. **Sampling density moves in-band either way.** Over-dense out-of-band metal weighs extra (desmo ring2 at 4x: +1.45
+   screened vs +0.31-0.44 real for the 3.04 mm lift); a buildable desmo must keep stage 1 inside the O20 footprint
+   (pitch_hi + 1.56 <= 10) or under link 1b's plate top, and at the verified law no legal pin has pitch below ~9.7, so
+   the desmo lever left is the drive geometry (crank axis dR, ratio g, PA budget). The J2-first stop order itself costs
+   0 reach.
+8. **Machinery:** batching contact-only parts into one exact distance call per pose made armarc's exact hardware-path
+   wear ~5x faster (548 s, reproduces 18.01 exactly); Bench.dist accepts batched point sets, so per-pose exact scans of
+   many K samples are affordable.
+
+**The 4-joint picture after J4 (for main round 15 lens A's take-bound table and the user's blocker).**
+- free-K oracle at the k33 seats (any K law, spring, J3 split or sensed K): 17.25 connected plain / 21.46 near-touch,
+  280 connected takes with ~21 contacts; cell B (sensed K + J3 own-angle dowel) 16.20 bench / 21.89 held, 4 joints,
+  cx 33.25, paired coin flip against the lead;
+- arm-side relay on the lead: real 18.01 (275 takes, 11 contacts), ideal 16.39 / 13.78 / 12.37 at PHI 20 / 30 / 45,
+  real PHI 30 19.86;
+- K-free cuff relay on a plain O20 3R: real 26.42 (242 takes), ideal 75-deg bound 10.22 (304 takes);
+- straight guides: 0 fold takes;
+- earlier: relays under the lead 22.18-32.92, cap null-space 57.70, minarc 19.54, skinnormal-shortk 18.58.
+For the first time a 4-DOF verified number (16.20) sits under the 3-joint lead's 18.28 on the bench, but not
+significantly (P 0.745 bench, 0.622 held), and it buys its reach with 15 contacts against 4. No 4-DOF row reaches 95;
+the only bound under 13.75 is the hardware-free K-free relay.
+
+**Next focus (round J5, track jump).** The score has not reached 95 (best verified 16.20 at 4 joints, 18.28 at 3; 95 is
+13.75). Measured reason: every K lever and every arm-fixed relay is capped at 16.2-18.3 by metal parking at the second
+wall (lessons 2, 3, 5), while the only sub-13.75 bound (10.22) is a K-free relay whose arm-fixed track hits the torso.
+- **Lens a, the carriage-borne relay rail (kfree-armarc's unmeasured lever):** a short curved rail on the pad side that
+  runs on rollers fixed to the arm at lateral stations only, so no metal covers the medial arc until the relay turns.
+  Price first with armarc's rule: relayed poses must clear the skin by >= 2 mm on the lead's REAL metal, the carriage
+  needs no knee-stack lift, and the relay must be two-sided or stopped (a one-sided spring relays folded poses in).
+  Decide relay range on frozen exact, never on Bench(60,160). Gate 0: frozen exact <= 15, kill > 17.5. It is a 4th
+  joint: a pass goes to the user as the 4-joint answer, not a lead change on its own.
+- **Lens b, psi2 on the 3-joint lead (cheap, <= 30 min):** the J2 window shift bought 8-16 fast points on the welded
+  plain 3R; re-fit the lead's chain with psi2 free on the near-touch objective (envsel), wear frozen exact once, report
+  paired vs the lead. Check first whether the lead's a2 / seat fit already spans it.
+- **Lens c, the second wall at the ER binders (117 / 119 / 129) with the free-K oracle as the instrument:** only moves
+  not on the round-15 dead list (back-seat J3 / hub-K / link-2 seat moves, link-2 root / whole-bar radial lifts);
+  pre-register the oracle gate (>= 279 takes at <= 4 contacts, binders cleared by >= 0.2 mm) before any claim, and never
+  place a stop from claim-bench binders (freek's P1).
+- **Machinery before the next claim:** pass `lead: 18.28` to the verify template (or fix the default in exo-screen.js
+  line 24); have the auditor write an entry for every verified row, dead or not; correct the dashboard's 9.56 for
+  freek-oracle (verified 16.20); record the verifier's fold-reading change in the change log; re-wear the desmo pair at
+  kit density on the exact path when the box allows.
+
+### Needs the user's say (with J4's numbers)
+
+- The 4-joint question: freek-oracle-route-knuckle-4r is the first 4-joint row under the 3-joint lead on the bench
+  (16.20 vs 18.28; held 21.89 vs 22.38), a coin flip that trades 13 extra contacts for reach; the only path to 95 on
+  file is a hardware-free bound (K-free relay 10.22) that needs a 4th joint. Round 15 lens A's table carries the 3-joint
+  side; the blocker message goes to the user from there.
+- The transmission guard, the J1 seat rule and the 5-deg fold margin stay; no lens relaxed them.
