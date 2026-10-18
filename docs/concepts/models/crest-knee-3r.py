@@ -216,8 +216,15 @@ class JogModel(Model):
         f1 = H["hub1"][keep].max(); f2 = H["hub2"][keep].max(); f3 = H["h3"][keep].max()
         tra, trb = self._levels(keep)
         hE = self._HE[keep].max(0) if keep.any() else self._HE.max(0)
-        xs, rE, f3, tra2 = self._E_profile(hE, f3, tra)
-        if tra2 > tra + 1e-9: tra, trb = self._levels(keep, tra_min=tra2)
+        # pin a's stack: the knee link's underside (tr_a + tp + RUN) must clear the E strap's top (E + T_LINK) by the
+        # 0.15 mm running gap (+0.05) wherever the strap passes under the knee's pin-a end (stations within 8.5 mm of
+        # pin a); the flat knee gets this for free when tr is set by the pad or knee, the joggle must enforce it
+        lE = float(P["lE"]); tp = P["tp"]
+        for _ in range(4):
+            xs, rE, f3, tra2 = self._E_profile(hE, f3, tra)
+            near = rE[xs >= lE - 8.5]; req = max(tra2, (float(near.max()) + S.T_LINK + self.ADJ + 0.05 - tp - S.RUN) if len(near) else tra2)
+            if req <= tra + 1e-6: break
+            tra, trb = self._levels(keep, tra_min=req)
         self.f = [f1, f2, f3]; self.tr = tra; self.tr_b = trb; self.zb = tra
         w, _ = self._knee_w(); self._kw = w; klev = tra * w + trb * (1 - w)
         u, c = D.u, D.c; k = math.tan(S.RAMP * D2R); rL = {nm: [r[keep].max(0) for r in rows] for nm, rows in self.Lneed.items()}
