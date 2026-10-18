@@ -1,0 +1,26 @@
+[
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Overhead reach is metal at the skin (report-only under the user's 2026-10-17 ruling). The re-wear reproduces 32.84 bench / 29.81 held to the digit. Overhead workspace (elev >= 140) the claim takes 5 / 28 on Bench(110,360): lowest metal 0.59, 0.96, 1.23, 1.72, 2.10 mm (4 of 5 under 2 mm); held 6 / 26 at 0.02, 0.18, 0.59, 0.85, 1.11, 1.45 mm (all 6 under 2 mm, 4 under 1 mm). All 10 overhead clip frames (Raise overhead, elev 148-150) are taken with lowest metal 1.08-1.85 mm, bench and held. Over all taken poses: 6 under 1 mm, 34 under 2 mm, 77 under 3 mm bench (10 / 34 / 83 held). Gap 32.84 plain, 36.25 at 1 mm, 57.98 at 2 mm (25.14 points live in the 1-2 mm shell, the old T1 'gamed' line was 25), 93.37 at 3 mm; band read 3-14 mm 35.30. H1 (skin-normal-3r-pin-knee) on the same bench: 27 poses under 2 mm, 2 mm gap 46.85 (shell 19.65); the lead conecut-knee-knuckle-3r 33 poses, 34.84 (shell 16.56). Not gamed: the design is behind both plain AND at 2 mm (dominance -14.56 plain / -23.14 at 2 mm vs the lead), so no ranking is bought by the shell.",
+  "evidence": "docs/alignment/remeasure/crest-knee-3r_bench.json + _held.json (deep: gap_near1/2/3, gap_band3_14), crest-knee-3r_{bench,held}_probe.json (ws_overhead140 / clip_overhead140 floors), crest-knee-3r_{bench,held}_perpose.json (per-pose min_mm, cmin); references remeasure/skin-normal-3r-pin-knee_bench.json, conecut-knee-knuckle-3r_bench.json"
+ },
+ {
+  "key": "NEW-ws-inband",
+  "level": "watch",
+  "reason": "The gap reads in-band on clip frames only. On the 228 workspace poses the claim takes (unscored) 0.793 of the metal is in 2-14 mm and 20.5 % is above 14 mm (2.5 % above 20 mm, max 27.7 mm), against 0.853 on the scored clip frames; held out 0.775 / 22.3 % above 14 mm. At elevation 90-140: 0.804 bench / 0.800 held. H1 reads 0.867 over all taken workspace poses (13.3 % above 14 mm) and the lead 0.868 (13.0 %): the crest seats stand member 3 and the knee link off the skin more on the poses the score does not read (the knee link 0.628 in band, median 12.9 mm, row exact_frozen.parts_ib14). Not gamed: it does not rank the design above anyone; the wearer gets more 15-28 mm standoff than the number shows.",
+  "evidence": "docs/alignment/remeasure/crest-knee-3r_bench_probe.json, crest-knee-3r_held_probe.json (ws_unscored, ws_elev90_140); skin-normal-3r-pin-knee_probe.json, conecut-knee-knuckle-3r_probe_bench.json"
+ },
+ {
+  "key": "P2",
+  "level": "watch",
+  "reason": "The held-out set is not fully out of the search's sample. The verifier's held_bench() (docs/concepts/verify/crest-knee-3r.py lines 45-56, = tools/osn_polish.py held_bench) excludes the Bench(110,360) poses but not the Bench(60,160) poses the CMA searched on and the frozen shape (heights, knee m, E profile, J3 window) was fitted on: 60 of its 470 poses (20 clip, 40 ws) are search-bench poses. Those 60 read 21.43 (reach 0.75); the 410 truly unseen poses read 30.88 (reach 0.6562, ib14 0.8514, 5 contacts), not 29.81. The held number stays better than the bench claim (32.84), so the held_out check is unaffected, but the row's 'held out 29.81' carries 1.07 points of in-sample poses. The set is also drawn from the FIT clips (held-out clips excluded), so it is a disjoint-pose check, not the held-out split.",
+  "evidence": "docs/alignment/remeasure/crest-knee-3r_held_overlap.json (this audit: held_bench() indices vs concept_bench._select(60,160); each subset's gap by tools/alignment_paired.py gap_parts on docs/alignment/remeasure/crest-knee-3r_held_perpose.json; the full set reproduces 29.81)"
+ },
+ {
+  "key": "R2",
+  "level": "watch",
+  "reason": "Displayed numbers the design does not hold. docs/dashboard/data/morphs.json shows gap and sweep_gap 26.34 (score 90.42): the in-sample fast best of 531 configs on Bench(60,160); the frozen exact claim is 32.84 (+6.50) and the out-of-search held is 30.88. The row's 'verdict' field still opens 'SCREENED, below the lens bar' although status is verified (the verification is appended to 'note'). No rank effect measured: the leaderboard ranks verified rows by v_gap (docs/dashboard/core.js line 12, leader.js line 73), and the only verified row with a better v_gap and a sweep number above 26.34 is desmo-conecut-knuckle-3r (sweep 86.19, its own record), so the stale 26.34 moves no ranking.",
+  "evidence": "docs/dashboard/data/morphs.json (crest-knee-3r: gap 26.34, sweep_gap 26.34, v_gap 32.84); docs/concepts/rows/crest-knee-3r.json verdict / note"
+ }
+]
