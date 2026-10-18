@@ -66,7 +66,13 @@ def _patch(LM):
         if "XP" in fr and "plateC" in fr and np.allclose(cen, cK, atol=1e-9):          # the PLATE-hubK stroke gate (link 1b frame)
             REC["gate_calls"] += 1
             if NOTCH["bypass"]:
-                REC["plateK"].append(float(np.min(v))); return np.full_like(np.asarray(v, float), 99.0)
+                REC["plateK"].append(float(np.min(v)))
+                sel = np.asarray(v, float) < 1.0
+                if sel.any():
+                    e_, f_ = frame(np.asarray(aK, float)); w = np.asarray(Pw, float)[sel] - cen; z = w @ ax; rv = w - z[:, None] * ax
+                    REC.setdefault("viol", []).append(np.c_[np.linalg.norm(rv, axis=1), np.degrees(np.arctan2(rv @ f_, rv @ e_)), z,
+                                                           np.full(int(sel.sum()), float(np.degrees(fr["kgrid"][fr["j"]])) if "kgrid" in fr else -1.0)])
+                return np.full_like(np.asarray(v, float), 99.0)
             if not NOTCH["on"]: return v
             return np.maximum(v, -sd_notch(Pw, cen, ax, eK))                          # the gate runs in link 1b's frame = the notch's body
         i = getattr(self, "_kph_pose", None)
@@ -123,10 +129,10 @@ def notch_samples(M):
         if m != memK or not len(X): new.append((m, X)); continue
         X = np.asarray(X, float); r, az, z = cyl(X); ins = inside(r, az, z) & (r <= HUB_R + 0.05)
         info["contact_dropped"] += int(ins.sum()); new.append((m, X[~ins]) if ins.any() else (m, X))
-    zz = np.unique(np.r_[np.arange(z0, z1 + 1e-9, 0.5), z1]); aa = np.unique(np.r_[np.arange(a0, a1 + 1e-9, 1.0), a1]); rr = np.unique(np.r_[np.arange(rN, HUB_R + 1e-9, 0.5), HUB_R])
+    zt = min(z1, CROWN); zz = np.unique(np.r_[np.arange(z0, zt + 1e-9, 0.5), zt]); aa = np.unique(np.r_[np.arange(a0, a1 + 1e-9, 1.0), a1]); rr = np.unique(np.r_[np.arange(rN, HUB_R + 1e-9, 0.5), HUB_R])
     A, Z = np.meshgrid(aa, zz); face = xyz(np.full(A.size, rN), A.ravel(), Z.ravel())
     sides = [xyz(R_.ravel(), np.full(R_.size, ae), Z_.ravel()) for ae in (a0, a1) for R_, Z_ in [np.meshgrid(rr, zz)]]
-    caps = [xyz(R_.ravel(), A_.ravel(), np.full(R_.size, zc)) for zc in (z0, z1) for R_, A_ in [np.meshgrid(rr, aa)]]
+    caps = [xyz(R_.ravel(), A_.ravel(), np.full(R_.size, zc)) for zc in (z0, z1) if zc < CROWN - 1e-9 for R_, A_ in [np.meshgrid(rr, aa)]]
     sol = np.concatenate([face] + sides + caps); _ADDED.append(sol); new.append((mLb, sol))
     M.contact = new; info["solid_n"] = int(len(sol)); info["wall_over_MR117_mm"] = round(rN - 5.5, 3)
     info["wall_to_stopA_groove_mm"] = round(z0 - GRV_Z[1], 3) if (rN < GRV_R[1]) else None
@@ -206,6 +212,10 @@ def probe(sets, outp, notch=None):
     out = dict(sets=sets, notch=dict(NOTCH), fit={k: r1.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact", "gap_near1")},
                info=_info(M), plateK_true_min=round(min(REC["plateK"]), 3) if REC["plateK"] else None, rec=dict(gate_calls=REC["gate_calls"], pose_calls=REC["pose_calls"]),
                footprint=footprint(M, S), secs=round(time.time() - t, 1))
+    if REC.get("viol"):
+        A = np.concatenate(REC["viol"]); out["gate_viol"] = dict(n=len(A), r_min=round(float(A[:, 0].min()), 3), az=[round(float(A[:, 1].min()), 1), round(float(A[:, 1].max()), 1)],
+                                                                z=[round(float(A[:, 2].min()), 2), round(float(A[:, 2].max()), 2)], K=[round(float(A[:, 3].min()), 2), round(float(A[:, 3].max()), 2)])
+        REC["viol"] = []
     json.dump(out, open(outp, "w"), indent=1, default=float); print(json.dumps(out, default=float), flush=True)
     return out
 
@@ -213,7 +223,10 @@ def probe(sets, outp, notch=None):
 def guard(sets, outp, notch=None):
     """fast fit -> frozen -> exact wear on the guard poses only (reduced Bench(110,360)); per-part minima like the judge's scans"""
     if notch: NOTCH.update(notch)
-    T, V, LM, DS, S, PLAY = _harness(); PLAY.update(on=False)
+    T, V, LM, DS, S, PLAY = _harness()
+    delta = sets.pop("delta", None)
+    if delta is None: PLAY.update(on=False)
+    else: PLAY.update(delta=float(delta), on=True, info={})
     CB = V.CB; _B0 = CB.Bench; KEEP = list(GUARD)
 
     class RB(_B0):
@@ -243,8 +256,8 @@ def guard(sets, outp, notch=None):
                 if d < 0.8: worst.append((round(d, 3), nm))
         per[gi] = dict(dK=round(float(dK[j]), 2), taken=B.res[j] is not None and float(np.min(B.res[j])) >= 0, why=str(M.why[j]) if hasattr(M, "why") else None,
                        parts=sorted(worst)[:8])
-    out = dict(sets=sets, notch=dict(NOTCH), fit={k: fit[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, info=_info(M1),
-               per=per, secs=round(time.time() - t, 1))
+    out = dict(sets=sets, delta=delta, notch=dict(NOTCH), fit={k: fit[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, info=_info(M1),
+               notch_samples=getattr(M1, "_kph_notch", None), per=per, secs=round(time.time() - t, 1))
     json.dump(out, open(outp, "w"), indent=1, default=float); print(json.dumps(out, default=float), flush=True)
     return out
 
