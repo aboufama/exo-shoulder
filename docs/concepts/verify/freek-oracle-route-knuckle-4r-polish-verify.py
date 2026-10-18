@@ -135,7 +135,7 @@ def heldcheck(outp):
     out = dict(envh_ws=len(ws), envh_clip=len(cl), identical_to_held=int(len(set(idx.tolist()) & set(hidx.tolist()))),
                clips_from_held_clips=int(sum(int(c) in held_clips for c in Z["CID"][idx])),
                min_cheb_coord_deg=round(float(cheb.min()), 3), n_cheb_lt2=int((cheb < 2).sum()),
-               min_geo_hand_frame_deg=round(float(geo.min()), 3), n_geo_lt2=int((geo < 2).sum()),
+               min_geo_HG_glenohumeral_deg=round(float(geo.min()), 3), n_geo_lt2=int((geo < 2).sum()),
                min_geo_humerus_deg=round(float(geoh.min()), 3), n_geoh_lt2=int((geoh < 2).sum()))
     json.dump(out, open(outp, "w"), indent=1); print(json.dumps(out))
 

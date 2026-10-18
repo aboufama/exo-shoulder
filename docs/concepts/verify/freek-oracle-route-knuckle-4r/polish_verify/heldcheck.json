@@ -1,0 +1,12 @@
+{
+ "envh_ws": 210,
+ "envh_clip": 60,
+ "identical_to_held": 0,
+ "clips_from_held_clips": 0,
+ "min_cheb_coord_deg": 2.227,
+ "n_cheb_lt2": 0,
+ "min_geo_HG_glenohumeral_deg": 1.662,
+ "n_geo_lt2": 1,
+ "min_geo_humerus_deg": 2.216,
+ "n_geoh_lt2": 0
+}
