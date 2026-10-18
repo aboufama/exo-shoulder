@@ -312,3 +312,62 @@ locked control by 27.7 fast points at the same seats, and its frozen exact 97.04
 (18.28). What it buys is in-band (0.685 vs 0.502 for the plain 3R at those seats); what it cannot buy is the folded side
 of the window, because a track that holds the 50 deg lock below th ~62 has to leave the band. Next: nothing on this
 family unless someone reopens it with the fold lever upstream of J2 (the knuckle family already does that).
+
+## Audit 3 (third death audit, 2026-10-18 07:08-07:25 UTC; an auditor who did not build this model)
+
+Question: does "far behind" stand, or does a bug, a missed region or the open gate hide a design within 10 of the
+champion (an honest gap <= 78.93 on Bench(60,160) fast)? **Not refuted. Status stays screened: far behind, no lead path,
+and the gate is not converged, so the row is not dead.** One-line reason: the slot opens the folded side of the window
+only where its track runs 67-129 mm from GH and knee hub K crosses link 1 and hub 1. The basin that stays in the band
+plateaus at 86.82, 7.9 points above the bar.
+
+What was measured (model file unchanged; local, niced, OMP_NUM_THREADS=1, 2 processes, box load 9-18):
+
+1. **Reproduction.** E1-g13-3 reads 86.82 fast exactly (reach 0.5188, follow 0.7167, ib14 0.6845, contact 0.0382,
+   window [62.25, 125.75]). The gap formula checks by hand: 21.55 + 23.33 + 38.12 + 3.82. The gate recomputed from the
+   sweep is 24.24 / 24.24 / 0.52 (n 1641, best at index 1388), as audit 2 recorded. No convention bug was found:
+   shared kit bench, shared gap formula, and b >= 20 deg, e_min and dG_min match the O20 envelopes they encode.
+2. **Missed region: the H1 seats.** The locked control there is 24 fast points better than at E1's seats (34.78 vs
+   59.15). E1's law moved onto the H1 seats, shifted by the a1 difference, gives this:
+   - The lock-held track covers th [29.75, 124.25]: the folded side is open, with kinematic reach 0.88.
+   - Every one of the 201 closing poses collides. The pairs are hub1|trk2 201, pinK|link1 138, pinK|spoke 121,
+     hub1|pinK 103 and pinK|trk3 81. The track needs 9 segments and runs to 129 mm from GH.
+   - Result: 275.0 honest.
+
+   Three more seat swaps read 122-284, and two of them are dishonest.
+3. **Ghost attribution (ATTRIBUTION ONLY, never a claim).** The same config, with K6 told to ignore crossings:
+
+   | exempted pairs | gap | reach | follow | ib14 | contact |
+   |---|---|---|---|---|---|
+   | track vs hub 1 / armG | 213.73 | 0.231 | 0.10 | 0.455 | 0.173 |
+   | plus K and crank vs link 1 / spoke / hub 1 / track | **105.33** | 0.644 | 0.667 | 0.475 | 0.089 |
+
+   Even with every crossing exempted, the folded-side track (trk6-9 in band 0.25 / 0.03 / 0.00 / 0.03), L2b (0.08) and
+   hub 2 (0.17) leave the band. The folded side is not just a collision problem: the track that holds the 50 deg lock
+   there cannot lie on the skin.
+4. **Gate continuation: two wide restarts with emax free.** The re-dispatch's lesson was that a wide restart can break a
+   plateau.
+
+   | stream | start | sigma | evals | best |
+   |---|---|---|---|---|
+   | F1 | E1-g13-3 | 1.0 | 40 | 107.18 |
+   | F2 | D2-g9-0 | 0.8 | 64 | 184.07 |
+
+   Neither found a new basin. The 109 audit tries (86 honest) are appended to the sweep as stream "AUD3". The gate is
+   now **24.24 / 23.91 / 0.52** (n 1750, best still at index 1388), so it is NOT converged. The 2nd-half rule needs
+   n >= 2777, about 1027 more tries without gain. That is a farm-sized job, and the farm is closed.
+
+Red team (unchanged from audit 2, E1-g13-3):
+- The pose that jams: every pose with th < 62.25 (rest and scapular-plane overhead; overhead 0/28 frozen).
+- The point that pinches: min metal 0.24 mm frozen.
+- The optimistic number: the fast 86.82 (frozen exact 97.04).
+
+No per-pose dump was written: the row is 79 points behind the lead.
+
+New knowledge: the slot's lock rule and the band are incompatible on the folded side at every seat tried. At E1's seats
+the lock-held track stops at th 62. At the H1 seats it reaches th 29.75, but only with a 9-segment track that climbs to
+129 mm and a knee hub that crosses link 1 and hub 1. The ghost bound (105.33, with every crossing exempted) is worse
+than the in-band basin (86.82), so no stacking or exemption of the crossings rescues the H1 seats. This confirms the
+round's lesson from the other side: the fold lever has to sit upstream of J2 (the knuckle family).
+Next: nothing on this family. If anyone reopens it, the open gate is a farm job (about 1000 tries from E1-g13-3 and from
+the H1 seats); expect it to confirm the plateau.
