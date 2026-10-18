@@ -1,6 +1,6 @@
 # Take-bound table: can 3 joints reach 95 at the legal J1 seats? (round 15 lens A)
 
-Status: sections 1-3 filled; 4-7 PENDING (filled section by section, each section committed). Started 2026-10-18 ~12:20
+Status: sections 1-4 filled; 5-7 PENDING (filled section by section, each section committed). Started 2026-10-18 ~12:20
 UTC on branch claude/exciting-albattani-94w8cp. Plan: docs/concepts/ROUNDS.md "Round 15 plan, re-dispatch
 (2026-10-18 ~09:25 UTC)", lens A "take-bound-3dof".
 
@@ -29,7 +29,10 @@ takes / 360; score 95 = gap 13.75.
 
 ## 2. The 3-DOF table (one row per legal J1 seat family x realisation)
 
-Takes are workspace takes of 360. "Gap at family proximity" = the zero-contact floor of the row's best take count
+Takes are workspace takes of 360. Seat naming follows ROUNDS.md: the "back", "k33", "crest" and "H1" rows all sit
+J1 on the back / top of the acromion near bvec(97-102, 62-65) (H1: anterior 0.085 / up 0.898 / lateral 0.432; the k33
+seats about 6 deg of azimuth forward of the lead's) and differ in J2 / J3 seats and realisation; the "cap pole" J1 is
+bvec(43.2, 59.9). Every J1 here is inside ruling 4 (back of the shoulder + acromion top). "Gap at family proximity" = the zero-contact floor of the row's best take count
 plus that row's measured in-band / follow / contact penalty (from its best metal cell). Cells in *italics* are bounds or
 estimates, not measurements of a buildable design.
 
@@ -142,7 +145,22 @@ pick1's take count is 0.764 x 360 = 275 (FINDINGS "freek ... final polish": reac
 
 ## 4. Reconciling parking_k 0.775-0.778 with the 267-272 law cap and the 269-271 ghosts
 
-PENDING
+The three numbers measure different things and agree once the K stroke is matched. parking_k's 0.775-0.778
+(docs/research/fold_ceiling.md section 4, table at lines 324-334) is an ESTIMATED verified reach (279-280 takes) for an
+IDEAL law with a ~75-deg K stroke on a 28-32 / 48-50 K dyad, every part parked at its clip max + 4 mm, with the leader's
+in-band 0.894 and contact 0.005 held fixed, and before the knee, the part-part collisions and the drive's own metal.
+The 267-272 law cap (docs/concepts/ROUNDS.md line 1583) is the kinematic count of the REAL lobe law, which cannot exceed
+kK 2.3 at PA <= 42 (kK >= 2.7 kills the lobe at its base radius), i.e. a ~46-57 deg stroke; and the 269-271 ghosts are
+frozen-exact takes of real chains with the drive metal deleted at those strokes. At a matched stroke parking_k agrees
+with both: 26 / 38 at 46.25 -> 272 in window, est. reach 0.725 (the verified 0.7278); 26 / 38 at 57.5 -> 275 in
+window, est. 0.731 (263 takes). The 0.775-0.778 needs the 75-deg stroke that no measured drive delivers: the lobe law
+caps first, and the long-stroke drives were measured dead (bell crank / ball links do not park, 23.31 / 27.67;
+longstroke_drive.md). The one direct test of parking_k's premise at a ~75-deg stroke is round 105's free-K oracle at
+the lead's seats with stop B 76 (seatoracle-erwall cell L0b, kit metal, the best K per pose): 277 takes as estimated
+(within 2-3 of 279-280), but ib14 0.886 instead of the assumed 0.894 and 13 contacts instead of ~2, because 9 of the 24
+newly closed poses are external-rotation poses 4.6-13.2 mm in the skin at every legal K - so 17.69, not ~13.7.
+parking_k's estimate was right about the takes and wrong about the proximity: a uniform +4 mm part lift does not clear
+the ER binders, which bind radially (link 2 over the deltoid crest, hub K overhead) and are not reachable by K.
 
 ## 5. Jam-bias column for the pin-knee cells (H1 pin-a running gap)
 
