@@ -1,248 +1,235 @@
 # Alignment audit: slotted-eccentric-pin-knee-3r (round 14, slice r14-B)
 
-Auditor run 2026-10-18 02:20-02:40 UTC. Tool `tools/alignment_audit.py` VERSION 2026-10-17.6, reference
-conecut-knee-knuckle-3r. Ledger entry 2026-10-18T02:36:31Z, by auditor, run `audit:slotted-eccentric-pin-knee-3r`.
+Auditor run 2026-10-18 08:11-08:45 UTC. Tool `tools/alignment_audit.py` VERSION 2026-10-18.1, reference
+conecut-knee-knuckle-3r. Ledger entry by auditor, run `audit:slotted-eccentric-pin-knee-3r` (git 1a20637).
+This replaces the 02:37 auditor sections, which audited the old claim 201.20 (config B-g47-2). The 02:41 skeptic
+section on that old claim is kept below the dated rule at the end.
 
-## Verdict: WATCH (claim 201.20)
+## Verdict: WATCH (claim 97.04)
 
-- The claim is the row's v_gap: 201.20 on Bench(110,360) exact, frozen shape (score 26.8). The fast search number is
-  153.49.
-- This audit re-wore the claim and reproduced it to the digit:
-  - fit Bench(60,160) fast at the 1 mm part-part rule: 188.47;
-  - Bench(110,360) exact: 201.20;
-  - held out (poses disjoint from Bench(110,360)): 194.02, which is 7.18 better than the bench.
-- Nothing in this design's number is bought by gaming. It is a far-behind, honestly scored design: 201.20 against the
-  plain-3R control at its own seats, 58.53 through the same code and protocol.
-- Every pattern found is a watch. None of them ranks the design above a design that is better for the wearer, and no
-  hard rule is broken.
-- One finding is new and reaches beyond this design: the dashboard's per-design "Sweep best gap" counts configurations
-  the model itself flagged dishonest. This design shows 97.45 there.
+- The claim is the row's v_gap: 97.04 on Bench(110,360) exact, frozen shape (score 64.7), config E1-g13-3. The fast
+  search number is 86.82. The claim moved from 201.20 since the last audit: two death audits and a re-dispatch ran
+  more CMA (the row's commits 50c40c9, 49de388, 8d4590e).
+- This audit re-wore E1-g13-3 through the model's own `frozen()`, unchanged (`tools/alignment_slotted_rewear.py`):
+  - fit Bench(60,160) fast at the 1 mm part-part rule: 89.42;
+  - Bench(110,360) exact: 97.04, the claim to the digit;
+  - held out (poses disjoint from Bench(110,360)): 93.02, which is 4.02 better than the bench.
+- Nothing in the number is bought by gaming. The design is 78.76 plain points behind the lead (18.28) and 83.27 behind
+  at 2 mm, so no pattern here ranks it above a design that is better for the wearer, and no hard rule is broken.
+- All findings are watch. The new one is about depth: the claim got better while its skin presses got much deeper
+  (deepest 9.92 -> 34.90 mm).
 
-## What the wearer gets (measured, re-wear on Bench(110,360) exact; held out in brackets)
+## What the wearer gets (measured on the re-wear; held out in brackets)
 
-Files: `docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json` and `_held.json`, with per-pose dumps in
+Files: `docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json` and `_held.json`, per-pose dumps in
 `_bench_perpose.json` and `_held_perpose.json`.
 
 **Reach and follow**
-- Overhead reach (workspace, elevation >= 140): 0 / 28 taken (0 / 26). Only 10 / 28 (9 / 26) even close
-  kinematically inside the slot window; the rest are lost to collisions and contact.
-- Raised arm (elevation 90-140): 14 / 85 taken. Overall reach 0.181 (0.192).
-- Follow: 0.055 (0.064). 82 of 110 clip frames have th < 74.0 deg, below the lock-held slot track's end. The track end
-  is a hard stop that sits where the wearer's arm rests and moves every day.
+- Overhead reach (workspace, elevation >= 140): 0 / 28 taken (0 / 26). Only 12 / 28 (11 / 26) even close
+  kinematically; the slot track ends at th 125.75. Overhead clip frames: 0 / 10.
+- Raised arm (elevation 90-140): 12 / 85 taken (16 / 86).
+- Overall reach 0.461 (0.494); follow 0.682 (0.700). Kinematic reach 0.608 (0.633) against th need p5-p95 27.1-143.2.
+- The track's lower end at th 62.25 is a hard stop that sits above the rest region (th p5 27.1). The wearer's arm at
+  rest and in scapular-plane overhead is outside the window.
 
 **Clearance and contact**
-- Taken poses with metal < 2 mm: 20 of 71 (15 of 76). Under 1 mm: 7 (3). Under 3 mm: 31 (21). Minimum 0.089 mm.
-- Near-touch gaps: 222.88 at 1 mm, 242.94 at 2 mm, 259.92 at 3 mm (held out: 200.31 / 233.00 / 241.72). These are
-  reported only; 2 mm is not a gate.
-- Contact: 8 poses press into the skin (9 held out), summed 27.78 mm (33.13 mm). The deepest is 9.92 mm, in a
-  workspace side raise (plane -15, elevation 90, axial 105). Held out, the deepest is 9.94 mm at plane 0, elevation 75,
-  axial 75. Four poses are deeper than 3 mm (five held out).
-- The T5 contact-depth check reads x1.37 of the reference's summed depth on the bench and x0.54 held out, so it gives
-  no watch. The depths are still real: a 1 cm press is a bruise.
+- Taken poses with metal < 2 mm: 21 of 241 (27 of 255). Under 1 mm: 6 (11). Under 3 mm: 128 (144). Minimum 0.237 mm
+  (0.146 mm).
+- Per-pose clearance floors (wear probe): the closest metal sits at 2-3 mm on 43 of 75 taken clip poses and 64 of 166
+  taken workspace poses.
+- Near-touch gaps (report only): 103.66 at 1 mm, 118.11 at 2 mm, 218.31 at 3 mm (101.62 / 116.55 / 219.90). Band
+  read as 3-14 mm: 97.72.
+- Contact: 16 poses press into the skin (16 held out), summed 95.67 mm (55.50 mm), 10 deeper than 3 mm (6).
+  - Deepest on the bench: 34.90 mm at workspace plane 150, elevation 120, axial -180 (across the body, raised,
+    full rotation).
+  - Next deepest: 10.33 mm at plane -90, elevation 60, axial 135; then 7.49 mm at plane -15, elevation 90, axial 105.
+  - Deepest held out: 13.36 mm at plane 0, elevation 90, axial 90.
 
 **In-band**
-- Clip frames: 0.604 in-band 2-14 mm (0.660), 0.362 in-band 2-10 mm.
-- Workspace, unscored: 0.652 (0.627) over the 65 (69) taken workspace poses.
-- Per part:
-  - hub 2: 0.00 (fitted level 71.2 mm: link 1, track and crank stacked);
-  - crank: 0.36;
-  - L2b: 0.27 (0.43 held out);
-  - hub 3: 0.51;
-  - spoke: 0.53.
-- These per-part readings are fractions only. The kit records no per-part sample counts.
+- Clip frames: 0.699 in band 2-14 mm (0.684), 0.354 in band 2-10 mm (0.347).
+- Workspace, unscored: 0.725 (0.722) over 166 (178) taken workspace poses. Raised arm: 0.835 (0.802).
+- Per part (fractions; `frozen.inband_member`):
+  - crank 0.36 (0.35);
+  - L2b 0.23 (0.20);
+  - hub 3 0.55 (0.52);
+  - pinK 0.59 (0.56);
+  - track node 1 0.57 (0.56);
+  - hub 2 0.86 (0.84), up from 0.00 at the old claim. Its post lift is 0.85 mm, K's 4.44 mm, hub 3's 4.0 mm.
+- Per-part sample counts (a third wear, `tools/alignment_slotted_partcounts.py`, 97.04 reproduced; file
+  `docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_partcounts.json`, 75 taken clip frames not in contact):
+  no part has zero samples; the thinnest are the track nodes at 35 samples per pose (2625 clip samples). The worst
+  parts are the most sampled: L2b 315 per pose (0.23 in band, median 16.63 mm) and the crank 105 per pose (0.36,
+  14.77 mm). Sample-weighted in-band is 0.699 and part-weighted 0.793, so the weighting does not flatter.
 
 **Springs, stops, transmission, cuff twist**
-- Springs: none. K is slaved by the roller in the slot, one determined loop.
-- Stops: the slot track's ends at th 74.0 and 133.5 deg are the physical stops. Taken th spans 74.83-123.04
-  (74.01-121.52).
-- Fold margin in th, at the effective a2 the model reads (its own `geom()` mg): minimum over taken poses 15.80 deg
-  (17.30 held out). The rule is 5.23.
-- Knee transmission psi: minimum 72.68 deg (71.31 held out). The rule is 15. No near-singular posture is taken.
-- Cuff twist: not measurable here. The pin-knee cuff is not in the model; member 3 is the kit neck.
+- Springs: none. K is slaved by the roller in the slot: one determined loop, one branch.
+- Stops: the track ends at th 62.25 and 125.75 deg (fit). Taken th spans 62.80-119.34 (62.43-124.59).
+- Fold margin in th, at the effective a2 the model reads (its own `geom()` mg): minimum over taken poses 12.53 deg
+  (7.27 held out). The rule is 5.23.
+- Knee transmission psi: minimum 62.00 deg (61.15). The rule is 15. No near-singular posture is taken.
+- Cuff twist: not measurable. The pin-knee cuff is not in the model; member 3 is the kit neck (finding S3).
 
 **Moving coordinates over taken poses (idle check)**
-- K: 72.68-100.06 deg, a span of 27.38 deg.
-- Effective a2: 74.48-87.38 deg.
-- Crank (link 2a about J2), q1: -60.0 to 18.6 deg.
-- Roller on the track: e 27.1-38.4 deg, eta 7.5-71.9 deg.
+- K: 62.0-108.0 deg, a span of 46.0 deg.
+- Effective a2: 63.37-81.91 deg.
+- Crank q1: -73.1 to 33.2 deg.
+- Roller on the track: e 32.85-47.94 deg.
 - Nothing is idle.
 
 ## The 12 checks (`docs/alignment/slotted-eccentric-pin-knee-3r.json`, after the re-wear)
 
 | check | level | measured reason |
 |---|---|---|
-| held_out | ok | held out 194.02 vs bench 201.20 (-7.18; re-measured) |
-| fast_frozen | watch | fast 153.49 -> frozen exact 201.20 (+47.71): the row's headline gap is a number the design does not hold (the row and doc say so) |
-| near_touch | ok | 201.20 / 222.88 / 242.94 / 259.92 at 0 / 1 / 2 / 3 mm; band read 3-14 mm 202.96 |
-| contact_depth | ok | bench 8 poses, 27.78 mm, deepest 9.92 mm, vs ref 20.24 mm (x1.37); held 33.13 vs 60.97 mm (x0.54) |
-| dominance | ok | vs conecut-knee-knuckle-3r: -182.92 plain, -208.10 at 2 mm |
+| held_out | ok | held out 93.02 vs bench 97.04 (-4.02; re-measured) |
+| fast_frozen | ok | fast 86.82 -> frozen exact 97.04 (+10.22) |
+| near_touch | ok | 97.04 / 103.66 / 118.11 / 218.31 at 0 / 1 / 2 / 3 mm; band read 3-14 mm 97.72; 21.07 points in the 0-2 mm shell |
+| contact_depth | watch | bench 16 poses, 95.67 mm, deepest 34.9 mm vs the reference's 20.24 mm (x4.73, +75.43 mm); held 55.50 vs 60.97 mm (x0.91) |
+| dominance | ok | vs conecut-knee-knuckle-3r: -78.76 plain, -83.27 at 2 mm |
 | continuity | watch | no continuity flood on file |
-| fold_margin | watch | the tool reads only the row and verifier files; this audit measured 15.80 / 17.30 deg (above) but cannot place it where the check reads |
-| idle | ok | K moves 27.38 deg (re-measured); crank and knee have no span key the check reads (measured above) |
-| sampling | watch | fractions only; hub2 0.00, crank 0.36, L2b 0.27 |
-| complexity | ok | recomputed 5.0 = row 5.0 (closed loop 4 + track pair 1; slaved K and cuff knee 0) |
-| reporting | watch | dashboard sweep best 97.45 (score 64.56) sits 103.75 below the claim |
-| judge_change | ok | no bench, judge or metric file in the row's 3 commits |
-| rules | ok | O20 at J1-J3 and K (forced in `_clean`), margin 5.23, 0 passive translations, 3 active |
+| fold_margin | watch | the tool does not read the re-wear's `kin.fold_margin_th_min_taken`; measured 12.53 / 7.27 deg (above) |
+| idle | ok | K moves 46.01 deg |
+| sampling | watch | fractions only; crank 0.36, L2b 0.23 |
+| density | ok | not measured |
+| complexity | ok | recomputed 5.0 = row 5.0 |
+| reporting | watch | dashboard sweep best 86.82 sits 10.22 below the claim |
+| judge_change | ok | no bench, judge or metric file in the row's 6 commits |
+| rules | ok | O20 at J1-J3 and K, margin 5.23, 0 passive translations, 3 active |
+
+The fold_margin watch is a reader gap, not a margin problem: the 02:51 skeptic refuted the same reading on the old
+claim. Proposal F-a below still stands.
 
 ## Findings (`docs/alignment/slotted-eccentric-pin-knee-3r.findings.json`)
 
-### 1. NEW-dishonest-sweep-best (watch): the dashboard's sweep best is a configuration the model rejected
+### 1. T5 (watch): the claim got better and its presses got deeper
 
 **Evidence.**
-- `docs/dashboard/data/morphs.json` shows sweep_gap 97.45 for this design (sweep_inband14 0.2095).
-- That number comes from AUD-g9-2 (`docs/concepts/sweeps/slotted-eccentric-pin-knee-3r.json` k 1013, 01:58 UTC). It is
-  a CMA probe the death auditor appended to the design's own sweep file.
-- The model flagged it `honest: false`: ib14 0.21, collide 0.12, eccentric parts out of band.
-- `tools/dash_build.py` `sweep_file_rows()` and `sweeps()` (lines 188-250) read only the shares and the file `gap`.
-  They never read `honest` nor the penalised `obj`. Stream C, for example, logs gap 112.55 with obj 212.55.
-- The same file also holds the locked control's configurations: lock=1, the plain 3R, stream `paired`, best 30.24 at
-  01:13:30. They are kept out of the sweep best only because they were logged 7 minutes before the 01:20 claim (the
-  passed_over rule). Logged after it, the eccentric would show the plain 3R's 30.24 (score 89.0).
+- Old claim (201.20, B-g47-2): 8 contact poses, 27.78 mm summed, deepest 9.92 mm. Held out: 9 poses, 33.13 mm,
+  deepest 9.94 mm.
+- New claim (97.04, E1-g13-3): 16 poses, 95.67 mm summed, deepest 34.90 mm, 10 deeper than 3 mm. Held out: 16 poses,
+  55.50 mm, deepest 13.36 mm.
+- The contact share fell (0.101 -> 0.062) only because many more poses close (taken 71 -> 241).
+- Against the lead: x4.73 and +75.43 mm on the bench. Held out x0.91.
 
-**Repo-wide** (`python3 tools/alignment_sweep_honesty.py`, new in this audit): 10 of 98 designs have a dishonest
-sweep best.
+**Why this is not a better exo.** Metal 3.5 cm inside the arm, across the body with the arm raised, is a block or a
+bruise. The contact term charges it the same as a 0.1 mm touch.
 
-| design | dashboard sweep best | best honest | difference |
-|---|---|---|---|
-| virtual-pole-4bar-j1 | 152.69 | 237.75 | +85.06 |
-| slotted-eccentric-pin-knee-3r | 97.45 | 153.49 | +56.04 |
-| virtual-pole-4bar-j2 | 104.57 | 145.94 | +41.37 |
-| meridian-goniometer | 86.81 | 94.31 | +7.50 |
-| virtual-j2-knee-3r | 84.34 | 86.01 | +1.67 |
-| fivebar-roll | 89.13 | 90.30 | +1.17 |
-| cuff-slaved-elbow-fourbar-3r | 107.61 | 108.36 | +0.75 |
-| clavicular-front-route | 65.53 | 65.71 | +0.18 |
-| twin-k2-sidecar-knuckle-3r | 58.31 | 58.44 | +0.13 |
-| split-knuckle-twosided-3r | 26.62 | 26.62 | 0.00 |
+**Why watch, not gamed.** The design is 79 points behind the lead. The depth ranks it above no better design.
 
-None of the 10 is the sweep record (minarc 6.19) or near the top of the board.
+**Action.** Report only; the score stays as is (user ruling 2026-10-17).
 
-**Why this is not a better exo.** A configuration the model rejected (parts lifted out of band, collisions, a failed
-gate) is shown as the design's best evidence. That configuration is not wearable.
-
-**Why watch, not gamed.** For this design the dashboard's best-evidence order is verified, then claimed, then sweep.
-That order reads 201.20 / 153.49 first, so the 97.45 ranks it above no better design.
-
-**Action.**
-- Proposal R5-a below.
-- Auditors' probe configurations belong in a separate file (for example `docs/alignment/remeasure/<id>_probes.json`),
-  not in the design's sweep file.
-- Controls belong under their own id, or carry `control: true`.
-
-**Proposed catalogue entry R5.** A sweep best read from configurations the model rejected, or from another mechanism
-logged under the design's id. Detect: `tools/alignment_sweep_honesty.py` (dashboard sweep best against the best honest
-configuration, obj-aware).
-
-### 2. S3 (watch): the cuff pin knee in the name is not in the model
-
-**Evidence.** The row's name and `mechanism.cuff_knee` declare the cuff: pins a and b, a knee link and an arm pad.
-The model builds member 3 as the kit neck instead (model lines 9-15). The re-wear samples 16 metal groups, and none of
-them is the cuff knee.
-
-**Why it does not flatter.** The doc's own paired controls show the kit neck costs about 7.6 points against the real
-pin knee: kit-neck control at H1 34.78 fast / 36.83 frozen, against the pin knee's 27.20 verified under its own
-harness.
-
-**Action.** No pin-knee number may be quoted from this row until the knee is built and sampled. Renaming the row's
-headline to "eccentric J2 on the pin-knee seats (kit neck)" would say what was measured.
-
-### 3. S2 (watch): out-of-band parts hidden by sample weighting
+### 2. T1 (watch): the whole search ran on the plain gap
 
 **Evidence.**
-- Hub 2 is 0.00 in band: it sits at 71.2 mm, a three-layer stack.
-- The crank is at 0.36 and L2b at 0.27.
-- The headline in-band is still 0.604.
+- All 1763 configurations in `docs/concepts/sweeps/slotted-eccentric-pin-knee-3r.json` have `near: 0`, including the
+  death auditors' AUD2 and AUD3 streams that found the claim.
+- CLAUDE.md rule: "every search objective is the near-touch gap".
+- Measured cost: 97.04 plain -> 103.66 at 1 mm (+6.62) on the bench, 93.02 -> 101.62 (+8.60) held out.
 
-**Why this is not a better exo.** A hub standing several centimetres above the band is felt at every pose.
+**Why this is not a better exo.** A plain-gap optimum can park metal at 0.1-1 mm, which is metal on a real arm.
 
-**Action.** None for the ranking (201.20). Kit models should record per-part sample counts (proposal S2-a).
+**Action.** Any further search on this row (the open gate is a farm job of about 1000 tries) runs with `near=1`.
 
-### 4. G1 (watch): metal hugging the skin
+### 3. G1 (watch): metal hugging the skin
 
-**Evidence.** 20 of 71 taken poses have metal < 2 mm, so 28 % of what the bench counts as taken is metal on a real arm.
-The near-touch gap rises by 41.74 points at 2 mm.
+**Evidence.**
+- 21 of 241 taken poses have metal < 2 mm, and 128 of 241 have metal < 3 mm (53 %).
+- Held out: 27 / 144 of 255.
+- 21.07 points of the bench gap live in the 0-2 mm shell, above the catalogue's watch line of 15.
+- The lead has 33 of 372 < 2 mm and 105 of 372 < 3 mm (28 %).
 
-**Action.** None: report only (user ruling 2026-10-17).
+**Action.** Report only (user ruling 2026-10-17: near-touch is not a gate).
 
-### 5. S5 (watch): no continuity flood
+### 4. S5 (watch): no continuity flood
 
-**What was measured.**
-- K never nears its branch point: psi is at least 71 deg over the taken poses.
-- The slot track's lower end, th 74.0, sits on the rest region: 72 of 128 bench workspace poses at elevation <= 30 and
-  82 of 110 clip frames are below it.
+**What was measured.** A bench-graph flood upper bound on this audit's per-pose dumps
+(`tools/alignment_benchgraph_flood.py`):
+- Bench: at most 121 of 166 taken workspace poses connect. Reach 0.461 -> <= 0.336, a loss of >= 12.50 points.
+- Held out: at most 120 of 178. Reach 0.494 -> <= 0.333, a loss of >= 16.11 points.
+- The bench graph is sparse (1.13 neighbours per cell; 52 of 360 cells have none), so part of that loss is the
+  graph, not the design.
+- K stays on one branch (psi at least 61 deg), so a branch flip is not the cause.
 
-**What it means.** The 18 % static reach is a set of islands above a blocked rest. A flood can only lower the reach,
-not lift the rank.
+**Action.** A flood (connected_full) is owed before any connected-reach claim. It can only lower this row's reach.
 
-**Action.** A flood is owed before any connected-reach claim.
+### 5. S3 (watch): the cuff pin knee in the name is not in the model
 
-### 6. R1 (watch): a self-measured number in the verified column
+**Evidence.** The row's name and `mechanism.cuff_knee` declare the cuff: pins, knee link and arm pad. The model builds
+member 3 as the kit neck (model lines 9-15). The re-wear samples 17 metal groups, and none is the cuff knee.
 
-**Evidence.** v_gap 201.20 is the screener's own frozen exact. There is no verifier file for this design, and its status
-is screened.
+**Why it does not flatter.** The doc's paired controls put the kit neck about 7.6-10 points behind the real pin knee.
 
-**Why it does not flatter.** The number is pessimistic, and it reproduced in two independent re-wears: the 02:08 death
-audit and this one.
+**Action.** Label the row "eccentric J2 at the pin-knee seats (kit neck)".
 
-**Action.** Labelling only.
+### 6. R1 (watch): an auditor's self-found, self-measured number in the verified column
+
+**Evidence.**
+- The dashboard's Verified gap 97.04 is the second death auditor's frozen exact of E1-g13-3, a configuration the same
+  auditor found with its own CMA (stream AUD2, 185 evaluations).
+- Death auditors ran 461 of the 1763 sweep configurations (AUD2 352, AUD3 109).
+- There is no verifier file for this id, and the status is screened.
+- The row is internally stale: its top-level `exact_frozen` block and `limiter` still describe D2-g9-0 (117.68).
+
+**Why it does not flatter.** This audit re-wore E1-g13-3 independently: 97.04 to the digit, held out 93.02.
+
+**Action.** Labelling only. Refresh `exact_frozen` and `limiter` to E1-g13-3.
 
 ### Patterns checked and not present
 
-- **T1, T2:** the plain gap is not near any cutoff that matters; the design is 182 points behind.
-- **T3:** the fold margin is read in th, at the effective a2 the model itself uses. It measures 15.80 deg (17.30 held
-  out), above the rule's 5.23.
-- **T4:** the box edges are the rules' floors (margin 5.23, psi_lo 15, lock 50). The best config sits far from them:
-  psi 71.3, margin 15.8. The emax cap of 40 was freed by the death audit, and the result got worse (197.07 dishonest).
-- **T5:** see contact_depth above (x1.37 / x0.54).
-- **S1, P1:** held out 7.18 better than the bench.
+- **T2:** the band read as 3-14 mm moves the gap only 0.68 points (97.72).
+- **T3:** the fold margin is read in th at the model's own effective a2: 12.53 deg bench, 7.27 held, rule 5.23.
+- **T4:** margin, psi_lo and lock_min sit at their rule floors by construction (hard box edges). The taken poses stay
+  clear of them (margin 7.27, psi 61). `emax` was freed from 40 to 49.75 by a death audit; it bounds how far the track
+  runs from J2 (a size bound, not a singularity margin). The track reaches e 47.94, 1.8 deg under it.
+- **S1, P1:** held out 4.02 better than the bench.
+- **S2:** the sampling check lists crank 0.36 and L2b 0.23, but they are the most sampled parts; part-weighted
+  in-band (0.793) is above sample-weighted (0.699), the opposite of S2.
 - **S4:** no instance.
-- **M1, M2:** O20 is enforced at K. The roller is a real MR52ZZ on an O2 dowel. The track is a 2 mm plate.
-- **M3:** pinK has no `over` list. That makes the model over-strict, not optimistic (death audit: stacking it moves the
-  best 153.49 -> 153.86).
-- **M4:** K moves 27.4 deg and a2e moves 12.9 deg; nothing is idle.
+- **M1, M2:** O20 is forced at J1-J3 and K in `_clean`. The roller is an MR52ZZ on an O2 dowel; the track is a 2 mm
+  plate.
+- **M3:** pinK still has no `over` list, which makes the model over-strict, not optimistic.
+- **M4:** K moves 46.0 deg and a2e 18.5 deg; nothing is idle.
 - **M5, G2, G3:** no springs. Cuff twist is not modelled (S3).
-- **P2:** the search ran on Bench(60,160) only. Held out was first touched by this audit.
-- **P3, R3:** 915 configs, top-5 spread 2.61, reported with the convergence gate.
-- **P4:** no judge change.
-- **R2:** no refuted number displayed. R4: the dashboard v_gap 201.2 equals the row.
+- **P2:** the search ran on Bench(60,160) only. Held out was first touched by audits.
+- **P3, R3:** best of 1763 with the convergence gate reported (24.24 / 23.91 / 0.52, not converged). Fast to frozen
+  +10.22, inside the verified rows' 4.6-14.
+- **P4:** no judge change in the row's 6 commits.
+- **R2:** the old NEW-dishonest-sweep-best finding is gone for this row. The dashboard sweep best is now 86.82,
+  E1-g13-3, honest.
+- **R4:** dashboard v_gap 97.04 equals the row, and its v_contact 0.0623 equals the frozen exact.
 - **G4:** no taken pose is near-singular.
 - **G5:** complexity recomputes to 5.0.
 - **G6:** 3 active joints.
+- Motion preview: `docs/concepts/viz/concepts/slotted-eccentric-pin-knee-3r.js` carries E1-g13-3's law and track, but
+  draws it on the k4598 home geometry, not on E1's own seats. The file says so; it does not change a number.
 
-## Proposals (measurement or reporting changes; not applied, not inputs to the verdict)
+## Proposals (not applied; not inputs to the verdict)
 
-- **R5-a (dashboard sweep best).** `tools/dash_build.py` would skip configurations with `honest: false`, read each
-  configuration at max(gap, obj), and skip configurations tagged as controls (stream `paired`, or params lock=1, or
-  `control: true`).
-  - Measured effect (`tools/alignment_sweep_honesty.py`): 10 of 98 sweep bests rise. The four large moves are +85.06,
-    +56.04, +41.37 and +7.50 points; the full list is in finding 1.
-  - The sweep record (6.19), every verified row and every claimed row are unchanged.
-- **F-a (fold-margin reader).** `c_fold_margin` would also read a re-measure file's `kin.fold_margin_th_min_taken`
-  (written by `tools/alignment_slotted_rewear.py`). For this row that turns the watch into ok at 15.80 deg. No other
+- **F-a (fold-margin reader), from the last audit, still open.** `c_fold_margin` would also read a re-measure file's
+  `kin.fold_margin_th_min_taken`. For this row that turns the watch into ok at 12.53 deg (7.27 held out). No other
   row has the key today.
-- **S2-a (per-part counts in the kit).** `concept_kit` `inband_member` would carry `[share, median mm, samples]`, as the
-  pin-knee audit does, so `sampling` can weigh parts. This is a model-side change and needs no metric change.
+- **T5-b (depth trend on a moved claim).** When a claim moves, `contact_depth` would also compare the new claim's
+  summed and deepest press with the previous claim's re-wear of the same design. Measured effect: only this row has two
+  re-wears on file for two claims. It gives watch here (27.78 -> 95.67 mm, 9.92 -> 34.90 mm) and changes no verdict.
+- **P5 (catalogue entry, proposed): the death auditor becomes the optimiser.** A refute-or-stand audit that runs its own
+  CMA, and whose best becomes the row's claim and its v_* numbers, is a search plus a self-measure. It is the same
+  pattern as R1. Detect: sweep streams tagged AUD* that hold the row's `best_k`. Here: 461 audit evaluations, `best_k`
+  E1-g13-3 in AUD2. Proposal: such a claim is labelled "audit-found" until a verifier writes a file.
 
 ## What I could not measure, and why
 
-- **Continuity flood:** this model has no verifier with an `extras()` flood, and `tools/alignment_kit_flood.py` needs
-  one. It is not run. The measured context is in finding 5.
-- **Per-part sample counts:** the kit records fractions only.
+- **Continuity flood (connected_full):** this kit model has no verifier `extras()` flood. Only the bench-graph upper
+  bound above is on file.
+- **Which part made the 34.90 mm press:** the per-pose dump records the minimum metal, not its part. A per-part
+  attribution needs another wear; it was not run inside the time box.
 - **Cuff twist and the cuff knee's clearance:** the knee is not in the model.
-- **R17 dynamics:** no CAD, no dynamics judge run (none required for a screened row).
+- **R17 dynamics:** no CAD, and none is required for a screened row.
 
-## Instruments added by this audit (new files only)
+The next loop step is unchanged. This design stays screened and far behind. Nothing here moves it, and no new leader
+is involved.
 
-- `tools/alignment_slotted_rewear.py` re-wears slotted-eccentric kit models through their own `frozen()`, unchanged.
-  It wraps only `K.bench` (to swap in the held bench) and `build()` (pass-through record of th, effective a2, mg, psi
-  and K). It reads the worn bench with `deep_audit`, `wear_probe.analyse` and a per-pose dump. Run time: 85 s bench,
-  92 s held, local, niced, 2 processes.
-- `tools/alignment_sweep_honesty.py` measures the dashboard sweep best against the best honest configuration for every
-  design.
+---
 
-The next loop step is unchanged. This design stays screened and far behind; nothing here moves it, and no new leader is
-involved.
+*Earlier skeptic review of the 02:37 audit (old claim 201.20), kept as written. Rule dated 2026-10-18 08:45 UTC.*
 
 ## Skeptic (2026-10-18 02:41-02:51 UTC)
 

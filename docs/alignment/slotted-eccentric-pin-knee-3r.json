@@ -1,103 +1,103 @@
 {
  "id": "slotted-eccentric-pin-knee-3r",
  "status": "screened",
- "v_gap": 201.2,
+ "v_gap": 97.04,
  "complexity": 5.0,
  "verdict": "watch",
  "reasons": [
-  "fast_frozen: self/fast 153.49 -> verified 201.2 (+47.71) - the row's headline 'gap' is a number the design does not hold",
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): v_gap 97.04: bench 16 contact poses, sum 95.67 mm, deepest 34.9 mm at ['ws', 150.0, 120.0, -180.0], 10 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+75.43 mm, x4.73) - CLEARLY DEEPER; held 16 contact poses, sum 55.5 mm, deepest 13.36 mm at ['ws', 0.0, 90.0, 90.0], 6 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-5.47 mm, x0.91)",
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
-  "sampling: per-part sample counts not on file (fractions only); mostly out-of-band parts: hub2 0.00, crank 0.36, L2b 0.27 (re-measured)",
-  "reporting: dashboard sweep best 97.45 (score 64.56) sits 103.75 below the verified number"
+  "sampling: per-part sample counts not on file (fractions only); mostly out-of-band parts: crank 0.36, L2b 0.23 (re-measured)",
+  "reporting: dashboard sweep best 86.82 (score 68.43) sits 10.22 below the verified number"
  ],
  "checks": [
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 194.02 vs bench 201.2 (-7.18; re-measured (this audit))",
-   "held_gap": 194.02,
-   "v_gap": 201.2,
-   "drop": -7.18,
+   "reason": "held out 93.02 vs bench 97.04 (-4.02; re-measured (this audit))",
+   "held_gap": 93.02,
+   "v_gap": 97.04,
+   "drop": -4.02,
    "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
-   "level": "watch",
-   "reason": "self/fast 153.49 -> verified 201.2 (+47.71) - the row's headline 'gap' is a number the design does not hold",
-   "fast": 153.49,
-   "verified": 201.2,
-   "drop": 47.71
+   "level": "ok",
+   "reason": "self/fast 86.82 -> verified 97.04 (+10.22)",
+   "fast": 86.82,
+   "verified": 97.04,
+   "drop": 10.22
   },
   {
    "check": "near_touch",
    "level": "ok",
-   "reason": "plain 201.2, <1 mm 222.88, <2 mm 242.94, <3 mm 259.92, band read 3-14 mm 202.96, 41.74 points live in the 1-2 mm shell (re-measured (this audit))",
-   "shell2": 41.74,
-   "plain": 201.2,
-   "n1": 222.88,
-   "n2": 242.94,
-   "n3": 259.92,
-   "band3": 202.96,
+   "reason": "plain 97.04, <1 mm 103.66, <2 mm 118.11, <3 mm 218.31, band read 3-14 mm 97.72, 21.07 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 21.07,
+   "plain": 97.04,
+   "n1": 103.66,
+   "n2": 118.11,
+   "n3": 218.31,
+   "band3": 97.72,
    "hist": {
-    "0-1": 0.004,
-    "1-2": 0.0098,
-    "2-3": 0.0176,
-    "3-4": 0.0228,
-    "4-6": 0.0919,
-    "6-10": 0.23,
-    "10-14": 0.2419,
-    ">14": 0.3819
+    "0-1": 0.0005,
+    "1-2": 0.0018,
+    "2-3": 0.0068,
+    "3-4": 0.0155,
+    "4-6": 0.0956,
+    "6-10": 0.236,
+    "10-14": 0.3452,
+    ">14": 0.2987
    },
-   "minmm": 0.089,
+   "minmm": 0.237,
    "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
-   "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 201.2: bench 8 contact poses, sum 27.78 mm, deepest 9.92 mm at ['ws', -15.0, 90.0, 105.0], 4 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+7.54 mm, x1.37); held 9 contact poses, sum 33.13 mm, deepest 9.94 mm at ['ws', 0.0, 75.0, 75.0], 5 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-27.84 mm, x0.54)",
+   "level": "watch",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 97.04: bench 16 contact poses, sum 95.67 mm, deepest 34.9 mm at ['ws', 150.0, 120.0, -180.0], 10 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+75.43 mm, x4.73) - CLEARLY DEEPER; held 16 contact poses, sum 55.5 mm, deepest 13.36 mm at ['ws', 0.0, 90.0, 90.0], 6 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-5.47 mm, x0.91)",
    "depths": {
-    "v_gap 201.2": {
+    "v_gap 97.04": {
      "bench": {
-      "n": 8,
-      "sum_mm": 27.78,
-      "max_mm": 9.92,
-      "n_deeper3": 4,
+      "n": 16,
+      "sum_mm": 95.67,
+      "max_mm": 34.9,
+      "n_deeper3": 10,
       "overhead140": 0,
       "deepest": [
        "ws",
-       -15.0,
-       90.0,
-       105.0
+       150.0,
+       120.0,
+       -180.0
       ],
-      "gap": 201.2,
+      "gap": 97.04,
       "src": "docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench_perpose.json",
       "cross_check": {
        "files": 1,
        "sums": [
-        27.78
+        95.67
        ],
        "agree": true
       }
      },
      "held": {
-      "n": 9,
-      "sum_mm": 33.13,
-      "max_mm": 9.94,
-      "n_deeper3": 5,
+      "n": 16,
+      "sum_mm": 55.5,
+      "max_mm": 13.36,
+      "n_deeper3": 6,
       "overhead140": 0,
       "deepest": [
        "ws",
        0.0,
-       75.0,
-       75.0
+       90.0,
+       90.0
       ],
-      "gap": 194.02,
+      "gap": 93.02,
       "src": "docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_held_perpose.json",
       "cross_check": {
        "files": 1,
        "sums": [
-        33.13
+        55.5
        ],
        "agree": true
       }
@@ -107,21 +107,21 @@
    "ref": "conecut-knee-knuckle-3r",
    "compare": [
     {
-     "claim": "v_gap 201.2",
+     "claim": "v_gap 97.04",
      "wear": "bench",
-     "sum": 27.78,
+     "sum": 95.67,
      "ref_sum": 20.24,
-     "excess": 7.54,
-     "ratio": 1.37,
-     "watch": false
+     "excess": 75.43,
+     "ratio": 4.73,
+     "watch": true
     },
     {
-     "claim": "v_gap 201.2",
+     "claim": "v_gap 97.04",
      "wear": "held",
-     "sum": 33.13,
+     "sum": 55.5,
      "ref_sum": 60.97,
-     "excess": -27.84,
-     "ratio": 0.54,
+     "excess": -5.47,
+     "ratio": 0.91,
      "watch": false
     }
    ]
@@ -129,10 +129,10 @@
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs conecut-knee-knuckle-3r: plain -182.92, 2 mm -208.10",
+   "reason": "vs conecut-knee-knuckle-3r: plain -78.76, 2 mm -83.27",
    "ref": "conecut-knee-knuckle-3r",
-   "gain_plain": -182.92,
-   "gain_2mm": -208.1
+   "gain_plain": -78.76,
+   "gain_2mm": -83.27
   },
   {
    "check": "continuity",
@@ -147,11 +147,11 @@
   {
    "check": "idle",
    "level": "ok",
-   "reason": "K moves: smallest recorded span 27.38 deg (re-measured dK_deg_abs span); crank: declared moving, no span on file; knee: declared moving, no span on file",
+   "reason": "K moves: smallest recorded span 46.01 deg (re-measured dK_deg_abs span); crank: declared moving, no span on file; knee: declared moving, no span on file",
    "spans": [
     [
      "re-measured dK_deg_abs span",
-     27.38
+     46.01
     ]
    ],
    "declared": [
@@ -164,25 +164,31 @@
   {
    "check": "sampling",
    "level": "watch",
-   "reason": "per-part sample counts not on file (fractions only); mostly out-of-band parts: hub2 0.00, crank 0.36, L2b 0.27 (re-measured)",
+   "reason": "per-part sample counts not on file (fractions only); mostly out-of-band parts: crank 0.36, L2b 0.23 (re-measured)",
    "parts": {
-    "hub1": 1.0,
-    "hub2": 0.0,
-    "hub3": 0.5103,
-    "pinK": 0.7809,
-    "studG": 0.8333,
-    "link1": 0.75,
-    "spoke": 0.5294,
-    "trk1": 0.6369,
-    "trk2": 1.0,
+    "hub1": 0.9612,
+    "hub2": 0.8602,
+    "hub3": 0.5519,
+    "pinK": 0.5926,
+    "studG": 0.9737,
+    "link1": 0.9268,
+    "spoke": 0.9228,
+    "trk1": 0.5745,
+    "trk2": 0.9981,
     "trk3": 1.0,
     "trk4": 1.0,
     "trk5": 1.0,
-    "neck": 0.6731,
-    "crank": 0.3611,
-    "L2b": 0.269,
-    "armG": 0.7895
+    "trk6": 1.0,
+    "neck": 0.8173,
+    "crank": 0.3564,
+    "L2b": 0.2261,
+    "armG": 0.7136
    }
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
   },
   {
    "check": "complexity",
@@ -194,12 +200,12 @@
   {
    "check": "reporting",
    "level": "watch",
-   "reason": "dashboard sweep best 97.45 (score 64.56) sits 103.75 below the verified number"
+   "reason": "dashboard sweep best 86.82 (score 68.43) sits 10.22 below the verified number"
   },
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
   },
   {
    "check": "rules",
@@ -212,7 +218,7 @@
   "held": true
  },
  "verifier_files": [],
- "git": "df10e83",
- "tool_version": "2026-10-17.6",
- "t": "2026-10-18T02:35:02Z"
+ "git": "1a20637",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T08:34:00Z"
 }
