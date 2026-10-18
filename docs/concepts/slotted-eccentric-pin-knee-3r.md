@@ -252,3 +252,63 @@ control at every basin found so far is 55-57.
 So a fold lever on the pin-knee chain belongs on link 1, not link 2. This is the measured reason the knuckle family leads
 and the eccentric family trails its own control in every basin found (parent 115.21 frozen vs 46.60; this row 117.68
 frozen; 115.07 fast vs 55.09).
+
+## Audit 2 (second death audit, 2026-10-18 06:22-06:47 UTC; an auditor who did not build this model)
+
+Question: does the re-dispatch's "far behind" stand, or is the bad number a bug, a missed region or an unconverged
+search? Bar for refutation: an honest gap <= 78.93 on Bench(60,160) fast. **Not refuted; status stays screened (far
+behind, no lead path).** One-line reason: the new basin refines to 86.82 fast / 97.04 frozen exact, still 7.9 points
+above the bar and 27.7 fast points behind its own locked control at the same seats (59.15), because the lock-held track
+still ends at th 62.25 (overhead 0/28) and the crank / L2b / K stay 0.23-0.59 in band.
+
+What was measured (model file unchanged; local, niced, OMP_NUM_THREADS=1, <= 2 processes; ~5 s per fast evaluation):
+
+1. **Reproduction.** D2-g9-0 reads 115.07 fast exactly (reach 0.4625, follow 0.65, ib14 0.5606, contact 0.0738, honest,
+   window [66.5, 128.25]). Gate recomputed from the sweep: 13.97 / 13.97 / 12.63, as claimed.
+2. **The new basin had never been refined** (D3 started from D2-g3-6, not D2-g9-0). CMA from D2-g9-0:
+
+   | stream | start | sigma | evals | best |
+   |---|---|---|---|---|
+   | E1 | D2-g9-0 | 0.3 | 185 | **86.82 (E1-g13-3)**, 87.03, 87.77 |
+   | E2 | E1-g2-4 (88.21) | 0.2 | 105 | none better |
+   | E3 / E4 | E1-g13-3 | 0.6 (wide restart) | 49 + 17 | none better (93.88) |
+
+   E1-g13-3: az 94.00, el 58.45, a1 49.96, wd 68.38, wa -20.10, Amin 56.48, Amax 81.91, w 2.27, sl 0.929, b 24.36,
+   c 73.23, emax 49.75, sk 1, margin 5.23; track dG 32, gG -180, 66.1 mm, e 32.8-48.3 deg, q2 span 203.8, lock over the
+   whole run 39.6.
+   - Bench(60,160) fast: **86.82** (score 68.43; reach 0.519, follow 0.717, ib14 0.685, ib10 0.346, contact 0.038,
+     collide 0.16). The gain over D2-g9-0 is in-band (hub 2 0.19 -> 0.84) and contact, not reach.
+   - Frozen exact Bench(110,360) (model `frozen` mode; fit at the 1 mm part-part rule 89.42): **97.04** (score 64.7;
+     reach 0.461, follow 0.682, ib14 0.699, ib10 0.354, contact 0.062, near-touch 103.66, min metal 0.24 mm,
+     overhead >= 140 0/28 ws and 0/10 clip; kinematic reach 0.608 against th need p5-p95 27.1-143.2; lock-held window
+     [62.25, 125.75]). In band per member: crank 0.36, L2b 0.23, K 0.59, hub 3 0.55, track node 1 0.57.
+3. **Paired locked control at E1-g13-3's seats** (lock=1, the plain 3R through the same code, Bench(60,160) fast):
+
+   | a2 | 60 | 64 | 68 | **72** | 76 |
+   |---|---|---|---|---|---|
+   | gap | 61.13 | 61.80 | 60.60 | **59.15** | 61.99 |
+   | reach | 0.719 | 0.719 | 0.725 | 0.744 | 0.738 |
+   | follow | 1.0 | 1.0 | 1.0 | 1.0 | 0.95 |
+   | ib14 | 0.503 | 0.496 | 0.513 | 0.502 | 0.497 |
+
+   Paired deficit **+27.7 fast** (was +60.0 at D2-g9-0, +96.4 at B-g47-2). The eccentric now beats its control on
+   in-band (0.685 vs 0.502) but loses 0.22 of reach and 0.28 of follow: the slot still gives away the folded side.
+4. **Attribution of the 50 deg slot lock (ATTRIBUTION ONLY; the lock is a round-14 hard edge).** D2-g9-0 with the lock
+   gate at 40 / 30 deg: the track opens to th [13.0, 128.5] / [13.75, 128.5], reach 0.56-0.59, follow 0.82, but the
+   longer track lifts out of band (ib14 0.26-0.27, dishonest): 120.62 / 113.68. The lock rule is not the only killer;
+   the metal that a folded-side track needs is.
+5. **Gate** over the whole honest history (A + B + C + AUD + D1-D3 + this audit's AUD2 streams, n 1641; score points):
+   **24.24 / 24.24 / 0.52**, best at index 1388. Not converged by the 2nd-half rule (~1135 more no-gain tries), but the
+   last 253 tries, including two sigma-0.6 restarts, gained nothing and the top 5 are within 0.52 point: a local plateau
+   at 86.8-88.2. The 352 audit evaluations are appended to the sweep as stream "AUD2" (start re-evaluations excluded).
+
+Red team (E1-g13-3): the pose that jams is every pose with th < 62.25 (track end = hard stop; rest and scapular-plane
+overhead). The point that pinches: min metal 0.24 mm frozen. The optimistic number: the fast 86.82 (frozen exact 97.04,
++10.2). No convention bug against tools/concept_baseline.py found (shared kit bench, gap formula, exact reproduction).
+The per-pose dump (tools/alignment_paired.py) was not written: the row is far from any lead.
+
+New knowledge: the round's lesson stands and gets a number. Refined, the downstream eccentric still trails its own
+locked control by 27.7 fast points at the same seats, and its frozen exact 97.04 is 79 points behind the knuckle lead
+(18.28). What it buys is in-band (0.685 vs 0.502 for the plain 3R at those seats); what it cannot buy is the folded side
+of the window, because a track that holds the 50 deg lock below th ~62 has to leave the band. Next: nothing on this
+family unless someone reopens it with the fold lever upstream of J2 (the knuckle family already does that).

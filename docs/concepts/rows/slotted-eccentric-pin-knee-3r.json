@@ -8,35 +8,35 @@
  "passive_translations": 0,
  "status": "screened",
  "t_ideated": "2026-10-16T05:47:46Z",
- "t_screened": "2026-10-18T06:10:00Z",
- "reach": 0.4625,
- "follow": 0.65,
- "inband14": 0.5606,
- "inband10": 0.3043,
- "contact": 0.0738,
- "gap": 115.07,
- "v_reach": 0.4333,
- "v_follow": 0.6545,
- "v_inband14": 0.566,
- "v_inband10": 0.3051,
- "v_gap": 117.68,
- "n_configs": 1286,
+ "t_screened": "2026-10-18T06:46:00Z",
+ "reach": 0.5188,
+ "follow": 0.7167,
+ "inband14": 0.6845,
+ "inband10": 0.3464,
+ "contact": 0.0382,
+ "gap": 86.82,
+ "v_reach": 0.4611,
+ "v_follow": 0.6818,
+ "v_inband14": 0.699,
+ "v_inband10": 0.3538,
+ "v_gap": 97.04,
+ "n_configs": 1638,
  "model_file": "docs/concepts/models/slotted-eccentric-pin-knee-3r.py",
  "doc": "docs/concepts/slotted-eccentric-pin-knee-3r.md",
- "best_k": "D2-g9-0",
+ "best_k": "E1-g13-3",
  "best_params": {
-  "az": 95.002,
-  "el": 61.2368,
-  "a1": 53.0824,
-  "wd": 70.9797,
-  "wa": -20.3724,
-  "Amin": 56.3657,
-  "Amax": 80.7136,
-  "w": 4.5462,
-  "sl": 0.9154,
-  "b": 26.0397,
-  "c": 74.6565,
-  "emax": 43.1886,
+  "az": 93.9976,
+  "el": 58.4469,
+  "a1": 49.9579,
+  "wd": 68.3776,
+  "wa": -20.0988,
+  "Amin": 56.4817,
+  "Amax": 81.9072,
+  "w": 2.2735,
+  "sl": 0.9293,
+  "b": 24.3621,
+  "c": 73.2273,
+  "emax": 49.7455,
   "sigma": -1,
   "sk": 1,
   "margin": 5.23
@@ -181,23 +181,24 @@
   }
  },
  "gate": {
-  "n": 1286,
-  "gain_2nd_half": 13.971,
-  "gain_last_third": 13.971,
-  "top5_spread": 12.629,
+  "n": 1641,
+  "gain_2nd_half": 24.24,
+  "gain_last_third": 24.24,
+  "top5_spread": 0.52,
   "converged": false,
-  "best_index": 1246,
-  "unit": "score points; ordered history A + B + C + AUD (file order) then D1 / D2 / D3 chronologically (generation end times); every try counted (dishonest never the best); top-5 over distinct configurations; the D starts' re-evaluations excluded",
+  "best_index": 1388,
+  "unit": "score points; ordered history A + B + C + AUD + D1 / D2 / D3 (as before) then the second audit's AUD2 streams E1-E4 in file order; honest only; top-5 over distinct gaps",
   "previous": {
-   "n": 1014,
-   "gain_2nd_half": 5.967,
-   "gain_last_third": 0.0,
-   "top5_spread": 2.494,
-   "best": "B-g47-2 153.49"
-  }
+   "n": 1286,
+   "gain_2nd_half": 13.971,
+   "gain_last_third": 13.971,
+   "top5_spread": 12.629,
+   "best": "D2-g9-0 115.07"
+  },
+  "note": "the last 253 tries (E1 gens 14-23, E2, the sigma-0.6 restarts E3 / E4) gained nothing; top-5 within 0.52 point; the 2nd-half rule needs ~1135 more no-gain tries"
  },
  "complexity": 5.0,
- "verdict": "RE-DISPATCH 2026-10-18 05:28-06:10 UTC (container restart; box free): the 166 no-gain tries the gate needed were run as local CMA (D1 sigma 0.3 + D2 sigma 0.8 from B-g47-2 with emax freed, D3 sigma 0.35 from D2-g3-6; 272 tries + 3 start re-evaluations, 231 honest) - and the wide restart D2 found a NEW BASIN: D2-g9-0 115.07 fast (score 58.2; reach 0.4625, follow 0.65, ib14 0.561, contact 0.074; was 153.49), frozen exact Bench(110,360) 117.68 (score 57.2; reach 0.433, follow 0.655, ib14 0.566, ib10 0.305, contact 0.081, near-touch 126.06, min metal 0.08 mm, overhead 0/28). It is still 60 fast points BEHIND ITS OWN LOCKED CONTROL at the same seats (55.09 at a2 68: reach 0.738, follow 1.0, ib14 0.555): the gain is follow (0.23 -> 0.65) bought by lifting the eccentric's metal out of the band (hub 2 0.19, crank 0.23, L2b 0.19, K 0.36 in band) and by a lock-held track th [66.5, 128.25] (q2 span 201.5) that gives the stretched side +12.5 deg over the plain dyad [20.25, 115.75] but loses 46 deg on the folded side (rest / scapular-plane overhead: the slot's lock falls under 50 deg there). Gate 13.97 / 13.97 / 12.63 (n 1286) -> NOT converged, status stays SCREENED (far behind; no lead path). | AUDITED 2026-10-18 02:08 UTC: far-behind verdict STANDS (not refuted). Fast 153.49 and frozen exact 201.20 reproduced to the digit; every honest variant (emax freed, other knee branch, dG 40 outside K's sweep, pinK stacked over link 1) reads >= 152 fast vs the 78.93 bar; only the O10 knee the plan rules out reaches 70.07 (= the refuted parent). Status stays screened: the gate's 2nd-half rule is open (5.97 / 0.00 / 2.49, n 1014, 424 configs without gain). | SCREENED, far behind - the eccentric loses to its own locked control: best 153.49 on Bench(60,160) fast (score 44.19; reach 0.400, follow 0.233, ib14 0.631, contact 0.049) after 915 configs, frozen exact Bench(110,360) 201.20 (score 26.8; reach 0.181, follow 0.055, ib14 0.604, contact 0.101, overhead 0/28, near-touch 222.88) vs the plain 3R at the same axis directions through the same code and protocol 34.78 fast / 36.83 frozen (H1 directions) and 57.07 / 58.53 (the best config's own seats) and the verified pin knee 27.20 / lead 18.28. The slot widens the KINEMATIC window as promised (H1: th [32.5, 104.0] -> [25.5, 121.75] two-sided, [32.25, 129.75] stretched-only; kinematic reach 0.775 -> 0.869-0.888), but the metal that implements it collides with link 1 / hub 1 / itself on 88-100 % of the closing poses - also with the parent's O10 knee (probe: 132/133 and 197/199), so it is not the O20 rule. Convergence gate (score points, n 915): 8.51 / 0.00 / 2.61 -> NOT converged (2nd-half rule), status screened, not dead. The spec's start condition (parent passes its slot gate with >= 3 frozen points over its control) was already false (parent v_gap 115.21 vs control 46.60).",
+ "verdict": "SECOND DEATH AUDIT 2026-10-18 06:22-06:47 UTC: NOT REFUTED, status stays screened (far behind, no lead path). The re-dispatch's new basin was never refined: a local CMA from D2-g9-0 took it 115.07 -> 86.82 fast (E1-g13-3, score 68.43; reach 0.519, follow 0.717, ib14 0.685, contact 0.038) and frozen exact Bench(110,360) 97.04 (score 64.7; reach 0.461, follow 0.682, ib14 0.699, contact 0.062, near-touch 103.66, overhead 0/28). That is still 7.9 fast points short of the refutation bar (78.93) and 27.7 fast points behind its own locked control at the same seats (plain 3R a2 72: 59.15, reach 0.744, follow 1.0). Gate 24.24 / 24.24 / 0.52 (n 1641): the last 253 tries incl. two sigma-0.6 restarts gained nothing, so the basin has plateaued locally but the 2nd-half rule stays open. Previous verdict text kept in audit2.previous / the md.",
  "limiter": "(re-dispatch, D2-g9-0) the slot's lock: the lock-held track spans only th [66.5, 128.25] (kinematic reach 0.575 big bench vs the locked control's window [20.25, 115.75]); the crank + K sweep q2's 201.5 deg around J2 and cross link 1, so the search lifts hub 2 / K / crank / L2b out of the band (0.19 / 0.36 / 0.23 / 0.19 in band; frozen post lift K 7.0 mm). | the eccentric's own metal around hub 2: the roller track must sit on link 1 in the annulus e = dist(J2, G) in [b - dG, b + dG] (dG >= 14.5 mm for the roller to clear K's boss), i.e. on the same circle the knee hub K sweeps (b >= 20 deg for two O20 hubs side by side) over a q2 span of 170-235 deg (the J2 interior angle sweeps ~0 -> 180 across any wide window); so K and the crank cross link 1, hub 1, the spoke and the track (top K6 pairs at H1: pinK|link1 137, link1|crank 132, hub1|pinK 123, pinK|trk 92 of 199 closing poses). Stacking them honestly makes hub 2 a 3-layer stack (link 1 + track + crank, K above): hub 2 lifts to 71 mm and leaves the band (0.00), crank 0.37, L2b 0.38. CMA escapes the collisions only by shrinking the lock-held track to th [74, 133.5] (kinematic reach 0.50 fast / 0.41 big, below the plain 0.775): overhead and rest poses fall outside the slot.",
  "note": "Model = the parent's kit model (docs/concepts/models/slotted-eccentric-j2-3r.py, inverted cam, every check unchanged: K3 march, K2 dense incl. axes K and G, K6 with same-body exemption, honest posts, crowns + walls, declared pins, slot gate) at the pin-knee chain's J1 / J3 axis directions (H1: bvec(101.16, 63.90), J3 = the tilted d3 = wdir(78.55, -5.34), a1 41.02, a2 68.26), O20 enforced at K (rad 10, 12.25 mm), margin >= 5.23 (5 + K play), psi in [15, 165], lock >= 50 deg, b >= 20 deg - all hard box edges. Member 3 = the kit neck in both arms of every paired comparison: the eccentric's metal is upstream of member 3, so the cuff knee cannot change it. Sweep (local, farm closed, niced, 2 processes): A 113 (H1 two-sided start, stopped at 238.25), B 697 (parent-best start: 275 at O20 -> 153.49), C 113 (stretched-only start Amin 68: best honest 271, best 112.55 dishonest = every eccentric part lifted out of band, ib14 0.11, sparse samples) + 13 paired controls / probes. Gate 0 (slot_design, 432 law cells per seat): 217/432 pass at H1. Frozen exact of the best: fit at 1 mm part-part 188.47 -> Bench(110,360) exact 201.20 (closure 0.37, collide 0.55 of closing poses, min metal 0.09 mm, post lifts hub 2 0.85 / K 3.25 / hub 3 2.82 mm). Complexity v2.2 5.0 (closed loop 4 + track pair 1; slaved K and cuff knee 0). 0 passive translations, 3 active. What would be needed (unmeasured, judged not worth it): a cam whose track lies OUTSIDE K's sweep annulus (dG > b + 10 mm: a long roller arm, more metal over the deltoid) or a track under link 1's skin face (no room at 2-14 mm). | Re-dispatch 05:28-06:10 UTC: sweep appended as streams D1 (161 evaluations, 157 honest, best 149.91), D2 (97, 63 honest, best 115.07 = D2-g9-0, also 115.83 D2-g3-6), D3 (17, 11 honest, none better; slow gens ~150-300 s at box load 10-14). Frozen exact of D2-g9-0: fit at 1 mm 115.07 (no 0.5-1 mm part pair) -> 117.68 in 232 s. Lesson (predicts beyond this row): a slaved length-changing hinge inherits the swept angle of the body it rides on. Downstream of J2 (this row) the crank + K sweep q2's 170-235 deg relative to link 1 and must cross link 1 / hub 1 / the track; upstream of J2 on link 1 (the knuckle family: link 1a -> K -> link 1b -> J2, lead conecut-knee-knuckle-3r 18.28 verified) the slaved body turns only by the law's span (dK cap 57 deg) and link 2 keeps the plain 3R sweep.",
  "audit": {
@@ -310,6 +311,148 @@
     "overhead_ws": "6/28 (0.2143)"
    },
    "paired_delta_frozen": "+142.67 at the best config's own seats, +164.37 vs the H1-direction control (same code, same protocol)"
+  }
+ },
+ "audit2": {
+  "time": "2026-10-18T06:22-06:47Z",
+  "by": "death auditor (did not build the model)",
+  "refuted": false,
+  "reproduction": "D2-g9-0 115.07 fast exactly (reach 0.4625, follow 0.65, ib14 0.5606, contact 0.0738, honest); gate 13.97 / 13.97 / 12.63 recomputed from the sweep",
+  "cma": "local, niced, OMP 1, <= 2 processes, model file unchanged: E1 sigma 0.3 from D2-g9-0 (185 evals, best E1-g13-3 86.82), E2 sigma 0.2 from E1-g2-4 (105, none better), E3 / E4 sigma 0.6 from E1-g13-3 (66, none better)",
+  "best_fast": {
+   "tag": "E1-g13-3",
+   "gap": 86.82,
+   "score": 68.43,
+   "reach": 0.5188,
+   "follow": 0.7167,
+   "inband14": 0.6845,
+   "inband10": 0.3464,
+   "contact": 0.0382,
+   "collide": 0.1603
+  },
+  "frozen_exact": {
+   "protocol": "model frozen mode: fit Bench(60,160) fast at the 1 mm radial part-part rule (89.42), every level frozen, worn on Bench(110,360) CB_EXACT=1",
+   "gap": 97.04,
+   "score": 64.71,
+   "reach": 0.4611,
+   "follow": 0.6818,
+   "inband14": 0.699,
+   "inband10": 0.3538,
+   "contact": 0.0623,
+   "gap_near1": 103.66,
+   "min_metal_skin": 0.24,
+   "overhead_ws_taken": "0/28",
+   "kin_reach": 0.6083,
+   "th_need_p5_p95": [
+    27.1,
+    143.2
+   ],
+   "window_fit": [
+    62.25,
+    125.75
+   ],
+   "q2_span": 203.8,
+   "slot_len_mm": 66.1,
+   "lock_full_run": 39.6,
+   "inband_member": {
+    "hub2": 0.8602,
+    "hub3": 0.5519,
+    "pinK": 0.5926,
+    "crank": 0.3564,
+    "L2b": 0.2261,
+    "armG": 0.7136,
+    "trk1": 0.5745
+   }
+  },
+  "paired_control_same_seats": {
+   "60": {
+    "gap": 61.13,
+    "reach": 0.7188,
+    "follow": 1.0,
+    "inband14": 0.503,
+    "contact": 0.0331,
+    "window": [
+     15.5,
+     104.5
+    ]
+   },
+   "64": {
+    "gap": 61.8,
+    "reach": 0.7188,
+    "follow": 1.0,
+    "inband14": 0.4963,
+    "contact": 0.0331,
+    "window": [
+     19.5,
+     108.5
+    ]
+   },
+   "68": {
+    "gap": 60.6,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.5125,
+    "contact": 0.0435,
+    "window": [
+     23.5,
+     112.5
+    ]
+   },
+   "72": {
+    "gap": 59.15,
+    "reach": 0.7438,
+    "follow": 1.0,
+    "inband14": 0.5023,
+    "contact": 0.0376,
+    "window": [
+     27.5,
+     116.5
+    ]
+   },
+   "76": {
+    "gap": 61.99,
+    "reach": 0.7375,
+    "follow": 0.95,
+    "inband14": 0.4967,
+    "contact": 0.0541,
+    "window": [
+     31.5,
+     120.5
+    ]
+   }
+  },
+  "paired_deficit_fast": 27.67,
+  "attribution_lock_min": {
+   "note": "ATTRIBUTION ONLY (the 50 deg lock is a round-14 hard edge): D2-g9-0 with the slot lock gate relaxed",
+   "lock_40": {
+    "gap": 120.62,
+    "honest": false,
+    "window": [
+     13.0,
+     128.5
+    ],
+    "reach": 0.5625,
+    "follow": 0.8167,
+    "inband14": 0.2561,
+    "contact": 0.0915
+   },
+   "lock_30": {
+    "gap": 113.68,
+    "honest": false,
+    "window": [
+     13.75,
+     128.5
+    ],
+    "reach": 0.5875,
+    "follow": 0.8167,
+    "inband14": 0.2682,
+    "contact": 0.0592
+   }
+  },
+  "previous": {
+   "best_k": "D2-g9-0",
+   "gap": 115.07,
+   "v_gap": 117.68
   }
  }
 }
