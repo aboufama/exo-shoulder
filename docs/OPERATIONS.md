@@ -111,9 +111,24 @@ WATCHDOG (exo-shoulder, every 15 min; docs/OPERATIONS.md):
 **After a container restart** (cloud sessions restart without warning, twice on 2026-10-18; every background workflow
 stops and the session crons vanish):
 1. Commit the agents' uncommitted outputs first (`git status`, add by explicit path, push).
-2. Resume each stopped workflow with `Workflow({scriptPath, resumeFromRunId: <its run id>, args: <its ORIGINAL args,
-   verbatim>})`. Completed agents replay from cache; only the in-flight ones rerun. Recover lost args from the session
-   transcript (`~/.claude/projects/<project>/<session>.jsonl`: the Workflow tool_use whose result names the run id).
+2. **Single-stage workflows** (verify-claim, alignment-audit, final-polish, a CAD): resume with `Workflow({scriptPath,
+   resumeFromRunId: <its run id>, args: <its ORIGINAL args, verbatim>})`. Completed agents replay from cache. Recover
+   lost args from the session transcript (`~/.claude/projects/<project>/<session>.jsonl`: the Workflow tool_use whose
+   result names the run id).
+   **Discovery loops: do NOT resume** (measured 2026-10-18). A resumed loop re-runs every nested `workflow()` child
+   (discovery-ideate / exo-screen / alignment-audit) of the rounds it had already closed: those children's agents do
+   not replay from cache. Their new results then change the close's prompt, so the close, the next plan and the next
+   ideation all re-run. Main round 15 was re-planned twice and never reached screening.
+   Instead, stop the resumed loop and launch a FRESH loop at the round in progress with `n_rounds: 1`. Its `focus`
+   names what is already on file:
+   - the plan section in ROUNDS.md, to adopt and not re-derive;
+   - the ideas already judged;
+   - the rows already screened or dead, not to re-screen;
+   - any round left without a close, for the next planner to write first.
+
+   Run every loop one round per launch (`n_rounds: 1`); the watchdog starts the next round from the close's
+   next_focus. A restart then costs at most the round in progress. Deliverables that must survive (a user-decision
+   table) run as separate agents that commit after every section.
 3. `CronList`; re-create the watchdog and the hourly audit as above.
 4. The first publish to the public artifact may be refused for files published before the restart. Run `Artifact
    list scope files` (or `read` with the path), check that the published copy is our own older build, then republish.

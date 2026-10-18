@@ -633,6 +633,18 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      waits on running frozen-exact dumps (acroant audit d_az1 1.0 / 1.5, seat-only dumps, a held-out wear); their
      agents redo them. Round 105 by then: seatoracle-erwall DEAD (every cell > 17.25), acroant-conecut DEAD, desmo-geom
      DEAD; proxtrack-relay screened 14.02 bench / 18.01 held (unverified, 4 DOF).
+   - *Lead, 12:25 UTC 10-18:* **the resume approach was wasting the loops.** Each resumed discovery loop re-ran every
+     nested screen / ideate child of its already-closed rounds (round 14 / round 104), then re-closed and re-planned
+     them. Main round 15 never got past ideation today, and its lens A (the 3-DOF take-bound table, the user's decision
+     input) never reached disk.
+     - Both resumed loops were stopped (TaskStop) and replaced:
+       - (a) a lead agent builds docs/research/take_bound_3dof.md, committing after every section;
+       - (b) verify-claim for proxtrack-relay-knuckle-4r (wf_61d461b8-269; screened 14.02 / held 18.01, 4 DOF);
+       - (c) a fresh main loop at round 15 with n_rounds 1 (wf_98caeaad-582): it adopts the 09:25 plan and runs lenses
+         B / C only;
+       - (d) a fresh jump loop at round 106 with n_rounds 1 (wf_3329d842-38f): its planner first writes round 105's
+         missing close.
+     - The rule is now in OPERATIONS section 3: never resume a discovery loop, and run one round per launch.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
