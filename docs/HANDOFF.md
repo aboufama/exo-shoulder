@@ -59,6 +59,20 @@ because the problem looks impossible on the first try: rigid metal within 1 cm o
 real gain came from a hard numeric target, verifiers that refuted self-measured claims (several were refuted), and a
 search loop that kept going.
 
+## 0. Latest (2026-10-18 ~22:00 UTC)
+
+- The user picked design B (pin knee H1b: 3 hubs, 3 links, a two-pin knee) to model from the A3 drawing set in
+  docs/drawings/B (10 sheets: kinematic layout, GA + parts list, hub section, one end-geometry sheet per part; built by
+  tools/eng_interfaces.py from the STEP files posed at the rest frame - the STEP files themselves are in the build pose
+  where the knee is open). Viewer: https://claude.ai/artifact/SvYgkudJa7EKyJpy3xwFXz. Set B carries the upgrade notes
+  (MR63ZZ knee pins, knee stop 30.46-149.54 deg, J2 stop: J1-J3 angle 32.2-104.3 deg = J2 21.6-149.7 deg from fold).
+- Knee kinematics, measured (screw check on B at rest): 5 joints independent (no self-motion), every arm rotation
+  about a fixed GH closes; the knee pins move with the arm (up to 0.085 rad/rad) so IK must solve the knee loop; GH
+  slip in the knee plane is absorbed (J3 reads 0.25-0.95 deg/mm, a fixed-GH solve misreads 0.2-0.8 deg/mm), slip
+  along J3 is blocked (the cuff liner takes it).
+- Running: track O1 (overhead, round 301), track K1 (knee-less 4-joint, round 401), the hourly audit. Round 107
+  closed (phi40-thinstack-relay-4r 14.06, best 4-joint, WATCH); round 108 stopped after its plan (user preference).
+
 ## 1. How a design is scored
 
 - **The bench** (`tools/concept_bench.py`): `Bench(n_clip, n_ws)` poses the body model on fit-clip frames and on
