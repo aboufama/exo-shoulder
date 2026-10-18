@@ -79,4 +79,45 @@ So the claim stands on the stated ISO P5 J2 bearing spec. P0 fails on both sides
 
 ## Step 0 wears (frozen exact Bench(110,360))
 
-(filled from the wear runs below)
+Protocol: the claim's own frozen protocol. The shape is fitted once on Bench(60,160) fast (stage 1 at F+3.9 through T's
+glev hook) and worn unchanged on Bench(110,360) exact. On every DWELL pose K = law + delta, and J1 / J2 / J3 re-solve
+(the kplay `PlayDesign`, verbatim). The J2 dowel cut at K-eq 46.35 removed 0 poses: the largest taken K is 45.615.
+Outputs and dumps are in `/tmp/claude-0/-home-user-exo-shoulder/55c580fc-1103-56e5-9e17-3e425f438838/scratchpad/kstop/`
+(`wear_*.json`, `dump_*.json`, `summary_p0264_m0210.json`).
+
+| wear | gap | reach | ib14 | ib10 | contact | 203 main / extra walls | 264 | 205 | 237 | 139 | near1 | overhead |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| parent cell A at F+3.9, delta 0 (s1level, kslot 46.0) | 18.65 | 0.7278 | 0.8963 | 0.5703 | 0.0106 | 0.716 / 0.263 | -1.169 | -4.28 | -9.47 | 0.072 | 20.29 | 8/28 |
+| **+0.264** (wall side, P5 worst) | **18.60** | 0.7278 | 0.8968 | 0.5707 | 0.0106 | 0.610 / **0.158** | -0.999 | -4.44 | -9.39 | 0.072 | 20.78 | 8/28 |
+| **-0.210** (stop A, P5) | **18.68** | 0.7278 | 0.8960 | 0.5703 | 0.0106 | 0.801 / 0.347 | -1.304 | -4.15 | -9.64 | 0.072 | 20.32 | 8/28 |
+| **per-pose worst of the two** | **18.69** | 0.7278 | 0.8960 | - | 0.0106 | 0.158 | -1.304 | -4.44 | -9.64 | 0.072 | - | 8/28 |
+| worst, +0.1 mm probe | 19.23 | 0.7250 | 0.8960 | - | 0.0133 | taken | | | | **flips** | | |
+| worst, +0.2 mm probe | **19.77** | 0.7222 | 0.8960 | - | 0.0160 | **flips** | | | | **flips** | | |
+
+The judge's rates reproduce. 203's c10 closes 0.105 mm over +0.264 deg (0.40 mm/deg predicted: 0.263 -> 0.157, read
+0.158). 264 opens on the + side (-1.17 -> -1.00) and deepens on the - side (-1.30, 0.64 mm/deg predicted: -1.30). The
+probe reading 19.77 matches the judge's ~19.73.
+
+The 98 lost workspace poses keep the parent's / lead's attribution: fold 88 (the model's why), J3 stop 6, contact 4
+(205, 237, 264, 316). 316 is the radial link-2 binder (-1.235), the same as on the lead.
+
+### Gates
+
+| gate | reading | verdict |
+|---|---|---|
+| frozen exact <= 19.05 (kill) | 18.69 per-pose worst | **pass** |
+| 203 >= 0.15 at every stated corner (P5) | 0.158 worn (0.157 / 0.191 / 0.201 worst / RSS / matched) | **pass, by 0.008** |
+| 203 at the +0.1 / +0.2 probes | 0.158 < 0.2 | **fails at +0.2**: the claim needs conecut-h2facet's facet (c 0.5: +0.31 -> ~0.47) |
+| 139 at the probes | 0.072 < 0.1 | **fails at +0.1**: the claim needs conecut-l2jog (dl 1.0 planform: 0.487) |
+| e- range <= 0.29 at P5 | 0.210 | pass (P0 0.408 fails: P5 is a stated build spec) |
+| cx <= 17.0 | 16.75 (16.5 if simplicity.py leaves the set screw out as a fastener) | pass |
+| M3 | no stage-1 metal in F+0..3.0; the short arm's swept metal inside r 10.15 sits at level 2.53..3.15 over az 9.9..43.1. It is clear of the plate with a pocket to F+1.0 and a 1.38 arm tip | pass as a build spec (pocket + tip thickness) |
+| RC_MIN as a cut | rc_min 1.02 (a_s 9.8), 1.03 (9.9) | pass |
+| bind first-fail >= 47.35 (a_s +-0.1, mu 0.12 / 0.15 / 0.17) | pin first fail 51.25 (9.8, mu 0.17), 48.11 (9.9, mu 0.17); cap side >= 58.3 | pass at every legal corner |
+| a_s 9.7 corner | the pin's rho about u2 crosses the skirt pitch limit R_HI 9.94 (rho 9.904 at a_s 9.8, 0.036 under it): dK_lim 0 (s1-pitch) | **red-team flag**: the placement sits 0.036 mm inside the pitch window. It is a design-placement gate (the groove is ground to the chain), but the box edge is a cliff, not a slope |
+| th >= 5 incl. play | dwell rows: min 5.389 at 229 with abs(dth/dK) 0.198 gives 5.34 at +0.264. Forced rows: 5.181 at 313 with the groove play 0.23 x 0.405 gives 5.09. PlayDesign's own J1-J3 check lost 0 dwell poses (m3e >= 17.0 in its last batch) | pass |
+
+Note on the verifier's V3 under play: with delta != 0 every dwell pose has abs(dK) = delta > 1e-6, so V3 files it as
+"forced" and reads the K sub-dyad m_sub (about 0 on rest poses; this is the lead's G4 WATCH item), not th. Its "min 0.0 /
+lt5 106" is that artifact. It is not a fold, and the taken set is the same 372 poses as delta 0.
+
