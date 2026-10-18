@@ -2,7 +2,7 @@
 
 **Status: DEAD at step 0.** The pre-registered kill is met: no pressure-angle-passing pin start leaves the tooth with <= 4
 skin-contact poses at a level <= R 64. At the spec's law (rho 1.05-1.1) the cell is empty. Over 302,595 pin starts, no
-single pin-flank pair carries the 44.1 deg K stroke. The best built range from stop A is 29.7 deg with a crowned pin and
+single pin-flank pair (the spec's drive) carries the 44.1 deg K stroke. The best built range from stop A is 29.7 deg with a crowned pin and
 35.9 with a rolling one. The law-only ghost with that range reads **31.80** frozen exact Bench(110,360). A full-stroke
 single pair exists only at fast laws (rho >= 2.0 rolling, >= 2.5 sliding), where the pin sits on or inside hub K's O20 rim.
 Its tooth (20-30 mm from hub 2's axis) then dips 9-19 mm into the skin on 19-57 overhead poses at every level up to R 67.
@@ -149,16 +149,22 @@ pre-registered step-0 scan plus a kinematic bound over 302,595 pin starts.
 
 **New knowledge** (it predicts beyond this row):
 
-1. **One-pair K drive, arc-of-action law.** With a constant ratio rho, the PA lens sits around the fixed pole at
-   ~bk2 / (1 + rho) from uK. At mu 0.087 the arc of action is ~27-30 deg of K at rho 1.1, ~35-37 at 1.5, ~40-44 at 2.0
-   and ~45-48 at 2.5, nearly independent of the dyad split (32 / 32 to 36 / 28). Any single-pair K drive that must carry
-   the lead's 44 deg stroke needs rho >= 2.5 (sliding) or >= 2.0 (rolling). Its pin then sits within ~13 mm of uK, on hub
-   K's own O20 rim.
-2. **Tooth-sweep law.** A link-2 tooth whose contact is 20-30 mm from u2 sweeps the overhead-scaption shoulder top at
-   the stretched end, 10-19 mm deep, at every level up to R 67. The lead's two-stage drive avoids exactly this by keeping
-   its link-2 element as a rim lobe inside hub 2's skirt (r <= 11.5). Any future one-pair or cam drive must keep its
-   link-2 element within ~12 mm of u2, or put it on link 1b (the frame that does not sweep with q2).
-3. **Simplest surviving one-pair cell, if anyone wants it.** A rolling pin on hub K's cap. Rho 2.0-2.15 (the lead's own
+1. **Pin-flank K drive, arc-of-action law** (a pin or roller on one flank, which is what the spec builds). With a constant
+   ratio rho, the PA lens sits around the fixed pole at ~bk2 / (1 + rho) from uK. At mu 0.087 the arc of action is
+   ~27-30 deg of K at rho 1.1, ~35-37 at 1.5, ~40-44 at 2.0 and ~45-48 at 2.5, nearly independent of the dyad split
+   (32 / 32 to 36 / 28). A pin-flank drive that must carry the lead's 44 deg stroke needs rho >= 2.5 (sliding) or >= 2.0
+   (rolling), and its pin then sits within ~13 mm of uK, on hub K's own O20 rim. **Scope:** this holds for a pin (point /
+   cylinder nose) only. The parent row's dead-row audit (f9ceb81, onetooth-slowlaw-knuckle-3r_audit_toothpair.py) shows
+   that a tooth-tooth (spherical involute) pair, whose contact passes *through* the pitch point, carries 46.7-47.3 deg at
+   rho 1.0-1.5 at the lead's own dyad, with a ghost of 18.83 / 261 there. That path needs no re-seat: this row's re-seat
+   ghost is the same 18.83 / 261.
+2. **Tooth-sweep law** (measured for link-2 contact at 20-30 mm from u2). A link-2 tooth there sweeps the
+   overhead-scaption shoulder top at the stretched end, 10-19 mm deep, at every level up to R 67. The lead's two-stage
+   drive avoids exactly this by keeping its link-2 element as a rim lobe inside hub 2's skirt (r <= 11.5). Any one-pair or
+   cam drive, the involute pair above included (its pole is ~15-17 mm from u2 at rho 1.0-1.5), must measure its link-2
+   tooth sweep before it claims anything. docs/research/shortk_onetooth/metal.py does that on any flank locus, with frames
+   checked. The alternative is to keep the link-2 element within ~12 mm of u2.
+3. **Simplest surviving pin-flank cell, if anyone wants it.** A rolling pin on hub K's cap. Rho 2.0-2.15 (the lead's own
    law), pin 12.9-13.6 mm from uK, contact 20-30 mm from u2. It dies on point 2 unless the link-2 flank is moved inside
    hub 2's rim, which is the lead's lobe again.
 4. **Kit trap.** The lead's model stack clamps bk1 / bk2 to [26, 32] / [38, 48] (roller-longdyad's old search box). Any
