@@ -85,6 +85,19 @@ The first stage-0 probes, at cell (-52.5, 17.5), forced four changes. Each is st
      budget (`--budget-s` up to 900).
    - Every cell's stage-0 number and its loss attribution is reported.
 
+5. **(~13:27 UTC, after stage 0 and before any CMA) The drive phase is free, and so is a lateral-J3 variant.**
+   - Why the drive is freed: stage 0 put the K drive's crank pressure angle at 75-87 deg at rest in 9 of 10 seeds
+     (gate 38). That holds even with the lead's dyad, rest th and drive parameters, so the drive is the first wall.
+     With it idle, the window collapses to state A and fold takes 56-164 of the 220 fit poses.
+   - So the CMA also frees the drive phase inside the lead's clamps: beta (-180..-150), g (1.8-3.0), r_c (14.5-19.5)
+     and lift (0-4). Scales: beta 6, g 0.25, r_c 1.5, lift 0.8. The full free set: wd 6, wa 12, d_a1 4, d_a2 4, beta 6,
+     g 0.25, r_c 1.5, lift 0.8, lE 8, lc 4, phib 10, J3MIN 6.
+   - Run settings: popsize 8, sigma 0.3, `--budget-s 1200`, seed 1.
+   - Lateral-J3 variant (`PM_WA_MAX=90`, tag `_lat`): the J3 seat is limited to the lateral half of the arm,
+     |wa| <= 90, as the lead's is (wa -10.7). Why: the best window-share J3 seats at these J1 seats are on the medial
+     upper arm (wa 140-180), against the trunk and axilla.
+   - Stage-1 cells, by stage-0 near-1 (no seed was honest): (-26.25, 40)_lat 294.04 and (0, 40)_lat 315.18.
+
 ## Results
 
 (to be filled after the runs)

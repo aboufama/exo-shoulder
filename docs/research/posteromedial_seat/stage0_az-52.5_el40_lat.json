@@ -1,0 +1,152 @@
+{
+ "cell": [
+  -52.5,
+  40.0
+ ],
+ "seed": [
+  {
+   "share": 0.6409,
+   "wd": 110.0,
+   "wa": -30.0,
+   "th_rest": 80.34,
+   "br": 1.0,
+   "az2": -14.35,
+   "el2": 72.71,
+   "r1": 111.6,
+   "r2": 52.3
+  },
+  {
+   "share": 0.6409,
+   "wd": 110.0,
+   "wa": -30.0,
+   "th_rest": 80.34,
+   "br": -1.0,
+   "az2": -15.6,
+   "el2": 19.61,
+   "r1": 111.6,
+   "r2": 76.2
+  },
+  {
+   "share": 0.6091,
+   "wd": 105.0,
+   "wa": -30.0,
+   "th_rest": 84.23,
+   "br": 1.0,
+   "az2": -5.08,
+   "el2": 67.35,
+   "r1": 111.6,
+   "r2": 52.6
+  },
+  {
+   "share": 0.6091,
+   "wd": 105.0,
+   "wa": -30.0,
+   "th_rest": 84.23,
+   "br": -1.0,
+   "az2": -14.22,
+   "el2": 21.16,
+   "r1": 111.6,
+   "r2": 74.5
+  }
+ ],
+ "wa_abs_max": 90.0,
+ "params": {
+  "az1": -52.5,
+  "el1": 40.0,
+  "wd": 110.0,
+  "wa": -30.0,
+  "br": 1.0
+ },
+ "near1": 367.36,
+ "plain": {
+  "gap": 367.36,
+  "reach": 0.0187,
+  "follow": 0.0,
+  "inband14": 0.0,
+  "contact": 0.9423
+ },
+ "gap_near2": 369.9,
+ "reach": 0.0187,
+ "inband14": 0.0,
+ "contact": 0.9423,
+ "why": {
+  "fold": 165,
+  "slide": 0,
+  "flip": 0,
+  "closure": 0,
+  "skin": 49,
+  "parts": 3,
+  "contact": 0
+ },
+ "cam": {
+  "dK_lim": 0.0,
+  "why_lim": "pressure_crank",
+  "pa_crank_max_taken": 80.3,
+  "pa_horn_max_taken": 77.0,
+  "phi_max_taken": 0.0,
+  "flank_rho_min": 3.0,
+  "clear_hubK_min": 1.18,
+  "clear_roll_hubK_min": 3.98,
+  "clear_lowarm_lug_min": 23.13,
+  "arm_len": 64.5,
+  "arc_deg": 125.6,
+  "law_dK_max": 62.7,
+  "nose_r": 1.1839,
+  "mu": 0.087,
+  "friction_deg": 4.97,
+  "pa_kin_max": 38.03,
+  "pa_eff_horn": 82.0,
+  "pa_eff_crank": 85.3
+ },
+ "seats": {
+  "az1": -52.5,
+  "el1": 40.0,
+  "az2": -14.351,
+  "el2": 72.707,
+  "wd": 110.0,
+  "wa": -30.0,
+  "b3": 0.329,
+  "br": 1.0,
+  "legal": true,
+  "unresolved": false,
+  "a1": 37.552,
+  "a2": 57.218
+ },
+ "parts": {},
+ "knee": {
+  "n": 3,
+  "ang": [
+   79.56,
+   81.91
+  ],
+  "margin_deg": [
+   54.34,
+   72.87
+  ],
+  "margin_mm": [
+   19.95,
+   22.86
+  ],
+  "d_perp_mm": [
+   95.5,
+   95.7
+  ],
+  "knee_N_per_Nm_max": 10.5,
+  "q3p": [
+   26.58,
+   47.25
+  ],
+  "stop_margin_deg": 138.49,
+  "stop_hi_margin_deg": 75.49,
+  "dowel_N_per_Nm": 133.3,
+  "j3stop": 0
+ },
+ "honest": false,
+ "flags": {
+  "sidecar_fail": null,
+  "drive_idle": true,
+  "pa_fail": true,
+  "knee_moved": null
+ },
+ "secs": 18.5
+}
