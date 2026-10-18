@@ -8311,5 +8311,46 @@
    ]
   },
   "lead_same_bench": 12.5
+ },
+ {
+  "k": 148,
+  "t": "2026-10-18T02:49:01Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 180.0,
+   "lo": 0.0,
+   "hi": 21.0,
+   "r0": 49.5,
+   "h_lift": 13.5,
+   "q0": "policy (ii) relay"
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8771,
+  "reach": 0.6813,
+  "contact": 0.0061,
+  "gap": 28.1,
+  "inband10": 0.5566,
+  "follow": 0.9167,
+  "ghost_gap": 11.88,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 21.0,
+   "gap": 28.1,
+   "ghost": 11.88,
+   "reach": 0.6813,
+   "inband14": 0.8771,
+   "contact": 0.0061,
+   "ws_taken": 109,
+   "contacts": 1,
+   "relay_taken": 1,
+   "relay_contact": 0,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 28.73,
+  "cand": 1,
+  "relay_taken": 1,
+  "relay_contact": 0,
+  "relay_parts": 0,
+  "n_windows": 2
  }
 ]
