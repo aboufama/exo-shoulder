@@ -194,3 +194,55 @@ Lens 1's slaved-elbow branch is closed with these numbers; the J3 closer's ceili
 (arm-grounded or base-grounded) of a cap-pole 4R path closes >= 0.80 of Bench(110,360) ws with continuous motion. The
 remaining J2 lever named by the planner (a J2 with no metal on its axis) is now down to the open four-bar
 (remote-pole-fourbar-j2-3r, pick 1, running) - and finding 2 applies to its pins too.
+
+## Audit (2026-10-18, death upheld)
+
+An auditor tried to refute the death on the screen's own bench and kit: Bench(60,160) fast, with the K2 dense, K3 march
+and K6 checks and the audit on. A refutation needed a corrected gap of 78.93 or lower (within 10 of the champion's
+68.93). **Not refuted.** Measured reason: in-band 0.205 costs 69.5 of the 107.61 points, because every elbow part is
+a rigid body whose pins roam the shoulder dome (hubs A0 / A1 / B0 0-3 % in band; crank A, link 1 and coupler 0 %). Neither
+looser determinacy checks nor free seats move them.
+
+- **Reproduction.** `check` on the best config gives 107.61 again: reach 0.7688, follow 0.70, ib14 0.2051, ib10
+  0.0847, contact 0, near-touch gap 107.61, min metal 1.54 mm, residual 0.0031 deg, min 2R margin 5.95 deg, min
+  transmission 35.7 deg, min |df/dsigma| 0.152. The per-member in-band matches the table above.
+- **Honesty flag (reporting fix, no change to the verdict).** This page and the claim say every number is `honest`.
+  The kit says otherwise for the best: `honest` is False because the coupler is sampled at a 4.14 mm median spacing
+  (> 4 mm). Its underside rides about 145 mm out, so the 2 mm grid at r_ref 70 spreads out. Only 122 of the 697 v2
+  configs pass the kit audit. The best kit-honest config is k559 at **108.36** (reach 0.7625, follow 0.70, ib14
+  0.2039, contact 0, min metal 1.55 mm). The sparse coupler sits far off the skin, so it cannot hide contact. The row's
+  `gap` stays 107.61. Its `v_gap` is 108.22, the best kit-honest number on file (an audit ES config, below).
+- **Convergence gate, recomputed from the sweep.** 697 v2 configs. Gain over the second half 0.909 score points, over
+  the last third 0.0. Top 5 distinct configs 107.61 / 108.36 / 109.02 / 109.34 / 109.44, a spread of 0.665. The gate
+  passes. The best (k458) was re-evaluated 3 more times by the restarts, but 239 later distinct configs did not beat it.
+- **Model read.** I found no bug in the closure, the conventions or the checks. B1 is arm-fixed (F.HG of J3's
+  wdir and the arm-down direction). A1 sits on the coupler at sigma about J3. A0 comes from the kit's closed-form 2R with
+  the 5 deg margin. The loop root (slope branch `sgn`, nearest `home`) is pose-local, and the kit's locality check
+  passes. The kit and conventions match those of the plain cap-pole 3R control (63.18).
+- **Over-strict checks? No: they protect the number.** On the best config, transmission floor 30 -> 20 deg, pin
+  separation 22 -> 18 deg and loop slope sin 8 -> sin 4 deg give **117.80** (worse). Closure_ws rises 0.775 -> 0.794,
+  but the extra poses drag the straps off the skin: ib14 falls to 0.173, follow to 0.667, and every strap is sampled at
+  10-12 mm (~250 mm out). Going further (10 / 15 / sin 2 deg) gives the same 117.80.
+- **Missed region? The seats were fixed at the plain 3R's cap pole, and `by` sat on its lower bound (22 = the B1-J3
+  pin separation), with d1 / db near their upper bounds.** Two elitist (1+6)-ES runs from the best on the near-touch
+  gap, niced and local, with 13 free parameters (the 9 shape parameters plus J1 az / el and J3 wd / wa). The bounds
+  were widened to d0 <= 40, L <= 55, d1 <= 95, db <= 65, by <= 60 and rho <= 80. Run 1 used the screen's step sizes,
+  run 2 small shape steps and 1.5x seat steps. Together they evaluated 188 configs with seats over az 32-51, el
+  55-68, wd 80-100 and wa -15 to +1. **Best 103.91** (score 62.2): reach 0.794, follow 0.70, ib14 0.217, ib10 0.090,
+  contact 0, min metal 1.31 mm, closure_ws 0.80. Seats: J1 az 46.5 / el 62.5 (3.4 / 2.5 deg off the cap pole), J3 wd
+  91.6 / wa -5.5. Run 1 independently reached 104.68 at az 42.7 / el 61.5 / wa -6.5. So a small seat move buys **3.7
+  gap points**, all of it as reach (+4 ws poses), with in-band and follow flat. That number is not kit-honest either:
+  crank A and the coupler are sampled at 4.1-4.5 mm, so they ride ~150 mm out. The best kit-honest ES config is 108.22.
+  Neither run is converged (improvements at entries 93-98 and 72-75), but nothing they found narrows the bound below.
+  The shape parameters stayed at the screen's optimum (d1 73-75, db 43-44, by 22-22.5, rho 60-61), so the widened
+  bounds were not used.
+- **Bound over every config on file (967: the screen's 779 plus the audit's 188).** The best value of each metric,
+  taken from different configs that never occur together, is ib14 0.235 (among configs with reach and follow >= 0.6),
+  follow 0.767 and reach 0.806. Even that impossible combination scores 66.5 + 18.3 + 9.4 = **94.2 > 78.93**. Follow
+  is exactly 0.70 in every top config: the clips where the loop root vanishes (Reach a high shelf, Wash opposite
+  shoulder, Reach back pocket) are lost whatever the seats. ib14 stays <= 0.235 because the elbow parts (97-137 mm
+  hubs, 89-149 mm straps) never come into band. The fixed parts already carry their share (hub J1 1.00, hub J3 0.68,
+  neck 0.75).
+
+Files: the auditor's script and ES logs are in the auditor's scratchpad (`aud/aud.py`, `es1.json`, `es2.json`). The
+ES entries are summarised here, not appended to the screen's sweep, so the screen's gate reading stays as it was.

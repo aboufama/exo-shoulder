@@ -16,11 +16,11 @@
  "contact": 0.0,
  "gap": 107.61,
  "gap_nt": 107.61,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7625,
+ "v_follow": 0.7,
+ "v_inband14": 0.2053,
+ "v_inband10": 0.0841,
+ "v_gap": 108.22,
  "n_configs": 779,
  "verdict": "DEAD at gate 0 (converged): best honest 107.61 fast (score 60.87) vs the plain cap-pole 3R 63.18 through the same kit; frozen exact Bench(110,360) 117.08 (score 57.43) vs the control's 56.40. The lead's kill test fails on all three counts over 5729 kinematic layouts (ws closure max 0.789 < 0.80, dense follow max 0.833 < 0.95, every part <= 75 mm only at closure <= 0.68). Tether cell B best 132.86.",
  "limiter": "The slave loop's root vanishes along internally rotated climbs (Reach a high shelf 5/9 lost), cross-body (Wash opposite shoulder 7/9) and behind-back motions (dense K2) and on 53 ws poses; the 4R path's own window (elbow 2R open on 43-49 ws poses); the elbow parts (A0, A1, B0, crank A, link 1, coupler) 0-4 % in band at 97-137 mm because they roam the shoulder dome (O20 disc edges: the proxy's centre rays read 62-75). Overhead 5/28 frozen.",
@@ -168,5 +168,99 @@
    "collide": true,
    "taken": false
   }
- ]
+ ],
+ "audit_2026_10_18": {
+  "t": "2026-10-18T00:22:22Z",
+  "verdict": "death upheld (not refuted)",
+  "bench": "Bench(60,160) fast, kit checks (K2 dense, K3 march, K6, audit), same as the screen",
+  "reproduced": {
+   "gap": 107.61,
+   "reach": 0.7688,
+   "follow": 0.7,
+   "inband14": 0.2051,
+   "inband10": 0.0847,
+   "contact": 0.0,
+   "gap_nt": 107.61,
+   "min_metal_mm": 1.54,
+   "honest": false,
+   "audit": [
+    "coupler: sparse sampling (4.14 mm median spacing > 4 mm)"
+   ]
+  },
+  "best_kit_honest": {
+   "k": 559,
+   "gap": 108.36,
+   "reach": 0.7625,
+   "follow": 0.7,
+   "inband14": 0.2039,
+   "inband10": 0.084,
+   "contact": 0.0,
+   "min_metal_mm": 1.55,
+   "note": "only 122 of 697 v2 configs pass the kit audit; the audit ES found a kit-honest 108.22 (reach 0.7625, follow 0.70, ib14 0.2053, ib10 0.0841, contact 0, min metal 1.65 mm) = the v_* fields"
+  },
+  "gate": {
+   "n": 697,
+   "gain_2nd_half": 0.909,
+   "gain_last_third": 0.0,
+   "top5_spread": 0.665,
+   "passes": true
+  },
+  "relaxed_checks": {
+   "mu20_sep18_cross4": 117.8,
+   "mu10_sep15_cross2": 117.8,
+   "note": "worse: closure_ws 0.775 -> 0.794 but ib14 0.205 -> 0.173, follow 0.70 -> 0.667, straps sparse at 10-12 mm (~250 mm out)"
+  },
+  "seat_es": {
+   "n": 188,
+   "ranges": {
+    "az": [
+     32.1,
+     50.7
+    ],
+    "el": [
+     54.9,
+     68.0
+    ],
+    "wd": [
+     80.5,
+     100.3
+    ],
+    "wa": [
+     -14.9,
+     0.7
+    ]
+   },
+   "widened": {
+    "d0": 40,
+    "L": 55,
+    "d1": 95,
+    "db": 65,
+    "by": 60,
+    "rho": 80
+   },
+   "best": {
+    "gap": 103.91,
+    "reach": 0.7937,
+    "follow": 0.7,
+    "inband14": 0.2171,
+    "inband10": 0.0899,
+    "contact": 0.0,
+    "min_metal_mm": 1.31,
+    "closure_ws": 0.8,
+    "honest": false,
+    "audit": "crankA / coupler sampled at 4.2 / 4.4 mm",
+    "seats": {
+     "az": 46.51,
+     "el": 62.47,
+     "wd": 91.6,
+     "wa": -5.47
+    }
+   },
+   "best_kit_honest": 108.22,
+   "converged": false,
+   "note": "two elitist (1+6)-ES from the best, 13 free params incl. J1 az/el and J3 wd/wa; a small seat move buys 3.7 gap points as reach only; shape params stayed at the screen optimum"
+  },
+  "bound": "best of each metric over 967 configs (never together): ib14 0.235, follow 0.767, reach 0.806 -> gap >= 94.2 > 78.93",
+  "reason": "ib14 0.205 costs 69.5 of 107.61 points: the elbow parts (hubs A0/A1/B0, crank A, link 1, coupler) are 0-3 % in band at 97-137 mm because they roam the shoulder dome; looser checks lose (117.80), free seats buy 3.7 as reach only (103.91, not kit-honest); follow is pinned at 0.70 by the loop-root loss on internally rotated / cross-body clips"
+ }
 }
