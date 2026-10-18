@@ -190,3 +190,106 @@ gain.
    (top-5 spread 0, n >= 20), the row should say "flat sweep: parameters chosen elsewhere" and name the bench they were
    chosen on.
    - Measured effect on verified rows: conecut-h2facet (122 flat configs). No gap changes.
+
+## Skeptic (2026-10-18, 16:50-17:08 UTC)
+
+Ledger entry 2026-10-18T17:06:25Z, by skeptic, run `skeptic:conecut-h2facet-knuckle-3r`.
+
+**Final verdict: WATCH.** The ledger tool takes the worst level among the reasons not refuted with evidence. I upheld 14
+of the 15 reasons and refuted 1 (S5) with a new measurement. Rulings: `docs/alignment/conecut-h2facet-knuckle-3r.rulings.json`.
+
+**How I checked.**
+- I re-derived every number from the raw files with my own short scripts:
+  - the per-pose dumps (chamfer-only, fd 0.6 and the lead's, bench and held);
+  - the verifier JSONs;
+  - the sweep files;
+  - morphs.json / sweeps.json;
+  - `tools/simplicity.py --json`;
+  - the lead's user-standard CAD judge files.
+- I made three new measurements. All ran locally with CB_EXACT=1, nice 10, OMP_NUM_THREADS=1 and at most 2 processes.
+  The models were unchanged and the farm was not used.
+  - `remeasure/conecut-h2facet-knuckle-3r+chamferonly_flood_held.json`: the held continuity flood, which the audit did
+    not obtain. It uses the lead verifier harness with `--flood --set fd=0` and took 381.7 s.
+  - `remeasure/conecut-h2facet-knuckle-3r+rowconfig_flood_bench.json`: the bench flood at the row's own best_params
+    (fd 0.6). It took 167.7 s.
+  - `remeasure/conecut-h2facet-knuckle-3r_msub_rest_bench.json`: m_sub with K at rest, from
+    `tools/alignment_msub_rest_probe_model.py`. It took 151.7 s.
+
+### Rulings
+
+1. **continuity: upheld, now measured on held.**
+   - Bench: both floods read static 18.28, full 18.28 (0 dropped), knn 19.97 (6 dropped) and bench-graph 50.13. That is
+     ok by the coded rule.
+   - Held: static 22.16, full 22.16 (0 of 332 dropped), knn **30.39 (77 dropped)**, bench-graph 23.33 (11 dropped).
+     The knn loss is 8.23, above TH conn_gamed 3, so c_continuity line 505 reads watch. The desmo-conecut and
+     lowarm-halfring held files read the same way, and so does the sibling l2jog's held flood (knn 30.69).
+   - The check's text "no flood on file" is out of date; the watch level is not.
+2. **complexity: upheld.** simplicity.py scores this row 0 (items []) and the lead 18.5. The row field says 18.5.
+3. **reporting: upheld.** morphs.json shows gap / sweep_gap 12.5 beside v_gap 18.28, and the verdict starts
+   "SCREENED". The lead's own morphs row has the same 12.5 / 18.28 pair.
+4. **G5: upheld, recounted.** 37 verified rows. With the shown 0 this row dominates 33 of the other 36; with 18.5 it
+   dominates 12. conecut-l2jog and lowarm-kphase-notch also show 0.
+5. **T1: upheld, re-derived from the dumps.**
+   - Bench: near1 19.37 vs 19.92, from pose 203 alone (0.263 -> 1.122 mm).
+   - Held: the plain 22.16 vs 22.38 comes from one flip, pose 447 (-0.207 mm -> taken at 0.697 mm). Held near1 is
+     25.23 for both.
+   - Changed poses: 21 on the bench (20 up, mean +0.603 mm; pose 234 -0.050 mm) and 45 held (all up, mean +0.601 mm).
+   - The fd 0.6 and chamfer-only dumps are identical on 470/470 bench and 1154/1154 held poses.
+   - The held edge is metal at 0.70 mm on a taken pose.
+6. **P1: upheld.** 122 configurations, all reading 12.5 / 13.66. One correction: the envh read (17.57 / 22.24)
+   exists only on the 47 coarse entries; the 75 CMA entries have none. GUARD and AZ203 are exact claim-bench poses.
+7. **NEW-wrong-body-frame: upheld.**
+   - In docs/HARDWARE.md the boss starts at U0 3.15 and belongs to the upper member. The flat (z 3.9-12.25) is
+     edited on member 7 (link 1b), and J2 turns -14.2..90.9 deg.
+   - The flat is worth 0: the per-pose dumps show 0 changed poses, and my two bench floods are equal.
+   - A second defect is under Missed (1).
+8. **R1: upheld.** The verdict string opens "SCREENED"; the alignment field is empty; sweeps.json has 122 entries at
+   12.5.
+9. **S5: REFUTED by measurement.**
+   - The held flood now exists: full 22.16 = static, 0 of 332 forced dropped.
+   - From the dumps, the held ws taken set is the lead's 659 plus pose 447. l2jog's held set equals the lead's.
+   - forced_taken is 332 both here and in l2jog's held flood. So 447 is not a forced pose, and no flood can drop it.
+   - knn and bench-graph each keep exactly one more pose than the sibling, with the same drop counts (77 and 11).
+   - The lead's own held flood is still not on file. That item belongs to the lead's row.
+10. **T3: upheld.** The th margin is 5.006 held and 5.181 bench, and J3MIN is the lead's -111.9036. So the 1.33 deg
+    held window carries over.
+11. **M5: upheld on the raceway; the carried text needs a correction.**
+    - R17 and cuff twist HAVE been measured on this chain: user_conecut_knee judge/dynamics.json.
+      - Nominal case: 0.126 N.m, 0.57 N, twist 3.99 deg, R17 PASS.
+      - krate0.01 case: twist 3.89 deg.
+      - M5 forward bound: twist 4.54 / 4.67 / 4.77 deg, 0.23 deg under the 5 deg gate.
+      - Plain-friction case f0.05: twist 11.73 deg and 5.24 N, both over the 5 deg / 5 N rule.
+    - What stands: J3 bearing s0 0.3 at 6 N.m (build.json j3_stop dowel_calc), and s0 0.40 under a silicone liner.
+12. **G4: upheld, now measured on this row.** m_sub at rest: n 205, min 0.0, lt1 50, lt5 107. Identical to the lead
+    on 372/372 rows.
+13. **NEW-strap-dilution: upheld.** The equal-strap gap is 18.67 on the bench and 22.68 held. Held in-band is 0.8999.
+14. **NEW-ws-inband: upheld.** Workspace in-band is 0.8676 over all taken poses, 0.8315 at elevation 90-140 and 0.9359
+    overhead. All equal the lead's.
+15. **P2: upheld (carried).** This design's own parameters came from bench guard poses only. It inherits the lead's
+    J3MIN, whose L1 build window is bounded by held-out q3'. Measured effect: zero.
+
+### Missed (for the next audit; not counted in this verdict)
+
+1. **The flat's wall figure is not the flat's.**
+   - The model's `wall_min_mm` (line 163) is min(10 - c, 10 - fd) - 5.5, i.e. measured to the MR117 bore. The row and
+     verdict cite it as 3.1 mm.
+   - But the flat runs z 3.9-12.25 and, from H1 8.75 up, cuts the cap skirt over the O18 M18x0.5 spigot (HARDWARE.md:
+     spigot r <= 9, skirt to r 10, about 1 mm).
+   - fd 0.6 leaves at most 0.4 mm of skirt there, before thread depth. So the flat cannot be built for a second
+     reason, independent of the frame error.
+   - Anything that imports the flat (lowarm-kphase-notch cites its 264 table) needs both fixes.
+2. **The carried M5 text was stale.**
+   - The audit copied "R17 and cuff twist never measured" from the lead's 2026-10-17 ledger. The lead chain's
+     user-standard CAD has measured both since then (ruling 11).
+   - The real live risks are the thin 0.23 deg twist margin at the forward bound, and the 11.7 deg twist if a plain
+     pin or bushing is used.
+   - Carried reasons should be re-read against the files before they are copied.
+3. **The continuity check cannot see the flood files on record.**
+   - c_continuity reads only the row, the verifier files, and `remeasure/<id>_*bench*.json` files that hold
+     contact_aware_verifier / final_verifier keys.
+   - So the audit's `+chamferonly_flood_bench.json` and my held flood are both invisible to it. It will keep printing
+     "no flood on file", whatever the floods read.
+   - On the held flood now on file it would read watch (knn -8.23).
+   - Proposal, an instrument change and not an input to this verdict: also read `<id>+*_flood_{bench,held}.json`
+     `connected` blocks. Measured effect: this row's continuity level is unchanged (watch, from held knn), and only the
+     check's text changes.
