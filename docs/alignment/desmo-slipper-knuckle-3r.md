@@ -1,166 +1,211 @@
 # Alignment audit: desmo-slipper-knuckle-3r
 
-Auditor run `audit:desmo-slipper-knuckle-3r`, 2026-10-17 17:20-17:50 UTC (discovery round 12, slice r12-A verified this
-design this round). Reference: slipper-nose-knuckle-3r, the verified 3-active lead (18.49), whose drive this design
-rebuilds without its clock spring. Tool VERSION 2026-10-17.4. Farm closed (the 12-hour budget line was reached before
-this audit), so every re-wear ran locally, niced, at most 2 processes.
+This is a re-audit, run 2026-10-18 06:04-06:20 UTC on the box (local only, niced, OMP_NUM_THREADS=1, at most 2
+processes; the farm is closed, $0 spent). The hourly loop (06:04) triggered it after the desmo-conecut CAD-triggered
+audit (8edc253) flagged that this design runs the same stage-1 level formula. Reference: conecut-knee-knuckle-3r, the
+verified lead (18.28). Tool VERSION 2026-10-17.6. The first audit of this row (2026-10-17 17:20-17:50) is superseded by
+this text; its skeptic section is kept below the rule.
 
 ## Verdict and claim
 
-- **Claim:** v_gap **18.95** (score 93.11), Bench(110,360) exact, frozen shape, the independent verifier's number at a
-  RE-PLACED stage-1 pin (a_s 9.5, psi 150) with the groove's blended onset law in the IK. Held out 23.90. The claim's
-  own placement (a_s 9.25, psi 154: 18.63) failed its own 0.25-deg crank-free slop gate under the verifier's dense
-  scan (`docs/concepts/rows/desmo-slipper-knuckle-3r.json` verification).
-- **Ledger verdict: WATCH** (2026-10-17T17:46:26Z, claim 18.95 v_gap) (`docs/alignment/ledger.jsonl`, entry by auditor, run
-  `audit:desmo-slipper-knuckle-3r`). The tool's own verdict is watch (reporting only: the dashboard's sweep best 12.79 sits 6.16 below the verified number); the judgement pass adds 8 watch
-  findings and no gamed one.
-- **In one line:** the verified number is honest and reproduces (19.00 through the model's own IK, 18.95 with the
-  verifier's blended IK); the design is not ranked above a better one (it is 0.46 behind the lead on the same poses).
-  Its real gain - no clock spring, so no preload, no spring lag, no M5 hold problem - is one the score cannot see, and
-  so is its new risk: the sliding stage 1 jams outright at mu 0.14, where the lead's rolling stage 1 loses 1.9 points.
+- **Claim:** v_gap **18.95** (score 93.11). This is the verifier's frozen exact Bench(110,360) at the re-placed stage-1
+  pin (a_s 9.5, psi 150, glev -0.5), with the blended-law IK. Held out 23.90.
+- **Ledger verdict: WATCH.** Entry 2026-10-18T06:18:28Z, by auditor, run `audit:desmo-slipper-knuckle-3r`.
+  - The tool verdict is watch, on the reporting check alone (the dashboard's sweep best 12.79 sits 6.16 below the
+    verified number).
+  - The judgement pass adds 11 findings, all watch: M3, NEW-inherited-stack, NEW-friction-cliff, NEW-silent-check,
+    NEW-refuted-best-params, R1, R2, T3, T5, NEW-ws-inband and G3.
+  - That makes 12 reason items. No finding is gamed.
+- **In one line:** the 18.95 reproduces exactly, but it belongs to a stage 1 that cannot be built. The groove, the pin
+  and the short arm sit inside link 1b's J2 lower plate. At the nearest level that clears the plate, the verified pin
+  no longer drives at all. The nearest pin that does drive and can be cut reads **20.38 bench (+1.43) and 25.33 held
+  (+1.43)**, and that costs in-band only.
+- **Rank:** at that level the design falls behind sidecar-parallelogram (19.13) and sidecar-roller-flank (20.08) on the
+  plain gap and on held out. It stays not-the-leader either way, and those two rows are not shown better for the wearer
+  (finding M3). Hence watch, not gamed.
+
+## The task's two measurements
+
+### (1) Where stage 1 sits against link 1b's J2 plate and strap
+
+Measured with the model and the verifier unchanged, using `tools/alignment_desmo_slipper_s1level.py geom` (new file).
+It runs the frozen protocol's fit model on fast Bench(60,160) with the verifier's `--blend` IK at the verified config.
+All levels are along the J2 axis u2, over hub 2's face. The face is H2 = c2.u2 + f[1] = 62.044 mm, the CAD's own
+definition (`user_style_desmo.py` H2 via `joints4`). The J2 axis passes through GH (offset 0.0).
+Source: `docs/alignment/remeasure/desmo-slipper-knuckle-3r_s1level_scan_fast.json`, `measured_at_verified_config`.
+
+| part | level over hub 2's face (mm) | radius from the J2 axis (mm) |
+|---|---|---|
+| crank pivot PV | **-1.300** (desmo-conecut: -1.289) | 16.02 |
+| groove layer = ring samples (link 2 metal) | **0.60 .. 2.10** (mid 1.35) | ring 10 .. 11.05 sampled (rigid), the whole ring 1.6 .. 11.05 contact |
+| stage-1 pin (O1.5) | 0.60 .. 2.10 | 9.49 (inside the O20 footprint) |
+| short arm samples, root to pin | -1.75 .. +0.35 | 16.0 -> 9.5 |
+| link 1b's J2 lower member (the plate) | **0 .. 3.0** (tools/concept_kit.py line 24) | 0 .. 10 |
+| link 2's J2 member | from 3.15 | 0 .. 10 |
+
+What the table shows:
+
+- The whole stage 1 lies inside link 1b's plate layer. The groove ring is link 2 metal, and link 2 turns about u2
+  against link 1b by q2. So the relief that link 1b would need is not the verifier's assumed "5 x 4 x 1.5 mm pocket"
+  for the pin and arm. It would be an annular cut through the plate, spanning the 99.9-deg ring sector plus the J2
+  travel. That cut is not measured here; the angle is from the model's `ring_az_deg`.
+- **The box excludes every buildable level.** The level formula hmid = PV.u2 + 3.15 + glev (model line 148) treats
+  the pivot as if it sat on the face, so the groove mid is F + 1.85 + glev. The box glev [-1.0, 1.5] (line 87)
+  therefore puts the groove bottom at F+0.10 .. 2.60, inside the plate for every value. The search could never have
+  found a buildable placement.
+- **Link 1b's strap** is not sampled within 12 mm of the J2 axis in the model (`l1b_samples_r_le_12` n = 0), so the
+  model holds no strap metal to read there. The desmo-conecut CAD found its strap crossed by 0.79-0.87 mm at the model
+  level. No CAD of this design exists.
+
+### (2) Re-wear at the nearest buildable level
+
+The instrument applies glev AFTER the model's clamp; the verifier's own `wear()` is unchanged.
+
+- **Control:** glev -0.5 at the verified pin reproduces **18.95 exactly** (`remeasure/desmo-slipper-knuckle-3r_s1level_control_bench.json`).
+- **The level:** F+3.9, groove layer F+3.15 .. 4.65, glev 2.050. This is the nearest level that clears the plate top
+  F+3.0 by the 0.15 running gap. It is the same criterion desmo-conecut's audit used, and the most lenient one: the
+  short arm still runs F+0.74 .. 2.9, and the strap is not shown clear.
+
+**The pin pick, on the fast bench, before any exact or held-out wear.** At F+3.9 the verified pin 9.5/150 is dead: its
+pitch is 10.074, past R_HI 9.94, so the s1-pitch gate cuts dK_lim to 0 and the fast gap reads 101.19. Of 9 pins tried:
+
+- 9.8/150 and 9.9/150 keep the drive with a groove centreline radius at or above the 0.75 pin radius. They read fast
+  14.94, rc 0.95 / 0.94, crank-free play 0.169 deg, desmo_fail [], dK_lim 49.5.
+- 9.7/152 and 9.8/152 read 14.21, but with rc 0.64, which is under the pin radius. That is the defect the verifier
+  refuted the claim placement on, so they are excluded.
+- The pick is 9.8/150, the same pin as desmo-conecut's F+3.9 candidate.
+
+**Exact frozen at F+3.9, pin 9.8/150** (`remeasure/desmo-slipper-knuckle-3r_s1level3p9_{bench,held}.json` with
+per-pose dumps; the dumps recompute to 20.38 / 25.34):
+
+| | verified level (F+1.35) | plate-clearing level (F+3.9) | delta |
+|---|---|---|---|
+| bench gap | 18.95 | **20.38** | +1.43 |
+| reach / follow / contact | 0.725 / 1.0 / 0.0054 | 0.725 / 1.0 / 0.0054 | 0 |
+| in-band 2-14 (clip frames) | 0.8909 | 0.8766 | -0.0143 |
+| ring sector samples, in band, median | 19, 0.54, 13.8 mm | 29, 0.175, 16.3 mm | the larger pin needs a larger ring, and it rides higher |
+| held-out gap | 23.90 | **25.33** | +1.43 |
+| near-touch 1 / 2 mm, bench | 20.58 / 33.45 | 22.01 / 34.96 | +1.4 / +1.5 |
+| stage-1 pa_pin / pa_cap max (gate 38.03 at mu 0.087) | 33.94 / 35.25 | 31.61 / 35.73 | |
+
+**Levels fully above link 1b** (fast only; `_s1level_scan_fast.json`):
+
+- At F+4.6, 2 of 6 pins tried keep a cuttable groove: 10.1/151 (rc 0.83, dK_lim 48.0, fast 15.02) and 10.3/150
+  (rc 1.05, dK_lim 45.25, fast 16.28).
+- At F+6.15, the CAD's "all of stage 1 above link 1b" layout (`user_style_desmo.stage1_layout`), **0 of 11** pins tried
+  keep the drive with rc >= 0.75. The drive-keeping ones have rc 0.20-0.54, and 3 of them fail groove-slop.
+- The scan is not exhaustive. On what was tried, a truly buildable version of this drive costs +1.4 to +2.75 fast, or
+  has no feasible pin.
 
 ## What the wearer gets (measured)
 
-Re-worn here with the model UNCHANGED (`tools/alignment_audit.py remeasure`, only `PK.audit` wrapped) at the verified
-placement, passed by hand (`docs/alignment/remeasure/desmo-slipper-knuckle-3r_vconfig_params.json`) because the row's
-best_params is the refuted placement (finding 3). The model's own IK uses the linear K law, the verifier's the blended
-law; the 0.05 difference is the one the verifier measured on the claim placement (-0.04).
+All figures are on the frozen verified config unless a column says otherwise. Sources: the per-pose dumps
+`remeasure/desmo-slipper-knuckle-3r_{bench,held}_perpose.json` (the verifier's, 18.94 / 23.91) and
+`_s1level3p9_{bench,held}_perpose.json` (this audit), plus `remeasure/desmo-slipper-knuckle-3r_probe_bench.json`.
+Counts of taken poses use 0 <= min metal < x.
 
-| | desmo-slipper (this audit, verified placement) | lead slipper-nose (its audit) |
-|---|---|---|
-| frozen exact Bench(110,360), model IK / verifier IK | 19.0 / 18.95 (reach 0.725, in-band14 0.8904, contact 0.0054; 575.9 s) | 18.49 |
-| held out, model IK | 23.95 (verifier 23.90); reach 0.6828, in-band14 0.8893, contact 0.0116; near 1 / 2 mm 27.04 / 37.52 | 23.45 (verifier 23.45) |
-| reach, workspace | 261 / 360 (0.725); held 650 / 952 | 261 / 360; held 650 / 952 |
-| overhead (elev >= 140) taken / total | 8 / 28 (held 18 / 71) | 8 / 28 (held 18 / 71) |
-| raised arm (elev >= 90) | 46 / 113 (held 114 / 300) | 46 / 113 (held 114 / 300) |
-| taken poses with metal < 1 / 2 / 3 mm, bench | 3 / 30 / 100 (9 overhead under 2 mm) | 3 / 30 / 100 |
-| taken poses with metal < 2 mm, held out | 67 (< 1 mm: 14; 18 overhead) | 67 (< 1 mm: 14) |
-| contact poses, bench | 2: 9.01 mm at (15, 165, -60), 5.72 mm at (30, 165, -60); sum 14.72 mm | 2: 9.01 / 5.74 mm, sum 14.75 mm |
-| contact poses, held out | 10, sum 46.14 mm, deepest 9.05 mm at (30, 165, -45); 4 below elev 150: 3.49 / 5.51 / 1.60 mm at elev 60, 1.22 mm at (15, 105, 15) | 10, sum 46.12 mm, deepest 9.06 mm |
-| workspace in-band 2-14 (unscored), all / elev 90-140 / overhead | 0.8534 / 0.8009 / 0.9378 (over 14 mm: 0.1447 / 0.1983 / 0.06; p95 19.98 mm, max 30.8 mm at elev 90-140 / all) | 0.856 / 0.8004 / 0.94 (over 14 mm 0.142 / 0.1987 / 0.0577) |
-| fold margin in th, min over taken (K on its law) | 5.181 deg (held 5.006) | 5.181 deg (held 5.006) |
-| lowest metal, overhead p10 | 1.82 mm | 1.82 mm |
+| | bench, verified level | bench, F+3.9 | held, verified | held, F+3.9 |
+|---|---|---|---|---|
+| overhead reach (elev >= 140), taken / total | 8 / 28 | 8 / 28 | 18 / 71 | 18 / 71 |
+| raised-arm reach (elev >= 90) | 46 / 113 | 46 / 113 | 114 / 300 | 114 / 300 |
+| taken poses with metal < 1 / 2 / 3 mm | 2 / 27 / 96 | 2 / 28 / 96 | 14 / 64 / 191 | 14 / 66 / 190 |
+| taken overhead poses < 2 mm | 2 | 3 | 8 | 8 |
+| closest taken metal | 0.072 mm | 0.072 mm | 0.33 mm | 0.33 mm |
+| contact poses, summed depth, deepest | 2, 14.72 mm, 9.01 mm at (15, 165, -60): crank / lug | same | 10, 46.14 mm, 9.05 mm at (30, 165, -45) | same |
+| workspace in-band, all taken / elev 90-140 / overhead (unscored) | 0.853 / 0.801 / 0.938 | not probed | - | - |
 
-Files: `docs/alignment/remeasure/desmo-slipper-knuckle-3r_{bench,held,probe_bench,mu_cliff}.json` (this audit) and the verifier's per-pose dumps `docs/alignment/remeasure/desmo-slipper-knuckle-3r_{bench,held}_perpose.json` (recomputed 18.94 / 23.91).
+- **Springs:** none. K is held both ways, by the groove (stage 1) and the two-walled slot (stage 2).
+- **Stops:** the slot's end cap is stop A. The drive range ends at K 49.5 (stage-2 horn pressure angle) at both
+  levels. J2 fold losses: 88 bench / 260 held.
+- **Friction:** the drive jams from mu 0.136 on the linear reading at the verified level, and from **mu 0.128** at F+3.9
+  (pa_cap 35.73). The lead's rolling stage 1 keeps its drive at mu 0.15.
+- **Cuff twist / K play:** crank-free play is 0.174 deg at the verified level and 0.169 at F+3.9 (the model's scan;
+  the verifier's dense scan reads 0.188). Cuff twist and drag are not measured, because no CAD exists (G3).
+- **Near-singular postures:** the min fold margin in th is 5.181 bench and 5.006 held, with K on its law. K play costs
+  about 0.1 deg of that (T3).
 
-- **Clip metal histogram (scored frames, bench):** 0.01 % of samples under 2 mm, 0.15 % at 2-3 mm, 10.9 % over 14 mm.
-  Reading the band as 3-14 mm costs 0.15 points (19.15): the band edge is not exploited (T2 clean).
-- **Near-touch (report-only, user ruling 2026-10-17):** 1 mm 20.63, 2 mm 33.50, 3 mm 83.87 (bench); 14.50 points live
-  in the 1-2 mm shell, under the 15-point T1 watch line, and the lead's 14.53. The lowest metal, 0.072 mm, is the
-  lead's own pose 139 on the cuff end E.
-- **Springs:** none. The clock spring, its 6-mm cap, stop A and the stage-1 roller are gone; K is held both ways by the
-  groove (stage 1) and the two-walled slot (stage 2). This is a real gain for the wearer that the score does not show:
-  the lead's spring lagged 0.42-0.53 deg and its forward-stroke bound fails the judge's gate by 0.0008 deg at mu 0.15
-  (the lead's own M5 watch).
-- **Stops:** the slot's end cap is stop A, the groove's dwell holds K at rest; the drive range ends at K 49.5 (stage-2
-  horn pressure angle, as on the lead). Taken K reaches 45.62 deg (held 46.27).
-- **Friction (new, measured here):** the stage-1 pin's cap-side pressure angle is 35.25 deg at the dwell exit, which K crosses on its way to
-  any of the 188 taken bench poses that need it off rest. The drive
-  holds to mu 0.135 and jams from mu 0.14 (model rule; 0.172 under the judge's 45-deg rule): K never leaves the dwell and
-  the fast gap goes 14.84 -> 86.71. The lead at mu 0.15 keeps 43.0 deg of drive and 14.88
-  (`docs/alignment/remeasure/desmo-slipper-knuckle-3r_mu_cliff.json`).
-- **K slop / cuff twist:** crank-free K play 0.188 deg worst inside the taken range at nominal fit (verifier's dense
-  scan), about 0.36 deg in series with the slot, 0.48 at the groove's worst tolerance. Not on the bench (the models carry
-  no slop state).
-- **Near-singular postures:** min fold margin in th 5.181 deg bench, 5.006 held out, read with K on its law; the K play
-  costs about 0.1 deg (finding T3). Stage-1 pin-side pressure angle up to 31.2 deg over K 0-46 (verified placement, mu 0.12
-  run); cap side 35.25 at the dwell exit (the binder, see Friction).
-- **Continuity:** static 18.95 = full flood 18.95; knn flood 20.62 (+1.67, the lead +1.67); bench-graph flood 51.97 (the
-  graph's sparsity, as on every row of this family).
-- **Complexity:** 15.75 (tools/simplicity.py v2.2, recomputed) against the lead's 18.25. The count is honest or
-  conservative: the record copies the lead's 4 passive rotations / 8 joints, and the row's own note says that if one of
-  them is the lead's stage-1 roller spin (which this design no longer has) the count is 13.75; counting the
-  ground-crown pin as a made part instead of a bought one adds 0.75. Either way it stays under the lead's 18.25.
+## Findings (all watch; `docs/alignment/desmo-slipper-knuckle-3r.findings.json`)
 
-Not measured, and why: the arm-vs-hub-2-stack clearance (no geometry of the J2 seat stack in the model; finding M3);
-the wear of the 0.23-mm groove ridge and its contact stress (no contact-mechanics model of the groove; finding
-NEW-silent-check); the fold margin with K offset by its play per pose (the models carry no slop state; finding T3);
-m_sub at rest (the lead's G4) was not re-measured - by construction it is the lead's (same seats, law and rest poses),
-but K at rest is now held positively by the groove's dwell instead of a spring on stop A; the held-out wear probe (time box; the held-out re-wear itself ran: 23.95).
-
-## Findings
-
-Each finding is in `docs/alignment/desmo-slipper-knuckle-3r.findings.json` with its evidence. All are watch. None is
-gamed: no measurement shows the number ranking this design above a design that is better for the wearer (it ranks
-0.46 below the lead on identical poses, losses and contacts, and its complexity edge is real), and no hard rule is
-broken (3 active DOF, 0 passive translations, O20 hubs, fold margin 5.006 deg at nominal K).
-
-1. **NEW-friction-cliff (new pattern).** The spring-free drive trades the lead's rolling stage 1 for a sliding pin parked
-   0.91 deg under its friction-dependent jam gate at mu 0.12. At mu 0.14 the cap-side pressure angle at the dwell exit
-   (35.25 deg, crossed whenever K leaves its rest: 188 of the 371 taken bench poses need K off rest) exceeds 43 - atan(mu) = 35.03 and the drive cannot leave the
-   dwell: fast plain 86.71, reach 0.344. The lead loses 1.9 points at mu 0.15. Why the exo is not better than its
-   number says: the number is read at mu 0.087; a dry or worn groove is a jammed shoulder. Action: a mu column (0.12 /
-   0.15) on every sliding-drive claim; re-place stage 1 for cap-side margin at the dwell exit, or keep the stage-1
-   follower and delete only the spring (the spring alone is worth 3 points of the design's 2.5-point net complexity gain).
-2. **NEW-silent-check.** The model declares a groove-centreline-radius gate (RC_MIN 1.5 mm, "cuts dK_lim") and never
-   enforces it. Enforced, it would stop K at 0.5-0.8 deg at the verified placement (rc 0.99-1.0 mm over the whole onset
-   corner). The verifier replaced it by a dense play scan (passes, 0.188 deg inside the taken range), which answers slop
-   but not wear: the groove's inner wall at the onset corner is a 0.23-mm ridge loaded at every dwell exit. The onset
-   blend that softens the corner sits at its search-box edge (10 of 0-10). Action: enforce the gate or retire it with
-   its measured reason; state the ridge and its stress on the L1 CAD.
-3. **NEW-refuted-best-params (new pattern).** best_params, gap 13.19, reach 0.775 and the verdict line "paired TIE"
-   are the claim placement the verifier refuted on determinacy; v_gap 18.95 is a placement stored only in
-   verification.verified_config. Every tool reading best_params (this audit's own remeasure and probe, the viz preview,
-   a polish, the CAD) builds the failing placement unless told otherwise. Nothing on the leaderboard is flattered (the
-   verified number is the worse one); the risk is building the wrong exo. Action: verified placement into best_params
-   (claim's kept as claim_params), or the tools read verified_config.
-4. **R2.** The dashboard (rebuilt 17:43: verified, 18.95) still shows a sweep best of 12.79 for this design (score
-   95.35, over the golden 95 line); until the rebuild it read "screened" with no verified number. That number is fast, read with the dense outer-wall sampling the screener measured at -0.31 (in-band
-   padding), at a placement between two the verifier's dense scan refuted. On the sweep column the design reads ahead
-   of the lead (12.79 vs 13.00); verified it is behind (18.95 vs 18.49). Action: sweep rows record their sampling
-   convention and slop reading.
-5. **T3.** Held-out min fold margin 5.006 deg with K on its law; the drive's 0.36-0.48 deg of K play costs about 0.1 deg
-   of th, so the held-out minimum is under 5 with play (verifier's estimate). Same class as the lead's spring lag, smaller.
-6. **M3.** The 9.5-mm short arm and the pin pass through hub 2's O20 footprint in the layer of link 1b's J2 seat; no
-   check covers them against the hub-2 stack. A 5 x 4 x 1.5 mm relief pocket is assumed, not shown.
-7. **T5 (carried).** Two overhead contacts at 9.01 and 5.72 mm deep (sum 14.72 mm, x2.36 the default reference's 6.23
-   mm); held out 10, sum 46.14 mm, deepest 9.05 mm. The lead's own contacts, unchanged by the drive.
-8. **NEW-ws-inband (carried).** The gap reads in-band on clip frames only. On taken workspace poses at elevation 90-140, 0.8009 of the metal is in 2-14 mm and 0.1983 is above 14 mm (p95 19.98 mm), against 0.8004 / 0.1987 on the lead and 0.8904 on the scored clip frames. Same metal, same poses as the lead; carried.
+1. **M3, measured now.**
+   - *Evidence:* the clash and the re-wear above. The 18.95 sits at a stage-1 level inside link 1b's plate. The
+     plate-clearing re-wear costs +1.43 bench and +1.43 held, all of it in-band; above link 1b there is no or a more
+     costly pin.
+   - *Why the exo is not better than its number:* the built drive must ride higher. It then puts the ring sector's
+     metal further off the skin (median 16.3 mm), so the 1-cm band reads worse, and the drive jams at a lower friction.
+   - *Why watch:* the design is not the leader before or after. The rows it would fall behind (sidecar-parallelogram
+     19.13 / 22.03, sidecar-roller-flank 20.08 / 22.23) are much worse at 2 mm near-touch (50.14 / 46.82 vs 34.96), and
+     their held numbers come from older harnesses.
+   - *Action:* re-claim at a buildable level before any CAD.
+2. **NEW-inherited-stack (proposed catalogue M6), seen from the source.**
+   - *Evidence:* the formula (line 148) and the box (line 87) are this model's. desmo-conecut and, through it,
+     lowarm-halfring (17.96, the plain-gap top row) inherit them. A second chain shows the same 1.30 mm pivot offset
+     and the same ~1.4-1.5 point in-band cost.
+   - *Reporting error:* the lead's note on this row says it "inherits desmo-conecut's" layer. It is the reverse.
+   - *Action:* one fix in the family model, then re-claim the family's rows.
+3. **NEW-friction-cliff (carried):** the jam friction moves from 0.136 to 0.128 at the buildable level.
+4. **NEW-silent-check (carried):** RC_MIN 1.5 still never cuts. At the buildable levels, the pins that score best pass
+   the model with rc 0.28-0.64, under the pin radius. A re-placement search needs the gate enforced first.
+5. **NEW-refuted-best-params (carried):** best_params is still the refuted 9.25/154. At F+3.9 that pin keeps the drive
+   but has rc 0.51.
+6. **R1:** the row and the dashboard still show 18.95 with "unmeasured on this row". It is measured now.
+7. **R2 (tool reporting):** the sweep best is 12.79 (score 95.35) against the verified 18.95.
+8. **T3 (carried):** held fold margin 5.006 with K on its law.
+9. **T5 (carried, report only):** contact depth 14.72 mm bench and 46.14 mm held, unchanged at F+3.9.
+10. **NEW-ws-inband (carried):** the raised-arm workspace reads in-band 0.801, unscored. The raised ring adds metal over
+    14 mm.
+11. **G3 (missing measurement):** no CAD, R17, cuff twist or drag for this row. The sibling's CAD twists the cuff
+    11.74 deg at f 0.05.
 
 ## Patterns walked and found clean
 
-- **T1 / G1 (metal hugging):** 14.50 points in the 1-2 mm shell (under 15), and 30 taken poses under 2 mm, the same 30
-  as the lead (paired dumps). **T2:** band read as 3-14 mm costs 0.15. **T4:** no singularity margin moved by the
-  search; the bound at the box edge (blend 10) spends groove radius, not a fold margin (finding 2).
-- **S1 / P1:** held out +4.95 (23.90 vs 18.95), the lead's +4.96. **S2:** sample-weighted in-band 0.891 vs part-weighted
-  0.898; the ring sector (19 samples at the verified placement, 0.533 in band, median 13.9 mm) and the slot's outer wall
-  (horn 61 samples vs the lead's 23) are sampled, and the whole 0.46 against the lead is theirs, all in-band; the short arm and pin are contact-only samples sitting under the ring
-  (conservative). **S3:** every declared moving body is sampled (crank 129, horn 61, ring2 19, L1a 8 ...). **S5:**
-  full flood = static.
-- **M1 / M2:** O20 at every hub, 0 passive translations, every joint a component (ISO 8734 pins, MR63ZZ crank pair).
-  **M4:** K moves 45.62 deg; the crank moves with it (phi = dK / g, about 19 deg). **M5:** no spring (see finding 1
-  for the positive drive's own failure mode).
-- **P2:** the search ran on the fast bench only (near2 objective); the verifier chose its placement by the slop gate
-  and friction, not by a held-out number. **P3 / R3:** convergence gate 0.00 / 0.00 / 0.00 over 136 configs (near2 flat
-  at the lead's 16.47); one frozen claim, one verifier re-placement with its reason. **P4:** no bench / judge / metric
-  file in the row's 3 commits.
-- **R1:** status verified with verifier files on disk; the verified number is the verifier's, not the claim's.
-- **G2 / G3:** no spring; cuff twist from K play only (<= 0.48 deg of K). **G5 / G6:** complexity recomputed 15.75 =
-  row; 3 active DOF, nothing sensed.
+- **T1 / T2:** 14.5 points live in the 1-2 mm shell at the verified level (the tool's reading: 2 mm near-touch minus
+  plain), and 14.58 at F+3.9. Both are under the 15-point line. The band read as 3-14 mm costs 0.15.
+- **T4:** blend 10 sits at its box edge. It spends groove radius, not a fold margin (NEW-silent-check).
+- **S1 / P1:** held +4.95, the family's.
+- **S2:** sample-weighted 0.890 vs part-weighted 0.898. **S3:** every moving body is sampled.
+- **S4:** the sample is the standard bench's.
+- **S5:** full flood = static 18.95.
+- **M1 / M2:** O20 hubs, 0 passive translations, ISO 8734 pins, MR63ZZ crank pair. M1 is not counted under M3: the
+  parts are real components; they are placed in another part's volume.
+- **M4:** K moves 45.6 deg. **M5:** no spring.
+- **P2:** the pin pick here was made on fast only, before the held wear.
+- **P3 / R3:** convergence gate 0/0/0. This audit's control reproduced the claim; it was not re-measured until lucky.
+- **P4:** no bench / judge / metric file changed in the row's 4 commits.
+- **G1 / G2:** no spring. **G4:** same seats as the lead. **G5 / G6:** complexity 15.75 recomputed, 3 active DOF.
 
-## Cross-design check: is the lead's rim lobe unsampled metal? (no)
+## Re-wear rule (step 2)
 
-The screener wrote that the lead's hub-2 rim lobe "was never sampled past O20", so that this design "pays for metal the
-lead got for free" (`docs/concepts/desmo-slipper-knuckle-3r.md` item 1). If true, that would be S3 on the reference and
-the paired +0.46 against this design would be a sampling artefact. Checked: the lead's lobe crest is 9.62 mm from hub
-2's axis on every verifier wear (`docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_frozen.json` and 7 sibling
-files, crest_exact), inside the sampled O20 envelope, and its follower roller is sampled (group 'roller', 19 samples,
-identical in both re-wears). The lead's spring-loaded follower rides ON the lobe and needs no outer wall; this design's
-two-walled groove does (pitch 9.49 + 0.76 + 0.8 = ring to r 11.05 at the verified placement, 19 samples, 0.533 in band,
-median 13.9 mm). So the ring sector is new metal, the +0.46 is a fair price of positive return, and the "11.5 skirt"
-is the desmo model's own allowance (SKIRT_R = HUB_R + 1.5), not metal on the lead. No finding against the lead.
+The row's last commit (2f4e435, 06:00:55) changed only its verdict text. The claim, best_params and verification are
+unchanged, so `tools/alignment_audit.py remeasure` was not re-run. The control above re-wears the verified claim
+through the same harness today, at 18.95. The existing `remeasure/desmo-slipper-knuckle-3r_{bench,held}.json` (17:31,
+19.00 / 23.95 on the model's linear IK) stand.
 
-## Proposals (measurement or reporting changes; none is an input to the verdict)
+## Numbers I could not get, and why
 
-- **P-1 (catalogue M6, NEW-friction-cliff):** every claim with a sliding drive pair reports its drive range at mu 0.12
-  and 0.15 next to the claim's mu, and the friction at which the range collapses. Measured effect on the verified rows
-  with sliding drives: this design jams at 0.14 (fast 14.84 -> 86.71); the lead keeps 43.0 deg at 0.15 (fast 13.00 ->
-  14.88); other rows not measured here.
-- **P-2 (catalogue R5 - the reporting family, not requirement R5 - NEW-refuted-best-params):** a row whose verifier re-places or corrects the config carries the
-  verified config in best_params (the claim's in claim_params), and its headline gap / reach / verdict fields read the
-  verified numbers. Effect on the verified rows today: only this row has verification.verified_config.
-- **P-3:** sweep rows (docs/concepts/sweeps/*.json) record their metal-sampling convention, and the dashboard shows a
-  sweep best only with that convention, or re-read at the claim's density.
+- **The real relief swept in link 1b by the ring sector:** the ring sector plus the J2 travel. Not computed here;
+  no CAD of this row exists.
+- **Strap clearance:** there are no link 1b strap samples near J2 in the model.
+- **A wide pin scan at F+4.6 and F+6.15** (20 pins tried in all, time box), and an exact wear above link 1b.
+- **The workspace wear probe at F+3.9:** time box.
+- **Cuff twist and drag:** no CAD.
+
+## Proposals (not applied; none feeds the verdict)
+
+1. **Family level fix (measurement change).** Measure stage 1's level from hub 2's face, not the crank pivot. Re-base
+   the glev box so that the groove bottom is >= F+3.15. Enforce RC_MIN, or a floor of pin radius + ridge.
+   - Measured effect on the verified rows: this row 18.95 -> 20.38 bench / 23.90 -> 25.33 held at the nearest
+     plate-clearing pin. desmo-conecut 18.98 -> 20.50 bench (its audit).
+   - lowarm-halfring 17.96: not measured. It runs the same layer at glev -1.0.
+   - No other verified row has a desmo stage 1.
+2. **A layer check in every verifier of a stacked drive:** sample each drive part against the members of the joint
+   whose layer it shares (here link 1b's J2 plate F+0..3 and its strap). This row is the first measured case where a
+   verifier's "relief pocket" assumption hid a layer conflict.
+3. **Reporting:** write the measured plate-clearing number on the row as a separate field next to v_gap. Do not
+   replace v_gap without a verifier.
+
+---
+
+*Earlier skeptic section (2026-10-17), kept as written; it rules on the first audit's findings.*
 
 ## Skeptic (2026-10-17 ~17:55 UTC, skeptic:desmo-slipper-knuckle-3r)
 

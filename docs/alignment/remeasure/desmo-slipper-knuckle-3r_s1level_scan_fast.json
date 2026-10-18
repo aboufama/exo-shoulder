@@ -1,0 +1,1362 @@
+{
+ "design": "desmo-slipper-knuckle-3r",
+ "tool": "tools/alignment_desmo_slipper_s1level.py geom",
+ "bench": "fast Bench(60,160), the frozen protocol's fit model, verifier --blend IK",
+ "measured_at_verified_config": {
+  "H2": 62.0437,
+  "J2_axis_off_GH_mm": 0.0,
+  "pivot_minus_face_mm": -1.2997,
+  "groove_mid_over_face_mm": 1.3503,
+  "groove_layer_over_face_mm": [
+   0.6,
+   2.1
+  ],
+  "pin_band_over_face_mm": [
+   0.6,
+   2.1
+  ],
+  "pin_radius_about_u2_mm": 9.487,
+  "arm_root_over_face_mm": -1.748,
+  "arm_pin_end_over_face_mm": 0.35,
+  "pivot_radius_about_u2_mm": 16.022,
+  "dR_dot_u2": 0.9669,
+  "lower_plate_over_face_mm": [
+   0.0,
+   3.0
+  ],
+  "link2_member_from_mm": 3.15
+ },
+ "level_formula": "groove mid over hub 2's face = pivot_minus_face + 3.15 + glev = 1.8503 + glev; box glev [-1.0, 1.5] -> groove layer F+0.10..1.60 to F+2.60..4.10 (its bottom inside the plate F+0..3 for every value)",
+ "levels_note": "F+3.9 = groove layer F+3.15..4.65 (clears the plate top F+3.0 by the 0.15 running gap; the most lenient plate-clearing level, as in desmo-conecut's audit); F+6.15 = the CAD's all-of-stage-1-above-link-1b layout (user_style_desmo.stage1_layout: arm F+3.45..4.95, groove mid F+6.15)",
+ "rows": [
+  {
+   "level_over_face_mm": 1.3503,
+   "glev": -0.5,
+   "a_s": 9.5,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 13.53,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8897,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 49.5,
+   "why_lim": "pressure_horn",
+   "crank_free_deg": 0.174,
+   "groove_layer_over_face_mm": [
+    0.6,
+    2.1
+   ],
+   "pin_band_over_face_mm": [
+    0.6,
+    2.1
+   ],
+   "arm_root_over_face_mm": -1.748,
+   "arm_pin_end_over_face_mm": 0.35,
+   "pin_radius_about_u2_mm": 9.487,
+   "stage1": {
+    "pitch": [
+     9.487,
+     9.487
+    ],
+    "pa_pin_max": 33.94,
+    "pa_cap_max": 35.25,
+    "pa_gate": 38.03,
+    "drift_max": 0.293,
+    "rc_min": 0.9,
+    "rc_onset": 0.99,
+    "n_ring_rigid": 19,
+    "r_out": 11.05,
+    "lim_by_gate": {
+     "pitch": 60.25,
+     "pa_pin": 53.5,
+     "pa_cap": 60.25,
+     "drift": null,
+     "radius": 0.5
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 3.9,
+   "glev": 2.0497,
+   "a_s": 9.25,
+   "psi": 154.0,
+   "fit_fast": {
+    "gap": 14.22,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8828,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 49.5,
+   "why_lim": "pressure_horn",
+   "crank_free_deg": 0.195,
+   "groove_layer_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "pin_band_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "arm_root_over_face_mm": 0.78,
+   "arm_pin_end_over_face_mm": 2.9,
+   "pin_radius_about_u2_mm": 9.685,
+   "stage1": {
+    "pitch": [
+     9.685,
+     9.685
+    ],
+    "pa_pin_max": 17.8,
+    "pa_cap_max": 34.59,
+    "pa_gate": 38.03,
+    "drift_max": 0.229,
+    "rc_min": 0.51,
+    "rc_onset": 0.74,
+    "n_ring_rigid": 19,
+    "r_out": 11.24,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 57.75,
+     "pa_cap": 58.25,
+     "drift": null,
+     "radius": 0.75
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 3.9,
+   "glev": 2.0497,
+   "a_s": 9.5,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 101.19,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.8736,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.173,
+   "groove_layer_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "pin_band_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "arm_root_over_face_mm": 0.802,
+   "arm_pin_end_over_face_mm": 2.9,
+   "pin_radius_about_u2_mm": 10.074,
+   "stage1": {
+    "pitch": [
+     10.074,
+     10.074
+    ],
+    "pa_pin_max": 20.97,
+    "pa_cap_max": 37.6,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 1.01,
+    "n_ring_rigid": 27,
+    "r_out": 11.63,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 62.25,
+     "pa_cap": 64.5,
+     "drift": null,
+     "radius": 1.0
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 3.9,
+   "glev": 2.0497,
+   "a_s": 9.6,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 101.17,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.8738,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.17,
+   "groove_layer_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "pin_band_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "arm_root_over_face_mm": 0.78,
+   "arm_pin_end_over_face_mm": 2.9,
+   "pin_radius_about_u2_mm": 10.019,
+   "stage1": {
+    "pitch": [
+     10.019,
+     10.019
+    ],
+    "pa_pin_max": 22.04,
+    "pa_cap_max": 36.96,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 1.01,
+    "n_ring_rigid": 27,
+    "r_out": 11.58,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 60.0,
+     "pa_cap": 63.25,
+     "drift": null,
+     "radius": 1.0
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 3.9,
+   "glev": 2.0497,
+   "a_s": 9.7,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 101.17,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.8738,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.168,
+   "groove_layer_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "pin_band_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "arm_root_over_face_mm": 0.758,
+   "arm_pin_end_over_face_mm": 2.9,
+   "pin_radius_about_u2_mm": 9.965,
+   "stage1": {
+    "pitch": [
+     9.965,
+     9.965
+    ],
+    "pa_pin_max": 23.1,
+    "pa_cap_max": 36.33,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 1.02,
+    "n_ring_rigid": 27,
+    "r_out": 11.53,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 57.75,
+     "pa_cap": 62.0,
+     "drift": null,
+     "radius": 0.75
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 3.9,
+   "glev": 2.0497,
+   "a_s": 9.7,
+   "psi": 152.0,
+   "fit_fast": {
+    "gap": 14.21,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8829,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 49.5,
+   "why_lim": "pressure_horn",
+   "crank_free_deg": 0.184,
+   "groove_layer_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "pin_band_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "arm_root_over_face_mm": 0.716,
+   "arm_pin_end_over_face_mm": 2.9,
+   "pin_radius_about_u2_mm": 9.674,
+   "stage1": {
+    "pitch": [
+     9.674,
+     9.674
+    ],
+    "pa_pin_max": 33.43,
+    "pa_cap_max": 33.65,
+    "pa_gate": 38.03,
+    "drift_max": 0.269,
+    "rc_min": 0.64,
+    "rc_onset": 0.88,
+    "n_ring_rigid": 19,
+    "r_out": 11.23,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 52.75,
+     "pa_cap": 57.25,
+     "drift": null,
+     "radius": 0.5
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 3.9,
+   "glev": 2.0497,
+   "a_s": 9.8,
+   "psi": 148.0,
+   "fit_fast": {
+    "gap": 101.84,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.8671,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.16,
+   "groove_layer_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "pin_band_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "arm_root_over_face_mm": 0.78,
+   "arm_pin_end_over_face_mm": 2.9,
+   "pin_radius_about_u2_mm": 10.216,
+   "stage1": {
+    "pitch": [
+     10.216,
+     10.216
+    ],
+    "pa_pin_max": 24.58,
+    "pa_cap_max": 38.3,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 1.17,
+    "n_ring_rigid": 37,
+    "r_out": 11.78,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 60.25,
+     "pa_cap": 0.0,
+     "drift": null,
+     "radius": 1.0
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 3.9,
+   "glev": 2.0497,
+   "a_s": 9.8,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 14.94,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8756,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 49.5,
+   "why_lim": "pressure_horn",
+   "crank_free_deg": 0.169,
+   "groove_layer_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "pin_band_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "arm_root_over_face_mm": 0.736,
+   "arm_pin_end_over_face_mm": 2.9,
+   "pin_radius_about_u2_mm": 9.912,
+   "stage1": {
+    "pitch": [
+     9.912,
+     9.912
+    ],
+    "pa_pin_max": 31.61,
+    "pa_cap_max": 35.73,
+    "pa_gate": 38.03,
+    "drift_max": 0.302,
+    "rc_min": 0.95,
+    "rc_onset": 1.02,
+    "n_ring_rigid": 29,
+    "r_out": 11.47,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 55.5,
+     "pa_cap": 61.0,
+     "drift": null,
+     "radius": 0.75
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 3.9,
+   "glev": 2.0497,
+   "a_s": 9.8,
+   "psi": 152.0,
+   "fit_fast": {
+    "gap": 14.21,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8829,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 49.5,
+   "why_lim": "pressure_horn",
+   "crank_free_deg": 0.175,
+   "groove_layer_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "pin_band_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "arm_root_over_face_mm": 0.693,
+   "arm_pin_end_over_face_mm": 2.9,
+   "pin_radius_about_u2_mm": 9.616,
+   "stage1": {
+    "pitch": [
+     9.616,
+     9.616
+    ],
+    "pa_pin_max": 36.85,
+    "pa_cap_max": 32.96,
+    "pa_gate": 38.03,
+    "drift_max": 0.272,
+    "rc_min": 0.64,
+    "rc_onset": 0.88,
+    "n_ring_rigid": 19,
+    "r_out": 11.18,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 50.5,
+     "pa_cap": 56.25,
+     "drift": null,
+     "radius": 0.5
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 3.9,
+   "glev": 2.0497,
+   "a_s": 9.9,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 14.94,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8756,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 49.5,
+   "why_lim": "pressure_horn",
+   "crank_free_deg": 0.168,
+   "groove_layer_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "pin_band_over_face_mm": [
+    3.15,
+    4.65
+   ],
+   "arm_root_over_face_mm": 0.713,
+   "arm_pin_end_over_face_mm": 2.9,
+   "pin_radius_about_u2_mm": 9.859,
+   "stage1": {
+    "pitch": [
+     9.859,
+     9.859
+    ],
+    "pa_pin_max": 34.43,
+    "pa_cap_max": 35.15,
+    "pa_gate": 38.03,
+    "drift_max": 0.305,
+    "rc_min": 0.94,
+    "rc_onset": 1.03,
+    "n_ring_rigid": 29,
+    "r_out": 11.42,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 53.0,
+     "pa_cap": 60.0,
+     "drift": null,
+     "radius": 0.5
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 4.6,
+   "glev": 2.7496999999999994,
+   "a_s": 9.8,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 101.23,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.8732,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.166,
+   "groove_layer_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "pin_band_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "arm_root_over_face_mm": 1.436,
+   "arm_pin_end_over_face_mm": 3.6,
+   "pin_radius_about_u2_mm": 10.073,
+   "stage1": {
+    "pitch": [
+     10.073,
+     10.073
+    ],
+    "pa_pin_max": 23.06,
+    "pa_cap_max": 36.35,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 1.03,
+    "n_ring_rigid": 27,
+    "r_out": 11.63,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 57.75,
+     "pa_cap": 62.0,
+     "drift": null,
+     "radius": 0.75
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 4.6,
+   "glev": 2.7496999999999994,
+   "a_s": 9.8,
+   "psi": 152.0,
+   "fit_fast": {
+    "gap": 15.02,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8748,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 49.5,
+   "why_lim": "pressure_horn",
+   "crank_free_deg": 0.179,
+   "groove_layer_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "pin_band_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "arm_root_over_face_mm": 1.393,
+   "arm_pin_end_over_face_mm": 3.6,
+   "pin_radius_about_u2_mm": 9.779,
+   "stage1": {
+    "pitch": [
+     9.779,
+     9.779
+    ],
+    "pa_pin_max": 33.32,
+    "pa_cap_max": 33.67,
+    "pa_gate": 38.03,
+    "drift_max": 0.272,
+    "rc_min": 0.65,
+    "rc_onset": 0.89,
+    "n_ring_rigid": 29,
+    "r_out": 11.34,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 53.0,
+     "pa_cap": 57.25,
+     "drift": null,
+     "radius": 0.5
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 4.6,
+   "glev": 2.7496999999999994,
+   "a_s": 9.9,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 101.23,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.8732,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.163,
+   "groove_layer_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "pin_band_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "arm_root_over_face_mm": 1.413,
+   "arm_pin_end_over_face_mm": 3.6,
+   "pin_radius_about_u2_mm": 10.019,
+   "stage1": {
+    "pitch": [
+     10.019,
+     10.019
+    ],
+    "pa_pin_max": 24.1,
+    "pa_cap_max": 35.75,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 1.03,
+    "n_ring_rigid": 27,
+    "r_out": 11.58,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 55.5,
+     "pa_cap": 61.0,
+     "drift": null,
+     "radius": 0.75
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 4.6,
+   "glev": 2.7496999999999994,
+   "a_s": 10.0,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 101.22,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.8733,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.161,
+   "groove_layer_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "pin_band_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "arm_root_over_face_mm": 1.391,
+   "arm_pin_end_over_face_mm": 3.6,
+   "pin_radius_about_u2_mm": 9.966,
+   "stage1": {
+    "pitch": [
+     9.966,
+     9.966
+    ],
+    "pa_pin_max": 25.13,
+    "pa_cap_max": 35.18,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 1.04,
+    "n_ring_rigid": 27,
+    "r_out": 11.53,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 53.25,
+     "pa_cap": 60.0,
+     "drift": null,
+     "radius": 0.75
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 4.6,
+   "glev": 2.7496999999999994,
+   "a_s": 10.1,
+   "psi": 151.0,
+   "fit_fast": {
+    "gap": 15.02,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8748,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 48.0,
+   "why_lim": "s1-pa-pin",
+   "crank_free_deg": 0.172,
+   "groove_layer_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "pin_band_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "arm_root_over_face_mm": 1.347,
+   "arm_pin_end_over_face_mm": 3.6,
+   "pin_radius_about_u2_mm": 9.759,
+   "stage1": {
+    "pitch": [
+     9.759,
+     9.759
+    ],
+    "pa_pin_max": 37.9,
+    "pa_cap_max": 33.2,
+    "pa_gate": 38.03,
+    "drift_max": 0.292,
+    "rc_min": 0.83,
+    "rc_onset": 0.97,
+    "n_ring_rigid": 29,
+    "r_out": 11.32,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 48.25,
+     "pa_cap": 56.75,
+     "drift": null,
+     "radius": 0.5
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 4.6,
+   "glev": 2.7496999999999994,
+   "a_s": 10.3,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 16.28,
+    "reach": 0.7625,
+    "follow": 1.0,
+    "inband14": 0.8747,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 45.25,
+   "why_lim": "s1-pa-pin",
+   "crank_free_deg": 0.169,
+   "groove_layer_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "pin_band_over_face_mm": [
+    3.85,
+    5.35
+   ],
+   "arm_root_over_face_mm": 1.325,
+   "arm_pin_end_over_face_mm": 3.6,
+   "pin_radius_about_u2_mm": 9.813,
+   "stage1": {
+    "pitch": [
+     9.813,
+     9.813
+    ],
+    "pa_pin_max": 37.84,
+    "pa_cap_max": 33.6,
+    "pa_gate": 38.03,
+    "drift_max": 0.303,
+    "rc_min": 1.05,
+    "rc_onset": 1.05,
+    "n_ring_rigid": 29,
+    "r_out": 11.37,
+    "lim_by_gate": {
+     "pitch": 64.0,
+     "pa_pin": 45.5,
+     "pa_cap": 57.5,
+     "drift": null,
+     "radius": 0.25
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 6.15,
+   "glev": 4.2997,
+   "a_s": 9.6,
+   "psi": 156.0,
+   "fit_fast": {
+    "gap": 15.18,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8732,
+    "contact": 0.0
+   },
+   "desmo_fail": [
+    "groove-slop"
+   ],
+   "dK_lim": 49.5,
+   "why_lim": "pressure_horn",
+   "crank_free_deg": 0.27,
+   "groove_layer_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "pin_band_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "arm_root_over_face_mm": 2.913,
+   "arm_pin_end_over_face_mm": 5.15,
+   "pin_radius_about_u2_mm": 9.734,
+   "stage1": {
+    "pitch": [
+     9.734,
+     9.734
+    ],
+    "pa_pin_max": 28.62,
+    "pa_cap_max": 31.65,
+    "pa_gate": 38.03,
+    "drift_max": 0.208,
+    "rc_min": 0.2,
+    "rc_onset": 0.64,
+    "n_ring_rigid": 29,
+    "r_out": 11.29,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 52.25,
+     "pa_cap": 53.0,
+     "drift": null,
+     "radius": 0.75
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 6.15,
+   "glev": 4.2997,
+   "a_s": 9.8,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 102.05,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.865,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.168,
+   "groove_layer_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "pin_band_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "arm_root_over_face_mm": 2.986,
+   "arm_pin_end_over_face_mm": 5.15,
+   "pin_radius_about_u2_mm": 10.432,
+   "stage1": {
+    "pitch": [
+     10.432,
+     10.432
+    ],
+    "pa_pin_max": 20.72,
+    "pa_cap_max": 37.76,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 1.04,
+    "n_ring_rigid": 37,
+    "r_out": 11.99,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 62.75,
+     "pa_cap": null,
+     "drift": null,
+     "radius": 1.5
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 6.15,
+   "glev": 4.2997,
+   "a_s": 9.8,
+   "psi": 152.0,
+   "fit_fast": {
+    "gap": 101.33,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.8722,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.174,
+   "groove_layer_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "pin_band_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "arm_root_over_face_mm": 2.943,
+   "arm_pin_end_over_face_mm": 5.15,
+   "pin_radius_about_u2_mm": 10.141,
+   "stage1": {
+    "pitch": [
+     10.141,
+     10.141
+    ],
+    "pa_pin_max": 20.09,
+    "pa_cap_max": 35.26,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 0.9,
+    "n_ring_rigid": 27,
+    "r_out": 11.7,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 57.75,
+     "pa_cap": 60.0,
+     "drift": null,
+     "radius": 1.0
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 6.15,
+   "glev": 4.2997,
+   "a_s": 9.8,
+   "psi": 155.0,
+   "fit_fast": {
+    "gap": 15.18,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8732,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 49.5,
+   "why_lim": "pressure_horn",
+   "crank_free_deg": 0.185,
+   "groove_layer_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "pin_band_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "arm_root_over_face_mm": 2.885,
+   "arm_pin_end_over_face_mm": 5.15,
+   "pin_radius_about_u2_mm": 9.727,
+   "stage1": {
+    "pitch": [
+     9.727,
+     9.727
+    ],
+    "pa_pin_max": 35.89,
+    "pa_cap_max": 31.17,
+    "pa_gate": 38.03,
+    "drift_max": 0.227,
+    "rc_min": 0.28,
+    "rc_onset": 0.7,
+    "n_ring_rigid": 29,
+    "r_out": 11.29,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 50.5,
+     "pa_cap": 52.5,
+     "drift": null,
+     "radius": 0.75
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 6.15,
+   "glev": 4.2997,
+   "a_s": 9.9,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 102.05,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.865,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.165,
+   "groove_layer_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "pin_band_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "arm_root_over_face_mm": 2.963,
+   "arm_pin_end_over_face_mm": 5.15,
+   "pin_radius_about_u2_mm": 10.376,
+   "stage1": {
+    "pitch": [
+     10.376,
+     10.376
+    ],
+    "pa_pin_max": 21.75,
+    "pa_cap_max": 37.13,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 1.05,
+    "n_ring_rigid": 37,
+    "r_out": 11.94,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 60.5,
+     "pa_cap": 63.5,
+     "drift": null,
+     "radius": 1.25
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 6.15,
+   "glev": 4.2997,
+   "a_s": 10.0,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 102.05,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.865,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.163,
+   "groove_layer_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "pin_band_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "arm_root_over_face_mm": 2.941,
+   "arm_pin_end_over_face_mm": 5.15,
+   "pin_radius_about_u2_mm": 10.322,
+   "stage1": {
+    "pitch": [
+     10.322,
+     10.322
+    ],
+    "pa_pin_max": 22.78,
+    "pa_cap_max": 36.52,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 1.05,
+    "n_ring_rigid": 37,
+    "r_out": 11.88,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 58.5,
+     "pa_cap": 62.5,
+     "drift": null,
+     "radius": 1.0
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 6.15,
+   "glev": 4.2997,
+   "a_s": 10.0,
+   "psi": 154.0,
+   "fit_fast": {
+    "gap": 15.18,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8732,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 48.25,
+   "why_lim": "s1-pa-pin",
+   "crank_free_deg": 0.185,
+   "groove_layer_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "pin_band_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "arm_root_over_face_mm": 2.858,
+   "arm_pin_end_over_face_mm": 5.15,
+   "pin_radius_about_u2_mm": 9.734,
+   "stage1": {
+    "pitch": [
+     9.734,
+     9.734
+    ],
+    "pa_pin_max": 37.65,
+    "pa_cap_max": 30.98,
+    "pa_gate": 38.03,
+    "drift_max": 0.245,
+    "rc_min": 0.42,
+    "rc_onset": 0.77,
+    "n_ring_rigid": 29,
+    "r_out": 11.29,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 48.5,
+     "pa_cap": 52.75,
+     "drift": null,
+     "radius": 0.5
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 6.15,
+   "glev": 4.2997,
+   "a_s": 10.0,
+   "psi": 156.0,
+   "fit_fast": {
+    "gap": 15.64,
+    "reach": 0.7625,
+    "follow": 1.0,
+    "inband14": 0.8811,
+    "contact": 0.0
+   },
+   "desmo_fail": [
+    "groove-slop"
+   ],
+   "dK_lim": 43.5,
+   "why_lim": "s1-pa-pin",
+   "crank_free_deg": 0.261,
+   "groove_layer_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "pin_band_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "arm_root_over_face_mm": 2.82,
+   "arm_pin_end_over_face_mm": 5.15,
+   "pin_radius_about_u2_mm": 9.458,
+   "stage1": {
+    "pitch": [
+     9.458,
+     9.458
+    ],
+    "pa_pin_max": 37.92,
+    "pa_cap_max": 27.87,
+    "pa_gate": 38.03,
+    "drift_max": 0.207,
+    "rc_min": 0.4,
+    "rc_onset": 0.65,
+    "n_ring_rigid": 19,
+    "r_out": 11.02,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 43.75,
+     "pa_cap": 47.75,
+     "drift": null,
+     "radius": 0.5
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 6.15,
+   "glev": 4.2997,
+   "a_s": 10.1,
+   "psi": 151.0,
+   "fit_fast": {
+    "gap": 101.32,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.8723,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.163,
+   "groove_layer_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "pin_band_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "arm_root_over_face_mm": 2.897,
+   "arm_pin_end_over_face_mm": 5.15,
+   "pin_radius_about_u2_mm": 10.115,
+   "stage1": {
+    "pitch": [
+     10.115,
+     10.115
+    ],
+    "pa_pin_max": 23.59,
+    "pa_cap_max": 34.58,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 0.98,
+    "n_ring_rigid": 27,
+    "r_out": 11.67,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 53.75,
+     "pa_cap": 59.0,
+     "drift": null,
+     "radius": 0.75
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 6.15,
+   "glev": 4.2997,
+   "a_s": 10.2,
+   "psi": 158.0,
+   "fit_fast": {
+    "gap": 17.95,
+    "reach": 0.7312,
+    "follow": 1.0,
+    "inband14": 0.8893,
+    "contact": 0.0
+   },
+   "desmo_fail": [
+    "groove-slop"
+   ],
+   "dK_lim": 34.0,
+   "why_lim": "s1-pa-pin",
+   "crank_free_deg": 0.583,
+   "groove_layer_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "pin_band_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "arm_root_over_face_mm": 2.738,
+   "arm_pin_end_over_face_mm": 5.15,
+   "pin_radius_about_u2_mm": 9.052,
+   "stage1": {
+    "pitch": [
+     9.052,
+     9.052
+    ],
+    "pa_pin_max": 37.92,
+    "pa_cap_max": 22.54,
+    "pa_gate": 38.03,
+    "drift_max": 0.165,
+    "rc_min": 0.54,
+    "rc_onset": 0.54,
+    "n_ring_rigid": 9,
+    "r_out": 10.61,
+    "lim_by_gate": {
+     "pitch": null,
+     "pa_pin": 34.25,
+     "pa_cap": 41.0,
+     "drift": null,
+     "radius": 0.25
+    }
+   }
+  },
+  {
+   "level_over_face_mm": 6.15,
+   "glev": 4.2997,
+   "a_s": 10.3,
+   "psi": 150.0,
+   "fit_fast": {
+    "gap": 101.3,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.8725,
+    "contact": 0.0
+   },
+   "desmo_fail": [],
+   "dK_lim": 0.0,
+   "why_lim": "s1-pitch",
+   "crank_free_deg": 0.156,
+   "groove_layer_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "pin_band_over_face_mm": [
+    5.4,
+    6.9
+   ],
+   "arm_root_over_face_mm": 2.875,
+   "arm_pin_end_over_face_mm": 5.15,
+   "pin_radius_about_u2_mm": 10.163,
+   "stage1": {
+    "pitch": [
+     10.163,
+     10.163
+    ],
+    "pa_pin_max": 25.8,
+    "pa_cap_max": 34.82,
+    "pa_gate": 38.03,
+    "drift_max": 0.0,
+    "rc_min": 99.0,
+    "rc_onset": 1.07,
+    "n_ring_rigid": 27,
+    "r_out": 11.72,
+    "lim_by_gate": {
+     "pitch": 0.0,
+     "pa_pin": 51.5,
+     "pa_cap": 59.5,
+     "drift": null,
+     "radius": 0.75
+    }
+   }
+  }
+ ]
+}
