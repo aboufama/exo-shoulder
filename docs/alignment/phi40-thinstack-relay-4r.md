@@ -29,7 +29,7 @@ The earlier audit of the screened claim (21:05, same day) is replaced by this on
   reproduced to 0.00). Those re-wears now agree with the verifier's dumps to the bit.
 - In their place this audit ran one new diagnostic, the thin shell's share (finding M2): the claim model unchanged, its
   own exact Bench(110,360) prepare, and the pick worn at tsh 1.5 and at tsh 1.0 as the control
-  (/tmp scratchpad tsh_attrib.json; numbers in M2). One niced process with OMP_NUM_THREADS=1. The machine was at load
+  (docs/alignment/remeasure/phi40-thinstack-relay-4r_tsh.json; numbers in M2). One niced process with OMP_NUM_THREADS=1. The machine was at load
   ~10 from other agents' re-wears.
 
 ## Tool checks (docs/alignment/phi40-thinstack-relay-4r.json)
@@ -119,7 +119,25 @@ docs/alignment/remeasure/conecut-knee-knuckle-3r_{bench,held}_perpose.json, whic
 4. **M5, return spring (watch).** The margin is 0.22-0.62 N on 2.0 N. The coil is on a new lug, the travel is now
    40 deg, and strip-on-liner friction (S3) is not budgeted. Action: a return / hysteresis / cuff-twist test on this
    hardware.
-5. **M2, the 1.0 mm slotted shell (watch).** TSH_FINDING
+5. **M2, the 1.0 mm slotted shell (watch).** The thin shell carries a third of the row's gain over its parent, and its stiffness is not shown.
+   - This audit's diagnostic (docs/alignment/remeasure/phi40-thinstack-relay-4r_tsh.json) wore the pick twice on its
+     own exact Bench(110,360) prepare, with the claim model unchanged:
+     - tsh 1.5 (the parent family's shell) reads **14.30**: chain-only in-band 0.8922, pooled 0.9150.
+     - The control, tsh 1.0, reads **14.06**: 0.8946 / 0.9169, which reproduces the verified number to 0.00.
+     - Plain 13.52, reach 0.8056, 17 contacts, 0 jams, near1 18.18 and near2 38.82 are the same in both.
+   - So the 1.0 mm shell is worth 0.24 of the row's 0.70 over offset-shortcar-relay-4r (14.76), all of it chain
+     in-band. The E strap and knee link ride 0.5 mm lower: R_b falls from 83.2 to 82.7 mm.
+   - Stiffness: the verifier estimates that the two 4 x 1 mm lips deflect about 0.6 mm at 5 N mid-span when
+     unsupported. Checked here: F L^3 / 48 E I with E 114 GPa, I 2 x (4 x 1^3 / 12) mm^4 and L 75 mm gives 0.58 mm.
+     The liner carries inward loads only.
+   - The E strap clears the carriage by 1.200 mm, 0.2 mm above the 1 mm rule. On 255 of 400 bench and 578 held taken
+     poses the clearance is under 1.5 mm. An outward cuff load of a few newtons, lifting the carriage on its lips,
+     would take those poses under the rule.
+   - Why watch and not gamed: a 1.0 mm Ti sheet is a real part, the margin is better than the parent's, and the row
+     misses 95 at either thickness.
+   - Action: build the shell section as L1 CAD and run a CalculiX check of the lips under an outward carriage load (or
+     state a liner bond or a back-up strap) before the 0.24 is counted as real.
+   - This diagnostic is a seventh reading of the claim bench (14.30). It is worse than the claim and changes no pick.
 6. **G6, 4th joint (watch).**
    - The 4.22-point lead over the 3-active lead comes from a counted 4th joint: complexity 51.25 against 18.5.
    - The overhead it adds is skin-hugging: bench +1 take at 1.08 mm, held +4 at 0.10-0.62 mm.
