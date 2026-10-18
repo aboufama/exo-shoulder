@@ -3991,5 +3991,66 @@
    "J3 bearing 1 MR117-2RS 7x11x3": 1.0
   },
   "verdict": "stop"
+ },
+ "stop_engagement_built": {
+  "rule": "exported dowel turned about its joint's bearing axis vs the slotted part; engagement = first contact past the window (bisection, 0.0002 deg); target: K / J2 0.02 mm past (0.15 deg at r 7.75), J3 0 (exactly at J3MIN / J3MAX)",
+  "K dowel 1": {
+   "lo": {
+    "window_deg": -62.849,
+    "engages_deg": -62.989,
+    "past_window_deg": 0.14
+   },
+   "hi": {
+    "window_deg": 0.0,
+    "engages_deg": 0.141,
+    "past_window_deg": 0.141
+   }
+  },
+  "K dowel 2": {
+   "lo": {
+    "window_deg": -62.849,
+    "engages_deg": -62.989,
+    "past_window_deg": 0.14
+   },
+   "hi": {
+    "window_deg": 0.0,
+    "engages_deg": 0.141,
+    "past_window_deg": 0.141
+   }
+  },
+  "J2 dowel": {
+   "lo": {
+    "window_deg": -14.315,
+    "engages_deg": -14.455,
+    "past_window_deg": 0.14
+   },
+   "hi": {
+    "window_deg": 102.068,
+    "engages_deg": 102.208,
+    "past_window_deg": 0.14
+   }
+  },
+  "J3 dowel": {
+   "lo": {
+    "window_deg": -111.9036,
+    "engages_deg": -111.903,
+    "past_window_deg": -0.0
+   },
+   "hi": {
+    "window_deg": 122.7417,
+    "engages_deg": 122.738,
+    "past_window_deg": -0.003
+   }
+  }
+ },
+ "law_closure": {
+  "frames": 1337,
+  "groove_closure_max_mm": 0.0041,
+  "pin_axial_from_groove_mid_mm": [
+   -0.0,
+   0.211
+  ],
+  "slot_closure_max_mm": 0.0001,
+  "rule": "pin point (built level) in link 2's posed frame vs the built groove centreline; nose (C0) in the crank's posed frame vs the slot path at |dK|"
  }
 }

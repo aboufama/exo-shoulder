@@ -7630,5 +7630,170 @@
   "closes": 0.7228,
   "feasible_kin_parts": 0.7228,
   "driven_feasible": 556
+ },
+ "drive_skin": {
+  "rule": ">= 0.3 mm on every frame (gen-5 lobe ring: -0.26)",
+  "frames": 1337,
+  "every": 1,
+  "min_mm": 1.536,
+  "where": "drive cap-ring groove layer keep-out (li: Raise overhead frame 77",
+  "passes": true,
+  "per_part": {
+   "drive nose dowel keep-out (ISO 8734 1.5 ": {
+    "min_mm": 7.602,
+    "at": "Reach a high shelf frame 34",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive nose boss root keep-out (link 1a: ": {
+    "min_mm": 6.511,
+    "at": "Comb hair frame 161",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive nose boss keep-out (link 1a: O5 x ": {
+    "min_mm": 6.315,
+    "at": "Comb hair frame 105",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive stage-1 pin keep-out (ISO 8734 1.5": {
+    "min_mm": 6.769,
+    "at": "Reach a high shelf frame 75",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive crank short arm keep-out (6.8 x 3 ": {
+    "min_mm": 6.427,
+    "at": "Reach a high shelf frame 75",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive crank tip plate keep-out (7.04 x 3": {
+    "min_mm": 9.411,
+    "at": "Comb hair frame 105",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive bell crank bent arm keep-out (6 x ": {
+    "min_mm": 4.494,
+    "at": "Comb hair frame 88",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive cap-ring roof keep-out (the sector": {
+    "min_mm": 1.585,
+    "at": "Raise overhead frame 77",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 57
+   },
+   "drive cap-ring groove layer keep-out (li": {
+    "min_mm": 1.536,
+    "at": "Raise overhead frame 77",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 61
+   }
+  },
+  "per_clip": {
+   "Raise overhead": 1.536,
+   "Drink from a cup": 5.84,
+   "Comb hair": 4.494,
+   "Reach a high shelf": 5.579,
+   "Wash opposite shoulder": 5.771,
+   "Reach back pocket": 5.346,
+   "Wave": 2.125,
+   "Walking arm swing": 6.196
+  }
+ },
+ "j3stop_clip_frames": {
+  "total": 0,
+  "per_clip": {}
+ },
+ "j3_on_clip_frames": {
+  "frames": 1337,
+  "held": 0,
+  "q3p_deg": [
+   -62.4,
+   101.41
+  ],
+  "margin_to_stops_deg": [
+   49.5,
+   21.33
+  ],
+  "knee_deg": [
+   59.27,
+   91.81
+  ],
+  "knee_stop_margin_deg": 62.97
+ },
+ "verified": {
+  "bench": {
+   "gap": 18.98,
+   "score": 93.1,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.893,
+   "inband10": 0.5629,
+   "contact": 0.0106,
+   "overhead": "8/28"
+  },
+  "claim_linear_ik": {
+   "gap": 19.04,
+   "score": 93.08
+  },
+  "held": {
+   "gap": 23.19,
+   "score": 91.57,
+   "reach": 0.6922,
+   "inband14": 0.8919,
+   "contact": 0.016,
+   "overhead": "18/71"
+  },
+  "th_margin": {
+   "bench_min": 5.181,
+   "held_min": 5.006,
+   "dth_dK_at_min": 0.403,
+   "k_play_nominal_deg": 0.227,
+   "k_play_worst_tol_deg": 0.281,
+   "held_min_with_play": [
+    4.915,
+    4.893
+   ]
+  },
+  "groove_scan": {
+   "crank_free_worst_deg": 0.187,
+   "at_K": 44.0,
+   "held_slot_slop_deg": 0.04
+  },
+  "mu_claim": "0.15 nominal only (a_s +0.07 mm binds stage 1 at K 44.75)",
+  "complexity": 16.5,
+  "ledger": "WATCH (docs/alignment/desmo-conecut-knuckle-3r.md)",
+  "harness": "docs/concepts/verify/desmo-conecut-knuckle-3r.py --blend",
+  "dumps": [
+   "docs/concepts/verify/desmo-conecut-knuckle-3r_v_bench_frozen_blend.json",
+   "docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json"
+  ]
+ },
+ "ring_patch": {
+  "note": "cap-ring sector widened past the groove's round ends (asin((GW/2 + RW)/rho) + 0.5 deg) and the nose-boss root started RUNG outside hub K's O20 by --patch-ring; every other part untouched",
+  "parts": {
+   "drive cap-ring groove layer": "drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 116.7 deg, r 6.30..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)",
+   "drive cap-ring roof": "drive cap-ring roof keep-out (the sector over the groove, F+1.61..F+3.65, one with hub 2's upper boss)",
+   "drive nose boss root": "drive nose boss root keep-out (link 1a: 4 x 3 Ti from hub K's rim to the boss)"
+  },
+  "valid": {
+   "drive cap-ring groove layer keep-out (li": [
+    true,
+    1
+   ],
+   "drive cap-ring roof keep-out (the sector": [
+    true,
+    1
+   ],
+   "drive nose boss root keep-out (link 1a: ": [
+    true,
+    1
+   ]
+  }
  }
 }
