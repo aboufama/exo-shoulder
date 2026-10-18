@@ -86,6 +86,10 @@ pre-registered hardware is the only other claim-bench hardware reading).
   135-165, axial -90..-105). 5 of the 6 have chain metal in the skin and stay contacts; 396 (metal 0.46 mm) is lost.
   PROBE +0.15 mm on the bump (claim bench, diagnostic only, not a claim): jams 6 -> 0, gate 14.40 -> 14.20, plain 13.74,
   reach 286, near1 17.91: the rule-floor clearance is not where the points are; the claim holds either way.
+  PROBE rt_extra 2.5 (the spec's value) at the pick (claim bench, diagnostic only): plain 14.02 unchanged, gate 15.26
+  (chain-only 0.8876): a higher shell needs a taller bump. The pass rests on the low shell (underside 5.5 mm over the
+  clip-p90 skin), which adds no contact on the claim bench (contact share identical 0.0319); the held-out wear and the
+  verifier's skin-bulge check decide it.
 * **The point that pinches.** E strap over the moving carriage: 1.0 mm by construction at the fit poses (rule floor);
   the jam list shows the carriage at >= 3.5 mm on the claim bench, so the binding clearance is the boss vs the shell
   top, not the carriage.
@@ -101,3 +105,28 @@ pre-registered hardware is the only other claim-bench hardware reading).
 * **Spec corrections that moved numbers**: the uniform bump (spec) vs the shell/carriage split (model): 20.59 vs 16.82
   gate at the same hardware; the jam -> contact precedence: 15.62 -> 16.82.
 
+## New knowledge
+
+* The relay's in-band price is the BUMP, and it is set by geometry, not by the relay: the E strap / boss / knee must
+  clear the shell top by 1 mm and the carriage top by 1 mm only over the carriage footprint. A uniform bump to the
+  carriage top + 1 over a +-10 mm band (the spec) costs chain-only ib14 0.9012 -> 0.8371 (+6.4 gap); the split bump
+  costs 0.8777 at the spec's ds 16 / rt 2.5 and 0.8962 at ds 19.5 / rt 1.5 / band 9.3 / ramp 6.2. Every mm of shell
+  height costs ~0.9 gap points through the bump (rt 1.5 -> 2.5: gate 14.40 -> 15.26).
+* Moving the station proximal also legalises the bracket: the pad's proximal edge is at s -105.6, so ds 16 leaves 3.6 mm
+  for a 9 mm drop (68.6 deg, machined) and ds 19.5 gives 49.9 deg (bent bar under the 60-deg ruling).
+* Ideal relay bound at PHI 35 (tilt 12 / az 235) frozen exact: 13.21 (PHI 30: 13.78, PHI 45: 12.37). The hardware
+  claim (14.02 plain) sits 0.8 above its own bound; the remaining gap to 95 (13.75) is the relayed contacts (9 of 33
+  relayed poses, the second wall) and the fold beyond the relay (56 poses), not the hardware.
+* A jam rule that removes a pose from the bench must not remove a contact: 5 of 6 near-floor jams had chain metal in
+  the skin (15.62 vs 16.82 gate at the pre-registered hardware).
+
+## Next
+
+The verifier re-measures the claim (frozen exact Bench(110,360), PHI 35 / ds 19.538 / rt_extra 1.5 / pre 10.41 /
+bump 1.002 / band 9.272 / ramp 6.0): `CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3
+docs/concepts/models/proxtrack-relay-knuckle-4r.py frozen '<params>' out.json` (writes the T5 per-pose dump next to it),
+`... held '<params>' out.json` for the held-out wear, and a paired comparison against the lead and against
+freekoracle-route (16.20). Red team for the verifier: the low shell vs skin bulge at the arm's widest section (rt 1.5),
+the one-sided folded-side relays (262, 206), the bumped boss at elevation 165 (264 deepens -1.17 -> -5.80), and the
+near-touch 17.68. The lever left inside the morphology: a two-sided relay (or an own-angle refusal) for the folded side,
+and a lower carriage (h_c) since the bump over the footprint is h_c + 1.
