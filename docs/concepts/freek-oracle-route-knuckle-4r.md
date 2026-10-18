@@ -24,13 +24,17 @@
    129 / 139 / 148 / 316 / 343 / 369 / 423 / 119 with hub 2, L1b, L2, hub K distances at the oracle's pick) is on file so
    any reader can re-measure it.
 
-## Verdict (the bound of record, frozen exact Bench(110,360), k33 shape)
+## Verdict (frozen exact Bench(110,360), k33 shape)
 
-**Free-K oracle: 17.25 connected plain (16.96 static), 21.46 near-touch; kit at the same shape 18.61 / 23.36. Pre-registered
-gate FAIL** (280 connected takes but ~21 contacts; 5 binders - 117 / 119 / 129 / 343 / 423 - touch the skin at EVERY legal K).
-The oracle rescues exactly 3 poses (148 at 0.46 mm, 316 at 2.40, 369 at 1.56). The anterior link-2 corridor makes it worse
-(+12 deg: 18.71 connected). So every K-side lever at these seats - any K law, spring, J3 stop, J3 spring or a sensed free K -
-is bounded by 17.25 plain / 21.46 near-touch; the wall is where hub 2 and link 2 park at the ER binders, not K.
+**Cell A (the free-K oracle, an instrument): 17.25 connected plain (16.96 static), 21.46 near-touch; kit at the same shape 18.61 /
+23.36. Pre-registered gate FAIL** (280 connected takes but ~21 contacts; 5 binders - 117 / 119 / 129 / 343 / 423 - touch the skin
+at EVERY legal K). It rescues exactly 3 poses (148 at 0.46 mm, 316 at 2.40, 369 at 1.56). The anterior link-2 corridor makes it
+worse (+12 deg: 18.71 connected). The ER wall (117 / 119 / 129 / 148) is where hub 2 and link 2 park, not K.
+
+**Cell B (built, since the plain bound met the 17.78 trigger): a dowel stop on J3's own angle at q3max 86 (model convention),
+K opening to hold it: 16.20 static / 17.35 connected plain (score 93.69), 22.19 near-touch, 276 connected ws takes, 4 counted
+joints, complexity ~33.25.** The first 4-DOF row under the lead's 18.28 on the plain reading (by 0.93); NOT verified, no
+held-out at the time of writing, near-touch 22.19, overhead 5 / 28.
 
 ## What was built (docs/concepts/models/freek-oracle-route-knuckle-4r.py)
 
@@ -139,19 +143,46 @@ It does what the proposer said at the ER binders and no more: best legal metal 1
 "129 to +0.90 at +12 deg" of the proposer's interpolated field is -4.17 on the exact skin with every check on: the field
 (Hf - Hb + 2 at 2-deg (s, v) cells) was optimistic by ~5 mm at 129.
 
-### Cells B / C (conditional): trigger met on the plain reading only, NOT built in this time box
+### Cell B, BUILT and measured (the trigger was met on the plain reading: bound 17.25 <= 17.78)
 
-The plain connected bound (17.25) is 0.53 under the 17.78 trigger; the near-touch connected bound (21.46, the round's search
-objective) is not. The oracle data bound them further, before any build:
+The plain connected bound (17.25) is 0.53 under the 17.78 trigger (the near-touch bound 21.46 is not), so cell B was built in the
+time left: **a dowel stop on J3's OWN angle at q3max** (`ODesign.j3stop`, param `q3max`, deg in the MODEL's J3 convention:
+`S.sub1` about u3 from vref = unit(u3 x (0.3, 0.5, 0.8)) - not kscan3's reference). Where the slaved state's q3 exceeds q3max
+(state A or stretched), K opens along the free self-motion to the FIRST K where q3 = q3max (0.5-deg scan from the current K
+up to stop B + linear refine); J2 keeps its own priced slot (stretched end 7.877, checked); no crossing before stop B -> the
+pose is refused (the arm is stopped by the J3 dowel with K on stop B, exactly as the kit refuses past stop B). Determinacy: the
+K clock spring pulls K down and q3 rises as K falls (dq3/ddK ~ -0.67 at the IR binders), so the lowest K with q3 <= q3max is the
+spring's equilibrium - one state per pose. Hardware: an ISO 8734 2 m6 dowel at r 7.5 in a 2.1 x 1.0 groove inside J3's O20
+stack (the catalogue entry); complexity ~33.25 (shortk 32.5 + dowel 0.25 + groove 0.5), 4 counted joints.
 
-* Only the IR rescues (316, 369) lie in a J3 stop's direction (more K). The ER side wants LESS K than the kit and touches at the
-  floor anyway, so neither a J3 stop nor a J3-centring spring can take it. Cell B's ceiling is therefore ~17.6 plain (2 takes and
-  2 contacts off 18.61) if it opens nothing else - 0.2 under the trigger, 0.7 under the lead, for a 4th counted joint
-  (+25 complexity).
-* **q3 in the model's OWN J3 convention** (vref = unit(u3 x (0.3, 0.5, 0.8)), `S.sub1` as in `_ik_phys`): the IR binders sit at
-  q3 99-113 at the kit, and the K that rescues them puts q3 at 77-82 (dq3/ddK ~ -0.67); the ER binders at q3 -60..-82. A cell-B
-  groove end belongs at q3max ~ 78-82 deg in this convention (kscan3's reference is a different one). Per-binder values:
-  the numbers are in the table below (computed with ODesign.free_solve on the k33 design).
+Fit Bench(60,160) fast WITH the law -> frozen -> Bench(110,360) exact; continuity = the remeasure harness's kinematic flood fill
+(`RM.kin_nodes` + `RM.flood`, 2-deg slerp edges, jump 10 deg incl. dK) run on THIS design:
+
+| q3max (model's J3 convention) | static gap | connected gap | ws taken static / connected | ib14 | follow | contact | near-touch (connected) | overhead >= 140 taken |
+|---|---|---|---|---|---|---|---|---|
+| off (the kit, k33) | 18.61 | 18.61 | 277 / 277 | 0.8965 | 0.9455 | 0.0475 | 23.36 | 6 / 28 (k33 verify file) |
+| 80 | 17.00 | 17.86 | 279 / 276 | 0.8996 | 0.9455 | 0.0404 | 22.70 | 6 / 28 |
+| **86** | **16.20** | **17.35** | 280 / 276 | 0.8977 | 0.9545 | 0.0379 | **22.19** | 5 / 28 |
+
+Flood fill (q3max 86): 1108 kinematic nodes, all connected (0 islands), 979 edges tested, 3 refused by the rule, 0 by jumps;
+4 taken bench ws poses are not kinematic nodes under the verifier's stricter per-node rules (they include the J1-K-J3 sub-chain
+margin, which does not bind a free J2 - not attributed further in this box), so the connected reading is the conservative one.
+Fast Bench(60,160) sweep of q3max 70-95 (rows k 61-68): 16.72 / 11.72 / 10.66 / 10.75 / 10.16 / **9.56** / 10.74 / 10.84
+(kit 12.18) - 86 picked there, then worn frozen.
+
+Binders under cell B (q3max 86, frozen exact; mm): 316 +1.12 and 369 +0.31 taken, 343 and 423 now REFUSED by the stop (they were
+contacts: refused = lost reach, not contact), 148 -0.67, 117 -1.80, 129 -6.37, 119 -12.0 still in the skin, 127 +1.19, 139 +0.42.
+
+**What cell B is and is not.** It is a determined 4-DOF realisation that lands at **17.35 connected (score 93.69) frozen exact,
+0.93 under the lead's 18.28** - the first 4-DOF row on file under the bar - at near-touch 22.19, complexity ~33.25 vs the lead's
+18.5 at 3 DOF, and with the overhead count at 5 / 28 (k33 kit 6 / 28, the lead 8 / 28). It beats the static oracle bound at q3max 86
+(16.20 vs 16.96) because a stop may REFUSE a pose (343, 423 turn from contact into lost reach) where the oracle had to keep the
+mechanism somewhere legal; the connected readings agree within 0.1 (17.35 vs 17.25). Not run: held-out (launched at the end of
+the box, see the row), the J3-stop force (the dowel at r 7.5 takes the arm's torque about J3: the M5 class check the lead's
+watch list carries), the spring-equilibrium scan of the verifier (`checks_B`'s 'lower_inside' test, which assumes J2 on a stop).
+The ER wall is untouched by cell B (117 / 119 / 129 / 148), so cell C (a J3-centring spring) cannot do better on those poses.
+
+#### q3 of the binders in the model's own J3 convention (for whoever builds cells B / C next)
 
 | pose | q3 at kit | q3 at floor / kit / pick | dK floor / kit / pick |
 |---|---|---|---|
@@ -185,10 +216,13 @@ link 2's height profile refitted for the ER binders, measured by the same oracle
 
 ## Next
 
-* Cells B / C are not worth their 4th joint at these seats: ceiling ~17.6 plain for B, both under 21 near-touch. Record them as
-  bounded by A.
-* Point the oracle at the seats instead: hub 2 / link 2 parking at the ER binders is the wall. The instrument here (run-based,
-  legal-only, connected) can bound any seat move the same way in ~10 min of exact compute per shape.
+* **Verify cell B (q3max 86)** with an independent verifier: held-out (launched at the end of this box), the J3-stop force through
+  the dowel at r 7.5 (M5 class), the spring-equilibrium red team adapted to a free J2, the 4 taken-but-not-node poses, and
+  q3max 83-90 frozen exact (only 80 and 86 were worn). Its ranking question is the user's DOF rule: a 4th counted joint at
+  ~33 complexity for ~0.9 plain points over a 3-DOF lead at 18.5.
+* Cell C (J3-centring spring) cannot touch the ER wall either; build it only if cell B verifies and its stop force is the problem.
+* Point the oracle at the SEATS: hub 2 / link 2 parking at the ER binders (117 / 119 / 129 / 148) is the wall for every K-side
+  lever; the run-based, legal-only, connected oracle bounds any seat move in ~10 min of exact compute per shape.
 
 ## Files and reproduction
 

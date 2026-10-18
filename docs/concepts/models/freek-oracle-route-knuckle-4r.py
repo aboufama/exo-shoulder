@@ -386,7 +386,8 @@ if __name__ == "__main__":
     if mode == "law":                                        # cell B (q3max) or the kit: fit fast -> frozen on Bench(60,160) fast or Bench(110,360) exact, no oracle
         P = params(over); P.pop("_seed", None); fitB = RM.PV.fast_bench(60, 160); ex = len(sys.argv) > 4 and sys.argv[4] == "exact"
         ODesign.SLOT55 = False                               # a real mechanism: J2 keeps its own priced slot in every state
-        B = CB.Bench(n_clip=110, n_ws=360) if ex else fitB; ODesign.TAB = None
+        hd = len(sys.argv) > 4 and sys.argv[4] == "held"; ex = ex or hd
+        B = (RM.PV.held_bench() if hd else CB.Bench(n_clip=110, n_ws=360)) if ex else fitB; ODesign.TAB = None
         Mk, fitr, M1, _ = RM.freeze(fitB, B, dict(P), KModel); rk = Mk.run(); nt = RM.near_touch(Mk, B); tk = RM.taken_list(B)
         out = dict(id=ID, mode="law", bench=B.mode, over=over, **{k: rk[k] for k in KEYS}, near=nt["gap_near1"], near1_poses=nt["near1_poses"], min_mm=nt["min_mm"],
                    ws_taken=sum(1 for i in tk if B.kind[i] == "ws"), why={k: int((Mk.why == k).sum()) for k in set(Mk.why.tolist()) if k},

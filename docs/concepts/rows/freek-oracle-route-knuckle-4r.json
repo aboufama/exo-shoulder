@@ -13,9 +13,9 @@
   "springs_or_flexures": 1,
   "custom_parts": 14,
   "catalogue_parts": 16,
-  "notes": "CELL A IS A BOUND, NOT A MECHANISM: the counts are skinnormal-shortk-knuckle-4r's chain (J1 / K / J2 / J3 O20 hubs, two-pin cuff knee on MR63ZZ pairs) with link 2 as one bent Ti bar (a routed bar is the same made part); K is picked per pose by an oracle, which no unpowered part can do. Realisations: cell B (J3 upper stop, dowel + groove: ~33 per the catalogue estimate) and cell C (J3-centring spring: ~36); not built in this time box",
+  "notes": "Cell B as measured: skinnormal-shortk-knuckle-4r's chain (J1 / K / J2 / J3 O20 hubs, K sensed + clock spring to stop A + stop-B dowel, J2 own-angle dowel slot, two-pin cuff knee on MR63ZZ pairs) + a second end on J3's dowel groove (ISO 8734 2 m6 dowel at r 7.5, 2.1 x 1.0 groove inside the O20 stack): complexity 32.5 + 0.25 + 0.5 = 33.25 (catalogue estimate, not re-read by tools/simplicity.py). Cell A (the oracle) has no hardware: a bound.",
   "source": "docs/concepts/models/freek-oracle-route-knuckle-4r.py (imports skinnormal-shortk-knuckle-4r.py -> minarc-stop-knuckle-4r-kitrule.py unchanged)",
-  "confidence": "bound",
+  "confidence": "counted (cell B); bound (cell A)",
   "cuff_knee": {
    "pins": 2,
    "sensed": false,
@@ -34,22 +34,22 @@
  "active_dof": 4,
  "passive_dof": 2,
  "passive_translations": 0,
- "complexity": "bound (cell A has no K hardware); cells B ~33 / C ~36 (catalogue estimate, not built)",
+ "complexity": 33.25,
  "status": "screened",
  "t_ideated": "2026-10-18T05:16:06Z",
- "t_screened": "2026-10-18T06:07:21Z",
- "reach": 0.8313,
+ "t_screened": "2026-10-18T06:26:48Z",
+ "reach": 0.8375,
  "follow": 0.95,
- "inband14": 0.8973,
- "inband10": 0.5387,
- "contact": 0.0404,
- "gap": 11.18,
+ "inband14": 0.8974,
+ "inband10": 0.5385,
+ "contact": 0.0305,
+ "gap": 9.56,
  "v_reach": null,
  "v_follow": null,
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 61,
+ "n_configs": 69,
  "frozen_exact": {
   "bench": "Bench(110,360) exact, fit Bench(60,160) fast, frozen k33 shape, CB_FOLD_MARGIN 5.5",
   "kit": {
@@ -109,17 +109,52 @@
     "343": -2.48,
     "423": -1.33
    }
+  },
+  "cellB_q3max86": {
+   "static": {
+    "gap": 16.2,
+    "reach": 0.7778,
+    "follow": 0.9545,
+    "inband14": 0.8977,
+    "inband10": 0.5424,
+    "contact": 0.0375,
+    "near": 21.01,
+    "ws_taken": 280,
+    "near1_poses": 9,
+    "min_mm": 0.092
+   },
+   "connected": {
+    "gap": 17.35,
+    "reach": 0.7667,
+    "ws_taken": 276,
+    "contact": 0.0379,
+    "near": 22.19,
+    "nodes": 1108,
+    "islands": 0,
+    "dropped": 4
+   },
+   "overhead140": "5/28",
+   "j3stop_engaged_taken": 32,
+   "file": "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max86_bench.json"
+  },
+  "cellB_q3max80": {
+   "static_gap": 17.0,
+   "connected_gap": 17.86,
+   "near_connected": 22.7,
+   "ws_taken_connected": 276,
+   "file": "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max80_bench.json"
   }
  },
- "frozen_gap": 17.25,
- "frozen_score": 93.73,
+ "frozen_gap": 17.35,
+ "frozen_score": 93.69,
  "best_params": {
-  "seed": "k33",
-  "rA": 0,
-  "route": "great circle (no corridor)",
-  "oracle": "run-based v2b, 7 samples on [5.5-deg floor, stop B 82.0], CAP 2.5 mm"
+  "seed": "k33 (verified priced params, docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_k33_fit60_bench_params.json)",
+  "cell": "B",
+  "q3max": 86,
+  "q3_convention": "model own: S.sub1 about u3 from vref = unit(u3 x (0.3, 0.5, 0.8))",
+  "route": "great circle (rA 0)"
  },
- "best_k": 51,
+ "best_k": 66,
  "gate": {
   "n": 10,
   "rule": "v2b rows only (k 51-60); 51 earlier rows are superseded v1 / v2a oracles",
@@ -127,8 +162,8 @@
   "gain_second_half": 0.01,
   "gain_last_third": 0.01,
   "top5_spread": 0.24,
-  "passed": null,
-  "comment": "numerically within the thresholds, but n = 10 on the local box (farm closed) is not the 100-300 + CMA the brief asks; the bound is an instrument, not a design sweep"
+  "passed": false,
+  "comment": "v2b oracle rows k 51-60 (n 10) within thresholds numerically; cell B q3max sweep rows k 61-68 (n 8) best 9.56 at 86 with neighbours 10.16 / 10.74 - a 1-D sweep, not converged in the gate's sense; n is far below the brief's 100-300 + CMA (farm closed, local <= 2 processes)"
  },
  "preregistered_gate": {
   "rule": ">= 279 takes at <= 4 contacts (or >= 275 at 0), every binder cleared by >= 0.2 mm",
@@ -143,9 +178,9 @@
   ],
   "result": "FAIL"
  },
- "verdict": "BOUND, gate FAIL. A per-pose oracle K (every check of the model on every sample, legal configurations only) moves the k33 frozen exact Bench(110,360) gap 18.61 -> 16.96 static / 17.25 connected (plain), 21.46 near-touch: +3 ws takes (148, 316, 369) and nothing else. Five binders (117 / 119 / 129 ER, 343 / 423 IR) and 405 / 459 touch the skin at EVERY legal K. The anterior link-2 corridor makes it worse: Bench(60,160) +8 deg 13.73 near vs 11.18 at route 0; frozen exact +12 deg 18.71 connected (in-band 0.899 -> 0.884; ER binders 117 / 129 / 119 still in the skin at -0.46 / -4.17 / -8.48, IR rescues shrink). Any K law, spring, stop or sensed K at these seats is bounded by 17.25 plain / 21.46 near-touch.",
+ "verdict": "Cell A BOUND, gate FAIL: the free-K oracle moves the k33 frozen exact Bench(110,360) gap 18.61 -> 16.96 static / 17.25 connected plain (21.46 near-touch), rescuing only 148 / 316 / 369; 117 / 119 / 129 / 343 / 423 touch at every legal K; the anterior link-2 corridor is worse (+12 deg 18.71). Cell B BUILT (the plain bound met the 17.78 trigger): a J3 own-angle dowel stop at q3max 86 with K opening to hold it gives 16.20 static / 17.35 connected plain (score 93.69), 22.19 near-touch, 276 connected takes - the first 4-DOF row under the lead 18.28 on the plain reading (by 0.93), at complexity ~33.25 and overhead 5/28. UNVERIFIED; held-out launched at the end of the box.",
  "limiter": "metal parking at the ER binders (plane -90..-45, elev 45-60, axial 120-135): they want LESS K and still touch at the 5.5-deg floor (117 -1.14, 129 -5.87 with K >= 66 refused by the knee slide, 119 -10.74); the IR binders want K at stop B (82) and 343 / 423 still touch there (-0.19 / -1.33). The K self-motion cannot move hub 2 / link 2 off the skin at these seats - the wall is seat-level (where hub 2 and link 2 park), not K-level.",
- "note": "Spec corrections: (1) the literal max-min oracle over hub 2 / L1b / L2 / hub K ignores member 3 and the knee moving with K (J3 misses GH by ~15 mm) - replaced by a run-based oracle (FO_HOW=scan keeps the literal one); (2) my first run-based rule (v2a) let 5 contact poses dodge to REFUSED K samples (read as lost, not contact): 15.27 / 15.55 was optimistic by 1.7; corrected (v2b) - only legal configurations compete; (3) the J2 slot stretched end is at the 5.5-deg rule for the bound (kit priced 7.877); (4) state-A contacts are not offered to the oracle (as specified). Cells B / C: the plain connected bound 17.25 is 0.53 under the 17.78 trigger, but NOT built in this time box; the data bound them further: only the IR rescues (316, 369) are in a J3 stop's direction (more K), so cell B's ceiling is ~17.6 plain if it opens nothing else (2 takes + 2 contacts off 18.61); in the MODEL's own J3 convention (vref = unit(u3 x (0.3, 0.5, 0.8))) the IR binders sit at q3 99-113 at the kit and the rescuing K puts q3 at 77-82 (dq3/ddK ~ -0.67), the ER binders at q3 -60..-82 - so q3max ~ 78-82 deg is where a cell-B groove end would go (kscan3's reference is not this one). Near-touch: 8 taken poses under 1 mm (min 0.092, a state-A pose); the rescued 148 sits at 0.46. Local runs only (farm closed), niced, <= 2 processes.",
+ "note": "Spec corrections: (1) the literal max-min oracle over hub 2 / L1b / L2 / hub K ignores member 3 and the knee moving with K (J3 misses GH by ~15 mm) - replaced by a run-based oracle (FO_HOW=scan keeps the literal one); (2) my first run-based rule (v2a) let 5 contact poses dodge to REFUSED K samples (read as lost, not contact): 15.27 / 15.55 was optimistic by 1.7; corrected (v2b) - only legal configurations compete; (3) the J2 slot stretched end is at the 5.5-deg rule for the bound (kit priced 7.877); (4) state-A contacts are not offered to the oracle (as specified). Cell B: built (see verdict); its gain over the bound's 2-rescue estimate comes from REFUSING 343 / 423 at the J3 stop (contact -> lost reach) and from opening K for state-A poses too; in the MODEL's own J3 convention (vref = unit(u3 x (0.3, 0.5, 0.8))) the IR binders sit at q3 99-113 at the kit and the rescuing K puts q3 at 77-82 (dq3/ddK ~ -0.67), the ER binders at q3 -60..-82 - so q3max ~ 78-82 deg is where a cell-B groove end would go (kscan3's reference is not this one). Near-touch: 8 taken poses under 1 mm (min 0.092, a state-A pose); the rescued 148 sits at 0.46. Local runs only (farm closed), niced, <= 2 processes.",
  "doc": "docs/concepts/freek-oracle-route-knuckle-4r.md",
  "model_file": "docs/concepts/models/freek-oracle-route-knuckle-4r.py",
  "viz": "docs/concepts/viz/concepts/freek-oracle-route-knuckle-4r.js"
