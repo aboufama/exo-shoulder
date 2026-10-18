@@ -213,9 +213,9 @@
  },
  "why": {
   "fold": 213,
+  "slide": 15,
   "contact": 29,
-  "parts": 3,
-  "slide": 15
+  "parts": 3
  },
  "fold_margin_th": {
   "all": {
@@ -605,7 +605,7 @@
    "axial": 135.0
   }
  ],
- "secs": 446.3,
+ "secs": 287.6,
  "exact": true,
- "git": "111c82b"
+ "git": "d889d5a"
 }

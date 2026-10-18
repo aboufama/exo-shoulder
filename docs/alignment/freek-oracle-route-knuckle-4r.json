@@ -6,7 +6,6 @@
  "verdict": "watch",
  "reasons": [
   "held_out: held out 22.67 vs bench 16.2 (+6.47; re-measured (this audit))",
-  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): v_gap 16.2: bench 15 contact poses, sum 78.55 mm, deepest 20.88 mm at ['ws', 15.0, 165.0, -60.0], 6 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+58.31 mm, x3.88) - CLEARLY DEEPER; held 47 contact poses, sum 232.2 mm, deepest 19.91 mm at ['ws', 30.0, 165.0, -45.0], 22 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (+171.23 mm, x3.81) - CLEARLY DEEPER",
   "dominance: beats conecut-knee-knuckle-3r by 0.93 plain but loses by 11.06 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
@@ -55,8 +54,8 @@
   },
   {
    "check": "contact_depth",
-   "level": "watch",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 16.2: bench 15 contact poses, sum 78.55 mm, deepest 20.88 mm at ['ws', 15.0, 165.0, -60.0], 6 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+58.31 mm, x3.88) - CLEARLY DEEPER; held 47 contact poses, sum 232.2 mm, deepest 19.91 mm at ['ws', 30.0, 165.0, -45.0], 22 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (+171.23 mm, x3.81) - CLEARLY DEEPER",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 16.2: bench 15 contact poses, sum 78.55 mm, deepest 20.88 mm at ['ws', 15.0, 165.0, -60.0], 6 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 47 contact poses, sum 232.2 mm, deepest 19.91 mm at ['ws', 30.0, 165.0, -45.0], 22 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
    "depths": {
     "polished_gap 15.4": {},
     "v_gap 16.2": {
@@ -107,26 +106,7 @@
     }
    },
    "ref": "conecut-knee-knuckle-3r",
-   "compare": [
-    {
-     "claim": "v_gap 16.2",
-     "wear": "bench",
-     "sum": 78.55,
-     "ref_sum": 20.24,
-     "excess": 58.31,
-     "ratio": 3.88,
-     "watch": true
-    },
-    {
-     "claim": "v_gap 16.2",
-     "wear": "held",
-     "sum": 232.2,
-     "ref_sum": 60.97,
-     "excess": 171.23,
-     "ratio": 3.81,
-     "watch": true
-    }
-   ]
+   "compare": []
   },
   {
    "check": "dominance",
@@ -139,7 +119,7 @@
   {
    "check": "continuity",
    "level": "ok",
-   "reason": "static 16.2, connected 16.2: the flood drops 0 claim poses (islands 0; docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_repro_q3max86_held.json)",
+   "reason": "static 16.2, connected 16.2: the flood drops 0 claim poses (islands 0; docs/concepts/verify/freek-oracle-route-knuckle-4r/reverify_rerun_q3max86_bench.json)",
    "static": 16.2,
    "connected_full": 16.2
   },
@@ -201,7 +181,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 8 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 9 commits that touched the row"
   },
   {
    "check": "rules",
@@ -214,6 +194,10 @@
   "held": true
  },
  "verifier_files": [
+  "docs/concepts/verify/freek-oracle-route-knuckle-4r/reverify_side_bench.json",
+  "docs/concepts/verify/freek-oracle-route-knuckle-4r/reverify_skip_held.json",
+  "docs/concepts/verify/freek-oracle-route-knuckle-4r/reverify_skip_bench.json",
+  "docs/concepts/verify/freek-oracle-route-knuckle-4r/reverify_rerun_q3max86_bench.json",
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_repro_q3max86_held.json",
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_onereading_held.json",
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_onereading_bench.json",
@@ -221,13 +205,9 @@
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_margins_bench.json",
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_paired_vs_lead_static.json",
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_repro_q3max86_bench.json",
-  "docs/concepts/verify/freek-oracle-route-knuckle-4r/kit_k33_held.json",
-  "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max86_held.json",
-  "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max80_bench.json",
-  "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max86_bench.json",
-  "docs/concepts/verify/freek-oracle-route-knuckle-4r/wear3_rA12_25_55.json"
+  "docs/concepts/verify/freek-oracle-route-knuckle-4r/kit_k33_held.json"
  ],
- "git": "111c82b",
+ "git": "10cfdbd",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T11:18:05Z"
+ "t": "2026-10-18T20:59:38Z"
 }
