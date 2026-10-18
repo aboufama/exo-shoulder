@@ -1,6 +1,6 @@
 # Take-bound table: can 3 joints reach 95 at the legal J1 seats? (round 15 lens A)
 
-Status: sections 1-4 filled; 5-7 PENDING (filled section by section, each section committed). Started 2026-10-18 ~12:20
+Status: complete (written section by section, each section committed). Started 2026-10-18 ~12:20
 UTC on branch claude/exciting-albattani-94w8cp. Plan: docs/concepts/ROUNDS.md "Round 15 plan, re-dispatch
 (2026-10-18 ~09:25 UTC)", lens A "take-bound-3dof".
 
@@ -164,12 +164,80 @@ the ER binders, which bind radially (link 2 over the deltoid crest, hub K overhe
 
 ## 5. Jam-bias column for the pin-knee cells (H1 pin-a running gap)
 
-PENDING
+The pin-a stack rule (knee link underside >= E-strap top + 0.15 + 0.05 mm; FINDINGS "Round 14 re-dispatch" item 1)
+was never applied to H1 or its descendants. Geometry (`skin-normal-3r-pin-knee.py` line 125: tp = (stk - RUN) / 2,
+RUN 0.5, T_LINK 3.0; running gap = tp + RUN - T_LINK = stk / 2 - 2.75):
+
+| pin-knee cell | stk (mm) | pin-a running gap (mm) | vs the 0.20 rule |
+|---|---|---|---|
+| **H1 verified (best_params)** | 5.6815 | **0.091** | **under by 0.109** |
+| H1 polish 2 | 5.6258 | 0.063 | under |
+| H1 P5 | 5.5412 | 0.021 | under |
+| H1 GPU knee F2 | 5.8703 | 0.185 | under by 0.015 |
+| crest-knee-3r (flat / joggle) | 6.0 | 0.25 | passes (the joggle's 0.20 is the floor; NEW-tolcliff) |
+
+H1 is under the rule, so (per the lens spec) H1's parameters were worn once with the rule applied at equal parameters:
+stk raised to the rule's minimum 5.90 (gap 0.20), everything else equal (`docs/research/take_bound_3dof_h1_stack.json`,
+fast Bench(60,160), ~5 s each):
+
+| H1 parameters | fast gap | reach | ib14 | contact | why (all 220 poses) |
+|---|---|---|---|---|---|
+| stk 5.6815 (as verified) | 23.64 | 0.700 | 0.8979 | 0.0343 | fold 36, slide 5, skin 6, parts 4 |
+| stk 5.90 (stack rule) | 23.69 | 0.700 | 0.8974 | 0.0343 | identical |
+
+The rule moves H1 by **+0.05 fast** (in-band only, the knee link 0.929 -> 0.925 in band; no take, contact or jam
+changes), under the lens's 1-point trigger, so no stack-rule re-fit was run. H1's jam bias is ~0.05, not the crest's
+jam-steered ~8 fast points: H1's E strap does not rise under the knee's sweep the way the crest's does. Frozen exact Bench(110,360) wears of both stk values were started; if they land inside the time box their numbers are appended to `take_bound_3dof_h1_stack.json` (otherwise: unmeasured frozen, time box).
+Not modelled here (both are build rules from the crest audit): the E strap's stand-up above the boss face (up to 0.125
+mm at the crest; skim it flush inside the knee's sweep) and a +0.1 / +0.2 mm tolerance probe. The column stays
+report-only: no number here goes under H1's 27.20, so nothing goes to the verifier.
 
 ## 6. Conclusion for the user
 
-PENDING
+**Can 3 joints reach 95 at the legal seats? On the evidence, no.** At every J1 seat the user allows (back of the shoulder,
+acromion top) and every 3-joint realisation measured - plain 3R, knuckle with a K law, pin knee, at the back / k33, cap
+pole, crest, H1 and antcrest seats - the best take count on real metal is 262 (the lead), and even the idealised
+versions stop short: 269-271 takes with a perfect K drive at the back seat, and 277-280 takes only with a free per-pose
+K (the ceiling of ANY K law) whose extra poses go into the skin (17.25-17.69, 13-21 contacts). The best 3-joint design,
+**conecut-knee-knuckle-3r, is at 18.28 (score 93.35, held out 22.38): 4.53 gap points short of 95**; it needs 279 takes
+at its 4 contacts and has 262 (+17), or 275 at zero contact (+13). Clearing all 4 of its contacts without a new take
+would give 17.22 (score 93.7) - the 3-joint ceiling on the evidence. **Uncertainty, stated honestly:** this is a
+measured bound, not a proof. Kinematics alone allow 99 % of the workspace at the legal seats; what stops every family
+is metal against skin (the K drive's stroke and the external-rotation poses at the back seat, hub 2's level at the cap
+pole, J3-window stops at the crest), measured at specific seats and dyads after ~40 back-seat cells, 668 cap configs
+and 6676 crest configs. One cell is unmeasured (a knuckle with an ideal K law at the crest J3 seat; the nearest evidence,
+J3 moved up the lateral deltoid, says 269-271), and parking_k's ~95.1 estimate at a 75-deg stroke was refuted by the
+measured oracle at that stroke (17.69). **The 4-joint options:** freek-oracle-route-knuckle-4r is verified at 16.20
+(score 94.11; polished 15.40 = score 94.40, held 20.50) - 1 more joint, complexity 33.25 vs 18.5, 15 contact poses vs 4
+(78.55 mm summed depth vs the lead's 20.24 mm; the polish halves it to 39.47 mm, still ~2x), and still 1.65 short of 95.
+proxtrack-relay-knuckle-4r screens at 14.02 (score 94.90; held 18.01) at complexity 52.5, but it is UNVERIFIED (an
+independent verification is pending) and even its own screen misses 13.75 by 0.27. The only sub-13.75 number on file,
+the K-free ideal relay's 10.22 (304 takes), has no hardware: real relays read 18.01-26.42. So a 4th joint buys ~2-4
+gap points at about 2x the complexity and 2-4x the contact depth, and has not yet reached 95 either.
+
+**Blocker text for the lead (ready to send as a big update): "95 at 3 DOF is measured out of reach at the
+back-of-shoulder and acromion-top seats."** The options, each with its number:
+1. **A 4th joint** - best like-for-like verified: freek-oracle-route-knuckle-4r 16.20 (polished 15.40, held 20.50;
+   cx 33.25; 2x the lead's contact depth); best screened: proxtrack-relay-knuckle-4r 14.02 / 14.40 gate (held 18.01;
+   cx 52.5; verification pending). Neither is at 95 yet.
+2. **J1 seats beyond ruling 4** (front / clavicle) - unmeasured (the optional report-only row was not run in this time
+   box); kinematically the legal seats are not the limit (0.99 of the workspace), so a front seat would have to win on
+   skin clearance, not on the window.
+3. **Accept the 3-joint ceiling** - the lead 18.28 (93.35) today; ~17.2 (93.7) if its 4 contacts are cleared.
 
 ## 7. Sources
 
-PENDING
+- Plans: docs/concepts/ROUNDS.md "Round 15 plan (2026-10-18 ~03:15 UTC)" lens A (lines ~3735-3810) and "Round 15 plan,
+  re-dispatch (~09:25 UTC)" State and lens A (lines ~4545-4640).
+- Findings: docs/FINDINGS.md "Round 13", "Round J2", "Round 14", "Round J3", "Round J4", "Round 14 re-dispatch",
+  "freek-oracle-route-knuckle-4r final polish" (+ independent verification), "seatoracle-erwall-knuckle-3r".
+- Kinematics: docs/research/fold_ceiling.md (sections 2-4), docs/research/fold_ceiling/{kin_ceiling.py,kin_ceiling.json,
+  kfree_armarc_ideal_frozen_exact.json}; docs/concepts/verify/deltoid-crest-j3-3r_audit3_kinscan.json;
+  docs/concepts/verify/cap-plateau-knuckle-3r_kinscan_{B,C}.json.
+- Verified numbers: docs/concepts/verify/conecut-knee-knuckle-3r_v_{bench,held}_frozen.json,
+  crest-knee-3r-joggle_v_{bench,held}_frozen.json, crest-knee-3r_v_bench_frozen.json,
+  deltoid-crest-j3-3r_audit_frozen_s12_ee8.json, cap-plateau-knuckle-3r_frozen97_{C2best,A3onesided,ctrlbest}.json,
+  seatoracle-erwall-knuckle-3r/cell_{C0,L0b}.json; docs/concepts/rows/*.json (read only); ledger via
+  `python3 tools/alignment_ledger.py get <id>` (2026-10-18 ~12:30 UTC: conecut / H1 / crest-knee / deltoid-crest /
+  freek WATCH; lowarm-halfring GAMED; cap-plateau, proximal-j3, seatoracle, proxtrack no entry).
+- This lens's own output: docs/research/take_bound_3dof.{py,json}, docs/research/take_bound_3dof_h1_stack.json.
