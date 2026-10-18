@@ -69,7 +69,7 @@
       "gap": 17.96,
       "src": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_bench_perpose.json",
       "cross_check": {
-       "files": 1,
+       "files": 2,
        "sums": [
         14.92
        ],
@@ -292,7 +292,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
   },
   {
    "check": "rules",
@@ -305,10 +305,11 @@
   "held": false
  },
  "verifier_files": [
+  "docs/concepts/verify/lowarm-halfring-knuckle-3r_redteam_kplay_metal.json",
   "docs/concepts/verify/lowarm-halfring-knuckle-3r_v_held_frozen.json",
   "docs/concepts/verify/lowarm-halfring-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "f804972",
+ "git": "1d0d2e1",
  "tool_version": "2026-10-17.6",
- "t": "2026-10-18T02:40:47Z"
+ "t": "2026-10-18T07:04:54Z"
 }
