@@ -21,7 +21,7 @@
  "v_inband14": 0.8971,
  "v_inband10": 0.4444,
  "v_gap": 34.98,
- "n_configs": 7118,
+ "n_configs": 7126,
  "best_params": {
   "az": 108.5603,
   "el": 64.4969,
@@ -294,7 +294,7 @@
  },
  "verdict": "DEAD: best fast 26.78 (score 90.26) on Bench(60,160) after 7118 configs - the normal J2 stack (inv2 0), never CMA'd in pass 1, took 36.63 -> 26.78 - but its frozen exact on Bench(110,360) is 40.17 (score 85.39; reach 0.606 = 218/360, follow 0.891, ib14 0.905, contact 0.048, near-touch 59.75, overhead 6/28), 8.1 above the spec's kill bar (j3-neck-over-3r 32.10), 9.1 behind the zero-complexity optimum (31.04 frozen) and 21.9 behind the lead (18.28). The fast bench over-reads this basin by 11-14 points at every optimum (36.63->47.86, 29.85->43.99, 28.63->41.04, 26.78->40.17) vs zc-frontier's +2.2. Convergence gate (score points, evaluation order, n 7118): 0.265 / 0.0 / 0.0 -> passed.",
  "limiter": "the J2 fold, stretched side: the crest J3 seat (wd ~104) spreads the J1-J3 angle to p5-p95 18.1-137.4 deg (Bench(110,360)) against the dyad window [|a1-a2|+5, a1+a2-5] = [10.5, 81.4] at the best arcs 40.5 / 45.9 -> kinematic closure 0.75 of the workspace (overhead 0.50), 88/360 ws lost stretched (overhead 14/28, across 48/68); arcs that widen the window lift hub 2 off band at O20 (a1 >= 44: 69-83 mm, 0.02-0.07; the cap cell at inv2 0 reaches 0.79 but hub 2 sits at 86 mm, ib14 0.64, best 47.48). Secondary: part-part at hub 2 over the cap (39/360; binders (0,150,-15), (30,135,0), (0,105,15)), contact at hub 2's rim (6) and link 2 (4); near-touch gap ~60 (min metal 0.05 mm). The fast bench's 160 poses under-sample the stretched wall: every fast gain transfers at ~0.8.",
- "note": "Pass 2 (2026-10-17 23:29 - 2026-10-18 00:35 UTC, local, niced, 2 processes): categorical probe (14) at the two pass-1 bests -> the normal J2 stack inv2 0 (link 1 on hub 2's lower plate) wins 3.6 / 2.1 points (link 1 0.67 -> 0.98 in band); inv3 0 costs 15-50; sigma +1 dead. CMA in inv2 0 / inv3 1 / sigma -1: s9 193 (29.85), s10 681 (26.78, sigma collapsed), s11 341 (from the a2 51.5 config, 33.34), s12 1189 (wide restart sigma 0.5, 0 gain; second basin 29.38 at wd 109.4 / end_extra 6.0), s13 697 (cap-pole cell at inv2 0, sigma 0.6: 47.48, reach 0.79 but hub 2 F 86 mm, ib14 0.64), s14 671 (29.29 basin) / s15 781 (0 gain); s8 25 (inv2 1, stopped). Frozen exact (fit Bench(60,160) fast, every level frozen, Bench(110,360) exact) of 29.85 / 28.63 / 26.78: 43.99 / 41.04 / 40.17. Pass 1 (2526 configs, inv2 1 streams s1-s7, best 36.63 -> frozen 47.86) kept as frozen_exact_pass1_s6. 0 passive translations, complexity 0, 3 active. Spec corrections: O15 -> O20, margin 10 -> 5, no base stub (CAD ruling 1). Preview updated to the 26.78 config (docs/concepts/viz/concepts/deltoid-crest-j3-3r.js).",
+ "note": "RE-DISPATCH 2026-10-18 06:09-06:20 UTC (round-14 closing-screen brief arrived again after screen + verify + death audit; no rerun, gate passed): added the paired lens-3 NO-KNEE CONTROL - crest-knee-3r's verified seats as a plain GH 3R (a1 40.88, a2 59.68, sigma -1) read 61.94 fast / 70.59 frozen exact (score 74.33) vs crest-knee 32.84 at the same seats: identical reach (228/360) and fold (93 vs 92 ws), so the knee's 37.75 points there are ALL metal placement (hub 2 in band 0.04 -> 0.99, F 70.7 -> 60.7 mm; contact 0.086 -> 0.015, 31 -> 5 poses), none of it reach. At each chain's own optimum the knee is worth only 2.14 at the crest (34.98 vs 32.84) vs 3.84 at the back seats. | Pass 2 (2026-10-17 23:29 - 2026-10-18 00:35 UTC, local, niced, 2 processes): categorical probe (14) at the two pass-1 bests -> the normal J2 stack inv2 0 (link 1 on hub 2's lower plate) wins 3.6 / 2.1 points (link 1 0.67 -> 0.98 in band); inv3 0 costs 15-50; sigma +1 dead. CMA in inv2 0 / inv3 1 / sigma -1: s9 193 (29.85), s10 681 (26.78, sigma collapsed), s11 341 (from the a2 51.5 config, 33.34), s12 1189 (wide restart sigma 0.5, 0 gain; second basin 29.38 at wd 109.4 / end_extra 6.0), s13 697 (cap-pole cell at inv2 0, sigma 0.6: 47.48, reach 0.79 but hub 2 F 86 mm, ib14 0.64), s14 671 (29.29 basin) / s15 781 (0 gain); s8 25 (inv2 1, stopped). Frozen exact (fit Bench(60,160) fast, every level frozen, Bench(110,360) exact) of 29.85 / 28.63 / 26.78: 43.99 / 41.04 / 40.17. Pass 1 (2526 configs, inv2 1 streams s1-s7, best 36.63 -> frozen 47.86) kept as frozen_exact_pass1_s6. 0 passive translations, complexity 0, 3 active. Spec corrections: O15 -> O20, margin 10 -> 5, no base stub (CAD ruling 1). Preview updated to the 26.78 config (docs/concepts/viz/concepts/deltoid-crest-j3-3r.js).",
  "doc": "docs/concepts/deltoid-crest-j3-3r.md",
  "mechanism": {
   "active_dof": 3,
@@ -1070,5 +1070,173 @@
   "bound": "kinematic closure 0.742 of the workspace caps reach -> >= 15.8 reach points + follow; with all 38 part-part and 11 contact poses cleared the frozen gap would read ~17-19, so the kill is fold + part-part together",
   "champion_same_bench": 68.93,
   "reason": "death stands: best frozen exact 34.98 (selection-corrected from 40.17) is 2.9 over the spec kill bar 32.10, 3.9 behind the zero-complexity optimum 31.04 and 16.7 behind the lead 18.28; losses are the stretched fold (kin 0.74) plus physical part-part (hub2-neck overhead, hub1-hub3 at small th)"
+ },
+ "noknee_control_r14": {
+  "t": "2026-10-18T06:19:00Z",
+  "what": "lens 3's no-knee control (ROUNDS.md round 14 'Carried'): crest-knee-3r's VERIFIED seats (J1 bvec(106.32, 62.87), J2 home bvec(30.37, 50.37), J3 seat ray wdir(93.04, -1.37)) built as a plain GH-concentric 3R through this file's build and checks (zc-frontier, unchanged; the crest-box clamp lifted only because wd 93.04 sits under its 95 edge), b3 tilt and knee removed, member 3 = hub-3 plate + K7 neck rigid on BOTTOM",
+  "arcs": {
+   "a1": 40.883,
+   "a2": 59.683,
+   "sigma": -1
+  },
+  "fast_probe": {
+   "inv2 0 inv3 0 ee 2.95": 64.88,
+   "inv2 0 inv3 0 ee 8.0": 66.68,
+   "inv2 0 inv3 1 ee 2.95": 61.94,
+   "inv2 0 inv3 1 ee 8.0": 64.65,
+   "inv2 1 inv3 0 ee 2.95": 73.2,
+   "inv2 1 inv3 0 ee 8.0": 73.37,
+   "inv2 1 inv3 1 ee 2.95": 63.71,
+   "inv2 1 inv3 1 ee 8.0": 66.71
+  },
+  "fast_best": {
+   "gap": 61.94,
+   "reach": 0.7188,
+   "follow": 0.9167,
+   "inband14": 0.5762,
+   "contact": 0.0811,
+   "hub_F": {
+    "hub1": 52.0,
+    "hub2": 70.74,
+    "hub3": 68.0
+   },
+   "inband_member": {
+    "hub1": 0.9366,
+    "hub2": 0.0456,
+    "hub3": 0.7014,
+    "link1": 0.462,
+    "link2": 0.5527,
+    "neck": 0.6963
+   }
+  },
+  "frozen_exact": {
+   "gap": 70.59,
+   "score": 74.33,
+   "reach": 0.6333,
+   "follow": 0.9182,
+   "inband14": 0.5787,
+   "inband10": 0.2827,
+   "contact": 0.0861,
+   "near_touch_gap": 77.75,
+   "hub_F": {
+    "hub1": 52.0,
+    "hub2": 70.74,
+    "hub3": 68.0
+   },
+   "inband_member": {
+    "hub1": 0.9367,
+    "hub2": 0.0433,
+    "hub3": 0.7104,
+    "link1": 0.4644,
+    "link2": 0.5548,
+    "neck": 0.6963
+   },
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.1786,
+    "n_clip": 10,
+    "follow": 0.5,
+    "n_taken": 10,
+    "inband14": 0.6,
+    "inband10": 0.4892
+   },
+   "attribution": {
+    "ws": {
+     "n": 360,
+     "taken": 228,
+     "fold_folded": 21,
+     "fold_stretched": 72,
+     "jam_K2": 0,
+     "parts": 17,
+     "contact": 22
+    },
+    "clip": {
+     "n": 110,
+     "taken": 101,
+     "fold_folded": 0,
+     "fold_stretched": 0,
+     "jam_K2": 0,
+     "parts": 0,
+     "contact": 9
+    },
+    "overhead": {
+     "n": 28,
+     "taken": 5,
+     "fold_folded": 0,
+     "fold_stretched": 10,
+     "jam_K2": 0,
+     "parts": 1,
+     "contact": 12
+    },
+    "across": {
+     "n": 68,
+     "taken": 22,
+     "fold_folded": 0,
+     "fold_stretched": 45,
+     "jam_K2": 0,
+     "parts": 1,
+     "contact": 0
+    },
+    "behind": {
+     "n": 25,
+     "taken": 18,
+     "fold_folded": 0,
+     "fold_stretched": 6,
+     "jam_K2": 0,
+     "parts": 0,
+     "contact": 1
+    }
+   },
+   "contact_by_member": {
+    "hub2": 18,
+    "link2": 6,
+    "hub1": 4,
+    "neck": 3
+   },
+   "kin_ws": 0.7417,
+   "th_ws_p5_p95": [
+    23.0,
+    135.8
+   ],
+   "window": [
+    23.8,
+    95.6
+   ]
+  },
+  "paired_vs_crest_knee": {
+   "crest_knee_frozen": 32.84,
+   "plain_frozen": 70.59,
+   "knee_worth": 37.75,
+   "reach_both": 0.6333,
+   "fold_plain": 93,
+   "fold_knee": 92,
+   "hub2_inband_plain": 0.0433,
+   "hub2_inband_knee": 0.989,
+   "hub2_F_plain": 70.74,
+   "hub2_F_knee": 60.73,
+   "contact_poses_plain": 31,
+   "contact_poses_knee": 5,
+   "contact_frac_plain_knee": [
+    0.0861,
+    0.0146
+   ]
+  },
+  "matched_optimum": {
+   "crest_plain_best_frozen": 34.98,
+   "crest_knee_frozen": 32.84,
+   "knee_worth_at_crest": 2.14,
+   "back_seat_plain_zc_frozen": 31.04,
+   "back_seat_knee_H1_verified": 27.2,
+   "knee_worth_at_back": 3.84
+  },
+  "file": "docs/concepts/verify/deltoid-crest-j3-3r_noknee_ctrl_frozen.json",
+  "script": "docs/concepts/verify/deltoid-crest-j3-3r_noknee_ctrl.py"
+ },
+ "convergence_r14_reread": {
+  "n": 7126,
+  "best": 26.78,
+  "gain_2nd_half": 0.265,
+  "gain_last_third": 0.0,
+  "top5_spread": 0.0
  }
 }

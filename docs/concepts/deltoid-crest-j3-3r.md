@@ -401,3 +401,55 @@ overhead, and hub 1 against hub 3 at small J1-J3 angles.
 
 Not done (time box): a per-pose dump of the 34.98 config, a held-out read, and a motion preview update. The preview
 still shows the fast claim config.
+
+## Round-14 re-dispatch (2026-10-18 06:09-06:20 UTC): duplicate brief, plus the paired no-knee control for lens 3
+
+The same closing-screen brief came back after this row had already been screened (7118 configs, gate 0.265 / 0.0 /
+0.0), verified (47.86, held 50.05; later best 40.17) and death-audited (best frozen exact 34.98). Nothing was rerun: the
+gate passed and the basins are mapped (sections above). The re-read gate at n 7126 is unchanged (0.265 / 0.0 / 0.0
+score points).
+
+The brief also calls this row "lens 3's no-knee control". Lens 3 (crest-knee-3r) is now verified at 32.84 frozen exact,
+and a control at the knee's OWN seats was not on file. It is measured here, one variable changed.
+
+**Control.** crest-knee-3r's verified seats as a plain GH-concentric spherical 3R: J1 bvec(106.32, 62.87), J2 home
+bvec(30.37, 50.37), J3 on its seat ray wdir(93.04, -1.37) with the b3 tilt and the knee removed. Member 3 is the hub-3
+plate plus the K7 neck, rigid on BOTTOM. That gives a1 40.88, a2 59.68, sigma -1, q 0.957. It runs through this file's
+build and checks, unchanged (zc-frontier: top faces, crowns, near-touch, hub F <= 140, 1 mm radial K6). The crest-box
+clamp is lifted only because wd 93.04 sits under its 95 edge. Script and output:
+docs/concepts/verify/deltoid-crest-j3-3r_noknee_ctrl.py and docs/concepts/verify/deltoid-crest-j3-3r_noknee_ctrl_frozen.json.
+The 8 configurations are in the sweep file as phase `r14-noknee-ctrl`.
+
+| stack (Bench(60,160) fast) | ee 2.95 | ee 8.0 |
+|---|---|---|
+| inv2 0 / inv3 0 | 64.88 | 66.68 |
+| inv2 0 / inv3 1 | **61.94** | 64.65 |
+| inv2 1 / inv3 0 | 73.20 | 73.37 |
+| inv2 1 / inv3 1 | 63.71 | 66.71 |
+
+| frozen exact Bench(110,360) (fit fast, every level frozen) | gap (score) | reach (ws taken) | follow | ib14 | contact | fold ws (folded / stretched) | parts | hub 2 F / in band |
+|---|---|---|---|---|---|---|---|---|
+| crest-knee-3r (verified) | 32.84 (88.06) | 0.6333 (228) | 1.0 | 0.853 | 0.0146 (5) | 92 (all causes, 470 poses) | 5 | 60.7 mm / 0.99 |
+| **plain 3R, same seats (this control)** | **70.59 (74.33)** | 0.6333 (228) | 0.918 | 0.579 | 0.0861 (31) | 93 (21 / 72) | 17 | 70.7 mm / 0.04 |
+
+Per member in band (control): hub 1 0.94, hub 2 0.04, hub 3 0.71, link 1 0.46, link 2 0.55, neck 0.70. Contacts by
+member: hub 2 18, link 2 6, hub 1 4, neck 3. Overhead 5/28 taken (fold 10, contact 12, parts 1). Kinematic closure 0.742,
+th p5-p95 23.0-135.8 against the window [23.8, 95.6]. Near-touch gap 77.75, min metal 0.07 mm.
+
+**Reading (new knowledge).**
+- At fixed seats the knee is worth 37.75 frozen points, and none of it is reach. Both chains take the same 228/360 and
+  lose the same fold (93 vs 92). J1 and J2 are GH rays in both, so the J1-J3 fold window is the same. The knee pays for
+  itself only in metal placement. With J3 fixed in the arm frame, the J2 ray sweeps higher skin, so hub 2 has to sit at
+  F 70.7 mm (0.04 in band) and becomes 18 of the 31 contacts. On the knee chain (J3 tilted b3 0.33, member 3 floating on
+  the cuff pins), hub 2 sits at 60.7 mm with 0.99 in band.
+- At each chain's own optimum, the knee is worth only 2.14 at the crest (plain best 34.98 vs crest-knee 32.84), against
+  3.84 at the back-of-shoulder seats (zc-frontier 31.04 vs H1 27.20). The plain chain gets hub 2 back into the band at
+  the crest by shortening a2 to 46-47 and lifting J3 to wd 104-109. That costs about 10 takes and 0.06-0.08 follow.
+- Consequence for lens 3 and its successors: at the crest seats, a knee chain cannot gain reach over the plain chain.
+  Its reach ceiling is the same fold (kin 0.742). The crest's 2-point knee premium cannot carry it past H1 (27.20)
+  without a fold lever. That agrees with crest-knee-3r's own limiter: the crest's fold gain is paid back in J3 stops
+  and member-3 in band.
+
+Status unchanged: **DEAD** (kill bar 32.10; best frozen exact 34.98; lead 18.28). 0 passive translations, complexity 0,
+3 active. The motion preview passes (`node docs/concepts/viz/test.mjs deltoid-crest-j3-3r`). It still shows the fast
+claim config, as the audit noted.
