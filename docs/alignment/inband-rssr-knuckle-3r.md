@@ -1,190 +1,290 @@
 # Alignment audit: inband-rssr-knuckle-3r
 
-Auditor run 2026-10-17 13:04-13:20 UTC (hourly audit 13:03). This run was due for one reason: the display and judge
-change a510cfe (12:41). That commit added the lead's `leader_ruling` text to the row. It also changed
-`tools/dash_build.py`: a CONFIRMED polish now reads its pick key from `polished_id` and is promoted to status
-'verified'. And it changed the headline in `docs/dashboard/simple/index.html` and `public/index.html`: a row ruled
-'tie: X' or 'no lead' is skipped. The row's claim did not move: polished pick3, 18.33 bench / 22.86 held, the same
-number the 12:28 audit and the 12:36 skeptic judged (48be5d5).
+Auditor run 2026-10-18 21:05-21:40 UTC (hourly audit). This run was due because the row was committed at
+2026-10-17T15:21:40Z (8f69bd6), after the last audit at 13:18:02Z.
 
-- **Checks:** `docs/alignment/inband-rssr-knuckle-3r.json`, run with `--ref slipper-nose-knuckle-3r` as before.
+**What changed since 13:18.** The row's own change is small: `complexity` went from 28.5 to 24.5. That is a change of
+ruler, not of design: the cuff knee's closure loop became free under simplicity v2.1, and the lead's 3d9dc71 and
+8f69bd6 apply that to every pin-knee row. The claim did not move: polished pick3 is still 18.33 bench / 22.86 held,
+the number the verifier confirmed in 931a8d1. What changed around the row is bigger:
+
+- **The headline moved.** It is now conecut-knee-knuckle-3r at 18.28 / 22.38 held (verified, skeptic 2026-10-17
+  20:15:35Z), while this row's `leader_ruling` still names slipper-nose.
+- **The dashboard changed twice.** `tools/dash_build.py` now promotes a CONFIRMED polish to 'verified' only while the
+  latest ledger entry is a non-gamed skeptic entry on the same claim. A `leader_ruling` now counts only when it cites
+  a skeptic entry.
+- **The leader family has been dynamics-judged.** `user_conecut_knee` and `user_slipper_nose` each have a
+  `judge/dynamics.json`.
+
+**Files for this run:**
+
+- **Checks:** `docs/alignment/inband-rssr-knuckle-3r.json`, tool VERSION 2026-10-18.1.
 - **Findings:** `docs/alignment/inband-rssr-knuckle-3r.findings.json`.
-- **Ledger:** `docs/alignment/ledger.jsonl`, 13:10:58Z, `by auditor`, run `audit:inband-rssr-knuckle-3r`.
-- **New tool:** `tools/alignment_headline_probe.mjs`. It re-runs the page's own `board` and `leader` calcs,
-  extracted verbatim from the page, on `morphs.json` and on what-if copies held in memory. Its output is
-  `docs/alignment/remeasure/inband_pick3/headline_probe_{simple,public}.json`.
-- **Cost:** local only, $0 farm.
+- **Ledger:** `docs/alignment/ledger.jsonl`, `by auditor`, run `audit:inband-rssr-knuckle-3r`.
+- **New measurements, all written by this run:**
+  - `docs/alignment/remeasure/inband-rssr-knuckle-3r_{bench,held}.json`: the tool's re-wear of the row's screen pick.
+  - `docs/alignment/remeasure/inband_pick3/pick3_vs_conecut-knee_2026-10-18.json`: the per-pose wearer counts and
+    paired bootstraps of pick3 against conecut-knee, lowarm-kphase-notch and slipper-nose.
+  - `docs/alignment/remeasure/inband_pick3/headline_probe_{simple,public}_2026-10-18.json`.
+  - `docs/alignment/remeasure/inband_pick3/probe_pick3_unpriced_bench.json`: the unscored workspace probe of pick3.
+- **Cost:** local only (nice, OMP_NUM_THREADS=1, at most 2 processes), $0 farm.
 
-## Verdict: WATCH (the ledger's verdict). The display change hides nothing and promotes no unverified number today. Two latent defects.
+## Verdict: WATCH (the ledger's verdict). The claim stands. The row's '(tie)' label is now stale: the row is behind the new leader.
 
-- **Claim:** `polished_gap` 18.33 (pick3, priced), unchanged since the verifier's 931a8d1.
-- **What the board shows now:** this row is #1, 'Verified (tie)', at 18.33 with every term filled: reach 0.7194,
-  follow 1.0, in-band 0.9071, contact 0.0027. Those are the verifier's
-  `docs/research/inband_env_polish/verify/claim_pick3_fit60_bench.json` numbers to the digit, and they recompute to
-  18.33.
-- **The headline** is slipper-nose-knuckle-3r 18.49, "tied with In-band RSSR knuckle (pick3)". Both print score 93.3.
-  Gamed rows are still forced to 'Flagged': dipped-law-groove 18.64 is Flagged and sorts below every verified row.
-- **Promotion:** only two rows carry a CONFIRMED polish. One is this row. The other, minarc-stop-knuckle-4r, was
-  already verified and has 4 DOF, so it is outside the 3-joint headline.
+- **Claim:** `polished_gap` 18.33 (pick3, priced), unchanged.
+- **The buildable config reads the same number.** That config is `polished_params_cad_catalogue`: the igus KBRM-02
+  O9 head at r_h 15.9, with the ear de-duplicated. Priced, it reads 18.33 bench / 22.86 held
+  (`remeasure/inband_pick3/claim_O9rh15.9_dedup_{bench,held}.json`). So no part of the board's number is bought by the
+  model's non-catalogue O7 socket. The old M2 finding is resolved in substance; see "Resolved since 13:18".
+- **Against today's leader** conecut-knee (unpriced, margin 5, same poses, `tools/alignment_paired.compare_sets`,
+  4000 draws). Positive means this row is worse.
 
-| question the lead asked | measured answer |
-|---|---|
-| can the change hide a real leader? | **Not today.** The tie target is the headline, so the tie is named. It can when the ruling goes stale. Measured with the page's own code: if slipper-nose is flagged or refuted, the headline goes to trimlug-k165 at 18.51; with a new verified 3-joint row at 18.45, that row takes it. In every case this row (18.33, Verified) leaves the headline unnamed (`headline_probe_simple.json`, runs A / B / C). |
-| can it promote an unverified number? | **Not today.** The promoted v_* match the verifier's file. But the promotion keys off free text (`polished_status` starting with 'CONFIRMED'). It checks no verifier file and no ledger entry, and it lives only on the dashboard. The row still says 'screened', so the auditor's own R1 guard never fires (finding NEW-freetext-promotion). |
-| does the board show 18.33 (priced) while the ruling uses 18.32 (unpriced)? | **Yes.** The bench difference is 0.01, so the board order is unchanged. The held-out reading is where the two disagree: 22.86 priced vs 23.54 unpriced, against the leader's 23.45. The board does not show held-out numbers (finding NEW-reading-mismatch). |
-| does the promotion key off a free-text status rather than the ledger? | **Yes** (finding NEW-freetext-promotion). The ledger is read only for 'gamed' -> Flagged. |
+  | leg | difference | 90 % CI | P(this row better) |
+  |---|---|---|---|
+  | bench | +0.03 | [-1.95, +1.93] | 0.49 |
+  | held | +1.16 | [-0.06, +2.38] | 0.064 |
+  | pooled | +0.84 | | 0.10 |
+  | held, catalogue build | +1.24 | [+0.02, +2.47] | 0.048 |
 
-## What the wearer gets (pick3 as claimed, under the leader's protocol unless noted)
+  This row is behind the leader on every leg. It is more complex (24.5 against 18.5), and it has no dynamics run.
+  The board ranks it below the leader, which is correct.
+- **What is wrong is the label.** The pill still reads 'Verified (tie)' on a ruling made against slipper-nose, which
+  is no longer the headline (finding NEW-stale-tie).
+- **Nothing is gamed.** No hard rule is broken: 3 active joints, O20 hubs, 0 passive translations, and an own-state
+  `th` minimum of 5.52 deg (0 taken poses under 5.5). No ranking against a better design is proven at 90 %.
 
-The claim is unchanged, so this is the 12:28 audit's wear. I recounted it this run from the per-pose dumps
-`remeasure/inband_pick3/claim_O7nominal_unpriced_{bench,held}_perpose.json` and
-`farm/claim_pick3_fit60_*_perpose.json`.
+## What the wearer gets (pick3 as claimed, priced; leader conecut-knee in brackets, unpriced at margin 5)
 
-- **Overhead (elevation >= 140):** 9 of 28 workspace poses taken on the bench, 19 of 71 held out. The leader takes
-  8 / 18.
-- **Raised arm by band** (held, priced claim dump): elevation 90-120 takes 68 of 140, 120-140 takes 27 of 89, 140-160
-  takes 11 of 35, and 160+ takes 8 of 36.
-- **Workspace reach:** 260 of 360 and 646 of 952 (priced: 259 and 648). The leader takes 261 and 650.
-- **Taken poses with metal under 2 mm:** 19 bench / 52 held unpriced, and 22 / 54 priced. The leader has 25 / 62.
-  Counting the model's extra walls, it is 26 / 64 against 30 / 67.
-- **Lowest metal on a taken pose:** 0.31 mm bench, 0.01 mm held (unpriced).
-- **Deepest contact:** 8.30 mm held out. The 4 overhead contact poses sit at elevation 150.
-- **Workspace in-band (unscored, priced):** 0.873 / 0.874. At elevation 90-140 it is 0.832 / 0.845, and overhead it
-  is 0.935 / 0.934.
-- **Springs:** 0.172 N.m at J2, which gives 1.15 / 1.44 N at the cuff. That is 17 % / 29 % of R17, static only.
-- **Stops:** the drive range ends on the law (dK 65.5 deg, against 47.5 deg taken).
-- **Singularity:** transmission >= 52.2 deg, with no jam in range.
-- **Not measured:** cuff twist and dynamics.
-- **DOF:** 3 active joints, O20 hubs, complexity 28.5 (the leader's is 22.25).
+All counts come from the per-pose dumps, and each dump reproduces its claim: priced 18.33 / 22.87, unpriced
+18.32 / 23.54, the leader 18.29 / 22.38. The sources are `docs/research/inband_env_polish/farm/claim_pick3_fit60_{bench,held}_perpose.json`,
+`remeasure/inband_pick3/claim_O7nominal_unpriced_*_perpose.json` and
+`remeasure/conecut-knee-knuckle-3r_{bench,held}_perpose.json`. The summary is in
+`pick3_vs_conecut-knee_2026-10-18.json` under "wear".
+
+- **Overhead (elevation >= 140):** 9 of 28 workspace poses taken on the bench and 19 of 71 held out [8 / 28 and
+  18 / 71].
+- **Raised arm by band (held):**
+
+  | elevation | this row | leader |
+  |---|---|---|
+  | 90-120 | 68 / 140 | 76 / 140 |
+  | 120-140 | 27 / 89 | 29 / 89 |
+  | 140-160 | 11 / 35 | 11 / 35 |
+  | 160+ | 8 / 36 | 7 / 36 |
+
+  The leader's held-out lead is mid-raise: it takes 18 workspace poses this row does not, and this row takes 5 the
+  leader does not.
+- **Workspace reach:** 259 of 360 and 648 of 952 [262 and 659].
+- **Taken poses with metal under 2 mm** (own metal): 22 bench and 54 held [23 / 57]. Counting the model's extra
+  walls, it is 30 / 66 [33 / 71].
+  - Under 1 mm: 3 / 15 [3 / 13].
+  - With the buildable O9 head (unpriced): under 1 mm rises to 7 / 18 and under 2 mm to 21 / 56. The 1 mm near-touch
+    gap rises by 1.64 bench and 2.22 held (`claim_O9rh15.9_dedup_*`). This is reported only; near-touch is not a gate.
+- **Lowest metal on a taken pose:** 0.31 mm bench and 0.36 mm held [0.07 / 0.33].
+- **Contact and its depth.**
+  - Bench: 1 contact pose, 0.22 mm deep [4 poses, sum 20.24 mm, deepest 8.93 mm].
+  - Held: 8 contact poses, summed depth 21.16 mm, deepest 6.09 mm at plane -90 / elevation 60 / axial 120
+    [14 poses, sum 60.97 mm, deepest 9.86 mm at elevation 165].
+  - Overhead held contacts: 4 (elevation 150: 3.80 / 3.70 / 0.10 mm; elevation 165: 0.76 mm) [7, deepest 9.86 mm].
+  - Unpriced, the held contacts are 12, summed 33.27 mm, deepest 8.30 mm.
+  - So this row presses into the arm less often and less deeply than the leader. That is a real wearer advantage,
+    smaller than the leader's reach advantage in gap points.
+- **Workspace in-band (unscored), unpriced pick3 on the bench:** WS_INBAND
+  (`remeasure/inband_pick3/probe_pick3_unpriced_bench.json`).
+- **Springs:** static 0.165 N.m at J2, which gives 1.1 / 1.37 N at the cuff. That is 17 % of the R17 moment and 22-28 %
+  of the cuff force (row `spring_R17`).
+- **Stops:** the K drive's range ends on the law (dK 65.5 deg against about 47.5 deg taken). The folded dowel sits at
+  smlo 5.03 deg, at the search's 5.0 deg floor, and is priced +0.5 deg to 5.53. On every taken pose the own-state
+  `th` minimum is 5.589 deg bench and 5.524 deg held, with 0 poses under 5.5 (`polished_rules`).
+- **Singularity:** transmission >= 52.2 deg; the knee window is at ang_min 25.22 deg, its search floor, not widened.
+- **Not measured:** dynamics and cuff twist. No CAD and no `judge/dynamics.py` run exists for this id. The leader's
+  CAD reads `moves_freely_nominal` true.
+- **DOF and complexity:** 3 active joints, O20 hubs, complexity 24.5 [18.5]. The 28.5 -> 24.5 change is a ruler
+  change, applied the same way on the leader family. `tools/simplicity.py` recomputes 24.5.
 
 ## Checks (tool, this run)
 
-The tool's verdict is WATCH. It comes only from the two check false positives the skeptic refuted at 11:40 and
-again at 12:45:
+The tool's verdict is WATCH. It comes from one check, `held_out`: "no verified bench gap on the row". This is the same
+false positive the skeptic has refuted three times. The row keeps status 'screened' with `v_gap` null, while the
+verifier's numbers sit under `polished_*` and `docs/research/inband_env_polish/verify/`. Measured, the drop is
+22.86 - 18.33 = +4.53 priced (+5.22 unpriced), under TH held_watch 6.0. The leader drops +4.10.
 
-- **held_out** reads the empty top-level `v_gap`.
-- **idle** reads the kneeless models' `knee_moved` flag.
+- **The tool still reads the screen pick, not pick3.** `remeasure` re-wears the row's `best_params` (cma3 p).
+  - This run reproduced its 18.87 bench exactly (`remeasure/inband-rssr-knuckle-3r_bench.json`, 128 s).
+  - Held out it reproduced 23.21 exactly (`remeasure/inband-rssr-knuckle-3r_held.json`, 411 s): near-touch 1 mm
+    26.53, 2 mm 36.97, lowest metal 0.03 mm. The screen pick's numbers are unchanged since 11:12 on 2026-10-17, and
+    no bench, kit or model file has changed since.
+  - So near_touch, continuity, sampling and density describe that screen pick: <2 mm 34.12, shell2 15.25, knn flood
+    21.39, rod 12 and L1a 8 samples, all ok.
+- **contact_depth** reports 'not measured'. The polished claim's per-pose dumps sit under
+  `docs/research/inband_env_polish/farm/`, where the tool does not look. This run measured the depths from them
+  (above): they are shallower than the leader's.
+- **complexity:** recomputed 24.5 = row 24.5.
+- **reporting:** 'ok', with the dashboard showing 'verified' against the row's 'screened'.
+- **judge_change:** 'ok'. 8f69bd6 touched `judge/dynamics.py` in the same commit as the row, but it changed only the
+  row's complexity, and no dynamics judge runs on this id. So it is not P4.
+- **rules:** 'ok'.
 
-The rest:
+## Every catalogue pattern against this design (pick3 as claimed)
 
-- **dominance** vs slipper-nose: plain -0.38, 2 mm -1.10, so this row is behind on both. That is the row's 18.87 pick,
-  the tool's default remeasure.
-- **Tool side effect:** run without `--ref`, dominance now says 'no reference'.
-- **reporting** prints "dashboard status 'verified' vs row 'screened'" but stays 'ok'. That is the gap this audit
-  measures in NEW-freetext-promotion.
-- **near_touch, continuity and sampling** still read the default remeasure of the row's pre-polish pick (18.87), not
-  the polished pick3. pick3's own near-touch and continuity are in `remeasure/inband_pick3/` and the polish verifier's
-  files.
+| pattern | present? | measured reason |
+|---|---|---|
+| T1 metal parked past the cutoff | no | contact 0.0027; near-touch 1 mm 20.52 and 2 mm 33.38 bench, against the leader's 34.84 at 2 mm; under-2 mm taken poses 22 / 54 against 23 / 57 |
+| T2 band edge | no | for the screen pick, reading the band as 3-14 mm moves the gap +0.14 and 0.14 % of clip metal sits at 2-3 mm; pick3's clip in-band 0.907 is in line with that |
+| T3 margin read on another angle | no | own-state `th` from the member frames: min 5.589 / 5.524, 0 poses under 5.5 |
+| T4 bound walking to a singular posture | no (bounds at the user's floors) | smlo 5.03 at its 5.0 floor, priced +0.5; ang_min 25.22 at its floor (the pick's own value, not widened); transmission >= 52.2 deg |
+| T5 depth-blind contact | no | held depth sum 21.16 mm, deepest 6.09 mm, against the leader's 60.97 / 9.86 |
+| S1 skewed sample | no | held drop +4.53 (< 6); the env search bench has 0 poses within 2 deg of the held-out set (polish verifier) |
+| S2 sparse sampling of bad metal | no | part-weighted in-band is 1.5 points above the sample-weighted reading; the thin rod (12 samples) and L1a (8) sit in band (0.87 / 0.98) |
+| S3 unsampled bodies | no | every declared body has a metal group: rod, rodends, crank, horn, ear, L1a, L1b, L2, knee, pad |
+| S4 skin, not body | not this design's | (rig-wide) |
+| S5 static islands | no | kinematic and contact-aware floods drop 0 taken poses (`verify/caflood_pick3.json`) |
+| S6 over-dense sampling | no | no part above 2x the kit's density; the ear double-sampling is removed in the catalogue build at the same gap |
+| M1 virtual / zero-size | no | 0 passive translations |
+| M2 a part that does not exist at that size | resolved | the catalogue O9 build reads 18.33 / 22.86 priced, the same as the board; one residual build-text conflict (proposal P-J) |
+| M3 unchecked clash | no | the O9 head-rim clash (-0.22 / -0.49 mm) was found by the 12:28 audit and is fixed by the r_h 15.9 + ~0.6 mm spacer build, measured above |
+| M4 idle mechanism | no | K spans 45.8-47.5 deg and the crank 33.7-34.8 deg |
+| M5 spring that cannot hold | **watch** | dynamics unmeasured; the leader family is now dynamics-judged |
+| P1 in-sample tuning | no | see S1 |
+| P2 held-out leakage / choosing by held-out | **watch** | pick3 picked best of 3 after the claims (worst on the env-fit held leg; ranked last by the pre-registered envsel rule) |
+| P3 re-measuring until lucky | no | the claim harness is deterministic; one claim per pick |
+| P4 judge changed with the design | no | see judge_change |
+| R1 self-measured shown as verified | no | the board's v_* equal the verifier's file; the promotion is now ledger-gated |
+| R2 refuted records shown | no | |
+| R3 best-of-many without spread | **watch** | 19.15 / 19.49 / 18.33; that choice alone puts the row above lowarm 18.47 and slipper-nose 18.49 |
+| R4 pipeline recomputes the number | no | the board's 18.33 = `polished_gap` |
+| G1 hugging 1-3 mm | no | 87 / 184 taken poses under 3 mm against the leader's 97 / 199 |
+| G2 stiff spring | no (static) | 17 % of R17 |
+| G3 cuff twist | unmeasured | under M5 |
+| G4 singular posture | no | see T3 / T4 |
+| G5 complexity hidden | no | 24.5 recomputed; the knee-loop ruler is applied as on the leader family; stale `mechanism.confidence` text ("--score 28.5") |
+| G6 4th sensed joint | n/a | 3 active joints |
+| NEW-stale-tie | **watch** | see below |
+| NEW-reading-mismatch | **watch** | see below |
 
 ## Findings (all watch)
 
-### NEW-stale-tie: a headline ruling that outlives its basis (new; display change a510cfe)
+### NEW-stale-tie: the tie ruling has outlived its basis (carried, now live)
 
-- **Evidence.** The headline skips any row whose `leader_ruling` matches `/^(tie|no lead)/i`. It names a tie only
-  while the tie's target is the headline.
-- **The probe** (`tools/alignment_headline_probe.mjs`, same result on both pages):
+- **What the row says:** `leader_ruling` = "tie: slipper-nose-knuckle-3r | ledger 2026-10-17T13:18:02Z | ...".
+  `dash_build` accepts it, because it cites a non-gamed skeptic entry, so the pill prints 'Verified (tie)'.
+- **What the board does** (`headline_probe_{simple,public}_2026-10-18.json`, 'as published'): the headline is
+  conecut-knee 18.28, "tied with Re-centred knee, chamfered hub". This row is not named, and it is behind the
+  headline: bench +0.03, held +1.16 (P better 0.064), catalogue build +1.24 held (CI [+0.02, +2.47]).
+- **Why the exo is not what the label says:** a reader sees 'tie' next to 18.33 / 93.3 against the leader's
+  18.28 / 93.4 and reads it as tied with the leader. Against the leader it is behind on every leg, more complex, and
+  without a dynamics run.
+- **The latent half, measured:**
+  - In runs A and B (conecut-knee flagged or refuted), the headline goes to lowarm-kphase-notch at 18.47. This row
+    (18.33) and conecut-h2facet (18.28) stay out of the headline unnamed.
+  - For this row that exclusion rests on a ruling against slipper-nose. Against lowarm it is bench -0.15
+    (CI [-2.12, +1.71]) and held +0.66 (P 0.155), so the exclusion happens to be defensible, but only by accident.
+- **Action (lead):** re-rule this row against the current headline or clear the ruling (proposal P-F). Either way no
+  headline changes today.
 
-  | what-if | headline | this row (18.33) |
-  |---|---|---|
-  | as published | slipper-nose 18.49 | named |
-  | slipper-nose flagged gamed | trimlug-k165 18.51 | kept out, not named |
-  | slipper-nose refuted | trimlug-k165 18.51 | kept out, not named |
-  | new verified 3-joint row at 18.45 | that row | kept out, not named |
-  | ruling text begins with a space | **inband-rssr 18.33** | takes the headline despite the tie ruling |
-  | row status 'screened' (pre-promotion) | slipper-nose 18.49 | named, shown Checking |
+### R3: best of 3 shown without its spread (carried, updated for the new board)
 
-- **A 'no lead' ruling** is never named in the headline, and its board pill shows no mark except on hover.
-- **Why the exo is not better or worse.** Nothing is hidden today. But a tie ruled against one design says nothing
-  about the next headline. If the leader changes, the board's lowest verified 3-joint gap leaves the headline in
-  silence, or comes back on a typo.
-- **Action:** proposal P-F below. The lead re-rules or clears the tie whenever the headline changes.
-- **Proposed catalogue entry, R5. A display ruling that outlives its basis.**
-  - Looks like: a hand-written ruling that removes or adds a row on the headline, with no link to the comparison it
-    was made on.
-  - Detect: re-run the page's leader calc and list every verified 3-joint row with a lower gap than the headline that
-    the headline does not name (`tools/alignment_headline_probe.mjs`).
+- **The board order:** 18.33 sits above lowarm-kphase-notch 18.47 (complexity 0, estimated) and slipper-nose 18.49
+  (18.25), and this row is the more complex one (24.5).
+- **The bench edge is noise:** paired unpriced -0.15 (CI [-2.12, +1.71]) against lowarm and -0.17 (CI [-2.01, +1.69])
+  against slipper-nose.
+- **Held out** it is behind lowarm by +0.66 (P better 0.155) and level with slipper-nose at +0.08 (P 0.366).
+- **The three picks** read 19.15 / 19.49 / 18.33 bench (`farm/claim_pick{1,2,3}_fit60_bench.json`). The
+  pre-registered pick1 would sort below both simpler rows.
+- **Why the exo is not better:** the place above two simpler designs comes from the selection, not from a measured
+  advantage.
+- **Action:** show "best of 3: 18.33-19.49" (P-H) and a held-out column.
 
-### NEW-freetext-promotion: dashboard-only verification keyed on text (new; display change a510cfe)
+### P2: post-hoc pick (carried, unchanged)
 
-- **What the code does.** `tools/dash_build.py` lines 401-413 promote any ideated, modelling or screened row whose
-  `polished_status` text starts with 'CONFIRMED'. They do not check a verifier file or the ledger.
-- **Today the number is the verifier's.** So this is a guard defect, not a gamed number.
-- **The disagreement.** The row file still says status 'screened' with `v_gap` null, and the ledger records
-  'screened'. Only the board says 'verified'.
-- **The guard bypass, measured in memory.** I ran `c_reporting` (`tools/alignment_audit.py`) twice:
-  - on the row as filed, it returns 'ok';
-  - on the row with the dashboard's status (verified, v_gap 18.33), it returns **watch**: "status verified but no
-    verifier file under docs/concepts/verify/; verdict text still reads as a self-measured screen".
-  - There are 0 files for this id under `docs/concepts/verify/`. The verifier wrote to
-    `docs/research/inband_env_polish/verify/`.
-- **The same split** produces the `held_out` false positive the skeptic has now refuted twice.
-- **The latent risk.** A polisher that writes 'CONFIRMED' into its own `polished_status` is shown Verified. If it is
-  the lowest gap and has no ruling, it takes the headline, before any audit (probe run D: without the ruling, this
-  row takes the headline at 18.33).
-- **Action:** proposal P-G.
+- **Selection:** pick3 was chosen after the claims were known. The pre-registered envsel rule ranked it last:
+  25.905 / 26.225 / 26.295.
+- **The picks on each leg:**
 
-### R3: best of 3 shown without its spread (carried, updated for a510cfe)
+  | leg | pick1 | pick2 | pick3 |
+  |---|---|---|---|
+  | fit60 bench | 19.15 | 19.49 | 18.33 |
+  | fit60 held | 23.12 | 23.39 | 22.86 |
+  | env-fit held | 22.43 | 23.47 | 23.57 |
 
-- **What a510cfe fixed.** The pick1 key defect the skeptic found at 12:45 is fixed: every v_* term is now filled.
-- **What remains.** The board's #1 row is pick3, chosen post hoc from 3 committed picks: bench 19.15 / 19.49 / 18.33.
-  Its edge on the leader is noise: paired bench -0.16, 90 % CI [-2.13, +1.64].
-- **Ranking basis.** The board ranks on the bench gap alone. Held out, where pick3 is behind the leader under the same
-  protocol, is not shown.
-- **Action:** proposal P-H, carried from the 12:28 audit.
+  On the env-fit held leg pick3 is the worst of the three.
+- **No held-out search was found,** so this is watch.
 
-### NEW-reading-mismatch: priced claim next to an unpriced leader (carried, unchanged)
+### NEW-reading-mismatch: a priced claim next to unpriced neighbours (carried, updated)
 
-- **Bench:** 18.33 priced against 18.32 unpriced, so the board shows 0.01 better than the same-protocol reading.
-- **Held out:** 22.86 priced against 23.54 unpriced. The leader reads 23.45, so the sign flips.
-- **The tie ruling** uses the unpriced numbers, which is right. The board shows only the bench.
+- **The readings:** the board's 18.33 is priced, and its neighbours (18.28 / 18.47 / 18.49) are unpriced at margin 5.
+  On the bench the order holds (18.32 unpriced).
+- **Held out, the reading decides the comparison:**
+  - Against the leader it is +0.49 priced (P 0.307) and +1.16 unpriced (P 0.064).
+  - Against lowarm, priced is level (22.86 against 22.87) and unpriced is 0.66 behind.
+- **The ruling text uses the unpriced reading,** and the board shows the priced bench only.
 
-### P2: post-hoc pick (carried; the skeptic's missed item now on file)
+### M5: spring hold and cuff twist unmeasured (carried; the asymmetry grew)
 
-- **The env-fit held leg:** pick3 is the worst of the three, 22.43 / 23.47 / 23.57
-  (`farm/claim_pick{1,2,3}_env_held.json`). Its 23.57 is behind the leader's 23.45 even priced.
-- **The fit60 legs** are the only ones where pick3 is best.
-- **The pre-registered pick1** reads 19.15 on the bench.
+- **This row:** there is no CAD and no `judge/dynamics.py` run, and no `pipeline/full-exo/designs/*inband*`.
+- **The leader family:** `user_conecut_knee` and `user_slipper_nose` now have `judge/dynamics.json` with
+  `moves_freely_nominal` true.
+- **What is unmeasured here:** this row's drive differs from theirs. It is an RSSR rod on two ball links instead of
+  the nose / flank sliding pair. So the leader's dynamics result cannot be carried over: the friction sensitivity
+  (the "mu <= 0.105" wear line in HANDOFF is the slipper's) and the cuff twist are unmeasured for this design.
+- **No ranking depends on it today.**
 
-### M2: the CAD config is not buildable with the named ball link (carried, re-checked)
+## Resolved since 13:18 (no finding this run)
 
-- **The CAD config:** `polished_params_cad.r_h` is still 15.0125.
-- **With the catalogue igus KBRM-02 O9 head,** that config loses every pose (`fit_O9.json`, 275.0). It lives from
-  r_h 15.65.
-- **Where the fix is written:** the part and r_h 15.9 now appear only in the `leader_ruling` text.
-
-### M5: spring hold unmeasured (carried, unchanged)
-
-The spring is static only. There is no dynamics, R17 or CAD run for this id, and the leader shares the same gap.
+- **NEW-freetext-promotion.** `tools/dash_build.py` (lines 483-490) now promotes a CONFIRMED polish only while the latest
+  ledger entry is a non-gamed skeptic entry on the same claim (|claim - v_gap| <= 0.005). It also accepts a
+  `leader_ruling` only when the ruling cites a non-gamed skeptic entry. A self-written 'CONFIRMED' can no longer take
+  the headline before an audit. What remains is in proposal P-G.
+- **M2.** The buildable catalogue config was measured at the board's number: 18.33 / 22.86 priced. The unpriced reading
+  is 18.32 / 23.62, against the O7 pick3's 18.32 / 23.54. What remains is a text conflict on the row (proposal P-J).
 
 ## Proposals (measurement or reporting changes, not applied, not inputs to this verdict)
 
-- **P-F: a tie ruling names its target and expires.**
-  - The page names in the headline every verified 3-joint row ruled a tie whose gap is below the headline's, as
-    "(tie ruling vs X, stale)" when X is not the headline. It also labels 'no lead' on the pill.
-  - Match on the trimmed, lower-cased text.
-  - Measured effect today: none, because the target is the headline (all 6 probe runs on both pages). In runs
-    A / B / C the headline would name this row.
-- **P-G: verification lives in the row, not in the display.**
-  - The polish verifier writes the row's `status: verified` and `v_*` itself, and records its file paths (e.g.
-    `polished_verify: [...]`).
-  - `dash_build` promotes only when a recorded verifier file's `final.gap` equals `polished_gap` to within 0.05.
-  - `c_reporting` treats a dashboard-promoted row as verified for its R1 check, and reads the verifier paths the row
-    names.
-  - Measured effect today: this row passes the file test (18.33 = `verify/claim_pick3_fit60_bench.json` final.gap).
-    minarc is already verified. No verified row moves. The `held_out` false positive on this row disappears.
-- **P-H (repeated): show the best-of-N spread.**
-  - A polished pick on the board carries "best of 3: 18.33-19.49".
-  - Effect: display only, no row moves.
-- **P-D (repeated): read a claimant and its incumbent under one protocol before any leader comparison.**
+- **P-F (repeated, now live): a tie ruling expires when its target stops being the headline.** The page then shows the
+  row without '(tie)' until the lead re-rules it.
+  - Measured effect today, with the page's own calcs on `morphs.json`: the pill on this row loses '(tie)'. The
+    headline stays conecut-knee 18.28, because 18.28 < 18.33.
+  - In runs A and B, this row (18.33) would take the headline over lowarm (18.47), and it would then need its own
+    leader-change audit, since it is held-out behind lowarm by 0.66.
+- **P-G (repeated, partly applied by the lead): the polished claim lives in the row and in the audit tool.**
+  - The polish verifier writes `status: verified`, `v_*` and its file paths on the row.
+  - `tools/alignment_audit.py` then reads pick3's per-pose dumps for held_out, near_touch, contact_depth and
+    continuity, instead of re-wearing the screen pick.
+  - Measured effect: the held_out false positive goes, with a drop of +4.53. contact_depth reads 21.16 mm / 6.09 mm
+    held, below the leader's 60.97 / 9.86, so ok. No verified row moves.
+- **P-H (repeated): show the best-of-N spread** ("best of 3: 18.33-19.49") and a held-out column. Display only.
+- **P-J (new): one build config per row.**
+  - `polished_status` still says "build the r_h +0.25 variant (polished_params_cad)". That config (r_h 15.0125) loses
+    every pose with the catalogue KBRM-02 head (275.0, `remeasure/inband_pick3/` and the 13:18 skeptic). Meanwhile
+    `polished_params_cad_catalogue_note` says "BUILD THIS config" for r_h 15.9.
+  - Proposal: the lead strikes the first instruction or replaces `polished_params_cad` with the catalogue config.
+  - Effect: none on any number. It prevents a CAD agent from building the config that fails.
+- **P-K (new): the promotion should not flicker with every audit.**
+  - `dash_build` promotes only while the LATEST ledger entry for the row is a skeptic entry. Every hourly auditor
+    entry, this one included, therefore drops the row from 'Verified' back to its file status 'screened' until the
+    skeptic's next entry, even when the auditor's verdict is watch on the same claim.
+  - Proposal: promote while the latest skeptic entry on the same claim is not gamed and no later entry is gamed.
+  - Measured effect: after this run's watch entry the row stays 'Verified'. Without the change it shows as a screen
+    until the skeptic rules. No other row is affected, since minarc is verified in its own file.
+- **Record hygiene (no proposal needed):** `mechanism.confidence` still says "tools/simplicity.py --score 28.5". The
+  row's complexity and the recompute are both 24.5.
 
 ## Numbers I could not get
 
-- **No re-wear this run.** The claim did not move: a510cfe changed only `leader_ruling`. pick3 was re-worn at 12:28
-  under both protocols, with the O9 head and with the ear de-duplicated (`remeasure/inband_pick3/`). The tool's
-  default remeasure files (11:06) are the row's pre-polish pick and were not re-run.
-- **The trimlug-k165 what-if** (it takes the headline in runs A / B) uses its current, still-unaudited verified row.
-  Its audit is running in the discovery loop, and I did not duplicate it.
-- **Cuff twist, dynamics and the leader read priced:** as in the 12:28 audit, out of scope and out of budget.
+- **Workspace in-band of the priced pick3 and of the catalogue build.** The workspace probe
+  (`tools/alignment_wear_probe_params.py`) can override params, but not the model's socket radius SC.ER or the
+  pricing. So it measured the unpriced O7 pick3 on the bench only (above). The O9 build's workspace in-band is not
+  measured; its clip in-band (0.9011 against 0.9026) suggests a difference under 0.002.
+- **Dynamics, R17 and cuff twist for this id:** these need an L1 / L2 CAD, which does not exist. The task is out of
+  scope for an audit.
+- **A held-out workspace probe of pick3:** skipped for time. It would take about 6 min on 1 process, and the held
+  per-pose counts above already give overhead reach, the clearance floor and the contact depth.
+
+---
+
+*Earlier sections below: the skeptics of 2026-10-17 (13:10-13:30, 12:30-12:45 and 11:30-11:40 UTC), kept unchanged. The
+2026-10-17 13:04-13:20 auditor section they answer is replaced by the run above and remains in git history (e95a8aa and
+earlier).*
 
 ## Skeptic (2026-10-17 13:10-13:30 UTC, hourly audit 13:03 / display change a510cfe): final verdict WATCH
 

@@ -1,0 +1,128 @@
+{
+ "id": "proxtrack-relay-knuckle-4r",
+ "status": "screened",
+ "v_gap": 17.46,
+ "complexity": 52.5,
+ "verdict": "watch",
+ "reasons": [
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "idle: a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: dashboard sweep best 4.25 (score 98.45) sits 13.21 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 21.46 vs bench 17.46 (+4.00; row held_out_gap)",
+   "held_gap": 21.46,
+   "v_gap": 17.46,
+   "drop": 4.0,
+   "source": "row held_out_gap"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 4.15 -> verified 17.46 (+13.31)",
+   "fast": 4.15,
+   "verified": 17.46,
+   "drop": 13.31
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump proxtrack-relay-knuckle-4r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 17.46": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.0 deg (v_min_th; 3 readings)",
+   "min_margin": 5.0,
+   "where": "v_min_th"
+  },
+  {
+   "check": "idle",
+   "level": "watch",
+   "reason": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 52.5 vs row 52.5",
+   "recomputed": 52.5,
+   "row": 52.5
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "dashboard sweep best 4.25 (score 98.45) sits 13.21 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/held_stackfix.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/price_flange.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/price_base.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/price_R.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_held.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/coil.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/price_stackfix.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_flood.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_bench.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_bumpcheck.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/stack.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_edges.json"
+ ],
+ "git": "3e53887",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T21:08:50Z"
+}

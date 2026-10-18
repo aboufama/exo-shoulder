@@ -1,0 +1,471 @@
+{
+ "id": "underpass-bridge-relay-4r",
+ "note": "derived from the verifier's corrected-bridge dumps + its X1 lost set; no model run",
+ "bench": {
+  "lost": [
+   345,
+   396,
+   446
+  ],
+  "recomputed_gap": 20.6,
+  "verifier_gap": 20.6,
+  "model_rule": {
+   "gap": {
+    "gap": 19.74,
+    "reach": 0.7972,
+    "follow": 1.0,
+    "inband14": 0.8347,
+    "contact": 0.0293,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 287,
+    "contact_poses": 12
+   },
+   "near1": 24.44,
+   "near2": 53.77,
+   "near2_scored_only": 45.68,
+   "overhead": [
+    8,
+    28
+   ],
+   "raised": [
+    64,
+    113
+   ],
+   "taken": 397,
+   "lt1": 9,
+   "lt2": 59,
+   "lt3": 141,
+   "lt2_scored_only": 49,
+   "contacts": 12,
+   "depth_sum_mm": 43.23,
+   "deepest": [
+    {
+     "i": 262,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      135.0,
+      0.0
+     ],
+     "mm": -9.787
+    },
+    {
+     "i": 237,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -8.928
+    },
+    {
+     "i": 206,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      120.0,
+      -15.0
+     ],
+     "mm": -6.071
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -5.797
+    }
+   ],
+   "deeper3": 5
+  },
+  "x1": {
+   "gap": {
+    "gap": 20.6,
+    "reach": 0.7889,
+    "follow": 1.0,
+    "inband14": 0.8347,
+    "contact": 0.0296,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 284,
+    "contact_poses": 12
+   },
+   "near1": 24.79,
+   "near2": 53.16,
+   "near2_scored_only": 45.05,
+   "overhead": [
+    7,
+    28
+   ],
+   "raised": [
+    61,
+    113
+   ],
+   "taken": 394,
+   "lt1": 8,
+   "lt2": 56,
+   "lt3": 138,
+   "lt2_scored_only": 46,
+   "contacts": 12,
+   "depth_sum_mm": 43.23,
+   "deepest": [
+    {
+     "i": 262,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      135.0,
+      0.0
+     ],
+     "mm": -9.787
+    },
+    {
+     "i": 237,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -8.928
+    },
+    {
+     "i": 206,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      120.0,
+      -15.0
+     ],
+     "mm": -6.071
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -5.797
+    }
+   ],
+   "deeper3": 5
+  }
+ },
+ "held": {
+  "lost": [
+   815,
+   887,
+   888,
+   898,
+   969,
+   1092,
+   1099,
+   1152
+  ],
+  "recomputed_gap": 24.33,
+  "verifier_gap": 24.33,
+  "model_rule": {
+   "gap": {
+    "gap": 23.45,
+    "reach": 0.7773,
+    "follow": 1.0,
+    "inband14": 0.8318,
+    "contact": 0.0437,
+    "n_ws": 952,
+    "n_clip": 202,
+    "ws_taken": 740,
+    "contact_poses": 43
+   },
+   "near1": 29.44,
+   "near2": 55.86,
+   "near2_scored_only": 49.67,
+   "overhead": [
+    19,
+    71
+   ],
+   "raised": [
+    168,
+    300
+   ],
+   "taken": 942,
+   "lt1": 29,
+   "lt2": 138,
+   "lt3": 300,
+   "lt2_scored_only": 122,
+   "contacts": 43,
+   "depth_sum_mm": 173.02,
+   "deepest": [
+    {
+     "i": 532,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      135.0,
+      -15.0
+     ],
+     "mm": -12.235
+    },
+    {
+     "i": 531,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      135.0,
+      -30.0
+     ],
+     "mm": -11.842
+    },
+    {
+     "i": 1121,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      45.0,
+      -120.0
+     ],
+     "mm": -11.133
+    },
+    {
+     "i": 1127,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      60.0,
+      -105.0
+     ],
+     "mm": -9.944
+    }
+   ],
+   "deeper3": 21
+  },
+  "x1": {
+   "gap": {
+    "gap": 24.33,
+    "reach": 0.7689,
+    "follow": 1.0,
+    "inband14": 0.8318,
+    "contact": 0.044,
+    "n_ws": 952,
+    "n_clip": 202,
+    "ws_taken": 732,
+    "contact_poses": 43
+   },
+   "near1": 29.3,
+   "near2": 55.19,
+   "near2_scored_only": 48.99,
+   "overhead": [
+    17,
+    71
+   ],
+   "raised": [
+    160,
+    300
+   ],
+   "taken": 934,
+   "lt1": 24,
+   "lt2": 130,
+   "lt3": 292,
+   "lt2_scored_only": 114,
+   "contacts": 43,
+   "depth_sum_mm": 173.02,
+   "deepest": [
+    {
+     "i": 532,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      135.0,
+      -15.0
+     ],
+     "mm": -12.235
+    },
+    {
+     "i": 531,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      135.0,
+      -30.0
+     ],
+     "mm": -11.842
+    },
+    {
+     "i": 1121,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      45.0,
+      -120.0
+     ],
+     "mm": -11.133
+    },
+    {
+     "i": 1127,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      60.0,
+      -105.0
+     ],
+     "mm": -9.944
+    }
+   ],
+   "deeper3": 21
+  }
+ },
+ "lead_bench": {
+  "gap": {
+   "gap": 18.29,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9012,
+   "contact": 0.0106,
+   "n_ws": 360,
+   "n_clip": 110,
+   "ws_taken": 262,
+   "contact_poses": 4
+  },
+  "near1": 19.92,
+  "near2": 34.84,
+  "near2_scored_only": 30.79,
+  "overhead": [
+   8,
+   28
+  ],
+  "raised": [
+   47,
+   113
+  ],
+  "taken": 372,
+  "lt1": 3,
+  "lt2": 33,
+  "lt3": 105,
+  "lt2_scored_only": 23,
+  "contacts": 4,
+  "depth_sum_mm": 20.24,
+  "deepest": [
+   {
+    "i": 237,
+    "kind": "ws",
+    "pose": [
+     15.0,
+     165.0,
+     -60.0
+    ],
+    "mm": -8.928
+   },
+   {
+    "i": 264,
+    "kind": "ws",
+    "pose": [
+     30.0,
+     165.0,
+     -60.0
+    ],
+    "mm": -5.797
+   },
+   {
+    "i": 205,
+    "kind": "ws",
+    "pose": [
+     0.0,
+     105.0,
+     15.0
+    ],
+    "mm": -4.28
+   },
+   {
+    "i": 316,
+    "kind": "ws",
+    "pose": [
+     60.0,
+     150.0,
+     -105.0
+    ],
+    "mm": -1.235
+   }
+  ],
+  "deeper3": 3
+ },
+ "lead_held": {
+  "gap": {
+   "gap": 22.38,
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.9,
+   "contact": 0.016,
+   "n_ws": 952,
+   "n_clip": 202,
+   "ws_taken": 659,
+   "contact_poses": 14
+  },
+  "near1": 25.23,
+  "near2": 37.11,
+  "near2_scored_only": 34.88,
+  "overhead": [
+   18,
+   71
+  ],
+  "raised": [
+   123,
+   300
+  ],
+  "taken": 861,
+  "lt1": 13,
+  "lt2": 71,
+  "lt3": 217,
+  "lt2_scored_only": 57,
+  "contacts": 14,
+  "depth_sum_mm": 60.97,
+  "deepest": [
+   {
+    "i": 683,
+    "kind": "ws",
+    "pose": [
+     45.0,
+     165.0,
+     -30.0
+    ],
+    "mm": -9.864
+   },
+   {
+    "i": 610,
+    "kind": "ws",
+    "pose": [
+     30.0,
+     165.0,
+     -45.0
+    ],
+    "mm": -9.133
+   },
+   {
+    "i": 534,
+    "kind": "ws",
+    "pose": [
+     15.0,
+     150.0,
+     -60.0
+    ],
+    "mm": -7.082
+   },
+   {
+    "i": 755,
+    "kind": "ws",
+    "pose": [
+     60.0,
+     165.0,
+     -30.0
+    ],
+    "mm": -6.923
+   }
+  ],
+  "deeper3": 9
+ }
+}
