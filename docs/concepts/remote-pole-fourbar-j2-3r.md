@@ -186,3 +186,50 @@ Files: model docs/concepts/models/remote-pole-fourbar-j2-3r.py (`check` / `jac` 
 docs/concepts/sweeps/remote-pole-fourbar-j2-3r.json; row docs/concepts/rows/remote-pole-fourbar-j2-3r.json; preview
 docs/concepts/viz/concepts/remote-pole-fourbar-j2-3r.js (best config). Scratch scripts (not in the repo): binder
 minimax bopt.py, full-pose minimax fbopt.py, kit search rs.py, kit side experiments asym.py / fixpt.py / k6why.py.
+
+## Audit (2026-10-18, death upheld)
+
+An auditor tried to refute the death on the same bench and kit: Bench(60,160) fast, with the K2 dense, K3 march and K6
+checks and the audit on. Refuting it would need a corrected gap of 78.93 or lower, i.e. within 10 of the champion's
+68.93. **Not refuted.**
+
+- **Reproduction.** `check` on the k298 config gives 90.11 again (reach 0.7688, follow 0.8833, ib14 0.1968, ib10
+  0.1046, contact 0, honest, residual 0.0003 deg, W 91.0, min th margin 6.909). The 1 mm near-touch gap is also 90.11.
+- **Convergence gate, recomputed from the sweep.** 389 tries, 245 of them honest. Gain over the second half 0.08 score
+  points, over the last third 0.08. Top 5 distinct configs 90.11 / 90.32 / 90.59 / 92.28 / 97.57, a spread of 2.71.
+  The gate passes. The best was first found at k46 (90.59, coarse) and CMA moved it by only 0.48 after that.
+- **Model read.** I found no bug in the closure, the fold window, the conventions or the honesty checks. Closure
+  carries the coupler's J3 point onto the arm's J3 axis through the J1 turn phi. The window is the longest monotone th
+  run with both transmissions in [30, 150], minus 5 deg at each end. All six pins are O20 stacks. Layering lifts the
+  cranks over hubJ1, link 1 over the cranks and coupler pins, and the coupler over the rest. The control (the plain
+  cap-pole 3R through the same kit, 63.18) shows the kit is not harsher than the baseline. The parameter boxes contain
+  both cells the screen found (spread and J1-cluster).
+- **Where the pins are bound** (per pose, worst disc sample, K3 march, 193 fit poses). Each moving pin takes its level
+  from a 2-3 % tail of poses:
+
+  | pin | p50 | p90 | max | poses that set it |
+  |---|---|---|---|---|
+  | A1 | 61 | 91 | 141 mm | the Raise-overhead clip frames 3-6 (136-141 mm) |
+  | A0 | 51 | 76 | 100 mm | ws pose 93 |
+  | B0 | 47 | 62 | 109 mm | ws poses 104 / 116 / 128 |
+  | B1 | 61 | 71 | 89 mm | |
+  | J1 | | | 50-55 mm, flat | |
+  | J3 | | | 52-71 mm, flat | |
+
+  So A1 is bound overhead, the regime the user cares about most, and A0 and B0 are bound at different workspace poses.
+- **The two levers that drop a tail, both missing from the screen and both measured here.**
+
+  | lever | values tried | gap | why |
+  |---|---|---|---|
+  | underside quantile q | 0.99 / 0.98 / 0.97 / 0.96 / 0.95 / 0.93 | 101.7 / 138.3 / 152.7 / 110.59 / 123.4 / 154.29 | ib14 rises from 0.197 to 0.369, but the lowered layers collide in K6 (collide 0.088 to 0.24-0.45) and contact reaches 0.157 |
+  | extra stop margin on the th window | hi 5 / 10 / 20; lo 5 / 10 / 20 | 94.49 / 103.77 / 123.36; 90.11 / 114.28 / 114.22 (lo 20 + hi 20: 147.13) | ib14 stays 0.197-0.227 and reach falls |
+
+  The stops were added to the model as optional `stop_lo` / `stop_hi` (deg of th, default 0, default numbers unchanged).
+
+**Measured reason the death stands:** six O20 pins each take their level from a different 2-3 % pose tail (A1 at
+136-141 mm on the overhead raise against a median of 61). Neither lever that removes a tail helps. A lower underside
+quantile breaks the K6 layering and adds contact. A tighter th stop costs reach without lifting in-band (0.197 to
+0.227). The best stays 90.11, 21 over the champion's 68.93 and 27 over the plain cap-pole 3R through the same kit
+(63.18).
+
+Scratch scripts (not in the repo): scan.py (q and stop grids) and drv.py (per-pose pin drivers).

@@ -14,11 +14,11 @@
  "inband10": 0.1046,
  "contact": 0.0,
  "gap": 90.11,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7688,
+ "v_follow": 0.8833,
+ "v_inband14": 0.1968,
+ "v_inband10": 0.1046,
+ "v_gap": 90.11,
  "n_configs": 389,
  "verdict": "DEAD at gate 0: best honest 90.11 fast Bench(60,160) (score 67.23) vs the plain cap-pole O20 3R 63.18 through the same kit and the 17.5 bar; converged (389 kit tries, gate 0.08 / 0.08 / 2.71). The four-bar's kinematic window is wider (286/360 on Bench(110,360) ws, overhead 16/28) but its six O20 stacks sit 86-130 mm out: A1 / crank A / the coupler meet the J2 zone at the binder poses (A1 113 mm at (30,150,-60)). Step 0 (4 binder poses) passes as a minimax (67 mm, W 101.8) but the binder moves (B1 p50 94 mm); a full-pose minimax finds a J1-cluster cell (<= 76 mm on centre rays) that dies on stacking (kit 274.37, 133.04 with a fixed-point over-lift).",
  "note": "Round 102 lens 1 (virtual J2), open near-isogram cell at the cap pole (J1 bvec(43.15,59.93), J3 wdir(92.03,-9.03)), six O20 pins. Row = best HONEST config (sweep k298, iso {\"th0\": 101.107, \"dA0\": 36.279, \"pA0\": 96.125, \"dA1\": 61.148, \"pA1\": 31.223, \"g\": 32.812, \"gam\": 28.934, \"eps\": -7.652, \"tw\": 11.424}): W 91.0 th [19.0, 110.0], min th margin 6.909, min transmission 41.1, pin sep 27.0, collide 0.0881, residual 0.00031 deg, mass 250.2 g; near-touch (1 mm) gap 90.11, min metal 2.0004992408015534 mm; overhead (elev >= 140, Bench(60,160) ws) 4/12. Fitted levels (mm): {\"hubJ1\": 55.0, \"hubA0\": 90.0, \"hubB0\": 100.0, \"hubA1\": 127.0, \"hubB1\": 86.0, \"hubJ3\": 70.0, \"crankA\": 127.0, \"crankB\": 100.0, \"link1\": 104.0, \"coupler\": 130.2, \"neck\": 101.0}. Per member in band: {\"hubJ1\": 1.0, \"hubA0\": 0.0, \"hubB0\": 0.0, \"hubA1\": 0.0, \"hubB1\": 0.0098, \"hubJ3\": 0.6601, \"crankA\": 0.0, \"crankB\": 0.183, \"link1\": 0.0, \"coupler\": 0.0503, \"neck\": 0.7363}. CONTROL plain cap-pole O20 3R same kit + bench: 63.18 (cruciate-knuckle-3r's control). Convergence gate (389 kit tries, 245 honest; incl. non-assembling layouts at 275): gain 2nd half 0.08 score pts, last third 0.08, top-5 spread 2.71 -> passes. Red team: ten ~1-2 deg perturbations of the 90.59 config score 90.32-273.75 (narrow spike); lens 1 proxy 33.67-35.72 -> kit 170-275 for the same seeds; rotation Jacobian sigma ratio >= 0.111 inside the window (0.005 at the run ends behind the 5-deg stops). Kit note: the kit's over-lift is a single pass before the climb limit, not a fixed point (reproducer and side experiment in the .md).",
@@ -51,6 +51,50 @@
   "collide": true,
   "q": 1.0
  },
- "audit": [],
- "hubless": []
+ "audit": {
+  "t": "2026-10-18T00:01:41Z",
+  "refuted": false,
+  "bench": "Bench(60,160) fast, kit checks (K2 dense, K3 march, K6, audit), same as the screen",
+  "reproduced": 90.11,
+  "champion_same_bench": 68.93,
+  "refute_bar": 78.93,
+  "gate": {
+   "n": 389,
+   "honest": 245,
+   "gain_2nd_half": 0.08,
+   "gain_last_third": 0.08,
+   "top5": [
+    90.11,
+    90.32,
+    90.59,
+    92.28,
+    97.57
+   ],
+   "spread": 2.71,
+   "passes": true
+  },
+  "levers": {
+   "q": {
+    "1.0": 90.11,
+    "0.99": 101.7,
+    "0.98": 138.3,
+    "0.97": 152.7,
+    "0.96": 110.59,
+    "0.95": 123.4,
+    "0.93": 154.29
+   },
+   "th_stops_extra_deg": {
+    "hi5": 94.49,
+    "hi10": 103.77,
+    "hi20": 123.36,
+    "lo5": 90.11,
+    "lo10": 114.28,
+    "lo20": 114.22,
+    "lo20_hi20": 147.13
+   }
+  },
+  "reason": "Each moving O20 pin's level is set by a 2-3 % pose tail (A1 136-141 mm on the Raise-overhead clip frames vs median 61; A0 100 at one ws pose vs 51; B0 99-109 vs 47); the two levers that drop a tail - underside quantile q < 1 and extra th stops - were measured and both lose (q: ib14 up to 0.369 but K6 collide 0.24-0.45 and contact up to 0.157, gap 101.7-154.3; stops: ib14 0.197-0.227, reach down, gap 94.5-147.1)."
+ },
+ "hubless": [],
+ "v_contact": 0.0
 }

@@ -104,8 +104,9 @@ def build(B, F, p):
     w = mv(F.RHG, np.broadcast_to(K.wdir(p["wd"], p["wa"]), (P, 3)))           # J3 axis (thorax), fixed in the humerus
     ws = mv(ST, w); j = cv["j"]
     rho = ang(np.broadcast_to(j, (P, 3)), ws)                                  # the arm's J1-J3 angle (th)
-    if cv["valid"]:
-        ok = (rho >= cv["lo"]) & (rho <= cv["hi"])
+    slo, shi = float(p.get("stop_lo", 0.0)), float(p.get("stop_hi", 0.0))   # audit: extra stop margin (deg of th) at
+    if cv["valid"]:                                                            # each end, a design variable (default 0)
+        ok = (rho >= cv["lo"] + slo) & (rho <= cv["hi"] - shi)
         theta = np.interp(rho, cv["g"], cv["th"]); marg = np.minimum(rho - (cv["lo"] - K.FOLD_MARGIN), (cv["hi"] + K.FOLD_MARGIN) - rho)
     else:
         ok = np.zeros(P, bool); theta = np.zeros(P); marg = np.zeros(P)
@@ -141,7 +142,7 @@ def build(B, F, p):
         K.neck_member(F, J3, joints=("J3",), ramps=(("hubJ3", 0.0), (None, 0)))]
     okr = ok & (res < 0.5)
     info = dict(residual_deg=round(float(res[okr].max()), 5) if okr.any() else None, pin_sep_deg=round(cv["sep"], 1),
-                th_window=[round(cv["lo"], 1), round(cv["hi"], 1)] if "lo" in cv else None,
+                th_window=[round(cv["lo"] + slo, 1), round(cv["hi"] - shi, 1)] if "lo" in cv else None,
                 W=round(cv.get("W", 0.0), 1), min_th_margin=round(float(marg[okr].min()), 3) if okr.any() else None,
                 min_transmission=round(float(mg[okr].min()), 1) if okr.any() else None)
     return K.Chain(members=mem, ok=okr, q=q, joints=joints, info=info)
