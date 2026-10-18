@@ -1,0 +1,277 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-18T19:53:11Z",
+  "params": {
+   "rho": 1.1,
+   "bk1": 34.0,
+   "bk2": 30.0,
+   "cell": "ghost",
+   "bench": "bench exact frozen"
+  },
+  "inband14": 0.9054,
+  "inband10": 0.5883,
+  "reach": 0.725,
+  "follow": 1.0,
+  "contact": 0.0133,
+  "gap": 18.83,
+  "fit_fast": {
+   "gap": 13.12,
+   "reach": 0.7688,
+   "follow": 1.0,
+   "inband14": 0.9049,
+   "inband10": 0.5847,
+   "contact": 0.0,
+   "near1": 13.12,
+   "near2": 29.6
+  },
+  "ws_taken": 261,
+  "near2": 40.34,
+  "min_metal": 0.38,
+  "dK_taken_max": 44.14,
+  "kdyad_margin_min": 9.736,
+  "contact_poses": [
+   [
+    139,
+    -0.49
+   ],
+   [
+    205,
+    -4.21
+   ],
+   [
+    237,
+    -0.32
+   ],
+   [
+    264,
+    -0.12
+   ],
+   [
+    316,
+    -1.21
+   ]
+  ]
+ },
+ {
+  "k": 1,
+  "t": "2026-10-18T19:56:43Z",
+  "params": {
+   "rho": 1.1,
+   "bk1": 34.0,
+   "bk2": 30.0,
+   "cell": "ghost",
+   "bench": "envsel exact frozen"
+  },
+  "inband14": 0.9054,
+  "inband10": 0.5883,
+  "reach": 0.6833,
+  "follow": 1.0,
+  "contact": 0.022,
+  "gap": 23.87,
+  "fit_fast": {
+   "gap": 13.12,
+   "reach": 0.7688,
+   "follow": 1.0,
+   "inband14": 0.9049,
+   "inband10": 0.5847,
+   "contact": 0.0,
+   "near1": 13.12,
+   "near2": 29.6
+  },
+  "ws_taken": 246,
+  "near2": 51.23,
+  "min_metal": 0.03,
+  "dK_taken_max": 43.78,
+  "kdyad_margin_min": 9.847,
+  "contact_poses": [
+   [
+    227,
+    -3.05
+   ],
+   [
+    264,
+    -1.55
+   ],
+   [
+    365,
+    -1.25
+   ],
+   [
+    451,
+    -0.06
+   ],
+   [
+    452,
+    -1.06
+   ],
+   [
+    454,
+    -2.92
+   ],
+   [
+    460,
+    -1.66
+   ],
+   [
+    464,
+    -0.11
+   ]
+  ]
+ },
+ {
+  "k": 2,
+  "t": "2026-10-18T19:56:16Z",
+  "params": {
+   "rho": 1.1,
+   "DKCAP": 29.7,
+   "bk1": 34.0,
+   "bk2": 30.0,
+   "cell": "ghost",
+   "bench": "bench exact frozen"
+  },
+  "inband14": 0.909,
+  "inband10": 0.5844,
+  "reach": 0.6139,
+  "follow": 0.9273,
+  "contact": 0.0092,
+  "gap": 31.8,
+  "fit_fast": {
+   "gap": 27.29,
+   "reach": 0.6438,
+   "follow": 0.9333,
+   "inband14": 0.9057,
+   "inband10": 0.5764,
+   "contact": 0.0,
+   "near1": 27.29,
+   "near2": 47.34
+  },
+  "ws_taken": 221,
+  "near2": 55.11,
+  "min_metal": 0.38,
+  "dK_taken_max": 29.27,
+  "kdyad_margin_min": 14.657,
+  "contact_poses": [
+   [
+    205,
+    -4.21
+   ],
+   [
+    237,
+    -0.32
+   ],
+   [
+    264,
+    -0.12
+   ]
+  ]
+ },
+ {
+  "k": 3,
+  "t": "2026-10-18T20:03:15Z",
+  "params": {
+   "rho": 2.1534,
+   "bk1": 34.0,
+   "bk2": 30.0,
+   "cell": "ghost",
+   "bench": "bench exact frozen"
+  },
+  "inband14": 0.9174,
+  "inband10": 0.5957,
+  "reach": 0.725,
+  "follow": 1.0,
+  "contact": 0.0133,
+  "gap": 18.83,
+  "fit_fast": {
+   "gap": 13.12,
+   "reach": 0.7688,
+   "follow": 1.0,
+   "inband14": 0.917,
+   "inband10": 0.5932,
+   "contact": 0.0,
+   "near1": 14.3,
+   "near2": 35.19
+  },
+  "ws_taken": 261,
+  "near2": 45.24,
+  "min_metal": 0.3,
+  "dK_taken_max": 44.14,
+  "kdyad_margin_min": 9.736,
+  "contact_poses": [
+   [
+    139,
+    -0.14
+   ],
+   [
+    205,
+    -4.26
+   ],
+   [
+    237,
+    -0.25
+   ],
+   [
+    264,
+    -0.13
+   ],
+   [
+    316,
+    -1.23
+   ]
+  ]
+ },
+ {
+  "k": 4,
+  "t": "2026-10-18T20:03:15Z",
+  "params": {
+   "rho": 2.5,
+   "bk1": 34.0,
+   "bk2": 30.0,
+   "cell": "ghost",
+   "bench": "bench exact frozen"
+  },
+  "inband14": 0.9162,
+  "inband10": 0.5944,
+  "reach": 0.725,
+  "follow": 1.0,
+  "contact": 0.0133,
+  "gap": 18.83,
+  "fit_fast": {
+   "gap": 12.5,
+   "reach": 0.775,
+   "follow": 1.0,
+   "inband14": 0.9159,
+   "inband10": 0.592,
+   "contact": 0.0,
+   "near1": 13.66,
+   "near2": 34.53
+  },
+  "ws_taken": 261,
+  "near2": 45.24,
+  "min_metal": 0.29,
+  "dK_taken_max": 44.14,
+  "kdyad_margin_min": 9.736,
+  "contact_poses": [
+   [
+    139,
+    -0.04
+   ],
+   [
+    205,
+    -4.27
+   ],
+   [
+    237,
+    -0.23
+   ],
+   [
+    264,
+    -0.13
+   ],
+   [
+    316,
+    -1.23
+   ]
+  ]
+ }
+]
