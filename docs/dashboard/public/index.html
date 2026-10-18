@@ -158,32 +158,32 @@ window.dash = (() => {
 
 <div class="sx">
   <header id="top">
-    <h1>Shoulder exo: who is winning</h1>
+    <h1>Shoulder exo design search</h1>
     <p class="muted" id="tz-note">All times are US Eastern.</p>
     <p class="lede" id="lede" data-source="leader">—</p>
     <div class="kpis">
-      <div class="kpi lead" id="kpi-best"><span class="lab">Best 3-joint design so far</span><span class="big" data-source="leader" data-field="score">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span><span id="kpi-best-cx" class="muted" data-source="leader" data-field="complexity"></span></div>
-      <div class="kpi"><span class="lab">Goal</span><span class="big">100</span><span class="muted">every target met</span></div>
+      <div class="kpi lead" id="kpi-best"><span class="lab">Best verified 3-joint design</span><span class="big" data-source="leader" data-field="score">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span><span id="kpi-best-cx" class="muted" data-source="leader" data-field="complexity"></span></div>
+      <div class="kpi"><span class="lab">Goal score</span><span class="big">100</span><span class="muted">every target met</span></div>
     </div>
-    <p class="muted" style="margin-top:12px">Score: higher is better, 100 = every target met, 0 = nothing works. It is the share of three targets a design meets - metal 2-14 mm from the skin (target 90 % of the metal), following the arm (95 % of motion frames), reaching everyday poses (90 %) - minus a penalty for any pose where metal would touch the skin.</p>
+    <p class="muted" style="margin-top:12px">Score, 0-100 (higher is better): how close a design comes to three targets at once - metal 2-14 mm from the skin (90 % of the metal), following the arm (95 % of motion frames) and reaching everyday arm poses (90 %) - minus a penalty wherever metal would touch the skin.</p>
   </header>
 
   <section class="card" id="camps">
-    <h2>Two ways to fail</h2>
-    <p class="muted">Each dot is a design. Right = moves with the arm everywhere; up = stays close to the skin. A winner sits in the green corner. Most designs do one or the other.</p>
+    <h2>Close to the skin vs moving with the arm</h2>
+    <p class="muted">Each dot is a design: further right moves with the arm in more poses, higher keeps more metal 2-14 mm from the skin. The goal is the green top-right corner; most designs manage only one of the two.</p>
     <div class="chart" id="scatter" data-source="board"></div>
   </section>
 
   <section class="card" id="simp-sec">
     <h2>Score vs simplicity</h2>
-    <p class="muted">Each dot is a design whose parts have been counted. Right = higher score; down = simpler. The simplicity number is points: 0 = the simplest buildable chain (three hinges, three links), and every extra freedom, slider, sensor, loop or part adds points. The goal is the bottom-right corner: once scores reach 95, the simpler design wins. The number is shown beside the score and never changes it.</p>
+    <p class="muted">Each dot is a design whose parts have been counted: further right scores higher, lower is simpler. Simplicity points start at 0 for the plainest buildable chain (three hinges, three links) and grow with every extra joint, slider, spring, loop or part. The goal is the bottom-right corner: at a score of 95 or more, the simpler design wins. Simplicity never changes the score.</p>
     <div class="chart" id="simp" data-source="board" style="min-height:300px"></div>
     <p class="muted" id="simp-note" data-source="board"></p>
   </section>
 
   <section class="card" id="board-sec">
-    <h2>Leaderboard</h2>
-    <p class="muted">Every design that has a measured number. Ranked by the independently verified number (frozen shape, exact bench); a score marked "self-measured" is the design's own frozen claim, and one marked "fast search" is an unverified quick-bench number that typically drops 5-14 points when verified - those rank below every verified design. Dead and refuted designs rank below the live ones: their number is often a best-case bound measured without the hardware the design would need. A design with 4 joints is marked as such and is not ranked for the lead (the 3-joint designs are the real leaders). "Flagged" means the alignment auditor found the score gain is a measurement artefact rather than a better exo (for example metal moved into the 1-2 mm shell next to the skin); it does not count as verified until resolved. Motion: each design through the same arm loop, at one scale. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side. Simplicity: points for every freedom, slider, sensor, loop and part beyond the simplest buildable chain (three hinges, three links = 0), lower = simpler; hover a number for where its points come from. It is not part of the score.</p>
+    <h2>Leaderboard: every scored design</h2>
+    <p class="muted">Best score first. Independently verified and self-measured scores rank together; dead ends follow (their number is often a best case without the hardware they would need), then "fast search" scores, which usually drop 5-14 points once checked. 4-joint designs are listed but cannot take the lead. "Checking" = being re-measured; "Flagged" = the auditor found a measurement artefact, not a better exo; "Stopped early" = dropped while its search was still improving. In the names, a knuckle is an extra hinge that folds a link and a "drive" is the cam, rod or groove that turns it from the middle hinge; a cuff knee is two pins at the arm cuff; a relay is a spring-loaded 4th joint. Tap a motion preview to enlarge it; hover a simplicity number for its breakdown.</p>
     <div class="scroll"><table id="board" data-source="board" data-row-key="id">
       <thead><tr><th class="mo" data-source="motion" data-field="mech">Motion</th><th data-field="short">Design</th><th class="num" data-field="score">Score</th><th class="num cx" data-field="complexity">Simplicity<span class="cap">lower = simpler</span></th><th data-field="close" class="cl">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
       <tbody></tbody>
@@ -191,36 +191,37 @@ window.dash = (() => {
   </section>
 
   <section class="card" id="progress">
-    <h2>Best quick-search score over time</h2>
-    <p class="muted">The best score any configuration reached in the agents' fast searches (higher is better). These are unverified: the frozen, independently checked number is typically 5-14 points lower, so this line is not the leaderboard.</p>
+    <h2>Best fast-search score over time</h2>
+    <p class="muted">The best score any configuration has reached in the agents' quick searches (higher is better). Unverified: a checked score is usually 5-14 points lower, so this line is not the leaderboard.</p>
     <div class="chart" id="record" data-source="sweeps morphs" style="min-height:260px"></div>
   </section>
 
   <section class="card" id="now">
-    <h2>What just happened</h2>
+    <h2>Latest results</h2>
+    <p class="muted">The seven newest entries in the project log, newest first.</p>
     <ul class="events" id="events" data-source="events"></ul>
   </section>
 
   <section class="card" id="built">
-    <h2>The built prototype design vs the 19 requirements</h2>
+    <h2>Requirements met by the best built design</h2>
     <p class="muted" id="reqline" data-source="reqsum">—</p>
     <div class="chips" id="chips" data-source="reqs"></div>
   </section>
   <section class="detail-head" id="details">
-    <h2>Details: every data point</h2>
-    <p class="muted">Everything the agents have measured, over time. Hover any dot for what it is.</p>
+    <h2>Details: every measurement over time</h2>
+    <p class="muted">Hover any dot for what it is.</p>
   </section>
 
   <section class="card" id="all-configs">
-    <h2>Every configuration tried</h2>
-    <p class="muted">Each dot is one parameter setting of one design, scored when it finished (higher is better). Colours are the leading designs; grey dots are the rest; the line is the best so far.</p>
+    <h2>Every configuration tested</h2>
+    <p class="muted">Each dot is one parameter setting of a design, scored when its agent tested it (higher is better). Coloured: the top eight designs on the leaderboard; grey: the rest; line: the best score so far.</p>
     <div class="legend" id="cfg-legend" data-source="sweeps"></div>
     <div class="chart" id="cfg-chart" data-source="sweeps" style="min-height:340px"></div>
   </section>
 
   <section class="card" id="targets">
-    <h2>Each target over time</h2>
-    <p class="muted">The three things the score is made of. Faint dots: every configuration; line: the best any configuration has reached so far; dashed: the target. A design must hit all three at once to win.</p>
+    <h2>The three score targets over time</h2>
+    <p class="muted">Faint dots: every configuration tested; line: the best reached so far; dashed: the target. A winning design must hit all three at once.</p>
     <div class="grid3">
       <div><h3 class="muted">Metal 2-14 mm from the skin (target 90 %)</h3><div class="chart" id="t-close" data-source="sweeps" style="min-height:220px"></div></div>
       <div><h3 class="muted">Follows the arm (target 95 %)</h3><div class="chart" id="t-follow" data-source="sweeps" style="min-height:220px"></div></div>
@@ -229,12 +230,12 @@ window.dash = (() => {
   </section>
 
   <section class="card" id="built-time">
-    <h2>Built prototype designs over time</h2>
-    <p class="muted">Full CAD designs scored by the outside judges, by the time they were judged. Dots: 3-joint designs (filled) and 4-joint designs (hollow); grey: judged under older rules; dashed: the requirement.</p>
+    <h2>Built CAD designs, as judged over time</h2>
+    <p class="muted">Each dot is a CAD build scored by the outside judges, at the time it was judged. Filled: 3 joints; hollow: 4 joints; grey: judged under older rules; dashed: the pass line.</p>
     <div class="grid3">
-      <div><h3 class="muted">R1: skin 2-14 mm from the metal (pass 90 %)</h3><div class="chart" id="c-R1" data-source="cad" style="min-height:220px"></div></div>
+      <div><h3 class="muted">R1: metal 2-14 mm from the skin (pass 90 %)</h3><div class="chart" id="c-R1" data-source="cad" style="min-height:220px"></div></div>
       <div><h3 class="muted">R3: follows the arm (pass 95 %)</h3><div class="chart" id="c-R3" data-source="cad" style="min-height:220px"></div></div>
-      <div><h3 class="muted">R16: everyday workspace reached (pass 90 %)</h3><div class="chart" id="c-R16" data-source="cad" style="min-height:220px"></div></div>
+      <div><h3 class="muted">R16: everyday arm poses reached (pass 90 %)</h3><div class="chart" id="c-R16" data-source="cad" style="min-height:220px"></div></div>
     </div>
   </section>
 </div>
@@ -248,8 +249,13 @@ window.etZone = () => (new Intl.DateTimeFormat('en-US', { timeZone: 'America/New
 </script>
 <script>
 const live = (m) => !m.is_baseline && !['dead', 'refuted', 'duplicate'].includes(m.status);
+// a design's display name: the build's short_name (tools/dash_names.json); a dataset without it gets the id's words
+const idName = (id) => { const w = String(id || '').split('-').filter((x) => x && !/^[345]r$/.test(x)).join(' ') || String(id || ''); return w.charAt(0).toUpperCase() + w.slice(1); };
+const designName = (m) => { let s = String(m.short_name || '').trim() || idName(m.id); if (m.active_dof > 3 && !/joints\)/.test(s)) s += ` (${m.active_dof} joints)`; return s; };
+/** a label of at most n characters, cut at a word boundary with an ellipsis (never mid-word) */
+const fit = (s, n) => { s = String(s || ''); if (s.length <= n) return s; const c = s.slice(0, n).replace(/[\s,;:+-]+\S*$/, '').replace(/[\s,;:+(-]+$/, ''); return (c || s.slice(0, n)) + '…'; };
 dash.calc('board', {
-  inputs: ['morphs', 'sweeps'], title: 'Designs with a number',
+  inputs: ['morphs', 'sweeps'], title: 'Scored designs',
   description: 'Every morphology with a measured bench number: the verified number if one exists, else the agent\'s claim, else its best sweep so far; score = 100 x (1 - gap / 275) floored at 0, best first. A dead design whose sweep had not converged (still improving when stopped) is marked Stopped early. complexity = the simplicity number from the design\'s parts count (tools/simplicity.py: points, lower = simpler, 0 = three hinges and three links), shown beside the score and never part of it; complexity_items = where its points come from; passive_trans > 2 = not buildable.',
   fn: (morphs, sweeps) => {
     const sc = (g) => Math.max(0, (1 - g / 275) * 100), by = {};
@@ -270,9 +276,14 @@ dash.calc('board', {
     const fz = !v && m.frozen_gap !== null && m.frozen_gap !== undefined, basis = v ? 'verified' : fz ? 'self' : 'fast';
     // the alignment auditor's ledger (docs/ALIGNMENT.md): 'gamed' = the gain is a measurement artefact; never shown as verified
     const state = m.is_baseline ? 'Baseline' : m.alignment === 'gamed' ? 'Flagged' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? (conv[m.id] === false ? 'Stopped early' : 'Dead end') : c ? 'Checking' : 'Sweeping';
-    const short = m.is_baseline ? "Today's 3-hinge chain" : String(m.name || m.id).split(/[:(;]| with | - /)[0].trim().slice(0, 44);
+    // the display name (tools/dash_names.json via the build's short_name; the row's long name is never cut mid-phrase); the
+    // verified configuration's code (pick1, ...) goes to the name's hover text, not into the name. Self-contained like the
+    // rest of this calc (the page's designName() is the same rule)
+    const w = String(m.id || '').split('-').filter((x) => x && !/^[345]r$/.test(x)).join(' ') || String(m.id || '');
+    let short = String(m.short_name || '').trim() || (w.charAt(0).toUpperCase() + w.slice(1));
+    if (m.active_dof > 3 && !/joints\)/.test(short)) short += ` (${m.active_dof} joints)`;
     const g = fz ? m.frozen_gap : m[p + 'gap'];
-    return { id: m.id, short: m.v_config ? `${short} (${m.v_config})` : short, basis, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline,
+    return { id: m.id, short, config: m.v_config || '', basis, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline,
       complexity: m.complexity ?? null, complexity_items: m.complexity_items || '', passive_trans: m.passive_trans ?? null, active_dof: m.active_dof ?? null, leader_ruling: m.leader_ruling || '', audited: !!m.alignment };
   // dead / refuted rows rank below live ones: their number is often a ghost bound without the design's hardware (lead 2026-10-18:
   // two dead ghosts at 16.9 / 17.2 ranked above the verified lead)
@@ -280,7 +291,7 @@ dash.calc('board', {
   }
 });
 dash.calc('leader', {
-  inputs: ['board'], title: 'Best 3-joint design so far',
+  inputs: ['board'], title: 'Best verified 3-joint design',
   description: 'The highest-scoring design whose number an independent verifier confirmed (frozen exact bench). Score = 100 x (1 - gap / 275), floored at 0. complexity = its simplicity number (lower = simpler; not part of the score).',
   fn: (board) => {
     // user 2026-10-17: a sensed joint is a joint and the goal is 3 joints, so the headline is the best verified design with <= 3 active joints
@@ -291,14 +302,14 @@ dash.calc('leader', {
     const sc = (g) => (g == null ? null : Math.max(0, Math.round((1 - g / 275) * 1000) / 10));
     const short = b.short == null ? null : ties.length ? `${b.short} (tied with ${ties.map((t) => t.short).join(', ')})` : b.short;
     // every new leader gets an alignment audit (CLAUDE.md): until its ledger entry exists the headline says so
-    const shortA = short == null ? null : (b.audited ? short : `${short} - alignment audit pending`);
-    return [{ id: b.id ?? null, short: shortA, score: sc(b.gap), state: b.state ?? null, complexity: b.complexity ?? null }];
+    const pending = short != null && !b.audited, shortA = short == null ? null : (pending ? `${short} - alignment audit pending` : short);
+    return [{ id: b.id ?? null, short: shortA, name: short, pending, score: sc(b.gap), state: b.state ?? null, complexity: b.complexity ?? null }];
   }
 });
 dash.calc('reqsum', {
   inputs: ['reqs'], title: 'Requirements passing',
   description: 'How many of the 19 requirements the best judged built design passes.',
-  fn: (reqs) => [{ pass: reqs.filter((r) => r.state === 'pass').length, total: reqs.filter((r) => r.empty !== true).length, design: (reqs.find((r) => r.design) || {}).design ?? null }]
+  fn: (reqs) => { const d = reqs.find((r) => r.design) || {}; return [{ pass: reqs.filter((r) => r.state === 'pass').length, total: reqs.filter((r) => r.empty !== true).length, design: d.design ?? null, design_name: d.design_name || d.design || null }]; }
 });
 
 const pct = d3.format('.0%'), g1 = d3.format('.1f'), cxf = d3.format('.1~f');
@@ -337,10 +348,10 @@ function drawScatter(all) {
   const lab = rows.filter((r) => r === best || r.close >= 0.7 || mv(r) >= 0.85).slice(0, 7);
   const used = [];
   lab.forEach((r) => {
-    const px = x(mv(r)), left = px > W - 190; let py = y(r.close) + 4;
+    const t = fit(r.short, W < 480 ? 26 : 40), px = x(mv(r)), left = px + 10 + t.length * 6.6 > W - m.r; let py = y(r.close) + 4;
     while (used.some((u) => Math.abs(u - py) < 14)) py += 14;
     used.push(py);
-    svg.append('text').attr('class', 'lbl').attr('x', left ? px - 10 : px + 10).attr('y', py).attr('text-anchor', left ? 'end' : 'start').text(r.short.slice(0, 26));
+    svg.append('text').attr('class', 'lbl').attr('x', left ? px - 10 : px + 10).attr('y', py).attr('text-anchor', left ? 'end' : 'start').text(t);
   });
 }
 
@@ -379,7 +390,7 @@ function drawSimple(rows) {
   // joins a label moved off its dot's line)
   const narrow = W < 480, lab = live.slice(0, narrow ? 3 : 5), placed = [], cw = 6.6;
   lab.forEach((r) => {
-    const t = r.short.slice(0, narrow ? 20 : 26).trim(), w = t.length * cw, ax = px(r), ay = y(r.complexity);
+    const t = fit(r.short, narrow ? 26 : 40), w = t.length * cw, ax = px(r), ay = y(r.complexity);
     for (const dy of [0, -14, 14, -28, 28, -42, 42, -56, 56]) for (const side of [1, -1]) {
       const x0 = side > 0 ? ax + 10 : ax - 10 - w, yb = ay + 4 + dy;
       if (x0 < m.l + 2 || x0 + w > W - m.r || yb - 11 < m.t || yb + 2 > H - m.b) continue;
@@ -495,7 +506,8 @@ function drawBoard(rows, mo) {
     const has = mo && mo.byId.has(r.id), cell = td('', 'mo');
     if (has) { const svg = moThumb(r.id, r.short, r); cell.appendChild(svg); thumbs.push(svg); }
     // a 4-joint design is marked (user 2026-10-17: the 3-joint designs are the real leaders; audit 2026-10-18 freek G6)
-    td(r.active_dof > 3 ? `${r.short} - ${r.active_dof} joints, not ranked for the lead` : r.short); td(r.basis === 'verified' || r.is_baseline ? g1(r.score) : `${g1(r.score)} ${r.basis === 'self' ? 'self-measured' : 'fast search'}`, 'num' + (r.basis === 'verified' ? '' : ' unv'));
+    const nm = td(r.active_dof > 3 ? `${r.short} - not ranked for the lead` : r.short); nm.title = r.config ? `${r.id} (verified configuration: ${r.config})` : r.id;
+    td(r.basis === 'verified' || r.is_baseline ? g1(r.score) : `${g1(r.score)} ${r.basis === 'self' ? 'self-measured' : 'fast search'}`, 'num' + (r.basis === 'verified' ? '' : ' unv'));
     const cx = td('', 'num cx');
     if (r.complexity != null) {
       const bar = document.createElement('span'), i = document.createElement('i'); bar.className = 'cxbar'; i.style.width = Math.min(1, r.complexity / cxMax) * 100 + '%'; bar.appendChild(i);
@@ -527,18 +539,23 @@ function drawRecord(sweeps) {
   svg.append('text').attr('class', 'lbl').attr('x', Math.min(x(last.t) + 8, W - 60)).attr('y', y(last.v) - 8).text(g1(last.v));
 }
 
-function drawEvents(ev) {
+function drawEvents(ev, names) {
   const ul = document.getElementById('events'); ul.replaceChildren();
+  // a design id in the log text reads as its display name (longest ids first, whole ids only)
+  const ids = names ? [...names.keys()].filter((k) => k && /^[a-z0-9_-]+$/i.test(k)).sort((a, b) => b.length - a.length) : [];
+  const re = ids.length ? new RegExp(`(^|[^A-Za-z0-9_-])(${ids.join('|')})(?![A-Za-z0-9_-])`, 'g') : null;
   ev.filter((e) => e.event).sort((a, b) => (a.time < b.time ? 1 : -1)).slice(0, 7).forEach((e) => {
     const li = document.createElement('li'); const t = document.createElement('time'); t.textContent = d3.utcFormat('%H:%M')(et(e.time));
-    const s = document.createElement('span'); const txt = String(e.event).replace(/\{[^}]*\}/g, '').replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').replace(/ at( config \S+)?$/, '').trim(); s.textContent = txt.length > 170 ? txt.slice(0, 167) + '...' : txt;
+    let txt = String(e.event).replace(/\{[^}]*\}/g, '').replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').replace(/ at( config \S+)?$/, '').replace(/ ([,:;.])/g, '$1').trim();
+    if (re) txt = txt.replace(re, (all, pre, id) => pre + names.get(id));
+    const s = document.createElement('span'); s.textContent = fit(txt, 170); s.title = String(e.event);
     li.append(t, s); ul.appendChild(li);
   });
 }
 
 function drawReqs(reqs) {
   const box = document.getElementById('chips'); box.replaceChildren();
-  reqs.filter((r) => r.req).forEach((r) => { const c = document.createElement('span'); c.className = 'chip ' + (r.state === 'pass' ? 'pass' : r.state === 'fail' ? 'fail' : 'none'); c.textContent = `${r.req} ${r.name}`.slice(0, 48); box.appendChild(c); });
+  reqs.filter((r) => r.req).forEach((r) => { const c = document.createElement('span'); c.className = 'chip ' + (r.state === 'pass' ? 'pass' : r.state === 'fail' ? 'fail' : 'none'); c.textContent = `${r.req} ${r.name}`; box.appendChild(c); });
 }
 
 
@@ -565,7 +582,7 @@ function drawConfigs(sw, names, leaders) {
   if (!pts.length) return;
   { const t0 = liveStart(pts.map((p) => p.d)); pts.splice(0, pts.findIndex((p) => p.d >= t0)); }
   const col = new Map(leaders.slice(0, 8).map((id, i) => [id, dash.colors[i % dash.colors.length]]));
-  leaders.slice(0, 8).forEach((id) => { const e = document.createElement('span'); const i = document.createElement('i'); i.style.background = col.get(id); e.append(i, names.get(id) || id); leg.appendChild(e); });
+  leaders.slice(0, 8).forEach((id) => { const e = document.createElement('span'); const i = document.createElement('i'); i.style.background = col.get(id); e.append(i, names.get(id) || idName(id)); leg.appendChild(e); });
   const W = Math.max(320, box.clientWidth), H = 340, m = { l: 40, r: 12, t: 10, b: 26 };
   const x = d3.scaleUtc(d3.extent(pts, (p) => p.d), [m.l, W - m.r]), y = d3.scaleLinear([0, 100], [H - m.b, m.t]);
   const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
@@ -573,7 +590,7 @@ function drawConfigs(sw, names, leaders) {
   const c = svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (p) => x(p.d)).attr('cy', (p) => y(p.s)).attr('r', 2.6)
     .attr('fill', (p) => (p.passed_over ? 'none' : col.get(p.id) || 'var(--cds-chart-muted, var(--color-fg-muted))'))
     .attr('stroke', (p) => (p.passed_over ? 'var(--color-fg-muted)' : 'none')).attr('fill-opacity', (p) => (col.has(p.id) ? 0.75 : 0.35));
-  hover(box, c, (p) => `${names.get(p.id) || p.id}: score ${g1(p.s)} - close to skin ${pct(p.inband14)}, follows ${pct(p.follow)}, reaches ${pct(p.reach)}${p.passed_over ? ' (superseded by its agent)' : ''}`);
+  hover(box, c, (p) => `${names.get(p.id) || idName(p.id)}: score ${g1(p.s)} - close to skin ${pct(p.inband14)}, follows ${pct(p.follow)}, reaches ${pct(p.reach)}${p.passed_over ? ' (superseded by its agent)' : ''}`);
   const rec = pts.filter((p) => p.is_record && !p.passed_over && p.record_gap != null).map((p) => ({ d: p.d, s: scoreOf(p.record_gap) }));
   if (rec.length) { rec.push({ d: pts[pts.length - 1].d, s: rec[rec.length - 1].s }); svg.append('path').attr('d', d3.line().curve(d3.curveStepAfter).x((p) => x(p.d)).y((p) => y(p.s))(rec)).attr('fill', 'none').attr('stroke', 'var(--color-fg)').attr('stroke-width', 1.5); }
 }
@@ -604,7 +621,7 @@ function drawCad(id, cad, req) {
   const c = svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (p) => x(p.d)).attr('cy', (p) => y(Math.min(1, p.value))).attr('r', 4)
     .attr('fill', (p) => (p.dof === 4 ? 'none' : cur(p) ? dash.colors[1] : 'var(--cds-chart-muted, var(--color-fg-muted))'))
     .attr('stroke', (p) => (cur(p) ? dash.colors[1] : 'var(--cds-chart-muted, var(--color-fg-muted))')).attr('stroke-width', 1.5);
-  hover(box, c, (p) => `${p.design} (${p.dof}-joint${cur(p) ? '' : ', older rules'}): ${req} ${pct(p.value)}`);
+  hover(box, c, (p) => `${p.design_name || p.design} (${p.dof} joints${cur(p) ? '' : ', older rules'}): ${req} ${pct(p.value)}`);
 }
 
 dash.onData(() => {
@@ -624,23 +641,26 @@ dash.onData(() => {
   }
   if (okd(L) && L.data[0] && L.data[0].score != null) {
     const l = L.data[0];
-    document.getElementById('lede').textContent = `${l.short} leads with a score of ${g1(l.score)} out of 100. Status: ${l.state.toLowerCase()}. No design meets every target yet.`;
+    document.getElementById('lede').textContent = `${l.name || l.short} leads with a verified score of ${g1(l.score)} out of 100${l.pending ? ' (alignment audit pending)' : ''}.${l.score < 100 ? ' No design meets every target yet.' : ''}`;
   }
-  if (okd(L) && L.data[0]) { const l = L.data[0]; document.querySelector('#kpi-best .big').textContent = l.score == null ? '—' : g1(l.score); document.getElementById('kpi-best-name').textContent = l.short ? `${l.short} (${String(l.state).toLowerCase()})` : '—'; document.getElementById('kpi-best-cx').textContent = l.complexity == null ? '' : `simplicity ${cxf(l.complexity)} points (lower = simpler)`; }
+  if (okd(L) && L.data[0]) { const l = L.data[0]; document.querySelector('#kpi-best .big').textContent = l.score == null ? '—' : g1(l.score); document.getElementById('kpi-best-name').textContent = l.short || '—'; document.getElementById('kpi-best-cx').textContent = l.complexity == null ? '' : `simplicity ${cxf(l.complexity)} points (lower = simpler)`; }
   const MOT = dash.data('motion'), mo = okd(MOT) && Array.isArray(MOT.data) ? motionPrep(MOT.data) : null;
   if (okd(B)) { const rows = B.data.filter((r) => r.empty !== true); drawScatter(rows); drawSimple(rows); drawBoard(rows, mo); }
   if (okd(S)) drawRecord(S.data.filter((r) => r.empty !== true));
-  if (okd(E)) drawEvents(E.data.filter((r) => r.empty !== true));
+  // display names by id: every concept (morphs), the board's names over them, and every built-CAD design (cad)
+  const C = dash.data('cad'), names = new Map();
+  if (okd(C)) C.data.forEach((r) => { if (r.design && r.design_name) names.set(r.design, r.design_name); });
+  if (okd(M)) M.data.forEach((m) => { if (m.id && m.empty !== true) names.set(m.id, designName(m)); });
+  if (okd(B)) B.data.forEach((r) => { if (r.id && r.short) names.set(r.id, r.short); });
+  if (okd(E)) drawEvents(E.data.filter((r) => r.empty !== true), names);
   if (okd(R)) drawReqs(R.data.filter((r) => r.empty !== true));
-  if (okd(RS) && RS.data[0]) { const q = RS.data[0]; document.getElementById('reqline').textContent = `${q.pass} of ${q.total} pass on the best judged design (${q.design}). Green = pass, red = fail, dashed = not measured yet.`; }
+  if (okd(RS) && RS.data[0]) { const q = RS.data[0]; document.getElementById('reqline').textContent = `${q.pass} of ${q.total} pass on the best judged 3-joint build: ${q.design_name || q.design}. Green = pass, red = fail, dashed = not measured yet or waiting on the user.`; }
   if (okd(S) && okd(B)) {
     const sw = S.data.filter((r) => r.empty !== true), rows = B.data.filter((r) => r.empty !== true);
-    const names = new Map(rows.map((r) => [r.id, r.short]));
     const leaders = rows.filter((r) => !r.is_baseline).map((r) => r.id);
     drawConfigs(sw, names, leaders);
     drawTarget('t-close', sw, 'inband14', 0.9); drawTarget('t-follow', sw, 'follow', 0.95); drawTarget('t-reach', sw, 'reach', 0.9);
   }
-  const C = dash.data('cad');
   if (okd(C)) { const cad = C.data.filter((r) => r.empty !== true); drawCad('c-R1', cad, 'R1'); drawCad('c-R3', cad, 'R3'); drawCad('c-R16', cad, 'R16'); }
 });
 </script>

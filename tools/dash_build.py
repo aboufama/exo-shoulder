@@ -12,12 +12,14 @@ Datasets (id: sources -> builder):
                 plus each morphology's best sweep configuration (sweeps/<id>.json), its complexity count (the
                 user's "simplicity number", tools/simplicity.py on the row's "mechanism" record; lower = simpler,
                 shown beside the score, never part of the gap) and its alignment verdict (the latest entry for the id
-                in docs/alignment/ledger.jsonl: clean / watch / gamed, tools/alignment_ledger.py)   -> morphs()
+                in docs/alignment/ledger.jsonl: clean / watch / gamed, tools/alignment_ledger.py) and its display name
+                (short_name: tools/dash_names.json, else built from the id words; ' (N joints)' added at 4+)  -> morphs()
   sweeps        concept bench, every configuration a morphology agent evaluated, with its time, its morphology's best
                 gap so far and the overall record so far (all morphologies)                         -> sweeps()
-  cad           built-CAD outside judges, long form: one row per (judged design, requirement) with value, threshold and
-                pass: tools/judged_history.py (score.json, score_14mm.json, judge/*.json) + judge/scorecard.json,
-                thresholds from judge/requirements.json                                              -> cad()
+  cad           built-CAD outside judges, long form: one row per (judged design, requirement) with value, threshold,
+                pass, and its display name (design_name: tools/dash_names.json "cad"): tools/judged_history.py
+                (score.json, score_14mm.json, judge/*.json) + judge/scorecard.json, thresholds from
+                judge/requirements.json                                                              -> cad()
   gpu_evals     GPU band-evaluator DETAIL evaluations: tools/judged_history.py --evals (time = the commit that added
                 the result file)                                                                     -> gpu_evals()
   gpu_searches  GPU band searches, one row per search job: pipeline/conformal/gpu_client/band_search_*.json (time = the
@@ -63,6 +65,60 @@ try:                                                 # the complexity count (doc
     import simplicity as SIMP
 except Exception as _e:                              # the dashboard still builds; the column stays empty
     SIMP = None; WARN.append(f"tools/simplicity.py did not import ({_e}): no complexity column")
+
+
+# Display names (tools/dash_names.json): every design gets a short plain-English name for the page; a row without a curated
+# name gets one built from its id words - the row's long "name" is never cut mid-phrase (user 2026-10-18: the legend read
+# "Proxtrack's one-sided relay re-priced under", "Re-centred never-binding pin knee + J3 hard").
+NAMES_FILE = os.path.join(REPO, "tools", "dash_names.json")
+ID_NOISE = {"3r", "4r", "5r"}
+ID_WORDS = {"j1": "J1", "j2": "J2", "j3": "J3", "pinknee": "pin knee", "longdyad": "long dyad", "fourbar": "four-bar",
+            "4bar": "four-bar", "gh": "GH", "rcm": "RCM", "2r": "2-hinge", "3rrr": "3-RRR", "sph3r": "3-hinge"}
+
+
+def _names():
+    try:
+        with open(NAMES_FILE) as f: d = json.load(f)
+        return d if isinstance(d, dict) else {}
+    except Exception as e:
+        if os.path.exists(NAMES_FILE): warn(f"tools/dash_names.json unreadable ({e}): names built from the ids")
+        return {}
+
+
+NAMES = _names()
+
+
+def id_name(mid):
+    """the fallback display name: the id's words, sentence case, without the 3r / 4r suffix"""
+    w = [ID_WORDS.get(x, x) for x in str(mid).split("-") if x and x not in ID_NOISE] or [str(mid)]
+    s = " ".join(w)
+    return s[:1].upper() + s[1:]
+
+
+def base_name(mid):
+    v = (NAMES.get("designs") or {}).get(mid)
+    return v.strip() if isinstance(v, str) and v.strip() else id_name(mid)
+
+
+def short_name(mid, active_dof=None):
+    """the page's name for a design: tools/dash_names.json (else the id words), ' (N joints)' added at 4+ active joints"""
+    s = base_name(mid)
+    if isinstance(active_dof, int) and active_dof >= 4 and "joints)" not in s: s += f" ({active_dof} joints)"
+    return s
+
+
+def cad_name(design):
+    """the page's name for a built-CAD design id: tools/dash_names.json "cad" ({concept-id} = that concept's name), else a
+    keep-out (l1_) or user-style (user_) build named after the concept its id starts with, else the id itself"""
+    v = (NAMES.get("cad") or {}).get(design)
+    if isinstance(v, str) and v.strip():
+        return re.sub(r"\{([a-z0-9-]+)\}", lambda g: base_name(g.group(1)), v.strip())
+    m = re.match(r"(l1|user)_(.+)$", str(design))
+    if m:
+        stem = m.group(2).replace("_", "-")
+        hits = sorted(k for k in (NAMES.get("designs") or {}) if k == stem or k.startswith(stem + "-"))
+        if hits: return base_name(hits[0]) + (", keep-out CAD" if m.group(1) == "l1" else ", user-style CAD")
+    return str(design)
 
 
 def complexity_of(mid, mech):
@@ -290,7 +346,7 @@ def thin_fit(rows, limit=SWEEP_BYTES):
 
 
 def blank(mid):
-    return dict(id=mid, name=mid, family="", lens="", status="ideated", is_baseline=False, active_dof=None, passive_dof=None,
+    return dict(id=mid, name=mid, short_name="", family="", lens="", status="ideated", is_baseline=False, active_dof=None, passive_dof=None,
                 t_ideated=None, t_screened=None, reach=None, follow=None, inband14=None, inband10=None, contact=None, gap=None,
                 v_reach=None, v_follow=None, v_inband14=None, v_inband10=None, v_contact=None, v_gap=None,
                 n_configs=0, sweep_gap=None, sweep_t=None, sweep_reach=None, sweep_follow=None, sweep_inband14=None,
@@ -382,6 +438,7 @@ def morphs(S):
         try:
             for k in NUMS: m[k] = share(m[k]); m["v_" + k] = share(m.get("v_" + k))
             m["active_dof"], m["passive_dof"] = to_int(m["active_dof"]), to_int(m["passive_dof"])
+            m["short_name"] = short_name(mid, m["active_dof"])
             m["is_baseline"] = truthy(m["is_baseline"])
             m["t_ideated"], m["t_screened"] = norm_time(m["t_ideated"]), norm_time(m["t_screened"])
             st = str(m["status"] or "ideated").lower().strip()
@@ -488,6 +545,9 @@ def morphs(S):
             if m is not keep: m["is_baseline"] = False
         warn(f"{len(bases)} rows claimed to be the baseline; kept {keep['id']}")
     if not any(m["is_baseline"] for m in out): warn("no baseline row (docs/concepts/rows/baseline-3r.json)")
+    unnamed = [m["id"] for m in out if m["id"] not in (NAMES.get("designs") or {}) and m["status"] != "duplicate" and
+               any(m.get(k) is not None for k in ("v_gap", "gap", "sweep_gap"))]
+    if unnamed: warn(f"display names: {len(unnamed)} scored row(s) named from their id words (add them to tools/dash_names.json): {', '.join(unnamed[:8])}")
     out.sort(key=lambda m: (not m["is_baseline"], m["id"]))
     return out
 
@@ -496,20 +556,20 @@ def morphs(S):
 REQ_DEF = load(os.path.join(REPO, "judge", "requirements.json"), {}) or {}
 # id, short name, direction, unit shown, judged_history column
 REQS = [
-    ("R1", "Skin 2-14 mm from the metal while following", "hi", "%", "r1_14"),
-    ("R1-aim", "Skin 2-10 mm from the metal (the 1 cm aim)", "hi", "%", "r1_10"),
+    ("R1", "Metal 2-14 mm from the skin while following", "hi", "%", "r1_14"),
+    ("R1-aim", "Metal 2-10 mm from the skin (the 1 cm aim)", "hi", "%", "r1_10"),
     ("R2", "No part enters the body", "lo", "mm", None),
     ("R3", "Follows the arm (frames tracked)", "hi", "%", "follow"),
-    ("R4", "Overhead works (Raise overhead, 14 mm band)", "hi", "%", "overhead_14"),
-    ("R5", "Shoulder-chain DOF (cap 4)", "lo", "", "dof"),
-    ("R5-aim", "Exactly 3 DOF, the minimum", "lo", "", "dof"),
+    ("R4", "Works overhead (raise overhead, 14 mm band)", "hi", "%", "overhead_14"),
+    ("R5", "At most 4 shoulder-chain joints", "lo", "", "dof"),
+    ("R5-aim", "Exactly 3 joints, the minimum", "lo", "", "dof"),
     ("R6", "No interference between moving parts", "lo", "mm", "parts_mm"),
     ("R7", "Every custom part is one valid solid", "bool", "", None),
     ("R8", "Custom-part mass", "lo", "g", None),
-    ("R9", "Strength SF (independent FEA)", "hi", "", None),
-    ("R10", "Base slip on the scapula (GH-centre misalignment)", "lo", "mm", None),
+    ("R9", "Strength safety factor (independent FEA)", "hi", "", None),
+    ("R10", "Base slip on the shoulder blade (joint-centre shift)", "lo", "mm", None),
     ("R11", "Pressure the exo adds on the cuff", "lo", "kPa", None),
-    ("R12", "CAD standard: G2 surfaces, no visible screws", None, "", None),
+    ("R12", "CAD standard: smooth (G2) surfaces, no visible screws", None, "", None),
     ("R13", "Manufacturable (supplier review and quote)", None, "", None),
     ("R14", "Holds on motions and bodies never used to design it", None, "", None),
     ("R15", "Works on real bodies (printed prototype)", None, "", None),
@@ -610,7 +670,7 @@ def cad(ev):
         op, thr, judge = threshold(rid)
         lvl, dof = meta[design]
         since = rules.get(rid, ("", ""))[0]
-        out.append(dict(time=t, design=design, level=lvl, dof=dof, req=rid, name=by[rid][1], value=round(v, 4), op=op or "",
+        out.append(dict(time=t, design=design, design_name=cad_name(design), level=lvl, dof=dof, req=rid, name=by[rid][1], value=round(v, 4), op=op or "",
                         threshold=thr, unit=by[rid][3], ok=passes(v, op, thr), rules="older" if since and t < since else "current",
                         judge=judge[:120], src=src))
     out.sort(key=lambda r: (r["time"], r["design"], [x[0] for x in REQS].index(r["req"])))
@@ -647,7 +707,7 @@ def reqs(C, ev):
         if cur and d in ("hi", "lo", "bool"):
             b = max(cur, key=lambda c: ((c["value"] if d != "lo" else -c["value"]), c["time"]))
         since = rules.get(rid, ("", ""))
-        out.append(dict(req=rid, name=name, design=best if r else "", time=t if r else None, state=state, value=None if v is None else round(v, 4),
+        out.append(dict(req=rid, name=name, design=best if r else "", design_name=cad_name(best) if r else "", time=t if r else None, state=state, value=None if v is None else round(v, 4),
                         unit=unit, op=op or "", threshold=thr, target=str(r.get("target") or (f"{op} {thr:g}" if op and thr is not None else "")),
                         judge=judge[:160], best_value=b["value"] if b else None, best_design=b["design"] if b else "",
                         best_ok=b["ok"] if b else None, rules_since=since[0] or None, rules_why=since[1]))
@@ -803,7 +863,7 @@ def motion(out_dir):
 
 # ---------------------------------------------------------------- main
 DESC = {
-    "morphs": ("Concept bench morphologies", "One row per morphology in the swarm's catalogue: status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. alignment = the alignment auditor's latest verdict (clean / watch / gamed; gamed = the number is not evidence of a better exo, so the design cannot be called verified, a winner or a leader; empty = never audited), alignment_stage = audit (skeptic pending) or skeptic (final), alignment_reasons = the reasons at that level, alignment_t = when, alignment_claim = the number it audited, alignment_stale = the row's claim moved since (a re-audit is due); from docs/alignment/ledger.jsonl (tools/alignment_ledger.py, docs/ALIGNMENT.md). Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json."),
+    "morphs": ("Concept bench morphologies", "One row per morphology in the swarm's catalogue: short_name = its display name (tools/dash_names.json, else built from the id words; ' (N joints)' at 4+ active joints), status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. alignment = the alignment auditor's latest verdict (clean / watch / gamed; gamed = the number is not evidence of a better exo, so the design cannot be called verified, a winner or a leader; empty = never audited), alignment_stage = audit (skeptic pending) or skeptic (final), alignment_reasons = the reasons at that level, alignment_t = when, alignment_claim = the number it audited, alignment_stale = the row's claim moved since (a re-audit is due); from docs/alignment/ledger.jsonl (tools/alignment_ledger.py, docs/ALIGNMENT.md). Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json."),
     "sweeps": ("Concept bench sweeps", "Every configuration a morphology agent evaluated on the concept bench, with its time, gap, its morphology's best gap so far (best_gap) and the record over all morphologies so far (record_gap); passed_over marks a configuration its agent measured before its claimed row and rejected (better than the claim), which counts for no best. Built from docs/concepts/sweeps/*.json; a morphology with more than 1500 configurations is thinned for the page (every running-best and record row, its 300 best gaps and an even sample of the rest), while best_gap, record_gap and n_configs come from the full set."),
     "cad": ("Built CAD judge results", "One row per judged design and requirement: value, threshold and pass from the outside judges, timed by the judge output (score files: the earliest of their commit, their file time and the first commit whose docs report the design; scorecard-only values: the scorecard's commit). Built from tools/judged_history.py, judge/scorecard.json files and judge/requirements.json."),
     "gpu_evals": ("GPU evaluator detail runs", "Every GPU band-evaluator detail evaluation of a search candidate (in-band 14 mm, follow, workspace share, overhead follow). Time is the git commit that added the result file, not the run itself. Built from pipeline/conformal/gpu_client/band_eval_*.json via tools/judged_history.py --evals."),
