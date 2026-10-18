@@ -89,8 +89,17 @@ All counts come from the per-pose dumps, and each dump reproduces its claim: pri
   - Unpriced, the held contacts are 12, summed 33.27 mm, deepest 8.30 mm.
   - So this row presses into the arm less often and less deeply than the leader. That is a real wearer advantage,
     smaller than the leader's reach advantage in gap points.
-- **Workspace in-band (unscored), unpriced pick3 on the bench:** WS_INBAND
-  (`remeasure/inband_pick3/probe_pick3_unpriced_bench.json`).
+- **Workspace in-band (unscored), unpriced pick3 on the bench**
+  (`remeasure/inband_pick3/probe_pick3_unpriced_bench.json`; it reproduces 18.32; leader in brackets from
+  `remeasure/conecut-knee-knuckle-3r_probe_bench.json`):
+  - All taken workspace poses: 0.874 [0.868]. 12.5 % of the metal is over 14 mm and 3.3 % over 20 mm; the farthest
+    sample is 32.6 mm.
+  - Elevation 90-140: 0.837 [0.832].
+  - Overhead: 0.921 [0.936]. Of the 9 taken overhead poses, 5 have metal under 2 mm and 1 under 1 mm [4 of 8, and
+    0]. All 9 are under 3 mm.
+  - Taken workspace poses with metal under 2 mm: 18 [28].
+  - The first probe call passed `picks/pick3.json`, whose params are nested, and so wore the screen pick (18.87).
+    This run re-ran it with the flat `pick3_params_flat.json`.
 - **Springs:** static 0.165 N.m at J2, which gives 1.1 / 1.37 N at the cuff. That is 17 % of the R17 moment and 22-28 %
   of the cuff force (row `spring_R17`).
 - **Stops:** the K drive's range ends on the law (dK 65.5 deg against about 47.5 deg taken). The folded dowel sits at
@@ -273,7 +282,7 @@ verifier's numbers sit under `polished_*` and `docs/research/inband_env_polish/v
 
 - **Workspace in-band of the priced pick3 and of the catalogue build.** The workspace probe
   (`tools/alignment_wear_probe_params.py`) can override params, but not the model's socket radius SC.ER or the
-  pricing. So it measured the unpriced O7 pick3 on the bench only (above). The O9 build's workspace in-band is not
+  pricing. So it measured the unpriced O7 pick3 on the bench only (above, 230 s). The O9 build's workspace in-band is not
   measured; its clip in-band (0.9011 against 0.9026) suggests a difference under 0.002.
 - **Dynamics, R17 and cuff twist for this id:** these need an L1 / L2 CAD, which does not exist. The task is out of
   scope for an audit.
