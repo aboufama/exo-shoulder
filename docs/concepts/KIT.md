@@ -44,7 +44,7 @@ K.log_event(f"screened <name>: gap {rep['gap']} (baseline 68.93)")
 | `strap_dirs`, `cap_dirs`, `disc_xy`, `rect_xy`, `plane_frame` | sampling |
 | `Member`, `Chain` | the data model (docstrings); kinds `free` (skin-fitted underside per sample), `cap` (one radius), `flat` (K4 plate at h_F) |
 | `hub_member`, `strap_member`, `neck_member` | K4 / K5 / K7 members |
-| `fit_profiles`, `member_points`, `collisions` | K3 fit with quantile q over the fit poses, K6 |
+| `fit_profiles`, `member_points`, `collisions` | K3 fit with quantile q over the fit poses (a member with `over` lifted to a fixed point of `over` + climb, 2026-10-18), K6 |
 | `evaluate(B, build, params, q=None, mode='march', cont=True, collide=True)` | report: `reach follow inband14 inband10 contact gap`, `inband_member`, `mass_g` (Ti 4.43 g/cm3), `mass_g_strap55` (straps at 5.5 mm), `closure` (share of poses the chain closes in), `flips`, `collide`, + `Chain.info`; `B._kit_last` keeps chain, profiles and points for plots |
 | `sweep(B, build, configs, out_json)` | writes the sweep file after EVERY configuration: list of `{k, t, params, inband14, inband10, reach, follow, contact, gap, closure, mass_g}` |
 | `write_row(id, name, rep, ...)` | `docs/concepts/rows/<id>.json` with the screen2.js fields (v_* null until verified); refuses a report that is not `honest` unless `force=True` (the row then carries `honest: false`, `checks`, `audit`) |
@@ -91,7 +91,10 @@ K.log_event(f"screened <name>: gap {rep['gap']} (baseline 68.93)")
   part-part clearance, `over` builds 1 mm) -> the pose is not taken; joint partners exempt within HUB_R + 2 mm
   of the shared joint. To avoid collisions by construction, give the upper part `over=[(name, 1.0)]`: its underside is
   raised to the other's top + 1 mm wherever they meet in any fit pose (the template's link 2 over link 1 and the neck:
-  without it 34 % of the template's closing poses collide; link 2 then pays for it: 5 % in band).
+  without it 34 % of the template's closing poses collide; link 2 then pays for it: 5 % in band). Since 2026-10-18 the
+  lift and the K5 climb repeat until nothing rises, so the FINAL profile satisfies `over` (one pass did not: see
+  "Measurement change 2026-10-18"). It clears K6 as `_over` tests the pair (lifted member first); K6 tests pairs in
+  `Chain.members` order and `_near` is not symmetric, so a lower-first pair can still be rejected (same section).
 - **K7.** `neck_member(F, p_from)`: 14 x 6 strap from the arm-end plate (direction p_from) to the start of BOTTOM's bar
   (RH @ (67.5 Wb + 40 Db)), K3 underside, K5 climb.
 
@@ -133,11 +136,19 @@ covers 56 % of an O20 disc, reaches 7.5 mm: the audit flags it); no continuity o
 
 ## Tests
 
-`OMP_NUM_THREADS=1 python3 -m pytest -q tools/test_concept_kit.py` (22 tests, ~35-45 s): directions vs band_impl, frames
+`OMP_NUM_THREADS=1 python3 -m pytest -q tools/test_concept_kit.py` (25 tests, ~20-45 s): directions vs band_impl, frames
 vs Bench, closure vs a brute-force circle scan on random vectors (both branches) and near-degenerate cases (b ~ w,
 tangent circles), K3 march vs a brute 1 mm march on real poses, `outer` vs concept_baseline, `dist_many` vs
 `B.dist` (incl. points outside the grid box), collisions on constructed hit / miss / exempt cases, `over`, K2 on a
-constructed flip (frames rule and dense rule), and the baseline row reproduction.
+constructed flip (frames rule and dense rule), and the baseline row reproduction. Since 2026-10-18: the `over` lift is
+a fixed point and clears K6 where one pass collided (constructed), no `over` pair K6-collides on the template and the
+remote-pole four-bar cluster layout, and a strict xfail that records `_near`'s pair-order residual (it starts failing,
+on purpose, the day that residual is fixed).
+
+Status 2026-10-18 (Bench(60,160) fast cache built locally, Python 3.12 venv): 23 passed, 1 xfailed, 1 failed. The
+failure is `test_template_runs_on_kit_conventions` (collide 0.0095 != 0): hub 1 vs hub 3 (2 poses) and hub 1 vs the neck
+(1 pose), no `over` pair. It fails identically with the kit before the 2026-10-18 change (base 9eb026a3), so it is not
+this change's (why it started failing was not investigated here).
 
 ## Verification (adversarial verifier, 2026-10-15)
 
@@ -184,3 +195,91 @@ Holes that remain (the verifier must look): a member that samples only part of i
 (the kit cannot know the true outline), understated thickness `t`, a sweep re-run with `resume=False` that drops
 earlier configurations, `n_configs` written by hand, a model that reads poses outside `B` (only held-out clips in
 B are caught), monkey-patching the kit.
+
+## Measurement change 2026-10-18: the `over` lift is a fixed point
+
+**A MEASUREMENT change, not a design change**: no model, configuration or row was edited; numbers move only where the
+kit measured them wrongly before. Re-measure the old way with the kit at 9eb026a3 (`git show 9eb026a3:tools/concept_kit.py`).
+
+**The bug.** `fit_profiles` ran ramps -> `_over` -> K5 climb ONCE per member. `_near` judges each sample at the member's
+CURRENT radius, and the shared-joint exemption is an arc there (angle x radius / layout scale <= HUB_R + 2), which
+grows as a sample below r_ref = 70 mm rises. So a sample that `_over` left alone (exempt at its pre-climb radius) could
+be lifted by the climb, from the samples `_over` had raised further out, into the partner's layer, no longer exempt,
+and K6 rejected the pose. Found on remote-pole-fourbar-j2-3r's cluster layout: crank A vs link 1 ~17 mm from their
+shared A0 axis, link 1 at 87.5 mm over crank A's 87.0 (top 90.0), where `_over` on the final profile asks for 91.0.
+
+**The fix** (`fit_profiles`, nothing else in the kit changed: `_over`, `_near`, `collisions` are untouched; `_climb` is
+the old climb code moved into a helper): ramps -> `_over` -> climb, then `_over` -> climb again until no sample rises by
+more than 1e-9 mm (both steps only raise, so it ends; > 20 passes raises a RuntimeError, never seen). A profile that
+one pass already left at the fixed point comes back bit-identical, so a model where one pass was enough does not move.
+Measured: every member that moved needed 2 passes (3 `_over` calls with the final check); a member that does not move
+costs one extra `_over` call (the check).
+
+**What moved.** Bench(60,160) fast cache, kit checks on (march, dense K2, K6, audit):
+
+| model / configuration | gap old kit -> fixed point | collide | note |
+|---|---|---|---|
+| remote-pole-fourbar-j2-3r cluster layout (sweep k90) | 274.37 -> **133.04** | 0.9948 -> 0.2723 | link 1 over crank A: 190 of 191 poses hit -> 0 |
+| remote-pole-fourbar-j2-3r best honest (k298) | 90.11 -> **87.62** | 0.088 -> 0.067 | link 1 over crank B cleared; dead verdict stands (control 63.18) |
+| remote-pole-fourbar-j2-3r k46 | 90.59 -> 90.59 | 0.0785 | |
+| remote-pole-fourbar-j2-3r PARAMS (lens-1 seed s1) | 245.81 -> 203.94 | 0.945 -> 0.695 | |
+| spine-parked-j2-3r PARAMS (end_extra 0) | 56.80 -> **37.82** | 0.149 -> 0.011 | link 2 over link 1: 27 poses -> 1 |
+| zc-frontier-3r PARAMS (end_extra 0) | 45.92 -> **34.50** | 0.124 -> 0.056 | link 2 over link 1: 22 poses -> 1 |
+| slotted-eccentric-j2-3r PARAMS | 275 -> 275 | 1.0 -> 1.0 | crank over link 1 cleared, still no pose taken; Ti mass 124.0 -> 125.5 g |
+| _template (q 0.95) | 67.87 -> 67.87 | 0.0095 | unchanged |
+
+Breadth: of the 62 model files with `over`, 34 run through `K.evaluate(build, PARAMS)` (the other 28 need their own
+entry points or arguments); at their PARAMS 30 are unchanged to the last digit and the 4 above moved.
+
+**The verified leaderboard (30 rows) does not move.** Only 5 verifiers build kit members with `over` (arm-parked-knee-4r,
+dwell-fourbar-knee-3r, j3-neck-over-3r, spine-parked-j2-3r, zc-frontier-3r). The other 24 with a committed harness never
+call `fit_profiles`: each harness was run in full under the new kit with `fit_profiles` instrumented (its verified
+command, flags and config), 0 calls in every one, and each reproduced its row's `v_gap` to the digit (cam-unfold-4th
+26.70, conecut 18.28, crest 32.84, desmo-conecut 18.98, desmo-slipper 18.95, dipped-law 18.64, frontload 22.82, geneva
+23.57, groove-desmo 22.64, k-rim 44.79, kneeless-roller 21.07, kneeless-sidecar 21.11, lowarm 17.96, minarc 19.54,
+offset-skin-normal 41.02, raglan 27.82, roller-longdyad 18.67, sidecar-longdyad 18.91, sidecar-parallelogram 19.13,
+sidecar-roller-flank 20.08, skin-normal cufflink 29.10, pin knee 27.20, slipper-nose 18.49, trimlug 18.51).
+seed-offset-3r-slides has no committed harness and no `over` anywhere in its model. For the 5, every
+`fit_profiles` call of the harness's Bench(60,160) fit gives bit-identical profiles with the fixed point (max difference
+0.0 mm), and each harness re-run in full (Bench(110,360) exact, frozen from the Bench(60,160) fast fit, the verifier's
+checks, Python 3.12 venv, local 4 cores) gives:
+
+| row (harness, config) | v_gap recorded | old kit (9eb026a3) | fixed point |
+|---|---|---|---|
+| spine-parked-j2-3r (verify/spine-parked-j2-3r.py frozen, k7008 O20, rebase/sp20_m5.json params) | 41.00 | 41.00 | 41.00 |
+| dwell-fourbar-knee-3r (verify/dwell-fourbar-knee-3r.py, verifier_checks params) | 37.66 | 37.66 | 37.66 |
+| zc-frontier-3r (verify/zc-frontier-3r-gpu-skeptic.py frozen --fits fit60) | 33.51 | 33.51 | 33.51 |
+| j3-neck-over-3r (verify/j3-neck-over-3r.py claim) | 28.46 | 28.46 | 28.46 |
+| arm-parked-knee-4r (verify/arm-parked-knee-4r.py frozen_r12_botharc) | 26.71 | 26.71 | 26.71 |
+
+Every field of each run record is identical between the two kits, except wall-clock times and the ORDER of one list
+(j3-neck-over's `independent_audit.clip_big_steps`: the same 13 entries, clips iterated in another order).
+
+**Why the leaders did not move, and what it means for their searches.** spine-parked and zc carry `end_extra` (the
+strap-end hold past the shared-joint zone, 1.02 / 1.78 mm), which their searches found. spine-parked's note called it
+a "K6 strap-end artifact" cleared by end_extra 0.24. That matches this bug: at the verified seats with end_extra 0 the
+old kit rejects link 2 over link 1 in 18 poses (zc: 20), the fixed point in none, and the workaround no longer pays. At the verified seats, Bench(60,160) fast fit:
+
+| seat | old kit, searched end_extra | old kit, end_extra 0 | fixed point, searched | fixed point, end_extra 0 |
+|---|---|---|---|---|
+| spine-parked-j2-3r k7008 | 36.20 | 42.32 (collide 0.103) | 36.20 | **32.61** (collide 0) |
+| zc-frontier-3r v00 | 30.04 | 40.11 (collide 0.127) | 30.04 | **29.26** |
+
+Worn on the verifier protocol (the rows' own harnesses, Bench(110,360) exact, frozen from the fast fit), fixed-point kit:
+spine-parked-j2-3r k7008 with end_extra 0: **38.85** (verified 41.00; near-touch 49.98 vs 54.44; reach 0.617 vs 0.600,
+in-band14 0.810 vs 0.805); zc-frontier-3r v00 with end_extra 0: **32.75** (verified 33.51; near-touch 39.78 vs 40.57).
+These are DESIGN candidates (a changed parameter), measured by the agent that proposes them: not verified, rows
+unchanged. What it means: searches run on the old kit steered `end_extra` (and possibly other strap-end / layer
+parameters) to dodge this bug; a re-search of spine-parked / zc (and any family whose optimum carries such a hold) on
+the fixed kit is the next step, and its winner needs an independent verifier.
+
+**Not fixed here: `_near` is not symmetric (pair order).** `_near(A, B)` measures the arc at A's radius and adds B's
+largest sample extent; `_over` tests (lifted member, partner) while K6 (`collisions`) tests pairs in `Chain.members`
+order. When the partner comes first in the chain, K6's near set can be larger than the one the lift cleared, so a pose
+can still be rejected. At the fixed point every `over` pair is clear tested lifted-member-first (test), but in K6's order the
+cluster layout keeps crank A / crank B over hub J1 (36 / 6 poses) and the coupler over crank B (16): all 52 of its
+remaining K6 rejections. Side experiment (NOT the kit; scratch `_over` testing each pair in K6's order): cluster layout
+133.04 -> 82.76 (collide 0), k46 90.59 -> 88.31. The same lower-first residual is in the PARAMS of arm-parked-knee-4r
+(link 2 over link 1, 14 poses), cap-nullspace-4r, seed-2r-cring, geneva-tail-knuckle-3r and stop-relay-rocker-3r, with
+the old kit and the new alike (measured: every one of these hits is in a lower-first pair and none remains when the
+pair is tested lifted-member-first). Fixing it is a second measurement change (the user's call); `test_over_pairs_clear_in_k6_order_with_lower_member_first` is a strict xfail that will flag the day it is fixed.

@@ -106,6 +106,11 @@ fixed point, not used for any claim): the cluster layout goes 274.37 -> **133.04
 follow 0.60, ib14 0.189), the best honest iso config is unchanged (90.59 both ways). So the kit quirk is real and worth
 fixing, but it does not rescue the cluster: with a correct lift it is still 70 gap points behind the plain cap 3R
 (63.18): four bodies stacked on one 25-deg patch put the coupler over three O20 stacks, in band 0.19.
+**In the kit since 2026-10-18** (docs/concepts/KIT.md "Measurement change 2026-10-18"): the kit's own fixed-point lift
+gives the cluster layout 274.37 -> 133.04 (collide 0.9948 -> 0.2723) and k46 90.59 -> 90.59, as this side experiment
+said, but the best honest k298 90.11 -> **87.62** (collide 0.088 -> 0.067: link 1 over crank B no longer hits; reach
+0.769 -> 0.794). The verdict stands (24 points behind the 63.18 control). The remaining K6 rejections of `over` pairs
+there are `_near`'s pair order (KIT.md), not the lift. The row and sweep keep the numbers measured with the old kit.
 
 ## Gate 0: the honest kit on Bench(60,160) fast (the decision)
 

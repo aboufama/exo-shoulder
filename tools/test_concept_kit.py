@@ -173,6 +173,70 @@ def test_over_clears_by_construction():
     assert not K.collisions(ch, pts, ch.ok).any() and K.collisions(ch, {"A": D * 70.0, "B": D * 71.0}, ch.ok).all()
 
 
+def _over_pair_hits(ch, prof, ok, k6_order=True):
+    """K6 hits between every member with `over` and each partner it lists, at the final profiles (the shared-joint
+    exemption is K6's own). k6_order: the pair in chain.members order, as `collisions` tests it; False: the lifted
+    member first, as `_over` tests it (`_near` is not symmetric: KIT.md "Measurement change 2026-10-18")"""
+    pts = {m.name: K.member_points(m, prof[m.name]) for m in ch.members}
+    pos = {m.name: j for j, m in enumerate(ch.members)}; O = {m.name: m for m in ch.members}; hits = {}
+    for m in ch.members:
+        for name, _ in m.over:
+            pair = sorted([m, O[name]], key=lambda x: pos[x.name]) if k6_order else [m, O[name]]
+            n = int(K.collisions(K.Chain(members=pair, ok=ok, joints=ch.joints), pts, ok).sum())
+            if n: hits[f"{m.name} over {name}"] = n
+    return hits
+
+
+def test_over_lift_is_a_fixed_point(monkeypatch):
+    """a strap over a partner that shares its joint: at its raw 50 mm the samples 10-17 mm out along the partner are
+    inside the shared-joint exemption (arc = angle * radius <= 12 mm), so `_over` leaves them; the climb from the lifted
+    part then raises them to 67-71 mm, where the arc is > 12 mm and they sit in the partner's layer [70, 73]. One pass
+    of ramps -> over -> climb collides there; the kit's lift (repeated to a fixed point) must not."""
+    P = 2; k = np.tile([0, 1.0, 0], (P, 1)); a, _ = K.plane_frame(k); v = K.unit(math.cos(0.6) * k + math.sin(0.6) * a)
+    A = K.strap_member("crank", k, v, ("J",)); Bm = K.strap_member("link", k, v, ("J",), over=[("crank", 1.0)])
+    s = np.repeat(np.arange(Bm.grid[0]), Bm.grid[1])
+    raw = {"crank": np.full(A.D.shape[1], 70.0), "link": np.where(s < 9, 50.0, 60.0)}
+    monkeypatch.setattr(K, "_levels", lambda B, chain, fit, q, mode: {n: r.copy() for n, r in raw.items()})
+    ch = K.Chain(members=[A, Bm], ok=np.ones(P, bool), joints=dict(J=k))
+    prof = K.fit_profiles(None, ch, ch.ok)
+    one = K._climb(Bm, K._over(ch, Bm, raw["link"], {"crank": prof["crank"]}, ch.ok))      # the old single pass
+    assert _over_pair_hits(ch, dict(prof, link=one), ch.ok)                                 # ... collides
+    assert not _over_pair_hits(ch, prof, ch.ok)                                             # the fixed point does not
+    assert np.allclose(K._climb(Bm, K._over(ch, Bm, prof["link"], prof, ch.ok)), prof["link"], rtol=0, atol=1e-9)   # and is one
+    assert np.all(prof["link"] >= one) and prof["link"].max() == one.max()                  # raises only where needed
+
+
+RPF_CLUSTER = {"th0": 86.43, "dA0": 23.968, "pA0": -93.116, "dA1": 72.584, "pA1": -37.479, "g": 22.24, "gam": -99.152,
+               "eps": -0.742, "tw": 17.453}     # remote-pole four-bar cluster layout: one `over` pass left collide 0.995
+
+
+def _fitted_model(B, fn, par):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(fn, os.path.join(K.REPO, "docs", "concepts", "models", fn))
+    M = importlib.util.module_from_spec(spec); spec.loader.exec_module(M); p = dict(M.PARAMS, **par)
+    ch = M.build(B, K.frames(B), p); ok = np.asarray(ch.ok, bool); assert ok.sum() > 20
+    return ch, K.fit_profiles(B, ch, ok, p.get("q", 1.0)), ok
+
+
+def test_over_pairs_clear_on_models(B):
+    """on real models no lifted member K6-collides with an `over` partner at the fitted profiles (fit poses = the
+    closing poses), outside the shared-joint exemption: the template (link 2 over link 1 and the neck) in K6's own pair
+    order, and the remote-pole four-bar cluster layout (link 1 over crank A: 190 of 191 poses hit after one pass)
+    with each pair tested the way `_over` lifts against it (lifted member first)"""
+    ch, prof, ok = _fitted_model(B, "_template.py", {})
+    assert not _over_pair_hits(ch, prof, ok) and not _over_pair_hits(ch, prof, ok, k6_order=False)
+    ch, prof, ok = _fitted_model(B, "remote-pole-fourbar-j2-3r.py", RPF_CLUSTER)
+    assert not _over_pair_hits(ch, prof, ok, k6_order=False), _over_pair_hits(ch, prof, ok, k6_order=False)
+    assert "link1 over crankA" not in _over_pair_hits(ch, prof, ok)
+
+
+@pytest.mark.xfail(strict=True, reason="`_near` is not symmetric (arc at the first member's radius) and K6 tests the pair in "
+                   "chain order: lower-first pairs keep hits the lift does not see (KIT.md 'Measurement change 2026-10-18')")
+def test_over_pairs_clear_in_k6_order_with_lower_member_first(B):
+    ch, prof, ok = _fitted_model(B, "remote-pole-fourbar-j2-3r.py", RPF_CLUSTER)
+    assert not _over_pair_hits(ch, prof, ok), _over_pair_hits(ch, prof, ok)    # measured: crank A / B over hub J1, coupler over crank B
+
+
 def test_template_runs_on_kit_conventions(B):
     import importlib.util
     p = os.path.join(K.REPO, "docs", "concepts", "models", "_template.py")

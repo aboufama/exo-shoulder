@@ -271,7 +271,8 @@ class Member:
     off: level added to the fitted underside (hub stack); grid (ns, nc) + climb_deg: strap climb limit along axis 0
     (step_mm apart); ramps: [(mask (m,), other member name, dz)]: final underside >= the other's level + dz there;
     over: [(other member name, gap)]: wherever it passes over that member (in any fit pose), underside >= the
-    other's top + gap (the K6 clearance by construction; the other must not itself have `over`).
+    other's top + gap (the K6 clearance by construction; the other must not itself have `over`), iterated with the
+    climb limit to a fixed point (fit_profiles), so the FINAL profile satisfies it.
     joints: names of the joints it carries (K6 partners are exempt within HUB_R + 2 mm of a shared joint)."""
     name: str
     D: np.ndarray
@@ -328,8 +329,20 @@ def _levels(B, chain, fit, q, mode):
     return out
 
 
-def fit_profiles(B, chain, fit, q=1.0, mode="march"):
-    """underside radius per sample (final, with offsets, flat levels, climb limit and ramps) -> {name: rho (m,)}"""
+def _climb(m, r):
+    """K5: |d underside / d s| <= tan(climb) along a strap (raises only)"""
+    if not (m.climb_deg and m.grid): return r
+    ns, nc = m.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * m.step_mm; sl = math.tan(m.climb_deg * D2R)
+    return (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1).ravel()
+
+
+def fit_profiles(B, chain, fit, q=1.0, mode="march", max_pass=20):
+    """underside radius per sample (final, with offsets, flat levels, climb limit and ramps) -> {name: rho (m,)}.
+    A member with `over` is lifted to a FIXED POINT: ramps -> `_over` -> climb, then `_over` -> climb again until no
+    sample rises. `_near` judges a sample at the member's CURRENT radius (the shared-joint exemption is an arc there),
+    so one pass let the climb lift samples `_over` had passed (exempt at their pre-climb radius) into the partner's
+    layer, and K6 rejected the pose (KIT.md "Measurement change 2026-10-18"). Both steps only raise, so the passes end;
+    a profile one pass already left at the fixed point is returned unchanged."""
     raw = _levels(B, chain, fit, q, mode); prof = {}; level = {}
     order = sorted(chain.members, key=lambda m: (len(m.over) > 0, len(m.ramps) > 0))
     for m in order:
@@ -337,10 +350,16 @@ def fit_profiles(B, chain, fit, q=1.0, mode="march"):
         if m.kind in ("cap", "flat"): r[:] = r.max()
         r = r + m.off
         for mask, other, dz in m.ramps: r[mask] = np.maximum(r[mask], level[other] + dz)
-        if m.over: r = _over(chain, m, r, prof, fit)
-        if m.climb_deg and m.grid:                            # K5: |d underside / d s| <= tan(climb) (raises only)
-            ns, nc = m.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * m.step_mm; sl = math.tan(m.climb_deg * D2R)
-            R2 = (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1); r = R2.ravel()
+        if m.over:
+            r = _climb(m, _over(chain, m, r, prof, fit))
+            for _ in range(max_pass):
+                r1 = _climb(m, _over(chain, m, r, prof, fit))
+                if not (r1 > r + 1e-9).any(): break               # (the climb's float round-off is ~1e-13 mm)
+                r = r1
+            else:
+                raise RuntimeError(f"{m.name}: `over` + climb lift did not reach a fixed point in {max_pass} passes")
+        else:
+            r = _climb(m, r)
         prof[m.name] = r; level[m.name] = float(r.max())
     return prof
 

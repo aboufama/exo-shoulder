@@ -3289,3 +3289,24 @@ null-space costs more in hub / link metal than it returns in takes. This is the 
    guide inside a link adds no hub and no ring crossing. Read the early curved-slide deaths first.
 3. Machinery: verify template bar to the current lead; near-touch objective in every search; an auditor ledger entry
    for each round winner; quoted numbers from saved outputs only.
+
+## The kit's `over` lift is now a fixed point: no verified number moves, but two zero-complexity searches were dodging it (2026-10-18, MEASUREMENT change, docs/concepts/KIT.md)
+
+**Measurement change, not a design change.** `tools/concept_kit.py` `fit_profiles` ran ramps -> `over` -> climb once; the
+climb could lift a strap sample that `over` had left alone (inside the shared-joint exemption at its pre-climb radius)
+into its partner's layer, and K6 then rejected the pose. Now `over` + climb repeat until nothing rises (2 passes where
+anything moves). Nothing else in the kit changed. Bench(60,160) fast: remote-pole four-bar cluster layout 274.37 ->
+133.04, its best honest k298 90.11 -> 87.62 (still dead: control 63.18); spine-parked-j2-3r PARAMS 56.80 -> 37.82,
+zc-frontier-3r PARAMS 45.92 -> 34.50; 30 of the 34 `over` models runnable at their PARAMS unchanged.
+
+* **The verified leaderboard does not move.** 5 verifiers build kit members with `over` (arm-parked 26.71, dwell 37.66,
+  j3-neck-over 28.46, spine-parked 41.00, zc-frontier 33.51): their fitted profiles are bit-identical and each full
+  harness re-run (Bench(110,360) exact, frozen) gives the same number with the old and the new kit. The other 24 never
+  call the kit's fit; each reproduced its `v_gap` to the digit under the new kit.
+* **Why the leaders did not move: their searches had learned a workaround.** spine-parked and zc carry `end_extra` (a
+  longer strap-end hold over the shared joint; "K6 strap-end artifact" in spine-parked's note). With the fixed point it
+  no longer pays: end_extra 0 at the same seats wears **38.85** (spine-parked, verified 41.00) and **32.75** (zc, verified
+  33.51) on the verifier protocol. Candidates, not verified; next: re-search those two on the fixed kit.
+* **Still open (the user's call): `_near` is not symmetric.** K6 tests a pair in chain order, `over` lifts against it
+  lifted-member-first; lower-first pairs keep K6 rejections the lift cannot see (all 52 remaining on the cluster layout;
+  a scratch K6-order `over` gives 82.76 there). A strict xfail test marks it.
