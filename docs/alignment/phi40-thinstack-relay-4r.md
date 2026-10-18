@@ -299,3 +299,98 @@ docs/alignment/phi40-thinstack-relay-4r.rulings.json.
      next audit should name its basis.
 
 **Final verdict (ledger): WATCH.** Refuted: continuity. Upheld: dominance, reporting, T5, G1, S3, M5, M2, G6, P1.
+
+## Skeptic, second pass (2026-10-18 ~21:47 UTC)
+
+This is a second, independent skeptic on the same audit. It had the 21:05 reason list plus the two keys the 21:34 entry
+added (reporting, M2), and it ruled on all 11. It ran no new wear (the models are unchanged).
+
+It re-derived every number from the raw dumps with `alignment_paired._gap`, using one rule: metal = min(min_mm, cmin),
+and a pose under t mm counts as contact.
+- Rows and references: verifier_{claim,held}_perpose.json, diag_phi35_claimbench_s0_perpose.json, and the lead and
+  parent dumps under docs/alignment/remeasure/.
+- Gate checks: `tools/alignment_neartouch_dumps.py` (row, lead, parent), `tools/simplicity.py`, and the verifier JSON
+  fields pick.continuity, pick.xcheck.X3, clearance_margin_taken and th_margin.
+- Plain gaps reproduce: 13.52 / 16.02 (row), 13.73 (PHI 35), 18.29 / 22.38 (lead), 13.73 (parent).
+- The verifier's dumps equal the auditor's re-wear pose for pose: 0 differences in the flags, and the metal differs by
+  at most 0.000 mm.
+
+The rulings are in docs/alignment/phi40-thinstack-relay-4r.rulings.json. This pass replaced the 21:42 file; its version
+is in git at 4601d2c. Three of the 11 reasons are refuted.
+
+- **held_out: REFUTED.**
+  - The row is verified: v_gap 14.06 and v_held 16.69.
+  - verifier_held.log gives gate 16.69 and plain 16.02. The re-derived plain is also 16.02.
+  - The tool's held_out check reads ok: the drop is +2.63, under the 6.0 watch line.
+  - The 21:34 audit entry has already dropped this reason.
+- **dominance: upheld.**
+  - Plain: 13.52 against the lead's 18.29.
+  - At 2 mm: 46.63 on the dump basis (59 poses) or 47.16 on deep_audit (60 poses). The lead reads 34.84 on both
+    bases. So the row loses by 11.79-12.32.
+  - Both read the same bench indices.
+  - The 4.76 uses the row's pooled in-band. On the chain-only gate the gain is 4.22, which favours the row.
+- **continuity: REFUTED.**
+  - verifier_claim.json and verifier_held.json, pick.continuity: dropped_relayed 0, phi0_taken_not_connected 0, and
+    static = plain (13.52 / 16.02).
+  - The flood has 0 edge failures from a passive jump.
+  - cmap is keyed by the bench grid index, and a missing node counts as not connected, so the reading is exact. The
+    gap is in the tool's reader.
+- **reporting: REFUTED.** This pass disagrees with the 21:42 skeptic.
+  - The trigger fires: the verdict text opens "SCREENED".
+  - But the R1 pattern is absent. R1 means a self-measured number shown as verified. Here the number shown, 14.06
+    (row v_gap, and morphs.json v_gap 14.06), is the verifier's own reading (verifier_claim.log gate 14.06), held 16.69
+    is the same, and the dumps are identical pose for pose.
+  - The stale text understates the row and costs the wearer nothing. It is a housekeeping item for the row's owner.
+  - The next audit should settle which reading of c_reporting stands: the trigger, or the pattern behind it.
+- **T5: upheld.**
+  - Bench: 17 contacts, 74.92 mm, deepest 15.37 at i263, 7 deeper than 3 mm.
+  - Held: 48 contacts, 198.11 mm, deepest 13.89.
+  - Lead: 4 / 20.24 and 14 / 60.97. Parent: 13 / 46.18 (bench). Ratios: 3.70, 3.25, 1.62.
+  - The PHI 35 dump differs on exactly 8 poses, all relay stops (ev False). At PHI 40 four of them are contacts:
+    1.268 + 15.366 + 0.948 + 13.783 = 31.365 mm.
+- **G1: upheld.**
+  - PHI 40 against PHI 35, same hardware: -0.21 plain, +0.27 at 1 mm, +1.07 at 2 mm (+1.08 on B.report).
+  - Band takes: 0.211, 1.084 (elevation 150), 1.744 and 3.786 mm.
+  - New held overhead takes over the lead: 0.10, 0.52, 0.24 and 0.62 mm.
+  - On envsel, PHI 40 also wins at 1 mm (22.25 against PHI 35's 22.45), so the 1 mm search rule would have picked
+    the same.
+- **S3: upheld.** The strip is not modelled.
+  - X3 chord_rmin is 76.61 against the 79.1 liner, so the strip sits 2.49 mm into it.
+  - The chord comes within 2 mm of the skin on 1 bench and 4 held poses.
+  - A guide clashes with the chain on 326 of 417 bench and 776 of 1000 held poses.
+- **M5: upheld.** Nothing on file measures it: no R17, hysteresis or twist output. The margin re-derives to
+  0.22-0.62 N.
+- **M2: upheld.** There is no FEA on file.
+  - The tsh diagnostic reads 14.30 against 14.06.
+  - The lip deflection re-derives to 0.578 mm.
+  - Clearance: lt1.5 is 255 (bench) and 578 (held), with the lowest at 1.200 mm.
+- **G6: upheld.**
+  - Complexity: 51.25 against 18.5. Gate: 14.06 against 18.28.
+  - Overhead extras over the lead: 1 on the bench (1.08 mm) and 4 held (0.10-0.62 mm). The lead takes no overhead pose
+    the row loses.
+  - Raised arm: 67 against 47 on the bench, 176 against 123 held.
+- **P1: upheld (forward risk).**
+  - Two post-claim readings sit under 95: delta 5 at 13.67 and lean 0 at 13.55. The next row registers exactly those
+    levers.
+  - This claim itself was pre-registered: pick.json was written at 19:50, before the claim log, and PHI 41 / 42 failed
+    the pre-stated +0.5 cliff clause.
+
+**Missed by the auditor** (for the next audit; none of these changes this verdict):
+
+1. **The tool's dominance check compares unlike in-band readings.**
+   - It reads the row's plain gap, which pools the relay hardware's 372 in-band samples (relay_hw_inband 0.9756),
+     against the lead's chain gap.
+   - On the row's chain-only gate the gain is 4.22, not 4.76.
+   - The 0.54 difference flatters the row.
+   - Proposal (instrument, not applied): read dominance on the claim's own gate field.
+2. **The flood has failures on the envelope grid.**
+   - edge_fail: 26 phi-jump edges and 1 active-jump edge.
+   - 3 relayed envelope nodes are not connected (177 against 174).
+   - None maps to a bench or held pose: 0 dropped. They do mark regions the arm cannot reach continuously.
+   - The tool does not report flood edge failures. A next audit could list which grid nodes they are.
+3. **Two skeptics read c_reporting differently on this row.** This pass refuted it; the 21:42 pass upheld it. The next
+   audit should settle the rule.
+
+**Final verdict (ledger, this pass): WATCH.**
+- Refuted: held_out, continuity, reporting.
+- Upheld: dominance, T5, G1, S3, M5, M2, G6, P1.
