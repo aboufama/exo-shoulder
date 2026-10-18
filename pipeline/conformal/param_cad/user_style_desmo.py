@@ -670,7 +670,7 @@ def run_checks(M, dd, stops, rep, t0, g3, G, lay, gl):
                                        q3p_frames_vs_model_max_deg=max(r["stops"]["J3"]["frame_vs_model_deg"] for r in rep["check"]),
                                        note=("hub2 includes the model's O20 samples inside the stage-1 relief (r >= 6.05 over the relief sector, F+3.15..F+%.2f): a stated "
                                              "stack change (the stage 1 rides above link 1b); ring2 / crank / plate / horn are the drive's model samples (ring2 = the model's "
-                                             "lip at the model's level, DELTA %.2f below the built one)" % (s1i["levels_over_hub2_face_mm"]["relief"][1], s1i["delta_mm"])))
+                                             "lip at the model's level, DELTA %.2f below the built one)" % (rep["stage1"]["levels_over_hub2_face_mm"]["relief"][1], rep["stage1"]["delta_mm"])))
     except Exception as e_:
         import traceback; traceback.print_exc(); rep["kinematics_exact"] = f"error {e_!r}"[:400]
     W(); print(f"kinematics: {rep.get('kinematics_exact')} ({time.time() - t0:.0f} s)", flush=True)
