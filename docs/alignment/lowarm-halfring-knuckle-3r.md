@@ -1,222 +1,127 @@
 # Alignment audit: lowarm-halfring-knuckle-3r
 
-This is a re-audit, run 2026-10-18 07:09-07:36 UTC on the box (local only, niced, OMP_NUM_THREADS=1, at most 2 of my
-processes, box load 16-19 from other agents; the farm is closed, $0 spent). The hourly loop (07:04) triggered it for two
-reasons. First, the re-issued screen's red team (commit f90113b) calls cell A's 18.28 "the honest tie at cx 16.5".
-Second, the desmo-slipper audit (ledger 2026-10-18T06:26:41Z) found that this row loads the desmo family's stage-1 level
-formula. Reference: conecut-knee-knuckle-3r, the verified lead (18.28). Tool VERSION 2026-10-17.6. The first audit of
-this row (02:28-02:50) is superseded by this text; its skeptic section is kept below the rule.
+Third audit of this row, run 2026-10-18 08:18-08:37 UTC on the box (local only, niced, OMP_NUM_THREADS=1, at most 2 of
+my processes, box load 11-15 from other agents; the farm is closed by CLAUDE.md's spent budget line, $0 spent). Why it
+ran: discovery round 14, slice r14-B, and the claim moved under the ledger. Commit 786b081 (07:40:32Z) re-verified the row
+on cell A and set `v_gap` 18.83, while the ledger's last entry (skeptic, 07:44:04Z) still carried findings written for
+cell B's 17.96. Reference: conecut-knee-knuckle-3r, the verified lead (18.28). Tool VERSION 2026-10-18.1. The previous
+auditor sections are replaced by this text; both skeptic sections are kept below the rule.
 
-- **Checks:** `docs/alignment/lowarm-halfring-knuckle-3r.json`. They ran through `tools/alignment_strparams_adapter.py`,
-  because the tool still crashes on the row's string `best_params` (c_rules: 'str' object has no attribute 'items').
-  Tool verdict: **watch**, on continuity alone (the held kNN flood loses 8.23). Every other check is ok.
-- **New instrument:** `tools/alignment_lowarm_s1level.py`. It loads the row's verifier unchanged, re-applies glev after
-  the model's clamp, and records where stage 1 sits. The previous instance of this audit wrote it before a container
-  restart, and the lead's WIP commit f164440 saved it.
-- **Files written:**
-  - `remeasure/lowarm-halfring-knuckle-3r_s1level_geom_fast.json`: the four geometry runs.
-  - `remeasure/lowarm-halfring-knuckle-3r_s1level3p9_{A,B}_bench.json`, with `_perpose` dumps: the exact re-wears.
-- **Findings:** `docs/alignment/lowarm-halfring-knuckle-3r.findings.json`, 11 in all: 2 gamed (M3, P1) and 9 watch.
-- **Ledger entry:** 2026-10-18T07:34:11Z, by auditor, run `audit:lowarm-halfring-knuckle-3r`, git 983ed3e.
-  **Verdict GAMED**, claim v_gap 17.96.
+- **Checks:** `docs/alignment/lowarm-halfring-knuckle-3r.json` (12 checks + rules). Tool verdict: **watch**, on continuity alone (the held kNN flood loses 8.14); every other check is ok. Two checks read the unplayed re-wear, not the claim: `near_touch` and `dominance` compare cell A without play (18.28; plain +0.00 and 2 mm +0.00 vs the lead), and `contact_depth` finds no dump that reproduces 18.83 (the verifier's dumps recompute 18.29). The per-pose play wear below supplies those numbers by hand.
+- **Re-wear (step 2):** due. The row's last commit (07:40:32) is newer than the standing re-wear (02:43, cell B). The
+  tool's `remeasure` still crashes on the row's string `best_params` (`dict(str)`), so I ran it UNCHANGED through a
+  scratch wrapper that points its row directory at a copy with `best_params` decoded (no repo file edited). The params
+  are the row's `best_params` (cell A: no `l2_lift`, so the model's default 0.0).
+  Output: `docs/alignment/remeasure/lowarm-halfring-knuckle-3r_bench.json`, `..._held.json`.
+- **New measurement:** the verified play, read per pose. The verifier's own `docs/concepts/models/lowarm-halfring-knuckle-3r-kplay.py`
+  ran unchanged for cell A at +0.912 and -0.912, with `tools/alignment_paired.py`'s per-pose rows stashed for both sides.
+  Output: `docs/alignment/remeasure/lowarm-halfring-knuckle-3r_kplay_perpose_A.json`.
+- **Housekeeping:** a mis-pathed scratch stash of that run (per-pose rows, numbers only) landed at the repo root as
+  `0.912` and was swept into the watchdog commit d3aac25 (08:29). This audit's commit removes it; its content is in the
+  `_kplay_perpose_A.json` above.
+- **Findings:** `docs/alignment/lowarm-halfring-knuckle-3r.findings.json`, 8 in all: 1 gamed (M3) and 7 watch.
+- **Ledger:** 2026-10-18T08:35:49Z, by auditor, run `audit:lowarm-halfring-knuckle-3r`, git 1a20637. **Verdict GAMED**, claim v_gap 18.83 (re-keyed from 17.96).
 
-## Verdict: GAMED. Claim v_gap 17.96 (score 93.47), held out 22.70
+## Verdict: GAMED. Claim v_gap 18.83 (score 93.15), held out 22.64 (no play, unclashed)
 
-**Neither number stands on buildable metal.** Both the claim (cell B 17.96) and the "honest tie" (cell A 18.28) put
-stage 1 inside link 1b's J2 lower plate. At the nearest level that clears the plate:
+**The claim is now behind the lead, and the gamed P1 is gone from the headline.** The row's number is cell A (pre-registered
+at ideation 2026-10-17T23:25:10Z, not picked on the claim bench) with the hard stop pad at its true 6.75 mm lever and the
+resulting 0.912-deg dwell K play worn as metal on one side. The dashboard shows 18.83, 8th among verified rows.
 
-- **cell B reads 18.39**, 0.11 behind the lead;
-- **cell A reads 18.65**, 0.37 behind the lead, with the same 262 takes and 4 contacts.
+**What still keeps it gamed is M3, on the hard-rule clause.** The verified config still has stage 1's groove ring sector
+and O1.5 pin inside link 1b's J2 lower plate. The verifier measured the buildable number itself (19.05 with the play, 18.65
+without, `docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_padplay.json`) and did not put it in `v_gap`. At 18.83 the
+row ranks ahead of sidecar-longdyad-knuckle-3r (18.91); at its own buildable 19.05 it ranks behind. The margin is small
+(0.14 bench, held a tie) and density-sensitive, so the rank clause alone would only be watch; the clash is the gamed fact.
 
-All of the cost is in-band; reach and contact do not move. P1 (the link-2 lift picked on the claim bench, held out
-behind) is still unresolved, because the row carries no `leader_ruling`.
+**The verified play is read on its kind side.** v_gap wears the 0.912-deg play as +0.912 on every dwell pose. The
+two sides hurt different poses, and the per-pose worst of the two reads **18.89** (measured this audit, reproducing the
+verifier's 18.83 / 18.35 first). It is +0.06, so it changes no rank, but it is the reading the wearer gets.
 
-### Question 1: is "cell A 18.28" an honest, pre-registered config?
-
-**Yes on selection. No on "tie".**
-
-- **Pre-registered.** The ideation event (2026-10-17T23:25:10Z) names a_s 9.2, psi 149.5, glev -1.0 and zr 2.0 before
-  modelling started (01:00).
-- **Not picked on the claim bench.** The 114-config fast LHS over the whole box found cell A best (fast 13.12). The
-  794-config frozen-exact scan moved only link 2's lift parameters (cell B). So P1 and P2 do not apply to cell A.
-- **But the 18.28 is self-measured.** The proposer reproduced it, and the red team is the same screen agent. The
-  verifier wore cell B only. Cell A's held 22.64 is "proposer, same code path" (the row's `cells.A.held_src`).
-- **Held out it is behind.** 22.64 against the lead's 22.38: the tie is a bench reading only. A verifier wear of cell
-  A (bench and held, `--cell A --flood --dump`) was running in another agent's slot during this audit; its result is
-  not on file yet.
-- **It inherits the unbuildable layer.** glev -1.0 is desmo-conecut's BEST, the lower edge of the box (question 2).
-
-### Question 2: the inherited stage-1 layer
-
-Measured with `tools/alignment_lowarm_s1level.py geom` on the frozen protocol's fit model (Bench(60,160), linear IK as
-verified). All levels run along the J2 axis u2, over hub 2's face H2 = c2.u2 + f[1]. Stage 1 is identical in cells A
-and B (same a_s / psi / glev). Source: `remeasure/lowarm-halfring-knuckle-3r_s1level_geom_fast.json`.
-
-| part | verified level (glev -1.0, pin 9.2 / 149.5) | F+3.9 (glev 2.039, pin 9.8 / 150) |
-|---|---|---|
-| crank pivot PV | **F-1.289** (as desmo-conecut) | F-1.289 |
-| groove ring (link 2 metal) and O1.5 pin band | **F+0.111 .. 1.611** | F+3.15 .. 4.65 |
-| short arm, lower face, root to pin | F-2.146 .. -0.139 | F+0.751 .. 2.9 |
-| pin radius about u2 | 9.60 mm | 9.90 mm |
-| half-ring sector built | 18.9 deg (135 of 462 stations) | 18.3 deg (124 of 451) |
-| groove rc_min / dK_lim / desmo_fail | 1.0 / 46 slot-end / [] | 1.02 / 46 slot-end / [] |
-| dwell K play (hard pad) | 0.638 deg | 0.622 deg |
-| link 1b's J2 lower member (the plate) | F+0 .. 3.0 (`tools/concept_kit.py` line 24) | same |
-| link 1b samples within 12 mm of the J2 axis | 0 (no plate metal is sampled, so no clash can be read) | 0 |
-
-What the table shows:
-
-- **The verified groove and pin lie wholly inside the plate.** Both cells run the inherited formula hmid = PV.u2 + 3.15
-  + glev (`docs/concepts/models/desmo-conecut-knuckle-3r.py` line 182). The lowarm model execs desmo-conecut's
-  `_desmo_build_B` with only the half-ring line patched (model lines 41-48).
-- **No value in the box is buildable.** The clamp box glev [-1.0, 1.5] (`desmo-slipper-knuckle-3r.py` line 87) keeps the
-  layer bottom at F+0.11 .. 2.61, inside the plate for every value. -1.0 is the edge where the ring sector sits lowest
-  and in-band reads best.
-- **Cell A's own pin is dead at the plate-clearing level.** At F+3.9 (the family's criterion: the plate top F+3.0 plus
-  the 0.15 running gap), pin 9.2 / 149.5 has pitch 10.304, past R_HI. The drive limit falls to 0 (s1-pitch), and the
-  fast gap reads 95.51 (reach 0.344).
-- **The pin I picked.** 9.8 / 150 is the family's pre-registered F+3.9 pin from the desmo-conecut CAD's level scan
-  (`pipeline/full-exo/designs/user_desmo_conecut/stage1_level_scan.json`). 9.9 / 150 reads identically on fast. I picked
-  on fast only, before any exact wear.
-- **F+3.9 is the lenient level.** The short arm still runs F+0.75 .. 2.9 through the plate layer (a relief pocket is
-  assumed, as on the family), and no CAD of this row exists.
-
-**Exact frozen Bench(110,360) at F+3.9, pin 9.8 / 150.** These run through the row's verifier `wear()` unchanged; only
-glev and the pin differ. Files: `remeasure/lowarm-halfring-knuckle-3r_s1level3p9_{A,B}_bench.json` and their `_perpose`
-dumps, which recompute to 18.66 and 18.39. Each wear took 1010 s at about a third of a core.
-
-| | cell A verified level | cell A F+3.9 | cell B verified level (claim) | cell B F+3.9 | lead conecut-knee |
-|---|---|---|---|---|---|
-| bench gap | 18.28 | **18.65** | 17.96 | **18.39** | 18.28 |
-| reach (ws taken) | 0.7278 (262) | 0.7278 (262) | 0.7306 (263) | 0.7306 (263) | 0.7278 (262) |
-| in-band 2-14 / 2-10 | 0.9006 / 0.5715 | 0.8963 / 0.5703 | 0.8978 / 0.5682 | 0.8935 / 0.5670 | 0.9012 / 0.5739 |
-| contact (poses) | 0.0106 (4) | 0.0106 (4) | 0.0080 (3) | 0.0080 (3) | 0.0106 (4) |
-| near-touch 1 mm | - | 20.29 | 20.14 | 20.57 | 19.92 |
-| fit fast (plain) | 13.12 | 13.52 | - | 13.81 | - |
-
-What the exact wears show:
-
-- **The cost is in-band only:** +0.37 (A) and +0.43 (B). It is a third of the family's cost (desmo-conecut +1.52,
-  desmo-slipper +1.43), because the half ring keeps only an 18-degree sector of the raised ring.
-- **The rank flips.** With stage 1 out of the plate, the claim moves from ahead of the lead (-0.32) to behind it
-  (+0.11). The tie becomes 0.37 behind, on identical takes and contacts: the lead keeps more metal in the 1-cm band.
-- **Held out at F+3.9 was not run** (time box).
+Re-wear (this audit, model unchanged): bench 18.28 (262/360, 4 contacts, near-touch 19.92 / 34.84 / 86.16, band 3-14
+mm 18.42), held 22.64 (657/952, near-touch 25.49 / 37.12 / 82.96). Both match the verifier's cell-A numbers, and on the
+bench they match the lead pose for pose.
 
 ## What the wearer gets (measured)
 
-Sources:
+Sources: the verifier's cell-A dumps `remeasure/lowarm-halfring-knuckle-3r_{bench,held}_perpose.json` (recompute 18.29 /
+22.64), this audit's per-pose play wear, this audit's re-wear, and the first audit's probe (cell B) for the unscored
+workspace in-band. Counts of taken poses use min(metal, contact copy) at or above 0 and under x.
 
-- the verifier's per-pose dumps at the verified level: `remeasure/lowarm-halfring-knuckle-3r_{bench,held}_perpose.json`;
-- this audit's F+3.9 dumps;
-- `remeasure/conecut-knee-knuckle-3r_bench_perpose.json` for the lead;
-- the first audit's probe, `remeasure/lowarm-halfring-knuckle-3r_probe_bench.json`.
-
-Counts of taken poses use min(metal, contact copy) at or above 0 and under x.
-
-| | B verified bench | B held | A F+3.9 bench | B F+3.9 bench | lead bench |
+| | A verified, no play, bench | A held, no play | A +0.912 (v_gap) bench | A per-pose worst of +/-0.912 | lead bench |
 |---|---|---|---|---|---|
-| overhead reach (elev >= 140), taken / total | 9 / 28 | 19 / 71 | 8 / 28 | 9 / 28 | 8 / 28 |
-| raised-arm reach (elev >= 90) | 48 / 113 | 124 / 300 | 47 / 113 | 48 / 113 | 47 / 113 |
-| taken poses with metal < 1 / 2 / 3 mm | 4 / 34 / 106 | 12 / 71 / 216 | 3 / 33 / 105 | 4 / 34 / 106 | 3 / 33 / 105 |
-| taken overhead poses < 2 mm | 5 | 11 | 4 | 5 | 4 |
-| closest taken metal | 0.048 mm (pose 316) | 0.325 mm | 0.072 mm | 0.048 mm | 0.072 mm |
-| contact poses, summed depth, deepest | 3, 14.92 mm, **9.47 mm** at (15, 165, -60): crank | 13, 43.67 mm, **10.38 mm** at (45, 165, -30) | 4, 16.15 mm, 9.47 mm | 3, 14.92 mm, 9.47 mm | 4, 20.24 mm, 8.93 mm |
-| workspace in-band, unscored (all / elev 90-140 / overhead) | 0.8634 / 0.8283 / 0.9279 | - | not probed | not probed | 0.8676 / 0.8315 / 0.9359 |
+| overhead reach (elev >= 140), taken / total | 8 / 28 | 18 / 71 | 8 / 28 | 8 / 28 | 8 / 28 |
+| raised-arm reach (elev >= 90) | 47 / 113 | 123 / 300 | 46 / 113 | 46 / 113 | 47 / 113 |
+| taken poses with metal < 1 / 2 / 3 mm (contacts excluded) | 3 / 33 / 105 of 372 | 13 / 70 / 215 of 859 | 3 / 34 / 107 of 371 | 3 / 34 / 107 of 371 | 3 / 33 / 105 |
+| closest taken metal | 0.072 mm (pose 139) | 0.325 mm | 0.072 mm | 0.072 mm | 0.072 mm |
+| contact poses, summed depth, deepest | 4, 16.16 mm, 9.47 mm at (15, 165, -60): crank | 14, 43.84 mm | 5, 16.24 mm, 9.50 mm | 5, 18.13 mm, **10.22 mm** at (15, 165, -60) | 4, 20.24 mm, 8.93 mm |
+| gap | 18.28 | 22.64 | 18.83 | **18.89** | 18.28 |
+| workspace in-band, unscored (all / elev 90-140 / overhead) | cell B probe: 0.8634 / 0.8283 / 0.9279 | - | - | - | 0.8676 / 0.8315 / 0.9359 |
 
 Beyond the table:
 
 - **Springs:** none. The desmo K drive is spring-free.
-- **Stops:** J2 / J3 dowel stops, and the crank stop pad on link 1b. The pad is unsampled (S3).
-- **Dwell hold:** a hard pad leaves 0.638 deg of K play against the 0.25 gate (M5). Worn as metal, it closes pose 203
-  from 0.263 mm to 0.008 mm (red team).
+- **Stops:** J2 / J3 dowel stops and the crank stop pad on link 1b (now measured: on link 1b's top face, clear of link 2
+  by 18.46 mm and link 1a by 5.37 mm, `rows: verification_cellA.pad_true_lever.pad_block_metal`).
+- **Dwell hold:** the hard pad's true lever is 6.75 mm, so the K play is 0.912 deg, 3.6x the claim's own 0.25 gate. It
+  puts pose 203 (abduction 90 / external rotation 45) 0.10 mm into the skin on the +side.
 - **Cuff twist and drag:** not measured; there is no CAD or R17 run for this row.
-- **Near-singular postures:**
-  - The fold margin th is 5.181 bench and 5.11 held (5.088 / 5.017 with the dwell play; 0 poses dropped).
-  - The K sub-dyad m_sub at K rest is under 1 deg on 50 of 205 rest bench poses (G4).
+- **Near-singular postures:** the fold margin th is 5.181 bench and 5.11 held (5.088 / 5.017 with the play; 0 poses
+  dropped). The K sub-dyad m_sub at K rest is under 1 deg on 50 of 205 rest bench poses (G4).
+- **Continuity:** connected_full equals static (18.28 / 22.64), but the kNN flood without the envelope stepping stones
+  reads 19.97 bench and 30.78 held (S5).
 
 ## Findings (`lowarm-halfring-knuckle-3r.findings.json`)
 
-1. **M3, gamed: unbuildable stage-1 layer under both cells.**
-   - *Evidence:* the two tables above.
-   - *Why the exo is not better than its number:* the verified groove, pin and arm occupy link 1b's plate volume. Built,
-     they must ride higher. There the extra ring metal leaves the band, and both cells fall behind the lead. The lead
-     is a verified design already built at L2 CAD (`pipeline/full-exo/designs/user_conecut_knee`).
-   - *Why gamed:* a hard rule (every part at its real envelope) is broken by the verified config, and that placement
-     is what ranks the row ahead of (17.96) or level with (18.28) the lead.
-   - *Action:* re-claim both cells at a level with the groove bottom at F+3.15 or above (bench and held), or record
-     them as unbuildable.
-2. **P1, gamed (carried, unresolved).**
-   - *Evidence:* the link-2 lift is the minimum of 794 configs scanned on the claim bench. Held out it reads 22.70
-     against the lead's 22.38.
-   - *What is still missing:* `morphs.json` still shows 17.96 first among verified rows, with an empty `leader_ruling`.
-   - *Action:* unchanged; record a `leader_ruling`.
-3. **R1, watch: the "honest tie" is self-measured and bench-only.**
-   - Cell A is pre-registered and clean of P1 (question 1).
-   - Its 18.28 and its held 22.64 are the proposer's own numbers, and held out it is 0.26 behind the lead.
-   - At the buildable level it is 0.37 behind on the bench.
-   - *Action:* drop "tie" from the row and events until a verifier wears cell A at a buildable level, bench and held.
-4. **NEW-inherited-stack, watch (proposed catalogue M6, carried).**
-   - *Evidence:* round 15 lens B (`lowarm-adjpad-knuckle-3r`, ROUNDS.md lines 3644-3660) pre-registers its pass bar
-     as "frozen exact <= 18.28 at cx <= 17.0". That bar was set by cell A on the unbuildable layer.
-   - At the buildable level the same cell reads 18.65. Lens B's cell A0L (the one-part groove) is desmo-conecut, which
-     reads 20.50 at F+3.9 (its audit).
-   - *Action for the planner:* lens B must pre-register the stage-1 level (groove bottom >= F+3.15) before any run, or
-     its pass bar is unreachable honestly.
-5. **T1, watch (carried, report only).** The bench edge is pose 316 at 0.048 mm. It is unchanged at F+3.9.
-6. **R3, watch (carried).** The row shows best-of-794 without its spread (p10 18.07, median 18.42).
-7. **M5, watch (updated).** The hard pad still fails its own 0.25-deg gate (0.638; 0.622 at F+3.9). The red team
-   measured the play as metal: the score moves -0.11 .. +0.10, but pose 203 closes to 0.008 mm. The fix (a preload or
-   an adjuster) has unmeasured drag or parts.
-8. **S3, watch (carried).** The pad is unsampled metal.
-9. **S5, watch (carried).** Continuity holds only through the envelope stepping stones (held kNN 30.93 against 22.70).
-10. **G4, watch (carried).** m_sub at K rest is under 1 deg on 50 of 205 rest poses. With the dwell play applied, the
-    verifier's th row reads 0.0 at poses 283, 311 and 338.
-11. **T5, watch (report only, the skeptic's missed 4, filed now).** The low arm (zr 2.0, both cells) made the deepest
-    presses deeper than the lead's: bench 9.47 against 8.93 mm, held 10.38 against 9.86 mm.
+- **M3** (gamed). Re-keyed on the moved claim v_gap 18.83 (786b081, cell A with the hard pad's true-lever dwell play worn as metal). The verified number still stands on the stage-1 layer that sits inside link 1b's J2 lower member: at glev -1.0 the groove ring sector (link 2 metal) and the O1.5 pin occupy F+0.111..1.611 inside the plate F+0..3.0 (docs/alignment/remeasure/lowarm-halfring-knuckle-3r_s1level_geom_fast.json; the family's built CAD fails R6 at 1.50 mm on the same layer, desmo-conecut VERIFY.md). Two real envelopes in one volume: a hard rule (every part at its real envelope) is broken by the verified config. NEW this audit: the verifier MEASURED the buildable number and left it out of v_gap - docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_padplay.json kplay_true_lever_stage1_F39: 18.65 at play 0, 19.05 at +0.912 (row verification_cellA.v_gap_rule: 'plate layer not applied; 19.05 with both'). Rank consequence on the dashboard (docs/dashboard/data/morphs.json, verified rows by v_gap): 18.83 places the row 8th, ahead of sidecar-longdyad-knuckle-3r 18.91 (ledger watch, no stage-1 clash, held 22.67); the verifier's own buildable 19.05 places it behind. Against desmo-slipper 18.95 / desmo-conecut 18.98 the order holds like-for-like (they carry the same unapplied layer, +1.43 / +1.52). Size is small and density-sensitive (the skeptic's kit-density re-weight puts cell A's layer cost at +0.00..+0.10, pending measurement change), so the rank flip over sidecar-longdyad is 0.14 bench points and held is a tie (22.64 unclashed, no play, vs 22.67); the gamed level rests on the hard rule plus the verifier's own unapplied measurement, not on a wearer-side margin. Action: publish v_gap at the buildable level (19.05) or record a lead ruling that the layer is deferred to CAD; the family (desmo-slipper, desmo-conecut, both ledgered watch on the same layer) needs one ruling. [evidence: docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_padplay.json; docs/concepts/rows/lowarm-halfring-knuckle-3r.json verification_cellA.stage1_layer_auditor and v_gap_rule; docs/alignment/remeasure/lowarm-halfring-knuckle-3r_s1level3p9_A_bench.json] Why the exo is not better: a pin and a ring sector cannot occupy the plate that carries J2. The buildable placement costs in-band, and the verifier measured it. Action: publish 19.05, or record a family-wide lead ruling that defers the layer to CAD.
+- **NEW-one-sided-play** (watch). The verified v_gap 18.83 wears the dwell K play as ONE uniform side on every dwell pose (+0.912: 18.83; -0.912: 18.35). A free play of 0.912 deg sits on whichever side the load pushes it, pose by pose, and the two sides hurt different poses: the +side takes the extra contact (pose 203, abduction 90 / external rotation 45, -0.102 mm) but raises in-band to 0.9021 (above the 0.90 threshold, so in-band adds 0 to the gap), while the -side drops in-band to 0.8994 and presses 237 and 264 deeper (-10.215 / -1.753 mm vs -9.504 / -0.579). MEASURED this audit: the verifier's own kplay script (docs/concepts/models/lowarm-halfring-knuckle-3r-kplay.py, unchanged, cell A) at +/-0.912 with per-pose rows stashed, reproducing 18.83 / 18.35; the per-pose worst of the two sides (taken on both, contact on either, the lower in-band fraction) reads 18.89 (reach 0.725 = 261/360, in-band 0.8994, 5 contacts, summed depth 18.13 mm, deepest 10.22 mm at pose 237 = plane 15 / elev 165 / axial -60). +0.06 over v_gap: small, but optimistic by construction, and it moves the row no rank (sidecar-longdyad 18.91 stays behind). Proposed catalogue entry T6 (play read on one side). [evidence: docs/alignment/remeasure/lowarm-halfring-knuckle-3r_kplay_perpose_A.json] Why the exo is not better: the wearer gets both sides of the play, pose by pose. Action: read a play per pose at its worst side (proposal T6).
+- **M5** (watch). Now priced, still not held: the verifier corrected the pad lever (12.29 -> 6.75 mm; the claim's seat test counted arm points up to 5 mm beside link 1b as over it, 25 of 133 crank samples truly over L1b) and wore the resulting 0.912-deg dwell K play as metal (v_gap 18.83). The hard pad fails the claim's own 0.25-deg dwell gate by 3.6x; for the wearer this is an unsensed knee coordinate that floats ~0.9 deg in dwell and pushes pose 203 (abduction 90 / external rotation 45, a raised-arm posture) 0.10 mm into the skin. The fix the row names (a preloaded or adjusted pad) adds drag or a part that is neither measured nor counted (complexity stays 16.5 with the pad as 0 parts). [evidence: docs/concepts/rows/lowarm-halfring-knuckle-3r.json verification_cellA.pad_true_lever, play_as_metal_true_lever] Why the exo is not better: an unsensed coordinate floats by 3.6x its own gate. Action: round 15 lens B's adjusted rigid pad, sampled and counted.
+- **P1** (watch). Resolved as the headline, record still on file: cell B's in-sample 17.96 (min of 794 frozen-exact configs on the claim bench; held 22.70, behind the lead) is no longer the row's v_gap (now 18.83, cell A, pre-registered at ideation 2026-10-17T23:25:10Z) and the dashboard shows 18.83 (morphs.json 08:15). But the row's top-level 'verification' block (t 02:20) still reads bench gap 17.96, overhead 9/28, near1 20.14 for cell B with no superseded flag; a reader of that block gets the gamed number. [evidence: docs/concepts/rows/lowarm-halfring-knuckle-3r.json verification.bench vs verification_cellA] Why it matters: the gamed cell-B number is still printed in the row. Action: mark the 02:20 verification block superseded.
+- **NEW-inherited-stack** (watch). Carried: the model execs desmo-conecut's _desmo_build_B with only the half-ring line patched (docs/concepts/models/lowarm-halfring-knuckle-3r.py lines 41-48), so the unbuildable stage-1 level formula and its glev box [-1.0, 1.5] (every value inside the plate) pass to the next round: ROUNDS.md round 15 lens B (lowarm-adjpad-knuckle-3r) pre-registers its pass bar as cell A's 18.28 at cx <= 17.0, a bar set on the clashing layer (18.65 at the nearest buildable level F+3.9, 19.05 with the true-lever play). [evidence: docs/concepts/ROUNDS.md lines 3644-3660] Why it matters: the next round's bar is set on the clashing layer. Action: name the level with the bar (proposal 4).
+- **T1** (watch). Report only (user decision 3). Re-worn this audit (cell A, no play, model unchanged): bench plain 18.28, near-touch 1 / 2 / 3 mm 19.92 / 34.84 / 86.16, band read 3-14 mm 18.42, min metal 0.072 mm at pose 139 - identical to the lead (19.92 / 34.84 / 86.16, band3 18.34); held 22.64, near 25.49 / 37.12 / 82.96 vs the lead's 25.23 / 37.10 / 83.12. 16.56 bench points live in the 1-2 mm shell, as on the lead. Under the verified +0.912 play near1 is 20.46 and pose 203 goes from 0.263 mm to -0.102 mm; taken poses under 2 mm rise 33 -> 34. [evidence: docs/alignment/remeasure/lowarm-halfring-knuckle-3r_bench.json, _held.json, _kplay_perpose_A.json; remeasure/conecut-knee-knuckle-3r_{bench,held}.json] Report only.
+- **S5** (watch). Carried: reach is continuous only through the envelope stepping stones: cell A connected_full 18.28 / 22.64 equals static, but the kNN flood (no stepping stones) reads 19.97 bench, 30.78 held (-8.14 held). [evidence: docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_bench_frozen.json, _vA_held_frozen.json] Report only; the documented flood passes.
+- **G4** (watch). Carried: the K sub-dyad margin m_sub at K rest is < 1 deg on 50 of 205 rest bench poses (min 0.0, p10 0.267, < 5 deg on 107), while the documented fold margin th is >= 5.181 (dwell 5.389; with the play 5.088). The K law is the same in cells A and B (only link 2's lift differs), so it applies to the claim. A near-singular sub-dyad at rest that the fold-margin check does not read. [evidence: docs/alignment/remeasure/lowarm-halfring-knuckle-3r_msub_rest_bench.json] Why it matters: a sub-dyad near its singular posture at rest is a feel risk the fold margin does not read. Action: report m_sub with th.
 
-**Resolved since the first audit:** M3 V5. The red team measured the lifted link 2 against the crank: at least 9.16 mm
-over 373 taken poses, and at least 9.06 mm against link 1b. The skeptic refuted NEW-string-params; it is not re-raised,
-although the tool still crashes on the string.
-
-## Re-wear rule (step 2)
-
-The row's last commit (f90113b, 06:08:37) added red-team fields and changed the note. The claim, `best_params` and
-verification are unchanged, so `remeasure lowarm-halfring-knuckle-3r bench|held` was not re-run. The standing re-wear
-(02:40, 17.96) and the verifier's dumps stand. The F+3.9 wears above are the new measurement.
+Resolved since the last audit, not carried: **R3** (best-of-794 without its spread) belonged to cell B's lift scan; cell
+A's parameters were pre-registered and the 114-config fast LHS was flat (13.12-13.59). **R1** (cell A self-measured) is
+resolved: the verifier reproduced 18.28 and held 22.64 and published 18.83. **S3** and **T5** were refuted by the
+second skeptic and stay refuted: the pad is measured, and the summed contact depth is below the lead's under every play
+side (16.16 / 16.23 / 18.13 mm vs 20.24).
 
 ## Numbers I could not get, and why
 
-- **Held out at F+3.9, both cells:** the time box. Each exact wear took 17 min at the box's load; held needs about 2.5
-  times that.
-- **A wider pin scan at F+3.9, and levels fully above link 1b (F+4.6, F+6.15):** not run here. On desmo-slipper's
-  chain, no pin kept the drive at F+6.15.
-- **The relief that link 1b would need for the short arm at F+0.75 .. 2.9:** no CAD of this row exists. The strap is
-  not sampled near J2.
-- **Cell A's verifier wear at the verified level:** another agent's run; not on file at this writing.
-- **The workspace probe at F+3.9:** the time box.
-- **Cuff twist and pad drag:** no CAD.
-- **The lead's own stage-1 level against its plate:** not measured here. The lead's drive is slipper-nose's (no desmo
-  groove), and its L2 CAD exists.
+- **Held out with the play and with the buildable layer:** not run in the time box. Held at 22.64 is the unplayed,
+  clashing config; the kplay script has no held path, and a held wear took 15 min at this load.
+- **Workspace in-band (unscored) for cell A:** the cell-A dumps carry no per-pose in-band counts for workspace poses, and
+  the wear probe (`tools/alignment_strparams_adapter.py probe`) would have been a third process. The cell-B probe stands in.
+- **The tool's contact_depth check on the claim:** no dump that reproduces 18.83 sits at the path the tool reads. The
+  per-pose play wear has the depths (table above); I did not overwrite the verifier's cell-A dump to feed the tool.
+- **Cuff twist, pad drag, R17:** no CAD of this row.
+- **Per-pose worst at the buildable level (play and layer together):** not run; the verifier's uniform +0.912 there reads 19.05.
 
 ## Proposals (not applied; none feeds the verdict)
 
-1. **Family level fix (a measurement change, carried from the desmo-slipper audit).**
-   - Change: measure the stage-1 level from hub 2's face, not from the crank pivot. Re-base glev so the groove bottom
-     is at F+3.15 or above.
-   - Measured effect on the verified rows at the nearest plate-clearing pin:
+1. **T6, a new catalogue entry: play read on one side.** A free play (a stop with clearance, a slot, a groove) is worn
+   pose by pose at its worst side, not as one uniform offset. Measured effect: this row 18.83 -> 18.89 (the per-pose worst of +/-0.912, `remeasure/lowarm-halfring-knuckle-3r_kplay_perpose_A.json`). Other verified
+   rows: none wears a play as metal today (the lead's groove play is unworn), so no other row moves.
+2. **One ruling for the stage-1 layer across the family.** The same clash is ledgered gamed here and watch on
+   desmo-slipper (18.95, +1.43 at F+3.9) and desmo-conecut (18.98, +1.52). Either every verified number that carries an
+   unapplied, measured clash is published at its buildable level (this row 19.05, desmo-slipper 20.38, desmo-conecut
+   20.50), or the lead rules that the layer is deferred to CAD for all three. Effect on the board: this row drops behind
+   sidecar-longdyad (18.91); the two desmo rows drop behind sidecar-parallelogram (19.13) and sidecar-roller-flank (20.08),
+   still ahead of kneeless-roller (21.07).
+3. **Superseded verification blocks get a flag.** The row's top-level `verification` block (cell B, 17.96) has no
+   superseded marker next to `verification_cellA`. Effect: reporting only; no number moves.
+4. **Round 15 lens B's pass bar** (cell A's 18.28 at cx <= 17.0) should name its level: 18.65 at the buildable stage-1
+   level, 19.05 with the true-lever play.
 
-     | row | verified | at the buildable level |
-     |---|---|---|
-     | this row, cell B | 17.96 | 18.39 |
-     | this row, cell A | 18.28 | 18.65 |
-     | desmo-conecut | 18.98 | 20.50 |
-     | desmo-slipper | 18.95 | 20.38 (held 25.33) |
+Next: the lead records a ruling on M3 (publish 19.05, or defer the layer to CAD for the family); round 15 lens B
+(lowarm-adjpad) carries the level and the per-pose play rule into its claim.
 
-   - No other verified row has a desmo stage 1.
-2. **A layer check in every verifier of a stacked drive.** Sample each drive part against the members of the joint it
-   sits in: link 1b's plate needs samples within 12 mm of J2 (n = 0 today). Effect: the same four rows as above.
-3. **A pass bar carried into a new round names the level its source number was measured at.** This applies to round
-   15 lens B: its 18.28 bar becomes 18.65 at the buildable level.
+---
+
+_Below: the skeptic sections of the previous audits (2026-10-18 07:37-07:46 and 02:50-03:01 UTC), kept unchanged. Their
+rulings refer to the earlier findings (ledger 2026-10-18T07:34:11Z and 02:43:22Z)._
 
 ## Skeptic (2026-10-18, 07:37-07:46 UTC), second audit
 

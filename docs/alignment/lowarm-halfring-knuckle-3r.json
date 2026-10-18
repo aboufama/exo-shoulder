@@ -11,11 +11,11 @@
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 22.64 vs bench 18.83 (+3.81; docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_held_frozen.json)",
+   "reason": "held out 22.64 vs bench 18.83 (+3.81; re-measured (this audit))",
    "held_gap": 22.64,
    "v_gap": 18.83,
    "drop": 3.81,
-   "source": "docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_held_frozen.json"
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -51,10 +51,45 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump lowarm-halfring-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.83: held 14 contact poses, sum 43.84 mm, deepest 10.38 mm at ['ws', 45.0, 165.0, -30.0], 5 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-17.13 mm, x0.72); bench depths not on file",
    "depths": {
-    "v_gap 18.83": {}
-   }
+    "v_gap 18.83": {
+     "held": {
+      "n": 14,
+      "sum_mm": 43.84,
+      "max_mm": 10.38,
+      "n_deeper3": 5,
+      "overhead140": 7,
+      "deepest": [
+       "ws",
+       45.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 22.64,
+      "src": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        43.84
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 18.83",
+     "wear": "held",
+     "sum": 43.84,
+     "ref_sum": 60.97,
+     "excess": -17.13,
+     "ratio": 0.72,
+     "watch": false
+    }
+   ]
   },
   {
    "check": "dominance",
@@ -250,7 +285,7 @@
  ],
  "remeasured": {
   "bench": true,
-  "held": false
+  "held": true
  },
  "verifier_files": [
   "docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_padplay.json",
@@ -260,7 +295,7 @@
   "docs/concepts/verify/lowarm-halfring-knuckle-3r_v_held_frozen.json",
   "docs/concepts/verify/lowarm-halfring-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "595e258",
+ "git": "1a20637",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T08:27:38Z"
+ "t": "2026-10-18T08:35:33Z"
 }
