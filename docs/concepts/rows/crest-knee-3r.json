@@ -54,7 +54,7 @@
  "n_configs": 2019,
  "verdict": "SCREENED, below the lens bar: best claimed frozen exact Bench(110,360) 32.84 (score 88.06; reach 0.6333, follow 1.0, ib14 0.8529, contact 0.0146; near-touch 1 mm 36.25) vs H1's verified 27.20 and the lens bar <= 21.0 / kill > 23.64. Every claimed cell (32.84, 33.23, 37.40) meets the lens's kill condition, but the convergence gate is not passed (near-touch gain over the last third 0.62 > 0.5 score points), so it is not called dead. Fast 26.34 / near-touch 28.74 on Bench(60,160). | ANTCREST re-dispatch 2026-10-18: antcrest basin (J1 bvec(55, 62), J3 wdir(98-104, +5..+18)) SCREENED, both kill lines met, gate not passed: best frozen exact Bench(110,360) 61.12 (score 77.77), held 64.60, fast 56.73 (575 configs, Bench(60,160) fast + |axial|>=150 gate; env cache unavailable locally). Hub 2 0.118 in band (kill <= 0.5); the fold gain (9-23 of 220) needs hub 2 at 74-98 mm off band, and the CMA optimum walks back to the crest J3 (wd 92-93, fold 42-56). The row's verified crest claim 32.84 stands. | RE-DISPATCH 2 2026-10-18: JOGGLED knee link (cx 0, 0 passive translations) claimed, UNVERIFIED: frozen exact Bench(110,360) 31.5 (score 88.55; reach 0.6278, ib14 0.8719, contact 0.0147), held out 28.45, fast 22.02 / near-touch 24.41; vs the verified flat claim 32.84 / held 29.81. Control at the same parameters: flat knee + pin-a stack rule 32.5 frozen at the J4 point (joggle 31.43), flat knee as verified jams (136 fast). Joggle gate passed (near-touch 0.58 / 0.04 / 0.21, n 309). Antcrest continued to 1002 tries: best near-touch 56.57 (plain 55.3), gate 0.51 / 0.51 / 0.51 (last third short by 0.01; valid-only passes); stays screened, both kill lines met.",
  "limiter": "the crest's fold gain is paid back: J3's crest azimuth wa trades fold (48 -> 16-24 of 220 from wa -20 to 0) for J3-window stops (5 -> 17) and member-3 in band; total losses stay 48-55 of 220 vs H1's 51. At the fold-free end the single knee level tr puts the E boss and the arm pad over skins of different height (boss 0.43 / pad 0.85, or boss 0.88 / pad 0.04 in band), knee link 0.29-0.63. Big bench: fold 92 of 470, J3 window 30, |axial| >= 150 ws 5/27 taken (22 fold).",
- "note": "Model: the verified pin-knee model unchanged + link 2 flying over the whole member 3 + a J3 own-angle stop (frozen window 265.6 + 239.5 deg) + MR63ZZ knee pins (stk 6.0) + ang_min >= 25.22. Local CMA (farm closed), 531 configs over 5 runs (C1 / C3 starts, small-step CMA, a wa [-6, 8] run at the fold-free end). Frozen exact needs 4-6 min per cell here. H1 through the same code 23.64 fast. Gate (near-touch, score points): 0.93 / 0.62 / 0.93 (fails the last-third rule by 0.12). Next lever (unmeasured): a joggled knee link so pin a's boss and pin b's pad sit at their own levels at the fold-free end; upside bounded by fast reach 0.70-0.71 there (~21 fast if member 3 reached 0.90 in band), likely ~25-27 frozen, i.e. not the <= 21 bar. | VERIFIED 2026-10-18 (independent verifier, local exact, docs/concepts/verify/crest-knee-3r.py): frozen exact Bench(110,360) 32.84 reproduced to the digit (reach 0.6333, follow 1.0, ib14 0.8529, ib10 0.4431, contact 0.0146 = 5 poses, depth sum 6.40 mm, deepest -2.77); the pin-knee verifier's extra checks (independent 3D closure <= 0.023 deg, knee vs hub 3 upper, E boss vs hubs / L1 / L2) remove 0 poses; J3 window, knee window [25.22, 154.78], th margin (6.23 bench / 5.33 held) all hold; continuity flood on the full 1432-pose grid with the J3 window: 0 islands, 0 bench poses dropped. Held out 29.81 (reach 0.6667, ib14 0.8521, contact 0.0169 = 6 poses). Near-touch 1 mm 36.25 / held 35.39. CHAMPION same bench and protocol 64.93 (fold margin 5; 66.97 at margin 10 through the pin-knee verifier, 75.94 risley checks): not refuted. Not a leader: 5.64 behind H1 27.20 and 14.56 behind the lead 18.28; overhead ws reach 5/28. | ANTCREST re-dispatch 2026-10-18: frozen exact Bench(110,360) 61.12 (fast 56.73), gate {'objective': 'near-touch gap + 2 per |axial|>=150 contact pose', 'n': 575, 'best_obj': 57.98, 'gain_half_score': 3.61, 'gain_third_score': 1.59, 'top5_spread_score': 1.24, 'plain': {'gain_half_score': 2.71, 'gain_third_score': 1.59, 'top5_spread_score': 1.06}, 'passed': False}; details in antcrest_2026_10_18. | RE-DISPATCH 2: model JogModel (kj=1) in docs/concepts/models/crest-knee-3r.py; the verifier harness must build CK.JogModel when kj=1 (scratchpad claim3.py sets V.CK.Model = JogModel); per-pose dumps docs/alignment/remeasure/crest-knee-3r-joggle_{bench,held}_perpose.json; best_params_joggle holds the claimed configuration; best_params / v_* stay the verified flat cell. | JOGGLE VERIFIED 2026-10-18T08:57:02Z: frozen exact Bench(110,360) 31.50 (reach 0.6278, ib14 0.8719, contact 0.0147), held 28.45, connected 31.49 / 28.45, verifier checks (pin-knee extra + joggle slices) removed 0 / 0 poses; champion same bench 64.93; v_* now carry the joggle cell (params best_params_joggle), the flat cell's numbers are in v_flat.",
+ "note": "Model: the verified pin-knee model unchanged + link 2 flying over the whole member 3 + a J3 own-angle stop (frozen window 265.6 + 239.5 deg) + MR63ZZ knee pins (stk 6.0) + ang_min >= 25.22. Local CMA (farm closed), 531 configs over 5 runs (C1 / C3 starts, small-step CMA, a wa [-6, 8] run at the fold-free end). Frozen exact needs 4-6 min per cell here. H1 through the same code 23.64 fast. Gate (near-touch, score points): 0.93 / 0.62 / 0.93 (fails the last-third rule by 0.12). Next lever (unmeasured): a joggled knee link so pin a's boss and pin b's pad sit at their own levels at the fold-free end; upside bounded by fast reach 0.70-0.71 there (~21 fast if member 3 reached 0.90 in band), likely ~25-27 frozen, i.e. not the <= 21 bar. | VERIFIED 2026-10-18 (independent verifier, local exact, docs/concepts/verify/crest-knee-3r.py): frozen exact Bench(110,360) 32.84 reproduced to the digit (reach 0.6333, follow 1.0, ib14 0.8529, ib10 0.4431, contact 0.0146 = 5 poses, depth sum 6.40 mm, deepest -2.77); the pin-knee verifier's extra checks (independent 3D closure <= 0.023 deg, knee vs hub 3 upper, E boss vs hubs / L1 / L2) remove 0 poses; J3 window, knee window [25.22, 154.78], th margin (6.23 bench / 5.33 held) all hold; continuity flood on the full 1432-pose grid with the J3 window: 0 islands, 0 bench poses dropped. Held out 29.81 (reach 0.6667, ib14 0.8521, contact 0.0169 = 6 poses). Near-touch 1 mm 36.25 / held 35.39. CHAMPION same bench and protocol 64.93 (fold margin 5; 66.97 at margin 10 through the pin-knee verifier, 75.94 risley checks): not refuted. Not a leader: 5.64 behind H1 27.20 and 14.56 behind the lead 18.28; overhead ws reach 5/28. | ANTCREST re-dispatch 2026-10-18: frozen exact Bench(110,360) 61.12 (fast 56.73), gate {'objective': 'near-touch gap + 2 per |axial|>=150 contact pose', 'n': 575, 'best_obj': 57.98, 'gain_half_score': 3.61, 'gain_third_score': 1.59, 'top5_spread_score': 1.24, 'plain': {'gain_half_score': 2.71, 'gain_third_score': 1.59, 'top5_spread_score': 1.06}, 'passed': False}; details in antcrest_2026_10_18. | RE-DISPATCH 2: model JogModel (kj=1) in docs/concepts/models/crest-knee-3r.py; the verifier harness must build CK.JogModel when kj=1 (scratchpad claim3.py sets V.CK.Model = JogModel); per-pose dumps docs/alignment/remeasure/crest-knee-3r-joggle_{bench,held}_perpose.json; best_params_joggle holds the claimed configuration; best_params / v_* stay the verified flat cell. | JOGGLE VERIFIED 2026-10-18T08:57:02Z: frozen exact Bench(110,360) 31.50 (reach 0.6278, ib14 0.8719, contact 0.0147), held 28.45, connected 31.49 / 28.45, verifier checks (pin-knee extra + joggle slices) removed 0 / 0 poses; champion same bench 64.93; v_* now carry the joggle cell (params best_params_joggle), the flat cell's numbers are in v_flat. | RE-VERIFIED (round-3 skeptic, 2026-10-18T12:05:54Z): flat claim (best_params) frozen exact Bench(110,360) 32.84 / held 29.81 reproduced to the digit, 0 poses removed; new checks (J2 branch side, J3 window on the true relative angle, knee-pin rotations, 2 mm sample density, pin-a stack) all pass; champion same bench 64.93; not refuted. v_* keep the verified joggle cell (v_params_key best_params_joggle, 31.50); the flat cell's numbers stay in v_flat.",
  "gap_near1_fast": 28.74,
  "best_params": {
   "az1": 106.3227,
@@ -2054,7 +2054,8 @@
   "v_inband10": 0.4431,
   "v_gap": 32.84,
   "params_key": "best_params",
-  "note": "the flat-knee cell verified 2026-10-18 01:40 UTC (held 29.81)"
+  "note": "the flat-knee cell verified 2026-10-18 01:40 UTC (held 29.81)",
+  "reverified_r3": "2026-10-18T12:05:54Z"
  },
  "v_params_key": "best_params_joggle",
  "verification_joggle": {
@@ -2687,5 +2688,329 @@
    "pin-knee extra_checks 'pad' line prints tr = tr_a 66.08; the pad sits at tr_b 62.89 (label only: pad samples and boxes are at tr_b, error 0.0 mm)",
    "extra_checks spans_deg q3 547.9 is an unwrap over unordered poses, not a travel; the J3 own-angle window is 245.09 deg"
   ]
+ },
+ "verification_r3_flat": {
+  "t": "2026-10-18T12:05:54Z",
+  "params_key": "best_params",
+  "claim": 32.84,
+  "harness": "docs/concepts/verify/crest-knee-3r-v3.py (committed flat harness's fit / wear path + own-angle checks from body transforms, sample-density audit, per-pose dumps); docs/concepts/verify/crest-knee-3r-v3_pinastack.py",
+  "protocol": "fit Bench(60,160) fast -> shape frozen (J3 window [265.6, +239.54]) -> worn exact (CB_EXACT=1) on Bench(110,360) and the disjoint held-out bench; local, niced, 1 thread (farm closed)",
+  "bench": {
+   "corrected": {
+    "gap": 32.84,
+    "reach": 0.6333,
+    "follow": 1.0,
+    "inband14": 0.8529,
+    "inband10": 0.4431,
+    "contact": 0.0146
+   },
+   "removed": 0,
+   "why": {
+    "fold": 92,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "j3stop": 30,
+    "skin": 0,
+    "parts": 5,
+    "contact": 5
+   },
+   "near1": 36.25,
+   "near2": 57.98,
+   "contacts": 5,
+   "contact_depth_sum": -6.4,
+   "overhead_ws": {
+    "total": 28,
+    "taken": 5
+   },
+   "th_margin_min_taken": 6.228,
+   "j3_margin_min_taken": 4.62,
+   "knee_ang_taken": [
+    80.23,
+    101.38
+   ],
+   "extra": {
+    "closure_max": {
+     "hub3c": 0.0,
+     "rot3_axis": 0.0165,
+     "pin_a": 0.0,
+     "pin_b": 0.0,
+     "knee_rot_axis": 0.0233,
+     "arm_rot": 0.0
+    },
+    "closure_bad_poses": 0,
+    "knee_vs_hub3_upper_bad": 0,
+    "boss_bad": 0
+   },
+   "j2_branch": {
+    "axis_dev_deg_max": 0.0001,
+    "q2_fold": 74.5,
+    "q2_stretch": -105.5,
+    "th_range_q": [
+     14.13,
+     95.89
+    ],
+    "taken_side_counts": {
+     "+": 0,
+     "-": 338
+    },
+    "kin_side_counts": {
+     "+": 0,
+     "-": 348
+    },
+    "q2_taken_range": [
+     -68.38,
+     53.64
+    ],
+    "th_from_q2_vs_model_maxerr": 0.0
+   },
+   "j3_own_angle": {
+    "axis_dev_deg_max": 0.0012,
+    "q3true_minus_q3p_spread": 0.0,
+    "q3true_minus_q3p_mean": 0.0,
+    "q3p_taken_inside_window": 338,
+    "n_taken": 338
+   },
+   "knee_pins": {
+    "pin_a_axis_dev": 0.0001,
+    "pin_b_axis_dev": 0.0001,
+    "pin_a_range": [
+     -14.2,
+     6.95
+    ],
+    "pin_b_range": [
+     -10.28,
+     13.42
+    ]
+   },
+   "sample_density": {
+    "hub1": {
+     "n": 80,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "hub2": {
+     "n": 80,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "hub3": {
+     "n": 80,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "E": {
+     "n": 112,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "boss": {
+     "n": 32,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "pad": {
+     "n": 32,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "knee": {
+     "n": 100,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "L1": {
+     "n": 44,
+     "nn_med": 1.71,
+     "nn_max": 2.06
+    },
+    "L2": {
+     "n": 96,
+     "nn_med": 1.86,
+     "nn_max": 3.0
+    }
+   },
+   "recomputed": {
+    "gap": 32.83,
+    "reach": 0.6333,
+    "follow": 1.0,
+    "inband14": 0.8529,
+    "contact": 0.0146,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 228,
+    "contact_poses": 5
+   },
+   "dump": "docs/alignment/remeasure/crest-knee-3r_v3_bench_perpose.json"
+  },
+  "held": {
+   "corrected": {
+    "gap": 29.81,
+    "reach": 0.6667,
+    "follow": 1.0,
+    "inband14": 0.8521,
+    "inband10": 0.4405,
+    "contact": 0.0169
+   },
+   "removed": 0,
+   "why": {
+    "fold": 81,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "j3stop": 30,
+    "skin": 0,
+    "parts": 3,
+    "contact": 6
+   },
+   "near1": 35.39,
+   "near2": 54.71,
+   "contacts": 6,
+   "contact_depth_sum": -4.8,
+   "overhead_ws": {
+    "total": 26,
+    "taken": 6
+   },
+   "th_margin_min_taken": 5.331,
+   "j3_margin_min_taken": 1.0,
+   "knee_ang_taken": [
+    80.23,
+    103.76
+   ],
+   "extra": {
+    "closure_max": {
+     "hub3c": 0.0,
+     "rot3_axis": 0.0151,
+     "pin_a": 0.0,
+     "pin_b": 0.0,
+     "knee_rot_axis": 0.0214,
+     "arm_rot": 0.0
+    },
+    "closure_bad_poses": 0,
+    "knee_vs_hub3_upper_bad": 0,
+    "boss_bad": 0
+   },
+   "j2_branch": {
+    "axis_dev_deg_max": 0.0001,
+    "q2_fold": 74.5,
+    "q2_stretch": -105.5,
+    "th_range_q": [
+     14.13,
+     95.89
+    ],
+    "taken_side_counts": {
+     "+": 0,
+     "-": 350
+    },
+    "kin_side_counts": {
+     "+": 0,
+     "-": 359
+    },
+    "q2_taken_range": [
+     -71.25,
+     53.76
+    ],
+    "th_from_q2_vs_model_maxerr": 0.0
+   },
+   "j3_own_angle": {
+    "axis_dev_deg_max": 0.0004,
+    "q3true_minus_q3p_spread": 0.0,
+    "q3true_minus_q3p_mean": 0.0,
+    "q3p_taken_inside_window": 350,
+    "n_taken": 350
+   },
+   "knee_pins": {
+    "pin_a_axis_dev": 0.0001,
+    "pin_b_axis_dev": 0.0001,
+    "pin_a_range": [
+     -14.2,
+     9.33
+    ],
+    "pin_b_range": [
+     -11.84,
+     13.42
+    ]
+   },
+   "sample_density": {
+    "hub1": {
+     "n": 80,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "hub2": {
+     "n": 80,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "hub3": {
+     "n": 80,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "E": {
+     "n": 112,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "boss": {
+     "n": 32,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "pad": {
+     "n": 32,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "knee": {
+     "n": 100,
+     "nn_med": 2.0,
+     "nn_max": 2.0
+    },
+    "L1": {
+     "n": 44,
+     "nn_med": 1.71,
+     "nn_max": 2.06
+    },
+    "L2": {
+     "n": 96,
+     "nn_med": 1.86,
+     "nn_max": 3.0
+    }
+   },
+   "recomputed": {
+    "gap": 29.81,
+    "reach": 0.6667,
+    "follow": 1.0,
+    "inband14": 0.8521,
+    "contact": 0.0169,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 240,
+    "contact_poses": 6
+   },
+   "dump": "docs/alignment/remeasure/crest-knee-3r_v3_held_perpose.json"
+  },
+  "pin_a_stack": {
+   "knee_underside_mm": 64.469,
+   "strap_top_by_radius_from_pin_a": {
+    "0-6.5": "no strap samples (boss)",
+    "6.5-8.5": [
+     4,
+     64.841,
+     -0.371
+    ],
+    "8.5-12": [
+     8,
+     66.106,
+     -1.636
+    ]
+   },
+   "verdict": "the E strap rises up to 1.64 mm above the knee link's underside 6.5-12 mm from pin a, but every such sample is outside the 6.5 mm the model exempts and is checked by collide's knee-E pair (0.15 mm rule) on every pose (5 bench poses dropped as knee-E parts); no unchecked jam"
+  },
+  "champion_same_bench": 64.93,
+  "champion_ref": "spherical 3R champion, Bench(110,360) exact, same frozen protocol at fold margin 5 (docs/concepts/verify/arm-parked-knee-4r_champbig_frozen.json: 64.93)",
+  "refuted": false,
+  "verdict": "flat cell reproduced to the digit: 32.84 bench / 29.81 held; 0 poses removed; all taken poses on one side of the J2 fold (338 / 0 bench, 350 / 0 held) so the 5-deg fold window is a J2 own-angle stop; q3' equals the true link 2 -> member 3 rotation (spread 0.0000 deg); knee pins turn -14.2..+9.3 deg; every part sampled at 2.0 mm (L2 worst gap 3.0 mm)"
  }
 }

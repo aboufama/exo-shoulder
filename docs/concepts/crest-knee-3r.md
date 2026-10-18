@@ -591,3 +591,43 @@ protocol (66.97 at fold margin 10, 75.94 with the risley checks). The joggle bea
 bench and 1.36 held. It is still not a leader: 4.30 behind H1's 27.20 and 13.22 behind the lead's 18.28. Overhead
 workspace reach is 7/28. The row's v_* fields now hold the joggle cell (`v_params_key: best_params_joggle`); the flat
 cell's numbers are kept in `v_flat`.
+
+## Verification (round-3 skeptic re-run of the flat claim, 2026-10-18 12:00-12:06 UTC)
+
+Claim checked: the flat-knee cell (`best_params`), frozen exact Bench(110,360) 32.84. Harness
+`docs/concepts/verify/crest-knee-3r-v3.py`: the committed flat harness's fit / wear path unchanged (fit on Bench(60,160)
+fast, shape and J3 window [265.6, +239.54 deg] frozen, worn without refit with CB_EXACT=1), the pin-knee verifier's
+`extra_checks` unchanged, plus new checks computed from the body transforms rather than the model's own joint variables.
+Local, niced, one thread per wear (farm closed).
+
+| wear | gap | reach | follow | ib14 | ib10 | contact (poses, depth sum) | near 1 / 2 mm | min th | overhead ws | removed |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Bench(110,360) exact | **32.84** | 0.6333 | 1.0 | 0.8529 | 0.4431 | 0.0146 (5, -6.40 mm) | 36.25 / 57.98 | 6.23 | 5 / 28 | 0 |
+| held out exact | **29.81** | 0.6667 | 1.0 | 0.8521 | 0.4405 | 0.0169 (6, -4.80 mm) | 35.39 / 54.71 | 5.33 | 6 / 26 | 0 |
+| champion (spherical 3R), same bench + protocol, fold margin 5 | 64.93 | 0.7278 | 0.9182 | 0.565 | 0.3504 | 0.1103 | | | | |
+
+New refutation attempts (none removed a pose):
+
+- **Is the fold window a stop on J2's own angle?** th depends on q2 alone (the J1-J3 angle computed from q2 matches the
+  model's th to 0.000 deg), and th(q2) has two mirror arcs between the fold (q2 74.5) and the stretch (q2 -105.5). A
+  dowel stop can hold only one arc. Every taken pose sits on the same arc (bench 338 / 0, held 350 / 0; kinematic set
+  348 / 0), so one J2 stop realises the 5-deg fold margin.
+- **Is the J3 window on J3's own angle?** The relative rotation link 2 -> member 3 from the body transforms has its axis
+  on J3 (<= 0.0012 deg) and equals the model's q3' with a spread of 0.0000 deg over the taken poses, so the frozen
+  window is a real dowel-in-slot stop between the two bodies J3 connects (every taken pose inside it).
+- **Knee pins:** member 3 -> knee link and knee link -> arm pad rotate about the pin axis (<= 0.0001 deg) through
+  -14.2..+9.3 and -11.8..+13.4 deg: small arcs for an MR63ZZ pair.
+- **Sampling:** every part's skin-facing samples sit on a 2.0 mm grid (nearest-neighbour median 1.7-2.0 mm, worst gap
+  3.0 mm on link 2), with 25 contact-only wall / crown sets; no part is thinned to the samples near the skin.
+- **Pin a's stack (the joggle verifier's watch, on the flat cell):** the E strap's top rises up to 0.37 mm (6.5-8.5 mm
+  from pin a) and 1.64 mm (8.5-12 mm) above the knee link's underside (64.47 mm), but no strap sample lies within the
+  6.5 mm the model exempts (that is the boss), and every raised sample is in collide's knee-E pair (0.15 mm running gap)
+  on every pose (5 bench poses dropped there). It is not an unchecked jam; a CAD build should still pocket or step the
+  strap end under the knee's sweep.
+- Per-pose dumps: `docs/alignment/remeasure/crest-knee-3r_v3_{bench,held}_perpose.json` (recomputed 32.83 / 29.81,
+  with the J2 arc per pose).
+
+Verdict: **verified at 32.84 (score 88.06), held 29.81; not refuted** (champion 64.93 on the same bench and protocol).
+The row's v_* fields still hold the better verified joggle cell (31.50, `v_params_key` best_params_joggle). The flat
+cell's numbers stay in `v_flat`, and this re-run is stored in `verification_r3_flat`. The cell is not a leader: it is
+5.64 behind H1 (27.20) and 14.56 behind the lead (18.28), with overhead workspace reach at 5/28.
