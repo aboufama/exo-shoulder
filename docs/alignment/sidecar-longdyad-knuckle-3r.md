@@ -338,3 +338,52 @@ are watch. The claim is 18.91.
 - K is held on its law by one 0.08 N.m clock spring, and the hub-only reading depends on it. Should R17 (K lag, lift-off) have to pass before a knuckle row may drop its knee encoders?
 
 **Cost:** one local exact run (one process, nice) + one fit-bench run; no farm, $0.
+
+## Skeptic (2026-10-18, 23:10-23:30 UTC, hourly audit of 22:37, git 464835b)
+
+**Final verdict: WATCH** (ledger entry 2026-10-18T23:23:31Z, `by skeptic`, run `skeptic:sidecar-longdyad-knuckle-3r`).
+All 11 reasons are upheld and none is refuted. Every number I checked reproduced. The rulings file is
+`docs/alignment/sidecar-longdyad-knuckle-3r.rulings.json`. No bench, judge, kit, model, row, dashboard page or
+CLAUDE.md was edited, and no score changed. Compute: two exact bench wears, local, nice, OMP_NUM_THREADS=1, 2
+processes, about 117 s each. No farm, $0.
+
+**What I re-measured myself.** The model was unchanged and run with CB_EXACT=1. I called `remeasure()` in
+`tools/alignment_audit.py` with its output sent to scratch, so the canonical files stayed untouched.
+- **stk 6.0 (MR63ZZ pair):** 19.21. This is identical, field for field (frozen, parts_ib14, deep), to the
+  auditor's `_mr63knee_bench.json`.
+- **stk 5.0 (the kit's iglidur figure), new:** 18.94, with the knee part 0.939 in band (median 10.5 mm). It is on file
+  as `docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_skeptic_stk5_bench.json`.
+
+### Rulings
+
+| key | ruling | evidence |
+|---|---|---|
+| reporting | upheld | Row and morphs.json: gap 10.3 / reach 0.8 / sweep_gap 10.3 against v_gap 18.91, and the verdict opens "SCREENED". The rule is c_reporting lines 736-752 (sweep < v_gap - 5): 8.61 > 5. |
+| M2 | upheld | 19.21 reproduced (see above). The model's PARAMS resolve stk 4.8534 (LEAD, line 48), and the row's best_params has no stk. desmo-conecut is at stk 6.0 / 18.98 / held 23.24, so the bench order flips and the held order does not. **New:** at stk 5.0 the bench reads 18.94. So 0.27 of the 0.30 comes from the MR63ZZ build rule and 0.03 from the stack being thinner than the kit's. |
+| S3 | upheld | Missing measurement. Design doc lines 290-295; red team line 25 (CFS2.5 on a 6.0 mm arm, ring r 10.29-13.43, 3.43 mm outside the O20 hub). No remeasure or verify file samples a follower or a ring. |
+| NEW-catalogue-drive | upheld | rh155cap354: bench 19.76, held 23.53. The only param that differs from the row is r_h 15.5. dK max 34.9 deg, so the cap was in force. The claim takes dK to 37.8 (verify extra), with dK_lim 43.0. That wear still samples the O7 socket (ER 3.5), so 19.76 is a lower bound. |
+| NEW-unpriced-stops | upheld | smlo 5.0. a1max 63.1774 = 28.9414 + 39.236 - 5. min th 5.232. Priced at +0.5: 19.36 / 23.29 (min 5.513). |
+| G5 | upheld | v2.2 score() gives 25.5 / twin 28.0 and roller 20.25 / twin 23.75. The record deltas give an over-subtraction of 1 body + 2 made + 2 bought = 2.5. On the faithful count the bonus is larger: 5.5 (see missed 3). No verified ranking flips. |
+| G4 | upheld | Recounted from the probe's per-pose rows. 250 rest poses: under 5 deg on 145, under 2 on 88, under 1 on 67, min 0.000 at (15, 45, -15). Family reading: min 5.232. The 145 by band: clip 44, elevation < 60: 45, 60-90: 34, 90-140: 18, >= 140: 4. B1 is open. |
+| M5 | upheld | knee_determinacy file: 375 taken, K open on 123, K_free mobility 4, hubs-only sigma_min 0. No R17 output: the L1 folder has build, design, glb and parts only. |
+| G1 | upheld | Bench deep: 26 / 2 / 178 of 371, min 0.278, p10 1.02. Held: 63 / 14 of 859, min 0.141, p10 0.64. Overhead: 5 of 8 floors under 2 mm. My two re-wears read the same. |
+| S1 | upheld, evidence corrected | 13 3R rows sit in 18.28-18.98, and this row is 14th overall. **But held out it is 5th of the 13, not 2nd.** Ahead of it: h2facet 22.16, conecut-knee 22.38, l2jog 22.45, halfring 22.64 (remeasure `_held.json` frozen.gap). sidecar-parallelogram (bench 19.13) holds 22.03. It is still better held (5th) than bench (11th), so "the noise does not flatter it" holds. |
+| R1 | upheld | All the cited stale texts are present. Also stale: the row verdict's "complexity 49 (= the lead)", and the mechanism notes' "pin knee (2 iglidur pins, sensed twist as the lead)" while cuff_knee.sensed is false. |
+
+### Missed (for the next audit; does not change this verdict)
+
+1. **S1's held rank is overstated in the audit's text.** The row is 5th of the 13 tie-group rows held out, not 2nd,
+   and every one of the 13 now has a held wear on file. The ranking direction holds.
+2. **M2's cost is the build rule, not the sub-kit stack.** stk 5.0 reads 18.94 (+0.03) and stk 6.0 reads 19.21
+   (+0.30). desmo-slipper (18.95) and sidecar-parallelogram (19.13) also resolve to stk 4.8534 (the model's PARAMS),
+   so P-1 should list them. At about +0.3 like-for-like they do not reorder against this row.
+3. **G5 is larger on the faithful count.** The previous skeptic's correction counts the rod as a body (bodies 8, loops
+   10 - 8 = 2, the same loop count as the twin). With it, v2.2 still subtracts the knee's "closure loop"
+   (cuff_knee.closed_loops 1), and the row reads **22.5, which is 5.5 under its kneeless twin**. With no loop credit
+   (a serial knee adds none) it reads 26.5 (1.5 under). The recorded 25.5 lies between the two. So on a consistent
+   count, the v2.1 loop credit takes out a drive loop, not a knee loop. No verified gap ranking flips.
+4. **No held-out continuity flood.** `docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json` has
+   connected = null. The held 22.67 used in S1 and M2 is static only. The bench full flood equals static, so the
+   flood is likely, but not shown, to cost 0 held out.
+
+**Final verdict (ledger): WATCH.**
