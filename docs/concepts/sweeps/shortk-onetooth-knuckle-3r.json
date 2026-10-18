@@ -273,5 +273,43 @@
     -1.23
    ]
   ]
+ },
+ {
+  "k": 5,
+  "t": "2026-10-18T20:32:27Z",
+  "params": {
+   "rho": 2.0,
+   "bk1": 34.0,
+   "bk2": 30.0,
+   "cell": "ghost",
+   "bench": "envsel exact frozen"
+  },
+  "inband14": 0.9178,
+  "inband10": 0.5966,
+  "reach": 0.6833,
+  "follow": 1.0,
+  "contact": 0.022,
+  "gap": 23.87,
+  "ws_taken": 246,
+  "near2": 51.23
+ },
+ {
+  "k": 6,
+  "t": "2026-10-18T20:32:25Z",
+  "params": {
+   "rho": 2.0,
+   "bk1": 32.0,
+   "bk2": 32.0,
+   "cell": "ghost",
+   "bench": "envsel exact frozen"
+  },
+  "inband14": 0.9178,
+  "inband10": 0.6114,
+  "reach": 0.6833,
+  "follow": 1.0,
+  "contact": 0.022,
+  "gap": 23.87,
+  "ws_taken": 246,
+  "near2": 49.18
  }
 ]

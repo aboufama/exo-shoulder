@@ -3601,7 +3601,7 @@
   "name": "Re-seated short-K one-tooth knuckle: K moved ~8 deg toward J2 (bk1 / bk2 34 / 30) so the one-tooth drive sits 17-19 mm from u2 at a near-lead law with a ~9-deg PA margin",
   "family": "slaved-knuckle 3R, one-stage K drive on a re-seated K dyad",
   "lens": "round107:B one-stage drive (the 'just outside the O20 rim' cell: move K, not the law)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-18T18:48:51Z",
   "source": "round 107 (J7, track jump) judge (docs/concepts/round107_ideation.md)",
   "description": "The K dyad re-seated from bk1 / bk2 26 / 38.03 to 34 / 30 with the J1 and J2 seats unchanged and the rest arc a1 = 37.55 kept (the K = 0 chain is the lead's); K's stroke to the lead's a1 = 54.27 end is 44.2 deg; a1max 58.77 <= bk1 + bk2 - 5 = 59. With K 30 deg from u2 a single pair passes PA over rho 0.85-1.2: at rho 1.05 contact 16.6-18.8 mm from u2, PA 18.7 / 28.9; at rho 1.1 17.0-19.0 mm, PA 25.2 / 27.9, rise over 40.1 deg of q2 (onset q2 36.9 / th 62.2; th 106.3 end at q2 -3.3); still passes at mu 0.2 (cap 31.7). Judge: the sine rule puts the rho 1.1 pitch axis ~15.7 deg from u2 (14.3 from uK), consistent. Drive: a crowned pin on a short link-1a horn (~12-13 mm from uK) and a one-sided link-2 tooth 7-9 mm past hub 2's rim, spring-held by the lead's clock spring and stop A. Hub K sits ~8 mm closer to hub 2 (centres ~32 mm apart, rims ~12 mm) and rides ~2 mm higher (R 57.1; at the lead's R 55.1 the new seat touches on 59 poses). AT REST (th ~84): K open ~20 deg, the tooth pushing the pin across link 1b just outside hub 2's rim. OVERHEAD (th ~54): K closed, tooth parked 40-60 deg round hub 2. ACROSS / BEHIND below th 62.2: the K = 0 pose is the lead's except where hub K and links 1a / 1b now run.",
