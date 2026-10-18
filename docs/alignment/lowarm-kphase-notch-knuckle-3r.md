@@ -242,3 +242,109 @@ Not measured, and why:
 - Detect: read every friction-gated limit (dK_lim, lim_pa_by_mu) at the family's red-team mu, and re-wear the claim
   there when the margin is under 2 deg.
 - Here: lowarm-kphase-notch-knuckle-3r, pa_eff 42.6 / 43. At mu 0.17 it reads 18.75 against 18.47.
+
+## Skeptic (2026-10-18, ~17:08-17:30 UTC)
+
+**Final verdict: WATCH.** This is the ledger tool's skeptic entry (2026-10-18T17:23:56Z). Rulings are in
+`docs/alignment/lowarm-kphase-notch-knuckle-3r.rulings.json`. I refuted 2 of the 17 reasons with evidence (held_out,
+fold_margin) and upheld 15.
+
+**What I re-measured.** I re-wore both held sides with the model unchanged, through the auditor's adapter:
+`tools/alignment_remeasure_kphase.py side held <delta> <out> --flood`. That runs the verifier's harness with its
+corrections off, the parent's `wear()` and the verifier's `flood()`. Settings: CB_EXACT=1, OMP_NUM_THREADS=1, nice 15,
+2 processes, about 830 s each. The summary is `docs/alignment/remeasure/lowarm-kphase-notch-knuckle-3r_skeptic_flood.json`.
+The merged per-pose worst is `docs/alignment/remeasure/lowarm-kphase-notch-knuckle-3r_held.json`.
+
+| held wear | static | connected_full | connected_knn | bench-graph flood | min th (dwell / forced) | m_sub < 1 deg (dwell) |
+|---|---|---|---|---|---|---|
+| -0.210 (worst side) | 22.87 | 22.87 (0 of 329 forced dropped) | **30.89 (75 dropped, +8.02)** | 24.05 (11 dropped) | 5.317 / 5.248 | 100 of 457 |
+| +0.264 | 22.80 | 22.80 (0 dropped) | 30.82 (75 dropped, +8.02) | 23.98 (11 dropped) | 5.517 / 5.248 | 98 |
+| per-pose worst | **22.87** (reach 0.6891, in-band 0.8971, contact 0.0149, 656 ws taken, 13 contacts) | | | | | |
+
+- Each side matches the verifier's sided per-pose dump with 0 differences (1154 / 1154 poses).
+- The J2 dowel cuts held 835 (K 46.0) and 1068 (45.881); the largest taken K is 45.367.
+- Merged near-touch: 25.73 / 37.36 / 82.71 at 1 / 2 / 3 mm, closest metal 0.325 mm, overhead 18 of 71. These are the
+  auditor's dump readings.
+
+**Files on record I checked:**
+- The four verifier records the auditor copied have the same sha256 as the session-scratchpad originals
+  (`kphv/v_{bench,held}_{0.264,-0.210}.json`).
+- The dumps recompute 18.47 (bench) and 22.87 (held).
+- The sided taken sets are identical: bench 372 / 372 and held 858 / 858, symmetric difference 0, same contacts.
+- An in-memory run of the audit tool (`audit(..., write=False)`, before my held file existed) still printed held_out,
+  continuity and fold_margin as 'nothing on file'. `_verifier_outputs()` returns [] for this id, and the tool does not
+  read `rows:verification.held / continuity / th_margin`, because those are text.
+
+**Rulings.**
+1. **held_out: REFUTED.** I measured held at 22.87 (per-pose worst; sides 22.80 / 22.87), 0 per-pose diffs from the
+   verifier. Before this audit the number was on file at `rows:verification.held`, `remeasure/_held_perpose.json` and
+   `remeasure/_verifier_wears.json` v_held_*.frozen. The drop is +4.40, under the documented held_watch 6.0, so the
+   tool's rule reads ok. The tie with the parent is ruled under P1.
+2. **continuity: upheld (watch).** The bench flood is on file (full 18.39, knn +1.69). Held, measured now: full = static
+   (0 dropped), but knn **+8.02** (75 of 329 forced takes not knn-connected). The tool's rule watches when the knn loss
+   is over 3, the same as on the parent (+8.24).
+3. **fold_margin: REFUTED.** The min th is on file: `rows:verification.th_margin`, verifier records v3b_th_margin 5.248 /
+   5.317, and bench `remeasure/_bench.json:th_margin` 5.181 / 5.301. My held re-measure gives 5.248 forced and 5.317
+   dwell, with 0 under 5. The minimum over everything, 5.181, is at or above fold_min 5.0.
+4. **sampling: upheld.** I re-derived it from parts_ib14 with the tool's arithmetic: +2.85 points (under 3), but ring2 is
+   0.179 in band at 15.6 mm on 6 samples. That trips the documented out-of-band-part watch.
+5. **reporting: upheld.** morphs.json has sweep_gap 13.33 against v_gap 18.47 (5.14 > 5), and the row verdict is still
+   the screen's.
+6. **NEW-friction-corner: upheld.** At mu 0.17, the per-pose worst is 18.75 (313 lost, dK_taken_max 43.661). The loss also
+   holds on the fixed built geometry: lim_pa_by_mu (the same in every probe row) reads 46.5 at 0.15 and 40.75 at 0.20,
+   so about 44.2 at 0.17, which is under 313's K of 45.615. Two corrections, neither of which changes the level:
+   - mu is a synthesis input. The 'mu 0.17 wear' re-synthesises the plate and pocket (plate_len 9.67 -> 9.33). At
+     mu 0.12 the re-synthesised plate hits hub K (dK_lim 0, fit 95.51).
+   - The why-line "the parent reaches the stroke end up to mu 0.20" is wrong. At mu 0.20 the parent also collapses
+     (dK_lim 0, s1b-pa-pin, fit 95.51).
+7. **P1: upheld.** Recomputed from the dumps: bench -0.22, held -0.01. Only the parent takes held 274, 1054 and 1068, and
+   835 is a contact only on the parent.
+8. **NEW-hairline-gates: upheld.** Every margin checks out at its source: gate0 2.05 / 42.6, clear_plate_hubK 1.05,
+   203 0.158, 313 at 0.135 deg, held vs the lead +0.49, clocking +8.9 / -8.3. See also the dowel-to-bind margin under
+   missed.
+9. **M2: upheld.** The claim doc (lines 168-176) and HARDWARE.md (lines 49 and 62) confirm the cut skirt and thread and
+   the need for a clocked cap. Whether that counts as O20 is the user's call.
+10. **G5: upheld.** simplicity.py gives 0 (the parent 16.75), and morphs.json shows complexity 0 as 'the anchor'.
+    Dominance, recomputed over 36 rows: 29 at the shown 0, 15 at the true 16.75.
+11. **R1: upheld.** The row verdict and limiter are the screen's, and morphs.json has alignment ''. The tool still reads
+    nothing on file.
+12. **S5: upheld.** The held flood now exists and confirms the concern: knn +8.02 on both sides. The bench -0.210 side's
+    taken set is identical to the flooded +0.264 side's.
+13. **S2: upheld.** crank 125 vs 133 samples per frame, plate 0.846 vs 0.715. Kit density not measured.
+14. **G4: upheld.** m_sub < 1 deg on 50 bench and 98 / 100 held dwell poses (my held re-wear agrees). The cost to the
+    wearer has not been measured.
+15. **M5: upheld.** No R17 run and no compliance model. cos 33.1 / cos 42.6 = 1.138.
+16. **M3: upheld.** The re-framing costs 0.00, but the parent's carried build items have nothing on file closing them.
+17. **T1: upheld.** under1 at 139 0.072 and 203 0.158. Near-touch 4 / 33 / 104 bench and 13 / 72 / 217 held. The edge
+    over the parent is 0.00 at 2 mm on the bench and +0.02 behind at 2 mm held.
+
+**Missed (for the next audit; not in this verdict).**
+- **M1. The family's dowel-to-bind margin is not applied to the new stage-2 bind.**
+  - The parent's own gate keeps the J2 dowel at least 1.0 deg under any bind first-fail at mu 0.17. Source:
+    `lowarm-kstop-knuckle-3r.py` gates(), rule "bind first-fail >= 47.35 (dowel 46.35 + 1.0)".
+  - The phase turns K's stroke end from a metal slot end (the parent, 46.75) into a pressure-angle bind: pocket-pa 46.0
+    at mu 0.15 (rows gate0.c_dK_lim). That is 0.25 deg over the re-phased dowel at 45.75.
+  - At mu 0.17 the bind, 44.25 'wall2B-pa', comes 1.5 deg BEFORE the dowel. So the K stroke ends on a jam, not on a
+    stop.
+  - Under the parent's 1.0 deg rule, the dowel would sit at or under 45.0 even at mu 0.15. That cuts bench 313 (K 45.615)
+    and gives about 18.75, the auditor's dowel-low reading, behind the parent's 18.69.
+  - Neither the claim doc nor the verifier harness runs this gate. Searching both for 47.35, first-fail and mu 0.17
+    gives no hits.
+- **M2. Round-15 ranking at the probe.**
+  - ROUNDS.md lines 4602-4604 say that a claim at a rule-floor clearance is ranked at its +0.2 mm probe. Here 203 is at
+    0.158 against the 0.15 floor.
+  - The claim states its probe reading (claim doc lines 153 and 180, `rows:verification.bench`): 19.56. The parent's is
+    19.77 (`lowarm-kstop-knuckle-3r.md` line 95) and the lead's is 18.83.
+  - The audit compares plain numbers only. At the probe the edge over the parent holds (-0.21), and the design is 0.73
+    behind the lead.
+  - The leaderboard stays the plain verified gap (CLAUDE.md), so this is a reporting note.
+- **M3. Proposal A should read friction on the frozen geometry.**
+  - The model takes mu as a synthesis input: it re-sizes the plate and pocket, and at mu 0.12 the design collapses on
+    PLATE-hubK. That is impossible for a fixed part at lower friction.
+  - A friction corner should therefore read lim_pa_by_mu, or re-check the pa cap, on the claim's built geometry. It
+    should not re-fit at the red-team mu.
+  - Here both readings agree (about 44.2 against 44.25).
+- **M4. Tool blind spots with the same root as G5.**
+  - c_idle prints 'no moving drive / joint declared', because `_declared_joints` reads the missing mechanism count fields.
+    K's travel is therefore never checked. It does move (dK_taken_max 45.615), so there is no cost here.
+  - c_rules reads O20 only from hub_r keys (line 786), so a notched hub passes as 'O20 as recorded'.
