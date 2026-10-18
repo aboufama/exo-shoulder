@@ -5,7 +5,7 @@ skin-contact poses at a level <= R 64. At the spec's law (rho 1.05-1.1) the cell
 single pin-flank pair (the spec's drive) carries the 44.1 deg K stroke. The best built range from stop A is 29.7 deg with a crowned pin and
 35.9 with a rolling one. The law-only ghost with that range reads **31.80** frozen exact Bench(110,360). A full-stroke
 single pair exists only at fast laws (rho >= 2.0 rolling, >= 2.5 sliding), where the pin sits on or inside hub K's O20 rim.
-Its tooth (20-30 mm from hub 2's axis) then dips 9-19 mm into the skin on 19-57 overhead poses at every level up to R 67.
+Its tooth (20-30 mm from hub 2's axis) then dips 9-19 mm into the skin on 19-66 overhead poses at every level up to R 67.
 The re-seat alone, with no drive metal (ghost), reads **18.83** (261 ws takes) against the lead's 18.28 / 262.
 
 ## Deeper-version answers (written first, before any number)
@@ -121,6 +121,7 @@ Script: docs/research/shortk_onetooth/metal.py. Envsel exact, on the frozen ghos
 | 34 / 30, 27 / +21 | 47 / 38 / 34 / 32 | -15.8 .. -16.8 | 0.31 | 0 / 0 |
 | 32 / 32, 22 / -9 | 29 / 27 / 24 / 19 | -9.8 .. -10.1 | 0.15 | 0 / 0 |
 | 32 / 32, 22 / -6 | 29 / 26 / 23 / 19 | -9.3 .. -9.6 | 0.15 | 0 / 0 |
+| 32 / 32, 30 / +24 | 66 / - / - / - (stopped after R 61) | -18.1 | - | 20 / - |
 
 Every contact is overhead scaption at the stretched end: envsel ws 382 (plane 30.8 / elev 137.5 / axial -45.1), 453
 (29.7 / 149.6 / -56.5), 378 and 375, and the clip frames 5-13 (plane 30, elev 107-150, axial -51..-60). There the tooth's
