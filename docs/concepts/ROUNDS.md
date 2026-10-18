@@ -5535,6 +5535,8 @@ Carry: none (no ideated entry targets overhead). Being screened elsewhere: none 
 resolved; no row in modelling). Rules unchanged: 1 cm, <= 4 DOF, J1 back / acromion top, O20 v5 only, 5-deg th margin,
 MR63ZZ knee pins + stops, continuity flood, real envelopes, held out never tuned on; local CPU <= 2 niced processes.
 
+Restart note (2026-10-18 ~23:45 UTC): the 23:38 container restart stopped the first launch after ideation; the fresh relaunch adopts this plan unchanged (same state, same lenses A / B / C, nothing screened, no row written), and its ideators start from the 9 unjudged ideas in docs/concepts/ideas_restart/r301_unjudged_ideas.json (lens A's step 0 killed the J3 re-aim as written and found the mirrored K, sK +1: ghost 268 / 11 of 28, crossover cell 276 / 14 of 28; lens B found the J0 under J1 dead, 8 of 28 overhead at every J0 angle, and a humeral-axis ring 4th joint at 16 of 28 projected 7.69 with no ring metal; lens C measured all three drive-free ideas dead), with their scratch scripts intact under the session scratchpad (cone301/, rocker4r/, dfc/).
+
 ## Round 108 plan (Round J8, track jump; 2026-10-18 ~21:55 UTC, lead verified gap 18.28)
 
 Planner's read (21:50-22:10 UTC): ROUNDS.md (round 107 plan + results, round 301 plan), FINDINGS.md "Round J7" and
