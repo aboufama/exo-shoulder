@@ -1210,5 +1210,149 @@
     "contact": 0.0359
    }
   }
+ },
+ {
+  "k": 35,
+  "t": "2026-10-18T05:55:00Z",
+  "params": {
+   "seed": "k33",
+   "rA": -10.26,
+   "rsp": 23.47,
+   "rsr": 51.89
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8821,
+  "inband10": 0.5397,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.72,
+  "extra": {
+   "plain": 10.72,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 13.57,
+    "plain": 13.57,
+    "reach": 0.8187,
+    "inband14": 0.8815,
+    "contact": 0.0359
+   }
+  }
+ },
+ {
+  "k": 36,
+  "t": "2026-10-18T05:55:33Z",
+  "params": {
+   "seed": "k33",
+   "rA": -8.04,
+   "rsp": 33.71,
+   "rsr": 59.58
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8878,
+  "inband10": 0.5415,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 11.3,
+  "extra": {
+   "plain": 10.15,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.815,
+   "moved": 9,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 14.07,
+    "plain": 12.94,
+    "reach": 0.8187,
+    "inband14": 0.8878,
+    "contact": 0.0359
+   }
+  }
+ },
+ {
+  "k": 37,
+  "t": "2026-10-18T05:56:09Z",
+  "params": {
+   "seed": "k33",
+   "rA": -15.77,
+   "rsp": 15.82,
+   "rsr": 50.82
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8872,
+  "inband10": 0.5483,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0207,
+  "gap": 10.85,
+  "extra": {
+   "plain": 10.85,
+   "ws_taken": 132,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 14,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 21
+   },
+   "kit": {
+    "gap": 14.19,
+    "plain": 14.19,
+    "reach": 0.8125,
+    "inband14": 0.8866,
+    "contact": 0.041
+   }
+  }
+ },
+ {
+  "k": 38,
+  "t": "2026-10-18T05:56:43Z",
+  "params": {
+   "seed": "k33",
+   "rA": -8.22,
+   "rsp": 26.23,
+   "rsr": 53.08
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8917,
+  "inband10": 0.5456,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.76,
+  "extra": {
+   "plain": 9.76,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.62,
+    "plain": 12.62,
+    "reach": 0.8187,
+    "inband14": 0.891,
+    "contact": 0.0359
+   }
+  }
  }
 ]
