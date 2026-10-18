@@ -511,5 +511,38 @@
     "contact": 0.0106
    }
   }
+ },
+ {
+  "k": 15,
+  "t": "2026-10-18T05:42:37Z",
+  "params": {
+   "seed": "stopb80"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8974,
+  "inband10": 0.5365,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0308,
+  "gap": 10.84,
+  "extra": {
+   "plain": 10.84,
+   "ws_taken": 132,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "slide": 7,
+    "fold": 18,
+    "contact": 6
+   },
+   "kit": {
+    "gap": 12.83,
+    "plain": 12.83,
+    "reach": 0.8125,
+    "inband14": 0.8953,
+    "contact": 0.0361
+   }
+  }
  }
 ]
