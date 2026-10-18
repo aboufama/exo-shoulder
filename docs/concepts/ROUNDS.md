@@ -5534,3 +5534,129 @@ No bench, judge or kit file changed: no number below moved because the measureme
 Carry: none (no ideated entry targets overhead). Being screened elsewhere: none found (round 107's four picks are all
 resolved; no row in modelling). Rules unchanged: 1 cm, <= 4 DOF, J1 back / acromion top, O20 v5 only, 5-deg th margin,
 MR63ZZ knee pins + stops, continuity flood, real envelopes, held out never tuned on; local CPU <= 2 niced processes.
+
+## Round 108 plan (Round J8, track jump; 2026-10-18 ~21:55 UTC, lead verified gap 18.28)
+
+Planner's read (21:50-22:10 UTC): ROUNDS.md (round 107 plan + results, round 301 plan), FINDINGS.md "Round J7" and
+"Round J4" (K-free relay bound), rows (phi40-thinstack, offset-shortcar, freek, the lead, kfree-armarc, armarc,
+skin-normal-3r-pin-knee H1, the 3-joint frontier), phi40's diagnostics_post_claim, reach_attribution.md (relay rows),
+events.jsonl tail (to the 21:47:26Z close), catalogue.json (21 ideated, all under measured closures), the running
+processes (the overhead round's cone301 / rocker4r probes hold 2 of the 4 cores) and `tools/alignment_ledger.py latest`.
+No bench, judge or kit file changed since round 107: no number below moved because the measurement changed.
+
+### State
+
+- **Lead (best verified 3-joint, not gamed): conecut-knee-knuckle-3r 18.28** (score 93.35), held 22.38; reach 0.7278
+  (262/360: fold 88 of 98 lost), ib14 0.9012, 4 contacts (T5 20.24 mm), overhead 8/28 bench, 18/71 held; 3 / 0 P /
+  cx 18.5; 2 mm 34.84 / 37.11 held. WATCH carried: dashboard sweep 12.5 shown as 95.45, T1 (203 taken at 0.263 mm),
+  T3 (held th margin 5.006), self-reference. conecut-h2facet ties (18.28 / held 22.16). User's build pick: the pin knee
+  H1 (skin-normal-3r-pin-knee, 27.20, reach 0.6583, cx 0, built as user_pinknee_h1b).
+- **Best 4-joint (user option, never a lead): phi40-thinstack-relay-4r 14.06** (chain-only gate; plain 13.52), held
+  16.69 / 16.02, reach 0.8056 (290/360: 48 fold, 5 J3 stop, 17 contacts), ib14 chain 0.8946 / pooled 0.9169, 0 jams,
+  overhead 9/28 (held 22/71), min th 5.000, cx 51.25. Gate = reach 9.44 + contact 4.08 + in-band 0.54; 95 is 0.31 away.
+  WATCH carried (no lens buys points the same way): 2 mm 47.16 vs the lead's 34.84 (every added overhead take at
+  0.10-1.08 mm; 50 bench takes < 2 mm); T5 74.92 mm over 17 contacts (x3.70 the lead), deepest 15.37 at (30,150,-30)
+  and 13.78 at (150,60,-120); CF strip unmodelled (free chord 2.49 mm into the liner, a guided strip reads 172.40); R17
+  with carriage friction unmeasured (coil 2.0 N vs 1.38-1.78 N gravity, 11-31 % margin); 0.24 of the gain rides on the
+  1.0 mm shell (stiffness unshown, ~0.6 mm at 5 N unsupported); G6 (the 4th joint buys raised arm 67 vs 47 of 113,
+  overhead +1); P1 (six reads of this hardware on Bench(110,360): delta 5.0 13.67 / plain 13.01 / 16 contacts, lean 0
+  13.55 / 16 contacts, delta 6 14.02 with 5 jams, PHI 35 14.28, delta 3.0 14.01: the next relay claim is decided on held).
+  Envsel on file: PHI 35 delta 3.5 15.13 / delta 5.0 15.25; PHI 40 delta 3.5 14.46; PHI 42 14.17 (anterior shell end
+  0.90 mm at envsel 119). offset-shortcar 14.76 / 17.77 (cx 52.5); freek 15.40 polished / 20.50 (verified 16.20 /
+  21.89, cx 33.25, 0 loops, contact depth x3.88).
+- **3-joint complexity frontier (verified):** cx 0 H1 27.20 / crest-knee 31.50; cx 12.0 geneva-tail-pinknee 23.57;
+  cx 15.75 desmo-slipper 18.95; cx 16.5 desmo-conecut 18.98; cx 16.75 lowarm-kstop 18.69; lowarm-kphase-notch 18.47;
+  cx 18.5 the lead 18.28. A 4th active joint costs 25 points by itself (simplicity v2.2), loops 4 each.
+- **Measured ceilings:** 95 at 3 DOF is out of reach at the legal seats (take-bound: 272-take law cap ~94.7; zero-
+  contact floor 271 takes 14.72; the lead 4.53 short); the free-K oracle bounds every K lever at 17.25 connected; the
+  long dyad over the top is dead (166.76). **The only sub-13.75 bound on file is a K-free cuff relay** (round J4): an
+  ideal 75-deg relay on a plain O20 3R at the lead's seats reads 10.22 (304/360, **overhead 14/28**, the best overhead
+  bound of any <= 4-joint option). It died built (kfree-armarc 26.42) because a single arm-fixed track long enough
+  (PHI 45-75) sits in the chest across the body when un-relayed (to -10.1 mm), and its low-lift tilted axis left 107 of
+  118 losses kinematic (perfect-metal bound >= 19.72). phi40's thin stack (1.0 mm shell, h_c 1.4, ds 31, shell to
+  +50.9 deg) has never carried a K-free base; behind-back ER caps anterior arm-fixed metal at ~+49-51 deg rel the pad.
+- **Where the lead loses overhead** (round 301 attribution): abduction cone 0/10 (5 folded, 3 J3 stop 34-37 deg past
+  J3MIN, 2 drive contacts 237 crank / 264 horn); flexion/IR overhead 5/15 (9 stretched fold, residual median ~38 deg;
+  316 link 2). The overhead round O1 owns these on the 3-joint lead.
+- **Dead, do not rescreen:** the under-pass bridge (strap top inside the shell, 20.60); pin-flank one-stage K drives
+  (pole-bounded, 21-32 deg of the 44-45.6 needed); K laws with rho < 1.0 (msub fold); link-2 drive elements 20-30 mm
+  from u2 (tooth sweep 7-19 mm into the shoulder top); the long dyad; two-sided relays; the desmo base under a relay;
+  the K-free arm-arc relay with a tilted axis; relays under the lead at J0 / wobble / backbridge; cap null-space 4R;
+  posteromedial knuckle; K levers at the k33 seats; straight guides; arm-fixed cuff arcs at the pad station.
+- **Instrument owed:** `_depth_sources` (tools/alignment_audit.py line ~351) still calls `.get` on `d.get(w)` outside
+  the try and crashes on a paired file whose held is the string 'missing dump'; until the auditor fixes it, T5 reads
+  come from `tools/alignment_paired.py dump` files directly.
+- **Compute:** farm CLOSED; local only, nice -n 10, OMP_NUM_THREADS=1, <= 2 processes per agent; 4 cores shared with
+  round 301 and the hourly audit: envsel / fast first, ONE exact claim wear and ONE held wear per pre-registered pick.
+
+### Lenses
+
+**A. relay-held-95 (reach to 95 at 4 joints; a user option; 2 processes, <= 120 min).** Close the relay's last 0.31.
+- Import docs/concepts/models/phi40-thinstack-relay-4r.py read-only. Cells on envsel (tools/env_bench.py): C1 delta 5.0,
+  C2 lean 0 (zero dowel in the slot side wall), C3 both, C4 / C5 = C3 at PHI 37 / 38 (do the two 14-15 mm presses 263
+  -15.37 / 459 -13.78 go at equal gap?), each with its +-1.5 deg delta cliff partners.
+- Tie-breaks registered in the row BEFORE any read: (1) no jam at delta +-1.5 on envsel; (2) fewer taken poses with
+  metal < 2 mm on the lead's basis (crown sets included); (3) lower T5 summed depth; (4) more overhead takes; (5) smaller
+  PHI. Pick on envsel, then ONE frozen exact Bench(110,360) read and ONE held read.
+- Decided on held (P1): pass = held gate <= 16.19 paired vs phi40's 16.69 (P(better) >= 0.9) AND bench gate <= 13.75;
+  kill = held >= 16.69 or bench > 14.06.
+- Price in the same row what 14.06 leaves out: (a) the CF strip guided in a liner relief, sampled on every face, relief
+  floor >= 1 mm from the skin; (b) CalculiX on the 1.0 mm slotted shell at the measured pad load: if the deflection
+  passes the clash margin, re-read with the shell moved by it on every contact set (lesson 5); (c) R17 with iglidur tape
+  friction mu 0.15-0.25 at the pad load and coil hysteresis; poses where the coil stalls are read as un-returned.
+- Report: chain-only gate (headline) with plain beside it, near1, the 2 mm reading on the lead's basis, T5 dumps bench +
+  held vs the lead, overhead /28 and /71 with phi40's 19 lost bench overhead poses attributed per pose
+  (docs/research/overhead/lead_overhead_attr.py adapted), continuity flood, min th, cx.
+
+**B. kfree-telescope-relay (LOW COMPLEXITY at the relay's reach, 4 joints, on the user's build base; 2 processes,
+<= 120 min).** Drop the knuckle, its K and its whole drive (3 loops, crank, roller, horn, stop A); the relay does the fold
+work on the pin-knee H1 base (cx 0 + one counted relay ~ cx 30-35 vs phi40's 51.25 and freek's 33.25). Escape the
+single track's torso cap with a TWO-STAGE nested arm shell: stage 1 (fixed, <= +45 deg, inside the ER cap) and stage 2
+(a slotted 1.0 mm Ti strip riding in stage 1, sequenced like a drawer slide: dragged out by the carriage's end stop past
+phi1, retracted by its own CF coil), so the long track exists only on relayed poses.
+- Step 0 (no metal, <= 30 min): the ideal K-free relay bound at H1's seats AND the lead's on phi40's shell axis and
+  station (ds 31), PHI 40 / 50 / 60 / 75, envsel then frozen exact; kill if no PHI <= 75 reads <= 15.40 (no room under
+  freek) or the relayed poses at PHI > 45 are the across-body poses where the chest binds (the extension would sit in
+  the chest when relayed).
+- Gate: thin-stack metal on every face (stage 1 + stage 2 + carriage + both coils, kit density), continuity flood
+  (stage 2's sequencing state included: no jump > 10 deg, no hysteresis branch change), envsel pick, ONE frozen exact
+  read + ONE held read. Pass = <= 15.40 at cx <= 35 (Pareto over freek and phi40) and overhead >= 10/28; kill > 16.20
+  or held paired worse than freek's 20.50. Cell 0 (control, also new): single-stage PHI 40-50 K-free on phi40's
+  hardware. Report overhead /28 and /71, the 2 mm reading, T5, R17 with friction on both stages.
+
+**C. involute-onestage (3 joints, complexity at the lead's number; MEASUREMENT ONLY; 1 process, <= 90 min).** The
+round-107 verifier's open path: one spherical involute tooth pair drives K (rho 1.2-1.5, DKLIM 46; ghost 18.83 / 261
+takes, 0.15 under the 18.98 Pareto line, ~1 deg stroke margin), deleting the crank, its MR63ZZ pivot and one loop
+(cx 18.5 -> ~10-11).
+- Build the flank metal first: link-2 tooth within ~12 mm of u2 or moved to link 1b (tooth-sweep law); measure its sweep
+  with docs/research/shortk_onetooth/metal.py on envsel and the overhead scaption set, built-flank mode at 0.05 deg
+  (PA <= 38, stroke margin >= 1 deg). Kill = > 4 sweep contacts or margin < 1 deg, before any frozen read.
+- Then ONE frozen exact read + ONE held read: Pareto pass = <= 18.98 at cx <= 12; kill > 19.5.
+- It cannot be a claim or a winner until the user rules whether a one-tooth involute pair is a "gear" under MVP1: write
+  the question with the measured numbers into the round notes for the lead. The overhead round's drive-free-cone lens
+  reads whether deleting the crank / roller / horn frees 237 / 264 on the lead chain: read its committed result, do
+  not repeat it; this lens owns the flank build, the whole bench, held, the sweep and the user question.
+
+Rules for all lenses: select on envsel / envh, never place a stop, margin or tie-break from Bench(110,360) binders (P1);
+search objective = the near-touch gap; clearance read on every face of every part (round 107 lesson 5); held out stays
+held out; kit density 1 pt / 4 mm2; every screened morphology writes docs/concepts/viz/concepts/<id>.js, passes
+`node docs/concepts/viz/test.mjs <id>` and re-runs `node docs/concepts/viz/thumbs.mjs`; commit after every step.
+
+### Carried (ideated, never screened)
+
+None. The 21 ideated catalogue entries all sit under measured closures (round 106 / 107 plans); the round-4 picks are done.
+
+### Elsewhere, not to be duplicated
+
+- Round 301 (track overhead, wf_3171073e): abduction-cone (J3 re-aim on the lead), rocker-redundant-4r (active J0 under
+  J1, Keemink 2018), drive-free-cone (the lead without crank / roller / horn). Lens B stays at the cuff (no J0, no J1
+  move); lens C does not re-run the drive-deletion ghost.
+- Deferred by the lead: the generation CAD + stills of the 4-joint winners (freek, offset-shortcar, phi40) until the
+  user answers the 4-joint question.
+
+### Needs the user's say
+
+- The 4-joint question (phi40 94.89 / held 16.69 at cx 51.25 vs freek 94.40 / 20.50 at cx 33.25 vs the 3-joint lead
+  93.35 / 22.38 at cx 18.5); lens B adds a lower-cx 4-joint point if it passes.
+- Whether a one-tooth involute pair counts as a gear under MVP1 (lens C measures it).
+- The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule, O20 hubs and the transmission guard stay.
