@@ -123,6 +123,76 @@ Next: the lead records a ruling on M3 (publish 19.05, or defer the layer to CAD 
 _Below: the skeptic sections of the previous audits (2026-10-18 07:37-07:46 and 02:50-03:01 UTC), kept unchanged. Their
 rulings refer to the earlier findings (ledger 2026-10-18T07:34:11Z and 02:43:22Z)._
 
+## Skeptic (2026-10-18, 08:38-08:53 UTC), third audit
+
+This skeptic ruled on the third audit (ledger 2026-10-18T08:35:49Z, claim v_gap 18.83, cell A). Method: every number re-read from the rawest file on disk, and two re-derivations.
+- Re-run, model unchanged, local, niced, 1 process: `tools/alignment_lowarm_s1level.py geom --cell A`.
+- Recomputed from the per-pose rows: the play wear and the per-part in-band at the kit's density.
+- Rulings: `docs/alignment/lowarm-halfring-knuckle-3r.rulings.json`. Ledger: 2026-10-18T08:52:57Z, run `skeptic:lowarm-halfring-knuckle-3r`.
+
+**Final verdict (ledger tool): GAMED.** M3 is upheld. 3 reasons are refuted with evidence (NEW-one-sided-play, P1, T1). 6 are upheld (continuity, M3, M5, NEW-inherited-stack, S5, G4).
+
+### Rulings
+
+- **continuity: upheld (watch).**
+  - Held (`_vA_held_frozen.json:connected`): static 22.64, full 22.64, kNN 30.78, bench 23.81.
+  - Bench: full 18.28, kNN 19.97, bench graph 50.13.
+  - The tool's rule (`c_continuity` lines 500-505: rule flood ok, then watch on a kNN loss > 3) reads the right numbers.
+  - Context: the lead reads the same on the bench (kNN 19.97 / bench 50.13, `conecut-knee-knuckle-3r_v_bench_frozen.json`), so the pattern is shared and not row-specific.
+- **M3: upheld (gamed).**
+  - I re-ran the geom on cell A (4.7 s). Groove layer and pin band are at F+0.111..1.611, pin radius 9.602 mm, inside link 1b's lower member F+0..3.0 under the O20 hub (r 10, `concept_kit.py` line 24). The clash is on the claimed config itself.
+  - The verifier's buildable numbers are on file (`vA_padplay.json:kplay_true_lever_stage1_F39`): recomputed 18.66 without play and 19.05 with it. v_gap stays 18.83.
+  - **Attempted refutation, not sufficient.** I re-weighted the two cell-A `claim_frozen_out.parts_ib14` records to the kit's density (horn /2.519, ring2 /3.957).
+    - Without play: clashing ~18.31, buildable ~18.42. The layer costs **+0.11 at kit density**, against +0.37 as sampled.
+    - With play: per-part counts are not on file. Carrying the same deltas over puts buildable+play at in-band ~0.900, about 18.83, which would remove the rank flip over sidecar-longdyad (18.91, no flagged parts).
+  - That is an estimate, and S6 never changes the gap. Two real envelopes in one volume in the verified config is the fact, so the finding stands.
+- **NEW-one-sided-play: refuted.**
+  - The measurement is right. I recomputed the per-pose worst three ways from `_kplay_perpose_A.json:sides`: the auditor's composite, the per-pose minimum in-band, and a coherent one-side-per-pose pick. All three read **18.89**, and the two sides reproduce 18.83 / 18.35.
+  - But there is no documented rule. ALIGNMENT.md has no T6 and no play-reading rule, and the auditor's own .md files T6 under "Proposals (none feeds the verdict)".
+  - The row's "worst side" was applied as the worse uniform side, a valid reading under the current protocol. Under the brief, a proposed tightening never feeds the verdict.
+  - It moves to proposal T6 with its effect: +0.06, no rank change.
+- **M5: upheld (watch).** All values are in `padcheck.P1_pad_seat`.
+  - True lever 6.75 mm (25 of 133 crank samples truly over L1b); K play 0.912 deg against the row's own gate of 0.25 (3.65x, ok false).
+  - The play is priced as metal at pose 203 (-0.102 mm).
+  - The drag of a preloaded or adjusted fix is not on file.
+- **P1: refuted.**
+  - The claim is cell A, not the in-sample cell B scan pick. Held-out drop is +3.81, under the documented watch at > 6 (`checks.held_out`).
+  - The row marks cell B superseded (`cells.B.note`: "moved out of the headline by the 07:40 re-verification"), and the dashboard verdict reads "Cell B stays GAMED (P1)". The tool's `reporting` check is ok.
+  - What is left is an unflagged legacy block. It is a label with no wearer cost; proposal 3 (flag it) stands.
+- **NEW-inherited-stack: upheld (watch).**
+  - Model lines 43-48 exec desmo-conecut's `_desmo_build_B` with one line replaced, and the cell-A geom re-run confirms the layer.
+  - ROUNDS.md lens B names no stage-1 level check. Its A0L reference (desmo-conecut 18.37, "inside hub 2's O20") sits on the same layer.
+  - Nuance: 18.28 is also the lead's number.
+- **T1: refuted.**
+  - The numbers reproduce (`checks.near_touch` 19.92 / 34.84 / 86.16, shell2 16.56).
+  - The documented level is report-only: user decision 3, and `c_near_touch` lines 279-281 keep it ok.
+  - The row is identical to the lead (dominance +0.00 / +0.00). The play's one shift (pose 203) is already a scored contact in v_gap.
+- **S5: upheld (watch).** Same records as continuity. It is shared with the lead on the bench, and nothing on file shows the kNN drops reachable.
+- **G4: upheld (watch).**
+  - m_sub at K rest: min 0.0, under 1 deg on 50 of 205 poses. With K moved its min is 10.8, and the documented th at rest has a min of 5.389.
+  - The probe ran on cell B (`params_source` CELL_B, l2_lift 1.5). The carry to cell A is inferred from identical K parameters, not re-worn (a 9-min exact wear).
+
+### Missed by the auditor (for the next audit; not in this verdict)
+
+1. **The `density` check reads the old claim.** `remeasure/sample_density_lowarm-halfring-knuckle-3r.json:bench.file` is `_v_bench_frozen.json` (cell B, 17.96), so the tool's density line ("17.96 -> 18.04") describes cell B, not v_gap 18.83.
+   - Cell A at kit density (this skeptic's re-weight): 18.28 -> ~18.31 without play; buildable 18.65 -> ~18.42.
+   - Action: run `tools/sample_density.py measure` on cell A, with the play wears' per-part counts.
+2. **The kplay script's dwell flag is unreliable.** `PLAY["dwell_idx"]` is set inside `_ik_phys` (line 70) to the indices of the last call's batch, so the named and contact records read `dwell: false` on every pose.
+   - Pose 203 is one of them, yet it moves 0.263 -> -0.102 / 1.083 mm under +/-0.912 (`vA_padplay.json:kplay_true_lever.*.named.203`). The script plays only dwell poses.
+   - Contact lists that say `dwell: false` therefore do not show which contacts the play caused.
+3. **The M3 rank clause is density-sensitive in the other direction too.** The published 18.83 includes the over-dense horn (2.52x, in-band 0.949), which deflates the gap.
+   - The rank comparison with sidecar-longdyad (no flagged parts) is not like for like at the sampled density.
+   - At kit density both the clashing and the buildable cell A sit about 18.83 against 18.91 (estimate, see M3). The flip the auditor cites exists only at the sampled density.
+
+### Proposals carried
+
+- **T6 (from NEW-one-sided-play):** wear a free play per pose at its worst side.
+  - Effect: this row 18.83 -> 18.89 (measured three ways).
+  - No other verified row wears a play as metal today, so no other row moves.
+- **S-2:** re-run the density instrument on every row whose claim moved after its density file was written (today: this row) before the density check is read.
+
+Final verdict: **GAMED** (M3: the verified config puts stage 1 inside link 1b's J2 plate; the buildable 19.05 is measured and unapplied). Next: the lead rules once for the family's stage-1 layer (this row, desmo-slipper, desmo-conecut), and the density instrument is re-run on cell A.
+
 ## Skeptic (2026-10-18, 07:37-07:46 UTC), second audit
 
 The audit's skeptic ran this section. Method:
