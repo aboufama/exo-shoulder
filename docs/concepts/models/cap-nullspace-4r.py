@@ -238,8 +238,19 @@ def seat_legal(p):
     b, c = geom(p); return bool(seat_ok(b)) and (p["policy"] == "ctrl" or bool(seat_ok(c)))
 
 
+def snap(params):
+    """search-safe params: scalar spring entries k0..k3 / r0..r3 (CMA) folded into k / r, bounds on the rest"""
+    p = dict(PARAMS, **params); p["k"] = [float(x) for x in p["k"]]; p["r"] = [float(x) for x in p["r"]]
+    for i in range(4):
+        if f"k{i}" in p: p["k"][i] = max(0.0, float(p[f"k{i}"]))
+        if f"r{i}" in p: p["r"][i] = float(p[f"r{i}"])
+    p["m"] = max(K.FOLD_MARGIN, float(p["m"])); p["q"] = min(1.0, max(0.9, float(p["q"]))); p["a0"] = min(45.0, max(20.0, float(p["a0"])))
+    for k_ in ("sB", "sig", "sigma3", "nq"): p[k_] = int(round(float(p[k_])))
+    return p
+
+
 def evaluate(B, params, near=False):
-    p = dict(PARAMS, **params)
+    p = snap(params)
     if not seat_legal(p):
         return p, dict(gap=275.0, reach=0.0, follow=0.0, inband14=0.0, inband10=0.0, contact=0.0, honest=False,
                        audit=["J0 / J1 seat outside the seat rule"], inband_member={})
