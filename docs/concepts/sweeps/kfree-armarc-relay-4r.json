@@ -4321,5 +4321,50 @@
 12
 ],
 "min_metal_taken": 1.267
+},
+{
+"k": 98,
+"t": "2026-10-18T07:43:11Z",
+"params": {
+"PHI": 60,
+"tilt": 12,
+"taz": 235,
+"sgn": 1
+},
+"inband14": 0.8455,
+"inband10": 0.4571,
+"reach": 0.5062,
+"follow": 0.3833,
+"contact": 0.0796,
+"gap": 109.46,
+"gap_near1": 113.99,
+"bench": [
+60,
+160
+],
+"mode": "fast",
+"relayed": {
+"n_ws": 38,
+"taken_ws": 31,
+"contact": 5,
+"jam": 5,
+"jam_ws": 3,
+"clip": 7,
+"clip_taken": 4,
+"phi_max": 59.81,
+"phi_max_taken": 59.81
+},
+"why_ws": {
+"": 81,
+"j3stop": 2,
+"contact": 8,
+"jam": 40,
+"fold": 29
+},
+"overhead": [
+3,
+12
+],
+"min_metal_taken": 0.272
 }
 ]

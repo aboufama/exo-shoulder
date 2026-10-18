@@ -2,51 +2,61 @@
  {
   "key": "continuity",
   "refuted": false,
-  "evidence": "Re-read docs/concepts/verify/lowarm-halfring-knuckle-3r_v_held_frozen.json:connected: static 22.70, connected_full 22.70 (0 dropped), connected_knn 30.93 (77 forced poses dropped), connected_bench 23.88 (11 dropped). Bench file: full 17.96 (0), knn 19.64 (6), bench graph 49.98 (114). tools/alignment_audit.py continuity (lines ~496-503) reads the rule's flood (connected_full, loss 0: ok), then raises ok to watch when the kNN loss exceeds TH conn_gamed 3 (8.23 held). That is the documented threshold applied to the documented number. No measurement shows the kNN drops are a sampling artifact. Upheld."
- },
- {
-  "key": "judgement:P1",
-  "refuted": false,
-  "evidence": "(a) Re-derived from docs/concepts/sweeps/lowarm-halfring-knuckle-3r.json: 794 rows with stage frozen-scan and bench 'Bench(110,360) exact, frozen cell-A wear' (the claim bench); min 17.96 (h 1.5 / r_full 14 / L 9.836), p10 18.07, median 18.42, max 19.30; 251 under 18.28. Held gaps recomputed by me from the per-pose rows (contact = contact/(taken+contact)): this row 22.70 (658/952 ws, ib14 0.8967, 13 contacts), the lead 22.38 (659/952, 0.9000, 14) on the same 1154 poses, both exact. (c) Not apples to apples on the bench, and the bias favours this row: the lead's config was searched on Bench(60,160) fast (rows/conecut-knee-knuckle-3r.json:note, 352 configs) and frozen onto the exact bench; this row's 17.96 is the minimum of a scan on the exact bench itself. CLAUDE.md's polish rule (search on an envelope sample, claim held out) puts it at 22.70, behind 22.38. docs/dashboard/data/morphs.json lists the row first among status 'verified' (17.96 above 18.28), with leader_ruling '' on both rows, while rows/lowarm-halfring-knuckle-3r.json:verdict reads 'NO NEW LEAD'. Caveats, none of which refutes: the documented held_out threshold reads ok (+4.74 < 6), so 'gamed' is a judgement on the RANK, not a TH number; the held difference is not significant (CI90 [-0.34, +0.68]); and the sub-point 'worse than its own cell A (22.64)' rests on a proposer number with no dump or verifier file (rows:cells.A.held_src 'proposer, same code path'). The lead comparison stands on two per-pose dumps. Upheld."
- },
- {
-  "key": "judgement:T1",
-  "refuted": false,
-  "evidence": "Paired the per-pose dumps myself (remeasure/*_bench_perpose.json). Bench pose 316 (ws 60/150/-105) is the ONLY discordant pose: this row is taken at min_mm 0.048, the lead is in contact at -1.235. Held: 820 is taken at 0.941 here and in contact (-0.177) on the lead; 274 and 1054 are taken by the lead and not evaluated here. Sweep: all 251 beaters clear 316 by 0.014-0.197 mm (l2_316_min); best config with clearance >= 0.1 mm 18.24, >= 0.2 mm 18.41. remeasure/*_bench.json:deep gap_near1/2/3: 20.14 / 34.84 / 86.40 vs the lead's 19.92 / 34.84 / 86.16. Taken poses under 1 / 2 / 3 mm: 4 / 34 / 106 vs 3 / 33 / 105. The measurement is right and correctly marked report-only (user decision 3). Upheld as watch."
- },
- {
-  "key": "judgement:R3",
-  "refuted": false,
-  "evidence": "Spread re-derived (p10 18.07, median 18.42 over 794 frozen-scan configs; two configs at 17.96, next 17.97 with 316 at 0.014 mm). rows/lowarm-halfring-knuckle-3r.json carries n_configs 908 and cells.B_robust 18.41, but no p10, median or distribution field. morphs.json shows v_gap = sweep_gap = 17.96 and nothing else. Upheld."
- },
- {
-  "key": "judgement:M5",
-  "refuted": false,
-  "evidence": "verify/*_v_bench_frozen.json:lowarm_fit.dwell_K_play: total 0.638 (runout 0.176, conc 0.088, pad_lap 0.335, slot 0.04), gate 0.25, ok false; tight 0.292 (rows:dwell_hold.K_play_tight), still over the gate. v4_kplay nominal: min 5.088, 0 dropped. The verifier's kplay_correct (verify/lowarm-halfring-knuckle-3r.py lines 154-175) only drops poses whose th margin minus play x |dth/dK| falls below 5 deg and re-runs Bench.report. It never moves metal by the play, so the metal shift at 316 (0.048 mm) and 139 (0.072 mm) is not on file. No file measures the pad's drag either. Upheld."
+  "evidence": "Re-read docs/concepts/verify/lowarm-halfring-knuckle-3r_v_held_frozen.json:connected: static 22.70, connected_full 22.70 (0 dropped), connected_knn 30.93 (-8.23), connected_bench 23.88. Bench file: full 17.96, knn 19.64, bench graph 49.98. The cell-A verifier wear (commit 786b081, rows/lowarm-halfring-knuckle-3r.json:verification_cellA.held.flood) shows the same pattern: full 22.64, knn 30.78. The documented threshold (ALIGNMENT.md section 5, connected loss watch > 1, gamed > 3) is applied to the rule's flood (connected_full, loss 0, ok), and the tool raises a watch on the kNN loss. Right number, documented threshold. No measurement shows the kNN drops are a sampling artifact. Upheld."
  },
  {
   "key": "judgement:M3",
   "refuted": false,
-  "evidence": "Confirmed: V5 appears only in the verifier's docstring (lines 16-18); no code or output key implements it. Narrowing, found on file: the model's own per-pose l2_check (docs/concepts/models/desmo-slipper-knuckle-3r.py lines 358-372) reads link_pts['L2'], and the lift rewrites that (models/lowarm-halfring-knuckle-3r.py lines 83-92, run from _contact_only; lowarm_fit.l2_lift n_moved 32 proves it ran). It measures link 2's strap outside O20 + 1.5 mm (underside and top copy) against the crank's short arm and pin in every taken pose, with a 1.0 mm reject line. verify bench l2.clear_min 12.32 mm (373 poses, 0 lost), held 12.33 (860, 0 lost); parent desmo-conecut 12.11 / 12.12. So the lifted bar versus the crank ARM is measured and clear. Still unmeasured: the tip plate, the hub-2 stack crown, and the root inside r < 11.5 mm (l2_check excludes it). The watch stands, narrowed."
+  "evidence": "Geometry confirmed from remeasure/lowarm-halfring-knuckle-3r_s1level_geom_fast.json:runs.verified_glev-1.0_pin9.2_149.5.rec: pin band F+0.111..1.611 at pin radius 9.602 mm (inside the O20 hub radius 10, tools/concept_kit.py line 24: lower member [F, F+3]); l1b_samples_r_le_12 n 0. The model line I read (desmo-conecut model line 182: hmid = zc + 3.15 + glev) and the glev box [-1, 1.5] (desmo-slipper model line 87) put every level inside the plate. Independent judge on the same layer: the parent's built CAD pipeline/full-exo/designs/user_desmo_conecut/judge/scorecard.json R6 1.50 mm FAIL, and VERIFY.md lines 43-44 say stage 1's insert, pin, short arm and link 2's roof sit inside link 1b's J2 plate by 1.39-1.50 mm on every frame. The row's own verifier adopted it (rows:verification_cellA, commit 786b081: '+0.37 more, 19.05 with both'). The F+3.9 numbers re-derive from the files: parts_ib14 shows the whole cell-B cost is ring2 (4 samples at 0.859 in band -> 6 at 0.176; every other part identical). ATTEMPTED REFUTATION of the rank clause, NOT sufficient to refute: ring2 is sampled at 3.957x the kit density (docs/alignment/remeasure/sample_density_lowarm-halfring-knuckle-3r.json:parts.ring2.ratio, the lead's cross-row check after the measurement-change event 07:32Z). Re-weighting the auditor's own files to kit density (my computation, the death-audit 14dfecc method): cell B 17.91 -> 18.02 (flagged parts at kit) vs the lead 18.28, or 18.31 -> 18.41 (all parts at kit) vs the lead 18.42; cell A 18.28 -> 18.28 / 18.53 -> 18.63. So under the pending density measurement, the plate-clearing cell B still ranks ahead of or level with the lead, and the 'rank flip' rests on the ring's 4x weight. But that density change is pending, not the current measurement. Under the current one (same harness for both rows), the auditor's 18.39 / 18.65 vs 18.28 is right, and the clash itself is a hard-rule violation (metal inside another part). Not refuted. When the density change lands, M3's level is due for re-judging (proposal S-1 in the .md)."
+ },
+ {
+  "key": "judgement:P1",
+  "refuted": false,
+  "evidence": "Re-derived from docs/concepts/sweeps/lowarm-halfring-knuckle-3r.json: 794 frozen-exact scan configs on the claim bench Bench(110,360), min 17.96, p10 18.07, median 18.42, 251 under 18.28. The cell-B paired file, read from git (8c2f2a3:docs/alignment/remeasure/lowarm-halfring-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json; commit 786b081 has since overwritten that path with cell A): bench -0.32 (CI90 [-1.55, 0.42]), held +0.32 (CI90 [-0.34, 0.68]). New evidence that the scan gain is in-sample: the verifier now wears cell A independently (rows:verification_cellA.held.gap 22.64, vA_held_frozen.json). The link-2 lift scan buys -0.32 on the claim bench (18.28 -> 17.96) and loses +0.06 held out (22.64 -> 22.70). It holds at kit density too (my re-weight via sample_density_*.json ratios): held, this row 22.64 (flagged parts) / 23.03 (all parts) vs the lead 22.38 / 22.63. rows/lowarm-halfring-knuckle-3r.json:leader_ruling is still absent. docs/dashboard/data/morphs.json (v119, 07:33) still lists v_gap 17.96 first among verified rows with leader_ruling ''. The row's v_gap is now 18.83 (786b081, 07:40) and its verdict reads 'Cell B stays GAMED (P1). NO NEW LEAD'. Upheld."
+ },
+ {
+  "key": "judgement:R1",
+  "refuted": false,
+  "evidence": "The 'self-measured' sub-point is resolved after the audit. The verifier wore cell A (commit 786b081, 07:40Z): rows:verification_cellA.reproduced.gap 18.28 (262/360, ib14 0.9006, 4 contacts; docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_bench_frozen.json) and held.gap 22.64 (vA_held_frozen.json). The reason's conclusion is CONFIRMED and strengthened. Held is paired +0.26 behind the lead (P(better) 0.005, CI90 [0.0, 0.53]); the verifier's own verdict reads 'NOT a lead and not a tie'. With the stop pad at its true 6.75 mm lever, cell A's dwell play is 0.912 deg; worn as metal (+0.912) it reads 18.83 with pose 203 at -0.102 mm (rows:verification_cellA.play_as_metal_true_lever). The F+3.9 number is density-dependent: 18.65 as sampled, 18.28 with the flagged parts at kit density, 18.63 with all parts at kit (my re-weight). It is never ahead of the lead. Upheld."
+ },
+ {
+  "key": "judgement:NEW-inherited-stack",
+  "refuted": false,
+  "evidence": "Read docs/concepts/models/lowarm-halfring-knuckle-3r.py lines 41-48: it execs desmo-conecut's _desmo_build_B source with exactly one line replaced (the half-ring 'used' mask), so the stage-1 level formula is inherited unchanged. Read ROUNDS.md 3644-3660: lens B's cells A0L (desmo-conecut groove) and A-adj (half ring + low arm) name no stage-1 level check. Nuance, which narrows but does not refute: the pass bar 'frozen exact <= 18.28' equals the verified LEAD's number as well as cell A's (the lens is 'cx-at-lead'), so the bar's value is not set by the unbuildable layer alone. What the lens inherits is the layer: a pass on it can be met at glev -1.0 inside link 1b's plate. Upheld as watch."
+ },
+ {
+  "key": "judgement:T1",
+  "refuted": false,
+  "evidence": "remeasure/lowarm-halfring-knuckle-3r+cellB_bench_perpose.json pose 316 (ws 60/150/-105): min_mm 0.048, taken. In the lead's dump the same pose is in contact at -1.24. The sweep min with clearance >= 0.2 mm is 18.41 (the previous skeptic's re-derivation of the sweep, carried). remeasure/lowarm-halfring-knuckle-3r_bench.json:deep gap_near1/2/3 20.14 / 34.84 / 86.40 (poses 4/34/106). Measurement right, and it is correctly report-only (user decision 3). Upheld as watch."
+ },
+ {
+  "key": "judgement:R3",
+  "refuted": false,
+  "evidence": "Spread re-derived from docs/concepts/sweeps/lowarm-halfring-knuckle-3r.json: n 794, min 17.96, p10 18.07, median 18.42. rows/lowarm-halfring-knuckle-3r.json has no spread / p10 / median field (keys checked; n_configs 908 only). morphs.json shows the min alone. Upheld."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Upheld and UNDERSTATED. verify/*_v_bench_frozen.json:lowarm_fit.dwell_K_play total 0.638 vs gate 0.25 is the claim's own number at its lenient 12.29 mm pad lever. The verifier's padcheck finds the crank arm truly over link 1b only out to 6.75 mm (rows:verification_cellA.pad_true_lever: crank samples truly over L1b 25/133, pad_lap_K 0.609, dwell_K_play 0.912). I reproduced this by running docs/concepts/verify/lowarm-halfring-knuckle-3r_padcheck.py (true_pad_lever_mm 6.75, total_play_at_true_lever 0.912). Worn as metal at +0.912 (cell A), it reads 18.83 with 5 contacts and pose 203 at -0.102 mm, i.e. in the skin (rows:verification_cellA.play_as_metal_true_lever). Cell B's claim at the true-lever play is not on file. The drag of any preloaded fix is still unmeasured."
  },
  {
   "key": "judgement:S3",
-  "refuted": false,
-  "evidence": "verify/*_v_bench_frozen.json:lowarm_fit.pad holds only position (lever 12.29 mm, n_arm_over 7 of 28, pad_seat_ok true), with no height and no skin clearance. remeasure/*_bench.json:parts_ib14 has no stop-pad entry: 'pad' [1.0, 6.2, 32] is identical on the lead, so it is the family's cuff pad. No number for the stop pad is on file. Upheld."
+  "refuted": true,
+  "evidence": "The pad is now on file: rows:verification_cellA.pad_true_lever.pad_block_metal (786b081): footprint over L1b, min L2 18.46 / L1a 5.37 / crank forced 0.479 mm, 'clear: on link 1b top face, no skin-facing metal' (vA_padplay.json). I re-ran docs/concepts/verify/lowarm-halfring-knuckle-3r_padcheck.py: pad base 59.1 = link 1b top, top 62.26 = the sampled arm top, 48 samples, all 4 corners over L1b, L2_lt1 0, L1a_lt1 0. Height and skin side are measured: sampled link 1b lies between pad and skin."
  },
  {
   "key": "judgement:S5",
   "refuted": false,
-  "evidence": "Verifier connected records: bench knn 19.64 (6 forced dropped, -1.68), bench graph 49.98 (114 dropped); held knn 30.93 (77 dropped, -8.23); connected_full 0 dropped on both. This is the same measured pattern as the continuity reason, correctly carried. Upheld."
+  "evidence": "Same records as 'continuity'. Bench: knn 19.64 (6 forced dropped), bench graph 49.98. Held: knn 30.93 (77 dropped). Cell A (verification_cellA.reproduced.flood): knn 19.97, bench_only 50.13; held knn 30.78. connected_full drops 0 everywhere. The pattern is measured and correctly carried. Upheld."
  },
  {
   "key": "judgement:G4",
   "refuted": false,
-  "evidence": "MEASURED on this row by this skeptic (the reason said it was not): tools/alignment_msub_strparams.py (new wrapper; tools/alignment_msub_rest_probe_model.py unchanged, row params decoded over CELL_B) -> docs/alignment/remeasure/lowarm-halfring-knuckle-3r_msub_rest_bench.json. Reproduces 17.96. m_sub at K rest: n 205, min 0.0, p10 0.267, median 4.753, under 1 deg on 50, under 2 deg on 65, under 5 deg on 107. That is identical to the parent desmo-conecut (remeasure/desmo-conecut-knuckle-3r_msub_rest_bench.json). Moved poses: m_sub min 10.805, m_eff min 5.181. The carried watch is confirmed on this row."
+  "evidence": "remeasure/lowarm-halfring-knuckle-3r_msub_rest_bench.json (the previous skeptic's exact probe, which reproduces 17.96): m_sub at K rest n 205, min 0.0, p10 0.267, median 4.753, lt1 50, lt2 65. The 'th row reads 0.0 at poses 283/311/338' clause is not in docs/concepts/verify/lowarm-halfring-knuckle-3r_v_bench_frozen.json. Its v4_kplay.nominal.min_margin_with_play is 5.088 on the J1-J3 th, with 0 drops, so the 0.0 reading belongs to the K sub-dyad m_sub, not the documented fold margin. The m_sub numbers stand, and a sub-dyad at its fold at rest is the near-singular joint ALIGNMENT.md section 1 names. Upheld as watch."
  },
  {
-  "key": "judgement:NEW-string-params",
+  "key": "judgement:T5",
   "refuted": true,
-  "evidence": "The format is real: this is the only row of docs/concepts/rows/*.json with a string best_params (my scan). But the harm it names did not happen in any number on file. Every wear of the claim used the decoded claimed params (l2_rfull 14.0, l2_len 9.836, l2_lift 1.5), not CELL_B's defaults (l2_rfull 16.0, models/lowarm-halfring-knuckle-3r.py line 56): verify/*_v_bench_frozen.json:params and _v_held_frozen.json:params, remeasure/*_bench.json:params, *_bench_perpose.json / *_held_perpose.json:params, and this skeptic's _msub_rest_bench.json:params. Three independent wears reproduce 17.96 (verifier, auditor adapter re-wear, auditor probe) and a fourth (this m_sub probe) does too. With the adapter, every audit check ran (docs/alignment/lowarm-halfring-knuckle-3r.json: rules ok, reporting ok). No number moved and the wearer gets nothing different (ALIGNMENT.md section 1). It is an instrument-robustness defect, already the auditor's proposal R5, and not evidence about this design."
+  "evidence": "Wrong threshold, and no cost to the wearer. ALIGNMENT.md section 5: watch at summed depth >= 2x the reference's and >= 5 mm more. Dumps: bench 14.92 mm / 3 poses vs lead 20.24 / 4; held 43.67 / 13 vs 60.97 / 14. Ratio 0.74 / 0.72: reads ok. Single deepest press: +0.54 at 237, +0.52 at 683, but 264 is 1.17 vs 5.80 and 316 clears."
  }
 ]
