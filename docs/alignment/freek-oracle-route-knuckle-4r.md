@@ -415,3 +415,81 @@ fold_margin) and upheld 14. Every reason was at watch, so the verdict is watch.
   - The R17 / dowel force / cuff twist.
   - The 4-vs-3 DOF presentation on the board (R4, G6, proposal E / H).
 - The row stays "not the lead".
+
+## Skeptic (2026-10-18, 21:40-21:50 UTC, on the 21:05 hourly audit of the polish claim 15.40)
+
+Run by the audit's skeptic. I changed no model, bench, judge, kit, row or dashboard file, and no score.
+
+- **Sources.** I re-derived every number from the rawest files on disk with `tools/alignment_paired.py` (`gap_parts`;
+  `compare_sets` with 2000-4000 boots):
+  - the auditor's 21:00 re-wear dumps (`remeasure/freek_polish_pick1/*_{static,conn}_perpose.json`);
+  - the polish verifier's dumps (`polish_verify/pick1_{fit60,envh}_*_perpose.json`);
+  - the verified config's and the lead's dumps;
+  - the `stoprefusal`, `skipcheck` and `reverify_*` files.
+- **Checks re-run.** The re-wear and the polish verifier's dumps are identical: 0 of 470 bench and 0 of 1154 held poses
+  differ. I re-ran the T5 instrument hole with a scratch probe (scratchpad only). The probe filters the one malformed paired
+  file out of `glob` and calls the tool's `c_contact_depth` unchanged.
+- **Compute.** Local only, niced, OMP_NUM_THREADS=1, 1 process, $0.
+- **Rulings.** `docs/alignment/freek-oracle-route-knuckle-4r.rulings.json`. Ledger entry 2026-10-18T21:47:26Z, run
+  `skeptic:freek-oracle-route-knuckle-4r`.
+
+**Final verdict (computed by `tools/alignment_ledger.py skeptic`): WATCH.** 3 reasons refuted with measurements or file
+fields (held_out, fold_margin, NEW-mixed-reading). 13 upheld, all at watch.
+
+| key | ruling | evidence |
+|---|---|---|
+| held_out | **refuted** | The +6.47 pairs a static bench number (16.2) with a mixed-reading flood held number (22.66). Same-reading drops: pick1 fit60 15.40 -> 20.51 (+5.11), pick1 shared flood 15.40 -> 21.16 (+5.76), pick1 env fit 20.24 (+4.84), verified config one reading 16.21 -> 21.89 (+5.68), verified config flood to flood 17.35 -> 22.66 (+5.31). All are under TH held_watch 6.0. |
+| dominance | upheld | Reproduced on every reading. pick1: -2.89 plain (P 0.985), +10.60 behind at 2 mm on the bench (P 0.018) and +12.76 held. Verified config: -2.08 / +11.38. The tool's +0.93 uses the mixed flood 17.35. Watch is the documented cap (2026-10-17.2). |
+| fold_margin | **refuted** | Row `polished_bench.th.one_min` 5.59 and `polished_held_out_fit60.th.one_min` 5.58 (one_lt5 0). Re-wear `fold_margin_th.all.min_margin_th` 5.586 / 5.583 (n_below5 0). All are >= TH fold_min 5.0. The watch is FOLD_KEY, which does not match the key. |
+| sampling | upheld | No per-part in-band record anywhere on file. Not measured. |
+| reporting | upheld (half refuted) | The "flatters" clause is wrong: 15.4 is the polish confirmed by its independent verifier, and it recomputes from `pick1_fit60_bench_perpose.json`. The sweep clause stands: `morphs.json` (55fdc52) has sweep_gap 9.56 < v_gap - 5. The "Every configuration tested" chart plots sweeps as scores with no fast / self-measured label. The board ranks on v_gap, and the record chart has 0 records for this row. |
+| NEW-instrument-masked-T5 | upheld | Reproduced. `_depth_sources('conecut-knee-knuckle-3r')` and `_claim_depths` raise `AttributeError: 'str' object has no attribute 'get'`. With the malformed file skipped, T5 reads watch: freek x3.88 / x3.81, offset-shortcar x2.28 bench, phi40-thinstack x3.70 bench and **x3.24 held** (197.82 vs 60.97 mm; the audit cited only phi40's bench). |
+| T5 | upheld | pick1: 7 / 39.47 mm vs 4 / 20.24 on the bench (x1.95). Held, CAD shape: 29 / 127.92 vs 14 / 60.97 (x2.10, +66.95 mm), over both TH depth_ratio 2.0 and depth_floor 5. The lead's held dump is on the same protocol. |
+| NEW-stop-refusal | upheld | Recomputed: side 16.39 / 21.55 for pick1 and 16.45 / 22.29 for the verified config, a gain of 0.06 / 0.74 (the audit's 0.75 is rounding). `reverify_side_bench.json` gives 16.68. Skip checks: 0 skipped and 0 q3 rises (31 / 66 engaged for pick1; 47 / 100 recs for the verifier). No dowel force is on file. |
+| G1 | upheld | 45.44 vs 34.84 and 49.87 vs 37.11; 48 vs 33 and 102 vs 71 taken poses under 2 mm. Correction: the lead's range on clip frames 6-12 is 1.84-2.47 mm, not 1.84-2.12. The shell is wider than the audit says (missed 1). |
+| G6 | upheld | 4 joints, complexity 33.25, leader_ruling empty. Correction: phi40-thinstack-relay-4r was verified at 21:09 (36a87d4, 14.06). Two 4-joint rows now rank ahead and this row is third. |
+| R4 | upheld | `morphs.json` still holds gap / sweep_gap 9.56. `frozen_gap` 17.35 recomputes from the verified config's flood dump; pick1's flood is 15.40. |
+| NEW-mixed-reading | **refuted** | Facts right, claimed harm wrong. No code in tools/, pipeline/, judge/ or docs/dashboard reads `polished_held_out_gap` (grep). alignment_audit reads `held_out_gap` 21.89. The field is labelled with its own protocol and paired with its own reference (`polished_held_out_protocol`; `polished_held_out_ref_VER_same_protocol` 22.3, so +2.06 on that protocol). The 1-point polish rule passes on both readings (1.38 / 2.06). Significance is P1's finding. |
+| M5 | upheld | No R17, dowel force, preload or cuff twist on file (grep). |
+| T4 | upheld | Min th 5.586 / 5.583, in state 1 (J2 on its stop). a1max 72.6719 = 29.3309 + 48.851 - 5.51, priced 70.7149. No measurement of feel near the edge is on file. |
+| P1 | upheld | Re-run: -0.81 (CI90 -5.54..1.84, P 0.727) on the bench; -1.38 (CI90 -3.71..0.43, P 0.892) held. Held ws share with \|axial\| >= 150 is 0.1103. I did not re-measure the envh share. |
+| P4 | upheld | Shared flood held 21.16 with overhead 12 / 71, against the one reading's 20.51 with 18 / 71. |
+
+### Missed by the audit (for the next audit; not in this verdict)
+
+1. **The 1-2 mm shell spans three raised-arm passages, not one.**
+   - On the tool's metal (min of min_mm and cmin), pick1 takes 15 bench clip frames under 2 mm; the lead takes 5 (frames
+     7-11).
+   - Frames 6-12 (plane 30, elev 138-150): pick1 1.70-1.80 mm, lead 1.84-2.47 mm.
+   - Frames 47-48 and 52-54 (plane 73-78, elev 129-143, axial -63 to -67): pick1 1.85-1.98 mm, lead 2.78-3.08 mm.
+   - Frames 66-68 (plane 82, elev 132, axial -82): pick1 1.92 mm, lead 2.80 mm.
+   - On the second and third passages pick1 rides about 1 mm closer than the lead. The verified config was already there
+     (1.75-2.04 mm), so the polish did not cause it.
+   - Overhead taken ws p10 on the same metal (numpy default percentile): pick1 1.56 mm, lead 1.79 mm. The tool's record
+     reads 1.67 mm.
+2. **On the stop-refusal reading, the 1-point polish rule depends on the held protocol.**
+   - The row's `polished_held_out_side_reading` gives pick 21.37 vs the verified config's 22.6 (gain 1.23, env fit). That
+     passes the 1-point rule.
+   - The CAD-shape side reading recomputes to 21.55 vs 22.29 (gain 0.74). That fails it.
+   - So under proposal B, whether the polish is confirmed depends on which held protocol is read. The verdict text quotes
+     0.74, but the field holds 1.23. Proposal F should cover this field too.
+3. **The T5 instrument hole also hides held depth on phi40-thinstack-relay-4r.** With the malformed file skipped, phi40
+   reads x3.24 held (48 contacts / 197.82 mm vs 14 / 60.97), not only x3.70 bench. That row was verified at 21:09 and is
+   now first on the board. Re-audit it after proposal I.
+4. **G6 ranking is stale.** phi40-thinstack-relay-4r (4 joints, 14.06) was verified after the audit's snapshot. Three
+   4-joint rows now outrank the 3-joint lead (18.28), and none has a leader_ruling. The headline KPI still excludes them
+   (the `leader` calc's `ok3` in docs/dashboard/public/index.html).
+
+### What happens next
+
+- Proposal I (type-check the paired file) restores T5 on three rows. phi40-thinstack-relay-4r and
+  offset-shortcar-relay-4r both need a re-audit after it lands.
+- Proposal C (FOLD_KEY reads `one_min` / `min_margin_th`) and proposal G (audit the keyed claim) close the two
+  instrument watches refuted here again: fold_margin, refuted at 11:24 and now, and held_out, refuted at 07:37, 08:43,
+  11:24 and now.
+- Still open on the design:
+  - the held contact depth (x2.10);
+  - the 1-2 mm shell on three raised-arm passages;
+  - the dowel side reading, 0.06 / 0.74 (proposal B, and its protocol, missed 2);
+  - R17, the dowel force and the cuff twist.
+- The row stays not the lead.
