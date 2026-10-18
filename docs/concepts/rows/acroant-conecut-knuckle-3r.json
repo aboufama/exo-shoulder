@@ -22,7 +22,22 @@
  "v_gap": null,
  "n_configs": 52,
  "best_params": {
-  "d_az1": 5.0
+  "d_az1": 1.1562,
+  "r_c": 15.567,
+  "g": 2.4439,
+  "kK": 2.1802,
+  "r_lobe": 8.3399,
+  "beta": -175.0947,
+  "lift": 0.6111,
+  "s_arm": 4.1631,
+  "lE": 99.2122,
+  "lc": 24.0138,
+  "phiE": -1.0037,
+  "phib": -90.8168,
+  "J3MIN": -112.4223,
+  "J3MAX": 123.3325,
+  "a1max": 58.7678,
+  "bk2": 38.0336
  },
  "verdict": "in progress",
  "limiter": "in progress",
