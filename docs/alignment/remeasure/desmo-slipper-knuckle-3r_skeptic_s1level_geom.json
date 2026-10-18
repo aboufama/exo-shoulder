@@ -1,0 +1,169 @@
+{
+ "design": "desmo-slipper-knuckle-3r",
+ "by": "skeptic:desmo-slipper-knuckle-3r",
+ "time": "2026-10-18T06:30Z",
+ "what": "skeptic re-run of tools/alignment_desmo_slipper_s1level.py geom (model, verifier and bench unchanged; fast Bench(60,160), verifier --blend IK), niced, OMP_NUM_THREADS=1",
+ "commands": [
+  "python3 tools/alignment_desmo_slipper_s1level.py geom <out> --set a_s=9.5 --set psi=150 --glev -0.5",
+  "python3 tools/alignment_desmo_slipper_s1level.py geom <out> --set a_s=9.5 --set psi=150 --level 3.9 --pmf -1.2997"
+ ],
+ "face_definition_check": "tool H2 = c2.u2 + f[1]; CAD pipeline/concept_l1/build_minarc_l1.py joints4: C[2]=D.c[1], U[2]=D.u[1], F[2]=M.f[1] -> the same face; J2 layer order ('J2', 2, 'l1b', 'l2') pipeline/conformal/param_cad/user_style_desmo.py line 142 (link 1b lower, link 2 upper)",
+ "runs": {
+  "verified_level_glev_-0.5": {
+   "params_sets": {
+    "a_s": 9.5,
+    "psi": 150.0,
+    "glev": -0.5
+   },
+   "fit_fast": {
+    "gap": 13.53,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8897,
+    "contact": 0.0
+   },
+   "rec": {
+    "glev": -0.5,
+    "H2": 62.0437,
+    "J2_axis_off_GH_mm": 0.0,
+    "pivot_minus_face_mm": -1.2997,
+    "groove_mid_over_face_mm": 1.3503,
+    "groove_layer_over_face_mm": [
+     0.6,
+     2.1
+    ],
+    "ring_samples_level_over_face_mm": 0.6,
+    "pin_band_over_face_mm": [
+     0.6,
+     2.1
+    ],
+    "pin_radius_about_u2_mm": 9.487,
+    "arm_root_over_face_mm": -1.748,
+    "arm_pin_end_over_face_mm": 0.35,
+    "pivot_radius_about_u2_mm": 16.022,
+    "dR_dot_u2": 0.9669,
+    "lower_plate_over_face_mm": [
+     0.0,
+     3.0
+    ],
+    "link2_member_from_mm": 3.15,
+    "l1b_samples_r_le_12": {
+     "n": 0,
+     "level_over_face_mm": null
+    },
+    "stage1": {
+     "a_s": 9.5,
+     "psi": 150.0,
+     "pitch": [
+      9.487,
+      9.487
+     ],
+     "r_out": 11.05,
+     "pa_pin_max": 33.94,
+     "pa_cap_max": 35.25,
+     "pa_gate": 38.03,
+     "drift_max": 0.293,
+     "tilt_max_deg": 5.07,
+     "crown_needed": true,
+     "rc_min": 0.9,
+     "rc_onset": 0.99,
+     "blend_K_lead_deg": 2.614,
+     "arm_from_axis": 9.5,
+     "n_ring_rigid": 19,
+     "ring_az_deg": 99.9,
+     "lim_by_gate": {
+      "pitch": 60.25,
+      "pa_pin": 53.5,
+      "pa_cap": 60.25,
+      "drift": null,
+      "radius": 0.5
+     }
+    },
+    "dK_lim": 49.5,
+    "why_lim": "pressure_horn",
+    "dK_lim_parent": 49.5,
+    "desmo_fail": [],
+    "crank_free": 0.174
+   },
+   "secs": 10.9
+  },
+  "F+3.9_verified_pin": {
+   "params_sets": {
+    "a_s": 9.5,
+    "psi": 150.0,
+    "glev": 2.0497
+   },
+   "fit_fast": {
+    "gap": 101.19,
+    "reach": 0.3312,
+    "follow": 0.5333,
+    "inband14": 0.8736,
+    "contact": 0.0
+   },
+   "rec": {
+    "glev": 2.0497,
+    "H2": 62.0437,
+    "J2_axis_off_GH_mm": 0.0,
+    "pivot_minus_face_mm": -1.2997,
+    "groove_mid_over_face_mm": 3.9,
+    "groove_layer_over_face_mm": [
+     3.15,
+     4.65
+    ],
+    "ring_samples_level_over_face_mm": 3.15,
+    "pin_band_over_face_mm": [
+     3.15,
+     4.65
+    ],
+    "pin_radius_about_u2_mm": 10.074,
+    "arm_root_over_face_mm": 0.802,
+    "arm_pin_end_over_face_mm": 2.9,
+    "pivot_radius_about_u2_mm": 16.022,
+    "dR_dot_u2": 0.9669,
+    "lower_plate_over_face_mm": [
+     0.0,
+     3.0
+    ],
+    "link2_member_from_mm": 3.15,
+    "l1b_samples_r_le_12": {
+     "n": 0,
+     "level_over_face_mm": null
+    },
+    "stage1": {
+     "a_s": 9.5,
+     "psi": 150.0,
+     "pitch": [
+      10.074,
+      10.074
+     ],
+     "r_out": 11.63,
+     "pa_pin_max": 20.97,
+     "pa_cap_max": 37.6,
+     "pa_gate": 38.03,
+     "drift_max": 0.0,
+     "tilt_max_deg": 0.0,
+     "crown_needed": false,
+     "rc_min": 99.0,
+     "rc_onset": 1.01,
+     "blend_K_lead_deg": 2.614,
+     "arm_from_axis": 9.5,
+     "n_ring_rigid": 27,
+     "ring_az_deg": 89.5,
+     "lim_by_gate": {
+      "pitch": 0.0,
+      "pa_pin": 62.25,
+      "pa_cap": 64.5,
+      "drift": null,
+      "radius": 1.0
+     }
+    },
+    "dK_lim": 0.0,
+    "why_lim": "s1-pitch",
+    "dK_lim_parent": 49.5,
+    "desmo_fail": [],
+    "crank_free": 0.173
+   },
+   "secs": 6.3
+  }
+ }
+}

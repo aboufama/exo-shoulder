@@ -259,3 +259,76 @@ centreline radius) on the built, blended groove. Measured effect on the one row 
   verified placement, the same as the mu 0.14 run, where dK_lim is also 0.
 * Under reading (a), the cap-side gate is dropped at the dwell exit and nothing moves.
 * No other verified row has a blended stage-1 groove.
+
+---
+
+## Skeptic (2026-10-18 ~06:27 UTC, skeptic:desmo-slipper-knuckle-3r), on the 06:18 re-audit
+
+Final verdict (`tools/alignment_ledger.py skeptic`, entry 2026-10-18T06:26:41Z): **WATCH**.
+- Of the 12 reasons, 1 is refuted with evidence (T5) and 11 are upheld.
+- Rulings: `docs/alignment/desmo-slipper-knuckle-3r.rulings.json`. They replace the 2026-10-17 file, whose rulings are
+  kept in the section above.
+- New raw material: `docs/alignment/remeasure/desmo-slipper-knuckle-3r_skeptic_s1level_geom.json`. It holds my re-run
+  of the auditor's `geom` mode, with the model, verifier and bench unchanged, at the verified level and at F+3.9 with
+  the verified pin.
+- Local only, niced, OMP_NUM_THREADS=1, 2 processes, about 10 s each. No farm.
+
+### Re-measured
+
+| what | auditor | my re-run / re-derivation |
+|---|---|---|
+| pivot under hub 2's face | -1.300 | -1.2997 |
+| groove layer, pin band | F+0.60..2.10 | F+0.60..2.10, pin r 9.487 |
+| short arm | F-1.75..+0.35 | F-1.748..+0.35 |
+| verified pin at F+3.9 | pitch 10.074, dK_lim 0, fast 101.19 | the same (s1-pitch) |
+| F+3.9 bench / held | 20.38 / 25.33 | 20.38 by hand from the frozen terms; dump 25.34 |
+| contact depth, this row | 14.72 / 46.14 mm | 14.72 / 46.14 (my own sum over the dumps) |
+| contact depth, conecut-knee (the current lead) | - | 20.24 / 60.97 mm (4 / 14 contacts) |
+
+- **The face definition is the CAD's.** In `build_minarc_l1.py joints4`, F[2] = M.f[1] and C[2] = D.c[1].
+- **Link 1b is J2's lower member.** See `user_style_desmo.py` line 142 and `tools/concept_kit.py` line 24.
+
+### Rulings
+
+| key | ruling | evidence (short; the full text is in the rulings file) |
+|---|---|---|
+| reporting | upheld | `morphs.json`: sweep_gap 12.79 vs v_gap 18.95. The difference, 6.16, is over the documented sg < vg - 5. |
+| M3 | upheld | Re-measured as in the table above, with the same harness and frozen protocol on both sides. The +1.43 is a lower bound: at F+3.9 the short arm still runs F+0.80..2.90, inside the plate, and at F+6.15 0 of 11 pins held. |
+| NEW-inherited-stack | upheld | The formula (line 148) and the box (line 87) belong to this model, created in 8d483b1 at 15:28. desmo-conecut came later (171b169, 19:36) and loads this file (line 53, copied at line 182). lowarm-halfring loads desmo-conecut at glev -1.0. The row note reverses the direction. lowarm-halfring is already `gamed` in the ledger (03:00:45Z). |
+| NEW-friction-cliff | upheld | pa_cap_max 35.73 at F+3.9 (9.8/150): tan(7.27) = 0.128. At the verified level, 35.25 gives 0.136. Missed[0] from the 2026-10-17 skeptic is still open (no friction force analysis through the built blended onset). |
+| NEW-silent-check | upheld | The cut list (line 182) holds pitch, pa-pin, pa-cap and drift, while the radius check appears only in lim_by_gate (line 286). Re-run at the verified placement: rc_min 0.90, lim_by_gate.radius 0.5 deg against the dK_lim of 49.5 actually used. |
+| NEW-refuted-best-params | upheld | best_params is 9.25/154 (13.19), but verified_config is 9.5/150. The scan's 3.9/9.25/154 row has rc 0.51. |
+| R1 | upheld | The verdict reads "Unmeasured on this row", but the audit measured 20.38 / 25.33. The same field still carries the screen's self-claim ("paired TIE with the lead ... 18.63"). |
+| R2 | upheld | Sweep best 12.79 rests on the dense-wall convention (-0.31) and a placement with only a sparse slop reading. Both dense scans on file nearby fail. |
+| T3 | upheld (missing measurement) | Held th min 5.006 (n 852, lt5 0) against TH 5.0. No per-pose margin with K play is on file. |
+| **T5** | **refuted** | The documented reference is the current lead (DEPTH_REF = conecut-knee, line 301; ALIGNMENT.md section 6, change 2026-10-17.5). Against it this row reads x0.73 bench (14.72 vs 20.24 mm) and x0.76 held (46.14 vs 60.97), with excess -5.52 / -14.83 mm. Neither TH depth_ratio 2.0 nor depth_floor 5 mm is met, and the tool's own contact_depth check reads ok. The audit's x2.36 is against sidecar-longdyad. That is RULINGS_DEPTH_REF, a selftest replay reference that the 2026-10-17.5 change retired as the live reference. |
+| NEW-ws-inband | upheld | Raised-arm in-band 0.8009 (over 14 mm: 0.198, max 30.8 mm). Against the CURRENT lead (conecut-knee probe: 0.8315 raised, 0.9012 scored) the unscored deficit is 3.06 points and the scored one 1.08, so the score under-reads this design's raised-arm cost. |
+| G3 | upheld (missing measurement) | No desmo-slipper entry in `pipeline/full-exo/designs`; the row has no cad, judge, r17 or cuff_twist field. |
+
+### Missed (for the next audit; not counted in this verdict)
+
+0. **The verdict field still advertises a refuted self-claim as a tie with a former lead.** This is R1 in its
+   documented form.
+   * What the text says: after the lead note, `docs/concepts/rows/desmo-slipper-knuckle-3r.json` verdict (and
+     `morphs.json`) reads "paired TIE with the lead at lower complexity: frozen exact Bench(110,360) 18.63 vs the lead's
+     18.49 ... held 23.59 vs 23.45".
+   * Why 18.63 is wrong: it is the claim placement 9.25/154, which the verifier refuted on its own slop gate.
+   * What the verified config measures: paired against the same slipper-nose, it is worse, not tied.
+     `remeasure/desmo-slipper-knuckle-3r_vs_slipper-nose-knuckle-3r_paired.json` gives bench diff +0.46 (ci90 0.0..0.56,
+     p_A_better 0.0) and held +0.45 (p_A_better 0.0).
+   * Why "the lead" is wrong: slipper-nose is no longer the lead; conecut-knee (18.28) is.
+   * Action: replace the screen text with the verified paired reading.
+1. **The declared radius gate would cut the verified claim itself, not only re-placed pins.**
+   * Measured at the verified placement: rc_min 0.90, and lim_by_gate.radius is 0.5 deg (my re-run). Enforced as the
+     docstring states (lines 13-16), the gate cuts dK_lim to about 0.5.
+   * Expected effect: on this chain a gate that cuts dK_lim to 0 reads fast 101.19 (scan row 3.9/9.5/150). So the 18.95
+     exists only because the declared 1.5 floor is silent. I did not run the gate-on wear; this is an inference from
+     the same chain's dK_lim-0 reading.
+   * The physical floor is the pin radius 0.75, which the verified placement passes (0.90). It leaves an inner-wall
+     ridge of 0.90 - 0.76 = 0.14 mm radius under the drive load.
+   * Missing: no contact-stress or wear number is on file for that ridge.
+   * Action: decide which floor is the rule (1.5 declared, or 0.75 + a stated ridge), enforce it in the cut list, and
+     re-claim.
+
+**Proposal (measurement change, not an input to this verdict):** none new. The audit's family level fix and the 2026-10-17
+skeptic's "gate on the built groove" proposal cover the open items.
