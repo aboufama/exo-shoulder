@@ -1,0 +1,281 @@
+{
+ "id": "phi40-thinstack-relay-4r",
+ "status": "screened",
+ "v_gap": null,
+ "complexity": 51.25,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no verified bench gap on the row",
+  "dominance: beats conecut-knee-knuckle-3r by 4.76 plain but loses by 12.32 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no verified bench gap on the row"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "no pair"
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 13.52, <1 mm 18.18, <2 mm 47.16, <3 mm 100.73, band read 3-14 mm 13.52, 33.64 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 33.64,
+   "plain": 13.52,
+   "n1": 18.18,
+   "n2": 47.16,
+   "n3": 100.73,
+   "band3": 13.52,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0007,
+    "2-3": 0.0035,
+    "3-4": 0.0109,
+    "4-6": 0.0885,
+    "6-10": 0.4736,
+    "10-14": 0.3404,
+    ">14": 0.0825
+   },
+   "minmm": 0.072,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): gap 14.06: bench 17 contact poses, sum 74.92 mm, deepest 15.37 mm at ['ws', 30.0, 150.0, -30.0], 7 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 48 contact poses, sum 197.82 mm, deepest 13.89 mm at ['ws', 45.0, 150.0, -15.0], 23 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
+   "depths": {
+    "gap 14.06": {
+     "bench": {
+      "n": 17,
+      "sum_mm": 74.92,
+      "max_mm": 15.37,
+      "n_deeper3": 7,
+      "overhead140": 6,
+      "deepest": [
+       "ws",
+       30.0,
+       150.0,
+       -30.0
+      ],
+      "gap": 14.06,
+      "src": "docs/alignment/remeasure/phi40-thinstack-relay-4r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        74.92
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 48,
+      "sum_mm": 197.82,
+      "max_mm": 13.89,
+      "n_deeper3": 23,
+      "overhead140": 16,
+      "deepest": [
+       "ws",
+       45.0,
+       150.0,
+       -15.0
+      ],
+      "gap": 16.69,
+      "src": "docs/alignment/remeasure/phi40-thinstack-relay-4r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        197.82
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "beats conecut-knee-knuckle-3r by 4.76 plain but loses by 12.32 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": 4.76,
+   "gain_2mm": -12.32
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.0 deg (frozen_exact.th_margin; 4 readings)",
+   "min_margin": 5.0,
+   "where": "frozen_exact.th_margin"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 46.29 deg (re-measured dK span); crank: declared moving, no span on file; knee moves: smallest recorded span 46.67 deg (re-measured K.ang span)",
+   "spans": [
+    [
+     "re-measured dK span",
+     46.29
+    ],
+    [
+     "re-measured K.ang span",
+     46.67
+    ],
+    [
+     "re-measured K.qa span",
+     46.67
+    ],
+    [
+     "re-measured K.qb span",
+     53.21
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.917 vs part-weighted 0.926 (-0.88 points); thinly sampled parts: L1a 8 (re-measured)",
+   "parts": {
+    "hub1": [
+     1.0,
+     8.62,
+     80
+    ],
+    "hubK": [
+     0.9918,
+     7.91,
+     80
+    ],
+    "hub2": [
+     0.9118,
+     11.59,
+     80
+    ],
+    "hub3": [
+     0.7422,
+     11.45,
+     80
+    ],
+    "E": [
+     0.94,
+     9.6,
+     164
+    ],
+    "boss": [
+     1.0,
+     7.47,
+     32
+    ],
+    "pad": [
+     1.0,
+     6.22,
+     32
+    ],
+    "knee": [
+     0.9989,
+     9.73,
+     90
+    ],
+    "crank": [
+     0.8007,
+     11.3,
+     133
+    ],
+    "roller": [
+     0.9383,
+     9.99,
+     19
+    ],
+    "horn": [
+     0.9549,
+     7.46,
+     23
+    ],
+    "L1a": [
+     0.9807,
+     10.07,
+     8
+    ],
+    "L1b": [
+     0.9179,
+     8.22,
+     36
+    ],
+    "L2": [
+     0.7312,
+     11.97,
+     124
+    ],
+    "relay_hw_inband": [
+     0.9756,
+     8.27,
+     372
+    ]
+   }
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 51.25 vs row 51.25",
+   "recomputed": 51.25,
+   "row": 51.25
+  },
+  {
+   "check": "reporting",
+   "level": "ok",
+   "reason": "row, verifier files and dashboard agree"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [
+  "docs/concepts/verify/phi40-thinstack-relay-4r/verifier_claim.json",
+  "docs/concepts/verify/phi40-thinstack-relay-4r/verifier_held_perpose.json",
+  "docs/concepts/verify/phi40-thinstack-relay-4r/verifier_claim_perpose.json",
+  "docs/concepts/verify/phi40-thinstack-relay-4r/_times.json",
+  "docs/concepts/verify/phi40-thinstack-relay-4r/diag_phi35_claimbench_s0_perpose.json",
+  "docs/concepts/verify/phi40-thinstack-relay-4r/flood_PHI35_t12_a235_s1.json",
+  "docs/concepts/verify/phi40-thinstack-relay-4r/diag_claimbench_s1_perpose.json",
+  "docs/concepts/verify/phi40-thinstack-relay-4r/held_pick_perpose.json",
+  "docs/concepts/verify/phi40-thinstack-relay-4r/diag_claimbench_s0_perpose.json",
+  "docs/concepts/verify/phi40-thinstack-relay-4r/claim_phi40_post0_perpose.json",
+  "docs/concepts/verify/phi40-thinstack-relay-4r/claim_phi40_pick_perpose.json",
+  "docs/concepts/verify/phi40-thinstack-relay-4r/pick_phi40.json"
+ ],
+ "git": "d889d5a",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T21:04:34Z"
+}
