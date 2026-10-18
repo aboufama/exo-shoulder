@@ -104,6 +104,13 @@ All numbers below are fit-bench (Bench(60,160) fast) numbers unless marked; the 
 (plain) and the near-1 objective counts metal < 1 mm as contact. Files: docs/research/posteromedial_seat/
 (stage0_*.json, cma_*.json, frozen_*.json, the drivers stage0.py / stage1.sh / summarize.py).
 
+### 0. Control: the wrapper reproduces the lead
+
+The model, with its seat box opened to the lead's J1 (95.39, 67.90), the lead's J3 seat, branch -1 and d_a1 = d_a2 = 0,
+re-solves J2 to the lead's exact (45.821, 41.085). On Bench(60,160) fast it gives near-1 13.66, plain 12.50, reach 0.775,
+ib14 0.9007, contact 0, honest. These are the lead's own fast numbers (row conecut-knee-knuckle-3r: plain 12.5; lead
+check 13.66 near-1). So every loss below comes from the seat, not the wrapper.
+
 ### 1. Kinematics first: the lead's dyad gains at most 3 % of window at these seats (fit bench, 220 poses)
 
 Share of the fit bench's 220 poses (60 clip frames + 160 workspace) whose th = angle(u1, Q u3) lies in a window, best J3
