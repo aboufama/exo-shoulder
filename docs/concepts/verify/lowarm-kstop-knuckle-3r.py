@@ -12,7 +12,8 @@ The verifier adds ONE metal correction (V-ARM) on top, selectable:
          contact list = skin-checked metal), i.e. the real envelope of the short arm. T = 0 reproduces the claim.
 
     CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/verify/lowarm-kstop-knuckle-3r.py wear <delta> <bench|held> <out.json>
-        [--arm-t 1.38] [--dump PATH]
+        [--arm-t 1.38] [--dump PATH] [--flood]   (--flood: the continuity flood, connected() of minarc-stop-knuckle-4r-mechanism.py,
+        on the post-dowel bench)
 """
 import importlib.util, json, math, os, sys
 import numpy as np
@@ -32,6 +33,7 @@ _orig_h = KM._harness
 
 def _h():
     T, V, LM, DS, S, PLAY = _orig_h()
+    INFO["_V"] = V
     b0 = LM.LHModel._desmo_build_B
 
     def b_arm(self):
@@ -62,7 +64,14 @@ if __name__ == "__main__":
         d, which, outp = float(sys.argv[2]), sys.argv[3], sys.argv[4]
         dump = sys.argv[sys.argv.index("--dump") + 1] if "--dump" in sys.argv else None
         o = KM.wear(d, which, dump, {})
+        V = INFO.pop("_V")
+        if "--flood" in sys.argv:
+            import time as _t
+            fit, M1, M, B, r = V.CAP["res"]
+            MECH = _load("minarc_mech_for_kstop_v", os.path.join(HERE, "minarc-stop-knuckle-4r-mechanism.py"))
+            t1 = _t.time(); cr = MECH.connected_report(M, B); cr["secs"] = round(_t.time() - t1, 1)
+            o["connected"] = {k: v for k, v in cr.items() if k != "static"}
         o["verify_arm"] = dict(INFO); o["verify_note"] = "verifier V-ARM: short-arm underside sampled at sheet - arm_t (0 = the claim's metal)"
         json.dump(o, open(outp, "w"), indent=1, default=float)
-        print(json.dumps({k: o.get(k) for k in ("delta", "wear", "frozen", "dowel", "play_info", "named", "recomputed", "secs", "verify_arm")}
+        print(json.dumps({k: o.get(k) for k in ("delta", "wear", "frozen", "dowel", "play_info", "named", "recomputed", "secs", "verify_arm", "connected")}
                          | {"v": {k: (o["verifier"] or {}).get(k) for k in ("why", "overhead", "near1", "minmetal", "contacts")}}, default=float))
