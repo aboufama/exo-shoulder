@@ -238,3 +238,16 @@ What I checked:
 
 The next lever is unchanged: a guide whose long element moves with the carriage, so that no arm-fixed metal covers the
 medial arc while the relay is unturned. Nobody has measured it yet.
+
+### Audit re-dispatch after the container restart (2026-10-18T12:02:36Z)
+
+Nothing was re-run. The audit above (commit edde0db) is on origin, and the death stands. One new tally comes from the
+frozen dump (docs/research/fold_ceiling/kfree_armarc_frozen_exact.json), joined by pose index to the th values in
+lost_poses_roller-longdyad-knuckle-3r.json. Same seats, so th is the same.
+
+- The 103 fold losses split into 88 stretched (th 94.96-176) and 15 folded (th 7.7-27.0). The lead's split is 73 + 15.
+- The PHI-19 relay takes 20 poses past the plain wall (th > 94.66), and only 3 of them lie past the lead's
+  106.3. Meanwhile 18 stretched fold losses lie inside the lead's window (th <= 106.3).
+- So the relay's whole deficit against the lead is kinematic, inside the lead's own stretched window: 15 more
+  stretched folds, plus 5 more contacts and 2 parts, minus 2 fewer J3 stops. A longer arc is the only lever that adds
+  phi there, and it is the torso trade measured above.
