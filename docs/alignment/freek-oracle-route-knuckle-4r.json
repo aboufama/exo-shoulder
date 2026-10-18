@@ -10,7 +10,7 @@
   "dominance: beats conecut-knee-knuckle-3r by 0.93 plain but loses by 11.06 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
-  "reporting: dashboard sweep best 9.56 (score 96.52) sits 6.64 below the verified number"
+  "reporting: dashboard v_gap 15.4 vs verifier 16.2 (-0.80; the dashboard flatters the design); dashboard sweep best 9.56 (score 96.52) sits 6.64 below the verified number"
  ],
  "checks": [
   {
@@ -196,7 +196,7 @@
   {
    "check": "reporting",
    "level": "watch",
-   "reason": "dashboard sweep best 9.56 (score 96.52) sits 6.64 below the verified number"
+   "reason": "dashboard v_gap 15.4 vs verifier 16.2 (-0.80; the dashboard flatters the design); dashboard sweep best 9.56 (score 96.52) sits 6.64 below the verified number"
   },
   {
    "check": "judge_change",
@@ -227,7 +227,7 @@
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max86_bench.json",
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/wear3_rA12_25_55.json"
  ],
- "git": "d196fc2",
+ "git": "111c82b",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T11:02:10Z"
+ "t": "2026-10-18T11:18:05Z"
 }

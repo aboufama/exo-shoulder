@@ -14,7 +14,7 @@
  {
   "key": "G1",
   "level": "watch",
-  "reason": "Report only (user 2026-10-17: near-touch is not a gate). Auditor's re-wear of pick1 on Bench(110,360) exact: near-touch 1 mm 17.53 (lead 19.92, VER 21.01: pick1 now better at 1 mm), 2 mm 45.45 (lead 34.84, VER 46.22: 10.61 behind the lead), 3 mm 155.15; 48 bench poses with metal < 2 mm (near2_poses); taken poses with metal < 2 mm 28 bench / 60 held (lead 23 / 57, VER 28 / 55); overhead p10 metal 1.67 mm (VER 1.11, lead 1.79). Band read 3-14 mm: 15.89 (+0.49).",
+  "reason": "Report only (user 2026-10-17: near-touch is not a gate). Auditor's re-wear of pick1 on Bench(110,360) exact: near-touch 1 mm 17.53 (lead 19.92, VER 21.01: pick1 now better at 1 mm), 2 mm 45.45 (lead 34.84, VER 46.22: 10.61 behind the lead), 3 mm 155.15; 48 bench poses with metal < 2 mm (near2_poses); taken poses with metal < 2 mm 28 bench / 60 held (lead 23 / 57, VER 28 / 55); overhead p10 metal 1.67 mm (VER 1.11, lead 1.79). Band read 3-14 mm: 15.89 (+0.49). Held (auditor re-wear, CAD shape): 1 mm 22.00 (lead 25.23, VER 25.85), 2 mm 49.86 (lead 37.10, VER 48.10: 12.76 behind the lead), 102 held poses with metal < 2 mm; overhead p10 metal 1.65 mm.",
   "evidence": "docs/alignment/remeasure/freek_polish_pick1/freek-oracle-route-knuckle-4r_bench.json deep_static; held re-wear docs/alignment/remeasure/freek_polish_pick1/freek-oracle-route-knuckle-4r_held.json"
  },
  {
@@ -52,5 +52,11 @@
   "level": "watch",
   "reason": "Improved by the polish, not gone. The polish searched on envh (60 Bench(60,160) clips + 210 env workspace poses; q3max a search variable there, no longer placed from the claim bench's binders) and the picks were committed (6086e09) before any claim. Bench -> held drop on the claim's own protocol is +5.10 (15.40 -> 20.50) against VER's +5.69. But the verified-protocol bench gain over VER is +0.81 (CI90 of the gain -1.84..+5.54, P 0.73), inside noise, and the CAD-shape held gain +1.38 has P 0.89 with its CI crossing 0; envh's |axial| >= 150 share is 9.5 % against 11.0 % held out (the known polish-loss mechanism, docs/research/freek-oracle-route-knuckle-4r_final_polish.md section 1). Search-bench hygiene measured: the one envh pose 1.66 deg (HG frame) from held pose 779 changes nothing (779 is taken clean by pick1 and VER on both fit protocols), and dropping all 27 held poses within 3 deg of an envh pose raises the gain (+2.22 env fit, +1.52 CAD shape).",
   "evidence": "polish_verify/heldcheck.json; auditor scratch re-check of the HG distances; per-pose dumps; docs/research/freek_env_polish/picks"
+ },
+ {
+  "key": "P4",
+  "level": "watch",
+  "reason": "Carried from the 08:29 audit, now with a held-out effect on this claim. The claim's continuity uses the verifier's design-specific flood reading (kin_nodes_model, one reading per state's moving chain; it lives only in docs/concepts/verify/freek-oracle-route-knuckle-4r-verify.py, not in the shared harness, with no entry in docs/ALIGNMENT.md section 6). The auditor's re-wear through the shared harness's own flood (RM.kin_nodes, the family reading) reproduces the static numbers exactly (bench 15.40, held 20.50) and drops 0 bench poses, but drops 6 held poses, all overhead (609, 677, 681, 753, 754, 826: elev 150-165, axial -75..-45): held 20.50 -> 21.15 and held overhead taken 18 -> 12 of 71 (the lead takes 18). The 08:43 skeptic measured the moving-chain reading to be the right one (T3 refuted), so the claim's reading stands; the finding is that the held overhead count depends on a reading the shared harness does not apply. On the family reading the held gain over the verified config is 22.67 -> 21.15 = 1.52.",
+  "evidence": "docs/alignment/remeasure/freek_polish_pick1/freek-oracle-route-knuckle-4r_held.json (flood.dropped_poses, overhead140, frozen vs frozen_static); _bench.json (flood dropped 0); polish_verify/pick1_fit60_held.json connected.dropped 0"
  }
 ]
