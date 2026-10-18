@@ -553,6 +553,25 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      loop wf_f06588fd-4d1, the jump loop wf_6c42dda0-f91 and the hourly audit wf_b8e85540-23f (freek-oracle-route +
      lowarm-halfring) were resumed from cache; crons re-created (watchdog d07fc9f7, hourly audit ca2ab295). The recovery
      steps are now written in OPERATIONS section 3, 'After a container restart'.
+   - *Lead, 07:45 UTC 10-18:* this was a measurement change, not a design change. The desmo-window death audit (14dfecc)
+     found the desmo ring2 sampler is ~4x the kit's density. The lead's cross-row density audit (0696192;
+     tools/sample_density.py; alignment_audit 2026-10-18.1 adds a 'density' check, SELFTEST PASS;
+     docs/alignment/sample_density.md) re-weighted every verified row under 20.5 at the kit's 1 pt / 4 mm2.
+     **The top order is unchanged.** The lead conecut-knee reads 18.28 / 22.43 (held was 22.38), and no row moves under
+     it. Moves on the rows:
+     - desmo-conecut 18.98 -> 18.68 (18.49 at 4x);
+     - desmo-slipper 18.95 -> 18.81;
+     - slipper-nose / trimlug +0.07 (their roller is 4.55x and well placed);
+     - lowarm-halfring 17.96 -> 18.04.
+     The desmo stage-1 lift costs +0.31..0.44, not ~1.45. Exact re-wears still to run, ~55 min each at load 18:
+     desmo-conecut and desmo-slipper (`CB_EXACT=1 python3 tools/sample_density.py rewear <id> bench|held`).
+   - *07:45:* two final verdicts.
+     - freek-oracle-route-knuckle-4r is GAMED (P1). Its 17.35 bench lead is a coin flip that reverses held out, and its
+       stop was placed from claim-bench binders. The row stays screened with 4 DOF.
+     - lowarm-halfring-knuckle-3r is GAMED (M3 + P1): its stage 1 sits inside the plate. Cell A was re-verified at 18.83
+       (pad play), and at the plate-clearing level it reads 18.65.
+
+     No lead change; the lead is conecut-knee 18.28.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
