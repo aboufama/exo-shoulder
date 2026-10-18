@@ -16,7 +16,7 @@ for f in sorted(os.listdir(L)):
                                       gap_refusals_as_contacts=d["stop_refusal"]["gap_refusals_as_contacts"], q3own_engaged=d["j3stop"].get("q3own_engaged"),
                                       priced={k: round(v, 3) for k, v in d["priced"].items()}, secs=d["secs"])
 def CS(a, b):
-    try: return CS(a, b)
+    try: return AP.compare_sets(a, b)
     except SystemExit as e: return dict(error=str(e), gap_A=None, gap_B=None, diff=None, boot=dict(ci90=None, p_A_better=None), discordant=None)
 def pp(name):
     p = os.path.join(L, f"claim_{name}_perpose.json")
@@ -31,6 +31,9 @@ for k in ("pick1", "pick2", "pick3"):
     a = pp(f"{k}_env_held"); b = pp("VER_env_held")
     if a and b: out["paired"][f"{k}_env_held_vs_VER_env_held"] = CS(a, b)
     if a: out["paired"][f"{k}_env_held_vs_VER_fit60_held(cross-protocol)"] = CS(a, ver_held60); out["paired"][f"{k}_env_held_vs_lead_held"] = CS(a, lead_held)
+for k in ("pick1", "pick2", "pick3"):
+    a = pp(f"{k}_fit60_held"); b = pp("VER_fit60_held") or ver_held60
+    if a: out["paired"][f"{k}_fit60_held_vs_VER_fit60_held"] = CS(a, b); out["paired"][f"{k}_fit60_held_vs_lead_held"] = CS(a, lead_held)
 b = pp("VER_env_held")
 if b: out["paired"]["VER_env_held_vs_VER_fit60_held"] = CS(b, ver_held60)
 json.dump(out, open(os.path.join(REPO, "docs", "research", "freek_env_polish", "summary.json"), "w"), indent=1)

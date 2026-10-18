@@ -61,7 +61,7 @@ the claim queue (section 4).
    stops smhi / smlo >= 5.0 (the user's floor); stop B a1max <= bk1 + bk2 - 5.51 (the K-dyad repair of the family).
 2. **Priced** like the verified row (`env_polish.priced`): each J2 stop drawn s + 0.5, read at CB_FOLD_MARGIN 5.5; K's stop B
    drawn where the 5-deg rule first cuts the stretched branch. The verified config has no cut; the polished picks do
-   (pick1: dK cut 75.9 -> a1max 76.09 nominal is built as 70.71), so the pricing binds on them, not on the verified config.
+   (pick1: its 76.09 is first capped by the K-dyad repair to 72.67, then the rule cut at dK 75.9 / th 122.7 builds stop B at 70.71), so the pricing binds on them, not on the verified config.
 3. **a** = fit on envh FAST, scored in-sample. **b** = fit on Bench(60,160) FAST (the verified protocol's fit), worn
    FROZEN on envh FAST. The slipper polish measured that an env-fit gain is a fit-protocol artifact unless the
    Bench(60,160)-fit shape travels too, so both shapes are scored.
@@ -93,11 +93,82 @@ is the Bench(60,160) optimum.
 **Picks** (`docs/research/freek_env_polish/picks/`): the best rows by objective, each >= 1 CMA step from the others in some
 parameter (no envsel cache exists locally, so no independent pick-selection draw; the claim is the only arbiter):
 
-| pick | row | obj | a near / plain | b near / plain | Bench(60,160) in-sample near | envh contacts / depth | q3max | smhi / smlo | a1max (priced) | bk1 / bk2 | az2 / el2 | wd / wa / b3 |
+| pick | row | obj | a near / plain | b near / plain | Bench(60,160) in-sample near | envh contacts / depth | q3max | smhi / smlo | a1max nominal -> K-dyad cap -> priced | bk1 / bk2 | az2 / el2 | wd / wa / b3 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| VER | - | 16.97 | 15.54 / 15.54 | 18.39 / 14.75 | 9.56 | 8 / 17.28 | 86 | 7.377 / 7.329 | 76.04 (76.04) | 32 / 52 | 44.40 / 43.87 | 66.60 / -9.63 / 0.40 |
-| pick1 | fe1-g10-7 | 14.06 | 13.60 / 12.69 | 14.51 / 12.69 | 12.72 | 4 / 5.45 | 84.77 | 7.647 / 8.084 | 76.09 (70.71) | 29.33 / 48.85 | 48.92 / 41.35 | 66.72 / -13.75 / 0.293 |
-| pick2 | fe1-g13-3 | 14.89 | 14.09 / 13.21 | 15.68 / 12.14 | 12.84 | 3 / 5.48 | 86.26 | 7.876 / 7.722 | 74.90 (72.80) | 29.05 / 49.91 | 42.00 / 43.61 | 67.13 / -12.84 / 0.294 |
-| pick3 | fe1-g8-5 | 15.10 | 13.46 / 12.55 | 16.73 / 11.32 | 12.00 | 3 / 4.13 | 84.63 | 7.326 / 7.022 | 76.98 (74.05) | 32.21 / 51.06 | 54.19 / 39.43 | 68.24 / -9.95 / 0.323 |
+| VER | - | 16.97 | 15.54 / 15.54 | 18.39 / 14.75 | 9.56 | 8 / 17.28 | 86 | 7.377 / 7.329 | 76.04 -> 76.04 -> 76.04 | 32 / 52 | 44.40 / 43.87 | 66.60 / -9.63 / 0.40 |
+| pick1 | fe1-g10-7 | 14.06 | 13.60 / 12.69 | 14.51 / 12.69 | 12.72 | 4 / 5.45 | 84.77 | 7.647 / 8.084 | 76.09 -> 72.67 -> 70.71 | 29.33 / 48.85 | 48.92 / 41.35 | 66.72 / -13.75 / 0.293 |
+| pick2 | fe1-g13-3 | 14.89 | 14.09 / 13.21 | 15.68 / 12.14 | 12.84 | 3 / 5.48 | 86.26 | 7.876 / 7.722 | 74.90 -> 73.45 -> 72.80 | 29.05 / 49.91 | 42.00 / 43.61 | 67.13 / -12.84 / 0.294 |
+| pick3 | fe1-g8-5 | 15.10 | 13.46 / 12.55 | 16.73 / 11.32 | 12.00 | 3 / 4.13 | 84.63 | 7.326 / 7.022 | 76.98 -> 76.98 -> 74.05 | 32.21 / 51.06 | 54.19 / 39.43 | 68.24 / -9.95 / 0.323 |
 
-@@CLAIMS@@
+## 4. The claims (exact, frozen, priced, one fold reading)
+
+The claim harness (`tools/freek_env_polish.py claim`) is the verifier's own path: `RM.freeze` (fit FAST, wear EXACT
+frozen) -> `Mk.run()` -> near-touch -> the verifier's `flood_connected` with `kin_nodes_model` (the verified one fold
+reading), plus a per-pose dump (`alignment_paired._dump_bench`), the th margins on both readings, J3's own angle at the
+engaged poses and the stop-refusal side reading. **It reproduces the verified config on the verified protocol exactly**:
+16.20 / near 21.01 / 15 contacts / 78.55 mm / min th 5.91 / family min 0.14 (`local/claim_VER_fit60_bench.json`).
+All 13 claims ran locally, 2 at a time, 09:43-10:25 UTC (2-5 min each).
+
+**Gap (plain, connected = static: 0 workspace poses dropped by continuity in every claim):**
+
+| config | verified protocol: fit Bench(60,160) -> Bench(110,360) | held out, fit Bench(60,160) (the CAD shape) | held out, fit envh | fit envh -> envh exact (search-bench check) |
+|---|---|---|---|---|
+| VER (verified) | **16.20** (score 94.11) | **21.89** (on file; this harness: @@VERH@@) | 22.30 | 15.45 (fast in-sample 15.54: the cache is within 0.09) |
+| pick1 (obj rank 1) | **15.40** (94.40) | **20.50** | **20.24** | - |
+| pick2 (rank 2) | 16.65 (93.95) | 21.17 | 22.02 | - |
+| pick3 (rank 3) | 15.93 (94.21) | **18.90** | 20.09 | - |
+| lead conecut-knee-knuckle-3r (3 joints) | 18.28 | 22.38 | - | - |
+
+**Held-out gain over the verified config** (paired bootstrap over poses within kind, `alignment_paired.compare_sets`,
+`summary.json`; positive = better than VER):
+
+| pick | verified protocol (bench) | held out, fit60 (CAD shape) | held out, env fit (like for like) | held out env fit vs VER's verified held (cross-protocol) |
+|---|---|---|---|---|
+| pick1 | +0.81 (CI90 -1.84..+5.54, P 0.73) | **+1.39** @@P1H@@ | **+2.06** (CI90 +0.20..+4.65, P 0.97) | +1.66 (P 0.93) |
+| pick2 | -0.45 (P better 0.54: a skewed bootstrap) | +0.72 @@P2H@@ | +0.28 (P 0.72) | -0.12 (P 0.55) |
+| pick3 | +0.28 (P 0.67) | **+2.99** @@P3H@@ | **+2.21** (CI90 +0.56..+4.96, P 0.98) | +1.81 (P 0.97) |
+
+**Against the 3-joint lead** (same benches): pick1 -2.89 bench (P better 0.985), -2.14 held env fit (P 0.99); pick3 -2.36
+bench (0.93), -2.29 held (0.98). VER's own lead was -2.08 bench (P 0.745) / -0.49 held (P 0.62).
+
+**Where the gain comes from** (pick1 vs VER, Bench(110,360)): contact 0.0375 -> 0.0179 (-1.96 points), in-band 0.8977 ->
+0.9008 (-0.23), reach 0.778 -> 0.764 (+1.39 worse); follow 0.955 -> 1.000 (no gap effect above 0.95). Held out (fit60): the
+same pattern. The polish buys contact, not reach: overhead taken 8 / 28 bench on every config; held out 15 -> 18 (pick1) /
+21 (pick3) of 71.
+
+## 5. The watch items (the audit's list, each config)
+
+| config / wear | contact poses / summed depth | J3 stop: own angle q3' at engaged poses | stop-refused poses / of them kit contacts / side-reading gap | min th, one reading (under 5) | min th, family reading (under 5) | continuity |
+|---|---|---|---|---|---|---|
+| VER bench | 15 / 78.55 mm | 96.87 | 6 / 1 / 16.44 | 5.91 (0) | 0.14 (7) | 0 dropped, 0 islands |
+| VER held fit60 | 47 / 232.2 mm (on file) | 96.87 | @@VERSR@@ | 6.50 (audit) | 0.01 (audit) | 0 dropped |
+| VER held env | 50 / 241.47 | 96.98 | 19 / 3 / 22.60 | 6.38 (0) | 0.01 (13) | 0 / 0 |
+| pick1 bench | **7 / 39.47** | 92.99 | 6 / **4** / **16.39** | 5.59 (0) | **5.59 (0)** | 0 / 0 |
+| pick1 held fit60 | **29 / 127.92** | 92.99 | 14 / **10** / 21.54 | 5.58 (0) | 0.70 (6) | 0 / 0 |
+| pick1 held env | 29 / 134.76 | 93.10 | 14 / **11** / 21.37 | 5.58 (0) | 0.70 (6) | 0 dropped, 1 island |
+| pick2 bench | 10 / 70.81 | 93.46 | 7 / 1 / 16.89 | 5.91 (0) | 0.29 (8) | 0 / 0 |
+| pick2 held fit60 | 35 / 197.94 | 93.46 | 19 / 5 / 21.68 | 5.94 (0) | 0.29 (18) | 0 / 0 |
+| pick3 bench | 7 / 32.95 | 94.21 | 6 / 4 / 16.92 | 6.29 (0) | 6.29 (0) | 0 / 0 |
+| pick3 held fit60 | 28 / 146.71 | 94.14-94.21 | 13 / 11 / 20.02 | 5.56 (0) | 0.03 (7) | 0 / 0 |
+| lead bench / held | 4 / 20.24; 14 / 60.97 | - | - | - | - | - |
+
+* **Contact depth: better, still about 2x the lead.** pick1 halves the summed depth on the bench (78.55 -> 39.47 mm) and
+  held out (232.2 -> 127.92 mm); the lead is at 20.24 / 60.97.
+* **Stop refusals of kit contacts: WORSE.** The polished dowel sits about 4 deg lower on J3's own angle (92.99 vs 96.87)
+  and refuses more poses that, without it, would press metal into the arm: bench 1 -> 4, held 3-5 -> 10-11. Counting
+  them as contacts (audit proposal B; the kit is worn with the SAME frozen shape and the dowel removed), pick1's bench
+  gain vanishes (16.44 -> 16.39) and its held-out gain shrinks to +1.23 (env fit, 22.60 -> 21.37); pick3's bench reading
+  is 0.48 worse than VER's. A stop is better than metal in the arm, but on this reading most of the bench gain is the stop
+  refusing contact poses. Note: the audit's side reading (16.68) counted poses 343 and 423 from the kit's own fit; worn
+  with the claim's frozen shape, 423 is a kit refusal, not a contact, so VER reads 16.44 here.
+* **Fold margin: holds.** Every taken pose of every config keeps th >= 5 on the one reading (min 5.56, pick3 held; 0 under
+  5 everywhere; the priced J2 stops are read at 5.5). The family reading (J1-K-J3 sub-chain in state 2, report only) is
+  better for pick1 than for VER: bench min 0.14 -> 5.59 (7 -> 0 poses under 5), held 0.01 -> 0.70 (13 -> 6).
+* **J3 stop placement (P1).** q3max was a search variable on envh only (84.77 for pick1 = own angle 92.99 at all 23 / 43
+  engaged bench / held poses: the groove is cut at 92.99, not at the model's 84.77). It was never placed from the claim
+  bench's or the held-out binders. The picks were fixed by the objective rank at 09:43:09 UTC, before any claim number
+  existed (file times in `local/`); they were not committed before the claims.
+* **Continuity.** 0 workspace poses dropped on every claim; the one-reading flood connects 1109-1137 grid nodes with 0-1
+  islands. The envh fresh poses: 167-173 of 210 joined by edges in the search; every taken one was joined.
+
+@@NEXT@@
