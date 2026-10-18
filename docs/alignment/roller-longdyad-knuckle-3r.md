@@ -454,3 +454,123 @@ metal over 14 mm is 0.2012 against 0.1565. Both probes are exact on the frozen c
 
 **Final verdict: WATCH.** The 3 hub encoders fix this row's pose without the knee encoders, so the ruling's premise
 holds and nothing is gamed.
+
+---
+
+## Skeptic (2026-10-18, 23:00-23:25 UTC), on the 22:29 audit at the top of this file (ledger entry 2026-10-18T23:23:44Z, `by skeptic`, run `skeptic:roller-longdyad-knuckle-3r`)
+
+**Final verdict: WATCH** (computed by `tools/alignment_ledger.py skeptic`). 1 of 7 reasons refuted with evidence (M5),
+and 6 upheld at watch. The rulings are in `docs/alignment/roller-longdyad-knuckle-3r.rulings.json`. That file now holds
+only these 7 judgement rulings. The 04:42 tool-check rulings (contact_depth upheld, S2 refuted, complexity resolved)
+are still in git (a0c9ffd) and in the 04:30 skeptic section above. `alignment_audit.py selftest --ids
+roller-longdyad-knuckle-3r` passes (verdict watch, TP 0 / FP 0 / FN 0), but it no longer replays those old checks on
+this row.
+
+**What I re-measured.**
+- I re-ran the stk 6.0 bench wear myself: the probe's own `probe()`, written to scratch, CB_EXACT=1, nice, 1 process,
+  git 8147f54, 127 s. It gave 18.93 (reach 0.725, inband14 0.8911, contact 0.0054, knee link 0.913 / 11.3 mm).
+  Frozen, why, parts_ib14, params and every deep field match `remeasure/roller-longdyad-knuckle-3r_stk6_bench.json`
+  bit for bit.
+- I recomputed both complexity counts with `tools/simplicity.py`.
+- I re-derived contact depth and the near-touch counts from the per-pose dumps of this row, sidecar-longdyad and
+  conecut-knee.
+- I read the raised-arm probes, including the lead's, which the audit did not use.
+- I read the R17 output on the built gen-6 CAD field by field.
+
+Farm $0.
+
+### Rulings
+
+1. **M2 (knee stack 4.85 mm, not the MR63ZZ 6.0): upheld.**
+   - Reproduced: 18.93 on the bench (my run), 24.00 held out (the gap arithmetic on `_stk6_held.json`:
+     1.01 + 21.83 + 1.16).
+   - `stk_claim` 4.8534 comes from the model PARAMS (frontload WIN, line 45). best_params carries no stk.
+   - New like-for-like neighbour since the audit: `remeasure/sidecar-longdyad-knuckle-3r_mr63knee_{bench,held}.json`
+     (stk 6.0) reads 19.21 / 22.97 (+0.30 / +0.30).
+   - With both knees at 6.0, the order is unchanged:
+     - bench: 18.93 vs 19.21, this row ahead by 0.28;
+     - held out: 24.00 vs 22.97, sidecar ahead by 1.03;
+     - desmo-conecut (stk 6.0, 18.98) stays 0.05 behind; conecut-knee (stk 6.0, 18.28) stays ahead.
+   - The scored knee is still not the build rule's knee (+0.26 / +0.27).
+2. **G5 (3.5 points under the faithful knee-free count): upheld.**
+   - simplicity v2.2 gives the row 20.25 and kneeless-roller 23.75.
+   - The row minus its template is (bodies 4, joints 7, rot 3, loops 2, made 8, bought 9). The twin is (5, 7, 3, 2,
+     11, 13). The difference is 1 body (1.0) + 3 made (1.5) + 4 bought (1.0) = 3.5.
+   - The name still ends "(cx 43.75)".
+3. **S1 (0.24 bench win inside paired noise, reversed held out): upheld.**
+   - The paired claim file reproduces: bench diff -0.25 (SD 1.35, P 0.605); held +1.06 (SD 0.87, P 0.135).
+   - At stk 6.0 on both, the held-out reversal persists (+1.03).
+   - Note: the documented S1 detector (TH held_watch 6) reads +5.06, so this watch rests on the paired measurement,
+     not on that threshold.
+4. **T5 (depth-blind contact): upheld.**
+   - Re-derived: this row presses 16.46 mm on the bench (2 poses, -10.55 at (15,165,-60)) and 49.88 mm held out.
+   - sidecar-longdyad presses 6.23 mm (x2.64, +10.23 mm, past TH 2.0 / 5 mm).
+   - Against the documented default reference (the current lead conecut-knee: 20.25 / 60.96 mm), the TH rule does
+     **not** fire (0.81x / 0.82x).
+   - It fires against the row this claim outranks, which is also the reference the instrument replays T5 rulings on
+     (`tools/alignment_audit.py` line 307, `RULINGS_DEPTH_REF`).
+   - The bench edge over sidecar comes from the contact term (paired split: contact -0.53 of a -0.25 total). That is
+     fewer presses but deeper ones, the T5 case.
+5. **NEW-ws-inband (raised-arm standoff): upheld, and stronger than stated.**
+   - At elev 90-140: in-band 0.7979 / over 14 mm 0.2012, against sidecar's 0.8409 / 0.1565.
+   - The lead's probe is on file (`remeasure/conecut-knee-knuckle-3r_probe_{bench,held}.json`):
+     - lead: 0.8315 / 0.1676 on the bench, 0.8478 / 0.1492 held;
+     - this row: 0.7979 / 0.2012 on the bench, 0.8185 / 0.1796 held;
+     - so this row is worse than the lead too.
+   - **Correction:** "25 / 61 vs 23 / 57 taken poses with metal < 2 mm" counts clip frames.
+     - On ws poses this row has **22 / 54**, against the lead's 23 / 57 (fewer).
+     - With cmin it is 25 / 58 vs 28 / 63.
+     - The reversal is 3 / 7 clip hold frames at 1.99 mm here against 2.00 mm on the lead, at clip (30,150,-60).
+6. **G4 (near-straight knee): upheld, with the force number corrected.**
+   - The knee spans 86.21-151.92 deg on the bench and 153.16 held out. The stop is at 154.78, so the margins are
+     2.86 / 1.62 deg.
+   - The 31.6 N per N.m quoted is slipper-nose's (conecut-knee concept line 95, knee 152.2).
+   - This row has the same knee (lE 67.832, lc 21.15):
+     - bench: d_perp 31.93 mm, so 31.3 N per N.m;
+     - held out: d_perp 30.63 mm, so 32.7 N per N.m;
+     - that is 2.6-2.7x the re-centred knee's 12.0.
+   - At ang_min 30.46 the wear reads 18.71 / 23.55 (files on record). So the claim's 25.22 window buys 0.04 on the
+     bench, loses 0.18 held out, and lets the knee run to 1.62 deg from its stop.
+7. **M5 (one spring force-closes two rolling pairs; "no lift-off run on the clips exists"): REFUTED.**
+   - The run is on file: `pipeline/full-exo/designs/user_roller_longdyad/judge/dynamics.json` (R17,
+     dynamics-2026-10-16, commit 3e2124c, 2026-10-17 10:13).
+     - It is the same run whose 2x twist of 4.10 / 4.02 deg the reason cites.
+     - `cases[*].clips[8].slaved.K` has closure "force", `liftoff_share_of_driven`, `lift_max_deg` and
+       `law_err_driven_deg`. That is the run the red team asked for (`roller_mechanism_redteam.md` lines 116-118).
+   - Every rolling-bearing case (mu 0.002 / 0.005, 1x and 2x, the MVP1 build) is clean:
+     - `verdict.per_case` slaved_liftoff_share <= 0.0039;
+     - lift_max_deg 0.0;
+     - slaved_law_err_deg <= 0.225 (limit 5);
+     - free = true.
+   - The 43.7 rad/s2 q2 limit is the red team's static estimate for a throw that "everyday motion does not" reach
+     (line 117). The 2x clips do not lift.
+   - Lift-off appears only in the plain-bearing and constant-friction comparison cases (share 0.17-0.82). In those
+     cases every hinge is plain and the whole build fails "free" on twist (12-90 deg), so they show no K-specific hold
+     failure.
+
+### Missed by the auditor (not in this verdict; for the next audit)
+
+1. **Each judge takes the knee that suits it.**
+   - The gap is scored on the 4.85 mm iglidur-faced knee stack (M2).
+   - R17's nominal pass on the same gen-6 CAD models those iglidur knee pins at the rolling-bearing law.
+     `dynamics.json` `chain.notes[1]` says so: "iglidur knee pins share it - an optimistic note for the plain-bearing
+     pins".
+   - So no single knee gets both 18.67 and the R17 pass. Under the build rule's MR63ZZ knee, the R17 law is right but
+     the gap is 18.93. Under the iglidur knee, the gap is 18.67 but the R17 knee friction is optimistic.
+   - CLAUDE.md decision 5 records that plain iglidur knee pins fail R17 (~10 deg twist, ~10 N).
+   - The audit's "R17 passes on the built gen-6 CAD, which has iglidur knee pins" reads as if plain knee pins passed.
+   - Not measured: R17 with plain friction on the two knee pins only.
+   - Action: state the claim at stk 6.0 (proposal 1), or run R17 with plain knee pins.
+2. **A stale missing-measurement watch was carried.**
+   - The 04:42 skeptic's "no R17 output exists" looked in `l1_roller-longdyad/judge`.
+   - The R17 slaved lift-off file landed in `user_roller_longdyad/judge` at 10:13 the same day. The audit cites that
+     file for the twist but did not read its slaved fields.
+   - Action: before carrying a "not measured" watch, grep the design's `judge/dynamics.json` for `slaved` and
+     `liftoff`.
+3. **A near-touch comparison decided on a 0.01 mm knife edge.**
+   - The lead comparison (25 / 61 vs 23 / 57) reverses on the workspace poses (22 / 54 vs 23 / 57).
+   - It is decided by repeated clip hold frames at 1.99 vs 2.00 mm.
+   - Report only, but the direction printed in the "What the wearer gets" table is the less robust one.
+
+Local compute: 1 exact bench wear, 1 process, niced, OMP_NUM_THREADS=1, output in scratch, no repo file overwritten.
+Everything else was read from files on record. Farm $0.
