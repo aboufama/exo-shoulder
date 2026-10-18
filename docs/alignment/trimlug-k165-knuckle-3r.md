@@ -1,231 +1,303 @@
 # Alignment audit: trimlug-k165-knuckle-3r
 
-Auditor run 2026-10-17 12:46-13:07 UTC (discovery round 11, slice r11-B). Ledger entry 2026-10-17T13:06:57Z, `by auditor`, run
-`audit:trimlug-k165-knuckle-3r`. Checks: `docs/alignment/trimlug-k165-knuckle-3r.json` (tool VERSION 2026-10-17.2,
-`--ref slipper-nose-knuckle-3r`). Findings: `docs/alignment/trimlug-k165-knuckle-3r.findings.json`.
+Hourly auditor run, 2026-10-18 21:22-21:45 UTC. It was due because the row was committed at 2026-10-17 15:21:40Z
+(8f69bd6, a complexity refresh), after the last audit at 13:18:11Z.
 
-## Verdict: WATCH (no gamed reason; the number is the lead's, and the exo is a little better than the lead where the score does not look)
+- Ledger entry: 2026-10-18T21:36:35Z, `by auditor`, run `audit:trimlug-k165-knuckle-3r`, git 175622c.
+- Checks: `docs/alignment/trimlug-k165-knuckle-3r.json` (tool VERSION 2026-10-18.1, `--ref slipper-nose-knuckle-3r`).
+- Findings: `docs/alignment/trimlug-k165-knuckle-3r.findings.json` (9, all watch).
+- The earlier auditor sections (2026-10-17 12:46-13:07) are replaced by this one. The 2026-10-17 Skeptic section is
+  kept below the rule.
 
-- **The claim:** v_gap 18.51 (score 93.27), frozen exact Bench(110,360), verified 2026-10-17 12:25 UTC. The design is
-  the verified lead slipper-nose-knuckle-3r (18.49) with its horn lug cut back to the farthest flank contact + 1.5 mm
-  (r_K <= 21.27 mm). Nothing else changes: drive law, nose, seats, cam table and dK_lim 49.8 are the lead's.
-- **Re-worn here, with the model unchanged** (`tools/alignment_trimlug_adapter.py`, a new adapter that wears the claim
-  once per bench through the three audit readers; CB_EXACT=1; bench local, held out on the farm):
-  - bench 18.51 (reach 0.725 = 261/360, follow 1.0, ib14 0.8953, contact 0.0054 = 2 poses), the claim to the digit
-    (`docs/alignment/remeasure/trimlug-k165-knuckle-3r_bench.json`);
-  - held out 23.47 (reach 0.6828, 10 contact poses; farm, 744 s, ~$0.07; `..._held.json`), near-touch 26.56 / 36.97 / 79.28;
-  - near-touch at 1 / 2 / 3 mm: 20.14 / 33.02 / 83.17 (3 / 30 / 100 taken poses); in-band read as 3-14 mm: 18.66.
-- **Against the lead, pose by pose** (`docs/alignment/remeasure/trimlug-k165-knuckle-3r_vs_slipper-nose-knuckle-3r_paired_claim.json`):
-  - the two take the SAME poses: 0 of 470 bench poses differ in taken or contact (and 0 of 1154 held out; the same 10 held contact poses);
-  - the metal floor rises on 60 bench poses (+0.06 to +1.56 mm) and falls on none;
-  - the +0.02 gap is all in-band: 3 of the 23 scored lug samples are cut, and they were in band.
-- **Reasons, all watch:** 3 tool checks (`continuity`, `idle`, `reporting`) and 7 judgement findings (S1, T5, M5, G4,
-  NEW-ws-inband, NEW-stale-complexity-ruler, R1). Five of the findings are carried unchanged from the lead family; one
-  (S1) is new and applies to the lead too; one is record-keeping. Two of the tool watches are instrument artefacts,
-  measured below (`continuity`: the flood is clean; `idle`: the known knee false positive).
+## Verdict: WATCH
 
-What the trim buys is real and the score cannot see it: contact DEPTH. Pose 264 (30, 165, -60) presses 4.18 mm into the
-arm instead of 5.74; the held-out contacts sum 40.58 mm instead of 46.12 (the same 10 poses; 4 of them 0.9-1.7 mm shallower). The score charges the design 0.02 for it, so the
-design sits second, behind its own parent. Nothing here ranks it above a design that is better for the wearer.
+No reason reaches gamed. The number is its parent's, honestly reported. Nothing here ranks the design above one that is
+better for the wearer.
 
-## What the wearer gets (measured, Bench(110,360) exact unless stated)
+- **The claim:** v_gap 18.51 (score 93.27), frozen exact Bench(110,360), verified 2026-10-17 12:25 UTC. Held out 23.47.
+- **What changed since the last audit:** only the row's complexity record (22.25 -> 18.25: the cuff knee's closure loop
+  is now recorded under `cuff_knee`). That is the fix for the last audit's NEW-stale-complexity-ruler. The tool's
+  `complexity` check now reads 18.25 = 18.25.
+- **Unchanged since the 12:52 re-wear:** the model, its parent model, the kit, the bench and the verifier. `git log`
+  shows no commit to any of them since 12:00 on 2026-10-17.
+- **Re-worn anyway at HEAD 9028dec:** bench 18.51. 0 of 470 poses differ from the committed dump in metal floor, taken
+  or contact (`remeasure/trimlug-k165-knuckle-3r_bench*.json`, 147 s, local).
+- **The ranking has moved under it.** The 3-active leaders are now conecut-knee-knuckle-3r and its two siblings at
+  18.28. This row is 18.51, behind its own parent slipper-nose (18.49) by 0.02 (`docs/dashboard/data/morphs.json`).
+- **New this hour, measured:**
+  - **(a) The stated wall.** The "1.5 mm wall" that the trim depends on holds at the lug's mid-plane only. Kept at the
+    lug's top edge instead, the score does not move: 18.50 against 18.51. But a third of the bench depth gain goes away,
+    and two fifths of the held-out gain (NEW-wall-plane).
+  - **(b) R17 on the built CAD.** It now exists, so M5 is measured instead of open. The spring holds. The cuff twist sits
+    0.44-0.96 deg under its 5-deg gate.
+  - **(c) The stock O2.5 dowel.** With the stock dowel nose that the CAD builds (r 1.25 against the claim's 1.1839), the
+    claim holds: 18.51, T5 13.12 mm.
 
-| quantity | trimlug (this audit) | lead slipper-nose | file |
-|---|---|---|---|
-| reach (taken / 360) | 261 (0.725) | 261 | `remeasure/trimlug-k165-knuckle-3r_probe_bench.json` |
-| overhead, elev >= 140 | 8 / 28 (0.286): 5/13 at 140-160, 3/15 at 160-200 | 8 / 28 | same, `ws_reach_by_elev` |
-| why overhead poses are lost | fold 14, knee slide 4, contact 2 | same | `ws_overhead_why_not` |
-| raised arm, elev 90-140 | 38 / 85 (0.447): 26/51 at 90-120, 12/34 at 120-140 | same | same |
-| overhead taken poses with metal < 2 / < 3 mm | 4 of 8 / 8 of 8 | 4 / 8 | `ws_overhead140` floor counts |
-| all taken poses with metal < 1 / 2 / 3 mm | 3 / 30 / 100 of 371 | 3 / 30 / 100 | `remeasure/..._bench.json` deep |
-| min metal over taken poses | 0.072 mm | 0.07 | same |
-| contact poses (bench) | 2: 237 (15,165,-60) 9.01 mm (crank; lug 8.35; hub K 2.65), 264 (30,165,-60) 4.18 mm (lug top) | 2: 9.01, 5.74 | `..._bench_perpose.json`, row t5 |
-| contact depth sum, bench / held | 13.19 mm / 40.58 mm (10 poses, deepest 9.05 at (30,165,-45), 7 deeper than 3 mm) | 14.75 / 46.12 | per-pose dumps |
-| workspace in-band, all taken ws (unscored) | 0.8559, 14.2 % of metal above 14 mm | 0.8560 | `ws_unscored` |
-| raised-arm in-band (unscored, elev 90-140) | 0.8002, 19.9 % above 14 mm, p95 20.16 mm, max 30.8 mm | 0.8004 | `ws_elev90_140` |
-| held out: raised-arm in-band; overhead taken; overhead poses under 2 / 3 mm | 0.8218; 18 / 71; 10 / 18 of 18 | 0.8218; 18 / 71; 10 / 18 | `..._probe_held.json` |
-| continuity flood (rule 2026-10-16) | full 18.51 (0 dropped), knn 20.18 (6 forced poses), literal bench graph 50.13 | full 18.49, knn 20.16 | `remeasure/trimlug-k165-knuckle-3r_flood_bench.json` |
-| fold margin (family reading, th) | 5.181 deg bench (2 poses under 5.5), 5.006 held | same | probe extras; `verify/..._v_held_frozen.json` |
-| J1-K-J3 sub-chain margin with K at rest | 106 of 204 rest poses under 5 deg, 50 under 1 deg, min 0.000 (pose 227) | identical pose by pose (max difference 0.000 deg) | `remeasure/..._msub_rest_bench.json` |
-| cuff knee | 86.2-151.9 deg over taken poses, window 25.2-154.8 (2.9 deg from its stop) | same | probe extras |
-| drive | dK taken 45.62 of 49.8 deg; horn PA 35.8 + friction 4.97 = 40.77 deg (cap 43); crank 34.47 | same | `verify/..._v_bench_frozen.json` |
-| springs / cuff twist | one clock spring 0.08 N.m + 0.03 N.m/rad; no R17, dynamics or cuff-twist number on file | same | (not measured) |
-| complexity | 22.25 shown; 18.25 with the cuff-knee loop recorded the lead family's way | 22.25 / 18.25 | `tools/simplicity.py` |
+## What the wearer gets
 
-Numbers I could not get: cuff twist and spring lag (no dynamics judge has worn this family; R17 is the instrument);
-the m_sub rest probe held out (bench only, time box); contact depth under a bulging, real arm (the skin model is rigid).
+Measured on Bench(110,360) exact unless stated. "This audit" means re-worn at HEAD.
+
+| quantity | value | file |
+|---|---|---|
+| reach, taken / 360 | 261 (0.725), the parent's pose for pose | `remeasure/trimlug-k165-knuckle-3r_probe_bench.json` (this audit) |
+| overhead, elev >= 140 | 8 / 28 (0.286): 5/13 at 140-160, 3/15 at 160-200; held out 18 / 71 | same, `ws_reach_by_elev`; `_probe_held.json` |
+| why overhead poses are lost | fold 14, knee slide 4, contact 2 | same, `ws_overhead_why_not` |
+| raised arm, elev 90-140 | 38 / 85 (0.447): 26/51 at 90-120, 12/34 at 120-140 | same |
+| taken poses with metal < 1 / 2 / 3 mm | 3 / 30 / 100 of 371 (min 0.072 mm); held out 14 / 67 / 200 of 852 (min 0.33) | `remeasure/..._bench.json` deep (this audit), `_held.json` |
+| overhead taken poses with metal < 2 / < 3 mm | 4 of 8 / 8 of 8; held out 10 / 18 of 18 | `ws_overhead140` floor counts |
+| near-touch gap, 1 / 2 / 3 mm | 20.14 / 33.02 / 83.17; held out 26.56 / 36.97 / 79.28 | same |
+| contact, bench | 2 poses. 237 (15, 165, -60): 9.00 mm, the crank (the lug group 8.35, hub K 2.65). 264 (30, 165, -60): 4.18 mm, the lug top (the parent 5.74). Sum 13.18 mm | `remeasure/..._bench_perpose.json`, row t5 |
+| contact, held out | the parent's same 10 poses, sum 40.59 mm (the parent with the same dense lug 46.35). Deepest 9.06 mm at (30, 165, -45), the crank. 7 deeper than 3 mm | `remeasure/..._edgewall.json` |
+| contact depth with the 1.5 mm wall kept at the lug's top edge | bench 13.44 / 13.70 mm, held out 41.85 / 42.89 mm (r_trim 21.72 / 21.98), gap 18.50 | `remeasure/..._edgewall.json`, `_bench_edgewall2.21.json` |
+| workspace in-band (unscored, all taken ws) | 0.8559; 14.2 % of metal above 14 mm (p95 17.8, max 30.8) | `ws_unscored` |
+| raised-arm in-band (unscored, elev 90-140) | 0.8002; 19.9 % above 14 mm (p95 20.16, max 30.8); held out 0.8218 | `ws_elev90_140` |
+| built CAD (user_trimlug_k165) | R1 81.3 %, R1-aim 47.6 %, R4 73.4 %, R6 0.0 mm, R16 64.2 %, R17 PASS; 8 of 19 | `pipeline/full-exo/designs/user_trimlug_k165/judge/scorecard.md` |
+| springs | one clock spring on K, 0.08 N.m preload + 0.015 N.m/rad. R17 nominal: K off its law 0.136 deg, follower lift-off 0 | `.../user_trimlug_k165/judge/dynamics.json` |
+| cuff twist | 4.04 deg nominal (gate 5.0); forward-stroke bound 4.56 deg at mu 0.087, 5.0008 at mu 0.15 (FAIL) | same; `user_slipper_nose/judge_m5/forward_bound_mu*.json` |
+| cuff force, moment about GH | 0.58 N, 0.129 N.m nominal; plain-bearing friction (mu 0.06) is not free: 12.0 N, twist 20.4 deg | same |
+| stops and knee | knee 86.2-151.9 deg in its 25.2-154.8 window (2.9 deg from the stop). K stroke taken 45.62 of 49.8 deg | probe extras |
+| fold margin (th, the rule's reading) | 5.181 deg bench, 5.006 deg held out. A linear K-phase stack gives 4.996 | `verify/..._v_held_frozen.json`; CAD check D2 |
+| near-singular postures | with K at rest, m_sub under 5 deg on 106 of 204 rest poses, under 1 deg on 50, min 0.000 | `remeasure/..._msub_rest_bench.json` |
+| stock dowel (r 1.25, as built) | 18.51, T5 13.12 mm, dK_lim 49.5 | `remeasure/..._bench_r125.json` |
+| complexity | 18.25 (recomputed = row) | `tools/simplicity.py` via the `complexity` check |
+
+**Numbers I could not get, and why:**
+
+- **The bench gap with the real lobe follower, lobe ring and straddle boss sampled** (S3). No bench model of those parts
+  exists. Only the built CAD's judges read them.
+- **The held-out gap at the top-edge wall.** I measured the 10 held contact poses only. The full held set is 852 + 302
+  poses, about 12 minutes locally, and the farm is closed: its $8 budget is spent.
+- **Contact depth on a real, bulging arm.** The skin model is rigid.
+- **R17 with the real nose friction measured.** The pass line mu <= 0.105 rests on a wear test that has not been run.
 
 ## Findings
 
-### S1 (watch, new; applies to the lead too): the bench order against sidecar-longdyad flips held out
+### NEW-wall-plane (watch, new): the "1.5 mm wall" is read at the lug's mid-plane only
 
-Paired per pose on the claim dumps of both designs
-(`remeasure/trimlug-k165-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_claim.json`, 4000 bootstrap resamples within
-kind; diff = trimlug - sidecar-longdyad, negative = trimlug better):
+- **Evidence.** The trim cuts the horn lug at r_trim = the farthest flank contact + trim_wall. The model reads that
+  contact at the lug's mid-plane (`docs/concepts/models/trimlug-k165-knuckle-3r.py` lines 84-96: 19.77 + 1.5 = 21.27 mm).
+  The gen-7 CAD check (`docs/research/user_slipper_nose_fix_check.md` O2) reads the same contact line at the lug's top
+  edge, +1.5 mm along ez:
+  - the farthest contact is 20.22 mm over [0, dK_lim 49.75], and 20.48 mm over the built 51.75-deg stroke;
+  - so the wall the built part keeps is 1.08 mm, or 0.82 mm over the built stroke;
+  - the verifier's trim check T1 reads 2.53 / 1.99 mm on its own construction (rings +-1.25 mm along the GH ruling).
 
-| wear | diff | reach | in-band | contact | 90 % interval | P(trimlug better) |
-|---|---|---|---|---|---|---|
-| bench | -0.40 | 0.00 | +0.13 | **-0.53** (2 contact poses vs 4) | [-2.74, +1.67] | 0.64 |
-| held out | **+0.81** | +0.74 (21 poses only trimlug takes, 28 only sidecar) | +0.07 | +0.01 | [-0.68, +2.16] | 0.19 |
-| pooled bench + held | +0.47 | +0.53 | +0.09 | -0.15 | [-0.77, +1.62] | 0.27 |
+  The two independent readings disagree.
+- **Measured here** (`tools/alignment_trimlug_edgewall.py`, a new file; the model unchanged, only `trim_wall` varied):
 
-- **Why it matters:** the leaderboard puts the slipper family (18.49 / 18.51) above sidecar-longdyad (18.91). The whole
-  bench margin is two fewer contact poses, and those two press deep (13.19 mm summed against 6.23 mm over 4, see T5).
-  Out of sample the order reverses (23.47 against 22.67; at 1 mm 26.56 against 25.75), and the pooled data favour
-  sidecar-longdyad with P 0.73.
-- **Why it is only watch:** neither interval excludes 0, and sidecar-longdyad is not better on every count for the
-  wearer: at 2 mm it is worse (34.03 against 33.02 bench, 37.24 against 36.97 held) and it touches on 4 bench poses.
-- **Action:** the round planner and the closer should read the pooled bench + held order between the slipper family
-  and sidecar-longdyad before naming a winner; the next audit of slipper-nose should carry this finding.
+  | trim_wall (r_trim) | what it is | bench T5 (pose 264) | held T5, 10 contacts | Bench(110,360) gap |
+  |---|---|---|---|---|
+  | 99 (none) | the parent, with the same dense lug | 14.74 (5.74) | 46.35 | 18.49 (verifier control) |
+  | **1.5 (21.27)** | **the claim: 1.5 mm at the mid-plane** | **13.18 (4.18)** | **40.59** | **18.51** |
+  | 1.95 (21.72) | 1.5 mm at the top edge, over [0, dK_lim] | 13.44 (4.44) | 41.85 | - |
+  | 2.21 (21.98) | 1.5 mm at the top edge, over the built stroke | 13.70 (4.70) | 42.89 | 18.50 |
 
-### T5 (watch, carried, improved here): depth-blind contact
+- **Why the exo is not as much better as stated.** The design exists for contact depth.
+  - On the bench, 0.26-0.52 mm of its 1.56 mm gain is metal cut out of the stated wall at the lug's top edge (17-33 %).
+  - Held out it is 1.26-2.30 mm of the 5.76 mm gain (22-40 %).
+  - The CAD keeps 0.82 mm, not 1.5, between the nose's last contact and the cut edge.
+- **Why it is only watch.**
+  - The score is blind to depth. It charges the trim +0.02, and with the wall at the top edge it would read 18.50.
+  - The design ranks behind its parent.
+  - No wall rule exists.
+  - The MVP1 nose load (5-15 N, clock spring) is trivial for 0.8 mm of Ti.
+- **Action.**
+  - The row, the doc and the drawing state the wall as built: >= 0.8 mm at the top edge, as the CAD check asks.
+  - Otherwise move the cut to r_K 21.98 and report the depth gain that a true 1.5 mm wall leaves: 1.04 mm on the bench,
+    3.46 mm held out.
+  - The verifier's T1 and the CAD check's O2 should be reconciled to one construction.
 
-- **Bench** (per-pose dump of this re-wear): 2 contacts, 237 (15, 165, -60) 9.01 mm (the crank; the trimmed lug is
-  also 8.35 mm in, hub K's disc 2.65) and 264 (30, 165, -60) 4.18 mm (the lug top; the lead 5.74). Sum 13.19 mm against
-  the lead's 14.75.
-- **Held out:** the lead's same 10 contact poses, sum 40.58 mm against 46.12; deepest 9.05 mm at (30, 165, -45), the
-  crank, untouched; 7 deeper than 3 mm. Four get shallower: (15, 150, -60) 7.07 -> 6.13, (60, 165, -30) 6.87 -> 5.15,
-  (45, 165, -45) 5.80 -> 4.18, (30, 150, -45) 5.33 -> 4.07. Four, not the row's five.
-- **Why it matters:** the score is blind to depth both ways. It does not reward this design for pressing 1.56 / 5.54 mm
-  less (it charges +0.02), and it ranks the family above sidecar-longdyad, which presses 6.23 mm over 4 bench poses
-  (x2.12, +6.96 mm: past the tool's own T5 margin) and 35.66 held (x1.14).
-- **Why it is only watch:** T5 never gives gamed (user 2026-10-17), and sidecar-longdyad is worse at 2 mm.
-- **Action:** none for this design; it is the depth fix the family needed. Pose 264 needs the lug to end at r_K ~18
-  (dK ~35, the stroke wall), a 0.5 mm narrower crank tip and a 0.3 mm flat on hub 2, per the design's own limiter.
+### T5 (watch, carried): depth-blind contact
 
-### M5 (watch, carried): one clock spring against a sliding nose, not measured
+Reproduced at HEAD. Bench: 2 contacts, sum 13.18 mm against the parent's 14.74 (dense lug). Held out: the same 10
+contacts, sum 40.59 mm against 46.35. Four of them are 0.94-1.72 mm shallower. The deepest is 9.06 mm, the crank,
+unchanged. The score charges +0.02 for the improvement, and part of the improvement is the wall reading above. T5 is
+never gamed (user 2026-10-17).
 
-The lead's upheld finding, unchanged. The spring (0.08 N.m + 0.03 N.m/rad) force-closes the drive through a sliding
-O2.37 nose at an assumed mu 0.087 (horn 35.8 + 4.97 = 40.77 deg against the 43 cap, crank 34.47). No dynamics or
-preload number is on file. The trim cuts lug metal behind the flank only (verifier T1: the dowel's contact line stays on
-retained metal with 2.53 mm to the cut, 1.99 mm over the full stroke), so the risk is the lead's, neither bought nor
-reduced. Action: R17 / a preload sweep on the slipper family before CAD.
+- **Action:** none for this design. Clearing pose 264 needs the lug to end at r_K ~18 (dK ~35, the stroke wall), a
+  ~0.5 mm narrower crank tip and a ~0.3 mm flat on hub 2.
+
+### M5 (watch, carried, now measured; G3 from the wearer's side): the spring holds, the twist is near its gate
+
+R17 has now run on the built CAD (`pipeline/full-exo/designs/user_trimlug_k165/judge/dynamics.json`, 18:39). It passes
+nominal, on rolling bearings at mu 0.005:
+
+- cuff twist 4.04 deg against the 5.0 gate;
+- cuff force 0.58 N, M_GH 0.129 N.m;
+- K off its law by 0.136 deg, follower lift-off 0.
+
+These match user_slipper_nose to 0.005 deg: the drive is shared, and the glb differs in link 1a only.
+
+The shared drive's forward-stroke bound (`user_slipper_nose/judge_m5/forward_bound_mu*.json`) reads:
+
+| nose mu | 0.087 (the claim's) | 0.105 | 0.12 | 0.15 |
+|---|---|---|---|---|
+| twist (deg) | 4.56 | 4.68 | 4.79 | 5.0008: **FAIL** under the unrounded gate (8f69bd6) |
+
+With plain-bearing friction (mu 0.06 at the hubs) the chain does not move freely: twist 20.4 deg, force 12.0 N, follower
+lift-off 25 %.
+
+- **Why it matters:** the twist the wearer feels sits 0.44-0.96 deg under its gate. It needs rolling bearings and a
+  greased nose at mu <= 0.105, an untested wear assumption.
+- **Why only watch:** the gate passes as built and modelled. The drive is the parent's (its M5 was upheld at 16:27), so
+  the trim neither buys this nor fixes it.
+- **Action:** run the nose wear test (pass line mu <= 0.105) before any claim of "moves freely" on the slipper family.
+
+### T3 (watch, new on this row): the held-out fold margin is 0.006 deg above the rule, and the build tolerance decides it
+
+- **Evidence.**
+  - The held-out th margin is 5.006 deg (`verify/trimlug-k165-knuckle-3r_v_held_frozen.json`); the bench reads 5.181.
+  - The CAD check (lines 94-100, D2) reproduces the lead's 17:20 ruling: at the drawn K-phase low end a linear stack
+    gives -0.12 deg of K and a held-out th of 4.996, which puts 1 held-out pose under 5.
+  - The band holds only on an RSS stack, and the drawing does not say RSS.
+- **Why only watch.** The margin is read on th, the rule's own angle, so this is not the T3 exploit. It is a claim that
+  lives at the rule's edge. This was the 13:18 skeptic's "missed" item 1, and the parent's T3 was upheld.
+- **Action:** the drawing states RSS, or the K lead moves up 0.02 deg.
 
 ### G4 (watch, carried): near-singular sub-chain with K at rest
 
-Re-measured pose by pose here (`remeasure/trimlug-k165-knuckle-3r_msub_rest_bench.json`, the model unchanged). With K
-at rest on stop A (204 of 371 taken bench poses) the J1-K-J3 sub-chain margin m_sub is under 5 deg on 106 poses, under
-1 deg on 50, minimum 0.000 deg at (15, 75, 15). With K moved it is >= 10.8 deg. The claim's fold reading (5.181 bench,
-5.006 held) reads m_plain at rest (min 5.389), not m_sub: the open B1 question for the user. The maximum difference to
-the lead over the 371 shared poses is 0.000 deg, so this design neither buys nor fixes it. The knee peaks at 151.92 deg
-against a 154.78 stop. Action: the user's ruling on B1, which applies to the whole slipper / roller family.
+Unchanged. With K at rest on stop A, m_sub is under 5 deg on 106 of 204 rest poses and under 1 deg on 50, with a
+minimum of 0.000 deg at (15, 75, 15). The claim's fold reading takes m_plain at rest (min 5.389). B1 is still open with
+the user (`docs/HANDOFF.md` line 309).
+
+- **Action:** the user's ruling on B1.
+
+### T1 (watch, carried from the parent's upheld T1; G1): metal at 1-3 mm
+
+- 30 of 371 taken bench poses have metal under 2 mm, and 100 have it under 3 mm.
+- Overhead, 4 of the 8 taken poses are under 2 mm and all 8 are under 3 mm.
+- 14.51 gap points live in the 0-2 mm shell, just under the tool's 15-point line.
+- This row is identical to its parent pose for pose.
+
+Reported only (user 2026-10-17: near-touch is not a gate).
 
 ### NEW-ws-inband (watch, carried): the raised-arm standoff the score does not read
 
-The gap reads in-band on clip frames only. On the taken workspace poses at elev 90-140 (38 of 85) this design holds
-0.8002 of its metal in 2-14 mm and 19.9 % above 14 mm (p95 20.16 mm, max 30.8 mm): the lead 0.8004, sidecar-longdyad
-0.841. Held out 0.8218 / 17.6 % above 14 mm (the lead 0.8218). The trim does not touch it. Action: none for this design; the proposal stands on
-the lead's audit.
+On the taken workspace poses at elev 90-140, 0.8002 of the metal is in band and 19.9 % is above 14 mm. Held out it is
+0.8218. The scored clip in-band is 0.8953. The built CAD reads R1 81.3 % against its L1's 82.0. The trim does not touch
+this.
 
-### NEW-stale-complexity-ruler (watch, carried): the record understates the simplification
+- **Action:** none for this design; the proposal stands on the parent's audit.
 
-The row copies the lead's mechanism record, which charges the cuff knee's closure loop in `closed_loops 3`. Recomputed
-here with `tools/simplicity.py` v2.2: 22.25 as recorded, 18.25 with the loop recorded under `cuff_knee` the way
-roller-longdyad records it. The dashboard therefore shows this family 2.0 more complex than roller-longdyad (20.25) where
-like-for-like it is 2.0 simpler. Reporting against the design. Action: fix the lead's and this row's record (writer's
-job, not the auditor's).
+### S3 (watch, new on this row): the real follower, lobe ring and straddle boss are not sampled
 
-### R1 (watch): the row's text
+The drive red team (`docs/research/slipper_mechanism_redteam.md` lines 53-56 and 183-186) found these parts unsampled by
+the claim's model:
 
-- The row verdict says 5 of the 10 held-out contacts are lug-deepest and 1.2-1.7 mm shallower; the design doc lists 4,
-  and the verifier's per-pose reading agrees with 4.
-- The headline `gap` 13.02 / `reach` 0.775 are the fit bench's (Bench(60,160) fast), which has no contact pose: the
-  bench on which the design's whole subject is invisible. The dashboard's sweep line shows 13.00-13.06 for this id; the
-  sweep best 13.02 reads as score 95.27, above the user's golden 95 line, against the verified 93.27 (the tool's
-  `reporting` check).
-- The limiter calls pose 237 "hub K's disc plus the crank"; the trimmed lug is also 8.35 mm in the skin there.
-- `n_configs` 45 against 31 entries in the sweep file (one timestamp); the 14 two-pose exact checks are not on file.
+- the modelled lobe follower (s_arm 4.0 on r 8.27) lies inside hub 2's O20;
+- the real follower is an MR63ZZ on a 6.5 mm arm, with the lobe ring at r 10.79-12.77;
+- the real lobe ring, the follower plate and the 10 mm straddle boss are not sampled.
 
-None of it moves the verified number, and every record calls the design "not a lead change". Action: correct the row
-text; keep fit-bench numbers out of the headline columns (proposal R-a below).
+The built CAD carries them and is judged as drawn: R6 0.0 mm, R1 81.3 %, R16 64.2 %. The bench gap with them sampled is
+not on file. This was the 13:18 skeptic's "missed" item 2, and it applies to the whole family.
+
+- **Action:** sample the three parts in the family's bench model, or state the CAD as their only reading.
+
+### R1 (watch, carried): the row's text
+
+Unchanged since the skeptic upheld it at 13:18:
+
+- the verdict still begins "screened -" on a verified row;
+- it says "5 of them the lug, each 1.2-1.7 mm shallower" (measured: 4, 0.94-1.72 mm);
+- the headline gap 13.02 / reach 0.775 are Bench(60,160) fast;
+- the dashboard shows those, with contact 0.0, and a sweep best of 13.02 (score 95.27, above the user's 95 line);
+- n_configs reads 45 against 31 sweep entries;
+- the limiter leaves out the lug at 237.
+
+New: the name and the verdict state a "1.5 mm wall" that the part keeps at its mid-plane only. None of it moves the
+verified number.
+
+- **Action:** correct the row text. That is the writer's job, not the auditor's.
+
+## Not carried from the last audit (measured)
+
+- **S1** was refuted by the skeptic: the held-out drop is +4.96, under the 6-point line, and every interval includes 0.
+  The leaderboard has also moved (conecut-knee 18.28 leads the family), so the pairing with sidecar-longdyad no longer
+  decides a winner.
+- **NEW-stale-complexity-ruler** was refuted by the skeptic, and the lead has fixed it: the row reads 18.25 and the
+  `complexity` check reads ok.
+- **idle** was the instrument's false positive, refuted three times. The tool now reads ok: K moves 45.61 deg, the crank
+  19.3.
+- **continuity** is still a tool watch: "no flood on file" in a shape it reads. The flood is on file and clean (full
+  18.51, 0 dropped; `remeasure/trimlug-k165-knuckle-3r_flood_bench.json`), and the skeptic refuted it. This is
+  proposal I-b, still not applied.
 
 ## Tool checks, read
 
-- `held_out` ok: 23.47 vs 18.51 (+4.96), under the 6-point watch line.
-- `fast_frozen` ok: 13.02 -> 18.51 (+5.49).
-- `near_touch` ok: re-measured 18.51 / 20.14 / 33.02 / 83.17; 14.51 points live in the 0-2 mm shell (watch at 15).
-  Before the re-wear this check read the verifier's LEAD CONTROL file (`_v_bench_lead.json`, 18.49), not the claim's
-  (proposal I-a).
-- `contact_depth` ok: bench 13.19 mm over 2 poses vs the lead's 14.75 (x0.89); held 40.58 mm over 10 vs 46.12 (x0.88).
-- `dominance` ok: vs the lead plain -0.02, 2 mm +0.00.
-- `continuity` watch: no flood "on file" in a shape the tool reads. Measured here: full 18.51, 0 poses dropped (knn 20.18,
-  6 forced poses dropped; the lead 18.49 / 20.16). The taken set is the lead's pose for pose and the kinematics are the
-  lead's (the trim edits metal only), so this is the lead's flood. Not a design issue (proposal I-b).
-- `idle` watch: "knee asserted rigid but moves 65.71 deg". The third occurrence of the same instrument false positive
-  (refuted on groove-desmo and on slipper-nose): the model only READS `knee_moved`; the 65.71 deg is the pin knee's
-  designed motion (86.21-151.92 deg in its 25.22-154.78 window). K moves 45.61 deg, the crank 19.3 deg (proposal I-c).
-- `sampling` ok: sample-weighted 0.895 vs part-weighted 0.924; L1a thinly sampled (8), as the lead.
-- `complexity`, `judge_change`, `fold_margin`, `rules` ok.
+| check | level | reading |
+|---|---|---|
+| held_out | ok | 23.47 vs 18.51 (+4.96) |
+| fast_frozen | ok | 13.02 -> 18.51 (+5.49) |
+| near_touch | ok | 18.51 / 20.14 / 33.02 / 83.17; shell 14.51; band 3-14 18.66 |
+| contact_depth | ok | bench 13.19 vs 14.75 (x0.89), held 40.58 vs 46.12 (x0.88) |
+| dominance | ok | vs the parent: plain -0.02, 2 mm +0.00 |
+| density (new, VERSION 2026-10-18.1) | ok | roller 4.55x the kit's density. Re-weighted, the bench reads 18.58 and held 23.54: +0.07 each, under the 0.1 line |
+| complexity | ok | 18.25 = 18.25 |
+| reporting | watch | see R1 |
+| continuity | watch | instrument reading (above) |
+| idle, sampling, fold_margin, judge_change, rules | ok | |
 
-## Patterns walked and found absent (with the measurement)
+## Patterns walked and found absent
 
-- T1 / G1: no shift of metal toward the cutoff: 1 / 2 / 3 mm counts identical to the lead (3 / 30 / 100). The family's
-  overhead metal does hug the skin (4 of the 8 taken overhead poses under 2 mm, all 8 under 3 mm), reported, not a
-  finding (user 2026-10-17: near-touch is reported only; the 0-2 mm shell is 14.51 points, under the 15 line).
-- T2: band read 3-14 mm costs +0.15 (18.66).
-- T3 / T4: no bound moved; the th reading is the rule's own (5.181 / 5.006), the knee window and stops are the lead's.
-- S2 / S3: no new body; the dense 0.5 mm contact-only lug copy (648 samples) samples the trim edge; lead + dense =
-  18.49 / T5 14.74, so the copy hides nothing on the bench, and it is 0.22 mm STRICTER held out (46.35 vs 46.13 sparse).
-- S5: flood clean (above).
-- M1 / M2: no new part; the trim is a cut on link 1a's existing lug; O20 hubs unchanged; the lead's verifier showed the
-  stock O2.5 dowel holds 18.49.
-- M3: the dense lug was worn against every member at every taken pose by the verifier: crank 0.153 mm (the lead's
-  designed 0.15 running gap over the lug), nose 0.424 mm (its own sliding pair), everything else >= 20.96 mm.
-- M4: K 45.6 deg, crank 19.3 deg.
-- P1: the trim was designed on the two claim-bench contact poses (237 / 264), but its depth gain travels held out
-  (held out -5.54 mm on the same 10 poses, against -1.56 on the bench), and the pick (wall 1.5) is not the best-T5 column (wall 1.0: 12.67 / 38.71) - it was chosen on the
-  wall, not on a number.
-- P2: no search touched the held-out set; five configs were worn held out as columns and the pick is not the held best.
-- P3: farm + local verifier repeat identical; this audit's re-wear identical (18.51).
-- P4: the dense lug copy is a measurement change made with the design; it is reported as its own column and compared
-  dense-to-dense (the held depth gain is 5.76 dense-to-dense, 5.54 against the lead's sparse 46.13).
-- R3: the grid spread is reported (fast 13.00-13.40, top-5 spread 0.004 score points).
-- G2 / G3: not measurable without R17 (see M5).
+- **T2:** reading the band as 3-14 mm costs +0.15 (18.66).
+- **T4:** no bound moved. The knee window and the stops are the parent's.
+- **S2:** part-weighted in-band is 0.924 against 0.895 sample-weighted. L1a has 8 samples, as the parent.
+- **S4:** not measurable here (the rig's R2 artefact, 24.87).
+- **S5:** the flood is clean (full 18.51, 0 dropped).
+- **M1 / M2:** no virtual part; O20 hubs.
+  - The claim's nose r 1.1839 (an O2.37 dowel) is not a stock part, but the stock O2.5 that the CAD builds holds the
+    claim: 18.51, T5 13.12 mm (`remeasure/..._bench_r125.json`, this audit).
+- **M3:** the verifier wore the dense lug against every member: crank 0.153 mm (the designed running gap), nose 0.424 mm.
+  The CAD reads R6 0.0 mm.
+- **M4:** K 45.6 deg, crank 19.3 deg.
+- **P1 / P2:** the held-out set was never searched. The pick (wall 1.5) is not the best-T5 column (wall 1.0: 12.67 /
+  38.71).
+- **P3:** four wears of the claim are identical: verifier farm, verifier local, the 13:06 audit, and this audit at HEAD.
+- **P4:** the commits since the verification touched the row's complexity only. `judge/dynamics.py` (8f69bd6, R17
+  unrounded) changed in the same commit as the row's complexity refresh. It is a stricter gate, stated as a measurement
+  change, and it does not touch v_gap.
+- **R2 / R3 / R4:** the dashboard v_gap is the verified 18.51 and v_contact is 0.0054. The grid spread is reported
+  (13.00-13.40 fast).
+- **G2:** the spring is 0.08 N.m and R17 passes at 0.129 N.m about GH.
+- **G5 / G6:** 3 active joints, 0 passive translations, complexity recomputed.
 
 ## New pattern (proposed catalogue entry)
 
-**S6. The in-band term pays for dead metal (the trim penalty).**
-- **Looks like:** removing metal that the mechanism does not use, and that sits in the 2-14 mm band most of the time,
-  raises the gap; adding filler metal in band lowers it.
-- **Why not better:** the wearer feels the part's height and its worst pose, not the share of its samples in band. Here
-  the cut lug is the metal that pressed 5.74 mm into the arm at pose 264.
-- **Detect:** `sampling` already reports part-weighted against sample-weighted in-band; flag a design change whose gap
-  moves only through the in-band term while its metal floor rises (or falls) on every changed pose.
-- **Here:** trimlug +0.02 for cutting 3 in-band lug samples that caused a 1.56 mm deeper press (taken set identical, floor
-  up on 60 poses, down on none); the kneeless wedge column of slipper-nose -1.06 for 4.73 g of filler under an unmoved
-  crown (`slipper-nose-knuckle-3r.md`, NEW-filler-metal, a control column, not a claim).
+**NEW-wall-plane: a margin stated on one plane of a 3-D part.** Proposed for the next free number in section 2 (T6 and M6 are
+already taken by other audits' proposals); T family, the margin is read where it is largest.
 
-## Proposals (not applied; each is a measurement or reporting change for the lead / the user)
+- **Looks like:** a wall, clearance or edge margin is quoted as one number ("+ 1.5 mm wall", "0.3 mm rule") but read on
+  one section of a part whose contact line or skin distance varies across its thickness.
+- **Why not better:** the built part fails, or touches, at its worst section, not at the section the model reads.
+- **Detect:** for every stated margin, the claim reports its minimum over the part's thickness (top / mid / bottom
+  section, or the swept contact line at both faces), and a CAD check of the built part repeats it.
+- **Here:** trimlug's 1.5 mm wall is 1.08 / 0.82 mm at the lug's top edge (CAD check O2). Honouring it there costs 0.52
+  of the 1.56 mm bench depth gain and 2.30 of the 5.76 mm held-out gain, and moves the gap -0.01
+  (`remeasure/trimlug-k165-knuckle-3r_edgewall.json`).
 
-- **I-a (tool reading).** `near_touch` takes the newest non-held verifier file with a `gap_near1`; when the verifier
-  also wears a control (here `_v_bench_lead.json`, trim off), the check reads the control. Prefer the file whose frozen
-  gap equals the row's v_gap (+-0.05). Effect here: 18.49 -> 18.51 plain, shell 14.53 -> 14.51, no level change.
-- **I-b (tool reading).** `continuity` should read `docs/alignment/remeasure/<id>_flood_*.json` (`connected` with
-  `connected_full`) when its own `frozen.gap` reproduces the claim. Effect here: watch -> ok (full 18.51, 0 dropped).
-- **I-c (tool reading, third false positive).** `idle` matches the text `knee_moved` anywhere in the model; match only
-  an assignment, or skip when `mechanism.cuff_knee.pins > 0`. Effect: the idle watch disappears here, on slipper-nose and
-  on groove-desmo (each refuted by its skeptic).
-- **R-a (reporting).** Rows and the dashboard's sweep line should not show a fit-bench gap as a score when the claim
-  bench is different (13.02 / 95.27 here, 13.0 / 95.27 on the lead).
-- **S6 reading (metric, for the user).** Score in-band part-weighted instead of sample-weighted. Measured on the 16
-  verified rows whose audits carry per-part in-band (gap with the verified in-band term replaced by the part-weighted
-  one): slipper-nose 18.49 -> 18.04, trimlug 18.51 -> 18.04, roller-longdyad 18.67 -> 18.04, dipped-law 18.64 -> 18.57,
-  sidecar-longdyad 18.91 -> 18.57, sidecar-parallelogram 19.13 -> 19.13, sidecar-roller-flank 20.08 -> 19.11,
-  kneeless-roller 21.07 -> 20.12, kneeless-sidecar 21.11 -> 19.95, groove-desmo 22.64 -> 22.50, frontload 22.82 ->
-  28.45, geneva-tail 23.57 -> 29.26, cam-unfold-4th 26.70 -> 31.56, skin-normal-3r-pin-knee 27.20 -> 26.73, raglan 27.82
-  -> 27.28, k-rim-lobe-stub 44.79 -> 52.04 (part lists from each `docs/alignment/<id>.json` sampling check; 9 verified
-  rows have none on file). It removes the trim penalty (trimlug ties its parent) and punishes rows with a far-off,
-  lightly sampled part; it also LOOSENS the knuckle family (part-weighted in-band >= 0.90 caps the term at 0). A
-  measurement change; the user's call, not an input to this verdict.
+## Proposals (not applied; measurement or reporting changes for the lead or the user)
+
+- **W-a (reporting, tightening).** State every design wall or clearance at its worst section.
+  - Measured effect on every verified row: only this row carries a stated trim wall (`grep trim_wall
+    docs/concepts/rows/*.json`).
+  - Here: gap 18.51 -> 18.50, T5 13.18 -> 13.70 mm, held contact depth 40.59 -> 42.89 mm.
+  - No other verified number moves.
+- **I-b (tool reading, still open).** `continuity` should read `docs/alignment/remeasure/<id>_flood_*.json` when its
+  `frozen.gap` reproduces the claim. Effect here: watch -> ok.
+- **R-a (reporting, still open).** Keep fit-bench numbers (13.02 / 0.775 / contact 0) out of the headline gap and reach
+  columns of verified rows and the dashboard.
 
 ## What happens next
 
-- The trim is worth keeping in the lead's CAD (a cut, no part, no joint): pose 264 presses 1.56 mm less; held out the
-  contacts sum 5.54 mm less (46.12 -> 40.58). It does not clear 264 (the lug band behind the stroke end, the crank's
-  side wall and hub 2's housing all stay in), so overhead stays 8 / 28.
-- The S1 flip is the family's: the next audit of slipper-nose should carry it, and the round planner should read the
-  pooled bench + held order before naming a winner between the slipper family and sidecar-longdyad.
-- The three instrument fixes (I-a, I-b, I-c) belong to the audit tool's owner; each needs `selftest` after the change.
+- **The CAD drawing:** state the lug's top-edge wall (>= 0.8 mm), or move the cut to r_K 21.98 at no cost to the score.
+- **The nose wear test:** mu <= 0.105 is the line between "moves freely" and a 5-deg cuff twist at the end of the
+  forward stroke.
+- **The user's B1 ruling** (m_sub at K's rest) still decides G4 for the whole slipper / roller family.
+- **The next audit** of this row is due when its claim, its parent's model, or the wall reading changes.
+
+---
+
+_Below this rule: the 2026-10-17 skeptic section, kept unchanged (it rules on the 2026-10-17 12:46-13:07 auditor run, whose text the section above replaces)._
 
 ## Skeptic (2026-10-17 13:08-13:20 UTC)
 
