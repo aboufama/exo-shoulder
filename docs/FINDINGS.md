@@ -3512,7 +3512,8 @@ Self-measured, local only (the CPU farm is closed): at most 2 niced processes, $
   like the row (stops +0.5 at margin 5.5, stop B at the 5-deg rule cut), one fold reading, full-grid flood + fresh-pose
   edges, near-touch objective averaging the envh fit and the Bench(60,160) fit worn on envh, claim-fit and depth guards.
   One start at the verified config, 161 tries; the gate passes (0.54 / 0.00 / spread 0.77), sigma not collapsed: a
-  local optimum. @@FE2F@@
+  local optimum. A second start (seed 2, 49 tries before the box) reached 14.69 in the same basin
+  (first start at 49 tries: 14.82; final 14.06).
 * **Claims (exact, frozen, priced, one reading, 0 poses dropped by continuity):**
   * verified protocol (fit Bench(60,160) -> Bench(110,360)): VER 16.20, **pick1 15.40** (score 94.40), pick2 16.65, pick3 15.93;
   * held out, the CAD shape (fit Bench(60,160)): VER 21.89, **pick1 20.50 (+1.39, P better 0.89)**, pick2 21.17 (+0.73),

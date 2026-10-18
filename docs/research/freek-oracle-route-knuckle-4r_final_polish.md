@@ -194,7 +194,11 @@ same pattern. The polish buys contact, not reach: overhead taken 8 / 28 bench on
 * **Continuity.** 0 workspace poses dropped on every claim; the one-reading flood connects 1109-1137 grid nodes with 0-1
   islands. The envh fresh poses: 167-173 of 210 joined by edges in the search; every taken one was joined.
 
-@@FE2@@
+**A second start (seed 2, convergence check, 10:17-10:28 UTC).** Same objective and x0, budget 840 s; the box slowed
+to 2-3 min per generation, so it ran 6 generations, 49 tries. Best 14.69 (fe2-g4-7: q3max 86.70, bk2 50.98, b3 0.315,
+wa -12.65) - the same basin and direction as the first start (whose best at 49 tries was 14.82; final 14.06). Not
+better than pick1, so not claimed. It supports the gate (two starts move the same parameters the same way) but does not
+make the optimum global.
 
 ## 6. Next
 
@@ -206,8 +210,8 @@ same pattern. The polish buys contact, not reach: overhead taken 8 / 28 bench on
    them too; pick3 survives that reading (+2.28).
 3. The audit's open physical checks carry over unchanged to any polished config: R17 with the state-2 spring hold, the
    dowel force, the cuff twist with the stop engaged. The polished dowel sits at own angle 92.99 (pick1) / 94.21 (pick3).
-4. Search space left closed: the J1 seat (no seat-region check tool), the knee geometry, a second fit-protocol-aware
-   start. Opening the J1 seat needs a check of the user's J1 region first.
+4. Search space left closed: the J1 seat (no seat-region check tool), the knee geometry, a longer second start (fe2
+   stopped at 49 tries on the box's load). Opening the J1 seat needs a check of the user's J1 region first.
 
 ## Files
 
@@ -220,4 +224,5 @@ same pattern. The polish buys contact, not reach: overhead taken 8 / 28 bench on
 
 ## Cost
 
-$0 farm (closed). Local, niced, at most 2 processes: envh cache 16 min x 2, CMA 22 min x 2, claims 34 min x 2@@FE2COST@@.
+$0 farm (closed). Local, niced, at most 2 processes: envh cache 16 min x 2, CMA 22 min x 2, claims 34 min x 2, second start 11 min x 2. The box was shared with a discovery loop and
+the alignment auditor (load 3-10 on 4 cores).
