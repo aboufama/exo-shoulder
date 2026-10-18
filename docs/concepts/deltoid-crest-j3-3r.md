@@ -492,7 +492,7 @@ translations, complexity 0.
 
 ## Audit (death re-audit, round 14, 2026-10-18 08:36-08:50 UTC, local, niced, <= 2 processes)
 
-**Verdict: the death stands, not refuted. The best frozen exact stays 34.98 (score 87.28; held 39.27), 2.88 over the spec's kill bar of 32.10 and 16.7 behind the lead's 18.28. Neither new lever moves it: the spec's untested neck-over-hub-2 variant reads 36.05 frozen (+1.07), and the sweep holds no config with more big-bench closure that keeps its metal clear.****
+**Verdict: the death stands, not refuted. The best frozen exact stays 34.98 (score 87.28; held 39.27), 2.88 over the spec's kill bar of 32.10 and 16.7 behind the lead's 18.28. Neither new lever moves it: the spec's untested neck-over-hub-2 variant reads 36.05 frozen (+1.07), and the sweep holds no config with more big-bench closure that keeps its metal clear.**
 
 The brief's literal refutation test ("corrected gap within 10 of the champion's 68.93 on Bench(60,160)") is stale: the
 fast 26.78 already passes it, and so did every row the round-14 kill bar rejects. This audit judges the death against
@@ -537,7 +537,7 @@ part-part split, re-dispatch 3 the held-out read, dumps, th margin and flood):
    neck-over probe above is the one place the build could be called conservative, and it is now measured. Margin 5,
    O20, own-angle stops: all at the rules, none tighter.
 
-**Reason (one line):** inside the crest basin, fold-free poses and metal clearance trade about 1:1. The kinematic closure on the big bench tops out at 0.74-0.78 with hub 2 in band. The poses that more closure adds, and the poses that a lifted neck clears, are lost again to hub 1, hub 2 and hub 3 metal against skin or each other. That leaves the best frozen exact at 34.98, over the 32.10 bar.
+**Reason (one line):** inside the crest basin, fold-free poses and metal clearance trade about 1:1. With hub 2 in band, the kinematic closure on the big bench tops out at 0.81, and at 0.78 among configs with a fast gap under 40. The poses that more closure adds, and the poses that a lifted neck clears, are lost again to hub 1, hub 2 and hub 3 metal against skin or each other. That leaves the best frozen exact at 34.98, over the 32.10 bar.
 
 **Lesson for every screen:** before you call a part-part pair an over-strict check, clear it in the model and wear it frozen. Here the hub2-neck collisions hid skin contact one layer down: clearing 5 collisions produced 4 contacts.
 
