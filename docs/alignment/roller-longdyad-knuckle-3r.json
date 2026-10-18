@@ -49,7 +49,7 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.67: bench 2 contact poses, sum 16.46 mm, deepest 10.55 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (+1.71 mm, x1.12); held 10 contact poses, sum 49.88 mm, deepest 9.54 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (+3.76 mm, x1.08)",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.67: bench 2 contact poses, sum 16.46 mm, deepest 10.55 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 10 contact poses, sum 49.88 mm, deepest 9.54 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
    "depths": {
     "v_gap 18.67": {
      "bench": {
@@ -98,35 +98,13 @@
      }
     }
    },
-   "ref": "slipper-nose-knuckle-3r",
-   "compare": [
-    {
-     "claim": "v_gap 18.67",
-     "wear": "bench",
-     "sum": 16.46,
-     "ref_sum": 14.75,
-     "excess": 1.71,
-     "ratio": 1.12,
-     "watch": false
-    },
-    {
-     "claim": "v_gap 18.67",
-     "wear": "held",
-     "sum": 49.88,
-     "ref_sum": 46.12,
-     "excess": 3.76,
-     "ratio": 1.08,
-     "watch": false
-    }
-   ]
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
   },
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs slipper-nose-knuckle-3r: plain -0.18, 2 mm -0.08",
-   "ref": "slipper-nose-knuckle-3r",
-   "gain_plain": -0.18,
-   "gain_2mm": -0.08
+   "reason": "no reference"
   },
   {
    "check": "continuity",
@@ -275,6 +253,15 @@
    }
   },
   {
+   "check": "density",
+   "level": "ok",
+   "reason": "over-dense parts roller 2.23x; bench 18.67 -> 18.76 at the kit's density; held 23.73 -> 23.82 at the kit's density",
+   "over": {
+    "roller": 2.225
+   },
+   "src": "remeasure/sample_density_roller-longdyad-knuckle-3r.json"
+  },
+  {
    "check": "complexity",
    "level": "ok",
    "reason": "recomputed 20.25 vs row 20.25",
@@ -306,7 +293,7 @@
   "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen_env.json",
   "docs/concepts/verify/roller-longdyad-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "06f7b8d",
- "tool_version": "2026-10-17.2",
- "t": "2026-10-17T08:03:51Z"
+ "git": "2e3b6a3",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T22:15:47Z"
 }

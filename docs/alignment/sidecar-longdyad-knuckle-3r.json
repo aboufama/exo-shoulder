@@ -51,7 +51,7 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.91: bench 4 contact poses, sum 6.23 mm, deepest 4.61 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (-8.52 mm, x0.42); held 10 contact poses, sum 35.66 mm, deepest 8.37 mm at ['ws', 15.0, 150.0, -60.0], 5 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (-10.46 mm, x0.77)",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged) (frontload-lobe-stopb-knuckle-3r has no depth on file; compared with conecut-knee-knuckle-3r): v_gap 18.91: bench 4 contact poses, sum 6.23 mm, deepest 4.61 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 10 contact poses, sum 35.66 mm, deepest 8.37 mm at ['ws', 15.0, 150.0, -60.0], 5 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
    "depths": {
     "v_gap 18.91": {
      "bench": {
@@ -101,35 +101,16 @@
      }
     }
    },
-   "ref": "slipper-nose-knuckle-3r",
-   "compare": [
-    {
-     "claim": "v_gap 18.91",
-     "wear": "bench",
-     "sum": 6.23,
-     "ref_sum": 14.75,
-     "excess": -8.52,
-     "ratio": 0.42,
-     "watch": false
-    },
-    {
-     "claim": "v_gap 18.91",
-     "wear": "held",
-     "sum": 35.66,
-     "ref_sum": 46.12,
-     "excess": -10.46,
-     "ratio": 0.77,
-     "watch": false
-    }
-   ]
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
   },
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs slipper-nose-knuckle-3r: plain -0.42, 2 mm -1.01",
-   "ref": "slipper-nose-knuckle-3r",
-   "gain_plain": -0.42,
-   "gain_2mm": -1.01
+   "reason": "vs frontload-lobe-stopb-knuckle-3r: plain +3.91, 2 mm +10.05",
+   "ref": "frontload-lobe-stopb-knuckle-3r",
+   "gain_plain": 3.91,
+   "gain_2mm": 10.05
   },
   {
    "check": "continuity",
@@ -283,6 +264,11 @@
    }
   },
   {
+   "check": "density",
+   "level": "ok",
+   "reason": "no part sampled > 2x the kit's density"
+  },
+  {
    "check": "complexity",
    "level": "ok",
    "reason": "recomputed 25.5 vs row 25.5; hand count (not derived from the model)",
@@ -313,7 +299,7 @@
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json",
   "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json"
  ],
- "git": "06f7b8d",
- "tool_version": "2026-10-17.2",
- "t": "2026-10-17T08:03:52Z"
+ "git": "a6c5b62",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T22:18:13Z"
 }
