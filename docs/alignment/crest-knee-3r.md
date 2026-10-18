@@ -279,3 +279,78 @@ Rulings: `docs/alignment/crest-knee-3r.rulings.json`. Numbers: `docs/alignment/r
 3. **Not measured (a limitation, not a finding).** The flood treats part-clash and contact poses as passable nodes.
    The bench has 5 workspace clash poses and 5 workspace contact poses (held 3 and 6). A flood with clash walls would
    need the full grid evaluated through `M.run`.
+
+---
+
+## Skeptic of the joggle audit (2026-10-18 ~09:15 UTC, claim 31.50)
+
+Re-measured with the models and both verifiers unchanged (imported; local, niced, at most 2 processes):
+
+- an independent exact re-wear of the joggle claim through the joggle verifier's own `fit_fast` / `worn` /
+  `extra_checks` / `joggle_checks`, with no dump written (`docs/alignment/remeasure/crest-knee-3r_skeptic_joggle_wear.py`,
+  not the auditor's adapter). It gives 31.50 bench and 28.45 held again, and it also records the knee-to-strap clearance
+  of every taken pose;
+- the same wear for a bent-bar build (`JOG_MAX=2.78`, the model's own `jog_max`);
+- a stricter continuity flood (`crest-knee-3r_skeptic_joggle_flood.py`).
+
+Rulings: `docs/alignment/crest-knee-3r.rulings.json`. Numbers: `docs/alignment/remeasure/crest-knee-3r_skeptic_joggle_checks.json`.
+
+**Final verdict (ledger): WATCH.** 5 reasons upheld (reporting, NEW-tolcliff, G1, NEW-ws-inband, R2), 2 refuted with
+measurements (continuity, M2).
+
+- **continuity: refuted.** The flood is on file: row `verification_joggle.continuity` has 974 / 974 connected, 0 islands,
+  803 / 803 edges, and 0 bench and 0 held poses dropped. `verify/crest-knee-3r-joggle_v_flood_{bench,held}.json` give
+  connected = static. A stricter re-run seeded from ONE rest pose, testing every edge including the elevation-0 ring,
+  also connects 974 / 974 and drops 0 / 0. The tool's watch comes from a reading gap: `c_continuity` does not read
+  `verification_joggle.continuity`.
+- **reporting: upheld.** `morphs.json` shows sweep_gap 22.02 against v_gap 31.50. That is 9.48 apart, past the 5-point
+  trigger in `c_reporting`. The row's verdict still opens "SCREENED ... 32.84".
+- **NEW-tolcliff: upheld, with its size corrected.**
+  - The verifier's probe reproduces to the digit: 31.78 / 31.78 / 34.31 / 39.90 / 51.64 bench at +0.05 / 0.1 / 0.15 /
+    0.2 / 0.3 mm.
+  - The clearance is 0.20 mm only at its minimum: 1 bench pose is under 0.25 mm, 25 are under 0.35 mm and 46 under
+    0.45 mm.
+  - "Jam" in that probe means the 0.15 mm running gap is lost. Under a metal-touch reading, +0.2 mm touches 1 bench
+    pose (31.78) and 0 held poses. The cliff comes at +0.3 mm: 13 / 16 poses touch, giving 34.31 / 32.08, while the
+    flat cell touches nothing up to +0.3 mm (32.84).
+  - So the 1.34-point lead becomes a 1.47-point deficit at a 0.3 mm strap error on either reading. At 0.2 mm the lead
+    holds only if a running gap under 0.15 mm is accepted. The wearer cost is real: the knee rubs or binds on the strap.
+- **G1: upheld.**
+  - Near-touch reproduced from the verifier's dumps and from the independent re-wear: 34.08 / 59.56 / 88.99 at
+    1 / 2 / 3 mm (held 33.28 / 55.91 / 88.99). The shell is 28.06 points, past shell2_watch 15. Near-touch is
+    report-only, so the level is watch.
+  - Overhead workspace: 7 / 28 taken, 5 of them under 2 mm. Overhead clips: 10 / 10 taken, 4 under 1 mm and all under
+    2 mm.
+  - Correction, against the design: the auditor's floor list is the dump's `cmin` column. The true per-pose floors are
+    0.71, 1.06, 1.18, 1.28, 1.36, 2.17 and 2.57 mm. For example, pose 90 / 150 / -60 is at 1.18 mm, not 2.96.
+- **NEW-ws-inband: upheld.** The re-wear gives a workspace in-band of 0.8174 (held 0.794), with 18.2 % of the metal over
+  14 mm (max 29.95 mm), against 0.8719 on the clip frames. That is a 5.45-point shortfall. On the same probe harness the
+  lead's shortfall is 3.4 and H1's 2.9.
+- **R2: upheld.** `morphs.json` puts gap 26.34 (the flat cell's fast number) and sweep_gap 22.02 (the joggle's fast
+  number) next to v_gap 31.50, and alignment_claim is still 32.84. No rank effect.
+- **M2: refuted.**
+  - The claimed part exists at this size: a machined Ti knee link. The concept doc already says so
+    (`docs/concepts/crest-knee-3r.md` lines 581-583), and so does the row's re-dispatch record.
+  - The feared bent-bar build was measured. With jog_max 2.78 and the levels re-solved by the model's own LP, then
+    frozen and worn exact, it reads 32.02. That is +0.52 on the claim and still ahead of the flat cell's 32.84.
+  - The 0.41 mm does not come out of the running gap. The stack rule holds tr_a at 66.075 and the pad rises instead
+    (tr_b 62.89 -> 63.295), so the knee-to-strap minimum stays 0.200 mm with the same 25 poses under 0.35 mm.
+  - What remains is a label: the `JogModel` docstring still says "a bent 3 mm bar".
+
+### Missed (for the next audit; not counted in this verdict)
+
+These are measurement and reporting slips. None of them moves a rank.
+
+1. **The overhead floor list was optimistic.** The audit's G1 text lists the overhead floors from the dump's `cmin`
+   column, not min(min_mm, cmin). Three of the seven values are 0.4-1.8 mm too high. The counts under 1 / 2 mm were
+   right. The next probe or audit should read min(min_mm, cmin).
+2. **The tolerance probe reports running-gap loss as "jam".** Proposal M6 should carry both readings:
+   - running gap lost (clearance < 0.15 + d): 25 poses at +0.2 mm;
+   - metal touch (clearance < d): 1 pose at +0.2 mm, 13 at +0.3 mm.
+   It should also drop the phrase "0.20 mm on every binding pose": only 1 bench pose is under 0.25 mm.
+3. **The concept doc's buildability line is stale.** `docs/concepts/crest-knee-3r.md` line 138 gives a "1.16 mm step"
+   over a "12.3 mm ramp run" as too short for a bent bar. The claim's step is 3.19 mm over 13.26 mm, and a 1.16 mm step
+   could be bent in 12.3 mm (it allows 2.38 mm of rise). The conclusion (machined) is right; the reason on file is wrong.
+4. **The joggle's real worth depends on the build.** The row's lesson says the joggle is worth about 1.07 against the
+   flat + stack-rule control (32.50). Built as a bent bar (32.02) it is worth 0.48. With a 0.3 mm strap error it is
+   worth less than nothing against the flat cell.
