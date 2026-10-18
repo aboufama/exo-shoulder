@@ -178,3 +178,62 @@ Next, in order: (a) do NOT stack this lever on the lead cell unless an in-band s
 lowered stretch elsewhere on link 2 that pulls samples back under 14 mm on the clips); (b) the h2facet chamfer (held
 -0.22) is the hub-2 half of the hardened cell and has no in-band cost; (c) lowarm-kstop's chain carries the same link-2
 binder at 139 (0.072): hand it the waist only if its held ib14 has margin (> 0.9007).
+
+## Verification (independent verifier, 2026-10-18 ~16:00 UTC)
+
+**Verdict: VERIFIED at 18.28 on frozen exact Bench(110,360), a tie with the lead (score 93.35). The champion on the same
+bench and checks is 75.94 (the risley-turret verifier's reference, the one the lead's verifier uses).** The hardening
+does NOT hold up as the cut the claim describes. The 139 / probe gain is a hidden radial lift of link 2's edge zone, by
+up to 0.95 mm, not a planform move.
+
+Harness: `docs/concepts/verify/conecut-l2jog-knuckle-3r.py` (the true-cut red team, through the claim's own `Scan` and
+`frozen()`). I ran `tools/alignment_paired.py dump` (bench and held) and `compare` on the claim's own frozen protocol,
+unchanged.
+
+| | bench (110 clips + 360 ws, exact) | held (202 + 952, exact) |
+|---|---|---|
+| claim (waist k512) | 18.28 / ib14 0.9005 / ib10 0.5737 / reach 0.7278 (262) / follow 1.0 / 4 contacts | 22.45 / ib14 0.8993 / reach 0.6922 (659) / 14 contacts |
+| my per-pose dump | **18.28** (recomputed 18.29), identical | **22.45** (recomputed 22.44), identical |
+| paired vs the lead | 0 status-discordant poses; diff 0.00, CI90 0.00..0.09; in band -74 of 107910 samples | 0 discordant; +0.06, all in-band (CI90 0.00..0.08, P(better) 0) |
+| probes +0.1 / +0.2 / +0.35 (from the dump) | 18.29 / 18.29 / 18.83 (lead 18.83 / 18.83 / 19.37) | 22.44 / 22.44 / 22.66 (lead 22.38 / 22.38 / 22.60) |
+| poses whose metal moved | 139 0.072 -> 0.602; 345 1.709 -> 1.606 | 224 / 225 / 252 -3.49 / -5.51 / -1.60 -> -2.43 / -4.58 / -0.71; 898 1.67 -> **1.528**; 305 |
+| **TRUE CUT** (each moved sample on the original underside) | **18.28, ib14 0.9013, 139 0.073, probes 18.83 / 18.83 / 19.37 (= the lead)**, why fold 88 / parts 0 / contact 4 | scan: 224 / 225 / 252 -3.09 / -5.26 / -1.37, 898 1.69 |
+
+What I checked:
+
+1. **DOF: unchanged.** 3 active joints (J1, J2, J3). K is slaved and never read. Knee pins a / b are passive rotations
+   outside the count. 0 passive translations, no gears / pulleys / cables. The jog moves samples only.
+2. **The frozen path really carries the jog.** `CC.CCModel = JogModel` is a module global, so `_frozen_model`'s
+   `Frozen(CCModel)` subclasses JogModel. Its `fit` copies M1's jogged `link_pts` / `strap` / `contact` and does not
+   apply the jog twice. No new part-pair or jam rejections: the evaluated-pose set equals the lead's on both wears.
+3. **Gate, held and selection.** The gate re-computes from the sweep's `obj` (0.008 / 0.008 / 0.013). envh asserts
+   that it holds no held pose. The held scans cover only the 4 cells already picked, after the bench pick (scratch
+   `held_scan.json`). The preview test passes.
+4. **RED TEAM: the waist is not a cut (main finding).** Link 2 is a kit `free` member: each underside sample is fitted to
+   the skin on its own. At the binder its section is not straight. Rows 0-3 sit at r 69.55 / 68.43 / 68.86 / 69.20 mm
+   from GH, so the edge row 0, the binder, is 1.1 mm HIGHER than row 1. `jog_disp` moves every row in the plate plane
+   and keeps its height. The waist's new edge, 1.58 mm in, therefore keeps row 0's height over an underside that is
+   0.83 mm lower there. Over the flat that lift is up to +0.95 mm (and -0.30 mm on inner rows). A real planform cut is
+   the claim's own build ("a profile cut before bending", cx +0), and it leaves the new edge ON the original underside.
+   Re-read that way, through the claim's own harness and frozen protocol:
+   - 139 = 0.073 (the lead's 0.072);
+   - the probes are 18.83 / 18.83 / 19.37, the lead's;
+   - in-band 0.9013, so the in-band cost vanishes too.
+
+   The spec's rigid jog has the same artifact (true-cut 139 = 0.059). The judge's planform-only 0.487 / 0.716 used the
+   same in-plane translation, so they share it. **The hardening and its in-band cost are one and the same thing: an
+   edge-zone radial lift.** The modelled shape is buildable only as a re-shaped (machined) underside with a raised edge
+   zone. That is still cx +0, but it is not a laser cut, and it should be named and priced as a lift. The doc's
+   lessons (3) "waists, not jogs" and (4) "the planform waist is cheaper than a radial joggle" are mis-attributed: the
+   waist is an edge-only lift. That is why it is cheaper than a whole-section joggle.
+5. **The far edge does not stay.** `y01` is normalised over the whole bar's across range (-0.07..6.94 mm; the bar widens
+   toward hub 3). In the flat, the far row moves +0.18..0.26 mm outward and the edge row moves 1.57..1.59 mm. The
+   narrowing is ~1.33 mm (5.87 -> 4.54 mm at the binder), not 1.6 (5.9 -> 4.3). Held 898 goes 1.67 -> 1.528 under the
+   waist; the claim says unchanged.
+6. Minor: every sweep entry has the same timestamp (written in one go, not incrementally).
+
+**Status.** The verified number stands as a tie: v_gap 18.28 either way, and no pose changes status. It is not a lead
+change, and held is +0.06 worse. As a probe hardener it is refuted for the cut: built as described, the lead's +0.1 /
++0.2 probe flip at 139 remains. Next: if 139 needs hardening, price an explicit edge-zone lift (or a skin-fitted re-fit
+of the waisted planform) on the kit's own underside rule against its in-band cost. Do not stack this waist on the lead
+or on lowarm-kstop as a free "cut".
