@@ -2,7 +2,7 @@
 
 **Status: DEAD at step 0** (pre-registered kill gate: law-only ghost frozen exact Bench(110,360) > 19.0 or workspace
 takes < 258). The slow law alone, with every drive part deleted, reads **22.79 with 247 workspace takes** at rho 0.8. The
-lead's own law through the same harness reads __CTRL__. Separately, the spec's pin cannot carry the stroke: its built
+lead's own law through the same harness reads **18.28 with 262 takes, exactly the verified lead**, so the cost is the law. Separately, the spec's pin cannot carry the stroke: its built
 flank is undercut 1.25 mm over K 2.5-20.3 deg, because the pin passes through the relative pole (the pitch point) at K 22.4.
 
 ## Deeper-version answers (written first, before any number)
@@ -54,8 +54,8 @@ Each fit is on Bench(60,160) fast, then the frozen shape is worn exact.
 
 | law | onset th | fast plain / 2 mm | envsel exact frozen (ws takes / 360) | Bench(110,360) exact frozen (ws takes) |
 |---|---|---|---|---|
-| lead 2.1534 (control, drive deleted) | 77.93 | 12.50 / 18.80 | 24.14 (245) | __CTRLB__ |
-| rho 0.90 | 62.25 | 16.25 / 25.56 | 27.55 (236) | __G090B__ |
+| lead 2.1534 (control, drive deleted) | 77.93 | 12.50 / 18.80 | 24.14 (245) | **18.28 (262)**, 4 contacts = the verified lead |
+| rho 0.90 | 62.25 | 16.25 / 25.56 | 27.55 (236) | 20.53 (255), 5 contacts, follow 0.9727 |
 | rho 0.80 (spec) | 58.55 | 16.88 / 30.29 | 27.87 (233) | **22.79 (247)**, 5 contacts, follow 0.9545 |
 | rho 0.75 | 56.29 | 18.12 / 29.92 | 28.33 (233) | - |
 
@@ -90,7 +90,7 @@ This is `flank` mode at rho 0.8, nose r 1.25, R 62, mu 0.087 (gate 38.03):
 | 22.5 / +26 | 25.6 | 15.8 / 37.3 | 6.3-25.6 (1.25) | ~6 deg |
 
 Pin scan (r 8-40 mm / az -180..180, rho 0.8 and 0.9, drive range = first K where the kinematic PA fails or the flank is
-undercut): __SCAN__
+undercut): built drive range from stop A (max over pins, PA <= 38.03 kinematic and no undercut): rho 0.8 21.0 deg (612 pins r 8-40 / az 360) and 23.6 (81-pin refine), 0.9 26.1 (612), 1.0 29.3, 1.2 28.1, 1.5 32.1 (156 each, r 12-34 / az -60..60); no pin reaches 40 at any rho, the stroke needs 45.6 (taken) / 50 (stop B). The drive range is therefore at most about two thirds of the stroke at any law tried, so no single pin-flank pair carries the lead's end state.
 
 The proposer's PA pass (18.3 / 34.0) was read on a 0.76 deg K grid, which steps over the pole spike. The pin's circle
 about uK (23.0 mm) runs through the pole (pitch axis ~16.7 deg from u2, about 21.3 deg = 23 mm from uK). That is not an
@@ -108,7 +108,7 @@ accident: the PA gate pulls the contact toward the pitch point, because the comm
 - **The optimistic number.** The ghost is a bound. Real pin + tooth metal stacked over link 1b at R 64-67 can only remove
   takes and in-band, and the built flank cannot carry more than a few degrees of K from stop A. Even the bound fails both
   kill thresholds.
-- **Onset-held variant** (slow rate from the lead's onset, SMHI_FIX 16.84): __ONSET__
+- **Onset-held variant** (slow rate from the lead's onset, SMHI_FIX 16.84): fast 15.62 / 16.25 / 16.25 / 17.50 at rho 1.2 / 1.0 / 0.9 / 0.8, against 12.50 for the lead's law. msub is fine (5.6-7.9), but the slow rate reaches the stretched wall (the m3e dyad margin) before the lead's end state, so the stretched reach is lost instead (fold 37-40 against 31). Holding the onset does not rescue the morphology.
 
 ## Verdict
 

@@ -1,0 +1,180 @@
+{
+ "id": "onetooth-slowlaw-knuckle-3r",
+ "name": "One-tooth slow-law knuckle: the crank deleted, one crowned pin on link 1a's horn pushed by one link-2 tooth flank at rho 0.8, held by the lead's clock spring (cell D spring-free groove not run)",
+ "lens": "round107:B one-stage drive (one higher pair, slow law)",
+ "family": "slaved-knuckle 3R, one-stage (single higher pair) K drive",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-18T19:27:06Z",
+ "reach": 0.7375,
+ "follow": 0.9833,
+ "inband14": 0.9044,
+ "inband10": 0.6162,
+ "contact": 0.0,
+ "gap": 16.25,
+ "gap_near1": 16.25,
+ "gap_near2": 25.56,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 12,
+ "best_params": {
+  "rho": 0.9,
+  "cell": "ghost",
+  "DKLIM": 50.0,
+  "smhi": 32.519,
+  "seats_knee_J3stop": "conecut-knee-knuckle-3r best_params unchanged"
+ },
+ "frozen": {
+  "bench110_360_exact": {
+   "rho0.9": {
+    "gap": 20.53,
+    "reach": 0.7083,
+    "follow": 0.9727,
+    "inband14": 0.905,
+    "inband10": 0.6203,
+    "contact": 0.0136,
+    "ws_taken": 255,
+    "near2": 36.27,
+    "min_metal": 0.44,
+    "contact_poses": [
+     139,
+     205,
+     237,
+     264,
+     316
+    ]
+   },
+   "rho0.8_spec": {
+    "gap": 22.79,
+    "reach": 0.6861,
+    "follow": 0.9545,
+    "inband14": 0.9148,
+    "inband10": 0.6256,
+    "contact": 0.014,
+    "ws_taken": 247,
+    "near2": 44.45,
+    "min_metal": 0.54,
+    "contact_poses": [
+     139,
+     205,
+     237,
+     264,
+     316
+    ]
+   },
+   "control_lead_law_ghost": {
+    "gap": 18.28,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.9154,
+    "inband10": 0.6167,
+    "contact": 0.0106,
+    "ws_taken": 262
+   }
+  },
+  "envsel_exact": {
+   "rho0.75": {
+    "gap": 28.33,
+    "reach": 0.6472,
+    "follow": 0.9455,
+    "inband14": 0.9112,
+    "inband10": 0.6226,
+    "contact": 0.026,
+    "ws_taken": 233,
+    "near2": 49.63,
+    "min_metal": 0.05,
+    "contact_poses": [
+     227,
+     264,
+     365,
+     451,
+     452,
+     454,
+     455,
+     460,
+     464
+    ]
+   },
+   "rho0.8": {
+    "gap": 27.87,
+    "reach": 0.6472,
+    "follow": 0.9545,
+    "inband14": 0.9148,
+    "inband10": 0.6256,
+    "contact": 0.0259,
+    "ws_taken": 233,
+    "near2": 48.69,
+    "min_metal": 0.08,
+    "contact_poses": [
+     227,
+     264,
+     365,
+     451,
+     452,
+     454,
+     455,
+     460,
+     464
+    ]
+   },
+   "rho0.9": {
+    "gap": 27.55,
+    "reach": 0.6556,
+    "follow": 0.9727,
+    "inband14": 0.905,
+    "inband10": 0.6203,
+    "contact": 0.0311,
+    "ws_taken": 236,
+    "near2": 44.12,
+    "min_metal": 0.07,
+    "contact_poses": [
+     227,
+     264,
+     365,
+     371,
+     372,
+     451,
+     452,
+     454,
+     455,
+     460,
+     464
+    ]
+   },
+   "control_lead_law_ghost": {
+    "gap": 24.14,
+    "reach": 0.6806,
+    "follow": 1.0,
+    "inband14": 0.9154,
+    "inband10": 0.6167,
+    "contact": 0.022,
+    "ws_taken": 245,
+    "near2": 38.25,
+    "min_metal": 0.18,
+    "contact_poses": [
+     227,
+     264,
+     365,
+     451,
+     452,
+     454,
+     455,
+     464
+    ]
+   }
+  }
+ },
+ "complexity": null,
+ "complexity_note": "not built (dead at step 0); the proposer / judge estimate was 10.25-11.0 (cell D 7.0-7.5)",
+ "mechanism": null,
+ "verdict": "DEAD at step 0 (pre-registered kill: law-only ghost frozen exact Bench(110,360) > 19.0 or ws takes < 258). rho 0.8 (spec): 22.79, 247 ws takes; rho 0.9: 20.53, 255; the lead's own law through the same ghost harness reproduces the verified 18.28 / 262 exactly, so the +4.51 / -15 takes are the slow law's. Independently the one pair cannot carry the stroke: the spec's pin crosses the relative pole at K 22.4 deg and its built flank is undercut 1.25 mm over K 2.5-20.3; over 1773 pin placements at rho 0.8-1.5 the built drive range from stop A is <= 32.1 deg (rho 0.8: 23.6) against the 45.6-50 the lead's end state needs. Cell D not run (conditional on the spring cell's built flank passing PA). Not a cx 10-11 frontier point (a ghost bound, no buildable drive).",
+ "limiter": "(1) KINEMATIC, at the lead's seats: the slow law opens K from th 58.5 (lead 77.9), where the knuckle's J1-K-J3 sub-dyad is within 5 deg of its own fold (msub_min 3.0 deg at rho 0.8, 4.0 at 0.9; >= 5 only for rho >= ~1.0): the fold rule rejects the first ~5 deg of th past the onset (fast: poses 23, 24, 87, 110, 112, 124, 132, 157 at th 60.3-62.9, K 1.8-4.3 deg; 2 are clip frames -> follow 0.967), exact Bench(110,360) 247 ws takes vs 262. (2) THE DRIVE: one pin on link 1a vs one link-2 flank has a fixed relative pole (pitch axis ~16.7 deg from u2 at rho 0.8); PA <= 38 needs the contact near the pole, so a long-stroke pin crosses it and the flank undercuts (lantern-gear rule: one pin acts on one side of the pitch point only); the one-sided arc of action is <= 23.6-32.1 deg of K.",
+ "note": "Model docs/concepts/models/onetooth-slowlaw-knuckle-3r.py loads the verified lead conecut-knee-knuckle-3r unchanged (SN_CELL=lead) and changes only the law (kK := rho, onset moved in closed form on K's stop-A curve so the end state is the lead's, drive range DKLIM 50 = the lead's fitted dK_lim) and, in cell ghost, deletes every drive part (crank m9 metal + contact, roller / nose, flank lug, ROD / CRK / HORN straps and their part pairs, cam / RSSR gates). A LAW change, not a metric change: no bench, judge or kit file changed. Frozen protocol: fit Bench(60,160) fast -> shape frozen -> worn exact on envsel (selection) and Bench(110,360). Paired control (rho 2.1534 = the lead's law, drive deleted): Bench(110,360) exact 18.28 / 262 ws / 4 contacts (= the verified lead), envsel 24.14 / 245. Slow cells: envsel rho 0.75 28.33 (233), 0.8 27.87 (233), 0.9 27.55 (236); Bench(110,360) rho 0.8 22.79 (247, contacts 139 / 205 / 237 / 264 / 316, all hub 2 / hub K), rho 0.9 20.53 (255). Overhead unchanged (envsel 5/26, exact 7-8/28). Fast scan (plain / 2 mm): 2.1534 12.50 / 18.80, 1.5 13.12 / 20.62, 1.2 13.12 / 18.28, 1.0 13.12 / 19.45, 0.9 16.25 / 25.56, 0.8 16.88 / 30.29, 0.75 18.12 / 29.92, 0.7 20.00 / 35.30; onset held at the lead (slow rate from th 77.93): 1.2 15.62, 1.0 16.25, 0.9 16.25, 0.8 17.50 (the stretched end is lost instead). Built flank (mode flank, exact spherical kinematics; pin path in link 2's frame, contact = X - rn F, built flank = union-of-discs boundary): spec pin r 21.5 / az +24: pole K 22.4 (|v_rel| 0.0013 mm/deg), kinematic PA excl. the pole 13.1 / 38.8, undercut 1.25 mm over K 2.5-20.3 and 1.13 over 22.4-23.9 -> drive range ~2.5 deg; the proposer's 18.3 / 34.0 pass was read on a 0.76 deg K grid that steps over the pole spike. built drive range from stop A (max over pins, PA <= 38.03 kinematic and no undercut): rho 0.8 21.0 deg (612 pins r 8-40 / az 360) and 23.6 (81-pin refine), 0.9 26.1 (612), 1.0 29.3, 1.2 28.1, 1.5 32.1 (156 each, r 12-34 / az -60..60); no pin reaches 40 at any rho, the stroke needs 45.6 (taken) / 50 (stop B). Convergence gate (1-D law scan, 12 cells, plain score): gain over the 2nd half 0.00, over the last third 0.00, top-5 spread 1.14 points - met formally, but the death is the pre-registered step-0 bound plus the drive-range impossibility, not a search plateau (the ghost has no drive parameters; seats / knee / J3 stop are the lead's by spec). Red team: no jam reading applies to a ghost; the pinch points are the lead's hub 2 / hub K binders plus 139; the optimistic number is the ghost itself (real pin + tooth metal stacked over link 1b at R 64-67 only removes takes / in-band). Cell D (spring-free groove) not run: conditional on the spring cell's built flank passing PA.",
+ "doc": "docs/concepts/onetooth-slowlaw-knuckle-3r.md"
+}

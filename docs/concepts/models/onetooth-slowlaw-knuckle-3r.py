@@ -103,7 +103,7 @@ def _report(B, params):
     p = _clamp(dict(PARAMS, **params))
     r, M = CC._report(B, p)
     L_ = M.D.law(); s = smhi_for(p)
-    r["law"] = dict(rho=p["rho"], smhi=round(p["smhi"], 3), th_on=round(s["th_on"], 2), th_hi_lead=round(s["th_hi_lead"], 2),
+    r["law"] = dict(rho=p["rho"], smhi=round(p["smhi"], 3), th_on=round(min(s["a1"] + s["a2"], 360 - s["a1"] - s["a2"]) - p["smhi"], 2), th_hi_lead=round(s["th_hi_lead"], 2),
                     why_end=L_.get("why_end"), dK_max=round(float(L_.get("dK_max", 0.0)), 2), th_max=L_.get("th_max"), DKLIM=p["DKLIM"],
                     dK_taken_max=round(float(np.degrees(np.abs(np.asarray(M.dK, float))[M.kin_ok]).max()), 2) if M.kin_ok.any() else None)
     r["cell"] = CELL

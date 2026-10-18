@@ -3529,7 +3529,7 @@
   "name": "One-tooth slow-law knuckle: the crank deleted, one crowned pin on link 1a's horn pushed by one link-2 tooth flank, held by the lead's clock spring (cell D: spring-free one-groove form closure)",
   "family": "slaved-knuckle 3R, one-stage (single higher pair) K drive",
   "lens": "round107:B one-stage drive (onestage-cam-knuckle-3r corrected by its own step 0: the lead's law is dead for one pair, the slow law rho 0.8 passes)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-18T18:48:51Z",
   "source": "round 107 (J7, track jump) judge (docs/concepts/round107_ideation.md)",
   "merged_from": [
