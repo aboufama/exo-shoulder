@@ -1,69 +1,73 @@
 # Alignment audit: conecut-h2facet-knuckle-3r
 
-Auditor run 2026-10-18 ~16:00-16:35 UTC. Discovery round 15, slice r15-A. Reference: the lead conecut-knee-knuckle-3r.
-Tool: tools/alignment_audit.py 2026-10-18.1. Checks: docs/alignment/conecut-h2facet-knuckle-3r.json. Findings:
-docs/alignment/conecut-h2facet-knuckle-3r.findings.json. Ledger: `python3 tools/alignment_ledger.py get conecut-h2facet-knuckle-3r`.
+Auditor run 2026-10-18 ~22:04-22:20 UTC (hourly; ledger entry 2026-10-18T22:14:00Z). It was due because the row changed at 21:00:39Z (d889d5a, dashboard
+v147: a `leader_ruling` 'tie' with conecut-knee was added), after the last audit (skeptic, 17:06:25Z, WATCH). The task
+of this run was a check of how the leader is reported and presented. Reference: the lead conecut-knee-knuckle-3r.
+Tool: tools/alignment_audit.py 2026-10-18.1 (`--ref conecut-knee-knuckle-3r`). Checks:
+docs/alignment/conecut-h2facet-knuckle-3r.json. Findings: docs/alignment/conecut-h2facet-knuckle-3r.findings.json.
+Ledger: `python3 tools/alignment_ledger.py get conecut-h2facet-knuckle-3r`.
 
 ## Verdict and claim
 
 **Ledger verdict: WATCH.** No check and no finding is 'gamed'.
 
-The claim is v_gap **18.28** (score 93.35) on exact Bench(110,360), frozen shape. Held out it reads 22.16.
+The claim is unchanged: v_gap **18.28** (score 93.35) on exact Bench(110,360), frozen shape; held out 22.16.
 
-- **What the design is:** the lead's chain, unchanged, plus a 1.4 mm x 45-deg chamfer on hub 2's skin-side bottom edge.
-  The row also lists an upper flat, which is mis-framed and worth 0 (finding NEW-wrong-body-frame).
-- **Against the lead, on the bench:** an exact tie, with the same 262 takes and the same 4 contacts.
-- **Against the lead, held out:** 22.16 vs 22.38, a -0.22 edge that is one pose.
-- **Is the exo better?** Yes, a little, and never worse. The chamfer only removes metal.
-- **Does the number oversell it?** Yes, in two places:
-  - every scored gain sits just past a cutoff (T1);
-  - the board shows the design at complexity 0 when it is 18.5 (G5).
-
-I re-measured both claim numbers with the models unchanged. Each reproduces exactly:
-
-| wear | gap | reach | in-band14 | contacts | near1 | near2 | near3 | band 3-14 | file |
-|---|---|---|---|---|---|---|---|---|---|
-| bench re-wear (model's own frozen()) | 18.28 | 0.7278 | 0.9012 | 4 | 19.38 | 34.84 | 81.91 (lead 86.16) | 18.33 (lead 18.34) | remeasure/conecut-h2facet-knuckle-3r_bench.json |
-| held re-wear (model's own frozen_held()) | 22.16 | 0.6933 | 0.900 | 13 | 25.23 | 36.89 | 79.60 (lead 83.12) | 22.32 (lead 22.55) | remeasure/conecut-h2facet-knuckle-3r_held.json |
-| bench continuity flood (chamfer only) | static 18.28, full 18.28, knn 19.97, bench-graph 50.13 = the lead's flood | | | | | | | | remeasure/conecut-h2facet-knuckle-3r+chamferonly_flood_bench.json |
-| bench wear probe | 18.28 | | | | | | | | remeasure/conecut-h2facet-knuckle-3r_probe_bench.json |
-
-The chain's coordinate spans are bit-identical to the lead's re-wear:
-- dK -0.796..0 rad;
-- K.ang 59.27..105.94 deg;
-- q3' -109.20..116.10 deg;
-- msub 10.81..99.0 deg;
-- a1e 37.55..54.26 deg.
+- **What changed since the last audit:** one string. `git diff 616e0c7..HEAD` on the row shows only the new
+  `leader_ruling`. The model, the verifier files, tools/concept_kit.py, the audit tool and the probe adapters have
+  not changed since the re-wears on file (f493a7f 16:00 bench, 0781b77 16:12 held).
+- **Why I did not re-wear the claim:** the claim did not move and neither did any input to it. The bench and held
+  re-wears on file (f493a7f / 0781b77) reproduce 18.28 / 22.16 bit for bit. The only new wear is the held workspace
+  probe, which had never been run for this row.
+- **The ruling:** it is valid. It cites the skeptic entry 2026-10-18T17:06:25Z, whose verdict is watch, and
+  tools/dash_build.py checks that. It moves no number and only demotes this row. I replicated the page's board and
+  leader calcs on morphs.json:
+  - with the ruling, the headline is 'Re-centred cuff knee (tied with Re-centred knee, chamfered hub)', 18.28, complexity 18.5;
+  - without it, the headline would be this row at complexity 0.
+- **Is the exo better than the lead?** A little, and never worse. The chamfer only removes metal.
+- **Is the number or its presentation selling it wrongly?** Not upward. Two things are off:
+  - The tie is resolved by hand because the board's tie order is the id's alphabetical order (NEW-tie-order).
+  - Every display of the row still has complexity 0 except the headline (G5).
+  - The ruling's own text undersells the row: 'buys no take' is true on the bench only (R1).
 
 ## What the wearer gets (measured)
 
-- **Overhead reach (elev >= 140):** 8 of 28 bench poses taken, the same as the lead. The 20 lost poses: fold 14,
-  contact 3, J3 stop 3 (probe). Held: 18 of 71.
-- **Raised-arm reach (elev >= 90):** 47 of 113 bench poses (0.416), the same as the lead. Held: 124 of 300 (the lead
-  123 of 300); the one extra is pose 447.
+- **Overhead reach (elev >= 140):** 8 of 28 bench poses taken, the same as the lead. The 20 lost: fold 14, contact 3,
+  J3 stop 3 (bench probe). Held: see the table below.
+- **Raised-arm reach (elev >= 90):** 47 of 113 bench poses (0.416), equal to the lead. Held: 124 of 300 (lead 123;
+  this audit's held probe: 106 + 18). The extra one is pose 447 (0/90/30), taken with metal at 0.697 mm. Its in-band
+  metal pulls the held 90-140 band down slightly, 0.8478 -> 0.8469.
 - **Taken poses with metal under 2 mm:** 33 bench and 71 held, both equal to the lead. Under 3 mm: 99 vs 105 bench and
-  206 vs 217 held, so the chamfer helps here. Under 1 mm: 2 vs 3 bench and 14 vs 13 held; held 447 joins this group at
-  0.697 mm.
-- **Lowest metal on a taken pose:** 0.072 mm at bench 139 (ws -60/60/105), on link 2. The chamfer cannot reach it.
+  206 vs 217 held (the chamfer's real gain). Under 1 mm: 2 vs 3 bench and 14 vs 13 held (held 447 joins at 0.697 mm).
+- **Lowest metal on a taken pose:** 0.072 mm at bench 139 (ws -60/60/105), on link 2, which the chamfer cannot reach.
 - **Deepest contact:**
-  - bench: 8.93 mm at ws 15/165/-60, on the crank / horn; 4 contact poses summing 19.86 mm (lead 20.24);
-  - held: 9.86 mm at ws 45/165/-30; 13 contact poses summing 60.5 mm (lead 14 poses, 60.97 mm).
-  - Pose 205 stays a contact at -3.90 mm (lead -4.28). It binds on hub 2 but would need 4.85 mm of radial cut, which
-    runs into the bore.
-- **Workspace in-band (unscored, bench):**
-  - all taken workspace poses: 0.868 (13.0 % of the metal above 14 mm, max 30.74 mm);
-  - elevation 90-140: 0.832;
-  - overhead: 0.936 on 8 poses.
-  - Every value equals the lead's. Only the scored clip frames read 0.901.
-- **Clearance gain from the chamfer:** 21 bench and 45 held poses change, mean +0.57 / +0.60 mm, max +0.98. All of them
-  sit at elevation 45-138, none overhead. The single drop is 234 at -0.05 mm, a measurement change from the denser
-  sampling.
-- **Springs, stops, cuff twist, singular postures:** all the lead's, with nothing added.
-  - K clock spring and sliding-nose drive: R17 and cuff twist never measured on this chain (M5).
-  - J3 own-angle dowel: the held number lives inside a 1.33 deg window (T3).
-  - th fold margin: 5.181 bench, 5.006 held (T3).
-  - m_sub near-singular at K rest: carried, not re-measured (G4).
-  - The chamfer adds no joint, stop or load path. The wall to the O7 pin collar is 3.1 mm.
+  - bench: 8.93 mm at ws 15/165/-60 (crank / horn); 4 contact poses, 19.86 mm in total (lead 20.24);
+  - held: 9.86 mm at ws 45/165/-30; 13 contact poses, 60.5 mm in total (lead 14, 60.97).
+- **Workspace in-band (unscored), bench:** 0.868 over all taken workspace poses, 0.832 at elevation 90-140, and 0.936
+  overhead on 8 poses. Only the scored clip frames read 0.901.
+- **Held workspace probe (new in this audit, 316.5 s, the model unchanged):** it reproduces held gap 22.16 (reach 0.6933, in-band 0.9).
+
+  | held, taken workspace poses | h2facet | lead |
+  |---|---|---|
+  | all: taken of total | 660 of 952 | 659 of 952 |
+  | all: in-band 2-14 mm | 0.871 | 0.8712 |
+  | all: metal above 14 mm | 12.7 % (max 31.46 mm) | 12.6 % (max 31.46 mm) |
+  | elevation 90-140: taken | 106 of 229 | 105 of 229 |
+  | elevation 90-140: in-band | 0.8469 | 0.8478 |
+  | overhead (elev >= 140): taken | 18 of 71 | 18 of 71 |
+  | overhead: in-band | 0.932 | 0.932 |
+  | overhead: why not taken | fold 36, J3 stop 10, contact 7 | fold 36, J3 stop 10, contact 7 |
+  | taken poses with a floor under 1 / 2 / 3 mm | 14 / 63 / 164 | 13 / 63 / 172 |
+
+  The clip frames, which are what the score reads, are at in-band 0.900 on 202 of 202. File:
+  docs/alignment/remeasure/conecut-h2facet-knuckle-3r_probe_held.json.
+- **Springs, stops, cuff twist, singular postures:** all the lead's; the chamfer adds no joint, stop or load path.
+  - The lead's built CAD dynamics give 3.99 deg nominal cuff twist and 4.77 deg at the M5 forward bound, 0.23 deg under
+    the 5 deg gate; with plain friction it is 11.73 deg and 5.24 N (pipeline/full-exo/designs/user_conecut_knee/judge/dynamics.json).
+  - The th fold margin is 5.181 deg on the bench and 5.006 held. The J3 dowel's held number holds inside a 1.33 deg window.
+  - m_sub with the knee at rest is under 1 deg on 50 of 205 poses (G4).
+- **What the built exo gets today:** the lead's CAD (user_conecut_knee, 4ad3a2a) has no chamfer yet, so the wearer of
+  the built design does not get this row's +0.6 mm on 45 held poses.
 
 ## Checks (tools/alignment_audit.py)
 
@@ -73,123 +77,106 @@ The chain's coordinate spans are bit-identical to the lead's re-wear:
 | fast_frozen | ok | 12.5 -> 18.28 (+5.78) |
 | near_touch | ok | 18.28 / 19.38 / 34.84; 16.56 points in the 1-2 mm shell (the lead's) |
 | contact_depth | ok | bench 4 poses, 19.86 mm; held 13 poses, 60.5 mm |
-| dominance | ok | vs the lead: +0.00 plain, +0.00 at 2 mm |
-| continuity | watch | no flood in the verifier files. This audit measured the bench flood: full 18.28 = static (finding S5) |
+| dominance | ok | vs the lead: +0.00 plain, +0.00 at 2 mm (needs `--ref`; without it the check reads 'no reference') |
+| continuity | watch | the text says 'no flood on file', but the check cannot see the floods that are on file. On those floods: bench full 18.28 = static; held full 22.16 = static, knn 30.39 |
 | fold_margin | ok | 5.006 deg |
-| idle | ok | knee moves; dK span 45.6 deg |
-| sampling | ok | sample-weighted 0.901 vs part-weighted 0.925; L1a 8 samples (the lead's) |
+| idle | ok | the knee moves |
+| sampling | ok | sample-weighted 0.901 vs part-weighted 0.925; L1a has 8 samples (the lead's) |
 | density | ok | roller 4.55x (the lead's) |
-| complexity | watch | recomputed 0.0 vs row 18.5: the mechanism record is a delta (finding G5) |
-| reporting | watch | the verdict reads as a screen; the dashboard's sweep best 12.5 sits 5.78 below the verified number |
-| judge_change | ok | none |
+| complexity | watch | recomputed 0.0 vs the row's 18.5: the mechanism record is a delta (G5) |
+| reporting | watch | the verdict reads as a screen; the sweep best 12.5 sits 5.78 below the verified number (R1) |
+| judge_change | ok | no bench / judge / metric file changed in the 4 commits that touched the row |
 | rules | ok | O20, margin >= 5, 0 passive translations, 3 active DOF |
 
 ## Findings
 
-Each finding has its full numbers and files in the findings JSON.
+Every finding below is watch. The full numbers and file paths are in the findings JSON.
 
-1. **G5: complexity hidden by the record (watch).**
-   - The cause: the row's mechanism block is a delta record (source + record_delta + complexity 18.5), so
-     tools/simplicity.py scores it as the anchor, 0.
-   - The board: tools/dash_build.py publishes that 0, and the user's score-vs-simplicity chart plots the design at
-     (93.35, 0), the golden-solution corner. The lead it is built on plots at 18.5.
-   - The measured effect: with the shown 0, this row dominates 33 of the other 36 verified rows. With its true 18.5 it
-     dominates 12.
-   - The same defect is on conecut-l2jog-knuckle-3r and lowarm-kphase-notch-knuckle-3r.
-   - Why the exo is not better: complexity is the user's second objective, and this design adds nothing on that axis.
-   - Why watch and not gamed: complexity is never scored, and the row's own complexity field is right.
-   - Action: write the lead's full mechanism record into the row, with the +0 delta.
-2. **T1: gains parked just past a cutoff (watch).**
-   - Bench: near1 19.92 -> 19.38 comes from pose 203 at 1.122 mm, 0.12 mm past the 1 mm line.
-   - Held: the -0.22 plain edge is pose 447, taken at 0.697 mm, so held near1 is identical (25.23 both). The near2 edge
-     (36.89 vs 37.10) is pose 599, which moves 1.867 -> 2.094 mm.
-   - The exo is genuinely better: 66 poses gain 0.04-0.98 mm, and only one pose loses (the -0.05 mm measurement
-     change).
-   - But a 0.4-0.9 mm gain is counted as a whole pose.
-   - Action: report the held edge as one pose taken at 0.70 mm, not as a held lead.
-3. **P1: chosen on the claim bench (watch).**
-   - The search benches cannot see the cut: 122 configs read 12.5 / near1 13.66, so the convergence gate passes
-     vacuously.
-   - The cut is placed at exact-bench pose 203's binder sample and sized on six exact claim-bench guard poses. The
-     bench-side gains (203, near1, the +0.35 probe, T5) are therefore in-sample.
-   - Held confirms the sign but not the size.
-4. **NEW-wrong-body-frame: the flat (watch).**
-   - The upper flat is modelled on link 1b, but it cuts link 2's boss and cap, which turn -14..+91 deg at J2.
-   - It is worth 0 here: fd 0 is identical pose for pose.
-   - The row still advertises it: the name, best_params fd 0.6, and the 264 +0.26..+0.37 table that
-     rows/lowarm-kphase-notch-knuckle-3r.json already cites as its enabler.
-   - Action: set fd 0 in best_params (or mark the flat refuted), and re-measure the flat in link 2's frame before any
-     row imports it.
-5. **R1: screen strings on a verified row (watch).**
-   - The verdict opens "SCREENED as a 0-cx ENABLER CELL". morphs.json shows gap / sweep_gap 12.5 (score 95.45, above
-     the 95 line) and empty alignment.
-   - Action: put the verified result and the chamfer-only config first.
-6. **S5: no held flood (watch).**
-   - The bench flood equals the lead's (measured here).
-   - The one pose the design gains anywhere (held 447) has no flood, and neither does the lead's held wear.
-7. **Carried from the lead's chain, all watch:** T3 (th 5.006 held; J3 dowel 1.33 deg window), M5 (K spring, R17 and
-   cuff twist not measured), G4 (m_sub at rest, not re-measured), NEW-strap-dilution (equal-strap gap 18.67 / 22.68),
-   NEW-ws-inband (workspace in-band 0.868, 0.832 at elevation 90-140, unscored), P2 (held leak in form from the lead's
-   knee re-centring, zero measured effect).
+1. **NEW-tie-order (new; the reason this audit was due).**
+   - **Evidence:** tools/dash_build.py line 551 sorts the rows by id. The page's board sort by gap is stable, and the
+     leader calc takes the first verified <=3-joint row without a ruling. The only exact tie among verified rows is
+     at 18.28: this row, the lead and the gamed conecut-l2jog. 'conecut-h2facet' sorts before 'conecut-knee'.
+   - **Why the exo is not better:** without the hand-written ruling, a row whose verified gain is zero would head the
+     board, at the shown complexity 0.
+   - **Action:** an explicit tie-break in the builder (proposal 1).
+2. **R1 (extended to the ruling text).**
+   - **Evidence:** the verdict still opens 'SCREENED'. gap / sweep_gap 12.5 (score 95.45) sit beside v_gap 18.28.
+     The ruling says 'buys no take', which is true on the bench; held out it buys pose 447, and 45 poses gain +0.60 mm
+     with none worse.
+   - **Why it matters:** nothing is inflated. The headline names the tie partner that is slightly worse at the skin,
+     and the built CAD lacks the chamfer.
+   - **Action:** put the verified result first in the verdict; say 'bench tie, held +1 take at 0.70 mm' in the ruling;
+     add the chamfer to user_conecut_knee.
+3. **G5.**
+   - **Evidence:** the board shows complexity 0 for a real 18.5. On 38 verified rows it dominates 33 of 37 at 0 and 12
+     at 18.5. The headline is fixed by the ruling; the simple board's chart (labelled, at (93.35, 0)) and the
+     Simplicity column are not.
+   - **Action:** expand the delta mechanism record.
+4. **T1.** Every scored gain lands just past a cutoff: 203 at 1.122 mm and 447 at 0.697 mm. The wearer is at least as
+   well off at every pose; the size of the gain is oversold.
+5. **P1.** The cut was sized on claim-bench guard poses; 122 flat configs.
+6. **NEW-wrong-body-frame.**
+   - The flat is modelled on link 1b but cuts link 2's boss and cap.
+   - It also cuts the cap skirt over the O18 spigot, leaving at most 0.4 mm.
+   - It is worth 0, yet still sits in best_params and in the name.
+7. **T3.** The fold margin is 5.006 held, and the J3 window is 1.33 deg (carried).
+8. **M5.** The text is corrected: twist was measured, 0.23 deg under the gate at the forward bound, and 11.73 deg with
+   plain friction. J3 raceway s0 0.3-0.40 (carried).
+9. **G4.** m_sub at rest is under 1 deg on 50 of 205 poses (measured by the skeptic on this row).
+10. **NEW-strap-dilution.** 18.67 / 22.68 at an equal strap count; held in-band 0.8999 (carried).
+11. **NEW-ws-inband.** The raised arm is the worst band and is unscored; the held probe was added in this audit.
+12. **P2.** Held drift-cloud use in the lead's knee, with zero effect (carried).
 
-Patterns walked and found absent:
-- **T2:** clip in-band is unchanged, and the 3-14 mm band gap is 18.33 vs 18.34.
-- **T4:** no bound moved.
-- **T5:** depth is lower than the lead's on both wears.
-- **S1:** held +3.88 is the lead's own drop.
-- **S2 / S6:** the 3011 added samples are contact-only and so conservative. The 80 rigid in-band samples are kept, 6 of
-  them clipped.
-- **S3:** the cut is sampled as a solid, including the chamfer's top edge.
-- **S4:** none.
-- **M1 / M2:** the chamfer is a real machining feature on link 1b's lower plate, and the O20 bearing stack is untouched.
-  The flat is the exception (finding 4).
-- **M3:** part-vs-part collisions keep the uncut cylinder, which is conservative.
-- **M4:** the knee spans 46.7 deg and dK 45.6 deg.
-- **P3:** two wears (flat / chamfer only), identical.
-- **P4:** no measurement file in the row's commits.
-- **R2 / R4:** v_gap on the board equals the verifier's.
-- **R3:** the c table is reported in full.
-- **G2 / G3:** nothing new; see M5.
+S5 is no longer a finding: the skeptic refuted it with the held flood (full 22.16 = static, 0 of 332 forced poses dropped).
+
+**Walked and not present:**
+- **T2:** the band read at 3-14 mm is 18.33 vs plain 18.28.
+- **T4:** no joint bound changed.
+- **T5:** this row's contacts are not deeper than the lead's.
+- **S1 / S2 / S3 / S4:** sampling checks ok. The chamfer region is solid-sampled, and the one drop (234, -0.05 mm)
+  comes from the denser sampling.
+- **M1:** this is the flat, under NEW-wrong-body-frame.
+- **M2 / M3:** the chamfer wall is 3.1 mm to the bore, and the cut adds no clash.
+- **M4:** the knee moves.
+- **P3:** held was worn once per config, and this audit did not re-wear the claim.
+- **P4:** no judge change.
+- **R2:** the refuted flat is under NEW-wrong-body-frame.
+- **R3:** see P1.
+- **R4:** the board's v_gap equals the verifier's.
+- **G1:** see T1.
+- **G2 / G3:** see M5.
 - **G6:** 3 active DOF.
-
-## Held re-wear
-
-I re-wore the held split through the model's own frozen_held() (docs/alignment/remeasure/conecut-h2facet-knuckle-3r_held.json).
-It reproduces the verifier exactly:
-
-| held reading | h2facet | lead (remeasure/conecut-knee-knuckle-3r_held.json) |
-|---|---|---|
-| gap | 22.16 | 22.38 |
-| reach (taken) | 0.6933 (862 taken) | 0.6922 (861) |
-| near1 | 25.23 (14 poses) | 25.23 (13) |
-| near2 | 36.89 (71) | 37.10 (71) |
-| near3 | 79.60 (207) | 83.12 (218) |
-| band read as 3-14 mm | 22.32 | 22.55 |
-| min metal on a taken pose | 0.325 mm | 0.325 mm |
-
-The coordinate spans are bit-identical. The plain held edge (-0.22) and the 1 mm reading (0.00) differ only because
-pose 447 is taken at 0.697 mm. The 3 mm reading (-3.52, 11 fewer poses under 3 mm) is the chamfer's real, wearer-side
-gain.
 
 ## Proposals (proposals only; none feeds this verdict)
 
-1. **Catalogue entry M6, "A feature modelled on a body it does not ride on."**
-   - Looks like: a cut, pad or relief is placed in one member's frame while the metal it removes belongs to a member
-     that turns relative to it (a boss or cap on the other side of a joint).
-   - Detect: for each geometry edit, list the R6 group of the edited samples' member and of the physical part. Flag
-     watch when they differ and the joint between them spans more than the feature's angular tolerance.
-   - Here: the h2facet flat, worth 0 on its own chain, already cited by another row as an enabler.
-   - Effect on verified rows: none measured. The only feature-edit rows are conecut-h2facet (0 change) and
-     conecut-l2jog (a planform cut on link 2's own profile, the right body per its row).
-2. **A record rule for delta rows** (a reporting fix, not a metric change). A row whose mechanism is
-   `{source, record_delta}` should be expanded to the source's full record before tools/simplicity.py scores it. Until
-   then, the complexity check should read a delta record's complexity as the source's.
-   - Measured effect: 3 verified rows change their shown complexity (conecut-h2facet 0 -> 18.5, conecut-l2jog 0 -> 18.5,
-     lowarm-kphase-notch 0 -> its source's). No gap changes.
-3. **A vacuous-search flag for the convergence gate.** When every configuration of a search reads the same number
-   (top-5 spread 0, n >= 20), the row should say "flat sweep: parameters chosen elsewhere" and name the bench they were
-   chosen on.
-   - Measured effect on verified rows: conecut-h2facet (122 flat configs). No gap changes.
+1. **An explicit tie-break for the headline (an instrument change; no score moves).** On an exact v_gap tie among
+   verified rows, the builder orders by:
+   1. fewer passive translations (CLAUDE.md's winner rule);
+   2. then the incumbent first (the earliest verification event), because a design replaces the lead only on a lower gap;
+   3. then id.
+   The headline names the tie. Measured on today's board: the only exact tie is 18.28, and the headline is unchanged
+   (conecut-knee). This row's ruling then becomes unnecessary.
+   - **Alternative, the user's call:** break ties on the held gap instead. That would put this row in the headline
+     (22.16 vs 22.38), which is the right answer for the wearer, but only once G5 is fixed so that the headline does
+     not read complexity 0.
+   - Proposed catalogue entry **R5, "Headline by name order on an exact tie"**:
+     - looks like: a derivative row with zero gain and an id that sorts earlier takes the headline;
+     - detect: count the verified <=3-joint unflagged rows within 0.005 of the headline gap that have no ruling, and
+       watch when there are two or more;
+     - here: 2 rows.
+2. **A record rule for delta rows** (carried from 16:31). Expand `{source, record_delta}` to the source's full record
+   before tools/simplicity.py scores it. Measured effect: 3 verified rows change their shown complexity (h2facet and
+   l2jog 0 -> 18.5; kphase-notch 0 -> its source's). No gap changes.
+3. **A vacuous-search flag for the convergence gate** (carried). Flag a search when every config reads the same number.
+   Effect: this row's 122 configs.
+4. **Catalogue entry M6, "a feature modelled on a body it does not ride on"** (carried). Here it is extended with the
+   wall check: report a cut's wall to every part it cuts (bore, cap skirt, thread), not just to the bore.
+5. **The continuity check should read the flood files on record** (from the skeptic's Missed 3). It should also read
+   `remeasure/<id>+*_flood_{bench,held}.json` `connected` blocks. Effect: this row's level stays watch (held knn), and
+   only the text changes.
+
+---
+*Skeptic section below kept from 2026-10-18 17:08 UTC (dated rule).*
 
 ## Skeptic (2026-10-18, 16:50-17:08 UTC)
 
