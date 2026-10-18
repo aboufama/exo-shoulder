@@ -117,10 +117,12 @@ H, so a foot at the zero end is a contact at 466 for any real height (extrapolat
    The whole hardware price is 466 (posterior foot in the skin); remove it and the claim is the ideal bound 13.21
    (score 95.20, margin 0.54).
 2. **The pinch point: the posterior foot at 466** (150, 105, -105: arm across the front at 105 elevation, full IR, phi
-   28 - the relay at 80 % travel). The judge's envsel table (259 / 264 / 265) did not contain this pose. Lever for the
-   next round, measured and E-free: put the foot UNDER the shell's zero end ([lo, lo + 4 mm] = [-1.65, +1.17] deg rel pad)
-   instead of beyond it: E's arm-frame azimuth starts at +6.44 (5.3 deg = ~7.6 mm of margin), so the jam rule is not at
-   risk; the skin at 466 there must be read (not done: time box).
+   28 - the relay at 80 % travel). The judge's envsel table (259 / 264 / 265) did not contain this pose. Candidate lever
+   for the next round: a foot UNDER the shell's zero end ([lo, lo + 4 mm] = [-1.65, +1.17] deg rel pad) is E-free (E's
+   arm-frame azimuth starts at +6.44, ~7.6 mm of margin) BUT the T-nut flange's posterior edge rests at lo + 2 mm
+   (carriage half-width + the 2 mm zero dowel), so a full-width inboard foot collides with the flange at rest; only side
+   feet outside the flange's s band (|s - s0| 5..6 mm, 1 mm wide each) or a foot proximal / distal of the shell band
+   would fit - each needs its own skin read at 466 (not done: time box).
 3. **The root moment.** A cantilever needs 243 N.mm at its root; a 12 x 4 mm Ti foot on a soft liner pad cannot carry it
    (61 N couple over 4 mm). The root must be a rigid arm-band anchor (a band plate posterior of the foot) - unmodelled
    metal, and the band's compliance tilts the shell (tip drop not priced). Without that anchor the design is the
@@ -155,7 +157,8 @@ which the torso at 119 kills (envsel 16.31).
 
 1. Verifier: re-run the claim from `verify/underpass-bridge-relay-4r/pick.json` (frozen rl_fix 81.307, hiE 49.0) and the
    held bench; T5 dumps are on file; read the 2 mm crown-set reading and the E envelope table on both benches.
-2. Inboard foot ([lo, lo + 4 mm], E-free by 5.3 deg): re-select on envsel, then one claim - the 466 contact is the whole
+2. Move the foot off 466 (side feet outside the T-nut flange's s band, or a foot beside the shell band in s; the plain
+   inboard foot collides with the flange at rest): re-select on envsel, then one claim - the 466 contact is the whole
    hardware price (13.74 -> 13.21 if it clears).
 3. Rigid root: model the arm-band anchor plate as metal and price the band compliance (tip drop vs the 1.2 mm clearance).
 4. Cliff probes owed: delta + 1.5 (the parent's bracket cliff), shell +0.5 mm.
