@@ -223,3 +223,76 @@ Files: model `docs/concepts/models/offset-shortcar-relay-4r.py`, outputs and T5 
 `docs/concepts/verify/offset-shortcar-relay-4r/` (controls_claimbench*, envsel_s1..s3, claim*, held*, diag_coil*,
 paired_held.json), sweep `docs/concepts/sweeps/offset-shortcar-relay-4r.json`, preview
 `docs/concepts/viz/concepts/offset-shortcar-relay-4r.js`.
+
+## Verification (independent skeptic, 2026-10-18)
+
+Verifier: `docs/concepts/verify/offset-shortcar-relay-4r-verify.py`. It imports the claim model unchanged, re-records the
+same prepared wear, and adds the checks the model leaves out. Outputs are in `docs/concepts/verify/offset-shortcar-relay-4r/verifier_*`.
+
+**Verdict: VERIFIED at v_gap 14.76** (frozen exact Bench(110,360), chain-only buildable gate; score 94.63). Held out:
+**17.77**. Both reproduce the claim to 0.00, and the extended checks find no new jam. The champion on the same bench is
+75.94 (the risley-turret verifier's champion with the kit checks and 1 mm clearance). This verifier's checks are a
+superset of that family's, and the extra relay checks do not apply to a design without a relay. Not refuted: there are
+4 active joints (inside the cap), 0 passive translations, and the relay coordinate is held by the CF coil on its zero
+dowel plus an own-angle PHI dowel. The 95 line is missed by 1.01 (13.75 needed).
+
+| reading (frozen exact) | gate (chain-only) | plain | near1 | ib14 chain / pooled | reach (ws taken) | contacts | jams |
+|---|---|---|---|---|---|---|---|
+| claim as modelled, re-run (`verifier_delta_probe` [0]) | 14.76 | 13.74 | 17.91 | 0.8898 / 0.9132 | 0.7944 (286) | 13 | 0 |
+| **with the extended checks X1 + X2 (`verifier_claim`)** | **14.76** | 13.74 | 17.91 | 0.8898 / 0.9132 | 0.7944 (286) | 13 | 0 (+0) |
+| held out, with X1 + X2 (`verifier_held`) | **17.77** | 16.64 | 22.62 | 0.8887 / 0.9123 | 0.7773 (740) | 43 | 0 (+0) |
+| diag: coil on a shell tab (`verifier_tab`) | 14.76 | 13.74 | 17.91 | 0.8898 / 0.9151 | 0.7944 | 13 (466 now the tab, -5.56) | 0 |
+| **red team: carriage rest delta 5.0 (+0.5 deg)** | **27.53** | 27.53 | 31.36 | 0.9130 / 0.9335 | 0.7278 (262), follow 0.8818 | 13 | **37** |
+| red team: bump 1.2 (0.2 mm build tolerance on the E strap; `verifier_bump12`) | 14.88 | 13.74 | 17.91 | 0.8886 / 0.9122 | 0.7944 (286) | 13 | 0 |
+
+Checks run:
+
+1. **Active DOF and determinacy.** The design has J1, J2 and J3 plus the relay, which is a counted 4th joint (4 is the
+   cap). The two knee pins sit outside the count, as the user ruled. There are no passive translations. The relay
+   carriage is a curved sliding pair: a rotation about a_r. It sits on its zero dowel under the coil, and the PHI end
+   is an own-angle dowel in the shell slot. The fold margin, read the H1 way on the claim bench, has a minimum `th`
+   margin of 5.000 deg over 396 taken poses (0 below 5); held: 5.000 over 942. Continuity: the PHI 35 flood
+   (153 of 154 relayed envelope nodes connected) drops 0 bench poses and 0 held poses.
+2. **Every part at its real size and sampled.** The shell (both faces), carriage, T-nut flange, bracket and coil
+   cylinder are all sampled at about 1 point per 4 mm2 and checked against the posed skin at every pose. This
+   verifier adds two checks the model omits:
+   - **X1:** every chain part, including the contact-only top and crown sets, is checked against every relay body,
+     bumped exactly as the model bumps it. The model checked the shell against 6 parts, the carriage against 4, the
+     bracket against the E strap and boss only, and the coil against 6.
+   - **X2:** the bracket's top face is sampled as well (the bracket is a 2 mm plate).
+
+   Result: **0 new jams** on the bench and 0 held. The closest non-adjacent pairs on taken poses are:
+   - E strap over the carriage, 1.002 mm;
+   - E strap over the shell, 1.115 mm;
+   - E strap vs the bracket, 1.45 mm (nearest sample - 1);
+   - every other part vs the coil, >= 13.8 mm.
+
+   The knee link, which is adjacent to the pad/bracket body through pin b, comes to 0.216 mm of the bracket (sampled,
+   - 1 mm) only on contact poses 343 (bench) and 1153 (held). On taken poses it stays >= 1.4 mm.
+3. **Honest pose-taking.** The same 13 contacts as proxtrack: the lead's 4 at phi 0, 8 relayed chain contacts, and
+   466 on the coil at -2.95 mm. All are counted. There are no jams laundered into lost poses, and the T5 per-pose dumps
+   reproduce the plain gap (bench 13.74 -> 13.73 recomputed, held 16.64 -> 16.63; `verifier_claim_perpose.json`,
+   `verifier_held_perpose.json`).
+4. **No bench artefact.** CB_EXACT=1 throughout, with one prepare per bench, and the claim bench was read only at the
+   pick. Selection was on envsel only: the pick beat delta 0 there by 0.03, and on the claim bench delta 4.5 is 0.50
+   worse than the delta-0 control (14.26). The pick was not tuned to the claim bench.
+
+Red-team findings (none breaks a rule; the first two make the number optimistic as a build):
+
+- **The cliff is 0.5 deg away, not ~1.5.** At delta 5.0 the bench reads **27.53**: 37 poses jam, including 13 clip
+  frames, so follow falls to 0.88. All 37 are the E strap over the carriage at 0.93 mm, not the bracket. The doc's
+  "the pick sits ~1.5 deg from that cliff" is wrong. Delta 4.5 is the last safe reading on a 0.5 deg step (0.7 mm of
+  carriage travel at R_t 80.6).
+- **The E-over-carriage clearance is at the rule floor on most poses.** The bump is 1.002, so the E strap sits
+  1.002 mm over the carriage. Of the taken poses, 112 on the bench (61 ws) and 270 held are under 1.1 mm; 182 bench
+  and 400 held are under 1.2 mm. This is legal under the 1 mm rule, but it leaves no build tolerance. The bump-1.2
+  reading prices a 0.2 mm tolerance: gate 14.88 (+0.12) with 0 jams, so the margin is cheap to buy (a build should
+  use about 1.2).
+- **The coil floats in the model.** It is an 8 x 8 cylinder 1 mm over the shell-top level beyond the zero end, with no
+  mount. Mounted on a shell tab (the shell continued at R_t to the coil's far edge, -8.3 deg) it costs 0.00: 466 goes
+  from -2.95 on the coil to -5.56 on the tab, with no new contact and no jam. A cheek mount from the shell's end face
+  to the coil axle is the lighter build, and the tab bounds it.
+- Inherited and unpriced here (from the buildability verifier of proxtrack, same PHI, axis and chain):
+  - 3 bistable relay poses on the claim bench, worth <= ~0.6-0.8 points;
+  - the R17 preload covers gravity only (no carriage friction or coil hysteresis);
+  - 4 DOF where the user prefers 3, so this is not a leader under the 3-DOF ruling, and the complexity is 52.5.
