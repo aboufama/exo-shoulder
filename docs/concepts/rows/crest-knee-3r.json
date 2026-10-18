@@ -51,10 +51,10 @@
  "inband10": 0.4383,
  "contact": 0.0171,
  "gap": 26.34,
- "n_configs": 1106,
- "verdict": "SCREENED, below the lens bar: best claimed frozen exact Bench(110,360) 32.84 (score 88.06; reach 0.6333, follow 1.0, ib14 0.8529, contact 0.0146; near-touch 1 mm 36.25) vs H1's verified 27.20 and the lens bar <= 21.0 / kill > 23.64. Every claimed cell (32.84, 33.23, 37.40) meets the lens's kill condition, but the convergence gate is not passed (near-touch gain over the last third 0.62 > 0.5 score points), so it is not called dead. Fast 26.34 / near-touch 28.74 on Bench(60,160). | ANTCREST re-dispatch 2026-10-18: antcrest basin (J1 bvec(55, 62), J3 wdir(98-104, +5..+18)) SCREENED, both kill lines met, gate not passed: best frozen exact Bench(110,360) 61.12 (score 77.77), held 64.60, fast 56.73 (575 configs, Bench(60,160) fast + |axial|>=150 gate; env cache unavailable locally). Hub 2 0.118 in band (kill <= 0.5); the fold gain (9-23 of 220) needs hub 2 at 74-98 mm off band, and the CMA optimum walks back to the crest J3 (wd 92-93, fold 42-56). The row's verified crest claim 32.84 stands.",
+ "n_configs": 2019,
+ "verdict": "SCREENED, below the lens bar: best claimed frozen exact Bench(110,360) 32.84 (score 88.06; reach 0.6333, follow 1.0, ib14 0.8529, contact 0.0146; near-touch 1 mm 36.25) vs H1's verified 27.20 and the lens bar <= 21.0 / kill > 23.64. Every claimed cell (32.84, 33.23, 37.40) meets the lens's kill condition, but the convergence gate is not passed (near-touch gain over the last third 0.62 > 0.5 score points), so it is not called dead. Fast 26.34 / near-touch 28.74 on Bench(60,160). | ANTCREST re-dispatch 2026-10-18: antcrest basin (J1 bvec(55, 62), J3 wdir(98-104, +5..+18)) SCREENED, both kill lines met, gate not passed: best frozen exact Bench(110,360) 61.12 (score 77.77), held 64.60, fast 56.73 (575 configs, Bench(60,160) fast + |axial|>=150 gate; env cache unavailable locally). Hub 2 0.118 in band (kill <= 0.5); the fold gain (9-23 of 220) needs hub 2 at 74-98 mm off band, and the CMA optimum walks back to the crest J3 (wd 92-93, fold 42-56). The row's verified crest claim 32.84 stands. | RE-DISPATCH 2 2026-10-18: JOGGLED knee link (cx 0, 0 passive translations) claimed, UNVERIFIED: frozen exact Bench(110,360) 31.5 (score 88.55; reach 0.6278, ib14 0.8719, contact 0.0147), held out 28.45, fast 22.02 / near-touch 24.41; vs the verified flat claim 32.84 / held 29.81. Control at the same parameters: flat knee + pin-a stack rule 32.5 frozen at the J4 point (joggle 31.43), flat knee as verified jams (136 fast). Joggle gate passed (near-touch 0.58 / 0.04 / 0.21, n 309). Antcrest continued to 1002 tries: best near-touch 56.57 (plain 55.3), gate 0.51 / 0.51 / 0.51 (last third short by 0.01; valid-only passes); stays screened, both kill lines met.",
  "limiter": "the crest's fold gain is paid back: J3's crest azimuth wa trades fold (48 -> 16-24 of 220 from wa -20 to 0) for J3-window stops (5 -> 17) and member-3 in band; total losses stay 48-55 of 220 vs H1's 51. At the fold-free end the single knee level tr puts the E boss and the arm pad over skins of different height (boss 0.43 / pad 0.85, or boss 0.88 / pad 0.04 in band), knee link 0.29-0.63. Big bench: fold 92 of 470, J3 window 30, |axial| >= 150 ws 5/27 taken (22 fold).",
- "note": "Model: the verified pin-knee model unchanged + link 2 flying over the whole member 3 + a J3 own-angle stop (frozen window 265.6 + 239.5 deg) + MR63ZZ knee pins (stk 6.0) + ang_min >= 25.22. Local CMA (farm closed), 531 configs over 5 runs (C1 / C3 starts, small-step CMA, a wa [-6, 8] run at the fold-free end). Frozen exact needs 4-6 min per cell here. H1 through the same code 23.64 fast. Gate (near-touch, score points): 0.93 / 0.62 / 0.93 (fails the last-third rule by 0.12). Next lever (unmeasured): a joggled knee link so pin a's boss and pin b's pad sit at their own levels at the fold-free end; upside bounded by fast reach 0.70-0.71 there (~21 fast if member 3 reached 0.90 in band), likely ~25-27 frozen, i.e. not the <= 21 bar. | VERIFIED 2026-10-18 (independent verifier, local exact, docs/concepts/verify/crest-knee-3r.py): frozen exact Bench(110,360) 32.84 reproduced to the digit (reach 0.6333, follow 1.0, ib14 0.8529, ib10 0.4431, contact 0.0146 = 5 poses, depth sum 6.40 mm, deepest -2.77); the pin-knee verifier's extra checks (independent 3D closure <= 0.023 deg, knee vs hub 3 upper, E boss vs hubs / L1 / L2) remove 0 poses; J3 window, knee window [25.22, 154.78], th margin (6.23 bench / 5.33 held) all hold; continuity flood on the full 1432-pose grid with the J3 window: 0 islands, 0 bench poses dropped. Held out 29.81 (reach 0.6667, ib14 0.8521, contact 0.0169 = 6 poses). Near-touch 1 mm 36.25 / held 35.39. CHAMPION same bench and protocol 64.93 (fold margin 5; 66.97 at margin 10 through the pin-knee verifier, 75.94 risley checks): not refuted. Not a leader: 5.64 behind H1 27.20 and 14.56 behind the lead 18.28; overhead ws reach 5/28. | ANTCREST re-dispatch 2026-10-18: frozen exact Bench(110,360) 61.12 (fast 56.73), gate {'objective': 'near-touch gap + 2 per |axial|>=150 contact pose', 'n': 575, 'best_obj': 57.98, 'gain_half_score': 3.61, 'gain_third_score': 1.59, 'top5_spread_score': 1.24, 'plain': {'gain_half_score': 2.71, 'gain_third_score': 1.59, 'top5_spread_score': 1.06}, 'passed': False}; details in antcrest_2026_10_18.",
+ "note": "Model: the verified pin-knee model unchanged + link 2 flying over the whole member 3 + a J3 own-angle stop (frozen window 265.6 + 239.5 deg) + MR63ZZ knee pins (stk 6.0) + ang_min >= 25.22. Local CMA (farm closed), 531 configs over 5 runs (C1 / C3 starts, small-step CMA, a wa [-6, 8] run at the fold-free end). Frozen exact needs 4-6 min per cell here. H1 through the same code 23.64 fast. Gate (near-touch, score points): 0.93 / 0.62 / 0.93 (fails the last-third rule by 0.12). Next lever (unmeasured): a joggled knee link so pin a's boss and pin b's pad sit at their own levels at the fold-free end; upside bounded by fast reach 0.70-0.71 there (~21 fast if member 3 reached 0.90 in band), likely ~25-27 frozen, i.e. not the <= 21 bar. | VERIFIED 2026-10-18 (independent verifier, local exact, docs/concepts/verify/crest-knee-3r.py): frozen exact Bench(110,360) 32.84 reproduced to the digit (reach 0.6333, follow 1.0, ib14 0.8529, ib10 0.4431, contact 0.0146 = 5 poses, depth sum 6.40 mm, deepest -2.77); the pin-knee verifier's extra checks (independent 3D closure <= 0.023 deg, knee vs hub 3 upper, E boss vs hubs / L1 / L2) remove 0 poses; J3 window, knee window [25.22, 154.78], th margin (6.23 bench / 5.33 held) all hold; continuity flood on the full 1432-pose grid with the J3 window: 0 islands, 0 bench poses dropped. Held out 29.81 (reach 0.6667, ib14 0.8521, contact 0.0169 = 6 poses). Near-touch 1 mm 36.25 / held 35.39. CHAMPION same bench and protocol 64.93 (fold margin 5; 66.97 at margin 10 through the pin-knee verifier, 75.94 risley checks): not refuted. Not a leader: 5.64 behind H1 27.20 and 14.56 behind the lead 18.28; overhead ws reach 5/28. | ANTCREST re-dispatch 2026-10-18: frozen exact Bench(110,360) 61.12 (fast 56.73), gate {'objective': 'near-touch gap + 2 per |axial|>=150 contact pose', 'n': 575, 'best_obj': 57.98, 'gain_half_score': 3.61, 'gain_third_score': 1.59, 'top5_spread_score': 1.24, 'plain': {'gain_half_score': 2.71, 'gain_third_score': 1.59, 'top5_spread_score': 1.06}, 'passed': False}; details in antcrest_2026_10_18. | RE-DISPATCH 2: model JogModel (kj=1) in docs/concepts/models/crest-knee-3r.py; the verifier harness must build CK.JogModel when kj=1 (scratchpad claim3.py sets V.CK.Model = JogModel); per-pose dumps docs/alignment/remeasure/crest-knee-3r-joggle_{bench,held}_perpose.json; best_params_joggle holds the claimed configuration; best_params / v_* stay the verified flat cell.",
  "gap_near1_fast": 28.74,
  "best_params": {
   "az1": 106.3227,
@@ -1360,5 +1360,691 @@
   },
   "verdict": "antcrest basin (J1 bvec(55, 62), J3 wdir(98-104, +5..+18)) SCREENED, both kill lines met, gate not passed: best frozen exact Bench(110,360) 61.12 (score 77.77), held 64.60, fast 56.73 (575 configs, Bench(60,160) fast + |axial|>=150 gate; env cache unavailable locally). Hub 2 0.118 in band (kill <= 0.5); the fold gain (9-23 of 220) needs hub 2 at 74-98 mm off band, and the CMA optimum walks back to the crest J3 (wd 92-93, fold 42-56). The row's verified crest claim 32.84 stands.",
   "doc": "docs/concepts/crest-knee-3r.md section 'Round-14 re-dispatch: the ANTCREST basin'"
+ },
+ "redispatch2_2026_10_18": {
+  "t": "2026-10-18T08:17:09Z",
+  "what": "re-dispatch 2 after the container restart: (1) antcrest CMA continued (ac-C5 21, ac-C6 405 tries); (2) the row's named next lever, a JOGGLED knee link (kj=1: E boss at tr_a, arm pad at tr_b, machined Ti knee link stepping between them; kinematics unchanged; cx 0) with the pin-a stack rule (knee underside >= E-strap top + 0.15 within 8.5 mm of pin a), CMA re-fit from 8 starts (J4 238, J5 71 tries); controls at the same parameters",
+  "search_bench": "Bench(60,160) fast (the env cache does not exist locally: no part file survived; farm closed)",
+  "joggle_best": {
+   "params": {
+    "az1": 103.4567,
+    "el1": 63.8099,
+    "az2": 28.5495,
+    "el2": 48.6809,
+    "wd": 89.875,
+    "wa": -3.5556,
+    "b3": 0.314,
+    "lE": 71.6198,
+    "lc": 25.2612,
+    "phiE": -9.5692,
+    "phib": -88.5186,
+    "ang_min": 26.6396,
+    "h2cap": 69.7595,
+    "j3stop": 1,
+    "j3stop_margin": 1.3224,
+    "fly": 1,
+    "stk": 6.0,
+    "kj": 1
+   },
+   "fast": {
+    "gap": 22.02,
+    "gap_nt": 24.41,
+    "reach": 0.7125,
+    "follow": 1.0,
+    "inband14": 0.873,
+    "inband10": 0.4409,
+    "contact": 0.0057,
+    "why": {
+     "fold": 29,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "j3stop": 14,
+     "skin": 1,
+     "parts": 2,
+     "contact": 0
+    },
+    "parts": {
+     "hub1": 0.971,
+     "hub2": 0.981,
+     "hub3": 0.889,
+     "E": 0.851,
+     "boss": 0.896,
+     "pad": 0.863,
+     "knee": 0.656,
+     "L1": 0.945,
+     "L2": 0.89
+    }
+   },
+   "frozen_exact_bench": {
+    "gap": 31.5,
+    "reach": 0.6278,
+    "follow": 1.0,
+    "inband14": 0.8719,
+    "inband10": 0.4475,
+    "contact": 0.0147,
+    "near1": 34.08,
+    "why": {
+     "fold": 87,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "j3stop": 24,
+     "skin": 0,
+     "parts": 18,
+     "contact": 5
+    },
+    "contacts": 5,
+    "contact_depth_sum": -5.15,
+    "deepest": -1.96,
+    "th_margin_min": 5.085,
+    "overhead": {
+     "total": 28,
+     "taken": 7,
+     "lost_why": {
+      "": 0,
+      "j3stop": 8,
+      "fold": 10,
+      "contact": 3
+     }
+    },
+    "axial150": {
+     "total": 27,
+     "taken": 5,
+     "lost_why": {
+      "": 0,
+      "fold": 22
+     }
+    },
+    "removed_by_verifier_checks": 0,
+    "tr_a_b": [
+     66.08,
+     62.89
+    ],
+    "model_class": "JogModel",
+    "parts_ib14": {
+     "hub1": 0.973,
+     "hub2": 0.983,
+     "hub3": 0.887,
+     "E": 0.846,
+     "boss": 0.899,
+     "pad": 0.866,
+     "knee": 0.656,
+     "L1": 0.946,
+     "L2": 0.885
+    },
+    "extra": {
+     "closure_max": {
+      "hub3c": 0.0,
+      "rot3_axis": 0.0165,
+      "pin_a": 0.0,
+      "pin_b": 0.0,
+      "knee_rot_axis": 0.0233,
+      "arm_rot": 0.0
+     },
+     "closure_bad_poses": 0,
+     "knee_vs_hub3_upper_bad": 0,
+     "boss_bad": 0
+    }
+   },
+   "held_out": {
+    "gap": 28.45,
+    "reach": 0.65,
+    "follow": 1.0,
+    "inband14": 0.8713,
+    "inband10": 0.4459,
+    "contact": 0.0058,
+    "near1": 33.28,
+    "why": {
+     "fold": 83,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "j3stop": 28,
+     "skin": 0,
+     "parts": 13,
+     "contact": 2
+    },
+    "contacts": 2,
+    "contact_depth_sum": -2.04,
+    "deepest": -1.42,
+    "th_margin_min": 5.502,
+    "overhead": {
+     "total": 26,
+     "taken": 8,
+     "lost_why": {
+      "": 0,
+      "j3stop": 7,
+      "fold": 11
+     }
+    },
+    "axial150": {
+     "total": 29,
+     "taken": 8,
+     "lost_why": {
+      "": 0,
+      "fold": 21
+     }
+    },
+    "removed_by_verifier_checks": 0,
+    "tr_a_b": [
+     66.08,
+     62.89
+    ],
+    "model_class": "JogModel",
+    "parts_ib14": {
+     "hub1": 0.973,
+     "hub2": 0.981,
+     "hub3": 0.889,
+     "E": 0.844,
+     "boss": 0.9,
+     "pad": 0.866,
+     "knee": 0.653,
+     "L1": 0.946,
+     "L2": 0.885
+    },
+    "extra": {
+     "closure_max": {
+      "hub3c": 0.0,
+      "rot3_axis": 0.0152,
+      "pin_a": 0.0,
+      "pin_b": 0.0,
+      "knee_rot_axis": 0.0216,
+      "arm_rot": 0.0
+     },
+     "closure_bad_poses": 0,
+     "knee_vs_hub3_upper_bad": 0,
+     "boss_bad": 0
+    }
+   }
+  },
+  "joggle_j4_claim": {
+   "fast_gap": 23.31,
+   "fast_nt": 24.51,
+   "frozen_exact_bench": {
+    "gap": 31.43,
+    "reach": 0.6222,
+    "follow": 1.0,
+    "inband14": 0.8782,
+    "inband10": 0.4559,
+    "contact": 0.0147,
+    "near1": 32.57,
+    "why": {
+     "fold": 92,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "j3stop": 24,
+     "skin": 0,
+     "parts": 15,
+     "contact": 5
+    },
+    "contacts": 5,
+    "contact_depth_sum": -4.34,
+    "deepest": -1.77,
+    "th_margin_min": 5.623,
+    "overhead": {
+     "total": 28,
+     "taken": 7,
+     "lost_why": {
+      "j3stop": 8,
+      "": 0,
+      "fold": 10,
+      "contact": 3
+     }
+    },
+    "axial150": {
+     "total": 27,
+     "taken": 5,
+     "lost_why": {
+      "": 0,
+      "fold": 22
+     }
+    },
+    "removed_by_verifier_checks": 0,
+    "tr_a_b": [
+     65.19,
+     64.03
+    ],
+    "model_class": "JogModel",
+    "parts_ib14": {
+     "hub1": 0.97,
+     "hub2": 0.987,
+     "hub3": 0.887,
+     "E": 0.781,
+     "boss": 0.859,
+     "pad": 0.92,
+     "knee": 0.733,
+     "L1": 0.959,
+     "L2": 0.908
+    },
+    "extra": {
+     "closure_max": {
+      "hub3c": 0.0,
+      "rot3_axis": 0.0165,
+      "pin_a": 0.0,
+      "pin_b": 0.0,
+      "knee_rot_axis": 0.0233,
+      "arm_rot": 0.0
+     },
+     "closure_bad_poses": 0,
+     "knee_vs_hub3_upper_bad": 0,
+     "boss_bad": 0
+    }
+   },
+   "held_out": {
+    "gap": 27.83,
+    "reach": 0.6472,
+    "follow": 1.0,
+    "inband14": 0.8774,
+    "inband10": 0.4543,
+    "contact": 0.0029,
+    "near1": 31.23,
+    "why": {
+     "fold": 85,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "j3stop": 28,
+     "skin": 0,
+     "parts": 13,
+     "contact": 1
+    },
+    "contacts": 1,
+    "contact_depth_sum": -1.58,
+    "deepest": -1.58,
+    "th_margin_min": 5.613,
+    "overhead": {
+     "total": 26,
+     "taken": 8,
+     "lost_why": {
+      "": 0,
+      "j3stop": 7,
+      "fold": 11
+     }
+    },
+    "axial150": {
+     "total": 29,
+     "taken": 8,
+     "lost_why": {
+      "": 0,
+      "fold": 21
+     }
+    },
+    "removed_by_verifier_checks": 0,
+    "tr_a_b": [
+     65.19,
+     64.03
+    ],
+    "model_class": "JogModel",
+    "parts_ib14": {
+     "hub1": 0.97,
+     "hub2": 0.985,
+     "hub3": 0.89,
+     "E": 0.778,
+     "boss": 0.862,
+     "pad": 0.925,
+     "knee": 0.729,
+     "L1": 0.959,
+     "L2": 0.906
+    },
+    "extra": {
+     "closure_max": {
+      "hub3c": 0.0,
+      "rot3_axis": 0.0152,
+      "pin_a": 0.0,
+      "pin_b": 0.0,
+      "knee_rot_axis": 0.0215,
+      "arm_rot": 0.0
+     },
+     "closure_bad_poses": 0,
+     "knee_vs_hub3_upper_bad": 0,
+     "boss_bad": 0
+    }
+   }
+  },
+  "controls_at_j4": {
+   "flat_knee_as_verified": {
+    "fast_gap": 136.08,
+    "note": "kj=0: 125 poses jam knee-E (tr 64.4 sits under the E strap end)"
+   },
+   "flat_knee_plus_stack_rule": {
+    "fast_gap": 24.39,
+    "frozen_exact_bench": {
+     "gap": 32.5,
+     "reach": 0.6222,
+     "follow": 1.0,
+     "inband14": 0.8675,
+     "inband10": 0.4381,
+     "contact": 0.0147,
+     "near1": 33.64,
+     "why": {
+      "fold": 92,
+      "slide": 0,
+      "flip": 0,
+      "closure": 0,
+      "j3stop": 24,
+      "skin": 0,
+      "parts": 15,
+      "contact": 5
+     },
+     "contacts": 5,
+     "contact_depth_sum": -4.34,
+     "deepest": -1.77,
+     "th_margin_min": 5.623,
+     "overhead": {
+      "total": 28,
+      "taken": 7,
+      "lost_why": {
+       "contact": 3,
+       "": 0,
+       "j3stop": 8,
+       "fold": 10
+      }
+     },
+     "axial150": {
+      "total": 27,
+      "taken": 5,
+      "lost_why": {
+       "": 0,
+       "fold": 22
+      }
+     },
+     "removed_by_verifier_checks": 0,
+     "tr_a_b": [
+      65.19,
+      65.19
+     ],
+     "model_class": "JogModel",
+     "parts_ib14": {
+      "hub1": 0.97,
+      "hub2": 0.987,
+      "hub3": 0.887,
+      "E": 0.781,
+      "boss": 0.859,
+      "pad": 0.884,
+      "knee": 0.668,
+      "L1": 0.959,
+      "L2": 0.908
+     },
+     "extra": {
+      "closure_max": {
+       "hub3c": 0.0,
+       "rot3_axis": 0.0165,
+       "pin_a": 0.0,
+       "pin_b": 0.0,
+       "knee_rot_axis": 0.0233,
+       "arm_rot": 0.0
+      },
+      "closure_bad_poses": 0,
+      "knee_vs_hub3_upper_bad": 0,
+      "boss_bad": 0
+     }
+    }
+   },
+   "joggle": {
+    "fast_gap": 23.31,
+    "frozen_exact_bench_gap": 31.43
+   },
+   "lesson": "the joggle itself is worth ~1.07 (fast 1.08, frozen exact 32.50 -> 31.43); the rest of the gain over the old flat best comes from the pin-a stack rule, which opens a seat / knee region the flat fit jams"
+  },
+  "antcrest_continuation": {
+   "best": {
+    "k": 1602,
+    "run": "ac-C6",
+    "gap": 55.3,
+    "gap_nt": 56.57,
+    "reach": 0.6375,
+    "ib14": 0.7119,
+    "contact": 0.0191
+   },
+   "gate_all": {
+    "n": 1002,
+    "best": 56.57,
+    "gain_half": 0.51,
+    "gain_third": 0.51,
+    "top5_spread": 0.51,
+    "passed": false
+   },
+   "gate_valid_only": {
+    "n": 646,
+    "best": 56.57,
+    "gain_half": 0.51,
+    "gain_third": 0.05,
+    "top5_spread": 0.51,
+    "passed": true
+   }
+  },
+  "gates": {
+   "antcrest (ac-*)": {
+    "nt": {
+     "n": 1002,
+     "best": 56.57,
+     "gain_half": 0.51,
+     "gain_third": 0.51,
+     "top5_spread": 0.51,
+     "passed": false
+    },
+    "plain": {
+     "n": 1002,
+     "best": 55.03,
+     "gain_half": 0.62,
+     "gain_third": 0.62,
+     "top5_spread": 0.28,
+     "passed": false
+    },
+    "obj": {
+     "n": 1002,
+     "best": 56.57,
+     "gain_half": 0.51,
+     "gain_third": 0.51,
+     "top5_spread": 0.51,
+     "passed": false
+    },
+    "valid_only_nt": {
+     "n": 646,
+     "best": 56.57,
+     "gain_half": 0.51,
+     "gain_third": 0.05,
+     "top5_spread": 0.51,
+     "passed": true
+    },
+    "best_nt": {
+     "k": 1602,
+     "run": "ac-C6",
+     "gap": 55.3,
+     "gap_nt": 56.57,
+     "reach": 0.6375,
+     "ib14": 0.7119,
+     "contact": 0.0191
+    },
+    "best_plain": {
+     "k": 1637,
+     "run": "ac-C6",
+     "gap": 55.03,
+     "gap_nt": 57.57,
+     "reach": 0.6438,
+     "ib14": 0.7019,
+     "contact": 0.0127
+    }
+   },
+   "crest flat (first screen + W2)": {
+    "nt": {
+     "n": 554,
+     "best": 28.74,
+     "gain_half": 0.93,
+     "gain_third": 0.54,
+     "top5_spread": 0.62,
+     "passed": false
+    },
+    "plain": {
+     "n": 554,
+     "best": 25.64,
+     "gain_half": 0.72,
+     "gain_third": 0.72,
+     "top5_spread": 0.72,
+     "passed": false
+    },
+    "obj": {
+     "n": 554,
+     "best": 25.64,
+     "gain_half": 0.72,
+     "gain_third": 0.72,
+     "top5_spread": 1.08,
+     "passed": false
+    },
+    "valid_only_nt": {
+     "n": 339,
+     "best": 28.74,
+     "gain_half": 0.93,
+     "gain_third": 0.62,
+     "top5_spread": 0.62,
+     "passed": false
+    },
+    "best_nt": {
+     "k": 438,
+     "run": "W",
+     "gap": 26.34,
+     "gap_nt": 28.74,
+     "reach": 0.7,
+     "ib14": 0.8537,
+     "contact": 0.0171
+    },
+    "best_plain": {
+     "k": 432,
+     "run": "W",
+     "gap": 25.64,
+     "gap_nt": 32.17,
+     "reach": 0.6937,
+     "ib14": 0.8671,
+     "contact": 0.0172
+    }
+   },
+   "crest joggled v1 (J1-J3, before the pin-a stack fix)": {
+    "nt": {
+     "n": 154,
+     "best": 28.08,
+     "gain_half": 0.0,
+     "gain_third": 0.0,
+     "top5_spread": 0.47,
+     "passed": true
+    },
+    "plain": {
+     "n": 154,
+     "best": 24.48,
+     "gain_half": 0.0,
+     "gain_third": 0.0,
+     "top5_spread": 0.59,
+     "passed": true
+    },
+    "obj": {
+     "n": 154,
+     "best": 28.08,
+     "gain_half": 0.0,
+     "gain_third": 0.0,
+     "top5_spread": 0.47,
+     "passed": true
+    },
+    "valid_only_nt": {
+     "n": 77,
+     "best": 28.08,
+     "gain_half": 0.0,
+     "gain_third": 0.0,
+     "top5_spread": 0.47,
+     "passed": true
+    },
+    "best_nt": {
+     "k": 1149,
+     "run": "J1",
+     "gap": 24.48,
+     "gap_nt": 28.08,
+     "reach": 0.7063,
+     "ib14": 0.8603,
+     "contact": 0.0114
+    },
+    "best_plain": {
+     "k": 1149,
+     "run": "J1",
+     "gap": 24.48,
+     "gap_nt": 28.08,
+     "reach": 0.7063,
+     "ib14": 0.8603,
+     "contact": 0.0114
+    }
+   },
+   "crest joggled v2 (J4, J5)": {
+    "nt": {
+     "n": 309,
+     "best": 24.41,
+     "gain_half": 0.58,
+     "gain_third": 0.04,
+     "top5_spread": 0.21,
+     "passed": true
+    },
+    "plain": {
+     "n": 309,
+     "best": 22.02,
+     "gain_half": 0.58,
+     "gain_third": 0.47,
+     "top5_spread": 0.45,
+     "passed": true
+    },
+    "obj": {
+     "n": 309,
+     "best": 24.41,
+     "gain_half": 0.58,
+     "gain_third": 0.04,
+     "top5_spread": 0.21,
+     "passed": true
+    },
+    "valid_only_nt": {
+     "n": 294,
+     "best": 24.41,
+     "gain_half": 0.55,
+     "gain_third": 0.04,
+     "top5_spread": 0.21,
+     "passed": true
+    },
+    "best_nt": {
+     "k": 1993,
+     "run": "J5",
+     "gap": 22.02,
+     "gap_nt": 24.41,
+     "reach": 0.7125,
+     "ib14": 0.873,
+     "contact": 0.0057
+    },
+    "best_plain": {
+     "k": 1993,
+     "run": "J5",
+     "gap": 22.02,
+     "gap_nt": 24.41,
+     "reach": 0.7125,
+     "ib14": 0.873,
+     "contact": 0.0057
+    }
+   }
+  },
+  "doc": "docs/concepts/crest-knee-3r.md section 'Round-14 re-dispatch 2'"
+ },
+ "best_params_joggle": {
+  "az1": 103.4567,
+  "el1": 63.8099,
+  "az2": 28.5495,
+  "el2": 48.6809,
+  "wd": 89.875,
+  "wa": -3.5556,
+  "b3": 0.314,
+  "lE": 71.6198,
+  "lc": 25.2612,
+  "phiE": -9.5692,
+  "phib": -88.5186,
+  "ang_min": 26.6396,
+  "h2cap": 69.7595,
+  "j3stop": 1,
+  "j3stop_margin": 1.3224,
+  "fly": 1,
+  "stk": 6.0,
+  "kj": 1
  }
 }
