@@ -234,47 +234,85 @@ def viz_export(par): return CC.viz_export(_clamp(dict(PARAMS, **par)))
 _GB = {}
 
 
-def _guard_setup():
-    if _GB: return _GB
-    old = os.environ.pop("CB_EXACT", None)
-    try: B1 = CB.Bench(n_clip=60, n_ws=160)
+def guard_bench(poses=GUARD, n_clip_keep=4):
+    """Bench(110,360) EXACT reduced to the guard poses (+ n_clip_keep clip frames so the report has clips): the frozen
+    wear of a chain at only these poses takes seconds; per-pose results are identical to the full bench (ws poses are
+    scored one by one)"""
+    old = os.environ.get("CB_EXACT"); os.environ["CB_EXACT"] = "1"; os.environ["CB_QUIET_EXACT"] = "1"
+    try: B = CB._Bench0(110, 360) if hasattr(CB, "_Bench0") else CB.Bench(110, 360)
     finally:
-        if old is not None: os.environ["CB_EXACT"] = old
-    P0 = _clamp(dict(PARAMS, c=0.0, fd=0.0, dense=0))
-    fit, M1, M, B, r = CC._frozen_model(P0, 110, 360)      # needs CB_EXACT=1 in the caller
-    _GB.update(M1=M1, M=M, B=B, r=r)
-    return _GB
+        if old is None: os.environ.pop("CB_EXACT")
+        else: os.environ["CB_EXACT"] = old
+    sel = [j for j in range(len(B.idx)) if B.kind[j] == "clip"][:n_clip_keep] + list(poses)
+    B.orig = sel; B.idx = np.asarray(B.idx)[sel]; B.kind = [B.kind[j] for j in sel]; B.clip = [B.clip[j] for j in sel]
+    B.poses = [B.poses[j] for j in sel]; B.res = [None] * len(sel); B._skin = {}; B._ex = {}; B._frames = {}; B.key = CB._key(B.idx)
+    return B
 
 
-def guard(plist, poses=GUARD):
-    """per config: the min distance at each guard pose of (a) every part of the lead (unchanged metal), (b) hub 2's
-    rigid disc and contact rings after the cut, (c) the cut solid; + the probe readings at 203"""
-    G = _guard_setup(); M, B = G["M"], G["B"]; mem2 = M.cyl["hub2"][0]
+def with_guard_bench(fn, poses=GUARD):
+    """run fn() with CB.Bench(110, 360) returning the reduced guard bench (any chain's frozen protocol)"""
+    if not hasattr(CB, "_Bench0"): CB._Bench0 = CB.Bench
+    orig = CB.Bench
+    def Bench(n_clip=60, n_ws=160, *a, **k):
+        if (n_clip, n_ws) == (110, 360): return guard_bench(poses)
+        return CB._Bench0(n_clip, n_ws, *a, **k)
+    CB.Bench = Bench
+    try: return fn()
+    finally: CB.Bench = orig
+
+
+def guard_on(M, B, plist, poses=None, apply=None):
+    """per config: the min distance at each guard pose (bench positions; B.orig maps them back) of (a) every part of the
+    chain except hub 2 (unchanged metal), (b) hub 2's rigid disc and contact rings after the cut, (c) the cut solid"""
+    apply = apply or apply_facet
+    poses = list(range(len(B.idx))) if poses is None else poses
+    poses = [j for j in poses if B.kind[j] == "ws"]
+    name = (lambda j: int(B.orig[j])) if hasattr(B, "orig") else (lambda j: int(j))
+    mem2 = M.cyl["hub2"][0]
     base_rigid = {nm: (m, X.copy()) for nm, (m, X) in M.rigid.items()}; base_contact = list(M.contact)
-    other = {}
+    other, binder = {}, {}
     for j in poses:
         dm = []
         for nm, (m, X) in base_rigid.items():
-            if m != mem2 and len(X): dm.append(float(B.dist(j, M.world(m, j, X)).min()))
-        for (m, X) in base_contact:
-            if m != mem2 and len(X): dm.append(float(B.dist(j, M.world(m, j, X)).min()))
-        other[j] = round(min(dm), 3)
+            if m != mem2 and len(X): dm.append((float(B.dist(j, M.world(m, j, X)).min()), "r:" + nm))
+        for ci, (m, X) in enumerate(base_contact):
+            if m != mem2 and len(X): dm.append((float(B.dist(j, M.world(m, j, X)).min()), "c%d" % ci))
+        d0 = min(dm); other[j] = round(d0[0], 3); binder[j] = d0[1]
     rows = []
     for P in plist:
-        Pc = _clamp(dict(PARAMS, **P)); M.rigid = dict(base_rigid); M.contact = list(base_contact)
-        info = apply_facet(M, Pc); row = dict(params={k: Pc[k] for k in FACET}, facet=info, poses={})
+        Pc = dict(FACET, **P); M.rigid = dict(base_rigid); M.contact = list(base_contact)
+        info = apply(M, Pc); row = dict(params={k: Pc[k] for k in FACET}, facet=info, poses={})
+        mem2_, cen2, ax2 = M.cyl["hub2"]; u, e, f = frame(ax2)
         for j in poses:
-            mr = float(B.dist(j, M.world(mem2, j, M.rigid["hub2"][1])).min())
-            cs = [float(B.dist(j, M.world(m, j, X)).min()) for (m, X) in M.contact if m == mem2 and len(X)]
-            row["poses"][j] = dict(hub2_rigid=round(mr, 3), hub2_walls=round(min(cs), 3) if cs else None, others=other[j],
-                                   pose_min=round(min([mr, other[j]] + cs), 3))
+            Xr = M.rigid["hub2"][1]; dr = B.dist(j, M.world(mem2, j, Xr)); mr = float(dr.min())
+            cs = []; az_min = None; best = 1e9
+            for (m, X) in M.contact:
+                if m == mem2 and len(X):
+                    d = B.dist(j, M.world(m, j, X)); k = int(np.argmin(d))
+                    cs.append(float(d[k]))
+                    if d[k] < best: best = float(d[k]); rr, aa, zz = to_cyl(X[k:k + 1], cen2, u, e, f); az_min = [round(float(rr[0]), 2), round(float(aa[0]), 1), round(float(zz[0]), 2)]
+            row["poses"][name(j)] = dict(hub2_rigid=round(mr, 3), hub2_walls=round(min(cs), 3) if cs else None, others=other[j], other_binder=binder[j],
+                                         pose_min=round(min([mr, other[j]] + cs), 3), hub2_min_at_r_az_z=az_min)
         m203 = row["poses"].get(203, {}).get("pose_min")
         if m203 is not None:
             row["p203"] = dict(plain=m203, probe01=round(m203 - 0.1, 3), probe02=round(m203 - 0.2, 3), prereg_035=bool(m203 >= 0.35))
-        row["t5_hub2"] = {j: row["poses"][j]["pose_min"] for j in poses if row["poses"][j]["pose_min"] < 0}
+        row["t5"] = {j: v["pose_min"] for j, v in row["poses"].items() if v["pose_min"] < 0}
+        row["t5_sum"] = round(-sum(row["t5"].values()), 3)
         rows.append(row)
-    rows.insert(0, dict(control_frozen={k: G["r"].get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}))
     M.rigid = base_rigid; M.contact = base_contact
+    return rows
+
+
+def guard(plist, poses=GUARD, full=False):
+    """the lead's chain: frozen protocol (fit Bench(60,160) fast) worn on the guard bench (full=True: the whole exact
+    Bench(110,360), which also re-measures the control claim)"""
+    P0 = _clamp(dict(PARAMS, c=0.0, fd=0.0, dense=0))
+    if full:
+        fit, M1, M, B, r = CC._frozen_model(P0, 110, 360); sel = [j for j in poses]
+    else:
+        fit, M1, M, B, r = with_guard_bench(lambda: CC._frozen_model(P0, 110, 360), poses); sel = None
+    rows = guard_on(M, B, [_clamp(dict(PARAMS, **P)) for P in plist], sel)
+    rows.insert(0, dict(control={k: r.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, full=full))
     return rows
 
 
@@ -285,7 +323,7 @@ if __name__ == "__main__":
         print(json.dumps(viz_export(par), default=float)); sys.exit()
     if mode == "guard":
         os.environ["CB_EXACT"] = "1"; os.environ["CB_QUIET_EXACT"] = "1"
-        t = time.time(); rows = guard(par if isinstance(par, list) else [par])
+        t = time.time(); rows = guard(par if isinstance(par, list) else [par], full=os.environ.get("H2F_FULL") == "1")
         out = dict(row=ID, rows=rows, secs=round(time.time() - t, 1))
         if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
         print(json.dumps(rows[0])); rows = rows[1:]

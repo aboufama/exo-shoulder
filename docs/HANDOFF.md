@@ -656,6 +656,9 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      14.02 plain, held 18.51), but the bump puts the pin-a boss ~5 mm inside the knee link at every pose. With the
      buildable stack it reads 17.46 (93.65), held 21.46: 0.82 / 0.92 better than the 3-joint lead, worse than freek
      polished, cx 52.5. The user was told (the blocker's option 2 best stays freek 94.1 verified / 94.4 polished).
+   - *14:00:* the blocker's option 1 (test the posteromedial J1 seat first) is answered: DEAD (fa4db10). The best frozen
+     exact is 202.93, with no honest drive at any seat in the box (the drive's PA is 75-88 deg there) and the metal off
+     the curved back. The user was told; options 2-4 remain (4th joint / front-clavicle seats / accept ~93-94).
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
