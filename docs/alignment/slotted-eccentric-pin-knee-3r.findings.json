@@ -1,0 +1,39 @@
+[
+ {
+  "key": "NEW-dishonest-sweep-best",
+  "level": "watch",
+  "reason": "The dashboard's 'Sweep best gap' for this design is 97.45 (score 64.56; docs/dashboard/data/morphs.json sweep_gap, sweep_inband14 0.2095). It is AUD-g9-2 (docs/concepts/sweeps/slotted-eccentric-pin-knee-3r.json k 1013, t 01:58), one of the death auditor's own CMA probes, and the model flagged it honest=false (ib14 0.21, collide 0.12, eccentric parts lifted out of band). tools/dash_build.py sweeps() never reads a configuration's honest flag or its penalised obj, so the dashboard shows a number the model itself rejected. It sits 56.04 below the best honest configuration (153.49) and 103.75 below the frozen exact 201.20. The same file also holds 9 configurations of a different mechanism, the locked control (lock=1, the plain 3R, stream 'paired', best 30.24). They are excluded only because they were logged at 01:13:30, before the 01:20 claim (passed_over rule); logged 7 minutes later, the eccentric's sweep best would read 30.24, the plain 3R's number. Repo-wide (tools/alignment_sweep_honesty.py, this audit), 10 of 98 designs show a dishonest sweep best. 4 of them sit more than 5 points below their best honest configuration: virtual-pole-4bar-j1 +85.06, slotted-eccentric-pin-knee-3r +56.04, virtual-pole-4bar-j2 +41.37, meridian-goniometer +7.50. None of the 10 is the sweep record (minarc 6.19) or near the top of the board. For this design the headline, claim and verified columns all read 153.49 / 201.20 first, so the 97.45 ranks it above no better design. That makes this watch, not gamed.",
+  "evidence": "docs/dashboard/data/morphs.json (slotted-eccentric-pin-knee-3r sweep_gap 97.45); docs/concepts/sweeps/slotted-eccentric-pin-knee-3r.json k 1013 (AUD-g9-2, honest false) and k 915-923 (stream paired, lock=1); tools/dash_build.py lines 188-209 and 224-250 (no honest / obj read); tools/alignment_sweep_honesty.py output in docs/alignment/slotted-eccentric-pin-knee-3r.md",
+  "proposed_catalogue_entry": "R5. A sweep best read from configurations the model rejected, or from another mechanism logged under the design's id. Detect: tools/alignment_sweep_honesty.py (dashboard sweep best vs best honest, obj-aware)."
+ },
+ {
+  "key": "S3",
+  "level": "watch",
+  "reason": "The row's name, family and mechanism.cuff_knee declare the pin-knee cuff: pins a and b, a knee link and an arm pad, 2 moving bodies. The model does not build them: member 3 is the kit neck in every arm of the comparison (docs/concepts/models/slotted-eccentric-pin-knee-3r.py lines 9-15; the re-wear's sampled groups are hub1-3, pinK, studG, link1, spoke, trk1-5, neck, crank, L2b and armG, with no cuff-knee group). So the measured 201.20 / 194.02 belongs to 'eccentric J2 + kit neck', not to the 'Pin knee 3R' in the name. The doc says so and argues the cuff is downstream of every eccentric part. Its own paired data show the kit neck is the pessimistic side: the kit-neck control at H1 reads 34.78 fast / 36.83 frozen, against the pin knee's 27.20 verified under its own harness. So the unsampled bodies do not flatter this number. They do need sampling before any pin-knee claim is made from this row.",
+  "evidence": "docs/concepts/rows/slotted-eccentric-pin-knee-3r.json mechanism.cuff_knee + name; docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json frozen.inband_member (16 groups, no cuff knee); docs/concepts/slotted-eccentric-pin-knee-3r.md 'Frozen exact'"
+ },
+ {
+  "key": "S2",
+  "level": "watch",
+  "reason": "In-band is sample-weighted at 0.604 (bench; 0.660 held), but three moving parts are mostly out of band (re-wear frozen.inband_member). Hub 2 is at 0.00: its fitted level is 71.2 mm from GH because hub 2 carries three layers (link 1 + track + crank, K above). The crank is at 0.36 (held 0.37) and L2b at 0.27 (held 0.43). A hub stack standing tens of millimetres above the 14 mm band is a bump the wearer feels at every pose, whatever its sample share. The kit records no per-part sample counts, so the sample-weighted versus part-weighted split cannot be computed. The design already scores 201.20, so this ranks it above nothing.",
+  "evidence": "docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json and _held.json frozen.inband_member; docs/concepts/slotted-eccentric-pin-knee-3r.md (hub 2 71.2 mm)"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Re-worn on Bench(110,360) exact, the frozen shape reproduces 201.20. Of its 71 taken poses, 7 have metal < 1 mm, 20 < 2 mm and 31 < 3 mm (min 0.089 mm). The near-touch gaps are 222.88 at 1 mm, 242.94 at 2 mm and 259.92 at 3 mm, so 41.74 points depend on the 0-2 mm shell. Held out: 3 / 15 / 21 of 76 taken poses, with 200.31 / 233.00 / 241.72. About 28 % of what the bench calls taken (bench) is metal within 2 mm of the skin, i.e. metal on a real arm. Report only under the user's 2026-10-17 ruling (2 mm is not a gate). The dominance check reads -182.92 plain and -208.10 at 2 mm against conecut-knee-knuckle-3r, so no ranking depends on it.",
+  "evidence": "docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json deep.*; _held.json deep.*; _bench_perpose.json / _held_perpose.json min_mm"
+ },
+ {
+  "key": "S5",
+  "level": "watch",
+  "reason": "No continuity flood is on file. The rule applies because K is a slaved passive coordinate (one closure branch, sk=+1) and the cuff knee is passive. Measured on the re-wear: K stays well clear of its branch point over every taken pose (psi min 72.68 deg bench / 71.31 held vs the rule's 15). The slot track's hard stop at th 74.0 sits where the wearer's arm rests: 82 of 110 clip frames and 72 of 128 workspace poses at elevation <= 30 (63 of 129 held) have th < 74, so the rest region is mostly outside the window. A flood can only lower the static reach of 0.181, so it cannot lift this design's rank. It is still owed before any claim of a connected 18 %: the wearer would have to reach the th >= 74 islands from a rest the exo blocks.",
+  "evidence": "docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json kin.psi_taken / kin.th_taken; _bench_perpose.json th per pose; row exact_frozen.frozen.window [74.0, 133.5]"
+ },
+ {
+  "key": "R1",
+  "level": "watch",
+  "reason": "The row's v_gap 201.20 (shown in the dashboard's 'Verified gap' column) is the screening agent's own frozen exact. There is no verifier file under docs/concepts/verify/ for this id, and the status is 'screened'. The number reproduces to the digit in the 02:08 death audit and in this audit's re-wear (tools/alignment_slotted_rewear.py: fit 188.47, Bench(110,360) exact 201.20, held 194.02). It is pessimistic (worse than the fast 153.49), so nothing is flattered. This is a labelling item only: a self-measured frozen number sits in the verified column.",
+  "evidence": "docs/concepts/rows/slotted-eccentric-pin-knee-3r.json v_gap / status / audit.reproduced; ls docs/concepts/verify/ | grep slotted-eccentric-pin-knee (none); docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json"
+ }
+]

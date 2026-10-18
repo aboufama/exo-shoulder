@@ -121,8 +121,13 @@ def run(rid, wear):
                source=f"tools/alignment_slotted_rewear.py: model {rid}.py unchanged (its own frozen(): fit Bench(60,160) fast, frozen levels), "
                       f"worn {'Bench(110,360)' if wear == 'bench' else 'held_bench(110,360) = tools/osn_polish.py held_bench'}")
     path = os.path.join(AA.REM, f"{rid}_{wear}.json"); json.dump(out, open(path, "w"), indent=1, default=float)
-    pp = dict(id=rid, wear=wear, gap=rep.get("gap"), mode=Bb.mode, idx=[int(x) for x in Bb.idx],
-              poses=[dict(i=i, kind=str(kind[i]), elev=float(el[i]), min_mm=mins[i], taken=bool(i in set(tk)), take_model=bool(take[i]),
+    if "knee" in g: deep.setdefault("coord_spans", {})["dK_deg_abs"] = _span(g["knee"], sel)   # K = the slaved knee hub's joint angle (deg)
+    out["parts_ib14"] = rep.get("inband_member")                                                 # fractions only (the kit records no counts)
+    json.dump(out, open(path, "w"), indent=1, default=float)
+    cs = set(cont); tks = set(tk)
+    pp = dict(id=rid, wear=wear, frozen=dict(gap=rep.get("gap")), mode=Bb.mode, idx=[int(x) for x in Bb.idx],
+              poses=[dict(i=i, kind=str(kind[i]), elev=float(el[i]), plane=float(Bb.poses[i]["plane"]), axial=float(Bb.poses[i]["axial"]),
+                          min_mm=mins[i], taken=bool(i in tks), contact=bool(i in cs), take_model=bool(take[i]),
                           th=None if "th" not in g else round(float(g["th"][i]), 3), mg=None if "mg" not in g else round(float(g["mg"][i]), 3),
                           knee=None if "knee" not in g else round(float(g["knee"][i]), 3)) for i in range(n)])
     json.dump(pp, open(os.path.join(AA.REM, f"{rid}_{wear}_perpose.json"), "w"), default=float)
