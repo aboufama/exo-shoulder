@@ -178,24 +178,36 @@ def ring_parts(M, G):
     """the link-2 cap-ring sector on hub 2 (member-2 home frame): groove layer (hmid -0.75 .. +0.75, the groove cut through it) + roof
     (to hub 2's upper boss F+UP+0.5, so the sector is one with link 2's upper boss); planform in polar (r, az) about u2: inner wall
     rho - GW/2 - RW .. outer r_out (the model's), az over the used groove +- 3 deg (the model's sector)"""
+    from scipy.spatial import cKDTree
     u2, bx, by = G["u2"], G["bx"], G["by"]; used = G["Kb"] <= G["lim"] + 1e-12
-    az, rho = G["az"][used], G["rho"][used]; o = np.argsort(az); az, rho = az[o], rho[o]
-    mono = bool(np.all(np.diff(G["az"][used]) * np.sign(G["az"][used][-1] - G["az"][used][0]) > -1e-9))
-    a0, a1 = float(az[0]) - math.radians(3), float(az[-1]) + math.radians(3); nA = max(60, int(math.degrees(a1 - a0) * 2))
-    A = np.linspace(a0, a1, nA); rc = np.interp(A, az, rho); ing = (A >= az[0] - 1e-9) & (A <= az[-1] + 1e-9)
-    r_out = float(G["r_out"]); hw = GW / 2
-    nodes = np.stack([rc - hw - RW, rc - hw, rc + hw, np.full(nA, r_out)], 1)        # (nA, 4)
+    az, rho = G["az"][used], G["rho"][used]
+    mono = bool(np.all(np.diff(az) * np.sign(az[-1] - az[0]) > -1e-9))
+    P2 = np.c_[rho * np.cos(az), rho * np.sin(az)]; Tp = cKDTree(P2)                    # the groove centreline (link 2 local, polar plane)
+    # the sector: the model samples the used groove azimuths +- 3 deg; a buildable ring closes the groove's round ends with the ring wall RW, i.e.
+    # asin((GW/2 + RW) / rho_end) + 0.5 deg past each end (the +-3 deg sector would cut the groove's end discs through: two pieces)
+    i0, i1 = int(np.argmin(az)), int(np.argmax(az)); hw = GW / 2
+    m0 = math.asin(min(1.0, (hw + RW) / float(rho[i0]))) + math.radians(0.5); m1 = math.asin(min(1.0, (hw + RW) / float(rho[i1]))) + math.radians(0.5)
+    a0, a1 = float(az.min()) - max(m0, math.radians(3)), float(az.max()) + max(m1, math.radians(3)); nA = max(80, int(math.degrees(a1 - a0) * 4))
+    A = np.linspace(a0, a1, nA); r_out = float(G["r_out"]); hw = GW / 2; rr = np.arange(DS.BORE_R - 1.0, r_out, 0.005)
+    glo, ghi, has = np.zeros(nA), np.zeros(nA), np.zeros(nA, bool)
+    for j, a in enumerate(A):                                                           # the groove's radial extent at this azimuth: points within hw of the path
+        d, _ = Tp.query(np.c_[rr * math.cos(a), rr * math.sin(a)]); inn = d < hw
+        if inn.any(): has[j] = True; glo[j], ghi[j] = rr[inn].min(), rr[inn].max()
+    jj = np.nonzero(has)[0]; glo[: jj[0]] = glo[jj[0]]; ghi[: jj[0]] = ghi[jj[0]]; glo[jj[-1] + 1:] = glo[jj[-1]]; ghi[jj[-1] + 1:] = ghi[jj[-1]]
+    rin = np.minimum(DS.BORE_R, glo - 0.15)
+    nodes = np.stack([rin, glo, ghi, np.full(nA, r_out)], 1)                           # (nA, 4)
     V2 = np.array([[r * math.cos(a), r * math.sin(a)] for a, row in zip(A, nodes) for r in row])
-    keep_g = np.ones((nA - 1, 3), bool); keep_g[:, 1] = ~(ing[:-1] & ing[1:])           # groove layer: the groove cell cut where the groove runs
-    keep_r = np.ones((nA - 1, 3), bool)
+    keep_g = np.ones((nA - 1, 3), bool); keep_g[:, 1] = ~(has[:-1] & has[1:])          # groove layer: the groove cell cut where the groove runs
+    keep_r = np.ones((nA - 1, 3), bool); rc = 0.5 * (glo + ghi)
     to3 = lambda h: (lambda P2: P2[:, :1] * bx + P2[:, 1:] * by + h * u2)
     lv = G["hmid"] - GD / 2; top = G["H2"] + UP + 0.5
     groove = extrude_map(V2, _quads_to_tris(nA, 4, keep_g), to3(lv), to3(lv + GD))
     roof = extrude_map(V2, _quads_to_tris(nA, 4, keep_r), to3(lv + GD), to3(max(top, lv + GD + ROOF)))
     info = dict(level_from_hub2_face_mm=[round(lv - G["H2"], 3), round(lv + GD - G["H2"], 3), round(max(top, lv + GD + ROOF) - G["H2"], 3)],
                 groove_mid_from_hub2_face_mm=round(G["hmid"] - G["H2"], 3), pitch_mm=[round(float(rho.min()), 3), round(float(rho.max()), 3)],
-                inner_wall_r_mm=round(float((rc - hw - RW).min()), 3), r_out_mm=round(r_out, 3), past_O20_mm=round(r_out - S.HUB_R, 3),
-                sector_deg=round(math.degrees(a1 - a0), 2), groove_az_deg=round(math.degrees(float(az[-1] - az[0])), 2), az_monotone=mono,
+                inner_wall_r_mm=round(float(rin.min()), 3), groove_r_mm=[round(float(glo[has].min()), 3), round(float(ghi[has].max()), 3)], r_out_mm=round(r_out, 3), past_O20_mm=round(r_out - S.HUB_R, 3),
+                sector_deg=round(math.degrees(a1 - a0), 2), model_sector_deg=round(math.degrees(float(az.max() - az.min())) + 6.0, 2),
+                end_margins_deg=[round(math.degrees(max(m0, math.radians(3))), 2), round(math.degrees(max(m1, math.radians(3))), 2)], groove_az_deg=round(math.degrees(float(az[-1] - az[0])), 2), az_monotone=mono,
                 drift_mm=round(float(np.abs(G["z"][used]).max()), 3), azimuth_deg=[round(math.degrees(a0), 2), round(math.degrees(a1), 2)],
                 note=("the groove's mid-plane sits at the crank pivot's level + 3.15 + glev along u2 (the model's rule); the pivot is "
                       f"{G['H2'] - float(M._scg['PV'] @ u2):.2f} mm below hub 2's face, so the groove layer lands at F+{lv - G['H2']:.2f}..F+{lv + GD - G['H2']:.2f}: "
@@ -210,9 +222,10 @@ def stage1_parts(M, G):
     al = F0 - A0; al = unit(al - (al @ u2) * u2); ac = np.cross(u2, al)
     L = float(np.linalg.norm((F0 - A0) - ((F0 - A0) @ u2) * u2))
     c = A0 + ((bot + top) / 2 - float(A0 @ u2)) * u2 + ((L + 1.5) - 1.0) / 2 * al
-    arm = REF.box(c, np.stack([al, ac, u2], 1), [L + 2.5, ARM_W, S1_T])
+    c = A0 + ((bot + top) / 2 - float(A0 @ u2)) * u2 + (SL.ARM_ROOT + L + 1.5) / 2 * al   # from ARM_ROOT (inside the O10 boss wall, bore free) to 1.5 past the pin
+    arm = REF.box(c, np.stack([al, ac, u2], 1), [L + 1.5 - SL.ARM_ROOT, ARM_W, S1_T])
     pin = REF.cyl(F0, u2, bot - float(F0 @ u2), (G["hmid"] + GD / 2 - 0.10) - float(F0 @ u2), r=PIN_D / 2)
-    return arm, pin, dict(arm_len_mm=round(L + 2.5, 2), arm_level_from_hub2_face_mm=[round(bot - G["H2"], 3), round(top - G["H2"], 3)], a_s=round(L, 3),
+    return arm, pin, dict(arm_len_mm=round(L + 1.5 - SL.ARM_ROOT, 2), arm_level_from_hub2_face_mm=[round(bot - G["H2"], 3), round(top - G["H2"], 3)], a_s=round(L, 3),
                           pin_from_hub2_face_mm=[round(bot - G["H2"], 3), round(G["hmid"] + GD / 2 - 0.10 - G["H2"], 3)],
                           pin_into_groove_mm=round(GD - 0.10, 2), crank_axis_at_arm_u2_level_mm=round(float(A0 @ u2) - G["H2"], 3))
 
@@ -250,12 +263,12 @@ def trim_arm(dg, G, zb, clr=0.3):
     T = cKDTree(G["Z"]); arc = dg["arc"]; keep = len(arc)
     while keep > 0:
         row = arc[keep - 1]; X = np.r_[row, row + T_LINK * row / np.linalg.norm(row, axis=1)[:, None]]
-        X = np.r_[X, 0.5 * (X[:-1] + X[1:])]
+        X = np.r_[X, 0.5 * (X[:-1] + X[1:])]; X = unit(X) * G["R0"]                   # on the nose path's sphere: the nose is a radial pin
         if float(T.query(X)[0].min()) > G["hw_in"] + clr: break
         keep -= 1
     psi = dg["psi"]                                                               # arc[k] <-> psi[k + 1]
     def ok(a):
-        row = dg["arc_row"](a); X = np.r_[row, row + T_LINK * row / np.linalg.norm(row, axis=1)[:, None]]; X = np.r_[X, 0.5 * (X[:-1] + X[1:])]
+        row = dg["arc_row"](a); X = np.r_[row, row + T_LINK * row / np.linalg.norm(row, axis=1)[:, None]]; X = np.r_[X, 0.5 * (X[:-1] + X[1:])]; X = unit(X) * G["R0"]
         return float(T.query(X)[0].min()) > G["hw_in"] + clr
     lo = psi[keep]; hi = psi[keep + 1] if keep + 1 < len(psi) else dg["beta"]
     for _ in range(30):
@@ -266,7 +279,7 @@ def trim_arm(dg, G, zb, clr=0.3):
     ext_save = SL.ARM_END; SL.ARM_END = 0.0
     try: m, info = SL.arm_mesh(dg2, zb)
     finally: SL.ARM_END = ext_save
-    Xs = np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, 6000, seed=17)[0]]
+    Xs = unit(np.r_[np.asarray(m.vertices), trimesh.sample.sample_surface_even(m, 6000, seed=17)[0]]) * G["R0"]
     info.update(arc_rows_kept=int(keep), arc_rows_model=int(len(arc)), arm_to_slot_path_mm=round(float(T.query(Xs)[0].min()), 3),
                 ends_at_beta_deg=round(math.degrees(dg2["beta"]), 3), note="the arc ends where its section clears the slot by >= 0.3 mm; the tip plate joins it")
     return m, info
@@ -384,7 +397,8 @@ def law_check(M, K, idx, dg):
             pin = R2.T @ (R9 @ G["F0"] + t9 - t2)
             out.append(dict(pose=int(i), state=int(K["state"][i]), q2_deg=round(q2, 3), dK_deg=round(dK, 3), dK_law_deg=round(want, 3),
                             err_deg=round(abs(dK - want), 4), slot_closure_mm=round(float(np.linalg.norm(nz - ref)), 4),
-                            groove_closure_mm=round(float(Tg.query(pin)[0]), 4)))
+                            groove_closure_mm=round(float(Tg.query(pin)[0]), 4),
+                            cam_closure_mm=round(max(float(np.linalg.norm(nz - ref)), float(Tg.query(pin)[0])), 4)))
     finally: M.Q, M.s, M.RS, M.X, M.K, M.q = old
     return out
 
@@ -513,11 +527,37 @@ def _drive_geom(M):
 SL.law_check, SL.slaved_decl, SL.law_geom, SL.drive_geom = _law_check, _slaved_decl, _law_geom, _drive_geom
 
 
+def patch_ring(dd):
+    """rewrite ONLY the two cap-ring parts of an existing build (exo.glb nodes, parts_full.json, build.json stack.drive.ring) to the current
+    ring_parts (the first build cut its +-3 deg sector through the groove's end discs: groove layer in two pieces)"""
+    M, _ = fit(); G = desmo_geom(M); groove, roof, rinfo = ring_parts(M, G)
+    sc = trimesh.load(os.path.join(dd, "exo.glb")); PF = json.load(open(os.path.join(dd, "parts_full.json"))); new = {}
+    for key, mesh in (("drive cap-ring groove layer", groove), ("drive cap-ring roof", roof)):
+        old = [g for g in sc.geometry if g.split("|")[1].startswith(key)]; assert len(old) == 1, old
+        gp, nm, k = old[0].split("|")[:3]
+        nm2 = nm.replace("99.9 deg", f"{rinfo['sector_deg']:.1f} deg") if "groove layer" in key else nm
+        node = next(n for n in sc.graph.nodes_geometry if sc.graph[n][1] == old[0]); T_ = sc.graph[node][0]; assert np.allclose(T_, np.eye(4)), T_
+        sc.delete_geometry(old[0]); nn = f"{gp}|{nm2}|{k}"; sc.add_geometry(mesh, node_name=nn, geom_name=nn); new[key] = nm2
+        for p in PF["parts"]:
+            if p["name"].startswith(key):
+                mm = mesh.copy(); mm.merge_vertices(); vol = abs(mm.volume); rho_ = BASE.STEEL if "groove" in key else BASE.TI
+                p.update(name=nm2, vol_cm3=round(vol / 1000, 3), mass_g=round(vol / 1000 * rho_, 2), valid=bool(mm.is_watertight and mm.is_volume),
+                         pieces=int(len(mm.split(only_watertight=False))), faces=len(mesh.faces))
+    sc.export(os.path.join(dd, "exo.glb")); json.dump(PF, open(os.path.join(dd, "parts_full.json"), "w"), indent=1)
+    BJ = json.load(open(os.path.join(dd, "build.json"))); BJ["stack"]["drive"]["ring"] = rinfo
+    BJ["ring_patch"] = dict(note="cap-ring sector widened past the groove's round ends (asin((GW/2 + RW)/rho) + 0.5 deg) by --patch-ring; every other part untouched",
+                            parts=new, valid={p["name"][:40]: (p["valid"], p["pieces"]) for p in PF["parts"] if p["name"].startswith("drive cap-ring")})
+    json.dump(BJ, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
+    print(f"patched ring: {BJ['ring_patch']}", flush=True)
+
+
 def main():
     out = "l1_desmo-conecut"
     if "--out" in sys.argv: out = sys.argv[sys.argv.index("--out") + 1]
     else: sys.argv += ["--out", out]
     dd = os.path.join(BASE.FULL, "designs", out)
+    if "--patch-ring" in sys.argv:
+        patch_ring(dd); return
     if "--post-only" in sys.argv:
         sys.argv.remove("--post-only"); post(dd); return
     t0 = time.time()
