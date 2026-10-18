@@ -8,7 +8,7 @@
  "passive_translations": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": "2026-10-18T15:08:54Z",
+ "t_screened": "2026-10-18T15:14:55Z",
  "reach": 0.775,
  "follow": 1.0,
  "inband14": 0.9003,
@@ -21,9 +21,9 @@
  "v_inband10": null,
  "v_gap": null,
  "n_configs": 540,
- "verdict": "",
- "limiter": "",
- "note": "",
+ "verdict": "SCREENED (measured negative for the hardening role): the link-2 planform WAIST (edge moved 1.6 mm in the bar plane over 20 mm, far edge kept) removes the lead's only +0.1 / +0.2 mm probe flip - frozen exact Bench(110,360) 18.28 tie (score 93.35), +0.2 probe 18.83 -> 18.28, pose 139 0.072 -> 0.602 mm, no new contact, 0 jams - but it pushes clip samples past 14 mm and the lead's held ib14 is exactly 0.9000: held 22.45 vs 22.38 (+0.07; the spec's pure jog 22.49, +0.11). A trade (~-0.0004 ib14 per mm of edge move), not a free hardener.",
+ "limiter": "in-band: every link-2 move that adds clearance at 139 moves samples past 14 mm on the clips (Bench(60,160) ib14 0.9007 -> 0.9003 waist / 0.8995 jog / 0.8961 joggle); the lead sits at held ib14 0.9000 so the cost shows 1:1 on held. 139 itself is the edge of a held link-2 contact cluster (224 / 225 / 252, plane -90..-75, elev 60, axial 105-120).",
+ "note": "540 configs on the lead's frozen chain (scan: worn once per bench, link 2 re-read; Bench(60,160) + envh all-pose fast, envsel / bench exact within 4 mm): 10 direction + 290 coarse + 3 ES (2 starts sigma 0.3 + sigma-0.8 restart, 5 x 16). Search envh near1 + plain - 0.5 min(L2 margin, 1); selection envsel (plain, +0.2 probe, near1) then the search objective; pre-registered 139 >= 0.4 (255 pass). Gate (envh objective, score points): gain 0.008 over the 2nd half, 0.008 over the last third, top-5 spread 0.013 - passed (flat: one envh pose, 150, moves). Direction +w (toward the bar's far rows) only; -w puts 139 into the skin (-0.48 at dl 1). Judge's planform-only reading reproduced (dl 1.0 / 1.5 -> 0.487 / 0.716). Span rule: the moved span stays at stations >= -15 (316's root stretch -22.2..-16.3 untouched) and inside hub 3's rim; without it envsel 458 became a contact. Claims (frozen, exact): waist pick bench 18.28 / ib14 0.9005 / near1 19.92 / probe 0.1, 0.2, 0.35 = 18.28, 18.28, 18.83; held 22.45 / ib14 0.8993 / near1 25.30, 14 contacts (= lead), 252 -1.60 -> -0.71. Spec jog k355: bench 18.28 / ib14 0.9000, held 22.49 / ib14 0.8989 / near1 25.56 (held 898 1.67 -> 0.95: the jog's far side). Kit density L2 0.919x. cx 18.5 (+0: a profile cut). Next: stack only with an in-band source; h2facet (no in-band cost, held -0.22) is the hub-2 half of the hardened cell.",
  "doc": "docs/concepts/conecut-l2jog-knuckle-3r.md",
  "best_params": {
   "stk": 6.0,
@@ -130,5 +130,65 @@
   "source": "lead conecut-knee-knuckle-3r",
   "record_delta": "+0: a profile change (planform waist) cut into link 2's existing flat Ti profile before bending",
   "complexity": 18.5
+ },
+ "held_frozen": {
+  "gap": 22.45,
+  "reach": 0.6922,
+  "follow": 1.0,
+  "inband14": 0.8993,
+  "inband10": 0.5723,
+  "contact": 0.016,
+  "ws_taken": 659,
+  "contact_poses": 14,
+  "near1": 25.3,
+  "near2": 37.1,
+  "lead_gap": 22.38,
+  "lead_ib14": 0.9,
+  "lead_near1": 25.23,
+  "diff": 0.07,
+  "paired": {
+   "discordant": 0,
+   "note": "no pose changes status (contact / take / probe) on held; the whole difference is in-band 0.9000 -> 0.8993 over the 202 held clip frames"
+  },
+  "link2_cluster": {
+   "224": [
+    -3.49,
+    -2.43
+   ],
+   "225": [
+    -5.51,
+    -4.57
+   ],
+   "252": [
+    -1.6,
+    -0.71
+   ]
+  }
+ },
+ "kit_density": {
+  "flags": {
+   "roller": 4.549,
+   "L1a": 0.33
+  },
+  "L2_ratio": 0.919,
+  "note": "same flags as the lead; the waist compresses link 2's rows (denser, ratio 0.919 at the kit's 1 / 4 mm2)"
+ },
+ "variants": {
+  "joggle_k333": {
+   "params": {
+    "dl": 1.6,
+    "Lf": 18.2957,
+    "T": 6.709,
+    "cs": 0.8568,
+    "rot": -10.0,
+    "ff": 0.9325,
+    "dz": 0.5442
+   },
+   "p139": 0.752,
+   "fit_ib14": 0.8961,
+   "held_scan_near1": 25.23,
+   "note": "radial joggle pays in-band ~1:1 (fit ib14 0.8961): dead"
+  },
+  "jog_scan_inband_error": "first scan re-read in-band only within 4 mm of link 2 (bench ib14 read 0.9012, true 0.9000); fixed: fast benches re-read every pose"
  }
 }

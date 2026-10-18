@@ -1,6 +1,6 @@
 # conecut-l2jog-knuckle-3r - link-2 mid-bar planform jog at pose 139 on the lead's frozen chain
 
-Round 15 (main re-launch), lens C (conecut-sidestep-metal: tangent-plane metal moves on a frozen chain). Status: in work.
+Round 15 (main re-launch), lens C (conecut-sidestep-metal: tangent-plane metal moves on a frozen chain). Status: screened (bench probe hardener; held -0.07 through in-band).
 
 ## Deeper-version answers (written first, before the model)
 
@@ -114,3 +114,67 @@ with no take and no new contact. What is left under 0.35 mm is pose 203 (hub 2's
 chamfer's job (conecut-h2facet: 203 -> 1.122). Predicted, not measured as one cell: together the +0.35 probe reads
 18.28 and 379 (0.616, not link 2) is the lowest metal; the two edits touch disjoint samples (hub 2's skin-side ring vs
 link 2's mid-bar), so their bench effects should add.
+
+## Held out (never searched, selected or tuned on; both cells worn once, frozen, after the pick)
+
+| held (952 ws + 202 clip, exact) | lead | jog k355 (spec) | waist k512 (pick) |
+|---|---|---|---|
+| gap | 22.38 | 22.49 (+0.11) | **22.45 (+0.07)** |
+| ib14 / ib10 | 0.9000 / 0.5726 | 0.8989 / 0.5723 | 0.8993 / 0.5723 |
+| reach / follow / contacts | 0.6922 / 1.0 / 14 | same 14 | same 14 |
+| near1 | 25.23 | 25.56 | 25.30 |
+| link-2 contacts 224 / 225 / 252 (139's neighbours: plane -90 / -75, elev 60, axial 105-120) | -3.49 / -5.51 / -1.60 | -2.43 / -4.55 / -1.06 | -2.43 / -4.57 / **-0.71** |
+| held 898 (jog's far side) | 1.67 | **0.95** (into the 1-mm shell) | 1.67 (unchanged) |
+
+Both cells lose on held, and the whole loss is IN-BAND: the lead's held ib14 sits exactly on the 0.900 target, so the
+0.0007 (waist) / 0.0011 (jog) of samples the lever pushes past 14 mm over the 202 held clip frames cost 0.07 / 0.11 gap
+points one for one. No take, no new contact, no pose changes status on held (deterministic difference; the per-pose
+paired test has no discordant pose, so its CI is the in-band term alone). The jog's far side also pulls held 898 under
+1 mm (near1 +0.33); the waist does not (its far edge stays put) - the deeper-version idea (c) measured.
+
+**In-band price per lever (Bench(60,160) clips, all-pose re-read):** planform jog dl 0.5 / 1.0 / 1.5 -> ib14 0.9004 /
+0.9001 / 0.8996 (139 0.28 / 0.49 / 0.72); waist dl 1.0 / 1.6 -> 0.9006 / 0.9003 (139 0.46 / 0.60); joggle dz 0.3 / 0.5
+-> 0.8991 / 0.8982 (139 0.33 / 0.47): the joggle is a radial lift and pays in-band ~1:1, as round 13 measured for root
+lifts. The waist is the cheapest lever per mm of clearance; it is still not free.
+
+## Red team (own)
+
+- **Optimistic number?** My first scan read in-band only on poses within 4 mm of link 2 and called it "unchanged": wrong
+  by 0.0012 on the bench (fixed, see the harness section; every number above is the frozen protocol's or the
+  all-pose re-read). The search objective on envh sees ONE movable pose (envh 150, a link-2 contact -0.53 -> taken
+  +0.38 at dl 1.6), so the ES drives dl to the box edge; the claim bench's 139 lever and the held in-band cost are the
+  real story, not the envh take.
+- **Point that pinches:** after the waist, 139's binder is still link 2 (0.602 mm, row 0 at the waist's flat); the
+  lowest metal over the taken bench poses is hub 2's skin-side ring at 203 (0.263). K play: the judge measured 139's
+  link-2 binder unchanged (0.072) under +-0.912 deg of K play on lowarm cell A; not re-measured here on the waist.
+- **Pose that binds on the far side:** envsel 458 (0.18 on the lead) went to -0.014 (a new contact, envsel +0.56) with a
+  20 mm jog centred on the binder and no span rule; with the span rule it is untouched. Held 898 is the jog's far-side
+  binder (0.95); the waist leaves it at 1.67. Bench 345 / envsel 461 come to ~1.2-1.3 mm under the jog (still > 1).
+- **Pose that jams:** none added - the frozen runs re-checked part pairs with the jogged strap: why = fold 88, contact
+  4, parts 0 on the bench; fold 260, contact 14, parts 0 held (= the lead).
+- **Build:** the waist narrows the 5.9 mm bar to 4.3 mm over 20 mm (+ 9.7 mm cosine run-outs), cut into the flat profile
+  before bending (laser / waterjet; planform S radius >= 5 mm, no bend). Out-of-plane section modulus 8.85 -> 6.45 mm3
+  (-27 %): 155 MPa per N m in Ti-6Al-4V (yield ~880 MPa) - fine for the unpowered MVP1, but it is the weakest station
+  of link 2 now and must be re-checked when link 2 carries the J3 stop's 155 N per N m (lead WATCH M5). Kit density
+  (tools/sample_density.py measure): L2 0.919x, the same flags as the lead (roller 4.5x, L1a 0.33x).
+- **What it does not do:** no take on any claim bench; it is not a lead change and it LOSES 0.07 on held.
+
+## Verdict and what next
+
+SCREENED, as a measured negative for the hardening role: the link-2 planform lever removes the lead's only +0.1 /
++0.2 mm probe flip (bench 18.83 -> 18.28, plain 18.28 tie, 139 0.072 -> 0.602 with the waist / 0.726 with the spec's
+jog), but every link-2 planform or radial move at 139 pushes clip samples past 14 mm, and the lead's held in-band sits on
+0.900 exactly, so held reads 22.45 (waist) / 22.49 (jog) vs 22.38. The lever is a trade, not a free hardener: about
+-0.0004 ib14 per mm of edge move for +0.3 mm at 139.
+
+New knowledge: (1) 139 is the edge of a held LINK-2 contact cluster (224 / 225 / 252: plane -90..-75, elev 60, axial
+105-120, -1.6 .. -5.5 mm); the waist gains 0.9 - 1.06 mm there (252 -1.60 -> -0.71, 0.71 mm short of a take; 224 / 225 need 2.4 / 4.6 mm
+more). (2) The lead's held ib14 = 0.9000: any metal move that adds clearance anywhere on links costs
+held points unless it is paid back in-band elsewhere - the auditor's 'in-band margin' is ZERO on held. (3) The waist
+(one-sided narrowing) beats the jog on every bench at equal clearance at the target, because the far edge does not
+move into new skin (held 898, envsel 458).
+
+Next, in order: (a) do NOT stack this lever on the lead cell unless an in-band source is found (e.g. pair it with a
+lowered stretch elsewhere on link 2 that pulls samples back under 14 mm on the clips); (b) the h2facet chamfer (held
+-0.22) is the hub-2 half of the hardened cell and has no in-band cost; (c) lowarm-kstop's chain carries the same link-2
+binder at 139 (0.072): hand it the waist only if its held ib14 has margin (> 0.9007).

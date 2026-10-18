@@ -3485,7 +3485,7 @@
   "name": "Link-2 mid-bar planform jog at pose 139 (the lead's probe binder; the same link 2 on lowarm-kstop's chain)",
   "family": "slaved-knuckle 3R, pin knee (the verified lead's frozen chain)",
   "lens": "round15:C conecut-sidestep-metal (tangent-plane metal moves on a frozen chain)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-18T13:28:19Z",
   "source": "round 15 (main, re-launch) judge (docs/concepts/round15_ideation.md)",
   "description": "AT REST: the lead conecut-knee-knuckle-3r unchanged except one stretch of link 2. Over +-10 mm about the sample that grazes the skin at pose 139 (link-2 sample 13, ~70 mm from GH) the bar is offset ~1.0 mm sideways IN ITS OWN PLANFORM (the bar's width direction), with linear 10 mm run-outs, cut into the flat profile before bending as two tangent arcs (an S-jog of 1.0 mm over 10 mm needs R ~25 mm >= the R15 inner rule; no lift, no twist). The 3 mm Ti section and the bar's height over the skin are unchanged. LOW / ACROSS-BODY (139: plane -60 / elev 60 / axial 105): link 2 goes from 0.072 mm to ~0.49 mm off the skin (judge, planform-only, dl 1.0). OVERHEAD and behind the back: unchanged. The root stretch that binds radially at 316 (r_J2 13.5-19.4) is not touched. 139 is the only pose that flips at the lead's +0.1 / +0.2 mm probes (18.28 plain -> 18.83 probe) and it is the same link-2 binder on lowarm-kstop's chain (0.072, unchanged under dwell K play), so the jog is the probe hardener for both.",
