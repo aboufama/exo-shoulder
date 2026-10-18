@@ -1,4 +1,4 @@
-# Round 107 (J7, track jump) ideation: judge and red team (2026-10-18 ~18:30 UTC)
+# Round 107 (J7, track jump) ideation: judge and red team (2026-10-18 18:48 UTC)
 
 Target: bench score >= 90 (gap <= 27.5; score = 100 (1 - gap / 275)). The lead is already past it; the real targets are
 gap 0, and 95 (gap 13.75) at low complexity. The plan is docs/concepts/ROUNDS.md "Round 107 plan" (40bf0ec). No bench,
@@ -25,7 +25,8 @@ undetermined passive coordinate (K is slaved by its drive; the relay is spring-h
 4. shortk-onetooth-knuckle-3r (lens B, re-seated K), its tooth-sweep scan as step 0.
 
 The long-dyad family (all three lens-C rows) is dead at step 0 and is not given a slot: the proposer's ghosts and family
-scan, plus the judge's frozen exact wear (section 1.6), put it far above the 27.20 kill line.
+scan, plus the judge's re-reads (canonical 158.66 fast reproduced; far-end hub 2 frozen exact 166.76, section 1.6), put
+it far above the 27.20 kill line.
 
 **The judge's main finding.** The under-pass's 14.59 (the ideal-relay bound on envsel) was read with the bridge
 floating: its supports were never sampled. Measured here, the E strap sweeps +6.4..+49.0 deg (rel the pad) in the arm
@@ -39,7 +40,7 @@ Judge estimate 13.5-14.0 on the claim bench, against the 13.75 line.
 
 All judge reads are on the fit bench and envsel (the selection bench); none on Bench(110,360) or held-out poses.
 Scripts: /tmp/claude-0/-home-user-exo-shoulder/55c580fc-1103-56e5-9e17-3e425f438838/scratchpad/r107j/ (eaz.py,
-blocks.py, blocks2.py; outputs eaz.json, blocks.log, blocks2.log, longtop_frozen.json).
+blocks.py, blocks2.py, lt_frozen.py; outputs eaz.log, blocks.log, blocks2.log, lt_far.json, lt_canon.log).
 
 ### 1.1 The proposers' relay numbers reproduce from their own logs
 
@@ -51,8 +52,8 @@ chain-only gate, lug coil, ds 31 / delta 4.5 / carw 14):
 | bump control, PHI 35 | 15.61 | 0.8898 / 0.9132 | 0.7861 | 13 | 0 |
 | lever (b), per-pose window | 15.82 | 0.8877 | 0.7861 | 13 | 0 |
 | band 8 + bump 1.2 + tsh 1.0 + lean (lugcoil) | 15.21 | 0.8938 / 0.9167 | 0.7861 | 13 | 0 |
-| same, delta 5.0 | 15.68 | 0.8891 | 0.7861 | 13 | 0 |
-| same, delta 6.0 | 93.84 | - | 0.4667 | 13 | **174** |
+| band 8 + bump 1.2 (1.5 mm shell), delta 5.0 | 15.68 | 0.8891 | 0.7861 | 13 | 0 |
+| band 8 + bump 1.2 (1.5 mm shell), delta 6.0 | 93.84 | - | 0.4667 | 13 | **174** |
 | PHI 40 full composite, delta 4.5 (phi40) | 14.54 | 0.8938 / 0.9157 | 0.7972 | 15 | 0 |
 | PHI 40, delta 5.0 / 3.0 / 6.0 | 14.58 / 14.93 / 101.88 | - | - | 15 / 16 / 16 | 0 / 0 / **188** |
 | PHI 45, old window | 15.41 | 0.8898 | 0.7972 | 17 | 0 |
@@ -85,15 +86,15 @@ The shell arc is -1.9..+45.9. So:
   reach the relay exists to take.
 - No intermediate post can work either: E occupies every azimuth from +6.4 to +49.0 in some pose.
 - A cantilever from the posterior support: a 1.5 x 8 (net) Ti strip over 69 mm deflects P L^3 / (3 E I) = 1.7 mm at
-  4 N (I = 8 x 1.5^3 / 12 = 2.25 mm4, E 114 GPa), more than the 1.2 mm clearance; it needs a stiffer, taller section,
-  which the pooled in-band window (1.1) does not have to give. Simply supported, the same strip deflects 0.11 mm (the
+  4 N (I = 8 x 1.5^3 / 12 = 2.25 mm4, E 114 GPa), more than the 1.2 mm clearance. A thicker shell costs pooled in-band (1.1); the only
+  form left is a stiffener above the shell, outside the carriage footprint (1.3). Simply supported, the same strip deflects 0.11 mm (the
   proposer's check is right for a bridge, not for a cantilever).
 
 ### 1.3 The supports against the posed skin (judge, blocks.py / blocks2.py)
 
 Arm-fixed Ti blocks, 12 mm in s, 4 mm along the arc, from R_liner - H up to the shell underside R_liner = 81.31
 (R_t 82.81), sampled every 1 mm / 0.5 mm radially, signed distance to the posed skin on every evaluated envsel pose
-(406), in the arm frame HG0 as the model's rerecord does for the shell:
+(406, taken or not; the proposer's 3.13 at 259 is over taken poses only), in the arm frame HG0 as the model's rerecord does for the shell:
 
 | set | min mm | worst poses (ws, plane / elev / axial) | in the skin | < 1 mm |
 |---|---|---|---|---|
@@ -147,8 +148,16 @@ the long links (so the true numbers are worse). Family scan: best proxy 56.6 / 6
 110-120 / 120-130 / 130-141, getting worse as the dyad lengthens; the proxy is optimistic (raglan 33.7 vs the kit's
 42.72). The knuckle bound (any K law, no drive metal): 4-part ib14 <= 0.2 at >= 63 % of fit poses kept.
 
-Judge frozen exact wear (raglan-routed-3r.py frozen, CB_EXACT=1, fit Bench(60,160) with continuity, frozen on
-Bench(110,360) exact), canonical long-top config: [LT_LINE]
+Judge re-reads (r107j/lt_frozen.py: kit evaluate on Bench(60,160), every underside frozen, worn on Bench(110,360);
+CB_EXACT=1; cont False as the proposer's ghost, which is optimistic):
+
+| realization | fit (Bench(60,160)) | frozen exact Bench(110,360) | takes | ib14 | contact | parts in band |
+|---|---|---|---|---|---|---|
+| far-end hub 2 (longtop-farhub2, J1 acromion top bvec(109.1, 61.6), a1 134.1 / a2 41.9, e2 -1) | 164.43 (proposer 164.42) | **166.76** | 268 | 0.188 | 0.157 | hub 1 0.97, link 1 0.63, hub 2 0.25, hub 3 / link 2 / neck 0.00 |
+| canonical (longtop-dyad, J1 bvec(-45, 17.5), a1 132.5 / a2 47.5, branch -1) | **158.66 fast, reproduced** (hub 1, hub 2, link 1 at the 400 mm cap) | not finished: the exact fit did not complete in 28 min (its hubs march to the 400 mm cap); the fast fit already reads 5.8x the kill line | 218 (fast) | 0.046 | 0.289 | all 0.00 but the neck 0.36 |
+
+Both are far past the 27.20 kill line (H1 at cx 0) and the link-in-band < 0.6 kill (link 2 0.00 / link 1 0.00); the
+raglan model's own `frozen` mode (fold-sph3r extras, continuity on) did not finish its fit in 25 min either.
 
 Mechanism, measured: a 0.99 kinematic window needs J1 opposite the arm's workspace centre, 146+ mm from GH on the
 curved back (or the long arc moves to link 2); the chain then spans 180 deg of the GH sphere, the long link turns ~320
@@ -165,8 +174,8 @@ highest skin it ever passes over (proximity_atlas.md). No J1 stop, hub end or K 
 | phi40-thinstack-relay-4r | **PICK 3 (fallback, parallel)** | the bump family's best measured composite (14.54); keeps the E-over-carriage cliff, so delta 3.5 is pre-registered first (1.1); the anterior end is a 0.44 mm near-touch |
 | lugcoil-lbracket-relay-4r | **MERGED into pick 3 as its PHI 35 cell** | the same hardware at PHI 35; 15.21 envsel / ~13.84 claim is a coin flip, and its delta 4.5 pick fails the cliff gate |
 | shortk-onetooth-knuckle-3r | **PICK 4** | a different morphology (re-seated K dyad) with the best PA margin; lives or dies on its tooth-sweep scan, which becomes step 0 on envsel |
-| longtop-dyad-3r | **REJECTED (dead at step 0, measured)** | ghost 158.66 fast, hub 2 at the 400 mm cap; frozen exact above (1.6); kill line 27.20 |
-| longtop-farhub2-3r | **MERGED with longtop-dyad-3r and rejected** | the far-end hub-2 realization of the same family: moves the floating part from hub 2 to link 2 / hub 3 (164.42 fast) |
+| longtop-dyad-3r | **REJECTED (dead at step 0, measured)** | ghost 158.66 fast (judge reproduced), hubs 1 / 2 and link 1 at the 400 mm cap; kill line 27.20 (1.6) |
+| longtop-farhub2-3r | **MERGED with longtop-dyad-3r and rejected** | the far-end hub-2 realization of the same family: moves the floating part from hub 2 to link 2 / hub 3; judge frozen exact **166.76** (fit 164.43) |
 | longtop-gradedk-knuckle-3r | **MERGED with longtop-dyad-3r and rejected** | the "with its own drive" clause as a bound: no K law gets the chain into band (ib14 <= 0.2 at >= 63 % kept); the drive gate (ghost <= 22) is never reached |
 
 ## 3. Ranking
