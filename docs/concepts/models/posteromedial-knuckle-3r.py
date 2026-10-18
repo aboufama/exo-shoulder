@@ -36,6 +36,7 @@ BASE = CC._clamp(dict(CC.PARAMS, **LEAD))                    # the verified lead
 AZ_BOX, EL_BOX = (-52.5, 0.0), (0.0, 45.0)                   # the posteromedial cell (task box)
 D_ARC = 12.0                                                 # |d_a1|, |d_a2| <= 12 deg
 LEAD_WIN = (24.67, 110.99)                                   # the lead family's th window (fold_ceiling kin_ceiling.json leader_seats)
+TH0_LEAD, TH0_TOL = 83.233, 4.0                              # the lead's rest th (deg) and the seed tolerance (amendment 1)
 REST_M = 5.5                                                 # rest-pose fold margin for a valid J2 resolution (deg)
 
 
@@ -153,12 +154,18 @@ def seed(az1, el1, top=3):
     import concept_kit as KIT; U3 = np.asarray(KIT.wdir(WD, WA), float)       # = S.w_dir, vectorised
     th = np.degrees(np.arccos(np.clip(np.einsum("pij,sj,i->sp", Q, U3, u1), -1, 1)))
     share = ((th >= LEAD_WIN[0]) & (th <= LEAD_WIN[1])).mean(1)
+    # AMENDMENT 1 (before any CMA): the rest pose must sit at the lead's rest th (83.23 deg, +-TH0_TOL), so the dyad's
+    # rest configuration and hence the K drive's phase (crank / lobe / flank) is the lead's. Without it the first seed
+    # (-52.5, 17.5 / wd 80 wa -140, rest th 26.7) gave the drive idle: crank pressure angle 86.8 deg at rest (gate 38).
+    thr = np.degrees(np.arccos(np.clip((np.einsum("ij,sj->si", R["Q0"], U3)) @ u1, -1, 1)))      # ray approximation
     out = []
     for k in np.argsort(-share, kind="stable"):
-        d3 = OSN.seat(R["Q0"] @ U3[k], BASE["b3"])[1]
+        if abs(thr[k] - TH0_LEAD) > TH0_TOL + 3.0: continue
+        d3 = OSN.seat(R["Q0"] @ U3[k], BASE["b3"])[1]; th0 = math.degrees(math.acos(float(np.clip(d1 @ d3, -1, 1))))
+        if abs(th0 - TH0_LEAD) > TH0_TOL: continue
         ok = [resolve_j2(d1, d3, Y["a1"], Y["a2"], br)[2] for br in (1.0, -1.0)]
-        if any(ok): out.append(dict(share=round(float(share[k]), 4), wd=float(WD[k]), wa=float(WA[k]), br_ok=ok))
-        if len(out) >= top or len(out) == 0 and share[k] < share.max() - 0.25: break
+        if any(ok): out.append(dict(share=round(float(share[k]), 4), wd=float(WD[k]), wa=float(WA[k]), th_rest=round(th0, 2), br_ok=ok))
+        if len(out) >= top: break
     return out
 
 
