@@ -178,3 +178,61 @@ better:* moving from rest, the arm reaches the fold stop before it reaches those
 them. *Detect:* the kNN-8 continuity flood over the taken poses (the verifier's `extras()`; for kit models,
 `tools/alignment_kit_flood.py` on the per-pose dump), whatever the passive count. *Here:* deltoid-crest-j3-3r's s10
 config, 26.78 fast / 40.17 frozen: 6 islands at elev 90, connected reach 0.589 against 0.606 static.
+
+## Skeptic (2026-10-18)
+
+Re-measured from the per-pose dumps, the verifier files and the tool code. The models are unchanged. Everything ran
+locally, niced, with at most 2 processes. Rulings: `docs/alignment/deltoid-crest-j3-3r.rulings.json`. New measurements:
+`docs/alignment/remeasure/deltoid-crest-j3-3r_skeptic_checks.json`.
+
+**Final verdict (ledger): WATCH.** 4 reasons upheld (reporting, T1, G1, R2) and 2 refuted with measurements (P2, NEW-plain3r-islands).
+
+- **reporting: upheld.** `morphs.json` shows sweep_gap 26.78 against v_gap 47.86, a spread of 21.08. That is past the
+  5-point trigger (`c_reporting`, line 715), and 26.78 reads as a score of 90.26. The minimum of the sweep file is k 3581
+  (cma-s10). The page labels the number "Sweep best gap" (`bench.js:131`), so this is a label watch. Of the 20 verified
+  rows with this pattern, this one has the largest spread (next: spine-parked 12.51, minarc 12.21).
+- **T1: upheld.** The CMA objective is `r["gap"]` (`tools/concept_cma.py:55`), which is the verifier's plain gap
+  (`zc-frontier-3r.py:145-149`). My recompute from the dumps gives bench 47.86 / 64.84 / 95.56 / 122.84 (22 / 58 / 101
+  poses) and held 50.05 / 66.52 / 92.72 / 120.43. The lead's shells are 1.64 / 16.56; this design's are 16.98 / 47.70.
+  The search is still running on the plain objective: the uncommitted cma-s12 / s13 rows (5666 in the sweep file now)
+  have best 29.38 plain against 44.5 near-touch, and the 26.78 rows sit at 50-51 near-touch.
+- **G1: upheld.** The numbers re-derive exactly: overhead ws on the bench is 0.13 / 0.84 / 1.20 / 1.34 mm, overhead
+  clip 0.66-1.28 mm, held ws 0.07-0.66 mm, with 9 / 20 and 11 / 22 overhead contacts and held presses of 10.51 and
+  9.24 mm. One caveat: the 5 held overhead clip readings equal the bench's to 0.01 mm because they are the same frames
+  (see missed 1), so only the held ws readings are independent.
+- **P2: refuted.** The watch rests on the held_watch line, and that line was applied to a reading that still contains
+  in-sample frames. The index reading (53.98, 410 poses) keeps 12 frames whose 5-D pose equals a search frame. The
+  pose-vector reading removes everything the search saw, which leaves 398 poses at 51.09, +3.23 over the bench and
+  under the 6.0 line. If I also remove the 32 held clip frames that are identical to claim-bench frames, 383 poses
+  remain at **49.40, +1.54**, which is below the reported +2.19. The overlap is real, but it does not flatter this row's
+  held number.
+- **R2: upheld on its main number.** Fit 26.78 fast, worn frozen exact 40.17: 13.39 worse, with a -23.42 mm press at
+  (0, 165, 15). The "6 static islands" sub-claim does not stand (next ruling). Side fact: this better config wears 40.17,
+  but the claim stays at the older 47.86 config. That understates the design and is not gaming.
+- **NEW-plain3r-islands: refuted.** I re-ran `tools/alignment_kit_flood.py` unchanged on the s10 wear and got the same 6
+  islands. They are an artifact of the flood's edge direction. `extras()` expands only from a connected node `a` to
+  `knn(a)`. None of the 6 islands is in the kNN-8 of any connected node, yet each island's own kNN-8 holds 3-6
+  connected nodes. Run on those pairs, the verifier's own edge test passes: closure 1.0 at every 2-degree step and a
+  maximum axis step of 0.65-1.96 deg (for example (0,90,45) <-> (15,60,60), 38.2 deg apart). For each island, 30-40 of
+  its 40 nearest connected poses pass. With symmetric edges the s10 config has 0 islands and loses 0 reach points.
+  The claimed config re-floods at 207 / 207 on the held set, with a th margin of 5.313.
+
+### Missed (for the next audit; not counted in this verdict)
+
+1. **The held set overlaps the CLAIM bench by content.** `held_bench(110,360)` excludes Bench(110,360) by index only.
+   32 of its 110 clip frames have 5-D pose vectors identical to Bench(110,360) clip frames: 27 taken, 2 contacts. That
+   includes all 5 held overhead clip frames (0.66 x3, 0.70, 0.81 mm, the same as the bench). The held set also holds
+   13 internal duplicate vectors. So the "held" overhead clip evidence, and part of the held follow, repeat the bench.
+   Removing these frames moves this row's held gap by -3.81 (to 46.24). Proposal: `held_bench` should exclude by pose
+   vector against both Bench(110,360) and Bench(60,160), and de-duplicate itself. Its effect on the other rows should
+   be measured the way `heldleak_fit60_all.json` was.
+2. **The search keeps optimising the plain gap.** In the working tree, 1886 new cma-s12 / s13 rows were written after
+   the audit, on the same plain objective (best 29.38 plain against 44.5 near-touch). A new best from them would carry
+   T1 forward. The next audit of this row should check the phase of the claimed config.
+3. **Instrument note (not gaming; it reads harsher, not kinder):** the verifier's continuity flood (`extras()` kNN-8,
+   copied into other verifiers and run by `tools/alignment_kit_flood.py`) is directed. A taken pose whose nearest
+   connected neighbour has 8 closer taken poses reads as an island even when a valid 2-degree slerp edge exists.
+   Island counts on other rows (S5 findings, connected-reach claims) should be re-read with symmetric edges
+   (`edge(a, b)` for b in knn(a) or a in knn(b)). Measured here: 6 -> 0.
+
+Verdict printed by `tools/alignment_ledger.py skeptic`: **watch**.
