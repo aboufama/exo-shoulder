@@ -85,23 +85,97 @@ def gate(M, Q):
     return ok
 
 
-def solve_phi(M, rp, frames=None):
-    """least phi in [0, PHI] (one-sided, sense sgn) per global frame at which the lead's gates pass; nan where none"""
+def solve_phi_Q(M, rp, HG):
+    """least phi in [0, PHI] (one-sided, sense sgn) for humerus frames HG (n,3,3) at which the lead's gates pass; nan
+    where none (1-deg scan, bisection to < 0.1 deg)"""
     ax = raxis(rp["tilt"], rp["taz"]); PHI = float(rp["PHI"]); sg = 1.0 if float(rp.get("sgn", 1)) >= 0 else -1.0
-    HG = Z0["HG"].astype(float); n = len(HG); fr = np.arange(n) if frames is None else np.asarray(frames)
-    phi = np.full(n, np.nan); ok0 = gate(M, HG[fr]); phi[fr[ok0]] = 0.0
-    todo = fr[~ok0]; lastfail = np.zeros(n)
+    n = len(HG); phi = np.full(n, np.nan); ok0 = gate(M, HG); phi[ok0] = 0.0
+    todo = np.nonzero(~ok0)[0]
     for f in np.arange(1.0, PHI + 1e-9, 1.0):
         if not len(todo): break
         okf = gate(M, HG[todo] @ rotm(ax, np.full(len(todo), sg * f * D2R)))
-        hit = todo[okf]; phi[hit] = f; lastfail[todo[~okf]] = f; todo = todo[~okf]
+        phi[todo[okf]] = f; todo = todo[~okf]
     hit = np.nonzero(np.isfinite(phi) & (phi > 0))[0]
-    lo, hi = phi[hit] - 1.0, phi[hit].copy()
-    for _ in range(4):                                              # bisect to < 0.1 deg (least passing phi)
-        mid = 0.5 * (lo + hi); okm = gate(M, HG[hit] @ rotm(ax, sg * mid * D2R))
-        hi = np.where(okm, mid, hi); lo = np.where(okm, lo, mid)
-    phi[hit] = hi
+    if len(hit):
+        lo, hi = phi[hit] - 1.0, phi[hit].copy()
+        for _ in range(4):                                          # bisect to < 0.1 deg (least passing phi)
+            mid = 0.5 * (lo + hi); okm = gate(M, HG[hit] @ rotm(ax, sg * mid * D2R))
+            hi = np.where(okm, mid, hi); lo = np.where(okm, lo, mid)
+        phi[hit] = hi
     return phi * sg, ax
+
+
+def solve_phi(M, rp, frames=None):
+    """least phi per global frame (Z0 order); nan where none"""
+    HG = Z0["HG"].astype(float); n = len(HG); fr = np.arange(n) if frames is None else np.asarray(frames)
+    phi = np.full(n, np.nan); ph, ax = solve_phi_Q(M, rp, HG[fr]); phi[fr] = ph
+    return phi, ax
+
+
+def flood_relay(M, rp, step_deg=2.0, passive_jump=10.0, active_jump=25.0):
+    """CONTINUITY RULE (CLAUDE.md; the lead's connected_full reading, minarc-stop-knuckle-4r-mechanism.py flood grid
+    'full'): nodes = every pose of the 15-deg workspace envelope grid (Z0 'Workspace (envelope)', 1432 poses; the
+    bench's 360 are a 1-in-4 subsample) at which the relayed lead closes (least phi in [0, PHI] exists); edges = grid
+    neighbours whose 2-deg HG slerp closes at EVERY frame with the least-phi relay, the relay never steps > 10 deg,
+    the passive K drive angle dK and knee pins qa / qb never > 10 deg, the actives never > 25 deg; seeds = phi = 0
+    nodes in the lead's state A (kstate 0, as the lead's own flood). Kinematic only (skin is the bench's job).
+    -> dict(global env index -> connected bool), phi per env node, stats"""
+    from scipy.spatial.transform import Rotation as Rot, Slerp
+    names = list(Z0["NAMES"]); allw = np.nonzero(Z0["CID"] == names.index("Workspace (envelope)"))[0]
+    Ha = Z0["HG"][allw].astype(float); ph, ax = solve_phi_Q(M, rp, Ha); feas = np.isfinite(ph)
+    D = M.D
+    Qa = Ha.copy(); Qa[feas] = Ha[feas] @ rotm(ax, ph[feas] * D2R)
+    D.ik(Qa); sta = np.asarray(getattr(D, "_state", np.zeros(len(Qa))), float).copy()
+    Pz = Z0["POSE"][allw]; keyf = {tuple(np.round(Pz[k, :3], 1)): k for k in range(len(allw)) if feas[k]}
+    valsf = [sorted(set(np.round(Pz[:, d], 1))) for d in range(3)]
+    edges = []
+    for a in keyf.values():
+        x = tuple(np.round(Pz[a, :3], 1))
+        for d in range(3):
+            j = valsf[d].index(x[d])
+            for jj in (j - 1, j + 1):
+                if 0 <= jj < len(valsf[d]):
+                    y = list(x); y[d] = valsf[d][jj]; b = keyf.get(tuple(y))
+                    if b is not None and a < b: edges.append((a, b))
+    segs = []; Hs_all = []; off = 0
+    for a, b in edges:                                               # batch every edge's slerp frames
+        R2 = Rot.from_matrix(np.stack([Ha[a], Ha[b]])); ang = np.degrees((R2[0].inv() * R2[1]).magnitude())
+        m = max(2, int(math.ceil(ang / step_deg)) + 1); Hs = Slerp([0, 1], R2)(np.linspace(0, 1, m)).as_matrix()
+        segs.append((off, m)); Hs_all.append(Hs); off += m
+    H = np.concatenate(Hs_all); phs, _ = solve_phi_Q(M, rp, H); okf = np.isfinite(phs)
+    Qs = H.copy(); Qs[okf] = H[okf] @ rotm(ax, phs[okf] * D2R)
+    q, ok, _, _, _, s = D.ik(Qs); dK = getattr(D, "_dK", None); Kn = D.knee(s)
+    cols = [np.degrees(q[:, 0]), np.degrees(q[:, 1]), np.degrees(q[:, 2] + Kn["phi"]), phs]
+    pas = [phs]
+    if dK is not None and len(dK) == len(Qs): cols.append(np.degrees(np.asarray(dK, float))); pas.append(cols[-1])
+    for k in ("qa", "qb"):
+        if k in Kn: cols.append(np.degrees(np.asarray(Kn[k], float))); pas.append(cols[-1])
+    eok = np.zeros(len(edges), bool); why = {"open": 0, "phi_jump": 0, "passive_jump": 0, "active_jump": 0}
+    for e, (o, m) in enumerate(segs):
+        sl = slice(o, o + m)
+        if not okf[sl].all(): why["open"] += 1; continue
+        if (np.abs(np.diff(phs[sl])) > passive_jump).any(): why["phi_jump"] += 1; continue
+        dpas = max(float(np.abs(wr(np.diff(c[sl]))).max()) for c in pas[1:]) if len(pas) > 1 else 0.0
+        dact = max(float(np.abs(wr(np.diff(c[sl]))).max()) for c in cols[:3])
+        if dpas > passive_jump: why["passive_jump"] += 1; continue
+        if dact > active_jump: why["active_jump"] += 1; continue
+        eok[e] = True
+    adj = {}
+    for e, (a, b) in enumerate(edges):
+        if eok[e]: adj.setdefault(a, []).append(b); adj.setdefault(b, []).append(a)
+    conn = np.zeros(len(allw), bool); front = [k for k in keyf.values() if ph[k] == 0 and sta[k] == 0]
+    for k in front: conn[k] = True
+    while front:
+        nxt = []
+        for a in front:
+            for b in adj.get(a, []):
+                if not conn[b]: conn[b] = True; nxt.append(b)
+        front = nxt
+    rel = feas & (ph != 0)
+    stats = dict(env=int(len(allw)), env_ok=int(feas.sum()), env_ok_phi0=int((feas & (ph == 0)).sum()), env_relayed=int(rel.sum()),
+                 env_relayed_connected=int((rel & conn).sum()), env_phi0_connected=int((feas & (ph == 0) & conn).sum()),
+                 edges=len(edges), edges_ok=int(eok.sum()), edge_fail=why, seeds=int(((ph == 0) & feas & (sta == 0)).sum()))
+    return {int(allw[k]): bool(conn[k]) for k in range(len(allw))}, {int(allw[k]): float(ph[k]) for k in range(len(allw))}, stats
 
 
 # ---- relay metal (post-run, explicit: the lead's run writes B.res itself, so a B.record hook is not enough) -------------
@@ -308,6 +382,19 @@ def evaluate_relay(params, nc=60, nw=160, exact=False, verbose=False):
     plain = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}     # ideal relay, no relay metal / lift
     hwrep = rerecord(M, B, G, ax, phi_b, Z0["HG"][B.idx].astype(float)) if G is not None else {}
     rr_ = B.report(); rep = {k: rr_[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+    conn_out = None
+    if os.environ.get("ARMARC_FLOOD", "0") == "1" and float(rp["PHI"]) > 0:      # the continuity rule: reach on the CONNECTED set
+        tf = time.time(); cmap, _, fst = flood_relay(M1, rp)
+        ws_ = np.array(B.kind) == "ws"
+        tk = [j for j in range(len(B.idx)) if B.res[j] is not None and float(np.min(B.res[j])) >= 0]
+        drop = [j for j in tk if ws_[j] and phi_b[j] != 0 and not cmap.get(int(B.idx[j]), False)]
+        drop0 = [j for j in tk if ws_[j] and phi_b[j] == 0 and not cmap.get(int(B.idx[j]), False)]
+        static = dict(rep)
+        for j in drop: B.res[j] = None
+        rr_ = B.report(); rep = {k: rr_[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+        conn_out = dict(static=static, connected=dict(rep), dropped_relayed=len(drop), phi0_taken_not_connected=len(drop0),
+                        dropped=[[B.poses[j][k] for k in ("plane", "elev", "axial")] + [round(float(phi_b[j]), 1)] for j in drop],
+                        flood=fst, secs=round(time.time() - tf, 1))
     mins = np.array([float(np.min(B.res[j])) if B.res[j] is not None else np.nan for j in range(len(B.idx))])
     ws = np.array(B.kind) == "ws"; elev = np.array([p["elev"] for p in B.poses])
     taken = np.isfinite(mins) & (mins >= 0); rel = phi_b != 0
@@ -320,7 +407,7 @@ def evaluate_relay(params, nc=60, nw=160, exact=False, verbose=False):
                             clip_relayed=int((rel & ~ws).sum()),
                             phi_max=round(float(np.abs(phi_b).max()), 2) if rel.any() else 0.0),
                min_metal_taken=round(float(np.nanmin(np.where(taken, mins, np.nan))), 3) if taken.any() else None,
-               near1_gap=None, hw=hwrep, secs=round(time.time() - t0, 1))
+               near1_gap=None, hw=hwrep, continuity=conn_out, secs=round(time.time() - t0, 1))
     ok1 = lambda j: B.res[j] is not None and float(np.min(B.res[j])) >= 1.0
     cl = [j for j, k in enumerate(B.kind) if k == "clip"]; wsl = [j for j, k in enumerate(B.kind) if k == "ws"]
     nz = [j for j in range(len(B.kind)) if B.res[j] is not None]
@@ -403,6 +490,13 @@ if __name__ == "__main__":
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "gravity":
         print(json.dumps(gravity_check(par))); sys.exit(0)
+    if mode == "floodonly":                                         # kinematic continuity flood only (the fitted lead, phi solve)
+        rp = dict(RELAY); rp.update({k: par[k] for k in RELAY if k in par}); os.environ.pop("CB_EXACT", None)
+        B1 = CB.Bench(n_clip=60, n_ws=160); M1 = CC.CCModel(B1, CC._clamp(dict(CC.PARAMS, **LEAD))); M1.run()
+        t = time.time(); cmap, phmap, st = flood_relay(M1, rp); st["secs"] = round(time.time() - t, 1)
+        out = dict(params=par, flood=st, connected=[k for k, v in cmap.items() if v], phi={k: v for k, v in phmap.items() if np.isfinite(v)})
+        if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), default=float)
+        print(json.dumps(st)); sys.exit(0)
     if mode == "frozen": out, M, B = evaluate_relay(par, 110, 360, exact=True)
     elif mode == "held": out, M, B = evaluate_relay(par, -1, -1, exact=True)
     else: out, M, B = evaluate_relay(par)

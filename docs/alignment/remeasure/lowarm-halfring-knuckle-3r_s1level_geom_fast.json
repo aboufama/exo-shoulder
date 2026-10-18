@@ -1,0 +1,514 @@
+{
+ "id": "lowarm-halfring-knuckle-3r",
+ "tool": "tools/alignment_lowarm_s1level.py geom (model / verifier / bench unchanged)",
+ "cell": "A (stage 1 identical in cell B: same a_s / psi / glev)",
+ "note": "fit model Bench(60,160) fast, linear IK as verified; levels along u2 over hub 2's face H2 = c2.u2 + f[1]; link 1b's J2 lower member F+0..3.0 (tools/concept_kit.py line 24), link 2's member from F+3.15. fit_fast.gap is the model's near-touch objective; the plain fast gap is 13.12 + 100*(0.90 - inband14)+",
+ "runs": {
+  "verified_glev-1.0_pin9.2_149.5": {
+   "sets": {},
+   "fit_fast": {
+    "gap": 19.45,
+    "reach": 0.7688,
+    "follow": 1.0,
+    "inband14": 0.9002,
+    "contact": 0.0,
+    "desmo_fail": null,
+    "why": {
+     "fold": 32,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 0
+    }
+   },
+   "rec": {
+    "glev": -1.0,
+    "H2": 62.516,
+    "J2_axis_off_GH_mm": 0.0,
+    "pivot_minus_face_mm": -1.2893,
+    "groove_mid_over_face_mm": 0.8607,
+    "groove_layer_over_face_mm": [
+     0.111,
+     1.611
+    ],
+    "pin_band_over_face_mm": [
+     0.111,
+     1.611
+    ],
+    "pin_radius_about_u2_mm": 9.602,
+    "arm_root_over_face_mm": -2.146,
+    "arm_pin_end_over_face_mm": -0.139,
+    "pivot_radius_about_u2_mm": 16.021,
+    "r_out": 11.161902514017576,
+    "dR_dot_u2": 0.9674,
+    "lower_plate_over_face_mm": [
+     0.0,
+     3.0
+    ],
+    "link2_member_from_mm": 3.15,
+    "owd": {
+     "owd_margin": 2.0,
+     "n_used": 135,
+     "n_all": 462
+    },
+    "l1b_samples_r_le_12": {
+     "n": 0,
+     "level_over_face_mm": null
+    },
+    "stage1": {
+     "a_s": 9.2,
+     "psi": 149.5,
+     "pitch": [
+      9.602,
+      9.602
+     ],
+     "r_out": 11.16,
+     "pa_pin_max": 24.24,
+     "pa_cap_max": 37.29,
+     "pa_gate": 34.47,
+     "drift_max": 0.277,
+     "tilt_max_deg": 4.83,
+     "crown_needed": true,
+     "rc_min": 1.0,
+     "rc_onset": 1.0,
+     "ridge_mm": 0.243,
+     "blend_K_lead_deg": 2.614,
+     "arm_from_axis": 9.2,
+     "n_ring_rigid": 4,
+     "ring_az_deg": 18.9,
+     "lim_by_gate": {
+      "pitch": null,
+      "pa_pin": 58.0,
+      "pa_cap": 0.0,
+      "drift": null,
+      "radius": 0.75
+     }
+    },
+    "dK_lim": 46.0,
+    "why_lim": "slot-end",
+    "desmo_fail": [],
+    "lowarm": {
+     "pin_wall_mm_per_rad": 7.802,
+     "dphi_dK": 0.4178,
+     "K_deg_per_mm_at_pin": 17.576,
+     "pad": {
+      "lever_mm": 12.29,
+      "n_arm_over": 7,
+      "n_arm": 28,
+      "lever_range": [
+       0.0,
+       12.29
+      ]
+     },
+     "pad_seat_ok": true,
+     "pad_lever_used": 12.29,
+     "dwell_K_play": {
+      "runout": 0.176,
+      "conc": 0.088,
+      "pad_lap": 0.335,
+      "slot": 0.04,
+      "total": 0.638,
+      "gate": 0.25,
+      "ok": false,
+      "inputs": {
+       "runout_mm": 0.01,
+       "conc_mm": 0.005,
+       "pad_tol_mm": 0.03
+      }
+     },
+     "owd": {
+      "owd_margin": 2.0,
+      "n_used": 135,
+      "n_all": 462
+     },
+     "l2_lift": null
+    }
+   },
+   "secs": 10.2
+  },
+  "F+3.9_glev2.039_pin9.2_149.5": {
+   "sets": {
+    "glev": 2.039
+   },
+   "fit_fast": {
+    "gap": 95.51,
+    "reach": 0.3438,
+    "follow": 0.65,
+    "inband14": 0.8971,
+    "contact": 0.0,
+    "desmo_fail": null,
+    "why": {
+     "fold": 121,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 0
+    }
+   },
+   "rec": {
+    "glev": 2.039,
+    "H2": 62.516,
+    "J2_axis_off_GH_mm": 0.0,
+    "pivot_minus_face_mm": -1.2893,
+    "groove_mid_over_face_mm": 3.8997,
+    "groove_layer_over_face_mm": [
+     3.15,
+     4.65
+    ],
+    "pin_band_over_face_mm": [
+     3.15,
+     4.65
+    ],
+    "pin_radius_about_u2_mm": 10.304,
+    "arm_root_over_face_mm": 0.893,
+    "arm_pin_end_over_face_mm": 2.9,
+    "pivot_radius_about_u2_mm": 16.021,
+    "r_out": 11.864024517924673,
+    "dR_dot_u2": 0.9674,
+    "lower_plate_over_face_mm": [
+     0.0,
+     3.0
+    ],
+    "link2_member_from_mm": 3.15,
+    "owd": {
+     "owd_margin": 2.0,
+     "n_used": 8,
+     "n_all": 335
+    },
+    "l1b_samples_r_le_12": {
+     "n": 0,
+     "level_over_face_mm": null
+    },
+    "stage1": {
+     "a_s": 9.2,
+     "psi": 149.5,
+     "pitch": [
+      10.304,
+      10.304
+     ],
+     "r_out": 11.86,
+     "pa_pin_max": 17.99,
+     "pa_cap_max": 40.18,
+     "pa_gate": 34.47,
+     "drift_max": 0.0,
+     "tilt_max_deg": 0.0,
+     "crown_needed": false,
+     "rc_min": 99.0,
+     "rc_onset": 1.05,
+     "ridge_mm": 98.24,
+     "blend_K_lead_deg": 2.614,
+     "arm_from_axis": 9.2,
+     "n_ring_rigid": 4,
+     "ring_az_deg": 7.7,
+     "lim_by_gate": {
+      "pitch": 0.0,
+      "pa_pin": null,
+      "pa_cap": 0.0,
+      "drift": null,
+      "radius": 1.75
+     }
+    },
+    "dK_lim": 0.0,
+    "why_lim": "s1-pitch",
+    "desmo_fail": [],
+    "lowarm": {
+     "pin_wall_mm_per_rad": 7.619,
+     "dphi_dK": 0.4178,
+     "K_deg_per_mm_at_pin": 17.999,
+     "pad": {
+      "lever_mm": 12.29,
+      "n_arm_over": 7,
+      "n_arm": 28,
+      "lever_range": [
+       0.0,
+       12.29
+      ]
+     },
+     "pad_seat_ok": true,
+     "pad_lever_used": 12.29,
+     "dwell_K_play": {
+      "runout": 0.18,
+      "conc": 0.09,
+      "pad_lap": 0.335,
+      "slot": 0.037,
+      "total": 0.642,
+      "gate": 0.25,
+      "ok": false,
+      "inputs": {
+       "runout_mm": 0.01,
+       "conc_mm": 0.005,
+       "pad_tol_mm": 0.03
+      }
+     },
+     "owd": {
+      "owd_margin": 2.0,
+      "n_used": 8,
+      "n_all": 335
+     },
+     "l2_lift": null
+    }
+   },
+   "secs": 6.9
+  },
+  "F+3.9_glev2.039_pin9.8_150": {
+   "sets": {
+    "a_s": 9.8,
+    "psi": 150.0,
+    "glev": 2.039
+   },
+   "fit_fast": {
+    "gap": 19.45,
+    "reach": 0.7688,
+    "follow": 1.0,
+    "inband14": 0.896,
+    "contact": 0.0,
+    "desmo_fail": null,
+    "why": {
+     "fold": 32,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 0
+    }
+   },
+   "rec": {
+    "glev": 2.039,
+    "H2": 62.516,
+    "J2_axis_off_GH_mm": 0.0,
+    "pivot_minus_face_mm": -1.2893,
+    "groove_mid_over_face_mm": 3.8997,
+    "groove_layer_over_face_mm": [
+     3.15,
+     4.65
+    ],
+    "pin_band_over_face_mm": [
+     3.15,
+     4.65
+    ],
+    "pin_radius_about_u2_mm": 9.904,
+    "arm_root_over_face_mm": 0.751,
+    "arm_pin_end_over_face_mm": 2.9,
+    "pivot_radius_about_u2_mm": 16.021,
+    "r_out": 11.463541007275982,
+    "dR_dot_u2": 0.9674,
+    "lower_plate_over_face_mm": [
+     0.0,
+     3.0
+    ],
+    "link2_member_from_mm": 3.15,
+    "owd": {
+     "owd_margin": 2.0,
+     "n_used": 124,
+     "n_all": 451
+    },
+    "l1b_samples_r_le_12": {
+     "n": 0,
+     "level_over_face_mm": null
+    },
+    "stage1": {
+     "a_s": 9.8,
+     "psi": 150.0,
+     "pitch": [
+      9.904,
+      9.904
+     ],
+     "r_out": 11.46,
+     "pa_pin_max": 29.22,
+     "pa_cap_max": 35.7,
+     "pa_gate": 34.47,
+     "drift_max": 0.289,
+     "tilt_max_deg": 4.78,
+     "crown_needed": true,
+     "rc_min": 1.02,
+     "rc_onset": 1.02,
+     "ridge_mm": 0.264,
+     "blend_K_lead_deg": 2.614,
+     "arm_from_axis": 9.8,
+     "n_ring_rigid": 6,
+     "ring_az_deg": 18.3,
+     "lim_by_gate": {
+      "pitch": null,
+      "pa_pin": 52.5,
+      "pa_cap": 0.0,
+      "drift": null,
+      "radius": 0.75
+     }
+    },
+    "dK_lim": 46.0,
+    "why_lim": "slot-end",
+    "desmo_fail": [],
+    "lowarm": {
+     "pin_wall_mm_per_rad": 8.319,
+     "dphi_dK": 0.4178,
+     "K_deg_per_mm_at_pin": 16.485,
+     "pad": {
+      "lever_mm": 12.29,
+      "n_arm_over": 7,
+      "n_arm": 28,
+      "lever_range": [
+       0.0,
+       12.29
+      ]
+     },
+     "pad_seat_ok": true,
+     "pad_lever_used": 12.29,
+     "dwell_K_play": {
+      "runout": 0.165,
+      "conc": 0.082,
+      "pad_lap": 0.335,
+      "slot": 0.04,
+      "total": 0.622,
+      "gate": 0.25,
+      "ok": false,
+      "inputs": {
+       "runout_mm": 0.01,
+       "conc_mm": 0.005,
+       "pad_tol_mm": 0.03
+      }
+     },
+     "owd": {
+      "owd_margin": 2.0,
+      "n_used": 124,
+      "n_all": 451
+     },
+     "l2_lift": null
+    }
+   },
+   "secs": 12.7
+  },
+  "F+3.9_glev2.039_pin9.9_150": {
+   "sets": {
+    "a_s": 9.9,
+    "psi": 150.0,
+    "glev": 2.039
+   },
+   "fit_fast": {
+    "gap": 19.45,
+    "reach": 0.7688,
+    "follow": 1.0,
+    "inband14": 0.896,
+    "contact": 0.0,
+    "desmo_fail": null,
+    "why": {
+     "fold": 32,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 0
+    }
+   },
+   "rec": {
+    "glev": 2.039,
+    "H2": 62.516,
+    "J2_axis_off_GH_mm": 0.0,
+    "pivot_minus_face_mm": -1.2893,
+    "groove_mid_over_face_mm": 3.8997,
+    "groove_layer_over_face_mm": [
+     3.15,
+     4.65
+    ],
+    "pin_band_over_face_mm": [
+     3.15,
+     4.65
+    ],
+    "pin_radius_about_u2_mm": 9.851,
+    "arm_root_over_face_mm": 0.729,
+    "arm_pin_end_over_face_mm": 2.9,
+    "pivot_radius_about_u2_mm": 16.021,
+    "r_out": 11.410876891780022,
+    "dR_dot_u2": 0.9674,
+    "lower_plate_over_face_mm": [
+     0.0,
+     3.0
+    ],
+    "link2_member_from_mm": 3.15,
+    "owd": {
+     "owd_margin": 2.0,
+     "n_used": 119,
+     "n_all": 446
+    },
+    "l1b_samples_r_le_12": {
+     "n": 0,
+     "level_over_face_mm": null
+    },
+    "stage1": {
+     "a_s": 9.9,
+     "psi": 150.0,
+     "pitch": [
+      9.851,
+      9.851
+     ],
+     "r_out": 11.41,
+     "pa_pin_max": 31.8,
+     "pa_cap_max": 35.12,
+     "pa_gate": 34.47,
+     "drift_max": 0.292,
+     "tilt_max_deg": 4.74,
+     "crown_needed": true,
+     "rc_min": 1.03,
+     "rc_onset": 1.03,
+     "ridge_mm": 0.27,
+     "blend_K_lead_deg": 2.614,
+     "arm_from_axis": 9.9,
+     "n_ring_rigid": 6,
+     "ring_az_deg": 18.1,
+     "lim_by_gate": {
+      "pitch": null,
+      "pa_pin": 49.5,
+      "pa_cap": 0.0,
+      "drift": null,
+      "radius": 0.5
+     }
+    },
+    "dK_lim": 46.0,
+    "why_lim": "slot-end",
+    "desmo_fail": [],
+    "lowarm": {
+     "pin_wall_mm_per_rad": 8.448,
+     "dphi_dK": 0.4178,
+     "K_deg_per_mm_at_pin": 16.232,
+     "pad": {
+      "lever_mm": 12.29,
+      "n_arm_over": 7,
+      "n_arm": 28,
+      "lever_range": [
+       0.0,
+       12.29
+      ]
+     },
+     "pad_seat_ok": true,
+     "pad_lever_used": 12.29,
+     "dwell_K_play": {
+      "runout": 0.162,
+      "conc": 0.081,
+      "pad_lap": 0.335,
+      "slot": 0.04,
+      "total": 0.618,
+      "gate": 0.25,
+      "ok": false,
+      "inputs": {
+       "runout_mm": 0.01,
+       "conc_mm": 0.005,
+       "pad_tol_mm": 0.03
+      }
+     },
+     "owd": {
+      "owd_margin": 2.0,
+      "n_used": 119,
+      "n_all": 446
+     },
+     "l2_lift": null
+    }
+   },
+   "secs": 12.9
+  }
+ }
+}
