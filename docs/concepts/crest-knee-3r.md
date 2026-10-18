@@ -40,7 +40,7 @@ az 85-115) and never sat at J1 az 55; this section is that missing measurement.
    measured, hub 2 0.09 / 0.05 in band at 76-77 mm); the first screen's crest cells and H1 (23.64) through the same
    code; the adversarial verifier (docs/concepts/verify/crest-knee-3r.py) that re-runs the claim.
 
-### What was measured (antcrest, 2026-10-18 06:09-07:15 UTC, local, farm closed)
+### What was measured (antcrest, 2026-10-18 06:09-07:00 UTC, local, farm closed)
 
 **Envelope bench: not available here, so the knee re-fit ran on Bench(60,160).** The env fast grid lives on the farm
 volume (closed). A local build (tools/env_bench.py part / assemble, 1 niced process) reached 92 of 530 poses in 13 min
@@ -83,33 +83,88 @@ sample share. A real hub 2 carries the link ends: the wide-window seeds (fold 10
 link 2 went with it (0.03 in band), so hub 2 + L2 (26 % of the samples) are out of band. That alone costs >= 16
 in-band points.
 
-**3. The search (CMA on Bench(60,160) fast, near-touch objective + |axial| >= 150 gate).** 251 configurations:
-- A1: 15 random around the two judge cells.
-- C1: 3 starts at antcrest A / A with cap 67 / (60, 66) with cap 70; 60 perturbations, then CMA, sigma 0.10.
-- C2: 4 starts at the best knee-free-bound seats (wide a1 / a2 55-59), stopped at 70 evaluations. Nothing beat its own
-  seed 68.41, with hub 2 at 90-97 mm.
-
-Results:
+**3. The search (CMA on Bench(60,160) fast, near-touch objective + |axial| >= 150 gate).** 575 configurations (557
+scored, 18 cut at the 40 s exact-fallback limit). All are in `docs/concepts/sweeps/crest-knee-3r.json` after the first
+screen's 531, under run tags `ac-*` with `bench`, `obj`, `ax150_contact`:
+- ac-A1: 17 random around the two judge cells.
+- ac-C1: 303. Starts: antcrest A, A with cap 67, and (60, 66) with cap 70; 60 perturbations, then CMA, sigma 0.10.
+- ac-C2: 73. Four starts at the best knee-free-bound seats (wide a1 / a2 55-59). Stopped: nothing beat its own seed
+  68.41, with hub 2 at 90-97 mm.
+- ac-C3: 81, CMA sigma 0.05 from the C1 best.
+- ac-C4: 101, CMA sigma 0.04 from the C3 best.
 
 | set (configs, gap < 150) | n | best plain gap | hub 2 level, median | hub 2 in band, median |
 |---|---|---|---|---|
 | fold 0-20 of 220 | 26 | 68.41 | 97.8 mm | 0.01 |
 | fold 20-30 | 36 | 73.12 | 73.7 mm | 0.14 |
-| fold 30-40 | 29 | **64.19** | 75.0 mm | 0.09 |
-| fold 40-60 | 17 | 68.79 | 75.5 mm | 0.07 |
+| fold 30-40 | 34 | 64.19 | 75.4 mm | 0.09 |
+| fold 40-50 | 171 | **56.73** | 75.7 mm | 0.08 |
+| fold 50-80 | 63 | 57.95 | 75.9 mm | 0.05 |
 | hub 2 in band >= 0.5 (any fold) | 12 | 80.26 | | |
 
-The best cell is J1 bvec(53.4, 59.3), a1/a2 44.4/56.2 (J2 bvec(20.2, 21.7)), J3 wdir(93.4, 0.1), b3 0.315, lE 69.5,
-lc 31.7, phiE 18.0, phib -66.1, ang_min 27.42, h2cap 75.6, J3 stop on. It reads **64.19 fast**: reach 0.644, follow
-0.867, ib14 0.653, contact 0.055, fold 38, J3 stop 12, skin 9, parts 6. Its parts in band: hub 2 0.09 at 75 mm, boss
-0.32, knee 0.51, E 0.60.
+**The search leaves the basin.** The top 20 configurations all sit at J3 wd 92.0-94.6, at or near the box edge 92: back
+at the first screen's crest J3 (wd 93), not the antcrest's 98-104. Their fold is 42-56 of 220, worse than H1's 36. The
+fold gain that defined the basin (9-23 of 220) is reachable only with hub 2 at 74-98 mm, out of band, and with link 2
+lifted along with it. Once member 3 and hub 2 must live near the skin, the CMA gives the whole fold gain back.
 
-The CMA's own path is the finding:
-- It pulled the antcrest back toward the first screen's crest J3 (wd 93, wa 0) and a smaller a1 (44).
-- The fold returned to H1's 36-40. **The basin's fold gain cannot be kept once member 3 and hub 2 have to live near
-  the skin.**
+**4. Claim: the best shape frozen (fit Bench(60,160) fast), worn without refit, exact path, verifier checks on**
+(`claim2.py` in scratchpad ck2: docs/concepts/verify/crest-knee-3r.py crest_checks + the pin-knee verifier's
+extra_checks; per-pose dumps `docs/alignment/remeasure/crest-knee-3r-antcrest_{bench,held}_perpose.json`).
 
-CLAIM_PLACEHOLDER
+Best cell (ac-C4 k10): J1 bvec(49.9, 57.7), a1/a2 42.8/60.4 (J2 bvec(16.1, 22.5)), J3 wdir(93.0, 0.1), b3 0.302, lE
+70.4, lc 33.6, phiE 7.0, phib -84.3, ang_min 26.89, h2cap 76.0, J3 stop window [291.2, +240.6], MR63ZZ knee pins
+(stk 6.0), O20 hubs at 53.4 / 75.4 / 66.2 mm from GH.
+
+| wear | gap | reach | follow | ib14 | ib10 | contact (poses, depth sum, deepest) | near-touch 1 mm | min th | ws overhead taken | ws \|axial\| >= 150 taken | why lost (fold / J3 stop / parts / contact) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Bench(60,160) fast (fit) | 56.73 | 0.6375 | 0.8667 | 0.722 | 0.4736 | 0.0435 | 57.98 | | | | 43 / 10 / 6 / 7 of 220 |
+| **Bench(110,360) exact, frozen** | **61.12** | 0.5889 | 0.8636 | 0.7209 | 0.4768 | 0.0346 (11, -15.4 mm, -4.81) | 65.85 | 5.28 deg | 3 / 28 | 10 / 27 | 106 / 26 / 20 / 11 of 470 |
+| held out, frozen | 64.60 | 0.5778 | 0.8545 | 0.7190 | 0.4757 | 0.0473 (15, -61.6 mm, -12.78) | 71.73 | 6.01 deg | 2 / 26 | 12 / 29 | 110 / 25 / 18 / 15 |
+
+Earlier claims on the way: the C1 best frozen exact 66.98 (fast 64.19) and the C3 best 62.40 (fast 57.95). The
+verifier's extra checks removed 0 poses on every wear: closure <= 0.023 deg, knee 77.9-96.7 inside [26.89, 153.11],
+J3 window held, th margin >= 5.28. Parts in band (bench): hub 2 0.118, knee 0.685, E 0.713, boss 0.720, L1 0.775, L2
+0.824, hub 3 0.863, pad 0.887, hub 1 1.0.
+
+**Red team (own best).**
+- **The optimistic number:** fast 56.73 becomes 61.12 frozen on the big bench and 64.60 held out.
+- **The pose that jams:** |axial| >= 150, where every loss is fold (17 of 27). The antcrest seats do not open the
+  rotation extremes either.
+- **The point that pinches:** 15 held-out contact poses, deepest -12.78 mm. Overhead workspace: 3 of 28 taken.
+- **The kill lines, both met:** hub 2 is 0.118 in band on taken poses (kill <= 0.5), and frozen exact 61.12 is far
+  over 23.64.
+
+**Convergence gate (search objective, score points, all 575 configurations in time order): NOT passed.** Gain over the
+second half 3.61 (> 1), over the last third 1.59 (> 0.5), top-5 spread 1.24 (< 3). Plain gap: 2.71 / 1.59 / 1.06. The
+small-step CMA was still descending, by ~1.25 gap points per 40 evaluations, when the time box ran out. So the basin
+is not formally called dead. It sits 37 points over the kill line (fast) and the descent is slow. It would need
+roughly 1000 more evaluations at that rate to reach the 23.64 kill line, and it is walking OUT of the basin (wd to 92, the crest J3) toward the first
+screen's own optimum (26.34 fast / 32.84 frozen, verified).
+
+### Verdict (antcrest re-dispatch)
+
+**Screened, both kill lines met, gate not passed; the row's verified claim stays the crest cell (32.84 frozen exact,
+held 29.81).**
+
+- Best antcrest: frozen exact Bench(110,360) **61.12** (score 77.77), held 64.60, fast 56.73. That is 28 points worse
+  than the same row's crest cell and 33.9 over H1's 27.20.
+- Cx stays 0: 3 active, 2 knee pins outside the count, 0 passive translations.
+
+What this teaches beyond the cell:
+- **On a GH-ray J2, the J2 judge's "fold loss 20-24 of 220" is not a reach gain.** It holds only if hub 2 may sit at
+  the high end of its ray's skin-exit spread. At the antcrest seats that spread is 52-91 mm (p5-p95) and is NOT
+  separable on J3's own angle (0-16 of the dropped poses stoppable). Every config with hub 2 >= 0.5 in band scores
+  >= 80 fast, and the fold-free configs need hub 2 at a median 97.8 mm.
+- **A knee-free bound that scores hub 2 alone is too weak to kill a seat** (bound median 15, min 3.1). Hub 2 drags
+  its link ends with it (link 2 0.03 in band at 97 mm), so any seat bound must carry hub 2 + L1 / L2 (~26 % of the
+  samples).
+- **For whoever plans next:** at J1 az ~50-55 the search's own optimum moves J3 back to the crest (wd 92-93). The
+  pin-knee chain's fold lever is not a J1 / J3 seat move; seats only trade fold for hub-2 level (this run), or for J3
+  stops and member-3 sweep (first screen).
+
+Not run (time box / farm closed): the envelope-bench knee re-fit (env cache unavailable; see above) and the kNN
+continuity flood (the cell is ~37 points over the bar). The motion preview stays at the row's best configuration (the
+crest cell); the antcrest cell is not the best configuration.
 
 ## Deeper-version answers (first screen, crest cells)
 

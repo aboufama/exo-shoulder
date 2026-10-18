@@ -51,10 +51,10 @@
  "inband10": 0.4383,
  "contact": 0.0171,
  "gap": 26.34,
- "n_configs": 531,
- "verdict": "SCREENED, below the lens bar: best claimed frozen exact Bench(110,360) 32.84 (score 88.06; reach 0.6333, follow 1.0, ib14 0.8529, contact 0.0146; near-touch 1 mm 36.25) vs H1's verified 27.20 and the lens bar <= 21.0 / kill > 23.64. Every claimed cell (32.84, 33.23, 37.40) meets the lens's kill condition, but the convergence gate is not passed (near-touch gain over the last third 0.62 > 0.5 score points), so it is not called dead. Fast 26.34 / near-touch 28.74 on Bench(60,160).",
+ "n_configs": 1106,
+ "verdict": "SCREENED, below the lens bar: best claimed frozen exact Bench(110,360) 32.84 (score 88.06; reach 0.6333, follow 1.0, ib14 0.8529, contact 0.0146; near-touch 1 mm 36.25) vs H1's verified 27.20 and the lens bar <= 21.0 / kill > 23.64. Every claimed cell (32.84, 33.23, 37.40) meets the lens's kill condition, but the convergence gate is not passed (near-touch gain over the last third 0.62 > 0.5 score points), so it is not called dead. Fast 26.34 / near-touch 28.74 on Bench(60,160). | ANTCREST re-dispatch 2026-10-18: antcrest basin (J1 bvec(55, 62), J3 wdir(98-104, +5..+18)) SCREENED, both kill lines met, gate not passed: best frozen exact Bench(110,360) 61.12 (score 77.77), held 64.60, fast 56.73 (575 configs, Bench(60,160) fast + |axial|>=150 gate; env cache unavailable locally). Hub 2 0.118 in band (kill <= 0.5); the fold gain (9-23 of 220) needs hub 2 at 74-98 mm off band, and the CMA optimum walks back to the crest J3 (wd 92-93, fold 42-56). The row's verified crest claim 32.84 stands.",
  "limiter": "the crest's fold gain is paid back: J3's crest azimuth wa trades fold (48 -> 16-24 of 220 from wa -20 to 0) for J3-window stops (5 -> 17) and member-3 in band; total losses stay 48-55 of 220 vs H1's 51. At the fold-free end the single knee level tr puts the E boss and the arm pad over skins of different height (boss 0.43 / pad 0.85, or boss 0.88 / pad 0.04 in band), knee link 0.29-0.63. Big bench: fold 92 of 470, J3 window 30, |axial| >= 150 ws 5/27 taken (22 fold).",
- "note": "Model: the verified pin-knee model unchanged + link 2 flying over the whole member 3 + a J3 own-angle stop (frozen window 265.6 + 239.5 deg) + MR63ZZ knee pins (stk 6.0) + ang_min >= 25.22. Local CMA (farm closed), 531 configs over 5 runs (C1 / C3 starts, small-step CMA, a wa [-6, 8] run at the fold-free end). Frozen exact needs 4-6 min per cell here. H1 through the same code 23.64 fast. Gate (near-touch, score points): 0.93 / 0.62 / 0.93 (fails the last-third rule by 0.12). Next lever (unmeasured): a joggled knee link so pin a's boss and pin b's pad sit at their own levels at the fold-free end; upside bounded by fast reach 0.70-0.71 there (~21 fast if member 3 reached 0.90 in band), likely ~25-27 frozen, i.e. not the <= 21 bar. | VERIFIED 2026-10-18 (independent verifier, local exact, docs/concepts/verify/crest-knee-3r.py): frozen exact Bench(110,360) 32.84 reproduced to the digit (reach 0.6333, follow 1.0, ib14 0.8529, ib10 0.4431, contact 0.0146 = 5 poses, depth sum 6.40 mm, deepest -2.77); the pin-knee verifier's extra checks (independent 3D closure <= 0.023 deg, knee vs hub 3 upper, E boss vs hubs / L1 / L2) remove 0 poses; J3 window, knee window [25.22, 154.78], th margin (6.23 bench / 5.33 held) all hold; continuity flood on the full 1432-pose grid with the J3 window: 0 islands, 0 bench poses dropped. Held out 29.81 (reach 0.6667, ib14 0.8521, contact 0.0169 = 6 poses). Near-touch 1 mm 36.25 / held 35.39. CHAMPION same bench and protocol 64.93 (fold margin 5; 66.97 at margin 10 through the pin-knee verifier, 75.94 risley checks): not refuted. Not a leader: 5.64 behind H1 27.20 and 14.56 behind the lead 18.28; overhead ws reach 5/28.",
+ "note": "Model: the verified pin-knee model unchanged + link 2 flying over the whole member 3 + a J3 own-angle stop (frozen window 265.6 + 239.5 deg) + MR63ZZ knee pins (stk 6.0) + ang_min >= 25.22. Local CMA (farm closed), 531 configs over 5 runs (C1 / C3 starts, small-step CMA, a wa [-6, 8] run at the fold-free end). Frozen exact needs 4-6 min per cell here. H1 through the same code 23.64 fast. Gate (near-touch, score points): 0.93 / 0.62 / 0.93 (fails the last-third rule by 0.12). Next lever (unmeasured): a joggled knee link so pin a's boss and pin b's pad sit at their own levels at the fold-free end; upside bounded by fast reach 0.70-0.71 there (~21 fast if member 3 reached 0.90 in band), likely ~25-27 frozen, i.e. not the <= 21 bar. | VERIFIED 2026-10-18 (independent verifier, local exact, docs/concepts/verify/crest-knee-3r.py): frozen exact Bench(110,360) 32.84 reproduced to the digit (reach 0.6333, follow 1.0, ib14 0.8529, ib10 0.4431, contact 0.0146 = 5 poses, depth sum 6.40 mm, deepest -2.77); the pin-knee verifier's extra checks (independent 3D closure <= 0.023 deg, knee vs hub 3 upper, E boss vs hubs / L1 / L2) remove 0 poses; J3 window, knee window [25.22, 154.78], th margin (6.23 bench / 5.33 held) all hold; continuity flood on the full 1432-pose grid with the J3 window: 0 islands, 0 bench poses dropped. Held out 29.81 (reach 0.6667, ib14 0.8521, contact 0.0169 = 6 poses). Near-touch 1 mm 36.25 / held 35.39. CHAMPION same bench and protocol 64.93 (fold margin 5; 66.97 at margin 10 through the pin-knee verifier, 75.94 risley checks): not refuted. Not a leader: 5.64 behind H1 27.20 and 14.56 behind the lead 18.28; overhead ws reach 5/28. | ANTCREST re-dispatch 2026-10-18: frozen exact Bench(110,360) 61.12 (fast 56.73), gate {'objective': 'near-touch gap + 2 per |axial|>=150 contact pose', 'n': 575, 'best_obj': 57.98, 'gain_half_score': 3.61, 'gain_third_score': 1.59, 'top5_spread_score': 1.24, 'plain': {'gain_half_score': 2.71, 'gain_third_score': 1.59, 'top5_spread_score': 1.06}, 'passed': False}; details in antcrest_2026_10_18.",
  "gap_near1_fast": 28.74,
  "best_params": {
   "az1": 106.3227,
@@ -1106,5 +1106,259 @@
   "champion_same_bench": 64.93,
   "champion_ref": "spherical 3R champion, same bench and frozen protocol at fold margin 5 (docs/concepts/verify/minarc-skeptic/champbig_frozen_m5.json); 66.97 through the pin-knee verifier at margin 10, 75.94 with the risley checks",
   "refuted": false
+ },
+ "antcrest_2026_10_18": {
+  "t": "2026-10-18T07:00:13Z",
+  "status": "screened",
+  "seats": "antcrest basin (J2 judge, round102_ideation 1.5): J1 bvec(55, 62), J3 wdir(98-104, +5..+18); searched az1 45-68, el1 54-70, a1 40-62, a2 45-70, wd 92-110, wa -4..24",
+  "search_bench": "Bench(60,160) fast (env cache not available locally: farm closed, local build ~75 min at load 10-13, stopped at 92/530 poses)",
+  "objective": "near-touch gap + 2 per |axial| >= 150 contact pose",
+  "n_configs": 575,
+  "best_params": {
+   "az1": 49.9269,
+   "el1": 57.7314,
+   "wd": 92.9564,
+   "wa": 0.0995,
+   "b3": 0.3021,
+   "lE": 70.3748,
+   "lc": 33.6356,
+   "phiE": 6.974,
+   "phib": -84.3364,
+   "ang_min": 26.8939,
+   "h2cap": 75.9633,
+   "j3stop": 1,
+   "j3stop_margin": 1.1222,
+   "fly": 1,
+   "stk": 6.0,
+   "az2": 16.06,
+   "el2": 22.52
+  },
+  "fast": {
+   "gap": 56.73,
+   "gap_nt": 57.98,
+   "reach": 0.6375,
+   "follow": 0.8667,
+   "inband14": 0.722,
+   "inband10": 0.4736,
+   "contact": 0.0435,
+   "why": {
+    "fold": 43,
+    "j3stop": 10,
+    "skin": 7,
+    "parts": 6
+   },
+   "held_out_frozen_exact": {
+    "gap": 64.6,
+    "reach": 0.5778,
+    "follow": 0.8545,
+    "inband14": 0.719,
+    "inband10": 0.4757,
+    "contact": 0.0473,
+    "near1": 71.73,
+    "contact_poses": 15,
+    "depth_sum": -61.59,
+    "deepest": -12.78,
+    "th_margin_min": 6.011
+   }
+  },
+  "frozen_exact_bench": {
+   "gap": 61.12,
+   "reach": 0.5889,
+   "follow": 0.8636,
+   "inband14": 0.7209,
+   "inband10": 0.4768,
+   "contact": 0.0346,
+   "near1": 65.85,
+   "why": {
+    "fold": 106,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "j3stop": 26,
+    "skin": 0,
+    "parts": 20,
+    "contact": 11
+   },
+   "axial150": {
+    "total": 27,
+    "taken": 10,
+    "lost_why": {
+     "": 0,
+     "fold": 17
+    }
+   },
+   "overhead": {
+    "total": 28,
+    "taken": 3,
+    "lost_why": {
+     "": 0,
+     "contact": 4,
+     "parts": 1,
+     "j3stop": 9,
+     "fold": 11
+    }
+   },
+   "th_margin_min": 5.282,
+   "contact_depth_sum": -15.4,
+   "removed_by_verifier_checks": 0,
+   "parts_ib14": {
+    "hub1": [
+     1.0,
+     6.8,
+     80
+    ],
+    "hub2": [
+     0.118,
+     19.8,
+     80
+    ],
+    "hub3": [
+     0.863,
+     10.7,
+     80
+    ],
+    "E": [
+     0.713,
+     11.0,
+     108
+    ],
+    "boss": [
+     0.72,
+     11.0,
+     32
+    ],
+    "pad": [
+     0.887,
+     8.8,
+     32
+    ],
+    "knee": [
+     0.685,
+     11.9,
+     115
+    ],
+    "L1": [
+     0.775,
+     6.2,
+     56
+    ],
+    "L2": [
+     0.824,
+     7.8,
+     108
+    ]
+   },
+   "secs": 189.3
+  },
+  "gate": {
+   "objective": "near-touch gap + 2 per |axial|>=150 contact pose",
+   "n": 575,
+   "best_obj": 57.98,
+   "gain_half_score": 3.61,
+   "gain_third_score": 1.59,
+   "top5_spread_score": 1.24,
+   "plain": {
+    "gain_half_score": 2.71,
+    "gain_third_score": 1.59,
+    "top5_spread_score": 1.06
+   },
+   "passed": false
+  },
+  "hub2_trade_A": {
+   "L": [
+    60,
+    63,
+    66,
+    70,
+    74,
+    78
+   ],
+   "kept": [
+    90,
+    124,
+    146,
+    156,
+    163,
+    168
+   ],
+   "kept_ws": [
+    65,
+    84,
+    98,
+    106,
+    110,
+    114
+   ],
+   "dropped": [
+    107,
+    73,
+    51,
+    41,
+    34,
+    29
+   ],
+   "j3_stoppable": [
+    15,
+    14,
+    14,
+    13,
+    11,
+    11
+   ],
+   "hub2_ib": [
+    0.91,
+    0.86,
+    0.7,
+    0.35,
+    0.11,
+    0.04
+   ],
+   "need_p5_50_95": [
+    52.5,
+    61.0,
+    91.3
+   ],
+   "fold": 23
+  },
+  "knee_free_bound": {
+   "cells": 64,
+   "min": 3.08,
+   "median": 15.02,
+   "max": 43.61,
+   "corr_fold": 0.78,
+   "note": "fold + hub 2 at its best level only, other samples assumed in band, perfect J3 stop: the bound lets hub 2 float at 90-100 mm (11.6 % sample share); real link ends follow hub 2 (L2 0.03 in band at hub 2 97 mm), so it does not kill the seats - the links and member 3 do"
+  },
+  "by_fold": {
+   "0-20": {
+    "n": 26,
+    "best": 68.41,
+    "hub2_level_med": 97.8,
+    "hub2_ib_med": 0.01
+   },
+   "20-30": {
+    "n": 36,
+    "best": 73.12,
+    "hub2_level_med": 73.7,
+    "hub2_ib_med": 0.14
+   },
+   "30-40": {
+    "n": 29,
+    "best": 64.19,
+    "hub2_level_med": 75.0,
+    "hub2_ib_med": 0.09
+   },
+   "40-60": {
+    "n": 17,
+    "best": 68.79,
+    "hub2_level_med": 75.5,
+    "hub2_ib_med": 0.07
+   },
+   "hub2_ib_ge_0.5": {
+    "n": 12,
+    "best": 80.26
+   }
+  },
+  "verdict": "antcrest basin (J1 bvec(55, 62), J3 wdir(98-104, +5..+18)) SCREENED, both kill lines met, gate not passed: best frozen exact Bench(110,360) 61.12 (score 77.77), held 64.60, fast 56.73 (575 configs, Bench(60,160) fast + |axial|>=150 gate; env cache unavailable locally). Hub 2 0.118 in band (kill <= 0.5); the fold gain (9-23 of 220) needs hub 2 at 74-98 mm off band, and the CMA optimum walks back to the crest J3 (wd 92-93, fold 42-56). The row's verified crest claim 32.84 stands.",
+  "doc": "docs/concepts/crest-knee-3r.md section 'Round-14 re-dispatch: the ANTCREST basin'"
  }
 }
