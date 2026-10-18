@@ -4952,3 +4952,99 @@ compact part). The round-4 picks are done.
   18.28 at cx 18.5. Lens A says whether a two-sided relay reaches 95; lens B prices the cheapest base under it.
 - Proposal B (stop refusals that would be contacts count as contacts) decides lens A's folded-side refusal reading.
 - The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule and the transmission guard stay; no lens relaxes them.
+
+## Round 106 results (Round J6, track jump; 2026-10-18 ~12:30 - ~15:20 UTC, closer)
+
+Ledger re-checked at close (`tools/alignment_ledger.py get <id>`): offset-shortcar-relay-4r exit 0 **WATCH** (skeptic
+15:16:21Z, b649c0c); the lead conecut-knee-knuckle-3r exit 0 WATCH; freek-oracle-route-knuckle-4r exit 0 WATCH;
+proxtrack-relay-knuckle-4r still has no entry. No bench, judge or kit file changed during the round: no number below moved
+because the measurement changed. The base moved under the round: proxtrack's verifier (18c4b46) refuted it AS MODELLED
+(the rigid bump lifts the pin-a boss 1.76-5.69 mm through the knee link; buildable stack 17.46 / held 21.46), so the judge
+(docs/concepts/round106_ideation.md) re-based both lenses on the buildable number. Farm closed: everything ran locally.
+
+| design (lens) | frozen exact (chain-only gate / plain) | held (gate / plain) | reach / contacts / overhead | act / P / cx | outcome |
+|---|---|---|---|---|---|
+| **offset-shortcar-relay-4r** (A, judge re-spec: proxtrack's one-sided relay under the buildable stack; station ds 31, 14 mm carriage resting 4.5 deg anterior, CF coil arm-fixed beyond the zero end, T-nut flange sampled) | **14.76 / 13.74** (score 94.63; near1 17.91, near2 37.70; ib14 chain 0.8898 / pooled 0.9132) | **17.77 / 16.64** (best held on file) | 0.7944 (286/360) / 13 (lead 4) / 8 of 28 | 4 / 0 / 52.5 (51.25 lean flag) | **VERIFIED 14.76** (reproduced to 0.00, extended checks X1 + X2 add 0 jams; held 17.77 reproduced); **WATCH**; 4-joint pass, 95 missed by 1.01 |
+| twoside-proxtrack-relay-4r + twoside-longstroke-relay-4r (A) | ~12.95-13.6 by arithmetic at ds 31, never worn | - | new folded-side contacts 129 L2 -2.83, 207 K crank -8.88, 263; envsel 260 -3.13, 447 -8.77 | 4 / 0 / 59.75 | **DEAD at step 0** (pre-registered kill: any new folded-side contact; 262 / 206 stay hub-2 contacts at either sign, so the hypothesis is refuted) |
+| proxtrack-desmo-relay-4r + leanrelay-desmo-relay-4r (B) | 15.03 / 15.25 (own per-pose arithmetic) | 19.10 / 19.33 (+0.59 / +0.82 vs proxtrack, kill > 0.5) | - | 4 / 0 / 48.75-50.25 | **DEAD, dominated** (both own kill lines; the held line holds at any station) |
+| leanrelay-knuckle-4r (B) | merged into the pick as the lean flag | - | - | 4 / 0 / ~51 | its OD 1.2 extension spring cannot exist (>= 132 mm body for 0.83 N over 49 mm); part merges kept as a flag |
+| conecut-knee-knuckle-3r (the lead, reference) | 18.28 | 22.38 | 0.7278 (262) / 4 / 8 of 28 | 3 / 0 / 18.5 | stays the verified lead |
+
+**Winner: offset-shortcar-relay-4r, verified 14.76 (score 94.63), held 17.77, 4 active joints, 0 passive translations,
+complexity 52.5, ledger WATCH (not gamed: re-checked at close, exit 0).** No design was passed over as gamed. It beats
+the previous verified lead's number (18.28) by 3.52 gate against gate (4.54 on the pooled plain reading), but it is a
+4-joint design: under the user's rulings (3 DOF preferred, 2026-10-15; "the 3-joint leaders are the real leaders",
+2026-10-17) it is **not a lead change**. It is the new best 4-joint verified design, ahead of freek-oracle-route-knuckle-4r
+(polished 15.40 / held 20.50) by 0.64 bench and 2.73 held, at complexity 52.5 against 33.25 (freek stays the simpler
+4-joint point: the two are a Pareto pair). The 3-joint lead stays conecut-knee-knuckle-3r 18.28 / held 22.38. It is
+the generation-J6 CAD candidate (the lead's call) and goes to the user as the 4-joint option. Paired held (plain, 4000
+bootstraps): vs proxtrack buildable -1.73 (CI90 -2.91 .. -0.81), vs the lead -5.74 (CI90 -7.90 .. -4.14), vs freek's
+verified dump -5.26 (CI90 -8.49 .. -2.96), P(better) 1.00 for all three.
+
+**Alignment (auditor 15:07:52Z, skeptic 15:16:21Z: WATCH; 7 reasons upheld, 2 refuted).** Carried with the numbers:
+- *dominance / G1 (near-touch, report-only):* plain 13.74 vs the lead's 18.28, but at 2 mm 46.08 vs 34.84 (11.24
+  behind) on the deep_audit basis; on one basis the skeptic reads 45.56 bench / 47.71 held against 34.84 / 37.11 (the
+  auditor's held figure mixed bases). 56 taken non-contact poses have metal < 2 mm (lead 33), 135 held (lead 71); of the
+  24 new takes 8 are < 2 mm and FOUR (skeptic; the auditor said three) are < 1 mm. The row's near2 column (37.70) leaves
+  out the crown sets (M.cmin) and the lead's does not, hiding most of the 2 mm deficit; the dominance line quotes the
+  pooled plain gain +4.54, gate against gate it is +3.52.
+- *T5 (contact depth):* 13 bench contacts summing 46.18 mm vs the lead's 4 / 20.24 mm (x2.28), deepest 9.79 mm at ws
+  (30, 135, 0) on hub 2 (a relayed pose, a plain scapular-plane raise to 135 deg where the lead gives a stop); held 43
+  contacts, 173.02 vs 60.97 mm (x2.84; skeptic x2.82), deepest 12.24 mm. Shared contacts have identical depth: the
+  whole excess is new contacts at poses the lead loses to the fold. (Tool bug found by the auditor: `_depth_sources`
+  crashes on docs/alignment/remeasure/desmo-geom-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json, held = 'missing dump'.)
+- *NEW-clearance-floor:* bump 1.002 parks the E strap 1.002 mm over the carriage, 0.002 mm past the 1 mm jam floor, on
+  everyday clip frames: 112 taken poses < 1.1 mm, 182 < 1.2 mm (held 270 / 400). A 0.2 mm build margin (bump 1.2) reads
+  14.88 (+0.12, 0 jams).
+- *T4 (tolerance cliff):* delta 4.5 sits 0.5 deg (0.70 mm of carriage arc) from a cliff: delta 5.0 reads 27.53 (37
+  E-over-carriage jams, follow 0.88), delta 6 119.05 (211 jams), ds 34 / delta 4.5 47.80 (77 jams). The doc's "~1.5 deg"
+  is wrong (verifier). The offset itself buys 0.03 (envsel 15.64 -> 15.61; claim bench without the coil 14.26 -> 14.23).
+- *M5 (return spring):* R17 (preload 0.063 N.m, coil F >= 0.79 N) is inherited from proxtrack and covers chain gravity
+  only; carriage friction, coil hysteresis and the return under cuff load are unmeasured (at mu 0.2 a ~4 N radial pad load
+  would stall it, arithmetic only); 3 bistable relay poses inherited and unpriced (<= ~0.6-0.8).
+- *G6 (the 4th joint):* the 3.52 points come from a counted 4th joint (cx 52.5 vs 18.5) and buy no overhead: 8/28 for
+  both on the bench, 19/71 vs 18/71 held; all 24 new bench takes are at elev 30-135. Must not be shown as the overall leader.
+- *Refuted by the skeptic:* continuity (the flood is on file: 0 relayed poses dropped, connected = static on bench and
+  held) and P1 (held - bench +3.01, under the 6.0 watch line and under the lead's +4.10; selection on envsel; two other
+  configs read better on the claim bench, so the pick was not tuned there).
+- Verifier's other notes: the coil has no mount in the model (a shell tab to -8.3 deg costs 0.00: 466 moves to -5.56 on
+  the tab); knee link vs bracket 0.216 mm only on contact poses 343 / 1153.
+
+**What the round measured (lessons).**
+1. **The relay's buildable price is a track-STATION effect.** At ds 19.5 the pin-a boss sits inside the shell window
+   (boss lift 4.89-5.69 mm, +2.7-3.1 gate); at ds >= 31 it leaves it (lift 1.13-1.23 mm, 0 jams). Envsel shows it on its
+   own: 18.87 (ds 19.5) -> 15.94 (28) -> 15.64 (31) -> 15.68 (34); held 21.46 -> 17.77, jams 17 -> 0. A search that does
+   not model a part's stack picks the station on a metal error.
+2. **On a one-sided relay the posterior internal-rotation binder (466; held 842 / 914 / 1140) sits on whatever arm-fixed
+   part is nearest the zero end.** Moving the shell end cleared the shell (-3.26 -> +0.68 mm) and handed 466 to the
+   arm-fixed coil (-2.95 mm). The coil on the carriage lug, or no coil, reads 14.23 (diagnostic, claim bench, set
+   nothing) = this hardware's ideal-coil bound, 0.48 over the 95 line. Envsel ties the two coils (15.61 / 15.61), so the
+   lug needs a pre-registered physical tie-break before it can be claimed.
+3. **Offsetting a carriage under a rigid local bump is not free:** the bump window [lo - PHI, hi] and the carriage
+   footprint follow the carriage, ~0.11 gap per deg (chain-only ib14 0.8948 -> 0.8898 = +0.50 on both envsel and the
+   claim bench). The judge's ~13.74 prediction priced the 466 take and not this in-band cost.
+4. **A two-sided relay does not remove the folded-side contacts:** 262 / 206 keep hub 2 in the deltoid at either sign
+   (-9.62 / -5.52), and the negative side adds new chain contacts (129 L2 -2.83, 207 K crank -8.88). Two-sided relays
+   are closed.
+5. **The desmo base under any relay is dominated by its own held line** (+0.59 / +0.82 vs proxtrack); the relay's
+   4-joint complexity floor stays ~51-52.5 on the knuckle base; freek (33.25) remains the cheaper 4-joint point.
+6. **A planform-turned pad bracket hits a hard jam cliff over the E strap** past delta ~4.5: routing the bracket at the
+   pad azimuth (an L-shaped carriage lug) is the fix, not a smaller delta.
+7. Infrastructure: the parent's `prepare(nc=-2)` envsel path could not run (armarc reads the pose archive at import,
+   env_bench appends envsel later); offset-shortcar installs envsel first, and every relay row selecting on envsel needs
+   the same fix.
+
+**Where the gap is (measured):** gate 14.76 = reach 10.56 + contact 3.18 + in-band 1.02. 12 chain contacts are inherited
+(the lead's 4 at phi 0: 205, 237, 264, 316; 8 relayed: 262 -9.79 and 206 -6.07 folded-side on hub 2, 343, 372, 182,
+423, 448, 457); 56 poses lie beyond the relay; overhead 8/28.
+
+**Next focus (round 107, track jump).** 95 is not reached (best verified 14.76 at 4 joints, 18.28 at 3; the take-bound
+table measures 95 at 3 DOF out of reach at the legal seats, the lead 4.53 short). The 4-joint relay is 1.01 from the line
+and its remaining levers are measured: (a) the lug coil (pre-registered tie-break "no arm-fixed part over the posterior
+arc"; diagnostic 14.23); (b) buy back the offset's +0.50 in-band and more of the 1.02 in-band term with a bump window
+that follows only the carriage's real travel (or band at its floor), chosen on envsel; (c) route the bracket at the pad
+azimuth so delta has real margin; (d) price the build margin in the claim (bump 1.2, +0.12). Arithmetic: 14.23 + 0.12
+needs >= 0.60 of in-band buy-back to reach 13.75. Report the near2 reading on the lead's basis (crown sets included) and
+the contact depth next to every claim. The 3-joint side stays the lead's (take-bound, posteromedial seat dead): its
+open lever is complexity at the lead's number. Owed: the generation-J6 CAD + stills of offset-shortcar (the lead's call,
+4-joint option for the user), the auditor's `_depth_sources` crash fix, proxtrack's ledger entry.

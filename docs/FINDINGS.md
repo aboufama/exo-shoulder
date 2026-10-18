@@ -3693,3 +3693,75 @@ judge or kit file changed; nothing was selected on held-out poses.
   a different family: a long dyad over the top of the shoulder with its own drive, for which the nearest evidence is
   the in-band collapse above. Row docs/concepts/rows/posteromedial-knuckle-3r.json (status dead); motion preview
   docs/concepts/viz/concepts/posteromedial-knuckle-3r.js (test.mjs OK).
+
+## Round J6 (round 106, track jump): no lead change - the buildable one-sided relay verifies at 14.76 (score 94.63, held 17.77, the best held number on file; 4 joints, cx 52.5, WATCH), 1.01 from 95; two-sided relays and the desmo base under a relay are closed (2026-10-18, discovery round 106, closer)
+
+**What was measured** (frozen exact Bench(110,360), the verification protocol; bar 18.28 = conecut-knee-knuckle-3r;
+complexity tools/simplicity.py v2.2; farm closed, all local; no bench, judge or kit change):
+
+| design | v_gap / held (chain-only gate) | joints / P / cx | ledger | verdict |
+|---|---|---|---|---|
+| offset-shortcar-relay-4r (proxtrack's one-sided relay under the buildable pin-a stack, ds 31, 14 mm carriage at delta 4.5, arm-fixed CF coil) | 14.76 / 17.77 (plain 13.74 / 16.64) | 4 / 0 / 52.5 | WATCH | round winner, best 4-joint verified, not a lead |
+| twoside-proxtrack-relay-4r / twoside-longstroke-relay-4r | never worn (~12.95-13.6 arithmetic) | 4 / 0 / 59.75 | none | dead at step 0 (pre-registered kill) |
+| proxtrack-desmo-relay-4r / leanrelay-desmo-relay-4r | 15.03-15.25 / 19.10-19.33 (arithmetic) | 4 / 0 / 48.75-50.25 | none | dead, dominated (own held line) |
+
+1. **The relay's buildable price is a station effect, measured on the selection bench and held out.** proxtrack's
+   verifier refuted it as modelled (the rigid bump drives the pin-a boss 5.05-5.08 mm into the knee link's eye; priced
+   buildable 17.46 / held 21.46). Moving the track station proximal takes the boss out of the shell window: envsel
+   18.87 (ds 19.5) -> 15.94 (28) -> 15.64 (31) -> 15.68 (34); boss lift 4.89 -> 1.13 -> 0 mm; held 21.46 -> 17.77 with
+   17 jams -> 0. On the claim bench (read once at the envsel pick): gate 14.76, plain 13.74, near1 17.91, reach 0.7944
+   (286/360), follow 1.0, the SAME 13 contacts as proxtrack, 0 jams, overhead 8/28. Three controls reproduce the
+   verifier and judge to 0.00 (17.46, 16.92, 14.26). The independent verifier reproduces 14.76 / 17.77 to 0.00, its
+   extended checks (every chain part vs shell, carriage, coil and bracket; the bracket's top face) add 0 jams, the
+   continuity flood drops 0 relayed poses, min th margin 5.000 deg (0 of 396 bench, 0 of 942 held taken poses below 5).
+2. **What failed and why: 95 missed by 1.01.** Gate = reach 10.56 + contact 3.18 + in-band 1.02. (a) The posterior
+   internal-rotation binder 466 (150, 105, -105) follows the arm-fixed hardware: the 4.5-deg offset cleared the shell
+   there (-3.26 -> +0.68 mm) and the arm-fixed coil took the contact (-2.95 mm). With the coil on the carriage lug, or
+   no coil, the claim bench reads 14.23 (diagnostic, set nothing): this hardware's bound at ds 31, 0.48 over the line.
+   (b) The offset costs in-band: the rigid bump window [lo - PHI, hi] and the carriage footprint follow the carriage, ib14
+   chain 0.8948 -> 0.8898 = +0.50 gap (~0.11 per deg). The judge's ~13.74 prediction priced the take and missed this.
+   (c) 12 chain contacts are inherited unchanged: the lead's 4 at phi 0 (205 -4.28, 237 -8.93, 264 -5.80, 316 -1.23)
+   and 8 relayed (262 -9.79 and 206 -6.07 folded-side on hub 2; 343, 372, 182, 423, 448, 457); 56 poses lie beyond the
+   relay. (d) The bracket's planform turn runs over the E strap past delta 4.5: 27.53 at delta 5.0 (37 jams), 119.05 at
+   delta 6 (211 jams), 47.80 at ds 34 / delta 4.5 (77 jams).
+3. **Two-sided relays are closed.** The proposer's own step-0 data triggers the pre-registered kill: the negative side
+   adds new chain contacts (129 L2 -2.83 mm, 207 K crank -8.88 mm, 263; envsel 260 -3.13, 447 -8.77), and the contacts
+   it targeted stay (262 / 206 keep hub 2 in the deltoid at either sign, -9.62 / -5.52). The "clean" shell windows clear
+   their binders by 0.01-0.37 mm.
+4. **The desmo base under a relay is dominated** by its own held line (+0.59 / +0.82 vs proxtrack, kill > 0.5; the
+   in-band price is a constant per relay config, so no station saves it). leanrelay's OD 1.2 extension spring cannot
+   exist (>= 132 mm close-wound body for 0.83 N preload over 49 mm); its part merges are a flag (cx 51.25).
+5. **Paired held (plain, 4000 bootstraps):** vs proxtrack buildable -1.73 (CI90 -2.91 .. -0.81), vs the lead -5.74
+   (CI90 -7.90 .. -4.14), vs freek's verified dump -5.26 (CI90 -8.49 .. -2.96), P(better) 1.00 each. Bench -> held
+   inflation +3.01 (proxtrack +4.0, the lead +4.10).
+
+**Alignment (WATCH; auditor + skeptic, 7 upheld / 2 refuted), carried with the design:**
+- Near-touch (report-only): 2 mm reading 45.56 bench / 47.71 held vs the lead's 34.84 / 37.11 on one basis (auditor
+  46.08 vs 34.84); 56 taken non-contact poses < 2 mm (lead 33), 135 held (lead 71); 4 new takes < 1 mm. The row's
+  near2 (37.70) omits the crown sets the lead's includes. Gate against gate the gain over the lead is +3.52, not the
+  pooled +4.54.
+- Contact depth (T5): 46.18 mm summed over 13 bench contacts vs 20.24 over 4 (x2.28), deepest 9.79 mm (hub 2, ws
+  (30, 135, 0), a plain raise the lead stops); held 173.02 vs 60.97 mm (x2.84), deepest 12.24 mm. All the excess is new
+  contacts at poses the lead loses to the fold.
+- Clearance floor: E strap 1.002 mm over the carriage (rule floor 1 mm) on 112 taken poses < 1.1 mm; bump 1.2 reads
+  14.88 (+0.12).
+- Tolerance cliff: 0.5 deg (0.70 mm) from 27.53; the offset itself buys 0.03.
+- Return spring: R17 inherited (0.063 N.m, F >= 0.79 N), gravity only; friction, hysteresis and 3 bistable poses unpriced.
+- The 4th joint: cx 52.5 vs 18.5 and no overhead gain (8/28 both; held 19/71 vs 18/71).
+- Refuted: continuity (flood on file, 0 dropped) and P1 (held - bench +3.01 < 6.0; selection on envsel).
+
+**New knowledge.** (1) Bump or lift levers must lift a pin stack as one rigid body, and the station decides whether the
+stack sits in the bump window at all. (2) On a one-sided relay an arm-fixed part near the zero end is the posterior-IR
+binder whatever it is: the spring belongs on the carriage. (3) A carriage offset under a rigid bump pays in-band ~0.11
+gap per deg. (4) Infrastructure: relay models that select on envsel must install envsel before importing armarc (the
+pose archive is read at import). (5) The auditor's `_depth_sources` crashes on a paired file whose held entry is the
+string 'missing dump' (desmo-geom vs the lead); fix before the next T5 read.
+
+**Next.** The 4-joint relay's measured remainder: lug coil under a pre-registered physical tie-break (14.23 diagnostic),
+a bump window that follows only the carriage's real travel (or band at its floor) to buy back >= 0.60 of the 1.02
+in-band term with the bump-1.2 build margin, the bracket routed at the pad azimuth; select on envsel, claim once, report
+the 2 mm reading on the lead's basis and contact depth. 4-joint rows go to the user as options (this one: 94.63 / held
+17.77 at cx 52.5, against freek 15.40 / 20.50 at cx 33.25); the 3-joint lead stays conecut-knee-knuckle-3r 18.28.
+Model `docs/concepts/models/offset-shortcar-relay-4r.py`, doc `docs/concepts/offset-shortcar-relay-4r.md`, verifier
+`docs/concepts/verify/offset-shortcar-relay-4r-verify.py`, audit `docs/alignment/offset-shortcar-relay-4r.md`, judge
+`docs/concepts/round106_ideation.md`.
