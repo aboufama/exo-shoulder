@@ -505,6 +505,16 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      ~94.65), so 95 (279 takes) may be out of reach for 3 DOF at the allowed seats. Round 15 builds the 3-DOF take-bound
      table; if it stays < 275 that is a USER decision (accept 4 DOF, or accept < 95) - the jump track's 4-DOF relays so
      far all lose in-band (lead-relay-j0 24.92, backbridge 32.13, wobble dead, cap-nullspace 70.64).
+   - *Lead, 03:55 UTC 10-18:* jump round J3 (round 103) closed with no lead change: both 4-joint levers died on metal,
+     not kinematics. The relays scored lead-relay-j0 22.18, backbridge 32.13 and wobble 32.92; the cap null-space scored
+     57.70 (all frozen exact, all audited and upheld). Jump track relaunched as rounds 104-106 (wf_6c42dda0-f91), focused
+     on J3's lessons:
+     - a price-first gate (added metal priced at the measured +0.2 points per mm before any ghost);
+     - lens a, a length-changing link: one real catalogue miniature guide inside link 2, or the counted cuff slide. It
+       targets the 73 stretched-fold losses and adds no hub and no ring crossing;
+     - lens b, one outside-field mechanism, only if it passes the pricing;
+     - machinery fixes: the verify bar is the lead's 18.28, near-touch objective everywhere, and a ledger entry for
+       each round winner.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
