@@ -143,7 +143,7 @@ def bench_eval(B, params):
     r, M = _report(B, params); r.pop("params", None); return r
 
 
-def seed(az1, el1, top=3):
+def seed(az1, el1, top=3, wa_abs_max=180.0):
     """kinematic seeding on the FIT bench only (Bench(60,160): its 60 clip frames + 160 workspace poses; never the claim
     bench, never held out): th = angle(u1, Q u3) per pose; J3 seats wd 45..110 x wa -180..170 (5 / 10 deg) ranked by the
     share of fit poses inside the lead family's th window LEAD_WIN (the dyad is the lead's at d_a1 = d_a2 = 0); a seat
@@ -161,7 +161,7 @@ def seed(az1, el1, top=3):
     thr = np.degrees(np.arccos(np.clip((np.einsum("ij,sj->si", R["Q0"], U3)) @ u1, -1, 1)))      # ray approximation
     out = []
     for k in np.argsort(-share, kind="stable"):
-        if abs(thr[k] - TH0_LEAD) > TH0_TOL + 3.0: continue
+        if abs(thr[k] - TH0_LEAD) > TH0_TOL + 3.0 or abs(WA[k]) > wa_abs_max: continue
         d3 = OSN.seat(R["Q0"] @ U3[k], BASE["b3"])[1]; th0 = math.degrees(math.acos(float(np.clip(d1 @ d3, -1, 1))))
         if abs(th0 - TH0_LEAD) > TH0_TOL: continue
         # AMENDMENT 2 (before any CMA): J2's seat must lie on the shoulder's skin, r2 <= R2_MAX from GH (OSN.seat marches
@@ -187,7 +187,8 @@ def viz_export(par): return CC.viz_export(_clamp(dict(PARAMS, **par)))
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
     if mode == "seed":
-        print(json.dumps(seed(float(sys.argv[2]), float(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 3))); sys.exit()
+        print(json.dumps(seed(float(sys.argv[2]), float(sys.argv[3]), int(sys.argv[4]) if len(sys.argv) > 4 else 3,
+                              float(sys.argv[5]) if len(sys.argv) > 5 else 180.0))); sys.exit()
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "viz":
         print(json.dumps(viz_export(par), default=float)); sys.exit()
