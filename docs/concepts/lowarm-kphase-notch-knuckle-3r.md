@@ -95,3 +95,90 @@ optional: hub 2 needs >= 0.41 mm at az ~124, and ring2 needs >= 0.45 mm.
 3. Re-run the guard at the three play corners and the +0.1 / +0.2 probes.
 4. If 264 >= 0.2 at every corner, run the full frozen exact Bench(110,360) sided wears with dowel 45.75, then
    CMA over (beta -158..-156, n, a0 / a1, f, f2) to the convergence gate.
+
+## Verification (independent verifier, 2026-10-18 ~15:20-16:00 UTC)
+
+Verdict: **VERIFIED at v_gap 18.47** (score 93.28) on Bench(110,360), exact path, frozen shape. The champion scores 75.94
+through the same checks (the risley-turret verifier's kit checks + 1 mm radial clearance). This is **not a lead change**
+and the claim's lever (pose 264 from contact to take) **did not land**. The 13.33 in the row is a Bench(60,160) fast fit,
+and the claimant says so. Harness: `docs/concepts/verify/lowarm-kphase-notch-knuckle-3r.py`. It loads the claim's model
+unchanged at its best config (beta -157, notch n 2.45 / az 46-98 / F_K+6.0 to the crown, J2 dowel 45.75) and adds two
+metal corrections. Per-pose dumps: `docs/alignment/remeasure/lowarm-kphase-notch-knuckle-3r_{bench,held}_perpose.json`.
+
+**Checks.**
+1. **DOF.** 3 active (J1, J2, J3). K is slaved by the desmo drive (a closed loop, never read). The crank pivot and the
+   two knee pins are passive rotations, each fixed by its loop. There are 0 passive translations and no spring, gear,
+   pulley or cable. The dwell hold is stop A (K-own set screw), and its play is priced by the sided wears at P5
+   (+0.264 / -0.210 deg K). No coordinate is left undetermined.
+2. **V-OWN (new correction: the notch's skin samples were mis-framed).** The model keeps hub K's skin-checked O20 samples
+   on member 1 (link 1a, the hub's lower member). It drops the 15 that sit inside the notch in link 1a's rest frame, but
+   puts the notch solid on member 7 (link 1b). The O20 above U0 (F+3.15: boss, bearings, cap) turns with the upper member
+   (docs/HARDWARE.md, v5 R6 groups), and the claim itself cuts the notch in link 1b. At K != 0 (up to 45.6 deg on taken
+   poses) the model's hole therefore sat up to 45 deg away from the real notch, and a sector of real upper wall and
+   crown went unchecked against the skin. The verifier moves the 161 member-1 samples inside the O20 above F+3.15 to
+   link 1b, then drops the 15 inside the notch in link 1b's frame. **Measured effect: none** (every take, contact and
+   in-band sample identical at both corners). The upper wall of hub K is not a skin binder anywhere on the bench.
+   Part-vs-part checks were already framed right: the PLATE-hubK gate runs in link 1b's frame, and the per-pose sd_cyl
+   patch rotates the notch with link 1b.
+3. **V-ARM (the parent verifier's correction).** The crank's short-arm underside is now sampled 1.38 mm below its sheet
+   (24 samples). Effect: none.
+4. **Pose-taking.** The parent's verified checks run unchanged: closure, joint and slide ranges, part-part clearance
+   (>= 1 mm, 0.15 running gap), branch flips, hub-axis access, the J2 dowel at 45.75 (0 poses cut; max taken dK 45.615)
+   and the PLATE-hubK / pocket-pa stroke gates (dK_lim 46.0). Lost poses: fold 88, contact 4, everything else 0.
+   - Continuity flood at +0.264: connected_full 18.39 (0 dropped, 128 of 128 forced takes connected through 526
+     envelope poses). connected_knn reads 20.08 (6 dropped).
+5. **No bench artefact.** Every number is CB_EXACT=1. The 1228-point notch solid is contact-only, so it adds no weight
+   to in-band. The in-band parts are kstop's, plus the re-phased crank, plate and horn.
+
+**Bench(110,360), exact, frozen, corrected (V-OWN + V-ARM):**
+
+| wear | gap | reach | ib14 | ib10 | follow | contact | 203 (main / walls) | 264 | near1 |
+|---|---|---|---|---|---|---|---|---|---|
+| +0.264 | 18.39 | 0.7278 | 0.8989 | 0.5793 | 1.0 | 0.0106 (4) | 0.61 / 0.158 | -0.249 | 20.57 |
+| -0.210 | 18.46 | 0.7278 | 0.8982 | 0.5788 | 1.0 | 0.0106 (4) | 0.80 / 0.347 | -0.087 | 20.10 |
+| **per-pose worst (P5)** | **18.47** | 0.7278 | 0.8982 | 0.5788 | 1.0 | 0.0106 (4) | 0.158 | -0.249 | |
+| probe +0.1 mm | 19.01 | 0.7250 | 0.8982 | | | 5 (139 flips) | | | |
+| probe +0.2 mm | **19.56** | 0.7222 | 0.8982 | | | 6 (139, 203 flip) | | | |
+
+- The claimant's own frozen wears (no corrections) give the same numbers to 0.00: 18.39 / 18.46, worst 18.47,
+  probes 19.01 / 19.56.
+- Takes: 262 of 360, overhead 8 of 28. The 4 contacts are 205 (-4.44), 237 (-9.74), 264 (-0.25 at e+) and 316
+  (-1.235, link 2).
+- 264's binders at e+ are ring2 (-0.249) and hub 2 (c12 -0.214), exactly as the claim reports. The phase clears every
+  drive part there.
+- Minimum metal over taken poses is 0.07 mm (pose 139, link 2).
+
+**Paired comparison with the lead (conecut-knee-knuckle-3r, its verified dumps).**
+- Bench: +0.18, all in-band. Same 262 takes and the same 4 contacts. CI90 [0, 0.35], P(better) 0.
+- At the +0.2 probe this cell reads 19.56 against the lead's 18.83.
+- Against the parent: lowarm-kstop-knuckle-3r was verified at 18.69 (P5 worst), so the phase is worth -0.22 in-band on
+  that chain. It is still +0.18 behind the lead.
+
+**Held out (frozen, exact, the same corrections; never searched or selected on).**
+- +0.264: 22.80. -0.210: 22.87. Per-pose worst: **22.87** (reach 0.6891, ib14 0.8971, ib10 0.5774, follow 1.0,
+  13 contacts, overhead 18 of 71).
+- Against the lead's held 22.38: **+0.50**, split reach +0.32 / in-band +0.29 / contact -0.11. CI90 [-0.02, 0.79],
+  P(better) 0.088. That sits on the round's 0.5 held kill line.
+- The lead takes 3 held ws poses this cell does not: 274, 1054 and 1068. 1068 (dK 45.88) is cut by the re-phased J2
+  dowel (45.75, was 46.35). The dowel also cuts 835 (dK 46.0), which is a contact on the lead. So the dowel re-phase that
+  beta -157 needs (dK_lim 46.0) costs on held, and gains nothing on the bench (0 bench poses cut).
+- Fold margin th (V3b, sided): minimum 5.317 on dwell and 5.248 on forced poses; 0 poses under 5. m_sub < 1 deg on
+  98-100 dwell poses (the lead's G4 WATCH item, carried).
+
+**Issues for the auditor and the next agent.**
+- **The notch cuts the v5 cap and its thread** (buildability, M-class). The claim says "groove, thread and access bore
+  are untouched", which holds for stop A. But the plate crosses hub K at F_K+7.08..9.94, which reaches above the boss
+  top H1 (8.75). In the O20 v5 stack, z 8.75-10.25 is the cap's 1 mm skirt (r 9-10) threaded onto the boss's O18
+  M18x0.5 spigot (docs/HARDWARE.md). A notch to r 7.55 therefore removes the cap skirt and the spigot thread over a
+  52-deg sector, leaving 86 % of about 3 threads engaged. The cap tightens at an uncontrolled azimuth, so the notch has
+  to be indexed (clocking pin) or machined after assembly. The plate footprint az 54.9-89.7 inside the notch 46-98
+  allows about +-8 deg. This is the same class of finding as conecut-h2facet's cap flat. It needs the auditor's
+  'Keep O20 only' ruling and a stated build spec.
+- The wall over the MR117 is 2.05 mm at beta -157 (rule floor 2.0). pa_eff_horn is 42.6 against the 43 limit, a
+  0.4 deg margin.
+- 203 holds 0.158 at e+ (>= 0.15) but flips at the +0.2 probe, as on kstop. 139 is 0.072 everywhere. Under the round's
+  rule the cell is ranked at the probe: 19.56.
+- Not converged (11 gate-0 configs, no CMA). The hub-2 / ring2 flats that would decide 264 are not modelled. If they
+  are ported, the flat must be framed in link 2 (hub 2's upper member, az_L2 = 124 - q2), per the conecut-h2facet
+  verification, and ring2 needs >= 0.45 mm with RC_MIN as a cut.
+- Kit density was not re-measured (tools/sample_density.py needs a frozen() entry point this model lacks).

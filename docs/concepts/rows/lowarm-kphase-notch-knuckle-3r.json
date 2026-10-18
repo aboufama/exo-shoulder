@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 4,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-18T15:00:00Z",
  "reach": 0.7688,
@@ -15,11 +15,11 @@
  "inband10": 0.577,
  "contact": 0.0,
  "gap": 13.33,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7278,
+ "v_follow": 1.0,
+ "v_inband14": 0.8982,
+ "v_inband10": 0.5788,
+ "v_gap": 18.47,
  "n_configs": 11,
  "bench": "Bench(60,160) fast fit (gap above) + exact frozen wear on the guard poses 139/203/205/237/264/316 at K play 0 / -0.210 / +0.264",
  "best_params": {
@@ -48,7 +48,7 @@
  },
  "verdict": "Gate 0 half-passed, measured: phasing the stage-2 pair to beta -157 with a 2.45 mm crown-open notch in link 1b's boss clears every drive part at 264 (nose boss 0.48 mm at the e- corner) while keeping the stroke (dK_lim 46.0) and 203 / 139 unchanged. 264 is NOT yet a take: its remaining binders are hub 2 (c12 -0.21) and the stage-1 ring2 lip (-0.25) at the e+ corner, which need the hub-2 flat (conecut-h2facet measured +0.26..+0.37 there on the kstop cell) and a >= 0.45 mm ring2 lip relief (not modelled yet; RC_MIN must cut). Not converged, not a verdict.",
  "limiter": "pose 264 (plane 30 / elev 165 / axial -60, K = 0 dwell): after the phase + notch, ring2 (stage-1 ring lip on link 2) -0.249 mm and hub 2 upper wall c12 -0.214 mm at the e+ play corner (+0.264 deg K); the notch wall over the MR117 (2.05 mm) caps beta at about -157 (deeper phase needs n > 2.5); beta -155 loses stroke (dK_lim 44.0 < 45.6)",
- "note": "Model: docs/concepts/models/lowarm-kphase-notch-knuckle-3r.py (kstop's harness unchanged; hub K's solid = O20 cylinder minus the notch, CSG max(sd_cyl, -sd_notch), in the PLATE-hubK stroke gate AND every per-pose collide; hub-K contact samples inside the notch dropped and a dense notch solid added on link 1b; rigid samples projected). Without the per-pose notch the fit collapses (reach 0.21, follow 0.12: measured, sweep k 0). Convergence gate NOT run (11 configs, gate-0 scan only): gain over the 2nd half / last third / top-5 spread not applicable yet. Full frozen exact Bench(110,360) wears at beta -157 (+0.264 / -0.210, dowel 45.75) were launched; they leave 264 a contact by construction (no flats), so they measure only the dowel re-phase cost. Local only, niced (one 3-process burst during the guard scan, over the 2-process rule; noted).",
+ "note": "Model: docs/concepts/models/lowarm-kphase-notch-knuckle-3r.py (kstop's harness unchanged; hub K's solid = O20 cylinder minus the notch, CSG max(sd_cyl, -sd_notch), in the PLATE-hubK stroke gate AND every per-pose collide; hub-K contact samples inside the notch dropped and a dense notch solid added on link 1b; rigid samples projected). Without the per-pose notch the fit collapses (reach 0.21, follow 0.12: measured, sweep k 0). Convergence gate NOT run (11 configs, gate-0 scan only): gain over the 2nd half / last third / top-5 spread not applicable yet. Full frozen exact Bench(110,360) wears at beta -157 (+0.264 / -0.210, dowel 45.75) were launched; they leave 264 a contact by construction (no flats), so they measure only the dowel re-phase cost. Local only, niced (one 3-process burst during the guard scan, over the 2-process rule; noted). | VERIFIER (2026-10-18 ~16:00): v_gap 18.47 frozen exact Bench(110,360) per-pose worst of the P5 sided wears (champion 75.94 through the same checks, the risley-turret verifier's); +0.2 probe 19.56; held 22.87 (+0.50 vs the lead, P(better) 0.088). Verified, NOT a lead change: 264 stays a contact (ring2 -0.249 / hub 2 -0.214 at e+). Corrections V-OWN + V-ARM change nothing. Build issue: the notch cuts the v5 cap skirt + M18x0.5 spigot thread (clocked cap needed).",
  "mechanism": {
   "joints": {
    "active": [
@@ -69,5 +69,27 @@
   ],
   "complexity": 16.75
  },
- "doc": "docs/concepts/lowarm-kphase-notch-knuckle-3r.md"
+ "doc": "docs/concepts/lowarm-kphase-notch-knuckle-3r.md",
+ "t_verified": "2026-10-18T16:00:00Z",
+ "verification": {
+  "bench": "Bench(110,360) exact frozen, per-pose worst of the P5 sided dwell wears (+0.264 18.39 / -0.210 18.46) = 18.47 (score 93.28); 262 takes, 4 contacts (205, 237, 264 -0.249 at e+, 316), overhead 8/28; probes +0.1 19.01 (139 flips) / +0.2 19.56 (139, 203 flip)",
+  "held": "per-pose worst 22.87 (+0.264 22.80 / -0.210 22.87); paired vs the lead 22.38: +0.50 (reach +0.32, in-band +0.29, contact -0.11), CI90 [-0.02, 0.79], P(better) 0.088; dowel 45.75 cuts held 835 / 1068",
+  "vs_lead_bench": "+0.18 (all in-band), same takes and contacts, CI90 [0, 0.35], P(better) 0",
+  "corrections": "V-OWN (hub-K skin samples above U0 moved to link 1b, the notch's body; the claim dropped them in link 1a's frame, mis-framed at K != 0): 161 moved, 15 dropped, effect 0.00; V-ARM 1.38 (crank short-arm underside): effect 0.00; the claimant's uncorrected wears reproduce to 0.00",
+  "continuity": "connected_full 18.39 at +0.264 (0 dropped; knn graph 20.08)",
+  "th_margin": "held min 5.317 dwell / 5.248 forced, 0 under 5; m_sub < 1 deg on 98-100 dwell poses (G4 carried)",
+  "champion_same_bench": 75.94,
+  "harness": "docs/concepts/verify/lowarm-kphase-notch-knuckle-3r.py",
+  "dumps": [
+   "docs/alignment/remeasure/lowarm-kphase-notch-knuckle-3r_bench_perpose.json",
+   "docs/alignment/remeasure/lowarm-kphase-notch-knuckle-3r_held_perpose.json"
+  ],
+  "issues": [
+   "264 still a contact: the claimed lever (264 -> take) did not land; the hub-2 / ring2 flats are not modelled",
+   "the notch crosses the v5 cap skirt (r 9-10) and the M18x0.5 spigot thread (z 8.75-10.22): the cap must be clocked (pin) or the notch machined after assembly; 86 % thread left; needs the auditor's 'Keep O20 only' ruling",
+   "ranked at the +0.2 probe: 19.56 vs the lead's 18.83",
+   "wall over MR117 2.05 (floor 2.0); pa_eff_horn 42.6 vs 43",
+   "not converged (11 gate-0 configs); kit density not re-measured"
+  ]
+ }
 }
