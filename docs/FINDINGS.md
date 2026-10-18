@@ -3595,3 +3595,61 @@ judge or kit file changed; nothing was selected on held-out poses.
 * **Blocker for the user (big update):** accept a 4th joint (best verified 15.40 polished, not yet 95), J1 seats beyond
   ruling 4 (unmeasured), or the 3-joint ceiling (18.28 today; ~17.2 = score 93.7 if the lead's 4 contacts are cleared).
 * **Next:** the crest-seat knuckle ghost (the one empty cell); the optional front-seat report-only row; the lead takes the blocker text to the user.
+
+## proxtrack-relay-knuckle-4r judged REFUTED as modelled: the bump lifts the pin-a boss through the knee link; priced buildable it reads 17.46 frozen exact / 21.46 held, so the 4-joint best stays freek-oracle-route (2026-10-18, verification judge, 2 lenses)
+
+* **Claim:** round 105 screened row, frozen exact Bench(110,360) gate 14.40 (chain-only ib14 0.8962) / plain 14.02
+  (pooled) / near1 17.68 at PHI 35 / ds 19.5 / rt 1.5; held 18.51 / 18.01. 4 counted joints (J1, J2, J3, proximal relay),
+  complexity 52.5. This was the closest number on file to 95 (score 94.90 unverified).
+* **Lens remeasure (fbad337), not refuted:** every number reproduces to 0.00 on the claim's own model. It runs its own
+  strict continuity flood (1188 of 1189 envelope nodes connected, 0 branch changes, connected = static: bench 285, held
+  731). Min th is 5.000 deg on 395 bench and 933 held taken poses. Paired with the lead, the claim takes all 262 of the
+  lead's poses plus 23 relayed ones. Contact is where that gain is paid: 13 vs 4 bench contacts and 47 vs 14 held;
+  summed depth 50.7 vs 20.2 mm bench and 190.6 vs 61.0 mm held. Overhead is unchanged (8/28 bench, 18/71 held).
+* **Lens buildability (18c4b46), refuted:** the claim's "rigid local bump" moves the pin-a boss (member 3) up 1.76-5.69 mm.
+  The knee link rides on top of the boss on pin a (`off_k = tp + RUN`), but its bump is only 0-3.72 mm. The bumped boss
+  top therefore sits 5.05-5.08 mm inside the knee link's eye at all 184 fit-bench poses; the lead's stack gap is +0.50 at
+  every pose.
+  * The minimal buildable stack lifts the knee eye over the lifted boss with a 60-deg ramp back down. It reads gate
+    **17.46** / plain 14.40 / near1 18.06 frozen exact, and chain-only ib14 drops 0.8962 -> 0.8656. Reach, follow and
+    contacts are unchanged; jams go 6 -> 5.
+  * Held out the same stack reads 21.46 / 18.37 / 23.75. That is +3.06 gate on the bench and +2.95 held, over the 3-point
+    bar.
+* **Judge's own check:** a re-run of the stack harness gives the same result (-5.083 min, -5.048 p50). The judge also
+  ran the most lenient point-by-point reading, holding the knee link fixed to the boss with no rotation about pin a. Each
+  knee point over the boss is compared with the nearest bumped boss point + tp. Every one of the 26 knee points over the
+  boss still interferes at every pose, by 2.59-3.99 mm. The interference is real under any reading. The claim's
+  per-point bump lands both bodies on the same target cylinder.
+* **The adversarial questions:**
+  1. *In-band reading:* the gate (chain-only, pre-registered) is the reading. The pooled plain number is lifted by 303
+     arm-fixed shell-underside samples per pose, 99.5 % of them in band, at about 1.0-1.2x kit density. That is real
+     metal, but it dilutes the fraction: report it, never quote it as the result.
+  2. *The bump's sizing is clean, its shape is not:* the amounts come from the fit bench only (both lenses, in code).
+     Making the per-pose radial direction rigid costs 0.00 (direction spread 6.4 deg max). The stack is the defect.
+  3. *Jam -> contact and the annular clearance:* both rule changes make the number worse (15.62 -> 16.82 at the
+     pre-registered config) and reproduce. They do not flatter it.
+  4. *Pick:* PHI 35 and rt_extra 1.5 (at the box edge) are single claim-bench readings. The fast pick was made under the
+     superseded jam -> lost rule; re-read today it is 4.25 / 4.65 against 3.75 / 4.15, within fast noise. Bench -> held
+     inflation is +4.11, the same as the lead's +4.10, so there is no sign of a claim-bench over-fit.
+  5. *Continuity:* clean (see the remeasure lens).
+  6. *Fold margin:* held, but the relayed poses sit exactly on 5.000 deg by construction of the least-phi solve.
+  7. *Components:* the relay is a made curved plain guide (slotted Ti shell, T-nut carriage, iglidur strip); no
+     catalogue curved guide fits h_c 1.7. Three items cost 0.00 or nothing: the T-nut flange is unmodelled (priced
+     0.00), the constant-force spring has no part number (an 8 mm coil beyond the zero dowel clears the chain by at
+     least 16.7 mm), and the bracket must be machined from solid. Two risks remain unpriced. There are 3 bistable relay
+     poses (at most ~0.8 points). The R17 preload covers gravity only, not carriage friction.
+* **Paired at the buildable number:**
+  * Against the 3-joint lead conecut-knee-knuckle-3r (18.28 / 22.38): 0.82 better on the bench and 0.92 better held.
+  * Against freek-oracle-route-knuckle-4r: 2.06 worse than its polished 15.40 and 0.96 worse than its held 20.50.
+  * Cost: 4 joints at complexity 52.5, against freek's 33.25 and the lead's 18.5. Among 4-joint designs freek
+    dominates it.
+  * Row status stays `screened` with `refuted_by`. The worst credible number is 17.46 (score 93.65), held 21.46. The
+    pre-registered PASS (<= 15) fails, and the number sits 0.04 under the 17.5 kill.
+* **New knowledge:** a radial bump sized point by point cannot be applied to bodies that stack on a common pin. Each body
+  lands on the same target surface, so the stack's thickness (tp + running gap) disappears. Any bump or lift lever must
+  lift a pin stack as ONE rigid body: boss, pad and knee eye together, by the boss's maximum. Here that layer costs about
+  3 gate points through the knee link's in-band, because the eye rises 5.7 mm at every clip pose.
+* **Next:** the lever that keeps the morphology alive is to move the knee stack off the track band, keeping the boss low,
+  rather than lifting it. Re-wear frozen exact and held out with the stack lifted as one body, the spring given a part
+  number and an envelope, and the T-nut given its flange. No 4-joint or 3-joint design is verified at 95; freek
+  (15.40 / 20.50) stays the best 4-joint row.
