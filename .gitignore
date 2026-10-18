@@ -67,4 +67,4 @@ pipeline/full-exo/designs/cad_r21_*/
 .state/
 
 # in-progress temp files written by running re-measures (renamed on completion)
-docs/alignment/remeasure/.*_tmp.json
+docs/alignment/remeasure/.*tmp*.json
