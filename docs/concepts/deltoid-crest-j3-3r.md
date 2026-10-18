@@ -528,7 +528,7 @@ part-part split, re-dispatch 3 the held-out read, dumps, th margin and flood):
 
    Lifting the neck clears 5 of the 38 part-part poses, but 4 of those 5 then fail on skin contact at hub 2 and hub 3,
    so the variant gains 1 take and loses 1.12 points of contact: +1.07 net. The hub2-neck poses are skin-bound under
-   the collision. File: . No held read: the
+   the collision. File: `docs/concepts/verify/deltoid-crest-j3-3r_audit2_neckover_frozen.json`. No held read: the
    variant loses on the bench.
 
 4. **Bugs, conventions, over-strict checks.** The model is zc-frontier-3r's build and checks unchanged (the verified 3R
