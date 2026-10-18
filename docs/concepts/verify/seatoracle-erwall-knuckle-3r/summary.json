@@ -1,0 +1,152 @@
+{
+ "L0": {
+  "kit": 174.65,
+  "static": 165.18,
+  "conn": 221.45,
+  "near": 225.18,
+  "ws_taken": 2,
+  "contacts": 13,
+  "contacts_ws": 13,
+  "ib14": 0.8509,
+  "ib10": 0.6445,
+  "follow": 0.1273,
+  "reach": 0.0056,
+  "moved": 52,
+  "min_mm": 0.006,
+  "near1": 4,
+  "lost_ws": {
+   "parts": 192,
+   "fold": 60,
+   "slide": 10
+  },
+  "oh_taken": 2,
+  "oh_contact": 2,
+  "p203": {
+   "st": "refused",
+   "why": "slide",
+   "kind": "ws",
+   "elev": 90.0,
+   "plane": 0.0,
+   "axial": 45.0,
+   "moved": false
+  },
+  "margins": {
+   "min_th_margin": 4.013,
+   "at_pose": 166,
+   "below_5_5": 13
+  },
+  "dropped": 83
+ },
+ "L0b": {
+  "kit": 18.26,
+  "static": 17.69,
+  "conn": 17.69,
+  "near": 22.11,
+  "ws_taken": 277,
+  "contacts": 13,
+  "contacts_ws": 13,
+  "ib14": 0.8862,
+  "ib10": 0.5527,
+  "follow": 1.0,
+  "reach": 0.7694,
+  "moved": 26,
+  "min_mm": 0.052,
+  "near1": 12,
+  "lost_ws": {
+   "fold": 60,
+   "slide": 8,
+   "parts": 2
+  },
+  "oh_taken": 9,
+  "oh_contact": 5,
+  "p203": {
+   "st": "refused",
+   "why": "parts",
+   "kind": "ws",
+   "elev": 90.0,
+   "plane": 0.0,
+   "axial": 45.0,
+   "moved": false
+  },
+  "margins": {
+   "min_th_margin": 5.5,
+   "at_pose": 333,
+   "below_5_5": 0
+  },
+  "dropped": 0
+ },
+ "S1": {
+  "kit": 22.9,
+  "static": 21.73,
+  "conn": 21.73,
+  "near": 26.47,
+  "ws_taken": 272,
+  "contacts": 27,
+  "contacts_ws": 21,
+  "ib14": 0.8986,
+  "ib10": 0.51,
+  "follow": 0.9455,
+  "reach": 0.7556,
+  "moved": 32,
+  "min_mm": 0.469,
+  "near1": 8,
+  "lost_ws": {
+   "fold": 59,
+   "slide": 8
+  },
+  "oh_taken": 5,
+  "oh_contact": 9,
+  "p203": {
+   "st": "refused",
+   "why": "slide",
+   "kind": "ws",
+   "elev": 90.0,
+   "plane": 0.0,
+   "axial": 45.0,
+   "moved": false
+  },
+  "margins": {
+   "min_th_margin": 5.5,
+   "at_pose": 306,
+   "below_5_5": 0
+  },
+  "dropped": 0
+ },
+ "S2": {
+  "kit": 24.54,
+  "static": 22.91,
+  "conn": 22.91,
+  "near": 28.72,
+  "ws_taken": 273,
+  "contacts": 26,
+  "contacts_ws": 20,
+  "ib14": 0.8816,
+  "ib10": 0.4406,
+  "follow": 0.9455,
+  "reach": 0.7583,
+  "moved": 34,
+  "min_mm": 0.163,
+  "near1": 10,
+  "lost_ws": {
+   "fold": 55,
+   "slide": 12
+  },
+  "oh_taken": 4,
+  "oh_contact": 10,
+  "p203": {
+   "st": "refused",
+   "why": "slide",
+   "kind": "ws",
+   "elev": 90.0,
+   "plane": 0.0,
+   "axial": 45.0,
+   "moved": false
+  },
+  "margins": {
+   "min_th_margin": 5.5,
+   "at_pose": 306,
+   "below_5_5": 0
+  },
+  "dropped": 0
+ }
+}
