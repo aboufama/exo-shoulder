@@ -172,8 +172,8 @@ One fast evaluation per seed (lead's dyad, rest th, drive, knee and stop; J3 sea
   the 220 poses. The drive is built in mm on a sphere about GH (the crank pivot sits (HUB_R + 6) / f2 rad beside hub 2,
   the lug and nose on link 1b's fitted level), so the same parts at a new seat are a different spherical mechanism. The
   acromion-top re-seat already showed it: the drive fails beyond +6 deg of J1 azimuth (acroant-conecut-knuckle-3r row).
-  The one seed with a working drive ((0, 40), medial J3) takes nothing: 95 of 220 poses in the skin (hub 3 / link 2 on
-  the medial arm), 88 fold, 28 knee slide.
+  The one seed with a working drive ((0, 40), medial J3) takes nothing: 95 of 220 poses in the skin (J3 on the medial arm;
+  no per-part split at stage 0), 88 fold, 28 knee slide.
 - **Metal second.** Where poses close, the arm-side metal floats: (0, 17.5) medial J3 has hub 2, hub 3, link 2, E strap,
   knee, pad and boss at 0.0 in band with medians 31-58 mm off the skin (stage0_az0_el17.5.json `parts`); skin and part
   collisions take 10-95 poses per seed.
@@ -239,7 +239,7 @@ finding F1 flagged.
   - **Kinematics.** With the lead's dyad these seats add at most 3 % of window (0.914 -> 0.945). Even that needs J3 on
     the medial upper arm, against the trunk. The 0.99-1.00 ceiling that made the cell look promising belongs to a
     different dyad: J1 and J3 90-170 deg apart, arcs ~130 / ~45.
-  - **The drive.** The slipper-nose K drive is sized in mm on the lead's 42-62 mm hub levels. At J1 seats 59-167 mm
+  - **The drive.** The slipper-nose K drive is sized in mm on the lead's hub levels (J1 / K / J2 at 50 / 55 / 62 mm from GH; the pick's are 97 / 68 / 78). At J1 seats 59-167 mm
     from GH it becomes a different spherical mechanism, its crank pressure angle runs 75-88 deg (gate 38), and K
     cannot open. A 12-parameter CMA with the drive phase free did not find one honest drive in 122 tries.
   - **Metal.** Hub 2 and the J1-side links float 19-29 mm off the curved back (in-band 0.00-0.42), as the older

@@ -3671,7 +3671,7 @@ judge or kit file changed; nothing was selected on held-out poses.
     flood or held-out wear was run.
 * **Why (attribution):**
   1. **The K drive cannot open (the first wall).**
-     - The slipper-nose drive is sized in mm on the lead's 42-62 mm hub levels. The crank pivot sits (HUB_R + 6) / f2
+     - The slipper-nose drive is sized in mm on the lead's hub levels (J1 / K / J2 at 50 / 55 / 62 mm from GH; the pick's are 97 / 68 / 78). The crank pivot sits (HUB_R + 6) / f2
        rad beside hub 2.
      - J1's skin at these seats is 59-167 mm from GH (the lead's is 42), so the same parts form a different spherical
        mechanism.
