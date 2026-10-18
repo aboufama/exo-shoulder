@@ -91,7 +91,8 @@ K.log_event(f"screened <name>: gap {rep['gap']} (baseline 68.93)")
   part-part clearance, `over` builds 1 mm) -> the pose is not taken; joint partners exempt within HUB_R + 2 mm
   of the shared joint. To avoid collisions by construction, give the upper part `over=[(name, 1.0)]`: its underside is
   raised to the other's top + 1 mm wherever they meet in any fit pose (the template's link 2 over link 1 and the neck:
-  without it 34 % of the template's closing poses collide; link 2 then pays for it: 5 % in band).
+  without it 34 % of the template's closing poses collide; link 2 then pays for it: 5 % in band). Ramps, `over` and the
+  K5 climb repeat until no sample rises (Verification, bug 4).
 - **K7.** `neck_member(F, p_from)`: 14 x 6 strap from the arm-end plate (direction p_from) to the start of BOTTOM's bar
   (RH @ (67.5 Wb + 40 Db)), K3 underside, K5 climb.
 
@@ -133,11 +134,15 @@ covers 56 % of an O20 disc, reaches 7.5 mm: the audit flags it); no continuity o
 
 ## Tests
 
-`OMP_NUM_THREADS=1 python3 -m pytest -q tools/test_concept_kit.py` (22 tests, ~35-45 s): directions vs band_impl, frames
+`OMP_NUM_THREADS=1 python3 -m pytest -q tools/test_concept_kit.py` (27 tests, ~25-45 s): directions vs band_impl, frames
 vs Bench, closure vs a brute-force circle scan on random vectors (both branches) and near-degenerate cases (b ~ w,
 tangent circles), K3 march vs a brute 1 mm march on real poses, `outer` vs concept_baseline, `dist_many` vs
 `B.dist` (incl. points outside the grid box), collisions on constructed hit / miss / exempt cases, `over`, K2 on a
-constructed flip (frames rule and dense rule), and the baseline row reproduction.
+constructed flip (frames rule and dense rule), the baseline row reproduction, and `over` as a fixed point (a constructed
+case, the remote-pole reproducer, the template: no `over` pair in contact outside the shared-joint zone; Verification,
+bug 4). 2026-10-18: `test_template_runs_on_kit_conventions` fails (template collide 0.0095: hub1 / hub3 and hub1 / neck,
+pairs without `over`) before and after bug 4's fix alike; `test_remote_pole_over_pairs_clear_in_k6_order` is an
+expected failure (the pair-order hole, Verification).
 
 ## Verification (adversarial verifier, 2026-10-15)
 
@@ -169,6 +174,45 @@ Bugs found and fixed (each with a test):
    chain does not close in) for every pose, so a strap whose arc varies did not end on its axis, and the layout
    changed with the pose set (dense K2 rebuilds on other frames). Now each pose uses its own angle, the sample count
    the median. No number changed for closure-built links (constant arc).
+4. **`over` judged before the climb (2026-10-18; a MEASUREMENT change).** `fit_profiles` ran ramps -> `_over` -> K5
+   climb once. `_over` picks the samples "near" the lower member with `_near` at the member's CURRENT radius (the
+   layout widens with radius, `_scale`; the arc is angle x radius; the shared-joint zone is HUB_R + 2 mm of arc), so
+   samples it passed at their pre-climb radius could be lifted by the climb into the lower member's layer, and K6
+   rejected the pose. Reproducer (Bench(60, 160) fast): remote-pole-fourbar-j2-3r at the near-isogram vector (th0 86.43,
+   dA0 23.968, pA0 -93.116, dA1 72.584, pA1 -37.479, g 22.24, gam -99.152, eps -0.742, tw 17.453): link 1 over crank
+   A, 6 samples ~17 mm from the shared A0 axis at 87.5 mm, on crank A (87.0 + 3 mm); `_over` on the final profile asked
+   for 91.0; K6 rejected 190 of 191 closing poses (collide 0.9948, gap 274.37). Not the pair order: K6 upper-first gave
+   the same 0.9948. Now ramps -> `_over` -> climb repeat per `over` member until no sample rises (`max_pass` 4; a member
+   still rising is listed as `over_unsettled` in the report: none seen); the result is the single pass's profile,
+   bit for bit, wherever the second pass raises nothing. Reproducer: link 1 settles in 3 passes (those 6 samples
+   +3.46 mm), link 1 / crank A 190 -> 0 poses, collide 0.9948 -> 0.2723, gap 274.37 -> 133.04 (what K6 still rejects
+   is the pair-order hole below). Tests: a constructed case (one pass collides, the fixed point does not), the
+   reproducer, the template at q 0.95 / 1.0; on the old kit the reproducer test fails (link 1: `_over` asks +3.46 mm).
+
+   Re-scored before -> after (same code, same params, only the kit changed). The 30 verified rows: 24 never reach
+   `_over` (models on their own pipelines, mostly the knuckle family); the 6 that do get bitwise-identical profiles
+   (the second pass raises nothing), so every verified number stands:
+
+   | verified row | `over` members | screening, Bench(60, 160) fast | frozen (fit Bench(60, 160) fast, wear Bench(110, 360) exact) | row gap / v_gap |
+   |---|---|---|---|---|
+   | arm-parked-knee-4r | link2, link3 | 19.32 -> 19.32 | 25.05 -> 25.05 | 19.32 / 26.71 |
+   | dwell-fourbar-knee-3r | L2a, rocker, L2bJ, L2bQ | 144.31 -> 144.31 | 138.70 -> 138.70 | 30.46 / 37.66 |
+   | j3-neck-over-3r | link1b, link2, neck | 26.26 -> 26.26 (its frozen fit, `near` 0: 22.87 -> 22.87) | 28.46 -> 28.46 | 22.87 / 28.46 |
+   | minarc-stop-knuckle-4r | link1b, link2 | 56.70 -> 56.70 | 58.20 -> 58.20 | 6.19 / 19.54 |
+   | spine-parked-j2-3r | link2 | 38.06 -> 38.06 (polish_params) | 43.26 -> 43.26 | 28.49 / 41.0 |
+   | zc-frontier-3r | link2, neck | 30.04 -> 30.04 | 33.51 -> 33.51 (verifier, fit60) | 28.85 / 33.51 |
+
+   Entry points: each model's `bench_eval` / `frozen` (zc: docs/concepts/verify/zc-frontier-3r-gpu-skeptic.py frozen
+   --fits fit60), params = row best_params (else polish_params, else PARAMS). j3-neck-over and zc-frontier reproduce
+   their v_gap exactly; arm-parked, dwell, minarc and spine-parked do not (before and after alike: drift since their
+   verification, NOT from this fix, not investigated here). The other rows with a kit model (59 scored the same way):
+   38 reach `_over`, 5 change, all dead or refuted: remote-pole-fourbar-j2-3r (row PARAMS) 245.81 -> 203.94 (collide
+   0.9451 -> 0.6951); cap-plateau-knuckle-3r 27.13 -> 28.65 (collide 0.0265 -> 0, but the freed poses touch the skin:
+   contact 0.038 -> 0.0582, so the gap is not monotone in this fix); back-anchored-ring-3r 116.31 -> 116.34;
+   slotted-eccentric-j2-3r 275.0 both (Ti mass 124.0 -> 125.5 g); stop-relay-rocker-3r 42.52 both (in-band 10
+   0.4897 -> 0.4873). The template is unchanged (67.87 at q 0.95, 65.05 at q 1.0). `tools/gpu_bench.py`'s
+   `fit_profiles` replica still runs one pass: equal to the kit wherever the second pass raises nothing (every
+   verified row), not on configs like the reproducer.
 
 Honesty holes closed (`audit`, run by every `evaluate`; `honest` = march + K2 + K6 + clean audit):
 skipped hub -> ValueError unless the joint is declared in `Chain.hubless` (listed in the report); hub smaller than O20
@@ -184,3 +228,11 @@ Holes that remain (the verifier must look): a member that samples only part of i
 (the kit cannot know the true outline), understated thickness `t`, a sweep re-run with `resume=False` that drops
 earlier configurations, `n_configs` written by hand, a model that reads poses outside `B` (only held-out clips in
 B are caught), monkey-patching the kit.
+
+K6's pair order (found 2026-10-18 with bug 4, left open on purpose: that change touched only the pass order). `_near`
+is not symmetric (the arc at the FIRST member's radius, the second's largest sample extent); `_over` tests (upper,
+lower), `collisions` tests the chain's member order, so an `over` pair listed lower-first can still be flagged at its
+fixed point. Measured (Bench(60, 160) fast), poses flagged lower-first / upper-first: the reproducer hubJ1 / crank A
+36 / 0, hubJ1 / crank B 6 / 0, crank B / coupler 16 / 0 (52 poses, collide 0.2723); minarc-stop-knuckle-4r link1b /
+link2 4 / 0 (all its 4 rejected poses); zc-frontier-3r link1 / link2 1 / 0 and link2 / neck 3 / 0. Closing it changes
+verified numbers (minarc, zc); `test_remote_pole_over_pairs_clear_in_k6_order` is a strict expected failure until then.

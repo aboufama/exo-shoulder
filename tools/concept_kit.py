@@ -271,7 +271,8 @@ class Member:
     off: level added to the fitted underside (hub stack); grid (ns, nc) + climb_deg: strap climb limit along axis 0
     (step_mm apart); ramps: [(mask (m,), other member name, dz)]: final underside >= the other's level + dz there;
     over: [(other member name, gap)]: wherever it passes over that member (in any fit pose), underside >= the
-    other's top + gap (the K6 clearance by construction; the other must not itself have `over`).
+    other's top + gap (the K6 clearance by construction; the other must not itself have `over`); repeated with the
+    ramps and the climb until no sample rises (fit_profiles), so the final underside satisfies it.
     joints: names of the joints it carries (K6 partners are exempt within HUB_R + 2 mm of a shared joint)."""
     name: str
     D: np.ndarray
@@ -328,19 +329,36 @@ def _levels(B, chain, fit, q, mode):
     return out
 
 
-def fit_profiles(B, chain, fit, q=1.0, mode="march"):
-    """underside radius per sample (final, with offsets, flat levels, climb limit and ramps) -> {name: rho (m,)}"""
+def _climb(m, r):
+    """K5: |d underside / d s| <= tan(climb_deg) along the strap's axis 0 (raises only)"""
+    if not (m.climb_deg and m.grid): return r
+    ns, nc = m.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * m.step_mm; sl = math.tan(m.climb_deg * D2R)
+    return (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1).ravel()
+
+
+def fit_profiles(B, chain, fit, q=1.0, mode="march", max_pass=4):
+    """underside radius per sample (final, with offsets, flat levels, climb limit and ramps) -> {name: rho (m,)}.
+    A member with `over` repeats ramps -> `_over` -> climb until no sample rises (at most max_pass passes): `_over`
+    judges which samples are near the lower member at their CURRENT radius (`_near`: the layout widens with radius, the
+    arc is angle x radius), so samples the climb raised after a single pass were judged at the wrong radius and could
+    end up inside the lower member's layer (K6 then rejects the pose). Every step only raises. A member still rising
+    after max_pass passes is listed in chain.info['over_unsettled'] (K6 still judges every pose)."""
     raw = _levels(B, chain, fit, q, mode); prof = {}; level = {}
     order = sorted(chain.members, key=lambda m: (len(m.over) > 0, len(m.ramps) > 0))
     for m in order:
         r = raw[m.name].copy()
         if m.kind in ("cap", "flat"): r[:] = r.max()
         r = r + m.off
-        for mask, other, dz in m.ramps: r[mask] = np.maximum(r[mask], level[other] + dz)
-        if m.over: r = _over(chain, m, r, prof, fit)
-        if m.climb_deg and m.grid:                            # K5: |d underside / d s| <= tan(climb) (raises only)
-            ns, nc = m.grid; R2 = r.reshape(ns, nc); x = np.arange(ns) * m.step_mm; sl = math.tan(m.climb_deg * D2R)
-            R2 = (R2[None, :, :] - sl * np.abs(x[:, None, None] - x[None, :, None])).max(1); r = R2.ravel()
+        for k in range(max_pass if m.over else 1):
+            r0 = r; r = r.copy()
+            for mask, other, dz in m.ramps: r[mask] = np.maximum(r[mask], level[other] + dz)
+            if m.over: r = _over(chain, m, r, prof, fit)
+            r = _climb(m, r)
+            if k and np.max(r - r0, initial=0.0) <= 1e-9: r = r0; break      # (the climb's float sums: ~1e-14 mm)
+        else:
+            if m.over and max_pass > 1:
+                u = chain.info.setdefault("over_unsettled", [])
+                if m.name not in u: u.append(m.name)
         prof[m.name] = r; level[m.name] = float(r.max())
     return prof
 

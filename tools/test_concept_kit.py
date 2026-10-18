@@ -173,12 +173,85 @@ def test_over_clears_by_construction():
     assert not K.collisions(ch, pts, ch.ok).any() and K.collisions(ch, {"A": D * 70.0, "B": D * 71.0}, ch.ok).all()
 
 
+def assert_over_pairs_clear(ch, prof, fit, listed=False):
+    """every member with `over`: its final underside is a fixed point of `_over` (nothing left to raise), and K6 (the
+    shared-joint zone exempt) flags no fit pose between it and any member it is over. K6 tests the pair with the upper
+    member first (the order `_over` builds against), or in the chain's own member order (listed=True, as evaluate does:
+    `_near` is not symmetric, see KIT.md Verification)"""
+    O = {o.name: o for o in ch.members}
+    for m in ch.members:
+        if not m.over: continue
+        r = prof[m.name]; assert np.max(K._over(ch, m, r, prof, fit) - r, initial=0.0) <= 1e-9, m.name
+        for name, _ in m.over:
+            pair = [o for o in ch.members if o.name in (m.name, name)] if listed else [m, O[name]]
+            hit = K.collisions(K.Chain(members=pair, ok=fit, joints=ch.joints), {o.name: K.member_points(o, prof[o.name]) for o in pair}, fit)
+            assert not hit.any(), (m.name, name, int(hit.sum()))
+
+
+def test_over_is_a_fixed_point_with_the_climb(monkeypatch):
+    """`_near` judges at the member's CURRENT radius (the shared-joint zone is HUB_R + 2 mm of arc at radius, scaled
+    above r_ref): B's samples 8-13 deg from J sit at 50 mm (inside the zone there) when `_over` runs, the climb then lifts
+    them to 69-77 mm, where they are outside the zone and inside A's layer [76, 79] -> K6 hit after one pass. fit_profiles
+    repeats ramps -> over -> climb until nothing rises."""
+    P = 2; k = np.tile([0.0, 1, 0], (P, 1)); t = math.radians(40.0); v = np.tile([math.sin(t), math.cos(t), 0], (P, 1))
+    A = K.strap_member("A", k, v, ("J",)); Bm = K.strap_member("B", k, v, ("J",), over=[("A", 1.0)])   # same arc off J
+    ns, nc = Bm.grid; s = np.repeat(np.arange(ns), nc)
+    raw = {"A": np.full(ns * nc, 76.0), "B": np.where(s <= 8, 50.0, 70.0)}       # B low by the joint, high beyond
+    ch = K.Chain(members=[A, Bm], ok=np.ones(P, bool), joints=dict(J=k))
+    monkeypatch.setattr(K, "_levels", lambda B, chain, fit, q, mode: {n: r.copy() for n, r in raw.items()})
+    one = K.fit_profiles(None, ch, ch.ok, max_pass=1)                            # the old single pass
+    assert K.collisions(ch, {n.name: K.member_points(n, one[n.name]) for n in ch.members}, ch.ok).all()
+    prof = K.fit_profiles(None, ch, ch.ok)
+    for listed in (False, True): assert_over_pairs_clear(ch, prof, ch.ok, listed)
+    assert "over_unsettled" not in ch.info
+    assert np.all(prof["B"] >= one["B"]) and np.allclose(prof["A"], one["A"]) and np.isclose(prof["B"].max(), 80.0)   # A's top + 1
+
+
+@pytest.fixture(scope="module")
+def remote_pole(B):
+    """the measured case (2026-10-17, Bench(60,160) fast): remote-pole-fourbar-j2-3r at the near-isogram vector"""
+    import importlib.util
+    p = os.path.join(K.REPO, "docs", "concepts", "models", "remote-pole-fourbar-j2-3r.py")
+    spec = importlib.util.spec_from_file_location("rp", p); M = importlib.util.module_from_spec(spec); spec.loader.exec_module(M)
+    par = dict(M.PARAMS, th0=86.43, dA0=23.968, pA0=-93.116, dA1=72.584, pA1=-37.479, g=22.24, gam=-99.152, eps=-0.742, tw=17.453)
+    r = K.evaluate(B, M.build, par); return r, dict(B._kit_last)
+
+
+def test_remote_pole_link1_clears_crank_a(remote_pole):
+    """one pass left link 1's samples ~17 mm from the shared A0 axis at 87.5 mm, on crank A (87.0 + 3): `_over` on the
+    final profile still asked for 91.0 and K6 rejected 190 of 191 closing poses (collide 0.9948, gap 274.37). The fixed
+    point lifts them: every `over` pair clear with the upper member first, link 1 vs crank A clear in K6's own order"""
+    r, L = remote_pole; ch, prof, ok = L["chain"], L["prof"], L["ok"]
+    assert ok.sum() > 100 and "over_unsettled" not in r
+    assert_over_pairs_clear(ch, prof, ok)
+    pair = [m for m in ch.members if m.name in ("crankA", "link1")]
+    assert not K.collisions(K.Chain(members=pair, ok=ok, joints=ch.joints), {m.name: K.member_points(m, prof[m.name]) for m in pair}, ok).any()
+    assert r["collide"] < 0.5
+
+
+@pytest.mark.xfail(strict=True, reason="known hole left open (KIT.md Verification): `_near` is not symmetric, `_over` tests "
+                   "(upper, lower), K6 tests the chain's order: hubJ1 / crankB listed before crank A / B / the coupler")
+def test_remote_pole_over_pairs_clear_in_k6_order(remote_pole):
+    r, L = remote_pole; assert_over_pairs_clear(L["chain"], L["prof"], L["ok"], listed=True)
+
+
 def test_template_runs_on_kit_conventions(B):
     import importlib.util
     p = os.path.join(K.REPO, "docs", "concepts", "models", "_template.py")
     spec = importlib.util.spec_from_file_location("tp", p); M = importlib.util.module_from_spec(spec); spec.loader.exec_module(M)
     r = K.evaluate(B, M.build, M.PARAMS)
     assert r["collide"] == 0.0 and r["residual_deg"] < 0.5 and 0 < r["gap"] < 275 and r["mass_g"] > 50
+
+
+@pytest.mark.parametrize("q", (0.95, 1.0))
+def test_template_over_pairs_clear(B, q):
+    """link 2 over link 1 and the neck: a fixed point, and K6 clear in both pair orders"""
+    import importlib.util
+    p = os.path.join(K.REPO, "docs", "concepts", "models", "_template.py")
+    spec = importlib.util.spec_from_file_location("tp", p); M = importlib.util.module_from_spec(spec); spec.loader.exec_module(M)
+    r = K.evaluate(B, M.build, dict(M.PARAMS, q=q)); L = B._kit_last
+    assert "over_unsettled" not in r
+    for listed in (False, True): assert_over_pairs_clear(L["chain"], L["prof"], L["ok"], listed)
 
 
 # ---- verification (adversarial verifier, docs/concepts/KIT.md "Verification") ----------------------------------------
