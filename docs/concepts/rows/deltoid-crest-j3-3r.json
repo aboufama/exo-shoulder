@@ -16,11 +16,11 @@
  "contact": 0.0178,
  "gap": 26.78,
  "bench": "Bench(60,160) fast, zc-frontier verified checks (top faces, crowns, near-touch, hub F <= 140, 1 mm radial K6)",
- "v_reach": 0.575,
- "v_follow": 0.8909,
- "v_inband14": 0.867,
- "v_inband10": 0.4791,
- "v_gap": 47.86,
+ "v_reach": 0.6056,
+ "v_follow": 0.9364,
+ "v_inband14": 0.8971,
+ "v_inband10": 0.4444,
+ "v_gap": 34.98,
  "n_configs": 7118,
  "best_params": {
   "az": 108.5603,
@@ -971,5 +971,104 @@
    ]
   }
  },
- "v_note": "v_* are the verifier's numbers for the pass-1 claim (36.63 fast config, 2026-10-18 00:05); the verifier's own re-measure of the current 26.78 claim is verification.later_best_s10 (frozen exact 40.17, connected reach 0.589, contact depth max 23.42 mm); the screen's own frozen exact of the same config is frozen_exact (40.17)"
+ "v_note": "AUDIT 2026-10-18 01:45 UTC: v_* = the morphology's best FROZEN EXACT measured by the death auditor (Bench(110,360) exact, fit Bench(60,160) fast, every level frozen): the s12 second basin (fast 29.38 at the old box edge end_extra 6.0) with end_extra opened to the rule bound 8 -> 34.98 (score 87.28). Selected among 4 frozen wears on Bench(110,360) (mild in-sample selection, no held-out read). History: claim config (fast 26.78) frozen 40.17 (screen and verifier, verification.later_best_s10); pass-1 claim (fast 36.63) 47.86 (verification.v_gap).",
+ "audit": {
+  "t": "2026-10-18T01:45:00Z",
+  "role": "death auditor",
+  "refuted": false,
+  "gate": {
+   "n": 7118,
+   "gain_2nd_half": 0.265,
+   "gain_last_third": 0.0,
+   "top5_dupes_spread": 0.0,
+   "top5_distinct_basins": [
+    26.78,
+    29.29,
+    29.85,
+    30.25,
+    30.98
+   ],
+   "top5_distinct_spread_score": 1.53,
+   "passed": true
+  },
+  "box_edges": "top-200 fast configs all interior; only the s12 second basin sat on the model box edge end_extra 6.0 (rule bound 8.0, zc-frontier BOUNDS)",
+  "frozen_exact_wears": [
+   {
+    "cfg": "claim s10-g49 (fast 26.78), screen+verifier",
+    "fast": 26.78,
+    "frozen": 40.17,
+    "score": 85.39,
+    "reach": 0.6056,
+    "follow": 0.8909,
+    "inband14": 0.905,
+    "contact": 0.0482
+   },
+   {
+    "cfg": "s14-g37 wd 108.1 ee 5.31 (fast 29.29)",
+    "fast": 29.29,
+    "frozen": 38.23,
+    "score": 86.1,
+    "reach": 0.6083,
+    "follow": 0.9182,
+    "inband14": 0.9053,
+    "inband10": 0.4808,
+    "contact": 0.0588,
+    "file": "docs/concepts/verify/deltoid-crest-j3-3r_audit_frozen_s14.json"
+   },
+   {
+    "cfg": "s12-g63 wd 109.4 ee 6.0 (fast 29.38)",
+    "fast": 29.38,
+    "frozen": 35.62,
+    "score": 87.05,
+    "reach": 0.6083,
+    "follow": 0.9273,
+    "inband14": 0.9,
+    "inband10": 0.4635,
+    "contact": 0.0418,
+    "file": "docs/concepts/verify/deltoid-crest-j3-3r_audit_frozen_s12.json"
+   },
+   {
+    "cfg": "s12-g63 with ee 8.0 (rule bound; ee 7 identical fit 29.59)",
+    "fast": 29.59,
+    "frozen": 34.98,
+    "score": 87.28,
+    "reach": 0.6056,
+    "follow": 0.9364,
+    "inband14": 0.8971,
+    "inband10": 0.4444,
+    "contact": 0.0389,
+    "file": "docs/concepts/verify/deltoid-crest-j3-3r_audit_frozen_s12_ee8.json"
+   }
+  ],
+  "best_frozen_params": {
+   "az": 97.467,
+   "el": 62.7844,
+   "a1": 40.6347,
+   "a2": 47.4415,
+   "wd": 109.3974,
+   "wa": -1.127600000000001,
+   "q": 0.9581,
+   "end_extra": 8.0,
+   "sigma": -1,
+   "inv2": 0,
+   "inv3": 1
+  },
+  "selection_bias": "the fast-best is the frozen-worst of the 4 basins worn: fast rank and frozen rank are inverted (26.78->40.17, 29.29->38.23, 29.38->35.62, 29.59->34.98)",
+  "part_part": {
+   "bench": "Bench(60,160) fast, s12 config",
+   "poses": 18,
+   "pairs": {
+    "hub2-neck": 10,
+    "hub1-hub3": 9,
+    "hub1-link2": 9,
+    "hub1-neck": 4,
+    "link1-link2": 2
+   },
+   "reading": "hub2-neck at elev 90-150 (inverted J3 stack: the K7 neck on hub 3 cap plate crosses hub 2 overhead); hub1-hub3 / hub1-link2 at elev 30-45 (two O20 discs at ~52-62 mm need ~20 deg separation, the kinematic window opens at 11.8 deg). Both physical, shared kit rule (1 mm lateral, 0.5 mm radial), same as every leader; not an artefact.",
+   "file": "docs/concepts/verify/deltoid-crest-j3-3r_audit_pairs.txt"
+  },
+  "bound": "kinematic closure 0.742 of the workspace caps reach -> >= 15.8 reach points + follow; with all 38 part-part and 11 contact poses cleared the frozen gap would read ~17-19, so the kill is fold + part-part together",
+  "champion_same_bench": 68.93,
+  "reason": "death stands: best frozen exact 34.98 (selection-corrected from 40.17) is 2.9 over the spec kill bar 32.10, 3.9 behind the zero-complexity optimum 31.04 and 16.7 behind the lead 18.28; losses are the stretched fold (kin 0.74) plus physical part-part (hub2-neck overhead, hub1-hub3 at small th)"
+ }
 }

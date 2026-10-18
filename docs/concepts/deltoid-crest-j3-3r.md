@@ -341,3 +341,63 @@ connected; 6 islands at elevation 90 (planes -15..60, axial 15-45), so a connect
 Contact depth: 16 poses, two deep overhead hits (0, 165, +15) **23.4 mm** and (0, 165, -45) 11.6 mm. Still 21.9 over
 the lead (18.28) and 8.1 over the spec's kill bar (32.10): the verdict (dead on the kill bar) stands for the morphology.
 Files: `docs/concepts/verify/deltoid-crest-j3-3r_skeptic_{fit60,frozen,held,frozen_s10}.json`.
+
+## Audit (death auditor, 2026-10-18 01:31-01:46 UTC, local, niced, <= 2 processes)
+
+**Verdict: the death stands, not refuted. Best frozen exact for this morphology is 34.98 (score 87.28), down from 40.17
+once you correct for fast-bench selection. That is still 2.9 over the spec's kill bar (32.10), 3.9 behind the
+zero-complexity optimum (31.04) and 16.7 behind the lead (18.28).**
+
+What was checked:
+
+1. **Convergence gate, recomputed from the 7118-row sweep in evaluation order.** Gain over the second half was 0.265
+   score points and over the last third 0.0. The row's "top-5 spread 0.0" holds only because the five best rows are
+   duplicates of one config. Over the top five DISTINCT basins (26.78, 29.29, 29.85, 30.25, 30.98) the spread is 1.53
+   score points, under 3. The gate passes either way.
+2. **Box edges.** Every one of the top 200 fast configs sits inside the box. The one edge hit was the second basin
+   (s12, 29.38 fast), which sat on the model's end_extra box edge of 6.0. The rule bound is 8.0 (zc-frontier BOUNDS).
+   The audit opened that bound (see 3).
+3. **Fast-bench selection bias (new).** The screen wore only its fast-best on Bench(110,360) exact. Its own note says
+   the fast bench over-reads crest seats by 11-14 points, so the audit wore the other distinct basins frozen in the
+   same protocol: fit Bench(60,160) fast, every level frozen, worn on Bench(110,360) exact. Files are
+   `docs/concepts/verify/deltoid-crest-j3-3r_audit_frozen_*.json`.
+
+| config | fast | frozen exact | score | reach | follow | ib14 | contact |
+|---|---|---|---|---|---|---|---|
+| claim s10 (wd 104.4, ee 2.95) | 26.78 | 40.17 | 85.39 | 0.606 | 0.891 | 0.905 | 0.048 |
+| s14 (wd 108.1, ee 5.31) | 29.29 | 38.23 | 86.10 | 0.608 | 0.918 | 0.905 | 0.059 |
+| s12 (wd 109.4, ee 6.0, box edge) | 29.38 | 35.62 | 87.05 | 0.608 | 0.927 | 0.900 | 0.042 |
+| s12 at ee 8.0 (rule bound; ee 7 has an identical fit) | 29.59 | **34.98** | **87.28** | 0.606 | 0.936 | 0.897 | 0.039 |
+
+   Fast rank and frozen rank are fully inverted: the fast-best is the frozen-worst. The extra frozen points come from
+   follow (fit-clip frames), not from reach, which stays at 218-219/360 in every row. Choosing among these 4 wears
+   on Bench(110,360) is a mild in-sample selection, and there is no held-out read. The pick does not cross the bar,
+   so the verdict does not depend on it.
+
+   Best frozen config: J1 bvec(97.47, 62.78), J3 wdir(109.40, -1.13), a1 40.63 / a2 47.44, sigma -1, inv2 0, inv3 1,
+   q 0.958, end_extra 8.0.
+4. **Over-strict checks?** Part-part loses 36-39/360 poses frozen, which is about 10 reach points, so the audit split
+   them by member pair (Bench(60,160) fast, s12 config; `..._audit_pairs.py` / `.txt`). Of 18 poses, the pairs are:
+   - hub2-neck: 10 poses, at elevation 90-150. With the inverted J3 stack, the K7 neck rides on hub 3's cap plate and
+     crosses hub 2 overhead.
+   - hub1-hub3: 9 poses, and hub1-link2: 9 poses, at elevation 30-45. Two O20 discs at 52-62 mm from GH need about
+     20 deg of separation, but the kinematic window opens at 11.8 deg.
+
+   Both are physical, under the shared kit rule (1 mm lateral, 0.5 mm radial, joint partners exempt) that every
+   leader is measured with. They are not artefacts. The convention matches zc-frontier-3r and the verifier, and the
+   fits reproduce the sweep (29.29 and 29.38 exactly).
+5. **Bound.** Kinematic closure is 0.742 of the workspace, which alone costs at least 15.8 reach points. If all 38
+   part-part and 11 contact poses were cleared, the gap would read about 17-19. So the kill comes from the stretched
+   fold and part-part together: the fold sets the floor and part-part sets the margin over the bar.
+
+**Reason (one line):** the best frozen exact is 34.98, over the 32.10 kill bar. The losses are the stretched J2 fold
+(0.74 kinematic closure at the crest J3 seat) plus physical part-part: hub 2 against the inverted-stack neck
+overhead, and hub 1 against hub 3 at small J1-J3 angles.
+
+**Lessons for every screen:**
+- Wear the top 3-4 DISTINCT fast basins frozen before picking a claim. At seats where the fold wall cuts the dense
+  part of the workspace, fast rank does not predict frozen rank; here it was fully inverted (5.2 points).
+- Keep each model box at least as wide as the rule bounds. end_extra 6 vs 8 cost 0.64 frozen.
+
+Not done (time box): a per-pose dump of the 34.98 config, a held-out read, and a motion preview update. The preview
+still shows the fast claim config.
