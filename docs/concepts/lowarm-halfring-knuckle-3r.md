@@ -199,3 +199,60 @@ Verdict: **VERIFIED at v_gap 17.96** (score 93.47) as a bench number - not refut
 rule broken: 3 active DOF, K slaved and never undetermined beyond its play, 0 passive translations, no gears / pulleys /
 cables). It is NOT a lead change: the gain over the lead is a single 0.048-mm graze selected on the claim bench, held out
 does not transfer, and the hard-pad build fails the claim's own 0.25-deg dwell gate.
+
+## Red team, re-issued screen (2026-10-18 ~05:30-06:10 UTC): the dwell play as metal (auditor M5) and the lifted link 2 vs the crank (M3)
+
+The screen step was re-issued after a container restart. The row was already screened (908 configs, gate converged),
+verified (17.96) and ledgered GAMED (P1), so this pass did not re-run the sweep. It ran the two red-team items the
+auditor left open for this row (M5, M3) on the same frozen shape, one local niced process each (farm closed). Scripts:
+docs/concepts/models/lowarm-halfring-knuckle-3r-kplay.py and docs/concepts/models/lowarm-halfring-knuckle-3r-m3.py.
+Data: docs/concepts/verify/lowarm-halfring-knuckle-3r_redteam_kplay_metal.json.
+
+Method (M5): fit Bench(60,160) fast once (nominal), freeze the shape, and wear it on Bench(110,360) exact with K forced
+to law + delta on every DWELL pose (dK = 0). J1 / J2 / J3 are re-solved in closed form for the same arm pose, because the
+wearer's arm drives the chain and K sits wherever the play leaves it. The re-solve reproduces the model's own dwell IK to
+4e-10 deg at delta 0, and cells A / B reproduce 18.28 / 17.96. Forced poses keep the law value: their play is the
+parent's groove play, the same as the lead's. delta = +-0.638 deg is the hard pad's nominal one-sided worst case.
+delta = +0.292 is the tight-tolerance stack.
+
+| cell A (cx 16.5) | gap | ib14 | contacts (T5 depth) | pose 203 nearest metal (crown / edge) | pose 203 surface | near1 |
+|---|---|---|---|---|---|---|
+| delta 0 (as claimed) | 18.28 | 0.9006 | 4 (16.15 mm) | **0.263 mm** | 0.716 | 19.92 |
+| +0.292 (tight stack) | 18.28 | 0.9011 | 4 (16.07 mm) | 0.146 | 0.599 | 20.46 |
+| +0.638 (nominal stack) | 18.28 | 0.9017 | 4 (16.18 mm) | **0.008** | 0.460 | 20.46 |
+| -0.638 | 18.32 | 0.8996 | 4 (16.70 mm) | 0.517 | 0.973 | 19.96 |
+
+Cell B at the same deltas reads 17.96 / 17.85 (+0.638) / 18.06 (-0.638), with the same pose-level shifts.
+
+- **The score barely sees the play.** No pose is gained or lost and the fold count stays 88. The model's own dyad-margin
+  rule (m3e >= 5) drops no dwell pose. Gap moves -0.11 to +0.10 through in-band at the 0.90 knee.
+- **The metal moves.** 180-185 dwell poses move by -0.52 to +0.41 mm at their nearest sample (p95 |shift| 0.2 mm).
+  Three of the four shared contacts are DWELL poses (K = 0), so the play changes their depth:
+  - 205: -3.90 to -4.66 mm;
+  - 237: -9.40 to -9.99 mm;
+  - 264: -0.76 to -1.58 mm.
+  Only 316 is forced.
+- **The point that pinches: pose 203** (plane 0, elev 90, axial +45, i.e. abduction 90 with 45 deg of external rotation,
+  a dwell pose). Its nearest metal is a crown / edge sample (the audit's walls-crowns-tops set) at 0.263 mm as claimed. It
+  closes at ~0.40 mm per deg of K on the opening side: 0.146 mm at the tight stack, 0.008 mm at the nominal stack.
+  - Correction to the screen's red-team list above: 203 was listed at 0.72 mm. That is its surface sample; its crown / edge
+    sample is at 0.26.
+  - Poses 139 (0.072 mm) and 316 (0.048 mm, cell B) are FORCED poses. The dwell play does not move them; their play is
+    the parent's groove play, shared with the lead.
+- **The th rows read 0.0 under the play, and that is not a fold loss.** With K off stop A, the verifier's th_margin
+  treats the dwell poses as forced and reads the K sub-dyad margin (b1, c), which is 0.0 at poses 283 / 311 / 338
+  (elev 90, th ~35.4, dth/dK 0.000). This is the ledger's G4 near-singular sub-dyad at K rest made visible. The J1-J3
+  dyad margin those poses are scored on stays >= 5.
+- **Gate for any dwell hold on this chain (round 15 lens B, A-adj):** one-sided residual K play <= ~0.29 deg keeps pose 203
+  >= 0.15 mm. A hard pad at nominal tolerances (0.638) puts 203 at 0.008 mm. That is a contact in all but name, at a
+  common pose.
+
+M3, the lifted link 2 (cell B) vs the crank: the model's own l2_check reproduces (12.32 mm). The whole lifted bar (with
+its top copy) vs every crank sample set clears by >= 9.16 mm (p5 14.5) over the 373 taken bench poses, and vs link 1b's
+strap by >= 9.06 mm. The closest pose is 229 (plane 15, elev 90, axial -30, a dwell pose). The lift and the lowered
+crank are far apart, so M3 is cleared.
+
+Verdict of this pass (unchanged ranking): cell B stays GAMED (P1). Cell A is the honest number of this row: 18.28 frozen
+exact, a tie with the lead at cx 16.5. It stands only with a dwell hold whose one-sided residual play is <= ~0.29 deg.
+The hard pad (0.638) fails both its own 0.25-deg gate and the metal at pose 203. Round 15 lens B
+(lowarm-adjpad-knuckle-3r, assembly-adjusted rigid pad) inherits this 0.29-deg / 203 gate.

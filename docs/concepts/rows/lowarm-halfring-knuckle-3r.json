@@ -74,7 +74,7 @@
  },
  "verdict": "NO NEW LEAD. Cell B (link-2 root lift h 1.5 on an R15-inner S-bend) reads 17.96 frozen exact Bench(110,360) (score 93.47) vs the lead's 18.28, but pose 316 clears by 0.048 mm: no root lift reaches the pre-registered 0.2 mm (727 configs; the skin lies parallel under ~18 mm of link 2), the robust clear costs in-band 1:1 (18.41), and held out does not transfer (22.70 vs cell A 22.64). Cell A ties the lead (18.28, same 262 takes / 4 contacts) at cx 16.5, but the dwell hold over the two-body stack is 0.638 deg vs the 0.25 gate (0.292 at tight tolerances): it stands only with a preloaded pad (drag unmeasured).",
  "limiter": "(1) dwell hold: 17.6 deg of K per mm at the stage-1 pin and a pad lever <= 12.3 mm (the only link-1b metal under the crank arm) -> 0.638 deg K play; (2) pose 316: link 2's bar 0.05-0.37 mm over the skin for r_u2 15-34 mm; (3) the fold, unchanged: 88 bench poses lost (stretched 73 / folded 15).",
- "note": "Frozen protocol (fit Bench(60,160) fast -> frozen -> Bench(110,360) exact), local niced, farm closed. Sweeps (908, in order, stage+bench tagged): 114 Bench(60,160) LHS over the full box - flat (reach 0.7688, contact 0, near-touch objective 19.45 everywhere; plain 13.12-13.59, best = cell A's point); 727 + 67 frozen-exact surrogate configs (link 2's distance segment replaced per pose, Bench.report re-run; reproduces the full model to 0.00). Convergence gate (score pts): fast 0.000/0.000/0.007; frozen scan 0.000/0.000/0.007; extended 0.000/0.000/0.022. Stage-1 built PA at mu 0.17 over 9 corners: pin first fail >= 52.89, cap >= 59.99 (gate 47.27). rc_min 1.0 / ridge 0.243 carried. Bench T5 contact depth: B 14.92 mm over 3 poses (205 hub 2 -4.28, 237 crank -9.47, 264 hub K -1.17); A 16.15 over 4. Not run here (verifier's): blended-IK wear, th margin with K play, connected() flood, alignment_paired dumps, S6, paired held at the lead's K-play rule. | VERIFIED 2026-10-18 ~02:20 UTC by an independent skeptic: v_gap 17.96 (score 93.47) frozen exact Bench(110,360) reproduced (263/360, ib14 0.8978, 3 contacts, overhead 9/28; dump recomputes 17.97); champion 75.94 on the same bench (risley-turret verifier checks; 66.97 via the offset-skin-normal verifier). Added checks pass: own gates (desmo_fail empty), plate-vs-horn solids >= 0.15, th min 5.181 (dwell 5.389), th with the claim's own dwell K play 0.638 (+0.23 forced): min 5.088, 0 poses dropped; flood connected_full 17.96 (kNN 19.64). NOT a lead change: paired vs the lead -0.32 is ONE pose (316 at 0.048 mm, CI90 [-1.55, +0.42]) selected by a 727-config scan on the claim bench itself; held out reproduces 22.70 and is 0.32 WORSE than the lead paired (P(better) 0.26; pooled +0.13); the hard-pad build fails the claim's own 0.25-deg dwell gate (0.638); near-touch pose 139 (0.072 mm) under the 3x larger dwell play is unmeasured; the stop pad is unsampled metal.",
+ "note": "Frozen protocol (fit Bench(60,160) fast -> frozen -> Bench(110,360) exact), local niced, farm closed. Sweeps (908, in order, stage+bench tagged): 114 Bench(60,160) LHS over the full box - flat (reach 0.7688, contact 0, near-touch objective 19.45 everywhere; plain 13.12-13.59, best = cell A's point); 727 + 67 frozen-exact surrogate configs (link 2's distance segment replaced per pose, Bench.report re-run; reproduces the full model to 0.00). Convergence gate (score pts): fast 0.000/0.000/0.007; frozen scan 0.000/0.000/0.007; extended 0.000/0.000/0.022. Stage-1 built PA at mu 0.17 over 9 corners: pin first fail >= 52.89, cap >= 59.99 (gate 47.27). rc_min 1.0 / ridge 0.243 carried. Bench T5 contact depth: B 14.92 mm over 3 poses (205 hub 2 -4.28, 237 crank -9.47, 264 hub K -1.17); A 16.15 over 4. Not run here (verifier's): blended-IK wear, th margin with K play, connected() flood, alignment_paired dumps, S6, paired held at the lead's K-play rule. | VERIFIED 2026-10-18 ~02:20 UTC by an independent skeptic: v_gap 17.96 (score 93.47) frozen exact Bench(110,360) reproduced (263/360, ib14 0.8978, 3 contacts, overhead 9/28; dump recomputes 17.97); champion 75.94 on the same bench (risley-turret verifier checks; 66.97 via the offset-skin-normal verifier). Added checks pass: own gates (desmo_fail empty), plate-vs-horn solids >= 0.15, th min 5.181 (dwell 5.389), th with the claim's own dwell K play 0.638 (+0.23 forced): min 5.088, 0 poses dropped; flood connected_full 17.96 (kNN 19.64). NOT a lead change: paired vs the lead -0.32 is ONE pose (316 at 0.048 mm, CI90 [-1.55, +0.42]) selected by a 727-config scan on the claim bench itself; held out reproduces 22.70 and is 0.32 WORSE than the lead paired (P(better) 0.26; pooled +0.13); the hard-pad build fails the claim's own 0.25-deg dwell gate (0.638); near-touch pose 139 (0.072 mm) under the 3x larger dwell play is unmeasured; the stop pad is unsampled metal. | RED TEAM (re-issued screen, 2026-10-18 ~06:10 UTC): M5 - the hard pad's dwell K play worn as metal (K law +-0.638 on every dwell pose, chain re-solved): score moves -0.11..+0.10 only (A 18.28-18.32, B 17.85-18.06), 0 takes changed, but pose 203 (abduction 90 / ext rot 45, dwell) closes from 0.263 mm (crown / edge) to 0.008 mm at +0.638 (0.146 at the tight 0.292): a dwell hold on this chain needs one-sided play <= ~0.29 deg; 3 of the 4 shared contacts (205/237/264) are dwell poses whose depth moves +-0.4-0.8 mm with the play. M3 - lifted link 2 vs the crank >= 9.16 mm over 373 taken poses: clear.",
  "doc": "docs/concepts/lowarm-halfring-knuckle-3r.md",
  "mechanism": {
   "active_dof": 3,
@@ -211,5 +211,86 @@
    "pooled_p_better": 0.416,
    "file": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json"
   }
+ },
+ "redteam_2026_10_18_reissue": {
+  "t": "2026-10-18T06:10:00Z",
+  "why": "screen step re-issued after a container restart; row already screened / verified / ledgered GAMED (P1), so no re-sweep: the auditor's open M5 and M3 were measured on the same frozen shape (frozen exact Bench(110,360), local niced)",
+  "m5_dwell_play_as_metal": {
+   "method": "K = law + delta on every dwell pose (dK = 0), J1/J2/J3 re-solved for the same arm (self-check 4e-10 deg); forced poses keep the law (parent groove play, shared with the lead)",
+   "cellA": {
+    "0": 18.28,
+    "+0.292": 18.28,
+    "+0.638": 18.28,
+    "-0.638": 18.32
+   },
+   "cellB": {
+    "0": 17.96,
+    "+0.638": 17.85,
+    "-0.638": 18.06
+   },
+   "takes_changed": 0,
+   "fold_losses_added": 0,
+   "dwell_poses_moved": "180-185",
+   "surface_shift_mm": [
+    -0.521,
+    0.412
+   ],
+   "p95_abs_shift_mm": 0.2,
+   "contacts_dwell": {
+    "p205": [
+     -3.9,
+     -4.66
+    ],
+    "p237": [
+     -9.4,
+     -9.99
+    ],
+    "p264": [
+     -0.76,
+     -1.58
+    ]
+   },
+   "contact_316": "forced (unchanged)",
+   "T5_depth_cellA": {
+    "0": 16.15,
+    "+0.292": 16.07,
+    "+0.638": 16.18,
+    "-0.638": 16.7
+   },
+   "pose203": {
+    "pose": "plane 0 / elev 90 / axial +45 (dwell)",
+    "crown_edge_mm": {
+     "0": 0.263,
+     "+0.292": 0.146,
+     "+0.638": 0.008,
+     "-0.638": 0.517
+    },
+    "surface_mm": {
+     "0": 0.716,
+     "+0.292": 0.599,
+     "+0.638": 0.46,
+     "-0.638": 0.973
+    },
+    "slope_mm_per_deg": -0.4
+   },
+   "poses_139_316": "forced: not moved by the dwell play",
+   "th_rows_note": "verifier th_margin reads 0.0 under play at 283/311/338 = the K sub-dyad (b1, c) margin (ledger G4) once dK != 0; J1-J3 dyad margin >= 5, no pose dropped",
+   "gate": "one-sided residual dwell K play <= ~0.29 deg keeps pose 203 >= 0.15 mm; the hard pad (0.638) puts it at 0.008 mm"
+  },
+  "m3_lifted_link2_vs_crank": {
+   "l2_check_reproduced": 12.32,
+   "link2_vs_all_crank_min_mm": 9.157,
+   "p5": 14.518,
+   "link2_vs_L1b_min_mm": 9.056,
+   "n_taken": 373,
+   "at_pose": 229,
+   "verdict": "clear"
+  },
+  "correction": "the screen's red-team list gave pose 203 at 0.72 mm (surface sample); its crown / edge sample is 0.26 mm",
+  "data": "docs/concepts/verify/lowarm-halfring-knuckle-3r_redteam_kplay_metal.json",
+  "scripts": [
+   "docs/concepts/models/lowarm-halfring-knuckle-3r-kplay.py",
+   "docs/concepts/models/lowarm-halfring-knuckle-3r-m3.py"
+  ]
  }
 }

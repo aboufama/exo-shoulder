@@ -1,0 +1,577 @@
+{
+ "id": "lowarm-halfring-knuckle-3r",
+ "t": "2026-10-18T06:07:42Z",
+ "what": "red team M5 + M3 (re-issued screen): the hard pad's dwell K play worn as METAL on the frozen shape, frozen exact Bench(110,360); K = law + delta on every dwell pose (dK = 0), J1/J2/J3 re-solved for the same arm (self-check at delta 0: 4e-10 deg); forced poses keep the law value (their play is the parent's groove play, shared with the lead)",
+ "scripts": [
+  "docs/concepts/models/lowarm-halfring-knuckle-3r-kplay.py",
+  "docs/concepts/models/lowarm-halfring-knuckle-3r-m3.py"
+ ],
+ "cells": {
+  "cellA": {
+   "+0.000": {
+    "gap": 18.28,
+    "reach": 0.7278,
+    "inband14": 0.9006,
+    "inband10": 0.5715,
+    "contact": 0.0106,
+    "overhead": "8/28",
+    "near1": 19.92,
+    "near2": 34.84,
+    "near_touch_min": 0.07,
+    "fold": 88,
+    "contacts": {
+     "205": -4.28,
+     "237": -9.469,
+     "264": -1.169,
+     "316": -1.235
+    },
+    "T5_depth_mm": 16.15,
+    "surface_min_named": {
+     "139": 0.072,
+     "316": -1.235,
+     "203": 0.716,
+     "379": 0.747,
+     "205": -4.28,
+     "237": -9.469,
+     "264": -1.169
+    }
+   },
+   "+0.638": {
+    "gap": 18.28,
+    "reach": 0.7278,
+    "inband14": 0.9017,
+    "inband10": 0.5728,
+    "contact": 0.0106,
+    "overhead": "8/28",
+    "near1": 20.46,
+    "near2": 35.93,
+    "near_touch_min": 0.01,
+    "fold": 88,
+    "contacts": {
+     "205": -4.659,
+     "237": -9.532,
+     "264": -0.757,
+     "316": -1.235
+    },
+    "T5_depth_mm": 16.18,
+    "surface_min_named": {
+     "139": 0.072,
+     "316": -1.235,
+     "203": 0.46,
+     "379": 0.747,
+     "205": -4.659,
+     "237": -9.532,
+     "264": -0.757
+    },
+    "dwell_poses_moved": 185,
+    "surface_shift_mm": [
+     -0.379,
+     0.412
+    ],
+    "surface_shift_p95_abs": 0.206
+   },
+   "-0.638": {
+    "gap": 18.32,
+    "reach": 0.7278,
+    "inband14": 0.8996,
+    "inband10": 0.5711,
+    "contact": 0.0106,
+    "overhead": "8/28",
+    "near1": 19.96,
+    "near2": 34.84,
+    "near_touch_min": 0.07,
+    "fold": 88,
+    "contacts": {
+     "205": -3.898,
+     "237": -9.99,
+     "264": -1.578,
+     "316": -1.235
+    },
+    "T5_depth_mm": 16.7,
+    "surface_min_named": {
+     "139": 0.072,
+     "316": -1.235,
+     "203": 0.973,
+     "379": 0.747,
+     "205": -3.898,
+     "237": -9.99,
+     "264": -1.578
+    },
+    "dwell_poses_moved": 180,
+    "surface_shift_mm": [
+     -0.521,
+     0.382
+    ],
+    "surface_shift_p95_abs": 0.195
+   },
+   "dwell_K_play_model": {
+    "runout": 0.176,
+    "conc": 0.088,
+    "pad_lap": 0.335,
+    "slot": 0.04,
+    "total": 0.638,
+    "gate": 0.25,
+    "ok": false,
+    "inputs": {
+     "runout_mm": 0.01,
+     "conc_mm": 0.005,
+     "pad_tol_mm": 0.03
+    }
+   }
+  },
+  "cellB": {
+   "+0.000": {
+    "gap": 17.96,
+    "reach": 0.7306,
+    "inband14": 0.8978,
+    "inband10": 0.5682,
+    "contact": 0.008,
+    "overhead": "9/28",
+    "near1": 20.14,
+    "near2": 34.84,
+    "near_touch_min": 0.05,
+    "fold": 88,
+    "contacts": {
+     "205": -4.28,
+     "237": -9.469,
+     "264": -1.169
+    },
+    "T5_depth_mm": 14.92,
+    "surface_min_named": {
+     "139": 0.072,
+     "316": 0.048,
+     "203": 0.716,
+     "379": 0.747,
+     "205": -4.28,
+     "237": -9.469,
+     "264": -1.169
+    }
+   },
+   "+0.638": {
+    "gap": 17.85,
+    "reach": 0.7306,
+    "inband14": 0.8989,
+    "inband10": 0.5693,
+    "contact": 0.008,
+    "overhead": "9/28",
+    "near1": 20.57,
+    "near2": 35.93,
+    "near_touch_min": 0.01,
+    "fold": 88,
+    "contacts": {
+     "205": -4.659,
+     "237": -9.532,
+     "264": -0.757
+    },
+    "T5_depth_mm": 14.95,
+    "surface_min_named": {
+     "139": 0.072,
+     "316": 0.048,
+     "203": 0.46,
+     "379": 0.747,
+     "205": -4.659,
+     "237": -9.532,
+     "264": -0.757
+    },
+    "dwell_poses_moved": 185,
+    "surface_shift_mm": [
+     -0.379,
+     0.412
+    ],
+    "surface_shift_p95_abs": 0.206
+   },
+   "-0.638": {
+    "gap": 18.06,
+    "reach": 0.7306,
+    "inband14": 0.8968,
+    "inband10": 0.568,
+    "contact": 0.008,
+    "overhead": "9/28",
+    "near1": 20.24,
+    "near2": 34.84,
+    "near_touch_min": 0.05,
+    "fold": 88,
+    "contacts": {
+     "205": -3.898,
+     "237": -9.99,
+     "264": -1.578
+    },
+    "T5_depth_mm": 15.47,
+    "surface_min_named": {
+     "139": 0.072,
+     "316": 0.048,
+     "203": 0.973,
+     "379": 0.747,
+     "205": -3.898,
+     "237": -9.99,
+     "264": -1.578
+    },
+    "dwell_poses_moved": 180,
+    "surface_shift_mm": [
+     -0.521,
+     0.382
+    ],
+    "surface_shift_p95_abs": 0.195
+   },
+   "dwell_K_play_model": {
+    "runout": 0.176,
+    "conc": 0.088,
+    "pad_lap": 0.335,
+    "slot": 0.04,
+    "total": 0.638,
+    "gate": 0.25,
+    "ok": false,
+    "inputs": {
+     "runout_mm": 0.01,
+     "conc_mm": 0.005,
+     "pad_tol_mm": 0.03
+    }
+   }
+  },
+  "cellA_crown_edge": {
+   "+0.000": {
+    "gap": 18.28,
+    "reach": 0.7278,
+    "inband14": 0.9006,
+    "inband10": 0.5715,
+    "contact": 0.0106,
+    "overhead": "8/28",
+    "near1": 19.92,
+    "near2": 34.84,
+    "near_touch_min": 0.07,
+    "fold": 88,
+    "contacts": {
+     "205": -4.28,
+     "237": -9.469,
+     "264": -1.169,
+     "316": -1.235
+    },
+    "T5_depth_mm": 16.15,
+    "surface_min_named": {
+     "139": 0.072,
+     "316": -1.235,
+     "203": 0.716,
+     "379": 0.747,
+     "205": -4.28,
+     "237": -9.469,
+     "264": -1.169
+    },
+    "crown_edge_min_named": {
+     "139": 1.7,
+     "316": 0.672,
+     "203": 0.263,
+     "379": 0.616,
+     "205": -4.28,
+     "237": -9.469,
+     "264": -1.169
+    },
+    "near_low": [
+     [
+      139,
+      0.07
+     ],
+     [
+      203,
+      0.26
+     ],
+     [
+      379,
+      0.62
+     ],
+     [
+      230,
+      1.05
+     ],
+     [
+      376,
+      1.09
+     ]
+    ]
+   },
+   "+0.638": {
+    "gap": 18.28,
+    "reach": 0.7278,
+    "inband14": 0.9017,
+    "inband10": 0.5728,
+    "contact": 0.0106,
+    "overhead": "8/28",
+    "near1": 20.46,
+    "near2": 35.93,
+    "near_touch_min": 0.01,
+    "fold": 88,
+    "contacts": {
+     "205": -4.659,
+     "237": -9.532,
+     "264": -0.757,
+     "316": -1.235
+    },
+    "T5_depth_mm": 16.18,
+    "surface_min_named": {
+     "139": 0.072,
+     "316": -1.235,
+     "203": 0.46,
+     "379": 0.747,
+     "205": -4.659,
+     "237": -9.532,
+     "264": -0.757
+    },
+    "crown_edge_min_named": {
+     "139": 1.7,
+     "316": 0.672,
+     "203": 0.008,
+     "379": 0.616,
+     "205": -4.659,
+     "237": -9.532,
+     "264": -0.757
+    },
+    "near_low": [
+     [
+      203,
+      0.01
+     ],
+     [
+      139,
+      0.07
+     ],
+     [
+      379,
+      0.62
+     ],
+     [
+      230,
+      0.81
+     ],
+     [
+      284,
+      1.06
+     ]
+    ],
+    "dwell_poses_moved": 185,
+    "surface_shift_mm": [
+     -0.379,
+     0.412
+    ],
+    "surface_shift_p95_abs": 0.206
+   },
+   "-0.638": {
+    "gap": 18.32,
+    "reach": 0.7278,
+    "inband14": 0.8996,
+    "inband10": 0.5711,
+    "contact": 0.0106,
+    "overhead": "8/28",
+    "near1": 19.96,
+    "near2": 34.84,
+    "near_touch_min": 0.07,
+    "fold": 88,
+    "contacts": {
+     "205": -3.898,
+     "237": -9.99,
+     "264": -1.578,
+     "316": -1.235
+    },
+    "T5_depth_mm": 16.7,
+    "surface_min_named": {
+     "139": 0.072,
+     "316": -1.235,
+     "203": 0.973,
+     "379": 0.747,
+     "205": -3.898,
+     "237": -9.99,
+     "264": -1.578
+    },
+    "crown_edge_min_named": {
+     "139": 1.7,
+     "316": 0.672,
+     "203": 0.517,
+     "379": 0.616,
+     "205": -3.898,
+     "237": -9.99,
+     "264": -1.578
+    },
+    "near_low": [
+     [
+      139,
+      0.07
+     ],
+     [
+      203,
+      0.52
+     ],
+     [
+      379,
+      0.62
+     ],
+     [
+      376,
+      1.09
+     ],
+     [
+      403,
+      1.12
+     ]
+    ],
+    "dwell_poses_moved": 180,
+    "surface_shift_mm": [
+     -0.521,
+     0.382
+    ],
+    "surface_shift_p95_abs": 0.195
+   },
+   "+0.292": {
+    "gap": 18.28,
+    "reach": 0.7278,
+    "inband14": 0.9011,
+    "inband10": 0.572,
+    "contact": 0.0106,
+    "overhead": "8/28",
+    "near1": 20.46,
+    "near2": 34.84,
+    "near_touch_min": 0.07,
+    "fold": 88,
+    "contacts": {
+     "205": -4.454,
+     "237": -9.4,
+     "264": -0.981,
+     "316": -1.235
+    },
+    "T5_depth_mm": 16.07,
+    "surface_min_named": {
+     "139": 0.072,
+     "316": -1.235,
+     "203": 0.599,
+     "379": 0.747,
+     "205": -4.454,
+     "237": -9.4,
+     "264": -0.981
+    },
+    "crown_edge_min_named": {
+     "139": 1.7,
+     "316": 0.672,
+     "203": 0.146,
+     "379": 0.616,
+     "205": -4.454,
+     "237": -9.4,
+     "264": -0.981
+    },
+    "near_low": [
+     [
+      139,
+      0.07
+     ],
+     [
+      203,
+      0.15
+     ],
+     [
+      379,
+      0.62
+     ],
+     [
+      230,
+      0.94
+     ],
+     [
+      376,
+      1.09
+     ]
+    ],
+    "dwell_poses_moved": 162,
+    "surface_shift_mm": [
+     -0.174,
+     0.188
+    ],
+    "surface_shift_p95_abs": 0.1
+   }
+  }
+ },
+ "m3_lifted_link2": {
+  "l2_check_reproduced_min": 12.32,
+  "mode": "fit-only",
+  "n_taken": 373,
+  "lift": {
+   "h": 1.5,
+   "rfull": 14.0,
+   "L": 9.836157786453,
+   "n_moved": 32,
+   "n": 124,
+   "r_moved_max": 23.39
+  },
+  "n_crank_samples": 679,
+  "n_L2_out": 120,
+  "L2out_vs_crank_min_mm": 9.157,
+  "L2out_vs_crank_p5": 14.518,
+  "L2all_vs_crank_min_mm": 9.157,
+  "L2out_vs_L1b_min_mm": 9.056,
+  "lowest": [
+   {
+    "i": 229,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 90.0,
+    "axial": -30.0,
+    "L2out_crank": 9.157,
+    "L2all_crank": 9.157,
+    "L2out_L1b": 9.056,
+    "dK": 0.0
+   },
+   {
+    "i": 287,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 120.0,
+    "axial": -30.0,
+    "L2out_crank": 9.737,
+    "L2all_crank": 9.737,
+    "L2out_L1b": 9.622,
+    "dK": 0.0
+   },
+   {
+    "i": 204,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": -45.0,
+    "L2out_crank": 10.025,
+    "L2all_crank": 10.025,
+    "L2out_L1b": 9.903,
+    "dK": 0.0
+   },
+   {
+    "i": 178,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 75.0,
+    "axial": -30.0,
+    "L2out_crank": 11.054,
+    "L2all_crank": 11.054,
+    "L2out_L1b": 10.905,
+    "dK": 0.0
+   },
+   {
+    "i": 256,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 90.0,
+    "axial": -30.0,
+    "L2out_crank": 11.201,
+    "L2all_crank": 11.201,
+    "L2out_L1b": 11.047,
+    "dK": 0.0
+   },
+   {
+    "i": 199,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 75.0,
+    "axial": -30.0,
+    "L2out_crank": 11.474,
+    "L2all_crank": 11.46,
+    "L2out_L1b": 11.313,
+    "dK": 0.0
+   }
+  ],
+  "note": "nearest-sample distances between surface sample clouds (link 2 underside + T_LINK top copy; crank contact/rigid/strap sets); the crank arm sets are mid-lines or surfaces as the model samples them; non-adjacent rule 1 mm",
+  "secs": 10.8
+ }
+}
