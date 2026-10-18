@@ -35,7 +35,10 @@ _sp = importlib.util.spec_from_file_location("conecut_for_armarc", os.path.join(
 CC = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(CC)
 ID = "armarc-relay-knuckle-4r"
 LEAD = json.load(open(os.path.join(REPO, "docs", "concepts", "rows", "conecut-knee-knuckle-3r.json")))["best_params"]
-RELAY = dict(PHI=30.0, tilt=0.0, taz=0.0, sgn=1.0, hw=1, hwv="plain", ds=0.0)
+RELAY = dict(PHI=30.0, tilt=0.0, taz=0.0, sgn=1.0, hw=1, hwv="plain", ds=0.0, liner=4.0, plate=1.5, flange=0.0)
+# liner (mm, compliance under the shell at the highest p90 skin), plate (carriage plate), flange (T-nut flange under the
+# shell, sampled as skin-facing metal when > 0): defaults = the screen of 2026-10-18 08:04 (18.01); the re-launch lever
+# (2026-10-18 ~12:00) is liner 2 (R1's 2 mm liner / clearance convention) with the 1 mm flange sampled
 _Z0 = CB._poses_all(); Z0 = {k: _Z0[k] for k in _Z0.files}; _ORIG = CB._poses_all
 D2R = math.pi / 180
 
@@ -227,9 +230,9 @@ def relay_geometry(M1, B1, ax, rp):
                 prof[a, b, k] = rr[first_out] - dd[b, k, first_out]
     p90 = np.nanpercentile(prof, 90, axis=0)                                     # (ss, ths)
     hw = rp.get("hwv", "plain")
-    R_liner = float(np.nanmax(p90)) + 4.0
+    R_liner = float(np.nanmax(p90)) + float(rp.get("liner", 4.0))
     R_t = R_liner + 1.5 + (2.0 if hw == "vroller" else 0.0)
-    h_c = 5.5 if hw == "vroller" else 1.7                                        # carriage above the track / shell top
+    h_c = 5.5 if hw == "vroller" else 0.2 + float(rp.get("plate", 1.5))                                       # carriage above the track / shell top
     dh = max(0.0, R_t + h_c - rpad) if abs(ds) < 1e-9 else 0.0     # ds != 0: the pad hangs from a bracket, no lift
     # the movers (knee link 6, member 3's E strap / boss) that pass over the track band in ANY fit-bench pose must clear
     # its top + the carriage by 1 mm after one rigid lift (parts are rigid: the lift is the max over poses, not per pose)
@@ -242,7 +245,7 @@ def relay_geometry(M1, B1, ax, rp):
             if sel.any(): need = max(need, R_t + 1.0 - float(np.linalg.norm(_rad(h_[sel], ax), axis=1).min()))
     dh = max(dh, need)
     return dict(e=e, f=f, s0=s0, s_pad=s_pad, ds=ds, th0=th0, lo=lo, hi=hi, ths=ths, ss=ss, p90=p90, R_liner=R_liner, R_t=R_t, h_c=h_c, dh=dh,
-                rpad=rpad, hw=hw, sg=sg)
+                rpad=rpad, hw=hw, sg=sg, flange=float(rp.get("flange", 0.0)))
 
 
 CAR_W, CAR_L, SH_W, TR_W = 24.0, 14.0, 12.0, 8.0
@@ -262,6 +265,11 @@ def relay_points(G, ax):
         d = math.cos(t * D2R) * e + math.sin(t * D2R) * f
         for sv in np.arange(s0 - 0.5 * CAR_L, s0 + 0.5 * CAR_L + 0.01, 2.0):
             car.append(sv * ax + (Rt + 0.2) * d); cib.append(True); car.append(sv * ax + (Rt + G["h_c"]) * d); cib.append(False)
+    if G.get("flange", 0.0) > 0:                              # T-nut flange under the shell (8 wide slot key, CAR_W long): skin-facing metal
+        for t in np.arange(tc - half, tc + half + 1e-9, 2.0 / Rt / D2R):
+            d = math.cos(t * D2R) * e + math.sin(t * D2R) * f
+            for sv in np.arange(s0 - 4.0, s0 + 4.0 + 0.01, 2.0):
+                car.append(sv * ax + (Rt - 1.5 - G["flange"]) * d); cib.append(True)
     if abs(G["ds"]) > 1e-9:                                   # bracket (2 mm Ti, 10 wide) from the carriage edge up/down the arm to the pad
         sg_ = 1.0 if G["s_pad"] > s0 else -1.0; s_a = s0 + sg_ * 0.5 * CAR_L; s_b = G["s_pad"]
         r_a = Rt + G["h_c"]; r_b = G["rpad"] + G["dh"]; hb = 5.0 / Rt / D2R
