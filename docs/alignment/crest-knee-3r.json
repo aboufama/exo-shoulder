@@ -1,100 +1,100 @@
 {
  "id": "crest-knee-3r",
  "status": "verified",
- "v_gap": 32.84,
+ "v_gap": 31.5,
  "complexity": 0.0,
  "verdict": "watch",
  "reasons": [
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
-  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 26.34 (score 90.42) sits 6.50 below the verified number"
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 22.02 (score 91.99) sits 9.48 below the verified number"
  ],
  "checks": [
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 29.81 vs bench 32.84 (-3.03; re-measured (this audit))",
-   "held_gap": 29.81,
-   "v_gap": 32.84,
-   "drop": -3.03,
+   "reason": "held out 28.45 vs bench 31.5 (-3.05; re-measured (this audit))",
+   "held_gap": 28.45,
+   "v_gap": 31.5,
+   "drop": -3.05,
    "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
    "level": "ok",
-   "reason": "self/fast 26.34 -> verified 32.84 (+6.50)",
+   "reason": "self/fast 26.34 -> verified 31.5 (+5.16)",
    "fast": 26.34,
-   "verified": 32.84,
-   "drop": 6.5
+   "verified": 31.5,
+   "drop": 5.16
   },
   {
    "check": "near_touch",
    "level": "ok",
-   "reason": "plain 32.84, <1 mm 36.25, <2 mm 57.98, <3 mm 93.37, band read 3-14 mm 35.3, 25.14 points live in the 1-2 mm shell (re-measured (this audit))",
-   "shell2": 25.14,
-   "plain": 32.84,
-   "n1": 36.25,
-   "n2": 57.98,
-   "n3": 93.37,
-   "band3": 35.3,
+   "reason": "plain 31.5, <1 mm 34.08, <2 mm 59.56, <3 mm 88.99, band read 3-14 mm 32.91, 28.06 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 28.06,
+   "plain": 31.5,
+   "n1": 34.08,
+   "n2": 59.56,
+   "n3": 88.99,
+   "band3": 32.91,
    "hist": {
     "0-1": 0.0,
-    "1-2": 0.0014,
-    "2-3": 0.0246,
-    "3-4": 0.023,
-    "4-6": 0.0814,
-    "6-10": 0.3142,
-    "10-14": 0.4098,
-    ">14": 0.1457
+    "1-2": 0.0012,
+    "2-3": 0.0142,
+    "3-4": 0.0184,
+    "4-6": 0.0602,
+    "6-10": 0.3547,
+    "10-14": 0.4244,
+    ">14": 0.1269
    },
-   "minmm": 0.437,
+   "minmm": 0.653,
    "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 32.84: bench 5 contact poses, sum 6.4 mm, deepest 2.77 mm at ['ws', 75.0, 90.0, 15.0], 0 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (-13.84 mm, x0.32); held 6 contact poses, sum 4.8 mm, deepest 1.63 mm at ['ws', 135.0, 135.0, -45.0], 0 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-56.17 mm, x0.08)",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 31.5: bench 5 contact poses, sum 5.15 mm, deepest 1.96 mm at ['ws', 30.0, 165.0, -60.0], 0 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (-15.09 mm, x0.25); held 2 contact poses, sum 2.04 mm, deepest 1.42 mm at ['ws', 135.0, 135.0, -45.0], 0 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-58.93 mm, x0.03)",
    "depths": {
-    "v_gap 32.84": {
+    "v_gap 31.5": {
      "bench": {
       "n": 5,
-      "sum_mm": 6.4,
-      "max_mm": 2.77,
+      "sum_mm": 5.15,
+      "max_mm": 1.96,
       "n_deeper3": 0,
       "overhead140": 3,
       "deepest": [
        "ws",
-       75.0,
-       90.0,
-       15.0
+       30.0,
+       165.0,
+       -60.0
       ],
-      "gap": 32.84,
-      "src": "docs/alignment/remeasure/crest-knee-3r_bench_perpose.json",
+      "gap": 31.5,
+      "src": "docs/alignment/remeasure/crest-knee-3r_bench_probe.json",
       "cross_check": {
-       "files": 2,
+       "files": 1,
        "sums": [
-        6.4
+        5.15
        ],
        "agree": true
       }
      },
      "held": {
-      "n": 6,
-      "sum_mm": 4.8,
-      "max_mm": 1.63,
+      "n": 2,
+      "sum_mm": 2.04,
+      "max_mm": 1.42,
       "n_deeper3": 0,
-      "overhead140": 1,
+      "overhead140": 0,
       "deepest": [
        "ws",
        135.0,
        135.0,
        -45.0
       ],
-      "gap": 29.81,
-      "src": "docs/alignment/remeasure/crest-knee-3r_held_perpose.json",
+      "gap": 28.45,
+      "src": "docs/alignment/remeasure/crest-knee-3r_held_probe.json",
       "cross_check": {
-       "files": 2,
+       "files": 1,
        "sums": [
-        4.8
+        2.04
        ],
        "agree": true
       }
@@ -104,21 +104,21 @@
    "ref": "conecut-knee-knuckle-3r",
    "compare": [
     {
-     "claim": "v_gap 32.84",
+     "claim": "v_gap 31.5",
      "wear": "bench",
-     "sum": 6.4,
+     "sum": 5.15,
      "ref_sum": 20.24,
-     "excess": -13.84,
-     "ratio": 0.32,
+     "excess": -15.09,
+     "ratio": 0.25,
      "watch": false
     },
     {
-     "claim": "v_gap 32.84",
+     "claim": "v_gap 31.5",
      "wear": "held",
-     "sum": 4.8,
+     "sum": 2.04,
      "ref_sum": 60.97,
-     "excess": -56.17,
-     "ratio": 0.08,
+     "excess": -58.93,
+     "ratio": 0.03,
      "watch": false
     }
    ]
@@ -126,10 +126,10 @@
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs conecut-knee-knuckle-3r: plain -14.56, 2 mm -23.14",
+   "reason": "vs conecut-knee-knuckle-3r: plain -13.22, 2 mm -24.72",
    "ref": "conecut-knee-knuckle-3r",
-   "gain_plain": -14.56,
-   "gain_2mm": -23.14
+   "gain_plain": -13.22,
+   "gain_2mm": -24.72
   },
   {
    "check": "continuity",
@@ -139,26 +139,26 @@
   {
    "check": "fold_margin",
    "level": "ok",
-   "reason": "min fold margin on file 5.331 deg (verification.held.crest.th_margin_min_taken; 7 readings)",
-   "min_margin": 5.331,
-   "where": "verification.held.crest.th_margin_min_taken"
+   "reason": "min fold margin on file 5.085 deg (redispatch2_2026_10_18.joggle_best.frozen_exact_bench.th_margin_min; 15 readings)",
+   "min_margin": 5.085,
+   "where": "redispatch2_2026_10_18.joggle_best.frozen_exact_bench.th_margin_min"
   },
   {
    "check": "idle",
    "level": "ok",
-   "reason": "knee moves: smallest recorded span 21.15 deg (re-measured K.ang span)",
+   "reason": "knee moves: smallest recorded span 29.11 deg (re-measured K.ang span)",
    "spans": [
     [
      "re-measured K.ang span",
-     21.15
+     29.11
     ],
     [
      "re-measured K.qa span",
-     21.15
+     29.11
     ],
     [
      "re-measured K.qb span",
-     23.7
+     29.17
     ]
    ],
    "declared": [
@@ -169,54 +169,59 @@
   {
    "check": "sampling",
    "level": "ok",
-   "reason": "sample-weighted in-band 0.853 vs part-weighted 0.865 (-1.26 points) (re-measured)",
+   "reason": "sample-weighted in-band 0.872 vs part-weighted 0.882 (-1.04 points) (re-measured)",
    "parts": {
     "hub1": [
-     0.966,
-     10.5,
+     0.973,
+     10.4,
      80
     ],
     "hub2": [
-     0.989,
-     10.6,
+     0.983,
+     10.9,
      80
     ],
     "hub3": [
-     0.888,
-     10.0,
+     0.887,
+     10.1,
      80
     ],
     "E": [
-     0.774,
-     10.3,
+     0.846,
+     9.3,
      112
     ],
     "boss": [
-     0.876,
+     0.899,
      9.0,
      32
     ],
     "pad": [
-     0.805,
-     11.5,
+     0.866,
+     10.8,
      32
     ],
     "knee": [
-     0.628,
-     12.9,
-     100
+     0.656,
+     12.7,
+     95
     ],
     "L1": [
-     0.963,
-     5.5,
+     0.946,
+     9.0,
      44
     ],
     "L2": [
-     0.899,
-     9.3,
-     96
+     0.885,
+     9.2,
+     100
     ]
    }
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
   },
   {
    "check": "complexity",
@@ -228,12 +233,12 @@
   {
    "check": "reporting",
    "level": "watch",
-   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 26.34 (score 90.42) sits 6.50 below the verified number"
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 22.02 (score 91.99) sits 9.48 below the verified number"
   },
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
   },
   {
    "check": "rules",
@@ -246,12 +251,19 @@
   "held": true
  },
  "verifier_files": [
+  "docs/concepts/verify/crest-knee-3r-joggle_v_tolprobe_flatcell_bench.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_tolprobe_held.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_tolprobe_bench.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_flood_held.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_flood_bench.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_held_frozen.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_bench_frozen.json",
   "docs/concepts/verify/crest-knee-3r_v_flood_held.json",
   "docs/concepts/verify/crest-knee-3r_v_flood_bench.json",
   "docs/concepts/verify/crest-knee-3r_v_held_frozen.json",
   "docs/concepts/verify/crest-knee-3r_v_bench_frozen.json"
  ],
- "git": "6cebbf5",
- "tool_version": "2026-10-17.6",
- "t": "2026-10-18T02:15:11Z"
+ "git": "05eab63",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T09:02:33Z"
 }
