@@ -197,7 +197,7 @@ unchanged.
 | paired vs the lead | 0 status-discordant poses; diff 0.00, CI90 0.00..0.09; in band -74 of 107910 samples | 0 discordant; +0.06, all in-band (CI90 0.00..0.08, P(better) 0) |
 | probes +0.1 / +0.2 / +0.35 (from the dump) | 18.29 / 18.29 / 18.83 (lead 18.83 / 18.83 / 19.37) | 22.44 / 22.44 / 22.66 (lead 22.38 / 22.38 / 22.60) |
 | poses whose metal moved | 139 0.072 -> 0.602; 345 1.709 -> 1.606 | 224 / 225 / 252 -3.49 / -5.51 / -1.60 -> -2.43 / -4.58 / -0.71; 898 1.67 -> **1.528**; 305 |
-| **TRUE CUT** (each moved sample on the original underside) | **18.28, ib14 0.9013, 139 0.073, probes 18.83 / 18.83 / 19.37 (= the lead)**, why fold 88 / parts 0 / contact 4 | scan: 224 / 225 / 252 -3.09 / -5.26 / -1.37, 898 1.69 |
+| **TRUE CUT** (each moved sample on the original underside) | **18.28, ib14 0.9013, 139 0.073, probes 18.83 / 18.83 / 19.37 (= the lead)**, why fold 88 / parts 0 / contact 4 | **22.38, ib14 0.9001 (= the lead)**, 14 contacts; scan: 224 / 225 / 252 -3.09 / -5.26 / -1.37, 898 1.69 |
 
 What I checked:
 
