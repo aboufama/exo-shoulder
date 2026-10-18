@@ -1,0 +1,88 @@
+{
+ "rule": "the full CAD must not lose R1 / R6 / R16 against its own L1 (same judges, same steps: judge_all fast steps, --jobs 1 local; FEA skipped as the L1)",
+ "L1": "l1_desmo-conecut",
+ "full": "user_desmo_conecut",
+ "R1": {
+  "L1": 0.8219618441173511,
+  "full": 0.8175564518101596,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -0.44
+ },
+ "R1-aim": {
+  "L1": 0.5303538099070155,
+  "full": 0.5226309221714333,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -0.77
+ },
+ "R2": {
+  "L1": 24.87,
+  "full": 24.87,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": 0.0
+ },
+ "R3": {
+  "L1": 1.0,
+  "full": 1.0,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": 0.0
+ },
+ "R4": {
+  "L1": 0.7554588173599762,
+  "full": 0.7478271745117585,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -0.76
+ },
+ "R6": {
+  "L1": 1.48,
+  "full": 1.5,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": 0.02
+ },
+ "R7": {
+  "L1": true,
+  "full": true,
+  "L1_status": "PASS",
+  "full_status": "PASS"
+ },
+ "R8": {
+  "L1": 113.5,
+  "full": 207.9,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": 94.4
+ },
+ "R11": {
+  "L1": 0.36,
+  "full": 0.246,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": -0.11
+ },
+ "R16": {
+  "L1": 0.1333,
+  "full": 0.2417,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": 10.84
+ },
+ "R17": {
+  "L1": true,
+  "full": true,
+  "L1_status": "PASS",
+  "full_status": "PASS"
+ },
+ "passing": {
+  "L1": 7,
+  "full": 7
+ },
+ "loses": [
+  "R1",
+  "R6"
+ ]
+}
