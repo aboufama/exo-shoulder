@@ -355,8 +355,11 @@ def claim(fit, wear, which, outp):
     stop = V.stop_report(Mk, W)
     mg = margins(Mk.D, Mk.Q, tk)
     res_stop = list(W.res)
-    conn = V.flood_connected(Mk, W, tk)                      # RM.kin_nodes = the one reading
-    ck = set(); dropped = set(conn["dropped_idx"])
+    if wear == "envh":                                       # fresh (off-grid) poses: joined to the connected grid by edges (V's flood drops them all)
+        keys, cinfo = conn_keys(Mk.D, Mk.p, W); sc = score(Mk, W, keys)
+        conn = dict(cinfo, dropped=sc["dropped"], dropped_idx=[], **{k: sc[k] for k in ("gap", "near", "reach", "follow", "inband14", "contact", "ws_taken")})
+    else:
+        conn = V.flood_connected(Mk, W, tk)                  # RM.kin_nodes = the one reading
     side, res1 = stop_refusal(Mk, W, res_stop)
     if res1 is not None:
         r0 = list(W.res); W.res = res1; rs = W.report(); W.res = r0; side["gap_refusals_as_contacts"] = rs["gap"]
