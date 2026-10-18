@@ -1,0 +1,127 @@
+{
+ "id": "slotted-eccentric-pin-knee-3r",
+ "name": "Pin knee 3R with the eccentric slotted-lever J2 (moving fold boundary): inverted slot cam, O20 knee hub K slaved to q2",
+ "lens": "round14:lens 3 cell B (crest-pinknee-cx0) - eccentric + slot as a fold lever on the pin-knee chain",
+ "family": "offset 3R (skin-normal J3) + planar 2-pin cuff knee + slaved J2 eccentric (determined 4-revolute loop closed by a roller in a slot)",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "passive_translations": 0,
+ "status": "screened",
+ "t_ideated": "2026-10-16T05:47:46Z",
+ "t_screened": "2026-10-18T01:20:00Z",
+ "reach": 0.4,
+ "follow": 0.2333,
+ "inband14": 0.6306,
+ "inband10": 0.3637,
+ "contact": 0.0488,
+ "gap": 153.49,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 915,
+ "model_file": "docs/concepts/models/slotted-eccentric-pin-knee-3r.py",
+ "doc": "docs/concepts/slotted-eccentric-pin-knee-3r.md",
+ "best_k": "B-g47-2",
+ "best_params": {
+  "az": 85.4825,
+  "el": 59.0892,
+  "a1": 51.4594,
+  "wd": 79.8489,
+  "wa": -19.0564,
+  "Amin": 59.0335,
+  "Amax": 87.4236,
+  "w": 7.8251,
+  "sl": 1.0834,
+  "b": 28.3396,
+  "c": 81.6486,
+  "sigma": -1,
+  "sk": 1,
+  "margin": 5.23
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 1,
+  "moving_bodies": 4,
+  "joints": 5,
+  "closed_loops": 1,
+  "sliding_pairs": 1,
+  "rolling_pairs": 4,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 11,
+  "catalogue_parts": 5,
+  "notes": "the pin-knee 3R chain (J1-J3 O20 v5 hubs, MR117-2RS pairs) with link 2 split at a passive knee K (O20 v5 stack, MR117-2RS pair; O20-only rule) slaved to q2 by an MR52ZZ roller on an O2 dowel in an arm of link 2b riding a 2 mm slotted track plate fixed to link 1 around hub 2 (the inverted, non-singular cam of slotted-eccentric-j2-3r). Bodies: link 1 (+ spoke + track), crank 2a, link 2b (+ roller arm + stud), member 3 (hub-3 lower plate + E strap); the cuff knee (pins a, b, knee link, arm pad) is recorded under cuff_knee. Joints: J1, J2, K, J3 revolutes + the roller-in-slot pair. One closed loop (link 1 - crank - 2b - roller/track) determines K (R17: nothing sags).",
+  "source": "docs/concepts/models/slotted-eccentric-pin-knee-3r.py:1-25 + docs/concepts/models/slotted-eccentric-j2-3r.py:1-25",
+  "confidence": "counted",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
+ },
+ "exact_frozen": {
+  "protocol": "fit Bench(60,160) fast at the 1 mm radial part-part rule, every level frozen, worn on Bench(110,360) exact (parent harness SE.frozen)",
+  "fit": {
+   "gap": 188.47,
+   "reach": 0.2375,
+   "follow": 0.0667,
+   "inband14": 0.6066,
+   "contact": 0.0455
+  },
+  "frozen": {
+   "gap": 201.2,
+   "reach": 0.1806,
+   "follow": 0.0545,
+   "inband14": 0.6042,
+   "inband10": 0.3623,
+   "contact": 0.1013,
+   "closure": 0.3745,
+   "collide": 0.5511,
+   "gap_near1": 222.88,
+   "min_metal_skin": 0.09,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.0,
+    "n_clip": 10,
+    "follow": 0.2,
+    "n_taken": 2,
+    "inband14": 0.738
+   },
+   "th_need": {
+    "p5": 24.9,
+    "p95": 144.4,
+    "kin_reach": 0.4111
+   },
+   "window": [
+    74.0,
+    133.5
+   ],
+   "post_lift": {
+    "hub2": 0.85,
+    "hub3": 2.82,
+    "pinK": 3.25
+   }
+  }
+ },
+ "gate": {
+  "n": 915,
+  "gain_2nd_half": 8.505,
+  "gain_last_third": 0.0,
+  "top5_spread": 2.607,
+  "unit": "score points, ordered history A+B+C (interleaved by generation)",
+  "converged": false
+ },
+ "complexity": 5.0,
+ "verdict": "SCREENED, far behind - the eccentric loses to its own locked control: best 153.49 on Bench(60,160) fast (score 44.19; reach 0.400, follow 0.233, ib14 0.631, contact 0.049) after 915 configs, frozen exact Bench(110,360) 201.20 (score 26.8; reach 0.181, follow 0.055, ib14 0.604, contact 0.101, overhead 0/28, near-touch 222.88) vs the plain 3R at the same axis directions through the same code 34.78 (H1 directions) / 57.07 (the best config's own seats) and the verified pin knee 27.20 / lead 18.28. The slot widens the KINEMATIC window as promised (H1: th [32.5, 104.0] -> [25.5, 121.75] two-sided, [32.25, 129.75] stretched-only; kinematic reach 0.775 -> 0.869-0.888), but the metal that implements it collides with link 1 / hub 1 / itself on 88-100 % of the closing poses - also with the parent's O10 knee (probe: 132/133 and 197/199), so it is not the O20 rule. Convergence gate (score points, n 915): 8.51 / 0.00 / 2.61 -> NOT converged (2nd-half rule), status screened, not dead. The spec's start condition (parent passes its slot gate with >= 3 frozen points over its control) was already false (parent v_gap 115.21 vs control 46.60).",
+ "limiter": "the eccentric's own metal around hub 2: the roller track must sit on link 1 in the annulus e = dist(J2, G) in [b - dG, b + dG] (dG >= 14.5 mm for the roller to clear K's boss), i.e. on the same circle the knee hub K sweeps (b >= 20 deg for two O20 hubs side by side) over a q2 span of 170-235 deg (the J2 interior angle sweeps ~0 -> 180 across any wide window); so K and the crank cross link 1, hub 1, the spoke and the track (top K6 pairs at H1: pinK|link1 137, link1|crank 132, hub1|pinK 123, pinK|trk 92 of 199 closing poses). Stacking them honestly makes hub 2 a 3-layer stack (link 1 + track + crank, K above): hub 2 lifts to 71 mm and leaves the band (0.00), crank 0.37, L2b 0.38. CMA escapes the collisions only by shrinking the lock-held track to th [74, 133.5] (kinematic reach 0.50 fast / 0.41 big, below the plain 0.775): overhead and rest poses fall outside the slot.",
+ "note": "Model = the parent's kit model (docs/concepts/models/slotted-eccentric-j2-3r.py, inverted cam, every check unchanged: K3 march, K2 dense incl. axes K and G, K6 with same-body exemption, honest posts, crowns + walls, declared pins, slot gate) at the pin-knee chain's J1 / J3 axis directions (H1: bvec(101.16, 63.90), J3 = the tilted d3 = wdir(78.55, -5.34), a1 41.02, a2 68.26), O20 enforced at K (rad 10, 12.25 mm), margin >= 5.23 (5 + K play), psi in [15, 165], lock >= 50 deg, b >= 20 deg - all hard box edges. Member 3 = the kit neck in both arms of every paired comparison: the eccentric's metal is upstream of member 3, so the cuff knee cannot change it. Sweep (local, farm closed, niced, 2 processes): A 113 (H1 two-sided start, stopped at 238.25), B 697 (parent-best start: 275 at O20 -> 153.49), C 113 (stretched-only start Amin 68: best honest 271, best 112.55 dishonest = every eccentric part lifted out of band, ib14 0.11, sparse samples) + 13 paired controls / probes. Gate 0 (slot_design, 432 law cells per seat): 217/432 pass at H1. Frozen exact of the best: fit at 1 mm part-part 188.47 -> Bench(110,360) exact 201.20 (closure 0.37, collide 0.55 of closing poses, min metal 0.09 mm, post lifts hub 2 0.85 / K 3.25 / hub 3 2.82 mm). Complexity v2.2 5.0 (closed loop 4 + track pair 1; slaved K and cuff knee 0). 0 passive translations, 3 active. What would be needed (unmeasured, judged not worth it): a cam whose track lies OUTSIDE K's sweep annulus (dG > b + 10 mm: a long roller arm, more metal over the deltoid) or a track under link 1's skin face (no room at 2-14 mm)."
+}
