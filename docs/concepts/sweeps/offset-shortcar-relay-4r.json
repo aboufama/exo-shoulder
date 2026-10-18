@@ -1,7 +1,7 @@
 [
  {
   "k": 0,
-  "t": "2026-10-18T13:42:44Z",
+  "t": "2026-10-18T13:53:49Z",
   "bench": "Bench(110,360) exact frozen",
   "run": "controls_claimbench.json",
   "params": {
@@ -54,7 +54,7 @@
  },
  {
   "k": 1,
-  "t": "2026-10-18T13:42:44Z",
+  "t": "2026-10-18T13:53:49Z",
   "bench": "Bench(110,360) exact frozen",
   "run": "controls_claimbench.json",
   "params": {
@@ -107,7 +107,60 @@
  },
  {
   "k": 2,
-  "t": "2026-10-18T13:46:42Z",
+  "t": "2026-10-18T13:53:49Z",
+  "bench": "Bench(110,360) exact frozen",
+  "run": "controls_claimbench.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 31.0,
+   "delta": 0.0,
+   "carw": 14.0,
+   "pre": 0.0,
+   "coil": "none",
+   "flange": 0,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.8948,
+  "inband14_pooled": 0.916,
+  "inband10": 0.5744,
+  "reach": 0.7944,
+  "follow": 1.0,
+  "contact": 0.0318,
+  "gap": 14.26,
+  "gap_plain": 13.74,
+  "near1": 17.91,
+  "n_contacts": 13,
+  "contacts_by_cause": {
+   "chain": 12,
+   "hardware": 1,
+   "chain+hw": 0
+  },
+  "jams": 0,
+  "hw_contacts": [
+   [
+    466,
+    -3.26,
+    -6.4
+   ]
+  ],
+  "stack_boss_lift": 1.13,
+  "arc_rel_th0": [
+   -6.4,
+   41.4
+  ],
+  "note": "gap = chain-only buildable gate (the claim metric); controls have coil none / flange 0"
+ },
+ {
+  "k": 3,
+  "t": "2026-10-18T14:00:30Z",
   "bench": "envsel exact (selection)",
   "run": "envsel_s1.json",
   "params": {
@@ -164,8 +217,8 @@
   "note": "gap = chain-only buildable gate"
  },
  {
-  "k": 3,
-  "t": "2026-10-18T13:46:42Z",
+  "k": 4,
+  "t": "2026-10-18T14:00:30Z",
   "bench": "envsel exact (selection)",
   "run": "envsel_s1.json",
   "params": {
@@ -218,6 +271,334 @@
   "arc_rel_th0": [
    -6.4,
    41.4
+  ],
+  "note": "gap = chain-only buildable gate"
+ },
+ {
+  "k": 5,
+  "t": "2026-10-18T14:00:30Z",
+  "bench": "envsel exact (selection)",
+  "run": "envsel_s1.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 31,
+   "delta": 4.5,
+   "carw": 14,
+   "pre": 0,
+   "coil": "arm",
+   "flange": 1,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.8898,
+  "inband14_pooled": 0.9132,
+  "inband10": 0.5608,
+  "reach": 0.7861,
+  "follow": 1.0,
+  "contact": 0.032,
+  "gap": 15.61,
+  "gap_plain": 14.59,
+  "near1": 22.45,
+  "n_contacts": 13,
+  "contacts_by_cause": {
+   "chain": 12,
+   "hardware": 0,
+   "chain+hw": 1
+  },
+  "jams": 0,
+  "hw_contacts": [
+   [
+    264,
+    -1.68,
+    -1.9
+   ]
+  ],
+  "stack_boss_lift": 1.23,
+  "arc_rel_th0": [
+   -1.9,
+   45.9
+  ],
+  "note": "gap = chain-only buildable gate"
+ },
+ {
+  "k": 6,
+  "t": "2026-10-18T14:00:30Z",
+  "bench": "envsel exact (selection)",
+  "run": "envsel_s1.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 28,
+   "delta": 0,
+   "carw": 14,
+   "pre": 0,
+   "coil": "arm",
+   "flange": 1,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.8865,
+  "inband14_pooled": 0.9126,
+  "inband10": 0.576,
+  "reach": 0.7861,
+  "follow": 1.0,
+  "contact": 0.032,
+  "gap": 15.94,
+  "gap_plain": 14.59,
+  "near1": 22.45,
+  "n_contacts": 13,
+  "contacts_by_cause": {
+   "chain": 12,
+   "hardware": 0,
+   "chain+hw": 1
+  },
+  "jams": 0,
+  "hw_contacts": [
+   [
+    264,
+    -1.68,
+    -2.1
+   ]
+  ],
+  "stack_boss_lift": 2.84,
+  "arc_rel_th0": [
+   -6.4,
+   41.4
+  ],
+  "note": "gap = chain-only buildable gate"
+ },
+ {
+  "k": 7,
+  "t": "2026-10-18T14:00:30Z",
+  "bench": "envsel exact (selection)",
+  "run": "envsel_s1.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 34,
+   "delta": 0,
+   "carw": 14,
+   "pre": 0,
+   "coil": "arm",
+   "flange": 1,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.8944,
+  "inband14_pooled": 0.9165,
+  "inband10": 0.5907,
+  "reach": 0.7833,
+  "follow": 1.0,
+  "contact": 0.0345,
+  "gap": 15.68,
+  "gap_plain": 15.12,
+  "near1": 22.45,
+  "n_contacts": 14,
+  "contacts_by_cause": {
+   "chain": 12,
+   "hardware": 1,
+   "chain+hw": 1
+  },
+  "jams": 0,
+  "hw_contacts": [
+   [
+    259,
+    -0.08,
+    -6.4
+   ],
+   [
+    264,
+    -1.68,
+    -5.0
+   ]
+  ],
+  "stack_boss_lift": 0.0,
+  "arc_rel_th0": [
+   -6.39,
+   41.39
+  ],
+  "note": "gap = chain-only buildable gate"
+ },
+ {
+  "k": 8,
+  "t": "2026-10-18T14:01:10Z",
+  "bench": "envsel exact (selection)",
+  "run": "envsel_s2.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 34,
+   "delta": 4.5,
+   "carw": 14,
+   "pre": 0,
+   "coil": "arm",
+   "flange": 1,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.9212,
+  "inband14_pooled": 0.9397,
+  "inband10": 0.6227,
+  "reach": 0.6417,
+  "follow": 0.7727,
+  "contact": 0.0424,
+  "gap": 47.8,
+  "gap_plain": 47.8,
+  "near1": 54.19,
+  "n_contacts": 14,
+  "contacts_by_cause": {
+   "chain": 12,
+   "hardware": 1,
+   "chain+hw": 1
+  },
+  "jams": 77,
+  "hw_contacts": [
+   [
+    259,
+    -0.06,
+    -1.9
+   ],
+   [
+    264,
+    -1.68,
+    -1.9
+   ]
+  ],
+  "stack_boss_lift": 0.0,
+  "arc_rel_th0": [
+   -1.89,
+   45.89
+  ],
+  "note": "gap = chain-only buildable gate"
+ },
+ {
+  "k": 9,
+  "t": "2026-10-18T14:01:10Z",
+  "bench": "envsel exact (selection)",
+  "run": "envsel_s2.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 31,
+   "delta": 6,
+   "carw": 14,
+   "pre": 0,
+   "coil": "arm",
+   "flange": 1,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.9443,
+  "inband14_pooled": 0.9569,
+  "inband10": 0.6626,
+  "reach": 0.4333,
+  "follow": 0.2909,
+  "contact": 0.0647,
+  "gap": 119.05,
+  "gap_plain": 119.05,
+  "near1": 124.47,
+  "n_contacts": 13,
+  "contacts_by_cause": {
+   "chain": 12,
+   "hardware": 0,
+   "chain+hw": 1
+  },
+  "jams": 211,
+  "hw_contacts": [
+   [
+    264,
+    -1.68,
+    -0.4
+   ]
+  ],
+  "stack_boss_lift": 1.23,
+  "arc_rel_th0": [
+   -0.4,
+   47.4
+  ],
+  "note": "gap = chain-only buildable gate"
+ },
+ {
+  "k": 10,
+  "t": "2026-10-18T14:09:12Z",
+  "bench": "Bench(110,360) exact frozen",
+  "run": "claim.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 31,
+   "delta": 4.5,
+   "carw": 14,
+   "pre": 0,
+   "coil": "arm",
+   "flange": 1,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.8898,
+  "inband14_pooled": 0.9132,
+  "inband10": 0.5608,
+  "reach": 0.7944,
+  "follow": 1.0,
+  "contact": 0.0318,
+  "gap": 14.76,
+  "gap_plain": 13.74,
+  "near1": 17.91,
+  "n_contacts": 13,
+  "contacts_by_cause": {
+   "chain": 12,
+   "hardware": 1,
+   "chain+hw": 0
+  },
+  "jams": 0,
+  "hw_contacts": [
+   [
+    466,
+    -2.95,
+    -1.9
+   ]
+  ],
+  "stack_boss_lift": 1.23,
+  "arc_rel_th0": [
+   -1.9,
+   45.9
   ],
   "note": "gap = chain-only buildable gate"
  }
