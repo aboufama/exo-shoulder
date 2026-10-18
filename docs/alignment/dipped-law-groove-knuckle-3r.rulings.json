@@ -1,14 +1,72 @@
 [
- {"key": "dominance", "refuted": false, "evidence": "Re-read: remeasure/dipped-law-groove-knuckle-3r_bench.json deep.plain 18.64, deep.gap_near2 35.69 (34 poses) against remeasure/roller-longdyad-knuckle-3r_bench.json deep.plain 18.67, deep.gap_near2 33.10 (30 poses): +0.03 plain, -2.59 at 2 mm. Same harness, Bench(110,360) exact, frozen, both. Threshold: A1 gate retired, so watch only (tools/alignment_audit.py c_dominance). Wearer cost re-derived from the per-pose claim dumps: taken poses with metal < 2 mm 34 vs 30; overhead (elev >= 140) 5 of 8 taken under 2 mm vs 4 of 8. Stands."},
- {"key": "fold_margin", "refuted": false, "evidence": "Measurement right: verify/dipped-law-groove-knuckle-3r_v_held_frozen.json extra.th_margin {min 0.184, lt5 202, dipped.n 202, dipped.m_sub_min 0.184}; _v_bench_frozen.json {min 0.204, lt5 84}; re-run here through the unchanged verifier (tools/alignment_msub_rest_probe.py, new; remeasure/dipped-law-groove-knuckle-3r_skeptic_msub_bench.json) gives 0.204 / 84 again with frozen 18.64. The formula is the lead verifier's th_margin (verify/roller-longdyad-knuckle-3r.py lines 47-62, min(m_sub, m_eff) where |dK| > 1e-6), copied unchanged; TH fold_min 5.0 applied to its min. Context measured here, not a refutation: the same sub-chain margin exists with K AT REST in the rule-passing D=0 control (remeasure/dipped-law-groove-knuckle-3r-D0control_skeptic_msub_bench.json skeptic_msub_all.rest {n 204, m_sub_min 0.0, lt5 106, lt1 50}); 83 of the 84 dipped bench poses are taken by the control with K at rest and m_sub already < 5 there (min 0.205, median 1.675; the dip lowers m_sub by 0.00-0.33 deg). So the dip does not create the near-fold geometry; it changes what holds K there (dowel stop A -> spring-closed lobe). Whether m_sub is read for a cam-held K is the open user question (ROUNDS.md lines 681, 849, 978, 1191); CLAUDE.md 'A different reading is the user's call, not the model's'. Stands."},
- {"key": "judgement:T3", "refuted": false, "evidence": "Every number re-checked: bench 84 / 371 at 0.204 and held 202 / 850 at 0.184 (files above, and my re-run); all failing poses dipped (lt5 = dipped.n on both wears); D=0 control _v_bench_frozen_d0.json th_margin {min 5.181, lt5 0}, frozen 19.33, re-run here 19.33; claim 18.64, lead 18.67 (per-pose dumps recompute 18.63 / 19.33 / 18.66). Rule citations hold: CLAUDE.md 'The fold margin is read in ONE metric ... A different reading is the user's call'; ROUNDS.md 681/849/978/1191 list msub for a slaved K as open; round8_ideation.md item 8 parked crank-rod on the same Jacobian argument; ROUNDS.md 1136 'no user ruling may be assumed (no msub-free positive drive)'; round 10 itself killed the cam-slaved two-rise lobe on msub 2.14 (round10_ideation.md line 605). The waiver entered the design's own model (git -S: 5d587f5 / c177c28); the coupled reading code entered the verifier in 125be85 (WIP), its outputs in 35afc38. Minor: the phrase 'spec correction (2)' is not in the model file; the waiver text is in its docstring ('msub ... is NOT required on dipped poses'). My measurement (fold_margin ruling) shows the geometry is the family's own at K rest, so the wearer cost hinges on the slaving holding (M5 / B2), but the claim still exists only under a reading the design chose for itself. Stands."},
- {"key": "judgement:P1", "refuted": false, "evidence": "Re-derived from the per-pose dumps (remeasure/dipped-law-groove-knuckle-3r{,-D0control}_{bench,held}_perpose.json; params differ ONLY in dipD 1.0 vs 0.0, same harness and fit protocol; the control is the dip's own fit with D zeroed, so if anything handicapped). Held: ws taken only by the control 12, only by the dip 0; evaluated poses 879 vs 867; contact 17 / 17, same poses, 80.99 vs 81.20 mm; taken < 3 mm 293 vs 334; frozen 22.97 vs 24.07. Several of the 12 lost held poses are in band on the control (min_mm 4.40, 3.03, 2.74, 2.19, 3.57, 6.66). Bench: the two contacts 'removed' are pose 203 (0,90,45), cleared to 0.477 mm, and pose 316 (60,150,-105, overhead), which the dip no longer evaluates at all (ev false) while the control reaches it at -1.237 mm; the dip also loses pose 313 (60,120,-105) that the control takes at 3.77 mm. Of the two named targets, 182 stays in contact (-0.89 vs -1.675 mm). Bootstrap not re-run; the strict 0 / 12 discordance alone supports 'strictly dominated held out'. Stands."},
- {"key": "judgement:P4", "refuted": false, "evidence": "git log -S: the msub waiver ('is NOT required on dipped poses', the inA &= ~dipA gate) entered docs/concepts/models/dipped-law-groove-knuckle-3r.py in 5d587f5 (04:03) and the model commit c177c28 (04:07); the 'coupled' reading code entered docs/concepts/verify/dipped-law-groove-knuckle-3r.py in WIP 125be85 (05:57), and its outputs (coupled.min 5.389 / 5.406) were committed in 35afc38 (06:11). No kit / bench / judge file in either. Small citation correction (code in 125be85, not 35afc38); the pattern stands."},
- {"key": "judgement:NEW-contact-for-inband", "refuted": false, "evidence": "Re-derived from the per-pose claim dumps (dip vs remeasure/roller-longdyad-knuckle-3r_{bench,held}_perpose_claim.json, same 470 / 1154 poses, both frozen exact): bench contact 4 vs 2 (21.88 vs 16.46 mm), in-band 0.8993 vs 0.8937; held contact 17 vs 10, 7 only here / 0 only lead / 10 both, 81.20 vs 49.88 mm; taken < 3 mm 334 vs 273. The extra held contacts are the centred knee's (D=0 control also 17), but they belong to this row's claim. Contact is the goal's first line. Stands."},
- {"key": "judgement:T1", "refuted": false, "evidence": "Re-derived: pose 203 cmin 0.477 mm (bench perpose dump); near-2 35.69 - plain 18.64 = 17.05 points in the 1-2 mm shell (remeasure/..._bench.json deep); taken < 3 mm 147 vs 133 bench, 334 vs 273 held; overhead taken 8 of 28, 5 under 2 mm (lead 4). Report only, as the user ruled; numbers stand."},
- {"key": "judgement:M5", "refuted": false, "evidence": "No closure-force, spring-torque, preload or R17 number on file: rows/dipped-law-groove-knuckle-3r.json has 0 hits for r17 / closure force / spring torque / preload / dynamics. Missing measurement, so the watch stands. Note (measured, remeasure/..._skeptic_msub_bench.json): the 'sub-chain 0.18-0.20 deg from its fold if the follower lifts' part is not dip-specific: the control's K-at-rest poses carry m_sub down to 0.0 (50 under 1 deg) with K held by the same spring against stop A."},
- {"key": "judgement:NEW-sub-tolerance-feature", "refuted": false, "evidence": "verify/_v_bench_frozen.json extra.dip_table.lobe_dip_mm 0.068, extra.lobe_tol {K_deg_per_10um 0.35, dip_floor_deg -2.37}; dK_neg_deg -3.0 (stop A at the floor side, not at rest). The 0.35 deg / 10 um sensitivity is the family's (D=0 file lobe_tol 0.35), but only the dip puts K's rest through the dwell on the lobe. Stands."},
- {"key": "judgement:G4", "refuted": false, "evidence": "Bench probe extras.sc_info: pa_horn_max_taken 43.0 (cap 43), dK_lim 43.8, why_lim pressure_horn, clear_hubK_min 1.04 (rule 1 mm); verifier dK_lim_deg 43.75 vs the D=0 control 46.25 (2.5 deg of stroke). Both values are inside their rules, and the cap-bound horn is family-wide (control pa_horn_max 42.7, why_lim pressure_horn), but the stroke cost is real for the wearer: it is the 12 held-out poses lost (P1) and the overhead bench pose 316 no longer reached. Stands as watch."},
- {"key": "judgement:NEW-preview-not-claim", "refuted": false, "evidence": "Upheld and sharper than reported: the preview module docs/concepts/viz/concepts/dipped-law-groove-knuckle-3r.js line 11 (const P) has NO dipD / dip_thc / dip_w / dip_ref keys, and dipOf() (line 22) returns 0 when P.dipD is undefined, so the dashboard motion preview (thumbs.mjs -> docs/dashboard/data/motion.json, tools/dash_build.py motion()) shows no dip at all; P also reads law_mode 'seg' against best_params 'lin' and lacks g / beta / r_c / s_arm. The header comment says th_c 50 / w 8; best_params say dipD 1.0, th_c 53, w 12."},
- {"key": "judgement:S5", "refuted": false, "evidence": "rows/dipped-law-groove-knuckle-3r.json verification.flood {full 18.64, knn 20.32, full_dropped 0, knn_dropped 6}; verify/_v_bench_frozen.json connected: full 18.64 / 0, knn 20.32 / 6, bench-graph 50.2 / 112; the lead's verify file: full 18.67 / 0, knn 20.34 / 6, bench-graph 50.29 / 113. The rule's flood (full) loses 0, so the documented S5 threshold would read ok; the watch is a family-wide graph sensitivity, not this row's. Not refuted (a refutation needs the flood to be wrong, and it is not), but it does not separate this row from the lead."}
+ {
+  "key": "fold_margin",
+  "refuted": false,
+  "evidence": "Re-read 2026-10-18: verify/dipped-law-groove-knuckle-3r_v_held_frozen.json extra.th_margin {min 0.184, n 850, lt5 202, dipped.n 202, dipped.m_sub_min 0.184, lowest at dK -0.0, coupled.min 5.406}; _v_bench_frozen.json {min 0.204, n 371, lt5 84, dipped.n 84, coupled.min 5.389}. Threshold is the documented one: TH fold_min 5.0 (tools/alignment_audit.py line 64), c_fold_margin flags gamed below 4.95 on the minimum reading on file (line 544). The model and verifier are unchanged since c177c28 / 1dbb353 (git log), so the file is current. B1 is still open (HANDOFF line 326, ROUNDS.md line 5462), so the strictest family reading is the one that stands."
+ },
+ {
+  "key": "judgement:T3",
+  "refuted": false,
+  "evidence": "Every number re-checks: bench 84 / 371 at 0.204, held 202 / 850 at 0.184, all failing poses dipped (lt5 = dipped.n on both wears); D=0 control _v_bench_frozen_d0.json th_margin {min 5.181, lt5 0, dipped.n 0}; rows/roller-longdyad-knuckle-3r.json th_margin_min {bench 5.181, held 5.031, lt5 0}; roller held 23.73 (remeasure/roller-longdyad-knuckle-3r_held.json deep.plain, re-worn 22:27 today). The model docstring still waives msub on dipped poses ('is NOT required on dipped poses', git log -S -> 5d587f5). B1 open: HANDOFF line 326 and ROUNDS.md line 5462 ('B1 (G4, m_sub at K rest), unchanged'); no user ruling in CLAUDE.md. The 107 vs 106 context (previous skeptic's msub probe) is still the measured physics, but it is a reason for the ruling, not a refutation."
+ },
+ {
+  "key": "judgement:P1",
+  "refuted": false,
+  "evidence": "Re-ran tools/alignment_paired.py compare_sets on the dumps on file with two new seeds (1, 7; 4000 draws each). Pose keys match (the tool aborts otherwise). vs lowarm-kstop held: +1.20, CI90 [0.50, 2.20] / [0.48, 2.22], P(dip better) 0.004 / 0.005; ws taken only dip / only kstop 1 / 12; contact 5 / 2 / 12. Bench -0.05 [-0.62, 1.00] / [-0.65, 0.97], P 0.379 / 0.365. vs own D=0 control held: +1.10 [0.56, 1.83], P 0.000, ws 0 / 12, contact 0 / 0 / 17. Every dump reproduces its claim (dip 18.63 / 24.07, kstop 18.69 / 22.88, control 19.33 / 22.98). Apples to apples: lowarm-kstop's dumps are the per-pose WORST of its sided play wears (dump note; row step0 plus_0264 18.60 / minus_0210 18.68 / worst 18.69), so if anything the comparison handicaps the reference. Not refuted."
+ },
+ {
+  "key": "judgement:P4",
+  "refuted": false,
+  "evidence": "git log -S 'NOT required on dipped' -- the model -> 5d587f5; git log -S 'coupled' -- the verifier -> 125be85 (later commit 1dbb353); model commit c177c28. tools/concept_bench.py and tools/concept_kit.py last changed 2026-10-16 06:05 (17d6027), before the row. git show 8f69bd6 touched only the row's complexity record; the row has 0 hits for 'r17' (rows/dipped-law-groove-knuckle-3r.json). Upheld as stated."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "remeasure/dipped-law-groove-knuckle-3r_bench.json deep {plain 18.64, gap_near2 35.69, near2_poses 34}; remeasure/roller-longdyad-knuckle-3r_bench.json (re-worn today 22:24) deep {plain 18.67, gap_near2 33.10, near2_poses 30}: +0.03 plain, -2.59 at 2 mm, same harness and protocol. Contact depth recomputed from the claim dumps: bench 21.88 vs 16.46 mm (x1.33), held 81.20 vs 49.88 mm (x1.63). Overhead under 2 mm 5 of 8 (bench_probe probe.ws_overhead140.poses_floor_lt2 5, taken 8). Near-touch is report-only by the user's ruling, so watch is the right level."
+ },
+ {
+  "key": "judgement:NEW-contact-for-inband",
+  "refuted": false,
+  "evidence": "Re-ran the paired comparison vs remeasure/roller-longdyad-knuckle-3r_{bench,held}_perpose_claim.json (seeds 1, 7): bench -0.03 [-0.83, 1.10], contact 2 / 0 / 2; held +0.34 [-0.56, 1.56], ws 11 / 12, contact 7 only here / 0 only lead / 10 both. Depth recomputed: held presses > 3 mm 10 vs 7, bench 3 vs 2. In-band 0.8993 vs 0.8937 (rows). Upheld; inside the 1-point tie band, so watch."
+ },
+ {
+  "key": "judgement:T1",
+  "refuted": false,
+  "evidence": "bench_perpose dump: pose 203 cmin 0.477 (min_mm 0.941), lowest taken pose 139 (-60, 60, 105) min_mm 0.072; remeasure/_bench.json deep near1 20.81, near2 35.69 (34 poses), near3 118.59, plain 18.64 -> 17.05 points in the 1-2 mm shell; _held.json deep near2 38.72. Report only (user ruling 2026-10-17)."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "rows/dipped-law-groove-knuckle-3r.json: 0 hits for r17, torque, preload, friction, dynamics, 'mu '; its 8 'closure' hits are kinematic (closure_mm 0.0, lobe_cam_closure_deg 0.0, the knee closure loop), not a closure force. Of docs/research, judge/ and pipeline/, only docs/research/take_bound_3dof.md names the row (a list entry). Missing measurement, so the watch stands."
+ },
+ {
+  "key": "judgement:NEW-sub-tolerance-feature",
+  "refuted": false,
+  "evidence": "verify/_v_bench_frozen.json extra.dip_table.lobe_dip_mm 0.068, extra.lobe_tol {K_deg_per_10um 0.35, dip_floor_deg -2.37}, dK_neg_deg -3.0. Row: no 'play' / 'sided' / tolerance wear on file (0 hits). Compare lowarm-kstop, whose claim already wears +0.264 / -0.210 deg of K play (rows/lowarm-kstop-knuckle-3r.json bench). Upheld."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "remeasure/_bench_probe.json: pa_horn_max_taken 43.0, dK_lim 43.8, why_lim pressure_horn, clear_hubK_min 1.04; verify extra.dK_lim_deg 43.75 vs _v_bench_frozen_d0.json dK_lim 46.25. Both inside their rules (43 cap, 1 mm), so watch, not more."
+ },
+ {
+  "key": "judgement:NEW-preview-not-claim",
+  "refuted": false,
+  "evidence": "docs/concepts/viz/concepts/dipped-law-groove-knuckle-3r.js line 11 const P has no dipD / dip_thc / dip_w / dip_ref and law_mode 'seg'; line 22 dipOf returns 0 when P.dipD is undefined; rows best_params {dipD 1.0, dip_thc 53.0, dip_w 12.0, law_mode 'lin'}. Last commit of the .js 8a524ce 2026-10-17 04:42, about 41.5 h before the audit. Upheld."
+ },
+ {
+  "key": "judgement:S5",
+  "refuted": false,
+  "evidence": "rows/dipped-law-groove-knuckle-3r.json verification.flood {full 18.64, knn 20.32, full_dropped 0, knn_dropped 6}: +1.68 on knn, over TH conn_watch 1.0, under conn_gamed 3.0. roller-longdyad reads full 18.67 / knn 20.34 (previous skeptic's re-read), so the knn cost is family-wide. The held-out verify file has no 'connected' key (held is static only)."
+ },
+ {
+  "key": "judgement:NEW-contact-cured-by-losing-pose",
+  "refuted": false,
+  "evidence": "Re-derived from remeasure/dipped-law-groove-knuckle-3r{,-D0control}_bench_perpose.json: control contact poses [182, 203, 205, 237, 264, 316], dip [182, 205, 237, 264]; pose 316 (60, 150, -105) control ev true min_mm -1.237, dip ev false; evaluated poses 375 vs 377. Contact share 1.067 % vs 1.592 % (0.525 points); with 316 counted in contact on the dip it would be 1.330 %, so 316 carries 0.263 of the 0.525 (half). Pose 313 (60, 120, -105): control taken min_mm 2.276 (in band), dip ev false; ws taken only dip [203], only control [313]. Pose 182 still in contact on the dip (-0.89 vs -1.675). Upheld."
+ },
+ {
+  "key": "judgement:NEW-flag-not-on-doc",
+  "refuted": false,
+  "evidence": "docs/concepts/dipped-law-groove-knuckle-3r.md line 166 'Verdict: VERIFIED (not refuted) ... Level with the lead'; grep 'ledger|gamed|Flag' on that doc: 0 hits. Row verdict starts 'Level with the lead, not a lead change'. docs/HANDOFF.md line 127 complexity column 24.25, rows complexity 20.25. docs/dashboard/leader.js line 73 ranks by v_gap with no alignment filter (0 hits for 'gamed' or 'alignment' in the file), while docs/dashboard/data/morphs.json carries alignment 'gamed' for this row. Upheld (reporting, watch)."
+ }
 ]

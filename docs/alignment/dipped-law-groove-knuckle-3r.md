@@ -344,3 +344,91 @@ The sub-chain margin m_sub is already low on these poses before the dip, with K 
 - The paired bootstrap was not re-run. The strict 0 / 12 discordance held out is enough for "strictly dominated".
 - There is no held-out m_sub-at-rest probe; this audit covers the bench only.
 - There is no spring-closure or R17 run.
+
+## Skeptic (2026-10-18 22:55-23:20 UTC, ledger entry 2026-10-18T23:15:31Z, `by skeptic`, run `skeptic:dipped-law-groove-knuckle-3r`)
+
+**Final verdict (computed by `tools/alignment_ledger.py`): GAMED.** All 14 reasons of the 22:14 audit were upheld and
+none was refuted. The rulings with their full evidence are in `docs/alignment/dipped-law-groove-knuckle-3r.rulings.json`.
+
+How the skeptic worked:
+- Every number was re-derived from the rawest files on record: the verifier JSONs, the per-pose dumps, the re-wear
+  `deep` blocks, the bench probe, the rows and the git history. The model, its verifier, `tools/concept_bench.py` and
+  `tools/concept_kit.py` are unchanged since the dumps were made (git log), so no re-wear was needed.
+- The paired bootstraps were re-run with `tools/alignment_paired.py` `compare_sets` on the dumps on file: two new
+  seeds, 4000 draws each, against lowarm-kstop, the D=0 control and roller-longdyad. Output went to the scratchpad only;
+  no remeasure file was rewritten.
+- No farm, 1 niced local process, no file outside this report, its rulings and the ledger was written.
+
+### Rulings
+
+- **fold_margin (gamed): upheld.** `_v_held_frozen.json` extra.th_margin {min 0.184, lt5 202 of 850, all dipped,
+  coupled 5.406}; bench {min 0.204, lt5 84 of 371, coupled 5.389}. TH `fold_min` 5.0 (tool line 64), gamed below 4.95
+  (line 544), applied to the minimum reading on file. B1 is still open (HANDOFF line 326, ROUNDS.md line 5462).
+- **T3 (gamed): upheld.** The numbers re-check, and the msub waiver is still in the model docstring (`git log -S` ->
+  5d587f5). The D=0 control reads 5.181 / 0 under 5. roller-longdyad reads 5.181 / 5.031 and 23.73 held out (re-worn
+  22:27 today). No user ruling on B1 is in CLAUDE.md.
+- **P1 (gamed): upheld, re-run.**
+
+  | vs | wear | diff (seed 1 / seed 7) | CI90 | P(this better) | ws taken only here / only there | contact here / there / both |
+  |---|---|---|---|---|---|---|
+  | lowarm-kstop | bench | -0.05 | [-0.62, 1.00] / [-0.65, 0.97] | 0.379 / 0.365 | 0 / 1 | 1 / 1 / 3 |
+  | lowarm-kstop | held | **+1.20** | [0.50, 2.20] / [0.48, 2.22] | **0.004 / 0.005** | 1 / 12 | 5 / 2 / 12 |
+  | own D=0 control | held | **+1.10** | [0.56, 1.83] / [0.56, 1.82] | **0.000** | 0 / 12 | 0 / 0 / 17 |
+
+  Every dump reproduces its claim (dip 18.63 / 24.07, lowarm-kstop 18.69 / 22.88, control 19.33 / 22.98). The
+  lowarm-kstop dumps are the per-pose worst of its sided play wears, so the comparison, if anything, handicaps the
+  reference.
+- **P4 (watch): upheld.** The waiver is in 5d587f5 / c177c28 and the coupled reading in 125be85 (then 1dbb353). Kit and
+  bench last changed 2026-10-16 (17d6027). The row has 0 R17 hits.
+- **G1 (watch): upheld.** Near-2 is 35.69 / 34 poses against 33.10 / 30 (roller re-worn 22:24 today), with plain
+  +0.03. Contact depth recomputed from the claim dumps: 21.88 vs 16.46 mm on the bench, 81.20 vs 49.88 mm held out.
+  Overhead under 2 mm: 5 of 8 (probe `ws_overhead140.poses_floor_lt2`).
+- **NEW-contact-for-inband (watch): upheld.** Held out, contacts are 7 here / 0 there / 10 both. Presses deeper than
+  3 mm: 10 vs 7 held out, 3 vs 2 on the bench.
+- **T1 (watch, report only): upheld.** Pose 203 cmin 0.477 mm; lowest taken pose 139 at 0.072 mm; 17.05 points in the
+  1-2 mm shell.
+- **M5 (watch): upheld.** The row has 0 hits for r17 / torque / preload / friction / dynamics. Its "closure" hits are
+  kinematic (closure_mm 0.0, lobe_cam_closure_deg 0.0).
+- **NEW-sub-tolerance-feature (watch): upheld.** lobe_dip_mm 0.068, K_deg_per_10um 0.35, dip floor -2.37, dK_neg -3.0.
+  No tolerance wear is on file (see missed item 1).
+- **G4 (watch): upheld.** pa_horn_max_taken 43.0 (cap 43), clear_hubK_min 1.04 (rule 1 mm), dK_lim 43.75 against the
+  control's 46.25.
+- **NEW-preview-not-claim (watch): upheld.** The `.js` still has no dip keys and law_mode 'seg'. Its last commit is
+  8a524ce (2026-10-17 04:42).
+- **S5 (watch): upheld.** knn 20.32 / 6 dropped against full 18.64 / 0, over the 1-point watch line. The cost is
+  family-wide.
+- **NEW-contact-cured-by-losing-pose (watch): upheld, re-derived.**
+  - Control contact poses: [182, 203, 205, 237, 264, 316]. Dip: [182, 205, 237, 264].
+  - Pose 316 is ev false on the dip. Evaluated poses: 375 vs 377.
+  - The contact share is 1.067 % vs 1.592 % (0.525 points). With 316 counted as contact it would be 1.330 %, so 316
+    carries 0.263 points, half of the gain.
+  - Pose 313 (control taken at 2.276 mm, in band) is lost as well.
+- **NEW-flag-not-on-doc (watch): upheld.**
+  - The concept doc line 166 reads "VERIFIED (not refuted) ... Level with the lead". `grep ledger|gamed|Flag` on it
+    returns 0 hits.
+  - HANDOFF line 127 shows complexity 24.25, while the row reads 20.25.
+  - `docs/dashboard/leader.js` line 73 ranks by v_gap with no alignment filter, while morphs.json carries
+    alignment 'gamed' for this row.
+
+### Missed by the auditor (for the next audit; not counted in this verdict)
+
+1. **The bench order over lowarm-kstop compares a nominal wear with a worst-of-tolerance wear.**
+   - lowarm-kstop's 18.69 is the per-pose worst of its sided K-play wears. Its +0.264 deg side alone is 18.60, below
+     this row's 18.64 (rows/lowarm-kstop-knuckle-3r.json step0 {plus_0264 18.60, minus_0210 18.68, worst 18.69}).
+   - This row is worn nominal only. The row has 0 hits for 'play' or 'sided', although its own K rest moves 0.35 deg
+     per 10 um of lobe error through the dip (verify extra.lobe_tol). That is more than the play lowarm-kstop wears.
+   - So the 0.05 bench edge rests on the reference wearing its tolerance while this row does not.
+   - Proposal (a measurement change, the lead's or the user's call): wear dipped-K rows at +-10 um of lobe, i.e.
+     +-0.35 deg of K on dipped poses, and claim the per-pose worst, as lowarm-kstop does.
+   - Not measured here: the model has no K-offset hook. Scaling dipD re-synthesises the drive, so it is not a
+     tolerance.
+2. **No held-out continuity flood.** `_v_held_frozen.json` has no `connected` key. The held 24.07 and every held
+   paired comparison above are static-set numbers. This is family-wide, so it does not change any ordering here.
+3. **The documented best config is not the claimed one.** The concept doc (Files, line 161-162) and the preview's
+   header (line 7) say "dipD 1, th_c 50, w 8". The row's best_params read dip_thc 53, dip_w 12. This is a reporting
+   mismatch on top of NEW-preview-not-claim.
+
+### Not obtained by the skeptic
+
+- A tolerance wear of the dip (missed item 1): it needs a K-offset hook in the model, which is outside an audit.
+- A held-out flood, and any R17 or spring-hold number: no CAD or dynamics model exists for this row.
