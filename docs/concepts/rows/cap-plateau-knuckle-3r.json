@@ -229,7 +229,7 @@
  "s6": "not run (dead at gate 0)",
  "flood": "not run (dead at gate 0; K single-valued in th by construction, both lobes of cell C are one continuous law)",
  "verdict": "DEAD at gate 0 (pre-registered): the cap-pole lens closes. A: hub 2 0.04 in band, follow 0.85, frozen 76.59. B: 270 kinematic, frozen 47.76. C (best proxy, searched 344 tries, converged): frozen exact Bench(110,360) 32.08 / held 35.16 at 247 real-model takes (< 279), ib14 0.823, 9 contacts - +1.49 frozen / +1.13 held WORSE than the lead seats in the same paired kit at equal search effort (30.59 / 34.03); its two-lobe drive does not exist. The cap seat has no kinematic surplus over the lead knuckle: the lead seats/law take 277/360 kinematically in the same instrument (C 275, B 270); only A (294) clears 279 and it loses hub 2.",
- "limiter": "fold 85 (= the control 86) + link 2 x neck part collisions (19 bench / 53 held vs control 0 / 3): with J3 up the arm (d3 ~100) the neck to BOTTOM starts high on the lateral arm and link 2 sweeps across it under axial rotation (per-pair K6: link2 x neck is the only colliding pair; link 2 over hub K changes nothing). The box holds up to 299 kinematic takes, but the metal search walks back to ~275 (a stream from the 299 config ended at 29.5 near-touch).",
+ "limiter": "fold 85 of 113 lost bench poses (80 on the stretched wall th > cap + a2 - m = 95.3 deg; the control loses 86) + skin proximity on the overhead / scapular-plane poses where link 2 crosses the neck (audit 2026-10-18: exempting the link2 x neck pair frees 14 poses that are all already -0.34..-10.77 mm in the skin, frozen exact 35.65 > 32.08, 0 takes recovered); 19 of the 247 takes ride on the two-lobe K drive that does not exist (one-sided law 260 vs 275 kinematic)",
  "note": "Paired fold-ceiling kit (docs/research/fold_ceiling/kit_paired.py) with the K law per cell, m = 5 + 0.23 deg K play inside the fold margin; q 0.97 (the judge control setting; q 1.0 puts the cap J3 ray on the neck: hub 3 / link 2 150-250 mm out, 98.76). Control reproduces the judge (26.24 vs 26.27 fast). Kit omits drive metal and cuff knee in both arms: compare paired only. Selection of C2 among 3 stream bests was on frozen exact (34.25 / 32.08 / 32.73), so held 35.16 is the claim.",
  "doc": "docs/concepts/cap-plateau-knuckle-3r.md",
  "model_file": "docs/concepts/models/cap-plateau-knuckle-3r.py",
@@ -244,5 +244,7 @@
   "limiter_corrected": "fold 85 (80 on the stretched wall th > cap + a2 - m = 95.3) + skin proximity on the overhead / scapular-plane poses where link 2 crosses the neck (the part collision recovers 0 takes)",
   "dump": "docs/concepts/verify/cap-plateau-knuckle-3r_audit_ub_l2neck.json",
   "doc_section": "docs/concepts/cap-plateau-knuckle-3r.md \"Audit\""
- }
+ },
+ "limiter_screen": "fold 85 (= the control 86) + link 2 x neck part collisions (19 bench / 53 held vs control 0 / 3): with J3 up the arm (d3 ~100) the neck to BOTTOM starts high on the lateral arm and link 2 sweeps across it under axial rotation (per-pair K6: link2 x neck is the only colliding pair; link 2 over hub K changes nothing). The box holds up to 299 kinematic takes, but the metal search walks back to ~275 (a stream from the 299 config ended at 29.5 near-touch).",
+ "limiter_note": "limiter corrected from the death audit (docs/concepts/cap-plateau-knuckle-3r.md 'Audit'); the screen's attribution kept as limiter_screen"
 }
