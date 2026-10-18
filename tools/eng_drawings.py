@@ -507,11 +507,14 @@ def detail_sheet(spec, set_info, sheet_no, n_sheets, pdf, png):
 
 
 # ------------------------------------------------------------------ general arrangement
-def ga_sheet(set_info, bom, sheet_no, n_sheets, pdf, png):
+def ga_sheet(set_info, bom, sheet_no, n_sheets, pdf, png, pose=None):
     shapes, items = [], []
     for it in bom:
         for st in it.get("steps", []):
-            shp = load(st); shapes.append(shp); items.append((it["item"], shp))
+            shp = load(st)
+            if pose:
+                shp = pose(st, shp)                          # rest pose (the STEP files are in the build pose)
+            shapes.append(shp); items.append((it["item"], shp))
     asm = compound(shapes)
     sh = Sheet(); sh.border()
     views = {"behind": ((-1, 0, 0), (0, 0, 1)), "side": ((0, 0, 1), (1, 0, 0))}

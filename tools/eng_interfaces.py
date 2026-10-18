@@ -27,6 +27,29 @@ import eng_drawings as ED
 from eng_drawings import Sheet, load, features, hlr, ext, draw_polys, pick_scale, scale_txt, transformed, volume, callout, LW, PT, FS, INK, REPO
 
 GHOST = "#a7b0ba"
+
+
+def rest_posing(dd):
+    """pose(step_path, shape) -> the shape at the CAD's rest frame (clip 0, frame 0), as the judges pose it
+    (pipeline/full-exo/scene_export.py: every group by its frame transform, the arm side by the body rig). The STEP
+    files themselves are in the build pose, where the knee is not closed."""
+    import trimesh
+    sys.path.insert(0, os.path.join(REPO, "pipeline", "full-exo"))
+    import scene_export as SE
+    D = os.path.join(REPO, "pipeline", "full-exo", "designs", dd)
+    X, _ = SE.frame_xforms(json.load(open(os.path.join(D, "clips.json")))["clips"][0]["frames"][0])
+    kmap = {}
+    for name in trimesh.load(os.path.join(D, "exo.glb")).geometry:
+        bits = name.split("|")
+        if bits[-1].isdigit():
+            kmap[int(bits[-1])] = bits[0]
+    def pose(path, shape):
+        k = int(os.path.basename(path).split("_")[0]); g = kmap.get(k)
+        if g not in X:
+            return shape
+        R, t = X[g]
+        return transformed(shape, np.asarray(R), -np.asarray(R).T @ np.asarray(t))
+    return pose
 JOINT_FEATS = {(True, 11.0), (True, 7.0), (True, 6.0), (True, 5.5), (True, 20.0), (False, 7.0), (False, 4.0), (False, 12.0), (False, 10.0)}
 IVIEWS = {"front": ((0, -1, 0), (1, 0, 0)), "top": ((0, 0, 1), (1, 0, 0)), "right": ((1, 0, 0), (0, 1, 0))}
 
@@ -337,11 +360,11 @@ def interface_sheet(spec, info, names, sheet_no, n_sheets, pdf, png):
 BVIEWS = {"behind": ((-1, 0, 0), (0, 0, 1)), "side": ((0, 0, 1), (1, 0, 0)), "above": ((0, 1, 0), (0, 0, 1))}
 
 
-def joint_table(parts, joints):
-    """world-frame joints from the parts' ends; joints: [(name, [(pn, end index), ...])]"""
+def joint_table(parts, joints, pose):
+    """world-frame joints from the parts' ends at the rest pose; joints: [(name, [(pn, end index), ...])]"""
     pe = {}
     for p in parts:
-        ends, _, _ = part_ends(load(p["step"])); pe[p["pn"]] = ends
+        ends, _, _ = part_ends(pose(p["step"], load(p["step"]))); pe[p["pn"]] = ends
     out = []
     for name, members in joints:
         es = [pe[pn][i] for pn, i in members if pn in pe and i < len(pe[pn])]
@@ -445,7 +468,10 @@ def main():
                           "Rest pose of the built CAD (arm at the side). Joint angles change with the arm; the part-frame geometry does not."]
     out = os.path.join(REPO, "docs", "drawings", key); os.makedirs(out, exist_ok=True)
     made = [p for p in parts if p["pn"].startswith("D") and p["pn"] != "D8-07"] + [p for p in parts if not p["pn"].startswith("D") or p["pn"] == "D8-07"]
-    J, pe = joint_table([p for p in parts if p["pn"].startswith("D8")], JOINTS[key])
+    pose = rest_posing({"A": "user_conecut_knee", "B": "user_pinknee_h1b"}[key])
+    J, pe = joint_table([p for p in parts if p["pn"].startswith("D8")], JOINTS[key], pose)
+    for j in J:                                              # the two parts meeting at a joint must share its axis at rest
+        print(f"  {j['name']}: members {j['members']}", flush=True)
     names = {}
     for j in J:
         for pn, i in j["members"]:
@@ -460,7 +486,7 @@ def main():
         if not only:
             skeleton_sheet(info, J, 1, n, pdf, os.path.join(out, "01_KIN.png")); sheets.append({"file": "01_KIN.png", "title": info["skel_title"]})
             print("KIN done", flush=True)
-            ED.ga_sheet(info, bom, 2, n, pdf, os.path.join(out, "02_GA.png")); sheets.append({"file": "02_GA.png", "title": info["ga_title"]})
+            ED.ga_sheet(info, bom, 2, n, pdf, os.path.join(out, "02_GA.png"), pose=pose); sheets.append({"file": "02_GA.png", "title": info["ga_title"]})
             print("GA done", flush=True)
             ED.hub_sheet(info, hub, 3, n, pdf, os.path.join(out, "03_HUB.png")); sheets.append({"file": "03_HUB.png", "title": "Ø20 hub stack, section"})
             print("HUB done", flush=True)
