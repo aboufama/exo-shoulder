@@ -67,7 +67,8 @@ SHIM_T, WAVE_T, WAVE_RO, CLIP_DZ, CLIP_T = 0.10, 0.20, 3.0, 0.30, 0.6           
 # (internal tangency on the far side), so the built K / J2 stops engaged 0.88 deg past the model's stop angles (K stop A = K's sprung rest:
 # 6x the K-phase band) and the R1.05-ended J3 groove 0.76 deg past (outside the 0.585 deg held margin). Fixed here: the end centres sit
 # (w - r_d - clr) / rs INSIDE the stop angles (toward the slot's middle), so the dowel meets the end clr past the stop (K / J2: 0.02 mm,
-# USM's stated intent; J3: 0).
+# USM's stated intent; J3: 0). USM.arc_slot_cutter carries the same fix since 2026-10-18 (tools/stop_engage.py); this override stays so
+# the gen-8 / gen-9 builds do not depend on which USM they import.
 _arc_slot0 = USM.arc_slot_cutter
 
 

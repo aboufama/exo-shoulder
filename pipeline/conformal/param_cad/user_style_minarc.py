@@ -34,7 +34,7 @@ at the J1 hub ring (no tab). What is new here:
              extruded and glued: a 2.5-D machined bar whose underside steps along 3 lines. Ramps <= 60 deg (the ruling).
   stops      dowel-in-arc-slot (the verified claim's buildable stop): ISO 8734 O3 m6 hardened dowels pressed 3 mm into the
              upper boss at r 7.75, running in 3.1 mm arc slots through the lower pad (slot ends = semicircles, the dowel
-             touches 0.02 mm past the stop angle). J2: one dowel, q2 -24.98 .. 100.84 deg (drawn at the 5.0-deg J1-J3
+             touches 0.02 mm past the stop angle; gen 4..7 builds: 0.12 mm = 0.88 deg past, see arc_slot_cutter). J2: one dowel, q2 -24.98 .. 100.84 deg (drawn at the 5.0-deg J1-J3
              margin). K: an OPPOSED PAIR (stop A dK 0 = the spring's rest, stop B dK 34.47): two dowels 180 deg apart make the
              stop a couple, so K's MR117 pair carries no radial stop load (the L1 red team: one dowel -> 770 N radial at the
              6 N.m jam push, s0 0.73). The O2 dowel of the build spec fails bending at that push (SF 1.09, build.json of the
@@ -147,11 +147,14 @@ def clock_spring(k, F):
 
 
 # ---------------------------------------------------------------------------------------------------- stops
-def arc_slot_cutter(cen, k, a_lo, a_hi, z0, z1, rs=SLOT_RS, w=SLOT_W):
+def arc_slot_cutter(cen, k, a_lo, a_hi, z0, z1, rs=SLOT_RS, w=SLOT_W, rd=DOWEL_R, clr=END_CLR):
     """arc slot of half width w at radius rs from the dowel-centre stop angle a_lo to a_hi (rad, frame2(k)): two concentric arcs
-    + two semicircular ends whose centres sit (w - DOWEL_R + END_CLR) / rs beyond the stop angles (the O3 dowel touches the end
-    0.02 mm past the stop); extruded z0 .. z1 along k from cen"""
-    k = unit(k); e, f = frame2(k); dl = (w - DOWEL_R + END_CLR) / rs; lo, hi = a_lo - dl, a_hi + dl
+    + two semicircular ends whose centres sit (w - rd - clr) / rs INSIDE the stop angles (toward the slot's middle): a dowel of
+    radius rd in an end of radius w meets it only when its centre is (w - rd) BEYOND the end centre (internal tangency on the far
+    side), so the O3 dowel touches the end clr = 0.02 mm past the stop; extruded z0 .. z1 along k from cen.
+    Gen 4..7 put the end centres (w - rd + clr) / rs BEYOND the stops: those built K / J2 stops engage (2 (w - rd) + clr) / rs =
+    0.887 deg late (measured 0.879-0.885 by tools/stop_engage.py, docs/FINDINGS.md); gen 8 (user_style_conecut) had the same fix"""
+    k = unit(k); e, f = frame2(k); dl = (w - rd - clr) / rs; lo, hi = a_lo + dl, a_hi - dl
     P = lambda r, a: (r * math.cos(a), r * math.sin(a)); ro, ri = rs + w, rs - w; mid = 0.5 * (lo + hi)
     c_hi, c_lo = np.array(P(rs, hi)), np.array(P(rs, lo)); t_hi = np.array([-math.sin(hi), math.cos(hi)]); t_lo = np.array([-math.sin(lo), math.cos(lo)])
     wp = (cq.Workplane(plane(np.asarray(cen) + z0 * k, e, f)).moveTo(*P(ro, lo)).threePointArc(P(ro, mid), P(ro, hi))
