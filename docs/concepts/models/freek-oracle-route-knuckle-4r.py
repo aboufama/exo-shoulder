@@ -176,7 +176,7 @@ def params(over=None):
     over = dict(over or {}); seed = over.pop("seed", "k33"); over.pop("cap", None)
     f = K33.replace("c_k33_", f"c_{seed}_")
     P = dict(KR.PARAMS, **{k: v for k, v in json.load(open(f)).items() if not k.startswith("_")})
-    P.update(over); return P
+    P.update(over); P["_seed"] = seed; return P
 
 
 def evaluate(B, over):
@@ -265,7 +265,7 @@ def oracle_runs(Mk, B, ns=9):
 
 def run_oracle(fitB, B, P, frozen=True, how="runs"):
     """fit (kit K) on fitB, oracle on B with that shape, composed run; returns the reports"""
-    t0 = time.time(); ODesign.TAB = None
+    t0 = time.time(); ODesign.TAB = None; P = dict(P); seed = P.pop("_seed", "k33")
     Mk, fitr, M1, keys = RM.freeze(fitB, B, dict(P), KModel)          # frozen shape on B (fitB itself for the fast sweep)
     rk = Mk.run(); kit = {k: rk[k] for k in KEYS}; ntk = RM.near_touch(Mk, B); whyk = {k: int((Mk.why == k).sum()) for k in set(Mk.why.tolist()) if k}
     tk_kit = [i for i in RM.taken_list(B)]
@@ -276,8 +276,27 @@ def run_oracle(fitB, B, P, frozen=True, how="runs"):
     whyo = {k: int((Mo.why == k).sum()) for k in set(Mo.why.tolist()) if k}
     tk = RM.taken_list(B); ws = [i for i in range(len(B.idx)) if B.kind[i] == "ws"]
     low = {i: min(float(np.min(B.res[i])), float(getattr(Mo, "cmin", {}).get(i, 1e9))) for i in tk}
+    # CONNECTED bound: a taken ws pose counts only if (a) its grid node is in the seed's kinematic flood-fill set (the verifier's
+    # conn json; the route changes no kinematics) and (b) when the oracle moved K, every sampled K between the kit's and the
+    # pick is kinematically legal at that pose (K can be swept there without a fold / slide / closure / flip refusal)
+    conn = None; cf = K33.replace("_params.json", "_conn.json").replace("c_k33_", "c_" + str(seed) + "_")
+    if os.path.exists(cf) and how == "runs":
+        ck = {tuple(x) for x in json.load(open(cf))["connected_keys"]}; kin_bad = ("fold", "slide", "flip", "closure")
+        res0 = list(B.res); drop = []
+        for i in tk:
+            if B.kind[i] != "ws": continue
+            key = (float(B.poses[i]["plane"]), float(B.poses[i]["elev"]), float(B.poses[i]["axial"]))
+            ok_c = key in ck
+            if ok_c and i in tab:
+                lo, hi = sorted([res[i]["kit"] if res[i]["kit"] is not None else res[i]["floor"], tab[i]])
+                ok_c = all(w_ not in kin_bad for dk, tk_, dm, w_ in res[i]["rows"][1:] if dk is not None and lo - 1e-6 <= dk <= hi + 1e-6)
+            if not ok_c: drop.append(i)
+        for i in drop: B.res[i] = None
+        rc = B.report(); ntc = RM.near_touch(Mo, B); B.res = res0
+        conn = dict(file=os.path.relpath(cf, REPO), dropped=len(drop), **{k: rc[k] for k in KEYS}, near=ntc["gap_near1"],
+                    ws_taken=sum(1 for i in tk if B.kind[i] == "ws") - len(drop))
     ODesign.TAB = None
-    return dict(fit=fitr, kit=dict(**kit, near=ntk["gap_near1"], ws_taken=sum(1 for i in tk_kit if B.kind[i] == "ws"), why=whyk),
+    return dict(conn=conn, fit=fitr, kit=dict(**kit, near=ntk["gap_near1"], ws_taken=sum(1 for i in tk_kit if B.kind[i] == "ws"), why=whyk),
                 oracle=dict(**orc, near=nto["gap_near1"], near1_poses=nto["near1_poses"], min_mm=nto["min_mm"], ws_taken=sum(1 for i in tk if B.kind[i] == "ws"),
                             clear02=sum(1 for i in tk if low[i] >= 0.2), clear1=sum(1 for i in tk if low[i] >= 1.0), why=whyo,
                             moved=len(tab), state_free_taken=int(sum(1 for i in tk if Mo.kstate[i] == 2))),
@@ -297,7 +316,7 @@ if __name__ == "__main__":
     if mode == "side": print(side(over)); sys.exit()
     if mode == "viz":                                        # geometry export for docs/concepts/viz/concepts/<id>.js (SK's exporter on this model's fit)
         def _rep(B, pr):
-            ODesign.TAB = None; M = KModel(B, dict(params(pr))); r = M.run(); return dict(r), M
+            ODesign.TAB = None; pp = params(pr); pp.pop("_seed", None); M = KModel(B, pp); r = M.run(); return dict(r), M
         SK._report = _rep
         print(json.dumps(SK.viz_export(over), default=float)); sys.exit()
     if mode == "sweep":                                      # configs: a JSON list in argv[2]; appends to the sweep file incrementally
@@ -326,10 +345,10 @@ if __name__ == "__main__":
                                samples=[(None if x[0] is None else round(x[0], 1), x[1], None if x[2] is None else round(x[2], 2), x[3]) for x in rr["rows"]],
                                final_min=round(r["low"][j], 2) if j in r["low"] else None)
     out = dict(id=ID, mode=mode, bench=B.mode, fit_mode=fitB.mode, over=over, fold_margin=KIT.FOLD_MARGIN, fit=r["fit"], kit=k,
-               oracle={kk: v for kk, v in o.items()}, binders=bind, secs=r["secs"],
+               oracle={kk: v for kk, v in o.items()}, connected=r["conn"], binders=bind, secs=r["secs"],
                score_oracle=round(100 * (1 - o["gap"] / 275), 2), score_oracle_near=round(100 * (1 - o["near"] / 275), 2))
     if outp:
         json.dump(out, open(outp, "w"), indent=1, default=float)
         json.dump(dict(res={str(i): v for i, v in r["res"].items()}, tab={str(i): v for i, v in r["tab"].items()}, low={str(i): v for i, v in r["low"].items()}),
                   open(outp.replace(".json", "_perpose.json"), "w"), default=float)
-    print(json.dumps({kk: out[kk] for kk in ("mode", "bench", "kit", "oracle", "score_oracle", "score_oracle_near", "secs")}, default=float), flush=True)
+    print(json.dumps({kk: out[kk] for kk in ("mode", "bench", "kit", "oracle", "connected", "score_oracle", "score_oracle_near", "secs")}, default=float), flush=True)

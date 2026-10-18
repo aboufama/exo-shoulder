@@ -379,5 +379,137 @@
     "contact": 0.0308
    }
   }
+ },
+ {
+  "k": 11,
+  "t": "2026-10-18T05:39:59Z",
+  "params": {
+   "seed": "k8"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.907,
+  "inband10": 0.5621,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 13.74,
+  "extra": {
+   "plain": 8.02,
+   "ws_taken": 132,
+   "near1_poses": 5,
+   "min_mm": 0.105,
+   "moved": 24,
+   "why": {
+    "slide": 7,
+    "fold": 20,
+    "contact": 1
+   },
+   "kit": {
+    "gap": 15.53,
+    "plain": 12.08,
+    "reach": 0.8,
+    "inband14": 0.9055,
+    "contact": 0.0208
+   }
+  }
+ },
+ {
+  "k": 12,
+  "t": "2026-10-18T05:40:37Z",
+  "params": {
+   "seed": "k20"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8965,
+  "inband10": 0.5645,
+  "reach": 0.8187,
+  "follow": 1.0,
+  "contact": 0.0104,
+  "gap": 13.63,
+  "extra": {
+   "plain": 9.52,
+   "ws_taken": 131,
+   "near1_poses": 5,
+   "min_mm": 0.053,
+   "moved": 23,
+   "why": {
+    "slide": 7,
+    "fold": 20,
+    "contact": 2
+   },
+   "kit": {
+    "gap": 16.04,
+    "plain": 13.09,
+    "reach": 0.8,
+    "inband14": 0.895,
+    "contact": 0.0259
+   }
+  }
+ },
+ {
+  "k": 13,
+  "t": "2026-10-18T05:41:17Z",
+  "params": {
+   "seed": "k56"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.9017,
+  "inband10": 0.5624,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.08,
+  "extra": {
+   "plain": 8.93,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.432,
+   "moved": 16,
+   "why": {
+    "slide": 10,
+    "fold": 16,
+    "contact": 4
+   },
+   "kit": {
+    "gap": 13.57,
+    "plain": 12.44,
+    "reach": 0.8125,
+    "inband14": 0.8992,
+    "contact": 0.0361
+   }
+  }
+ },
+ {
+  "k": 14,
+  "t": "2026-10-18T05:41:57Z",
+  "params": {
+   "seed": "skinnormal_r"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.892,
+  "inband10": 0.5653,
+  "reach": 0.8063,
+  "follow": 1.0,
+  "contact": 0.0105,
+  "gap": 12.37,
+  "extra": {
+   "plain": 11.22,
+   "ws_taken": 129,
+   "near1_poses": 1,
+   "min_mm": 0.527,
+   "moved": 17,
+   "why": {
+    "slide": 4,
+    "fold": 25,
+    "contact": 2
+   },
+   "kit": {
+    "gap": 12.49,
+    "plain": 12.49,
+    "reach": 0.7937,
+    "inband14": 0.892,
+    "contact": 0.0106
+   }
+  }
  }
 ]
