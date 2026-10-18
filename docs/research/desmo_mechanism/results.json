@@ -1,0 +1,492 @@
+{
+ "source": "extract.py fit of BEST (k57) on Bench(60,160): {\"dK_lim\": 46.5, \"why_lim\": \"slot-end\"}",
+ "axes": {
+  "dR_vs_u2_deg": 14.66,
+  "dR_vs_uK_deg": 23.37,
+  "uK_vs_u2_deg": 38.03,
+  "PV": [
+   -27.14,
+   49.7,
+   28.261
+  ],
+  "PV_along_dR": 63.288,
+  "F0": [
+   -33.048,
+   43.888,
+   32.964
+  ],
+  "F0_from_dR": 9.529,
+  "F0_pitch_r_from_u2": 9.4,
+  "F0_level_u2": 63.377,
+  "hmid": 63.377,
+  "C0": [
+   -13.653,
+   59.209,
+   -9.585
+  ],
+  "C0_R_from_GH": 61.514,
+  "C0_r_from_uK": 16.176,
+  "C0_level_uK": 59.349,
+  "g": 2.3934,
+  "kK": 2.1534,
+  "s_th": -0.46438,
+  "frame": "link 1b at q2 onset, K = 0 (stop A), mm from GH; all axes through GH"
+ },
+ "levers": {
+  "stage2_lever_mm_per_rad": [
+   14.692,
+   15.971
+  ],
+  "stage2_lever_at_K0": 15.521,
+  "stage2_F_per_NmK": [
+   62.6,
+   68.1
+  ],
+  "stage1_leverC_mm": [
+   7.93,
+   9.458
+  ],
+  "stage1_F_per_NmK": [
+   253.1,
+   301.8
+  ],
+  "stage1_F_per_NmK_at_K": 46.41,
+  "crank_T_per_NmK": [
+   2.393,
+   2.393
+  ],
+  "J2_T_per_NmK": 2.1534,
+  "note": "F in N per N.m of torque about uK at K (frictionless, both directions)"
+ },
+ "pa": {
+  "stage2_horn": [
+   9.14,
+   24.73
+  ],
+  "stage2_crank": [
+   0.0,
+   14.56
+  ],
+  "stage1_pin_moving_max_to_lim": 33.67,
+  "stage1_cap_outside_blend_max": 28.25
+ },
+ "friction": {
+  "0.087": {
+   "stage1_fwd_eta_min_to_lim": 0.012,
+   "stage1_fwd_eta_at_held_46_27": 0.954,
+   "stage1_back_eta_min_moving": -92.179,
+   "stage1_back_locked_K_deg": [
+    0.0,
+    0.12
+   ],
+   "stage1_rule43_first_K": null,
+   "stage2_fwd_eta": [
+    0.95,
+    0.997
+   ],
+   "stage2_back_eta": [
+    0.952,
+    0.997
+   ],
+   "overall_fwd_eta_at_46_27": 0.907
+  },
+  "0.120": {
+   "stage1_fwd_eta_min_to_lim": 0.009,
+   "stage1_fwd_eta_at_held_46_27": 0.937,
+   "stage1_back_eta_min_moving": -130.122,
+   "stage1_back_locked_K_deg": [
+    0.0,
+    0.21
+   ],
+   "stage1_rule43_first_K": null,
+   "stage2_fwd_eta": [
+    0.931,
+    0.996
+   ],
+   "stage2_back_eta": [
+    0.934,
+    0.996
+   ],
+   "overall_fwd_eta_at_46_27": 0.873
+  },
+  "0.150": {
+   "stage1_fwd_eta_min_to_lim": 0.007,
+   "stage1_fwd_eta_at_held_46_27": 0.921,
+   "stage1_back_eta_min_moving": -165.973,
+   "stage1_back_locked_K_deg": [
+    0.0,
+    0.33
+   ],
+   "stage1_rule43_first_K": null,
+   "stage2_fwd_eta": [
+    0.915,
+    0.995
+   ],
+   "stage2_back_eta": [
+    0.919,
+    0.995
+   ],
+   "overall_fwd_eta_at_46_27": 0.842
+  },
+  "0.170": {
+   "stage1_fwd_eta_min_to_lim": 0.006,
+   "stage1_fwd_eta_at_held_46_27": 0.91,
+   "stage1_back_eta_min_moving": -190.629,
+   "stage1_back_locked_K_deg": [
+    0.0,
+    0.41
+   ],
+   "stage1_rule43_first_K": 45.98,
+   "stage2_fwd_eta": [
+    0.903,
+    0.994
+   ],
+   "stage2_back_eta": [
+    0.909,
+    0.994
+   ],
+   "overall_fwd_eta_at_46_27": 0.822
+  }
+ },
+ "friction_note": "eta = output / input power through one sliding pair (normal + mu x sliding): fwd = J2 drives K (cap -> pin, slot -> nose), back = the K load drives J2 (nose -> slot, pin -> cap); eta <= 0 is a true self-lock. stage1_rule43 = the family's design rule PA + atan(mu) <= 43 on the pin side (the verifier's 'bind'), not a jam.",
+ "tolerance_to_K": {
+  "F0 rebuild check mm": 0.0,
+  "a_s +0.01": [
+   0.0074,
+   0.0346,
+   0.0692,
+   0.0711,
+   0.0771,
+   0.0861,
+   0.0898,
+   0.0934,
+   0.095
+  ],
+  "a_s -0.01": [
+   -0.0062,
+   -0.0332,
+   -0.0689,
+   -0.0706,
+   -0.0762,
+   -0.0847,
+   -0.0882,
+   -0.0916,
+   -0.093
+  ],
+  "psi +0.06 deg (0.01 mm at 9.5)": [
+   -0.1436,
+   -0.1436,
+   -0.1436,
+   -0.1436,
+   -0.1436,
+   -0.1436,
+   -0.1436,
+   -0.1436,
+   -0.1436
+  ],
+  "x_deg": [
+   2.0,
+   6.0,
+   15.0,
+   25.0,
+   35.0,
+   42.0,
+   44.0,
+   45.62,
+   46.27
+  ],
+  "groove_profile_10um_deg_K": [
+   0.145,
+   0.1729
+  ],
+  "slot_profile_10um_deg_K": [
+   0.0359,
+   0.039
+  ]
+ },
+ "slot": {
+  "length_mm": 3.723,
+  "ruling_taper_deg": [
+   0.024,
+   2.238
+  ],
+  "straight_extrude_end_dev_um": 48.8,
+  "centreline_radius_mm": [
+   1.44,
+   33.4
+  ],
+  "inner_wall_radius_min_mm": 0.68,
+  "R0_mm": 61.514,
+  "note": "the nose's axis is radial through GH; the slot walls are offsets of a ruled surface of radial lines (converging on GH). A straight 2-axis extrude along the mean ruling leaves the wall off by up to this at the plate faces"
+ },
+ "groove_radius": {
+  "centreline_min_mm": 1.007,
+  "at_K_deg": 8.06,
+  "inner_wall_min_mm": 0.247,
+  "centreline_radius_at_K": [
+   [
+    0.5,
+    1.37
+   ],
+   [
+    1.0,
+    1.27
+   ],
+   [
+    2.0,
+    1.16
+   ],
+   [
+    3.0,
+    1.1
+   ],
+   [
+    5.0,
+    1.03
+   ],
+   [
+    8.0,
+    1.01
+   ],
+   [
+    11.0,
+    4.07
+   ],
+   [
+    15.0,
+    3.71
+   ],
+   [
+    25.0,
+    2.81
+   ],
+   [
+    35.0,
+    1.94
+   ],
+   [
+    46.0,
+    1.09
+   ]
+  ],
+  "drift_mm": [
+   0.0,
+   0.286
+  ]
+ },
+ "loads": [
+  {
+   "case": "nominal motion (judge drive torque peak, gen-8 CAD, mu_roll 0.005)",
+   "T_K_Nm": 0.034,
+   "T_J2_Nm": 0.073,
+   "crank_T_Nm": 0.081,
+   "F_stage1_max_N": 10.3,
+   "at_K": 46.4,
+   "F_stage1_blend_N": 9.9,
+   "F_stage2_max_N": 2.3,
+   "p0_ridge_Ti_MPa": 1998,
+   "p0_ridge_440C_MPa": 2431,
+   "p0_stage1_worstF_outer_Ti": 891,
+   "p0_stage1_worstF_inner_Ti": 1890,
+   "p0_stage1_worstF_inner_440C": 2299,
+   "p0_stage2_Ti": 275,
+   "p0_stage2_440C": 319,
+   "dowel_bend_MPa": 10,
+   "dowel_shear_MPa": 1,
+   "pin1_bend_MPa": 31
+  },
+  {
+   "case": "upper in-motion bound (spring design: 0.08 + 0.015 x 0.81 + 0.034)",
+   "T_K_Nm": 0.126,
+   "T_J2_Nm": 0.271,
+   "crank_T_Nm": 0.302,
+   "F_stage1_max_N": 38.0,
+   "at_K": 46.4,
+   "F_stage1_blend_N": 36.7,
+   "F_stage2_max_N": 8.6,
+   "p0_ridge_Ti_MPa": 3092,
+   "p0_ridge_440C_MPa": 3762,
+   "p0_stage1_worstF_outer_Ti": 1379,
+   "p0_stage1_worstF_inner_Ti": 2924,
+   "p0_stage1_worstF_inner_440C": 3557,
+   "p0_stage2_Ti": 529,
+   "p0_stage2_440C": 613,
+   "dowel_bend_MPa": 36,
+   "dowel_shear_MPa": 5,
+   "pin1_bend_MPa": 115
+  },
+  {
+   "case": "felt line: 1 N.m at GH, all of it about uK",
+   "T_K_Nm": 1.0,
+   "T_J2_Nm": 2.153,
+   "crank_T_Nm": 2.393,
+   "F_stage1_max_N": 301.8,
+   "at_K": 46.4,
+   "F_stage1_blend_N": 291.6,
+   "F_stage2_max_N": 68.1,
+   "p0_ridge_Ti_MPa": 6168,
+   "p0_ridge_440C_MPa": 7504,
+   "p0_stage1_worstF_outer_Ti": 2750,
+   "p0_stage1_worstF_inner_Ti": 5833,
+   "p0_stage1_worstF_inner_440C": 7096,
+   "p0_stage2_Ti": 1492,
+   "p0_stage2_440C": 1728,
+   "dowel_bend_MPa": 288,
+   "dowel_shear_MPa": 39,
+   "pin1_bend_MPa": 911
+  },
+  {
+   "case": "cuff slip, fabric liner at strap preload",
+   "T_K_Nm": 1.06,
+   "T_J2_Nm": 2.283,
+   "crank_T_Nm": 2.537,
+   "F_stage1_max_N": 319.9,
+   "at_K": 46.4,
+   "F_stage1_blend_N": 309.1,
+   "F_stage2_max_N": 72.1,
+   "p0_ridge_Ti_MPa": 6289,
+   "p0_ridge_440C_MPa": 7651,
+   "p0_stage1_worstF_outer_Ti": 2804,
+   "p0_stage1_worstF_inner_Ti": 5947,
+   "p0_stage1_worstF_inner_440C": 7235,
+   "p0_stage2_Ti": 1536,
+   "p0_stage2_440C": 1779,
+   "dowel_bend_MPa": 305,
+   "dowel_shear_MPa": 41,
+   "pin1_bend_MPa": 966
+  },
+  {
+   "case": "cuff slip, mu 0.5 at 14 kPa",
+   "T_K_Nm": 2.28,
+   "T_J2_Nm": 4.91,
+   "crank_T_Nm": 5.457,
+   "F_stage1_max_N": 688.1,
+   "at_K": 46.4,
+   "F_stage1_blend_N": 664.9,
+   "F_stage2_max_N": 155.2,
+   "p0_ridge_Ti_MPa": 8118,
+   "p0_ridge_440C_MPa": 9876,
+   "p0_stage1_worstF_outer_Ti": 3620,
+   "p0_stage1_worstF_inner_Ti": 7677,
+   "p0_stage1_worstF_inner_440C": 9340,
+   "p0_stage2_Ti": 2252,
+   "p0_stage2_440C": 2609,
+   "dowel_bend_MPa": 656,
+   "dowel_shear_MPa": 88,
+   "pin1_bend_MPa": 2077
+  },
+  {
+   "case": "lock line 10 N.m at GH x 0.84",
+   "T_K_Nm": 8.4,
+   "T_J2_Nm": 18.089,
+   "crank_T_Nm": 20.105,
+   "F_stage1_max_N": 2535.2,
+   "at_K": 46.4,
+   "F_stage1_blend_N": 2449.5,
+   "F_stage2_max_N": 571.7,
+   "p0_ridge_Ti_MPa": 12538,
+   "p0_ridge_440C_MPa": 15253,
+   "p0_stage1_worstF_outer_Ti": 5591,
+   "p0_stage1_worstF_inner_Ti": 11857,
+   "p0_stage1_worstF_inner_440C": 14425,
+   "p0_stage2_Ti": 4323,
+   "p0_stage2_440C": 5008,
+   "dowel_bend_MPa": 2416,
+   "dowel_shear_MPa": 324,
+   "pin1_bend_MPa": 7651
+  }
+ ],
+ "loads_note": "stage-1 pin crowned R 4.0 axial; ridge = the blend's inner-wall radius 0.247 mm (convex); stage 2 line 2.2 mm (2.5 plate minus 0.15 chamfers); allowables: 440C (58 HRC) bending ~1.9 GPa, shear ~1.1 GPa; Hertz p0 limits: Ti-6Al-4V (sigma_y 830-880) onset of subsurface yield p0 ~ 1.6 sigma_y / ... point contact ~1.4 GPa (0.62 tau), hardened 440C ~3.5-4.0 GPa static",
+ "stop_B_slot_end": {
+  "F_per_NmK": 61.8,
+  "lever_mm": 16.18,
+  "note": "the slot's far end stops the nose along its path: F = T_K / |vN|; and it also stops J2 through stage 1 (the pin carries T_J2 / lever)"
+ },
+ "press_fit": {
+  "2um": [
+   78,
+   93,
+   220.6
+  ],
+  "5um": [
+   195,
+   234,
+   551.5
+  ],
+  "8um": [
+   312,
+   374,
+   882.4
+  ],
+  "13um": [
+   507,
+   607,
+   1433.9
+  ]
+ },
+ "press_fit_note": "(contact MPa, hoop MPa in the O5 boss, pull-out N at mu 0.2, 3 mm engagement); ream 1.500 -0.005/0 vs m6 1.502-1.508 -> 2-13 um",
+ "wear": {
+  "sliding_per_stroke_mm": {
+   "stage1": 3.076,
+   "stage2": 3.723
+  },
+  "groove_travel_mm": 3.08,
+  "pin_normal_turn_deg": 61.3,
+  "cases": {
+   "in-motion upper 0.126 N.m | greased DLC / 440C insert (1e-8)": {
+    "groove_wall_um": 0.51,
+    "pin_um": 1.94,
+    "slot_wall_um": 0.08,
+    "dowel_um": 0.97
+   },
+   "in-motion upper 0.126 N.m | dry steel-steel (1e-7)": {
+    "groove_wall_um": 5.07,
+    "pin_um": 19.44,
+    "slot_wall_um": 0.78,
+    "dowel_um": 9.68
+   },
+   "in-motion upper 0.126 N.m | Ti bare vs 440C (galling, 1e-5)": {
+    "groove_wall_um": 507.04,
+    "pin_um": 1943.62,
+    "slot_wall_um": 77.96,
+    "dowel_um": 967.59
+   },
+   "nominal 0.034 N.m | greased DLC / 440C insert (1e-8)": {
+    "groove_wall_um": 0.14,
+    "pin_um": 0.52,
+    "slot_wall_um": 0.02,
+    "dowel_um": 0.26
+   },
+   "nominal 0.034 N.m | dry steel-steel (1e-7)": {
+    "groove_wall_um": 1.37,
+    "pin_um": 5.24,
+    "slot_wall_um": 0.21,
+    "dowel_um": 2.61
+   },
+   "nominal 0.034 N.m | Ti bare vs 440C (galling, 1e-5)": {
+    "groove_wall_um": 136.82,
+    "pin_um": 524.47,
+    "slot_wall_um": 21.04,
+    "dowel_um": 261.1
+   }
+  },
+  "note": "1e6 strokes x 2 passes; worst-case: wear spread over the groove wall length x 1.5 depth, over the pin's turning arc, over the slot length x 2.2 and a 0.3 mm dowel arc"
+ },
+ "play": {
+  "model_crank_free_c010": 0.174,
+  "verifier_dense_c010": 0.187,
+  "slot_held_c010": 0.04,
+  "nominal_model_c": 0.227,
+  "worst_model_c015": 0.34,
+  "wire_EDM_insert_nom": 0.217,
+  "wire_EDM_insert_worst": 0.276,
+  "wire_EDM_insert_best": 0.158,
+  "milled_Ti_groove_worst": 0.416,
+  "with_unpreloaded_crank_pair_10um": 0.449,
+  "note": "groove c1 = (slot width - pin d) / 2; wire EDM 1.520 +-0.003 vs ground pin 1.500 +-0.002 -> 0.0075-0.0125; slot c2 vs m6 dowel 1.502-1.508 -> 0.0045-0.0105"
+ },
+ "metal_shift_per_0p25deg_K_mm": {
+  "at_R60": 0.262,
+  "at_R80": 0.349
+ }
+}
