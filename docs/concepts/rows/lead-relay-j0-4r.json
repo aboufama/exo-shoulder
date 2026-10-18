@@ -1,0 +1,153 @@
+{
+ "id": "lead-relay-j0-4r",
+ "name": "Spring-centred J0 relay beside J1 under conecut's frozen chain, real O20 hub 0 on a handler post (4 counted joints: the user prefers 3)",
+ "lens": "round103:relay-under-lead (lens 1, reach, 4 DOF; the planner's own cell)",
+ "family": "base relay 4R: a spring-centred spare J0 under the slaved-knuckle pin-knee 3R",
+ "active_dof": 4,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": "2026-10-18T01:42:28Z",
+ "t_screened": "2026-10-18T02:03:35Z",
+ "reach": 0.7639,
+ "follow": 1.0,
+ "inband14": 0.8171,
+ "inband10": 0.5203,
+ "contact": 0.0302,
+ "gap": 24.92,
+ "bench": "Bench(110,360) exact, frozen lead shape (fit Bench(60,160) fast), stop window picked on Bench(60,160)",
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 144,
+ "best_params": {
+  "a0": 20.0,
+  "azu": 45.0,
+  "lo": -59.0,
+  "hi": 18.0,
+  "r0": 78.5,
+  "post_h": 14.3,
+  "lead": {
+   "stk": 6.0,
+   "lE": 97.1443,
+   "lc": 24.3508,
+   "phiE": 0.7526,
+   "phib": -91.8041,
+   "J3MIN": -111.9036,
+   "J3MAX": 122.7417
+  }
+ },
+ "claims": {
+  "claim_a20_z45.json": {
+   "a0": 20.0,
+   "azu": 45.0,
+   "window": [
+    -59.0,
+    18.0
+   ],
+   "real": {
+    "gap": 24.92,
+    "reach": 0.7639,
+    "follow": 1.0,
+    "inband14": 0.8171,
+    "inband10": 0.5203,
+    "contact": 0.0302,
+    "ws_taken": 275,
+    "contacts": 12,
+    "overhead": "8/28",
+    "relay_taken": 15,
+    "relay_contact": 8,
+    "relay_stop": 7,
+    "relay_parts": 0,
+    "x_parts": 2,
+    "q0_range": [
+     -58.0,
+     18.0
+    ]
+   },
+   "ghost": {
+    "gap": 16.07,
+    "reach": 0.7694,
+    "inband14": 0.9012,
+    "contact": 0.0301,
+    "ws_taken": 277,
+    "contacts": 12,
+    "overhead": "8/28"
+   },
+   "q0_zero_real": {
+    "gap": 27.14,
+    "reach": 0.7222,
+    "inband14": 0.8171,
+    "contact": 0.0107
+   },
+   "parts_inband": {
+    "chain": [
+     0.901,
+     9.3,
+     2.0
+    ],
+    "hub0_link0": [
+     0.0,
+     28.8,
+     18.1
+    ]
+   },
+   "near_touch_min_mm": 0.054,
+   "hub0": {
+    "r0": 78.5,
+    "link_len": 26.7,
+    "post_h": 14.3,
+    "n_x": 101
+   },
+   "xlog_min": {
+    "hub0": -1.92,
+    "link0": -1.56,
+    "wall": 9.43
+   }
+  }
+ },
+ "gate": {
+  "n": 143,
+  "gain_second_half": 1.215,
+  "gain_last_third": 1.215,
+  "top5_spread": 0.56,
+  "best_fit_gap": 14.03
+ },
+ "verdict": "PRELIMINARY (a0 10 seat wear running): REAL 24.92 frozen exact Bench(110,360) at the ghost's seat a0 20 / azu 45 (window [-59, +18] picked on Bench(60,160)) - over the 17.5 kill bar and 6.6 worse than the 3-joint lead (18.28); ghost 16.07.",
+ "limiter": "hub 0 + link 0 in-band dilution: 101 skin-facing samples per pose, 0 % in band (median 28.8 mm over the skin), ib14 0.9012 -> 0.8171 = +8.4 points; relays put chain metal into the skin on 8 of 23 relayed poses",
+ "note": "preliminary",
+ "doc": "docs/concepts/lead-relay-j0-4r.md",
+ "complexity": 50.75,
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 6,
+  "joints": 9,
+  "closed_loops": 3,
+  "sliding_pairs": 1,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 2,
+  "custom_parts": 14,
+  "catalogue_parts": 21,
+  "notes": "the lead conecut-knee-knuckle-3r record unchanged + J0 (counted, spring-centred): +1 active DOF, +1 moving body (J1's housing + link 0 now turn), +1 joint, +1 spring (double-leg torsion, 1.4310 wire 0.95), +2 made (link 0 bar + standoff post; hub 0 shaft), +5 bought (MR117-2RS pair x2, ISO 8734 2 m6 stop dowel, torsion spring, post screws)",
+  "source": "lead-relay-j0-4r screen 2026-10-18",
+  "confidence": "medium",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  }
+ }
+}
