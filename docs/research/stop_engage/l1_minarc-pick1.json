@@ -1,0 +1,41 @@
+{
+ "K K stop dowel 1 of 2 ": {
+  "rs": 7.75,
+  "past_hi_deg": 0.1583,
+  "past_lo_deg": 0.1595,
+  "kinds": [
+   "end",
+   "end"
+  ],
+  "axis": {
+   "rim_R_mm": 10.0,
+   "rim_pts": 488
+  }
+ },
+ "K K stop dowel 2 of 2 ": {
+  "rs": 7.75,
+  "past_hi_deg": 0.1583,
+  "past_lo_deg": 0.1595,
+  "kinds": [
+   "end",
+   "end"
+  ],
+  "axis": {
+   "rim_R_mm": 10.0,
+   "rim_pts": 488
+  }
+ },
+ "J2 J2 stop dowel (ISO 8": {
+  "rs": 7.75,
+  "past_hi_deg": 0.1608,
+  "past_lo_deg": 0.1589,
+  "kinds": [
+   "end",
+   "end"
+  ],
+  "axis": {
+   "rim_R_mm": 10.0,
+   "rim_pts": 154
+  }
+ }
+}

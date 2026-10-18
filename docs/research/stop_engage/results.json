@@ -1,0 +1,1248 @@
+{
+ "tool": "tools/stop_engage.py",
+ "expected": {
+  "old_cutter_deg": 0.8872,
+  "fixed_cutter_deg": 0.1479
+ },
+ "method": "tools/stop_engage.py - where each built K / J2 stop dowel really meets its slot end (an outside check of the drawn stop windows).",
+ "designs": [
+  {
+   "design": "user_conecut_knee",
+   "glb_commit": "821f3292 2026-10-17T21:27:53+00:00",
+   "joints": {
+    "K": {
+     "window_deg": [
+      -62.849,
+      0.0
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1a|D8-02a link 1a: 8x3 bar on ONE line/arc chain in span(u1, uK) (J1 seat at the J1 skirt + 0.15, 60-deg ramp, R2 centre-line bends: 5-axis machined from solid, tighter than the 15 mm bent-bar rule), J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, no magnet: K is slaved); K's two opposed 62.8-deg stop slots in the K pad; the flank lug (the r 1.25 conjugate flank: 4 tangent arcs; 4-axis UV wire-EDM ruled surface, a-C:H DLC) + its web (Ti-6Al-4V)|25",
+     "dowels": [
+      {
+       "dowel": "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|27",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.1409,
+       "err_lo_deg": 0.1403,
+       "err_hi_mm": 0.0191,
+       "err_lo_mm": 0.019,
+       "travel_excess_deg": 0.2812,
+       "contact_hi": {
+        "angle_deg": 0.1409,
+        "clearance0_mm": 0.019,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 62.9893,
+        "clearance0_mm": 0.019,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 62.9893,
+        "err_lo_deg": -62.7081
+       }
+      },
+      {
+       "dowel": "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|28",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.1409,
+       "err_lo_deg": 0.1403,
+       "err_hi_mm": 0.0191,
+       "err_lo_mm": 0.019,
+       "travel_excess_deg": 0.2812,
+       "contact_hi": {
+        "angle_deg": 0.1409,
+        "clearance0_mm": 0.019,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 62.9893,
+        "clearance0_mm": 0.019,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 62.9893,
+        "err_lo_deg": -62.7081
+       }
+      }
+     ]
+    },
+    "J2": {
+     "window_deg": [
+      -15.94,
+      102.068
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 118.0-deg q2 stop slot; carries the crank pivot pin in an O3 H7 bore on an O5 land spot-faced at the boss underside - 0.175 (D3) (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)|26",
+     "dowels": [
+      {
+       "dowel": "l2|J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -15.94 / 102.07 deg: stop B = the drive's range dK 46.25), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)|29",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": -1,
+       "err_hi_deg": 0.1407,
+       "err_lo_deg": 0.1437,
+       "err_hi_mm": 0.019,
+       "err_lo_mm": 0.0194,
+       "travel_excess_deg": 0.2844,
+       "contact_hi": {
+        "angle_deg": 102.2087,
+        "clearance0_mm": 0.046,
+        "contact_radial_mm": -0.03,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 16.0837,
+        "clearance0_mm": 0.046,
+        "contact_radial_mm": -0.082,
+        "contact_ahead_mm": 1.498,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": -85.9843,
+        "err_lo_deg": 86.2687
+       }
+      }
+     ]
+    }
+   },
+   "seconds": 45.5
+  },
+  {
+   "design": "user_desmo_conecut",
+   "glb_commit": "9c391e36 2026-10-18T03:59:07+00:00",
+   "joints": {
+    "K": {
+     "window_deg": [
+      -62.849,
+      0.0
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1a|D8-02a link 1a: 8x3 bar on ONE line/arc chain in span(u1, uK) (J1 seat at the J1 skirt + 0.15, 60-deg ramp, R2 centre-line bends: 5-axis machined from solid, tighter than the 15 mm bent-bar rule), J1 / K pads + integral O7 pins, plain K pin (no clock spring: K is slaved); K's two opposed 62.8-deg stop slots in the K pad; the O5 x 3 nose boss at the seat C0 (r_c 16.18 from hub K's axis) on a 4 x 3 root from the K pad (40-deg ramp), the nose dowel's reamed O1.5 H7 hole (Ti-6Al-4V)|24",
+     "dowels": [
+      {
+       "dowel": "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|26",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.1409,
+       "err_lo_deg": 0.1403,
+       "err_hi_mm": 0.0191,
+       "err_lo_mm": 0.019,
+       "travel_excess_deg": 0.2812,
+       "contact_hi": {
+        "angle_deg": 0.1409,
+        "clearance0_mm": 0.019,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 62.9893,
+        "clearance0_mm": 0.019,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 62.9893,
+        "err_lo_deg": -62.7081
+       }
+      },
+      {
+       "dowel": "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|27",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.1409,
+       "err_lo_deg": 0.1403,
+       "err_hi_mm": 0.0191,
+       "err_lo_mm": 0.019,
+       "travel_excess_deg": 0.2812,
+       "contact_hi": {
+        "angle_deg": 0.1409,
+        "clearance0_mm": 0.019,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 62.9893,
+        "clearance0_mm": 0.019,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 62.9893,
+        "err_lo_deg": -62.7081
+       }
+      }
+     ]
+    },
+    "J2": {
+     "window_deg": [
+      -14.315,
+      102.068
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 116.4-deg q2 stop slot; carries the crank pivot pin in an O3 H7 bore on an O5 land spot-faced at the boss underside - 0.175 (D3) (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)|25",
+     "dowels": [
+      {
+       "dowel": "l2|J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -14.31 / 102.07 deg: stop B = the drive's range dK 46.25), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)|28",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": -1,
+       "err_hi_deg": 0.1403,
+       "err_lo_deg": 0.1404,
+       "err_hi_mm": 0.019,
+       "err_lo_mm": 0.019,
+       "travel_excess_deg": 0.2807,
+       "contact_hi": {
+        "angle_deg": 102.2083,
+        "clearance0_mm": 0.0448,
+        "contact_radial_mm": -0.056,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 14.4554,
+        "clearance0_mm": 0.0448,
+        "contact_radial_mm": -0.056,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": -87.6126,
+        "err_lo_deg": 87.8933
+       }
+      }
+     ]
+    }
+   },
+   "seconds": 47.4
+  },
+  {
+   "design": "user_geneva_rod",
+   "glb_commit": "13e2ed3d 2026-10-16T20:54:09+00:00",
+   "joints": {
+    "K": {
+     "window_deg": [
+      -53.637,
+      0.0
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1a|D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, O3 magnet pocket); K's two opposed 53.6-deg stop slots in the K pad, both clear of the bar root (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)|25",
+     "dowels": [
+      {
+       "dowel": "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -53.64), pressed 3 mm in the K upper boss, polished|27",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8809,
+       "err_lo_deg": 0.8842,
+       "err_hi_mm": 0.1192,
+       "err_lo_mm": 0.1196,
+       "travel_excess_deg": 1.7651,
+       "contact_hi": {
+        "angle_deg": 0.8809,
+        "clearance0_mm": 0.0475,
+        "contact_radial_mm": -0.022,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 54.5212,
+        "clearance0_mm": 0.0475,
+        "contact_radial_mm": -0.09,
+        "contact_ahead_mm": 1.497,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 54.5212,
+        "err_lo_deg": -52.7561
+       }
+      },
+      {
+       "dowel": "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -53.64), pressed 3 mm in the K upper boss, polished|28",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8809,
+       "err_lo_deg": 0.8842,
+       "err_hi_mm": 0.1192,
+       "err_lo_mm": 0.1196,
+       "travel_excess_deg": 1.7651,
+       "contact_hi": {
+        "angle_deg": 0.8809,
+        "clearance0_mm": 0.0475,
+        "contact_radial_mm": -0.022,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 54.5212,
+        "clearance0_mm": 0.0475,
+        "contact_radial_mm": -0.09,
+        "contact_ahead_mm": 1.497,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 54.5212,
+        "err_lo_deg": -52.7561
+       }
+      }
+     ]
+    },
+    "J2": {
+     "window_deg": [
+      -21.811,
+      93.398
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad (carries the rocker post bush) + integral O7 pin with the 115.2-deg q2 stop slot (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)|26",
+     "dowels": [
+      {
+       "dowel": "l2|J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -21.81 / 93.40 deg), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)|29",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8853,
+       "err_lo_deg": 0.885,
+       "err_hi_mm": 0.1197,
+       "err_lo_mm": 0.1197,
+       "travel_excess_deg": 1.7703,
+       "contact_hi": {
+        "angle_deg": 94.2833,
+        "clearance0_mm": 0.0443,
+        "contact_radial_mm": 0.0,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 22.696,
+        "clearance0_mm": 0.0443,
+        "contact_radial_mm": -0.0,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": -70.702,
+        "err_lo_deg": 72.4723
+       }
+      }
+     ]
+    }
+   },
+   "seconds": 88.5
+  },
+  {
+   "design": "user_geneva_rod_v2",
+   "glb_commit": "5f4c9636 2026-10-17T02:57:01+00:00",
+   "joints": {
+    "K": {
+     "window_deg": [
+      -53.637,
+      0.0
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1a|D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, DD O3 tip for the horn hub; no magnet: K is slaved, never read); K's two opposed 53.6-deg stop slots in the K pad, both clear of the bar root (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)|25",
+     "dowels": [
+      {
+       "dowel": "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -53.64), pressed 3 mm in the K upper boss, polished|27",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8843,
+       "err_lo_deg": 0.8842,
+       "err_hi_mm": 0.1196,
+       "err_lo_mm": 0.1196,
+       "travel_excess_deg": 1.7685,
+       "contact_hi": {
+        "angle_deg": 0.8843,
+        "clearance0_mm": 0.0489,
+        "contact_radial_mm": 0.09,
+        "contact_ahead_mm": 1.497,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 54.5212,
+        "clearance0_mm": 0.0489,
+        "contact_radial_mm": 0.022,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 54.5212,
+        "err_lo_deg": -52.7527
+       }
+      },
+      {
+       "dowel": "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -53.64), pressed 3 mm in the K upper boss, polished|28",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8843,
+       "err_lo_deg": 0.8842,
+       "err_hi_mm": 0.1196,
+       "err_lo_mm": 0.1196,
+       "travel_excess_deg": 1.7685,
+       "contact_hi": {
+        "angle_deg": 0.8843,
+        "clearance0_mm": 0.0489,
+        "contact_radial_mm": 0.09,
+        "contact_ahead_mm": 1.497,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 54.5212,
+        "clearance0_mm": 0.0489,
+        "contact_radial_mm": 0.022,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 54.5212,
+        "err_lo_deg": -52.7527
+       }
+      }
+     ]
+    },
+    "J2": {
+     "window_deg": [
+      -21.811,
+      93.398
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad (carries the rocker post bush) + integral O7 pin with the 115.2-deg q2 stop slot (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)|26",
+     "dowels": [
+      {
+       "dowel": "l2|J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -21.81 / 93.40 deg), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)|29",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8853,
+       "err_lo_deg": 0.885,
+       "err_hi_mm": 0.1197,
+       "err_lo_mm": 0.1197,
+       "travel_excess_deg": 1.7703,
+       "contact_hi": {
+        "angle_deg": 94.2833,
+        "clearance0_mm": 0.0443,
+        "contact_radial_mm": 0.0,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 22.696,
+        "clearance0_mm": 0.0443,
+        "contact_radial_mm": -0.0,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": -70.702,
+        "err_lo_deg": 72.4723
+       }
+      }
+     ]
+    }
+   },
+   "seconds": 188.1
+  },
+  {
+   "design": "user_minarc_bdp",
+   "glb_commit": "a8cea51e 2026-10-16T14:38:09+00:00",
+   "joints": {
+    "K": {
+     "window_deg": [
+      -34.47,
+      0.0
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1a|D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, O3 magnet pocket); K's two opposed 34.5-deg stop slots in the K pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)|26",
+     "dowels": [
+      {
+       "dowel": "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 5.65 m6 hardened (stop A dK 0 / stop B dK -34.47), pressed 3 mm in the K upper boss, polished|28",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8795,
+       "err_lo_deg": 0.8804,
+       "err_hi_mm": 0.119,
+       "err_lo_mm": 0.1191,
+       "travel_excess_deg": 1.7599,
+       "contact_hi": {
+        "angle_deg": 0.8795,
+        "clearance0_mm": 0.0473,
+        "contact_radial_mm": -0.045,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 35.3504,
+        "clearance0_mm": 0.0473,
+        "contact_radial_mm": -0.067,
+        "contact_ahead_mm": 1.498,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 35.3504,
+        "err_lo_deg": -33.5905
+       }
+      },
+      {
+       "dowel": "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 5.65 m6 hardened (stop A dK 0 / stop B dK -34.47), pressed 3 mm in the K upper boss, polished|29",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8795,
+       "err_lo_deg": 0.8804,
+       "err_hi_mm": 0.119,
+       "err_lo_mm": 0.1191,
+       "travel_excess_deg": 1.7599,
+       "contact_hi": {
+        "angle_deg": 0.8795,
+        "clearance0_mm": 0.0472,
+        "contact_radial_mm": -0.045,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 35.3504,
+        "clearance0_mm": 0.0472,
+        "contact_radial_mm": -0.067,
+        "contact_ahead_mm": 1.498,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 35.3504,
+        "err_lo_deg": -33.5905
+       }
+      }
+     ]
+    },
+    "J2": {
+     "window_deg": [
+      -24.979,
+      100.843
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 125.8-deg q2 stop slot (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)|27",
+     "dowels": [
+      {
+       "dowel": "l2|J2 stop dowel: ISO 8734 O3 x 5.65 m6 hardened (q2 stops -24.98 / 100.84 deg), pressed 3 mm in the J2 upper boss, polished|30",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8804,
+       "err_lo_deg": 0.8795,
+       "err_hi_mm": 0.1191,
+       "err_lo_mm": 0.119,
+       "travel_excess_deg": 1.7599,
+       "contact_hi": {
+        "angle_deg": 101.7234,
+        "clearance0_mm": 0.0485,
+        "contact_radial_mm": -0.071,
+        "contact_ahead_mm": 1.498,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 25.8585,
+        "clearance0_mm": 0.0485,
+        "contact_radial_mm": -0.041,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": -74.9845,
+        "err_lo_deg": 76.7444
+       }
+      }
+     ]
+    }
+   },
+   "seconds": 62.6
+  },
+  {
+   "design": "user_minarc_pick1",
+   "glb_commit": "5644df88 2026-10-16T18:03:39+00:00",
+   "joints": {
+    "K": {
+     "window_deg": [
+      -56.652,
+      0.0
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1a|D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, O3 magnet pocket); K's two opposed 56.7-deg stop slots in the K pad, both clear of the bar root (machined from solid Ti-6Al-4V (2.5-D: ONE side-view sketch of lines + tangent arcs through the model's strap stations, extruded 8 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)|26",
+     "dowels": [
+      {
+       "dowel": "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 5.65 m6 hardened (stop A dK 0 / stop B dK -56.65), pressed 3 mm in the K upper boss, polished|28",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": -1,
+       "err_hi_deg": 0.8806,
+       "err_lo_deg": 0.8792,
+       "err_hi_mm": 0.1191,
+       "err_lo_mm": 0.1189,
+       "travel_excess_deg": 1.7598,
+       "contact_hi": {
+        "angle_deg": 0.8806,
+        "clearance0_mm": 0.0468,
+        "contact_radial_mm": -0.067,
+        "contact_ahead_mm": 1.498,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 57.5312,
+        "clearance0_mm": 0.0468,
+        "contact_radial_mm": -0.045,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 57.5312,
+        "err_lo_deg": -55.7714
+       }
+      },
+      {
+       "dowel": "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 5.65 m6 hardened (stop A dK 0 / stop B dK -56.65), pressed 3 mm in the K upper boss, polished|29",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": -1,
+       "err_hi_deg": 0.8806,
+       "err_lo_deg": 0.8792,
+       "err_hi_mm": 0.1191,
+       "err_lo_mm": 0.1189,
+       "travel_excess_deg": 1.7598,
+       "contact_hi": {
+        "angle_deg": 0.8806,
+        "clearance0_mm": 0.0468,
+        "contact_radial_mm": -0.067,
+        "contact_ahead_mm": 1.498,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 57.5312,
+        "clearance0_mm": 0.0468,
+        "contact_radial_mm": -0.045,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 57.5312,
+        "err_lo_deg": -55.7714
+       }
+      }
+     ]
+    },
+    "J2": {
+     "window_deg": [
+      -15.848,
+      97.419
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 113.3-deg q2 stop slot (machined from solid Ti-6Al-4V (2.5-D: ONE side-view sketch of lines + tangent arcs through the model's strap stations, extruded 8 mm; 3+2-axis or wire EDM), rounds R2 / R0.5 in the profile)|27",
+     "dowels": [
+      {
+       "dowel": "l2|J2 stop dowel: ISO 8734 O3 x 5.65 m6 hardened (q2 stops -15.85 / 97.42 deg), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)|30",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8812,
+       "err_lo_deg": 0.8845,
+       "err_hi_mm": 0.1192,
+       "err_lo_mm": 0.1196,
+       "travel_excess_deg": 1.7657,
+       "contact_hi": {
+        "angle_deg": 98.3002,
+        "clearance0_mm": 0.0474,
+        "contact_radial_mm": -0.019,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 16.7325,
+        "clearance0_mm": 0.0474,
+        "contact_radial_mm": -0.093,
+        "contact_ahead_mm": 1.497,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": -80.6865,
+        "err_lo_deg": 82.4522
+       }
+      }
+     ]
+    }
+   },
+   "seconds": 44.2
+  },
+  {
+   "design": "user_osn_k4216",
+   "glb_commit": "ca1f405a 2026-10-16T04:23:21+00:00",
+   "joints": {},
+   "skipped": "build.json has no stops (no K / J2 stop dowels)"
+  },
+  {
+   "design": "user_pinknee_h1",
+   "glb_commit": "a65d8ace 2026-10-16T10:10:08+00:00",
+   "joints": {},
+   "skipped": "build.json has no stops (no K / J2 stop dowels)"
+  },
+  {
+   "design": "user_pinknee_h1b",
+   "glb_commit": "1df3b16d 2026-10-16T12:01:18+00:00",
+   "joints": {},
+   "skipped": "build.json has no stops (no K / J2 stop dowels)"
+  },
+  {
+   "design": "user_roller_longdyad",
+   "glb_commit": "6a6f307d 2026-10-17T09:27:07+00:00",
+   "joints": {
+    "K": {
+     "window_deg": [
+      -62.849,
+      0.0
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1a|D8-02a link 1a: 8x3 bar on ONE line/arc chain in span(u1, uK) (J1 seat at the J1 skirt + 0.15, 60-deg ramp, R2 centre-line bends: 5-axis machined from solid, tighter than the 15 mm bent-bar rule), J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, no magnet: K is slaved); K's two opposed 62.8-deg stop slots in the K pad; the flank lug (3-arc flank, 2-axis wire-EDM along z_c) + its web (Ti-6Al-4V)|25",
+     "dowels": [
+      {
+       "dowel": "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|27",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8802,
+       "err_lo_deg": 0.8796,
+       "err_hi_mm": 0.1191,
+       "err_lo_mm": 0.119,
+       "travel_excess_deg": 1.7598,
+       "contact_hi": {
+        "angle_deg": 0.8802,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 63.7286,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 63.7286,
+        "err_lo_deg": -61.9688
+       }
+      },
+      {
+       "dowel": "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|28",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8802,
+       "err_lo_deg": 0.8796,
+       "err_hi_mm": 0.1191,
+       "err_lo_mm": 0.119,
+       "travel_excess_deg": 1.7598,
+       "contact_hi": {
+        "angle_deg": 0.8802,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 63.7286,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 63.7286,
+        "err_lo_deg": -61.9688
+       }
+      }
+     ]
+    },
+    "J2": {
+     "window_deg": [
+      -14.199,
+      102.068
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 116.3-deg q2 stop slot; carries the crank pivot pin in an O3 H7 bore (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)|26",
+     "dowels": [
+      {
+       "dowel": "l2|J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -14.20 / 102.07 deg: stop B = the drive's range dK 46.25), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)|29",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": -1,
+       "err_hi_deg": 0.8796,
+       "err_lo_deg": 0.8796,
+       "err_hi_mm": 0.119,
+       "err_lo_mm": 0.119,
+       "travel_excess_deg": 1.7592,
+       "contact_hi": {
+        "angle_deg": 102.9476,
+        "clearance0_mm": 0.0448,
+        "contact_radial_mm": -0.056,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 15.0786,
+        "clearance0_mm": 0.0448,
+        "contact_radial_mm": -0.056,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": -86.9894,
+        "err_lo_deg": 88.7486
+       }
+      }
+     ]
+    }
+   },
+   "seconds": 44.7
+  },
+  {
+   "design": "user_roller_longdyad_arm",
+   "glb_commit": "6a6f307d 2026-10-17T09:27:07+00:00",
+   "joints": {
+    "K": {
+     "window_deg": [
+      -62.849,
+      0.0
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1a|D8-02a link 1a: 8x3 bar on ONE line/arc chain in span(u1, uK) (J1 seat at the J1 skirt + 0.15, 60-deg ramp, R2 centre-line bends: 5-axis machined from solid, tighter than the 15 mm bent-bar rule), J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, no magnet: K is slaved); K's two opposed 62.8-deg stop slots in the K pad; the flank lug (3-arc flank, 2-axis wire-EDM along z_c) + its web (Ti-6Al-4V)|25",
+     "dowels": [
+      {
+       "dowel": "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|27",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8802,
+       "err_lo_deg": 0.8796,
+       "err_hi_mm": 0.1191,
+       "err_lo_mm": 0.119,
+       "travel_excess_deg": 1.7598,
+       "contact_hi": {
+        "angle_deg": 0.8802,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 63.7286,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 63.7286,
+        "err_lo_deg": -61.9688
+       }
+      },
+      {
+       "dowel": "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|28",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8802,
+       "err_lo_deg": 0.8796,
+       "err_hi_mm": 0.1191,
+       "err_lo_mm": 0.119,
+       "travel_excess_deg": 1.7598,
+       "contact_hi": {
+        "angle_deg": 0.8802,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 63.7286,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 63.7286,
+        "err_lo_deg": -61.9688
+       }
+      }
+     ]
+    },
+    "J2": {
+     "window_deg": [
+      -14.199,
+      102.068
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 116.3-deg q2 stop slot; carries the crank pivot pin in an O3 H7 bore (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)|26",
+     "dowels": [
+      {
+       "dowel": "l2|J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -14.20 / 102.07 deg: stop B = the drive's range dK 46.25), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)|29",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": -1,
+       "err_hi_deg": 0.8796,
+       "err_lo_deg": 0.8796,
+       "err_hi_mm": 0.119,
+       "err_lo_mm": 0.119,
+       "travel_excess_deg": 1.7592,
+       "contact_hi": {
+        "angle_deg": 102.9476,
+        "clearance0_mm": 0.0448,
+        "contact_radial_mm": -0.056,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 15.0786,
+        "clearance0_mm": 0.0448,
+        "contact_radial_mm": -0.056,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": -86.9894,
+        "err_lo_deg": 88.7486
+       }
+      }
+     ]
+    }
+   },
+   "seconds": 44.9
+  },
+  {
+   "design": "user_slipper_nose",
+   "glb_commit": "5a74d30b 2026-10-17T16:30:00+00:00",
+   "joints": {
+    "K": {
+     "window_deg": [
+      -62.849,
+      0.0
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1a|D8-02a link 1a: 8x3 bar on ONE line/arc chain in span(u1, uK) (J1 seat at the J1 skirt + 0.15, 60-deg ramp, R2 centre-line bends: 5-axis machined from solid, tighter than the 15 mm bent-bar rule), J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, no magnet: K is slaved); K's two opposed 62.8-deg stop slots in the K pad; the flank lug (the r 1.25 conjugate flank: 4 tangent arcs; 4-axis UV wire-EDM ruled surface, a-C:H DLC) + its web (Ti-6Al-4V)|25",
+     "dowels": [
+      {
+       "dowel": "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|27",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8802,
+       "err_lo_deg": 0.8796,
+       "err_hi_mm": 0.1191,
+       "err_lo_mm": 0.119,
+       "travel_excess_deg": 1.7598,
+       "contact_hi": {
+        "angle_deg": 0.8802,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 63.7286,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 63.7286,
+        "err_lo_deg": -61.9688
+       }
+      },
+      {
+       "dowel": "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|28",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8802,
+       "err_lo_deg": 0.8796,
+       "err_hi_mm": 0.1191,
+       "err_lo_mm": 0.119,
+       "travel_excess_deg": 1.7598,
+       "contact_hi": {
+        "angle_deg": 0.8802,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 63.7286,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 63.7286,
+        "err_lo_deg": -61.9688
+       }
+      }
+     ]
+    },
+    "J2": {
+     "window_deg": [
+      -15.824,
+      102.068
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 117.9-deg q2 stop slot; carries the crank pivot pin in an O3 H7 bore (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)|26",
+     "dowels": [
+      {
+       "dowel": "l2|J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -15.82 / 102.07 deg: stop B = the drive's range dK 46.25), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)|29",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": -1,
+       "err_hi_deg": 0.88,
+       "err_lo_deg": 0.8829,
+       "err_hi_mm": 0.119,
+       "err_lo_mm": 0.1194,
+       "travel_excess_deg": 1.7629,
+       "contact_hi": {
+        "angle_deg": 102.948,
+        "clearance0_mm": 0.0468,
+        "contact_radial_mm": -0.03,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 16.7069,
+        "clearance0_mm": 0.0468,
+        "contact_radial_mm": -0.082,
+        "contact_ahead_mm": 1.498,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": -85.3611,
+        "err_lo_deg": 87.124
+       }
+      }
+     ]
+    }
+   },
+   "seconds": 46.8
+  },
+  {
+   "design": "user_trimlug_k165",
+   "glb_commit": "ccacb8a5 2026-10-17T16:58:36+00:00",
+   "joints": {
+    "K": {
+     "window_deg": [
+      -62.849,
+      0.0
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1a|D8-02a link 1a: 8x3 bar on ONE line/arc chain in span(u1, uK) (J1 seat at the J1 skirt + 0.15, 60-deg ramp, R2 centre-line bends: 5-axis machined from solid, tighter than the 15 mm bent-bar rule), J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, no magnet: K is slaved); K's two opposed 62.8-deg stop slots in the K pad; the flank lug (the r 1.25 conjugate flank: 4 tangent arcs; 4-axis UV wire-EDM ruled surface, a-C:H DLC) + its web (Ti-6Al-4V)|25",
+     "dowels": [
+      {
+       "dowel": "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|27",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8802,
+       "err_lo_deg": 0.8796,
+       "err_hi_mm": 0.1191,
+       "err_lo_mm": 0.119,
+       "travel_excess_deg": 1.7598,
+       "contact_hi": {
+        "angle_deg": 0.8802,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 63.7286,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 63.7286,
+        "err_lo_deg": -61.9688
+       }
+      },
+      {
+       "dowel": "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished|28",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": 1,
+       "err_hi_deg": 0.8802,
+       "err_lo_deg": 0.8796,
+       "err_hi_mm": 0.1191,
+       "err_lo_mm": 0.119,
+       "travel_excess_deg": 1.7598,
+       "contact_hi": {
+        "angle_deg": 0.8802,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.064,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 63.7286,
+        "clearance0_mm": 0.0467,
+        "contact_radial_mm": -0.049,
+        "contact_ahead_mm": 1.499,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": 63.7286,
+        "err_lo_deg": -61.9688
+       }
+      }
+     ]
+    },
+    "J2": {
+     "window_deg": [
+      -15.824,
+      102.068
+     ],
+     "axis": {
+      "n_bearings": 2,
+      "axis_spread_deg": 0.0,
+      "centre_off_axis_mm": 0.0
+     },
+     "slotted_part": "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 117.9-deg q2 stop slot; carries the crank pivot pin in an O3 H7 bore (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)|26",
+     "dowels": [
+      {
+       "dowel": "l2|J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -15.82 / 102.07 deg: stop B = the drive's range dK 46.25), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)|29",
+       "rs_mm": 7.75,
+       "dowel_r_mm": 1.5,
+       "sense": -1,
+       "err_hi_deg": 0.88,
+       "err_lo_deg": 0.8829,
+       "err_hi_mm": 0.119,
+       "err_lo_mm": 0.1194,
+       "travel_excess_deg": 1.7629,
+       "contact_hi": {
+        "angle_deg": 102.948,
+        "clearance0_mm": 0.0468,
+        "contact_radial_mm": -0.03,
+        "contact_ahead_mm": 1.5,
+        "kind": "end"
+       },
+       "contact_lo": {
+        "angle_deg": 16.7069,
+        "clearance0_mm": 0.0468,
+        "contact_radial_mm": -0.082,
+        "contact_ahead_mm": 1.498,
+        "kind": "end"
+       },
+       "other_sense": {
+        "err_hi_deg": -85.3611,
+        "err_lo_deg": 87.124
+       }
+      }
+     ]
+    }
+   },
+   "seconds": 45.4
+  }
+ ]
+}

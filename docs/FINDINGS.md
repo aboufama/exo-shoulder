@@ -3289,3 +3289,67 @@ null-space costs more in hub / link metal than it returns in takes. This is the 
    guide inside a link adds no hub and no ring crossing. Read the early curved-slide deaths first.
 3. Machinery: verify template bar to the current lead; near-touch objective in every search; an auditor ledger entry
    for each round winner; quoted numbers from saved outputs only.
+
+## The drawn K / J2 stop slots of the gen-4..7 full CADs engage 0.88 deg late; the L1 keep-outs and gen 8 / 9 are right (2026-10-18, tools/stop_engage.py)
+
+Raw data: `docs/research/stop_engage/results.json` (every built `pipeline/full-exo/designs/user_*`), the L1 control
+`docs/research/stop_engage/l1_control.py` + `l1_minarc-{pick1,bdp}.json`. No judge, bench or design file changed; this
+is a measurement of the built metal against the drawn windows.
+
+**Cause.** `user_style_minarc.arc_slot_cutter` (gen 4..7, every full CAD built through it) put each semicircular slot
+end's centre (w - r_d + clr) / rs BEYOND the dowel-centre stop angle. A dowel of radius r_d in an end of radius w meets
+that end only when its centre is (w - r_d) beyond the end centre (internal tangency on the far side). So the built stop
+engages 2 (w - r_d) + clr = 0.12 mm past the model's stop angle, 0.887 deg at r 7.75 (O3 dowel, w 1.55, clr 0.02). The
+docstring's "touches 0.02 mm past the stop" was the intent, not the geometry. First seen on gen 8's first export
+(user_conecut_knee before its fix: 0.880-0.883 deg); gen 8's builder (`user_style_conecut`) overrides the cutter, and
+gen 9 (`user_style_desmo`) imports that override.
+
+**Method.** The checker loads exo.glb and takes each joint axis from its MR117 bearing pair (smallest-variance PCA
+direction through the volume centroids). It turns each stop dowel about that axis against the slotted part (K: link 1a,
+J2: link 1b), with contact = metal past 0 either way (igl.signed_distance). It scans the whole travel from the build
+pose (dowel at home = joint angle 0) in 0.5-deg steps, bisects the first contact to 1e-4 deg, and scores both axis
+signs. The wrong sign misses by 33-88 deg, so the sense is unambiguous. Every contact is an end contact (1.50 mm ahead
+of the dowel centre, <= 0.09 mm radial); no slot wall rubs mid-travel.
+
+**Measured.** Degrees of joint angle past each window end (build.json `stops`); both K dowels read the same.
+
+| design (gen) | K stop A (dK 0) | K stop B | J2 lo | J2 hi | free travel - window |
+|---|---|---|---|---|---|
+| user_minarc_bdp (4) | 0.880 | 0.880 | 0.880 | 0.880 | K 1.760, J2 1.760 |
+| user_minarc_pick1 (4b) | 0.881 | 0.879 | 0.885 | 0.881 | K 1.760, J2 1.766 |
+| user_geneva_rod (5) | 0.881 | 0.884 | 0.885 | 0.885 | K 1.765, J2 1.770 |
+| user_geneva_rod_v2 (5 fix) | 0.884 | 0.884 | 0.885 | 0.885 | K 1.769, J2 1.770 |
+| user_roller_longdyad, _arm (6) | 0.880 | 0.880 | 0.880 | 0.880 | K 1.760, J2 1.759 |
+| user_slipper_nose (7) | 0.880 | 0.880 | 0.883 | 0.880 | K 1.760, J2 1.763 |
+| user_trimlug_k165 (7) | 0.880 | 0.880 | 0.883 | 0.880 | K 1.760, J2 1.763 |
+| user_conecut_knee (8, fixed) | 0.141 | 0.140 | 0.144 | 0.141 | K 0.281, J2 0.284 |
+| user_desmo_conecut (9, fixed) | 0.141 | 0.140 | 0.140 | 0.140 | K 0.281, J2 0.281 |
+
+The gen-8 / 9 numbers match their builders' own `stop_engagement_built` (0.140-0.144) to the third decimal. Fixed
+target: clr / rs = 0.148 deg. user_osn_k4216 (gen 2) and user_pinknee_h1 / h1b (gen 3) have no K / J2 stop dowels.
+
+**What it means.**
+- On every gen-4..7 full CAD, each drawn K / J2 stop lets the joint run 0.88 deg (0.12 mm at the dowel) past the
+  model's stop, at both ends. So each window is 1.76 deg wider than the claim's.
+- K stop A is K's clock-spring rest phase, so the built rest sits 0.88 deg off it: about 6x the drawings' K-phase band
+  (+0.15 / -0.10 deg).
+- At J2's fold-side stop, q2 runs 0.88 deg past the claimed stop. The J1-J3 `th` margin there was not re-measured.
+- The judges' scorecards do not move. They pose the parts by the model's joint angles; the error is in where the metal
+  would stop them.
+- The STEP files, GLBs and drawings of these designs still carry the late stops until they are rebuilt.
+
+**Not affected.**
+- The L1 keep-outs: `build_minarc_l1.slotted_plate` has RADIAL ends at th + q -/+ asin((r_d + clr) / rs). A radial line
+  through the axis meets the dowel when the dowel centre is asin(r_d / rs) from it, so the dowel engages
+  asin(1.52 / 7.75) - asin(1.5 / 7.75) = 0.153 deg past the stop.
+- Measured on l1_minarc-pick1 and l1_minarc-bdp (axis from the slotted O20 plate's rim circle, since L1 has no
+  bearings): K 0.152-0.160, J2 0.155-0.161 deg past every end, all end contacts.
+- Hence the bench and verified numbers, which model the stop angle itself, stand.
+
+**Fix.** `user_style_minarc.arc_slot_cutter` now puts the end centres (w - r_d - clr) / rs INSIDE the stop angles. Its
+body is AST-identical to gen 8's override. Any gen-4..7 full CAD rebuilt through it (user_style_minarc / _roller /
+_slipper / geneva builders) gets the 0.148-deg engagement.
+
+**Next.** Rebuild a gen-4..7 full CAD only if it is shown or used again (needs `.cache/maps_s1.pt`), then re-run
+`tools/stop_engage.py <id>`. Add the checker to the full-CAD judge loop next to R7, so a drawn stop is measured the way
+the J3 groove's 0.76 deg was.
