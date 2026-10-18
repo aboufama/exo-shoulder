@@ -3410,3 +3410,88 @@ metal, no carriage lift, two-sided or stopped, range decided on frozen exact. (2
 cheap probe. (3) The ER binders with the free-K oracle as instrument, gate pre-registered, no stops placed from
 claim-bench poses. (4) Machinery: the verify template's bar is still stale (exo-screen.js line 24, 11 of 12
 verifications over J2-J4); the auditor wrote no entry for the three dead rows.
+
+## Round 14 re-dispatch: no lead change - the joggled cx-0 crest knee verifies at 31.50 (round winner, WATCH: a 0.20 mm tolerance cliff); the half-ring knuckle re-claims at 18.83 and stays GAMED (stage 1 inside link 1b's J2 plate); three deaths and one open screen hold (2026-10-18, discovery round 14 re-dispatch, closer)
+
+Everything here is frozen exact on Bench(110,360), unless marked fast (Bench(60,160)), and was confirmed by an
+independent verifier. The work ran locally, because the farm is closed. No bench, judge or kit changed. The full table
+and every watch reason are in docs/concepts/ROUNDS.md, "Round 14 results, re-dispatch close".
+
+**Winner: crest-knee-3r, joggled knee (kj=1).** v_gap 31.50 (score 88.55), held 28.45, cx 0, 3 active joints,
+0 passive translations, ledger WATCH. It replaces its own flat cell (32.84 / 29.81) as the round's winner config. It
+does not beat the lead: conecut-knee-knuckle-3r stays at 18.28 (score 93.35), and H1 reads 27.20.
+
+**Passed over: lowarm-halfring-knuckle-3r (18.83), GAMED (M3).** Its stage-1 groove ring sector and O1.5 pin sit at
+F+0.111..1.611 mm, inside link 1b's J2 lower plate (F+0..3.0). The buildable level reads 18.65, and 19.05 with the hard
+pad's true-lever play. Held out, paired against the lead, it is +0.26 worse, P(better) 0.005, so even un-gamed it does
+not tie the lead.
+
+What was measured, and what failed and why:
+1. **Pin-knee stack constraint (new).** At pin a, the knee link rides tp + RUN - T_LINK = 0.25 mm over the E-strap top.
+   - The verified flat crest fit was partly steered by a jam: at the same parameters, the flat model jams at 136 fast,
+     while flat plus the stack rule reads 24.39 fast and 32.50 frozen.
+   - The joggle itself (separate levels for boss and pad, machined link) is worth ~1.07 frozen. The ~5-point estimate
+     is refuted.
+   - Member 3's in-band limit is the E strap (0.85) and the knee link (0.66).
+   - 3 of 8 fold-free starts still jam where the knee folds back over a strap rising toward hub 3.
+2. **Tolerance cliff (WATCH, NEW-tolcliff).** The joggle's gain is fitted at a 0.20 mm running gap, the rule floor; the
+   flat cell clears by 0.33. At +0.2 mm of strap-level error, 25 bench / 24 held poses jam: 39.90 / 36.54, against the
+   flat cell's 33.11. The skeptic, counting contact as metal touch, puts the cliff at +0.3 mm (34.31).
+   - Cause: the 3.0 mm E strap stands up to 0.125 mm above the 2.75 mm boss face.
+   - Build rule (not modelled): skim the strap top flush with the boss face inside the knee's sweep.
+3. **Crest-knee's other watches.**
+   - G1: overhead is metal at the skin. The bench takes 7 of 28, 5 of them under 2 mm. Held out takes 8 of 26, all under
+     2 mm and 4 under 1 mm. 4 of 10 overhead clip frames are under 1 mm. The gap is 31.50 / 34.08 / 59.56 at plain /
+     1 mm / 2 mm.
+   - NEW-ws-inband: unscored workspace in-band is 0.817 bench / 0.794 held, against 0.872 scored. Max standoff is
+     29.95 mm; the knee link is 0.656 in band.
+   - Reporting / R2: the dashboard row mixes the joggle's 31.50, the flat cell's fast 26.34 and the sweep's 22.02.
+   - The joggled link must be machined: its 3.19 mm step over 13.26 mm is more than the 2.78 mm a bent bar can rise.
+4. **The lead family's contacts.** Three of the four shared contacts (205 hub 2 -4.28, 237 crank -9.47, 264 hub K -1.17)
+   are dwell poses at K = 0. No K-law lever reaches them; only 316 (link 2 -1.23) is a forced pose.
+5. **Dwell K play.**
+   - The hard pad's true lever is 6.75 mm, not the claimed 12.29. Only 25 of 133 crank samples are truly over link 1b;
+     the seat test counted points up to 5 mm beside it. That makes the play 0.912 deg, 3.6x the 0.25 gate.
+   - Worn as metal, the play puts pose 203 (abduction 90 / external rotation 45) 0.10 mm into the skin: v_gap 18.83.
+   - The score barely sees play (-0.11 to +0.10 per 0.64 deg), but the metal does: about 0.40 mm per deg at pose 203.
+   - Gate dwell holds on near-touch metal, at one-sided play <= ~0.29 deg.
+   - lowarm's other watches:
+     - S5: the kNN flood reads 19.97 bench / 30.78 held.
+     - G4: m_sub at rest is under 1 deg on 50 of 205 rest poses.
+     - NEW-inherited-stack: round 15 lens B's bar was set on the clashing layer.
+6. **Slotted eccentric (screened, not dead; WATCH).** E1-g13-3 reads 97.04 (held 93.02).
+   - A fold lever downstream of J2 sweeps J2's full span (q2 201.5 deg), so it collides with link 1 and hub 1 or it
+     leaves the band. It trails its locked control by 60-96 fast points in every basin.
+   - At the H1 seats the slot window opens to th [29.75, 124.25], but all 201 closing poses collide.
+   - One sigma-0.8 restart broke a 424-try plateau by 38 points. Wide restarts come before any death verdict.
+   - Watches:
+     - T5: 16 presses, 95.67 mm summed, deepest 34.90 at hub 3's crown; x4.73 the lead.
+     - No flood on file: reach <= 0.336 on the bench graph.
+     - T1: plain-gap search on all 1763 configs.
+     - G1: 6 / 21 / 128 of 241 taken poses under 1 / 2 / 3 mm.
+     - Sampling: L2b 0.23 in band.
+     - S3: the cuff knee is not modelled.
+     - Reporting: sweep 86.82 against the verified 97.04.
+7. **Crest no-knee 3R (dead, upheld).** 34.98 reproduces to 0.00 through a clamp-free path; held 39.27.
+   - Inside the crest basin, fold-free poses and clearance trade about one for one: closure is <= 0.81 with hub 2 in
+     band.
+   - The neck over hub 2 reads 36.05: 5 collisions became 4 contacts.
+   - Overhead skin at elev 150 in the scapular plane (axial -30) is the first obstacle for any crest successor: 6.93 mm
+     bench, 15.82 mm held.
+   - Plain pin 3Rs have kNN islands too: 8 of 218 takes.
+8. **Cap-pole knuckle (dead, upheld).**
+   - The buildable one-sided law, searched for 200 tries, reads 33.94 (245 takes, fold 96), behind its same-kit
+     control's 30.59.
+   - The two-lobe ghost lobe kept ~40 % of its kinematic takes as metal takes.
+   - The optimum sits 1 deg from a K6 collision cliff.
+   - The mirror J2 branch has no basin.
+
+Next: round 15 (in flight) has to take these lessons in.
+- Lens B's bar becomes the buildable 18.65 / 19.05, with the dwell hold priced as metal at pose 203.
+- Contact lenses can only move metal.
+- Lens A's take-bound table gets the crest rows (226 / 218 metal takes).
+
+Round 16 main:
+- Take the 3-DOF ceiling to the user if lens A confirms it.
+- Re-fit the pin-knee family (H1 and its descendants) with the stack and strap-skim rules at cx 0.
+- Require a +0.1 / +0.2 mm tolerance probe on every claim that sits at a rule-floor clearance.

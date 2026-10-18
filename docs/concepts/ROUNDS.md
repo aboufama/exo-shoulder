@@ -3523,6 +3523,175 @@ lead); 95 needs 13.75. This round closed the last two 3-joint seat families the 
 - B1 (unchanged): m_sub at K rest vs the coupled reading still decides G4 for the whole knuckle family (now measured on
   lowarm too: 50 of 205 rest poses under 1 deg).
 
+## Round 14 results, re-dispatch close (2026-10-18 ~07:30 - ~09:20 UTC, track main, closer)
+
+After the 03:05 close, the round's five rows were dispatched again: open screens were continued, the two deaths were
+audited a third time, the new claims were verified, and the auditor and skeptic re-ran on every moved number. All work ran
+locally (the farm is closed: <= 2 niced processes, OMP_NUM_THREADS=1). All numbers are frozen exact on Bench(110,360)
+(fit on Bench(60,160) fast, shape frozen, worn with no refit). No bench, judge or kit file changed, so no number moved
+because the measurement changed. Two numbers moved for design or pricing reasons:
+- crest-knee-3r moved 32.84 -> 31.50. This is a design change: a joggled knee link replaced the flat one.
+- lowarm-halfring-knuckle-3r moved 17.96 -> 18.83. The claim went from cell B to cell A, then the verifier priced the
+  hard pad's real lever as metal.
+
+Ledger exits, re-read with `tools/alignment_ledger.py get <id>` at ~09:19 UTC just before naming the winner:
+- crest-knee-3r exit 0: WATCH (skeptic 09:14:31Z, claim 31.50).
+- slotted-eccentric-pin-knee-3r exit 0: WATCH (skeptic 09:03:52Z, claim 97.04).
+- deltoid-crest-j3-3r exit 0: WATCH, but the entry (00:32:32Z) is still keyed on the 47.86 claim. The 34.98 re-wear has
+  no ledger entry.
+- **lowarm-halfring-knuckle-3r exit 3: GAMED** (skeptic 08:52:57Z, claim 18.83, M3 upheld).
+- cap-plateau-knuckle-3r exit 2: no entry (dead, never audited).
+- The lead conecut-knee-knuckle-3r exit 0: WATCH (unchanged).
+
+Every row has 3 active joints and 0 passive translations. Complexity is tools/simplicity.py v2.2.
+
+| design | verified gap (score) | held out | reach (takes) / overhead | cx | ledger | outcome |
+|---|---|---|---|---|---|---|
+| **crest-knee-3r**, joggled knee cell (kj=1: boss at tr_a 66.08, pad at tr_b 62.89, machined Ti link) | **31.50 (88.55)**; the claim reproduced; dumps agree, 0 discordant poses | **28.45** | 0.6278 (226/360) / 7 of 28 (held 8/26) | **0** | **WATCH** (5 upheld, 2 refuted) | **winner by the rule**. Replaces its own flat cell (32.84 / held 29.81): -1.34 bench, -1.36 held. Not a lead: +13.22 behind 18.28, +4.30 behind H1's 27.20 |
+| lowarm-halfring-knuckle-3r, cell A (half ring + low arm, hard pad at its true 6.75 mm lever) | 18.83 (93.15); 18.28 without the pad play | 22.64 (lead 22.38) | 0.725 (261) / 8 of 28 | 16.5 | **GAMED** (M3) | **passed over as gamed**. At the buildable stage-1 level it reads 18.65, and 19.05 with the play |
+| cap-plateau-knuckle-3r (cell C ghost; buildable one-sided law searched in audit 3) | 32.08 ghost; buildable 33.94 | 35.16 ghost; buildable 37.93 (unsearched) | ghost 0.6861 (247); buildable 0.6806 (245) / 7 of 28 | 17.5 | no entry | DEAD, upheld a third time. Behind the winner even as a ghost once the drive is real |
+| deltoid-crest-j3-3r (the crest no-knee control) | 34.98 (87.28) | 39.27 | 0.606 (218) / 6 of 28 | 0 | WATCH (keyed on 47.86) | DEAD, upheld. The neck-over-hub-2 variant reads 36.05 |
+| slotted-eccentric-pin-knee-3r (E1-g13-3) | 97.04 (64.71) | 93.02 | 0.461 (166) / 0 of 28 | 5.0 | WATCH (9 upheld, 2 refuted) | screened, not dead: the gate is open at 24.24 / 23.91 / 0.52, n 1750. No lead path |
+| conecut-knee-knuckle-3r (the lead, for reference) | 18.28 (93.35) | 22.38 | 0.7278 (262) / 8 of 28 | 18.5 | WATCH | stays the verified lead |
+
+**Winner: crest-knee-3r, joggled cuff-knee cell (kj=1).**
+- v_gap 31.50 (score 88.55), held out 28.45.
+- 3 active joints and 0 passive translations. The two MR63ZZ knee pins sit outside the count. Complexity 0.
+- Ledger WATCH (exit 0, skeptic 2026-10-18T09:14:31Z).
+- **It does NOT beat the previous verified lead of 18.28.** conecut-knee-knuckle-3r stays the lead, 13.22 points ahead.
+  No lead change.
+
+Designs passed over:
+- **lowarm-halfring-knuckle-3r (18.83, the round's best verified number) is GAMED (M3).**
+  - At the verified config, stage 1's groove ring sector (link-2 metal) and its O1.5 pin sit at F+0.111..1.611 mm.
+    That is inside link 1b's J2 lower plate (F+0..3.0): two real envelopes in one volume, which breaks a hard rule.
+  - The verifier measured the buildable level, F+3.9, but kept 18.83 as v_gap. The buildable level reads 18.65, and
+    19.05 with the true-lever pad play.
+  - Even un-gamed it is neither a lead nor a tie. On the bench it is the same 262 takes and the same 4 contacts as the
+    lead. Held out, paired against the lead, it is +0.26 worse, P(better) 0.005. Pooled over bench and held out it is
+    +0.17 worse, P(better) 0.001.
+- **cap-plateau-knuckle-3r (32.08) is not eligible.** Its two-lobe K drive does not exist. The buildable one-sided law,
+  searched for 200 tries, reads 33.94, below the winner.
+- **deltoid-crest-j3-3r (34.98) is dead, and lower than the winner anyway.**
+
+**Alignment.** Every watch reason of the round's designs, with numbers. Carry these into every summary that names the
+design:
+- **crest-knee-3r** (WATCH; 5 upheld; continuity and M2 refuted with evidence: the strict one-seed flood connects 974/974
+  with 0 dropped, and a bent-bar build measures 32.02 at the same 0.200 mm running gap):
+  - *reporting / R2*: the dashboard row mixes two cells. It shows the joggle's v_gap 31.50, the flat cell's fast 26.34,
+    and the joggle's in-sample sweep best 22.02 (shown as score 91.99, 9.48 below the verified number). The verdict text
+    still opens "SCREENED ... 32.84", and alignment_claim is the stale 32.84.
+  - *NEW-tolcliff*: the joggle's 1.34-point gain is fitted at a 0.20 mm metal-to-metal running gap. That is the pin-a
+    stack rule's floor, 0.15 + 0.05 mm; the flat cell clears by 0.33. A strap-level build error of +0.1 mm costs 0.28
+    bench / 1.11 held. At +0.2 mm, 25 bench / 24 held poses jam and the claim reads 39.90 / 36.54, against the flat
+    cell's 33.11: a 0.2 mm error flips the ranking by 6.79 points. The skeptic, counting contact as metal touch, puts
+    the cliff at +0.3 mm (34.31).
+    - Cause: the E strap is 3.0 mm thick against a 2.75 mm boss.
+    - Build rule: skim the strap top flush with the boss face inside the knee's sweep. It is not modelled.
+  - *G1* (near-touch, report-only): 7 overhead poses taken on the bench, with lowest metal 0.71-2.96 mm; 5 of them are
+    under 2 mm. Held out, all 8 are under 2 mm and 4 are under 1 mm. 4 of 10 overhead clip frames are now under 1 mm
+    (the flat cell had 0). The gap is 31.50 plain, 34.08 at 1 mm and 59.56 at 2 mm, so 28.06 points sit in the
+    0-2 mm shell.
+  - *NEW-ws-inband*: unscored workspace in-band is 0.817 bench / 0.794 held, against 0.872 scored. 18-20 % of the metal
+    sits above 14 mm (max 29.95 mm). The knee link is 0.656 in band. For comparison, H1 reads 0.867 and the lead 0.868.
+- **slotted-eccentric-pin-knee-3r** (WATCH; 9 upheld; fold_margin and R1 refuted):
+  - *contact_depth / T5*: 16 presses, 95.67 mm summed, against the lead's 20.24 mm (x4.73); x2.24 per pose held out.
+    The deepest is 34.90 mm at hub 3's crown, with the whole J3 end 21-35 mm inside the body. Hub 2 makes 8 of the 16.
+  - *continuity / S5*: no flood is on file. The bench-graph upper bound is reach 0.461 -> <= 0.336 (>= 12.50 points).
+  - *sampling*: L2b is 0.23 in band, median 16.6 mm.
+  - *reporting*: sweep 86.82 against the verified 97.04.
+  - *T1*: all 1763 configs searched on the plain gap. At 1 mm it reads 103.66 bench / 101.62 held.
+  - *G1*: 6 / 21 / 128 of 241 taken poses under 1 / 2 / 3 mm.
+  - *S3*: the cuff knee in the name is not modelled.
+- **lowarm-halfring-knuckle-3r** (GAMED: M3, above). Its watches:
+  - *continuity / S5*: the kNN flood reads 19.97 bench and 30.78 held (-8.14 held).
+  - *M5*: the hard pad's true lever is 6.75 mm, not 12.29, so the dwell K play is 0.912 deg, 3.6x the claim's own
+    0.25 gate. It pushes pose 203 (abduction 90 / external rotation 45) 0.10 mm into the skin.
+  - *NEW-inherited-stack*: round 15 lens B pre-registered its pass bar on the clashing layer.
+  - *G4*: the K sub-dyad margin at rest is under 1 deg on 50 of 205 rest bench poses.
+- **deltoid-crest-j3-3r** (WATCH on the 47.86 claim: reporting, T1, G1, R2). The 34.98 re-wear was never ledgered. That
+  is a machinery gap, not a finding about the design.
+- **The lead conecut-knee-knuckle-3r** (WATCH, unchanged from the round-15 plan's list): reporting, T1 (pose 203 taken at
+  0.263 mm), T3 (held th 5.006), NEW-strap-dilution (18.67), M5 (J3 stop), NEW-self-reference, G4.
+
+**Lessons (measured this re-dispatch):**
+1. **The pin knee has a hidden stack constraint at pin a.** The knee link rides tp + RUN - T_LINK = 0.25 mm over the
+   E-strap top.
+   - The verified flat fit was partly steered by a jam, not by skin. At the same parameters, the flat knee jams (136
+     fast); with the stack rule it reads 24.39 fast and 32.50 frozen.
+   - The joggle itself is worth ~1.07 frozen, not the ~5 points estimated from "member 3 to 0.90". Member 3's in-band
+     limit is the E strap (0.85) and the knee link (0.66), not the boss / pad level.
+   - H1 and every pin-knee descendant may carry the same jam bias.
+2. **A fit at a rule floor needs a tolerance probe.** The joggle's 0.20 mm running gap flips its ranking against the
+   flat cell under a 0.2 mm strap error (39.90 vs 33.11).
+3. **Three of the lead family's four shared contacts (205 hub 2, 237 crank, 264 hub K) are dwell poses at K = 0.** No
+   K-law lever reaches them; only 316 (link 2) is a forced pose. Round 13's "clear the four contacts" lens therefore needs
+   metal placement (hub 2, crank, hub K), not a K law.
+4. **Dwell K play is invisible to the score but not to the metal.** It moves the score -0.11 to +0.10 per 0.64 deg, but
+   pose 203 closes at ~0.40 mm per deg.
+   - A dwell hold needs one-sided play <= ~0.29 deg to keep 203 at >= 0.15 mm. On link 1b's planform that means a lever
+     of ~25 mm, or a preloaded hold.
+   - Gate dwell holds on near-touch metal, not on th.
+   - A pad-seat test must require metal on both sides of the lever: only 25 of 133 crank samples are truly over link 1b.
+5. **A fold lever downstream of J2 sweeps J2's whole span.** The slotted eccentric's q2 swings 201.5 deg, so the lever
+   crosses link 1 and hub 1, or it leaves the band.
+   - The slotted eccentric trails its own locked control by 60-96 fast points in every basin.
+   - Its 50-deg lock and the 2-14 mm band conflict on the folded side at every seat tried. At the H1 seats, all 201
+     closing poses collide.
+   - Fold levers belong upstream of J2, on link 1: the knuckle family.
+6. **A local plateau is not convergence.** 424 tries at sigma 0.3-0.5 showed no gain, then one sigma-0.8 restart with
+   emax freed gained 38 gap points in 4 generations. Run a wide restart before any death verdict.
+7. **At the crest seats, fold-free poses and metal clearance trade about one for one.**
+   - With hub 2 in band, closure tops out at 0.81 on the big bench, and the extra closure comes back as part-part and
+     contact poses (fast 37-47).
+   - Overhead skin, not only the fold, sets the overhead. The deepest metal is at elev 150 in the scapular plane,
+     axial -30: 6.93 mm bench, 15.82 mm held.
+   - Routing the neck over hub 2 turned 5 collisions into 4 contacts (36.05).
+   - Even a plain pin 3R has kNN-flood islands: 8 of 218 takes, worth 2.2 points.
+8. **At the cap pole, a ghost lobe that buys kinematic takes in the overhead fold region is worth ~40 % of its count on
+   metal.** The two-lobe law added 15 kinematic takes but only 6 bench / 22 held.
+   - The buildable one-sided optimum sits 1 deg from a K6 collision cliff: cap 57 reads 141, el1 66 reads 133.
+   - The mirror J2 branch holds no basin (70.16 near-touch).
+
+**Machinery gaps found:**
+- The 34.98 deltoid-crest re-wear and the cap-plateau death have no ledger entry.
+- The crest-knee dashboard row mixes cells (R2).
+- The verify template's literal refutation bar ("within 10 of 68.93") is stale; every row since round 4 meets it.
+- The pin-knee family's extra_checks label prints the pad level at tr_a.
+- The lowarm play script marks every pose as not in dwell.
+- The auditor's density check read cell B's density file.
+- The pre-registered envelope selection bench was not available locally, so the joggle was fit on Bench(60,160) fast.
+  Held out (28.45) reads better than the bench (31.50), so no over-fit penalty shows.
+
+**Generation-winner CAD.** Round 14's winner has no L2 CAD yet; nothing for crest-knee-3r is in docs/EVOLUTION.md or
+pipeline/evolution/. Build it at the joggle config:
+- The knee link is machined from solid. Its 3.19 mm step over a 13.26 mm run (13.5 deg) is more than a 3 mm bent bar
+  with a 15 mm inner bend radius can rise there (2.78 mm). State this on the part.
+- The strap top is skimmed flush with the boss face inside the knee's sweep.
+- The knee pins are MR63ZZ pairs, and the knee window [26.64, 153.36] is a physical stop.
+
+Stills on exo-blender-cycles still need the user's separate yes (CLAUDE.md (7)).
+
+**Next focus.** The score is not at 95: the best verified, non-gamed gap is still 18.28, and 95 needs 13.75. Round 15
+(lenses A take-bound table, B lowarm-adjpad, C conecut-sidestep) is in flight. This re-dispatch changes three of its
+inputs:
+- **Lens B's pass bar must move from 18.28 to the buildable level.** That is 18.65, or 19.05 with the true-lever play.
+  The dwell hold must be priced as metal at pose 203 with one-sided play <= ~0.29 deg, with a lever of ~25 mm or a
+  preload counted in cx, and must clear link 1b's J2 plate at stage 1. The pad-seat test must require metal on both
+  sides.
+- **Lens C, or any contact lens, can only move metal.** 205, 237 and 264 are dwell poses. Clearing all four contacts
+  without losing a take is worth about 1 point. Stops that turn a contact into a fold do not count.
+- **Lens A's table gets the crest row:** the cx-0 pin knee reaches 226 metal takes, and the crest no-knee 3R 218.
+
+Round 16 main, once lens A's table is on file:
+1. If the table confirms no 3-joint family reaches 275 metal takes at the legal seats, the lead takes the 3-DOF ceiling
+   to the user as a blocker.
+2. Put the strap-skim rule and the pin-a stack rule into the whole pin-knee family (H1 27.20 and its descendants) and
+   re-fit at cx 0.
+   - Measured worth: the stack rule opened a region the flat fit jammed (136 -> 24.39 fast at equal parameters), worth
+     0.34 frozen at the crest. This is the cheapest test of whether the cx-0 family's numbers are jam-biased.
+3. Make every claim at a rule-floor clearance carry a +0.1 / +0.2 mm tolerance probe, and rank at the probe.
+
 ## Round 15 plan (2026-10-18 ~03:15 UTC, track main, lead verified gap 18.28)
 
 Planner's read at 03:05-03:15 UTC: ROUNDS.md (round 14 results, round 103 plan), FINDINGS.md (round 14; "The fold is
