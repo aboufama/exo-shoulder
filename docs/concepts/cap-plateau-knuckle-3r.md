@@ -180,3 +180,65 @@ real-model ceiling. In the same instrument, the back-seat knuckle is at 277 kine
 - Sweep (every try in order): docs/concepts/sweeps/cap-plateau-knuckle-3r.json.
 - Per-pose dumps (bench + held, both arms of the pairing): docs/concepts/verify/cap-plateau-knuckle-3r_*.json.
 - Preview: docs/concepts/viz/concepts/cap-plateau-knuckle-3r.js (cell C best).
+
+## Audit (2026-10-18, death audit; the death STANDS)
+
+The audit tried to refute the death in three ways: the convergence gate, the model code, and the limiter attribution. It
+also re-ran the claim. Everything was local, niced and single-process. Scripts are in the auditor's scratchpad; the
+upper-bound per-pose dump is docs/concepts/verify/cap-plateau-knuckle-3r_audit_ub_l2neck.json.
+
+**Reproduction.** The frozen C2 best was re-worn on Bench(110,360) EXACT through the model's own `frozen` path (fit
+Bench(60,160) fast, shape frozen). It reads **32.08** to the digit: reach 0.6861 (247/360), follow 0.9818, ib14 0.8232,
+ib10 0.5234, contact 0.0301, why fold 85 / parts 19 / contact 9. The kinematic count also reproduces: 275/360 ws,
+110/110 clips, overhead 18/28.
+
+**Convergence gate.** Recomputed from the sweep over the 344 search rows in time order:
+
+- Near-touch objective: 0.073 / 0.004 / 0.004 score points (second half / last third / top-5 spread). PASSED.
+- Plain gap: 0.57 / 0.32 / 0.33.
+
+The pass is weaker than it looks. The search is a (1+1) local search, and C2 and C3 continue from the previous
+stream's best, so the top-5 configs are neighbours of one point and the spread is degenerate. The only independent
+start is C4, from the 299-kinematic config, and it ended worse (29.47 near-touch). Together with the box ceiling and the
+metal walk-back, the evidence still says the cell has no better basin. The gate is not what carries the death.
+
+**Model and convention checks (no bug found).**
+
+- The fold is read on th = angle(J1, J3) at m = 5 + 0.23, the same as the control and tools/concept_kit.py.
+- K's own dyad stays >= 5 deg from both of its folds by construction.
+- Both arms share the same kit, q search range and omissions.
+- Near-edge parameters: el1 66.59 (box edge 67) and lo 26.38 (edge 26). But 80 of the 85 fold losses sit on the
+  stretched wall, th > cap + a2 - m = 95.3 deg. lo does not move that wall, and the interior a2 / cap optimum shows
+  the box is not binding there.
+
+**Lobe slack (a candidate lever, measured small).** The folded lobe's slack, lo + f - a2 - m = 6.53 deg, loses th in
+[5.23, 8.50]. Kinematically that is 2 ws poses. Setting it to 0 puts every lobe pose exactly on the fold boundary,
+which is numerically ill-posed. It is not a lever.
+
+**The lobe the death calls a ghost carries real takes.** On the folded lobe there are 33 kinematic and 19 real-model
+bench takes (of 247). The law without the lobe (f = None) takes 260/360 kinematic, against 275. So the buildable,
+one-sided version of C is about 4-5 points WORSE than 32.08. The ghost drive flatters C; it does not hide a better
+design.
+
+**The limiter attribution, corrected (new).** The worn shape was re-run with ONLY the link 2 x neck pair exempt from
+K6. Everything else was unchanged: the fit, the over-lift, every other pair and the exact signed distance. The result
+is an upper bound for any re-routing that removes that collision:
+
+- Frozen exact reads **35.65** (WORSE than 32.08). Parts fall 19 -> 5 and contacts rise 9 -> 23; reach is unchanged
+  at 0.6861.
+- All 14 poses the exemption frees already have metal in the skin: -0.34 to -10.77 mm. Six are overhead (elevation
+  150-165) and pose 238 is the deepest.
+- So link 2 x neck is not what loses those poses. Skin proximity at the cap seat with J3 up the arm loses them, and
+  clearing the part collision recovers 0 takes.
+- The row's limiter should read: fold 85 (stretched wall, th > 95.3) plus skin proximity on the overhead /
+  scapular-plane poses where link 2 crosses the neck.
+
+**Verdict of the audit: the death STANDS.** The measured reason, in one line: at the converged best (reproduced at
+32.08 frozen exact, 247/360 takes), 80 of the 85 fold losses are on the stretched wall th > 95.3. The 14 poses behind
+the link 2 x neck collisions are skin contacts anyway (exempting the pair gives 35.65), and 19 takes need the two-lobe
+drive that does not exist. So no fix inside this cell reaches the control (30.59), let alone the 279-take bar or the
+lead (18.28).
+
+The task's refutation bar ("within 10 of the champion's 68.93 on Bench(60,160)") is a round-3 criterion. Every row since
+round 4 clears it, and so does this one (27.13 fast). It does not test this death, which is measured against the
+pre-registered gate 0 and the paired control.

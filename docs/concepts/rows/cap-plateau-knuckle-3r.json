@@ -15,11 +15,11 @@
  "inband10": 0.5234,
  "contact": 0.0301,
  "gap": 32.08,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6861,
+ "v_follow": 0.9818,
+ "v_inband14": 0.8232,
+ "v_inband10": 0.5234,
+ "v_gap": 32.08,
  "n_configs": 351,
  "complexity": 17.5,
  "mechanism": {
@@ -232,5 +232,17 @@
  "limiter": "fold 85 (= the control 86) + link 2 x neck part collisions (19 bench / 53 held vs control 0 / 3): with J3 up the arm (d3 ~100) the neck to BOTTOM starts high on the lateral arm and link 2 sweeps across it under axial rotation (per-pair K6: link2 x neck is the only colliding pair; link 2 over hub K changes nothing). The box holds up to 299 kinematic takes, but the metal search walks back to ~275 (a stream from the 299 config ended at 29.5 near-touch).",
  "note": "Paired fold-ceiling kit (docs/research/fold_ceiling/kit_paired.py) with the K law per cell, m = 5 + 0.23 deg K play inside the fold margin; q 0.97 (the judge control setting; q 1.0 puts the cap J3 ray on the neck: hub 3 / link 2 150-250 mm out, 98.76). Control reproduces the judge (26.24 vs 26.27 fast). Kit omits drive metal and cuff knee in both arms: compare paired only. Selection of C2 among 3 stream bests was on frozen exact (34.25 / 32.08 / 32.73), so held 35.16 is the claim.",
  "doc": "docs/concepts/cap-plateau-knuckle-3r.md",
- "model_file": "docs/concepts/models/cap-plateau-knuckle-3r.py"
+ "model_file": "docs/concepts/models/cap-plateau-knuckle-3r.py",
+ "v_contact": 0.0301,
+ "audit": {
+  "t": "2026-10-18T01:55:00Z",
+  "verdict": "death stands",
+  "reproduced": "frozen exact Bench(110,360) 32.08 to the digit (247/360, why fold 85 / parts 19 / contact 9); kinematic 275/360",
+  "gate": "recomputed near-touch 0.073 / 0.004 / 0.004, plain 0.57 / 0.32 / 0.33: passed, but top-5 spread is degenerate for chained (1+1) streams; the one independent start (C4) ended worse",
+  "lobe": "folded lobe carries 33 kinematic / 19 real-model bench takes; without it 260/360 kinematic (vs 275): the buildable one-sided C is ~4-5 points worse; lobe slack 6.53 deg costs only 2 ws poses",
+  "l2neck_upper_bound": "link2 x neck exempt from K6 only: frozen exact 35.65 (worse), parts 19 -> 5, contact 9 -> 23, reach unchanged 0.6861; all 14 freed poses have metal -0.34..-10.77 mm in the skin (6 overhead): the pair is not the cause, skin proximity is",
+  "limiter_corrected": "fold 85 (80 on the stretched wall th > cap + a2 - m = 95.3) + skin proximity on the overhead / scapular-plane poses where link 2 crosses the neck (the part collision recovers 0 takes)",
+  "dump": "docs/concepts/verify/cap-plateau-knuckle-3r_audit_ub_l2neck.json",
+  "doc_section": "docs/concepts/cap-plateau-knuckle-3r.md \"Audit\""
+ }
 }
