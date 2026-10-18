@@ -3576,7 +3576,7 @@
   "name": "Longer one-sided over-pass relay (PHI 40) on the thin stack: lug coil, band 8, bump 1.2, 1.0 mm shell, L-lug bracket (lugcoil-lbracket as its PHI 35 cell)",
   "family": "one-sided arm-fixed cuff relay on the verified lead (4 joints, over-pass bump)",
   "lens": "round107:A relay-95 (reach term on the bump family; the fallback to the under-pass, run in parallel)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-18T18:48:51Z",
   "source": "round 107 (J7, track jump) judge (docs/concepts/round107_ideation.md)",
   "merged_from": [

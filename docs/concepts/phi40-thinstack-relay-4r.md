@@ -252,3 +252,73 @@ This is a discrete, pre-registered hardware grid, not a CMA run: each wear takes
 
 The grid did not include the axis, the station (ds 31), the carriage width or the band. Those levers belong to the
 parent's grid and were inherited.
+
+## Verification (independent skeptic, 2026-10-18)
+
+Verifier: `docs/concepts/verify/phi40-thinstack-relay-4r-verify.py`. It imports the claim model unchanged, prepares
+its own frozen exact benches (Bench(110,360) and held), wears the pre-registered pick (`pick.json`) and then adds the
+checks the model leaves out. Outputs: `docs/concepts/verify/phi40-thinstack-relay-4r/verifier_*` (claim, held, T5
+per-pose dumps).
+
+**Verdict: VERIFIED at v_gap 14.06** (frozen exact Bench(110,360), chain-only buildable gate; score 94.89). Held out:
+**16.69**. Both reproduce the claim to 0.00, and the extended checks find no new jam and no new contact. The champion on
+the same bench is 75.94 (the risley-turret verifier's champion with the kit checks and 1 mm clearance; this verifier's
+checks are a superset of that family's, and the relay checks do not apply to a design without a relay). Not refuted:
+4 active joints (the cap), 0 passive translations, the relay coordinate held by the CF coil on its zero dowel and
+stopped by its own slot end. The 95 line (13.75) is missed by 0.31. It stays a 4-joint user option (complexity 51.25),
+never a lead.
+
+| reading (frozen exact) | gate (chain-only) | plain | ib14 chain / pooled | reach (ws taken) | contacts | jams |
+|---|---|---|---|---|---|---|
+| claim as modelled, re-run (own prepare) | 14.06 | 13.52 | 0.8946 / 0.9169 | 0.8056 (290) | 17 | 0 |
+| **with X1 + X2 (thin-shell sector) + X3 chord strip** | **14.06** | 13.52 | 0.8946 / 0.9169 | 0.8056 (290) | 17 (+0) | 0 (+0) |
+| held out, with X1 + X2 + X3 chord | **16.69** | 16.02 | 0.8933 / 0.9160 | 0.7878 (750/952) | 48 (+0) | 0 (+0) |
+| red team: carriage rest delta 3.0 (-0.5 deg, claim bench) | 14.01 | 13.52 | 0.8951 / 0.9173 | 0.8056 (290) | 17 (466 deeper: -0.94) | 0 |
+| red team: strip on an arm-fixed guide arc (X3 guide) | 172.40 | - | - | 0.1583 (57) | 17 | +326 lost |
+
+Checks run:
+
+1. **Active DOF and determinacy.** J1, J2, J3 and the relay (a counted 4th joint, the cap). The knee pins sit outside
+   the count, as the user ruled. No passive translation. Min `th` margin 5.000 over 400 taken bench poses (0 below 5)
+   and 5.000 over 952 held. The PHI 40 continuity flood drops 0 relayed poses on either bench.
+2. **Every part at its real size.**
+   - **X1:** every chain part, including the contact-only top and crown sets, is checked against every relay body,
+     bumped as the model bumps them. The shell sector uses the THIN radial band [R_t - 1.0, R_t]: the parent
+     verifier's hard-coded 1.5 would have read the shell 0.5 mm too deep. The coil is checked in the carriage frame.
+   - **X2:** the bracket's top face (+2 mm) is sampled.
+   - Result: 0 new jams on the bench and 0 on held. Closest non-adjacent pairs on taken poses: E strap over the
+     carriage at 1.200 mm (the bump-1.2 build margin holds: 0 poses under 1.2, 255 bench / 578 held under 1.5), E over
+     the shell 1.21, every part vs the lug coil >= 3.2.
+   - **X3 (new hardware the model does not carry): the lug coil's constant-force strip.** The drum rides on the
+     carriage lug at s0 + 7..17, entirely proximal of the 12 mm shell, so the strip has no shell under it. Under
+     tension it runs as a straight chord from an arm-fixed anchor (the drum's phi-0 bottom point) to the drum. Priced
+     as sampled metal at every pose's phi (up to 39.9): **0 skin contacts** (min 1.94 mm bench at 357, 1.30 held at
+     800), 0 chain clearances under 1 mm (min 7.2 mm). It costs 0.00. Two caveats:
+     - The chord sags to r 76.6 at phi 40, 2.5 mm below the shell underside (R_liner 79.1). The cuff liner must be
+       relieved along the strip path, or the strip rides on the liner (friction not priced).
+     - A guided strip does not fit. An arm-fixed guide arc under the strip (top at R_t + h_c) puts the E strap within
+       1 mm on 326 bench poses. The strip must run free.
+3. **Honest pose-taking.** The same 17 contacts as the claim: 12 inherited chain contacts, 4 relayed at phi > 35, and
+   466 on the posterior shell end. All are counted, and no jam is laundered into a lost pose. The T5 per-pose dumps
+   reproduce plain: bench 13.52 -> 13.52, held 16.02 -> 16.02 (`verifier_claim_perpose.json`,
+   `verifier_held_perpose.json`).
+4. **No bench artefact.** CB_EXACT=1 throughout, with this verifier's own prepares. The selection log shows the pick
+   was written on envsel before the claim log was opened (19:50 UTC), and the claim-bench post-pick diagnostics
+   (delta 5.0 13.67, lean 0 13.55) were not used to move the pick.
+
+Red-team findings (none breaks a rule):
+
+- **Low-side delta tolerance is fine.** Delta 3.0 reads 14.01 (0 jams; 466 goes from -0.33 to -0.94 on the shell
+  end). With the claim's delta 5.0 (13.67) and 6.0 (14.02, 5 E-over-carriage jams), the claim bench's no-jam window
+  is at least [3.0, 5.5]. The pick has 0.5 deg of margin below and about 2 deg above before jams.
+- **Contact depth is the optimistic part.** 263 sits -15.37 mm and 459 -13.78 mm deep at phi ~39.5. The depth sum is
+  74.93 mm (x3.70 the lead), and the bench's contact term is blind to depth. That is for the auditor's T5 check (the
+  dumps are on file).
+- **Knee crown vs bracket, 0.52 mm** (pose 370 bench / 752 held). This is the knee link's crown set against the L-lug
+  bracket. It is read as the adjacent 0.15 mm pair (knee link pinned to the pad body through pin b), as the parent's
+  verifier ruled. As a build tolerance it is tighter than the parent's 1.4 mm on taken poses.
+- **1.0 mm slotted shell stiffness is unpriced.** Unsupported, two 4 x 1 mm lips over 75 mm would deflect about 0.6 mm
+  at 5 N mid-span. The claim relies on the liner to carry inward loads. That is plausible but should be shown in the
+  L1 CAD.
+- Inherited and unpriced: R17 with friction (CF 2.0 N vs 1.38-1.78 N), 3 bistable relay poses, and the 2 mm reading
+  with the crown sets.
