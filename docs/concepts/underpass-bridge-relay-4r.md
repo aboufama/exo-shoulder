@@ -162,3 +162,104 @@ which the torso at 119 kills (envsel 16.31).
    hardware price (13.74 -> 13.21 if it clears).
 3. Rigid root: model the arm-band anchor plate as metal and price the band compliance (tip drop vs the 1.2 mm clearance).
 4. Cliff probes owed: delta + 1.5 (the parent's bracket cliff), shell +0.5 mm.
+
+## Verification (independent skeptic, 2026-10-18)
+
+Verifier: `docs/concepts/verify/underpass-bridge-relay-4r-verify.py`. It imports the claim model unchanged, re-wears the
+frozen pick on one prepare per bench (CB_EXACT=1), and adds the checks the model leaves out. Outputs are in
+`docs/concepts/verify/underpass-bridge-relay-4r/verifier_*`.
+
+**Verdict: REFUTED as claimed.** The 13.74 (score 95.00) needs the E strap to pass THROUGH the bridge shell. The
+corrected bridge reads **v_gap 20.60** on frozen exact Bench(110,360) with the extended checks, or 19.74 by the model's
+own jam rule. Held out at the same frozen corrected bridge (R_under 84.222): **24.33** with the extended checks (23.46 by the model rule, against the claim's 16.64; pooled ib14 0.8318, reach 0.7689 (732 taken), 43 contacts, 8 knee-top / bracket jams; `verifier_fixheld`). That is 6.86 worse than the claim, 5.84 worse than the parent offset-shortcar-relay-4r (14.76),
+and also worse than the 3-joint lead (18.28). It is still far better than the champion on the same bench and checks
+(**75.94**, the risley-turret verifier's champion with the kit checks and 1 mm clearance; these checks are a superset of
+that family's). The 95 line is missed by 6.85.
+
+### The finding: the strap is 3 mm thick, and the bridge was placed over its underside
+
+The model's need scan (`need_scan`) and its jam rule (the parent's sector rule) read only `M.rigid` and `M.link_pts`.
+For the E strap these are its **skin-facing underside**. The strap's top face, 3 mm higher, is a contact-only set:
+`(3, rigid["E"] + T_LINK * sn)`, T_LINK 3.0 (the pin-knee kit's line 296, inherited by the lead). Here it is
+`M.contact[23]` on member 3.
+
+- The bridge underside sits at R_under 81.307 = E's underside maximum 80.11 + 1.2.
+- The strap top reaches **r 83.02** in the shell footprint (claim bench pose 179; 83.00 on the fit frames alone).
+- So the top of a 3 mm Ti strap lies up to **1.7 mm inside a 2.5 mm shell** ([81.31, 83.81]).
+- On the claim bench the strap top is inside the shell sector on 131 of 409 evaluated poses, and within 0.5 mm of it on
+  all 409. That makes 396 of 396 taken poses jam. Held: 940 of 942.
+
+The parent offset-shortcar did not have this problem: its bump lifted the contact sets with the strap, and its
+verifier's X1 (which includes the contact sets) found 0 new jams. Removing the bump without moving the top face is what
+created the clash. The claim's "the bridge costs 0 points" is the price of an impossible part.
+
+### Corrected bridge (the model's own placement rule, with every chain set included)
+
+`need_all` runs the same footprint scan (shell: |s - s0| <= 7 and az in [lo - 1, hi + 1] in the arm frame; flange:
+|s - s0| <= 5 and the carriage half-width + 0.8 in the carriage frame). It covers every rigid, link and contact set,
+over the fit kin_ok frames plus the claim bench's ideal-relay takes. Including the claim bench is generous to the design,
+because the bridge is placed on the bench it is read on.
+
+The strap top sets both footprints (shell 83.02, flange 80.70):
+
+- **A (the design's own rule, up_clr 1.2, flange + 3):** R_under **84.222**.
+- **B (the legal minimum, 1.0 mm, flange 1 mm + 1 mm):** R_under 84.022.
+
+| reading (frozen exact Bench(110,360)) | gate | plain | ib14 chain / pooled | relay ib14 | reach (ws taken) | contacts | jams |
+|---|---|---|---|---|---|---|---|
+| claim as modelled, re-run (`verifier_claim` pick) | 13.74 | 13.74 | 0.9012 / 0.9021 | - | 0.7944 (286) | 13 | 0 |
+| claim + X1 (strap top vs shell / flange) | 375.0 | - | - | - | 0 (0) | - | 396 of 396 taken poses lost |
+| **A: R_under 84.222, model rule (`verifier_fix` A)** | 19.74 | 19.74 | 0.9012 / **0.8347** | 0.6626 | 0.7972 (287) | 12 (0 hardware) | 0 |
+| **A + X1 (verified reading)** | **20.60** | 20.60 | 0.9012 / 0.8347 | - | 0.7889 (284) | 12 | +3 (345, 396, 446) |
+| B: R_under 84.022, model rule | 19.06 | 19.06 | 0.9012 / 0.8415 | 0.6871 | 0.7972 (287) | 12 | 0 |
+| B + X1 | 19.92 | 19.92 | 0.9012 / 0.8415 | - | 0.7889 (284) | 12 | +3 |
+| held, A frozen, model rule (`verifier_fixheld`) | 23.46 | 23.46 | 0.9000 / 0.8318 | - | 0.7773 (740) | 43 | 0 |
+| **held, A frozen + X1** | **24.33** | 24.33 | 0.9000 / 0.8318 | - | 0.7689 (732) | 43 | +8 (all knee top vs bracket) |
+
+Where the points go at A + X1:
+
+- in-band 6.53: the raised shell's skin-facing metal is out of band, 66 % in 2-14 mm;
+- reach 11.11;
+- contact 2.96.
+
+The posterior foot no longer touches 466 (0.59 mm), so the pass that the claim described as "hostage to one pose" was
+never the binding issue. The bridge height is.
+
+X1's three extra losses are the knee link's top face (contact set c29, member 6) against the bracket. They read 0.09,
+-0.12 and 0.06 mm by nearest sample - 1 mm against the 0.15 mm adjacent running gap (knee link pinned to the pad
+through pin b). The same three poses read the same at the claimed height, so they do not depend on the bridge. They
+come with the unbumped knee link, and they are resolution-limited (2 mm bracket samples). Without them the corrected
+design reads 19.74 (A) or 19.06 (B).
+
+### Other checks
+
+1. **Active DOF and determinacy.** J1, J2 and J3 plus the relay make 4 counted joints (inside the cap, never a lead).
+   The knee pins sit outside the count, and there are 0 passive translations. The relay coordinate is held by the CF
+   coil on the zero dowel plus the PHI dowel, and K is slaved by the lead's drive. Fold margin (H1 `th`) on the claim
+   bench: min 5.000 deg over 396 taken poses, 0 below 5. Continuity: the PHI 35 flood drops 0 relayed takes. No issue.
+2. **Reproduction.** The claim re-runs exactly (13.74 / 286 takes / 13 contacts; held 16.64 / 740 / 43). T5 dumps
+   recompute 13.73. Corrected dumps:
+   - `verifier_fix_A_up1.2_perpose.json`: 19.74 recomputed, 12 contacts, depth sum 43.23 mm;
+   - `verifier_fix_B_up1.0_perpose.json`;
+   - `verifier_fixheld_A_up1.2_perpose.json`.
+3. **Loaded bridge (diagnostic).** Lowering the shell, foot and flange by the 4 N tip deflection (0.31 mm, an upper
+   bound) puts E's underside under 1 mm at 118 and 163 at the claimed height: 2 more jams. At the corrected height
+   (deflection 0.336) E's underside clears the shell by >= 4.19 mm, so this is moot there.
+4. **CF strip (X3, diagnostic).** The lug coil's strip has no guide surface, because the drum sits proximal of the
+   shell band. Modelled as a straight chord from an arm-fixed anchor (the drum bottom at phi 0) to the drum, with an
+   8 mm strip, it stays >= 8.9 mm from every chain set and >= 1 mm from the skin on every pose. It is not a limiter.
+   It is still unmodelled hardware in the row: the spec's "strip in a 0.15 mm recess on the shell top" is inconsistent
+   with a drum outside the shell band.
+5. **Anchor (not re-read).** The cantilever root moment is 250 N.mm at the corrected height. Nothing models it yet.
+
+### What this means for the relay family
+
+The under-pass does not remove the in-band term. It moves the term from the strap (bump) to the shell. A 3 mm strap
+under a 2.5 mm bridge puts the bridge underside >= 4.2 mm above E's underside. At the -0.016 pooled-ib per mm the
+judge measured, that costs ~0.07 of pooled in-band, ~6.5 gap points: more than the bump's 1.02.
+
+The lever that is still open is a **locally thinned strap**: a 1.5 mm E section under the bridge, if the strap's
+stiffness allows it, would raise R_under by 1.5 instead of 3.0. By the measured slope that reads roughly
+13.74 + 0.016 x 1.5 x 100 ~ 16.1 before X1. That is still above the parent's 14.76 unless the shell's own in-band
+metal is also kept out of the pooled reading. The parent offset-shortcar-relay-4r (14.76, verified) remains the best
+4-joint relay.

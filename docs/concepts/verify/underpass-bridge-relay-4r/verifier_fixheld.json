@@ -1,0 +1,2012 @@
+{
+ "prepare_secs": 326.7,
+ "ideal": {
+  "gap": 16.64,
+  "reach": 0.7773,
+  "follow": 1.0,
+  "inband14": 0.9,
+  "inband10": 0.5726,
+  "contact": 0.0437
+ },
+ "mode": "fix",
+ "bench": [
+  -1,
+  -1
+ ],
+ "A_up1.2": {
+  "rl_fix": 84.222,
+  "summary": {
+   "gate": 23.46,
+   "chain_only": 16.64,
+   "plain": 23.46,
+   "near1": 29.24,
+   "near2": 48.73,
+   "ibc": 0.9,
+   "ib": 0.8318,
+   "ib10": 0.4471,
+   "reach": 0.7773,
+   "fol": 1.0,
+   "con": 0.0437,
+   "ncon": 43,
+   "jams": 0,
+   "ws_taken": 740,
+   "overhead": [
+    19,
+    71
+   ],
+   "by_cause": {
+    "chain": 40,
+    "hardware": 0,
+    "chain+hw": 3
+   },
+   "hwc": [
+    [
+     225,
+     -5.51,
+     -1.4
+    ],
+    [
+     977,
+     -6.28,
+     -4.2
+    ],
+    [
+     1134,
+     -9.3,
+     -1.4
+    ]
+   ],
+   "stack": null,
+   "arc": [
+    -1.45,
+    45.45
+   ],
+   "R_t": 86.722,
+   "shell_min": {
+    "i": 211,
+    "mm": 3.2,
+    "az_rel": 44.8
+   },
+   "bracket": [
+    37.8
+   ],
+   "secs": 466.4,
+   "R_under": 84.222,
+   "tsh": 2.5,
+   "ant": "ii",
+   "postH": 1.5,
+   "hiE": 49.0,
+   "defl": 0.336,
+   "root": 249.6,
+   "parts_min": {
+    "post": {
+     "mm": 5.0,
+     "i": 1140,
+     "pose": [
+      150.0,
+      90.0,
+      -105.0
+     ]
+    },
+    "shell_only": {
+     "mm": 3.2,
+     "i": 211,
+     "pose": [
+      -90.0,
+      15.0,
+      165.0
+     ]
+    },
+    "flange": {
+     "mm": 5.72,
+     "i": 223,
+     "pose": [
+      -90.0,
+      60.0,
+      90.0
+     ]
+    },
+    "bracket": {
+     "mm": 0.68,
+     "i": 223,
+     "pose": [
+      -90.0,
+      60.0,
+      90.0
+     ]
+    },
+    "coil": {
+     "mm": 10.44,
+     "i": 219,
+     "pose": [
+      -90.0,
+      45.0,
+      105.0
+     ]
+    },
+    "car": {
+     "mm": 9.24,
+     "i": 223,
+     "pose": [
+      -90.0,
+      60.0,
+      90.0
+     ]
+    }
+   },
+   "lt1": 28,
+   "lt2": 122,
+   "jam_list": [],
+   "ib_relay": 0.6555,
+   "rl_fix": 84.222
+  },
+  "contacts": [
+   {
+    "i": 224,
+    "kind": "ws",
+    "pose": [
+     -90.0,
+     60.0,
+     105.0
+    ],
+    "phi": 0.0,
+    "min_mm": -3.49,
+    "parts": {
+     "chain": -3.49,
+     "shell": 4.1,
+     "shell_az": -1.4,
+     "car": 8.02,
+     "coil": 8.75,
+     "bracket": 0.08,
+     "flange": 4.59,
+     "post": 4.1,
+     "shell_only": 5.46
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 225,
+    "kind": "ws",
+    "pose": [
+     -90.0,
+     60.0,
+     120.0
+    ],
+    "phi": 0.0,
+    "min_mm": -5.51,
+    "parts": {
+     "chain": -5.51,
+     "shell": 3.14,
+     "shell_az": -1.4,
+     "car": 7.51,
+     "coil": 8.12,
+     "bracket": -0.26,
+     "flange": 3.98,
+     "post": 3.14,
+     "shell_only": 4.63
+    },
+    "cause": "chain+hw"
+   },
+   {
+    "i": 252,
+    "kind": "ws",
+    "pose": [
+     -75.0,
+     60.0,
+     105.0
+    ],
+    "phi": 0.0,
+    "min_mm": -1.6,
+    "parts": {
+     "chain": -1.6,
+     "shell": 4.0,
+     "shell_az": -1.4,
+     "car": 8.3,
+     "coil": 9.27,
+     "bracket": 0.19,
+     "flange": 4.72,
+     "post": 4.0,
+     "shell_only": 5.5
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 392,
+    "kind": "ws",
+    "pose": [
+     -15.0,
+     90.0,
+     30.0
+    ],
+    "phi": 16.4,
+    "min_mm": -2.75,
+    "parts": {
+     "chain": -2.27,
+     "shell": 12.3,
+     "shell_az": 34.2,
+     "car": 15.27,
+     "coil": 18.94,
+     "bracket": 3.68,
+     "flange": 11.6,
+     "post": 15.29,
+     "shell_only": 12.3
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 397,
+    "kind": "ws",
+    "pose": [
+     -15.0,
+     105.0,
+     0.0
+    ],
+    "phi": 6.8,
+    "min_mm": -1.61,
+    "parts": {
+     "chain": -1.52,
+     "shell": 14.21,
+     "shell_az": 35.6,
+     "car": 18.5,
+     "coil": 23.41,
+     "bracket": 5.47,
+     "flange": 15.02,
+     "post": 17.07,
+     "shell_only": 14.21
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 447,
+    "kind": "ws",
+    "pose": [
+     0.0,
+     90.0,
+     30.0
+    ],
+    "phi": 0.0,
+    "min_mm": -0.21,
+    "parts": {
+     "chain": 0.21,
+     "shell": 12.52,
+     "shell_az": 32.9,
+     "car": 17.86,
+     "coil": 23.67,
+     "bracket": 6.08,
+     "flange": 14.28,
+     "post": 16.19,
+     "shell_only": 12.52
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 453,
+    "kind": "ws",
+    "pose": [
+     0.0,
+     105.0,
+     30.0
+    ],
+    "phi": 25.4,
+    "min_mm": -4.7,
+    "parts": {
+     "chain": -3.99,
+     "shell": 12.44,
+     "shell_az": 34.2,
+     "car": 15.13,
+     "coil": 18.03,
+     "bracket": 3.25,
+     "flange": 11.43,
+     "post": 16.61,
+     "shell_only": 12.44
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 455,
+    "kind": "ws",
+    "pose": [
+     0.0,
+     120.0,
+     -30.0
+    ],
+    "phi": 32.2,
+    "min_mm": -4.54,
+    "parts": {
+     "chain": -3.66,
+     "shell": 15.04,
+     "shell_az": 34.2,
+     "car": 17.66,
+     "coil": 20.6,
+     "bracket": 4.47,
+     "flange": 14.15,
+     "post": 16.69,
+     "shell_only": 15.04
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 525,
+    "kind": "ws",
+    "pose": [
+     15.0,
+     105.0,
+     15.0
+    ],
+    "phi": 0.0,
+    "min_mm": -0.86,
+    "parts": {
+     "chain": -0.72,
+     "shell": 14.03,
+     "shell_az": 34.2,
+     "car": 19.38,
+     "coil": 25.19,
+     "bracket": 7.2,
+     "flange": 15.88,
+     "post": 17.79,
+     "shell_only": 14.03
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 528,
+    "kind": "ws",
+    "pose": [
+     15.0,
+     120.0,
+     -15.0
+    ],
+    "phi": 21.1,
+    "min_mm": -2.23,
+    "parts": {
+     "chain": -1.79,
+     "shell": 15.11,
+     "shell_az": 32.9,
+     "car": 18.01,
+     "coil": 21.66,
+     "bracket": 5.2,
+     "flange": 14.44,
+     "post": 17.31,
+     "shell_only": 15.11
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 529,
+    "kind": "ws",
+    "pose": [
+     15.0,
+     120.0,
+     0.0
+    ],
+    "phi": 6.6,
+    "min_mm": -3.21,
+    "parts": {
+     "chain": -3.08,
+     "shell": 14.75,
+     "shell_az": 34.2,
+     "car": 19.21,
+     "coil": 23.81,
+     "bracket": 6.26,
+     "flange": 15.74,
+     "post": 17.88,
+     "shell_only": 14.75
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 531,
+    "kind": "ws",
+    "pose": [
+     15.0,
+     135.0,
+     -30.0
+    ],
+    "phi": 33.3,
+    "min_mm": -11.84,
+    "parts": {
+     "chain": -11.34,
+     "shell": 15.02,
+     "shell_az": 32.9,
+     "car": 17.66,
+     "coil": 20.43,
+     "bracket": 4.05,
+     "flange": 14.16,
+     "post": 16.38,
+     "shell_only": 15.02
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 532,
+    "kind": "ws",
+    "pose": [
+     15.0,
+     135.0,
+     -15.0
+    ],
+    "phi": 18.5,
+    "min_mm": -12.23,
+    "parts": {
+     "chain": -11.58,
+     "shell": 15.03,
+     "shell_az": 32.9,
+     "car": 18.29,
+     "coil": 21.87,
+     "bracket": 5.31,
+     "flange": 14.59,
+     "post": 17.3,
+     "shell_only": 15.03
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 534,
+    "kind": "ws",
+    "pose": [
+     15.0,
+     150.0,
+     -60.0
+    ],
+    "phi": 0.0,
+    "min_mm": -7.08,
+    "parts": {
+     "chain": -7.08,
+     "shell": 13.47,
+     "shell_az": -1.4,
+     "car": 16.68,
+     "coil": 19.2,
+     "bracket": 5.84,
+     "flange": 12.99,
+     "post": 13.47,
+     "shell_only": 13.56
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 604,
+    "kind": "ws",
+    "pose": [
+     30.0,
+     135.0,
+     -15.0
+    ],
+    "phi": 25.9,
+    "min_mm": -9.15,
+    "parts": {
+     "chain": -8.79,
+     "shell": 15.22,
+     "shell_az": 32.9,
+     "car": 17.87,
+     "coil": 21.07,
+     "bracket": 4.94,
+     "flange": 14.34,
+     "post": 16.92,
+     "shell_only": 15.22
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 607,
+    "kind": "ws",
+    "pose": [
+     30.0,
+     150.0,
+     -45.0
+    ],
+    "phi": 0.0,
+    "min_mm": -5.39,
+    "parts": {
+     "chain": -4.53,
+     "shell": 14.14,
+     "shell_az": 22.3,
+     "car": 17.27,
+     "coil": 19.89,
+     "bracket": 6.2,
+     "flange": 13.58,
+     "post": 14.16,
+     "shell_only": 14.14
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 610,
+    "kind": "ws",
+    "pose": [
+     30.0,
+     165.0,
+     -45.0
+    ],
+    "phi": 0.0,
+    "min_mm": -9.13,
+    "parts": {
+     "chain": -8.04,
+     "shell": 13.63,
+     "shell_az": 22.3,
+     "car": 16.85,
+     "coil": 19.47,
+     "bracket": 6.13,
+     "flange": 13.15,
+     "post": 13.79,
+     "shell_only": 13.63
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 676,
+    "kind": "ws",
+    "pose": [
+     45.0,
+     135.0,
+     -15.0
+    ],
+    "phi": 33.1,
+    "min_mm": -5.91,
+    "parts": {
+     "chain": -5.62,
+     "shell": 15.36,
+     "shell_az": 31.6,
+     "car": 18.01,
+     "coil": 20.65,
+     "bracket": 4.36,
+     "flange": 14.53,
+     "post": 16.46,
+     "shell_only": 15.36
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 682,
+    "kind": "ws",
+    "pose": [
+     45.0,
+     165.0,
+     -45.0
+    ],
+    "phi": 0.0,
+    "min_mm": -5.85,
+    "parts": {
+     "chain": -5.35,
+     "shell": 12.75,
+     "shell_az": -1.4,
+     "car": 15.79,
+     "coil": 18.23,
+     "bracket": 5.83,
+     "flange": 12.21,
+     "post": 12.75,
+     "shell_only": 12.75
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 683,
+    "kind": "ws",
+    "pose": [
+     45.0,
+     165.0,
+     -30.0
+    ],
+    "phi": 0.0,
+    "min_mm": -9.86,
+    "parts": {
+     "chain": -8.55,
+     "shell": 13.88,
+     "shell_az": 22.3,
+     "car": 17.13,
+     "coil": 19.81,
+     "bracket": 6.3,
+     "flange": 13.43,
+     "post": 14.13,
+     "shell_only": 13.88
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 752,
+    "kind": "ws",
+    "pose": [
+     60.0,
+     165.0,
+     -105.0
+    ],
+    "phi": 5.4,
+    "min_mm": -0.97,
+    "parts": {
+     "chain": -0.97,
+     "shell": 9.15,
+     "shell_az": 26.3,
+     "car": 12.11,
+     "coil": 14.08,
+     "bracket": 3.79,
+     "flange": 8.86,
+     "post": 10.15,
+     "shell_only": 9.15
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 755,
+    "kind": "ws",
+    "pose": [
+     60.0,
+     165.0,
+     -30.0
+    ],
+    "phi": 0.0,
+    "min_mm": -6.92,
+    "parts": {
+     "chain": -6.25,
+     "shell": 13.01,
+     "shell_az": 22.3,
+     "car": 16.11,
+     "coil": 18.62,
+     "bracket": 6.01,
+     "flange": 12.52,
+     "post": 13.11,
+     "shell_only": 13.01
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 819,
+    "kind": "ws",
+    "pose": [
+     75.0,
+     150.0,
+     -120.0
+    ],
+    "phi": 24.8,
+    "min_mm": -0.18,
+    "parts": {
+     "chain": -0.18,
+     "shell": 10.04,
+     "shell_az": 27.6,
+     "car": 12.61,
+     "coil": 13.47,
+     "bracket": 2.78,
+     "flange": 9.25,
+     "post": 10.65,
+     "shell_only": 10.04
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 820,
+    "kind": "ws",
+    "pose": [
+     75.0,
+     150.0,
+     -90.0
+    ],
+    "phi": 0.0,
+    "min_mm": -0.18,
+    "parts": {
+     "chain": -0.18,
+     "shell": 10.21,
+     "shell_az": 19.7,
+     "car": 13.17,
+     "coil": 15.35,
+     "bracket": 4.43,
+     "flange": 9.84,
+     "post": 10.44,
+     "shell_only": 10.21
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 824,
+    "kind": "ws",
+    "pose": [
+     75.0,
+     165.0,
+     -105.0
+    ],
+    "phi": 20.5,
+    "min_mm": -0.42,
+    "parts": {
+     "chain": -0.42,
+     "shell": 9.64,
+     "shell_az": 27.6,
+     "car": 12.21,
+     "coil": 13.24,
+     "bracket": 2.94,
+     "flange": 8.93,
+     "post": 10.82,
+     "shell_only": 9.64
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 835,
+    "kind": "ws",
+    "pose": [
+     90.0,
+     15.0,
+     -150.0
+    ],
+    "phi": 0.0,
+    "min_mm": -3.55,
+    "parts": {
+     "chain": -3.49,
+     "shell": 6.12,
+     "shell_az": -4.2,
+     "car": 10.75,
+     "coil": 11.66,
+     "bracket": 1.39,
+     "flange": 7.32,
+     "post": 6.12,
+     "shell_only": 7.97
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 891,
+    "kind": "ws",
+    "pose": [
+     90.0,
+     150.0,
+     -105.0
+    ],
+    "phi": 21.0,
+    "min_mm": -0.32,
+    "parts": {
+     "chain": -0.32,
+     "shell": 10.85,
+     "shell_az": 31.6,
+     "car": 13.49,
+     "coil": 14.58,
+     "bracket": 3.36,
+     "flange": 10.11,
+     "post": 11.37,
+     "shell_only": 10.85
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 892,
+    "kind": "ws",
+    "pose": [
+     90.0,
+     150.0,
+     -90.0
+    ],
+    "phi": 4.4,
+    "min_mm": -1.38,
+    "parts": {
+     "chain": -1.38,
+     "shell": 10.88,
+     "shell_az": 21.0,
+     "car": 13.52,
+     "coil": 15.72,
+     "bracket": 4.25,
+     "flange": 10.15,
+     "post": 11.21,
+     "shell_only": 10.88
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 897,
+    "kind": "ws",
+    "pose": [
+     90.0,
+     165.0,
+     -75.0
+    ],
+    "phi": 1.9,
+    "min_mm": -1.79,
+    "parts": {
+     "chain": -1.79,
+     "shell": 10.11,
+     "shell_az": 26.3,
+     "car": 13.25,
+     "coil": 15.64,
+     "bracket": 4.45,
+     "flange": 9.89,
+     "post": 11.02,
+     "shell_only": 10.11
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 906,
+    "kind": "ws",
+    "pose": [
+     105.0,
+     15.0,
+     -165.0
+    ],
+    "phi": 5.6,
+    "min_mm": -4.57,
+    "parts": {
+     "chain": -3.89,
+     "shell": 6.04,
+     "shell_az": -4.2,
+     "car": 11.05,
+     "coil": 12.19,
+     "bracket": 0.16,
+     "flange": 7.51,
+     "post": 6.04,
+     "shell_only": 7.9
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 960,
+    "kind": "ws",
+    "pose": [
+     105.0,
+     135.0,
+     -105.0
+    ],
+    "phi": 23.0,
+    "min_mm": -0.16,
+    "parts": {
+     "chain": -0.05,
+     "shell": 11.98,
+     "shell_az": -1.4,
+     "car": 14.85,
+     "coil": 16.14,
+     "bracket": 3.86,
+     "flange": 11.38,
+     "post": 11.98,
+     "shell_only": 12.08
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 964,
+    "kind": "ws",
+    "pose": [
+     105.0,
+     150.0,
+     -90.0
+    ],
+    "phi": 18.2,
+    "min_mm": -0.87,
+    "parts": {
+     "chain": -0.87,
+     "shell": 11.65,
+     "shell_az": 31.6,
+     "car": 14.39,
+     "coil": 15.6,
+     "bracket": 3.89,
+     "flange": 10.95,
+     "post": 12.16,
+     "shell_only": 11.65
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 965,
+    "kind": "ws",
+    "pose": [
+     105.0,
+     150.0,
+     -75.0
+    ],
+    "phi": 1.5,
+    "min_mm": -1.5,
+    "parts": {
+     "chain": -1.27,
+     "shell": 11.75,
+     "shell_az": 28.9,
+     "car": 14.53,
+     "coil": 17.14,
+     "bracket": 4.9,
+     "flange": 11.07,
+     "post": 12.05,
+     "shell_only": 11.75
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 977,
+    "kind": "ws",
+    "pose": [
+     120.0,
+     15.0,
+     -180.0
+    ],
+    "phi": 10.4,
+    "min_mm": -6.28,
+    "parts": {
+     "chain": -4.62,
+     "shell": 5.99,
+     "shell_az": -4.2,
+     "car": 11.18,
+     "coil": 12.32,
+     "bracket": -0.44,
+     "flange": 7.77,
+     "post": 5.99,
+     "shell_only": 7.87
+    },
+    "cause": "chain+hw"
+   },
+   {
+    "i": 978,
+    "kind": "ws",
+    "pose": [
+     120.0,
+     15.0,
+     -165.0
+    ],
+    "phi": 0.0,
+    "min_mm": -1.33,
+    "parts": {
+     "chain": -1.22,
+     "shell": 6.41,
+     "shell_az": -4.2,
+     "car": 10.94,
+     "coil": 12.08,
+     "bracket": 1.65,
+     "flange": 7.46,
+     "post": 6.41,
+     "shell_only": 8.2
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 1032,
+    "kind": "ws",
+    "pose": [
+     120.0,
+     135.0,
+     -105.0
+    ],
+    "phi": 33.1,
+    "min_mm": -2.05,
+    "parts": {
+     "chain": -1.82,
+     "shell": 13.15,
+     "shell_az": -1.4,
+     "car": 16.21,
+     "coil": 17.6,
+     "bracket": 3.89,
+     "flange": 12.63,
+     "post": 13.15,
+     "shell_only": 13.32
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 1091,
+    "kind": "ws",
+    "pose": [
+     135.0,
+     120.0,
+     -105.0
+    ],
+    "phi": 28.8,
+    "min_mm": -0.34,
+    "parts": {
+     "chain": -0.26,
+     "shell": 13.6,
+     "shell_az": -1.4,
+     "car": 17.77,
+     "coil": 19.43,
+     "bracket": 4.93,
+     "flange": 14.15,
+     "post": 13.6,
+     "shell_only": 14.37
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 1098,
+    "kind": "ws",
+    "pose": [
+     135.0,
+     135.0,
+     -75.0
+    ],
+    "phi": 11.8,
+    "min_mm": -0.5,
+    "parts": {
+     "chain": -0.49,
+     "shell": 14.33,
+     "shell_az": -1.4,
+     "car": 17.2,
+     "coil": 18.69,
+     "bracket": 5.4,
+     "flange": 13.57,
+     "post": 14.33,
+     "shell_only": 14.48
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 1121,
+    "kind": "ws",
+    "pose": [
+     150.0,
+     45.0,
+     -120.0
+    ],
+    "phi": 33.9,
+    "min_mm": -11.13,
+    "parts": {
+     "chain": -9.95,
+     "shell": 9.67,
+     "shell_az": -2.8,
+     "car": 17.9,
+     "coil": 19.74,
+     "bracket": 4.06,
+     "flange": 14.19,
+     "post": 9.67,
+     "shell_only": 11.21
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 1127,
+    "kind": "ws",
+    "pose": [
+     150.0,
+     60.0,
+     -105.0
+    ],
+    "phi": 23.2,
+    "min_mm": -9.94,
+    "parts": {
+     "chain": -9.31,
+     "shell": 11.64,
+     "shell_az": -1.4,
+     "car": 17.86,
+     "coil": 19.54,
+     "bracket": 4.56,
+     "flange": 14.17,
+     "post": 11.64,
+     "shell_only": 13.14
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 1134,
+    "kind": "ws",
+    "pose": [
+     150.0,
+     75.0,
+     -105.0
+    ],
+    "phi": 25.6,
+    "min_mm": -9.3,
+    "parts": {
+     "chain": -8.25,
+     "shell": 12.28,
+     "shell_az": -1.4,
+     "car": 18.65,
+     "coil": 19.99,
+     "bracket": -3.45,
+     "flange": 14.96,
+     "post": 12.28,
+     "shell_only": 13.78
+    },
+    "cause": "chain+hw"
+   },
+   {
+    "i": 1135,
+    "kind": "ws",
+    "pose": [
+     150.0,
+     75.0,
+     -90.0
+    ],
+    "phi": 9.8,
+    "min_mm": -1.07,
+    "parts": {
+     "chain": -0.3,
+     "shell": 13.71,
+     "shell_az": -2.8,
+     "car": 18.38,
+     "coil": 19.83,
+     "bracket": 5.7,
+     "flange": 14.7,
+     "post": 13.71,
+     "shell_only": 15.21
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 1153,
+    "kind": "ws",
+    "pose": [
+     150.0,
+     120.0,
+     -75.0
+    ],
+    "phi": 3.1,
+    "min_mm": -1.09,
+    "parts": {
+     "chain": -1.09,
+     "shell": 15.62,
+     "shell_az": -1.4,
+     "car": 18.7,
+     "coil": 21.06,
+     "bracket": 6.34,
+     "flange": 14.98,
+     "post": 15.62,
+     "shell_only": 15.99
+    },
+    "cause": "chain"
+   }
+  ],
+  "underpass": {
+   "R_under": 84.222,
+   "R_t": 86.722,
+   "tsh": 2.5,
+   "ant": "ii",
+   "postH": 1.5,
+   "postL": 4.0,
+   "hiE": 49.0,
+   "up_clr": 1.2,
+   "skin_R_liner": 79.1,
+   "defl_mm": 0.336,
+   "root_Nmm": 249.6,
+   "rl_fix": 84.222,
+   "supports": [
+    [
+     "post",
+     82.72,
+     84.22,
+     -86.03,
+     -74.03,
+     -103.22,
+     -100.5
+    ]
+   ],
+   "part_min_taken": {
+    "post": {
+     "mm": 5.0,
+     "i": 1140,
+     "pose": [
+      150.0,
+      90.0,
+      -105.0
+     ]
+    },
+    "shell_only": {
+     "mm": 3.2,
+     "i": 211,
+     "pose": [
+      -90.0,
+      15.0,
+      165.0
+     ]
+    },
+    "flange": {
+     "mm": 5.72,
+     "i": 223,
+     "pose": [
+      -90.0,
+      60.0,
+      90.0
+     ]
+    },
+    "bracket": {
+     "mm": 0.68,
+     "i": 223,
+     "pose": [
+      -90.0,
+      60.0,
+      90.0
+     ]
+    },
+    "coil": {
+     "mm": 10.44,
+     "i": 219,
+     "pose": [
+      -90.0,
+      45.0,
+      105.0
+     ]
+    },
+    "car": {
+     "mm": 9.24,
+     "i": 223,
+     "pose": [
+      -90.0,
+      60.0,
+      90.0
+     ]
+    }
+   },
+   "n_metal_lt1_taken": 28,
+   "n_metal_lt2_taken": 122
+  },
+  "xcheck": {
+   "drop": 0.0,
+   "nC": 981,
+   "R_under": 84.222,
+   "R_t": 86.722,
+   "defl": 0.33601586037108877,
+   "clearance_margin_taken": {
+    "lt1": 0,
+    "lt1.1": 0,
+    "lt1.2": 0,
+    "lt1.5": 59,
+    "lt2": 156,
+    "lowest": [
+     {
+      "i": 277,
+      "kind": "ws",
+      "mm": 1.29,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 2.39
+     },
+     {
+      "i": 279,
+      "kind": "ws",
+      "mm": 1.29,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 1.03
+     },
+     {
+      "i": 250,
+      "kind": "ws",
+      "mm": 1.292,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 1.47
+     },
+     {
+      "i": 342,
+      "kind": "ws",
+      "mm": 1.292,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 1.87
+     },
+     {
+      "i": 341,
+      "kind": "ws",
+      "mm": 1.295,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 3.24
+     },
+     {
+      "i": 304,
+      "kind": "ws",
+      "mm": 1.298,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 1.38
+     },
+     {
+      "i": 663,
+      "kind": "ws",
+      "mm": 1.309,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 0.54
+     },
+     {
+      "i": 303,
+      "kind": "ws",
+      "mm": 1.313,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 2.79
+     },
+     {
+      "i": 513,
+      "kind": "ws",
+      "mm": 1.313,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 2.75
+     },
+     {
+      "i": 278,
+      "kind": "ws",
+      "mm": 1.318,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 1.7
+     },
+     {
+      "i": 378,
+      "kind": "ws",
+      "mm": 1.322,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 3.77
+     },
+     {
+      "i": 251,
+      "kind": "ws",
+      "mm": 1.333,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 0.83
+     },
+     {
+      "i": 584,
+      "kind": "ws",
+      "mm": 1.335,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 2.83
+     },
+     {
+      "i": 305,
+      "kind": "ws",
+      "mm": 1.336,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 0.81
+     },
+     {
+      "i": 506,
+      "kind": "ws",
+      "mm": 1.337,
+      "part": "c23:m3",
+      "hw": "shell",
+      "metal": 3.75
+     }
+    ]
+   },
+   "E_under_shell_taken": {
+    "min": [
+     [
+      4.192,
+      277
+     ],
+     [
+      4.192,
+      279
+     ],
+     [
+      4.192,
+      342
+     ],
+     [
+      4.194,
+      250
+     ],
+     [
+      4.196,
+      341
+     ],
+     [
+      4.198,
+      304
+     ],
+     [
+      4.202,
+      378
+     ],
+     [
+      4.203,
+      663
+     ]
+    ],
+    "lt1_1": 0,
+    "lt1_2": 0,
+    "lt1_31": 0,
+    "lt1_5": 0,
+    "n": 942
+   },
+   "extra_jam_rows": [
+    {
+     "i": 610,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -45.0
+     ],
+     "metal_min": -9.13,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.034
+      ]
+     ]
+    },
+    {
+     "i": 683,
+     "kind": "ws",
+     "pose": [
+      45.0,
+      165.0,
+      -30.0
+     ],
+     "metal_min": -9.86,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.252
+      ]
+     ]
+    },
+    {
+     "i": 752,
+     "kind": "ws",
+     "pose": [
+      60.0,
+      165.0,
+      -105.0
+     ],
+     "metal_min": -0.97,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.479
+      ]
+     ]
+    },
+    {
+     "i": 815,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      135.0,
+      -120.0
+     ],
+     "metal_min": 1.14,
+     "why": "",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       0.12
+      ]
+     ]
+    },
+    {
+     "i": 819,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      150.0,
+      -120.0
+     ],
+     "metal_min": -0.18,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.48
+      ]
+     ]
+    },
+    {
+     "i": 820,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      150.0,
+      -90.0
+     ],
+     "metal_min": -0.18,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       0.143
+      ]
+     ]
+    },
+    {
+     "i": 824,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      165.0,
+      -105.0
+     ],
+     "metal_min": -0.42,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.48
+      ]
+     ]
+    },
+    {
+     "i": 887,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      135.0,
+      -120.0
+     ],
+     "metal_min": 0.63,
+     "why": "",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.189
+      ]
+     ]
+    },
+    {
+     "i": 888,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      135.0,
+      -105.0
+     ],
+     "metal_min": 0.97,
+     "why": "",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       0.071
+      ]
+     ]
+    },
+    {
+     "i": 891,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      150.0,
+      -105.0
+     ],
+     "metal_min": -0.32,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.478
+      ]
+     ]
+    },
+    {
+     "i": 892,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      150.0,
+      -90.0
+     ],
+     "metal_min": -1.38,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.478
+      ]
+     ]
+    },
+    {
+     "i": 897,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      165.0,
+      -75.0
+     ],
+     "metal_min": -1.79,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.48
+      ]
+     ]
+    },
+    {
+     "i": 898,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      165.0,
+      -60.0
+     ],
+     "metal_min": 1.67,
+     "why": "",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       0.071
+      ]
+     ]
+    },
+    {
+     "i": 960,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      135.0,
+      -105.0
+     ],
+     "metal_min": -0.16,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.348
+      ]
+     ]
+    },
+    {
+     "i": 964,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      150.0,
+      -90.0
+     ],
+     "metal_min": -0.87,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.48
+      ]
+     ]
+    },
+    {
+     "i": 965,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      150.0,
+      -75.0
+     ],
+     "metal_min": -1.5,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.48
+      ]
+     ]
+    },
+    {
+     "i": 969,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      165.0,
+      -75.0
+     ],
+     "metal_min": 0.24,
+     "why": "",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.48
+      ]
+     ]
+    },
+    {
+     "i": 1032,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      135.0,
+      -105.0
+     ],
+     "metal_min": -2.05,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.479
+      ]
+     ]
+    },
+    {
+     "i": 1091,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      120.0,
+      -105.0
+     ],
+     "metal_min": -0.34,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.4
+      ]
+     ]
+    },
+    {
+     "i": 1092,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      120.0,
+      -90.0
+     ],
+     "metal_min": 1.8,
+     "why": "",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.171
+      ]
+     ]
+    },
+    {
+     "i": 1098,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      135.0,
+      -75.0
+     ],
+     "metal_min": -0.5,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.48
+      ]
+     ]
+    },
+    {
+     "i": 1099,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      135.0,
+      -60.0
+     ],
+     "metal_min": 0.76,
+     "why": "",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.225
+      ]
+     ]
+    },
+    {
+     "i": 1152,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      120.0,
+      -90.0
+     ],
+     "metal_min": 0.88,
+     "why": "",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.48
+      ]
+     ]
+    },
+    {
+     "i": 1153,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      120.0,
+      -75.0
+     ],
+     "metal_min": -1.09,
+     "why": "contact",
+     "jam": [
+      [
+       "c29:m6",
+       "bracket",
+       -0.48
+      ]
+     ]
+    }
+   ],
+   "n_extra_jam": 24,
+   "lost_new": 8,
+   "new_contacts": 0,
+   "strip_near_skin": [],
+   "rescored": {
+    "wear": {
+     "gap": 24.33,
+     "reach": 0.7689,
+     "follow": 1.0,
+     "inband14": 0.8318,
+     "inband10": 0.4471,
+     "contact": 0.044
+    },
+    "ib14_chain_only": 0.9,
+    "gate_gap": 24.33,
+    "ws_taken": 732,
+    "overhead": [
+     17,
+     71
+    ]
+   },
+   "closest": {
+    "c29:m6|bracket": [
+     -0.48,
+     969
+    ],
+    "knee|bracket": [
+     0.201,
+     969
+    ],
+    "c23:m3|shell": [
+     1.29,
+     279
+    ],
+    "c30:m6|bracket": [
+     1.826,
+     969
+    ],
+    "c23:m3|flange": [
+     2.779,
+     1091
+    ],
+    "E|shell": [
+     4.192,
+     342
+    ],
+    "c29:m6|shell": [
+     5.188,
+     969
+    ],
+    "E|flange": [
+     5.766,
+     1091
+    ],
+    "c23:m3|car": [
+     6.014,
+     751
+    ],
+    "c30:m6|shell": [
+     6.562,
+     969
+    ],
+    "c25:m3|bracket": [
+     6.573,
+     969
+    ],
+    "c23:m3|bracket": [
+     6.621,
+     924
+    ],
+    "knee|shell": [
+     6.822,
+     969
+    ],
+    "c25:m3|shell": [
+     7.229,
+     969
+    ],
+    "c24:m3|bracket": [
+     7.626,
+     824
+    ],
+    "boss|bracket": [
+     7.973,
+     969
+    ],
+    "c24:m3|shell": [
+     8.614,
+     969
+    ],
+    "E|bracket": [
+     8.626,
+     1062
+    ],
+    "boss|shell": [
+     8.742,
+     969
+    ],
+    "E|car": [
+     9.01,
+     86
+    ],
+    "c23:m3|coil": [
+     9.52,
+     885
+    ],
+    "c29:m6|car": [
+     9.836,
+     969
+    ],
+    "c23:m3|strip": [
+     10.475,
+     946
+    ],
+    "c25:m3|car": [
+     10.627,
+     969
+    ],
+    "c23:m3|sup_post": [
+     10.743,
+     507
+    ],
+    "c30:m6|car": [
+     10.752,
+     969
+    ],
+    "c25:m3|flange": [
+     10.906,
+     969
+    ],
+    "c29:m6|flange": [
+     11.524,
+     969
+    ],
+    "E|sup_post": [
+     11.602,
+     738
+    ],
+    "c24:m3|flange": [
+     11.876,
+     969
+    ],
+    "knee|car": [
+     11.897,
+     969
+    ],
+    "E|coil": [
+     12.047,
+     885
+    ],
+    "c30:m6|flange": [
+     12.519,
+     969
+    ],
+    "c24:m3|car": [
+     12.529,
+     824
+    ],
+    "E|strip": [
+     12.563,
+     1079
+    ],
+    "boss|flange": [
+     12.571,
+     969
+    ],
+    "knee|flange": [
+     12.678,
+     969
+    ],
+    "boss|car": [
+     12.978,
+     969
+    ],
+    "c29:m6|sup_post": [
+     18.429,
+     683
+    ],
+    "c30:m6|sup_post": [
+     19.398,
+     683
+    ]
+   }
+  }
+ }
+}
