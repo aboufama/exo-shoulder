@@ -251,3 +251,57 @@ on the clash count").
      seat-legal travel or close into contact.
    - Lens 1 ("J0 inside J1's footprint") closes with these numbers: neither stack order (this cell, or the sibling's
      hub 0 on top) and no floating relay comes within 3.9 points of the 3-joint lead.
+
+## Audit (2026-10-18, independent auditor): the death STANDS
+
+The audit tried to refute the death by forgiving everything the verdict rests on. It still holds. The measured reason
+in one line: **with every stack clash forgiven and the riser deleted, the stack's unavoidable in-band dilution (hub 1's
+exposed crescent lifted 13-15 mm onto the wedge, link 1a on hub 1's boss) costs 3.1-7.4 fit-bench points at every
+seat-legal a0, and the relay returns at most 2.8 of them (1.9 at the best seat): the cell's floor is 14.92 fast against the lead's 12.50.**
+
+1. **Convergence gate, recomputed from the sweep file** (149 entries, 122 seat-legal, in order): the best gained 0.14
+   score points over the second half and 0.14 over the last third; the top-5 spread is 0.31 score points (0.84 gap).
+   Converged. The stop windows are enumerated exhaustively per seat, so no CMA run is needed.
+2. **Reproduced through the model's own code.**
+   - Fit bench, q0 = 0, a0 6 / azu 180: 28.73 at r0 49.5 and 29.11 at r0 51 (sweep entries 116 and 68, exact match).
+   - The claim, `CB_EXACT=1 WOB_R0=49.5 ... claim 6 180 0 21` (403 s): **32.92** frozen exact Bench(110,360), reach
+     0.6472 (233/360), follow 0.90, ib14 0.8796, ib10 0.5608, 2 contacts, 42 poses lost to stack clashes (riser 35,
+     hub 0 on hub K 7), overhead 7/28, near-touch 0.072 mm. The ghost and the lead both read 18.28. Identical to the
+     row. These are the row's v_* fields.
+3. **Code review.** The lift h, the cover mask, the riser's height range, the clash pairs (riser and hub 0 are not
+   adjacent, so 1 mm is the right clearance), the contact sampling and the relay composition were checked. No bug that
+   inflates the gap. Two small items, both generous to the design or negligible:
+   - the riser bottom sits at hub K's plate height measured along u1 (55.1); hub K's near rim projects to ~54 mm along
+     u1, so the drawn riser is ~1 mm SHORTER than it must be;
+   - the cover mask of hub 1 is computed at q0 = 0 and reused on relayed poses (1-3 poses).
+4. **The forgiven bound** (`docs/concepts/verify/lead-relay-wobble-4r-audit.py`, results in
+   `docs/concepts/verify/lead-relay-wobble-4r-audit.results.json`). Could a better routing - a flipped hub K, a riser
+   clocked elsewhere, a slimmer drop - remove the clashes and refute the death? The probe sets every stack clash to
+   "never loses a pose" (PART_CLR -inf), deletes the riser, and keeps only what the stack cannot avoid: hub 1 on the
+   wedge (exposed crescent counted), link 1a on hub 1's boss, hub 0's underside and its skin contacts. 288 placements
+   on the fit bench: a0 5-20, azu every 15 deg, r0 derived or set 48.5-53; 38 sat on illegal seats.
+
+   | a0 | best seat-legal placement (azu / r0) | q0 = 0, every clash forgiven | ib14 | + relay, window enumerated | ghost |
+   |---|---|---|---|---|---|
+   | 5 | 225 / 49.0 | 15.60 | 0.869 | 15.60 (relays nothing) | 12.50 |
+   | 6 | 240 / 48.5 | 16.03 | 0.865 | 15.41 | 11.88 |
+   | 8 | 270 / 48.0 | 16.79 | 0.857 | **14.92** (window [-51, 0], 3 relayed) | 10.63 |
+   | 10 | 240 / 47.5 | 17.79 | 0.847 | 17.17 | 11.88 |
+   | 12 | 240 / 48.0 | 18.44 | 0.841 | 17.19 | 11.25 |
+   | 14 | 255 / 47.75 | 19.16 | 0.833 | 17.91 | 11.25 |
+   | 16 | 255 / 48.0 | 19.71 | 0.828 | 18.37 | 11.16 |
+   | 20 | 0 / 52.75 | 19.94 | 0.826 | 17.12 | 9.68 |
+
+   - Lead on the same bench: 12.50, ib14 0.9007. The forgiven floor is above it at every a0, and the dilution grows
+     with a0 (the lobe pushes hub 1's crescent further out) faster than the ghost gain.
+   - Also dropping link 1a's lifted samples (as if it were not skin-facing at all): 14.25 at a0 8 / azu 270.
+   - The original claim seat (a0 6 / azu 180 / r0 49.5) forgiven: 17.32 at q0 = 0, 16.70 with the relay.
+   - The free-sector floating seats (a0 10 / azu 150, a0 12 / azu 135, r0 85-87) forgiven: 25.83 and 26.76. Hub 0 is
+     0 % in band there.
+   - So no routing fix can reach the lead. The clashes the verdict names are real and buildable-relevant, but the cell
+     is dead even without them.
+5. **Not counted (would be gaming).** A skirt hung from the wedge to pull hub 1's crescent samples into band adds metal
+   only to move the in-band average; it would also have to clear hub 0's rim while turning with q0.
+
+**Template note.** The template's round-3 refutation bar (within 10 of 68.93) is passed trivially. The death is judged
+against the 3-joint lead (12.50 fast / 18.28 exact), and it stands.
