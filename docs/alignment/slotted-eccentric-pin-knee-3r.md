@@ -314,3 +314,82 @@ Refuted 4 of 11 (fold_margin, S2, G1, R1); upheld 7.
    Bump VERSION if applied.
 
 **Final verdict: WATCH.**
+
+---
+
+## Skeptic on the 08:45 audit, claim 97.04 (2026-10-18 08:50-09:04 UTC)
+
+Run `skeptic:slotted-eccentric-pin-knee-3r`, rulings in `docs/alignment/slotted-eccentric-pin-knee-3r.rulings.json`
+(this replaces the 02:51 rulings on the old claim; those are in git), ledger entry 2026-10-18T09:03:52Z.
+**Final verdict (computed by `tools/alignment_ledger.py skeptic`): WATCH.** Refuted 2 of 11 (fold_margin, R1);
+upheld 9.
+
+**What this skeptic measured (models unchanged):**
+- An independent exact wear with a new read-only tool, `tools/alignment_slotted_depthparts.py`. It runs the model's own
+  `frozen()`, CB_EXACT=1, niced, 1 process, about 200 s. Output:
+  `docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_skeptic_depthparts.json`.
+  - Result: 97.04, reach 0.4611, follow 0.6818, ib14 0.699, contact 0.0623. That is the claim to the digit.
+  - 16 contact poses, 95.67 mm summed.
+- The same tool attributes each press to a part. The model's `extras()` appends the O20 hub-crown minimum to `B.res`
+  for a pose whose crown is in the skin; the tool attributes that crown to its hub.
+
+  | press (mm) | pose (plane / elev / axial) | parts inside the skin (mm) |
+  |---|---|---|
+  | 34.90 | ws 150 / 120 / -180 | hub 3 crown 34.90, L2b 24.61, neck 21.45, hub 3 face 21.37, pinK 0.91 |
+  | 10.33 | ws -90 / 60 / 135 | L2b 10.33, neck 0.89, hub 3 0.27 |
+  | 7.49, 7.39, 6.55, 5.79, 5.32, 4.09 | ws, planes -15 to 15, elev 60-90 | hub 2 face and crown |
+  | 5.02, 3.82, 1.13 | ws, planes -90 to -45, axial 120-135 | L2b |
+  | 1.14, 0.65, 0.56 | 2 clip, 1 ws | roller stud G |
+  | 1.00, 0.50 | ws | hub 2 |
+
+  - Hub 2 is in 8 of the 16 presses (38.12 mm summed).
+  - The J3 end (hub 3, L2b, neck) makes the 34.90 mm press: several parts are 21-35 mm inside the body at once.
+- Fold margin, recomputed from the per-pose th with the model's own `a2e_of()` and the kit formula: 12.529 deg on the
+  bench (241 taken) and 7.271 held out (255 taken). Both match the dump's `mg` to within 0.001.
+  - The track's upper stop at th 125.75 engages at 6.115 deg of th; the lower stop at 62.25 is at 49.33.
+- The old claim's dumps (git f804972), the bench-graph flood, and the lead's dumps were re-read. Figures are in the
+  rulings below.
+
+**Rulings**
+
+| key | refuted | evidence (short; full text in the rulings file) |
+|---|---|---|
+| contact_depth | no | Re-derived: 16 / 95.67 mm / deepest 34.90, 10 > 3 mm; held 16 / 55.50 / 13.36. The reference is 4 / 20.24 mm on the same 470-pose bench: x4.73, +75.43, past 2x and 5 mm. Without the deepest pose it is still x3.0. The held x0.91 crosses pose sets (1154 lead vs 470); per pose it is x2.24. |
+| continuity | no | No flood for this id: the verify files are the parent's, and the row has no key. The bench-graph bound reproduces (12.50 / 16.11), but it is a bound for the sparse graph only. |
+| fold_margin | **yes** | On file: remeasure `kin.fold_margin_th_min_taken` 12.529 / 7.271. Recomputed to 0.001. Above 5.0, and the stops engage at >= 6.1 deg of th. |
+| sampling | no | Counts are on file now (part-weighted 0.793 vs 0.699, no thin part). The documented < 0.5 trigger still fires with counts: crank 0.356 (median 14.77 mm), L2b 0.226 (most sampled part, median 16.63 mm). |
+| reporting | no | morphs.json sweep_gap 86.82 vs v_gap 97.04 (10.22 > 5). No wear at the 1 mm rule reproduces 86.82; the fit there is 89.42. |
+| T5 | no | Old dumps at f804972: 8 presses / 27.78 mm / deepest 9.92 (71 taken). Now 16 / 95.67 / 34.90 (241 taken). Same harness. The mean press went 3.47 -> 5.98 mm. Hub 2 (in-band 0.00 -> 0.86) now presses on 8 poses. |
+| T1 | no | Sweep: near = 0 on 1746 of 1763 entries and absent on 17; none is 1. The 1 mm cost on file is 103.66 / 101.62 (6 / 11 poses). |
+| G1 | no | Share of taken poses with metal < 1 / 2 / 3 mm: 2.5 / 8.7 / 53.1 % here vs 0.8 / 8.9 / 28.2 % for the lead (held 4.3 / 10.6 / 56.5 vs 1.5 / 8.2 / 25.3). That is 3x the lead at 1 mm and 2x at 3 mm, so the pattern is present. |
+| S5 | no | Missing flood. psi min 62.0 / 61.15 (one branch). The size of the loss is unknown. |
+| S3 | no | Docstring: member 3 is the kit neck. The 17 sampled groups contain no cuff-knee body. |
+| R1 | **yes** | This skeptic's independent exact wear gives 97.04 to the digit (third reproduction; held 93.02 is better). The stale `exact_frozen` / `limiter` describe a worse config (117.68). What remains is labelling, which `reporting` carries. |
+
+**Missed by the auditor (for the next audit; this verdict does not change):**
+1. **The held contact-depth comparison crosses pose sets.**
+   - The lead's held dump is 1154 poses (952 ws + 202 clip); this design's is held_bench(110,360), 470 poses.
+   - Per pose: 55.50 / 470 = 0.118 mm against 60.97 / 1154 = 0.053 mm (x2.24). Scaled to 470 poses, the lead's held
+     sum is 24.83 mm, so the excess is +30.67 mm.
+   - So "held x0.91" understates; at equal pose counts the held wear also reads clearly deeper.
+   - Proposal (a measurement change, not applied): compare depths per pose, or on matched pose sets. On this row it
+     turns held from ok to watch and leaves the verdict the same.
+2. **The new depth comes from hub 2, lowered into the band.**
+   - Hub 2's in-band went 0.00 -> 0.86 between the claims (post lift 0.85 mm).
+   - Hub 2's face or crown now presses on 8 of the 16 contact poses, 38.12 mm summed, up to 7.49 mm. These poses are
+     at plane -15 to 15 and elevation 60-90 (front raise).
+   - This is the T5 trade, and the score cannot see it: the in-band gain is scored and the depth is not.
+3. **The 34.90 mm press is a gross intersection, not one sample.**
+   - At plane 150, elevation 120, axial -180, the whole J3 end is inside the body: hub 3's crown 34.90, L2b 24.61,
+     neck 21.45 and hub 3's face 21.37 mm.
+   - The auditor's re-wear could not attribute it; `tools/alignment_slotted_depthparts.py` now does.
+4. **The eccentric is saturated on a third of the taken poses.**
+   - For th >= 88.8 deg, a2e sits at Amax 81.907 and K at 107.5-108.0 deg: 77 of 241 taken bench poses (87 of 255
+     held). There the chain acts as a plain 3R with a2 81.9.
+   - 6 of the 16 bench presses, 62.69 of the 95.67 mm (the 34.90 mm one included), are in that saturated range.
+   - This is not score gaming. It locates the deep presses where the slot has no authority.
+5. **The S5 bench-graph loss is mostly the graph on the held wear.**
+   - Held has 0.672 neighbours per cell, and 160 of 360 cells have none, so ">= 16.11" says little about the design.
+   - Neither number bounds connected_full. Quote them as graph bounds only.
+
+**Final verdict: WATCH.**
