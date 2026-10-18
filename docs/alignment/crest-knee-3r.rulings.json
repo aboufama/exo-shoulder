@@ -1,0 +1,32 @@
+[
+ {
+  "key": "continuity",
+  "refuted": true,
+  "evidence": "The flood is on file: docs/concepts/rows/crest-knee-3r.json verification.continuity.bench_dropped 0, .held_dropped 0, .grid {poses 1432, kin_ok 959, connected 959, islands 0}, edges 789 tested / 788 passed (171 elevation-0 seeds + 788 = 959); docs/concepts/verify/crest-knee-3r_v_flood_{bench,held}.json bench.dropped [] and connected gap 32.83 / 29.81 = static. Re-run by the skeptic with the verifier's kin()/edge rules imported unchanged and a STRICTER seeding (one rest seed, plane -90 / elev 0 / axial 90, every edge tested incl. the elevation-0 ring): 959 / 959 connected, 0 islands, bench and held drop 0 taken poses (connected 32.83 / 29.81); all 171 elevation-0 nodes are kin-ok and on one knee branch (sgn +1). docs/alignment/remeasure/crest-knee-3r_skeptic_checks.json strict_flood. The tool's 'no flood on file' is a reading gap (c_continuity looks for a top-level 'continuity' key, not row.verification.continuity)."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Upheld. docs/dashboard/data/morphs.json crest-knee-3r: status verified, v_gap 32.84, gap 26.34, sweep_gap 26.34; 32.84 - 26.34 = 6.50 > 5, the documented trigger (tools/alignment_audit.py c_reporting: sg < vg - 5); 100(1 - 26.34/275) = 90.42. docs/concepts/rows/crest-knee-3r.json verdict still opens 'SCREENED, below the lens bar' (c_reporting: vd.upper().startswith('SCREENED')) while status is verified. No rank effect (v_gap is shown and ranks), so a label watch, but the displayed fast number is 6.50 better than the shape wears."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "Upheld, re-derived two ways. (1) From docs/alignment/remeasure/crest-knee-3r_{bench,held}_perpose.json with min(min_mm, cmin) of taken poses under thr counted as contact: bench 32.83 / 36.25 / 57.98 / 93.37 at plain / 1 / 2 / 3 mm (6 / 34 / 77 poses), held 29.81 / 35.40 / 54.70 / 92.22 (10 / 34 / 83); ws elev >= 140 bench 5 / 28 at 0.59, 0.96, 1.23, 1.72, 2.10 mm (lost: fold 11, j3stop 9, contact 3), held 6 / 26 at 0.02-1.45 mm. (2) An independent exact re-wear through the verifier's fit_fast / worn / extra_checks (no dump written): gap 32.84, ws overhead floors 0.59 / 0.96 / 1.23 / 1.72 / 2.10, clip overhead 10 / 10 at 1.08-1.85 mm, ws elev >= 90 32 / 113 (crest-knee-3r_skeptic_checks.json rewear_bench_exact). Shell 57.98 - 32.84 = 25.14 > shell2_watch 15 (TH line 61; near-touch is report-only since 2026-10-17, so watch, not gamed). Wearer cost per ALIGNMENT.md section 1: overhead, the region that matters most, has no taken pose with 2.1 mm or more of clearance. Caveat for the held side: 7 of the 10 held overhead clip frames are copies of claim-bench frames (pose vectors), so only the held ws readings are independent."
+ },
+ {
+  "key": "judgement:NEW-ws-inband",
+  "refuted": false,
+  "evidence": "Upheld. Independent exact re-wear (crest-knee-3r_skeptic_checks.json rewear_bench_exact.ws): 228 taken ws poses, in-band 2-14 0.7931, over 14 mm 0.205, max 27.7 mm; clip 0.8529. Apples to apples on the same Bench(110,360) exact probe harness (n 470, each probe's scored gap = its verified number): ws in-band 0.793 is the lowest of all 18 audited bench probes in docs/alignment/remeasure/*probe*.json (next kneeless-sidecar 0.843; H1 skin-normal-3r-pin-knee 0.867, lead conecut 0.868), and the ws-vs-clip shortfall 6.0 points (held 7.8) is the largest (others 2.3-4.9). No documented threshold exists for this new pattern, so the level rests on the measured outlier; the wearer gets metal 14-28 mm off the arm on a fifth of the unscored workspace metal, past the 14 mm pass line."
+ },
+ {
+  "key": "judgement:P2",
+  "refuted": true,
+  "evidence": "The overlap is real but the claimed effect is the wrong way round on the clean reading. Re-measured from crest-knee-3r_held_perpose.json against concept_bench._poses_all() POSE (5-D vectors rounded 1e-4; dump order checked pose by pose): index match with Bench(60,160) 60 (20 clip, 40 ws) -> 30.88 on 410 (reproduced); vector match 72 (12 more clip frames identical to search frames) -> 30.88 on 398. But the held set also holds 32 clip frames identical by pose vector to the CLAIM bench Bench(110,360) (0 by index; Comb hair, Drink, Raise overhead, Reach high shelf, Reach back pocket, Wash opposite shoulder; clip in-band 0.79). Removing every frame shared with EITHER bench leaves 383 poses at 28.13 (reach 0.6562, clip ib14 0.8805, 5 contacts), 1.68 BETTER than the reported 29.81, not 1.07 worse. So the reported held number does not flatter the design; the honest held is 28.13, not 30.88 (crest-knee-3r_skeptic_checks.json held_overlap_by_pose_vector, held_overlap_parts). No documented line (held_watch 6.0) is crossed either way. The protocol defect itself goes to missed / the held_bench proposal."
+ },
+ {
+  "key": "judgement:R2",
+  "refuted": false,
+  "evidence": "Upheld. docs/dashboard/data/morphs.json crest-knee-3r: gap 26.34, sweep_gap 26.34 (score 90.42) against v_gap 32.84; row best_params' fit_fast gap 26.34 on Bench(60,160) fast is the in-sample number of the same shape that wears 32.84 exact frozen (row exact_frozen.frozen; reproduced by the skeptic's re-wear, 32.84). The other two frozen cells also lead fast in the same order (27.63 -> 33.23, 29.02 -> 37.40, row exact_frozen_others), so the claim was not picked on the claim bench. Rank effect none (leaderboard ranks by v_gap; 26.34 is not the sweep record). Same evidence as 'reporting'; it stands as a display of a number the shape does not hold."
+ }
+]

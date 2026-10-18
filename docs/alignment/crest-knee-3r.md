@@ -193,3 +193,74 @@ these seats reaches it.
 - `docs/alignment/remeasure/crest-knee-3r_held_overlap.json`: the held set split into search and unseen poses.
 - `tools/alignment_crest_knee_adapter.py`: a new file. It gives the model a held wear through the verifier's own
   held_bench, and captures the worn bench so the remeasure and the probe come from one run.
+
+## Skeptic (2026-10-18)
+
+Re-measured from the per-pose dumps, the verifier files, the tool code, and two new runs (models and verifier unchanged,
+imported; local, niced, at most 2 processes):
+
+- an exact re-wear of the frozen claim through the verifier's own `fit_fast` / `worn` / `extra_checks`, with no dump
+  written (`docs/alignment/remeasure/crest-knee-3r_skeptic_wear.py`). It gives 32.84 again.
+- a stricter continuity flood (`docs/alignment/remeasure/crest-knee-3r_skeptic_flood.py`).
+
+Rulings: `docs/alignment/crest-knee-3r.rulings.json`. Numbers: `docs/alignment/remeasure/crest-knee-3r_skeptic_checks.json`.
+
+**Final verdict (ledger): WATCH.** 4 reasons upheld (reporting, G1, NEW-ws-inband, R2), 2 refuted with measurements
+(continuity, P2).
+
+- **continuity: refuted.** The flood is on file:
+  - `rows/crest-knee-3r.json` `verification.continuity`: bench_dropped 0, held_dropped 0, grid 959 / 959 connected,
+    0 islands (171 elevation-0 seeds + 788 passed edges = 959).
+  - `_v_flood_{bench,held}.json`: connected = static (32.83 / 29.81).
+  - A stricter re-run seeded from ONE rest pose and tested every edge, including the elevation-0 ring. It also connects
+    959 / 959 with 0 islands and drops 0 bench and 0 held poses.
+  - All 171 rest nodes are kin-ok and on one knee branch.
+  - The tool's watch is a reading gap: it looks for a top-level `continuity` key.
+- **reporting: upheld.** `morphs.json` shows sweep_gap 26.34 against v_gap 32.84. The 6.50 difference is past the
+  5-point trigger (`c_reporting`), and 26.34 reads as a score of 90.42. The row's verdict still opens "SCREENED" while
+  its status is verified.
+- **G1: upheld.** Re-derived from the dumps and again from the independent re-wear:
+  - Overhead workspace: 5 / 28 taken, at 0.59, 0.96, 1.23, 1.72 and 2.10 mm (held 6 / 26, at 0.02-1.45 mm).
+  - Overhead clips: 10 / 10 taken, at 1.08-1.85 mm.
+  - Near-touch gap: 36.25 / 57.98 / 93.37 at 1 / 2 / 3 mm.
+  - The 1-2 mm shell is 25.14 points, past shell2_watch 15. Near-touch is report-only, so the level is watch.
+  - Caveat: 7 of the 10 held overhead clip frames are pose-vector copies of bench frames. Only the held workspace
+    readings are independent.
+- **NEW-ws-inband: upheld.** The re-wear gives a workspace in-band of 0.7931, with 20.5 % of the metal over 14 mm
+  (max 27.7 mm), against 0.8529 on the clip frames.
+  - On the same exact probe harness this is the lowest workspace in-band of the 18 audited bench probes (next lowest
+    0.843; H1 0.867, the lead 0.868).
+  - Its shortfall to the clip in-band is the largest: 6.0 points on the bench and 7.8 held, against 2.3-4.9 for the
+    others.
+  - No documented threshold exists for this pattern. The level rests on this measured outlier.
+- **P2: refuted.** The overlap is real, but on the clean reading the held number is not flattered:
+  - Index match: 60 search poses in the held set. Pose-vector match: 72. Removing either set gives 30.88 (reproduced).
+  - The held set also holds 32 clip frames that are pose-vector copies of the CLAIM bench Bench(110,360) (0 by
+    index). Their clip in-band is 0.79.
+  - Removing every frame shared with either bench leaves 383 poses at 28.13. That is 1.68 better than the reported
+    29.81, not 1.07 worse.
+  - No documented line is crossed either way.
+- **R2: upheld.** The 26.34 is the fast, in-sample number of the same shape that wears 32.84 frozen exact. The three
+  frozen cells keep the same order fast and exact (26.34 / 27.63 / 29.02 -> 32.84 / 33.23 / 37.40), so the claim was
+  not picked on the claim bench. No rank effect. It overlaps with `reporting`.
+
+### Missed (for the next audit; not counted in this verdict)
+
+1. **The held-out bench copies the claim bench.**
+   - `held_bench()` (= `tools/osn_polish.py`) excludes Bench(110,360) by index, but 32 of its 110 clip frames are
+     identical by 5-D pose vector to claim-bench frames. They come from Comb hair, Drink, Raise overhead, Reach high
+     shelf, Reach back pocket and Wash opposite shoulder.
+   - Another 12 clip frames are identical to search frames beyond the 60 index overlap.
+   - So a part of every "held out" number made this way repeats the bench. That includes 7 of the 10 held overhead
+     clip frames, whose clearances match the bench's to 0.01 mm.
+   - Proposal (a measurement change): exclude by pose vector from both benches. On this row that moves held from
+     29.81 to 28.13.
+2. **The held J3-stop proximity is a search pose.** The 1.0 deg "closest held pose to the J3 stop" is held i 234 (ws
+   15 / 135 / -45), which is a Bench(60,160) search pose.
+   - The window edge sits at that pose's q3' plus j3stop_margin 1.0, the floor of the CMA box.
+   - The nearest held pose the search never saw is 2.42 deg from the stop (bench 4.62 deg).
+   - So the stop is fitted to the search sample's extreme pose with the minimum allowed margin. A real wearer at that
+     pose is 1 deg from a hard stop.
+3. **Not measured (a limitation, not a finding).** The flood treats part-clash and contact poses as passable nodes.
+   The bench has 5 workspace clash poses and 5 workspace contact poses (held 3 and 6). A flood with clash walls would
+   need the full grid evaluated through `M.run`.
