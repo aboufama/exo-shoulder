@@ -3522,3 +3522,207 @@ lead); 95 needs 13.75. This round closed the last two 3-joint seat families the 
   The lead should ask once the table is on file and the jump track's 4-joint ghosts give their like-for-like numbers.
 - B1 (unchanged): m_sub at K rest vs the coupled reading still decides G4 for the whole knuckle family (now measured on
   lowarm too: 50 of 205 rest poses under 1 deg).
+
+## Round 15 plan (2026-10-18 ~03:15 UTC, track main, lead verified gap 18.28)
+
+Planner's read at 03:05-03:15 UTC: ROUNDS.md (round 14 results, round 103 plan), FINDINGS.md (round 14; "The fold is
+two walls"; "Long-stroke K drive, measured"), rows/*.json, catalogue.json, events.jsonl tail (to 03:07:56Z),
+tools/simplicity.py v2.2, tools/env_bench.py, the lead's per-pose and stop-window dumps
+(docs/alignment/remeasure/conecut-knee-knuckle-3r_{bench_perpose,stopwindow}.json). Ledger re-read
+(`tools/alignment_ledger.py latest`, exits by `get`): **gamed** = lowarm-halfring-knuckle-3r (P1, 03:00:45Z),
+dipped-law-groove-knuckle-3r (fold margin 0.184), seed-offset-3r-slides; the lead conecut-knee-knuckle-3r exit 0 WATCH;
+desmo-conecut and desmo-slipper exit 0 WATCH. No bench, judge or kit file changed since round 14's close.
+
+### State
+
+- **Lead (best verified, not gamed): conecut-knee-knuckle-3r 18.28** (score 93.35), frozen exact Bench(110,360), held
+  22.38. Reach 0.7278 (262/360), ib14 0.9012, follow 1.0, contact 0.0106 (4 poses), overhead 8/28. 3 active joints,
+  0 passive translations, cx 18.5. Config: stk 6.0, lE 97.14, lc 24.35, phiE 0.75, phib -91.80, J3 window
+  [-111.90, 122.74].
+  - WATCH reasons (carry into every summary that names it; no lens may buy points the same way):
+    - reporting: the sweep's 12.5 is shown as 95.45;
+    - T1: 16.56 points sit in the 1-2 mm shell, and pose 203 is taken at 0.263 mm;
+    - T3: held th margin 5.006; K play of ~0.23 deg takes it near 4.92;
+    - NEW-strap-dilution: 18.67 at equal strap sampling;
+    - M5: the J3 stop returns 155 N per N.m through MR117 bearing 1;
+    - NEW-self-reference; G4 (B1).
+- **At the lead's number (all WATCH, 3 active, 0 passive translations):**
+
+  | design | verified gap | cx |
+  |---|---|---|
+  | inband-rssr | 18.33 polished | - |
+  | slipper-nose | 18.49 | 18.25 |
+  | trimlug-k165 | 18.51 | - |
+  | roller-longdyad | 18.67 | - |
+  | desmo-slipper | 18.95 | 15.75 |
+  | desmo-conecut | 18.98 | 16.5 |
+
+  - lowarm-halfring 17.96 (cx 16.5) is GAMED: its link-2 lift was picked from 794 configs on the claim bench; held out
+    22.70 vs 22.38; the bench edge is a 0.048-mm graze at pose 316.
+  - Its cell A (half ring + low arm, zr 2.0) ties 18.28 three times (262 takes, 4 contacts, proposer held 22.64) at
+    cx 16.5, but only with a hard pad of 0.638 deg K play (0.292 at 5-10 micron) against the 0.25 gate.
+  - Complexity frontier: H1 pin knee 27.20 at cx 0; crest-knee-3r 32.84 at cx 0 (WATCH: G1 overhead metal at 0.02-2.10
+    mm; ws in-band 0.793); geneva-tail-pinknee 23.57 at cx 12.
+- **95 arithmetic** (gap = 100 (0.90 - ib14)+ + 100 (0.95 - follow)+ + 100 (0.90 - reach)+ + 100 contact):
+  - 95 = 13.75 needs 275/360 takes at zero contact, or 279 at the lead's contact.
+  - Each lead contact pose that becomes a take is worth ~0.54 (one take 0.28 + contact 0.265).
+  - Zero contact at the lead's 262 takes = 17.22, the "in-band / contact ceiling".
+- **Where the lead loses its 98 poses:**
+  - fold 88: 73 on the stretched wall (th 107-176; 64 of them internal rotation >= 90 across the body; the wall is the
+    K drive's stroke and law, dK 52.6 of the 57 cap) and 15 on the folded wall (scapular-plane overhead; a hub-2
+    clearance trade, median need 71 mm);
+  - J3 stop 6;
+  - contact 4: 237 crank -9.42 mm, 205 hub 2 -4.28, 316 link 2 -1.23, 264 hub K -1.17.
+  - The J3 window is already at its edge: the stop-window sweep moves 1 contact into a stop, never a take.
+- **Measured take ceilings at the legal J1 seats (3 DOF):**
+  - Back of shoulder:
+    - plain O20 3R: 250 kinematic;
+    - knuckle, law-only kinematics: 267 at kK 1.96, 272 at 2.3;
+    - knuckle ghosts (ideal drive): 269-271, about 40 cells over rounds 12-13 (proximal-j3 269 at the knee rule);
+    - long-dyad, drive metal deleted, kK 3.0: 18.25 frozen (fold 88 -> 77);
+    - parking_k's ideal-law estimate: 0.775-0.778 at a 75-deg stroke. The real lobe law cannot follow it at
+      PA <= 42.
+  - Cap pole:
+    - plain 3R: 281 kinematic, 267 frozen;
+    - knuckle: cell C 275 kinematic, 247 metal (299 kinematic box -> a metal search walked back to 275);
+    - the lead's seats in the same kit: 277 kinematic, 259 metal.
+  - Deltoid crest: pin knee 228 frozen verified, no knee 218. A joggled knee is bounded at about 25-27 frozen.
+  - Antcrest: hub-2 need 50-400 mm; pin knee 375 with H1's knee (dead).
+  - Floor at 271 takes and zero contact: 14.72.
+- **4-DOF reference (jump track, round 103, every row dead):**
+  - lead-relay-j0-4r: a ghost J0 takes 275 (16.07); real hub 0 + link 0 give 22.18-24.92 (ib14 0.82-0.84), riding
+    25-30 mm over the skin at all 108 legal seats.
+  - backbridge 32.13; wobble 32.92.
+  - cap-nullspace-4r is still modelling: sprung 70.64 vs control 66.26 frozen.
+  - Older rows: minarc-stop-knuckle-4r 18.40 polished / 19.54 verified (cx 32.5); arm-parked-knee-4r 26.71.
+  - Any 4th DOF costs +25 cx.
+- **Dead: do not rescreen.**
+  - Round 14's list: cap-pole knuckle cells A/B/C; crest seat moves (except the joggled knee); the crest no-knee 3R;
+    slotted eccentrics on a J2 crank; link-2 root or whole-bar lifts (radial lifts cost in-band 1:1, 18.41); hard-pad
+    dwell stops; two-lobe ghost K drives.
+  - Plus: back-seat J3 / hub-K / link-2 seat moves (proximal-j3), long-stroke K drives (bell crank and ball links do
+    not park: 23.31 / 27.67), relays under the lead (r103 lens 1).
+- **Complexity arithmetic (tools/simplicity.py v2.2):** spring or flexure +3, catalogue part +0.25, made part +0.5,
+  sliding pair +1. **Any spring preload on cell A reads 16.5 + 3 = 19.5, above the lead's 18.5, so it is dead by
+  arithmetic.** The preload must be spring-free.
+- **Machinery still open (round 14, lesson 11):**
+  - no runner guard against selection on Bench(110,360) or held out (P1);
+  - tools/dash_build.py does not read the honest flag (slotted-eccentric's dishonest 97.45 is shown);
+  - the verify bar is still 68.93 / 75.94 (tools/workflows/exo-screen.js line 24);
+  - row verdicts are not rewritten from the verification block (crest-knee);
+  - the convergence gate passes on one start;
+  - box edges have sat inside rule bounds (end_extra 6 vs 8, +0.64).
+- **Compute:** the farm is CLOSED. Local only, niced, <= 2 processes per agent, OMP_NUM_THREADS=1, judges --jobs 1.
+
+### Lenses
+
+**A. take-bound-3dof (reach: the decisive table and the user's blocker; 1 slot, analysis + ghost fills, <= 90 min).**
+- Write `docs/research/take_bound_3dof.md`, with its script and JSON beside it, from the files on disk.
+  - Rows: one per J1 seat family (back, cap, crest, antcrest) x realisation (plain 3R, knuckle, pin knee).
+  - Columns:
+    - kinematic window takes at the 5-deg th margin;
+    - law-limited kinematic takes, where a K law applies;
+    - best ghost takes (drive metal deleted);
+    - best metal takes, frozen exact Bench(110,360);
+    - best verified non-gamed takes;
+    - the gap floor at zero contact, 100 (0.90 - takes/360);
+    - the gap at that family's measured ib14 / contact.
+  - Every cell is cited to a file. A cell nobody measured is run as a ghost on the paired kit (the crest-seat knuckle
+    with an ideal K law is the known hole), or marked unmeasured with the reason.
+- Add a 4-DOF reference row from round 103: ghost 275 vs real 22.18, and why (hub 0 + link 0 0-2 % in band).
+- Optional, report-only (<= 20 min): a "price of ruling 4" row. Give the kinematic + ghost take bound of the best
+  front / clavicle J1 seat in the knuckle family, so the user's choice has a number. Never a row, a design or a claim.
+- Reconcile parking_k's 0.775-0.778 with the measured 267-272 law cap and 269-271 ghosts, in one paragraph.
+- Write the result to FINDINGS. If no 3-DOF family reaches 275 metal takes, end the doc with the blocker text for the
+  lead, ready to send as a big update: "95 at 3 DOF is measured out of reach at the back-of-shoulder and acromion-top
+  seats". The options, each with its number:
+  - a 4th joint, with the jump track's best like-for-like;
+  - J1 seats beyond ruling 4 (the optional row);
+  - accept the ~17.2 in-band / contact ceiling at 3 DOF.
+- The jump track's 4-joint gates report against this table.
+
+**B. cx-at-lead-spring-free-dwell (complexity at the lead's number; suggested id lowarm-adjpad-knuckle-3r, a NEW row,
+because lowarm-halfring-knuckle-3r is GAMED).** Lowarm cell A's 18.28 at cx 16.5 stands only with a dwell hold <= 0.25
+deg. Two cells, in this order:
+- **A0L: the one-part groove (desmo-conecut with the cap-ring sector inside hub 2's O20, read 18.37) with the low arm.**
+  It has no pad, so it has no play question.
+- **A-adj: half ring + low arm with an assembly-adjusted RIGID pad** (an eccentric pin or locked set screw shims it to
+  zero clearance), built as metal.
+  - Its adjuster and lock are sampled metal (the pad is S3-unsampled today). Each part is counted in cx (+0.25-0.5
+    each).
+  - Measure its J2 drag R17-style at mu 0.17 over the tolerance corners.
+  - Report the near-touch shift of the residual K play at poses 139, 316 and 203, and min th with that play.
+- Pre-register before any run:
+  - **kill:** held out paired worse than the lead by > 0.5; cx > 17.0; a spring preload (19.5 by arithmetic); or
+    residual play > 0.25 deg at any tolerance corner.
+  - **pass:** frozen exact <= 18.28 at cx <= 17.0, held out paired within 0.5 of the lead.
+- Selection: fit on env, select on envsel (tools/env_bench.py), wear frozen exact Bench(110,360) once, claim held out
+  paired against the lead (CI90, P(better)).
+- Restore round 13's open items in the same model:
+  - bind at least 1 deg of K above the held stroke at a_s +-0.1 mm and mu 0.17;
+  - enforce RC_MIN (rc_min 1.0, ridge 0.243 mm);
+  - bring the crank-free worst-tolerance slop under 0.25 (0.27 today);
+  - make the slot end dK_lim >= 46.3 (46.0 today) or prove the bench max 45.62 safe;
+  - model the relief pocket as metal;
+  - carry K play into th.
+- The claim reports plain and near-touch gap, S6 equal-sample in-band for any added metal, the min th margin, and the
+  convergence gate over >= 2 independent starts.
+- If B passes, its config is a Pareto point at the lead's number (2 points simpler). It is not a lead change by itself:
+  the old CI tie rule is withdrawn and the question is with the user.
+
+**C. sideways-contacts (takes + contact on the lead's frozen chain and on B's cell; suggested id
+conecut-sidestep-knuckle-3r).** Only 264 (hub K -1.17 mm, overhead) and 316 (link 2 -1.23) are in reach. Each one
+cleared into a take is worth ~0.54, both ~1.1, to about 17.2 (score ~93.75): a lead change on the plain gap.
+- 237 (crank -9.42) and 205 (hub 2 -4.28) are out.
+- Lateral only, in the skin tangent plane: bar offset, lug or crown trim inside O20, hub phase about its own axis.
+  Radial lifts are dead (lesson 8).
+- Stops that turn a contact into a fold or a J3-stop loss do not count.
+- **Gate 0 (<= 30 min, the frozen-exact per-sample surrogate, ~0.1 s per config):**
+  1. Attribute each contact: the binding part sample, its contact normal, and the lateral direction that frees it.
+  2. Measure mm of skin clearance per mm of lateral move at 264 and 316.
+  3. Measure what the same move costs on envsel poses within 15 deg of them.
+  - The round-13 lesson says 264 binds radially (a +-1.5 mm bar offset moved 129 by <= 0.4 mm). If the lateral gain
+    is under 1.4 mm for 1.5 mm of move, or the move loses a take on envsel, kill at gate 0 with the number.
+  - The gate's Bench(110,360) reading is a kill test only, never a pick.
+- **Lever size:** set on envsel with a pre-registered >= 0.2 mm clearance at the cleared pose. The lead's T1 / lowarm's
+  T1 lesson: 0.014-0.197-mm grazes are not clears.
+- **Claim:**
+  - wear frozen exact once;
+  - claim held out paired against the lead;
+  - report the 1-2 mm shell points and pose 203's distance before and after.
+- **Kill:** held out paired not better than the lead (P(better) < 0.5), or any new contact.
+- Apply the same lever to B's cell if B passes.
+
+**Machinery before any claim (the lead, or the first free slot in this round):**
+- the runner guard refusing a selection scan on Bench(110,360) or held out;
+- tools/dash_build.py reads the honest flag and the penalised objective;
+- the verify bar becomes 18.28 in tools/workflows/exo-screen.js;
+- the row verdict is rewritten from the verification block;
+- the convergence gate needs >= 2 independent starts;
+- box edges equal the rule bounds both ways.
+
+A claim that lands before these must apply each by hand and say so.
+
+### Carried (ideated, never screened)
+
+None. The 22 'ideated' catalogue entries all fall under measured closures:
+- tripods / telescopes / crossed rails: passive translations, or no compact component;
+- lamellae, rings and rolling cones: O20 only; rings >= 72.2;
+- spherical parallel / five-bar loops: seed-spm 193; loop proxies 130-240 points optimistic;
+- strap / tape J2s: no real component at size;
+- offset-axis skin hubs: 3 passive translations.
+
+cap-nullspace-4r is modelling on the jump track. The round-4 picks are done (crest-knee-3r, deltoid-crest-j3-3r,
+slotted-eccentric-pin-knee-3r).
+
+### Elsewhere, not to be duplicated
+
+- cap-nullspace-4r (jump round 103, lens 2; modelling since 02:27Z).
+- The gen-9 desmo-conecut L2 CAD build (pipeline/conformal/param_cad/user_style_desmo.py, uncommitted, the lead's
+  slot). Lens B models a sibling cell in the paired kit and does not touch that CAD.
+
+### Needs the user's say
+
+- The 3-DOF ceiling: lens A's table, then the blocker message.
+- B1 (G4, m_sub at K rest): unchanged.
+- The lead's withdrawn CI tie rule: still with the user.
