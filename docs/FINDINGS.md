@@ -3333,4 +3333,8 @@ second wall as opening K from the scapula side.**
 Any future relay or 4th-joint idea must show its relayed poses clear the skin by >= 2 mm on the lead's REAL metal before
 modelling hardware. Kit-metal clearances run ~4 mm optimistic.
 
+The relay range (PHI) is invisible on Bench(60,160): the ideal relay reads 4.89 there at both PHI 20 and 25. Frozen exact,
+the ideal bound reads 16.39 / 13.78 / 12.37 at PHI 20 / 30 / 45. With the real shell, PHI 30 is WORSE (19.86): the
+longer circular arc touches the skin at arm-down poses.
+
 Files: docs/concepts/armarc-relay-knuckle-4r.md and docs/concepts/verify/armarc-relay-knuckle-4r/.

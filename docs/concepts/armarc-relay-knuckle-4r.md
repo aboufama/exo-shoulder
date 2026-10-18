@@ -275,3 +275,28 @@ lead's seats: the 4 mm liner + 1.5 shell + 0.2 + 1.5 plate stack is 7.2 mm over 
 
 Run time note for verifiers: the hardware path's exact wear (rerecord of 470 poses) took ~49 min wall under load 13-25.
 The ideal path took ~4 min.
+
+### The PHI lever, checked after the kill: closed by the hardware
+
+The fast bench cannot see PHI. The ideal relay reads 4.89 fast at both PHI 20 and PHI 25, because its 160 workspace
+poses never need phi > 20. Bench(110,360) can see it. All rows below are frozen exact at tilt 12 / az 235. They are
+DIAGNOSTICS: PHI read off the claim bench is not a claim (the lowarm-halfring P1 class).
+
+| PHI | ideal relay (no metal): bound | with the slotted shell + carriage | relayed: taken / contact | note |
+|---|---|---|---|---|
+| 20 | 16.39 | **18.01** | 13 / 7 | the fit best |
+| 30 | 13.78 | **19.86** (follow 0.9818, contact 0.0565) | 19 / 12 | the shell arc runs to -56.7 deg |
+| 45 | 12.37 | - | 32 / 13 (ideal) | near-touch 16.49 even with no metal |
+
+At PHI 30 the longer shell touches by itself:
+
+- at arm-down poses: elevation 0, four poses at -0.09 mm;
+- at 460 (150/60/-60): -2.97;
+- on clip frames 83 / 87: -0.35 / -0.45.
+
+12 of 31 relays are contacts. More relay range buys takes only in the ideal model. With the real track, every extra
+degree of arc is skin-facing metal on a circle that fits the arm only near the pad. This is the arm-ctrack / cring
+death again. Dead stands.
+
+Machinery note: the exact hardware wear now makes one distance call per pose for the contact-only parts. It runs in
+548 s, against ~2900 s before, and reproduces 18.01 exactly.

@@ -6206,5 +6206,114 @@
   ],
   "model_v": 2,
   "bench": "Bench(110,360) EXACT, frozen (lead shape from its phi=0 fit on Bench(60,160) fast): kit cell one+30 (long axis), IDEAL relay: no relay metal / lift (bound)"
+ },
+ {
+  "k": 172,
+  "t": "2026-10-18T08:19:51Z",
+  "params": {
+   "PHI": 30,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 0
+  },
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "reach": 0.7917,
+  "follow": 1.0,
+  "contact": 0.0295,
+  "gap": 13.78,
+  "near1": 17.45,
+  "gap_ideal_relay": 13.78,
+  "ib14_chain_only": null,
+  "relayed": {
+   "n": 31,
+   "taken": 23,
+   "contact": 8,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 29.44
+  },
+  "ws_taken": 285,
+  "overhead": [
+   8,
+   28
+  ],
+  "model_v": 2,
+  "bench": "Bench(110,360) EXACT, frozen: PHI 30 at the best axis, IDEAL relay (bound; PHI picked on the claim bench: diagnostic only)"
+ },
+ {
+  "k": 173,
+  "t": "2026-10-18T08:19:51Z",
+  "params": {
+   "PHI": 45,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 0
+  },
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "reach": 0.8167,
+  "follow": 1.0,
+  "contact": 0.0404,
+  "gap": 12.37,
+  "near1": 16.49,
+  "gap_ideal_relay": 12.37,
+  "ib14_chain_only": null,
+  "relayed": {
+   "n": 45,
+   "taken": 32,
+   "contact": 13,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 43.62
+  },
+  "ws_taken": 294,
+  "overhead": [
+   9,
+   28
+  ],
+  "model_v": 2,
+  "bench": "Bench(110,360) EXACT, frozen: PHI 45 at the best axis, IDEAL relay (bound; diagnostic only)"
+ },
+ {
+  "k": 174,
+  "t": "2026-10-18T08:19:51Z",
+  "params": {
+   "PHI": 30,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8912,
+  "inband10": 0.5846,
+  "reach": 0.7667,
+  "follow": 0.9818,
+  "contact": 0.0565,
+  "gap": 19.86,
+  "near1": 23.53,
+  "gap_ideal_relay": 13.78,
+  "ib14_chain_only": 0.8509,
+  "relayed": {
+   "n": 31,
+   "taken": 19,
+   "contact": 12,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 29.44
+  },
+  "ws_taken": 276,
+  "overhead": [
+   8,
+   28
+  ],
+  "model_v": 2,
+  "bench": "Bench(110,360) EXACT, frozen: PHI 30 at the best axis, relay metal on (diagnostic: is the PHI lever real with hardware?)"
  }
 ]
