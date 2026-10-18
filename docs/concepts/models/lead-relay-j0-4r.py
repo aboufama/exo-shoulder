@@ -359,8 +359,10 @@ if __name__ == "__main__":
         out_json = sys.argv[2]; B = M1.B; u1 = M1.D.u[0]
         log = json.load(open(out_json)) if os.path.exists(out_json) else []
         done = {(e["params"]["a0"], e["params"]["azu"]) for e in log}
-        for a0 in (10.0, 15.0, 20.0, 25.0, 30.0, 40.0):
-            for azu in (0.0, 30.0, 45.0, 60.0, 90.0, 120.0, 180.0, 240.0, 270.0, 300.0, 330.0):
+        grid = ([tuple(map(float, x)) for x in json.loads(sys.argv[3])] if len(sys.argv) > 3 else
+                [(a, z) for a in (10.0, 15.0, 20.0, 25.0, 30.0, 40.0) for z in (0.0, 30.0, 45.0, 60.0, 90.0, 120.0, 180.0, 240.0, 270.0, 300.0, 330.0)])
+        for a0, azu in grid:
+            if True:
                 if (a0, azu) in done: continue
                 c = relay_axis(u1, a0, azu); e = dict(k=len(log), t=datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
                                                       params=dict(a0=a0, azu=azu), bench="Bench(60,160) fast")

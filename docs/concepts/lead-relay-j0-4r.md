@@ -87,3 +87,81 @@ See the row file for the full per-pose dump. Section 3 holds the claim numbers.
 
 The relay buys 3.5 points, and carrying it costs 8.3. On the fit bench the window enumeration is exhaustive (99
 (lo, hi) pairs, every breakpoint of the per-pose q0 set), so the sweep over the window is converged by construction.
+
+### Seat scan with real metal, fit bench (best window per seat, picked there)
+
+All fit-bench numbers. Lead alone: 12.50. Hub 0's r0 is derived per seat.
+
+| seat a0 / azu | r0 (mm) | window | real gap | ghost | ib14 | note |
+|---|---|---|---|---|---|---|
+| 5 / 30-60 | 87.5-88.5 | [0, 0] | 16.96-17.13 | 12.50 | 0.854 | no relay closes the chain: J0 is too close to J1 to help |
+| 7.5 / 30 | **65.5** | [-56, +9] | 14.22 | 9.37 | 0.858 | the lowest hub of the scan (~17-20 mm over the skin) |
+| **10 / 45** | 88.0 | [-60, +42] | **14.03** | 8.02 | 0.840 | best real seat on the fit bench |
+| 10 / 330 | 74.5 | [-56, +57] | 14.86 | 9.90 | 0.850 | |
+| 20 / 45 (the ghost's seat) | 78.5 | [-59, +18] | 17.37 | 9.54 | 0.817 | |
+| 30 / 0-90, 270-330 | 81-120.5 | - | 22.4-25.4 | 9.8-11.2 | 0.74-0.79 | link 0 grows with a0 |
+| 40 / 0-45 | 92-98.5 | - | 24.6-27.6 | 8.4-11.3 | 0.74 | |
+| 15-30 / 120-240 | - | - | - | - | - | J0 seat rule fails |
+
+The full table is the sweep file. On top of the 11 x 6 grid there is a 14-seat refinement around a0 10 and a 48-seat
+random sample in a0 5-15. **Hub 0 never comes into band**: r0 is 65.5-120.5 mm over every legal seat, against a skin
+on c at 45-57 mm. The reason is structural:
+
+- J1 turns the whole distal chain about u1, so hub K (15-33 mm off u1, crown about 67 mm from GH), hub 2 (31-46 mm off
+  u1), L1b and the crank sweep an annulus around J1.
+- Any grounded hub whose axis is 7-40 deg off J1's sits in that annulus. It can only ride above it.
+- Below a0 ~5 the relay stops helping: no relayed pose closes.
+
+## 3. The claim: exact Bench(110,360), frozen lead, window from the fit bench
+
+| seat | window (fit bench) | REAL gap | reach (ws/360) | ib14 | contacts | ghost | hub 0 over the skin |
+|---|---|---|---|---|---|---|---|
+| lead alone, 3 joints (verified) | - | **18.28** | 0.7278 (262) | 0.9012 | 4 | - | - |
+| 20 / 45 (the ghost's seat) | [-59, +18] | **24.92** | 0.7639 (275) | 0.8171 | 12 | 16.07 | median 28.8 mm, min 18.1 |
+| 10 / 45 (best fit seat) | [-60, +42] | **22.18** | 0.7583 (273) | 0.8404 | 8 | 16.22 | median 40.5 mm, min 30.4 |
+| 7.5 / 30 (lowest hub) | [-56, +9] | A7GAP | A7REACH | A7IB | A7CT | A7GHOST | A7HUB |
+
+Overhead stays 8/28 at every seat: no overhead pose is relayed. Follow stays 1.0.
+
+**Ghost check.** The zero-size J0 composed from the same records gives 16.07 at a0 20 / azu 45, inside the judge's
+15.78-15.90 class. The 0.17 difference is the window: the judge's [-29, +18] was fitted on the claim bench, and this one
+was picked on the fit bench. At q0 = 0 with hub 0 stripped, the composition returns the lead's 18.28 exactly.
+
+**Where the points go (a0 20 / azu 45).**
+
+- **Relays.** 30 ws poses the lead loses have a feasible q0. 23 fall inside the window, 7 are on the stops.
+  - 15 are taken:
+    - 11 across the body (plane 60-150, internal rotation, axial -75 to -120): the stretched class at the K drive's
+      stroke wall, q0 -3 to -58;
+    - 3 behind the scapular plane (plane -90 to -30, axial +120 to +135), q0 -21 to -25;
+    - 1 folded-class pose (plane 30, elev 105, axial 0) at q0 +18. It is taken at 0.05 mm from the skin.
+  - 8 are skin contacts: the relayed chain drives L2 / E into the skin, with metal 0.6-5.7 mm deep.
+  - Net: +13 ws, +8 contacts, -2.2 points from the relay.
+- **Metal.** Hub 0 and link 0 add 101 skin-facing samples per pose, all 18-40 mm over the skin. They are 0 % in band
+  and take ib14 from 0.9012 to 0.8171: **+8.4 points.**
+- **Jams.** Hub 0 / link 0 clash with the lead's chain on 2 claim-bench poses that the lead takes at q0 = 0 (hub K
+  1.9 mm into hub 0's keep-out, link 0 1.6 mm). r0 was derived on the fit bench, so clearing these would lift hub 0
+  further.
+
+## 4. Red team of my own best configuration (a0 10 / azu 45, 22.18)
+
+- **The pose that jams.** At the ghost's seat, 2 clip / ws poses the lead takes are lost to hub K entering hub 0 /
+  link 0's keep-out: the fit-bench r0 is not enough on the claim bench. At a0 10 / azu 45 hub 0 clears by 14.5 mm and
+  link 0 by 7.0 mm, but only because the hub floats 40 mm over the skin.
+- **The point that pinches.**
+  - The near-touch minimum over taken poses is 0.054-0.072 mm. That is the lead's own pose-203 class (T1 WATCH),
+    unchanged.
+  - The relays add 4 taken poses within 1 mm of the skin at a0 20: pose 259 at 0.05 mm (plane 30, elev 105, axial 0),
+    340 at 0.44, 369 at 0.45, 446 at 0.93.
+  - Under the near-touch rule the relay's gain shrinks further.
+- **The optimistic number.**
+  - Both "real" numbers are optimistic, because:
+    1. policy (ii) assumes the spring finds the least-|q0| closing state quasi-statically;
+    2. the continuity flood (no J0 jump > 10 deg per 2-deg edge) was not run, and connected reach can only be <=
+       static;
+    3. the K-drive's stroke wall now carries the arm's push into J0. At the window end that is about 0.10 N m of
+       spring torque, or ~13 N at the slipper nose: small, but a new load path through the lead's M5 WATCH.
+  - None of these can bring 22.18 under the 17.5 bar.
+- **Gaming check (auditor's eye).** The window was never picked on the claim bench. Relayed skin hits stay contacts.
+  Parts clashes caused by hub 0 lose the pose; they are not dropped. Hub 0's samples are counted in in-band with the
+  same 1 / 4 mm2 density as the lead's hubs (25 exposed underside samples + the bar's 46-76).

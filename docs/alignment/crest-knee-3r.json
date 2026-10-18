@@ -1,0 +1,177 @@
+{
+ "id": "crest-knee-3r",
+ "status": "verified",
+ "v_gap": 32.84,
+ "complexity": 0.0,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "dominance: cannot compare with conecut-knee-knuckle-3r at 2 mm",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 26.34 (score 90.42) sits 6.50 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 32.84
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 26.34 -> verified 32.84 (+6.50)",
+   "fast": 26.34,
+   "verified": 32.84,
+   "drop": 6.5
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 32.84: bench 5 contact poses, sum 6.4 mm, deepest 2.77 mm at ['ws', 75.0, 90.0, 15.0], 0 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (-13.84 mm, x0.32); held 6 contact poses, sum 4.8 mm, deepest 1.63 mm at ['ws', 135.0, 135.0, -45.0], 0 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-56.17 mm, x0.08)",
+   "depths": {
+    "v_gap 32.84": {
+     "bench": {
+      "n": 5,
+      "sum_mm": 6.4,
+      "max_mm": 2.77,
+      "n_deeper3": 0,
+      "overhead140": 3,
+      "deepest": [
+       "ws",
+       75.0,
+       90.0,
+       15.0
+      ],
+      "gap": 32.84,
+      "src": "docs/alignment/remeasure/crest-knee-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        6.4
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 6,
+      "sum_mm": 4.8,
+      "max_mm": 1.63,
+      "n_deeper3": 0,
+      "overhead140": 1,
+      "deepest": [
+       "ws",
+       135.0,
+       135.0,
+       -45.0
+      ],
+      "gap": 29.81,
+      "src": "docs/alignment/remeasure/crest-knee-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        4.8
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 32.84",
+     "wear": "bench",
+     "sum": 6.4,
+     "ref_sum": 20.24,
+     "excess": -13.84,
+     "ratio": 0.32,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 32.84",
+     "wear": "held",
+     "sum": 4.8,
+     "ref_sum": 60.97,
+     "excess": -56.17,
+     "ratio": 0.08,
+     "watch": false
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.331 deg (verification.held.crest.th_margin_min_taken; 7 readings)",
+   "min_margin": 5.331,
+   "where": "verification.held.crest.th_margin_min_taken"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 0.0 vs row 0.0",
+   "recomputed": 0.0,
+   "row": 0.0
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 26.34 (score 90.42) sits 6.50 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/crest-knee-3r_v_flood_held.json",
+  "docs/concepts/verify/crest-knee-3r_v_flood_bench.json",
+  "docs/concepts/verify/crest-knee-3r_v_held_frozen.json",
+  "docs/concepts/verify/crest-knee-3r_v_bench_frozen.json"
+ ],
+ "git": "9952912",
+ "tool_version": "2026-10-17.6",
+ "t": "2026-10-18T02:09:06Z"
+}

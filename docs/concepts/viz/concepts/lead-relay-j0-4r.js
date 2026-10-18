@@ -1,12 +1,13 @@
 /* lead-relay-j0-4r at its claimed configuration: the verified lead conecut-knee-knuckle-3r UNCHANGED from J1 to the cuff
  * (geometry below is the lead's own viz export) carried by a FOURTH counted joint J0: an O20 v5 hub 0, grounded on a post of
- * the scapula handler, axis c through GH at a0 20 deg from J1's axis (azimuth 45 in u1's frame), its underside at r0 78.5 mm
- * (the lowest that clears the skin by 2 mm and the lead's whole sweep by 1 mm on the fit bench: ~30 mm over the skin).
- * Link 0 = a flat 12 x 3 Ti bar under hub 0's rotor plate + a 14.3 mm turned standoff post on J1's housing crown.
- * J0 is spring-centred (double-leg torsion spring, preloaded against a base dowel) with own-angle dowel stops [lo, hi]
- * = [-59, +18] (picked on Bench(60,160)). Policy (ii): q0 = 0 wherever the lead's chain closes; else the least |q0| in
+ * the scapula handler, axis c through GH at a0 10 deg from J1's axis (azimuth 45 in u1's frame; the best real-metal seat
+ * of the scan), its underside at r0 88 mm (the lowest that clears the skin by 2 mm and the lead's whole sweep by 1 mm on
+ * the fit bench: ~40 mm over the skin). Link 0 = a 23.8 mm turned standoff post on J1's housing crown + a flat 12 x 3 Ti
+ * bar under hub 0's rotor plate. J0 is spring-centred (double-leg torsion spring, preloaded against a base dowel) with
+ * own-angle dowel stops [lo, hi] = [-60, +42] (picked on Bench(60,160)). Policy (ii): q0 = 0 wherever the lead's chain closes; else the least |q0| in
  * the window at which it closes with the J0-J1-J3 sub-chain >= 5 deg from its fold (the model's relay_candidates).
- * Numbers: docs/concepts/rows/lead-relay-j0-4r.json (fit bench real 17.37 / ghost 9.54; claim on exact Bench(110,360)).
+ * Numbers: frozen exact Bench(110,360) REAL 22.18 (ghost 16.07-16.22; the 3-joint lead 18.28); a0 20 / azu 45 (the ghost's
+ * seat) 24.92. DEAD (Gate 0, > 17.5): hub 0 cannot come into band at any legal seat. Row: docs/concepts/rows/lead-relay-j0-4r.json.
  * Model: docs/concepts/models/lead-relay-j0-4r.py. 4 counted joints (the user prefers 3), 0 passive translations. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;
@@ -21,7 +22,7 @@
   const cb = x => Math.cos(x * D2R), sb = x => Math.sin(x * D2R);
   /** physical J2 stop: th (deg) inside [thLo, thHi] -> K on stop A (state 0); else J2 locked on its q2 stop, K opens */
   const dot = V.dot;
-  const RL = { a0: 20, azu: 45, lo: -59, hi: 18, r0: 78.5, post: 14.3 };
+  const RL = { a0: 10, azu: 45, lo: -60, hi: 42, r0: 88.0, post: 23.8 };
   const cAx = (() => { const u1 = u[0], ef = V.unit(V.cross(u1, [0, 1, 0])), ff = V.cross(u1, ef);
     return V.unit(V.add(V.scale(u1, cb(RL.a0)), V.add(V.scale(ef, sb(RL.a0) * cb(RL.azu)), V.scale(ff, sb(RL.a0) * sb(RL.azu))))); })();
   let RC = M.I3();
@@ -113,7 +114,7 @@
   const closes = (q, ctx) => { const r = C.residual(q, ctx); return Math.max(...r.map(Math.abs)) <= 0.5; };
   const solveC = (ctx, qPrev) => solve(ctx);
   const C = {
-    id: 'lead-relay-j0-4r', name: 'Spring-centred J0 relay (O20 hub 0 on a handler post, ~30 mm proud) under the lead conecut-knee-knuckle-3r, frozen (4 counted joints)',
+    id: 'lead-relay-j0-4r', name: 'Spring-centred J0 relay (O20 hub 0 on a handler post, ~40 mm proud) under the lead conecut-knee-knuckle-3r, frozen (4 counted joints)',
     dof: { active: 4, passive: 4 },   // J0 (spring-centred, counted) + J1 J2 J3; K, bell crank, knee pins a / b passive   // K, bell crank, knee pins a and b (the roller is gone)
     params: P,
     q0: ctx => solve(ctx),
@@ -138,7 +139,7 @@
       const arm = p => M.mulv(ctx.H, p), padC = arm(V.madd(G.Bm, sn, G.tr + G.tp / 2)), padN = M.mulv(ctx.H, sn), lat = arm([G.Bm[0], -150, 50]);
       return [
         { kind: 'plate', role: 'fixed-scapula', name: 'scapula-handler post top (hub 0 stator bolts here)', c: G0(V.scale(cAx, RL.r0 + hub + 1.5)), z: G0(cAx), x: ctx.attach.scapDir([1, 0, 0]), size: [24, 24], t: 3 },
-        { kind: 'hub', role: 'active', name: 'J0 hub 0 (O20 v5, counted, spring-centred, dowel stops ' + RL.lo + ' / ' + RL.hi + ' deg; underside r0 ' + RL.r0 + ' mm, ~30 mm over the skin)', c: G0(V.scale(cAx, RL.r0)), axis: G0(cAx), r: rad, h: hub },
+        { kind: 'hub', role: 'active', name: 'J0 hub 0 (O20 v5, counted, spring-centred, dowel stops ' + RL.lo + ' / ' + RL.hi + ' deg; underside r0 ' + RL.r0 + ' mm, ~40 mm over the skin)', c: G0(V.scale(cAx, RL.r0)), axis: G0(cAx), r: rad, h: hub },
         { kind: 'link', role: 'link', name: 'link 0 standoff post (turned, r 6) on J1 housing crown', a: W(crown1), b: W(postTop), r: 6 },
         { kind: 'link', role: 'link', name: 'link 0 flat bar (12 x 3 Ti) under hub 0 rotor plate', a: W(postTop), b: W(barEnd), r: 3 },
         h1,

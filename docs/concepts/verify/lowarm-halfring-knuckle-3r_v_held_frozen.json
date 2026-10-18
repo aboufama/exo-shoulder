@@ -1,0 +1,1186 @@
+{
+ "wear": "held",
+ "frozen": {
+  "gap": 22.7,
+  "reach": 0.6912,
+  "follow": 1.0,
+  "inband14": 0.8967,
+  "inband10": 0.5672,
+  "contact": 0.0149
+ },
+ "fit_fast": {
+  "gap": 13.39,
+  "reach": 0.7688,
+  "follow": 1.0,
+  "inband14": 0.8973,
+  "inband10": 0.5666,
+  "contact": 0.0,
+  "l2": {
+   "n": 183,
+   "clear_min": 14.19,
+   "lost": 0
+  }
+ },
+ "why": {
+  "fold": 262,
+  "slide": 0,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 13
+ },
+ "overhead": {
+  "ws": 71,
+  "taken": 19
+ },
+ "near1": 25.33,
+ "near2": 37.12,
+ "minmetal": 0.33,
+ "l2": {
+  "n": 860,
+  "clear_min": 12.33,
+  "lost": 0
+ },
+ "dK_taken_max": 45.88,
+ "parts_pairs": {},
+ "mode": "exact",
+ "n": 1154,
+ "n_taken": 860,
+ "contacts": [
+  {
+   "i": 224,
+   "kind": "ws",
+   "plane": -90.0,
+   "elev": 60.0,
+   "axial": 105.0,
+   "mm": -3.49
+  },
+  {
+   "i": 225,
+   "kind": "ws",
+   "plane": -90.0,
+   "elev": 60.0,
+   "axial": 120.0,
+   "mm": -5.51
+  },
+  {
+   "i": 252,
+   "kind": "ws",
+   "plane": -75.0,
+   "elev": 60.0,
+   "axial": 105.0,
+   "mm": -1.6
+  },
+  {
+   "i": 447,
+   "kind": "ws",
+   "plane": 0.0,
+   "elev": 90.0,
+   "axial": 30.0,
+   "mm": -0.21
+  },
+  {
+   "i": 525,
+   "kind": "ws",
+   "plane": 15.0,
+   "elev": 105.0,
+   "axial": 15.0,
+   "mm": -0.86
+  },
+  {
+   "i": 534,
+   "kind": "ws",
+   "plane": 15.0,
+   "elev": 150.0,
+   "axial": -60.0,
+   "mm": -2.43
+  },
+  {
+   "i": 607,
+   "kind": "ws",
+   "plane": 30.0,
+   "elev": 150.0,
+   "axial": -45.0,
+   "mm": -1.53
+  },
+  {
+   "i": 610,
+   "kind": "ws",
+   "plane": 30.0,
+   "elev": 165.0,
+   "axial": -45.0,
+   "mm": -9.82
+  },
+  {
+   "i": 682,
+   "kind": "ws",
+   "plane": 45.0,
+   "elev": 165.0,
+   "axial": -45.0,
+   "mm": -1.06
+  },
+  {
+   "i": 683,
+   "kind": "ws",
+   "plane": 45.0,
+   "elev": 165.0,
+   "axial": -30.0,
+   "mm": -10.39
+  },
+  {
+   "i": 755,
+   "kind": "ws",
+   "plane": 60.0,
+   "elev": 165.0,
+   "axial": -30.0,
+   "mm": -1.89
+  },
+  {
+   "i": 835,
+   "kind": "ws",
+   "plane": 90.0,
+   "elev": 15.0,
+   "axial": -150.0,
+   "mm": -3.55
+  },
+  {
+   "i": 978,
+   "kind": "ws",
+   "plane": 120.0,
+   "elev": 15.0,
+   "axial": -165.0,
+   "mm": -1.33
+  }
+ ],
+ "v1_fit_gates": {
+  "desmo_fail": [],
+  "dK_lim": 46.0,
+  "why_lim": "slot-end",
+  "dK_lim_parent": 64.5,
+  "why_lim_parent": "law",
+  "pa_eff_horn": 33.0,
+  "pa_eff_crank": 23.1,
+  "stage1_linear_lim_by_gate": {
+   "pitch": null,
+   "pa_pin": 58.0,
+   "pa_cap": 0.0,
+   "drift": null,
+   "radius": 0.75
+  },
+  "stage1_pa": {
+   "pin": 24.24,
+   "cap": 37.29,
+   "gate": 34.47
+  },
+  "stage1_ridge_mm": 0.243,
+  "stage1_rc_min": 1.0,
+  "stage1_built": {
+   "read": "built",
+   "half_blend_K_deg": 10.767,
+   "pin_max_moving": 48.89,
+   "cap_max_outside_blend": 40.89,
+   "cap_inside_blend": [
+    31.42,
+    89.98
+   ],
+   "pin_first_fail_K": 58.013,
+   "cap_first_fail_K": 62.793,
+   "note": "cap side gated for x >= half-blend (outside the blend); inside it the cap side is the dwell lock (reported) - a re-reading of desmo-slipper's linear-law gate, stated for the auditor"
+  },
+  "stage2B": {
+   "nose_r": 0.75,
+   "c_slot": 0.01,
+   "wall": 0.9,
+   "boss_r": 2.5,
+   "seat_rK": 16.18,
+   "seat_R": 61.51,
+   "boss_hubK_margin": 3.68,
+   "slot_len_mm": 3.65,
+   "plate_len_mm": 6.97,
+   "plate_w_mm": 3.32,
+   "rel_speed_rest_mm_per_rad": 0.525,
+   "pa_horn_max": 24.5,
+   "pa_crank_max": 14.56,
+   "dK_lim_pa_by_mu": {
+    "0.087": 64.5,
+    "0.120": 64.5,
+    "0.135": 64.5,
+    "0.150": 64.5,
+    "0.200": 61.0
+   },
+   "clear_plate_hubK": 1.31,
+   "clear_plate_hub2": 41.82,
+   "clear_lowarm_boss": 19.59,
+   "n_plate_rigid": 8,
+   "n_boss_rigid": 27
+  },
+  "slot_slop": 0.04,
+  "pocket_pa": [
+   25.2,
+   32.0,
+   34.47
+  ],
+  "crank_free": {
+   "c_mm": 0.010000000000000009,
+   "dwell_deg": 0.176,
+   "rise_deg": 0.18,
+   "corner": {
+    "max": 0.171,
+    "rows": [
+     [
+      -4.0,
+      1.064,
+      0.159,
+      0.158
+     ],
+     [
+      -2.0,
+      1.786,
+      0.159,
+      0.158
+     ],
+     [
+      -1.0,
+      2.217,
+      0.166,
+      0.159
+     ],
+     [
+      0.0,
+      2.693,
+      0.155,
+      0.155
+     ],
+     [
+      1.0,
+      3.216,
+      0.15,
+      0.153
+     ],
+     [
+      2.0,
+      3.785,
+      0.153,
+      0.151
+     ],
+     [
+      4.0,
+      5.065,
+      0.171,
+      0.155
+     ],
+     [
+      8.0,
+      8.179,
+      0.155,
+      0.155
+     ],
+     [
+      15.0,
+      15.0,
+      0.161,
+      0.161
+     ]
+    ],
+    "note": "(x0 deg of the K law from the onset, K, +K play, -K play), deg of K"
+   },
+   "max_deg": 0.18,
+   "worst_tol_c015_deg": 0.27,
+   "held_plus_free_deg": 0.22
+  }
+ },
+ "v2_plate_horn": {
+  "R0": 61.514,
+  "rPu": 63.164,
+  "horn_under_r": [
+   58.181,
+   60.014
+  ],
+  "horn_top_r_max": 63.014,
+  "n_plate": 58,
+  "n_horn": 27,
+  "poses_overlapping": 860,
+  "min_radial_gap_mm": 0.15,
+  "at": {
+   "i": 388,
+   "kind": "ws",
+   "plane": -15.0,
+   "elev": 90.0,
+   "axial": -45.0
+  },
+  "poses_below_running_gap": 0,
+  "rule": "radial gap >= 0.15 - 0.02 wherever plate and horn overlap within 1 mm across the sphere"
+ },
+ "v3_th_margin": {
+  "min": 5.11,
+  "n": 860,
+  "lt5": 0,
+  "forced": 403,
+  "lowest": [
+   {
+    "own": 5.11,
+    "forced": true,
+    "i": 1068,
+    "th": 106.45,
+    "dK": 45.88,
+    "dth_dK": 0.404,
+    "kind": "ws",
+    "plane": 135.0,
+    "elev": 60.0,
+    "axial": -90.0
+   },
+   {
+    "own": 5.248,
+    "forced": true,
+    "i": 859,
+    "th": 106.16,
+    "dK": 45.37,
+    "dth_dK": 0.406,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 60.0,
+    "axial": -105.0
+   },
+   {
+    "own": 5.267,
+    "forced": true,
+    "i": 699,
+    "th": 106.12,
+    "dK": 45.3,
+    "dth_dK": 0.406,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 30.0,
+    "axial": -120.0
+   },
+   {
+    "own": 5.294,
+    "forced": true,
+    "i": 242,
+    "th": 106.06,
+    "dK": 45.2,
+    "dth_dK": 0.407,
+    "kind": "ws",
+    "plane": -75.0,
+    "elev": 30.0,
+    "axial": 135.0
+   },
+   {
+    "own": 5.298,
+    "forced": true,
+    "i": 744,
+    "th": 106.06,
+    "dK": 45.18,
+    "dth_dK": 0.407,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 135.0,
+    "axial": -105.0
+   }
+  ]
+ },
+ "lowarm_fit": {
+  "pin_wall_mm_per_rad": 7.802,
+  "dphi_dK": 0.4178,
+  "K_deg_per_mm_at_pin": 17.576,
+  "pad": {
+   "lever_mm": 12.29,
+   "n_arm_over": 7,
+   "n_arm": 28,
+   "lever_range": [
+    0.0,
+    12.29
+   ]
+  },
+  "pad_seat_ok": true,
+  "pad_lever_used": 12.29,
+  "dwell_K_play": {
+   "runout": 0.176,
+   "conc": 0.088,
+   "pad_lap": 0.335,
+   "slot": 0.04,
+   "total": 0.638,
+   "gate": 0.25,
+   "ok": false,
+   "inputs": {
+    "runout_mm": 0.01,
+    "conc_mm": 0.005,
+    "pad_tol_mm": 0.03
+   }
+  },
+  "owd": {
+   "owd_margin": 2.0,
+   "n_used": 135,
+   "n_all": 462
+  },
+  "l2_lift": {
+   "h": 1.5,
+   "rfull": 14.0,
+   "L": 9.836157786453,
+   "n_moved": 32,
+   "n": 124,
+   "r_moved_max": 23.39
+  }
+ },
+ "v4_kplay": {
+  "nominal": {
+   "play_dwell": 0.638,
+   "play_forced": 0.23,
+   "n_drop": 0,
+   "n_drop_dwell": 0,
+   "drop_ws": 0,
+   "drop_clip": 0,
+   "min_margin_with_play": 5.017,
+   "report": {
+    "gap": 22.7,
+    "reach": 0.6912,
+    "follow": 1.0,
+    "inband14": 0.8967,
+    "inband10": 0.5672,
+    "contact": 0.0149
+   }
+  },
+  "tight": {
+   "play_dwell": 0.292,
+   "play_forced": 0.23,
+   "n_drop": 0,
+   "n_drop_dwell": 0,
+   "drop_ws": 0,
+   "drop_clip": 0,
+   "min_margin_with_play": 5.017,
+   "report": {
+    "gap": 22.7,
+    "reach": 0.6912,
+    "follow": 1.0,
+    "inband14": 0.8967,
+    "inband10": 0.5672,
+    "contact": 0.0149
+   }
+  },
+  "parent_groove": {
+   "play_dwell": 0.22,
+   "play_forced": 0.23,
+   "n_drop": 0,
+   "n_drop_dwell": 0,
+   "drop_ws": 0,
+   "drop_clip": 0,
+   "min_margin_with_play": 5.017,
+   "report": {
+    "gap": 22.7,
+    "reach": 0.6912,
+    "follow": 1.0,
+    "inband14": 0.8967,
+    "inband10": 0.5672,
+    "contact": 0.0149
+   }
+  },
+  "dwell_rows": {
+   "n": 457,
+   "min_own": 5.406,
+   "max_abs_dth_dK": 0.361
+  },
+  "forced_rows": {
+   "n": 403,
+   "min_own": 5.11,
+   "max_abs_dth_dK": 0.438
+  }
+ },
+ "dump": {
+  "path": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_held_perpose.json",
+  "recomputed": {
+   "gap": 22.7,
+   "reach": 0.6912,
+   "follow": 1.0,
+   "inband14": 0.8967,
+   "contact": 0.0149,
+   "n_ws": 952,
+   "n_clip": 202,
+   "ws_taken": 658,
+   "contact_poses": 13
+  }
+ },
+ "connected": {
+  "static": {
+   "gap": 22.7,
+   "reach": 0.6912,
+   "follow": 1.0,
+   "inband14": 0.8967,
+   "contact": 0.0149
+  },
+  "connected_bench": {
+   "gap": 23.88,
+   "reach": 0.6796,
+   "dropped": 11,
+   "dropped_forced": 11,
+   "forced_taken": 331,
+   "forced_taken_connected": 320,
+   "dropped_with_no_taken_neighbour": 4
+  },
+  "connected_knn": {
+   "gap": 30.93,
+   "reach": 0.6103,
+   "dropped": 77,
+   "dropped_forced": 77,
+   "forced_taken": 331,
+   "forced_taken_connected": 254
+  },
+  "connected_full": {
+   "gap": 22.7,
+   "reach": 0.6912,
+   "dropped": 0,
+   "dropped_forced": 0,
+   "forced_taken": 331,
+   "forced_taken_connected": 331,
+   "envelope": {
+    "env_ok": 1065,
+    "env_forced_ok": 526,
+    "env_forced_connected": 526
+   }
+  },
+  "secs": 2.3
+ },
+ "claim_frozen_out": {
+  "fit_fast": {
+   "gap": 13.39,
+   "reach": 0.7688,
+   "follow": 1.0,
+   "inband14": 0.8973,
+   "inband10": 0.5666,
+   "contact": 0.0,
+   "l2": {
+    "n": 183,
+    "clear_min": 14.19,
+    "lost": 0
+   }
+  },
+  "frozen": {
+   "gap": 22.7,
+   "reach": 0.6912,
+   "follow": 1.0,
+   "inband14": 0.8967,
+   "inband10": 0.5672,
+   "contact": 0.0149
+  },
+  "mode": "exact",
+  "bench": [
+   -1,
+   -1
+  ],
+  "why": {
+   "fold": 262,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 13
+  },
+  "parts_pairs": {},
+  "parts_ib14": {
+   "hub1": [
+    1.0,
+    8.6,
+    80
+   ],
+   "hubK": [
+    0.99,
+    7.9,
+    80
+   ],
+   "hub2": [
+    0.911,
+    11.6,
+    80
+   ],
+   "hub3": [
+    0.737,
+    11.5,
+    80
+   ],
+   "E": [
+    0.979,
+    6.1,
+    164
+   ],
+   "boss": [
+    1.0,
+    7.5,
+    32
+   ],
+   "pad": [
+    1.0,
+    6.2,
+    32
+   ],
+   "knee": [
+    1.0,
+    9.7,
+    90
+   ],
+   "crank": [
+    0.811,
+    11.1,
+    133
+   ],
+   "horn": [
+    0.948,
+    8.9,
+    27
+   ],
+   "ring2": [
+    0.855,
+    12.7,
+    4
+   ],
+   "plate": [
+    0.734,
+    12.2,
+    8
+   ],
+   "L1a": [
+    0.979,
+    10.1,
+    8
+   ],
+   "L1b": [
+    0.92,
+    8.2,
+    36
+   ],
+   "L2": [
+    0.706,
+    12.2,
+    124
+   ]
+  },
+  "audit": {
+   "near_touch_min_mm": 0.33,
+   "near_touch_low": [
+    {
+     "mm": 0.33,
+     "i": 1106,
+     "kind": "ws",
+     "plane": 150.0,
+     "elev": 15.0,
+     "axial": -180.0
+    },
+    {
+     "mm": 0.51,
+     "i": 1047,
+     "kind": "ws",
+     "plane": 135.0,
+     "elev": 15.0,
+     "axial": -165.0
+    },
+    {
+     "mm": 0.54,
+     "i": 663,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 90.0,
+     "axial": 45.0
+    },
+    {
+     "mm": 0.64,
+     "i": 1107,
+     "kind": "ws",
+     "plane": 150.0,
+     "elev": 15.0,
+     "axial": -165.0
+    },
+    {
+     "mm": 0.71,
+     "i": 735,
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 90.0,
+     "axial": 30.0
+    }
+   ],
+   "gap_near1": 25.33,
+   "near1_poses": 12,
+   "gap_near2": 37.12,
+   "near2_poses": 71,
+   "overhead140": {
+    "ws": 71,
+    "reach": 0.2676,
+    "clip": 19,
+    "follow": 1.0,
+    "inband14": 0.8974,
+    "inband10": 0.6343,
+    "why_not": {
+     "fold": 36,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 0,
+     "contact": 6
+    }
+   }
+  },
+  "ws_inband": {
+   "all": [
+    0.8675,
+    0.5532
+   ],
+   "e90_140": [
+    0.8446,
+    0.5633
+   ],
+   "ovh140": [
+    0.9287,
+    0.6726
+   ]
+  },
+  "split": {
+   "n": 13,
+   "by_part": {
+    "m1:hubK/horn": 6,
+    "horn": 6,
+    "crank": 6,
+    "m9:crank/plate": 5,
+    "m7:hub2": 4,
+    "plate": 3,
+    "m2:ring2": 2,
+    "hub2": 2,
+    "hubK": 2,
+    "m5:pad": 2,
+    "pad": 2,
+    "ring2": 1,
+    "m6:knee": 1,
+    "knee": 1
+   }
+  },
+  "overhead": {
+   "ws": 71,
+   "taken": 19
+  },
+  "l2": {
+   "n": 860,
+   "clear_min": 12.33,
+   "lost": 0
+  },
+  "crown": {
+   "crown_mm": {
+    "median": 20.4,
+    "min": 12.1,
+    "max": 37.1
+   },
+   "underside_min_mm": {
+    "median": 9.2,
+    "min": 0.5
+   }
+  },
+  "cam": {
+   "dK_lim": 46.0,
+   "why_lim": "slot-end",
+   "dK_lim_parent": 64.5,
+   "why_lim_parent": "law",
+   "pa_crank_max_taken": 14.6,
+   "pa_horn_max_taken": 24.5,
+   "pa_kin_max": 34.47,
+   "pa_eff_horn": 33.0,
+   "pa_eff_crank": 23.1,
+   "flank_rho_min": null,
+   "clear_hubK_min": 1.85,
+   "clear_lowarm_lug_min": null,
+   "contact_r": [
+    16.4,
+    22.2
+   ],
+   "nose_r": 0.75,
+   "mu": 0.15,
+   "desmo": {
+    "calib": {
+     "s_th": -0.4644,
+     "inv_kK": 0.4644,
+     "q_on_deg": 7.28,
+     "dwell_deg": [
+      7.7,
+      90.9
+     ],
+     "fit_rms_deg": 0.0,
+     "n": 90
+    },
+    "stage1": {
+     "a_s": 9.2,
+     "psi": 149.5,
+     "pitch": [
+      9.602,
+      9.602
+     ],
+     "r_out": 11.16,
+     "pa_pin_max": 24.24,
+     "pa_cap_max": 37.29,
+     "pa_gate": 34.47,
+     "drift_max": 0.277,
+     "tilt_max_deg": 4.83,
+     "crown_needed": true,
+     "rc_min": 1.0,
+     "rc_onset": 1.0,
+     "ridge_mm": 0.243,
+     "blend_K_lead_deg": 2.614,
+     "arm_from_axis": 9.2,
+     "n_ring_rigid": 4,
+     "ring_az_deg": 18.9,
+     "lim_by_gate": {
+      "pitch": null,
+      "pa_pin": 58.0,
+      "pa_cap": 0.0,
+      "drift": null,
+      "radius": 0.75
+     }
+    },
+    "stage1_built": {
+     "read": "built",
+     "half_blend_K_deg": 10.767,
+     "pin_max_moving": 48.89,
+     "cap_max_outside_blend": 40.89,
+     "cap_inside_blend": [
+      31.42,
+      89.98
+     ],
+     "pin_first_fail_K": 58.013,
+     "cap_first_fail_K": 62.793,
+     "note": "cap side gated for x >= half-blend (outside the blend); inside it the cap side is the dwell lock (reported) - a re-reading of desmo-slipper's linear-law gate, stated for the auditor"
+    },
+    "stage2B": {
+     "nose_r": 0.75,
+     "c_slot": 0.01,
+     "wall": 0.9,
+     "boss_r": 2.5,
+     "seat_rK": 16.18,
+     "seat_R": 61.51,
+     "boss_hubK_margin": 3.68,
+     "slot_len_mm": 3.65,
+     "plate_len_mm": 6.97,
+     "plate_w_mm": 3.32,
+     "rel_speed_rest_mm_per_rad": 0.525,
+     "pa_horn_max": 24.5,
+     "pa_crank_max": 14.56,
+     "dK_lim_pa_by_mu": {
+      "0.087": 64.5,
+      "0.120": 64.5,
+      "0.135": 64.5,
+      "0.150": 64.5,
+      "0.200": 61.0
+     },
+     "clear_plate_hubK": 1.31,
+     "clear_plate_hub2": 41.82,
+     "clear_lowarm_boss": 19.59,
+     "n_plate_rigid": 8,
+     "n_boss_rigid": 27
+    },
+    "slop": {
+     "slotB": {
+      "slop_max": 0.04,
+      "slop_at": [
+       1.0,
+       -1
+      ],
+      "pocket_pa_max_horn": 25.2,
+      "pocket_pa_max_crank": 32.0,
+      "pocket_pa_gate": 34.47,
+      "pocket_pa_fail_K0": null,
+      "pole_rows": [
+       [
+        0.0,
+        1,
+        0.0375,
+        15.8,
+        14.0
+       ],
+       [
+        0.0,
+        -1,
+        0.0375,
+        0.2,
+        2.0
+       ],
+       [
+        0.5,
+        1,
+        0.0375,
+        14.1,
+        12.0
+       ],
+       [
+        0.5,
+        -1,
+        0.0375,
+        12.1,
+        10.0
+       ],
+       [
+        1.0,
+        1,
+        0.0375,
+        12.5,
+        10.0
+       ],
+       [
+        1.0,
+        -1,
+        0.04,
+        10.4,
+        8.0
+       ],
+       [
+        1.5,
+        1,
+        0.0375,
+        10.8,
+        8.0
+       ],
+       [
+        1.5,
+        -1,
+        0.04,
+        10.7,
+        8.0
+       ],
+       [
+        2.0,
+        1,
+        0.0375,
+        11.1,
+        8.0
+       ],
+       [
+        2.0,
+        -1,
+        0.04,
+        11.0,
+        8.0
+       ],
+       [
+        2.5,
+        1,
+        0.0375,
+        11.4,
+        8.0
+       ],
+       [
+        2.5,
+        -1,
+        0.04,
+        11.4,
+        8.0
+       ],
+       [
+        3.0,
+        1,
+        0.0375,
+        9.7,
+        6.0
+       ],
+       [
+        3.0,
+        -1,
+        0.04,
+        11.7,
+        8.0
+       ],
+       [
+        3.5,
+        1,
+        0.0375,
+        10.0,
+        6.0
+       ],
+       [
+        3.5,
+        -1,
+        0.04,
+        10.0,
+        6.0
+       ],
+       [
+        4.0,
+        1,
+        0.0375,
+        10.4,
+        6.0
+       ],
+       [
+        4.0,
+        -1,
+        0.0375,
+        10.3,
+        6.0
+       ],
+       [
+        4.5,
+        1,
+        0.0375,
+        8.7,
+        4.0
+       ],
+       [
+        4.5,
+        -1,
+        0.0375,
+        10.6,
+        6.0
+       ],
+       [
+        5.0,
+        1,
+        0.0375,
+        9.0,
+        4.0
+       ],
+       [
+        5.0,
+        -1,
+        0.0375,
+        9.0,
+        4.0
+       ]
+      ],
+      "n_rows": 186,
+      "note": "rows (K0 deg, sign, slop deg, pa link 1a, pa crank) at the built pocket; K0 0 sign -1 = stop A (the closed end)"
+     },
+     "crank_free": {
+      "c_mm": 0.010000000000000009,
+      "dwell_deg": 0.176,
+      "rise_deg": 0.18,
+      "corner": {
+       "max": 0.171,
+       "rows": [
+        [
+         -4.0,
+         1.064,
+         0.159,
+         0.158
+        ],
+        [
+         -2.0,
+         1.786,
+         0.159,
+         0.158
+        ],
+        [
+         -1.0,
+         2.217,
+         0.166,
+         0.159
+        ],
+        [
+         0.0,
+         2.693,
+         0.155,
+         0.155
+        ],
+        [
+         1.0,
+         3.216,
+         0.15,
+         0.153
+        ],
+        [
+         2.0,
+         3.785,
+         0.153,
+         0.151
+        ],
+        [
+         4.0,
+         5.065,
+         0.171,
+         0.155
+        ],
+        [
+         8.0,
+         8.179,
+         0.155,
+         0.155
+        ],
+        [
+         15.0,
+         15.0,
+         0.161,
+         0.161
+        ]
+       ],
+       "note": "(x0 deg of the K law from the onset, K, +K play, -K play), deg of K"
+      },
+      "max_deg": 0.18,
+      "worst_tol_c015_deg": 0.27,
+      "held_plus_free_deg": 0.22
+     }
+    },
+    "fail": [],
+    "lowarm": {
+     "pin_wall_mm_per_rad": 7.802,
+     "dphi_dK": 0.4178,
+     "K_deg_per_mm_at_pin": 17.576,
+     "pad": {
+      "lever_mm": 12.29,
+      "n_arm_over": 7,
+      "n_arm": 28,
+      "lever_range": [
+       0.0,
+       12.29
+      ]
+     },
+     "pad_seat_ok": true,
+     "pad_lever_used": 12.29,
+     "dwell_K_play": {
+      "runout": 0.176,
+      "conc": 0.088,
+      "pad_lap": 0.335,
+      "slot": 0.04,
+      "total": 0.638,
+      "gate": 0.25,
+      "ok": false,
+      "inputs": {
+       "runout_mm": 0.01,
+       "conc_mm": 0.005,
+       "pad_tol_mm": 0.03
+      }
+     },
+     "owd": {
+      "owd_margin": 2.0,
+      "n_used": 135,
+      "n_all": 462
+     },
+     "l2_lift": {
+      "h": 1.5,
+      "rfull": 14.0,
+      "L": 9.836157786453,
+      "n_moved": 32,
+      "n": 124,
+      "r_moved_max": 23.39
+     }
+    }
+   }
+  },
+  "dK_taken_max": 45.88
+ },
+ "secs": 1307.0,
+ "exact": true,
+ "params": {
+  "r_c": 16.176,
+  "beta": -177.169,
+  "nose_r2": 0.75,
+  "wall2": 0.9,
+  "boss_r": 2.5,
+  "glev": -1.0,
+  "blend": 10.0,
+  "kslot": 46.0,
+  "a_s": 9.2,
+  "psi": 149.5,
+  "mu": 0.15,
+  "owd_margin": 2.0,
+  "zr": 2.0,
+  "l2_lift": 1.5,
+  "l2_rfull": 14.0,
+  "l2_len": 9.836,
+  "stage2": "B"
+ },
+ "blend": false,
+ "blend_ik": null
+}
