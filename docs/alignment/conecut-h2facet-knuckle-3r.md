@@ -280,3 +280,138 @@ of the 15 reasons and refuted 1 (S5) with a new measurement. Rulings: `docs/alig
    - Proposal, an instrument change and not an input to this verdict: also read `<id>+*_flood_{bench,held}.json`
      `connected` blocks. Measured effect: this row's continuity level is unchanged (watch, from held knn), and only the
      check's text changes.
+
+## Skeptic (2026-10-18, 22:50-23:10 UTC), on the 22:14 audit
+
+Ledger entry 2026-10-18T23:08:45Z, by skeptic, run `skeptic:conecut-h2facet-knuckle-3r`, on the audit entry
+2026-10-18T22:14:00Z. Rulings: `docs/alignment/conecut-h2facet-knuckle-3r.rulings.json`.
+
+**Final verdict (computed by the ledger tool): WATCH.** I upheld all 15 reasons and refuted none. No reason is 'gamed'.
+
+**How I checked.**
+- **Inputs:** `git diff --stat f493a7f HEAD` on both models, both verifiers, tools/concept_kit.py and
+  tools/alignment_audit.py is empty. The only change on the row is the `leader_ruling` string, so the claims on file
+  (18.28 / 22.16) still stand on unchanged inputs.
+- **Re-derived from raw files with my own scripts:**
+  - the chamfer-only and lead per-pose dumps, bench and held;
+  - the verifier JSONs;
+  - the sweep file;
+  - the flood files;
+  - the msub, stop-window, held-leak and probe files;
+  - the lead CAD's dynamics.json and vs_l1.json;
+  - `tools/simplicity.py --json`.
+- **Replicated the dashboard:** I rebuilt the page's board and leader calcs (docs/dashboard/simple/index.html lines
+  205-255) in Python on morphs.json, with and without the ruling.
+- **One new measurement:** I re-ran the auditor's only new wear, the held workspace probe
+  (`CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_wear_probe_model.py conecut-h2facet-knuckle-3r held`,
+  1 process, local, model unchanged; output kept in scratch, not committed). It took 577.2 s under machine load ~27
+  and reproduces the auditor's `remeasure/conecut-h2facet-knuckle-3r_probe_held.json` bit for bit: model_frozen 22.16 /
+  reach 0.6933 / in-band 0.900, near1 25.23 / near2 36.89, and 0 differing fields in the probe and extras blocks.
+- **Not used:** the farm.
+
+### Rulings (all upheld)
+
+1. **continuity: upheld.** The level stands, but the text is out of date.
+   - The floods are on file. The check's glob (tools/alignment_audit.py line 470) misses the `+chamferonly` names.
+   - Read with the check's own rule (lines 500-507: conn_watch 1, conn_gamed 3):
+     - bench: full 18.28 (0 dropped), knn 19.97 (+1.69). That is ok.
+     - held: full 22.16 (0 of 332 dropped), knn **30.39 (+8.23 > 3; 77 of 332 forced takes dropped)**. Line 505 sets
+       watch.
+   - So the check would read watch even if it could see the files.
+2. **complexity: upheld.** `tools/simplicity.py --json` scores this row 0 (items [], source 'lead conecut-knee-knuckle-3r'). The lead scores 18.5, and the row's field says 18.5.
+3. **reporting: upheld.**
+   - The verdict opens 'SCREENED as a 0-cx ENABLER CELL'; line 736 fires on that.
+   - morphs.json has gap / sweep_gap 12.5 (score 95.45) next to v_gap 18.28, and 12.5 < 18.28 - 5 (line 750).
+4. **NEW-tie-order: upheld, replicated.**
+   - The board sorts by (sink, gap), and the sort is stable. It therefore keeps tools/dash_build.py line 551's id order:
+     h2facet is index 21, the lead index 22.
+   - With the ruling, the headline is conecut-knee (18.28, complexity 18.5). Without it, the headline is this row (18.28,
+     complexity 0).
+   - Exactly 2 unflagged verified rows with at most 3 joints sit within 0.005 of the headline.
+   - The cited skeptic entry is ledger line 125 (17:06:25Z, watch). The lead is the incumbent: verified at events line
+     638, before this row at line 872.
+5. **R1: upheld.**
+   - The held dumps differ by exactly one flip: ws 447 (0/90/30) goes from contact (-0.207 mm) to taken (floor 0.697 mm).
+   - On the floor min(min_mm, cmin) over all 1154 held poses: 45 gain (mean +0.601 mm) and 0 lose.
+   - The bench dumps have 0 flips. So 'buys no take' is a bench-only statement.
+   - morphs.json carries no held field for either row, so the board cannot show the held edge at all.
+6. **G5: upheld, recounted.**
+   - morphs.json has 38 verified non-baseline rows with v_gap and complexity (4 of them gamed).
+   - At the shown 0 this row strictly dominates 33 of the other 37; at its real 18.5, 12.
+   - The Pareto front on the shown numbers is phi40-thinstack, freek-oracle-route, this row and the gamed conecut-l2jog.
+   - drawSimple labels the 5 best live rows by score: phi40 94.9, offset-shortcar 94.6, freek 94.4, proxtrack 93.7 and
+     **conecut-h2facet 93.4 at y = 0**. The headline (conecut-knee) is 6th and has no label.
+7. **T1: upheld, with one precision correction.**
+   - Bench: pose 203 goes 0.263 -> 1.122 mm (cmin). Floors under 1 / 2 / 3 mm: 2 / 33 / 99 against the lead's 3 / 33 / 105.
+   - Held: 14 / 71 / 206 against 13 / 71 / 217.
+   - Correction: 'never worse off at any pose' is not literally true on the bench. Pose 234 (ws 15/135/-60, taken) has
+     a floor of 1.556 -> 1.506 mm, 0.05 mm closer, inside the 2 mm shell. Held has no floor loss: pose 512's cmin goes
+     3.999 -> 3.888, but its floor stays at min_mm 3.556.
+8. **P1: upheld.** All 122 sweep entries read 12.5 (near1 13.66). Entry k 0 is the uncut anchor itself (c 0, fd 0) at
+   the same 12.5. The search could not tell any cut from no cut.
+9. **NEW-wrong-body-frame: upheld.**
+   - From the v_sampling file: mem2 is 7 (link 1b), q2_rel_deg runs -14.2..90.9 over 184 poses, and wall_min_mm 3.1 is
+     measured to the bore.
+   - fd 0 reproduces 18.28 / 22.16.
+   - best_params still has fd 0.6. rows/lowarm-kphase-notch still cites the flat's +0.26..+0.37.
+10. **T3: upheld.**
+    - th margin: 5.006 held, 5.181 bench.
+    - Stop-window precision: the held sweep in remeasure/conecut-knee-knuckle-3r_stopwindow.json starts at J3MIN
+      -112.4. It reads 22.38 from -112.4 to -111.2 and 22.49 from -111.1. So the file measures a window of at least
+      1.2 deg; the stated -112.49 lower edge is not in this file. J3MIN is the lead's -111.9036.
+11. **M5: upheld.** All of these are the lead's:
+    - dynamics.json nominal: 3.99 deg, 0.57 N;
+    - f0.05: 11.73 deg, 5.24 N;
+    - vs_l1.json M5 forward bound: 4.54 / 4.67 / 4.77 deg;
+    - red-team s0: 0.40 at 4.57 N.m, 0.22 at the lock line.
+12. **G4: upheld.** m_sub with the knee at rest: n 205, min 0.0, under 1 deg on 50, under 5 deg on 107. With the knee
+    moved, the minimum is 10.8 deg.
+13. **NEW-strap-dilution: upheld.** c4_inband gives gap_equal_strap 18.67 bench and 22.68 held. Held in-band is 0.8999.
+14. **NEW-ws-inband: upheld.**
+    - Held probe file: 660 of 952 taken, in-band 0.871. Elevation 90-140: 106 of 229 at 0.8469. Overhead: 18 of 71 at
+      0.932 (fold 36, J3 stop 10, contact 7).
+    - The lead: 659, 0.8712; 105, 0.8478; 18, 0.932.
+    - My re-run of the probe matches these to the last digit.
+15. **P2: upheld.** heldleak_check has held_binds 218 and flips []. This row differs from the lead only in the facet
+    keys.
+
+### Missed (for the next audit; none changes this verdict)
+
+1. **The gamed twin is drawn as a live design on the simplicity chart.**
+   - drawSimple (docs/dashboard/simple/index.html line 309) keeps every non-fast row with a complexity. `live` (line 326)
+     drops only Dead end / Refuted.
+   - So the Flagged (gamed) conecut-l2jog-knuckle-3r is plotted at (93.35, 0) in the live colour (`dash.colors[0]`),
+     next to this row's (93.35, 0) dot.
+   - It sits 7th by score, so it gets no label, but its dot and hover are there.
+   - Effect: the board's 'golden corner' chart shows two dots at complexity 0 for one chain. One is gamed, the other's
+     real complexity is 18.5.
+2. **A ruling stays valid after its row's audits move on.**
+   - tools/dash_build.py lines 514-519 accept a `leader_ruling` that cites any non-gamed skeptic entry of the row. It does
+     not have to be the latest one, and the row's current verdict is not checked.
+   - So a ruling written under an old watch keeps a row out of, or in, the headline after a later audit.
+   - Here it cites 17:06:25Z, and this run adds a newer entry. Today it is harmless (watch, and it demotes).
+   - Proposal: the builder checks that the row's latest ledger verdict is not gamed.
+3. **The two tie rulings use opposite standards.**
+   - inband-rssr-knuckle-3r was ruled a tie with slipper-nose because it led on the bench but trailed held out (P(better)
+     0.38). Held out decided that one.
+   - This row ties on the bench and leads held out (22.16 vs 22.38: one flip, no pose worse). It is ruled a tie with the
+     incumbent, and the ruling text omits the held edge.
+   - Both rulings follow the rule: a design replaces the lead only on a strictly lower plain gap. But the held-out
+     evidence the lead weighed in one ruling is left out of the other (R1).
+4. **The lead's hub-2 sampling reads 0.05 mm optimistic at bench pose 234.** The audit filed the 1.556 -> 1.506 drop
+   under denser sampling. If so, the lead's own reading there is 0.05 mm too generous: its hub-2 sample has not
+   converged at a pose inside the 2 mm shell. Small (no near1 or near2 count changes), but it is a sampling item on the
+   lead, not on this row.
+
+
+5. **The held continuity cost is measured on this row only.**
+   - The held knn flood (30.39, 77 forced takes dropped) is what keeps `continuity` at watch here.
+   - The lead conecut-knee-knuckle-3r has a flood only on the bench: docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_frozen.json
+     connected reads full 18.28, knn 19.97 and bench-graph 50.13, the same as this row. No held flood exists for the lead
+     in docs/concepts/verify or docs/alignment/remeasure.
+   - The two rows share the knee and the chain, and the chamfer adds no coordinate. So the held knn loss is very likely
+     the lead's too, but it is unmeasured on the lead.
+   - Next audit of the lead: run its held flood (`--flood`, CB_EXACT=1), so that the derivative is not the only row
+     carrying the reading.
+
+**Verdict: WATCH** (the ledger tool's worst level among the reasons not refuted with evidence).
