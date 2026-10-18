@@ -24,6 +24,7 @@ solve on the lead's own gates, flood continuity, gravity check); what changes is
     CB_EXACT=1 ... frozen '<json>' [out.json]          # Bench(110,360) exact, frozen (fit Bench(60,160) fast, phi 0)
     CB_EXACT=1 ... held '<json>' [out.json]            # the lead family's held-out bench
     ... hwsweep '<base json>' '<list of hw overrides json>' [bench nc nw] [out.json]   # one fit + relay solve, many hardware configs
+    ... hwsweep '<base>' '<list>' -2 0 [out.json]      # the same on envsel (pick selection, exact, static reading)
     ... gravity '<json>'                               # R17: spring preload needed (armarc gravity_check)
 params (relay): PHI, tilt, taz, sgn, ds (station offset, + = proximal), rt_extra (mm over p90 + 4), pre (pre-arc deg, floored),
         bump (mm over the carriage top), band (bump half-band in s, floor carriage half-length + 1), ramp (mm,
@@ -287,7 +288,11 @@ def prepare(base, nc=60, nw=160, exact=False):
             self._sc = None; self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]
             self.drop = np.zeros(len(self.poses_fit), bool); self._truncate()
     if exact: os.environ["CB_EXACT"] = "1"
-    B = AA.held_bench() if nc == -1 else CB.Bench(n_clip=nc, n_ws=nw)
+    if nc == -2:                                            # the pick-selection bench (tools/env_bench.py envsel; exact, never the claim bench)
+        import env_bench as EB; B = EB.bench("envsel", exact=True)
+        if int(rp.get("flood", 1)): rp["flood"] = 0          # envsel poses are off the flood's envelope grid: static reading
+    else:
+        B = AA.held_bench() if nc == -1 else CB.Bench(n_clip=nc, n_ws=nw)
     phi_b = phi_fill[B.idx]
     with AA.patched(Zr):
         M = Frozen(B, P2); r = M.run()
