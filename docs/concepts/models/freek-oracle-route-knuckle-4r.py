@@ -51,6 +51,7 @@ K33 = os.path.join(REPO, "docs", "concepts", "verify", "skinnormal-shortk-knuckl
 KEYS = ("gap", "reach", "follow", "inband14", "inband10", "contact")
 BINDERS = (117, 127, 129, 139, 148, 316, 343, 369, 423, 119)
 NS, CAP = 17, 2.5
+NSR = int(os.environ.get("FO_NSR", "7"))                    # samples of the run-based oracle on the exact bench
 
 
 def unit(x): x = np.asarray(x, float); return x / np.linalg.norm(x, axis=-1, keepdims=True)
@@ -211,11 +212,16 @@ def scan(M, B, ns=NS):
     for j, i in enumerate(cand):
         samp = np.unique(np.r_[np.linspace(min(fl[j], dkb), dkb, ns), dk_kit[i] if okk[i] else []].round(3))
         f = D.free_solve(np.repeat(M.Q[i][None], len(samp), 0), samp); rows = []
+        okk_ = np.nonzero(f["ok"])[0]; dd = {}
+        if len(okk_):                                        # ONE batched distance call per pose (the exact path builds its tree per call)
+            names = list(mt); sizes = [len(mt[mm]) for mm in names]
+            X = {1: f["R1"][okk_], 7: f["R1b"][okk_], 2: f["R12"][okk_]}
+            Pw = np.concatenate([np.einsum("kj,sij->ski", mt[mm], X[mm]) for mm in names], 1) @ M.RS[i].T
+            dist = B.dist(i, Pw); cut = np.cumsum([0] + sizes)
+            for a, k in enumerate(okk_): dd[k] = {mm: float(dist[a, cut[b]:cut[b + 1]].min()) for b, mm in enumerate(names)}
         for k, dk in enumerate(samp):
-            if not f["ok"][k]: rows.append((float(dk), False, None, None)); continue
-            X = {1: f["R1"][k], 7: f["R1b"][k], 2: f["R12"][k]}
-            dd = {mm: float(B.dist(i, (pts @ X[mm].T) @ M.RS[i].T).min()) for mm, pts in mt.items()}
-            rows.append((float(dk), True, min(dd.values()), dd))
+            if k not in dd: rows.append((float(dk), False, None, None)); continue
+            rows.append((float(dk), True, min(dd[k].values()), dd[k]))
         res[int(i)] = dict(th=float(th[i]), kit=float(dk_kit[i]) if okk[i] else None, floor=float(fl[j]), dKB=dkb, rows=rows)
     return res
 
@@ -238,7 +244,14 @@ def _rec(M, B, i):
     return (min(d, CAP) + 1e-3 * inb, True, d, "")
 
 
-def oracle_runs(Mk, B, ns=9):
+def sub_bench(B, sub):
+    """a fresh exact bench holding only the poses `sub` of B (same poses; per-pose caches empty)"""
+    W = CB.Bench(n_clip=110, n_ws=360); assert list(np.asarray(W.idx)) == list(np.asarray(B.idx)), "sub_bench expects Bench(110,360)"
+    sub = list(map(int, sub)); W.idx = np.asarray(W.idx)[sub]; W.kind = [W.kind[i] for i in sub]; W.poses = [W.poses[i] for i in sub]
+    W.res = [None] * len(sub); return W
+
+
+def oracle_runs(Mk, B, ns=9, sub=True):
     """the FAITHFUL oracle: ns composed runs of the frozen model, each with every stretched pose at the same fraction of its
     legal K range [floor, stop B]; per pose the best of {kit, ns samples} by _rec (taken and clear > lost > contact; ties ->
     nearest the kit's K). Every check of the model (knee window, slide residual, member 3 / knee moving with K, part pairs,
@@ -248,11 +261,13 @@ def oracle_runs(Mk, B, ns=9):
     w = Mk.Q @ D.u[2]; th = np.degrees(np.arccos(np.clip(w @ D.u[0], -1, 1)))
     cand = np.nonzero(st == 1)[0]; fl = np.minimum(D.floor(th[cand]), D.dKB()); dkb = D.dKB(); keys = qkeys(Mk.Q)
     recs = {int(i): [(float(dk_kit[i]) if okk[i] else None, _rec(Mk, B, i))] for i in cand}
+    Bs = sub_bench(B, cand) if (sub and B.mode != "fast") else B; loc = (lambda k, i: k) if Bs is not B else (lambda k, i: i)
     for j in range(ns):
         fr = j / max(ns - 1, 1); dks = fl + fr * (dkb - fl)
         ODesign.TAB = {keys[i]: float(dks[k]) for k, i in enumerate(cand)}
-        Mj = type(Mk)(B, dict(Mk.p)); Mj.run()
-        for k, i in enumerate(cand): recs[int(i)].append((float(dks[k]), _rec(Mj, B, i)))
+        Mj = type(Mk)(Bs, dict(Mk.p)); Mj.run()
+        for k, i in enumerate(cand): recs[int(i)].append((float(dks[k]), _rec(Mj, Bs, loc(k, i))))
+        print(f"  oracle sample {j + 1}/{ns} done", flush=True)
     ODesign.TAB = None; tab = {}
     for i, rr in recs.items():
         ref = rr[0][0] if rr[0][0] is not None else float(fl[list(cand).index(i)])
@@ -269,7 +284,7 @@ def run_oracle(fitB, B, P, frozen=True, how="runs"):
     Mk, fitr, M1, keys = RM.freeze(fitB, B, dict(P), KModel)          # frozen shape on B (fitB itself for the fast sweep)
     rk = Mk.run(); kit = {k: rk[k] for k in KEYS}; ntk = RM.near_touch(Mk, B); whyk = {k: int((Mk.why == k).sum()) for k in set(Mk.why.tolist()) if k}
     tk_kit = [i for i in RM.taken_list(B)]
-    if how == "runs": res, tab = oracle_runs(Mk, B)
+    if how == "runs": res, tab = oracle_runs(Mk, B, ns=NSR if B.mode != "fast" else 9)
     else: res = scan(Mk, B); tab = pick(res)
     ODesign.TAB = {qkeys(Mk.Q[[i]])[0]: v for i, v in tab.items()}
     Mo = type(Mk)(B, dict(Mk.p)); ro = Mo.run(); orc = {k: ro[k] for k in KEYS}; nto = RM.near_touch(Mo, B)
@@ -334,7 +349,7 @@ if __name__ == "__main__":
     P = params(over); CAP = float(over.get("cap", CAP))
     fitB = RM.PV.fast_bench(60, 160)
     B = fitB if mode == "fast" else CB.Bench(n_clip=110, n_ws=360)
-    r = run_oracle(fitB, B, P)
+    r = run_oracle(fitB, B, P, how=os.environ.get("FO_HOW", "runs"))
     o = r["oracle"]; k = r["kit"]
     bind = {}
     if mode == "wear":

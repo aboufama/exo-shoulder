@@ -69,3 +69,58 @@ arm drops through a window milled in link 1b's J2 plate, with an integral crowne
 ## Results
 
 (filled in below as measured; every number is quoted from a saved file)
+
+### Spec corrections (measured, stated for the verifier)
+
+1. **The level.** `level_scan` scans the groove MID-plane (its docstring). An insert on link 2's underside at F2+3.15
+   puts the mid-plane at F2+3.9. My scan reproduces the CAD's counts through the model's own stage-1 formulas, extended
+   to the drive end K 47.5: 7 feasible at mid 3.15 (CAD 6), 2 at mid 3.9 (CAD 2). The legal pins at 3.9 are:
+   * a_s 9.9 / psi 150: PA 32.88, groove rc 1.03, pitch 7.59-9.85, crank-free play 0.162;
+   * a_s 9.8 / psi 150: PA 31.86, rc 1.024, pitch 7.68-9.90, play 0.165.
+
+   A mid-plane at 3.15 is not buildable, because the insert's lower 0.75 mm would sit in link 1b's plate layer over the
+   whole J2 sweep. It is run only as a labelled control (k18).
+2. **No pin at either level meets pitch <= 9.0** (the lead's note confirmed). The insert reaches r_out 11.41
+   (pitch_hi 9.85 + 0.76 + the model's 0.8 wall) against the O20 rim at r 10, so the out-of-rim sector is priced as
+   metal: 29 rigid samples, against 19 at the claim's level. The spec's "+1.26" (0.5 wall) would be 0.3 mm smaller. I
+   kept the verified model's 0.8, which matches the gen-9 CAD's insert (r 6.05..10.96 at pitch 9.4).
+3. **The stop order is buildable only in a narrow band.**
+   * With the claim's pin, extending the drive to 47.5 cuts it at 47.25: the built-groove forward PA reaches the gate at
+     K 47.50, as the gen-9 red team said (ablation 'kdrive47.5-only'). 47.25 would clear the J2-first need (46.5 + 0.30
+     engagement + 0.25 lead = 47.05) by only 0.2 deg, and that level is not buildable anyway (control k17 fails 4 pair
+     gates).
+   * With the re-placed pin, the groove's PA first fails at K 52.3, so stage 1 is not the limit. The stage-2 slot is:
+     at kdrive 48.5 the longer tip plate comes within 1.0 mm of hub K's O20 at rest (PLATE-hubK at K 0: the drive is
+     dead, k1/k3/k5/...).
+   * At kdrive 47.5 every gate passes. J2's dowel window ends at 46.5 and engages at ~46.80, so the drive's end is 0.45
+     deg of K past the engagement plus the 0.25 K lead. The J2 stop carries its own load (pass condition met, narrow).
+
+### Fast sweep, Bench(60,160), frozen-shape fit (plain gap / near-touch gap: metal < 1 mm counted as contact)
+
+| k | cell | lev | a_s / psi | blend | kdrive | plain | near-touch | reach | ib14 | drive end | r_out | K play | fails |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | grid | 3.9 | 9.9 / 150.0 | 10.0 | 47.5 | 14.73 | 20.59 | 0.775 | 0.8777 | 47.5 slot-end | 11.41 | 0.167 | - |
+| 1 | grid | 3.9 | 9.9 / 150.0 | 10.0 | 48.5 | 101.12 | 110.62 | 0.3312 | 0.8743 | 0.0 PLATE-hubK | 11.41 | 0.167 | stop-order |
+| 2 | grid | 3.9 | 9.9 / 150.0 | 6.0 | 47.5 | 14.75 | 20.61 | 0.775 | 0.8775 | 47.5 slot-end | 11.41 | 0.33 | groove-slop |
+| 4 | grid | 3.9 | 9.9 / 150.0 | 8.0 | 47.5 | 14.68 | 20.52 | 0.775 | 0.8782 | 47.5 slot-end | 11.41 | 0.167 | - |
+| 6 | grid | 3.9 | 9.9 / 150.0 | 12.0 | 47.5 | 14.72 | 20.58 | 0.775 | 0.8778 | 47.5 slot-end | 11.41 | 0.167 | - |
+| 8 | grid | 3.9 | 9.8 / 150.0 | 10.0 | 47.5 | 14.73 | 20.59 | 0.775 | 0.8777 | 47.5 slot-end | 11.46 | 0.169 | - |
+| 10 | grid | 3.9 | 9.8 / 150.0 | 6.0 | 47.5 | 14.75 | 20.61 | 0.775 | 0.8775 | 47.5 slot-end | 11.46 | 0.25 | - |
+| 12 | grid | 3.9 | 9.8 / 150.0 | 8.0 | 47.5 | 14.67 | 20.51 | 0.775 | 0.8783 | 47.5 slot-end | 11.46 | 0.169 | - |
+| 14 | grid | 3.9 | 9.8 / 150.0 | 12.0 | 47.5 | 14.72 | 20.58 | 0.775 | 0.8778 | 47.5 slot-end | 11.46 | 0.169 | - |
+| 16 | arm_w 2.5 | 3.9 | 9.9 / 150.0 | 10.0 | 47.5 | 14.73 | 20.59 | 0.775 | 0.8777 | 47.5 slot-end | 11.41 | 0.167 | - |
+| 17 | CONTROL claim level | 0.861 | 9.529 / 149.71 | 10.0 | 46.5 | 13.27 | 19.05 | 0.775 | 0.8923 | 46.5 slot-end | 10.96 | 0.174 | 4 pair gates (not buildable) |
+| 18 | CONTROL mid 3.15 (illegal) | 3.15 | 9.8 / 150.0 | 10.0 | 47.5 | 14.62 | 20.49 | 0.775 | 0.8788 | 47.5 slot-end | 11.29 | 0.169 | insert in link 1b's plate |
+
+(k1, 3, 5, 7, 9, 11, 13, 15: kdrive 48.5, all dead on PLATE-hubK.) The control k17 reproduces desmo-conecut's own fit exactly:
+plain 13.27, reach 0.775, ib14 0.8923, the verifier's fit_fast. So the model's additions are neutral at the claim's level.
+
+**Attribution (fast).**
+* Reach is identical (0.775, fold 31) in every legal cell. Neither the K law nor the stop order loses a pose.
+* The whole cost is in-band: ib14 0.8923 -> 0.8777-0.8783, i.e. +1.40 to +1.46 plain points.
+* The new pin at the OLD level (ablation, not in the sweep file) cuts the drive at K 36.75 (s1b-pa-pin, reach 0.744). So
+  the pin is only legal where it was re-placed.
+* The new level with the OLD pin fails the pitch gate at K 0 (reach 0.331).
+* The mid-3.15 control (2.29 mm up, r_out 11.29) costs +1.35. So the loss comes from LIFTING the out-of-rim insert
+  sector, not from its extra 0.45 mm of radius: the samples rise out of the 14 mm band.
+* The kdrive extension 46.5 -> 47.5 costs 0.00 (same numbers at 46.5 and 47.5 with the new pin).
