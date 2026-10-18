@@ -1,6 +1,6 @@
 {
  "id": "freek-oracle-route-knuckle-4r",
- "status": "screened",
+ "status": "verified",
  "v_gap": 16.2,
  "complexity": 33.25,
  "verdict": "watch",
@@ -58,6 +58,7 @@
    "level": "watch",
    "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 16.2: bench 15 contact poses, sum 78.55 mm, deepest 20.88 mm at ['ws', 15.0, 165.0, -60.0], 6 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+58.31 mm, x3.88) - CLEARLY DEEPER; held 47 contact poses, sum 232.2 mm, deepest 19.91 mm at ['ws', 30.0, 165.0, -45.0], 22 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (+171.23 mm, x3.81) - CLEARLY DEEPER",
    "depths": {
+    "polished_gap 15.4": {},
     "v_gap 16.2": {
      "bench": {
       "n": 15,
@@ -200,7 +201,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 8 commits that touched the row"
   },
   {
    "check": "rules",
@@ -226,7 +227,7 @@
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max86_bench.json",
   "docs/concepts/verify/freek-oracle-route-knuckle-4r/wear3_rA12_25_55.json"
  ],
- "git": "595e258",
+ "git": "d196fc2",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T08:21:06Z"
+ "t": "2026-10-18T11:02:10Z"
 }

@@ -595,6 +595,22 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
    - Round 104's other rows: armarc 18.01, kfree-armarc 26.42 and desmo-window 18.80-19.01 at kit density are dead, all
      audited. The jump loop wf_6c42dda0-f91 runs on to rounds 105-106 on the closer's next focus (carriage-borne relay
      rail, psi2, ER binders).
+   - *Lead, 11:05 UTC 10-18:* freek-oracle-route's final polish was CONFIRMED by its independent verifier
+     (wf_1d92c2e0-413; d196fc2; row polished_* fields; docs/research/freek-oracle-route-knuckle-4r_final_polish.md).
+     - pick1: 15.40 bench (score 94.40, +0.81, noise).
+     - Held out env-fit +2.06 (P 0.97); CAD-shape +1.38 (CI crosses 0).
+     - Contacts halve: bench 15 -> 7, 78.55 -> 39.47 mm.
+     - It is still 4 DOF (cx 33.25), so not the headline lead. No config reaches 95; 4 DOF tops out at ~15.4 here.
+
+     **OPEN for the user (proposal B):** do poses the J3 stop REFUSES, which would be skin contacts without it, count
+     as contacts? On that reading pick1's CAD-shape held gain is +0.76 (< 1) and its bench gain 0. Until the user
+     rules, the current metric stands (a refused pose = lost reach) and both readings are reported. The polished claim's
+     alignment audit is running (wf_555370a5-90c). The dashboard promotes it only on a non-gamed skeptic ruling.
+   - *11:05:* round 105 (jump J5) is screening. proxtrack-relay-knuckle-4r self-measures 13.39 frozen exact with its
+     'refined bump' (17.31 with the spec bump). That is the first number on file under 95's 13.75, but it is UNVERIFIED
+     and 4 DOF: the bump amount is the max over the lead's fit-bench poses (legal), and a ~4-point move from a bump
+     reshape needs the verifier and auditor. desmo-geom is DEAD (no stage-1 pin inside O20 passes the PA gate), which
+     closes the buildable desmo drive.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
