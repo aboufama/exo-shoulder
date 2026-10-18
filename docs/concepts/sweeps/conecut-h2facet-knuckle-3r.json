@@ -1622,5 +1622,61 @@
    "mass_removed_mg": 119.0
   },
   "secs": 10.2
+ },
+ {
+  "k": 29,
+  "t": "2026-10-18T13:47:24Z",
+  "params": {
+   "c": 1.2,
+   "hw": 25.0,
+   "daz": -7.658084110365362,
+   "fd": 0.0,
+   "dazf": -8.820911613373791,
+   "z0": 7.1888154596538225,
+   "dense": 1
+  },
+  "inband14": 0.9007,
+  "inband10": 0.5719,
+  "reach": 0.775,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 12.5,
+  "near1": 13.66,
+  "bench": "Bench(60,160) fast, lead fit frozen",
+  "envh": {
+   "gap": 17.57,
+   "reach": 0.7381,
+   "follow": 1.0,
+   "inband14": 0.9007,
+   "inband10": 0.5719,
+   "contact": 0.0138,
+   "near1": 22.24,
+   "near2": 44.19,
+   "minmetal": 0.44,
+   "gap_probe0.1": 17.57,
+   "probe0.1_poses": 0,
+   "gap_probe0.2": 17.57,
+   "probe0.2_poses": 0,
+   "shell12_poses": 25
+  },
+  "obj": 22.24,
+  "tag": "coarse",
+  "facet": {
+   "c": 1.2,
+   "hw": 25.0,
+   "az0": 135.14,
+   "fd": 0.0,
+   "azf": 115.18,
+   "z0": 7.1888154596538225,
+   "dense": 1,
+   "rigid_clipped": 4,
+   "contact_dropped": 4,
+   "solid_n": 2298,
+   "notch_clear_deg": 15.14,
+   "wall_min_mm": 3.3,
+   "flat_halfwidth_deg": 0.0,
+   "mass_removed_mg": 27.8
+  },
+  "secs": 10.2
  }
 ]
