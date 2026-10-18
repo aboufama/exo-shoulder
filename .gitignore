@@ -65,3 +65,6 @@ pipeline/full-exo/designs/cad_r21_*/
 
 # per-machine operations state (dashboard publish versions: tools/dash_refresh.sh, docs/OPERATIONS.md)
 .state/
+
+# in-progress temp files written by running re-measures (renamed on completion)
+docs/alignment/remeasure/.*_tmp.json
