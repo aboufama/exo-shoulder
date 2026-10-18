@@ -1,0 +1,94 @@
+{
+ "A": "desmo-window-knuckle-3r",
+ "B": "conecut-knee-knuckle-3r",
+ "note": "diff = gap A - gap B (negative: A better); split per gap term; paired bootstrap over poses within kind",
+ "bench": {
+  "gap_A": 20.44,
+  "gap_B": 18.29,
+  "diff": 2.15,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": 2.15,
+   "contact": 0.0
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 4
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    0.79,
+    2.36
+   ],
+   "sd": 0.52,
+   "p_A_better": 0.0
+  },
+  "model_frozen": {
+   "A": 20.43,
+   "B": 18.28
+  }
+ },
+ "held": {
+  "gap_A": 24.61,
+  "gap_B": 22.38,
+  "diff": 2.23,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": 2.23,
+   "contact": 0.0
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 14
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    1.17,
+    2.31
+   ],
+   "sd": 0.37,
+   "p_A_better": 0.0
+  },
+  "model_frozen": {
+   "A": 24.62,
+   "B": 22.38
+  }
+ },
+ "pooled_bench_plus_held": {
+  "gap_A": 23.45,
+  "gap_B": 21.24,
+  "diff": 2.21,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": 2.21,
+   "contact": 0.0
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 18
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    1.37,
+    2.3
+   ],
+   "sd": 0.31,
+   "p_A_better": 0.0
+  }
+ }
+}

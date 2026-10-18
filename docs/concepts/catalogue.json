@@ -3294,7 +3294,7 @@
   "name": "Buildable desmo: stage-1 groove moved into link 2's underside, one-piece hardened crank through a window in link 1b's J2 plate",
   "family": "slaved knuckle, spring-free 2-contact crank (desmo); the family's structural cx floor",
   "lens": "round104:C low-cx-same-reach (the built cx frontier: fixes the gen-9 R6 stack conflict)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-18T05:16:06Z",
   "source": "round 104 (J4, track jump) judge (docs/concepts/round104_ideation.md)",
   "description": "Rest, overhead, across-body and behind-back match desmo-conecut cell B (or desmo-slipper) on the lead's seats: J1 hub on the back of the shoulder, link 1a to a plain hub K (no spring, no stop A), link 1b to hub 2, link 2 to hub 3, pin knee and pad as the lead. The ONLY change is the stage-1 stack at hub 2: today's groove (F2+0.11..1.61) sits inside link 1b's J2 plate layer and the gen-9 CAD crosses link 1b by 1.39-1.50 mm on all 451 frames (R6 1.50 FAIL). Here the groove is cut 1.5 deep into a 440C insert pressed into link 2's UNDERSIDE (F2+3.15..4.65); the crank is ONE 17-4PH H900 part: boss on link 1b's top, a short arm dropping through a window milled in link 1b's J2 plate over the arm's swept sector, an integral crowned R4 O1.5 pin rising into the groove; its long arm runs along link 1b to the unchanged stage-2 slot / nose at link 1a's boss. Across the body the pin leaves the dwell arc and the crank turns K up to its 46-deg stroke.",

@@ -124,3 +124,105 @@ plain 13.27, reach 0.775, ib14 0.8923, the verifier's fit_fast. So the model's a
 * The mid-3.15 control (2.29 mm up, r_out 11.29) costs +1.35. So the loss comes from LIFTING the out-of-rim insert
   sector, not from its extra 0.45 mm of radius: the samples rise out of the 14 mm band.
 * The kdrive extension 46.5 -> 47.5 costs 0.00 (same numbers at 46.5 and 47.5 with the new pin).
+
+### The claim wear: frozen exact Bench(110,360), worn ONCE (pre-registered config k4)
+
+The config was picked by the spec's rule among the two legal pins: K play <= 0.25, rc >= 1.0, smallest pitch hi. That is
+a_s 9.9 / psi 150, lev 3.9, blend 8, kdrive 47.5, kj2 46.5; near-touch fast 20.52, 0.01 off the best k12. The fit is on
+Bench(60,160) fast, the shape is frozen, the blended IK is the 18.98 record's, and the per-pose dumps are written. Saved
+outputs: docs/concepts/verify/desmo-window-knuckle-3r_v_{bench,held}_frozen.json and
+docs/alignment/remeasure/desmo-window-knuckle-3r_{bench,held}_perpose.json.
+
+| wear | gap | score | reach | ib14 | ib10 | contact | near-touch 1 mm | min metal (taken) | overhead | dK taken max | min th margin |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| bench exact 360 | **20.43** | 92.57 | 0.7278 (262) | 0.8785 | 0.5622 | 0.0106 (4) | 22.07 | 0.07 mm | 8 / 28 | 45.62 | 5.181 |
+| held out (861 ws taken) | **24.62** | 91.05 | 0.6922 | 0.8776 | 0.5614 | 0.016 (14) | 27.47 | 0.33 mm | 18 / 71 | 46.27 | 5.006 |
+
+**Paired, per pose** (tools/alignment_paired.py compare, docs/alignment/remeasure/desmo-window-knuckle-3r_vs_*_paired.json).
+The reach and contact poses are identical (0 discordant takes, the same 4 / 14 contacts).
+
+| comparison | bench diff | 90 % CI | held diff | 90 % CI | P(window better) |
+|---|---|---|---|---|---|
+| vs conecut-knee-knuckle-3r, the lead (18.28 / 22.38) | +2.15 | [0.79, 2.36] | **+2.23** | [1.17, 2.31] | 0.000 |
+| vs desmo-conecut-knuckle-3r with blend (18.98 / 23.19) | +1.45 | [0.79, 1.56] | +1.42 | [1.17, 1.51] | 0.000 |
+
+The whole difference is in-band, on both sets.
+
+**Where the 1.45 points go**, from the frozen run's per-part in-band (parts_ib14).
+* ring2, the out-of-rim insert sector: 29 samples, mean 16.8 mm from the skin, 15.1 % in band. At the claim's level it
+  was 19 samples at 54 % in band.
+* Every other part is unchanged.
+* Fast ablation with ring_rigid=0 (the sector's skin samples removed): ib14 0.9001 at the new level vs 0.8992 at the
+  claim's. So the raised sector costs 2.19 fast points against the old sector's 0.69: +1.50, matching the +1.45 frozen.
+
+## Verdict: DEAD (pre-registered kill, both conditions)
+
+* Frozen exact Bench(110,360) is 20.43, above the 19.45 kill line and 2.15 above the lead's 18.28.
+* Held out, paired, it is +2.23 worse than the lead, past the 0.5 kill line.
+* The mechanism is buildable as specified, with three caveats from the red team below, at cx 16.25 with 0 passive
+  translations.
+* The stack fix itself costs nothing in reach, contact, the stop order or the drive's gates. It loses only in-band.
+  Lifting stage 1 above link 1b's plate lifts the insert's out-of-O20 sector 3.04 mm. That sector cannot shrink: both
+  legal pins have pitch hi 9.85-9.90 against the 34.47-deg PA gate, so r_out is 11.41-11.46 with the 0.8 wall. At its
+  new height it sits 16.8 mm (mean) over the skin.
+* So the built desmo frontier stays at 18.25-18.5 (the conecut / slipper builds), not 16.25 at <= 19.45.
+
+**Convergence gate** (score points, near-touch objective, over the 18 legal rows of 32 tries in sweep order):
+* best gain over the second half: 0.007;
+* over the last third: 0.007;
+* top-5 spread: 0.011.
+
+The best near-touch is refine k26 (a_s 9.778 / psi 149.87, blend 12.3, kdrive 48.0): 20.49 near-touch, 14.65 plain. That
+is 0.03 better than the worn k4, which cannot close the 0.98 to the kill line, so it was not re-worn.
+
+The gate passes. The morphology's free parameters cannot move the limiter:
+* the level is fixed by the stack (insert underside = plate top + 0.15);
+* the pitch is fixed by the PA gate (2 legal pins);
+* blend 6-12, kdrive, arm_w and win_c move the gap by <= 0.08.
+
+## Red team (measured, best config)
+
+* **Stop order: met, narrowly.**
+  * The drive ends at K 47.5. J2's dowel window ends at 46.5 and engages at ~46.80, so the drive clears the engagement
+    plus the 0.25 K lead (47.05) by 0.45 deg.
+  * The slot can grow to 48.0 (kdrive probes k19-k21: drive end 47.75 / 48.0 / 48.0, gap unchanged). At 48.5 the longer
+    tip plate comes within 1.0 mm of hub K's O20 at rest and the whole drive is dead (PLATE-hubK at K 0).
+  * Stage 1 is not the limit: the re-placed pin's built-groove PA first fails at K 49.40 (blend 8).
+* **The point that pinches (spec flaw).** The spec's arm layer F2+1.6..3.1 leaves the arm's top 0.05 mm under the
+  insert's underside (F2+3.15), below the 0.15 running gap between the crank and link 2. Per taken fast pose, the arm's top
+  line comes within 0.04 mm of link 2's metal (pose 60). Fix: drop the arm to F2+1.45..2.95. That metal is interior and
+  off the skin-check list, so the bench is unaffected.
+* **Window size (structural).**
+  * The crank axis meets hub 2's plate layer 17.2 mm from hub 2's axis (azimuth 58.9). An arm kept at the plate layer
+    all the way to the boss needs a window r 6.55..18.69 over a 48.1-deg sector. That is 8.7 mm past the O20 rim, not
+    the ~0.9 the judge assumed.
+  * The wall left over the O11 MR117 seat is 1.05 mm (>= 0.8: passes).
+  * Link 1b's sampled plate keeps 42-86 mm of arc at r 7-10 against a 1.9-6.3 mm window there. Past the rim the window
+    crosses link 1b's strap root.
+  * If the arm instead climbs onto link 1b's top just past the insert (r ~11.7), the window shrinks to the judge's
+    figure. The arm then shares the layer above F2+3.0 with link 2's J2 ring and strap, which is the crank-vs-link-2
+    clearance above.
+  * Either way the open-rim housing needs the M5 / FEA check before any CAD. That check was not run here.
+* **K play.** Crank-free 0.167 deg nominal, 0.251 at worst tolerance (c 0.015), just over 0.25, like the parent's 0.261.
+  The th margin is the parent's (5.181 bench / 5.006 held). 0.167 deg of play x dth/dK 0.403 takes the held margin to
+  ~4.94 (the lead's T3 watch item, carried).
+* **Pair checks.**
+  * Insert vs link 1b's plate top: 0.15 by construction.
+  * 32 link-1b-member samples inside the insert's slab are the O20 cylinder's side-wall ring (r 10.0, F2+4.08). The model
+    attaches that ring to link 1b's member by convention; in the gen-9 stack that wall is link 2's J2 ring, the insert's
+    own seat. So it is not an overlap, and the check now excludes the r = HUB_R ring. Rows k19-k21 carry the flag from
+    before this fix.
+  * Plate vs horn: min radial gap 0.15 on all 372 taken poses (V2).
+* **Named poses** (the parent's, unchanged kinematics): rest taken; overhead 8 / 28 taken; across the body taken;
+  behind the back, abduction 90 with internal rotation, and extreme external rotation (dK 62 past stop B) lost to the
+  fold. Contacts: 205 (hub 2 -4.28), 237 (crank -9.47), 264 (-1.17), 316 (link 2 -1.23).
+
+## What this teaches (beyond this morphology)
+
+* For a groove drive at a J2 hub, the stage-1 stack level is a skin-band variable, not just a fit variable.
+  * Metal outside the O20 rim pays for its height directly: 3.04 mm up cost 1.45 points at only 29 samples.
+  * A buildable desmo must keep stage 1 inside the O20 footprint (pitch_hi + 1.56 <= 10, i.e. pitch <= 8.44) or below
+    the plate top. At the verified law and drive no legal pin has pitch <= 9.7 at any level (CAD scan and this scan).
+  * The next lever is the drive geometry: the crank axis dR, the ratio g, or the PA budget. The seat is not the lever.
+* The J2-first stop order costs nothing in reach. It needs the stage-2 slot to run 0.55-1.0 deg of K past J2's window,
+  and hub K's O20 caps that at ~48.0 at r_c 16.18.

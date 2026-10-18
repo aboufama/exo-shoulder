@@ -158,7 +158,9 @@ class WModel(DC.DCModel):
         ann = (rb_ >= r_in_ins - 0.15) & (rb_ <= r_out_ins + 0.15)
         below = ann & (lb_ < ins_lo)                              # link 1b metal under the insert (its lower plate / strap)
         l1b_top = float(lb_[below].max()) if below.any() else None
-        n_slab = int((ann & (lb_ >= ins_lo - 0.15) & (lb_ <= ins_hi + 0.15)).sum())   # link 1b metal inside the insert's slab
+        wall = np.abs(rb_ - float(S.HUB_R)) < 0.05             # the O20 cylinder's side-wall rings: axisymmetric about u2, attached to
+        # link 1b's member by the model's convention; in the gen-9 stack the wall above F2+3.15 is link 2's J2 ring (the insert's seat)
+        n_slab = int((ann & ~wall & (lb_ >= ins_lo - 0.15) & (lb_ <= ins_hi + 0.15)).sum())   # link 1b metal inside the insert's slab
         # (link 1b samples far above the slab, e.g. F2+12.25, are its upper J2 cap over link 2's ring: not in the insert's layer)
         pairs = dict(insert_layer=[round(ins_lo, 3), round(ins_hi, 3)], arm_layer=[ARM_LO, ARM_HI],
                      insert_vs_l1b_plate_top=round(ins_lo - PLATE_TOP, 3),
