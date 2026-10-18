@@ -1,0 +1,64 @@
+{
+ "A": "desmo-geom-knuckle-3r",
+ "B": "conecut-knee-knuckle-3r",
+ "note": "diff = gap A - gap B (negative: A better); split per gap term; paired bootstrap over poses within kind",
+ "bench": {
+  "gap_A": 18.44,
+  "gap_B": 18.29,
+  "diff": 0.15,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": 0.15,
+   "contact": 0.0
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 4
+  },
+  "boot": {
+   "n": 2000,
+   "ci90": [
+    0.0,
+    0.34
+   ],
+   "sd": 0.14,
+   "p_A_better": 0.0
+  },
+  "model_frozen": {
+   "A": 18.43,
+   "B": 18.28
+  }
+ },
+ "held": "missing dump",
+ "pooled_bench_plus_held": {
+  "gap_A": 18.44,
+  "gap_B": 18.29,
+  "diff": 0.15,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": 0.15,
+   "contact": 0.0
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 4
+  },
+  "boot": {
+   "n": 2000,
+   "ci90": [
+    0.0,
+    0.34
+   ],
+   "sd": 0.14,
+   "p_A_better": 0.0
+  }
+ }
+}
