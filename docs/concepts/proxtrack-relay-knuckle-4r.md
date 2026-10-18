@@ -79,6 +79,12 @@ lower is allowed when it does not touch) and the ramp at its 60-deg floor. Fast 
 10.98 / 9.80 (the fast bench is near-blind to PHI: the PHI 35 pick was worn on the claim bench ONCE; the PHI 30
 pre-registered hardware is the only other claim-bench hardware reading).
 
+**Held-out wear** (the lead family's held-out bench, exact, never searched or selected; claim params): plain
+18.01 / GATE 18.51 (pooled ib14 0.9187, chain-only 0.895) / near1 23.19; reach
+0.7679 (731/952), overhead 18/71, contact 0.048, ideal held bound 16.64. Lead held 22.38, freek 21.89:
+bench -> held inflation +4.11 (the lead's +4.10), so the gain over the lead holds out of sample (-3.87 held).
+T5 per-pose dumps: frozen_pick_phi35_exact_0_perpose.json (bench), held_pick_phi35_exact_perpose.json (held).
+
 ## Red team (measured)
 
 * **The pose that jams.** The rigid bump is sized on the fit bench; on the claim bench the pin-a boss (5 poses) and the
