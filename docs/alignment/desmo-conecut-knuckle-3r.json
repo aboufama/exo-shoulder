@@ -6,7 +6,7 @@
  "verdict": "watch",
  "reasons": [
   "continuity: static 23.19, connected full 23.19, knn 32.18, bench 24.47 (docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json); the knn flood (no envelope stepping stones) loses 8.99",
-  "reporting: verdict text still reads as a self-measured screen"
+  "density: over-dense parts horn 2.52x, ring2 2.44x; bench 18.98 -> 18.68 at the kit's density; held 23.19 -> 22.89 at the kit's density; moves > 0.1: bench ring2 18.98 -> 18.59; bench all over-dense 18.98 -> 18.68; held ring2 23.19 -> 22.80; held all over-dense 23.19 -> 22.89"
  ],
  "checks": [
   {
@@ -52,7 +52,7 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.98: held 14 contact poses, sum 43.84 mm, deepest 10.38 mm at ['ws', 45.0, 165.0, -30.0], 5 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-17.13 mm, x0.72); bench depths not on file",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.98: held 14 contact poses, sum 43.84 mm, deepest 10.38 mm at ['ws', 45.0, 165.0, -30.0], 5 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file); bench depths not on file",
    "depths": {
     "v_gap 18.98": {
      "held": {
@@ -80,25 +80,12 @@
     }
    },
    "ref": "conecut-knee-knuckle-3r",
-   "compare": [
-    {
-     "claim": "v_gap 18.98",
-     "wear": "held",
-     "sum": 43.84,
-     "ref_sum": 60.97,
-     "excess": -17.13,
-     "ratio": 0.72,
-     "watch": false
-    }
-   ]
+   "compare": []
   },
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs conecut-knee-knuckle-3r: plain -0.76, 2 mm -0.29",
-   "ref": "conecut-knee-knuckle-3r",
-   "gain_plain": -0.76,
-   "gain_2mm": -0.29
+   "reason": "no reference"
   },
   {
    "check": "continuity",
@@ -252,6 +239,16 @@
    }
   },
   {
+   "check": "density",
+   "level": "watch",
+   "reason": "over-dense parts horn 2.52x, ring2 2.44x; bench 18.98 -> 18.68 at the kit's density; held 23.19 -> 22.89 at the kit's density; moves > 0.1: bench ring2 18.98 -> 18.59; bench all over-dense 18.98 -> 18.68; held ring2 23.19 -> 22.80; held all over-dense 23.19 -> 22.89",
+   "over": {
+    "horn": 2.519,
+    "ring2": 2.445
+   },
+   "src": "remeasure/sample_density_desmo-conecut-knuckle-3r.json"
+  },
+  {
    "check": "complexity",
    "level": "ok",
    "reason": "recomputed 16.5 vs row 16.5",
@@ -260,13 +257,13 @@
   },
   {
    "check": "reporting",
-   "level": "watch",
-   "reason": "verdict text still reads as a self-measured screen"
+   "level": "ok",
+   "reason": "row, verifier files and dashboard agree"
   },
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
   },
   {
    "check": "rules",
@@ -285,7 +282,7 @@
   "docs/concepts/verify/desmo-conecut-knuckle-3r_groove_scan_claim.json",
   "docs/concepts/verify/desmo-conecut-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "7c3d4a4",
- "tool_version": "2026-10-17.6",
- "t": "2026-10-18T05:51:47Z"
+ "git": "73de661",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T23:13:45Z"
 }

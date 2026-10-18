@@ -1,192 +1,225 @@
 # Alignment audit: desmo-conecut-knuckle-3r
 
-First audit of this row (discovery round 13, slice r13-A: screened 20:09, verified 20:48 UTC 2026-10-17). Run
-20:49-21:18 UTC on the box (at most 2 niced processes; the farm was not used).
+Hourly audit, 2026-10-18 22:39-23:16 UTC. Due because the row was committed at 07:42:27 (ea9371b, the lead's density
+audit) after the last ledger entry (05:59:03, WATCH). That commit put a new, lower number on the row's verdict text: the
+S6 density re-weight, 18.68 bench / 22.89 held (18.49 with ring2 at 4x), next to v_gap 18.98. The confirmation re-wear was
+still pending. This is the first audit of that number. Run on the box (at most 2 niced processes, OMP_NUM_THREADS=1; the
+farm was not used, $0).
 
-- **Ledger entry:** 2026-10-17T21:17:26Z, by auditor, run `audit:desmo-conecut-knuckle-3r`. Verdict **watch**, tool
-  verdict watch, claim v_gap 18.98. Reasons: 2 tool reasons (continuity, reporting) and 12 judgement findings, all watch.
-- **Checks:** `docs/alignment/desmo-conecut-knuckle-3r.json` (tool VERSION 2026-10-17.6, `--ref slipper-nose-knuckle-3r`).
-- **Findings:** `docs/alignment/desmo-conecut-knuckle-3r.findings.json` (11, all watch).
-- **Re-wears and probes written by this audit** (the model ran unchanged; only its `audit()` was wrapped, or its
-  locals read with a return-trace):
-  - `remeasure/desmo-conecut-knuckle-3r_bench.json`: frozen exact Bench(110,360) 19.04 (the claim's linear-law IK),
-    with near-touch, metal histogram, coordinate spans and part in-band.
-  - `remeasure/desmo-conecut-knuckle-3r_held.json`: frozen held out 23.24 (linear-law IK; the verifier's blended IK reads 23.19), near-touch 1 mm 26.09 / 2 mm 37.56 / 3 mm 84.36, band read 3-14 mm 23.42, closest metal 0.325 mm, knee angles 59.27-107.07.
-  - `remeasure/desmo-conecut-knuckle-3r_probe_bench.json`: `tools/alignment_wear_probe_model.py` (unscored workspace
-    in-band, standoff, clearance floor, reach by elevation, own-state fold margin).
-  - `remeasure/desmo-conecut-knuckle-3r_s1read_check.json`: the stage-1 reading probe (fast Bench(60,160), five cells).
-  - `remeasure/desmo-conecut-knuckle-3r_blendband_fast.json`: the new probe `tools/alignment_blend_band_probe.py
-    --no-wear` (the built-groove back-drive pressure angle through the blend, read from the model's own arrays with a
-    return-trace). Its frozen-wear part (the taken poses' K histogram) was stopped at 21:16 after 11 CPU-minutes on a
-    box at load 6-8, to keep the time box.
+- **Ledger entry:** 2026-10-18T23:12:46Z, by auditor, run `audit:desmo-conecut-knuckle-3r`. Verdict **watch**, claim v_gap 18.98. Reasons: 2 tool reasons (continuity, density) and 13 judgement findings, all watch. None is gamed.
+- **Checks:** `docs/alignment/desmo-conecut-knuckle-3r.json` (tool VERSION 2026-10-18.1). Tool verdict watch:
+  continuity and density.
+- **Findings:** `docs/alignment/desmo-conecut-knuckle-3r.findings.json` (13, all watch).
+- **Files this audit wrote.** The model and the verifier ran unchanged. The wear was thinned in place by the same
+  `_thin` that `tools/sample_density.py` uses.
+  - `remeasure/desmo-conecut-knuckle-3r_bench.json`: the standard re-wear, 19.04 frozen exact on the claim's linear-law
+    IK. It matches the 2026-10-17 re-wear number for number: near-touch 1 mm 20.68 / 2 mm 35.13 / 3 mm 87.13, closest
+    metal 0.072 mm.
+  - `remeasure/desmo-conecut-knuckle-3r_held.json`: the standard held re-wear, 23.24 frozen held out (linear-law IK; the verified blended IK reads 23.19); near-touch 1 mm 26.09 / 2 mm 37.56, closest metal 0.325 mm.
+  - `tools/alignment_density_rewear_conecut.py` (new): the exact confirmation of the density re-weight through the
+    verifier's own `--blend` harness. It is needed because the row's recorded command crashes (finding S6).
+  - `remeasure/desmo-conecut-knuckle-3r_density_rewear_bench.json`: exact thinned bench 18.65 (in-band 0.8963; horn [27, 10], ring2 [19, 7]; fit_fast 13.27 = the verifier's).
+  - `remeasure/desmo-conecut-knuckle-3r_density_rewear_held.json`: exact thinned held out 22.86 (in-band 0.8952; horn [27, 10], ring2 [19, 7]; reach 0.6922, contact 0.016; fit_fast 13.27).
+  - `remeasure/desmo-conecut-knuckle-3r_s1level3p9_density_rewear_bench.json`: the plate-clearing level F+3.9 (glev 2.039, a_s 9.8 / psi 150, ring2 in link 2's true frame) thinned: exact bench 19.03 (in-band 0.8925; horn [27, 10], ring2 [29, 8]; desmo_fail []; as sampled 20.50).
 
 ## Verdict: WATCH, claim v_gap 18.98 (score 93.10), held out 23.19
 
-Nothing in the number is gamed and no hard rule is broken. The verified 18.98 is the verifier's blended-law IK wear; the
-claim's linear-law 19.04 reproduces exactly here (re-wear 19.04, per-pose dumps recompute to 18.99 / 19.05). The design
-is behind every sibling on the plain gap (slipper-nose 18.49, conecut 18.28, desmo-slipper 18.95), so its number does
-not buy it a rank. What it sells is a story: "spring-free, roller-free, the first desmo-family drive holding mu 0.15 on
-both stages, at complexity 16.5". Two parts of that story are weaker than the row's verdict text says:
+Nothing in the number is gamed and no hard rule is broken. The ranking number is still v_gap 18.98, and the dashboard
+shows 18.98.
 
-1. **The mu 0.15 claim rests on a gate the screener re-read for this design** (NEW-pa-reread). Read the way desmo-slipper
-   was read, the same placement holds mu ~0.139, the same as desmo-slipper's jam at 0.14. The real gain is stage 2.
-2. **At mu 0.15 the drive sits 0.07 mm from a cliff** (NEW-friction-cliff, the verifier's own probe).
+The new number on the row is honest as a measurement. The density re-weight 18.68 is confirmed by an exact thinned
+re-wear: **18.65 bench**, **22.86 held** (re-weight 22.89). It is a fair change in the design's favour. The family's ring2 sampler puts 1
+sample per mm2 on a strip of out-of-band metal, against the kit's 1 per 4 mm2, so the as-sampled 18.98 over-counted that
+strip.
 
-Neither changes the score: at mu 0.087 or 0.135 on the linear reading the fast gap is the claim's 13.31.
+But the 18.68 is the number of a stage 1 that cannot be built (M3), and it applies a one-sided correction (S6). The
+same thinning at the only plate-clearing level with a feasible pin reads **19.03**. So the exo that could be built reads
+19.03 at the kit's density. That is 0.05 from the verified 18.98, and 0.35-0.38 worse than the 18.68 now on the row. The
+two corrections (density, -0.33; a buildable level, +0.38 at the kit's density) cancel to within 0.05.
 
-## Ruling asked of the auditor: the built-groove stage-1 reading
-
-The concept doc (Next, item 2) asks the auditor to rule on reading stage 1 on the built blended groove. My ruling, from
-the model's own arrays (`tools/alignment_blend_band_probe.py`, `remeasure/desmo-conecut-knuckle-3r_blendband_fast.json`):
-
-- **Where the reading applies.** The blend runs over K 0 to 10.72 deg (half-blend 10.77 deg of the linear law's K), a
-  quarter of the 46.5 deg stroke. Through it the built cap-side (back-drive: the pin pushing link 2's cap ring)
-  pressure angle falls from 89.9 deg at K 0 to 31.8 at K 9.8 (rows: K 0.25 82.7, 1.0 74.6, 2.2 65.7, 3.3 59.3,
-  4.6 52.7, 6.1 45.9, 7.8 38.9, 8.8 35.3).
-- **What is a lock and what is not.** At mu 0.15 the back-drive self-locks above 81.47 deg (90 - atan mu): only for
-  K < 0.33 deg. That is the dwell lock, and exempting it is right: every blended dwell-rise groove has it, and a lock
-  that holds K at rest against the cuff's load is the slaved coordinate's job. From K 0.33 to 9.0 the back-drive is
-  NOT locked; it runs at 34.5-81 deg, above the family's 43 - atan(mu) margin gate, and the built reading leaves it
-  ungated. The rest pose (dK 4.6, ~52.7 deg) and the taken overhead pose at axial -135 (dK 5.8, ~47 deg) live there.
-- **Ruling.** The built reading is the right place to read the groove: it is the groove that is cut, and the linear
-  law's kink is not (the linear read's 35.05 deg at K 0 is a kink artefact). Exempting the true lock (K < 0.33 here) is
-  right. But no blended groove can pass the family's 43 - atan(mu) back-drive gate next to its dwell, because the cap
-  angle goes to 90 as the law's slope goes to 0; so the exemption the screener chose (the whole blend, K 0-10.72) is a
-  convention, not a measurement, and under it the back-drive from K 0.33 to 9.0 runs at 35-81 deg ungated. Neither
-  reading measures whether the wearer feels that. The honest friction label is therefore: **stage 2 (the inverted
-  slot) holds mu 0.15 with margin, a real gain over desmo-slipper's flank (43-44.5 deg of K at mu 0.135-0.15); stage 1
-  is desmo-slipper's, with the first 9 deg of back-drive ungated under either reading, and its forward side 0.07 mm
-  from a bind at mu 0.15.** "The first desmo-family drive holding mu 0.15 on both stages" compares a built-read claim
-  with desmo-slipper's linear-read jam (mu 0.14); the same stage 1 on the same reading would read the same.
-- **Score.** Unaffected: fast 13.31 at mu 0.087 and at mu 0.135 on the linear reading, equal to the claim
-  (`remeasure/desmo-conecut-knuckle-3r_s1read_check.json`). A watch on a label, never a refutation of 18.98.
-- **Equal-placement control.** Not available: cell A (the desmo stage 2 unchanged) at the claim's seat r_c 16.176
-  fails its flank cusp at K 0 at any mu (fast 86.44 at mu 0.15 and 0.087, same file), so the inversion cannot be
-  compared with the flank at this placement.
+| reading (exact frozen Bench(110,360) unless stated) | bench | held |
+|---|---|---|
+| verified v_gap (as sampled, unbuildable level glev -1.0) | 18.98 | 23.19 |
+| row's S6 re-weight (horn 2.52x, ring2 2.44x to the kit) | 18.68 | 22.89 |
+| **exact thinned re-wear (this audit; horn 27 -> 10, ring2 19 -> 7)** | **18.65** | **22.86** |
+| re-weight, ring2 at the sampler's own pitch (4.0x) | 18.57 | 22.78 |
+| re-weight, ring2 at its hull reading (1.45x, under the flag: horn only) | 19.07 | 23.28 |
+| re-weight, over-dense parts AND the sparse straps L2 / L1b to the kit | 19.02 | 23.23 |
+| re-weight, every part at the kit (the tool's all_parts) | 18.87 | 23.08 |
+| plate-clearing level F+3.9 (glev 2.039, a_s 9.8), as sampled | 20.50 | not run |
+| **plate-clearing level F+3.9, exact thinned (this audit; ring2 29 -> 8)** | **19.03** | not run (time box) |
+| lead conecut-knee: as sampled / over-dense at kit / all parts at kit | 18.28 / 18.28 / 18.42 | 22.38 / 22.43 / 22.63 |
 
 ## What the wearer gets (measured)
 
-All on the frozen claim (exact Bench(110,360) unless stated). Sources: `remeasure/desmo-conecut-knuckle-3r_bench.json`,
-`_probe_bench.json`, the verifier's `+blend` per-pose dumps, `verify/desmo-conecut-knuckle-3r_v_*_blend.json`.
+All numbers are on the frozen claim. The claim, the model and the kit are unchanged since the 2026-10-17 re-wears, and
+this audit's bench re-wear reproduces them exactly. Sources: `remeasure/desmo-conecut-knuckle-3r_bench.json`,
+`_probe_bench.json`, the verifier's `+blend` per-pose dumps, `verify/desmo-conecut-knuckle-3r_v_*_blend.json` and this
+audit's `_density_rewear_*` files.
 
 | what | bench | held out |
 |---|---|---|
 | overhead reach (elev >= 140), taken / total | 8 / 28 (0.286) | 18 / 71 (0.254) |
 | raised-arm reach (elev >= 90), taken / total | 47 / 113 (0.416) | 123 / 300 (0.410) |
-| reach by elevation band 90-120 / 120-140 / 140-160 / 160+ | 27/51, 12/34, 5/13, 3/15 | - |
 | why overhead poses are lost (ws, elev >= 140) | fold 14, contact 3, J3 stop 3 | - |
 | taken poses with metal < 2 mm (< 1 mm) | 33 (3) of 372 | 71 (13) of 861 |
-| closest taken metal | 0.072 mm (pose 139, plane -60 / elev 60 / axial 105) | 0.325 mm |
-| taken overhead poses with metal < 2 mm | 4 of 8 | - |
-| contact poses, summed depth, deepest | 4, 16.15 mm, 9.47 mm (pose 237, 15 / 165 / -60: crank -9.42, tip plate -5.87) | 14, 43.84 mm, 10.38 mm (pose 683, 45 / 165 / -30) |
-| scored in-band 2-14 (clip frames) | 0.893 (verified), 0.892 (linear IK) | 0.892 |
+| taken overhead poses with metal < 2 mm | 4 of 8 | 10 of 18 |
+| closest taken metal | 0.072 mm (pose 139: plane -60 / elev 60 / axial 105) | 0.325 mm |
+| contact poses, summed depth, deepest | 4, 16.15 mm, 9.47 mm (pose 237: plane 15 / elev 165 / axial -60; crank -9.42, tip plate -5.87) | 14, 43.84 mm, 10.38 mm (pose 683: 45 / 165 / -30) |
+| scored in-band 2-14 (clip frames): as sampled / at the kit's density | 0.893 / 0.8963 | 0.892 / 0.8952 |
 | unscored workspace in-band: all taken / elev 90-140 / overhead | 0.863 / 0.831 (16.8 % of metal > 14 mm, max 30.7 mm) / 0.933 | - |
 | fold margin th, min over taken | 5.181 deg (0 under 5) | 5.006 deg (pose 1054, at dK 46.27, the slot end) |
+| th where stop B engages (K 46.5) | not on file (about 4.83-4.91, extrapolated) | not on file |
 
-- **Springs:** none. K is slaved by a two-stage desmodromic drive (stage 1: a crowned O1.5 440C pin in a two-walled
-  groove in hub 2's cap ring; stage 2: an O1.5 nose on link 1a in a 3.72 mm slot in the crank's tip plate).
-- **Stops:** the J2 fold (88 bench / 260 held poses lost), the J3 dowel (j3stop, 3 overhead poses), the slot's far end
-  (stop B at K 46.5; the held stroke uses 46.27), and the knee window 25.22-154.78 (the taken knee angles 59.27-105.94,
-  34 deg clear).
-- **Cuff twist, drag, R17:** not measured (no CAD, no dynamics run).
-- **Near-singular postures:** the th margin sits at 5.0-5.2 deg at the slot end (T3); the sub-dyad m_sub is carried from
-  conecut (under 1 deg on 50 of 205 rest poses there; G4).
-- **Same arm, same takes as conecut.** The 262 taken workspace poses, the 4 bench contacts and the near-touch counts are
-  conecut's. The drive swap changes metal (+0.67 by sample weight from desmo's cap-ring sector, +0.09 from the
-  inversion: the row's S6 decomposition), not where the arm can go.
+- **Springs:** none. K is slaved by a two-stage desmodromic drive. Stage 1 is a crowned O1.5 440C pin in a two-walled
+  groove in hub 2's cap ring. Stage 2 is an O1.5 nose on link 1a in a 3.72 mm slot in the crank's tip plate.
+- **Stops:**
+  - the J2 fold: 88 bench / 260 held poses lost;
+  - the J3 dowel: 3 overhead poses;
+  - stop B at the slot's far end (K 46.5; the held stroke uses 46.27). The J2 low-end dowel engages after the drive's
+    own end (NEW-stop-through-drive);
+  - the knee window 25.22-154.78. The taken knee angles are 59.27-107.07, 34 deg clear.
+- **Knee hardware:** the claim carries stk 6.0 mm, the kit's MR63ZZ-pair stack. So the lead's build rule (MR63ZZ
+  bearing pairs) is met in the model. This was checked because two sibling rows were caught at stk 4.85.
+- **Cuff twist and drag (gen-9 full CAD, R17):** nominal (bearing mu 0.005) twist 3.97 deg, 0.51 N, 0 lags. At f 0.05:
+  11.74 deg with 23 lags over 10 deg. At f 0.2: 25.0 deg / 20.3 N. The R17 run drives K by the model's law, so the drive's
+  own force flow is unmeasured (G3).
+- **Near-singular postures:** th is 5.0-5.2 deg at the slot end (T3). The sub-dyad m_sub is under 1 deg on 50 of 205
+  rest poses (G4).
+- **Same arm as conecut:** the same 262 taken workspace poses and the same 4 bench contacts. The drive changes metal, not
+  where the arm can go. The stage-1 ring sector the drive adds is 0.55 in band (median 13.8 mm) at the claim's level and
+  0.143 (median 16.9 mm) at the level where it can be built. At the kit's density it is 7-8 samples, about 0.8 % of the
+  scored metal, so the score barely sees it. A wearer feels a 1 mm sliver of metal 17 mm off the arm at the hub (S2, report
+  only).
 
 ## Findings (all watch; `desmo-conecut-knuckle-3r.findings.json`)
 
-1. **NEW-pa-reread (proposed catalogue entry T6, "a gate re-read for the design that carries the claim").**
-   - *Looks like:* a claim passes a gate its family failed, because the claimant re-defined where the gate applies.
-   - *Here:* stage 1's cap (back-drive) side is gated only outside the blend. Inside the blend (K 0-10.72) the back-drive is above the gate from K 0 to 9.0
-     and self-locking only to K 0.33. On the
-     family's linear reading the claim placement fails at K 0 at mu 0.15 (cap 35.05 vs 34.47) and holds mu ~0.139.
-   - *Why not better:* the wearer gets the same stage 1 as desmo-slipper; the "first desmo drive at mu 0.15" is half a
-     reading. Stage 2's inversion (PA stroke 64.5 to mu 0.15) is a real gain.
-   - *Action:* state the friction claim under both readings in the row verdict; adopt one reading for the family
-     (proposal 2).
-2. **NEW-friction-cliff (carried).** a_s +0.07 mm binds stage 1 at K 44.75 (fast 14.56), below the held stroke 46.27.
-   *Action:* report "mu 0.15 nominal; mu 0.087 robust"; put a_s / psi tolerances on the drawing, or move the placement
-   to where a_s +-0.1 holds.
-3. **NEW-silent-check (carried).** RC_MIN 1.5 declared, never cut; the claim's rc_min is 1.01 (ridge 0.25 mm, 440C
-   insert). Worst-tolerance crank-free slop 0.281 deg > the 0.25 gate. *Action:* proposal 3.
-4. **M3.** The stage-1 arm and pin inside hub 2's O20 footprint are unchecked (relief pocket assumed); the new tip plate
-   rides 0.150 mm over link 1a's boss on every pose, and 1.23 mm from hub K's O20. *Action:* L1 CAD of the J2 seat stack
-   and the plate / boss layer with their stack tolerances.
-5. **T3 (carried).** th 5.006 held at the slot end; K play 0.227 deg (0.281 at worst tolerance) takes it to ~4.9.
-6. **S2.** Tip plate 8 samples (0.719 in band, median 12.3 mm), ring sector 19 (0.542, 13.8 mm); sample-weighted in-band
-   flatters this row by 0.79 points where it under-reads the siblings by 0.73-2.87. No rank changes.
-7. **T1 (report only).** 33 / 71 taken poses with metal under 2 mm, closest 0.072 mm; 4 of 8 taken overhead poses
-   under 2 mm. Same as conecut.
-8. **NEW-ws-inband (carried).** Raised-arm workspace (elev 90-140) in-band 0.831 with 16.8 % of the metal above 14 mm
-   (max 30.7 mm), unscored.
-9. **G4 (carried).** Same chain as conecut, whose sub-dyad is under 1 deg on 50 of 205 rest poses.
-10. **G3 (missing measurement).** No CAD, no R17, no cuff twist, no drag; the back-drive band's force flow is unmeasured.
-11. **R1.** The row verdict still says "passes every drive gate at mu 0.15 on BOTH stages"; the dashboard (rebuilt 20:57)
-    now shows "verified" 18.98 but carries the same screen text and a failing sweep best (86.19). *Action:* the lead
-    updates the verdict text (with the verifier's "nominal only" and both friction readings).
-12. **P2 (negligible).** The slot length was argued from a held-out stroke (46.27); its value equals the displaced lead's
-    own dK_lim 46.5. At least +0.3 held points at stake, none on the bench.
+1. **S6, over-dense sampling: the row's new number (NEW this audit).**
+   - *Evidence:* the re-weight 18.68 / 22.89 is confirmed exactly at **18.65** bench / **22.86** held
+     (`remeasure/desmo-conecut-knuckle-3r_density_rewear_{bench,held}.json`). The shape is the claim's: fit_fast 13.27
+     equals the verifier's, and every unthinned part's in-band is identical.
+   - *The confirmation command on the row cannot run.* `tools/sample_density.py rewear` crashes before any wear: its
+     `fitted()` calls `_thin(M1, *thin)` with three arguments, but `_thin` takes two. So "exact re-wear pending" could not
+     complete as written. The desmo-slipper audit hit the same crash and wrote its own adapter. This one,
+     `tools/alignment_density_rewear_conecut.py`, is for this row's verifier.
+   - *Spread:* the reading depends on which density figure ring2 gets: 19.07 (hull 1.45x, below the flag), 18.68 (cell
+     2.44x, used) or 18.57 (the sampler's own 0.5 x 2 mm pitch, 4x).
+   - *One-sided:* the correction applies only to parts above 2x. This row's sparse straps (L2 0.84x, in-band 0.732; L1b
+     0.72x) are left as they are. Correcting them too gives 19.02, and every part at the kit gives 18.87.
+   - *Why it is not gaming:* the over-sampled strip is out-of-band metal, so the as-sampled number was pessimistic for
+     this row. The area-honest number is a little better.
+   - *Why the exo is not better than 18.98 says:* see M3. The buildable design reads 19.03 at the kit's density.
+   - *Action:* proposals 1 and 2.
+2. **M3, unchecked clash (carried; re-measured at the kit's density).**
+   - The verified stage-1 layer is inside link 1b's J2 lower plate at every glev in the search box (CAD R6 1.50 mm on 451
+     of 451 frames).
+   - Thinned to the kit's density:
+     - claim's level: 18.65;
+     - the only plate-clearing level with a feasible pin (F+3.9): **19.03**. As sampled, that level read 20.50.
+   - So at the kit's density the buildable lift costs +0.38, not +1.52, and the 18.68 now on the row is 0.35-0.38
+     optimistic as the number of an exo that can be built.
+   - F+3.9 clears the plate by only 0.15 mm, and it is not shown clear of link 1b's strap.
+   - Not gamed: v_gap ranks, and the row is not the lead at any reading. The 18.68 ranks the row only in
+     `sample_density.md`, where it passes roller-longdyad (18.76 at kit). That row has its own open M2 (18.93 at the
+     MR63ZZ stack), so it is not shown better for the wearer.
+   - *Action:* the row's density sentence should carry the buildable 19.03 next to the 18.68 (the lead's call; the
+     auditor edits no row).
+3. **NEW-inherited-stack (proposed M6; now measured on three rows).**
+   - lowarm-halfring is ledger GAMED on the same layer (its skeptic re-ran the geometry: F+0.11..1.61).
+   - desmo-slipper reads 20.38 / 25.33 at the plate-clearing level, as sampled.
+   - At the kit's density the lift is +0.38 here and +0.11 on lowarm-halfring: mostly a density artefact on the number.
+     The clash is still real metal in a real plate.
+4. **NEW-sample-frame (proposed entry renumbered S7, since S6 is now the density check).**
+   - ring2 is sampled 7.28 deg off link 2's frame: +0.09 as sampled, +0.03 at the kit's density.
+   - The insert's 28 deg outside O20 that the model does not sample is still unworn, estimated at +0.05 to +0.1 at the
+     kit's density.
+5. **T3 (carried; the rule's second clause still unmet).**
+   - th on the taken poses: 5.181 bench and 5.006 held, 0 poses under 5.
+   - th where the K-clamped stop B engages (K 46.5) is not on file, although the stop-buildability rule requires it.
+     Extrapolated from the verifier's slope it is about 4.83-4.91.
+   - With the drive's 0.23-0.28 deg K play, 2-3 held poses fall under 5.
+6. **NEW-stop-through-drive (carried).** The groove's rise ends before the J2 dowel engages (0.17 deg of q2, about 0.37
+   deg of K), so the stop load passes through the 1.5 mm pin. No force number exists.
+7. **G3 (carried).** R17 passes nominal, but at f 0.05 the cuff twists 11.74 deg with 23 lags. The run drives K by the
+   law, so the drive's force flow is unmeasured.
+8. **NEW-pa-reread (carried).** "mu 0.15 on BOTH stages" rests on stage 1 read on the built groove, which exempts the
+   back-drive band K 0.33-9.0 (35-81 deg, ungated). On the family's linear reading the limit is mu ~0.139. The row
+   verdict still carries the sentence.
+9. **NEW-friction-cliff (carried).** a_s +0.07 mm binds stage 1 at K 44.75, below the held stroke of 46.27.
+10. **NEW-silent-check (carried).** RC_MIN 1.5 is declared and never cut on (rc_min 1.01). The worst-tolerance slop of
+    0.281 deg is over the 0.25 gate.
+11. **NEW-ws-inband (carried).** The raised-arm workspace in-band is 0.831, with 16.8 % of the metal above 14 mm (max
+    30.7 mm). It is unscored.
+12. **G4 (carried; measured on this row).** m_sub is under 1 deg on 50 of 205 rest poses.
+13. **P2 (carried; negligible).** The slot length is argued from a held-out stroke.
+
+**Retired this audit: R1.** The row verdict now opens with "VERIFIED 18.98 AS THE MODEL'S NUMBER, NOT AS A BUILDABLE
+DRIVE", and the tool's reporting check reads ok. What remains of the label is NEW-pa-reread's friction sentence. The
+dashboard's sweep_gap of 86.19 is a display error that understates the design (the sweep's best is 13.18), so it is not
+gaming.
+
+**Checked and clean:**
+- the knee stack (stk 6.0 = the MR63ZZ pair; M2 clean);
+- the dashboard number (18.98 = v_gap; R4 clean);
+- no bench, judge, kit or model commit with the row since the last audit (P4 clean; the 07:29 / 07:42 commits touched
+  only the verdict text);
+- the density re-wear changes no take or contact (4 contacts, 372 taken, near-touch 1 mm 20.29 / 2 mm 34.84: S5, T1 and
+  T5 unchanged).
 
 ## Checks the tool ran, and where my reading differs
 
-- **held_out ok:** held 23.19 vs bench 18.98 (+4.21), inside the family's +4 to +4.6.
-- **fast_frozen ok:** self 19.04 to verified 18.98.
+- **held_out ok:** 23.24 (linear IK) / 23.19 (verified) vs 18.98, +4.2.
+- **fast_frozen ok:** 19.04 to 18.98.
 - **near_touch ok (report only):** plain 19.04, 1 mm 20.68, 2 mm 35.13, 3 mm 87.13, band read 3-14 mm 19.23.
-- **contact_depth "not measured", but the depths ARE on file.** The verifier wrote the per-pose dumps of the verified
-  config as `remeasure/desmo-conecut-knuckle-3r+blend_{bench,held}_perpose.json`. The tool globs `<id>_*perpose*`, so
-  it misses the `+blend` files, and the plain-named dumps carry the linear-IK 19.04 / 23.24, 0.06 / 0.05 off the
-  claim (its +-0.05 rule). Read by hand (my sum of -min_mm over contact poses): bench 4 contacts, 16.15 mm, deepest
-  9.47 mm (pose 237, plane 15 / elev 165 / axial -60: crank -9.42, tip plate -5.87); held 14 contacts, 43.84 mm,
-  deepest 10.38 mm (pose 683, 45 / 165 / -30), 5 deeper than 3 mm. Reference slipper-nose: bench 2 / 14.75 mm, held
-  10 / 46.12 mm (x1.09 and x0.95: no T5). conecut: bench 4 / 20.24 mm, held 14 / 60.97 mm. The contacts are conecut's
-  poses; the summed depth is lower than conecut's because pose 264 is shallower (1.17 vs 5.80 mm).
-- **dominance ok:** vs slipper-nose plain -0.55, 2 mm -2.11 (behind on both).
-- **continuity watch (tool), not S5 in my reading.** The tool read the held file (knn flood 32.18 vs static 23.19,
-  -8.99) where for the siblings it read the bench file. The rule's flood (full envelope) drops 0 on both wears. On the
-  bench the knn flood reads 20.67 vs static 18.98 (-1.69), the same loss as conecut (19.97 vs 18.28, -1.69). No
-  sibling has a held knn flood on file, so the -8.99 has no comparison. I add no S5 finding; the tool's watch stands.
-- **fold_margin ok:** 5.006 held (see T3 for the K play).
-- **idle ok:** dK span 45.61 deg, knee K.ang 59.27-105.94 deg (window 25.22-154.78: 34 deg to the knee stop).
-- **sampling ok (tool), S2 in my reading:** part-weighted 0.884 vs sample-weighted 0.892 (see S2).
-- **complexity ok:** 16.5 recomputed (2 passive rotations 2, 2 loops 8, 3 joints beyond 3, 2 sliding pairs 2, 2 made
-  parts beyond 7 x 0.5, 2 bought beyond 6 x 0.25; the knee 0). Nothing hidden: the 440C ring insert and the J3 dowel
-  are counted; the tip plate is integral to the crank and the boss to link 1a's hub-K member.
-- **reporting watch:** the row's verdict text still reads as the screen (R1). The dashboard status / v_gap caught up at 20:57.
-- **judge_change ok, rules ok.**
+- **contact_depth ok:** held 14 poses, 43.84 mm summed, deepest 10.38 mm. The tool still misses the bench depths
+  (`+blend` dumps; proposal 1 of the 2026-10-17 audit, not applied). By hand: 4 poses, 16.15 mm, deepest 9.47.
+- **continuity watch:** held knn 32.18 vs 23.19. This is the conecut chain's held sample property (lowarm-halfring
+  -8.23), not the drive's. Upheld twice.
+- **fold_margin ok:** 5.006. It does not read the stop-engagement th (T3).
+- **idle ok, sampling ok, complexity ok (16.5), reporting ok, judge_change ok, rules ok.**
+- **density watch:** the S6 finding above confirms it exactly.
 
 ## Numbers I could not get, and why
 
-- **Feel (R17, cuff twist, drag):** no CAD and no dynamics run exist for this design; the drive has no spring, so there
-  is no preload to sweep, but the drag of two sliding pairs at 0.01 mm clearance and the force flow through the
-  back-drive band are unmeasured (G3).
-- **The full held dK histogram** (for the size of P2 and the held share of poses in the blend band): the blend-band probe
-  wears the bench only (time box).
-- **The hub-2 relief pocket clearance** (M3): no geometry of the J2 seat stack exists in the model.
-- **K play carried into th per pose** (T3): the models carry no slop state; the ~0.09 deg is the verifier's dth/dK
-  estimate.
-- **The m_sub reading at rest for this row** (G4): carried from conecut's measurement on the identical chain.
+- **th at stop B / the J2 dowel** (T3): the model computes th only for the poses it takes, at their law K. Driving forced
+  poses to K 46.5 needs a probe that sets K past the law, which this time box did not allow.
+- **The plate-clearing level held out at the kit's density:** not run (two slots; the box was at load 11-14 on 4 cores).
+  The bench lift at the kit's density is +0.38, and the frame / level re-wears so far moved bench and held alike, so I
+  would expect about +0.4 held. That is an estimate.
+- **Clearance of link 1b's strap at F+3.9, and a stage-1 level above link 1b with a feasible pin:** no geometry on file
+  (the CAD's level scan finds 0 feasible pins above F+4.6).
+- **The 28 deg of insert sector the model does not sample**, re-worn: not run.
+- **Feel of the back-drive band and the drive's force flow:** no judge measures it (G3).
 
 ## Proposals (not applied; none feeds the verdict)
 
-1. **T5 reads the verifier's `+blend` dumps** (instrument fix, `tools/alignment_audit.py` `_depth_sources`): glob
-   `<id>[_+]*perpose*.json` and key the pair by the stripped name. Measured effect on this row: contact_depth goes from
-   "not measured" to ok (bench 16.15 mm vs 14.75, held 43.84 vs 46.12). On every other verified row: no change (no
-   other row has a `+` dump whose gap is its v_gap; desmo-slipper's `+blend` / `+claim` dumps are 18.59 / other
-   placements, not its 18.95). Until then a verifier should also write the verified config under `<id>_vblend_...`.
-2. **One friction reading for the desmo family** (a measurement change; the user's or the lead's call). Read stage 1 on
-   the built groove for every desmo row (desmo-slipper included); exempt only the self-locking band (cap angle above
-   90 - atan(mu)), and report, not gate, the back-drive angle between that band and the blend's end, as a profile
-   (K, angle), next to the forward-side bind K and its a_s / psi tolerance. A 43 - atan(mu) back-drive gate next to a
-   dwell is unsatisfiable for any blended groove, so it should not be the rule; the feel question goes to proposal 4. Measured
-   effect on the verified rows: none on any score (the frozen claims run at their own mu, and this row's score is the
-   same 13.31 fast at mu 0.087 / 0.135); it changes only the friction label: this row "holds mu 0.15 (built) / 0.139
-   (linear)", desmo-slipper "jams at 0.14 (linear)". No other verified row has a desmo stage 1.
-3. **Enforce or delete RC_MIN** (desmo-slipper and this model): a declared gate that never cuts is a silent check. If the
-   440C insert is the answer, the model should say `RC_MIN = pin radius + ridge_min` and cut on it.
-4. **Back-drive force-flow judge** (new instrument): in a closed chain with a self-locking back-drive band, the dynamics
-   judge (R17) should report where the wearer's force must come through and how large it gets. No judge does this.
+1. **Fix the S6 confirmation path** (instrument): in `tools/sample_density.py` `fitted()`, call `_thin(M1, thin[0],
+   thin[1])` and thin at the Frozen wear model's `_truncate`, not at the second Bench. The desmo-slipper audit found that
+   the held path otherwise patches the polish file's Bench(20, 20). Measured effect on this row: bench 18.65 (vs the
+   re-weight's 18.68), held 22.86. Until then, quote S6 numbers as re-weights.
+2. **Read density two-sided, at the sampler's pitch** (a measurement change; the lead's or the user's call):
+   - use the sampler's own pitch where the model states it (ring2 0.5 x 2 mm = 4x; the boss disc 1 mm = 4x) instead of the
+     cell / hull estimate;
+   - re-weight sparse parts too, not only parts above 2x.
+
+   Measured effect on this row:
+   - bench: 18.98 -> 18.57 at the sampler's pitch (over-dense only), 19.02 with L2 / L1b corrected, 18.87 with every part
+     at the kit;
+   - the lead: 18.28 -> 18.42 with every part at the kit;
+   - the gap between them: 0.70 as sampled, 0.40 at the cell reading, 0.29 at the sampler's pitch, 0.45 with every part
+     at the kit.
+
+   At every one of these readings this row stays behind the lead and slipper-nose.
+3. **Quote a correction with the row's other measured corrections** (proposed catalogue entry R5, "a favourable
+   re-reading quoted alone"). When a measurement change moves a row in its favour, the row should state it next to the
+   row's other measured corrections at the same density: here the buildable level, 19.03 at the kit's density. Effect:
+   reporting only.
+4. **th at the stops** (carried from the CAD skeptic): `fold_margin` should read th where a K- or q2-clamped stop engages,
+   not only on taken poses.
+
+---
+
+*Earlier skeptic sections below this rule (2026-10-17 21:30 and 2026-10-18 05:59 UTC), kept as written.*
 
 ## Skeptic (2026-10-17, 21:20-21:30 UTC)
 
