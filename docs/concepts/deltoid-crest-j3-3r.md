@@ -178,6 +178,65 @@ farm is closed). So the row stays `screened`, with the death measured on the kil
 reach 0.575, follow 0.891, ib14 0.867, contact 0.062, near-touch 64.84, min metal 0.05 mm, overhead 4 / 28; ws losses
 {"n": 360, "taken": 207, "fold_folded": 1, "fold_stretched": 96, "jam_K2": 0, "parts": 43, "contact": 13}. The 1.27-point fast gain did not transfer (37.90 -> 47.88, 36.63 -> 47.86).
 
+## Pass 2: the normal J2 stack (2026-10-17 23:29 - 2026-10-18 00:30 UTC, local, niced, 2 processes)
+
+Every CMA stream s1-s7 had fixed `inv2 = 1` (link 1 on hub 2's cap plate, bridging over link 2), inherited from the Sobol
+best; the Sobol's 249 `inv2 = 0` configurations were never refined. The red team's own finding above (link 1 0.60-0.67
+in band because inv2 = 1 makes it ride 3-5 mm higher) pointed straight at it. A categorical probe at the two best
+configurations (14 configs, all sigma x inv2 x inv3, sweep phase `catprobe`):
+
+| config | sigma -1, inv2 0, inv3 1 | sigma -1, inv2 1, inv3 1 (s1-s7) | inv3 0 (either inv2) | sigma +1 (any) |
+|---|---|---|---|---|
+| 36.63 (a2 44.1) | **33.07** (link 1 0.98 in band, ib14 0.908) | 36.63 | 51.08 / 83.79 | 90.6-103.1 |
+| 37.90 (a2 51.5) | **35.80** | 37.90 | 51.31 / 85.68 | 82.3-99.9 |
+
+The normal J2 stack wins by 3.6 / 2.1 points; the inverted J3 stack (the spec's ask) is confirmed (inv3 0 costs 15-50);
+branch +1 is dead (follow 0.67-0.73). CMA then ran inside `inv2 0 / inv3 1 / sigma -1`:
+
+| stream | configs | best fast gap (score) | note |
+|---|---|---|---|
+| s8 (inv2 1, sigma 0.45) | 25 | 36.63 | stopped: dominated once the probe read 33.07 |
+| s9 (inv2 0, from the 36.63 config, sigma 0.35) | 193 | 29.85 (89.15) | J1 bvec(108.6, 63.8), J3 wdir(104.1, +1.6), a1 39.3 / a2 45.8 |
+| s11 (inv2 0, from the 37.90 config, sigma 0.5) | 341 | 33.34 | stopped for the frozen wear; the a2 ~51 side stays worse |
+| s10 (from s9's best, sigma 0.3) | 681 | **26.78 (90.26)** | sigma collapsed (0.03): stop |
+| s12 (wide restart from 26.78, sigma 0.5, pop 12) | S12_N | S12_BEST | |
+| s13 (cap-pole cell bvec(55, 62) / wdir(98, 5) 50/58 at inv2 0, sigma 0.6, pop 12) | S13_N | S13_BEST | |
+
+**Best fast (Bench(60,160)): 26.78, score 90.26** - J1 bvec(108.56, 64.50) (acromion top), J3 wdir(104.41, -0.39)
+(crest), a1 40.46 / a2 45.92, sigma -1, inv2 0, inv3 1, q 0.957, end_extra 2.95. Reach 0.700 (112 / 160 ws), follow
+0.900, ib14 0.903, ib10 0.457, contact 0.018; near-touch gap 51.11, min metal 0.04 mm; overhead 0 / 12 ws (9 stretched
+fold, 3 part-part), 3 / 5 clip frames. Hub levels F 51.0 / 60.3 / 62.0 mm; in band hub 1 0.98, hub 2 1.00, hub 3 0.93,
+link 1 0.96, link 2 0.86, neck 0.85. Fast losses: ws stretched fold 34, part-part 12, contact 2; clips stretched 5,
+contact 1. 3 active, 0 passive, 0 passive translations, complexity 0.
+
+### Frozen exact (fit Bench(60,160) fast, every level frozen, worn Bench(110,360) exact) - the fast gain does not transfer
+
+| fast best | fast gap | frozen exact gap (score) | reach | follow | ib14 | contact | near-touch | overhead ws | penalty |
+|---|---|---|---|---|---|---|---|---|---|
+| 36.63 (inv2 1, pass 1) | 36.63 | 47.86 (82.60) | 0.575 | 0.891 | 0.867 | 0.062 | 64.84 | 4 / 28 | +11.2 |
+| 29.85 (s9) | 29.85 | 43.99 (84.00) | 0.594 | 0.882 | 0.913 | 0.066 | 61.06 | 4 / 28 | +14.1 |
+| 28.63 (s10 g19) | 28.63 | 41.04 (85.08) | 0.603 | 0.891 | 0.909 | 0.054 | 60.01 | 5 / 28 | +12.4 |
+| **26.78 (s10)** | 26.78 | **40.17 (85.39)** | 0.606 (218 / 360) | 0.891 | 0.905 | 0.048 | 59.75 | 6 / 28 (0.214) | +13.4 |
+
+File: docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s10.json. Big-bench losses of the 26.78 config: workspace
+218 / 360 - stretched fold 88, folded 2, part-part 39, contact 13 (hub 2 6, link 2 4, hub 3 3, neck 2, hub 1 1); clips
+98 / 110 (stretched 9, contact 3); overhead: the attribution counts 5 / 28 taken (stretched 14, parts 3, contact 6)
+while the overhead reach metric reads 6 / 28 (0.214) - the same one-pose offset at 28.63 (4 vs 5); not resolved here,
+the table quotes the metric; clip follow 0.6; across
+the body 19 / 68 (stretched 48); behind 17 / 25. Min metal 0.05 mm. Red-team binders: (-75, 60, +60) taken at 1.75 mm;
+(0, 150, -15), (30, 135, 0), (0, 105, 15) lost to part-part (link 1 / link 2 at hub 2 over the cap: J2 exits 49-58 mm
+against hub 2 at 60.3); the crest binders (30, 135, -60) taken at 2.54 mm.
+
+**New knowledge (measured): at the crest seats the fast bench over-reads by 11-14 gap points at EVERY optimum, five
+to six times the zero-complexity optimum's own fast-to-frozen penalty (zc-frontier 28.85 -> 31.04, +2.2).** The
+reach loss splits evenly: the stretched-fold share of the workspace rises 21.3 % -> 24.4 %, part-part 7.5 % -> 10.8 %,
+contact 1.3 % -> 3.6 % from Bench(60,160) to Bench(110,360). The crest J3 puts the stretched fold wall (J1-J3 p95 143
+deg vs the window's upper edge a1 + a2 - 5 = 81.4) through the densest part of the workspace, so which of the 160
+poses fall on the taken side is a sample artefact the CMA exploits; the 9.85 fast points s9-s10 bought (36.63 ->
+26.78) are worth 7.7 frozen. On the fast bench the crest now beats the zc optimum through the same code (26.78 vs
+30.69) - on the verification bench it does not (40.17 vs 31.04): the pass-1 "dominated" claim stands on the bench
+that counts, not on Bench(60,160).
+
 ## Verdict: dead on the kill bar (formal gate open; closing screen)
 
 Convergence gate before the s6 wide restart (n 2160): 0.742 / 0.149 / 0.244 - passed then; after s6 / s7 (n 2526):
@@ -244,3 +303,21 @@ What was checked:
 Champion on the same bench: 75.94 (kit checks + 1 mm radial, Bench(110,360) exact). This harness adds the top-face /
 crown skin check, which can only add contact, so the champion reads >= 75.94 here; its in-band 0.41 alone costs 49
 gap points, so the margin-5 rebase cannot bring it below 47.86. Not refuted. No hard rule broken.
+
+**Held out (same harness, `held`):** the frozen shape of the claimed config worn on 470 poses disjoint from
+Bench(110,360) (tools/osn_polish.py held_bench, exact; held-out clips never loaded): **50.05** (score 81.80; reach 0.575,
+follow 0.873, ib14 0.870, ib10 0.471, contact 0.068, near-touch 66.52, overhead 4 / 26). Fold margin min 5.31 deg in
+th, 0 flips. Per-pose dump `docs/alignment/remeasure/deltoid-crest-j3-3r_held_perpose.json` (recomputed 50.05). Contact
+depth: 22 poses, two DEEP overhead hits - (30, 165, -15) 10.5 mm and (0, 150, -30) 9.2 mm into the skin; the rest
+<= 2.6 mm. They are scored as contact (plain gap), but the depth says the overhead skin binder is not a near miss.
+
+**The model's later best (re-measured with this harness, since the screening agent kept searching after the claim):**
+CMA s10's 26.78 fast config (J1 bvec(108.56, 64.50), J3 wdir(104.41, -0.39), a1 40.46 / a2 45.92, sigma -1, inv2 0 /
+inv3 1, q 0.957, end 2.95; normal J2 stack) frozen on Bench(110,360) exact: **40.17** (score 85.39; reach 0.606 =
+218/360, follow 0.891, ib14 0.905, ib10 0.463, contact 0.048, near-touch 59.75, overhead 5 / 28; fold margin min 5.50
+deg in th; 0 flips; hub F 51.0 / 60.3 / 62.0). Fast-to-frozen penalty 13.4 points (the screen's 12-14 holds). Losses: ws
+fold stretched 88, part-part 39, contact 13. Continuity flood over the TAKEN workspace poses (kNN-8): 212 / 218
+connected; 6 islands at elevation 90 (planes -15..60, axial 15-45), so a connected-reach reading is 0.589 (gap +1.7).
+Contact depth: 16 poses, two deep overhead hits (0, 165, +15) **23.4 mm** and (0, 165, -45) 11.6 mm. Still 21.9 over
+the lead (18.28) and 8.1 over the spec's kill bar (32.10): the verdict (dead on the kill bar) stands for the morphology.
+Files: `docs/concepts/verify/deltoid-crest-j3-3r_skeptic_{fit60,frozen,held,frozen_s10}.json`.
