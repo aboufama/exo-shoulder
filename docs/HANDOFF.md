@@ -75,6 +75,13 @@ search loop that kept going.
   along J3 is blocked (the cuff liner takes it).
 - Running: track O1 (overhead, round 301), track K1 (knee-less 4-joint, round 401), the hourly audit. Round 107
   closed (phi40-thinstack-relay-4r 14.06, best 4-joint, WATCH); round 108 stopped after its plan (user preference).
+- ~23:00 UTC 3D viewer of the built CAD: https://claude.ai/artifact/3DJLv26n2N7sh5xxHpccgK (docs/viz3d: real finishes on
+  the judges' posed body rig; lead, B and the vanilla zc-frontier; a focus mode on the lead's K drive - lobe ring, follower,
+  bell crank, nose, flank lug, clock spring - asked for by the user to understand "the wonky spring assembly").
+- ~23:38 UTC container restart. Lost: the first launches of rounds 301 and 401 after their plans and ideation (judges
+  unrun). Their unjudged ideas are kept in docs/concepts/ideas_restart/; both rounds relaunched FRESH (n_rounds 1,
+  wf_1095e69a = 301, wf_7bdc4855 = 401) adopting their ROUNDS.md plans. Nothing else was in flight (the 23:32 hourly
+  audit had finished). Crons re-created (watchdog 4,19,34,49; audit :17).
 
 ## 1. How a design is scored
 
