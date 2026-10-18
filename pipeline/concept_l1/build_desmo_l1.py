@@ -66,7 +66,8 @@ _DROP = ("nose dowel in the crank arm", "conjugate flank on link 1a", "lobe foll
 FITS = [dict(f) for f in CCL.FITS if not f["where"].startswith(_DROP)]
 FITS += [
     dict(where="stage-1 pin in the crank's short arm", fit="ISO 8734 1.5 m6 440C (58 HRC), pressed H7/m6 through the 1.5 mm Ti short arm along u2 (the dwell "
-         "pose), protruding 1.40 into the groove, tip 0.10 off the groove roof; crowned (the pin tilts up to 4.76 deg across the groove): crown radius >= 8 mm "
+         "pose), protruding 1.11 into the groove at home (0.82 at the worst axial drift), tip 0.10 + the 0.29 mm axial drift (the crank axis runs 15 deg off u2) "
+         "off the groove roof, short-arm top 0.15 + 0.29 under the ring; crowned (the pin tilts up to 4.76 deg across the groove): crown radius >= 8 mm "
          "on the running band, Ra <= 0.1, true position of the pin to the crank bore 0.01 (a_s 9.529 +-0.02: +0.07 mm binds stage 1 at K 44.75 at mu 0.15 - "
          "the verifier's cliff)"),
     dict(where="stage-1 groove in hub 2's cap-ring sector (link 2)", fit="1.52 +0.01/0 wide x 1.50 +0.05/0 deep (pin play 0.01 per side nominal, 0.015 worst) in a "
@@ -218,16 +219,18 @@ def ring_parts(M, G):
 def stage1_parts(M, G):
     """the crank's short arm (3 x 1.5 Ti, from the crank axis to the pin, top RUNG under the ring) and the crowned O1.5 pin (crank frame)"""
     u2, F0, dR = G["u2"], G["F0"], G["dR"]; A0 = G["s0"] * dR
-    lv_ring = G["hmid"] - GD / 2; top = lv_ring - RUNG; bot = top - S1_T
+    dz = float(np.abs(G["z"][G["Kb"] <= G["lim"] + 1e-12]).max())               # the pin's axial drift along u2 over the stroke (the crank axis is 15 deg off u2)
+    lv_ring = G["hmid"] - GD / 2; top = lv_ring - RUNG - dz; bot = top - S1_T       # first build: the arm top met the ring underside by 0.18 at dK 46.5
     al = F0 - A0; al = unit(al - (al @ u2) * u2); ac = np.cross(u2, al)
     L = float(np.linalg.norm((F0 - A0) - ((F0 - A0) @ u2) * u2))
     c = A0 + ((bot + top) / 2 - float(A0 @ u2)) * u2 + ((L + 1.5) - 1.0) / 2 * al
     c = A0 + ((bot + top) / 2 - float(A0 @ u2)) * u2 + (SL.ARM_ROOT + L + 1.5) / 2 * al   # from ARM_ROOT (inside the O10 boss wall, bore free) to 1.5 past the pin
     arm = REF.box(c, np.stack([al, ac, u2], 1), [L + 1.5 - SL.ARM_ROOT, ARM_W, S1_T])
-    pin = REF.cyl(F0, u2, bot - float(F0 @ u2), (G["hmid"] + GD / 2 - 0.10) - float(F0 @ u2), r=PIN_D / 2)
+    tip = G["hmid"] + GD / 2 - 0.10 - dz                                           # first build: the tip met the groove roof by 0.21 at dK 46.5
+    pin = REF.cyl(F0, u2, bot - float(F0 @ u2), tip - float(F0 @ u2), r=PIN_D / 2)
     return arm, pin, dict(arm_len_mm=round(L + 1.5 - SL.ARM_ROOT, 2), arm_level_from_hub2_face_mm=[round(bot - G["H2"], 3), round(top - G["H2"], 3)], a_s=round(L, 3),
-                          pin_from_hub2_face_mm=[round(bot - G["H2"], 3), round(G["hmid"] + GD / 2 - 0.10 - G["H2"], 3)],
-                          pin_into_groove_mm=round(GD - 0.10, 2), crank_axis_at_arm_u2_level_mm=round(float(A0 @ u2) - G["H2"], 3))
+                          pin_from_hub2_face_mm=[round(bot - G["H2"], 3), round(tip - G["H2"], 3)], axial_drift_mm=round(dz, 3),
+                          pin_into_groove_mm=round(tip - lv_ring, 2), pin_into_groove_at_worst_drift_mm=round(tip - lv_ring - dz, 2), crank_axis_at_arm_u2_level_mm=round(float(A0 @ u2) - G["H2"], 3))
 
 
 def tip_plate(M, G, n_path=40, n_cap=9):
@@ -326,8 +329,8 @@ def drive_parts(M, lg, dg):
                 f"{pinfo['slot_w_mm']:.2f} x {pinfo['slot_len_mm']:.2f} wire-EDM'd through it on the nose's path; closed end = stop A, far end = stop B at dK {math.degrees(G['lim']):.1f})", pl, "ti"))
     arm1, pin1, sinfo = stage1_parts(M, G)
     out.append(("dk", 9, f"drive crank short arm keep-out ({sinfo['arm_len_mm']:.1f} x {ARM_W:g} x {S1_T:g} Ti, crank axis -> the stage-1 pin at a_s {sinfo['a_s']:.2f}, "
-                f"top {RUNG:g} under the cap ring)", arm1, "ti"))
-    out.append(("dk", 9, f"drive stage-1 pin keep-out (ISO 8734 1.5 m6 440C, crowned, pressed through the short arm along u2, {GD - 0.10:.2f} into the groove)", pin1, "steel"))
+                f"top {RUNG:g} + the {sinfo['axial_drift_mm']:.2f} axial drift under the cap ring)", arm1, "ti"))
+    out.append(("dk", 9, f"drive stage-1 pin keep-out (ISO 8734 1.5 m6 440C, crowned, pressed through the short arm along u2, {sinfo['pin_into_groove_mm']:.2f} into the groove, tip 0.10 + the {sinfo['axial_drift_mm']:.2f} axial drift under the roof)", pin1, "steel"))
     boss, root, nose, binfo = boss_parts(M, G)
     out.append(("l1a", 1, f"drive nose boss keep-out (link 1a: O{2 * G['rb']:g} x 3 Ti radial at the seat C0, r_c {G['rK0']:.2f} from hub K's axis, {binfo['boss_to_hubK_rim_mm']:.2f} "
                 f"outside hub K's O20)", boss, "ti"))
@@ -366,13 +369,11 @@ def build_parts(M, lg, dg, knee_geom=None):
 def set_adjacent(parts):
     CCL.set_adjacent(parts)
     find = lambda s: next((p for p in parts if p[2].startswith(s)), None)
-    pairs = [("drive crank tip plate", b) for b in ("K upper boss", "K lower plate", "drive nose boss", "link 1a strap", "J2 upper boss", "link 1b strap")] + \
-            [("drive crank short arm", b) for b in ("J2 upper boss", "drive cap-ring", "link 2 strap", "J2 lower plate")] + \
-            [("drive stage-1 pin", b) for b in ("J2 upper boss", "drive cap-ring roof")] + \
-            [("drive cap-ring groove layer", b) for b in ("link 1b strap", "drive bell crank boss", "drive bell crank bent arm")] + \
-            [("drive cap-ring roof", b) for b in ("link 1b strap", "drive bell crank boss", "drive bell crank bent arm")] + \
-            [("drive nose boss", b) for b in ("drive bell crank bent arm", "link 1b strap", "K upper boss")] + \
-            [("drive nose dowel", b) for b in ("drive crank tip plate", "drive bell crank bent arm")]
+    # the drive's designed running pairs only (a penetration > ADJ jams a clip frame): the nose in the slot, the plate past hub K, the boss under the
+    # arm. The stage-1 stack conflicts (cap-ring sector / short arm / pin vs link 1b's J2 lower plate and strap: the model's groove level, see
+    # ring_parts) are NOT adjacency pairs: as pairs they jam every clip frame (first build: 1337 of 1337 held 'adjacent'), so the motion judges
+    # would read a frozen chain; they are measured by the drive sweep (build.json) and judged by R6 (judge/part_contact.py) instead
+    pairs = [("drive nose dowel", "drive crank tip plate"), ("drive crank tip plate", "K upper boss"), ("drive nose boss", "drive bell crank bent arm")]
     for a_, b_ in pairs:
         A, Bp = find(a_), find(b_)
         if A is None or Bp is None or A[1] == Bp[1]: continue
