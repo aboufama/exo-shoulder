@@ -1,0 +1,49 @@
+{
+ "id": "deltoid-crest-j3-3r",
+ "wear": "bench",
+ "perpose": "docs/alignment/remeasure/deltoid-crest-j3-3r_bench_perpose.json",
+ "params": {
+  "az": 105.4971,
+  "el": 63.1176,
+  "a1": 38.6879,
+  "a2": 44.1129,
+  "wd": 103.3777,
+  "wa": 4.934599999999989,
+  "sigma": -1,
+  "inv2": 1,
+  "inv3": 1,
+  "q": 0.9419,
+  "end_extra": 2.5478,
+  "margin": 5.0,
+  "width": 12.0,
+  "t_link": 3.0,
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "vm": 0,
+  "near": 0
+ },
+ "dump_gap": 47.87,
+ "th_margin_min_taken": 6.462,
+ "th_taken_range": [
+  23.24,
+  76.34
+ ],
+ "flood": {
+  "ws_taken_static": 207,
+  "ws_connected": 207,
+  "islands": 0,
+  "ws_connected_grid_edges": 71,
+  "edges": "kNN-8 by frame angle (grid-neighbour count kept for reference)",
+  "reach_static": 0.575,
+  "reach_connected": 0.575,
+  "island_poses": []
+ },
+ "reach_static": 0.575,
+ "reach_connected": 0.575,
+ "lost_points": 0.0,
+ "n_ws": 360,
+ "secs": 2.5,
+ "git": "b0db801",
+ "method": "verifier extras() unchanged (deltoid-crest-j3-3r-skeptic.py): kNN-8 by frame angle, 2-deg slerp, closure at the 5-deg margin, axis step <= 10 deg; taken set from the per-pose dump"
+}

@@ -1,0 +1,32 @@
+[
+ {
+  "key": "T1",
+  "level": "watch",
+  "reason": "Metal parked just past the 0 mm contact cutoff, from a plain-gap search. The zc-frontier family's evaluate() returns the verifier's PLAIN gap as the objective (docs/concepts/models/zc-frontier-3r.py lines 128 and 148; the near-touch gap is only reported, as 'near'), so the 2526-config (now 3780) CMA minimised the plain gap, not the near-touch gap CLAUDE.md asks every search to use. Measured on the verifier's per-pose dumps of the claimed config (docs/alignment/remeasure/deltoid-crest-j3-3r_{bench,held}_perpose.json, gaps reproduce 47.87 / 50.05), with the audit's deep_audit rule (taken poses below the threshold count as contact): bench plain 47.87, <1 mm 64.85, <2 mm 95.55, <3 mm 122.83; 22 / 58 / 101 of 305 taken poses have metal < 1 / 2 / 3 mm. Held 50.05 / 66.52 / 92.73 / 120.42 (22 / 55 / 95 of 303). So 17 points of the claim live in the 0-1 mm shell and 47.7 in the 0-2 mm shell, against the lead conecut-knee-knuckle-3r's 1.64 and 16.56 (3 and 33 poses; docs/alignment/remeasure/conecut-knee-knuckle-3r_bench.json). Not gamed: near-touch is report-only (user 2026-10-17), and no verified row sits between 47.86 plain and 64.85 near-touch, so the plain number puts this design above no design that is better for the wearer.",
+  "evidence": "docs/alignment/remeasure/deltoid-crest-j3-3r_bench_perpose.json; docs/alignment/remeasure/deltoid-crest-j3-3r_held_perpose.json; docs/concepts/models/zc-frontier-3r.py:128,145-149 (objective = plain verifier gap)"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Overhead reach is all metal-on-skin. The 4 overhead workspace poses the claim takes (4 / 28, elev >= 140) have their lowest metal at 0.13, 0.84, 1.20 and 1.34 mm on Bench(110,360), and at 0.07, 0.34, 0.39 and 0.66 mm on the held set (4 / 26). At the 1 mm reading, overhead reach falls to 2 / 28 on the bench and 0 / 26 held. The raised-arm clip frames are the same: 6 of 10 taken, lowest metal 0.66, 0.66, 0.66, 0.70, 0.81 and 1.28 mm. All 10 overhead poses the bench credits carry metal within 1.4 mm. Beside them, 9 of the 20 bench contacts and 11 of the 22 held contacts are overhead, two of the held ones 10.51 mm at (30, 165, -15) and 9.24 mm at (0, 150, -30) into the arm. Overhead the wearer gets no pose with 2 mm of clearance: the frozen exo either touches, presses in, or stops on the stretched fold (15 / 28). One taken pose in three (101 / 305) has metal within 3 mm.",
+  "evidence": "per-pose dumps above (min_mm of taken ws poses with elev >= 140; contact poses with min_mm < 0)"
+ },
+ {
+  "key": "P2",
+  "level": "watch",
+  "reason": "The held-out set is not out of the search's sample. held_bench(110,360) (docs/concepts/verify/deltoid-crest-j3-3r-skeptic.py, = tools/osn_polish.py held_bench) excludes the Bench(110,360) poses but not the Bench(60,160) poses the CMA searched on and the frozen levels were fit on. 60 of its 470 poses (40 ws, 20 clip) are search-bench poses by index, and 12 more clip frames have a pose vector identical to a search frame. The frozen shape takes 45 of the 60 (75 %, against 57.5 % reach overall) with 0 contacts. On the poses the search never saw, the held gap is 51.08 (pose-vector match, 398 poses) to 53.98 (index match, 410 poses): +3.22 to +6.12 over the bench 47.86, against the +2.19 reported (50.05). The index reading crosses the held_watch line of 6.0. Not gamed: both readings are below the gamed line of 10, and the design is dead on its kill bar (32.10) either way. The leaders are not flattered the same way: their 1154-pose held sets share only 30 poses with Bench(60,160), and removing them moves their held gaps by -0.64..+0.09 (docs/alignment/remeasure/heldleak_fit60_all.json).",
+  "evidence": "docs/alignment/remeasure/deltoid-crest-j3-3r_heldleak_check.json; docs/alignment/remeasure/heldleak_fit60_all.json"
+ },
+ {
+  "key": "R2",
+  "level": "watch",
+  "reason": "The dashboard shows a number the design does not hold. docs/dashboard/data/morphs.json carries sweep_gap 26.78 (score 90.26, reach 0.70, contact 0.018): the best of 3780 fast Bench(60,160) evaluations (CMA s10). The verifier wore that config frozen on Bench(110,360) exact: 40.17 (score 85.39), 13.39 points worse, with 6 static islands at elev 90 (kNN-8 flood: connected reach 0.589 against 0.606 static) and a 23.42 mm press at (0, 165, +15) (docs/concepts/verify/deltoid-crest-j3-3r_skeptic_frozen_s10.json). The row's headline gap 36.63 and reach 0.65 are also fast numbers (+11.23 to the verified 47.86). The fast-to-frozen penalty is 11-14 points at every best (the 160-pose search sample), so the sweep line reads 13 points better than the shape it names. v_gap 47.86 is shown correctly.",
+  "evidence": "docs/dashboard/data/morphs.json row deltoid-crest-j3-3r (sweep_gap, sweep_reach); docs/concepts/verify/deltoid-crest-j3-3r_skeptic_frozen_s10.json; row verification.later_best_s10"
+ },
+ {
+  "key": "NEW-plain3r-islands",
+  "level": "watch",
+  "reason": "The continuity rule and the audit's continuity check exempt plain 3Rs ('no passive coordinate; flood not required'), but a plain 3R working against its stretched fold can take static islands. The verifier's kNN-8 flood of the s10 config (the dashboard's sweep number) found 6 taken poses at elev 90 (planes -15..60, axial 15-45) that no continuous path from rest reaches at the 5 deg margin: 1.67 reach points that exist only statically. The claimed config is clean: tools/alignment_kit_flood.py (new; runs the verifier's own extras() on the per-pose dumps) finds 207 / 207 taken ws poses connected on the bench and 207 / 207 held, and reproduces the th margins 6.462 / 5.313. So the claim stands, and the exemption is the gap: a plain-3R number near the fold is never flood-checked unless a verifier volunteers it.",
+  "evidence": "docs/alignment/remeasure/deltoid-crest-j3-3r_bench_flood.json; docs/alignment/remeasure/deltoid-crest-j3-3r_held_flood.json; docs/concepts/verify/deltoid-crest-j3-3r_skeptic_frozen_s10.json (flood.island_poses)"
+ }
+]

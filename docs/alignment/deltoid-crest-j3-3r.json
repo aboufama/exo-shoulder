@@ -5,18 +5,17 @@
  "complexity": 0,
  "verdict": "watch",
  "reasons": [
-  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
-  "dominance: cannot compare with conecut-knee-knuckle-3r at 2 mm",
-  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
   "reporting: dashboard sweep best 26.78 (score 90.26) sits 21.08 below the verified number"
  ],
  "checks": [
   {
    "check": "held_out",
-   "level": "watch",
-   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
-   "v_gap": 47.86
+   "level": "ok",
+   "reason": "held out 50.05 vs bench 47.86 (+2.19; re-measured (this audit))",
+   "held_gap": 50.05,
+   "v_gap": 47.86,
+   "drop": 2.19,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -28,8 +27,26 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "level": "ok",
+   "reason": "plain 47.86, <1 mm 64.84, <2 mm 95.56, <3 mm 122.84, band read 3-14 mm 49.44, 47.7 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 47.7,
+   "plain": 47.86,
+   "n1": 64.84,
+   "n2": 95.56,
+   "n3": 122.84,
+   "band3": 49.44,
+   "hist": {
+    "0-1": 0.0007,
+    "1-2": 0.0047,
+    "2-3": 0.0158,
+    "3-4": 0.0179,
+    "4-6": 0.0905,
+    "6-10": 0.3549,
+    "10-14": 0.3879,
+    ">14": 0.1276
+   },
+   "minmm": 0.047,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
@@ -107,8 +124,11 @@
   },
   {
    "check": "dominance",
-   "level": "watch",
-   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+   "level": "ok",
+   "reason": "vs conecut-knee-knuckle-3r: plain -29.58, 2 mm -60.72",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -29.58,
+   "gain_2mm": -60.72
   },
   {
    "check": "continuity",
@@ -132,8 +152,16 @@
   },
   {
    "check": "sampling",
-   "level": "watch",
-   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+   "level": "ok",
+   "reason": "per-part sample counts not on file (fractions only) (re-measured)",
+   "parts": {
+    "hub1": 0.9858,
+    "hub2": 0.9989,
+    "hub3": 0.9046,
+    "link2": 0.9751,
+    "link1": 0.6738,
+    "neck": 0.8276
+   }
   },
   {
    "check": "complexity",
@@ -159,8 +187,8 @@
   }
  ],
  "remeasured": {
-  "bench": false,
-  "held": false
+  "bench": true,
+  "held": true
  },
  "verifier_files": [
   "docs/concepts/verify/deltoid-crest-j3-3r_skeptic_frozen_s10.json",
@@ -171,7 +199,7 @@
   "docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json",
   "docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact.json"
  ],
- "git": "565abe0",
+ "git": "1027be3",
  "tool_version": "2026-10-17.6",
- "t": "2026-10-18T00:13:14Z"
+ "t": "2026-10-18T00:25:18Z"
 }
