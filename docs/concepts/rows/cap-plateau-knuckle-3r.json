@@ -20,7 +20,7 @@
  "v_inband14": 0.8232,
  "v_inband10": 0.5234,
  "v_gap": 32.08,
- "n_configs": 351,
+ "n_configs": 694,
  "complexity": 17.5,
  "mechanism": {
   "active_dof": 3,
@@ -311,5 +311,16 @@
    "docs/concepts/verify/cap-plateau-knuckle-3r_held_C2onesided.json"
   ],
   "note": "not re-searched with the one-sided law (the C2 seats were tuned for the two-lobe law); a one-sided search would land between this and cell B's family (kinematic 260-270 < 279 before metal), so the kill holds by the take bound either way"
+ },
+ "audit3": {
+  "t": "2026-10-18T08:50:00Z",
+  "verdict": "death STANDS",
+  "reproduced_fast": "C2 ghost 27.13 fast (near1 25.21 via near_gap), one-sided re-fit 29.32: both to the digit",
+  "branch_check": "all 351 earlier tries sat on sigma -1 / sK -1. At the C2 config: sigma +1 154.82, sK +1 143.09, both +1 157.42 fast (K6 part collisions on 0.58-0.61 of poses, follow 0.28-0.32). A 140-try (1+1) search on sigma +1 from C2 reached only 70.16 near-touch / 72.37 plain (hub 2 out of band); gate 0.41 / 0.29 / 0.19. The other J2 branch is not a hidden basin.",
+  "onesided_search": "the BUILDABLE one-sided law (f = None, doff box opened to 5.24-8 like the control's), searched 200 tries from C2 on Bench(60,160) fast near-touch: best 27.70 near1; worn pick (k 166) 27.80 near1 / 27.02 plain fast -> FROZEN EXACT Bench(110,360) 33.94 (reach 0.6806 = 245/360, ib14 0.7994, follow 0.9909, contact 0.0194; why fold 96 / parts 12 / contact 7; overhead 7/28; min metal -16.29 mm). +3.35 behind the paired control 30.59, +15.66 behind the lead 18.28. Gate on the stream: 0.35 / 0.04 / 0.04 score points. Held out not worn (time box).",
+  "cliff": "the one-sided optimum sits at the box edges cap 56 / el1 67 against a K6 collision cliff: cap 57 -> 141.36 (collide 0.64), el1 66 -> 133.37 (collide 0.57); cap 58-62 all >= 134. Opening the cap box is not a lever.",
+  "one_line": "Death stands: the buildable one-sided cap knuckle, searched (200 tries) and worn frozen, reads 33.94 on Bench(110,360) exact (245/360 takes, fold 96) - behind the same-kit control 30.59 and the lead 18.28; the other J2 / K branches collide (>= 70 fast), and cap / el1 sit 1 deg from a K6 collision cliff.",
+  "note_bar": "The task's literal refutation bar (within 10 of 68.93 on Bench(60,160)) is round-3 era and met by every row since round 4 (27.13 fast here); it does not test a gate-0 death measured against the paired control and the lead.",
+  "files": "sweep rows k 351-693 (sources audit3_branch_sigma+1, audit3_onesided_search, audit3_onesided_frozen_wear)"
  }
 }

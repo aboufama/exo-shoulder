@@ -301,3 +301,48 @@ cell reaches the paired control (30.59), the 279-take bar or the lead (18.28).
 The task's literal bar, "within 10 of 68.93 on Bench(60,160)", is met by the original claim (27.13 fast), as audit 1
 noted. That bar is stale from round 3 and does not test a gate-0 death against the lead.
 
+
+## Audit 3 (2026-10-18 08:50 UTC, third death audit; the death STANDS)
+
+Audits 1 and 2 had already reproduced the ghost claim (32.08) twice, so this audit tested the two regions nobody had
+searched. Everything ran locally, niced, with at most 2 processes. All 343 evaluations are appended to the sweep (rows
+k 351-693: sources `audit3_*`).
+
+- **Reproduced.** At the C2 config the fast fit reads 27.13 (ghost) and 29.32 (one-sided re-fit), both to the digit.
+- **The other branches (new).** All 351 earlier tries used sigma -1 (J2's side of the J1-J3 plane) and sK -1 (K's
+  elbow).
+  - At C2 the other branches read:
+    - sigma +1: 154.82;
+    - sK +1: 143.09;
+    - both +1: 157.42.
+  - K6 part collisions hit 0.58-0.61 of the poses, with follow 0.28-0.32.
+  - A 140-try (1+1) search on sigma +1, started from C2, reaches only 70.16 near-touch / 72.37 plain, with hub 2 out
+    of band. Its gate reads 0.41 / 0.29 / 0.19.
+  - The mirror J2 branch is not a hidden basin.
+- **The buildable law, searched (new).**
+  - Setup: cell C's one-sided law (f = None), the class desmo-conecut's drive builds. The doff box was opened to
+    5.24-8 to match the control's law. 200 tries from C2 on Bench(60,160) fast, near-touch objective. Gate: 0.35 /
+    0.04 / 0.04 score points.
+  - Best fast: 27.70 near-touch. The worn pick, k 166, reads 27.80 near-touch / 27.02 plain.
+  - **Frozen exact Bench(110,360): 33.94.** Reach 0.6806 (245/360), ib14 0.799, follow 0.991, contact 0.019; why fold
+    96 / parts 12 / contact 7; overhead 7/28; min metal -16.29 mm.
+  - It sits **+3.35 behind the same-kit control (30.59)** and +15.7 behind the lead (18.28).
+  - The search recovers 1.44 of the un-searched one-sided 35.38. It does not close the 3-point lobe loss.
+  - Held out was not worn (time box).
+- **The optimum sits on a cliff (red team).**
+  - The one-sided best lies at the box edges, cap 56 and el1 67. Both are 1 deg from a K6 collision cliff:
+    - cap 57: 141.36 (collide 0.64);
+    - el1 66: 133.37 (collide 0.57);
+    - cap 58-62: >= 134.
+  - Opening the cap box, which would raise the stretched wall th > cap + a2 - m, is not a lever.
+  - A drive or cam tolerance of +1 deg on the K cap would collapse it.
+- **Bookkeeping.**
+  - The claim's n_configs (353) did not match the sweep (351). The one-sided re-fit was not appended. The row now
+    reads 694, the sweep length after this audit.
+  - The literal refutation bar, "within 10 of 68.93 on Bench(60,160)", is met by every row since round 4 and does not
+    test this gate-0 death.
+
+**Death stands.** The measured reason, in one line: the buildable one-sided cap knuckle, searched and worn frozen, reads
+33.94 on Bench(110,360) exact. That is 245/360 takes, with the fold losing 96 on the stretched wall. It is behind the
+same-kit control (30.59) and the lead (18.28). The mirror J2 / K branches collide (>= 70 fast). The cap / el1 optimum
+sits 1 deg from a K6 collision cliff.
