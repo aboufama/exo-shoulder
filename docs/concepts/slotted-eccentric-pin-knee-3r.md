@@ -188,3 +188,67 @@ Frozen exact re-run by the auditor (the model's `frozen` mode, Bench(110,360) CB
 min metal 0.09 mm). This reproduces the claim to the digit and is now the row's v_* fields. The 99 audit configurations
 are appended to the sweep as stream "AUD". The pinK-stack probe rows carry no params, because they come from a
 monkeypatched build.
+
+## Re-dispatch (2026-10-18 05:28-06:10 UTC): the gate continuation found a new basin, still far behind its control
+
+Why it ran. After the audit, the gate's 2nd-half rule was still open: the best (B-g47-2, 153.49) sat at index 589 of 1014
+tries, so about 166 more tries without gain were needed. The box was free after the container restart, so the tries ran
+locally (niced, 2 processes, OMP_NUM_THREADS=1, `tools/concept_cma.py`, model file unchanged):
+
+| stream | start | sigma | evaluations (honest) | best |
+|---|---|---|---|---|
+| D1 | B-g47-2, emax freed (scale 12) | 0.3 | 161 (157) | 149.91 (D1-g18-4) |
+| D2 | B-g47-2, emax freed | 0.8 | 97 (63) | **115.07 (D2-g9-0)**, 115.83 (D2-g3-6) |
+| D3 | D2-g3-6 | 0.35 | 17 (11) | none better (gens took 150-300 s at box load 10-14) |
+
+**New best D2-g9-0** (az 95.00, el 61.24, a1 53.08, wd 70.98, wa -20.37, Amin 56.37, Amax 80.71, w 4.55, sl 0.915,
+b 26.04, c 74.66, emax 43.19, sk 1, margin 5.23; track dG 32, gG -165, 56.9 mm long, e 30.5-42.6 deg; q2 span 201.5):
+
+- Bench(60,160) fast: **115.07** (score 58.2; reach 0.4625, follow 0.65, ib14 0.561, ib10 0.304, contact 0.074;
+  closure 0.69, collide 0.20 of the closing poses). Fit at the 1 mm part-part rule reads the same 115.07.
+- Frozen exact Bench(110,360): **117.68** (score 57.2; reach 0.433, follow 0.655, ib14 0.566, ib10 0.305, contact
+  0.081; near-touch 126.06, min metal 0.08 mm; overhead >= 140: 0/28 ws, clip follow 0.0; kinematic reach 0.575 against
+  th need p5-p95 26.3-144.2; post lifts hub 2 0.85, K 7.01, hub 3 4.0 mm). The run took 232 s.
+- Paired locked control at the same seats (lock=1, link 2 rigid through K = the plain 3R, same code, Bench(60,160) fast):
+
+  | a2 | 64 | **68** | 72 | 76 | 80 |
+  |---|---|---|---|---|---|
+  | gap | 61.33 | **55.09** | 58.11 | 64.19 | 70.70 |
+  | reach | 0.719 | 0.738 | 0.750 | 0.750 | 0.738 |
+  | ib14 | 0.522 | 0.555 | 0.512 | 0.472 | 0.474 |
+  | window th | [16.25, 111.75] | [20.25, 115.75] | [24.25, 119.75] | [28.25, 123.75] | [32.25, 127.75] |
+
+  The paired deficit is **+60.0 fast points** (115.07 vs 55.09). It was +96.4 at B-g47-2.
+
+**Where the 38 points came from.** Almost all of it is follow (0.23 -> 0.65). The search bought it with two moves. First,
+it lifted the eccentric's metal out of the band to stop the collisions: in band, hub 2 is 0.19, the crank 0.23, L2b 0.19
+and K 0.36, and collide fell from 0.55 to 0.20. Second, it moved to a lock-held track over th [66.5, 128.25]. That
+track adds 12.5 deg on the stretched side over the control's plain window [20.25, 115.75]. It loses 46 deg on the folded
+side, where the lock angle of the internal four-bar mode falls below 50 deg (41.8 over the whole kinematic run). Rest
+poses and scapular-plane overhead do not close there. So it is the same limiter as before, met another way. In-band
+(0.56) and contact (0.074) leave this basin with no route to the control.
+
+**Red team (D2-g9-0).**
+- The pose that jams: every pose with th < 66.5. The track ends there as a hard stop, so overhead takes 0/28 on the big bench.
+- The point that pinches: min metal-skin 0.08 mm. The near-touch gap is 126.06.
+- The optimistic number: the fast 115.07 itself. The control at the same seats, through the same code, is 55.09.
+- K's housing is fitted 7 mm higher on the big bench (post lift). The frozen shape carries this lift as out-of-band metal.
+
+**Gate (score points).** Ordered history: A + B + C + AUD in file order, then D1 / D2 / D3 in chronological order from the
+generation end times. Every try counts; dishonest tries are never the best; top-5 is taken over distinct configurations.
+Result: **13.97 / 13.97 / 12.63** (n 1286; best at index 1246), so the gate is NOT converged. Status stays **screened**:
+far behind, and no lead path. The wide restart showed that the earlier "no gain in 424 tries" was a local plateau. A
+second wide restart (sigma >= 0.8, emax free) is the cheapest next probe if anyone reopens the family, but the paired
+control at every basin found so far is 55-57.
+
+**Lesson that predicts beyond this row.** A slaved length-changing hinge inherits the swept angle of the body it rides on:
+- Downstream of the active joint whose angle drives it (this row: crank + K are J2's output), it sweeps that joint's span
+  relative to the parent link. Here that is q2's 170-235 deg (201.5 at D2-g9-0) around J2, so it must cross link 1, hub 1
+  and the track. The search then has two exits. It can collide, or it can lift the stack out of the band.
+- Upstream of that joint, it turns only by the law's span. This is the knuckle family (link 1a -> K -> link 1b -> J2; the
+  lead conecut-knee-knuckle-3r is 18.28 verified, with a dK cap of 57 deg, 52.6 of it used). Link 2 keeps the plain 3R
+  sweep and never crosses link 1.
+
+So a fold lever on the pin-knee chain belongs on link 1, not link 2. This is the measured reason the knuckle family leads
+and the eccentric family trails its own control in every basin found (parent 115.21 frozen vs 46.60; this row 117.68
+frozen; 115.07 fast vs 55.09).
