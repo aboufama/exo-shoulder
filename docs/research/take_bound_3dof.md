@@ -30,9 +30,11 @@ takes / 360; score 95 = gap 13.75.
 ## 2. The 3-DOF table (one row per legal J1 seat family x realisation)
 
 Takes are workspace takes of 360. Seat naming follows ROUNDS.md: the "back", "k33", "crest" and "H1" rows all sit
-J1 on the back / top of the acromion near bvec(97-102, 62-65) (H1: anterior 0.085 / up 0.898 / lateral 0.432; the k33
-seats about 6 deg of azimuth forward of the lead's) and differ in J2 / J3 seats and realisation; the "cap pole" J1 is
-bvec(43.2, 59.9). Every J1 here is inside ruling 4 (back of the shoulder + acromion top). "Gap at family proximity" = the zero-contact floor of the row's best take count
+J1 on the back / top of the acromion near bvec(97-102, 62-65) (H1: az 101.2 / el 63.9, anterior 0.085 / up 0.898 /
+lateral 0.432 - within ~4 deg of the back seat, so the H1 row is the back-seat plain 3R plus a pin knee; the k33 seats
+differ from the lead's by ~6 deg of J1 azimuth, 95.4 vs 101.6, seatoracle-erwall) and differ in J2 / J3 seats and realisation; the "cap pole" J1 is
+bvec(43.2, 59.9). Family names are ROUNDS.md's. Every J1 here is inside ruling 4 (back of the shoulder + acromion
+top). "Gap at family proximity" = the zero-contact floor of the row's best take count
 plus that row's measured in-band / follow / contact penalty (from its best metal cell). Cells in *italics* are bounds or
 estimates, not measurements of a buildable design.
 
