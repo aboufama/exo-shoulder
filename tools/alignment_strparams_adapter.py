@@ -9,6 +9,8 @@ disk is edited: _row() and remeasure() are re-bound in this process to decode a 
     OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_strparams_adapter.py audit <id> [--ref <id>]
     CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_strparams_adapter.py remeasure <id> bench|held [--cell-dict NAME]
         --cell-dict NAME: lay the row's params over the model module's dict NAME (e.g. CELL_B), as the verifier does
+    CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_strparams_adapter.py probe <id> bench|held <out.json> [--cell-dict NAME]
+        tools/alignment_wear_probe_model.py (unchanged) with the decoded params (and the same --cell-dict merge)
 """
 import importlib.util, inspect, json, os, sys, tempfile, textwrap
 
@@ -39,6 +41,14 @@ exec(compile(_src.replace(_old, 'P = dict(_decode(row).get("best_params") or {})
 remeasure = _ns["remeasure"]
 
 
+def _params(rid, name=None):
+    row = _decode(json.load(open(os.path.join(AA.ROWS, rid + ".json"))))
+    if not name: return dict(row["best_params"])
+    sp = importlib.util.spec_from_file_location("adp_model", os.path.join(AA.MODELS, rid + ".py"))
+    m = importlib.util.module_from_spec(sp); sp.loader.exec_module(m)
+    return dict(getattr(m, name), **row["best_params"])
+
+
 def main(argv):
     cmd = argv[1]
     if cmd == "audit":
@@ -55,6 +65,17 @@ def main(argv):
             P = dict(getattr(m, name), **row["best_params"])
             fd, params = tempfile.mkstemp(suffix=".json"); json.dump(P, os.fdopen(fd, "w"), default=float)
         remeasure(rid, wear, params=params)
+    elif cmd == "probe":
+        import time
+        import alignment_wear_probe_model as WPM
+        rid, wear, outp = argv[2], argv[3], argv[4]
+        name = argv[argv.index("--cell-dict") + 1] if "--cell-dict" in argv else None
+        src = textwrap.dedent(inspect.getsource(WPM.run)); old = 'P = dict(row.get("best_params") or {})'
+        assert src.count(old) == 1, "alignment_wear_probe_model.run changed; update the adapter"
+        ns = {}; exec(compile(src.replace(old, "P = _params(rid, _name)"), "awpm_run_strparams", "exec"), dict(WPM.__dict__, _params=_params, _name=name), ns)
+        t = time.time(); r = ns["run"](rid, wear); r["secs"] = round(time.time() - t, 1); r["exact"] = os.environ.get("CB_EXACT") == "1"
+        r["params_source"] = f"row best_params (decoded from a JSON string){' over the model dict ' + name if name else ''}"
+        json.dump(r, open(outp, "w"), indent=1, default=float); print(json.dumps({k: v for k, v in r.items() if k != "probe"}, default=float))
     else:
         raise SystemExit(__doc__)
 

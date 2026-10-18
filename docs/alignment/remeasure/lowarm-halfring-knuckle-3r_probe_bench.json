@@ -1,0 +1,334 @@
+{
+ "design": "lowarm-halfring-knuckle-3r",
+ "wear": "bench",
+ "model_frozen": {
+  "gap": 17.96,
+  "reach": 0.7306,
+  "follow": 1.0,
+  "inband14": 0.8978,
+  "inband10": 0.5682,
+  "contact": 0.008
+ },
+ "fit_fast": {
+  "gap": 13.39,
+  "reach": 0.7688,
+  "follow": 1.0,
+  "inband14": 0.8973,
+  "inband10": 0.5666,
+  "contact": 0.0,
+  "l2": {
+   "n": 183,
+   "clear_min": 14.19,
+   "lost": 0
+  }
+ },
+ "model_audit_near": {
+  "near1": 20.14,
+  "near2": 34.84,
+  "near2_poses": 34,
+  "min_mm": 0.05
+ },
+ "probe": {
+  "n": 470,
+  "mode": "exact",
+  "scored": {
+   "reach": 0.7306,
+   "follow": 1.0,
+   "inband14": 0.8978,
+   "inband10": 0.5682,
+   "contact": 0.008,
+   "mode": "exact",
+   "gap": 17.96
+  },
+  "clip_scored": {
+   "n": 110,
+   "taken": 110,
+   "share_taken": 1.0,
+   "inband14": 0.8978,
+   "inband10": 0.5682,
+   "below2": 0.0,
+   "over14": 0.1022,
+   "over20": 0.0104,
+   "d_median": 9.35,
+   "d_p95": 15.54,
+   "d_max": 28.1,
+   "pose_p95_median": 14.0,
+   "pose_p95_max": 23.05,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 25,
+   "share_floor_lt2": 0.0455,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 5,
+    "2-3": 20,
+    "3-4": 51,
+    "4-6": 18,
+    "6-10": 16,
+    "10-99": 0
+   }
+  },
+  "ws_unscored": {
+   "n": 360,
+   "taken": 263,
+   "share_taken": 0.7306,
+   "inband14": 0.8634,
+   "inband10": 0.5537,
+   "below2": 0.0024,
+   "over14": 0.1342,
+   "over20": 0.0272,
+   "d_median": 9.48,
+   "d_p95": 17.59,
+   "d_max": 30.74,
+   "pose_p95_median": 15.3,
+   "pose_p95_max": 27.51,
+   "poses_floor_lt1": 4,
+   "poses_floor_lt2": 29,
+   "poses_floor_lt3": 81,
+   "share_floor_lt2": 0.1103,
+   "floor_hist_mm": {
+    "0-1": 4,
+    "1-2": 25,
+    "2-3": 52,
+    "3-4": 75,
+    "4-6": 102,
+    "6-10": 5,
+    "10-99": 0
+   }
+  },
+  "ws_overhead140": {
+   "n": 28,
+   "taken": 9,
+   "share_taken": 0.3214,
+   "inband14": 0.9279,
+   "inband10": 0.6981,
+   "below2": 0.0118,
+   "over14": 0.0603,
+   "over20": 0.0,
+   "d_median": 7.95,
+   "d_p95": 14.34,
+   "d_max": 19.52,
+   "pose_p95_median": 13.03,
+   "pose_p95_max": 17.91,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 9,
+   "share_floor_lt2": 0.5556,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 4,
+    "2-3": 4,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "clip_overhead140": {
+   "n": 10,
+   "taken": 10,
+   "share_taken": 1.0,
+   "inband14": 0.8605,
+   "inband10": 0.5868,
+   "below2": 0.0,
+   "over14": 0.1395,
+   "over20": 0.0,
+   "d_median": 9.25,
+   "d_p95": 16.69,
+   "d_max": 19.92,
+   "pose_p95_median": 17.56,
+   "pose_p95_max": 17.96,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 10,
+   "share_floor_lt2": 0.5,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 5,
+    "2-3": 5,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_elev90_140": {
+   "n": 85,
+   "taken": 39,
+   "share_taken": 0.4588,
+   "inband14": 0.8283,
+   "inband10": 0.5477,
+   "below2": 0.0009,
+   "over14": 0.1708,
+   "over20": 0.0512,
+   "d_median": 9.56,
+   "d_p95": 20.08,
+   "d_max": 30.74,
+   "pose_p95_median": 16.75,
+   "pose_p95_max": 27.51,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 6,
+   "poses_floor_lt3": 19,
+   "share_floor_lt2": 0.1538,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 5,
+    "2-3": 13,
+    "3-4": 10,
+    "4-6": 10,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_below90": {
+   "n": 247,
+   "taken": 215,
+   "share_taken": 0.8704,
+   "inband14": 0.8671,
+   "inband10": 0.5488,
+   "below2": 0.0023,
+   "over14": 0.1306,
+   "over20": 0.024,
+   "d_median": 9.53,
+   "d_p95": 17.25,
+   "d_max": 29.66,
+   "pose_p95_median": 15.39,
+   "pose_p95_max": 25.17,
+   "poses_floor_lt1": 2,
+   "poses_floor_lt2": 18,
+   "poses_floor_lt3": 53,
+   "share_floor_lt2": 0.0837,
+   "floor_hist_mm": {
+    "0-1": 2,
+    "1-2": 16,
+    "2-3": 35,
+    "3-4": 65,
+    "4-6": 92,
+    "6-10": 5,
+    "10-99": 0
+   }
+  },
+  "ws_reach_by_elev": {
+   "0-60": [
+    158,
+    172
+   ],
+   "60-90": [
+    57,
+    75
+   ],
+   "90-120": [
+    27,
+    51
+   ],
+   "120-140": [
+    12,
+    34
+   ],
+   "140-160": [
+    6,
+    13
+   ],
+   "160-200": [
+    3,
+    15
+   ]
+  },
+  "contact_poses": [
+   {
+    "mm": -9.47,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": -60.0
+   },
+   {
+    "mm": -4.28,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": 15.0
+   },
+   {
+    "mm": -1.17,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -60.0
+   }
+  ],
+  "ws_overhead_why_not": {
+   "j3stop": 3,
+   "contact": 2,
+   "fold": 14
+  }
+ },
+ "extras": {
+  "th_margin_own_state": {
+   "min": 5.181,
+   "n": 373,
+   "lt5": 0,
+   "lt5p5": 2,
+   "forced": 168,
+   "th_max_taken": 106.3,
+   "lowest": {
+    "own": 5.181,
+    "forced": true,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 120.0,
+    "axial": -105.0
+   }
+  },
+  "knee_ang_taken": [
+   59.27,
+   105.94
+  ],
+  "knee_window": [
+   25.2189,
+   154.7811
+  ],
+  "dK_taken_max_deg": 45.62,
+  "sc_info": {
+   "boss_level": 63.3,
+   "lev_L1b": 60.1,
+   "arm_tip_level": 63.2,
+   "g": 2.393,
+   "sig": 1.0,
+   "r_c": 16.18,
+   "beta": -177.17,
+   "arm_len": 55.4,
+   "arc_deg": 127.3,
+   "rssr_closed": true,
+   "vel_angle_rest": 1.8,
+   "contact_r": [
+    16.4,
+    22.2
+   ],
+   "clear_hubK_min": 1.85,
+   "n_lowarm": 36,
+   "phi_max_taken": 19.3,
+   "cprog": 0.0,
+   "crest_exact": 9.62,
+   "dK_lim": 46.0,
+   "why_lim": "slot-end",
+   "law_dK_max": 62.7,
+   "nose_r": 0.75,
+   "mu": 0.15,
+   "friction_deg": 8.53,
+   "pa_kin_max": 34.47,
+   "flank_deleted": true,
+   "dK_lim_parent_flank": 64.5,
+   "why_lim_parent_flank": "law",
+   "pa_crank_max_taken": 14.6,
+   "pa_horn_max_taken": 24.5,
+   "pa_eff_crank": 23.1,
+   "pa_eff_horn": 33.0,
+   "dK_lim_parent": 64.5,
+   "why_lim_parent": "law"
+  }
+ },
+ "secs": 545.7,
+ "exact": true,
+ "params_source": "row best_params (decoded from a JSON string) over the model dict CELL_B"
+}

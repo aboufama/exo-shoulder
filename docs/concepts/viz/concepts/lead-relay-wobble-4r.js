@@ -23,7 +23,7 @@
   const cb = x => Math.cos(x * D2R), sb = x => Math.sin(x * D2R);
   /** physical J2 stop: th (deg) inside [thLo, thHi] -> K on stop A (state 0); else J2 locked on its q2 stop, K opens */
   const dot = V.dot;
-  const RL = { a0: 6, azu: 180, lo: -60, hi: 42, r0: 51.0, h: 15.0, flip: 7.25 };
+  const RL = { a0: 6, azu: 180, lo: 0, hi: 21, r0: 51.0, h: 15.0, flip: 7.25 };
   const cAx = (() => { const u1 = u[0], ef = V.unit(V.cross(u1, [0, 1, 0])), ff = V.cross(u1, ef);
     return V.unit(V.add(V.scale(u1, cb(RL.a0)), V.add(V.scale(ef, sb(RL.a0) * cb(RL.azu)), V.scale(ff, sb(RL.a0) * sb(RL.azu))))); })();
   let RC = M.I3();

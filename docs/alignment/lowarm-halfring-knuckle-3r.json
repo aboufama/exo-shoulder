@@ -5,10 +5,7 @@
  "complexity": 16.5,
  "verdict": "watch",
  "reasons": [
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
-  "dominance: cannot compare with conecut-knee-knuckle-3r at 2 mm",
-  "continuity: static 22.7, connected full 22.7, knn 30.93, bench 23.88 (docs/concepts/verify/lowarm-halfring-knuckle-3r_v_held_frozen.json); the knn flood (no envelope stepping stones) loses 8.23",
-  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out"
+  "continuity: static 22.7, connected full 22.7, knn 30.93, bench 23.88 (docs/concepts/verify/lowarm-halfring-knuckle-3r_v_held_frozen.json); the knn flood (no envelope stepping stones) loses 8.23"
  ],
  "checks": [
   {
@@ -30,8 +27,26 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "level": "ok",
+   "reason": "plain 17.96, <1 mm 20.14, <2 mm 34.84, <3 mm 86.4, band read 3-14 mm 18.16, 16.88 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 16.88,
+   "plain": 17.96,
+   "n1": 20.14,
+   "n2": 34.84,
+   "n3": 86.4,
+   "band3": 18.16,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0,
+    "2-3": 0.002,
+    "3-4": 0.0133,
+    "4-6": 0.122,
+    "6-10": 0.431,
+    "10-14": 0.3295,
+    ">14": 0.1022
+   },
+   "minmm": 0.048,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
@@ -109,8 +124,11 @@
   },
   {
    "check": "dominance",
-   "level": "watch",
-   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+   "level": "ok",
+   "reason": "vs conecut-knee-knuckle-3r: plain +0.32, 2 mm +0.00",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": 0.32,
+   "gain_2mm": 0.0
   },
   {
    "check": "continuity",
@@ -131,7 +149,7 @@
   {
    "check": "idle",
    "level": "ok",
-   "reason": "K moves: smallest recorded span 45.62 deg (docs/concepts/verify/lowarm-halfring-knuckle-3r_v_bench_frozen.json:claim_frozen_out.dK_taken_max); crank: declared moving, no span on file; knee: declared moving, no span on file",
+   "reason": "K moves: smallest recorded span 45.61 deg (re-measured dK span); crank: declared moving, no span on file; knee moves: smallest recorded span 46.67 deg (re-measured K.ang span)",
    "spans": [
     [
      "row:verification.v1_own_gates.dK_taken_max",
@@ -152,6 +170,22 @@
     [
      "docs/concepts/verify/lowarm-halfring-knuckle-3r_v_bench_frozen.json:claim_frozen_out.dK_taken_max",
      45.62
+    ],
+    [
+     "re-measured dK span",
+     45.61
+    ],
+    [
+     "re-measured K.ang span",
+     46.67
+    ],
+    [
+     "re-measured K.qa span",
+     46.67
+    ],
+    [
+     "re-measured K.qb span",
+     51.34
     ]
    ],
    "declared": [
@@ -163,8 +197,85 @@
   },
   {
    "check": "sampling",
-   "level": "watch",
-   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.898 vs part-weighted 0.905 (-0.72 points); thinly sampled parts: ring2 4, plate 8, L1a 8 (re-measured)",
+   "parts": {
+    "hub1": [
+     1.0,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.912,
+     11.6,
+     80
+    ],
+    "hub3": [
+     0.742,
+     11.5,
+     80
+    ],
+    "E": [
+     0.979,
+     6.0,
+     164
+    ],
+    "boss": [
+     1.0,
+     7.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     6.2,
+     32
+    ],
+    "knee": [
+     0.999,
+     9.7,
+     90
+    ],
+    "crank": [
+     0.813,
+     11.1,
+     133
+    ],
+    "horn": [
+     0.949,
+     8.9,
+     27
+    ],
+    "ring2": [
+     0.859,
+     12.7,
+     4
+    ],
+    "plate": [
+     0.719,
+     12.3,
+     8
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.918,
+     8.2,
+     36
+    ],
+    "L2": [
+     0.709,
+     12.2,
+     124
+    ]
+   }
   },
   {
    "check": "complexity",
@@ -190,14 +301,14 @@
   }
  ],
  "remeasured": {
-  "bench": false,
+  "bench": true,
   "held": false
  },
  "verifier_files": [
   "docs/concepts/verify/lowarm-halfring-knuckle-3r_v_held_frozen.json",
   "docs/concepts/verify/lowarm-halfring-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "1874a0f",
+ "git": "f804972",
  "tool_version": "2026-10-17.6",
- "t": "2026-10-18T02:30:16Z"
+ "t": "2026-10-18T02:40:47Z"
 }

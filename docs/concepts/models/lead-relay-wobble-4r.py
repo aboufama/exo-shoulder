@@ -56,6 +56,7 @@ def geometry(M1, a0, azu, r0_set=None):
     """hub 0 / wedge / lifted hub 1 / L1a + riser for seat (a0, azu); r0 from the FIT bench skin only (2 mm on every pose the
     lead takes), or r0_set (a design variable: hub 0 kept low, its skin hits counted as contacts)"""
     B1 = M1.B; u1 = M1.D.u[0]; c = L.relay_axis(u1, a0, azu); e, f = L.frame_of(c)
+    if not bool(L.seat_ok(c)[0]): raise RuntimeError("seat-illegal: hub 0's axis (the grounded base hub) is outside the J1 seat rule")
     dxy = CK.disc_xy(HUB_R, 2.0); ang = np.linspace(0, 2 * np.pi, 24, endpoint=False)
     rim = np.array([r * (math.cos(a) * e + math.sin(a) * f) for r in (5.0, 10.0) for a in ang] + [np.zeros(3)])
     tk = [i for i in range(len(B1.idx)) if B1.res[i] is not None]   # the poses the lead takes at q0 = 0 (relayed hits count later)
