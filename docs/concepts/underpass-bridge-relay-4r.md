@@ -36,3 +36,8 @@ D12 L10, flange on. Pick = the lowest chain-only gate with 0 jams, pooled ib14 >
 up_clr; ties (within 0.05) broken by fewer taken poses with metal < 1 mm, then the thinner posterior block. The claim
 is read ONCE (CB_EXACT=1, Bench(110,360), frozen, rl_fix / hiE frozen from envsel), then the held bench once.
 Pass = gate <= 13.75 with 0 jams; kill = gate > 14.76 or held > 18.27.
+
+Addendum written after cells 1-5 had read and BEFORE cell 6 (H 1.5) read: cells 1, 3, 4, 5 (all ant ii) tie at 14.59 with
+15 near-touch poses and the same block height, so the pre-registered rule cannot separate them. Last tie-break, chosen
+for robustness and not for a number: the larger E clearance (up_clr 1.2: the claim's E envelope is the main risk), then
+the parent's verified delta 4.5. If cell 6 ties, the rule's own "thinner posterior block" picks it.
