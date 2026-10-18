@@ -582,6 +582,19 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
        fire gamed, which depends on the open T3 question (which th reading holds with J2 free in state 2). Decide T3 first.
      - The row's v_* fields hold the STATIC reading (16.20). The continuity rule makes the connected 17.35 the claim, and
        the row is flagged GAMED either way.
+   - *Lead, 09:05 UTC 10-18:* jump round 104 (J4) closed (3c2edef).
+     - The re-audit keyed on the verified claim lowered freek-oracle-route-knuckle-4r to WATCH (auditor 08:29, skeptic
+       08:43). T3 was measured: the model's one fold reading is the right one.
+     - The lead flipped the row to VERIFIED: 16.20 frozen exact (score 94.11), held 21.89. This is **the best verified
+       number on file**, but it has 4 counted joints (cx 33.25), so it is NOT the headline lead (user 2026-10-17; the
+       dashboard's headline takes <= 3 active DOF).
+     - Against the lead it is a coin flip: -2.08 bench (P 0.745), -0.49 held (P 0.622). Its contact depth is 3.9x.
+     - Its final polish (templates/final-polish.js, local, farm closed) was launched because its q3max search was a 1-D
+       8-point sweep. It is also the measured answer to how far 4 DOF goes, for the user's 3-DOF vs 95 decision.
+     - The generation CAD comes after the polish and the open items: J3 dowel force, K-spring hold R17, cuff twist.
+   - Round 104's other rows: armarc 18.01, kfree-armarc 26.42 and desmo-window 18.80-19.01 at kit density are dead, all
+     audited. The jump loop wf_6c42dda0-f91 runs on to rounds 105-106 on the closer's next focus (carriage-borne relay
+     rail, psi2, ER binders).
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

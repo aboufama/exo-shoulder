@@ -1,0 +1,268 @@
+{
+ "id": "slotted-eccentric-pin-knee-3r",
+ "gap": 97.04,
+ "reach": 0.4611,
+ "follow": 0.6818,
+ "inband14": 0.699,
+ "contact": 0.0623,
+ "mode": "exact",
+ "exact": true,
+ "members": [
+  [
+   "hub1",
+   81
+  ],
+  [
+   "hub2",
+   81
+  ],
+  [
+   "hub3",
+   81
+  ],
+  [
+   "pinK",
+   197
+  ],
+  [
+   "studG",
+   149
+  ],
+  [
+   "link1",
+   217
+  ],
+  [
+   "spoke",
+   105
+  ],
+  [
+   "trk1",
+   35
+  ],
+  [
+   "trk2",
+   35
+  ],
+  [
+   "trk3",
+   35
+  ],
+  [
+   "trk4",
+   35
+  ],
+  [
+   "trk5",
+   35
+  ],
+  [
+   "trk6",
+   35
+  ],
+  [
+   "neck",
+   168
+  ],
+  [
+   "crank",
+   105
+  ],
+  [
+   "L2b",
+   315
+  ],
+  [
+   "armG",
+   100
+  ]
+ ],
+ "n_contact": 16,
+ "sum_mm": 24.149,
+ "contact_poses": [
+  {
+   "i": 119,
+   "kind": "ws",
+   "plane": -90.0,
+   "elev": 60.0,
+   "axial": 135.0,
+   "depth_mm": 10.334,
+   "pressing": {
+    "L2b": 10.334,
+    "neck": 0.888,
+    "hub3": 0.268
+   }
+  },
+  {
+   "i": 129,
+   "kind": "ws",
+   "plane": -75.0,
+   "elev": 60.0,
+   "axial": 120.0,
+   "depth_mm": 5.024,
+   "pressing": {
+    "L2b": 5.024
+   }
+  },
+  {
+   "i": 150,
+   "kind": "ws",
+   "plane": -45.0,
+   "elev": 60.0,
+   "axial": 135.0,
+   "depth_mm": 3.815,
+   "pressing": {
+    "L2b": 3.815
+   }
+  },
+  {
+   "i": 55,
+   "kind": "clip",
+   "plane": 59.62827682495117,
+   "elev": 89.68177795410156,
+   "axial": -52.85258102416992,
+   "depth_mm": 1.136,
+   "pressing": {
+    "studG": 1.136
+   }
+  },
+  {
+   "i": 117,
+   "kind": "ws",
+   "plane": -90.0,
+   "elev": 45.0,
+   "axial": 135.0,
+   "depth_mm": 1.129,
+   "pressing": {
+    "L2b": 1.129
+   }
+  },
+  {
+   "i": 252,
+   "kind": "ws",
+   "plane": 30.0,
+   "elev": 60.0,
+   "axial": 60.0,
+   "depth_mm": 1.003,
+   "pressing": {
+    "hub2": 1.003,
+    "trk4": 0.163
+   }
+  },
+  {
+   "i": 56,
+   "kind": "clip",
+   "plane": 43.23748016357422,
+   "elev": 42.28136444091797,
+   "axial": -40.21019744873047,
+   "depth_mm": 0.645,
+   "pressing": {
+    "studG": 0.645
+   }
+  },
+  {
+   "i": 272,
+   "kind": "ws",
+   "plane": 45.0,
+   "elev": 30.0,
+   "axial": -30.0,
+   "depth_mm": 0.559,
+   "pressing": {
+    "studG": 0.559
+   }
+  },
+  {
+   "i": 195,
+   "kind": "ws",
+   "plane": 0.0,
+   "elev": 45.0,
+   "axial": 60.0,
+   "depth_mm": 0.504,
+   "pressing": {
+    "hub2": 0.504
+   }
+  },
+  {
+   "i": 177,
+   "err": "res size 1810 != 1809"
+  },
+  {
+   "i": 180,
+   "err": "res size 1810 != 1809"
+  },
+  {
+   "i": 183,
+   "err": "res size 1810 != 1809"
+  },
+  {
+   "i": 198,
+   "err": "res size 1810 != 1809"
+  },
+  {
+   "i": 201,
+   "err": "res size 1810 != 1809"
+  },
+  {
+   "i": 228,
+   "err": "res size 1810 != 1809"
+  },
+  {
+   "i": 467,
+   "err": "res size 1810 != 1809"
+  }
+ ],
+ "by_part": {
+  "L2b": {
+   "poses": 4,
+   "sum_mm": 20.302,
+   "max_mm": 10.334
+  },
+  "neck": {
+   "poses": 1,
+   "sum_mm": 0.888,
+   "max_mm": 0.888
+  },
+  "hub3": {
+   "poses": 1,
+   "sum_mm": 0.268,
+   "max_mm": 0.268
+  },
+  "studG": {
+   "poses": 3,
+   "sum_mm": 2.34,
+   "max_mm": 1.136
+  },
+  "hub2": {
+   "poses": 2,
+   "sum_mm": 1.507,
+   "max_mm": 1.003
+  },
+  "trk4": {
+   "poses": 1,
+   "sum_mm": 0.163,
+   "max_mm": 0.163
+  }
+ },
+ "taken_min_mm_by_part": {
+  "hub1": 3.773,
+  "hub2": 1.285,
+  "hub3": 1.895,
+  "pinK": 5.9,
+  "studG": 0.237,
+  "link1": 0.943,
+  "spoke": 1.15,
+  "trk1": 1.196,
+  "trk2": 0.895,
+  "trk3": 0.682,
+  "trk4": 0.404,
+  "trk5": 0.656,
+  "trk6": 1.86,
+  "neck": 1.032,
+  "crank": 5.993,
+  "L2b": 2.056,
+  "armG": 3.087
+ },
+ "secs": 139.9,
+ "git": "69b07b3",
+ "source": "tools/alignment_slotted_depthparts.py: model slotted-eccentric-pin-knee-3r.py unchanged (own frozen()), worn Bench(110,360)"
+}
