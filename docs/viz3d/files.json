@@ -1,0 +1,19 @@
+{
+ "kin.js": "docs/concepts/viz/kin.js",
+ "zc.js": "docs/concepts/viz/concepts/zc-frontier-3r.js",
+ "user_conecut_knee/exo.txt": "docs/viz3d/user_conecut_knee/exo.txt",
+ "user_conecut_knee/motion.json": "docs/viz3d/user_conecut_knee/motion.json",
+ "user_pinknee_h1b/exo.txt": "docs/viz3d/user_pinknee_h1b/exo.txt",
+ "user_pinknee_h1b/motion.json": "docs/viz3d/user_pinknee_h1b/motion.json",
+ "skin/1ee0cb5c98ab.txt": "docs/viz3d/skin/1ee0cb5c98ab.txt",
+ "skin/3ffac764881d.txt": "docs/viz3d/skin/3ffac764881d.txt",
+ "skin/504b47170d93.txt": "docs/viz3d/skin/504b47170d93.txt",
+ "skin/608d4ba2253c.txt": "docs/viz3d/skin/608d4ba2253c.txt",
+ "skin/8673d30c3e40.txt": "docs/viz3d/skin/8673d30c3e40.txt",
+ "skin/88e9537f119e.txt": "docs/viz3d/skin/88e9537f119e.txt",
+ "skin/8e2eb5a6433e.txt": "docs/viz3d/skin/8e2eb5a6433e.txt",
+ "skin/dbb167c3fa61.txt": "docs/viz3d/skin/dbb167c3fa61.txt",
+ "skin/e2233d38377c.txt": "docs/viz3d/skin/e2233d38377c.txt",
+ "skin/mesh.json": "docs/viz3d/skin/mesh.json",
+ "skin/mesh.txt": "docs/viz3d/skin/mesh.txt"
+}

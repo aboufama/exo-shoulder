@@ -1,0 +1,560 @@
+<meta charset="utf-8">
+<title>Shoulder Exo 3D</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a full-window studio stage; readouts top-left, the finishes key top-right, a slim control bar at the bottom. */
+:root { --bg: #e6e9ec; --bg2: #f8f9fa; --panel: rgba(255,255,255,0.9); --ink: #161b21; --ink2: #56606c; --rule: #d3d8de; --accent: #c4661a; --bad: #b3373a; --good: #2c7a4b;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #101317; --bg2: #262c33; --panel: rgba(28,33,40,0.9); --ink: #e7ebef; --ink2: #9ba5b1; --rule: #333b45; --accent: #ec8b45; --bad: #ec7a7c; --good: #5cc28a; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #101317; --bg2: #262c33; --panel: rgba(28,33,40,0.9); --ink: #e7ebef; --ink2: #9ba5b1; --rule: #333b45; --accent: #ec8b45; --bad: #ec7a7c; --good: #5cc28a; color-scheme: dark }
+html, body { height: 100% }
+body { margin: 0; background: radial-gradient(ellipse 80% 70% at 50% 38%, var(--bg2), var(--bg)); background-color: var(--bg); color: var(--ink); font: 14px/1.45 var(--f-body); overflow: hidden }
+#stage { position: fixed; inset: 0 }
+#stage canvas { display: block; width: 100%; height: 100%; touch-action: none }
+.panel { position: fixed; background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 10px 12px; backdrop-filter: blur(6px); z-index: 3 }
+#info { top: calc(10px + env(safe-area-inset-top, 0px)); left: max(10px, env(safe-area-inset-left, 0px)); width: min(360px, calc(100vw - 20px)); max-height: calc(100vh - 96px); overflow: auto }
+#key { top: calc(10px + env(safe-area-inset-top, 0px)); right: max(10px, env(safe-area-inset-right, 0px)); width: 220px }
+#bar { left: max(10px, env(safe-area-inset-left, 0px)); right: max(10px, env(safe-area-inset-right, 0px)); bottom: calc(10px + env(safe-area-inset-bottom, 0px)); display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center }
+h1 { font: 600 15px/1.25 var(--f-body); margin: 0 0 4px }
+.sub { color: var(--ink2); font-size: 12.5px; margin: 0 0 8px }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden }
+.seg button { font: 600 12.5px var(--f-body); color: var(--ink2); background: transparent; border: 0; border-radius: 0; padding: 6px 10px; cursor: pointer }
+.seg button + button { border-left: 1px solid var(--rule) }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg2) }
+button, select { font: 500 13px var(--f-body); color: var(--ink); background: var(--panel); border: 1px solid var(--rule); border-radius: 7px; padding: 5px 9px; cursor: pointer }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px }
+#scrub { flex: 1 1 200px; min-width: 140px; accent-color: var(--accent) }
+label.ck { display: inline-flex; gap: 5px; align-items: center; font-size: 12.5px; color: var(--ink2); cursor: pointer }
+table.ro { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: 13px }
+table.ro td { padding: 2px 0; vertical-align: top } table.ro td:last-child { text-align: right; font-family: var(--f-mono); font-size: 12.5px }
+table.ro td:first-child { color: var(--ink2); padding-right: 10px }
+.status { margin-top: 6px; font-size: 12.5px; font-weight: 600 }
+.status.ok { color: var(--good) } .status.no { color: var(--bad) }
+.note { margin-top: 8px; font-size: 12px; color: var(--ink2) }
+#hover { margin-top: 6px; font-size: 12.5px; min-height: 2.6em }
+#hover b { font-weight: 600; color: var(--ink) }
+.krow { display: flex; gap: 8px; align-items: center; font-size: 12.5px; padding: 2px 0 }
+.sw { width: 13px; height: 13px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.15) }
+#labels { position: fixed; inset: 0; pointer-events: none; z-index: 2 }
+.lab { position: absolute; transform: translate(-50%, -125%); font: 600 11.5px var(--f-mono); color: #fff; background: rgba(20,24,30,0.78); padding: 1px 6px; border-radius: 4px; white-space: nowrap }
+#leaders { position: fixed; inset: 0; pointer-events: none; z-index: 2; width: 100%; height: 100% }
+.lab.f { transform: translate(-50%, -50%); background: var(--accent); color: #fff; font: 600 11.5px var(--f-body); padding: 2px 7px }
+#leaders line { stroke: var(--accent); stroke-width: 1.5 } #leaders circle { fill: var(--accent); stroke: #fff; stroke-width: 1 }
+#focus { margin-top: 10px; width: 100%; font-weight: 600; background: var(--ink); color: var(--bg2); border-color: var(--ink) }
+#focus[hidden] { display: none }
+#fx[hidden] { display: none }
+ol.steps { margin: 4px 0 8px; padding-left: 18px; font-size: 12.5px; color: var(--ink); display: grid; gap: 4px }
+ol.steps b { font-weight: 600 }
+#spark { display: block; width: 100%; height: auto; margin: 6px 0 2px }
+#spark text { font: 10px var(--f-body); fill: var(--ink2) }
+#spark { cursor: pointer }
+#tintKey { margin: 4px 0 0 22px } #tintKey[hidden] { display: none }
+#loading { position: fixed; inset: 0; display: grid; place-items: center; z-index: 4; color: var(--ink2); font-size: 14px; pointer-events: none }
+@media (max-width: 760px) { #key { display: none } #info { width: calc(100vw - 20px) } .hide-sm { display: none } }
+</style>
+
+<div id="stage"></div>
+<svg id="leaders" aria-hidden="true"></svg>
+<div id="labels"></div>
+<div id="loading">Loading the CAD…</div>
+
+<div class="panel" id="info">
+  <h1 id="dname"></h1>
+  <p class="sub" id="dsub"></p>
+  <table class="ro" id="ro"></table>
+  <div class="status" id="st"></div>
+  <div id="fx" hidden>
+    <ol class="steps">
+      <li><b>J2 closes.</b> The lobe ring is fixed to link 2's hub and turns with it.</li>
+      <li><b>Below J2 = +7.3°</b> the lobe's 2 mm rise reaches the follower roller on the bell crank.</li>
+      <li><b>The crank pivots on link 1b.</b> Its long arm carries a hardened nose dowel that bears on the flank lug of link 1a.</li>
+      <li><b>The nose pushes the flank,</b> so link 1a turns about K: the knuckle folds 2.15° per degree of J2, up to about 50°. That keeps J2 off its fold so the arm can keep rising.</li>
+      <li><b>The clock spring</b> in the K cap pulls K back to stop A as J2 reopens, and keeps the roller on the lobe and the nose on the flank throughout.</li>
+    </ol>
+    <svg id="spark" viewBox="0 0 320 78" role="img" aria-label="K fold over this motion: click to jump"></svg>
+    <label class="ck"><input type="checkbox" id="cHold" checked> hold link 1b still (show only the relative motion)</label>
+    <label class="ck"><input type="checkbox" id="cTint" checked> colour the moving bodies (anodised-titanium tones)</label>
+    <div id="tintKey"></div>
+    <p class="note">K has no motor and no sensor: its angle follows from J2 alone. The K cap is drawn see-through so the spring shows.</p>
+  </div>
+  <div id="hover" class="note">Hover a part: its whole moving body lights up.</div>
+  <button type="button" id="focus">Show how the spring and cam fold K</button>
+</div>
+
+<div class="panel" id="key"><h1>Finishes</h1><div id="keyrows"></div>
+  <p class="note">The mannequin is the judges' body model, posed frame by frame, matte black.</p></div>
+
+<div class="panel" id="bar">
+  <div class="seg" role="group" aria-label="Design">
+    <button type="button" data-d="A" aria-pressed="true">Lead · 93.35</button><button type="button" data-d="B" aria-pressed="false">Pin knee · 90.11</button><button type="button" data-d="V" aria-pressed="false">Vanilla 3R · 87.8</button>
+  </div>
+  <select id="clip" aria-label="Motion"></select>
+  <button type="button" id="play" aria-label="Play or pause">Pause</button>
+  <select id="speed" aria-label="Speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+  <input type="range" id="scrub" min="0" max="100" value="0" aria-label="Frame">
+  <label class="ck"><input type="checkbox" id="cAxes" checked> axes</label>
+  <label class="ck"><input type="checkbox" id="cLab" checked> labels</label>
+  <label class="ck hide-sm"><input type="checkbox" id="cMan" checked> mannequin</label>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/environments/RoomEnvironment.js"></script>
+<script src="kin.js"></script>
+<script src="zc.js"></script>
+<script>
+'use strict';
+const $ = (id) => document.getElementById(id);
+const DES = {
+  A: { dd: 'user_conecut_knee', name: 'Lead: cone-cut pin knee (3 joints)',
+       sub: 'Three powered hubs J1, J2, J3. A knuckle K in link 1 folds only when J2 nears its fold, driven by a cam on hub 2 (no extra motor). A two-pin knee on ball bearings lets the arm pad settle. Built CAD, posed frame by frame as the judges score it. Score 93.35.',
+       chain: ['base', 'l1a', 'l1b', 'dk', 'l2', 'l3', 'l4'] },
+  B: { dd: 'user_pinknee_h1b', name: 'Pin knee H1b (3 joints, complexity 0)',
+       sub: 'Three hubs, three links and a two-pin knee, nothing else. Built CAD, posed frame by frame as the judges score it. Score 90.11.',
+       chain: ['base', 'l1', 'l2', 'l3', 'l4'] },
+  V: { name: 'Vanilla 3R: zc-frontier (3 joints, complexity 0)',
+       sub: 'Three hinges whose axes meet at the shoulder centre, three links, a rigid neck to the arm. No knee, no cam. Score 87.8. No detailed CAD exists for it: drawn from its verified model with the real Ø20 hub stack and 12 × 3 mm titanium straps.' },
+};
+
+// ---------------- finishes (CLAUDE.md render rule: bead blasted metal, polished hardware, iglidur orange, no black parts)
+const FIN = {
+  ti:   { label: 'Ti-6Al-4V, bead blasted', color: 0x8b8984, metalness: 0.9, roughness: 0.48 },
+  al:   { label: 'Aluminium (7075, AlSi10Mg), bead blasted', color: 0xb3b7bb, metalness: 0.88, roughness: 0.44 },
+  ss:   { label: '17-4PH stainless, bead blasted', color: 0x9fa3a7, metalness: 0.92, roughness: 0.38 },
+  pol:  { label: 'Bearings, pins, screws, polished', color: 0xd6d9dc, metalness: 1.0, roughness: 0.18 },
+  igl:  { label: 'iglidur / igus polymer', color: 0xe8892b, metalness: 0.0, roughness: 0.55 },
+};
+function finishOf(title, material) {
+  const t = (title || '').toLowerCase(), m = (material || '').toLowerCase();
+  if (m.includes('iglidur') || t.includes('iglid') || t.includes('igus')) return 'igl';
+  if (m.includes('polish') || m.includes('bearing') || /screw|ball |magnet|e-clip|dowel|pin o|ring o/.test(t)) return 'pol';
+  if (m.includes('17-4')) return 'ss';
+  if (m.includes('7075') || m.includes('alsi')) return 'al';
+  if (m === 'user part') return 'al';
+  return 'ti';
+}
+function material(key) {
+  const f = FIN[key];
+  return new THREE.MeshStandardMaterial({ color: f.color, metalness: f.metalness, roughness: f.roughness, envMapIntensity: 0.9 });
+}
+$('keyrows').innerHTML = Object.values(FIN).map((f) => `<div class="krow"><span class="sw" style="background:#${f.color.toString(16).padStart(6, '0')}"></span>${f.label}</div>`).join('');
+
+// ---------------- renderer, studio light
+const stage = $('stage');
+const R = new THREE.WebGLRenderer({ antialias: true, alpha: true }); R.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+R.setClearColor(0x000000, 0); R.outputEncoding = THREE.sRGBEncoding; R.toneMapping = THREE.ACESFilmicToneMapping; R.toneMappingExposure = 0.92;
+R.shadowMap.enabled = true; R.shadowMap.type = THREE.PCFSoftShadowMap;
+stage.appendChild(R.domElement);
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(R).fromScene(new THREE.RoomEnvironment(), 0.04).texture;
+const cam = new THREE.PerspectiveCamera(30, 1, 5, 6000); cam.position.set(-330, 170, 460);
+const world = new THREE.Group(); world.matrixAutoUpdate = false; scene.add(world);   // 'hold link 1b still' moves this
+const ctl = new THREE.OrbitControls(cam, R.domElement); ctl.target.set(0, -70, 0); ctl.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x50555c, 0.35));
+const key = new THREE.DirectionalLight(0xffffff, 1.5); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -0.0004; key.shadow.normalBias = 0.6;
+Object.assign(key.shadow.camera, { left: -420, right: 420, top: 420, bottom: -420, near: 10, far: 2400 });
+scene.add(key, key.target);
+function placeKey() { key.target.position.copy(ctl.target); key.position.copy(ctl.target).add(new THREE.Vector3(260, 700, 420)); key.shadow.camera.updateProjectionMatrix(); }
+function resize() {                                              // on wide screens shift the view centre right, clear of the info panel
+  const w = stage.clientWidth, h = stage.clientHeight, sh = w > 900 ? 170 : 0; R.setSize(w, h, false);
+  cam.aspect = (w + 2 * sh) / h; if (sh) cam.setViewOffset(w + 2 * sh, h, 0, 0, w, h); else cam.clearViewOffset(); cam.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize); resize();
+
+/** normals with a crease angle: the CAD meshes carry positions only, smooth shading would round every edge */
+function creased(geo, deg) {
+  const g = geo.index ? geo.toNonIndexed() : geo.clone(), p = g.attributes.position.array, nt = p.length / 9;
+  const fn = new Float32Array(nt * 3), fa = new Float32Array(nt);
+  for (let f = 0; f < nt; f++) {
+    const o = f * 9, ux = p[o + 3] - p[o], uy = p[o + 4] - p[o + 1], uz = p[o + 5] - p[o + 2], vx = p[o + 6] - p[o], vy = p[o + 7] - p[o + 1], vz = p[o + 8] - p[o + 2];
+    let x = uy * vz - uz * vy, y = uz * vx - ux * vz, z = ux * vy - uy * vx; const l = Math.hypot(x, y, z) || 1;
+    fn[f * 3] = x / l; fn[f * 3 + 1] = y / l; fn[f * 3 + 2] = z / l; fa[f] = l;
+  }
+  const map = new Map(), keyOf = (i) => `${Math.round(p[i] * 200)},${Math.round(p[i + 1] * 200)},${Math.round(p[i + 2] * 200)}`;
+  for (let c = 0; c < nt * 3; c++) { const k = keyOf(c * 3); let a = map.get(k); if (!a) map.set(k, (a = [])); a.push(c); }
+  const N = new Float32Array(p.length), cs = Math.cos(deg * Math.PI / 180);
+  for (const list of map.values()) for (const c of list) {
+    const f = (c / 3) | 0; let x = 0, y = 0, z = 0;
+    for (const c2 of list) { const f2 = (c2 / 3) | 0;
+      if (fn[f * 3] * fn[f2 * 3] + fn[f * 3 + 1] * fn[f2 * 3 + 1] + fn[f * 3 + 2] * fn[f2 * 3 + 2] >= cs) { x += fn[f2 * 3] * fa[f2]; y += fn[f2 * 3 + 1] * fa[f2]; z += fn[f2 * 3 + 2] * fa[f2]; } }
+    const l = Math.hypot(x, y, z) || 1; N[c * 3] = x / l; N[c * 3 + 1] = y / l; N[c * 3 + 2] = z / l;
+  }
+  g.setAttribute('normal', new THREE.BufferAttribute(N, 3)); return g;
+}
+const fetchBin = (path) => fetch(path).then((r) => { if (!r.ok) throw new Error(path + ' ' + r.status); return r.text(); }).then((s) => {   // base64 text: artifacts serve no binary types
+  const b = atob(s.trim()), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u.buffer; });
+const mat4 = (a) => new THREE.Matrix4().set(a[0], a[1], a[2], a[9], a[3], a[4], a[5], a[10], a[6], a[7], a[8], a[11], 0, 0, 0, 1);
+const labRoot = $('labels'), labels = [];
+function addLabel(text, owner) { const d = document.createElement('div'); d.className = 'lab'; d.textContent = text; labRoot.appendChild(d); const L = { el: d, owner, p: new THREE.Vector3(), obj: null }; labels.push(L); return L; }
+const dashMat = new THREE.LineDashedMaterial({ color: 0x20252b, dashSize: 4, gapSize: 3, transparent: true, opacity: 0.8 });
+
+// ---------------- a built design: its GLB regrouped into rigid bodies, posed by the stored per-frame transforms
+const D = {};                                                      // key -> { mot, root, groups, axisLines, ready }
+function loadDesign(k) {
+  if (D[k]) return D[k].ready;
+  const d = D[k] = { root: new THREE.Group(), groups: {}, axisLines: [] };
+  d.root.visible = false; world.add(d.root);
+  d.ready = Promise.all([fetch(DES[k].dd + '/motion.json').then((r) => r.json()), fetchBin(DES[k].dd + '/exo.txt')]).then(([mot, glb]) => new Promise((res, rej) => {
+    d.mot = mot;
+    new THREE.GLTFLoader().parse(glb, '', (g) => {
+      g.scene.updateMatrixWorld(true);
+      const meshes = []; g.scene.traverse((o) => { if (o.isMesh) meshes.push(o); });
+      for (const o of meshes) {
+        const name = o.name.includes('|') ? o.name : (o.parent && o.parent.name) || o.name;
+        const bits = name.split('|'), gname = bits[0], idx = bits[bits.length - 1];
+        if (!d.groups[gname]) { const c = new THREE.Group(); c.matrixAutoUpdate = false; d.groups[gname] = c; d.root.add(c); }
+        const geo = o.geometry.clone(); geo.applyMatrix4(o.matrixWorld);
+        const tt = mot.titles[idx] || [bits.slice(1, -1).join(' ').replace(/_/g, ' '), ''], fk = finishOf(tt[0], tt[1]);
+        const m = new THREE.Mesh(creased(geo, 32), material(fk)); m.castShadow = m.receiveShadow = true;
+        m.userData = { body: gname, title: tt[0], fin: FIN[fk].label, raw: bits.slice(1, -1).join(' ').replace(/_/g, ' ') };
+        d.groups[gname].add(m);
+      }
+      for (const a of mot.axes) {                                   // joint axes ride their carrier body
+        const o = new THREE.Vector3(...a.o), dv = new THREE.Vector3(...a.d);
+        const ln = new THREE.Line(new THREE.BufferGeometry().setFromPoints([o.clone().addScaledVector(dv, a.lo), o.clone().addScaledVector(dv, a.hi)]), dashMat);
+        ln.computeLineDistances(); (d.groups[a.g] || d.root).add(ln); d.axisLines.push(ln); ln.visible = $('cAxes').checked;
+        const L = addLabel(a.name, k); L.p.copy(o).addScaledVector(dv, a.hi); L.obj = d.groups[a.g]; L.axis = a.name;
+      }
+      res(d);
+    }, rej);
+  }));
+  return d.ready;
+}
+function poseDesign(d, f) {
+  for (const [g, c] of Object.entries(d.groups)) { const a = f.g[g]; c.matrix.copy(a ? mat4(a) : new THREE.Matrix4()); c.matrixWorldNeedsUpdate = true; }
+}
+
+// ---------------- mannequin: the judges' body rig skin (docs/viz3d/build_skin.py), keyframed every 3rd frame
+const SK = { cache: {}, pending: {} };
+const skinMat = new THREE.MeshStandardMaterial({ color: 0x0c0d0f, roughness: 0.66, metalness: 0.0, envMapIntensity: 0.45, side: THREE.DoubleSide });
+async function loadSkin() {
+  const [js, buf] = await Promise.all([fetch('skin/mesh.json').then((r) => r.json()), fetchBin('skin/mesh.txt')]);
+  Object.assign(SK, { moving: Int32Array.from(js.moving), step: js.step, q: js.q });
+  const g = new THREE.BufferGeometry();
+  SK.rest = new Float32Array(buf, 0, js.nv * 3).slice();
+  g.setAttribute('position', new THREE.BufferAttribute(SK.rest.slice(), 3));
+  g.setIndex(new THREE.BufferAttribute(new Uint32Array(buf, js.nv * 12, js.nf * 3), 1)); g.computeVertexNormals();
+  SK.mesh = new THREE.Mesh(g, skinMat); SK.mesh.castShadow = SK.mesh.receiveShadow = true; world.add(SK.mesh);
+}
+function skinFor(name) {
+  if (SK.cache[name] || SK.pending[name]) return SK.cache[name];
+  SK.pending[name] = fetchBin('skin/' + name).then((b) => { SK.cache[name] = new Int16Array(b); render(true); });
+  return null;
+}
+function poseSkin(cl, i, lift) {
+  if (!SK.mesh || !cl.skin) return;
+  const kf = skinFor(cl.skin); if (!kf) return;
+  const n = cl.frames.length, st = SK.step, nk = cl.skinN, keyF = (j) => Math.min(j * st, n - 1);
+  const k0 = Math.min(Math.floor(i / st), nk - 1), k1 = Math.min(k0 + 1, nk - 1), f0 = keyF(k0), f1 = keyF(k1);
+  const a = f1 > f0 ? (i - f0) / (f1 - f0) : 0, b = 1 - a, m = SK.moving.length, o0 = k0 * m * 3, o1 = k1 * m * 3, q = SK.q;
+  const P = SK.mesh.geometry.attributes.position.array;
+  for (let v = 0; v < m; v++) {
+    const id = SK.moving[v] * 3, s0 = o0 + v * 3, s1 = o1 + v * 3;
+    P[id] = q * (b * kf[s0] + a * kf[s1]); P[id + 1] = q * (b * kf[s0 + 1] + a * kf[s1 + 1]) + lift; P[id + 2] = q * (b * kf[s0 + 2] + a * kf[s1 + 2]);
+  }
+  SK.mesh.position.y = -lift;                                      // the rest of the trunk rides down by the girdle lift
+  SK.mesh.geometry.attributes.position.needsUpdate = true; SK.mesh.geometry.computeVertexNormals();
+}
+
+// ---------------- vanilla zc-frontier: its verified model dressed in real hardware (B's Ø20 hub stack, Ti straps)
+const ZC = window.KIN && KIN.concepts['zc-frontier-3r'];
+const VAN = { root: new THREE.Group(), parts: [], sol: {}, built: false, axisLines: [] }; VAN.root.visible = false; world.add(VAN.root);
+function strapGeo(n) {                                             // a constant rectangular section swept along a polyline
+  const g = new THREE.BufferGeometry(), nv = 4 * 2 * n + 8, P = new Float32Array(nv * 3), I = [];
+  for (let s = 0; s < 4; s++) for (let i = 0; i < n - 1; i++) { const a = s * 2 * n + i * 2; I.push(a, a + 1, a + 2, a + 1, a + 3, a + 2); }
+  for (let e = 0; e < 2; e++) { const a = 8 * n + e * 4; I.push(...(e ? [a, a + 1, a + 2, a, a + 2, a + 3] : [a, a + 2, a + 1, a, a + 3, a + 2])); }
+  g.setAttribute('position', new THREE.BufferAttribute(P, 3)); g.setIndex(I); g.userData.n = n; return g;
+}
+function sweep(g, pts, th, wd, radial) {                           // radial(p) = unit thickness direction at p
+  const n = g.userData.n, P = g.attributes.position.array, V3 = THREE.Vector3;
+  const pp = []; for (let i = 0; i < n; i++) pp.push(new V3(...pts[Math.min(pts.length - 1, Math.round(i * (pts.length - 1) / (n - 1)))]));
+  const C = [];
+  for (let i = 0; i < n; i++) {
+    const t = pp[Math.min(n - 1, i + 1)].clone().sub(pp[Math.max(0, i - 1)]).normalize(), r = radial(pp[i]);
+    r.addScaledVector(t, -r.dot(t)).normalize(); const w = new V3().crossVectors(t, r).normalize();
+    C.push([[1, 1], [-1, 1], [-1, -1], [1, -1]].map(([a, b]) => pp[i].clone().addScaledVector(r, a * th / 2).addScaledVector(w, b * wd / 2)));
+  }
+  const put = (k, v) => { P[k * 3] = v.x; P[k * 3 + 1] = v.y; P[k * 3 + 2] = v.z; };
+  for (let s = 0; s < 4; s++) for (let i = 0; i < n; i++) { put(s * 2 * n + i * 2, C[i][s]); put(s * 2 * n + i * 2 + 1, C[i][(s + 1) % 4]); }
+  for (let e = 0; e < 2; e++) for (let c = 0; c < 4; c++) put(8 * n + e * 4 + c, C[e ? n - 1 : 0][c]);
+  g.attributes.position.needsUpdate = true; g.computeVertexNormals(); g.computeBoundingSphere();
+}
+function hubTemplate() {                                           // B's J1 stack (bearings, spacers, ring nut, dome cap) about its axis, base at y = 0
+  const b = D.B, ax = b.mot.axes.find((a) => a.name === 'J1'), o = new THREE.Vector3(...ax.o), q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(...ax.d), new THREE.Vector3(0, 1, 0));
+  const out = []; let ymin = Infinity, capMin = Infinity;
+  for (const grp of Object.values(b.groups)) for (const m of grp.children) {
+    if (!m.isMesh || !/^J1 /.test(m.userData.raw)) continue;
+    const g = m.geometry.clone().translate(-o.x, -o.y, -o.z).applyMatrix4(new THREE.Matrix4().makeRotationFromQuaternion(q)); g.computeBoundingBox();
+    ymin = Math.min(ymin, g.boundingBox.min.y); if (/cap/i.test(m.userData.raw)) capMin = Math.min(capMin, g.boundingBox.min.y);
+    out.push({ g, mat: m.material, title: m.userData.title, fin: m.userData.fin });
+  }
+  for (const t of out) t.g.translate(0, -ymin, 0);
+  const hh = Math.max(4, (isFinite(capMin) ? capMin : ymin + 9) - ymin);
+  const housing = new THREE.CylinderGeometry(10, 10, hh, 64).translate(0, hh / 2, 0);
+  out.push({ g: housing, mat: material('ti'), title: 'Hub ring Ø20 (link end)', fin: FIN.ti.label });
+  return out;
+}
+function buildVan() {
+  const s0 = VAN.sol[clipI][0], tpl = hubTemplate();
+  for (const d of ZC.parts(s0.q, s0.ctx)) {
+    let obj = null, up = null;
+    if (d.kind === 'hub') {
+      obj = new THREE.Group(); for (const t of tpl) { const m = new THREE.Mesh(t.g, t.mat.clone()); m.castShadow = m.receiveShadow = true; m.userData = { title: d.name.split(' (')[0] + ': ' + t.title, fin: t.fin }; obj.add(m); }
+      const ln = new THREE.Line(new THREE.BufferGeometry(), dashMat); VAN.root.add(ln); VAN.axisLines.push(ln); ln.visible = $('cAxes').checked;
+      const L = addLabel(d.name.split(' ')[0], 'V');
+      up = (q) => { const ax = new THREE.Vector3(...q.axis).normalize(); obj.position.set(...q.c); obj.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), ax);
+        const top = new THREE.Vector3(...q.c).addScaledVector(ax, (q.h || 12) + 10); ln.geometry.setFromPoints([new THREE.Vector3(0, 0, 0), top]); ln.computeLineDistances(); L.p.copy(top); };
+    } else if (d.kind === 'arc' || d.kind === 'link') {
+      const neck = /neck/.test(d.name), bar = d.kind === 'link', th = neck || bar ? 6 : 3, wd = neck ? 14 : 12, n = bar ? 2 : 25;
+      const geo = strapGeo(n); obj = new THREE.Mesh(geo, material(bar ? 'al' : 'ti')); obj.castShadow = obj.receiveShadow = true;
+      obj.userData = { title: d.name, fin: bar ? FIN.al.label : FIN.ti.label };
+      up = (q, ctx) => sweep(geo, bar ? [q.a, q.b] : q.pts, th, wd, bar ? (p) => { const a = new THREE.Vector3(...ctx.armAxis); return p.clone().addScaledVector(a, -p.dot(a)).normalize(); } : (p) => p.clone().normalize());
+    } else if (d.kind === 'plate') {
+      obj = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), material('ti')); obj.castShadow = obj.receiveShadow = true; obj.userData = { title: d.name, fin: FIN.ti.label }; obj.matrixAutoUpdate = false;
+      up = (q) => { const z = new THREE.Vector3(...q.z).normalize(), x0 = new THREE.Vector3(...q.x), x = x0.sub(z.clone().multiplyScalar(x0.dot(z))).normalize(), y = z.clone().cross(x);
+        obj.matrix.makeBasis(x, y, z).scale(new THREE.Vector3((q.size || [20, 16])[0], (q.size || [20, 16])[1], q.t || 3)).setPosition(...q.c); obj.matrixWorldNeedsUpdate = true; };
+    } else if (d.kind === 'strap') {
+      const sh = new THREE.Shape().absarc(0, 0, d.r + 2.5, 0, Math.PI * 2); sh.holes.push(new THREE.Path().absarc(0, 0, d.r, 0, Math.PI * 2, true));
+      const geo = new THREE.ExtrudeGeometry(sh, { depth: d.w || 26, bevelEnabled: false, curveSegments: 64 }).translate(0, 0, -(d.w || 26) / 2);
+      obj = new THREE.Mesh(geo, material('al')); obj.castShadow = obj.receiveShadow = true; obj.userData = { title: d.name, fin: FIN.al.label };
+      up = (q) => { obj.position.set(...q.c); obj.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), new THREE.Vector3(...q.axis).normalize()); };
+    }
+    if (!obj) { VAN.parts.push(null); continue; }
+    VAN.root.add(obj); VAN.parts.push({ obj, up });
+  }
+  VAN.built = true;
+}
+function solveVan() {
+  if (!ZC || VAN.sol[clipI]) return;
+  const cl = D.A.mot.clips[clipI];
+  VAN.sol[clipI] = KIN.run(ZC, cl.frames.map((f, i) => ({ pose: { plane: f.p[0], elev: f.p[1], axial: f.p[2], flex: f.p[3], pron: f.p[4] }, t: i / cl.fps }))).frames;
+}
+function poseVan(i) {
+  const sol = VAN.sol[clipI]; if (!sol) return null;
+  const s = sol[Math.min(i, sol.length - 1)], parts = ZC.parts(s.q, s.ctx);
+  parts.forEach((d, k) => { const p = VAN.parts[k]; if (p) p.up(d, s.ctx); });
+  return s;
+}
+
+// ---------------- camera on the shoulder chain (not the arm pad and cuffs that run down the arm)
+function frameView() {
+  const d = D.A; d.root.updateMatrixWorld(true);
+  const box = new THREE.Box3(); for (const g of DES.A.chain) if (d.groups[g]) box.expandByObject(d.groups[g]);
+  const c = box.getCenter(new THREE.Vector3()), sz = box.getSize(new THREE.Vector3());
+  const r = Math.max(sz.x, sz.y, sz.z) * 0.78, dir = new THREE.Vector3(-0.55, 0.42, 0.72).normalize();
+  const dist = r / Math.tan(cam.fov * Math.PI / 360) * (cam.aspect < 1 ? 1.6 : 1.05);
+  ctl.target.copy(c); cam.position.copy(c).addScaledVector(dir, dist); cam.near = dist / 50; cam.far = dist * 20; cam.updateProjectionMatrix(); ctl.update(); placeKey();
+}
+
+
+// ---------------- focus on the K drive: lobe ring (link 2) -> follower roller -> bell crank (pivots on link 1b) -> nose
+// dowel -> flank lug (link 1a) -> K folds; the clock spring in the K cap returns it to stop A and closes both contacts
+const FOCUS_PARTS = [[/^drive lobe follower roller/, 'Follower roller'], [/^D9-01/, 'Bell crank'],
+  [/^drive nose dowel/, 'Nose dowel'], [/^K clock spring/, 'Clock spring'], [/^K stop dowel 1/, 'Stop dowels (stop A / stop B)']];
+const TINT = { l1a: [0x2f62b0, 'link 1a (to J1)'], dk: [0xb98a1e, 'bell crank'], l2: [0x6c46a6, 'link 2 and its lobe ring'] };   // l1b stays plain: it is held still
+$('tintKey').innerHTML = Object.values(TINT).map(([c, n]) => `<div class="krow"><span class="sw" style="background:#${c.toString(16)}"></span>${n}</div>`).join('')
+  + '<div class="krow"><span class="sw" style="background:#8b8984"></span>link 1b, K cap and spring (held still)</div>';
+let focus = false, hold0 = null, FX = null;
+const leaders = $('leaders');
+function focusSetup() {
+  const d = D.A, find = (re) => { for (const grp of Object.values(d.groups)) for (const m of grp.children) if (m.isMesh && re.test(m.userData.raw)) { m.geometry.computeBoundingBox(); return { m, g: grp }; } return null; };
+  FX = { labels: [], keep: new Set(['l1a', 'l1b', 'dk', 'l2']), cap: find(/^K clock-spring cap/), lobe: find(/^D9-02/) };
+  const lab = (text, p, g) => { const L = addLabel(text, 'F'); L.el.classList.add('f'); L.p.copy(p); L.obj = g; FX.labels.push(L); };
+  for (const [re, text] of FOCUS_PARTS) { const h = find(re); if (h) lab(text, h.m.geometry.boundingBox.getCenter(new THREE.Vector3()), h.g); }
+  const nearest = (h, c) => { const P = h.m.geometry.attributes.position, v = new THREE.Vector3(), bp = new THREE.Vector3(); let best = Infinity;   // build pose: the drive's contacts touch
+    for (let i = 0; i < P.count; i++) { v.fromBufferAttribute(P, i); const dd = v.distanceToSquared(c); if (dd < best) { best = dd; bp.copy(v); } } return bp; };
+  const ctr = (h) => h.m.geometry.boundingBox.getCenter(new THREE.Vector3());
+  const nose = find(/^drive nose dowel/), l1a = find(/^D8-02a/), roller = find(/^drive lobe follower roller/);
+  if (nose && l1a) lab('Flank lug (on link 1a)', nearest(l1a, ctr(nose)), l1a.g);
+  if (roller && FX.lobe) lab('Lobe ring (turns with link 2)', nearest(FX.lobe, ctr(roller)), FX.lobe.g);
+}
+function tint(on) {
+  for (const [g, [c]] of Object.entries(TINT)) D.A.groups[g].traverse((m) => {
+    if (!m.isMesh || !/Ti-6Al|17-4PH/.test(m.userData.fin)) return;
+    if (on) { if (m.userData.col0 == null) m.userData.col0 = m.material.color.getHex(); m.material.color.setHex(c); }
+    else if (m.userData.col0 != null) { m.material.color.setHex(m.userData.col0); m.userData.col0 = null; }
+  });
+  $('tintKey').hidden = !on;
+}
+function ghost(m, on, op) {
+  const mt = m.material;
+  if (on) { if (!mt.userData.saved) mt.userData.saved = { t: mt.transparent, o: mt.opacity, d: mt.depthWrite }; Object.assign(mt, { transparent: true, opacity: op, depthWrite: false }); m.castShadow = false; }
+  else if (mt.userData.saved) { const v = mt.userData.saved; Object.assign(mt, { transparent: v.t, opacity: v.o, depthWrite: v.d }); delete mt.userData.saved; m.castShadow = true; }
+  mt.needsUpdate = true;
+}
+async function setFocus(on) {
+  if (on && design !== 'A') await setDesign('A');
+  focus = on; if (!FX) focusSetup();
+  $('fx').hidden = !on; $('dsub').hidden = on; $('focus').textContent = on ? 'Back to the full view' : 'Show how the spring and cam fold K';
+  for (const [g, grp] of Object.entries(D.A.groups)) grp.traverse((m) => { if (m.isMesh) ghost(m, on && !FX.keep.has(g), 0.1); });
+  if (FX.cap) ghost(FX.cap.m, on, 0.2);
+  if (SK.mesh) ghost(SK.mesh, on, 0.05);
+  tint(on && $('cTint').checked);
+  world.matrix.identity(); world.matrixWorldNeedsUpdate = true; hold0 = null;
+  if (on) {
+    const shelf = D.A.mot.clips.findIndex((c) => /shelf/i.test(c.name));
+    if (shelf >= 0) { clipI = shelf; $('clip').value = String(shelf); $('scrub').max = D.A.mot.clips[shelf].frames.length - 1; }
+    t = 0; $('speed').value = '0.5'; playing = true; $('play').textContent = 'Pause';
+    render(true); focusView(); spark();
+  } else { $('speed').value = '1'; render(true); frameView(); }
+}
+function focusView() {                                             // close in on the drive, looking down the K axis
+  world.updateMatrixWorld(true);
+  const box = new THREE.Box3().expandByObject(D.A.groups.dk); if (FX.cap) box.expandByObject(FX.cap.m); if (FX.lobe) box.expandByObject(FX.lobe.m);
+  const c = box.getCenter(new THREE.Vector3()), sz = box.getSize(new THREE.Vector3()), r = Math.max(sz.x, sz.y, sz.z) * 0.8 + 10;
+  const ax = D.A.mot.axes.find((a) => a.name === 'K'), kd = new THREE.Vector3(...ax.d).transformDirection(D.A.groups.l1a.matrixWorld);
+  const dir = kd.add(new THREE.Vector3(-0.55, 0.42, 0.72).normalize().multiplyScalar(0.6)).normalize();
+  const dist = r / Math.tan(cam.fov * Math.PI / 360) * (cam.aspect < 1 ? 1.7 : 1.15);
+  ctl.target.copy(c); cam.position.copy(c).addScaledVector(dir, dist); cam.near = Math.max(1, dist / 60); cam.far = dist * 60; cam.updateProjectionMatrix(); ctl.update(); placeKey();
+}
+function spark() {                                                 // K fold over the clip, with a cursor
+  const cl = D.A.mot.clips[clipI], n = cl.frames.length, W = 320, H = 78, x0 = 30, y0 = 6, w = W - x0 - 4, h = H - y0 - 20;
+  const X = (i) => x0 + i / (n - 1) * w, Y = (dk) => y0 + Math.min(1, Math.max(0, -dk / 50)) * h;
+  const pts = cl.frames.map((f, i) => `${X(i).toFixed(1)},${Y(f.dK).toFixed(1)}`).join(' ');
+  $('spark').innerHTML = `<line x1="${x0}" y1="${y0}" x2="${x0 + w}" y2="${y0}" stroke="var(--rule)"/><line x1="${x0}" y1="${y0 + h}" x2="${x0 + w}" y2="${y0 + h}" stroke="var(--rule)"/>
+    <text x="0" y="${y0 + 4}">0°</text><text x="0" y="${y0 + h + 3}">−50°</text>
+    <polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>
+    <line id="sparkCur" x1="${x0}" y1="${y0 - 2}" x2="${x0}" y2="${y0 + h + 2}" stroke="var(--ink)" stroke-width="1.2"/>
+    <text x="${x0}" y="${H - 4}">K fold through “${cl.name}”, time →</text>`;
+  FX.sparkX = X;
+}
+
+// ---------------- UI
+let clipI = 0, t = 0, playing = true, design = 'A', lastI = -1;
+const mot = () => D[design === 'V' ? 'A' : design].mot;
+async function setDesign(k) {
+  if (k !== 'A' && focus) await setFocus(false);
+  design = k; $('focus').hidden = k !== 'A';
+  for (const b of document.querySelectorAll('.seg button')) b.setAttribute('aria-pressed', b.dataset.d === k);
+  $('dname').textContent = DES[k].name; $('dsub').textContent = DES[k].sub;
+  for (const [kk, d] of Object.entries(D)) d.root.visible = false; VAN.root.visible = false;
+  if (k === 'V') {
+    if (!VAN.built) { $('loading').style.display = ''; $('loading').textContent = 'Loading the hub stack…'; await loadDesign('B'); solveVan(); buildVan(); $('loading').style.display = 'none'; }
+    solveVan();
+  } else if (!D[k] || !D[k].mot) { $('loading').style.display = ''; $('loading').textContent = 'Loading the CAD…'; await loadDesign(k); $('loading').style.display = 'none'; }
+  if (design !== k) return;
+  (k === 'V' ? VAN.root : D[k].root).visible = true;
+  render(true);
+}
+for (const b of document.querySelectorAll('.seg button')) b.onclick = () => setDesign(b.dataset.d);
+$('play').onclick = () => { playing = !playing; $('play').textContent = playing ? 'Pause' : 'Play'; };
+$('clip').onchange = (e) => { clipI = +e.target.value; t = 0; if (design === 'V') solveVan(); $('scrub').max = mot().clips[clipI].frames.length - 1; render(true); if (focus) spark(); };
+$('focus').onclick = () => setFocus(!focus);
+$('cHold').onchange = () => render(true);
+$('cTint').onchange = (e) => tint(focus && e.target.checked);
+$('spark').addEventListener('click', (e) => {                     // click the graph to jump to that moment
+  const r = $('spark').getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 320, n = D.A.mot.clips[clipI].frames.length;
+  const i = Math.round(Math.min(1, Math.max(0, (x - 30) / 286)) * (n - 1)); playing = false; $('play').textContent = 'Play'; t = i / D.A.mot.clips[clipI].fps; render(true);
+});
+$('scrub').oninput = (e) => { playing = false; $('play').textContent = 'Play'; t = +e.target.value / mot().clips[clipI].fps; render(true); };
+$('cAxes').onchange = (e) => { for (const d of Object.values(D)) d.axisLines.forEach((l) => (l.visible = e.target.checked)); VAN.axisLines.forEach((l) => (l.visible = e.target.checked)); };
+$('cLab').onchange = (e) => { labRoot.style.display = leaders.style.display = e.target.checked ? '' : 'none'; };
+$('cMan').onchange = (e) => { if (SK.mesh) SK.mesh.visible = e.target.checked; };
+
+const fmt = (x, d) => (x >= 0 ? '+' : '−') + Math.abs(x).toFixed(d == null ? 1 : d) + '°';
+function render(force) {
+  const M = design === 'V' ? D.A && D.A.mot : D[design] && D[design].mot; if (!M) return;
+  const cl = M.clips[clipI], n = cl.frames.length, i = Math.min(n - 1, Math.floor(t * cl.fps));
+  if (!force && i === lastI) return; lastI = i;
+  const f = cl.frames[i];
+  poseSkin(cl, i, f.lift);
+  $('scrub').value = i;
+  const rows = [['Motion', `${cl.name} · ${(i / cl.fps).toFixed(1)} s`], ['Arm', `plane ${f.p[0].toFixed(0)}°, elevation ${f.p[1].toFixed(0)}°, twist ${f.p[2].toFixed(0)}°`]];
+  const st = $('st');
+  if (design !== 'V') {
+    poseDesign(D[design], f);
+    if (focus) {                                                   // hold link 1b where it was: only the drive's relative motion shows
+      const M = D.A.groups.l1b.matrix; if (!hold0) hold0 = M.clone();
+      if ($('cHold').checked) world.matrix.multiplyMatrices(hold0, M.clone().invert()); else world.matrix.identity();
+      world.matrixWorldNeedsUpdate = true;
+      const on = f.dK < -0.05;
+      rows.push(['J2', `${fmt(f.q[1])} · ${on ? 'lobe on the roller' : 'roller on the dwell'}`], ['K fold', `${fmt(f.dK)}${on ? '' : ' (on stop A)'}`],
+                ['Clock spring torque', `${(0.08 + 0.015 * Math.abs(f.dK) * Math.PI / 180).toFixed(3)} N·m`]);
+      st.className = 'status ' + (f.held ? 'no' : 'ok');
+      st.textContent = f.held ? 'Held at a limit: this frame is not followed' : on ? `Cam driving: K folded ${Math.abs(f.dK).toFixed(1)}°` : 'K on stop A, held there by the spring';
+      const cur = document.getElementById('sparkCur'); if (cur && FX.sparkX) { const x = FX.sparkX(i).toFixed(1); cur.setAttribute('x1', x); cur.setAttribute('x2', x); }
+      $('ro').innerHTML = rows.map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join(''); return;
+    }
+    rows.push(['J1 · J2 · J3', `${fmt(f.q[0])} · ${fmt(f.q[1])} · ${fmt(f.q[2])}`]);
+    if (design === 'A') rows.push(['K (cam-slaved to J2)', `${fmt(f.dK)}${f.dK < -0.05 ? ' folded' : ' on its stop'}`]);
+    rows.push(['Knee (pin a to pin b)', `${f.knee.toFixed(1)}°`]);
+    st.className = 'status ' + (f.held ? 'no' : 'ok'); st.textContent = f.held ? 'Held at a limit: this frame is not followed' : 'Following the arm';
+  } else {
+    const s = poseVan(i), q = s ? s.q : [0, 0, 0];
+    rows.push(['J1 · J2 · J3', `${fmt(q[0])} · ${fmt(q[1])} · ${fmt(q[2])}`]);
+    const ok = s && s.closes && s.inRange; st.className = 'status ' + (ok ? 'ok' : 'no');
+    st.textContent = ok ? 'Following the arm' : (s && s.reason ? 'Cannot follow: ' + s.reason : 'Cannot close the chain here');
+  }
+  $('ro').innerHTML = rows.map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join('');
+}
+
+// hover: name the part, light up its whole rigid body
+const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(); let lit = [], hoverQ = null;
+function light(meshes) { for (const m of lit) m.material.emissive.setHex(0x000000); lit = meshes; for (const m of lit) m.material.emissive.setHex(0x3a2408); }
+R.domElement.addEventListener('pointermove', (e) => { hoverQ = e; });
+R.domElement.addEventListener('pointerleave', () => { hoverQ = null; light([]); $('hover').innerHTML = 'Hover a part: its whole moving body lights up.'; });
+function doHover() {
+  if (!hoverQ) return; const e = hoverQ; hoverQ = null;
+  const r = R.domElement.getBoundingClientRect(); mouse.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(mouse, cam);
+  const root = design === 'V' ? VAN.root : D[design] && D[design].root; if (!root) return;
+  const hit = ray.intersectObject(root, true).find((h) => h.object.isMesh && h.object.material.opacity > 0.5);
+  if (!hit) { light([]); $('hover').innerHTML = 'Hover a part: its whole moving body lights up.'; return; }
+  const u = hit.object.userData, M = mot(), esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  let body = [hit.object], bodyName = '';
+  if (design !== 'V' && u.body) { body = []; D[design].groups[u.body].traverse((o) => o.isMesh && body.push(o)); bodyName = M.bodies[u.body] || u.body; }
+  else if (hit.object.parent && hit.object.parent !== VAN.root) { body = []; hit.object.parent.traverse((o) => o.isMesh && body.push(o)); }
+  light(body);
+  $('hover').innerHTML = `<b>${esc(u.title || '')}</b><br>${esc(u.fin || '')}${bodyName ? ' · moves with ' + esc(bodyName) : ''}`;
+}
+const tmp = new THREE.Vector3();
+function placeLabels() {
+  const w = R.domElement.clientWidth, h = R.domElement.clientHeight, F = [];
+  for (const L of labels) {
+    const vis = L.owner === 'F' ? focus && design === 'A' : L.owner === design && !(focus && L.axis && !/^(K|J2|crank pivot)$/.test(L.axis));
+    if (!vis) { L.el.style.display = 'none'; continue; }
+    tmp.copy(L.p); if (L.obj) tmp.applyMatrix4(L.obj.matrixWorld); tmp.project(cam);
+    if (tmp.z > 1) { L.el.style.display = 'none'; continue; }
+    const x = (tmp.x + 1) / 2 * w, y = (1 - tmp.y) / 2 * h;
+    if (L.owner === 'F') { F.push({ L, x, y }); continue; }
+    L.el.style.display = ''; L.el.style.left = x + 'px'; L.el.style.top = y + 'px';
+  }
+  let svg = '';                                                    // drive labels: pushed out from their cluster, then apart, on leader lines
+  if (F.length) {
+    const cx = F.reduce((a, f) => a + f.x, 0) / F.length, cy = F.reduce((a, f) => a + f.y, 0) / F.length, out = Math.min(110, 0.12 * Math.min(w, h) + 40);
+    for (const f of F) {
+      let dx = f.x - cx, dy = f.y - cy; const l = Math.hypot(dx, dy); if (l < 1) { dx = 0; dy = -1; } else { dx /= l; dy /= l; }
+      f.L.el.style.display = ''; f.lx = f.x + dx * out; f.ly = f.y + dy * out; f.w = f.L.el.offsetWidth + 6; f.h = f.L.el.offsetHeight + 4;
+    }
+    for (let it = 0; it < 40; it++) for (let a = 0; a < F.length; a++) for (let b = a + 1; b < F.length; b++) {
+      const A = F[a], B = F[b], ox = (A.w + B.w) / 2 - Math.abs(A.lx - B.lx), oy = (A.h + B.h) / 2 - Math.abs(A.ly - B.ly);
+      if (ox > 0 && oy > 0) { const sgn = A.ly < B.ly || (A.ly === B.ly && a < b) ? -1 : 1; A.ly += sgn * oy / 2; B.ly -= sgn * oy / 2; }
+    }
+    for (const f of F) {
+      f.L.el.style.left = f.lx + 'px'; f.L.el.style.top = f.ly + 'px';
+      svg += `<line x1="${f.x.toFixed(1)}" y1="${f.y.toFixed(1)}" x2="${f.lx.toFixed(1)}" y2="${f.ly.toFixed(1)}"/><circle cx="${f.x.toFixed(1)}" cy="${f.y.toFixed(1)}" r="3"/>`;
+    }
+  }
+  leaders.innerHTML = svg;
+}
+let prev = performance.now();
+function loop(now) {
+  const dt = Math.min(0.1, (now - prev) / 1000); prev = now;
+  const M = mot && (design === 'V' ? D.A && D.A.mot : D[design] && D[design].mot);
+  if (M && playing) { const cl = M.clips[clipI]; t += dt * +$('speed').value; if (t * cl.fps >= cl.frames.length) t = 0; render(); }
+  doHover(); ctl.update(); R.render(scene, cam); placeLabels(); requestAnimationFrame(loop);
+}
+
+Promise.all([loadDesign('A'), loadSkin()]).then(() => {
+  const m = D.A.mot;
+  $('clip').innerHTML = m.clips.map((c, i) => `<option value="${i}">${c.name}</option>`).join('');
+  $('scrub').max = m.clips[0].frames.length - 1;
+  $('dname').textContent = DES.A.name; $('dsub').textContent = DES.A.sub; D.A.root.visible = true;
+  render(true); frameView(); $('loading').style.display = 'none'; requestAnimationFrame(loop);
+}).catch((e) => { $('loading').textContent = 'Could not load the CAD: ' + e.message; });
+</script>
