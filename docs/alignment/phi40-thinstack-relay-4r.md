@@ -207,3 +207,95 @@ Files from this audit:
 - docs/alignment/phi40-thinstack-relay-4r.md
 - docs/alignment/ledger.jsonl
 - docs/alignment/remeasure/phi40-thinstack-relay-4r_tsh.json (the M2 diagnostic)
+
+## Skeptic (2026-10-18 ~21:42 UTC)
+
+The skeptic re-derived every reason from the raw files and ran no new wear (models unchanged). Raw files:
+- the verifier's per-pose dumps (docs/concepts/verify/phi40-thinstack-relay-4r/verifier_{claim,held}_perpose.json);
+- the PHI 35 dump (diag_phi35_claimbench_s0_perpose.json);
+- the lead's dumps (docs/alignment/remeasure/conecut-knee-knuckle-3r_{bench,held}_perpose.json);
+- the verifier JSON and logs, the flood file, the tsh diagnostic, and a fresh `tools/simplicity.py` run.
+
+All rows use one formula: metal = min(min_mm, cmin), and a taken pose under t mm counts as contact and is not taken. It
+reproduces every plain gap (13.52, 16.02, 18.29, 22.38, 13.73). Rulings are in
+docs/alignment/phi40-thinstack-relay-4r.rulings.json.
+
+**Rulings (1 of 10 refuted)**
+
+- **dominance: upheld.**
+  - Plain: the row reads 13.52 against the lead's 18.29 (+4.77 for the row).
+  - At 2 mm: 46.63 against 34.84 (-11.79). The tool's B.report deep basis reads 47.16, -12.32, the same sign.
+  - Held at 2 mm: 47.91 against 37.11.
+  - Both rows are on the same Bench(110,360) exact frozen. Metal at 1-2 mm costs the wearer (ALIGNMENT.md s1).
+- **continuity: REFUTED.**
+  - verifier_claim.json pick.continuity: dropped_relayed 0, phi0_taken_not_connected 0, static 13.52 = plain.
+  - verifier_held.json: the same, static 16.02 = plain. claim_phi40.json[0] and held.json[0] agree.
+  - The flood (flood_PHI40_t12_a235_s1.json) is run with flood_relay(step_deg 2.0, passive_jump 10.0), which is the
+    2026-10-16 rule. It has 0 passive-jump edge failures.
+  - Under change log 2026-10-17.1 this counts as connected = static. The item is a gap in the tool's reader.
+- **reporting: upheld.**
+  - rows/phi40-thinstack-relay-4r.json is verified with v_gap 14.06, but its verdict opens "SCREENED". morphs.json
+    (v149) carries the same text.
+  - This is the documented trigger (c_reporting, line 736). The kneeless-sidecar precedent was upheld the same way.
+- **T5: upheld.**
+  - Bench: 17 contacts, 74.92 mm, 7 deeper than 3 mm, deepest 15.37 mm (i263). The lead has 4 / 20.24 mm: x3.70,
+    +54.68 mm.
+  - Held: 48 contacts, 198.11 mm (197.82 on min_mm alone), deepest 13.89 mm (i680). The lead has 14 / 60.97 mm:
+    x3.25, +137.14 mm.
+  - Both wears exceed TH (x2 and +5 mm).
+  - The contacts present at PHI 40 and absent at PHI 35 are exactly 233, 263, 421 and 459, 31.36 mm in all. None of
+    them is evaluated at PHI 35.
+  - None of the 13 bench contacts beyond the lead's 4 is evaluated for the lead.
+- **G1: upheld.**
+  - PHI 40 against PHI 35: plain -0.21, 1 mm +0.27, 2 mm +1.07, 3 mm +0.68.
+  - The 8 band poses: 233 c -1.27, 260 0.21, 263 c -15.37, 370 1.08 (overhead), 394 1.74, 417 3.79, 421 c -0.95,
+    459 c -13.78.
+  - Overhead takes added over the lead: on the bench only 370; held 896 0.10, 963 0.52, 969 0.24 and 1036 0.62. The
+    row loses no overhead take the lead has.
+- **S3: upheld.**
+  - From X3 on file: chord_rmin 76.61 against R_liner 79.1.
+  - Chord within 2 mm of the skin: 1 bench pose (357, 1.943 mm) and 4 held poses (1.301-1.899 mm).
+  - Guide clashes: 326 of 417 bench and 776 of 1000 held poses.
+  - The strip and the liner groove are in neither the claim model nor the mechanism record.
+- **M5: upheld.**
+  - The row's own md marks R17 "Not priced" (line 178) and "Inherited and unpriced" (line 323). The verify folder has
+    no return or hysteresis file.
+  - Margin arithmetic re-derived: 0.22-0.62 N (11-31 %).
+- **M2: upheld.**
+  - From the tsh diagnostic: tsh 1.5 reads 14.30, the control tsh 1.0 reads 14.06. Everything outside the chain-only
+    in-band is identical.
+  - Lip deflection F L^3 / 48 E I = 0.578 mm. At 1.5 mm lips the same formula gives 0.17 mm, so the deflection risk
+    is specific to the thin shell.
+  - The E-over-carriage clearance of 1.200 mm is set by bump 1.2 and holds only while the lips do not lift. Poses
+    under 1.5 mm: 255 bench and 578 held.
+  - No FEA is on file.
+- **G6: upheld.**
+  - `tools/simplicity.py` re-run: cx 51.25 with 4 active joints, against 18.5 with 3.
+  - Overhead taken: bench 9/28 against 8/28, held 22/71 against 18/71. Raised arm: 67 against 47 and 176 against 123.
+  - The user asks for 3 DOF before 4, so the 4th joint is a real cost.
+- **P1: upheld.**
+  - Six claim-bench readings are on file: 14.06, 14.01, 13.67, 14.02 (5 jams), 13.55 and 14.28. The audit's
+    tsh 1.5 reading (14.30) is a seventh.
+  - 13.55 and 13.67 sit under the 95 line. The next row registers those levers (md lines 217-221).
+
+**Missed by the auditor** (for the next audit, not in this verdict)
+
+1. **The "What the wearer gets" near-skin counts are on chain metal only.**
+   - They come from remeasure metal_shell_taken, which uses min_mm without cmin: bench <2 / <3 mm 50 / 136, held
+     <1 / <2 / <3 mm 32 / 123 / 305.
+   - On the near-touch basis the tool itself scores (min(min_mm, cmin): the deep near*_poses, recomputed here from the
+     verifier dumps) they are bench 9 / 60 / 144 and held 34 / 140 / 323.
+   - So the table understates the near-skin takes by 6-17 %. The extra metal is the crowns, the extra walls and the
+     relay hardware: clip frames 12 against 7 under 2 mm on the bench, 21 against 13 held.
+2. **The overhead 10th-percentile metal (1.80 bench / 0.62 held) pools clip frames with workspace poses** (deep_audit
+   `ov` uses every taken pose with elev >= 140).
+   - On the workspace overhead poses alone it is 1.58 mm on the bench (9 poses) and 0.49 mm held (22 poses).
+   - The wearer's overhead reading is closer to the skin than reported.
+3. **The 2 mm gap is not reproduced to the digit from the dumps.**
+   - The dumps give 46.63 on the bench against the tool's 47.16 (held 47.91 against 47.92). 1 mm and 3 mm match
+     exactly.
+   - The cause is likely the 3-decimal rounding in the dumps, or the clip in-band re-read inside B.report.
+   - No finding moves, but "one formula that reproduces each gap exactly" holds only for plain, 1 mm and 3 mm. The
+     next audit should name its basis.
+
+**Final verdict (ledger): WATCH.** Refuted: continuity. Upheld: dominance, reporting, T5, G1, S3, M5, M2, G6, P1.
