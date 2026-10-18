@@ -1,0 +1,5127 @@
+{
+ "note": "lowarm-kstop chain (kstop harness wear(delta, 'bench') on the reduced exact guard bench); hub-2 facet reads",
+ "runs": [
+  {
+   "delta": 0.0,
+   "named": {},
+   "play": {
+    "n_dwell": 31,
+    "selfcheck_q_maxdiff_deg": 3.95373162175389e-10,
+    "n_dwell_lost_fold": 0,
+    "m3e_min_dwell": 16.897
+   },
+   "rows": [
+    {
+     "params": {
+      "c": 0,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 0
+     },
+     "facet": {
+      "c": 0.0,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 0,
+      "rigid_clipped": 0,
+      "contact_dropped": 0,
+      "solid_n": 0,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 4.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 0.0
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.413,
+       "hub2_walls": 2.005,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        142.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.716,
+       "hub2_walls": 0.263,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 0.263,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        142.8,
+        -0.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.928,
+       "hub2_walls": -4.28,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -4.28,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        165.3,
+        -0.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.619,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.783,
+       "hub2_walls": -0.128,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        120.3,
+        8.17
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.263,
+      "probe01": 0.163,
+      "probe02": 0.063,
+      "prereg_035": false
+     },
+     "t5": {
+      "205": -4.28,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.918
+    },
+    {
+     "params": {
+      "c": 0,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 0.0,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 0,
+      "contact_dropped": 0,
+      "solid_n": 2395,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 4.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 0.0
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.413,
+       "hub2_walls": 1.973,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        139.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.716,
+       "hub2_walls": 0.263,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 0.263,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        0.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.928,
+       "hub2_walls": -4.291,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -4.291,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        162.8,
+        0.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.619,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.783,
+       "hub2_walls": -0.166,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.263,
+      "probe01": 0.163,
+      "probe02": 0.063,
+      "prereg_035": false
+     },
+     "t5": {
+      "205": -4.291,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.929
+    },
+    {
+     "params": {
+      "c": 0.5,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 0.5,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 1,
+      "contact_dropped": 7,
+      "solid_n": 2677,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 4.0,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 6.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.413,
+       "hub2_walls": 2.246,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.5,
+        137.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.716,
+       "hub2_walls": 0.57,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 0.57,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        0.5
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.615,
+       "hub2_walls": -4.13,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -4.13,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        0.5
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.619,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.783,
+       "hub2_walls": -0.166,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.57,
+      "probe01": 0.47,
+      "probe02": 0.37,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.13,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.768
+    },
+    {
+     "params": {
+      "c": 0.75,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 0.75,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 3,
+      "contact_dropped": 7,
+      "solid_n": 2774,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.75,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 15.2
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.529,
+       "hub2_walls": 2.398,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.25,
+        136.8,
+        0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.902,
+       "hub2_walls": 0.723,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 0.723,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        0.75
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.406,
+       "hub2_walls": -4.066,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -4.066,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        0.75
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.797,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.934,
+       "hub2_walls": -0.166,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.723,
+      "probe01": 0.623,
+      "probe02": 0.523,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.066,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.704
+    },
+    {
+     "params": {
+      "c": 1.0,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.0,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 5,
+      "contact_dropped": 7,
+      "solid_n": 2764,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 27.1
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.568,
+       "hub2_walls": 2.561,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.0,
+        135.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.068,
+       "hub2_walls": 0.877,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 0.877,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.19,
+       "hub2_walls": -4.001,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -4.001,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.987,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.989,
+       "hub2_walls": -0.166,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.877,
+      "probe01": 0.777,
+      "probe02": 0.677,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.001,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.639
+    },
+    {
+     "params": {
+      "c": 1.25,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.25,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 5,
+      "contact_dropped": 7,
+      "solid_n": 2934,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.25,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 42.3
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.747,
+       "hub2_walls": 2.735,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.75,
+        134.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.263,
+       "hub2_walls": 1.03,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 1.03,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.25
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.022,
+       "hub2_walls": -3.937,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -3.937,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.25
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.178,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.238,
+       "hub2_walls": -0.166,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.03,
+      "probe01": 0.93,
+      "probe02": 0.83,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -3.937,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.575
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 7,
+      "solid_n": 3164,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 60.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.38,
+       "hub2_walls": 1.122,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 1.122,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.02,
+       "hub2_walls": -3.898,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -3.898,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.293,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.387,
+       "hub2_walls": -0.166,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.122,
+      "probe01": 1.022,
+      "probe02": 0.922,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -3.898,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.536
+    },
+    {
+     "params": {
+      "c": 1.5,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.5,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 7,
+      "solid_n": 2924,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.0,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 60.9
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.937,
+       "hub2_walls": 2.815,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        106.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.458,
+       "hub2_walls": 1.184,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 1.184,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.5
+       ]
+      },
+      "205": {
+       "hub2_rigid": -2.935,
+       "hub2_walls": -3.926,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -3.926,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        178.8,
+        -0.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.37,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.486,
+       "hub2_walls": -0.166,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.184,
+      "probe01": 1.084,
+      "probe02": 0.984,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -3.926,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.564
+    },
+    {
+     "params": {
+      "c": 1.0,
+      "hw": 45,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.0,
+      "hw": 45.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 5,
+      "contact_dropped": 8,
+      "solid_n": 3184,
+      "notch_clear_deg": 2.8,
+      "wall_min_mm": 3.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 34.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.568,
+       "hub2_walls": 2.561,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.0,
+        135.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.068,
+       "hub2_walls": 0.877,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 0.877,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.19,
+       "hub2_walls": -4.001,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -4.001,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.987,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.989,
+       "hub2_walls": -0.166,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.877,
+      "probe01": 0.777,
+      "probe02": 0.677,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.001,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.639
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.3,
+      "dazf": 0.0,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.3,
+      "azf": 124.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 11,
+      "solid_n": 2897,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 14.07,
+      "mass_removed_mg": 94.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.38,
+       "hub2_walls": 1.122,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 1.122,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.02,
+       "hub2_walls": -3.898,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -3.898,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.293,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.387,
+       "hub2_walls": 0.087,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        138.1,
+        6.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.122,
+      "probe01": 1.022,
+      "probe02": 0.922,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -3.898,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.536
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.45,
+      "dazf": 0.0,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.45,
+      "azf": 124.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 14,
+      "solid_n": 2972,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 17.25,
+      "mass_removed_mg": 123.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.38,
+       "hub2_walls": 1.122,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 1.122,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.7,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.02,
+       "hub2_walls": -3.898,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -3.898,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.293,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.387,
+       "hub2_walls": 0.228,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        141.3,
+        6.55
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.122,
+      "probe01": 1.022,
+      "probe02": 0.922,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -3.898,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.536
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": 0.0,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 124.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 17,
+      "solid_n": 3011,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 158.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.38,
+       "hub2_walls": 1.122,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 1.122,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.02,
+       "hub2_walls": -3.898,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -3.898,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.293,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.387,
+       "hub2_walls": 0.37,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.9,
+        6.4
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.122,
+      "probe01": 1.022,
+      "probe02": 0.922,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -3.898,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.536
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 15,
+      "solid_n": 3047,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 140.3
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.38,
+       "hub2_walls": 1.122,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 1.122,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.02,
+       "hub2_walls": -3.898,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -3.898,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.293,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.387,
+       "hub2_walls": 0.325,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        132.8,
+        5.5
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.122,
+      "probe01": 1.022,
+      "probe02": 0.922,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -3.898,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.536
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": -5,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 119.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 16,
+      "solid_n": 3011,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 158.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.38,
+       "hub2_walls": 1.122,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 1.122,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.02,
+       "hub2_walls": -3.898,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -3.898,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.293,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.387,
+       "hub2_walls": 0.129,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        138.9,
+        6.4
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.122,
+      "probe01": 1.022,
+      "probe02": 0.922,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -3.898,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.536
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": 5,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 129.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 17,
+      "solid_n": 3011,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 158.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.38,
+       "hub2_walls": 1.122,
+       "others": 3.754,
+       "other_binder": "c5",
+       "pose_min": 1.122,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.02,
+       "hub2_walls": -3.898,
+       "others": -1.932,
+       "other_binder": "c33",
+       "pose_min": -3.898,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.293,
+       "hub2_walls": -0.214,
+       "others": -9.469,
+       "other_binder": "c31",
+       "pose_min": -9.469,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.387,
+       "hub2_walls": 0.239,
+       "others": -1.169,
+       "other_binder": "c32",
+       "pose_min": -1.169,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        109.1,
+        8.9
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.122,
+      "probe01": 1.022,
+      "probe02": 0.922,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -3.898,
+      "237": -9.469,
+      "264": -1.169
+     },
+     "t5_sum": 14.536
+    }
+   ],
+   "secs": 211.8
+  },
+  {
+   "delta": 0.264,
+   "named": {},
+   "play": {
+    "n_dwell": 31,
+    "n_dwell_lost_fold": 0,
+    "m3e_min_dwell": 17.008
+   },
+   "rows": [
+    {
+     "params": {
+      "c": 0,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 0
+     },
+     "facet": {
+      "c": 0.0,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 0,
+      "rigid_clipped": 0,
+      "contact_dropped": 0,
+      "solid_n": 0,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 4.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 0.0
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.413,
+       "hub2_walls": 2.005,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        142.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.61,
+       "hub2_walls": 0.158,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 0.158,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        142.8,
+        -0.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -4.081,
+       "hub2_walls": -4.437,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.437,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        165.3,
+        -0.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.523,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.7,
+       "hub2_walls": -0.214,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        120.3,
+        8.17
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.158,
+      "probe01": 0.058,
+      "probe02": -0.042,
+      "prereg_035": false
+     },
+     "t5": {
+      "205": -4.437,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.826
+    },
+    {
+     "params": {
+      "c": 0,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 0.0,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 0,
+      "contact_dropped": 0,
+      "solid_n": 2395,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 4.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 0.0
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.413,
+       "hub2_walls": 1.973,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        139.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.61,
+       "hub2_walls": 0.157,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 0.157,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        0.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -4.081,
+       "hub2_walls": -4.45,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.45,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        0.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.523,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.7,
+       "hub2_walls": -0.251,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.157,
+      "probe01": 0.057,
+      "probe02": -0.043,
+      "prereg_035": false
+     },
+     "t5": {
+      "205": -4.45,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.839
+    },
+    {
+     "params": {
+      "c": 0.5,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 0.5,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 1,
+      "contact_dropped": 7,
+      "solid_n": 2677,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 4.0,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 6.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.413,
+       "hub2_walls": 2.246,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.5,
+        137.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.61,
+       "hub2_walls": 0.463,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 0.463,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        0.5
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.774,
+       "hub2_walls": -4.292,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.292,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        0.5
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.523,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.7,
+       "hub2_walls": -0.251,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.463,
+      "probe01": 0.363,
+      "probe02": 0.263,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.292,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.681
+    },
+    {
+     "params": {
+      "c": 0.75,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 0.75,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 3,
+      "contact_dropped": 7,
+      "solid_n": 2774,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.75,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 15.2
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.529,
+       "hub2_walls": 2.398,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.25,
+        136.8,
+        0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.796,
+       "hub2_walls": 0.616,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 0.616,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        0.75
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.564,
+       "hub2_walls": -4.228,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.228,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        0.75
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.697,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.854,
+       "hub2_walls": -0.251,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.616,
+      "probe01": 0.516,
+      "probe02": 0.416,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.228,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.617
+    },
+    {
+     "params": {
+      "c": 1.0,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.0,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 5,
+      "contact_dropped": 7,
+      "solid_n": 2764,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 27.1
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.568,
+       "hub2_walls": 2.561,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.0,
+        135.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.965,
+       "hub2_walls": 0.769,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 0.769,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.345,
+       "hub2_walls": -4.165,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.165,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.882,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.909,
+       "hub2_walls": -0.251,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.769,
+      "probe01": 0.669,
+      "probe02": 0.569,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.165,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.554
+    },
+    {
+     "params": {
+      "c": 1.25,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.25,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 5,
+      "contact_dropped": 7,
+      "solid_n": 2934,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.25,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 42.3
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.747,
+       "hub2_walls": 2.735,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.75,
+        134.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.16,
+       "hub2_walls": 0.923,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 0.923,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.25
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.171,
+       "hub2_walls": -4.101,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.101,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.25
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.07,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.157,
+       "hub2_walls": -0.251,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.923,
+      "probe01": 0.823,
+      "probe02": 0.723,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.101,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.49
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 7,
+      "solid_n": 3164,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 60.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.277,
+       "hub2_walls": 1.014,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 1.014,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.169,
+       "hub2_walls": -4.063,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.063,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.183,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.306,
+       "hub2_walls": -0.251,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.014,
+      "probe01": 0.914,
+      "probe02": 0.814,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.063,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.452
+    },
+    {
+     "params": {
+      "c": 1.5,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.5,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 7,
+      "solid_n": 2924,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.0,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 60.9
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.937,
+       "hub2_walls": 2.815,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        106.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.355,
+       "hub2_walls": 1.076,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 1.076,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.5
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.083,
+       "hub2_walls": -4.085,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.085,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        178.8,
+        -0.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.258,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.405,
+       "hub2_walls": -0.251,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.076,
+      "probe01": 0.976,
+      "probe02": 0.876,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.085,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.474
+    },
+    {
+     "params": {
+      "c": 1.0,
+      "hw": 45,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.0,
+      "hw": 45.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 5,
+      "contact_dropped": 8,
+      "solid_n": 3184,
+      "notch_clear_deg": 2.8,
+      "wall_min_mm": 3.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 34.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.568,
+       "hub2_walls": 2.561,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.0,
+        135.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.965,
+       "hub2_walls": 0.769,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 0.769,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.345,
+       "hub2_walls": -4.165,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.165,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.882,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.909,
+       "hub2_walls": -0.251,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        124.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.769,
+      "probe01": 0.669,
+      "probe02": 0.569,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.165,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.554
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.3,
+      "dazf": 0.0,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.3,
+      "azf": 124.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 11,
+      "solid_n": 2897,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 14.07,
+      "mass_removed_mg": 94.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.277,
+       "hub2_walls": 1.014,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 1.014,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.169,
+       "hub2_walls": -4.063,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.063,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.183,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.306,
+       "hub2_walls": 0.005,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        138.1,
+        6.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.014,
+      "probe01": 0.914,
+      "probe02": 0.814,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.063,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.452
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.45,
+      "dazf": 0.0,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.45,
+      "azf": 124.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 14,
+      "solid_n": 2972,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 17.25,
+      "mass_removed_mg": 123.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.277,
+       "hub2_walls": 1.014,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 1.014,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.7,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.169,
+       "hub2_walls": -4.063,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.063,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.183,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.306,
+       "hub2_walls": 0.147,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        141.3,
+        6.55
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.014,
+      "probe01": 0.914,
+      "probe02": 0.814,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.063,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.452
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": 0.0,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 124.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 17,
+      "solid_n": 3011,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 158.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.277,
+       "hub2_walls": 1.014,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 1.014,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.169,
+       "hub2_walls": -4.063,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.063,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.183,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.306,
+       "hub2_walls": 0.29,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.9,
+        6.4
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.014,
+      "probe01": 0.914,
+      "probe02": 0.814,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.063,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.452
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 15,
+      "solid_n": 3047,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 140.3
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.277,
+       "hub2_walls": 1.014,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 1.014,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.169,
+       "hub2_walls": -4.063,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.063,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.183,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.306,
+       "hub2_walls": 0.23,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        132.8,
+        5.5
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.014,
+      "probe01": 0.914,
+      "probe02": 0.814,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.063,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.452
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": -5,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 119.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 16,
+      "solid_n": 3011,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 158.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.277,
+       "hub2_walls": 1.014,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 1.014,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.169,
+       "hub2_walls": -4.063,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.063,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.183,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.306,
+       "hub2_walls": 0.035,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        138.9,
+        6.4
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.014,
+      "probe01": 0.914,
+      "probe02": 0.814,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.063,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.452
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": 5,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 129.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 17,
+      "solid_n": 3011,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 158.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.277,
+       "hub2_walls": 1.014,
+       "others": 3.733,
+       "other_binder": "c5",
+       "pose_min": 1.014,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.169,
+       "hub2_walls": -4.063,
+       "others": -2.106,
+       "other_binder": "c33",
+       "pose_min": -4.063,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.183,
+       "hub2_walls": -0.38,
+       "others": -9.39,
+       "other_binder": "c31",
+       "pose_min": -9.39,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.306,
+       "hub2_walls": 0.137,
+       "others": -0.999,
+       "other_binder": "c32",
+       "pose_min": -0.999,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        109.1,
+        8.9
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.014,
+      "probe01": 0.914,
+      "probe02": 0.814,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.063,
+      "237": -9.39,
+      "264": -0.999
+     },
+     "t5_sum": 14.452
+    }
+   ],
+   "secs": 208.8
+  },
+  {
+   "delta": 0.363,
+   "named": {},
+   "play": {
+    "n_dwell": 31,
+    "n_dwell_lost_fold": 0,
+    "m3e_min_dwell": 17.05
+   },
+   "rows": [
+    {
+     "params": {
+      "c": 0,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 0
+     },
+     "facet": {
+      "c": 0.0,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 0,
+      "rigid_clipped": 0,
+      "contact_dropped": 0,
+      "solid_n": 0,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 4.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 0.0
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.413,
+       "hub2_walls": 2.005,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        142.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.571,
+       "hub2_walls": 0.118,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.118,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        142.8,
+        -0.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -4.138,
+       "hub2_walls": -4.496,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.496,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        165.3,
+        -0.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.491,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.669,
+       "hub2_walls": -0.247,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        120.3,
+        8.17
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.118,
+      "probe01": 0.018,
+      "probe02": -0.082,
+      "prereg_035": false
+     },
+     "t5": {
+      "205": -4.496,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.857
+    },
+    {
+     "params": {
+      "c": 0,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 0.0,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 0,
+      "contact_dropped": 0,
+      "solid_n": 2395,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 4.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 0.0
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.413,
+       "hub2_walls": 1.973,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        139.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.571,
+       "hub2_walls": 0.117,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.117,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        0.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -4.138,
+       "hub2_walls": -4.509,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.509,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        0.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.491,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.669,
+       "hub2_walls": -0.283,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        123.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.117,
+      "probe01": 0.017,
+      "probe02": -0.083,
+      "prereg_035": false
+     },
+     "t5": {
+      "205": -4.509,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.87
+    },
+    {
+     "params": {
+      "c": 0.5,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 0.5,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 1,
+      "contact_dropped": 7,
+      "solid_n": 2677,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 4.0,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 6.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.413,
+       "hub2_walls": 2.246,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.5,
+        137.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.571,
+       "hub2_walls": 0.423,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.423,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        0.5
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.834,
+       "hub2_walls": -4.353,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.353,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        0.5
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.491,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.669,
+       "hub2_walls": -0.283,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        123.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.423,
+      "probe01": 0.323,
+      "probe02": 0.223,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.353,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.714
+    },
+    {
+     "params": {
+      "c": 0.75,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 0.75,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 3,
+      "contact_dropped": 7,
+      "solid_n": 2774,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.75,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 15.2
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.529,
+       "hub2_walls": 2.398,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.25,
+        136.8,
+        0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.757,
+       "hub2_walls": 0.576,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.576,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        0.75
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.623,
+       "hub2_walls": -4.289,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.289,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        0.75
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.663,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.824,
+       "hub2_walls": -0.283,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        123.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.576,
+      "probe01": 0.476,
+      "probe02": 0.376,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.289,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.65
+    },
+    {
+     "params": {
+      "c": 1.0,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.0,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 5,
+      "contact_dropped": 7,
+      "solid_n": 2764,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 27.1
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.568,
+       "hub2_walls": 2.561,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.0,
+        135.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.926,
+       "hub2_walls": 0.729,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.729,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.404,
+       "hub2_walls": -4.226,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.226,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.847,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.879,
+       "hub2_walls": -0.283,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        123.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.729,
+      "probe01": 0.629,
+      "probe02": 0.529,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.226,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.587
+    },
+    {
+     "params": {
+      "c": 1.25,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.25,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 5,
+      "contact_dropped": 7,
+      "solid_n": 2934,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.25,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 42.3
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.747,
+       "hub2_walls": 2.735,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.75,
+        134.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.122,
+       "hub2_walls": 0.882,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.882,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.25
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.227,
+       "hub2_walls": -4.162,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.162,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.25
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.032,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.127,
+       "hub2_walls": -0.283,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        123.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.882,
+      "probe01": 0.782,
+      "probe02": 0.682,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.162,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.523
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 7,
+      "solid_n": 3164,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 60.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.239,
+       "hub2_walls": 0.974,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.974,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.225,
+       "hub2_walls": -4.124,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.124,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.144,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.276,
+       "hub2_walls": -0.283,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        123.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.974,
+      "probe01": 0.874,
+      "probe02": 0.774,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.124,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.485
+    },
+    {
+     "params": {
+      "c": 1.5,
+      "hw": 35.0,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.5,
+      "hw": 35.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 7,
+      "solid_n": 2924,
+      "notch_clear_deg": 12.8,
+      "wall_min_mm": 3.0,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 60.9
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.937,
+       "hub2_walls": 2.815,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        106.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.317,
+       "hub2_walls": 1.035,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 1.035,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.5
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.139,
+       "hub2_walls": -4.145,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.145,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        178.8,
+        -0.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.219,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.375,
+       "hub2_walls": -0.283,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        123.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 1.035,
+      "probe01": 0.935,
+      "probe02": 0.835,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.145,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.506
+    },
+    {
+     "params": {
+      "c": 1.0,
+      "hw": 45,
+      "daz": 0.0,
+      "fd": 0.0,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.0,
+      "hw": 45.0,
+      "az0": 142.8,
+      "fd": 0.0,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 5,
+      "contact_dropped": 8,
+      "solid_n": 3184,
+      "notch_clear_deg": 2.8,
+      "wall_min_mm": 3.5,
+      "flat_halfwidth_deg": 0.0,
+      "mass_removed_mg": 34.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.568,
+       "hub2_walls": 2.561,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        9.0,
+        135.8,
+        -0.0
+       ]
+      },
+      "203": {
+       "hub2_rigid": 0.926,
+       "hub2_walls": 0.729,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.729,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.0
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.404,
+       "hub2_walls": -4.226,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.226,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.0
+       ]
+      },
+      "237": {
+       "hub2_rigid": 2.847,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 1.879,
+       "hub2_walls": -0.283,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        123.9,
+        7.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.729,
+      "probe01": 0.629,
+      "probe02": 0.529,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.226,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.587
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.3,
+      "dazf": 0.0,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.3,
+      "azf": 124.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 11,
+      "solid_n": 2897,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 14.07,
+      "mass_removed_mg": 94.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.239,
+       "hub2_walls": 0.974,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.974,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.225,
+       "hub2_walls": -4.124,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.124,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.144,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.276,
+       "hub2_walls": -0.026,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        138.1,
+        6.7
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.974,
+      "probe01": 0.874,
+      "probe02": 0.774,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.124,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.485
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.45,
+      "dazf": 0.0,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.45,
+      "azf": 124.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 14,
+      "solid_n": 2972,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 17.25,
+      "mass_removed_mg": 123.8
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.239,
+       "hub2_walls": 0.974,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.974,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.7,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.225,
+       "hub2_walls": -4.124,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.124,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.144,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.276,
+       "hub2_walls": 0.116,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        141.3,
+        6.55
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.974,
+      "probe01": 0.874,
+      "probe02": 0.774,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.124,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.485
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": 0.0,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 124.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 17,
+      "solid_n": 3011,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 158.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.239,
+       "hub2_walls": 0.974,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.974,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.225,
+       "hub2_walls": -4.124,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.124,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.144,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.276,
+       "hub2_walls": 0.258,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.9,
+        5.9
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.974,
+      "probe01": 0.874,
+      "probe02": 0.774,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.124,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.485
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": 0.0,
+      "z0": 6.0,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 124.0,
+      "z0": 6.0,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 15,
+      "solid_n": 3047,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 140.3
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.239,
+       "hub2_walls": 0.974,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.974,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.225,
+       "hub2_walls": -4.124,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.124,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.144,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.276,
+       "hub2_walls": 0.194,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        132.8,
+        5.5
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.974,
+      "probe01": 0.874,
+      "probe02": 0.774,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.124,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.485
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": -5,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 119.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 16,
+      "solid_n": 3011,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 158.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.239,
+       "hub2_walls": 0.974,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.974,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.225,
+       "hub2_walls": -4.124,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.124,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.144,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.276,
+       "hub2_walls": 0.004,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        138.9,
+        6.4
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.974,
+      "probe01": 0.874,
+      "probe02": 0.774,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.124,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.485
+    },
+    {
+     "params": {
+      "c": 1.4,
+      "hw": 40,
+      "daz": 0.0,
+      "fd": 0.6,
+      "dazf": 5,
+      "z0": 4.5,
+      "dense": 1
+     },
+     "facet": {
+      "c": 1.4,
+      "hw": 40.0,
+      "az0": 142.8,
+      "fd": 0.6,
+      "azf": 129.0,
+      "z0": 4.5,
+      "dense": 1,
+      "rigid_clipped": 6,
+      "contact_dropped": 17,
+      "solid_n": 3011,
+      "notch_clear_deg": 7.8,
+      "wall_min_mm": 3.1,
+      "flat_halfwidth_deg": 19.95,
+      "mass_removed_mg": 158.6
+     },
+     "poses": {
+      "139": {
+       "hub2_rigid": 2.86,
+       "hub2_walls": 2.844,
+       "others": 1.7,
+       "other_binder": "c26",
+       "pose_min": 1.7,
+       "hub2_min_at_r_az_z": [
+        8.8,
+        135.8,
+        0.2
+       ]
+      },
+      "203": {
+       "hub2_rigid": 1.239,
+       "hub2_walls": 0.974,
+       "others": 3.725,
+       "other_binder": "c5",
+       "pose_min": 0.974,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        143.8,
+        1.4
+       ]
+      },
+      "205": {
+       "hub2_rigid": -3.225,
+       "hub2_walls": -4.124,
+       "others": -2.172,
+       "other_binder": "c33",
+       "pose_min": -4.124,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        161.8,
+        1.4
+       ]
+      },
+      "237": {
+       "hub2_rigid": 3.144,
+       "hub2_walls": -0.442,
+       "others": -9.426,
+       "other_binder": "c31",
+       "pose_min": -9.426,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        176.6,
+        12.25
+       ]
+      },
+      "264": {
+       "hub2_rigid": 2.276,
+       "hub2_walls": 0.103,
+       "others": -0.935,
+       "other_binder": "c32",
+       "pose_min": -0.935,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        109.1,
+        8.9
+       ]
+      },
+      "316": {
+       "hub2_rigid": 0.945,
+       "hub2_walls": 0.672,
+       "others": 1.628,
+       "other_binder": "c22",
+       "pose_min": 0.672,
+       "hub2_min_at_r_az_z": [
+        10.0,
+        221.6,
+        0.0
+       ]
+      }
+     },
+     "p203": {
+      "plain": 0.974,
+      "probe01": 0.874,
+      "probe02": 0.774,
+      "prereg_035": true
+     },
+     "t5": {
+      "205": -4.124,
+      "237": -9.426,
+      "264": -0.935
+     },
+     "t5_sum": 14.485
+    }
+   ],
+   "secs": 205.2
+  }
+ ]
+}

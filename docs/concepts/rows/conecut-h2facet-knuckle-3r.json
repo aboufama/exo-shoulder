@@ -8,22 +8,22 @@
  "passive_translations": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": null,
- "reach": null,
- "follow": null,
- "inband14": null,
- "inband10": null,
- "contact": null,
- "gap": null,
+ "t_screened": "2026-10-18T14:15:37Z",
+ "reach": 0.775,
+ "follow": 1.0,
+ "inband14": 0.9007,
+ "inband10": 0.5719,
+ "contact": 0.0,
+ "gap": 12.5,
  "v_reach": null,
  "v_follow": null,
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 0,
- "verdict": "in work",
- "limiter": "",
- "note": "",
+ "n_configs": 122,
+ "verdict": "SCREENED as a 0-cx ENABLER CELL, never a lead on its own: on the lead's frozen chain the cut buys no take (frozen exact Bench(110,360) 18.28 = lead, score 93.35), but pose 203 rises 0.263 -> 1.122 mm (0.614 mm per mm of chamfer, solid-sampled), near1 19.92 -> 19.38, the +0.35 mm probe 19.37 -> 18.83 (only link 2 at 139 is left under 1 mm: conecut-l2jog's target), T5 depth 20.25 -> 19.86 (205 -4.28 -> -3.90). On lowarm-kstop's chain (its own harness, exact guard poses) c >= 0.5 lifts 203 at the P5 / P0 worst corners from 0.157 / 0.117 to 0.463 / 0.423 (c 1.4: 1.014 / 0.974), and the planar flat (fd 0.6, z0 4.5) clears 264's hub-2 wall (-0.13..-0.28 -> +0.26..+0.37) while 264's hub-K binder (-0.94..-1.17) remains. HELD: 22.16 vs the lead's 22.38 (pose 447, a hub-2 edge contact, is taken; every changed held pose moved up; P(better) 0.644, CI90 [-0.66, 0]).",
+ "limiter": "The cut can reach only hub-2 metal: of the lead's 98 lost poses (fold 88, J3 stop 6, contact 4) only 205 binds on hub 2 and it needs 4.85 mm of radial cut (into the MR117 bore at r 5.5; wall floor 3.0 caps c at 1.5); 237 / 264 bind on the crank / horn, 316 on link 2. The search benches (Bench(60,160), envh) have no hub-2 binder, so every config reads 12.5 / near1 13.66 there.",
+ "note": "Convergence gate (Bench(60,160) near1, 122 configs incl. 3 CMA starts, one at sigma 0.8): gain over 2nd half 0, over last third 0, top-5 spread 0 - flat by construction. Best params c 1.4 hw 40 daz 0 fd 0.6 dazf 0 z0 4.5 dense 1 (wall 3.1 mm over the MR117 bore, notch clearance 7.8 deg, mass -0.13 g). Tables: docs/concepts/sweeps/conecut-h2facet-knuckle-3r_guard.json (lead chain, 103 configs exact at 139/203/205/237/264/316), _lowarm-kstop-cell.json (kstop chain, 15 configs x deltas 0 / 0.264 / 0.363). Measurement change of the dense solid: 234 -0.05 mm, 205 -0.011, 264 hub-2 -0.038; no take or contact moves. Collisions keep the uncut cylinder (conservative). 0 passive translations, 3 active DOF, cx 18.5 (+0).",
  "doc": "docs/concepts/conecut-h2facet-knuckle-3r.md",
  "best_params": {
   "stk": 6.0,
@@ -41,5 +41,82 @@
   "z0": 4.5,
   "dense": 1
  },
- "complexity": 18.5
+ "complexity": 18.5,
+ "frozen_exact": {
+  "gap": 18.28,
+  "reach": 0.7278,
+  "follow": 1.0,
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "contact": 0.0106,
+  "ws_taken": 262,
+  "contact_poses": 4,
+  "near1": 19.38,
+  "near2": 34.84,
+  "probe01": 18.83,
+  "probe02": 18.83,
+  "probe035": 18.83,
+  "overhead_taken": "8/28",
+  "t5": {
+   "p205": -3.9,
+   "p237": -8.93,
+   "p264": -5.8,
+   "p316": -1.23,
+   "sum": 19.86
+  },
+  "p203": 1.122,
+  "min_metal_taken": 0.072
+ },
+ "lead_same_protocol": {
+  "gap": 18.28,
+  "near1": 19.92,
+  "near2": 34.84,
+  "probe01": 18.83,
+  "probe02": 18.83,
+  "probe035": 19.37,
+  "p203": 0.263,
+  "t5_sum": 20.25
+ },
+ "mechanism": {
+  "source": "lead conecut-knee-knuckle-3r",
+  "record_delta": "+0: a milled chamfer and flat on hub 2's existing Ti housing",
+  "complexity": 18.5
+ },
+ "held_frozen": {
+  "gap": 22.16,
+  "reach": 0.6933,
+  "follow": 1.0,
+  "inband14": 0.9,
+  "inband10": 0.5726,
+  "contact": 0.0149,
+  "ws_taken": 660,
+  "contact_poses": 13,
+  "lead_gap": 22.38,
+  "paired": {
+   "diff": -0.22,
+   "ci90": [
+    -0.66,
+    0.0
+   ],
+   "p_better": 0.644,
+   "discordant": "held ws 447 (0, 90, 30): lead contact -0.207 -> taken 0.697"
+  },
+  "pooled": {
+   "gap": 21.08,
+   "lead": 21.24,
+   "ci90": [
+    -0.47,
+    0.0
+   ],
+   "p_better": 0.645
+  }
+ },
+ "kit_density": {
+  "flags": {
+   "roller": 4.549,
+   "L1a": 0.33
+  },
+  "hub2_ratio": 1.044,
+  "note": "same flags as the lead; the cut touches neither"
+ }
 }

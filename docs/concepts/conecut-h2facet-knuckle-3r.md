@@ -28,3 +28,113 @@ Round 15 (main re-launch), lens C (conecut-sidestep-metal: tangent-plane metal m
    auditor's T1 / T5 / probe checks, and a red-team pose list: 203 (the guard: >= 0.15 mm at +0.1 / +0.2 probes),
    205 (stays a contact: depth only), 237 / 264 (horn / crank: the cut cannot reach them on this chain), 316 (link 2:
    not hub 2), 139 (link 2 under K self-motion: unchanged by a hub-2 cut).
+
+## What was built
+
+`docs/concepts/models/conecut-h2facet-knuckle-3r.py` loads the verified lead (conecut-knee-knuckle-3r, its best_params)
+unchanged and edits only hub 2's samples after the metal synthesis (FTModel._rod_metal -> apply_facet):
+
+- **Bottom-edge chamfer** c x 45 deg over |az - (142.8 + daz)| <= hw (judge's frame e = unit(u2 x [0.3, 0.5, 0.8]); 142.8
+  = ring c10 sample 17, pose 203's binder). Cone face r = 10 - c + z, z in [0, c]; run-out end faces sampled.
+- **Upper flat**: a PLANAR flat of depth fd, normal at az 124 + dazf (264's hub-2 binders c12 / c13 samples 15-16), from
+  the crown down to z0 with a 45-deg run-out below z0 (no ledge). Spec correction: the spec's "r' = min(r, 10 - f)" is a
+  cylindrical pocket with stepped sector faces; a flat is one end-mill pass, removes less metal for the same centre
+  clearance and has no steps (half-width acos((10 - fd)/10) = 19.9 deg at fd 0.6).
+- **Sampled as a solid** (judge's rule): hub 2's contact-only rings lose every sample inside the cut, the in-band bottom
+  disc keeps its 80 samples (5-9 clipped radially onto the cone: S6 equal count), and a dense contact-only solid is added
+  in the cut sectors +- 6 deg (wall 0.5 mm x 1 deg, disc and crown bands, cone face, the chamfer's TOP EDGE on the
+  unchanged wall, end faces, flat face; 2400-2700 points, ~4 pts / mm2). `dense 0` (sample move only) is reported to
+  show why: at c 1.0 it reads 203 = 1.068 mm, the solid reads 0.877.
+- **Collisions** keep the UNCUT hub-2 cylinder (a cut only removes metal: conservative).
+- Build limits: wall over the MR117 OD 11 bore >= 3.0 needs c, fd <= 1.5; chosen c 1.4 (wall 3.1: 0.1 mm machining
+  margin over the rule floor). The chamfer stays under z 1.4 (link 1b's lower plate band F+0..3.0; the member interface
+  and any stop groove at F+3..3.15 untouched); the flat's run-out ends at z0 - fd = 3.9 (above the plate band).
+  Notch clearance to lowarm-kstop's short-arm plate notch (az 66-95, judge's frame): 142.8 - 40 - 95 = 7.8 deg.
+  Mass removed ~0.13 g (Ti-6Al-4V). Complexity +0 (a cut on an existing made part): 18.5 on the lead.
+
+## Results (all exact unless marked)
+
+**Claim protocol (the lead's: fit Bench(60,160) fast, shape frozen, worn exact Bench(110,360)), best config c 1.4, hw 40,
+daz 0, fd 0.6, dazf 0, z0 4.5, dense 1:**
+
+| | lead (verified dump) | h2facet |
+|---|---|---|
+| gap (plain) | 18.28 | **18.28** (score 93.35): reach 0.7278 (262/360), ib14 0.9012, ib10 0.5739, follow 1.0, 4 contacts |
+| near1 (metal < 1 mm = contact) | 19.92 | **19.38** (203 leaves the 1-mm shell) |
+| near2 | 34.84 | 34.84 (203 sits at 1.12: still in the 1-2 mm shell; shell count 30 -> 31) |
+| +0.1 / +0.2 / +0.35 mm probe | 18.83 / 18.83 / 19.37 | 18.83 / 18.83 / **18.83** (only 139, link 2 at 0.072, is left under 1 mm) |
+| pose 203 (guard) | 0.263 (c10 ring) | **1.122** (chamfer top edge), rigid disc 0.716 -> 1.380 |
+| T5 contact depth 205 / 237 / 264 / 316 | -4.28 / -8.93 / -5.80 / -1.235 (sum 20.25) | -3.90 / -8.93 / -5.80 / -1.23 (sum 19.86) |
+| overhead (elev >= 140) taken | 8 / 28 | 8 / 28 |
+
+21 poses changed their lowest metal, all up (hub-2 chamfer) except 234: 1.556 -> 1.506 (the dense wall sampling, a
+measurement change of -0.05 mm, still >= 1.5). No take, no contact and no in-band sample changed (clip nib identical).
+
+**Search benches (the convergence gate).** 122 configurations (47 coarse + 3 CMA starts x 25, one at sigma 0.8): every one
+reads Bench(60,160) fast plain 12.5 / near1 13.66 and envh (60 clips + 210 fresh env poses) 17.57 / near1 22.24, min
+metal 0.44 mm. Gate: gain 0 over the second half, 0 over the last third, top-5 spread 0 - passed, because no pose of
+either search bench binds on hub 2's skin-side edge. The cut is invisible to the search benches by construction; its
+value is read on the exact guard poses (below), where it is linear and needs no search.
+
+**203 vs c (lead chain, hw 35-40, daz 0, solid):** c 0 / 0.3 / 0.5 / 0.75 / 1.0 / 1.25 / 1.4 / 1.5 -> 0.263 / 0.447 /
+0.570 / 0.723 / 0.877 / 1.030 / 1.122 / 1.184 mm (0.614 mm per mm, = the judge's 0.571 / 0.878 at 0.5 / 1.0). The
+pre-registered >= 0.35 holds from c 0.15. Sector: hw 25 with daz -10 drops to 0.543 (binder outside the sector); hw >= 35
+is flat for |daz| <= 10.
+
+**264 vs fd (hub-2 wall only; c 1.4 hw 40):** fd 0.3 / 0.45 / 0.6 at dazf 0, z0 4.5 -> +0.087 / +0.228 / +0.370 (from
+-0.128 ring / -0.166 dense). z0 6.0 -> +0.325-0.335; z0 7.5 fails (-0.056: the skin also binds at z ~7); dazf +-5 ->
++0.13 / +0.24; dazf +-10 fails at fd 0.3-0.45. On the lead's chain 264 stays a contact through the horn lug (-5.80).
+
+**Cell on lowarm-kstop's chain** (its own harness `wear(delta, 'bench')` loaded unchanged: cell A at F+3.9, pad deleted,
+K stop A; dwell K = law + delta; worn on the exact guard poses; docs/concepts/sweeps/conecut-h2facet-knuckle-3r_lowarm-kstop-cell.json):
+
+| c (hw 35-40) | 203 at delta 0 | 203 at e+ 0.264 (P5 worst) | 203 at e+ 0.363 (P0 worst) |
+|---|---|---|---|
+| 0 | 0.263 | 0.157 | 0.117 |
+| 0.5 | 0.570 | 0.463 | 0.423 |
+| 0.75 | 0.723 | 0.616 | 0.576 |
+| 1.0 | 0.877 | 0.769 | 0.729 |
+| 1.25 | 1.030 | 0.923 | 0.882 |
+| 1.4 | 1.122 | 1.014 | 0.974 |
+
+So c >= 0.5 clears kstop's 203 gate at every corner and at the +0.2 probe (0.423 - 0.2 = 0.223 >= 0.15). 264's hub-2 wall
+on that chain with the flat (fd 0.6, z0 4.5): +0.370 / +0.290 / +0.258 at delta 0 / 0.264 / 0.363 (from -0.13..-0.28), but
+264's OTHER binder (hub K, -1.169 / -0.999 / -0.935) is untouched: the flat is necessary, not sufficient, for 264 -
+lowarm-kphase-notch must remove the hub-K part. 205 stays a contact on both chains (needs 4.85 mm of radial cut: into the
+MR117 bore).
+
+## Red team (own)
+
+- **Optimistic number?** The sample-move reading (dense 0) is +0.19 mm optimistic at c 1.0 (1.068 vs 0.877): the solid is
+  the claim. The dense wall is a measurement change: the dense control (c 0) reads 205 -4.291 (vs -4.28), 264's hub-2
+  wall -0.166 (vs -0.128) and pose 234 -0.05 mm; no take or contact moves.
+- **Point that pinches:** after the cut 203's binder is the chamfer's top edge (r 10, z 1.4, az 143.8) at 1.122 mm; the
+  next part at 203 is 3.75 mm away. With the lead's T3 K play (0.23 deg, ~0.4 mm/deg at this edge) 203 keeps ~1.03 mm.
+- **Pose that jams:** none added - collisions use the uncut cylinder (conservative), no joint, stop or range changes.
+- **Build:** wall 3.1 mm over the MR117 bore at c 1.4 (rule floor 3.0); 5-axis chamfer mill on link 1b's lower plate
+  edge; the flat is one end-mill pass on the housing (z 3.9 -> 12.25). No new part, body or joint.
+- **What it does not do:** no take on the lead's plain BENCH gap (it is never claimed as a lead on its own).
+
+## Held out (never searched, selected or tuned on; c / hw / fd chosen on the bench guard poses)
+
+Frozen held-out wear (952 ws + 202 clip): **22.16** vs the lead's 22.38 (-0.22): reach 0.6933 (660 / 952), ib14 0.900,
+ib10 0.5726, follow 1.0, 13 contacts (lead 14). The one discordant pose is held ws 447 (plane 0, elev 90, axial 30 - the
+neighbour of bench 203 at axial 45): a hub-2 bottom-edge contact on the lead (-0.207 mm), taken with the chamfer at
+0.697 mm. All 45 held poses whose metal changed moved UP; none moved down. Paired bootstrap vs the lead
+(tools/alignment_paired.py, 4000 resamples within kind): held diff -0.22, CI90 [-0.66, 0.00], P(better) 0.644; bench diff
+0.00; pooled bench + held 21.08 vs 21.24 (-0.16, CI90 [-0.47, 0.00], P 0.645). The held gain is the mechanism working as
+designed (the binder region around elev 90 / axial 30-45 is a hub-2 edge contact), not noise: one pose, one sign.
+Kit density (tools/sample_density.py measure): same flags as the lead (roller 4.5x, L1a 0.33x - parts this cut does not
+touch); hub 2 1.044x (lead 1.003x), so the lead's kit-density correction (+0.05 held) applies to both.
+
+## Verdict and what next
+
+SCREENED as a zero-complexity enabler. On the lead it ties the plain bench gap (18.28), improves held (22.16 vs 22.38),
+near1 (19.38 vs 19.92), the +0.35 probe (18.83 vs 19.37) and T5 depth (19.86 vs 20.25). It is a candidate replacement for
+the lead's hub 2 in the gen CAD (one chamfer + one flat on an existing Ti housing) once a verifier re-measures it; the
+CI tie rule (bench tie, held P 0.64) is the user's open question. Next, in order: (1) conecut-l2jog + this facet as the
+probe-hardened lead cell (only 139 is left under 1 mm; with 139 lifted >= 0.35 the +0.35 probe reads 18.28); (2)
+lowarm-kstop takes the facet at c >= 0.5 (its 203 gate then passes at P5 / P0 and the +0.2 probe) - import
+`apply_facet(M, P)` from this model, it works on any chain with `cyl['hub2']`; (3) lowarm-kphase-notch takes the flat
+(fd 0.6, z0 <= 6, dazf 0 +- 5) and must still remove 264's hub-K binder (-0.94..-1.17).
+
