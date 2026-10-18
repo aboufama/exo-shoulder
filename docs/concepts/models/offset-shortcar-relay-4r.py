@@ -240,6 +240,19 @@ if __name__ == "__main__":
                dict(carw=14.0, pre=0.0, ds=31.0, delta=0.0, coil="none", flange=0)]
         hwl += [dict(h, **json.loads(x)) for x in sys.argv[3:] for h in [{}]]
         hwsweep(dict(CLAIM_PARENT), hwl, 110, 360, outp, True); sys.exit(0)
+    if mode == "pickrun":                                   # pickrun base prelist nc nw pickfile out: prepare, wear prelist, then the pick once it is written
+        base = dict(CLAIM_PARENT, **json.loads(sys.argv[2])); pre = json.loads(sys.argv[3]); nc, nw = int(sys.argv[4]), int(sys.argv[5])
+        pickf, outp = sys.argv[6], sys.argv[7]; ex = os.environ.get("CB_EXACT") == "1"
+        S = prepare(base, nc, nw, exact=ex); res = []
+        print(json.dumps(dict(prepared=True, ideal=S["ideal"])), flush=True)
+        def _one(hw, tag):
+            o = wear(S, dict(base, **hw)); o["hw_override"] = hw; o["tag"] = tag; res.append(o)
+            print(json.dumps(dict(tag=tag, hw=hw, **summary(o)), default=float), flush=True); json.dump(res, open(outp, "w"), default=float)
+            pp = perpose(S); pp.update(wear=("held" if nc == -1 else f"bench({nc},{nw})"), params=dict(base, **hw), exact=ex, tag=tag)
+            json.dump(pp, open(outp.replace(".json", f"_{tag}_perpose.json"), "w"), default=float)
+        for k, hw in enumerate(pre): _one(hw, f"pre{k}")
+        while not os.path.exists(pickf): time.sleep(5)
+        _one(json.load(open(pickf)), "pick"); sys.exit(0)
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     if mode == "gravity": print(json.dumps(AA.gravity_check(par))); sys.exit(0)
     if mode == "hwsweep":
