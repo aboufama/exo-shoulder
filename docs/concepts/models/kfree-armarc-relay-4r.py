@@ -215,7 +215,171 @@ def repro():
     return out
 
 
+
+# =====================================================================================================================
+# LEAD-BASED MODEL (the scored one). The kit model above (build / evaluate / wear) reproduces the proposer's nok_metal
+# counts exactly (repro), but its q 1.0 metal parks hub 2 at 171 mm from GH even with no relay (kit CONTROL fast 74.45 /
+# 102.98 with K welded vs the lead's own model 12.50): its in-band is meaningless, so the score comes from the LEAD'S OWN
+# MODEL (conecut-knee-knuckle-3r: O20 stacks, pin knee, J3 dowel stop, fitted metal) through the relay wrapper of
+# armarc-relay-knuckle-4r (relay solve, arc track + shell + carriage metal, arm-side lift onto the carriage, jams), with:
+#   * K WELDED at stop A: the relay solve's gate adds |dK| <= KWELD (0.1 deg), so a pose past the plain wall
+#     th > a1 + a2 - 5 is relayed (least phi) or LOST - the lead's own K law never opens (no K, no drive);
+#   * poses with no welded solution in [0, PHI] are marked lost ('kfold') after the run (the wrapper would otherwise
+#     wear them at phi = 0 with the lead's K open);
+#   * drive metal deleted (drive = 0): the bell crank and nose (member 9) and link 1a's horn leave the rigid, contact and
+#     part lists (hub K + link 1a / 1b at stop A stay as metal: the spec's first pass, as the kit did); drive = 1 keeps
+#     them parked at dK = 0 (an upper bound on metal);
+#   * frozen shape: the lead's parts as fitted on Bench(60,160) fast at phi = 0 (its own protocol), worn with the relay.
+# =====================================================================================================================
+KWELD = 0.1
+DRIVE_NAMES = ("crank", "roller", "horn")
+_AR = None
+
+
+def _ar():
+    global _AR
+    if _AR is None:
+        os.environ.setdefault("SN_CELL", "lead")
+        sp = importlib.util.spec_from_file_location("armarc_for_kfree", os.path.join(HERE, "armarc-relay-knuckle-4r.py"))
+        _AR = importlib.util.module_from_spec(sp); sp.loader.exec_module(_AR)
+        g0 = _AR.gate
+
+        def gate_weld(M, Q):                                       # the lead's gates + K welded at stop A
+            ok = g0(M, Q); dk = np.degrees(np.abs(np.asarray(M.D._dK, float)))
+            return ok & (dk <= KWELD)
+        _AR.gate = gate_weld; _AR._gate_lead = g0
+    return _AR
+
+
+LPAR = dict(PHI=60.0, tilt=0.0, taz=0.0, sgn=1.0, hw=1, hwv="plain", ds=0.0, drive=0)
+
+
+def _strip_drive(M):
+    """delete the drive metal (crank + nose on member 9, link 1a's horn) from the rigid / contact lists"""
+    horn = M.rigid.get("horn")
+    for nm in DRIVE_NAMES: M.rigid.pop(nm, None)
+    keep = []
+    for m, Pc in M.contact:
+        if m == 9: continue
+        if horn is not None and m == horn[0] and len(Pc) and len(horn[1]):
+            dd = np.linalg.norm(np.asarray(Pc)[:, None, :] - np.asarray(horn[1])[None, :, :], axis=-1).min(1)
+            if np.median(dd) < 0.5: continue
+        keep.append((m, Pc))
+    M.contact = keep
+
+
+def lead_eval(params, nc=60, nw=160, exact=False):
+    AR = _ar(); CBm = AR.CB; t0 = time.time()
+    rp = dict(LPAR); rp.update({k: params[k] for k in LPAR if k in params})
+    # K welded: the lead's linear K law opens from th = a1 + a2 - smhi (16.84 deg before the plain wall); welded, the dyad
+    # closes up to a1 + a2 - 5, so the law onset moves to smhi = 5 (K at stop A wherever the welded dyad closes) and the
+    # gate |dK| <= KWELD then IS the welded chain's window
+    xp = {k: v for k, v in params.items() if k not in LPAR and k != "psi2"}
+    if float(params.get("psi2", 0.0)):                         # window re-placement (shift_a2.py): J2's rest axis turned about J1 by psi2
+        u1 = K.bvec(AR.LEAD["az1"], AR.LEAD["el1"]); u2 = K.bvec(AR.LEAD["az2"], AR.LEAD["el2"]); ps = math.radians(float(params["psi2"]))
+        v = K.unit(math.cos(ps) * u2 + math.sin(ps) * np.cross(u1, u2) + (1 - math.cos(ps)) * (u1 @ u2) * u1)
+        xp.update(az2=math.degrees(math.atan2(v[2], -v[0])), el2=math.degrees(math.asin(float(np.clip(v[1], -1, 1)))))
+    P = AR.CC._clamp(dict(AR.CC.PARAMS, **AR.LEAD, **dict(dict(smhi=5.0), **xp)))
+    old = os.environ.pop("CB_EXACT", None)
+    try:
+        B1 = CBm.Bench(n_clip=60, n_ws=160); M1 = AR.CC.CCModel(B1, dict(P)); r1 = M1.run()
+        assert abs(float(M1.p.get("smhi", 5.0)) - float(P["smhi"])) < 1e-6, ("smhi clamped", M1.p.get("smhi"))
+        ax = AR.raxis(rp["tilt"], rp["taz"])
+        G = AR.relay_geometry(M1, B1, ax, rp) if int(rp["hw"]) and float(rp["PHI"]) > 0 else None
+    finally:
+        if old is not None: os.environ["CB_EXACT"] = old
+    P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]
+    phi, ax = AR.solve_phi(M1, rp); phi_fill = np.where(np.isfinite(phi), phi, 0.0); Zr = AR.relayed_Z(phi_fill, ax)
+    drive = int(rp["drive"])
+
+    class Frozen(AR.CC.CCModel):
+        def fit(self):
+            for a in ("g", "fr", "geo", "rigid", "link_pts", "f", "fK", "tr", "zb", "_tr_fit", "cyl", "box", "strap", "cyl_surf", "Emid",
+                      "Hneed", "Lneed", "hEx", "_Ex", "_rod_info", "_viz_rod", "_crown_ok", "_scg", "_sc_info", "_wedge_info", "cyl_r"):
+                if hasattr(M1, a): setattr(self, a, getattr(M1, a))
+            self.rigid = dict(M1.rigid); self._sc = None
+            self.contact = list(M1.contact)
+            if not drive: _strip_drive(self)
+            self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool); self._truncate()
+    if exact: os.environ["CB_EXACT"] = "1"
+    B = CBm.Bench(n_clip=nc, n_ws=nw); phi_b = phi[B.idx]
+    with AR.patched(Zr):
+        M = Frozen(B, P2); M.run()
+    hwrep = AR.rerecord(M, B, G, ax, np.nan_to_num(phi_b), AR.Z0["HG"][B.idx].astype(float)) if G is not None else {}
+    why = np.asarray(M.why, dtype=object).copy(); nok = ~np.isfinite(phi_b)
+    for i in np.nonzero(nok)[0]:                                  # no welded solution in [0, PHI]: lost (the K is welded)
+        B.res[i] = None
+        if why[i] in ("", "contact", "skin"): why[i] = "kfold"
+    M.why = why
+    rr_ = B.report(); rep = {k: rr_[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+    mins = np.array([float(np.min(B.res[j])) if B.res[j] is not None else np.nan for j in range(len(B.idx))])
+    kind = np.array(B.kind); ws = kind == "ws"; elev = np.array([p["elev"] for p in B.poses])
+    taken = np.isfinite(mins) & (mins >= 0); rel = np.isfinite(phi_b) & (np.abs(phi_b) > 0)
+    ok1 = lambda j: B.res[j] is not None and float(np.min(B.res[j])) >= 1.0
+    cl = np.nonzero(~ws)[0]; wl = np.nonzero(ws)[0]; nz = [j for j in range(len(kind)) if B.res[j] is not None]
+    near1 = CBm.gap_of(rep["inband14"], float(np.mean([ok1(j) for j in cl])), float(np.mean([ok1(j) for j in wl])),
+                       float(np.mean([float(np.min(B.res[j])) < 1.0 for j in nz])) if nz else 0.0)
+    jam = (why == "parts") | (why == "jam")
+    out = dict(wear=rep, near1_gap=round(float(near1), 3), smhi=float(M1.p.get("smhi")), a1a2=[round(float(M1.D.a1), 3), round(float(M1.D.a2), 3)], fit_lead_phi0={k: r1[k] for k in ("gap", "reach", "inband14", "contact")},
+               bench=[nc, nw], mode=B.mode, relay=dict(rp, axis=[round(float(x), 4) for x in ax]),
+               why={str(k): int((why == k).sum()) for k in set(why.tolist())}, why_ws={str(k): int(((why == k) & ws).sum()) for k in set(why.tolist())},
+               ws_taken=int((ws & taken).sum()), ws=int(ws.sum()), overhead=[int((ws & taken & (elev >= 140)).sum()), int((ws & (elev >= 140)).sum())],
+               relayed=dict(n_ws=int((rel & ws).sum()), taken_ws=int((rel & ws & taken).sum()), contact=int((rel & np.isfinite(mins) & (mins < 0)).sum()),
+                            jam=int((rel & jam).sum()), jam_ws=int((rel & jam & ws).sum()), clip=int((rel & ~ws).sum()), clip_taken=int((rel & ~ws & taken).sum()),
+                            phi_max=round(float(np.nanmax(np.abs(phi_b))), 2) if np.isfinite(phi_b).any() else 0.0,
+                            phi_max_taken=round(float(np.max(np.abs(phi_b[taken]))), 2) if taken.any() else 0.0),
+               min_metal_taken=round(float(np.nanmin(np.where(taken, mins, np.nan))), 3) if taken.any() else None,
+               hw={k: v for k, v in hwrep.items() if k != "jams"}, n_hw_jams=len(hwrep.get("jams", [])), secs=round(time.time() - t0, 1))
+    if G is not None:
+        out["relay_hw"] = dict(R_t=round(G["R_t"], 1), h_c=G["h_c"], dh_lift=round(G["dh"], 2), rpad=round(G["rpad"], 1), th0=round(G["th0"], 1),
+                               arc=[round(G["lo"], 1), round(G["hi"], 1)], arc_len_deg=round(G["hi"] - G["lo"], 1),
+                               arc_len_mm=round((G["hi"] - G["lo"]) * math.pi / 180 * G["R_t"], 1))
+        out["viz_RL"] = dict(ax=[round(float(x), 4) for x in ax], e=[round(float(x), 4) for x in G["e"]], f=[round(float(x), 4) for x in G["f"]],
+                             s0=round(G["s0"], 2), Rt=round(G["R_t"], 1), lo=round(G["lo"], 2), hi=round(G["hi"], 2), th0=round(G["th0"], 2),
+                             hc=G["h_c"], dh=round(G["dh"], 1), PHI=float(rp["PHI"]), sgn=float(rp["sgn"]), rpad=round(G["rpad"], 1))
+    out["poses"] = [dict(i=int(j), kind=str(kind[j]), pose=[B.poses[j][k] for k in ("plane", "elev", "axial")],
+                         phi=(round(float(phi_b[j]), 1) if np.isfinite(phi_b[j]) else None), why=str(why[j]),
+                         min_mm=(round(float(mins[j]), 2) if np.isfinite(mins[j]) else None)) for j in range(len(kind)) if kind[j] == "ws"]
+    names = list(AR.Z0["NAMES"]); steps = []
+    for nm in CBm.FIT:
+        ii = np.nonzero(AR.Z0["CID"] == names.index(nm))[0]; ii = ii[np.argsort(AR.Z0["FI"][ii], kind="stable")]
+        p_ = phi[ii]; good = np.isfinite(p_[1:]) & np.isfinite(p_[:-1])
+        if good.any(): steps.append(float(np.abs(np.diff(p_))[good].max()))
+    out["phi_clip_step_max"] = round(max(steps), 2) if steps else 0.0
+    return out, M, B
+
+
+def lead_bench_eval(B, params):
+    out, _, _ = lead_eval(params); r = dict(out["wear"]); r["gap_near1"] = out["near1_gap"]; return r
+
+
+def append_sweep(params, out, path=None):
+    path = path or os.path.join(REPO, "docs", "concepts", "sweeps", ID + ".json")
+    try: S_ = json.load(open(path))
+    except Exception: S_ = []
+    w = out["wear"]
+    S_.append(dict(k=len(S_), t=K.now(), params=params, inband14=w["inband14"], inband10=w["inband10"], reach=w["reach"], follow=w["follow"],
+                   contact=w["contact"], gap=w["gap"], gap_near1=out["near1_gap"], bench=out["bench"], mode=out["mode"],
+                   relayed=out["relayed"], why_ws=out["why_ws"], overhead=out["overhead"], min_metal_taken=out["min_metal_taken"]))
+    json.dump(S_, open(path, "w"), indent=0, default=float)
+
+
 if __name__ == "__main__":
+    a = sys.argv[1:]; mode = a[0] if a else "lead"
+    if mode == "repro":
+        print(json.dumps(repro())); sys.exit()
+    if mode in ("lead", "lfrozen", "lsweep"):
+        if mode == "lsweep":                                     # lsweep '<json list of param dicts>' : fast, appended to the sweep file
+            for c in json.loads(a[1]):
+                out, _, _ = lead_eval(c); append_sweep(c, out, a[2] if len(a) > 2 else None)
+                print(json.dumps(dict(params=c, **out["wear"], near1=out["near1_gap"], rel=out["relayed"], why=out["why_ws"], ov=out["overhead"],
+                                      hw=out.get("relay_hw"), secs=out["secs"]), default=float), flush=True)
+            sys.exit()
+        par = json.loads(a[1]) if len(a) > 1 else {}
+        out, M, B = lead_eval(par, *((110, 360, True) if mode == "lfrozen" else (60, 160, False)))
+        out["params"] = par; out["row"] = ID
+        if len(a) > 2: json.dump(out, open(a[2], "w"), indent=0, default=float)
+        print(json.dumps({k: v for k, v in out.items() if k != "poses"}, default=float)); sys.exit()
     a = sys.argv[1:]; mode = a[0] if a else "fit"
     if mode == "repro":
         print(json.dumps(repro())); sys.exit()
