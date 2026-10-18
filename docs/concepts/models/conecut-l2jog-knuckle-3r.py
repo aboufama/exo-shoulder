@@ -217,15 +217,20 @@ def _bench(name):
 
 
 class Scan:
-    """control wear (jog 0) of the lead's frozen chain on one bench, then per jog config the L2 samples re-read"""
-    def __init__(self, bench, near=4.0):
+    """control wear (jog 0) of the lead's frozen chain on one bench, then per jog config the L2 samples re-read. The
+    control wear is cached (pickle: per-pose scored distances, contact-only minima, member-2 transforms of the near
+    poses) so later config batches on the same bench cost one distance call per near pose"""
+    def __init__(self, bench, near=4.0, cache=None):
+        import pickle, types
+        self.name = bench; self.B = B = _bench(bench)
+        if cache and os.path.exists(cache):
+            C = pickle.load(open(cache, "rb")); self.__dict__.update(C); self.M = types.SimpleNamespace(cmin=dict(self.cmin0), why=self.why0); self.base = self.read_many([dict(dl=0.0, dz=0.0)])[0]; return
         P0 = _clamp(dict(PARAMS, dl=0.0, dz=0.0))
         old = os.environ.pop("CB_EXACT", None)
         try: B1 = CB.Bench(n_clip=60, n_ws=160)
         finally:
             if old is not None: os.environ["CB_EXACT"] = old
         M1 = JogModel(B1, dict(P0)); M1.run(); P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]
-        self.M1 = M1; B = _bench(bench); self.B = B; self.name = bench
         ATTR = ("g", "fr", "geo", "rigid", "link_pts", "f", "fK", "tr", "zb", "_tr_fit", "cyl", "box", "strap", "cyl_surf", "Emid",
                 "Hneed", "Lneed", "hEx", "_Ex", "_rod_info", "_viz_rod", "_crown_ok", "_scg", "_sc_info", "_wedge_info")
 
@@ -236,49 +241,64 @@ class Scan:
                 self._sc = None
                 self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
                 self._truncate()
-        t = time.time(); M = Frozen(B, P2); self.r0 = M.run(); self.M = M; self.secs_wear = round(time.time() - t, 1)
-        self.res0 = [None if x is None else np.asarray(x, float).copy() for x in B.res]; self.cmin0 = dict(M.cmin)
+        t = time.time(); M = Frozen(B, P2); r0 = M.run(); self.secs_wear = round(time.time() - t, 1)
+        self.r0 = {k: r0.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+        self.res0 = [None if x is None else np.asarray(x, float).copy() for x in B.res]; self.cmin0 = dict(M.cmin); self.why0 = np.asarray(M.why).copy()
         mL2, X = M.link_pts["L2"]; self.mL2 = mL2; self.X = np.asarray(X, float); self.rows = l2_rows(M1); self.fr = jog_frame(self.X, self.rows)
-        nmetal = sum(len(x) for _, x in M.rigid.values()) + sum(len(x) for _, x in M.link_pts.values()); self.nmetal = nmetal
+        self.nmetal = sum(len(x) for _, x in M.rigid.values()) + sum(len(x) for _, x in M.link_pts.values())
         self.top = [ci for ci, (m, Xc) in enumerate(M.contact) if m == mL2 and len(Xc) == len(self.X)][0]
         self.Xtop = np.asarray(M.contact[self.top][1], float)
-        # per scored pose: non-L2 contact-only min, L2 under / top minima
-        self.poses = []; self.c_other = {}; self.l2min0 = {}
+        self.poses = []; self.c_other = {}; self.l2min0 = {}; self.T2 = {}
         for i in range(len(B.idx)):
             if self.res0[i] is None: continue
-            d = self.res0[i][:nmetal]; dL = d[nmetal - len(self.X):]
-            dT = B.dist(i, M.world(mL2, i, self.Xtop))
-            co = [float(B.dist(i, M.world(m, i, Xc)).min()) for ci, (m, Xc) in enumerate(M.contact) if ci != self.top and len(Xc)]
-            self.c_other[i] = min(co) if co else 1e9; self.l2min0[i] = (float(dL.min()), float(dT.min()))
-            if min(float(dL.min()), float(dT.min())) < near: self.poses.append(i)
-        self.base = self.read(dict(dl=0.0, dz=0.0))
+            d = self.res0[i][:self.nmetal]; dL = d[self.nmetal - len(self.X):]
+            sets = [M.world(m, i, Xc) for ci, (m, Xc) in enumerate(M.contact) if ci != self.top and len(Xc)]
+            n_o = sum(len(x) for x in sets); dd = B.dist(i, np.concatenate(sets + [M.world(mL2, i, self.Xtop)]))
+            self.c_other[i] = float(dd[:n_o].min()); dT = dd[n_o:]; self.l2min0[i] = (float(dL.min()), float(dT.min()))
+            if min(float(dL.min()), float(dT.min())) < near:
+                self.poses.append(i); E = M.world(mL2, i, np.vstack([np.zeros(3), np.eye(3)]))     # world() is affine: P @ A.T + b
+                b = E[0]; A = (E[1:] - b).T; assert np.allclose(self.X @ A.T + b, M.world(mL2, i, self.X), atol=1e-6)
+                self.T2[i] = (A.copy(), b.copy())
+        self.secs_init = round(time.time() - t, 1)
+        if cache:
+            keep = ("r0", "res0", "cmin0", "why0", "mL2", "X", "rows", "fr", "nmetal", "top", "Xtop", "poses", "c_other", "l2min0", "T2", "secs_wear", "secs_init")
+            pickle.dump({k: getattr(self, k) for k in keep}, open(cache, "wb"))
+        self.M = types.SimpleNamespace(cmin=dict(self.cmin0), why=self.why0)
+        self.base = self.read_many([dict(dl=0.0, dz=0.0)])[0]
 
-    def read(self, P):
-        """bench report with the jogged L2 (only the near poses re-read; the rest keep their control distances)"""
-        P = dict(JOG, **P); B = self.B; M = self.M; D, info = jog_disp(self.X, self.rows, P, self.fr)
-        res = list(self.res0); cmin = dict(self.cmin0); l2 = {}
+    def read_many(self, plist):
+        """bench reports with the jogged L2 for every config (one distance call per near pose for all configs)"""
+        B = self.B; nX = len(self.X); Ds = []; infos = []
+        for P in plist:
+            D, info = jog_disp(self.X, self.rows, dict(JOG, **P), self.fr); Ds.append(D); infos.append(info)
+        dist = {}
         for i in self.poses:
-            d = self.res0[i][:self.nmetal].copy()
-            dL = B.dist(i, M.world(self.mL2, i, self.X + D)); dT = B.dist(i, M.world(self.mL2, i, self.Xtop + D))
-            d[self.nmetal - len(self.X):] = dL; dc = min(self.c_other[i], float(dT.min())); cmin[i] = dc
-            res[i] = np.r_[d, dc] if dc < 0 else d; l2[i] = (round(float(dL.min()), 3), round(float(dT.min()), 3))
-        taken = [i for i in range(len(B.idx)) if res[i] is not None and float(np.min(res[i])) >= 0]   # before audit / probe
-        l2t = [min(l2.get(i, self.l2min0[i])) for i in taken if i in self.l2min0]                   # (they mark B.res in place)
-        mins = {int(i): round(min(float(np.min(res[i])), cmin.get(i, 1e9)), 3) for i in self.poses}
-        B.res = list(res); M.cmin = cmin; rep = B.report(); a = PK.audit(M, B); B.res = list(res); pr = probe(M, B)
-        B.res = list(self.res0); M.cmin = dict(self.cmin0)
-        out = dict(gap=rep["gap"], reach=rep["reach"], follow=rep["follow"], inband14=rep["inband14"], inband10=rep.get("inband10"),
-                   contact=rep["contact"], near1=a.get("gap_near1"), near2=a.get("gap_near2"), minmetal=a.get("near_touch_min_mm"),
-                   l2_min_taken=round(min(l2t), 3) if l2t else None, **pr, jog=info)
-        out["pose_min"] = mins; out["l2"] = {int(i): v for i, v in l2.items()}
-        return out
+            R, t = self.T2[i]; pts = np.concatenate([np.concatenate([self.X + D, self.Xtop + D]) for D in Ds]) @ R.T + t
+            dist[i] = B.dist(i, pts).reshape(len(Ds), 2, nX)
+        outs = []
+        for k, P in enumerate(plist):
+            res = list(self.res0); cmin = dict(self.cmin0); l2 = {}
+            for i in self.poses:
+                dL, dT = dist[i][k]; d = self.res0[i][:self.nmetal].copy(); d[self.nmetal - nX:] = dL
+                dc = min(self.c_other[i], float(dT.min())); cmin[i] = dc
+                res[i] = np.r_[d, dc] if dc < 0 else d; l2[i] = (round(float(dL.min()), 3), round(float(dT.min()), 3))
+            taken = [i for i in range(len(B.idx)) if res[i] is not None and float(np.min(res[i])) >= 0]
+            l2t = [min(l2.get(i, self.l2min0[i])) for i in taken if i in self.l2min0]
+            mins = {int(i): round(min(float(np.min(res[i])), cmin.get(i, 1e9)), 3) for i in self.poses}
+            self.M.cmin = cmin; B.res = list(res); rep = B.report(); a = PK.audit(self.M, B); B.res = list(res); pr = probe(self.M, B)
+            B.res = list(self.res0); self.M.cmin = dict(self.cmin0)
+            out = dict(gap=rep["gap"], reach=rep["reach"], follow=rep["follow"], inband14=rep["inband14"], inband10=rep.get("inband10"),
+                       contact=rep["contact"], near1=a.get("gap_near1"), near2=a.get("gap_near2"), minmetal=a.get("near_touch_min_mm"),
+                       l2_min_taken=round(min(l2t), 3) if l2t else None, **pr, jog=infos[k])
+            out["pose_min"] = mins; out["l2"] = {int(i): v for i, v in l2.items()}
+            outs.append(out)
+        return outs
 
 
 def scan_main(plist, bench, outp=None):
-    t = time.time(); SC_ = Scan(bench)
-    rows = []
-    for P in plist:
-        r = SC_.read(P); r["params"] = {k: _clamp(dict(PARAMS, **P))[k] for k in JOG}; rows.append(r)
+    t = time.time(); SC_ = Scan(bench, cache=os.environ.get("L2JOG_CACHE"))
+    rows = SC_.read_many([_clamp(dict(PARAMS, **P)) for P in plist])
+    for r, P in zip(rows, plist): r["params"] = {k: _clamp(dict(PARAMS, **P))[k] for k in JOG}
     o = dict(row=ID, bench=bench, mode=SC_.B.mode, n_near=len(SC_.poses), wear_secs=SC_.secs_wear, control={k: SC_.r0.get(k) for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")},
              base={k: v for k, v in SC_.base.items() if k not in ("pose_min", "l2")}, base_pose_min=SC_.base["pose_min"], rows=rows, secs=round(time.time() - t, 1))
     if outp: json.dump(o, open(outp, "w"), indent=1, default=float)
