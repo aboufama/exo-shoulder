@@ -5,6 +5,7 @@
  "complexity": 15.75,
  "verdict": "watch",
  "reasons": [
+  "density: over-dense parts roller 4.40x, horn 2.25x, ring2 2.45x; bench 18.95 -> 18.81 at the kit's density; held 23.90 -> 23.77 at the kit's density; moves > 0.1: bench horn 18.95 -> 19.16; bench ring2 18.95 -> 18.54; bench all over-dense 18.95 -> 18.81; held horn 23.90 -> 24.12; held ring2 23.90 -> 23.49; held all over-dense 23.90 -> 23.77",
   "reporting: dashboard sweep best 12.79 (score 95.35) sits 6.16 below the verified number"
  ],
  "checks": [
@@ -51,7 +52,7 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.95: bench 2 contact poses, sum 14.72 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (-5.52 mm, x0.73); held 10 contact poses, sum 46.14 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-14.83 mm, x0.76)",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.95: bench 2 contact poses, sum 14.72 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 10 contact poses, sum 46.14 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
    "depths": {
     "v_gap 18.95": {
      "bench": {
@@ -101,34 +102,12 @@
     }
    },
    "ref": "conecut-knee-knuckle-3r",
-   "compare": [
-    {
-     "claim": "v_gap 18.95",
-     "wear": "bench",
-     "sum": 14.72,
-     "ref_sum": 20.24,
-     "excess": -5.52,
-     "ratio": 0.73,
-     "watch": false
-    },
-    {
-     "claim": "v_gap 18.95",
-     "wear": "held",
-     "sum": 46.14,
-     "ref_sum": 60.97,
-     "excess": -14.83,
-     "ratio": 0.76,
-     "watch": false
-    }
-   ]
+   "compare": []
   },
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs conecut-knee-knuckle-3r: plain -0.72, 2 mm +1.34",
-   "ref": "conecut-knee-knuckle-3r",
-   "gain_plain": -0.72,
-   "gain_2mm": 1.34
+   "reason": "no reference"
   },
   {
    "check": "continuity",
@@ -273,6 +252,17 @@
    }
   },
   {
+   "check": "density",
+   "level": "watch",
+   "reason": "over-dense parts roller 4.40x, horn 2.25x, ring2 2.45x; bench 18.95 -> 18.81 at the kit's density; held 23.90 -> 23.77 at the kit's density; moves > 0.1: bench horn 18.95 -> 19.16; bench ring2 18.95 -> 18.54; bench all over-dense 18.95 -> 18.81; held horn 23.90 -> 24.12; held ring2 23.90 -> 23.49; held all over-dense 23.90 -> 23.77",
+   "over": {
+    "roller": 4.402,
+    "horn": 2.254,
+    "ring2": 2.449
+   },
+   "src": "remeasure/sample_density_desmo-slipper-knuckle-3r.json"
+  },
+  {
    "check": "complexity",
    "level": "ok",
    "reason": "recomputed 15.75 vs row 15.75",
@@ -287,7 +277,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 7 commits that touched the row"
   },
   {
    "check": "rules",
@@ -307,7 +297,7 @@
   "docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_blend.json",
   "docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "5610754",
- "tool_version": "2026-10-17.6",
- "t": "2026-10-18T06:16:26Z"
+ "git": "f892bc9",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T22:31:27Z"
 }
