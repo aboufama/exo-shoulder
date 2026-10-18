@@ -36,7 +36,11 @@ freek-oracle-route's polished 15.40, at complexity 52.5. Everything else this le
 per-pose direction (spread <= 6.4 deg) costs 0.00; the fold margin is met on every taken pose (min own-angle margin
 5.000 deg, 0 of 395 below 5); the spring coil fits at the zero end without touching the chain (>= 16.7 mm at every fit
 pose and relay angle); 3 bistable relay poses on the claim bench (<= ~0.8 points); the bracket is machined, not bent;
-the T-nut flange and the spring envelope are unmodelled (FLANGE_PLACEHOLDER). HELD_PLACEHOLDER
+the T-nut flange and the spring envelope are unmodelled (the flange, sampled as the parent family samples it - 1 mm x 8 key under the shell, skin-facing - costs 0.00: gate 14.40, contacts 13, pooled ib14 0.9196 -> 0.9234, `price_flange.json`). Held out (the family's held bench, exact, never searched): buildable stack **gate 21.46 / plain 18.37 / near1 23.75** (chain-only
+ib14 0.8644, reach 0.7689, contact 0.0479, 17 jams; `held_stackfix.json`) vs the claim's held 18.51 / 18.01 / 23.19:
++2.95 gate points out of sample too, so the stack cost is not a bench artefact. Held, it is still 0.92 under the lead's
+22.38 and 0.96 over freek-oracle-route's 20.50. (The held re-wear of the claim's own base was stopped at the time box;
+the claim's on-file held numbers are used for the pair.)
 
 ## 1. Every joint maps to a real component at its real envelope
 
@@ -44,7 +48,7 @@ the T-nut flange and the spring envelope are unmodelled (FLANGE_PLACEHOLDER). HE
 |---|---|---|---|
 | J1, J2, J3, K drive, two-pin knee, J3 dowel stop | the lead's verified O20 stacks / MR63ZZ pairs / ISO 8734 dowels (unchanged) | yes (lead) | as the lead |
 | relay track | made part: slotted circular Ti shell 1.5 x 12, R_t 79.9, arc [-109.5, -53.6] deg (56 deg, ~78 mm) | underside in band (303 samples, 1 / 4 mm2 = kit density), top contact / jam only | buildable as a machined / rolled part; no catalogue curved guide fits h_c 1.7 |
-| relay carriage | made part: T-nut carriage 24 x 14 on an iglidur strip, h_c 1.7 above the shell top | yes (contact / jam only, not in band) | **the T-nut's retaining flange under the shell is NOT modelled**: a carriage that is only above a 1.5 mm shell cannot be retained (the pad loads it both ways). The parent family's own model (armarc `flange`, 1 mm x 8 key, skin-facing) samples it; this model dropped it. Not priced (cheapest variant, ~0 expected on the chain-only gate: it sits 4.5 mm over the clip-p90 skin inside the liner) |
+| relay carriage | made part: T-nut carriage 24 x 14 on an iglidur strip, h_c 1.7 above the shell top | yes (contact / jam only, not in band) | **the T-nut's retaining flange under the shell is NOT modelled**: a carriage that is only above a 1.5 mm shell cannot be retained (the pad loads it both ways). The parent family's own model (armarc `flange`, 1 mm x 8 key, skin-facing) samples it; this model dropped it. Priced (`price_flange.json`): gate 14.40 unchanged, 0 new contacts, pooled ib14 0.9196 -> 0.9234 - an omission that costs nothing |
 | relay spring | "a constant-force spring, preload >= 0.063 N.m" (the parent doc: "CF class; part number to confirm") | **no** | no part number and no envelope. A real strip for ~0.8 N at R_t 80 over >= 55 mm of travel (0.05 mm 301 stainless, 8 wide, natural radius ~3 mm, bending stress ~1.6 GPa) coils to ~7-8 mm OD x 8 wide, standing ~8 mm proud of the shell top beyond the zero dowel (or riding the carriage, which would make h_c ~9). Placed arm-fixed beyond the zero dowel at the shell's station (centre R_t + D/2, arm azimuth lo - (D/2 + 1)/R_t), the
 coil clears every member-2 / 3 / 6 point at every fit pose at every relay angle by >= 17.1 mm (D 8) / 16.7 mm (D 5)
 (`coil.json`): it fits, at the price of an unsampled ~8 mm standing body ~15 mm off the skin. Riding on the carriage
@@ -130,14 +134,14 @@ R_t 80 - small, but it must be stated on the part).
   not a dilution, and 14.02 should not be quoted as the result; (d) the PHI 35 pick and the rt_extra 1.5 box edge are each
   one claim-bench reading (the fast sweep ranked PHI 25 > 30 > 35).
 
-## 7. Paired comparison (claim numbers; this lens did not re-run the held-out)
+## 7. Paired comparison (gate / plain; the lead and freek from their verified rows)
 
 | design | joints | frozen exact (gate / plain) | near1 | held | complexity |
 |---|---|---|---|---|---|
 | conecut-knee-knuckle-3r (lead) | 3 | 18.28 | - | 22.38 | 18.5 |
 | freek-oracle-route-knuckle-4r | 4 | polished 15.40 (16.20 frozen) | - | 20.50 | 33.25 |
 | proxtrack-relay-knuckle-4r (claim) | 4 | 14.40 / 14.02 | 17.68 | 18.51 / 18.01 | 52.5 |
-| proxtrack, buildable stack (this lens) | 4 | 17.46 / 14.40 | | not run | 52.5+ |
+| proxtrack, buildable stack (this lens) | 4 | 17.46 / 14.40 | 18.06 | 21.46 / 18.37 | 52.5 |
 
 ## Next
 

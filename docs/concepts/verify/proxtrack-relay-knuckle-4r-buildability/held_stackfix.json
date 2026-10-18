@@ -1,0 +1,826 @@
+{
+ "prepare_secs": 377.6,
+ "stackfix": {
+  "boss_lift_max": 5.69,
+  "knee_pts_raised": 35,
+  "knee_pts": 90
+ },
+ "variants": {
+  "stackfix": {
+   "wear": {
+    "gap": 18.37,
+    "reach": 0.7689,
+    "follow": 1.0,
+    "inband14": 0.8953,
+    "inband10": 0.5458,
+    "contact": 0.0479
+   },
+   "gate_gap": 21.46,
+   "ib14_gate": 0.8644,
+   "near1_gap": 23.75,
+   "near2_gap": 42.24,
+   "ws_taken": 732,
+   "overhead": [
+    18,
+    71
+   ],
+   "relayed": {
+    "n": 110,
+    "taken": 75,
+    "contact": 32,
+    "jam": 3,
+    "clip_relayed": 0,
+    "phi_max": 34.94
+   },
+   "why": {
+    "": 934,
+    "contact": 47,
+    "fold": 155,
+    "jam": 4,
+    "j3stop": 14
+   },
+   "min_metal_taken": 0.325,
+   "secs": 430.5,
+   "jams": 17,
+   "ib14_chain_only": 0.8644,
+   "bump_max_mm": 6.94,
+   "contacts": [
+    {
+     "i": 211,
+     "kind": "ws",
+     "pose": [
+      -90.0,
+      15.0,
+      165.0
+     ],
+     "phi": 0.0,
+     "min_mm": -0.73
+    },
+    {
+     "i": 224,
+     "kind": "ws",
+     "pose": [
+      -90.0,
+      60.0,
+      105.0
+     ],
+     "phi": 0.0,
+     "min_mm": -3.49
+    },
+    {
+     "i": 225,
+     "kind": "ws",
+     "pose": [
+      -90.0,
+      60.0,
+      120.0
+     ],
+     "phi": 0.0,
+     "min_mm": -5.51
+    },
+    {
+     "i": 252,
+     "kind": "ws",
+     "pose": [
+      -75.0,
+      60.0,
+      105.0
+     ],
+     "phi": 0.0,
+     "min_mm": -1.6
+    },
+    {
+     "i": 392,
+     "kind": "ws",
+     "pose": [
+      -15.0,
+      90.0,
+      30.0
+     ],
+     "phi": 16.4,
+     "min_mm": -2.75
+    },
+    {
+     "i": 397,
+     "kind": "ws",
+     "pose": [
+      -15.0,
+      105.0,
+      0.0
+     ],
+     "phi": 6.8,
+     "min_mm": -1.61
+    },
+    {
+     "i": 447,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      90.0,
+      30.0
+     ],
+     "phi": 0.0,
+     "min_mm": -0.21
+    },
+    {
+     "i": 453,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      105.0,
+      30.0
+     ],
+     "phi": 25.4,
+     "min_mm": -4.7
+    },
+    {
+     "i": 455,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      120.0,
+      -30.0
+     ],
+     "phi": 32.2,
+     "min_mm": -4.54
+    },
+    {
+     "i": 525,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      105.0,
+      15.0
+     ],
+     "phi": 0.0,
+     "min_mm": -0.86
+    },
+    {
+     "i": 528,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      120.0,
+      -15.0
+     ],
+     "phi": 21.1,
+     "min_mm": -2.23
+    },
+    {
+     "i": 529,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      120.0,
+      0.0
+     ],
+     "phi": 6.6,
+     "min_mm": -3.21
+    },
+    {
+     "i": 531,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      135.0,
+      -30.0
+     ],
+     "phi": 33.3,
+     "min_mm": -11.84
+    },
+    {
+     "i": 532,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      135.0,
+      -15.0
+     ],
+     "phi": 18.5,
+     "min_mm": -12.23
+    },
+    {
+     "i": 534,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      150.0,
+      -60.0
+     ],
+     "phi": 0.0,
+     "min_mm": -7.08
+    },
+    {
+     "i": 604,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      135.0,
+      -15.0
+     ],
+     "phi": 25.9,
+     "min_mm": -9.15
+    },
+    {
+     "i": 607,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      150.0,
+      -45.0
+     ],
+     "phi": 0.0,
+     "min_mm": -5.39
+    },
+    {
+     "i": 610,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -45.0
+     ],
+     "phi": 0.0,
+     "min_mm": -9.13
+    },
+    {
+     "i": 676,
+     "kind": "ws",
+     "pose": [
+      45.0,
+      135.0,
+      -15.0
+     ],
+     "phi": 33.1,
+     "min_mm": -5.91
+    },
+    {
+     "i": 682,
+     "kind": "ws",
+     "pose": [
+      45.0,
+      165.0,
+      -45.0
+     ],
+     "phi": 0.0,
+     "min_mm": -5.85
+    },
+    {
+     "i": 683,
+     "kind": "ws",
+     "pose": [
+      45.0,
+      165.0,
+      -30.0
+     ],
+     "phi": 0.0,
+     "min_mm": -9.86
+    },
+    {
+     "i": 752,
+     "kind": "ws",
+     "pose": [
+      60.0,
+      165.0,
+      -105.0
+     ],
+     "phi": 5.4,
+     "min_mm": -0.97
+    },
+    {
+     "i": 755,
+     "kind": "ws",
+     "pose": [
+      60.0,
+      165.0,
+      -30.0
+     ],
+     "phi": 0.0,
+     "min_mm": -6.92
+    },
+    {
+     "i": 819,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      150.0,
+      -120.0
+     ],
+     "phi": 24.8,
+     "min_mm": -0.18
+    },
+    {
+     "i": 820,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      150.0,
+      -90.0
+     ],
+     "phi": 0.0,
+     "min_mm": -0.18
+    },
+    {
+     "i": 824,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      165.0,
+      -105.0
+     ],
+     "phi": 20.5,
+     "min_mm": -0.42
+    },
+    {
+     "i": 835,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      15.0,
+      -150.0
+     ],
+     "phi": 0.0,
+     "min_mm": -3.55
+    },
+    {
+     "i": 842,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      30.0,
+      -150.0
+     ],
+     "phi": 25.9,
+     "min_mm": -5.15
+    },
+    {
+     "i": 891,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      150.0,
+      -105.0
+     ],
+     "phi": 21.0,
+     "min_mm": -0.32
+    },
+    {
+     "i": 892,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      150.0,
+      -90.0
+     ],
+     "phi": 4.4,
+     "min_mm": -1.38
+    },
+    {
+     "i": 897,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      165.0,
+      -75.0
+     ],
+     "phi": 1.9,
+     "min_mm": -1.79
+    },
+    {
+     "i": 906,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      15.0,
+      -165.0
+     ],
+     "phi": 5.6,
+     "min_mm": -4.57
+    },
+    {
+     "i": 914,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      30.0,
+      -150.0
+     ],
+     "phi": 23.3,
+     "min_mm": -2.11
+    },
+    {
+     "i": 960,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      135.0,
+      -105.0
+     ],
+     "phi": 23.0,
+     "min_mm": -0.16
+    },
+    {
+     "i": 964,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      150.0,
+      -90.0
+     ],
+     "phi": 18.2,
+     "min_mm": -0.87
+    },
+    {
+     "i": 965,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      150.0,
+      -75.0
+     ],
+     "phi": 1.5,
+     "min_mm": -1.5
+    },
+    {
+     "i": 977,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      15.0,
+      -180.0
+     ],
+     "phi": 10.4,
+     "min_mm": -6.28
+    },
+    {
+     "i": 978,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      15.0,
+      -165.0
+     ],
+     "phi": 0.0,
+     "min_mm": -1.33
+    },
+    {
+     "i": 1032,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      135.0,
+      -105.0
+     ],
+     "phi": 33.1,
+     "min_mm": -2.05
+    },
+    {
+     "i": 1091,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      120.0,
+      -105.0
+     ],
+     "phi": 28.8,
+     "min_mm": -0.34
+    },
+    {
+     "i": 1098,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      135.0,
+      -75.0
+     ],
+     "phi": 11.8,
+     "min_mm": -0.5
+    },
+    {
+     "i": 1121,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      45.0,
+      -120.0
+     ],
+     "phi": 33.9,
+     "min_mm": -10.7
+    },
+    {
+     "i": 1127,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      60.0,
+      -105.0
+     ],
+     "phi": 23.2,
+     "min_mm": -9.58
+    },
+    {
+     "i": 1134,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      75.0,
+      -105.0
+     ],
+     "phi": 25.6,
+     "min_mm": -9.3
+    },
+    {
+     "i": 1135,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      75.0,
+      -90.0
+     ],
+     "phi": 9.8,
+     "min_mm": -1.07
+    },
+    {
+     "i": 1140,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      90.0,
+      -105.0
+     ],
+     "phi": 26.8,
+     "min_mm": -9.61
+    },
+    {
+     "i": 1153,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      120.0,
+      -75.0
+     ],
+     "phi": 3.1,
+     "min_mm": -1.09
+    }
+   ],
+   "jam_list": [
+    {
+     "i": 610,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -45.0
+     ],
+     "track_mm": 1.0,
+     "track_part": "boss",
+     "carriage_mm": 2.46,
+     "carriage_part": "E",
+     "phi": 0.0,
+     "metal_min_mm": -9.13
+    },
+    {
+     "i": 683,
+     "kind": "ws",
+     "pose": [
+      45.0,
+      165.0,
+      -30.0
+     ],
+     "track_mm": 0.98,
+     "track_part": "boss",
+     "carriage_mm": 2.36,
+     "carriage_part": "E",
+     "phi": 0.0,
+     "metal_min_mm": -9.86
+    },
+    {
+     "i": 752,
+     "kind": "ws",
+     "pose": [
+      60.0,
+      165.0,
+      -105.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.41,
+     "carriage_part": "E",
+     "phi": 5.4,
+     "metal_min_mm": -0.97
+    },
+    {
+     "i": 819,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      150.0,
+      -120.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.42,
+     "carriage_part": "E",
+     "phi": 24.8,
+     "metal_min_mm": -0.18
+    },
+    {
+     "i": 824,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      165.0,
+      -105.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.42,
+     "carriage_part": "E",
+     "phi": 20.5,
+     "metal_min_mm": -0.42
+    },
+    {
+     "i": 891,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      150.0,
+      -105.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.41,
+     "carriage_part": "E",
+     "phi": 21.0,
+     "metal_min_mm": -0.32
+    },
+    {
+     "i": 892,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      150.0,
+      -90.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.41,
+     "carriage_part": "E",
+     "phi": 4.4,
+     "metal_min_mm": -1.38
+    },
+    {
+     "i": 897,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      165.0,
+      -75.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.42,
+     "carriage_part": "E",
+     "phi": 1.9,
+     "metal_min_mm": -1.79
+    },
+    {
+     "i": 960,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      135.0,
+      -105.0
+     ],
+     "track_mm": 0.97,
+     "track_part": "boss",
+     "carriage_mm": 2.36,
+     "carriage_part": "E",
+     "phi": 23.0,
+     "metal_min_mm": -0.16
+    },
+    {
+     "i": 964,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      150.0,
+      -90.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.42,
+     "carriage_part": "E",
+     "phi": 18.2,
+     "metal_min_mm": -0.87
+    },
+    {
+     "i": 965,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      150.0,
+      -75.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.42,
+     "carriage_part": "E",
+     "phi": 1.5,
+     "metal_min_mm": -1.5
+    },
+    {
+     "i": 969,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      165.0,
+      -75.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.42,
+     "carriage_part": "E",
+     "phi": 20.1,
+     "metal_min_mm": 0.24
+    },
+    {
+     "i": 1092,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      120.0,
+      -90.0
+     ],
+     "track_mm": 0.99,
+     "track_part": "boss",
+     "carriage_mm": 2.39,
+     "carriage_part": "E",
+     "phi": 14.8,
+     "metal_min_mm": 1.8
+    },
+    {
+     "i": 1098,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      135.0,
+      -75.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.42,
+     "carriage_part": "E",
+     "phi": 11.8,
+     "metal_min_mm": -0.5
+    },
+    {
+     "i": 1099,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      135.0,
+      -60.0
+     ],
+     "track_mm": 0.98,
+     "track_part": "boss",
+     "carriage_mm": 2.37,
+     "carriage_part": "E",
+     "phi": 0.0,
+     "metal_min_mm": 0.76
+    },
+    {
+     "i": 1152,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      120.0,
+      -90.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.42,
+     "carriage_part": "E",
+     "phi": 19.6,
+     "metal_min_mm": 0.88
+    },
+    {
+     "i": 1153,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      120.0,
+      -75.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.42,
+     "carriage_part": "E",
+     "phi": 3.1,
+     "metal_min_mm": -1.09
+    }
+   ],
+   "continuity_dropped": 0
+  }
+ }
+}
