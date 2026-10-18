@@ -8,6 +8,7 @@
  * the window at which it closes with the J0-J1-J3 sub-chain >= 5 deg from its fold (the model's relay_candidates).
  * Numbers: frozen exact Bench(110,360) REAL 22.18 (ghost 16.07-16.22; the 3-joint lead 18.28); a0 20 / azu 45 (the ghost's
  * seat) 24.92. DEAD (Gate 0, > 17.5): hub 0 cannot come into band at any legal seat. Row: docs/concepts/rows/lead-relay-j0-4r.json.
+ * The preview's q0 search uses the viz's tabulated drive law, so its relay angles sit within ~0-7 deg of the model's.
  * Model: docs/concepts/models/lead-relay-j0-4r.py. 4 counted joints (the user prefers 3), 0 passive translations. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;
@@ -92,18 +93,18 @@
   /** policy (ii): q0 = 0 if the lead's chain closes; else the least |q0| in [lo, hi] (1-deg steps) where it closes and
    *  the J0-J1-J3 sub-chain keeps >= 5 deg from its own fold; none -> drawn at q0 = 0 (red) */
   function sub(ctx, q0) {
-    const w = M.mulv(M.mul(M.T(ctx.S), ctx.H), u[2]), g = V.angle(w, cAx) / D2R, th = V.angle(w, M.mulv(M.rot(cAx, q0 * D2R), u[0])) / D2R;
+    const w = M.mulv(M.mul(M.T(ctx.S), ctx.H), u[2]), g = V.angle(w, cAx), th = V.angle(w, M.mulv(M.rot(cAx, q0), u[0]));   // V.angle: deg
     return Math.min(g - Math.abs(RL.a0 - th), RL.a0 + th - g);
   }
   function relay(ctx) {
-    const tryq = q0 => { RC = M.rot(cAx, q0 * D2R); const q = solve3(ctx); return check3(q, ctx) === null && (q0 === 0 || sub(ctx, q0) >= 5) ? q : null; };
+    const tryq = q0 => { RC = M.rot(cAx, q0); const q = solve3(ctx); return check3(q, ctx) === null && (q0 === 0 || sub(ctx, q0) >= 5) ? q : null; };
     let q = tryq(0); if (q) return [0].concat(q);
     for (let a = 1; a <= Math.max(-RL.lo, RL.hi); a++) for (const q0 of [-a, a]) {
       if (q0 < RL.lo || q0 > RL.hi) continue; q = tryq(q0); if (q) return [q0].concat(q);
     }
     RC = M.I3(); return [0].concat(solve3(ctx));
   }
-  const setRC = q => { RC = M.rot(cAx, q[0] * D2R); };
+  const setRC = q => { RC = M.rot(cAx, q[0]); };   // M.rot takes degrees
   const solve = ctx => relay(ctx);
   const check = (q, ctx) => {
     setRC(q); const r = check3(q.slice(1), ctx);

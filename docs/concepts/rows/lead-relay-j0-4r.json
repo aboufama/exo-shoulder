@@ -8,27 +8,27 @@
  "passive_translations": 0,
  "status": "dead",
  "t_ideated": "2026-10-18T01:42:28Z",
- "t_screened": "2026-10-18T02:03:35Z",
- "reach": 0.7639,
+ "t_screened": "2026-10-18T02:15:29Z",
+ "reach": 0.7583,
  "follow": 1.0,
- "inband14": 0.8171,
- "inband10": 0.5203,
- "contact": 0.0302,
- "gap": 24.92,
+ "inband14": 0.8404,
+ "inband10": 0.5352,
+ "contact": 0.0205,
+ "gap": 22.18,
  "bench": "Bench(110,360) exact, frozen lead shape (fit Bench(60,160) fast), stop window picked on Bench(60,160)",
  "v_reach": null,
  "v_follow": null,
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 144,
+ "n_configs": 210,
  "best_params": {
-  "a0": 20.0,
+  "a0": 10.0,
   "azu": 45.0,
-  "lo": -59.0,
-  "hi": 18.0,
-  "r0": 78.5,
-  "post_h": 14.3,
+  "lo": -60.0,
+  "hi": 42.0,
+  "r0": 88.0,
+  "post_h": 23.8,
   "lead": {
    "stk": 6.0,
    "lE": 97.1443,
@@ -40,6 +40,73 @@
   }
  },
  "claims": {
+  "claim_a10_z45.json": {
+   "a0": 10.0,
+   "azu": 45.0,
+   "window": [
+    -60.0,
+    42.0
+   ],
+   "real": {
+    "gap": 22.18,
+    "reach": 0.7583,
+    "follow": 1.0,
+    "inband14": 0.8404,
+    "inband10": 0.5352,
+    "contact": 0.0205,
+    "ws_taken": 273,
+    "contacts": 8,
+    "overhead": "8/28",
+    "relay_taken": 11,
+    "relay_contact": 4,
+    "relay_stop": 1,
+    "relay_parts": 0,
+    "x_parts": 0,
+    "q0_range": [
+     -53.0,
+     41.0
+    ]
+   },
+   "ghost": {
+    "gap": 16.22,
+    "reach": 0.7583,
+    "inband14": 0.9012,
+    "contact": 0.0205,
+    "ws_taken": 273,
+    "contacts": 8,
+    "overhead": "8/28"
+   },
+   "q0_zero_real": {
+    "gap": 24.24,
+    "reach": 0.7278,
+    "inband14": 0.8404,
+    "contact": 0.0106
+   },
+   "parts_inband": {
+    "chain": [
+     0.901,
+     9.3,
+     2.0
+    ],
+    "hub0_link0": [
+     0.0,
+     40.5,
+     30.4
+    ]
+   },
+   "near_touch_min_mm": 0.072,
+   "hub0": {
+    "r0": 88.0,
+    "link_len": 15.1,
+    "post_h": 23.8,
+    "n_x": 71
+   },
+   "xlog_min": {
+    "hub0": 14.49,
+    "link0": 6.97,
+    "wall": 17.88
+   }
+  },
   "claim_a20_z45.json": {
    "a0": 20.0,
    "azu": 45.0,
@@ -106,18 +173,85 @@
     "link0": -1.56,
     "wall": 9.43
    }
+  },
+  "claim_a7.5_z30.json": {
+   "a0": 7.5,
+   "azu": 30.0,
+   "window": [
+    -56.0,
+    9.0
+   ],
+   "real": {
+    "gap": 22.95,
+    "reach": 0.7306,
+    "follow": 1.0,
+    "inband14": 0.8583,
+    "inband10": 0.5461,
+    "contact": 0.0184,
+    "ws_taken": 263,
+    "contacts": 7,
+    "overhead": "8/28",
+    "relay_taken": 3,
+    "relay_contact": 3,
+    "relay_stop": 2,
+    "relay_parts": 0,
+    "x_parts": 2,
+    "q0_range": [
+     -41.0,
+     -12.0
+    ]
+   },
+   "ghost": {
+    "gap": 18.22,
+    "reach": 0.7361,
+    "inband14": 0.9012,
+    "contact": 0.0183,
+    "ws_taken": 265,
+    "contacts": 7,
+    "overhead": "8/28"
+   },
+   "q0_zero_real": {
+    "gap": 23.02,
+    "reach": 0.7222,
+    "inband14": 0.8583,
+    "contact": 0.0107
+   },
+   "parts_inband": {
+    "chain": [
+     0.901,
+     9.3,
+     2.0
+    ],
+    "hub0_link0": [
+     0.017,
+     19.3,
+     12.8
+    ]
+   },
+   "near_touch_min_mm": 0.072,
+   "hub0": {
+    "r0": 65.5,
+    "link_len": 8.4,
+    "post_h": 1.3,
+    "n_x": 50
+   },
+   "xlog_min": {
+    "hub0": -1.09,
+    "link0": 1.1,
+    "wall": 10.61
+   }
   }
  },
  "gate": {
-  "n": 143,
-  "gain_second_half": 1.215,
-  "gain_last_third": 1.215,
-  "top5_spread": 0.56,
+  "n": 207,
+  "gain_second_half": 0.0,
+  "gain_last_third": 0.0,
+  "top5_spread": 0.265,
   "best_fit_gap": 14.03
  },
- "verdict": "PRELIMINARY (a0 10 seat wear running): REAL 24.92 frozen exact Bench(110,360) at the ghost's seat a0 20 / azu 45 (window [-59, +18] picked on Bench(60,160)) - over the 17.5 kill bar and 6.6 worse than the 3-joint lead (18.28); ghost 16.07.",
- "limiter": "hub 0 + link 0 in-band dilution: 101 skin-facing samples per pose, 0 % in band (median 28.8 mm over the skin), ib14 0.9012 -> 0.8171 = +8.4 points; relays put chain metal into the skin on 8 of 23 relayed poses",
- "note": "preliminary",
+ "verdict": "DEAD (Gate 0). Real O20 hub 0 + link 0 worn under the frozen lead on exact Bench(110,360), stop window picked on Bench(60,160): best seat a0 10 / azu 45 22.18 (ghost 16.22); the ghost's own seat a0 20 / azu 45 24.92 (ghost 16.07); lowest hub a0 7.5 / azu 30 22.95 (ghost 18.22). All over the 17.5 kill bar and 3.9+ over the 3-joint lead (18.28). Lens 1 (relay under the lead) closes with a metal number. 4 counted joints; complexity 50.75.",
+ "limiter": "hub 0 (grounded, binding part): it must ride above the annulus J1 sweeps with hub K / hub 2 / L1b / crank, so r0 is 65.5-120.5 mm at all 108 legal seats (17-55 mm over the skin, 0-2 % in band); its 50-101 skin-facing samples per pose (with link 0) cost 4.2-8.4 points of ib14 (0.9012 -> 0.8404 at the best seat), against a relay gain of at most 2.2 points (+11-15 ws takes, +4-8 skin contacts on relayed poses)",
+ "note": "Fit bench Bench(60,160) fast: lead 12.50; hub 0 + link 0 at q0 = 0 20.83 (a0 20); best real seat a0 10 / azu 45 14.03 (window [-60, +42]); 207 configurations (99 windows at a0 20, 66-seat grid, 14-seat refinement, 48-seat random sample in a0 5-15). Convergence gate (fit bench, evaluation order): gain over 2nd half 0.0, over last third 0.0, top-5 spread 0.27 score points - passes; windows enumerated exhaustively per seat. Claim protocol: lead fitted on Bench(60,160) fast and frozen; hub 0's r0 derived on the fit bench (skin >= 2 mm on every pose, chain >= 1 mm on every pose the lead takes); window from the fit bench; relayed skin hits counted as contacts; hub-0 / link-0 part clashes lose the pose (2 poses at a0 20 and a0 7.5). Ghost (zero-size J0) composed from the same records reproduces the judge's class (16.07 vs 15.78-15.90 in-sample) and q0 = 0 without hub 0 returns the lead's 18.28. Link 0 as specified (descending bent bar) clashed with hub K on 47/160 fit poses; built as a turned standoff post on J1's housing crown + flat bar under hub 0. Overhead 8/28 at every seat (no overhead pose relayed). Near-touch min 0.054-0.072 mm (the lead's T1 class); 4 relayed takes within 1 mm at a0 20. Continuity flood not run (connected <= static, cannot rescue). Spring 0.95 wire D22 x6: ~0.019 N m/rad, ~0.10 N m at the window end (~0.7 N at the cuff, ~13 N at the J3 dowel / nose).",
  "doc": "docs/concepts/lead-relay-j0-4r.md",
  "complexity": 50.75,
  "mechanism": {

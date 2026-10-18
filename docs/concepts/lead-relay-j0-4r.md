@@ -104,7 +104,7 @@ All fit-bench numbers. Lead alone: 12.50. Hub 0's r0 is derived per seat.
 | 15-30 / 120-240 | - | - | - | - | - | J0 seat rule fails |
 
 The full table is the sweep file. On top of the 11 x 6 grid there is a 14-seat refinement around a0 10 and a 48-seat
-random sample in a0 5-15. **Hub 0 never comes into band**: r0 is 65.5-120.5 mm over every legal seat, against a skin
+random sample in a0 5-15 (45 legal). The random sample's best is 14.13 at a0 7.2 / azu 355, with r0 65.5 again. **Hub 0 never comes into band**: r0 is 65.5-120.5 mm over every legal seat, against a skin
 on c at 45-57 mm. The reason is structural:
 
 - J1 turns the whole distal chain about u1, so hub K (15-33 mm off u1, crown about 67 mm from GH), hub 2 (31-46 mm off
@@ -119,7 +119,7 @@ on c at 45-57 mm. The reason is structural:
 | lead alone, 3 joints (verified) | - | **18.28** | 0.7278 (262) | 0.9012 | 4 | - | - |
 | 20 / 45 (the ghost's seat) | [-59, +18] | **24.92** | 0.7639 (275) | 0.8171 | 12 | 16.07 | median 28.8 mm, min 18.1 |
 | 10 / 45 (best fit seat) | [-60, +42] | **22.18** | 0.7583 (273) | 0.8404 | 8 | 16.22 | median 40.5 mm, min 30.4 |
-| 7.5 / 30 (lowest hub) | [-56, +9] | A7GAP | A7REACH | A7IB | A7CT | A7GHOST | A7HUB |
+| 7.5 / 30 (lowest hub) | [-56, +9] | **22.95** | 0.7306 (263) | 0.8583 | 7 | 18.22 | median 19.3 mm, min 12.8 (1.7 % in band) |
 
 Overhead stays 8/28 at every seat: no overhead pose is relayed. Follow stays 1.0.
 
@@ -165,3 +165,62 @@ was picked on the fit bench. At q0 = 0 with hub 0 stripped, the composition retu
 - **Gaming check (auditor's eye).** The window was never picked on the claim bench. Relayed skin hits stay contacts.
   Parts clashes caused by hub 0 lose the pose; they are not dropped. Hub 0's samples are counted in in-band with the
   same 1 / 4 mm2 density as the lead's hubs (25 exposed underside samples + the bar's 46-76).
+
+## 5. Verdict
+
+**DEAD.** Gate 0: every real-metal wear is worse than 17.5 frozen exact, and every one is worse than the 3-joint lead.
+
+| claim | REAL | ghost |
+|---|---|---|
+| best seat, a0 10 / azu 45 | **22.18** | 16.22 |
+| the ghost's own seat, a0 20 / azu 45 | 24.92 | 16.07 |
+| lowest hub, a0 7.5 / azu 30 | 22.95 | 18.22 |
+| 3-joint lead (reference) | 18.28 | - |
+
+Lens 1 closes with this number, and the binding part is **hub 0**.
+
+- Hub 0 is grounded, so it sits at a fixed height over the skin. That height is 65.5-120.5 mm from GH at every one of
+  the 108 legal seats tried, 17-55 mm over the skin and 0-2 % in band.
+- Its 50-101 skin-facing samples per pose (hub underside + link 0) cost 4.2-8.4 points of in-band.
+- The relay itself buys at most 2.2 points (ghost 16.07-16.22 vs the lead's 18.28), because it adds 4-8 skin contacts
+  on the poses it relays.
+
+**Even the oracle cannot pass.** At the ghost's seat, the judge's policy-(i) bound (any feasible q0, 13.35) plus the
+measured dilution there (+8.4) is 21.8, still over 17.5.
+
+**Convergence gate** (Bench(60,160) fast, 207 configurations in evaluation order: the a0 20 window enumeration, the
+seat grid, the refinement and the random sample):
+
+| check | measured | gate |
+|---|---|---|
+| best gain over the second half | 0.0 score points | < 1 |
+| best gain over the last third | 0.0 | < 0.5 |
+| top-5 spread | 0.27 | < 3 |
+
+Every stop window is enumerated exhaustively per seat.
+
+**Not run:** the continuity flood. Connected reach can only be <= static reach, so it cannot rescue a number already
+over the bar.
+
+## 6. New knowledge (predicts beyond this morphology)
+
+1. **A grounded relay hub cannot sit in band beside a hub that turns its own neighbours.**
+   - J1 sweeps hub K (15-33 mm off J1's axis, crown about 67 mm from GH), hub 2 (31-46 mm off), L1b and the crank around
+     J1's axis.
+   - Any grounded O20 hub whose axis is 7-40 deg from J1's lies in that annulus and must ride above it: r0 >= 65.5 mm,
+     >= 17 mm over the skin. Below a0 ~5 no relay closes the chain at all.
+   - So a base relay under a knuckle host (or any host whose first link carries a hub within ~35 mm of J1) is either
+     stacked inside J1's footprint (lead-relay-wobble-4r: lifts hub 1 out of band), outside the annulus (a0 >= ~45:
+     lead-relay-backbridge-4r), or floating (this cell, >= 4 points of dilution).
+2. **The link from a floating relay hub to J1 cannot be a bent bar.**
+   - The spec's 20-deg descending bar clashed with hub K on 47 of 160 fit poses.
+   - The only clear route is a turned standoff post inside J1's own footprint (1.3-23.8 mm tall), then a flat bar
+     under the relay hub.
+3. **A spring-centred relay at the K drive's stroke wall takes the stretched poses at the cost of skin contacts.**
+   - Of 23 relayed poses at a0 20, 15 are taken and 8 drive L2 / E into the skin (0.6-5.7 mm). Of 15 at a0 10, 11 are
+     taken and 4 go into the skin.
+   - 4 of the relayed takes sit within 1 mm of the skin.
+   - A relay must be judged on its contacts, not on its takes.
+4. **Ghost vs metal is a trade along a0.** A lower hub (small a0) means fewer relays: at a0 7.5 there are 8 candidates
+   and 3 takes, so the ghost is 18.22, no gain. A larger a0 means a longer link 0 and more dilution: ib14 0.74 at a0 30-40.
+   The best real seat (a0 10) still sits 3.9 over the lead.
