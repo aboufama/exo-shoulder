@@ -515,6 +515,21 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      - lens b, one outside-field mechanism, only if it passes the pricing;
      - machinery fixes: the verify bar is the lead's 18.28, near-touch objective everywhere, and a ledger entry for
        each round winner.
+   - *Lead, 05:20 UTC 10-18:* the gen-9 CAD of desmo-conecut-knuckle-3r (wf_1cb39fa0-d38) is done: L1
+     l1_desmo-conecut and full user_desmo_conecut, judged, with EVOLUTION row, snapshot and VERIFY.md. No render; stills
+     still wait on the user's yes.
+     - The full CAD scores R1 81.8 / R1-aim 52.3 / R4 74.8; gen 8 scored 81.6 / 52.7 / 74.1. R7 PASS.
+     - **R6 FAILS at 1.50 mm.** The model puts the stage-1 groove layer inside link 1b's J2 lower plate (F+0.11..F+1.61),
+       and no feasible pin exists above link 1b (stage1_level_scan.json). So the verified stage 1 cannot be built in
+       the v5 stack.
+     - The model's ring2 samples sit +7.28 deg off link 2's true frame. That sector carries +0.67 of the claim's in-band.
+     - The K play (0.16-0.28 deg, no spring) puts the held-out th margin at 4.915 / 4.893.
+     - The independent check: not refuted as a record of the verified model, and not buildable as the CAD itself says.
+     - These may make the verified 18.98 optimistic, so a targeted alignment audit is running (wf_bd60ecda-9e0; the
+       lead is the reference). The lead conecut-knee is not affected: it has a different K drive, and its gen-8 CAD
+       passes R6.
+     - Open drive items from the CAD's red team: the stage-1 ridge reaches 3.8 GPa against 440C's ~3.0 GPa limit, and
+       a +0.25 deg K lead with kslot 46.9 needs a verified re-wear.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
