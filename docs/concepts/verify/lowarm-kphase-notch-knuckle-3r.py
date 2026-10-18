@@ -113,6 +113,28 @@ def setup():
     if OPT["own"]: K.notch_samples = notch_samples_own
 
 
+def th_margin_sided(V, delta):
+    """V3b: the fold margin th (tools/concept_kit.py lines 25-30) with a dwell flag that does not key on dK != 0: a dwell pose
+    carries dK = sp * delta exactly (PlayDesign), so it is read with the EFFECTIVE dyad (a1e = angle(u1, R1b u2), a2e) like a
+    forced pose's J1-J3 dyad, and the K sub-dyad m_sub (the lead's G4 WATCH item, ~0 on rest poses) is reported apart"""
+    fit, M1, M, B, r = V.CAP["res"]; D = M.D; u1, u2, u3 = D.u; uK = D.uK
+    sp = float(M._scg["sp"]) if getattr(M, "_scg", None) else 1.0; dKd = sp * math.radians(delta)
+    rows = []
+    for i in V.taken_of(B):
+        R1, _ = M.T(1, i); R1b, _ = M.T(7, i); R2, _ = M.T(2, i)
+        jK = R1 @ uK; j2 = R1b @ u2; j3 = R2 @ u3
+        th = V._ang(u1, j3); a1e = V._ang(u1, j2); a2e = V._ang(j2, j3); b1 = V._ang(u1, jK); c = V._ang(jK, j3)
+        dk = float(M.dK[i]); dwell = abs(dk - dKd) < 1e-6
+        m3 = V._dm(th, a1e, a2e); msub = V._dm(th, b1, c)
+        rows.append(dict(i=int(i), dwell=bool(dwell), th=round(th, 2), dK=round(math.degrees(dk), 3), m_th=round(m3, 3), m_sub=round(msub, 3),
+                         own=round(m3 if dwell else min(m3, msub), 3)))
+    dw = [x for x in rows if x["dwell"]]; fo = [x for x in rows if not x["dwell"]]
+    return dict(n=len(rows), n_dwell=len(dw), n_forced=len(fo), min_th_dwell=min([x["m_th"] for x in dw] or [None]),
+                min_own_forced=min([x["own"] for x in fo] or [None]), lt5_dwell=sum(1 for x in dw if x["m_th"] < 5 - 1e-6),
+                lt5_forced=sum(1 for x in fo if x["own"] < 5 - 1e-6), msub_lt1_dwell=sum(1 for x in dw if x["m_sub"] < 1.0),
+                lowest_dwell=sorted(dw, key=lambda x: x["m_th"])[:4], lowest_forced=sorted(fo, key=lambda x: x["own"])[:4])
+
+
 def flood(V):
     fit, M1, M, B, r = V.CAP["res"]
     MECH = _load("minarc_mech_for_kphase_v", os.path.join(HERE, "minarc-stop-knuckle-4r-mechanism.py"))
@@ -132,8 +154,9 @@ if __name__ == "__main__":
         dump = sys.argv[sys.argv.index("--dump") + 1] if "--dump" in sys.argv else None
         o = KS.wear(d, which, dump, dict(BEST))
         V = INFO.pop("_V")
+        o["v3b_th_margin"] = th_margin_sided(V, d)
         if "--flood" in sys.argv: o["connected"] = flood(V)
         o["verify"] = dict(opt=dict(OPT), notch=dict(K.NOTCH), dowel_K=KS.DOWEL_K, info={k: v for k, v in INFO.items()})
         json.dump(o, open(outp, "w"), indent=1, default=float)
-        print(json.dumps({k: o.get(k) for k in ("delta", "wear", "frozen", "dowel", "named", "recomputed", "secs", "verify", "connected")}
+        print(json.dumps({k: o.get(k) for k in ("delta", "wear", "frozen", "dowel", "named", "recomputed", "secs", "verify", "connected", "v3b_th_margin")}
                          | {"v": {k: (o["verifier"] or {}).get(k) for k in ("why", "overhead", "near1", "minmetal", "contacts")}}, default=float))
