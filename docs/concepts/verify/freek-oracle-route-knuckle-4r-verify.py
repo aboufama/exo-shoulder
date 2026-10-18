@@ -109,6 +109,32 @@ def flood_connected(Mk, B, tk):
                 near=ntc["gap_near1"], ws_taken=sum(1 for i in tk if B.kind[i] == "ws") - len(drop), edges=stats)
 
 
+def kin_nodes_model(D, Q, R_tol):
+    """RM.kin_nodes with ONE fold reading = the model's: in state 2 (J3 on its dowel, J2 free, K free) the moving chain is the
+    J1-K-J2 wrist, so the margin is the effective dyad's th margin m3e (+ the K dyad, held by stop B); the J1-K-J3 sub-chain
+    margin (J2 rigid) is the state-1 reading and is kept for state 1 only"""
+    u1, u2, u3 = D.u; uK = D.uK; ang, dmargin, PKm = RM.ang, RM.dmargin, PK
+    q, ok, X1, X2, X3, s = D.ik(Q)
+    st = D._state.copy(); K = D.knee(s); X1b = D._X1b[0]; m3e = np.asarray(D._m3e, float).copy()
+    ok = ok & K["ok"] & (np.abs(s[:, 2]) <= R_tol)
+    c = (np.einsum("nij,nij->n", X3[0], Q) - 1) / 2; ok &= np.degrees(np.arccos(np.clip(c, -1, 1))) < 0.5
+    j3 = np.einsum("nij,j->ni", X2[0], u3); j2 = np.einsum("nij,j->ni", X1b, u2); jK = np.einsum("nij,j->ni", X1[0], uK)
+    th = ang(u1[None], j3); a1e = ang(u1[None], j2); a2e = ang(j2, j3); b1 = ang(u1[None], jK); cc = ang(jK, j3)
+    fam = np.minimum(dmargin(th, b1, cc), dmargin(th, a1e, a2e))
+    own = np.where(st == 2, dmargin(th, a1e, a2e), np.where(st != 0, fam, dmargin(th, D.a1, D.a2)))
+    lo, hi = sorted(D.q2_stops); q2 = np.degrees(PKm.wrap(q[:, 1]))
+    if not VDesign.STATE2_SLOT: q2ok = (q2 >= lo - 0.05) & (q2 <= hi + 0.05)
+    else: q2ok = np.where(st == 2, True, (q2 >= lo - 0.05) & (q2 <= hi + 0.05))
+    ok &= (own >= RM.M5 - 1e-6) & q2ok
+    dKd = np.degrees(D._dK)
+    qq = np.c_[np.degrees(q[:, :2]), np.degrees(q[:, 2] + K["phi"]), np.degrees(K["qa"]), np.degrees(K["qb"]), dKd]
+    C2 = s[:, :2]; a = C2 - K["pa"]; b = K["B2"][None] - K["pa"]; sgn = np.sign(a[:, 0] * b[:, 1] - a[:, 1] * b[:, 0])
+    return ok, qq, sgn, st, own
+
+
+VDesign.STATE2_SLOT = False
+
+
 def m_of_claim_fit(q3max):
     """the knee reference m of the claim's own cell-B fit (q3 reading) - used as m_fix so the q3' stop and the knee agree"""
     VDesign.OWN = False; P = FO.params({"q3max": q3max}); P.pop("_seed", None)
@@ -160,6 +186,10 @@ if __name__ == "__main__":
                        note="cell B as claimed (stop on the model's q3 = cuff vs link 2; = J3 own angle q3' = q3 + phi, phi a function of q3 alone); "
                             "static per-pose; connected_dropped = ws poses the kinematic flood fill drops"), open(rp, "w"), default=float)
         r["dump"] = os.path.relpath(rp, REPO); r["recomputed"] = AP.gap_parts(poses)
+    elif mode == "conn_model":                               # the claim's cell B, connected under ONE (the model's) fold reading
+        RM.kin_nodes = kin_nodes_model
+        B = RM.PV.held_bench() if arg == "held" else CB.Bench(n_clip=110, n_ws=360)
+        r, M = law(B, 86.0, own=False, conn=True)
     elif mode == "wear":                                     # q3' stop, frozen on Bench(110,360) exact (or held out)
         B = RM.PV.held_bench() if extra == "held" else CB.Bench(n_clip=110, n_ws=360)
         mf = m_of_claim_fit(float(arg)); r, M = law(B, float(arg), own=True, mfix=mf, conn=True); r["m_fix"] = mf
