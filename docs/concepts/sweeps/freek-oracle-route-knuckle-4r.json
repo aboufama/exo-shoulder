@@ -1868,5 +1868,242 @@
     "contact": 0.0359
    }
   }
+ },
+ {
+  "k": 52,
+  "t": "2026-10-18T06:02:14Z",
+  "params": {
+   "seed": "k56"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.9017,
+  "inband10": 0.5624,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0547,
+  "gap": 13.47,
+  "extra": {
+   "plain": 12.34,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.432,
+   "moved": 20,
+   "why": {
+    "fold": 13,
+    "slide": 6,
+    "contact": 11
+   },
+   "kit": {
+    "gap": 13.57,
+    "plain": 12.44,
+    "reach": 0.8125,
+    "inband14": 0.8992,
+    "contact": 0.0361
+   }
+  }
+ },
+ {
+  "k": 53,
+  "t": "2026-10-18T06:02:32Z",
+  "params": {
+   "seed": "stopb80"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8974,
+  "inband10": 0.5365,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0406,
+  "gap": 11.82,
+  "extra": {
+   "plain": 11.82,
+   "ws_taken": 132,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 14,
+   "why": {
+    "fold": 17,
+    "slide": 6,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.83,
+    "plain": 12.83,
+    "reach": 0.8125,
+    "inband14": 0.8953,
+    "contact": 0.0361
+   }
+  }
+ },
+ {
+  "k": 54,
+  "t": "2026-10-18T06:02:50Z",
+  "params": {
+   "seed": "skinnormal_r"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.892,
+  "inband10": 0.5653,
+  "reach": 0.8063,
+  "follow": 1.0,
+  "contact": 0.0105,
+  "gap": 12.37,
+  "extra": {
+   "plain": 11.22,
+   "ws_taken": 129,
+   "near1_poses": 1,
+   "min_mm": 0.527,
+   "moved": 17,
+   "why": {
+    "fold": 25,
+    "slide": 4,
+    "contact": 2
+   },
+   "kit": {
+    "gap": 12.49,
+    "plain": 12.49,
+    "reach": 0.7937,
+    "inband14": 0.892,
+    "contact": 0.0106
+   }
+  }
+ },
+ {
+  "k": 55,
+  "t": "2026-10-18T06:03:07Z",
+  "params": {
+   "seed": "k8"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.907,
+  "inband10": 0.5621,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0204,
+  "gap": 15.22,
+  "extra": {
+   "plain": 9.54,
+   "ws_taken": 132,
+   "near1_poses": 5,
+   "min_mm": 0.105,
+   "moved": 26,
+   "why": {
+    "fold": 20,
+    "slide": 4,
+    "contact": 4
+   },
+   "kit": {
+    "gap": 15.53,
+    "plain": 12.08,
+    "reach": 0.8,
+    "inband14": 0.9055,
+    "contact": 0.0208
+   }
+  }
+ },
+ {
+  "k": 56,
+  "t": "2026-10-18T06:03:25Z",
+  "params": {
+   "rA": -8,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8947,
+  "inband10": 0.5491,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 11.44,
+  "extra": {
+   "plain": 11.44,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 14,
+   "why": {
+    "fold": 17,
+    "slide": 5,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.31,
+    "plain": 12.31,
+    "reach": 0.8187,
+    "inband14": 0.8941,
+    "contact": 0.0359
+   }
+  }
+ },
+ {
+  "k": 57,
+  "t": "2026-10-18T06:03:43Z",
+  "params": {
+   "rA": -4,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.9013,
+  "inband10": 0.5615,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 12.05,
+  "extra": {
+   "plain": 10.91,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.086,
+   "moved": 15,
+   "why": {
+    "fold": 17,
+    "slide": 5,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.85,
+    "plain": 11.72,
+    "reach": 0.8187,
+    "inband14": 0.9007,
+    "contact": 0.0359
+   }
+  }
+ },
+ {
+  "k": 58,
+  "t": "2026-10-18T06:04:01Z",
+  "params": {
+   "rA": 4,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8976,
+  "inband10": 0.536,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 11.15,
+  "extra": {
+   "plain": 11.15,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.048,
+   "moved": 15,
+   "why": {
+    "fold": 17,
+    "slide": 5,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.16,
+    "plain": 12.16,
+    "reach": 0.8187,
+    "inband14": 0.8956,
+    "contact": 0.0359
+   }
+  }
  }
 ]
