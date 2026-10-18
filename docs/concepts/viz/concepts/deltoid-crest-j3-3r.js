@@ -1,6 +1,9 @@
 /* deltoid-crest-j3-3r - the deltoid-crest J3 spherical 3R re-measured at O20 / fold margin 5 (closing screen, round 14;
  * bench model docs/concepts/models/deltoid-crest-j3-3r.py = zc-frontier-3r's build restricted to the crest box, doc
- * docs/concepts/deltoid-crest-j3-3r.md). Drawn at the screen's best configuration (P below, Bench(60,160) fast fit):
+ * docs/concepts/deltoid-crest-j3-3r.md). Drawn at the morphology's best FROZEN EXACT configuration (the death audit's
+ * s12-g63 with end_extra at the rule bound 8: 34.98 on Bench(110,360) exact, reproduced by the skeptic harness 2026-10-18;
+ * levels = its Bench(60,160) fast fit, max over the strap width at 11 stations; the fast claim config was 26.78 fast /
+ * 40.17 frozen):
  * J1 axis bvec(az, el) fixed in the scapula (acromion top), J3 axis wdir(wd, wa) fixed in the humerus ON THE DELTOID
  * CREST (wd >= 95), link arcs a1 / a2, J2 from the two-circle closure on branch sigma. Hubs O20 (r 10, 12.25 mm stack)
  * at the fitted levels F; links 12 x 3 Ti straps on the great circles at their fitted underside levels; member 3 =
@@ -10,12 +13,12 @@
  * rotations, complexity 0. The fold (J1-J3 angle outside the window) shows red - with hub 2's level spread, the limiter. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
-  const P = { az: 108.5603, el: 64.4969, a: [40.4557, 45.9232], w: [104.4082, -0.3864], branch: -1, inv2: 0, inv3: 1,
-              faces: [51.0, 60.3, 62.0], stack: 12.25, margin_deg: 5, cuff_at: 165,
-              // fitted underside level (mm from GH) at 11 stations along each strap (Bench(60,160) fast fit of the screen's best, gap 26.78; frozen exact 40.17)
-              lv1: [54.1, 54.1, 54.1, 54.1, 49.7, 49.0, 54.8, 60.3, 60.3, 60.3, 60.3],
-              lv2: [63.4, 63.4, 63.4, 64.3, 60.8, 56.3, 57.5, 62.0, 62.0, 62.0, 62.0],
-              lvn: [65.2, 65.2, 66.0, 66.5, 66.0, 69.5, 74.0, 74.1, 81.0, 89.6, 89.0] };
+  const P = { az: 97.467, el: 62.7844, a: [40.6347, 47.4415], w: [109.3974, -1.1276], branch: -1, inv2: 0, inv3: 1,
+              faces: [52.21, 60.0, 62.0], stack: 12.25, margin_deg: 5, cuff_at: 165,
+              // fitted underside level (mm from GH) at 11 stations along each strap (Bench(60,160) fast fit 29.59 of the best frozen config; frozen exact 34.98)
+              lv1: [55.4, 55.4, 55.4, 55.4, 55.4, 53.1, 60.0, 60.0, 60.0, 60.0, 60.0],
+              lv2: [63.1, 63.1, 63.7, 64.0, 64.0, 59.4, 59.4, 62.0, 62.0, 62.0, 62.0],
+              lvn: [65.2, 65.2, 66.0, 66.0, 68.1, 71.5, 74.4, 78.3, 83.4, 89.4, 97.0] };
   const C = K.sph3r(K.bvec(P.az, P.el), K.wdir(P.w[0], P.w[1]), P.a[0], P.a[1], P.branch);
   const lo = Math.abs(P.a[0] - P.a[1]), hi = Math.min(P.a[0] + P.a[1], 360 - P.a[0] - P.a[1]);
   const WB = [0, -0.0713, 0.9975], DB = [0, -0.9975, -0.0713];             // BOTTOM's bar (body_pose humerus frame)

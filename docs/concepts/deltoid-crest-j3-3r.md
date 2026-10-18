@@ -453,3 +453,39 @@ th p5-p95 23.0-135.8 against the window [23.8, 95.6]. Near-touch gap 77.75, min 
 Status unchanged: **DEAD** (kill bar 32.10; best frozen exact 34.98; lead 18.28). 0 passive translations, complexity 0,
 3 active. The motion preview passes (`node docs/concepts/viz/test.mjs deltoid-crest-j3-3r`). It still shows the fast
 claim config, as the audit noted.
+
+## Round-14 re-dispatch 3 (2026-10-18 07:41-08:05 UTC): the death audit's open items, closed
+
+The same closing-screen brief came a third time. Nothing was re-searched: the gate passed at n 7126 (0.265 / 0.0 / 0.0
+score points) and the basins are mapped above. Instead this pass closes the three items the death audit left open for
+the row's v_gap config (s12-g63 with end_extra at the rule bound 8: az 97.47, el 62.78, a1 40.63, a2 47.44, wd 109.40,
+wa -1.13, q 0.958, sigma -1, inv2 0, inv3 1). It ran through the skeptic harness
+(docs/concepts/verify/deltoid-crest-j3-3r-skeptic.py: ZC.snap with no crest-box clamp, fit Bench(60,160) fast, every
+level frozen), locally, niced, 2 processes, ~17 min each under load 18-21.
+
+| frozen exact | gap (score) | reach (ws taken) | follow | ib14 | contact (poses) | near-touch | min th margin | kNN flood | T5 depth (sum / max mm) |
+|---|---|---|---|---|---|---|---|---|---|
+| Bench(110,360) | **34.98** (87.28), dump 34.99 | 0.6056 (218) | 0.936 | 0.897 | 0.0389 (13) | 53.52 | 8.04 | 210 / 218 (8 islands: 37.21 on connected reach) | 24.51 / 6.93 at (15, 150, -30) |
+| held out (disjoint poses) | **39.27** (85.72), dump 39.26 | 0.6194 (223) | 0.900 | 0.896 | 0.0585 (20) | 56.28 | 5.45 | 223 / 223 | 41.63 / 15.82 at (0, 150, -30) |
+
+Files: docs/concepts/verify/deltoid-crest-j3-3r_vbest_{frozen,held}.json; per-pose dumps in tools/alignment_paired.py
+format docs/alignment/remeasure/deltoid-crest-j3-3r_{bench,held}_perpose_vgap.json (the older
+`..._{bench,held}_perpose.json` stay the pass-1 claim config's, 47.86 / 50.05). The motion preview now draws this
+config (fast-fit strap levels at 11 stations, max over the strap width; `node docs/concepts/viz/test.mjs
+deltoid-crest-j3-3r` passes, thumbs regenerated).
+
+**Reading.**
+- The audit's 34.98 reproduces to 0.00 through an independent path (no crest-box clamp). Held out it costs +4.29,
+  the same size as the family's usual held penalty (~4-5), so the in-sample selection among the 4 frozen wears bought
+  nothing that does not travel.
+- The overhead is where the metal goes deep. The deepest contacts on both sets sit at elevation 150 in the scapular
+  plane with internal rotation (-30): 6.93 mm on the bench and 15.82 mm held. That is the round-4 judge's red-team
+  prediction, measured: at the crest J3 seat the overhead skin, not the fold, sets the overhead. Overhead reach is
+  0.21 / 0.23 (6 of 26-28).
+- The plain 3R's flood shows 8 bench islands (static 218, connected 210). A plain 3R has no passive coordinate, so the
+  rule does not require the flood. The islands are taken poses whose kNN neighbours are all lost to the stretched fold
+  or to contact, and they would cost 2.2 more points if read strictly.
+- Held th margin 5.45 against the 5 bound; a plain pin chain has no K play to erode it.
+
+Status unchanged: **DEAD** (kill bar 32.10; best frozen exact 34.98, held 39.27; lead 18.28). 3 active, 0 passive
+translations, complexity 0.

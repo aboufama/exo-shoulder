@@ -294,7 +294,7 @@
  },
  "verdict": "DEAD: best fast 26.78 (score 90.26) on Bench(60,160) after 7118 configs - the normal J2 stack (inv2 0), never CMA'd in pass 1, took 36.63 -> 26.78 - but its frozen exact on Bench(110,360) is 40.17 (score 85.39; reach 0.606 = 218/360, follow 0.891, ib14 0.905, contact 0.048, near-touch 59.75, overhead 6/28), 8.1 above the spec's kill bar (j3-neck-over-3r 32.10), 9.1 behind the zero-complexity optimum (31.04 frozen) and 21.9 behind the lead (18.28). The fast bench over-reads this basin by 11-14 points at every optimum (36.63->47.86, 29.85->43.99, 28.63->41.04, 26.78->40.17) vs zc-frontier's +2.2. Convergence gate (score points, evaluation order, n 7118): 0.265 / 0.0 / 0.0 -> passed.",
  "limiter": "the J2 fold, stretched side: the crest J3 seat (wd ~104) spreads the J1-J3 angle to p5-p95 18.1-137.4 deg (Bench(110,360)) against the dyad window [|a1-a2|+5, a1+a2-5] = [10.5, 81.4] at the best arcs 40.5 / 45.9 -> kinematic closure 0.75 of the workspace (overhead 0.50), 88/360 ws lost stretched (overhead 14/28, across 48/68); arcs that widen the window lift hub 2 off band at O20 (a1 >= 44: 69-83 mm, 0.02-0.07; the cap cell at inv2 0 reaches 0.79 but hub 2 sits at 86 mm, ib14 0.64, best 47.48). Secondary: part-part at hub 2 over the cap (39/360; binders (0,150,-15), (30,135,0), (0,105,15)), contact at hub 2's rim (6) and link 2 (4); near-touch gap ~60 (min metal 0.05 mm). The fast bench's 160 poses under-sample the stretched wall: every fast gain transfers at ~0.8.",
- "note": "RE-DISPATCH 2026-10-18 06:09-06:20 UTC (round-14 closing-screen brief arrived again after screen + verify + death audit; no rerun, gate passed): added the paired lens-3 NO-KNEE CONTROL - crest-knee-3r's verified seats as a plain GH 3R (a1 40.88, a2 59.68, sigma -1) read 61.94 fast / 70.59 frozen exact (score 74.33) vs crest-knee 32.84 at the same seats: identical reach (228/360) and fold (93 vs 92 ws), so the knee's 37.75 points there are ALL metal placement (hub 2 in band 0.04 -> 0.99, F 70.7 -> 60.7 mm; contact 0.086 -> 0.015, 31 -> 5 poses), none of it reach. At each chain's own optimum the knee is worth only 2.14 at the crest (34.98 vs 32.84) vs 3.84 at the back seats. | Pass 2 (2026-10-17 23:29 - 2026-10-18 00:35 UTC, local, niced, 2 processes): categorical probe (14) at the two pass-1 bests -> the normal J2 stack inv2 0 (link 1 on hub 2's lower plate) wins 3.6 / 2.1 points (link 1 0.67 -> 0.98 in band); inv3 0 costs 15-50; sigma +1 dead. CMA in inv2 0 / inv3 1 / sigma -1: s9 193 (29.85), s10 681 (26.78, sigma collapsed), s11 341 (from the a2 51.5 config, 33.34), s12 1189 (wide restart sigma 0.5, 0 gain; second basin 29.38 at wd 109.4 / end_extra 6.0), s13 697 (cap-pole cell at inv2 0, sigma 0.6: 47.48, reach 0.79 but hub 2 F 86 mm, ib14 0.64), s14 671 (29.29 basin) / s15 781 (0 gain); s8 25 (inv2 1, stopped). Frozen exact (fit Bench(60,160) fast, every level frozen, Bench(110,360) exact) of 29.85 / 28.63 / 26.78: 43.99 / 41.04 / 40.17. Pass 1 (2526 configs, inv2 1 streams s1-s7, best 36.63 -> frozen 47.86) kept as frozen_exact_pass1_s6. 0 passive translations, complexity 0, 3 active. Spec corrections: O15 -> O20, margin 10 -> 5, no base stub (CAD ruling 1). Preview updated to the 26.78 config (docs/concepts/viz/concepts/deltoid-crest-j3-3r.js).",
+ "note": "RE-DISPATCH 3 2026-10-18 07:41-08:05 UTC (same round-14 closing-screen brief a third time; no rerun, gate passed at n 7126: 0.265 / 0.0 / 0.0): closed the death audit's open items for the v_gap config (s12-g63, ee 8). Skeptic harness reproduces 34.98 (dump recomputed 34.99); held out 39.27 (score 85.72; reach 0.619, follow 0.900, ib14 0.896, contact 0.0585); min th margin 8.04 bench / 5.45 held; kNN flood bench 210/218 connected (8 islands, 37.21 on connected reach), held 223/223; T5 contact depth bench 13 poses / 24.51 mm (max 6.93 at (15, 150, -30)), held 20 / 41.63 (max 15.82 at (0, 150, -30)). Per-pose dumps: docs/alignment/remeasure/deltoid-crest-j3-3r_{bench,held}_perpose_vgap.json. Preview moved to this config. Status DEAD unchanged. | RE-DISPATCH 2026-10-18 06:09-06:20 UTC (round-14 closing-screen brief arrived again after screen + verify + death audit; no rerun, gate passed): added the paired lens-3 NO-KNEE CONTROL - crest-knee-3r's verified seats as a plain GH 3R (a1 40.88, a2 59.68, sigma -1) read 61.94 fast / 70.59 frozen exact (score 74.33) vs crest-knee 32.84 at the same seats: identical reach (228/360) and fold (93 vs 92 ws), so the knee's 37.75 points there are ALL metal placement (hub 2 in band 0.04 -> 0.99, F 70.7 -> 60.7 mm; contact 0.086 -> 0.015, 31 -> 5 poses), none of it reach. At each chain's own optimum the knee is worth only 2.14 at the crest (34.98 vs 32.84) vs 3.84 at the back seats. | Pass 2 (2026-10-17 23:29 - 2026-10-18 00:35 UTC, local, niced, 2 processes): categorical probe (14) at the two pass-1 bests -> the normal J2 stack inv2 0 (link 1 on hub 2's lower plate) wins 3.6 / 2.1 points (link 1 0.67 -> 0.98 in band); inv3 0 costs 15-50; sigma +1 dead. CMA in inv2 0 / inv3 1 / sigma -1: s9 193 (29.85), s10 681 (26.78, sigma collapsed), s11 341 (from the a2 51.5 config, 33.34), s12 1189 (wide restart sigma 0.5, 0 gain; second basin 29.38 at wd 109.4 / end_extra 6.0), s13 697 (cap-pole cell at inv2 0, sigma 0.6: 47.48, reach 0.79 but hub 2 F 86 mm, ib14 0.64), s14 671 (29.29 basin) / s15 781 (0 gain); s8 25 (inv2 1, stopped). Frozen exact (fit Bench(60,160) fast, every level frozen, Bench(110,360) exact) of 29.85 / 28.63 / 26.78: 43.99 / 41.04 / 40.17. Pass 1 (2526 configs, inv2 1 streams s1-s7, best 36.63 -> frozen 47.86) kept as frozen_exact_pass1_s6. 0 passive translations, complexity 0, 3 active. Spec corrections: O15 -> O20, margin 10 -> 5, no base stub (CAD ruling 1). Preview updated to the 26.78 config (docs/concepts/viz/concepts/deltoid-crest-j3-3r.js).",
  "doc": "docs/concepts/deltoid-crest-j3-3r.md",
  "mechanism": {
   "active_dof": 3,
@@ -1238,5 +1238,152 @@
   "gain_2nd_half": 0.265,
   "gain_last_third": 0.0,
   "top5_spread": 0.0
+ },
+ "vgap_perpose_r14": {
+  "t": "2026-10-18T08:01:02Z",
+  "what": "third round-14 closing-screen dispatch: closes the death audit's open items for the v_gap config (s12-g63, end_extra 8) - reproduction, per-pose dumps bench + held (lead's T5 rule), held-out read, th margin, continuity flood",
+  "harness": "docs/concepts/verify/deltoid-crest-j3-3r-skeptic.py frozen|held (ZC.snap, no crest-box clamp; fit Bench(60,160) fast, every level frozen)",
+  "params": {
+   "az": 97.467,
+   "el": 62.7844,
+   "a1": 40.6347,
+   "a2": 47.4415,
+   "wd": 109.3974,
+   "wa": -1.127600000000001,
+   "sigma": -1,
+   "inv2": 0,
+   "inv3": 1,
+   "q": 0.9581,
+   "end_extra": 8.0,
+   "margin": 5.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "vm": 0,
+   "near": 0
+  },
+  "bench": {
+   "gap": 34.98,
+   "near": 53.52,
+   "reach": 0.6056,
+   "follow": 0.9364,
+   "inband14": 0.8971,
+   "inband10": 0.4444,
+   "contact": 0.0389,
+   "min_metal_all_faces": 0.21,
+   "score": 87.28,
+   "reproduces_v_gap": 34.98,
+   "dump_recomputed": 34.99,
+   "th_margin_min_taken": 8.039,
+   "flood": {
+    "ws_taken_static": 218,
+    "ws_connected": 210,
+    "islands": 8,
+    "ws_connected_grid_edges": 74,
+    "edges": "kNN-8 by frame angle (grid-neighbour count kept for reference)",
+    "reach_static": 0.6056,
+    "reach_connected": 0.5833
+   },
+   "gap_on_connected_reach": 37.21,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.2143,
+    "n_clip": 10,
+    "follow": 0.8,
+    "n_taken": 14,
+    "inband14": 0.8811,
+    "inband10": 0.6158
+   },
+   "contact_depth_mm": {
+    "n": 13,
+    "sum": 24.51,
+    "max": 6.93,
+    "deeper_than_2_5": 3,
+    "deepest": [
+     [
+      6.93,
+      15.0,
+      150.0,
+      -30.0
+     ],
+     [
+      6.24,
+      0.0,
+      135.0,
+      -45.0
+     ],
+     [
+      3.98,
+      0.0,
+      60.0,
+      15.0
+     ]
+    ]
+   },
+   "perpose": "docs/alignment/remeasure/deltoid-crest-j3-3r_bench_perpose_vgap.json",
+   "file": "docs/concepts/verify/deltoid-crest-j3-3r_vbest_frozen.json"
+  },
+  "held": {
+   "gap": 39.27,
+   "near": 56.28,
+   "reach": 0.6194,
+   "follow": 0.9,
+   "inband14": 0.8964,
+   "inband10": 0.4266,
+   "contact": 0.0585,
+   "min_metal_all_faces": 0.16,
+   "score": 85.72,
+   "dump_recomputed": 39.26,
+   "th_margin_min_taken": 5.451,
+   "flood": {
+    "ws_taken_static": 223,
+    "ws_connected": 223,
+    "islands": 0,
+    "ws_connected_grid_edges": 62,
+    "edges": "kNN-8 by frame angle (grid-neighbour count kept for reference)",
+    "reach_static": 0.6194,
+    "reach_connected": 0.6194
+   },
+   "overhead": {
+    "n_ws": 26,
+    "reach": 0.2308,
+    "n_clip": 10,
+    "follow": 0.6,
+    "n_taken": 12,
+    "inband14": 0.8783,
+    "inband10": 0.6006
+   },
+   "contact_depth_mm": {
+    "n": 20,
+    "sum": 41.63,
+    "max": 15.82,
+    "deeper_than_2_5": 6,
+    "deepest": [
+     [
+      15.82,
+      0.0,
+      150.0,
+      -30.0
+     ],
+     [
+      5.12,
+      15.0,
+      165.0,
+      -45.0
+     ],
+     [
+      3.18,
+      -30.0,
+      60.0,
+      30.0
+     ]
+    ]
+   },
+   "perpose": "docs/alignment/remeasure/deltoid-crest-j3-3r_held_perpose_vgap.json",
+   "file": "docs/concepts/verify/deltoid-crest-j3-3r_vbest_held.json"
+  },
+  "preview": "docs/concepts/viz/concepts/deltoid-crest-j3-3r.js now drawn at this config (fast-fit levels 29.59; test.mjs passes)"
  }
 }
