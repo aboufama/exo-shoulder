@@ -3833,3 +3833,80 @@ M5, T1.
 hub-2 flat in link 2's frame and a >= 0.45 mm ring2 lip relief), ring2's out-of-band metal on the lowarm family, the
 chamfer on user_conecut_knee's hub 2 as the generation CAD, and the G5 / R1 record fixes. 95 is not reached, so the
 objective stays reach and contacts; the 3-DOF ceiling and the 4-joint question are with the user.
+
+## Round J7 (round 107, track jump): no lead change - the thin-stack one-sided relay verifies at 14.06 (score 94.89, held 16.69, the best held number on file; 4 joints, cx 51.25, WATCH), 0.31 from 95; the under-pass bridge is refuted (13.74 -> 20.60), pin-flank one-stage K drives and the long dyad over the top are dead (2026-10-18, discovery round 107, closer)
+
+**What was measured** (frozen exact Bench(110,360), the verification protocol; bar 18.28 = conecut-knee-knuckle-3r;
+complexity tools/simplicity.py v2.2; farm closed, all local; no bench, judge or kit change):
+
+| design | v_gap / held (chain-only gate) | joints / P / cx | ledger | verdict |
+|---|---|---|---|---|
+| phi40-thinstack-relay-4r (PHI 40, delta 3.5, 1.0 mm Ti shell, h_c 1.4, band 8, bump 1.2, lug coil, L-lug bracket) | 14.06 / 16.69 (plain 13.52 / 16.02) | 4 / 0 / 51.25 | WATCH | round winner, best 4-joint verified, not a lead |
+| underpass-bridge-relay-4r (frozen bridge over the E strap) | claimed 13.74 / 16.64; verified 20.60 / 24.33 | 4 / 0 / 53.0 | WATCH (row refuted) | refuted: strap top inside the shell |
+| onetooth-slowlaw-knuckle-3r (one crowned pin, slow law rho 0.75-0.9) | ghost 22.79 (rho 0.8) / 20.53 (0.9) | 3 / 0 / ~10-11 | none | dead at step 0 |
+| shortk-onetooth-knuckle-3r (re-seated K 34/30) | ghost 18.83; buildable bound 26.99 | 3 / 0 / ~10-11 | none | dead at step 0 (tooth sweep) |
+| longtop family (3 rows, long dyad over the top) | judge 166.76 frozen exact / 158.66 fast | 3 / 0 / 0 | none | rejected at step 0 |
+
+1. **The relay's thin stack verifies; its extra travel does not pay.** phi40 (pick pre-registered on envsel, claim read
+   once, verifier reproduces to 0.00): gate 14.06 = reach 9.44 + contact 4.08 + in-band 0.54; reach 0.8056 (290/360),
+   follow 1.0, ib14 chain 0.8946 / pooled 0.9169, 17 contacts, 0 jams, overhead 9/28 (held 22/71), min th 5.000,
+   continuity 0 dropped. The verifier's X1 (every chain set, thin-shell sector), X2 (bracket top) and X3 (CF strip as a
+   free chord) add 0 jams and 0 contacts; delta 3.0 reads 14.01. The thin stack moves chain ib14 0.8898 -> 0.8946
+   (-0.48; the 1.0 mm shell alone is 0.24, tsh 1.5 reads 14.30). PHI 35 -> 40 is -0.22 on the claim bench (4 takes for
+   4 contacts, two 14-15 mm deep) where envsel priced -0.67. Delta windows: envsel [3.5, 5.0], claim bench [4.5, 5.5]
+   by the row (verifier: no-jam at least [3.0, 5.5]). Behind-back ER (envsel 119, held 211) caps anterior arm-fixed
+   metal at ~+49-51 deg rel the pad.
+2. **The under-pass's "free" bridge was an impossible part.** Its underside (81.307) sat 1.2 mm over the 3 mm E strap's
+   skin-facing face only; the strap's top face (contact set c23, r 83.02) ran 1.7 mm inside the 2.5 mm shell, so
+   396/396 taken claim poses jam (held 940/942). Placed by the design's own rule over every chain set (R_under 84.222):
+   19.74 model rule, 20.60 with the verifier's X1 (score 92.51), held 24.33; 1.0 mm clearance 19.06 / 19.92; loaded at
+   4 N (0.336 mm deflection) 22.02 (auditor). The cantilever's 249.6 N.mm root anchor is unmodelled.
+3. **Pin-flank one-stage K drives are bounded by the pole.** A constant-rate pin-flank pair has a fixed relative pole
+   (Kennedy axis along uK + u2 / rho); PA <= 38 needs contact near it, so a long-stroke pin crosses it and the flank
+   undercuts ~1.25 mm. Built range 21-32 deg of K (rho 0.8-1.5; 1773 + 302,595 pin starts, mu 0.087, sliding and
+   rolling) against the 44-45.6 deg the taken poses need. A full stroke needs rho >= 2.5 sliding or >= 1.6-2.0 rolling,
+   which seats the pin on hub K's O20 rim (8.7-13.6 mm from uK, 12.6 needed). The proposers' PA passes sampled K at
+   0.74-0.76 deg and stepped over the pole spike (built-flank mode at 0.05 deg catches it).
+4. **The slow law is also bounded by the knuckle's own fold:** msub < 5 deg below rho ~1.0 (3.0 at rho 0.8): ghost
+   22.79 / 247 takes at rho 0.8, 20.53 / 255 at 0.9, against the lead's law through the same harness 18.28 / 262 (the
+   paired control reproduces the verified lead exactly; the lead's drive metal costs 0 plain gap).
+5. **An involute tooth pair is the one open one-stage path** (onetooth verifier): one spherical involute pair carries
+   46.7-47.3 deg at rho 1.0-1.5 with both PAs <= 38.03, and the ghost at DKLIM 46 reads 18.83 / 261 at rho 1.2 and 1.5
+   (frozen exact, no drive metal; pose 139 newly in contact). That leaves 0.15 for the flank metal under the 18.98
+   Pareto line, at a ~1 deg stroke margin; whether a one-tooth involute pair is a "gear" under MVP1 is the user's call.
+6. **Tooth-sweep law:** a link-2 element 20-30 mm from u2 dips 7-19 mm into the shoulder top on overhead scaption at
+   the stretched end (shortk: 19-66 envsel poses; verifier 35 poses, min -11.14 mm, and 26 / 19 at rho 1.7 rolling,
+   min -7.3), at any level to R 67. The re-seat (34/30) buys nothing: its ghost is the involute pair's 18.83.
+7. **The long dyad over the top is measured dead** (judge, r107j/lt_frozen.py): far-end hub 2 166.76 frozen exact
+   (268 takes, ib14 0.188, hub 3 / link 2 / neck in band 0.00); canonical 158.66 fast (hubs at the 400 mm cap); no K
+   law brings 4-part ib14 above 0.2 at >= 63 % kept. The 0.99 kinematic window puts J1 146+ mm from GH on the back.
+
+**Alignment (final ledger verdicts).** phi40-thinstack-relay-4r WATCH, 9 upheld / 1 refuted (continuity): 2 mm 47.16
+vs the lead's 34.84 (12.32 behind; dump basis 46.63) while 4.76 ahead plain; the PHI band is +1.08 at 2 mm with 3 of
+its 4 takes under 2 mm; contact depth 74.92 mm over 17 bench contacts (x3.70 the lead, x1.62 the parent; deepest 15.37
+mm at (30, 150, -30)), held 198.11 mm (x3.25); the CF strip is unmodelled (a free chord sags 2.49 mm into the liner,
+1.30-1.94 mm from the skin; a guided strip reads 172.40); R17 with carriage friction unmeasured (11-31 % coil margin by
+arithmetic); the 1.0 mm shell's stiffness unshown (0.24 of the gain); the 4th joint (cx 51.25 vs 18.5) buys raised-arm
+takes (67 vs 47 of 113), not overhead (+1 at 1.08 mm); P1: six claim-bench readings of this hardware, two below 95
+(delta 5.0 13.67, lean 0 13.55) are diagnostics, so a claim built on them must be decided on held; stale verdict text.
+underpass-bridge-relay-4r WATCH on the refuted row, 8 upheld / 6 refuted: M3 resolved by the refutation (X1 losses
+resolution-limited; read as lost they give 19.14, so 20.60 is the harsher reading); skin-only thickness recurred in the
+verifier's loaded check (22.02); T5 43.23 mm / 12 bench contacts (x2.14), held 173.02 (x2.84); sampling split +5.28;
+the dashboard showed 13.74 / 'screened' against the verified 20.60 / refuted; the 249.6 N.mm anchor and the CF strip
+are unmodelled; no R17. Instrument (NEW-blind-reference): tools/alignment_audit.py `_depth_sources` raises AttributeError
+on the paired file whose held is the string 'missing dump', blinding T5's reference read (8 committed audits); still
+unfixed at close. proxtrack-relay-knuckle-4r's owed entry is written: GAMED (R2, 1bc67f6).
+
+**Why it failed.** The relay stops 0.31 short with its two remaining measured levers read only as claim-bench
+diagnostics (P1); the bridge priced its clearance on one face; one-pair pin drives cannot reach the stroke at the lead's
+seats without riding hub K's rim or sweeping a tooth into the overhead shoulder; the long dyad's great circle crosses
+the neck and trunk.
+
+**Next.** The relay: register delta 5.0 and the side-wall zero dowel on envsel with physical tie-breaks, decide on held
+paired against phi40 (16.69), price the CF strip path, the 1.0 mm shell (CalculiX) and R17 with carriage friction; a
+PHI 37-38 cell for the two 14-15 mm presses. The 3-joint side: build the involute tooth pair's flanks and tooth sweep
+(rho 1.2-1.5, DKLIM 46), with the user's gear ruling. 4-joint rows go to the user as options (phi40 94.89 / held 16.69
+at cx 51.25; freek 94.40 / 20.50 at cx 33.25); the 3-joint lead stays conecut-knee-knuckle-3r 18.28. Files:
+docs/concepts/{phi40-thinstack-relay-4r,underpass-bridge-relay-4r,onetooth-slowlaw-knuckle-3r,shortk-onetooth-knuckle-3r}.md,
+their rows, models and verifiers under docs/concepts/verify/, audits docs/alignment/{phi40-thinstack-relay-4r,
+underpass-bridge-relay-4r}.md, judge docs/concepts/round107_ideation.md, docs/research/shortk_onetooth/.
