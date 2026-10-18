@@ -199,3 +199,48 @@ What this predicts beyond the morphology: for a plain spherical 3R at O20 the J3
 proximity lever - raising J3 toward the acromion widens the J1-J3 range the dyad must cover; any crest-seat design
 needs a second fold window (knuckle, relay, 4th joint). As lens 3's no-knee control (crest-knee-3r): the knee must buy
 > 30 points on the stretched side at these seats to matter.
+
+## Verification (adversarial verifier, 2026-10-18)
+
+**Verdict: the claim stands - VERIFIED at v_gap 47.86 (score 82.60) on Bench(110,360) exact, frozen shape; not refuted
+against the champion (75.94 on the same bench and checks). The design is still dead on the kill bar** (spec bar 32.10,
+lead 18.28). Harness: `docs/concepts/verify/deltoid-crest-j3-3r-skeptic.py` (zc-frontier-3r's build and checks run
+directly, without the model file's crest-box snap; every addition below is its own code).
+
+| run (claimed config: J1 bvec(105.50, 63.12), J3 wdir(103.38, 4.93), a1 38.69 / a2 44.11, sigma -1, inv2 1 / inv3 1, q 0.942, end 2.55) | gap | score | reach | follow | ib14 | ib10 | contact | near-touch gap | min metal |
+|---|---|---|---|---|---|---|---|---|---|
+| claim, Bench(60,160) fast (reproduced) | 36.63 | 86.68 | 0.650 | 0.900 | 0.864 | 0.475 | 0.031 | 57.59 | 0.38 |
+| Bench(60,160) **exact** refit (CB_EXACT=1) | 36.64 | 86.68 | 0.650 | 0.900 | 0.864 | 0.473 | 0.031 | 58.88 | 0.30 |
+| **frozen, Bench(110,360) exact (v_*)** | **47.86** | **82.60** | 0.575 (207/360) | 0.891 | 0.867 | 0.479 | 0.062 | 64.84 | 0.05 |
+| champion 3R, Bench(110,360) exact, kit checks + 1 mm radial (risley-turret verifier) | 75.94 | 72.39 | 0.742 | 0.927 | 0.413 | 0.256 | 0.091 | | |
+
+What was checked:
+
+1. **DOF (R5 / R17).** J1 (scapula-fixed axis, O20 hub, base carried by the handler at the J1 ring), J2 (K1 closure on
+   a fixed branch) and J3 (humerus-fixed axis) are three active pins; member 3 is rigid on BOTTOM's bar. 3 active, 0
+   passive, 0 passive translations, nothing undetermined. Seat residual of J1 / J3 vs their declared seats 1e-4 deg.
+   J1 seat bvec(105.5, 63.1): anterior component 0.12 <= 0.20, inside ruling 4. Pass.
+2. **Real size and sampling.** O20 v5 hubs (rad 10, 12.25 mm stack) at all three joints, 12 x 3 Ti links, K7 14 x 6
+   neck, every member sampled over its whole face at the baseline density (kit audit clean, `honest` true); top faces,
+   crowns and walls skin-checked (1 top-contact pose on the big bench, counted as contact). Pass.
+3. **Pose-taking.** Closure: the J2 axis meets both arcs to 0.0 deg on every taken pose. Fold margin read in ONE metric
+   (th = angle(J1, J3), recomputed from the axes, not from the closure mask): min 6.46 deg over the 305 taken poses of
+   the big bench (5.38 on Bench(60,160)), th 23.2-76.3 deg. Dense K2: 0 flips. K6 at 1 mm radial (collide 0.117 of the
+   closing poses). Hub-axis accessibility: F 50.8 / 59.8 / 62.0 mm (<= 140). Pass.
+   **Continuity flood (added; a plain 3R needs none by the rule):** a grid-neighbour flood reads only 71 of 207 taken
+   workspace poses connected - an artefact: the bench samples the workspace grid sparsely, so most grid neighbours are
+   absent (312 grid edges for 263 closing poses). With kNN-8 edges (2-deg slerp, closure at the 5-deg margin at every
+   step, no axis step > 10 deg) every closing workspace pose is connected (263 / 263 on Bench(110,360), 120 / 120 on
+   Bench(60,160)): the fixed-branch closure set is one region, no islands. Static reach stands.
+4. **Bench artefacts.** None: the exact Bench(60,160) refit equals the fast claim (36.64 vs 36.63).
+5. **Contact depth (T5, lead's rule).** Per-pose dump `docs/alignment/remeasure/deltoid-crest-j3-3r_bench_perpose.json`
+   (alignment_paired format; the tool itself cannot wrap this kit model - no pin-knee-style audit - so the harness
+   writes the same rows through `alignment_paired._dump_bench` / `gap_parts`); its recomputed gap 47.87 reproduces
+   47.86 within 0.05. 20 contact poses (13 workspace, 7 clip), depths 0.10-3.26 mm (median 0.84; 5 deeper than 2.5 mm).
+6. **Losses (re-attributed, identical to the claim):** workspace 207 / 360 taken - fold stretched 96, folded 1,
+   part-part 43, contact 13 (link 2 7, neck 5, hub 2 4, hub 1 3, hub 3 1 over clips + ws); overhead 4 / 28 (stretched
+   15), across the body 19 / 68 (stretched 48). th p5-p95 19.3-131.2 deg against the window [10.4, 77.8].
+
+Champion on the same bench: 75.94 (kit checks + 1 mm radial, Bench(110,360) exact). This harness adds the top-face /
+crown skin check, which can only add contact, so the champion reads >= 75.94 here; its in-band 0.41 alone costs 49
+gap points, so the margin-5 rebase cannot bring it below 47.86. Not refuted. No hard rule broken.

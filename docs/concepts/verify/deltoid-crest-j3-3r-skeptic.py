@@ -5,9 +5,10 @@ crowns, near-touch, closure residual, hub-axis accessibility F <= 140) WITHOUT t
   * the fold margin read in ONE metric (th = angle(J1, J3), concept_kit lines 25-30) recomputed from the joint axes over
     every taken pose, independently of K.closure's mask;
   * closure residual and J2 axis vs both arcs over the taken poses;
-  * a workspace continuity flood (2-deg slerp edges between grid-neighbour taken ws poses, closure at the 5-deg margin
-    at every step, no joint axis stepping > 10 deg; seeds = taken poses at the lowest elevation level): static vs
-    connected reach (a plain 3R needs no flood by the rule; it is reported as a stricter reading);
+  * a workspace continuity flood (2-deg slerp edges between each taken ws pose and its 8 nearest taken ws poses by
+    frame angle, closure at the 5-deg margin at every step, no joint axis stepping > 10 deg; seeds = taken poses at the
+    lowest elevation level): static vs connected reach (a plain 3R needs no flood by the rule; reported as a stricter
+    reading). Grid-neighbour edges alone under-connect on the sparse bench samples (kept as ws_connected_grid_edges);
   * a per-pose dump (tools/alignment_paired.py format: min metal per pose, taken, contact, clip band counts) whose own
     gap is recomputed and compared with the report (lead's T5 rule, bench and held out);
   * the Bench(60,160) EXACT refit (CB_EXACT=1) against the claimed 36.63 fast (fast-cache artefact check);
@@ -90,18 +91,28 @@ def extras(B, p):
             ax = K.unit(np.asarray(ax, float).reshape(m, 3)); jmp = max(jmp, float(ang(ax[1:], ax[:-1]).max(initial=0)))
         return bool(np.all(c.ok) and jmp <= 10.0)
 
-    conn = np.zeros(n, bool)
-    if ws:
-        e0 = min(B.poses[i]["elev"] for i in ws); front = [i for i in ws if B.poses[i]["elev"] == e0]
-        for i in front: conn[i] = True
-        while front:
-            nxt = []
-            for a in front:
-                for b in nbrs(a):
-                    if not conn[b] and edge(a, b): conn[b] = True; nxt.append(b)
-            front = nxt
-    nws = sum(1 for k in B.kind if k == "ws")
+    from scipy.spatial.transform import Rotation as Rot
+    Dm = np.array([[max(np.degrees(Rot.from_matrix(X[a].T @ X[b]).magnitude()) for X in (F.RS, F.RHG)) for b in ws] for a in ws]) if ws else None
+    pos = {a: k for k, a in enumerate(ws)}
+
+    def knn(i, k=8):                    # the bench samples the ws grid sparsely: most grid neighbours are missing,
+        for t in np.argsort(Dm[pos[i]])[1:k + 1]: yield ws[t]   # so the grid flood under-connects; kNN-8 edges do not
+
+    def flood(nb):
+        conn = np.zeros(n, bool)
+        if ws:
+            e0 = min(B.poses[i]["elev"] for i in ws); front = [i for i in ws if B.poses[i]["elev"] == e0]
+            for i in front: conn[i] = True
+            while front:
+                nxt = []
+                for a in front:
+                    for b in nb(a):
+                        if not conn[b] and edge(a, b): conn[b] = True; nxt.append(b)
+                front = nxt
+        return conn
+    nws = sum(1 for k in B.kind if k == "ws"); cg = flood(nbrs); conn = flood(knn)
     out.update(flood=dict(ws_taken_static=len(ws), ws_connected=int(conn.sum()), islands=len(ws) - int(conn.sum()),
+                          ws_connected_grid_edges=int(cg.sum()), edges="kNN-8 by frame angle (grid-neighbour count kept for reference)",
                           reach_static=round(len(ws) / nws, 4), reach_connected=round(float(conn.sum()) / nws, 4),
                           island_poses=[[B.poses[i][k] for k in ("plane", "elev", "axial")] for i in ws if not conn[i]][:40]))
     return out
