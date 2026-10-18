@@ -90,6 +90,93 @@ So the cap proposals compared a kinematic count against a metal count.
   1197 g, 98.76 reading. q 0.97 (the judge's control setting) lets the 3 % worst fit poses be charged as contact. It
   is the comparable setting.
 - Cell A reproduces the routed kill: hub 2 is 0.04 in band, follow 0.85 and contact 0.071. The exact J2-RAY exit is
-  modest (ws p50 58, p90 67.7, p95 70, 11 / 294 > 75 mm). The O20 DISC is what binds: its far edge, 10 mm off the
-  ray, reaches the bunched deltoid. A hub-2 one-level test on the ray reads 260 ws clear at level 66 mm with 0.86 in
-  band. So even the optimistic ray loses 34 kinematic takes to a single level, against the gate's <= 10.
+  modest (ws p50 58, p90 67.7, p95 70, 11 / 294 > 75 mm). The hub's level is set by its O20 disc samples (10 mm off
+  the ray) at the q 0.97 quantile, not by the ray. A hub-2 one-level test on the ray alone reads 260 ws clear at level
+  66 mm with 0.86 in band. So even the optimistic ray loses 34 kinematic takes to a single level, against the gate's
+  <= 10. Cell A is dead on both halves.
+
+## Search (cell C, the best proxy) and the equal-effort red team of the pairing
+
+The search is a (1+1) local search inside the pre-registered box (model `search`), with every bound a hard edge, on
+Bench(60,160) fast with the 1 mm near-touch objective. There are four streams, 344 tries:
+
+- C1, 61 tries from the proxy config;
+- C2 and C3, 101 each, from the running best;
+- C4, 81 tries from the kinematic-best config of the box (299/360), run alongside C3.
+
+The CONTROL got the same search, 101 tries, in a box of the same widths around the lead's seats
+(docs/concepts/verify/cap-plateau-knuckle-3r_control_search.json). Without that, the pairing would compare a searched
+cell against an unsearched control.
+
+| config | tries | fast plain / near 1 | frozen exact Bench(110,360) | held out (exact) | ws taken bench / held | why bench (fold / parts / contact) | overhead bench / held | T5 contacts / depth sum bench, held |
+|---|---|---|---|---|---|---|---|---|
+| **C best (C2)** | 162 | 27.13 / 25.42 | **32.08** (reach 0.686, ib14 0.823, follow 0.982, contact 0.030) | **35.16** | 247 / 636 of 952 | 85 / 19 / 9 | 9/28, 23/71 | 11 / 34.8 mm, 36 / 86.3 mm |
+| C3 (best fast near 25.00) | 263 | 26.38 / 25.00 | 32.73 | - | 248 | 84 / 17 / 11 | 9/28 | - |
+| C4 from the 299-kin config | 81 | 29.27 / 29.47 | - | - | - | - | - | - |
+| **CONTROL searched** | 101 | 22.98 / 22.99 | **30.59** (reach 0.719, ib14 0.814, follow 1.0, contact 0.039) | **34.03** | 259 / 660 of 952 | 86 / 0 / 15 | 7/28, 17/71 | 15 / 68.9 mm, 41 / 201.3 mm |
+
+- **Paired at equal search effort, C is +1.49 frozen and +1.13 held out WORSE than the control.** Its fast number is
+  worse too (25.0 vs 23.0 near-touch).
+- Against the lead it is worse still: its real-model number is ~14 points above the lead's 18.28, because the kit has
+  no knee re-centring, no J3 dowel and no tuned metal. The 1.1-1.5 point paired deficit stands on top of that.
+- **Pre-registered gate 0 FAILS on the takes half.** C takes 247 / 360 on the real model (275 kinematic at this
+  config), with ib14 0.823 and 9-11 contacts. The bar is >= 279 takes at ib14 >= 0.88 with <= 4 contacts.
+- The paired clause (> 3 worse) is not triggered. The kill is the takes bar plus the drive: cell C's two-lobe K drive
+  does not exist, so this is a ghost.
+- **Convergence gate (C, 344 tries in time order, near-touch objective, score points):** gain over the second half
+  0.07 (< 1), over the last third 0.00 (< 0.5), top-5 spread 0.00 (< 3). PASSED. The plain-gap view is 0.57 / 0.32 /
+  0.33. The pick for the frozen wear was C2's best: of the three stream bests, it was the best on frozen exact (34.25 /
+  32.08 / 32.73). That makes it a wear-bench selection, so 32.08 is optimistic by the pick, and held out (35.16) is
+  the claim.
+- **The box holds more kinematic takes than the search keeps.** A 4000-config kinematic scan of C's box reaches 299 /
+  360 with 110 clips, and 1260 of the configs reach >= 279; B's box reaches 289. But the metal search walks away from
+  them: the C4 stream started at 299 ended at 29.5 near-touch, at a2 45 and el1 63, back at ~275 kinematic. **The
+  extra kinematic takes are bought with metal**, the proximity atlas's rule: a rigid part must clear the highest skin
+  it ever passes over.
+- **The limiter, measured:** fold 83-85 (the same as the control's 86), plus **link 2 x neck part collisions, 17-19 on
+  the bench and 53 held out (control 0 / 3)**.
+  - With J3 up the arm (d3 ~100), the neck to BOTTOM starts high on the lateral arm, and link 2 sweeps across it
+    under axial rotation.
+  - Per-pair K6 on the fit bench finds link 2 x neck as the ONLY colliding pair.
+  - Adding hub K to link 2's `over` list changes nothing (32.08 -> 32.08).
+  - On held out C has 17 FEWER fold losses than the control (231 vs 248) and 6 more overhead takes (23 vs 17 / 71).
+    The link-2 sweep over the neck spends that and more.
+- **Contact depth (T5, reported only):** C's contacts are shallower than the control's: bench 34.8 vs 68.9 mm summed,
+  held 86.3 vs 201.3. The deepest is pose 211 (plane 0, elev 165, axial 15) at -16.1 mm on both.
+
+## Red team
+
+- **Feel near the fold (judge addition 1).** On cell C's folded lobe, J1 turns **9.6 deg per deg of arm rotation at
+  th 9.3** (pose 256) and 6.8 at th 11.6 (pose 178), against ~1 in the bulk. Unpowered, the wearer would feel J1's
+  inertia whip as J3 passes under J1 overhead. Powered, it is a near-singular joint-rate demand. The preview shows the
+  same as a 27-deg joint jump between consecutive loop frames.
+- **The pose that jams / pinches.** Pose 211 (plane 0, elev 165, axial +15) puts metal 16.1 mm into the skin in both
+  arms of the pairing. Pose 208 (elev 135) is -4.1 mm on C and -11.7 mm on the control. The cap seat does not clear the
+  scapular-plane overhead binder.
+- **The optimistic numbers.**
+  - The kit has no K drive metal. Cells A and B would borrow desmo-conecut's drive, which costs the leaders ~2-5
+    frozen points. Cell C needs a two-lobe drive that does not exist.
+  - The kit has no cuff knee: every axis goes through GH, so there is no drift.
+  - So every cap number here is a lower bound on the real design's gap.
+  - The proposers' proxies (C 22.54, B 26.82 vs the lead 16.76 "on the same instrument") were one-level pile-up
+    estimates. On the real model the cells read 39.4 / 45.0 fast at their proxy configs, and the control reads 26.24.
+
+## Verdict
+
+**DEAD (gate 0, pre-registered).** The cap-pole lens is closed:
+
+- **A** fails hub 2: 0.04 in band, follow 0.85, frozen 76.59.
+- **B** fails the takes: 270 kinematic, frozen 47.76 at its proxy.
+- **C** fails the takes: 247 real-model at the converged best, frozen 32.08 / held 35.16, and it is a ghost.
+- C is +1.5 frozen / +1.1 held behind the lead's own seats in the same instrument at equal search effort.
+
+The kinematic counts that motivated the lens compared the cap knuckle (kinematic) against the back-seat knuckle's
+real-model ceiling. In the same instrument, the back-seat knuckle is at 277 kinematic, above B and C.
+
+## Files
+
+- Model: docs/concepts/models/cap-plateau-knuckle-3r.py (`kin`, `fit`, `frozen`, `held`, `j2exit`, `jrate`, `search`,
+  `levels`).
+- Sweep (every try in order): docs/concepts/sweeps/cap-plateau-knuckle-3r.json.
+- Per-pose dumps (bench + held, both arms of the pairing): docs/concepts/verify/cap-plateau-knuckle-3r_*.json.
+- Preview: docs/concepts/viz/concepts/cap-plateau-knuckle-3r.js (cell C best).

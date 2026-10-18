@@ -3038,3 +3038,44 @@ None is gamed. Every verifier upheld its number (0 of 4 refuted). The farm was c
 - (B) A redundant-4R null-space ghost at the cap pole, with hub 4 on the acromion top. The cap pole is the only legal
   seat at >= 0.78 kinematic, and its only failure is hub 2's per-pose zone, which a null-space can move.
 - Both use frozen exact Bench(110,360) with the continuity flood. Gate: <= 15 or >= 279 takes with <= 4 contacts.
+
+### cap-plateau-knuckle-3r (round 14 main, pick 2, gate 0 ghost) - DEAD: the cap-pole lens is closed (2026-10-18)
+
+The lead's slaved-knuckle chain moved to the posterolateral cap pole. All three cells were measured in the fold-ceiling
+paired kit, with the K law replaced, against the lead's seats and law in the same model (the CONTROL, which reproduces
+the judge's 26.27 as 26.24 fast). The fold margin is m 5 + 0.23 deg of K play. Fit is on Bench(60,160) fast; the
+frozen shape is worn on Bench(110,360) exact and on held out. Files: docs/concepts/cap-plateau-knuckle-3r.md and the
+per-pose dumps in docs/concepts/verify/cap-plateau-knuckle-3r_*.json.
+
+**The cap seat has no kinematic surplus over the lead's knuckle.** In the same instrument, the lead's seats and law take
+**277/360** kinematically. Cells B and C take 270 and 275; A takes 294. The "back-of-shoulder ceiling 269-271" that the
+cap proposals beat was a real-model number (J3 stop + metal) set against their kinematic counts. The cap's real
+surplus belongs to the plain 3R (281 vs 250), and the back-seat knuckle already recovers it.
+
+**Per cell:**
+
+- **A (routed U-law, a2 70):** hub 2 0.04 in band, follow 0.85, frozen 76.59. Even the exact J2 RAY (p95 70 mm) loses
+  34 ws to one level at 0.86 in band, against the gate's <= 10. Dead on both halves.
+- **B (short stop A):** proxy config frozen 47.76. The box's kinematic ceiling is 289. Dead.
+- **C (two-sided dwell, best proxy):** 344 local-search tries on the 1 mm objective, converged (0.07 / 0.00 / 0.00).
+  - Frozen exact **32.08**, held **35.16**; 247 real-model takes, ib14 0.823, 9 contacts.
+  - The control searched with the same effort (101 tries) reads 30.59 / 34.03. C is **+1.49 / +1.13 behind**.
+  - It fails the >= 279-take bar, and its two-lobe drive does not exist.
+
+**New knowledge:**
+
+1. **Kinematic takes in a seat box are not takes on metal.** C's box holds configs at 299/360 kinematic (1260 of 4000
+   scanned configs reach >= 279). A metal search started at the 299 config walks back to ~275 kinematic (a2 48 -> 45,
+   el1 61 -> 63) and ends 4 points worse. The cap pole's extra reach costs proximity, as the atlas's
+   highest-skin rule predicts.
+2. **J3 up the arm (wdir d ~100) puts link 2 over the neck.** Link 2 x neck is the only K6 pair on the fit bench, with
+   19 bench and 53 held-out part losses against the control's 0 / 3. Adding hub K to link 2's `over` list changes
+   nothing. C's fold advantage on held out (231 vs 248 fold losses, overhead 23 vs 17 / 71) is spent on that sweep.
+3. **The kit's default q 1.0 is unusable at the cap.** The J3 ray grazes the neck overhead, which puts hub 3, link 2 and
+   the neck 150-250 mm out (98.76, 1197 g). Paired kit numbers are quoted at the judge's q 0.97.
+4. **Two-sided K laws whip J1.** On C's folded lobe, J1 turns 9.6 deg per deg of arm rotation at th 9.3. Any lobe that
+   takes poses with J3 under J1 inherits a ~1/sin(th) joint-rate demand.
+
+**The cap-pole bound for the planner:** the best real-model cap knuckle is 32.08 frozen / 35.16 held in the paired kit,
+1.1-1.5 points behind the lead's own seats. Reach for 95 has to come from somewhere other than re-seating the knuckle's
+J1 or J3 (back seat 277 kinematic, cap 275-299 kinematic but <= 248 on metal).

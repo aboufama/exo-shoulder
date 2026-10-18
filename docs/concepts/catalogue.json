@@ -3104,7 +3104,7 @@
   "name": "Cap-pole slaved knuckle 3R: the routed U-law cell, the short-stop-A plateau cell and the two-sided dwell cell, measured on the real model to close the cap-seat lens",
   "family": "slaved-knuckle 3R with a pin knee (cap-pole seat)",
   "lens": "round14:cap-seat-ulaw (the jump judge's routed id; merged cap-shorta1-plateau-knuckle-3r as cell B and cap-dwell-ulaw-knuckle-3r as cell C)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-17T23:25:10Z",
   "source": "round 14 judge (docs/concepts/round14_ideation.md); routed from round 102 (docs/concepts/round102_ideation.md section 6)",
   "merged_from": [

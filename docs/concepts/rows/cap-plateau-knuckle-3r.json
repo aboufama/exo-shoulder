@@ -1,0 +1,236 @@
+{
+ "id": "cap-plateau-knuckle-3r",
+ "name": "Cap-pole slaved knuckle 3R (U-law cell A / short-stop-A plateau cell B / two-sided dwell cell C)",
+ "lens": "round14:cap-seat-ulaw",
+ "family": "slaved-knuckle 3R with a pin knee (cap-pole seat)",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": "2026-10-17T23:25:10Z",
+ "t_screened": "2026-10-18T00:53:31Z",
+ "reach": 0.6861,
+ "follow": 0.9818,
+ "inband14": 0.8232,
+ "inband10": 0.5234,
+ "contact": 0.0301,
+ "gap": 32.08,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 351,
+ "complexity": 17.5,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 5,
+  "joints": 8,
+  "closed_loops": 3,
+  "sensed_passive": 0,
+  "custom_parts": 13,
+  "sliding_pairs": 2,
+  "rolling_pairs": 0,
+  "springs_or_flexures": 0,
+  "catalogue_parts": 14,
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  },
+  "notes": "cap-plateau-knuckle-3r (GHOST at gate 0): the record of the knuckle chain with desmo-conecut's borrowed one-sided K drive (cells A / B); cell C (measured best) needs a two-lobe K drive that does not exist (+1-2 complexity, catalogue estimate 17.5-18.5). Not re-counted: the row died at gate 0.",
+  "source": "desmo-conecut-knuckle-3r screen 2026-10-17",
+  "confidence": "medium"
+ },
+ "best_params": {
+  "az1": 60.35845282311528,
+  "el1": 66.58903475535574,
+  "d3": 99.67965502070095,
+  "a3": -6.539243799867873,
+  "lo": 26.37846540787528,
+  "f": 31.393427505075323,
+  "cap": 54.56395748791015,
+  "a2": 46.008775963716396,
+  "bk1": 25.834871595277782,
+  "doff": 7.3754956757560945,
+  "q": 0.9719169367302719,
+  "off": 38.633280287960304,
+  "bk2": 34.17908589263237,
+  "cell": "C",
+  "sK": -1,
+  "sigma": -1,
+  "margin": 5.23,
+  "width": 12.0,
+  "t_link": 3.0
+ },
+ "fast": {
+  "bench": "Bench(60,160) fast (paired kit fit)",
+  "gap": 27.13,
+  "near1": 25.42,
+  "reach": 0.7438,
+  "follow": 0.9667,
+  "inband14": 0.8229,
+  "contact": 0.038
+ },
+ "frozen_self": {
+  "bench": "Bench(110,360) exact, frozen shape (fit Bench(60,160) fast, no refit), paired kit (no drive metal, no cuff knee)",
+  "frozen": {
+   "gap": 32.08,
+   "reach": 0.6861,
+   "follow": 0.9818,
+   "inband14": 0.8232,
+   "inband10": 0.5234,
+   "contact": 0.0301
+  },
+  "why": {
+   "fold": 85,
+   "flip": 0,
+   "parts": 19,
+   "contact": 9
+  },
+  "near1": 31.29,
+  "near2": 49.75,
+  "min_metal_mm": -16.106,
+  "overhead": "9/28",
+  "inband_member": {
+   "hub1": 1.0,
+   "hubK": 0.9125,
+   "hub2": 0.9751,
+   "hub3": 0.8836,
+   "link1a": 0.9611,
+   "link1b": 0.9443,
+   "link2": 0.504,
+   "neck": 0.7958
+  },
+  "ws_taken": 247,
+  "kinematic_ws": "275/360, clips 110/110, overhead 18/28",
+  "min_th_margin_deg": 5.76,
+  "dump": "docs/concepts/verify/cap-plateau-knuckle-3r_frozen97_C2best.json"
+ },
+ "held_self": {
+  "frozen": {
+   "gap": 35.16,
+   "reach": 0.6681,
+   "follow": 0.9802,
+   "inband14": 0.8217,
+   "inband10": 0.5226,
+   "contact": 0.0414
+  },
+  "why": {
+   "fold": 231,
+   "flip": 0,
+   "parts": 53,
+   "contact": 32
+  },
+  "near1": 34.91,
+  "overhead": "23/71",
+  "ws_taken": "636/952",
+  "dump": "docs/concepts/verify/cap-plateau-knuckle-3r_held_C2best.json"
+ },
+ "control": {
+  "note": "the lead seats / one-sided law in the same paired kit, searched with equal effort (101 tries, docs/concepts/verify/cap-plateau-knuckle-3r_control_search.json)",
+  "unsearched": {
+   "fast": 26.24,
+   "frozen": 33.19
+  },
+  "fast": 22.98,
+  "frozen": {
+   "gap": 30.59,
+   "reach": 0.7194,
+   "follow": 1.0,
+   "inband14": 0.8138,
+   "inband10": 0.4746,
+   "contact": 0.0391
+  },
+  "held": {
+   "gap": 34.03,
+   "reach": 0.6933,
+   "follow": 1.0,
+   "inband14": 0.8118,
+   "inband10": 0.4751,
+   "contact": 0.0454
+  },
+  "why": {
+   "fold": 86,
+   "flip": 0,
+   "parts": 0,
+   "contact": 15
+  },
+  "why_held": {
+   "fold": 248,
+   "flip": 0,
+   "parts": 3,
+   "contact": 41
+  },
+  "ws_taken": "259/360, held 660/952",
+  "paired_delta": {
+   "frozen": 1.49,
+   "held": 1.13
+  }
+ },
+ "cells": {
+  "A": {
+   "kinematic": "294/360 ws, clips 98/110, overhead 17/28",
+   "frozen_q097": 76.59,
+   "fast": 75.47,
+   "hub2_inband": 0.04,
+   "follow": 0.8455,
+   "j2_ray_exit_exact": "ws p50 58 / p90 67.7 / p95 70 / max 112, 11/294 > 75 mm; one ray level 66 mm keeps 260 ws at 0.86 in band (34 lost vs gate <= 10)",
+   "verdict": "dead (hub 2 + follow)"
+  },
+  "B": {
+   "kinematic": "270/360 ws, clips 110/110, overhead 16/28 (box ceiling 289)",
+   "frozen_q097": 47.76,
+   "fast": 44.98,
+   "verdict": "dead (takes)"
+  },
+  "C": {
+   "kinematic": "275/360 ws, clips 110/110, overhead 18/28 (box ceiling 299; 1260/4000 box configs >= 279 kinematic)",
+   "proxy_frozen_q097": 43.77,
+   "proxy_fast": 39.43,
+   "searched_frozen": 32.08,
+   "searched_held": 35.16,
+   "verdict": "dead (takes 247 real-model; ghost two-lobe drive)"
+  }
+ },
+ "t5": {
+  "bench": "11 contacts, depth sum 34.8 mm, max 16.1 (pose 211)",
+  "held": "36 contacts, depth sum 86.3 mm, max 12.8",
+  "control_bench": "15 / 68.9 mm",
+  "control_held": "41 / 201.3 mm"
+ },
+ "red_team": {
+  "j1_rate": "J1 9.6 deg per deg of arm rotation at th 9.3 (pose 256), 6.8 at th 11.6 (178) on the folded lobe",
+  "jam_pose": "211 (plane 0, elev 165, axial 15) -16.1 mm in both arms",
+  "optimistic": "kit omits drive metal (~2-5 frozen points on the leaders) and the cuff knee; cell C drive does not exist"
+ },
+ "convergence_gate": {
+  "rows": "344 cell-C search tries in time order (4 streams), near-touch objective, score points",
+  "gain_second_half": 0.07,
+  "gain_last_third": 0.0,
+  "top5_spread": 0.0,
+  "plain": {
+   "gain_second_half": 0.57,
+   "gain_last_third": 0.32,
+   "top5_spread": 0.33
+  },
+  "passed": true
+ },
+ "s6": "not run (dead at gate 0)",
+ "flood": "not run (dead at gate 0; K single-valued in th by construction, both lobes of cell C are one continuous law)",
+ "verdict": "DEAD at gate 0 (pre-registered): the cap-pole lens closes. A: hub 2 0.04 in band, follow 0.85, frozen 76.59. B: 270 kinematic, frozen 47.76. C (best proxy, searched 344 tries, converged): frozen exact Bench(110,360) 32.08 / held 35.16 at 247 real-model takes (< 279), ib14 0.823, 9 contacts - +1.49 frozen / +1.13 held WORSE than the lead seats in the same paired kit at equal search effort (30.59 / 34.03); its two-lobe drive does not exist. The cap seat has no kinematic surplus over the lead knuckle: the lead seats/law take 277/360 kinematically in the same instrument (C 275, B 270); only A (294) clears 279 and it loses hub 2.",
+ "limiter": "fold 85 (= the control 86) + link 2 x neck part collisions (19 bench / 53 held vs control 0 / 3): with J3 up the arm (d3 ~100) the neck to BOTTOM starts high on the lateral arm and link 2 sweeps across it under axial rotation (per-pair K6: link2 x neck is the only colliding pair; link 2 over hub K changes nothing). The box holds up to 299 kinematic takes, but the metal search walks back to ~275 (a stream from the 299 config ended at 29.5 near-touch).",
+ "note": "Paired fold-ceiling kit (docs/research/fold_ceiling/kit_paired.py) with the K law per cell, m = 5 + 0.23 deg K play inside the fold margin; q 0.97 (the judge control setting; q 1.0 puts the cap J3 ray on the neck: hub 3 / link 2 150-250 mm out, 98.76). Control reproduces the judge (26.24 vs 26.27 fast). Kit omits drive metal and cuff knee in both arms: compare paired only. Selection of C2 among 3 stream bests was on frozen exact (34.25 / 32.08 / 32.73), so held 35.16 is the claim.",
+ "doc": "docs/concepts/cap-plateau-knuckle-3r.md",
+ "model_file": "docs/concepts/models/cap-plateau-knuckle-3r.py"
+}

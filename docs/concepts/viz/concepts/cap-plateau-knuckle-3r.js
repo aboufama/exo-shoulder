@@ -4,13 +4,14 @@
  * a1e = clip(max(lo, th - off, lo + (f - th)), lo, cap)) -> link 1b -> J2 -> link 2 -> J3 (humerus-fixed) -> neck -> cuff.
  * Every axis passes through GH (the paired-kit instrument: no cuff knee, no drift). 3 active (J1, J2, J3), K passive and
  * determined by the law (GHOST: cell C's two-lobe K drive does not exist), 0 passive translations.
- * Measured (docs/concepts/cap-plateau-knuckle-3r.md): kinematic 275/360 ws, 110/110 clips at m 5 + 0.23 K play; hub / link
- * levels from the Bench(60,160) fit of docs/concepts/models/cap-plateau-knuckle-3r.py. */
+ * Best searched cell-C config (271 tries on the 1 mm near-touch objective, Bench(60,160) fast): plain 27.13 fast, frozen exact
+ * Bench(110,360) 32.08 vs the equal-effort control (lead seats / law, same instrument) 30.59 - DEAD (247 taken < 279; ghost
+ * drive). Kinematic 275/360 ws, 110/110 clips at m 5 + 0.23 K play; hub levels 51 / 59 / 60 / 65 mm from the fit. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
-  const P = { az1: 61.22, el1: 63.20, d3: 100.17, a3: -4.12, lo: 28.03, off: 38.18, cap: 52.51, f: 29.64, a2: 45.19, bk1: 27.50, bk2: 30.46,
+  const P = { az1: 60.358, el1: 66.589, d3: 99.680, a3: -6.539, lo: 26.378, off: 38.635, cap: 54.564, f: 31.393, a2: 46.009, bk1: 25.835, bk2: 34.179,
               sK: -1, sigma: -1, margin: 5.23,
-              lev: { hub1: 52, hubK: 56, hub2: 63, hub3: 70 }, hub_r: 10, stack: 12.25, neck_deg: 25, cuff_at: 165 };
+              lev: { hub1: 51, hubK: 59, hub2: 60, hub3: 65 }, hub_r: 10, stack: 12.25, neck_deg: 25, cuff_at: 165 };
   const u1 = V.unit(K.bvec(P.az1, P.el1)), u3 = V.unit(K.wdir(P.d3, P.a3));
   const ref1 = V.unit(V.reject([0, 0, 1], u1)), v0 = V.unit(V.reject([1, 0, 0], u3));
   const law = th => Math.min(P.cap, Math.max(P.lo, th - P.off, P.lo + (P.f - th)));
