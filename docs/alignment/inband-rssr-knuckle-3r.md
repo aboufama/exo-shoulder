@@ -20,7 +20,8 @@ the number the verifier confirmed in 931a8d1. What changed around the row is big
 
 - **Checks:** `docs/alignment/inband-rssr-knuckle-3r.json`, tool VERSION 2026-10-18.1.
 - **Findings:** `docs/alignment/inband-rssr-knuckle-3r.findings.json`.
-- **Ledger:** `docs/alignment/ledger.jsonl`, `by auditor`, run `audit:inband-rssr-knuckle-3r`.
+- **Ledger:** `docs/alignment/ledger.jsonl`, 2026-10-18T21:17:24Z, `by auditor`, run `audit:inband-rssr-knuckle-3r`.
+  Its verdict is watch, with 6 reason items: held_out, NEW-stale-tie, R3, P2, NEW-reading-mismatch and M5.
 - **New measurements, all written by this run:**
   - `docs/alignment/remeasure/inband-rssr-knuckle-3r_{bench,held}.json`: the tool's re-wear of the row's screen pick.
   - `docs/alignment/remeasure/inband_pick3/pick3_vs_conecut-knee_2026-10-18.json`: the per-pose wearer counts and
