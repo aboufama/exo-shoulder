@@ -2,7 +2,7 @@
  "id": "dipped-law-groove-knuckle-3r",
  "status": "verified",
  "v_gap": 18.64,
- "complexity": 24.25,
+ "complexity": 20.25,
  "verdict": "gamed",
  "reasons": [
   "fold_margin: min fold margin on file 0.184 deg (docs/concepts/verify/dipped-law-groove-knuckle-3r_v_held_frozen.json:extra.th_margin.min; 8 readings)"
@@ -51,7 +51,7 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.64: bench 4 contact poses, sum 21.88 mm, deepest 10.9 mm at ['ws', 15.0, 165.0, -60.0], 3 deeper than 3 mm vs roller-longdyad-knuckle-3r 16.46 mm over 2 (+5.42 mm, x1.33); held 17 contact poses, sum 81.2 mm, deepest 10.36 mm at ['ws', 45.0, 165.0, -30.0], 10 deeper than 3 mm vs roller-longdyad-knuckle-3r 49.88 mm over 10 (+31.32 mm, x1.63)",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.64: bench 4 contact poses, sum 21.88 mm, deepest 10.9 mm at ['ws', 15.0, 165.0, -60.0], 3 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 17 contact poses, sum 81.2 mm, deepest 10.36 mm at ['ws', 45.0, 165.0, -30.0], 10 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
    "depths": {
     "v_gap 18.64": {
      "bench": {
@@ -101,35 +101,13 @@
      }
     }
    },
-   "ref": "roller-longdyad-knuckle-3r",
-   "compare": [
-    {
-     "claim": "v_gap 18.64",
-     "wear": "bench",
-     "sum": 21.88,
-     "ref_sum": 16.46,
-     "excess": 5.42,
-     "ratio": 1.33,
-     "watch": false
-    },
-    {
-     "claim": "v_gap 18.64",
-     "wear": "held",
-     "sum": 81.2,
-     "ref_sum": 49.88,
-     "excess": 31.32,
-     "ratio": 1.63,
-     "watch": false
-    }
-   ]
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
   },
   {
    "check": "dominance",
-   "level": "watch",
-   "reason": "beats roller-longdyad-knuckle-3r by 0.03 plain but loses by 2.59 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
-   "ref": "roller-longdyad-knuckle-3r",
-   "gain_plain": 0.03,
-   "gain_2mm": -2.59
+   "level": "ok",
+   "reason": "no reference"
   },
   {
    "check": "continuity",
@@ -278,11 +256,20 @@
    }
   },
   {
+   "check": "density",
+   "level": "ok",
+   "reason": "over-dense parts roller 2.22x; bench 18.64 -> 18.72 at the kit's density; held 24.07 -> 24.15 at the kit's density",
+   "over": {
+    "roller": 2.223
+   },
+   "src": "remeasure/sample_density_dipped-law-groove-knuckle-3r.json"
+  },
+  {
    "check": "complexity",
    "level": "ok",
-   "reason": "recomputed 24.25 vs row 24.25",
-   "recomputed": 24.25,
-   "row": 24.25
+   "reason": "recomputed 20.25 vs row 20.25",
+   "recomputed": 20.25,
+   "row": 20.25
   },
   {
    "check": "reporting",
@@ -292,7 +279,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
   },
   {
    "check": "rules",
@@ -310,7 +297,7 @@
   "docs/concepts/verify/dipped-law-groove-knuckle-3r_v_bench_frozen_env.json",
   "docs/concepts/verify/dipped-law-groove-knuckle-3r_v_held_frozen.json"
  ],
- "git": "8e60d0e",
- "tool_version": "2026-10-17.2",
- "t": "2026-10-17T06:37:37Z"
+ "git": "b7bb9b0",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T22:13:35Z"
 }

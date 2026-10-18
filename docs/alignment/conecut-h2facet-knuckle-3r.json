@@ -259,7 +259,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
   },
   {
    "check": "rules",
@@ -279,7 +279,7 @@
   "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen_chamferonly.json",
   "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "616e0c7",
+ "git": "b7bb9b0",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T16:31:30Z"
+ "t": "2026-10-18T22:06:24Z"
 }
