@@ -295,6 +295,48 @@ already taken by other audits' proposals); T family, the margin is read where it
 - **The user's B1 ruling** (m_sub at K's rest) still decides G4 for the whole slipper / roller family.
 - **The next audit** of this row is due when its claim, its parent's model, or the wall reading changes.
 
+
+## Skeptic (2026-10-18 21:47-22:02 UTC, on the 21:22-21:45 auditor run)
+
+Ledger: `skeptic:trimlug-k165-knuckle-3r`, 2026-10-18T22:01:48Z. Rulings: `docs/alignment/trimlug-k165-knuckle-3r.rulings.json`
+(this run's; the 2026-10-17 rulings it replaces are in git history). New measurement:
+`docs/alignment/remeasure/trimlug-k165-knuckle-3r_topedge_skeptic.json` (the model's own `_flank()`, fit Bench(60,160)
+fast, model unchanged, local, about 60 s).
+
+**Final verdict (computed by the ledger): WATCH.** Refuted 4 (continuity, NEW-wall-plane, T5, T1); upheld 7
+(reporting, M5, T3, G4, NEW-ws-inband, S3, R1).
+
+| key | ruling | evidence |
+|---|---|---|
+| continuity | **refuted** | `remeasure/..._flood_bench.json` frozen.gap 18.51 = claim; connected_full 18.51, 0 dropped, 128/128 forced poses connected; knn 20.18 (+1.67 <= conn_gamed 3.0). Model and kit unchanged since that wear. The watch is the tool not reading `*_flood_*.json` (proposal I-b). |
+| reporting | upheld | row status verified, verdict 'screened - ...'; morphs.json sweep_gap / gap 13.02 (score 95.27) beside v_gap 18.51. |
+| NEW-wall-plane | **refuted** | Re-derived on the model's flank, 1.5 mm out along the GH ray (the lug's top face): over [0, dK_lim 49.75] contact r_K 20.249, wall 1.021 mm (the CAD check's 20.22 / 1.08 reproduced). Over the K the scored poses use: bench k <= 45.5, wall 1.587 mm; held k <= 46.25, wall 1.489 mm. The stated 1.5 mm holds at the top face on every scored pose (to 0.011 mm). The thinner walls are at K 46.3-51.75, which no taken pose reaches. So the extra metal of trim_wall 1.95 / 2.21 carries no contact on a scored pose. No wearer cost is given or measured. The verifier and the CAD check do not disagree: they read opposite faces (underside 18.74 here, verifier 18.739). The rule's text over [0, dK_lim] is wrong at the top face: carried in R1. |
+| T5 | **refuted** | Depths reproduce (bench 13.19 mm / 2, held 40.58 mm / 10, max 9.06). The documented line (>= 2x and >= 5 mm, reference = the current lead since tool 2026-10-17.5) is not met: conecut-knee 20.24 / 60.97 mm, so trimlug is x0.65 / x0.67. Against the parent x0.89 / x0.88, and the tool's contact_depth reads ok. Only the retired reference (sidecar-longdyad, x2.12) met it. |
+| M5 | upheld | dynamics.json nominal: twist 4.04 deg, 0.58 N, K law error 0.136 deg, lift-off 0; mu 0.06 plain: 20.37 deg, 12.0 N. Correction: the pass line is about mu 0.150, not 0.105 (forward_bound_mu0.12 reads 4.786 deg, free). It stands because the nose friction is untested and no posture sweep is on file. |
+| T3 | upheld | `_v_held_frozen.json` extra.th_margin.min 5.006; linear stack 4.996 (CAD check lines 94-100). |
+| G4 | upheld | `_msub_rest_bench.json`: m_sub_rest min 0.0, lt5 106, lt1 50 of 204; m_plain_rest min 5.389. B1 is the user's. |
+| T1 | **refuted** | Shell 33.02 - 18.51 = 14.51 <= TH shell2_watch 15.0; near_touch reads ok; near-touch is report-only (user 2026-10-17). The counts are near-touch counts, not taken floors. The per-pose dumps give 2 / 25 / 94 of 371 on the bench and 14 / 62 / 187 of 852 held, not 3 / 30 / 100 and 14 / 67 / 200. |
+| NEW-ws-inband | upheld | probe ws_elev90_140: in-band 0.8002, 19.9 % above 14 mm, max 30.8 mm; held 0.8218. |
+| S3 | upheld | No bench wear that samples the real follower, lobe ring or straddle boss is on file. The params still carry s_arm 4.0 / r_lobe 8.27. |
+| R1 | upheld | The row text is unchanged at HEAD a6ae26f ('5 of them the lug'; 13.02 / 0.775 / 0.0; n_configs 45 vs 31), and the stated wall rule fails at the top face (1.02 mm). |
+
+**Missed by the auditor (for the next audit; does not change this verdict):**
+
+1. **M5's pass line is misstated.** The reason says the pass line is mu <= 0.105, but `forward_bound_mu0.12.json` passes
+   at 4.786 deg. The line sits near 0.150, so the friction margin is 1.7x the claim's 0.087, not 1.2x.
+2. **T5 is read against a retired reference.** The finding does not apply the 2026-10-17.5 reference (the current lead).
+   Under that reference this row is the shallowest of the three slipper / conecut rows on file, not a T5 case.
+3. **T1 counts are taken from the near-touch counters.** `deep.near*_poses` is not "taken poses under N mm". The
+   per-pose dumps read lower on the bench (2 / 25 / 94) and held out (62 / 187 against 67 / 200).
+4. **NEW-wall-plane does not separate the stroke the poses use from the stroke the stop allows.** The thinner wall is
+   real only for K beyond 46.3 deg, which no taken pose reaches. A wall finding should state which stroke it reads.
+5. **Process (the lead's rule of 2026-10-17).** The verifier wrote no per-pose dump of its own and no `connected` flood
+   key: `docs/concepts/verify/trimlug-k165-knuckle-3r_*.json` holds neither. Both exist only as the auditor's re-measures
+   (`remeasure/..._bench_perpose.json`, `_held_perpose.json`, `_flood_bench.json`), which reproduce the claim.
+
+No new gaming was found. The score sits behind the parent (18.51 vs 18.49) and the current lead (18.28). Every
+remaining watch is shared with the family or is reporting.
+
 ---
 
 _Below this rule: the 2026-10-17 skeptic section, kept unchanged (it rules on the 2026-10-17 12:46-13:07 auditor run, whose text the section above replaces)._
