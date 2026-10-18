@@ -167,5 +167,6 @@
    "Bench tie with the lead (18.28 = 18.28, same 262 takes, same 4 contacts); held -0.22 on ONE pose (447), CI90 [-0.66, 0], P(better) 0.644: not a new leader on the plain verified gap; the CI tie rule stays the user's call.",
    "The chamfer is on the right body: link 1b's lower plate (F+0..3.0, lower member at J2), wall to the O7 pin collar is solid (the bearing bore sits in link 2's boss above U0 3.15), link 1b's bar exits at az ~355-25 (outside the 102.8-182.8 sector); only hub-2 ring samples were removed (17 of 160, groups c10-c13), no other part's samples."
   ]
- }
+ },
+ "leader_ruling": "tie: conecut-knee-knuckle-3r | ledger 2026-10-18T17:06:25Z | the lead's frozen chain unchanged plus a hub-2 chamfer that buys no take (frozen exact 18.28 = the lead); its own verdict: an enabler cell, never a lead on its own"
 }
