@@ -177,24 +177,24 @@
   {
    "k": 15,
    "group": "l2",
-   "name": "drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 99.9 deg, r 6.30..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)",
-   "vol_cm3": 0.065,
+   "name": "drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 116.7 deg, r 6.30..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)",
+   "vol_cm3": 0.082,
    "material": "steel",
-   "mass_g": 0.51,
+   "mass_g": 0.64,
    "valid": true,
-   "pieces": 2,
-   "faces": 6376
+   "pieces": 1,
+   "faces": 7456
   },
   {
    "k": 16,
    "group": "l2",
    "name": "drive cap-ring roof keep-out (the sector over the groove, F+1.61..F+3.65, one with hub 2's upper boss)",
-   "vol_cm3": 0.143,
+   "vol_cm3": 0.167,
    "material": "Ti-6Al-4V",
-   "mass_g": 0.63,
+   "mass_g": 0.74,
    "valid": true,
    "pieces": 1,
-   "faces": 6380
+   "faces": 7452
   },
   {
    "k": 17,
@@ -232,7 +232,7 @@
   {
    "k": 20,
    "group": "dk",
-   "name": "drive crank short arm keep-out (6.8 x 3 x 1.5 Ti, crank axis -> the stage-1 pin at a_s 9.30, top 0.15 under the cap ring)",
+   "name": "drive crank short arm keep-out (6.8 x 3 x 1.5 Ti, crank axis -> the stage-1 pin at a_s 9.30, top 0.15 + the 0.29 axial drift under the cap ring)",
    "vol_cm3": 0.031,
    "material": "Ti-6Al-4V",
    "mass_g": 0.14,
@@ -243,7 +243,7 @@
   {
    "k": 21,
    "group": "dk",
-   "name": "drive stage-1 pin keep-out (ISO 8734 1.5 m6 440C, crowned, pressed through the short arm along u2, 1.40 into the groove)",
+   "name": "drive stage-1 pin keep-out (ISO 8734 1.5 m6 440C, crowned, pressed through the short arm along u2, 1.11 into the groove, tip 0.10 + the 0.29 axial drift under the roof)",
    "vol_cm3": 0.005,
    "material": "steel",
    "mass_g": 0.04,
@@ -266,9 +266,9 @@
    "k": 23,
    "group": "l1a",
    "name": "drive nose boss root keep-out (link 1a: 4 x 3 Ti from hub K's rim to the boss)",
-   "vol_cm3": 0.084,
+   "vol_cm3": 0.076,
    "material": "Ti-6Al-4V",
-   "mass_g": 0.37,
+   "mass_g": 0.33,
    "valid": true,
    "pieces": 1,
    "faces": 156

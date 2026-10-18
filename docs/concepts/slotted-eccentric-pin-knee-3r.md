@@ -124,3 +124,61 @@ annulus: candidates are (a) a cam track OUTSIDE K's sweep (dG > b + 10 mm: a lon
 in-band metal) or (b) moving the variable length to link 1 (the U-law a1 schedule, measured 295/360 kinematic) where the
 coupler would ride hub 1 on the acromion top - both need their own gate 0 on metal before any CMA. Lens 3's cx-0 row
 (crest-knee-3r) and the knuckle lens stay the main lines.
+
+## Audit (death audit, 2026-10-18 01:46-02:10 UTC; an auditor who did not build this model)
+
+Question: is the "far behind" verdict caused by a bug, a wrong convention, a missed region or an over-strict check? Bar
+for refutation: an honest gap <= 78.93 on Bench(60,160) fast (within 10 of the champion's 68.93). **The verdict stands
+(not refuted).** Measured reason in one line: at the O20 knee the knee hub, the crank and the track must cross link 1 /
+hub 1 across the slot's window, so every honest variant reads >= 152 fast; only the O10 knee that the round-14 plan
+rules out reaches the bar (70.07), and that variant is the refuted parent.
+
+What was re-measured (the model file unchanged; probes in the auditor's scratch, numbers below):
+
+1. **Reproduction.** B-g47-2 on Bench(60,160) fast reads 153.49 exactly (reach 0.400, follow 0.233, ib14 0.631, ib10
+   0.364, contact 0.049, honest). Gate recomputed on the honest entries in file order: 8.51 / 0.00 / 2.61 (n 915), as
+   claimed. The 121 dishonest stream-C entries (the raw minimum, 112.55 at C-g10-7, has honest False and ib14 0.11 with
+   every eccentric part lifted out of band) are correctly excluded.
+2. **The O20 rule at K is the killer at the parent's seats (this corrects the row's "it is NOT the O20 rule").** The
+   parent's best config (CMA E gen 13, emax 64.23) through THIS model at margin 5.23:
+   - O10 MR63ZZ knee (the SEPK_O10_PROBE attribution path): **70.07** (reach 0.725, follow 0.90, ib14 0.485, contact
+     0.061, collide 0.10). That is inside the 78.93 bar.
+   - O20 knee (the rule): **209.85** (collide 0.88, hub 2 0.00 in band, trk7-10 0.00-0.12 in band).
+
+   The row's claim holds only at the H1 gate cells, where the O10 probe also collides. The 70.07 does not refute the
+   death, for two reasons. The round-14 plan requires K at O20 ("knee hub at O20 (not O11)"; CLAUDE.md "Keep O20 only").
+   And that O10 configuration is the parent itself, refuted at 115.21 frozen exact against its own locked control
+   (46.60), so it loses to the plain 3R even with the small knee.
+3. **Missed regions (three were never benched).**
+
+   | probe (Bench(60,160) fast, O20 K, margin 5.23) | gap | honest | collide | window th |
+   |---|---|---|---|---|
+   | emax fixed at 40 in ALL streams; best config with emax 50 / 64 / 80 | 197.07 | no | 0.82 | [64.25, 133.5] |
+   | other knee branch sk = -1 (best; best + emax 64; parent; H1 + emax 64) | 375 / 313.46 / 375 / 375 | no | 0.87-1.0 | - |
+   | dG 40 (roller track outside K's sweep: the doc's open option (a)), best + emax 90 | 275 | no | 1.0 | [53.25, 129.25] |
+   | parent seats with b 28 / 32 / 36 | 220.59 / 303.41 / 305.08 | yes / no / no | 0.89-0.93 | - |
+   | best, b 36, emax 64 | 136.83 | no (ib14 0.25) | 0.31 | [18.25, 133.5] |
+   | H1 gate cell, emax 64 | 228.95 | no | 0.88 | [25.5, 121.75] |
+
+   Lifting the emax cap widens the lock-held window, as the parent found, but the window's added metal collides.
+4. **One over-strict modelling choice found and fixed in a probe.** The parent build gives the knee hub `pinK` no `over`
+   list. The crank, L2b and armG stack over link 1 + the spoke + the track, but the K hub is fitted at its own skin
+   level, so K6 counts every pass of K over link 1 as a collision (pinK|link1 is the top pair). A monkeypatch gives pinK
+   `over` = link 1 + spoke + track at 1 mm:
+   - best: 153.86 (unchanged)
+   - parent seats: **160.72** (from 209.85; honest)
+   - H1 gate cell: 110.41 dishonest (pinK, crank, L2b and armG 0.00 in band; ib14 0.30)
+   - best + emax 64: 152.10 dishonest
+
+   The fix is real: about 49 points at the parent's seats. The model file should carry it if this family is ever
+   reopened. It does not approach the bar, because a K stacked over link 1 leaves the band, as the limiter says.
+5. **CMA continuation.** Local, 2 processes, sigma 0.5, emax freed (scale 12), seed 7, 400 s: 81 evals (69 honest), best
+   unchanged at 153.49. Gate over the combined honest history (n 1014, agent + 99 audit configs): 5.97 / 0.00 / 2.49.
+   The last 424 configurations gained nothing. The 2nd-half rule is still open, only because the 153.49 sits at index
+   589 of the interleaved history. It would need about 165 more no-gain evals, which the box (load ~6.5) could not run
+   inside the time box. Status therefore stays **screened (far behind)**, not dead, under the binding gate.
+
+Red-team summary: no convention bug against tools/concept_baseline.py was found. The bench, the gap formula and the
+fast path are the shared kit's, and the reproduction is exact. The bad number is physical: O20 knee metal in hub 2's
+annulus. The one over-strict check (pinK not stacked) is worth up to ~49 points at the parent's seats but 0 at the
+best config. The number that stays optimistic is the fast 153.49 itself: frozen exact reads 201.20.

@@ -120,13 +120,18 @@
    ],
    "r_out_mm": 10.96,
    "past_O20_mm": 0.96,
-   "sector_deg": 99.94,
+   "sector_deg": 116.66,
+   "model_sector_deg": 99.94,
+   "end_margins_deg": [
+    10.05,
+    12.67
+   ],
    "groove_az_deg": 93.83,
    "az_monotone": false,
    "drift_mm": 0.286,
    "azimuth_deg": [
-    -3.0,
-    96.94
+    -10.05,
+    106.61
    ],
    "note": "the groove's mid-plane sits at the crank pivot's level + 3.15 + glev along u2 (the model's rule); the pivot is 1.29 mm below hub 2's face, so the groove layer lands at F+0.11..F+1.61: INSIDE link 1b's J2 lower-plate layer (F+0..F+3, O20) - the stack conflict this L1 reports (R6)"
   },
@@ -166,15 +171,17 @@
   "stage1": {
    "arm_len_mm": 6.8,
    "arm_level_from_hub2_face_mm": [
-    -1.539,
-    -0.039
+    -1.825,
+    -0.325
    ],
    "a_s": 9.299,
    "pin_from_hub2_face_mm": [
-    -1.539,
-    1.511
+    -1.825,
+    1.225
    ],
-   "pin_into_groove_mm": 1.4,
+   "axial_drift_mm": 0.286,
+   "pin_into_groove_mm": 1.11,
+   "pin_into_groove_at_worst_drift_mm": 0.83,
    "crank_axis_at_arm_u2_level_mm": -1.222
   },
   "boss": {
@@ -735,7 +742,7 @@
   },
   {
    "where": "stage-1 pin in the crank's short arm",
-   "fit": "ISO 8734 1.5 m6 440C (58 HRC), pressed H7/m6 through the 1.5 mm Ti short arm along u2 (the dwell pose), protruding 1.40 into the groove, tip 0.10 off the groove roof; crowned (the pin tilts up to 4.76 deg across the groove): crown radius >= 8 mm on the running band, Ra <= 0.1, true position of the pin to the crank bore 0.01 (a_s 9.529 +-0.02: +0.07 mm binds stage 1 at K 44.75 at mu 0.15 - the verifier's cliff)"
+   "fit": "ISO 8734 1.5 m6 440C (58 HRC), pressed H7/m6 through the 1.5 mm Ti short arm along u2 (the dwell pose), protruding 1.11 into the groove at home (0.82 at the worst axial drift), tip 0.10 + the 0.29 mm axial drift (the crank axis runs 15 deg off u2) off the groove roof, short-arm top 0.15 + 0.29 under the ring; crowned (the pin tilts up to 4.76 deg across the groove): crown radius >= 8 mm on the running band, Ra <= 0.1, true position of the pin to the crank bore 0.01 (a_s 9.529 +-0.02: +0.07 mm binds stage 1 at K 44.75 at mu 0.15 - the verifier's cliff)"
   },
   {
    "where": "stage-1 groove in hub 2's cap-ring sector (link 2)",
@@ -1037,13 +1044,18 @@
     ],
     "r_out_mm": 10.96,
     "past_O20_mm": 0.96,
-    "sector_deg": 99.94,
+    "sector_deg": 116.66,
+    "model_sector_deg": 99.94,
+    "end_margins_deg": [
+     10.05,
+     12.67
+    ],
     "groove_az_deg": 93.83,
     "az_monotone": false,
     "drift_mm": 0.286,
     "azimuth_deg": [
-     -3.0,
-     96.94
+     -10.05,
+     106.61
     ],
     "note": "the groove's mid-plane sits at the crank pivot's level + 3.15 + glev along u2 (the model's rule); the pivot is 1.29 mm below hub 2's face, so the groove layer lands at F+0.11..F+1.61: INSIDE link 1b's J2 lower-plate layer (F+0..F+3, O20) - the stack conflict this L1 reports (R6)"
    },
@@ -1083,15 +1095,17 @@
    "stage1": {
     "arm_len_mm": 6.8,
     "arm_level_from_hub2_face_mm": [
-     -1.539,
-     -0.039
+     -1.825,
+     -0.325
     ],
     "a_s": 9.299,
     "pin_from_hub2_face_mm": [
-     -1.539,
-     1.511
+     -1.825,
+     1.225
     ],
-    "pin_into_groove_mm": 1.4,
+    "axial_drift_mm": 0.286,
+    "pin_into_groove_mm": 1.11,
+    "pin_into_groove_at_worst_drift_mm": 0.83,
     "crank_axis_at_arm_u2_level_mm": -1.222
    },
    "boss": {
