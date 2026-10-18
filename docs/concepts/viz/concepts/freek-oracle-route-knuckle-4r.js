@@ -3,13 +3,14 @@
  * J1 (O20, GH ray) -> link 1a -> K (O20, SENSED, counted: in the bound K is picked PER POSE by an oracle on the legal
  * self-motion [5.5-deg floor, stop B]; no unpowered mechanism can do that) -> link 1b -> J2 (O20, GH ray, own-angle slot)
  * -> link 2 (corridor bar) -> J3 (O20, skin-normal tilt) -> member 3 -> flat two-pin knee (MR63ZZ pairs) -> cuff.
- * This PREVIEW drives K on the kit's minimal opening (the lower end of the oracle's range: J2 on its stop past thHi);
+ * This PREVIEW shows CELL B (the built determination): K on stop A inside [thLo, thHi], J2 on its stop past it with K at the
+ * minimal opening, and wherever J3's own angle passes q3max 86 deg K opens further to hold it (frozen exact 17.35 connected);
  * the oracle's per-pose pick needs the skin distance and is not reproduced here. Bound: frozen exact Bench(110,360) connected 17.25 plain / 21.46 near-touch (kit 18.61 at the same shape).
  * Geometry exported from docs/concepts/models/freek-oracle-route-knuckle-4r.py (viz mode, fit on Bench(60,160)).
  * Red = K would pass stop B / the knee outside its window. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;
-  const P = {"az1": 101.6411, "el1": 67.8564, "az2": 44.3978, "el2": 43.8721, "wd": 66.5965, "wa": -9.6278, "b3": 0.4, "lE": 73.8692, "lc": 28.6946, "phiE": 1.3552, "phib": -53.1496, "stk": 5.791, "ang_min": 26.1449, "bk1": 32.0, "bk2": 52.0, "sK": -1.0, "a1max": 76.0441, "smlo": 7.8286, "smhi": 7.877, "capK": 6.0};
+  const P = {"q3max": 86, "az1": 101.6411, "el1": 67.8564, "az2": 44.3978, "el2": 43.8721, "wd": 66.5965, "wa": -9.6278, "b3": 0.4, "lE": 73.8692, "lc": 28.6946, "phiE": 1.3552, "phib": -53.1496, "stk": 5.791, "ang_min": 26.1449, "bk1": 32.0, "bk2": 52.0, "sK": -1.0, "a1max": 76.0441, "smlo": 7.8286, "smhi": 7.877, "capK": 6.0};
   const G = {"u": [[0.07606, 0.92624, 0.36918], [-0.46498, 0.65068, 0.60034], [-0.1212, -0.18362, 0.9755]], "uK": [-0.12993, 0.98171, -0.13915], "c": [[0.0, 0.0, 0.0], [-0.0, 0.0, -0.0], [-0.52423, -16.62839, -3.1952]], "sa": [0.02264, -0.983, -0.18222], "st": [0.99237, -0.0, 0.12329], "sn": [-0.1212, -0.18362, 0.9755], "A": [37.912, 58.5], "branch": -1.0, "m": [-15.40291, 0.88702, 0.0], "f": [49.11, 60.91, 79.0], "fK": 56.66, "capK": 6.0, "tr": 84.21, "tp": 2.646, "RUN": 0.5, "SING": 5.5, "hr": [10.0, 10.0, 10.0], "A0": [2.8814, -89.22125, -16.43669], "A0m": [3.41293, -74.08025, -13.52056], "Bm": [-18.98381, -90.99658, -19.48745], "eE": [0.0461, -0.98272, -0.17926], "eK": [-0.78052, -0.58953, -0.20794], "psiA": -50.2809, "dKB": 82.0, "thLo": 28.4166, "thHi": 88.535, "q2s": [89.3267, -21.3537], "L1a": [[-0.66, 49.9, 7.89], [-1.93, 54.09, 5.51], [-2.92, 57.86, 3.73]], "L1b": [[-13.51, 57.52, 2.63], [-14.46, 51.71, 6.57], [-16.71, 51.3, 10.85], [-18.53, 50.82, 14.36], [-20.68, 49.65, 18.75], [-22.62, 47.8, 23.03], [-24.93, 47.58, 27.32]], "L2": [[-28.44, 33.32, 45.42], [-27.01, 29.45, 46.05], [-26.96, 26.55, 49.75], [-26.74, 23.36, 53.31], [-26.36, 20.52, 55.9], [-25.82, 17.47, 58.26], [-24.57, 14.75, 60.26], [-24.87, 12.04, 62.09], [-24.44, 8.99, 63.82], [-22.97, 5.65, 65.08], [-21.77, 1.98, 66.18], [-20.41, -1.73, 66.9], [-18.97, -5.47, 67.39], [-16.92, -9.34, 67.28], [-16.32, -13.38, 68.18], [-15.61, -16.8, 72.07], [-15.38, -19.62, 75.12], [-15.05, -22.61, 78.09]]};
   const u = G.u, c = G.c, uK = G.uK, sn = G.sn, sa = G.sa, st = G.st, a1 = G.A[0], a2 = G.A[1], hub = 12.25, rad = 10;
   const wrapR = a => { a = (a + Math.PI) % (2 * Math.PI); return (a < 0 ? a + 2 * Math.PI : a) - Math.PI; };
@@ -61,9 +62,36 @@
     return { th, pa, psi, ang, d, phi: wrapR(th - pe), span: d >= Math.abs(lE - lc) + 1 && d <= lE + lc - 1 };
   }
   const Qof = ctx => M.mul(M.T(ctx.S), ctx.H);
+  /** free-K closure (J2 off its stop) at a given K opening dK (deg): the (a1e, a2) dyad on the arm's J3 axis, same branch */
+  function freeAt(Q, dK) {
+    const [u1, u2, u3] = u, w = M.mulv(Q, u3), RK = M.rot(uK, dK), v2 = M.mulv(RK, u2), v3 = M.mulv(RK, u3);
+    const c12 = dot(u1, v2), b1 = dot(w, u1), b2 = cb(a2), det = 1 - c12 * c12, al = (b1 - c12 * b2) / det, be = (b2 - c12 * b1) / det;
+    const cr = V.cross(u1, v2), g2 = (1 - al * al - be * be - 2 * al * be * c12) / dot(cr, cr);
+    let pick = null;
+    for (const sg of [1, -1]) {
+      const z = V.madd(V.add(V.scale(u1, al), V.scale(v2, be)), cr, sg * Math.sqrt(Math.max(g2, 0)));
+      const q1 = K.axisAngle(u1, z, w), q2 = K.axisAngle(v2, v3, z), p2 = M.mulv(M.rot(u1, q1), v2);
+      const br = Math.sign(dot(p2, V.cross(u1, w)));
+      if (pick === null || br === G.branch) pick = [q1, q2];
+    }
+    return { q1: pick[0], dK, q2: pick[1], ok: g2 > 0, L: { state: 2 } };
+  }
+  const q3of = (Q, k) => K.axisAngle(u[2], vref, M.mulv(M.T(M.mul(M.mul(M.rot(u[0], k.q1), M.rot(uK, k.dK)), M.rot(u[1], k.q2))), M.mulv(Q, vref)));
+  /** CELL B: J3's own-angle dowel stop at P.q3max (deg, the model's convention); past it K opens (0.5-deg steps up to stop B) to hold q3 = q3max */
+  function law(Q) {
+    let k = ik(Q), q3 = q3of(Q, k), stopped = false;
+    if (k.ok && P.q3max !== undefined && q3 > P.q3max) {
+      const sp = Math.sign(G.psiA); let found = null;
+      for (let d = Math.abs(k.dK); d <= G.dKB + 1e-9; d += 0.5) {
+        const f = freeAt(Q, sp * d); if (!f.ok) continue; const q3f = q3of(Q, f);
+        if (q3f <= P.q3max) { found = [f, q3f]; break; }
+      }
+      if (found) { k = found[0]; q3 = found[1]; } else stopped = true;
+    }
+    return { k, q3, stopped };
+  }
   function solve(ctx) {
-    const Q = Qof(ctx), k = ik(Q), R12 = M.mul(M.mul(M.rot(u[0], k.q1), M.rot(uK, k.dK)), M.rot(u[1], k.q2));
-    const q3 = K.axisAngle(u[2], vref, M.mulv(M.T(R12), M.mulv(Q, vref))), X = chain(k.q1, k.dK, k.q2, q3);
+    const Q = Qof(ctx), lw = law(Q), k = lw.k, q3 = lw.q3, X = chain(k.q1, k.dK, k.q2, q3);
     const sv = M.mulv(M.T(Q), X.t3), s = [V.dot(sv, sa), V.dot(sv, st), V.dot(sv, sn)], kn = knee(s);
     const R = x => K.wrap180(x / D2R);
     return [k.q1, k.dK, k.q2, K.wrap180(q3 + kn.phi / D2R), R(wrapR(kn.psi - pb - kn.phi)), R(wrapR(kn.psi - pb))];
@@ -75,7 +103,8 @@
     return Object.assign(X, { Rm3, R6, t6, R5, t5, pa, pb: pbW });
   }
   const check = (q, ctx) => {
-    const Q = Qof(ctx), k = ik(Q);
+    const Q = Qof(ctx), lw = law(Q), k = lw.k;
+    if (lw.stopped) return `J3 on its q3max stop (${P.q3max} deg): K would pass stop B`;
     if (!k.ok) return k.L.state ? `J2 on its q2 stop: K would pass stop B (a1max ${P.a1max} deg)` : 'chain cannot close';
     const F = fk(q), sv = M.mulv(M.T(Q), F.t3), kn = knee([V.dot(sv, sa), V.dot(sv, st)]);
     if (!kn.span) return 'knee span: the drift is beyond lE + lc';
@@ -85,11 +114,11 @@
   const closes = (q, ctx) => { const r = C.residual(q, ctx); return Math.max(...r.map(Math.abs)) <= 0.5; };
   const solveC = (ctx, qPrev) => { const q = solve(ctx); return (!qPrev || closes(q, ctx)) ? q : K.dls(C, ctx, qPrev, { iters: 40 }).q; };
   const C = {
-    id: 'freek-oracle-route-knuckle-4r', name: 'Free-K ORACLE bound (instrument): sensed knuckle 4R with an anterior link-2 corridor',
+    id: 'freek-oracle-route-knuckle-4r', name: 'Free-K oracle bound row, previewed as its CELL B: sensed knuckle 4R + J3 own-angle stop at q3max 86 (K opens to hold it)',
     dof: { active: 4, passive: 2 },
     params: P,
     q0: ctx => solve(ctx),
-    qNames: ['J1', 'K (sensed; ORACLE in the bound, preview = kit minimal opening)', 'J2', 'J3', 'knee pin a', 'knee pin b'], qUnits: ['deg', 'deg', 'deg', 'deg', 'deg', 'deg'],
+    qNames: ['J1', 'K (sensed; spring to stop A, opened by J2 stop or J3 q3max stop)', 'J2', 'J3', 'knee pin a', 'knee pin b'], qUnits: ['deg', 'deg', 'deg', 'deg', 'deg', 'deg'],
     resUnits: ['deg', 'deg', 'deg', 'mm', 'mm', 'mm'],
     solve: solveC,
     residual: (q, ctx) => { const F = fk(q); return M.rotErrDeg(F.R5, Qof(ctx)).concat(F.t5); },
@@ -98,9 +127,9 @@
       const S = ctx.S, W = p => M.mulv(S, p), Wd = v => M.mulv(S, v), F = fk(q);
       const on = (R, p) => W(M.mulv(R, p)), I = M.I3();
       const h1 = { kind: 'hub', role: 'active', name: 'J1 (axis on a GH ray)', c: W(V.scale(u[0], G.f[0])), axis: Wd(u[0]), r: rad, h: hub };
-      const hK = { kind: 'hub', role: 'active', name: 'K (O20, sensed; ORACLE per pose in the bound)', c: on(F.R1, V.scale(uK, G.fK)), axis: Wd(M.mulv(F.R1, uK)), r: rad, h: hub + (G.capK || 0) };
+      const hK = { kind: 'hub', role: 'active', name: 'K (O20, sensed; cell B: opened by the J2 stop or the J3 q3max stop)', c: on(F.R1, V.scale(uK, G.fK)), axis: Wd(M.mulv(F.R1, uK)), r: rad, h: hub + (G.capK || 0) };
       const h2 = { kind: 'hub', role: 'active', name: 'J2 (axis on a GH ray, dowel-in-slot stop on q2)', c: on(F.R1b, V.scale(u[1], G.f[1])), axis: Wd(M.mulv(F.R1b, u[1])), r: rad, h: hub };
-      const h3 = { kind: 'hub', role: 'active', name: 'J3 (skin-normal tilt, line misses GH)', c: on(F.R12, V.madd(c[2], u[2], G.f[2])), axis: Wd(M.mulv(F.R12, u[2])), r: rad, h: hub,
+      const h3 = { kind: 'hub', role: 'active', name: 'J3 (skin-normal tilt, line misses GH; cell B dowel stop at q3max 86)', c: on(F.R12, V.madd(c[2], u[2], G.f[2])), axis: Wd(M.mulv(F.R12, u[2])), r: rad, h: hub,
                    p0: on(F.R12, c[2]) };
       const n3 = Wd(M.mulv(F.Rm3, sn)), lvl = (p, h) => V.madd(W(p), n3, h), kz = G.tr + G.tp + G.RUN + G.tp / 2;
       const rim = W(V.add(M.mulv(F.Rm3, V.add(V.madd(c[2], sn, G.f[2] + 1.5), V.scale(G.eE, rad))), F.t3));
