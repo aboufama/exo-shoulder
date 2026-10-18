@@ -111,12 +111,9 @@ def real_eval(M, B, i, G, sl):
     Pn = np.concatenate([P[keep], hub1, l1a, hub0])
     d = B.dist(i, Pn)
     # contact samples: the lead's (hub 1's own ones lifted), hub 0's wall + crown, the riser
-    dc = 1e9
-    for m, Pc in M.contact:
-        Pc2 = Pc + G["h"] * G["u1"] if m == 0 else Pc
-        dc = min(dc, float(B.dist(i, M.world(m, i, Pc2)).min()))
-    riser_w = G["riser"] @ R1.T + t1
-    dc = min(dc, float(B.dist(i, G["wall0"] @ RS.T).min()), float(B.dist(i, riser_w @ RS.T).min()))
+    riser_w = G["riser"] @ R1.T + t1                         # one signed-distance call for every contact sample
+    PC = [M.world(m, i, Pc + G["h"] * G["u1"] if m == 0 else Pc) for m, Pc in M.contact] + [G["wall0"] @ RS.T, riser_w @ RS.T]
+    dc = float(B.dist(i, np.concatenate(PC)).min())
     # stack clashes (scapula frame)
     c, r0 = G["c"], G["r0"]; cmin, who = 1e9, None
     for k, X, hh in L.member_pts(M, i):

@@ -67,6 +67,7 @@ BRG_R, BRG_W, PIN_R, BORE_R = 3.0, 2.5, 1.5, 1.6                                
 SPACER_RI, SPACER_RO, SPACER_T, LAND_R = 1.55, 1.95, 0.175, 2.5                            # D3 spacer O3.1 x O3.9 (MR63ZZ inner ring) on an O5 land
 SHIM_T, WAVE_T, WAVE_RO, CLIP_DZ, CLIP_T = 0.10, 0.20, 2.9, 0.30, 0.6                     # D3 shim + wave washer, clip at ztop + 0.30
 PLATE_T, NOSE_LO, NOSE_TIP_CLR = DL1.PLATE_T, DL1.NOSE_LO, DL1.NOSE_TIP_CLR                # tip plate 2.5; nose dowel C0-1.0 .. plate top - 0.15
+RC_GROOVE = 1.0                                                                            # built groove centreline radius >= 1.0 (ridge >= 0.24: the model's 1.01)
 SHORT_ROOT = float(DL1.SL.ARM_ROOT)                                                        # 4.0: the short arm starts inside the boss wall
 
 
@@ -79,7 +80,10 @@ def slot_wire(wp, C2, hw, max_turn=math.radians(10.0), max_len=0.8, caps=True):
     """closed contour (lines + 3-point arcs) of the slot of half width hw about the dense planar centreline C2 (n x 2): both offsets
     as arcs through each segment's start / mid / end offset points (segments <= max_turn of turning and <= max_len long), semicircular
     end caps. Returns (workplane with the closed wire, report)"""
-    C2 = np.asarray(C2, float); d = np.gradient(C2, axis=0); T2 = d / np.linalg.norm(d, axis=1)[:, None]; N2 = np.c_[-T2[:, 1], T2[:, 0]]
+    C2 = np.asarray(C2, float); L0 = np.r_[0.0, np.cumsum(np.linalg.norm(np.diff(C2, axis=0), axis=1))]
+    ss = np.linspace(0.0, L0[-1], max(int(L0[-1] / 0.02), 60) + 1)                         # uniform in arc length (drops sub-0.02 mm hooks: the
+    C2 = np.c_[np.interp(ss, L0, C2[:, 0]), np.interp(ss, L0, C2[:, 1])]                    # nose path's relative pole at stop A)
+    d = np.gradient(C2, axis=0); T2 = d / np.linalg.norm(d, axis=1)[:, None]; N2 = np.c_[-T2[:, 1], T2[:, 0]]
     s = np.r_[0.0, np.cumsum(np.linalg.norm(np.diff(C2, axis=0), axis=1))]; n = len(C2); idx = [0]
     for i in range(2, n):
         if s[i] - s[idx[-1]] >= max_len or _turn(T2, idx[-1], i) >= max_turn: idx.append(i)
@@ -213,6 +217,16 @@ def pin_search(M, G, hm_abs, a_ref, psi_ref):
     jt = int(np.searchsorted(kgrid, lim + 1e-12)); k = kgrid[:jt]; nk = len(k)
     ph = sig * RF.phi_of(k, gg, cc); dph = sig * RF.dphi_of(k, gg, cc); RC = S.rotm(dR, ph)
     e1 = -unit(u2 - (u2 @ dR) * dR); e2 = np.cross(dR, e1); R_HI_B = min(DS.R_HI, 9.40)
+    # the groove planform per candidate (link 2's frame, the blended law over the J2 window) for its curvature: rc >= RC_GROOVE (no cusp;
+    # the model's own groove: rc 1.01-1.37 over the blend, ridge >= 0.25 for the red team's Hertz)
+    q_on = float(G["q_on"]); qa, qb = [float(x) for x in M._lg["J2"][:2]]; sa = abs(s_th)
+    xg = np.arange(min((qa - q_on) / s_th, (qb - q_on) / s_th) - math.radians(1.0) / sa, lim + 1e-9, math.radians(0.1) / sa)
+    Kx = np.minimum(np.where(xg <= -hb, 0.0, np.where(xg >= hb, xg, (xg + hb) ** 2 / (4 * hb))), lim)
+    Mx = np.einsum("xij,xjk->xik", S.rotm(u2, -(q_on + s_th * xg)), S.rotm(dR, sig * RF.phi_of(Kx, gg, cc))); ge2, gf2 = USM.frame2(u2)
+    def rc_min_of(Fp):
+        Gx = np.einsum("xij,pj->pxi", Mx, Fp); X, Y = Gx @ ge2, Gx @ gf2
+        dx, dy = np.gradient(X, axis=1), np.gradient(Y, axis=1); ddx, ddy = np.gradient(dx, axis=1), np.gradient(dy, axis=1)
+        kap = np.abs(dx * ddy - dy * ddx) / np.maximum((dx ** 2 + dy ** 2) ** 1.5, 1e-12); return 1.0 / np.maximum(kap.max(1), 1e-9)
     def evaluate(a, ps):
         v = np.cos(ps)[:, None] * e1 + np.sin(ps)[:, None] * e2; s0 = (hm_abs - a * (v @ u2)) / float(dR @ u2); Fp = s0[:, None] * dR + a * v   # (np, 3)
         C = np.einsum("kij,pj->pki", RC, Fp)                                                  # (np, nk, 3)
@@ -225,12 +239,15 @@ def pin_search(M, G, hm_abs, a_ref, psi_ref):
         ps = np.radians(np.arange(40.0, 260.0001, 0.5)); Fp, paF, paC, rho, z = evaluate(a, ps)
         ok = (rho.min(1) >= DS.R_LO) & (rho.max(1) <= R_HI_B) & (np.abs(z).max(1) <= DS.DRIFT_MAX)
         m = np.maximum(paF.max(1), np.where(k[None, :] >= hb, paC, 0.0).max(1))
+        ok &= m <= PAC - 1.0
+        if ok.any():
+            rcm = np.full(len(ps), 0.0); rcm[ok] = rc_min_of(Fp[ok]); ok &= rcm >= RC_GROOVE
         obj = m + 0.02 * np.abs(np.degrees(ps) - psi_ref) + 0.3 * abs(a - a_ref)
         for j in np.nonzero(ok)[0]:
             if best is None or obj[j] < best[0]: best = (float(obj[j]), float(a), float(ps[j]), Fp[j], float(paF[j].max()), float(np.where(k >= hb, paC[j], 0).max()),
-                                                         float(paC[j].max()), [float(rho[j].min()), float(rho[j].max())], float(np.abs(z[j]).max()))
+                                                         float(paC[j].max()), [float(rho[j].min()), float(rho[j].max())], float(np.abs(z[j]).max()), float(rcm[j]))
     if best is None: raise RuntimeError("stage-1 pin search: no (a_s, psi) at this level passes the model's pitch / drift gates")
-    o, a, ps, Fp, pF, pC, pCall, pr, dz = best
+    o, a, ps, Fp, pF, pC, pCall, pr, dz, rcb = best
     # stage-1 crank-free K play (the red team's / model's reading): the pin floats c per side across the groove (crank free, q2 held) ->
     # the crank turns c / (|dR x C| cos paF) -> K turns g times that (the model's 0.174 deg at c 0.01 reproduces this way)
     _, paF1, _, _, _ = evaluate(a, np.array([ps])); C1 = np.einsum("kij,j->ki", RC, Fp); arm = np.linalg.norm(np.cross(dR, C1), axis=1)
@@ -244,7 +261,8 @@ def pin_search(M, G, hm_abs, a_ref, psi_ref):
     return Fp, dict(a_s=round(a, 3), psi_deg=round(math.degrees(ps), 2), model_a_s=round(a_ref, 3), model_psi_deg=round(psi_ref, 2), pa_pin_max=round(pF, 2),
                     pa_cap_max_past_blend=round(pC, 2), pa_cap_max_in_blend=round(pCall, 2), pa_gate_mu=round(PAC, 2), mu=mu,
                     gates_by_mu={f"{m_:g}": round(43.0 - math.degrees(math.atan(m_)), 2) for m_ in (0.087, 0.12, 0.15, 0.17)}, pitch_mm=[round(x, 3) for x in pr],
-                    drift_mm=round(dz, 3), blend_end_K_deg=round(math.degrees(hb), 2), k_play=kplay,
+                    drift_mm=round(dz, 3), blend_end_K_deg=round(math.degrees(hb), 2), k_play=kplay, groove_rc_min_search_mm=round(rcb, 3),
+                    model_groove_rc_min_mm=round(float(rc_min_of(np.asarray(G["F0"], float)[None])[0]), 3), rc_gate_mm=RC_GROOVE,
                     note="the model's pin (a_s 9.529, psi 149.71) at the model level: pa_pin_max 33.74, pa_cap 35.05 (in the blend, ungated); the same pin "
                          "EXTENDED along its own axis to this level: pa_pin 52.86 (over the gate from K 24: binds) - so the built pin is re-placed")
 
@@ -391,10 +409,15 @@ def tip_plate(G):
     rm = G["rPu"] + PLATE_T / 2; Pm = Z * (rm / (Z @ nrm))[:, None]; o = rm * nrm; P2 = np.c_[(Pm - o) @ e, (Pm - o) @ f]
     sel = np.r_[0, np.arange(1, len(P2) - 1)[np.linalg.norm(np.diff(P2, axis=0), axis=1)[:-1] > 1e-4], len(P2) - 1]; P2 = P2[np.unique(sel)]
     pl = plane(o - PLATE_T / 2 * nrm, e, f)
-    wo, ro = slot_wire(cq.Workplane(pl), P2, G["hw_out"]); outer = wo.extrude(PLATE_T).val()
+    # the plate's outline: a stadium on the slot's chord (lines + 2 arcs), half width hw_out + the path's sag off the chord (walls >= wall2 everywhere)
+    ch = P2[-1] - P2[0]; Lc = float(np.linalg.norm(ch)); tc = ch / Lc; nc = np.array([-tc[1], tc[0]]); sag = float(np.abs((P2 - P2[0]) @ nc).max()); hwo = G["hw_out"] + sag
+    ang = math.atan2(tc[1], tc[0]); cpl = plane(o - PLATE_T / 2 * nrm + P2[0][0] * e + P2[0][1] * f, math.cos(ang) * e + math.sin(ang) * f, -math.sin(ang) * e + math.cos(ang) * f)
+    outer = USP.stadium(np.asarray(cpl.origin.toTuple()), np.asarray(cpl.xDir.toTuple()), np.asarray(cpl.yDir.toTuple()), Lc, hwo, PLATE_T)
+    ro = dict(max_dev_from_exact_offset_mm=0.0, chord_mm=round(Lc, 3), sag_mm=round(sag, 4), half_width_mm=round(hwo, 3))
     wi, ri = slot_wire(cq.Workplane(plane(o - (PLATE_T / 2 + 0.2) * nrm, e, f)), P2, G["hw_in"]); inner = wi.extrude(PLATE_T + 0.4).val()
     plate = outer.cut(inner)
-    return plate, inner, dict(slot_len_mm=ri["length_mm"], slot_w_mm=round(2 * G["hw_in"], 3), plate_w_mm=round(2 * G["hw_out"], 3), radial_mid_mm=round(rm, 3),
+    return plate, inner, dict(slot_len_mm=ri["length_mm"], slot_w_mm=round(2 * G["hw_in"], 3), plate_w_mm=round(2 * hwo, 3), plate_len_mm=round(Lc + 2 * hwo, 3),
+                              plate_valid=bool(plate.isValid()), plate_solids=len(plate.Solids()), radial_mid_mm=round(rm, 3), outline=ro,
                               arcs=ri["arcs_per_side"], arc_dev_mm=max(ri["max_dev_from_exact_offset_mm"], ro["max_dev_from_exact_offset_mm"]),
                               note="mid-thickness section extruded along the slot-centre radial; drawing: exact ruled walls (radial lines through GH), 4-axis UV wire EDM")
 
