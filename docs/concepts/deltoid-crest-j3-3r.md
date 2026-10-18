@@ -489,3 +489,55 @@ deltoid-crest-j3-3r` passes, thumbs regenerated).
 
 Status unchanged: **DEAD** (kill bar 32.10; best frozen exact 34.98, held 39.27; lead 18.28). 3 active, 0 passive
 translations, complexity 0.
+
+## Audit (death re-audit, round 14, 2026-10-18 08:36-08:50 UTC, local, niced, <= 2 processes)
+
+**Verdict: the death stands, not refuted. The best frozen exact stays 34.98 (score 87.28; held 39.27), 2.88 over the spec's kill bar of 32.10 and 16.7 behind the lead's 18.28. Neither new lever moves it: the spec's untested neck-over-hub-2 variant reads 36.05 frozen (+1.07), and the sweep holds no config with more big-bench closure that keeps its metal clear.****
+
+The brief's literal refutation test ("corrected gap within 10 of the champion's 68.93 on Bench(60,160)") is stale: the
+fast 26.78 already passes it, and so did every row the round-14 kill bar rejects. This audit judges the death against
+the bar the spec set (frozen exact Bench(110,360) under j3-neck-over-3r's 32.10) and the lead (18.28).
+
+What was checked (new in this pass; audit #1 at 01:45 UTC covered the gate, the box edges, the 4 frozen wears and the
+part-part split, re-dispatch 3 the held-out read, dumps, th margin and flood):
+
+1. **Convergence gate, recomputed from the sweep in evaluation order (n 7126).** Gain over the second half 0.265 score
+   points, over the last third 0.0, top 5 within 0.0 (duplicates of one config; 1.53 over 5 distinct basins). Passes.
+2. **Is the search sample hiding a better region? (new: kinematic scan of every honest distinct config, 6676 of 7126).**
+   The fast bench's 160 ws poses over-sample fold-free poses at the crest seat: at the v_gap config the fold-law
+   closure is 0.8125 on Bench(60,160) but 0.7417 on Bench(110,360). That 7.1-point gap is the whole of the reach drop
+   from fast to frozen (0.675 -> 0.606); the cache is not the cause. So the audit asked whether the sweep holds a config
+   with more closure on the BIG sample that the fast objective under-ranked. Over the configs with hub 2 in band
+   (>= 0.8) and ib14 >= 0.85 (4275), the best Bench(110,360) closure is 0.808 (p95 0.756); among those with a fast gap
+   under 40 it is 0.778. Every one of the top 8 (closure 0.767-0.778, +2.5-3.6 points of kinematic reach over the v_gap
+   config) gives the gain straight back as metal on the fast bench: parts 9-25 and contact 6-12 of 160, fast gap
+   37.2-47.4 (v_gap config: parts 18, contact 4, 29.59). Inside this basin the extra fold-free poses are exactly the
+   poses where hub 2, hub 1 and the neck collide or touch skin, so no config left in the sweep is a candidate to wear.
+   Files: `docs/concepts/verify/deltoid-crest-j3-3r_audit3_kinscan.{py,json}`,
+   `docs/concepts/verify/deltoid-crest-j3-3r_audit3_highkin_fast.txt`.
+3. **The spec's untested item, worn frozen (new): the K7 neck over hub 2's crown.** Audit #2's probe
+   (`..._audit2_neckover.py`, fast only, never worn) adds hub 2 to the neck's K6-by-construction `over` list (1 mm,
+   fitted as the max over the fit poses, so the neck stays one rigid part). Fast it moves the v_gap config 29.59 ->
+   28.47 (parts 18 -> 14 of 160) and the claim config 26.78 -> 27.92. Worn frozen on Bench(110,360) exact (fit
+   Bench(60,160) fast, every level frozen):
+
+   | frozen exact Bench(110,360) | gap (score) | ws taken | parts | contact poses (hub2 / hub3 / link2 / neck) | contact | follow | ib14 | near-touch |
+   |---|---|---|---|---|---|---|---|---|---|
+   | v_gap config, neck under hub 2's crown (row) | **34.98** (87.28) | 218 | 38 | 11 (5 / 3 / 4 / 1) | 0.0389 | 0.936 | 0.897 | 53.52 |
+   | same, neck over hub 2's crown | 36.05 (86.89) | 219 | 33 | 15 (7 / 5 / 4 / 1) | 0.0501 | 0.936 | 0.895 | 55.16 |
+
+   Lifting the neck clears 5 of the 38 part-part poses, but 4 of those 5 then fail on skin contact at hub 2 and hub 3,
+   so the variant gains 1 take and loses 1.12 points of contact: +1.07 net. The hub2-neck poses are skin-bound under
+   the collision. File: . No held read: the
+   variant loses on the bench.
+
+4. **Bugs, conventions, over-strict checks.** The model is zc-frontier-3r's build and checks unchanged (the verified 3R
+   harness several leaders' controls use) plus a box clamp that the skeptic harness drops with no change (34.98
+   reproduced to 0.00). Part-part uses the shared kit rule (1 mm lateral, 0.5 mm radial, joint partners exempt); the
+   neck-over probe above is the one place the build could be called conservative, and it is now measured. Margin 5,
+   O20, own-angle stops: all at the rules, none tighter.
+
+**Reason (one line):** inside the crest basin, fold-free poses and metal clearance trade about 1:1. The kinematic closure on the big bench tops out at 0.74-0.78 with hub 2 in band. The poses that more closure adds, and the poses that a lifted neck clears, are lost again to hub 1, hub 2 and hub 3 metal against skin or each other. That leaves the best frozen exact at 34.98, over the 32.10 bar.
+
+**Lesson for every screen:** before you call a part-part pair an over-strict check, clear it in the model and wear it frozen. Here the hub2-neck collisions hid skin contact one layer down: clearing 5 collisions produced 4 contacts.
+
