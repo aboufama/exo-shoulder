@@ -246,3 +246,86 @@ Two changes:
 Measured effect (read-only simulation, table under NEW-blind-reference): contact_depth goes from ok to watch on 4 of
 the 8 audits committed since 11:37 (freek-oracle-route, offset-shortcar, phi40-thinstack, this row). It stays ok on 4.
 No score or gap changes, since T5 never gives gamed.
+
+## Skeptic (2026-10-18 ~21:32 UTC)
+
+**Final verdict (ledger): watch.** I refuted 6 of the 14 reasons and upheld 8. The worst level among the upheld
+reasons is watch.
+
+How I checked. I re-derived everything from the verifier's raw corrected-bridge dumps
+(`verify/underpass-bridge-relay-4r/verifier_fix*_A_up1.2_perpose.json`) and its X1 jam rows, independently of the
+auditor's derived dumps, and ran no model:
+`docs/alignment/remeasure/underpass-bridge-relay-4r_skeptic.py` -> `_skeptic.json`. It recomputes **20.60 / 24.33**
+exactly. The lead's dumps recompute 18.29 / 22.38 on the same harness (frozen exact Bench(110,360) and the held split).
+The rulings are in `docs/alignment/underpass-bridge-relay-4r.rulings.json`.
+
+### Refuted (with evidence)
+
+- **near_touch.** The numbers are measured and on file: plain 20.60, near1 24.79, near2 53.16 (held 24.33 / 29.30 /
+  55.19). They are in `_skeptic.json` bench.x1 and in `_corrected_wear.json` bench.x1. When numbers are present,
+  `c_near_touch` reads ok (report-only since 2026-10-17). The watch was a reader gap.
+- **dominance.** Both 2 mm readings are on file on one harness: this row 20.60 / 53.16, the lead 18.29 / 34.84.
+  `c_dominance` gives dp = -2.31, which is its ok branch. There is no plain gain for 1-2 mm metal to buy.
+- **continuity.** `loaded_bench.json` continuity holds a flood on the corrected bridge:
+  - dropped_relayed 0 and phi0_taken_not_connected 0;
+  - 153 of 154 relayed envelope frames connected;
+  - `claim.json` continuity.dropped_relayed is 0.
+
+  The connected loss is 0, under the 1.0 line. The flood was run at the model rule, so see missed item 1.
+- **idle.** The declared drive is the relay coordinate phi. It spans 0 to 32.9 deg over the taken bench poses
+  (`claim.json` relayed_poses: 24 taken at phi 0.8-32.9; `loaded_bench.json` relayed.phi_max 32.94 on the corrected
+  wear). That is past the 2 deg line. The knee has no span on file for this row, and `c_idle` does not raise a level on
+  that.
+- **judgement:G1.** The readings are right: 56 of 394 taken poses under 2 mm (14.2 %), 130 of 934 held (13.9 %),
+  against the lead's 8.9 % and 8.2 %. The pattern is not there. G1 is an in-band gain bought by moving metal toward the
+  skin, and nothing was gained: plain is -2.31 behind the lead, pooled in-band is 0.8347 against 0.9012, and dominance
+  reads ok. The 1-2 mm metal stays reported under near_touch.
+- **judgement:R2.** The finding was stale at the audit's own git. Dashboard v148 (c33420e, 21:21:29, an ancestor of
+  81bf405) shows the row as status 'refuted', v_gap 20.6, with a verdict that begins "REFUTED AS CLAIMED". The
+  "PASS BY 0.01" text is gone. Refuted rows are not live: `core.js:9` and `leader.js:4` drop them, and `bench.js:4`
+  draws their line dashed. The leftover sweep_gap 13.74 is the upheld reporting watch.
+
+### Upheld
+
+- **sampling.** There is no per-part record. The two-group split on file stays watch even once measured:
+  - chain 0.9012, relay metal 0.6626, pooled 0.8347, so the relay is 27.9 % of the samples;
+  - the part-weighted figure is 0.7819, which is +5.28 points against the 3-point line;
+  - 6 moving bodies are declared but only 2 groups are sampled.
+- **reporting.** I re-ran `c_reporting` on the current board. It still fires: sweep best 13.74 sits 6.86 below
+  v_gap 20.6. Its other two parts (no v_gap, status 'screened') are stale since v148.
+- **judgement:M3.** Upheld on the unmeasured 2 mm sample resolution of the knee-top / bracket check.
+  **Correction:** the "+0.19 if read as lost" has the wrong sign. The 6 bench contact-jam poses already carry
+  taken = False. Reading them as lost takes them out of the contact denominator, as X1 does with a lost pose. That gives
+  **19.14 (-1.46)** on the bench and **22.73 (-1.60)** held, with 16 contact-jams there. The verifier's
+  kept-as-contact reading is the harsher one, so it does not flatter the design.
+- **judgement:NEW-skin-only-thickness.** Confirmed from the verifier's own xcheck:
+  - E's underside clears the shell by at least 4.192 mm, while the strap top (c23:m3) clears it by only 1.292 mm (pose 149);
+  - 5 taken poses sit under 1.336 mm: 118, 139, 149, 200 and 257;
+  - losing them as well recomputes **22.02** exactly.
+- **judgement:NEW-blind-reference.** Reproduced read-only:
+  - `_depth_sources('conecut-knee-knuckle-3r')` raises AttributeError;
+  - with the bad paired file skipped, this row reads watch: x2.14 bench, x2.84 held;
+  - freek-oracle-route (x3.88), offset-shortcar (x2.28) and phi40-thinstack (x3.70) also flip to watch;
+  - the four 3-joint rows stay ok.
+- **judgement:T5.** Confirmed:
+  - bench: 12 contacts, 43.23 mm summed, deepest 9.79 mm;
+  - held: 43 contacts, 173.02 mm summed, deepest 12.23 mm;
+  - against the lead's 4 / 20.24 mm and 14 / 60.97 mm, that is x2.14 (+22.99 mm) and x2.84 (+112.05 mm), past both
+    lines.
+- **judgement:S3.** The design's own doc (lines 126-128) says the root anchor is unmodelled metal. The model computes
+  the 249.6 N.mm root moment but samples no anchor.
+- **judgement:M5.** No R17, friction or hysteresis run is on file. The doc (line 134) lists them as inherited and
+  unpriced.
+
+### Missed (for the next audit; not in this verdict)
+
+1. **The continuity flood does not see the X1 clash.** `loaded_bench.json` continuity is read at the model rule
+   (static.gap 19.74), not at the verified X1 set (20.60). The verifier's `xcheck` (verify.py lines 53-57) runs only on
+   the bench poses (`S["M"]`, `S["B"]`). So the 1432 envelope frames are flooded without the knee-top / pad-bracket
+   clash, which jams 9 of the 397 bench poses. Two of those 9 are relayed poses (396 at phi 9.0, 446 at phi 0.8). So
+   "connected = static" has not been measured under the verified clash rule. Action: apply the X1 jam test to the
+   envelope frames, then re-flood.
+2. **An auditor error, not design gaming.** The M3 residual sign (+0.19, measured -1.46, see above) came from treating
+   contact poses as taken. Any future "read as lost" estimate should use the dump's taken flag.
+
+No new gaming by the design was found beyond these. The verified 20.60 stands as the honest number on the dumps.
