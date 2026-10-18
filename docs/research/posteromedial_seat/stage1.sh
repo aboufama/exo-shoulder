@@ -10,5 +10,5 @@ import json;d=json.load(open('$S'));s=d['seed'][0]
 print(json.dumps(dict(az1=d['cell'][0],el1=d['cell'][1],br=s['br'])))")
 SC='{"wd":6,"wa":12,"d_a1":4,"d_a2":4,"beta":6,"g":0.25,"r_c":1.5,"lift":0.8,"lE":8,"lc":4,"phib":10,"J3MIN":6}'
 OMP_NUM_THREADS=1 nice -n 10 python3 tools/concept_cma.py docs/concepts/models/posteromedial-knuckle-3r.py --x0 "$X0" --scales "$SC" --base "$BASE" \
-  --sigma 0.3 --popsize 8 --jobs 1 --budget-s 1200 --seed 1 --out docs/research/posteromedial_seat/cma_$TAG.json --label $TAG \
+  --sigma 0.3 --popsize 8 --jobs 1 --budget-s ${3:-1200} --seed 1 --out docs/research/posteromedial_seat/cma_$TAG.json --label $TAG \
   > docs/research/posteromedial_seat/cma_$TAG.log 2>&1
