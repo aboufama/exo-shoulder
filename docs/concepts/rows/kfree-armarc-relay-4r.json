@@ -16,11 +16,11 @@
  "contact": 0.022,
  "gap": 18.45,
  "gap_near1": 19.55,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.6722,
+ "v_follow": 1.0,
+ "v_inband14": 0.8885,
+ "v_inband10": 0.6135,
+ "v_gap": 26.42,
  "n_configs": 402,
  "best_params": {
   "sgn": 1,
@@ -116,5 +116,18 @@
   "contact": 0.0466,
   "overhead": "14/28",
   "note": "no relay metal, no lift: a bound, not a design"
+ },
+ "v_contact": 0.0249,
+ "audit": {
+  "t": "2026-10-18T09:05:00Z",
+  "result": "death stands (not refuted)",
+  "bar": "lead 18.28 frozen exact Bench(110,360) (stated by hand; the template's 68.93 / 75.94 / 30.35 defaults are stale); pre-registered kill 17.5",
+  "v_source": "v_* are the author's frozen exact Bench(110,360) per-pose dump (docs/research/fold_ceiling/kfree_armarc_frozen_exact.json) re-tallied by the auditor: CB.gap_of reproduces 26.42, why_ws 242 / fold 103 / contact 9 / j3stop 4 / parts 2. Not re-run (the exact wear takes 2337 s, over the 25-min audit box).",
+  "fast_repro": "k 381 re-run: 18.45 / near-touch 19.55, reach 0.7375, ib14 0.9027, contact 0.022 - identical to the sweep",
+  "gate": "re-computed from the sweep: near-touch 0.425 / 0.425 / 0.193 pts (PASSED); plain 1.058 / 1.058 / 0.451. Independent audit ES (74 configs, near-touch, (1+1)-ES from k 381 + 5 wide probes; docs/research/fold_ceiling/kfree_armarc_audit_es.json): near-touch best unchanged 19.55 (plain 17.81 at several neighbours, near-touch 20.08-21.25 there)",
+  "perfect_metal_bound": "at the frozen config the 107 kinematic losses (fold 103, J3 stop 4; every one has no welded solution in [0, PHI]) cap reach at 253/360 = 0.7028 even if every contact / parts pose became a take with zero contact and ib14 >= 0.90: gap >= 19.72 > 18.28 > 17.5. Hub K kept as metal (vs the morphology's one bent bar) therefore cannot rescue it.",
+  "thin_region_probes": "PHI 25 / 30 / 35 / 40 at psi2 -13 / -14 / -15 / -16 (axis tilt 12.05 / taz 236.92): fast 23.93 / 30.54 / 28.12 / 28.59 (near-touch 23.94 / 30.55 / 31.55 / 30.87); fold 35 / 30 / 24 / 22 vs contact 7 / 12 / 14 / 15: the longer arc trades fold for contact ~1:1, as the author's limiter says",
+  "sense_minus": "the sweep's 11 sgn -1 entries were all at psi2 0; ideal relay (no metal) sgn -1 PHI 60: psi2 -12 29.06 fast, best axis psi2 -8.92 21.39 fast (vs sgn +1 ideal 11.57 at PHI 45 / 9.25 at PHI 75): not a missed region (docs/research/fold_ceiling/kfree_armarc_audit_sgnm1.json)",
+  "red_team": "the optimum sits on a jam cliff: 25 of the 68 audit-ES samples (steps of ~0.3-2 deg in PHI / tilt / taz / psi2 around k 381, e.g. taz 236.92 -> 235.3) carry 7-76 jams (E strap / knee on the arm-fixed track at phi 0) and score 34.6-132.1 fast. A 1-2 deg relay-axis build error turns the design into a jammer: a real build reads worse than the stated number, not better."
  }
 }

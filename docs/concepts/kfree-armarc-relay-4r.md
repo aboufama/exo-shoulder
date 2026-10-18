@@ -179,3 +179,62 @@ The near-touch gate PASSED.
   relayed, i.e. in the stretched poses, which are the lateral / overhead ones.
 
 That last variant is the next lever for this column. It is not modelled here.
+
+## Audit (2026-10-18, death audit: try to refute the DEAD verdict)
+
+The bar is the lead's **18.28** frozen exact Bench(110,360), with the pre-registered kill at 17.5. I state it here by hand:
+the template's 68.93 / 75.94 / 30.35 defaults are stale. **Verdict: the death stands.**
+
+Measured reason in one line: at the frozen config, 107 of the 118 lost workspace poses are kinematic (fold 103, J3 stop 4;
+none has a welded solution in [0, PHI]). Even with perfect metal (every contact / parts pose taken, contact 0, ib14 >= 0.90)
+the gap is >= 19.72 > 18.28. A longer arc, which would cut the fold, puts the arm-fixed track into the torso about 1:1.
+
+What I checked:
+
+1. **Convergence gate, recomputed from the sweep (387 relay-hardware entries).**
+   - Near-touch: 0.425 / 0.425 / 0.193 points. It passes. The second number is close to the 0.5 limit.
+   - Plain gap: 1.058 / 1.058 / 0.451.
+   - Independent audit ES: 74 configs, near-touch objective, a (1+1)-ES started from k 381 plus 5 wide probes.
+     - The near-touch best stays at 19.55.
+     - The plain best is 17.81 at several neighbours, where near-touch reads 20.08-21.25.
+     - File: docs/research/fold_ceiling/kfree_armarc_audit_es.json.
+2. **Reproduction.** Re-running k 381 fast gives 18.45 / near-touch 19.55, reach 0.7375, ib14 0.9027, contact 0.022.
+   This matches the sweep exactly.
+3. **The frozen exact number, re-tallied from the per-pose dump.**
+   - CB.gap_of reproduces 26.42.
+   - why_ws: taken 242, fold 103, contact 9, J3 stop 4, parts 2.
+   - Every fold / J3-stop pose has phi = None.
+   - This is the author's run re-tallied, not a re-run: the exact wear takes 2337 s, which is longer than the 25-min box.
+4. **Over-strict modelling?**
+   - The model keeps hub K + link 1a / 1b as metal, while the morphology says link 1 is one bent bar. The
+     perfect-metal bound above shows this cannot matter. It affects at most 11 contact / parts poses and the in-band.
+   - The relay shell counts as 100 % in band. That makes the headline optimistic: the chain-only reading is 30.6.
+   - The track-in-torso contact is the real posed torso SDF on an arm-fixed arc. It is physical, not a modelling choice.
+5. **Thin region of the sweep (PHI 25-40 x psi2 -11..-16; only 9 entries had psi2 < -14).** Probes at the low-lift axis
+   (tilt 12.05 / taz 236.92):
+
+   | PHI / psi2 | fast gap | near-touch | fold | contact |
+   |---|---|---|---|---|
+   | 25 / -13 | 23.93 | 23.94 | 35 | 7 |
+   | 30 / -14 | 30.54 | 30.55 | 30 | 12 |
+   | 35 / -15 | 28.12 | 31.55 | 24 | 14 |
+   | 40 / -16 | 28.59 | 30.87 | 22 | 15 |
+   | 30 / -11 | 27.90 | 33.49 | 34 | 8 |
+
+   The fold falls 35 -> 22 while contact rises 4 -> 15. That is the author's limiter, confirmed.
+6. **Sense -1 (the relay turning laterally).**
+   - All 11 sgn -1 entries in the sweep were at psi2 0.
+   - Ideal relay (no metal) at sgn -1 / PHI 60: 29.06 fast at psi2 -12 (relay axis = humeral long axis, tilt 0) and 21.39
+     fast at the best axis / psi2 -8.92.
+   - Compare sgn +1 at the same best axis: 11.57 at PHI 45 and 9.25 at PHI 75.
+   - So sgn -1 is not a missed region. File: docs/research/fold_ceiling/kfree_armarc_audit_sgnm1.json.
+
+**Red team: the optimum sits on a jam cliff.**
+- 25 of the 68 audit-ES samples carry 7-76 jams (the E strap / knee on the arm-fixed track at phi 0) and score 34.6-132.1
+  fast. These samples are steps of ~0.3-2 deg around k 381, for example taz 236.92 -> 235.3.
+- So a 1-2 deg build error on the relay axis turns the design into a jammer. A real build would read worse than the
+  stated number, not better.
+- The continuity flood and the gravity check are still not run. Neither can lower the gap.
+
+The next lever is unchanged: a guide whose long element moves with the carriage, so that no arm-fixed metal covers the
+medial arc while the relay is unturned. Nobody has measured it yet.
