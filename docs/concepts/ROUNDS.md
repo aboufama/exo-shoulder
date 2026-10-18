@@ -5048,3 +5048,135 @@ needs >= 0.60 of in-band buy-back to reach 13.75. Report the near2 reading on th
 the contact depth next to every claim. The 3-joint side stays the lead's (take-bound, posteromedial seat dead): its
 open lever is complexity at the lead's number. Owed: the generation-J6 CAD + stills of offset-shortcar (the lead's call,
 4-joint option for the user), the auditor's `_depth_sources` crash fix, proxtrack's ledger entry.
+
+## Round 107 plan (Round J7, track jump; 2026-10-18 ~15:45 UTC, lead verified gap 18.28)
+
+Planner's read at 15:25-15:45 UTC: ROUNDS.md (round 106 plan + results), FINDINGS.md "Round J6", "Posteromedial J1
+seat", "Take-bound table", rows (offset-shortcar, proxtrack, freek, the lead, lowarm-kstop, lowarm-kphase-notch,
+conecut-h2facet, conecut-l2jog, desmo-*, geneva-tail-pinknee), docs/concepts/offset-shortcar-relay-4r.md,
+docs/research/take_bound_3dof.md (banner) and posteromedial_seat.md (conclusion), tools/simplicity.py v2.2 weights,
+events.jsonl tail (to 15:20:39Z), catalogue.json (21 ideated, all under measured closures), HANDOFF 15:25 note.
+Ledger (`tools/alignment_ledger.py latest`): **gamed** = lowarm-halfring-knuckle-3r (M3), dipped-law-groove-knuckle-3r
+(fold margin 0.184), seed-offset-3r-slides (3 passive translations); the lead conecut-knee-knuckle-3r WATCH;
+offset-shortcar-relay-4r WATCH (skeptic 15:16:21Z); freek-oracle-route-knuckle-4r WATCH; proxtrack-relay-knuckle-4r
+still has NO entry (owed). No bench, judge or kit file changed since round 106: no number below moved because the
+measurement changed.
+
+### State
+
+- **Lead (best verified 3-joint, not gamed): conecut-knee-knuckle-3r 18.28** (score 93.35), held 22.38; reach 0.7278
+  (262/360), ib14 0.9012, follow 1.0, 4 contacts (T5 sum 20.24 mm), overhead 8/28; 3 active, 0 P, cx 18.5. Near-touch
+  2 mm 34.84 bench / 37.11 held. WATCH carried: reporting (sweep 12.5 shown as 95.45), T1 (pose 203 taken at 0.263 mm),
+  T3 (held th margin 5.006), strap dilution (18.67 at equal strap sampling), M5 (J3 stop 155 N per N.m), self-reference.
+  conecut-h2facet-knuckle-3r verified a tie (18.28, held 22.16: the chamfer alone is the buildable config).
+- **Best 4-joint (a user option, never a lead): offset-shortcar-relay-4r 14.76** (score 94.63; chain-only buildable
+  gate = the headline; plain 13.74 pools shell metal into in-band), held 17.77 (best held on file), reach 0.7944
+  (286/360), ib14 chain 0.8898 / pooled 0.9132, 13 contacts, 0 jams, overhead 8/28, 4 active, 0 P, cx 52.5.
+  Gate = reach 10.56 + contact 3.18 + in-band 1.02. WATCH carried (no lens buys points the same way): 2 mm 45.56 / held
+  47.71 vs the lead's 34.84 / 37.11 (56 taken poses < 2 mm vs 33; the row's near2 37.70 omits the crown sets);
+  T5 depth x2.28 bench (46.18 vs 20.24 mm) / x2.84 held, deepest 9.79 mm hub 2 at ws (30, 135, 0); clearance floor (E
+  strap 1.002 mm over the carriage, 112 poses < 1.1 mm; bump 1.2 = 14.88); TOLERANCE CLIFF delta 4.5 -> 5.0 reads 27.53
+  (37 E-over-carriage jams); M5 (R17 gravity only: carriage friction, coil hysteresis, 3 bistable poses unpriced; mu 0.2
+  at ~4 N pad load would stall the coil, arithmetic); G6 (+25 cx, 0 overhead gain).
+- **freek-oracle-route-knuckle-4r** polished 15.40 / held 20.50 (verified 16.20 / 21.89), cx 33.25 (0 loops, serial,
+  sensed K + clock spring), WATCH (contact depth x3.88, stop refusals 343 / 423, cuff moment 1.9-3.1x K torque). freek and
+  offset-shortcar are the 4-joint Pareto pair.
+- **95 arithmetic on the relay:** the lug coil (or no coil) reads 14.23 on the claim bench (diagnostic, set nothing,
+  466 taken, shell 0.68 mm); + bump 1.2 build margin +0.12 = 14.35; 13.75 needs chain-only ib14 0.8898 -> >= 0.8958
+  (+0.0060 = 0.60 gap). The offset alone cost 0.0050 (0.8948 -> 0.8898, ~0.11 gap / deg) because the bump window
+  [lo - PHI, hi] and the carriage-footprint bump follow the carriage. Envsel (selection bench) at the pick: 15.61; ties
+  arm and lug coils (15.61 / 15.61), so the lug needs a pre-registered PHYSICAL tie-break.
+- **Where the relay loses (claim bench):** 12 chain contacts inherited (the lead's 4 at phi 0: 205 -4.28, 237 -8.93,
+  264 -5.80, 316 -1.23; 8 relayed: 262 -9.79 and 206 -6.07 folded-side on hub 2, 343, 372, 182, 423, 448, 457); 56 poses
+  beyond the relay; 466 on the arm-fixed coil -2.95 mm. Two-sided relays are CLOSED (262 / 206 stay at either sign,
+  new contacts 129 / 207). Station: ds 31 (ds 19.5 puts the pin-a boss in the shell window, ds 34 + delta 4.5 jams 77).
+- **3-joint side (take-bound):** 95 at 3 DOF is measured out of reach at the legal seats (272-take law cap, upper
+  estimate ~94.7; zero-contact floor 271 takes 14.72; the lead 4.53 short). The posteromedial seat for the KNUCKLE is
+  dead (202.93 frozen, crank PA 75-88 vs 38, hub 2 floats 19-29 mm). The ONE legal family never measured (take_bound
+  banner + posteromedial_seat.md 256): a LONG dyad over the shoulder top, arcs ~130 / ~45, J1 and J3 90-170 deg apart
+  (kinematic window 0.99-1.00), with its own drive.
+- **3-joint complexity frontier (verified):** cx 0 H1 27.20 / crest-knee 31.50; cx 12.0 geneva-tail-pinknee 23.57 (WATCH);
+  cx 15.75 desmo-slipper 18.95; cx 16.5 desmo-conecut 18.98; cx 18.5 the lead 18.28. lowarm-kstop (cx 16.75) screened
+  18.69 / held +0.50 (main track, verifier harness in progress). Loops cost 4 each (simplicity v2.2): the knuckle's
+  two-stage drive (stage-1 pin in the hub-2 cap-ring groove -> crank -> stage-2 nose slot) is most of its cx; desmo-geom
+  measured that no pin passes a stage-1 ring INSIDE the O20 rim (pitch_hi <= 8.44).
+- **Dead, do not rescreen:** two-sided relays; the desmo base under a relay (held +0.59 / +0.82); the K-free relay base
+  (26.42); relays under the lead at J0 / wobble / backbridge; cap null-space 4R (57.70); the posteromedial knuckle; every
+  K lever at the k33 seats (oracle 17.25); straight guides; arm-fixed cuff arcs at the pad station; carriage rails on the
+  pad side; leanrelay's OD 1.2 extension spring (cannot exist).
+- **Compute:** farm CLOSED (spent). Local only, nice -n 10, OMP_NUM_THREADS=1, <= 2 processes per agent, 4 cores shared
+  with the main track's lowarm verifiers: fast surrogate / envsel first, ONE exact claim wear per pre-registered config,
+  commit after every step.
+
+### Lenses
+
+**A. relay-95 (reach to 95 at 4 joints; suggested id lugcoil-lbracket-relay-4r; 2 processes, <= 120 min).** Finish
+offset-shortcar's four measured levers in one config, select on envsel, wear the claim bench ONCE.
+- Import docs/concepts/models/offset-shortcar-relay-4r.py read-only (envsel installed before armarc, its lesson 7).
+- Pre-register the physical tie-break NOW, before any read: "no arm-fixed part over the posterior arc" (lesson 2: the
+  arm-fixed part nearest the zero end is the posterior-IR binder) -> the coil rides the carriage's posterior-proximal lug.
+- (b) The bump window follows only the carriage footprint's real travel (the footprint swept over phi in [0, phi_max]
+  realised on envsel taken poses + a stated clearance), not [lo - PHI, hi]; band at its floor (8) as the second cell.
+  (c) Route the bracket at the pad azimuth (an L-shaped carriage lug, no planform turn over the E strap); re-read the
+  delta cliff on envsel: pass needs delta + 1.5 deg within +0.5 of the pick. (d) Bump 1.2 (build margin) in the claim.
+- Gate (pre-registered): pass = chain-only gate <= 13.75 (score >= 95), 0 jams, cliff margin >= 1.5 deg; kill = gate
+  > 14.76 (no gain over the parent) or held > 18.27. Report with the claim: plain beside the chain-only headline, near1,
+  the 2 mm reading on the LEAD'S basis (crown sets M.cmin included), T5 per-pose dumps bench + held
+  (`tools/alignment_paired.py dump`) with depth vs the lead, R17 with carriage friction (iglidur tape mu 0.15-0.25 at the
+  measured pad load) and coil hysteresis, both Proposal A / B readings for stop refusals, the continuity flood, min th
+  margin, cx (expected 52.5). A pass is the 4-joint answer for the user, never a lead change by itself.
+
+**B. one-stage drive (complexity at the lead's number, 3 joints; suggested id onestage-cam-knuckle-3r; 1 process,
+<= 90 min).** The closer's open 3-joint lever. Delete the crank: one higher pair drives K directly (a crowned pin on link
+1a's K member, at a lever arm from K, in a groove on link 2's side of J2 OUTSIDE the O20 rim; or the inverse), so the
+drive loses the crank body, its MR63ZZ pivot, one sliding pair and one loop (estimate cx 18.5 -> ~9-11; spring-free as
+desmo-slipper).
+- **Step 0 (no metal, <= 30 min):** synthesise the groove from the lead's verified K(J2) law (and desmo-slipper's) as a
+  line / tangent-arc profile; report max pressure angle (gate 38), the groove's radial excursion against the space
+  outside the O20 stack (desmo-geom: nothing fits inside the rim), the pin lever and the stroke (dK_lim >= 45.6).
+  Kill at step 0 = PA > 38 anywhere on the taken-pose range, or no groove fits outside the hub at <= the link's real
+  height: DEAD with the numbers (the take-bound table's drive row gets them).
+- **Gate:** groove and pin metal sampled at kit density (1 pt / 4 mm2), parameters chosen on envsel; frozen exact
+  Bench(110,360) once: pass = <= 18.98 at cx <= 12 (a Pareto point: beats the cx 12-16.5 frontier) ; kill = > 20.0 or held
+  paired worse than the lead by > 1.0. Report M3 (no drive sample inside link 1b's plate), the knee window, min th margin,
+  T5 dumps, the 2 mm reading, and the drive's transmission (K torque per N.m at J2) for R17.
+
+**C. long-dyad-top (weird, the last unmeasured 3-DOF family; suggested id longtop-dyad-3r; 1 process, <= 90 min).**
+J1 on the posteromedial back / acromion top (ruling 4), a long link 1 (arc ~130 deg) bent over the top of the shoulder,
+link 2 ~45 deg, J3 on the lateral arm, plain O20 pins first (cx 0), the knuckle's own drive only if the ghost passes.
+Kinematic window 0.99-1.00 (posteromedial_seat.md); the measured threat is metal floating over the curved back (hub 2
+in-band 0.00, median 28.9 mm at the posteromedial knuckle) and the long link's sagitta over the acromion.
+- **Step 0 (ghost, no drive):** K3-march every hub's and link's skin exit over envsel at the 5-deg fold margin with the
+  long link built as user-style bent bars (line / tangent-arc planform, climbs <= 60 deg, inner radius >= 15 mm) at real
+  height; report kinematic takes, in-band per part and contact. Kill = ghost frozen exact > 27.20 (H1 at cx 0) or
+  link-1 in-band < 0.6: write the closed 3-DOF answer into take_bound_3dof.md (the "unmeasured" line becomes measured).
+- **Gate:** if the cx-0 ghost <= 22, add the cheapest drive (B's one-stage cam if B passes, else the lead's) and wear
+  once: pass = <= 18.28 with cx <= 18.5 (a lead change at 3 DOF) or <= 22 at cx 0 (the new cx-0 point); held paired vs
+  the lead and H1.
+
+Rules for all lenses: select on envsel / envh (tools/env_bench.py), never on Bench(60,160) alone (blind to the relay)
+and never place a stop, margin or tie-break from Bench(110,360) binders (P1); held-out stays held out; every screened
+morphology writes docs/concepts/viz/concepts/<id>.js, passes `node docs/concepts/viz/test.mjs <id>` and re-runs
+`node docs/concepts/viz/thumbs.mjs`; commit after every step.
+
+### Carried (ideated, never screened)
+
+None. The 21 ideated catalogue entries all sit under measured closures (round 106 plan); the round-4 picks are done.
+
+### Elsewhere, not to be duplicated
+
+- Main track (round 15 lenses B / C): lowarm-kstop-knuckle-3r (verifier harness in progress, uncommitted) and
+  lowarm-kphase-notch-knuckle-3r (gate 0 half-passed, verifier file untracked). Lens B must not touch the low arm, the pad,
+  stop A or the stage-2 phase.
+- Owed by the auditor / lead: fix `_depth_sources` (crashes on
+  docs/alignment/remeasure/desmo-geom-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json, held = 'missing dump') before
+  lens A's T5 read; write proxtrack-relay-knuckle-4r's ledger entry (verify-claim REFUTED as modelled, 899cdbd).
+- Deferred by the lead: the generation CAD + stills of freek (J4) and offset-shortcar (J6) until the user answers the
+  4-joint question. Not built here.
+
+### Needs the user's say
+
+- The 4-joint question (open since 12:50): offset-shortcar 94.63 / held 17.77 at cx 52.5 vs freek 94.40 / held 20.50
+  at cx 33.25 vs the 3-joint lead 93.35 / held 22.38 at cx 18.5. Lens A says whether the relay reaches 95.
+- Proposal B (stop refusals count as contacts): both readings are reported for any stop design.
+- The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule and the transmission guard stay; no lens relaxes them.
