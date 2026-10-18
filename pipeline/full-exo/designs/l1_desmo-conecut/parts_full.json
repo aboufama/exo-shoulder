@@ -177,24 +177,24 @@
   {
    "k": 15,
    "group": "l2",
-   "name": "drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 99.9 deg, r 5.84..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)",
-   "vol_cm3": 0.044,
+   "name": "drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 99.9 deg, r 6.30..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)",
+   "vol_cm3": 0.065,
    "material": "steel",
-   "mass_g": 0.34,
+   "mass_g": 0.51,
    "valid": true,
-   "pieces": 1,
-   "faces": 3184
+   "pieces": 2,
+   "faces": 6376
   },
   {
    "k": 16,
    "group": "l2",
    "name": "drive cap-ring roof keep-out (the sector over the groove, F+1.61..F+3.65, one with hub 2's upper boss)",
-   "vol_cm3": 0.107,
+   "vol_cm3": 0.143,
    "material": "Ti-6Al-4V",
-   "mass_g": 0.47,
+   "mass_g": 0.63,
    "valid": true,
    "pieces": 1,
-   "faces": 3180
+   "faces": 6380
   },
   {
    "k": 17,
@@ -211,12 +211,12 @@
    "k": 18,
    "group": "dk",
    "name": "drive bell crank bent arm keep-out (6 x 3 mm Ti: straight run 19.4 mm, tangent arc r_c 16.18 about hub K's axis at radius 63.16 from GH, ending on the tip plate clear of the slot)",
-   "vol_cm3": 0.947,
+   "vol_cm3": 0.924,
    "material": "Ti-6Al-4V",
-   "mass_g": 4.2,
+   "mass_g": 4.09,
    "valid": true,
    "pieces": 1,
-   "faces": 444
+   "faces": 428
   },
   {
    "k": 19,
@@ -232,10 +232,10 @@
   {
    "k": 20,
    "group": "dk",
-   "name": "drive crank short arm keep-out (11.8 x 3 x 1.5 Ti, crank axis -> the stage-1 pin at a_s 9.30, top 0.15 under the cap ring)",
-   "vol_cm3": 0.053,
+   "name": "drive crank short arm keep-out (6.8 x 3 x 1.5 Ti, crank axis -> the stage-1 pin at a_s 9.30, top 0.15 under the cap ring)",
+   "vol_cm3": 0.031,
    "material": "Ti-6Al-4V",
-   "mass_g": 0.24,
+   "mass_g": 0.14,
    "valid": true,
    "pieces": 1,
    "faces": 12

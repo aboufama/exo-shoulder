@@ -113,11 +113,15 @@
     7.214,
     9.4
    ],
-   "inner_wall_r_mm": 5.84,
+   "inner_wall_r_mm": 6.3,
+   "groove_r_mm": [
+    6.455,
+    10.16
+   ],
    "r_out_mm": 10.96,
    "past_O20_mm": 0.96,
    "sector_deg": 99.94,
-   "groove_az_deg": 93.94,
+   "groove_az_deg": 93.83,
    "az_monotone": false,
    "drift_mm": 0.286,
    "azimuth_deg": [
@@ -128,7 +132,7 @@
   },
   "arm": {
    "root_mm": 4.0,
-   "stations": 28,
+   "stations": 27,
    "raised_root_rows": 4,
    "lifted_over_strap_mm": [
     0.0,
@@ -143,10 +147,10 @@
    ],
    "level_root_mm": 66.84,
    "level_tip_mm": 63.16,
-   "arc_rows_kept": 18,
+   "arc_rows_kept": 17,
    "arc_rows_model": 18,
-   "arm_to_slot_path_mm": 1.643,
-   "ends_at_beta_deg": -177.226,
+   "arm_to_slot_path_mm": 1.06,
+   "ends_at_beta_deg": -172.777,
    "note": "the arc ends where its section clears the slot by >= 0.3 mm; the tip plate joins it"
   },
   "plate": {
@@ -160,7 +164,7 @@
    ]
   },
   "stage1": {
-   "arm_len_mm": 11.8,
+   "arm_len_mm": 6.8,
    "arm_level_from_hub2_face_mm": [
     -1.539,
     -0.039
@@ -1026,11 +1030,15 @@
      7.214,
      9.4
     ],
-    "inner_wall_r_mm": 5.84,
+    "inner_wall_r_mm": 6.3,
+    "groove_r_mm": [
+     6.455,
+     10.16
+    ],
     "r_out_mm": 10.96,
     "past_O20_mm": 0.96,
     "sector_deg": 99.94,
-    "groove_az_deg": 93.94,
+    "groove_az_deg": 93.83,
     "az_monotone": false,
     "drift_mm": 0.286,
     "azimuth_deg": [
@@ -1041,7 +1049,7 @@
    },
    "arm": {
     "root_mm": 4.0,
-    "stations": 28,
+    "stations": 27,
     "raised_root_rows": 4,
     "lifted_over_strap_mm": [
      0.0,
@@ -1056,10 +1064,10 @@
     ],
     "level_root_mm": 66.84,
     "level_tip_mm": 63.16,
-    "arc_rows_kept": 18,
+    "arc_rows_kept": 17,
     "arc_rows_model": 18,
-    "arm_to_slot_path_mm": 1.643,
-    "ends_at_beta_deg": -177.226,
+    "arm_to_slot_path_mm": 1.06,
+    "ends_at_beta_deg": -172.777,
     "note": "the arc ends where its section clears the slot by >= 0.3 mm; the tip plate joins it"
    },
    "plate": {
@@ -1073,7 +1081,7 @@
     ]
    },
    "stage1": {
-    "arm_len_mm": 11.8,
+    "arm_len_mm": 6.8,
     "arm_level_from_hub2_face_mm": [
      -1.539,
      -0.039
