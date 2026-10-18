@@ -3535,3 +3535,17 @@ Self-measured, local only (the CPU farm is closed): at most 2 niced processes, $
   pick3 (held-out selected: best of three on the held-out set), ranked on a fresh envsel draw; a ruling on whether stop
   refusals of contact poses count as contacts; R17 / dowel force on any polished config. A polished config replaces the
   verified one only after that verifier confirms >= 1 gap point held out.
+
+### freek-oracle-route-knuckle-4r final polish: independent verification (2026-10-18 ~11:00 UTC, local, $0)
+
+The polish's pick1 (fe1-g10-7, objective rank 1, committed before any claim) is **confirmed** under the final-polish rule
+on the verifier's own path (`docs/concepts/verify/freek-oracle-route-knuckle-4r-polish-verify.py`: the verified config from
+the model's own params, frozen exact, priced, one fold reading, th from the member frames, kinematic + contact-aware
+continuity). Held out, fit envh: **20.24 vs 22.30 (+2.06, P 0.967)**; CAD shape (fit Bench(60,160)): 20.50 vs 21.89
+(+1.38, P 0.89); Bench(110,360): 15.40 (score 94.40) vs 16.20 (+0.81, P 0.73, noise). All four claims match the polisher's
+dumps pose for pose. th >= 5.58 on every taken pose; 0 poses dropped by either continuity reading. What it does not
+show: 95 (best 15.40, 1.65 points short), reach (the gain is contact: held 50 -> 29 contact poses, 241 -> 135 mm), or a
+gain under the stop-refusal side reading on the CAD shape (+0.76) or the bench (0): the polished dowel (own angle 93.0
+vs 96.9) refuses more poses that would be contacts. Search-bench hygiene holds on the env rule's metrics (>= 2.2 deg),
+but one envh pose is 1.66 deg from a held-out pose in the glenohumeral frame. The row keeps its verified 16.20; the
+polished config is recorded as `polished_*` fields; the 3-joint lead stays the lead.

@@ -264,5 +264,260 @@
    "docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_*.json",
    "docs/alignment/remeasure/freek-oracle-route-knuckle-4r_{bench,held}_perpose.json"
   ]
- }
+ },
+ "polished_status": "CONFIRMED (independent verifier, 2026-10-18): held-out gain >= 1 gap point on the env-fit protocol. Does NOT replace the verified fields; the 3-joint lead stays the lead.",
+ "polished_id": "pick1 fe1-g10-7 (objective rank 1; picks committed 09:43:17 UTC in 6086e09, before any claim)",
+ "polished_params_nominal_file": "docs/research/freek_env_polish/picks/pick1.json",
+ "polished_params_priced": {
+  "q3max": 84.7705,
+  "smhi": 8.1472,
+  "smlo": 8.5843,
+  "a1max": 70.7149,
+  "bk1": 29.3309,
+  "bk2": 48.851,
+  "az2": 48.9176,
+  "el2": 41.3495,
+  "wd": 66.7214,
+  "wa": -13.7533,
+  "b3": 0.2933
+ },
+ "polished_price": {
+  "th_cut": 122.7,
+  "dK_cut": 75.923,
+  "dK_stopB": 83.031,
+  "psiA": -55.366,
+  "a1max_nominal": 72.6719,
+  "a1max_priced": 70.7149
+ },
+ "polished_search": "envh (Bench(60,160) clips + env positions 110..528 step 2, 210 fresh ws poses); 1 CMA start 161 tries; tools/freek_env_polish.py",
+ "polished_held_out_gap": 20.24,
+ "polished_held_out_protocol": "fit envh FAST -> held out (1154) EXACT, frozen, priced, one fold reading",
+ "polished_held_out_gain": 2.06,
+ "polished_held_out_ref_VER_same_protocol": 22.3,
+ "polished_held_out_paired": {
+  "diff": -2.06,
+  "ci90": [
+   -4.65,
+   -0.2
+  ],
+  "p_pick_better": 0.967,
+  "discordant": {
+   "ws_taken_A_only": 23,
+   "ws_taken_B_only": 27,
+   "contact_A_only": 7,
+   "contact_B_only": 28,
+   "contact_both": 22
+  }
+ },
+ "polished_held_out_side_reading": {
+  "how": "stop-refused poses that are contacts without the dowel (same frozen shape) counted as contacts (audit proposal B, not a ruled gate)",
+  "pick": 21.37,
+  "VER": 22.6,
+  "gain": 1.23,
+  "refused_kit_contacts": [
+   11,
+   3
+  ]
+ },
+ "polished_contact": {
+  "held_envfit": [
+   29,
+   134.76
+  ],
+  "held_envfit_VER": [
+   50,
+   241.47
+  ]
+ },
+ "polished_th_margin": {
+  "held_envfit": {
+   "one_min": 5.58,
+   "one_lt5": 0,
+   "one_min_at": {
+    "i": 880,
+    "state": 1,
+    "kind": "ws"
+   },
+   "family_min": 0.7,
+   "family_lt5": 6,
+   "j2_axis_link1b_vs_link2_maxdeg": 0.0002,
+   "states": {
+    "0": 630,
+    "1": 222,
+    "2": 44
+   }
+  },
+  "how": "member frames M.T(1|7|2): one reading per state's moving chain; family reading reported"
+ },
+ "polished_continuity": {
+  "held_envfit": {
+   "kinematic_dropped": 0,
+   "islands": 1,
+   "contact_aware": {
+    "blocked_nodes": 31,
+    "connected": 1079,
+    "dropped": 0,
+    "gap": 20.24,
+    "reach": 0.729
+   }
+  }
+ },
+ "polished_j3_stop_own_angle": [
+  93.1,
+  93.1
+ ],
+ "polished_verifier": "docs/concepts/verify/freek-oracle-route-knuckle-4r-polish-verify.py; results docs/concepts/verify/freek-oracle-route-knuckle-4r/polish_verify/",
+ "polished_held_out_fit60": {
+  "gap": 20.5,
+  "VER": 21.89,
+  "gain": 1.39,
+  "side_reading": 21.54,
+  "side_VER_polisher_not_rerun": 22.3,
+  "contact": [
+   29,
+   127.92
+  ],
+  "th": {
+   "one_min": 5.58,
+   "one_lt5": 0,
+   "one_min_at": {
+    "i": 880,
+    "state": 1,
+    "kind": "ws"
+   },
+   "family_min": 0.7,
+   "family_lt5": 6,
+   "j2_axis_link1b_vs_link2_maxdeg": 0.0002,
+   "states": {
+    "0": 629,
+    "1": 222,
+    "2": 43
+   }
+  },
+  "continuity": {
+   "kinematic_dropped": 0,
+   "contact_aware": {
+    "blocked_nodes": 32,
+    "connected": 1077,
+    "dropped": 0,
+    "gap": 20.5,
+    "reach": 0.7269
+   }
+  },
+  "paired_vs_verified_dump": {
+   "gap_A": 20.51,
+   "gap_B": 21.89,
+   "diff": -1.38,
+   "split": {
+    "reach": 0.84,
+    "follow": 0.0,
+    "inband": -0.37,
+    "contact": -1.85
+   },
+   "discordant": {
+    "ws_taken_A_only": 19,
+    "ws_taken_B_only": 27,
+    "contact_A_only": 8,
+    "contact_B_only": 26,
+    "contact_both": 21
+   },
+   "boot": {
+    "n": 4000,
+    "ci90": [
+     -3.71,
+     0.43
+    ],
+    "sd": 1.26,
+    "p_A_better": 0.892
+   }
+  }
+ },
+ "polished_gap": 15.4,
+ "polished_score": 94.4,
+ "polished_bench": {
+  "protocol": "fit Bench(60,160) FAST -> Bench(110,360) EXACT, frozen, priced, one fold reading",
+  "gap": 15.4,
+  "score": 94.4,
+  "VER": 16.2,
+  "VER_src": "verified on file (not re-run: the per-pose dump on file was compared pose by pose)",
+  "gain": 0.8,
+  "side_reading": 16.39,
+  "side_VER_polisher_not_rerun": 16.44,
+  "contact": [
+   7,
+   39.47
+  ],
+  "contact_VER": [
+   15,
+   78.55
+  ],
+  "overhead": [
+   8,
+   28
+  ],
+  "th": {
+   "one_min": 5.59,
+   "one_lt5": 0,
+   "one_min_at": {
+    "i": 306,
+    "state": 1,
+    "kind": "ws"
+   },
+   "family_min": 5.59,
+   "family_lt5": 0,
+   "j2_axis_link1b_vs_link2_maxdeg": 0.0002,
+   "states": {
+    "0": 273,
+    "1": 89,
+    "2": 23
+   }
+  },
+  "continuity": {
+   "kinematic_dropped": 0,
+   "contact_aware": {
+    "blocked_nodes": 8,
+    "connected": 1101,
+    "dropped": 0,
+    "gap": 15.4,
+    "reach": 0.7639
+   }
+  },
+  "paired_vs_verified_dump": {
+   "gap_A": 15.4,
+   "gap_B": 16.21,
+   "diff": -0.81,
+   "split": {
+    "reach": 1.39,
+    "follow": 0.0,
+    "inband": -0.23,
+    "contact": -1.96
+   },
+   "discordant": {
+    "ws_taken_A_only": 6,
+    "ws_taken_B_only": 11,
+    "contact_A_only": 2,
+    "contact_B_only": 10,
+    "contact_both": 5
+   },
+   "boot": {
+    "n": 4000,
+    "ci90": [
+     -5.54,
+     1.84
+    ],
+    "sd": 2.23,
+    "p_A_better": 0.727
+   }
+  }
+ },
+ "polished_t": "2026-10-18T10:59:20Z",
+ "polished_caveats": [
+  "Held-out gain with the CAD shape (fit Bench(60,160) -> held out): +1.38 paired vs the verified dump (P 0.89, CI90 -0.43..+3.71): >= 1 point but not significant.",
+  "Verified protocol (Bench(110,360)): 15.40 (score 94.40) vs 16.20: +0.81, P 0.73 - inside noise; no config reaches 95 (gap <= 13.75).",
+  "Stop-refusal side reading (refused poses that are kit contacts counted as contacts; audit proposal B, not a ruled gate): held env-fit +1.23 (21.37 vs 22.60), held fit60 +0.76 (21.54 vs the polisher's VER 22.30, under 1), bench 16.39 vs 16.44 (0). The polished J3 dowel (own angle 92.99-93.10 vs 96.87-96.98) refuses more kit-contact poses: held 3 -> 10-11, bench 1 -> 4.",
+  "Contact poses / summed depth: held env-fit 29 / 134.76 mm (VER 50 / 241.47); bench 7 / 39.47 mm (VER 15 / 78.55; lead 4 / 20.24).",
+  "Search-bench hygiene: no envh pose is a held-out pose; coordinate Chebyshev min 2.23 deg and thorax-humerus geodesic min 2.22 deg from every held-out pose (the env rule), but ONE envh pose is 1.66 deg from a held-out pose in the glenohumeral (HG) frame the mechanism sees (1 of 210 search poses). The CMA records hold only envh and Bench(60,160) scores (no held-out outcome); the picks were committed (6086e09, 09:43:17) before the first claim (09:48).",
+  "Not re-run by this verifier: VER on Bench(110,360) and VER fit60 -> held out (the on-file verified per-pose dumps were used; the polisher's harness reproduced them exactly). pick2 / pick3 not verified (pick3 was selected on the held-out set).",
+  "Open physical checks carry over (R17 with the state-2 spring hold, dowel force, cuff twist with the stop engaged)."
+ ]
 }
