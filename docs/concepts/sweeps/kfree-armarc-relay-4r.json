@@ -17966,5 +17966,191 @@
 12
 ],
 "min_metal_taken": 0.177
+},
+{
+"k": 398,
+"t": "2026-10-18T08:27:33Z",
+"params": {
+"sgn": 1,
+"PHI": 19.42,
+"tilt": 12.05,
+"taz": 236.92,
+"psi2": -8.92,
+"hw": 0
+},
+"inband14": 0.9354,
+"inband10": 0.6952,
+"reach": 0.7438,
+"follow": 1.0,
+"contact": 0.0165,
+"gap": 17.27,
+"gap_near1": 18.37,
+"bench": [
+60,
+160
+],
+"mode": "fast",
+"relayed": {
+"n_ws": 16,
+"taken_ws": 13,
+"contact": 3,
+"jam": 0,
+"jam_ws": 0,
+"clip": 3,
+"clip_taken": 3,
+"phi_max": 18.94,
+"phi_max_taken": 18.94
+},
+"why_ws": {
+"": 119,
+"contact": 3,
+"parts": 1,
+"fold": 35,
+"j3stop": 2
+},
+"overhead": [
+1,
+12
+],
+"min_metal_taken": 0.314
+},
+{
+"k": 399,
+"t": "2026-10-18T08:27:38Z",
+"params": {
+"sgn": 1,
+"PHI": 45,
+"tilt": 12.05,
+"taz": 236.92,
+"psi2": -8.92,
+"hw": 0
+},
+"inband14": 0.9354,
+"inband10": 0.6952,
+"reach": 0.8,
+"follow": 1.0,
+"contact": 0.0157,
+"gap": 11.57,
+"gap_near1": 13.77,
+"bench": [
+60,
+160
+],
+"mode": "fast",
+"relayed": {
+"n_ws": 26,
+"taken_ws": 22,
+"contact": 3,
+"jam": 1,
+"jam_ws": 1,
+"clip": 3,
+"clip_taken": 3,
+"phi_max": 45.0,
+"phi_max_taken": 45.0
+},
+"why_ws": {
+"": 128,
+"contact": 3,
+"parts": 2,
+"fold": 26,
+"j3stop": 1
+},
+"overhead": [
+2,
+12
+],
+"min_metal_taken": 0.314
+},
+{
+"k": 400,
+"t": "2026-10-18T08:27:43Z",
+"params": {
+"sgn": 1,
+"PHI": 75,
+"tilt": 12.05,
+"taz": 236.92,
+"psi2": -8.92,
+"hw": 0
+},
+"inband14": 0.9354,
+"inband10": 0.6952,
+"reach": 0.8375,
+"follow": 1.0,
+"contact": 0.03,
+"gap": 9.25,
+"gap_near1": 13.63,
+"bench": [
+60,
+160
+],
+"mode": "fast",
+"relayed": {
+"n_ws": 37,
+"taken_ws": 28,
+"contact": 6,
+"jam": 3,
+"jam_ws": 3,
+"clip": 3,
+"clip_taken": 3,
+"phi_max": 69.88,
+"phi_max_taken": 64.81
+},
+"why_ws": {
+"": 134,
+"contact": 6,
+"parts": 4,
+"fold": 16
+},
+"overhead": [
+3,
+12
+],
+"min_metal_taken": 0.314
+},
+{
+"k": 401,
+"t": "2026-10-18T08:27:50Z",
+"params": {
+"sgn": 1,
+"PHI": 45,
+"tilt": 12.05,
+"taz": 236.92,
+"psi2": -8.92
+},
+"inband14": 0.9174,
+"inband10": 0.6702,
+"reach": 0.7312,
+"follow": 0.9333,
+"contact": 0.0942,
+"gap": 27.97,
+"gap_near1": 35.68,
+"bench": [
+60,
+160
+],
+"mode": "fast",
+"relayed": {
+"n_ws": 26,
+"taken_ws": 21,
+"contact": 4,
+"jam": 1,
+"jam_ws": 1,
+"clip": 3,
+"clip_taken": 3,
+"phi_max": 45.0,
+"phi_max_taken": 45.0
+},
+"why_ws": {
+"": 117,
+"contact": 14,
+"parts": 2,
+"fold": 26,
+"j3stop": 1
+},
+"overhead": [
+2,
+12
+],
+"min_metal_taken": 0.314
 }
 ]
