@@ -4711,3 +4711,64 @@ picks are done.
 - B1 (G4, m_sub at K rest), unchanged; the withdrawn CI tie rule, still with the user.
 - The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule and the transmission guard stay; no lens relaxes
   them.
+
+## Round 15 plan, re-launch (2026-10-18 ~12:25 UTC, track main, lead verified gap 18.28)
+
+Adopts "Round 15 plan, re-dispatch (09:25 UTC)" above, lenses B and C as written, with ONE change: **lens A
+(take-bound-3dof) runs as a separate lead agent** (docs/research/take_bound_3dof.md, skeleton dfcf0f5), so this loop
+runs **B (lowarm-adjpad-buildable) and C (conecut-sidestep-metal) only**. Read at 12:15-12:25: events.jsonl to
+12:07:34Z, `tools/alignment_ledger.py latest`, the lead's verified per-pose dump
+(docs/alignment/remeasure/conecut-knee-knuckle-3r_bench_perpose.json), rows/*.json, the interrupted runs' ideation
+results. No bench, judge or kit file changed since 09:25, so no number moved because the measurement changed. Ledger
+unchanged: GAMED lowarm-halfring-knuckle-3r (M3), dipped-law-groove-knuckle-3r, seed-offset-3r-slides; the lead
+conecut-knee-knuckle-3r 18.28 (held 22.38, 22.43 at kit density) WATCH with the same seven reasons (reporting, T1, T3,
+NEW-strap-dilution, M5, NEW-self-reference, G4).
+
+**Measured since 09:25 (jump round 105 and audits) that bind B and C:**
+- acroant-conecut-knuckle-3r DEAD: J1 +5 deg on the acromion top ties 18.28 (held 22.37) but the +0.2 mm probe reads
+  19.37 vs the lead's 18.83 (pose 203 at 0.138 mm < 0.15); +2 flips 203 to contact (18.83); 237 / 264 / 316 go deeper
+  (-10.47 / -6.54 / -1.60). J1 seat moves join C's exclusions; **203 is the guard pose of every tangent move.**
+- desmo-geom-knuckle-3r DEAD (audited): 0 PA-feasible O1.5 stage-1 pins inside hub 2's O20 in 131 geometries (annulus
+  1.38 mm vs >= 1.63 mm stroke). This closes A0L ("one-part groove inside hub 2's O20"): **B does not run A0L.** Its
+  ring-past-the-rim variant W wears 18.43 frozen exact (a tie ceiling).
+- seatoracle-erwall-knuckle-3r DEAD: free K at the lead's seats with stop B 76.04 reads 17.69 connected (277 takes, 13
+  contacts) > the 17.25 oracle: no K-law lever at the lead's seats.
+- proxtrack-relay-knuckle-4r SCREENED (4 joints, cx 52.5, not the headline): frozen exact 14.02 plain / 14.40 gate,
+  reach 0.7917 (285), 13 contacts, held 18.01; its verifier is running now. Best verified 4-joint stays
+  freek-oracle-route polished 15.40 until that verdict lands.
+- crest-knee-3r flat cell re-verified 32.84 / held 29.81 (the row keeps the joggle's 31.50).
+
+**Correction to the 09:25 state (C's arithmetic).** The lead's verified dump reads its four contacts as 205 hub 2
+-4.28, 237 -8.93, **264 -5.80** (crank / horn, the lead's own red team), 316 -1.235 (link 2 / hub 2; extra walls
++0.672). "264 hub K -1.17" and "237 crank -9.42" are the desmo-conecut chain's depths (round 13 lesson 6: the inverted
+drive took 264 from -5.80 to -1.17). So:
+- on the lead's chain only **316** is within an O20 trim (prize ~0.54 -> ~17.74); 264 needs 5.8 mm and is priced at
+  gate 0 only, with round 11's trimlug prior (lateral relief 1 mm toward K's axis gains 0.9-1.0 mm at 237 / 264);
+- on the desmo / lowarm chain (B's cell) **264 (-1.17) and 316 (-1.23)** are both in reach (~1.1 -> ~17.2).
+- C's gate 0 therefore runs on both chains (B's buildable cell once B's step 0 passes). Kill: lateral gain < 1.4 mm
+  per 1.5 mm of move at 316 (lead chain) and at 264 + 316 (desmo chain), or any envsel take lost.
+- Pose 203 on the lead: main metal 0.716 mm, extra walls 0.263 mm (hub 2 rim / K housing). A hub-2 rim chamfer inside
+  O20 is a C lever (metal on the shared binder). If C measures it, hand the number to B: adjpad's 203 margin at P5 is
+  0.154 mm, 0.004 above the floor.
+
+**Lens B runs from the four ideas judged in the interrupted runs (not regenerated).** Order:
+1. lowarm-kstop-knuckle-3r (K-own stop A, a set screw at the end of an arc groove inside hub K's O20; pad deleted;
+   short-arm notch in link 1b's J2 plate; cx 16.75; pre-registered start 18.65). Its own measurement: the short-arm
+   samples sit at F+2.78 / 2.90 (r 9.51 / 9.90) inside link 1b's plate band even at F+3.9, so the notch is part of the
+   metal and the M3 check covers the short arm, not only the groove and pin.
+2. lowarm-kpreload-knuckle-3r (zero play, cx 16.75) only with the auditor's ruling that the loop preload is not a
+   flexure; at 19.75 it dies on cx.
+3. lowarm-adjpad-knuckle-3r as the control cell (cx 17.0, at the cap; predicted step-0 kill on 203 at P5).
+4. lowarm-kstop-bareti-knuckle-3r (cx 16.25) only as a cell of kstop after kstop passes step 0. A Hertz-based RC_MIN
+   needs the auditor's acceptance, and its 35 N corner exceeds Ti first yield.
+- Every 09:25 rule for B holds: stage 1 at F+3.9 or above; play read at the P0 AND P5 corners (P5 counts only as a
+  stated build spec in components); 203 >= 0.15 mm at every corner and at the +0.1 / +0.2 mm probes; pose 139 (0.072 mm
+  on the lead) watched under the K self-motion; kit density (`python3 tools/sample_density.py measure <id>`); RC_MIN
+  as a cut; no spring.
+
+**Elsewhere now (not this loop):** take-bound-3dof (lead agent); proxtrack-relay-knuckle-4r (verify);
+armarc-relay-knuckle-4r (re-launch lever, liner 3.75 near-touch 12.30 fast); deltoid-crest-j3-3r (death audit 3);
+cap-plateau-knuckle-3r (held wear of audit 3s); crest-knee-3r (generation-winner L2 CAD); freek-oracle-route-knuckle-4r
+(polish confirmed, no rescreen). Carried: none (the 21 ideated catalogue entries are all under measured closures).
+Box: 4 cores, one verifier running; each lens <= 2 niced processes, OMP_NUM_THREADS=1, fast surrogate before any
+exact wear; commit after every step.
