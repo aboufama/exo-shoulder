@@ -154,3 +154,43 @@ Files: model docs/concepts/models/crest-knee-3r.py, sweep docs/concepts/sweeps/c
 order, `run` tag, `gap_nt`), row docs/concepts/rows/crest-knee-3r.json (exact_frozen + others, gate, H1 control),
 preview docs/concepts/viz/concepts/crest-knee-3r.js at the claimed config. Claim harness and per-pose dumps (bench 470
 poses each) were written to the session scratchpad (ck/final.py, ck/final{1,2,3}.json), not committed.
+
+## Verification (independent verifier, 2026-10-18)
+
+Harness `docs/concepts/verify/crest-knee-3r.py` (subclasses nothing new: it loads this model unchanged and the pin-knee
+verifier's `extra_checks` unchanged). Protocol: fit on Bench(60,160) fast, shape frozen (heights, knee reference m, E
+profile, J3 window [265.6, +239.54 deg]), worn without refit, exact path, on Bench(110,360) and on the disjoint held-out
+bench. Run locally (farm closed), niced, one thread, 2 processes.
+
+| wear | gap | reach | follow | ib14 | ib10 | contact (poses, depth sum, deepest) | near-touch 1 / 2 mm | min th | overhead ws taken | removed by checks |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Bench(110,360) | **32.84** | 0.6333 | 1.0 | 0.8529 | 0.4431 | 0.0146 (5, 6.40 mm, -2.77) | 36.25 / 57.98 | 6.23 deg | 5 / 28 | 0 |
+| held out | **29.81** | 0.6667 | 1.0 | 0.8521 | 0.4405 | 0.0169 (6, 4.80 mm, -1.63) | 35.39 / 54.71 | 5.33 deg | 6 / 26 | 0 |
+| champion (spherical 3R), same bench + protocol, fold margin 5 | 64.93 | | | | | | | | | |
+
+What was checked (each tried as a refutation; none removed a pose):
+
+- **DOF.** 3 active O20 hubs (MR117-2RS pairs); the cuff knee is 2 MR63ZZ pin pairs parallel to J3, outside the count
+  (user 2026-10-17). Closure: J1 and J2 on GH rays, the knee's planar RR absorbs the in-plane drift; the radial drift is
+  0.0 mm on every taken pose (R_tol 0.5), so no passive coordinate is undetermined and nothing sags. 0 passive
+  translations.
+- **Closure, independently in 3D** (not the closed form the model solves): hub-3 centre, pin a, pin b 0.000 mm; J3 and
+  knee-pin axes <= 0.023 deg; closure residual <= 0.017 deg.
+- **Parts the model does not pair:** knee link vs hub 3 above its lower plate (rides with link 2, 1 mm rule) 0 bad;
+  E boss vs hubs 1-2, link 1 (1 mm) and link 2 (0.15 mm, adjacent at J3) 0 bad. The fly-over E box is used only to size
+  link 2; the actual E strap mid-surface is checked against link 2 on every pose by the model's collide (E-L2).
+- **Stops and windows:** every taken pose has q3' inside the frozen J3 window (min margin 4.62 deg bench / 1.00 held);
+  knee angle 80.2-103.8 deg inside [25.22, 154.78]; min th margin 6.23 / 5.33 deg (>= 5; no K, so no K play).
+- **Continuity flood** (full 1432-pose workspace grid, 2-deg slerp edges, <= 10 deg joint steps incl. q3', pin a, pin
+  b, no knee branch change, the J3 window and fold margin as walls, seeds at elevation 0): 959 kinematic nodes, 959
+  connected, 0 islands; 0 taken bench or held poses dropped, so connected = static.
+- **Per-pose dumps** (lead's rule): `docs/alignment/remeasure/crest-knee-3r_bench_perpose.json` (recomputed 32.83) and
+  `..._held_perpose.json` (29.81), tools/alignment_paired.py format plus why / th margin / q3' / knee angle per pose.
+- **Pad place:** pin b sits 79.6 mm from GH in hub 3's plane at level 61.2 mm (H1: 61.0 / 78.5), i.e. on the upper arm
+  at H1's distance, not on the acromion.
+
+Verdict: **verified at 32.84 (score 88.06), held 29.81; not refuted** (champion 64.93 on the same bench and protocol;
+66.97 at fold margin 10 through the pin-knee verifier, 75.94 with the risley checks). It is not a leader or a round
+winner: 5.64 behind H1's 27.20 and 14.56 behind the lead's 18.28 on the same bench, overhead workspace reach 5/28
+(0.18), |axial| >= 150 workspace 5/27 (22 fold). The claim's own red team is accurate; the one framing to correct is
+"overhead 15/38": that count mixes 10 overhead clip frames with 5 of 28 overhead workspace poses.
