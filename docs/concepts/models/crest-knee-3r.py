@@ -277,10 +277,51 @@ class JogModel(Model):
             R, t = self.T(5, i); out["pad"] = (R @ cp + t, R @ Rp, np.array([PK.PAD_R, PK.PAD_R, tp / 2]))
         return out
 
+    def _knee_slices(self, n_ramp=4):
+        """the joggled knee link as boxes in its own (body 6) home frame: the pin-a flat, n_ramp ramp pieces (each box spans
+        its piece's level range) and the pin-b flat. Underside level + tp + RUN, thickness tp (as the flat knee's box)."""
+        P = self.D.p; tp = P["tp"]; fr = self.fr; lc = float(P["lc"]); sn = self.D.sn
+        tra, trb = self.tr, self.tr_b; a0, b0 = PK.BOSS_R, max(lc - PK.BOSS_R, PK.BOSS_R + 1e-6)
+        def lev(x): ww = min(max((b0 - x) / (b0 - a0), 0.0), 1.0); return tra * ww + trb * (1 - ww)
+        xs = [(-PK.BOSS_R, a0)] + [(a0 + (b0 - a0) * k / n_ramp, a0 + (b0 - a0) * (k + 1) / n_ramp) for k in range(n_ramp)] + [(b0, lc + PK.BOSS_R)]
+        Rk = np.stack([fr["eK"], fr["nK"], sn], 1); out = []
+        for x0, x1 in xs:
+            if x1 - x0 < 1e-6: continue
+            l0, l1 = sorted((lev(x0), lev(x1))); z0 = l0 + tp + S.RUN; z1 = l1 + tp + S.RUN + tp
+            out.append((fr["A0m"] + 0.5 * (x0 + x1) * fr["eK"] + 0.5 * (z0 + z1) * sn, Rk, np.array([0.5 * (x1 - x0), PK.KNEE_W / 2, 0.5 * (z1 - z0)])))
+        return out
+
     def _boxes_at_final(self, i):
         a0, b0 = self._tr_fit, getattr(self, "_trb_fit", None); self._tr_fit = self.tr; self._trb_fit = self.tr_b
-        try: return self._boxes_at(i)
+        try: out = self._boxes_at(i)
         finally: self._tr_fit = a0; self._trb_fit = b0
+        ks = getattr(self, "_kslice", None)
+        if ks is not None:
+            R, t = self.T(6, i); out["knee"] = (R @ ks[0] + t, R @ ks[1], ks[2])
+        return out
+
+    def collide(self, i):
+        """the flat knee's checks with the knee link = its pin-a flat, then the knee-only pairs for every other slice of the
+        joggle (non-adjacent: hub 1, hub 2, L1, L2; adjacent at pin a: hub 3 and the E strap past the boss, 0.15 mm rule)"""
+        sl = self._knee_slices(); self._kslice = sl[0]
+        try: out = super().collide(i)
+        finally: self._kslice = None
+        h = S.T_LINK / 2; fr = self.fr
+        def tf(m, X): R, t = self.T(m, i); return X @ R.T + t
+        surf = {k: tf(m, X) for k, (m, X) in self.cyl_surf.items() if k in ("hub1", "hub2", "hub3")}
+        strap = {k: tf(m, X) for k, (m, X) in self.strap.items()}
+        Em = tf(*self.Emid); pa = tf(3, fr["A0"][None])[0]; Ef = Em[np.linalg.norm(Em - pa, axis=1) > PK.BOSS_R + 0.5]
+        R6, t6 = self.T(6, i); lc_ = self.last_clear; adj = 1e9
+        for cen, Rk, half in sl[1:]:
+            box = (R6 @ cen + t6, R6 @ Rk, half)
+            def vb(X, extra=0.0): return float(self.sd_box(X, *box).min()) - extra if len(X) else 1e9
+            for key, v in (("knee-hub1", vb(surf["hub1"])), ("knee-hub2", vb(surf["hub2"])),
+                           ("knee-L1", vb(strap.get("L1", np.zeros((0, 3))), h)), ("knee-L2", vb(strap.get("L2", np.zeros((0, 3))), h))):
+                out = min(out, v); lc_[key] = round(min(lc_.get(key, 1e9), v), 1)
+            for key, v in (("knee-hub3", vb(surf["hub3"])), ("knee-E", vb(Ef, h))):
+                adj = min(adj, v); lc_[key] = round(min(lc_.get(key, 1e9), v), 1)
+        if adj < self.ADJ: out = min(out, -1.0)
+        return out
 
 
 _FlatModel = Model

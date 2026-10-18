@@ -6,6 +6,40 @@ pin knee's back-of-shoulder seats (H1, k4598) to the deltoid-crest seats, with l
 and an optional J3 own-angle stop. 3 active joints, 2 passive pins (cuff knee, outside the count), 0 passive
 translations.
 
+## Round-14 re-dispatch 2 (2026-10-18 07:22 UTC, after the container restart)
+
+The same lead note came back after the container restart; the first antcrest re-dispatch (section below) had committed
+its measurements at 07:00 (61.12 frozen exact, gate NOT passed). This pass closes what it left open and tries the
+row's own named next lever.
+
+### Deeper-version answers (written first, 07:24 UTC)
+
+1. **What a top mechanism designer would do that the spec does not ask for.** (a) Not re-screen what is measured: the
+   antcrest hub-2 trade (hub 2 0.118 in band; J2-ray skin exit 52-91 mm, not separable on J3) is knee-independent, so
+   an envelope-bench knee re-fit cannot move it. Close the basin properly instead: IPOP-style CMA restarts from the
+   top-5 antcrest configurations with a wider step (0.15) until the convergence gate passes or a new descent appears.
+   (b) Remove the crest cell's own measured limiter - ONE radial level for the E boss (member 3) and the arm pad (cuff)
+   over skins of different height (boss 0.43 / pad 0.85 in band at the fold-free end) - with a JOGGLED knee link: pin
+   a's boss and pin b's pad each at their own level, the knee link a bent 3 mm bar stepping between them (<= 60 deg
+   ramp). The pins stay parallel, so the planar knee's kinematics, closure and window are unchanged; only where the
+   metal sits along the pin axis moves. It costs no joint, no body and no complexity point. (c) Model the joggle's
+   collisions honestly: the knee link as 6 boxes (two flats + 4 ramp pieces), the 0.15 mm adjacency rule at pin a for
+   every piece.
+2. **Rawest material.** The posed skin through the signed-distance grids (Bench(60,160) fast 0089c747c10f; Bench(110,360)
+   exact for the claim), the model's per-sample needs (Hneed boss / pad / knee per pose and per sample - the level each
+   piece of metal must sit at), the per-pose dumps of the verified crest claim and the antcrest claim. The envelope
+   bench is still NOT available: no part of its cache survived (the earlier local build left no part file; the farm is
+   closed), so the knee re-fit again runs on Bench(60,160) fast.
+3. **Methods and tools.** The model file (new JogModel, kj=1; kj=0 is byte-for-byte the verified flat knee) on the
+   pin-knee VModel checks; the knee levels from a 2-variable LP (scipy HiGHS: least tr_a + tr_b with every boss / pad /
+   knee sample at or above its need, step <= tan 60 x the ramp run); own numpy CMA-ES (the earlier runners, unchanged
+   but for kj); the convergence gate computed from the sweep in time order; claim = frozen shape on Bench(110,360)
+   exact + held out.
+4. **What else shows the number is right.** tools/concept_bench.py (not this code); the flat knee at the same
+   parameters through the same code (26.34 fast, reproduced at the restart: near-touch 28.74); the antcrest best
+   reproduced (57.98 objective); the verifier harness docs/concepts/verify/crest-knee-3r.py (it builds CK.Model, the
+   flat knee - a joggle claim needs CK.JogModel there); the red-team list below.
+
 ## Round-14 re-dispatch: the ANTCREST basin (2026-10-18, lead note)
 
 The lead asked for the antcrest basin forwarded by the J2 judge (J1 bvec(55, 62), J3 wdir(98-104, +5..+18); fold loss
