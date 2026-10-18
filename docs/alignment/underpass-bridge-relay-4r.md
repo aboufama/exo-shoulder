@@ -2,7 +2,7 @@
 
 ## Verdict
 
-The ledger verdict is **VERDICT_TOKEN** (tool alone: watch). The claim the ledger now records is the row's verified
+The ledger verdict is **watch** (tool alone: watch). The claim the ledger now records is the row's verified
 number, **v_gap 20.60** on frozen exact Bench(110,360) (score 92.51), held out 24.33. The row's status is refuted.
 
 The previous audit (20:53 UTC, ledger 'gamed', finding M3) caught the self-measured 13.74 (score 95.00): it needed the
@@ -44,7 +44,9 @@ corrected-bridge per-pose dumps plus the verifier's own X1 lost set. The derived
   pick.th_margin). The bridge does not change the chain, so this carries over.
 - **Relay range:** the relay moves 0 to 32.9 deg over the bench takes and up to 34.94 deg held (PHI 35), so it is not
   idle.
-- **Continuity:** CONT_TOKEN
+- **Continuity:** on the corrected wear, static equals connected (19.74 by the model rule). The flood drops 0 relayed
+  takes, and 153 of 154 relayed envelope frames are connected (`remeasure/underpass-bridge-relay-4r_loaded_bench.json`
+  continuity).
 - **Cuff twist:** not measured.
 - **Near-singular postures:** none below the 5 deg margin.
 - **What is physically there:** a 2.5 mm Ti cantilever shell, 1.29 mm over the strap's top face at its closest taken
@@ -86,7 +88,26 @@ The held-out loaded read was not run: about 15 min of CPU on a box at load 12-15
 
 ### NEW-skin-only-thickness (watch): it recurred in the verifier's loaded-bridge diagnostic
 
-LOADED_TOKEN
+- The verifier's note ("Other checks" 3, and the row note) calls the loaded bridge moot at the corrected height,
+  because E's underside clears the shell by >= 4.19 mm.
+- That table, `E_under_shell_taken`, reads `per["E"]`: the rigid, skin-facing set only. The loaded X1 itself was run
+  only at the claimed height. At the corrected height the binding body is the strap's top face (contact set c23:m3),
+  which clears the shell by just 1.292 mm (pose 149).
+- This audit re-wore the corrected bridge (R_under 84.222) on exact Bench(110,360), with the model and the verifier's
+  `xcheck` unchanged (`remeasure/underpass-bridge-relay-4r_loaded.py`, 468 s):
+
+| shell state | extra jams | taken poses lost | rescored gap | ws taken | overhead |
+|---|---|---|---|---|---|
+| unloaded (drop 0; reproduces the verified number) | 9 | 3 | **20.60** | 284 | 7 / 28 |
+| loaded: 4 N tip deflection, 0.336 mm, uniform (an upper bound) | 14 | 8 | **22.02** (+1.42) | 279 | 7 / 28 |
+
+- The five new jams are all the strap top against the shell, read against the verifier's 1.0 mm non-adjacent rule:
+  149 at 0.962 mm, 139 at 0.963, 200 at 0.967, 257 at 0.996 and 118 at 0.997.
+- **Why it is only a watch:** the loaded clearance stays >= 0.96 mm, so no metal touches metal. The uniform drop
+  overstates the deflection near the foot. And the verified number does not rank the design above a better one either
+  way.
+- **Action:** if the family is re-claimed, read the loaded check over every set (Proposal 1). A shell stiff enough to
+  keep 1 mm under load, or the 1.5 mm thinned strap the verifier suggests, needs its own loaded read.
 
 ### NEW-blind-reference (watch): the tool's T5 alarm has been off since 11:37 UTC
 
@@ -205,7 +226,7 @@ on this one design:
 Proposed rule: any clearance table, placement or loaded check must report the minimum over the rigid, link AND
 contact-only sets, and must name the set that binds.
 
-Measured effect on verified rows: this row only, LOADED_EFFECT. offset-shortcar-relay-4r: its verifier's X1 includes
+Measured effect: this row only, 20.60 -> 22.02 if the loaded 1.0 mm rule entered the claim (as a diagnostic it does not). offset-shortcar-relay-4r: its verifier's X1 includes
 the contact sets (verify line 57), so 14.76 is unchanged. The 3-joint rows have no bridge.
 
 ### Proposal 2: the held_out check should prefer `v_held_gap` when the row has one

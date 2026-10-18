@@ -1,0 +1,764 @@
+{
+ "id": "underpass-bridge-relay-4r",
+ "wear": "bench",
+ "rl_fix": 84.222,
+ "ideal": {
+  "gap": 13.21,
+  "reach": 0.7972,
+  "follow": 1.0,
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "contact": 0.0293
+ },
+ "prepare_secs": 218.8,
+ "summary": {
+  "gate": 19.74,
+  "chain_only": 13.21,
+  "plain": 19.74,
+  "near1": 24.44,
+  "near2": 44.75,
+  "ibc": 0.9012,
+  "ib": 0.8347,
+  "ib10": 0.4485,
+  "reach": 0.7972,
+  "fol": 1.0,
+  "con": 0.0293,
+  "ncon": 12,
+  "jams": 0,
+  "ws_taken": 287,
+  "overhead": [
+   8,
+   28
+  ],
+  "by_cause": {
+   "chain": 12,
+   "hardware": 0,
+   "chain+hw": 0
+  },
+  "hwc": [],
+  "stack": null,
+  "arc": [
+   -1.45,
+   45.45
+  ],
+  "R_t": 86.722,
+  "shell_min": {
+   "i": 466,
+   "mm": 0.59,
+   "az_rel": -4.2
+  },
+  "bracket": [
+   37.8
+  ],
+  "secs": 220.2,
+  "R_under": 84.222,
+  "tsh": 2.5,
+  "ant": "ii",
+  "postH": 1.5,
+  "hiE": 49.0,
+  "defl": 0.336,
+  "root": 249.6,
+  "parts_min": {
+   "post": {
+    "mm": 0.59,
+    "i": 466,
+    "pose": [
+     150.0,
+     105.0,
+     -105.0
+    ]
+   },
+   "shell_only": {
+    "mm": 4.37,
+    "i": 466,
+    "pose": [
+     150.0,
+     105.0,
+     -105.0
+    ]
+   },
+   "flange": {
+    "mm": 5.24,
+    "i": 139,
+    "pose": [
+     -60.0,
+     60.0,
+     105.0
+    ]
+   },
+   "bracket": {
+    "mm": 0.44,
+    "i": 139,
+    "pose": [
+     -60.0,
+     60.0,
+     105.0
+    ]
+   },
+   "coil": {
+    "mm": 10.24,
+    "i": 139,
+    "pose": [
+     -60.0,
+     60.0,
+     105.0
+    ]
+   },
+   "car": {
+    "mm": 8.83,
+    "i": 139,
+    "pose": [
+     -60.0,
+     60.0,
+     105.0
+    ]
+   }
+  },
+  "lt1": 9,
+  "lt2": 49,
+  "jam_list": [],
+  "ib_relay": 0.6626,
+  "rl_fix": 84.222
+ },
+ "continuity": {
+  "static": {
+   "gap": 19.74,
+   "reach": 0.7972,
+   "follow": 1.0,
+   "inband14": 0.8347,
+   "inband10": 0.4485,
+   "contact": 0.0293
+  },
+  "dropped_relayed": 0,
+  "phi0_taken_not_connected": 0,
+  "flood": {
+   "env": 1432,
+   "env_ok": 1189,
+   "env_ok_phi0": 1035,
+   "env_relayed": 154,
+   "env_relayed_connected": 153,
+   "env_phi0_connected": 1035,
+   "edges": 3039,
+   "edges_ok": 3014,
+   "edge_fail": {
+    "open": 3,
+    "phi_jump": 21,
+    "passive_jump": 0,
+    "active_jump": 1
+   },
+   "seeds": 513
+  }
+ },
+ "relayed": {
+  "n": 33,
+  "taken": 25,
+  "contact": 8,
+  "jam": 0,
+  "clip_relayed": 0,
+  "phi_max": 32.94
+ },
+ "why": {
+  "": 397,
+  "contact": 12,
+  "fold": 56,
+  "j3stop": 5
+ },
+ "defl_mm": 0.336,
+ "xcheck_drop0": {
+  "drop": 0.0,
+  "n_extra_jam": 9,
+  "lost_new": 3,
+  "new_contacts": 0,
+  "rescored": {
+   "wear": {
+    "gap": 20.6,
+    "reach": 0.7889,
+    "follow": 1.0,
+    "inband14": 0.8347,
+    "inband10": 0.4485,
+    "contact": 0.0296
+   },
+   "ib14_chain_only": 0.9012,
+   "gate_gap": 20.6,
+   "ws_taken": 284,
+   "overhead": [
+    7,
+    28
+   ]
+  },
+  "margin": {
+   "lt1": 0,
+   "lt1.1": 0,
+   "lt1.2": 0,
+   "lt1.5": 24,
+   "lt2": 64
+  },
+  "lowest": [
+   {
+    "i": 149,
+    "kind": "ws",
+    "mm": 1.292,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 2.1
+   },
+   {
+    "i": 200,
+    "kind": "ws",
+    "mm": 1.295,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 3.27
+   },
+   {
+    "i": 139,
+    "kind": "ws",
+    "mm": 1.299,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 0.07
+   },
+   {
+    "i": 257,
+    "kind": "ws",
+    "mm": 1.313,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 1.63
+   },
+   {
+    "i": 118,
+    "kind": "ws",
+    "mm": 1.333,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 1.44
+   },
+   {
+    "i": 163,
+    "kind": "ws",
+    "mm": 1.337,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 2.54
+   },
+   {
+    "i": 138,
+    "kind": "ws",
+    "mm": 1.339,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 3.11
+   },
+   {
+    "i": 228,
+    "kind": "ws",
+    "mm": 1.341,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 2.44
+   },
+   {
+    "i": 230,
+    "kind": "ws",
+    "mm": 1.345,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 1.39
+   },
+   {
+    "i": 225,
+    "kind": "ws",
+    "mm": 1.347,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 3.63
+   }
+  ],
+  "jam_rows": [
+   {
+    "i": 237,
+    "pose": [
+     15.0,
+     165.0,
+     -60.0
+    ],
+    "metal_min": -8.93,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      0.014
+     ]
+    ]
+   },
+   {
+    "i": 316,
+    "pose": [
+     60.0,
+     150.0,
+     -105.0
+    ],
+    "metal_min": -1.23,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.204
+     ]
+    ]
+   },
+   {
+    "i": 343,
+    "pose": [
+     75.0,
+     150.0,
+     -105.0
+    ],
+    "metal_min": -1.73,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.462
+     ]
+    ]
+   },
+   {
+    "i": 345,
+    "pose": [
+     75.0,
+     165.0,
+     -75.0
+    ],
+    "metal_min": 1.71,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      0.092
+     ]
+    ]
+   },
+   {
+    "i": 372,
+    "pose": [
+     90.0,
+     165.0,
+     -90.0
+    ],
+    "metal_min": -0.07,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.481
+     ]
+    ]
+   },
+   {
+    "i": 396,
+    "pose": [
+     105.0,
+     135.0,
+     -90.0
+    ],
+    "metal_min": 0.46,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.119
+     ]
+    ]
+   },
+   {
+    "i": 423,
+    "pose": [
+     120.0,
+     135.0,
+     -90.0
+    ],
+    "metal_min": -0.7,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.48
+     ]
+    ]
+   },
+   {
+    "i": 446,
+    "pose": [
+     135.0,
+     120.0,
+     -75.0
+    ],
+    "metal_min": 1.18,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      0.059
+     ]
+    ]
+   },
+   {
+    "i": 448,
+    "pose": [
+     135.0,
+     135.0,
+     -90.0
+    ],
+    "metal_min": -1.92,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.481
+     ]
+    ]
+   }
+  ]
+ },
+ "xcheck_drop0.336": {
+  "drop": 0.336,
+  "n_extra_jam": 14,
+  "lost_new": 8,
+  "new_contacts": 0,
+  "rescored": {
+   "wear": {
+    "gap": 22.02,
+    "reach": 0.775,
+    "follow": 1.0,
+    "inband14": 0.8347,
+    "inband10": 0.4485,
+    "contact": 0.0299
+   },
+   "ib14_chain_only": 0.9012,
+   "gate_gap": 22.02,
+   "ws_taken": 279,
+   "overhead": [
+    7,
+    28
+   ]
+  },
+  "margin": {
+   "lt1": 5,
+   "lt1.1": 17,
+   "lt1.2": 25,
+   "lt1.5": 51,
+   "lt2": 83
+  },
+  "lowest": [
+   {
+    "i": 149,
+    "kind": "ws",
+    "mm": 0.962,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 2.1
+   },
+   {
+    "i": 139,
+    "kind": "ws",
+    "mm": 0.963,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 0.07
+   },
+   {
+    "i": 200,
+    "kind": "ws",
+    "mm": 0.967,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 3.27
+   },
+   {
+    "i": 257,
+    "kind": "ws",
+    "mm": 0.996,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 1.63
+   },
+   {
+    "i": 118,
+    "kind": "ws",
+    "mm": 0.997,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 1.44
+   },
+   {
+    "i": 163,
+    "kind": "ws",
+    "mm": 1.001,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 2.54
+   },
+   {
+    "i": 138,
+    "kind": "ws",
+    "mm": 1.003,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 3.11
+   },
+   {
+    "i": 225,
+    "kind": "ws",
+    "mm": 1.011,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 3.63
+   },
+   {
+    "i": 230,
+    "kind": "ws",
+    "mm": 1.012,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 1.39
+   },
+   {
+    "i": 128,
+    "kind": "ws",
+    "mm": 1.017,
+    "part": "c23:m3",
+    "hw": "shell",
+    "metal": 2.19
+   }
+  ],
+  "jam_rows": [
+   {
+    "i": 118,
+    "pose": [
+     -90.0,
+     60.0,
+     75.0
+    ],
+    "metal_min": 1.44,
+    "jam": [
+     [
+      "c23:m3",
+      "shell",
+      0.997
+     ]
+    ]
+   },
+   {
+    "i": 139,
+    "pose": [
+     -60.0,
+     60.0,
+     105.0
+    ],
+    "metal_min": 0.07,
+    "jam": [
+     [
+      "c23:m3",
+      "shell",
+      0.963
+     ]
+    ]
+   },
+   {
+    "i": 149,
+    "pose": [
+     -45.0,
+     60.0,
+     75.0
+    ],
+    "metal_min": 2.1,
+    "jam": [
+     [
+      "c23:m3",
+      "shell",
+      0.962
+     ]
+    ]
+   },
+   {
+    "i": 200,
+    "pose": [
+     0.0,
+     75.0,
+     30.0
+    ],
+    "metal_min": 3.27,
+    "jam": [
+     [
+      "c23:m3",
+      "shell",
+      0.967
+     ]
+    ]
+   },
+   {
+    "i": 237,
+    "pose": [
+     15.0,
+     165.0,
+     -60.0
+    ],
+    "metal_min": -8.93,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      0.014
+     ]
+    ]
+   },
+   {
+    "i": 257,
+    "pose": [
+     30.0,
+     90.0,
+     30.0
+    ],
+    "metal_min": 1.63,
+    "jam": [
+     [
+      "c23:m3",
+      "shell",
+      0.996
+     ]
+    ]
+   },
+   {
+    "i": 316,
+    "pose": [
+     60.0,
+     150.0,
+     -105.0
+    ],
+    "metal_min": -1.23,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.204
+     ]
+    ]
+   },
+   {
+    "i": 343,
+    "pose": [
+     75.0,
+     150.0,
+     -105.0
+    ],
+    "metal_min": -1.73,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.462
+     ]
+    ]
+   },
+   {
+    "i": 345,
+    "pose": [
+     75.0,
+     165.0,
+     -75.0
+    ],
+    "metal_min": 1.71,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      0.092
+     ]
+    ]
+   },
+   {
+    "i": 372,
+    "pose": [
+     90.0,
+     165.0,
+     -90.0
+    ],
+    "metal_min": -0.07,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.481
+     ]
+    ]
+   },
+   {
+    "i": 396,
+    "pose": [
+     105.0,
+     135.0,
+     -90.0
+    ],
+    "metal_min": 0.46,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.119
+     ]
+    ]
+   },
+   {
+    "i": 423,
+    "pose": [
+     120.0,
+     135.0,
+     -90.0
+    ],
+    "metal_min": -0.7,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.48
+     ]
+    ]
+   },
+   {
+    "i": 446,
+    "pose": [
+     135.0,
+     120.0,
+     -75.0
+    ],
+    "metal_min": 1.18,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      0.059
+     ]
+    ]
+   },
+   {
+    "i": 448,
+    "pose": [
+     135.0,
+     135.0,
+     -90.0
+    ],
+    "metal_min": -1.92,
+    "jam": [
+     [
+      "c29:m6",
+      "bracket",
+      -0.481
+     ]
+    ]
+   }
+  ]
+ },
+ "secs": 468.3
+}
