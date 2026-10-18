@@ -3495,3 +3495,42 @@ Round 16 main:
 - Take the 3-DOF ceiling to the user if lens A confirms it.
 - Re-fit the pin-knee family (H1 and its descendants) with the stack and strap-skim rules at cx 0.
 - Require a +0.1 / +0.2 mm tolerance probe on every claim that sits at a rule-floor clearance.
+
+## freek-oracle-route-knuckle-4r final polish on an envelope bench (local): pick1 15.40 bench / +1.39 held out, pick3 +2.99 held out; no config reaches 95; verifier due, the row stays 16.20 (2026-10-18, docs/research/freek-oracle-route-knuckle-4r_final_polish.md)
+
+Self-measured, local only (the CPU farm is closed): at most 2 niced processes, $0. New tool
+`tools/freek_env_polish.py`; the claim harness is the verifier's own path and reproduces the verified config exactly
+(16.20 / near 21.01 / 15 contacts / 78.55 mm / min th 5.91 on the bench; 21.89 / 47 / 232.2 mm / 6.50 held out).
+
+* **Search bench envh, a stated measurement choice.** env's fast cache lives on the closed farm volume, and a local
+  rebuild of 530 poses (about 12 s per pose per process on the shared box) does not fit the box. envh = Bench(60,160)'s 60
+  cached clip frames + the first stride-2 pass of env's 420 fresh workspace poses (210, built locally in 16 min). Its
+  workspace shares match the grid (abs(axial) >= 150 9.5 % vs 9.4 %; held out 11.0 %); no envh pose is a held-out pose.
+  Its price is noise: about 3 gap points of reach-share standard error. The fast envh number predicts the exact one
+  within 0.09 (15.54 -> 15.45, verified config).
+* **Polish:** 11 free (q3max, J2 stops, K stop B + arcs, J2 seat, J3 seat + tilt); J1 seat, knee and hubs fixed. Priced
+  like the row (stops +0.5 at margin 5.5, stop B at the 5-deg rule cut), one fold reading, full-grid flood + fresh-pose
+  edges, near-touch objective averaging the envh fit and the Bench(60,160) fit worn on envh, claim-fit and depth guards.
+  One start at the verified config, 161 tries; the gate passes (0.54 / 0.00 / spread 0.77), sigma not collapsed: a
+  local optimum. @@FE2F@@
+* **Claims (exact, frozen, priced, one reading, 0 poses dropped by continuity):**
+  * verified protocol (fit Bench(60,160) -> Bench(110,360)): VER 16.20, **pick1 15.40** (score 94.40), pick2 16.65, pick3 15.93;
+  * held out, the CAD shape (fit Bench(60,160)): VER 21.89, **pick1 20.50 (+1.39, P better 0.89)**, pick2 21.17 (+0.73),
+    **pick3 18.90 (+2.99, P 0.998)**;
+  * held out, envh fit: VER 22.30, pick1 20.24 (+2.06, P 0.97), pick2 22.02, pick3 20.09 (+2.21, P 0.98).
+* **No config reaches 95** (gap <= 13.75): the best verified-protocol number of this 4-joint design is 15.40, 1.65 short.
+  For the 3-DOF-vs-95 decision: one converged local polish moves it 0.8 bench / 0.7-3.0 held out. Against the 3-joint
+  lead (18.28 / 22.38) pick1 and pick3 now lead by 2.4-2.9 bench and 1.9-3.5 held out (P 0.93-0.999; the verified row
+  was a coin flip), at complexity 33.25 vs 18.5 and one more joint. The 3-joint lead stays the lead (user ruling).
+* **The gain is contact, not reach.** pick1 vs VER on the bench: contact 0.0375 -> 0.0179, reach 0.778 -> 0.764; overhead
+  taken unchanged (8 / 28). Contact depth halves (78.55 -> 39.47 mm bench, 232.2 -> 127.92 mm held) and stays about 2x the lead.
+* **Watch item made worse: stop refusals of contact poses.** The polished dowel sits about 4 deg lower on J3's own angle
+  (pick1 q3' 92.99, VER 96.87; the groove goes at q3', not at the model's q3max 84.77) and refuses more poses that are
+  contacts without it (bench 1 -> 4, held 4 -> 10). Counted as contacts, pick1's bench gain is 0 (16.44 -> 16.39) and its
+  CAD-shape held-out gain +0.76; pick3 keeps +2.28 held out but reads 0.48 worse on the bench.
+* **Fold and continuity hold:** one-reading th >= 5.56 on every taken pose of every config (0 under 5); the family
+  reading improves for pick1 (bench min 0.14 -> 5.59, 7 -> 0 poses under 5). 0 workspace poses dropped on 13 claims.
+* **Next:** an independent verifier on pick1 (the pre-claim primary, objective rank 1, picks fixed before any claim) and
+  pick3 (held-out selected: best of three on the held-out set), ranked on a fresh envsel draw; a ruling on whether stop
+  refusals of contact poses count as contacts; R17 / dowel force on any polished config. A polished config replaces the
+  verified one only after that verifier confirms >= 1 gap point held out.
