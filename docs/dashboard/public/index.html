@@ -183,7 +183,7 @@ window.dash = (() => {
 
   <section class="card" id="board-sec">
     <h2>Leaderboard</h2>
-    <p class="muted">Every design that has a measured number. Ranked by the independently verified number (frozen shape, exact bench); a score marked "self-measured" is the design's own frozen claim, and one marked "fast search" is an unverified quick-bench number that typically drops 5-14 points when verified - those rank below every verified design. "Flagged" means the alignment auditor found the score gain is a measurement artefact rather than a better exo (for example metal moved into the 1-2 mm shell next to the skin); it does not count as verified until resolved. Motion: each design through the same arm loop, at one scale. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side. Simplicity: points for every freedom, slider, sensor, loop and part beyond the simplest buildable chain (three hinges, three links = 0), lower = simpler; hover a number for where its points come from. It is not part of the score.</p>
+    <p class="muted">Every design that has a measured number. Ranked by the independently verified number (frozen shape, exact bench); a score marked "self-measured" is the design's own frozen claim, and one marked "fast search" is an unverified quick-bench number that typically drops 5-14 points when verified - those rank below every verified design. Dead and refuted designs rank below the live ones: their number is often a best-case bound measured without the hardware the design would need. A design with 4 joints is marked as such and is not ranked for the lead (the 3-joint designs are the real leaders). "Flagged" means the alignment auditor found the score gain is a measurement artefact rather than a better exo (for example metal moved into the 1-2 mm shell next to the skin); it does not count as verified until resolved. Motion: each design through the same arm loop, at one scale. "Checking" means an independent agent is re-measuring it. "Stopped early" means it was called dead while its search was still improving, so it is being re-opened. Names: R = a hinge (revolute joint), P = a slider; "3R" = three hinges in a row (3 degrees of freedom); "spherical" = all hinge axes meet at the centre of the shoulder joint; "offset" = they do not; "3-RRR" = three hinged legs side by side. Simplicity: points for every freedom, slider, sensor, loop and part beyond the simplest buildable chain (three hinges, three links = 0), lower = simpler; hover a number for where its points come from. It is not part of the score.</p>
     <div class="scroll"><table id="board" data-source="board" data-row-key="id">
       <thead><tr><th class="mo" data-source="motion" data-field="mech">Motion</th><th data-field="short">Design</th><th class="num" data-field="score">Score</th><th class="num cx" data-field="complexity">Simplicity<span class="cap">lower = simpler</span></th><th data-field="close" class="cl">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
       <tbody></tbody>
@@ -274,7 +274,9 @@ dash.calc('board', {
     const g = fz ? m.frozen_gap : m[p + 'gap'];
     return { id: m.id, short: m.v_config ? `${short} (${m.v_config})` : short, basis, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline,
       complexity: m.complexity ?? null, complexity_items: m.complexity_items || '', passive_trans: m.passive_trans ?? null, active_dof: m.active_dof ?? null, leader_ruling: m.leader_ruling || '', audited: !!m.alignment };
-  }).filter(Boolean).sort((a, b) => (a.basis === 'fast' || a.state === 'Flagged') - (b.basis === 'fast' || b.state === 'Flagged') || a.gap - b.gap);
+  // dead / refuted rows rank below live ones: their number is often a ghost bound without the design's hardware (lead 2026-10-18:
+  // two dead ghosts at 16.9 / 17.2 ranked above the verified lead)
+  }).filter(Boolean).sort((a, b) => { const sink = (r) => (r.basis === 'fast' || r.state === 'Flagged') ? 2 : (['Dead end', 'Stopped early', 'Refuted'].includes(r.state) ? 1 : 0); return sink(a) - sink(b) || a.gap - b.gap; });
   }
 });
 dash.calc('leader', {
@@ -492,7 +494,8 @@ function drawBoard(rows, mo) {
     const td = (c, cls) => { const e = document.createElement('td'); if (cls) e.className = cls; if (c instanceof Node) e.appendChild(c); else e.textContent = c; tr.appendChild(e); return e; };
     const has = mo && mo.byId.has(r.id), cell = td('', 'mo');
     if (has) { const svg = moThumb(r.id, r.short, r); cell.appendChild(svg); thumbs.push(svg); }
-    td(r.short); td(r.basis === 'verified' || r.is_baseline ? g1(r.score) : `${g1(r.score)} ${r.basis === 'self' ? 'self-measured' : 'fast search'}`, 'num' + (r.basis === 'verified' ? '' : ' unv'));
+    // a 4-joint design is marked (user 2026-10-17: the 3-joint designs are the real leaders; audit 2026-10-18 freek G6)
+    td(r.active_dof > 3 ? `${r.short} - ${r.active_dof} joints, not ranked for the lead` : r.short); td(r.basis === 'verified' || r.is_baseline ? g1(r.score) : `${g1(r.score)} ${r.basis === 'self' ? 'self-measured' : 'fast search'}`, 'num' + (r.basis === 'verified' ? '' : ' unv'));
     const cx = td('', 'num cx');
     if (r.complexity != null) {
       const bar = document.createElement('span'), i = document.createElement('i'); bar.className = 'cxbar'; i.style.width = Math.min(1, r.complexity / cxMax) * 100 + '%'; bar.appendChild(i);

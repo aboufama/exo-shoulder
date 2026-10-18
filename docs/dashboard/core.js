@@ -9,7 +9,8 @@ dash.calc('summary', {
     const live = (m) => !m.is_baseline && !['dead', 'refuted', 'duplicate'].includes(m.status);
     const base = morphs.find((m) => m.is_baseline) || {};
     const best = (rows, f) => rows.filter((m) => m[f] !== null && m[f] !== undefined).sort((a, b) => a[f] - b[f])[0] || {};
-    const ver = best(morphs.filter((m) => live(m) && ['verified', 'gpu', 'cad'].includes(m.status)), 'v_gap');
+    // the leader is the best <= 3-joint design (user 2026-10-17: sensed 4th joint = a joint; the 3-joint leaders are the real leaders)
+    const ver = best(morphs.filter((m) => live(m) && ['verified', 'gpu', 'cad'].includes(m.status) && (m.active_dof == null || m.active_dof <= 3)), 'v_gap');
     const cla = best(morphs.filter(live), 'gap');
     const swp = best(morphs.filter(live), 'sweep_gap');
     const bg = base.gap ?? null, d = (v) => (v === undefined || v === null || bg === null ? null : Math.round((v - bg) * 100) / 100);

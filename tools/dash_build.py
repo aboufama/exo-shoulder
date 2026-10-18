@@ -415,7 +415,10 @@ def morphs(S):
                 # 2026-10-17, inband-rssr pick3 skeptic: a pick3 row showed v_gap with v_reach / v_follow / v_inband14 empty)
                 pbs = rw.get("polished_bench") if isinstance(rw.get("polished_bench"), dict) else {}
                 pk = str(rw.get("polished_id") or "").split(" ")[0]
-                pb = next((pbs[k] for k in (pk, "pick1") if isinstance(pbs.get(k), dict)), None) or \
+                # a flat record (has its own "gap") is the claimed pick itself (freek-oracle-route audit 2026-10-18 R4: the board
+                # showed the polished gap next to the verified config's reach / follow / contact)
+                pb = pbs if num(pbs.get("gap")) is not None else \
+                     next((pbs[k] for k in (pk, "pick1") if isinstance(pbs.get(k), dict)), None) or \
                      next((v for k, v in pbs.items() if k.startswith("pick") and isinstance(v, dict)), {})
                 m["v_gap"] = round(num(rw["polished_gap"]), 2)
                 for k in ("reach", "follow", "inband14", "inband10", "contact"):

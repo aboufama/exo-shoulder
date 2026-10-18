@@ -615,6 +615,18 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      and 4 DOF: the bump amount is the max over the lead's fit-bench poses (legal), and a ~4-point move from a bump
      reshape needs the verifier and auditor. desmo-geom is DEAD (no stage-1 pin inside O20 passes the PA gate), which
      closes the buildable desmo drive.
+   - *Lead, 11:40 UTC 10-18:* the polished claim of freek-oracle-route is final WATCH, not gamed (skeptic
+     11:24:30Z, 94e94e9). The dashboard now shows it as verified 15.40 (score 94.40), 4 joints. Fixes from that audit:
+     - the row's polished_bench now carries pick1's own reach / follow / in-band / contact, so the board no longer shows
+       the verified config's components;
+     - the row's verdict states the like-for-like held number (20.50; the env-fit protocol gives 20.24);
+     - dash_build.py reads a flat polished_bench;
+     - the board marks 4-joint designs ('N joints, not ranked for the lead'), and the legacy core.js leader KPI filters
+       to <= 3 joints;
+     - dead / refuted rows now rank below live ones on the board. Two dead ghosts (proximal-j3-geodesic 16.91,
+       desmo-vrocker 17.23) had ranked above the verified lead.
+
+     The headline was verified headless: the 3-joint lead conecut-knee 93.4.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

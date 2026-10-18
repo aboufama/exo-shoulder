@@ -178,7 +178,7 @@
   ],
   "result": "FAIL"
  },
- "verdict": "VERIFIED 16.20 frozen exact Bench(110,360) (score 94.11), held 21.89, on the model's one fold reading, which the 08:29 audit measured to be the right one (min th 5.91 bench / 6.50 held over every state's moving chain). The status was flipped by the lead at 2026-10-18 09:05 UTC after the ledger lowered GAMED to WATCH (auditor 08:29, skeptic 08:43). 4 COUNTED JOINTS (K sensed), complexity 33.25. It does NOT replace the 3-joint lead conecut-knee 18.28 (user 2026-10-17: the 3-joint leaders are the real leaders). The paired difference against the lead is a coin flip: -2.08 bench (P 0.745), -0.49 held (P 0.622). Its contact depth is 3.9x the lead's (15 vs 4 bench contact poses), and the J3 stop was placed from the claim bench's binders (P1 watch). The claim's own mixed-reading flood gave 17.35 / 22.67, and the family reading gives 20.68 / 24.56. Open before CAD: J3 dowel force, the K-spring hold (R17), cuff twist with the stop engaged, and a converged search (q3max was a 1-D 8-point sweep). | Cell A BOUND, gate FAIL: the free-K oracle moves the k33 frozen exact Bench(110,360) gap 18.61 -> 16.96 static / 17.25 connected plain (21.46 near-touch), rescuing only 148 / 316 / 369; 117 / 119 / 129 / 343 / 423 touch at every legal K; the anterior link-2 corridor is worse (+12 deg 18.71). Cell B BUILT (the plain bound met the 17.78 trigger): a J3 own-angle dowel stop at q3max 86 with K opening to hold it gives 16.20 static / 17.35 connected plain (score 93.69), 22.19 near-touch, 276 connected takes - the first 4-DOF row under the lead 18.28 on the plain reading (by 0.93), at complexity ~33.25 and overhead 5/28. UNVERIFIED. HELD-OUT (1154 poses, frozen, connected): cell B 22.67 vs its kit 23.37 vs the lead's 22.38 - it does NOT beat the lead held out (+0.29).",
+ "verdict": "POLISHED 15.40 frozen exact Bench(110,360) (score 94.40; pick1 fe1-g10-7, final polish CONFIRMED by its independent verifier, ledger WATCH 11:24:30Z), held 20.5 like-for-like (verified 21.89; env-fit 20.24). Contacts 7 / 39.47 mm bench (verified 15 / 78.55; the lead 4 / 20.24). On the stop-refusal side reading (proposal B, open with the user) the gain shrinks to 0.06 bench / 0.74 held. 4 COUNTED JOINTS, complexity 33.25: NOT the headline lead (user 2026-10-17). The overhead clip passage now sits at 1.7 mm (1-2 mm shell). R17, the dowel force and the cuff twist are still open. | VERIFIED 16.20 frozen exact Bench(110,360) (score 94.11), held 21.89, on the model's one fold reading, which the 08:29 audit measured to be the right one (min th 5.91 bench / 6.50 held over every state's moving chain). The status was flipped by the lead at 2026-10-18 09:05 UTC after the ledger lowered GAMED to WATCH (auditor 08:29, skeptic 08:43). 4 COUNTED JOINTS (K sensed), complexity 33.25. It does NOT replace the 3-joint lead conecut-knee 18.28 (user 2026-10-17: the 3-joint leaders are the real leaders). The paired difference against the lead is a coin flip: -2.08 bench (P 0.745), -0.49 held (P 0.622). Its contact depth is 3.9x the lead's (15 vs 4 bench contact poses), and the J3 stop was placed from the claim bench's binders (P1 watch). The claim's own mixed-reading flood gave 17.35 / 22.67, and the family reading gives 20.68 / 24.56. Open before CAD: J3 dowel force, the K-spring hold (R17), cuff twist with the stop engaged, and a converged search (q3max was a 1-D 8-point sweep). | Cell A BOUND, gate FAIL: the free-K oracle moves the k33 frozen exact Bench(110,360) gap 18.61 -> 16.96 static / 17.25 connected plain (21.46 near-touch), rescuing only 148 / 316 / 369; 117 / 119 / 129 / 343 / 423 touch at every legal K; the anterior link-2 corridor is worse (+12 deg 18.71). Cell B BUILT (the plain bound met the 17.78 trigger): a J3 own-angle dowel stop at q3max 86 with K opening to hold it gives 16.20 static / 17.35 connected plain (score 93.69), 22.19 near-touch, 276 connected takes - the first 4-DOF row under the lead 18.28 on the plain reading (by 0.93), at complexity ~33.25 and overhead 5/28. UNVERIFIED. HELD-OUT (1154 poses, frozen, connected): cell B 22.67 vs its kit 23.37 vs the lead's 22.38 - it does NOT beat the lead held out (+0.29).",
  "limiter": "metal parking at the ER binders (plane -90..-45, elev 45-60, axial 120-135): they want LESS K and still touch at the 5.5-deg floor (117 -1.14, 129 -5.87 with K >= 66 refused by the knee slide, 119 -10.74); the IR binders want K at stop B (82) and 343 / 423 still touch there (-0.19 / -1.33). The K self-motion cannot move hub 2 / link 2 off the skin at these seats - the wall is seat-level (where hub 2 and link 2 park), not K-level.",
  "note": "Spec corrections: (1) the literal max-min oracle over hub 2 / L1b / L2 / hub K ignores member 3 and the knee moving with K (J3 misses GH by ~15 mm) - replaced by a run-based oracle (FO_HOW=scan keeps the literal one); (2) my first run-based rule (v2a) let 5 contact poses dodge to REFUSED K samples (read as lost, not contact): 15.27 / 15.55 was optimistic by 1.7; corrected (v2b) - only legal configurations compete; (3) the J2 slot stretched end is at the 5.5-deg rule for the bound (kit priced 7.877); (4) state-A contacts are not offered to the oracle (as specified). Cell B: built (see verdict); its gain over the bound's 2-rescue estimate comes from REFUSING 343 / 423 at the J3 stop (contact -> lost reach) and from opening K for state-A poses too; in the MODEL's own J3 convention (vref = unit(u3 x (0.3, 0.5, 0.8))) the IR binders sit at q3 99-113 at the kit and the rescuing K puts q3 at 77-82 (dq3/ddK ~ -0.67), the ER binders at q3 -60..-82 - so q3max ~ 78-82 deg is where a cell-B groove end would go (kscan3's reference is not this one). Near-touch: 8 taken poses under 1 mm (min 0.092, a state-A pose); the rescued 148 sits at 0.46. Local runs only (farm closed), niced, <= 2 processes. | VERIFIER 2026-10-18: reproduced 16.20 static / 17.35 connected (held 21.89 / 22.67). Under ONE fold reading (the model's; the state-2 moving wrist is >= 36 deg from singular) the flood connects every node: 16.20 bench / 21.89 held. Read the auditor's way, consistently: 20.68 / 24.56. The J3 dowel sits at J3's own angle q3' = 96.87 (q3 86 + phi 10.87, phi a function of q3 alone). Champion same bench 75.94. Not refuted. Ledger GAMED (P1) -> status kept 'screened'. 4 DOF: not a leader under the user's 3-DOF ruling.",
  "doc": "docs/concepts/freek-oracle-route-knuckle-4r.md",
@@ -443,10 +443,7 @@
   "gain": 0.8,
   "side_reading": 16.39,
   "side_VER_polisher_not_rerun": 16.44,
-  "contact": [
-   7,
-   39.47
-  ],
+  "contact": 0.0179,
   "contact_VER": [
    15,
    78.55
@@ -508,7 +505,12 @@
     "sd": 2.23,
     "p_A_better": 0.727
    }
-  }
+  },
+  "reach": 0.7639,
+  "follow": 1.0,
+  "inband14": 0.9008,
+  "inband10": 0.5249,
+  "components_src": "docs/concepts/verify/freek-oracle-route-knuckle-4r/polish_verify/pick1_fit60_bench.json (connected) - added by the lead after the 11:24 audit R4"
  },
  "polished_t": "2026-10-18T10:59:20Z",
  "polished_caveats": [
@@ -519,5 +521,7 @@
   "Search-bench hygiene: no envh pose is a held-out pose; coordinate Chebyshev min 2.23 deg and thorax-humerus geodesic min 2.22 deg from every held-out pose (the env rule), but ONE envh pose is 1.66 deg from a held-out pose in the glenohumeral (HG) frame the mechanism sees (1 of 210 search poses). The CMA records hold only envh and Bench(60,160) scores (no held-out outcome); the picks were committed (6086e09, 09:43:17) before the first claim (09:48).",
   "Not re-run by this verifier: VER on Bench(110,360) and VER fit60 -> held out (the on-file verified per-pose dumps were used; the polisher's harness reproduced them exactly). pick2 / pick3 not verified (pick3 was selected on the held-out set).",
   "Open physical checks carry over (R17 with the state-2 spring hold, dowel force, cuff twist with the stop engaged)."
- ]
+ ],
+ "polished_held_out_gap_fit60": 20.5,
+ "polished_held_out_note": "Like-for-like with the verified held 21.89 and the lead's 22.38 (both fit Bench(60,160)) is the CAD-shape number 20.5 (+1.38, P 0.89, CI crosses 0); polished_held_out_gap 20.24 is the env-fit protocol (+2.06 vs VER 22.30 on that protocol). Audit 2026-10-18T11:24:30Z final WATCH (not gamed)."
 }
