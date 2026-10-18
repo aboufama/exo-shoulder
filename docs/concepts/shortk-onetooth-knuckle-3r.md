@@ -170,3 +170,41 @@ pre-registered step-0 scan plus a kinematic bound over 302,595 pin starts.
    hub 2's rim, which is the lead's lobe again.
 4. **Kit trap.** The lead's model stack clamps bk1 / bk2 to [26, 32] / [38, 48] (roller-longdyad's old search box). Any
    re-seat row built on it must restore the dyad after `_clamp`, or it silently measures 32 / 38.
+
+## Audit (dead-row auditor, 2026-10-18)
+
+**Verdict: the death stands.** It stands on the pre-registered tooth-sweep kill. Two numbers in the record were wrong, and
+both were too pessimistic. Neither correction survives the tooth sweep.
+
+- **Reproduced.** The spec pin (r 19 / az 18, rho 1.1) gives pole K 22.2, undercut 1.25 mm over K 0-21.4 and drive range 0,
+  exactly as recorded. The dyad is restored after the lead's bk clamp (read in `_clamp`). The convergence gate does not
+  apply: this is not a search death, and the 3 full-stroke ghosts read 18.83 identically.
+- **Correction 1: an over-strict undercut test.** `fscan.py` cut the flank with pin positions over the whole DKLIM
+  (48.43 deg), including positions beyond the stroke the pin actually runs. A pin cut only by positions it never reaches
+  was scored short. The stroke-limited re-scan is docs/research/shortk_onetooth/audit_fscan_L.py, run on 34 / 30 with
+  mu 0.087 on the same 1 mm x 3 deg grid. It gives L = min(PA limit, min over cutting pairs of max(i, j)).
+  - At rho 1.1 the best range moves from 29.7 to **32.3 deg**, at pin r 21 / az 24, 15.6 mm from uK.
+  - At rho 1.5 the best is unchanged at 35.9.
+  - The law-only ghost at DKCAP 32.3 reads **26.99** frozen exact Bench(110,360). The record had 31.80. Its fit_fast is
+    21.87 (the record had 27.29): reach 0.6389, follow 0.9636, ib14 0.903, contact 0.0088, 230 ws takes, overhead 8/28,
+    near-2 48.61.
+  - The PA cliff sits 0.09 deg past the 32.21 deg stroke used: 51 deg at +0.5 deg. So this range has no tolerance margin.
+- **Correction 2: a gap in the law grid.** The scan jumped from rho 1.5 to 2.0. At rho 1.6-1.9 there are rolling
+  full-stroke pins *outside* hub K's O20 rim, so "rolling: rho 2.0 only" is a grid artefact. The rim margin is only
+  0.3-0.6 mm (12.6 mm needed). Examples:
+  - rho 1.7: r 19.5 / az -6 carries 44.45 deg at 13.21 mm from uK; r 26.5 / az 24 carries 45.95 deg at 13.19 mm.
+  - rho 1.8: r 27 / az 24 carries 45.8 deg at 13.06 mm.
+- **Tooth sweep at the corrected pins** (metal.py unchanged). The pre-registered kill allows at most 4 tooth contact poses
+  at a level of R 64 or lower.
+
+| pin | bench | tooth contact poses | tooth min | worst poses | kill (<= 4) |
+|---|---|---|---|---|---|
+| rho 1.1 sliding, r 21 / az 24, DKCAP 32.3 | Bench(110,360) exact | **35** at R 61 | -11.14 mm | ws 287, 229, 290, 256, clip 13 | fails |
+| rho 1.7 rolling, r 19.5 / az -6 | envsel exact | **26** at R 61, **19** at R 63 | -7.3 mm | 378, 453, 382, 375 (the row's overhead-scaption set) | fails |
+
+**Measured reason, in one line:** every buildable one-pin drive (at the corrected range 32.3 sliding, or full stroke at
+rho 1.6-2.0 rolling) puts a link-2 tooth 19-30 mm from u2, and that tooth touches the skin on 19-35 poses (7-11 mm deep).
+Without the tooth, the best buildable bound is 26.99, only 0.2 better than H1's 27.20 at complexity 0. So even a tooth that
+never touched the skin would buy at most a 0.21-point step over H1 at complexity ~10-11, on a range with no tolerance margin.
+
+Files: docs/research/shortk_onetooth/audit_fscan_L.py, audit_summary.json, audit_wear_rho1.1_dkcap32.3_bench.json.

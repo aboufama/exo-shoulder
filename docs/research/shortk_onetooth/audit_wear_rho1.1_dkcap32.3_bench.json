@@ -1,0 +1,195 @@
+{
+ "cell": "ghost",
+ "bench": "bench",
+ "mode": "exact",
+ "fit_fast": {
+  "gap": 21.87,
+  "reach": 0.6813,
+  "follow": 0.9667,
+  "inband14": 0.9028,
+  "inband10": 0.5761,
+  "contact": 0.0,
+  "near1": 21.87,
+  "near2": 39.92
+ },
+ "frozen": {
+  "gap": 26.99,
+  "reach": 0.6389,
+  "follow": 0.9636,
+  "inband14": 0.903,
+  "inband10": 0.579,
+  "contact": 0.0088
+ },
+ "why": {
+  "fold": 125,
+  "slide": 0,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 3
+ },
+ "near1": 27.57,
+ "near2": 48.61,
+ "min_metal": 0.38,
+ "parts_ib14": {
+  "hub1": [
+   1.0,
+   8.7,
+   80
+  ],
+  "hubK": [
+   0.988,
+   9.5,
+   80
+  ],
+  "hub2": [
+   0.952,
+   11.1,
+   80
+  ],
+  "hub3": [
+   0.596,
+   13.1,
+   80
+  ],
+  "E": [
+   0.974,
+   6.4,
+   164
+  ],
+  "boss": [
+   1.0,
+   7.5,
+   32
+  ],
+  "pad": [
+   1.0,
+   6.3,
+   32
+  ],
+  "knee": [
+   1.0,
+   9.7,
+   90
+  ],
+  "L1a": [
+   0.98,
+   7.2,
+   24
+  ],
+  "L1b": [
+   0.889,
+   10.6,
+   20
+  ],
+  "L2": [
+   0.73,
+   11.7,
+   128
+  ]
+ },
+ "parts_pairs": {},
+ "ws_taken": 230,
+ "n_ws": 360,
+ "ws_contact": 3,
+ "overhead": {
+  "ws": 28,
+  "taken": 8
+ },
+ "K_open": {
+  "taken_open": 241,
+  "taken": 336,
+  "dK_max": 32.21
+ },
+ "law": {
+  "rho": 1.1,
+  "smhi": 32.507082,
+  "th_on": 62.26,
+  "DKLIM": 32.3
+ },
+ "contact_poses": [
+  [
+   205,
+   [
+    0.0,
+    105.0,
+    15.0
+   ],
+   -4.21
+  ],
+  [
+   237,
+   [
+    15.0,
+    165.0,
+    -60.0
+   ],
+   -0.32
+  ],
+  [
+   264,
+   [
+    30.0,
+    165.0,
+    -60.0
+   ],
+   -0.12
+  ]
+ ],
+ "split": {
+  "n": 3,
+  "by_part": {
+   "m7:hub2": 3,
+   "hub2": 1
+  }
+ },
+ "knee": {
+  "n": 336,
+  "ang": [
+   59.26,
+   105.93
+  ],
+  "margin_deg": [
+   34.04,
+   48.85
+  ],
+  "margin_mm": [
+   11.42,
+   13.19
+  ],
+  "d_perp_mm": [
+   83.5,
+   87.5
+  ],
+  "knee_N_per_Nm_max": 12.0,
+  "q3p": [
+   -109.19,
+   111.86
+  ],
+  "stop_margin_deg": 2.71,
+  "stop_hi_margin_deg": 10.88,
+  "dowel_N_per_Nm": 133.3,
+  "j3stop": 6
+ },
+ "kdyad_margin_min_taken": 13.62,
+ "law_shortk": {
+  "k_end": 44.147,
+  "q2_end": -3.3711,
+  "q2_on": 36.7626,
+  "th_on": 62.263,
+  "smhi": 32.5071,
+  "DKLIM": 48.4328,
+  "a1e_wall": 55.5236,
+  "kdyad_margin_wall": 8.4764,
+  "kdyad_margin_rest": 33.5517,
+  "th_end": 106.3039,
+  "a1e_end": 54.2653
+ },
+ "id": "shortk-onetooth-knuckle-3r",
+ "params": {
+  "rho": 1.1,
+  "DKCAP": 32.3
+ },
+ "secs": 125.5
+}

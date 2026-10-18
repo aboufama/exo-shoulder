@@ -1,0 +1,156 @@
+{
+ "time": "2026-10-18T21:20:20Z",
+ "by": "dead-row auditor",
+ "stroke_limited_scan": {
+  "script": "docs/research/shortk_onetooth/audit_fscan_L.py",
+  "grid": "34/30, r 4-45 mm x az -180..180 (1 mm x 3 deg), K step 0.05, mu 0.087",
+  "rho1p1": {
+   "old_best": [
+    29.7,
+    21.0,
+    27.0,
+    16.49
+   ],
+   "new_best": [
+    32.3,
+    21.0,
+    24.0,
+    15.58
+   ],
+   "fields": "range deg, r0 mm, az0 deg, mm from uK"
+  },
+  "rho1p5": {
+   "old_best": 35.9,
+   "new_best": 35.9
+  }
+ },
+ "intermediate_law_rolling_scan": {
+  "script": "docs/research/shortk_onetooth/fscan.py",
+  "grid": "34/30, r 17-32 x az -15..31 (0.5 mm x 1.5 deg), mu 0.005",
+  "full_stroke_outside_rim": {
+   "1.6": [
+    [
+     25.5,
+     22.5,
+     45.4,
+     12.88
+    ]
+   ],
+   "1.7": [
+    [
+     19.5,
+     -6.0,
+     44.45,
+     13.21
+    ],
+    [
+     26.5,
+     24.0,
+     45.95,
+     13.19
+    ]
+   ],
+   "1.8": [
+    [
+     27.0,
+     24.0,
+     45.8,
+     13.06
+    ],
+    [
+     20.0,
+     -6.0,
+     45.2,
+     12.73
+    ]
+   ],
+   "1.9": [
+    [
+     20.0,
+     -9.0,
+     44.45,
+     13.06
+    ],
+    [
+     27.5,
+     24.0,
+     45.4,
+     12.96
+    ],
+    [
+     20.0,
+     -7.5,
+     46.1,
+     12.88
+    ]
+   ]
+  },
+  "fields": "r0, az0, range deg, mm from uK (rim needs >= 12.6)"
+ },
+ "ghost_at_corrected_range": {
+  "bench": "Bench(110,360) exact frozen",
+  "params": {
+   "rho": 1.1,
+   "DKCAP": 32.3
+  },
+  "gap": 26.99,
+  "reach": 0.6389,
+  "follow": 0.9636,
+  "inband14": 0.903,
+  "inband10": 0.579,
+  "contact": 0.0088,
+  "ws_taken": 230,
+  "near2": 48.61,
+  "overhead": "8/28",
+  "fit_fast": {
+   "gap": 21.87,
+   "reach": 0.6813,
+   "follow": 0.9667,
+   "inband14": 0.9028,
+   "inband10": 0.5761,
+   "contact": 0.0
+  },
+  "file": "docs/research/shortk_onetooth/audit_wear_rho1.1_dkcap32.3_bench.json"
+ },
+ "tooth_proxy": {
+  "script": "docs/research/shortk_onetooth/metal.py (unchanged)",
+  "rho1p1_sliding_r21_az24_DKCAP32p3_bench": {
+   "Lt61": {
+    "tooth_contact": 35,
+    "tooth_min": -11.14,
+    "worst": [
+     287,
+     229,
+     290,
+     256,
+     13
+    ],
+    "pin_contact": 1,
+    "pa_at_stroke_plus_0p5": [
+     51.0,
+     50.2
+    ]
+   }
+  },
+  "rho1p7_rolling_r19p5_azm6_envsel": {
+   "Lt61": {
+    "tooth_contact": 26,
+    "tooth_min": -7.29,
+    "ib14": 0.708,
+    "worst": [
+     378,
+     453,
+     382,
+     375,
+     13
+    ]
+   },
+   "Lt63": {
+    "tooth_contact": 19,
+    "tooth_min": -7.32,
+    "ib14": 0.503
+   }
+  }
+ },
+ "verdict": "DEATH STANDS (pre-registered kill: tooth contact poses >> 4 at every corrected pin); two corrections to the record: the rho 1.1 sliding built range is 32.3 not 29.7 (bound 26.99 not 31.80), and rolling full-stroke pins outside hub K's rim exist at rho 1.6-1.9, not only 2.0"
+}
