@@ -377,3 +377,35 @@ source. Nothing new was run: the box was at load 17 on 4 cores, and an exact wea
   WIP s1raised file's 20.42 ran clamped at 1.5, as the auditor said.
 
 **Final verdict (ledger tool): WATCH.**
+
+## Skeptic, hourly audit (2026-10-18, 23:16-23:31 UTC)
+
+I read the files and re-derived the numbers locally. Nothing was re-worn and $0 was spent. Rulings are in
+`desmo-conecut-knuckle-3r.rulings.json`. The ledger entry is 2026-10-18T23:30:35Z, run `skeptic:desmo-conecut-knuckle-3r`.
+
+**Final verdict (ledger): WATCH.** I upheld all 15 reasons and refuted none. Every number the auditor cites reproduces
+from the raw files.
+
+| key | ruling | what I checked |
+|---|---|---|
+| continuity | upheld | Held file `connected`: full 23.19 (0 dropped), knn 32.18 (84 of 355 forced-taken dropped). The tool's knn > 3 rule (lines 500-505) is applied as coded. The level comes from the held file only: on the claim's own bench file, knn is 20.67 (+1.69), under the trigger. |
+| density | upheld | I recomputed this from `claim_frozen_out.parts_ib14` and the sample_density ratios. Over-dense parts at the kit's density give 18.68 / 22.89; ring2 alone gives 18.59 / 22.80; horn alone gives 19.07 / 23.28. ring2's sampler is 0.5 mm x 2 mm, which is 4x the kit's density (model lines 252-254). |
+| S6 | upheld | `_thin(M, names, step)` receives 4 positional arguments from line 146, so the TypeError is real. The exact thinned wears read 18.65 / 22.86, and fit_fast 13.27 equals the verifier's. **Correction:** the auditor's "one-sided" 19.02 leaves out L1a, the sparsest strap (0.33x, 0.981 in band). With all three sparse straps at the kit's density it reads 18.88 / 23.09, which is all-parts within 0.01. |
+| M3 | upheld | part_contact.json: max_depth 1.5 on 451 frames, with the stage-1 pin inside l1b. The insert sits at F+0.111..1.611. The F+3.9 thinned wear reads 19.03. **Attribution:** the 19.03 run has fix_ring_frame true and the 18.65 run has it false, so the +0.38 includes the S7 frame (about +0.03); the level alone is about +0.35. The row's buildable range of 18.80-19.01 is 0.02 under this. |
+| NEW-inherited-stack | upheld | This row's part is measured: the CAD clash and the level formula at glev -1.0. I cite the cross-row numbers from their own audits and did not re-measure them. |
+| NEW-sample-frame | upheld | ringframe 19.07 / 23.28, q_on 7.279, insert_sector 123.88 deg. The unsampled sector has no wear on file. |
+| T3 | upheld | th minimum is 5.181 on the bench and 5.006 held (pose 1054, dK 46.27), with 0 poses under 5. No file reports th at stop B. |
+| NEW-stop-through-drive | upheld | build.json: the groove ends at q2 -14.282, and the J2 dowel engages at -14.455. |
+| G3 | upheld | dynamics.json: f0.05 gives 11.74 deg with 23 lags; f0.2 gives 25.0 deg; every case's K is driven by the law (slaved_law_err 0.055-11.0). |
+| NEW-pa-reread | upheld | blendband: cap above the gate at K 0-8.995 and above self-lock at K 0-0.326. The linear read at mu 0.15 gives plain 86.52 and at mu 0.135 gives 13.31; tan(43 - 35.05) = 0.1396. |
+| NEW-friction-cliff | upheld | The row's friction_probe matches: as9.60 14.56 at 44.75 and as9.65 15.17 at 43.0. All binds fall below the held stroke of 46.27. |
+| NEW-silent-check | upheld | v1_fit_gates: rc_min 1.01, ridge 0.247, radius limit 0.25. worst_tol is 0.281, over the 0.25 gate. |
+| NEW-ws-inband | upheld | probe ws_elev90_140: 0.8308 in band, 0.1683 over 14 mm, max 30.74 mm. clip 0.8924. Overhead: 4 of 8 poses under 2 mm. |
+| G4 | upheld | msub_rest: 50 of 205 under 1 deg, p10 0.267, min 0.0. |
+| P2 | upheld | Concept doc line 15 cites the held 46.27. kslot is a free variable in [30, 70] (model line 93). The bench maximum dK is 45.62. |
+
+**Missed (for the next audit; none changes this verdict):**
+1. **The continuity reading rests on one wear.** The tool reads the newest verify file by mtime (`tools/alignment_audit.py` line 187), and that is the held file. On the claim's own bench file (`_v_bench_frozen_blend.json` connected), the rule's original grid graph (`connected()` in stop-relay-rocker-3r.py, recorded as connected_bench) reads **52.25**: 118 of 137 forced-taken poses are dropped, and 19 of those have no taken neighbour. The audit reports only the held bench-graph number, 24.47. The same graph reads 50.13 on the lead conecut-knee and 50.11 on slipper-nose (`_v_bench_frozen.json`). So this is a family-wide artefact of the sparse bench and does not change the ranking. Report both wears' floods.
+2. **The auditor's S6 counter-reading is itself selective.** "Over-dense + L2 + L1b = 19.02" leaves out L1a (0.33x), which pulls the other way. The symmetric reading is 18.87-18.88 bench and 23.08-23.09 held. So the row's 18.68 is 0.19-0.20 under a symmetric correction, not 0.34.
+3. **The M3 lift mixes two changes.** The 19.03 run has fix_ring_frame true and the 18.65 run has it false. The level alone is about +0.35; the frame adds about +0.03.
+4. **The row's buildable range is slightly optimistic.** The verdict text (ea9371b) quotes the buildable variant at 18.80-19.01 bench. The exact buildable wear reads 19.03. No held number exists at the buildable level, and nothing ranks on this.
