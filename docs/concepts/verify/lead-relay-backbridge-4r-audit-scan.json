@@ -1,0 +1,383 @@
+[
+ {
+  "a0": 60.0,
+  "azu": 0.0,
+  "seat_ok": true,
+  "c_bvec": [
+   17.6,
+   27.6
+  ],
+  "travel": [
+   -60.0,
+   60.0
+  ],
+  "r0": 75.5,
+  "r0_chain": 96.0,
+  "clash_fit": 7,
+  "hub0_ib": 0.024,
+  "hub0_med": 20.9,
+  "routes": [
+   {
+    "side": 0.0,
+    "len": 47.8,
+    "n": 168,
+    "chain_sets": 24,
+    "skin_sets": 0,
+    "ib": 0.0,
+    "med": 30.1
+   },
+   {
+    "side": -30.0,
+    "len": 72.7,
+    "n": 259,
+    "chain_sets": 29,
+    "skin_sets": 8,
+    "ib": 0.0,
+    "med": 31.8
+   },
+   {
+    "side": 30.0,
+    "len": 72.7,
+    "n": 259,
+    "chain_sets": 37,
+    "skin_sets": 0,
+    "ib": 0.016,
+    "med": 23.8
+   }
+  ],
+  "ib_est": 0.7203
+ },
+ {
+  "a0": 60.0,
+  "azu": 30.0,
+  "seat_ok": true,
+  "c_bvec": [
+   43.6,
+   17.5
+  ],
+  "travel": [
+   -23.0,
+   60.0
+  ],
+  "r0": 96.0,
+  "r0_chain": 106.0,
+  "clash_fit": 1,
+  "hub0_ib": 0.0,
+  "hub0_med": 31.8,
+  "routes": [
+   {
+    "side": 0.0,
+    "len": 57.3,
+    "n": 203,
+    "chain_sets": 29,
+    "skin_sets": 0,
+    "ib": 0.0,
+    "med": 31.7
+   },
+   {
+    "side": -30.0,
+    "len": 86.2,
+    "n": 308,
+    "chain_sets": 4,
+    "skin_sets": 40,
+    "ib": 0.0,
+    "med": 31.8
+   },
+   {
+    "side": 30.0,
+    "len": 86.2,
+    "n": 308,
+    "chain_sets": 44,
+    "skin_sets": 0,
+    "ib": 0.0,
+    "med": 29.3
+   }
+  ],
+  "ib_est": 0.6988
+ },
+ {
+  "a0": 60.0,
+  "azu": 60.0,
+  "seat_ok": true,
+  "c_bvec": [
+   69.3,
+   10.4
+  ],
+  "travel": [
+   -12.0,
+   60.0
+  ],
+  "r0": 129.5,
+  "r0_chain": 129.5,
+  "clash_fit": 0,
+  "hub0_ib": 0.0,
+  "hub0_med": 31.8,
+  "routes": [
+   {
+    "side": 0.0,
+    "len": 72.3,
+    "n": 259,
+    "chain_sets": 0,
+    "skin_sets": 37,
+    "ib": 0.0,
+    "med": 31.8
+   },
+   {
+    "side": -30.0,
+    "len": 107.8,
+    "n": 378,
+    "chain_sets": 0,
+    "skin_sets": 54,
+    "ib": 0.0,
+    "med": 31.8
+   },
+   {
+    "side": 30.0,
+    "len": 107.8,
+    "n": 378,
+    "chain_sets": 46,
+    "skin_sets": 8,
+    "ib": 0.0,
+    "med": 31.7
+   }
+  ],
+  "ib_est": 0.6692
+ },
+ {
+  "a0": 60.0,
+  "azu": 90.0,
+  "seat_ok": true,
+  "c_bvec": [
+   95.4,
+   7.9
+  ],
+  "travel": [
+   -10.0,
+   60.0
+  ],
+  "r0": 129.5,
+  "r0_chain": null,
+  "clash_fit": 5,
+  "hub0_ib": 0.023,
+  "hub0_med": 31.8,
+  "routes": [
+   {
+    "side": 0.0,
+    "len": 72.3,
+    "n": 259,
+    "chain_sets": 1,
+    "skin_sets": 36,
+    "ib": 0.0,
+    "med": 31.8
+   },
+   {
+    "side": -30.0,
+    "len": 107.8,
+    "n": 378,
+    "chain_sets": 13,
+    "skin_sets": 41,
+    "ib": 0.016,
+    "med": 31.8
+   },
+   {
+    "side": 30.0,
+    "len": 107.8,
+    "n": 378,
+    "chain_sets": 30,
+    "skin_sets": 24,
+    "ib": 0.0,
+    "med": 31.8
+   }
+  ],
+  "ib_est": 0.6706
+ },
+ {
+  "a0": 60.0,
+  "azu": 120.0,
+  "seat_ok": false,
+  "c_bvec": [
+   121.5,
+   10.4
+  ]
+ },
+ {
+  "a0": 60.0,
+  "azu": 150.0,
+  "seat_ok": false,
+  "c_bvec": [
+   147.2,
+   17.5
+  ]
+ },
+ {
+  "a0": 60.0,
+  "azu": 180.0,
+  "seat_ok": false,
+  "c_bvec": [
+   173.1,
+   27.6
+  ]
+ },
+ {
+  "a0": 60.0,
+  "azu": 210.0,
+  "seat_ok": false,
+  "c_bvec": [
+   -158.7,
+   38.8
+  ]
+ },
+ {
+  "a0": 60.0,
+  "azu": 240.0,
+  "seat_ok": false,
+  "c_bvec": [
+   -125.1,
+   48.2
+  ]
+ },
+ {
+  "a0": 60.0,
+  "azu": 270.0,
+  "seat_ok": true,
+  "c_bvec": [
+   -84.6,
+   52.1
+  ],
+  "travel": [
+   -60.0,
+   11.0
+  ],
+  "r0": 129.5,
+  "r0_chain": 129.5,
+  "clash_fit": 0,
+  "hub0_ib": 0.19,
+  "hub0_med": 4.5,
+  "routes": [
+   {
+    "side": 0.0,
+    "len": 72.3,
+    "n": 259,
+    "chain_sets": 10,
+    "skin_sets": 27,
+    "ib": 0.058,
+    "med": 31.6
+   },
+   {
+    "side": -30.0,
+    "len": 107.8,
+    "n": 378,
+    "chain_sets": 33,
+    "skin_sets": 21,
+    "ib": 0.094,
+    "med": 25.6
+   },
+   {
+    "side": 30.0,
+    "len": 107.8,
+    "n": 378,
+    "chain_sets": 0,
+    "skin_sets": 54,
+    "ib": 0.045,
+    "med": 31.8
+   }
+  ],
+  "ib_est": 0.6922
+ },
+ {
+  "a0": 60.0,
+  "azu": 300.0,
+  "seat_ok": true,
+  "c_bvec": [
+   -44.1,
+   48.2
+  ],
+  "travel": [
+   -60.0,
+   14.0
+  ],
+  "r0": 129.5,
+  "r0_chain": 129.5,
+  "clash_fit": 0,
+  "hub0_ib": 0.222,
+  "hub0_med": 22.3,
+  "routes": [
+   {
+    "side": 0.0,
+    "len": 72.3,
+    "n": 259,
+    "chain_sets": 25,
+    "skin_sets": 12,
+    "ib": 0.02,
+    "med": 27.9
+   },
+   {
+    "side": -30.0,
+    "len": 107.8,
+    "n": 378,
+    "chain_sets": 46,
+    "skin_sets": 8,
+    "ib": 0.0,
+    "med": 28.1
+   },
+   {
+    "side": 30.0,
+    "len": 107.8,
+    "n": 378,
+    "chain_sets": 0,
+    "skin_sets": 54,
+    "ib": 0.095,
+    "med": 31.8
+   }
+  ],
+  "ib_est": 0.6867
+ },
+ {
+  "a0": 60.0,
+  "azu": 330.0,
+  "seat_ok": true,
+  "c_bvec": [
+   -10.5,
+   38.8
+  ],
+  "travel": [
+   -60.0,
+   17.0
+  ],
+  "r0": 76.0,
+  "r0_chain": 77.0,
+  "clash_fit": 1,
+  "hub0_ib": 0.808,
+  "hub0_med": 10.9,
+  "routes": [
+   {
+    "side": 0.0,
+    "len": 48.0,
+    "n": 168,
+    "chain_sets": 24,
+    "skin_sets": 0,
+    "ib": 0.0,
+    "med": 25.8
+   },
+   {
+    "side": -30.0,
+    "len": 73.0,
+    "n": 259,
+    "chain_sets": 37,
+    "skin_sets": 0,
+    "ib": 0.0,
+    "med": 30.4
+   },
+   {
+    "side": 30.0,
+    "len": 73.0,
+    "n": 259,
+    "chain_sets": 14,
+    "skin_sets": 23,
+    "ib": 0.133,
+    "med": 30.6
+   }
+  ],
+  "ib_est": 0.7719
+ }
+]
