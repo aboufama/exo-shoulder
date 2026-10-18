@@ -1,0 +1,67 @@
+[
+ {
+  "key": "continuity",
+  "refuted": false,
+  "evidence": "The reason's wording is wrong, but the level stands on a number I measured. (1) The flood IS on file for the bench: rows:verification.flood {connected_full 18.6, dropped 0, knn 20.29, bench_only 50.45}, raw in the verifier's kstop_ver/varm_p0264.json:connected. The tool missed it because c_continuity reads only top-level row keys (alignment_audit.py line 482) and verifier files under docs/concepts/verify. I re-ran the other side with the model unchanged (verifier harness wear -0.210 --flood, CB_EXACT=1, 0 per-pose diffs vs the verifier's dumps). Bench: static 18.68, full 18.68 (0 dropped), knn 20.37 (+1.69), bench graph 50.53. That reads ok by the tool's rule. Held, the worst side 22.88: full 22.88 (0 dropped), knn 31.12 (77 dropped, +8.24), bench graph 24.05 (11 dropped) (docs/alignment/remeasure/lowarm-kstop-knuckle-3r_skeptic_flood.json:held_m0210.connected). The tool's rule (c_continuity lines 503-505: ok on connected_full, but watch when the knn loss > conn_gamed 3) gives WATCH on the held record, as for the parent (halfring held knn +8.14, upheld by its skeptic). Taken sets are identical across the two sides (bench 262 / 262, held 659 / 659, symmetric difference 0), so the per-pose worst shares these floods. Upheld as watch."
+ },
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "The min-th margin is on file and I re-measured it. On file: rows:verification.held.v3b_th {dwell_min 5.317, forced_min 5.006 at pose 1054, lt5 0}; docs/concepts/lowarm-kstop-knuckle-3r.md line 124 (bench dwell 5.389 / 5.34 at +0.264, forced 5.181 at 313). The tool missed it because FOLD_KEY (alignment_audit.py line 524) does not match the spellings dwell_min / forced_min / min_th_dwell / min_own_forced. Measured by me (verifier harness th_margin_sided, wear -0.210, model unchanged): bench min_th_dwell 5.301 (pose 229), min_own_forced 5.181 (pose 313), lt5 0; held min_th_dwell 5.317, min_own_forced 5.006, lt5 0 (docs/alignment/remeasure/lowarm-kstop-knuckle-3r_skeptic_flood.json). The tool's rule (gamed below fold_min - 0.05 = 4.95, else ok) reads ok at 5.006. The unworn groove play (~4.92) is an estimate, not a reading on file, and is ruled under T3 (upheld)."
+ },
+ {
+  "key": "sampling",
+  "refuted": false,
+  "evidence": "Re-derived from two sources: docs/alignment/remeasure/lowarm-kstop-knuckle-3r_bench.json:parts_ib14 and the verifier's raw kstop_ver/varm_p0264.json:claim_frozen_out.parts_ib14 agree: 15 parts, 980 samples, sample-weighted 0.8967, part-weighted 0.8610, +3.57 points (-0.210 side: varm_m0210 +3.54). That is over TH part_weight_watch 3.0, and ring2 [0.179, 15.6 mm, 6] is under the 0.5 'mostly out of band' line (alignment_audit.py c_sampling). Without ring2 the gap is -0.86 (0.9011 / 0.9097), so the whole watch is ring2. The lead reads -2.37 (conecut-knee_bench.json parts_ib14). The wearer cost is real: metal at a median 15.6 mm, above the 14 mm pass line, on 82 % of ring2's samples. Upheld."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "rows:status 'verified' while rows:verdict starts 'SCREENED (step 0 passes)' and says 'the claim is the combined cell ... (not yet measured)'. docs/dashboard/data/morphs.json carries the same verdict string. That matches the tool's rule (c_reporting: a verified row whose verdict starts with SCREENED). Upheld."
+ },
+ {
+  "key": "judgement:NEW-hairline-gates",
+  "refuted": false,
+  "evidence": "Every number re-read: kstop_ver/varm_p0264.json:named.203.cmin 0.158; rows:verification.paired_vs_lead.held.diff 0.4977; varm_p0264.json:s1_geom.stage1.pitch [9.904, 9.904] vs R_HI 9.94 (doc line 172); kstop_ver/hvarm_m0210.json:dowel.dK_taken_max 46.268 vs K 46.35; rows:report_P0.p203_at_0363 0.118. I tried the 'no documented threshold' refutation, which worked for NEW-one-sided-play on lowarm-halfring. It fails here: the gates are this round's own pre-registered rules (docs/concepts/ROUNDS.md 09:25 block lines 4633-4662, adopted at line 4717; standing rules at line 4764). Two of them do not merely pass by a hairline; they fail. (a) 'bind >= 1 deg of K above the held stroke at a_s +-0.1 mm': at a_s 9.7, dK_lim is 0 (rows:step0.gates.bind). (b) '203 >= 0.15 mm ... at the +0.1 / +0.2 mm probes': rows:step0.gates.probe_0p2 reads 'FAIL alone (19.77)'. The finding stands, and is understated. Upheld."
+ },
+ {
+  "key": "judgement:S2",
+  "refuted": false,
+  "evidence": "Same records as sampling. ring2 [0.179, 15.6, 6] here vs the parent's [0.859, 12.7, 4] (docs/alignment/remeasure/lowarm-halfring-knuckle-3r_bench.json:parts_ib14.ring2). The part-weighted reading is 0.861 vs the lead's 0.925; the sample-weighted reading is 0.8967 vs 0.9011. My recompute without ring2 gives sample-weighted 0.9011, identical to the lead. So the raised ring is the design's entire bench in-band deficit vs the lead (paired +0.40). Kit density is not on file (checks.density 'not measured'), so the honest weight of ring2 is unmeasured. Upheld."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "No stiffness model or measurement of the crank's long arm is on file. grep 'stiffness' finds only the generic judge/fea.py and judge/dynamics.py, with no CAD of this row to run them on. The claim's own red team (docs/concepts/lowarm-kstop-knuckle-3r.md 'The pinch', lines 160-165) gives 27-77 N/mm, 0.06-0.22 mm at 203 per 0.05 N.m, and calls it 'the number most likely to be optimistic'. My -0.210 wear reads 203 at cmin 0.347 on the stop-A side, so the hairline is only on the +K (wall, long-arm) side: varm_p0264 named.203.cmin 0.158. The missing measurement stands. Upheld."
+ },
+ {
+  "key": "judgement:T3",
+  "refuted": false,
+  "evidence": "Held forced min th re-measured 5.006 (the verifier's hvarm_m0210 lowest_forced pose 1054 m_th 5.006); bench forced 5.181 at 313 (my bench -0.210 wear). The groove play arithmetic on file (doc line 124: 0.23 deg x 0.405) gives 5.006 - 0.093 = 4.913 held. That is under the user's 5 deg and under the tool's 4.95 gamed line, if it were worn. The round requires 'K play carried into th' and 'min th with play' (ROUNDS.md 09:25 block, Restore and Claim-reports lines). Neither the claim nor the verifier wore it on forced poses. Upheld."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Re-measured: held msub_lt1_dwell 100 of 457 dwell poses; bench (-0.210) 50 of 205; lowest dwell poses m_sub 0.76-1.55 deg (kstop_ver/hvarm_m0210.json:v3b_th_margin.lowest_dwell). No measurement shows the sub-dyad fold is unfelt. The user's question is still open (the lead's ledger G4 watch). Upheld."
+ },
+ {
+  "key": "judgement:S5",
+  "refuted": false,
+  "evidence": "Measured the missing floods myself, model unchanged (verifier harness --flood, CB_EXACT=1). Bench -0.210: full 18.68 (0 dropped), knn 20.37 (+1.69). held -0.210 (the held worst side, 22.88): static 22.88, connected_full 22.88 (0 dropped), connected_knn 31.12 (77 dropped, loss +8.24), bench graph 24.05 (11 dropped) (docs/alignment/remeasure/lowarm-kstop-knuckle-3r_skeptic_flood.json). Taken sets are identical across sides on bench and held (sym diff 0), so the per-pose worst takes the same connected poses. The held knn loss is over TH conn_gamed 3 (alignment_audit.py c_continuity: ok on full but watch when the knn loss > 3), so the pattern the auditor feared is measured, not just missing. Upheld."
+ },
+ {
+  "key": "judgement:M3",
+  "refuted": false,
+  "evidence": "The build specs are the row's own: rows:step0.gates.m3 'pass as a build spec: short arm's swept metal inside r 10.15 ... pocket to F+1.0 needs a 1.38 mm arm tip'; doc line 50 (r 8.15..10.14, level 2.53..3.15); doc lines 175-180 (pocket removes ~30-35 % of link 1b's bar root, an FEA item); doc line 304 (stop-A set screw with zero thread wall to the boss). No FEA of the pocketed root and no CAD bore fix is on file. The bench effect is 0 (rows:verification.v_arm.poses_changed 0). The strength risk is unmeasured. Upheld."
+ },
+ {
+  "key": "judgement:G5",
+  "refuted": true,
+  "evidence": "Part of the measurement is wrong, and the rest is not a G5 pattern. (1) The set screw IS counted: rows:mechanism.complexity reads 'lowarm record 16.5 + 1 bought part (the M1.6 stop-A set screw) = 16.75'. tools/simplicity.py score(row mechanism) returns 16.75 with the item '3 bought parts beyond 6 x 0.25'. (2) G5's documented detect (docs/ALIGNMENT.md line 263: recompute tools/simplicity.py, DOF cap, passive translations) reads ok: checks.complexity recomputed 16.75, 3 active DOF, 0 passive translations. The simplicity ruler has no precision-class term for any design, so 16.75 vs 18.5 is like for like. The lead's extra points are its spring ('1 spring / flexure x 3') and one more bought part, and this design has neither. (3) The auditor's own remedy is proposal C, 'not scored. No number moves', which is a reporting addition, not a defect in the count. The groove's cliff is ruled under NEW-hairline-gates (upheld)."
+ },
+ {
+  "key": "judgement:R1",
+  "refuted": false,
+  "evidence": "ls docs/concepts/verify | grep kstop -> only lowarm-kstop-knuckle-3r.py. The verifier's JSON outputs (varm_*, hvarm_*, vdump_*, hvdump_*) exist only in a session scratchpad (kstop_ver/). The committed per-pose dumps cite them as sources (remeasure/..._bench_perpose.json:sources). The verdict text is the screen's. One sub-point is cosmetic: morphs.json v_gap is 18.69, equal to the row; only its gap / sweep_gap read 18.68, the -0.210 side. The missing committed record stands. Upheld."
+ }
+]

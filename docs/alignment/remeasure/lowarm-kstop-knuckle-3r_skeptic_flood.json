@@ -1,0 +1,370 @@
+{
+ "id": "lowarm-kstop-knuckle-3r",
+ "by": "skeptic",
+ "t": "2026-10-18",
+ "how": "docs/concepts/verify/lowarm-kstop-knuckle-3r.py wear -0.210 <bench|held> --arm-t 1.38 --flood, CB_EXACT=1, OMP_NUM_THREADS=1, nice 15, model unchanged (the verifier's own harness; --flood = connected_report() of minarc-stop-knuckle-4r-mechanism.py on the post-dowel bench)",
+ "bench_m0210": {
+  "frozen": {
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.896,
+   "inband10": 0.5703,
+   "contact": 0.0106,
+   "gap": 18.68
+  },
+  "dowel": {
+   "K": 46.35,
+   "n_cut": 0,
+   "cut": [],
+   "dK_taken_max": 45.615,
+   "n_taken_pre": 372
+  },
+  "connected": {
+   "connected_bench": {
+    "gap": 50.53,
+    "reach": 0.4139,
+    "dropped": 113,
+    "dropped_forced": 113,
+    "forced_taken": 128,
+    "forced_taken_connected": 15,
+    "dropped_with_no_taken_neighbour": 18
+   },
+   "connected_knn": {
+    "gap": 20.37,
+    "reach": 0.7111,
+    "dropped": 6,
+    "dropped_forced": 6,
+    "forced_taken": 128,
+    "forced_taken_connected": 122
+   },
+   "connected_full": {
+    "gap": 18.68,
+    "reach": 0.7278,
+    "dropped": 0,
+    "dropped_forced": 0,
+    "forced_taken": 128,
+    "forced_taken_connected": 128,
+    "envelope": {
+     "env_ok": 1065,
+     "env_forced_ok": 526,
+     "env_forced_connected": 526
+    }
+   },
+   "secs": 1.2
+  },
+  "v3b_th_margin": {
+   "n": 372,
+   "n_dwell": 205,
+   "n_forced": 167,
+   "min_th_dwell": 5.301,
+   "min_own_forced": 5.181,
+   "lt5_dwell": 0,
+   "lt5_forced": 0,
+   "msub_lt1_dwell": 50,
+   "lowest_dwell": [
+    {
+     "i": 229,
+     "dwell": true,
+     "th": 25.06,
+     "dK": 0.21,
+     "m_th": 5.301,
+     "m_sub": 1.554,
+     "own": 5.301
+    },
+    {
+     "i": 287,
+     "dwell": true,
+     "th": 26.35,
+     "dK": 0.21,
+     "m_th": 6.6,
+     "m_sub": 1.109,
+     "own": 6.6
+    },
+    {
+     "i": 204,
+     "dwell": true,
+     "th": 27.04,
+     "dK": 0.21,
+     "m_th": 7.283,
+     "m_sub": 0.921,
+     "own": 7.283
+    },
+    {
+     "i": 178,
+     "dwell": true,
+     "th": 29.65,
+     "dK": 0.21,
+     "m_th": 9.89,
+     "m_sub": 0.41,
+     "own": 9.89
+    }
+   ],
+   "lowest_forced": [
+    {
+     "i": 313,
+     "dwell": false,
+     "th": 106.3,
+     "dK": -45.615,
+     "m_th": 5.181,
+     "m_sub": 14.95,
+     "own": 5.181
+    },
+    {
+     "i": 309,
+     "dwell": false,
+     "th": 105.18,
+     "dK": -43.661,
+     "m_th": 5.714,
+     "m_sub": 16.062,
+     "own": 5.714
+    },
+    {
+     "i": 409,
+     "dwell": false,
+     "th": 104.56,
+     "dK": -42.593,
+     "m_th": 6.01,
+     "m_sub": 16.677,
+     "own": 6.01
+    },
+    {
+     "i": 366,
+     "dwell": false,
+     "th": 104.44,
+     "dK": -42.38,
+     "m_th": 6.069,
+     "m_sub": 16.8,
+     "own": 6.069
+    }
+   ]
+  },
+  "named": {
+   "139": {
+    "min_mm": 0.072,
+    "cmin": 1.7,
+    "taken": true,
+    "dK": 30.969
+   },
+   "203": {
+    "min_mm": 0.801,
+    "cmin": 0.347,
+    "taken": true,
+    "dK": 0.21
+   },
+   "205": {
+    "min_mm": -4.154,
+    "cmin": -4.154,
+    "taken": false,
+    "dK": 0.21
+   },
+   "237": {
+    "min_mm": -9.64,
+    "cmin": -9.64,
+    "taken": false,
+    "dK": 0.21
+   },
+   "264": {
+    "min_mm": -1.304,
+    "cmin": -1.304,
+    "taken": false,
+    "dK": 0.21
+   },
+   "316": {
+    "min_mm": -1.235,
+    "cmin": 0.672,
+    "taken": false,
+    "dK": 43.919
+   },
+   "313": {
+    "min_mm": 2.478,
+    "cmin": 4.236,
+    "taken": true,
+    "dK": 45.615
+   }
+  },
+  "secs": 498.2,
+  "dump_vs_verifier": "0 per-pose diffs of 470 vs the verifier's kstop_ver/vdump_m0210.json"
+ },
+ "held_m0210": {
+  "frozen": {
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.895,
+   "inband10": 0.5694,
+   "contact": 0.016,
+   "gap": 22.88
+  },
+  "dowel": {
+   "K": 46.35,
+   "n_cut": 0,
+   "cut": [],
+   "dK_taken_max": 46.268,
+   "n_taken_pre": 861
+  },
+  "connected": {
+   "connected_bench": {
+    "gap": 24.05,
+    "reach": 0.6807,
+    "dropped": 11,
+    "dropped_forced": 11,
+    "forced_taken": 332,
+    "forced_taken_connected": 321,
+    "dropped_with_no_taken_neighbour": 4
+   },
+   "connected_knn": {
+    "gap": 31.12,
+    "reach": 0.6113,
+    "dropped": 77,
+    "dropped_forced": 77,
+    "forced_taken": 332,
+    "forced_taken_connected": 255
+   },
+   "connected_full": {
+    "gap": 22.88,
+    "reach": 0.6922,
+    "dropped": 0,
+    "dropped_forced": 0,
+    "forced_taken": 332,
+    "forced_taken_connected": 332,
+    "envelope": {
+     "env_ok": 1065,
+     "env_forced_ok": 526,
+     "env_forced_connected": 526
+    }
+   },
+   "secs": 2.4
+  },
+  "v3b_th_margin": {
+   "n": 861,
+   "n_dwell": 457,
+   "n_forced": 404,
+   "min_th_dwell": 5.317,
+   "min_own_forced": 5.006,
+   "lt5_dwell": 0,
+   "lt5_forced": 0,
+   "msub_lt1_dwell": 100,
+   "lowest_dwell": [
+    {
+     "i": 590,
+     "dwell": true,
+     "th": 25.07,
+     "dK": 0.21,
+     "m_th": 5.317,
+     "m_sub": 1.548,
+     "own": 5.317
+    },
+    {
+     "i": 527,
+     "dwell": true,
+     "th": 26.04,
+     "dK": 0.21,
+     "m_th": 6.289,
+     "m_sub": 1.204,
+     "own": 6.289
+    },
+    {
+     "i": 510,
+     "dwell": true,
+     "th": 27.09,
+     "dK": 0.21,
+     "m_th": 7.333,
+     "m_sub": 0.908,
+     "own": 7.333
+    },
+    {
+     "i": 391,
+     "dwell": true,
+     "th": 27.7,
+     "dK": 0.21,
+     "m_th": 7.948,
+     "m_sub": 0.762,
+     "own": 7.948
+    }
+   ],
+   "lowest_forced": [
+    {
+     "i": 1054,
+     "dwell": false,
+     "th": 106.67,
+     "dK": -46.268,
+     "m_th": 5.006,
+     "m_sub": 14.584,
+     "own": 5.006
+    },
+    {
+     "i": 274,
+     "dwell": false,
+     "th": 106.62,
+     "dK": -46.173,
+     "m_th": 5.031,
+     "m_sub": 14.637,
+     "own": 5.031
+    },
+    {
+     "i": 1068,
+     "dwell": false,
+     "th": 106.45,
+     "dK": -45.881,
+     "m_th": 5.11,
+     "m_sub": 14.8,
+     "own": 5.11
+    },
+    {
+     "i": 859,
+     "dwell": false,
+     "th": 106.16,
+     "dK": -45.367,
+     "m_th": 5.248,
+     "m_sub": 15.091,
+     "own": 5.248
+    }
+   ]
+  },
+  "secs": 969.2
+ },
+ "bench_p0264_verifier": {
+  "frozen": {
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.8968,
+   "inband10": 0.5707,
+   "contact": 0.0106,
+   "gap": 18.6
+  },
+  "connected": {
+   "connected_bench": {
+    "gap": 50.45,
+    "reach": 0.4139,
+    "dropped": 113,
+    "dropped_forced": 113,
+    "forced_taken": 128,
+    "forced_taken_connected": 15,
+    "dropped_with_no_taken_neighbour": 18
+   },
+   "connected_knn": {
+    "gap": 20.29,
+    "reach": 0.7111,
+    "dropped": 6,
+    "dropped_forced": 6,
+    "forced_taken": 128,
+    "forced_taken_connected": 122
+   },
+   "connected_full": {
+    "gap": 18.6,
+    "reach": 0.7278,
+    "dropped": 0,
+    "dropped_forced": 0,
+    "forced_taken": 128,
+    "forced_taken_connected": 128,
+    "envelope": {
+     "env_ok": 1065,
+     "env_forced_ok": 526,
+     "env_forced_connected": 526
+    }
+   },
+   "secs": 1.5
+  },
+  "src": "verifier scratchpad kstop_ver/varm_p0264.json:connected (copied here so it is on file)"
+ },
+ "taken_sets": "bench 262 / 262 ws taken on +0.264 / -0.210 (symmetric difference 0, same 4 contacts 205 237 264 316); held 659 / 659 (sym diff 0, same 14 contacts) - verifier dumps kstop_ver/vdump_*.json, hvdump_*.json"
+}

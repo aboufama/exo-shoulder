@@ -236,3 +236,108 @@ and the th margin sit in the row's verification block (finding R1). The judgemen
 
   The verifier's V3b fixed the th reading. Proposal: every play wear carries an explicit dwell mask, and a play-aware
   check refuses to run without it. No number moves.
+
+## Skeptic (2026-10-18, ~16:42-17:05 UTC)
+
+**Final verdict: WATCH.** This is the ledger tool's skeptic entry (2026-10-18T17:02:50Z). Rulings are in
+`docs/alignment/lowarm-kstop-knuckle-3r.rulings.json`. I refuted 2 of the 13 reasons with evidence and upheld 11.
+
+**What I re-measured.**
+
+- The model ran unchanged through the verifier's own harness: `docs/concepts/verify/lowarm-kstop-knuckle-3r.py wear -0.210
+  <bench|held> --arm-t 1.38 --flood`, CB_EXACT=1, OMP_NUM_THREADS=1, nice, 2 processes.
+- Both wears reproduce the verifier's per-pose dumps with 0 diffs (470 bench, 1154 held), at 18.68 and 22.88.
+- Summary: `docs/alignment/remeasure/lowarm-kstop-knuckle-3r_skeptic_flood.json`. It also copies the verifier's +0.264
+  bench flood, which until now existed only in a session scratchpad.
+
+| wear | static | connected_full | connected_knn | bench graph |
+|---|---|---|---|---|
+| bench +0.264 (verifier) | 18.60 | 18.60 (0 dropped) | 20.29 (6, +1.69) | 50.45 (113) |
+| bench -0.210 (skeptic) | 18.68 | 18.68 (0 dropped) | 20.37 (6, +1.69) | 50.53 (113) |
+| held -0.210 (skeptic) | 22.88 | 22.88 (0 dropped) | **31.12 (77, +8.24)** | 24.05 (11) |
+
+The taken sets are identical across the two sides: bench 262 / 262 and held 659 / 659, with symmetric difference 0 and
+the same contacts. So the per-pose worst claim shares these floods.
+
+The fold margin th (V3b, effective dyad on dwell poses):
+
+| | dwell min | forced min | poses under 5 | m_sub < 1 on dwell poses |
+|---|---|---|---|---|
+| bench (-0.210) | 5.301 (pose 229) | 5.181 (pose 313) | 0 | 50 of 205 |
+| held (-0.210) | 5.317 | 5.006 (pose 1054) | 0 | 100 of 457 |
+
+**Rulings.**
+
+1. **continuity: upheld (watch).** The wording is wrong: the bench flood is on file at `rows:verification.flood`. The tool
+   misses it because it reads only top-level row keys (line 482). Both bench sides read ok: full loss 0, knn loss +1.69.
+   The held flood, which nobody had run before, loses **+8.24 on knn** (77 forced takes not knn-connected). By the
+   tool's rule (lines 503-505: watch when the knn loss is over 3) that is a watch, the same as the parent's +8.14.
+2. **fold_margin: REFUTED.** The min-th margin is on file: `rows:verification.held.v3b_th` (forced 5.006, dwell 5.317,
+   lt5 0) and the claim doc line 124 (bench). I re-measured it (table above). The tool rule, gamed only under 4.95,
+   reads ok at 5.006. The tool's FOLD_KEY (line 524) misses the spellings dwell_min / forced_min / min_th_dwell /
+   min_own_forced. The groove-play estimate is ruled under T3.
+3. **sampling: upheld.** Two sources agree: the audit's re-wear and the verifier's raw `claim_frozen_out.parts_ib14`.
+   Sample-weighted in-band is 0.8967 and part-weighted 0.8610, a difference of +3.57 against the 3.0 line. The
+   -0.210 side reads +3.54. ring2 alone causes it: without ring2 the difference is -0.86.
+4. **reporting: upheld.** The row status is verified, but the verdict text still starts "SCREENED (step 0 passes)". The
+   dashboard carries the same string.
+5. **NEW-hairline-gates: upheld, and understated.**
+   - Every margin re-reads: 203 cmin 0.158, held paired 0.4977, pitch rho 9.904 vs R_HI 9.94, held K 46.268 vs 46.35,
+     and P0 203 at 0.118.
+   - "No documented threshold" (the refutation that worked for NEW-one-sided-play on lowarm-halfring) does not apply
+     here. These are the round's own pre-registered gates (ROUNDS.md 09:25 block, lines 4633-4662, adopted at 4717 and
+     4764).
+   - Two of them fail outright rather than pass by a hairline: bind at a_s -0.1 mm (dK_lim 0) and 203 at the +0.2 probe
+     ("FAIL alone"). See missed items 2 and 3.
+6. **S2: upheld.**
+   - ring2 reads 0.179 / 15.6 mm here, against 0.859 / 12.7 mm on the parent.
+   - Sample-weighted without ring2, this design reads 0.9011, the lead's exact number. The raised ring is therefore this
+     design's whole bench in-band deficit against the lead (paired +0.40).
+   - Kit density is still unmeasured.
+7. **M5: upheld.** No stiffness model or measurement of the 41 mm long arm is on file. The hairline is on the wall (+K)
+   side only: 203 reads 0.158 at +0.264 and 0.347 at -0.210 (my wear).
+8. **T3: upheld.** Held forced th is 5.006. The groove-play arithmetic on file (0.23 deg x 0.405) gives about 4.91. That
+   is under 5 deg and under the tool's 4.95 gamed line, had the play been worn. The round requires "K play carried into
+   th" and "min th with play", and neither the claim nor the verifier wore the play on forced poses.
+9. **G4: upheld.** m_sub is under 1 deg on 100 held and 50 bench dwell poses. The user's question is still open.
+10. **S5: upheld, and now measured.** The held knn flood loses +8.24, the pattern the auditor expected from the parent.
+11. **M3: upheld.** The pocket and root FEA, the bore fix and the arm tip are build specs, and none of them has a
+    measurement on file. The bench effect is 0.
+12. **G5: REFUTED.**
+    - The set screw IS counted: `rows:mechanism.complexity` reads "16.5 + 1 bought part (the M1.6 stop-A set screw)",
+      and simplicity.py lists "3 bought parts beyond 6 x 0.25".
+    - G5's documented detect is complexity recompute + DOF cap + passive translations (ALIGNMENT.md line 263), and it
+      reads ok.
+    - The ruler has no precision term for any design, so the comparison is like for like. The lead's extra points are
+      its spring (3).
+    - The auditor's own remedy, proposal C, is "not scored; no number moves". The groove cliff is ruled under
+      NEW-hairline-gates.
+13. **R1: upheld.** The verifier's JSON outputs are still only in a session scratchpad (`docs/concepts/verify` holds only
+    the .py), and the verdict text is the screen's. One sub-point is cosmetic: the dashboard v_gap reads 18.69, equal to
+    the row; only its gap / sweep_gap read 18.68.
+
+**Missed by the audit (for the next audit; not counted in this verdict).**
+
+1. **The pre-registered pass is missed.** ROUNDS.md 09:25 lens-B block: "Pre-registered pass: frozen exact <= 18.65 at
+   cx <= 17.0". The row reads v_gap 18.69. It is neither pass nor kill (kill > 19.05), yet the verdict reads "step 0
+   passes" and the dashboard shows VERIFIED. No rank effect, since the design is behind the lead.
+2. **A pre-registered tolerance corner was re-scoped after it failed.**
+   - The 09:25 rule: "bind >= 1 deg of K above the held stroke at a_s +-0.1 mm and mu 0.17".
+   - At a_s 9.7 the drive is dead: `rows:step0.gates.bind` gives dK_lim 0, fit reach 0.34.
+   - The row restates the box as "every legal corner". The doc (lines 172-174) calls it "a placement cliff, not a
+     tolerance one ... treat a_s < 9.8 as a wall".
+   - The audit read this as a 0.036 mm hairline. It is a failed pre-registered corner.
+   - Wearer cost if a_s is built 0.1 mm short: the K drive does not move.
+3. **A standing B rule fails alone.** The rule: "203 >= 0.15 mm ... at the +0.1 / +0.2 mm probes" (ROUNDS.md line 4765).
+   `rows:step0.gates.probe_0p2` reads "FAIL alone (19.77)". The fix is deferred to a combined cell that is not measured.
+4. **The play-inclusive th gate is read on bench only.** The claim's own gate (doc line 124: "th >= 5 incl. play")
+   reads 5.09 on bench. The same arithmetic on held pose 1054 gives about 4.91, a fail, and it would sit under the
+   tool's fold_margin gamed line (4.95) if worn.
+5. **Round-required claim columns are absent.** Neither "min th with play" (held) nor "S6 equal-sample in-band for the
+   hold metal (tools/sample_density.py)" is on file (ROUNDS.md 09:25 "Claim reports"; standing rule line 4766).
+   checks.density reads "not measured".
+
+**Instrument note (not gaming; for the tool's keeper).** `c_continuity` and `c_fold_margin` do not read nested
+`verification.*` records (`verification.flood`, `verification.held.v3b_th`), so this row got two "missing" watches whose
+numbers were on file. The fold reading is ok; the continuity reading is watch on the held knn loss, now on file in the
+skeptic summary.
