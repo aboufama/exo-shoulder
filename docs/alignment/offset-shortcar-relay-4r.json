@@ -5,11 +5,8 @@
  "complexity": 52.5,
  "verdict": "watch",
  "reasons": [
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
-  "dominance: cannot compare with conecut-knee-knuckle-3r at 2 mm",
-  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
-  "idle: a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
-  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out"
+  "dominance: beats conecut-knee-knuckle-3r by 4.54 plain but loses by 11.24 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
  ],
  "checks": [
   {
@@ -31,21 +28,67 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "level": "ok",
+   "reason": "plain 13.74, <1 mm 17.91, <2 mm 46.08, <3 mm 100.04, band read 3-14 mm 13.74, 32.34 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 32.34,
+   "plain": 13.74,
+   "n1": 17.91,
+   "n2": 46.08,
+   "n3": 100.04,
+   "band3": 13.74,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0006,
+    "2-3": 0.0034,
+    "3-4": 0.0105,
+    "4-6": 0.088,
+    "6-10": 0.4588,
+    "10-14": 0.3524,
+    ">14": 0.0862
+   },
+   "minmm": 0.072,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump offset-shortcar-relay-4r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 14.76: bench 13 contact poses, sum 46.18 mm, deepest 9.79 mm at ['ws', 30.0, 135.0, 0.0], 5 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held depths not on file",
    "depths": {
-    "v_gap 14.76": {}
-   }
+    "v_gap 14.76": {
+     "bench": {
+      "n": 13,
+      "sum_mm": 46.18,
+      "max_mm": 9.79,
+      "n_deeper3": 5,
+      "overhead140": 5,
+      "deepest": [
+       "ws",
+       30.0,
+       135.0,
+       0.0
+      ],
+      "gap": 14.76,
+      "src": "docs/alignment/remeasure/offset-shortcar-relay-4r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        46.18
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
   },
   {
    "check": "dominance",
    "level": "watch",
-   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+   "reason": "beats conecut-knee-knuckle-3r by 4.54 plain but loses by 11.24 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": 4.54,
+   "gain_2mm": -11.24
   },
   {
    "check": "continuity",
@@ -61,9 +104,26 @@
   },
   {
    "check": "idle",
-   "level": "watch",
-   "reason": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
-   "spans": [],
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 46.29 deg (re-measured dK span); crank: declared moving, no span on file; knee moves: smallest recorded span 46.67 deg (re-measured K.ang span)",
+   "spans": [
+    [
+     "re-measured dK span",
+     46.29
+    ],
+    [
+     "re-measured K.ang span",
+     46.67
+    ],
+    [
+     "re-measured K.qa span",
+     46.67
+    ],
+    [
+     "re-measured K.qb span",
+     50.84
+    ]
+   ],
    "declared": [
     "K",
     "crank",
@@ -73,8 +133,85 @@
   },
   {
    "check": "sampling",
-   "level": "watch",
-   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.913 vs part-weighted 0.924 (-1.06 points); thinly sampled parts: L1a 8 (re-measured)",
+   "parts": {
+    "hub1": [
+     1.0,
+     8.62,
+     80
+    ],
+    "hubK": [
+     0.9918,
+     7.91,
+     80
+    ],
+    "hub2": [
+     0.9118,
+     11.59,
+     80
+    ],
+    "hub3": [
+     0.7422,
+     11.45,
+     80
+    ],
+    "E": [
+     0.915,
+     10.29,
+     164
+    ],
+    "boss": [
+     1.0,
+     7.55,
+     32
+    ],
+    "pad": [
+     1.0,
+     6.22,
+     32
+    ],
+    "knee": [
+     0.9929,
+     9.87,
+     90
+    ],
+    "crank": [
+     0.8007,
+     11.3,
+     133
+    ],
+    "roller": [
+     0.9383,
+     9.99,
+     19
+    ],
+    "horn": [
+     0.9549,
+     7.46,
+     23
+    ],
+    "L1a": [
+     0.9807,
+     10.07,
+     8
+    ],
+    "L1b": [
+     0.9179,
+     8.22,
+     36
+    ],
+    "L2": [
+     0.7312,
+     11.97,
+     124
+    ],
+    "relay_hw_inband": [
+     0.9798,
+     8.14,
+     344
+    ]
+   }
   },
   {
    "check": "density",
@@ -91,7 +228,7 @@
   {
    "check": "reporting",
    "level": "ok",
-   "reason": "dashboard shows no verified number (row v_gap 14.76); dashboard status 'screened' vs row 'verified'"
+   "reason": "row, verifier files and dashboard agree"
   },
   {
    "check": "judge_change",
@@ -105,7 +242,7 @@
   }
  ],
  "remeasured": {
-  "bench": false,
+  "bench": true,
   "held": false
  },
  "verifier_files": [
@@ -122,7 +259,7 @@
   "docs/concepts/verify/offset-shortcar-relay-4r/claim_pick_perpose.json",
   "docs/concepts/verify/offset-shortcar-relay-4r/pick.json"
  ],
- "git": "9ea4228",
+ "git": "a0a40f2",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T14:58:28Z"
+ "t": "2026-10-18T15:06:56Z"
 }

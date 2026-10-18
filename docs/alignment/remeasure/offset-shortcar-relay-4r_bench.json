@@ -1,0 +1,606 @@
+{
+ "id": "offset-shortcar-relay-4r",
+ "wear": "bench",
+ "params": {
+  "PHI": 35.0,
+  "ds": 31,
+  "rt_extra": 1.5,
+  "pre": 0,
+  "bump": 1.002,
+  "band": 9.272,
+  "ramp": 6.0,
+  "tilt": 12,
+  "taz": 235,
+  "sgn": 1,
+  "flood": 1,
+  "hw": 1,
+  "hwv": "plain",
+  "liner": 4.0,
+  "plate": 1.5,
+  "flange": 1,
+  "delta": 4.5,
+  "carw": 14,
+  "coil": "arm",
+  "lean": 0,
+  "h_c": 1.7,
+  "coilD": 8.0,
+  "coilL": 8.0
+ },
+ "adapter": "tools/alignment_wear_offset_relay.py",
+ "frozen": {
+  "gap": 14.76,
+  "gap_plain": 13.74,
+  "gate_chain_only": 14.76,
+  "reach": 0.7944,
+  "follow": 1.0,
+  "inband14": 0.9132,
+  "inband14_chain_only": 0.8898,
+  "contact": 0.0318
+ },
+ "summary": {
+  "gate": 14.76,
+  "chain_only": 14.76,
+  "plain": 13.74,
+  "near1": 17.91,
+  "near2": 37.7,
+  "ibc": 0.8898,
+  "ib": 0.9132,
+  "ib10": 0.5608,
+  "reach": 0.7944,
+  "fol": 1.0,
+  "con": 0.0318,
+  "ncon": 13,
+  "jams": 0,
+  "ws_taken": 286,
+  "overhead": [
+   8,
+   28
+  ],
+  "by_cause": {
+   "chain": 12,
+   "hardware": 1,
+   "chain+hw": 0
+  },
+  "hwc": [
+   [
+    466,
+    -2.95,
+    -1.9
+   ]
+  ],
+  "stack": 1.23,
+  "arc": [
+   -1.9,
+   45.9
+  ],
+  "R_t": 80.6,
+  "shell_min": {
+   "i": 139,
+   "mm": 1.03,
+   "az_rel": -0.5
+  },
+  "bracket": [
+   25.0
+  ],
+  "secs": 177.5
+ },
+ "deep": {
+  "plain": 13.74,
+  "reach": 0.7944,
+  "follow": 1.0,
+  "inband14": 0.9132,
+  "contact": 0.0318,
+  "n_poses": 470,
+  "n_taken": 396,
+  "min_metal_mm": 0.072,
+  "gap_near1": 17.91,
+  "near1_poses": 8,
+  "gap_near2": 46.08,
+  "near2_poses": 57,
+  "gap_near3": 100.04,
+  "near3_poses": 141,
+  "clip_metal_hist": {
+   "0-1": 0.0,
+   "1-2": 0.0006,
+   "2-3": 0.0034,
+   "3-4": 0.0105,
+   "4-6": 0.088,
+   "6-10": 0.4588,
+   "10-14": 0.3524,
+   ">14": 0.0862
+  },
+  "gap_band3_14": 13.74,
+  "inband3_14": 0.9098,
+  "overhead_min_metal_p10": 1.83,
+  "coord_spans": {
+   "dK": [
+    -0.8079,
+    0.0
+   ],
+   "kstate": [
+    0.0,
+    1.0
+   ],
+   "a1e": [
+    37.5517,
+    54.4626
+   ],
+   "msub": [
+    10.8052,
+    99.0
+   ],
+   "kin_ok": [
+    1.0,
+    1.0
+   ],
+   "res_deg": [
+    0.0,
+    0.0151
+   ],
+   "q3p": [
+    -109.2015,
+    118.2828
+   ],
+   "clear": [
+    1.3146,
+    5.196
+   ],
+   "K.phi": [
+    -0.1448,
+    0.1421
+   ],
+   "K.th": [
+    -0.1317,
+    0.1553
+   ],
+   "K.psi": [
+    -2.1119,
+    -1.2245
+   ],
+   "K.ang": [
+    59.2737,
+    105.9435
+   ],
+   "K.ok": [
+    1.0,
+    1.0
+   ],
+   "K.qa": [
+    -2.1071,
+    -1.2925
+   ],
+   "K.qb": [
+    -0.5096,
+    0.3778
+   ]
+  }
+ },
+ "parts_ib14": {
+  "hub1": [
+   1.0,
+   8.62,
+   80
+  ],
+  "hubK": [
+   0.9918,
+   7.91,
+   80
+  ],
+  "hub2": [
+   0.9118,
+   11.59,
+   80
+  ],
+  "hub3": [
+   0.7422,
+   11.45,
+   80
+  ],
+  "E": [
+   0.915,
+   10.29,
+   164
+  ],
+  "boss": [
+   1.0,
+   7.55,
+   32
+  ],
+  "pad": [
+   1.0,
+   6.22,
+   32
+  ],
+  "knee": [
+   0.9929,
+   9.87,
+   90
+  ],
+  "crank": [
+   0.8007,
+   11.3,
+   133
+  ],
+  "roller": [
+   0.9383,
+   9.99,
+   19
+  ],
+  "horn": [
+   0.9549,
+   7.46,
+   23
+  ],
+  "L1a": [
+   0.9807,
+   10.07,
+   8
+  ],
+  "L1b": [
+   0.9179,
+   8.22,
+   36
+  ],
+  "L2": [
+   0.7312,
+   11.97,
+   124
+  ],
+  "relay_hw_inband": [
+   0.9798,
+   8.14,
+   344
+  ]
+ },
+ "metal_shell_taken": {
+  "lt1": {
+   "all": 8,
+   "ws": 8,
+   "overhead": 0
+  },
+  "lt2": {
+   "all": 47,
+   "ws": 40,
+   "overhead": 2
+  },
+  "lt3": {
+   "all": 133,
+   "ws": 107,
+   "overhead": 7
+  }
+ },
+ "reach_by_elev": {
+  "elev>=90": [
+   63,
+   113
+  ],
+  "elev>=120": [
+   25,
+   62
+  ],
+  "elev>=140": [
+   8,
+   28
+  ],
+  "elev>=160": [
+   3,
+   15
+  ]
+ },
+ "relayed": {
+  "n": 33,
+  "taken": 24,
+  "contact": 9,
+  "jam": 0,
+  "clip_relayed": 0,
+  "phi_max": 32.94
+ },
+ "continuity": {
+  "static": {
+   "gap": 13.74,
+   "reach": 0.7944,
+   "follow": 1.0,
+   "inband14": 0.9132,
+   "inband10": 0.5608,
+   "contact": 0.0318
+  },
+  "dropped_relayed": 0,
+  "phi0_taken_not_connected": 0,
+  "flood": {
+   "env": 1432,
+   "env_ok": 1189,
+   "env_ok_phi0": 1035,
+   "env_relayed": 154,
+   "env_relayed_connected": 153,
+   "env_phi0_connected": 1035,
+   "edges": 3039,
+   "edges_ok": 3014,
+   "edge_fail": {
+    "open": 3,
+    "phi_jump": 21,
+    "passive_jump": 0,
+    "active_jump": 1
+   },
+   "seeds": 513
+  }
+ },
+ "jams": 0,
+ "contacts": [
+  {
+   "i": 182,
+   "kind": "ws",
+   "pose": [
+    -15.0,
+    90.0,
+    45.0
+   ],
+   "phi": 11.3,
+   "min_mm": -0.71,
+   "parts": {
+    "chain": -0.13,
+    "shell": 5.88,
+    "shell_az": 33.6,
+    "coil_arm": 14.11,
+    "car": 8.27,
+    "bracket": 3.12,
+    "flange": 5.56
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 205,
+   "kind": "ws",
+   "pose": [
+    0.0,
+    105.0,
+    15.0
+   ],
+   "phi": 0.0,
+   "min_mm": -4.28,
+   "parts": {
+    "chain": -3.93,
+    "shell": 8.51,
+    "shell_az": 35.1,
+    "coil_arm": 17.13,
+    "car": 12.85,
+    "bracket": 6.75,
+    "flange": 10.37
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 206,
+   "kind": "ws",
+   "pose": [
+    0.0,
+    120.0,
+    -15.0
+   ],
+   "phi": 17.4,
+   "min_mm": -6.07,
+   "parts": {
+    "chain": -5.52,
+    "shell": 9.76,
+    "shell_az": 33.6,
+    "coil_arm": 17.09,
+    "car": 12.31,
+    "bracket": 5.31,
+    "flange": 9.63
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 237,
+   "kind": "ws",
+   "pose": [
+    15.0,
+    165.0,
+    -60.0
+   ],
+   "phi": 0.0,
+   "min_mm": -8.93,
+   "parts": {
+    "chain": -8.59,
+    "shell": 8.21,
+    "shell_az": 22.3,
+    "coil_arm": 12.86,
+    "car": 10.39,
+    "bracket": 5.9,
+    "flange": 7.7
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 262,
+   "kind": "ws",
+   "pose": [
+    30.0,
+    135.0,
+    0.0
+   ],
+   "phi": 11.3,
+   "min_mm": -9.79,
+   "parts": {
+    "chain": -9.62,
+    "shell": 9.97,
+    "shell_az": 33.6,
+    "coil_arm": 17.51,
+    "car": 13.07,
+    "bracket": 6.07,
+    "flange": 10.43
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 264,
+   "kind": "ws",
+   "pose": [
+    30.0,
+    165.0,
+    -60.0
+   ],
+   "phi": 0.0,
+   "min_mm": -5.8,
+   "parts": {
+    "chain": -5.39,
+    "shell": 7.32,
+    "shell_az": 22.3,
+    "coil_arm": 11.89,
+    "car": 9.29,
+    "bracket": 5.6,
+    "flange": 6.73
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 316,
+   "kind": "ws",
+   "pose": [
+    60.0,
+    150.0,
+    -105.0
+   ],
+   "phi": 0.0,
+   "min_mm": -1.23,
+   "parts": {
+    "chain": -1.23,
+    "shell": 4.21,
+    "shell_az": 20.9,
+    "coil_arm": 9.11,
+    "car": 6.24,
+    "bracket": 3.99,
+    "flange": 3.95
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 343,
+   "kind": "ws",
+   "pose": [
+    75.0,
+    150.0,
+    -105.0
+   ],
+   "phi": 8.4,
+   "min_mm": -1.73,
+   "parts": {
+    "chain": -1.73,
+    "shell": 4.89,
+    "shell_az": 26.5,
+    "coil_arm": 9.78,
+    "car": 6.57,
+    "bracket": 3.63,
+    "flange": 4.27
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 372,
+   "kind": "ws",
+   "pose": [
+    90.0,
+    165.0,
+    -90.0
+   ],
+   "phi": 19.4,
+   "min_mm": -0.07,
+   "parts": {
+    "chain": -0.07,
+    "shell": 5.06,
+    "shell_az": 26.5,
+    "coil_arm": 10.66,
+    "car": 6.6,
+    "bracket": 3.15,
+    "flange": 4.27
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 423,
+   "kind": "ws",
+   "pose": [
+    120.0,
+    135.0,
+    -90.0
+   ],
+   "phi": 16.0,
+   "min_mm": -0.7,
+   "parts": {
+    "chain": -0.69,
+    "shell": 8.15,
+    "shell_az": 10.9,
+    "coil_arm": 12.46,
+    "car": 9.96,
+    "bracket": 4.75,
+    "flange": 7.34
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 448,
+   "kind": "ws",
+   "pose": [
+    135.0,
+    135.0,
+    -90.0
+   ],
+   "phi": 29.4,
+   "min_mm": -1.92,
+   "parts": {
+    "chain": -1.33,
+    "shell": 9.36,
+    "shell_az": 10.9,
+    "coil_arm": 13.67,
+    "car": 11.14,
+    "bracket": 4.69,
+    "flange": 8.56
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 457,
+   "kind": "ws",
+   "pose": [
+    150.0,
+    45.0,
+    -105.0
+   ],
+   "phi": 15.1,
+   "min_mm": -2.0,
+   "parts": {
+    "chain": -1.18,
+    "shell": 7.52,
+    "shell_az": -1.9,
+    "coil_arm": 10.27,
+    "car": 10.77,
+    "bracket": 4.48,
+    "flange": 8.09
+   },
+   "cause": "chain"
+  },
+  {
+   "i": 466,
+   "kind": "ws",
+   "pose": [
+    150.0,
+    105.0,
+    -105.0
+   ],
+   "phi": 28.0,
+   "min_mm": -2.95,
+   "parts": {
+    "chain": 4.32,
+    "shell": 0.68,
+    "shell_az": -1.9,
+    "coil_arm": -2.95,
+    "car": 13.08,
+    "bracket": 5.66,
+    "flange": 10.4
+   },
+   "cause": "hardware"
+  }
+ ],
+ "secs": 313.2,
+ "exact": true,
+ "git": "fe88753"
+}
