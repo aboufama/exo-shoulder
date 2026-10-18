@@ -540,3 +540,23 @@ Each line is a measurement change: verdicts that move because of it moved becaus
 - **2026-10-17.6** (lead, from the 19:20 skeptic's NEW-self-reference): the current lead's own T5 compares with the lead it
   displaced (PREV_LEAD, slipper-nose), never with itself. Measured by the skeptic: x1.37 bench / x1.32 held, ok; no
   verified row changes level.
+- **2026-10-18.1** (alignment worker, from the desmo-window death audit's ring2 finding, commit 14dfecc):
+  - New check `density` (S6, over-dense sampling). In-band is a share of samples, so a part sampled above 2x the kit's
+    1 pt / 4 mm2 weighs extra. The check reads `remeasure/sample_density_<id>.json`, written by the new
+    `tools/sample_density.py`, which measures per-part density on the verifier's own fitted shape and re-weights the
+    saved per-part in-band, bench and held. It gives watch when such a part moves the gap by more than 0.1 at the kit's
+    density. It never gives gamed and never changes the gap.
+  - Verdict changes: desmo-conecut and desmo-slipper read watch on this check. Their over-dense gaps:
+
+    | row | bench | held |
+    |---|---|---|
+    | desmo-conecut | 18.98 -> 18.68 (ring2 alone 18.59) | 23.19 -> 22.89 |
+    | desmo-slipper | 18.95 -> 18.81 (horn +0.21, ring2 -0.41) | - |
+
+  - Every other verified row under 20.5 reads ok on it. The lead conecut-knee is unchanged on the bench at 18.28 (its
+    ib14 is above the cap) and moves 22.38 -> 22.43 held. No row moves under the lead. Table:
+    `docs/alignment/sample_density.md`.
+  - Also fixed: `c_rules` read a row's `best_params` stored as a JSON string as a dict and crashed. lowarm-halfring's
+    row does this, which broke `selftest` once its rulings file landed.
+  - Two new mutations: an over-dense part moving the gap 0.2 gives watch; one moving nothing gives ok. SELFTEST PASS (5
+    leaders, 0 FP / 0 FN).

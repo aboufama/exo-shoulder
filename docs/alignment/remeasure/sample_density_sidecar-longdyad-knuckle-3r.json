@@ -1,0 +1,339 @@
+{
+ "id": "sidecar-longdyad-knuckle-3r",
+ "tool": "tools/sample_density.py",
+ "version": "2026-10-18.1",
+ "kit_cell_mm2": 4.0,
+ "flag": [
+  0.5,
+  2.0
+ ],
+ "model": "docs/concepts/models/sidecar-longdyad-knuckle-3r.py",
+ "params": {
+  "bk1": 28.9414,
+  "bk2": 39.236,
+  "a1max": 63.177400000000006,
+  "kK": 1.6232,
+  "r_h": 14.8706,
+  "beta": -86.447,
+  "La": 16.5467,
+  "s_arm": 4.3872,
+  "hl": 3.15,
+  "zr": 0.0,
+  "r_lobe": 7.7447,
+  "smhi": 16.5464,
+  "smlo": 5.0,
+  "az1": 96.6954,
+  "el1": 67.5865,
+  "az2": 42.2031,
+  "el2": 44.4209,
+  "wd": 67.5003,
+  "wa": -7.3175,
+  "b3": 0.345,
+  "ang_min": 26.8823,
+  "lc": 25.6915,
+  "phib": -60.7036,
+  "gam": 0.0,
+  "law_mode": "lin"
+ },
+ "fit_secs": 4.0,
+ "row_v_gap": 18.91,
+ "row_status": "verified",
+ "parts": {
+  "hub1": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.4,
+   "cell_median": 3.997,
+   "d1": 1.996,
+   "d2": 2.002,
+   "one_row_share": 0.0,
+   "ratio": 1.002,
+   "hull_area_mm2": 339.7,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hubK": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.8,
+   "cell_median": 3.998,
+   "d1": 1.999,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 339.8,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hub2": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.2,
+   "cell_median": 3.984,
+   "d1": 1.996,
+   "d2": 1.996,
+   "one_row_share": 0.0,
+   "ratio": 1.002,
+   "hull_area_mm2": 339.7,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hub3": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.1,
+   "cell_median": 3.995,
+   "d1": 1.995,
+   "d2": 2.002,
+   "one_row_share": 0.0,
+   "ratio": 1.003,
+   "hull_area_mm2": 339.7,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "E": {
+   "n": 104,
+   "n_unique": 104,
+   "area_mm2": 418.7,
+   "cell_median": 4.025,
+   "d1": 1.997,
+   "d2": 2.013,
+   "one_row_share": 0.0,
+   "ratio": 0.994,
+   "hull_area_mm2": 418.7,
+   "ratio_hull": 0.994,
+   "flatness": 0.031,
+   "masked_lattice": false
+  },
+  "boss": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 127.7,
+   "cell_median": 3.985,
+   "d1": 1.996,
+   "d2": 1.997,
+   "one_row_share": 0.0,
+   "ratio": 1.002,
+   "hull_area_mm2": 131.3,
+   "ratio_hull": 0.975,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "pad": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 127.8,
+   "cell_median": 3.997,
+   "d1": 1.996,
+   "d2": 2.003,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 131.3,
+   "ratio_hull": 0.975,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "knee": {
+   "n": 95,
+   "n_unique": 95,
+   "area_mm2": 379.1,
+   "cell_median": 3.99,
+   "d1": 1.997,
+   "d2": 2.001,
+   "one_row_share": 0.0,
+   "ratio": 1.003,
+   "hull_area_mm2": 380.2,
+   "ratio_hull": 1.0,
+   "flatness": 0.0,
+   "masked_lattice": false
+  },
+  "crank": {
+   "n": 57,
+   "n_unique": 57,
+   "area_mm2": 170.6,
+   "cell_median": 3.985,
+   "d1": 1.839,
+   "d2": 1.998,
+   "one_row_share": 0.0,
+   "ratio": 1.336,
+   "hull_area_mm2": 200.9,
+   "ratio_hull": 1.135,
+   "flatness": 0.13,
+   "masked_lattice": false
+  },
+  "horn": {
+   "n": 20,
+   "n_unique": 20,
+   "area_mm2": 79.9,
+   "cell_median": 3.99,
+   "d1": 1.996,
+   "d2": 1.998,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 80.0,
+   "ratio_hull": 1.0,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "rod": {
+   "n": 13,
+   "n_unique": 13,
+   "area_mm2": 56.7,
+   "cell_median": 4.36,
+   "d1": 2.18,
+   "d2": 2.0,
+   "one_row_share": 1.0,
+   "ratio": 0.916,
+   "hull_area_mm2": 62.5,
+   "ratio_hull": 0.832,
+   "flatness": 0.0,
+   "masked_lattice": false
+  },
+  "rodends": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 254.1,
+   "cell_median": 7.94,
+   "d1": 1.364,
+   "d2": 5.823,
+   "one_row_share": 0.0,
+   "ratio": 0.504,
+   "hull_area_mm2": 265.9,
+   "ratio_hull": 0.481,
+   "flatness": 0.04,
+   "masked_lattice": false
+  },
+  "L1a": {
+   "n": 12,
+   "n_unique": 12,
+   "area_mm2": 83.6,
+   "cell_median": 6.131,
+   "d1": 2.023,
+   "d2": 3.031,
+   "one_row_share": 0.0,
+   "ratio": 0.574,
+   "hull_area_mm2": 74.7,
+   "ratio_hull": 0.642,
+   "flatness": 0.042,
+   "masked_lattice": false
+  },
+  "L1b": {
+   "n": 36,
+   "n_unique": 36,
+   "area_mm2": 196.0,
+   "cell_median": 4.175,
+   "d1": 2.001,
+   "d2": 2.071,
+   "one_row_share": 0.0,
+   "ratio": 0.735,
+   "hull_area_mm2": 182.4,
+   "ratio_hull": 0.789,
+   "flatness": 0.341,
+   "masked_lattice": false
+  },
+  "L2": {
+   "n": 132,
+   "n_unique": 132,
+   "area_mm2": 625.3,
+   "cell_median": 4.272,
+   "d1": 2.025,
+   "d2": 2.097,
+   "one_row_share": 0.0,
+   "ratio": 0.844,
+   "hull_area_mm2": 719.9,
+   "ratio_hull": 0.733,
+   "flatness": 0.108,
+   "masked_lattice": false
+  }
+ },
+ "flagged": {},
+ "over_dense": [],
+ "masked_lattice": [],
+ "note": "ratio = samples / mm2 over the kit's 1 / 4 mm2 (cell = d1 x d2, the grid's two pitches; a one-row part is credited 2 mm across). Re-weight: each flagged part's count set to n / ratio in the saved per-part in-band; exact for the counts, assumes the part's in-band share is uniform over its samples.",
+ "bench": {
+  "file": "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json",
+  "path": "/",
+  "frozen": {
+   "gap": 18.91,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8966,
+   "inband10": 0.5336,
+   "contact": 0.0107
+  },
+  "recomputed_ib14": 0.8966,
+  "variants": {
+   "over_at_kit": {
+    "ib14": 0.8966,
+    "gap": 18.91,
+    "n": {}
+   },
+   "over_at_kit_hull": {
+    "ib14": 0.8966,
+    "gap": 18.91,
+    "n": {}
+   },
+   "flagged_at_kit": {
+    "ib14": 0.8966,
+    "gap": 18.91,
+    "n": {}
+   },
+   "per_part": {},
+   "all_parts_at_kit": {
+    "ib14": 0.8966,
+    "gap": 18.91
+   },
+   "as_sampled": {
+    "ib14": 0.8966,
+    "gap": 18.91
+   }
+  },
+  "count_mismatch": {}
+ },
+ "held": {
+  "file": "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json",
+  "path": "/",
+  "frozen": {
+   "gap": 22.67,
+   "reach": 0.6901,
+   "follow": 1.0,
+   "inband14": 0.8947,
+   "inband10": 0.532,
+   "contact": 0.0115
+  },
+  "recomputed_ib14": 0.8949,
+  "variants": {
+   "over_at_kit": {
+    "ib14": 0.8947,
+    "gap": 22.67,
+    "n": {}
+   },
+   "over_at_kit_hull": {
+    "ib14": 0.8947,
+    "gap": 22.67,
+    "n": {}
+   },
+   "flagged_at_kit": {
+    "ib14": 0.8947,
+    "gap": 22.67,
+    "n": {}
+   },
+   "per_part": {},
+   "all_parts_at_kit": {
+    "ib14": 0.8946,
+    "gap": 22.68
+   },
+   "as_sampled": {
+    "ib14": 0.8947,
+    "gap": 22.67
+   }
+  },
+  "count_mismatch": {}
+ },
+ "exact_rewear_cmd": "CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/sample_density.py rewear sidecar-longdyad-knuckle-3r bench|held",
+ "secs": 4.3
+}

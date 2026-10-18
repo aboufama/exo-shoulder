@@ -20,6 +20,8 @@ Checks (each gives ok / watch / gamed with a measured reason; the catalogue entr
                  asserts rigid (a deleted knee = one bracket) is not a joint, only checked constant [M4 idle mechanism]
   sampling       per-part sample counts, sample-weighted vs part-weighted in-band,
                  declared moving bodies vs sampled metal groups                          [S2 metal density, S3 unsampled bodies]
+  density        over-dense parts (> 2x the kit's 1 pt / 4 mm2, tools/sample_density.py) whose re-weight to the kit's
+                 density moves the gap > 0.1 (bench or held): watch; never gamed, never changes the gap  [S6 over-dense sampling]
   complexity     tools/simplicity.py on the row's mechanism vs the row's complexity;
                  hand count; DOF cap                                                     [G5 complexity hidden by the count]
   reporting      row status vs verifier files; dashboard number vs verified number        [R1 / R2 refuted records shown]
@@ -55,12 +57,12 @@ OUT = os.path.join(REPO, "docs", "alignment")
 REM = os.path.join(OUT, "remeasure")
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-VERSION = "2026-10-17.6"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
+VERSION = "2026-10-18.1"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
 ROUND8 = ["sidecar-longdyad-knuckle-3r", "sidecar-parallelogram-knuckle-3r", "sidecar-roller-flank-knuckle-3r", "twist-long-a2-knuckle-3r"]
 # thresholds (gap points unless stated); calibrated on the verified rows, docs/ALIGNMENT.md "Thresholds"
 TH = dict(held_watch=6.0, held_gamed=10.0, shell2_watch=15.0, shell2_gamed=25.0, dom_gamed=0.0, conn_watch=1.0, conn_gamed=3.0,
           fold_min=5.0, idle_deg=2.0, part_min_samples=16, part_weight_watch=3.0, part_weight_gamed=8.0, ff_watch=14.0,
-          depth_ratio=2.0, depth_floor_mm=5.0)
+          depth_ratio=2.0, depth_floor_mm=5.0, density_ratio=2.0, density_shift=0.1)
 MEASURE_PATHS = ("tools/concept_bench.py", "tools/concept_kit.py", "tools/env_bench.py", "tools/simplicity.py", "judge/",
                  "tools/judge_all.sh", "tools/concept_bigbench.py", "pipeline/avg/body_pose.py", "data/raw/split.json",
                  "pipeline/conformal/band_poses", "docs/concepts/verify/skin-normal-3r-pin-knee-polish.py",
@@ -671,6 +673,39 @@ def c_sampling(row, V, rem_b):
     return _chk("sampling", lvl, "; ".join(reasons) + f" ({src})", parts=pib)
 
 
+def c_density(row, sd=None):
+    """S6 (VERSION 2026-10-18.1): in-band is a share of samples, so a part sampled denser than the kit's 1 pt / 4 mm2 weighs
+    extra (out-of-band metal over-sampled inflates the gap, well-placed metal deflates it). Reads
+    docs/alignment/remeasure/sample_density_<id>.json (tools/sample_density.py measure); watch when a part > 2x the kit's
+    density moves the gap > 0.1 on re-weighting it to the kit's density (alone or with the other over-dense parts), bench
+    or held. Under-dense parts are reported only (the kit's own sparse rule is in tools/concept_kit.py audit())."""
+    if sd is None:
+        sd = row.get("_sample_density")
+        if sd is None:
+            f = os.path.join(REM, f"sample_density_{row.get('id')}.json")
+            sd = json.load(open(f)) if os.path.exists(f) else None
+    if not sd: return _chk("density", "ok", "per-part density not measured (python3 tools/sample_density.py measure <id>)")
+    parts = sd.get("parts") or {}
+    over = {k: v.get("ratio") for k, v in parts.items() if (v.get("ratio") or 0) > TH["density_ratio"]}
+    if not over: return _chk("density", "ok", "no part sampled > 2x the kit's density" + (f"; under-dense: {', '.join(f'{k} {v:.2f}x' for k, v in (sd.get('flagged') or {}).items())}" if sd.get("flagged") else ""))
+    moves, reasons = [], []
+    for w in ("bench", "held"):
+        rec = sd.get(w)
+        if not rec: continue
+        g0 = float(rec["frozen"]["gap"]); var = rec.get("variants") or {}
+        for k in over:
+            g = (var.get("per_part") or {}).get(k)
+            if g is not None and abs(g - g0) > TH["density_shift"]: moves.append(f"{w} {k} {g0:.2f} -> {g:.2f}")
+        g = (var.get("over_at_kit") or {}).get("gap")
+        if g is not None:
+            reasons.append(f"{w} {g0:.2f} -> {g:.2f} at the kit's density")
+            if abs(g - g0) > TH["density_shift"]: moves.append(f"{w} all over-dense {g0:.2f} -> {g:.2f}")
+    lvl = "watch" if moves else "ok"
+    why = "over-dense parts " + ", ".join(f"{k} {v:.2f}x" for k, v in over.items()) + "; " + "; ".join(reasons)
+    if moves: why += "; moves > 0.1: " + "; ".join(moves)
+    return _chk("density", lvl, why, over=over, src=f"remeasure/sample_density_{row.get('id')}.json")
+
+
 def c_complexity(row):
     m = row.get("mechanism")
     if not isinstance(m, dict): return _chk("complexity", "watch", "no mechanism record: complexity unaudited")
@@ -742,6 +777,10 @@ def c_judge_change(row):
 
 def c_rules(row):
     reasons, lvl = [], "ok"; bp = row.get("best_params") or {}
+    if isinstance(bp, str):                                   # a row that stores its params as a JSON string (lowarm-halfring)
+        try: bp = json.loads(bp)
+        except Exception: bp = {}
+    if not isinstance(bp, dict): bp = {}
     txt = json.dumps(row)
     for k, v in bp.items():
         if re.fullmatch(r"(hub_r|hr|r_hub)\d?", k) and _num(v) is not None and _num(v) < 9.99: lvl = "gamed"; reasons.append(f"slim hub {k}={v} (O20 only)")
@@ -756,7 +795,7 @@ def audit(rid, params=None, ref=None, write=True):
     row = _row(rid); V = _verifier_outputs(rid); rb, rh = _remeasured(rid, "bench"), _remeasured(rid, "held")
     if ref is None and rid.startswith("sidecar-"): ref = "frontload-lobe-stopb-knuckle-3r"
     checks = [c_held_out(row, V, rh), c_fast_frozen(row), c_near_touch(row, V, rb), c_contact_depth(row, ref), c_dominance(row, V, rb, ref),
-              c_continuity(row, V), c_fold_margin(row, V, rb), c_idle(row, V, rb), c_sampling(row, V, rb), c_complexity(row), c_reporting(row, V),
+              c_continuity(row, V), c_fold_margin(row, V, rb), c_idle(row, V, rb), c_sampling(row, V, rb), c_density(row), c_complexity(row), c_reporting(row, V),
               c_judge_change(row), c_rules(row)]
     lv = [c["level"] for c in checks]
     verdict = "gamed" if "gamed" in lv else "watch" if "watch" in lv else "clean"
@@ -796,7 +835,7 @@ def table():
 LEADERS = ["roller-longdyad-knuckle-3r", "sidecar-longdyad-knuckle-3r", "kneeless-roller-knuckle-3r", "kneeless-sidecar-knuckle-3r",
            "minarc-stop-knuckle-4r"]                        # the five current leaders (README Status, 2026-10-17)
 CHECKS = ("held_out", "fast_frozen", "near_touch", "contact_depth", "dominance", "continuity", "fold_margin", "idle", "sampling",
-          "complexity", "reporting", "judge_change", "rules")
+          "density", "complexity", "reporting", "judge_change", "rules")
 # judgement findings the skeptics ruled on that a tool check now measures: finding key -> check
 JUDGEMENT_CHECK = {r"NEW-(contact-depth|depth-blind-contact)": "contact_depth", r"NEW-idle-check-false-positive": "idle"}
 
@@ -858,7 +897,7 @@ def selftest(ids=None, hard=LEADERS, verbose=True):
         good = lv in want; rep.append(f"{'mut  ' if good else 'MUT! '}{name}: {check} {lv} (want {'/'.join(want)})")
         if not good: fails.append(f"mutation {name}: {check} {lv}, want {want}")
     fn_check = dict(idle=lambda r, V, rb: c_idle(r, V, rb), fold_margin=lambda r, V, rb: c_fold_margin(r, V, rb),
-                    complexity=lambda r, V, rb: c_complexity(r))
+                    complexity=lambda r, V, rb: c_complexity(r), density=lambda r, V, rb: c_density(r))
     def strip_K(row, V, rb):                                   # the drive idle: every K / crank reading 0
         for d in [row] + [x[1] for x in V]:
             for p, v in _find_keys(d, r"(dK_taken_max(_deg)?|dK_max|K_span|phi_max_taken)$"):
@@ -885,6 +924,22 @@ def selftest(ids=None, hard=LEADERS, verbose=True):
     mut("slipper-nose 5 active DOF", "slipper-nose-knuckle-3r", dof5, "complexity", ("gamed",))
     def pt3(row, V, rb): row["mechanism"]["passive_trans"] = 3; return row, V, rb
     mut("slipper-nose 3 passive translations", "slipper-nose-knuckle-3r", pt3, "complexity", ("gamed",))
+    def sd_of(rid):
+        f = os.path.join(REM, f"sample_density_{rid}.json"); return json.load(open(f)) if os.path.exists(f) else None
+    def over_shift(row, V, rb):                                # an over-dense part whose re-weight moves the bench gap 0.2
+        sd = sd_of("slipper-nose-knuckle-3r") or dict(parts={}, bench=None, held=None)
+        sd = json.loads(json.dumps(sd)); sd["parts"]["roller"] = dict(sd["parts"].get("roller") or {}, ratio=4.5)
+        if sd.get("bench"): sd["bench"]["variants"]["per_part"]["roller"] = float(sd["bench"]["frozen"]["gap"]) + 0.2
+        else: sd["bench"] = dict(frozen=dict(gap=18.0), variants=dict(per_part=dict(roller=18.2)))
+        row["_sample_density"] = sd; return row, V, rb
+    def over_flat(row, V, rb):                                 # the same part over-dense but moving nothing
+        sd = json.loads(json.dumps(sd_of("slipper-nose-knuckle-3r") or dict(parts={})))
+        sd["parts"] = {"roller": dict(ratio=4.5)}
+        for w in ("bench", "held"):
+            if sd.get(w): sd[w]["variants"] = dict(per_part=dict(roller=float(sd[w]["frozen"]["gap"])), over_at_kit=dict(gap=float(sd[w]["frozen"]["gap"])))
+        row["_sample_density"] = sd; return row, V, rb
+    mut("slipper-nose over-dense roller moving the gap 0.2", "slipper-nose-knuckle-3r", over_shift, "density", ("watch",))
+    mut("slipper-nose over-dense roller moving nothing", "slipper-nose-knuckle-3r", over_flat, "density", ("ok",))
     ref_self = c_contact_depth(_row(DEPTH_REF), DEPTH_REF)["level"]
     rep.append(f"{'mut  ' if ref_self == 'ok' else 'MUT! '}reference vs itself: contact_depth {ref_self} (want ok)")
     if ref_self != "ok": fails.append("contact_depth fires on the reference itself")
