@@ -1,0 +1,18 @@
+{
+ "R_under_frozen": 81.307,
+ "etop_sets": [
+  23
+ ],
+ "frames": 184,
+ "E_underside_max": [
+  79.991,
+  68
+ ],
+ "E_top_max": [
+  82.869,
+  68
+ ],
+ "frames_top_above_R_under": 62,
+ "note": "auditor's independent check (docs/alignment/remeasure/underpass-bridge-relay-4r_striptop.py): model imported unchanged, fit Bench(60,160) fast prepare, strict shell footprint |s - s0| <= SH_W/2 and az in [lo, hi] in the arm frame, phi 0 fit kin_ok frames; E = rigid E (skin-facing underside), top = contact set 23 on member 3 (E + T_LINK sn)",
+ "t": "2026-10-18T20:58Z"
+}

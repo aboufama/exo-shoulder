@@ -1,0 +1,50 @@
+[
+ {
+  "key": "M3",
+  "level": "gamed",
+  "reason": "Unchecked clash: the claim's 13.74 (score 95.00, 'pass by 0.01') needs the E strap to run THROUGH the bridge shell. The shell underside was frozen at R_under 81.307 = E's skin-facing underside maximum 80.11 + up_clr 1.2, but the strap is T_LINK 3.0 mm thick and its top face (contact-only set c23 on member 3, (3, rigid['E'] + T_LINK sn), skin-normal-3r-pin-knee.py line 296) reaches r 83.02 in the shell footprint (83.00 on the fit frames alone), i.e. up to 1.7 mm inside the 2.5 mm shell [81.31, 83.81]. The independent verifier's X1 (every chain set incl. contact-only sets vs every relay body) puts c23:m3 at 0.0 mm from the shell sector and the T-nut flange: 409 of 409 evaluated claim-bench poses jam (c23|shell 409, c23|flange 285), 396 of 396 taken poses lost, rescored gap 375.0; held 940 of 942. The bridge placed by the design's OWN rule over every chain set (R_under 84.222, up_clr 1.2) reads gate 19.74 (pooled in-band 0.9021 -> 0.8347: the raised shell's skin-facing metal leaves the band), 20.60 with X1; the legal minimum (84.022) 19.06 / 19.92. So the claim ranks the design 1.02 ahead of its parent offset-shortcar-relay-4r (verified 14.76) and over the 95 line, while the buildable version is 4.3-5.8 points BEHIND the parent and behind the 3-joint lead conecut-knee-knuckle-3r (18.28). A hard rule is broken (every part at its real envelope; metal cannot pass through metal), and the number ranks the design above a design that is better for the wearer.",
+  "evidence": "docs/concepts/verify/underpass-bridge-relay-4r/verifier_claim.json pick.xcheck_drop0 (n_extra_jam 409, lost_new 396, closest c23:m3|shell 0.0 @96, c23:m3|flange 0.0 @6, rescored gap_gate 375.0); verifier_claim.log; verifier_held.log (940 of 942 lost); verifier_fix.json / verifier_fix.log (need: shell 83.022 c23:m3 bench pose 179, 83.003 fit; A_up1.2 R_under 84.222 gate 19.74, X1 rescored 20.60; B_up1.0 19.06 / 19.92); verifier_fix_A_up1.2_perpose.json recomputes 19.74; docs/concepts/models/underpass-bridge-relay-4r.py lines 165-216 (need_scan reads M1.rigid + M1.link_pts only); parent docs/concepts/rows/offset-shortcar-relay-4r.json v_gap 14.76; lead docs/concepts/rows/conecut-knee-knuckle-3r.json v_gap 18.28; auditor's own check docs/alignment/remeasure/underpass-bridge-relay-4r_striptop.json (strict footprint, 184 fit frames: underside max 79.99, top max 82.87 at frame 68, top above R_under 81.307 on 62 of 184 frames)"
+ },
+ {
+  "key": "NEW-skin-only-thickness",
+  "level": "watch",
+  "reason": "New pattern (cause of the M3 finding): a part's thickness lives only in a skin-check set. The kit samples a strap or link at its skin-facing face (M.rigid / M.link_pts) and keeps its top face, hub crowns and knee-link top as 'contact-only' sets (checked against the skin, not scored). Any clearance PLACEMENT or metal-to-metal jam rule that reads only rigid + link sets (this model's need_scan, model lines 165-207, and the parent sector rule it extends for names knee/E/boss/hub3/L2/pad) sees a 3 mm strap as a 0 mm sheet. In the parent offset-shortcar the rigid bump lifted the contact sets with the strap, so the parent's verifier X1 found 0 new jams; removing the bump is exactly what exposed it. Any future under-pass, bridge or stacked-relay model that reuses need_scan inherits a 3 mm (T_LINK) optimism.",
+  "evidence": "docs/concepts/models/underpass-bridge-relay-4r.py need_scan (names = list(M1.rigid) + list(M1.link_pts)); docs/concepts/models/skin-normal-3r-pin-knee.py _contact_only lines 286-310; docs/concepts/verify/offset-shortcar-relay-4r-verify.py line 57 (parent verifier includes M.contact); docs/concepts/verify/underpass-bridge-relay-4r-verify.py need_all"
+ },
+ {
+  "key": "T2",
+  "level": "watch",
+  "reason": "The pass sits on two knife edges. The gap 13.74 is 0.01 under the 13.75 pass line (one more contact pose = +0.24). In-band is read at its cutoff: claim chain-only 0.9012 / pooled 0.9021 (0.0012 / 0.0021 above 0.90), held chain-only exactly 0.9000 / pooled 0.9009. The flagged switch between chain 0.9012 and pooled 0.9021 is not a cherry-pick: the gate is the worse of the two readings in every file (claim: both pass, so the gate = plain 13.74; parent: chain 0.8898 fails -> 14.76; corrected bridge: pooled 0.8347 fails -> 19.74). The 3-14 mm band reading was not measured (no re-wear path for this model).",
+  "evidence": "docs/concepts/rows/underpass-bridge-relay-4r.json frozen_exact / held_out; docs/concepts/verify/underpass-bridge-relay-4r/verifier_claim.log, verifier_held.log (ibc 0.9, ib 0.9009), verifier_fix.log (A_up1.2 ibc 0.9012 ib 0.8347)"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Metal hugging: 58 of 396 taken claim-bench poses have metal (incl. walls / crowns) under 2 mm (48 on scored metal alone), 8 under 1 mm, 142 under 3 mm; held 138 of 942 under 2 mm, 30 under 1 mm. near1 17.91, near2 (no crown sets) 38.22 vs plain 13.74. Against the parent offset-shortcar the claim is 1.02 ahead on the gate but 0.52 behind at 2 mm (parent near2 37.70): the plain-gap gain does not survive the 2 mm reading. At the corrected bridge the posterior foot clears pose 466 by only 0.59 mm (0.46 mm at the 1.0 mm minimum) - metal parked just outside the 0 mm cutoff (T1).",
+  "evidence": "docs/concepts/verify/underpass-bridge-relay-4r/verifier_claim_perpose.json, verifier_held_perpose.json (min_mm / cmin over taken poses, auditor's count); docs/concepts/rows/underpass-bridge-relay-4r.json frozen_exact near1 / near2_no_crown; docs/concepts/rows/offset-shortcar-relay-4r.json frozen_exact near2 37.7; verifier_fix.log parts_min post 0.59 @466 (A), 0.46 (B)"
+ },
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "Depth-blind contact. Claim bench: 13 contact poses, summed 43.79 mm, deepest 9.79 mm at ws (30, 135, 0), then 8.93 at (15, 165, -60) and 6.07 at (0, 120, -15); 12 are inherited chain contacts, 1 is new hardware: the posterior bridge foot 0.56 mm into the arm at pose 466 (150, 105, -105). Held: 43 contacts, summed 173.02 mm, deepest 12.24 mm at (15, 135, -15). The 3-joint lead conecut-knee-knuckle-3r has 4 contacts / 20.24 mm on the bench and 14 / 60.97 mm held (x2.2 / x2.8, past the 2x / 5 mm watch line). The score charges these poses, so it does not reward them, but the wearer gets J2's hub pressed ~10-12 mm into the arm on plain raises to 135 deg. The tool's contact_depth check could not read the dumps (it looks for alignment_paired / wear-probe files), so this is the judgement reading.",
+  "evidence": "docs/concepts/verify/underpass-bridge-relay-4r/verifier_claim_perpose.json and verifier_held_perpose.json (recompute 13.73 / 16.63, reproduce the claim to 0.01); docs/concepts/rows/underpass-bridge-relay-4r.json limiter; lead depths from docs/alignment/offset-shortcar-relay-4r.findings.json T5"
+ },
+ {
+  "key": "S3",
+  "level": "watch",
+  "reason": "Unsampled or unmodelled bodies the bridge needs. (1) The cantilever has no anterior support (ant 'ii'): its root moment, 242.7 N.mm at the claimed height and 249.6 N.mm at the corrected height, needs a rigid arm-band anchor that the row itself calls unmodelled - no metal samples it, so its standoff and skin contact are unscored. (2) The CF coil strip has no guide surface: the spec's 'strip in a 0.15 mm recess on the shell top' is inconsistent with a drum outside the shell band; the verifier modelled it as a straight chord (>= 8.9 mm from chain, >= 1 mm from skin), a diagnostic, not part of the claim.",
+  "evidence": "docs/concepts/rows/underpass-bridge-relay-4r.json limiter / frozen_exact root_moment_Nmm 242.7; docs/concepts/verify/underpass-bridge-relay-4r/verifier_fix.log (root 249.6); docs/concepts/underpass-bridge-relay-4r.md Verification 'Other checks' 4-5 (verifier, in progress)"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "The relay coordinate is held by the CF coil on the zero dowel and the PHI dowel and is scored at its planned state; no R17 dynamics / posture sweep is on file for this row. The bridge is a cantilever: under the 4 N pad load its 0.31 mm tip deflection drops E's underside below 1 mm at poses 118 and 163 at the claimed height (2 more jams, verifier drop 0.31 diagnostic) - moot at the corrected height (E clears by >= 4.19 mm), but the claimed design is the one being ranked.",
+  "evidence": "docs/concepts/verify/underpass-bridge-relay-4r/verifier_claim.log (drop 0.31: E min 0.987 @118, 0.991 @163, lt1_1 12); docs/concepts/rows/underpass-bridge-relay-4r.json mechanism springs_or_flexures 2, frozen_exact deflection_mm_4N 0.31"
+ },
+ {
+  "key": "R2",
+  "level": "watch",
+  "reason": "The row (status screened, gap 13.74) and the dashboard (docs/dashboard/data/morphs.json: gap 13.74, verdict '4-JOINT PASS BY 0.01 (claim, unverified)') still show the pass, while the independent verifier's write-up (docs/concepts/underpass-bridge-relay-4r.md 'Verification', uncommitted at 20:47 UTC, held fix still running) reads REFUTED, v_gap 20.60. It is labelled unverified, so it is not R1 today; it becomes a refuted record shown as a pass if the row and dashboard are not updated when the verifier lands.",
+  "evidence": "docs/dashboard/data/morphs.json row underpass-bridge-relay-4r; docs/concepts/rows/underpass-bridge-relay-4r.json verdict; docs/concepts/underpass-bridge-relay-4r.md Verification section (working tree)"
+ }
+]

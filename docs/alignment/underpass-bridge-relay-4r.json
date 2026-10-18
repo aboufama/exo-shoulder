@@ -1,0 +1,121 @@
+{
+ "id": "underpass-bridge-relay-4r",
+ "status": "screened",
+ "v_gap": null,
+ "complexity": 53.0,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no verified bench gap on the row",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "idle: a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no verified bench gap on the row"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "no pair"
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump underpass-bridge-relay-4r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "gap 13.74": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.0 deg (docs/concepts/verify/underpass-bridge-relay-4r/verifier_held.json:pick.th_margin.min; 2 readings)",
+   "min_margin": 5.0,
+   "where": "docs/concepts/verify/underpass-bridge-relay-4r/verifier_held.json:pick.th_margin.min"
+  },
+  {
+   "check": "idle",
+   "level": "watch",
+   "reason": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 53.0 vs row 53.0",
+   "recomputed": 53.0,
+   "row": 53.0
+  },
+  {
+   "check": "reporting",
+   "level": "ok",
+   "reason": "row, verifier files and dashboard agree"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_held.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_fix.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_fix_A_up1.2_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_held_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_claim.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_claim_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/held_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/held.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/diag_claimbench_postH_1_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/diag_claimbench_postH_0_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/claim_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/claim.json"
+ ],
+ "git": "60eb0e3",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T20:46:46Z"
+}
