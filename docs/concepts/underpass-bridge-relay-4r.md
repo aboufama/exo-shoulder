@@ -106,3 +106,56 @@ Contacts: the 12 chain contacts the parent inherits (lead's 205 / 237 / 264 / 31
 372, 423, 448, 457 - identical depths to the parent) + 466 at the foot (the parent's 466 was the arm-fixed coil, -2.95).
 Contact depth sum 43.79 mm (parent 46.18 at its claim; the lead 20.24).
 T5 dump: `verify/underpass-bridge-relay-4r/claim_perpose.json`.
+
+Post-claim diagnostic (same claim-bench prepare protocol, NOT a claim, not used to pick): posterior foot H 1.0 / 2.0
+read 13.74 / 13.74 (466 at the foot -0.33 / -0.79 mm; H 1.5 -0.56). The foot's depth at 466 falls only 0.46 mm per mm of
+H, so a foot at the zero end is a contact at 466 for any real height (extrapolated clear only at H ~0).
+
+## Red team (my own pick)
+
+1. **The pass is 0.01 wide.** 13.74 vs 13.75: any one extra contact or lost take on the claim bench crosses the line.
+   The whole hardware price is 466 (posterior foot in the skin); remove it and the claim is the ideal bound 13.21
+   (score 95.20, margin 0.54).
+2. **The pinch point: the posterior foot at 466** (150, 105, -105: arm across the front at 105 elevation, full IR, phi
+   28 - the relay at 80 % travel). The judge's envsel table (259 / 264 / 265) did not contain this pose. Lever for the
+   next round, measured and E-free: put the foot UNDER the shell's zero end ([lo, lo + 4 mm] = [-1.65, +1.17] deg rel pad)
+   instead of beyond it: E's arm-frame azimuth starts at +6.44 (5.3 deg = ~7.6 mm of margin), so the jam rule is not at
+   risk; the skin at 466 there must be read (not done: time box).
+3. **The root moment.** A cantilever needs 243 N.mm at its root; a 12 x 4 mm Ti foot on a soft liner pad cannot carry it
+   (61 N couple over 4 mm). The root must be a rigid arm-band anchor (a band plate posterior of the foot) - unmodelled
+   metal, and the band's compliance tilts the shell (tip drop not priced). Without that anchor the design is the
+   simply-supported option (i), which the torso at 119 kills.
+4. **Deflection vs the clearance.** 0.31 mm at 4 N leaves E 0.89 mm under the loaded shell at its highest pose (envsel
+   279) - below the 1 mm jam rule when the pad is loaded there; the jam rule was read on the unloaded shell.
+5. **Near-touch on the bracket.** The bracket (in-band, carriage frame) sits 0.45 mm over the skin at 139 (-60, 60, 105;
+   envsel 259 0.36 mm) - inherited from the parent; 8 taken poses have metal < 1 mm (parent row: 56 < 2 mm; here 48).
+6. **Inherited and unpriced:** 3 bistable relay poses, carriage friction / coil hysteresis (R17 covers gravity only), the
+   parent's tolerance cliff (delta 5.0 -> 37 jams; delta + 1.5 not re-read here), 4 active joints (+25 complexity).
+7. **Optimistic numbers I know of:** the 2 mm reading with the crown sets (lead basis) was not re-read (parent: 45.56 vs
+   its 37.70 without); the claim / held E envelope was read only through the jam rule (0 jams), not tabulated.
+
+## Held-out bench (read once, same frozen pick)
+
+**Gate 16.64 = plain 16.64 = the held ideal-relay bound** (reach 0.7773, follow 1.0, ib14 chain 0.9000 / pooled 0.9009,
+43 contacts, 0 jams, overhead 19/71, near1 22.62, near2 41.91, 29 taken poses < 1 mm). The parent reads 17.77 gate / 16.64
+plain on the same held bench: the under-pass removes the parent's in-band term there too (-1.13), and the held hardware
+contacts are all on poses the chain already loses (225 / 1134 at the shell zero end, 977 at the foot: chain+hw), so the
+foot costs nothing held. Held is the best held number on file for any relay (parent 17.77, freek 20.50, the lead 22.38).
+T5 dump: `verify/underpass-bridge-relay-4r/held_perpose.json`. Contact depth sum held 172.99 mm (pose minima).
+
+## Verdict
+
+4-JOINT PASS ON THE BENCH, by 0.01: frozen exact Bench(110,360) chain-only gate **13.74 (score 95.00)**, held **16.64**,
+0 jams, 0 passive translations, complexity 53.0 (the parent's 52.5 record - the bump goes, the posterior foot comes).
+Not a lead (4 joints), and the pass is hostage to one pose: the posterior foot at 466. The physically open item is the
+cantilever root (243 N.mm into the arm band) - if the root cannot be made rigid, the design falls back to option (i),
+which the torso at 119 kills (envsel 16.31).
+
+## Next (the loop)
+
+1. Verifier: re-run the claim from `verify/underpass-bridge-relay-4r/pick.json` (frozen rl_fix 81.307, hiE 49.0) and the
+   held bench; T5 dumps are on file; read the 2 mm crown-set reading and the E envelope table on both benches.
+2. Inboard foot ([lo, lo + 4 mm], E-free by 5.3 deg): re-select on envsel, then one claim - the 466 contact is the whole
+   hardware price (13.74 -> 13.21 if it clears).
+3. Rigid root: model the arm-band anchor plate as metal and price the band compliance (tip drop vs the 1.2 mm clearance).
+4. Cliff probes owed: delta + 1.5 (the parent's bracket cliff), shell +0.5 mm.

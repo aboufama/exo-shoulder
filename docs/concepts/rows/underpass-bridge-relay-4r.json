@@ -44,16 +44,102 @@
   }
  },
  "status": "screened",
- "reach": 0.7861,
+ "reach": 0.7944,
  "follow": 1.0,
  "inband14": 0.9012,
- "inband10": 0.5464,
- "contact": 0.032,
- "gap": 14.59,
- "n_configs": 2,
- "verdict": "IN PROGRESS: envsel exact (selection bench) PHI 35 cantilever bridge (tsh 2.5, posterior foot H 2, up_clr 1.2, delta 4.5, lug coil D12 L10) reads gate 14.59 = the envsel ideal-relay bound (0 jams, 0 hardware contacts, pooled ib14 0.9024, deflection 0.31 mm); PHI 40 cell 1 fails the pooled in-band rule (0.8931, gate 14.61). Claim on frozen exact Bench(110,360) running.",
- "limiter": "pending claim",
- "note": "preliminary row; see the md",
- "t_screened": "2026-10-18T19:11:15Z",
- "complexity": 53.0
+ "inband10": 0.5447,
+ "contact": 0.0318,
+ "gap": 13.74,
+ "n_configs": 7,
+ "verdict": "4-JOINT PASS BY 0.01 (claim, unverified): frozen exact Bench(110,360) chain-only gate 13.74 = plain (score 95.00; pass line 13.75), held 16.64 (= the held ideal-relay bound; parent 17.77), 0 jams, 286 takes, overhead 8/28, ib14 chain 0.9012 / pooled 0.9021, 13 contacts (12 inherited chain + the posterior foot at 466 -0.56 mm); 4 active joints, 0 passive translations, complexity 53.0. Envsel pick (PHI 35, cantilever bridge tsh 2.5, posterior foot 1.5 mm, up_clr 1.2, delta 4.5, R_under 81.307 frozen) read 14.59 = the envsel ideal bound; ant 'i' dead (torso at 119, 16.31); PHI 40 fails pooled in-band (0.8931). Never a lead (4 joints).",
+ "limiter": "the posterior bridge foot at 466 (150, 105, -105; phi 28): -0.56 mm at H 1.5, -0.33 at H 1.0, -0.79 at H 2.0 - the whole hardware price (claim ideal bound 13.21); then the inherited 12 chain contacts and the fold (56 poses, overhead 8/28); physically: the cantilever root moment 243 N.mm needs a rigid arm-band anchor (unmodelled), and 0.31 mm deflection at 4 N eats E's 1.2 mm clearance to 0.89",
+ "note": "Model imports offset-shortcar-relay-4r read-only (buildability path), NO bump, shell underside R_under frozen at selection from a 480-frame need scan (E 80.11 at envsel 279 + up_clr 1.2), underside / flange / jam sector moved to the real underside, supports sampled as arm-fixed metal + jam sectors, curved-cantilever deflection checked (0.31 mm at 4 N, t 2.5). Selection on envsel exact only (7 cells; 5 ant-ii PHI 35 cells tie at the ideal bound 14.59; pick by the pre-registered tie-breaks -> H 1.5). CONVERGENCE GATE (discrete pre-registered grid): gain 2nd half 0.00, last third 0.00, top-5 spread 0.00 score points (the bound is the limit). Claim read once, held once (T5 dumps verify/underpass-bridge-relay-4r/claim_perpose.json, held_perpose.json). Post-claim diagnostic: foot H 1.0 / 2.0 read 13.74 / 13.74 (466 still a contact). Owed: verifier, 2 mm crown-set reading, cliff probes (delta + 1.5, shell +0.5), inboard foot lever, rigid-root metal.",
+ "t_screened": "2026-10-18T19:44:57Z",
+ "complexity": 53.0,
+ "best_params": {
+  "PHI": 35.0,
+  "tilt": 12,
+  "taz": 235,
+  "sgn": 1,
+  "ds": 31.0,
+  "carw": 14.0,
+  "pre": 0.0,
+  "delta": 4.5,
+  "coil": "lug",
+  "coilD": 12.0,
+  "coilL": 10.0,
+  "flange": 1,
+  "lean": 0,
+  "ant": "ii",
+  "tshc": 2.5,
+  "postH": 1.5,
+  "postL": 4.0,
+  "up_clr": 1.2,
+  "rl_fix": 81.307,
+  "hiE": 49.0,
+  "rt_extra_base": 1.5
+ },
+ "frozen_exact": {
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast, phi 0)",
+  "gate_chain_only": 13.74,
+  "plain": 13.74,
+  "near1": 17.91,
+  "near2_no_crown": 38.22,
+  "inband14_pooled": 0.9021,
+  "inband14_chain_only": 0.9012,
+  "ws_taken": 286,
+  "overhead": [
+   8,
+   28
+  ],
+  "contacts": 13,
+  "jams": 0,
+  "hardware_contacts": [
+   [
+    466,
+    [
+     150.0,
+     105.0,
+     -105.0
+    ],
+    28.0,
+    -0.56,
+    "posterior foot"
+   ]
+  ],
+  "ideal_relay": 13.21,
+  "contact_depth_sum_mm": 43.79,
+  "min_metal_taken": 0.072,
+  "continuity_dropped": 0,
+  "R_under": 81.307,
+  "R_t": 83.807,
+  "deflection_mm_4N": 0.31,
+  "root_moment_Nmm": 242.7,
+  "perpose": "docs/concepts/verify/underpass-bridge-relay-4r/claim_perpose.json"
+ },
+ "held_out_gap": 16.64,
+ "held_out": {
+  "gate": 16.64,
+  "plain": 16.64,
+  "near1": 22.62,
+  "near2_no_crown": 41.91,
+  "reach": 0.7773,
+  "follow": 1.0,
+  "ib14_chain_only": 0.9,
+  "ib14_pooled": 0.9009,
+  "contacts": 43,
+  "jams": 0,
+  "overhead": [
+   19,
+   71
+  ],
+  "ideal_relay": 16.64,
+  "perpose": "docs/concepts/verify/underpass-bridge-relay-4r/held_perpose.json"
+ },
+ "envsel": {
+  "pick": 14.59,
+  "ideal": 14.59,
+  "phi40_cell": 14.61,
+  "ant_i_cell": 16.31
+ }
 }
