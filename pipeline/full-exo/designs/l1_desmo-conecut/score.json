@@ -1,0 +1,97 @@
+{
+ "overall": 0.5303538099070155,
+ "follow": 1.0,
+ "in_band": 0.5303538099070155,
+ "clips": [
+  {
+   "name": "Raise overhead",
+   "frames": 181,
+   "score": 0.4533837915972832,
+   "follow": 1.0,
+   "in_band_when_following": 0.4533837915972832,
+   "median_gap": 11.474397288618611,
+   "min_gap": 1.577452331052434
+  },
+  {
+   "name": "Drink from a cup",
+   "frames": 178,
+   "score": 0.4923297489003819,
+   "follow": 1.0,
+   "in_band_when_following": 0.4923297489003819,
+   "median_gap": 10.027078532588778,
+   "min_gap": 3.3493497903422202
+  },
+  {
+   "name": "Comb hair",
+   "frames": 202,
+   "score": 0.6404686261214527,
+   "follow": 1.0,
+   "in_band_when_following": 0.6404686261214527,
+   "median_gap": 8.559919561037933,
+   "min_gap": 2.4821542225431847
+  },
+  {
+   "name": "Reach a high shelf",
+   "frames": 157,
+   "score": 0.659895537340236,
+   "follow": 1.0,
+   "in_band_when_following": 0.659895537340236,
+   "median_gap": 8.528805583593758,
+   "min_gap": 2.4080614997729004
+  },
+  {
+   "name": "Wash opposite shoulder",
+   "frames": 193,
+   "score": 0.3622899094921681,
+   "follow": 1.0,
+   "in_band_when_following": 0.3622899094921681,
+   "median_gap": 13.490542579688391,
+   "min_gap": 3.363440319980072
+  },
+  {
+   "name": "Reach back pocket",
+   "frames": 145,
+   "score": 0.6930925448640985,
+   "follow": 1.0,
+   "in_band_when_following": 0.6930925448640985,
+   "median_gap": 8.605391144080551,
+   "min_gap": 2.6225257999980847
+  },
+  {
+   "name": "Wave",
+   "frames": 172,
+   "score": 0.4336386455994848,
+   "follow": 1.0,
+   "in_band_when_following": 0.4336386455994848,
+   "median_gap": 11.361264331388362,
+   "min_gap": 2.3657581127091083
+  },
+  {
+   "name": "Walking arm swing",
+   "frames": 109,
+   "score": 0.5633156132381552,
+   "follow": 1.0,
+   "in_band_when_following": 0.5633156132381552,
+   "median_gap": 9.432081070762738,
+   "min_gap": 3.212074631749305
+  }
+ ],
+ "band": [
+  2.0,
+  10.0
+ ],
+ "step": 3,
+ "groups_scored": [
+  "base",
+  "dk",
+  "l1a",
+  "l1b",
+  "l2",
+  "l3",
+  "l4"
+ ],
+ "groups_excluded": {
+  "F": "forearm-fixed parts (the user's MIDDLE / FOREARM CUFF and their screws): ride the forearm segment, far outside the shoulder zone (> 110 mm from GH); the shoulder judges do not pose the forearm"
+ },
+ "group_rule": "metal_groups.py: every group posed in clips.json + H within 110 mm of GH; anything else must be excluded with a reason"
+}
