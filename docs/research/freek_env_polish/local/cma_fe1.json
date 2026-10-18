@@ -1,0 +1,4839 @@
+[
+ {
+  "tag": "fe1-g0-x0",
+  "params": {
+   "q3max": 86.0,
+   "smhi": 7.377,
+   "smlo": 7.3286,
+   "a1max": 76.0441,
+   "bk1": 32.0,
+   "bk2": 52.0,
+   "az2": 44.3978,
+   "el2": 43.8721,
+   "wd": 66.5965,
+   "wa": -9.6278,
+   "b3": 0.4
+  },
+  "obj": 16.965,
+  "xfit": {
+   "price": {
+    "a1max_priced": 76.0441,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 15.54,
+    "near": 15.54,
+    "reach": 0.781,
+    "follow": 0.95,
+    "inband14": 0.8985,
+    "inband10": 0.5396,
+    "contact": 0.0349,
+    "contact_poses": 8,
+    "depth": 17.28,
+    "near1_poses": 0,
+    "min_mm": 1.6,
+    "ws_taken": 164,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1137,
+    "connected": 1137,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 9.56,
+    "near": 9.56,
+    "reach": 0.8375,
+    "follow": 0.95,
+    "inband14": 0.8974,
+    "inband10": 0.5385,
+    "contact": 0.0305,
+    "contact_poses": 6,
+    "depth": 24.29,
+    "near1_poses": 0,
+    "min_mm": 1.425,
+    "ws_taken": 134,
+    "dropped": 0,
+    "stop_engaged": 20,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 14.75,
+    "near": 18.39,
+    "reach": 0.7857,
+    "follow": 0.95,
+    "inband14": 0.8974,
+    "inband10": 0.5385,
+    "contact": 0.0306,
+    "contact_poses": 7,
+    "depth": 16.78,
+    "near1_poses": 4,
+    "min_mm": 0.286,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1136,
+    "connected": 1136,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 16.965,
+   "secs": 13.9
+  },
+  "secs": 15.2,
+  "gen": 0
+ },
+ {
+  "tag": "fe1-g1-0",
+  "params": {
+   "q3max": 86.8,
+   "smhi": 7.9981,
+   "smlo": 7.4195,
+   "a1max": 76.3721,
+   "bk1": 32.8519,
+   "bk2": 52.3491,
+   "az2": 41.8555,
+   "el2": 44.5717,
+   "wd": 67.84,
+   "wa": -10.6704,
+   "b3": 0.4117
+  },
+  "obj": 20.207,
+  "xfit": {
+   "price": {
+    "a1max_priced": 76.3721,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 17.01,
+    "near": 17.93,
+    "reach": 0.7762,
+    "follow": 0.95,
+    "inband14": 0.893,
+    "inband10": 0.513,
+    "contact": 0.0393,
+    "contact_poses": 9,
+    "depth": 18.8,
+    "near1_poses": 1,
+    "min_mm": 0.787,
+    "ws_taken": 163,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1132,
+    "connected": 1132,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 10.97,
+    "near": 10.97,
+    "reach": 0.825,
+    "follow": 0.95,
+    "inband14": 0.8961,
+    "inband10": 0.5306,
+    "contact": 0.0308,
+    "contact_poses": 6,
+    "depth": 24.59,
+    "near1_poses": 0,
+    "min_mm": 1.425,
+    "ws_taken": 132,
+    "dropped": 0,
+    "stop_engaged": 20,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 15.78,
+    "near": 22.18,
+    "reach": 0.781,
+    "follow": 0.95,
+    "inband14": 0.8961,
+    "inband10": 0.5306,
+    "contact": 0.0349,
+    "contact_poses": 8,
+    "depth": 21.88,
+    "near1_poses": 7,
+    "min_mm": 0.575,
+    "ws_taken": 164,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1132,
+    "connected": 1132,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.152,
+   "obj": 20.207,
+   "secs": 14.4
+  },
+  "secs": 15.6,
+  "gen": 1,
+  "sigma": 0.5
+ },
+ {
+  "tag": "fe1-g1-1",
+  "params": {
+   "q3max": 87.1006,
+   "smhi": 7.8581,
+   "smlo": 7.12,
+   "a1max": 76.2677,
+   "bk1": 31.9117,
+   "bk2": 52.6585,
+   "az2": 47.7119,
+   "el2": 40.3489,
+   "wd": 64.7206,
+   "wa": -11.2591,
+   "b3": 0.3834
+  },
+  "obj": 17.45,
+  "xfit": {
+   "price": {
+    "a1max_priced": 76.2677,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 13.79,
+    "near": 15.61,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.8793,
+    "inband10": 0.5308,
+    "contact": 0.0172,
+    "contact_poses": 4,
+    "depth": 8.31,
+    "near1_poses": 2,
+    "min_mm": 0.038,
+    "ws_taken": 168,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     8,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1141,
+    "connected": 1141,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 10.35,
+    "near": 11.49,
+    "reach": 0.825,
+    "follow": 1.0,
+    "inband14": 0.8969,
+    "inband10": 0.5594,
+    "contact": 0.0254,
+    "contact_poses": 5,
+    "depth": 24.68,
+    "near1_poses": 1,
+    "min_mm": 0.678,
+    "ws_taken": 132,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 13.85,
+    "near": 19.29,
+    "reach": 0.7905,
+    "follow": 1.0,
+    "inband14": 0.8969,
+    "inband10": 0.5594,
+    "contact": 0.0259,
+    "contact_poses": 6,
+    "depth": 8.98,
+    "near1_poses": 6,
+    "min_mm": 0.049,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1140,
+    "connected": 1140,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 17.45,
+   "secs": 13.7
+  },
+  "secs": 14.6,
+  "gen": 1,
+  "sigma": 0.5
+ },
+ {
+  "tag": "fe1-g1-2",
+  "params": {
+   "q3max": 85.4471,
+   "smhi": 7.5692,
+   "smlo": 6.481,
+   "a1max": 75.9084,
+   "bk1": 35.1862,
+   "bk2": 54.4599,
+   "az2": 47.9335,
+   "el2": 46.9559,
+   "wd": 68.327,
+   "wa": -11.6942,
+   "b3": 0.4417
+  },
+  "obj": 22.721,
+  "xfit": {
+   "price": {
+    "a1max_priced": 75.9084,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 17.93,
+    "near": 21.59,
+    "reach": 0.7667,
+    "follow": 0.95,
+    "inband14": 0.8979,
+    "inband10": 0.5276,
+    "contact": 0.0439,
+    "contact_poses": 10,
+    "depth": 20.04,
+    "near1_poses": 4,
+    "min_mm": 0.16,
+    "ws_taken": 161,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1111,
+    "connected": 1111,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 168
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 14.89,
+    "near": 17.18,
+    "reach": 0.7937,
+    "follow": 0.95,
+    "inband14": 0.8991,
+    "inband10": 0.5389,
+    "contact": 0.0417,
+    "contact_poses": 8,
+    "depth": 31.47,
+    "near1_poses": 2,
+    "min_mm": 0.151,
+    "ws_taken": 127,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 19.64,
+    "near": 23.3,
+    "reach": 0.7571,
+    "follow": 0.95,
+    "inband14": 0.8991,
+    "inband10": 0.5389,
+    "contact": 0.0526,
+    "contact_poses": 12,
+    "depth": 26.29,
+    "near1_poses": 4,
+    "min_mm": 0.133,
+    "ws_taken": 159,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1110,
+    "connected": 1110,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 168
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.276,
+   "obj": 22.721,
+   "secs": 13.6
+  },
+  "secs": 14.5,
+  "gen": 1,
+  "sigma": 0.5
+ },
+ {
+  "tag": "fe1-g1-3",
+  "params": {
+   "q3max": 87.5935,
+   "smhi": 8.1225,
+   "smlo": 7.8256,
+   "a1max": 76.8868,
+   "bk1": 33.7122,
+   "bk2": 53.0005,
+   "az2": 39.8196,
+   "el2": 44.7751,
+   "wd": 66.5835,
+   "wa": -11.8726,
+   "b3": 0.3487
+  },
+  "obj": 19.52,
+  "xfit": {
+   "price": {
+    "a1max_priced": 76.8868,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 15.18,
+    "near": 17.92,
+    "reach": 0.7905,
+    "follow": 0.95,
+    "inband14": 0.8881,
+    "inband10": 0.5446,
+    "contact": 0.0304,
+    "contact_poses": 7,
+    "depth": 15.3,
+    "near1_poses": 3,
+    "min_mm": 0.16,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1141,
+    "connected": 1141,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 170
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 13.74,
+    "near": 13.74,
+    "reach": 0.8063,
+    "follow": 0.95,
+    "inband14": 0.8926,
+    "inband10": 0.5848,
+    "contact": 0.0363,
+    "contact_poses": 7,
+    "depth": 31.07,
+    "near1_poses": 0,
+    "min_mm": 1.265,
+    "ws_taken": 129,
+    "dropped": 0,
+    "stop_engaged": 19,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 15.65,
+    "near": 21.12,
+    "reach": 0.7857,
+    "follow": 0.95,
+    "inband14": 0.8926,
+    "inband10": 0.5848,
+    "contact": 0.0348,
+    "contact_poses": 8,
+    "depth": 18.86,
+    "near1_poses": 6,
+    "min_mm": 0.093,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1135,
+    "connected": 1135,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 170
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 19.52,
+   "secs": 14.0
+  },
+  "secs": 14.9,
+  "gen": 1,
+  "sigma": 0.5
+ },
+ {
+  "tag": "fe1-g1-4",
+  "params": {
+   "q3max": 85.1593,
+   "smhi": 7.4226,
+   "smlo": 7.4599,
+   "a1max": 74.873,
+   "bk1": 33.5663,
+   "bk2": 52.8913,
+   "az2": 44.3417,
+   "el2": 41.9256,
+   "wd": 67.6993,
+   "wa": -6.4684,
+   "b3": 0.4045
+  },
+  "obj": 26.55,
+  "xfit": {
+   "price": {
+    "a1max_priced": 74.873,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 17.78,
+    "near": 24.15,
+    "reach": 0.7762,
+    "follow": 0.95,
+    "inband14": 0.8936,
+    "inband10": 0.5536,
+    "contact": 0.0476,
+    "contact_poses": 11,
+    "depth": 37.28,
+    "near1_poses": 5,
+    "min_mm": 0.453,
+    "ws_taken": 163,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     4,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1134,
+    "connected": 1134,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 13.21,
+    "near": 16.98,
+    "reach": 0.8313,
+    "follow": 0.95,
+    "inband14": 0.8672,
+    "inband10": 0.5104,
+    "contact": 0.0306,
+    "contact_poses": 6,
+    "depth": 34.92,
+    "near1_poses": 2,
+    "min_mm": 0.757,
+    "ws_taken": 133,
+    "dropped": 0,
+    "stop_engaged": 19,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 18.61,
+    "near": 24.95,
+    "reach": 0.7857,
+    "follow": 0.95,
+    "inband14": 0.8672,
+    "inband10": 0.5104,
+    "contact": 0.039,
+    "contact_poses": 9,
+    "depth": 31.27,
+    "near1_poses": 5,
+    "min_mm": 0.058,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1134,
+    "connected": 1134,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 2.0,
+   "obj": 26.55,
+   "secs": 15.6
+  },
+  "secs": 16.4,
+  "gen": 1,
+  "sigma": 0.5
+ },
+ {
+  "tag": "fe1-g1-5",
+  "params": {
+   "q3max": 86.8668,
+   "smhi": 7.8681,
+   "smlo": 7.0125,
+   "a1max": 76.3442,
+   "bk1": 31.1884,
+   "bk2": 48.7757,
+   "az2": 45.5306,
+   "el2": 40.073,
+   "wd": 64.9202,
+   "wa": -7.8786,
+   "b3": 0.3729
+  },
+  "obj": 19.2,
+  "xfit": {
+   "price": {
+    "a1max_priced": 70.2372,
+    "dK_cut": 65.164
+   },
+   "a": {
+    "gap": 17.22,
+    "near": 19.04,
+    "reach": 0.7952,
+    "follow": 0.95,
+    "inband14": 0.8629,
+    "inband10": 0.5348,
+    "contact": 0.0303,
+    "contact_poses": 7,
+    "depth": 8.24,
+    "near1_poses": 2,
+    "min_mm": 0.478,
+    "ws_taken": 167,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1119,
+    "connected": 1119,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 15.62,
+    "near": 15.62,
+    "reach": 0.8063,
+    "follow": 0.95,
+    "inband14": 0.8687,
+    "inband10": 0.5658,
+    "contact": 0.0312,
+    "contact_poses": 6,
+    "depth": 9.93,
+    "near1_poses": 0,
+    "min_mm": 1.411,
+    "ws_taken": 129,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 17.54,
+    "near": 19.36,
+    "reach": 0.7905,
+    "follow": 0.95,
+    "inband14": 0.8687,
+    "inband10": 0.5658,
+    "contact": 0.0346,
+    "contact_poses": 8,
+    "depth": 10.29,
+    "near1_poses": 2,
+    "min_mm": 0.447,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1119,
+    "connected": 1119,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 19.2,
+   "secs": 14.4
+  },
+  "secs": 15.4,
+  "gen": 1,
+  "sigma": 0.5
+ },
+ {
+  "tag": "fe1-g1-6",
+  "params": {
+   "q3max": 85.9867,
+   "smhi": 7.0623,
+   "smlo": 7.1421,
+   "a1max": 76.687,
+   "bk1": 32.5147,
+   "bk2": 53.7067,
+   "az2": 48.8713,
+   "el2": 42.8213,
+   "wd": 65.5822,
+   "wa": -9.0629,
+   "b3": 0.4322
+  },
+  "obj": 19.25,
+  "xfit": {
+   "price": {
+    "a1max_priced": 76.687,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 14.89,
+    "near": 16.71,
+    "reach": 0.7857,
+    "follow": 0.95,
+    "inband14": 0.896,
+    "inband10": 0.5199,
+    "contact": 0.0306,
+    "contact_poses": 7,
+    "depth": 14.77,
+    "near1_poses": 2,
+    "min_mm": 0.34,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1129,
+    "connected": 1129,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 11.72,
+    "near": 11.72,
+    "reach": 0.8187,
+    "follow": 0.95,
+    "inband14": 0.9038,
+    "inband10": 0.5781,
+    "contact": 0.0359,
+    "contact_poses": 7,
+    "depth": 32.76,
+    "near1_poses": 0,
+    "min_mm": 1.031,
+    "ws_taken": 131,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 17.23,
+    "near": 21.79,
+    "reach": 0.7714,
+    "follow": 0.95,
+    "inband14": 0.9038,
+    "inband10": 0.5781,
+    "contact": 0.0437,
+    "contact_poses": 10,
+    "depth": 21.05,
+    "near1_poses": 5,
+    "min_mm": 0.342,
+    "ws_taken": 162,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1129,
+    "connected": 1129,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 19.25,
+   "secs": 14.1
+  },
+  "secs": 15.0,
+  "gen": 1,
+  "sigma": 0.5
+ },
+ {
+  "tag": "fe1-g1-7",
+  "params": {
+   "q3max": 86.1867,
+   "smhi": 6.7998,
+   "smlo": 7.2276,
+   "a1max": 76.1154,
+   "bk1": 32.8491,
+   "bk2": 52.2753,
+   "az2": 43.7984,
+   "el2": 46.1851,
+   "wd": 68.195,
+   "wa": -9.652,
+   "b3": 0.4196
+  },
+  "obj": 20.338,
+  "xfit": {
+   "price": {
+    "a1max_priced": 76.1154,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 17.94,
+    "near": 17.94,
+    "reach": 0.7714,
+    "follow": 0.95,
+    "inband14": 0.8887,
+    "inband10": 0.5123,
+    "contact": 0.0395,
+    "contact_poses": 9,
+    "depth": 28.46,
+    "near1_poses": 0,
+    "min_mm": 1.778,
+    "ws_taken": 162,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     4,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1133,
+    "connected": 1133,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 168
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 12.4,
+    "near": 13.53,
+    "reach": 0.8125,
+    "follow": 0.95,
+    "inband14": 0.8996,
+    "inband10": 0.5517,
+    "contact": 0.0361,
+    "contact_poses": 7,
+    "depth": 42.5,
+    "near1_poses": 1,
+    "min_mm": 0.775,
+    "ws_taken": 130,
+    "dropped": 0,
+    "stop_engaged": 20,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 15.93,
+    "near": 20.5,
+    "reach": 0.7762,
+    "follow": 0.95,
+    "inband14": 0.8996,
+    "inband10": 0.5517,
+    "contact": 0.0351,
+    "contact_poses": 8,
+    "depth": 32.33,
+    "near1_poses": 5,
+    "min_mm": 0.123,
+    "ws_taken": 163,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     4,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1133,
+    "connected": 1133,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 168
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 1.118,
+   "obj": 20.338,
+   "secs": 14.2
+  },
+  "secs": 15.1,
+  "gen": 1,
+  "sigma": 0.5
+ },
+ {
+  "tag": "fe1-g2-0",
+  "params": {
+   "q3max": 87.0277,
+   "smhi": 8.0543,
+   "smlo": 6.9784,
+   "a1max": 76.6842,
+   "bk1": 34.5527,
+   "bk2": 52.6968,
+   "az2": 46.8707,
+   "el2": 40.5031,
+   "wd": 64.7707,
+   "wa": -11.4437,
+   "b3": 0.4451
+  },
+  "obj": 20.2,
+  "xfit": {
+   "price": {
+    "a1max_priced": 76.6842,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 13.11,
+    "near": 18.54,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.8904,
+    "inband10": 0.5214,
+    "contact": 0.0215,
+    "contact_poses": 5,
+    "depth": 8.55,
+    "near1_poses": 6,
+    "min_mm": 0.138,
+    "ws_taken": 168,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1135,
+    "connected": 1135,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 11.6,
+    "near": 11.6,
+    "reach": 0.825,
+    "follow": 1.0,
+    "inband14": 0.8844,
+    "inband10": 0.542,
+    "contact": 0.0254,
+    "contact_poses": 5,
+    "depth": 20.92,
+    "near1_poses": 0,
+    "min_mm": 1.122,
+    "ws_taken": 132,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 13.71,
+    "near": 21.86,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.8844,
+    "inband10": 0.542,
+    "contact": 0.0215,
+    "contact_poses": 5,
+    "depth": 7.89,
+    "near1_poses": 9,
+    "min_mm": 0.399,
+    "ws_taken": 168,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1135,
+    "connected": 1135,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 20.2,
+   "secs": 14.0
+  },
+  "secs": 15.0,
+  "gen": 2,
+  "sigma": 0.4747
+ },
+ {
+  "tag": "fe1-g2-1",
+  "params": {
+   "q3max": 89.9275,
+   "smhi": 8.171,
+   "smlo": 6.8512,
+   "a1max": 77.3845,
+   "bk1": 30.1655,
+   "bk2": 55.6123,
+   "az2": 49.033,
+   "el2": 40.4889,
+   "wd": 59.9854,
+   "wa": -10.3102,
+   "b3": 0.3763
+  },
+  "obj": 27.37,
+  "xfit": {
+   "price": {
+    "a1max_priced": 77.3845,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 19.77,
+    "near": 21.56,
+    "reach": 0.7905,
+    "follow": 0.95,
+    "inband14": 0.8709,
+    "inband10": 0.5208,
+    "contact": 0.0591,
+    "contact_poses": 14,
+    "depth": 57.73,
+    "near1_poses": 2,
+    "min_mm": 0.243,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     4,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1158,
+    "connected": 1158,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 177
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 12.77,
+    "near": 12.77,
+    "reach": 0.8063,
+    "follow": 0.95,
+    "inband14": 0.8972,
+    "inband10": 0.5899,
+    "contact": 0.0312,
+    "contact_poses": 6,
+    "depth": 24.01,
+    "near1_poses": 0,
+    "min_mm": 1.425,
+    "ws_taken": 129,
+    "dropped": 0,
+    "stop_engaged": 9,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 22.37,
+    "near": 25.09,
+    "reach": 0.7524,
+    "follow": 0.95,
+    "inband14": 0.8972,
+    "inband10": 0.5899,
+    "contact": 0.0733,
+    "contact_poses": 17,
+    "depth": 55.18,
+    "near1_poses": 3,
+    "min_mm": 0.278,
+    "ws_taken": 158,
+    "dropped": 0,
+    "stop_engaged": 10,
+    "overhead": [
+     3,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1138,
+    "connected": 1138,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 4.045,
+   "obj": 27.37,
+   "secs": 14.0
+  },
+  "secs": 14.9,
+  "gen": 2,
+  "sigma": 0.4747
+ },
+ {
+  "tag": "fe1-g2-2",
+  "params": {
+   "q3max": 87.3902,
+   "smhi": 7.4345,
+   "smlo": 6.3142,
+   "a1max": 77.3959,
+   "bk1": 32.4017,
+   "bk2": 50.2581,
+   "az2": 48.0574,
+   "el2": 41.6171,
+   "wd": 62.6451,
+   "wa": -13.5661,
+   "b3": 0.3684
+  },
+  "obj": 17.01,
+  "xfit": {
+   "price": {
+    "a1max_priced": 72.9037,
+    "dK_cut": 72.707
+   },
+   "a": {
+    "gap": 13.54,
+    "near": 15.36,
+    "reach": 0.7905,
+    "follow": 1.0,
+    "inband14": 0.8915,
+    "inband10": 0.5241,
+    "contact": 0.0174,
+    "contact_poses": 4,
+    "depth": 6.77,
+    "near1_poses": 2,
+    "min_mm": 0.803,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1122,
+    "connected": 1122,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 170
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 9.68,
+    "near": 11.95,
+    "reach": 0.8187,
+    "follow": 1.0,
+    "inband14": 0.9043,
+    "inband10": 0.568,
+    "contact": 0.0155,
+    "contact_poses": 3,
+    "depth": 24.5,
+    "near1_poses": 2,
+    "min_mm": 0.148,
+    "ws_taken": 131,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 13.18,
+    "near": 18.66,
+    "reach": 0.7857,
+    "follow": 1.0,
+    "inband14": 0.9043,
+    "inband10": 0.568,
+    "contact": 0.0175,
+    "contact_poses": 4,
+    "depth": 8.75,
+    "near1_poses": 6,
+    "min_mm": 0.275,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1118,
+    "connected": 1118,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 17.01,
+   "secs": 13.5
+  },
+  "secs": 14.4,
+  "gen": 2,
+  "sigma": 0.4747
+ },
+ {
+  "tag": "fe1-g2-3",
+  "params": {
+   "q3max": 86.5083,
+   "smhi": 7.313,
+   "smlo": 7.8497,
+   "a1max": 79.1201,
+   "bk1": 29.6924,
+   "bk2": 49.7601,
+   "az2": 48.1101,
+   "el2": 42.828,
+   "wd": 64.4364,
+   "wa": -11.5051,
+   "b3": 0.331
+  },
+  "obj": 16.77,
+  "xfit": {
+   "price": {
+    "a1max_priced": 72.26,
+    "dK_cut": 80.711
+   },
+   "a": {
+    "gap": 14.91,
+    "near": 15.81,
+    "reach": 0.7857,
+    "follow": 0.95,
+    "inband14": 0.9055,
+    "inband10": 0.568,
+    "contact": 0.0348,
+    "contact_poses": 8,
+    "depth": 8.64,
+    "near1_poses": 1,
+    "min_mm": 0.905,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1128,
+    "connected": 1128,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 170
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 12.16,
+    "near": 12.16,
+    "reach": 0.8187,
+    "follow": 0.95,
+    "inband14": 0.8956,
+    "inband10": 0.5575,
+    "contact": 0.0359,
+    "contact_poses": 7,
+    "depth": 19.57,
+    "near1_poses": 0,
+    "min_mm": 1.411,
+    "ws_taken": 131,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 15.9,
+    "near": 17.73,
+    "reach": 0.7762,
+    "follow": 0.95,
+    "inband14": 0.8956,
+    "inband10": 0.5575,
+    "contact": 0.0308,
+    "contact_poses": 7,
+    "depth": 7.96,
+    "near1_poses": 2,
+    "min_mm": 0.582,
+    "ws_taken": 163,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1121,
+    "connected": 1121,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 167
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 16.77,
+   "secs": 13.6
+  },
+  "secs": 14.4,
+  "gen": 2,
+  "sigma": 0.4747
+ },
+ {
+  "tag": "fe1-g2-4",
+  "params": {
+   "q3max": 85.6689,
+   "smhi": 7.6793,
+   "smlo": 7.3256,
+   "a1max": 72.3431,
+   "bk1": 36.1965,
+   "bk2": 52.3356,
+   "az2": 47.3723,
+   "el2": 42.5112,
+   "wd": 64.6259,
+   "wa": -6.8079,
+   "b3": 0.3716
+  },
+  "obj": 21.453,
+  "xfit": {
+   "price": {
+    "a1max_priced": 72.3431,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 18.81,
+    "near": 18.81,
+    "reach": 0.781,
+    "follow": 0.95,
+    "inband14": 0.8742,
+    "inband10": 0.5272,
+    "contact": 0.0433,
+    "contact_poses": 10,
+    "depth": 32.66,
+    "near1_poses": 0,
+    "min_mm": 1.594,
+    "ws_taken": 164,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     4,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1118,
+    "connected": 1118,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 14.13,
+    "near": 15.28,
+    "reach": 0.8063,
+    "follow": 0.95,
+    "inband14": 0.8936,
+    "inband10": 0.5927,
+    "contact": 0.0412,
+    "contact_poses": 8,
+    "depth": 46.87,
+    "near1_poses": 1,
+    "min_mm": 0.791,
+    "ws_taken": 129,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 19.19,
+    "near": 21.02,
+    "reach": 0.7667,
+    "follow": 0.95,
+    "inband14": 0.8936,
+    "inband10": 0.5927,
+    "contact": 0.0522,
+    "contact_poses": 12,
+    "depth": 39.72,
+    "near1_poses": 2,
+    "min_mm": 0.402,
+    "ws_taken": 161,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     3,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1117,
+    "connected": 1117,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 170
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 1.538,
+   "obj": 21.453,
+   "secs": 14.3
+  },
+  "secs": 15.2,
+  "gen": 2,
+  "sigma": 0.4747
+ },
+ {
+  "tag": "fe1-g2-5",
+  "params": {
+   "q3max": 85.4472,
+   "smhi": 8.0234,
+   "smlo": 7.6243,
+   "a1max": 77.1528,
+   "bk1": 30.887,
+   "bk2": 52.0984,
+   "az2": 47.7007,
+   "el2": 41.2075,
+   "wd": 66.0355,
+   "wa": -9.3272,
+   "b3": 0.3333
+  },
+  "obj": 16.555,
+  "xfit": {
+   "price": {
+    "a1max_priced": 77.1528,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 12.83,
+    "near": 14.65,
+    "reach": 0.8048,
+    "follow": 0.95,
+    "inband14": 0.8969,
+    "inband10": 0.5356,
+    "contact": 0.03,
+    "contact_poses": 7,
+    "depth": 7.66,
+    "near1_poses": 2,
+    "min_mm": 0.785,
+    "ws_taken": 169,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1151,
+    "connected": 1151,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 11.07,
+    "near": 12.21,
+    "reach": 0.825,
+    "follow": 0.95,
+    "inband14": 0.9066,
+    "inband10": 0.5732,
+    "contact": 0.0357,
+    "contact_poses": 7,
+    "depth": 23.56,
+    "near1_poses": 1,
+    "min_mm": 0.518,
+    "ws_taken": 132,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 13.93,
+    "near": 18.46,
+    "reach": 0.7952,
+    "follow": 0.95,
+    "inband14": 0.9066,
+    "inband10": 0.5732,
+    "contact": 0.0345,
+    "contact_poses": 8,
+    "depth": 10.58,
+    "near1_poses": 5,
+    "min_mm": 0.473,
+    "ws_taken": 167,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1148,
+    "connected": 1148,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 16.555,
+   "secs": 14.4
+  },
+  "secs": 15.4,
+  "gen": 2,
+  "sigma": 0.4747
+ },
+ {
+  "tag": "fe1-g2-6",
+  "params": {
+   "q3max": 85.6183,
+   "smhi": 7.4937,
+   "smlo": 6.5828,
+   "a1max": 75.9611,
+   "bk1": 31.25,
+   "bk2": 50.6126,
+   "az2": 51.5676,
+   "el2": 42.6445,
+   "wd": 64.0843,
+   "wa": -10.7208,
+   "b3": 0.3583
+  },
+  "obj": 17.855,
+  "xfit": {
+   "price": {
+    "a1max_priced": 75.0175,
+    "dK_cut": 86.072
+   },
+   "a": {
+    "gap": 13.51,
+    "near": 15.33,
+    "reach": 0.7952,
+    "follow": 0.95,
+    "inband14": 0.9032,
+    "inband10": 0.5564,
+    "contact": 0.0303,
+    "contact_poses": 7,
+    "depth": 15.44,
+    "near1_poses": 2,
+    "min_mm": 0.081,
+    "ws_taken": 167,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1134,
+    "connected": 1134,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 12.85,
+    "near": 12.85,
+    "reach": 0.8125,
+    "follow": 0.95,
+    "inband14": 0.9065,
+    "inband10": 0.5835,
+    "contact": 0.041,
+    "contact_poses": 8,
+    "depth": 32.74,
+    "near1_poses": 0,
+    "min_mm": 1.411,
+    "ws_taken": 130,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 17.64,
+    "near": 20.38,
+    "reach": 0.7714,
+    "follow": 0.95,
+    "inband14": 0.9065,
+    "inband10": 0.5835,
+    "contact": 0.0478,
+    "contact_poses": 11,
+    "depth": 20.74,
+    "near1_poses": 3,
+    "min_mm": 0.41,
+    "ws_taken": 162,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1127,
+    "connected": 1127,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 170
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 17.855,
+   "secs": 19.3
+  },
+  "secs": 20.2,
+  "gen": 2,
+  "sigma": 0.4747
+ },
+ {
+  "tag": "fe1-g2-7",
+  "params": {
+   "q3max": 86.4991,
+   "smhi": 8.1944,
+   "smlo": 6.8774,
+   "a1max": 77.7004,
+   "bk1": 33.0322,
+   "bk2": 52.4355,
+   "az2": 44.9822,
+   "el2": 42.3343,
+   "wd": 71.9868,
+   "wa": -9.5689,
+   "b3": 0.3782
+  },
+  "obj": 94.191,
+  "xfit": {
+   "price": {
+    "a1max_priced": 77.7004,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 68.58,
+    "near": 68.58,
+    "reach": 0.5429,
+    "follow": 0.7167,
+    "inband14": 0.8701,
+    "inband10": 0.4688,
+    "contact": 0.0655,
+    "contact_poses": 11,
+    "depth": 30.34,
+    "near1_poses": 0,
+    "min_mm": 1.843,
+    "ws_taken": 114,
+    "dropped": 0,
+    "stop_engaged": 0,
+    "overhead": [
+     0,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1160,
+    "connected": 1160,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 175
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 86.44,
+    "near": 86.44,
+    "reach": 0.475,
+    "follow": 0.6167,
+    "inband14": 0.8443,
+    "inband10": 0.4115,
+    "contact": 0.0504,
+    "contact_poses": 6,
+    "depth": 26.16,
+    "near1_poses": 0,
+    "min_mm": 1.884,
+    "ws_taken": 76,
+    "dropped": 0,
+    "stop_engaged": 0,
+    "overhead": [
+     0,
+     12
+    ]
+   },
+   "b": {
+    "gap": 87.47,
+    "near": 87.47,
+    "reach": 0.4143,
+    "follow": 0.6167,
+    "inband14": 0.8443,
+    "inband10": 0.4115,
+    "contact": 0.0,
+    "contact_poses": 0,
+    "depth": -0.0,
+    "near1_poses": 0,
+    "min_mm": 1.549,
+    "ws_taken": 87,
+    "dropped": 0,
+    "stop_engaged": 0,
+    "overhead": [
+     0,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1160,
+    "connected": 1160,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 175
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 14.86,
+   "depth_pen": 1.306,
+   "obj": 94.191,
+   "secs": 20.1
+  },
+  "secs": 21.0,
+  "gen": 2,
+  "sigma": 0.4747
+ },
+ {
+  "tag": "fe1-g3-0",
+  "params": {
+   "q3max": 86.8756,
+   "smhi": 7.7228,
+   "smlo": 7.9607,
+   "a1max": 78.4759,
+   "bk1": 28.3826,
+   "bk2": 49.9009,
+   "az2": 45.5775,
+   "el2": 41.3259,
+   "wd": 64.1089,
+   "wa": -10.2728,
+   "b3": 0.381
+  },
+  "obj": 18.135,
+  "xfit": {
+   "price": {
+    "a1max_priced": 71.9095,
+    "dK_cut": 78.721
+   },
+   "a": {
+    "gap": 14.16,
+    "near": 15.81,
+    "reach": 0.7857,
+    "follow": 1.0,
+    "inband14": 0.8902,
+    "inband10": 0.5406,
+    "contact": 0.0175,
+    "contact_poses": 4,
+    "depth": 5.83,
+    "near1_poses": 4,
+    "min_mm": 0.46,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1119,
+    "connected": 1119,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 1,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 11.02,
+    "near": 12.36,
+    "reach": 0.8125,
+    "follow": 1.0,
+    "inband14": 0.8979,
+    "inband10": 0.5872,
+    "contact": 0.0206,
+    "contact_poses": 4,
+    "depth": 21.26,
+    "near1_poses": 3,
+    "min_mm": 0.386,
+    "ws_taken": 130,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 13.86,
+    "near": 20.46,
+    "reach": 0.781,
+    "follow": 1.0,
+    "inband14": 0.8979,
+    "inband10": 0.5872,
+    "contact": 0.0175,
+    "contact_poses": 4,
+    "depth": 7.83,
+    "near1_poses": 9,
+    "min_mm": 0.085,
+    "ws_taken": 164,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1119,
+    "connected": 1119,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 168
+    },
+    "refused": {
+     "rule": 1,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 18.135,
+   "secs": 18.9
+  },
+  "secs": 20.4,
+  "gen": 3,
+  "sigma": 0.4625
+ },
+ {
+  "tag": "fe1-g3-1",
+  "params": {
+   "q3max": 87.8382,
+   "smhi": 7.8779,
+   "smlo": 7.142,
+   "a1max": 75.5416,
+   "bk1": 29.8726,
+   "bk2": 50.2632,
+   "az2": 49.2117,
+   "el2": 39.0868,
+   "wd": 67.5037,
+   "wa": -9.7553,
+   "b3": 0.3266
+  },
+  "obj": 17.185,
+  "xfit": {
+   "price": {
+    "a1max_priced": 72.7646,
+    "dK_cut": 75.254
+   },
+   "a": {
+    "gap": 12.54,
+    "near": 15.25,
+    "reach": 0.8095,
+    "follow": 1.0,
+    "inband14": 0.8822,
+    "inband10": 0.505,
+    "contact": 0.0171,
+    "contact_poses": 4,
+    "depth": 2.91,
+    "near1_poses": 3,
+    "min_mm": 0.2,
+    "ws_taken": 170,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     8,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1126,
+    "connected": 1126,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 174
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 13.48,
+    "near": 14.63,
+    "reach": 0.8063,
+    "follow": 1.0,
+    "inband14": 0.8796,
+    "inband10": 0.4952,
+    "contact": 0.0207,
+    "contact_poses": 4,
+    "depth": 16.0,
+    "near1_poses": 1,
+    "min_mm": 0.917,
+    "ws_taken": 129,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 11.89,
+    "near": 19.12,
+    "reach": 0.8143,
+    "follow": 1.0,
+    "inband14": 0.8796,
+    "inband10": 0.4952,
+    "contact": 0.0128,
+    "contact_poses": 3,
+    "depth": 3.12,
+    "near1_poses": 8,
+    "min_mm": 0.029,
+    "ws_taken": 171,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     8,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1126,
+    "connected": 1126,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 174
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 17.185,
+   "secs": 18.6
+  },
+  "secs": 19.9,
+  "gen": 3,
+  "sigma": 0.4625
+ },
+ {
+  "tag": "fe1-g3-2",
+  "params": {
+   "q3max": 87.5164,
+   "smhi": 7.9508,
+   "smlo": 7.6175,
+   "a1max": 80.2358,
+   "bk1": 30.5365,
+   "bk2": 52.0701,
+   "az2": 48.4274,
+   "el2": 42.5838,
+   "wd": 65.3413,
+   "wa": -9.6367,
+   "b3": 0.3194
+  },
+  "obj": 19.063,
+  "xfit": {
+   "price": {
+    "a1max_priced": 77.0966,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 12.45,
+    "near": 16.96,
+    "reach": 0.8095,
+    "follow": 0.95,
+    "inband14": 0.9021,
+    "inband10": 0.5206,
+    "contact": 0.034,
+    "contact_poses": 8,
+    "depth": 26.31,
+    "near1_poses": 5,
+    "min_mm": 0.326,
+    "ws_taken": 170,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1157,
+    "connected": 1157,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 175
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 11.56,
+    "near": 11.56,
+    "reach": 0.825,
+    "follow": 0.95,
+    "inband14": 0.9075,
+    "inband10": 0.5894,
+    "contact": 0.0406,
+    "contact_poses": 8,
+    "depth": 36.97,
+    "near1_poses": 0,
+    "min_mm": 1.425,
+    "ws_taken": 132,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 14.83,
+    "near": 19.36,
+    "reach": 0.7905,
+    "follow": 0.95,
+    "inband14": 0.9075,
+    "inband10": 0.5894,
+    "contact": 0.0388,
+    "contact_poses": 9,
+    "depth": 23.59,
+    "near1_poses": 5,
+    "min_mm": 0.44,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1150,
+    "connected": 1150,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.903,
+   "obj": 19.063,
+   "secs": 19.7
+  },
+  "secs": 20.9,
+  "gen": 3,
+  "sigma": 0.4625
+ },
+ {
+  "tag": "fe1-g3-3",
+  "params": {
+   "q3max": 86.8716,
+   "smhi": 7.8911,
+   "smlo": 7.1937,
+   "a1max": 78.5081,
+   "bk1": 28.9962,
+   "bk2": 50.6968,
+   "az2": 52.0778,
+   "el2": 42.0709,
+   "wd": 63.4215,
+   "wa": -10.2138,
+   "b3": 0.3528
+  },
+  "obj": 20.054,
+  "xfit": {
+   "price": {
+    "a1max_priced": 74.183,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 14.91,
+    "near": 17.64,
+    "reach": 0.7857,
+    "follow": 0.95,
+    "inband14": 0.9057,
+    "inband10": 0.5705,
+    "contact": 0.0348,
+    "contact_poses": 8,
+    "depth": 20.67,
+    "near1_poses": 3,
+    "min_mm": 0.207,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1133,
+    "connected": 1133,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 170
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 12.85,
+    "near": 12.85,
+    "reach": 0.8125,
+    "follow": 0.95,
+    "inband14": 0.9132,
+    "inband10": 0.6096,
+    "contact": 0.041,
+    "contact_poses": 8,
+    "depth": 40.16,
+    "near1_poses": 0,
+    "min_mm": 1.411,
+    "ws_taken": 130,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 18.13,
+    "near": 21.79,
+    "reach": 0.7667,
+    "follow": 0.95,
+    "inband14": 0.9132,
+    "inband10": 0.6096,
+    "contact": 0.048,
+    "contact_poses": 11,
+    "depth": 26.89,
+    "near1_poses": 4,
+    "min_mm": 0.398,
+    "ws_taken": 161,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1124,
+    "connected": 1124,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.339,
+   "obj": 20.054,
+   "secs": 19.8
+  },
+  "secs": 21.2,
+  "gen": 3,
+  "sigma": 0.4625
+ },
+ {
+  "tag": "fe1-g3-4",
+  "params": {
+   "q3max": 85.072,
+   "smhi": 6.6939,
+   "smlo": 7.9044,
+   "a1max": 77.5398,
+   "bk1": 30.7605,
+   "bk2": 49.6839,
+   "az2": 51.5934,
+   "el2": 39.3876,
+   "wd": 64.7973,
+   "wa": -10.2304,
+   "b3": 0.4027
+  },
+  "obj": 17.455,
+  "xfit": {
+   "price": {
+    "a1max_priced": 68.8319,
+    "dK_cut": 64.119
+   },
+   "a": {
+    "gap": 14.9,
+    "near": 15.82,
+    "reach": 0.7762,
+    "follow": 1.0,
+    "inband14": 0.8924,
+    "inband10": 0.5612,
+    "contact": 0.0176,
+    "contact_poses": 4,
+    "depth": 5.58,
+    "near1_poses": 1,
+    "min_mm": 0.803,
+    "ws_taken": 163,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1090,
+    "connected": 1090,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 167
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 11.7,
+    "near": 12.85,
+    "reach": 0.8063,
+    "follow": 1.0,
+    "inband14": 0.8872,
+    "inband10": 0.5037,
+    "contact": 0.0105,
+    "contact_poses": 2,
+    "depth": 4.87,
+    "near1_poses": 1,
+    "min_mm": 0.052,
+    "ws_taken": 129,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 14.5,
+    "near": 19.09,
+    "reach": 0.781,
+    "follow": 1.0,
+    "inband14": 0.8872,
+    "inband10": 0.5037,
+    "contact": 0.0132,
+    "contact_poses": 3,
+    "depth": 2.39,
+    "near1_poses": 5,
+    "min_mm": 0.445,
+    "ws_taken": 164,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1090,
+    "connected": 1090,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 167
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 17.455,
+   "secs": 14.2
+  },
+  "secs": 15.2,
+  "gen": 3,
+  "sigma": 0.4625
+ },
+ {
+  "tag": "fe1-g3-5",
+  "params": {
+   "q3max": 85.214,
+   "smhi": 8.1732,
+   "smlo": 7.9333,
+   "a1max": 76.5873,
+   "bk1": 32.0532,
+   "bk2": 50.8418,
+   "az2": 49.0589,
+   "el2": 41.6791,
+   "wd": 65.1003,
+   "wa": -12.0955,
+   "b3": 0.3256
+  },
+  "obj": 16.055,
+  "xfit": {
+   "price": {
+    "a1max_priced": 76.0209,
+    "dK_cut": 83.245
+   },
+   "a": {
+    "gap": 11.72,
+    "near": 14.45,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.9009,
+    "inband10": 0.5512,
+    "contact": 0.0172,
+    "contact_poses": 4,
+    "depth": 3.48,
+    "near1_poses": 3,
+    "min_mm": 0.008,
+    "ws_taken": 168,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1145,
+    "connected": 1145,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 9.04,
+    "near": 11.31,
+    "reach": 0.825,
+    "follow": 1.0,
+    "inband14": 0.9016,
+    "inband10": 0.5397,
+    "contact": 0.0154,
+    "contact_poses": 3,
+    "depth": 24.27,
+    "near1_poses": 2,
+    "min_mm": 0.285,
+    "ws_taken": 132,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 13.11,
+    "near": 17.66,
+    "reach": 0.7905,
+    "follow": 1.0,
+    "inband14": 0.9016,
+    "inband10": 0.5397,
+    "contact": 0.0216,
+    "contact_poses": 5,
+    "depth": 6.78,
+    "near1_poses": 5,
+    "min_mm": 0.117,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1140,
+    "connected": 1140,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 16.055,
+   "secs": 15.1
+  },
+  "secs": 16.0,
+  "gen": 3,
+  "sigma": 0.4625
+ },
+ {
+  "tag": "fe1-g3-6",
+  "params": {
+   "q3max": 86.5586,
+   "smhi": 7.1114,
+   "smlo": 7.273,
+   "a1max": 77.4398,
+   "bk1": 32.2319,
+   "bk2": 50.5147,
+   "az2": 45.8571,
+   "el2": 41.4653,
+   "wd": 64.9823,
+   "wa": -13.641,
+   "b3": 0.2985
+  },
+  "obj": 17.885,
+  "xfit": {
+   "price": {
+    "a1max_priced": 71.9223,
+    "dK_cut": 68.253
+   },
+   "a": {
+    "gap": 13.03,
+    "near": 14.85,
+    "reach": 0.8048,
+    "follow": 1.0,
+    "inband14": 0.8821,
+    "inband10": 0.5497,
+    "contact": 0.0172,
+    "contact_poses": 4,
+    "depth": 11.97,
+    "near1_poses": 2,
+    "min_mm": 0.572,
+    "ws_taken": 169,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     8,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1128,
+    "connected": 1127,
+    "islands": 1,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 1,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 12.7,
+    "near": 12.7,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.8938,
+    "inband10": 0.5614,
+    "contact": 0.0208,
+    "contact_poses": 4,
+    "depth": 25.3,
+    "near1_poses": 0,
+    "min_mm": 1.347,
+    "ws_taken": 128,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 13.68,
+    "near": 20.92,
+    "reach": 0.7952,
+    "follow": 1.0,
+    "inband14": 0.8938,
+    "inband10": 0.5614,
+    "contact": 0.0258,
+    "contact_poses": 6,
+    "depth": 15.42,
+    "near1_poses": 8,
+    "min_mm": 0.024,
+    "ws_taken": 167,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1125,
+    "connected": 1124,
+    "islands": 1,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 1,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 17.885,
+   "secs": 15.4
+  },
+  "secs": 16.5,
+  "gen": 3,
+  "sigma": 0.4625
+ },
+ {
+  "tag": "fe1-g3-7",
+  "params": {
+   "q3max": 88.2109,
+   "smhi": 7.4568,
+   "smlo": 7.0673,
+   "a1max": 78.0915,
+   "bk1": 33.2395,
+   "bk2": 51.5018,
+   "az2": 49.0482,
+   "el2": 39.8171,
+   "wd": 64.5514,
+   "wa": -7.7721,
+   "b3": 0.3722
+  },
+  "obj": 18.37,
+  "xfit": {
+   "price": {
+    "a1max_priced": 74.6068,
+    "dK_cut": 71.878
+   },
+   "a": {
+    "gap": 15.84,
+    "near": 16.3,
+    "reach": 0.7952,
+    "follow": 0.9833,
+    "inband14": 0.8764,
+    "inband10": 0.539,
+    "contact": 0.03,
+    "contact_poses": 7,
+    "depth": 10.16,
+    "near1_poses": 2,
+    "min_mm": 0.024,
+    "ws_taken": 167,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1142,
+    "connected": 1142,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 12.29,
+    "near": 14.01,
+    "reach": 0.8187,
+    "follow": 0.9833,
+    "inband14": 0.889,
+    "inband10": 0.5974,
+    "contact": 0.0306,
+    "contact_poses": 6,
+    "depth": 28.01,
+    "near1_poses": 3,
+    "min_mm": 0.021,
+    "ws_taken": 131,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 17.29,
+    "near": 20.44,
+    "reach": 0.781,
+    "follow": 0.9833,
+    "inband14": 0.889,
+    "inband10": 0.5974,
+    "contact": 0.0429,
+    "contact_poses": 10,
+    "depth": 21.31,
+    "near1_poses": 5,
+    "min_mm": 0.021,
+    "ws_taken": 164,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1142,
+    "connected": 1142,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 18.37,
+   "secs": 15.4
+  },
+  "secs": 16.3,
+  "gen": 3,
+  "sigma": 0.4625
+ },
+ {
+  "tag": "fe1-g4-0",
+  "params": {
+   "q3max": 84.4711,
+   "smhi": 8.1568,
+   "smlo": 7.8371,
+   "a1max": 76.3995,
+   "bk1": 30.1162,
+   "bk2": 48.0826,
+   "az2": 46.4785,
+   "el2": 43.8392,
+   "wd": 64.4881,
+   "wa": -13.2661,
+   "b3": 0.3084
+  },
+  "obj": 19.095,
+  "xfit": {
+   "price": {
+    "a1max_priced": 71.3911,
+    "dK_cut": 79.785
+   },
+   "a": {
+    "gap": 13.6,
+    "near": 16.73,
+    "reach": 0.7857,
+    "follow": 1.0,
+    "inband14": 0.903,
+    "inband10": 0.5718,
+    "contact": 0.0217,
+    "contact_poses": 5,
+    "depth": 7.57,
+    "near1_poses": 5,
+    "min_mm": 0.153,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1118,
+    "connected": 1118,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 170
+    },
+    "refused": {
+     "rule": 1,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 12.21,
+    "near": 14.93,
+    "reach": 0.7937,
+    "follow": 1.0,
+    "inband14": 0.9086,
+    "inband10": 0.6276,
+    "contact": 0.0158,
+    "contact_poses": 3,
+    "depth": 26.19,
+    "near1_poses": 4,
+    "min_mm": 0.298,
+    "ws_taken": 127,
+    "dropped": 0,
+    "stop_engaged": 19,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 17.39,
+    "near": 21.46,
+    "reach": 0.7571,
+    "follow": 1.0,
+    "inband14": 0.9086,
+    "inband10": 0.6276,
+    "contact": 0.031,
+    "contact_poses": 7,
+    "depth": 13.53,
+    "near1_poses": 6,
+    "min_mm": 0.27,
+    "ws_taken": 159,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1103,
+    "connected": 1103,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 166
+    },
+    "refused": {
+     "rule": 1,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 19.095,
+   "secs": 18.0
+  },
+  "secs": 19.1,
+  "gen": 4,
+  "sigma": 0.4485
+ },
+ {
+  "tag": "fe1-g4-1",
+  "params": {
+   "q3max": 84.4475,
+   "smhi": 7.1329,
+   "smlo": 7.5565,
+   "a1max": 74.2074,
+   "bk1": 29.1935,
+   "bk2": 50.2602,
+   "az2": 51.6182,
+   "el2": 39.6278,
+   "wd": 67.2491,
+   "wa": -9.4677,
+   "b3": 0.3769
+  },
+  "obj": 16.51,
+  "xfit": {
+   "price": {
+    "a1max_priced": 71.4248,
+    "dK_cut": 75.452
+   },
+   "a": {
+    "gap": 13.48,
+    "near": 15.3,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.8824,
+    "inband10": 0.5142,
+    "contact": 0.0172,
+    "contact_poses": 4,
+    "depth": 2.03,
+    "near1_poses": 2,
+    "min_mm": 0.803,
+    "ws_taken": 168,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1111,
+    "connected": 1111,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 11.88,
+    "near": 13.03,
+    "reach": 0.8063,
+    "follow": 1.0,
+    "inband14": 0.8854,
+    "inband10": 0.4884,
+    "contact": 0.0105,
+    "contact_poses": 2,
+    "depth": 5.57,
+    "near1_poses": 1,
+    "min_mm": 0.307,
+    "ws_taken": 129,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 12.27,
+    "near": 17.72,
+    "reach": 0.8048,
+    "follow": 1.0,
+    "inband14": 0.8854,
+    "inband10": 0.4884,
+    "contact": 0.0129,
+    "contact_poses": 3,
+    "depth": 3.16,
+    "near1_poses": 6,
+    "min_mm": 0.412,
+    "ws_taken": 169,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1111,
+    "connected": 1111,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 16.51,
+   "secs": 16.6
+  },
+  "secs": 17.6,
+  "gen": 4,
+  "sigma": 0.4485
+ },
+ {
+  "tag": "fe1-g4-2",
+  "params": {
+   "q3max": 88.7608,
+   "smhi": 7.3736,
+   "smlo": 6.5801,
+   "a1max": 74.5675,
+   "bk1": 30.2483,
+   "bk2": 50.0037,
+   "az2": 46.1675,
+   "el2": 41.4378,
+   "wd": 65.6532,
+   "wa": -9.6799,
+   "b3": 0.3357
+  },
+  "obj": 17.98,
+  "xfit": {
+   "price": {
+    "a1max_priced": 71.7094,
+    "dK_cut": 73.1
+   },
+   "a": {
+    "gap": 13.97,
+    "near": 14.77,
+    "reach": 0.7952,
+    "follow": 1.0,
+    "inband14": 0.8867,
+    "inband10": 0.5354,
+    "contact": 0.0216,
+    "contact_poses": 5,
+    "depth": 4.49,
+    "near1_poses": 3,
+    "min_mm": 0.66,
+    "ws_taken": 167,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1132,
+    "connected": 1132,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 11.44,
+    "near": 13.0,
+    "reach": 0.8063,
+    "follow": 1.0,
+    "inband14": 0.9019,
+    "inband10": 0.5809,
+    "contact": 0.0207,
+    "contact_poses": 4,
+    "depth": 20.82,
+    "near1_poses": 3,
+    "min_mm": 0.508,
+    "ws_taken": 129,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 14.45,
+    "near": 21.19,
+    "reach": 0.7857,
+    "follow": 1.0,
+    "inband14": 0.9019,
+    "inband10": 0.5809,
+    "contact": 0.0302,
+    "contact_poses": 7,
+    "depth": 8.41,
+    "near1_poses": 9,
+    "min_mm": 0.469,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1131,
+    "connected": 1131,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 17.98,
+   "secs": 17.1
+  },
+  "secs": 18.4,
+  "gen": 4,
+  "sigma": 0.4485
+ },
+ {
+  "tag": "fe1-g4-3",
+  "params": {
+   "q3max": 86.6197,
+   "smhi": 7.7869,
+   "smlo": 8.0105,
+   "a1max": 75.1369,
+   "bk1": 31.5749,
+   "bk2": 50.2745,
+   "az2": 47.6611,
+   "el2": 38.294,
+   "wd": 63.7305,
+   "wa": -16.0175,
+   "b3": 0.332
+  },
+  "obj": 21.1,
+  "xfit": {
+   "price": {
+    "a1max_priced": 72.1889,
+    "dK_cut": 66.682
+   },
+   "a": {
+    "gap": 16.03,
+    "near": 18.8,
+    "reach": 0.7619,
+    "follow": 1.0,
+    "inband14": 0.9001,
+    "inband10": 0.5475,
+    "contact": 0.0222,
+    "contact_poses": 5,
+    "depth": 8.45,
+    "near1_poses": 3,
+    "min_mm": 0.244,
+    "ws_taken": 160,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1113,
+    "connected": 1113,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 165
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 14.88,
+    "near": 17.16,
+    "reach": 0.7875,
+    "follow": 1.0,
+    "inband14": 0.9051,
+    "inband10": 0.5523,
+    "contact": 0.0363,
+    "contact_poses": 7,
+    "depth": 27.67,
+    "near1_poses": 2,
+    "min_mm": 0.754,
+    "ws_taken": 126,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 17.87,
+    "near": 23.4,
+    "reach": 0.7524,
+    "follow": 1.0,
+    "inband14": 0.9051,
+    "inband10": 0.5523,
+    "contact": 0.0311,
+    "contact_poses": 7,
+    "depth": 11.28,
+    "near1_poses": 6,
+    "min_mm": 0.279,
+    "ws_taken": 158,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1113,
+    "connected": 1113,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 165
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 21.1,
+   "secs": 17.0
+  },
+  "secs": 18.3,
+  "gen": 4,
+  "sigma": 0.4485
+ },
+ {
+  "tag": "fe1-g4-4",
+  "params": {
+   "q3max": 86.8218,
+   "smhi": 7.4185,
+   "smlo": 8.1369,
+   "a1max": 78.4489,
+   "bk1": 29.0227,
+   "bk2": 52.6442,
+   "az2": 52.2874,
+   "el2": 41.7229,
+   "wd": 65.6575,
+   "wa": -10.1635,
+   "b3": 0.3351
+  },
+  "obj": 19.488,
+  "xfit": {
+   "price": {
+    "a1max_priced": 76.1569,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 13.99,
+    "near": 19.46,
+    "reach": 0.7905,
+    "follow": 0.95,
+    "inband14": 0.9075,
+    "inband10": 0.5649,
+    "contact": 0.0304,
+    "contact_poses": 7,
+    "depth": 19.61,
+    "near1_poses": 6,
+    "min_mm": 0.015,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1136,
+    "connected": 1136,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 170
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 12.21,
+    "near": 12.21,
+    "reach": 0.8187,
+    "follow": 0.95,
+    "inband14": 0.9042,
+    "inband10": 0.5475,
+    "contact": 0.0408,
+    "contact_poses": 8,
+    "depth": 33.47,
+    "near1_poses": 0,
+    "min_mm": 1.411,
+    "ws_taken": 131,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 15.39,
+    "near": 19.05,
+    "reach": 0.781,
+    "follow": 0.95,
+    "inband14": 0.9042,
+    "inband10": 0.5475,
+    "contact": 0.0349,
+    "contact_poses": 8,
+    "depth": 19.35,
+    "near1_poses": 4,
+    "min_mm": 0.104,
+    "ws_taken": 164,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1133,
+    "connected": 1133,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.233,
+   "obj": 19.488,
+   "secs": 17.5
+  },
+  "secs": 18.8,
+  "gen": 4,
+  "sigma": 0.4485
+ },
+ {
+  "tag": "fe1-g4-5",
+  "params": {
+   "q3max": 86.3951,
+   "smhi": 8.3392,
+   "smlo": 8.4803,
+   "a1max": 78.5123,
+   "bk1": 31.8113,
+   "bk2": 50.411,
+   "az2": 48.5713,
+   "el2": 37.5231,
+   "wd": 66.3956,
+   "wa": -14.2492,
+   "b3": 0.324
+  },
+  "obj": 19.625,
+  "xfit": {
+   "price": {
+    "a1max_priced": 73.7103,
+    "dK_cut": 69.845
+   },
+   "a": {
+    "gap": 14.93,
+    "near": 18.57,
+    "reach": 0.781,
+    "follow": 1.0,
+    "inband14": 0.9018,
+    "inband10": 0.5325,
+    "contact": 0.0303,
+    "contact_poses": 7,
+    "depth": 8.32,
+    "near1_poses": 4,
+    "min_mm": 0.601,
+    "ws_taken": 164,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1123,
+    "connected": 1123,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 14.03,
+    "near": 16.32,
+    "reach": 0.7937,
+    "follow": 1.0,
+    "inband14": 0.8971,
+    "inband10": 0.5412,
+    "contact": 0.0311,
+    "contact_poses": 6,
+    "depth": 24.85,
+    "near1_poses": 2,
+    "min_mm": 0.346,
+    "ws_taken": 127,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 14.32,
+    "near": 20.68,
+    "reach": 0.7857,
+    "follow": 1.0,
+    "inband14": 0.8971,
+    "inband10": 0.5412,
+    "contact": 0.026,
+    "contact_poses": 6,
+    "depth": 10.88,
+    "near1_poses": 7,
+    "min_mm": 0.113,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1123,
+    "connected": 1123,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 19.625,
+   "secs": 16.5
+  },
+  "secs": 17.5,
+  "gen": 4,
+  "sigma": 0.4485
+ },
+ {
+  "tag": "fe1-g4-6",
+  "params": {
+   "q3max": 84.9854,
+   "smhi": 8.1473,
+   "smlo": 7.634,
+   "a1max": 78.6395,
+   "bk1": 29.8291,
+   "bk2": 49.0981,
+   "az2": 46.7972,
+   "el2": 42.53,
+   "wd": 66.8271,
+   "wa": -10.8326,
+   "b3": 0.3147
+  },
+  "obj": 14.95,
+  "xfit": {
+   "price": {
+    "a1max_priced": 72.5212,
+    "dK_cut": 80.841
+   },
+   "a": {
+    "gap": 13.55,
+    "near": 13.55,
+    "reach": 0.7952,
+    "follow": 1.0,
+    "inband14": 0.8866,
+    "inband10": 0.5232,
+    "contact": 0.0173,
+    "contact_poses": 4,
+    "depth": 4.02,
+    "near1_poses": 0,
+    "min_mm": 1.011,
+    "ws_taken": 167,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1124,
+    "connected": 1124,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 9.82,
+    "near": 11.98,
+    "reach": 0.8187,
+    "follow": 1.0,
+    "inband14": 0.8935,
+    "inband10": 0.5544,
+    "contact": 0.0104,
+    "contact_poses": 2,
+    "depth": 16.57,
+    "near1_poses": 4,
+    "min_mm": 0.418,
+    "ws_taken": 131,
+    "dropped": 0,
+    "stop_engaged": 19,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 12.86,
+    "near": 16.35,
+    "reach": 0.7952,
+    "follow": 1.0,
+    "inband14": 0.8935,
+    "inband10": 0.5544,
+    "contact": 0.0173,
+    "contact_poses": 4,
+    "depth": 4.6,
+    "near1_poses": 6,
+    "min_mm": 0.415,
+    "ws_taken": 167,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1122,
+    "connected": 1122,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 14.95,
+   "secs": 14.6
+  },
+  "secs": 15.6,
+  "gen": 4,
+  "sigma": 0.4485
+ },
+ {
+  "tag": "fe1-g4-7",
+  "params": {
+   "q3max": 87.1481,
+   "smhi": 8.2931,
+   "smlo": 8.8574,
+   "a1max": 78.239,
+   "bk1": 32.0466,
+   "bk2": 49.7075,
+   "az2": 44.4198,
+   "el2": 38.8532,
+   "wd": 66.7648,
+   "wa": -11.7967,
+   "b3": 0.3172
+  },
+  "obj": 22.025,
+  "xfit": {
+   "price": {
+    "a1max_priced": 72.4447,
+    "dK_cut": 65.818
+   },
+   "a": {
+    "gap": 16.74,
+    "near": 19.55,
+    "reach": 0.7857,
+    "follow": 1.0,
+    "inband14": 0.8812,
+    "inband10": 0.5337,
+    "contact": 0.0343,
+    "contact_poses": 8,
+    "depth": 7.64,
+    "near1_poses": 5,
+    "min_mm": 0.488,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1128,
+    "connected": 1128,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 15.92,
+    "near": 17.3,
+    "reach": 0.7937,
+    "follow": 1.0,
+    "inband14": 0.8782,
+    "inband10": 0.5848,
+    "contact": 0.0311,
+    "contact_poses": 6,
+    "depth": 22.91,
+    "near1_poses": 3,
+    "min_mm": 0.788,
+    "ws_taken": 127,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 16.13,
+    "near": 24.5,
+    "reach": 0.7905,
+    "follow": 1.0,
+    "inband14": 0.8782,
+    "inband10": 0.5848,
+    "contact": 0.03,
+    "contact_poses": 7,
+    "depth": 10.4,
+    "near1_poses": 11,
+    "min_mm": 0.005,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1128,
+    "connected": 1128,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 22.025,
+   "secs": 14.1
+  },
+  "secs": 15.0,
+  "gen": 4,
+  "sigma": 0.4485
+ },
+ {
+  "tag": "fe1-g5-0",
+  "params": {
+   "q3max": 87.3872,
+   "smhi": 7.8338,
+   "smlo": 7.1294,
+   "a1max": 78.2696,
+   "bk1": 28.5576,
+   "bk2": 50.0285,
+   "az2": 51.7395,
+   "el2": 38.0631,
+   "wd": 65.7009,
+   "wa": -12.2169,
+   "b3": 0.3475
+  },
+  "obj": 16.08,
+  "xfit": {
+   "price": {
+    "a1max_priced": 71.9379,
+    "dK_cut": 76.644
+   },
+   "a": {
+    "gap": 14.15,
+    "near": 14.15,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.88,
+    "inband10": 0.527,
+    "contact": 0.0215,
+    "contact_poses": 5,
+    "depth": 3.62,
+    "near1_poses": 0,
+    "min_mm": 1.289,
+    "ws_taken": 168,
+    "dropped": 0,
+    "stop_engaged": 11,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1113,
+    "connected": 1113,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 13.02,
+    "near": 15.31,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.8957,
+    "inband10": 0.5396,
+    "contact": 0.0259,
+    "contact_poses": 5,
+    "depth": 21.07,
+    "near1_poses": 2,
+    "min_mm": 0.092,
+    "ws_taken": 128,
+    "dropped": 0,
+    "stop_engaged": 11,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 12.58,
+    "near": 18.01,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.8957,
+    "inband10": 0.5396,
+    "contact": 0.0215,
+    "contact_poses": 5,
+    "depth": 6.86,
+    "near1_poses": 6,
+    "min_mm": 0.015,
+    "ws_taken": 168,
+    "dropped": 0,
+    "stop_engaged": 11,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1113,
+    "connected": 1113,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 16.08,
+   "secs": 14.7
+  },
+  "secs": 15.8,
+  "gen": 5,
+  "sigma": 0.4303
+ },
+ {
+  "tag": "fe1-g5-1",
+  "params": {
+   "q3max": 84.6142,
+   "smhi": 8.3982,
+   "smlo": 6.8097,
+   "a1max": 76.3304,
+   "bk1": 30.8035,
+   "bk2": 49.0287,
+   "az2": 48.1843,
+   "el2": 42.5733,
+   "wd": 69.2261,
+   "wa": -9.5038,
+   "b3": 0.3742
+  },
+  "obj": 17.94,
+  "xfit": {
+   "price": {
+    "a1max_priced": 73.2783,
+    "dK_cut": 81.7
+   },
+   "a": {
+    "gap": 17.09,
+    "near": 17.09,
+    "reach": 0.7857,
+    "follow": 0.95,
+    "inband14": 0.8906,
+    "inband10": 0.5184,
+    "contact": 0.0472,
+    "contact_poses": 11,
+    "depth": 14.09,
+    "near1_poses": 0,
+    "min_mm": 1.67,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1124,
+    "connected": 1124,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 10.91,
+    "near": 12.05,
+    "reach": 0.825,
+    "follow": 0.95,
+    "inband14": 0.8917,
+    "inband10": 0.5162,
+    "contact": 0.0258,
+    "contact_poses": 5,
+    "depth": 14.7,
+    "near1_poses": 1,
+    "min_mm": 0.473,
+    "ws_taken": 132,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 14.26,
+    "near": 18.79,
+    "reach": 0.8,
+    "follow": 0.95,
+    "inband14": 0.8917,
+    "inband10": 0.5162,
+    "contact": 0.0343,
+    "contact_poses": 8,
+    "depth": 11.32,
+    "near1_poses": 5,
+    "min_mm": 0.2,
+    "ws_taken": 168,
+    "dropped": 0,
+    "stop_engaged": 16,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1124,
+    "connected": 1124,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 17.94,
+   "secs": 16.0
+  },
+  "secs": 17.0,
+  "gen": 5,
+  "sigma": 0.4303
+ },
+ {
+  "tag": "fe1-g5-2",
+  "params": {
+   "q3max": 86.3252,
+   "smhi": 8.5395,
+   "smlo": 7.3499,
+   "a1max": 74.7277,
+   "bk1": 30.6688,
+   "bk2": 48.8469,
+   "az2": 45.0129,
+   "el2": 42.1861,
+   "wd": 66.636,
+   "wa": -7.9053,
+   "b3": 0.3271
+  },
+  "obj": 18.807,
+  "xfit": {
+   "price": {
+    "a1max_priced": 72.671,
+    "dK_cut": 77.364
+   },
+   "a": {
+    "gap": 16.99,
+    "near": 17.89,
+    "reach": 0.7857,
+    "follow": 0.95,
+    "inband14": 0.8834,
+    "inband10": 0.5521,
+    "contact": 0.039,
+    "contact_poses": 9,
+    "depth": 22.55,
+    "near1_poses": 1,
+    "min_mm": 0.226,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1137,
+    "connected": 1137,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 13.25,
+    "near": 13.25,
+    "reach": 0.8187,
+    "follow": 0.95,
+    "inband14": 0.8847,
+    "inband10": 0.5601,
+    "contact": 0.0359,
+    "contact_poses": 7,
+    "depth": 27.49,
+    "near1_poses": 0,
+    "min_mm": 1.316,
+    "ws_taken": 131,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 15.94,
+    "near": 18.67,
+    "reach": 0.7905,
+    "follow": 0.95,
+    "inband14": 0.8847,
+    "inband10": 0.5601,
+    "contact": 0.0346,
+    "contact_poses": 8,
+    "depth": 21.65,
+    "near1_poses": 3,
+    "min_mm": 0.162,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1137,
+    "connected": 1137,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 171
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.527,
+   "obj": 18.807,
+   "secs": 15.3
+  },
+  "secs": 16.2,
+  "gen": 5,
+  "sigma": 0.4303
+ },
+ {
+  "tag": "fe1-g5-3",
+  "params": {
+   "q3max": 85.7571,
+   "smhi": 7.6875,
+   "smlo": 6.881,
+   "a1max": 77.538,
+   "bk1": 31.0102,
+   "bk2": 48.5702,
+   "az2": 48.6752,
+   "el2": 42.599,
+   "wd": 67.739,
+   "wa": -10.5578,
+   "b3": 0.3447
+  },
+  "obj": 15.55,
+  "xfit": {
+   "price": {
+    "a1max_priced": 70.9792,
+    "dK_cut": 74.621
+   },
+   "a": {
+    "gap": 13.38,
+    "near": 14.29,
+    "reach": 0.7905,
+    "follow": 1.0,
+    "inband14": 0.8931,
+    "inband10": 0.5275,
+    "contact": 0.0174,
+    "contact_poses": 4,
+    "depth": 2.23,
+    "near1_poses": 1,
+    "min_mm": 0.017,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1114,
+    "connected": 1114,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 170
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 10.26,
+    "near": 10.26,
+    "reach": 0.8125,
+    "follow": 1.0,
+    "inband14": 0.8953,
+    "inband10": 0.5055,
+    "contact": 0.0104,
+    "contact_poses": 2,
+    "depth": 13.85,
+    "near1_poses": 0,
+    "min_mm": 1.245,
+    "ws_taken": 130,
+    "dropped": 0,
+    "stop_engaged": 18,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 13.16,
+    "near": 16.81,
+    "reach": 0.7905,
+    "follow": 1.0,
+    "inband14": 0.8953,
+    "inband10": 0.5055,
+    "contact": 0.0174,
+    "contact_poses": 4,
+    "depth": 3.49,
+    "near1_poses": 4,
+    "min_mm": 0.459,
+    "ws_taken": 166,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1113,
+    "connected": 1113,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 170
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 15.55,
+   "secs": 14.1
+  },
+  "secs": 15.1,
+  "gen": 5,
+  "sigma": 0.4303
+ },
+ {
+  "tag": "fe1-g5-4",
+  "params": {
+   "q3max": 85.0215,
+   "smhi": 7.5909,
+   "smlo": 7.2838,
+   "a1max": 74.9033,
+   "bk1": 28.1296,
+   "bk2": 48.6992,
+   "az2": 49.2179,
+   "el2": 40.9104,
+   "wd": 66.5616,
+   "wa": -12.3701,
+   "b3": 0.3171
+  },
+  "obj": 15.46,
+  "xfit": {
+   "price": {
+    "a1max_priced": 69.9818,
+    "dK_cut": 76.632
+   },
+   "a": {
+    "gap": 11.93,
+    "near": 12.85,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.8979,
+    "inband10": 0.5408,
+    "contact": 0.0172,
+    "contact_poses": 4,
+    "depth": 3.46,
+    "near1_poses": 1,
+    "min_mm": 0.803,
+    "ws_taken": 168,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1107,
+    "connected": 1107,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 12.08,
+    "near": 13.23,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.9084,
+    "inband10": 0.5635,
+    "contact": 0.0208,
+    "contact_poses": 4,
+    "depth": 20.72,
+    "near1_poses": 1,
+    "min_mm": 0.531,
+    "ws_taken": 128,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 11.72,
+    "near": 18.07,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.9084,
+    "inband10": 0.5635,
+    "contact": 0.0172,
+    "contact_poses": 4,
+    "depth": 6.92,
+    "near1_poses": 7,
+    "min_mm": 0.046,
+    "ws_taken": 168,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1107,
+    "connected": 1107,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 172
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 15.46,
+   "secs": 14.2
+  },
+  "secs": 15.1,
+  "gen": 5,
+  "sigma": 0.4303
+ },
+ {
+  "tag": "fe1-g5-5",
+  "params": {
+   "q3max": 86.0786,
+   "smhi": 8.0599,
+   "smlo": 8.2569,
+   "a1max": 76.9708,
+   "bk1": 28.7961,
+   "bk2": 50.3393,
+   "az2": 48.0393,
+   "el2": 43.3252,
+   "wd": 65.9025,
+   "wa": -10.9216,
+   "b3": 0.3022
+  },
+  "obj": 19.475,
+  "xfit": {
+   "price": {
+    "a1max_priced": 73.6254,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 14.83,
+    "near": 17.57,
+    "reach": 0.7857,
+    "follow": 0.95,
+    "inband14": 0.8966,
+    "inband10": 0.5479,
+    "contact": 0.0306,
+    "contact_poses": 7,
+    "depth": 14.41,
+    "near1_poses": 3,
+    "min_mm": 0.01,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 13,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1130,
+    "connected": 1130,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 13.49,
+    "near": 13.49,
+    "reach": 0.8063,
+    "follow": 0.95,
+    "inband14": 0.9135,
+    "inband10": 0.5961,
+    "contact": 0.0412,
+    "contact_poses": 8,
+    "depth": 32.37,
+    "near1_poses": 0,
+    "min_mm": 1.411,
+    "ws_taken": 129,
+    "dropped": 0,
+    "stop_engaged": 14,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 16.81,
+    "near": 21.38,
+    "reach": 0.7714,
+    "follow": 0.95,
+    "inband14": 0.9135,
+    "inband10": 0.5961,
+    "contact": 0.0395,
+    "contact_poses": 9,
+    "depth": 19.42,
+    "near1_poses": 5,
+    "min_mm": 0.44,
+    "ws_taken": 162,
+    "dropped": 0,
+    "stop_engaged": 12,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1122,
+    "connected": 1122,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 168
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 19.475,
+   "secs": 14.5
+  },
+  "secs": 15.3,
+  "gen": 5,
+  "sigma": 0.4303
+ },
+ {
+  "tag": "fe1-g5-6",
+  "params": {
+   "q3max": 85.4149,
+   "smhi": 7.5438,
+   "smlo": 7.1838,
+   "a1max": 74.6751,
+   "bk1": 30.52,
+   "bk2": 49.5026,
+   "az2": 44.5995,
+   "el2": 39.9808,
+   "wd": 67.7459,
+   "wa": -10.4914,
+   "b3": 0.3746
+  },
+  "obj": 20.455,
+  "xfit": {
+   "price": {
+    "a1max_priced": 70.2722,
+    "dK_cut": 65.025
+   },
+   "a": {
+    "gap": 15.11,
+    "near": 18.72,
+    "reach": 0.8,
+    "follow": 1.0,
+    "inband14": 0.8704,
+    "inband10": 0.5012,
+    "contact": 0.0215,
+    "contact_poses": 5,
+    "depth": 7.35,
+    "near1_poses": 4,
+    "min_mm": 0.132,
+    "ws_taken": 168,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1113,
+    "connected": 1113,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 15.12,
+    "near": 17.42,
+    "reach": 0.7937,
+    "follow": 1.0,
+    "inband14": 0.8811,
+    "inband10": 0.5332,
+    "contact": 0.026,
+    "contact_poses": 5,
+    "depth": 18.8,
+    "near1_poses": 2,
+    "min_mm": 0.614,
+    "ws_taken": 127,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 14.95,
+    "near": 22.19,
+    "reach": 0.7952,
+    "follow": 1.0,
+    "inband14": 0.8811,
+    "inband10": 0.5332,
+    "contact": 0.0258,
+    "contact_poses": 6,
+    "depth": 8.18,
+    "near1_poses": 8,
+    "min_mm": 0.105,
+    "ws_taken": 167,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     6,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1113,
+    "connected": 1113,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 20.455,
+   "secs": 14.1
+  },
+  "secs": 15.0,
+  "gen": 5,
+  "sigma": 0.4303
+ },
+ {
+  "tag": "fe1-g5-7",
+  "params": {
+   "q3max": 85.8305,
+   "smhi": 8.0454,
+   "smlo": 7.5981,
+   "a1max": 74.9969,
+   "bk1": 32.6307,
+   "bk2": 49.0328,
+   "az2": 47.6557,
+   "el2": 40.1404,
+   "wd": 67.5384,
+   "wa": -10.158,
+   "b3": 0.3831
+  },
+  "obj": 18.93,
+  "xfit": {
+   "price": {
+    "a1max_priced": 71.5836,
+    "dK_cut": 67.237
+   },
+   "a": {
+    "gap": 9.87,
+    "near": 17.1,
+    "reach": 0.819,
+    "follow": 1.0,
+    "inband14": 0.8866,
+    "inband10": 0.5198,
+    "contact": 0.0043,
+    "contact_poses": 1,
+    "depth": 2.22,
+    "near1_poses": 8,
+    "min_mm": 0.176,
+    "ws_taken": 172,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1112,
+    "connected": 1112,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 12.58,
+    "near": 14.87,
+    "reach": 0.8125,
+    "follow": 1.0,
+    "inband14": 0.8772,
+    "inband10": 0.4887,
+    "contact": 0.0155,
+    "contact_poses": 3,
+    "depth": 13.12,
+    "near1_poses": 2,
+    "min_mm": 0.102,
+    "ws_taken": 130,
+    "dropped": 0,
+    "stop_engaged": 19,
+    "overhead": [
+     2,
+     12
+    ]
+   },
+   "b": {
+    "gap": 11.71,
+    "near": 20.76,
+    "reach": 0.8143,
+    "follow": 1.0,
+    "inband14": 0.8772,
+    "inband10": 0.4887,
+    "contact": 0.0086,
+    "contact_poses": 2,
+    "depth": 2.41,
+    "near1_poses": 10,
+    "min_mm": 0.546,
+    "ws_taken": 171,
+    "dropped": 0,
+    "stop_engaged": 15,
+    "overhead": [
+     7,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1112,
+    "connected": 1112,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 173
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 18.93,
+   "secs": 14.2
+  },
+  "secs": 15.1,
+  "gen": 5,
+  "sigma": 0.4303
+ }
+]
