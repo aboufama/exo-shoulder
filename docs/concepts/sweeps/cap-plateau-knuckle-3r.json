@@ -61,5 +61,125 @@
    "neck: sparse sampling (10.39 mm median spacing > 4 mm)"
   ],
   "mass_g": 1197.4
+ },
+ {
+  "k": 1,
+  "t": "2026-10-18T00:24:51Z",
+  "params": {
+   "az1": 61.22,
+   "el1": 63.2,
+   "d3": 100.17,
+   "a3": -4.12,
+   "lo": 28.03,
+   "off": 38.18,
+   "cap": 52.51,
+   "a2": 45.19,
+   "f": 29.64,
+   "bk1": 27.5,
+   "bk2": 30.46,
+   "sK": -1.0,
+   "sigma": -1.0,
+   "margin": 5.23,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.97,
+   "cell": "C"
+  },
+  "inband14": 0.7223,
+  "inband10": null,
+  "reach": 0.7063,
+  "follow": 0.9667,
+  "contact": 0.0229,
+  "gap": 39.43,
+  "bench": "Bench(60,160) fast fit",
+  "frozen_exact_110_360": {
+   "gap": 43.77,
+   "reach": 0.6667,
+   "follow": 0.9818,
+   "inband14": 0.7235,
+   "inband10": 0.4139,
+   "contact": 0.0279
+  },
+  "why": {
+   "fold": 85,
+   "flip": 0,
+   "parts": 25,
+   "contact": 10
+  },
+  "overhead": "7/28",
+  "depth_mm_max": 16.479,
+  "inband_member": {
+   "hub1": 1.0,
+   "hubK": 0.7527,
+   "hub2": 0.9783,
+   "hub3": 0.8725,
+   "link1a": 0.8254,
+   "link1b": 0.6779,
+   "link2": 0.3042,
+   "neck": 0.7874
+  },
+  "honest_fit": true,
+  "audit": [],
+  "mass_g": 126.0
+ },
+ {
+  "k": 2,
+  "t": "2026-10-18T00:27:03Z",
+  "params": {
+   "az1": 56.17,
+   "el1": 61.38,
+   "d3": 91.05,
+   "a3": -9.21,
+   "lo": 31.2,
+   "off": 45.32000000000001,
+   "cap": 56.37,
+   "a2": 50.56,
+   "f": null,
+   "bk1": 32.11,
+   "bk2": null,
+   "sK": -1.0,
+   "sigma": -1.0,
+   "margin": 5.23,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.97,
+   "cell": "B"
+  },
+  "inband14": 0.7189,
+  "inband10": null,
+  "reach": 0.6937,
+  "follow": 0.9333,
+  "contact": 0.0457,
+  "gap": 44.98,
+  "bench": "Bench(60,160) fast fit",
+  "frozen_exact_110_360": {
+   "gap": 47.76,
+   "reach": 0.6528,
+   "follow": 0.9545,
+   "inband14": 0.7199,
+   "inband10": 0.3969,
+   "contact": 0.0503
+  },
+  "why": {
+   "fold": 90,
+   "flip": 0,
+   "parts": 17,
+   "contact": 18
+  },
+  "overhead": "5/28",
+  "depth_mm_max": 15.645,
+  "inband_member": {
+   "hub1": 1.0,
+   "hubK": 0.5736,
+   "hub2": 0.7857,
+   "hub3": 0.8086,
+   "link1a": 0.7677,
+   "link1b": 0.5812,
+   "link2": 0.5508,
+   "neck": 0.8158
+  },
+  "honest_fit": true,
+  "audit": [],
+  "mass_g": 125.3
  }
 ]

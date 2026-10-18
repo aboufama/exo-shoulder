@@ -79,12 +79,14 @@ def build(B, F, p):
                   K.axis_angle(p3, F.HG([0.0, -1, 0]), p2)], -1)
     for j, (s_lo, s_hi) in (p.get("stops") or {}).items():      # own-angle hard stops (dowel in an arc groove)
         ok &= ((q[:, int(j)] - s_lo) % 360.0) <= ((s_hi - s_lo) % 360.0)
+    # link 2 rides over link 1a and the neck (kit); l2_over_hubK adds hub K (the spec's list; link 1b cannot be listed: the
+    # kit forbids 'over' onto a member that itself has 'over' - its K6 clearance is then checked by K.collisions)
     hubs = [K.hub_member("hub1", p1, "J1"), K.hub_member("hubK", pK, "K"), K.hub_member("hub2", p2, "J2"), K.hub_member("hub3", p3, "J3")]
     w, t = p["width"], p["t_link"]
     links = [K.strap_member("link1a", p1, pK, ("J1", "K"), width=w, t=t, ramp_to=(("hub1", K.STACK), ("hubK", 0.0))),
              K.strap_member("link1b", pK, p2, ("K", "J2"), width=w, t=t, ramp_to=(("hubK", K.STACK), ("hub2", 0.0)), over=[("link1a", 1.0)]),
              K.strap_member("link2", p2, p3, ("J2", "J3"), width=w, t=t, ramp_to=(("hub2", K.STACK), ("hub3", K.STACK)),
-                            over=[("link1a", 1.0), ("neck", 1.0)]),
+                            over=[("link1a", 1.0), ("neck", 1.0)] + ([("hubK", 1.0)] if p.get("l2_over_hubK") else [])),
              K.neck_member(F, p3, joints=("J3",), ramps=(("hub3", 0.0), (None, 0)))]
     okm = np.asarray(ok, bool)
     return K.Chain(members=hubs + links, ok=ok, q=q, joints=dict(J1=p1, K=pK, J2=p2, J3=p3),
@@ -156,6 +158,48 @@ def levels(cell, over=None):
     return dict(levels=lv, fit={k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, inband_member=r["inband_member"])
 
 
+BOX = {  # the pre-registered sweep boxes (catalogue sweep_params); every bound is a hard edge
+    "C": dict(az1=(56, 66), el1=(60, 67), d3=(96, 104), a3=(-8, 0), lo=(26, 31), f=(26, 34), cap=(50, 56), a2=(43, 48), bk1=(25, 30),
+              doff=(6, 8), q=(0.95, 0.99)),
+    "B": dict(az1=(52, 62), el1=(58, 66), d3=(88, 98), a3=(-14, -4), lo=(29, 34), a2=(48, 54), cap=(52, 60), bk1=(28, 34), q=(0.95, 0.99)),
+}
+STEP = dict(az1=2.0, el1=2.0, d3=2.0, a3=2.0, lo=1.0, f=1.5, cap=1.5, a2=1.5, bk1=1.0, doff=0.5, q=0.01)
+
+
+def near_gap(B, p):
+    """the fit's 1 mm near-touch gap (the CLAUDE.md search objective) + the plain report"""
+    r = K.evaluate(B, build, p); take = B._kit_last["take"]; Pi = np.nonzero(take)[0]
+    ws = np.array(B.kind) == "ws"; good = np.zeros(len(ws), bool)
+    if len(Pi): good[Pi[np.array([float(np.min(B.res[i])) >= 1.0 for i in Pi])]] = True
+    return CB.gap_of(r["inband14"], good[~ws].mean(), good[ws].mean(), 0.0), r
+
+
+def search(cell, n, seed, out, start=None):
+    """local (1+1) search inside the cell's box on Bench(60,160) fast, 1 mm near-touch objective; every eval appended
+    to `out` (a sweep-format list) as it lands"""
+    B = K.bench(60, 160); rng = np.random.default_rng(seed); box = BOX[cell]; rows = []
+    def mk(x):
+        p = P_of(cell, x)
+        if cell == "C": p["off"] = p["a2"] - x["doff"]; p["bk2"] = p["cap"] + 5.0 - p["bk1"] + 0.45
+        else: p["off"] = p["a2"] - p["margin"] - 0.01; p["bk2"] = None
+        return p
+    c0 = CELLS[cell]; x = {k: (float(c0[k]) if k in c0 and c0[k] is not None else None) for k in box}
+    if cell == "C": x["doff"] = c0["a2"] - c0["off"]
+    x["q"] = 0.97; x.update(start or {})
+    def rec(p, f, r):
+        e = dict(k=len(rows), t=K.now(), params={k: v for k, v in p.items()}, **{k: r[k] for k in ("inband14", "inband10", "reach", "follow", "contact", "gap")},
+                 gap_near1=f, honest=r["honest"], bench="Bench(60,160) fast fit", seed=seed)
+        rows.append(e); json.dump(rows, open(out + ".tmp", "w"), indent=1, default=float); os.replace(out + ".tmp", out)
+    p = mk(x); f, r = near_gap(B, p); rec(p, f, r); print("start", f, r["gap"], flush=True)
+    for it in range(n):
+        y = dict(x)
+        for k in rng.choice(list(box), size=int(rng.integers(1, 4)), replace=False):
+            y[k] = float(np.clip(y[k] + rng.normal(0, STEP[k]), *box[k]))
+        q = mk(y); g, rr = near_gap(B, q); rec(q, g, rr)
+        if g < f: x, f = y, g; print(it, "best", round(f, 2), rr["gap"], {k: round(v, 2) for k, v in y.items()}, flush=True)
+    return x, f
+
+
 def frozen(cell, over=None, which="bench"):
     KP.build = build                                         # the kit's wear() calls its module-level build: use this model's
     p = P_of(cell, over); t = time.time(); out = KP.wear(p, which); out["params"] = p; out["secs"] = round(time.time() - t, 1)
@@ -171,6 +215,8 @@ if __name__ == "__main__":
         o = j2exit(cell, over); dst = a[-1] if a[-1].endswith(".json") else None
         if dst: json.dump(o, open(dst, "w"), indent=0)
         print(json.dumps({k: v for k, v in o.items() if k != "per_pose"}))
+    elif mode == "search":
+        x, f = search(cell, int(a[2]), int(a[3]), a[4]); print("BEST", f, json.dumps(x))
     elif mode == "levels": print(json.dumps(levels(cell, over), default=float))
     elif mode == "fit":
         r = K.evaluate(K.bench(60, 160), build, P_of(cell, over))

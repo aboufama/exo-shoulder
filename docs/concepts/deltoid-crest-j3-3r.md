@@ -199,8 +199,9 @@ branch +1 is dead (follow 0.67-0.73). CMA then ran inside `inv2 0 / inv3 1 / sig
 | s9 (inv2 0, from the 36.63 config, sigma 0.35) | 193 | 29.85 (89.15) | J1 bvec(108.6, 63.8), J3 wdir(104.1, +1.6), a1 39.3 / a2 45.8 |
 | s11 (inv2 0, from the 37.90 config, sigma 0.5) | 341 | 33.34 | stopped for the frozen wear; the a2 ~51 side stays worse |
 | s10 (from s9's best, sigma 0.3) | 681 | **26.78 (90.26)** | sigma collapsed (0.03): stop |
-| s12 (wide restart from 26.78, sigma 0.5, pop 12) | S12_N | S12_BEST | |
-| s13 (cap-pole cell bvec(55, 62) / wdir(98, 5) 50/58 at inv2 0, sigma 0.6, pop 12) | S13_N | S13_BEST | |
+| s12 (wide restart from 26.78, sigma 0.5, pop 12) | 1189 | 26.78 (no gain) | second basin 29.38 at J1 bvec(97.5, 62.8), J3 wdir(109.4, -1.1), end_extra 6.0 (box edge) |
+| s13 (cap-pole cell bvec(55, 62) / wdir(98, 5) 50/58 at inv2 0, sigma 0.6, pop 12) | 697 | 47.48 | reach 0.794 (the highest of the screen) but hub 2 at F 86 mm, ib14 0.636: the cap pole's hub-2 problem is untouched by the stack order |
+| s14 (from the 29.38 basin, sigma 0.35) + s15 (from 26.78, sigma 0.2), closing streams | S1415_N | S1415_BEST | |
 
 **Best fast (Bench(60,160)): 26.78, score 90.26** - J1 bvec(108.56, 64.50) (acromion top), J3 wdir(104.41, -0.39)
 (crest), a1 40.46 / a2 45.92, sigma -1, inv2 0, inv3 1, q 0.957, end_extra 2.95. Reach 0.700 (112 / 160 ws), follow
@@ -230,14 +231,23 @@ against hub 2 at 60.3); the crest binders (30, 135, -60) taken at 2.54 mm.
 **New knowledge (measured): at the crest seats the fast bench over-reads by 11-14 gap points at EVERY optimum, five
 to six times the zero-complexity optimum's own fast-to-frozen penalty (zc-frontier 28.85 -> 31.04, +2.2).** The
 reach loss splits evenly: the stretched-fold share of the workspace rises 21.3 % -> 24.4 %, part-part 7.5 % -> 10.8 %,
-contact 1.3 % -> 3.6 % from Bench(60,160) to Bench(110,360). The crest J3 puts the stretched fold wall (J1-J3 p95 143
-deg vs the window's upper edge a1 + a2 - 5 = 81.4) through the densest part of the workspace, so which of the 160
+contact 1.3 % -> 3.6 % from Bench(60,160) to Bench(110,360). The crest J3 puts the stretched fold wall (J1-J3 p5-p95 18.1-137.4
+deg on Bench(110,360) vs the window [10.5, 81.4]; kinematic closure 0.75 of the workspace, 0.50 overhead) through the
+densest part of the workspace, so which of the 160
 poses fall on the taken side is a sample artefact the CMA exploits; the 9.85 fast points s9-s10 bought (36.63 ->
 26.78) are worth 7.7 frozen. On the fast bench the crest now beats the zc optimum through the same code (26.78 vs
 30.69) - on the verification bench it does not (40.17 vs 31.04): the pass-1 "dominated" claim stands on the bench
 that counts, not on Bench(60,160).
 
-## Verdict: dead on the kill bar (formal gate open; closing screen)
+## Verdict: VERDICT_HEAD
+
+**Pass 2 (this update):** best fast 26.78 (score 90.26 on Bench(60,160)) with the normal J2 stack - the first crest
+configuration to cross 90 on the fast bench - but frozen exact on Bench(110,360) it reads 40.17 (score 85.39; the
+verifier re-measured the same config independently at 40.17, connected reach 0.589, contact depth to 23.4 mm at
+(0, 165, +15) overhead). 8.1 over the spec's kill bar (32.10), 9.1 behind the zero-complexity optimum (31.04 frozen),
+21.9 behind the lead (18.28). Convergence gate over the whole sweep (score points, evaluation order): GATE_LINE.
+
+Pass 1 (kept for the record):
 
 Convergence gate before the s6 wide restart (n 2160): 0.742 / 0.149 / 0.244 - passed then; after s6 / s7 (n 2526):
 1.204 / 0.462 / 0.422 - not formally passed (above). s4 (257) and s5 (311) found nothing below 37.90; s7 (145) nothing
@@ -250,14 +260,22 @@ the crest box x branch x both stack orders, CMA streams s1-s7); best fast 36.63 
 Limiter (measured): the deltoid-crest J3 seat widens the J1-J3 angle range the J2 dyad must span (p95 143 deg on the big
 bench), so the plain spherical dyad loses the stretched side (90 / 360 workspace, 14 / 28 overhead, 51 / 68 across);
 the only arcs that open the window (a1 >= 44) lift hub 2 to 69-83 mm (0.02-0.07 in band) at O20. The round-4 "crest
-basin" (hub 2 0.82-0.997 at equal arcs) was an O15 / margin-10 artefact. The crest is strictly dominated by the
-zc-frontier optimum below it (wd 85.7): 30.69 vs 37.90 fast through the same code; the zc optimum moved up to wd 95 /
-100 loses 7.7 / 10.3.
+basin" (hub 2 0.82-0.997 at equal arcs) was an O15 / margin-10 artefact. The crest is dominated by the
+zc-frontier optimum below it (wd 85.7) on the bench that counts: 40.17 vs 31.04 frozen exact (pass 2); on the fast
+bench the pass-2 crest best now reads 26.78 vs the zc optimum's 30.69 through the same code (pass 1: 37.90), a
+sample artefact worth 11-14 points at every crest optimum; the zc optimum moved up to wd 95 / 100 loses 7.7 / 10.3.
 
 What this predicts beyond the morphology: for a plain spherical 3R at O20 the J3 seat height is a FOLD lever, not a
 proximity lever - raising J3 toward the acromion widens the J1-J3 range the dyad must cover; any crest-seat design
 needs a second fold window (knuckle, relay, 4th joint). As lens 3's no-knee control (crest-knee-3r): the knee must buy
 > 30 points on the stretched side at these seats to matter.
+
+Pass-2 lessons that predict beyond this morphology: (1) the J2 stack order is a first-order variable at O20 (3.6 /
+2.1 points at fixed geometry, link 1 0.67 -> 0.98 in band): never let a CMA inherit a categorical from the Sobol
+best - probe every stack order x branch at the incumbent before the local search. (2) The fast bench's error is
+seat-dependent: 11-14 points at the crest vs 2.2 at the zc optimum. Where the stretched fold wall cuts the dense part
+of the workspace, Bench(60,160) rewards the CMA for moving the wall between its 160 samples; judge such seats on the
+frozen exact wear, never on the fast number (here the fast score crossed 90 while the frozen one sat at 85.4).
 
 ## Verification (adversarial verifier, 2026-10-18)
 
