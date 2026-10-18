@@ -223,3 +223,32 @@ bench at PHI 35 / delta 3.5 is also read, to price the PHI 35 -> 40 band on the 
 3. **Fallback relation to the under-pass.** If the under-pass row (no bump: in-band chain 0.9012) passes its supports
    and height window, its in-band beats this row's 0.8946 by about 0.6 gap points. This row's levers (PHI 40, thin
    stack, L-lug) carry over to it.
+
+| reading | gate | plain | ib14 chain | reach | contacts | jams |
+|---|---|---|---|---|---|---|
+| envsel PHI 35, delta 3.5 (the lugcoil-lbracket cell with the L-lug) | 15.13 | 14.59 | 0.8946 | 0.7861 | 13 | 0 |
+| envsel PHI 35, delta 5.0 | 15.25 | 14.59 | 0.8934 | 0.7861 | 13 | 0 |
+| claim bench PHI 35, delta 3.5 (diagnostic) | **14.28** | 13.74 | 0.8946 | 0.7944 (286) | 13 (466 on the shell end) | 0 |
+| claim bench PHI 40, delta 3.5 (THE CLAIM) | **14.06** | 13.52 | 0.8946 | 0.8056 (290) | 17 | 0 |
+
+- **Attribution on the claim bench:** the hardware levers alone (thin stack, band 8, bump 1.2, lean, lug coil,
+  L-lug) take 14.76 to 14.28 (-0.48, all of it chain-only in-band 0.8898 -> 0.8946). PHI 35 -> 40 takes 14.28 to
+  14.06 (-0.22): +4 takes and +4 contacts, two of them 14-15 mm deep.
+- **On envsel PHI 40 is worth -0.67** (15.13 -> 14.46): 4 takes and 2 contacts there. The selection bench was more
+  optimistic about the travel than the claim bench.
+- **The PHI 35 cell would not have been the pick under the rule** (15.13 > 14.46). So the completed grid does not
+  change the selection.
+- **The chain-only in-band 0.8946 does not move with PHI or delta** (0.8934-0.8946). The bump window grows with PHI,
+  but the E strap's band at the station is already covered at PHI 35.
+
+## Convergence gate
+
+This is a discrete, pre-registered hardware grid, not a CMA run: each wear takes 2-6 min and the farm is closed.
+
+- **The 9 envsel readings:** 7 selection cells + 2 post-pick PHI 35 cells.
+- **Gain over the 2nd half:** 0.00 score points. **Over the last third:** 0.00.
+- **Top-5 spread:** 0.41 gap = 0.15 score points.
+- **Caveat:** the two 14.17 cells fail the cliff clause, so the legal best is 14.46.
+
+The grid did not include the axis, the station (ds 31), the carriage width or the band. Those levers belong to the
+parent's grid and were inherited.

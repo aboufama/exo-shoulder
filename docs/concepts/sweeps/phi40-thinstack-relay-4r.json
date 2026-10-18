@@ -999,5 +999,219 @@
    "phi0_not_conn": 0,
    "static_gap": 13.01
   }
+ },
+ {
+  "k": 12,
+  "t": "2026-10-18T20:13:41Z",
+  "bench": "envsel (post-pick completion)",
+  "tag": "s0",
+  "params": {
+   "carw": 14.0,
+   "pre": 0.0,
+   "ds": 31.0,
+   "delta": 3.5,
+   "coil": "lug",
+   "coilD": 12.0,
+   "coilL": 10.0,
+   "flange": 1,
+   "lean": 1,
+   "band": 8.0,
+   "bump": 1.2,
+   "tsh": 1.0,
+   "lbr": 1,
+   "PHI": 35.0
+  },
+  "inband14": 0.8946,
+  "inband14_pooled": 0.9177,
+  "inband10": 0.5865,
+  "reach": 0.7861,
+  "follow": 1.0,
+  "contact": 0.032,
+  "gap": 15.13,
+  "plain": 14.59,
+  "near1": 22.45,
+  "near2": 38.64,
+  "ncon": 13,
+  "jams": 0,
+  "ws_taken": 283,
+  "overhead": [
+   5,
+   26
+  ],
+  "arc": [
+   -4.01,
+   44.58
+  ],
+  "ends": {
+   "-6": [
+    0.94,
+    259
+   ],
+   "-4": [
+    0.91,
+    259
+   ],
+   "+36": [
+    4.11,
+    286
+   ],
+   "+38": [
+    4.6,
+    286
+   ],
+   "+40": [
+    4.78,
+    286
+   ],
+   "+42": [
+    5.67,
+    286
+   ]
+  },
+  "conn": null
+ },
+ {
+  "k": 13,
+  "t": "2026-10-18T20:13:41Z",
+  "bench": "envsel (post-pick completion)",
+  "tag": "s1",
+  "params": {
+   "carw": 14.0,
+   "pre": 0.0,
+   "ds": 31.0,
+   "delta": 5.0,
+   "coil": "lug",
+   "coilD": 12.0,
+   "coilL": 10.0,
+   "flange": 1,
+   "lean": 1,
+   "band": 8.0,
+   "bump": 1.2,
+   "tsh": 1.0,
+   "lbr": 1,
+   "PHI": 35.0
+  },
+  "inband14": 0.8934,
+  "inband14_pooled": 0.9163,
+  "inband10": 0.5774,
+  "reach": 0.7861,
+  "follow": 1.0,
+  "contact": 0.032,
+  "gap": 15.25,
+  "plain": 14.59,
+  "near1": 22.45,
+  "near2": 38.64,
+  "ncon": 13,
+  "jams": 0,
+  "ws_taken": 283,
+  "overhead": [
+   5,
+   26
+  ],
+  "arc": [
+   -2.51,
+   46.08
+  ],
+  "ends": {
+   "-4": [
+    0.9,
+    259
+   ],
+   "+36": [
+    4.12,
+    286
+   ],
+   "+38": [
+    4.61,
+    286
+   ],
+   "+40": [
+    4.79,
+    286
+   ],
+   "+42": [
+    5.69,
+    286
+   ],
+   "+44": [
+    6.09,
+    286
+   ]
+  },
+  "conn": null
+ },
+ {
+  "k": 14,
+  "t": "2026-10-18T20:13:41Z",
+  "bench": "Bench(110,360) exact frozen (post-claim diagnostic)",
+  "tag": "s0",
+  "params": {
+   "carw": 14.0,
+   "pre": 0.0,
+   "ds": 31.0,
+   "delta": 3.5,
+   "coil": "lug",
+   "coilD": 12.0,
+   "coilL": 10.0,
+   "flange": 1,
+   "lean": 1,
+   "band": 8.0,
+   "bump": 1.2,
+   "tsh": 1.0,
+   "lbr": 1,
+   "PHI": 35.0
+  },
+  "inband14": 0.8946,
+  "inband14_pooled": 0.9177,
+  "inband10": 0.5865,
+  "reach": 0.7944,
+  "follow": 1.0,
+  "contact": 0.0318,
+  "gap": 14.28,
+  "plain": 13.74,
+  "near1": 17.91,
+  "near2": 37.7,
+  "ncon": 13,
+  "jams": 0,
+  "ws_taken": 286,
+  "overhead": [
+   8,
+   28
+  ],
+  "arc": [
+   -4.01,
+   44.58
+  ],
+  "ends": {
+   "-6": [
+    0.98,
+    139
+   ],
+   "-4": [
+    1.03,
+    139
+   ],
+   "+36": [
+    4.07,
+    201
+   ],
+   "+38": [
+    4.57,
+    201
+   ],
+   "+40": [
+    4.88,
+    201
+   ],
+   "+42": [
+    5.8,
+    201
+   ]
+  },
+  "conn": {
+   "dropped_relayed": 0,
+   "phi0_not_conn": 0,
+   "static_gap": 13.74
+  }
  }
 ]
