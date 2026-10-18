@@ -530,6 +530,14 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
        passes R6.
      - Open drive items from the CAD's red team: the stage-1 ridge reaches 3.8 GPa against 440C's ~3.0 GPa limit, and
        a +0.25 deg K lead with kslot 46.9 needs a verified re-wear.
+   - *Lead, 05:29 UTC 10-18:* the container restarted at ~05:25 and stopped every background workflow. All three were
+     resumed with resumeFromRunId and the same args; completed agents replay from cache:
+     - main loop wf_f06588fd-4d1 (round 15);
+     - jump loop wf_6c42dda0-f91 (round 104; its ideation was cached, and screening started);
+     - the desmo-conecut audit wf_bd60ecda-9e0.
+
+     The session crons were re-created: watchdog 6a968e7b at 7,22,37,52, hourly audit c3bb6ae3 at :41. The agents'
+     uncommitted outputs were saved first (a813bce).
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
