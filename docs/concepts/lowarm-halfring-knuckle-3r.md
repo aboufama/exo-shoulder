@@ -256,3 +256,66 @@ Verdict of this pass (unchanged ranking): cell B stays GAMED (P1). Cell A is the
 exact, a tie with the lead at cx 16.5. It stands only with a dwell hold whose one-sided residual play is <= ~0.29 deg.
 The hard pad (0.638) fails both its own 0.25-deg gate and the metal at pose 203. Round 15 lens B
 (lowarm-adjpad-knuckle-3r, assembly-adjusted rigid pad) inherits this 0.29-deg / 203 gate.
+
+## Verification of cell A (independent skeptic, re-issued, 2026-10-18 ~07:10-07:40 UTC)
+
+The re-issued screen moved the claim from cell B (17.96, ledgered GAMED P1) to **cell A: 18.28**, the pre-registered
+config at cx 16.5. This pass verifies cell A. It ran locally, niced, with at most 2 processes (the farm is closed).
+
+Tools:
+- the existing harness, `docs/concepts/verify/lowarm-halfring-knuckle-3r.py wear bench|held --cell A --flood --dump`
+  (frozen exact, linear IK as claimed);
+- `docs/concepts/verify/lowarm-halfring-knuckle-3r_padcheck.py`, the stop pad's seat and the pad as metal;
+- `docs/concepts/models/lowarm-halfring-knuckle-3r-kplay.py`, the dwell K play worn as metal.
+
+Data:
+- `docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_{bench,held}_frozen.json`
+- `docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_padplay.json`
+
+| check | result |
+|---|---|
+| frozen exact Bench(110,360), as claimed | **18.28 reproduced**: reach 0.7278 (262/360), follow 1.0, ib14 0.9006, ib10 0.5715, contact 0.0106 (4 poses, see below); T5 depth 16.15 mm; why: fold 88, contact 4, parts 0, closure 0, flip 0; overhead 8/28 |
+| the 4 bench contacts | 205 hub 2 -4.28, 237 crank -9.47, 264 hub K -1.17, 316 link 2 -1.23 |
+| per-pose dumps | canonical `docs/alignment/remeasure/lowarm-halfring-knuckle-3r_{bench,held}_perpose.json` now hold cell A (bench recomputes 18.29, held 22.64); the cell-B dumps moved to `lowarm-halfring-knuckle-3r+cellB_*_perpose.json` |
+| V1 own gates | desmo_fail empty; dK_lim 46.0 (slot end), taken max 45.62 |
+| V2 plate vs horn | min 0.15 mm, 0 poses below the running gap |
+| V3 / V4 th margin | min 5.181 (dwell 5.389); with the claim's 0.638 dwell play and 0.23 forced play, min 5.088, 0 dropped |
+| continuity | connected_full 18.28 (0 dropped); kNN 19.97 |
+| near-touch (reported only) | min metal 0.072 mm (pose 139, forced); gap at 1 mm 19.92, at 2 mm 34.84 |
+| held out, frozen exact | **22.64 reproduced**: reach 0.6901 (657/952), ib14 0.8995, contact 0.016 (14 poses, T5 43.85 mm), overhead 18/71; th min 5.11 (5.017 with play, 0 dropped); flood full 22.64, kNN 30.78 |
+| paired vs the lead (conecut-knee) | bench **0.00**: identical takes and contacts, 0 discordant poses; bootstrap P(better) 0.026 (ib14 0.9006 vs 0.9012 at the 0.90 knee) |
+| paired vs the lead, held | **+0.26 worse**: 2 ws poses that only the lead takes; P(better) 0.005. Pooled bench + held: +0.17, P(better) 0.001 |
+| paired vs desmo-conecut, bench | -0.76, in-band only: the half ring's removed metal, confirmed as removal |
+| **stop-pad seat** (padcheck P1) | **The claim's 12.29 mm pad lever is wrong; the true lever is 6.75 mm.** The model counts a crank-arm point as "over link 1b" when it lies within W_LINK/2 + 1 = 5 mm of ANY link-1b sample. Link 1b is sampled across its full 8 mm width, so points up to ~5 mm beside its edge pass. Only 25 of 133 crank samples have link-1b metal on both lateral sides, and the largest lever among them is 6.75 mm. The claim's own formula then gives a pad-lap K of 0.609 (not 0.335) and **dwell K play 0.912 deg** (3.6x the 0.25 gate) |
+| pad block as metal (P2) | 3 x 2 mm block from link 1b's top face to the arm's top. Its footprint is over link 1b, so it adds no skin-facing metal. It clears link 2 (>= 18.46 mm), link 1a (>= 5.37), the crank in forced poses (>= 0.479) and every hub axis (>= 15.0 mm radial): pass |
+| **play worn as metal, true lever** | K = law + 0.912 on every dwell pose, chain re-solved: **18.83**. Pose 203 (plane 0 / elev 90 / axial +45: abduction 90 with 45 deg of external rotation) goes from 0.263 mm to **-0.10 mm, a 5th contact**. Reach 0.725 (261/360), ib14 0.9021, contact 0.0133; 205 -4.82, 264 -0.58. The other side, -0.912, reads 18.35 (ib14 0.8994; 203 at 1.08 mm) |
+| stage-1 layer (the auditor's family finding) | stage 1's groove and pin sit at F+0.11..1.61 over hub 2's face, inside link 1b's J2 lower plate (F+0..3.0). The model does not check this. At the plate-clearing level F+3.9 with pin 9.8 / 150 (the auditor's pick; this pass reproduced their 18.65 as its control): **18.65**. With the true-lever play +0.912 on top: **19.05** |
+
+Champion on the same bench and checks: **75.94** (risley-turret verifier checks; 66.97 via the offset-skin-normal
+verifier).
+
+### Verdict
+
+**VERIFIED at v_gap 18.83** (score 93.15). That is cell A with the claimed hardware, the integral hard pad on link 1b,
+at its true lever, with the worse side of the resulting dwell play worn as metal. Not refuted:
+- the gap is far better than the champion;
+- 3 active DOF;
+- K stays determined within its play, so no free coordinate;
+- 0 passive translations;
+- no gears, pulleys or cables.
+
+Readings:
+- **18.28** reproduces exactly as claimed. On the bench it is a pose-for-pose tie with the lead: the same 262 takes and
+  the same 4 contacts.
+- **It is not a lead and, as built, not a tie.**
+  - Held out it is 0.26 behind the lead (P(better) 0.005).
+  - The claimed hard pad has a 6.75 mm lever, not 12.29. That leaves 0.912 deg of dwell play, and on the open side the
+    play puts pose 203, a common abduction-with-external-rotation pose, 0.10 mm into the skin (18.83).
+  - The family's stage-1 layer clash with link 1b's J2 plate costs a further +0.37 (19.05 with both).
+- **What a dwell hold on this chain must meet:** one-sided play <= ~0.29 deg (the 06:10 red team's pose-203 gate). A
+  hard pad on link 1b cannot meet it, because link 1b's planform gives the pad at most a 6.75 mm lever: 0.03 mm of lap
+  alone is 0.61 deg of K. Round 15 lens B (an assembly-adjusted pad) needs a lever of about 25 mm or more, or a
+  preloaded hold, and must sample the pad wherever it sits.
+- **New knowledge.**
+  - "Over the link" tests must require link metal on both lateral sides, not proximity to any sample.
+  - The 06:10 red team's linear slope held to the true play: pose 203 closes at about 0.40 mm per deg of K.
