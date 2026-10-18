@@ -19,6 +19,10 @@ The decision this table feeds (the user's): accept a 4th joint, or accept a veri
 >   law cap.
 > - **No 4-joint design reaches 95 either** (best verified 16.20, polished 15.40; proxtrack 14.02 unverified).
 > - The scope is 'every family measured': about 40 catalogue concepts were never modelled.
+> - **proxtrack-relay-knuckle-4r is REFUTED as modelled** (verify-claim wf_61d461b8-269, 899cdbd). Its bump puts the
+>   pin-a boss 5.05-5.08 mm inside the knee link riding on it at all 184 fit poses. With the buildable stack priced in
+>   it reads gate 17.46 (score 93.65), held 21.46, so freek-oracle-route dominates it. The best 4-joint number on file
+>   stays freek: verified 16.20, polished 15.40 (94.40), held 20.50.
 
 Machine-readable: `docs/research/take_bound_3dof.json`, built by `docs/research/take_bound_3dof.py` from the cited files
 (the script re-reads every cited JSON value and checks it to +-0.005; markdown-line citations are quoted, not machine

@@ -652,6 +652,10 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      (docs/research/posteromedial_seat.md, pre-registered). The corrected BLOCKER was sent to the user at ~12:50 with
      four options: (1) test the posteromedial seats first, no rule change; (2) a 4th joint; (3) front / clavicle J1
      seats; (4) accept ~93-94 with 3 joints.
+   - *13:05:* proxtrack-relay-knuckle-4r is REFUTED as modelled (899cdbd). The numbers reproduce exactly (14.40 gate /
+     14.02 plain, held 18.51), but the bump puts the pin-a boss ~5 mm inside the knee link at every pose. With the
+     buildable stack it reads 17.46 (93.65), held 21.46: 0.82 / 0.92 better than the 3-joint lead, worse than freek
+     polished, cx 52.5. The user was told (the blocker's option 2 best stays freek 94.1 verified / 94.4 polished).
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
