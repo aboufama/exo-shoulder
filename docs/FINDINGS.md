@@ -3563,3 +3563,36 @@ still in the skin). NEW: the overhead clip frames 7-11 / 234 / 290 are TAKEN at 
 3.5-4.4 mm in the skin at the k33 seats and forward of them - a J1-seat (az 95.4 vs 101.6) property, not a K one; the ER binders
 pull J1 forward, the overhead clip pulls it back. The GH-ray seat proxy's pose classes held (24 vs 27 newly closing; 13 / 2 / 9
 vs 15 / 2 / 10); its gap was 1.1-1.7 optimistic (in-band). docs/concepts/seatoracle-erwall-knuckle-3r.md.
+
+## Take-bound table (round 15 lens A): 95 at 3 DOF is measured out of reach at the back-of-shoulder and acromion-top seats; the lead is 4.53 points short (2026-10-18, docs/research/take_bound_3dof.md)
+
+Analysis from files on disk plus one cheap fill (local, niced, $0). Every cell is cited in the doc and machine-read in
+`docs/research/take_bound_3dof.json` (`take_bound_3dof.py` re-reads every cited JSON value and checks it). No bench,
+judge or kit file changed; nothing was selected on held-out poses.
+
+* **95 = 275 takes at zero contact, 279 at the lead's contact.** At each family's own measured in-band / contact the
+  need is higher: back knuckle 279 (metal) - 292 (oracle), crest 290-295, H1 286, cap knuckle 313, cap plain 3R > 360.
+* **Best takes per legal-seat family (frozen exact Bench(110,360)):** back knuckle 262 metal (lead 18.28), 269-271
+  ghost (16.91 at the knee rule), 272 kinematic at the drive's stroke; free-K oracle (any K law) 277 / 13 contacts /
+  17.69 at a non-buildable 76-deg stroke (lead's seats) and 280 / ~21 contacts / 17.25 (k33 seats); back plain 3R 250
+  kinematic; cap plain 3R 281 kinematic / 267 metal (ib14 0.50, 56.40); cap knuckle 275 kinematic / 247 ghost (32.08) /
+  245 buildable (33.94); crest 3R 291 kinematic with hub 2 in band / 218 metal (34.98); crest pin knee 226 (31.50,
+  verified); H1 237 (27.20, verified); antcrest 212. Unmeasured: the crest-seat knuckle with an ideal K law (no model;
+  nearest evidence 269-271).
+* **The kinematic window is not the limit** (0.99 of the 360 at the best legal seat pair): every "no" is metal against
+  skin at specific seats - the K drive's stroke and the ER binders at the back seat, hub 2's level at the cap pole,
+  J3-window stops at the crest. It is a measured bound, not a proof.
+* **parking_k's 0.775-0.778 reconciled:** it assumed a 75-deg stroke (no measured drive delivers one; the lobe law caps
+  at kK 2.3, long-stroke drives do not park) and the leader's proximity held fixed. The measured oracle at that stroke
+  confirms the takes (277 vs 279-280) and refutes the proximity (9 of 24 new poses 4.6-13.2 mm in the skin): 17.69.
+* **Jam-bias (new):** H1's verified pin-a running gap is 0.091 mm, under the 0.20 stack rule (polish 2 0.063, P5 0.021,
+  GPU F2 0.185; crest 0.25). Worn at the rule (stk 5.90, equal parameters) H1 moves +0.05 fast (23.64 -> 23.69, knee
+  link in-band only): under the 1-point trigger, no re-fit. H1's 27.20 stands; the strap stand-up is not modelled.
+* **4-joint comparison:** freek-oracle-route-knuckle-4r 16.20 verified / 15.40 polished (held 20.50; cx 33.25; contact
+  depth ~2x the lead's 20.24 mm); proxtrack-relay-knuckle-4r 14.02 screened (held 18.01; cx 52.5) UNVERIFIED, pending
+  its independent verification; K-free ideal relay 10.22 with no hardware (real relays 18.01-26.42); ghost J0 275 vs
+  real 22.18. No design of either kind is verified at 95.
+* **Blocker for the user (big update):** accept a 4th joint (best verified 15.40 polished, not yet 95), J1 seats beyond
+  ruling 4 (unmeasured), or the 3-joint ceiling (18.28 today; ~17.2 = score 93.7 if the lead's 4 contacts are cleared).
+* **Next:** the crest-seat knuckle ghost (the one empty cell); the optional front-seat report-only row; the frozen
+  exact H1 stack-rule wear if it did not land; the lead takes the blocker text to the user.
