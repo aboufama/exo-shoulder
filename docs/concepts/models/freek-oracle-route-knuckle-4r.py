@@ -150,12 +150,37 @@ class ODesign(KR.KRDesign):
         ok &= bool(self.k_ok) & bool(self.stops_ok)
         return dict(q=np.stack([q1, q2, q3], 1), ok=ok, R1=R1, R1b=R1 @ RK, R12=R12, R123=R123, t3=t3, s=s, dK=dK, a1e=a1e, m3e=m3e, rel=rel, th=th)
 
+    def j3stop(self, Q, q, ok):
+        """CELL B (opt-in param q3max, deg, the MODEL's own J3 angle: S.sub1 about u3 from vref = unit(u3 x (0.3, 0.5, 0.8))): a dowel
+        stop at q3max on J3's own angle. Where the slaved state's q3 > q3max, K opens along the free self-motion until q3 = q3max
+        (first crossing on [current |dK|, stop B], 0.5-deg scan + linear refine); no crossing -> refused (the arm is stopped)."""
+        q3max = self.p.get("q3max")
+        if q3max is None or not len(Q): return {}
+        q3 = np.degrees(PK.wrap(q[:, 2])); sel = np.nonzero(ok & (q3 > float(q3max)))[0]
+        if not len(sel): return {}
+        dkb = self.dKB(); grid = np.arange(0.0, dkb + 1e-9, 0.5); out = {}
+        for i in sel:
+            d0 = abs(float(np.degrees(self._dK[i]))); g = grid[grid >= d0 - 1e-9]
+            f = self.free_solve(np.repeat(Q[i][None], len(g), 0), g); qq = np.degrees(PK.wrap(f["q"][:, 2]))
+            hit = np.nonzero(f["ok"] & (qq <= float(q3max)))[0]
+            if not len(hit): out[int(i)] = None; continue
+            k = int(hit[0])
+            if k > 0 and f["ok"][k - 1]:
+                a, b = qq[k - 1], qq[k]; t = (a - float(q3max)) / max(a - b, 1e-9); out[int(i)] = float(g[k - 1] + t * (g[k] - g[k - 1]))
+            else: out[int(i)] = float(g[k])
+        return out
+
     def _ik_phys(self, Q):
         q, ok, X1, X2, X3, s = super()._ik_phys(Q)
-        if not ODesign.TAB or not len(Q): return q, ok, X1, X2, X3, s
-        ks = qkeys(Q); idx = np.array([i for i, k in enumerate(ks) if k in ODesign.TAB], int)
-        if not len(idx): return q, ok, X1, X2, X3, s
-        f = self.free_solve(Q[idx], np.array([ODesign.TAB[ks[i]] for i in idx]))
+        tab_ = {}
+        if ODesign.TAB and len(Q):
+            ks = qkeys(Q); tab_ = {i: ODesign.TAB[k] for i, k in enumerate(ks) if k in ODesign.TAB}
+        js = self.j3stop(Q, q, ok); refuse = [i for i, v in js.items() if v is None]
+        tab_.update({i: v for i, v in js.items() if v is not None})
+        if refuse: ok = ok.copy(); ok[refuse] = False
+        if not tab_: return q, ok, X1, X2, X3, s
+        idx = np.array(sorted(tab_), int)
+        f = self.free_solve(Q[idx], np.array([tab_[i] for i in idx]))
         q = q.copy(); ok = ok.copy(); s = s.copy()
         R1m, Z0 = X1; R1m = R1m.copy(); R2m = X2[0].copy(); R3m, t3m = X3[0].copy(), X3[1].copy(); X1b = self._X1b[0].copy()
         q[idx] = f["q"]; ok[idx] = f["ok"]; R1m[idx] = f["R1"]; R2m[idx] = f["R12"]; R3m[idx] = f["R123"]; t3m[idx] = f["t3"]; s[idx] = f["s"]
@@ -357,6 +382,17 @@ def side(P=None):
 if __name__ == "__main__":
     mode = sys.argv[1]; over = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}; outp = sys.argv[3] if len(sys.argv) > 3 else None
     if mode == "side": print(side(over)); sys.exit()
+    if mode == "law":                                        # cell B (q3max) or the kit: fit fast -> frozen on Bench(60,160) fast or Bench(110,360) exact, no oracle
+        P = params(over); P.pop("_seed", None); fitB = RM.PV.fast_bench(60, 160); ex = len(sys.argv) > 4 and sys.argv[4] == "exact"
+        B = CB.Bench(n_clip=110, n_ws=360) if ex else fitB; ODesign.TAB = None
+        Mk, fitr, M1, _ = RM.freeze(fitB, B, dict(P), KModel); rk = Mk.run(); nt = RM.near_touch(Mk, B); tk = RM.taken_list(B)
+        D = Mk.D; D.ik(Mk.Q); js = D.j3stop(Mk.Q, *D.ik(Mk.Q)[:2]) if P.get("q3max") is not None else {}
+        out = dict(id=ID, mode="law", bench=B.mode, over=over, **{k: rk[k] for k in KEYS}, near=nt["gap_near1"], near1_poses=nt["near1_poses"], min_mm=nt["min_mm"],
+                   ws_taken=sum(1 for i in tk if B.kind[i] == "ws"), why={k: int((Mk.why == k).sum()) for k in set(Mk.why.tolist()) if k},
+                   j3stop=dict(engaged=sum(1 for v in js.values() if v is not None), refused=sum(1 for v in js.values() if v is None)),
+                   binders={j: (round(min(float(np.min(B.res[j])), float(Mk.cmin.get(j, 1e9))), 2) if B.res[j] is not None else str(Mk.why[j])) for j in BINDERS if ex})
+        if outp: json.dump(out, open(outp, "w"), indent=1, default=float)
+        print(json.dumps(out, default=float)); sys.exit()
     if mode == "viz":                                        # geometry export for docs/concepts/viz/concepts/<id>.js (SK's exporter on this model's fit)
         def _rep(B, pr):
             ODesign.TAB = None; pp = params(pr); pp.pop("_seed", None); M = KModel(B, pp); r = M.run(); return dict(r), M
