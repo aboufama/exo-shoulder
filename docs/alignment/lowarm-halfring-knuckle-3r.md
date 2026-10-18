@@ -218,6 +218,101 @@ verification are unchanged, so `remeasure lowarm-halfring-knuckle-3r bench|held`
 3. **A pass bar carried into a new round names the level its source number was measured at.** This applies to round
    15 lens B: its 18.28 bar becomes 18.65 at the buildable level.
 
+## Skeptic (2026-10-18, 07:37-07:46 UTC), second audit
+
+The audit's skeptic ran this section. Method:
+- **Raw files.** I re-derived the numbers from the raw files: the sweep rows, the verifier JSONs (cells A and B), the
+  per-part in-band of every wear, the per-pose dumps (bench and held, both rows) and the family's built CAD scorecard.
+- **One measurement of my own.** I ran `docs/concepts/verify/lowarm-halfring-knuckle-3r_padcheck.py` once, unchanged,
+  niced: about 7 s on the fit bench. The output went to the scratchpad only.
+- **Re-weighting at kit density.** I re-weighted the saved `parts_ib14` of the verified wears and of the auditor's F+3.9
+  wears to the kit's sample density. The method is the one from death audit 14dfecc. The ratios come from the lead's
+  cross-row density check, `remeasure/sample_density_*.json` (on disk, not yet committed).
+- **Nothing edited.** No model, bench, judge, row or score was changed.
+
+The rulings are in `docs/alignment/lowarm-halfring-knuckle-3r.rulings.json`. Ledger entry: 2026-10-18T07:44:04Z, run
+`skeptic:lowarm-halfring-knuckle-3r`.
+
+**Final verdict (computed by `tools/alignment_ledger.py skeptic`): GAMED.** M3 and P1 are upheld. 10 reasons are upheld
+and 2 are refuted (S3, T5).
+
+**The claim moved after the audit.** Commit 786b081 (07:40:32Z, the cell-A verifier) changed the row's `v_gap` from 17.96
+to **18.83**: cell A with its stop pad at the true lever. The verifier's verdict reads "NOT a lead and not a tie ... Cell
+B stays GAMED (P1). NO NEW LEAD". This ledger entry still keys the audited claim, 17.96.
+
+| key | ruling | evidence (short; full text in the rulings file) |
+|---|---|---|
+| continuity | upheld (watch) | held: full 22.70, kNN 30.93 (-8.23). Cell A held: kNN 30.78. Documented threshold applied to the rule's flood. |
+| M3 | **upheld (gamed)** | The pin band F+0.111..1.611 at r 9.602 lies inside link 1b's lower member [F, F+3] at O20 r 10, with 0 link-1b samples within 12 mm. The parent's built CAD fails R6 at 1.50 mm on this same layer (VERIFY.md lines 43-44). The row's verifier adopted the finding. The whole cell-B cost at F+3.9 is ring2 (4 samples at 0.859 in band -> 6 at 0.176). My refutation attempt on the rank clause is below. |
+| P1 | **upheld (gamed)** | 794 scan configs on the claim bench: min 17.96, p10 18.07, median 18.42. Now that cell A is verified (held 22.64), the lift scan shows as in-sample: -0.32 on the bench, +0.06 held out. At kit density, held still trails the lead: 22.64 / 23.03 vs 22.38 / 22.63. Still no `leader_ruling`. morphs.json (v119) still lists 17.96 first. |
+| R1 | upheld (watch) | "Self-measured" is resolved: the verifier reproduces 18.28 and held 22.64. The conclusion is confirmed: held paired +0.26 (P(better) 0.005), "not a tie" by the verifier, 18.83 with the true-lever play. |
+| NEW-inherited-stack | upheld (watch) | The model execs `_desmo_build_B` with one line swapped (lines 41-48). Lens B checks no level. The 18.28 bar is also the lead's own number ("cx-at-lead"), but a pass can still be met inside the plate. |
+| T1 | upheld (watch) | Pose 316 at 0.048 mm here, -1.24 on the lead. Near-touch 20.14 / 34.84 / 86.40. Report only. |
+| R3 | upheld (watch) | The spread (p10 18.07, median 18.42) is in no row or dashboard field. |
+| M5 | upheld (watch), **understated** | The true pad lever is 6.75 mm, not 12.29 (I reproduced this). Play is 0.912 deg vs the 0.25 gate; worn as metal, cell A reads 18.83 with pose 203 at -0.102 mm (in the skin). Cell B at that play is not on file. |
+| S3 | **refuted** | The pad is now measured: on link 1b's top face (base 59.1 = link-1b top, top 62.26 = the sampled arm top). All 4 corners are over L1b. Clear of L2 (18.46) and L1a (5.37), with no skin-facing metal. Source: `rows:verification_cellA.pad_true_lever.pad_block_metal`, reproduced by my padcheck run. |
+| S5 | upheld (watch) | Same records as continuity. Cell A: kNN 19.97 bench, 30.78 held. |
+| G4 | upheld (watch) | m_sub at K rest is < 1 deg on 50 of 205 (min 0.0). The "th 0.0 at 283/311/338" clause is not in the verifier file. Its J1-J3 th with play has min 5.088 and 0 drops, so the 0.0 is the sub-dyad, not the documented fold margin. |
+| T5 | **refuted** | The documented threshold is summed depth >= 2x the reference's and >= 5 mm more. Measured: bench 14.92 (3 poses) vs the lead's 20.24 (4); held 43.67 (13) vs 60.97 (14), ratio 0.74 / 0.72. The deepest single press is +0.5 mm at 237 and 683, but 264 is 1.17 vs 5.80 mm and 316 clears. The wearer is pressed less in total. |
+
+### The M3 rank clause at kit density (attempted refutation; does not refute)
+
+Ring2 is sampled at 3.957x the kit's density (`sample_density_lowarm-halfring-knuckle-3r.json:parts.ring2.ratio`). The
+lead logged this as a pending measurement change at 07:32Z, before the audit's 07:34Z entry. I re-weighted the in-band
+from the saved `parts_ib14` (reach, follow and contact unchanged):
+
+| wear | as sampled | flagged parts at kit (ring2, horn, L1a) | all parts at kit |
+|---|---|---|---|
+| cell B verified (glev -1.0) | 17.96 | 17.91 | 18.31 |
+| cell B at F+3.9 (pin 9.8 / 150) | 18.39 | **18.02** | **18.41** |
+| cell A verified | 18.28 | 18.28 | 18.53 |
+| cell A at F+3.9 | 18.65 | 18.28 | 18.63 |
+| lead conecut-knee | 18.28 | 18.28 | 18.42 |
+| held: cell B / cell A / lead | 22.70 / 22.64 / 22.38 | 22.64 / 22.59 / 22.38 | 23.03 / 22.94 / 22.63 |
+
+- **The cost of clearing the plate shrinks at kit density.** It is +0.00..+0.11, against +0.37 / +0.43 as sampled.
+- **The bench rank does not flip at kit density.** Cell B at the buildable level stays ahead of the lead (18.02 vs 18.28)
+  or level with it (18.41 vs 18.42).
+- **Why this does not refute M3.** The density change is pending, not the current measurement. The clash itself
+  (metal inside another part) is a hard-rule fact that no density changes.
+- **Held out, the row trails the lead in every variant.** P1 stands on that, not on M3.
+
+### Missed by the auditor (for the next audit; does not change this verdict)
+
+1. **M5 is understated by 1.4x.** The claim's pad-seat test counts an arm point as over link 1b when it lies within 5
+   mm of any link-1b sample. The true lever is 6.75 mm, which makes the dwell K play 0.912 deg, not 0.638 (gate 0.25).
+   - Worn as metal on cell A: 18.83, 5 contacts, pose 203 at -0.102 mm (`rows:verification_cellA.play_as_metal_true_lever`).
+   - The audit read only the claim's 0.638.
+   - Cell B's 17.96 at this play is not on file. Cell B shares the pad and the dwell pose 203.
+2. **The claim moved under the ledger.** The row's `v_gap` is now 18.83 (786b081, 07:40Z); the ledger still keys 17.96.
+   The dashboard (morphs.json v119, 07:33) still shows 17.96 first among verified rows. The next audit must re-key on
+   18.83 (cell A, true-lever play, plate layer not applied; 19.05 with both, per the verifier).
+3. **The M3 magnitude ignores ring2's 3.96x over-density** (the table above). The event was on file 2 minutes before
+   the audit's entry. This is a hygiene miss in the auditor's comparison, not gaming by the row: the over-density
+   penalises the row at F+3.9.
+4. **The P1 evidence path now holds cell-A data.** 786b081 overwrote
+   `remeasure/lowarm-halfring-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json` with cell A. The cell-B pairing the
+   ledger cites lives only in git (8c2f2a3), so the next audit should cite it by commit.
+5. **The string-params defect persists in a new tool** (instrument note). The padcheck script builds from the verifier's
+   `BEST` (CELL_B defaults: l2_rfull 16.0, l2_len 9.84), not the claimed 14.0 / 9.836, and labels its output "cell A".
+   The pad result does not depend on link 2 (min L2 18.46-18.9 mm), but any link-2 reading from that script is not the
+   claim's.
+
+### Proposal (not applied; it feeds no verdict)
+
+- **S-1.** When the ring2 density measurement change lands, re-judge M3's level on the kit-density numbers.
+  - The clash stays a hard-rule finding, at watch at least, until a buildable stage-1 placement is worn.
+  - The rank consequence vanishes for cell B (18.02 / 18.41 vs 18.28 / 18.42).
+  - Measured effect on the verified rows I re-weighted: this row B 17.96 -> 17.91 / 18.31; A 18.28 -> 18.28 / 18.53;
+    the lead 18.28 -> 18.28 / 18.42 (flagged / all parts at kit).
+  - The other rows' ratios are in the lead's `remeasure/sample_density_*.json`.
+
+Next steps:
+- **The lead:** record a `leader_ruling` on cell B (P1), or let the dashboard pick up the row's new 18.83.
+- **The next audit:** key on 18.83. Wear cell B at the true-lever play (+0.912) and at a buildable stage-1 level at kit
+  density, bench and held.
+
+
 ---
 
 _Below: the first audit's skeptic section (2026-10-18 02:50-03:01 UTC), kept unchanged. Its rulings refer to the first
