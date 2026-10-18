@@ -162,6 +162,10 @@ ledger's latest entry for it is a non-gamed skeptic ruling on the same number (a
   numbers are the rows' `v_gap`; "WARN n sweep rows log their objective gap above the plain formula" is expected (every
   search logs its near-touch / continuity objective; the builder keeps the larger, ~27,450 rows) - only the "below it
   ... by > 0.2" count is agent error, and the lines it prints are the ones to look at.
+- **Design names**: the page names every design from `tools/dash_names.json` ("designs": id -> a 2-5 word plain-English
+  name of the mechanism; "cad": built-CAD id -> name, `{concept-id}` = that concept's name). The build adds " (N joints)"
+  at 4+ active joints and writes the names into the datasets (`morphs.short_name`, `cad` / `reqs` `design_name`). A scored
+  row without an entry is named from its id words and the build log warns "display names: ..." - add its name then.
 - **8 MB per dataset**: the store refuses a bigger file. `dash_build.py` thins `sweeps` to 7.5 MB (`thin_fit`);
   `dash_refresh.sh` flags any dataset over 8 MB - do not publish it, thin it in the builder.
 - **New session, first refresh**: `Artifact read` both URLs (a publish to an artifact this session has not read is

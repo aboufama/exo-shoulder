@@ -176,14 +176,14 @@ window.dash = (() => {
 
   <section class="card" id="simp-sec">
     <h2>Score vs simplicity</h2>
-    <p class="muted">Each dot is a design whose parts have been counted: further right scores higher, lower is simpler. Simplicity points start at 0 for the plainest buildable chain (three hinges, three links) and grow with every extra joint, slider, spring, loop or part. The goal is the bottom-right corner: at a score of 95 or more, the simpler design wins. Simplicity never changes the score.</p>
+    <p class="muted">Each dot is a design whose parts have been counted: further right scores higher, lower is simpler. Points start at 0 for the plainest buildable chain (three hinges, three links) and grow with every extra joint, slider, spring, loop or part; they never change the score. Goal: the bottom-right corner - at a score of 95 or more, the simpler design wins.</p>
     <div class="chart" id="simp" data-source="board" style="min-height:300px"></div>
     <p class="muted" id="simp-note" data-source="board"></p>
   </section>
 
   <section class="card" id="board-sec">
     <h2>Leaderboard: every scored design</h2>
-    <p class="muted">Best score first. Independently verified and self-measured scores rank together; dead ends follow (their number is often a best case without the hardware they would need), then "fast search" scores, which usually drop 5-14 points once checked. 4-joint designs are listed but cannot take the lead. "Checking" = being re-measured; "Flagged" = the auditor found a measurement artefact, not a better exo; "Stopped early" = dropped while its search was still improving. In the names, a knuckle is an extra hinge that folds a link and a "drive" is the cam, rod or groove that turns it from the middle hinge; a cuff knee is two pins at the arm cuff; a relay is a spring-loaded 4th joint. Tap a motion preview to enlarge it; hover a simplicity number for its breakdown.</p>
+    <p class="muted">Best score first: verified and self-measured scores, then dead ends (often a best case without their real hardware), then "fast search" scores, which usually drop 5-14 points once checked. 4-joint designs cannot take the lead. Checking = being re-measured; Flagged = the auditor found a measurement artefact, not a better exo; Stopped early = dropped while still improving. In the names, a knuckle is an extra hinge that folds a link, a "drive" is the cam, rod or groove that turns it from the middle hinge, a cuff knee is two pins at the arm cuff and a relay is a spring-loaded 4th joint. Tap a preview to enlarge it; hover a simplicity number for its breakdown.</p>
     <div class="scroll"><table id="board" data-source="board" data-row-key="id">
       <thead><tr><th class="mo" data-source="motion" data-field="mech">Motion</th><th data-field="short">Design</th><th class="num" data-field="score">Score</th><th class="num cx" data-field="complexity">Simplicity<span class="cap">lower = simpler</span></th><th data-field="close" class="cl">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
       <tbody></tbody>
@@ -192,12 +192,12 @@ window.dash = (() => {
 
   <section class="card" id="progress">
     <h2>Best fast-search score over time</h2>
-    <p class="muted">The best score any configuration has reached in the agents' quick searches (higher is better). Unverified: a checked score is usually 5-14 points lower, so this line is not the leaderboard.</p>
+    <p class="muted">The best score any configuration has reached in the agents' fast searches (higher is better). Unverified: a checked score is usually 5-14 points lower, so this line is not the leaderboard.</p>
     <div class="chart" id="record" data-source="sweeps morphs" style="min-height:260px"></div>
   </section>
 
   <section class="card" id="now">
-    <h2>Latest results</h2>
+    <h2>Latest activity</h2>
     <p class="muted">The seven newest entries in the project log, newest first.</p>
     <ul class="events" id="events" data-source="events"></ul>
   </section>
@@ -214,7 +214,7 @@ window.dash = (() => {
 
   <section class="card" id="all-configs">
     <h2>Every configuration tested</h2>
-    <p class="muted">Each dot is one parameter setting of a design, scored when its agent tested it (higher is better). Coloured: the top eight designs on the leaderboard; grey: the rest; line: the best score so far.</p>
+    <p class="muted">Each dot is one parameter setting of a design, scored when its agent tested it (higher is better). Coloured: the top eight designs on the leaderboard; grey: the rest; hollow: set aside by its agent; line: the best score so far.</p>
     <div class="legend" id="cfg-legend" data-source="sweeps"></div>
     <div class="chart" id="cfg-chart" data-source="sweeps" style="min-height:340px"></div>
   </section>
@@ -253,7 +253,7 @@ const live = (m) => !m.is_baseline && !['dead', 'refuted', 'duplicate'].includes
 const idName = (id) => { const w = String(id || '').split('-').filter((x) => x && !/^[345]r$/.test(x)).join(' ') || String(id || ''); return w.charAt(0).toUpperCase() + w.slice(1); };
 const designName = (m) => { let s = String(m.short_name || '').trim() || idName(m.id); if (m.active_dof > 3 && !/joints\)/.test(s)) s += ` (${m.active_dof} joints)`; return s; };
 /** a label of at most n characters, cut at a word boundary with an ellipsis (never mid-word) */
-const fit = (s, n) => { s = String(s || ''); if (s.length <= n) return s; const c = s.slice(0, n).replace(/[\s,;:+-]+\S*$/, '').replace(/[\s,;:+(-]+$/, ''); return (c || s.slice(0, n)) + '…'; };
+const fit = (s, n) => { s = String(s || ''); if (s.length <= n) return s; const c = s.slice(0, n).replace(/[\s,;:+-]+\S*$/, '').replace(/[\s,;:+(-]+$/, ''); return (c || s.slice(0, n)) + '\u2026'; };
 dash.calc('board', {
   inputs: ['morphs', 'sweeps'], title: 'Scored designs',
   description: 'Every morphology with a measured bench number: the verified number if one exists, else the agent\'s claim, else its best sweep so far; score = 100 x (1 - gap / 275) floored at 0, best first. A dead design whose sweep had not converged (still improving when stopped) is marked Stopped early. complexity = the simplicity number from the design\'s parts count (tools/simplicity.py: points, lower = simpler, 0 = three hinges and three links), shown beside the score and never part of it; complexity_items = where its points come from; passive_trans > 2 = not buildable.',
@@ -546,7 +546,9 @@ function drawEvents(ev, names) {
   const re = ids.length ? new RegExp(`(^|[^A-Za-z0-9_-])(${ids.join('|')})(?![A-Za-z0-9_-])`, 'g') : null;
   ev.filter((e) => e.event).sort((a, b) => (a.time < b.time ? 1 : -1)).slice(0, 7).forEach((e) => {
     const li = document.createElement('li'); const t = document.createElement('time'); t.textContent = d3.utcFormat('%H:%M')(et(e.time));
-    let txt = String(e.event).replace(/\{[^}]*\}/g, '').replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').replace(/ at( config \S+)?$/, '').replace(/ ([,:;.])/g, '$1').trim();
+    let txt = String(e.event).replace(/\{[^}]*\}/g, '');
+    for (let k = 0; k < 4 && /\([^()]*\)/.test(txt); k++) txt = txt.replace(/\([^()]*\)/g, '');   // nested asides too
+    txt = txt.replace(/\s+/g, ' ').replace(/ at( config \S+)?$/, '').replace(/ ([,:;.])(?=\s|$)/g, '$1').trim();
     if (re) txt = txt.replace(re, (all, pre, id) => pre + names.get(id));
     const s = document.createElement('span'); s.textContent = fit(txt, 170); s.title = String(e.event);
     li.append(t, s); ul.appendChild(li);
