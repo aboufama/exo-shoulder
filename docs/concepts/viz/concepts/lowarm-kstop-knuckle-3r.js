@@ -5,8 +5,8 @@
  * stop PAD DELETED, the dwell held by the inner wall (+K, confirmed: drho/dK -0.0606 mm/deg at the dwell exit) and K's OWN
  * stop A inside hub K's O20 (a 1.3 x 1.6 lug on link 1a's lower plate in a 2.1-wide arc groove under link 1b's boss,
  * r 6.45-8.55; the groove's K = 0 end is an M1.6 flat-point set screw on the groove tangent, access bore exiting the O20
- * wall at az -10 about uK; far end = stop B 46.6), a 0.63-deep short-arm pocket in link 1b's J2 lower plate (az 6-47 about
- * u2), and the J2 low-end dowel re-phased to K-eq 46.35 (G.dKlim below). Link 2 is cell A's (no root lift): the lifted
+ * wall at az -10 about uK; far end = stop B 46.6), a short-arm pocket in link 1b's J2 lower plate (floor F+1.0, az 6-47 about
+ * u2; arm tip 1.38 thick), and the J2 low-end dowel re-phased to K-eq 46.35 (G.dKlim below). Link 2 is cell A's (no root lift): the lifted
  * export's points are put back on the fitted level here with the model's own S-bend profile.
  * Numbers (frozen exact Bench(110,360)): docs/concepts/rows/lowarm-kstop-knuckle-3r.json.
  * Chain geometry exported from docs/concepts/models/desmo-conecut-knuckle-3r.py (mode viz). */
@@ -122,7 +122,7 @@
         h1,
         { kind: 'arc', role: 'link', name: 'link 1a (8 x 3 strap, J1 -> K)', pts: (G.L1a.length ? G.L1a : [V.scale(u[0], G.f[0]), V.scale(uK, G.fK)]).map(p => on(F.R1, p)), r: 2.5 },
         hK,
-        { kind: 'arc', role: 'link', name: 'link 1b (8 x 3 strap, K -> J2; J2 lower plate pocketed 0.63 deep where the crank short arm passes, az 6-47 about u2)', pts: G.L1b.map(p => on(F.R1b, p)), r: 2.5 },
+        { kind: 'arc', role: 'link', name: 'link 1b (8 x 3 strap, K -> J2; J2 lower plate pocketed to F+1.0 where the crank short arm (tip 1.38 thick) passes, az 6-47 about u2)', pts: G.L1b.map(p => on(F.R1b, p)), r: 2.5 },
         h2,
         { kind: 'arc', role: 'link', name: 'link 2 (8 x 3 strap, fitted; cell A, no root lift)', pts: G.L2.map(p => on(F.R12, p)), r: 2.5 },
         { kind: 'hub', role: 'passive', name: 'bell crank boss (MR63ZZ pair on a 3 mm 440C pin in link 1b; short arm carries the crowned O1.5 pin at F+3.9 in the HALF-RING groove of link 2 440C ring insert: inner wall over dwell + rise blocks +K in the dwell, outer wall over rise + blend only - stage 1)', c: on(Rc, G.rocker), axis: Wd(M.mulv(Rc, G.rockerAx)), r: 5, h: 6 },

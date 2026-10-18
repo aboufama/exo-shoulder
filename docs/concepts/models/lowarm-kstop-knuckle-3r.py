@@ -112,6 +112,7 @@ def wear(delta, which, dump=None, sets=None):
                verifier={k: res.get(k) for k in ("frozen", "fit_fast", "why", "overhead", "near1", "near2", "minmetal", "n_taken", "contacts",
                                                   "v1_fit_gates", "v3_th_margin", "v4_kplay", "lowarm_fit")},
                s1_geom=T.REC[-1] if T.REC else None, secs=round(time.time() - t, 1),
+               claim_frozen_out=res.get("claim_frozen_out"),
                note="frozen protocol of the claim's model (fit Bench(60,160) fast, shape frozen, worn); stage 1 at F+3.9 via T's glev "
                     "hook; dwell K = law + delta on every dwell pose (PlayDesign, kplay red team, verbatim); J2 dowel cut at 46.35")
     if dump:
@@ -230,6 +231,27 @@ def geom(outp):
     print(json.dumps(out, default=float)[:6000])
 
 
+def gates(outp):
+    """7: RC_MIN as a cut and the bind first-fail at a_s +-0.1 x mu 0.12 / 0.15 / 0.17 (fast fit model, the built read)"""
+    T, V, LM, DS, S, PLAY = _harness()
+    PLAY.update(on=False)
+    os.environ.pop("CB_EXACT", None)
+    B1 = V.CB.Bench(n_clip=60, n_ws=160); rows = []
+    for a_s in (9.7, 9.8, 9.9):
+        for mu in (0.12, 0.15, 0.17):
+            P = params(T, LM, dict(a_s=a_s, mu=mu)); t = time.time()
+            r1, M = LM._report_dc(B1, dict(P))
+            info = getattr(M, "_sc_info", None) or {}; d = info.get("desmo") or {}; st1 = d.get("stage1") or {}; sb = d.get("stage1_built") or {}
+            ib, fo, re_, ct = r1["inband14"], r1["follow"], r1["reach"], r1["contact"]
+            rows.append(dict(a_s=a_s, mu=mu, dK_lim=info.get("dK_lim"), why_lim=info.get("why_lim"), rc_min=st1.get("rc_min"), rc_ok=bool((st1.get("rc_min") or 0) >= 1.0),
+                             pin_first_fail_K=sb.get("pin_first_fail_K"), cap_first_fail_K=sb.get("cap_first_fail_K"),
+                             bind_ok=bool(min([x for x in (sb.get("pin_first_fail_K"), sb.get("cap_first_fail_K")) if x is not None] or [99]) >= 47.35),
+                             pa_pin=st1.get("pa_pin_max"), pa_cap=st1.get("pa_cap_max"), pa_gate=st1.get("pa_gate"), desmo_fail=list(getattr(M, "_desmo_fail", []) or []),
+                             fit_plain=round(100 * (max(0, .9 - ib) + max(0, .95 - fo) + max(0, .9 - re_)) + 100 * ct, 2), reach=re_, secs=round(time.time() - t, 1)))
+            print(json.dumps(rows[-1], default=float), flush=True)
+    json.dump(dict(id=ID, rows=rows, rule="bind first-fail >= 47.35 (dowel 46.35 + 1.0) at a_s +-0.1 and mu 0.17; RC_MIN (rc >= 1.0) is a cut"), open(outp, "w"), indent=1, default=float)
+
+
 if __name__ == "__main__":
     mode = sys.argv[1]
     sets = {}
@@ -246,5 +268,7 @@ if __name__ == "__main__":
                          | {"v": {k: (o["verifier"] or {}).get(k) for k in ("why", "overhead", "near1", "minmetal", "contacts", "v3_th_margin")}}, default=float))
     elif mode == "combine":
         print(json.dumps(combine(sys.argv[2:]), default=float, indent=1))
+    elif mode == "gates":
+        gates(sys.argv[2])
     elif mode == "budget":
         print(json.dumps(budget(), indent=1))

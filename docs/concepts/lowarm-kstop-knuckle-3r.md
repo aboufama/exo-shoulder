@@ -51,12 +51,17 @@ the verified F+3.9 cell A (18.65).
 
 **What the M3 numbers change in the spec.** The short arm's metal inside hub 2's footprint sits at az 9.9-43.1 in the
 h2facet frame, not az 66-95. That puts it **65 deg clear of the facet sector (108-178)**, so the judge's notch-vs-facet
-gate passes in the model's own frame. The arm's sampled sheet dips 0.37 mm over the stroke, so the pocket is sized
-from the arm's thickness:
+gate passes in the model's own frame.
 
-- with the spec's floor F+1.0 (+0.15 running gap), the tip of the short arm may be at most **1.48 mm thick** (top F+3.0
-  at the dwell);
-- with the spec's 1.85 mm arm, the floor goes to F+0.63.
+The arm's sampled sheet is its top face. It sits 0.25 under the ring insert's underside (F+3.15) at the dwell, and the
+pin protrudes from it. The sheet dips 0.37 mm over the stroke because the crank axis is 14.7 deg off u2. So the pocket's
+floor and the arm's tip thickness t trade against each other:
+
+- with the spec's floor at F+1.0 (+0.15 running gap), **t <= 2.53 - 1.15 = 1.38 mm**;
+- with the spec's 1.75-1.85 mm arm, the floor goes to F+0.63..0.53, i.e. the pocket is 2.4-2.5 deep in the 3.0 plate.
+
+A 3-wide x 1.38 Ti tip carrying the stage-1 pin is fine in bending: ~60 MPa at 20 N over a 3 mm cantilever. The build
+spec is t 1.38 at the tip, with floor F+1.0 over az 6-47 and r 8.0-10.
 
 The pocket removes link-1b plate metal on the plate's upper (non-skin) face. It adds no skin-facing metal and no samples.
 
