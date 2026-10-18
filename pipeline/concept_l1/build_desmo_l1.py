@@ -291,7 +291,8 @@ def boss_parts(M, G):
     C0, rL, rb, uK = G["C0"], G["rL"], G["rb"], G["uK"]; cr = unit(C0)
     boss = REF.cyl(C0, cr, -1.5, 1.5, r=rb)
     db = unit(C0 - (C0 @ uK) * uK); wb = unit(np.cross(uK, db)); rK0 = G["rK0"]; lvK = G["lvK"]; rows = []
-    rs = np.r_[np.arange(S.HUB_R - 0.5, rK0, 1.0), rK0]
+    rs = np.r_[np.arange(S.HUB_R + RUNG, rK0, 1.0), rK0]                            # starts RUNG outside hub K's O20: inside it the root (F+1.94..4.94) would cross
+                                                                                    # link 1b's K upper boss (F+3.15..): -0.24 mm on the first build's drive sweep
     for r_ in rs:
         row = []
         for w_ in np.linspace(-(rb - 0.5), rb - 0.5, 5):
@@ -530,9 +531,9 @@ SL.law_check, SL.slaved_decl, SL.law_geom, SL.drive_geom = _law_check, _slaved_d
 def patch_ring(dd):
     """rewrite ONLY the two cap-ring parts of an existing build (exo.glb nodes, parts_full.json, build.json stack.drive.ring) to the current
     ring_parts (the first build cut its +-3 deg sector through the groove's end discs: groove layer in two pieces)"""
-    M, _ = fit(); G = desmo_geom(M); groove, roof, rinfo = ring_parts(M, G)
+    M, _ = fit(); G = desmo_geom(M); groove, roof, rinfo = ring_parts(M, G); _b, root, _n, binfo = boss_parts(M, G)
     sc = trimesh.load(os.path.join(dd, "exo.glb")); PF = json.load(open(os.path.join(dd, "parts_full.json"))); new = {}
-    for key, mesh in (("drive cap-ring groove layer", groove), ("drive cap-ring roof", roof)):
+    for key, mesh in (("drive cap-ring groove layer", groove), ("drive cap-ring roof", roof), ("drive nose boss root", root)):
         old = [g for g in sc.geometry if g.split("|")[1].startswith(key)]; assert len(old) == 1, old
         gp, nm, k = old[0].split("|")[:3]
         nm2 = nm.replace("99.9 deg", f"{rinfo['sector_deg']:.1f} deg") if "groove layer" in key else nm
@@ -540,13 +541,14 @@ def patch_ring(dd):
         sc.delete_geometry(old[0]); nn = f"{gp}|{nm2}|{k}"; sc.add_geometry(mesh, node_name=nn, geom_name=nn); new[key] = nm2
         for p in PF["parts"]:
             if p["name"].startswith(key):
-                mm = mesh.copy(); mm.merge_vertices(); vol = abs(mm.volume); rho_ = BASE.STEEL if "groove" in key else BASE.TI
+                mm = mesh.copy(); mm.merge_vertices(); vol = abs(mm.volume); rho_ = BASE.STEEL if "groove layer" in key else BASE.TI
                 p.update(name=nm2, vol_cm3=round(vol / 1000, 3), mass_g=round(vol / 1000 * rho_, 2), valid=bool(mm.is_watertight and mm.is_volume),
                          pieces=int(len(mm.split(only_watertight=False))), faces=len(mesh.faces))
     sc.export(os.path.join(dd, "exo.glb")); json.dump(PF, open(os.path.join(dd, "parts_full.json"), "w"), indent=1)
-    BJ = json.load(open(os.path.join(dd, "build.json"))); BJ["stack"]["drive"]["ring"] = rinfo
-    BJ["ring_patch"] = dict(note="cap-ring sector widened past the groove's round ends (asin((GW/2 + RW)/rho) + 0.5 deg) by --patch-ring; every other part untouched",
-                            parts=new, valid={p["name"][:40]: (p["valid"], p["pieces"]) for p in PF["parts"] if p["name"].startswith("drive cap-ring")})
+    BJ = json.load(open(os.path.join(dd, "build.json"))); BJ["stack"]["drive"]["ring"] = rinfo; BJ["stack"]["drive"]["boss"] = binfo
+    BJ["ring_patch"] = dict(note="cap-ring sector widened past the groove's round ends (asin((GW/2 + RW)/rho) + 0.5 deg) and the nose-boss root started RUNG outside "
+                                 "hub K's O20 by --patch-ring; every other part untouched",
+                            parts=new, valid={p["name"][:40]: (p["valid"], p["pieces"]) for p in PF["parts"] if p["name"].startswith(("drive cap-ring", "drive nose boss root"))})
     json.dump(BJ, open(os.path.join(dd, "build.json"), "w"), indent=1, default=float)
     print(f"patched ring: {BJ['ring_patch']}", flush=True)
 
