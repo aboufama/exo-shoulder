@@ -538,6 +538,13 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
 
      The session crons were re-created: watchdog 6a968e7b at 7,22,37,52, hourly audit c3bb6ae3 at :41. The agents'
      uncommitted outputs were saved first (a813bce).
+   - *Lead, 06:00 UTC 10-18:* the desmo-conecut audit is final WATCH (8edc253). The 18.98 stands as the model's number,
+     not as a buildable drive. Stage 1 sits inside link 1b's J2 plate for every glev in the search box. Re-worn at the
+     only plate-clearing level with a feasible pin (F+3.9), the bench gives 20.50 (+1.52). No buildable stage-1 placement
+     is on file. The ring2 offset is worth +0.09.
+     - desmo-slipper (18.95) inherits the same layer. Its row is flagged, and the next hourly audit picks it up.
+     - Both row verdicts now say this.
+     - Round 104's desmo-window-knuckle-3r (stage 1 raised into link 2) is the fix attempt.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
