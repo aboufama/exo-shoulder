@@ -1,0 +1,65 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-18T00:22:23Z",
+  "params": {
+   "az1": 61.22,
+   "el1": 63.2,
+   "d3": 100.17,
+   "a3": -4.12,
+   "lo": 28.03,
+   "off": 38.18,
+   "cap": 52.51,
+   "a2": 45.19,
+   "f": 29.64,
+   "bk1": 27.5,
+   "bk2": 30.46,
+   "sK": -1.0,
+   "sigma": -1.0,
+   "margin": 5.23,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 1.0,
+   "cell": "C"
+  },
+  "inband14": 0.0808,
+  "inband10": null,
+  "reach": 0.7688,
+  "follow": 1.0,
+  "contact": 0.0161,
+  "gap": 96.65,
+  "bench": "Bench(60,160) fast fit",
+  "frozen_exact_110_360": {
+   "gap": 98.76,
+   "reach": 0.7472,
+   "follow": 1.0,
+   "inband14": 0.0808,
+   "inband10": 0.0632,
+   "contact": 0.0156
+  },
+  "why": {
+   "fold": 85,
+   "flip": 0,
+   "parts": 0,
+   "contact": 6
+  },
+  "overhead": "14/28",
+  "depth_mm_max": 63.944,
+  "inband_member": {
+   "hub1": 1.0,
+   "hubK": 0.0,
+   "hub2": 0.0385,
+   "hub3": 0.0,
+   "link1a": 0.0,
+   "link1b": 0.0016,
+   "link2": 0.0,
+   "neck": 0.0
+  },
+  "honest_fit": false,
+  "audit": [
+   "link2: sparse sampling (11.43 mm median spacing > 4 mm)",
+   "neck: sparse sampling (10.39 mm median spacing > 4 mm)"
+  ],
+  "mass_g": 1197.4
+ }
+]
