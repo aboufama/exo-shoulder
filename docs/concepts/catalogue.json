@@ -3364,7 +3364,7 @@
   "name": "The lead with J1 slid 5-10 deg forward along the acromion top, K drive and knee re-fit (3 joints)",
   "family": "knuckle / conecut-knee (the lead's coupled-K family)",
   "lens": "round105:B seat lever on the lead's coupled K (pre-staged lens-B follow-on, runs on its own measured step 0)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-18T10:10:19Z",
   "source": "round 105 (J5, track jump) judge (docs/concepts/round105_ideation.md)",
   "description": "conecut-knee-knuckle-3r unchanged in parts (slipper-nose K drive, conecut knee, J3 own-angle dowel, O20 hubs). J1 moves forward on the acromion top by az1 +5..+10 (95.39 -> 100.39..105.39 at el1 67.90, 1.9-3.8 deg on the sphere, inside ruling 4); J2's rest is re-solved so a1 37.55 / a2 57.22 and the th window are unchanged (az1 +10: az2 / el2 51.71 / 42.78). At rest J1 sits 4-8 mm further forward on the acromion. The crank's worst pressure angle drops 34.5 -> 14.3 deg at +10; hub 2 and link 2 ride closer to the skin (hub 2 in band 0.95 -> 0.99, L2 0.735 -> 0.799 on the fit bench); two overhead poses (plane 15-60, elevation 135-165) touch unless the re-fit lifts hub K / crank there.",

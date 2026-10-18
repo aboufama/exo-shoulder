@@ -6,9 +6,9 @@
  "active_dof": 3,
  "passive_dof": 4,
  "passive_translations": 0,
- "status": "screened",
+ "status": "dead",
  "t_ideated": "2026-10-18T10:10:19Z",
- "t_screened": "2026-10-18T10:43:43Z",
+ "t_screened": "2026-10-18T11:16:22Z",
  "reach": 0.775,
  "follow": 1.0,
  "inband14": 0.9068,
@@ -20,28 +20,13 @@
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 52,
+ "n_configs": 339,
  "best_params": {
-  "d_az1": 1.1562,
-  "r_c": 15.567,
-  "g": 2.4439,
-  "kK": 2.1802,
-  "r_lobe": 8.3399,
-  "beta": -175.0947,
-  "lift": 0.6111,
-  "s_arm": 4.1631,
-  "lE": 99.2122,
-  "lc": 24.0138,
-  "phiE": -1.0037,
-  "phib": -90.8168,
-  "J3MIN": -112.4223,
-  "J3MAX": 123.3325,
-  "a1max": 58.7678,
-  "bk2": 38.0336
+  "d_az1": 5.0
  },
- "verdict": "in progress",
- "limiter": "in progress",
- "note": "in progress",
+ "verdict": "DEAD (pre-registered stop + kill). The re-fit returns d_az1 < 2.5: CMA-ES on envh near1 (15 free: d_az1, 9 drive, 4 knee, J3 stop, a1max) from +2 and from +5 both walk J1 back to d_az1 1.16 / 1.45 (best 17.08 / 17.20 near1 on envh). Seat-only +5 frozen exact Bench(110,360) 18.28 = the lead (paired 0.00, CI90 [-1.02,+0.56]); held 22.37 vs 22.38 (paired -0.01, CI90 [-1.10,+0.63]): a tie that loses at the ranking reading (+0.2 mm probe 19.37 vs the lead 18.83; pose 203 at 0.138 mm < the 0.15 kill line; 237 / 264 / 316 deeper). +2: 18.83 (203 into contact). CMA best k109 frozen from its envh fit: 19.66 (> 18.28, kill).",
+ "limiter": "the lead's own walls, untouched by a J1 seat move at fixed a1 / a2: fold 88-89 of the 98 lost Bench(110,360) poses (the th window is the dyad's; moving J1 forward trades a J3-stop pose for a fold pose), the lead's four contacts (205 hub 2, 237 crank, 264 hub K / horn, 316 link 2: dwell / drive metal) deeper at +5, and pose 203 (hub 2 at plane 0 / elev 90 / axial 45) which the forward seat brings from 0.263 to 0.138 mm (+5) or into contact (+2). The slipper drive fails beyond +6 at the verified drive (dK_lim 0, crank PA 44-53 at +7..+12).",
+ "note": "Model docs/concepts/models/acroant-conecut-knuckle-3r.py: the verified lead imported unchanged + d_az1 (J1 az, el1 fixed) with J2 re-solved on the lead's branch so a1 37.552 / a2 57.218 hold exactly (circ_int on the seat rays; +10 -> az2 / el2 51.7141 / 42.775, the spec's numbers). Step 0 on the VERIFIED lead params (Bench(60,160) fast, plain / near1): 0 12.50 / 13.66; +1 12.78; +2..+4 13.12; +5 12.50 / 12.50 (min metal 1.33, crank PA 32.4 -> 23.6); +6 13.04; +7..+12 drive fails. The proposer's step 0 (+10 14.73 / 24.49, contacts 115 / 152) reproduces exactly only on the module-default knee (lE 82 / lc 27 / phiE 3.8 / phib -96.6 / J3MIN -105), not on the verified lead row; on the verified lead 115 / 152 are taken at 2.9 / 4.7 mm. Bench(60,160) fast is FLAT here (every honest config 12.50 = reach 0.775; a 40-config CMA there sat on the floor), so the search ran on envh (60 clip frames + 210 fresh env poses, fast, no held-out pose; tools/freek_env_polish.py's bench rebuilt in the model): seat-only 0 18.54 / 19.47; +1 17.30; +2 17.24; +3 17.76; +4 19.11; +5 19.19 (fitted ib14 FALLS 0.890 -> 0.884 with more ws poses lifting the metal); +6 19.67. CONVERGENCE GATE (score points): start A (from +2, sigma 0.25, 170 configs) gain 2nd half 0.00, last third 0.00, top-5 spread 0.00 = PASS (best 17.08 at d_az1 1.16); start B (from +5, 110 configs) 0.37 / 0.00 / 0.04 = PASS (best 17.20 at d_az1 1.45). Per-pose dumps: docs/alignment/remeasure/acroant-conecut-knuckle-3r+{d5,d2,cmabest}_*_perpose.json. 3 active, 0 passive translations, complexity 18.5 (the lead's record; the seat move adds no part). Local only (farm closed), <= 2 niced processes.",
  "doc": "docs/concepts/acroant-conecut-knuckle-3r.md",
  "complexity": 18.5,
  "mechanism": {
@@ -72,6 +57,139 @@
    "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
    "closed_loops": 1,
    "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  }
+ },
+ "gap_near1": 12.5,
+ "gap_near2": 19.97,
+ "frozen": {
+  "bench_exact": {
+   "gap": 18.28,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9077,
+   "inband10": 0.5734,
+   "contact": 0.0106,
+   "ws_taken": 262,
+   "contacts": [
+    [
+     205,
+     -2.96
+    ],
+    [
+     237,
+     -10.47
+    ],
+    [
+     264,
+     -6.54
+    ],
+    [
+     316,
+     -1.6
+    ]
+   ],
+   "near1": 19.92,
+   "near2": 35.39,
+   "probe0.1": 18.83,
+   "probe0.2": 19.37,
+   "pose203_mm": 0.138,
+   "shell_1_2_poses": 31,
+   "why": {
+    "fold": 89,
+    "j3stop": 5,
+    "contact": 4
+   },
+   "j3_stop_margin_deg": 0.84,
+   "crank_pa": 23.6,
+   "horn_pa": 36.4,
+   "dK_lim": 49.2
+  },
+  "held": {
+   "gap": 22.37,
+   "reach": 0.6912,
+   "inband14": 0.9065,
+   "contact": 0.0149,
+   "ws_taken": 658,
+   "contacts": 13,
+   "near1": 25.44,
+   "probe0.2": 22.37,
+   "j3_stop_margin_deg": 0.74
+  },
+  "paired_vs_lead": {
+   "bench": [
+    0.0,
+    [
+     -1.02,
+     0.56
+    ],
+    0.564
+   ],
+   "held": [
+    -0.01,
+    [
+     -1.1,
+     0.63
+    ],
+    0.647
+   ],
+   "pooled": [
+    -0.0,
+    [
+     -0.88,
+     0.46
+    ],
+    0.65
+   ],
+   "file": "docs/alignment/remeasure/acroant-conecut-knuckle-3r+d5_vs_conecut-knee-knuckle-3r_paired.json"
+  },
+  "lead_same_reading": {
+   "bench": 18.28,
+   "probe0.1": 18.83,
+   "probe0.2": 18.83,
+   "near1": 19.92,
+   "near2": 34.84,
+   "pose203_mm": 0.263,
+   "held": 22.38,
+   "held_near1": 25.23
+  },
+  "d2_bench_exact": {
+   "gap": 18.83,
+   "ws_taken": 261,
+   "contacts": 5,
+   "probe0.2": 19.37,
+   "note": "203 flips to contact -0.137"
+  },
+  "cma_best_k109": {
+   "params": {
+    "d_az1": 1.1562,
+    "r_c": 15.567,
+    "g": 2.4439,
+    "kK": 2.1802,
+    "r_lobe": 8.3399,
+    "beta": -175.0947,
+    "lift": 0.6111,
+    "s_arm": 4.1631,
+    "lE": 99.2122,
+    "lc": 24.0138,
+    "phiE": -1.0037,
+    "phib": -90.8168,
+    "J3MIN": -112.4223,
+    "J3MAX": 123.3325,
+    "a1max": 58.7678,
+    "bk2": 38.0336
+   },
+   "envh_fit_near1": 17.08,
+   "bench_exact_envh_fit": {
+    "gap": 19.66,
+    "ws_taken": 259,
+    "contacts": 6,
+    "near1": 20.2,
+    "near2": 28.87
+   },
+   "bench_exact_b60_fit": {
+    "gap": 86.67,
+    "why": "the slipper drive synthesis fails on the Bench(60,160) fit (dK_lim 0): a drive cliff"
+   }
   }
  }
 }
