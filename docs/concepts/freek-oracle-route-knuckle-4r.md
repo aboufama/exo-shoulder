@@ -236,3 +236,76 @@ link 2's height profile refitted for the ER binders, measured by the same oracle
   `CB_EXACT=1 CB_FOLD_MARGIN=5.5 OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/freek-oracle-route-knuckle-4r.py wear '{}' OUT.json`
   (wear3_r0 was composed from the v2a run's saved sample records with the corrected rule: `FO_PRE=<v2a OUT.json>`).
 * Fast sweep: `... freek-oracle-route-knuckle-4r.py sweep '[{"rA": 8, "rsp": 25, "rsr": 48}, {"seed": "stopb80"}]'`.
+
+## Verification (skeptic, 2026-10-18 ~07:45 UTC)
+
+**Result: not refuted. The numbers reproduce exactly. The row stays "screened"**, because the alignment ledger marks it
+GAMED (P1, `docs/alignment/freek-oracle-route-knuckle-4r.md`), and CLAUDE.md says a gamed design cannot be called verified
+until that finding is resolved. It is 4 DOF, so under the user's 2026-10-17 ruling it is not a leader in any case.
+Champion on Bench(110,360) exact: 75.94 (risley-turret checks). This row's harness is the stricter k33 kit harness. The bar
+that matters is the 3-DOF lead's 18.28 (held 22.38). Harness: `docs/concepts/verify/freek-oracle-route-knuckle-4r-verify.py`.
+Outputs: `docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_*.json` and the per-pose dumps
+`docs/alignment/remeasure/freek-oracle-route-knuckle-4r_{bench,held}_perpose.json`, which recompute to 16.21 / 21.89.
+
+| reading (cell B, q3max 86, frozen exact) | bench gap | held gap (1154) | ws taken bench / held |
+|---|---|---|---|
+| reproduced, static (the model's own code, unchanged) | 16.20 | 21.89 | 280 / 700 |
+| reproduced, connected as claimed (claim's flood) | 17.35 | 22.67 | 276 / 693 |
+| **one fold reading = the model's (flood re-run with the state-2 rule)** | **16.20** | **21.89** | 280 / 700 (0 dropped) |
+| one fold reading = the family's, applied to clips too (auditor T3, not re-run) | 20.68 | 24.56 | - |
+| lead conecut-knee-knuckle-3r | 18.28 | 22.38 | 262 / 659 |
+
+Checks:
+
+1. **DOF.** 4 counted joints: J1, K (sensed, with a clock spring to stop A), J2 and J3. That is inside the 4-DOF cap, with 0
+   passive translations. The two knee pins carry no encoders and are outside the count. K is never left undetermined:
+   - state A: K sits on stop A;
+   - state 1: J2 is on its own-angle stop and K takes its smallest opening;
+   - state 2: J3 is on its dowel, and with J3 locked the J1-K-J2 wrist is a 3R, so K is fixed. The spring presses J3 into
+     the dowel because dq3/ddK < 0 at every crossing.
+
+   **No hard rule is broken.** The design still loses the ranking to the 3-joint lead under the user's 2026-10-17 ruling.
+2. **J3 stop reading (new check).** The model reads the stop on q3 = the angle of the cuff relative to link 2. J3's own angle
+   (link 2 -> member 3) is q3' = q3 + phi.
+   - The knee drift s = R3^T (c3 - R3 c3) depends on q3 alone, so phi is a function of q3. At all 32 bench / 61 held
+     stop-engaged poses, phi = 10.87 deg exactly.
+   - So the stop IS a dowel on J3's own angle, at **q3' = 96.87 deg**. The CAD groove must be cut there, not at 86.
+   - A dowel at q3' 86 is a different, worse design: fast 11.22 plain / 12.36 near, against 9.56.
+   - Fit-bench sweep of a q3'-reading stop (74 / 80 / 86 / 92 / 98 / 104): 20.62 / 20.97 / 12.36 / 10.75 / 9.59 / 10.84
+     near-touch. 98 reproduces the claim's 9.56, which confirms the mapping (`verify_q3own_stop_fit60.json`).
+3. **Fold margin read two ways (the auditor's T3, ruled here).** The model scores state 2 on the effective dyad's th
+   margin: min 9.60 bench / 8.62 held. The claim's flood applies the family margin min(m_sub, m_eff) to every forced state,
+   where m_sub is the J1-K-J3 sub-chain with J2 rigid (state 1's moving chain).
+   - Under that reading, 8 taken bench poses sit below 5.5, all in state 2: the 4 ws poses 291 / 315 / 317 / 344 (which the
+     flood drops) and the 4 clip frames 12 / 47 / 49 / 52 (0.76-4.28, still scored as taken). Held out the count is 13.
+   - In state 2, J2 is free, and the chain that moves is the J1-K-J2 wrist. It is **>= 35.99 deg from coplanar** on the
+     bench (37.56 held). For comparison, the state-A J1-J2-J3 chain gets as close as 23.1 deg.
+   - So the J1-K-J3 margin is not a singularity of the state-2 mechanism. Ruling: the model's reading.
+   - Re-running the flood with that one reading connects all 1136 nodes: 0 islands, 0 rule refusals, 0 jump refusals with
+     dK included, 0 branch refusals. Connected = static = **16.20 bench / 21.89 held**. The claim's 17.35 / 22.67 mixed the
+     two readings.
+   - If the lead prefers the family reading, the consistent numbers are the auditor's 20.68 / 24.56, behind the lead.
+   - Files: `verify_margins_{bench,held}.json`, `verify_onereading_{bench,held}.json`.
+4. **Parts, sampling, pose-taking.** Cell B adds no skin-facing metal: the dowel and its groove sit inside J3's O20 stack. So
+   the verified k33 kit harness applies unchanged:
+   - metal and sampling: O20 hubs incl. crowns, links at their real section, member 3 and the knee, contact rings;
+   - pose rules: closure < 0.5 deg, knee window, slide residual, part pairs, fit-clip continuity incl. dK.
+
+   The oracle table is off in law mode (`ODesign.TAB = None`). q3max was picked on the fit bench (rows k 61-68), not on the
+   claim bench. The binder-informed range is the auditor's P1.
+5. **Paired vs the lead (static dumps, `verify_paired_vs_lead_static.json`).** Neither difference is significant: the gains
+   are coin flips.
+
+   | wear | cell B minus lead | CI90 | P(better) |
+   |---|---|---|---|
+   | bench | -2.08 | [-4.99, 2.98] | 0.745 |
+   | held out | -0.49 | [-2.70, 2.13] | 0.62 |
+
+   Cell B buys reach (+24 / +63 ws takes only it gets) and pays in contact: 13 / 37 contact poses only it has, against 2 / 4
+   only the lead has.
+
+Open (not run here):
+- the J3 dowel force and the K-spring hold (R17 lag, preload);
+- cuff twist with the stop engaged;
+- the auditor's NEW-stop-refusal pricing: 343 / 423 are refused at the dowel, worth 0.48;
+- convergence: a 1-D, 8-point q3max sweep, with the farm closed.
