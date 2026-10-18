@@ -1,0 +1,1232 @@
+{
+ "design": "user_conecut_knee",
+ "source": "pipeline/full-exo/designs/user_conecut_knee/exo.glb + parts_full.json",
+ "parts": [
+  {
+   "file": "000.png",
+   "title": "J1 bearing 1 MR117-2RS 7x11x3",
+   "desc": "J1 bearing 1 MR117-2RS 7x11x3",
+   "descs": [
+    "J1 bearing 1 MR117-2RS 7x11x3",
+    "J1 bearing 2 MR117-2RS 7x11x3",
+    "J2 bearing 1 MR117-2RS 7x11x3",
+    "J2 bearing 2 MR117-2RS 7x11x3",
+    "J3 bearing 1 MR117-2RS 7x11x3",
+    "J3 bearing 2 MR117-2RS 7x11x3",
+    "K bearing 1 MR117-2RS 7x11x3",
+    "K bearing 2 MR117-2RS 7x11x3"
+   ],
+   "qty": 8,
+   "ks": [
+    20,
+    19,
+    14,
+    13,
+    7,
+    6,
+    1,
+    0
+   ],
+   "bodies": [
+    "base (on the scapula handler)",
+    "link 1b",
+    "link 2"
+   ],
+   "material": "bearing steel",
+   "mass_g": 1.32,
+   "size_mm": [
+    10.99,
+    10.99,
+    3.0
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "001.png",
+   "title": "J1 outer spacer 17-4PH",
+   "desc": "J1 outer spacer 17-4PH",
+   "descs": [
+    "J1 outer spacer 17-4PH",
+    "J2 outer spacer 17-4PH",
+    "J3 outer spacer 17-4PH",
+    "K outer spacer 17-4PH"
+   ],
+   "qty": 4,
+   "ks": [
+    21,
+    15,
+    8,
+    2
+   ],
+   "bodies": [
+    "base (on the scapula handler)",
+    "link 1b",
+    "link 2"
+   ],
+   "material": "17-4PH",
+   "mass_g": 0.09,
+   "size_mm": [
+    10.99,
+    10.99,
+    0.6
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "002.png",
+   "title": "J1 inner spacer",
+   "desc": "J1 inner spacer (ground, preload)",
+   "descs": [
+    "J1 inner spacer (ground, preload)",
+    "J2 inner spacer (ground, preload)",
+    "J3 inner spacer (ground, preload)",
+    "K inner spacer (ground, preload)"
+   ],
+   "qty": 4,
+   "ks": [
+    22,
+    16,
+    9,
+    3
+   ],
+   "bodies": [
+    "link 1a",
+    "link 1b",
+    "member 3"
+   ],
+   "material": "stainless (polished)",
+   "mass_g": 0.07,
+   "size_mm": [
+    8.19,
+    8.19,
+    0.6
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "003.png",
+   "title": "J1 ring nut M7x0.5",
+   "desc": "J1 ring nut M7x0.5 (Ti-6Al-4V)",
+   "descs": [
+    "J1 ring nut M7x0.5 (Ti-6Al-4V)",
+    "J2 ring nut M7x0.5 (Ti-6Al-4V)",
+    "J3 ring nut M7x0.5 (Ti-6Al-4V)",
+    "K ring nut M7x0.5 (Ti-6Al-4V)"
+   ],
+   "qty": 4,
+   "ks": [
+    23,
+    17,
+    10,
+    4
+   ],
+   "bodies": [
+    "link 1a",
+    "link 1b",
+    "member 3"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.08,
+   "size_mm": [
+    8.59,
+    8.59,
+    0.9
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "004.png",
+   "title": "J1 cap O20",
+   "desc": "J1 cap O20, torispherical dome R63.6 / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)",
+   "descs": [
+    "J1 cap O20, torispherical dome R63.6 / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)",
+    "J3 cap O20, torispherical dome R63.6 / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)"
+   ],
+   "qty": 2,
+   "ks": [
+    24,
+    5
+   ],
+   "bodies": [
+    "base (on the scapula handler)",
+    "link 2"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 2.12,
+   "size_mm": [
+    19.99,
+    19.99,
+    3.45
+   ],
+   "faces": 4486,
+   "user_part": false
+  },
+  {
+   "file": "005.png",
+   "title": "K clock-spring cap O20 x crown F+18.25",
+   "desc": "K clock-spring cap O20 x crown F+18.25 (6 mm taller), FLAT crown, no sensor pocket (K is slaved, never read): spring chamber O16 x 5.2, outer-hook slot, threaded M18x0.5, pinned to link 1b's ring at the spring's preload index (Ti-6Al-4V)",
+   "descs": [
+    "K clock-spring cap O20 x crown F+18.25 (6 mm taller), FLAT crown, no sensor pocket (K is slaved, never read): spring chamber O16 x 5.2, outer-hook slot, threaded M18x0.5, pinned to link 1b's ring at the spring's preload index (Ti-6Al-4V)"
+   ],
+   "qty": 1,
+   "ks": [
+    11
+   ],
+   "bodies": [
+    "link 1b"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 6.53,
+   "size_mm": [
+    19.99,
+    19.99,
+    9.45
+   ],
+   "faces": 4876,
+   "user_part": false
+  },
+  {
+   "file": "006.png",
+   "title": "K clock spring",
+   "desc": "K clock spring: 0.3 x 5 mm 1.4310 +C1900 strip, 145.6 mm, 9 half-turns R2.75..R7.55, outer hook in the cap slot, inner end in the arbor slit; 0.015 N.m/rad, 0.08 N.m preload on stop A = the closing spring of both rolling pairs (the nose on the flank, the follower on the lobe) (polished spring steel)",
+   "descs": [
+    "K clock spring: 0.3 x 5 mm 1.4310 +C1900 strip, 145.6 mm, 9 half-turns R2.75..R7.55, outer hook in the cap slot, inner end in the arbor slit; 0.015 N.m/rad, 0.08 N.m preload on stop A = the closing spring of both rolling pairs (the nose on the flank, the follower on the lobe) (polished spring steel)"
+   ],
+   "qty": 1,
+   "ks": [
+    12
+   ],
+   "bodies": [
+    "link 1b"
+   ],
+   "material": "1.4310 spring steel (polished)",
+   "mass_g": 1.73,
+   "size_mm": [
+    15.23,
+    14.38,
+    5.0
+   ],
+   "faces": 70572,
+   "user_part": false
+  },
+  {
+   "file": "007.png",
+   "title": "J2 cap O20 x crown F+12.25",
+   "desc": "J2 cap O20 x crown F+12.25, flat crown, R0.5 corner (the lobe ring's seat), threaded M18x0.5 (Ti-6Al-4V)",
+   "descs": [
+    "J2 cap O20 x crown F+12.25, flat crown, R0.5 corner (the lobe ring's seat), threaded M18x0.5 (Ti-6Al-4V)"
+   ],
+   "qty": 1,
+   "ks": [
+    18
+   ],
+   "bodies": [
+    "link 2"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 2.73,
+   "size_mm": [
+    19.99,
+    19.99,
+    3.45
+   ],
+   "faces": 4532,
+   "user_part": false
+  },
+  {
+   "file": "008.png",
+   "title": "D8-02a link 1a",
+   "desc": "D8-02a link 1a: 8x3 bar on ONE line/arc chain in span(u1, uK) (J1 seat at the J1 skirt + 0.15, 60-deg ramp, R2 centre-line bends: 5-axis machined from solid, tighter than the 15 mm bent-bar rule), J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, no magnet: K is slaved); K's two opposed 62.8-deg stop slots in the K pad; the flank lug (the r 1.25 conjugate flank: 4 tangent arcs; 4-axis UV wire-EDM ruled surface, a-C:H DLC) + its web (Ti-6Al-4V)",
+   "descs": [
+    "D8-02a link 1a: 8x3 bar on ONE line/arc chain in span(u1, uK) (J1 seat at the J1 skirt + 0.15, 60-deg ramp, R2 centre-line bends: 5-axis machined from solid, tighter than the 15 mm bent-bar rule), J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, no magnet: K is slaved); K's two opposed 62.8-deg stop slots in the K pad; the flank lug (the r 1.25 conjugate flank: 4 tangent arcs; 4-axis UV wire-EDM ruled surface, a-C:H DLC) + its web (Ti-6Al-4V)"
+   ],
+   "qty": 1,
+   "ks": [
+    25
+   ],
+   "bodies": [
+    "link 1a"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 12.54,
+   "size_mm": [
+    51.39,
+    27.11,
+    19.41
+   ],
+   "faces": 28006,
+   "user_part": false
+  },
+  {
+   "file": "009.png",
+   "title": "D8-02b link 1b",
+   "desc": "D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 118.0-deg q2 stop slot; carries the crank pivot pin in an O3 H7 bore on an O5 land spot-faced at the boss underside - 0.175 (D3) (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)",
+   "descs": [
+    "D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad + integral O7 pin with the 118.0-deg q2 stop slot; carries the crank pivot pin in an O3 H7 bore on an O5 land spot-faced at the boss underside - 0.175 (D3) (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)"
+   ],
+   "qty": 1,
+   "ks": [
+    26
+   ],
+   "bodies": [
+    "link 1b"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 13.91,
+   "size_mm": [
+    60.75,
+    20.0,
+    15.38
+   ],
+   "faces": 40804,
+   "user_part": false
+  },
+  {
+   "file": "010.png",
+   "title": "K stop dowel 1 of 2",
+   "desc": "K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished",
+   "descs": [
+    "K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished",
+    "K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -62.85), pressed 3 mm in the K upper boss, polished"
+   ],
+   "qty": 2,
+   "ks": [
+    28,
+    27
+   ],
+   "bodies": [
+    "link 1b"
+   ],
+   "material": "hardened steel (polished)",
+   "mass_g": 0.31,
+   "size_mm": [
+    5.65,
+    3.0,
+    3.0
+   ],
+   "faces": 836,
+   "user_part": false
+  },
+  {
+   "file": "011.png",
+   "title": "J2 stop dowel",
+   "desc": "J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -15.94 / 102.07 deg: stop B = the drive's range dK 46.25), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)",
+   "descs": [
+    "J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -15.94 / 102.07 deg: stop B = the drive's range dK 46.25), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)"
+   ],
+   "qty": 1,
+   "ks": [
+    29
+   ],
+   "bodies": [
+    "link 2"
+   ],
+   "material": "bearing steel",
+   "mass_g": 0.31,
+   "size_mm": [
+    5.65,
+    3.0,
+    3.0
+   ],
+   "faces": 836,
+   "user_part": false
+  },
+  {
+   "file": "012.png",
+   "title": "D8-03 link 2",
+   "desc": "D8-03 link 2 (5-axis / 3+2 machined from solid Ti-6Al-4V, drop 68.0 deg at J2 (<= 70: CAD ruling 2, tighter transition on a part machined from solid)): 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, the J3 stop's 2.10 x 1.00 arc groove (r 7.5, 250.0 deg, R1.05 ends) under the J3 pad / ring, flies over the knee and the pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)",
+   "descs": [
+    "D8-03 link 2 (5-axis / 3+2 machined from solid Ti-6Al-4V, drop 68.0 deg at J2 (<= 70: CAD ruling 2, tighter transition on a part machined from solid)): 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, the J3 stop's 2.10 x 1.00 arc groove (r 7.5, 250.0 deg, R1.05 ends) under the J3 pad / ring, flies over the knee and the pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)"
+   ],
+   "qty": 1,
+   "ks": [
+    30
+   ],
+   "bodies": [
+    "link 2"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 19.66,
+   "size_mm": [
+    104.03,
+    20.3,
+    16.38
+   ],
+   "faces": 57815,
+   "user_part": false
+  },
+  {
+   "file": "013.png",
+   "title": "D9-02 drive lobe ring",
+   "desc": "D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper 14.7 deg along the follower axis), profile r 10.65 -> 12.62 mm (6 3-point arcs), dwell r 10.20, bore O20 on the J2 cap skirt, band F+6.98..F+10.01, keyed by an O1 dowel at the onset phase + 0.35 deg of q2 (the +0.75 deg K lead, +0.15 / -0.10 deg K RSS; the CAD draws the nominal phase = the loaded state)",
+   "descs": [
+    "D9-02 drive lobe ring: 17-4PH H900, wire-EDM (taper 14.7 deg along the follower axis), profile r 10.65 -> 12.62 mm (6 3-point arcs), dwell r 10.20, bore O20 on the J2 cap skirt, band F+6.98..F+10.01, keyed by an O1 dowel at the onset phase + 0.35 deg of q2 (the +0.75 deg K lead, +0.15 / -0.10 deg K RSS; the CAD draws the nominal phase = the loaded state)"
+   ],
+   "qty": 1,
+   "ks": [
+    31
+   ],
+   "bodies": [
+    "link 2"
+   ],
+   "material": "17-4PH",
+   "mass_g": 0.73,
+   "size_mm": [
+    21.52,
+    21.05,
+    3.03
+   ],
+   "faces": 768,
+   "user_part": false
+  },
+  {
+   "file": "014.png",
+   "title": "D9-01 drive bell crank",
+   "desc": "D9-01 drive bell crank (Ti-6Al-4V, 5-axis machined from solid): STRADDLE boss O10 x 10 (683ZZ seats O7 x 3 at both ends), clevis lug to the follower pin at a_s 6.5 / psi 216 with the follower pocket O7 x 3 between the bearings, bent arm 6 x 3 (straight run through the model arm stations (side-view line/arc profile) + the arc about hub K at r_c 15.37, a revolve, 124.5 deg), O6 tip boss reamed O2.495-2.500 for the nose; all bores one setup +-5 um",
+   "descs": [
+    "D9-01 drive bell crank (Ti-6Al-4V, 5-axis machined from solid): STRADDLE boss O10 x 10 (683ZZ seats O7 x 3 at both ends), clevis lug to the follower pin at a_s 6.5 / psi 216 with the follower pocket O7 x 3 between the bearings, bent arm 6 x 3 (straight run through the model arm stations (side-view line/arc profile) + the arc about hub K at r_c 15.37, a revolve, 124.5 deg), O6 tip boss reamed O2.495-2.500 for the nose; all bores one setup +-5 um"
+   ],
+   "qty": 1,
+   "ks": [
+    32
+   ],
+   "bodies": [
+    "knuckle drive"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 7.37,
+   "size_mm": [
+    57.27,
+    22.23,
+    15.0
+   ],
+   "faces": 4344,
+   "user_part": false
+  },
+  {
+   "file": "015.png",
+   "title": "drive crank bearing 1 683ZZ 3x7x3",
+   "desc": "drive crank bearing 1 683ZZ 3x7x3 (polished)",
+   "descs": [
+    "drive crank bearing 1 683ZZ 3x7x3 (polished)",
+    "drive crank bearing 2 683ZZ 3x7x3, preloaded 5-10 N by the wave washer through the inner-ring shim (polished)"
+   ],
+   "qty": 2,
+   "ks": [
+    34,
+    33
+   ],
+   "bodies": [
+    "knuckle drive"
+   ],
+   "material": "bearing steel",
+   "mass_g": 0.73,
+   "size_mm": [
+    7.0,
+    7.0,
+    3.0
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "016.png",
+   "title": "drive lobe follower roller MR63ZZ 3x6x2.5 at a_s 6.5 mm",
+   "desc": "drive lobe follower roller MR63ZZ 3x6x2.5 at a_s 6.5 mm, psi 216 deg, between the crank bearings (polished)",
+   "descs": [
+    "drive lobe follower roller MR63ZZ 3x6x2.5 at a_s 6.5 mm, psi 216 deg, between the crank bearings (polished)",
+    "knee pin a bearing 1 MR63ZZ: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+    "knee pin a bearing 2 MR63ZZ: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+    "knee pin b bearing 1 MR63ZZ: knee bearing 1 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)",
+    "knee pin b bearing 2 MR63ZZ: knee bearing 2 of 2 MR63ZZ 3x6x2.5 (J6 housing, the pin's free length j5) (polished)"
+   ],
+   "qty": 5,
+   "ks": [
+    58,
+    57,
+    49,
+    48,
+    35
+   ],
+   "bodies": [
+    "knee link",
+    "knuckle drive"
+   ],
+   "material": "bearing steel",
+   "mass_g": 0.41,
+   "size_mm": [
+    6.0,
+    6.0,
+    2.5
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "017.png",
+   "title": "drive follower inner-ring shim 1 O3.1 x O4.5 x 0.2",
+   "desc": "drive follower inner-ring shim 1 O3.1 x O4.5 x 0.2 (stainless, polished)",
+   "descs": [
+    "drive follower inner-ring shim 1 O3.1 x O4.5 x 0.2 (stainless, polished)",
+    "drive follower inner-ring shim 2 O3.1 x O4.5 x 0.2 (stainless, polished)"
+   ],
+   "qty": 2,
+   "ks": [
+    37,
+    36
+   ],
+   "bodies": [
+    "knuckle drive"
+   ],
+   "material": "stainless (polished)",
+   "mass_g": 0.01,
+   "size_mm": [
+    4.5,
+    4.5,
+    0.2
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "018.png",
+   "title": "drive follower pin O3 h5 17-4PH H900 x 10",
+   "desc": "drive follower pin O3 h5 17-4PH H900 x 10, pressed H7/m6 through both clevis prongs, flush (polished)",
+   "descs": [
+    "drive follower pin O3 h5 17-4PH H900 x 10, pressed H7/m6 through both clevis prongs, flush (polished)"
+   ],
+   "qty": 1,
+   "ks": [
+    38
+   ],
+   "bodies": [
+    "knuckle drive"
+   ],
+   "material": "17-4PH",
+   "mass_g": 0.55,
+   "size_mm": [
+    10.0,
+    3.0,
+    3.0
+   ],
+   "faces": 332,
+   "user_part": false
+  },
+  {
+   "file": "019.png",
+   "title": "drive nose dowel ISO 8734 2.5 m6 x 6 type C",
+   "desc": "drive nose dowel ISO 8734 2.5 m6 x 6 type C (1.4125 = 440C grade, >= 52 HRC), a-C:H DLC, pressed 3 mm in the arm's O6 tip boss (reamed O2.495-2.500, Loctite 648), flush with the outer face, rounded end 59.96 mm from GH on the flank (polished)",
+   "descs": [
+    "drive nose dowel ISO 8734 2.5 m6 x 6 type C (1.4125 = 440C grade, >= 52 HRC), a-C:H DLC, pressed 3 mm in the arm's O6 tip boss (reamed O2.495-2.500, Loctite 648), flush with the outer face, rounded end 59.96 mm from GH on the flank (polished)"
+   ],
+   "qty": 1,
+   "ks": [
+    39
+   ],
+   "bodies": [
+    "knuckle drive"
+   ],
+   "material": "hardened steel (polished)",
+   "mass_g": 0.23,
+   "size_mm": [
+    6.0,
+    2.5,
+    2.5
+   ],
+   "faces": 836,
+   "user_part": false
+  },
+  {
+   "file": "020.png",
+   "title": "drive crank pivot pin O3 h5 17-4PH H900",
+   "desc": "drive crank pivot pin O3 h5 17-4PH H900, pressed in link 1b, clip groove at the boss top + 0.30 (polished)",
+   "descs": [
+    "drive crank pivot pin O3 h5 17-4PH H900, pressed in link 1b, clip groove at the boss top + 0.30 (polished)"
+   ],
+   "qty": 1,
+   "ks": [
+    40
+   ],
+   "bodies": [
+    "link 1b"
+   ],
+   "material": "17-4PH",
+   "mass_g": 0.8,
+   "size_mm": [
+    14.55,
+    3.0,
+    3.0
+   ],
+   "faces": 332,
+   "user_part": false
+  },
+  {
+   "file": "021.png",
+   "title": "drive crank pivot pin clip DIN 6799 RS 2.3 at the boss top + 0.30",
+   "desc": "drive crank pivot pin clip DIN 6799 RS 2.3 at the boss top + 0.30 (groove O2.3 x 0.6 H13, land 0.50 to the pin end) over the preload stack (polished)",
+   "descs": [
+    "drive crank pivot pin clip DIN 6799 RS 2.3 at the boss top + 0.30 (groove O2.3 x 0.6 H13, land 0.50 to the pin end) over the preload stack (polished)"
+   ],
+   "qty": 1,
+   "ks": [
+    41
+   ],
+   "bodies": [
+    "link 1b"
+   ],
+   "material": "stainless (polished)",
+   "mass_g": 0.11,
+   "size_mm": [
+    6.0,
+    6.0,
+    0.6
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "022.png",
+   "title": "drive crank inner-ring spacer O3.1 x O4.5 x 0.175 ground stainless 1.4310",
+   "desc": "drive crank inner-ring spacer O3.1 x O4.5 x 0.175 ground stainless 1.4310 (select-fit 0.15-0.20): on link 1b's O5 spot-faced land under the lower 683ZZ inner ring - holds the crank's axial position (D3) (polished)",
+   "descs": [
+    "drive crank inner-ring spacer O3.1 x O4.5 x 0.175 ground stainless 1.4310 (select-fit 0.15-0.20): on link 1b's O5 spot-faced land under the lower 683ZZ inner ring - holds the crank's axial position (D3) (polished)"
+   ],
+   "qty": 1,
+   "ks": [
+    42
+   ],
+   "bodies": [
+    "link 1b"
+   ],
+   "material": "bearing steel",
+   "mass_g": 0.01,
+   "size_mm": [
+    4.5,
+    4.5,
+    0.18
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "023.png",
+   "title": "drive crank preload inner-ring shim O3.1 x O4.5 x 0.10 stainless",
+   "desc": "drive crank preload inner-ring shim O3.1 x O4.5 x 0.10 stainless (polished)",
+   "descs": [
+    "drive crank preload inner-ring shim O3.1 x O4.5 x 0.10 stainless (polished)",
+    "knee pin a shim: O3.1 x O4.5 x 0.1 under the e-clip (stainless, polished)",
+    "knee pin b shim: O3.1 x O4.5 x 0.1 under the e-clip (stainless, polished)"
+   ],
+   "qty": 3,
+   "ks": [
+    59,
+    50,
+    43
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)",
+    "link 1b",
+    "member 3"
+   ],
+   "material": "stainless (polished)",
+   "mass_g": 0.01,
+   "size_mm": [
+    4.5,
+    4.5,
+    0.1
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "024.png",
+   "title": "drive crank preload wave washer O3.2 x O6",
+   "desc": "drive crank preload wave washer O3.2 x O6 (stainless spring shim: 0.08 strip, free 0.40, drawn at its 0.20 working height: 5-10 N) (polished)",
+   "descs": [
+    "drive crank preload wave washer O3.2 x O6 (stainless spring shim: 0.08 strip, free 0.40, drawn at its 0.20 working height: 5-10 N) (polished)"
+   ],
+   "qty": 1,
+   "ks": [
+    44
+   ],
+   "bodies": [
+    "link 1b"
+   ],
+   "material": "stainless (polished)",
+   "mass_g": 0.03,
+   "size_mm": [
+    6.0,
+    6.0,
+    0.2
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "025.png",
+   "title": "D8-04 member 3",
+   "desc": "D8-04 member 3: J3 disc + integral O7 pin + the J3 stop dowel's reamed O2.000 -0.005/0 through hole (r 7.5), E strap (one side-view sketch of lines and tangent arcs, 8 x 3, its top stepping to the boss), E boss O12 x 2.75 + the O3 H7 seat of pin a (ISO 8734 m6 pressed; MR63ZZ-pair knee) (Ti-6Al-4V)",
+   "descs": [
+    "D8-04 member 3: J3 disc + integral O7 pin + the J3 stop dowel's reamed O2.000 -0.005/0 through hole (r 7.5), E strap (one side-view sketch of lines and tangent arcs, 8 x 3, its top stepping to the boss), E boss O12 x 2.75 + the O3 H7 seat of pin a (ISO 8734 m6 pressed; MR63ZZ-pair knee) (Ti-6Al-4V)"
+   ],
+   "qty": 1,
+   "ks": [
+    45
+   ],
+   "bodies": [
+    "member 3"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 15.7,
+   "size_mm": [
+    113.11,
+    20.0,
+    11.21
+   ],
+   "faces": 2192,
+   "user_part": false
+  },
+  {
+   "file": "026.png",
+   "title": "knee pin a ISO 8734 3 m6 x 10 faced to 9.7",
+   "desc": "knee pin a ISO 8734 3 m6 x 10 faced to 9.7: 440C (1.4125) pressed H7/m6 in the E boss over its full 2.75 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)",
+   "descs": [
+    "knee pin a ISO 8734 3 m6 x 10 faced to 9.7: 440C (1.4125) pressed H7/m6 in the E boss over its full 2.75 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)",
+    "knee pin b ISO 8734 3 m6 x 10 faced to 9.7: 440C (1.4125) pressed H7/m6 in the arm pad over its full 2.75 mm, O2.3 x 0.6 e-clip groove with a 0.3 mm land (polished)"
+   ],
+   "qty": 2,
+   "ks": [
+    55,
+    46
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)",
+    "member 3"
+   ],
+   "material": "stainless (polished)",
+   "mass_g": 0.53,
+   "size_mm": [
+    9.75,
+    3.0,
+    3.0
+   ],
+   "faces": 1508,
+   "user_part": false
+  },
+  {
+   "file": "027.png",
+   "title": "knee pin a spacer",
+   "desc": "knee pin a spacer: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)",
+   "descs": [
+    "knee pin a spacer: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)",
+    "knee pin b spacer: inner-ring spacer O3.1 x O4.5 x 0.5 (stainless, polished)"
+   ],
+   "qty": 2,
+   "ks": [
+    56,
+    47
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)",
+    "member 3"
+   ],
+   "material": "stainless (polished)",
+   "mass_g": 0.03,
+   "size_mm": [
+    4.5,
+    4.5,
+    0.5
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "028.png",
+   "title": "knee pin a e-clip DIN 6799 RS 2.3",
+   "desc": "knee pin a e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stainless, polished)",
+   "descs": [
+    "knee pin a e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stainless, polished)",
+    "knee pin b e-clip DIN 6799 RS 2.3: retaining e-clip (A2 stainless, polished)"
+   ],
+   "qty": 2,
+   "ks": [
+    60,
+    51
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)",
+    "member 3"
+   ],
+   "material": "stainless (polished)",
+   "mass_g": 0.09,
+   "size_mm": [
+    6.0,
+    5.77,
+    0.6
+   ],
+   "faces": 572,
+   "user_part": false
+  },
+  {
+   "file": "029.png",
+   "title": "D8-05 knee link",
+   "desc": "D8-05 knee link: flat plate 36.4 x 10 x 2.75 (lines + R1 arcs) + two O9 x 5.5 bearing bosses (2.75 mm proud of the plate, away from the skin), each 2 x MR63ZZ in O6 J6 housings with a 0.5 mm shoulder + knee stop tooth behind pin a (its face meets the E strap's side at knee angle 154.781 deg = 180 - ang_min 25.2189; +-0.02 on the tooth and the E strap's side face) (Ti-6Al-4V)",
+   "descs": [
+    "D8-05 knee link: flat plate 36.4 x 10 x 2.75 (lines + R1 arcs) + two O9 x 5.5 bearing bosses (2.75 mm proud of the plate, away from the skin), each 2 x MR63ZZ in O6 J6 housings with a 0.5 mm shoulder + knee stop tooth behind pin a (its face meets the E strap's side at knee angle 154.781 deg = 180 - ang_min 25.2189; +-0.02 on the tooth and the E strap's side face) (Ti-6Al-4V)"
+   ],
+   "qty": 1,
+   "ks": [
+    52
+   ],
+   "bodies": [
+    "knee link"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 4.98,
+   "size_mm": [
+    41.42,
+    10.0,
+    7.31
+   ],
+   "faces": 3072,
+   "user_part": false
+  },
+  {
+   "file": "030.png",
+   "title": "J3 stop dowel ISO 8734 2 m6 x 5",
+   "desc": "J3 stop dowel ISO 8734 2 m6 x 5, 440C grade >= 56 HRC, ground to 3.90: pressed through hub 3's lower plate (member 3) at r 7.5, F+0.10..F+4.00 (skin end recessed 0.10), 0.85 mm into link 2's groove (tip 0.15 off its floor); stops J3's own angle q3' at -111.90 / 122.74 deg (polished)",
+   "descs": [
+    "J3 stop dowel ISO 8734 2 m6 x 5, 440C grade >= 56 HRC, ground to 3.90: pressed through hub 3's lower plate (member 3) at r 7.5, F+0.10..F+4.00 (skin end recessed 0.10), 0.85 mm into link 2's groove (tip 0.15 off its floor); stops J3's own angle q3' at -111.90 / 122.74 deg (polished)"
+   ],
+   "qty": 1,
+   "ks": [
+    53
+   ],
+   "bodies": [
+    "member 3"
+   ],
+   "material": "hardened steel (polished)",
+   "mass_g": 0.1,
+   "size_mm": [
+    3.9,
+    2.0,
+    2.0
+   ],
+   "faces": 836,
+   "user_part": false
+  },
+  {
+   "file": "031.png",
+   "title": "D8-06 BOTTOM + arm pad + pad mount, one 5-axis part",
+   "desc": "D8-06 BOTTOM + arm pad + pad mount, one 5-axis part (user's bar cut square to the arm 19.8 mm distal of pin b; O12 pad at pin b + the O3 H7 seat of pin b (ISO 8734 m6 pressed; MR63ZZ-pair knee), clear anodised (never black); 2.75 mm mount 31.4 long at the pad level, riser 1 mm into BOTTOM's underside; 7075-T6)",
+   "descs": [
+    "D8-06 BOTTOM + arm pad + pad mount, one 5-axis part (user's bar cut square to the arm 19.8 mm distal of pin b; O12 pad at pin b + the O3 H7 seat of pin b (ISO 8734 m6 pressed; MR63ZZ-pair knee), clear anodised (never black); 2.75 mm mount 31.4 long at the pad level, riser 1 mm into BOTTOM's underside; 7075-T6)"
+   ],
+   "qty": 1,
+   "ks": [
+    54
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "7075-T6 (BOTTOM merged with the pad mount)",
+   "mass_g": 58.6,
+   "size_mm": [
+    242.5,
+    51.26,
+    19.56
+   ],
+   "faces": 15196,
+   "user_part": false
+  },
+  {
+   "file": "032.png",
+   "title": "D8-01 scapula base AT THE J1 RING",
+   "desc": "D8-01 scapula base AT THE J1 RING: the J1 upper member alone (O20 ring + seat disc + M18 x 0.5 spigot); the user's scapula handler bracket threads onto the spigot in place of the dome cap - no ears, no tab (Ti-6Al-4V, 5-axis machined)",
+   "descs": [
+    "D8-01 scapula base AT THE J1 RING: the J1 upper member alone (O20 ring + seat disc + M18 x 0.5 spigot); the user's scapula handler bracket threads onto the spigot in place of the dome cap - no ears, no tab (Ti-6Al-4V, 5-axis machined)"
+   ],
+   "qty": 1,
+   "ks": [
+    61
+   ],
+   "bodies": [
+    "base (on the scapula handler)"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 6.49,
+   "size_mm": [
+    19.99,
+    19.99,
+    7.07
+   ],
+   "faces": 8446,
+   "user_part": false
+  },
+  {
+   "file": "033.png",
+   "title": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW",
+   "desc": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
+   "descs": [
+    "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL"
+   ],
+   "qty": 3,
+   "ks": [
+    76,
+    68,
+    62
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    7.3,
+    6.97,
+    6.97
+   ],
+   "faces": 2612,
+   "user_part": true
+  },
+  {
+   "file": "034.png",
+   "title": "FOREARM CUFF",
+   "desc": "FOREARM CUFF",
+   "descs": [
+    "FOREARM CUFF"
+   ],
+   "qty": 1,
+   "ks": [
+    63
+   ],
+   "bodies": [
+    "forearm cuff"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    110.0,
+    105.02,
+    80.93
+   ],
+   "faces": 5284,
+   "user_part": true
+  },
+  {
+   "file": "035.png",
+   "title": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "desc": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "descs": [
+    "Hex socket head countersunk screw grade C M4x0.7 x 8"
+   ],
+   "qty": 6,
+   "ks": [
+    74,
+    73,
+    72,
+    67,
+    66,
+    64
+   ],
+   "bodies": [
+    "forearm cuff"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    8.0,
+    7.49,
+    7.49
+   ],
+   "faces": 769,
+   "user_part": true
+  },
+  {
+   "file": "036.png",
+   "title": "TOP",
+   "desc": "TOP",
+   "descs": [
+    "TOP"
+   ],
+   "qty": 1,
+   "ks": [
+    65
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    42.3,
+    42.3,
+    2.8
+   ],
+   "faces": 1930,
+   "user_part": true
+  },
+  {
+   "file": "037.png",
+   "title": "IGUS THRUST WASHER",
+   "desc": "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
+   "descs": [
+    "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J"
+   ],
+   "qty": 2,
+   "ks": [
+    71,
+    69
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    38.81,
+    38.81,
+    1.5
+   ],
+   "faces": 256,
+   "user_part": true
+  },
+  {
+   "file": "038.png",
+   "title": "MIDDLE",
+   "desc": "MIDDLE",
+   "descs": [
+    "MIDDLE"
+   ],
+   "qty": 1,
+   "ks": [
+    70
+   ],
+   "bodies": [
+    "forearm cuff"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    161.23,
+    42.49,
+    5.39
+   ],
+   "faces": 3858,
+   "user_part": true
+  },
+  {
+   "file": "039.png",
+   "title": "5mm D",
+   "desc": "5mm D, 2.5mm H, N42 MAGNET",
+   "descs": [
+    "5mm D, 2.5mm H, N42 MAGNET"
+   ],
+   "qty": 1,
+   "ks": [
+    75
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    4.98,
+    4.98,
+    2.5
+   ],
+   "faces": 252,
+   "user_part": true
+  },
+  {
+   "file": "040.png",
+   "title": "CirPattern1[15]",
+   "desc": "CirPattern1[15]",
+   "descs": [
+    "CirPattern1[10]",
+    "CirPattern1[11]",
+    "CirPattern1[12]",
+    "CirPattern1[13]",
+    "CirPattern1[14]",
+    "CirPattern1[15]",
+    "CirPattern1[16]",
+    "CirPattern1[17]",
+    "CirPattern1[1]",
+    "CirPattern1[2]",
+    "CirPattern1[3]",
+    "CirPattern1[4]",
+    "CirPattern1[5]",
+    "CirPattern1[6]",
+    "CirPattern1[7]",
+    "CirPattern1[8]",
+    "CirPattern1[9]",
+    "Revolve4"
+   ],
+   "qty": 18,
+   "ks": [
+    98,
+    97,
+    96,
+    95,
+    94,
+    92,
+    91,
+    89,
+    88,
+    87,
+    86,
+    85,
+    84,
+    83,
+    81,
+    80,
+    79,
+    77
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    2.34,
+    2.34,
+    2.34
+   ],
+   "faces": 528,
+   "user_part": true
+  },
+  {
+   "file": "041.png",
+   "title": "Revolve1[2]",
+   "desc": "Revolve1[2]",
+   "descs": [
+    "Revolve1[2]",
+    "Revolve1[3]"
+   ],
+   "qty": 2,
+   "ks": [
+    93,
+    78
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    24.88,
+    24.88,
+    0.38
+   ],
+   "faces": 256,
+   "user_part": true
+  },
+  {
+   "file": "042.png",
+   "title": "Revolve1[1]",
+   "desc": "Revolve1[1]",
+   "descs": [
+    "Revolve1[1]"
+   ],
+   "qty": 1,
+   "ks": [
+    82
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    26.87,
+    26.87,
+    4.0
+   ],
+   "faces": 1026,
+   "user_part": true
+  },
+  {
+   "file": "043.png",
+   "title": "Revolve3",
+   "desc": "Revolve3",
+   "descs": [
+    "Revolve3"
+   ],
+   "qty": 1,
+   "ks": [
+    90
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    21.84,
+    21.84,
+    4.0
+   ],
+   "faces": 1026,
+   "user_part": true
+  },
+  {
+   "file": "044.png",
+   "title": "UPPER ARM CUFF",
+   "desc": "UPPER ARM CUFF (one sketch: flat land + inner/outer R arcs, both side arcs trimmed clear of the trunk, extruded; AlSi10Mg bead blasted)",
+   "descs": [
+    "UPPER ARM CUFF (one sketch: flat land + inner/outer R arcs, both side arcs trimmed clear of the trunk, extruded; AlSi10Mg bead blasted)"
+   ],
+   "qty": 1,
+   "ks": [
+    99
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "AlSi10Mg",
+   "mass_g": 36.71,
+   "size_mm": [
+    87.8,
+    80.8,
+    2.64
+   ],
+   "faces": 9758,
+   "user_part": false
+  },
+  {
+   "file": "045.png",
+   "title": "M4x6 ISO 10642 hexagon socket countersunk screw",
+   "desc": "M4x6 ISO 10642 hexagon socket countersunk screw (upper cuff -> BOTTOM), polished A2",
+   "descs": [
+    "M4x6 ISO 10642 hexagon socket countersunk screw (upper cuff -> BOTTOM), polished A2"
+   ],
+   "qty": 6,
+   "ks": [
+    105,
+    104,
+    103,
+    102,
+    101,
+    100
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "stainless (polished)",
+   "mass_g": 0.84,
+   "size_mm": [
+    7.89,
+    7.89,
+    6.0
+   ],
+   "faces": 752,
+   "user_part": false
+  }
+ ]
+}
