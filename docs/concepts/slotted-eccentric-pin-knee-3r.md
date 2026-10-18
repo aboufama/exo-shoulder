@@ -93,6 +93,11 @@ Best config B-g47-2: fit 188.47 (153.49 at the search's 0.5 mm) -> **201.20** (s
 overhead >= 140: 0/28 ws, clip follow 0.2; kinematic reach 0.41 vs th need p5-p95 24.9-144.4; post lifts hub 2 0.85,
 K 3.25, hub 3 2.82 mm).
 
+Paired controls through the same frozen protocol (locked: link 2 rigid through K, the plain 3R): at the best config's
+own seats (a2 66) fit 57.07 -> frozen exact **58.53** (reach 0.703, follow 1.0, ib14 0.549, contact 0.037, overhead 6/28);
+at the H1 directions (a2 68.26) 34.78 -> **36.83** (reach 0.661, ib14 0.801, contact 0.031, overhead 6/28; the real pin
+knee at H1 is 27.20 verified - the kit neck costs ~10). Paired frozen deficit of the eccentric: +142.7 at its own seats.
+
 ## Red team (own best config)
 
 - The pose that jams: every pose with th < 74 deg (rest, scapular-plane overhead, the folded side) - the slot's lock
