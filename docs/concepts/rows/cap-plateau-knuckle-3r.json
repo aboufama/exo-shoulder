@@ -246,5 +246,15 @@
   "doc_section": "docs/concepts/cap-plateau-knuckle-3r.md \"Audit\""
  },
  "limiter_screen": "fold 85 (= the control 86) + link 2 x neck part collisions (19 bench / 53 held vs control 0 / 3): with J3 up the arm (d3 ~100) the neck to BOTTOM starts high on the lateral arm and link 2 sweeps across it under axial rotation (per-pair K6: link2 x neck is the only colliding pair; link 2 over hub K changes nothing). The box holds up to 299 kinematic takes, but the metal search walks back to ~275 (a stream from the 299 config ended at 29.5 near-touch).",
- "limiter_note": "limiter corrected from the death audit (docs/concepts/cap-plateau-knuckle-3r.md 'Audit'); the screen's attribution kept as limiter_screen"
+ "limiter_note": "limiter corrected from the death audit (docs/concepts/cap-plateau-knuckle-3r.md 'Audit'); the screen's attribution kept as limiter_screen",
+ "audit2": {
+  "t": "2026-10-18T06:55:00Z",
+  "verdict": "death stands (second death audit; duplicate dispatch, kept to cheap independent checks)",
+  "reproduced": "frozen exact Bench(110,360) 32.08 to the digit again (247/360, why fold 85 / parts 19 / contact 9, overhead 9/28, min metal -16.106 mm, 129 s); fast fit 27.13; kinematic 275/360",
+  "gate": "recomputed from the sweep (344 cell-C search rows, time order): near-touch 0.073 / 0.004 / 0.004, plain 0.567 / 0.316 / 0.331 score points -> passed (degenerate top-5, as audit 1 noted)",
+  "claim_selection": "3 cell-C configs were worn on the claim bench (k 165 34.25, k 167 32.08, k 349 32.73); the row reports the best. The pick flatters C (it does not hide a better design), and the fast-best C3 config (k 252, near-touch 25.00) wears WORSE frozen (32.73).",
+  "box_edges": "the two edge-hugging parameters are pinned by measured cliffs, not by the box: el1 (best 66.59, edge 67) fast 66.0 28.02 / 66.59 27.13 / 67.0 29.95 / 68.0 32.95 / 69.0 141.47 (follow 0.30) / 72 164.26; lo (best 26.38, edge 26) 27.5 28.94 / 26.38 27.13 / 25.5 132.27 (K6 collide 0.52) / 24 134.06 / 22 131.43; kinematic takes stay 274-276/360 throughout. Opening the box gains nothing.",
+  "robustness": "NEW: the best sits 0.9 deg above a part-collision cliff in lo (the K law floor, a drive/cam tolerance: lo 25.5 -> K6 collide 0.52, gap 132) and ~2.4 deg below an el1 follow cliff (69 -> follow 0.30). J1 seat errors: el1 +0.4 / +1.4 deg cost 2.8 / 5.8 fast points; az1 +-1.5 and d3 +-1.7 cost 0.6-2.2.",
+  "scripts": "auditor scratchpad audit2/edge.py, cliff.py (not committed; reproducible from the row best_params via the model file)"
+ }
 }

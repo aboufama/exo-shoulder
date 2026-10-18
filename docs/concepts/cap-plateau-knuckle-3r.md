@@ -242,3 +242,47 @@ lead (18.28).
 The task's refutation bar ("within 10 of the champion's 68.93 on Bench(60,160)") is a round-3 criterion. Every row since
 round 4 clears it, and so does this one (27.13 fast). It does not test this death, which is measured against the
 pre-registered gate 0 and the paired control.
+
+## Audit 2 (2026-10-18 06:55 UTC, second death audit; the death STANDS)
+
+This was a duplicate dispatch, so the audit was kept to cheap, independent checks. Everything ran local, niced and
+single-process.
+
+- **Reproduced again.** The C2 best, worn frozen on Bench(110,360) EXACT through the model's `frozen` path, reads
+  **32.08** to the digit. That is 247/360 takes (fold 85, parts 19, contact 9), overhead 9/28, min metal -16.106 mm,
+  in 129 s. The fast fit reads 27.13 and the kinematic count 275/360.
+- **Gate.** Recomputed from the sweep over the 344 cell-C search rows in time order:
+  - near-touch: 0.073 / 0.004 / 0.004 score points. PASSED.
+  - plain gap: 0.567 / 0.316 / 0.331.
+- **Claim selection.** Three C configs were worn on the claim bench: k 165 at 34.25, k 167 at 32.08 and k 349 at 32.73.
+  The row reports the best of the three, which flatters C. The fast-best config (C3, k 252, near-touch 25.00) wears
+  worse frozen (32.73), so the pick does not hide a better design.
+- **Box edges (new).** The two parameters that sit at the box edge are held there by measured cliffs, not by the box.
+  Fast Bench(60,160) gap, everything else at the best:
+
+  | el1 (best 66.59, box edge 67) | 65.0 | 66.0 | 66.59 | 67.0 | 68.0 | 69.0 | 72.0 |
+  |---|---|---|---|---|---|---|---|
+  | gap | 28.46 | 28.02 | **27.13** | 29.95 | 32.95 | 141.47 (follow 0.30) | 164.26 |
+
+  | lo (best 26.38, box edge 26) | 27.5 | 26.38 | 25.5 | 24 | 22 |
+  |---|---|---|---|---|---|
+  | gap | 28.94 | **27.13** | 132.27 (K6 collide 0.52) | 134.06 | 131.43 |
+
+  Kinematic takes stay at 274-276/360 across both scans. Opening the box gains nothing.
+- **Robustness (new red-team item).** Two cliffs sit close to the best:
+  - **lo**, the K law's floor (a drive or cam tolerance), is 0.9 deg above a part-collision cliff. At lo 25.5, K6
+    collisions hit 0.52 of the poses and the gap reads 132.
+  - **el1** is ~2.4 deg below a follow cliff: at 69, follow drops to 0.30.
+
+  J1 seat errors cost points too:
+  - el1 +0.4 / +1.4 deg cost 2.8 / 5.8 fast points;
+  - az1 +-1.5 deg and d3 +-1.7 deg cost 0.6-2.2.
+
+**The death stands.** The measured reason, in one line: at the converged best (32.08 frozen exact, reproduced twice,
+247/360 takes) 80 of 85 fold losses are on the stretched wall th > 95.3. The box edges are pinned by collision and
+follow cliffs, not by the box. The 19 lobe takes need a two-lobe drive that does not exist. So no change inside the
+cell reaches the paired control (30.59), the 279-take bar or the lead (18.28).
+
+The task's literal bar, "within 10 of 68.93 on Bench(60,160)", is met by the original claim (27.13 fast), as audit 1
+noted. That bar is stale from round 3 and does not test a gate-0 death against the lead.
+
