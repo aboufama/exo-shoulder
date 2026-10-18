@@ -40,6 +40,77 @@ az 85-115) and never sat at J1 az 55; this section is that missing measurement.
    measured, hub 2 0.09 / 0.05 in band at 76-77 mm); the first screen's crest cells and H1 (23.64) through the same
    code; the adversarial verifier (docs/concepts/verify/crest-knee-3r.py) that re-runs the claim.
 
+### What was measured (antcrest, 2026-10-18 06:09-07:15 UTC, local, farm closed)
+
+**Envelope bench: not available here, so the knee re-fit ran on Bench(60,160).** The env fast grid lives on the farm
+volume (closed). A local build (tools/env_bench.py part / assemble, 1 niced process) reached 92 of 530 poses in 13 min
+at box load 10-13, i.e. ~75 min for the whole bench, longer than the time box. It was stopped and the search ran on
+Bench(60,160) fast, with the |axial| >= 150 contact gate in the objective (+2 points per contact pose there). The
+verdict below does not hinge on the knee (next point), so the env re-fit could not change it. Whoever re-opens this
+cell needs the env cache on the farm or ~75 local CPU-minutes first.
+
+**1. The hub-2 trade at the judge's seat (knee-free, rawest number).** `h2need.py` (scratchpad ck2) reads, per closing
+pose, the level hub 2 needs along its GH ray (the model's Hneed hub2). At antcrest A (J1 bvec(55, 62), a1/a2 50/58, J3
+wdir(98, 5); J2 bvec(21.1, 17.9)) the fold loses 23 of 220 and the need is p5 / 50 / 95 = 52.5 / 61.0 / 91.3 mm. In
+the table, "hub 2 in band" means <= 12 mm above its own 2 mm level (the model's proxy). "J3-stoppable" counts the
+poses dropped above the cap whose q3' lies outside the kept poses' window:
+
+| hub-2 level cap L (mm) | poses kept (ws of 160) | dropped (ws) | J3-stoppable | hub 2 in band |
+|---|---|---|---|---|
+| 60 | 90 (65) | 107 (72) | 15 | 0.91 |
+| 63 | 124 (84) | 73 (53) | 14 | 0.86 |
+| 66 | 146 (98) | 51 (39) | 14 | 0.70 |
+| 70 | 156 (106) | 41 (31) | 13 | 0.35 |
+| 74 | 163 (110) | 34 (27) | 11 | 0.11 |
+| 78 | 168 (114) | 29 (23) | 11 | 0.04 |
+
+Antcrest B (wdir(102, 18), 52.5/56) and two neighbours read the same shape:
+- B's need is p95 86.1.
+- At B, hub 2 is >= 0.5 in band only at L <= ~67, and nothing above L 63 is J3-stoppable.
+- The hub-2 tail is NOT separable on J3 at the antcrest seats (0-16 of the dropped poses). The judge's "separates on J3"
+  came from the crest cells C1 / C2 / C3.
+
+A dropped pose that is not stopped is metal in the skin, i.e. CONTACT (the model's greedy-drop convention). So each mm
+of cap that buys hub-2 in-band costs contact at 100 / 220 per pose, and the fold gain (23 vs H1's 36) is spent several
+times over.
+
+**2. A knee-free lower bound says the seats alone do not kill the basin; the links do.** `h2bound.py` takes 64 seat
+cells (the 4 named cells + 60 uniform in az1 45-68, el1 54-70, a1 40-62, a2 45-70, wd 92-110, wa -4..24, b3 0-0.4).
+For each cell it scores the fold plus hub 2 at its best level, assuming every other sample is in band and a perfect
+J3 stop on every dropped pose. The bound is 3.1-43.6 (median 15.0). It correlates with the fold at r = 0.78. Its
+minimum sits at L 90-100 mm with hub 2 ~0.01 in band: the bound lets hub 2 float far off the skin at only its 11.6 %
+sample share. A real hub 2 carries the link ends: the wide-window seeds (fold 10 / 19) put hub 2 at 96.9 / 89.9 mm, and
+link 2 went with it (0.03 in band), so hub 2 + L2 (26 % of the samples) are out of band. That alone costs >= 16
+in-band points.
+
+**3. The search (CMA on Bench(60,160) fast, near-touch objective + |axial| >= 150 gate).** 251 configurations:
+- A1: 15 random around the two judge cells.
+- C1: 3 starts at antcrest A / A with cap 67 / (60, 66) with cap 70; 60 perturbations, then CMA, sigma 0.10.
+- C2: 4 starts at the best knee-free-bound seats (wide a1 / a2 55-59), stopped at 70 evaluations. Nothing beat its own
+  seed 68.41, with hub 2 at 90-97 mm.
+
+Results:
+
+| set (configs, gap < 150) | n | best plain gap | hub 2 level, median | hub 2 in band, median |
+|---|---|---|---|---|
+| fold 0-20 of 220 | 26 | 68.41 | 97.8 mm | 0.01 |
+| fold 20-30 | 36 | 73.12 | 73.7 mm | 0.14 |
+| fold 30-40 | 29 | **64.19** | 75.0 mm | 0.09 |
+| fold 40-60 | 17 | 68.79 | 75.5 mm | 0.07 |
+| hub 2 in band >= 0.5 (any fold) | 12 | 80.26 | | |
+
+The best cell is J1 bvec(53.4, 59.3), a1/a2 44.4/56.2 (J2 bvec(20.2, 21.7)), J3 wdir(93.4, 0.1), b3 0.315, lE 69.5,
+lc 31.7, phiE 18.0, phib -66.1, ang_min 27.42, h2cap 75.6, J3 stop on. It reads **64.19 fast**: reach 0.644, follow
+0.867, ib14 0.653, contact 0.055, fold 38, J3 stop 12, skin 9, parts 6. Its parts in band: hub 2 0.09 at 75 mm, boss
+0.32, knee 0.51, E 0.60.
+
+The CMA's own path is the finding:
+- It pulled the antcrest back toward the first screen's crest J3 (wd 93, wa 0) and a smaller a1 (44).
+- The fold returned to H1's 36-40. **The basin's fold gain cannot be kept once member 3 and hub 2 have to live near
+  the skin.**
+
+CLAIM_PLACEHOLDER
+
 ## Deeper-version answers (first screen, crest cells)
 
 1. **What a top mechanism designer would do that the spec does not ask for.** The spec says "run the pin-knee model
