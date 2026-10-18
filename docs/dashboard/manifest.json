@@ -4,10 +4,10 @@
   "title": "Concept bench morphologies",
   "description": "One row per morphology in the swarm's catalogue: short_name = its display name (tools/dash_names.json, else built from the id words; ' (N joints)' at 4+ active joints), status, the agent's claimed bench numbers, the verifier's re-measured numbers (v_), its best sweep configuration so far, and the 3R baseline once (is_baseline), and the complexity count (the simplicity number, never part of the gap or score): complexity = points, lower = simpler, 0 = three pins on bearing pairs and three links; complexity_items = where the points come from; passive_trans = passive translations (more than 2 = not buildable); mechanism_confidence = counted or estimated. alignment = the alignment auditor's latest verdict (clean / watch / gamed; gamed = the number is not evidence of a better exo, so the design cannot be called verified, a winner or a leader; empty = never audited), alignment_stage = audit (skeptic pending) or skeptic (final), alignment_reasons = the reasons at that level, alignment_t = when, alignment_claim = the number it audited, alignment_stale = the row's claim moved since (a re-audit is due); from docs/alignment/ledger.jsonl (tools/alignment_ledger.py, docs/ALIGNMENT.md). Built from docs/concepts/catalogue.json, families.json, rows/*.json (complexity: tools/simplicity.py on each row's mechanism record, docs/SIMPLICITY.md) and sweeps/*.json.",
   "file": "data/morphs.json",
-  "sha256": "87d7729f9b85145956206ae18fa6dd00d86f06ac0caf24152ebd206d913431fe",
+  "sha256": "dd5d68e1d39dbf32e00fc48ce6325bf25e96f5abc3eea7a700f03bd5ffc9e737",
   "rows": 164,
-  "bytes": 480816,
-  "updated": "2026-10-18T21:20:45Z"
+  "bytes": 481455,
+  "updated": "2026-10-18T21:37:01Z"
  },
  {
   "id": "sweeps",
@@ -64,10 +64,10 @@
   "title": "Event log",
   "description": "What happened and when: the swarm's own log (docs/concepts/events.jsonl), one milestone per judged design and every new built-CAD R1 record (from the judge outputs).",
   "file": "data/events.json",
-  "sha256": "1bea9979efb76bc06fffe818a7529e9364382ecb1861c7ba6d841919c88e8ce3",
-  "rows": 949,
-  "bytes": 415740,
-  "updated": "2026-10-18T21:20:45Z"
+  "sha256": "22cdea9f54c12eaf7bde65be96e3e51d4eee3cf93239cfba15dab72750427549",
+  "rows": 950,
+  "bytes": 416316,
+  "updated": "2026-10-18T21:37:01Z"
  },
  {
   "id": "spend",
@@ -104,9 +104,9 @@
   "title": "Data build info",
   "description": "When tools/dash_build.py last gathered the data, the repo commit, and any warnings it printed.",
   "file": "data/meta.json",
-  "sha256": "f9ed571b6c3670fdfc8282e24ca8c09b96325aa0887ea8438b90c089f00aa168",
+  "sha256": "b7b2e4fa30190a40353a2c3c4ee41ad218acf594726f59a7cdfb26763d6d2493",
   "rows": 1,
   "bytes": 2089,
-  "updated": "2026-10-18T21:20:45Z"
+  "updated": "2026-10-18T21:37:01Z"
  }
 ]
