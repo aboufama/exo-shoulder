@@ -4839,3 +4839,116 @@ optimum sits on two floors (rt_extra 1.5, ramp 60 deg). (7) Pose 264: the main r
 **Next focus (round 106, track jump).** 95 has not been reached (best screened 14.40 gate / 14.02 plain at 4 joints,
 best verified 15.40 polished at 4 joints and 18.28 at 3). The measured limiter of the nearest design is its 13 contacts
 (9 relayed, 2 of them folded-side one-sided relays), not its reach. Plan: docs/concepts/ROUNDS.md "Round 106 plan".
+
+## Round 106 plan (Round J6, track jump; 2026-10-18 ~12:30 UTC, lead verified gap 18.28)
+
+Planner's read at 12:15-12:30 UTC: ROUNDS.md (round 104 results, round 105 plan, round 15 re-dispatch / re-launch plans),
+FINDINGS.md section heads to "freek polish", rows/*.json (proxtrack, seatoracle, acroant, desmo-geom, kfree-armarc,
+armarc, freek, lead), docs/concepts/proxtrack-relay-knuckle-4r.md, docs/concepts/round105_ideation.md 1.4-1.5,
+events.jsonl tail (to 12:07Z), HANDOFF 12:25 note, catalogue.json (21 ideated, all under measured closures),
+tools/simplicity.py v2.2 weights, docs/research/take_bound_3dof.md (SKELETON, being filled by a lead agent: not
+duplicated here). Ledger (`tools/alignment_ledger.py latest`): **gamed** = lowarm-halfring-knuckle-3r (M3),
+dipped-law-groove-knuckle-3r (fold margin 0.184), seed-offset-3r-slides (3 passive translations); the lead
+conecut-knee-knuckle-3r exit 0 WATCH; freek-oracle-route-knuckle-4r WATCH (skeptic 11:24:30Z); the four round-105 rows
+exit 2. No bench, judge or kit file changed: no number below moved because the measurement changed.
+
+### State
+
+- **Lead (best verified, not gamed): conecut-knee-knuckle-3r 18.28** (score 93.35) frozen exact Bench(110,360), held
+  22.38 (22.43 kit density); reach 0.7278 (262/360), ib14 0.9012, follow 1.0, 4 contacts, overhead 8/28; 3 active, 0
+  passive translations, cx 18.5. WATCH (carried; no lens buys points the same way): reporting (sweep 12.5 shown as
+  95.45); T1 (16.56 points in the 1-2 mm shell, pose 203 taken at 0.263 mm); T3 (held th margin 5.006); NEW-strap-dilution
+  (18.67 at equal strap sampling); M5 (J3 stop 155 N per N.m through MR117 bearing 1); NEW-self-reference; G4.
+- **Best 4-joint verified: freek-oracle-route-knuckle-4r polished 15.40 / held 20.50** (verified 16.20 / 21.89), cx 33.25,
+  WATCH: contact depth x3.88 (15 contacts vs 4), P1 lowered (J3 stop placed from claim-bench binders), P4 reading change
+  with no change-log entry, NEW-stop-refusal (343 / 423 refused kit contacts: 16.68 read as contacts), M5 cuff moment
+  1.9-3.1x K torque, 5 overhead clip frames in contact (follow 0.9545). Not a lead (4 joints).
+- **Nearest design to 95: proxtrack-relay-knuckle-4r, SCREENED** (verify-claim running separately; no ledger entry):
+  frozen exact plain 14.02 / chain-only gate 14.40 (ib14 pooled 0.9196 / chain 0.8962) / near1 17.68; reach 0.7917
+  (285/360), 13 contacts (lead 4), overhead 8/28; held plain 18.01 / gate 18.51 (lead 22.38); cx 52.5; ideal bound PHI
+  35 13.21 (PHI 30 13.78, PHI 45 12.37). Its watch items (round 105 results): dilution (gate on chain-only), low shell at
+  the box edge (rt 1.5; rt 2.5 -> 15.26), one-sided folded-side relays 262 -9.79 / 206 -6.07, 466 -8.22 at phi 28, 6
+  near-jams at the 1 mm floor, PHI near-invisible on the fast bench, optimum on two floors.
+- **95 arithmetic on proxtrack:** gate 14.40 = in-band 0.38 + reach 10.83 + contact 3.19. 13.75 needs -0.65: two
+  contacts made takes (~0.52 each) reach ~13.36; refusing them (Proposal A) ~0.25 each -> ~13.91; under Proposal B 0.
+  Of 33 relayed bench poses 23 taken, 9 contact, 1 jam; 56 fold poses lie beyond the relay.
+- **Complexity arithmetic (simplicity v2.2):** a 4th active joint costs 25; proxtrack = lead 18.5 + 25 + relay body /
+  joint / sliding pair / spring 3 / parts ~9. The 4-joint floor is ~33 (freek 33.25); the relay's cheapest base is the
+  open question: the K-free base is CLOSED (buildable axes >= 15.70 ideal with 26-29 contacts before any rail metal; only
+  tilt 0 reads 10.22 and carries no rail), so the base must stay a knuckle (18.5) or its spring-free desmo (16.25-16.5).
+- **3-joint side:** take ceilings at the legal seats (back plain O20 3R 250 kinematic, knuckle 267-272, ghosts 269-271,
+  cap 247-281, crest 218-228; zero-contact floor at 271 takes 14.72) - the lead agent's take-bound table carries it; the
+  main track runs lowarm-adjpad-knuckle-3r (cx <= 17.0) and conecut-sidestep-knuckle-3r (contacts by metal moves).
+- **Dead, do not rescreen** (rounds 15 / J4 / J5 lists): straight guides; arm-fixed cuff arcs at the pad station; every
+  K lever at the k33 seats (oracle 17.25); the anterior link-2 corridor; desmo-window, desmo-geom (no pin inside O20);
+  the dog drive; psi2 on the lead (20.84); the K-free relay base; carriage rails on the pad side (15-25 deg window); J1
+  forward on the acromion top (coupled K and free-K); longer K strokes at the lead's seats (17.69); relays under the lead
+  (J0 / wobble / backbridge); cap null-space.
+- **Compute:** farm CLOSED. Local only, nice -n 10, OMP_NUM_THREADS=1, <= 2 processes per lens; the box (4 cores) also
+  carries the proxtrack verifier, the take-bound agent and main round 15 lenses B / C: fast surrogate first, ONE exact
+  wear per pre-registered config, commit after every step.
+
+### Lenses
+
+**A. twoside-relay (reach to 95 at 4 joints; suggested id twoside-proxtrack-relay-4r; 1 slot, step 0 <= 30 min, total
+<= 120 min).** proxtrack's own "next": its 13.75 gap is contacts, and 2 of the 9 relayed contacts are folded-side poses a
+ONE-SIDED spring relays into the skin. Make the relay two-sided: spring-centred on a centre dowel (a torsion spring or two
+constant-force springs, each side capped by an own-angle dowel), so folded-side poses relay by -phi; or refuse the folded
+side with an own-angle dowel (report both Proposal readings). Lower carriage h_c (the bump over the footprint is h_c + 1)
+and the bump margin as design variables.
+- Import docs/concepts/models/proxtrack-relay-knuckle-4r.py READ-ONLY (its verifier is running): never edit its row,
+  model, sweep or verify dir. If the verifier moves proxtrack's number, re-base the gates on the verified reading.
+- **Step 0 (no hardware, exact path, from proxtrack's per-pose dumps + the ideal relay solve):** at PHI 35 and 45, let the
+  ideal relay turn to -PHI_f as well; re-read the 33 relayed + 56 beyond-relay bench poses and the folded-side contacts
+  (262, 206, 466) on the lead's REAL metal with the 2-mm rule (relayed metal < 2 mm counts lost). Price the folded-side
+  shell: the un-relayed track's clearance to the torso and arm-down skin at every envsel pose for -PHI_f arcs. **Survive
+  only if the two-sided ideal + proxtrack's measured hardware price (+0.81 plain / +1.19 gate at PHI 35) <= 13.75, i.e.
+  ideal <= 12.56 on the gate reading, at a buildable folded-side arc.** Otherwise DEAD with the numbers (the relay row of
+  the take-bound table gets them).
+- PHI, PHI_f, h_c and the bump margin are chosen on envh / envsel (tools/env_bench.py, exact path), never on Bench(60,160)
+  (blind to PHI) and never from claim-bench poses (the P1 class: no stop or margin placed from Bench(110,360) binders).
+- **Gate (pre-registered):** frozen exact Bench(110,360) once: pass = chain-only gate <= 13.75 (score >= 95) with <= 9
+  contacts; kill = gate > 14.40 (no gain over its parent) or any new folded-side contact. Report plain, chain-only gate,
+  near1, both Proposal readings, the continuity flood (a two-sided relay may jump sides: no relay jump > 10 deg, no
+  branch change), min th margin, R17 for each spring (gravity check both sides), T5 per-pose dumps bench + held,
+  cx (expected 52.5-53.5). Held paired vs proxtrack and vs the lead (CI90, P(better)). A pass is the 4-joint answer for
+  the user, never a lead change by itself.
+
+**B. lean-base relay (complexity at the relay's reach; suggested id proxtrack-desmo-relay-4r; 1 slot, <= 90 min).** The
+only cx left under a 4-joint relay is the base (the 25 for the 4th joint is fixed; the K-free base is closed). Put
+proxtrack's relay hardware (its claim parameters, then a relay-only re-fit on envh with the near-touch objective) on the
+SPRING-FREE buildable desmo base: desmo-window's stage 1 at link 1b's plate top + 0.15 (cx 16.25; kit density 18.80-19.01
+/ held 23.00-23.20; same 262 takes and 4 contacts as the lead), kit sampling density (tools/sample_density.py clean).
+This measures the 4-joint complexity floor at the relay's reach: cx ~50.25 vs 52.5.
+- **Step 0 (<= 30 min):** wear proxtrack's claim parameters on the desmo base frozen exact once (the transfer number);
+  check stage-1 metal vs the split bump band (no stage-1 sample inside the bump band or the carriage footprint) and the
+  M3 rule (no stage-1 sample inside link 1b's plate F+0..3.0).
+- **Pre-registered:** pass = chain-only gate <= 14.70 at cx <= 50.5 (a Pareto point >= 2 cx under proxtrack within 0.3
+  of it); kill = gate > 15.0, held paired worse than proxtrack by > 0.5, any M3 overlap or any spring added to the base.
+  If lens A passes first, carry A's two-sided relay onto this base before the claim (one fast check, one exact wear).
+- Not main round 15 lens B (no low arm, no pad, no A-adj cell, no drive-geometry change: the desmo law and stage 1 stay
+  desmo-window's verified ones).
+
+### Carried (ideated, never screened)
+
+None. The 21 ideated entries all sit under measured closures (straight / telescoping / tape translations add 0 fold takes;
+lazy-tongs-j2 is a K law under the 17.25 oracle; lone-helix-humeral breaks the CAD path rule and its legal form is the
+tilted relay arc; rolling cones are a gear-class coupling; tripods / crossed rails need passive translations or have no
+compact part). The round-4 picks are done.
+
+### Elsewhere, not to be duplicated
+
+- proxtrack-relay-knuckle-4r: verify-claim (wf_61d461b8-269); lens A imports its model read-only.
+- Main round 15 re-launch (wf_98caeaad-582): lowarm-adjpad-knuckle-3r (lens B), conecut-sidestep-knuckle-3r (lens C).
+- docs/research/take_bound_3dof.md: lead agent (round 15 lens A); this round's step-0 numbers go in its relay row.
+- Owed by the auditor: ledger entries for proxtrack (on its verification), desmo-geom, acroant-conecut, seatoracle-erwall
+  and both carrail deaths; the acroant audit's +1.0 / +1.5 seat wear and desmo-geom variant W's held wear (cut by the
+  restart).
+
+### Needs the user's say
+
+- The 4-joint question, sharpened: proxtrack (screened, verification running) is 0.65 gate / 0.27 plain from 95 at 4
+  joints and cx 52.5 with 13 contacts, and the best held number on file (18.01 vs the lead's 22.38); the 3-joint lead is
+  18.28 at cx 18.5. Lens A says whether a two-sided relay reaches 95; lens B prices the cheapest base under it.
+- Proposal B (stop refusals that would be contacts count as contacts) decides lens A's folded-side refusal reading.
+- The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule and the transmission guard stay; no lens relaxes them.
