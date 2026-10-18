@@ -4541,3 +4541,173 @@ coupling for MVP1.
   carry it.
 - The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule and the transmission guard stay; no lens relaxes
   them.
+
+## Round 15 plan, re-dispatch (2026-10-18 ~09:25 UTC, track main, lead verified gap 18.28)
+
+Planner's read at 09:19-09:25 UTC: ROUNDS.md (round 14 re-dispatch close, round 15 plan of 03:15, round 105 plan),
+FINDINGS.md ("Round 14 re-dispatch", "Round J4"), docs/concepts/crest-knee-3r.md (stack rule), rows/*.json,
+catalogue.json (21 ideated, 0 modelling), events.jsonl tail (to 09:18:56Z), the ledger (`tools/alignment_ledger.py
+latest`, exits by `get`). **Gamed** = lowarm-halfring-knuckle-3r (M3, 08:52:57Z, claim 18.83), dipped-law-groove-knuckle-3r
+(fold margin 0.184), seed-offset-3r-slides (3 passive translations). The lead conecut-knee-knuckle-3r exit 0 WATCH. No
+bench, judge or kit file changed since round 14's close, so no number below moved because the measurement changed.
+**Round 15's 03:15 plan produced nothing on disk** (no docs/research/take_bound_3dof.md, no lowarm-adjpad or
+conecut-sidestep row or model): this re-plan keeps its three lenses and puts the re-dispatch measurements into them.
+Box: 4 cores; the freek-oracle-route env polish holds 2 processes and jump round 105 is starting, so every lens here runs
+<= 2 niced processes, OMP_NUM_THREADS=1, and uses the fast surrogate before any exact wear.
+
+### State
+
+- **Lead (best verified, not gamed): conecut-knee-knuckle-3r 18.28** (score 93.35), frozen exact Bench(110,360), held
+  22.38 (22.43 at kit density). Reach 0.7278 (262/360), ib14 0.9012, follow 1.0, contact 4 poses, overhead 8/28.
+  3 active joints, 0 passive translations, cx 18.5 (4 passive R, 3 loops, 1 spring, 1 track).
+  - WATCH reasons (carry into every summary that names it; no lens may buy points the same way): reporting (sweep 12.5
+    shown as 95.45); T1 (16.56 points in the 1-2 mm shell; pose 203 taken at 0.263 mm); T3 (held th margin 5.006, ~0.23
+    deg K play -> ~4.92); NEW-strap-dilution (18.67 at equal strap sampling); M5 (J3 stop 155 N per N.m through MR117
+    bearing 1); NEW-self-reference; G4 (m_sub < 1 deg at K rest on 50 of 205 rest poses).
+- **The low-cx points at the lead's reach are on unbuildable stage-1 metal (M3 measured, family-wide).** The desmo level
+  formula (pivot + 3.15 + glev) puts stage 1 inside link 1b's J2 lower plate (F+0..3.0):
+  - desmo-slipper 18.95 (cx 15.75, WATCH) reads 20.38 bench / 25.33 held at the plate-clearing level F+3.9;
+  - desmo-conecut 18.98 (cx 16.5, WATCH): gen-9 CAD R6 fails at 1.50 mm on 451/451 frames; nearest buildable 20.5;
+  - lowarm-halfring cell A 18.83 (cx 16.5, GAMED M3): 18.65 at F+3.9, 19.05 with the hard pad's true-lever play (lever
+    6.75 mm not 12.29; play 0.912 deg; pose 203 0.10 mm into the skin); held +0.26 worse than the lead, P(better) 0.005;
+  - desmo-window (buildable stage 1, J2-first stops) 18.80-19.01 / held 23.00-23.20, cx 16.25: dead on the held line.
+  - Buildable pins that score best at F+3.9 have groove rc 0.28-0.64 mm, under the 0.75 pin radius: RC_MIN must cut.
+- **cx-0 frontier:** H1 skin-normal-3r-pin-knee 27.20 (WATCH); crest-knee-3r joggled knee 31.50 / held 28.45 (226/360,
+  WATCH: NEW-tolcliff - fitted at the 0.20 mm pin-a running gap, the rule floor; +0.2 mm strap error -> 39.90 vs the
+  flat cell's 33.11; G1 4/10 overhead clip frames < 1 mm; ws in-band 0.817; R2 dashboard mixes cells).
+  - The pin-a stack rule (knee underside >= E top + 0.15 + 0.05) is a hidden constraint of EVERY pin-knee model: at the
+    crest the flat fit was jam-steered (136 fast -> 24.39 fast at equal parameters; +0.34 frozen). H1 and its
+    descendants were fitted without it.
+- **4-joint side (not the headline; user ruling 2026-10-17):** freek-oracle-route-knuckle-4r 16.20 / held 21.89, cx
+  33.25, WATCH (15 contacts vs 4, depth x3.88, paired P 0.745 bench / 0.622 held); free-K oracle 17.25 connected (280
+  takes, ~21 contacts: ER binders 117 / 119 / 129 touch at every legal K); K-free ideal 75-deg relay 10.22 (304 takes, no
+  hardware, long axis 49-68 mm out); real relays 18.01 / 26.42 dead; cap null-space 57.70 dead.
+- **95 arithmetic** (gap = 100 [(0.90 - ib14)+ + (0.95 - follow)+ + (0.90 - reach)+ + contact]): 13.75 = 275 takes at
+  zero contact or 279 at the lead's contact. One take +0.28; a contact made a take +0.54; zero contact at 262 takes =
+  17.22.
+- **Where the lead loses its 98 poses:** fold 88 (stretched wall 73: th 107-176, 64 internal rotation >= 90 across the
+  body, the K stroke dK 52.6 of 57; folded wall 15: scapular-plane overhead, hub-2 clearance); J3 stop 6 (window at its
+  edge); contact 4: 237 crank -9.42, 205 hub 2 -4.28, 264 hub K -1.17 - **all three dwell poses at K = 0, no K-law
+  reaches them** - and 316 link 2 -1.23 (the only forced pose).
+- **Measured take ceilings at the legal seats (3 DOF):** back: plain O20 3R 250 kinematic; knuckle law-only 267-272;
+  knuckle ghosts 269-271 (~40 cells); cap pole: plain 3R 281 kinematic / 267 frozen, knuckle 275 kinematic / 247 metal,
+  buildable one-sided 245; crest: pin knee 226 metal (joggle; flat 228), no-knee 3R 218; antcrest dead. Floor at 271
+  takes, zero contact: 14.72.
+- **Dead, do not rescreen:** round 15's 03:15 list (cap-pole knuckle cells, crest seat moves except the joggle, crest
+  no-knee 3R, slotted eccentrics on a J2 crank, link-2 root / whole-bar radial lifts, hard-pad dwell stops, two-lobe
+  ghost drives, back-seat J3 / hub-K / link-2 seat moves, long-stroke K drives, relays under the lead); J4's (straight
+  guides, arm-fixed cuff arcs, every K lever at the k33 seats, the anterior link-2 corridor, desmo-window, the dog drive);
+  psi2 on the lead (20.84 vs 18.67). Any spring on a knuckle cell adds +3 cx (16.5 -> 19.5 > the lead's 18.5).
+- **Measured rules that every claim this round obeys (round 14 re-dispatch lessons):** a dwell hold is priced as metal at
+  pose 203 with one-sided play <= ~0.29 deg (~0.40 mm per deg closes there); a pad-seat test counts only samples with
+  metal on both sides (25 of 133 crank samples are over link 1b); every claim at a rule-floor clearance carries a +0.1 /
+  +0.2 mm tolerance probe and is ranked at the probe (the round-16 rule, pulled forward: it is hygiene); a local plateau
+  is not convergence (one sigma-0.8 restart broke a 424-try plateau by 38 points): a wide restart before any death.
+- **Machinery:** the loop passes `lead: 18.28` to every verifier (discovery-loop.js line 87). Still open: runner guard
+  against selection on Bench(110,360) / held out; dash_build honest flag; row verdict rewrite from the verification
+  block (crest-knee still reads "SCREENED ... 32.84"); convergence gate >= 2 starts; box edges = rule bounds; no ledger
+  entry for the deltoid-crest 34.98 re-wear, cap-plateau, or the J4 deaths. A claim that lands first applies each by hand.
+
+### Lenses
+
+**A. take-bound-3dof (reach: the decisive table and the user's blocker; 1 slot, analysis + ghost fills, <= 90 min).**
+Unchanged scope from the 03:15 plan (one row per J1 seat family x realisation; columns kinematic window takes at th 5,
+law-limited, best ghost, best metal frozen exact, best verified non-gamed, zero-contact floor 100 (0.90 - takes/360),
+the gap at the family's measured ib14 / contact; every cell cited to a file or marked unmeasured with the reason), plus:
+- the crest rows: pin knee 226 metal takes (cx 0, joggle; flat 228), no-knee 3R 218;
+- the 4-joint reference rows from J3-J5: ghost J0 275 vs real 22.18; free-K oracle 280 / ~21 contacts / 17.25; K-free
+  ideal relay 304 / 10.22 (no hardware); freek 16.20; J5 lens B's per-seat oracle numbers go in as "pending J5" - never
+  wait for them;
+- **a jam-bias column for every pin-knee cell** (the round-16 item 2 pulled forward, because it is a cell of this
+  table): read H1's verified config's pin-a running gap (geometry, ~5 min). If it is under 0.20 mm, wear H1's
+  parameters with the stack rule once (fast, equal parameters); if that moves > 1 fast point, run one stack-rule re-fit
+  on env (near-touch objective, >= 2 starts + one sigma-0.8 restart, <= 45 min), select on envsel, wear frozen exact
+  once. Report-only into the table; any number under 27.20 goes to the verifier as a cx-0 claim with the +0.1 / +0.2 mm
+  probe.
+- Reconcile parking_k's 0.775-0.778 with the 267-272 law cap and the 269-271 ghosts (one paragraph).
+- Write the result to FINDINGS. If no 3-joint family reaches 275 metal takes at the legal seats, end the doc with the
+  blocker text for the lead ("95 at 3 DOF is measured out of reach at the back-of-shoulder and acromion-top seats"),
+  each option with its number: a 4th joint (the jump track's best like-for-like), J1 seats beyond ruling 4 (optional
+  report-only row, <= 20 min, never a design), or the ~17.2 in-band / contact ceiling at 3 DOF.
+
+**B. lowarm-adjpad-knuckle-3r (complexity at the lead's reach; a NEW row, lowarm-halfring is GAMED; 1 slot, <= 120 min).**
+The pass bar moves from 18.28 (cell A on the clashing layer) to the **buildable level: 18.65, or 19.05 with the
+true-lever play**.
+- **Step 0 (geometry + one exact wear, no fit, <= 30 min):**
+  1. Stage 1 at F+3.9 (pin 9.8 / 150) or above link 1b's plate top: zero stage-1 or hold samples in F+0..3.0 (M3 check
+     printed with the claim).
+  2. Place the dwell hold on link 1b's planform, priced as sampled metal: a lever of >= ~25 mm with metal on BOTH sides
+     (the pad-seat test), or an assembly-adjusted RIGID pad (eccentric pin or locked set screw, +0.25-0.5 cx per part)
+     whose residual one-sided play is <= 0.29 deg at every tolerance corner. No spring preload (19.5 cx by arithmetic).
+  3. Wear cell A's verified parameters with that hold, frozen exact once: the pre-registered start number, with pose
+     203's clearance at the worst corner.
+  - Kill at step 0: no hold fits with metal on both sides at <= 0.29 deg; or the start reads > 19.05; or 203 < 0.15 mm.
+- **A0L (one-part groove inside hub 2's O20 + the low arm) runs only if re-priced at the buildable level first.** Its
+  +0.67 / 18.37 estimate was measured on desmo-conecut's clashing layer (F+0.11..1.61); desmo-conecut's nearest buildable
+  candidate reads 20.5. Run it only if its buildable start reads <= 18.65.
+- **Fit:** near-touch objective on env, select on envsel (tools/env_bench.py), frozen exact Bench(110,360) once, held
+  paired vs the lead (CI90, P(better)); convergence gate >= 2 independent starts + one sigma-0.8 restart. Search-box
+  edges = the rule bounds (stage-1 level floor, RC_MIN, PA <= 42, the 0.29 deg play cap) as hard edges.
+- Restore in the same model: bind >= 1 deg of K above the held stroke at a_s +-0.1 mm and mu 0.17; RC_MIN enforced as a
+  cut (rc >= pin radius 0.75 + ridge); the relief pocket as metal; K play carried into th; slot end dK_lim >= 46.3 or
+  45.62 proven safe; the J2 low-end stop load must bypass stage 1 (NEW-stop-through-drive: dowel at K ~46.8 vs groove end
+  46.5).
+- **Pre-registered pass:** frozen exact <= 18.65 at cx <= 17.0, buildable stage 1, hold play <= 0.29 deg and 203 >=
+  0.15 mm at every corner, held paired within 0.5 of the lead. A pass is a buildable Pareto point >= 1.5 cx under the
+  lead; under 18.28 verified and not gamed it is a lead change by the plain-gap rule.
+- **Kill:** frozen exact > 19.05; held paired worse than the lead by > 0.5; cx > 17.0; any spring; play > 0.29 deg at a
+  corner; any M3 overlap; RC_MIN fail.
+- Claim reports plain and near-touch gap, the 1-2 mm shell points, S6 equal-sample in-band for the hold metal
+  (tools/sample_density.py clean), min th with play, a mu column (0.12 / 0.15 / 0.17), the +0.1 / +0.2 mm probe at any
+  rule-floor clearance.
+- Not J5 lens C (desmo-geom-knuckle-3r varies dR / g / PA with no low arm and no pad): B does not vary dR / g. If both
+  land on the same cell, stop and report.
+
+**C. conecut-sidestep-knuckle-3r (takes + contact on the lead's frozen chain; metal moves only; 1 slot, <= 90 min).**
+Each contact made a take is worth ~0.54; 264 + 316 together ~1.1, to about 17.2 (score ~93.75): a lead change on the
+plain gap.
+- **Contacts can only be cleared by moving metal.** 205 (hub 2 -4.28), 237 (crank -9.42) and 264 (hub K -1.17) are
+  dwell poses at K = 0, so no K-law change reaches them; 316 (link 2 -1.23) is the one forced pose.
+- Levers, in the skin tangent plane only: bar offset, lug or crown trim inside O20, hub K phase about its own axis, the
+  crank's phase / side at K = 0 (for 237). Not allowed: radial lifts (in-band 1:1, dead), J2 seat re-splits (J5 lens B's
+  seat oracle), J3-window moves (at its edge: a contact only becomes a stop), any stop that turns a contact into a fold.
+- **Gate 0 (<= 30 min, the frozen-exact per-sample surrogate):** per contact, the binding part sample, its normal, the
+  lateral direction that frees it, mm of clearance per mm of move, and the cost on envsel poses within 15 deg. Prior:
+  a +-1.5 mm bar offset moved 129 by <= 0.4 mm (264 binds radially), so hub K phase is 264's live lever. Kill at gate 0 if
+  the lateral gain is < 1.4 mm per 1.5 mm of move at both 264 and 316, or the move loses an envsel take. 205 and 237 are
+  priced here only (4.28 / 9.42 mm are beyond an O20 trim); continue on them only if gate 0 shows a lever.
+- Lever size on envsel with a pre-registered >= 0.2 mm clearance at the cleared pose (0.014-0.197 mm grazes are not
+  clears) and the +0.1 / +0.2 mm probe; the Bench(110,360) reading is a kill test, never a pick.
+- **Claim:** frozen exact once; held paired vs the lead; report the 1-2 mm shell points and pose 203 before / after.
+  **Kill:** held paired P(better) < 0.5, any new contact, or 203 under 0.15 mm.
+- Apply the same lever to B's cell if B passes.
+
+### Carried (ideated, never screened)
+
+None. The 21 ideated catalogue entries all fall under measured closures (straight / telescoping / tape translations add
+0 fold takes; lazy-tongs-j2 is a K law under the 17.25 oracle; lone-helix-humeral breaks the CAD path rule; rolling cones
+are a gear-class coupling; tripods / crossed rails need passive translations or have no compact part). The round-4
+picks are done.
+
+### Elsewhere, not to be duplicated
+
+- Jump round 105: carrail-relay-knuckle-4r / carrail-relay-kfree-4r (lens A), seatoracle-erwall-knuckle-3r (lens B),
+  desmo-geom-knuckle-3r (lens C).
+- freek-oracle-route-knuckle-4r: env polish running (2 processes).
+- crest-knee-3r: the round-14 generation-winner L2 CAD at the joggle config (the lead's slot): machined knee link (3.19
+  mm step over 13.26 mm > the 2.78 mm a bent bar rises), strap top skimmed flush with the boss face inside the knee's
+  sweep, MR63ZZ knee pins, knee window [26.64, 153.36] as a physical stop. Stills need the user's separate yes.
+
+### Round 16 (unchanged from the re-dispatch close)
+
+1. If lens A confirms no 3-joint family reaches 275 metal takes at the legal seats, the lead takes the 3-DOF ceiling to
+   the user as a blocker.
+2. The stack and strap-skim rules into the whole pin-knee family at cx 0 (lens A runs the H1 cell now).
+3. The tolerance probe at rule floors (already in force this round).
+
+### Needs the user's say
+
+- The 3-DOF ceiling (lens A's table, then the blocker message).
+- B1 (G4, m_sub at K rest), unchanged; the withdrawn CI tie rule, still with the user.
+- The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule and the transmission guard stay; no lens relaxes
+  them.
