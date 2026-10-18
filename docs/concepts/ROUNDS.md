@@ -4772,3 +4772,70 @@ cap-plateau-knuckle-3r (held wear of audit 3s); crest-knee-3r (generation-winner
 (polish confirmed, no rescreen). Carried: none (the 21 ideated catalogue entries are all under measured closures).
 Box: 4 cores, one verifier running; each lens <= 2 niced processes, OMP_NUM_THREADS=1, fast surrogate before any
 exact wear; commit after every step.
+
+## Round 105 results (Round J5, track jump; 2026-10-18 ~09:10 - ~11:50 UTC; written by the round-106 planner from the rows, events and ledger: the third container restart cut the closer)
+
+Ledger at 12:25 UTC (`tools/alignment_ledger.py get <id>`): proxtrack-relay-knuckle-4r, desmo-geom-knuckle-3r,
+acroant-conecut-knuckle-3r and seatoracle-erwall-knuckle-3r all exit 2 (no entry); the lead conecut-knee-knuckle-3r
+exits 0 WATCH. No bench, judge or kit file changed during the round. Farm closed: everything ran locally (<= 2 niced
+processes). The judge (0843173, docs/concepts/round105_ideation.md) picked 4 of the ideas and killed both carrail relays
+at step 0 with measured numbers. "Frozen" = frozen exact Bench(110,360), the verification protocol; envh = 60 clip frames
++ 210 fresh envelope poses (held-out free).
+
+| design (lens) | frozen exact | held | reach / contacts | act / P / cx | outcome |
+|---|---|---|---|---|---|
+| proxtrack-relay-knuckle-4r (A survivor: arm-fixed relay shell 16-20 mm PROXIMAL of the pad on the frozen lead, zero lift, split rigid bump; PHI 35, ds 19.54, rt_extra 1.5, a 10.41, bump 1.0, band 9.27, ramp 6.15) | **plain 14.02 / gate 14.40** (chain-only ib14 0.8962; pooled 0.9196) / near1 17.68 | plain 18.01 / gate 18.51 (lead 22.38, freek 21.89) | 0.7917 (285/360) / 13 (lead 4), overhead 8/28 | 4 / 0 / 52.5 | **screened, passes its pre-registered gate (<= 15)**; pre-registered PHI 30 config 20.59 spec bump (kill) / 16.82 refined bump; verification runs separately (verify-claim wf_61d461b8-269) |
+| desmo-geom-knuckle-3r (C: slim-pivot regressive desmo, stage 1 inside hub 2's O20) | variant W k22 18.43 (death audit) | - | 0.7278 / 4 (= the lead's) | 3 / 0 / 16.5 | **DEAD** (no stage-1 pin inside O20 passes the PA gate: 108 geometries x ~7800 pins, min PA 43.9 vs 34.47 / 38.03; audit 46af77e re-scan 131 geometries, 0 pins: annulus 1.38 mm vs >= 1.63 mm stroke) |
+| acroant-conecut-knuckle-3r (seat lever: J1 +5..+10 deg along the acromion top on the lead's coupled K) | +5 seat-only 18.28 (= lead, paired 0.00 CI90 [-1.02, +0.56]); +2 18.83; CMA best 19.66 | +5 22.37 | 0.7278 / 4 | 3 / 0 / 18.5 | **DEAD** (pre-registered stop: envh CMA walks J1 back to d_az1 1.16 / 1.45 < 2.5; kill: +0.2 mm probe 19.37 vs the lead's 18.83, pose 203 at 0.138 mm < 0.15) |
+| seatoracle-erwall-knuckle-3r (B instrument: free-K oracle at the seats) | best cell L0b 17.69 connected (277 takes, 13 contacts) | - | 0.7694 / 13 | 3 / 2 / - | **DEAD** (instrument kill: every cell > 17.25) |
+| carrail-relay-knuckle-4r / carrail-relay-kfree-4r (A, judge step 0) | posterior free window 15-25 deg; any tail carrying PHI >= 30 reads >= 27.4 / K-free buildable axes >= 15.70 plain, 15.92 2-mm, 26-29 contacts before any rail metal | - | - | 4 | **DEAD at step 0** (judge, measured) |
+| conecut-knee-knuckle-3r (the lead, reference) | 18.28 | 22.38 (22.43 kit density) | 0.7278 (262) / 4 | 3 / 0 / 18.5 | stays the verified lead |
+
+**Winner: none yet.** No design an independent verifier confirmed this round. proxtrack-relay-knuckle-4r is the round's
+best screened number and the best held-out number on file (18.01 plain vs the lead's 22.38: -3.87 held with the same
+bench -> held inflation, +4.11 vs +4.10); it is a 4-joint design at cx 52.5 (lead 18.5) with 13 contacts against 4, so
+under the user's 2026-10-17 ruling it goes to the user as the 4-joint option, never as the lead. If its verifier confirms
+it, it is J5's winner and the generation-CAD candidate (the lead's call). Open audit work: the acroant death audit
+(11:51Z: wear the envh seat optimum d_az1 +1.0 / +1.5 frozen exact) and the desmo-geom variant W held wear have no result
+on file (cut by the restart); none of the four rows nor the two carrail deaths has a ledger entry.
+
+**proxtrack's red team, carried as watch items until its audit lands:** (1) dilution: plain 14.02 reads the pooled
+in-band (303 shell samples 99.5 % in band); the chain-only gate 14.40 is the honest number. (2) The pass rests on the low
+shell (rt_extra 1.5 at the box edge; rt 2.5 reads gate 15.26): the skin bulge at the arm's widest section decides it.
+(3) One-sided folded-side relays put chain metal in the skin: 262 -9.79, 206 -6.07; 466 -8.22 at phi 28. (4) 6 boss /
+knee near-jams at 0.94-0.99 mm (rule floor), 5 with metal in the skin (kept as contacts); a +0.15 mm bump probe (claim
+bench, diagnostic) reads 14.20 with 0 jams. (5) The fast bench is near-blind to PHI (fast ranking 25 > 30 > 35 at 12.69 /
+10.98 / 9.80); two hardware configs were read on the claim bench (pre-registered PHI 30 and the PHI 35 pick). (6) The
+optimum sits on two floors (rt_extra 1.5, ramp 60 deg). (7) Pose 264: the main round-15 re-launch plan measured it at
+-5.80 on the lead's own dump (-1.17 only on the desmo chain), so proxtrack's -5.80 there is not a bump cost.
+
+**What the round measured (lessons).**
+1. **The arm-side relay's price was the hardware placement, not the relay.** Moving the station 16-20 mm proximal of the
+   pad (the bracket becomes a legal ~50-deg bent bar at ds 19.5) with a SPLIT rigid bump (R_t + 1 over the shell, + h_c
+   only over the carriage footprint) and a low shell turned armarc's 18.01 into 14.02 plain / 14.40 gate. A uniform bump
+   costs chain-only in-band 0.9012 -> 0.8371 (+6.4 gap); every mm of shell height costs ~0.9 gap through the bump. The
+   hardware sits 0.81 (plain) above its own ideal bound at PHI 35 (13.21, first on file; PHI 30 13.78, PHI 45 12.37).
+2. **What stands between proxtrack and 95 (13.75) is contacts, not reach:** gate 14.40 = in-band 0.38 + reach 10.83 +
+   contact 3.19. 9 of 33 relayed bench poses are contacts (the one-sided spring relays folded-side poses 262 / 206 into
+   the skin, the planner's step-0 item 4 was NOT met) and 56 fold poses lie beyond the relay; overhead stays 8/28. One
+   contact made a take is worth ~0.52, a contact refused ~0.25 (0 under Proposal B).
+3. **A jam must never delete a contact:** 5 of 6 near-floor jams had chain metal in the skin (15.62 -> 16.82 gate when
+   kept as contacts).
+4. **The K-free base is closed for relays:** buildable axes read >= 15.70 ideal with 26-29 contacts before any rail metal;
+   only the tilt-0 long axis (10.22) is under 15, and no rail fits there (20-36 mm skin spread under the sweep). A
+   carriage rail on the pad side has only a 15-25 deg posterior free window (>= 27.4 at PHI >= 30).
+5. **Seat level of the second wall (instrument):** at the lead's seats a long stop B (76.04) closes 24 more stretched poses
+   but 9 of them carry their own contacts (119 -13.2, 405 -10.3, 448 -5.1, 399 -4.6, 117 -2.2 ...) and the stroke costs
+   in-band (0.909 -> 0.886 fast): 17.69. J1 forward on the k33 seats trades the ER wall (117 / 148 cleared at +25) for the
+   overhead clip (frames 7-11 at -3.5..-4.4 mm): 21.73 / 22.91. **The overhead clip contacts are a J1-seat (azimuth)
+   property:** taken at the lead's seats, in the skin at k33 / forward.
+6. **J1 forward along the acromion top on the coupled K is a flat tie that loses at the tolerance probe:** the search walks
+   d_az1 back to 1.2-1.5 deg; +5 ties 18.28 (held 22.37) and fails the +0.2 mm probe (pose 203 0.138 mm).
+7. **The desmo family's ceiling is a tie at the lead's takes:** with stage 1 inside O20 no pin passes PA (the annulus
+   1.38 mm is under the >= 1.63 mm stroke); with the ring past the rim (variant W) 18.43 frozen.
+8. **Bench(60,160) fast is blind to both seat moves (acroant: every honest config 12.50) and relay range (PHI):** envh /
+   envsel select, the claim bench only kills.
+
+**Next focus (round 106, track jump).** 95 has not been reached (best screened 14.40 gate / 14.02 plain at 4 joints,
+best verified 15.40 polished at 4 joints and 18.28 at 3). The measured limiter of the nearest design is its 13 contacts
+(9 relayed, 2 of them folded-side one-sided relays), not its reach. Plan: docs/concepts/ROUNDS.md "Round 106 plan".
