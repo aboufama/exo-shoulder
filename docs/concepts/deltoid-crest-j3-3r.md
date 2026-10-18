@@ -236,7 +236,7 @@ What was checked:
 5. **Contact depth (T5, lead's rule).** Per-pose dump `docs/alignment/remeasure/deltoid-crest-j3-3r_bench_perpose.json`
    (alignment_paired format; the tool itself cannot wrap this kit model - no pin-knee-style audit - so the harness
    writes the same rows through `alignment_paired._dump_bench` / `gap_parts`); its recomputed gap 47.87 reproduces
-   47.86 within 0.05. 20 contact poses (13 workspace, 7 clip), depths 0.10-3.26 mm (median 0.84; 5 deeper than 2.5 mm).
+   47.86 within 0.05. 20 contact poses (13 workspace, 7 clip), depths 0.10-3.26 mm (median 0.99; 5 deeper than 2.5 mm).
 6. **Losses (re-attributed, identical to the claim):** workspace 207 / 360 taken - fold stretched 96, folded 1,
    part-part 43, contact 13 (link 2 7, neck 5, hub 2 4, hub 1 3, hub 3 1 over clips + ws); overhead 4 / 28 (stretched
    15), across the body 19 / 68 (stretched 48). th p5-p95 19.3-131.2 deg against the window [10.4, 77.8].

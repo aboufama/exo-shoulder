@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 0,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-17T22:48:46Z",
  "reach": 0.65,
@@ -16,11 +16,11 @@
  "contact": 0.0307,
  "gap": 36.63,
  "bench": "Bench(60,160) fast, zc-frontier verified checks (top faces, crowns, near-touch, hub F <= 140, 1 mm radial K6)",
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.575,
+ "v_follow": 0.8909,
+ "v_inband14": 0.867,
+ "v_inband10": 0.4791,
+ "v_gap": 47.86,
  "n_configs": 2526,
  "best_params": {
   "az": 105.4971,
@@ -294,7 +294,7 @@
  },
  "verdict": "EXPECTED DEAD on the kill bar, formal convergence gate open: best fast 36.63 (score 86.68) on Bench(60,160) after 2526 configs; frozen exact Bench(110,360) of 36.63: 47.86 (score 82.60; reach 0.575, follow 0.891, ib14 0.867, contact 0.062, near-touch 64.84, overhead 4/28) - the fast gain did not transfer (37.90 config: 47.88, score 82.59; reach 0.578 = 208/360, follow 0.873, ib14 0.880, contact 0.059, near-touch 72.17, overhead 4/28) - 15.8 points above the spec's kill bar (j3-neck-over-3r 32.10 frozen), behind the zc-frontier optimum (31.04 frozen) and the lead (18.28). Dominated: the zc optimum below the crest (wd 85.7) reads 30.69 fast through the same code; moved onto the crest (wd 95 / 100) it loses 7.7 / 10.3. Gate after the s6 wide restart: 1.204 / 0.462 / 0.422 (2nd half > 1) - the row stays screened; ~900 more no-gain tries would close it formally.",
  "limiter": "the J2 fold (stretched side): the crest J3 seat widens the J1-J3 angle range to 20-143 deg (p5-p95, Bench(110,360)) against the dyad window 18.4-84.6 at the best arcs 38.1 / 51.5 -> 90 of 360 ws lost stretched (overhead 14 / 28, across 51 / 68); the arcs that widen the window (a1 >= 44) lift hub 2 to 69-83 mm, 0.02-0.07 in band at O20 (the round-4 equal-arc basin was an O15 / margin-10 artefact). Secondary: part-part at the cap binders (link 1 on hub 2's cap plate), near-touch (min metal 0.01 mm).",
- "note": "Closing screen (round 14 carried pick; lens plain-crest-j3-cap seed; crest-knee-3r's no-knee control). Model = zc-frontier-3r's build + verifier checks unchanged, search clamped to the crest box (J1 bvec az 30-120 / el 48-80 in ruling 4, J3 wdir wd 95-120 / wa -20..20, a1 34-64, a2 38-70, sigma +-1, inv2 / inv3 0/1, q 0.85-1, end_extra 0-6). Local only (farm closed), niced, <= 2 processes. Sweep: 493 Sobol + CMA s1 (441, from Sobol best 48.05) + s2 (369, long-a1 cap basin, pinned at the box edges a1 64 / el 79: 44.62) + s3 (289, 37.90) + s4 (257, 0 gain) + s5 (311, 0 gain) + s6 (221, wide restart sigma 0.7: 36.63) + s7 (145, 0 gain). CONVERGENCE GATE (score points, sweep in evaluation order, n 2526): gain over 2nd half 1.204, over last third 0.462, top-5 spread 0.422 -> NOT passed (the s6 wide restart's +0.46 landed in the 2nd half; it read 0.742 / 0.149 / 0.244, passed, at n 2160 before s6); the converging chain s3+s4 alone 0.149 / 0.0. Seeds at O20 / margin 5: A 71.21, B 69.65, cap cell 60.39 (judge 62.80). Hub 2 in band by a1: 34-40 0.95 (F 61), 40-46 0.07, 46-52 0.03 (F 80), 52-58 0.02, 58-64 0.76. Best gap by wd: 95-100 40.30, 100-105 37.90, 105-110 45.19, 110-115 60.39, 115-120 77.06. Control (same code, fast): zc optimum 30.69 at wd 85.74 -> 38.43 / 41.01 / 74.85 at wd 95 / 100 / 103.08 (docs/concepts/verify/deltoid-crest-j3-3r_wd_slice.json). Red team: near-touch gap 69.09 fast / 72.17 frozen (min metal 0.12 / 0.01 mm, q 0.943 sets levels at the 94th percentile); no K2 jam; contacts link 2 / hub 2 / hub 1; cap binders (0,150,-15), (30,135,0), (0,105,15) lost to part-part (link 1 on hub 2's cap plate), J2 exits 50-60 mm there (hub 2 F 59.6): the short a1 fixes hub 2 and pays in the fold. Spec corrections: O15 -> O20, margin 10 -> 5, no base stub (CAD ruling 1: handler carries the base at the J1 hub ring). 0 passive translations, complexity 0. Frozen exact of 36.63: 47.86 (docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json); of 37.90: 47.88 (frozen_exact_37_90).",
+ "note": "Closing screen (round 14 carried pick; lens plain-crest-j3-cap seed; crest-knee-3r's no-knee control). Model = zc-frontier-3r's build + verifier checks unchanged, search clamped to the crest box (J1 bvec az 30-120 / el 48-80 in ruling 4, J3 wdir wd 95-120 / wa -20..20, a1 34-64, a2 38-70, sigma +-1, inv2 / inv3 0/1, q 0.85-1, end_extra 0-6). Local only (farm closed), niced, <= 2 processes. Sweep: 493 Sobol + CMA s1 (441, from Sobol best 48.05) + s2 (369, long-a1 cap basin, pinned at the box edges a1 64 / el 79: 44.62) + s3 (289, 37.90) + s4 (257, 0 gain) + s5 (311, 0 gain) + s6 (221, wide restart sigma 0.7: 36.63) + s7 (145, 0 gain). CONVERGENCE GATE (score points, sweep in evaluation order, n 2526): gain over 2nd half 1.204, over last third 0.462, top-5 spread 0.422 -> NOT passed (the s6 wide restart's +0.46 landed in the 2nd half; it read 0.742 / 0.149 / 0.244, passed, at n 2160 before s6); the converging chain s3+s4 alone 0.149 / 0.0. Seeds at O20 / margin 5: A 71.21, B 69.65, cap cell 60.39 (judge 62.80). Hub 2 in band by a1: 34-40 0.95 (F 61), 40-46 0.07, 46-52 0.03 (F 80), 52-58 0.02, 58-64 0.76. Best gap by wd: 95-100 40.30, 100-105 37.90, 105-110 45.19, 110-115 60.39, 115-120 77.06. Control (same code, fast): zc optimum 30.69 at wd 85.74 -> 38.43 / 41.01 / 74.85 at wd 95 / 100 / 103.08 (docs/concepts/verify/deltoid-crest-j3-3r_wd_slice.json). Red team: near-touch gap 69.09 fast / 72.17 frozen (min metal 0.12 / 0.01 mm, q 0.943 sets levels at the 94th percentile); no K2 jam; contacts link 2 / hub 2 / hub 1; cap binders (0,150,-15), (30,135,0), (0,105,15) lost to part-part (link 1 on hub 2's cap plate), J2 exits 50-60 mm there (hub 2 F 59.6): the short a1 fixes hub 2 and pays in the fold. Spec corrections: O15 -> O20, margin 10 -> 5, no base stub (CAD ruling 1: handler carries the base at the J1 hub ring). 0 passive translations, complexity 0. Frozen exact of 36.63: 47.86 (docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json); of 37.90: 47.88 (frozen_exact_37_90). VERIFICATION 2026-10-18 (adversarial verifier): claimed config re-measured frozen on Bench(110,360) exact with the zc-frontier checks + top faces + 1 mm radial K6 = v_gap 47.86 (score 82.60; reach 0.575, follow 0.891, ib14 0.867, ib10 0.479, contact 0.062), reproducing the claim; Bench(60,160) exact refit 36.64 (fast 36.63: no artefact); fold margin min 6.46 deg in th over taken poses; 0 flips; kNN continuity flood: no islands; contact depth max 3.26 mm over 20 poses. Champion on the same bench and checks: 75.94 (risley-turret verifier, kit checks + 1 mm radial; this harness's extra top-face check can only raise it) -> not refuted. Verified does not mean alive: dead on the kill bar (32.10) and 29.6 points behind the lead (18.28).",
  "doc": "docs/concepts/deltoid-crest-j3-3r.md",
  "mechanism": {
   "active_dof": 3,
@@ -552,5 +552,35 @@
    "near": 0
   },
   "of_fast_gap": 37.9
+ },
+ "verification": {
+  "t": "2026-10-18T00:05:00Z",
+  "harness": "docs/concepts/verify/deltoid-crest-j3-3r-skeptic.py",
+  "config": "claimed best (36.63 fast): row best_params",
+  "bench": "Bench(110,360) exact, frozen shape (fit Bench(60,160) fast), zc-frontier checks + top faces + 1 mm radial K6",
+  "v_gap": 47.86,
+  "score": 82.6,
+  "v_contact": 0.0615,
+  "near_touch_gap": 64.84,
+  "min_metal_mm": 0.05,
+  "fit60_exact_refit": 36.64,
+  "th_margin_min_taken": 6.462,
+  "closure_err_deg": 0.0,
+  "flips": 0,
+  "hub_F": {
+   "hub1": 50.77,
+   "hub2": 59.77,
+   "hub3": 62.0
+  },
+  "flood": "kNN-8: 263/263 closing ws poses connected (no islands); grid-neighbour flood 71/207 is a sparse-sample artefact",
+  "contact_depth_mm": {
+   "n": 20,
+   "max": 3.26,
+   "median": 0.99,
+   "deeper_than_2_5": 5
+  },
+  "perpose": "docs/alignment/remeasure/deltoid-crest-j3-3r_bench_perpose.json",
+  "champion_same_bench": 75.94,
+  "refuted": false
  }
 }
