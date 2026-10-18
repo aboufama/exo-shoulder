@@ -3549,3 +3549,17 @@ gain under the stop-refusal side reading on the CAD shape (+0.76) or the bench (
 vs 96.9) refuses more poses that would be contacts. Search-bench hygiene holds on the env rule's metrics (>= 2.2 deg),
 but one envh pose is 1.66 deg from a held-out pose in the glenohumeral frame. The row keeps its verified 16.20; the
 polished config is recorded as `polished_*` fields; the 3-joint lead stays the lead.
+
+### seatoracle-erwall-knuckle-3r (round 105 lens B, instrument) - DEAD by the pre-registered kill: no K law and no J1 move along the acromion top reaches 95 at the lead's or k33's seats (2026-10-18)
+
+Free-K oracle (verified harness, kit metal, NSR 7), frozen exact Bench(110,360), connected on each cell's own kinematic flood.
+Lead's seats + stop B 76.04 with K dyad 32 / 52: **17.69** (277 ws takes, 13 contacts, ib14 0.886, follow 1.0; kit 18.26). The
+plan's bk1 26 cannot carry that stroke: the K rule a1max <= bk1 + bk2 - 5.5 forces bk2 >= 55.55 and the flat K triangle
+(26 / 37.55 / 55.56) puts link 1b over hub 1's crown (0.89 mm, every state-A pose; 165.18). Control at the lead's stroke 58.77
+(same seats, oracle K): 20.52 (255 takes, 5 contacts, ib14 0.913). The stroke newly closes 24 ws poses: 13 clear, 2 near, 9 in the
+skin (119 -13.2, 405 -10.3, 448 -5.1, 399 -4.6 mm ...) with the best K already picked, and costs in-band 0.023 at equal K dyad
+(fast). J1 forward on the k33 seats: +15 21.73, +25 22.91 vs 17.25 (ER 117 / 148 clear at +25, in-band 0.882, overhead clip
+still in the skin). NEW: the overhead clip frames 7-11 / 234 / 290 are TAKEN at the lead's seats (1.5-1.9 mm at its stroke) and
+3.5-4.4 mm in the skin at the k33 seats and forward of them - a J1-seat (az 95.4 vs 101.6) property, not a K one; the ER binders
+pull J1 forward, the overhead clip pulls it back. The GH-ray seat proxy's pose classes held (24 vs 27 newly closing; 13 / 2 / 9
+vs 15 / 2 / 10); its gap was 1.1-1.7 optimistic (in-band). docs/concepts/seatoracle-erwall-knuckle-3r.md.

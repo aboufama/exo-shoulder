@@ -75,6 +75,43 @@
   },
   "dropped": 0
  },
+ "C0": {
+  "kit": 19.71,
+  "static": 18.83,
+  "conn": 20.52,
+  "near": 22.16,
+  "ws_taken": 255,
+  "contacts": 5,
+  "contacts_ws": 5,
+  "ib14": 0.9128,
+  "ib10": 0.5785,
+  "follow": 1.0,
+  "reach": 0.7083,
+  "moved": 39,
+  "min_mm": 0.056,
+  "near1": 5,
+  "lost_ws": {
+   "fold": 87,
+   "slide": 7
+  },
+  "oh_taken": 8,
+  "oh_contact": 3,
+  "p203": {
+   "st": "refused",
+   "why": "slide",
+   "kind": "ws",
+   "elev": 90.0,
+   "plane": 0.0,
+   "axial": 45.0,
+   "moved": false
+  },
+  "margins": {
+   "min_th_margin": 5.5,
+   "at_pose": 185,
+   "below_5_5": 0
+  },
+  "dropped": 6
+ },
  "S1": {
   "kit": 22.9,
   "static": 21.73,
@@ -148,5 +185,20 @@
    "below_5_5": 0
   },
   "dropped": 0
+ },
+ "L0b_vs_C0": {
+  "new": 24,
+  "cls": {
+   "skin": 9,
+   "clear": 13,
+   "near": 2
+  },
+  "lost_new": 0,
+  "common": {
+   "taken->taken": 260,
+   "contact->contact": 3,
+   "taken->contact": 1,
+   "contact->taken": 2
+  }
  }
 }
