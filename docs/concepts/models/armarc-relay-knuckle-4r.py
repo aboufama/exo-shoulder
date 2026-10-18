@@ -267,6 +267,12 @@ def rerecord(M, B, G, ax, phi_b, HG0):
                 relay_median_mm=round(float(np.median(rc)), 2) if len(rc) else None)
 
 
+def held_bench():
+    """the lead family's held-out bench (every fit-clip frame and ws pose not in Bench(110,360) / Bench(60,160); exact)"""
+    sp_ = importlib.util.spec_from_file_location("pk_polish_v_armarc", os.path.join(REPO, "docs", "concepts", "verify", "skin-normal-3r-pin-knee-polish.py"))
+    PVm = importlib.util.module_from_spec(sp_); sp_.loader.exec_module(PVm); return PVm.held_bench()
+
+
 def evaluate_relay(params, nc=60, nw=160, exact=False, verbose=False):
     """fit the lead on Bench(60,160) fast at phi = 0 (frozen shape), solve phi per frame with the FITTED lead's gates,
     wear on Bench(nc,nw) with the relayed arm-side frames + the relay metal + the arm-side lift"""
@@ -295,7 +301,7 @@ def evaluate_relay(params, nc=60, nw=160, exact=False, verbose=False):
             self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
             self._truncate()
     if exact: os.environ["CB_EXACT"] = "1"
-    B = CB.Bench(n_clip=nc, n_ws=nw)
+    B = held_bench() if nc == -1 else CB.Bench(n_clip=nc, n_ws=nw)
     phi_b = phi_fill[B.idx]
     with patched(Zr):
         M = Frozen(B, P2); r = M.run()
@@ -398,6 +404,7 @@ if __name__ == "__main__":
     if mode == "gravity":
         print(json.dumps(gravity_check(par))); sys.exit(0)
     if mode == "frozen": out, M, B = evaluate_relay(par, 110, 360, exact=True)
+    elif mode == "held": out, M, B = evaluate_relay(par, -1, -1, exact=True)
     else: out, M, B = evaluate_relay(par)
     out.pop("_M", None)
     out["params"] = par; out["row"] = ID
