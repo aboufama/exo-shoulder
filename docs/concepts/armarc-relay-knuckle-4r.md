@@ -300,3 +300,57 @@ death again. Dead stands.
 
 Machinery note: the exact hardware wear now makes one distance call per pose for the contact-only parts. It runs in
 548 s, against ~2900 s before, and reproduces 18.01 exactly.
+
+## Audit (2026-10-18 ~08:40 UTC): the death stands
+
+The auditor tried to refute the death. The bar is the round-104 lead, conecut-knee-knuckle-3r, at **18.28** frozen exact
+on Bench(110,360), with the pre-registered kill at 17.5. Both are stated by hand: the verify template's 68.93 / 75.94 /
+30.35 are stale. By that stale template the fast 8.79 would "pass" trivially, and that reading means nothing here.
+
+**Convergence gate** (sweep v2, 102 configurations; score points):
+
+- gain over the second half 0.00;
+- gain over the last third 0.00;
+- top-5 distinct configurations within 0.41.
+
+Converged. The space is small (PHI, tilt, azimuth, sense, bracket). It covers tilt 0-16, azimuth 0 and 225-270 (the
+geometric circularity scan picked the arc) and PHI 10-45. The sense -1 was run in v1 (15 configurations, 21.6-169 fast).
+No region was missed that the kinematics point to.
+
+**Reproduced.** The 18.01 comes back exactly from the saved per-pose frozen exact results: 110 clips, 275 ws takes and
+11 contacts, so 396 poses recorded. This was not a re-run, because the box was carrying two other agents' processes
+under the <= 2 rule.
+
+**Code review: no bug found that moves the number.**
+
+- The relay is HG' = HG R(a_r, phi) in the humerus frame. The track is arm-fixed (HG0), the carriage rides HG', and the
+  skin stays the pose's own.
+- The least-phi solve uses every lead gate.
+- The 11 contacts are the same with the ideal relay (contact 0.0278 with and without relay metal). They are chain metal
+  (member 3, hub 3, the neck), not a relay-hardware artifact.
+- The 4.59 mm lift is the carriage-top term (76.1 + 1.7 - 73.2), not the jam term. It is physical: the stack is 4 mm
+  liner + 1.5 shell + 0.2 gap + 1.5 plate, and only 2.6 mm separate the skin p90 from the pad.
+
+**Readings the auditor added** (arithmetic on the saved per-pose results;
+the method reproduces 18.01 at PHI 20 exactly):
+
+| reading (frozen exact Bench(110,360)) | gap | chain-only in-band reading |
+|---|---|---|
+| as measured (PHI 20) | 18.01 | 21.73 |
+| continuity applied to contacts: 206 (0/120/-15, phi 17.4, -6.07 mm) is a flood island, so it is blocked (lost), not a contact | 17.76 | 21.48 |
+| PHI cap 15 (end dowel blocks relays > 15 as lost); claim-bench pick, NOT admissible | 17.83-18.02 | 21.55 |
+| PHI cap 10, same caveat | 17.36-17.75 | 21.08 |
+| lead conecut-knee-knuckle-3r | 18.28 (dilution-corrected 18.67) | - |
+
+- Only one diagnostic dips under the kill: the PHI-10 cap, with in-band held at PHI 20's value. That PHI was read off
+  the claim bench (the P1 class); the fast bench picked PHI 20, and PHI 10 reads 10.06 fast against 8.79.
+- Its honest chain-only reading is 21.08, against the lead's dilution-corrected 18.67.
+- Near-touch is 21.72, against the lead's 19.92.
+
+**Measured reason in one line.** A relayed pose parks the chain's own metal on the skin: 7 of 20 relayed bench poses are
+contacts, the same with the ideal relay. The knee stack's 4.59 mm climb onto the carriage also costs the chain 0.055 of
+in-band, which the shell's 24 % share of samples (100 % in band) hides. So every honest reading sits above the lead,
+and the design costs 4 DOF and complexity 52 against 18.5.
+
+**Next.** As the screen said: no relay or 4th-joint idea gets compute until it shows that its relayed poses clear the
+skin by >= 2 mm on the lead's REAL metal, with a carriage that needs no lift (track top <= the pad's underside).
