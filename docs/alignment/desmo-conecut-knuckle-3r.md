@@ -266,3 +266,81 @@ None found. I checked these:
 Instrument notes for the next audit (not gaming):
 - The continuity source depends on file mtime order.
 - The held overhead near-touch (10 of 18 poses under 2 mm) was not in the audit's table.
+
+## Skeptic, CAD-triggered audit (2026-10-18, 05:45-05:59 UTC)
+
+Ledger entry 2026-10-18T05:59:03Z, by skeptic, run `skeptic:desmo-conecut-knuckle-3r`. It answers the auditor's
+CAD-triggered entry of 2026-10-18T05:52:06Z (WATCH on claim 18.98, 15 reasons).
+
+**Final verdict: WATCH.** The ledger tool takes the worst level among the reasons not refuted with evidence. All 15
+reasons are upheld; none is refuted. Rulings: `docs/alignment/desmo-conecut-knuckle-3r.rulings.json` (this file
+replaces the 2026-10-17 rulings, whose S2 and T1 refutations are no longer among the reasons).
+
+**How I checked.** I re-read every number from the raw files with my own short scripts, without importing the audit
+tool. The sources were the verifier's `_v_{bench,held}_frozen_blend.json`, the auditor's `remeasure/*ringframe*` and
+`*s1level3p9*` files, and the gen-9 CAD's `build.json`, `stage1_level_scan.json`, `judge/part_contact.json`,
+`judge/body_contact.json`, `judge/dynamics.json` and `VERIFY.md`. I also read the row, `morphs.json` and the model
+source. Nothing new was run: the box was at load 17 on 4 cores, and an exact wear takes about 11 minutes there. $0 spent.
+
+### Rulings
+
+1. **continuity: upheld.** The held blend file reads full 23.19 (0 dropped) and knn 32.18 (84 dropped). The rule is
+   applied as coded.
+   - New since the last skeptic: a same-chain row now has a held knn flood on file. lowarm-halfring reads 22.70 to
+     30.93 (-8.23, 77 dropped), and this row's linear-IK held file reads -8.24. So the held knn loss belongs to the
+     conecut chain on the held sample, not to the drive.
+   - Still upheld: no other chain has a held knn flood, and the full flood checks no skin at its envelope nodes.
+2. **reporting: upheld.** The row verdict, unchanged since 2026-10-17 20:48, is still the screen text. The dashboard
+   was rebuilt at 05:42 and carries the same text.
+3. **M3: upheld, every number re-derived.**
+   - Where the layer sits: build.json gives groove_mid 0.861 at glev -1.0, so the pivot is 1.289 mm below hub 2's face.
+     The insert sits at F+0.111..1.611 and the short arm at F-1.825..-0.325, against the plate at F..F+3.
+   - The box: the clamp [-1.0, 1.5] keeps the layer bottom at F+0.11..2.61, inside the plate for every value.
+   - R6: max_depth 1.50 mm, 8 violating pairs, all stage-1 parts in l1b.
+   - The re-wear: `_s1level3p9_bench.json` reads frozen 20.5, with glev_used 2.039, layer [3.15, 4.65], desmo_fail []
+     and a dump that recomputes to 20.51. It ran on the same harness as the 18.98.
+   - Feasible pins in the level scan: 2 at F+3.9 and 0 from F+4.6 up.
+   - Note for the next audit: part of the +1.52 is the bigger ring that the a_s 9.8 pin needs (n_ring 19 to 29; the
+     model's r_out grows with the pin radius, lines 250-255). That ring is real metal of the candidate, not an artefact.
+4. **NEW-inherited-stack: upheld.** Confirmed: lowarm-halfring runs glev -1.0 on desmo-conecut's own
+   `_desmo_build_B`, and desmo-slipper runs glev -0.5 with the same formula (line 148) and the same box (line 87).
+   Neither row has an R6 reading of stage 1.
+5. **NEW-sample-frame: upheld on its unmeasured half.** The frame re-wears are confirmed: 19.07 bench and 23.28 held,
+   with the pin inside the model band 1.0 and inside the fixed band 0.864. The 28 deg of insert sector outside O20
+   (123.88 vs 95.9 deg) is not sampled and has not been re-worn by anyone, so the +0.2 stays an estimate.
+6. **T3: upheld.** The numbers are confirmed: held 5.006 (pose 1054, dK 46.27, slope 0.403), 0 poses under 5, and
+   bench 5.181. The red team's slope 0.08 gives 4.986 on one pose.
+   - Why I did not refute it as "the rule as written": the rule has a second clause, "a model that clamps another angle
+     must show its stops engage at >= 5 deg of th". Stop B and the J2 dowel clamp K and q2 at K_law 46.5, not th.
+   - No file reports th at that stop. The verifier's own slope carried from pose 1054 to K 46.5 gives about 4.91 even
+     without play. That is an estimate, not a measurement.
+7. **NEW-stop-through-drive: upheld, now from the CAD's own numbers.** The groove's rise ends at q2 -14.282. The J2
+   dowel's window is -14.315 and it engages at -14.455. So the drive meets its end 0.17 deg of q2 (about 0.37 deg of K)
+   before the dowel touches. No force number exists.
+8. **G3: upheld.** The nominal case passes. At f 0.05 the cuff twists 11.74 deg (23 lags over 10 deg) on s1 and 11.78
+   deg (29 lags) on s2. K is driven by the law (law error 0.099), so the drive's own force flow is unmeasured.
+9. **R1: upheld.** The dashboard row is status verified, v_gap 18.98, sweep_gap 86.19, with the "BOTH stages" text. It
+   says nothing of R6 1.50 or R16 24.2 %.
+10. **NEW-pa-reread, NEW-friction-cliff, NEW-silent-check, NEW-ws-inband, G4, P2: upheld, unchanged.** The row file is
+    unchanged since the 2026-10-17 skeptic, and the fields re-read the same. The F+3.9 candidate shows the same stage-1
+    pattern: cap 35.7 vs gate 34.47, linear pa_cap limit 0.0, rc_min 1.02 with radius limit 0.75.
+
+### Missed (for the next audit; not counted in this verdict)
+
+- **No stop-engagement th on file.** The CLAUDE.md rule asks a K- or q2-clamped design to show th >= 5 where its stops
+  engage. Here stop B and the J2 dowel engage at K_law 46.5, but th is reported only on taken poses (held 5.006 at
+  46.27). The verifier's slope, extrapolated, gives about 4.91 at the stop for pose 1054's direction. For bench pose 313
+  the same extrapolation gives 5.181 - 0.405 x 0.88 = 4.83, if that direction can reach the stop. Both are estimates.
+  The tool's fold_margin check reads only the taken-pose minimum, so it cannot see this.
+- **The verified claim's search optimum sits on the infeasible edge.** glev -1.0 is the box's lower edge, where the
+  sector is lowest and the scored in-band is highest (0.893, against 0.8786 at glev 1.5 and 0.8778 at F+3.9). The whole
+  box lies inside link 1b's plate (M3). The optimiser bought in-band from an unchecked clash.
+  - That is the M3 pattern on the plain gap, worth +1.52 bench to the candidate level. It is not a rank change: the row
+    is not the lead, and 20.50 is behind the rows the auditor lists.
+  - The gen-9 CAD and EVOLUTION entry were built "AS MODELLED" (build.json stage1_mode "model"). Their judged
+    R-numbers belong to the unbuildable level.
+- **Checked and clean:** the stage-1 parts have 0 body contact in the CAD (judge/body_contact.json parts: pin, short
+  arm, crank, insert and link 2 all max_depth 0.0). The s1level re-wear really ran at glev 2.039 (glev_used), and the
+  WIP s1raised file's 20.42 ran clamped at 1.5, as the auditor said.
+
+**Final verdict (ledger tool): WATCH.**

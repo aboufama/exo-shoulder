@@ -2,71 +2,76 @@
  {
   "key": "continuity",
   "refuted": false,
-  "evidence": "Upheld; measurement and threshold right, cost unmeasured. Re-read docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json connected: static 23.19, connected_full 23.19 (0 dropped, 355/355 forced connected), connected_knn 32.18 (84 dropped, all forced, 271/355), connected_bench 24.47 (12). The linear-IK held file _v_held_frozen.json reads the same pattern: knn 31.48 (77 dropped) vs 23.24. Rule applied to the right number: tools/alignment_audit.py line 503 (knn - static 8.99 > TH conn_gamed 3 -> watch; the rule flood 'full' is ok). Apples to apples, partly: _verifier_outputs (line 185) takes the NEWEST verifier file by mtime, here the held blend file; on this row's own bench file the same check reads knn 20.67 vs 18.98 (-1.69), the -1.67..-1.69 every sibling reads on its bench file (conecut 19.97/18.28, desmo-slipper _fix 20.62/18.95, slipper-nose 20.16/18.49), i.e. ok. But no sibling has a held knn flood on file, so I cannot show the held -8.99 is a property of the held sample rather than of this design, and the full flood evaluates no skin at its intermediate envelope nodes (docs/concepts/verify/minarc-stop-knuckle-4r-mechanism.py lines 329-331), so whether the stepping stones the 84 held poses need are poses the wearer passes without contact is unmeasured."
+  "evidence": "Upheld. Re-read docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json connected: static 23.19, connected_full 23.19 (0 dropped), connected_knn 32.18 (84 dropped), connected_bench 24.47 (12). Rule as coded (tools/alignment_audit.py lines 498-505: full flood ok, knn - static 8.99 > TH conn_gamed 3 -> watch) applied to the right number. NEW since the last skeptic: a held knn flood of a non-identical row is now on file, docs/concepts/verify/lowarm-halfring-knuckle-3r_v_held_frozen.json connected: static 22.70, knn 30.93 (77 dropped, -8.23), and this row's linear-IK held file reads -8.24 (77). So the held knn loss is a property of this chain on the held sample, not of the desmo drive. On this row's bench file the knn loss is 1.69 (20.67 vs 18.98, 6 dropped), the -1.67..-1.69 every sibling reads. But no row outside the conecut chain has a held knn flood, and the full flood checks no skin at its envelope nodes, so whether the 84 held poses are reachable without contact is still unmeasured."
  },
  {
   "key": "reporting",
   "refuted": false,
-  "evidence": "Upheld. docs/concepts/rows/desmo-conecut-knuckle-3r.json (mtime 20:48:45) 'verdict' starts 'SCREENED, not a new lead: cell B (inverted stage 2) passes every drive gate at mu 0.15 on BOTH stages' while status 'verified', v_gap 18.98, verification.verdict 'VERIFIED'. docs/dashboard/data/morphs.json (mtime 21:12:45) carries the same screen text, status verified, v_gap 18.98, alignment '' / alignment_t None (built before the 21:17:26 audit entry)."
- },
- {
-  "key": "judgement:NEW-pa-reread",
-  "refuted": false,
-  "evidence": "Upheld (a label; the wearer cost is unmeasured). Re-read the model's own arrays: docs/alignment/remeasure/desmo-conecut-knuckle-3r_blendband_fast.json groove: gate_deg 34.47, self_lock_deg 81.47, blend_K_span [0, 10.724], cap_above_gate_K [0, 8.995], cap_above_60_K [0, 3.14], cap_above_self_lock_K [0, 0.326], rows_K_cap K 4.577 -> 52.71 (the rest pose dK 4.6, concept doc 'Named poses'). _s1read_check.json: claim_linear_mu15 plain 86.52, dK_lim 0.0 's1-pa-cap' (cap 35.05 vs gate 34.47); claim_linear_mu135 plain 13.31 = claim. My arithmetic: 43 - atan(0.15) = 34.469, 90 - atan(0.15) = 81.469, tan(43 - 35.05) = 0.1397. Code: docs/concepts/models/desmo-conecut-knuckle-3r.py lines 226-243: s1-pa-cap cuts only when s1_read == 'linear'; on the built read the cap side is gated only where xb >= half-blend (bcap). best_params s1_read 'built'. The gate is the model's own (43 - atan mu); the 'BOTH stages at mu 0.15' sentence holds only on the built read; the 35-81 deg back-drive band from K 0.33 to 9.0 is ungated and its feel is unmeasured (no R17 / dynamics, see G3)."
- },
- {
-  "key": "judgement:NEW-friction-cliff",
-  "refuted": false,
-  "evidence": "Upheld, the verifier's own probe. docs/concepts/rows/desmo-conecut-knuckle-3r.json verification.friction_probe.rows: as9.60 [14.56, 44.75, s1b-pa-pin], as9.65 [15.17, 43.0, s1b-pa-pin], psi150.2 [13.94, 46.0, s1b-pa-pin] (+0.49 deg from 149.71), mu0.17 [14.56, 45.5], best [13.31, 46.5, slot-end]; as9.60_mu087 and psi149.3_mu087 13.31. Held stroke: _v_held_frozen_blend.json dK_taken_max 46.27 > 44.75 / 45.5 / 46.0, so those tolerance / friction cases lose taken held poses. friction_probe.reading: 'mu 0.15 ... sits 0.07 mm (a_s 9.60) from a binding stage-1 forward PA'."
- },
- {
-  "key": "judgement:NEW-silent-check",
-  "refuted": false,
-  "evidence": "Upheld from the code. docs/concepts/models/desmo-conecut-knuckle-3r.py line 58 imports RC_MIN (= desmo-slipper line 71, 1.5); line 376 uses ('radius', rcK < RC_MIN) only inside lim_by_gate (report); the cut dict at lines 236-243 holds s1-pitch, s1-drift, s1-pa-pin/cap (linear read) and s1b-pa-pin/cap (built read), no radius. _v_bench_frozen_blend.json v1_fit_gates: stage1_rc_min 1.01, stage1_ridge_mm 0.247, stage1_linear_lim_by_gate.radius 0.25. Row verification.gates: worst_tol_c015_dense_deg 0.281 > 0.25 (dense_groove_worst_deg 0.187 nominal)."
+  "evidence": "Upheld. docs/concepts/rows/desmo-conecut-knuckle-3r.json (last commit 9b1d1f3, 2026-10-17 20:48:52) 'verdict' still starts 'SCREENED, not a new lead: cell B (inverted stage 2) passes every drive gate at mu 0.15 on BOTH stages' under status verified, v_gap 18.98. docs/dashboard/data/morphs.json (rebuilt 05:42 2026-10-18) carries the same text (status verified, v_gap 18.98, alignment 'watch')."
  },
  {
   "key": "judgement:M3",
   "refuted": false,
-  "evidence": "Upheld (missing measurement + measured running gap). _v_bench_frozen_blend.json v2_plate_horn: rPu 63.164, horn_top_r_max 63.014, min_radial_gap_mm 0.15, poses_overlapping 372 (held file: 861 overlapping, 0.15); the gap is the rule's own value on every pose, so any stack error > ~0.13 mm (0.15 - 0.02 rule) makes it rub. Row verification.gates.plate_hubK_mm 1.23. No CAD of this design exists: ls pipeline/full-exo/designs | grep desmo -> none; grep -rl desmo-conecut pipeline/ judge/ -> none, so the hub-2 relief pocket for the stage-1 arm / pin is unmodelled."
+  "evidence": "Upheld; every number re-derived. Level: model line 182 hmid = PV.u2 + 3.15 + glev; pipeline/full-exo/designs/user_desmo_conecut/build.json stage1.levels_over_hub2_face_mm: groove_mid 0.861 = model_groove_mid at glev_equivalent -1.0, so the pivot sits 0.861 - 2.15 = -1.289 mm from hub 2's face; insert [0.111, 1.611], short_arm [-1.825, -0.325], inside the lower member [F, F+3] (tools/concept_kit.py line 24 STACK 3.15). Box: desmo-slipper-knuckle-3r.py line 87 clamps glev to [-1.0, 1.5] -> layer bottom F+0.111..2.611, inside the plate for every value. R6: judge/part_contact.json max_depth 1.5, violations 8, all stage-1 parts (pin 1.47, short arm 1.50, insert 1.42, link-2 sector 1.39) in l1b, frames 451. Re-wear: docs/alignment/remeasure/desmo-conecut-knuckle-3r_s1level3p9_bench.json frozen gap 20.5 (inband14 0.8778, reach 0.7278, follow 1.0, contact 0.0106), glev_used [2.039], stage1_layer_over_hub2_face_mm [3.15, 4.65], v1_fit_gates.desmo_fail [], dump.recomputed 20.51; same harness (the verifier's wear, --blend) as the 18.98. Level scan stage1_level_scan.json: F+3.9 feasible_pa_and_rc 2 (best_pa_with_rc_ok a_s 9.8 / psi 150, PA 29.53, rc 1.024); F+4.6, 5.0, 5.4, 6.03: 0. The +1.52 also includes the larger ring the a_s 9.8 pin needs (ring_frame_log n_ring 19 -> 29: the model's r_out grows with the pin radius, lines 250-255), which is part of that candidate's real metal. No buildable stage-1 placement is on file; held at F+3.9 unmeasured."
+ },
+ {
+  "key": "judgement:NEW-inherited-stack",
+  "refuted": false,
+  "evidence": "Upheld (measured on this row only). docs/concepts/models/lowarm-halfring-knuckle-3r.py line 54 CELL_A0 glev=-1.0 and line 50 takes desmo-conecut's _desmo_build_B; its row best_params glev -1.0 (verified 17.96). docs/concepts/rows/desmo-slipper-knuckle-3r.json best_params glev -0.5 (verified 18.95); desmo-slipper-knuckle-3r.py line 148 has the same hmid = zc + 3.15 + glev and line 87 the same box. Neither row has a CAD or an R6 reading of stage 1 against link 1b, so whether their pivot also sits 1.29 mm under hub 2's face is unmeasured."
+ },
+ {
+  "key": "judgement:NEW-sample-frame",
+  "refuted": false,
+  "evidence": "Upheld on its unmeasured half. Frame half confirmed and small: remeasure/desmo-conecut-knuckle-3r_ringframe_bench.json frozen 19.07 (inband14 0.8921), _ringframe_held.json 23.28 (0.891), both fix_ring_frame true, q_on_deg 7.279, pin_inside_model_ring_band 1.0, pin_inside_fixed_ring_band 0.864. S3 half: build.json stage1.insert_sector_deg 123.88 vs ring_az_model_deg [-3.0, 92.94] (95.9 deg) -> ~28 deg of outside-O20 ring unsampled; not re-worn by the auditor or by me (no tool on file samples the built sector), so the ~+0.2 stays an estimate."
  },
  {
   "key": "judgement:T3",
   "refuted": false,
-  "evidence": "Upheld (missing per-pose measurement). _v_held_frozen_blend.json v3_th_margin: min 5.006, lt5 0, lowest i 1054 (ws 135/30/-135) forced dK 46.27 dth_dK 0.403; next 5.031 (i 274, dK 46.17), 5.11 (i 1068, dK 45.88); bench _v_bench_frozen_blend.json min 5.181 (i 313, dK 45.62). Row verification.gates held_plus_free_dense_deg 0.227, worst_tol_c015_dense_deg 0.281. My arithmetic: 5.006 - 0.403 x 0.227 = 4.91; x 0.281 -> 4.89; 46.27 + 0.227 = 46.497 < stop B 46.5, so the play is physically available at that pose. TH fold_min 5.0. No model carries a slop state, so no per-pose reading exists."
+  "evidence": "Upheld. Numbers confirmed: _v_held_frozen_blend.json v3_th_margin min 5.006, lt5 0, lowest i 1054 (dK 46.27, dth_dK 0.403), 274 (5.031, 46.17), 1068 (5.110, 45.88); _v_bench_frozen_blend.json min 5.181, lt5 0; the tool's fold_margin check reads ok. The red team (docs/concepts/events.jsonl 2026-10-18T01:10:26Z) puts the right slope at 0.08 (held 4.986, 1 pose under 5), which favours the auditor's lower bound. I did not refute on the documented threshold because the rule has a second clause the claim does not meet on file: CLAUDE.md 'a model that clamps another angle must show its stops engage at >= 5 deg of th in every state'. Stop B and the J2 dowel clamp K / q2 at K_law 46.5 (build.json stop_engagement_built 'J2 dowel' lo window -14.315 = K_law 46.5), not th; no file reports th at stop engagement, and extrapolating the verifier's own slope from pose 1054 to K 46.5 gives 5.006 - 0.403 x 0.23 = 4.91 (an estimate). So th at the physical stop is unmeasured and likely under 5 by ~0.1 deg even without play."
  },
  {
-  "key": "judgement:S2",
-  "refuted": true,
-  "evidence": "Refuted on the documented threshold (b), measurement confirmed. Recomputed from docs/alignment/desmo-conecut-knuckle-3r.json checks[sampling].parts (15 parts): part-weighted in-band 0.8844, sample-weighted 0.8923, difference +0.79 points. TH part_weight_watch = 3.0 (tools/alignment_audit.py line 62; docs/ALIGNMENT.md section 5 'part-weighted in-band: watch > 3 points'); the tool's own sampling check on this row reads 'ok'. No rank effect: with the part-weighted in-band the bench gap would be ~18.98 + 0.79 = 19.77, behind conecut 18.28, slipper-nose 18.49 and desmo-slipper 18.95 either way (the row is already behind all three). The thin plate (8) / L1a (8) samples are reported by the tool, not levelled."
- },
- {
-  "key": "judgement:T1",
-  "refuted": true,
-  "evidence": "Refuted on the documented rule (b); numbers confirmed and kept as a report. Re-derived from docs/alignment/remeasure/desmo-conecut-knuckle-3r+blend_bench_perpose.json (recomputed 18.99): 372 taken, 33 with min(min_mm, cmin) < 2 mm, 3 < 1 mm, closest 0.072 mm; overhead (ws elev >= 140) 8 taken, 4 < 2 mm. Held +blend dump (23.19): 861 taken, 71 < 2 mm, 13 < 1 mm, closest 0.325 mm; overhead 18 taken, 10 < 2 mm. Shell 35.13 - 19.04 = 16.09. But near-touch is report-only by the user's ruling: CLAUDE.md user decision (3) 2026-10-17 'Near-touch (2 mm) is not a gate ... the auditor reports it only' and (6) 'the 1 mm / 2 mm near-touch readings are reported only'; tools/alignment_audit.py lines 277-281 keep c_near_touch at level 'ok' ('report-only ... the level stays ok'); SUPERSEDED = {near_touch, dominance} in the self-test. This audit's own checks[near_touch] reads 'ok', and the finding labels itself 'Reported only'. A watch level here applies the retired shell2_watch 15 gate. Contact (metal past 0 mm) is scored; T5 depth reads ok."
- },
- {
-  "key": "judgement:NEW-ws-inband",
+  "key": "judgement:NEW-stop-through-drive",
   "refuted": false,
-  "evidence": "Upheld. docs/alignment/remeasure/desmo-conecut-knuckle-3r_probe_bench.json (model_frozen 19.04, exact): probe.ws_elev90_140 n 85, taken 39, inband14 0.8308, over14 0.1683, over20 0.0507, d_max 30.74; ws_unscored inband14 0.8626, over14 0.1353; clip_scored inband14 0.8924. Workspace metal is not scored for in-band; 17 % of raised-arm metal 14-31 mm off the skin is against the ~1 cm goal (ALIGNMENT.md section 1). Same as conecut (remeasure/conecut-knee-knuckle-3r_probe_bench.json ws_elev90_140 0.8315)."
- },
- {
-  "key": "judgement:G4",
-  "refuted": false,
-  "evidence": "Upheld, now MEASURED on this row (was carried from conecut). I ran tools/alignment_msub_rest_probe_model.py desmo-conecut-knuckle-3r bench (CB_EXACT=1, nice 10, OMP_NUM_THREADS=1, 1 process, 339 s, model unchanged); it reproduces the frozen claim (gap 19.04, reach 0.7278, ib14 0.8924, contact 0.0106; family reading min 5.181, lt5 0). m_sub at rest (dK = 0): n 205, min 0.0, p10 0.267, p50 4.753, lt1 50, lt2 65, lt5 107 - identical to conecut (remeasure/conecut-knee-knuckle-3r_msub_rest_bench.json: n 205, lt1 50, lt2 65, lt5 107). m_sub on moved poses min 10.805, m_eff moved min 5.181, m_plain at rest min 5.389. File: docs/alignment/remeasure/desmo-conecut-knuckle-3r_msub_rest_bench.json. What a near-zero sub-dyad at rest costs the wearer with K slaved by a groove whose back-drive is not locked from K 0.33 (NEW-pa-reread) is unmeasured."
+  "evidence": "Upheld from the CAD's own numbers. pipeline/full-exo/designs/user_desmo_conecut/build.json stage1.groove_q2_deg [-14.282, 103.068] (the groove's rise ends at q2 -14.282, K_law 46.5) and stop_engagement_built 'J2 dowel' lo window_deg -14.315, engages_deg -14.455, past_window_deg 0.14: the groove end comes 0.17 deg of q2 (~0.37 deg of K at kK 2.15) before the dowel touches, so the J2 low-end stop load goes through the O1.5 stage-1 pin. VERIFY.md section 5 says the same. No force number exists; the bench's stop B is a kinematic clamp."
  },
  {
   "key": "judgement:G3",
   "refuted": false,
-  "evidence": "Upheld (missing measurement). No CAD, R17, cuff twist or drag reading for this design anywhere: ls pipeline/full-exo/designs | grep -i desmo -> none; grep -rl 'desmo-conecut' pipeline/ judge/ -> none; the row has no R17 / twist field. The two sliding pairs at 0.01 mm clearance and the 35-81 deg back-drive band have no force-flow number."
+  "evidence": "Upheld. pipeline/full-exo/designs/user_desmo_conecut/judge/dynamics.json verdict: moves_freely_nominal true (nominal case passive|mu0.005); per_case 'passive|f0.05|s1' twist_peak_deg 11.74, lags_over_10deg 23, free false, slaved_law_err_deg 0.099 (K driven by the law); 'passive|f0.05|s2' 11.78 / 29 lags. R17 drives K by the model's law, and the built stage 1 does not transmit (M3), so the drive's own force flow and the K 0.33-9.0 back-drive band have no measurement."
  },
  {
   "key": "judgement:R1",
   "refuted": false,
-  "evidence": "Upheld. Row 'verdict' (docs/concepts/rows/desmo-conecut-knuckle-3r.json) still reads 'passes every drive gate at mu 0.15 on BOTH stages ... the first desmo-family drive that does', while the same row's verification text (commit 9b1d1f3, 20:48:52) says 'mu 0.15 is nominal only: the score is independent of the built-groove reading ... a_s +0.07 mm binds'. docs/dashboard/data/morphs.json (21:12:45): status verified, v_gap 18.98, gap 19.04, sweep_gap 86.19, the same screen verdict text. The sweep_gap 86.19 is not the sweep's best: docs/concepts/sweeps/desmo-conecut-knuckle-3r.json min gap 13.18 (k0, cell A) over 146 rows (an unflattering display error)."
+  "evidence": "Upheld. docs/dashboard/data/morphs.json (05:42 2026-10-18) row: status verified, v_gap 18.98, gap 19.04, sweep_gap 86.19, alignment 'watch', verdict 'SCREENED, not a new lead: ... passes every drive gate at mu 0.15 on BOTH stages'. The row file is unchanged since 2026-10-17 20:48 (git log), before the gen-9 CAD found R6 1.50 mm FAIL (judge/part_contact.json max_depth 1.5) and R16 24.2 % (VERIFY.md section 4). A label, not a rank."
+ },
+ {
+  "key": "judgement:NEW-pa-reread",
+  "refuted": false,
+  "evidence": "Upheld, unchanged since the 2026-10-17 skeptic (row file unchanged since 20:48). remeasure/desmo-conecut-knuckle-3r_blendband_fast.json: cap_above_gate_K [0, 8.995], cap_above_self_lock_K [0, 0.326]; _s1read_check.json claim_linear_mu15 plain 86.52 (s1-pa-cap), claim_linear_mu135 13.31. The F+3.9 re-wear reads the same pattern: _s1level3p9_bench.json v1_fit_gates.stage1_pa cap 35.7 vs gate 34.47, stage1_linear_lim_by_gate.pa_cap 0.0. The score is unaffected; the label stands."
+ },
+ {
+  "key": "judgement:NEW-friction-cliff",
+  "refuted": false,
+  "evidence": "Upheld, unchanged. docs/concepts/rows/desmo-conecut-knuckle-3r.json verification.friction_probe rows as9.60 [14.56, 44.75, s1b-pa-pin], as9.65 [15.17, 43.0], psi150.2 [13.94, 46.0], mu0.17 [14.56, 45.5]; held dK_taken_max 46.27 (_v_held_frozen_blend.json) is above each bind."
+ },
+ {
+  "key": "judgement:NEW-silent-check",
+  "refuted": false,
+  "evidence": "Upheld, unchanged. Model cut dict (desmo-conecut-knuckle-3r.py lines 236-243) has no radius entry; RC_MIN 1.5 used only in lim_by_gate. _v_bench_frozen_blend.json v1_fit_gates stage1_rc_min 1.01, stage1_linear_lim_by_gate.radius 0.25; row verification.gates worst_tol_c015_dense_deg 0.281 > 0.25. The F+3.9 candidate has the same gap: stage1_rc_min 1.02, lim_by_gate.radius 0.75."
+ },
+ {
+  "key": "judgement:NEW-ws-inband",
+  "refuted": false,
+  "evidence": "Upheld, unchanged. remeasure/desmo-conecut-knuckle-3r_probe_bench.json probe.ws_elev90_140 inband14 0.8308, over14 0.1683, d_max 30.74 (unscored), against the scored clip in-band 0.8924."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Upheld, measured on this row by the 2026-10-17 skeptic: remeasure/desmo-conecut-knuckle-3r_msub_rest_bench.json m_sub at rest n 205, lt1 50, lt2 65 (identical to conecut). What it costs with K slaved through an unlocked back-drive band is unmeasured."
  },
  {
   "key": "judgement:P2",
   "refuted": false,
-  "evidence": "Upheld (hygiene; no bench effect). docs/concepts/desmo-conecut-knuckle-3r.md line 15: 'Cut it to the stroke the taken poses need (bench 45.62, held 46.27 deg of K)'. Held poses above the bench max 45.62 are taken at dK 46.27 / 46.17 / 45.88 (_v_held_frozen_blend.json v3_th_margin.lowest). The '46.5 = displaced lead's dK_lim' coincidence is docs/concepts/rows/slipper-nose-knuckle-3r.json claims.lead_mu050.dK_lim 46.5 (a mu 0.05 friction limit; its frozen.dK_lim is 49.8), so it does not show the value was picked without held data. Bench claim independent (bench dK_taken_max 45.62); held drop 23.19 - 18.98 = 4.21 < TH held_watch 6 with or without the +0.3."
+  "evidence": "Upheld (hygiene). docs/concepts/desmo-conecut-knuckle-3r.md line 15 sizes the slot from the held stroke 46.27; held poses 1054 / 274 / 1068 are taken at dK 46.27 / 46.17 / 45.88 above the bench max 45.62 (_v_held_frozen_blend.json v3_th_margin.lowest; _v_bench_frozen_blend.json dK max 45.62). No bench effect; held drop 4.21 < TH held_watch 6."
  }
 ]
