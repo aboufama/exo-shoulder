@@ -112,7 +112,7 @@
     return null;
   };
   const closes = (q, ctx) => { const r = C.residual(q, ctx); return Math.max(...r.map(Math.abs)) <= 0.5; };
-  const solveC = (ctx, qPrev) => solve(ctx);
+  const solveC = (ctx, qPrev) => { const q = solve(ctx); return (!qPrev || closes(q, ctx)) ? q : K.dls(C, ctx, qPrev, { iters: 40 }).q; };
   const C = {
     id: 'lead-relay-j0-4r', name: 'Spring-centred J0 relay (O20 hub 0 on a handler post, ~40 mm proud) under the lead conecut-knee-knuckle-3r, frozen (4 counted joints)',
     dof: { active: 4, passive: 4 },   // J0 (spring-centred, counted) + J1 J2 J3; K, bell crank, knee pins a / b passive   // K, bell crank, knee pins a and b (the roller is gone)
