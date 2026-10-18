@@ -1,0 +1,74 @@
+{
+ "id": "freek-oracle-route-knuckle-4r",
+ "mode": "law",
+ "bench": "exact",
+ "over": {
+  "q3max": 86
+ },
+ "gap": 21.89,
+ "reach": 0.7353,
+ "follow": 0.9604,
+ "inband14": 0.8957,
+ "inband10": 0.5413,
+ "contact": 0.0499,
+ "near": 25.85,
+ "near1_poses": 19,
+ "min_mm": 0.138,
+ "ws_taken": 700,
+ "why": {
+  "contact": 47,
+  "fold": 187,
+  "slide": 26
+ },
+ "j3stop_engaged_taken": 61,
+ "binders": {
+  "117": 2.37,
+  "127": 2.08,
+  "129": 2.47,
+  "139": 2.99,
+  "148": 6.35,
+  "316": 4.47,
+  "343": 0.28,
+  "369": 4.34,
+  "423": 4.03,
+  "119": 2.43
+ },
+ "connected": {
+  "nodes": 1108,
+  "seeds": 132,
+  "connected": 1108,
+  "islands": 0,
+  "dropped": 7,
+  "gap": 22.67,
+  "reach": 0.7279,
+  "follow": 0.9604,
+  "inband14": 0.8957,
+  "inband10": 0.5413,
+  "contact": 0.0503,
+  "near": 26.22,
+  "ws_taken": 693,
+  "edges": {
+   "tested": 979,
+   "passed": 976,
+   "refused_rule": 3,
+   "refused_jump": 0,
+   "refused_branch": 0,
+   "jump_by_joint": {
+    "q1": 0,
+    "q2": 0,
+    "q3'": 0,
+    "pin_a": 0,
+    "pin_b": 0,
+    "dK": 0
+   },
+   "seed_branch": [
+    1.0
+   ]
+  },
+  "secs": 3.1
+ },
+ "overhead140_ws": {
+  "ws": 71,
+  "taken": 8
+ }
+}

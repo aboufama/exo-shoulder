@@ -33,8 +33,9 @@ worse (+12 deg: 18.71 connected). The ER wall (117 / 119 / 129 / 148) is where h
 
 **Cell B (built, since the plain bound met the 17.78 trigger): a dowel stop on J3's own angle at q3max 86 (model convention),
 K opening to hold it: 16.20 static / 17.35 connected plain (score 93.69), 22.19 near-touch, 276 connected ws takes, 4 counted
-joints, complexity ~33.25.** The first 4-DOF row under the lead's 18.28 on the plain reading (by 0.93); NOT verified, no
-held-out at the time of writing, near-touch 22.19, overhead 5 / 28.
+joints, complexity ~33.25.** The first 4-DOF row under the lead's 18.28 on the plain reading (by 0.93) - but **held out (1154
+disjoint poses, frozen, connected) it reads 22.67 vs its own kit 23.37 and the lead's 22.38: it does NOT beat the lead held
+out.** NOT verified; near-touch 22.19; overhead 5 / 28.
 
 ## What was built (docs/concepts/models/freek-oracle-route-knuckle-4r.py)
 
@@ -177,8 +178,8 @@ contacts: refused = lost reach, not contact), 148 -0.67, 117 -1.80, 129 -6.37, 1
 0.93 under the lead's 18.28** - the first 4-DOF row on file under the bar - at near-touch 22.19, complexity ~33.25 vs the lead's
 18.5 at 3 DOF, and with the overhead count at 5 / 28 (k33 kit 6 / 28, the lead 8 / 28). It beats the static oracle bound at q3max 86
 (16.20 vs 16.96) because a stop may REFUSE a pose (343, 423 turn from contact into lost reach) where the oracle had to keep the
-mechanism somewhere legal; the connected readings agree within 0.1 (17.35 vs 17.25). Not run: held-out (launched at the end of
-the box, see the row), the J3-stop force (the dowel at r 7.5 takes the arm's torque about J3: the M5 class check the lead's
+mechanism somewhere legal; the connected readings agree within 0.1 (17.35 vs 17.25). Held out (1154 poses, frozen exact, flood fill): 21.89 static / 22.67 connected (near-touch 26.22) vs the kit's 23.37 / 23.37 and
+the lead's 22.38 (files cellB_q3max86_held.json, kit_k33_held.json). Not run: the J3-stop force (the dowel at r 7.5 takes the arm's torque about J3: the M5 class check the lead's
 watch list carries), the spring-equilibrium scan of the verifier (`checks_B`'s 'lower_inside' test, which assumes J2 on a stop).
 The ER wall is untouched by cell B (117 / 119 / 129 / 148), so cell C (a J3-centring spring) cannot do better on those poses.
 
