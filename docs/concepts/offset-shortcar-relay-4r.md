@@ -85,6 +85,35 @@ Beyond delta ~4.5 the pad bracket's planform turn runs over the E strap: 211 jam
 The pick sits ~1.5 deg from that cliff. Not read (time box, load 13-15 on 4 cores): delta 3, carw 12 / 16, coil on the
 lug, lean flag, bump 1.15, ds 36. PHI stays 35: the anterior end (45.9 rel th0) shows no hardware contact on envsel.
 
-## Status
+## Claim: ONE frozen exact Bench(110,360) wear at the envsel pick
 
-(claim and held filled in below)
+Pick: PHI 35, tilt 12, taz 235, sgn +1, ds 31, delta 4.5, carw 14, pre 0 (floor 6.40 deg), h_c 1.7, bump 1.002, band
+9.272, ramp 6.0 (floor 6.27), rt_extra 1.5, coil arm-fixed beyond the zero end (az -5.46 rel th0, underside R_t + 1),
+T-nut flange sampled, lean 0. Shell R_t 80.6, arc [-1.9, +45.9] deg rel the pad azimuth (67.2 mm), bracket 25.0 deg
+climb with a 6.46 mm planform turn (legal under the 60-deg ruling; bent 2 x 10 Ti), boss lift 1.23 mm (knee link
+raised over it), 0 jams.
+
+| reading | value |
+|---|---|
+| **chain-only buildable gate (the claim)** | **14.76** (score 94.63) |
+| plain (pooled in-band 0.9132) | 13.74 |
+| near1 (metal < 1 mm = contact) | 17.91 |
+| 2 mm reading (near2) | 37.70 |
+| ib14 chain-only / pooled / ib10 | 0.8898 / 0.9132 / 0.5608 |
+| reach (ws taken) / follow / overhead | 0.7944 (286 / 360) / 1.0 / 8 of 28 |
+| contacts | 13 (0.0318): the SAME 13 poses as proxtrack (no new contact of any kind) |
+| jams | 0 |
+| continuity (PHI 35 flood, own dir) | 0 relayed poses dropped (static = connected) |
+| relayed bench poses | 33: 24 taken, 9 contacts, 0 jams, phi max 32.94 |
+| min metal on taken poses | 0.072 mm |
+
+Contacts by cause: the lead's own at phi 0: 205 -4.28, 237 -8.93, 264 -5.80, 316 -1.23; relayed chain: 182 -0.71,
+206 -6.07, 262 -9.79 (folded-side one-sided relays, hub 2), 343 -1.73, 372 -0.07, 423 -0.70, 448 -1.92, 457 -2.00;
+hardware: **466 (150, 105, -105) at phi 28: -2.95 mm, and it is the COIL, not the shell** - the offset did clear the
+shell there (shell 0.68 mm, from -3.26 at delta 0), but the arm-fixed coil now sits where the old posterior end was.
+
+vs the controls on the same bench: ds 31 / delta 0 = 14.26 (judge, reproduced). The offset costs chain-only in-band
+0.8948 -> 0.8898 (+0.50: the bump window [lo - PHI, hi] and the carriage-footprint bump move 4.5 deg with the carriage)
+and buys no take on this bench (466 trades a shell contact for a coil contact): 14.26 -> 14.76.
+
+## Status
