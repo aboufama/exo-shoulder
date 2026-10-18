@@ -5,16 +5,17 @@
  * CREST (wd >= 95), link arcs a1 / a2, J2 from the two-circle closure on branch sigma. Hubs O20 (r 10, 12.25 mm stack)
  * at the fitted levels F; links 12 x 3 Ti straps on the great circles at their fitted underside levels; member 3 =
  * hub 3's plate + the K7 14 x 6 neck to BOTTOM's bar. inv3 = 1: link 2 on hub 3's lower plate and member 3 on the cap
- * plate bridging over it; inv2 = 1: link 2 on hub 2's lower plate, link 1 on top. 0 passive translations, 0 passive
+ * plate bridging over it; inv2 = 0 (the normal J2 stack, best since CMA s9): link 1 on hub 2's lower plate, link 2 on
+ * the cap plate. 0 passive translations, 0 passive
  * rotations, complexity 0. The fold (J1-J3 angle outside the window) shows red - with hub 2's level spread, the limiter. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
-  const P = { az: 105.4971, el: 63.1176, a: [38.6879, 44.1129], w: [103.3777, 4.9346], branch: -1, inv2: 1, inv3: 1,
-              faces: [50.8, 59.8, 62.0], stack: 12.25, margin_deg: 5, cuff_at: 165,
-              // fitted underside level (mm from GH) at 11 stations along each strap (Bench(60,160) fast fit of the screen's best, gap 36.63)
-              lv1: [53.9, 53.9, 53.9, 53.9, 55.3, 56.3, 61.0, 63.8, 62.9, 62.9, 62.9],
-              lv2: [59.8, 59.8, 59.8, 59.8, 55.0, 56.0, 57.2, 62.0, 62.0, 62.0, 62.0],
-              lvn: [65.2, 65.2, 66.0, 65.7, 67.0, 68.9, 71.8, 78.1, 79.0, 88.7, 89.0] };
+  const P = { az: 108.5603, el: 64.4969, a: [40.4557, 45.9232], w: [104.4082, -0.3864], branch: -1, inv2: 0, inv3: 1,
+              faces: [51.0, 60.3, 62.0], stack: 12.25, margin_deg: 5, cuff_at: 165,
+              // fitted underside level (mm from GH) at 11 stations along each strap (Bench(60,160) fast fit of the screen's best, gap 26.78; frozen exact 40.17)
+              lv1: [54.1, 54.1, 54.1, 54.1, 49.7, 49.0, 54.8, 60.3, 60.3, 60.3, 60.3],
+              lv2: [63.4, 63.4, 63.4, 64.3, 60.8, 56.3, 57.5, 62.0, 62.0, 62.0, 62.0],
+              lvn: [65.2, 65.2, 66.0, 66.5, 66.0, 69.5, 74.0, 74.1, 81.0, 89.6, 89.0] };
   const C = K.sph3r(K.bvec(P.az, P.el), K.wdir(P.w[0], P.w[1]), P.a[0], P.a[1], P.branch);
   const lo = Math.abs(P.a[0] - P.a[1]), hi = Math.min(P.a[0] + P.a[1], 360 - P.a[0] - P.a[1]);
   const WB = [0, -0.0713, 0.9975], DB = [0, -0.9975, -0.0713];             // BOTTOM's bar (body_pose humerus frame)
