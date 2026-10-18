@@ -63,7 +63,7 @@ def _clamp(p):
     rho = min(max(float(p.get("rho", 0.8)), 0.3), 4.0); dkl = min(max(float(p.get("DKLIM", 50.0)), 30.0), 62.0)
     p = CC._clamp(p); p["rho"] = rho; p["DKLIM"] = dkl
     p["kK"] = rho; p["kA"] = p["kB"] = rho                     # the law: |dK| = rho t (t = q2 travel past the slow onset)
-    p["smhi"] = round(smhi_for(p)["smhi"], 6)
+    p["smhi"] = round(smhi_for(p)["smhi"], 6) if not float(p.get("SMHI_FIX", 0) or 0) else float(p["SMHI_FIX"])   # SMHI_FIX: onset held (red team)
     p["t_end"] = max(float(p.get("t_end", 75.0)), dkl / rho + 2.0)
     return p
 
@@ -174,6 +174,77 @@ def wear(P, bench="envsel"):
     return out, M, B
 
 
+def flank(P=None, r0=21.5, az0=24.0, nose_r=1.25, R_mm=62.0, kmax=None, dk=0.02, mu=0.087, win=1.0):
+    """THE BUILT FLANK of the one pair (exact spherical kinematics, all axes through GH): the crowned pin (radial, O 2 nose_r)
+    at (r0 mm from u2, az0 deg from the K direction about u2) on link 1a, pushed by one link-2 flank. Per dk deg of K the pin
+    centre C(K) = R(uK, -sp K) C0 (link 1b frame), v1 = -sp uK x C, v2 = (s_q / rho) u2 x C; the kinematic normal n _|_ v1 - v2
+    (sign: the push opens K, F . v1 > 0); in LINK 2's frame the pin centre path X(K) and the contact point X - rn F. The
+    BUILT flank is the boundary of the pin's swept region on the -F side: a contact point inside the disc of another K
+    (beyond +-win deg) is CUT AWAY (undercut: no contact there, the spring takes K off the law). Reports: the relative pole
+    (|v_rel| -> 0: the pin passes the pitch point, the flank cusps - lantern-gear rule: a pin acts on ONE side of the pitch
+    point only), the undercut K spans and depth, the kinematic and the built-flank pressure angles vs 43 - atan(mu), the
+    K slop where the flank is cut (depth / the pin's normal travel per deg of K)."""
+    P = _clamp(dict(PARAMS, **(P or {})))
+    D = FL.G.KR.KB.KDesign(P)
+    if getattr(D, "q2sgn", None) is None: D.q2sgn = -1.0          # the lead's ik branch (fitted value on every bench)
+    L = D.law()
+    u2, uK = D.u[1], D.uK; sp = float(np.sign(D.psiA)) or 1.0; s_q = float(L["s_q"]); rho = float(P["rho"])
+    kmax = float(P["DKLIM"]) if kmax is None else float(kmax)
+    e = S.unit(np.cross(u2, np.cross(uK, u2))); f = np.cross(u2, e)
+    t = r0 / R_mm; C0 = math.cos(t) * u2 + math.sin(t) * (math.cos(math.radians(az0)) * e + math.sin(math.radians(az0)) * f)
+    ks = np.radians(np.arange(0.0, kmax + 1e-9, dk)); n = len(ks)
+    # link 1b = R1 R(uK, dK) and link 2 = link 1b R(u2, q2) (the model's _ik_phys): in link 1b's frame link 1a turns by
+    # R(uK, -dK) = R(uK, -sp |K|) and link 2 by R(u2, s_q |K| / rho)
+    C = np.einsum("nij,j->ni", S.rotm(uK, -sp * ks), C0)
+    v1 = -sp * np.cross(uK, C); v2 = (s_q / rho) * np.cross(u2, C); vr = v1 - v2
+    nn = np.cross(C, vr / np.maximum(np.linalg.norm(vr, axis=1), 1e-15)[:, None])
+    F = nn * np.sign(np.einsum("ij,ij->i", nn, v1))[:, None]
+    def pa(nv, v): return np.degrees(np.arccos(np.clip(np.abs(np.einsum("ij,ij->i", nv, v)) / np.maximum(np.linalg.norm(v, axis=1), 1e-15), 0, 1)))
+    pa1k, pa2k = pa(F, v1), pa(F, v2)
+    R2t = S.rotm(u2, -(s_q / rho) * ks)                       # link 1b -> link 2 frame (q2 relative to the onset)
+    X = np.einsum("nij,nj->ni", R2t, C); Fl = np.einsum("nij,nj->ni", R2t, F)
+    rn = nose_r / R_mm; Pc = S.unit(X - rn * Fl)                # contact points (unit sphere, link 2 frame)
+    from scipy.spatial import cKDTree
+    tree = cKDTree(X); w = int(round(win / dk)); depth = np.zeros(n)
+    for j in range(n):
+        idx = tree.query_ball_point(Pc[j], rn * 0.999)
+        idx = [i for i in idx if abs(i - j) > w]
+        if idx: depth[j] = (rn - float(np.min(np.linalg.norm(X[idx] - Pc[j], axis=1)))) * R_mm
+    cut = depth > 0.005
+    # built-flank normal from the surviving contact polyline (link 2 frame), compared with the kinematic one
+    keep = np.nonzero(~cut)[0]; Pk = Pc[keep]; tg = np.gradient(Pk, axis=0); nb = np.cross(Pk, tg); nb /= np.maximum(np.linalg.norm(nb, axis=1), 1e-15)[:, None]
+    nb *= np.sign(np.einsum("ij,ij->i", nb, Fl[keep]))[:, None]
+    dev = np.degrees(np.arccos(np.clip(np.einsum("ij,ij->i", nb, Fl[keep]), -1, 1)))
+    Fb = np.einsum("nji,nj->ni", R2t[keep], nb)                # back to link 1b frame
+    pa1b, pa2b = pa(Fb, v1[keep]), pa(Fb, v2[keep])
+    gate = SN.pa_kin(mu); vmin = int(np.argmin(np.linalg.norm(vr, axis=1)))
+    kdeg = np.degrees(ks)
+    spans = []
+    if cut.any():
+        j = 0
+        while j < n:
+            if cut[j]:
+                j0 = j
+                while j < n and cut[j]: j += 1
+                spans.append([round(float(kdeg[j0]), 2), round(float(kdeg[j - 1]), 2), round(float(depth[j0:j].max()), 4)])
+            j += 1
+    vF = np.abs(np.einsum("ij,ij->i", F, v1)) * R_mm * math.pi / 180   # mm of pin normal travel per deg of K
+    slop = float(np.max(depth[cut] / np.maximum(vF[cut], 1e-9))) if cut.any() else 0.0
+    ok_k = (pa1k <= gate) & (pa2k <= gate); kin_lim = float(kdeg[int(np.argmin(ok_k))]) if not ok_k.all() else kmax
+    okb = ok_k & ~cut; built_lim = float(kdeg[int(np.argmin(okb))]) if not okb.all() else kmax   # the drive's own range from stop A
+    return dict(rho=rho, pin=[r0, az0], nose_r=nose_r, kmax=kmax, gate=round(gate, 2), sp=sp, s_q=s_q,
+                pin_from_uK_mm=round(math.degrees(math.acos(float(C0 @ uK))) * math.pi / 180 * R_mm, 2),
+                pole=dict(K=round(float(kdeg[vmin]), 2), vrel_mm_per_deg=round(float(np.linalg.norm(vr[vmin])) * R_mm * math.pi / 180, 5)),
+                pa_kin_max=[round(float(pa1k.max()), 1), round(float(pa2k.max()), 1)], pa_kin_first_fail_K=round(kin_lim, 2),
+                pa_kin_excl_pole=[round(float(np.max(pa1k[np.abs(kdeg - kdeg[vmin]) > 1.0])), 1), round(float(np.max(pa2k[np.abs(kdeg - kdeg[vmin]) > 1.0])), 1)],
+                drive_range_K=round(built_lim, 2), undercut_spans=spans, undercut_max_mm=round(float(depth.max()), 4), slop_deg=round(slop, 3),
+                pa_built_max=[round(float(pa1b.max()), 1), round(float(pa2b.max()), 1)] if len(keep) else None,
+                built_vs_kin_normal_dev_max=round(float(dev.max()), 2) if len(keep) else None,
+                contact_r_from_u2_mm=[round(float(np.degrees(np.arccos(np.clip(C @ u2, -1, 1))).min()) * math.pi / 180 * R_mm, 1),
+                                      round(float(np.degrees(np.arccos(np.clip(C @ u2, -1, 1))).max()) * math.pi / 180 * R_mm, 1)],
+                sliding_mm=round(float(np.sum(np.linalg.norm(np.diff(Pc, axis=0), axis=1))) * R_mm, 2))
+
+
 def viz_export(par): return CC.viz_export(_clamp(dict(PARAMS, **par)))
 
 
@@ -186,6 +257,9 @@ if __name__ == "__main__":
         print(json.dumps({k: out[k] for k in ("cell", "bench", "fit_fast", "frozen", "why", "near1", "near2", "min_metal", "ws_taken", "n_ws", "ws_contact", "overhead", "K_open", "law", "secs")}, default=float))
         sys.exit()
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
+    if mode == "flank":
+        kw = json.loads(sys.argv[3]) if len(sys.argv) > 3 else {}
+        print(json.dumps(flank(par, **kw), default=float)); sys.exit()
     if mode == "viz":
         print(json.dumps(viz_export(par), default=float)); sys.exit()
     B = CB.Bench(n_clip=60, n_ws=160); t = time.time()
