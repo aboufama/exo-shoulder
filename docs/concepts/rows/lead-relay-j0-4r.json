@@ -16,11 +16,11 @@
  "contact": 0.0205,
  "gap": 22.18,
  "bench": "Bench(110,360) exact, frozen lead shape (fit Bench(60,160) fast), stop window picked on Bench(60,160)",
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7583,
+ "v_follow": 1.0,
+ "v_inband14": 0.8404,
+ "v_inband10": 0.5352,
+ "v_gap": 22.18,
  "n_configs": 210,
  "best_params": {
   "a0": 10.0,
@@ -251,7 +251,7 @@
  },
  "verdict": "DEAD (Gate 0). Real O20 hub 0 + link 0 worn under the frozen lead on exact Bench(110,360), stop window picked on Bench(60,160): best seat a0 10 / azu 45 22.18 (ghost 16.22); the ghost's own seat a0 20 / azu 45 24.92 (ghost 16.07); lowest hub a0 7.5 / azu 30 22.95 (ghost 18.22). All over the 17.5 kill bar and 3.9+ over the 3-joint lead (18.28). Lens 1 (relay under the lead) closes with a metal number. 4 counted joints; complexity 50.75.",
  "limiter": "hub 0 (grounded, binding part): it must ride above the annulus J1 sweeps with hub K / hub 2 / L1b / crank, so r0 is 65.5-120.5 mm at all 108 legal seats (17-55 mm over the skin, 0-2 % in band); its 50-101 skin-facing samples per pose (with link 0) cost 4.2-8.4 points of ib14 (0.9012 -> 0.8404 at the best seat), against a relay gain of at most 2.2 points (+11-15 ws takes, +4-8 skin contacts on relayed poses)",
- "note": "Fit bench Bench(60,160) fast: lead 12.50; hub 0 + link 0 at q0 = 0 20.83 (a0 20); best real seat a0 10 / azu 45 14.03 (window [-60, +42]); 207 configurations (99 windows at a0 20, 66-seat grid, 14-seat refinement, 48-seat random sample in a0 5-15). Convergence gate (fit bench, evaluation order): gain over 2nd half 0.0, over last third 0.0, top-5 spread 0.27 score points - passes; windows enumerated exhaustively per seat. Claim protocol: lead fitted on Bench(60,160) fast and frozen; hub 0's r0 derived on the fit bench (skin >= 2 mm on every pose, chain >= 1 mm on every pose the lead takes); window from the fit bench; relayed skin hits counted as contacts; hub-0 / link-0 part clashes lose the pose (2 poses at a0 20 and a0 7.5). Ghost (zero-size J0) composed from the same records reproduces the judge's class (16.07 vs 15.78-15.90 in-sample) and q0 = 0 without hub 0 returns the lead's 18.28. Link 0 as specified (descending bent bar) clashed with hub K on 47/160 fit poses; built as a turned standoff post on J1's housing crown + flat bar under hub 0. Overhead 8/28 at every seat (no overhead pose relayed). Near-touch min 0.054-0.072 mm (the lead's T1 class); 4 relayed takes within 1 mm at a0 20. Continuity flood not run (connected <= static, cannot rescue). Spring 0.95 wire D22 x6: ~0.019 N m/rad, ~0.10 N m at the window end (~0.7 N at the cuff, ~13 N at the J3 dowel / nose).",
+ "note": "Fit bench Bench(60,160) fast: lead 12.50; hub 0 + link 0 at q0 = 0 20.83 (a0 20); best real seat a0 10 / azu 45 14.03 (window [-60, +42]); 207 configurations (99 windows at a0 20, 66-seat grid, 14-seat refinement, 48-seat random sample in a0 5-15). Convergence gate (fit bench, evaluation order): gain over 2nd half 0.0, over last third 0.0, top-5 spread 0.27 score points - passes; windows enumerated exhaustively per seat. Claim protocol: lead fitted on Bench(60,160) fast and frozen; hub 0's r0 derived on the fit bench (skin >= 2 mm on every pose, chain >= 1 mm on every pose the lead takes); window from the fit bench; relayed skin hits counted as contacts; hub-0 / link-0 part clashes lose the pose (2 poses at a0 20 and a0 7.5). Ghost (zero-size J0) composed from the same records reproduces the judge's class (16.07 vs 15.78-15.90 in-sample) and q0 = 0 without hub 0 returns the lead's 18.28. Link 0 as specified (descending bent bar) clashed with hub K on 47/160 fit poses; built as a turned standoff post on J1's housing crown + flat bar under hub 0. Overhead 8/28 at every seat (no overhead pose relayed). Near-touch min 0.054-0.072 mm (the lead's T1 class); 4 relayed takes within 1 mm at a0 20. Continuity flood not run (connected <= static, cannot rescue). Spring 0.95 wire D22 x6: ~0.019 N m/rad, ~0.10 N m at the window end (~0.7 N at the cuff, ~13 N at the J3 dowel / nose). | AUDIT 2026-10-18: death stands; claim reproduced exactly (22.18 exact frozen); r0 not over-strict (hub-0-alone bound with jams lost: best 18.77 fit at a0 <= 40 vs lead 12.50, relay gain <= 4.48); sub-chain margin relaxed makes it worse; no modelling bug.",
  "doc": "docs/concepts/lead-relay-j0-4r.md",
  "complexity": 50.75,
  "mechanism": {
@@ -283,5 +283,39 @@
    "closed_loops": 1,
    "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
   }
+ },
+ "audit": {
+  "t": "2026-10-18T03:22:00Z",
+  "verdict": "death stands",
+  "refuted": false,
+  "reproduced": {
+   "bench": "Bench(110,360) exact, frozen lead, a0 10 / azu 45, window [-60, 42] from the fit bench",
+   "gap": 22.18,
+   "reach": 0.7583,
+   "follow": 1.0,
+   "inband14": 0.8404,
+   "inband10": 0.5352,
+   "contact": 0.0205,
+   "ghost": 16.22,
+   "q0_zero_real": 24.24,
+   "near_touch_min_mm": 0.072
+  },
+  "gate": {
+   "gain_second_half_score": 0.0,
+   "gain_last_third_score": 0.0,
+   "top5_spread_score": 0.27,
+   "top5_spread_gap": 0.73,
+   "converged": true
+  },
+  "r0_bound": "hub 0 ALONE (link 0 omitted), r0 free 44-90, jams = lost poses, 3324 seat-legal placements on the fit bench: best at a0 <= 40 18.77 (a0 35 / azu 300 / r0 78) vs the lead's 12.50; + the largest relay gain measured (4.48) = 14.29 > 12.50. In-band jam-free hub 0 only at a0 55-60 / azu 330 (12.50-13.75), the backbridge cell's region (bridge measured 32.13).",
+  "sub_margin": "J0-J1-J3 5-deg margin relaxed to 0 / off: best real worse (14.03 -> 14.66 at a0 10/45; 17.37 -> 17.87 at a0 20/45); not over-strict",
+  "code_review": "relay kinematics, sample density, ghost stripping, contact and clash bookkeeping checked; no bug found",
+  "reason": "At every seat of this cell (a0 <= 40) a grounded O20 hub 0 alone costs >= 6.27 fit-bench points even with link 0 deleted and r0 freed, more than the largest relay gain measured (4.48): bound 14.29 vs the lead's 12.50 on the same bench.",
+  "files": [
+   "docs/concepts/verify/lead-relay-j0-4r-audit-bound.py",
+   "docs/concepts/verify/lead-relay-j0-4r-audit-sub.py",
+   "docs/concepts/verify/lead-relay-j0-4r-audit.results.json"
+  ],
+  "template_note": "the template's round-3 refutation bar (within 10 of 68.93) is passed trivially; the death is against the round-103 17.5 kill bar and the lead's 18.28, and it stands"
  }
 }

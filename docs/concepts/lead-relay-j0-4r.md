@@ -224,3 +224,70 @@ over the bar.
 4. **Ghost vs metal is a trade along a0.** A lower hub (small a0) means fewer relays: at a0 7.5 there are 8 candidates
    and 3 takes, so the ghost is 18.22, no gain. A larger a0 means a longer link 0 and more dilution: ib14 0.74 at a0 30-40.
    The best real seat (a0 10) still sits 3.9 over the lead.
+
+## Audit (2026-10-18, independent auditor): the death STANDS
+
+The audit tried to refute the death in four ways. None worked. The measured reason in one line: **at every seat this
+cell covers (a0 <= 40), a grounded O20 hub 0 on its own costs at least 6.27 fit-bench points, even with link 0 deleted
+and r0 left free (jams counted as lost poses instead of lifting the hub). The largest relay gain measured anywhere is
+4.48, so the best this cell can reach is 14.29 on the fit bench, against the lead's 12.50 there.**
+
+1. **Convergence gate (recomputed from the sweep file, 210 entries in order).**
+   - Best fit-bench gap 14.03 (k 101).
+   - Gain over the second half: 0.0 score points. Gain over the last third: 0.0.
+   - Top-5 spread: 0.73 gap points (14.03-14.76), which is 0.27 score points.
+   - Converged. Stop windows are enumerated exhaustively per seat, so no CMA run is needed.
+2. **Is r0 over-strict?** The model derives r0 as the lowest underside that clears every chain sample by 1 mm on every
+   fit pose. The bench only loses a clashing pose, so lowering the hub and accepting a few jams could in principle pay.
+   - Probe: `docs/concepts/verify/lead-relay-j0-4r-audit-bound.py`, 3324 placements (a0 10-60, azu every 15 deg,
+     seat-legal only, r0 44-90 in 2 mm steps).
+   - Each placement wears hub 0 ALONE (link 0 omitted, which is optimistic). Its underside disc is sampled at
+     1 / 4 mm2, a pose where hub 0 comes within 1 mm of the chain is lost, and hub 0 into the skin is a contact.
+   - Best per a0 on the fit bench (lead alone: 12.50):
+
+     | a0 | best placement (azu / r0) | gap, hub 0 alone | ib14 |
+     |---|---|---|---|
+     | 10 | 0 / 76 | 19.30 | 0.832 |
+     | 20 | 90 / 78 | 19.19 | 0.833 |
+     | 30 | 270 / 88 | 19.01 | 0.835 |
+     | 35 | 300 / 78 | 18.77 | 0.837 |
+     | 40 | 315 / 78 | 18.78 | 0.837 |
+     | 45 | 315 / 78 | 17.26 | 0.852 |
+     | 50 | 315 / 82 | 16.13 | 0.864 |
+     | 55 | 330 / 70 | 13.75 | 0.907 |
+     | 60 | 330 / 74 | 12.50 | 0.905 |
+
+   - Lowering r0 into the band (r0 52-68) loses 15-85 of the lead's fit poses to hub K / hub 2 / L1 at every a0 <= 50.
+     Lifting is cheaper than jamming, so the model's derived r0 is the right choice. It is not over-strict.
+   - The only placements where hub 0 is in band and jam-free are a0 55-60 / azu 330. They lie outside J1's annulus, and
+     that is the sibling cell lead-relay-backbridge-4r. Its bridge (link 0 across the annulus) measured 32.13 frozen
+     exact. **No region of this cell's range was missed.**
+3. **Is the J0-J1-J3 5-deg sub-chain margin over-strict?** Probe: `docs/concepts/verify/lead-relay-j0-4r-audit-sub.py`
+   (fit bench).
+   - Relaxing the margin to 0, or dropping it entirely, adds 2 relay candidates at a0 10 and 1 at a0 20.
+   - It makes the best real gap WORSE: 14.03 -> 14.66 at a0 10 / 45, and 17.37 -> 17.87 at a0 20 / 45. The ghost goes
+     8.02 -> 8.65. The least-|q0| choice then lands on a worse q0.
+   - The margin is the user's 5-deg fold rule applied to the J0-J1 dyad. It is not over-strict.
+4. **Conventions and modelling (code read of `docs/concepts/models/lead-relay-j0-4r.py`).**
+   - The relay kinematics are right: the chain sees Rc^T Q and every member, the arm side included, is turned by Rc, so
+     the arm lands back on Q. The skin is the real pose's skin.
+   - Hub 0's and link 0's samples are at the bench density (disc_xy 2 mm, bar 2 x 2 mm). Hidden samples are dropped
+     only where hub 1's crown statically covers them.
+   - Ghost mode strips exactly the n_x extra samples. Relayed skin hits stay contacts, and hub-0 clashes lose the pose.
+   - The lead reproduces: fit 12.50, and at q0 = 0 with hub 0 stripped the claim reproduces 18.28.
+   - No bug was found that moves the number by more than rounding.
+
+**Re-measured claim** (the model's own claim mode, re-run by the auditor, CB_EXACT=1, Bench(110,360) exact, frozen lead,
+a0 10 / azu 45, window [-60, +42] from the fit bench): **gap 22.18**, reach 0.7583 (273/360), follow 1.0, ib14 0.8404,
+ib10 0.5352, contact 0.0205 (8 poses: 4 lead + 4 relayed), overhead 8/28, near-touch min 0.072 mm, ghost 16.22, q0 = 0
+with hub 0 worn 24.24 (217 s). This reproduces the agent's claim to the digit.
+
+**Template note.** The task template's refutation bar ("within 10 of the champion's 68.93 on Bench(60,160)") is from
+round 3, and this row passes it trivially: 22.18 is far better than 68.93. The round-103 bar that killed the row is the
+17.5 frozen-exact kill line and the 3-joint lead's 18.28. Against that bar the death stands. Even the optimistic
+hub-alone bound plus the largest relay gain (14.29 fit bench) does not reach the lead's own fit-bench 12.50.
+
+**Next (for the planner).** The base relay under the knuckle host is closed at all three cells (beside, stacked,
+backbridge). The one placement family where a grounded hub 0 is in band and jam-free (a0 55-60 / azu 330) is
+blocked only by link 0's route across J1's annulus. The ask for any future relay is a host whose first link carries no
+hub within ~35 mm of J1, so the annulus is empty. A 4th DOF there still costs +25 complexity.
