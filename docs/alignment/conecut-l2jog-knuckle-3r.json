@@ -1,0 +1,163 @@
+{
+ "id": "conecut-l2jog-knuckle-3r",
+ "status": "verified",
+ "v_gap": 18.28,
+ "complexity": 18.5,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "dominance: cannot compare with conecut-knee-knuckle-3r at 2 mm",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "complexity: recomputed 0.0 vs row 18.5; MISMATCH",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 12.5 (score 95.45) sits 5.78 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 18.28
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 12.5 -> verified 18.28 (+5.78)",
+   "fast": 12.5,
+   "verified": 18.28,
+   "drop": 5.78
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.28: bench 4 contact poses, sum 20.24 mm, deepest 8.93 mm at ['ws', 15.0, 165.0, -60.0], 3 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 14 contact poses, sum 58.09 mm, deepest 9.86 mm at ['ws', 45.0, 165.0, -30.0], 8 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
+   "depths": {
+    "v_gap 18.28": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 20.24,
+      "max_mm": 8.93,
+      "n_deeper3": 3,
+      "overhead140": 3,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.28,
+      "src": "docs/alignment/remeasure/conecut-l2jog-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        20.24
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 14,
+      "sum_mm": 58.09,
+      "max_mm": 9.86,
+      "n_deeper3": 8,
+      "overhead140": 7,
+      "deepest": [
+       "ws",
+       45.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 22.45,
+      "src": "docs/alignment/remeasure/conecut-l2jog-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        58.09
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "no moving drive / joint declared",
+   "spans": [],
+   "declared": [],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "over-dense parts roller 4.55x; ",
+   "over": {
+    "roller": 4.549
+   },
+   "src": "remeasure/sample_density_conecut-l2jog-knuckle-3r.json"
+  },
+  {
+   "check": "complexity",
+   "level": "watch",
+   "reason": "recomputed 0.0 vs row 18.5; MISMATCH",
+   "recomputed": 0.0,
+   "row": 18.5
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 12.5 (score 95.45) sits 5.78 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/conecut-l2jog-knuckle-3r_v_truecut_scan_held.json",
+  "docs/concepts/verify/conecut-l2jog-knuckle-3r_v_truecut_scan_bench.json"
+ ],
+ "git": "cc26ec4",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T16:25:26Z"
+}

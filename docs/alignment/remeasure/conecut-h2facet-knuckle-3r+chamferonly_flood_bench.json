@@ -1,0 +1,104 @@
+{
+ "id": "conecut-h2facet-knuckle-3r",
+ "what": "continuity flood (2-deg slerp, the lead verifier harness worn unchanged with --flood) of the verified buildable config (chamfer only, --set fd=0), exact Bench(110,360) frozen; written by the alignment auditor 2026-10-18",
+ "cmd": "CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/verify/conecut-h2facet-knuckle-3r.py bench out.json --flood --set fd=0",
+ "frozen": {
+  "gap": 18.28,
+  "reach": 0.7278,
+  "follow": 1.0,
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "contact": 0.0106
+ },
+ "connected": {
+  "static": {
+   "gap": 18.28,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9012,
+   "contact": 0.0106
+  },
+  "connected_bench": {
+   "gap": 50.13,
+   "reach": 0.4139,
+   "dropped": 113,
+   "dropped_forced": 113,
+   "forced_taken": 128,
+   "forced_taken_connected": 15,
+   "dropped_with_no_taken_neighbour": 18
+  },
+  "connected_knn": {
+   "gap": 19.97,
+   "reach": 0.7111,
+   "dropped": 6,
+   "dropped_forced": 6,
+   "forced_taken": 128,
+   "forced_taken_connected": 122
+  },
+  "connected_full": {
+   "gap": 18.28,
+   "reach": 0.7278,
+   "dropped": 0,
+   "dropped_forced": 0,
+   "forced_taken": 128,
+   "forced_taken_connected": 128,
+   "envelope": {
+    "env_ok": 1065,
+    "env_forced_ok": 526,
+    "env_forced_connected": 526
+   }
+  },
+  "secs": 2.8
+ },
+ "why": {
+  "fold": 88,
+  "slide": 0,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 4
+ },
+ "th_margin": 5.181,
+ "secs": 318.7,
+ "lead_same_harness": {
+  "static": {
+   "gap": 18.28,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9012,
+   "contact": 0.0106
+  },
+  "connected_bench": {
+   "gap": 50.13,
+   "reach": 0.4139,
+   "dropped": 113,
+   "dropped_forced": 113,
+   "forced_taken": 128,
+   "forced_taken_connected": 15,
+   "dropped_with_no_taken_neighbour": 18
+  },
+  "connected_knn": {
+   "gap": 19.97,
+   "reach": 0.7111,
+   "dropped": 6,
+   "dropped_forced": 6,
+   "forced_taken": 128,
+   "forced_taken_connected": 122
+  },
+  "connected_full": {
+   "gap": 18.28,
+   "reach": 0.7278,
+   "dropped": 0,
+   "dropped_forced": 0,
+   "forced_taken": 128,
+   "forced_taken_connected": 128,
+   "envelope": {
+    "env_ok": 1065,
+    "env_forced_ok": 526,
+    "env_forced_connected": 526
+   }
+  },
+  "secs": 3.4
+ }
+}
