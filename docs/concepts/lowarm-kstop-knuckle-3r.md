@@ -307,3 +307,43 @@ CB_EXACT=1, local, niced, <= 2 processes (the farm is closed).
      the MR117 seat (r 6.7..8.3 vs 5.5).
    - The short arm needs the claim's t <= 1.38 tip, or the gen-9 CAD's 1.5 with the pocket floor at F+0.88. Either way
      the underside stays >= 7.9 mm off the skin (V-ARM).
+
+**Held out (frozen exact, same harness, V-ARM on; never searched or selected on).**
+
+| wear | gap | reach | ib14 | contact | notes |
+|---|---|---|---|---|---|
+| +0.264 | **22.81** | 0.6922 (659/952) | 0.8957 | 0.016 (14) | reproduced; 0 per-pose differences from the claim's held dump; fold 260, parts 0, closure 0; overhead 18/71 |
+| -0.210 | **22.88** | 0.6922 | 0.8950 | 0.016 (14) | reproduced |
+| per-pose worst | **22.876** | 0.6922 | 0.8950 | 0.016 | dump `docs/alignment/remeasure/lowarm-kstop-knuckle-3r_held_perpose.json` (recomputes 22.88); contact depth 44.95 mm over 14 poses (bench 16.62 over 4) |
+
+The J2 dowel cuts 0 on held (largest taken K 46.268, 0.08 under 46.35).
+
+**V3b, the fold margin under play.**
+
+| pose set | n | min th |
+|---|---|---|
+| held dwell | 457 | 5.317 at -0.210, pose 590 (5.517 at +0.264) |
+| held forced | 404 | 5.006, pose 1054 (the lead's T3 item: ~4.92 with 0.23 deg of groove play) |
+
+0 poses are under 5 deg. On 100 dwell poses m_sub < 1 deg: that is the lead's G4 item, still with the user.
+
+### Verdict
+
+**VERIFIED: v_gap 18.69 (score 93.20)** on frozen exact Bench(110,360), per-pose worst of the P5 sided dwell wears,
+against the champion's 75.94 on the same bench (risley-turret verifier checks, the reference every verifier of this
+family uses). Held is 22.876.
+
+- No hard rule is broken: 3 active DOF, 0 passive translations, O20 at every joint, J1 at the back seat, th >= 5
+  everywhere, own-angle stops, no gear / pulley / cable / spring.
+- It is **not a lead change**: bench +0.40, held +0.4977, P(better) 0, and ranked at the +0.2 probe it is 19.77 against
+  the lead's 18.83.
+- It is the buildable lower-complexity point (cx 16.75 against 18.5) on the lead's reach. The M3 stage-1 finding is closed
+  as built at F+3.9 (pocket + 1.38 tip).
+- WATCH items carried to the auditor:
+  - the probe failure (203 / 139);
+  - the held line at +0.4977;
+  - the unmodelled long-arm compliance at 203;
+  - kit density not measured;
+  - the set-screw bore fix;
+  - V3 / V4 / play_info read wrongly under play.
+- The combined cell (+ h2facet chamfer + l2jog) is the next measurement. It is unmeasured.
