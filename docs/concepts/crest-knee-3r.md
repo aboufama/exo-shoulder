@@ -6,7 +6,41 @@ pin knee's back-of-shoulder seats (H1, k4598) to the deltoid-crest seats, with l
 and an optional J3 own-angle stop. 3 active joints, 2 passive pins (cuff knee, outside the count), 0 passive
 translations.
 
-## Deeper-version answers (written first)
+## Round-14 re-dispatch: the ANTCREST basin (2026-10-18, lead note)
+
+The lead asked for the antcrest basin forwarded by the J2 judge (J1 bvec(55, 62), J3 wdir(98-104, +5..+18); fold loss
+20-24 of 220 vs H1's 36), re-measured at O20 / margin 5 with the knee RE-FIT on the envelope bench and an |axial| >= 150
+contact gate. The first screen (sections from "Deeper-version answers (first screen)" on) searched the CREST cells (J1
+az 85-115) and never sat at J1 az 55; this section is that missing measurement.
+
+### Deeper-version answers (written first, 2026-10-18 06:12 UTC)
+
+1. **What a top mechanism designer would do that the spec does not ask for.** (a) Parameterise J2 by the axis angles
+   a1 (J1-J2) and a2 (J2-J3 at rest) on the posterior branch and convert to bvec(az2, el2) at the rest pose, so every
+   candidate closes at rest and the fold window 2 min(a1, a2) - 20 is a search coordinate, not an accident of az2 / el2
+   (antcrest A a1/a2 50/58 -> J2 bvec(21.1, 17.9); B 52.5/56 -> bvec(35.7, 11.4): hub 2 sits LOW on the posterior
+   deltoid, el 11-18, not over the supraspinatus). (b) Treat hub 2's level as the design variable it is: one radial
+   level for a J2 ray whose skin exit spreads 50-77 mm (p5-p95) means hub 2 is in band only where the exit is within
+   12 mm of the level; the levers are h2cap (drop the high-exit poses) and the J3 own-angle stop (the judge measured
+   that the hub-2 tail separates on J3's angle, not J1's), and the kill line is hub 2 <= 0.5 in band. (c) Re-fit the
+   knee on the representative envelope sample (|axial| >= 150 at 11 %, not Bench(60,160)'s 6 %) with an explicit
+   |axial| >= 150 contact term in the objective, because H1's knee collides there. (d) Keep every rule bound as a hard
+   box edge (ang_min >= 25.22, MR63ZZ stk 6.0, O20, fold margin 5, own-angle J3 stop frozen into the claim).
+2. **Rawest material.** The posed skin through the signed-distance grids (Bench(60,160) fast cache 0089c747c10f; the
+   envelope bench 'env' cache env-72d21f5aa2e5-env, BUILT LOCALLY this session with tools/env_bench.py part / assemble
+   because the farm volume is closed; Bench(110,360) exact), the model's per-pose IK (q1-q3', knee angle, the hub-2
+   level each pose needs = Hneed["hub2"]), the 10 fps fit clips for continuity, and the judge's raw J2-exit percentiles
+   (round102_ideation 1.5), not the "fold 20-24 of 220" summary.
+3. **Methods and tools.** The model file with its checks unchanged (pin-knee VModel rules, part-part clearances,
+   contact-only walls / crowns, J3 window frozen); a new runner (a1 / a2 seat parameterisation, near-touch objective +
+   2 points per |axial| >= 150 contact pose); random box, then own numpy CMA-ES, first on Bench(60,160) fast while the
+   env cache builds, then on env; the claim wears the frozen shape on Bench(110,360) exact.
+4. **What else shows the number is right.** tools/concept_bench.py (not this code); the antcrest A / B seeds through the
+   same code at the judge's exact seats (73.12 / 82.31 fast before any knee re-fit: fold 23 / 20 of 220 as the judge
+   measured, hub 2 0.09 / 0.05 in band at 76-77 mm); the first screen's crest cells and H1 (23.64) through the same
+   code; the adversarial verifier (docs/concepts/verify/crest-knee-3r.py) that re-runs the claim.
+
+## Deeper-version answers (first screen, crest cells)
 
 1. **What a top mechanism designer would do that the spec does not ask for.** The spec says "run the pin-knee model
    unchanged at the crest seats". The literal antcrest seats (J1 bvec(55, 62)) are already measured dead (hub-2 need

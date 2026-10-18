@@ -176,25 +176,26 @@ CAR_W, CAR_L, SH_W, TR_W = 24.0, 14.0, 12.0, 8.0
 
 def relay_points(G, ax):
     """(shell + track points, arm-fixed HG frame), (carriage points, carriage frame = HG' at phi) - ~1 pt / 4 mm2"""
-    e, f, s0, Rt = G["e"], G["f"], G["s0"], G["R_t"]; arm = []
+    e, f, s0, Rt = G["e"], G["f"], G["s0"], G["R_t"]; arm = []; aib = []; cib = []
     for t in np.arange(G["lo"], G["hi"] + 1e-9, 2.0 / Rt / D2R):
         d = math.cos(t * D2R) * e + math.sin(t * D2R) * f
         b = int(np.argmin(np.abs(G["ths"] - t))); rsk = float(np.nanmax(G["p90"][:, b])) + 4.0
         for sv in np.arange(s0 - 0.5 * SH_W, s0 + 0.5 * SH_W + 0.01, 2.0):
-            arm.append(sv * ax + (rsk if G["hw"] == "vroller" else Rt - 1.5) * d)    # shell underside (plain: the slotted circular shell)
-            arm.append(sv * ax + Rt * d)                                              # track / shell top
+            arm.append(sv * ax + (rsk if G["hw"] == "vroller" else Rt - 1.5) * d); aib.append(True)   # shell underside (plain: the slotted circular shell)
+            arm.append(sv * ax + Rt * d); aib.append(False)                                            # track / shell top: contact / jam only
     car = []; half = 0.5 * CAR_W / Rt / D2R; tc = G["th0"]
     for t in np.arange(tc - half, tc + half + 1e-9, 2.0 / Rt / D2R):
         d = math.cos(t * D2R) * e + math.sin(t * D2R) * f
         for sv in np.arange(s0 - 0.5 * CAR_L, s0 + 0.5 * CAR_L + 0.01, 2.0):
-            car.append(sv * ax + (Rt + 0.2) * d); car.append(sv * ax + (Rt + G["h_c"]) * d)
+            car.append(sv * ax + (Rt + 0.2) * d); cib.append(True); car.append(sv * ax + (Rt + G["h_c"]) * d); cib.append(False)
     if abs(G["ds"]) > 1e-9:                                   # bracket (2 mm Ti, 10 wide) from the carriage edge up/down the arm to the pad
         sg_ = 1.0 if G["s_pad"] > s0 else -1.0; s_a = s0 + sg_ * 0.5 * CAR_L; s_b = G["s_pad"]
         r_a = Rt + G["h_c"]; r_b = G["rpad"] + G["dh"]; hb = 5.0 / Rt / D2R
         for sv in np.arange(min(s_a, s_b), max(s_a, s_b) + 0.01, 2.0):
             r = r_a + (r_b - r_a) * (sv - s_a) / (s_b - s_a)
             for t in np.arange(tc - hb, tc + hb + 1e-9, 2.0 / Rt / D2R):
-                d = math.cos(t * D2R) * e + math.sin(t * D2R) * f; car.append(sv * ax + r * d)
+                d = math.cos(t * D2R) * e + math.sin(t * D2R) * f; car.append(sv * ax + r * d); cib.append(True)
+    G["arm_ib"] = np.array(aib, bool); G["car_ib"] = np.array(cib, bool)
     return np.array(arm), np.array(car)
 
 
@@ -243,8 +244,11 @@ def rerecord(M, B, G, ax, phi_b, HG0):
                 jam.append(dict(i=i, kind=B.kind[i], track_mm=round(dmin, 2), track_part=min(dpt, key=dpt.get), carriage_mm=round(dcar, 2),
                                 carriage_part=min(dpc, key=dpc.get), phi=round(float(phi_b[i]), 1)))
                 B.res[i] = None; why[i] = "jam"; continue
-        d = B.dist(i, np.r_[chain, relay])
-        dc = []
+        dall = B.dist(i, np.r_[chain, relay]); nC = len(chain)
+        rib = np.r_[G["arm_ib"], G["car_ib"]] if len(arm) else np.zeros(0, bool)
+        d = np.r_[dall[:nC], dall[nC:][rib]]                               # in-band samples: skin-facing surfaces only (1 per 4 mm2)
+        dtop = dall[nC:][~rib] if len(arm) else np.zeros(0)                # tops: contact only
+        dc = [float(dtop.min())] if len(dtop) else []
         for m, Pc in M.contact:
             w = M.world(m, i, Pc)
             if lift is not None and (m in ARM_LIFT_MEMBERS or m == 3):
@@ -255,11 +259,11 @@ def rerecord(M, B, G, ax, phi_b, HG0):
         if min(dc, float(d.min())) < 0: why[i] = "contact"
         elif why[i] == "contact": why[i] = ""
         if B.kind[i] == "clip" and float(d.min()) >= 0:
-            lift_ib.append(d[:len(chain)]); rel_ib.append(d[len(chain):])
+            lift_ib.append(d[:nC]); rel_ib.append(d[nC:])
     M.why = why
     ib = lambda a: round(float(((a >= 2) & (a <= 14)).mean()), 4) if len(a) else None
     lc = np.concatenate(lift_ib) if lift_ib else np.zeros(0); rc = np.concatenate(rel_ib) if rel_ib else np.zeros(0)
-    return dict(jams=jam, ib14_chain_only=ib(lc), ib14_relay_metal=ib(rc), n_relay_pts=int(len(arm) + len(car)),
+    return dict(jams=jam, ib14_chain_only=ib(lc), ib14_relay_metal=ib(rc), n_relay_pts=int(len(arm) + len(car)), n_relay_ib_pts=int(G["arm_ib"].sum() + G["car_ib"].sum()) if len(arm) else 0, model_v=2,
                 relay_median_mm=round(float(np.median(rc)), 2) if len(rc) else None)
 
 

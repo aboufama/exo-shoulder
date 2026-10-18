@@ -2185,5 +2185,173 @@
    },
    "rule": "v2b (run-based oracle, legal configurations only) - of record"
   }
+ },
+ {
+  "k": 61,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 70.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.9082,
+  "inband10": 0.5438,
+  "reach": 0.8125,
+  "follow": 0.9167,
+  "contact": 0.0464,
+  "gap": 16.72,
+  "extra": {
+   "plain": 16.72,
+   "ws_taken": 130,
+   "min_mm": 1.157,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 62,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 74.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.9005,
+  "inband10": 0.5337,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0308,
+  "gap": 11.72,
+  "extra": {
+   "plain": 10.58,
+   "ws_taken": 132,
+   "min_mm": 0.344,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 63,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 77.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8992,
+  "inband10": 0.5346,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0308,
+  "gap": 10.66,
+  "extra": {
+   "plain": 10.66,
+   "ws_taken": 132,
+   "min_mm": 1.411,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 64,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 80.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8983,
+  "inband10": 0.5346,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0308,
+  "gap": 10.75,
+  "extra": {
+   "plain": 10.75,
+   "ws_taken": 132,
+   "min_mm": 1.411,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 65,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 83.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8977,
+  "inband10": 0.5313,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0306,
+  "gap": 10.16,
+  "extra": {
+   "plain": 10.16,
+   "ws_taken": 133,
+   "min_mm": 1.411,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 66,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 86.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8974,
+  "inband10": 0.5385,
+  "reach": 0.8375,
+  "follow": 0.95,
+  "contact": 0.0305,
+  "gap": 9.56,
+  "extra": {
+   "plain": 9.56,
+   "ws_taken": 134,
+   "min_mm": 1.425,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 67,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 90.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8968,
+  "inband10": 0.5386,
+  "reach": 0.8375,
+  "follow": 0.95,
+  "contact": 0.0305,
+  "gap": 10.74,
+  "extra": {
+   "plain": 9.62,
+   "ws_taken": 134,
+   "min_mm": 0.427,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 68,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 95.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8958,
+  "inband10": 0.5343,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0355,
+  "gap": 10.84,
+  "extra": {
+   "plain": 10.84,
+   "ws_taken": 133,
+   "min_mm": 1.425,
+   "rule": "cell B law, near-touch gap"
+  }
  }
 ]

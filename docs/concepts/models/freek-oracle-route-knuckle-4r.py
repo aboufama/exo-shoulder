@@ -102,6 +102,7 @@ KB.KGeo = RouteGeo
 # ------------------------------------------------------------------ oracle K
 class ODesign(KR.KRDesign):
     TAB = None                                               # {pose key: |dK| deg}
+    SLOT55 = True                                            # oracle bound: J2's stretched slot end at the 5.5-deg rule; False = the design's own stop
 
     def dKB(self):
         P = self.p; b1, b2 = float(P["bk1"]) * D2R, float(P["bk2"]) * D2R
@@ -144,7 +145,7 @@ class ODesign(KR.KRDesign):
         A, Rr, q0 = self._q2c; sgq = self.q2sgn or 1.0
         rel = sgq * np.degrees(PK.wrap(q2 - q0))
         rlo = math.degrees(math.acos(max(-1.0, min(1.0, (math.cos(self.th_lo * D2R) - A) / Rr))))
-        th5 = min(self.a1 + self.a2, 360 - self.a1 - self.a2) - m
+        th5 = (min(self.a1 + self.a2, 360 - self.a1 - self.a2) - m) if ODesign.SLOT55 else self.th_hi   # bound: slot end at the 5.5 rule; cell B: the real stop
         rhi = math.degrees(math.acos(max(-1.0, min(1.0, (math.cos(th5 * D2R) - A) / Rr))))
         ok = (g2 > 0) & (m3e >= m - 1e-6) & (np.asarray(dKabs) <= self.dKB() + 1e-6) & (rel >= rlo - 0.05) & (rel <= rhi + 0.05)
         ok &= bool(self.k_ok) & bool(self.stops_ok)
@@ -384,13 +385,25 @@ if __name__ == "__main__":
     if mode == "side": print(side(over)); sys.exit()
     if mode == "law":                                        # cell B (q3max) or the kit: fit fast -> frozen on Bench(60,160) fast or Bench(110,360) exact, no oracle
         P = params(over); P.pop("_seed", None); fitB = RM.PV.fast_bench(60, 160); ex = len(sys.argv) > 4 and sys.argv[4] == "exact"
+        ODesign.SLOT55 = False                               # a real mechanism: J2 keeps its own priced slot in every state
         B = CB.Bench(n_clip=110, n_ws=360) if ex else fitB; ODesign.TAB = None
         Mk, fitr, M1, _ = RM.freeze(fitB, B, dict(P), KModel); rk = Mk.run(); nt = RM.near_touch(Mk, B); tk = RM.taken_list(B)
-        D = Mk.D; D.ik(Mk.Q); js = D.j3stop(Mk.Q, *D.ik(Mk.Q)[:2]) if P.get("q3max") is not None else {}
         out = dict(id=ID, mode="law", bench=B.mode, over=over, **{k: rk[k] for k in KEYS}, near=nt["gap_near1"], near1_poses=nt["near1_poses"], min_mm=nt["min_mm"],
                    ws_taken=sum(1 for i in tk if B.kind[i] == "ws"), why={k: int((Mk.why == k).sum()) for k in set(Mk.why.tolist()) if k},
-                   j3stop=dict(engaged=sum(1 for v in js.values() if v is not None), refused=sum(1 for v in js.values() if v is None)),
+                   j3stop_engaged_taken=int(sum(1 for i in tk if Mk.kstate[i] == 2)),
                    binders={j: (round(min(float(np.min(B.res[j])), float(Mk.cmin.get(j, 1e9))), 2) if B.res[j] is not None else str(Mk.why[j])) for j in BINDERS if ex})
+        if ex:                                               # continuity: the remeasure harness's kinematic flood fill, run on THIS design (law incl.)
+            t1 = time.time(); Z, Wg, POSE, HG = RM.ws_grid(); D = Mk.D; R_tol = float(Mk.p["R_tol"]); _ = D.ik(HG[:2])
+            okn, qq, sgn, st, own = RM.kin_nodes(D, HG, R_tol); seeds = okn & (POSE[:, 1] == 0) & (st == 0)
+            cn, stats = RM.flood(POSE, HG, okn, seeds, D, R_tol)
+            ck = {(float(POSE[i, 0]), float(POSE[i, 1]), float(POSE[i, 2])) for i in np.nonzero(cn)[0]}
+            res0 = list(B.res); drop = [i for i in tk if B.kind[i] == "ws" and (float(B.poses[i]["plane"]), float(B.poses[i]["elev"]), float(B.poses[i]["axial"])) not in ck]
+            for i in drop: B.res[i] = None
+            rc = B.report(); ntc = RM.near_touch(Mk, B); B.res = res0
+            out["connected"] = dict(nodes=int(okn.sum()), seeds=int(seeds.sum()), connected=int(cn.sum()), islands=int((okn & ~cn).sum()), dropped=len(drop),
+                                    **{k: rc[k] for k in KEYS}, near=ntc["gap_near1"], ws_taken=out["ws_taken"] - len(drop), edges=stats, secs=round(time.time() - t1, 1))
+            el = np.array([p_["elev"] for p_ in B.poses]); out["overhead140_ws"] = dict(ws=int(sum(1 for i in range(len(el)) if el[i] >= 140 and B.kind[i] == "ws")),
+                                                                                    taken=int(sum(1 for i in tk if el[i] >= 140 and B.kind[i] == "ws" and i not in drop)))
         if outp: json.dump(out, open(outp, "w"), indent=1, default=float)
         print(json.dumps(out, default=float)); sys.exit()
     if mode == "viz":                                        # geometry export for docs/concepts/viz/concepts/<id>.js (SK's exporter on this model's fit)
