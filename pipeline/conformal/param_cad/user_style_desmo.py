@@ -67,7 +67,7 @@ BRG_R, BRG_W, PIN_R, BORE_R = 3.0, 2.5, 1.5, 1.6                                
 SPACER_RI, SPACER_RO, SPACER_T, LAND_R = 1.55, 1.95, 0.175, 2.5                            # D3 spacer O3.1 x O3.9 (MR63ZZ inner ring) on an O5 land
 SHIM_T, WAVE_T, WAVE_RO, CLIP_DZ, CLIP_T = 0.10, 0.20, 2.9, 0.30, 0.6                     # D3 shim + wave washer, clip at ztop + 0.30
 PLATE_T, NOSE_LO, NOSE_TIP_CLR = DL1.PLATE_T, DL1.NOSE_LO, DL1.NOSE_TIP_CLR                # tip plate 2.5; nose dowel C0-1.0 .. plate top - 0.15
-RC_GROOVE = 1.0                                                                            # built groove centreline radius >= 1.0 (ridge >= 0.24: the model's 1.01)
+RC_GROOVE = 1.0                                                                            # the verified groove's centreline radius (1.007: ridge 0.247) - reported against
 SHORT_ROOT = float(DL1.SL.ARM_ROOT)                                                        # 4.0: the short arm starts inside the boss wall
 
 
@@ -239,14 +239,14 @@ def pin_search(M, G, hm_abs, a_ref, psi_ref):
         ps = np.radians(np.arange(40.0, 260.0001, 0.5)); Fp, paF, paC, rho, z = evaluate(a, ps)
         ok = (rho.min(1) >= DS.R_LO) & (rho.max(1) <= R_HI_B) & (np.abs(z).max(1) <= DS.DRIFT_MAX)
         m = np.maximum(paF.max(1), np.where(k[None, :] >= hb, paC, 0.0).max(1))
-        ok &= m <= PAC - 1.0
-        if ok.any():
-            rcm = np.full(len(ps), 0.0); rcm[ok] = rc_min_of(Fp[ok]); ok &= rcm >= RC_GROOVE
-        obj = m + 0.02 * np.abs(np.degrees(ps) - psi_ref) + 0.3 * abs(a - a_ref)
+        ok &= m <= PAC                                                                     # the drive must MOVE at the claim's mu (no bind)
+        rcm = np.full(len(ps), 0.0)
+        if ok.any(): rcm[ok] = rc_min_of(Fp[ok]); ok &= rcm > GW / 2 + 0.01                 # no cusp (the groove can be cut)
+        obj = -rcm + 0.002 * m                                                             # then the roundest groove (the ridge carries the Hertz)
         for j in np.nonzero(ok)[0]:
             if best is None or obj[j] < best[0]: best = (float(obj[j]), float(a), float(ps[j]), Fp[j], float(paF[j].max()), float(np.where(k >= hb, paC[j], 0).max()),
                                                          float(paC[j].max()), [float(rho[j].min()), float(rho[j].max())], float(np.abs(z[j]).max()), float(rcm[j]))
-    if best is None: raise RuntimeError("stage-1 pin search: no (a_s, psi) at this level passes the model's pitch / drift gates")
+    if best is None: raise RuntimeError("stage-1 pin search: no (a_s, psi) at this level passes the model's pitch / drift / PA gates without a cusp")
     o, a, ps, Fp, pF, pC, pCall, pr, dz, rcb = best
     # stage-1 crank-free K play (the red team's / model's reading): the pin floats c per side across the groove (crank free, q2 held) ->
     # the crank turns c / (|dR x C| cos paF) -> K turns g times that (the model's 0.174 deg at c 0.01 reproduces this way)
@@ -311,6 +311,23 @@ def stage1_layout(M, G, l1b_body, dg):
     return dict(u2=u2, H2=H2, dz=dz, delta=delta, F0n=Fp, pin_search=srch, arm_geo=arm_geo_for(Fp), **Lv)
 
 
+def stage1_layout_model(M, G):
+    """stage 1 AT THE VERIFIED MODEL'S LEVELS (the L1's): groove mid-plane = the crank pivot level + 3.15 + glev (F2+0.861), the 440C
+    groove layer F+0.11..1.61 under a Ti roof to F+3.65 (one with link 2's J2 pad), the short arm 1.5 thick from the model's pin point
+    down (F-1.83..-0.33), the pin F-1.83..+1.22 (tip 0.10 + the drift under the roof): the verified metal. It crosses link 1b's J2
+    lower plate and strap (the L1's finding 1 / 5); build.json stage1_level_scan says why no buildable level was found"""
+    D = M.D; u2 = unit(D.u[1]); Uu, C, F4, hr = BM.joints4(M); H2 = float((np.asarray(C[2], float) + F4[2] * unit(Uu[2])) @ u2)
+    used = G["Kb"] <= G["lim"] + 1e-12; dz = float(np.abs(G["z"][used]).max()); hmid = float(G["hmid"]) - H2; F0 = np.asarray(G["F0"], float); dR = G["dR"]
+    h_rel = hmid - GD / 2; h_ins = h_rel + GD; h_at = h_rel - RUNG - dz; h_ab = h_at - S1_T; h_tip = h_ins - PIN_TIP_CLR - dz
+
+    def arm_geo(hlev):
+        A0 = (H2 + hlev) / float(dR @ u2) * dR; Fp = F0 - (F0 @ u2) * u2 + (H2 + hlev) * u2
+        al = unit((Fp - A0) - ((Fp - A0) @ u2) * u2); ac = np.cross(u2, al); L = float(np.linalg.norm((Fp - A0) - ((Fp - A0) @ u2) * u2))
+        return A0, al, ac, L
+    return dict(u2=u2, H2=H2, dz=dz, delta=0.0, F0n=F0, pin_search=None, arm_geo=arm_geo, l1b_top_under_arm=None, h_ab=h_ab, h_at=h_at, h_rel=h_rel,
+                h_ins=h_ins, h_tip=h_tip, hmid_new=hmid, mode="model", roof_top=UP + 0.5)
+
+
 def groove_line(M, G, lay, lg):
     """the stage-1 groove centreline in link 2's home frame for the pin's point at the BUILT level (F0 + DELTA u2), through the model's
     own blended law (desmo_geom's x / blend / cut at dK_lim) with the dwell run over the whole J2 window (+-1 deg of q2: the L1's
@@ -369,7 +386,8 @@ def stage1_parts(M, G, lay, gl, lg, dg):
     while ra1 < a0: ra0 += 2 * math.pi; ra1 += 2 * math.pi
     relief = sector(pl(UP - 0.4), REL_RIN, S.HUB_R + 2.5, ra0, ra1, lay["h_rel"] - UP + 0.4 + 0.01)
     pocket = sector(pl(lay["h_rel"] - 0.01), INS_RIN, r_out + 0.3, a0, a1, GD + 0.01)
-    lip = sector(pl(lay["h_ins"]), INS_RIN + 0.5, r_out, a0, a1, ROOF)                   # the roof lip over the insert's 0.96 outside O20 (link 2)
+    if lay.get("mode") == "model": lip = sector(pl(lay["h_ins"]), INS_RIN, r_out, a0, a1, lay["roof_top"] - lay["h_ins"])   # the model's roof to F+3.65 (one with link 2's pad)
+    else: lip = sector(pl(lay["h_ins"]), INS_RIN + 0.5, r_out, a0, a1, ROOF)              # the roof lip over the insert's 0.96 outside O20 (link 2)
     # short arm (crank frame = link 1b at phi 0): stadium from the root to 1.5 past the pin, 1.5 thick from h_ab, along u2
     org = A0 + SHORT_ROOT * al; org = org - (org @ u2) * u2 + (H2 + lay["h_ab"]) * u2
     arm = USP.stadium(org, al, ac, L - SHORT_ROOT, SARM_W / 2, S1_T)
@@ -383,9 +401,9 @@ def stage1_parts(M, G, lay, gl, lg, dg):
     pin = xform(wp.revolve(360, (0, 0, 0), (0, 1, 0)).val(), PB.axis_frame(u2), pc + H2 * u2)
     hole = disc(pc + H2 * u2, u2, r, lay["h_ab"] - 0.2, lay["h_at"] + 0.2)
     # J2 dowel / link-2 strap vs the relief: azimuths in link 2's frame (reported)
-    info = dict(levels_over_hub2_face_mm=dict(link1b_top_under_arm=round(lay["l1b_top_under_arm"], 3), short_arm=[round(lay["h_ab"], 3), round(lay["h_at"], 3)],
+    info = dict(levels_over_hub2_face_mm=dict(link1b_top_under_arm=(round(lay["l1b_top_under_arm"], 3) if lay["l1b_top_under_arm"] is not None else None), short_arm=[round(lay["h_ab"], 3), round(lay["h_at"], 3)],
                                               relief=[UP, round(lay["h_rel"], 3)], insert=[round(lay["h_rel"], 3), round(lay["h_ins"], 3)],
-                                              roof_lip=[round(lay["h_ins"], 3), round(lay["h_ins"] + ROOF, 3)], pin=[round(lay["h_ab"], 3), round(lay["h_tip"], 3)],
+                                              roof_lip=[round(lay["h_ins"], 3), round(lay.get("roof_top", lay["h_ins"] + ROOF), 3)], pin=[round(lay["h_ab"], 3), round(lay["h_tip"], 3)],
                                               groove_mid=round(lay["hmid_new"], 3), model_groove_mid=round(float(G["hmid"]) - H2, 3)),
                 delta_mm=round(lay["delta"], 3), glev_equivalent=round(float(M.D.p["glev"]) + lay["delta"], 3), axial_drift_mm=round(lay["dz"], 3),
                 pin_into_groove_mm=round(lay["h_tip"] - lay["h_rel"], 3), pin_into_groove_at_worst_drift_mm=round(lay["h_tip"] - lay["h_rel"] - lay["dz"], 3),
@@ -397,7 +415,8 @@ def stage1_parts(M, G, lay, gl, lg, dg):
                 crown=dict(R_mm=CROWN_R, band=[round(zg0, 3), round(zt, 3)], end_drop_mm=round(max(dr(zg0), dr(zt)), 4)))
     # what of link 2 sits in the relief's azimuths (reported): the J2 dowel home angle and link 2's bar root, frame_of(u2) of link 2
     info["relief_vs_link2"] = dict(note="relief (link 2 frame) must miss the J2 stop dowel and link 2's bar root")
-    return dict(insert=ins, relief=relief, pocket=pocket, lip=lip, arm=arm, pin=pin, hole=hole, frame=(e2, f2), a=(a0, a1), ra=(ra0, ra1)), info
+    info["mode"] = lay.get("mode", "raised")
+    return dict(insert=ins, relief=relief, pocket=pocket, lip=lip, arm=arm, pin=pin, hole=hole, frame=(e2, f2), a=(a0, a1), ra=(ra0, ra1), mode=lay.get("mode", "raised")), info
 
 
 # ---------------------------------------------------------------------------------------------------- the crank
@@ -433,8 +452,8 @@ def crank_parts(M, dg, G, zb, s1, l1b_body):
     beta_t = math.radians(tinfo["ends_at_beta_deg"]); dg2 = dict(dg, beta=beta_t)
     arc, ainfo = USS.arm_arc(dg2, lay_)
     plate, slot_cut, pinfo = tip_plate(G)
-    crank = boss; fuse_rep = {}
-    for lab, part in (("short arm", s1["arm"]), ("straight run", straight), ("arc", arc), ("tip plate", plate)):
+    crank = boss; fuse_rep = {}; sep_arm = s1.get("mode") == "model"
+    for lab, part in ((() if sep_arm else (("short arm", s1["arm"]),)) + (("straight run", straight), ("arc", arc), ("tip plate", plate))):
         try: crank = US.glue(crank, part); fuse_rep[lab] = "glued"
         except RuntimeError: crank = crank.fuse(part); fuse_rep[lab] = f"fused ({len(crank.Solids())} solids)"
     print(f"  crank fuse: {fuse_rep}; plate valid {plate.isValid()} solids {len(plate.Solids())}, arc valid {arc.isValid()}, straight valid {straight.isValid()}, "
@@ -444,13 +463,16 @@ def crank_parts(M, dg, G, zb, s1, l1b_body):
     crank = crank.cut(disc(np.zeros(3), dR, BRG_R, ztop - BRG_W, ztop + 1.0))
     crank = crank.cut(disc(np.zeros(3), dR, BORE_R, zb - 1.0, ztop + 1.0))
     crank = crank.cut(s1["hole"])
+    arm_sep = clean(s1["arm"].cut(s1["hole"])) if sep_arm else None
     brg = [rev([(PIN_R, 0.0), (BRG_R, 0.0), (BRG_R, BRG_W), (PIN_R, BRG_W)], (zb + z0) * dR, dR) for z0 in (0.0, BOSS_H - BRG_W)]
     top_sp = USS.l1b_top_under(l1b_body, dR, SPACER_RO + 0.05, zb - 6.0, zb + 1.0)
     z_land = zb - SPACER_T
     if top_sp is None: top_sp = z_land - 0.5
-    land = disc(np.zeros(3), dR, LAND_R, top_sp - 1.0, z_land)
-    l1b_new = clean(l1b_body.fuse(land)); ok_land = valid1(l1b_new)
-    if not ok_land: l1b_new = l1b_body
+    if top_sp < z_land - 0.05:
+        land = disc(np.zeros(3), dR, LAND_R, top_sp - 1.0, z_land)
+        l1b_new = clean(l1b_body.fuse(land)); ok_land = valid1(l1b_new)
+        if not ok_land: l1b_new = l1b_body
+    else: l1b_new, ok_land = l1b_body, "not built: link 1b's strap rises through the boss level (the model's boss sits inside the strap)"
     lev = float(dg["lev"])
     ppin = rev([(0.0, lev), (PIN_R, lev), (PIN_R, ztop + 1.4), (0.0, ztop + 1.4)], np.zeros(3), dR)
     spacer = rev([(SPACER_RI, z_land), (SPACER_RO, z_land), (SPACER_RO, zb), (SPACER_RI, zb)], np.zeros(3), dR)
@@ -475,6 +497,12 @@ def crank_parts(M, dg, G, zb, s1, l1b_body):
              ("l1b", f"drive crank inner-ring spacer O3.1 x O3.9 x {SPACER_T:.3f} ground stainless 1.4310 (select-fit 0.15-0.20): on link 1b's O5 spot-faced land under the lower MR63ZZ inner ring (D3) (polished)", spacer),
              ("l1b", f"drive crank preload inner-ring shim O3.1 x O3.9 x {SHIM_T:.2f} stainless (polished)", shim),
              ("l1b", f"drive crank preload wave washer O3.2 x O5.8 (stainless spring shim, drawn at its {WAVE_T:.2f} working height: 5-10 N) (polished)", wave)]
+    if arm_sep is not None:
+        lv = s1["info"]["levels_over_hub2_face_mm"]["short_arm"]
+        parts.insert(1, ("dk", f"D9-03 drive stage-1 short arm 3 x {S1_T:g} Ti AS MODELLED (F2{lv[0]:+.2f}..F2{lv[1]:+.2f}: the verified model's level, UNDER link 1b's strap and J2 "
+                               "lower plate; no attachment to the crank boss can pass link 1b's strap - the open stage-1 item, build.json stage1_level_scan), "
+                               "O1.5 H7 pin bore", arm_sep))
+        info["short_arm_separate"] = dict(valid=bool(arm_sep.isValid()), solids=len(arm_sep.Solids()), why="model level: under link 1b's strap (the L1's finding 5)")
     return parts, info, l1b_new
 
 
@@ -621,6 +649,8 @@ def main():
     ap.add_argument("--skip-base-search", action="store_true"); ap.add_argument("--checks-only", action="store_true"); ap.add_argument("--no-checks", action="store_true")
     ap.add_argument("--link-margin", type=float, default=0.0); ap.add_argument("--l1b-margin", type=float, default=0.1)
     ap.add_argument("--stop-after-drive", default=None, help="export hubs + links + drive to this glb and stop (a quick geometry look)")
+    ap.add_argument("--stage1", default="model", choices=("model", "raised"), help="model: stage 1 at the verified model's levels (the verified metal; "
+                    "crosses link 1b, R6); raised: above link 1b in a relief of link 2 with the pin re-searched (no feasible pin found at F+6.03: errors)")
     a = ap.parse_args(MY_ARGV); t0 = time.time(); dd = os.path.join(FULL, "designs", a.out); os.makedirs(os.path.join(dd, "step"), exist_ok=True)
     import concept_kit as KIT
     M, rep0 = RL1.fit(); D = M.D; lg = RL1.law_geom(M); M._lg = lg; dg = RL1.drive_geom(M); G = dg["desmo"]
@@ -663,8 +693,11 @@ def main():
     print(f"  link 1a with the nose boss: valid {b1a.isValid()}, solids {len(b1a.Solids())}", flush=True)
     i_1b = next(i for i, (g, n, s) in enumerate(lk) if n.startswith("D8-02b")); l1b_body = lk[i_1b][2]
     top = USS.l1b_top_under(l1b_body, unit(dg["dR"]), BOSS_R + 0.6, dg["zboss"] - 6.0, dg["zboss"] + 12.0)
-    zb = max(float(dg["zboss"]), (top if top is not None else -1e9) + RUNG)
-    lay = stage1_layout(M, G, l1b_body, dg)
+    if a.stage1 == "raised":
+        zb = max(float(dg["zboss"]), (top if top is not None else -1e9) + RUNG); lay = stage1_layout(M, G, l1b_body, dg)
+    else:                                                                                  # the L1's boss (on link 1b's strap + RUNG); the model's short arm
+        zb = max(float(dg["zboss"]), (top if top is not None else -1e9) + RUNG); lay = stage1_layout_model(M, G)   # hangs under the strap: a separate part
+    rep["stage1_mode"] = a.stage1
     gl = groove_line(M, G, lay, lg)
     s1, s1i = stage1_parts(M, G, lay, gl, lg, dg); s1["info"] = s1i; rep["stage1"] = s1i
     print(f"stage 1 (built level): {json.dumps(s1i, default=float)[:1500]}", flush=True)
@@ -684,14 +717,19 @@ def main():
     i_2 = next(i for i, (g, n, s) in enumerate(lk) if n.startswith("D8-03")); b2 = lk[i_2][2]; v0 = b2.Volume()
     try: b2 = US.glue(b2, s1["lip"])
     except RuntimeError: b2 = b2.fuse(s1["lip"])
-    b2 = clean(b2.cut(s1["relief"]).cut(s1["pocket"]))
+    if a.stage1 == "raised": b2 = clean(b2.cut(s1["relief"]).cut(s1["pocket"]))
+    else: b2 = clean(b2)
     b2, sl2 = USM.sliver_free(b2, "link 2 (stage-1 relief)")
     clu = [c_ for v in UC.CLIMB_USED.values() for c_ in v if c_ is not None]
     rep["link2_stage1"] = dict(valid=b2.isValid(), solids=len(b2.Solids()), slivers=sl2, volume_change_mm3=round(b2.Volume() - v0, 2))
     lk[i_2] = (lk[i_2][0], lk[i_2][1].replace("D8-03 link 2:", f"D8-03 link 2 (5-axis / 3+2 machined from solid Ti-6Al-4V, drop {max(clu) if clu else 0:.1f} deg at J2 (<= {UC.L2_CLIMB:g}: "
                                                            "CAD ruling 2, tighter transition on a part machined from solid)):")
-               .replace("J2 dowel hole,", f"J2 dowel hole, the stage-1 relief under the J2 pad (r >= {REL_RIN:g}, {s1i['relief_sector_deg']:.1f} deg, F+{UP:g}..F+"
-                                          f"{s1i['levels_over_hub2_face_mm']['relief'][1]:.2f}) + the groove insert's pocket and 0.8 roof lip ({s1i['past_O20_mm']:.2f} past O20),"), b2)
+               .replace("J2 dowel hole,", (f"J2 dowel hole, the stage-1 relief under the J2 pad (r >= {REL_RIN:g}, {s1i['relief_sector_deg']:.1f} deg, F+{UP:g}..F+"
+                                          f"{s1i['levels_over_hub2_face_mm']['relief'][1]:.2f}) + the groove insert's pocket and 0.8 roof lip ({s1i['past_O20_mm']:.2f} past O20),")
+                        if a.stage1 == "raised" else
+                        (f"J2 dowel hole, the stage-1 cap-ring sector hanging under the J2 pad (Ti roof F+{s1i['levels_over_hub2_face_mm']['roof_lip'][0]:.2f}.."
+                         f"F+{s1i['levels_over_hub2_face_mm']['roof_lip'][1]:.2f}, r {INS_RIN:g}..{s1i['insert_r_mm'][1]:.2f}, {s1i['insert_sector_deg']:.1f} deg: the verified "
+                         "model's level, inside link 1b's J2 lower-plate layer - see build.json stage1_level_scan),")), b2)
     print(f"link 2 + stage-1 relief: {rep['link2_stage1']}", flush=True)
     if a.stop_after_drive:                                                                     # quick look: the drive + links + hubs to a scratch glb
         sc = trimesh.Scene(); dn = [(g, n, s) for g, n, s in hw + lk + cp] + [("l2", "drive stage-1 groove insert", s1["insert"])]
