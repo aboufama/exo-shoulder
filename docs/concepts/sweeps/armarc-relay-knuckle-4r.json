@@ -21,6 +21,7 @@
   "ib14_chain_only": 0.6872,
   "ib14_relay_metal": 0.4645,
   "gap_chain_only_ib": 30.04,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 16.26,
   "relayed": {
@@ -32,7 +33,7 @@
    "clip_relayed": 0,
    "phi_max": 24.75
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 1,
@@ -56,6 +57,7 @@
   "ib14_chain_only": 0.6872,
   "ib14_relay_metal": 0.5339,
   "gap_chain_only_ib": 30.68,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 16.26,
   "relayed": {
@@ -67,7 +69,7 @@
    "clip_relayed": 0,
    "phi_max": 18.94
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 2,
@@ -91,6 +93,7 @@
   "ib14_chain_only": 0.8166,
   "ib14_relay_metal": 1.0,
   "gap_chain_only_ib": 99.93,
+  "model_v": 1,
   "jams": 88,
   "dh_lift": 5.39,
   "relayed": {
@@ -102,7 +105,7 @@
    "clip_relayed": 0,
    "phi_max": 25.25
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 3,
@@ -126,6 +129,7 @@
   "ib14_chain_only": 0.6872,
   "ib14_relay_metal": 0.3987,
   "gap_chain_only_ib": 37.55,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 16.26,
   "relayed": {
@@ -137,7 +141,7 @@
    "clip_relayed": 0,
    "phi_max": 42.69
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 4,
@@ -161,6 +165,7 @@
   "ib14_chain_only": 0.8166,
   "ib14_relay_metal": 0.9892,
   "gap_chain_only_ib": 104.02,
+  "model_v": 1,
   "jams": 88,
   "dh_lift": 5.39,
   "relayed": {
@@ -172,7 +177,7 @@
    "clip_relayed": 0,
    "phi_max": 42.19
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 5,
@@ -196,6 +201,7 @@
   "ib14_chain_only": 0.8166,
   "ib14_relay_metal": 1.0,
   "gap_chain_only_ib": 100.58,
+  "model_v": 1,
   "jams": 88,
   "dh_lift": 5.39,
   "relayed": {
@@ -207,7 +213,7 @@
    "clip_relayed": 0,
    "phi_max": 19.56
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 6,
@@ -231,6 +237,7 @@
   "ib14_chain_only": 0.7561,
   "ib14_relay_metal": 0.9787,
   "gap_chain_only_ib": 34.8,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 7.67,
   "relayed": {
@@ -242,7 +249,7 @@
    "clip_relayed": 0,
    "phi_max": 12.56
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 7,
@@ -266,6 +273,7 @@
   "ib14_chain_only": 0.7385,
   "ib14_relay_metal": 0.9392,
   "gap_chain_only_ib": 43.99,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 8.42,
   "relayed": {
@@ -277,7 +285,7 @@
    "clip_relayed": 0,
    "phi_max": 24.75
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 8,
@@ -301,6 +309,7 @@
   "ib14_chain_only": 0.7723,
   "ib14_relay_metal": 0.9933,
   "gap_chain_only_ib": 22.66,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 7.26,
   "relayed": {
@@ -312,7 +321,7 @@
    "clip_relayed": 0,
    "phi_max": 26.56
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 9,
@@ -336,6 +345,7 @@
   "ib14_chain_only": 0.7343,
   "ib14_relay_metal": 0.9125,
   "gap_chain_only_ib": 49.12,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 8.54,
   "relayed": {
@@ -347,7 +357,7 @@
    "clip_relayed": 0,
    "phi_max": 42.62
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 10,
@@ -371,6 +381,7 @@
   "ib14_chain_only": 0.757,
   "ib14_relay_metal": 0.9791,
   "gap_chain_only_ib": 34.91,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 8.15,
   "relayed": {
@@ -382,7 +393,7 @@
    "clip_relayed": 0,
    "phi_max": 43.62
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 11,
@@ -406,6 +417,7 @@
   "ib14_chain_only": 0.7863,
   "ib14_relay_metal": 0.9973,
   "gap_chain_only_ib": 19.14,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 6.74,
   "relayed": {
@@ -417,7 +429,7 @@
    "clip_relayed": 0,
    "phi_max": 16.38
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 12,
@@ -441,6 +453,7 @@
   "ib14_chain_only": 0.7657,
   "ib14_relay_metal": 0.8155,
   "gap_chain_only_ib": 170.24,
+  "model_v": 1,
   "jams": 161,
   "dh_lift": 8.63,
   "relayed": {
@@ -452,7 +465,7 @@
    "clip_relayed": 0,
    "phi_max": 18.5
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 13,
@@ -476,6 +489,7 @@
   "ib14_chain_only": 0.7657,
   "ib14_relay_metal": 0.7133,
   "gap_chain_only_ib": 167.94,
+  "model_v": 1,
   "jams": 161,
   "dh_lift": 8.63,
   "relayed": {
@@ -487,7 +501,7 @@
    "clip_relayed": 0,
    "phi_max": 29.5
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 14,
@@ -511,6 +525,7 @@
   "ib14_chain_only": null,
   "ib14_relay_metal": null,
   "gap_chain_only_ib": null,
+  "model_v": 1,
   "jams": 199,
   "dh_lift": 5.37,
   "relayed": {
@@ -522,7 +537,7 @@
    "clip_relayed": 0,
    "phi_max": 29.5
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 15,
@@ -546,6 +561,7 @@
   "ib14_chain_only": 0.7657,
   "ib14_relay_metal": 0.5872,
   "gap_chain_only_ib": 174.71,
+  "model_v": 1,
   "jams": 161,
   "dh_lift": 8.63,
   "relayed": {
@@ -557,7 +573,7 @@
    "clip_relayed": 0,
    "phi_max": 41.62
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 16,
@@ -581,6 +597,7 @@
   "ib14_chain_only": null,
   "ib14_relay_metal": null,
   "gap_chain_only_ib": null,
+  "model_v": 1,
   "jams": 202,
   "dh_lift": 5.37,
   "relayed": {
@@ -592,7 +609,7 @@
    "clip_relayed": 0,
    "phi_max": 41.88
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 17,
@@ -616,6 +633,7 @@
   "ib14_chain_only": null,
   "ib14_relay_metal": null,
   "gap_chain_only_ib": null,
+  "model_v": 1,
   "jams": 197,
   "dh_lift": 5.37,
   "relayed": {
@@ -627,7 +645,7 @@
    "clip_relayed": 0,
    "phi_max": 18.56
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 18,
@@ -651,6 +669,7 @@
   "ib14_chain_only": 0.7788,
   "ib14_relay_metal": 0.9263,
   "gap_chain_only_ib": 25.06,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 6.95,
   "relayed": {
@@ -662,7 +681,7 @@
    "clip_relayed": 0,
    "phi_max": 14.38
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 19,
@@ -686,6 +705,7 @@
   "ib14_chain_only": 0.7834,
   "ib14_relay_metal": 0.9331,
   "gap_chain_only_ib": 33.37,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 7.11,
   "relayed": {
@@ -697,7 +717,7 @@
    "clip_relayed": 0,
    "phi_max": 26.25
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 20,
@@ -721,6 +741,7 @@
   "ib14_chain_only": 0.7588,
   "ib14_relay_metal": 0.8667,
   "gap_chain_only_ib": 50.02,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 8.65,
   "relayed": {
@@ -732,7 +753,7 @@
    "clip_relayed": 0,
    "phi_max": 42.31
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 21,
@@ -756,6 +777,7 @@
   "ib14_chain_only": 0.8462,
   "ib14_relay_metal": 0.7666,
   "gap_chain_only_ib": 21.67,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 4.62,
   "relayed": {
@@ -767,7 +789,7 @@
    "clip_relayed": 0,
    "phi_max": 22.19
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 22,
@@ -791,6 +813,7 @@
   "ib14_chain_only": 0.8462,
   "ib14_relay_metal": 0.8631,
   "gap_chain_only_ib": 22.32,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 4.62,
   "relayed": {
@@ -802,7 +825,7 @@
    "clip_relayed": 0,
    "phi_max": 12.44
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 23,
@@ -826,6 +849,7 @@
   "ib14_chain_only": 0.8403,
   "ib14_relay_metal": 0.6343,
   "gap_chain_only_ib": 26.57,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 4.81,
   "relayed": {
@@ -837,7 +861,7 @@
    "clip_relayed": 0,
    "phi_max": 42.25
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 24,
@@ -861,6 +885,7 @@
   "ib14_chain_only": null,
   "ib14_relay_metal": null,
   "gap_chain_only_ib": null,
+  "model_v": 1,
   "jams": 197,
   "dh_lift": 6.07,
   "relayed": {
@@ -872,7 +897,7 @@
    "clip_relayed": 0,
    "phi_max": 19.25
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 25,
@@ -896,6 +921,7 @@
   "ib14_chain_only": null,
   "ib14_relay_metal": null,
   "gap_chain_only_ib": null,
+  "model_v": 1,
   "jams": 198,
   "dh_lift": 6.07,
   "relayed": {
@@ -907,7 +933,7 @@
    "clip_relayed": 0,
    "phi_max": 25.0
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 26,
@@ -931,6 +957,7 @@
   "ib14_chain_only": null,
   "ib14_relay_metal": null,
   "gap_chain_only_ib": null,
+  "model_v": 1,
   "jams": 201,
   "dh_lift": 6.07,
   "relayed": {
@@ -942,7 +969,7 @@
    "clip_relayed": 0,
    "phi_max": 43.56
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 27,
@@ -966,6 +993,7 @@
   "ib14_chain_only": 0.8421,
   "ib14_relay_metal": 0.8714,
   "gap_chain_only_ib": 100.37,
+  "model_v": 1,
   "jams": 86,
   "dh_lift": 6.08,
   "relayed": {
@@ -977,7 +1005,7 @@
    "clip_relayed": 0,
    "phi_max": 25.31
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 28,
@@ -1001,6 +1029,7 @@
   "ib14_chain_only": 0.8399,
   "ib14_relay_metal": 0.945,
   "gap_chain_only_ib": 104.76,
+  "model_v": 1,
   "jams": 90,
   "dh_lift": 6.08,
   "relayed": {
@@ -1012,7 +1041,7 @@
    "clip_relayed": 0,
    "phi_max": 13.06
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 29,
@@ -1036,6 +1065,7 @@
   "ib14_chain_only": 0.929,
   "ib14_relay_metal": 0.5978,
   "gap_chain_only_ib": 154.38,
+  "model_v": 1,
   "jams": 154,
   "dh_lift": 6.06,
   "relayed": {
@@ -1047,7 +1077,7 @@
    "clip_relayed": 0,
    "phi_max": 44.44
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 30,
@@ -1071,6 +1101,7 @@
   "ib14_chain_only": 0.7193,
   "ib14_relay_metal": 0.5091,
   "gap_chain_only_ib": 31.55,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 10.36,
   "relayed": {
@@ -1082,7 +1113,7 @@
    "clip_relayed": 0,
    "phi_max": 12.88
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 31,
@@ -1106,6 +1137,7 @@
   "ib14_chain_only": 0.7193,
   "ib14_relay_metal": 0.4518,
   "gap_chain_only_ib": 30.91,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 10.36,
   "relayed": {
@@ -1117,7 +1149,7 @@
    "clip_relayed": 0,
    "phi_max": 22.56
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 32,
@@ -1141,6 +1173,7 @@
   "ib14_chain_only": 0.7443,
   "ib14_relay_metal": 0.4109,
   "gap_chain_only_ib": 31.23,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 8.66,
   "relayed": {
@@ -1152,7 +1185,7 @@
    "clip_relayed": 0,
    "phi_max": 28.31
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 33,
@@ -1176,6 +1209,7 @@
   "ib14_chain_only": 0.7162,
   "ib14_relay_metal": 0.3667,
   "gap_chain_only_ib": 33.91,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 10.68,
   "relayed": {
@@ -1187,7 +1221,7 @@
    "clip_relayed": 0,
    "phi_max": 43.81
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 34,
@@ -1211,6 +1245,7 @@
   "ib14_chain_only": 0.7522,
   "ib14_relay_metal": 0.3491,
   "gap_chain_only_ib": 33.57,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 8.27,
   "relayed": {
@@ -1222,7 +1257,7 @@
    "clip_relayed": 0,
    "phi_max": 43.94
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 35,
@@ -1246,6 +1281,7 @@
   "ib14_chain_only": 0.7443,
   "ib14_relay_metal": 0.4838,
   "gap_chain_only_ib": 29.05,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 8.66,
   "relayed": {
@@ -1257,7 +1293,7 @@
    "clip_relayed": 0,
    "phi_max": 12.69
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 36,
@@ -1281,6 +1317,7 @@
   "ib14_chain_only": null,
   "ib14_relay_metal": null,
   "gap_chain_only_ib": null,
+  "model_v": 1,
   "jams": 196,
   "dh_lift": 6.23,
   "relayed": {
@@ -1292,7 +1329,7 @@
    "clip_relayed": 0,
    "phi_max": 15.19
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 37,
@@ -1316,6 +1353,7 @@
   "ib14_chain_only": null,
   "ib14_relay_metal": null,
   "gap_chain_only_ib": null,
+  "model_v": 1,
   "jams": 198,
   "dh_lift": 6.23,
   "relayed": {
@@ -1327,7 +1365,7 @@
    "clip_relayed": 0,
    "phi_max": 26.75
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 38,
@@ -1351,6 +1389,7 @@
   "ib14_chain_only": null,
   "ib14_relay_metal": null,
   "gap_chain_only_ib": null,
+  "model_v": 1,
   "jams": 203,
   "dh_lift": 6.23,
   "relayed": {
@@ -1362,7 +1401,7 @@
    "clip_relayed": 0,
    "phi_max": 42.0
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 39,
@@ -1386,6 +1425,7 @@
   "ib14_chain_only": 0.7064,
   "ib14_relay_metal": 0.9407,
   "gap_chain_only_ib": 26.5,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 10.58,
   "relayed": {
@@ -1397,7 +1437,7 @@
    "clip_relayed": 0,
    "phi_max": 19.38
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 40,
@@ -1421,6 +1461,7 @@
   "ib14_chain_only": 0.7064,
   "ib14_relay_metal": 0.9554,
   "gap_chain_only_ib": 26.63,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 10.58,
   "relayed": {
@@ -1432,7 +1473,7 @@
    "clip_relayed": 0,
    "phi_max": 13.69
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 41,
@@ -1456,6 +1497,7 @@
   "ib14_chain_only": 0.7006,
   "ib14_relay_metal": 0.9282,
   "gap_chain_only_ib": 27.21,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 11.47,
   "relayed": {
@@ -1467,7 +1509,7 @@
    "clip_relayed": 0,
    "phi_max": 13.81
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  },
  {
   "k": 42,
@@ -1491,6 +1533,7 @@
   "ib14_chain_only": 0.7064,
   "ib14_relay_metal": 0.9214,
   "gap_chain_only_ib": 26.5,
+  "model_v": 1,
   "jams": 0,
   "dh_lift": 10.58,
   "relayed": {
@@ -1502,6 +1545,4593 @@
    "clip_relayed": 0,
    "phi_max": 19.38
   },
-  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit"
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 43,
+  "t": "2026-10-18T06:22:15Z",
+  "params": {
+   "PHI": 25,
+   "tilt": 5,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7791,
+  "inband10": 0.3496,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 19.23,
+  "near1": 24.88,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.7006,
+  "ib14_relay_metal": 0.8939,
+  "gap_chain_only_ib": 27.08,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 11.47,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.56
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 44,
+  "t": "2026-10-18T06:22:15Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 5,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7834,
+  "inband10": 0.3586,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 18.8,
+  "near1": 24.45,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.7006,
+  "ib14_relay_metal": 0.9127,
+  "gap_chain_only_ib": 27.08,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 11.47,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.56
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 45,
+  "t": "2026-10-18T06:22:26Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 5,
+   "taz": 290,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7452,
+  "inband10": 0.3326,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0202,
+  "gap": 23.75,
+  "near1": 29.4,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.6955,
+  "ib14_relay_metal": 0.8227,
+  "gap_chain_only_ib": 28.72,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 13.0,
+  "relayed": {
+   "n": 14,
+   "taken": 10,
+   "contact": 4,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.69
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 46,
+  "t": "2026-10-18T06:22:27Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 5,
+   "taz": 290,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7529,
+  "inband10": 0.3414,
+  "reach": 0.8313,
+  "follow": 1.0,
+  "contact": 0.0153,
+  "gap": 23.11,
+  "near1": 27.66,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.6955,
+  "ib14_relay_metal": 0.8489,
+  "gap_chain_only_ib": 28.85,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 13.0,
+  "relayed": {
+   "n": 12,
+   "taken": 9,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 13.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 47,
+  "t": "2026-10-18T06:22:38Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8908,
+  "inband10": 0.5809,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 8.19,
+  "near1": 12.73,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8272,
+  "ib14_relay_metal": 0.9999,
+  "gap_chain_only_ib": 14.55,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 5.3,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.06
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 48,
+  "t": "2026-10-18T06:22:39Z",
+  "params": {
+   "PHI": 25,
+   "tilt": 5,
+   "taz": 290,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7358,
+  "inband10": 0.3241,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0202,
+  "gap": 24.69,
+  "near1": 30.34,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.6955,
+  "ib14_relay_metal": 0.7948,
+  "gap_chain_only_ib": 28.72,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 13.0,
+  "relayed": {
+   "n": 14,
+   "taken": 10,
+   "contact": 4,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.69
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 49,
+  "t": "2026-10-18T06:22:51Z",
+  "params": {
+   "PHI": 25,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8964,
+  "inband10": 0.6023,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0202,
+  "gap": 8.63,
+  "near1": 15.41,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.8272,
+  "ib14_relay_metal": 0.9999,
+  "gap_chain_only_ib": 15.55,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 5.3,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 50,
+  "t": "2026-10-18T06:22:52Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8937,
+  "inband10": 0.5918,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 7.77,
+  "near1": 13.42,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.8272,
+  "ib14_relay_metal": 0.9999,
+  "gap_chain_only_ib": 14.42,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 5.3,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 51,
+  "t": "2026-10-18T06:23:01Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8664,
+  "inband10": 0.5284,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 11.13,
+  "near1": 15.66,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.7863,
+  "ib14_relay_metal": 0.9973,
+  "gap_chain_only_ib": 19.14,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 6.74,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 52,
+  "t": "2026-10-18T06:23:01Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8675,
+  "inband10": 0.5304,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 10.52,
+  "near1": 15.06,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7932,
+  "ib14_relay_metal": 0.9983,
+  "gap_chain_only_ib": 17.95,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 6.51,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 53,
+  "t": "2026-10-18T06:23:09Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 290,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8342,
+  "inband10": 0.4812,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 13.85,
+  "near1": 19.53,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7443,
+  "ib14_relay_metal": 0.9923,
+  "gap_chain_only_ib": 22.84,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 8.44,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.5
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 54,
+  "t": "2026-10-18T06:23:10Z",
+  "params": {
+   "PHI": 25,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8595,
+  "inband10": 0.5068,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0202,
+  "gap": 12.32,
+  "near1": 16.84,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.7723,
+  "ib14_relay_metal": 0.9929,
+  "gap_chain_only_ib": 21.04,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 7.26,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 20.31
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 55,
+  "t": "2026-10-18T06:23:18Z",
+  "params": {
+   "PHI": 25,
+   "tilt": 10,
+   "taz": 290,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8414,
+  "inband10": 0.5016,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 13.0,
+  "near1": 19.78,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.7443,
+  "ib14_relay_metal": 0.9932,
+  "gap_chain_only_ib": 22.71,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 8.44,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 20.62
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 56,
+  "t": "2026-10-18T06:23:19Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 290,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8372,
+  "inband10": 0.4891,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 14.05,
+  "near1": 19.72,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.7443,
+  "ib14_relay_metal": 0.9927,
+  "gap_chain_only_ib": 23.34,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 8.44,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 15.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 57,
+  "t": "2026-10-18T06:23:26Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 15,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7589,
+  "inband10": 0.3843,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 21.88,
+  "near1": 28.68,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.7261,
+  "ib14_relay_metal": 0.8089,
+  "gap_chain_only_ib": 25.16,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 9.3,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 18.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 58,
+  "t": "2026-10-18T06:23:27Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 15,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7934,
+  "inband10": 0.4011,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0051,
+  "gap": 16.79,
+  "near1": 22.47,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7431,
+  "ib14_relay_metal": 0.8778,
+  "gap_chain_only_ib": 21.82,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 8.4,
+  "relayed": {
+   "n": 12,
+   "taken": 11,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.56
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 59,
+  "t": "2026-10-18T06:23:37Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 15,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7008,
+  "inband10": 0.3469,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0204,
+  "gap": 29.46,
+  "near1": 31.73,
+  "gap_ideal_relay": 9.54,
+  "ib14_chain_only": 0.7107,
+  "ib14_relay_metal": 0.6843,
+  "gap_chain_only_ib": 28.47,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 10.85,
+  "relayed": {
+   "n": 12,
+   "taken": 8,
+   "contact": 4,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 15.0
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 60,
+  "t": "2026-10-18T06:23:38Z",
+  "params": {
+   "PHI": 25,
+   "tilt": 15,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7543,
+  "inband10": 0.3954,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0303,
+  "gap": 25.1,
+  "near1": 31.88,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.7217,
+  "ib14_relay_metal": 0.8,
+  "gap_chain_only_ib": 28.36,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 9.54,
+  "relayed": {
+   "n": 14,
+   "taken": 12,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 20.62
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 61,
+  "t": "2026-10-18T06:23:56Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 15,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.6675,
+  "inband10": 0.3376,
+  "reach": 0.8187,
+  "follow": 1.0,
+  "contact": 0.0305,
+  "gap": 34.43,
+  "near1": 36.69,
+  "gap_ideal_relay": 10.04,
+  "ib14_chain_only": 0.7062,
+  "ib14_relay_metal": 0.6071,
+  "gap_chain_only_ib": 30.56,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 11.74,
+  "relayed": {
+   "n": 13,
+   "taken": 8,
+   "contact": 5,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 62,
+  "t": "2026-10-18T06:23:56Z",
+  "params": {
+   "PHI": 25,
+   "tilt": 15,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.6171,
+  "inband10": 0.3202,
+  "reach": 0.8125,
+  "follow": 1.0,
+  "contact": 0.0404,
+  "gap": 41.08,
+  "near1": 45.6,
+  "gap_ideal_relay": 10.53,
+  "ib14_chain_only": 0.7023,
+  "ib14_relay_metal": 0.4949,
+  "gap_chain_only_ib": 32.56,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 13.22,
+  "relayed": {
+   "n": 14,
+   "taken": 9,
+   "contact": 5,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 21.31
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 63,
+  "t": "2026-10-18T06:24:15Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 15,
+   "taz": 290,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.6572,
+  "inband10": 0.3197,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 32.05,
+  "near1": 36.58,
+  "gap_ideal_relay": 7.77,
+  "ib14_chain_only": 0.7029,
+  "ib14_relay_metal": 0.5824,
+  "gap_chain_only_ib": 27.48,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 12.45,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 15.31
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 64,
+  "t": "2026-10-18T06:24:15Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 15,
+   "taz": 290,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.6894,
+  "inband10": 0.3287,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 28.33,
+  "near1": 32.87,
+  "gap_ideal_relay": 7.27,
+  "ib14_chain_only": 0.7068,
+  "ib14_relay_metal": 0.6588,
+  "gap_chain_only_ib": 26.59,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 11.57,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 15.0
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 65,
+  "t": "2026-10-18T06:24:33Z",
+  "params": {
+   "PHI": 25,
+   "tilt": 15,
+   "taz": 290,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.6013,
+  "inband10": 0.3023,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0202,
+  "gap": 38.14,
+  "near1": 43.79,
+  "gap_ideal_relay": 8.27,
+  "ib14_chain_only": 0.6989,
+  "ib14_relay_metal": 0.4554,
+  "gap_chain_only_ib": 28.38,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 14.06,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 21.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 66,
+  "t": "2026-10-18T06:24:34Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -25
+  },
+  "inband14": 0.9436,
+  "inband10": 0.6956,
+  "reach": 0.8125,
+  "follow": 0.9667,
+  "contact": 0.0457,
+  "gap": 13.32,
+  "near1": 17.85,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.9076,
+  "ib14_relay_metal": 0.9993,
+  "gap_chain_only_ib": 13.32,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 0.0,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 67,
+  "t": "2026-10-18T06:24:53Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -35
+  },
+  "inband14": 0.9441,
+  "inband10": 0.7015,
+  "reach": 0.8063,
+  "follow": 0.9667,
+  "contact": 0.0508,
+  "gap": 14.45,
+  "near1": 18.98,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.9076,
+  "ib14_relay_metal": 0.9994,
+  "gap_chain_only_ib": 14.45,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 0.0,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 68,
+  "t": "2026-10-18T06:24:53Z",
+  "params": {
+   "PHI": 30,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -25
+  },
+  "inband14": 0.9452,
+  "inband10": 0.6027,
+  "reach": 0.8063,
+  "follow": 0.9667,
+  "contact": 0.0603,
+  "gap": 15.4,
+  "near1": 19.92,
+  "gap_ideal_relay": 5.39,
+  "ib14_chain_only": 0.9076,
+  "ib14_relay_metal": 0.9967,
+  "gap_chain_only_ib": 15.4,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 0.0,
+  "relayed": {
+   "n": 15,
+   "taken": 13,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 26.56
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 69,
+  "t": "2026-10-18T06:25:09Z",
+  "params": {
+   "PHI": 30,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -35
+  },
+  "inband14": 0.9473,
+  "inband10": 0.5826,
+  "reach": 0.8063,
+  "follow": 0.95,
+  "contact": 0.0653,
+  "gap": 15.9,
+  "near1": 20.42,
+  "gap_ideal_relay": 5.39,
+  "ib14_chain_only": 0.9101,
+  "ib14_relay_metal": 0.9962,
+  "gap_chain_only_ib": 15.9,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 0.0,
+  "relayed": {
+   "n": 15,
+   "taken": 13,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 26.56
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 70,
+  "t": "2026-10-18T06:25:11Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "vroller"
+  },
+  "inband14": 0.7519,
+  "inband10": 0.4265,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 22.58,
+  "near1": 27.11,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.7003,
+  "ib14_relay_metal": 0.8343,
+  "gap_chain_only_ib": 27.74,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": 12.54,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 71,
+  "t": "2026-10-18T06:25:18Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 0
+  },
+  "inband14": 0.9007,
+  "inband10": 0.5719,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 6.64,
+  "near1": 11.17,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": null,
+  "ib14_relay_metal": null,
+  "gap_chain_only_ib": null,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": null,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 72,
+  "t": "2026-10-18T06:25:39Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 8,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8253,
+  "inband10": 0.508,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 14.74,
+  "near1": 19.28,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7732,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 19.95,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.11,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 13.75
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 73,
+  "t": "2026-10-18T06:25:41Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 8,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8224,
+  "inband10": 0.5026,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 15.78,
+  "near1": 19.21,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.7732,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 20.7,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.11,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.62
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 74,
+  "t": "2026-10-18T06:26:00Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 8,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8214,
+  "inband10": 0.5011,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 15.88,
+  "near1": 19.31,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.7732,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 20.7,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.13,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.62
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 75,
+  "t": "2026-10-18T06:26:03Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 8,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8282,
+  "inband10": 0.5123,
+  "reach": 0.85,
+  "follow": 1.0,
+  "contact": 0.0101,
+  "gap": 13.19,
+  "near1": 18.84,
+  "gap_ideal_relay": 4.89,
+  "ib14_chain_only": 0.7732,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 18.69,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.11,
+  "relayed": {
+   "n": 14,
+   "taken": 12,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.44
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 76,
+  "t": "2026-10-18T06:26:24Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 8,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8282,
+  "inband10": 0.5156,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 14.32,
+  "near1": 18.84,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.7732,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 19.82,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.13,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.62
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 77,
+  "t": "2026-10-18T06:26:26Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 8,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8254,
+  "inband10": 0.5096,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 14.73,
+  "near1": 19.27,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7732,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 19.95,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.13,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 13.88
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 78,
+  "t": "2026-10-18T06:26:49Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 8,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8204,
+  "inband10": 0.5047,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 15.23,
+  "near1": 19.77,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.768,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 20.47,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.36,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.0
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 79,
+  "t": "2026-10-18T06:26:50Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 8,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8173,
+  "inband10": 0.4978,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 16.29,
+  "near1": 19.72,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.768,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 21.22,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.36,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.62
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 80,
+  "t": "2026-10-18T06:27:09Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 8,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8061,
+  "inband10": 0.4881,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 17.41,
+  "near1": 20.84,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.7537,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 22.65,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.88,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.62
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 81,
+  "t": "2026-10-18T06:27:12Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 8,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8233,
+  "inband10": 0.5114,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 14.81,
+  "near1": 19.33,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.768,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 20.34,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.36,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.75
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 82,
+  "t": "2026-10-18T06:27:29Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 8,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8124,
+  "inband10": 0.5019,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 15.9,
+  "near1": 20.42,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.7537,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 21.77,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.88,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 83,
+  "t": "2026-10-18T06:27:32Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 8,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8093,
+  "inband10": 0.4951,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 16.34,
+  "near1": 20.88,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7537,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 21.9,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.88,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.06
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 84,
+  "t": "2026-10-18T06:27:49Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8816,
+  "inband10": 0.5556,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 9.11,
+  "near1": 13.65,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8462,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 12.65,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 4.59,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.0
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 85,
+  "t": "2026-10-18T06:27:55Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8796,
+  "inband10": 0.5481,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 10.06,
+  "near1": 13.49,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.8462,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 13.4,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 4.59,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.31
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 86,
+  "t": "2026-10-18T06:28:11Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 12,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8633,
+  "inband10": 0.5206,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 11.69,
+  "near1": 15.12,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.8263,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 15.39,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.32,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.31
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 87,
+  "t": "2026-10-18T06:28:18Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8835,
+  "inband10": 0.5628,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 8.79,
+  "near1": 14.44,
+  "gap_ideal_relay": 4.89,
+  "ib14_chain_only": 0.8462,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 12.52,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 4.59,
+  "relayed": {
+   "n": 14,
+   "taken": 12,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 88,
+  "t": "2026-10-18T06:28:30Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 12,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8596,
+  "inband10": 0.5229,
+  "reach": 0.8313,
+  "follow": 1.0,
+  "contact": 0.0203,
+  "gap": 12.94,
+  "near1": 17.48,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.8147,
+  "ib14_relay_metal": 0.9999,
+  "gap_chain_only_ib": 17.43,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.75,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 18.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 89,
+  "t": "2026-10-18T06:28:37Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 12,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.861,
+  "inband10": 0.5212,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 11.17,
+  "near1": 15.71,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8195,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 15.32,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.58,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.19
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 90,
+  "t": "2026-10-18T06:28:50Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 12,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8333,
+  "inband10": 0.4786,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0051,
+  "gap": 12.8,
+  "near1": 18.48,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7855,
+  "ib14_relay_metal": 0.9975,
+  "gap_chain_only_ib": 17.58,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.73,
+  "relayed": {
+   "n": 12,
+   "taken": 11,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 91,
+  "t": "2026-10-18T06:28:59Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 12,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8429,
+  "inband10": 0.4898,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 13.73,
+  "near1": 17.16,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.8007,
+  "ib14_relay_metal": 0.9991,
+  "gap_chain_only_ib": 17.95,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.24,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.31
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 92,
+  "t": "2026-10-18T06:29:11Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 12,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8267,
+  "inband10": 0.4687,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 15.35,
+  "near1": 18.78,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.7808,
+  "ib14_relay_metal": 0.9965,
+  "gap_chain_only_ib": 19.94,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.97,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.44
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 93,
+  "t": "2026-10-18T06:29:22Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 12,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8289,
+  "inband10": 0.4744,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 13.75,
+  "near1": 20.55,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.7768,
+  "ib14_relay_metal": 0.9952,
+  "gap_chain_only_ib": 18.96,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.05,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 17.5
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 94,
+  "t": "2026-10-18T06:29:32Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 12,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8047,
+  "inband10": 0.4436,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 16.17,
+  "near1": 22.97,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.7498,
+  "ib14_relay_metal": 0.9802,
+  "gap_chain_only_ib": 21.66,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 8.09,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.69
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 95,
+  "t": "2026-10-18T06:29:44Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 12,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8184,
+  "inband10": 0.4594,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0051,
+  "gap": 14.29,
+  "near1": 19.97,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7679,
+  "ib14_relay_metal": 0.9917,
+  "gap_chain_only_ib": 19.34,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.43,
+  "relayed": {
+   "n": 12,
+   "taken": 11,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.5
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 96,
+  "t": "2026-10-18T06:29:55Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 14,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8662,
+  "inband10": 0.5236,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 10.65,
+  "near1": 15.19,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8262,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 14.65,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.3,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.12
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 97,
+  "t": "2026-10-18T06:30:06Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 14,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8654,
+  "inband10": 0.5182,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 11.48,
+  "near1": 14.91,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.8281,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 15.21,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.24,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.25
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 98,
+  "t": "2026-10-18T06:30:15Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 14,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8372,
+  "inband10": 0.4771,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 14.3,
+  "near1": 17.73,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.7933,
+  "ib14_relay_metal": 0.9956,
+  "gap_chain_only_ib": 18.69,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.44,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.62
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 99,
+  "t": "2026-10-18T06:30:27Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 14,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8658,
+  "inband10": 0.527,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 10.06,
+  "near1": 16.86,
+  "gap_ideal_relay": 5.51,
+  "ib14_chain_only": 0.822,
+  "ib14_relay_metal": 0.9998,
+  "gap_chain_only_ib": 14.44,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.47,
+  "relayed": {
+   "n": 13,
+   "taken": 12,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 20.0
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 100,
+  "t": "2026-10-18T06:30:37Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 14,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8214,
+  "inband10": 0.4615,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 15.63,
+  "near1": 22.43,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.7678,
+  "ib14_relay_metal": 0.985,
+  "gap_chain_only_ib": 20.99,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.36,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 18.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 101,
+  "t": "2026-10-18T06:30:49Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 14,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8274,
+  "inband10": 0.4648,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0051,
+  "gap": 13.39,
+  "near1": 19.07,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7787,
+  "ib14_relay_metal": 0.9904,
+  "gap_chain_only_ib": 18.26,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.97,
+  "relayed": {
+   "n": 12,
+   "taken": 11,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 102,
+  "t": "2026-10-18T06:30:57Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 14,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7968,
+  "inband10": 0.4321,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0051,
+  "gap": 16.45,
+  "near1": 22.13,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7478,
+  "ib14_relay_metal": 0.961,
+  "gap_chain_only_ib": 21.35,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 8.19,
+  "relayed": {
+   "n": 12,
+   "taken": 11,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.56
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 103,
+  "t": "2026-10-18T06:31:09Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 14,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8091,
+  "inband10": 0.4427,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 17.11,
+  "near1": 20.54,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.7623,
+  "ib14_relay_metal": 0.9779,
+  "gap_chain_only_ib": 21.79,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.61,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 8.0
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 104,
+  "t": "2026-10-18T06:31:16Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 14,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7865,
+  "inband10": 0.4197,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 19.37,
+  "near1": 22.8,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.7425,
+  "ib14_relay_metal": 0.9496,
+  "gap_chain_only_ib": 23.77,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 8.51,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 8.19
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 105,
+  "t": "2026-10-18T06:31:27Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 14,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7769,
+  "inband10": 0.415,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 20.08,
+  "near1": 25.75,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.7309,
+  "ib14_relay_metal": 0.9204,
+  "gap_chain_only_ib": 24.68,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 9.02,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 17.69
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 106,
+  "t": "2026-10-18T06:31:35Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 14,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7417,
+  "inband10": 0.3908,
+  "reach": 0.8313,
+  "follow": 1.0,
+  "contact": 0.0203,
+  "gap": 24.73,
+  "near1": 29.27,
+  "gap_ideal_relay": 7.77,
+  "ib14_chain_only": 0.7138,
+  "ib14_relay_metal": 0.8289,
+  "gap_chain_only_ib": 27.52,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 10.31,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.75
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 107,
+  "t": "2026-10-18T06:31:47Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 14,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7686,
+  "inband10": 0.4058,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 20.41,
+  "near1": 24.95,
+  "gap_ideal_relay": 7.27,
+  "ib14_chain_only": 0.7279,
+  "ib14_relay_metal": 0.908,
+  "gap_chain_only_ib": 24.48,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 9.28,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.75
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 108,
+  "t": "2026-10-18T06:31:55Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 16,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8398,
+  "inband10": 0.4799,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0051,
+  "gap": 12.15,
+  "near1": 17.83,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7932,
+  "ib14_relay_metal": 0.9922,
+  "gap_chain_only_ib": 16.81,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.41,
+  "relayed": {
+   "n": 12,
+   "taken": 11,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.31
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 109,
+  "t": "2026-10-18T06:32:06Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 16,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8484,
+  "inband10": 0.4868,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 13.18,
+  "near1": 16.61,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.8067,
+  "ib14_relay_metal": 0.995,
+  "gap_chain_only_ib": 17.35,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.0,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 110,
+  "t": "2026-10-18T06:32:12Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 16,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8041,
+  "inband10": 0.4329,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 17.61,
+  "near1": 21.04,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.7606,
+  "ib14_relay_metal": 0.9608,
+  "gap_chain_only_ib": 21.96,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 7.65,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 8.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 111,
+  "t": "2026-10-18T06:32:24Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 16,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8353,
+  "inband10": 0.4767,
+  "reach": 0.8313,
+  "follow": 1.0,
+  "contact": 0.0153,
+  "gap": 14.87,
+  "near1": 21.69,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.784,
+  "ib14_relay_metal": 0.9888,
+  "gap_chain_only_ib": 20.0,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.75,
+  "relayed": {
+   "n": 12,
+   "taken": 11,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.31
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 112,
+  "t": "2026-10-18T06:32:31Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 16,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7721,
+  "inband10": 0.4166,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0254,
+  "gap": 22.83,
+  "near1": 29.62,
+  "gap_ideal_relay": 7.77,
+  "ib14_chain_only": 0.7305,
+  "ib14_relay_metal": 0.8963,
+  "gap_chain_only_ib": 26.99,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 9.0,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.31
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 113,
+  "t": "2026-10-18T06:32:43Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 16,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7866,
+  "inband10": 0.4216,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 18.61,
+  "near1": 23.15,
+  "gap_ideal_relay": 7.27,
+  "ib14_chain_only": 0.743,
+  "ib14_relay_metal": 0.9291,
+  "gap_chain_only_ib": 22.97,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 8.4,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.56
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 114,
+  "t": "2026-10-18T06:32:49Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 16,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7462,
+  "inband10": 0.397,
+  "reach": 0.8187,
+  "follow": 1.0,
+  "contact": 0.0255,
+  "gap": 26.06,
+  "near1": 27.19,
+  "gap_ideal_relay": 10.68,
+  "ib14_chain_only": 0.7193,
+  "ib14_relay_metal": 0.8342,
+  "gap_chain_only_ib": 28.75,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 9.82,
+  "relayed": {
+   "n": 12,
+   "taken": 7,
+   "contact": 5,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 115,
+  "t": "2026-10-18T06:33:02Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 16,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7645,
+  "inband10": 0.4025,
+  "reach": 0.8125,
+  "follow": 1.0,
+  "contact": 0.0155,
+  "gap": 23.85,
+  "near1": 25.0,
+  "gap_ideal_relay": 10.3,
+  "ib14_chain_only": 0.731,
+  "ib14_relay_metal": 0.885,
+  "gap_chain_only_ib": 27.2,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 9.08,
+  "relayed": {
+   "n": 9,
+   "taken": 6,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 8.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 116,
+  "t": "2026-10-18T06:33:08Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 16,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7373,
+  "inband10": 0.3876,
+  "reach": 0.8125,
+  "follow": 1.0,
+  "contact": 0.0155,
+  "gap": 26.57,
+  "near1": 27.72,
+  "gap_ideal_relay": 10.3,
+  "ib14_chain_only": 0.7161,
+  "ib14_relay_metal": 0.8138,
+  "gap_chain_only_ib": 28.69,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 10.14,
+  "relayed": {
+   "n": 9,
+   "taken": 6,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 9.12
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 117,
+  "t": "2026-10-18T06:33:24Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 16,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7126,
+  "inband10": 0.3809,
+  "reach": 0.8125,
+  "follow": 1.0,
+  "contact": 0.0355,
+  "gap": 31.04,
+  "near1": 33.31,
+  "gap_ideal_relay": 11.18,
+  "ib14_chain_only": 0.7097,
+  "ib14_relay_metal": 0.7213,
+  "gap_chain_only_ib": 31.33,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 11.03,
+  "relayed": {
+   "n": 13,
+   "taken": 7,
+   "contact": 6,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 17.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 118,
+  "t": "2026-10-18T06:33:28Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 16,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.6765,
+  "inband10": 0.3644,
+  "reach": 0.8125,
+  "follow": 1.0,
+  "contact": 0.0355,
+  "gap": 34.65,
+  "near1": 36.92,
+  "gap_ideal_relay": 11.18,
+  "ib14_chain_only": 0.7043,
+  "ib14_relay_metal": 0.5915,
+  "gap_chain_only_ib": 31.87,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 12.6,
+  "relayed": {
+   "n": 13,
+   "taken": 7,
+   "contact": 6,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 119,
+  "t": "2026-10-18T06:33:43Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 16,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.7127,
+  "inband10": 0.3767,
+  "reach": 0.8187,
+  "follow": 1.0,
+  "contact": 0.0155,
+  "gap": 28.41,
+  "near1": 29.54,
+  "gap_ideal_relay": 9.68,
+  "ib14_chain_only": 0.7097,
+  "ib14_relay_metal": 0.7228,
+  "gap_chain_only_ib": 28.71,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 11.14,
+  "relayed": {
+   "n": 10,
+   "taken": 7,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 11.69
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 120,
+  "t": "2026-10-18T06:33:45Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8518,
+  "inband10": 0.5562,
+  "reach": 0.7063,
+  "follow": 0.6333,
+  "contact": 0.0131,
+  "gap": 57.17,
+  "near1": 61.0,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8076,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 61.59,
+  "model_v": 2,
+  "jams": 43,
+  "dh_lift": 5.14,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 13.88
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 121,
+  "t": "2026-10-18T06:34:03Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 10,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8485,
+  "inband10": 0.5463,
+  "reach": 0.6937,
+  "follow": 0.6333,
+  "contact": 0.0067,
+  "gap": 58.12,
+  "near1": 61.98,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.8076,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 62.21,
+  "model_v": 2,
+  "jams": 43,
+  "dh_lift": 5.14,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.44
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 122,
+  "t": "2026-10-18T06:34:06Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 10,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.868,
+  "inband10": 0.5396,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 11.22,
+  "near1": 14.65,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.8324,
+  "ib14_relay_metal": 0.9999,
+  "gap_chain_only_ib": 14.78,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.12,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.44
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 123,
+  "t": "2026-10-18T06:34:24Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8542,
+  "inband10": 0.5634,
+  "reach": 0.7188,
+  "follow": 0.6333,
+  "contact": 0.0129,
+  "gap": 55.66,
+  "near1": 60.74,
+  "gap_ideal_relay": 4.89,
+  "ib14_chain_only": 0.8076,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 60.32,
+  "model_v": 2,
+  "jams": 43,
+  "dh_lift": 5.14,
+  "relayed": {
+   "n": 14,
+   "taken": 12,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.62
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 124,
+  "t": "2026-10-18T06:34:26Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8723,
+  "inband10": 0.5546,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 9.91,
+  "near1": 14.43,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.8324,
+  "ib14_relay_metal": 0.9999,
+  "gap_chain_only_ib": 13.9,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.12,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 125,
+  "t": "2026-10-18T06:34:44Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8702,
+  "inband10": 0.5473,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 10.25,
+  "near1": 13.66,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8324,
+  "ib14_relay_metal": 0.9999,
+  "gap_chain_only_ib": 14.03,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.12,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.0
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 126,
+  "t": "2026-10-18T06:34:45Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8622,
+  "inband10": 0.5352,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 11.05,
+  "near1": 15.59,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8221,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 15.06,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.5,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.19
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 127,
+  "t": "2026-10-18T06:35:03Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 10,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8605,
+  "inband10": 0.5283,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 11.97,
+  "near1": 15.4,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.8228,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 15.74,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.48,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.44
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 128,
+  "t": "2026-10-18T06:35:04Z",
+  "params": {
+   "PHI": 10,
+   "tilt": 10,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8499,
+  "inband10": 0.5148,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 13.03,
+  "near1": 16.46,
+  "gap_ideal_relay": 8.02,
+  "ib14_chain_only": 0.8104,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 16.98,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.95,
+  "relayed": {
+   "n": 9,
+   "taken": 8,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 7.44
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 129,
+  "t": "2026-10-18T06:35:18Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 255,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8627,
+  "inband10": 0.5394,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 11.5,
+  "near1": 17.17,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.8197,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 15.8,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.6,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 17.25
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 130,
+  "t": "2026-10-18T06:35:19Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8433,
+  "inband10": 0.5161,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 13.44,
+  "near1": 17.97,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.7953,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 18.24,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.43,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.62
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 131,
+  "t": "2026-10-18T06:35:27Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 265,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8475,
+  "inband10": 0.5163,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 12.52,
+  "near1": 17.06,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8041,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 16.86,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.16,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.31
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 132,
+  "t": "2026-10-18T06:35:41Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8662,
+  "inband10": 0.5412,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 10.65,
+  "near1": 15.19,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8272,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 14.55,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.3,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.06
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 133,
+  "t": "2026-10-18T06:35:41Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8684,
+  "inband10": 0.5487,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 10.3,
+  "near1": 15.95,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.8272,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 14.42,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.3,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 134,
+  "t": "2026-10-18T06:35:56Z",
+  "params": {
+   "PHI": 25,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8705,
+  "inband10": 0.5559,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0202,
+  "gap": 11.22,
+  "near1": 18.0,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.8272,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 15.55,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.3,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 135,
+  "t": "2026-10-18T06:35:56Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.839,
+  "inband10": 0.5099,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 13.37,
+  "near1": 17.91,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7932,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 17.95,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.51,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 136,
+  "t": "2026-10-18T06:36:10Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -12
+  },
+  "inband14": 0.9372,
+  "inband10": 0.6921,
+  "reach": 0.4062,
+  "follow": 0.3833,
+  "contact": 0.0222,
+  "gap": 108.27,
+  "near1": 113.47,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.9181,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 108.27,
+  "model_v": 2,
+  "jams": 106,
+  "dh_lift": 2.46,
+  "relayed": {
+   "n": 12,
+   "taken": 9,
+   "contact": 2,
+   "jam": 1,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.06
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 137,
+  "t": "2026-10-18T06:36:10Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8363,
+  "inband10": 0.5104,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 14.14,
+  "near1": 18.67,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.7863,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 19.14,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.74,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 138,
+  "t": "2026-10-18T06:36:26Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -18
+  },
+  "inband14": 0.926,
+  "inband10": 0.6812,
+  "reach": 0.45,
+  "follow": 0.4333,
+  "contact": 0.0392,
+  "gap": 100.59,
+  "near1": 103.8,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.9023,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 100.59,
+  "model_v": 2,
+  "jams": 94,
+  "dh_lift": 1.45,
+  "relayed": {
+   "n": 12,
+   "taken": 9,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.06
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 139,
+  "t": "2026-10-18T06:36:28Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -25
+  },
+  "inband14": 0.9309,
+  "inband10": 0.687,
+  "reach": 0.8,
+  "follow": 0.9667,
+  "contact": 0.051,
+  "gap": 15.1,
+  "near1": 17.37,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.9076,
+  "ib14_relay_metal": 0.9996,
+  "gap_chain_only_ib": 15.1,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 0.0,
+  "relayed": {
+   "n": 12,
+   "taken": 9,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.06
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 140,
+  "t": "2026-10-18T06:36:43Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -12
+  },
+  "inband14": 0.9359,
+  "inband10": 0.6909,
+  "reach": 0.4125,
+  "follow": 0.3833,
+  "contact": 0.0326,
+  "gap": 108.68,
+  "near1": 113.81,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.9152,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 108.68,
+  "model_v": 2,
+  "jams": 106,
+  "dh_lift": 2.74,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 2,
+   "jam": 1,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 141,
+  "t": "2026-10-18T06:36:45Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -18
+  },
+  "inband14": 0.925,
+  "inband10": 0.6783,
+  "reach": 0.4562,
+  "follow": 0.4333,
+  "contact": 0.0388,
+  "gap": 99.93,
+  "near1": 106.31,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.8993,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 100.0,
+  "model_v": 2,
+  "jams": 95,
+  "dh_lift": 1.94,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 142,
+  "t": "2026-10-18T06:37:01Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 250,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -25
+  },
+  "inband14": 0.9323,
+  "inband10": 0.693,
+  "reach": 0.8063,
+  "follow": 0.9667,
+  "contact": 0.0556,
+  "gap": 14.93,
+  "near1": 18.32,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.9076,
+  "ib14_relay_metal": 0.9996,
+  "gap_chain_only_ib": 14.93,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 0.0,
+  "relayed": {
+   "n": 14,
+   "taken": 10,
+   "contact": 4,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 143,
+  "t": "2026-10-18T06:37:03Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -12
+  },
+  "inband14": 0.9104,
+  "inband10": 0.6272,
+  "reach": 0.45,
+  "follow": 0.4333,
+  "contact": 0.0101,
+  "gap": 97.68,
+  "near1": 102.58,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8839,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 99.29,
+  "model_v": 2,
+  "jams": 97,
+  "dh_lift": 3.21,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 1,
+   "jam": 1,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 144,
+  "t": "2026-10-18T06:37:20Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -18
+  },
+  "inband14": 0.9071,
+  "inband10": 0.6264,
+  "reach": 0.4813,
+  "follow": 0.55,
+  "contact": 0.0265,
+  "gap": 84.52,
+  "near1": 90.57,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8779,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 86.73,
+  "model_v": 2,
+  "jams": 83,
+  "dh_lift": 1.82,
+  "relayed": {
+   "n": 12,
+   "taken": 11,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 145,
+  "t": "2026-10-18T06:37:21Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -25
+  },
+  "inband14": 0.9303,
+  "inband10": 0.6814,
+  "reach": 0.8187,
+  "follow": 0.9667,
+  "contact": 0.0357,
+  "gap": 11.7,
+  "near1": 17.37,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.9076,
+  "ib14_relay_metal": 0.9987,
+  "gap_chain_only_ib": 11.7,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 0.0,
+  "relayed": {
+   "n": 12,
+   "taken": 11,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 146,
+  "t": "2026-10-18T06:37:37Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -12
+  },
+  "inband14": 0.9276,
+  "inband10": 0.6475,
+  "reach": 0.4375,
+  "follow": 0.4,
+  "contact": 0.0309,
+  "gap": 104.34,
+  "near1": 110.97,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.9046,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 104.34,
+  "model_v": 2,
+  "jams": 100,
+  "dh_lift": 3.5,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 147,
+  "t": "2026-10-18T06:37:38Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -18
+  },
+  "inband14": 0.9126,
+  "inband10": 0.6224,
+  "reach": 0.4938,
+  "follow": 0.5,
+  "contact": 0.0354,
+  "gap": 89.16,
+  "near1": 97.76,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.884,
+  "ib14_relay_metal": 0.9997,
+  "gap_chain_only_ib": 90.76,
+  "model_v": 2,
+  "jams": 84,
+  "dh_lift": 2.3,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 148,
+  "t": "2026-10-18T06:37:48Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 10,
+   "taz": 270,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -25
+  },
+  "inband14": 0.9314,
+  "inband10": 0.6801,
+  "reach": 0.8125,
+  "follow": 0.9667,
+  "contact": 0.0457,
+  "gap": 13.32,
+  "near1": 17.85,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.9076,
+  "ib14_relay_metal": 0.9988,
+  "gap_chain_only_ib": 13.32,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 0.0,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 16.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 149,
+  "t": "2026-10-18T06:47:16Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 11,
+   "taz": 225,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.9017,
+  "inband10": 0.6527,
+  "reach": 0.4375,
+  "follow": 0.3833,
+  "contact": 0.0211,
+  "gap": 105.03,
+  "near1": 106.7,
+  "gap_ideal_relay": 4.89,
+  "ib14_chain_only": 0.8695,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 108.08,
+  "model_v": 2,
+  "jams": 103,
+  "dh_lift": 4.52,
+  "relayed": {
+   "n": 14,
+   "taken": 10,
+   "contact": 2,
+   "jam": 2,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 20.0
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 150,
+  "t": "2026-10-18T06:47:17Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 11,
+   "taz": 225,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8995,
+  "inband10": 0.6451,
+  "reach": 0.425,
+  "follow": 0.3833,
+  "contact": 0.0215,
+  "gap": 106.37,
+  "near1": 106.37,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8695,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 109.37,
+  "model_v": 2,
+  "jams": 103,
+  "dh_lift": 4.52,
+  "relayed": {
+   "n": 12,
+   "taken": 8,
+   "contact": 2,
+   "jam": 2,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 13.75
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 151,
+  "t": "2026-10-18T06:47:26Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 11,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8715,
+  "inband10": 0.5875,
+  "reach": 0.6125,
+  "follow": 0.5,
+  "contact": 0.0154,
+  "gap": 78.14,
+  "near1": 83.72,
+  "gap_ideal_relay": 4.89,
+  "ib14_chain_only": 0.8304,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 82.25,
+  "model_v": 2,
+  "jams": 68,
+  "dh_lift": 4.47,
+  "relayed": {
+   "n": 14,
+   "taken": 12,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.69
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 152,
+  "t": "2026-10-18T06:47:27Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 11,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8694,
+  "inband10": 0.5807,
+  "reach": 0.6,
+  "follow": 0.5,
+  "contact": 0.0156,
+  "gap": 79.62,
+  "near1": 83.84,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8304,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 83.52,
+  "model_v": 2,
+  "jams": 68,
+  "dh_lift": 4.47,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 13.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 153,
+  "t": "2026-10-18T06:47:37Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 11,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8726,
+  "inband10": 0.5463,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 9.88,
+  "near1": 15.53,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.8327,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 13.87,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.1,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.94
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 154,
+  "t": "2026-10-18T06:47:38Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 11,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8724,
+  "inband10": 0.5421,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 10.03,
+  "near1": 14.57,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8353,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 13.74,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.0,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.12
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 155,
+  "t": "2026-10-18T06:47:45Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 12,
+   "taz": 225,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.9174,
+  "inband10": 0.6611,
+  "reach": 0.4125,
+  "follow": 0.3667,
+  "contact": 0.0112,
+  "gap": 108.2,
+  "near1": 108.21,
+  "gap_ideal_relay": 5.51,
+  "ib14_chain_only": 0.8903,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 109.17,
+  "model_v": 2,
+  "jams": 108,
+  "dh_lift": 3.96,
+  "relayed": {
+   "n": 13,
+   "taken": 9,
+   "contact": 1,
+   "jam": 3,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.5
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 156,
+  "t": "2026-10-18T06:47:46Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 12,
+   "taz": 225,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.9155,
+  "inband10": 0.6537,
+  "reach": 0.4062,
+  "follow": 0.3667,
+  "contact": 0.0114,
+  "gap": 108.85,
+  "near1": 108.84,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8903,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 109.82,
+  "model_v": 2,
+  "jams": 108,
+  "dh_lift": 3.96,
+  "relayed": {
+   "n": 12,
+   "taken": 8,
+   "contact": 1,
+   "jam": 3,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 13.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 157,
+  "t": "2026-10-18T06:47:53Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8835,
+  "inband10": 0.5628,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 8.79,
+  "near1": 14.44,
+  "gap_ideal_relay": 4.89,
+  "ib14_chain_only": 0.8462,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 12.52,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 4.59,
+  "relayed": {
+   "n": 14,
+   "taken": 12,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 158,
+  "t": "2026-10-18T06:47:54Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8816,
+  "inband10": 0.5556,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 9.11,
+  "near1": 13.65,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8462,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 12.65,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 4.59,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.0
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 159,
+  "t": "2026-10-18T06:48:01Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 12,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8596,
+  "inband10": 0.5229,
+  "reach": 0.8313,
+  "follow": 1.0,
+  "contact": 0.0203,
+  "gap": 12.94,
+  "near1": 17.48,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.8147,
+  "ib14_relay_metal": 0.9999,
+  "gap_chain_only_ib": 17.43,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.75,
+  "relayed": {
+   "n": 13,
+   "taken": 10,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 18.38
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 160,
+  "t": "2026-10-18T06:48:03Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 12,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.861,
+  "inband10": 0.5212,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 11.17,
+  "near1": 15.71,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8195,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 15.32,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 5.58,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.19
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 161,
+  "t": "2026-10-18T06:48:11Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 13,
+   "taz": 225,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.9183,
+  "inband10": 0.6592,
+  "reach": 0.4813,
+  "follow": 0.3833,
+  "contact": 0.0196,
+  "gap": 100.5,
+  "near1": 105.32,
+  "gap_ideal_relay": 5.51,
+  "ib14_chain_only": 0.8915,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 101.35,
+  "model_v": 2,
+  "jams": 95,
+  "dh_lift": 4.01,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.56
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 162,
+  "t": "2026-10-18T06:48:12Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 13,
+   "taz": 225,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.9169,
+  "inband10": 0.6536,
+  "reach": 0.475,
+  "follow": 0.3833,
+  "contact": 0.0198,
+  "gap": 101.15,
+  "near1": 105.99,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8915,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 102.0,
+  "model_v": 2,
+  "jams": 95,
+  "dh_lift": 4.01,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 13.88
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 163,
+  "t": "2026-10-18T06:48:19Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 13,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.877,
+  "inband10": 0.5502,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0202,
+  "gap": 10.57,
+  "near1": 16.22,
+  "gap_ideal_relay": 6.01,
+  "ib14_chain_only": 0.8367,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 14.6,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 4.93,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.88
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 164,
+  "t": "2026-10-18T06:48:20Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 13,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8762,
+  "inband10": 0.5443,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0102,
+  "gap": 9.65,
+  "near1": 14.19,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.8392,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 13.35,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 4.83,
+  "relayed": {
+   "n": 12,
+   "taken": 10,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.06
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 165,
+  "t": "2026-10-18T06:48:27Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 13,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8399,
+  "inband10": 0.4899,
+  "reach": 0.8375,
+  "follow": 1.0,
+  "contact": 0.0152,
+  "gap": 13.78,
+  "near1": 19.45,
+  "gap_ideal_relay": 6.64,
+  "ib14_chain_only": 0.7896,
+  "ib14_relay_metal": 0.9972,
+  "gap_chain_only_ib": 18.81,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.53,
+  "relayed": {
+   "n": 13,
+   "taken": 11,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 18.56
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 166,
+  "t": "2026-10-18T06:48:28Z",
+  "params": {
+   "PHI": 15,
+   "tilt": 13,
+   "taz": 245,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8446,
+  "inband10": 0.4921,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "contact": 0.0051,
+  "gap": 11.67,
+  "near1": 17.35,
+  "gap_ideal_relay": 6.13,
+  "ib14_chain_only": 0.7986,
+  "ib14_relay_metal": 0.9986,
+  "gap_chain_only_ib": 16.27,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 6.27,
+  "relayed": {
+   "n": 12,
+   "taken": 11,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 14.25
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 167,
+  "t": "2026-10-18T06:48:38Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain",
+   "ds": -25
+  },
+  "inband14": 0.9331,
+  "inband10": 0.6935,
+  "reach": 0.8,
+  "follow": 0.9667,
+  "contact": 0.0606,
+  "gap": 16.06,
+  "near1": 21.71,
+  "gap_ideal_relay": 4.89,
+  "ib14_chain_only": 0.9076,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 16.06,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 0.0,
+  "relayed": {
+   "n": 14,
+   "taken": 11,
+   "contact": 3,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 168,
+  "t": "2026-10-18T06:48:38Z",
+  "params": {
+   "PHI": 25,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8859,
+  "inband10": 0.572,
+  "reach": 0.8313,
+  "follow": 1.0,
+  "contact": 0.0253,
+  "gap": 10.81,
+  "near1": 17.59,
+  "gap_ideal_relay": 4.89,
+  "ib14_chain_only": 0.8462,
+  "ib14_relay_metal": 1.0,
+  "gap_chain_only_ib": 14.78,
+  "model_v": 2,
+  "jams": 0,
+  "dh_lift": 4.59,
+  "relayed": {
+   "n": 14,
+   "taken": 12,
+   "contact": 2,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 169,
+  "t": "2026-10-18T06:48:43Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 0
+  },
+  "inband14": 0.9007,
+  "inband10": 0.5719,
+  "reach": 0.8562,
+  "follow": 1.0,
+  "contact": 0.0051,
+  "gap": 4.89,
+  "near1": 10.53,
+  "gap_ideal_relay": 4.89,
+  "ib14_chain_only": null,
+  "ib14_relay_metal": null,
+  "gap_chain_only_ib": null,
+  "model_v": 1,
+  "jams": 0,
+  "dh_lift": null,
+  "relayed": {
+   "n": 14,
+   "taken": 13,
+   "contact": 1,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.81
+  },
+  "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
  }
 ]

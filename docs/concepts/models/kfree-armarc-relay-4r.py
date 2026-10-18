@@ -276,7 +276,7 @@ def lead_eval(params, nc=60, nw=160, exact=False):
     # gate |dK| <= KWELD then IS the welded chain's window
     xp = {k: v for k, v in params.items() if k not in LPAR and k != "psi2"}
     if float(params.get("psi2", 0.0)):                         # window re-placement (shift_a2.py): J2's rest axis turned about J1 by psi2
-        u1 = K.bvec(AR.LEAD["az1"], AR.LEAD["el1"]); u2 = K.bvec(AR.LEAD["az2"], AR.LEAD["el2"]); ps = math.radians(float(params["psi2"]))
+        L0 = dict(AR.CC.PARAMS, **AR.LEAD); u1 = K.bvec(L0["az1"], L0["el1"]); u2 = K.bvec(L0["az2"], L0["el2"]); ps = math.radians(float(params["psi2"]))
         v = K.unit(math.cos(ps) * u2 + math.sin(ps) * np.cross(u1, u2) + (1 - math.cos(ps)) * (u1 @ u2) * u1)
         xp.update(az2=math.degrees(math.atan2(v[2], -v[0])), el2=math.degrees(math.asin(float(np.clip(v[1], -1, 1)))))
     P = AR.CC._clamp(dict(AR.CC.PARAMS, **AR.LEAD, **dict(dict(smhi=5.0), **xp)))
