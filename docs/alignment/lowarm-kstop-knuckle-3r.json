@@ -5,7 +5,6 @@
  "complexity": null,
  "verdict": "watch",
  "reasons": [
-  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "sampling: sample-weighted in-band 0.897 vs part-weighted 0.861 (+3.57 points); thinly sampled parts: ring2 6, plate 8, L1a 8; mostly out-of-band parts: ring2 (0.18 in band, median 15.6 mm, 0.6 % of samples) (re-measured)",
@@ -14,9 +13,12 @@
  "checks": [
   {
    "check": "held_out",
-   "level": "watch",
-   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
-   "v_gap": 18.69
+   "level": "ok",
+   "reason": "held out 22.88 vs bench 18.69 (+4.19; re-measured (this audit))",
+   "held_gap": 22.88,
+   "v_gap": 18.69,
+   "drop": 4.19,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -267,10 +269,10 @@
  ],
  "remeasured": {
   "bench": true,
-  "held": false
+  "held": true
  },
  "verifier_files": [],
- "git": "f493a7f",
+ "git": "0781b77",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T16:09:34Z"
+ "t": "2026-10-18T16:23:44Z"
 }

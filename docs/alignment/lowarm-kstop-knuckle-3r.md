@@ -9,7 +9,7 @@ Checks: `docs/alignment/lowarm-kstop-knuckle-3r.json`.
 
 The ledger tool printed WATCH (see "Ledger" below). The number is real. This audit re-wore it with the model unchanged
 and got 18.69 again, the per-pose worst of the two sided dwell wears. The +0.264 deg wear reads 18.60 and the -0.210 deg
-wear reads 18.68, both bit-identical to the claim and the verifier. Held: HELD_LINE.
+wear reads 18.68, both bit-identical to the claim and the verifier. Held, re-worn the same way (`docs/alignment/remeasure/lowarm-kstop-knuckle-3r_held.json`), reads 22.81 at +0.264 and 22.88 at -0.210, with the per-pose worst at 22.88 (claim 22.876). Held minus bench is +4.19; the lead's is +4.09.
 
 Nothing in the number ranks this design above a design that is better for the wearer. It sits behind the lead on every
 reading:
@@ -175,6 +175,30 @@ There are 9 findings, all watch. The ledger also carries the tool's non-ok check
 - **G6:** not applicable.
 - **T1:** report-only (user decision 3). Its one design-specific part, 203 sitting just past the round's 0.15 gate, is in
   finding 1.
+
+## Re-wear (this audit)
+
+The model ran unchanged. `tools/alignment_remeasure_kstop.py` wraps the model's own `_harness` so that the chain's
+`PK.audit` records `alignment_audit.deep_audit`. It ran CB_EXACT=1, local, niced, 2 processes, with the farm budget spent.
+
+| wear | +0.264 | -0.210 | per-pose worst | claim | secs |
+|---|---|---|---|---|---|
+| bench | 18.60 | 18.68 | **18.69** | 18.69 | 456 / 455 |
+| held | 22.81 | 22.88 | **22.88** | 22.876 | 868 / 865 |
+
+- The J2 dowel would cut 0 poses on both sets. The largest taken K is 45.615 on bench and 46.268 on held.
+- Files: `docs/alignment/remeasure/lowarm-kstop-knuckle-3r_{bench,held}.json`. Each holds the per-pose worst plus both
+  sides' deep records.
+
+## Ledger
+
+The ledger tool printed `watch` (2026-10-18T16:23:49Z, claim 18.69, tool verdict watch). Its reason_items:
+
+- the tool's checks: continuity, fold_margin, sampling, reporting;
+- the judgement findings: NEW-hairline-gates, S2, M5, T3, G4, S5, M3, G5, R1.
+
+Two of the tool's watches, continuity and fold_margin, are records the tool cannot find, not measured faults. The flood
+and the th margin sit in the row's verification block (finding R1). The judgement findings S5 and T3 carry those numbers.
 
 ## Numbers I could not get, and why
 
