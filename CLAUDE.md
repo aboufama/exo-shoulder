@@ -43,8 +43,9 @@ cost 0 complexity (tools/simplicity.py v2.2), and no agent spends time on sensin
 encoder-value analysis. DOF counting is unchanged: a joint in the shoulder chain is a joint (pick1 = 4 DOF); the cuff
 knee pins are cuff alignment outside the count. The leaderboard's plain verified gap counts contact as penetration
 (metal past 0 mm) as the verifiers compute it; the 1 mm / 2 mm near-touch readings are reported only.
-User decisions 2026-10-18 evening: (8) the user is modelling design B (skin-normal-3r-pin-knee H1b) themselves from the
-drawing set docs/drawings/B (tools/eng_interfaces.py; viewer https://claude.ai/artifact/SvYgkudJa7EKyJpy3xwFXz);
+User decisions 2026-10-18 evening: (8) the user is modelling the 3-JOINT LEAD conecut-knee-knuckle-3r themselves from the
+drawing set docs/drawings/A (~22:30 UTC: "can we go to the current 3 powered link high score?"; "not fully sold" on the knee; it
+replaced design B, docs/drawings/B, which stays as the simpler reference; the zc-frontier CAD build was stopped) (tools/eng_interfaces.py; viewer https://claude.ai/artifact/SvYgkudJa7EKyJpy3xwFXz);
 (9) "Overhead needs to be solved, work on it in the background" (track O1, round 301+); (10) "if there is a 4 joints
 setup that scores way higher without a knee, I'd honestly prefer that" (track K1, round 401+: rigid cuff, no knee, no
 cuff slides, <= 4 counted joints; with a rigid cuff every axis must pass through GH, so it is a spherical 4R with a

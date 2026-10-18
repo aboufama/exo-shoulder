@@ -61,7 +61,10 @@ search loop that kept going.
 
 ## 0. Latest (2026-10-18 ~22:00 UTC)
 
-- The user picked design B (pin knee H1b: 3 hubs, 3 links, a two-pin knee) to model from the A3 drawing set in
+- ~22:30 UTC the user switched to the 3-joint lead conecut-knee-knuckle-3r (drawing set docs/drawings/A, 15 sheets, all
+  7 joints - J1, K, J2, J3, crank pivot, pin a, pin b - close to 0.000 mm at the rest pose); "not fully sold" on the knee.
+  The zc-frontier (simplest, no knee, 87.8) CAD build was started then stopped at the user's switch.
+- Before that the user picked design B (pin knee H1b: 3 hubs, 3 links, a two-pin knee) to model from the A3 drawing set in
   docs/drawings/B (10 sheets: kinematic layout, GA + parts list, hub section, one end-geometry sheet per part; built by
   tools/eng_interfaces.py from the STEP files posed at the rest frame - the STEP files themselves are in the build pose
   where the knee is open). Viewer: https://claude.ai/artifact/SvYgkudJa7EKyJpy3xwFXz. Set B carries the upgrade notes
