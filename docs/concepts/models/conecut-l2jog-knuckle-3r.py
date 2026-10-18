@@ -55,6 +55,7 @@ JB = 13                                                       # pose 139's binde
 XB_REF = np.array([-28.79, 11.22, 62.31])                     # its local coordinates on the lead's fit (check)
 T_TOP = 3.0                                                   # L2 top = underside + 3 mm radial (contact-only set)
 GUARD = (139, 203, 205, 237, 264, 316)
+S_LO, S_HI = -15.0, 38.8                                      # allowed station span of the jog (see _clamp)
 
 
 def _clamp(p):
@@ -63,6 +64,13 @@ def _clamp(p):
                       ("ff", 0.0, 1.0), ("dz", 0.0, 0.8)):
         p[k] = min(max(float(p.get(k, JOG[k])), lo), hi)
     p["sgn"] = 1 if float(p.get("sgn", 1)) >= 0 else -1
+    # the moved span stays off link 2's root stretch that binds radially at 316 (stations -22.2 .. -16.3 from the binder,
+    # r_J2 13.5 - 19.4: the spec keeps it untouched) and >= 2 mm inside hub 3's rim (station 40.8): S_LO / S_HI
+    for _ in range(2):
+        lo_end = p["cs"] - p["Lf"] / 2 - p["T"]; hi_end = p["cs"] + p["Lf"] / 2 + p["T"]
+        if lo_end < S_LO: p["T"] = max(4.0, p["T"] - (S_LO - lo_end)); p["Lf"] = max(4.0, min(p["Lf"], 2 * (p["cs"] - S_LO - p["T"])))
+        if hi_end > S_HI: p["T"] = max(4.0, p["T"] - (hi_end - S_HI)); p["Lf"] = max(4.0, min(p["Lf"], 2 * (S_HI - p["cs"] - p["T"])))
+    p["dz"] = min(p["dz"], 2 * p["T"] ** 2 / (math.pi ** 2 * 15.0))     # joggle bend radius >= 15 mm (5 t, the CAD rule)
     return CC._clamp(p)
 
 
