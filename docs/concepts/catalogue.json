@@ -3151,7 +3151,7 @@
   "name": "Back-of-shoulder J0 outside hub 2's orbit with a link-0 bridge over the knuckle (4 joints: the user prefers 3)",
   "family": "base relay 4R, remote spare hub",
   "lens": "round103:relay-under-lead (lens 1: the a0 >= 60 placement the PASS rule allows only with hub 2's orbit clearing J0 + 5 mm)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-18T01:42:28Z",
   "source": "round 103 (J3, track jump) judge (docs/concepts/round103_ideation.md)",
   "description": "Hub 0 (O20 v5) on the back of the shoulder over the supraspinatus / scapular spine, c = bvec(-10.5, 38.8): a0 60 at azimuth 330 from J1, outside hub 2's orbit about J1 (37.6-54.3 deg + 9-10 deg hub). The proposer's probe (clash2.json) finds 0 clip and 0 ws clashes with the lead's chain at a0 60-90 / azu 330, the only clash-free legal seat family on that side. Link 0 is a long 12 x 3 Ti bar (~70-80 mm) that arches from hub 0 over the band hub K, the crank and hub 2 sweep, down to J1's housing on the acromion top. Hub 0's underside sits at r0 76 mm (85-105 at a0 70-90), ~16-20 mm above the resting skin, because a scapula-fixed point there must clear the arm in behind-back and extension poses; the bridge rides 18-30 mm above the skin (8 stations 18.4-29.5 mm). The seat rule cuts J0's travel to +-17 deg. ACROSS THE BODY the relay takes stretched poses as in lead-relay-j0-4r; OVERHEAD and BEHIND THE BACK q0 = 0, but hub 0 sits where the arm passes behind the back.",

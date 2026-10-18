@@ -5,7 +5,8 @@
  * hub rims) bridges from hub 0's crown over the chain's sweep to hub 1's crown (link 1a leaves hub 1's lower plate).
  * Relay rule (model policy ii): q0 = 0 while the lead closes; otherwise the least |q0| in the window at which it closes.
  * A frame the relay cannot take is drawn at q0 = 0 and shows red with the lead's reason.
- * Measured (docs/concepts/models/lead-relay-backbridge-4r.py wear): see docs/concepts/rows/lead-relay-backbridge-4r.json. */
+ * Measured frozen exact Bench(110,360) with hub 0 + link 0 as metal: 32.13 (lead 18.28; ghost 18.22): link 0 rides 24-30 mm over
+ * the skin (0 % in band) because it must bridge the chain's swept annulus to reach hub 1. DEAD (round 103 gate 0). */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;
   const P = {"az1": 95.3929, "el1": 67.8974, "az2": 45.8211, "el2": 41.0855, "wd": 66.8662, "wa": -10.6559, "b3": 0.329, "lE": 97.1443, "lc": 24.3508, "phiE": 0.7526, "phib": -91.8041, "stk": 6.0, "ang_min": 25.2189, "bk1": 26.0, "bk2": 38.0336, "sK": -1, "a1max": 58.7678, "smhi": 16.8433, "smlo": 5.0, "capK": 6.0, "law_mode": "seg", "kA": 2.1534, "t1": 6.0, "kB": 2.1534, "smt": 12.0, "kK": 2.1534, "i_rock": 2.3934, "r_horn": 4.0, "r_lobe": 8.2661, "arm_lo": 1.0, "J3MIN": -111.9036, "J3MAX": 122.7417};

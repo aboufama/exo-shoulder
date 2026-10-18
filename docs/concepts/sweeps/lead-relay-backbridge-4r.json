@@ -1,0 +1,218 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-18T02:22:05Z",
+  "params": {
+   "a0": 60.0,
+   "azu": 330.0,
+   "route": "great circle",
+   "window": [
+    -7.0,
+    0.0
+   ],
+   "r0": 76.0,
+   "link0_len_mm": 48.0,
+   "metal": true,
+   "cell": "hub 0 + link 0 as real metal",
+   "bench": "Bench(110,360) exact, frozen lead fit on Bench(60,160) fast; window picked on Bench(60,160)"
+  },
+  "inband14": 0.7722,
+  "inband10": 0.4847,
+  "reach": 0.725,
+  "follow": 1.0,
+  "contact": 0.0185,
+  "gap": 32.13,
+  "gap_near1": 33.19,
+  "ws_taken": 261,
+  "contacts": 7
+ },
+ {
+  "k": 1,
+  "t": "2026-10-18T02:22:05Z",
+  "params": {
+   "a0": 60.0,
+   "azu": 330.0,
+   "route": "great circle",
+   "window": [
+    -7.0,
+    0.0
+   ],
+   "r0": 76.0,
+   "link0_len_mm": 48.0,
+   "metal": false,
+   "cell": "ghost: zero-size J0, same window",
+   "bench": "Bench(110,360) exact, frozen lead fit on Bench(60,160) fast; window picked on Bench(60,160)"
+  },
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "reach": 0.7361,
+  "follow": 1.0,
+  "contact": 0.0183,
+  "gap": 18.22,
+  "gap_near1": 19.27,
+  "ws_taken": 265,
+  "contacts": 7
+ },
+ {
+  "k": 2,
+  "t": "2026-10-18T02:22:05Z",
+  "params": {
+   "a0": 55.0,
+   "azu": 345.0,
+   "route": "great circle",
+   "window": [
+    -22.0,
+    8.0
+   ],
+   "r0": 67.5,
+   "link0_len_mm": 38.9,
+   "metal": true,
+   "cell": "hub 0 + link 0 as real metal",
+   "bench": "Bench(110,360) exact, frozen lead fit on Bench(60,160) fast; window picked on Bench(60,160)"
+  },
+  "inband14": 0.7951,
+  "inband10": 0.4887,
+  "reach": 0.6944,
+  "follow": 1.0,
+  "contact": 0.0296,
+  "gap": 34.01,
+  "gap_near1": 36.17,
+  "ws_taken": 250,
+  "contacts": 11
+ },
+ {
+  "k": 3,
+  "t": "2026-10-18T02:22:05Z",
+  "params": {
+   "a0": 55.0,
+   "azu": 345.0,
+   "route": "great circle",
+   "window": [
+    -22.0,
+    8.0
+   ],
+   "r0": 67.5,
+   "link0_len_mm": 38.9,
+   "metal": false,
+   "cell": "ghost: zero-size J0, same window",
+   "bench": "Bench(110,360) exact, frozen lead fit on Bench(60,160) fast; window picked on Bench(60,160)"
+  },
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "reach": 0.7611,
+  "follow": 1.0,
+  "contact": 0.0327,
+  "gap": 17.16,
+  "gap_near1": 19.18,
+  "ws_taken": 274,
+  "contacts": 13
+ },
+ {
+  "k": 4,
+  "t": "2026-10-18T02:22:05Z",
+  "params": {
+   "a0": 70.0,
+   "azu": 330.0,
+   "route": "great circle",
+   "window": [
+    -7.0,
+    0.0
+   ],
+   "r0": 84.5,
+   "link0_len_mm": 63.6,
+   "metal": true,
+   "cell": "hub 0 + link 0 as real metal",
+   "bench": "Bench(110,360) exact, frozen lead fit on Bench(60,160) fast; window picked on Bench(60,160)"
+  },
+  "inband14": 0.7365,
+  "inband10": 0.4604,
+  "reach": 0.7278,
+  "follow": 1.0,
+  "contact": 0.0185,
+  "gap": 35.42,
+  "gap_near1": 36.74,
+  "ws_taken": 262,
+  "contacts": 7
+ },
+ {
+  "k": 5,
+  "t": "2026-10-18T02:22:05Z",
+  "params": {
+   "a0": 70.0,
+   "azu": 330.0,
+   "route": "great circle",
+   "window": [
+    -7.0,
+    0.0
+   ],
+   "r0": 84.5,
+   "link0_len_mm": 63.6,
+   "metal": false,
+   "cell": "ghost: zero-size J0, same window",
+   "bench": "Bench(110,360) exact, frozen lead fit on Bench(60,160) fast; window picked on Bench(60,160)"
+  },
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "reach": 0.7389,
+  "follow": 1.0,
+  "contact": 0.0183,
+  "gap": 17.94,
+  "gap_near1": 19.24,
+  "ws_taken": 266,
+  "contacts": 7
+ },
+ {
+  "k": 6,
+  "t": "2026-10-18T02:22:05Z",
+  "params": {
+   "a0": 60.0,
+   "azu": 0.0,
+   "route": "great circle",
+   "window": [
+    -22.0,
+    1.0
+   ],
+   "r0": 75.5,
+   "link0_len_mm": 47.8,
+   "metal": true,
+   "cell": "hub 0 + link 0 as real metal",
+   "bench": "Bench(110,360) exact, frozen lead fit on Bench(60,160) fast; window picked on Bench(60,160)"
+  },
+  "inband14": 0.7203,
+  "inband10": 0.4577,
+  "reach": 0.7222,
+  "follow": 1.0,
+  "contact": 0.0289,
+  "gap": 38.64,
+  "gap_near1": 41.0,
+  "ws_taken": 260,
+  "contacts": 11
+ },
+ {
+  "k": 7,
+  "t": "2026-10-18T02:22:05Z",
+  "params": {
+   "a0": 60.0,
+   "azu": 0.0,
+   "route": "great circle",
+   "window": [
+    -22.0,
+    1.0
+   ],
+   "r0": 75.5,
+   "link0_len_mm": 47.8,
+   "metal": false,
+   "cell": "ghost: zero-size J0, same window",
+   "bench": "Bench(110,360) exact, frozen lead fit on Bench(60,160) fast; window picked on Bench(60,160)"
+  },
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "reach": 0.7667,
+  "follow": 1.0,
+  "contact": 0.0302,
+  "gap": 16.35,
+  "gap_near1": 18.61,
+  "ws_taken": 276,
+  "contacts": 12
+ }
+]
