@@ -154,16 +154,21 @@ class WModel(DC.DCModel):
         # link 1b's highest metal under the insert's annulus (its samples + T_LINK) over the J2 sweep
         r_in_ins = max(float(BORE_R), 0.0); r_out_ins = float(dsm["r_out"])
         Xb = np.concatenate([X for m, X in self.contact if m == mLb] + [X for m, X in self.rigid.values() if m == mLb])
-        Xbp = Xb - np.outer(Xb @ u2, u2); rb_ = np.linalg.norm(Xbp, axis=1); under = (rb_ >= r_in_ins - 0.5) & (rb_ <= r_out_ins + 0.5)
-        l1b_top = float((Xb[under] @ u2 - H2).max()) if under.any() else None
+        Xbp = Xb - np.outer(Xb @ u2, u2); rb_ = np.linalg.norm(Xbp, axis=1); lb_ = Xb @ u2 - H2
+        ann = (rb_ >= r_in_ins - 0.15) & (rb_ <= r_out_ins + 0.15)
+        below = ann & (lb_ < ins_lo)                              # link 1b metal under the insert (its lower plate / strap)
+        l1b_top = float(lb_[below].max()) if below.any() else None
+        n_slab = int((ann & (lb_ >= ins_lo - 0.15) & (lb_ <= ins_hi + 0.15)).sum())   # link 1b metal inside the insert's slab
+        # (link 1b samples far above the slab, e.g. F2+12.25, are its upper J2 cap over link 2's ring: not in the insert's layer)
         pairs = dict(insert_layer=[round(ins_lo, 3), round(ins_hi, 3)], arm_layer=[ARM_LO, ARM_HI],
                      insert_vs_l1b_plate_top=round(ins_lo - PLATE_TOP, 3),
-                     l1b_sampled_top_under_insert=round(l1b_top, 3) if l1b_top is not None else None,
+                     l1b_sampled_top_under_insert=round(l1b_top, 3) if l1b_top is not None else None, l1b_samples_in_insert_slab=n_slab,
                      arm_vs_window_wall=round(wc, 3), arm_top_vs_insert=round(ins_lo - ARM_HI, 3),
                      pin_tip_under_roof=0.1, crank_boss_note="boss on link 1b's top outside link 2's pad; crank vs link 2 per pose by the parent's part checks (parts_pairs)")
         fails = []
         if ins_lo - PLATE_TOP < 0.15 - 1e-9: fails.append("insert-l1b-plate")
-        if l1b_top is not None and ins_lo - l1b_top < 0.15 - 1e-9: pairs["insert_vs_l1b_sampled_top"] = round(ins_lo - l1b_top, 3)
+        if l1b_top is not None: pairs["insert_vs_l1b_sampled_top"] = round(ins_lo - l1b_top, 3)
+        if n_slab and not ctrl: fails.append("insert-l1b-slab")
         if ins_lo - ARM_HI < 0.0 - 1e-9: fails.append("arm-insert")
         if win["wall_over_O11_seat"] < 0.8 - 1e-9: fails.append("O11-wall")
         # --- stop order: the drive (groove rise + slot) must outlast J2's own dowel engagement + the K lead
