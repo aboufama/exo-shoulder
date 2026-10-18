@@ -35,7 +35,7 @@ _sp = importlib.util.spec_from_file_location("conecut_for_armarc", os.path.join(
 CC = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(CC)
 ID = "armarc-relay-knuckle-4r"
 LEAD = json.load(open(os.path.join(REPO, "docs", "concepts", "rows", "conecut-knee-knuckle-3r.json")))["best_params"]
-RELAY = dict(PHI=30.0, tilt=0.0, taz=0.0, sgn=1.0, hw=1, fit_relay=0)
+RELAY = dict(PHI=30.0, tilt=0.0, taz=0.0, sgn=1.0, hw=1, hwv="plain", ds=0.0)
 _Z0 = CB._poses_all(); Z0 = {k: _Z0[k] for k in _Z0.files}; _ORIG = CB._poses_all
 D2R = math.pi / 180
 
@@ -79,6 +79,9 @@ def gate(M, Q):
     q3p = wr(np.degrees(q[:, 2] + K["phi"])); lo, hi = float(P.get("J3MIN", -105)), float(P.get("J3MAX", 999))
     ok &= (q3p >= lo) & ((q3p <= hi) if hi < 180 else True)
     c = (np.einsum("nij,nij->n", X3[0], Q) - 1) / 2; ok &= np.degrees(np.arccos(np.clip(c, -1, 1))) < 0.5
+    g = getattr(M, "_scg", None)                                   # the drive's own range (J2 stop B): |dK| <= dK_lim
+    if g is not None and "dK_lim" in g and getattr(D, "_dK", None) is not None and len(D._dK) == len(Q):
+        ok &= np.abs(np.asarray(D._dK, float)) <= float(g["dK_lim"]) + 1e-9
     return ok
 
 
@@ -101,98 +104,188 @@ def solve_phi(M, rp, frames=None):
     return phi * sg, ax
 
 
-# ---- relay metal --------------------------------------------------------------------------------------------------
+# ---- relay metal (post-run, explicit: the lead's run writes B.res itself, so a B.record hook is not enough) -------------
+ARM_LIFT_MEMBERS = (5, 6)                                  # pad (arm member) and knee link: lifted fully onto the carriage
+
+
 def _basis(ax):
     e = unit(np.cross(ax, [0.0, 0.0, 1.0]) if abs(ax[2]) < 0.9 else np.cross(ax, [1.0, 0.0, 0.0])); f = np.cross(ax, e); return e, f
 
 
+def _rad(X, ax):
+    return X - (X @ ax)[:, None] * ax[None]
+
+
 def relay_geometry(M1, B1, ax, rp):
-    """pad centroid -> theta0, s_cuff; skin radius profile about ax at s_cuff (max over the fit-clip poses, HG frame)"""
-    pad = np.asarray(M1.g["pad"][1], float); c = pad.mean(0); e, f = _basis(ax)
-    s0 = float(c @ ax); th0 = math.degrees(math.atan2(float(c @ f), float(c @ e)))
+    """HG-frame geometry from the fitted lead (phi = 0): pad centroid azimuth theta0 and station s0 about ax; the skin
+    radius about ax over the arc (ARM skin: first exit of a ray from the axis; p90 over the fit-bench clip poses - the
+    liner is 4 mm compliance; contact at every bench pose is still checked on the real posed skin); the circular track /
+    slotted shell radius R_t = max over the arc of (skin p90 + 4 liner + 1.5 shell) [+ 2 track for 'vroller'];
+    carriage top = R_t + h_c; pad lift dh = carriage top - the lead's pad underside radius (>= 0)."""
+    i0 = [j for j in range(len(B1.idx)) if B1.kind[j] == "clip" and M1.kin_ok[j]][0]
+    m, X = M1.rigid["pad"]; padS = M1.world(m, i0, X) @ M1.RS[i0]               # thorax -> scapula frame
+    padH = padS @ M1.Q[i0]                                                       # -> HG frame (member 5 = Q)
+    e, f = _basis(ax); c = padH.mean(0); s_pad = float(c @ ax); ds = float(rp.get("ds", 0.0)); s0 = s_pad + ds   # s0 = the track station
+    th0 = math.degrees(math.atan2(float(c @ f), float(c @ e)))
+    rpad = float(np.linalg.norm(_rad(padH, ax), axis=1).min())
+    for nm in ("boss", "knee"):                                                  # the knee stack's lowest point rides on the carriage
+        m_, X_ = M1.rigid[nm]; h_ = (M1.world(m_, i0, X_) @ M1.RS[i0]) @ M1.Q[i0]
+        rpad = min(rpad, float(np.linalg.norm(_rad(h_, ax), axis=1).min()))
     PHI = abs(float(rp["PHI"])); sg = 1.0 if float(rp.get("sgn", 1)) >= 0 else -1.0
-    lo, hi = (th0 - 14.0, th0 + PHI + 14.0) if sg > 0 else (th0 - PHI - 14.0, th0 + 14.0)
-    ths = np.arange(lo, hi + 1e-9, 2.0); ss = np.arange(s0 - 6.0, s0 + 6.0 + 1e-9, 2.0)
-    clips = [i for i, k in enumerate(B1.kind) if k == "clip"][::3]
-    Zp = CB._poses_all(); RS = Zp["RS"][B1.idx].astype(float); HG = Zp["HG"][B1.idx].astype(float)
-    rr = np.arange(20.0, 90.0, 1.0); rmax = np.zeros((len(ss), len(ths)))
-    for i in clips:
-        R = RS[i] @ HG[i]
-        for a, sv in enumerate(ss):
-            for b, t in enumerate(ths):
-                d = math.cos(t * D2R) * e + math.sin(t * D2R) * f
-                pts = (sv * ax)[None] + rr[:, None] * d[None]
-                dd = B1.dist(i, pts @ R.T); out = np.nonzero(dd > 0)[0]
-                r_s = float(rr[out[0]] - dd[out[0]]) if len(out) else rr[-1]
-                rmax[a, b] = max(rmax[a, b], r_s)
-    return dict(e=e, f=f, s0=s0, th0=th0, lo=lo, hi=hi, ths=ths, ss=ss, rskin=rmax, R_t=float(rmax.max()) + 5.5)
+    hc = 0.5 * CAR_W / max(rpad, 30.0) / D2R
+    lo, hi = (th0 - hc - 3.0, th0 + PHI + hc + 3.0) if sg > 0 else (th0 - PHI - hc - 3.0, th0 + hc + 3.0)
+    ths = np.arange(lo, hi + 1e-9, 2.0); ss = np.arange(s0 - 0.5 * SH_W, s0 + 0.5 * SH_W + 1e-9, 2.0)
+    clips = [j for j in range(len(B1.idx)) if B1.kind[j] == "clip"]
+    rr = np.arange(10.0, 110.0, 1.0); prof = np.full((len(clips), len(ss), len(ths)), np.nan)
+    for a, j in enumerate(clips):
+        R = M1.RS[j] @ M1.Q[j]
+        pts = []
+        for sv in ss:
+            for t in ths:
+                d = math.cos(t * D2R) * e + math.sin(t * D2R) * f; pts.append((sv * ax)[None] + rr[:, None] * d[None])
+        pts = np.concatenate(pts); dd = B1.dist(j, pts @ R.T).reshape(len(ss), len(ths), len(rr))
+        inside = dd < 0
+        for b in range(len(ss)):
+            for k in range(len(ths)):
+                ins = np.nonzero(inside[b, k])[0]
+                if not len(ins): continue
+                first_out = ins[0] + np.argmax(~inside[b, k, ins[0]:]) if (~inside[b, k, ins[0]:]).any() else len(rr) - 1
+                prof[a, b, k] = rr[first_out] - dd[b, k, first_out]
+    p90 = np.nanpercentile(prof, 90, axis=0)                                     # (ss, ths)
+    hw = rp.get("hwv", "plain")
+    R_liner = float(np.nanmax(p90)) + 4.0
+    R_t = R_liner + 1.5 + (2.0 if hw == "vroller" else 0.0)
+    h_c = 5.5 if hw == "vroller" else 1.7                                        # carriage above the track / shell top
+    dh = max(0.0, R_t + h_c - rpad) if abs(ds) < 1e-9 else 0.0     # ds != 0: the pad hangs from a bracket, no lift
+    # the movers (knee link 6, member 3's E strap / boss) that pass over the track band in ANY fit-bench pose must clear
+    # its top + the carriage by 1 mm after one rigid lift (parts are rigid: the lift is the max over poses, not per pose)
+    band_s = (s0 - 0.5 * SH_W - 2.0, s0 + 0.5 * SH_W + 2.0); need = 0.0
+    for j in np.nonzero(M1.kin_ok)[0]:
+        for nm in ("knee", "E", "boss"):
+            m_, X_ = M1.rigid[nm]; h_ = (M1.world(m_, j, X_) @ M1.RS[j]) @ M1.Q[j]
+            sv = h_ @ ax; az = np.degrees(np.arctan2(h_ @ f, h_ @ e)); azr = (az - lo + 180.0) % 360.0 - 180.0 + lo
+            sel = (sv >= band_s[0]) & (sv <= band_s[1]) & (azr >= lo) & (azr <= hi)
+            if sel.any(): need = max(need, R_t + 1.0 - float(np.linalg.norm(_rad(h_[sel], ax), axis=1).min()))
+    dh = max(dh, need)
+    return dict(e=e, f=f, s0=s0, s_pad=s_pad, ds=ds, th0=th0, lo=lo, hi=hi, ths=ths, ss=ss, p90=p90, R_liner=R_liner, R_t=R_t, h_c=h_c, dh=dh,
+                rpad=rpad, hw=hw, sg=sg)
 
 
-def relay_points(G, ax, phi_i):
-    """(track+shell points in the arm frame, carriage points in the carriage frame) - HG-frame coordinates"""
-    e, f, s0 = G["e"], G["f"], G["s0"]; out_arm = []
-    Rt = G["R_t"]
-    for t in np.arange(G["lo"], G["hi"] + 1e-9, 2.0 / max(Rt, 1) / D2R):      # 2 mm along the arc
+CAR_W, CAR_L, SH_W, TR_W = 24.0, 14.0, 12.0, 8.0
+
+
+def relay_points(G, ax):
+    """(shell + track points, arm-fixed HG frame), (carriage points, carriage frame = HG' at phi) - ~1 pt / 4 mm2"""
+    e, f, s0, Rt = G["e"], G["f"], G["s0"], G["R_t"]; arm = []
+    for t in np.arange(G["lo"], G["hi"] + 1e-9, 2.0 / Rt / D2R):
         d = math.cos(t * D2R) * e + math.sin(t * D2R) * f
-        for sv in np.arange(s0 - 4.0, s0 + 4.01, 2.0):
-            out_arm.append(sv * ax + Rt * d)                                     # track underside
-        b = int(np.argmin(np.abs(G["ths"] - t))); rsh = float(G["rskin"][:, b].max()) + 4.0
-        for sv in np.arange(s0 - 6.0, s0 + 6.01, 2.0):
-            out_arm.append(sv * ax + rsh * d)                                    # shell (on the 4 mm liner over the highest skin)
-    car = []
-    tc = G["th0"]; half = 12.0 / Rt / D2R
+        b = int(np.argmin(np.abs(G["ths"] - t))); rsk = float(np.nanmax(G["p90"][:, b])) + 4.0
+        for sv in np.arange(s0 - 0.5 * SH_W, s0 + 0.5 * SH_W + 0.01, 2.0):
+            arm.append(sv * ax + (rsk if G["hw"] == "vroller" else Rt - 1.5) * d)    # shell underside (plain: the slotted circular shell)
+            arm.append(sv * ax + Rt * d)                                              # track / shell top
+    car = []; half = 0.5 * CAR_W / Rt / D2R; tc = G["th0"]
     for t in np.arange(tc - half, tc + half + 1e-9, 2.0 / Rt / D2R):
         d = math.cos(t * D2R) * e + math.sin(t * D2R) * f
-        for sv in np.arange(s0 - 7.0, s0 + 7.01, 2.0):
-            car.append(sv * ax + (Rt - 1.0) * d)                                 # carriage / roller underside
-            car.append(sv * ax + (Rt + 6.0) * d)                                 # carriage plate top
-    return np.array(out_arm), np.array(car)
+        for sv in np.arange(s0 - 0.5 * CAR_L, s0 + 0.5 * CAR_L + 0.01, 2.0):
+            car.append(sv * ax + (Rt + 0.2) * d); car.append(sv * ax + (Rt + G["h_c"]) * d)
+    if abs(G["ds"]) > 1e-9:                                   # bracket (2 mm Ti, 10 wide) from the carriage edge up/down the arm to the pad
+        sg_ = 1.0 if G["s_pad"] > s0 else -1.0; s_a = s0 + sg_ * 0.5 * CAR_L; s_b = G["s_pad"]
+        r_a = Rt + G["h_c"]; r_b = G["rpad"] + G["dh"]; hb = 5.0 / Rt / D2R
+        for sv in np.arange(min(s_a, s_b), max(s_a, s_b) + 0.01, 2.0):
+            r = r_a + (r_b - r_a) * (sv - s_a) / (s_b - s_a)
+            for t in np.arange(tc - hb, tc + hb + 1e-9, 2.0 / Rt / D2R):
+                d = math.cos(t * D2R) * e + math.sin(t * D2R) * f; car.append(sv * ax + r * d)
+    return np.array(arm), np.array(car)
 
 
-class _RelayBench:
-    """wraps B.record: the relay metal joins every recorded (taken) pose's metal"""
-    def __init__(self, B, G, ax, phi_b, RS, HG0):
-        self.B, self.G, self.ax, self.phi_b = B, G, ax, phi_b
-        self.arm, self.car = relay_points(G, ax, 0.0); self.RS, self.HG0 = RS, HG0; self._orig = B.record
-        B.record = self.record
-
-    def world(self, i):
-        Ra = self.RS[i] @ self.HG0[i]; Rc = Ra @ rotm(self.ax, np.array([self.phi_b[i] * D2R]))[0]
-        return np.r_[self.arm @ Ra.T, self.car @ Rc.T]
-
-    def record(self, i, P):
-        if P is None or not len(P): return self._orig(i, P)
-        return self._orig(i, np.r_[np.asarray(P, float), self.world(i)])
+def lift_fn(G, ax):
+    """radial lift about ax (HG' frame) of the arm-side chain metal onto the carriage: pad, knee link fully; member 3
+    (E strap, pin b boss) by a ramp in s from s0 + 35 (no lift: hub 3 is at s > -45) to s0 + 15 (full)"""
+    dh = G["dh"]; s_full, s_none = G["s_pad"] + 15.0, G["s_pad"] + 35.0
+    def lift(m, Xh):
+        if dh <= 0 or not len(Xh): return Xh
+        if m in ARM_LIFT_MEMBERS: w = np.ones(len(Xh))
+        elif m == 3: w = np.clip((s_none - Xh @ ax) / (s_none - s_full), 0.0, 1.0)
+        else: return Xh
+        r = _rad(Xh, ax); n = np.linalg.norm(r, axis=1, keepdims=True); n[n < 1e-9] = 1.0
+        return Xh + (dh * w)[:, None] * r / n
+    return lift
 
 
-def _frozen_lead(P, B1):
-    M1 = CC.CCModel(B1, dict(P)); r1 = M1.run(); return M1, r1
+def rerecord(M, B, G, ax, phi_b, HG0):
+    """recompute every recorded pose's metal: chain metal with the arm-side lift + relay hardware; jams (relay metal
+    or lifted metal within 1 mm of a non-adjacent body) -> pose lost ('jam'); metal < 0 -> contact"""
+    lift = lift_fn(G, ax) if G is not None else None
+    arm, car = relay_points(G, ax) if G is not None else (np.zeros((0, 3)), np.zeros((0, 3)))
+    names = list(M.rigid) + list(M.link_pts); parts = list(M.rigid.values()) + list(M.link_pts.values())
+    why = np.asarray(M.why, dtype=object).copy(); jam = []; lift_ib = []; rel_ib = []
+    for i in range(len(B.idx)):
+        if B.res[i] is None and why[i] not in ("contact", "skin"): continue
+        if B.res[i] is None: continue
+        RS = M.RS[i]; Qp = M.Q[i]; Q0 = HG0[i]
+        P = []; per = {}
+        for nm, (m, X) in zip(names, parts):
+            w = M.world(m, i, X)                                           # thorax frame
+            if lift is not None and (m in ARM_LIFT_MEMBERS or m == 3):
+                h = (w @ RS) @ Qp; h = lift(m, h); w = (h @ Qp.T) @ RS.T
+            per[nm] = w; P.append(w)
+        chain = np.concatenate(P)
+        relay = np.zeros((0, 3))
+        if len(arm):
+            wa = (arm @ Q0.T) @ RS.T; wc = (car @ Qp.T) @ RS.T; relay = np.r_[wa, wc]
+            # jam: track/shell vs the chain bodies that move over it (knee link 6, member 3 = E strap / boss / hub 3, link 2)
+            from scipy.spatial import cKDTree
+            tr = cKDTree(wa); tc_ = cKDTree(wc)
+            dpt = {n: float(tr.query(per[n])[0].min()) - 1.0 for n in ("knee", "E", "boss", "hub3", "L2") if n in per}   # ~2 mm spacing: gap ~ d - 1
+            dpc = {n: float(tc_.query(per[n])[0].min()) - 1.0 for n in ("E", "hub3", "L2") if n in per}
+            dmin, dcar = min(dpt.values()), min(dpc.values())
+            if min(dmin, dcar) < 1.0:
+                jam.append(dict(i=i, kind=B.kind[i], track_mm=round(dmin, 2), track_part=min(dpt, key=dpt.get), carriage_mm=round(dcar, 2),
+                                carriage_part=min(dpc, key=dpc.get), phi=round(float(phi_b[i]), 1)))
+                B.res[i] = None; why[i] = "jam"; continue
+        d = B.dist(i, np.r_[chain, relay])
+        dc = []
+        for m, Pc in M.contact:
+            w = M.world(m, i, Pc)
+            if lift is not None and (m in ARM_LIFT_MEMBERS or m == 3):
+                h = (w @ RS) @ Qp; h = lift(m, h); w = (h @ Qp.T) @ RS.T
+            dc.append(float(B.dist(i, w).min()))
+        dc = min(dc) if dc else 1e9
+        B.res[i] = np.r_[d, dc] if dc < 0 else d
+        if min(dc, float(d.min())) < 0: why[i] = "contact"
+        elif why[i] == "contact": why[i] = ""
+        if B.kind[i] == "clip" and float(d.min()) >= 0:
+            lift_ib.append(d[:len(chain)]); rel_ib.append(d[len(chain):])
+    M.why = why
+    ib = lambda a: round(float(((a >= 2) & (a <= 14)).mean()), 4) if len(a) else None
+    lc = np.concatenate(lift_ib) if lift_ib else np.zeros(0); rc = np.concatenate(rel_ib) if rel_ib else np.zeros(0)
+    return dict(jams=jam, ib14_chain_only=ib(lc), ib14_relay_metal=ib(rc), n_relay_pts=int(len(arm) + len(car)),
+                relay_median_mm=round(float(np.median(rc)), 2) if len(rc) else None)
 
 
 def evaluate_relay(params, nc=60, nw=160, exact=False, verbose=False):
-    """fit on Bench(60,160) fast (relay seen by the fit only if fit_relay), freeze, wear on Bench(nc,nw)"""
+    """fit the lead on Bench(60,160) fast at phi = 0 (frozen shape), solve phi per frame with the FITTED lead's gates,
+    wear on Bench(nc,nw) with the relayed arm-side frames + the relay metal + the arm-side lift"""
     t0 = time.time(); rp = dict(RELAY); rp.update({k: params[k] for k in RELAY if k in params})
     P = CC._clamp(dict(CC.PARAMS, **LEAD, **{k: v for k, v in params.items() if k not in RELAY}))
     old = os.environ.pop("CB_EXACT", None)
     try:
         B1 = CB.Bench(n_clip=60, n_ws=160)
-        M0 = CC.CCModel(B1, dict(P))                                         # init only: the lead's design, m reference
-        P0 = dict(M0.p); P0["m_fix"] = [float(x) for x in M0.D.m]
-        phi, ax = solve_phi(M0, rp)
-        phi_fill = np.where(np.isfinite(phi), phi, 0.0)
-        Zr = relayed_Z(phi_fill, ax)
-        with patched(Zr if int(rp["fit_relay"]) else None):
-            M1 = CC.CCModel(B1, dict(P0)); r1 = M1.run()
+        M1 = CC.CCModel(B1, dict(P)); r1 = M1.run()
         fit = {k: r1[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+        ax = raxis(rp["tilt"], rp["taz"])
+        G = relay_geometry(M1, B1, ax, rp) if int(rp["hw"]) and float(rp["PHI"]) > 0 else None
     finally:
         if old is not None: os.environ["CB_EXACT"] = old
     P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]
-    G = relay_geometry(M1, B1, ax, rp) if int(rp["hw"]) else None
+    phi, ax = solve_phi(M1, rp)
+    phi_fill = np.where(np.isfinite(phi), phi, 0.0)
+    Zr = relayed_Z(phi_fill, ax)
 
     class Frozen(CC.CCModel):
         def fit(self):
             for a in ("g", "fr", "geo", "rigid", "link_pts", "f", "fK", "tr", "zb", "_tr_fit", "cyl", "box", "strap", "cyl_surf", "Emid",
-                      "Hneed", "Lneed", "hEx", "_Ex", "_rod_info", "_viz_rod", "_crown_ok", "_scg", "_sc_info", "_wedge_info"):
+                      "Hneed", "Lneed", "hEx", "_Ex", "_rod_info", "_viz_rod", "_crown_ok", "_scg", "_sc_info", "_wedge_info", "cyl_r"):
                 if hasattr(M1, a): setattr(self, a, getattr(M1, a))
             self._sc = None
             self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
@@ -201,46 +294,94 @@ def evaluate_relay(params, nc=60, nw=160, exact=False, verbose=False):
     B = CB.Bench(n_clip=nc, n_ws=nw)
     phi_b = phi_fill[B.idx]
     with patched(Zr):
-        M = Frozen(B, P2)
-        if G is not None: _RelayBench(B, G, ax, phi_b, Zr["RS"][B.idx].astype(float), Z0["HG"][B.idx].astype(float))
-        r = M.run()
-    rep = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+        M = Frozen(B, P2); r = M.run()
+    plain = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}     # ideal relay, no relay metal / lift
+    hwrep = rerecord(M, B, G, ax, phi_b, Z0["HG"][B.idx].astype(float)) if G is not None else {}
+    rr_ = B.report(); rep = {k: rr_[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
     mins = np.array([float(np.min(B.res[j])) if B.res[j] is not None else np.nan for j in range(len(B.idx))])
     ws = np.array(B.kind) == "ws"; elev = np.array([p["elev"] for p in B.poses])
     taken = np.isfinite(mins) & (mins >= 0); rel = phi_b != 0
-    # the lead's own outcome per pose (phi = 0 everywhere): which relayed poses are new takes
     why = np.asarray(M.why)
-    out = dict(fit_fast=fit, wear=rep, bench=[nc, nw], mode=B.mode, relay=dict(rp, axis=[round(float(x), 4) for x in ax]),
-               why={k: int((why == k).sum()) for k in set(why.tolist())},
+    out = dict(fit_fast=fit, wear=rep, wear_ideal_relay=plain, bench=[nc, nw], mode=B.mode, relay=dict(rp, axis=[round(float(x), 4) for x in ax]),
+               why={str(k): int((why == k).sum()) for k in set(why.tolist())},
                ws_taken=int((ws & taken).sum()), ws=int(ws.sum()), overhead=[int((ws & taken & (elev >= 140)).sum()), int((ws & (elev >= 140)).sum())],
                relayed=dict(n=int((rel & ws).sum()), taken=int((rel & ws & taken).sum()), contact=int((rel & np.isfinite(mins) & (mins < 0)).sum()),
-                            jam=int((rel & (why == "parts")).sum()), lost_other=int((rel & ws & ~np.isfinite(mins) & (why != "parts")).sum()),
+                            jam=int((rel & ((why == "parts") | (why == "jam"))).sum()), lost_other=int((rel & ws & ~np.isfinite(mins) & (why != "parts") & (why != "jam")).sum()),
                             clip_relayed=int((rel & ~ws).sum()),
                             phi_max=round(float(np.abs(phi_b).max()), 2) if rel.any() else 0.0),
                min_metal_taken=round(float(np.nanmin(np.where(taken, mins, np.nan))), 3) if taken.any() else None,
-               near1_gap=None, secs=round(time.time() - t0, 1))
-    # 1 mm near-touch reading: metal < 1 mm counts as contact
+               near1_gap=None, hw=hwrep, secs=round(time.time() - t0, 1))
     ok1 = lambda j: B.res[j] is not None and float(np.min(B.res[j])) >= 1.0
     cl = [j for j, k in enumerate(B.kind) if k == "clip"]; wsl = [j for j, k in enumerate(B.kind) if k == "ws"]
     nz = [j for j in range(len(B.kind)) if B.res[j] is not None]
     reach1 = float(np.mean([ok1(j) for j in wsl])); fol1 = float(np.mean([ok1(j) for j in cl]))
     con1 = float(np.mean([float(np.min(B.res[j])) < 1.0 for j in nz])) if nz else 0.0
     out["near1_gap"] = CB.gap_of(rep["inband14"], fol1, reach1, con1)
+    # lead's own wall per relayed pose (phi = 0 run of the same frozen shape is the PHI = 0 case; here: the kin gate split)
     out["relayed_poses"] = [dict(i=int(j), pose=[B.poses[j][k] for k in ("plane", "elev", "axial")], phi=round(float(phi_b[j]), 1),
                                  why=str(why[j]), min_mm=(round(float(mins[j]), 2) if np.isfinite(mins[j]) else None))
                             for j in range(len(B.idx)) if ws[j] and rel[j]]
-    out["contacts"] = [dict(i=int(j), pose=[B.poses[j][k] for k in ("plane", "elev", "axial")], phi=round(float(phi_b[j]), 1), min_mm=round(float(mins[j]), 2))
+    out["contacts"] = [dict(i=int(j), kind=B.kind[j], pose=[B.poses[j][k] for k in ("plane", "elev", "axial")], phi=round(float(phi_b[j]), 1), min_mm=round(float(mins[j]), 2))
                        for j in range(len(B.idx)) if np.isfinite(mins[j]) and mins[j] < 0]
-    # continuity of phi along the fit clips (10 fps): max step between consecutive frames that are both taken kinematically
     names = list(Z0["NAMES"]); steps = []
     for nm in CB.FIT:
         ii = np.nonzero(Z0["CID"] == names.index(nm))[0]; ii = ii[np.argsort(Z0["FI"][ii], kind="stable")]
         p = phi[ii]; good = np.isfinite(p[1:]) & np.isfinite(p[:-1])
         if good.any(): steps.append(float(np.abs(np.diff(p))[good].max()))
     out["phi_clip_step_max"] = round(max(steps), 2) if steps else 0.0
-    if G is not None: out["relay_hw"] = dict(R_t=round(G["R_t"], 1), s0=round(G["s0"], 1), th0=round(G["th0"], 1), arc=[round(G["lo"], 1), round(G["hi"], 1)],
-                                              rskin=[round(float(G["rskin"].min()), 1), round(float(G["rskin"].max()), 1)])
+    out["phi_clip_relayed"] = int(sum(int((np.isfinite(phi[np.nonzero(Z0["CID"] == names.index(nm))[0]]) & (phi[np.nonzero(Z0["CID"] == names.index(nm))[0]] != 0)).sum()) for nm in CB.FIT))
+    if G is not None: out["relay_hw"] = dict(hw=G["hw"], R_t=round(G["R_t"], 1), R_liner=round(G["R_liner"], 1), h_c=G["h_c"], dh_lift=round(G["dh"], 2), rpad=round(G["rpad"], 1),
+                                              s0=round(G["s0"], 1), s_pad=round(G["s_pad"], 1), ds=G["ds"], th0=round(G["th0"], 1), arc=[round(G["lo"], 1), round(G["hi"], 1)],
+                                              skin_p90=[round(float(np.nanmin(G["p90"])), 1), round(float(np.nanmax(G["p90"])), 1)])
+    out["_M"] = None
     return out, M, B
+
+
+# ---- gravity determinacy (judge 1.4): generalised gravity torque along the relay's null space ------------------------
+# moving-body masses (g) from the lead's gen-9 full CAD build (pipeline/full-exo/designs/user_conecut_knee/build.json):
+# member 1 = link 1a + J1/K bearings, K cap + clock spring; 7 = link 1b + J2 bearings, cap, dowels, crank pin; 9 = bell
+# crank + bearings + roller; 2 = link 2 + lobe ring + J3 bearings + cap; 3 = member 3 (J3 disc, E strap, boss, pin a);
+# 6 = knee link + its MR63ZZ pair; 5 = pad mount + pin b + carriage (est. 8 g; BOTTOM's bar stays on the arm shell)
+MASS_G = {1: 24.7, 7: 21.0, 9: 10.3, 2: 25.1, 3: 17.2, 6: 5.8, 5: 8.0}
+
+
+def gravity_check(params, dphi=2.0):
+    """finite difference of the moving bodies' potential energy along the relay (arm fixed, carriage turned by dphi):
+    tau(phi=0) = -dPE/dphi per fit-bench pose closed at both phi; the spring preload must exceed 1.5 x max(tau+)"""
+    rp = dict(RELAY); rp.update({k: params[k] for k in RELAY if k in params})
+    P = CC._clamp(dict(CC.PARAMS, **LEAD)); old = os.environ.pop("CB_EXACT", None)
+    B1 = CB.Bench(n_clip=60, n_ws=160); M1 = CC.CCModel(B1, dict(P)); M1.run()
+    P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]; ax = raxis(rp["tilt"], rp["taz"]); sg = 1.0 if float(rp.get("sgn", 1)) >= 0 else -1.0
+    n = len(Z0["HG"]); com = {}
+    for tag, ph in (("0", 0.0), ("d", sg * dphi)):
+        Zr = relayed_Z(np.full(n, ph), ax)
+        class Fz(CC.CCModel):
+            def fit(self):
+                for a in ("g", "fr", "geo", "rigid", "link_pts", "f", "fK", "tr", "zb", "_tr_fit", "cyl", "box", "strap", "cyl_surf", "Emid",
+                          "Hneed", "Lneed", "hEx", "_Ex", "_rod_info", "_viz_rod", "_crown_ok", "_scg", "_sc_info", "_wedge_info", "cyl_r"):
+                    if hasattr(M1, a): setattr(self, a, getattr(M1, a))
+                self._sc = None; self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+        B = CB.Bench(n_clip=60, n_ws=160)
+        with patched(Zr):
+            M = Fz(B, P2); M.fit()
+        ok = np.asarray(M.kin_ok, bool); E = np.full(len(B.idx), np.nan)
+        for i in np.nonzero(ok)[0]:
+            e_ = 0.0
+            for nm, (m, X) in list(M.rigid.items()) + list(M.link_pts.items()):
+                if m in MASS_G: pass
+            for m, mass in MASS_G.items():
+                pts = [M.world(mm, i, X) for mm, X in list(M.rigid.values()) + list(M.link_pts.values()) if mm == m]
+                if pts: e_ += mass * 1e-3 * 9.81 * float(np.concatenate(pts)[:, 1].mean()) * 1e-3     # J; world +y up
+            E[i] = e_
+        com[tag] = (E, ok, B)
+    if old is not None: os.environ["CB_EXACT"] = old
+    E0, ok0, B = com["0"]; Ed, okd, _ = com["d"]; both = ok0 & okd
+    tau = -(Ed - E0) / (dphi * D2R)                            # N.m pushing phi up (positive = the relay would drift open)
+    kind = np.array(B.kind)
+    t = tau[both]
+    return dict(n=int(both.sum()), tau_max_open=round(float(np.nanmax(t)), 4), tau_p95=round(float(np.nanpercentile(t, 95)), 4),
+                tau_min=round(float(np.nanmin(t)), 4), tau_clip_max=round(float(np.nanmax(tau[both & (kind == "clip")])), 4),
+                preload_needed_Nm=round(1.5 * max(0.0, float(np.nanmax(t))), 4), masses_g=MASS_G, dphi=dphi)
 
 
 def bench_eval(B, params):
@@ -250,8 +391,11 @@ def bench_eval(B, params):
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
+    if mode == "gravity":
+        print(json.dumps(gravity_check(par))); sys.exit(0)
     if mode == "frozen": out, M, B = evaluate_relay(par, 110, 360, exact=True)
     else: out, M, B = evaluate_relay(par)
+    out.pop("_M", None)
     out["params"] = par; out["row"] = ID
     if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
     print(json.dumps({k: v for k, v in out.items() if k not in ("relayed_poses",)}, default=float))
