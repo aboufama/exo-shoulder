@@ -106,7 +106,7 @@ config.
 |---|---|---|---|---|---|
 | buildable gate (chain-only) | 16.92 | 16.60 | 15.09 | **14.26** | **14.30** |
 | chain-only ib14 | 0.8710 | 0.8714 | 0.8865 | 0.8948 | 0.8944 |
-| bump as claimed (gate) | 14.20 | - | 14.14 | DS31BASE | - |
+| bump as claimed (gate) | 14.20 | - | 14.14 | 14.21 | - |
 | plain (pooled) | 14.24 | 13.87 | 13.74 | 13.74 | 13.74 |
 | near1 | 17.90 | 18.04 | 17.91 | 17.91 | 17.91 |
 | ws taken / contacts / jams | 285 / 13 / 5 | 286 / 13 / 0 | 286 / 13 / 0 | 286 / 13 / 0 | 286 / 13 / 0 |
@@ -116,7 +116,8 @@ What the station readings show:
 
 - **The stack cost is a station artefact.** proxtrack's sweep chose ds 19.54 under a model that charged nothing for the
   pin-a stack, so the station was selected on a metal error.
-- At ds 31-34 the buildable gate (14.26-14.30) is back at the claim's own unbuildable 14.40.
+- At ds 31-34 the buildable gate (14.26-14.30) is back at the claim's own unbuildable 14.40. At ds 31 the stack
+  costs 0.05 (14.21 as modelled vs 14.26 buildable); at ds 28 it costs 0.95 (14.14 vs 15.09).
 - The 5 boss near-jams at the shell top vanish (pose 396 becomes a take).
 - The contact set is proxtrack's 13, with no new pose. The relay pattern stays 33 relayed, 24 taken, 9 contacts.
 - The plateau from 31 to 34 says the rest of the price (~1.05 over the 13.21 ideal) is the E-strap bump and pose 466.
