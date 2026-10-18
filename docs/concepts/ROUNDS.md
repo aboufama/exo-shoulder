@@ -3158,3 +3158,129 @@ Two 4-joint ghost gates, like-for-like against the lead. The 3-joint classes at 
   4-joint class's ghost number like-for-like before the lead asks.
 - The transmission guard [30, 150] and the J1 seat rule stay as they are. No lens relaxed them, and cruciate's
   low-floor windows would need the first.
+
+## Round 103 plan (Round J3, track jump; 2026-10-18 ~00:55 UTC, lead verified gap 18.28)
+
+Planner's read at 00:40-00:55 UTC: ROUNDS.md (J1 / J2 results, round 14 plan), rows/*.json, events.jsonl tail,
+catalogue, acromion-relay-4r.md, arm-parked-knee-4r row, tools/simplicity.py v2.2. Ledger re-read
+(`tools/alignment_ledger.py latest`): gamed = dipped-law-groove-knuckle-3r (fold margin 0.184), seed-offset-3r-slides;
+every other audited row WATCH. This round answers the J2 closer: two 4-joint ghost gates, like-for-like against the
+lead. **The user prefers 3 joints; every claim from this round says it is a 4-DOF design and compares with the 3-joint
+lead and with the 4-DOF rows (minarc-stop-knuckle-4r 18.40 polished / 19.54 verified, arm-parked-knee-4r 26.71).**
+
+### State
+
+- **Lead (best verified, not gamed): conecut-knee-knuckle-3r 18.28** (score 93.35) frozen exact Bench(110,360), held
+  22.38; reach 0.7278 (262/360), ib14 0.9012, follow 1.0, contact 0.0106 (4 poses), overhead 8/28, 3 active, 0 passive
+  translations, cx 18.5. Config: stk 6.0, lE 97.14, lc 24.35, phiE 0.75, phib -91.80, J3 window [-111.90, 122.74].
+  WATCH (carry into every summary that names it; no lens may buy points the same way): reporting (sweep 12.5 shown as
+  95.45); T1 (16.56 points of the bench claim live in the 1-2 mm shell; pose 203 taken at 0.263 mm); T3 (held th
+  margin 5.006, a +-0.3 deg K-phase error crosses 5; the J3 dowel's held number holds in a 1.33-deg window);
+  NEW-strap-dilution (18.67 at the displaced lead's strap sampling); P2 (held poses read by the knee prefilter, measured
+  effect nil); M5 (J3 stop returns 155 N per N.m through MR117 bearing 1); NEW-self-reference (T5 reference swap).
+- **Others at the lead's reach:** slipper-nose 18.49 (cx 18.25), trimlug-k165 18.51, roller-longdyad 18.67,
+  desmo-slipper 18.95 (cx 15.75), desmo-conecut 18.98 (cx 16.5). Complexity frontier: cx 0 pin-knee 23.64 (current
+  checks; verified 27.2), crest-knee-3r 32.84 frozen (main r14, cx 0); geneva-tail-pinknee 23.57 at cx 12.
+- **95 arithmetic** (tools/concept_bench.py gap_of): reach 0.7731 = 279/360 at ib14 >= 0.90 and the lead's contact
+  (+17 takes); 282/360 at ib14 0.88 and 0 contact. In-band above 0.90 buys nothing.
+- **Where the lead loses poses (98 of 360):** fold 88 = stretched 73 (th 107-176; 64 of them internal rotation >= 90
+  across the body; the stretched wall is the K drive's stroke, dK 52.6 of the 57 cap) + folded 15 (th 7.7-22,
+  scapular-plane overhead); J3 stop 6; contact 4 (237 / 205 / 316 / 264). Overhead 8/28: fold 14, contact 3, J3 stop 3.
+- **3-joint ceilings at the legal seats (measured):** back-seat plain O20 3R 250/360 kinematic; back-seat knuckle
+  ghosts (ideal drive) 269-271 takes (proximal-j3 16.52 / 271 / 4 contacts but < 274 bar; desmo-vrocker 17.23 / 269 /
+  6; long-dyad 17.86 / 269 / 8); cap pole 281/360 kinematic (267 metal frozen; T-0 56.40) but every J2 realisation
+  fails its zone (revolute hub 2 <= 0.12 in band over 668 configs; virtual J2 86.95-108.22 fast; crest J3 40.17
+  frozen); cap-pole knuckle (main r14 cap-plateau-knuckle-3r, 00:27): control 26.24 fast / 33.19 frozen, cells C 43.77
+  and B 47.76 frozen, pre-registered KILL. Cap-pole J2 ray: exit p95 107 mm, 0.181 of the 281 closing poses > 75 mm.
+- **4-joint precedents (what this round builds on, not repeats):**
+  - Ghost J0 under the pin-knee host H1 (J1 verifier): 23.64 -> 18.30 fast (front seat) / 18.62 (seat-legal), 40
+    placements a0 15-60 x azu 0-315 at T 60. With real metal every J0 placement jams on hub 2's orbit about J1
+    (radius a1 + ~25 deg, covers every allowed seat): a relay needs a0 <= ~20 or J0 inside J1's footprint.
+  - acromion-relay-4r (J0 under the plain cap 3R, least-|q0| clamp policy): +4.57 frozen (+17 ws, 0 overhead), in-band
+    +0.001, hub 2 <= 0.12; max |q0| 38.5 deg. The relay never engages at the binder poses (J2 strictly inside its
+    stops there, so q0 = 0): a clamp policy cannot move hub 2 by construction. A CLEARANCE-chosen null-space was never
+    run.
+  - arm-parked-knee-4r (spare hub on the deltoid, spring-centred): frozen reach 0.772 (the 95 line) at ib14 0.799;
+    hub 4 0.51 and link 3 0.32 in band; cx 32.25. park4 (spring-centred, back seat) 22.36 self-measured. K as the 4th
+    joint (minarc, skinnormal-shortk-4r 18.58): 1:1 fold for contact.
+  - Complexity: any 4th DOF costs +25 (tools/simplicity.py v2.2 active_extra, "a spare freedom in MVP1"), so a 4-DOF
+    95 is cx >= ~28; the golden (95 at cx ~0) stays a 3-joint question that the measured caps above answer "not at
+    these seats".
+- **Dead on this track (J1-J2, 0 of 9 under the 17.5 gate):** rigid arm rings (>= 72.2), 2R pointer + arm-axial J3 /
+  spars (sleeve ghost 101.02), arm-fixed races (44.53), base relays on plain O20 hosts with a1 >= 40 under a clamp
+  policy, virtual-J2 cells at the cap pole (open 90.11, crossed 86.95, slaved elbow 107.61-108.22 fast), arm-grounded
+  coupling loops (follow 0.70), plain crest-J3 3Rs (40.17 frozen), proxy-only loop screens (130-240 points optimistic).
+  Main-track closures stand (knuckle drive / law / flank / lobe / seat variants are not this track's).
+- **Machinery open before the next claim (J2 closer):** verify template bar -> 18.28 (stale in 3 of 4 verifications);
+  zc-frontier evaluate() -> near-touch objective (T1); continuity flood kNN edges bidirectional (tools/spare_flood.py
+  and the kit's connected(): the skeptic's islands refutation, 6 -> 0); held set de-duplicated against the claim bench
+  by pose vector (32 shared clip frames incl. every overhead clip frame); in-band weighted by real area for members
+  sampled sparser than 4 mm; the kit `over` lift iterated to a fixed point (a MEASUREMENT change: announce it and
+  re-wear the lead under it); claim numbers from the row file, kit-honest only.
+- **Compute:** farm CLOSED (CLAUDE.md (7)); local only, niced, <= 2 processes per agent, OMP_NUM_THREADS=1.
+
+### Lenses
+
+1. **LENS relay-under-lead (reach; 4 DOF; suggested id lead-relay-j0-4r).** A spare J0 on bony scapula skin under
+   conecut's FROZEN verified chain (the config above, no refit of the 3R, its knee, K law and J3 window unchanged).
+   - *Measured reason:* J1's ghost J0 bought 5.0-5.3 fast points on H1, whose losses are also mostly fold; the lead's
+     88 fold losses are the 95 gap (+17 takes needed), and J0 tilts J1's axis so the same arm pose needs a smaller th.
+   - *Gate 0 (<= 45 min, ghost J0 = zero-size, then its O20 stack):* legal seats only (back of the shoulder /
+     acromion top, J1 seat rule); a0 in {15, 20, 30, 45, 60} x J0 azimuth 0-315 step 45 x travel T 30 / 45 / 60.
+     Two policies, both reported: (i) per-pose free q0 within T (the bound); (ii) the realisable spring-centred clamp
+     (q0 = 0 while the chain closes at th margin >= 5 incl. K play; else the least |q0| that closes, J0-J1-J3
+     sub-chain margin >= 5, J0 stops as own-angle dowels). Continuity flood with bidirectional edges (no J0 jump > 10
+     deg per 2-deg slerp edge, no K-branch change); frozen exact Bench(110,360); report static and connected
+     taken / 360, overhead / 28, contacts, min th margin, which of the 73 stretched / 15 folded / 6 J3-stop losses are
+     relayed, and the gain as a function of a0.
+   - *Pass (pre-registered):* policy (ii) <= 15, or >= 279 taken with <= 4 contacts, at a0 <= 20 (J0 stackable inside
+     J1's footprint), or at a larger a0 only with hub 2's measured orbit clearing J0's O20 stack + 5 mm on every taken
+     pose. *Kill:* policy (i) > 17.5 at every a0 -> relays under the knuckle closed with the number.
+   - *If it passes:* J0's metal (O20 stack + spring) against hub 2's orbit, measured before any CAD; feel (spring
+     torque at the relay poses as cuff force; the twin cell of acromion-relay was felt on 189-192 / 201 poses).
+     Complexity ~18.5 + 25 + 2 + 3 (spring) + parts ~= 49; state it beside the score.
+2. **LENS clearance-nullspace-4r (reach AND the low-complexity cell of the 4-DOF class; suggested id
+   cap-nullspace-4r).** A plain-pin redundant spherical 4R at the cap pole (four O20 v5 hubs on MR117 pairs, 3 mm bent
+   bars at real height; no drive, no lobe, no knuckle), Keemink 2018 (TNSRE 26(4)) with the null-space resolved for
+   CLEARANCE, the one policy no row has run; the spare hub parked on the acromion top (bony, 2-5 mm skin spread), never
+   on the deltoid (arm-parked: 0.51).
+   - *Measured reason:* the cap pole is the only legal seat at >= 0.78 kinematic reach (281/360); its only failure is
+     hub 2's zone (0.181 of closing poses exit > 75 mm), which a 3R cannot move per pose and a clamp relay never
+     moves (above). A null-space slides J2 along its a2-circle about the arm-fixed J3.
+   - *Step 0 instrument (<= 15 min, no hardware; the bound for ANY null-space at these arcs):* for each of the cap
+     control's 281 closing ws poses (J1 bvec(43.2, 59.9), a1/a2 50.2/60.3, J3 wdir(92.0, -9.0)), sweep J2 along the arc
+     of its a2-circle that the spare dyad reaches with >= 5 deg margin in both sub-chains (base J0 on the acromion top,
+     the spare hub on its a0-circle, a0 15-40, kept inside the acromion-top / back seat region), K3-march the J2 ray's and the spare hub's skin exits at 2-deg steps, and report the share of poses with
+     a point where both exit <= 75 mm (cap control: 0.819) and the continuity of the min-exit choice. *Kill at step 0:*
+     share < 0.95 -> the null-space class is closed at the cap pole with the number (write it to FINDINGS).
+   - *Gate 0 if step 0 passes:* ghost wear with all four O20 stacks and links as metal, null-space per pose = min over
+     the arc of the worst member requirement, under the bidirectional continuity flood; fit on the envelope bench (the
+     crest seats over-read Bench(60,160) by 11-14), frozen exact Bench(110,360); then the realisable MVP1
+     determination (spring-centred spare + own-angle stops, least-energy) - report both, and their difference as the
+     price of an unpowered null-space. Same pass / kill as lens 1.
+   - *Complexity if built:* 25 + 1 body + 1 joint + ~1.5 parts (+3 with a centring spring) ~= 28-31 - no drive or
+     lobe, the simplest 4-DOF realisation on file (arm-parked 32.25, minarc 32.5, lens 1 ~49).
+   - *Red team:* sag (a free spare drops within 0.1 s; the clearance policy is what MVP2's cables enforce, the user's
+     context only, not a metric); the spare hub on the acromion under shrug / overhead; the two-sub-chain fold.
+
+No third lens: the 3-joint low-complexity cells at new seats (crest-knee-3r cx 0, slotted-eccentric-pin-knee-3r) are
+main round 14's and running; every other 3-joint class at the legal seats is measured capped (State).
+
+### Carried (ideated, never screened)
+
+- None this round. The round-4 picks are done or running in main (deltoid-crest-j3-3r dead 40.17 frozen; crest-knee-3r
+  32.84 frozen; slotted-eccentric-pin-knee-3r modelling since 00:38). The other 20 ideated entries fall under measured
+  closures: hubless / rolling / thin-ring joints (O20 only; rings >= 72.2), spherical parallel / five-bar / tripod
+  loops (seed-spm 193; J2 lesson 2: every added O20 pin is a disc levelled by its own worst 2-3 % of poses; lesson 7:
+  loop proxies 130-240 points optimistic), offset-axis skin hubs (3 passive translations), strap / tape / lame J2s (no
+  real component at size).
+
+### Elsewhere, not to be duplicated
+
+- Main round 14: slotted-eccentric-pin-knee-3r (modelling), cap-plateau-knuckle-3r (gate-0 KILL at 00:27; cell C
+  search still writing), lowarm-halfring-knuckle-3r (pick 1), crest-knee-3r (screened 32.84 frozen; verification next).
+
+### Needs the user's say (unchanged)
+
+- The 4-joint question: lenses 1-2 give the 4-DOF class its ghost numbers like-for-like before the lead asks. The
+  transmission guard [30, 150], the J1 seat rule and the 5-deg fold margin stay as they are.
