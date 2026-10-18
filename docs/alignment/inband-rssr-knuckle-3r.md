@@ -290,6 +290,118 @@ verifier's numbers sit under `polished_*` and `docs/research/inband_env_polish/v
 - **A held-out workspace probe of pick3:** skipped for time. It would take about 6 min on 1 process, and the held
   per-pose counts above already give overhead reach, the clearance floor and the contact depth.
 
+## Skeptic (2026-10-18 21:40-21:58 UTC, hourly audit 21:17:24Z): final verdict WATCH
+
+The ledger computed the verdict: `python3 tools/alignment_ledger.py skeptic inband-rssr-knuckle-3r`, entry
+2026-10-18T21:53:51Z, `by skeptic`, run `skeptic:inband-rssr-knuckle-3r`, verdict **watch**. 1 of 6 reasons is
+refuted with evidence (held_out). The other 5 are upheld. The rulings are in
+`docs/alignment/inband-rssr-knuckle-3r.rulings.json`.
+
+**Method.** Local only, $0 farm, under 1 min of CPU (nice, OMP_NUM_THREADS=1, 1 process).
+
+- I recomputed every gap from the per-pose dumps with my own gap and bootstrap code (scratch `sk_paired.py`, not
+  `compare_sets`): 3000 draws, seed 12345, resampled within kind.
+- I re-ran the page's board and headline rule in Python on the current `morphs.json` (30680b7).
+- I read the verifier files, the picks' pre-registered selection fields and the leaders' `dynamics.json`.
+- The model (6a6f307, 2026-10-17 09:27) and `tools/concept_kit.py` (17d6027) predate every dump used, so the dumps
+  stand.
+
+### Rulings
+
+- **held_out: REFUTED (tool false positive).**
+  - The check fires only because the row's top-level `v_gap` is null (status 'screened';
+    `tools/alignment_audit.py` line 222).
+  - The verified numbers are on file: `verify/claim_pick3_fit60_bench.json` final.gap 18.33 and
+    `verify/claim_pick3_fit60_held.json` final.gap 22.86. The drop is +4.53, under TH held_watch 6.0 (line 63).
+  - My recompute from the dumps:
+
+    | reading | bench | held | drop |
+    |---|---|---|---|
+    | priced | 18.33 | 22.87 | +4.54 |
+    | unpriced, margin 5 | 18.32 | 23.54 | +5.22 |
+    | O9 catalogue, unpriced | 18.32 | 23.62 | +5.30 |
+    | env-fit held (final.gap 23.57, against bench 18.33) | | | +5.24 |
+
+  - Every reading is under 6.
+- **NEW-stale-tie: upheld.**
+  - My re-run of the page rule (`simple/index.html` lines 238-251) gives the headline as conecut-knee 18.28. Its
+    only named tie is conecut-h2facet. This row's ruling still targets slipper-nose (18.49), which is not the headline.
+  - The pill (line 466) adds ' (tie)' to whatever state the row has:
+    - at d889d5a (21:00) the status was 'verified', so the pill read 'Verified (tie)';
+    - since c33420e (21:20, the first rebuild after the auditor's entry) it is 'screened', so the pill reads
+      'Checking (tie)';
+    - after this skeptic entry, `dash_build` lines 488-492 re-promote the row and it will read 'Verified (tie)' again.
+  - My paired bootstrap against the leader (unpriced):
+
+    | leg | difference | 90 % CI | P(this row better) |
+    |---|---|---|---|
+    | bench | +0.03 | [-1.90, +1.92] | |
+    | held | +1.16 | [-0.13, +2.33] | 0.072 |
+    | held, O9 catalogue | +1.24 | [-0.08, +2.48] | 0.064 |
+
+  - The auditor's "CI [+0.02, +2.47]" for the O9 build (excluding 0) is seed noise at the edge. The direction
+    stands, but it is not a 90 % result.
+  - Display only, no rank change, so watch.
+- **R3: upheld.**
+  - The fit60 bench picks recompute to 19.15 / 19.49 / 18.33.
+  - Board `v_gap`: this row 18.33 (complexity 24.5), minarc 18.40, lowarm 18.47 (complexity 0), slipper-nose 18.49,
+    trimlug 18.51. The pre-registered pick1 (19.15) would sort below all of them.
+  - Paired, unpriced:
+
+    | against | bench | held | P(this row better), held |
+    |---|---|---|---|
+    | lowarm | -0.15, CI [-2.21, +1.73] | +0.66 | 0.159 |
+    | slipper-nose | -0.17 | +0.08 | 0.392 |
+
+  - There is no spread and no held-out number on the board.
+- **P2: upheld.**
+  - env-fit held final.gap: 22.43 / 23.47 / 23.57 (pick3 worst).
+  - Pre-registered `xfit_summary.sel_mean_near1`: 25.905 / 26.225 / 26.295 (pick3 last).
+  - pick3 is also last on sel_gap (22.78 / 22.54 / 23.39), and its selection-bench depth is 4x pick1's
+    (sel_depth 3.619 / 5.643 / 14.777).
+  - It is best only on the fit60 legs.
+  - The picks were committed (28b9bb4, 11:27) before the claims (482d4a1, 11:50). No held-out search was found.
+- **NEW-reading-mismatch: upheld.**
+  - The verifier's `price` block: smlo 5.0333 -> 5.5333, a1max 59.0374 -> 58.5374, margin 5.5. The unpriced file
+    reads at margin 5.0.
+  - Paired held against the leader: +0.49 priced (P 0.307), +1.16 unpriced (P 0.072).
+  - Against lowarm, held: -0.01 priced, +0.66 unpriced.
+  - The board's bench order is the same under either reading. The held comparison, which the board does not show,
+    flips with the reading.
+- **M5: upheld (a measurement is missing).**
+  - There is no `pipeline/full-exo/designs/*inband*`, and no file under `judge/` or `pipeline/` names this id.
+  - The leaders' `dynamics.json` read `verdict.moves_freely_nominal` true.
+  - pick3's static spring: 0.172 N.m, 1.15 / 1.44 N. Dynamics and cuff twist are unmeasured.
+
+### Missed (for the next audit; not counted in this verdict)
+
+1. **The audit quotes the screen pick's spring, not pick3's.**
+   - The figures 0.165 N.m and 1.1 / 1.37 N come from the row's `spring_R17` (kK 1.7901, dK 46.44 deg): the cma3 p
+     screen pick.
+   - pick3's verifier files read kK 1.8622: 0.172 N.m and 1.15 / 1.43-1.44 N at dK 47.47 bench / 47.68 held
+     (`verify/claim_pick3_fit60_{bench,held}.json` spring).
+   - The audit understates the spring by 4 %. It is still about 17 % of R17. Record hygiene: `spring_R17` should be
+     pick3's.
+2. **The 'pricing' reads as a cost, but held out it is a gain.**
+   - Priced held 22.87 against unpriced 23.54: 0.67 better.
+   - Contact poses fall 12 -> 8, depth sum 33.27 -> 21.16 mm, deepest 8.30 -> 6.09 mm. Reach rises by 2 workspace
+     poses, even though the stop window is narrower.
+   - The cause: the frozen-shape fit is re-run for each reading and lands differently. The priced fit is 2.46 WORSE
+     on its own fit bench (`fit_fast` 19.45 against 16.99) and better held out. So the priced claim is a second draw
+     of the fit, not a priced-in tolerance.
+   - The audit's wearer depth figures ("shallower than the leader": 21.16 / 6.09 mm) come from the favourable draw.
+     Under the leader's reading the row is still shallower than the leader (33.27 / 8.30 against 60.97 / 9.86), so
+     the conclusion survives with a smaller margin.
+   - The lowest metal on a taken pose, unpriced held, is 0.01 mm (priced 0.36).
+   - The unpriced `th` minimum is 5.346 deg, with 2 poses under 5.5 and 0 under 5, so the fold rule still holds.
+3. **'Checking (tie)'.**
+   - Between every auditor entry and the next skeptic entry, the board shows this row as 'Checking'. It still ranks
+     it on basis 'verified' (`v_gap` 18.33) and still prints '(tie)' against a non-headline row.
+   - `morphs.json` status: verified at d889d5a, screened at c33420e and at 30680b7.
+   - This extends proposal P-K: the pill's '(tie)' should follow the same gate as the promotion.
+
+**Final verdict: WATCH** (the ledger's).
+
 ---
 
 *Earlier sections below: the skeptics of 2026-10-17 (13:10-13:30, 12:30-12:45 and 11:30-11:40 UTC), kept unchanged. The
