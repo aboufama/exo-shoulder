@@ -70,7 +70,7 @@
       "gap": 23.24,
       "src": "docs/alignment/remeasure/desmo-conecut-knuckle-3r_held_perpose.json",
       "cross_check": {
-       "files": 1,
+       "files": 2,
        "sums": [
         43.84
        ],
@@ -285,7 +285,7 @@
   "docs/concepts/verify/desmo-conecut-knuckle-3r_groove_scan_claim.json",
   "docs/concepts/verify/desmo-conecut-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "f4d12cb",
+ "git": "7c3d4a4",
  "tool_version": "2026-10-17.6",
- "t": "2026-10-18T05:29:16Z"
+ "t": "2026-10-18T05:51:47Z"
 }
