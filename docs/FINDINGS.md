@@ -3653,3 +3653,43 @@ judge or kit file changed; nothing was selected on held-out poses.
   rather than lifting it. Re-wear frozen exact and held out with the stack lifted as one body, the spring given a part
   number and an envelope, and the T-nut given its flange. No 4-joint or 3-joint design is verified at 95; freek
   (15.40 / 20.50) stays the best 4-joint row.
+
+## Posteromedial J1 seat for the lead knuckle family: dead, frozen exact 202.93, no honest K drive; the untested legal region does not change the 3-DOF answer (2026-10-18, docs/research/posteromedial_seat.md)
+
+* **Question.** Skeptic F1 (docs/alignment/take_bound_3dof_skeptic.md) named the one legal J1 cell that no knuckle had
+  been measured in: the posteromedial back of the shoulder. That is bvec az -52.5..0, el 0..45, inside ruling 4, where
+  kin_ceiling.json gives 0.994. Model docs/concepts/models/posteromedial-knuckle-3r.py is the verified lead
+  conecut-knee-knuckle-3r, imported unchanged. J1 is re-seated in the box, J3 is free, and J2 is re-solved from the
+  lead's arcs +-12. It was pre-registered (7c5e5c7) before any search, with amendments (f48a09d, 55f2ce6) before any CMA.
+* **Measured** (fit bench only for seeding, search and selection; held out never read):
+  - **Stage 0 (19 seeds).** 9 cells x the best-share / lateral-J3 / both-branch variants give 254-375 fast. No seed is
+    honest. Two seeds are unbuildable because the rest IK lands 2.7 and 7.4 deg off J2's ray.
+  - **Stage 1 (122 configs).** The CMA, with the drive phase free, ran on (-26.25, 40) lateral J3 on both branches. The
+    best near-1 is 225.38 (plain 223.16). 0 of 122 are honest.
+  - **Stage 3, frozen exact Bench(110,360) of the pick: 202.93** (near-1 204.41). That is reach 0.089 (32 takes),
+    follow 0.28, ib14 0.59 and contact 0.24, against the lead's verified 18.28. **Dead by the kill line** (> 17.5). No
+    flood or held-out wear was run.
+* **Why (attribution):**
+  1. **The K drive cannot open (the first wall).**
+     - The slipper-nose drive is sized in mm on the lead's 42-62 mm hub levels. The crank pivot sits (HUB_R + 6) / f2
+       rad beside hub 2.
+     - J1's skin at these seats is 59-167 mm from GH (the lead's is 42), so the same parts form a different spherical
+       mechanism.
+     - The crank's pressure angle is 75-88 deg (gate 38) in 16 of 17 valid seeds and in all 122 CMA configurations,
+       so dK_lim is 0.
+     - The window collapses to state A, and fold takes 266 of 470 poses at the wear.
+  2. **Kinematics.** With the lead's dyad the posteromedial seats add at most +0.03 of fit-bench window share
+     (0.914 -> 0.945), and only with J3 on the medial upper arm against the trunk. The cell's 0.99-1.00 ceiling needs a
+     different dyad, with J1 and J3 90-170 deg apart (arcs ~130 / ~45).
+  3. **Metal floats off the curved back.**
+     - In band: hub 2 0.00 (median 28.9 mm), crank 0.18, link 1a 0.18, hub 1 0.42. The arm side is in band.
+     - Contacts: drive metal (crank / nose 18, hub K / horn 14) and hub 2 (11).
+     - This matches the older posterior measurements (zc P0 in-band 0.42; pin-knee posterior 0.17-0.25).
+* **New knowledge.** The knuckle's drive does not transfer between seats. It is a mm-scale mechanism laid on a sphere
+  whose radius is set by the seat (acroant had already shown failure beyond +6 deg of J1 azimuth). A seat lever on this
+  family is also a drive redesign.
+* **Conclusion.** The untested legal region does not change the 3-DOF answer. The posteromedial row of
+  take_bound_3dof.md now reads "knuckle measured: dead, 202.93 frozen exact, no honest drive". What stays unmeasured is
+  a different family: a long dyad over the top of the shoulder with its own drive, for which the nearest evidence is
+  the in-band collapse above. Row docs/concepts/rows/posteromedial-knuckle-3r.json (status dead); motion preview
+  docs/concepts/viz/concepts/posteromedial-knuckle-3r.js (test.mjs OK).

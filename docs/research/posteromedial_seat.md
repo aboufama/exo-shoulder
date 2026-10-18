@@ -182,12 +182,69 @@ One fast evaluation per seed (lead's dyad, rest th, drive, knee and stop; J3 sea
 
 ### 4. Stage 1: CMA with the drive phase free (amendment 5)
 
-STAGE1_TEXT
+Two cells, picked by stage-0 near-1 (no seed was honest): (-26.25, 40) lateral J3 on branch +1 (294.04) and the same
+cell on branch -1 (254.02, the registered "both branches" seed, run after the first CMA had started). A (0, 40) lateral
+CMA was started and stopped after 1 configuration to give its slot to the branch -1 seed. Local, `--jobs 1`, niced.
+
+| run | configs | honest | best near-1 / plain | reach | follow | ib14 | contact | why: fold / skin / parts / contact | drive at best: dK_lim, crank PA |
+|---|---|---|---|---|---|---|---|---|---|
+| (-26.25, 40) lat br +1, 1200 s | 73 | **0** | 225.38 / 223.16 | 0.081 | 0.333 | 0.580 | 0.476 | 130 / 30 / 24 / 0 | 0, past the 38 gate |
+| (-26.25, 40) lat br -1, 720 s | 49 | **0** | 229.04 / 227.23 | 0.200 | 0.233 | 0.497 | 0.452 | 136 / 36 / 0 / 2 | 0, past the 38 gate |
+
+- No configuration in 122 found a K drive inside its pressure-angle gate. The CMA moved the arcs (d_a1 +3.0,
+  d_a2 -3.3), the J3 seat (wd 113, wa -18) and the drive phase (beta -177.6, g 2.45, r_c 16.4, lift 1.0) and bought
+  ~70 points of near-1 (294 -> 225) by shrinking skin / part hits, not by opening K. It did not converge (sigma 0.27-0.28
+  at the end).
+- Stage 2: the best fit near-1 is 225.38 (br +1); br -1 at 229.04 is 3.66 behind, outside the 3-point rule, so one pick is
+  worn.
 
 ### 5. Stage 3: frozen exact wear
 
-STAGE3_TEXT
+The br +1 pick (docs/research/posteromedial_seat/pick_az-26.25_el40_lat.json), claim protocol: fit Bench(60,160) fast
+(223.16, the fit above), freeze the drive and the metal, wear Bench(110,360) EXACT
+(frozen_az-26.25_el40_lat_bench.json, 317 s).
+
+| | plain gap | near-1 | reach (takes / 360) | follow | ib14 | contact | why: fold / parts / contact / j3stop | overhead taken |
+|---|---|---|---|---|---|---|---|---|
+| posteromedial pick (-26.25, 40) | **202.93** | 204.41 | 0.089 (32) | 0.282 | 0.591 | 0.241 (20 poses) | 266 / 114 / 20 / 7 | 1 / 28 |
+| lead conecut-knee-knuckle-3r (verified) | 18.28 | 19.92 | 0.728 (262) | 1.0 | 0.908 | 0.011 (4) | 89 / - / 4 / 5 | - |
+
+- **Kill line: 202.93 > 17.5, so the cell is DEAD.** The continuity flood was not run because it can only remove takes
+  from the 32 static ones. Held out was not worn, because the pick does not pass.
+- The pick is also not honest: K drive dK_lim 0, crank pressure angle 79.5 deg against the 38 gate. Its number is an
+  optimistic reading of a drive that cannot move.
+- **Lost poses** (470 = 360 workspace + 110 clip frames):
+  - **Fold 266.** K never opens, so only th in state A [24.67, 89.77] closes.
+  - **Part collisions 114.**
+  - **Skin contact 20.** Per part: crank / nose 18, hub K / horn 14, hub 2 11, hub 3 / E / boss 8, pad 4, knee 3.
+    The drive's metal and hub 2 go into the skin.
+  - **J3 stop 7.**
+- **In-band** (parts_ib14, share in 2-14 mm, median mm):
+  - Hub 2: 0.00, median 28.9 mm off the skin.
+  - Crank: 0.18, median 20.8 mm.
+  - Link 1a: 0.18, median 19.3 mm.
+  - Hub 1: 0.42, median 15.0 mm.
+  - The arm-side parts are in band: hub 3 0.99, E 1.00, pad 0.97.
+  - The metal that floats is the J1 -> K -> J2 side over the back, as in the older posterior measurements.
 
 ## Conclusion
 
-CONCLUSION_TEXT
+**No. The untested legal region does not change the 3-DOF answer.** The lead's knuckle family (same chain, O20 hubs,
+knee, drive rules and 5-deg fold margin) was moved to J1 on the posteromedial back of the shoulder, the region skeptic
+finding F1 flagged.
+- **Stage 0 / 1:** all 9 seats in the box (az -52.5..0, el 0..40, plus lateral-J3 and both-branch variants: 19 seeds,
+  122 CMA configurations) give no honest configuration.
+- **Stage 3:** the best seat, (-26.25, 40), wears frozen exact at **202.93** against the lead's verified 18.28.
+- **Three measured reasons:**
+  - **Kinematics.** With the lead's dyad these seats add at most 3 % of window (0.914 -> 0.945). Even that needs J3 on
+    the medial upper arm, against the trunk. The 0.99-1.00 ceiling that made the cell look promising belongs to a
+    different dyad: J1 and J3 90-170 deg apart, arcs ~130 / ~45.
+  - **The drive.** The slipper-nose K drive is sized in mm on the lead's 42-62 mm hub levels. At J1 seats 59-167 mm
+    from GH it becomes a different spherical mechanism, its crank pressure angle runs 75-88 deg (gate 38), and K
+    cannot open. A 12-parameter CMA with the drive phase free did not find one honest drive in 122 tries.
+  - **Metal.** Hub 2 and the J1-side links float 19-29 mm off the curved back (in-band 0.00-0.42), as the older
+    posterior measurements found (zc P0 in-band 0.42, pin-knee posterior 0.17-0.25).
+- The skeptic's correction stands as measured: the posteromedial row of take_bound_3dof.md reads "knuckle measured:
+  dead (202.93 frozen exact, no honest drive)".
+- What stays unmeasured is a different family: a long dyad over the top of the shoulder (arcs ~130 / ~45) with its own
+  drive. The nearest evidence for it is the in-band collapse above.
