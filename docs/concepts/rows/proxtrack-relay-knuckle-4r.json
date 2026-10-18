@@ -14,11 +14,11 @@
  "inband10": 0.5495,
  "contact": 0.0,
  "gap": 4.15,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7917,
+ "v_follow": 1.0,
+ "v_inband14": 0.8656,
+ "v_inband10": 0.5475,
+ "v_gap": 17.46,
  "n_configs": 225,
  "verdict": "SCREENED, PASSES the pre-registered gate: frozen exact Bench(110,360) GATE 14.40 (chain-only ib14 0.8962; plain 14.02 at pooled 0.9196; near1 17.68) <= 15, vs the lead 18.28; reach 0.7917 (285/360, lead 262) but overhead 8/28 unchanged and 13 contacts (lead 4). A 4-joint answer at complexity 52.5 (lead 18.5): goes to the user as the 4-joint option, not a lead change by itself. The PRE-REGISTERED config itself fails: PHI 30 / ds 16 / rt 2.5 reads 20.59 with the spec bump (kill) and 16.82 with the refined bump (report band). HELD-OUT (exact, never searched): gate 18.51 (plain 18.01, chain-only ib14 0.895, reach 0.7679) vs the lead's held 22.38 and freek's 21.89; bench->held +4.11 (lead +4.10). Needs: adversarial verifier, paired comparison vs freek 16.20 and the lead.",
  "limiter": "the second wall reached from the arm side plus the bump floor: 33 relayed bench poses -> 23 taken, 9 contacts (chain metal on binder-side skin: folded-side one-sided relays 262 -9.79 / 206 -6.07, 466 -8.22 at phi 28), the rigid boss / knee bump at its 1 mm rule floor (6 near-jams at 0.94-0.99 mm, overhead IR poses, 5 with metal in the skin); fold 56 poses beyond the relay; overhead 8/28 unchanged",
@@ -145,5 +145,98 @@
    "file": "docs/concepts/verify/proxtrack-relay-knuckle-4r/held_pick_phi35_exact.json (+ _perpose.json)",
    "lead_held": 22.38
   }
+ },
+ "refuted_by": "verify lens buildability / red team (18c4b46): the rigid local bump lifts the pin-a boss (member 3) 1.76-5.69 mm but the knee link that rides on top of it on pin a only 0-3.72 mm, so the bumped boss top sits 5.05-5.08 mm inside the knee link's eye at all 184 fit-bench poses (lead +0.50); judge re-run: reproduced (-5.08 / -5.05 p50), and even point by point (knee welded to the boss) every knee point over the boss interferes, 2.6-4.0 mm. The minimal buildable stack (knee eye lifted over the lifted boss, 60-deg ramp) costs +3.06 gate (14.40 -> 17.46), over the 3-point bar; held +2.95 (18.51 -> 21.46)",
+ "v_gap_plain": 14.4,
+ "v_gap_near1": 18.06,
+ "v_score": 93.65,
+ "v_inband14_pooled": 0.8962,
+ "v_contact": 0.0319,
+ "v_contact_poses": 13,
+ "v_jams": 5,
+ "v_min_metal_mm": 0.072,
+ "v_min_th": 5.0,
+ "v_held_out": 21.46,
+ "held_out_gap": 21.46,
+ "held_out_gap_plain": 18.37,
+ "held_out_gap_near1": 23.75,
+ "v_t": "2026-10-18T13:05:00Z",
+ "v_protocol": "frozen exact Bench(110,360) (fit Bench(60,160) fast at phi 0, worn frozen), margin 5 on the one th metric, O20 hubs, continuity flood on (connected = static), gate = chain-only in-band (pre-registered), plain = pooled in-band; held out = the family's disjoint exact held bench (never searched); priced with the buildable pin-a stack",
+ "v_verdict": "REFUTED as modelled (judge, 2 lenses). The claim's numbers reproduce exactly on its own model (gate 14.40 / plain 14.02 / near1 17.68; held 18.51 / 18.01), but they need a pin-a boss lifted through the knee link that rides on it. Priced buildable: frozen exact gate 17.46 (score 93.65) / plain 14.40 / near1 18.06, held gate 21.46 / plain 18.37 / near1 23.75. The pre-registered PASS (<= 15) fails; 17.46 sits in the report band, 0.04 under the 17.5 kill. Paired: 0.82 better than the 3-joint lead conecut-knee-knuckle-3r on the bench (18.28) and 0.92 held (22.38), but 2.06 worse than freek-oracle-route-knuckle-4r polished (15.40) and 0.96 worse held (20.50), at 4 joints and complexity 52.5 (lead 18.5, freek 33.25): dominated among 4-joint designs, never the headline lead.",
+ "v_issues": [
+  "DECISIVE (buildability lens, judge reproduced): pin-a stack interference 5.05-5.08 mm at all 184 fit poses; buildable stack +3.06 gate, +2.95 held",
+  "in-band reading: the gate (chain-only, pre-registered) is the claim's reading; the pooled plain number is lifted by 303 arm-fixed shell-underside samples per pose at ~1.0-1.2x kit density, 99.5 % in band - real metal, reported, never quoted as the result",
+  "bump amounts come from the fit bench only (both lenses, in code); the per-pose radial direction made rigid (one member-frame vector per point, re-sized) costs 0.00",
+  "jam -> contact precedence makes the number worse, not better (15.62 -> 16.82 at the pre-registered config); the analytic annular clearance reproduces",
+  "PHI 35 / rt_extra 1.5 (box edge) are single claim-bench readings and the fast pick was made under the superseded jam -> lost rule (fast re-read 4.25 / 4.65 vs 3.75 / 4.15, within fast noise); bench -> held inflation +4.11 equals the lead's +4.10, so no sign of claim-bench over-fit",
+  "continuity: remeasure lens's own strict flood - 1188 of 1189 envelope nodes connected, 0 branch changes; connected = static on bench (285) and held (731)",
+  "fold margin: min th 5.000 deg on 395 bench and 933 held taken poses (0 below 5); relayed poses sit exactly on 5.000 by construction - legal, no slack",
+  "unpriced: 3 claim-bench poses with two feasible relay ranges (history-dependent state, <= ~0.8 points); R17 preload 0.063 N.m covers gravity only, not carriage friction",
+  "components: relay = made curved plain guide (slotted Ti shell + T-nut carriage on an iglidur strip, no catalogue curved guide fits h_c 1.7); the T-nut flange is unmodelled (priced 0.00); the constant-force spring has no part number (an 8 mm coil beyond the zero dowel clears the chain by >= 16.7 mm); the pad bracket must be machined from solid, not bent",
+  "contact: 13 bench / 47 held contacts vs the lead's 4 / 14; 9 bench / 32 held of them on relayed poses, down to -9.79 mm; overhead 8/28 bench, 18/71 held - the same as the lead"
+ ],
+ "verification": {
+  "t": "2026-10-18T13:05:00Z",
+  "result": "REFUTED as modelled (buildability lens refutes; remeasure lens reproduces the claim on its own model)",
+  "lenses": {
+   "remeasure": {
+    "refuted": false,
+    "commit": "fbad337",
+    "gate": 14.4,
+    "plain": 14.02,
+    "near1": 17.68,
+    "near1_chain_only": 18.06,
+    "held_gate": 18.51,
+    "held_plain": 18.01,
+    "held_near1": 23.19,
+    "reach": 0.7917,
+    "contact": 0.0319,
+    "min_th": 5.0,
+    "files": [
+     "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure.py",
+     "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure.md",
+     "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_{bench,held,edges,flood,bumpcheck}.json"
+    ]
+   },
+   "buildability": {
+    "refuted": true,
+    "commit": "18c4b46",
+    "as_modelled_gate": 14.4,
+    "stackfix_gate": 17.46,
+    "stackfix_plain": 14.4,
+    "stackfix_near1": 18.06,
+    "stackfix_ib14_chain_only": 0.8656,
+    "stackfix_ib14_pooled": 0.8962,
+    "held_stackfix_gate": 21.46,
+    "held_stackfix_plain": 18.37,
+    "held_stackfix_near1": 23.75,
+    "rigid_direction": 14.4,
+    "flange": 14.4,
+    "files": [
+     "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability.py",
+     "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability-stack.py",
+     "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability.md",
+     "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/*.json"
+    ]
+   }
+  },
+  "judge_check": "re-ran buildability-stack.py: n 184, boss 1.76-5.69 mm, knee 0-3.72 mm, stack gap min -5.083 / p50 -5.048 (lead +0.50 at every pose) - identical; a point-by-point check (each knee point over the boss vs the nearest bumped boss point + tp, knee held fixed to the boss) still interferes at every pose, -2.59 to -3.99 mm, median -2.48, 100 % of the 26 knee points over the boss",
+  "paired": {
+   "vs_lead_conecut": {
+    "bench": -0.82,
+    "held": -0.92,
+    "takes": "claim takes all 262 lead ws poses + 23 relayed (McNemar p 2.4e-7 on takes, contacts 13 vs 4)"
+   },
+   "vs_freek_polished": {
+    "bench": 2.06,
+    "held": 0.96
+   },
+   "vs_freek_frozen_verified": {
+    "bench": 1.26,
+    "held": -0.43
+   }
+  },
+  "dof": "4 counted joints (J1, J2, J3, relay); complexity 52.5 (tools/simplicity.py v2.2 reproduced); not the headline lead (user 2026-10-17)",
+  "worst_credible": "frozen exact gate 17.46 (buildable stack priced in); held 21.46"
  }
 }
