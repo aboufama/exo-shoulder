@@ -5339,3 +5339,76 @@ cx 52.5 vs freek 15.40 / 20.50 at cx 33.25 vs the 3-joint lead 18.28 / 22.38 at 
 (h2facet ties the bench and is 0.22 better held on one pose); 'Keep O20 only' for notches and flats cut into the v5
 cap skirt and spigot thread (kphase-notch); B1 (G4, m_sub at K rest), unchanged. The 1 cm rule, the DOF cap, the 5-deg
 fold margin, the J1 seat rule and the transmission guard stay; no lens relaxed them.
+
+## Round 301 plan (Round O1, track overhead; 2026-10-18 ~21:45 UTC, lead verified gap 18.28)
+
+Track goal (user 2026-10-18 ~21:40 UTC: "Overhead needs to be solved, work on it in the background"): take MORE of the 28
+overhead workspace poses (ws, elev >= 140) of Bench(110,360) and the 71 held, both reported in every claim, at a verified
+plain gap no worse than the lead's 18.28 with 3 joints, or as a clearly labelled 4-joint option. Score formula unchanged.
+Planner's read: ROUNDS.md tail (rounds 15 / 106 / 107), FINDINGS.md (J6, take bound, posteromedial seat), take_bound_3dof.md
+banner, fold_ceiling.md 4b / 7, reach_attribution.md (overhead rows, levers table), the lead's verify JSONs (frozen,
+nostop, held), rows (lead, phi40, offset-shortcar, arm-parked-knee-4r, armarc-relay, stop-relay-rocker, acromial-rocker),
+catalogue (20 ideated, none aimed at overhead; all under measured closures), events tail to 21:09:26Z, ledger latest.
+No bench, judge or kit file changed: no number below moved because the measurement changed.
+
+### State
+
+- **Lead: conecut-knee-knuckle-3r 18.28** (score 93.35), held 22.38, reach 0.7278 (262/360), ib14 0.9012, 4 contacts,
+  **overhead 8/28 bench, 18/71 held**; 3 active, 0 P, cx 18.5. WATCH carried: dashboard sweep 12.5 shown as 95.45, T1
+  (pose 203 at 0.263 mm), T3 (held th margin 5.006), self-reference. conecut-h2facet-knuckle-3r ties (18.28, held 22.16).
+- **4-joint options (never the lead):** phi40-thinstack-relay-4r verified 14.06 (94.89), held 16.69, overhead 9/28,
+  cx 51.25, WATCH (2 mm shell 12.32 worse than the lead; contact depth x1.62 parent); offset-shortcar-relay-4r 14.76,
+  held 17.77, overhead 8/28 (held 19/71), cx 52.5, WATCH (2 mm 45.56 vs 34.84; T5 depth x2.28). The relays buy across-
+  body, not overhead. GAMED: underpass-bridge (refuted 20.60), lowarm-halfring, conecut-l2jog, dipped-law-groove.
+- **NEW: the lead's 28 overhead poses attributed per pose** (frozen exact Bench(110,360), reproduces why fold 88 /
+  contact 4; `docs/research/overhead/lead_overhead_attr_bench.json`, script beside it). Two clusters, two causes:
+  - **Abduction cone (plane 0-30 plus 292; elev 150-165; axial -60..+15): 0 of 10 taken.** Folded 5 (210, 236, 263,
+    265, 292: K on stop A, a1e 37.55, residual 2.7-12.8 deg below the window bottom |a1e - a2| + 5 = 24.67); J3-stop 3
+    (209, 211, 238: J3 would turn to q3 -146..-149 against J3MIN -111.9, 34-37 deg past the stop, where hub 2 / K
+    housing go 1-22 mm into the skin); drive contacts 2 (237 crank/roller -8.93, 264 horn lug -5.80, K idle at dK 0).
+    The same wall is on file twice: arm-parked-knee-4r (abduction overhead buries hub 2 + links 1/2 5-6 mm under the
+    acromion bulge) and the J6 relays (folded-side 262 / 206 keep hub 2 in the deltoid at either relay sign).
+  - **Flexion / across overhead with IR (plane 60-120, axial -45..-150): 5 of 15 taken.** Stretched fold 9 (343, 370,
+    372, 397, 398, 399, 424, 425, 426: residual 0-51 deg, median ~38, K mostly at stop A because the drive cannot open
+    the knuckle there); contact 1 (316 link 2 -1.23 at a1e 53.76). No K stroke covers these (the 75-deg stroke on a
+    32 / 48 dyad adds 3 overhead to the window, fold_ceiling 4b).
+  - Correction to the round brief: the overhead contacts are 237 / 264 / 316 (205 is elev 105, not overhead).
+  - Held (952 + clips): 71 overhead, 18 taken, fold 36, contact 7, J3 stop 10 (verify JSON audit.overhead140).
+- **Also lost and close to overhead:** ws elev 90-140 takes 39 of 85 (probe ws_elev90_140) - the overhead track counts
+  >= 140 only, but any lever is reported on both.
+- **Dead for overhead, with the reason:** window re-placement (a2 +2.8: 20.84 / held 24.17; overhead spans th 12-139,
+  wider than any window); longer pin-knee link (lc 31 admits 2, both touch 0.8 / 1.3 mm); two-sided relays (hub 2 in
+  the deltoid at either sign); arm-side arc relay armarc (18.01, relayed takes median 1.81 mm, 7 of 20 contacts);
+  stop-relay rocker (the overhead poses sit on the OTHER closure root, q0 -49.5 -> +44.2: a continuity jump);
+  acromial rocker on a rod (rod passes its dead point on 61-171 of 220 poses); posteromedial J1 seat (202.93).
+- **Open, measured headroom:** a per-pose-free J1 rocker (travel 30) holds 0.84-0.88 of the bench and 0.68-0.82 of the
+  overhead kinematically (reach_attribution levers table) - never built as an ACTIVE (sensed, counted) 4th joint with a
+  continuity flood; the leaderJ1 + free-J3 kinematic window (kin_ceiling_regions) holds 0.867-0.944 at window widths
+  86-110 - a J3 re-aim at the lead's J1 has never been read on the overhead set.
+
+### Lenses
+
+- **A `abduction-cone` (3 joints, the biggest cluster: 10 lost of 10).** Re-aim J3 (tilt b3 = 0.329 now, azimuth on the
+  arm, station along the humerus) and, if needed, stop A's a1, so the abduction cone stops folding (needs +2.7..+12.8 deg
+  of th) and the J3 rotation stays inside a physical stop that keeps hub 2 / K off the acromion bulge. Step 0 is a ghost
+  at the lead's J1, K dyad and law on frozen exact Bench(110,360) with `docs/research/fold_ceiling/parking_k.py`
+  (one-level parking, exact skin) on the overhead set AND the whole bench; kill if no seat adds >= 3 overhead takes at
+  >= 262 whole-bench takes, or if the new takes park hub 2 / K / link 1 below 1 mm (the arm-parked wall). Report the
+  1-2 mm shell count on every new take (the auditor's watch: overhead bought in the shell).
+- **B `rocker-redundant-4r` (4 joints, labelled option; Keemink 2018 TNSRE 26(4) redundant non-orthogonal 4R).** An
+  ACTIVE J0 under J1 at the acromion top (O20 v5 hub on the scapula handler; axis through GH 20-35 deg from J1, travel
+  +-30 with physical stops), the 4th coordinate chosen per pose by a proximity-optimal IK with the continuity flood
+  (2-deg slerp, no J0 jump > 10 deg, no root change - the stop-relay rocker's failure). Kinematic headroom 0.68-0.82
+  overhead; target: both clusters (the IR cluster needs 25-51 deg that no K stroke gives). Step 0 kinematic-continuous
+  ghost, then the exact one-level parking; kill if connected overhead < 12/28 or connected gap > 16.0.
+- **C `drive-free-cone` (3 joints, LOW COMPLEXITY at the same reach).** Both abduction-cone contacts are the K drive's
+  metal while K is idle (237 crank/roller, 264 horn). Replace crank + roller + horn by one cam flank pair (the audit of
+  2026-10-18 20:24Z measured a single spherical involute flank pair carrying 46.7-47.3 deg of K at rho 1.0-1.5, ghost
+  18.83 / 261 takes at DKLIM 46): fewer bodies, cx below 18.5. Step 0: the lead's frozen chain with crank / roller /
+  horn metal removed (law kept) on frozen exact Bench - do 237 / 264 become takes? Kill if neither does (another part
+  binds) or if the flank pair's own metal re-enters 237 / 264. State it as a cam / follower (MVP1 forbids gears); the
+  auditor rules on the component.
+
+Carry: none (no ideated entry targets overhead). Being screened elsewhere: none found (round 107's four picks are all
+resolved; no row in modelling). Rules unchanged: 1 cm, <= 4 DOF, J1 back / acromion top, O20 v5 only, 5-deg th margin,
+MR63ZZ knee pins + stops, continuity flood, real envelopes, held out never tuned on; local CPU <= 2 niced processes.
