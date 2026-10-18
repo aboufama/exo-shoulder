@@ -1,0 +1,176 @@
+{
+ "row": "lead-relay-wobble-4r",
+ "a0": 6.0,
+ "azu": 180.0,
+ "window": [
+  0.0,
+  21.0
+ ],
+ "bench": [
+  110,
+  360
+ ],
+ "mode": "exact",
+ "fit_fast": {
+  "gap": 12.5,
+  "reach": 0.775,
+  "follow": 1.0,
+  "inband14": 0.9007,
+  "inband10": 0.5719,
+  "contact": 0.0
+ },
+ "lead": 18.28,
+ "real": {
+  "reach": 0.6472,
+  "follow": 0.9,
+  "inband14": 0.8796,
+  "inband10": 0.5608,
+  "contact": 0.006,
+  "poses": {
+   "clip": 110,
+   "ws": 360
+  },
+  "mode": "exact",
+  "gap": 32.92,
+  "ws_taken": 233,
+  "contacts": 2,
+  "parts": 42,
+  "overhead": "7/28",
+  "near_touch_min_mm": 0.072,
+  "relay_taken": 0,
+  "relay_contact": 0,
+  "relay_parts": 0,
+  "relay_stop": 2,
+  "window": [
+   0.0,
+   21.0
+  ]
+ },
+ "ghost": {
+  "reach": 0.7278,
+  "follow": 1.0,
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "contact": 0.0106,
+  "poses": {
+   "clip": 110,
+   "ws": 360
+  },
+  "mode": "exact",
+  "gap": 18.28,
+  "ws_taken": 262,
+  "contacts": 4,
+  "parts": 0,
+  "overhead": "8/28",
+  "near_touch_min_mm": 0.072,
+  "relay_taken": 0,
+  "relay_contact": 0,
+  "relay_parts": 0,
+  "relay_stop": 2,
+  "window": [
+   0.0,
+   21.0
+  ]
+ },
+ "q0_zero": {
+  "reach": 0.6472,
+  "follow": 0.9,
+  "inband14": 0.8796,
+  "inband10": 0.5608,
+  "contact": 0.006,
+  "poses": {
+   "clip": 110,
+   "ws": 360
+  },
+  "mode": "exact",
+  "gap": 32.92,
+  "ws_taken": 233,
+  "contacts": 2,
+  "parts": 42,
+  "overhead": "7/28",
+  "near_touch_min_mm": 0.072
+ },
+ "parts_inband": {
+  "chain": [
+   0.909,
+   9.3,
+   2.7,
+   88407
+  ],
+  "hub1": [
+   0.0,
+   21.1,
+   17.8,
+   3267
+  ],
+  "L1a": [
+   0.0,
+   30.4,
+   26.5,
+   792
+  ],
+  "hub0": [
+   1.0,
+   9.3,
+   3.4,
+   8019
+  ]
+ },
+ "parts_why_q0": {
+  "riser": 35,
+  "hub0:hubK": 7
+ },
+ "geo": {
+  "r0": 49.5,
+  "h_lift": 13.5,
+  "hub0_off": 5.2,
+  "riser_h": 19.1,
+  "hub1_exposed": 33
+ },
+ "relays": [
+  {
+   "i": 439,
+   "side": "pos",
+   "q0": 50.0,
+   "st": "ok",
+   "real": 5.48,
+   "ghost": 5.48,
+   "x": {
+    "hub0_clear": 10.53,
+    "hub0_who": "hubK",
+    "riser_clear": 5.27,
+    "hub1_clear": 22.35,
+    "hub1_who": "L1b",
+    "dc": 5.99
+   },
+   "pose": [
+    135.0,
+    75.0,
+    -90.0
+   ]
+  },
+  {
+   "i": 446,
+   "side": "pos",
+   "q0": 37.0,
+   "st": "ok",
+   "real": 0.6,
+   "ghost": 0.6,
+   "x": {
+    "hub0_clear": 10.3,
+    "hub0_who": "hubK",
+    "riser_clear": 4.74,
+    "hub1_clear": 21.52,
+    "hub1_who": "L1b",
+    "dc": 3.48
+   },
+   "pose": [
+    135.0,
+    120.0,
+    -75.0
+   ]
+  }
+ ],
+ "Teff": 60.0,
+ "secs": 351
+}

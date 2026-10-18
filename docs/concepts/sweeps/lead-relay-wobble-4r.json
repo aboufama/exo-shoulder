@@ -4968,7 +4968,8 @@
    "h_lift": 13.35,
    "hub0_offset_mm": 4.3,
    "riser_h": 19.0,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8884,
@@ -5023,7 +5024,8 @@
    "h_lift": 14.35,
    "hub0_offset_mm": 4.4,
    "riser_h": 20.0,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8883,
@@ -5078,7 +5080,8 @@
    "h_lift": 15.4,
    "hub0_offset_mm": 4.5,
    "riser_h": 21.0,
-   "hub1_exposed": 30
+   "hub1_exposed": 30,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8845,
@@ -5133,7 +5136,8 @@
    "h_lift": 16.9,
    "hub0_offset_mm": 4.6,
    "riser_h": 22.5,
-   "hub1_exposed": 30
+   "hub1_exposed": 30,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8725,
@@ -5188,7 +5192,8 @@
    "h_lift": 13.35,
    "hub0_offset_mm": 4.3,
    "riser_h": 19.0,
-   "hub1_exposed": 28
+   "hub1_exposed": 28,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8893,
@@ -5244,7 +5249,8 @@
    "h_lift": 14.35,
    "hub0_offset_mm": 4.4,
    "riser_h": 20.0,
-   "hub1_exposed": 28
+   "hub1_exposed": 28,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.889,
@@ -5300,7 +5306,8 @@
    "h_lift": 15.35,
    "hub0_offset_mm": 4.5,
    "riser_h": 21.0,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8851,
@@ -5356,7 +5363,8 @@
    "h_lift": 16.85,
    "hub0_offset_mm": 4.6,
    "riser_h": 22.5,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8725,
@@ -5412,7 +5420,8 @@
    "h_lift": 13.35,
    "hub0_offset_mm": 4.3,
    "riser_h": 19.0,
-   "hub1_exposed": 28
+   "hub1_exposed": 28,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8814,
@@ -5468,7 +5477,8 @@
    "h_lift": 14.35,
    "hub0_offset_mm": 4.4,
    "riser_h": 20.0,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8803,
@@ -5524,7 +5534,8 @@
    "h_lift": 15.35,
    "hub0_offset_mm": 4.5,
    "riser_h": 21.0,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8773,
@@ -5580,7 +5591,8 @@
    "h_lift": 16.85,
    "hub0_offset_mm": 4.6,
    "riser_h": 22.5,
-   "hub1_exposed": 30
+   "hub1_exposed": 30,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8629,
@@ -5636,7 +5648,8 @@
    "h_lift": 13.35,
    "hub0_offset_mm": 4.3,
    "riser_h": 19.0,
-   "hub1_exposed": 28
+   "hub1_exposed": 28,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8858,
@@ -5692,7 +5705,8 @@
    "h_lift": 14.4,
    "hub0_offset_mm": 4.4,
    "riser_h": 20.0,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8846,
@@ -5748,7 +5762,8 @@
    "h_lift": 15.4,
    "hub0_offset_mm": 4.5,
    "riser_h": 21.0,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8814,
@@ -5804,7 +5819,8 @@
    "h_lift": 16.9,
    "hub0_offset_mm": 4.6,
    "riser_h": 22.5,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8683,
@@ -5860,7 +5876,8 @@
    "h_lift": 13.4,
    "hub0_offset_mm": 4.3,
    "riser_h": 19.0,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8849,
@@ -5916,7 +5933,8 @@
    "h_lift": 14.4,
    "hub0_offset_mm": 4.4,
    "riser_h": 20.0,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8846,
@@ -5972,7 +5990,8 @@
    "h_lift": 15.4,
    "hub0_offset_mm": 4.5,
    "riser_h": 21.0,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8813,
@@ -6028,7 +6047,8 @@
    "h_lift": 16.9,
    "hub0_offset_mm": 4.6,
    "riser_h": 22.5,
-   "hub1_exposed": 29
+   "hub1_exposed": 29,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8693,
@@ -6084,7 +6104,8 @@
    "h_lift": 13.5,
    "hub0_offset_mm": 5.2,
    "riser_h": 19.1,
-   "hub1_exposed": 33
+   "hub1_exposed": 33,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8849,
@@ -6140,7 +6161,8 @@
    "h_lift": 14.5,
    "hub0_offset_mm": 5.3,
    "riser_h": 20.1,
-   "hub1_exposed": 34
+   "hub1_exposed": 34,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8835,
@@ -6196,7 +6218,8 @@
    "h_lift": 15.45,
    "hub0_offset_mm": 5.4,
    "riser_h": 21.1,
-   "hub1_exposed": 35
+   "hub1_exposed": 35,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.879,
@@ -6252,7 +6275,8 @@
    "h_lift": 16.95,
    "hub0_offset_mm": 5.5,
    "riser_h": 22.6,
-   "hub1_exposed": 35
+   "hub1_exposed": 35,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8661,
@@ -6308,7 +6332,8 @@
    "h_lift": 13.5,
    "hub0_offset_mm": 5.2,
    "riser_h": 19.1,
-   "hub1_exposed": 34
+   "hub1_exposed": 34,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.884,
@@ -6364,7 +6389,8 @@
    "h_lift": 14.5,
    "hub0_offset_mm": 5.3,
    "riser_h": 20.1,
-   "hub1_exposed": 35
+   "hub1_exposed": 35,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8826,
@@ -6420,7 +6446,8 @@
    "h_lift": 15.5,
    "hub0_offset_mm": 5.4,
    "riser_h": 21.1,
-   "hub1_exposed": 35
+   "hub1_exposed": 35,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8786,
@@ -6476,7 +6503,8 @@
    "h_lift": 16.8,
    "hub0_offset_mm": 5.5,
    "riser_h": 22.4,
-   "hub1_exposed": 37
+   "hub1_exposed": 37,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8637,
@@ -6532,7 +6560,8 @@
    "h_lift": 13.5,
    "hub0_offset_mm": 5.2,
    "riser_h": 19.1,
-   "hub1_exposed": 33
+   "hub1_exposed": 33,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8771,
@@ -6588,7 +6617,8 @@
    "h_lift": 14.5,
    "hub0_offset_mm": 5.3,
    "riser_h": 20.1,
-   "hub1_exposed": 34
+   "hub1_exposed": 34,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8758,
@@ -6644,7 +6674,8 @@
    "h_lift": 15.5,
    "hub0_offset_mm": 5.4,
    "riser_h": 21.1,
-   "hub1_exposed": 35
+   "hub1_exposed": 35,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8706,
@@ -6700,7 +6731,8 @@
    "h_lift": 17.0,
    "hub0_offset_mm": 5.5,
    "riser_h": 22.6,
-   "hub1_exposed": 37
+   "hub1_exposed": 37,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8553,
@@ -6756,7 +6788,8 @@
    "h_lift": 13.5,
    "hub0_offset_mm": 5.2,
    "riser_h": 19.1,
-   "hub1_exposed": 33
+   "hub1_exposed": 33,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8814,
@@ -6812,7 +6845,8 @@
    "h_lift": 14.5,
    "hub0_offset_mm": 5.3,
    "riser_h": 20.1,
-   "hub1_exposed": 34
+   "hub1_exposed": 34,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8802,
@@ -6868,7 +6902,8 @@
    "h_lift": 15.45,
    "hub0_offset_mm": 5.4,
    "riser_h": 21.1,
-   "hub1_exposed": 35
+   "hub1_exposed": 35,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8752,
@@ -6924,7 +6959,8 @@
    "h_lift": 16.95,
    "hub0_offset_mm": 5.5,
    "riser_h": 22.6,
-   "hub1_exposed": 35
+   "hub1_exposed": 35,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8605,
@@ -6980,7 +7016,8 @@
    "h_lift": 13.5,
    "hub0_offset_mm": 5.2,
    "riser_h": 19.1,
-   "hub1_exposed": 32
+   "hub1_exposed": 32,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8823,
@@ -7036,7 +7073,8 @@
    "h_lift": 14.5,
    "hub0_offset_mm": 5.3,
    "riser_h": 20.1,
-   "hub1_exposed": 34
+   "hub1_exposed": 34,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8802,
@@ -7092,7 +7130,8 @@
    "h_lift": 15.4,
    "hub0_offset_mm": 5.4,
    "riser_h": 21.0,
-   "hub1_exposed": 36
+   "hub1_exposed": 36,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8748,
@@ -7148,7 +7187,8 @@
    "h_lift": 16.9,
    "hub0_offset_mm": 5.5,
    "riser_h": 22.5,
-   "hub1_exposed": 36
+   "hub1_exposed": 36,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8602,
@@ -7204,7 +7244,8 @@
    "h_lift": 13.5,
    "hub0_offset_mm": 6.0,
    "riser_h": 19.1,
-   "hub1_exposed": 38
+   "hub1_exposed": 38,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8806,
@@ -7260,7 +7301,8 @@
    "h_lift": 14.5,
    "hub0_offset_mm": 6.2,
    "riser_h": 20.1,
-   "hub1_exposed": 39
+   "hub1_exposed": 39,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.879,
@@ -7316,7 +7358,8 @@
    "h_lift": 15.45,
    "hub0_offset_mm": 6.3,
    "riser_h": 21.1,
-   "hub1_exposed": 40
+   "hub1_exposed": 40,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.874,
@@ -7372,7 +7415,8 @@
    "h_lift": 16.95,
    "hub0_offset_mm": 6.5,
    "riser_h": 22.6,
-   "hub1_exposed": 40
+   "hub1_exposed": 40,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.86,
@@ -7428,7 +7472,8 @@
    "h_lift": 13.45,
    "hub0_offset_mm": 6.0,
    "riser_h": 19.1,
-   "hub1_exposed": 39
+   "hub1_exposed": 39,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8719,
@@ -7484,7 +7529,8 @@
    "h_lift": 14.45,
    "hub0_offset_mm": 6.2,
    "riser_h": 20.1,
-   "hub1_exposed": 39
+   "hub1_exposed": 39,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.871,
@@ -7540,7 +7586,8 @@
    "h_lift": 15.45,
    "hub0_offset_mm": 6.3,
    "riser_h": 21.1,
-   "hub1_exposed": 40
+   "hub1_exposed": 40,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8657,
@@ -7596,7 +7643,8 @@
    "h_lift": 16.95,
    "hub0_offset_mm": 6.5,
    "riser_h": 22.6,
-   "hub1_exposed": 40
+   "hub1_exposed": 40,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8506,
@@ -7652,7 +7700,8 @@
    "h_lift": 13.45,
    "hub0_offset_mm": 6.0,
    "riser_h": 19.1,
-   "hub1_exposed": 39
+   "hub1_exposed": 39,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8719,
@@ -7708,7 +7757,8 @@
    "h_lift": 14.45,
    "hub0_offset_mm": 6.2,
    "riser_h": 20.1,
-   "hub1_exposed": 39
+   "hub1_exposed": 39,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8709,
@@ -7764,7 +7814,8 @@
    "h_lift": 15.45,
    "hub0_offset_mm": 6.3,
    "riser_h": 21.1,
-   "hub1_exposed": 39
+   "hub1_exposed": 39,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.866,
@@ -7820,7 +7871,8 @@
    "h_lift": 16.95,
    "hub0_offset_mm": 6.5,
    "riser_h": 22.6,
-   "hub1_exposed": 40
+   "hub1_exposed": 40,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.85,
@@ -7876,7 +7928,8 @@
    "h_lift": 13.5,
    "hub0_offset_mm": 6.0,
    "riser_h": 19.1,
-   "hub1_exposed": 38
+   "hub1_exposed": 38,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8771,
@@ -7932,7 +7985,8 @@
    "h_lift": 14.45,
    "hub0_offset_mm": 6.2,
    "riser_h": 20.1,
-   "hub1_exposed": 39
+   "hub1_exposed": 39,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8753,
@@ -7988,7 +8042,8 @@
    "h_lift": 15.45,
    "hub0_offset_mm": 6.3,
    "riser_h": 21.1,
-   "hub1_exposed": 39
+   "hub1_exposed": 39,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8703,
@@ -8044,7 +8099,8 @@
    "h_lift": 16.95,
    "hub0_offset_mm": 6.5,
    "riser_h": 22.6,
-   "hub1_exposed": 41
+   "hub1_exposed": 41,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8539,
@@ -8100,7 +8156,8 @@
    "h_lift": 13.45,
    "hub0_offset_mm": 6.0,
    "riser_h": 19.1,
-   "hub1_exposed": 41
+   "hub1_exposed": 41,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8745,
@@ -8156,7 +8213,8 @@
    "h_lift": 14.45,
    "hub0_offset_mm": 6.2,
    "riser_h": 20.1,
-   "hub1_exposed": 41
+   "hub1_exposed": 41,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8741,
@@ -8212,7 +8270,8 @@
    "h_lift": 15.45,
    "hub0_offset_mm": 6.3,
    "riser_h": 21.1,
-   "hub1_exposed": 41
+   "hub1_exposed": 41,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8692,
@@ -8268,7 +8327,8 @@
    "h_lift": 16.95,
    "hub0_offset_mm": 6.5,
    "riser_h": 22.6,
-   "hub1_exposed": 42
+   "hub1_exposed": 42,
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8536,
@@ -8322,7 +8382,8 @@
    "hi": 21.0,
    "r0": 49.5,
    "h_lift": 13.5,
-   "q0": "policy (ii) relay"
+   "q0": "policy (ii) relay",
+   "seat_legal": true
   },
   "bench": "Bench(60,160) fast",
   "inband14": 0.8771,

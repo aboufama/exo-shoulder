@@ -120,7 +120,7 @@ def real_eval(M, B, i, G, sl):
         if k in ("hub1", "L1a"): continue
         dd = float(L.sd_cyl(X, r0 * c, c).min()) - hh
         if dd < cmin: cmin, who = dd, k
-    rcl = float(L.sd_cyl(riser_w, r0 * c, c).min())
+    rcl = float(L.sd_cyl(riser_w, r0 * c, c).min()) if not os.environ.get("WOB_NORISER") else 1e9   # counterfactual only
     u1r = R0 @ G["u1"]; h1c = (G["f1"] + G["h"]) * u1r; h1min, h1who = 1e9, None
     for k, X, hh in L.member_pts(M, i):
         if k in ("hub1", "L1a") or M._mem.get(k) in (0, 1): continue

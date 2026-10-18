@@ -8,7 +8,7 @@ Round 103 (J3, track jump), lens 1, the PASS rule's "J0 inside J1's footprint" c
 
 **Verdict: DEAD.** The stack jams before the in-band arithmetic matters. Hub 0 sits at hub 1's old level, and there it
 hits hub K and the riser that link 1a now needs. Those clashes lose 11-170 of the lead's poses at every legal seat. The
-best legal configuration scores __CLAIM__ frozen exact (fit bench 28.48), against the lead's 18.28.
+best legal configuration scores 32.92 frozen exact (fit bench 28.10), against the lead's 18.28.
 
 ## 0. The deeper version (answered before modelling)
 
@@ -70,7 +70,7 @@ arm pad / BOTTOM`.
     bench, or is set as a variable.
   - 80 skin-facing underside samples.
 - **Hub 1.** Lifted along u1 by h, the least lift that puts its lower plate >= 1.5 mm over hub 0's crown plane over the
-  discs' overlap, and its centre above the crown. That gives h = 15.0 mm at the best legal seat. Samples under hub 0's
+  discs' overlap, and its centre above the crown. That gives h = 13.5 mm at the best legal seat (r0 49.5). Samples under hub 0's
   crown disc are dropped, because they are not skin-facing. The exposed crescent counts (37-53 of 80).
 - **Link 1a.** Its 8 samples are lifted by h + 7.25. The riser wall runs from hub K's plate level (55.1 mm) to the lifted
   root: 3 mm thick, 8 mm wide, 10.5-13.5 mm off u1 along link 1a's azimuth, and 20-50 mm tall.
@@ -128,13 +128,20 @@ skin is high there.**
 | a0 8 / azu 180 | 52.0 | 33.57 | 0.853 | 0.669 | 18 | 4 |
 | a0 8 / azu 195 | 52.0 | 33.77 | 0.860 | 0.681 | 20 | - |
 | a0 6 / azu 150 | 51.0 | 37.24 | 0.880 | 0.588 | 34 (riser) | 1 |
-| __REFINE__ | | | | | | |
+| a0 6 / azu 180 (refined) | 49.5 | 28.73 | 0.877 | 0.675 | 20 | 1 |
+| a0 5 / azu 180 (relays nothing: a0 <= 5) | 49.5 | 28.94 | 0.881 | 0.663 | 23 | 0 |
+
+The refinement covered a0 5-7, azu 160-200 and r0 49.5-53 (60 configurations). The best stack is a0 6 / azu 180 /
+r0 49.5, with hub 1 lifted 13.5 mm and hub 0's lobe 5.2 mm off u1. With the riser counted as clear (a
+counterfactual, because the riser cannot be removed), the same stack scores 19.21 fast against the lead's 12.50: hub
+0 still meets hub K on 3 poses, and ib14 is 0.863.
 
 ### 2c. The relay (policy (ii)), fit bench, the window enumerated
 
 | seat (legal) | window | REAL gap | GHOST gap | relay candidates | relayed takes / contacts |
 |---|---|---|---|---|---|
-| **a0 6 / azu 180 / r0 51** | [0, 21] | **28.48** | 11.88 | 1 | 1 / 0 |
+| **a0 6 / azu 180 / r0 49.5** | [0, 21] | **28.10** | 11.88 | 1 | 1 / 0 |
+| a0 6 / azu 180 / r0 51 | [0, 21] | 28.48 | 11.88 | 1 | 1 / 0 |
 | a0 8 / azu 180 / r0 52 | [0, 8] | 32.93 | 11.88 | 3 | 1 / 0 |
 | a0 10 / azu 150 (r0 85.5) | [0, 42] | 32.78 | 11.05 | 8 | - |
 | a0 12 / azu 135 (r0 86.5) | [0, 39] | 33.69 | 11.69 | 9 | - |
@@ -145,11 +152,61 @@ skin is high there.**
 
 ## 3. The claim: exact Bench(110,360), frozen lead, window from the fit bench
 
-__CLAIMTABLE__
+Best legal configuration: a0 6 / azu 180, r0 49.5 (hub 0 at hub 1's old level, 1.0 mm lower), h 13.5, window
+[0, 21] picked on the fit bench (`CB_EXACT=1 WOB_R0=49.5 ... claim 6 180 0 21`, 351 s).
+
+| state | gap | reach (ws/360) | follow | ib14 | ib10 | contacts | lost to stack clashes | overhead |
+|---|---|---|---|---|---|---|---|---|
+| 3-joint lead (reproduced through this code) | **18.28** | 0.7278 (262) | 1.0 | 0.9012 | 0.5739 | 4 | - | 8/28 |
+| **REAL: stack + relay, window [0, 21]** | **32.92** | 0.6472 (233) | **0.90** | 0.8796 | 0.5608 | 2 | 42 (riser 35, hub 0 on hub K 7) | 7/28 |
+| q0 = 0 (the stack's price alone) | 32.92 | 0.6472 | 0.90 | 0.8796 | 0.5608 | 2 | 42 | 7/28 |
+| GHOST (zero-size J0, same window) | 18.28 | 0.7278 | 1.0 | 0.9012 | 0.5739 | 4 | - | 8/28 |
+
+- **The relay buys nothing on the claim bench.** Of the lead's 94 lost poses, 2 have a feasible q0, and both fall
+  outside the fit-bench window, so the ghost equals the lead.
+- **The stack costs 14.6 points.**
+  - Reach: -29 ws poses (+8.1).
+  - Follow: 0.90 (+5.0). The clashes land on followed clip frames, including the scapular-plane overhead clip at plane
+    30, elev 124-150.
+  - ib14: 0.8796 (+2.0).
+- **In band, per part, over the taken clip frames:**
+  - chain (the lead minus hub 1 and L1a): 0.909, median 9.3 mm;
+  - hub 1's exposed crescent (33 of 80 samples): 0 %, median 21.1, min 17.8;
+  - L1a: 0 %, median 30.4;
+  - hub 0 (80): **100 %**, median 9.3, min 3.4.
+- Near-touch minimum over taken poses: 0.072 mm (the lead's own pose-203 class).
 
 ## 4. Red team of my own best configuration (a0 6 / azu 180 / r0 51)
 
-__REDTEAM__
+- **The pose that jams.** The scapular-plane overhead clip (plane 30, elev 124.5-150, axial -55 to -60): 5 followed
+  frames.
+  - The riser enters hub 0 by 1.7-1.9 mm. Hub 0 clears hub K there by only 1.8-1.9 mm.
+  - Worst ws pose: (-15, 75, -45). Riser -4.6 mm into hub 0, and hub 0 -0.3 mm into hub K.
+  - Across the body at low elevation, (135-150, 0-30, -45 to -60): the riser clears hub 0 by only 0.4-0.8 mm, under the
+    1 mm rule.
+  - So the stack jams first at **overhead**, which is the requirement that matters most.
+- **The point that pinches.**
+  - Hub 0's lobe toward azu 180 meets the skin at ws (135, 135, -45): its wall is 0.67 mm in, a contact.
+  - Three taken poses sit within 1 mm of the skin: 0.36 mm at (120, 30, -135), 0.37 at (45, 165, -90), 0.45 at
+    (60, 165, -90).
+  - On the clear poses, the riser's clearance to hub 0 is 1.04 mm at minimum and 2.18 mm at p10. A 0.2 mm build error
+    loses more poses.
+- **The optimistic numbers.**
+  - Hub 0's ground bracket (a skin-level tab from its lower plate to the handler, under the chain's sweep) is not
+    modelled. It would add skin-level metal and clashes.
+  - The wedge is drawn at its 1.5 mm minimum.
+  - The riser is the thinnest buildable wall (3 mm). Its 8 mm width matches the lead's strap.
+  - Policy (ii) assumes the spring finds the least-|q0| state quasi-statically.
+  - The continuity flood was not run. Connected reach can only be <= static reach.
+  - Even with the riser deleted (impossible: it is the only path from hub 1's boss to hub K's plate) the fit-bench
+    number is 19.21 against the lead's 12.50.
+- **Gaming check (auditor's eye).**
+  - The window was picked on the fit bench, never on the claim bench.
+  - Stack clashes lose the pose; they are not dropped.
+  - Hub 0's skin hits stay contacts.
+  - Covered samples are dropped only where hub 0's crown disc lies under them.
+  - Seat-illegal seats are nulled in the sweep, not ranked. 27 configurations sat on illegal seats, including the
+    best-looking "floating" ones (a0 12-16 / azu 150, 26.12-28.19 fast).
 
 ## 5. Verdict
 
@@ -164,9 +221,9 @@ on the clash count").
     (r0 76-86, 0 % in band, hub 1 lifted 41-52 mm) or takes contacts. Even at r0 51 the riser still loses 17 poses.
 - The arithmetic kill as written (+7.4) overstates the dilution: the measured value is +2.7 with covered samples
   dropped. But the clashes alone cost more than any relay can return.
-- Best legal: __BEST__.
+- Best legal: a0 6 / azu 180 / r0 49.5, window [0, 21]: **28.10 fast** (lead 12.50) and **32.92 frozen exact Bench(110,360)** (lead 18.28).
 
-**Convergence gate** (Bench(60,160) fast, legal configurations in evaluation order): __GATE__.
+**Convergence gate** (Bench(60,160) fast, legal configurations in evaluation order): 122 legal configurations of 149 evaluated. The best gained 0.14 score points over the second half (< 1) and 0.14 over the last third (< 0.5); the top-5 spread is 0.31 (< 3). **Converged.**.
 
 ## 6. New knowledge (predicts beyond this morphology)
 

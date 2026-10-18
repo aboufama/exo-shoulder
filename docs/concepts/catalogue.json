@@ -3173,7 +3173,7 @@
   "name": "Coaxially stacked 'wobble' J0 under hub 1, the PASS rule's 'J0 inside J1's footprint' cell (4 joints: the user prefers 3)",
   "family": "base relay 4R, nested tilted stack",
   "lens": "round103:relay-under-lead (lens 1: the a0 <= 20 'stackable inside J1's footprint' clause)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-18T01:42:28Z",
   "source": "round 103 (J3, track jump) judge (docs/concepts/round103_ideation.md)",
   "description": "Hub 0 (O20 v5) sits directly under hub 1 on the acromion top, its axis c tilted a0 = 6-12 deg from u1 (both through GH). Hub 1's housing bolts to hub 0's output through a Ti wedge plate of angle a0, so J1's axis wobbles on a cone of half-angle a0 as J0 turns; travel is limited only by the J1 seat rule (up to +-180 deg). AT REST the stack is 2 x 12.25 mm: hub 1, its crown and the root of L1a ride 12.25 mm (plus the wedge) higher than in the lead; hub 0's rim (offset 7-9 mm + r 10) reaches 17-19 mm from J1's axis. ACROSS THE BODY J0 turns and moves hub 1 by up to 2 a0 (14-18 mm) over the skin. OVERHEAD and BEHIND THE BACK: q0 = 0. For a0 < 5 the J0-J1-J3 sub-chain cannot hold a 5-deg margin (g is confined to [th - a0, th + a0]) and nothing is relayed.",

@@ -1,0 +1,98 @@
+{
+ "id": "lead-relay-wobble-4r",
+ "name": "Wobble J0: O20 hub 0 stacked UNDER hub 1 of the lead conecut-knee-knuckle-3r (hub 1 on a Ti wedge, J1's axis on a cone of half-angle a0; 4 counted joints, the user prefers 3)",
+ "lens": "round103:relay-under-lead (lens 1: the a0 <= 20 'stackable inside J1's footprint' clause)",
+ "family": "base relay 4R, nested tilted stack",
+ "active_dof": 4,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "complexity": 50.75,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-18T03:07:12Z",
+ "reach": 0.6813,
+ "follow": 0.9167,
+ "inband14": 0.8771,
+ "inband10": 0.5566,
+ "contact": 0.0061,
+ "gap": 28.1,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "claim_frozen_exact": {
+  "bench": "Bench(110,360) exact, frozen lead, window [0, 21] from the fit bench",
+  "gap": 32.92,
+  "reach": 0.6472,
+  "ws_taken": 233,
+  "follow": 0.9,
+  "inband14": 0.8796,
+  "inband10": 0.5608,
+  "contact": 0.006,
+  "contacts": 2,
+  "lost_to_stack_clashes": 42,
+  "parts_why": {
+   "riser": 35,
+   "hub0:hubK": 7
+  },
+  "overhead": "7/28",
+  "near_touch_min_mm": 0.072,
+  "relayed": 0,
+  "relay_stop": 2,
+  "ghost_gap": 18.28,
+  "lead_same_code": 18.28,
+  "parts_inband": {
+   "chain": [
+    0.909,
+    9.3,
+    2.7,
+    88407
+   ],
+   "hub1": [
+    0.0,
+    21.1,
+    17.8,
+    3267
+   ],
+   "L1a": [
+    0.0,
+    30.4,
+    26.5,
+    792
+   ],
+   "hub0": [
+    1.0,
+    9.3,
+    3.4,
+    8019
+   ]
+  },
+  "geo": {
+   "r0": 49.5,
+   "h_lift": 13.5,
+   "hub0_off": 5.2,
+   "riser_h": 19.1,
+   "hub1_exposed": 33
+  },
+  "file": "docs/concepts/verify/lead-relay-wobble-4r_claim.json"
+ },
+ "best_params": {
+  "a0": 6.0,
+  "azu": 180.0,
+  "r0": 49.5,
+  "h_lift": 13.5,
+  "lo": 0.0,
+  "hi": 21.0,
+  "wedge_min": 1.5,
+  "flip": 7.25,
+  "riser_t": 3.0,
+  "lead": "conecut-knee-knuckle-3r best_params, frozen"
+ },
+ "n_configs": 149,
+ "verdict": "DEAD on the clash count: hub 0 at hub 1's level jams on hub K and on the riser link 1a needs (L1a must ride hub 1's boss and drop 13-24 mm in the 4 mm gap to hub K), losing 11-170 of the lead's poses at every legal seat; where hub 0's lobe points into the chain's free sector the skin is high on overhead poses and hub 0 floats (r0 76-86). Best legal 28.10 fast / 32.92 frozen exact Bench(110,360) vs the 3-joint lead 12.50 / 18.28; the relay buys nothing on the claim bench (2 candidates, both outside the window).",
+ "limiter": "stack clashes (measured, claim bench): riser vs hub 0 35 poses, hub 0 vs hub K 7, incl. 5 frames of the scapular-plane overhead clip (plane 30, elev 124-150: riser 1.7-1.9 mm into hub 0) -> reach 0.647, follow 0.90; hub 1's exposed crescent (33/80) and L1a 0 % in band (median 21 / 30 mm) -> ib14 0.880; relay 0 poses at a0 6.",
+ "note": "Convergence gate (Bench(60,160) fast, 122 legal configs of 149 in order): best gain over the 2nd half 0.14 score pts, last third 0.14, top-5 spread 0.31 -> converged. 27 configs sat on seat-illegal hub-0 axes (a0 >= 10 at azu 150-210) and are nulled in the sweep (numbers kept under measured_seat_illegal). Spec arithmetic (+7.4 dilution) overstates: covered hub-1 samples are not skin-facing, measured +2.0-2.7. Counterfactual with the riser deleted (unbuildable): 19.21 fast vs lead 12.50. Not modelled (generous): hub 0's skin-level ground bracket. Continuity flood not run (connected <= static). Ghost on the fit bench 11.88 (lead 12.50): a0 6-12 relays 1-12 of the 36 lost fit poses. Simplicity record: lead's mechanism + J0 (counted, spring-centred, own-angle dowel stops, MR117 pair in O20 v5) + Ti wedge plate + L1a riser (5-axis from solid).",
+ "doc": "docs/concepts/lead-relay-wobble-4r.md",
+ "model_file": "docs/concepts/models/lead-relay-wobble-4r.py"
+}

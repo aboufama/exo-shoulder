@@ -1,15 +1,17 @@
 /* lead-relay-wobble-4r at its best STACK seat: the verified lead conecut-knee-knuckle-3r UNCHANGED from J1 to the cuff
  * (geometry below is the lead's own viz export) carried by a FOURTH counted joint J0 stacked UNDER hub 1: hub 0 (O20 v5,
  * grounded through a skin-level bracket of the scapula handler on its lower plate - not modelled in the bench) on axis c
- * through GH, a0 6 deg from J1's axis at azimuth 180 in u1's frame, its underside at r0 51 mm (hub 1's old level, 50.47).
- * Hub 1 sits on hub 0's crown through a Ti wedge plate (>= 1.5 mm at its thin edge): hub 1 is LIFTED 15.0 mm along u1, so
+ * through GH, a0 6 deg from J1's axis at azimuth 180 in u1's frame, its underside at r0 49.5 mm (hub 1's old level, 50.47).
+ * Hub 1 sits on hub 0's crown through a Ti wedge plate (>= 1.5 mm at its thin edge): hub 1 is LIFTED 13.5 mm along u1, so
  * J1's axis wobbles on a 6-deg cone about c as J0 turns. Hub 1's lower plate is the relayed body (it sits on the wedge), so
  * link 1a rides hub 1's BOSS (F + 7.25) and drops to hub K's lower plate through a 3 mm riser wall at hub 1's rim (5-axis
  * from solid). J0 is spring-centred with own-angle dowel stops [lo, hi] (fit bench); policy (ii): q0 = 0 wherever the lead
  * closes, else the least |q0| in the window at which it closes with the J0-J1-J3 sub-chain >= 5 deg from its fold.
  * Numbers (model docs/concepts/models/lead-relay-wobble-4r.py, row docs/concepts/rows/lead-relay-wobble-4r.json): the
- * metal price alone (q0 = 0) is 29.11 on Bench(60,160) fast vs the lead's 12.50 - hub 0 jams on hub K and the riser on hub 0
- * (20 of the lead's poses), hub 1 and L1a leave the band. DEAD. 4 counted joints (the user prefers 3), 0 passive translations. */
+ * best legal config (window [0, 21]) scores 28.10 on Bench(60,160) fast (lead 12.50) and 32.92 frozen exact Bench(110,360)
+ * (lead 18.28): the riser jams on hub 0 and hub 0 on hub K (42 of the lead's claim poses, the scapular-plane overhead clip
+ * among them), hub 1's crescent and L1a leave the band, and no pose is relayed. DEAD. 4 counted joints (the user prefers 3),
+ * 0 passive translations. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;
   const P = {"az1": 95.3929, "el1": 67.8974, "az2": 45.8211, "el2": 41.0855, "wd": 66.8662, "wa": -10.6559, "b3": 0.329, "lE": 97.1443, "lc": 24.3508, "phiE": 0.7526, "phib": -91.8041, "stk": 6.0, "ang_min": 25.2189, "bk1": 26.0, "bk2": 38.0336, "sK": -1, "a1max": 58.7678, "smhi": 16.8433, "smlo": 5.0, "capK": 6.0, "law_mode": "seg", "kA": 2.1534, "t1": 6.0, "kB": 2.1534, "smt": 12.0, "kK": 2.1534, "i_rock": 2.3934, "r_horn": 4.0, "r_lobe": 8.2661, "arm_lo": 1.0, "J3MIN": -111.9036, "J3MAX": 122.7417};
@@ -23,7 +25,7 @@
   const cb = x => Math.cos(x * D2R), sb = x => Math.sin(x * D2R);
   /** physical J2 stop: th (deg) inside [thLo, thHi] -> K on stop A (state 0); else J2 locked on its q2 stop, K opens */
   const dot = V.dot;
-  const RL = { a0: 6, azu: 180, lo: 0, hi: 21, r0: 51.0, h: 15.0, flip: 7.25 };
+  const RL = { a0: 6, azu: 180, lo: 0, hi: 21, r0: 49.5, h: 13.5, flip: 7.25 };
   const cAx = (() => { const u1 = u[0], ef = V.unit(V.cross(u1, [0, 1, 0])), ff = V.cross(u1, ef);
     return V.unit(V.add(V.scale(u1, cb(RL.a0)), V.add(V.scale(ef, sb(RL.a0) * cb(RL.azu)), V.scale(ff, sb(RL.a0) * sb(RL.azu))))); })();
   let RC = M.I3();
