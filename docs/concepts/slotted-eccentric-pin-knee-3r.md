@@ -25,3 +25,35 @@
    same code (the eccentric must beat ITS OWN control, not a number from another model), the frozen exact run on
    Bench(110,360), the parent's independent verifier harness (docs/concepts/verify/slotted-eccentric-j2-3r.py), and a
    red-team pose list (overhead >= 140, across the body, behind the back, near-touch, lock-angle minimum).
+
+## Why this cell was run, and what decides it
+
+Round 14 plan: "slotted-eccentric-pin-knee-3r: only as lens 3's cell B if lens 3's measured limiter after gate 0 is the
+fold, with its knee hub at O20 (not O11) and its complexity recorded". Lens 3 (crest-knee-3r, screened 00:12 UTC)
+reports the fold as its largest loss (big bench: fold 92 of the lost poses, J3 window 30), and the lead
+(conecut-knee-knuckle-3r) loses 88 of its 98 bench poses to the fold, 73 of them on the STRETCHED side (th 107-176,
+internal rotation across the body). So the cell runs. Its spec's own start condition is NOT met: the parent
+slotted-eccentric-j2-3r was refuted (v_gap 115.21 frozen exact vs its locked control 46.60 through the same code; the
+slot costs ~69 points). This screen asks whether the pin-knee chain's axis directions, or a stretched-only law, change
+that.
+
+Model: docs/concepts/models/slotted-eccentric-pin-knee-3r.py = the parent's kit model (inverted cam, every check
+unchanged) at the pin-knee chain's axis directions, with the O20 rule enforced at K (rad 10, 12.25 mm stack), fold
+margin >= 5.23 (5 + K play) in th, psi in [15, 165], slot lock >= 50 deg, b >= 20 deg (two O20 hubs side by side).
+Member 3 is the kit neck in both arms of every paired comparison; the eccentric's metal is all upstream of member 3, so
+the cuff knee cannot change it (see the deeper version, point 1).
+
+## Gate 0: the slot does what it promises kinematically
+
+Seat-independent slot gate (synthetic poses over th, the parent's slot_design: lock angle of the internal four-bar mode
+>= 50 deg, normal component >= 0.2 deg/deg, G-K-J2 alignment >= 10 deg, track self-overlap), 432 law cells per seat
+(Amin 52-68, Amax 86-102, b 20-30, c 66-82, sl 0.6 / 1.0, both knee branches), knee hub O20:
+
+| seat (axis directions) | plain dyad window th | best lock-held window (law) | kinematic reach Bench(60,160) |
+|---|---|---|---|
+| H1 (a1 41.02, a2 68.26) | [32.47, 104.05] | two-sided [25.5, 121.75] (Amin 58, Amax 86, b 25, c 74, sl 0.6; track 90.9 mm, 160 deg around J2) | 0.775 -> 0.8875 |
+| H1, stretched-only | [32.47, 104.05] | [32.25, 129.75] (Amin 68, Amax 94, b 25, c 74, sl 0.6; lock 50.1 over the whole run) | 0.775 -> 0.869 |
+| crest (a1 40.88, a2 55.01) | [19.36, 90.66] | [24.0, 121.5] (Amin 58, Amax 86, b 25, c 74, sl 0.6) | - |
+
+217 of 432 H1 cells pass the slot gate; q2 spans 170-235 deg in every passing cell (the J2 interior angle sweeps ~0 -> 180
+across any wide window; the crank adds to it).

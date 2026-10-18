@@ -492,6 +492,11 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      number; L1 Walking-arm-swing R1 97.6 -> 81.4 unattributed; verify the slot-cutter claim on user_slipper_nose with
      stops_cc.py. Desmo-conecut's generation CAD (round 13 winner, not a lead) is DEFERRED while both discovery loops
      need the 4 local cores (farm closed); start it when a loop ends or the farm reopens. Stills wait for the user.
+   - *Lead, 00:58 UTC 10-18:* the box went idle (load ~4: both loops planning), so the desmo-conecut generation CAD
+     (gen 9, spring-free desmodromic K on the gen-8 conecut builders) started as wf_1cb39fa0-d38, niced, local, no render.
+     Round J2 (jump) closed: virtual J2 at the cap pole dead (86.95-108.22 fast vs the plain cap 3R 63.18), deltoid-crest
+     47.86 dead; J3 = 4-joint ghost gates. Round 14: cap-plateau-knuckle-3r dead at gate 0 (32.08 frozen, 247 takes) -
+     the cap-pole seat is closed on both tracks.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

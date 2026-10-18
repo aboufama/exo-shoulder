@@ -48,6 +48,8 @@ build = SE.build
 def _clean(params):
     p = dict(PARAMS, **params)
     p.update(rpin=10.0, pin_t=K.CROWN, rad1=10.0, rad2=10.0, rad3=10.0)          # O20 at every joint incl. K (rule)
+    if os.environ.get("SEPK_O10_PROBE") == "1":       # ATTRIBUTION PROBE ONLY (never a claim): the parent's O10 MR63ZZ knee
+        p.update(rpin=5.0, pin_t=6.5)
     p["margin"] = max(MARGIN_RULE, float(p["margin"])); p["psi_lo"] = max(PSI_RULE, float(p["psi_lo"]))
     p["lock_min"] = max(LOCK_RULE, float(p["lock_min"]))
     p["b"] = max(20.0, float(p["b"]))                       # two O20 hubs (J2, K) side by side: >= 21.6 mm at r 62
@@ -65,12 +67,12 @@ def bench_eval(B, params):
 
 def th_of_bench(B, seat):
     """per-pose J1-J3 angle th (deg) on bench B at a seat's axis directions (workspace + clip frames, the bench's order)"""
-    rec = {}
+    rec = []
     def bld(B_, F, p):
-        p1 = F.S(K.bvec(p["az"], p["el"])); p3 = F.HG(K.wdir(p["wd"], p["wa"])); rec["th"] = SE.ang(p1, p3)
+        p1 = F.S(K.bvec(p["az"], p["el"])); p3 = F.HG(K.wdir(p["wd"], p["wa"])); rec.append(np.atleast_1d(SE.ang(p1, p3)))
         return SE.build(B_, F, p)
     K.evaluate(B, bld, _clean(dict(SEATS[seat], lock=1)))
-    return rec["th"]
+    return np.concatenate(rec)
 
 
 def scan(seat="H1"):
@@ -92,6 +94,23 @@ def scan(seat="H1"):
     out["cells"].sort(key=lambda c: -c["cover"]); return out
 
 
+def attribute(params, B=None):
+    """where the poses go: closure / window (not ok), part-part pairs (K6, per pair over the closing poses), contact; the
+    fitted underside level of each member (mm from GH, max over the poses) and its in-band share"""
+    import dataclasses
+    B = B or K.bench(60, 160); p, r = evaluate(B, params); L = B._kit_last; ch, pts, ok, hit = L["chain"], L["pts"], L["ok"], L["hit"]
+    M = ch.members; pairs = {}
+    for a in range(len(M)):
+        for b in range(a + 1, len(M)):
+            h = K.collisions(dataclasses.replace(ch, members=[M[a], M[b]]), pts, ok)
+            if h.any(): pairs[f"{M[a].name}|{M[b].name}"] = int(h.sum())
+    lvl = {m.name: [round(float(np.min(L["prof"][m.name])), 1), round(float(np.max(L["prof"][m.name])), 1)] for m in M}
+    out = dict(n=int(len(ok)), closes=int(np.sum(ch.ok)), cont_ok=int(ok.sum()), collide=int(hit[ok].sum()), taken=int(L["take"].sum()),
+               pairs=dict(sorted(pairs.items(), key=lambda kv: -kv[1])[:12]), level_mm=lvl, inband_member=r.get("inband_member"),
+               gap=r.get("gap"), reach=r.get("reach"), inband14=r.get("inband14"), contact=r.get("contact"), kin_reach=(r.get("th_need") or {}).get("kin_reach"))
+    return out
+
+
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "check"
     if mode == "scan":
@@ -101,6 +120,8 @@ if __name__ == "__main__":
         for c in o["cells"][:12]: print(c)
         sys.exit()
     par = json.loads(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].startswith("{") else {}
+    if mode == "attr":
+        print(json.dumps(attribute(par), indent=1, default=float)); sys.exit()
     if mode == "frozen":
         o = sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else "frozen.json"
         SE.ID = ID; SE.frozen(_clean(par), o); sys.exit()
