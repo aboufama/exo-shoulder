@@ -10,7 +10,7 @@ kit's family fold reading in that flood) with two things swapped from outside:
   * the output directory: docs/alignment/remeasure/freek_polish_pick1/ (the verified config's re-wear files stay as they are).
 After the wear it reads, from the same frozen design (captured from RM.freeze, nothing re-fitted):
   * the stop-refusal side reading (audit proposal B), on its own code: the poses the J3 dowel refuses (the model's
-    j3stop2 returns no crossing), worn by the same frozen shape with the dowel removed (q3max dropped), and the gap with
+    ODesign.j3stop returns no crossing), worn by the same frozen shape with the dowel removed (q3max dropped), and the gap with
     each refused pose that is a contact without the dowel scored as that contact.
 It never edits the model, a bench, a judge or a row.
 
@@ -65,7 +65,7 @@ def main(wear):
     # ---- stop refusal on the captured frozen design (own code; same idea as audit proposal B)
     Mk, B, mod = CAP["Mk"], CAP["B"], CAP["mod"]; KR = mod.KR
     D = Mk.D; Q = Mk.Q
-    q, ok, X1, X2, X3, s = KR.KRDesign._ik_phys(D, Q); js = D.j3stop2(Q, q, ok, s)
+    q, ok, X1, X2, X3, s = KR.KRDesign._ik_phys(D, Q); js = D.j3stop(Q, q, ok)   # the model's own dowel (its q3)
     refused = sorted(i for i, v in js.items() if v is None)
     rows = []; res1 = list(B.res)
     if refused:

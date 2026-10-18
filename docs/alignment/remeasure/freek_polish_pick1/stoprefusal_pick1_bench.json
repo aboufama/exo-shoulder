@@ -1,0 +1,120 @@
+{
+ "id": "freek-oracle-route-knuckle-4r",
+ "config": "pick1",
+ "wear": "bench",
+ "tool": "tools/alignment_freek_stop_refusal.py",
+ "dump": "docs/concepts/verify/freek-oracle-route-knuckle-4r/polish_verify/pick1_fit60_bench_perpose.json",
+ "params": {
+  "q3max": 84.7705,
+  "smhi": 8.1472,
+  "smlo": 8.5843,
+  "a1max": 70.7149,
+  "bk1": 29.3309,
+  "bk2": 48.851,
+  "az2": 48.9176,
+  "el2": 41.3495,
+  "wd": 66.7214,
+  "wa": -13.7533,
+  "b3": 0.2933
+ },
+ "fit_fast": {
+  "gap": 11.57,
+  "reach": 0.8,
+  "follow": 1.0,
+  "inband14": 0.901,
+  "inband10": 0.5201,
+  "contact": 0.0157,
+  "mode": "fast"
+ },
+ "plain": {
+  "gap": 15.4,
+  "reach": 0.7639,
+  "follow": 1.0,
+  "inband14": 0.9008,
+  "contact": 0.0179,
+  "n_ws": 360,
+  "n_clip": 110,
+  "ws_taken": 275,
+  "contact_poses": 7
+ },
+ "refused": 6,
+ "refused_not_in_dump_untaken": [],
+ "refused_kit_contacts": 4,
+ "refused_kit_contact_depth_mm": 11.92,
+ "side": {
+  "gap": 16.39,
+  "reach": 0.7639,
+  "follow": 1.0,
+  "inband14": 0.9008,
+  "contact": 0.0278,
+  "n_ws": 360,
+  "n_clip": 110,
+  "ws_taken": 275,
+  "contact_poses": 11
+ },
+ "side_depth_total_mm": 51.38,
+ "side_contact_poses": 11,
+ "refused_rows": [
+  {
+   "i": 316,
+   "kind": "ws",
+   "plane": 60.0,
+   "elev": 150.0,
+   "axial": -105.0,
+   "dump_ev": false,
+   "dump_taken": false,
+   "kit_min_mm": -2.41
+  },
+  {
+   "i": 343,
+   "kind": "ws",
+   "plane": 75.0,
+   "elev": 150.0,
+   "axial": -105.0,
+   "dump_ev": false,
+   "dump_taken": false,
+   "kit_min_mm": -4.11
+  },
+  {
+   "i": 372,
+   "kind": "ws",
+   "plane": 90.0,
+   "elev": 165.0,
+   "axial": -90.0,
+   "dump_ev": false,
+   "dump_taken": false,
+   "kit_min_mm": null
+  },
+  {
+   "i": 396,
+   "kind": "ws",
+   "plane": 105.0,
+   "elev": 135.0,
+   "axial": -90.0,
+   "dump_ev": false,
+   "dump_taken": false,
+   "kit_min_mm": -1.26
+  },
+  {
+   "i": 399,
+   "kind": "ws",
+   "plane": 105.0,
+   "elev": 165.0,
+   "axial": -90.0,
+   "dump_ev": false,
+   "dump_taken": false,
+   "kit_min_mm": null
+  },
+  {
+   "i": 423,
+   "kind": "ws",
+   "plane": 120.0,
+   "elev": 135.0,
+   "axial": -90.0,
+   "dump_ev": false,
+   "dump_taken": false,
+   "kit_min_mm": -4.14
+  }
+ ],
+ "secs": 12.8
+}

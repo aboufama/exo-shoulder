@@ -84,6 +84,8 @@ pre-registered hardware is the only other claim-bench hardware reading).
 * **The pose that jams.** The rigid bump is sized on the fit bench; on the claim bench the pin-a boss (5 poses) and the
   knee link (1) come 0.94-0.99 mm from the shell top at overhead / IR poses (316, 343, 372, 396, 423, 448: elevation
   135-165, axial -90..-105). 5 of the 6 have chain metal in the skin and stay contacts; 396 (metal 0.46 mm) is lost.
+  PROBE +0.15 mm on the bump (claim bench, diagnostic only, not a claim): jams 6 -> 0, gate 14.40 -> 14.20, plain 13.74,
+  reach 286, near1 17.91: the rule-floor clearance is not where the points are; the claim holds either way.
 * **The point that pinches.** E strap over the moving carriage: 1.0 mm by construction at the fit poses (rule floor);
   the jam list shows the carriage at >= 3.5 mm on the claim bench, so the binding clearance is the boss vs the shell
   top, not the carriage.

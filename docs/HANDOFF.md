@@ -606,6 +606,10 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      as contacts? On that reading pick1's CAD-shape held gain is +0.76 (< 1) and its bench gain 0. Until the user
      rules, the current metric stands (a refused pose = lost reach) and both readings are reported. The polished claim's
      alignment audit is running (wf_555370a5-90c). The dashboard promotes it only on a non-gamed skeptic ruling.
+   - *11:15 correction:* proxtrack's screen closed (fd3cff8). Its claim is 14.02 plain frozen exact (score 94.90; gate
+     reading 14.40) at PHI 35 / ds 19.5 / rt 1.5 after a converged 219-config sweep. The pre-registered PHI 30 config
+     reads 16.82 with the refined bump and 20.59 with the spec bump. The 13.39 below was an earlier reading that the
+     screen superseded. It is unverified, 4 DOF, cx 52.5, and awaits round 105's verifier and auditor.
    - *11:05:* round 105 (jump J5) is screening. proxtrack-relay-knuckle-4r self-measures 13.39 frozen exact with its
      'refined bump' (17.31 with the spec bump). That is the first number on file under 95's 13.75, but it is UNVERIFIED
      and 4 DOF: the bump amount is the max over the lead's fit-bench poses (legal), and a ~4-point move from a bump

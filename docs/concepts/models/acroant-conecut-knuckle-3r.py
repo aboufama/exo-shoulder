@@ -104,7 +104,53 @@ def bench_eval(B, params):
     r, M = _report(B, params); r.pop("params", None); return r
 
 
+def bench_envh():
+    """envh (tools/freek_env_polish.py bench_envh, re-built here without importing the freek verifier): Bench(60,160)'s 60
+    clip frames + 210 fresh env workspace poses, local fast cache .cache/concept_bench/envh-491cc8b49f3d; no held-out pose"""
+    import env_bench as EB
+    E = json.load(open(os.path.join(REPO, "docs", "research", "freek_env_polish", "envh.json")))
+    old = os.environ.pop("CB_EXACT", None)
+    try: B60 = CB.Bench(n_clip=60, n_ws=160)
+    finally:
+        if old is not None: os.environ["CB_EXACT"] = old
+    cl = [i for i, k in enumerate(B60.kind) if k == "clip"]
+    Benv = EB.bench("env", exact=True); ws_pos = E["env_ws_positions"]
+    idx = np.r_[np.asarray(B60.idx)[cl], np.asarray(Benv.idx)[ws_pos]]; key = "envh-" + CB._key(idx); assert key == E["key"]
+    Z = CB._poses_all(); names = list(Z["NAMES"]); cid = Z["CID"]
+    old = os.environ.get("CB_EXACT"); os.environ["CB_EXACT"] = "1"; os.environ["CB_QUIET_EXACT"] = "1"
+    try: B = CB.Bench(20, 20)
+    finally:
+        if old is None: os.environ.pop("CB_EXACT")
+        else: os.environ["CB_EXACT"] = old
+    B.idx = idx; B.kind = ["clip"] * len(cl) + ["ws"] * len(ws_pos); B.clip = [str(names[c]) for c in cid[idx]]
+    B.poses = [dict(plane=float(p[0]), elev=float(p[1]), axial=float(p[2]), flex=float(p[3]), pron=float(p[4])) for p in Z["POSE"][idx]]
+    B.res = [None] * len(idx); B._skin = {}; B._ex = {}; B._frames = {}; B.key = key
+    d = os.path.join(CB.CACHE, key)
+    B.meta = json.load(open(os.path.join(d, "meta.json"))); B.grid = np.load(os.path.join(d, "grid.npy"), mmap_mode="r")
+    B._V = np.load(os.path.join(d, "skins.npy"), mmap_mode="r"); B.mode = "fast"
+    hidx, _ = EB.held_idx(); assert not (set(idx.tolist()) & set(hidx.tolist())), "a held-out pose in envh"
+    return B
+
+
+def _with_fit_bench(fn):
+    """ACRO_FIT=envh: the claim protocol's fit bench is envh instead of Bench(60,160) (a config searched on envh is frozen
+    from its own fit, as the freek polish's 'claim envh'); default: the lead's protocol unchanged"""
+    def run(*a):
+        if os.environ.get("ACRO_FIT") != "envh": return fn(*a)
+        orig = CC.CB.Bench; Be = bench_envh()
+        def Bench(n_clip=60, n_ws=160, *k, **kw):
+            if n_clip == 60 and n_ws == 160 and os.environ.get("CB_EXACT") != "1":
+                Be.res = [None] * len(Be.idx); return Be
+            return orig(n_clip, n_ws, *k, **kw)
+        CC.CB.Bench = Bench
+        try: return fn(*a)
+        finally: CC.CB.Bench = orig
+    return run
+
+
+@_with_fit_bench
 def frozen(P, nc=110, nw=360): return CC.frozen(_clamp(dict(PARAMS, **P)), nc, nw)
+@_with_fit_bench
 def frozen_held(P): return CC.frozen(_clamp(dict(PARAMS, **P)), -1, -1)
 def frozen_flood(P, nc=110, nw=360): return CC.frozen_flood(_clamp(dict(PARAMS, **P)), nc, nw)
 def viz_export(par): return CC.viz_export(_clamp(dict(PARAMS, **par)))
