@@ -5,6 +5,16 @@ Round 103 (J3, track jump), lens 2 (the low-complexity cell of the 4-DOF class).
 envelope grid). Sweep: `docs/concepts/sweeps/cap-nullspace-4r.json`. Row: `docs/concepts/rows/cap-nullspace-4r.json`.
 **4 joints counted (4-DOF, the user prefers 3), 0 passive translations.**
 
+## Verdict: DEAD - closes the spring-set cap-pole null-space class (4-DOF; the user prefers 3)
+
+**Claim cell (springs on J0 + J2 + J3, spring law exact at deflection <= 170 deg): 57.70 frozen exact Bench(110,360)**
+(score 79.0; reach 0.744, follow 1.0, ib14 0.548, ib10 0.359, contact 0.069, overhead 11/28, near-touch 64.51, 1 flood
+island dropped, min th margin 5.04, min J0-J1-J2 margin 5.00), 46.32 fast Bench(60,160). The plain cap 3R it replaces,
+searched to the gate on the same kit: 60.61 frozen exact (54.15 fast). The redundancy buys 2.9 frozen points for a 4th
+counted joint (+25 complexity) and three springs that must wind ~+-170 deg; the lead is 18.28. Gate on the claim-law
+sweep: 0.27 / 0.11 / 0.12 score points (262 configs, seeded from 768 earlier ones; 1267 configs in all incl. the control).
+Limiter: hub 2, fitted ~117-121 mm from GH, 0.00 in band in every searched cell.
+
 ## Deeper-version prompt (answered before modelling)
 
 1. **What a top mechanism designer would do that the spec does not ask for.** Treat c-J1-J2-u3 as what it is - a
@@ -55,12 +65,15 @@ own angle q0 on a 1-deg grid. Three corrections to the proposer's scratch model 
 | plain cap 3R control, searched (198 configs, gate passed) | 54.15 (54.45 at K6 1 mm) | 60.61 | 0.756 | 0.459 | 0.021 | 10/28 | 0.06 |
 | sprung 4R, search best 1 (397 configs) | 49.62 (51.71 at K6 1 mm) | 59.44 | 0.750 | 0.494 | 0.038 | 10/28 | 0.00 |
 | sprung 4R, search best 2 (552 configs; springs J0 + J2 + J3) | 47.28 (47.33 with the flood; 48.77 at K6 1 mm) | 59.05 | 0.739 | 0.542 | 0.072 | 11/28 | 0.00 |
+| sprung 4R, search best 3 (723 configs, still improving fast) | 45.47 (47.55 at K6 1 mm) | 57.87 | 0.739 | 0.549 | 0.067 | 10/28 | 0.00 |
+| **sprung 4R, spring law exact (dmax 170), CLAIM CELL** (262-config sweep, gate passed) | 46.32 (46.97 at K6 1 mm + flood; near-touch 54.22) | **57.70** (near-touch 64.51) | 0.744 | 0.548 | 0.069 | 11/28 | 0.00 |
+| sprung 4R, conservative springs (dmax 120), top 25 re-worn | 102.43 best | - | | | | | |
 | ghost (bound only, oracle; proposer, in-sample, K2 off) | 44.97 quoted, 48.55 on file | not worn | | | | | |
 
 Like-for-like (same kit, same checks, both searched to the gate on the same bench): the sprung 4R beats the plain cap
-3R it replaces by 6.9 points fast (47.28 vs 54.15) but by **1.6 points frozen exact (59.05 vs 60.61)**, for one more
+3R it replaces by 7.8 points fast (46.32 vs 54.15) but by **2.9 points frozen exact (57.70 vs 60.61)**, for one more
 counted joint (+25 complexity, 4-DOF) and three springs. Against the lead (conecut-knee-knuckle-3r v_gap 18.28, 3
-joints) it is 40.8 points behind.
+joints) it is 39.4 points behind.
 
 ## Limiter (measured)
 
@@ -91,6 +104,8 @@ that does not hold on 360 new poses (near-touch gap 56.28 fast / 66.40 frozen).
   N.mm/deg reaches ~96 N.mm at 170 deg with 40 N.mm preload, under a ~128 N.mm yield estimate) keeps the best cells at
   46-48 fast; **dmax 120 (a conservative torsion-spring range) collapses them to 102-191 fast** (best 2: 191.30, reach
   0.19, follow 0.15). The cell lives only with springs that wind ~+-170 deg.
+- **Motion preview (claim cell, the viz loop's path-tracked spring):** 233 of 239 frames close in range; J0 snaps
+  46 deg at frame 91 (a basin change the metal would feel as a jump), 4 frames have no closing state.
 - **Feel:** with 40 N.mm preload per spring and the deflections above the centring torque reaches ~100-150 N.mm at the
   ends - ~1-1.5 N at a 100-mm cuff lever, felt as a pull toward rest on every pose.
 

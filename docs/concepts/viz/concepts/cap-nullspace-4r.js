@@ -1,6 +1,6 @@
 /* cap-nullspace-4r - cap-pole redundant 4R whose 1-D null-space is set by two preloaded torsion springs (J0 to the
  * base, J3 to the arm-end plate) inside own-angle stops (docs/concepts/models/cap-nullspace-4r.py; params = the
- * model's best spring cell on Bench(60,160) fast, see P.src; hub 2 sits at its fitted 121 mm: the measured limiter).
+ * model's best spring cell on Bench(60,160) fast, see P.src; hub 2 sits at its fitted 117 mm: the measured limiter).
  * J0 (counted joint, O20, scapula-fixed axis c on the back of the shoulder, a0 from the cap pole toward bearing beta)
  * -> link 0 (12 x 3 Ti, arc a0) -> J1 (O20, rest at the cap pole b; dowel stop on the J0-J1-J2 fold) -> link 1 (a1)
  * -> J2 (O20; dowel stop on the J1-J2-J3 fold) -> link 2 (a2) -> J3 (O20, humerus-fixed) -> K7 neck -> BOTTOM / cuff.
@@ -10,7 +10,7 @@
  * a descent that runs > 10 deg (a basin snap) is flagged red, not smoothed. 4 joints, 0 passive, 0 passive translations. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = K.D2R;
-  const P = {"src": "search best (k=best2: 552 configs ES, 47.28 fast / 59.05 frozen exact Bench(110,360)), springs on J0 + J2 + J3, sig -1", "b_az": 43.2, "b_el": 59.9, "a0": 25.0, "beta": 298.78, "a1": 57.39, "a2": 63.55, "wd": 83.9, "wa": -14.24, "sB": 1, "sig": -1, "m": 5.21, "k": [0.638, 0.0, 0.166, 0.208], "r": [-10.49, -3.15, 55.54, -141.51], "faces": {"J0": 57.0, "J1": 53.0, "J2": 121.2, "J3": 73.0}, "stack": 12.25, "cuff_at": 165, "lv0": [60.1, 60.1, 60.1, 53.0, 53.0, 53.0], "lv1": [56.1, 54.8, 69.2, 93.5, 117.7, 121.2], "lv2": [125.4, 125.2, 101.0, 73.6, 85.0, 76.2], "lvn": [73.0, 73.8, 77.0, 87.0, 89.8, 90.0]};
+  const P = {"src": "CLAIM cell (spring law exact, dmax 170): 46.32 fast / 57.70 frozen exact Bench(110,360); springs on J0 + J2 + J3, sig -1", "b_az": 43.2, "b_el": 59.9, "a0": 25.84, "beta": 298.78, "a1": 56.39, "a2": 63.55, "wd": 83.9, "wa": -14.24, "sB": 1, "sig": -1, "m": 5.0, "k": [0.6486, 0.0, 0.0756, 0.2616], "r": [-9.45, -3.15, 44.18, -143.35], "faces": {"J0": 57.0, "J1": 53.8, "J2": 117.0, "J3": 73.0}, "stack": 12.25, "cuff_at": 165, "lv0": [60.1, 60.1, 60.1, 53.8, 53.8, 53.8], "lv1": [56.9, 60.7, 68.5, 89.3, 113.5, 117.0], "lv2": [120.2, 121.0, 96.8, 74.0, 85.0, 76.2], "lvn": [73.0, 73.8, 77.0, 87.0, 89.8, 90.0]};
 
   const b = K.bvec(P.b_az, P.b_el), w3 = K.wdir(P.wd, P.wa);
   const t1 = V.unit(V.cross(b, [0, 1, 0])), t2 = V.cross(b, t1);

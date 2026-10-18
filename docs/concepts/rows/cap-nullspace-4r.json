@@ -6,24 +6,24 @@
  "active_dof": 4,
  "passive_dof": 0,
  "passive_translations": 0,
- "status": "screened",
+ "status": "dead",
  "t_ideated": null,
- "t_screened": "2026-10-18T03:09:30Z",
+ "t_screened": "2026-10-18T03:20:31Z",
  "reach": 0.825,
  "follow": 1.0,
- "inband14": 0.5422,
- "inband10": 0.3642,
- "contact": 0.04,
- "gap": 47.33,
+ "inband14": 0.547,
+ "inband10": 0.356,
+ "contact": 0.0352,
+ "gap": 46.32,
  "v_reach": null,
  "v_follow": null,
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 0,
- "verdict": "",
- "limiter": "",
- "note": "",
+ "n_configs": 1267,
+ "verdict": "DEAD (4-DOF, cx ~34.5; closes the spring-set cap-pole null-space class): 57.7 frozen exact Bench(110,360) (score 79.0; reach 0.7444, ib14 0.5476, contact 0.069, overhead 11/28, 1 flood island) vs its own plain cap 3R control 60.61 (searched to the gate, same kit) - 2.9 points for one more counted joint and three springs that must wind ~+-170 deg - and 39 points behind the lead (18.28, 3 joints). Fast 46.32 (sweep best 45.58) does not survive frozen; frozen plateau 59.44 -> 59.05 -> 57.87 -> 57.7. Gate on the claim-law sweep passed.",
+ "limiter": "hub 2: fitted 121 mm from GH at the cap pole, in band 0.0 frozen (control 0.06); the 1-D null-space is spent on hub 0 / link 0 / hub 1 (0.98-1.0 in band); contact grows frozen (plain-gap search); springs must wind ~+-170 deg (dmax 120 collapses the cell to 102+ fast); J0 sweeps ~320 deg about the back seat",
+ "note": "Assembly mode fixed (both fold stops pin the branch signs; the proposer's any-branch 69.80 / 70.36 -> 63.75 fast, 70.64 frozen exact). Flood: 1432-node envelope grid, path-tracked spring descent, symmetric edges, push / snap <= 10 deg. Searches: random + elitist ES on Bench(60,160) fast (local, niced, farm closed); claim = Bench(60,160) levels frozen on Bench(110,360) exact, K6 1 mm. Gate (score points, gain 2nd half / last third / top-5 spread): all spring sweeps 1.42 / 0.17 / 0.13; dmax-170 sweep 0.27 / 0.11 / 0.12 over 262; control 0.71 / 0.48 / 0.48. Plain-gap objective (not near-touch): near-touch gaps reported alongside.",
  "doc": "docs/concepts/cap-nullspace-4r.md",
  "complexity": 34.5,
  "mechanism": {
@@ -36,35 +36,142 @@
   "components": "4 x O20 v5 hub (MR117-2RS pair, 12.25 stack; J0 on the scapula handler's ring, no tab); preloaded double-leg torsion springs on J0 (to the base), J2 and J3 (to the arm-end plate) - the best cell uses three, the proposer's claim cell two (J0 + J3); ISO 8734 O2 dowel stops in arc slots on the J0-J1-J2 and J1-J2-J3 folds (own angles, >= 5 deg); 3 x 12x3 Ti straps; K7 neck"
  },
  "best_params": {
-  "policy": "spring",
-  "a1": 57.389,
-  "a2": 63.551,
-  "wd": 83.899,
-  "wa": -14.235,
-  "q": 0.979,
-  "a0": 25.0,
-  "beta": 298.782,
+  "b_az": 43.2,
+  "b_el": 59.9,
+  "a0": 25.844339286882043,
+  "beta": 298.7815130295237,
+  "a1": 56.38737789088655,
+  "a2": 63.551277395894246,
+  "wd": 83.89917039229606,
+  "wa": -14.235323616842141,
   "sB": 1,
   "sig": -1,
-  "m": 5.212,
+  "m": 4.216648134599367,
+  "T": 180.0,
+  "nq": 360,
+  "policy": "spring",
   "k": [
-   0.638,
+   0.189,
    0.0,
-   0.166,
-   0.208
+   0.0,
+   0.261
   ],
   "r": [
-   -10.489,
-   -3.154,
-   55.536,
-   -141.51
+   8.0,
+   0.0,
+   0.0,
+   -115.0
   ],
-  "b_az": 43.2,
-  "b_el": 59.9
+  "q": 0.9788580455234306,
+  "connect": 1,
+  "L1": 60.0,
+  "L2": 62.0,
+  "Ll0": 66.0,
+  "Ll1": 66.0,
+  "Ll2": 72.0,
+  "q1min": 40.0,
+  "sigma3": -1,
+  "dmax": 170,
+  "k0": 0.6485520365245306,
+  "k1": 0.0,
+  "k2": 0.07557101969037763,
+  "k3": 0.26159573494163,
+  "r0": -9.445264518247381,
+  "r1": -3.1537727533644695,
+  "r2": 44.17777352227466,
+  "r3": -143.34753188954096
  },
  "claim_bench": "Bench(110,360) exact frozen (Bench(60,160) levels, K6 1 mm, full-grid flood)",
- "frozen_exact": null,
- "control": null,
- "ghost_bound": null,
- "gate": null
+ "frozen_exact": {
+  "gap": 57.7,
+  "reach": 0.7444,
+  "follow": 1.0,
+  "inband14": 0.5476,
+  "inband10": 0.3593,
+  "contact": 0.069,
+  "gap_near1": 64.51,
+  "min_metal_skin": 0.16,
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.3929,
+   "n_clip": 10,
+   "follow": 1.0,
+   "n_taken": 21,
+   "inband14": 0.582,
+   "inband10": 0.4503
+  },
+  "inband_member": {
+   "hub0": 1.0,
+   "hub1": 0.9789,
+   "hub2": 0.0,
+   "hub3": 0.6888,
+   "link0": 0.9949,
+   "link1": 0.3673,
+   "link2": 0.1883,
+   "neck": 0.7952
+  },
+  "islands_dropped": 1,
+  "flood": {
+   "grid_conn": 0.806,
+   "off_grid": 0
+  },
+  "ws_taken": 296,
+  "th_fold_margin_min": 5.04,
+  "sub_margin_min": 5.0,
+  "q0_range": [
+   -165.0,
+   151.0
+  ],
+  "fit_fast_k6_1mm": 46.97,
+  "honest": true
+ },
+ "control": {
+  "name": "plain cap 3R (J1 locked at the cap pole), same kit",
+  "base_fast": 60.79,
+  "base_frozen_exact": 66.26,
+  "searched_fast": 54.15,
+  "searched_fast_k6_1mm": 54.45,
+  "searched_frozen_exact": 60.61,
+  "gate": {
+   "n": 198,
+   "best_score": 80.43,
+   "best_gap": 53.83,
+   "gain_2nd_half": 0.71,
+   "gain_last_third": 0.48,
+   "top5_spread": 0.48,
+   "converged": true
+  }
+ },
+ "ghost_bound": {
+  "fast_quoted": 44.97,
+  "fast_on_file": 48.55,
+  "note": "oracle, in-sample, K2 off, proposer's psi-grid model; not worn frozen (no unpowered realisation)"
+ },
+ "gate": {
+  "all_spring_sweeps": {
+   "n": 1030,
+   "best_score": 83.53,
+   "best_gap": 45.3,
+   "gain_2nd_half": 1.42,
+   "gain_last_third": 0.17,
+   "top5_spread": 0.13,
+   "converged": false
+  },
+  "dmax170_sweep": {
+   "n": 262,
+   "best_score": 83.43,
+   "best_gap": 45.58,
+   "gain_2nd_half": 0.27,
+   "gain_last_third": 0.11,
+   "top5_spread": 0.12,
+   "converged": true
+  }
+ },
+ "gap_near1_fast": 54.22,
+ "frozen_other": {
+  "proposer_cell_sig_fixed": 70.64,
+  "best1": 59.44,
+  "best2": 59.05,
+  "best3_wrapped_law": 57.87
+ }
 }

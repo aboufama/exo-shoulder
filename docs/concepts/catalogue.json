@@ -3195,7 +3195,7 @@
   "name": "Cap-pole redundant 4R (spare J1 on a back-seat J0): null-space set by two preloaded torsion springs and own-angle stops (the MVP1 claim), with the clearance-chosen ghost as its bound",
   "family": "track jump / 4-DOF redundant spherical chain (Keemink 2018 TNSRE 26(4)), plain pins, spring-determined",
   "lens": "round103:clearance-nullspace-4r (lens 2: the low-complexity cell of the 4-DOF class)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-18T01:42:28Z",
   "source": "round 103 (J3, track jump) judge (docs/concepts/round103_ideation.md)",
   "merged_from": [
