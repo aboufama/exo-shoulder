@@ -173,6 +173,8 @@ L 9.836) on the model's cell-B dict. CB_EXACT=1, local, niced (load 12 on 4 core
 | V3 th margin (own state) | min 5.181 (pose 313, forced, dK 45.62); dwell min 5.389 (pose 229); 0 poses < 5 |
 | V4 th margin with K play | dwell |dth/dK| <= 0.36, forced <= 0.438. Nominal pad play 0.638 (dwell) + 0.23 (forced): min 5.088, **0 poses dropped, gap unchanged 17.96**; tight 0.292 and parent-groove 0.22: same |
 | continuity flood | connected_full 17.96 (0 dropped; envelope 1065 / forced 526 all connected); kNN 19.64 (6 forced dropped; desmo-conecut's verified wear reads 20.73 vs 19.04 the same way); bench-only 49.98 (the known sparse-bench artefact) |
+| held out (frozen exact, same harness) | **22.70** reproduced: reach 0.6912 (658/952), ib14 0.8967, contact 0.0149 (13), overhead 19/71, fold 262, parts 0; th min 5.11, with K play 5.017, 0 dropped; flood connected_full 22.70, kNN 30.93 (desmo-conecut's held kNN 32.18); dump docs/alignment/remeasure/lowarm-halfring-knuckle-3r_held_perpose.json recomputes 22.70 |
+| paired vs the lead, HELD | **+0.32 worse** (22.70 vs conecut 22.38): in-band +0.33, reach +0.11, contact -0.11; CI90 [-0.34, +0.68], P(better) 0.26; pooled bench + held +0.13 worse, P(better) 0.42 (docs/alignment/remeasure/lowarm-halfring-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json) |
 | paired vs the lead (alignment_paired compare, bench) | -0.32 (A 17.97 vs conecut 18.29): ONE discordant pose (316: contact on the lead, taken here at 0.048 mm); split reach -0.28, contact -0.27, in-band +0.22; bootstrap CI90 [-1.55, +0.42], P(better) 0.64 |
 
 Findings:
@@ -183,7 +185,7 @@ Findings:
 2. **But the 0.32 over cell A / the lead is one pose selected on the claim bench**: the lift (h, r_full, L) was chosen by
    a 727-config scan of the frozen-exact Bench(110,360) surrogate - the bench the claim is measured on - and the gain is
    pose 316 grazing at 0.048 mm (paired CI90 [-1.55, +0.42]). The rule is "claim on held out": held out reads 22.70
-   (claim; see held row below) vs cell A 22.64 and the lead's 22.38 - no transfer.
+   (reproduced) vs cell A 22.64 and the lead's 22.38 - paired on held out it is 0.32 WORSE than the lead (P(better) 0.26).
 3. **The design as claimed fails its own dwell-hold gate** (0.638 deg with the hard pad, 0.292 at 5-10 micron
    tolerances, gate 0.25): unmeasured here is what the extra dwell play does to near-touch poses through the chain's
    self-motion - pose 139 (plane -60 / elev 60 / axial 105) is taken at 0.072 mm and 203 / 379 at 0.72-0.75 mm; with
