@@ -1,0 +1,88 @@
+{
+ "n": 184,
+ "boss_amount_mm": [
+  1.76,
+  5.69
+ ],
+ "knee_amount_mm": [
+  0.0,
+  3.72
+ ],
+ "R_boss": 5.83,
+ "tp": 2.75,
+ "lead_gap_mm": [
+  0.5,
+  0.5
+ ],
+ "claim_gap_min_mm": -5.083,
+ "claim_poses_interfering": 184,
+ "claim_interf_p50_mm": -5.048,
+ "worst": [
+  {
+   "gap_claim": -5.08,
+   "gap_lead": 0.5,
+   "j": 152,
+   "kind": "ws",
+   "pose": [
+    60.0,
+    165.0,
+    -90.0
+   ]
+  },
+  {
+   "gap_claim": -5.08,
+   "gap_lead": 0.5,
+   "j": 140,
+   "kind": "ws",
+   "pose": [
+    45.0,
+    165.0,
+    -90.0
+   ]
+  },
+  {
+   "gap_claim": -5.08,
+   "gap_lead": 0.5,
+   "j": 219,
+   "kind": "ws",
+   "pose": [
+    150.0,
+    120.0,
+    -60.0
+   ]
+  },
+  {
+   "gap_claim": -5.08,
+   "gap_lead": 0.5,
+   "j": 210,
+   "kind": "ws",
+   "pose": [
+    135.0,
+    135.0,
+    -45.0
+   ]
+  },
+  {
+   "gap_claim": -5.07,
+   "gap_lead": 0.5,
+   "j": 174,
+   "kind": "ws",
+   "pose": [
+    90.0,
+    120.0,
+    -90.0
+   ]
+  },
+  {
+   "gap_claim": -5.06,
+   "gap_lead": 0.5,
+   "j": 36,
+   "kind": "clip",
+   "pose": [
+    82.0,
+    132.0,
+    -82.0
+   ]
+  }
+ ]
+}
