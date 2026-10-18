@@ -730,11 +730,7 @@
   },
   {
    "where": "stage-1 groove insert (link 2, hub 2)",
-   "fit": "440C ring sector, through-hardened 58-60 HRC, 1.5 thick, r 6.05..10.96 over 123.9 deg (0.96 past O20 under link 2's 0.8 roof lip); the groove = a 2-axis wire-EDM THROUGH slot 1.520 +-0.003 wide, walls parallel to u2, centreline = the pin's locus at the built level F+0.86 through the model's blended law (profile +-0.005 to the J2 bore; 29 arcs a side in the CAD, 4.4 um from the exact offset); pressed in link 2's pocket F+0.11..F+1.61, keyed by an ISO 8734 1 m6 x 4 dowel reamed at assembly; K LEAD +0.25 deg: phase the key +0.116 deg of q2 (red team)"
-  },
-  {
-   "where": "stage-1 relief in link 2's J2 pad",
-   "fit": "r >= 6.05 over 148.8 deg, F+3.15..F+0.11 (the short arm's sweep in link 2's frame + 2 deg): 3+2-axis from below with an O3 end mill; leaves 0.55 mm of the MR117 seat wall over the sector (unpowered MVP1; check the bearing press with a plug gauge)"
+   "fit": "440C ring sector, through-hardened 58-60 HRC, 1.5 thick, r 6.05..10.96 over 123.9 deg (0.96 past O20 under link 2's 0.8 roof lip); the groove = a 2-axis wire-EDM THROUGH slot 1.520 +-0.003 wide, walls parallel to u2, centreline = the pin's locus at the built level F+0.86 through the model's blended law (profile +-0.005 to the J2 bore; 29 arcs a side in the CAD, 4.4 um from the exact offset); under link 2's Ti roof (to F+3.65, one with the J2 pad), the insert layer F+0.11..F+1.61, keyed by an ISO 8734 1 m6 x 4 dowel reamed at assembly; K LEAD +0.25 deg: phase the key +0.116 deg of q2 (red team)"
   },
   {
    "where": "stage-1 pin in the crank's short arm",
@@ -1524,20 +1520,37 @@
  "l1_design": "l1_desmo-conecut",
  "level": "L2 user-style (full CAD of the generation-9 winner)",
  "build_fixes_2026_10_18": {
-  "stage1_raised": {
-   "delta_mm": 0.0,
-   "glev_equivalent": -1.0,
-   "why": "the model's stage 1 (groove F+0.11..1.61, short arm F-1.83..-0.33) sits inside link 1b's J2 lower plate and under its strap: built above link 1b in a relief of link 2's J2 pad, the groove re-cut on the pin's locus at the built level through the same blended law (K law unchanged)"
-  },
   "k_cap": "plain v5 cap, no clock spring",
   "link_margin_mm": {
    "l1b": 0.1,
    "l2": 0.0
   },
-  "link2_climb_max_deg": 70.0
+  "link2_climb_max_deg": 70.0,
+  "stage1": {
+   "mode": "model",
+   "level_over_hub2_face_mm": {
+    "insert": [
+     0.111,
+     1.611
+    ],
+    "roof": [
+     1.611,
+     3.65
+    ],
+    "short_arm": [
+     -1.825,
+     -0.325
+    ],
+    "pin": [
+     -1.825,
+     1.225
+    ]
+   },
+   "why": "built at the VERIFIED model's levels (the verified metal); it crosses link 1b's J2 lower plate and strap by 1.39-1.50 mm (R6) and the short arm cannot attach to the crank boss (it hangs under link 1b's strap; separate part D9-03). Lifting stage 1 above link 1b breaks the stage-1 transmission: stage1_level_scan.json (0 pins with PA <= 34.47 and groove radius >= 1.0 at F+4.6..6.03; 2 at F+3.9; 21 at the model level). A discovery-loop item."
+  }
  },
  "drive_build": {
-  "kind": "desmo cell B (spring-free, roller-free, positive both ways): stage 1 = crowned O1.5 440C pin on the bell crank's short arm in a 1.52 wire-EDM through slot of a 440C insert in link 2's J2 ring (BUILT ABOVE link 1b: the stack fix); bell crank on link 1b (2 x MR63ZZ on an O3 pin, D3 stack); stage 2 = ISO 8734 O1.5 440C nose (link 1a's boss) in the 1.52 slot of the crank's tip plate (UV wire EDM)",
+  "kind": "desmo cell B (spring-free, roller-free, positive both ways): stage 1 = crowned O1.5 440C pin on the bell crank's short arm in a 1.52 wire-EDM through slot of a 440C insert in link 2's J2 ring (at the verified model's level: crosses link 1b's J2 plate / strap, the open stage-1 item); bell crank on link 1b (2 x MR63ZZ on an O3 pin, D3 stack); stage 2 = ISO 8734 O1.5 440C nose (link 1a's boss) in the 1.52 slot of the crank's tip plate (UV wire EDM)",
   "mu": 0.15,
   "stage1": {
    "levels_over_hub2_face_mm": {

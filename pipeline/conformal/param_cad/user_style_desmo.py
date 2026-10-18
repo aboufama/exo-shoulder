@@ -556,9 +556,9 @@ def fits(s1i, ci):
              f"walls parallel to u2, centreline = the pin's locus at the built level F+{lv['groove_mid']:.2f} through the model's blended law (profile +-0.005 to the J2 bore; "
              f"{s1i['slot']['arcs_per_side']} arcs a side in the CAD, {s1i['slot']['max_dev_from_exact_offset_mm'] * 1000:.1f} um from the exact offset); pressed in link 2's pocket "
              "F+{:.2f}..F+{:.2f}, keyed by an ISO 8734 1 m6 x 4 dowel reamed at assembly; K LEAD +0.25 deg: phase the key +0.116 deg of q2 (red team)".format(lv["insert"][0], lv["insert"][1]))),
-        dict(where="stage-1 relief in link 2's J2 pad", fit=(f"r >= {REL_RIN:g} over {s1i['relief_sector_deg']:.1f} deg, F+{UP:g}..F+{lv['relief'][1]:.2f} (the short arm's sweep "
+        *([dict(where="stage-1 relief in link 2's J2 pad", fit=(f"r >= {REL_RIN:g} over {s1i['relief_sector_deg']:.1f} deg, F+{UP:g}..F+{lv['relief'][1]:.2f} (the short arm's sweep "
              "in link 2's frame + 2 deg): 3+2-axis from below with an O3 end mill; leaves 0.55 mm of the MR117 seat wall over the sector (unpowered MVP1; check the bearing "
-             "press with a plug gauge)")),
+             "press with a plug gauge)"))] if s1i.get("mode") == "raised" else []),
         dict(where="stage-1 pin in the crank's short arm", fit=(f"ISO 8734 1.5 m6 440C ground +-0.002, crowned R{CROWN_R:g} over the groove band (end drop {s1i['crown']['end_drop_mm']:.3f} "
              "vs the 4.76-deg tilt mismatch), pressed H7/m6 (reamed 1.500 -0.005/0) through the 1.5 mm short arm along u2, Ra <= 0.1, greased; true position to the crank bore "
              "0.01 (a_s 9.529 +-0.01: a hole error is a K-law error, +-0.095 deg)")),
@@ -857,10 +857,13 @@ def main():
                             label=(f"desmo-conecut-knuckle-3r (verified config: conecut-knee + J3 stop [{J3MIN:.2f}, {J3MAX:.2f}] + the spring-free desmo K drive cell B; verified "
                                    "18.98 / held 23.19), full CAD in the user's style"),
                             level="L2 user-style (full CAD of the generation-9 winner)",
-                            build_fixes_2026_10_18=dict(stage1_raised=dict(delta_mm=s1i["delta_mm"], glev_equivalent=s1i["glev_equivalent"],
-                                                                           why="the model's stage 1 (groove F+0.11..1.61, short arm F-1.83..-0.33) sits inside link 1b's J2 lower "
-                                                                               "plate and under its strap: built above link 1b in a relief of link 2's J2 pad, the groove "
-                                                                               "re-cut on the pin's locus at the built level through the same blended law (K law unchanged)"),
+                            build_fixes_2026_10_18=dict(stage1=dict(mode=s1i.get("mode"), delta_mm=s1i["delta_mm"], glev_equivalent=s1i["glev_equivalent"],
+                                                                           why=("the model's stage 1 (groove F+0.11..1.61, short arm F-1.83..-0.33) sits inside link 1b's J2 lower "
+                                                                                "plate and under its strap: built above link 1b in a relief of link 2's J2 pad, the pin re-placed "
+                                                                                "at the built level through the same blended law (K law unchanged)") if s1i.get("mode") == "raised" else
+                                                                               ("built at the VERIFIED model's levels (the verified metal): it crosses link 1b's J2 lower plate and strap "
+                                                                                "(R6) and the short arm cannot attach to the crank boss (separate part D9-03); lifting stage 1 above "
+                                                                                "link 1b breaks its transmission (stage1_level_scan.json): a discovery-loop item")),
                                                         k_cap="plain v5 cap, no clock spring", link_margin_mm=dict(l1b=USS.LINK_MARGIN["l1b"], l2=USS.LINK_MARGIN["l2"]),
                                                         link2_climb_max_deg=UC.L2_CLIMB),
                             built_with=("pipeline/conformal/param_cad/user_style_desmo.py (imports user_style_conecut (gen-8 full CAD: slot-end fix, link 2 70-deg drop, J3 "
