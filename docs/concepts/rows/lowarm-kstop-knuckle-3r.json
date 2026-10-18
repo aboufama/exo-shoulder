@@ -186,7 +186,41 @@
   "reaction_N_per_Nm": 133
  },
  "mechanism": {
-  "joints": {
+  "stops": [
+   "K-own stop A (M1.6 set screw on a lug, inside hub K)",
+   "K-own stop B (groove end 46.6)",
+   "J2 low-end dowel at K-eq 46.35",
+   "J3 dowel (conecut)",
+   "knee window"
+  ],
+  "loops": 2,
+  "springs": 0,
+  "sensed_passive": 0,
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  },
+  "complexity": "16.75 (lowarm record 16.5 + 1 bought part; 16.5 if simplicity.py leaves the set screw out as a fastener)",
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 5,
+  "closed_loops": 3,
+  "custom_parts": 13,
+  "sliding_pairs": 2,
+  "rolling_pairs": 0,
+  "springs_or_flexures": 0,
+  "catalogue_parts": 15,
+  "joints_desc": {
    "active": [
     "J1 O20 v5",
     "J2 O20 v5 (MR117 pair ISO P5 stated)",
@@ -204,18 +238,8 @@
     "stage 2: link 1a's O1.5 nose in the crank-tip slot"
    ]
   },
-  "stops": [
-   "K-own stop A (M1.6 set screw on a lug, inside hub K)",
-   "K-own stop B (groove end 46.6)",
-   "J2 low-end dowel at K-eq 46.35",
-   "J3 dowel (conecut)",
-   "knee window"
-  ],
-  "loops": 2,
-  "springs": 0,
-  "sensed_passive": 0,
-  "cuff_knee": "two-pin, MR63ZZ pairs, outside the count",
-  "complexity": "16.75 (lowarm record 16.5 + 1 bought part; 16.5 if simplicity.py leaves the set screw out as a fastener)"
+  "joints": 8,
+  "schema_note": "verifier 2026-10-18: the claim's record lacked docs/SIMPLICITY.md's count fields (tools/simplicity.py read 0); merged lowarm-halfring-knuckle-3r's record (16.5) + 1 bought part (the M1.6 stop-A set screw) = 16.75; the descriptive joint list moved to joints_desc. The pad deletion removes no counted part (the parent's pad was integral to link 1b)."
  },
  "cells": {
   "K": "this row (step 0 measured)",

@@ -666,6 +666,14 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      - Red team: a TOLERANCE CLIFF. The offset delta at 5.0 instead of 4.5 reads 27.53 (37 E-over-carriage jams), so
        the cliff is ~0.5 deg away. A bump +0.2 mm tolerance reads 14.88.
      - Its in-loop alignment audit is pending. The user was told the option-2 number moved: 94.63 verified, unaudited.
+   - *15:25:* round 106 closed (fe3bfed). Winner offset-shortcar-relay-4r, verified 14.76 / held 17.77, ledger final WATCH
+     (skeptic 15:16Z). It is the best 4-joint design; freek (15.40, cx 33.25) and it form a Pareto pair.
+     - Round 107 (jump) was launched fresh with n_rounds 1 (wf_8a7e4ba3-f33) on the closer's four levers: coil on the
+       carriage lug (diagnostic 14.23), bump window, L-lug bracket away from the cliff, build margin. 13.75 needs +0.60
+       of in-band.
+     - **Generation CAD + stills for the 4-joint winners (freek J4, offset-shortcar J6) are DEFERRED** until the user
+       answers the open 4-joint question, so the box is not spent on a class the user may reject. Round 107's levers
+       serve as the offset-shortcar polish.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
