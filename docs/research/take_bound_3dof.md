@@ -203,7 +203,8 @@ fast Bench(60,160), ~5 s each):
 
 The rule moves H1 by **+0.05 fast** (in-band only, the knee link 0.929 -> 0.925 in band; no take, contact or jam
 changes), under the lens's 1-point trigger, so no stack-rule re-fit was run. H1's jam bias is ~0.05, not the crest's
-jam-steered ~8 fast points: H1's E strap does not rise under the knee's sweep the way the crest's does. Frozen exact Bench(110,360) wears of both stk values were started; if they land inside the time box their numbers are appended to `take_bound_3dof_h1_stack.json` (otherwise: unmeasured frozen, time box).
+jam-steered ~8 fast points: H1's E strap does not rise under the knee's sweep the way the crest's does. **Frozen exact Bench(110,360)** (same file, `frozen_exact_Bench110_360`): the verified config reproduces **27.20**;
+at the stack rule it reads **27.28 (+0.08)**, with identical takes (237), contacts and near-touch (1 mm 31.75, 2 mm 46.85).
 Not modelled here (both are build rules from the crest audit): the E strap's stand-up above the boss face (up to 0.125
 mm at the crest; skim it flush inside the knee's sweep) and a +0.1 / +0.2 mm tolerance probe. The column stays
 report-only: no number here goes under H1's 27.20, so nothing goes to the verifier.

@@ -22,5 +22,189 @@
   "stk5.6815_verified": "{'gap': 23.64, 'reach': 0.7, 'follow': 0.95, 'inband14': 0.8979, 'inband10': 0.5521, 'contact': 0.0343} why {'fold': 36, 'slide': 5, 'flip': 0, 'closure': 0, 'skin': 6, 'parts': 4, 'contact': 0} knee {'ang': [103.0, 148.7], 'br': 1.0, 'drift_span': [18.8, 21.4], 'radial_span': 0.0, 'tr': np.float64(84.7), 'stk': 5.6815} f [49.9, 60.6, 77.2] seats {'tilt_deg': [16.7, 16.3, 30.7], 'a_deg': [41.0, 68.3], 'offset_mm': [0.0, 0.0, 10.7], 'rest_err_deg': 0.0001} 5s fast",
   "stk5.90_stackrule": "{'gap': 23.69, 'reach': 0.7, 'follow': 0.95, 'inband14': 0.8974, 'inband10': 0.5496, 'contact': 0.0343} why {'fold': 36, 'slide': 5, 'flip': 0, 'closure': 0, 'skin': 6, 'parts': 4, 'contact': 0} knee {'ang': [103.0, 148.7], 'br': 1.0, 'drift_span': [18.8, 21.4], 'radial_span': 0.0, 'tr': np.float64(84.7), 'stk': 5.9} f [49.9, 60.6, 77.2] seats {'tilt_deg': [16.7, 16.3, 30.7], 'a_deg': [41.0, 68.3], 'offset_mm': [0.0, 0.0, 10.7], 'rest_err_deg': 0.0001} 6s fast"
  },
- "frozen_exact_Bench110_360": {}
+ "frozen_exact_Bench110_360": {
+  "stk5.6815_verified": {
+   "frozen": {
+    "gap": 27.2,
+    "reach": 0.6583,
+    "follow": 0.9636,
+    "inband14": 0.8953,
+    "inband10": 0.5539,
+    "contact": 0.0256
+   },
+   "why": {
+    "fold": 97,
+    "slide": 14,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 7,
+    "contact": 9
+   },
+   "audit": {
+    "near_touch_min_mm": 0.09,
+    "near_touch_low": [
+     {
+      "mm": 0.09,
+      "i": 7,
+      "kind": "clip",
+      "plane": 30.0,
+      "elev": 148.11460876464844,
+      "axial": -59.61522674560547
+     },
+     {
+      "mm": 0.31,
+      "i": 318,
+      "kind": "ws",
+      "plane": 60.0,
+      "elev": 165.0,
+      "axial": -75.0
+     },
+     {
+      "mm": 0.55,
+      "i": 317,
+      "kind": "ws",
+      "plane": 60.0,
+      "elev": 150.0,
+      "axial": -45.0
+     },
+     {
+      "mm": 0.58,
+      "i": 12,
+      "kind": "clip",
+      "plane": 30.0,
+      "elev": 142.3291778564453,
+      "axial": -58.43452453613281
+     },
+     {
+      "mm": 0.75,
+      "i": 200,
+      "kind": "ws",
+      "plane": 0.0,
+      "elev": 75.0,
+      "axial": 30.0
+     }
+    ],
+    "gap_near1": 31.75,
+    "near1_poses": 8,
+    "gap_near2": 46.85,
+    "near2_poses": 27,
+    "overhead140": {
+     "ws": 28,
+     "reach": 0.1786,
+     "clip": 10,
+     "follow": 0.6,
+     "inband14": 0.9155,
+     "inband10": 0.6554,
+     "why_not": {
+      "fold": 15,
+      "slide": 7,
+      "flip": 0,
+      "closure": 0,
+      "skin": 0,
+      "parts": 0,
+      "contact": 5
+     }
+    }
+   },
+   "mode": "exact",
+   "bench": [
+    110,
+    360
+   ],
+   "secs": 278.1
+  },
+  "stk5.90_stackrule": {
+   "frozen": {
+    "gap": 27.28,
+    "reach": 0.6583,
+    "follow": 0.9636,
+    "inband14": 0.8945,
+    "inband10": 0.5508,
+    "contact": 0.0256
+   },
+   "why": {
+    "fold": 97,
+    "slide": 14,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 7,
+    "contact": 9
+   },
+   "audit": {
+    "near_touch_min_mm": 0.09,
+    "near_touch_low": [
+     {
+      "mm": 0.09,
+      "i": 7,
+      "kind": "clip",
+      "plane": 30.0,
+      "elev": 148.11460876464844,
+      "axial": -59.61522674560547
+     },
+     {
+      "mm": 0.31,
+      "i": 318,
+      "kind": "ws",
+      "plane": 60.0,
+      "elev": 165.0,
+      "axial": -75.0
+     },
+     {
+      "mm": 0.55,
+      "i": 317,
+      "kind": "ws",
+      "plane": 60.0,
+      "elev": 150.0,
+      "axial": -45.0
+     },
+     {
+      "mm": 0.58,
+      "i": 12,
+      "kind": "clip",
+      "plane": 30.0,
+      "elev": 142.3291778564453,
+      "axial": -58.43452453613281
+     },
+     {
+      "mm": 0.75,
+      "i": 200,
+      "kind": "ws",
+      "plane": 0.0,
+      "elev": 75.0,
+      "axial": 30.0
+     }
+    ],
+    "gap_near1": 31.75,
+    "near1_poses": 8,
+    "gap_near2": 46.85,
+    "near2_poses": 27,
+    "overhead140": {
+     "ws": 28,
+     "reach": 0.1786,
+     "clip": 10,
+     "follow": 0.6,
+     "inband14": 0.9152,
+     "inband10": 0.653,
+     "why_not": {
+      "fold": 15,
+      "slide": 7,
+      "flip": 0,
+      "closure": 0,
+      "skin": 0,
+      "parts": 0,
+      "contact": 5
+     }
+    }
+   },
+   "mode": "exact",
+   "bench": [
+    110,
+    360
+   ],
+   "secs": 282.6
+  }
+ },
+ "frozen_note": "CB_EXACT=1 skin-normal-3r-pin-knee.py frozen (fit Bench(60,160) fast, worn exact on Bench(110,360)); the verified config reproduces 27.20; the stack rule reads 27.28 (+0.08, in-band only; takes, contacts and near-touch identical)"
 }

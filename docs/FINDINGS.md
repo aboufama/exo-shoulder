@@ -3587,12 +3587,11 @@ judge or kit file changed; nothing was selected on held-out poses.
   confirms the takes (277 vs 279-280) and refutes the proximity (9 of 24 new poses 4.6-13.2 mm in the skin): 17.69.
 * **Jam-bias (new):** H1's verified pin-a running gap is 0.091 mm, under the 0.20 stack rule (polish 2 0.063, P5 0.021,
   GPU F2 0.185; crest 0.25). Worn at the rule (stk 5.90, equal parameters) H1 moves +0.05 fast (23.64 -> 23.69, knee
-  link in-band only): under the 1-point trigger, no re-fit. H1's 27.20 stands; the strap stand-up is not modelled.
+  link in-band only; frozen exact 27.20 -> 27.28, takes identical): under the 1-point trigger, no re-fit. H1's 27.20 stands; the strap stand-up is not modelled.
 * **4-joint comparison:** freek-oracle-route-knuckle-4r 16.20 verified / 15.40 polished (held 20.50; cx 33.25; contact
   depth ~2x the lead's 20.24 mm); proxtrack-relay-knuckle-4r 14.02 screened (held 18.01; cx 52.5) UNVERIFIED, pending
   its independent verification; K-free ideal relay 10.22 with no hardware (real relays 18.01-26.42); ghost J0 275 vs
   real 22.18. No design of either kind is verified at 95.
 * **Blocker for the user (big update):** accept a 4th joint (best verified 15.40 polished, not yet 95), J1 seats beyond
   ruling 4 (unmeasured), or the 3-joint ceiling (18.28 today; ~17.2 = score 93.7 if the lead's 4 contacts are cleared).
-* **Next:** the crest-seat knuckle ghost (the one empty cell); the optional front-seat report-only row; the frozen
-  exact H1 stack-rule wear if it did not land; the lead takes the blocker text to the user.
+* **Next:** the crest-seat knuckle ghost (the one empty cell); the optional front-seat report-only row; the lead takes the blocker text to the user.
