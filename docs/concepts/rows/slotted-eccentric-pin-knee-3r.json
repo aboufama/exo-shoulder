@@ -15,11 +15,11 @@
  "inband10": 0.3637,
  "contact": 0.0488,
  "gap": 153.49,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.1806,
+ "v_follow": 0.0545,
+ "v_inband14": 0.6042,
+ "v_inband10": 0.3623,
+ "v_gap": 201.2,
  "n_configs": 915,
  "model_file": "docs/concepts/models/slotted-eccentric-pin-knee-3r.py",
  "doc": "docs/concepts/slotted-eccentric-pin-knee-3r.md",
@@ -144,7 +144,27 @@
   "converged": false
  },
  "complexity": 5.0,
- "verdict": "SCREENED, far behind - the eccentric loses to its own locked control: best 153.49 on Bench(60,160) fast (score 44.19; reach 0.400, follow 0.233, ib14 0.631, contact 0.049) after 915 configs, frozen exact Bench(110,360) 201.20 (score 26.8; reach 0.181, follow 0.055, ib14 0.604, contact 0.101, overhead 0/28, near-touch 222.88) vs the plain 3R at the same axis directions through the same code and protocol 34.78 fast / 36.83 frozen (H1 directions) and 57.07 / 58.53 (the best config's own seats) and the verified pin knee 27.20 / lead 18.28. The slot widens the KINEMATIC window as promised (H1: th [32.5, 104.0] -> [25.5, 121.75] two-sided, [32.25, 129.75] stretched-only; kinematic reach 0.775 -> 0.869-0.888), but the metal that implements it collides with link 1 / hub 1 / itself on 88-100 % of the closing poses - also with the parent's O10 knee (probe: 132/133 and 197/199), so it is not the O20 rule. Convergence gate (score points, n 915): 8.51 / 0.00 / 2.61 -> NOT converged (2nd-half rule), status screened, not dead. The spec's start condition (parent passes its slot gate with >= 3 frozen points over its control) was already false (parent v_gap 115.21 vs control 46.60).",
+ "verdict": "AUDITED 2026-10-18 02:08 UTC: far-behind verdict STANDS (not refuted). Fast 153.49 and frozen exact 201.20 reproduced to the digit; every honest variant (emax freed, other knee branch, dG 40 outside K's sweep, pinK stacked over link 1) reads >= 152 fast vs the 78.93 bar; only the O10 knee the plan rules out reaches 70.07 (= the refuted parent). Status stays screened: the gate's 2nd-half rule is open (5.97 / 0.00 / 2.49, n 1014, 424 configs without gain). | SCREENED, far behind - the eccentric loses to its own locked control: best 153.49 on Bench(60,160) fast (score 44.19; reach 0.400, follow 0.233, ib14 0.631, contact 0.049) after 915 configs, frozen exact Bench(110,360) 201.20 (score 26.8; reach 0.181, follow 0.055, ib14 0.604, contact 0.101, overhead 0/28, near-touch 222.88) vs the plain 3R at the same axis directions through the same code and protocol 34.78 fast / 36.83 frozen (H1 directions) and 57.07 / 58.53 (the best config's own seats) and the verified pin knee 27.20 / lead 18.28. The slot widens the KINEMATIC window as promised (H1: th [32.5, 104.0] -> [25.5, 121.75] two-sided, [32.25, 129.75] stretched-only; kinematic reach 0.775 -> 0.869-0.888), but the metal that implements it collides with link 1 / hub 1 / itself on 88-100 % of the closing poses - also with the parent's O10 knee (probe: 132/133 and 197/199), so it is not the O20 rule. Convergence gate (score points, n 915): 8.51 / 0.00 / 2.61 -> NOT converged (2nd-half rule), status screened, not dead. The spec's start condition (parent passes its slot gate with >= 3 frozen points over its control) was already false (parent v_gap 115.21 vs control 46.60).",
  "limiter": "the eccentric's own metal around hub 2: the roller track must sit on link 1 in the annulus e = dist(J2, G) in [b - dG, b + dG] (dG >= 14.5 mm for the roller to clear K's boss), i.e. on the same circle the knee hub K sweeps (b >= 20 deg for two O20 hubs side by side) over a q2 span of 170-235 deg (the J2 interior angle sweeps ~0 -> 180 across any wide window); so K and the crank cross link 1, hub 1, the spoke and the track (top K6 pairs at H1: pinK|link1 137, link1|crank 132, hub1|pinK 123, pinK|trk 92 of 199 closing poses). Stacking them honestly makes hub 2 a 3-layer stack (link 1 + track + crank, K above): hub 2 lifts to 71 mm and leaves the band (0.00), crank 0.37, L2b 0.38. CMA escapes the collisions only by shrinking the lock-held track to th [74, 133.5] (kinematic reach 0.50 fast / 0.41 big, below the plain 0.775): overhead and rest poses fall outside the slot.",
- "note": "Model = the parent's kit model (docs/concepts/models/slotted-eccentric-j2-3r.py, inverted cam, every check unchanged: K3 march, K2 dense incl. axes K and G, K6 with same-body exemption, honest posts, crowns + walls, declared pins, slot gate) at the pin-knee chain's J1 / J3 axis directions (H1: bvec(101.16, 63.90), J3 = the tilted d3 = wdir(78.55, -5.34), a1 41.02, a2 68.26), O20 enforced at K (rad 10, 12.25 mm), margin >= 5.23 (5 + K play), psi in [15, 165], lock >= 50 deg, b >= 20 deg - all hard box edges. Member 3 = the kit neck in both arms of every paired comparison: the eccentric's metal is upstream of member 3, so the cuff knee cannot change it. Sweep (local, farm closed, niced, 2 processes): A 113 (H1 two-sided start, stopped at 238.25), B 697 (parent-best start: 275 at O20 -> 153.49), C 113 (stretched-only start Amin 68: best honest 271, best 112.55 dishonest = every eccentric part lifted out of band, ib14 0.11, sparse samples) + 13 paired controls / probes. Gate 0 (slot_design, 432 law cells per seat): 217/432 pass at H1. Frozen exact of the best: fit at 1 mm part-part 188.47 -> Bench(110,360) exact 201.20 (closure 0.37, collide 0.55 of closing poses, min metal 0.09 mm, post lifts hub 2 0.85 / K 3.25 / hub 3 2.82 mm). Complexity v2.2 5.0 (closed loop 4 + track pair 1; slaved K and cuff knee 0). 0 passive translations, 3 active. What would be needed (unmeasured, judged not worth it): a cam whose track lies OUTSIDE K's sweep annulus (dG > b + 10 mm: a long roller arm, more metal over the deltoid) or a track under link 1's skin face (no room at 2-14 mm)."
+ "note": "Model = the parent's kit model (docs/concepts/models/slotted-eccentric-j2-3r.py, inverted cam, every check unchanged: K3 march, K2 dense incl. axes K and G, K6 with same-body exemption, honest posts, crowns + walls, declared pins, slot gate) at the pin-knee chain's J1 / J3 axis directions (H1: bvec(101.16, 63.90), J3 = the tilted d3 = wdir(78.55, -5.34), a1 41.02, a2 68.26), O20 enforced at K (rad 10, 12.25 mm), margin >= 5.23 (5 + K play), psi in [15, 165], lock >= 50 deg, b >= 20 deg - all hard box edges. Member 3 = the kit neck in both arms of every paired comparison: the eccentric's metal is upstream of member 3, so the cuff knee cannot change it. Sweep (local, farm closed, niced, 2 processes): A 113 (H1 two-sided start, stopped at 238.25), B 697 (parent-best start: 275 at O20 -> 153.49), C 113 (stretched-only start Amin 68: best honest 271, best 112.55 dishonest = every eccentric part lifted out of band, ib14 0.11, sparse samples) + 13 paired controls / probes. Gate 0 (slot_design, 432 law cells per seat): 217/432 pass at H1. Frozen exact of the best: fit at 1 mm part-part 188.47 -> Bench(110,360) exact 201.20 (closure 0.37, collide 0.55 of closing poses, min metal 0.09 mm, post lifts hub 2 0.85 / K 3.25 / hub 3 2.82 mm). Complexity v2.2 5.0 (closed loop 4 + track pair 1; slaved K and cuff knee 0). 0 passive translations, 3 active. What would be needed (unmeasured, judged not worth it): a cam whose track lies OUTSIDE K's sweep annulus (dG > b + 10 mm: a long roller arm, more metal over the deltoid) or a track under link 1's skin face (no room at 2-14 mm).",
+ "audit": {
+  "t": "2026-10-18T02:08:00Z",
+  "refuted": false,
+  "bar": "honest gap <= 78.93 on Bench(60,160) fast",
+  "reproduced": {
+   "fast": 153.49,
+   "fit_1mm": 188.47,
+   "frozen_exact_Bench110_360": 201.2,
+   "note": "the model file unchanged; fast and frozen exact reproduce to the digit"
+  },
+  "gate": {
+   "agent": "8.51 / 0.00 / 2.61 (n 915, honest, file order) reproduced",
+   "combined": "5.97 / 0.00 / 2.49 (n 1014 incl. 99 audit configs; 424 configs since the best, no gain); the 2nd-half rule is still open, so the status stays screened"
+  },
+  "o20_attribution": "parent best (CMA E gen 13) through this model at margin 5.23: O10 knee 70.07 fast (inside the bar, but the plan rules it out, and it is the parent refuted at 115.21 frozen exact vs its control 46.60) vs O20 knee 209.85 (collide 0.88). The row's 'it is NOT the O20 rule' holds only at the H1 gate cells",
+  "missed_regions": "emax fixed at 40 in all streams: emax 50/64/80 at best 197.07 dishonest; knee branch sk=-1: 313-375; dG 40 (track outside K's sweep) 275; parent seats b 28/32/36 220.6/303.4/305.1; best b36 emax64 136.83 dishonest (ib14 0.25)",
+  "over_strict": "pinK carries no `over` list in the parent build (fitted at its own skin level, K6 counts every crossing of link 1); stacking pinK over link1+spoke+track: best 153.86, parent seats 160.72 (from 209.85), H1 gate cell 110.41 dishonest (ib14 0.30)",
+  "cma": "local continuation, sigma 0.5, emax freed, 81 evals (69 honest), best unchanged 153.49",
+  "reason": "at the O20 knee the knee hub, crank and track must cross link 1 / hub 1 over the slot's window: every honest variant reads >= 152 fast vs the 78.93 bar"
+ }
 }

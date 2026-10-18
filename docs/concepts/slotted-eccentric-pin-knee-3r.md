@@ -182,3 +182,9 @@ Red-team summary: no convention bug against tools/concept_baseline.py was found.
 fast path are the shared kit's, and the reproduction is exact. The bad number is physical: O20 knee metal in hub 2's
 annulus. The one over-strict check (pinK not stacked) is worth up to ~49 points at the parent's seats but 0 at the
 best config. The number that stays optimistic is the fast 153.49 itself: frozen exact reads 201.20.
+
+Frozen exact re-run by the auditor (the model's `frozen` mode, Bench(110,360) CB_EXACT=1): fit 188.47, then frozen exact
+**201.20** (reach 0.1806, follow 0.0545, ib14 0.6042, ib10 0.3623, contact 0.1013, overhead 0/28 ws, near-touch 222.88,
+min metal 0.09 mm). This reproduces the claim to the digit and is now the row's v_* fields. The 99 audit configurations
+are appended to the sweep as stream "AUD". The pinK-stack probe rows carry no params, because they come from a
+monkeypatched build.
