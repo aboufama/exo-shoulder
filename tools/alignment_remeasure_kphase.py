@@ -13,7 +13,8 @@ margin (the verifier's th_margin_sided, metric th of tools/concept_kit.py) and, 
 (minarc mechanism connected_report, the verifier's flood()). `merge` is the kstop adapter's merge (the claim's own per-pose
 worst rule) with the id switched.
 
-    CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_remeasure_kphase.py side <bench|held> <delta> <out.json> [--flood]
+    CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_remeasure_kphase.py side <bench|held> <delta> <out.json> [--flood] [--set mu=0.17]
+        (--set: a RED-TEAM reading of a model parameter, e.g. the family's friction mu 0.17; never the claim's number)
     python3 tools/alignment_remeasure_kphase.py merge <bench|held> <side_plus.json> <side_minus.json>
 """
 import importlib.util, json, os, sys, time
@@ -27,20 +28,21 @@ def _load(name, path):
     sp = importlib.util.spec_from_file_location(name, path); m = importlib.util.module_from_spec(sp); sp.loader.exec_module(m); return m
 
 
-def side(wear, delta, outp, flood=False):
+def side(wear, delta, outp, flood=False, extra=None):
     AA = _load("aa_for_kphase_rem", os.path.join(REPO, "tools", "alignment_audit.py"))
     AP = _load("ap_for_kphase_rem", os.path.join(REPO, "tools", "alignment_paired.py"))
     VK = _load("kphase_verifier_for_rem", os.path.join(REPO, "docs", "concepts", "verify", RID + ".py"))
     VK.OPT.update(own=False, arm_t=0.0)                     # the claim's own metal (verifier: corrections change 0.00)
     VK.setup()
     t = time.time()
-    o = VK.KS.wear(float(delta), wear, None, dict(VK.BEST))
+    sets = dict(VK.BEST, **(extra or {}))
+    o = VK.KS.wear(float(delta), wear, None, sets)
     V = VK.INFO.pop("_V"); fit, M1, M, B, r = V.CAP["res"]
     deep = AA.deep_audit(M, B); poses = AP._dump_bench(M, B)
     tk = [i for i in range(len(B.idx)) if AA._taken(B, i)]
     dK = np.degrees(np.abs(np.asarray(getattr(M, "dK", []), float)))
     thm = VK.th_margin_sided(V, float(delta))
-    out = dict(id=RID, wear=wear, delta=float(delta), params=dict(VK.BEST, notch=dict(VK.K.NOTCH), dowel_K=VK.KS.DOWEL_K),
+    out = dict(id=RID, wear=wear, delta=float(delta), params=dict(sets, notch=dict(VK.K.NOTCH), dowel_K=VK.KS.DOWEL_K), red_team_sets=extra or None,
                frozen=o.get("frozen"), fit_fast=(o.get("verifier") or {}).get("fit_fast"), why=(o.get("verifier") or {}).get("why"),
                parts_ib14=(r or {}).get("parts_ib14") if isinstance(r, dict) else None, audit=None, deep=deep, mode=B.mode, poses=poses,
                recomputed=AP.gap_parts(poses), dK_taken_max=round(float(max([dK[i] for i in tk] or [0])), 3) if len(dK) == len(B.idx) else None,
@@ -79,6 +81,9 @@ def merge(wear, paths):
 
 if __name__ == "__main__":
     if sys.argv[1] == "side":
-        side(sys.argv[2], float(sys.argv[3]), sys.argv[4], "--flood" in sys.argv)
+        ex = {}
+        for i_, a_ in enumerate(sys.argv):
+            if a_ == "--set": k_, v_ = sys.argv[i_ + 1].split("=", 1); ex[k_] = float(v_)
+        side(sys.argv[2], float(sys.argv[3]), sys.argv[4], "--flood" in sys.argv, ex)
     elif sys.argv[1] == "merge":
         merge(sys.argv[2], sys.argv[3:])
