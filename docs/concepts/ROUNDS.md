@@ -5663,3 +5663,135 @@ None. The 21 ideated catalogue entries all sit under measured closures (round 10
 
 
 **Lead note 2026-10-18 ~22:00 UTC: round 108 STOPPED after its plan, before ideation.** The user wrote: "if there is a 4 joints setup that scores way higher without a knee, I'd honestly prefer that". Every relay design this plan would tune carries the cuff knee, so the slot went to a knee-less 4-joint track (round K1 = 401). The relay levers above (delta 5.0, lean 0, PHI 37-38, CF strip / shell stiffness / R17 pricing) stay open for a later jump round.
+
+## Round 401 plan (Round K1, track kneeless; 2026-10-18 ~22:20 UTC, lead verified gap 18.28)
+
+Track goal (user 2026-10-18 ~21:55 UTC: "if there is a 4 joints setup that scores way higher without a knee, I'd
+honestly prefer that"): at most 4 counted joints, NO cuff knee, NO passive cuff slides (cuff rigid on the arm pad /
+BOTTOM), plain verified gap clearly better than the knee designs - target 95 (gap <= 13.75); worth the switch only if it
+beats the lead's 18.28 (held 22.38) by a clear margin (>= 2 points). With a rigid cuff and GH fixed every axis passes
+through GH: a spherical chain whose redundant coordinate is slaved (cam / knuckle drive) or sprung (relay + stops), the
+continuity flood binding. Planner's read: ROUNDS tail (rounds 106-108, 301), FINDINGS (J6, J7, take bound), rows
+(lead, h2facet, phi40, offset-shortcar, freek, kneeless-roller, kneeless-sidecar, kfree-armarc, armarc, acromion-relay,
+cap-nullspace, cam-coupled, cam-unfold, zc-frontier, spine-parked), docs/concepts/kfree-armarc-relay-4r.md,
+docs/concepts/armarc-relay-knuckle-4r.md, docs/research/sim_to_real_gaps.md, ring_and_shell_hardware.md, events tail
+(21:47Z), ledger latest. No bench, judge or kit file changed: no number below moved because the measurement changed.
+
+### State
+
+- **Lead (3 joints, the user's 2026-10-17 rule): conecut-knee-knuckle-3r 18.28** (93.35), held 22.38, reach 0.7278
+  (262/360), ib14 0.9012, 4 contacts / 20.24 mm (T5 reference), overhead 8/28 bench, 18/71 held, cx 18.5. WATCH carried:
+  dashboard sweep 12.5 shown as 95.45, T1 (pose 203 at 0.263 mm), T3 (held th margin 5.006), self-reference.
+  Tie: conecut-h2facet 18.28 / held 22.16 (WATCH: no flood on file, cx 0 vs 18.5 mismatch).
+- **3 DOF cannot make 95** at the legal J1 seats (take_bound_3dof.md: the lead is 4.53 short) - the 4th joint is needed.
+- **4-joint options, all WITH the knee:** phi40-thinstack-relay-4r 14.06 (94.89), held 16.69, reach 0.8056 (290/360:
+  48 fold, 5 J3 stop, 17 contacts), ib14 chain 0.8946, overhead 9/28 (22/71 held), cx 51.25; offset-shortcar 14.76 /
+  17.77, cx 52.5; freek-oracle-route 16.20 verified (15.40 polished) / 21.89, cx 33.25. WATCH reasons carried (do not buy
+  points the same way): metal moved into the 1-2 mm shell (2 mm reading 45.6-47.2 vs the lead's 34.84); T5 contact depth
+  x2.3-x3.7 the lead (phi40 74.93 mm / 17 poses); CF strip and 1.0 mm shell stiffness unmodelled (S3 / M2); R17 friction
+  unmeasured (M5); pose-sample cliffs at the shell ends. GAMED: underpass-bridge (refuted 20.60), proxtrack (17.46),
+  lowarm-halfring, conecut-l2jog, dipped-law-groove, seed-offset-3r-slides.
+- **Knee-less on file (correction to the brief: the knee-less best is NOT 33.51).** kneeless-roller-knuckle-3r 21.07
+  (92.34), held 24.59, reach 0.725, overhead 7/28 (16/71), cx 23.75; kneeless-sidecar-knuckle-3r 21.11, held 25.34,
+  cx 28. Both are spherical 4R chains with the 4th (K) cam-slaved = lever (a) already built at 3 counted joints. Measured
+  price of the knee deletion: the J3 tilt b3 (~2.2 frozen / ~3.5 fast points; J3 must lie on a GH ray), plus the
+  sidecar's rigid bracket E leg 0.15 mm from link 2 at J3 (8 bench / 17 held poses the fit bench never shows). WATCH
+  (both): NEW-free-deletion - the bench's GH is an exact fixed point, so the knee deletion is free on the bench and its
+  whole price is wearer-side (below). Spherical 3R cx 0 ceiling zc-frontier 33.51; spine-parked 41.0 (O15 hubs: does not
+  stand under O20). Dead knee-less 4R: acromion-relay-4r 42.74 fast (hub 2 124 mm from GH, set by q0 = 0 poses; a relay
+  that acts only with J2 on a stop cannot move it), cap-nullspace-4r 57.7 (hub 2 121 mm out at the cap pole; springs wind
+  +-170 deg), cam-coupled-4r 50.67 fast (hubs 2 / 3 roam; the groove cuts J1's housing).
+- **The relay's kinematic ceiling is the open headroom** (kfree-armarc-relay-4r.md): an ideal one-sided relay (no metal)
+  on the PLAIN O20 3R at the lead's seats, PHI 75, psi2 -14: **10.22 frozen exact** (reach 0.8444, 304/360, ib14
+  0.9106, contact 0.0466, overhead 14/28) - read with the knee's b3 0.329, never knee-less. It died as hardware (26.42)
+  because the ARM-FIXED arc (PHI 45: 70 deg, 93 mm, R_t 75) sits in the chest when un-relayed (across body plane 135-150:
+  -0.5 to -10.1 mm; arm at side, axial 60-120: -5.6 mm) and the knee stack lifted the carriage 5.9 mm; relay sign -1 is
+  wrong (44.31 fast); the low-lift axis is tilt ~12 toward taz ~237. Its own next lever, never modelled: a guide that
+  travels WITH the carriage (short arm-fixed roller stations, the long element moving), meeting the torso only on relayed
+  (stretched lateral / overhead) poses.
+- **Lever (b), the humeral long axis, is measured dead at the pad station:** the circle about the GH-elbow line floats
+  49-68 mm over a 58-deg arc (16.3 mm lift, fast 39.72); tilt 0-4: 12-23 mm float; long-axis ideal 11.93 frozen (with the
+  knee) unbuildable there. No distal station was ever scanned. Two-sided relays are closed at the tilted axis (round 106:
+  the negative side adds chain contacts; 262 / 206 keep hub 2 in the deltoid at either sign).
+- **Where the lead loses poses:** 98 of 360 (fold 88, contact 4, J3 stop / parts the rest); overhead: abduction cone
+  0/10 (fold 5, J3 stop 3, drive contacts 2), flexion / across with IR 5/15 (stretched fold 9, contact 1).
+- **Shoulder slip, the track's standing price (design-independent for any rigid-cuff spherical chain):** cuff misfit
+  |(I - R) d| at a 3 mm GH offset p95 4.83 / max 5.14 mm (kneeless-sidecar gh_offset_redteam; the lead's planar knee
+  leaves 4.14 / 4.19); linear in d, so the R10 4 mm slip gives ~6.4 / 6.9 mm, i.e. **13-31 N** at the 2-4.5 N/mm soft
+  tissue on file (sim_to_real_gaps.md) against the R17 5 N cap; within a 3 mm liner on 38.7 % of poses (66.6 % with the
+  knee). The knee removes only ~0.9 mm of it at 4 mm. Every claim restates it and names the liner compliance it assumes
+  (a few mm of radial play in the liner, stated as such); it is reported, not scored.
+
+### Lenses
+
+**A. kneeless-relay-knuckle-4r (REACH, highest odds; 4 counted joints + the slaved K; 2 processes, <= 120 min).**
+phi40-thinstack-relay-4r with the cuff knee deleted: b3 0 (J3 on a GH ray), hub 3's lower plate -> ONE rigid bent 3 mm
+Ti bracket -> the relay carriage (the knee link's raised bump over the boss and the knee stack gone); shell, carriage,
+lug coil, slot-end PHI stop, K drive unchanged. Model on docs/concepts/models/phi40-thinstack-relay-4r.py (read-only
+import) + the kneeless-sidecar bracket rule.
+- Step 0 (no new metal, <= 30 min): (i) the knee-less control at 3 joints (the lead with b3 0 + rigid bracket) on frozen
+  exact Bench(110,360) - the knee's price on today's lead (round-9 measure ~2.2); (ii) the knee-less ideal-relay bound at
+  phi40's axis / station, PHI 40 / 50 / 60, envsel then frozen exact. Kill if the bound > 15.4.
+- Selection on envsel only (bracket route over hub 3 / link 2, ds, delta, PHI), then ONE frozen exact read + ONE held.
+  Pass = <= 15.4 (clear margin over 18.28; <= 13.75 is 95); kill > 16.28 (lead - 2.0) or held >= 20.38.
+- Red team: bracket vs link 2 at J3 on every face (the sidecar's E-L2 class), the bracket's climb onto the carriage,
+  T5 depth vs the lead (20.24 mm) and phi40 (74.93 mm), the 2 mm reading, the shell ends' cliff partners (+1.5 deg).
+
+**B. kfree-moving-rail-relay-4r (LOW COMPLEXITY at the relay's reach, and the highest ceiling; 4 counted joints, no
+knuckle, no drive, no knee; 2 processes, <= 150 min).** Plain spherical O20 3R at the lead's seats (b3 0) + a one-sided
+relay whose LONG element moves: a curved Ti rail (arc about the GH-through relay axis, PHI 60-75) fixed to member 3,
+guided by 2-3 arm-fixed MR63ZZ V-rollers (or iglidur shoes) on BOTTOM at lateral stations only, a constant-force coil to
+a zero dowel, a PHI end dowel. At phi = 0 the rail lies lateral / posterior; it covers the medial arm only when relayed.
+cx target <= 12 (the 3R is 0; +1 counted joint, 1 spring, rolling pairs; tools/simplicity.py reads it).
+- Step 0 (no metal, <= 30 min): the knee-less ideal relay (b3 0) at PHI 45 / 60 / 75, psi2 -14..0, axis tilt 8-16
+  toward taz 225-245, envsel then frozen exact; for EVERY relayed pose, the moving rail's clearance to skin and torso at
+  its relayed position (round 108's kill: relayed poses at PHI > 45 that are across the body put the rail in the chest).
+  Kill if the bound > 14.0 or > 3 relayed taken poses put the rail within 2 mm of the skin / torso.
+- Hardware: rail section and roller heads sampled on every face, rail engagement >= 2 rollers at every phi (rail arc =
+  PHI + station span), roller-station footprint on BOTTOM, member 3 bracket to the rail; continuity flood (relay state
+  included); envsel pick, ONE frozen exact + ONE held. Pass = <= 13.75, Pareto pass = <= 15.4 at cx <= 15; kill > 17.0.
+- Red team: rail-roller jam under the 2-3 N preload + iglidur / MR63ZZ friction (R17, mu 0.15-0.25), rail in the
+  axilla / chest at the relayed across-body poses, the rail's free end vs the forearm cuff at elbow flexion.
+
+**C. distal-longaxis-ring-4r (WEIRD, lever b at a new station; 4 counted joints; 1 process, <= 100 min).** The 4th axis
+on the GH-elbow line as an arm-mounted ring segment at a DISTAL station (below the deltoid insertion, s 0.45-0.8 of
+GH-elbow), carried by a long rigid strap from hub 3; with the ring taking axial twist, J3 is re-aimed for elevation (the
+3R's fold window spent on pointing, not twist). Only the pad station was ever measured (49-68 mm float, unbuildable).
+- Step 0 (geometry only, <= 20 min): skin radius about the GH-elbow line per station and azimuth, p5 / p95 over every
+  workspace pose's posed skin (muscle bulge in flexion included); kill if no station has a >= 90-deg arc with spread
+  <= 8 mm, or if the strap from hub 3 to it is > 120 mm (its in-band < 0.85 kills the share).
+- Step 1: ideal ring bound (no metal), knee-less plain 3R at the lead's seats with J3 re-aim (b3 0), two cells: (i)
+  one-sided relay (CF coil to a stop); (ii) energy-shared null-space - J3 torsion spring + ring centring spring, the
+  equilibrium solved per pose, continuity flood binding, friction band mu 0.15-0.25 for R17 (the stop-free determinacy
+  the relays lack). Envsel, then frozen exact; kill > 14.0. A two-sided cell is read only if it beats the one-sided cell
+  on envsel (round 106 closure).
+- Hardware (only past step 1): a thin-section ring segment or custom wire-race C-rail (ring_and_shell_hardware.md: closed
+  rings - Franke 5.9 x 5.9, Kaydon 6.35 - are the only catalogue families at 45-65 mm radius), real section + clamp
+  sampled on every face; ONE frozen exact + ONE held.
+
+Rules for all lenses: select on envsel / envh only, never place a stop, margin or tie-break from Bench(110,360) binders
+(P1); search objective = the near-touch gap; clearance on every face of every part; 5-deg th margin per the kit (state
+the 4R equivalent for the relay state); continuity flood with static vs connected; held out never tuned on; O20 v5 hubs
+on MR117-2RS; no gears, pulleys, cables. Every claim reports: plain gap frozen exact + held, overhead /28 and /71,
+contacts and T5 depth vs the lead, the 2 mm reading, the null-space determinacy (springs, stops, flood), and the
+shoulder-slip price above (misfit at 4 mm, liner compliance assumed, force). Every screened morphology writes
+docs/concepts/viz/concepts/<id>.js, passes `node docs/concepts/viz/test.mjs <id>`, re-runs
+`node docs/concepts/viz/thumbs.mjs`. Local CPU only: nice -n 10, OMP_NUM_THREADS=1; the box is shared with round 301
+and the hourly audit, so A and B run first and C's geometry step fills a free slot. Commit after every step.
+
+### Carried (ideated, never screened)
+
+None. The 21 ideated catalogue entries sit under measured closures (round 106 / 107 plans); none is a knee-less
+rigid-cuff spherical 4R.
+
+### Elsewhere, not to be duplicated
+
+- Round 301 (track overhead): abduction-cone (J3 re-aim on the lead), rocker-redundant-4r (active J0 under J1, Keemink
+  2018, on the knee chain), drive-free-cone. K1 does not add a J0 rocker; lens C re-aims J3 only on the knee-less chain.
+- Round 108 (jump) stopped after its plan; its relay levers on the knee chain stay parked.
+
+### Needs the user's say
+
+- The shoulder-slip price of any knee-less rigid cuff (~6.4 mm p95 misfit at R10 4 mm, 13-31 N if the skin takes it vs
+  the R17 5 N cap): whether a compliant liner taking it is acceptable is the user's call, stated with each claim.
+- The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule, O20 hubs and the transmission guard stay.
