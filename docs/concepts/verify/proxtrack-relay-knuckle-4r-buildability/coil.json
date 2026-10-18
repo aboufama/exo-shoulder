@@ -1,0 +1,26 @@
+{
+ "R_t": 79.93,
+ "s0": -91.49,
+ "arc": [
+  -109.5,
+  -53.6
+ ],
+ "D8": {
+  "coil_az": -113.0,
+  "fit_poses": 184,
+  "jam_phi0": 0,
+  "jam_any_phi": 0,
+  "min_mm_phi0": 17.06,
+  "min_mm_any_phi": 17.06,
+  "jam_parts_phi0": {}
+ },
+ "D5": {
+  "coil_az": -112.0,
+  "fit_poses": 184,
+  "jam_phi0": 0,
+  "jam_any_phi": 0,
+  "min_mm_phi0": 16.68,
+  "min_mm_any_phi": 16.68,
+  "jam_parts_phi0": {}
+ }
+}

@@ -645,6 +645,13 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
        - (d) a fresh jump loop at round 106 with n_rounds 1 (wf_3329d842-38f): its planner first writes round 105's
          missing close.
      - The rule is now in OPERATIONS section 3: never resume a discovery loop, and run one round per launch.
+   - *Lead, 12:50 UTC 10-18:* **3-DOF take-bound table done** (docs/research/take_bound_3dof.md, 66a9c1e), with a skeptic
+     (c7f344e, UPHELD-WITH-CORRECTIONS; banner in the table). No 3-joint design or bound on file reaches 13.75. The
+     3-joint upper estimate is 14.4-14.7 (~94.7) from the 272-take law cap, and no 4-joint design reaches 95 either.
+     The one legal untested region, the posteromedial J1 seat for a knuckle, is being measured now by a lead agent
+     (docs/research/posteromedial_seat.md, pre-registered). The corrected BLOCKER was sent to the user at ~12:50 with
+     four options: (1) test the posteromedial seats first, no rule change; (2) a 4th joint; (3) front / clavicle J1
+     seats; (4) accept ~93-94 with 3 joints.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

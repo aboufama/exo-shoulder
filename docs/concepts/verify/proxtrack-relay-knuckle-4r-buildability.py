@@ -73,8 +73,10 @@ def rigid_vectors(M1, G, ax, amts, resize):
             for nd, ul in rec:
                 c = np.maximum((U * ul).sum(1), 0.3); req = np.maximum(req, np.where(nd > 0, nd / c, 0.0))
             grow.append(float((req - aa)[sel].max())); aa = req
+        spr = np.zeros(len(X))
         for nd, ul in rec:                                    # angle between the fixed vector and the radial at poses that need lift
-            c = np.clip((U * ul).sum(1), -1, 1); ang = np.degrees(np.arccos(c)); spread.append(np.where(sel & (nd > 0), ang, 0.0))
+            c = np.clip((U * ul).sum(1), -1, 1); ang = np.degrees(np.arccos(c)); spr = np.maximum(spr, np.where(sel & (nd > 0), ang, 0.0))
+        spread.append(spr)
         V = aa[:, None] * U; Vs[key] = V; XV[key] = X + V
         OUT.setdefault("amount_check", {})[f"{key[0]}:{key[1]}"] = dict(n_bumped=int(sel.sum()), max_amt=round(float(aa.max()), 2),
                                                                        best_vs_claim_max_diff=round(float(np.abs(best - np.asarray(a))[sel].max()), 3))
@@ -83,7 +85,7 @@ def rigid_vectors(M1, G, ax, amts, resize):
         ref = [(X, Vs[key]) for key, mm, X in _sets(M1) if mm == m]
         RX = np.concatenate([x for x, _ in ref]); RV = np.concatenate([v for _, v in ref])
         _, nn = cKDTree(RX).query(Pc); XV[("contact", k)] = Pc + RV[nn]
-    sp = np.max(np.stack(spread), axis=0) if spread else np.zeros(1)
+    sp = np.concatenate(spread) if spread else np.zeros(1)
     return XV, dict(dir_spread_deg_max=round(float(np.max(sp)), 2), dir_spread_deg_p90=round(float(np.percentile(sp[sp > 0], 90)), 2) if (sp > 0).any() else 0.0,
                     resize_growth_mm=round(max(grow), 2) if grow else 0.0)
 

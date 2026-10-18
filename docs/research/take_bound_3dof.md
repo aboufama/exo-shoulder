@@ -6,6 +6,20 @@ UTC on branch claude/exciting-albattani-94w8cp. Plan: docs/concepts/ROUNDS.md "R
 
 The decision this table feeds (the user's): accept a 4th joint, or accept a verified score below 95 with 3 joints.
 
+> **Skeptic corrections (docs/alignment/take_bound_3dof_skeptic.md, c7f344e: UPHELD-WITH-CORRECTIONS), applied by the
+> lead 2026-10-18 ~12:50 UTC. Read them before quoting this table.**
+> - **Scope.** The rows labelled 'Back' sit at bvec az 95-102 / el 62-68, which is the acromion top (the lead's seat). The
+>   posteromedial back of the shoulder (az < 40, el < 55) is legal under ruling 4, and no knuckle has been measured
+>   there. It is being measured now (docs/research/posteromedial_seat.md).
+> - **Ceiling.** The 3-joint upper estimate from the take count is 14.4-14.7 (score ~94.7): the 272-take law cap at
+>   zero contact. The best idealised measurement is 16.91 (93.85). '~17.2 (93.7)' understated it: clearing the lead's
+>   4 contacts turns them into takes, so 266 takes give 16.11.
+> - **The oracle** bounds TAKES with fixed metal, on the stretched side only, read at margin 5.5. It does not bound the
+>   gap or the sensed-K 4th joint: freek verified 16.20 at the same 280 takes. The 3-joint 'no' rests on the 272-take
+>   law cap.
+> - **No 4-joint design reaches 95 either** (best verified 16.20, polished 15.40; proxtrack 14.02 unverified).
+> - The scope is 'every family measured': about 40 catalogue concepts were never modelled.
+
 Machine-readable: `docs/research/take_bound_3dof.json`, built by `docs/research/take_bound_3dof.py` from the cited files
 (the script re-reads every cited JSON value and checks it to +-0.005; markdown-line citations are quoted, not machine
 checked). No bench, judge or kit file changed; nothing here was searched, selected or tuned on held-out poses. All gaps

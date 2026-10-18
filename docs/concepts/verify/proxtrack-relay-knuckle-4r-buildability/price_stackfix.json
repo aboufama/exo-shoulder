@@ -1,0 +1,272 @@
+{
+ "prepare_secs": 199.3,
+ "stackfix": {
+  "boss_lift_max": 5.69,
+  "knee_pts_raised": 35,
+  "knee_pts": 90
+ },
+ "variants": {
+  "stackfix": {
+   "wear": {
+    "gap": 14.4,
+    "reach": 0.7917,
+    "follow": 1.0,
+    "inband14": 0.8962,
+    "inband10": 0.5475,
+    "contact": 0.0319
+   },
+   "gate_gap": 17.46,
+   "ib14_gate": 0.8656,
+   "near1_gap": 18.06,
+   "near2_gap": 38.39,
+   "ws_taken": 285,
+   "overhead": [
+    8,
+    28
+   ],
+   "relayed": {
+    "n": 33,
+    "taken": 23,
+    "contact": 9,
+    "jam": 1,
+    "clip_relayed": 0,
+    "phi_max": 32.94
+   },
+   "why": {
+    "": 395,
+    "j3stop": 5,
+    "contact": 13,
+    "jam": 1,
+    "fold": 56
+   },
+   "min_metal_taken": 0.072,
+   "secs": 178.9,
+   "jams": 5,
+   "ib14_chain_only": 0.8656,
+   "bump_max_mm": 6.94,
+   "contacts": [
+    {
+     "i": 182,
+     "kind": "ws",
+     "pose": [
+      -15.0,
+      90.0,
+      45.0
+     ],
+     "phi": 11.3,
+     "min_mm": -0.71
+    },
+    {
+     "i": 205,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      105.0,
+      15.0
+     ],
+     "phi": 0.0,
+     "min_mm": -4.28
+    },
+    {
+     "i": 206,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      120.0,
+      -15.0
+     ],
+     "phi": 17.4,
+     "min_mm": -6.07
+    },
+    {
+     "i": 237,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      165.0,
+      -60.0
+     ],
+     "phi": 0.0,
+     "min_mm": -8.93
+    },
+    {
+     "i": 262,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      135.0,
+      0.0
+     ],
+     "phi": 11.3,
+     "min_mm": -9.79
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -60.0
+     ],
+     "phi": 0.0,
+     "min_mm": -5.8
+    },
+    {
+     "i": 316,
+     "kind": "ws",
+     "pose": [
+      60.0,
+      150.0,
+      -105.0
+     ],
+     "phi": 0.0,
+     "min_mm": -1.23
+    },
+    {
+     "i": 343,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      150.0,
+      -105.0
+     ],
+     "phi": 8.4,
+     "min_mm": -1.73
+    },
+    {
+     "i": 372,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      165.0,
+      -90.0
+     ],
+     "phi": 19.4,
+     "min_mm": -0.07
+    },
+    {
+     "i": 423,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      135.0,
+      -90.0
+     ],
+     "phi": 16.0,
+     "min_mm": -0.7
+    },
+    {
+     "i": 448,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      135.0,
+      -90.0
+     ],
+     "phi": 29.4,
+     "min_mm": -1.92
+    },
+    {
+     "i": 457,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      45.0,
+      -105.0
+     ],
+     "phi": 15.1,
+     "min_mm": -0.91
+    },
+    {
+     "i": 466,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      105.0,
+      -105.0
+     ],
+     "phi": 28.0,
+     "min_mm": -8.22
+    }
+   ],
+   "jam_list": [
+    {
+     "i": 316,
+     "kind": "ws",
+     "pose": [
+      60.0,
+      150.0,
+      -105.0
+     ],
+     "track_mm": 0.98,
+     "track_part": "boss",
+     "carriage_mm": 2.37,
+     "carriage_part": "E",
+     "phi": 0.0,
+     "metal_min_mm": -1.23
+    },
+    {
+     "i": 343,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      150.0,
+      -105.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.4,
+     "carriage_part": "E",
+     "phi": 8.4,
+     "metal_min_mm": -1.73
+    },
+    {
+     "i": 372,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      165.0,
+      -90.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.42,
+     "carriage_part": "E",
+     "phi": 19.4,
+     "metal_min_mm": -0.07
+    },
+    {
+     "i": 396,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      135.0,
+      -90.0
+     ],
+     "track_mm": 0.99,
+     "track_part": "boss",
+     "carriage_mm": 2.41,
+     "carriage_part": "E",
+     "phi": 9.0,
+     "metal_min_mm": 0.46
+    },
+    {
+     "i": 423,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      135.0,
+      -90.0
+     ],
+     "track_mm": 0.94,
+     "track_part": "boss",
+     "carriage_mm": 2.42,
+     "carriage_part": "E",
+     "phi": 16.0,
+     "metal_min_mm": -0.7
+    }
+   ],
+   "continuity_dropped": 0
+  }
+ }
+}
