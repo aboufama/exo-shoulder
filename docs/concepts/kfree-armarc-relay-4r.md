@@ -125,7 +125,7 @@ same bench).
    - At the only low-lift axis family (tilt ~12 toward taz ~237; lift 5.4-5.9 mm), the relay must turn toward the medial
      arm. sgn -1 is kinematically wrong: ideal PHI 60 with sgn -1 scores 44.31 fast.
    - At PHI 45 the track (70 deg, 93 mm) sits in the chest at phi = 0, i.e. un-relayed. Across the body (plane 135-150,
-     elev 15-75, axial -45..-60) it reaches -7.1 to -10.1 mm. With the arm at the side and axial 60-120 it reaches -5.6 mm.
+     elev 15-75, axial -45..-60) it reaches -0.5 to -10.1 mm (7 of 8 poses below -7). With the arm at the side and axial 60-120 it reaches -5.6 mm.
      The ideal relay keeps these poses clean (+4.2 to +6.4 mm).
    - A spring relay cannot lift its own track off the chest.
 3. **The converged optimum therefore keeps the arc short** (PHI ~19). There the ideal relay is only 17.27 fast, and the
