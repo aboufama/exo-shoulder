@@ -3221,7 +3221,7 @@
   "name": "Lead + one-sided arm-arc relay: J3 turned about an arm-fixed GH-through axis by a spring-preloaded circular guide at the cuff (with the straight-guide class closure as step 0)",
   "family": "knuckle-3r (lead conecut-knee-knuckle-3r) + cuff relay (4-joint count)",
   "lens": "round104:A guide-price-close (the measured survivor: a curved guide that changes an axis direction)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-18T05:16:06Z",
   "source": "round 104 (J4, track jump) judge (docs/concepts/round104_ideation.md)",
   "merged_from": [

@@ -6133,5 +6133,78 @@
    "phi_max": 19.81
   },
   "bench": "Bench(60,160) fast, lead shape frozen from its phi=0 fit; model_v 1 = relay tops in ib14 + lift at one reference pose (k<74 superseded), 2 = skin-facing relay samples only + pose-max lift"
+ },
+ {
+  "k": 170,
+  "t": "2026-10-18T08:04:59Z",
+  "params": {
+   "PHI": 20,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1,
+   "hw": 1,
+   "hwv": "plain"
+  },
+  "inband14": 0.8838,
+  "inband10": 0.5644,
+  "reach": 0.7639,
+  "follow": 1.0,
+  "contact": 0.0278,
+  "gap": 18.01,
+  "near1": 21.72,
+  "gap_ideal_relay": 16.39,
+  "ib14_chain_only": 0.8466,
+  "relayed": {
+   "n": 20,
+   "taken": 13,
+   "contact": 7,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 19.38
+  },
+  "ws_taken": 275,
+  "overhead": [
+   8,
+   28
+  ],
+  "model_v": 2,
+  "bench": "Bench(110,360) EXACT, frozen (lead shape from its phi=0 fit on Bench(60,160) fast): best config, relay metal on"
+ },
+ {
+  "k": 171,
+  "t": "2026-10-18T08:04:59Z",
+  "params": {
+   "PHI": 30,
+   "tilt": 0,
+   "taz": 0,
+   "sgn": 1,
+   "hw": 0
+  },
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "reach": 0.8028,
+  "follow": 1.0,
+  "contact": 0.0221,
+  "gap": 11.93,
+  "near1": 14.02,
+  "gap_ideal_relay": 11.93,
+  "ib14_chain_only": null,
+  "relayed": {
+   "n": 32,
+   "taken": 27,
+   "contact": 5,
+   "jam": 0,
+   "lost_other": 0,
+   "clip_relayed": 0,
+   "phi_max": 30.0
+  },
+  "ws_taken": 289,
+  "overhead": [
+   8,
+   28
+  ],
+  "model_v": 2,
+  "bench": "Bench(110,360) EXACT, frozen (lead shape from its phi=0 fit on Bench(60,160) fast): kit cell one+30 (long axis), IDEAL relay: no relay metal / lift (bound)"
  }
 ]
