@@ -52,7 +52,7 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.98: held 14 contact poses, sum 43.84 mm, deepest 10.38 mm at ['ws', 45.0, 165.0, -30.0], 5 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (-2.28 mm, x0.95); bench depths not on file",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.98: held 14 contact poses, sum 43.84 mm, deepest 10.38 mm at ['ws', 45.0, 165.0, -30.0], 5 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-17.13 mm, x0.72); bench depths not on file",
    "depths": {
     "v_gap 18.98": {
      "held": {
@@ -79,15 +79,15 @@
      }
     }
    },
-   "ref": "slipper-nose-knuckle-3r",
+   "ref": "conecut-knee-knuckle-3r",
    "compare": [
     {
      "claim": "v_gap 18.98",
      "wear": "held",
      "sum": 43.84,
-     "ref_sum": 46.12,
-     "excess": -2.28,
-     "ratio": 0.95,
+     "ref_sum": 60.97,
+     "excess": -17.13,
+     "ratio": 0.72,
      "watch": false
     }
    ]
@@ -95,10 +95,10 @@
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs slipper-nose-knuckle-3r: plain -0.55, 2 mm -2.11",
-   "ref": "slipper-nose-knuckle-3r",
-   "gain_plain": -0.55,
-   "gain_2mm": -2.11
+   "reason": "vs conecut-knee-knuckle-3r: plain -0.76, 2 mm -0.29",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -0.76,
+   "gain_2mm": -0.29
   },
   {
    "check": "continuity",
@@ -285,7 +285,7 @@
   "docs/concepts/verify/desmo-conecut-knuckle-3r_groove_scan_claim.json",
   "docs/concepts/verify/desmo-conecut-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "0a2b018",
+ "git": "f512fee",
  "tool_version": "2026-10-17.6",
- "t": "2026-10-17T21:17:26Z"
+ "t": "2026-10-18T05:14:24Z"
 }
