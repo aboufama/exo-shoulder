@@ -152,3 +152,48 @@ Cell B's 17.96 is a 0.048-mm graze that the pre-registered 0.2-mm rule rejects (
 held out (22.70 vs 22.64). Files: docs/concepts/models/lowarm-halfring-knuckle-3r.py (cells CELL_A0 / CELL_A / CELL_B),
 docs/concepts/sweeps/lowarm-halfring-knuckle-3r.json (908 entries in order; 'stage' and 'bench' name the bench of each),
 docs/concepts/viz/concepts/lowarm-halfring-knuckle-3r.js (cell B at its measured config, the model's own export).
+
+## Verification (independent skeptic, 2026-10-18 ~02:35 UTC)
+
+Harness: docs/concepts/verify/lowarm-halfring-knuckle-3r.py (the claim's model loaded UNCHANGED and worn through its own
+frozen protocol; checks copied from the desmo-conecut-knuckle-3r verifier - V1 fit gates, V2 plate-vs-horn solids, V3
+own-state th margin with dth/dK, continuity flood, per-pose dump - plus V4: th margin with the claim's OWN dwell K play,
+poses below 5 deg removed and Bench.report re-run). Config = the row's best_params (cell B: l2_lift 1.5, r_full 14,
+L 9.836) on the model's cell-B dict. CB_EXACT=1, local, niced (load 12 on 4 cores; the farm is closed).
+
+| check | result |
+|---|---|
+| frozen exact Bench(110,360) | **17.96** (score 93.47) reproduced: reach 0.7306 (263/360), follow 1.0, ib14 0.8978, ib10 0.5682, contact 0.0080 (3: 205 hub 2 -4.28, 237 crank -9.47, 264 hub K -1.17); why: fold 88, contact 3, parts 0, closure 0, flip 0 |
+| overhead (elev >= 140) | 9/28 taken |
+| near-touch (reported only) | min metal 0.048 mm (pose 316, link 2); gap at 1 mm 20.14, at 2 mm 34.84 |
+| per-pose dump | docs/alignment/remeasure/lowarm-halfring-knuckle-3r_bench_perpose.json, recomputes 17.97 (+0.01, rounding) |
+| V1 own gates (fit model) | desmo_fail empty; dK_lim 46.0 (slot end), dK taken max 45.62; stage-1 built pin max moving 48.89, first fail K 58.0 / cap 62.8; slot slop 0.04; crank free 0.18 deg (worst-tol 0.27, the parent's watch); rc_min 1.0 / ridge 0.243 (carried watch) |
+| claim's own dwell-hold gate | **FAILS: 0.638 deg vs 0.25** (runout 0.176, conc 0.088, pad lap 0.335 at lever 12.29 mm, slot 0.04) - re-read in the worn fit model, as the claim reports |
+| V2 plate vs horn solids | 373/373 overlapping poses at >= 0.15 mm (min 0.150, pose 204): pass |
+| V3 th margin (own state) | min 5.181 (pose 313, forced, dK 45.62); dwell min 5.389 (pose 229); 0 poses < 5 |
+| V4 th margin with K play | dwell |dth/dK| <= 0.36, forced <= 0.438. Nominal pad play 0.638 (dwell) + 0.23 (forced): min 5.088, **0 poses dropped, gap unchanged 17.96**; tight 0.292 and parent-groove 0.22: same |
+| continuity flood | connected_full 17.96 (0 dropped; envelope 1065 / forced 526 all connected); kNN 19.64 (6 forced dropped; desmo-conecut's verified wear reads 20.73 vs 19.04 the same way); bench-only 49.98 (the known sparse-bench artefact) |
+| paired vs the lead (alignment_paired compare, bench) | -0.32 (A 17.97 vs conecut 18.29): ONE discordant pose (316: contact on the lead, taken here at 0.048 mm); split reach -0.28, contact -0.27, in-band +0.22; bootstrap CI90 [-1.55, +0.42], P(better) 0.64 |
+
+Findings:
+
+1. **The number reproduces and survives the added checks**: 17.96 frozen exact, no part, closure, flip or th-margin
+   loss, and the dwell pad's 0.638-deg K play costs no pose through the fold margin (V4: dth/dK is 0.2-0.44 deg/deg, the
+   lowest dwell margin is 5.39).
+2. **But the 0.32 over cell A / the lead is one pose selected on the claim bench**: the lift (h, r_full, L) was chosen by
+   a 727-config scan of the frozen-exact Bench(110,360) surrogate - the bench the claim is measured on - and the gain is
+   pose 316 grazing at 0.048 mm (paired CI90 [-1.55, +0.42]). The rule is "claim on held out": held out reads 22.70
+   (claim; see held row below) vs cell A 22.64 and the lead's 22.38 - no transfer.
+3. **The design as claimed fails its own dwell-hold gate** (0.638 deg with the hard pad, 0.292 at 5-10 micron
+   tolerances, gate 0.25): unmeasured here is what the extra dwell play does to near-touch poses through the chain's
+   self-motion - pose 139 (plane -60 / elev 60 / axial 105) is taken at 0.072 mm and 203 / 379 at 0.72-0.75 mm; with
+   K free by 0.64 deg the intermediate bodies move up to ~0.7 mm tangentially at r ~65 mm (not modelled; a red-team item).
+   The preloaded-pad build that would pass the gate adds a preload element and a J2 drag the model does not read.
+4. **Unmodelled metal**: the stop pad itself (a lateral block on link 1b's top face standing into the arm's layer) is not
+   sampled for part-part clearance (small: it lies inside the arm's own swept band beside link 1b).
+
+Champion on the same bench and checks: 75.94 (risley-turret verifier checks; 66.97 via the offset-skin-normal verifier).
+Verdict: **VERIFIED at v_gap 17.96** (score 93.47) as a bench number - not refuted (better than the champion, no hard
+rule broken: 3 active DOF, K slaved and never undetermined beyond its play, 0 passive translations, no gears / pulleys /
+cables). It is NOT a lead change: the gain over the lead is a single 0.048-mm graze selected on the claim bench, held out
+does not transfer, and the hard-pad build fails the claim's own 0.25-deg dwell gate.

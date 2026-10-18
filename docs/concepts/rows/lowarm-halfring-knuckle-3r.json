@@ -6,7 +6,7 @@
  "active_dof": 3,
  "passive_dof": 4,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-18T01:40:26Z",
  "reach": 0.7306,
@@ -15,11 +15,11 @@
  "inband10": 0.5682,
  "contact": 0.008,
  "gap": 17.96,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7306,
+ "v_follow": 1.0,
+ "v_inband14": 0.8978,
+ "v_inband10": 0.5682,
+ "v_gap": 17.96,
  "n_configs": 908,
  "complexity": 16.5,
  "best_params": "{\"stage2\": \"B\", \"r_c\": 16.176, \"beta\": -177.169, \"nose_r2\": 0.75, \"wall2\": 0.9, \"boss_r\": 2.5, \"glev\": -1.0, \"blend\": 10.0, \"kslot\": 46.0, \"a_s\": 9.2, \"psi\": 149.5, \"mu\": 0.15, \"owd_margin\": 2.0, \"zr\": 2.0, \"l2_lift\": 1.5, \"l2_rfull\": 14.0, \"l2_len\": 9.836}",
@@ -74,7 +74,7 @@
  },
  "verdict": "NO NEW LEAD. Cell B (link-2 root lift h 1.5 on an R15-inner S-bend) reads 17.96 frozen exact Bench(110,360) (score 93.47) vs the lead's 18.28, but pose 316 clears by 0.048 mm: no root lift reaches the pre-registered 0.2 mm (727 configs; the skin lies parallel under ~18 mm of link 2), the robust clear costs in-band 1:1 (18.41), and held out does not transfer (22.70 vs cell A 22.64). Cell A ties the lead (18.28, same 262 takes / 4 contacts) at cx 16.5, but the dwell hold over the two-body stack is 0.638 deg vs the 0.25 gate (0.292 at tight tolerances): it stands only with a preloaded pad (drag unmeasured).",
  "limiter": "(1) dwell hold: 17.6 deg of K per mm at the stage-1 pin and a pad lever <= 12.3 mm (the only link-1b metal under the crank arm) -> 0.638 deg K play; (2) pose 316: link 2's bar 0.05-0.37 mm over the skin for r_u2 15-34 mm; (3) the fold, unchanged: 88 bench poses lost (stretched 73 / folded 15).",
- "note": "Frozen protocol (fit Bench(60,160) fast -> frozen -> Bench(110,360) exact), local niced, farm closed. Sweeps (908, in order, stage+bench tagged): 114 Bench(60,160) LHS over the full box - flat (reach 0.7688, contact 0, near-touch objective 19.45 everywhere; plain 13.12-13.59, best = cell A's point); 727 + 67 frozen-exact surrogate configs (link 2's distance segment replaced per pose, Bench.report re-run; reproduces the full model to 0.00). Convergence gate (score pts): fast 0.000/0.000/0.007; frozen scan 0.000/0.000/0.007; extended 0.000/0.000/0.022. Stage-1 built PA at mu 0.17 over 9 corners: pin first fail >= 52.89, cap >= 59.99 (gate 47.27). rc_min 1.0 / ridge 0.243 carried. Bench T5 contact depth: B 14.92 mm over 3 poses (205 hub 2 -4.28, 237 crank -9.47, 264 hub K -1.17); A 16.15 over 4. Not run here (verifier's): blended-IK wear, th margin with K play, connected() flood, alignment_paired dumps, S6, paired held at the lead's K-play rule.",
+ "note": "Frozen protocol (fit Bench(60,160) fast -> frozen -> Bench(110,360) exact), local niced, farm closed. Sweeps (908, in order, stage+bench tagged): 114 Bench(60,160) LHS over the full box - flat (reach 0.7688, contact 0, near-touch objective 19.45 everywhere; plain 13.12-13.59, best = cell A's point); 727 + 67 frozen-exact surrogate configs (link 2's distance segment replaced per pose, Bench.report re-run; reproduces the full model to 0.00). Convergence gate (score pts): fast 0.000/0.000/0.007; frozen scan 0.000/0.000/0.007; extended 0.000/0.000/0.022. Stage-1 built PA at mu 0.17 over 9 corners: pin first fail >= 52.89, cap >= 59.99 (gate 47.27). rc_min 1.0 / ridge 0.243 carried. Bench T5 contact depth: B 14.92 mm over 3 poses (205 hub 2 -4.28, 237 crank -9.47, 264 hub K -1.17); A 16.15 over 4. Not run here (verifier's): blended-IK wear, th margin with K play, connected() flood, alignment_paired dumps, S6, paired held at the lead's K-play rule. | VERIFIED 2026-10-18 ~02:20 UTC by an independent skeptic: v_gap 17.96 (score 93.47) frozen exact Bench(110,360) reproduced (263/360, ib14 0.8978, 3 contacts, overhead 9/28; dump recomputes 17.97); champion 75.94 on the same bench (risley-turret verifier checks; 66.97 via the offset-skin-normal verifier). Added checks pass: own gates (desmo_fail empty), plate-vs-horn solids >= 0.15, th min 5.181 (dwell 5.389), th with the claim's own dwell K play 0.638 (+0.23 forced): min 5.088, 0 poses dropped; flood connected_full 17.96 (kNN 19.64). NOT a lead change: paired vs the lead -0.32 is ONE pose (316 at 0.048 mm, CI90 [-1.55, +0.42]) selected by a 727-config scan on the claim bench itself; held out does not transfer; the hard-pad build fails the claim's own 0.25-deg dwell gate (0.638); near-touch pose 139 (0.072 mm) under the 3x larger dwell play is unmeasured; the stop pad is unsampled metal.",
  "doc": "docs/concepts/lowarm-halfring-knuckle-3r.md",
  "mechanism": {
   "active_dof": 3,
@@ -106,5 +106,83 @@
   "source": "desmo-conecut-knuckle-3r screen 2026-10-17",
   "confidence": "medium"
  },
- "mechanism_note": "desmo-conecut's record (the half ring deletes metal, the pad is integral to link 1b: 0 parts); simplicity v2.2 16.5"
+ "mechanism_note": "desmo-conecut's record (the half ring deletes metal, the pad is integral to link 1b: 0 parts); simplicity v2.2 16.5",
+ "champion_same_bench": 75.94,
+ "verification": {
+  "t": "2026-10-18T02:20:00Z",
+  "harness": "docs/concepts/verify/lowarm-halfring-knuckle-3r.py",
+  "bench": {
+   "gap": 17.96,
+   "reach": 0.7306,
+   "follow": 1.0,
+   "inband14": 0.8978,
+   "inband10": 0.5682,
+   "contact": 0.008,
+   "taken_ws": "263/360",
+   "overhead": "9/28",
+   "why": {
+    "fold": 88,
+    "contact": 3,
+    "parts": 0,
+    "closure": 0,
+    "flip": 0
+   },
+   "near1": 20.14,
+   "near2": 34.84,
+   "min_metal_mm": 0.048,
+   "dump": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_bench_perpose.json",
+   "dump_recomputed": 17.97
+  },
+  "v1_own_gates": {
+   "desmo_fail": [],
+   "dK_lim": 46.0,
+   "dK_taken_max": 45.62,
+   "slot_slop": 0.04,
+   "crank_free_deg": 0.18,
+   "crank_free_worst_tol": 0.27
+  },
+  "dwell_hold_gate": {
+   "K_play": 0.638,
+   "gate": 0.25,
+   "ok": false,
+   "note": "the claim's own gate, re-read in the worn fit model"
+  },
+  "v2_plate_horn": {
+   "min_radial_gap_mm": 0.15,
+   "below_running_gap": 0
+  },
+  "v3_th_margin": {
+   "min": 5.181,
+   "dwell_min": 5.389,
+   "lt5": 0
+  },
+  "v4_th_with_K_play": {
+   "nominal": {
+    "play_dwell": 0.638,
+    "play_forced": 0.23,
+    "min": 5.088,
+    "dropped": 0,
+    "gap": 17.96
+   },
+   "tight": {
+    "dropped": 0,
+    "gap": 17.96
+   }
+  },
+  "flood": {
+   "connected_full": 17.96,
+   "knn": 19.64,
+   "bench_only": 49.98
+  },
+  "paired_vs_lead_bench": {
+   "diff": -0.32,
+   "discordant": "316 only (lead contact, here taken at 0.048 mm)",
+   "ci90": [
+    -1.55,
+    0.42
+   ],
+   "p_better": 0.641
+  },
+  "champion_same_bench": 75.94
+ }
 }

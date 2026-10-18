@@ -3079,7 +3079,7 @@
   "name": "Half-ring desmo knuckle: stage 1's dwell outer wall cut to an 18.9-deg lip, a crank stop pad on link 1b, the crank's free span in link 1b's layer (link-2 root lift as cell B)",
   "family": "slaved-knuckle 3R with an unsensed pin knee",
   "lens": "round14:knuckle-o20-overhead (the round's one knuckle lens; cells A and B run as one row; merged stopdwell-halfring-knuckle-3r as the cell-A0 control and l2rootlift-halfring-knuckle-3r as cell B)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-17T23:25:10Z",
   "source": "round 14 judge (docs/concepts/round14_ideation.md)",
   "merged_from": [
