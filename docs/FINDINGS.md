@@ -3078,7 +3078,9 @@ surplus belongs to the plain 3R (281 vs 250), and the back-seat knuckle already 
 
 **The cap-pole bound for the planner:** the best real-model cap knuckle is 32.08 frozen / 35.16 held in the paired kit,
 1.1-1.5 points behind the lead's own seats. Reach for 95 has to come from somewhere other than re-seating the knuckle's
-J1 or J3 (back seat 277 kinematic, cap 275-299 kinematic but <= 248 on metal).
+J1 or J3 (back seat 277 kinematic, cap 275-299 kinematic but <= 248 on metal). Measured on 2026-10-18 (re-dispatch 3): the BUILDABLE one-sided version
+of that config (no folded-side lobe) reads 35.38 frozen / 37.93 held (241/360 takes, 260 kinematic), +4.79 / +3.90
+behind the control: the ghost lobe was worth ~3 points, and the cap seat's best buildable knuckle is ~5 points behind.
 
 ## Round 14: no lead change - the cx-0 crest pin knee verifies at 32.84 (round winner), the half-ring knuckle's 17.96 is GAMED (picked on the claim bench, held 22.70 vs 22.38), and the cap and crest seats close the main track's 3-joint seat question (2026-10-18, discovery round 14, closer)
 

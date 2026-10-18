@@ -220,6 +220,21 @@ bench takes (of 247). The law without the lobe (f = None) takes 260/360 kinemati
 one-sided version of C is about 4-5 points WORSE than 32.08. The ghost drive flatters C; it does not hide a better
 design.
 
+**The buildable one-sided C, measured (re-dispatch 3, 2026-10-18 08:15 UTC).** The estimate above is now a number. Cell
+C's best config (C2) with the one-sided law (f = None, the class desmo-conecut's drive builds), shape re-fit on
+Bench(60,160) fast (29.32) and worn frozen:
+
+| | ghost two-lobe C2 | one-sided C2 (buildable class) | lead-seat control |
+|---|---|---|---|
+| kinematic ws | 275/360, clips 110/110 | 260/360, clips 108/110 | 277/360 |
+| frozen exact Bench(110,360) | 32.08 (247 takes) | **35.38** (241 takes, ib14 0.797, overhead 8/28) | 30.59 |
+| held out | 35.16 (636/952) | **37.93** (614/952, follow 0.965, overhead 21/71) | 34.03 |
+| T5 bench / held | 11 / 34.8 mm; 36 / 86.3 mm | 7 / 24.8 mm; 16 / 29.0 mm | 15 / 68.9 mm; 41 / 201.3 mm |
+
+The lobe is worth 3.30 frozen / 2.77 held. The buildable cap knuckle sits **+4.79 / +3.90 behind** the lead's seats in
+the same kit (not re-searched with the one-sided law; the take bound, 260-270 kinematic < 279, holds either way).
+Per-pose dumps: docs/concepts/verify/cap-plateau-knuckle-3r_{frozen97,held}_C2onesided.json.
+
 **The limiter attribution, corrected (new).** The worn shape was re-run with ONLY the link 2 x neck pair exempt from
 K6. Everything else was unchanged: the fit, the over-lift, every other pair and the exact signed distance. The result
 is an upper bound for any re-routing that removes that collision:

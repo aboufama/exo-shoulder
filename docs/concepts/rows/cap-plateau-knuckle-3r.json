@@ -256,5 +256,60 @@
   "box_edges": "the two edge-hugging parameters are pinned by measured cliffs, not by the box: el1 (best 66.59, edge 67) fast 66.0 28.02 / 66.59 27.13 / 67.0 29.95 / 68.0 32.95 / 69.0 141.47 (follow 0.30) / 72 164.26; lo (best 26.38, edge 26) 27.5 28.94 / 26.38 27.13 / 25.5 132.27 (K6 collide 0.52) / 24 134.06 / 22 131.43; kinematic takes stay 274-276/360 throughout. Opening the box gains nothing.",
   "robustness": "NEW: the best sits 0.9 deg above a part-collision cliff in lo (the K law floor, a drive/cam tolerance: lo 25.5 -> K6 collide 0.52, gap 132) and ~2.4 deg below an el1 follow cliff (69 -> follow 0.30). J1 seat errors: el1 +0.4 / +1.4 deg cost 2.8 / 5.8 fast points; az1 +-1.5 and d3 +-1.7 cost 0.6-2.2.",
   "scripts": "auditor scratchpad audit2/edge.py, cliff.py (not committed; reproducible from the row best_params via the model file)"
+ },
+ "buildable_onesided": {
+  "t": "2026-10-18T08:15:00Z",
+  "what": "re-dispatch 3: cell C's best config (C2) with the ONE-SIDED K law (f = None: no folded-side lobe, the class desmo-conecut's drive builds), shape re-fit on Bench(60,160) fast, worn frozen exact Bench(110,360) and held out - replaces the audit's estimate (~4-5 worse) with a measurement",
+  "kinematic": "260/360 ws, clips 108/110, overhead 16/28, min th margin 5.51",
+  "fast": {
+   "gap": 29.32,
+   "reach": 0.725,
+   "follow": 0.9667,
+   "inband14": 0.7987,
+   "contact": 0.0169
+  },
+  "frozen": {
+   "gap": 35.38,
+   "reach": 0.6694,
+   "follow": 0.9818,
+   "inband14": 0.7965,
+   "inband10": 0.5333,
+   "contact": 0.0197,
+   "why": {
+    "fold": 100,
+    "flip": 0,
+    "parts": 12,
+    "contact": 7
+   },
+   "near1": 35.25,
+   "overhead": "8/28",
+   "ws_taken": "241/360",
+   "t5": "7 contacts, depth sum 24.8 mm, max 16.1 (pose 211)"
+  },
+  "held": {
+   "gap": 37.93,
+   "reach": 0.645,
+   "follow": 0.9653,
+   "inband14": 0.7951,
+   "inband10": 0.5347,
+   "contact": 0.0194,
+   "why": {
+    "fold": 293,
+    "flip": 4,
+    "parts": 29,
+    "contact": 16
+   },
+   "near1": 40.87,
+   "overhead": "21/71",
+   "ws_taken": "614/952",
+   "t5": "16 contacts, depth sum 29.0 mm, max 12.8"
+  },
+  "vs_ghost": "+3.30 frozen / +2.77 held worse than the two-lobe ghost 32.08 / 35.16 (the lobe carries 6 bench / 22 held takes on metal)",
+  "vs_control": "+4.79 frozen / +3.90 held worse than the lead-seat control 30.59 / 34.03 in the same kit",
+  "dumps": [
+   "docs/concepts/verify/cap-plateau-knuckle-3r_frozen97_C2onesided.json",
+   "docs/concepts/verify/cap-plateau-knuckle-3r_held_C2onesided.json"
+  ],
+  "note": "not re-searched with the one-sided law (the C2 seats were tuned for the two-lobe law); a one-sided search would land between this and cell B's family (kinematic 260-270 < 279 before metal), so the kill holds by the take bound either way"
  }
 }
