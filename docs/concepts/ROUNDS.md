@@ -2970,3 +2970,191 @@ cap-plateau-knuckle-3r ("main round 14's seat cell, hub-2 tail gate first") and 
 ### Needs the user's say (unchanged)
 
 - B1 (m_sub at K rest vs the coupled reading) still decides G4 for the whole knuckle family.
+
+## Round 102 results (Round J2, track jump; 2026-10-17 ~20:00 - 2026-10-18 ~00:40 UTC, closer)
+
+I re-read the ledger with `tools/alignment_ledger.py get <id>` at 00:37 UTC, just before naming the winner:
+- deltoid-crest-j3-3r exits 0, verdict WATCH (skeptic, 00:32 UTC);
+- cruciate-knuckle-3r, remote-pole-fourbar-j2-3r and cuff-slaved-elbow-fourbar-3r exit 2 (no entry: dead rows, never
+  audited).
+
+No design is gamed. Complexity is tools/simplicity.py v2.2. All four rows are dead, and every verifier upheld its
+number (0 of 4 refuted). The farm was closed all round, so everything ran locally (<= 2 niced processes). "Fast" means
+Bench(60,160) fast with kit checks; "frozen" means frozen exact Bench(110,360), the verification protocol. The lens-0
+instrument (the hub-2-free ceiling, windows 90 / 100 / 110) produced no row. The judge's Bench(110,360) J2-exit for the
+cap control (docs/concepts/round102_ideation.md section 7) is its only measured output: 281/360 closing, J2 exit p95
+107 mm, 0.181 of closing ws poses > 75 mm.
+
+| design (lens) | verified number | frozen | reach / overhead | act / P / cx | ledger | outcome |
+|---|---|---|---|---|---|---|
+| deltoid-crest-j3-3r (2: plain O20 3R, J3 on the deltoid crest; the round-4 pick re-measured at O20 / margin 5) | **v_gap 47.86 frozen** (score 82.60) on the claimed 36.63-fast config; held 50.05. The screen's later best is 26.78 fast; the verifier re-wore it at **40.17 frozen** (score 85.39) | 47.86 / 40.17 | 0.575 (207/360), overhead 4/28 / 0.606 (218/360), overhead 6/28 | 3 / 0 / **0** | WATCH | dead on the spec's kill bar (32.10) and on the track's 17.5 gate; convergence passed (n 7118: 0.265 / 0.0 / 0.0) |
+| cruciate-knuckle-3r (1: crossed four-bar J2 at the cap pole, O20 pins) | 86.95 fast (score 68.38), honest | not run (fast is 4.5x the bar) | 0.7125 fast / not measured | 3 / 3 / 16 | exit 2 | dead at gate 0; 23.8 worse than the plain cap-pole 3R through the same kit (63.18) |
+| remote-pole-fourbar-j2-3r (1: open spherical four-bar J2, pole off the linkage) | 90.11 fast (score 67.23), honest | not run (fast is 5x the bar) | 0.7688 fast / kinematic window 16/28; taken 4/12 fast | 3 / 3 / 16 | exit 2 | dead at gate 0; 27 worse than the control |
+| cuff-slaved-elbow-fourbar-3r (1: 4R elbow path with a slave loop closed through the arm cuff) | 108.22 fast (kit-honest; the claim's 107.61 fails the kit audit) | 117.08 (claimant's; not re-run by the verifier), overhead 5/28 | 0.7625 fast | 3 / 3 / 16 | exit 2 | dead at gate 0; follow 0.70 (the loop root vanishes mid-motion) |
+| conecut-knee-knuckle-3r (the lead, for reference) | 18.28 frozen (93.35), held 22.38 | - | 0.7278 (262/360) / 8 of 28 | 3 / 0 / 18.5 | WATCH | stays the verified lead |
+
+**Winner (by the rule): deltoid-crest-j3-3r.** Its v_gap is 47.86 frozen (score 82.60), complexity 0, 3 active
+joints, 0 passive joints, 0 passive translations, ledger WATCH. It is the round's only design with a number on the
+verification protocol, and that number was confirmed by an independent verifier. The verifier also re-wore the
+screen's later best (26.78 fast) at 40.17 frozen (score 85.39). **It does not beat the previous verified lead, 18.28
+(conecut-knee-knuckle-3r): it trails by 29.58 on the claim and by 21.89 on the later best.** It is dead on the track's
+gate-0 bar (17.5) and on its spec's kill bar (32.10), and the row says so (status dead). So, as in round J1, it is not
+a build candidate: no generation CAD for J2, and the generation CAD of record stays the lead's. No design reached the
+judges (judge_all), so no EVOLUTION row. Passed over as gamed: none.
+
+**Alignment.** The ledger's WATCH reasons for deltoid-crest-j3-3r (auditor 00:25 UTC, skeptic 00:32 UTC; the skeptic
+upheld 4 of 6 and refuted 2 by measurement):
+- **reporting:** the dashboard's sweep best of 26.78 (score 90.26) sits 21.08 below the verified 47.86.
+- **T1 (plain-gap search):** the zc-frontier family's evaluate() (docs/concepts/models/zc-frontier-3r.py lines 128 and
+  148) returns the PLAIN gap as the objective, so 2526 configs (later 7118) were searched on the plain gap, not on the
+  near-touch gap CLAUDE.md asks for.
+  - Bench reading: 47.87 plain, 64.85 with metal < 1 mm counted as contact, 95.55 at < 2 mm, 122.83 at < 3 mm.
+  - The near-touch shells (16.98 / 47.70 points) compare with the lead's 1.64 / 16.56.
+- **G1 (overhead is metal-on-skin):** the 4 overhead workspace poses the claim takes (4/28, elev >= 140) have their
+  lowest metal at 0.13, 0.84, 1.20 and 1.34 mm on the bench, and at 0.07-0.66 mm on the 4/26 held poses.
+  - At the 1 mm reading, overhead falls to 2/28 on the bench and 0/26 held.
+  - Raised-arm clip frames: 6 of 10 taken, all within 1.4 mm.
+  - 0 overhead poses have 2 mm of clearance.
+- **R2:** the s10 config (26.78 fast) wears to 40.17 frozen, 13.39 worse.
+  - Contact depth reaches 23.4 mm at (0, 165, +15) and 11.6 mm at (0, 165, -45).
+  - Held, the claimed config goes 10.5 mm deep at (30, 165, -15) and 9.2 mm at (0, 150, -30).
+- **Refuted by the skeptic:**
+  - P2, the held drop: content-disjoint +1.54, search-unseen +3.23, under the watch line.
+  - The verifier's 6 static islands (connected reach 0.589): an artefact of a one-way kNN-8 flood. With edges in both
+    directions there are 0 islands.
+- **Missed, per the skeptic (process, all rows):**
+  - the held set shares 32 clip frames by pose vector with the claim bench, including every overhead clip frame;
+  - the directed flood can report reachable poses as islands on any row it runs on.
+
+The three four-bar rows have no ledger entry. Their verifiers' findings are carried here at watch level:
+- **cruciate-knuckle-3r:**
+  - *in-band sample-weighting (auditor note):* low-floor crossed windows read 75.05 in the kit only because their
+    metal floats at 9.7-11.5 mm sample spacing (rule: 4 mm). Weighted by real area they read 90.21, and the row's
+    "best measured" 79.77 (k1) reads 91.28. Only kit-audit-clean numbers are quoted.
+  - *follow constant:* follow is 0.8833 on every top config. The 7 lost Raise-overhead frames sit at th 24-30, below
+    every window floor (~33). This is a real kinematic loss, not a bug.
+  - *transmission guard [30, 150] not lowered:* lowering it would shrink a margin, which is the user's call.
+- **remote-pole-fourbar-j2-3r:**
+  - *missed levers, now measured:* q 0.99-0.93 gives 101.7-154.3; extra th stops of 5-20 deg give 94.5-147.1. Both
+    lose.
+  - *hub level:* the row lists A0 at 90 mm, but a per-pose recompute reads 100 mm at pose 93. Contact is 0, so the
+    number does not change.
+  - *kit `over` lift (open):* fit_profiles lifts once, before the climb limit, so the lift is not a fixed point.
+    Iterated, the J1-cluster cell moves 274.37 -> 133.04 and the best is unchanged. Fixing the kit is a measurement
+    change for every model that uses `over`, so it goes to the kit owner.
+- **cuff-slaved-elbow-fourbar-3r:**
+  - *reporting:* the claim says "honest", but the kit reports honest=False on 107.61 (the coupler is sampled at
+    4.14 mm). The kit-honest best is 108.22 (verifier) / 108.36 (screen k559).
+  - *search box:* the J1 / J3 seats were fixed. A seat-free ES reached 103.91, all of it reach (+4 ws), and fails the
+    kit audit.
+  - *gate:* re-evaluations of one best were counted; the gate still passes on 239 distinct later configs.
+  - *process:* a pattern-matched `pkill -f` on the screener's own run.
+- **Process, all rows:**
+  - three of four verifiers again quoted the stale template bar (68.93, refute at 78.93; the lead is 18.28);
+  - three of four claims never ran frozen exact, because their fast numbers were 4.5-6x the bar.
+
+**What the round measured (lessons).**
+1. **The virtual J2 is closed at the cap pole, in all three cells.** Through the same kit and bench, the plain
+   cap-pole O20 3R scores 63.18 fast (56.40 frozen). Against it:
+   - open four-bar: 90.11 (+27);
+   - crossed four-bar: 86.95 (+24);
+   - slaved elbow: 107.61-108.22 (+45).
+
+   The kinematics are never the limit. The open cell's window covers 286/360 against the plain 281, and the crossed
+   cell reaches W 101 at legal pins. The metal is the limit.
+2. **Every added O20 pin is a rigid disc whose level comes from its own worst 2-3 % of poses.** So more pins near the
+   J2 zone mean more tails:
+   - open four-bar: A1 136-141 mm on the Raise-overhead frames against a median of 61; A0 100 against 51; B0 99-109
+     against 47;
+   - slaved elbow: disc edges A0 / A1 / B0 at 97-137 mm;
+   - crossed four-bar: hubs 79-130 mm, 0-0.003 in band.
+3. **The cap pole's binder is a zone, not a ray.** At (0..15, 150, 0) and (0, 105, 0), every part within ~25-50 deg of
+   J2 is pushed to 79-130 mm.
+   - A crossed cell puts metal on its own pole, the J2 ray.
+   - An open cell's coupler pins roam into the zone.
+   - A cell clustered within 25-30 deg of J1 keeps every member <= 76 mm on centre rays (W 91.8), but dies on layering
+     (K6 rejects 99.5 % of poses; 274.37, or 133.04 with an iterated lift).
+   - Bound in the plain cap 3R's link-1 frame: metal 22 deg from J1 is in band at almost any dihedral (median 0.93);
+     at 40 deg the best is 0.87; on hub 2's ring (50.2 deg) the best is 0.083.
+4. **A slave loop closed through the arm cannot follow internal rotation.** The loop root exists only while the
+   arm-fixed pin stays in reach. Internally rotated climbs and cross-body sweeps carry it out of reach mid-motion:
+   - Reach a high shelf loses 5 of 9 transitions;
+   - Wash opposite shoulder loses 7 of 9;
+   - follow is 0.70 on the dense path against 0.918 on the proxy.
+
+   A pose-by-pose bench cannot see this. Any coupling loop grounded on the arm inherits it.
+5. **For a plain O20 3R, the J3 seat height is a fold lever, not a proximity lever.** Hub 3 sits well on the crest
+   (0.90-0.95 in band at 62 mm), but J3 on the crest (wd ~104) widens the J1-J3 angle the dyad must span:
+   - p5-p95 18-137 deg, against a window of [10.5, 81.4];
+   - 88/360 ws lost stretched (overhead 14/28, across the body 48/68);
+   - the best gap rises steadily with wd: 37.9 / 45.2 / 60.4 / 77.1 at wd 100-120.
+
+   The round-4 "crest basin" was an artefact of O15 hubs and the 10-deg margin: with equal arcs, hub 2 sat 0.82-0.997
+   in band at O15 and sits 0.02-0.07 at O20.
+6. **At the crest seats, Bench(60,160) over-reads by 11-14 points; at the zc seats the gap is +2.2.** Pairs:
+   36.63 -> 47.86, 29.85 -> 43.99, 28.63 -> 41.04, 26.78 -> 40.17. The fit bench under-samples the stretched poses the
+   window costs. Searches at any new seat should run on the envelope bench, or pre-register a fast-to-frozen check.
+7. **Proxies overstate four-bar cells by 130-240 points.** Lens 1's proxy (centre rays only, no layering, no K6, no
+   O20 disc edges):
+   - proxy 42.34 -> kit 103.72; proxy 63.38 -> kit 79.77;
+   - centre-ray hub levels are 15-60 mm optimistic for roaming pins.
+
+   Loop and four-bar mechanisms need the kit in the search loop from the first config.
+8. **The four-pose binder test is necessary, not sufficient.** A minimax search clears it at 67 mm in ~2 min (the
+   judge's 90000 random layouts missed it), then the binder moves to the median and p90 poses (B1 94 / 126 mm).
+
+**The 3-joint picture after rounds J1 and J2 (for the lead's ceiling statement).**
+- No jump-track class has beaten the 17.5 gate: 0 of 9 designs in J1 and J2.
+- At the legal seats:
+  - the back seat's plain 3R is kinematically capped at 250/360;
+  - the back-seat knuckle family is capped at 269-271 takes (ghosts with an ideal drive);
+  - the cap pole reaches 281/360 kinematically, but every J2 realisation fails its zone:
+    - revolute J2: hub 2 <= 0.12 in band over 668 configs;
+    - virtual J2: >= 86.95 fast in all three cells;
+    - plain J3 on the crest: 40.17 frozen.
+- 95 needs 279/360 at the lead's in-band.
+
+**Next focus (round J3, track jump).** The score has not reached 95. The best verified gap is 18.28 (conecut, WATCH),
+and 95 needs 13.75: +17 takes, to 279/360, at ib14 >= 0.90 and the lead's contact.
+
+Close these in the catalogue, with the numbers above:
+- virtual-J2 cells at the cap pole (open, crossed, slaved, clustered);
+- arm-grounded coupling loops;
+- plain crest-J3 3Rs;
+- proxy-only screens of loop mechanisms.
+
+Two 4-joint ghost gates, like-for-like against the lead. The 3-joint classes at legal seats are measured capped
+(above). The user prefers 3, so any claim says so.
+- **Lens A, a ghost J0 relay under the lead's verified chain** (conecut's frozen shape; a zero-size J0 at the legal
+  seats, back of the shoulder / acromion top; continuity flood; frozen exact Bench(110,360)).
+  - *Measured reason:* round J1's ghost J0 under the pin-knee host bought 5.0-5.3 fast points (23.64 -> 18.30 front /
+    18.62 seat-legal) on a back-seat host whose losses are also mostly fold. The lead loses 88 poses to fold (stretched
+    73, 64 of them internal rotation >= 90 across the body). +17 takes is the 95 line.
+  - *Gate:* ghost <= 15 or >= 279 takes with <= 4 contacts. Otherwise the relay class is closed for good, with the
+    number.
+  - *If it passes:* the hardware question is J0's metal against hub 2's orbit. Per J1 lesson 5, that needs a1 <= ~20
+    deg or a J0 that sits clear of the orbit. Measure it before modelling.
+- **Lens B, the redundant-4R null-space ghost at the cap pole.** Four O20 hubs at real height. Per pose, the
+  null-space is chosen for clearance, under the continuity flood (no joint jump > 10 deg per 2-deg step, no branch
+  change). The 4th hub is parked on the acromion top (bony, 2-5 mm skin spread), not the deltoid.
+  - *Measured reason:* the cap pole is the only legal seat with kinematic reach >= 0.78 (281/360). Its sole failure is
+    hub 2's zone (0.181 of closing poses exit > 75 mm), which a revolute 3R cannot move per pose. A null-space can.
+  - *Precedent:* the redundant 4R's kinematic headroom is ~1.0. Its cost was entirely parking (hub 4 0.51 in band when
+    on the deltoid), and that was never measured with hub 4 on the acromion top.
+  - *Gate:* as lens A.
+  - *If it passes:* determination is the next question (spring-centred + stops; a free spare sags within 0.1 s).
+- **Machinery before the next claim:**
+  - set the verify template's bar to 18.28 (stale in 3 of 4 verifications);
+  - zc-frontier evaluate() objective -> the near-touch gap (T1);
+  - make the continuity flood's kNN edges bidirectional (the skeptic's islands refutation);
+  - de-duplicate the held set against the claim bench by pose vector (32 shared clip frames);
+  - in-band weighted by real area for members sampled sparser than 4 mm;
+  - the kit `over` lift iterated to a fixed point (a measurement change; announce it);
+  - every claim message's numbers come from the row file, kit-honest only.
+
+### Needs the user's say (unchanged, now with J2's numbers)
+
+- The 4-joint question: every 3-joint class at the legal seats is measured at >= 18.28 (above). Lenses A / B give the
+  4-joint class's ghost number like-for-like before the lead asks.
+- The transmission guard [30, 150] and the J1 seat rule stay as they are. No lens relaxed them, and cruciate's
+  low-floor windows would need the first.
