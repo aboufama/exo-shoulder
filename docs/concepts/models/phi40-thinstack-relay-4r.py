@@ -125,7 +125,10 @@ def _run(base, nc, nw, exact, items, outp, tagger):
 
     def one(hw, tag):
         o = wear(S, dict(base, **hw)); o["hw_override"] = hw; o["tag"] = tag; res.append(o)
-        print(json.dumps(dict(tag=tag, hw=hw, **summary(o)), default=float), flush=True)
+        if nc != -2:
+            try: o["th_margin"] = BV.th_margin(S["M"], S["B"])           # fold margin over the taken poses (the verifier's reading)
+            except Exception as ex: o["th_margin"] = dict(err=repr(ex)[:200])
+        print(json.dumps(dict(tag=tag, hw=hw, **summary(o), th_margin=o.get("th_margin")), default=float), flush=True)
         if outp:
             json.dump(res, open(outp, "w"), default=float)
             if nc != -2:
