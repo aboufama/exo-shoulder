@@ -545,6 +545,10 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      - desmo-slipper (18.95) inherits the same layer. Its row is flagged, and the next hourly audit picks it up.
      - Both row verdicts now say this.
      - Round 104's desmo-window-knuckle-3r (stage 1 raised into link 2) is the fix attempt.
+     - *06:31:* the desmo-slipper audit is also final WATCH. Its stage 1 sits in the same plate, and its model is the SOURCE
+       of the level formula. Re-worn at F+3.9: 20.38 / 25.33 (+1.43, a lower bound). Its old 'paired TIE' was at a refuted
+       placement. desmo-window is DEAD at 20.43. **No desmo-family stage 1 is buildable on file.** The family's
+       simplicity edge (cx 15.75-16.5) has no buildable number below ~20. Row texts were corrected by the lead.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
