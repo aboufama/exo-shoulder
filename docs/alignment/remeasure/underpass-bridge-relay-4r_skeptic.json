@@ -1,0 +1,181 @@
+{
+ "bench": {
+  "raw_model_rule": 19.74,
+  "lost": [
+   345,
+   396,
+   446
+  ],
+  "jam_contacts": [
+   237,
+   316,
+   343,
+   372,
+   423,
+   448
+  ],
+  "verifier_rescored": 20.6,
+  "x1": {
+   "gap": {
+    "gap": 20.6,
+    "reach": 0.7889,
+    "follow": 1.0,
+    "inband14": 0.8347,
+    "contact": 0.0296,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 284,
+    "contact_poses": 12
+   },
+   "near1": 24.79,
+   "near2": 53.16,
+   "taken": 394,
+   "lt1": 8,
+   "lt2": 56,
+   "frac_lt2": 0.1421,
+   "ncon": 12,
+   "depth": 43.23,
+   "deepest": 9.79,
+   "deeper3": 5,
+   "oh": [
+    7,
+    28
+   ]
+  },
+  "jam_contacts_as_lost": 19.14,
+  "loaded_new_lost": [
+   118,
+   139,
+   149,
+   200,
+   257
+  ],
+  "loaded_gap": 22.02,
+  "E_under_min": [
+   4.192,
+   139
+  ],
+  "clr_lowest": {
+   "i": 149,
+   "kind": "ws",
+   "mm": 1.292,
+   "part": "c23:m3",
+   "hw": "shell",
+   "metal": 2.1
+  }
+ },
+ "held": {
+  "raw_model_rule": 23.45,
+  "lost": [
+   815,
+   887,
+   888,
+   898,
+   969,
+   1092,
+   1099,
+   1152
+  ],
+  "jam_contacts": [
+   610,
+   683,
+   752,
+   819,
+   820,
+   824,
+   891,
+   892,
+   897,
+   960,
+   964,
+   965,
+   1032,
+   1091,
+   1098,
+   1153
+  ],
+  "verifier_rescored": 24.33,
+  "x1": {
+   "gap": {
+    "gap": 24.33,
+    "reach": 0.7689,
+    "follow": 1.0,
+    "inband14": 0.8318,
+    "contact": 0.044,
+    "n_ws": 952,
+    "n_clip": 202,
+    "ws_taken": 732,
+    "contact_poses": 43
+   },
+   "near1": 29.3,
+   "near2": 55.19,
+   "taken": 934,
+   "lt1": 24,
+   "lt2": 130,
+   "frac_lt2": 0.1392,
+   "ncon": 43,
+   "depth": 173.02,
+   "deepest": 12.23,
+   "deeper3": 21,
+   "oh": [
+    17,
+    71
+   ]
+  },
+  "jam_contacts_as_lost": 22.73
+ },
+ "lead_bench": {
+  "gap": {
+   "gap": 18.29,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9012,
+   "contact": 0.0106,
+   "n_ws": 360,
+   "n_clip": 110,
+   "ws_taken": 262,
+   "contact_poses": 4
+  },
+  "near1": 19.92,
+  "near2": 34.84,
+  "taken": 372,
+  "lt1": 3,
+  "lt2": 33,
+  "frac_lt2": 0.0887,
+  "ncon": 4,
+  "depth": 20.24,
+  "deepest": 8.93,
+  "deeper3": 3,
+  "oh": [
+   8,
+   28
+  ]
+ },
+ "lead_held": {
+  "gap": {
+   "gap": 22.38,
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.9,
+   "contact": 0.016,
+   "n_ws": 952,
+   "n_clip": 202,
+   "ws_taken": 659,
+   "contact_poses": 14
+  },
+  "near1": 25.23,
+  "near2": 37.11,
+  "taken": 861,
+  "lt1": 13,
+  "lt2": 71,
+  "frac_lt2": 0.0825,
+  "ncon": 14,
+  "depth": 60.97,
+  "deepest": 9.86,
+  "deeper3": 9,
+  "oh": [
+   18,
+   71
+  ]
+ }
+}

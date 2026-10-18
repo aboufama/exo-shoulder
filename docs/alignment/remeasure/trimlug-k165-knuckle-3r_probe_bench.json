@@ -246,9 +246,9 @@
    }
   ],
   "ws_overhead_why_not": {
+   "slide": 4,
    "fold": 14,
-   "contact": 2,
-   "slide": 4
+   "contact": 2
   }
  },
  "extras": {
@@ -317,7 +317,7 @@
    "pa_eff_crank": 34.5
   }
  },
- "secs": 245.6,
+ "secs": 147.0,
  "exact": true,
  "adapter": "tools/alignment_trimlug_adapter.py"
 }

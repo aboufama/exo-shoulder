@@ -282,9 +282,9 @@
   }
  },
  "mode": "exact",
- "secs": 245.6,
+ "secs": 147.0,
  "exact": true,
- "git": "137d572",
+ "git": "9028dec",
  "adapter": "tools/alignment_trimlug_adapter.py",
  "t5": {
   "n": 2,

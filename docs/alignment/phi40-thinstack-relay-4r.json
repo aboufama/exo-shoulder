@@ -1,24 +1,31 @@
 {
  "id": "phi40-thinstack-relay-4r",
- "status": "screened",
- "v_gap": null,
+ "status": "verified",
+ "v_gap": 14.06,
  "complexity": 51.25,
  "verdict": "watch",
  "reasons": [
-  "held_out: no verified bench gap on the row",
   "dominance: beats conecut-knee-knuckle-3r by 4.76 plain but loses by 12.32 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
-  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "reporting: verdict text still reads as a self-measured screen"
  ],
  "checks": [
   {
    "check": "held_out",
-   "level": "watch",
-   "reason": "no verified bench gap on the row"
+   "level": "ok",
+   "reason": "held out 16.69 vs bench 14.06 (+2.63; re-measured (this audit))",
+   "held_gap": 16.69,
+   "v_gap": 14.06,
+   "drop": 2.63,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
    "level": "ok",
-   "reason": "no pair"
+   "reason": "self/fast 14.06 -> verified 14.06 (+0.00)",
+   "fast": 14.06,
+   "verified": 14.06,
+   "drop": 0.0
   },
   {
    "check": "near_touch",
@@ -46,9 +53,9 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): gap 14.06: bench 17 contact poses, sum 74.92 mm, deepest 15.37 mm at ['ws', 30.0, 150.0, -30.0], 7 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 48 contact poses, sum 197.82 mm, deepest 13.89 mm at ['ws', 45.0, 150.0, -15.0], 23 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 14.06: bench 17 contact poses, sum 74.92 mm, deepest 15.37 mm at ['ws', 30.0, 150.0, -30.0], 7 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 48 contact poses, sum 197.82 mm, deepest 13.89 mm at ['ws', 45.0, 150.0, -15.0], 23 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
    "depths": {
-    "gap 14.06": {
+    "v_gap 14.06": {
      "bench": {
       "n": 17,
       "sum_mm": 74.92,
@@ -114,7 +121,7 @@
   {
    "check": "fold_margin",
    "level": "ok",
-   "reason": "min fold margin on file 5.0 deg (frozen_exact.th_margin; 4 readings)",
+   "reason": "min fold margin on file 5.0 deg (frozen_exact.th_margin; 5 readings)",
    "min_margin": 5.0,
    "where": "frozen_exact.th_margin"
   },
@@ -243,13 +250,13 @@
   },
   {
    "check": "reporting",
-   "level": "ok",
-   "reason": "row, verifier files and dashboard agree"
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen"
   },
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
   },
   {
    "check": "rules",
@@ -262,6 +269,7 @@
   "held": true
  },
  "verifier_files": [
+  "docs/concepts/verify/phi40-thinstack-relay-4r/verifier_held.json",
   "docs/concepts/verify/phi40-thinstack-relay-4r/verifier_claim.json",
   "docs/concepts/verify/phi40-thinstack-relay-4r/verifier_held_perpose.json",
   "docs/concepts/verify/phi40-thinstack-relay-4r/verifier_claim_perpose.json",
@@ -272,10 +280,9 @@
   "docs/concepts/verify/phi40-thinstack-relay-4r/held_pick_perpose.json",
   "docs/concepts/verify/phi40-thinstack-relay-4r/diag_claimbench_s0_perpose.json",
   "docs/concepts/verify/phi40-thinstack-relay-4r/claim_phi40_post0_perpose.json",
-  "docs/concepts/verify/phi40-thinstack-relay-4r/claim_phi40_pick_perpose.json",
-  "docs/concepts/verify/phi40-thinstack-relay-4r/pick_phi40.json"
+  "docs/concepts/verify/phi40-thinstack-relay-4r/claim_phi40_pick_perpose.json"
  ],
- "git": "d889d5a",
+ "git": "81bf405",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T21:04:34Z"
+ "t": "2026-10-18T21:22:32Z"
 }
