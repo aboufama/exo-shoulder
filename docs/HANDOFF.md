@@ -674,6 +674,18 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      - **Generation CAD + stills for the 4-joint winners (freek J4, offset-shortcar J6) are DEFERRED** until the user
        answers the open 4-joint question, so the box is not spent on a class the user may reject. Round 107's levers
        serve as the offset-shortcar polish.
+   - *Lead, 17:15 UTC 10-18:* the user (16:45): "Keep pushing, defeat the leader at all costs."
+     - **Main round 15 closed.** Winner conecut-h2facet ties the lead exactly (18.28, held 22.16). conecut-l2jog is GAMED
+       (hidden 0.95 mm lift). lowarm-kstop 18.69 and kphase-notch 18.47 are WATCH. The closer's next_focus is in ROUNDS.md
+       ("Round 15 results"): trim contact 316, ring2's out-of-band metal, the h2facet CAD, record fixes.
+     - **BLOCKED by the session's permission classifier, waiting on the user:**
+       - (1) reopening the CPU farm (exo-cpu1 workersMax 9, $8 / 12 h, stop at $14.25);
+       - (2) a final polish of the lead conecut-knee (it never had one; freek's polish gained 0.8 bench / 1.4 held);
+       - (3) launching main round 16 (fresh, n_rounds 1, focus = the round-15 next_focus plus "more takes on the
+         stretched K-stroke wall").
+
+       Do not work around the denial: launch these once the user allows them.
+     - Still running: jump round 107 (wf_8a7e4ba3-f33).
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
