@@ -127,3 +127,49 @@ cell's built flank passing the PA gate, which it does not.
    lead's seats msub < 5 deg for rho < ~1.0, so the 5 deg fold rule rejects the first ~5 deg of th past the onset. This
    costs 9-12 ws takes per 360. Any slaved-knuckle lens that wants a slow law must move its onset, or its seats, against
    msub as well as against PA.
+
+## Audit (dead-row auditor, 2026-10-18)
+
+**Verdict: the death of this row stands as specified. Its generalization is refuted.** The row specifies a crowned pin on
+one flank with a slow law at rho 0.75-0.9. The verdict's claim that "a one-pair drive cannot carry the lead's stroke" is
+false for a tooth-tooth pair at rho 1.2-1.5.
+
+- **Reproduced.** The rho 0.9 ghost on fast Bench(60,160) reads plain 16.25, reach 0.7375, follow 0.9833, ib14 0.9044,
+  contact 0, identical to the row. Rho 1.5 reads fast 13.12, which is sweep k1. The formal convergence gate is met
+  (0.00 / 0.00 / 1.14 on the 12-cell scan).
+- **No over-strict check.** The msub losses at rho < 1 come from the family reading of the 5 deg fold rule
+  (min(m_sub, m_eff) >= 5 wherever K is off its rest). The ledger ruled that dropping it was gaming
+  (dipped-law-groove-knuckle-3r, T3). The rho 0.8 / 0.9 kill is therefore right.
+- **What the row missed: the pin is not the only one-pair profile.** The pin scan bounds pins only, because a pin's
+  contact normal always runs through the pin centre. A spherical involute tooth pair has its plane of action through the
+  relative pole, and its contact is kept between the base-cone feet of uK and u2, so there is no interference. Both
+  kinematic PAs stay at or below 38.03 and K = integral dsigma / (n . v1). It uses the same axes and signs as `flank()`
+  (`docs/concepts/verify/onetooth-slowlaw-knuckle-3r_audit_toothpair.py`). The maximum K range one pair can carry is
+  37.7 / 42.5 / 47.3 / 47.1 / 46.7 / 46.1 deg at rho 0.8 / 0.9 / 1.0 / 1.2 / 1.5 / 2.15. Pins reach 21-32 deg. The
+  taken stroke is 45.62 deg. The spherical result matches the planar one: the involute roll is tan(PA) rad, and
+  tan 38.03 = 44.8 deg on a plane.
+- **The ghost at a stroke one tooth pair can carry passes step 0.** Frozen exact Bench(110,360), drive metal deleted:
+
+| cell | fast | frozen exact | ws takes | contacts (mm) |
+|---|---|---|---|---|
+| rho 1.5, DKLIM 46 | 13.12 | **18.83** | 261 | 139 -0.17, 205 -4.25, 237 -2.85, 264 -0.13, 316 -1.22 |
+| rho 1.2, DKLIM 46 | 13.12 | **18.83** | 261 | 139 -0.31, 205 -4.42, 237 -2.85, 264 -0.09, 316 -1.28 |
+| rho 1.5, DKLIM 50 | 13.12 | 18.83 | 261 | same set |
+| rho 1.5, DKLIM 32 (the stroke a pin carries) | 18.75 | 24.18 | 240 | 205, 237, 264 |
+| control: the lead's law, ghost (row) | 12.50 | 18.28 | 262 | 4 |
+
+- Both DKLIM 46 cells pass the pre-registered gate (<= 19.0, >= 258 takes).
+- Reach is 0.725, overhead 8/28, follow 1.0, ib14 0.9179 / 0.9073, and the 2 mm reading is 35.39 / 29.4.
+- Against the paired control the cells are +0.55 and -1 take, and pose 139 is new: it is shallow, -0.17 / -0.31 mm.
+
+**These are bounds, not claims.** The ghost has no drive metal. The pass line is 18.98 at cx <= 12, which leaves 0.15
+for the two flanks' metal. A frozen reading in (20.0, 23.5] would still be the cx 10-11 frontier point.
+
+**Open before any claim:**
+- the two flanks' metal stacked over link 1b;
+- PA and slop on the BUILT involute flanks, with tip and root, the onset at stop A, and a 0.4 deg stroke margin;
+- whether a single-tooth involute cam pair counts as a "gear" under MVP1. It is one higher pair like the lead's slipper
+  nose, but the user decides that reading.
+
+The sibling shortk-onetooth-knuckle-3r (rho 1.05-1.1) should test this profile before it calls the pin's range the
+drive's.
