@@ -6,119 +6,97 @@
  "active_dof": 3,
  "passive_dof": 0,
  "passive_translations": 0,
- "status": "verified",
+ "status": "dead",
  "t_ideated": null,
- "t_screened": "2026-10-17T22:48:46Z",
- "reach": 0.65,
+ "t_screened": "2026-10-18T00:35:30Z",
+ "reach": 0.7,
  "follow": 0.9,
- "inband14": 0.8644,
- "inband10": 0.4752,
- "contact": 0.0307,
- "gap": 36.63,
+ "inband14": 0.9025,
+ "inband10": 0.4567,
+ "contact": 0.0178,
+ "gap": 26.78,
  "bench": "Bench(60,160) fast, zc-frontier verified checks (top faces, crowns, near-touch, hub F <= 140, 1 mm radial K6)",
  "v_reach": 0.575,
  "v_follow": 0.8909,
  "v_inband14": 0.867,
  "v_inband10": 0.4791,
  "v_gap": 47.86,
- "n_configs": 2526,
+ "n_configs": 7118,
  "best_params": {
-  "az": 105.4971,
-  "el": 63.1176,
-  "a1": 38.6879,
-  "a2": 44.1129,
-  "wd": 103.3777,
-  "wa": 4.934599999999989,
+  "az": 108.5603,
+  "el": 64.4969,
+  "a1": 40.4557,
+  "a2": 45.9232,
+  "wd": 104.4082,
+  "wa": -0.38640000000000896,
   "sigma": -1,
-  "inv2": 1,
+  "inv2": 0,
   "inv3": 1,
-  "q": 0.9419,
-  "end_extra": 2.5478
+  "q": 0.9572,
+  "end_extra": 2.9522
  },
- "near_gap": 57.59,
+ "near_gap": 51.11,
  "frozen_exact": {
   "protocol": "fit Bench(60,160) fast, every level frozen, worn Bench(110,360) exact",
-  "of_fast_gap": 36.63,
-  "of_config": {
-   "az": 105.4971,
-   "el": 63.1176,
-   "a1": 38.6879,
-   "a2": 44.1129,
-   "wd": 103.3777,
-   "wa": 4.934599999999989,
-   "sigma": -1,
-   "inv2": 1,
-   "inv3": 1,
-   "q": 0.9419,
-   "end_extra": 2.5478,
-   "margin": 5.0,
-   "width": 12.0,
-   "t_link": 3.0,
-   "rad1": 10.0,
-   "rad2": 10.0,
-   "rad3": 10.0,
-   "vm": 0,
-   "near": 0
-  },
-  "gap": 47.86,
-  "score": 82.6,
-  "reach": 0.575,
+  "gap": 40.17,
+  "score": 85.39,
+  "reach": 0.6056,
   "follow": 0.8909,
-  "inband14": 0.867,
-  "inband10": 0.4791,
-  "contact": 0.0615,
-  "near_touch_gap": 64.84,
+  "inband14": 0.905,
+  "inband10": 0.4625,
+  "contact": 0.0482,
+  "near_touch_gap": 59.75,
   "min_metal_all_faces_mm": 0.05,
   "honest": true,
   "hub_F": {
-   "hub1": 50.77,
-   "hub2": 59.77,
+   "hub1": 51.0,
+   "hub2": 60.3,
    "hub3": 62.0
   },
   "inband_member": {
-   "hub1": 0.9858,
-   "hub2": 0.9989,
-   "hub3": 0.9046,
-   "link2": 0.9751,
-   "link1": 0.6738,
-   "neck": 0.8276
+   "hub1": 0.9756,
+   "hub2": 0.9999,
+   "hub3": 0.9268,
+   "link1": 0.9605,
+   "link2": 0.8682,
+   "neck": 0.8463
   },
   "overhead": {
    "n_ws": 28,
-   "reach": 0.1429,
+   "reach": 0.2143,
    "n_clip": 10,
    "follow": 0.6,
-   "n_taken": 10,
-   "inband14": 0.8131,
-   "inband10": 0.5073
+   "n_taken": 12,
+   "inband14": 0.8681,
+   "inband10": 0.5737
   },
   "attribution": {
    "ws": {
     "n": 360,
-    "taken": 207,
-    "fold_folded": 1,
-    "fold_stretched": 96,
+    "taken": 218,
+    "fold_folded": 2,
+    "fold_stretched": 88,
     "jam_K2": 0,
-    "parts": 43,
+    "parts": 39,
     "contact": 13
    },
    "clip": {
     "n": 110,
     "taken": 98,
     "fold_folded": 0,
-    "fold_stretched": 5,
+    "fold_stretched": 9,
     "jam_K2": 0,
     "parts": 0,
-    "contact": 7
+    "contact": 3
    },
    "overhead": {
     "n": 28,
-    "taken": 4,
+    "taken": 5,
     "fold_folded": 0,
-    "fold_stretched": 15,
+    "fold_stretched": 14,
     "jam_K2": 0,
-    "parts": 4,
-    "contact": 5
+    "parts": 3,
+    "contact": 6
    },
    "across": {
     "n": 68,
@@ -131,20 +109,20 @@
    },
    "behind": {
     "n": 25,
-    "taken": 13,
+    "taken": 17,
     "fold_folded": 0,
-    "fold_stretched": 11,
+    "fold_stretched": 8,
     "jam_K2": 0,
     "parts": 0,
-    "contact": 1
+    "contact": 0
    }
   },
   "contact_by_member": {
-   "neck": 5,
-   "link2": 7,
-   "hub2": 4,
-   "hub3": 1,
-   "hub1": 3
+   "link2": 4,
+   "hub2": 6,
+   "hub3": 3,
+   "neck": 2,
+   "hub1": 1
   },
   "binders": [
    {
@@ -160,10 +138,10 @@
     ],
     "i": 128,
     "result": "taken",
-    "th": 51.1,
+    "th": 47.2,
     "j2_exit_mm": 55.0,
-    "hub2_level": 59.8,
-    "min_mm": 0.45
+    "hub2_level": 60.3,
+    "min_mm": 1.75
    },
    {
     "asked": [
@@ -178,9 +156,9 @@
     ],
     "i": 209,
     "result": "parts",
-    "th": 56.7,
+    "th": 53.4,
     "j2_exit_mm": 49.0,
-    "hub2_level": 59.8,
+    "hub2_level": 60.3,
     "min_mm": null
    },
    {
@@ -196,9 +174,9 @@
     ],
     "i": 262,
     "result": "parts",
-    "th": 41.4,
-    "j2_exit_mm": 51.0,
-    "hub2_level": 59.8,
+    "th": 37.7,
+    "j2_exit_mm": 50.0,
+    "hub2_level": 60.3,
     "min_mm": null
    },
    {
@@ -214,9 +192,9 @@
     ],
     "i": 205,
     "result": "parts",
-    "th": 48.7,
-    "j2_exit_mm": 57.0,
-    "hub2_level": 59.8,
+    "th": 43.2,
+    "j2_exit_mm": 58.0,
+    "hub2_level": 60.3,
     "min_mm": null
    },
    {
@@ -232,10 +210,10 @@
     ],
     "i": 261,
     "result": "taken",
-    "th": 46.9,
-    "j2_exit_mm": 53.0,
-    "hub2_level": 59.8,
-    "min_mm": 1.94
+    "th": 52.4,
+    "j2_exit_mm": 55.0,
+    "hub2_level": 60.3,
+    "min_mm": 2.54
    },
    {
     "asked": [
@@ -250,10 +228,10 @@
     ],
     "i": 261,
     "result": "taken",
-    "th": 46.9,
-    "j2_exit_mm": 53.0,
-    "hub2_level": 59.8,
-    "min_mm": 1.94
+    "th": 52.4,
+    "j2_exit_mm": 55.0,
+    "hub2_level": 60.3,
+    "min_mm": 2.54
    },
    {
     "asked": [
@@ -268,33 +246,55 @@
     ],
     "i": 261,
     "result": "taken",
-    "th": 46.9,
-    "j2_exit_mm": 53.0,
-    "hub2_level": 59.8,
-    "min_mm": 1.94
+    "th": 52.4,
+    "j2_exit_mm": 55.0,
+    "hub2_level": 60.3,
+    "min_mm": 2.54
    }
   ],
-  "file": "docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json"
+  "file": "docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s10.json",
+  "of_fast_gap": 26.78,
+  "of_config": {
+   "az": 108.5603,
+   "el": 64.4969,
+   "a1": 40.4557,
+   "a2": 45.9232,
+   "wd": 104.4082,
+   "wa": -0.38640000000000896,
+   "sigma": -1,
+   "inv2": 0,
+   "inv3": 1,
+   "q": 0.9572,
+   "end_extra": 2.9522,
+   "margin": 5.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "vm": 0,
+   "near": 0
+  }
  },
- "frozen_exact_gap": 47.86,
+ "frozen_exact_gap": 40.17,
  "convergence": {
-  "n": 2526,
-  "best": 36.63,
-  "gain_2nd_half": 1.204,
-  "gain_last_third": 0.462,
+  "n": 7118,
+  "best": 26.78,
+  "gain_2nd_half": 0.265,
+  "gain_last_third": 0.0,
   "top5": [
-   36.63,
-   37.33,
-   37.58,
-   37.76,
-   37.79
+   26.78,
+   26.78,
+   26.78,
+   26.78,
+   26.78
   ],
-  "top5_spread": 0.422,
-  "passed": false
+  "top5_spread": 0.0,
+  "passed": true
  },
- "verdict": "EXPECTED DEAD on the kill bar, formal convergence gate open: best fast 36.63 (score 86.68) on Bench(60,160) after 2526 configs; frozen exact Bench(110,360) of 36.63: 47.86 (score 82.60; reach 0.575, follow 0.891, ib14 0.867, contact 0.062, near-touch 64.84, overhead 4/28) - the fast gain did not transfer (37.90 config: 47.88, score 82.59; reach 0.578 = 208/360, follow 0.873, ib14 0.880, contact 0.059, near-touch 72.17, overhead 4/28) - 15.8 points above the spec's kill bar (j3-neck-over-3r 32.10 frozen), behind the zc-frontier optimum (31.04 frozen) and the lead (18.28). Dominated: the zc optimum below the crest (wd 85.7) reads 30.69 fast through the same code; moved onto the crest (wd 95 / 100) it loses 7.7 / 10.3. Gate after the s6 wide restart: 1.204 / 0.462 / 0.422 (2nd half > 1) - the row stays screened; ~900 more no-gain tries would close it formally.",
- "limiter": "the J2 fold (stretched side): the crest J3 seat widens the J1-J3 angle range to 20-143 deg (p5-p95, Bench(110,360)) against the dyad window 18.4-84.6 at the best arcs 38.1 / 51.5 -> 90 of 360 ws lost stretched (overhead 14 / 28, across 51 / 68); the arcs that widen the window (a1 >= 44) lift hub 2 to 69-83 mm, 0.02-0.07 in band at O20 (the round-4 equal-arc basin was an O15 / margin-10 artefact). Secondary: part-part at the cap binders (link 1 on hub 2's cap plate), near-touch (min metal 0.01 mm).",
- "note": "Closing screen (round 14 carried pick; lens plain-crest-j3-cap seed; crest-knee-3r's no-knee control). Model = zc-frontier-3r's build + verifier checks unchanged, search clamped to the crest box (J1 bvec az 30-120 / el 48-80 in ruling 4, J3 wdir wd 95-120 / wa -20..20, a1 34-64, a2 38-70, sigma +-1, inv2 / inv3 0/1, q 0.85-1, end_extra 0-6). Local only (farm closed), niced, <= 2 processes. Sweep: 493 Sobol + CMA s1 (441, from Sobol best 48.05) + s2 (369, long-a1 cap basin, pinned at the box edges a1 64 / el 79: 44.62) + s3 (289, 37.90) + s4 (257, 0 gain) + s5 (311, 0 gain) + s6 (221, wide restart sigma 0.7: 36.63) + s7 (145, 0 gain). CONVERGENCE GATE (score points, sweep in evaluation order, n 2526): gain over 2nd half 1.204, over last third 0.462, top-5 spread 0.422 -> NOT passed (the s6 wide restart's +0.46 landed in the 2nd half; it read 0.742 / 0.149 / 0.244, passed, at n 2160 before s6); the converging chain s3+s4 alone 0.149 / 0.0. Seeds at O20 / margin 5: A 71.21, B 69.65, cap cell 60.39 (judge 62.80). Hub 2 in band by a1: 34-40 0.95 (F 61), 40-46 0.07, 46-52 0.03 (F 80), 52-58 0.02, 58-64 0.76. Best gap by wd: 95-100 40.30, 100-105 37.90, 105-110 45.19, 110-115 60.39, 115-120 77.06. Control (same code, fast): zc optimum 30.69 at wd 85.74 -> 38.43 / 41.01 / 74.85 at wd 95 / 100 / 103.08 (docs/concepts/verify/deltoid-crest-j3-3r_wd_slice.json). Red team: near-touch gap 69.09 fast / 72.17 frozen (min metal 0.12 / 0.01 mm, q 0.943 sets levels at the 94th percentile); no K2 jam; contacts link 2 / hub 2 / hub 1; cap binders (0,150,-15), (30,135,0), (0,105,15) lost to part-part (link 1 on hub 2's cap plate), J2 exits 50-60 mm there (hub 2 F 59.6): the short a1 fixes hub 2 and pays in the fold. Spec corrections: O15 -> O20, margin 10 -> 5, no base stub (CAD ruling 1: handler carries the base at the J1 hub ring). 0 passive translations, complexity 0. Frozen exact of 36.63: 47.86 (docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json); of 37.90: 47.88 (frozen_exact_37_90). VERIFICATION 2026-10-18 (adversarial verifier): claimed config re-measured frozen on Bench(110,360) exact with the zc-frontier checks + top faces + 1 mm radial K6 = v_gap 47.86 (score 82.60; reach 0.575, follow 0.891, ib14 0.867, ib10 0.479, contact 0.062), reproducing the claim; Bench(60,160) exact refit 36.64 (fast 36.63: no artefact); fold margin min 6.46 deg in th over taken poses; 0 flips; kNN continuity flood: no islands; contact depth max 3.26 mm over 20 poses. Champion on the same bench and checks: 75.94 (risley-turret verifier, kit checks + 1 mm radial; this harness's extra top-face check can only raise it) -> not refuted. Verified does not mean alive: dead on the kill bar (32.10) and 29.6 points behind the lead (18.28). Held out (frozen shape, 470 poses disjoint from Bench(110,360), exact): 50.05; deep overhead contacts 10.5 / 9.2 mm. Later best (CMA s10, 26.78 fast) re-measured by the verifier: frozen exact 40.17 (reach 0.606, follow 0.891, ib14 0.905, contact 0.048; kNN flood 6 islands -> connected 0.589; deepest contact 23.4 mm at (0,165,+15)) - still dead on the kill bar 32.10.",
+ "verdict": "DEAD: best fast 26.78 (score 90.26) on Bench(60,160) after 7118 configs - the normal J2 stack (inv2 0), never CMA'd in pass 1, took 36.63 -> 26.78 - but its frozen exact on Bench(110,360) is 40.17 (score 85.39; reach 0.606 = 218/360, follow 0.891, ib14 0.905, contact 0.048, near-touch 59.75, overhead 6/28), 8.1 above the spec's kill bar (j3-neck-over-3r 32.10), 9.1 behind the zero-complexity optimum (31.04 frozen) and 21.9 behind the lead (18.28). The fast bench over-reads this basin by 11-14 points at every optimum (36.63->47.86, 29.85->43.99, 28.63->41.04, 26.78->40.17) vs zc-frontier's +2.2. Convergence gate (score points, evaluation order, n 7118): 0.265 / 0.0 / 0.0 -> passed.",
+ "limiter": "the J2 fold, stretched side: the crest J3 seat (wd ~104) spreads the J1-J3 angle to p5-p95 18.1-137.4 deg (Bench(110,360)) against the dyad window [|a1-a2|+5, a1+a2-5] = [10.5, 81.4] at the best arcs 40.5 / 45.9 -> kinematic closure 0.75 of the workspace (overhead 0.50), 88/360 ws lost stretched (overhead 14/28, across 48/68); arcs that widen the window lift hub 2 off band at O20 (a1 >= 44: 69-83 mm, 0.02-0.07; the cap cell at inv2 0 reaches 0.79 but hub 2 sits at 86 mm, ib14 0.64, best 47.48). Secondary: part-part at hub 2 over the cap (39/360; binders (0,150,-15), (30,135,0), (0,105,15)), contact at hub 2's rim (6) and link 2 (4); near-touch gap ~60 (min metal 0.05 mm). The fast bench's 160 poses under-sample the stretched wall: every fast gain transfers at ~0.8.",
+ "note": "Pass 2 (2026-10-17 23:29 - 2026-10-18 00:35 UTC, local, niced, 2 processes): categorical probe (14) at the two pass-1 bests -> the normal J2 stack inv2 0 (link 1 on hub 2's lower plate) wins 3.6 / 2.1 points (link 1 0.67 -> 0.98 in band); inv3 0 costs 15-50; sigma +1 dead. CMA in inv2 0 / inv3 1 / sigma -1: s9 193 (29.85), s10 681 (26.78, sigma collapsed), s11 341 (from the a2 51.5 config, 33.34), s12 1189 (wide restart sigma 0.5, 0 gain; second basin 29.38 at wd 109.4 / end_extra 6.0), s13 697 (cap-pole cell at inv2 0, sigma 0.6: 47.48, reach 0.79 but hub 2 F 86 mm, ib14 0.64), s14 671 (29.29 basin) / s15 781 (0 gain); s8 25 (inv2 1, stopped). Frozen exact (fit Bench(60,160) fast, every level frozen, Bench(110,360) exact) of 29.85 / 28.63 / 26.78: 43.99 / 41.04 / 40.17. Pass 1 (2526 configs, inv2 1 streams s1-s7, best 36.63 -> frozen 47.86) kept as frozen_exact_pass1_s6. 0 passive translations, complexity 0, 3 active. Spec corrections: O15 -> O20, margin 10 -> 5, no base stub (CAD ruling 1). Preview updated to the 26.78 config (docs/concepts/viz/concepts/deltoid-crest-j3-3r.js).",
  "doc": "docs/concepts/deltoid-crest-j3-3r.md",
  "mechanism": {
   "active_dof": 3,
@@ -658,5 +658,318 @@
    },
    "file": "docs/concepts/verify/deltoid-crest-j3-3r_skeptic_frozen_s10.json"
   }
- }
+ },
+ "frozen_exact_pass1_s6": {
+  "protocol": "fit Bench(60,160) fast, every level frozen, worn Bench(110,360) exact",
+  "of_fast_gap": 36.63,
+  "of_config": {
+   "az": 105.4971,
+   "el": 63.1176,
+   "a1": 38.6879,
+   "a2": 44.1129,
+   "wd": 103.3777,
+   "wa": 4.934599999999989,
+   "sigma": -1,
+   "inv2": 1,
+   "inv3": 1,
+   "q": 0.9419,
+   "end_extra": 2.5478,
+   "margin": 5.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "vm": 0,
+   "near": 0
+  },
+  "gap": 47.86,
+  "score": 82.6,
+  "reach": 0.575,
+  "follow": 0.8909,
+  "inband14": 0.867,
+  "inband10": 0.4791,
+  "contact": 0.0615,
+  "near_touch_gap": 64.84,
+  "min_metal_all_faces_mm": 0.05,
+  "honest": true,
+  "hub_F": {
+   "hub1": 50.77,
+   "hub2": 59.77,
+   "hub3": 62.0
+  },
+  "inband_member": {
+   "hub1": 0.9858,
+   "hub2": 0.9989,
+   "hub3": 0.9046,
+   "link2": 0.9751,
+   "link1": 0.6738,
+   "neck": 0.8276
+  },
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.1429,
+   "n_clip": 10,
+   "follow": 0.6,
+   "n_taken": 10,
+   "inband14": 0.8131,
+   "inband10": 0.5073
+  },
+  "attribution": {
+   "ws": {
+    "n": 360,
+    "taken": 207,
+    "fold_folded": 1,
+    "fold_stretched": 96,
+    "jam_K2": 0,
+    "parts": 43,
+    "contact": 13
+   },
+   "clip": {
+    "n": 110,
+    "taken": 98,
+    "fold_folded": 0,
+    "fold_stretched": 5,
+    "jam_K2": 0,
+    "parts": 0,
+    "contact": 7
+   },
+   "overhead": {
+    "n": 28,
+    "taken": 4,
+    "fold_folded": 0,
+    "fold_stretched": 15,
+    "jam_K2": 0,
+    "parts": 4,
+    "contact": 5
+   },
+   "across": {
+    "n": 68,
+    "taken": 19,
+    "fold_folded": 0,
+    "fold_stretched": 48,
+    "jam_K2": 0,
+    "parts": 1,
+    "contact": 0
+   },
+   "behind": {
+    "n": 25,
+    "taken": 13,
+    "fold_folded": 0,
+    "fold_stretched": 11,
+    "jam_K2": 0,
+    "parts": 0,
+    "contact": 1
+   }
+  },
+  "contact_by_member": {
+   "neck": 5,
+   "link2": 7,
+   "hub2": 4,
+   "hub3": 1,
+   "hub1": 3
+  },
+  "binders": [
+   {
+    "asked": [
+     -75,
+     60,
+     60
+    ],
+    "pose": [
+     -75.0,
+     60.0,
+     60.0
+    ],
+    "i": 128,
+    "result": "taken",
+    "th": 51.1,
+    "j2_exit_mm": 55.0,
+    "hub2_level": 59.8,
+    "min_mm": 0.45
+   },
+   {
+    "asked": [
+     0,
+     150,
+     0
+    ],
+    "pose": [
+     0.0,
+     150.0,
+     -15.0
+    ],
+    "i": 209,
+    "result": "parts",
+    "th": 56.7,
+    "j2_exit_mm": 49.0,
+    "hub2_level": 59.8,
+    "min_mm": null
+   },
+   {
+    "asked": [
+     30,
+     150,
+     0
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     0.0
+    ],
+    "i": 262,
+    "result": "parts",
+    "th": 41.4,
+    "j2_exit_mm": 51.0,
+    "hub2_level": 59.8,
+    "min_mm": null
+   },
+   {
+    "asked": [
+     0,
+     105,
+     0
+    ],
+    "pose": [
+     0.0,
+     105.0,
+     15.0
+    ],
+    "i": 205,
+    "result": "parts",
+    "th": 48.7,
+    "j2_exit_mm": 57.0,
+    "hub2_level": 59.8,
+    "min_mm": null
+   },
+   {
+    "asked": [
+     30,
+     149,
+     -59
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     -60.0
+    ],
+    "i": 261,
+    "result": "taken",
+    "th": 46.9,
+    "j2_exit_mm": 53.0,
+    "hub2_level": 59.8,
+    "min_mm": 1.94
+   },
+   {
+    "asked": [
+     30,
+     124,
+     -54
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     -60.0
+    ],
+    "i": 261,
+    "result": "taken",
+    "th": 46.9,
+    "j2_exit_mm": 53.0,
+    "hub2_level": 59.8,
+    "min_mm": 1.94
+   },
+   {
+    "asked": [
+     30,
+     135,
+     -45
+    ],
+    "pose": [
+     30.0,
+     135.0,
+     -60.0
+    ],
+    "i": 261,
+    "result": "taken",
+    "th": 46.9,
+    "j2_exit_mm": 53.0,
+    "hub2_level": 59.8,
+    "min_mm": 1.94
+   }
+  ],
+  "file": "docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json"
+ },
+ "frozen_exact_pass2": [
+  {
+   "fast": 36.63,
+   "stack": "inv2 1 (pass 1, s6)",
+   "frozen": 47.86,
+   "score": 82.6,
+   "reach": 0.575,
+   "follow": 0.8909,
+   "inband14": 0.867,
+   "contact": 0.0615,
+   "near": 64.84,
+   "overhead_reach": 0.1429
+  },
+  {
+   "fast": 29.85,
+   "stack": "inv2 0 (s9)",
+   "frozen": 43.99,
+   "score": 84.0,
+   "reach": 0.5944,
+   "follow": 0.8818,
+   "inband14": 0.913,
+   "contact": 0.0661,
+   "near": 61.06,
+   "overhead_reach": 0.1429
+  },
+  {
+   "fast": 28.63,
+   "stack": "inv2 0 (s10 g19)",
+   "frozen": 41.04,
+   "score": 85.08,
+   "reach": 0.6028,
+   "follow": 0.8909,
+   "inband14": 0.9089,
+   "contact": 0.0541,
+   "near": 60.01,
+   "overhead_reach": 0.1786
+  },
+  {
+   "fast": 26.78,
+   "stack": "inv2 0 (s10 best)",
+   "frozen": 40.17,
+   "score": 85.39,
+   "reach": 0.6056,
+   "follow": 0.8909,
+   "inband14": 0.905,
+   "contact": 0.0482,
+   "near": 59.75,
+   "overhead_reach": 0.2143
+  }
+ ],
+ "stack_probe": {
+  "at_36.63": {
+   "inv2 0 inv3 1": 33.07,
+   "inv2 1 inv3 1": 36.63,
+   "inv2 0 inv3 0": 51.08,
+   "inv2 1 inv3 0": 83.79,
+   "sigma +1": [
+    90.64,
+    103.14
+   ]
+  },
+  "at_37.90": {
+   "inv2 0 inv3 1": 35.8,
+   "inv2 1 inv3 1": 37.9,
+   "inv2 0 inv3 0": 51.31,
+   "inv2 1 inv3 0": 85.68,
+   "sigma +1": [
+    82.34,
+    99.91
+   ]
+  }
+ },
+ "v_note": "v_* are the verifier's numbers for the pass-1 claim (36.63 fast config, 2026-10-18 00:05); the verifier's own re-measure of the current 26.78 claim is verification.later_best_s10 (frozen exact 40.17, connected reach 0.589, contact depth max 23.42 mm); the screen's own frozen exact of the same config is frozen_exact (40.17)"
 }

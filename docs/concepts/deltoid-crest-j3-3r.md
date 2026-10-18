@@ -201,7 +201,7 @@ branch +1 is dead (follow 0.67-0.73). CMA then ran inside `inv2 0 / inv3 1 / sig
 | s10 (from s9's best, sigma 0.3) | 681 | **26.78 (90.26)** | sigma collapsed (0.03): stop |
 | s12 (wide restart from 26.78, sigma 0.5, pop 12) | 1189 | 26.78 (no gain) | second basin 29.38 at J1 bvec(97.5, 62.8), J3 wdir(109.4, -1.1), end_extra 6.0 (box edge) |
 | s13 (cap-pole cell bvec(55, 62) / wdir(98, 5) 50/58 at inv2 0, sigma 0.6, pop 12) | 697 | 47.48 | reach 0.794 (the highest of the screen) but hub 2 at F 86 mm, ib14 0.636: the cap pole's hub-2 problem is untouched by the stack order |
-| s14 (from the 29.38 basin, sigma 0.35) + s15 (from 26.78, sigma 0.2), closing streams | S1415_N | S1415_BEST | |
+| s14 (from the 29.38 basin, sigma 0.35) + s15 (from 26.78, sigma 0.2), closing streams | 671 + 781 | 26.78 (no gain; s14's basin 29.29) | gate passed at n 7118 |
 
 **Best fast (Bench(60,160)): 26.78, score 90.26** - J1 bvec(108.56, 64.50) (acromion top), J3 wdir(104.41, -0.39)
 (crest), a1 40.46 / a2 45.92, sigma -1, inv2 0, inv3 1, q 0.957, end_extra 2.95. Reach 0.700 (112 / 160 ws), follow
@@ -239,13 +239,15 @@ poses fall on the taken side is a sample artefact the CMA exploits; the 9.85 fas
 30.69) - on the verification bench it does not (40.17 vs 31.04): the pass-1 "dominated" claim stands on the bench
 that counts, not on Bench(60,160).
 
-## Verdict: VERDICT_HEAD
+## Verdict: DEAD on the kill bar, convergence gate passed (n 7118)
 
 **Pass 2 (this update):** best fast 26.78 (score 90.26 on Bench(60,160)) with the normal J2 stack - the first crest
 configuration to cross 90 on the fast bench - but frozen exact on Bench(110,360) it reads 40.17 (score 85.39; the
 verifier re-measured the same config independently at 40.17, connected reach 0.589, contact depth to 23.4 mm at
 (0, 165, +15) overhead). 8.1 over the spec's kill bar (32.10), 9.1 behind the zero-complexity optimum (31.04 frozen),
-21.9 behind the lead (18.28). Convergence gate over the whole sweep (score points, evaluation order): GATE_LINE.
+21.9 behind the lead (18.28). Convergence gate over the whole sweep (score points, evaluation order): n 7118, gain over the second half 0.265, over the last third 0.0, top-5 spread 0.0 (the five best
+configurations sit within 1 deg of the optimum; the best distinct basin, s12 / s14's wd ~108-109 cell, reads 29.29 = 0.92
+score points behind) -> PASSED.
 
 Pass 1 (kept for the record):
 
