@@ -13,6 +13,9 @@ for cell in sys.argv[1:]:
     az, el = (float(x) for x in cell.split(",")); tag = f"az{az:g}_el{el:g}"; t0 = time.time()
     WAX = float(os.environ.get("PM_WA_MAX", 180.0)); tag += "_lat" if WAX < 180 else ""
     sd = PM.seed(az, el, top=3, wa_abs_max=WAX); res = dict(cell=[az, el], seed=sd, wa_abs_max=WAX)
+    BR = os.environ.get("PM_BR")                                   # the registered 'both branches': PM_BR=-1 / 1 picks that branch's best seed
+    if BR is not None:
+        sd = [x for x in PM.seed(az, el, top=6, wa_abs_max=WAX) if x["br"] == float(BR)][:3]; tag += f"_br{int(float(BR)):+d}"; res["seed"] = sd
     if sd:
         s0 = sd[0]; par = dict(az1=az, el1=el, wd=s0["wd"], wa=s0["wa"], br=s0["br"]); B.reset()
         try: r, M = PM._report(B, par)
