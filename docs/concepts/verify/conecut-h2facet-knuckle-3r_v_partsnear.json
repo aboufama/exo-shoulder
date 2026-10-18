@@ -1,0 +1,78 @@
+{
+ "r:hub1": [
+  1000000000.0,
+  null
+ ],
+ "r:hubK": [
+  1000000000.0,
+  null
+ ],
+ "r:hub3": [
+  61.6,
+  {
+   "i": 75,
+   "which": "chamfer",
+   "member": 3
+  }
+ ],
+ "r:E": [
+  63.03,
+  {
+   "i": 91,
+   "which": "chamfer",
+   "member": 3
+  }
+ ],
+ "r:boss": [
+  86.56,
+  {
+   "i": 91,
+   "which": "flat",
+   "member": 3
+  }
+ ],
+ "r:pad": [
+  76.38,
+  {
+   "i": 91,
+   "which": "flat",
+   "member": 5
+  }
+ ],
+ "r:knee": [
+  78.6,
+  {
+   "i": 91,
+   "which": "flat",
+   "member": 6
+  }
+ ],
+ "r:crank": [
+  1000000000.0,
+  null
+ ],
+ "r:roller": [
+  1000000000.0,
+  null
+ ],
+ "r:horn": [
+  1000000000.0,
+  null
+ ],
+ "l:L1a": [
+  1000000000.0,
+  null
+ ],
+ "l:L1b": [
+  1000000000.0,
+  null
+ ],
+ "l:L2": [
+  1.83,
+  {
+   "i": 211,
+   "which": "chamfer",
+   "member": 2
+  }
+ ]
+}

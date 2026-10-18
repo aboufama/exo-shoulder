@@ -138,3 +138,55 @@ lowarm-kstop takes the facet at c >= 0.5 (its 203 gate then passes at P5 / P0 an
 `apply_facet(M, P)` from this model, it works on any chain with `cyl['hub2']`; (3) lowarm-kphase-notch takes the flat
 (fd 0.6, z0 <= 6, dazf 0 +- 5) and must still remove 264's hub-K binder (-0.94..-1.17).
 
+
+## Verification (independent verifier, 2026-10-18 ~15:15 UTC)
+
+**Verdict: VERIFIED at 18.28 on Bench(110,360) exact, frozen. That is a tie with the lead. The flat is modelled on the
+wrong body. The buildable verified config is the chamfer alone.** The champion on the same bench and checks is 75.94
+(the risley-turret verifier's reference, the same one the lead's verifier uses).
+
+Harness: `docs/concepts/verify/conecut-h2facet-knuckle-3r.py`. It runs the lead's verifier
+(`docs/concepts/verify/conecut-knee-knuckle-3r.py`) unchanged on the claim's model module (CCModel = FTModel). Checks:
+cam closure in the world, pressure angles with friction, K sense, own-state th margin, the J3 own-angle stop (C1 / C2),
+equal-strap in-band (C4), and the per-pose dump.
+
+| | bench (110 clips + 360 ws) | held (202 + 952) |
+|---|---|---|
+| claim (c 1.4, hw 40, fd 0.6, z0 4.5) | **18.28**: reach 0.7278 (262), ib14 0.9012, ib10 0.5739, follow 1.0, 4 contacts, near1 19.38, overhead 8/28 | **22.16**: reach 0.6933 (660), ib14 0.900, 13 contacts, overhead 18/71 |
+| chamfer only (fd 0) | 18.28, identical per pose (0 readings changed) | 22.16, identical per pose (447 taken at 0.697) |
+| checks | closure 0.0 mm, 0 failing poses, th margin min 5.181, wrong sense 0, equal-strap gap 18.67 | th margin min 5.006, 0 failing, equal-strap 22.68 |
+
+The per-pose dumps reproduce the claim's dumps bit for bit (max |diff| 0 over 470 + 1154 poses). The chamfer-only dumps
+are on file at `docs/alignment/remeasure/conecut-h2facet-knuckle-3r+chamferonly_{bench,held}_perpose.json`.
+
+What I checked and found:
+
+1. **DOF: unchanged.** 3 active joints (J1, J2, J3). K is slaved by the drive and never read. The knee pins are passive
+   rotations outside the count. 0 passive translations, no gears, pulleys or cables. A cut adds no joint.
+2. **The chamfer is on the right body and sampled honestly.** Member 7 is link 1b, which sits at level 0 at J2 (the lower
+   member). So the bottom-edge chamfer (z 0..1.4) lies in link 1b's lower plate (F+0..3.0) and is framed correctly. Under
+   the plate there is the integral O7 pin, not a bearing bore. The MR117 pair sits in link 2's boss above U0 3.15, so the
+   3.1 mm "wall over the bore" figure is conservative. Link 1b's bar leaves hub 2 at az ~355-25, outside the 102.8-182.8
+   sector, so the chamfer does not cut a link root. The cut removed 17 of hub 2's 160 ring samples (c10-c13) and no
+   sample of any other part. It added 3011 dense solid samples. The in-band disc kept its 80 samples, 6 of them clipped.
+   The crank, roller and horn never come within the cut's azimuth windows. Link 2's bar comes no closer than 1.83 mm to
+   the chamfer zone (pose 211), passing above it.
+3. **The flat is mis-framed.** The upper flat (z 3.9..12.25) is cut into the O20 v5 boss and the threaded cap. In the
+   real stack both turn with the UPPER member at J2, which is link 2 (docs/HARDWARE.md, R6 groups). The model fixes the
+   flat in link 1b's frame. J2's relative angle spans -14..+91 deg over the fit poses, so a real flat sweeps about 105 deg
+   of azimuth in link 1b's frame. The claimed tolerance is +-5 deg. The cap also threads on and tightens at an
+   uncontrolled azimuth, so the flat must be indexed or machined after assembly.
+   - Consequence: on the lead's chain the flat is worth nothing. With fd 0, bench and held are identical pose for pose.
+   - The 264 hub-2-wall table on lowarm-kstop's chain (+0.26..+0.37) must be re-read with the flat in link 2's frame
+     (az_L2 = 124 - q2(264)) before lowarm-kstop or lowarm-kphase-notch imports it. It holds at most at 264's own q2.
+4. **No bench artefact.** Every number is exact (CB_EXACT=1). Part-vs-part collisions keep the uncut cylinder, which
+   is conservative. The search benches carry no hub-2 binder, as the claim says. No take, contact or in-band sample
+   moved on the bench, and on held only pose 447 moved.
+5. **Not a new leader.** The bench tie is exact: the same 262 takes and the same 4 contacts (205 at -3.90, 237 at -8.93,
+   264 at -5.80, 316 at -1.23). The held gain of -0.22 rests on ONE pose (447): CI90 [-0.66, 0], P(better) 0.644.
+   - On the plain verified gap the lead stands. Swapping this in on the held number is the user's CI tie rule.
+   - As a CAD change on the lead's hub 2 at 0 cx, the chamfer alone is a strict improvement: 203 rises 0.263 -> 1.122 mm,
+     near1 19.92 -> 19.38, the +0.35 probe 19.37 -> 18.83, and T5 20.25 -> 19.86.
+
+Next: put the chamfer (c 1.4, hw 40, fd 0) on the lead's gen CAD hub 2, which costs 0 cx. Re-read the flat for the
+lowarm cells in link 2's frame. Hand the chamfer-only dumps to the auditor's T5 check.
