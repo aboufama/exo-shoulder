@@ -5797,3 +5797,5 @@ rigid-cuff spherical 4R.
 - The shoulder-slip price of any knee-less rigid cuff (~6.4 mm p95 misfit at R10 4 mm, 13-31 N if the skin takes it vs
   the R17 5 N cap): whether a compliant liner taking it is acceptable is the user's call, stated with each claim.
 - The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule, O20 hubs and the transmission guard stay.
+
+Restart note (2026-10-18 ~23:41 UTC, fresh relaunch after the ~23:38 container restart stopped the first run after ideation): this plan is adopted as written (same state, lenses, carry, exclusions); ideators start from the 9 unjudged ideas in docs/concepts/ideas_restart/r401_unjudged_ideas.json (their step-0 measurements stand, not re-derived); nothing was screened, no row written; open for the judge: the distal ideas trip lens C's 120-mm strap kill (strap 185-215 mm) while measuring its stated reason (in-band < 0.85) false (strap in band 0.99 on the q=1 fit).
