@@ -3289,3 +3289,46 @@ null-space costs more in hub / link metal than it returns in takes. This is the 
    guide inside a link adds no hub and no ring crossing. Read the early curved-slide deaths first.
 3. Machinery: verify template bar to the current lead; near-touch objective in every search; an auditor ledger entry
    for each round winner; quoted numbers from saved outputs only.
+
+### Lens a (length-changing chain) closed; the cuff arm-arc relay dies at the kill (armarc-relay-knuckle-4r, 2026-10-18)
+
+**Step 0, the class closure.** A straight guide changes no axis direction, so it adds no fold takes. This holds inside
+link 2, as the counted cuff slide, and as a radial guide for hub 2. Evidence on file:
+
+- th is identical to 0.000 deg on 470 poses (scratch lensa/kin_out.json);
+- the rail metal costs ~+0.6 / 1.1 / 1.6 gap at travel 0 / 10 / 20;
+- a rail normal to J3 forms a planar 4-DOF group with J3 and the two knee pins: one coordinate is left undetermined.
+
+The angle-changing variants are dead or bounded:
+
+- GH-concentric arcs: 88.29 / 73.0 / 71.53 / 41.19;
+- the free-K bound: 18.40-18.58.
+
+**The survivor, a one-sided spring arm-arc relay at the cuff.** It turns J3's arm frame about a GH-through arm axis on
+a slotted circular Ti shell. It is a counted 4th joint, with the least-phi physical solve on every lost pose.
+
+- Fast: 8.79 on Bench(60,160), gate converged.
+- **Frozen exact Bench(110,360): 18.01 > the kill 17.5** (lead 18.28).
+  - Takes: 275, against the lead's 262.
+  - Contacts: 11, against the lead's 4.
+  - 20 relayed poses: 13 taken at a median 1.81 mm, and 7 contacts. A spring relay cannot refuse a pose, so
+    folded-side relays go in to -9.79 mm.
+  - Near-touch: 21.72.
+  - Chain-only in-band reading: 21.73. The knee stack climbs 4.59 mm onto the carriage, and the shell's in-band samples
+    dilute the headline.
+
+**The lesson that predicts beyond this morphology: relaying past the stretched wall from the ARM side meets the same
+second wall as opening K from the scapula side.**
+
+- The chain is parked at its wall posture with the arm turned further, which lays member 3, hub 3 and the neck onto
+  the binder-side skin.
+- Even the ideal relay with no hardware is bounded:
+  - 16.39 at the buildable axis (tilt 12);
+  - 11.93 at the long axis. Measured on the lead's real metal, the kit's "27 clean" become 21 clean, 4 contacts and
+    2 unreachable. The long axis is unbuildable: a circle about the GH-elbow line floats 49-68 mm out over the arc.
+- A one-sided spring relay also cannot choose its wall, so it relays folded-side poses into the skin.
+
+Any future relay or 4th-joint idea must show its relayed poses clear the skin by >= 2 mm on the lead's REAL metal before
+modelling hardware. Kit-metal clearances run ~4 mm optimistic.
+
+Files: docs/concepts/armarc-relay-knuckle-4r.md and docs/concepts/verify/armarc-relay-knuckle-4r/.
