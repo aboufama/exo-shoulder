@@ -155,3 +155,52 @@ displayed above the lead.
 - **Pre-registered clearances are part of the claim.** When the proposer pre-registers a clearance (here 0.2 mm at pose
   316) and the claim misses it, the claim row carries both numbers (17.96 graze / 18.41 robust) and the leaderboard uses
   the pre-registered one. Effect: this row 17.96 -> 18.41.
+
+## Skeptic (2026-10-18, 02:50-03:01 UTC)
+
+Run by the audit's skeptic. I re-derived the numbers from the raw files: the sweep rows, the verifier JSONs, and the bench and
+held per-pose dumps, where I recomputed the gaps myself (contact = contact poses / (taken + contact)). The model and every
+bench, judge and row were left unchanged. One new measurement: the m_sub rest probe on this row (G4), through a new wrapper,
+`tools/alignment_msub_strparams.py`. It runs the unchanged `tools/alignment_msub_rest_probe_model.py` with the row's string
+params decoded over CELL_B, as the verifier does. It ran as one niced process for 540 s and reproduces 17.96. Rulings:
+`docs/alignment/lowarm-halfring-knuckle-3r.rulings.json`. Ledger entry: 2026-10-18T03:00:45Z, run
+`skeptic:lowarm-halfring-knuckle-3r`.
+
+**Final verdict (computed by `tools/alignment_ledger.py skeptic`): GAMED.** P1 is upheld. 9 reasons upheld, 1 refuted
+(NEW-string-params).
+
+| key | ruling | evidence |
+|---|---|---|
+| continuity (watch) | **upheld** | Held: static 22.70, connected_full 22.70 (0 dropped), kNN 30.93 (77 dropped), bench graph 23.88. Bench: kNN 19.64, bench graph 49.98. The tool reads the rule's flood (loss 0, ok), then raises it to watch because the kNN loss is over TH conn_gamed 3. That is the documented rule applied to the documented number. |
+| judgement:P1 (gamed) | **upheld** | Sweep re-derived: 794 frozen-scan rows, all tagged `Bench(110,360) exact` (the claim bench); min 17.96, p10 18.07, median 18.42, max 19.30; 251 under 18.28. Held, recomputed by me from the per-pose rows: 22.70 (658/952 ws, ib14 0.8967, 13 contacts) vs the lead's 22.38 (659/952, 0.9000, 14), same 1154 poses, both exact. The bench comparison is not apples to apples, and the bias favours this row: the lead was searched on Bench(60,160) fast (its row note, 352 configs) and frozen onto the exact bench, while this row's 17.96 is the minimum of a scan on the exact bench itself. morphs.json shows this row first among status `verified`, with `leader_ruling` empty on both rows. Caveats (none refutes): the documented `held_out` threshold reads ok (+4.74 < 6), so the level is a judgement on the rank; the held difference is not significant (CI90 [-0.34, +0.68]); cell A's 22.64 has no dump (see missed 1). |
+| judgement:T1 (watch) | upheld | Pose 316 is the only discordant bench pose: 0.048 mm here, -1.235 mm on the lead. Held 820: 0.941 mm here, -0.177 on the lead. The 251 beaters clear 316 by 0.014-0.197 mm; clearance >= 0.1 mm gives 18.24, >= 0.2 mm gives 18.41. Near-touch 1 / 2 / 3 mm: 20.14 / 34.84 / 86.40 vs 19.92 / 34.84 / 86.16. Taken poses under 1 / 2 / 3 mm: 4 / 34 / 106 vs 3 / 33 / 105. Report only. |
+| judgement:R3 (watch) | upheld | The spread is right. The row carries n_configs 908 and B_robust 18.41 but no p10 or median; the dashboard shows only 17.96. |
+| judgement:M5 (watch) | upheld | dwell_K_play 0.638 against the 0.25 gate (ok false; tight 0.292). V4 (`kplay_correct`, verifier lines 154-175) only drops poses by th margin and never moves metal by the play, so the metal shift at 316 and 139 is not on file. Neither is the pad's drag. |
+| judgement:M3 (watch) | upheld, **narrowed** | V5 is in the docstring only. But the lifted bar against the crank ARM is on file. The model's own `l2_check` (desmo-slipper model lines 358-372) reads `link_pts["L2"]`, which the lift rewrites (lowarm model lines 83-92). It measures link 2's strap outside O20 + 1.5 mm (underside and top copy) against the crank's short arm and pin in every taken pose: **clear_min 12.32 mm bench (373 poses), 12.33 held (860), 0 lost** (parent 12.11 / 12.12). Still unmeasured: the tip plate, the hub-2 crown, and the root inside r < 11.5 mm. |
+| judgement:S3 (watch) | upheld | `lowarm_fit.pad` holds position only (lever 12.29 mm, 7 of 28 arm points over link 1b). There is no height or skin clearance on file. `parts_ib14.pad` [1.0, 6.2, 32] is identical on the lead, so it is the cuff pad. |
+| judgement:S5 (watch) | upheld | Same records as continuity: kNN 19.64 / 30.93 (6 / 77 forced poses dropped), bench graph 49.98. |
+| judgement:G4 (watch) | upheld, **now measured on this row** | `remeasure/lowarm-halfring-knuckle-3r_msub_rest_bench.json`: m_sub at K rest n 205, min 0.0, p10 0.267, median 4.753, **< 1 deg on 50**, < 2 deg on 65, < 5 deg on 107, identical to the parent. Moved poses: m_sub min 10.805, m_eff min 5.181. |
+| judgement:NEW-string-params (watch) | **refuted** | The format is real (the only string `best_params` among the rows). But no number on file was worn with CELL_B's defaults (l2_rfull 16). The verifier's bench and held params, the remeasure params, both per-pose dumps and this skeptic's probe all carry l2_rfull 14.0 / l2_len 9.836 / l2_lift 1.5, and four independent wears reproduce 17.96. Through the adapter every audit check ran (rules ok, reporting ok). The wearer's numbers are unchanged. It is an instrument defect, already proposal R5, not evidence about the design. |
+
+### Missed by the audit (for the next audit; not in this verdict)
+
+1. **Cell A's held 22.64 is unverified, yet three conclusions lean on it**: the row verdict ("does not transfer"), the
+   audit's P1 sub-point ("worse than its own no-lift cell"), and the audit's suggested fallback claim (cell A at 18.28 as
+   the honest tie). `rows:cells.A.held_src` = "proposer, same code path". No held dump or verifier file for cell A exists
+   in `docs/concepts/verify/` or `docs/alignment/remeasure/`. Before cell A is claimed as the tie at complexity 16.5, its
+   held number needs a verifier wear and a per-pose dump.
+2. **The held reach loss includes two poses this design never evaluates.** Held 274 (-60 / 45 / 120) and 1054 (135 / 30 /
+   -135) have `ev` false here (lost before evaluation, within held `why.fold` 262), while the lead takes them at 2.28 and
+   1.23 mm. The chain is said to be unchanged, yet the held fold set differs from the lead's. The frozen re-fit for cell B
+   moves which poses fold. It is small (+0.11 reach), but it shows the lift is not a pure link-2 change on the held set.
+3. **The audit's held leg rests on the verifier's own dump.** Every held number in P1 and T1 comes from
+   `remeasure/lowarm-halfring-knuckle-3r_held_perpose.json`, written by the row's verifier (its note), with no `git`
+   field. The lead's held dump was written by the auditor (git 748862f). I recomputed it and it is consistent (22.70), but
+   no third party has re-worn the held set for this row.
+4. **The deepest contacts got deeper, and cell A shares the cause.** The audit tabled it but filed no finding. The low arm
+   (zr 4.03 -> 2.0) brought the crank 2 mm closer: bench 237 9.47 vs 8.93 mm, held 683 10.39 vs 9.86, 610 9.82 vs 9.13.
+   T5 reads ok only because it sums depth. Cell A has the same low arm, so the recommended fallback claim inherits it.
+
+Next: the lead records a `leader_ruling` on the row, or claims the held number, to clear P1. Cell A needs a verifier held
+wear (missed 1) before it is offered as a tie. V5 still needs the tip-plate, hub-2 crown and root-in-stack clearances, and
+M5 needs a K-perturbed re-wear of poses 316 and 139.
