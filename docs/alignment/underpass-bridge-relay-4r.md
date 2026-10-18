@@ -329,3 +329,78 @@ The rulings are in `docs/alignment/underpass-bridge-relay-4r.rulings.json`.
    contact poses as taken. Any future "read as lost" estimate should use the dump's taken flag.
 
 No new gaming by the design was found beyond these. The verified 20.60 stands as the honest number on the dumps.
+
+## Skeptic (2026-10-18 21:40 UTC) of the 20:52 audit ('gamed' on claim 13.74)
+
+**Final verdict (ledger tool, 21:39:52): watch.**
+
+How to read it:
+
+- The tool always rules against the LATEST 'audit' entry. That is the 21:22:58 re-audit (all watch), not the 20:52 audit
+  this skeptic was asked to check.
+- Against the 20:52 reasons themselves, the verdict would be **gamed**: M3 is upheld below. At 20:52, the 13.74 claim
+  was not evidence of a better exo.
+- The row has since been refuted (v_gap 20.60), so the 'gamed' is resolved. The re-audit and its own skeptic
+  (21:32:19, watch) record that.
+- This entry supersedes the 21:32 skeptic entry with the same verdict. It keeps dominance, idle, G1 and
+  NEW-blind-reference standing where that skeptic refuted them. Read the two together.
+
+Rulings: `docs/alignment/underpass-bridge-relay-4r.rulings-2052.json`. It is a separate file, because the
+re-audit skeptic's committed `.rulings.json` was left untouched. 5 of 13 refuted, 8 upheld.
+
+| key | ruling | evidence (short) |
+|---|---|---|
+| held_out | refuted | Held-out verification is on file. verifier_held.json pick.summary.gate 16.64, and verifier_held_perpose.json recomputes 16.63. The row now has v_gap 20.6 and v_held_gap 24.33. |
+| near_touch | refuted | claim.json near1_gap 17.91 / near2_gap 38.22. verifier_claim.json pick.summary agrees, and the dump recomputes near1 17.91. |
+| continuity | refuted | verifier_claim.json pick.continuity: dropped_relayed 0, 153 / 154 relayed envelope frames connected, passive_jump 0. |
+| idle | refuted | claim.json relayed_poses: 24 taken relayed poses at phi 0.8-32.9 deg (held 0.4-34.9), against TH idle_deg 2.0. The knee has no span on file (not level-raising). |
+| sampling | upheld | No parts_ib14 anywhere. The unsampled anchor and CF strip exist (S3). |
+| judgement:M3 (gamed) | **upheld, re-measured** | See below. |
+| NEW-skin-only-thickness | upheld | models/underpass-bridge-relay-4r.py line 176: need_scan reads M1.rigid + M1.link_pts only, never M1.contact. |
+| T2 | upheld | gate 13.74 against the 13.75 line. ib14 0.9012 / 0.9021, held 0.9000 / 0.9009. |
+| G1 | upheld | 58 / 396 taken poses under 2 mm (48 scored), 8 under 1 mm. Held: 138 / 942 and 30. Parent near2 37.70 against 38.22. |
+| T5 | upheld | 13 contacts / 43.79 mm, deepest 9.79 (bench). Held: 43 / 173.02 mm. The lead's dumps on the same benches: 20.24 / 60.97 mm (x2.16 / x2.84). |
+| S3 | upheld | Root moment 242.7 N.mm. supports = ['post'] only, and no anchor or CF strip in part_min_taken. |
+| M5 | upheld | No R17 file. E underside 1.297 mm at 118 and 1.301 at 163, so the 0.31 mm deflection jams both. |
+| R2 | refuted (resolved) | Row status 'refuted' with v_gap 20.6. morphs.json v148+ shows refuted, and core.js / bench.js drop or dash refuted rows. |
+
+### M3: the skeptic's own re-measure
+
+Script and output: `docs/alignment/remeasure/underpass-bridge-relay-4r_skeptic2052_striptop.py` / `.json`. The model was
+imported unchanged, on the fit Bench(60,160) the frozen R_under came from.
+
+The refutation tried: is the hit a footprint-edge artefact? The shell footprint was shrunk by 0, 1 and 2 mm at every
+edge.
+
+| edge margin | strap top inside the 81.31-83.81 shell metal | > 0.5 mm deep | > 1 mm deep | deepest |
+|---|---|---|---|---|
+| 0 mm | 62 / 184 frames | 42 | 23 | 1.56 mm (frame 68) |
+| 1 mm | 62 / 184 | 39 | 22 | 1.50 mm |
+| 2 mm | 60 / 184 | 32 | 18 | 1.33 mm |
+
+- On the median frame the strap top sits 0.28 mm under the shell underside (no clearance at all). So the clash is in the
+  middle of the shell, not at its edge.
+- On the claim bench, verifier_claim.json xcheck_drop0 reads c23:m3 against the shell at 0.0 mm on 127 of 396 taken
+  poses, and 0.1-0.49 mm on the rest.
+- **Precision note:** the auditor's "396 / 396 jam, rescored 375.0" uses the verifier's 1.0 mm metal-to-metal rule.
+  Counted as plain interpenetration it is about 1/3 of the poses, and that still wrecks the claim.
+- Every corrected reading is over the 13.75 line: 19.74 / 20.60 at R_under 84.222, and 19.06 / 19.92 at the legal
+  minimum 84.022.
+- Apples to apples, the parent (v_gap 14.76) and the lead (v_gap 18.28, recompute 18.29 on the same exact frozen
+  bench) are both ahead.
+
+### Missed by the auditor (for the next audit; not counted in this verdict)
+
+1. **near2 reported without crowns.** The claim's near2 38.22 (row frozen_exact.near2_no_crown) leaves the hub crowns and
+   walls out.
+   - Counting them (min of min_mm and cmin, as the G1 counts do), verifier_claim_perpose.json gives near2 **46.60** on the
+     bench, and the held dump gives **48.47** against the reported 41.91.
+   - Report-only by the user's ruling, but the headline near2 reads about 8 points kinder than the metal the wearer has.
+2. **The re-audit's R2 and 'reporting' reasons are stale.**
+   - They read morphs.json v147, but v148 (c33420e, 21:21:29) already showed 'refuted' / v_gap 20.6, 89 s before the
+     re-audit entry.
+   - The only live residual is sweeps.json best_gap 13.74, which is history and drawn dashed.
+3. **The ledger skeptic step targets only the latest audit.**
+   - A skeptic queued for an earlier audit (this one) gets its verdict computed on a different reason set, and it
+     supersedes that audit's own skeptic.
+   - Proposal (tool change, not made here): `skeptic --audit-time <t>`, to rule on a named audit entry.
