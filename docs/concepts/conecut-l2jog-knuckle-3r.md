@@ -32,3 +32,85 @@ Round 15 (main re-launch), lens C (conecut-sidestep-metal: tangent-plane metal m
    must stay untouched: the jog's weight there must be 0), 203 / 205 / 237 / 264 (other parts: unchanged by
    construction), and every pose where the jogged stretch's FAR side or the run-outs come within 1 mm of the skin on
    any bench (envsel, held).
+
+## What was built
+
+`docs/concepts/models/conecut-l2jog-knuckle-3r.py` loads the verified lead (conecut-knee-knuckle-3r at its best_params)
+unchanged and moves only link 2's samples right after the lead's fit (JogModel.fit -> apply_jog), so the frozen claim
+protocol copies the jogged shape:
+
+- **Bar frame at the binder** (link_pts['L2'] sample 13, row 0 = the bar's edge row, 69.6 mm from GH, s = 0): PCA of
+  the samples within 8 mm (sv 19.81 / 10.73 / 2.00) gives axis a, plate normal n (outward) and width w = n x a
+  (+w from row 0 toward row 3). The bar is 5.9 mm wide (4 rows at ~1.95 mm), 3 mm thick, from hub 2's rim (station
+  -28) to hub 3's rim (+40.8). Row tangents . lat stay within -0.05 .. -0.01 and the across-bar vector . lat >= 0.95
+  over the whole jog span: the bar is straight in planform and arched in elevation (T . n goes +0.35 -> -0.5), so a
+  constant width-direction jog IS a planform move (the along-bar slide artifact the judge flagged is <= 5 % here,
+  0.08 mm at dl 1.6). The coarse 4-mm PCA I tried first suggested a planform turn past station +5; the row tangents
+  show it was the PCA's noise (4 x 4 samples), not the bar.
+- **Station** = per-row arc length from the row's crossing of the binder's normal plane: the section moves rigidly.
+- **Profile**: flat over Lf, cosine run-outs over T (the S of two tangent arcs; planform S radius 2 T^2 / (pi^2 dl),
+  5.0 mm at the pick - a laser / waterjet profile cut before bending, no bend).
+- **Moved sets**: underside (scored, 124), mid strap (collisions), top contact set (contact-only, member 2, index 22).
+- **Variants** (mine, not the spec's): ff < 1 = a one-sided WAIST (the far edge moves ff dl, the bar narrows by
+  (1 - ff) dl); dz > 0 = a local press-brake JOGGLE through the thickness, capped at bend radius 2 T^2 / (pi^2 dz)
+  >= 15 mm (5 t).
+- **Span rule** (spec: "the root stretch that binds radially at 316 is not touched"): link 2's root stretch at r_J2
+  13.5 - 19.4 mm sits at stations -22.2 .. -16.3, so the moved span is clamped to stations >= -15 (and <= 38.8, 2 mm
+  inside hub 3's rim). Without it the search drove the span to -29 (onto hub 2's rim: the bar would leave its hub) and
+  the joggle made 316 shallower (-1.235 -> -0.92) - a radial root lift, which round 13 measured dead.
+
+## Scan harness (and one measurement error I made and fixed)
+
+`scan` wears the lead's frozen chain ONCE per bench (cached), then re-reads link 2 for every configuration with one
+distance call per pose for all configurations. First version re-read only poses where link 2 is within 4 mm of the skin:
+exact for contact, probes and near-touch, but NOT for in-band (2-14 mm per sample over clip frames moves wherever a jogged
+sample sits near 14 mm). The frozen claim of the first pick exposed it: ib14 0.9012 -> 0.9000 on the bench and 0.9007 ->
+0.8995 on Bench(60,160) where the scan had read "unchanged". The fast benches (Bench(60,160), envh) are now re-read on
+every scored pose (L2JOG_NEAR default 1e9 there): the scan then reproduces the frozen fit exactly (12.55 / 0.8995 at the
+pick). The exact benches keep the 4-mm re-read (contact / probes / near-touch) and their in-band comes from the frozen
+protocol only. The sweep file's Bench(60,160) numbers are the corrected all-pose reads.
+
+## Results
+
+Search bench = envh (Bench(60,160)'s 60 fit clips + 210 fresh envelope poses, fast cache, no held-out pose), objective
+near1 + plain - 0.5 min(link-2 min over taken, 1) (the near-touch objective with a margin tie-break). Selection bench =
+envsel (exact, 110 clips + 360 fresh poses), lexicographic (plain, +0.2 probe, near1), then the search objective.
+Pre-registered lever size: pose 139 >= 0.4 mm plain (so >= 0.2 after the +0.2 probe).
+
+540 configurations: 10 direction checks + 290 coarse (structured + Latin) + 3 ES runs of 5 x 16 (2 starts at sigma 0.3
+of the box, 1 restart at sigma 0.8). Convergence gate on the search objective (envh, all-pose re-read): gain 0.008 score
+points over the second half, 0.008 over the last third, top-5 spread 0.013 - passed (the objective is nearly flat: one
+envh pose is all the lever can move).
+
+**Direction (exact, 139):** +w (toward the bar's far rows) is the lever; -w makes 139 and envh 150 worse. Planform
+dl 0.5 / 1.0 / 1.5 at Lf 20, T 10: 139 = 0.280 / 0.487 / 0.716 mm (the judge's planform-only 0.487 / 0.716 reproduced to
+the digit).
+The opposite sign (-w) drives the bar INTO the bump: 139 = -0.199 / -0.484 / -0.811 (a new contact). A joggle alone
+(dz 0.5, no planform) reads 139 = 0.501 (0.86 mm per mm: the binder's radial gradient 0.77 plus the arch).
+
+**Selection.** 255 of 540 configurations meet the pre-registered 139 >= 0.4. Envsel ties for 182 of them at (plain 24.14
+= the lead, +0.2 probe 24.70 = the lead, near1 28.02 vs the lead's 28.58: envsel 259 leaves the 1-mm shell, 0.605 ->
+1.0-1.16). The search objective (with exact in-band) then picks the WAIST (k512): dl 1.6, Lf 20, T 9.69, cs +4.69,
+rot +3.39, ff 0 (far edge kept), dz 0. The best spec-faithful pure jog (ff 1, dz 0) is k355: dl 1.6, Lf 20, T 6.28,
+cs +1.28, rot -2.36 (k234, dl 1.37, is 0.006 better on the search objective - a tie). The best joggle is k333 (dz 0.54).
+
+**Claim protocol (the lead's: fit Bench(60,160) fast, shape frozen, worn exact Bench(110,360) once; collisions
+re-checked):**
+
+| | lead | jog k355 (spec) | waist k512 (pick) |
+|---|---|---|---|
+| fit Bench(60,160) plain / near1 / ib14 | 12.50 / 13.66 / 0.9007 | 12.55 / 13.71 / 0.8995 | **12.50 / 13.66 / 0.9003** |
+| frozen exact Bench(110,360) gap | 18.28 | 18.28 | **18.28** (score 93.35) |
+| reach / follow / contacts / overhead | 0.7278 / 1.0 / 4 / 8 of 28 | same | same (205 / 237 / 264 / 316 unchanged: -4.28 / -8.93 / -5.80 / -1.23) |
+| ib14 / ib10 | 0.9012 / 0.5739 | 0.9000 / 0.5737 | 0.9005 / 0.5737 |
+| pose 139 (link 2) | 0.072 | 0.726 | **0.602** |
+| +0.1 / +0.2 / +0.35 mm probe | 18.83 / 18.83 / 19.37 | 18.28 / 18.28 / 18.83 | **18.28 / 18.28 / 18.83** |
+| near1 / near2 | 19.92 / 34.84 | 19.92 / 34.84 | 19.92 / 34.84 (203 at 0.263 and 379 at 0.616 stay under 1 mm) |
+| lowest metal over taken | 0.072 (139) | 0.26 (203 wall) | 0.26 (203 wall); then 139 0.60, 379 0.62 |
+| J3 stop margin (taken) | 2.7 deg | 2.7 | 2.7 |
+
+So the lever does exactly what it was meant to: it removes the lead's only +0.1 / +0.2 mm probe flip (18.83 -> 18.28)
+with no take and no new contact. What is left under 0.35 mm is pose 203 (hub 2's skin-side ring, 0.263): the h2facet
+chamfer's job (conecut-h2facet: 203 -> 1.122). Predicted, not measured as one cell: together the +0.35 probe reads
+18.28 and 379 (0.616, not link 2) is the lowest metal; the two edits touch disjoint samples (hub 2's skin-side ring vs
+link 2's mid-bar), so their bench effects should add.

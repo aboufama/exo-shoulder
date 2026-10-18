@@ -198,6 +198,9 @@ def _frozen_out(P, nc, nw):
     return out
 
 
+def frozen(P, nc=110, nw=360): return _frozen_out(P, nc, nw)
+
+
 def frozen_bench(P): return _frozen_out(P, 110, 360)
 
 
@@ -228,7 +231,12 @@ class Scan:
     """control wear (jog 0) of the lead's frozen chain on one bench, then per jog config the L2 samples re-read. The
     control wear is cached (pickle: per-pose scored distances, contact-only minima, member-2 transforms of the near
     poses) so later config batches on the same bench cost one distance call per near pose"""
-    def __init__(self, bench, near=4.0, cache=None):
+    def __init__(self, bench, near=None, cache=None):
+        # near: link-2 re-read radius (mm). The bench's IN-BAND (2-14 mm per sample over clip frames) moves wherever the
+        # jogged samples sit near 2 or 14 mm, so a radius re-read is exact for contact / probes / near-touch only;
+        # default: every scored pose on the fast benches (exact in-band), 4 mm on the exact benches (in-band read by the
+        # frozen protocol)
+        if near is None: near = float(os.environ.get("L2JOG_NEAR", 1e9 if bench in ("fit", "envh") else 4.0))
         import pickle, types
         self.name = bench; self.B = B = _bench(bench)
         if cache and os.path.exists(cache):
