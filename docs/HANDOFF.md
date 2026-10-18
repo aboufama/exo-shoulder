@@ -627,6 +627,12 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
        desmo-vrocker 17.23) had ranked above the verified lead.
 
      The headline was verified headless: the 3-joint lead conecut-knee 93.4.
+   - *Lead, 11:58 UTC 10-18:* a third container restart at ~11:54 (the others were ~05:25 and ~07:06). Recovered per
+     OPERATIONS section 3: WIP saved (1ffb086); the main loop wf_f06588fd-4d1 and the jump loop wf_6c42dda0-f91 were
+     resumed from cache; crons re-created (watchdog d6730f62, hourly audit c3bb6ae3 -> 0d683d87). Lost: four one-off
+     waits on running frozen-exact dumps (acroant audit d_az1 1.0 / 1.5, seat-only dumps, a held-out wear); their
+     agents redo them. Round 105 by then: seatoracle-erwall DEAD (every cell > 17.25), acroant-conecut DEAD, desmo-geom
+     DEAD; proxtrack-relay screened 14.02 bench / 18.01 held (unverified, 4 DOF).
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
