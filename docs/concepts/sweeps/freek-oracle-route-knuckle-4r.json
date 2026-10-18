@@ -1837,5 +1837,36 @@
    },
    "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
   }
+ },
+ {
+  "k": 51,
+  "t": "2026-10-18T06:01:55Z",
+  "params": {},
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8973,
+  "inband10": 0.5387,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 11.18,
+  "extra": {
+   "plain": 11.18,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 14,
+   "why": {
+    "fold": 17,
+    "slide": 5,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.18,
+    "plain": 12.18,
+    "reach": 0.8187,
+    "inband14": 0.8954,
+    "contact": 0.0359
+   }
+  }
  }
 ]
