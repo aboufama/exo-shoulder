@@ -262,8 +262,12 @@ the rigid in-band samples change.
 Sources:
 * docs/alignment/remeasure/desmo-window-knuckle-3r_ringfix_fast.json and _ringorig_fast.json;
 * docs/alignment/remeasure/desmo-window-knuckle-3r_ringdensity_reweight.json;
-* the full frozen exact re-wear through the verifier harness: docs/concepts/verify/desmo-window-knuckle-3r_ringfix_audit.py
-  (results below when it lands).
+* the full frozen exact re-wear (docs/concepts/verify/desmo-window-knuckle-3r_ringfix_audit.py `wear bench|held`) was
+  started and then stopped. At load 18 it ran at ~1/3 of a core, which projects to ~55 min for the bench alone (1060 s at
+  a full core). The frozen numbers above therefore come from the saved per-part in-band. That re-weighting is exact as
+  long as the kept ring carries the sector's in-band share. The fast run checks it: the measured subsample moved the
+  fast near-touch by 1.50 points, against 1.42 from the bench re-weighting (10 samples). The lead can run that
+  command for the exact confirmation.
 
 **What the correction changes.**
 * **The lift cost.** Like for like with the parent at the kit's density, raising stage 1 by 3.04 mm costs +0.31..0.44 on
