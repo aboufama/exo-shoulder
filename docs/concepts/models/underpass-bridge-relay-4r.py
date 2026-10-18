@@ -36,8 +36,8 @@ ID = "underpass-bridge-relay-4r"
 D2R = math.pi / 180
 VDIR = os.path.join(REPO, "docs", "concepts", "verify", ID); os.makedirs(VDIR, exist_ok=True); PT.VDIR = VDIR; OS.VDIR = VDIR
 PT.DEF.update(up_clr=1.2, postH=2.0, postL=4.0, ant="ii", tshc=2.5, rl_fix=0.0, hiE=0.0, P_load=4.0)
-CLAIM_PARENT = dict(OS.CLAIM_PARENT)
 HW0 = dict(carw=14.0, pre=0.0, ds=31.0, delta=4.5, coil="lug", coilD=12.0, coilL=10.0, flange=1, lean=0)
+CLAIM_PARENT = dict(OS.CLAIM_PARENT, **HW0)                          # proxtrack's claim (PHI, axis, rt_extra 1.5) + offset-shortcar's pick hardware
 E_TI = 114000.0                                                       # Ti-6Al-4V, N/mm2
 
 
@@ -208,7 +208,7 @@ def need_scan(S, hw):
 
 def place(S, hw):
     """the bridge placement (selection bench only): rl_fix and hiE from the need scan"""
-    hw = dict(HW0, **hw); nd = need_scan(S, hw); up = float(hw.get("up_clr", PT.DEF["up_clr"])); hiE = nd["E_az"][1]
+    hw = dict(hw); nd = need_scan(S, hw); up = float(hw.get("up_clr", PT.DEF["up_clr"])); hiE = nd["E_az"][1]
     sh = nd["sh_max"]
     if str(hw.get("ant", PT.DEF["ant"])) == "i":
         Ru0 = max(nd["skin_R_liner"], sh + up); sh2, _ = nd["win"](nd["lo"], hiE + math.degrees(5.0 / Ru0)); sh = max(sh, sh2)
@@ -221,7 +221,7 @@ def prepare(base, nc=60, nw=160, exact=False):
 
 
 def wear(S, hw):
-    hw = dict(HW0, **hw); scan = None
+    hw = dict(hw); scan = None
     if not float(hw.get("rl_fix", 0.0)):
         pl, scan = place(S, hw); hw.update(pl)
     o = OS.wear(S, hw); G = OS.PARTS.get("_G", {})
@@ -270,7 +270,7 @@ def _append_sweep(path, params, o, nc, nw):
     import datetime
     L = json.load(open(path)) if os.path.exists(path) else []
     w = o["wear"]; ibg = o["ib14_gate"]
-    L.append(dict(k=len(L), t=datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"), params={k: v for k, v in params.items()},
+    L.append(dict(k=len(L), t=datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), params={k: v for k, v in params.items()},
                   bench=("envsel exact" if nc == -2 else f"Bench({nc},{nw})"), inband14=ibg, inband14_pooled=w["inband14"], inband10=w["inband10"],
                   reach=w["reach"], follow=w["follow"], contact=w["contact"], gap=o["gate_gap"], plain=w["gap"], near1=o["near1_gap"],
                   jams=len(o["hw"]["jams"]), defl_mm=o["underpass"]["defl_mm"]))
@@ -283,6 +283,17 @@ if __name__ == "__main__":
         par = json.loads(sys.argv[2]); hwl = json.loads(sys.argv[3]); nc = int(sys.argv[4]); nw = int(sys.argv[5])
         outp = sys.argv[6] if len(sys.argv) > 6 else None; sw = os.environ.get("UP_SWEEP")
         hwsweep(dict(CLAIM_PARENT, **par), hwl, nc, nw, outp, os.environ.get("CB_EXACT") == "1" or nc == -2, sweep=sw); sys.exit(0)
+    if mode == "pickrun":                                   # pickrun '<base>' nc nw pickfile out: prepare, then wear the pick once it is written
+        base = dict(CLAIM_PARENT, **json.loads(sys.argv[2])); nc, nw = int(sys.argv[3]), int(sys.argv[4]); pickf, outp = sys.argv[5], sys.argv[6]
+        S = prepare(base, nc, nw, exact=True); print(json.dumps(dict(prepared=True, ideal=S["ideal"])), flush=True)
+        while not os.path.exists(pickf): time.sleep(5)
+        hw = json.load(open(pickf)); o = wear(S, dict(base, **hw)); o["row"] = ID; o["hw_override"] = hw
+        print(json.dumps(dict(tag="pick", **summary(o)), default=float), flush=True)
+        json.dump(o, open(outp, "w"), indent=1, default=float)
+        pp = OS.perpose(S); pp.update(id=ID, wear=("held" if nc == -1 else f"bench({nc},{nw})"), params=dict(base, **o["hw_full"]), exact=True, tag="pick")
+        json.dump(pp, open(outp.replace(".json", "_perpose.json"), "w"), default=float)
+        if os.environ.get("UP_SWEEP"): _append_sweep(os.environ["UP_SWEEP"], dict(base, **o["hw_full"]), o, nc, nw)
+        sys.exit(0)
     if mode == "held":
         par = json.loads(sys.argv[2]); outp = sys.argv[3] if len(sys.argv) > 3 else None; base = dict(CLAIM_PARENT, **par)
         S = prepare(base, -1, -1, exact=True); o = wear(S, base); o["row"] = ID
