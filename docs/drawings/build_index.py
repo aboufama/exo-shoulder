@@ -6,8 +6,8 @@
 import html, json, os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SETS = [("B", "Set B · Pin knee H1b", "3 hubs, 3 links, a two-pin knee to the arm pad. Verified score 90.11, complexity 0. The design to build."),
-        ("A", "Set A · Cone-cut chain (reference)", "The 3-joint lead's chain (score 93.35). Design A adds a cuff relay that is not modelled in CAD yet.")]
+SETS = [("A", "Set A · Cone-cut pin knee (the 3-joint lead)", "3 powered hubs, a cam-slaved knuckle in link 1, a J3 stop and a two-pin knee on ball bearings. Verified score 93.35, held-out gap 22.38."),
+        ("B", "Set B · Pin knee H1b (simpler)", "3 hubs, 3 links and a two-pin knee, nothing else. Verified score 90.11, complexity 0.")]
 
 
 def main():

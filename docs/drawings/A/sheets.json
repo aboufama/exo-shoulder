@@ -1,6 +1,6 @@
 {
  "set": "A",
- "design": "conecut-knee-knuckle-3r (A chain)",
+ "design": "conecut-knee-knuckle-3r (3-joint lead)",
  "pdf": "A_drawings.pdf",
  "sheets": [
   {
@@ -9,7 +9,7 @@
   },
   {
    "file": "02_GA.png",
-   "title": "Cone-cut pin knee chain, general arrangement"
+   "title": "Cone-cut pin knee (3-joint lead), general arrangement"
   },
   {
    "file": "03_HUB.png",
@@ -28,8 +28,8 @@
    "pn": "D8-02a",
    "title": "Link 1a (J1 to K, flank lug)",
    "ends": [
-    "J1",
-    "K"
+    "K",
+    "J1"
    ],
    "scale": "1:1",
    "file": "05_D8-02a.png"
@@ -39,6 +39,7 @@
    "title": "Link 1b (K to J2, crank pin)",
    "ends": [
     "K",
+    "crank pivot",
     "J2"
    ],
    "scale": "2:1",
@@ -58,7 +59,8 @@
    "pn": "D8-04",
    "title": "Member 3 (J3 disc + E strap)",
    "ends": [
-    "J3"
+    "J3",
+    "pin a"
    ],
    "scale": "1:1",
    "file": "08_D8-04.png"
@@ -67,8 +69,8 @@
    "pn": "D8-05",
    "title": "Knee link (with stop tooth)",
    "ends": [
-    "pin a",
-    "pin b"
+    "pin b",
+    "pin a"
    ],
    "scale": "2:1",
    "file": "09_D8-05.png"
@@ -76,16 +78,18 @@
   {
    "pn": "D8-06",
    "title": "Arm pad + pad mount + BOTTOM (one part)",
-   "scale": "1:1",
-   "features": 10,
-   "mass_g": 58.66,
+   "ends": [
+    "pin b"
+   ],
+   "scale": "1:2",
    "file": "10_D8-06.png"
   },
   {
    "pn": "D9-01",
    "title": "Drive bell crank",
    "ends": [
-    "END 1"
+    "nose dowel",
+    "crank pivot"
    ],
    "scale": "2:1",
    "file": "11_D9-01.png"
@@ -94,7 +98,7 @@
    "pn": "D9-02",
    "title": "Drive lobe ring (cam)",
    "ends": [
-    "END 1"
+    "J2 cap seat"
    ],
    "scale": "2:1",
    "file": "12_D9-02.png"

@@ -89,15 +89,61 @@ def axial_faces(shape, P, D, rmax=12.5):
     return out
 
 
+def partial_bosses(shape, d0=12.0, min_span=150.0):
+    """boss cylinders of diameter d0 that are not full turns (a pin boss merged into a strap or pad): the knee-pin axes of
+    parts whose pressed pins are merged into the solid, so no seat bore is modelled"""
+    from OCP.GeomAbs import GeomAbs_Cylinder
+    from OCP.BRepTools import BRepTools
+    from OCP.BRepLProp import BRepLProp_SLProps
+    from OCP.TopAbs import TopAbs_REVERSED
+    out = []
+    exp = TopExp_Explorer(shape, TopAbs_FACE)
+    while exp.More():
+        f = TopoDS.Face_s(exp.Current()); exp.Next()
+        sa = BRepAdaptor_Surface(f)
+        if sa.GetType() != GeomAbs_Cylinder:
+            continue
+        cyl = sa.Cylinder()
+        if abs(2 * cyl.Radius() - d0) > 0.05:
+            continue
+        u0, u1, v0, v1 = BRepTools.UVBounds_s(f)
+        if math.degrees(u1 - u0) < min_span or math.degrees(u1 - u0) > 340:
+            continue
+        a = cyl.Axis(); P0 = np.array([a.Location().X(), a.Location().Y(), a.Location().Z()]); D = np.array([a.Direction().X(), a.Direction().Y(), a.Direction().Z()])
+        pr = BRepLProp_SLProps(sa, (u0 + u1) / 2, (v0 + v1) / 2, 1, 1e-6)
+        P = np.array([pr.Value().X(), pr.Value().Y(), pr.Value().Z()]); N = np.array([pr.Normal().X(), pr.Normal().Y(), pr.Normal().Z()])
+        if f.Orientation() == TopAbs_REVERSED:
+            N = -N
+        rad = P - (P0 + D * np.dot(P - P0, D))
+        if np.dot(N, rad) <= 0:
+            continue                                          # a bore, not a boss
+        out.append(dict(d=d0, hole=False, c=P0 + D * (v0 + v1) / 2, D=D, L=v1 - v0))
+    return out
+
+
 def part_ends(shape):
     """ends (joint components), clocked secondary features and other features of a part, world coordinates; every
     axis points away from GH (the world origin)"""
-    G = coaxial_groups(features(shape))
+    F = features(shape)
+    for pb in partial_bosses(shape):
+        if not any(abs(abs(np.dot(pb["D"], f["D"])) - 1) < 1e-4 and np.linalg.norm(np.cross(pb["c"] - f["c"], f["D"])) < 0.05 for f in F):
+            F.append(pb)
+    G = coaxial_groups(F)
     for g in G:
         g["D"] = unit(g["D"])
         if np.dot(g["D"], g["c"]) < 0:
             g["D"] = -g["D"]
     ends = [g for g in G if any((f["hole"], round(f["d"], 1)) in JOINT_FEATS for f in g["f"])]
+    def hosted(g, among):
+        for e in among:
+            if abs(np.dot(g["D"], e["D"])) > math.cos(math.radians(2)):
+                rv = (g["c"] - e["c"]) - e["D"] * np.dot(g["c"] - e["c"], e["D"])
+                if np.linalg.norm(rv) < 12.5:
+                    return True
+        return False
+    _eid = {id(e) for e in ends}
+    seats = [g for g in G if id(g) not in _eid and any(f["hole"] and round(f["d"], 1) in (3.0, 2.5) and f["L"] >= 2.0 for f in g["f"]) and not hosted(g, ends)]
+    ends = ends + seats                                       # pressed pin seats (knee pins, crank pivot, nose dowel) are joint ends too
     eid = {id(e) for e in ends}
     rest = [g for g in G if id(g) not in eid]
     sec, other = [], []
@@ -183,8 +229,10 @@ def fmt_s(x):
 
 
 # ------------------------------------------------------------------ part sheet
-def interface_sheet(spec, info, names, sheet_no, n_sheets, pdf, png):
+def interface_sheet(spec, info, names, sheet_no, n_sheets, pdf, png, pose=None):
     shape_w = load(spec["step"])
+    if pose:
+        shape_w = pose(spec["step"], shape_w)                # rest pose: end order and names match the kinematic sheet
     ends, sec, other = part_ends(shape_w)
     if not ends:
         raise SystemExit(f"{spec['pn']}: no end components found")
@@ -361,13 +409,26 @@ BVIEWS = {"behind": ((-1, 0, 0), (0, 0, 1)), "side": ((0, 0, 1), (1, 0, 0)), "ab
 
 
 def joint_table(parts, joints, pose):
-    """world-frame joints from the parts' ends at the rest pose; joints: [(name, [(pn, end index), ...])]"""
+    """world-frame joints at the rest pose; joints: [(name, part a, part b)] - each joint is the coaxial pair of ends
+    of the two parts it connects (matched by geometry, not by order)"""
     pe = {}
     for p in parts:
         ends, _, _ = part_ends(pose(p["step"], load(p["step"]))); pe[p["pn"]] = ends
     out = []
-    for name, members in joints:
-        es = [pe[pn][i] for pn, i in members if pn in pe and i < len(pe[pn])]
+    for name, pa_, pb_ in joints:
+        if pa_ not in pe or pb_ not in pe or not pe[pa_] or not pe[pb_]:
+            print(f"  {name}: cannot match ({pa_}, {pb_})", flush=True); continue
+        best = None
+        for i, ea in enumerate(pe[pa_]):
+            for k, eb in enumerate(pe[pb_]):
+                ang = math.degrees(math.acos(min(1.0, abs(np.dot(ea["D"], eb["D"]))))); v = eb["O"] - ea["O"]
+                off = np.linalg.norm(v - ea["D"] * np.dot(v, ea["D"]))
+                if best is None or ang + off < best[0]:
+                    best = (ang + off, i, k, ang, off)
+        _, i, k, ang, off = best
+        print(f"  {name}: {pa_}[{i}] / {pb_}[{k}] axis angle {ang:.3f} deg, offset {off:.3f} mm", flush=True)
+        members = [(pa_, i), (pb_, k)]
+        es = [pe[pa_][i], pe[pb_][k]]
         if not es:
             continue
         D = unit(np.mean([e["D"] if np.dot(e["D"], es[0]["D"]) > 0 else -e["D"] for e in es], axis=0))
@@ -450,10 +511,9 @@ def skeleton_sheet(info, J, sheet_no, n_sheets, pdf, png):
 
 # ------------------------------------------------------------------ sets
 JOINTS = {
-    "B": [("J1", [("D8-01", 0), ("D8-02", 0)]), ("J2", [("D8-02", 1), ("D8-03", 0)]), ("J3", [("D8-03", 1), ("D8-04", 0)]),
-          ("pin a", [("D8-04", 1), ("D8-05", 0)]), ("pin b", [("D8-05", 1), ("D8-06", 0)])],
-    "A": [("J1", [("D8-01", 0), ("D8-02a", 0)]), ("K", [("D8-02a", 1), ("D8-02b", 0)]), ("J2", [("D8-02b", 1), ("D8-03", 0)]),
-          ("J3", [("D8-03", 1), ("D8-04", 0)]), ("pin a", [("D8-04", 1), ("D8-05", 0)]), ("pin b", [("D8-05", 1), ("D8-06", 0)])],
+    "B": [("J1", "D8-01", "D8-02"), ("J2", "D8-02", "D8-03"), ("J3", "D8-03", "D8-04"), ("pin a", "D8-04", "D8-05"), ("pin b", "D8-05", "D8-06")],
+    "A": [("J1", "D8-01", "D8-02a"), ("K", "D8-02a", "D8-02b"), ("J2", "D8-02b", "D8-03"), ("J3", "D8-03", "D8-04"),
+          ("crank pivot", "D8-02b", "D9-01"), ("pin a", "D8-04", "D8-05"), ("pin b", "D8-05", "D8-06")],
 }
 
 
@@ -469,16 +529,19 @@ def main():
     out = os.path.join(REPO, "docs", "drawings", key); os.makedirs(out, exist_ok=True)
     made = [p for p in parts if p["pn"].startswith("D") and p["pn"] != "D8-07"] + [p for p in parts if not p["pn"].startswith("D") or p["pn"] == "D8-07"]
     pose = rest_posing({"A": "user_conecut_knee", "B": "user_pinknee_h1b"}[key])
-    J, pe = joint_table([p for p in parts if p["pn"].startswith("D8")], JOINTS[key], pose)
+    J, pe = joint_table([p for p in parts if p["pn"][:2] in ("D8", "D9")], JOINTS[key], pose)
     for j in J:                                              # the two parts meeting at a joint must share its axis at rest
         print(f"  {j['name']}: members {j['members']}", flush=True)
     names = {}
     for j in J:
         for pn, i in j["members"]:
             names[(pn, i)] = j["name"]
-    for pn, ends in pe.items():
-        for i in range(len(ends)):
-            names.setdefault((pn, i), f"END {i + 1}")
+    for pn, ends in pe.items():                              # ends that are not chain joints: name them by what they carry
+        for i, e in enumerate(ends):
+            ds = {(f["hole"], round(f["d"], 1)) for f in e["f"]}
+            label = ("nose dowel" if (True, 2.5) in ds else "J2 cap seat" if (True, 20.0) in ds else
+                     "follower pin" if (True, 3.0) in ds else f"END {i + 1}")
+            names.setdefault((pn, i), label)
     n = 3 + len(made)
     sheets = []
     pdf_path = os.path.join(out, f"{key}_drawings.pdf" if not only else f"{key}_{only}.pdf")
@@ -494,9 +557,9 @@ def main():
             if only and p["pn"] != only:
                 continue
             fn = f"{i:02d}_{p['pn']}.png"
-            ends, _, _ = part_ends(load(p["step"]))
+            ends, _, _ = part_ends(pose(p["step"], load(p["step"])))
             if ends:
-                r = interface_sheet(p, info, names, i, n, pdf, os.path.join(out, fn))
+                r = interface_sheet(p, info, names, i, n, pdf, os.path.join(out, fn), pose=pose)
             else:                                            # no joint ends (e.g. the cuff plate): the hole-table sheet
                 r = ED.detail_sheet(p, info, i, n, pdf, os.path.join(out, fn))
             r["file"] = fn; sheets.append(r)

@@ -798,12 +798,13 @@ def set_A():
         dict(item=18, pn="K spring", desc="Clock spring 0.3 × 5 × 145.6, 1.4310", qty=1, material="spring steel", source="made / spring maker", steps=[]),
         dict(item=19, pn="misc", desc="Pins, shims, e-clips DIN 6799 RS 2.3, wave washer, M4×6 ISO 10642 (6)", qty="–", material="stainless", source="catalogue", steps=[]),
     ]
-    info = dict(key="A", design="conecut-knee-knuckle-3r (A chain)", ga_title="Cone-cut pin knee chain, general arrangement", mass="216.1 g",
+    info = dict(key="A", design="conecut-knee-knuckle-3r (3-joint lead)", ga_title="Cone-cut pin knee (3-joint lead), general arrangement", mass="216.1 g",
                 step_dir=os.path.relpath(os.path.join(REPO, "pipeline/full-exo/designs", dd, "step"), REPO),
-                ga_notes=["Right shoulder, rest pose. This is design A's 3-joint chain (the current 3-joint lead, verified 93.35). J1, J2, J3 are counted joints; K is slaved by the cam drive (D9-01/02) and not counted.",
-                          "Design A adds a 4th joint, a cuff relay (Ti shell R80.6 strapped 31 mm above the pad, 14 × 14 T-nut carriage, 0-35°, constant-force coil). The relay is NOT modelled in CAD yet: no drawing exists for it.",
-                          "J1 seats on your scapula handler at the acromion top (bracket on the J1 M18×0.5 spigot).",
-                          "Bought parts (items 14-19) are listed, not drawn. Status FOR REVIEW."])
+                ga_notes=["Right shoulder, rest pose. The 3-joint lead: verified score 93.35 (gap 18.28), held-out gap 22.38, complexity 18.5. J1, J2, J3 are the three counted (powered in MVP2) joints. K is slaved to J2 by the cam drive and is not counted; the two knee pins align the cuff and are not counted.",
+                          "Cam drive: lobe ring D9-02 on the J2 cap pushes an MR63ZZ follower on the bell crank D9-01 (2 × 683ZZ on a Ø3 pivot in link 1b); the crank's Ø2.5 DLC nose drives the flank on link 1a. Below 7.28° of J2 the clock spring in the K cap (H-05, 0.08 N·m preload) holds K on stop A; above it K = 2.15 × (J2 − 7.28°), up to 50°.",
+                          "Stops (all on a joint's own angle): J3 −111.90° to +122.74° (Ø2 dowel in a 250° groove under link 2's J3 ring); J2 −15.94° to +102.07° (Ø3 dowel in a 118° slot); K 0° / −62.85° (two Ø3 dowels); knee tooth at 154.78°.",
+                          "Knee pins on MR63ZZ pairs (Ø6 J6 housings, Ø3 m6 pins in Ø3 H7 seats), already to the 2026-10-17 rule. J1 seats on your scapula handler at the acromion top (bracket on the J1 M18×0.5 spigot).",
+                          "Bought parts (items 14-19) are listed, not drawn. Generated from the STEP files of the built CAD (gen 8) posed at its rest frame; status FOR REVIEW."])
     return info, parts, hub, bom
 
 
