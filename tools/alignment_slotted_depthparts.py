@@ -3,7 +3,8 @@
 Read-only on every claim. Runs the model UNCHANGED through its own frozen() (fit Bench(60,160) fast at the 1 mm
 part-part rule, every level frozen, worn on Bench(110,360); CB_EXACT=1 for exact), exactly as
 tools/alignment_slotted_partcounts.py does, then reads the worn bench's own record (B._kit_last: chain members and
-their sampled points; B.res: per-pose signed distances, members concatenated in chain order) and writes, for every
+their sampled points; B.res: per-pose signed distances, members concatenated in chain order, plus the O20 hub-crown
+minimum that the model's extras() appends for a pose whose crown is in the skin - attributed here to its hub) and writes, for every
 contact pose (any metal sample < 0 mm), the deepest press of each member, and the per-member minimum over the taken
 poses. It also reports the frozen gap, so the run doubles as an independent reproduction of the claim.
 
@@ -40,6 +41,18 @@ def run(rid, out=None):
         try: os.remove(tmp)
         except OSError: pass
     Bb = cap[(110, 360)]; L = Bb._kit_last; pts = L["pts"]; ch = L["chain"]; n = len(Bb.idx)
+    DW = getattr(SE, "DW", None); flat = ch.info.get("flat", {}); prof = L["prof"]; hubs = [m for m in ch.members if m.kind == "flat"]
+
+    def _crown_who(i):                     # which hub's crown is deepest at pose i (DW.crown_points, as extras() samples it)
+        try:
+            best = (np.inf, "?")
+            for m in hubs:
+                C = DW.crown_points(m, prof[m.name], *flat[m.name][:2])[[i]]
+                d = K.dist_many(Bb, np.repeat([i], C.shape[1]), C.reshape(-1, 3))
+                if float(np.min(d)) < best[0]: best = (float(np.min(d)), m.name)
+            return best[1]
+        except Exception as e:
+            return f"?({e})"
     cols = []
     for m in ch.members:
         cols.append((m.name, int(pts[m.name].shape[1])))
@@ -49,11 +62,13 @@ def run(rid, out=None):
         r = Bb.res[i]
         if r is None: continue
         r = np.asarray(r, float)
-        if r.size != tot:
+        if r.size not in (tot, tot + 1):
             contact.append(dict(i=i, err=f"res size {r.size} != {tot}")); continue
         per, o = {}, 0
         for nm, s in cols:
             per[nm] = round(float(np.min(r[o:o + s])), 3); o += s
+        if r.size == tot + 1:              # the model's extras() appends the O20 hub-crown minimum for a pose whose crown is in the skin
+            per["crown:" + _crown_who(i)] = round(float(r[-1]), 3)
         if float(np.min(r)) < 0:
             pz = Bb.poses[i]
             contact.append(dict(i=i, kind=Bb.kind[i], plane=pz["plane"], elev=pz["elev"], axial=pz["axial"],
