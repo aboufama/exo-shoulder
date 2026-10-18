@@ -237,3 +237,73 @@ pocket's cut into link 1b's bar root, and the held line.
 4. Model or measure the crank long arm's stiffness, since it decides 203 on the wall side.
 5. The independent verifier and the alignment auditor: M3 closure, the stop-A O20 wall, the flexure ruling for P, and
    Hertz for T.
+
+## Verification (independent skeptic, 2026-10-18 ~15:25 UTC)
+
+Harness: `docs/concepts/verify/lowarm-kstop-knuckle-3r.py`. The claim's model is loaded UNCHANGED and worn through its own
+frozen protocol: fit on Bench(60,160) fast, shape frozen, worn on Bench(110,360) exact and on the held-out set. Dwell K is
+law + delta (the kplay PlayDesign), and the J2 dowel cut sits at 46.35. The verifier adds four checks:
+
+- **V-ARM, a metal correction.** The parent samples the crank's short arm as one sheet, 1.0 mm under the pin centre
+  (desmo-conecut-knuckle-3r.py line 267). The claim reads that sheet as the arm's TOP face and gives the arm a thickness
+  (t <= 1.38 build spec; the gen-9 CAD has 1.5). So the arm's skin-facing underside was never sampled. V-ARM adds it at
+  sheet - 1.38: the same 8 x 3 stations, crank frame, skin-checked contact list.
+- **The continuity flood**, `connected()` of minarc-stop-knuckle-4r-mechanism.py, run on the post-dowel bench. The claim
+  did not run it.
+- **V3b, the fold margin th with a dwell flag that does not key on dK != 0.** Under play, a dwell pose carries
+  dK = sp * delta exactly, so it is read with the effective J1-J3 dyad. The K sub-dyad m_sub (the lead's G4 item) is
+  reported separately.
+- **Per-pose worst dumps** in the alignment_paired format (the lead's rule), plus the paired comparison against the lead.
+
+CB_EXACT=1, local, niced, <= 2 processes (the farm is closed).
+
+| check | result |
+|---|---|
+| frozen exact Bench(110,360), +0.264 (wall side, P5 worst) | **18.60** reproduced bit-identically (reach 0.7278 = 262/360, ib14 0.8968, ib10 0.5707, follow 1.0, contact 0.0106 = 4); why: fold 88, contact 4, parts 0, closure 0, flip 0, skin 0; overhead 8/28 |
+| frozen exact Bench(110,360), -0.210 (stop A, P5) | **18.68** reproduced (ib14 0.8960; 264 at -1.304, 203 at 0.801 / 0.347) |
+| per-pose worst of the two (the claim) | **18.69** (score 93.20) reproduced. Dump: `docs/alignment/remeasure/lowarm-kstop-knuckle-3r_bench_perpose.json` (recomputes 18.69) |
+| +0.1 / +0.2 mm probes (worst) | 19.23 (139 flips) / **19.77** (139 and 203 flip), reproduced. The lead reads 18.83 at +0.2 |
+| V-ARM, short-arm underside at t 1.38 (24 samples, F-0.82..F+1.71 about hub 2's face) | **0 of 470 poses change** in either wear (min metal, extra-wall metal, taken, in-band all identical). Measured directly on the fit bench, the underside's lowest skin distance is 7.92 mm (sheet 9.26 mm) and it is never below the pose's other contact metal. The arm rides high over the dome beside hub 2. Correction applied, effect 0.00 |
+| J2 dowel at K-eq 46.35 | cuts 0 (largest taken K 45.615) |
+| continuity flood (+0.264 wear) | connected_full **18.60 (0 dropped)**; envelope 1065 ok / 526 forced, all connected; kNN 20.29 (6 forced dropped, the family's known kNN reading: parent 19.64); bench-only 50.45 (the known sparse-bench artefact, 18 of the 113 drops have no taken neighbour) |
+| V1 own gates | desmo_fail empty; dK_lim 46.75 (slot end); stage-1 built pin first fail 52.33 / cap 59.74 (>= 47.35); rc_min 1.02; ridge 0.264; PA pin 29.7 / cap 35.7 (gate 34.47; the cap side is gated outside the blend on the built read, as in the parent) |
+| near-touch (reported only) | min metal 0.07 (139, link 2); 0.16 (203); gap at 1 mm 20.78 / 20.32, at 2 mm 34.84 |
+| complexity | the row's mechanism record lacked docs/SIMPLICITY.md's count fields, so tools/simplicity.py read **0**. The verifier merged the parent's record + 1 bought part (the M1.6 set screw): simplicity.py now reads **16.75**, which matches the claim |
+| paired vs the lead (alignment_paired compare, 4000 boots) | bench **+0.3998** (18.686 vs 18.286), held **+0.4977** (22.876 vs 22.379), pooled +0.46. All of it is in-band (the lead's held ib14 is 0.89999, so every in-band point counts), with 0 discordant takes and 0 discordant contacts (4 / 14 shared). CI90 [0.00, 0.58] / [0.00, 0.55], **P(better) 0.00** on both. File: `docs/alignment/remeasure/lowarm-kstop-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json` |
+
+### Findings
+
+1. **The number stands.** The frozen exact bench reproduces 18.69 bit-identically. The only metal the claim left out (the
+   short arm's underside) sits >= 7.9 mm from the skin and changes 0 poses. The flood drops 0 poses and the dowel cuts 0.
+   Exactly 3 ACTIVE DOF: J1, J2 and J3 on O20 v5 hubs. K is a passive rotation, slaved by the two-stage desmo drive in
+   the rise. In the dwell it is held between two pieces of metal that exist: the half ring's inner wall blocks +K
+   (drho/dK = -0.0606 mm/deg, so +K presses that wall) and stop A, K's own lug in link 1b's groove, blocks -K. That
+   leaves no undetermined passive coordinate. The crank pivot and the two knee pins are closure-determined rotations
+   (MR63ZZ pairs). There are 0 passive translations and no gear, pulley, cable or spring. Every stop acts on its own
+   joint's angle: stop A / B on K, the dowel on J2 (re-phased to the J2 angle at K-eq 46.35), the J3 dowel on J3.
+2. **Ranked at the probe (the round-15 rule), this cell alone is 19.77, not 18.69.** 203 = 0.158 < 0.2 and
+   139 = 0.072 < 0.1 both flip. That is 0.94 behind the lead's probe reading (18.83). The rule "203 >= 0.15 at every
+   corner and at the +0.1 / +0.2 probes" FAILS at the +0.2 probe here, and at the P0 corner (203 0.118, e- 0.408 > 0.29).
+   The claim says this itself and relies on the P5 J2 pair as a stated build spec, plus the combined cell with h2facet /
+   l2jog. Both of those have landed since. h2facet's verified buildable config is the chamfer alone (its upper flat was
+   mis-framed). l2jog reads 139 at 0.602. **The combined cell is unmeasured. It is not this verification.**
+3. **Held is at the kill line, not inside it with room to spare.** The paired held difference is +0.4977 against a 0.5
+   line, P(better) 0. The +0.5 includes no tolerance: kit density was not re-measured on this row (the parent's shifts
+   are -0.06 / +0.08), and the claim's own red team puts the unmodelled long-arm compliance at 0.06-0.22 mm at 203 per
+   0.05 N.m. Either can push held over the line, or 203 into contact (+0.54).
+4. **Instrument notes (no number moves).**
+   - The wear JSON's `play_info` (n_dwell 31, n_dwell_lost_fold 0, m3e_min) is the LAST IK BATCH only, because
+     PlayDesign overwrites PLAY["info"] on every `_ik_phys` call. The real dwell count is 205 of the 372 taken (V3 at
+     delta 0 files 167 as forced). What shows no dwell pose was lost under play is the unchanged taken count (372 at
+     +0.264, at -0.210 and at 0).
+   - Besides V3, the verifier's V4 kplay also misfiles under play. It reads 60.76 with 108 poses dropped, because the
+     dwell poses carry dK = delta, so they are filed as forced and m_sub ~ 0 minus 0.23 is read as a fold. Nobody
+     should quote that 60.76. V3b gives the true dwell th margin (below).
+   - The row's mechanism record could not be scored (tools/simplicity.py read 0). It is fixed by merging.
+5. **Build notes for the CAD (inside O20, no bench effect).**
+   - The M1.6 stop-A set screw, centred on the 1.6-tall groove (F_K+3.15..4.75), has zero thread wall to link 1b's boss
+     underside (U0 = F_K+3.15). Raise the bore to centre >= F_K+4.45 (0.5 wall), pocket the groove's K = 0 end to
+     F_K+5.25 and run the lug to F_K+4.9. The flat point (O0.8) then bears at F_K+4.05..4.85. The thread stays 1.2 off
+     the MR117 seat (r 6.7..8.3 vs 5.5).
+   - The short arm needs the claim's t <= 1.38 tip, or the gen-9 CAD's 1.5 with the pocket floor at F+0.88. Either way
+     the underside stays >= 7.9 mm off the skin (V-ARM).
