@@ -108,6 +108,17 @@ WATCHDOG (exo-shoulder, every 15 min; docs/OPERATIONS.md):
    newly passing on a built CAD, a blocker that needs them, a generation-winner render ready.
 ```
 
+**After a container restart** (cloud sessions restart without warning, twice on 2026-10-18; every background workflow
+stops and the session crons vanish):
+1. Commit the agents' uncommitted outputs first (`git status`, add by explicit path, push).
+2. Resume each stopped workflow with `Workflow({scriptPath, resumeFromRunId: <its run id>, args: <its ORIGINAL args,
+   verbatim>})`. Completed agents replay from cache; only the in-flight ones rerun. Recover lost args from the session
+   transcript (`~/.claude/projects/<project>/<session>.jsonl`: the Workflow tool_use whose result names the run id).
+3. `CronList`; re-create the watchdog and the hourly audit as above.
+4. The first publish to the public artifact may be refused for files published before the restart. Run `Artifact
+   list scope files` (or `read` with the path), check that the published copy is our own older build, then republish.
+5. Note what was resumed and what was lost (one-off wait tasks are lost; their agent redoes the step) in HANDOFF.
+
 ## 4. Dashboards (two artifacts, one dataset build)
 
 **2026-10-17: the session now runs under the user's second account, which cannot write to the two artifacts below

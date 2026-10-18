@@ -549,6 +549,10 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
        of the level formula. Re-worn at F+3.9: 20.38 / 25.33 (+1.43, a lower bound). Its old 'paired TIE' was at a refuted
        placement. desmo-window is DEAD at 20.43. **No desmo-family stage 1 is buildable on file.** The family's
        simplicity edge (cx 15.75-16.5) has no buildable number below ~20. Row texts were corrected by the lead.
+   - *Lead, 07:10 UTC 10-18:* a second container restart at ~07:06. Recovered as before: WIP saved (f164440); the main
+     loop wf_f06588fd-4d1, the jump loop wf_6c42dda0-f91 and the hourly audit wf_b8e85540-23f (freek-oracle-route +
+     lowarm-halfring) were resumed from cache; crons re-created (watchdog d07fc9f7, hourly audit ca2ab295). The recovery
+     steps are now written in OPERATIONS section 3, 'After a container restart'.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
