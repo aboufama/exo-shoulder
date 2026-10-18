@@ -24,7 +24,7 @@ I re-measured both claim numbers with the models unchanged. Each reproduces exac
 | wear | gap | reach | in-band14 | contacts | near1 | near2 | near3 | band 3-14 | file |
 |---|---|---|---|---|---|---|---|---|---|
 | bench re-wear (model's own frozen()) | 18.28 | 0.7278 | 0.9012 | 4 | 19.38 | 34.84 | 81.91 (lead 86.16) | 18.33 (lead 18.34) | remeasure/conecut-h2facet-knuckle-3r_bench.json |
-| held re-wear | see the held section | | | | | | | | remeasure/conecut-h2facet-knuckle-3r_held.json |
+| held re-wear (model's own frozen_held()) | 22.16 | 0.6933 | 0.900 | 13 | 25.23 | 36.89 | 79.60 (lead 83.12) | 22.32 (lead 22.55) | remeasure/conecut-h2facet-knuckle-3r_held.json |
 | bench continuity flood (chamfer only) | static 18.28, full 18.28, knn 19.97, bench-graph 50.13 = the lead's flood | | | | | | | | remeasure/conecut-h2facet-knuckle-3r+chamferonly_flood_bench.json |
 | bench wear probe | 18.28 | | | | | | | | remeasure/conecut-h2facet-knuckle-3r_probe_bench.json |
 
@@ -154,7 +154,22 @@ Patterns walked and found absent:
 
 ## Held re-wear
 
-HELD_PLACEHOLDER
+I re-wore the held split through the model's own frozen_held() (docs/alignment/remeasure/conecut-h2facet-knuckle-3r_held.json).
+It reproduces the verifier exactly:
+
+| held reading | h2facet | lead (remeasure/conecut-knee-knuckle-3r_held.json) |
+|---|---|---|
+| gap | 22.16 | 22.38 |
+| reach (taken) | 0.6933 (862 taken) | 0.6922 (861) |
+| near1 | 25.23 (14 poses) | 25.23 (13) |
+| near2 | 36.89 (71) | 37.10 (71) |
+| near3 | 79.60 (207) | 83.12 (218) |
+| band read as 3-14 mm | 22.32 | 22.55 |
+| min metal on a taken pose | 0.325 mm | 0.325 mm |
+
+The coordinate spans are bit-identical. The plain held edge (-0.22) and the 1 mm reading (0.00) differ only because
+pose 447 is taken at 0.697 mm. The 3 mm reading (-3.52, 11 fewer poses under 3 mm) is the chamfer's real, wearer-side
+gain.
 
 ## Proposals (proposals only; none feeds this verdict)
 

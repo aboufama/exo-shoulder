@@ -13,11 +13,11 @@
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 22.16 vs bench 18.28 (+3.88; docs/concepts/verify/conecut-h2facet-knuckle-3r_v_held_frozen_chamferonly.json)",
+   "reason": "held out 22.16 vs bench 18.28 (+3.88; re-measured (this audit))",
    "held_gap": 22.16,
    "v_gap": 18.28,
    "drop": 3.88,
-   "source": "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_held_frozen_chamferonly.json"
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -30,16 +30,25 @@
   {
    "check": "near_touch",
    "level": "ok",
-   "reason": "plain 18.28, <1 mm 19.38, <2 mm 34.84, 16.56 points live in the 1-2 mm shell (docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen_chamferonly.json)",
+   "reason": "plain 18.28, <1 mm 19.38, <2 mm 34.84, <3 mm 81.91, band read 3-14 mm 18.33, 16.56 points live in the 1-2 mm shell (re-measured (this audit))",
    "shell2": 16.56,
    "plain": 18.28,
    "n1": 19.38,
    "n2": 34.84,
-   "n3": null,
-   "band3": null,
-   "hist": null,
-   "minmm": 0.07,
-   "source": "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen_chamferonly.json"
+   "n3": 81.91,
+   "band3": 18.33,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0,
+    "2-3": 0.0017,
+    "3-4": 0.0141,
+    "4-6": 0.125,
+    "6-10": 0.4331,
+    "10-14": 0.3273,
+    ">14": 0.0988
+   },
+   "minmm": 0.072,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
@@ -62,7 +71,7 @@
       "gap": 18.28,
       "src": "docs/alignment/remeasure/conecut-h2facet-knuckle-3r_bench_perpose.json",
       "cross_check": {
-       "files": 1,
+       "files": 2,
        "sums": [
         19.86
        ],
@@ -128,6 +137,22 @@
     [
      "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
      46.27
+    ],
+    [
+     "re-measured dK span",
+     45.61
+    ],
+    [
+     "re-measured K.ang span",
+     46.67
+    ],
+    [
+     "re-measured K.qa span",
+     46.67
+    ],
+    [
+     "re-measured K.qb span",
+     49.66
     ]
    ],
    "declared": [],
@@ -136,7 +161,7 @@
   {
    "check": "sampling",
    "level": "ok",
-   "reason": "sample-weighted in-band 0.901 vs part-weighted 0.925 (-2.37 points); thinly sampled parts: L1a 8 (docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen_chamferonly.json)",
+   "reason": "sample-weighted in-band 0.901 vs part-weighted 0.925 (-2.37 points); thinly sampled parts: L1a 8 (re-measured)",
    "parts": {
     "hub1": [
      1.0,
@@ -243,8 +268,8 @@
   }
  ],
  "remeasured": {
-  "bench": false,
-  "held": false
+  "bench": true,
+  "held": true
  },
  "verifier_files": [
   "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_sampling.json",
@@ -254,7 +279,7 @@
   "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen_chamferonly.json",
   "docs/concepts/verify/conecut-h2facet-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "ab49849",
+ "git": "616e0c7",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T15:59:33Z"
+ "t": "2026-10-18T16:31:30Z"
 }
