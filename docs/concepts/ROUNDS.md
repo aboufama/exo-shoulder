@@ -5180,3 +5180,162 @@ None. The 21 ideated catalogue entries all sit under measured closures (round 10
   at cx 33.25 vs the 3-joint lead 93.35 / held 22.38 at cx 18.5. Lens A says whether the relay reaches 95.
 - Proposal B (stop refusals count as contacts): both readings are reported for any stop design.
 - The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule and the transmission guard stay; no lens relaxes them.
+
+## Round 15 results (2026-10-18 ~12:25 - ~17:30 UTC, track main, closer)
+
+The round ran lenses B (lowarm-adjpad-buildable) and C (conecut-sidestep-metal); lens A ran as a separate lead agent
+(docs/research/take_bound_3dof.md). All work was local (the farm is closed: <= 2 niced processes, OMP_NUM_THREADS=1).
+All numbers are frozen exact on Bench(110,360) (fit fast, shape frozen, worn with no refit) and were re-measured by an
+independent verifier; held out is the held set, never searched on. No bench, judge or kit file changed, so no number
+moved because the measurement changed. Lens B ran kstop (step 0 = cell A of the buildable half ring) and its phase cell
+kphase-notch; cells C (adjpad, dominated by construction), P (kpreload, no flexure ruling) and T (bareti, no Hertz
+RC_MIN ruling) were not run. Lens C ran two zero-complexity metal cuts on the lead's chain (h2facet, l2jog).
+
+Ledger exits, re-read with `tools/alignment_ledger.py get <id>` at ~17:26 UTC just before naming the winner:
+- conecut-h2facet-knuckle-3r exit 0: WATCH (skeptic 17:06:25Z, claim 18.28; 14 upheld, 1 refuted).
+- **conecut-l2jog-knuckle-3r exit 3: GAMED** (skeptic 17:13:36Z, claim 18.28; NEW-hidden-lift upheld).
+- lowarm-kphase-notch-knuckle-3r exit 0: WATCH (skeptic 17:23:56Z, claim 18.47; 2 of 17 refuted).
+- lowarm-kstop-knuckle-3r exit 0: WATCH (skeptic 17:02:50Z, claim 18.69; 11 upheld, 2 refuted).
+- The lead conecut-knee-knuckle-3r exit 0: WATCH (unchanged, 2026-10-17T20:15:35Z).
+
+Every row has 3 active joints and 0 passive translations. Complexity is tools/simplicity.py v2.2 at the TRUE record;
+the board shows 0 for h2facet, l2jog and kphase-notch because their mechanism records are deltas (G5, below).
+
+| design (lens) | verified gap (score) | held out (paired vs lead 22.38) | reach (takes) / overhead | cx | ledger | outcome |
+|---|---|---|---|---|---|---|
+| **conecut-h2facet-knuckle-3r** (C): the lead + a 1.4 mm x 45-deg chamfer on link 1b's J2 lower-plate edge, +-40 deg sector at az 142.8 (c 1.4, hw 40, fd 0; the upper flat dropped) | **18.28 (93.35)**, an exact tie: the same 262 takes, the same 4 contacts | 22.16 (-0.22, one pose: 447 taken at 0.697 mm; CI90 [-0.66, 0], P(better) 0.644) | 0.7278 (262/360) / 8 of 28 | 18.5 (board 0) | WATCH | **winner by the rule**; ties the lead, not a lead change |
+| conecut-l2jog-knuckle-3r (C): one-sided planform waist on link 2 at pose 139 | 18.28 (93.35) | 22.45 (+0.07, all in-band) | 0.7278 (262) / 8 of 28 | 18.5 (board 0) | **GAMED** | **passed over**: the waist is an unstated 0.95 mm edge lift; as the stated cut it is the lead exactly |
+| lowarm-kphase-notch-knuckle-3r (B): kstop + K phase beta -157, notch in link 1b's hub-K boss, J2 dowel 45.75 | 18.47 (93.28), per-pose worst of +0.264 18.39 / -0.210 18.46 | 22.87 (+0.50, CI90 [-0.02, 0.79], P(better) 0.088) | 0.7278 (262) / 8 of 28 | 16.75 (board 0) | WATCH | +0.19 behind; 264 stays a contact (ring2 -0.249, hub 2 -0.214 at e+) |
+| lowarm-kstop-knuckle-3r (B): half ring + low arm with stage 1 at F+3.9, K-own stop A (M1.6 set screw in an arc groove), pad deleted | 18.69 (93.20), per-pose worst of +0.264 18.60 / -0.210 18.68 | 22.876 (+0.4977, CI90 [0, 0.55], P(better) 0) | 0.7278 (262) / 8 of 28 | 16.75 | WATCH | the family's M3 is closed at a buildable level; +0.41 behind, all in-band |
+| conecut-knee-knuckle-3r (the lead, for reference) | 18.28 (93.35) | 22.38 | 0.7278 (262) / 8 of 28 | 18.5 | WATCH | stays the verified lead |
+
+**Winner: conecut-h2facet-knuckle-3r, chamfer only (c 1.4, hw 40, fd 0).**
+- v_gap 18.28 (score 93.35), held out 22.16; 3 active joints, 0 passive translations, complexity 18.5 (the lead's;
+  the chamfer adds 0 parts, 0.13 g).
+- Ledger WATCH (exit 0, skeptic 2026-10-18T17:06:25Z).
+- **It does NOT beat the previous verified lead of 18.28: it ties it exactly on the bench.** Its held number is 0.22
+  better on one pose (P(better) 0.644). Whether a bench tie with a better held number may replace the lead is the
+  user's withdrawn CI tie rule, still open. No lead change: conecut-knee-knuckle-3r stays the lead.
+- The verified, buildable config is the chamfer alone. The row's upper flat (fd 0.6) is modelled on link 1b, but it
+  cuts link 2's O20 boss and threaded cap, which turn with J2 (-14..+91 deg): it cannot be built as modelled, and it is
+  worth 0 (fd 0 and fd 0.6 are identical pose for pose on bench and held).
+- What it buys is robustness, not takes: pose 203 0.263 -> 1.122 mm (0.614 mm per mm of chamfer, solid-sampled), near1
+  19.92 -> 19.38, the +0.35 mm probe 19.37 -> 18.83 (only pose 139 at 0.072 mm stays under 1 mm), total contact depth
+  (T5) 20.25 -> 19.86 mm, held 447 from a -0.207 contact to a 0.697 take; every one of the 45 changed held poses moved up.
+- The generation CAD is the lead's user_conecut_knee with this chamfer on hub 2's lower plate (0 complexity); it gets
+  its EVOLUTION entry when built.
+
+**Passed over: conecut-l2jog-knuckle-3r (18.28, tied), GAMED (NEW-hidden-lift).** Link 2's underside is fitted to the
+skin row by row; at the binder its rows sit at r 69.55 / 68.43 / 68.86 / 69.20 mm from GH. The waist moved each row
+sideways at constant height, so the new edge sits up to 0.95 mm above the real underside (model_lift_mm
+[-0.298, 0.951]). That lift, not the cut, gave pose 139 0.072 -> 0.602 mm and the +0.2 mm probe 18.83 -> 18.29. Built
+as the stated cut: bench 18.28, 139 at 0.073 mm, probes 18.83 / 18.83 / 19.37, held 22.38 - the lead exactly. Under
+the round-15 probe ranking (the plain gap ties, both 0 passive translations) it would have broken the tie on the
+artifact. Even un-gamed it is a no-op.
+
+**Alignment (every watch reason of the round's designs, with the numbers).**
+- *conecut-h2facet-knuckle-3r (WATCH, 14 upheld; S5 refuted: 447 is a non-forced take, connected in every flood).*
+  Continuity: bench flood full 18.28 = static, knn 19.97, bench graph 50.13 (= the lead); held knn flood 30.39 vs 22.16
+  (+8.23, over the tool's 3-point line). G5 / complexity: simplicity.py reads 0 against the true 18.5, so the board
+  plots it at (93.35, 0), where it dominates 33 of 36 verified rows (12 at 18.5). Reporting / R1: the verdict field
+  still opens 'SCREENED as a 0-cx ENABLER CELL'; morphs.json shows gap / sweep 12.5 (score 95.45, above the 95 line),
+  5.78 under the verified number. T1: every gain sits just past a cutoff (bench near1 from 203 alone; held plain from
+  447 alone; held near1 identical 25.23; the 1-2 mm shell unchanged at 16.56 points). P1: all 122 search configs read
+  the same (12.5 / near1 13.66; envh 17.57), so the gate passed without a search; the chamfer was sized on six exact
+  claim-bench guard poses, so its bench near1 / probe / T5 gains are in-sample. NEW-wrong-body-frame: the flat (above),
+  and the skeptic adds that its quoted 3.1 mm wall ignores the ~1 mm cap skirt. T3: th 5.181 bench / 5.006 held; the
+  held number needs the J3 dowel inside a 1.33 deg window, and a +-0.3 deg K-phase build error crosses 5 deg. M5: the
+  J3 stop load can dent the MR117 raceway under a silicone liner (s0 stands); R17 PASS and cuff twist 3.99 deg were
+  measured on the lead's user-standard CAD. G4: m_sub at K rest = the lead's. NEW-strap-dilution: at the displaced
+  lead's E-strap count 18.67 bench / 22.68 held; held ib14 0.900 sits on the hinge. NEW-ws-inband: unscored workspace
+  in-band 0.868 over all taken poses, 0.832 at elevation 90-140, 0.936 overhead (8 of 28), = the lead. P2: the lead's
+  knee re-centring read held poses (0 measured effect); no held selection of its own.
+- *conecut-l2jog-knuckle-3r (GAMED; 2 of 18 refuted: fold_margin, G1).* Besides the hidden lift: R2 - refuted records
+  are still shown (139 at 0.602, probe02 18.28, 'far edge kept'; the far row moves +0.18-0.26 mm, the narrowing is
+  ~1.33 mm, not 1.6, and held overhead 898 goes 1.67 -> 1.528 mm); R1 / G5 as for h2facet (board 0 vs 18.5); M5 - the
+  waist cuts link 2's section modulus by 22.7 % on the J3-stop load path, unchecked; S5 - held knn flood 30.69 (+8.24,
+  77 of 332 forced takes dropped; the chain's property).
+- *lowarm-kphase-notch-knuckle-3r (WATCH; held_out and fold_margin refuted by re-measure).* Continuity / S5: bench
+  +0.264 full 18.39 (0 dropped), knn 20.08 (+1.69); held full 22.87 (0 dropped), knn 30.89 (+8.02). Sampling / S2:
+  sample-weighted ib 0.899 vs part-weighted 0.870 (+2.85); ring2 0.18 in band at a median 15.6 mm on 6 samples (0.6 %
+  of the weight). Reporting / R1: board sweep best 13.33 (score 95.15) sits 5.14 under 18.47; the verdict field still
+  says 'Gate 0 half-passed'; the verifier's sided wear JSONs were never committed. NEW-friction-corner: the 0.22 bench
+  edge over kstop is bought with stage-2 transmission margin (pa_eff_horn 33.1 -> 42.6 deg against the 43 cap at mu
+  0.15; at mu 0.17 dK_lim is 44.25 and the exact re-wear reads 18.75, behind kstop's 18.69); the skeptic adds that the
+  family's 1.0 deg dowel-to-bind margin is not applied to the new stage-2 pa bind (0.25 deg at mu 0.15, -1.5 at 0.17).
+  P1: the bench edge does not travel (held 22.87 vs kstop 22.88, P(better) 0.437; held 274 / 1054 lost to fold or
+  stroke, 1068 cut by the dowel re-phase 46.35 -> 45.75). NEW-hairline-gates: notch wall 2.05 vs 2.0, pa 42.6 vs 43,
+  plate-hub K 1.05 vs 1.0, 203 0.158 vs 0.15, pose 313 0.135 deg under the dowel (a dowel 0.14 deg low reads 18.75),
+  held +0.49 vs the 0.5 kill line, notch clocking +-8 deg. M2: the notch removes a 52-deg x 2.45 mm sector of hub K's
+  boss, the cap's 1 mm skirt and the M18x0.5 spigot thread (86 % left), so the cap must be clocked; without the notch
+  the plate penetrates hub K by 1.40 mm; 'Keep O20 only' needs a ruling. G5: board 0 for 16.75 (dominates 29 of 36 vs
+  15). G4: m_sub < 1 deg on 50 bench / 98-100 held dwell poses. M5: the dwell hold runs through the crank's long arm
+  (now 49.7 mm), never stiffness-modelled; R17 not run. M3: the V-OWN frame error (notch samples dropped on link 1a,
+  solid on link 1b) was caught and moves 0.00. T1: 139 0.072, 203 0.158; under 1 / 2 / 3 mm: 4 / 33 / 104 bench,
+  13 / 72 / 217 held. Probe ranking: +0.2 mm 19.56 (kstop 19.77, lead 18.83).
+- *lowarm-kstop-knuckle-3r (WATCH; fold_margin and G5 refuted).* Continuity / S5: bench +0.264 full 18.60 (0 dropped),
+  knn 20.29; the skeptic's -0.210 and held floods: held full 22.88 (0 dropped), knn 31.12 (+8.24). Sampling / S2:
+  0.897 vs 0.861 (+3.57); ring2 is the whole bench in-band deficit vs the lead - without ring2 the design reads 0.9011,
+  the lead's number. NEW-hairline-gates: 203 at 0.158 vs 0.15 (+0.008) while the long-arm compliance is 0.06-0.22 mm;
+  held +0.4977 vs the 0.5 kill line with kit density unmeasured (parent shift +0.08); the skeptic adds that two
+  pre-registered gates fail outright (the a_s -0.1 bind corner, re-scoped 'not legal'; 203 at the +0.2 mm probe: 19.77)
+  and that the pre-registered pass (<= 18.65) is missed at 18.69. M5: the +K dwell load runs through the crank's 41 mm
+  long arm (27-77 N/mm): 0.06-0.22 mm at 203 per 0.05 N.m, so 203 reads 0.10 to -0.06 mm (contact at the soft end), in
+  no wear. T3: held forced th 5.006 at pose 1054, ~4.91-4.92 with the stated 0.23 deg groove play (bench 5.181 / 5.09).
+  G4: m_sub < 1 deg on 100 held dwell poses. M3: closed by build specs the model does not carry - a pocket cutting
+  ~30-35 % of link 1b's bar root, arm swept metal to r 10.14 vs the r 10 spec, arm tip 1.38 mm vs 1.5 in the CAD, and
+  zero thread wall at the set-screw bore (fix: bore centre at F_K+4.45 or higher). Reporting / R1: the dashboard shows
+  the screen's text, which names the unmeasured combined cell; the verifier JSONs sat only in the scratchpad.
+
+**Lessons (measured).**
+1. **On the lead's chain the sub-millimetre metal levers are exhausted: they buy robustness, not takes.** The lead's 4
+   contacts bind on hub 2 at 205 (-3.90 after the chamfer; clearing it needs 4.85 mm radial, the MR117 wall caps the
+   cut at 1.5), the crank / roller at 237 (-8.93), the horn lug at 264 (-5.80) and link 2 at 316 (-1.23). No O20 trim
+   reaches 205 / 237 / 264. Reach is 0.7278 (262/360, overhead 8 of 28) on all four rows, the lead's exactly.
+2. **The tangent binders are not on the search benches.** Bench(60,160) and envh hold no hub-2 edge binder (122 configs
+   flat). Tangent-plane cuts can only be judged on exact guard poses, and those gains are in-sample by construction.
+3. **A cut must be sampled as a solid, on the body that carries it, keeping the fitted underside.** Moving samples in
+   over-reads by 0.19 mm at c 1.0 (h2facet); a flat on the stack belongs to the member that turns it (cap and boss turn
+   with link 2 at J2); a notch's skin samples belong to the body that owns the metal (V-OWN); a planform move on a
+   skin-fitted link must re-project each moved sample to the original underside (l2jog's GAMED finding).
+4. **The lead's held ib14 is exactly 0.9000**: any metal move that costs in-band costs held one for one.
+5. **The buildable lowarm level (stage 1 at F+3.9) is priced: exactly 0.40 bench / 0.50 held of in-band, from one
+   part.** Link 2's 440C ring insert (ring2) rises to a median 15.6 mm (0.179 in band, 6 samples); without it the
+   design reads the lead's 0.9011. Takes and contacts are the lead's (0 discordant). The family's M3 is closed.
+6. **Dwell play is sided.** At the dwell exit rho(K) of the stage-1 pin falls -0.0606 mm per deg: +K presses the inner
+   wall, so a one-sided K-own stop replaces the pad. +K improves the gap (18.60 at +0.264), -K costs (18.68 at
+   -0.210); pose 203 loses 0.40 mm per deg of +K, on the uncut ring and on the chamfer alike.
+7. **K phasing spends transmission margin.** beta -177 -> -157 clears every drive part at 264 and buys -0.22 bench
+   in-band, but pa_eff_horn goes 33.1 -> 42.6 deg (cap 43) and the gain is gone at mu 0.17 (18.75) and held (22.87 vs
+   22.88). 264 is then bound by hub 2's upper wall and the ring2 lip at the e+ corner (needs >= 0.41 / >= 0.45 mm).
+8. **The held knn flood loses ~8.0-8.24 points on every chain of this family** (lead property): the held set's forced
+   takes connect only through the 526 envelope stepping stones.
+9. **Instrument and reporting bugs found** (none moved a verified number): delta mechanism records make simplicity.py
+   score 0 on three of the four rows (G5); V3 / V4 misfile dwell poses as forced under sided play (V3b with a dwell
+   flag reads them right); PlayDesign's play_info describes only the last IK batch; `dict(V.BEST) | LM.CELL_A`
+   carries cell B's l2_lift 1.5; c_continuity cannot read the flood files on record; verifier JSONs left in the
+   scratchpad read as 'missing'.
+
+**Next round should attack.** Verified scores have not reached 95 (best 3-joint 18.28; best 4-joint offset-shortcar-
+relay-4r 14.76, WATCH, round J6), so the objective stays reach / contacts, not complexity. Lens A's measured take bound
+(docs/research/take_bound_3dof.md) puts 95 out of reach at 3 DOF at the legal seats (the lead is 4.53 points short;
+~17.2 = score 93.7 if its 4 contacts were cleared); that blocker goes to the user through the lead. Inside the main
+track the measured, still-open levers are:
+1. **Contacts the trims can reach.** 316 (link 2 / hub 2, -1.23; prize ~0.54 -> ~17.74) on the lead's chain, and 264 +
+   316 on the lowarm chain (kphase-notch: hub-2 flat framed in link 2, az_L2 = 124 - q2(264), >= 0.41 mm, plus a ring2
+   lip relief >= 0.45 mm at the e+ corner, RC_MIN as a cut), each gated on 203 at P5 / P0 and the +0.1 / +0.2 mm probes,
+   priced at mu 0.17 and on held. Kill: lateral gain < 1.4 mm per 1.5 mm of move, or any envsel take lost.
+2. **ring2's out-of-band metal on the lowarm family** (the whole 0.40 / 0.50 deficit): reshape or re-seat link 2's
+   ring insert so it sits <= 14 mm without dropping stage 1 below F+3.9. Ceiling (arithmetic from the measured deficit, not a wear): kstop
+   at the lead's in-band is ~18.69 - 0.40 = ~18.29 at cx 16.75 (a simpler tie, not a lead).
+3. **The generation-winner CAD**: the chamfer alone on user_conecut_knee's hub 2 (0 complexity), judged; EVOLUTION entry.
+4. **Reporting hygiene before the next audit**: full SIMPLICITY.md count records on h2facet, l2jog and kphase-notch
+   (the board shows 0), verdict strings and verifier JSONs on file (R1).
+Not to run: the l2jog waist family (a true cut is a no-op), the upper flat (wrong body), kpreload (no flexure ruling),
+bareti (no Hertz ruling), adjpad (dominated), any K phase past beta -157 (wall 2.05 / pa 42.6 limits).
+
+**Needs the user's say.** The 3-DOF ceiling (lens A) and the 4-joint question (offset-shortcar 14.76 / held 17.77 at
+cx 52.5 vs freek 15.40 / 20.50 at cx 33.25 vs the 3-joint lead 18.28 / 22.38 at cx 18.5); the withdrawn CI tie rule
+(h2facet ties the bench and is 0.22 better held on one pose); 'Keep O20 only' for notches and flats cut into the v5
+cap skirt and spigot thread (kphase-notch); B1 (G4, m_sub at K rest), unchanged. The 1 cm rule, the DOF cap, the 5-deg
+fold margin, the J1 seat rule and the transmission guard stay; no lens relaxed them.
