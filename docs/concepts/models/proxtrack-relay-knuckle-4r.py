@@ -15,7 +15,8 @@ solve on the lead's own gates, flood continuity, gravity check); what changes is
     The bump is RIGID: one amount per sampled point = the max over every fit-bench pose (lead fit, phi 0) of
     ramp-weight x max(0, R_b - r); contact-only sets take the amount of the nearest sampled point of the same member.
     Bumped points stay sampled metal in ib14.
-  * JAMS: shell / track vs knee link, E strap, boss, hub 3, link 2, pad < 1 mm -> pose lost; carriage + bracket vs E,
+  * JAMS: shell / track vs knee link, E strap, boss, hub 3, link 2, pad < 1 mm -> pose lost (unless its metal is in the
+    skin: then it stays a CONTACT); carriage + bracket vs E,
     boss, hub 3, link 2 < 1 mm -> lost. Arm-fixed shell metal in the skin is a CONTACT (it cannot refuse a pose).
   * GATE (pre-registered by the judge): read on the LOWER of pooled ib14 and chain-only ib14 (shell / carriage / bracket
     out of the share): pass <= 15, kill > 17.5 on frozen exact Bench(110,360).
@@ -222,11 +223,6 @@ def rerecord(M, B, G, ax, phi_b, HG0, bumps):
             for n in ("E", "boss"):
                 if n in per: dpc[n] = min(dpc[n], float(tb_.query(per[n])[0].min()) - 1.0)
         dmin, dcar = min(dpt.values()), min(dpc.values())
-        if min(dmin, dcar) < 1.0:
-            jam.append(dict(i=i, kind=B.kind[i], pose=[B.poses[i][k] for k in ("plane", "elev", "axial")], track_mm=round(dmin, 2),
-                            track_part=min(dpt, key=dpt.get), carriage_mm=round(dcar, 2), carriage_part=min(dpc, key=dpc.get),
-                            phi=round(float(phi_b[i]), 1)))
-            B.res[i] = None; why[i] = "jam"; continue
         dall = B.dist(i, np.r_[chain, wa, wc]); nC = len(chain)
         rib = np.r_[G["arm_ib"], G["car_ib"]]
         d = np.r_[dall[:nC], dall[nC:][rib]]
@@ -237,6 +233,13 @@ def rerecord(M, B, G, ax, phi_b, HG0, bumps):
             Wc.append(bumped(("contact", k), m, M.world(m, i, Pc), RS, Qp))
         if Wc: dc.append(float(B.dist(i, np.concatenate(Wc)).min()))
         dc = min(dc) if dc else 1e9
+        if min(dmin, dcar) < 1.0:
+            jam.append(dict(i=i, kind=B.kind[i], pose=[B.poses[i][k] for k in ("plane", "elev", "axial")], track_mm=round(dmin, 2),
+                            track_part=min(dpt, key=dpt.get), carriage_mm=round(dcar, 2), carriage_part=min(dpc, key=dpc.get),
+                            phi=round(float(phi_b[i]), 1), metal_min_mm=round(min(dc, float(d.min())), 2)))
+            if min(dc, float(d.min())) >= 0:                # a jam with metal in the skin stays a CONTACT (never laundered into a lost pose)
+                B.res[i] = None; why[i] = "jam"; continue
+            B.res[i] = np.r_[d, dc] if dc < 0 else d; why[i] = "contact"; continue
         B.res[i] = np.r_[d, dc] if dc < 0 else d
         if min(dc, float(d.min())) < 0: why[i] = "contact"
         elif why[i] == "contact": why[i] = ""
