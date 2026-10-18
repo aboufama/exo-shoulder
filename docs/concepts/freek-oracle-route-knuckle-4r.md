@@ -24,6 +24,14 @@
    129 / 139 / 148 / 316 / 343 / 369 / 423 / 119 with hub 2, L1b, L2, hub K distances at the oracle's pick) is on file so
    any reader can re-measure it.
 
+## Verdict (the bound of record, frozen exact Bench(110,360), k33 shape)
+
+**Free-K oracle: 17.25 connected plain (16.96 static), 21.46 near-touch; kit at the same shape 18.61 / 23.36. Pre-registered
+gate FAIL** (280 connected takes but ~21 contacts; 5 binders - 117 / 119 / 129 / 343 / 423 - touch the skin at EVERY legal K).
+The oracle rescues exactly 3 poses (148 at 0.46 mm, 316 at 2.40, 369 at 1.56). The anterior link-2 corridor makes it worse
+(+12 deg: 18.71 connected). So every K-side lever at these seats - any K law, spring, J3 stop, J3 spring or a sensed free K -
+is bounded by 17.25 plain / 21.46 near-touch; the wall is where hub 2 and link 2 park at the ER binders, not K.
+
 ## What was built (docs/concepts/models/freek-oracle-route-knuckle-4r.py)
 
 The verified skinnormal-shortk / minarc kitrule harness, imported unchanged (the k33 priced params of
@@ -114,6 +122,22 @@ the IR side is rescued (316, 369), the ER side is a wall at every K.
 The anterior corridor buys nothing the oracle can use on the fit bench and costs near-touch from +8 deg on (link 2 rides closer
 to the skin elsewhere: the proposer's in-band proxy 0.864 -> 0.814 at +8 was the right sign). The exact frozen check of the
 spec's +12 corridor at the binders is in "Corridor, exact" below.
+
+### Corridor, exact (the spec's anterior corridor at the binders): rA +12, peak s 25, back on the great circle at s 55
+
+Frozen exact Bench(110,360), refitted shape, oracle v2b (saved: docs/concepts/verify/freek-oracle-route-knuckle-4r/wear3_rA12_25_55.json):
+
+| reading | gap | ws taken | ib14 | contact | near-touch |
+|---|---|---|---|---|---|
+| kit at the corridor shape | 20.18 | 277 | 0.8808 | 0.0475 | 25.45 |
+| oracle static | 18.42 | 281 | 0.8844 | 0.0447 | 23.15 |
+| oracle connected | 18.71 | 280 | 0.8844 | 0.0448 | 23.45 |
+
+It does what the proposer said at the ER binders and no more: best legal metal 117 -1.14 -> -0.46, 129 -5.87 -> -4.17, 119 -10.74
+-> -8.48, 148 0.46 -> 1.76 (now clears 1 mm) - all still in the skin except 148 - while the IR side loses (316 2.40 -> 1.19, 369
+1.56 -> 0.54, 343 -0.19 -> -2.48) and link 2's in-band falls 0.899 -> 0.884 (+1.5 gap). Net: 17.25 -> 18.71 connected. The
+"129 to +0.90 at +12 deg" of the proposer's interpolated field is -4.17 on the exact skin with every check on: the field
+(Hf - Hb + 2 at 2-deg (s, v) cells) was optimistic by ~5 mm at 129.
 
 ### Cells B / C (conditional): trigger met on the plain reading only, NOT built in this time box
 

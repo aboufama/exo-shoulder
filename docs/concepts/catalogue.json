@@ -3268,7 +3268,7 @@
   "name": "Free-K oracle bound with an anterior link-2 corridor (lens B instrument, never a claim), with two determined K splits as conditional cells",
   "family": "knuckle 4R, sensed K: oracle bound + spring / stop-determined realisations",
   "lens": "round104:B second-wall-route (the take-bound row of the jump track)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-18T05:16:06Z",
   "source": "round 104 (J4, track jump) judge (docs/concepts/round104_ideation.md)",
   "merged_from": [
