@@ -15,11 +15,11 @@
  "inband10": 0.4847,
  "contact": 0.0185,
  "gap": 32.13,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.7722,
+ "v_inband10": 0.4847,
+ "v_gap": 32.13,
  "n_configs": 8,
  "verdict": "DEAD (gate 0 KILL, round 103 rule: > 17.5 frozen exact at every seat worn). Best 32.13 (score 88.32) frozen exact Bench(110,360) at a0 60 / azu 330 (great-circle bridge, window [-7, 0] picked on Bench(60,160)) vs lead 18.28; seats 55/345 34.01, 70/330 35.42, 60/0 38.64; ghosts at the same windows 16.35-18.22 (the relay buys <= 1.9 points). 4 counted joints (the user prefers 3), cx 50.75, 0 passive translations.",
  "limiter": "LINK 0 (the bridge): 0-1.7 %% in band, median 24.3-30.3 mm over the skin, 140-224 samples - every station of every route (great circle and planform turns +-20/+-40 deg) is set by the chain's swept crowns (hub K / L1a / hub 2 / crank / L2 at 20-24 mm), not by the skin; ib14 0.9011 (chain) -> 0.772 at 60/330. Secondary: hub 0 at its skin-set seat sits inside the chain's sweep at 55/345 and 60/0 (24 / 17 lead poses lost to parts; chain-clear r0 83 / 96 mm); link 0 x L2 jams 4 lead poses at 60/330 and 70/330. Hub 0 itself is mostly IN band at azu 330/345 (0.73-0.88, median 10.9-11.4 mm).",
@@ -631,5 +631,45 @@
    220,
    229
   ]
+ },
+ "audit": {
+  "t": "2026-10-18T03:40:00Z",
+  "verdict": "death stands",
+  "refuted": false,
+  "reproduced": {
+   "bench": "Bench(110,360) exact, frozen lead, a0 60 / azu 330, great circle, window [-7, 0] from the fit bench",
+   "gap": 32.13,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.7722,
+   "inband10": 0.4847,
+   "contact": 0.0185,
+   "ghost": 18.22,
+   "gap_near1": 33.19,
+   "min_metal_mm": 0.07,
+   "secs": 518
+  },
+  "gate": {
+   "metal_series": [
+    32.13,
+    34.01,
+    35.42,
+    38.64
+   ],
+   "gain_second_half_score": 0.0,
+   "gain_last_third_score": 0.0,
+   "top4_spread_score": 2.37,
+   "converged": "formally (4 decisive wears, not a search); the full-azimuth scan below replaces a CMA run"
+  },
+  "azimuth_scan": "a0 60, azu every 30 deg over the full circle (the screen covered 285-0 only), 3 routes each (great circle, +-30 deg planform turns): seat-legal azu 270-90; link 0 0-13 % in band on every route (chain-set at most stations); hub 0 in band only at azu 330 (0.81; 0.00-0.22 elsewhere); fit-clip in-band ceiling <= 0.772 at every seat (0.669-0.772). docs/concepts/verify/lead-relay-backbridge-4r-audit-scan.json",
+  "bridge_free_bound": "at 60/330 with link 0 deleted entirely (its 168 samples and its 4 L2 jams removed; hub 0 kept): ib14 949.8/1062 = 0.894, reach 0.7361, contact 0.0183 -> 18.78 > 17.5 kill line and > lead 18.28. The seat is dead even without the bridge; the bridge adds 13.4.",
+  "density": "link 0 sampled 168 per 48 x 12 mm (1 per 3.4 mm2, denser than the 1 per 4 mm2 rule): at 144 samples the claim is ~30.6, still dead",
+  "minor": "60/330 called clash-free: the current model gives r0_chain 77.0 vs r0 76.0 (1 fit pose enters hub 0); no hub0 pair on the claim bench, effect nil. The screen's logs print r0_chain 40.0 (older build_metal).",
+  "reason": "The relay's own reach gain is <= 1.93 points (zero-size ghosts 16.35-18.22 vs 18.28) and every seat that could use it has hub 0 out of band or in the chain's sweep; at the only in-band seat (60/330) the bridge-free bound is already 18.78, and link 0 must ride over the chain's crowns (0-13 % in band at every legal azimuth).",
+  "files": [
+   "docs/concepts/verify/lead-relay-backbridge-4r-audit-scan.py",
+   "docs/concepts/verify/lead-relay-backbridge-4r-audit-scan.json"
+  ],
+  "template_note": "the template's round-3 bar (within 10 of 68.93) is passed trivially; the death is against the round-103 17.5 kill line and the lead's 18.28, and it stands"
  }
 }

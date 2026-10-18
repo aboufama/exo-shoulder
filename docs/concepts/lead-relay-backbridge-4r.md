@@ -153,3 +153,59 @@ the 2-14 band for its whole crossing, so the in-band price is set by its sample 
 - Remote relay hubs, base bridges and "over the knuckle" links are therefore priced before they are built:
   ~+0.2 points per mm of 12 mm bar at the lead's 1062-sample pool (11.5 points at 48 mm).
 - Put new hubs INSIDE a footprint, or on the skin side of the annulus where the chain never passes. Never across it.
+
+## Audit (2026-10-18, independent auditor): the death STANDS
+
+The measured reason in one line: **the relay itself buys at most 1.93 points (zero-size ghosts 16.35-18.22 against the
+lead's 18.28), and the only seat where hub 0 is in band (60 / 330) scores 18.78 even with link 0 deleted entirely.
+The bridge then costs a further 13.4, because at every seat-legal azimuth it rides over the chain's crowns.**
+
+1. **The claim reproduces.** The model's own `wear 60 330 0` was re-run by the auditor (Bench(110,360) exact, frozen
+   lead, window [-7, 0] from the fit bench, 518 s).
+   - Gap 32.13, reach 0.725 (261/360), follow 1.0, ib14 0.7722, ib10 0.4847, contact 0.0185 (7 poses).
+   - Near-touch 33.19, min metal 0.07 mm. Ghost 18.22.
+   - The same per-part table: hub 0 0.811 / 10.9 mm / 81 samples, link 0 0.000 / 25.8 mm / 168 samples.
+   - This matches the claim to the digit.
+2. **Convergence gate.** The metal series in order is 32.13, 34.01, 35.42, 38.64.
+   - Gain over the second half: 0.0 score points. Gain over the last third: 0.0. Top-4 spread: 2.37 score points.
+   - This passes formally. With only 4 decisive wears it is not a search. Item 3 covers the parameter space instead
+     of a CMA run.
+3. **Was the obvious region missed? The screen measured azimuths 285-0 only.** The audit ran a full-circle scan:
+   `docs/concepts/verify/lead-relay-backbridge-4r-audit-scan.py` at a0 60, azu every 30 deg, with 3 routes each
+   (the great circle and planform turns of +-30 deg), on the fit bench.
+   - Seat-legal azimuths are 270-90. At 120-240 the J1 seat rule fails, because those seats are in front of the
+     shoulder or under it.
+   - Link 0 is 0-13 % in band on every route at every legal seat (median 24-32 mm).
+   - Hub 0 is in band only at azu 330 (0.81). Elsewhere it is 0.00-0.22, with r0 75-130 mm.
+   - The in-band ceiling (chain + hub 0 + best route) is 0.669-0.772. The best is azu 330, the claimed seat.
+   - No region was missed.
+4. **Is the bridge the whole story? It is not, and that makes the death stronger.**
+   - At 60 / 330, delete link 0 completely: drop its 168 samples and its 4 link0 x L2 jams, and keep hub 0. That
+     gives ib14 949.8 / 1062 = 0.894, reach 0.7361 and contact 0.0183, so the gap is 18.78. That is over the 17.5
+     kill line and over the lead.
+   - The seats whose ghosts are under 17.5 are 55 / 345 (17.16) and 60 / 0 (16.35). Neither works.
+     - At 55 / 345, hub 0 sits in the chain's sweep: 24 claim poses are lost to parts. The chain-clear seat,
+       r0 83, lifts it out of band.
+     - At 60 / 0, hub 0 alone is 0.024 in band, which costs about 6.6 points.
+5. **Over-strict checks or bugs? The code was read.**
+   - Relay convention: the chain sees Rc^T Q, every member is premultiplied by Rc (so the arm lands back on Q), and
+     the skin is the real pose's skin. This is correct.
+   - Hub 0 is invariant under J0, as an axisymmetric hub should be. Link 0 turns with J0. Chain clearances are taken
+     in link 0's frame.
+   - Link 0's skin and chain heights: at the chain-set stations the bar must pass over hub crowns sitting 2-14 mm
+     above the skin, so it rides at crown + 1 + 1.5 mm. There is no room under an O20 crown. This is not
+     over-strict.
+   - The sampling is slightly too dense: link 0 has 168 samples on a 48 x 12 bar, 1 per 3.4 mm2 against the
+     1 per 4 mm2 rule. At 144 samples the claim is about 30.6, still dead.
+   - Minor: the doc calls 60 / 330 "clash-free". The current build_metal gives r0_chain 77.0 against r0 76.0, so
+     1 fit pose's chain enters hub 0. There is no hub-0 pair on the claim bench, so the effect is nil. The
+     screen's logs print r0_chain 40.0, from an earlier build_metal.
+
+**Template note.** The template's round-3 refutation bar ("within 10 of 68.93 on Bench(60,160)") is passed trivially.
+The death is against the round-103 bar: the 17.5 kill line and the 3-joint lead's 18.28. Against that bar it stands.
+
+**Next (for the planner).** The three relay cells under the knuckle host are now all audited dead: beside, stacked
+and backbridge. The relay's kinematic gain on this frozen host is ~2 points, because about half of the relayed poses
+put the skin-fitted chain into the skin. A relay is therefore not worth a 4th joint (+25 complexity) on this host.
+Do not re-try it with a better bridge. If anything, it needs a host re-fitted with the relay in the loop, and that is
+a new design, not this lens.
