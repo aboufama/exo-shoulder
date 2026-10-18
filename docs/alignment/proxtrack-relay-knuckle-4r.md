@@ -158,3 +158,92 @@ both verifier lenses.
 - A future design pass models the lifted knee stack as one part and checks it against the E strap and the knee-pin
   stack.
 - An R17 / cuff-twist run on the relay spring with carriage friction.
+
+## Skeptic (2026-10-18 ~22:00 UTC): final verdict WATCH (was gamed)
+
+The ledger computed the verdict: `python3 tools/alignment_ledger.py skeptic ...`, entry 2026-10-18T21:59:37Z.
+
+- **Refuted (4):** near_touch, continuity, idle, judgement:R2.
+- **Upheld (11):** every other reason.
+- **Rulings file:** `docs/alignment/proxtrack-relay-knuckle-4r.rulings.json`.
+- **New measurement:** `tools/alignment_skeptic_probe_proxtrack.py` re-ran the model unchanged through the
+  buildability verifier's harness (buildable stack, frozen exact Bench(110,360); nice 10, 1 process, 344 s).
+  - It reproduces gate 17.46 / plain 14.40.
+  - Output: `docs/alignment/remeasure/proxtrack-relay-knuckle-4r_bench_skeptic.json`.
+
+### Refuted
+
+- **near_touch.** The numbers are on file; the tool did not read them.
+  - Row: v_gap_near1 18.06, held_out_gap_near1 23.75, frozen_exact.near1_gap 17.68 / near2_gap 38.01.
+  - Buildable stack: price_stackfix.json near1 18.06 / near2 38.39.
+  - The tool's `_near_numbers` skips the top-level `v_gap_near1`.
+  - Since 2026-10-17 near-touch is report only (level ok).
+- **continuity.** remeasure_flood.json kin_strict: bench 285 -> 285, held 731 -> 731, 0 dropped, 0 branch changes.
+  The contact-aware flood reads the same.
+  - The buildable stack has the same relay solve (relayed 33 / 23 / 9 / 1, phi_max 32.94), and its
+    probe.continuity shows 0 dropped.
+  - Connected loss 0.00, under conn_watch 1.0.
+- **idle.** Measured over the 395 taken poses:
+  - K (dK) spans 46.29 deg and is forced on 186;
+  - the relay phi spans 0-32.94 deg, nonzero on 23;
+  - the knee link turns 38 deg (remeasure.md line 114).
+  - All are far above idle_deg 2.0.
+- **judgement:R2.** The facts reproduce, and the defect stays a watch under `reporting`. The gamed level does not stand:
+  - **The facts.** On morphs.json v151 (21:50, after the audit), core.js's claim and sweep picks are still proxtrack
+    4.15 / 4.25.
+  - **No documented gamed level.** No threshold or code path gives gamed for a displayed number. Section 5 has no
+    reporting threshold, and `c_reporting` sets dashboard defects to watch.
+  - **Precedent.** All 21 earlier judgement:R2 ledger entries are watch. That includes underpass-bridge-relay-4r at
+    20:52, the identical case.
+  - **Not like for like.** The hero's claim / sweep lines take the lowest fast number of any live row. Verified 4-joint
+    rows never enter the hero. Without proxtrack, the line would show minarc's 6.19 against its verified 18.40.
+  - **What a gamed mark would block is already right.** The leader line is the <= 3-joint lead at 18.28, and
+    morphs.json carries v_gap 17.46.
+  - **The lead's action still stands:** set the status to refuted, or add a refuted_by filter in core.js.
+
+### Upheld, re-derived from the raw files
+
+- **sampling.** The relay spring coil is still unsampled: coil.json gives chain clearance only, with no skin distance
+  and no part number. The flange was priced only as modelled.
+  - A rigid-part record now exists (all taken poses, clip + ws). The lowest parts are hub3 0.58 and the lifted knee
+    0.66.
+- **reporting.** sweep_gap 4.25 against v_gap 17.46, 13.21 > 5.
+- **R1.** HANDOFF lines 609-610 headline the pooled plain 14.02 over the pre-registered gate.
+  - The 13:05 entry (lines 655-658) records the refutation.
+  - Line 664 compares against the buildable held reading (paired_held.json gap_B 18.37), not against a verified
+    number.
+- **NEW-inband-dilution.** The pooled in-band reproduces exactly:
+  (107910 x 0.8656 + 33330 x 0.9953) / 141240 = 0.8962.
+  - Workspace chain in-band: 0.8316 against the lead's 0.8676.
+- **T5.** Bench: 13 contacts summing 50.36 mm against the lead's 4 summing 20.24 (x2.49). Held: 47 summing 189.82
+  against 14 summing 60.97 (x3.11).
+  - **New:** the 4 phi-0 bench contacts are the lead's own 4, at identical depths. All +30.12 mm of the extra depth
+    comes from relayed poses.
+- **G1.** Report only. Shell 23.99 against 16.56, on the same pooled lens. This is c_dominance's watch pattern.
+- **M3.** The lifted eye was checked only against the shell top. No E strap, MR63ZZ or pad check is on file.
+- **M5.** The preload is gravity only, the spring has no part, 3 poses are bistable, and there is no R17 or cuff-twist
+  run for this id.
+- **G4.** Wording corrected, pattern stands. The 23 relayed taken poses sit at th 5.0001-5.0542 deg (median 5.0089),
+  not "exactly 5.000". The 12 lowest of all 395 taken poses are relayed, and the minimum at phi 0 is 5.181.
+- **T4.** rt_extra sits at its box edge 1.5. At 2.5 the gate reads 15.26: the low shell lowers the chain-only gate too.
+  No bulge check is in the verifier docs.
+- **NEW-postreg-respec.** The KILL at 20.59 is on file (events line 830; kill > 17.5). v_gap 17.46 sits 0.04 under the
+  kill line. Held drift is +4.00 against the lead's +4.10.
+
+### Missed by the audit (for the next audit; not counted in this verdict)
+
+1. **Mixed lens on the row's near-touch numbers.** v_gap 17.46 is on the GATE lens (chain-only in-band), but
+   v_gap_near1 18.06 and held_out_gap_near1 23.75 are POOLED.
+   - Why pooled: PT.wear's near1 is pooled. price_flange.json near1 17.68 equals remeasure_bench.json
+     mine.near1.gap_pooled 17.68, and the stackfix near1 18.06 goes with wear.inband14 0.8962 (pooled), not
+     ib14_gate 0.8656.
+   - On the v_gap lens, near1 is 17.68 + 100 x (0.90 - 0.8656) = 21.12 on the bench and about 26.8 held.
+   - So the row shows near-touch costing +0.60 over v_gap when on the same lens it costs +3.66. It is report only, but
+     anyone comparing near1 across rows is misled.
+2. **All of the extra contact depth is the relay's.** The relayed poses add 9 bench contacts (30.12 mm), all on top of
+   the lead's unchanged 4. Bench per-pose dumps of both designs: `docs/alignment/remeasure/
+   proxtrack-relay-knuckle-4r_bench_stackfix_perpose.json` and `conecut-knee-knuckle-3r_bench_perpose.json`.
+   - The score does charge these: a contact pose is neither reached nor free, so the relay pays for it in the gap.
+   - The depth (9.79 mm deepest) is what it does not see.
+
+**Final verdict: WATCH** (ledger 2026-10-18T21:59:37Z).

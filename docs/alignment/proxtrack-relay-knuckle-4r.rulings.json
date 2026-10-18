@@ -1,0 +1,77 @@
+[
+ {
+  "key": "near_touch",
+  "refuted": true,
+  "evidence": "The near-touch measurement is on file, so this is an instrument read miss. Row docs/concepts/rows/proxtrack-relay-knuckle-4r.json has v_gap_near1 18.06 (buildable stack, the claim's stack), held_out_gap_near1 23.75, and frozen_exact.near1_gap 17.68 / near2_gap 38.01 (as modelled). docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/price_stackfix.json has variants.stackfix.near1_gap 18.06 / near2_gap 38.39. docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_bench.json has mine.near1 / mine.near2 (gap_pooled 17.68 / 38.01, gap_gate 18.06 / 38.39). tools/alignment_audit.py _near_numbers accepts a top-level gap_near1 only when the key is exactly 'gap_near1', so the row's v_gap_near1 is skipped and frozen_exact.near1_gap does not match the pattern. Also, c_near_touch has been report-only since 2026-10-17 (its level stays ok), so the reading carries no watch. Caveat, in missed[]: the row's near1 values are POOLED, not on the v_gap lens."
+ },
+ {
+  "key": "continuity",
+  "refuted": true,
+  "evidence": "The flood is on file and drops nothing. docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_flood.json: kin_strict.bench static_taken 285, connected_taken 285, dropped 0; kin_strict.held 731 / 731 / 0; contact_strict is the same; edge_branch 0; edge_fail_strict.dpas 0. Row frozen_exact.continuity reads 'connected = static'. For the buildable stack, docs/alignment/remeasure/proxtrack-relay-knuckle-4r_bench_probe.json variants.stackfix.continuity gives dropped_relayed 0 and phi0_taken_not_connected 0. Its relayed record (n 33, taken 23, contact 9, jam 1, phi_max 32.94) is identical to the as-modelled state the flood ran on, so the kinematics did not change. The connected loss is 0.00, under TH conn_watch 1.0. c_continuity reads only the row's top-level keys and the verifier JSONs' 'connected' dicts, so it missed this flood."
+ },
+ {
+  "key": "idle",
+  "refuted": true,
+  "evidence": "Measured by this skeptic (docs/alignment/remeasure/proxtrack-relay-knuckle-4r_bench_skeptic.json): the same harness, the buildable stack, frozen exact Bench(110,360), reproducing gate 17.46 / plain 14.40. Over the 395 taken poses, K (dK) spans 0 to -46.29 deg and is forced on 186. The relay ('crank' in the tool's mapping) spans phi 0 to 32.94 deg, nonzero on 23 taken poses. Both are far above TH idle_deg 2.0. The knee link turns 38 deg relative to the carriage over the fit poses (docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure.md line 114). c_idle's watch fires only when no K / crank span is on file, and with these spans every declared drive moves."
+ },
+ {
+  "key": "sampling",
+  "refuted": false,
+  "evidence": "Upheld. A per-part record now exists for the rigid parts (docs/alignment/remeasure/proxtrack-relay-knuckle-4r_bench_skeptic.json per_part, all 395 taken poses, clip + ws, buildable stack). No sampled part is mostly out of band: the lowest are hub3 0.58 and the lifted knee link 0.66 (90 samples per pose). The links of that run were mis-sliced and dropped, so this is not a full clip-only record. The relay spring coil is still unsampled. docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/coil.json only shows it clears the chain members by >= 16.68 mm. It has no skin distance and no part number. The T-nut flange was sampled only as modelled (price_flange.json: gate 14.40 -> 14.40, 13 contacts unchanged, pooled ib14 0.9196 -> 0.9234), never on the buildable stack. The watch for an unsampled body stands."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Upheld. docs/dashboard/data/morphs.json (v151, 30680b7 21:50, after the audit) still has sweep_gap 4.25 and gap 4.15 against v_gap 17.46: 17.46 - 4.25 = 13.21 > 5, the documented trigger (tools/alignment_audit.py c_reporting, sg < vg - 5). The row status is still 'screened' while refuted_by is set. This check is where the R2 display defect is recorded, at its documented level."
+ },
+ {
+  "key": "judgement:R2",
+  "refuted": true,
+  "evidence": "The measured facts stand, but the GAMED level does not; the defect stays a watch under 'reporting'. (a) The facts reproduce. Recomputing core.js's picks on morphs.json v151 gives claim = proxtrack 4.15 and sweep = proxtrack 4.25, both 'screened'. The next are minarc 6.19 and freek 9.56. (b) No documented threshold gives gamed for a displayed number. docs/ALIGNMENT.md section 5 'Thresholds' and TH in tools/alignment_audit.py have no reporting entry. c_reporting sets dashboard defects to 'watch' ('a pipeline (dashboard) defect'), and docs/ALIGNMENT.md R2 names no gamed trigger. Every one of the 21 earlier judgement:R2 entries in docs/alignment/ledger.jsonl is watch. That includes underpass-bridge-relay-4r at 20:52:45Z, the same case: a refuted row with status screened, displayed with '4-JOINT PASS BY 0.01 (claim, unverified)'. (c) The 'ranks above verified 4-joint designs' comparison is not like for like. The hero's claim / sweep lines take the lowest fast number of ANY live row, and verified 4-joint rows never enter the hero (the ver filter is active_dof <= 3). With proxtrack removed, the line would show minarc's 6.19 against its verified 18.40, which is the same defect. (d) What the 'gamed' block protects is already correct. The leader line is conecut-knee-knuckle-3r 18.28 (recomputed), and morphs.json carries proxtrack's v_gap 17.46, so the design is neither called verified nor ranked as the leader. The lead's action (status 'refuted', or a refuted_by filter in core.js) still stands."
+ },
+ {
+  "key": "judgement:R1",
+  "refuted": false,
+  "evidence": "Upheld as a label watch. docs/HANDOFF.md lines 609-610 (11:15) headline '14.02 plain frozen exact (score 94.90; gate reading 14.40)', the pooled number over the pre-registered gate. The row's v_gap_plain is 14.4 (the buildable stack pooled), the same figure as the refuted as-modelled gate. Partial weakening: HANDOFF lines 655-658 (13:05) do record the refutation with 17.46 / held 21.46. Line 664 compares against proxtrack's buildable held reading (docs/concepts/verify/offset-shortcar-relay-4r/paired_held.json 'proxtrack-buildable-held' gap_B 18.37) and does not call it verified."
+ },
+ {
+  "key": "judgement:NEW-inband-dilution",
+  "refuted": false,
+  "evidence": "Upheld; re-derived. In docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_bench.json, mine.n_pts_relay 33330 over 110 clip poses is 303 per pose, and ib14_relay_metal is 0.9953. The pooled stackfix ib14 is (107910 x 0.8656 + 33330 x 0.9953) / 141240 = 0.8962, which reproduces plain 14.40 against gate 17.46 (3.06 points). Workspace chain-only in-band is 0.8316, with 16.61 % over 14 mm (bench_probe.json variants.stackfix). The lead reads 0.8676 / 13.03 % (conecut-knee-knuckle-3r_probe_bench.json probe.ws_unscored), on the same bench and frozen fit. The lead has no arm-fixed part, so its pool is chain only. The claimed v_gap is not inflated; v_gap_plain is."
+ },
+ {
+  "key": "judgement:T5",
+  "refuted": false,
+  "evidence": "Upheld; recomputed from the per-pose dumps. Bench stackfix: 13 contact poses summing 50.36 mm, deepest -9.787 (recomputed gap 17.46). The lead has 4 summing 20.24 (recomputed 18.29): x2.49 and +30.12 mm, over TH depth_ratio 2.0 and depth_floor_mm 5.0. Held stackfix: 47 summing 189.82, deepest -12.235 (recomputed 21.46), against the lead's 14 summing 60.97 (x3.11). 9 of 13 bench and 32 of 47 held contacts have phi > 0. Sharper: the 4 phi-0 bench contacts are the lead's own 4 at the same depths (lead dump: (0,105,15) -4.28, (15,165,-60) -8.928, (30,165,-60) -5.797, (60,150,-105) -1.235). All 30.12 mm of the extra depth comes from the relay."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "Upheld (report only). bench_probe.json variants.stackfix.floor_all has lt2 57 and lt1 7 of 395 taken poses. The per-pose dump gives 56 with a non-null floor_all_mm; the one-pose difference is the probe's fallback to min(res). The 1-2 mm shell is 38.39 - 14.40 = 23.99 (pooled, same lens on both sides), against the lead's 34.84 - 18.28 = 16.56. Plain gain 3.88, 2 mm loss 3.55. That is the pattern c_dominance reports as 'watch' (A1 retired, never gamed), and 23.99 sits between shell2_watch 15 and shell2_gamed 25."
+ },
+ {
+  "key": "judgement:M3",
+  "refuted": false,
+  "evidence": "Upheld. In docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability.md, lines 80-86 price the stack fix (35 of 90 knee points lifted >= 5.69 mm, 60-deg ramp; price_stackfix.json). Lines 117-120 re-record only the jams of the boss against the shell top (6 -> 5). No file checks the lifted eye against the E strap, the MR63ZZ knee-pin pairs (line 49: 'unchanged' from the lead) or the pad. A grep of the verifier files for MR63 finds only that table row."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Upheld. buildability.md line 103 says the preload of 0.063 N.m is gravity only, with no carriage friction or hysteresis. Line 52 says the spring has no part number and no envelope; coil.json is an estimate. Lines 98-102 report 3 of 409 claim-bench poses with two feasible relay ranges. A grep for R17 or cuff twist under docs/concepts/verify/proxtrack-relay-knuckle-4r*, judge/ and pipeline/ finds no run for this id."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Upheld, with one wording correction. Measured (docs/alignment/remeasure/proxtrack-relay-knuckle-4r_bench_skeptic.json relayed_th): the 23 relayed taken bench poses sit at a th margin of 5.0001 to 5.0542 deg (median 5.0089; 12 at <= 5.01, all 23 at <= 5.06), not 'exactly 5.000'. The 12 lowest poses over all 395 taken poses are all relayed (all_th_le_5p01 12). The minimum at phi 0 is 5.181 (remeasure.md R2 table). So every relayed pose has <= 0.055 deg of slack above the 5-deg floor. No stop-margin search for the relay is on file (row best_params has no margin variable), and the feel near the edge has not been red-teamed."
+ },
+ {
+  "key": "judgement:T4",
+  "refuted": false,
+  "evidence": "Upheld. Row best_params.rt_extra is 1.5, and the row note says 'rt_extra at the box edge 1.5 ... ramp at its 60-deg floor'. frozen_exact.probes_claim_bench_diagnostic.rt_extra_2p5 has gate 15.26 against 14.40 (chain_only_ib14 0.8876). The low shell pulls the chain-only gate as well, not only the pooled reading. 'bulge' appears only in docs/concepts/proxtrack-relay-knuckle-4r.md lines 98 and 135 (the request), never in docs/concepts/verify/proxtrack-relay-knuckle-4r-*.md."
+ },
+ {
+  "key": "judgement:NEW-postreg-respec",
+  "refuted": false,
+  "evidence": "Upheld. docs/concepts/events.jsonl line 830 (10:47:41Z): the pre-registered config, spec's uniform bump, reads gate 20.59 = KILL. docs/concepts/proxtrack-relay-knuckle-4r.md line 56 gives 'pass <= 15, kill > 17.5'. Line 834 (11:06:30Z) is the re-picked config (14.40). Row frozen_exact.prereg_phi30 shows refined_bump gate 16.82. v_gap 17.46 sits 0.04 under the kill. Bench -> held: 21.46 - 17.46 = +4.00, against the lead's 22.38 - 18.28 = +4.10, so there is no over-fit sign."
+ }
+]
