@@ -50,7 +50,7 @@
    -10.41,
    45.41
   ],
-  "note": "gap = chain-only buildable gate (the claim metric); controls have coil none / flange 0"
+  "note": "CONTROL (coil none, flange 0, as the references); gap = chain-only buildable gate"
  },
  {
   "k": 1,
@@ -103,7 +103,7 @@
    -6.45,
    41.45
   ],
-  "note": "gap = chain-only buildable gate (the claim metric); controls have coil none / flange 0"
+  "note": "CONTROL (coil none, flange 0, as the references); gap = chain-only buildable gate"
  },
  {
   "k": 2,
@@ -156,7 +156,7 @@
    -6.4,
    41.4
   ],
-  "note": "gap = chain-only buildable gate (the claim metric); controls have coil none / flange 0"
+  "note": "CONTROL (coil none, flange 0, as the references); gap = chain-only buildable gate"
  },
  {
   "k": 3,
@@ -592,6 +592,309 @@
    [
     466,
     -2.95,
+    -1.9
+   ]
+  ],
+  "stack_boss_lift": 1.23,
+  "arc_rel_th0": [
+   -1.9,
+   45.9
+  ],
+  "note": "THE CLAIM (envsel pick, read once); gap = chain-only buildable gate"
+ },
+ {
+  "k": 11,
+  "t": "2026-10-18T14:20:03Z",
+  "bench": "Bench(110,360) exact frozen",
+  "run": "diag_coil_claimbench.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 31,
+   "delta": 4.5,
+   "carw": 14,
+   "pre": 0,
+   "coil": "lug",
+   "flange": 1,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.8898,
+  "inband14_pooled": 0.9132,
+  "inband10": 0.5608,
+  "reach": 0.7972,
+  "follow": 1.0,
+  "contact": 0.0293,
+  "gap": 14.23,
+  "gap_plain": 13.21,
+  "near1": 17.91,
+  "n_contacts": 12,
+  "contacts_by_cause": {
+   "chain": 12,
+   "hardware": 0,
+   "chain+hw": 0
+  },
+  "jams": 0,
+  "hw_contacts": [],
+  "stack_boss_lift": 1.23,
+  "arc_rel_th0": [
+   -1.9,
+   45.9
+  ],
+  "note": "DIAGNOSTIC (P1 class: read after the claim, selects nothing); gap = chain-only buildable gate"
+ },
+ {
+  "k": 12,
+  "t": "2026-10-18T14:20:03Z",
+  "bench": "Bench(110,360) exact frozen",
+  "run": "diag_coil_claimbench.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 31,
+   "delta": 4.5,
+   "carw": 14,
+   "pre": 0,
+   "coil": "none",
+   "flange": 1,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.8898,
+  "inband14_pooled": 0.9132,
+  "inband10": 0.5608,
+  "reach": 0.7972,
+  "follow": 1.0,
+  "contact": 0.0293,
+  "gap": 14.23,
+  "gap_plain": 13.21,
+  "near1": 17.91,
+  "n_contacts": 12,
+  "contacts_by_cause": {
+   "chain": 12,
+   "hardware": 0,
+   "chain+hw": 0
+  },
+  "jams": 0,
+  "hw_contacts": [],
+  "stack_boss_lift": 1.23,
+  "arc_rel_th0": [
+   -1.9,
+   45.9
+  ],
+  "note": "DIAGNOSTIC (P1 class: read after the claim, selects nothing); gap = chain-only buildable gate"
+ },
+ {
+  "k": 13,
+  "t": "2026-10-18T14:24:11Z",
+  "bench": "held-out exact",
+  "run": "held.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 19.538,
+   "delta": 0,
+   "carw": 24,
+   "pre": 10.41,
+   "coil": "none",
+   "flange": 0,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.8644,
+  "inband14_pooled": 0.8953,
+  "inband10": 0.5458,
+  "reach": 0.7689,
+  "follow": 1.0,
+  "contact": 0.0479,
+  "gap": 21.46,
+  "gap_plain": 18.37,
+  "near1": 23.75,
+  "n_contacts": 47,
+  "contacts_by_cause": {
+   "chain": 40,
+   "hardware": 4,
+   "chain+hw": 3
+  },
+  "jams": 17,
+  "hw_contacts": [
+   [
+    211,
+    -0.73,
+    44.1
+   ],
+   [
+    225,
+    -5.51,
+    -9.0
+   ],
+   [
+    842,
+    -5.15,
+    -9.0
+   ],
+   [
+    914,
+    -2.11,
+    -10.4
+   ],
+   [
+    977,
+    -6.28,
+    -10.4
+   ],
+   [
+    1134,
+    -9.3,
+    -10.4
+   ],
+   [
+    1140,
+    -9.61,
+    -10.4
+   ]
+  ],
+  "stack_boss_lift": 5.69,
+  "arc_rel_th0": [
+   -10.41,
+   45.41
+  ],
+  "note": "held-out (proxtrack buildable control first, then the pick)"
+ },
+ {
+  "k": 14,
+  "t": "2026-10-18T14:24:11Z",
+  "bench": "held-out exact",
+  "run": "held.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 31,
+   "delta": 4.5,
+   "carw": 14,
+   "pre": 0,
+   "coil": "arm",
+   "flange": 1,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.8887,
+  "inband14_pooled": 0.9123,
+  "inband10": 0.5594,
+  "reach": 0.7773,
+  "follow": 1.0,
+  "contact": 0.0437,
+  "gap": 17.77,
+  "gap_plain": 16.64,
+  "near1": 22.62,
+  "n_contacts": 43,
+  "contacts_by_cause": {
+   "chain": 38,
+   "hardware": 0,
+   "chain+hw": 5
+  },
+  "jams": 0,
+  "hw_contacts": [
+   [
+    224,
+    -3.49,
+    0.9
+   ],
+   [
+    225,
+    -5.51,
+    -1.9
+   ],
+   [
+    252,
+    -1.6,
+    -1.9
+   ],
+   [
+    977,
+    -6.28,
+    -1.9
+   ],
+   [
+    1134,
+    -9.3,
+    -1.9
+   ]
+  ],
+  "stack_boss_lift": 1.23,
+  "arc_rel_th0": [
+   -1.9,
+   45.9
+  ],
+  "note": "held-out (proxtrack buildable control first, then the pick)"
+ },
+ {
+  "k": 15,
+  "t": "2026-10-18T14:24:53Z",
+  "bench": "envsel exact (selection)",
+  "run": "envsel_s3.json",
+  "params": {
+   "PHI": 35.0,
+   "ds": 31,
+   "delta": 4.5,
+   "carw": 14,
+   "pre": 0,
+   "coil": "lug",
+   "flange": 1,
+   "lean": 0,
+   "h_c": 1.7,
+   "bump": 1.002,
+   "rt_extra": 1.5,
+   "band": 9.272,
+   "ramp": 6.0,
+   "tilt": 12,
+   "taz": 235,
+   "sgn": 1
+  },
+  "inband14": 0.8898,
+  "inband14_pooled": 0.9132,
+  "inband10": 0.5608,
+  "reach": 0.7861,
+  "follow": 1.0,
+  "contact": 0.032,
+  "gap": 15.61,
+  "gap_plain": 14.59,
+  "near1": 22.45,
+  "n_contacts": 13,
+  "contacts_by_cause": {
+   "chain": 12,
+   "hardware": 0,
+   "chain+hw": 1
+  },
+  "jams": 0,
+  "hw_contacts": [
+   [
+    264,
+    -1.68,
     -1.9
    ]
   ],

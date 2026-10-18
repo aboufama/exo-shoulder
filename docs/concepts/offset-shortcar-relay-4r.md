@@ -116,4 +116,110 @@ vs the controls on the same bench: ds 31 / delta 0 = 14.26 (judge, reproduced). 
 0.8948 -> 0.8898 (+0.50: the bump window [lo - PHI, hi] and the carriage-footprint bump move 4.5 deg with the carriage)
 and buys no take on this bench (466 trades a shell contact for a coil contact): 14.26 -> 14.76.
 
+## Diagnostics on the claim bench (P1 class: read AFTER the claim, set nothing)
+
+One more claim-bench prepare, the pick's hardware with the coil moved:
+
+| coil | gate | plain | takes | contacts | jams |
+|---|---|---|---|---|---|
+| arm-fixed beyond the zero end (the claim) | 14.76 | 13.74 | 286 | 13 (466 = coil -2.95) | 0 |
+| on the carriage's posterior-proximal lug (anterior edge az th0 + 2, underside at the carriage top) | 14.23 | 13.21 | 287 | 12 (466 taken, shell 0.68 mm) | 0 |
+| none (ideal-coil bound) | 14.23 | 13.21 | 287 | 12 | 0 |
+
+So the lug coil costs nothing over the ideal-coil bound on this bench, and the best this hardware can read here is
+14.23: 0.48 over the 95 line (13.75), because the offset's in-band cost (+0.50) eats the 466 take (-0.52). Envsel (the legitimate
+selection bench, read after the claim) TIES the two coils: 15.61 / 15.61 (envsel has no coil binder), so envsel cannot
+choose the lug; the claim stays the arm coil read once, and 14.23 stays a diagnostic until someone pre-registers a
+physical tie-break (e.g. no arm-fixed part over the posterior arc) and re-reads it.
+
+## Held-out bench (the lead family's held set, 1154 poses; one prepare: proxtrack's buildable control, then the pick)
+
+| | gate (chain-only) | plain | near1 | reach / takes | contacts | jams | overhead |
+|---|---|---|---|---|---|---|---|
+| proxtrack buildable control (carw 24, ds 19.538) | 21.46 (reproduces the verifier's 21.46) | 18.37 | 23.75 | 0.7689 / 732 | 47 | 17 | 18 / 71 |
+| **pick (ds 31, delta 4.5, carw 14, arm coil)** | **17.77** | 16.64 | 22.62 | 0.7773 / 740 | 43 | 0 | 19 / 71 |
+
+Bench -> held inflation +3.01 (proxtrack +4.0, the lead +4.10). No new held contact; 4 gone: 211 (-90, 15, 165)
+(the anterior-end alias, -0.73), 842 / 914 / 1140 (posterior IR, shell -5.15 / -2.11 / -9.61 at az -9 / -10.4: the
+offset moved the shell off them, and the coil does not reach them). 8 more workspace takes, 17 jams -> 0 (the station:
+boss lift 5.69 -> 1.23). Paired (tools/alignment_paired.compare_sets on the per-pose dumps, plain pooled gap, 4000
+paired bootstraps within kind): vs proxtrack buildable -1.73 (CI90 -2.91 .. -0.81, P(better) 1.00); vs the lead
+conecut-knee-knuckle-3r 22.38: -5.74 (CI90 -7.90 .. -4.14, P 1.00); vs freek-oracle-route-knuckle-4r's dump on file
+(21.89, the verified config): -5.26 (CI90 -8.49 .. -2.96, P 1.00); freek's polished held 20.50 is 2.73 above this gate.
+
+## Red team (my own best config)
+
+- **The pose that binds**: 466 (150, 105, -105) at phi 28, coil -2.95 mm; on the claim bench the shell is at 0.68 mm
+  there (a near-touch: near1 counts it). On held the parent's posterior binders are 842 / 914 / 1140 (shell -2.1 to
+  -9.6 mm at az -9 to -10.4); the offset moves the shell off them and the arm-fixed coil does NOT reach them on held (no held contact has coil metal under 1 mm): 466 is the coil's only
+  binder on file.
+- **The cliff**: the bracket's planform turn runs over the E strap: 0 jams at delta 4.5, 211 at delta 6 (E strap
+  0.09 mm from the carriage frame), 77 at ds 34 / delta 4.5. The pick is ~1.5 deg from it; the CAD must route the
+  bracket at the pad's azimuth (an L-shaped carriage lug) rather than turn over the strap, and re-read.
+- **The optimistic numbers**: plain 13.74 pools the shell / flange / bracket metal into in-band (chain-only 0.8898 is
+  the honest share); the min metal on taken poses is 0.072 mm; near1 17.91 and near2 37.70; the ramp sits on its
+  60-deg floor (6.27) and rt_extra on the box edge 1.5 (proxtrack: rt 2.5 reads +0.86); 3 bistable relay poses and the
+  stops parked at the 5-deg th margin are inherited from proxtrack (same prepare, same relay solve: min th 5.0 as the
+  verifier measured).
+- **Selection hygiene**: delta, ds, carw and the coil were chosen on envsel; the claim bench was read once at the
+  pick; the coil diagnostics above were read after the claim and choose nothing.
+- **R17**: the relay axis, PHI, sense and chain are proxtrack's, so the gravity check is proxtrack's: preload >= 0.063
+  N.m, i.e. a constant-force coil F >= 0.79 N at R_t 80.6 (part number still to confirm). Not re-run (two niced
+  processes on a load-14 box).
+
+## Verdict against the judge's pre-registered clauses
+
+- 95 PASS (chain-only buildable gate <= 13.75, no contact outside proxtrack's 13, held paired better than 21.46):
+  **FAILS** on the bench number: 14.76 (0.99 over the line). The other two clauses hold.
+- **4-JOINT PASS (<= 15.40 and held <= 20.50): PASSES**: 14.76 / held 17.77 - better than freek-oracle-route-knuckle-4r
+  (polished 15.40 / held 20.50) on both, at complexity 52.5 (freek 33.25; lean flag 51.25).
+- KILL (gate > 16.92, a new folded-side contact, held paired worse than 21.46): none triggered.
+
+Score 94.63 frozen exact (lead conecut-knee-knuckle-3r 93.35 at 18.28; held 17.77 = the best held number on file,
+lead 22.38). It is a 4-joint design: under the user's rulings it is not the headline lead; it is the best-held 4-joint
+row and the nearest buildable reading to 95.
+
+## What limits it (measured)
+
+1. **The rigid bump's in-band**: chain-only ib14 0.8898 (pooled 0.9132). The offset moves the bump window
+   [lo - PHI, hi] and the carriage-footprint bump 4.5 deg with the carriage: 0.8948 -> 0.8898 = +0.50 on both envsel and
+   the claim bench. In-band is 0.11 points from its target here; the gap is reach (10.56) + contact (3.18) + in-band (1.02).
+2. **12 chain contacts unchanged** (the lead's 4 at phi 0 + 8 relayed: the folded-side one-sided relays 262 / 206 on
+   hub 2, 343 / 372 on L2, 182 / 423 / 448, boss + knee at 457) and the fold: 56 poses beyond the relay, overhead 8 / 28.
+3. **The posterior binder follows the arm-fixed hardware**: 466 left the shell (0.68 mm) and landed on the coil
+   (-2.95 mm). The coil on the carriage lug reads 14.23 (diagnostic) = the ideal-coil bound.
+4. **The bracket cliff** at delta > 4.5 (E strap under the planform turn).
+
+## New knowledge
+
+- The buildable-stack station effect holds on the selection bench independently of the claim bench: envsel 18.87
+  (ds 19.5) -> 15.94 (28) -> 15.64 (31) -> 15.68 (34), and on held it is larger than on the bench (21.46 -> 17.77 with
+  the offset; 17 jams -> 0).
+- An arm-fixed part near a one-sided relay's zero end is the posterior-IR binder whatever it is (shell end or coil):
+  moving the shell end just hands the contact to the next arm-fixed part. The coil belongs on the carriage.
+- Offsetting a carriage under a rigid bump is not free: the bump window follows the carriage, ~0.11 point per deg here.
+- The judge's claim-bench prediction (466 a take -> ~13.74) missed because it priced the offset's take and not its
+  in-band cost; the lug-coil diagnostic (14.23) is the measured ceiling of this hardware family at this station.
+
+## What happens next
+
+1. The verifier re-measures the claim (14.76 / held 17.77) from the per-pose dumps on file (T5: claim_pick_perpose.json,
+   held_pick_perpose.json).
+2. Lug coil: envsel ties it with the arm coil (15.61 / 15.61); with a pre-registered physical tie-break (no arm-fixed
+   part over the posterior arc) one claim + one held wear at the lug (diagnostic 14.23 bench).
+3. Win the in-band back: a bump window that follows only the carriage footprint's real travel instead of
+   [lo - PHI, hi], or a delta-free fix for 466 (the lug coil alone at delta 0 keeps the shell end at -6.4, where 466's
+   shell is -3.26: so the offset stays, and the in-band must be bought elsewhere - band 8 (its floor) on envsel).
+4. Route the bracket at the pad azimuth (L-shaped carriage lug) so delta is no longer bounded by the E strap cliff.
+
 ## Status
+
+SCREENED 2026-10-18 (status 'screened' in the catalogue): frozen exact Bench(110,360) chain-only buildable gate 14.76
+(score 94.63), plain 13.74, held 17.77 / plain 16.64; 4 active joints, 0 passive translations, complexity 52.5
+(51.25 lean). Selection grid on envsel: 8 readings (7 hardware configs + the lug), convergence gate on the grid: gain
+over the 2nd half 0.00, over the last third 0.00, top-5 spread 1.19 score points (a pre-registered discrete grid,
+not a CMA: ds / delta / coil are the only free hardware levers here; carw 12 / 16, lean, bump 1.15, ds 36 not read).
+Files: model `docs/concepts/models/offset-shortcar-relay-4r.py`, outputs and T5 dumps
+`docs/concepts/verify/offset-shortcar-relay-4r/` (controls_claimbench*, envsel_s1..s3, claim*, held*, diag_coil*,
+paired_held.json), sweep `docs/concepts/sweeps/offset-shortcar-relay-4r.json`, preview
+`docs/concepts/viz/concepts/offset-shortcar-relay-4r.js`.

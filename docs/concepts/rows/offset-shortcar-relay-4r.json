@@ -1,0 +1,304 @@
+{
+ "id": "offset-shortcar-relay-4r",
+ "name": "Proxtrack's one-sided relay re-priced under the buildable pin-a stack: shell 31 mm proximal, 14 mm carriage resting 4.5 deg anterior, CF coil beyond the zero end",
+ "lens": "round106:A twoside-relay (one-sided control; judge re-spec)",
+ "family": "cuff relay / 4-joint (proxtrack, hardware price under the buildable stack)",
+ "active_dof": 4,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "screened",
+ "t_ideated": "2026-10-18T13:28:29Z",
+ "t_screened": "2026-10-18T14:25:28Z",
+ "reach": 0.7944,
+ "follow": 1.0,
+ "inband14": 0.8898,
+ "inband10": 0.5608,
+ "contact": 0.0318,
+ "gap": 14.76,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 16,
+ "verdict": "4-JOINT PASS, 95 missed: frozen exact Bench(110,360) chain-only buildable gate 14.76 (score 94.63; plain 13.74, near1 17.91), held 17.77 (plain 16.64) - the best held number on file, paired better than proxtrack buildable (21.46), the lead (22.38) and freek (20.50 polished / 21.89 dump) with P(better) 1.00; same 13 contacts as proxtrack, 0 jams, 286 takes, overhead 8/28; 4 active joints, 0 passive translations, cx 52.5 (51.25 lean). The 95 line needs -1.01: the offset's 466 take went to the arm-fixed coil (-2.95 mm) and the offset itself costs +0.50 in-band; the lug coil reads 14.23 (diagnostic, envsel ties the coils).",
+ "limiter": "the rigid bump's chain-only in-band (0.8898; the offset moves the bump window and carriage footprint 4.5 deg: +0.50) + the 12 chain contacts it inherits (lead's 4 at phi 0, folded-side one-sided relays 262 / 206 on hub 2, L2 343 / 372, 182 / 423 / 448 / 457) + the fold (56 poses, overhead 8/28) + the arm-fixed coil at the moved zero end (466 -2.95 mm); a bracket cliff at delta > 4.5 (E strap under the planform turn: 211 jams at delta 6, 77 at ds 34 / delta 4.5)",
+ "note": "Built on proxtrack via its buildability verifier (stackfix in EVERY reading). Controls on one claim-bench prepare reproduce 17.46 / 16.92 / 14.26 exactly; held control reproduces 21.46. Selection on envsel exact only (8 readings): ds 19.5 18.87, 28 15.94, 31 15.64, 31/d4.5 15.61 (pick), 34 15.68, 34/d4.5 47.80 (77 jams), 31/d6 119.05 (211 jams), lug coil 15.61 (tie). CONVERGENCE GATE on the grid: gain 2nd half 0.00, last third 0.00, top-5 spread 1.19 score points (discrete pre-registered grid, not CMA; carw 12/16, lean, bump 1.15, ds 36 not read: time box). Claim read once at the envsel pick. Diagnostics after the claim (P1): lug coil 14.23, no coil 14.23. Spec corrections: the parent's envsel path could not run (armarc reads the archive at import) - fixed by installing envsel first; 466's binder at the pick is the coil, not the shell. R17 inherited from proxtrack (same axis / PHI / chain): preload 0.063 N.m, coil F >= 0.79 N. Min th margin inherited (same prepare / relay solve): 5.0. T5 dumps: verify/offset-shortcar-relay-4r/claim_pick_perpose.json, held_pick_perpose.json.",
+ "doc": "docs/concepts/offset-shortcar-relay-4r.md",
+ "complexity": 52.5,
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 6,
+  "joints": 9,
+  "closed_loops": 3,
+  "sliding_pairs": 2,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 2,
+  "custom_parts": 16,
+  "catalogue_parts": 20,
+  "notes": "proxtrack-relay-knuckle-4r's record (same part count): the lead conecut-knee-knuckle-3r + the relay (a counted 4th joint: 14 x 14 Ti T-nut carriage in a slotted circular Ti shell on iglidur tape, 31 mm PROXIMAL of the pad, resting 4.5 deg anterior; 1 body, 1 joint, 1 sliding pair), a constant-force coil arm-fixed beyond the moved zero end, 2 ISO 8734 stop dowels + iglidur tape (catalogue), shell + carriage / T-nut + pad bracket with a planform turn (made); the E strap and knee link carry the rigid local bump with the knee link raised over the boss (buildable stack); lean flag (carriage / bracket / T-flange in BOTTOM, one dowel) = 51.25",
+  "source": "offset-shortcar-relay-4r screen 2026-10-18",
+  "confidence": "medium",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  }
+ },
+ "best_params": {
+  "PHI": 35.0,
+  "tilt": 12,
+  "taz": 235,
+  "sgn": 1,
+  "hw": 1,
+  "hwv": "plain",
+  "ds": 31,
+  "liner": 4.0,
+  "plate": 1.5,
+  "flange": 1,
+  "rt_extra": 1.5,
+  "pre": 0,
+  "bump": 1.002,
+  "band": 9.272,
+  "ramp": 6.0,
+  "flood": 1,
+  "delta": 4.5,
+  "carw": 14,
+  "coil": "arm",
+  "lean": 0,
+  "h_c": 1.7,
+  "coilD": 8.0,
+  "coilL": 8.0
+ },
+ "frozen_exact": {
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast, phi 0)",
+  "gate_chain_only": 14.76,
+  "plain": 13.74,
+  "near1": 17.91,
+  "near2": 37.7,
+  "inband14_pooled": 0.9132,
+  "inband14_chain_only": 0.8898,
+  "ws_taken": 286,
+  "overhead": [
+   8,
+   28
+  ],
+  "contacts": 13,
+  "contacts_by_cause": {
+   "chain": 12,
+   "hardware": 1,
+   "chain+hw": 0
+  },
+  "contact_list": [
+   [
+    182,
+    [
+     -15.0,
+     90.0,
+     45.0
+    ],
+    11.3,
+    -0.71,
+    "chain",
+    33.6
+   ],
+   [
+    205,
+    [
+     0.0,
+     105.0,
+     15.0
+    ],
+    0.0,
+    -4.28,
+    "chain",
+    35.1
+   ],
+   [
+    206,
+    [
+     0.0,
+     120.0,
+     -15.0
+    ],
+    17.4,
+    -6.07,
+    "chain",
+    33.6
+   ],
+   [
+    237,
+    [
+     15.0,
+     165.0,
+     -60.0
+    ],
+    0.0,
+    -8.93,
+    "chain",
+    22.3
+   ],
+   [
+    262,
+    [
+     30.0,
+     135.0,
+     0.0
+    ],
+    11.3,
+    -9.79,
+    "chain",
+    33.6
+   ],
+   [
+    264,
+    [
+     30.0,
+     165.0,
+     -60.0
+    ],
+    0.0,
+    -5.8,
+    "chain",
+    22.3
+   ],
+   [
+    316,
+    [
+     60.0,
+     150.0,
+     -105.0
+    ],
+    0.0,
+    -1.23,
+    "chain",
+    20.9
+   ],
+   [
+    343,
+    [
+     75.0,
+     150.0,
+     -105.0
+    ],
+    8.4,
+    -1.73,
+    "chain",
+    26.5
+   ],
+   [
+    372,
+    [
+     90.0,
+     165.0,
+     -90.0
+    ],
+    19.4,
+    -0.07,
+    "chain",
+    26.5
+   ],
+   [
+    423,
+    [
+     120.0,
+     135.0,
+     -90.0
+    ],
+    16.0,
+    -0.7,
+    "chain",
+    10.9
+   ],
+   [
+    448,
+    [
+     135.0,
+     135.0,
+     -90.0
+    ],
+    29.4,
+    -1.92,
+    "chain",
+    10.9
+   ],
+   [
+    457,
+    [
+     150.0,
+     45.0,
+     -105.0
+    ],
+    15.1,
+    -2.0,
+    "chain",
+    -1.9
+   ],
+   [
+    466,
+    [
+     150.0,
+     105.0,
+     -105.0
+    ],
+    28.0,
+    -2.95,
+    "hardware",
+    -1.9
+   ]
+  ],
+  "jams": 0,
+  "min_metal_taken": 0.072,
+  "shell_min_taken": {
+   "i": 139,
+   "mm": 1.03,
+   "az_rel": -0.5
+  },
+  "relayed": {
+   "n": 33,
+   "taken": 24,
+   "contact": 9,
+   "jam": 0,
+   "clip_relayed": 0,
+   "phi_max": 32.94
+  },
+  "continuity": 0,
+  "arc_rel_th0": [
+   -1.9,
+   45.9
+  ],
+  "stack_boss_lift": 1.23,
+  "bracket_ramp_deg": 25.0,
+  "bracket_turn_mm": 6.46,
+  "perpose": "docs/concepts/verify/offset-shortcar-relay-4r/claim_pick_perpose.json"
+ },
+ "held_out_gap": 17.77,
+ "held_out_gap_plain": 16.64,
+ "held_out_gap_near1": 22.62,
+ "held_out": {
+  "gate": 17.77,
+  "plain": 16.64,
+  "near1": 22.62,
+  "reach": 0.7773,
+  "follow": 1.0,
+  "ib14_chain_only": 0.8887,
+  "contacts": 43,
+  "jams": 0,
+  "control_proxtrack_buildable": {
+   "gate": 21.46,
+   "plain": 18.37
+  },
+  "perpose": "docs/concepts/verify/offset-shortcar-relay-4r/held_pick_perpose.json"
+ }
+}
