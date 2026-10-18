@@ -96,6 +96,61 @@ Binned over the 131 configs under gap 60 (sweep file), by J3's crest azimuth wa:
   0.88 and the pad at 0.04. The knee link above them is 0.29-0.44 in band.
 - The search therefore settles in the middle (wa -13 to -16): fold 34-41, stops 12-15, knee 0.73.
 
+## Claims: frozen shape (fit Bench(60,160) fast) worn on Bench(110,360) exact
+
+Same protocol as the pin knee's lesson (c): heights, knee centre m, E profile and the J3 window frozen from the fit;
+`scratchpad ck/final.py` (claim harness, logged in this doc) adds near-touch (scored samples AND contact-only walls /
+crowns / tops), min th margin (the H1 metric, J1-J3 angle vs the dyad's fold), overhead >= 140, |axial| >= 150 and a
+per-pose dump. Held out was not touched.
+
+| cell | fast Bench(60,160) plain / near-touch | frozen exact gap | reach | follow | ib14 | contact | near-touch 1 mm / 2 mm | min metal | min th | overhead taken | why (fold / J3 stop / parts / contact) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| best1 (wa -13.0, mid basin) | 27.63 / 31.29 | **33.23** | 0.6139 | 0.9545 | 0.8778 | 0.024 | 37.84 (8) / 70.48 (46) | 0.37 mm | 8.99 deg | 14 / 38 | 96 / 32 / 8 / 8 |
+| best2 (wa -1.6, fold-free end) | 29.02 / 30.22 | 37.40 | 0.6278 | 0.9545 | 0.8416 | 0.043 | 40.44 (5) / 67.41 (37) | 0.04 mm | 6.24 deg | 9 / 38 | 77 / 29 / 18 / 15 |
+| **best3 (wa -1.4, fold-free end; the claim)** | 26.34 / 28.74 | **32.84** | 0.6333 | 1.0 | 0.8529 | 0.0146 | 36.25 (6) / 57.98 (34) | 0.44 mm | 6.23 deg | 15 / 38 | 92 / 30 / 5 / 5 |
+
+Reference: H1 (skin-normal-3r-pin-knee k4598) verified frozen exact **27.20** on the same bench (reach 0.6583, 237/360
+ws taken, 9 contact poses; docs/alignment/remeasure/skin-normal-3r-pin-knee_bench_perpose.json).
+
+## Red team (own best, frozen exact)
+
+- **The optimistic number:** fast -> frozen exact costs +5.6 (best1) and +8.4 (best2) gap. The fold-free end's fast
+  reach 0.706 is 0.628 on Bench(110,360): its extra fast takes were sample-tuned, as round-3 lesson (c) predicts. The
+  J3 window fitted on 220 poses stops 29-32 of 470 on the big bench (15-17 on the search bench).
+- **The pose that jams:** the fold still owns the large-axial region: |axial| >= 150 workspace poses 5 of 27 taken, all
+  22 losses fold, on BOTH cells. The crest seats do not open internal / external rotation extremes.
+- **The point that pinches:** best1's deepest contact is -1.81 mm at plane -75 / elev 60 / axial 120 (behind the back,
+  internal rotation); best2 adds the Raise-overhead clip frames 7-11 (plane 30, elev 148-150, axial -60, -0.9 to -1.28
+  mm), 264 (30 / 165 / -60, -3.82) and 281 (45 / 75 / 15, -4.10): the fold-free end parks member 3 over the overhead
+  skin, the same overhead touches the round-14 judge's J3-stop control relabelled on H1.
+- **Overhead (elev >= 140):** 14 / 38 (best1: lost to fold 11, J3 stop 10, contact 3), 9 / 38 (best2: fold 10,
+  contact 11, J3 stop 8). H1-class overhead, not better.
+- **Rules kept:** min th margin 8.99 / 6.24 deg (>= 5), knee angle 84.6-101.3 / 70.5-100.4 inside [ang_min, 180 -
+  ang_min] with ang_min 25.22-25.92, O20 hubs, MR63ZZ knee pins (stk 6.0), J3 window frozen, 0 passive translations.
+- Not run (time box): the kNN continuity flood (the knee pins are closure-determined and the 10 fps clip continuity of
+  the VModel holds; the J3 window is a physical stop, not a passive coordinate), per-pose held-out dumps.
+
 ## Status
 
-(claim numbers below)
+**Screened, below the lens bar; not called dead (gate not passed).** Best claimed frozen exact Bench(110,360)
+**32.84** (score 88.06), best fast 26.34 (near-touch 28.74) on Bench(60,160), 531 configurations, cx 0, 0 passive
+translations, 3 active O20 hubs + 2 MR63ZZ knee pins.
+
+- Against the lens: bar <= 21.0 frozen exact, kill > 23.64. Every claimed cell is over the kill line (32.84, 33.23,
+  37.40), and 5.6 over H1's verified 27.20 on the same bench and code family.
+- Convergence gate (near-touch objective, score points): best gained 0.93 over the second half (< 1, passes), 0.62
+  over the last third (> 0.5, FAILS by 0.12), top-5 spread 0.93 (< 3, passes). Plain gap: 0.72 / 0.72 / 1.08. The last
+  gains came from the wa [-6, 8] run at the fold-free end, so a dead call waits for that run to flatten.
+- What it teaches beyond this morphology: on the pin-knee chain, moving J3 along the crest moves losses between the
+  fold and member 3's sweep over the crest (fold + J3 stops + skin + parts 48-55 of 220 for every wa), so a seat move
+  alone does not buy reach; and a flat two-pin knee with ONE level for boss and pad cannot follow a crest whose two
+  pin sites differ in skin height (boss / pad in band 0.43 / 0.85 or 0.88 / 0.04).
+- Next (if anyone picks it up): a joggled knee link (pin a and pin b ends at their own levels, an R15 S-bend in the
+  flat bar; MR63ZZ pairs unchanged), re-searched at wa -6..+8. Upside bounded by the fold-free end's fast reach
+  0.70-0.71: ~21 fast if member 3 reached 0.90 in band, likely 25-27 frozen - under H1 at best, not the <= 21 bar.
+  The lens's real 95 path is not here.
+
+Files: model docs/concepts/models/crest-knee-3r.py, sweep docs/concepts/sweeps/crest-knee-3r.json (531 entries, time
+order, `run` tag, `gap_nt`), row docs/concepts/rows/crest-knee-3r.json (exact_frozen + others, gate, H1 control),
+preview docs/concepts/viz/concepts/crest-knee-3r.js at the claimed config. Claim harness and per-pose dumps (bench 470
+poses each) were written to the session scratchpad (ck/final.py, ck/final{1,2,3}.json), not committed.
