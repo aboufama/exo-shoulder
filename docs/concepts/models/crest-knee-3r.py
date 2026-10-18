@@ -120,6 +120,7 @@ class JogModel(Model):
         a0, b0 = PK.BOSS_R, max(lc - PK.BOSS_R, PK.BOSS_R + 1e-6)
         w = np.clip((b0 - s) / (b0 - a0), 0.0, 1.0)                  # weight of tr_a in the underside level
         smax = math.tan(S.RAMP * D2R) * max(lc - 2 * PK.BOSS_R, 0.0)
+        if self.p.get("jog_max") is not None: smax = min(smax, float(self.p["jog_max"]))   # jog_max 0 = flat knee + the pin-a stack rule (control)
         return w, smax
 
     def _levels(self, keep, tra_min=None):

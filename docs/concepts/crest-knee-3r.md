@@ -40,6 +40,99 @@ row's own named next lever.
    reproduced (57.98 objective); the verifier harness docs/concepts/verify/crest-knee-3r.py (it builds CK.Model, the
    flat knee - a joggle claim needs CK.JogModel there); the red-team list below.
 
+### What was measured (07:24-08:15 UTC, local, 2 niced processes, Bench(60,160) fast; claims exact)
+
+**Restart reproduction.** The flat crest best (W k438) re-reads 26.34 / near-touch 28.74 and the antcrest best 56.73 /
+objective 57.98, to the digit.
+
+**1. The antcrest basin, closed further (runs ac-C5, ac-C6).** ac-C5 (21 tries, perturbation 0.15) broke 16 of 21
+configurations (nothing closes, or the fast-cache box is left), so it was replaced by ac-C6: 30 perturbations of 0.05
+around the top-5, then CMA sigma 0.06 (405 tries). Best: objective 56.57 / near-touch 56.57 / plain 55.30 (reach
+0.6375, ib14 0.7119, contact 0.0191) - 1.4 points under the first pass, at the same place: J1 bvec(49.8, 57.7), J3
+wd 93 (the crest J3, not the antcrest's 98-104). Convergence gate over all 1002 antcrest tries in time order (score
+points, near-touch): 0.51 / 0.51 / 0.51 - gain over the second half PASSES (< 1), top-5 PASSES (< 3), the last third
+fails by 0.01 (two late steps of 1.26 and 0.15 gap points). It has crept from 3.61 / 1.59 to 0.51 / 0.51 while the
+best moved 1.4 points. Plain gap: 0.62 / 0.62 / 0.28. ~250 more non-improving tries would pass the last third. It
+does not change the verdict: hub 2 stays 0.11 in band (kill <= 0.5), and the cell is 32 points over the kill line.
+
+**2. The joggled knee link (kj=1), the row's named next lever.** Model: `JogModel` in the model file (kj=0 is the
+verified flat knee, unchanged).
+- v1 (runs J1-J3, 154 tries, recorded but superseded) let the boss level tr_a drop to the boss's own need. That jams
+  the knee's pin-a end on the E strap's last stations, on 57-176 poses at the fold-free cells: the knee underside
+  (tr_a + tp + RUN) sits only 0.25 mm over the E top (tr_a + T_LINK), and the strap's end may sit up to a 60-deg ramp
+  above tr_a.
+- v2 (J4, J5) adds the pin-a stack rule: the knee underside clears the E top + 0.15 running gap (+0.05) over every
+  strap station within 8.5 mm of pin a, raising tr_a until it holds. The joggle at the old flat best then reads 25.06
+  / near-touch 28.66 (flat 26.34 / 28.74). At the fold-free cells it reads 29.49-32.69 (flat 32.64-34.02). Three cells
+  (k 332 / 154 / 140) still jam knee-E on 57-158 poses: the knee folds back over a strap that rises toward hub 3,
+  a real collision.
+- CMA re-fit from 8 starts (J4: 238 tries). Best k177: **fast 23.31 plain / 24.51 near-touch** (reach 0.70, follow
+  1.0, ib14 0.8784, ib10 0.4502, contact 0.0115; fold 29, J3 stop 14, parts 3, skin 2 of 220). Seats: J1 bvec(103.5,
+  63.5), J2 bvec(28.9, 49.7), J3 wdir(90.9, -3.3), b3 0.30. Knee: lE 71.6, lc 24.3, phiE -1.4, phib -94.7, ang_min
+  25.98, h2cap 70.0, J3 stop on (margin 1.21), MR63ZZ pins (stk 6.0). Levels: tr_a 65.19 / tr_b 64.03, so the step
+  is 1.16 mm.
+
+**3. Controls at the same parameters (where the points come from).**
+
+| model at J4 k177 | fast gap | ib14 | pad / knee in band | parts lost |
+|---|---|---|---|---|
+| flat knee as verified (kj=0) | 136.08 | - | - | 125 poses knee-E jam (tr 64.4) |
+| flat knee + the pin-a stack rule (kj=1, jog_max 0) | 24.39 | 0.8676 | 0.884 / 0.666 | 3 |
+| joggled knee (kj=1) | **23.31** | 0.8784 | 0.920 / 0.733 | 3 |
+
+- The joggle itself is worth 1.08 fast points.
+- The rest of the gain over the old flat best (26.34 -> 24.39) comes from the stack rule. It opens a seat / knee
+  region (lc 24, wd 91) that the flat model jams: its tr can sit 0.25 mm under the E strap's end.
+- Lesson for the pin-knee family: a flat-knee fit whose tr is set by the boss must still be raised to clear the
+  strap's end, not jammed. The jam reads as "parts" and steers the search away from the region.
+
+**4. Claim: J4 k177 frozen (fit Bench(60,160) fast), worn without refit, exact path, verifier checks on** (claim3.py =
+the antcrest claim script + `V.CK.Model = JogModel` when kj=1, so the verifier harness's fit, wear, crest_checks and the
+pin-knee verifier's extra_checks all run on the joggled model. Per-pose dumps:
+`docs/alignment/remeasure/crest-knee-3r-joggle_{bench,held}_perpose.json`):
+
+| wear | gap | reach | follow | ib14 | ib10 | contact (poses, depth sum, deepest) | near-touch 1 mm | min th | ws overhead taken | ws \|axial\| >= 150 taken | lost (fold / J3 stop / parts / contact) |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Bench(60,160) fast (fit) | 23.31 | 0.70 | 1.0 | 0.8784 | 0.4502 | 0.0115 | 24.51 | | | | 29 / 14 / 3 / 2 of 220 |
+| **Bench(110,360) exact, frozen** | **31.43** | 0.6222 | 1.0 | 0.8782 | 0.4559 | 0.0147 (5, -4.34 mm, -1.77) | 32.57 | 5.62 deg | 7 / 28 | 5 / 27 | 92 / 24 / 15 / 5 of 470 |
+| held out, frozen | **27.83** | 0.6472 | 1.0 | 0.8774 | 0.4543 | 0.0029 (1, -1.58 mm) | 31.23 | 5.61 deg | 8 / 26 | 8 / 29 | 85 / 28 / 13 / 1 |
+
+The verifier checks removed 0 poses on both wears (closure <= 0.023 deg, knee 72.2-98.3 inside [25.98, 154.02], J3 window
+held with margin >= 1.22 deg, knee vs hub 3 upper 0, boss 0). Parts in band (bench): hub 1 0.97, hub 2 0.987, hub 3
+0.887, E 0.781, boss 0.859, pad 0.92, knee 0.733, L1 0.959, L2 0.908.
+
+Against the row's verified flat claim (32.84 bench / 29.81 held):
+- Gap: -1.41 on the bench, -1.98 held.
+- In-band: +2.5 points.
+- Contact depth: -4.34 mm vs -6.40 mm. Near-touch: 32.57 vs 36.25.
+- Reach: 0.6222 vs 0.6333.
+
+H1 (verified 27.20) is not beaten on the bench. Held out, 27.83 sits at H1's level.
+
+CONTROL_PLACEHOLDER
+
+**5. Red team (own best).**
+- **The optimistic number:** fast 23.31 becomes 31.43 frozen on Bench(110,360), the usual ~8-point fast-to-big drop
+  of this row (flat: 26.34 -> 32.84).
+- **The pose that jams:** knee folded back over a rising E strap (ang < ~70) - the 3 fold-free cells that still jam.
+  At the claim, 15 bench poses are lost to parts (knee-E adjacency / L1-L2), all recorded as not taken.
+- **The point that pinches:** 5 bench contacts, deepest -1.77 mm. The reach loss is the fold: 92 of 470.
+- **Buildability:** the 1.16 mm step is a machined Ti knee link (pin-a flat, ramp, pin-b flat), 3-axis from a block
+  along the pin axis, stated on the part. A bent bar would need inner radius >= 15 mm (5 t), and the 12.3 mm ramp run
+  (lc - 2 x 6) is too short for that. No joint, body or encoder is added: cx stays 0.
+- **The verifier harness needs one line:** CK.Model -> CK.JogModel when kj=1 (claim3.py does this). Without it the
+  verifier would wear the flat model on the joggle's parameters, which jams at 136.
+
+**Convergence gates (score points; gain over the 2nd half / last third / top-5 spread):**
+- antcrest: near-touch 0.51 / 0.51 / 0.51 (n 1002), not passed, last third short by 0.01.
+- joggled v2 (J4 + J5): GATE_J_PLACEHOLDER
+- flat crest: 0.93 / 0.54 / 0.62 (n 554), not passed. It is superseded by the joggle as the row's best variant, and the
+  stack-rule control shows that its search was steered by a jam.
+
+### Verdict (re-dispatch 2)
+
+VERDICT_PLACEHOLDER
+
 ## Round-14 re-dispatch: the ANTCREST basin (2026-10-18, lead note)
 
 The lead asked for the antcrest basin forwarded by the J2 judge (J1 bvec(55, 62), J3 wdir(98-104, +5..+18); fold loss

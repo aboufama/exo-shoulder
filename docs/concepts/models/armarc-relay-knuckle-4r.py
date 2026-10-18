@@ -323,11 +323,13 @@ def rerecord(M, B, G, ax, phi_b, HG0):
         d = np.r_[dall[:nC], dall[nC:][rib]]                               # in-band samples: skin-facing surfaces only (1 per 4 mm2)
         dtop = dall[nC:][~rib] if len(arm) else np.zeros(0)                # tops: contact only
         dc = [float(dtop.min())] if len(dtop) else []
-        for m, Pc in M.contact:
+        Wc = []                                                            # contact-only parts: ONE distance call per pose (the exact
+        for m, Pc in M.contact:                                            # path pays a per-call cost; the min over the union is identical)
             w = M.world(m, i, Pc)
             if lift is not None and (m in ARM_LIFT_MEMBERS or m == 3):
                 h = (w @ RS) @ Qp; h = lift(m, h); w = (h @ Qp.T) @ RS.T
-            dc.append(float(B.dist(i, w).min()))
+            if len(w): Wc.append(w)
+        if Wc: dc.append(float(B.dist(i, np.concatenate(Wc)).min()))
         dc = min(dc) if dc else 1e9
         B.res[i] = np.r_[d, dc] if dc < 0 else d
         if min(dc, float(d.min())) < 0: why[i] = "contact"
