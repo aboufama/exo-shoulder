@@ -61,6 +61,30 @@ shared 4-core box. The plan is 9 x 6 min of CMA (2 in parallel, about 30 min wal
 per cell, plus 1-2 frozen exact wears and floods (about 6 min each). The time box ends 2026-10-18 ~14:29 UTC. A cell the
 time box does not reach is reported as "seed only", not as measured.
 
+### Amendments (2026-10-18 ~13:08 UTC, before any CMA; stage-0 probes only)
+
+The first stage-0 probes, at cell (-52.5, 17.5), forced four changes. Each is stated with the measurement that forced it.
+
+1. **The rest pose sits at the lead's rest th (83.23 +- 4 deg).**
+   - Why: the seed as registered put the top window-share J3 seat (wd 80 / wa -140) at rest th 26.7. That puts the
+     dyad's rest configuration at the other end of its window, so the K drive's phase is wrong. The drive went idle:
+     crank pressure angle 86.8 deg at rest against the 38 gate, dK_lim 0, fast 375 dishonest.
+   - With the lead's rest th, the dyad and its K drive phase are the lead's. Only where the chain sits on the body
+     changes, which is what this cell measures.
+2. **J2's seat lies on the shoulder's skin: r2 <= 120 mm from GH.**
+   - Why: OSN.seat marches each ray in from 260 mm. At these J1 seats, many J2 rays return r2 = 260, which means the
+     ray runs into the trunk and there is no buildable hub-2 seat. Each (J3 seat, branch) pair is a separate candidate.
+3. **A numerical snap, not a physics change.** The knuckle base asserts |c[0]|, |c[1]| < 1e-6 mm (J1 and J2 on GH rays).
+   At these seats the rest IK leaves c[1] at about 4e-6 mm. Offsets under 1e-3 mm are set to exactly 0; larger ones
+   still trip the assertion.
+4. **Compute.** A fast evaluation takes 30 s to over 4 min at these seats, against 4 s at the lead's seat. The box is
+   shared (load 9-16) and the geometry is slow: long links and hubs deep in the skin. Nine 6-minute CMAs would get
+   about 5-10 evaluations each, which is not a refit. So:
+   - Stage 0 runs on all 9 cells, with one fast evaluation of each cell's best seed.
+   - Stage 1 (the CMA) runs only on the best 1-2 cells by stage-0 near-1 gap, honest seeds first, with the remaining
+     budget (`--budget-s` up to 900).
+   - Every cell's stage-0 number and its loss attribution is reported.
+
 ## Results
 
 (to be filled after the runs)

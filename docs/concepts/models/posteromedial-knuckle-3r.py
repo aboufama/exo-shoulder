@@ -37,6 +37,7 @@ AZ_BOX, EL_BOX = (-52.5, 0.0), (0.0, 45.0)                   # the posteromedial
 D_ARC = 12.0                                                 # |d_a1|, |d_a2| <= 12 deg
 LEAD_WIN = (24.67, 110.99)                                   # the lead family's th window (fold_ceiling kin_ceiling.json leader_seats)
 TH0_LEAD, TH0_TOL = 83.233, 4.0                              # the lead's rest th (deg) and the seed tolerance (amendment 1)
+R2_MAX = 120.0                                               # J2 seat radius cap (mm, amendment 2)
 REST_M = 5.5                                                 # rest-pose fold margin for a valid J2 resolution (deg)
 
 
@@ -163,8 +164,16 @@ def seed(az1, el1, top=3):
         if abs(thr[k] - TH0_LEAD) > TH0_TOL + 3.0: continue
         d3 = OSN.seat(R["Q0"] @ U3[k], BASE["b3"])[1]; th0 = math.degrees(math.acos(float(np.clip(d1 @ d3, -1, 1))))
         if abs(th0 - TH0_LEAD) > TH0_TOL: continue
-        ok = [resolve_j2(d1, d3, Y["a1"], Y["a2"], br)[2] for br in (1.0, -1.0)]
-        if any(ok): out.append(dict(share=round(float(share[k]), 4), wd=float(WD[k]), wa=float(WA[k]), th_rest=round(th0, 2), br_ok=ok))
+        # AMENDMENT 2 (before any CMA): J2's seat must lie on the shoulder's skin, r2 <= R2_MAX from GH (OSN.seat marches
+        # the ray in from 260 mm; r2 = 260 means the J2 ray runs into the trunk, i.e. no buildable hub-2 seat). Each
+        # (seat, branch) is a separate candidate.
+        for br in (1.0, -1.0):
+            az2, el2, ok = resolve_j2(d1, d3, Y["a1"], Y["a2"], br)
+            if not ok: continue
+            r2 = float(np.linalg.norm(OSN.seat(S.bvec(az2, el2), 0.0)[0]))
+            if r2 > R2_MAX: continue
+            out.append(dict(share=round(float(share[k]), 4), wd=float(WD[k]), wa=float(WA[k]), th_rest=round(th0, 2), br=br,
+                            az2=round(az2, 2), el2=round(el2, 2), r1=round(float(np.linalg.norm(OSN.seat(u1, 0.0)[0])), 1), r2=round(r2, 1)))
         if len(out) >= top: break
     return out
 
