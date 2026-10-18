@@ -3190,3 +3190,102 @@ GAMED; cap-plateau not audited (dead). The farm was closed, so everything ran lo
    out and paired against the lead.
 3. Fix the machinery: P1 selection guard, the dashboard's honest flag, verify bar 18.28, row verdict rewrite, a
    two-start convergence gate.
+
+## Round J3 (round 103, track jump): no lead change - both 4-joint levers close with metal numbers: relays under the 3-joint lead 22.18 / 32.13 / 32.92 frozen (ghost 16.07-18.22, relay gain <= ~2), the cap-pole spring-set null-space 57.70 (its plain 3R control 60.61) (2026-10-18, discovery round 103, closer)
+
+Raw data:
+- rows: `docs/concepts/rows/{lead-relay-j0-4r,lead-relay-backbridge-4r,lead-relay-wobble-4r,cap-nullspace-4r}.json`;
+- models: `docs/concepts/models/<id>.py`; docs: `docs/concepts/<id>.md`, each with an Audit section;
+- sweeps: `docs/concepts/sweeps/<id>.json`;
+- verifier files: `docs/concepts/verify/lead-relay-j0-4r-audit-{bound,sub}.py` + `-audit.results.json`,
+  `lead-relay-backbridge-4r-audit-scan.{py,json}`, `lead-relay-wobble-4r-audit.{py,results.json}`,
+  `lead-relay-wobble-4r_claim.json`, `cap-nullspace-4r-audit.{py,json}`;
+- the judge's red team and picks: `docs/concepts/round103_ideation.md`;
+- the round table: `docs/concepts/ROUNDS.md` "Round 103 results".
+
+Benches: "fast" is Bench(60,160) fast with kit checks; "frozen" is frozen exact Bench(110,360). No bench, judge or kit
+file changed this round. Ledger re-read at ~03:50 UTC: all four rows exit 2 (no entry); the lead exits 0, WATCH. None
+is gamed. Every verifier upheld its number (0 of 4 refuted, each reproduced to the digit). Farm closed; local only.
+Every design has 4 counted joints (the user prefers 3); all are compared with the 3-joint lead (18.28).
+
+**What was measured.**
+* **lead-relay-j0-4r: VERIFIED 22.18 frozen** (score 91.93), the round's winner by the rule; dead at gate 0.
+  - Spring-centred J0 (O20 v5 hub 0) beside J1 under conecut's frozen chain, a0 10 / azu 45, stop window [-60, +42]
+    picked on the fit bench, hub 0 underside r0 88.0 mm (~40 mm over the skin), link 0 a 23.8 mm turned standoff post
+    on J1's crown + a 15.1 mm 12 x 3 Ti bar.
+  - Reach 0.7583 (273/360), follow 1.0, ib14 0.8404, ib10 0.5352, contact 0.0205 (8 poses), overhead 8/28;
+    complexity 50.75, 0 passive translations. Ghost (zero-size J0) 16.22.
+  - Other seats real / ghost: a0 20 / azu 45 24.92 / 16.07; a0 7.5 / azu 30 22.95 / 18.22. 210 configs, gate 0.0 /
+    0.0 / 0.27.
+* **lead-relay-backbridge-4r: VERIFIED 32.13 frozen** (88.32). J0 at a0 60 / azu 330 outside hub 2's orbit, link 0 a
+  48 mm bridge over the knuckle. Reach 0.725 (261/360), ib14 0.7722, 7 contacts, overhead 8/28. Hub 0 0.81 in band,
+  link 0 0.000 (median 25.8 mm over the skin). Ghost 18.22. Other seats 34.01 / 35.42 / 38.64.
+* **lead-relay-wobble-4r: VERIFIED 32.92 frozen** (88.03), 28.10 fast. J0 stacked under hub 1 on a 5-axis wedge at a0
+  6 / azu 180. Reach 0.6472 (233/360), follow 0.90, ib14 0.8796, 2 contacts, overhead 7/28; 42 claim poses lost to
+  stack clashes (riser 35, hub 0 on hub K 7). Relays 0 claim poses (ghost = lead 18.28).
+* **cap-nullspace-4r: VERIFIED 57.70 frozen** (79.02), 46.32 fast (model check 46.97). Cap-pole redundant spherical
+  4R, null-space set by torsion springs on J0 / J2 / J3 (law exact at <= 170 deg) and own-angle stops; both assembly
+  signs fixed. Reach 0.7444, ib14 0.5476, contact 0.069, overhead 11/28, near-touch 64.51; complexity 34.5. Its
+  searched plain cap 3R control: 60.61 frozen (54.15 fast). 1267 configs, claim-law gate 0.27 / 0.11 / 0.12.
+
+**What failed, and why (measured).**
+1. **Grounded relay hubs beside J1 float.** J1 sweeps hub K (15-33 mm off its axis), hub 2 (31-46 mm), L1b and the
+   crank through an annulus. A grounded O20 hub 7-40 deg off J1 must ride above it: r0 65.5-120.5 mm, 17-55 mm over
+   the skin, 0-2 % in band over 108 legal seats; hub 0 + link 0 add 50-101 skin-facing samples per pose (+6.1 to +8.4
+   gap). Verifier bound (r0 free, link 0 deleted, jams counted as losses, 3324 placements): hub 0 alone costs >= 6.27
+   fit points at every a0 <= 40, the relay returns at most 4.48; the cell's best possible is 14.29 fit vs the lead's
+   12.50. Link 0 cannot be a bent descending bar (it hit hub K on 30 % of fit poses); the only clear route is a turned
+   post inside J1's footprint.
+2. **Bridges across a swept ring ride at the neighbours' crown height.** Along 5 routes, every station's height was
+   set by the chain's swept crowns (hub K, L1a, hub 2, crank, L2 at 20-24 mm over the skin), never by the skin. Link
+   0 is 0-13 % in band at every legal seat (full-circle scan at a0 60). Cost: about +0.2 score points per mm of 12 mm
+   bar at the lead's 1062-sample pool. The only bridge-free in-band seat (60/330) still scores 18.78 with link 0
+   deleted.
+3. **Stacks under J1 jam.** The output link rides the upper hub's boss (~20 mm rise) and descends as a riser in the
+   ~4 mm gap to hub K's rim; it hits hub 0 on 35 claim poses. With every clash forgiven and the riser deleted (288
+   placements, a0 5-20), the stack's in-band dilution floors the cell at 14.92 fast (14.25 with link 1a dropped).
+   Covered samples are not skin-facing: part-table arithmetic says +7.4, a cover mask measures +2.0-2.7.
+4. **The relay's own gain is small because the chain is skin-fitted at q0 = 0.** Relayed poses push L2 / E 0.6-5.7
+   mm into the skin: 15 takes / 8 contacts at a0 20, 11 / 4 at a0 10; four relayed takes within 1 mm (pose 259 at
+   0.05 mm). Ghost gain on the lead 1.9-2.2 frozen; 0 overhead poses relayed. The proposer's 13.63 dropped those
+   contacts and is not a real number. A zero-size ghost overstates every relay by 6-9 points at these seats.
+5. **The cap-pole null-space never reaches hub 2.** The springs spend the 1-D null-space on hub 0 / link 0 / hub 1
+   (0.98-1.0 in band); hub 2 is fitted ~117-121 mm from GH (0.00 in band) because its axis crosses the deltoid crest /
+   acromion edge on > 2 % of fit poses whatever the spare does. Verifier bounds frozen exact: hub 2 deleted 53.10,
+   hub 2 ideal 50.25, hub 2 + links 1-2 ideal 19.84, every member ideal 18.26, in-band perfect 22.46. Short links
+   (a1 35-45, a2 45-58, unsearched by the claimant) put hub 2 0.56-0.64 in band only at reach 0.29-0.40 (best 83.31).
+   The oracle ghost reads 71.01 fast (K2 off), 158.89 with K2 on (follow 0.13): no realisable bound.
+6. **Modelling rules found on the way:** fix both assembly-mode signs of any redundant spherical four-bar (either
+   branch allowed misstated the cell by ~7 fast points); a quadratic spring law in the wrapped angle is physical only
+   below 180 deg (the best cells wind ~+-170 deg; a 120-deg range collapses them to 102-191 fast); after ~400 tries
+   the spring cell's fast gains stopped surviving frozen (fast 49.62 -> 45.47, frozen 59.44 -> 57.70).
+7. **Skin facts:** a free hub on the back of the shoulder at azu 330-345 sits mostly in band (0.73-0.88, median ~11
+   mm), its height set by overhead deltoid / supraspinatus bunching (closest 2.8 mm at elevation 150-165); the chain's
+   "free" sector around J1 (azimuth ~150-180) is free because the skin there is high at elevation 120-165 (a grounded
+   part placed there at a0 6-8 must rise from r0 51 to 76-86 mm).
+
+**Alignment (watch level; no ledger entry for any of the four rows).** lead-relay-j0-4r: proposer's 13.63 dropped
+relayed contacts; near-touch minimum 0.054-0.072 mm (the lead's T1 class), four relayed takes within 1 mm at a0 20;
+r0 derived on the fit bench jams 2 claim poses at a0 20 / 7.5; continuity flood and per-pose dump not run (dead).
+lead-relay-backbridge-4r: link 0 sampled at 1 per 3.4 mm2 (rule 1 per 4; ~30.6 at the right density, still dead);
+"clash-free" seat is 1 mm short on 1 fit pose; the screen's azimuth box (285-0) was widened by the verifier, nothing
+missed. lead-relay-wobble-4r: three simplifications generous to the design (riser ~1 mm short, no ground bracket,
+cover mask at q0 = 0); the row's `gap` is 28.10 fast, the verified number 32.92 frozen. cap-nullspace-4r: plain-gap
+search (T1; contact 0.035 fast -> 0.069 frozen, near-touch 64.51); three proposer numbers (44.97, 59.90, 60.79) were
+never in a saved output; headline 46.32 vs model check 46.97; a 46-deg J0 basin snap at frame 91 of the motion
+preview that the bench flood does not see. All four verifiers quoted the stale template bar (68.93); stale in 7 of 8
+verifications over J2-J3. The lead's WATCH reasons stand unchanged.
+
+**What it means.** No 4-DOF design on file beats the 3-joint lead: this round 22.18-57.70, best on file
+minarc-stop-knuckle-4r 19.54. At the legal seats with O20 hardware, adding a 4th joint as a base relay or a cap-pole
+null-space costs more in hub / link metal than it returns in takes. This is the 4-DOF row for the main track's
+3-DOF take-bound table and the user's blocker message.
+
+**Next.**
+1. Price first: every jump idea's added metal is priced with findings 1-3 above before any ghost; an idea whose metal
+   costs more than the +17 takes 95 needs can return dies before modelling.
+2. Lens a (round J4): the length-changing chain, one real miniature guide inside link 2 or as the counted cuff slide,
+   worn with its real envelope from the first config; the lead's 73 stretched losses (th 107-176) are the target, and a
+   guide inside a link adds no hub and no ring crossing. Read the early curved-slide deaths first.
+3. Machinery: verify template bar to the current lead; near-touch objective in every search; an auditor ledger entry
+   for each round winner; quoted numbers from saved outputs only.
