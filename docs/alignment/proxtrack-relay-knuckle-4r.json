@@ -37,10 +37,57 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump proxtrack-relay-knuckle-4r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 17.46: bench 13 contact poses, sum 50.36 mm, deepest 9.79 mm at ['ws', 30.0, 135.0, 0.0], 6 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 47 contact poses, sum 189.82 mm, deepest 12.23 mm at ['ws', 15.0, 135.0, -15.0], 23 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
    "depths": {
-    "v_gap 17.46": {}
-   }
+    "v_gap 17.46": {
+     "bench": {
+      "n": 13,
+      "sum_mm": 50.36,
+      "max_mm": 9.79,
+      "n_deeper3": 6,
+      "overhead140": 5,
+      "deepest": [
+       "ws",
+       30.0,
+       135.0,
+       0.0
+      ],
+      "gap": 17.46,
+      "src": "docs/alignment/remeasure/proxtrack-relay-knuckle-4r_bench_stackfix_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        50.36
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 47,
+      "sum_mm": 189.82,
+      "max_mm": 12.23,
+      "n_deeper3": 23,
+      "overhead140": 15,
+      "deepest": [
+       "ws",
+       15.0,
+       135.0,
+       -15.0
+      ],
+      "gap": 21.46,
+      "src": "docs/alignment/remeasure/proxtrack-relay-knuckle-4r_held_stackfix_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        189.82
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
   },
   {
    "check": "dominance",
@@ -122,7 +169,7 @@
   "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/stack.json",
   "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_edges.json"
  ],
- "git": "3e53887",
+ "git": "9028dec",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T21:08:50Z"
+ "t": "2026-10-18T21:29:26Z"
 }
