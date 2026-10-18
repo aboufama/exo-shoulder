@@ -520,3 +520,74 @@ Verdict: **verified at 32.84 (score 88.06), held 29.81; not refuted** (champion 
 winner: 5.64 behind H1's 27.20 and 14.56 behind the lead's 18.28 on the same bench, overhead workspace reach 5/28
 (0.18), |axial| >= 150 workspace 5/27 (22 fold). The claim's own red team is accurate; the one framing to correct is
 "overhead 15/38": that count mixes 10 overhead clip frames with 5 of 28 overhead workspace poses.
+
+## Verification of the joggled cuff-knee claim (independent verifier, 2026-10-18 08:50-09:00 UTC)
+
+Claim checked: the joggled knee link (kj=1, row key `best_params_joggle`: E boss at tr_a, arm pad at tr_b, the knee link
+stepping between them), frozen exact Bench(110,360) 31.50, held 28.45. Harness `docs/concepts/verify/crest-knee-3r-joggle.py`:
+the flat verifier's harness (`crest-knee-3r.py`, unchanged) switched to `CK.JogModel`, the pin-knee verifier's
+`extra_checks` unchanged, plus this verifier's joggle checks. Same protocol: fit on Bench(60,160) fast, shape frozen
+(f1-f3, tr_a 66.08 / tr_b 62.89, knee m, E profile, J3 window [269.19, +245.09 deg]), worn without refit, exact path, on
+Bench(110,360) and on the disjoint held-out bench. Local, niced, one thread, 2 processes.
+
+| wear | gap | reach | follow | ib14 | ib10 | contact (poses, depth sum, deepest) | near-touch 1 / 2 mm | min th | overhead ws | \|axial\| >= 150 ws | removed |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Bench(110,360) | **31.50** | 0.6278 | 1.0 | 0.8719 | 0.4475 | 0.0147 (5, -5.15 mm, -1.96) | 34.08 / 59.56 | 5.085 deg | 7 / 28 | 5 / 27 | 0 |
+| held out | **28.45** | 0.6500 | 1.0 | 0.8713 | 0.4459 | 0.0058 (2, -2.04 mm, -1.42) | 33.28 / 55.91 | 5.502 deg | 8 / 26 | 8 / 29 | 0 |
+| continuity flood (connected) | 31.49 / 28.45 | | | | | | | | | | 0 dropped |
+| champion (spherical 3R), same bench + protocol, fold margin 5 | 64.93 | | | | | | | | | | |
+
+Lost poses, bench: fold 87, J3 own-angle stop 24, parts 18, contact 5 (of 470).
+
+What was checked (each tried as a refutation):
+
+- **DOF.** Unchanged from the flat cell: 3 active O20 hubs; the knee is 2 MR63ZZ pin pairs parallel to J3 (outside the
+  count); radial drift 0.0 mm on every taken pose, closure residual <= 0.017 deg; independent 3D closure (hub-3 centre,
+  pin a, pin b 0.000 mm; J3 and pin axes <= 0.023 deg). No passive coordinate is undetermined. 0 passive translations.
+- **The joggle's metal, recomputed.** Knee skin samples vs the joggle law level(x) = tr_a .. tr_b: 0.000 mm; pad samples
+  at tr_b and boss samples at tr_a: 0.000 mm. Every slice of the joggled link (pin-a flat, 4 ramp pieces, pin-b flat) vs
+  the E strap mid-surface with NO exemption near pin a (adjacent, 0.15 mm): min 0.20 mm bench / 0.203 held, 0 bad;
+  vs hub 3's whole can (adjacent) and its upper part (non-adjacent, 1 mm): 54.8 mm; vs hubs 1-2 >= 28.3 mm, links
+  1-2 >= 39.1 mm. Arm pad (at tr_b) vs E boss >= 12.3 mm and vs the E strap >= 15.2 mm (non-adjacent, 1 mm). 0 poses removed.
+- **Stops and windows.** q3' of every taken pose inside the frozen J3 window (min margin 1.33 / 1.65 deg); knee angle
+  85.1-114.2 deg inside [26.64, 153.36]; ang_min 26.64 >= 25.22; th margin >= 5.085 deg (no K, so no K play).
+- **Continuity flood** (1432-pose grid, 2-deg slerp, <= 10 deg steps of q1 / q2 / q3' / pin a / pin b, no knee branch
+  change, the J3 window and the 5-deg fold margin as walls): 974 kinematic nodes, 974 connected, 0 islands, 803 / 803
+  edges pass; 0 bench and 0 held poses dropped, so connected = static.
+- **Per-pose dumps** `docs/alignment/remeasure/crest-knee-3r-joggle_v_{bench,held}_perpose.json` (recomputed 31.49 /
+  28.45); paired against the claimant's dumps: 0 discordant poses (taken / contact) on either set.
+- **Search and gate, recomputed from the sweep** (J4 + J5, 309 tries, time order): near-touch 0.58 / 0.04 / 0.21 score
+  points, plain 0.58 / 0.47 / 0.45 - passed, as claimed. The claimed cell is the fast-bench best (sweep k 1993); the J4
+  cell reads better on both big benches (31.43 / held 27.83), so held out was not used to pick it.
+
+Red team (new measurements, `docs/concepts/verify/crest-knee-3r-joggle_tolprobe.py`):
+
+- **Pin-a stack tolerance cliff.** The knee link rides at least 0.20 mm over the E-strap top (rule 0.15). The flat cell
+  rides at least 0.33 mm. If the strap top sits d mm higher than modelled, every taken pose with clearance below 0.15 + d
+  jams:
+
+  | strap-level error d | joggle bench: jams, gap | joggle held: jams, gap | flat cell bench: jams, gap |
+  |---|---|---|---|
+  | 0 | 0, 31.50 | 0, 28.45 | 0, 32.84 |
+  | +0.05 mm | 1, 31.78 | 0, 28.45 | 0, 32.84 |
+  | +0.1 mm | 1, 31.78 | 4, 29.56 | 0, 32.84 |
+  | +0.2 mm | 25, 39.90 | 24, 36.54 | 1, 33.11 |
+  | +0.3 mm | 46, 51.64 | 47, 48.85 | 77, 63.24 |
+
+  So at a +0.2 mm stack error the joggle reads worse than the flat cell. The root cause is shared by both cells: the
+  E strap is T_LINK 3.0 mm thick and the boss is tp 2.75, so inside the knee's sweep the strap top stands up to 0.125 mm
+  above the boss face. **Build rule:** skim the strap top flush with the boss face (2.75 mm) inside the knee's sweep.
+  This does not change the skin side and gives >= 0.375 mm. It is not modelled, so this is a watch item, not a rule break.
+- **The joggle must be machined.** The step is 3.19 mm over a 13.26 mm ramp run (13.5 deg). A 3 mm bent bar with 15 mm
+  inner bend radius rises at most 2.78 mm in that run, so the knee link is machined from solid, as the claim says. The
+  part must say so (CAD ruling 2026-10-16).
+- **Protocol.** The fit bench is Bench(60,160) fast, not the round-14 envelope bench (that bench is not available
+  locally and the farm is closed). Held out reads 28.45, better than the bench's 31.50, so no over-fit penalty shows.
+- **Minor labels.** `extra_checks` prints the pad at tr = tr_a 66.08, but the pad's samples and boxes are at tr_b 62.89
+  (label only). Its q3 "span" of 547.9 deg comes from unwrapping over unordered poses; the real J3 window is 245.09 deg.
+
+Verdict: **verified at 31.50 (score 88.55), held 28.45; not refuted.** The champion scores 64.93 on the same bench and
+protocol (66.97 at fold margin 10, 75.94 with the risley checks). The joggle beats the verified flat cell by 1.34 on the
+bench and 1.36 held. It is still not a leader: 4.30 behind H1's 27.20 and 13.22 behind the lead's 18.28. Overhead
+workspace reach is 7/28. The row's v_* fields now hold the joggle cell (`v_params_key: best_params_joggle`); the flat
+cell's numbers are kept in `v_flat`.

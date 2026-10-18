@@ -1,0 +1,55 @@
+{
+ "wear": "held",
+ "taken": 344,
+ "min_mm": 0.203,
+ "rows": [
+  {
+   "strap_level_error_mm": 0.0,
+   "jam_poses": 0,
+   "gap": 28.45,
+   "reach": 0.65,
+   "follow": 1.0,
+   "inband14": 0.8713
+  },
+  {
+   "strap_level_error_mm": 0.05,
+   "jam_poses": 0,
+   "gap": 28.45,
+   "reach": 0.65,
+   "follow": 1.0,
+   "inband14": 0.8713
+  },
+  {
+   "strap_level_error_mm": 0.1,
+   "jam_poses": 4,
+   "gap": 29.56,
+   "reach": 0.6389,
+   "follow": 1.0,
+   "inband14": 0.8713
+  },
+  {
+   "strap_level_error_mm": 0.2,
+   "jam_poses": 24,
+   "gap": 36.54,
+   "reach": 0.6083,
+   "follow": 0.9182,
+   "inband14": 0.8643
+  },
+  {
+   "strap_level_error_mm": 0.3,
+   "jam_poses": 47,
+   "gap": 48.85,
+   "reach": 0.5667,
+   "follow": 0.8455,
+   "inband14": 0.856
+  },
+  {
+   "strap_level_error_mm": 0.5,
+   "jam_poses": 95,
+   "gap": 78.16,
+   "reach": 0.4917,
+   "follow": 0.6545,
+   "inband14": 0.8302
+  }
+ ]
+}

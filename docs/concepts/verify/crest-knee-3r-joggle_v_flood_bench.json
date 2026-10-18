@@ -1,0 +1,71 @@
+{
+ "params": {
+  "az1": 103.4567,
+  "el1": 63.8099,
+  "az2": 28.5495,
+  "el2": 48.6809,
+  "wd": 89.875,
+  "wa": -3.5556,
+  "b3": 0.314,
+  "lE": 71.6198,
+  "lc": 25.2612,
+  "phiE": -9.5692,
+  "phib": -88.5186,
+  "ang_min": 26.6396,
+  "h2cap": 69.7595,
+  "j3stop": 1,
+  "j3stop_margin": 1.3224,
+  "fly": 1,
+  "stk": 6.0,
+  "kj": 1
+ },
+ "j3win": [
+  269.19,
+  245.09
+ ],
+ "fold_margin": 5.0,
+ "grid": {
+  "poses": 1432,
+  "kin_ok": 974,
+  "connected": 974,
+  "islands": 0
+ },
+ "edges": {
+  "tested": 803,
+  "passed": 803,
+  "refused": {
+   "fold_or_window": 0,
+   "jump": 0,
+   "branch": 0
+  }
+ },
+ "island_poses": [],
+ "bench": {
+  "wear": "bench",
+  "static": {
+   "gap": 31.49,
+   "reach": 0.6278,
+   "follow": 1.0,
+   "inband14": 0.8719,
+   "contact": 0.0147,
+   "n_ws": 360,
+   "n_clip": 110,
+   "ws_taken": 226,
+   "contact_poses": 5
+  },
+  "connected": {
+   "gap": 31.49,
+   "reach": 0.6278,
+   "follow": 1.0,
+   "inband14": 0.8719,
+   "contact": 0.0147,
+   "n_ws": 360,
+   "n_clip": 110,
+   "ws_taken": 226,
+   "contact_poses": 5
+  },
+  "dropped": [],
+  "dropped_poses": []
+ },
+ "secs": 4.8
+}

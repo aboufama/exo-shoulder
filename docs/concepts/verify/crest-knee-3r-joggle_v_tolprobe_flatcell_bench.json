@@ -1,0 +1,56 @@
+{
+ "wear": "bench",
+ "cell": "flat",
+ "taken": 338,
+ "min_mm": 0.334,
+ "rows": [
+  {
+   "strap_level_error_mm": 0.0,
+   "jam_poses": 0,
+   "gap": 32.84,
+   "reach": 0.6333,
+   "follow": 1.0,
+   "inband14": 0.8529
+  },
+  {
+   "strap_level_error_mm": 0.05,
+   "jam_poses": 0,
+   "gap": 32.84,
+   "reach": 0.6333,
+   "follow": 1.0,
+   "inband14": 0.8529
+  },
+  {
+   "strap_level_error_mm": 0.1,
+   "jam_poses": 0,
+   "gap": 32.84,
+   "reach": 0.6333,
+   "follow": 1.0,
+   "inband14": 0.8529
+  },
+  {
+   "strap_level_error_mm": 0.2,
+   "jam_poses": 1,
+   "gap": 33.11,
+   "reach": 0.6306,
+   "follow": 1.0,
+   "inband14": 0.8529
+  },
+  {
+   "strap_level_error_mm": 0.3,
+   "jam_poses": 77,
+   "gap": 63.24,
+   "reach": 0.5,
+   "follow": 0.7364,
+   "inband14": 0.908
+  },
+  {
+   "strap_level_error_mm": 0.5,
+   "jam_poses": 216,
+   "gap": 136.11,
+   "reach": 0.2556,
+   "follow": 0.2727,
+   "inband14": 0.9401
+  }
+ ]
+}
