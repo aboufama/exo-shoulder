@@ -7,25 +7,25 @@
  "passive_dof": 4,
  "status": "screened",
  "t_ideated": "2026-10-18T10:10:19Z",
- "t_screened": "2026-10-18T10:48:52Z",
- "reach": null,
- "follow": null,
- "inband14": null,
- "inband10": null,
- "contact": null,
- "gap": null,
+ "t_screened": "2026-10-18T11:07:28Z",
+ "reach": 0.8625,
+ "follow": 1.0,
+ "inband14": 0.896,
+ "inband10": 0.5495,
+ "contact": 0.0,
+ "gap": 4.15,
  "v_reach": null,
  "v_follow": null,
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 0,
- "verdict": "in progress",
- "limiter": "",
- "note": "",
+ "n_configs": 225,
+ "verdict": "SCREENED, PASSES the pre-registered gate: frozen exact Bench(110,360) GATE 14.40 (chain-only ib14 0.8962; plain 14.02 at pooled 0.9196; near1 17.68) <= 15, vs the lead 18.28; reach 0.7917 (285/360, lead 262) but overhead 8/28 unchanged and 13 contacts (lead 4). A 4-joint answer at complexity 52.5 (lead 18.5): goes to the user as the 4-joint option, not a lead change by itself. The PRE-REGISTERED config itself fails: PHI 30 / ds 16 / rt 2.5 reads 20.59 with the spec bump (kill) and 16.82 with the refined bump (report band). Needs: adversarial verifier, held-out wear, paired comparison vs freek 16.20 and the lead.",
+ "limiter": "the second wall reached from the arm side plus the bump floor: 33 relayed bench poses -> 23 taken, 9 contacts (chain metal on binder-side skin: folded-side one-sided relays 262 -9.79 / 206 -6.07, 466 -8.22 at phi 28), the rigid boss / knee bump at its 1 mm rule floor (6 near-jams at 0.94-0.99 mm, overhead IR poses, 5 with metal in the skin); fold 56 poses beyond the relay; overhead 8/28 unchanged",
+ "note": "Fast sweep 219 configs (Bench(60,160) fast, objective near-touch gate gap) + 6 claim-bench readings (pre-registered x3 rules, pick, 2 probes). CONVERGENCE GATE: gain 2nd half 0.08, last third 0.06, top-5 spread 0.01 score points. Optimum on floors: rt_extra at the box edge 1.5, ramp at its 60-deg floor 6.15. Spec corrections: bump split shell (R_t + 1) / carriage footprint (+ h_c) instead of a uniform R_t + h_c + 1 (20.59 -> 16.82 gate at the pre-registered hardware); analytic shell / carriage clearance (nearest-sample - 1 mm flagged true 1.0 mm as jams); jam with metal in the skin stays a contact (15.62 -> 16.82); bracket at ds 16 is 68.6 deg (machined), 49.9 deg at the pick. R17 preload 0.063 N.m. Elevation-0 aliases taken at 4.84 mm at a 10. Ideal PHI 35 bound 13.21 frozen exact (first on file).",
  "doc": "docs/concepts/proxtrack-relay-knuckle-4r.md",
  "passive_translations": 0,
- "complexity": null,
+ "complexity": 52.5,
  "mechanism": {
   "active_dof": 4,
   "passive_trans": 0,
@@ -56,5 +56,62 @@
    "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
   }
  },
- "best_params": null
+ "best_params": {
+  "PHI": 35.0,
+  "ds": 19.538,
+  "rt_extra": 1.5,
+  "pre": 10.41,
+  "bump": 1.002,
+  "band": 9.272,
+  "ramp": 6.0,
+  "tilt": 12,
+  "taz": 235,
+  "sgn": 1,
+  "flood": 1,
+  "hw": 1,
+  "hwv": "plain"
+ },
+ "frozen_exact": {
+  "bench": "Bench(110,360) exact, frozen lead shape (fit Bench(60,160) fast, phi 0)",
+  "plain": 14.02,
+  "gate_gap": 14.4,
+  "near1_gap": 17.68,
+  "near2_gap": 38.01,
+  "reach": 0.7917,
+  "follow": 1.0,
+  "inband14_pooled": 0.9196,
+  "inband14_chain_only": 0.8962,
+  "inband10": 0.5513,
+  "contact": 0.0319,
+  "contact_poses": 13,
+  "ws_taken": 285,
+  "overhead": [
+   8,
+   28
+  ],
+  "jams": 6,
+  "relayed": {
+   "n": 33,
+   "taken": 23,
+   "contact": 9,
+   "jam": 1,
+   "clip_relayed": 0,
+   "phi_max": 32.94
+  },
+  "min_metal_taken": 0.072,
+  "continuity": "connected = static (0 relayed bench poses dropped; flood 153/154 relayed envelope nodes connected)",
+  "ideal_bound_phi35": 13.21,
+  "file": "docs/concepts/verify/proxtrack-relay-knuckle-4r/frozen_pick_phi35_exact.json (+ _0_perpose.json, T5 dump)",
+  "prereg_phi30": {
+   "spec_uniform_bump": {
+    "plain": 17.31,
+    "gate": 20.59
+   },
+   "refined_bump": {
+    "plain": 14.59,
+    "gate": 16.82,
+    "near1": 18.26
+   }
+  }
+ }
 }

@@ -3316,7 +3316,7 @@
   "name": "Proximal-station arm-fixed relay track with a pad bracket on the lead (zero lift, track inside the measured free window), counted 4th R",
   "family": "cuff relay / 4-joint (armarc hardware moved proximal of the pad)",
   "lens": "round105:A carriage-relay-rail (the variant that survives the free-window measurement)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-18T10:10:19Z",
   "source": "round 105 (J5, track jump) judge (docs/concepts/round105_ideation.md)",
   "description": "conecut-knee-knuckle-3r unchanged. A slotted circular Ti shell (armarc's plain hardware: T-nut carriage on an iglidur strip, h_c 1.7) is ARM-FIXED about a_r (tilt 12 / az 235), 16 mm PROXIMAL of the pad (station s -95, ds +16), underside R 78.5 (6.5 mm over the clip-p90 skin 72.0), spanning [th0 - a, th0 + PHI + a] with a ~10 deg: only the measured lateral-to-anterior-lateral free window. The carriage (24 x 14) carries a 10 x 2 mm Ti bracket that drops 16 mm distally to BOTTOM's pad: the pad keeps rpad 73.2 (ZERO LIFT); member 3's E strap and the knee link take a local bump over the track band to R >= 82.7. Rest: a short lateral arc proximal of the pad. Overhead / across the body: carriage, bracket, pad, knee and E strap turn anterior by phi <= PHI. Folded side: the one-sided spring relays those too and they stay contacts (measured, not fixed).",
