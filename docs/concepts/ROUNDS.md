@@ -5660,3 +5660,6 @@ None. The 21 ideated catalogue entries all sit under measured closures (round 10
   93.35 / 22.38 at cx 18.5); lens B adds a lower-cx 4-joint point if it passes.
 - Whether a one-tooth involute pair counts as a gear under MVP1 (lens C measures it).
 - The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule, O20 hubs and the transmission guard stay.
+
+
+**Lead note 2026-10-18 ~22:00 UTC: round 108 STOPPED after its plan, before ideation.** The user wrote: "if there is a 4 joints setup that scores way higher without a knee, I'd honestly prefer that". Every relay design this plan would tune carries the cuff knee, so the slot went to a knee-less 4-joint track (round K1 = 401). The relay levers above (delta 5.0, lean 0, PHI 37-38, CF strip / shell stiffness / R17 pricing) stay open for a later jump round.
