@@ -36,6 +36,7 @@ BASE = CC._clamp(dict(CC.PARAMS, **LEAD))                    # the verified lead
 AZ_BOX, EL_BOX = (-52.5, 0.0), (0.0, 45.0)                   # the posteromedial cell (task box)
 D_ARC = 12.0                                                 # |d_a1|, |d_a2| <= 12 deg
 LEAD_WIN = (24.67, 110.99)                                   # the lead family's th window (fold_ceiling kin_ceiling.json leader_seats)
+REST_M = 5.5                                                 # rest-pose fold margin for a valid J2 resolution (deg)
 
 
 def _rays(P):
@@ -61,7 +62,8 @@ def resolve_j2(d1, d3, a1, a2, br):
     a = (c1 - dd * c2) / den; b = (c2 - dd * c1) / den; p_ = a * d1 + b * d3; h2 = 1 - float(p_ @ p_)
     d2 = p_ + br * math.sqrt(max(h2, 0.0)) * n; d2 = d2 / np.linalg.norm(d2)
     el2 = math.degrees(math.asin(float(np.clip(d2[1], -1, 1)))); az2 = math.degrees(math.atan2(float(d2[2]), float(-d2[0])))
-    return az2, el2, bool(h2 > 1e-4)
+    th0 = math.degrees(math.acos(dd))                        # the rest pose must close with the fold margin (+0.5) on stop A
+    return az2, el2, bool(h2 > 1e-4 and abs(a1 - a2) + REST_M <= th0 <= a1 + a2 - REST_M)
 
 
 def seat_legal(az, el):
@@ -86,6 +88,26 @@ def _clamp(p):
 
 
 PARAMS = dict(BASE, az1=-52.5, el1=17.5, d_a1=0.0, d_a2=0.0, br=1.0)
+
+# NUMERICAL NOTE (not physics): the knuckle base (minarc-stop-knuckle-4r-pinknee KDesign) asserts |c[0]|, |c[1]| < 1e-6 mm
+# (J1, J2 on GH rays). With b1 = b2 = 0 that holds by construction, but at these seats the rest-pose IK (float32 rest
+# rotation Q0, a J2 ray closer to the J1-J3 great circle than the lead's) leaves c[1] at ~1e-4 mm (rest_err ~1e-4 deg).
+# Offsets < SNAP_MM are set to exactly 0 (a < 1 micron change of the hub-2 offset); anything larger is left alone, so
+# the base's assertion still guards a real off-ray seat. The largest snap of the last design is kept in SNAPPED.
+SNAP_MM = 1e-3
+SNAPPED = [0.0]
+_KB = CC.FL.G.KR.KB
+_osn_init = _KB.PK.OSN.Design.__init__
+
+
+def _osn_init_snap(self, params=None):
+    _osn_init(self, params)
+    for k in (0, 1):
+        n = float(np.linalg.norm(self.c[k]))
+        if 0 < n < SNAP_MM: self.c[k] = np.zeros(3); SNAPPED[0] = max(SNAPPED[0], n)
+
+
+_KB.PK.OSN.Design.__init__ = _osn_init_snap
 
 
 def _report(B, params):
@@ -123,20 +145,21 @@ def seed(az1, el1, top=3):
     """kinematic seeding on the FIT bench only (Bench(60,160): its 60 clip frames + 160 workspace poses; never the claim
     bench, never held out): th = angle(u1, Q u3) per pose; J3 seats wd 45..110 x wa -180..170 (5 / 10 deg) ranked by the
     share of fit poses inside the lead family's th window LEAD_WIN (the dyad is the lead's at d_a1 = d_a2 = 0); a seat
-    whose rest-pose J2 does not resolve on a branch is skipped. Returns the top seats (both branches each)."""
+    whose rest pose does not close on stop A with the fold margin (J2 unresolvable on both branches) is skipped. Returns
+    the top valid seats (with the branches that resolve)."""
     Z = CB._poses_all(); ix = CB._select(60, 160)[0]; Q = Z["HG"][ix].astype(float)
     u1 = np.asarray(S.bvec(az1, el1), float); Y = lead_dyad(); R = OSN.rest(); d1 = OSN.seat(u1, 0.0)[1]
-    rows = []
-    for wd in np.arange(45.0, 111.0, 5.0):
-        for wa in np.arange(-180.0, 180.0, 10.0):
-            u3 = np.asarray(S.w_dir(wd, wa), float)
-            th = np.degrees(np.arccos(np.clip(np.einsum("pij,j->pi", Q, u3) @ u1, -1, 1)))
-            share = float(((th >= LEAD_WIN[0]) & (th <= LEAD_WIN[1])).mean())
-            d3 = OSN.seat(R["Q0"] @ u3, BASE["b3"])[1]
-            ok = [resolve_j2(d1, d3, Y["a1"], Y["a2"], br)[2] for br in (1.0, -1.0)]
-            if any(ok): rows.append((share, float(wd), float(wa), ok))
-    rows.sort(key=lambda x: -x[0])
-    return [dict(share=round(s, 4), wd=wd, wa=wa, br_ok=ok) for s, wd, wa, ok in rows[:top]]
+    WD, WA = np.meshgrid(np.arange(45.0, 111.0, 5.0), np.arange(-180.0, 180.0, 10.0), indexing="ij"); WD, WA = WD.ravel(), WA.ravel()
+    import concept_kit as KIT; U3 = np.asarray(KIT.wdir(WD, WA), float)       # = S.w_dir, vectorised
+    th = np.degrees(np.arccos(np.clip(np.einsum("pij,sj,i->sp", Q, U3, u1), -1, 1)))
+    share = ((th >= LEAD_WIN[0]) & (th <= LEAD_WIN[1])).mean(1)
+    out = []
+    for k in np.argsort(-share, kind="stable"):
+        d3 = OSN.seat(R["Q0"] @ U3[k], BASE["b3"])[1]
+        ok = [resolve_j2(d1, d3, Y["a1"], Y["a2"], br)[2] for br in (1.0, -1.0)]
+        if any(ok): out.append(dict(share=round(float(share[k]), 4), wd=float(WD[k]), wa=float(WA[k]), br_ok=ok))
+        if len(out) >= top or len(out) == 0 and share[k] < share.max() - 0.25: break
+    return out
 
 
 def frozen(P, nc=110, nw=360): return CC.frozen(_clamp(dict(PARAMS, **P)), nc, nw)
