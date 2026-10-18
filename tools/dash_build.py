@@ -441,7 +441,8 @@ def morphs(S):
             fz = rw.get("frozen_exact")
             # rows store the frozen exact claim under several keys (frozen_exact / frozen / claim.frozen); the first number
             # found wins (alignment audit 2026-10-17, inband-rssr R4: reading frozen_exact only showed the in-sample fit gap)
-            cands = [rw.get("frozen_exact_gap"), fz.get("gap") if isinstance(fz, dict) else None,
+            # (freek-oracle-route audit 2026-10-18 R4: a row's top-level frozen_gap was never read, so the page showed its fast 9.56)
+            cands = [rw.get("frozen_exact_gap"), rw.get("frozen_gap"), fz.get("gap") if isinstance(fz, dict) else None,
                      (rw.get("frozen") or {}).get("gap") if isinstance(rw.get("frozen"), dict) else None,
                      (rw.get("claim") or {}).get("gap") if isinstance(rw.get("claim"), dict) else None]
             m["frozen_gap"] = next((num(c) for c in cands if num(c) is not None), None)

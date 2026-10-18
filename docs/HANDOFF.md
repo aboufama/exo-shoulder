@@ -572,6 +572,16 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
        (pad play), and at the plate-clearing level it reads 18.65.
 
      No lead change; the lead is conecut-knee 18.28.
+   - *07:55:* the skeptic's reporting findings on freek-oracle-route are fixed.
+     - dash_build.py now reads a row's top-level frozen_gap; the page had shown the fast 9.56.
+     - The row's part counts now include the J3 dowel, so complexity is 32.5 -> 33.25 on the page.
+
+     Open for the auditor:
+     - FOLD_KEY in tools/alignment_audit.py matches none of the fold readings on file (m3e_min / family_own_min /
+       fold_margin_th.*.min_margin_th). Adding them would make the family reading (0.32 deg on a taken held clip frame)
+       fire gamed, which depends on the open T3 question (which th reading holds with J2 free in state 2). Decide T3 first.
+     - The row's v_* fields hold the STATIC reading (16.20). The continuity rule makes the connected 17.35 the claim, and
+       the row is flagged GAMED either way.
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).
