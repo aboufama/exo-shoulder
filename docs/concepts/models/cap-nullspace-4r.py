@@ -17,7 +17,8 @@ folds, the J1 axis sits on the legal seat (az -110..135, el >= -20, x <= 0.2 in 
 
 Policies:
   ctrl   : the plain cap 3R (J1 locked at b; hubs 1-3 only) = the like-for-like control.
-  spring : E = sum k_i wrap(q_i - r_i)^2 (q0 = J0 own angle, q1 / q2 = J1 / J2 own angles, q3 = J3 own angle vs the
+  spring : E = sum k_i wrap(q_i - r_i)^2 (dmax < 180: a sprung joint's deflection |q_i - r_i| is held <= dmax, the
+           working range of a real double-leg torsion spring; the wrapped law at dmax = 180 is the proposer's) (q0 = J0 own angle, q1 / q2 = J1 / J2 own angles, q3 = J3 own angle vs the
            arm-end plate); the POSE-LOCAL state is the global minimum over the feasible set; the full-grid flood
            (connect=1) path-tracks the local minimum (descent from the previous state, a stop push <= 10 deg, no snap)
            over the 1432-node envelope grid on 2-deg HG slerps with symmetric neighbour edges; a ws pose counts only if
@@ -99,6 +100,8 @@ class NS:
             q3 = K.axis_angle(W, np.broadcast_to(ref3[:, None, :], (P, n, 3)), J2)
             J2s.append(J2); oks.append(ok); Qs.append(np.stack([np.broadcast_to(s.QG, (P, n)), q1, q2, q3], -1))
         J2 = np.stack(J2s, 1); ok = np.stack(oks, 1); Q = np.stack(Qs, 1)
+        dmax = float(p.get("dmax", 180.0))                  # a real torsion spring's working deflection (deg); 180 = off
+        if dmax < 180: ok = ok & (np.abs(wrap(Q - s.r))[..., s.k > 0] <= dmax).all(-1)
         E = (s.k * np.radians(wrap(Q - s.r)) ** 2).sum(-1)
         return dict(J2=J2, ok=ok, Q=Q, E=np.where(ok, E, np.inf))
 

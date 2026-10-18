@@ -497,6 +497,14 @@ designs (dipped-law-groove-knuckle-3r, seed-offset-3r-slides); every leader is w
      Round J2 (jump) closed: virtual J2 at the cap pole dead (86.95-108.22 fast vs the plain cap 3R 63.18), deltoid-crest
      47.86 dead; J3 = 4-joint ghost gates. Round 14: cap-plateau-knuckle-3r dead at gate 0 (32.08 frozen, 247 takes) -
      the cap-pole seat is closed on both tracks.
+   - *Lead, 03:13 UTC 10-18:* round 14 closed: winner crest-knee-3r 32.84 (not competitive, 14.6 behind the lead) - its
+     polish and generation CAD are SKIPPED on purpose (the CAD rule is for showing the best designs; this one is far off
+     the lead). lowarm-halfring-knuckle-3r 17.96 is GAMED (final, skeptic 03:00: the link-2 lift was picked from 794
+     configs on the claim bench; held 22.70 behind the lead). Measured: the 3-joint seat question is closed - back seat
+     269-271 takes (ghost), cap 247 (metal), crest 228; even 271 takes at 0 contact floors the gap at 14.72 (score
+     ~94.65), so 95 (279 takes) may be out of reach for 3 DOF at the allowed seats. Round 15 builds the 3-DOF take-bound
+     table; if it stays < 275 that is a USER decision (accept 4 DOF, or accept < 95) - the jump track's 4-DOF relays so
+     far all lose in-band (lead-relay-j0 24.92, backbridge 32.13, wobble dead, cap-nullspace 70.64).
 2. **Reach is the gap.**
    - The lead's gap is reach 17.50 of 18.49 (ROUNDS round 10 results). **Score 95 is gap <= 13.75**: +18 workspace
      poses at the lead's in-band and contact, 0.278 points each (ROUNDS round 11 plan).

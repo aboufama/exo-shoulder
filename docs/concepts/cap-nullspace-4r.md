@@ -54,3 +54,54 @@ own angle q0 on a 1-deg grid. Three corrections to the proposer's scratch model 
 | sprung cell, proposer config, assembly mode fixed | 63.75 | 70.64 | 0.733 | 0.399 | 0.039 | 10/28 | 0.01 |
 | plain cap 3R control, searched (198 configs, gate passed) | 54.15 (54.45 at K6 1 mm) | 60.61 | 0.756 | 0.459 | 0.021 | 10/28 | 0.06 |
 | sprung 4R, search best 1 (397 configs) | 49.62 (51.71 at K6 1 mm) | 59.44 | 0.750 | 0.494 | 0.038 | 10/28 | 0.00 |
+| sprung 4R, search best 2 (552 configs; springs J0 + J2 + J3) | 47.28 (47.33 with the flood; 48.77 at K6 1 mm) | 59.05 | 0.739 | 0.542 | 0.072 | 11/28 | 0.00 |
+| ghost (bound only, oracle; proposer, in-sample, K2 off) | 44.97 quoted, 48.55 on file | not worn | | | | | |
+
+Like-for-like (same kit, same checks, both searched to the gate on the same bench): the sprung 4R beats the plain cap
+3R it replaces by 6.9 points fast (47.28 vs 54.15) but by **1.6 points frozen exact (59.05 vs 60.61)**, for one more
+counted joint (+25 complexity, 4-DOF) and three springs. Against the lead (conecut-knee-knuckle-3r v_gap 18.28, 3
+joints) it is 40.8 points behind.
+
+## Limiter (measured)
+
+**Hub 2.** At the best cell hub 2's fitted level is 121 mm from GH (skin under it ~55-75 mm): in band 0.00 (control
+0.06), link 2 0.18, link 1 0.35; the springs place the spare so that hub 0 (1.00), link 0 (0.99) and hub 1 (0.99) sit in
+band, which is what the search buys - a 1-D null-space serves one member set, and every searched cell spends it on
+the cap-pole members, never on hub 2, because hub 2's axis at the cap pole crosses the deltoid crest / acromion edge
+on > 2 % of the fit poses whatever the spare does (the proposer's step 0: J2-ray exit p95 96-107 mm). The frozen wear
+then adds contact (0.072 at best 2, 0.038 at best 1): the plain-gap search buys fast points with metal close to the skin
+that does not hold on 360 new poses (near-touch gap 56.28 fast / 66.40 frozen).
+
+## Red team (best 2, Bench(60,160) fast, own script)
+
+- **Lost ws poses (20 of 160):** 16 have no closing state even at 0.5-deg fold margins (the J0-J1 circle cannot meet
+  J2's circle: the four-bar's own reach), 3 lose only to the 5-deg fold stops, 4 close only in the other J2 assembly
+  mode (unreachable by the metal), 1 collides. Overhead (elev >= 140): 3 of 12 taken fast, 9 have no closing state.
+- **The point that pinches:** 8 contact poses fast, deepest **-26.2 mm at plane -15 / elev 75 / axial -45** (across the
+  body, internal rotation), then -13.7 mm at plane -15 / elev 105 / axial +45 and -7.0 mm at plane -90 / elev 60 /
+  axial 135 (behind the back). Closest non-contact metal 0.12 mm at plane 45 / elev 165 / axial -90 (overhead).
+- **The optimistic numbers:** fast -> frozen costs 10-12 points in every searched cell (best 1 49.62 -> 59.44, best 2
+  47.28 -> 59.05); the fast search kept improving (best 49.62 -> 45.47) while the frozen number stayed flat
+  (59.44 -> 59.05): the fast gains are bench-tuned contact, not design. The proposer's 69.80 was an any-branch number.
+- **The springs' travel decides the cell:** at the taken poses the J2 spring winds -180 .. +172 deg from its rest and
+  the J3 spring -123 .. +125 deg; J0 swings -57 .. +80 deg fast and -170 .. +149 deg frozen exact (a 25-deg bar sweeping
+  ~320 deg about the back seat, over the acromion). The energy law is quadratic in the WRAPPED deflection, which equals
+  a real spring's law only while |q_i - r_i| < 180 along the path; the model now takes `dmax` (states with a sprung
+  deflection > dmax are infeasible). dmax 170 (the law exact; a 0.95-wire / D 22 / 6-coil double-leg spring at ~0.33
+  N.mm/deg reaches ~96 N.mm at 170 deg with 40 N.mm preload, under a ~128 N.mm yield estimate) keeps the best cells at
+  46-48 fast; **dmax 120 (a conservative torsion-spring range) collapses them to 102-191 fast** (best 2: 191.30, reach
+  0.19, follow 0.15). The cell lives only with springs that wind ~+-170 deg.
+- **Feel:** with 40 N.mm preload per spring and the deflections above the centring torque reaches ~100-150 N.mm at the
+  ends - ~1-1.5 N at a 100-mm cuff lever, felt as a pull toward rest on every pose.
+
+## New knowledge
+
+1. **Fix both branch signs in any null-space model.** Two fold stops pin the four-bar's assembly mode; a pose-local
+   model that lets either J2 branch win misstates the design by ~7 fast points here (70.36 vs 63.75) and in the
+   OPTIMISTIC or pessimistic direction depending on how the mixed poses shape the fitted levels.
+2. **A spring-set null-space at the cap pole is worth ~1.6 frozen points over the plain 3R it replaces** (59.05 vs
+   60.61, both searched to the gate on the same kit) - the redundancy is spent on the cap-pole members, not on hub 2,
+   which is the binder. The class "spare at the cap pole" cannot reach the lead's region (18.28) with springs; only the
+   oracle ghost (bound, 44.97-48.55 fast in-sample, K2 off) was ever better fast, and nothing in it is buildable unpowered.
+3. **Fast-bench improvements of a spring cell decouple from the frozen number** after ~400 tries (fast -4.2, frozen
+   -0.4): stop the fast search on a frozen plateau, not on the fast gate alone.

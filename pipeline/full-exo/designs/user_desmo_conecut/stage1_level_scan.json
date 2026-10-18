@@ -1,0 +1,192 @@
+{
+ "rule": "For each groove mid-plane level (over hub 2's\n    face), the pin point re-placed over (a_s 7..12, psi 40..260) through the model's own formula: max pressure angle (pin side over the\n    stroke, cap side past the blend) vs the gate 43 - atan(mu 0.15) = 34.47, and the re-synthesised groove's min centreline radius vs the\n    verified groove's 1.007 (ridge 0.247: the red team's Hertz case); pitch in the model's [R_LO, R_HI], drift <= 0.6. Rows [a_s, psi,\n    max PA, rc_min, pitch lo, pitch hi]",
+ "gate_deg": 34.47,
+ "rc_floor_mm": 1.0,
+ "model_level_mm": 0.861,
+ "levels": [
+  {
+   "level_over_hub2_face_mm": 0.861,
+   "candidates": 889,
+   "pa_ok": 124,
+   "rc_ok": 42,
+   "feasible_pa_and_rc": 21,
+   "best_rc_with_pa_ok": [
+    9.8,
+    146.0,
+    34.126,
+    1.279,
+    7.299,
+    9.851
+   ],
+   "best_pa_with_rc_ok": [
+    9.4,
+    149.0,
+    30.286,
+    1.05,
+    7.386,
+    9.57
+   ]
+  },
+  {
+   "level_over_hub2_face_mm": 2.5,
+   "candidates": 847,
+   "pa_ok": 116,
+   "rc_ok": 35,
+   "feasible_pa_and_rc": 8,
+   "best_rc_with_pa_ok": [
+    9.9,
+    148.0,
+    33.771,
+    1.161,
+    7.428,
+    9.848
+   ],
+   "best_pa_with_rc_ok": [
+    9.6,
+    150.0,
+    29.714,
+    1.003,
+    7.541,
+    9.691
+   ]
+  },
+  {
+   "level_over_hub2_face_mm": 3.15,
+   "candidates": 826,
+   "pa_ok": 107,
+   "rc_ok": 26,
+   "feasible_pa_and_rc": 6,
+   "best_rc_with_pa_ok": [
+    9.9,
+    149.0,
+    33.152,
+    1.095,
+    7.505,
+    9.836
+   ],
+   "best_pa_with_rc_ok": [
+    9.7,
+    150.0,
+    29.823,
+    1.013,
+    7.613,
+    9.786
+   ]
+  },
+  {
+   "level_over_hub2_face_mm": 3.9,
+   "candidates": 795,
+   "pa_ok": 95,
+   "rc_ok": 17,
+   "feasible_pa_and_rc": 2,
+   "best_rc_with_pa_ok": [
+    9.9,
+    150.0,
+    32.147,
+    1.03,
+    7.616,
+    9.851
+   ],
+   "best_pa_with_rc_ok": [
+    9.8,
+    150.0,
+    29.534,
+    1.024,
+    7.71,
+    9.904
+   ]
+  },
+  {
+   "level_over_hub2_face_mm": 4.6,
+   "candidates": 768,
+   "pa_ok": 84,
+   "rc_ok": 12,
+   "feasible_pa_and_rc": 0,
+   "best_rc_with_pa_ok": [
+    9.9,
+    151.0,
+    31.263,
+    0.96,
+    7.722,
+    9.859
+   ],
+   "best_pa_with_rc_ok": [
+    10.1,
+    150.0,
+    34.49,
+    1.046,
+    7.607,
+    9.905
+   ]
+  },
+  {
+   "level_over_hub2_face_mm": 5.0,
+   "candidates": 754,
+   "pa_ok": 82,
+   "rc_ok": 11,
+   "feasible_pa_and_rc": 0,
+   "best_rc_with_pa_ok": [
+    10.0,
+    151.0,
+    32.403,
+    0.96,
+    7.729,
+    9.895
+   ],
+   "best_pa_with_rc_ok": [
+    10.3,
+    150.0,
+    37.675,
+    1.057,
+    7.522,
+    9.893
+   ]
+  },
+  {
+   "level_over_hub2_face_mm": 5.4,
+   "candidates": 742,
+   "pa_ok": 76,
+   "rc_ok": 9,
+   "feasible_pa_and_rc": 0,
+   "best_rc_with_pa_ok": [
+    10.1,
+    151.0,
+    33.502,
+    0.962,
+    7.736,
+    9.932
+   ],
+   "best_pa_with_rc_ok": [
+    10.4,
+    150.0,
+    38.513,
+    1.064,
+    7.53,
+    9.932
+   ]
+  },
+  {
+   "level_over_hub2_face_mm": 6.03,
+   "candidates": 727,
+   "pa_ok": 58,
+   "rc_ok": 9,
+   "feasible_pa_and_rc": 0,
+   "best_rc_with_pa_ok": [
+    10.1,
+    152.0,
+    33.171,
+    0.813,
+    7.83,
+    9.925
+   ],
+   "best_pa_with_rc_ok": [
+    10.7,
+    150.0,
+    42.551,
+    1.078,
+    7.412,
+    9.924
+   ]
+  }
+ ]
+}

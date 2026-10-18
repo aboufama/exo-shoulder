@@ -267,6 +267,42 @@ def pin_search(M, G, hm_abs, a_ref, psi_ref):
                          "EXTENDED along its own axis to this level: pa_pin 52.86 (over the gate from K 24: binds) - so the built pin is re-placed")
 
 
+def level_scan(M, G, levels, step_a=0.1, step_psi=1.0):
+    """can stage 1 be LIFTED out of link 1b's J2 lower-plate layer at the verified law? For each groove mid-plane level (over hub 2's
+    face), the pin point re-placed over (a_s 7..12, psi 40..260) through the model's own formula: max pressure angle (pin side over the
+    stroke, cap side past the blend) vs the gate 43 - atan(mu 0.15) = 34.47, and the re-synthesised groove's min centreline radius vs the
+    verified groove's 1.007 (ridge 0.247: the red team's Hertz case); pitch in the model's [R_LO, R_HI], drift <= 0.6. Rows [a_s, psi,
+    max PA, rc_min, pitch lo, pitch hi]"""
+    g = M._scg; D = M.D; u2 = unit(D.u[1]); dR, sig, gg, cc, kgrid = g["dR"], g["sig"], g["g"], g.get("c", 0.0), g["kgrid"]; lim = float(g["dK_lim"])
+    mu = float(D.p.get("mu", 0.15)); PAC = 43.0 - math.degrees(math.atan(mu)); s_th = float(G["s_th"]); hb = math.radians(float(D.p["blend"])) / abs(s_th) / 2.0
+    jt = int(np.searchsorted(kgrid, lim + 1e-12)); k = kgrid[:jt]; ph = sig * RF.phi_of(k, gg, cc); dph = sig * RF.dphi_of(k, gg, cc); RC = S.rotm(dR, ph)
+    e1 = -unit(u2 - (u2 @ dR) * dR); e2 = np.cross(dR, e1); q_on = float(G["q_on"]); qa, qb = [float(x) for x in M._lg["J2"][:2]]; sa = abs(s_th)
+    xg = np.arange(min((qa - q_on) / s_th, (qb - q_on) / s_th) - math.radians(1.0) / sa, lim + 1e-9, math.radians(0.1) / sa)
+    Kx = np.minimum(np.where(xg <= -hb, 0.0, np.where(xg >= hb, xg, (xg + hb) ** 2 / (4 * hb))), lim)
+    Mx = np.einsum("xij,xjk->xik", S.rotm(u2, -(q_on + s_th * xg)), S.rotm(dR, sig * RF.phi_of(Kx, gg, cc))); ge2, gf2 = USM.frame2(u2)
+    Uu, C, F4, hr = BM.joints4(M); H2 = float((np.asarray(C[2], float) + F4[2] * unit(Uu[2])) @ u2); out = []
+    for lev in levels:
+        hm = H2 + lev; R = []
+        for a in np.arange(7.0, 12.0001, step_a):
+            ps = np.radians(np.arange(40.0, 260.0001, step_psi)); v = np.cos(ps)[:, None] * e1 + np.sin(ps)[:, None] * e2
+            Fp = ((hm - a * (v @ u2)) / float(dR @ u2))[:, None] * dR + a * v; Cc = np.einsum("kij,pj->pki", RC, Fp)
+            vF = dph[None, :, None] * np.cross(dR, Cc); vcap = s_th * np.cross(u2, Cc); n1 = np.cross(vF - vcap, u2); n1 /= np.linalg.norm(n1, axis=2, keepdims=True)
+            ang = lambda A, B: np.degrees(np.arccos(np.clip(np.einsum("pki,pki->pk", A, B) / (np.linalg.norm(A, axis=2) * np.linalg.norm(B, axis=2) + 1e-12), -1, 1)))
+            paF = DS._fold(ang(n1, vF)); paC = DS._fold(ang(n1, vcap)); rho = np.linalg.norm(Cc - (Cc @ u2)[..., None] * u2, axis=2); z = Cc @ u2 - hm
+            ok = (rho.min(1) >= DS.R_LO) & (rho.max(1) <= DS.R_HI) & (np.abs(z).max(1) <= DS.DRIFT_MAX)
+            m = np.maximum(paF.max(1), np.where(k[None, :] >= hb, paC, 0.0).max(1))
+            Gx = np.einsum("xij,pj->pxi", Mx, Fp); X, Y = Gx @ ge2, Gx @ gf2; dx, dy = np.gradient(X, axis=1), np.gradient(Y, axis=1)
+            kap = np.abs(dx * np.gradient(dy, axis=1) - dy * np.gradient(dx, axis=1)) / np.maximum((dx ** 2 + dy ** 2) ** 1.5, 1e-12); rc = 1.0 / np.maximum(kap.max(1), 1e-9)
+            for j in np.nonzero(ok)[0]: R.append((a, math.degrees(ps[j]), m[j], rc[j], rho[j].min(), rho[j].max()))
+        R = np.array(R); f1 = R[R[:, 2] <= PAC] if len(R) else R; f2 = R[R[:, 3] >= RC_GROOVE] if len(R) else R
+        out.append(dict(level_over_hub2_face_mm=lev, candidates=int(len(R)), pa_ok=int(len(f1)), rc_ok=int(len(f2)),
+                        feasible_pa_and_rc=int(((R[:, 2] <= PAC) & (R[:, 3] >= RC_GROOVE)).sum()) if len(R) else 0,
+                        best_rc_with_pa_ok=(np.round(f1[np.argmax(f1[:, 3])], 3).tolist() if len(f1) else None),
+                        best_pa_with_rc_ok=(np.round(f2[np.argmin(f2[:, 2])], 3).tolist() if len(f2) else None)))
+        print(f"  level scan F+{lev:.2f}: {out[-1]}", flush=True)
+    return dict(rule=level_scan.__doc__.split("?")[1].strip(), gate_deg=round(PAC, 2), rc_floor_mm=RC_GROOVE, model_level_mm=round(float(G["hmid"]) - H2, 3), levels=out)
+
+
 def stage1_layout(M, G, l1b_body, dg):
     """the stage-1 levels (over hub 2's face F2, along u2) from the BUILT link 1b: the short arm's footprint over the crank's swing,
     link 1b's highest metal under it (its J2 plate top F+3.0, its strap), + RUNG + the pin's axial drift -> arm, relief, insert, pin;
@@ -638,8 +674,10 @@ def run_checks(M, dd, stops, rep, t0, g3, G, lay, gl):
     except Exception as e_:
         import traceback; traceback.print_exc(); rep["kinematics_exact"] = f"error {e_!r}"[:400]
     W(); print(f"kinematics: {rep.get('kinematics_exact')} ({time.time() - t0:.0f} s)", flush=True)
-    try: rep["drive_skin"] = USS.drive_skin(dd); W(); print(f"drive skin: { {k: v for k, v in rep['drive_skin'].items() if k != 'per_clip'} }", flush=True)
-    except Exception as e_: rep["drive_skin"] = f"error {e_!r}"[:300]; W()
+    if os.environ.get("DESMO_DRIVE_SKIN") == "1":
+        try: rep["drive_skin"] = USS.drive_skin(dd); W(); print(f"drive skin: { {k: v for k, v in rep['drive_skin'].items() if k != 'per_clip'} }", flush=True)
+        except Exception as e_: rep["drive_skin"] = f"error {e_!r}"[:300]; W()
+    else: rep["drive_skin"] = "not run in this pass (2-process cap; R2 judges every part on every clip frame): DESMO_DRIVE_SKIN=1 --checks-only"; W()
     print(f"checks done in {time.time() - t0:.0f} s", flush=True)
 
 
@@ -649,6 +687,7 @@ def main():
     ap.add_argument("--skip-base-search", action="store_true"); ap.add_argument("--checks-only", action="store_true"); ap.add_argument("--no-checks", action="store_true")
     ap.add_argument("--link-margin", type=float, default=0.0); ap.add_argument("--l1b-margin", type=float, default=0.1)
     ap.add_argument("--stop-after-drive", default=None, help="export hubs + links + drive to this glb and stop (a quick geometry look)")
+    ap.add_argument("--level-scan", default=None, help="comma list of groove levels over hub 2's face: run level_scan, write <out>/stage1_level_scan.json, stop")
     ap.add_argument("--stage1", default="model", choices=("model", "raised"), help="model: stage 1 at the verified model's levels (the verified metal; "
                     "crosses link 1b, R6); raised: above link 1b in a relief of link 2 with the pin re-searched (no feasible pin found at F+6.03: errors)")
     a = ap.parse_args(MY_ARGV); t0 = time.time(); dd = os.path.join(FULL, "designs", a.out); os.makedirs(os.path.join(dd, "step"), exist_ok=True)
@@ -662,6 +701,8 @@ def main():
     assert abs(float(l1b["fit"]["tr"]) - float(M.tr)) < 1e-2 and np.allclose(l1b["fit"]["m"], D.m, atol=1e-2), "the fit differs from the L1's"
     assert np.allclose(l1b["stack"]["f"], M.f, atol=1e-2) and abs(l1b["stack"]["fK"] - M.fK) < 1e-2
     Uu, C, F4, hr = BM.joints4(M)
+    if a.level_scan:
+        r_ = level_scan(M, G, [float(x) for x in a.level_scan.split(",")]); json.dump(r_, open(os.path.join(dd, "stage1_level_scan.json"), "w"), indent=1, default=float); return
     print(f"fit (the verifier's DCModel --blend on BEST) on Bench(60,160) {M.B.mode} at fold margin {KIT.FOLD_MARGIN}: near-touch gap {rep0['gap']}; hub levels "
           f"{np.round(F4, 2).tolist()} (J1 K J2 J3) tr {M.tr:.2f}; dK_lim {math.degrees(G['lim']):.2f} ({time.time() - t0:.0f} s)", flush=True)
     l1_stops = l1d["stack_mm"]["stops"]; stops = {}
