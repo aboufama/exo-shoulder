@@ -1,108 +1,99 @@
 # Alignment audit: desmo-slipper-knuckle-3r
 
-This is a re-audit, run 2026-10-18 06:04-06:20 UTC on the box (local only, niced, OMP_NUM_THREADS=1, at most 2
-processes; the farm is closed, $0 spent). The hourly loop (06:04) triggered it after the desmo-conecut CAD-triggered
-audit (8edc253) flagged that this design runs the same stage-1 level formula. Reference: conecut-knee-knuckle-3r, the
-verified lead (18.28). Tool VERSION 2026-10-17.6. The first audit of this row (2026-10-17 17:20-17:50) is superseded by
-this text; its skeptic section is kept below the rule.
+This is the hourly re-audit, run 2026-10-18 22:30-23:00 UTC on the box (local only, niced, OMP_NUM_THREADS=1, at most 2
+processes of mine; the farm budget line is spent, so $0 was spent). What triggered it: commit ea9371b (07:42, the lead's
+density audit) came after the last audit (06:26, WATCH). It wrote a new, lower number on the row, 18.81 bench / 23.77
+held at the kit's sampling density, next to v_gap 18.95, and HANDOFF said the exact re-wear was still pending. Reference:
+the verified lead conecut-knee-knuckle-3r (18.28). Tool VERSION 2026-10-18.1. This text replaces the 06:18 audit's
+auditor sections; its measurements that still stand are carried below. The skeptic sections are kept below the rule.
 
 ## Verdict and claim
 
-- **Claim:** v_gap **18.95** (score 93.11). This is the verifier's frozen exact Bench(110,360) at the re-placed stage-1
-  pin (a_s 9.5, psi 150, glev -0.5), with the blended-law IK. Held out 23.90.
-- **Ledger verdict: WATCH.** Entry 2026-10-18T06:18:28Z, by auditor, run `audit:desmo-slipper-knuckle-3r`.
-  - The tool verdict is watch, on the reporting check alone (the dashboard's sweep best 12.79 sits 6.16 below the
-    verified number).
-  - The judgement pass adds 11 findings, all watch: M3, NEW-inherited-stack, NEW-friction-cliff, NEW-silent-check,
-    NEW-refuted-best-params, R1, R2, T3, T5, NEW-ws-inband and G3.
-  - That makes 12 reason items. No finding is gamed.
-- **In one line:** the 18.95 reproduces exactly, but it belongs to a stage 1 that cannot be built. The groove, the pin
-  and the short arm sit inside link 1b's J2 lower plate. At the nearest level that clears the plate, the verified pin
-  no longer drives at all. The nearest pin that does drive and can be cut reads **20.38 bench (+1.43) and 25.33 held
-  (+1.43)**, and that costs in-band only.
-- **Rank:** at that level the design falls behind sidecar-parallelogram (19.13) and sidecar-roller-flank (20.08) on the
-  plain gap and on held out. It stays not-the-leader either way, and those two rows are not shown better for the wearer
-  (finding M3). Hence watch, not gamed.
+- **Claim:** v_gap **18.95** (score 93.11), unchanged. This is the verifier's frozen exact Bench(110,360) at the
+  re-placed stage-1 pin (a_s 9.5, psi 150, glev -0.5), with the blended-law IK. Held out 23.90.
+- **The new number on the row is now measured exact.** At the kit's density (1 sample per 4 mm2) the claim reads
+  **18.85 bench / 23.81 held**. The re-weight on the row said 18.81 / 23.77, so it holds to 0.04.
+  - The documented confirmation command (`tools/sample_density.py rewear`) crashes before any wear, so no exact
+    reading existed before this audit.
+  - I re-wore it through the verifier's own harness with a new adapter, `tools/alignment_density_rewear_desmo.py`.
+- **Ledger verdict: WATCH** (entry 2026-10-18T22:54:26Z, by auditor, run `audit:desmo-slipper-knuckle-3r`). The tool
+  gives watch on `density` (S6) and `reporting`. The judgement pass adds 11 findings, all watch, for 13 reason items.
+  No finding is gamed.
+- **In one line:** the density change is a fairer reading of the same metal, worth 0.10 here. It does not make the exo
+  better and does not change the rank. It does shrink the measured cost of the unbuildable stage 1:
+  - at the plate-clearing level the row reads **19.21 bench / 24.17 held** at the kit's density;
+  - that is a lift of **+0.36 / +0.36**, not the +1.43 / +1.43 the 06:18 audit measured as sampled;
+  - the stage 1 at the verified level still cannot be built, and no buildable stage 1 is verified.
 
-## The task's two measurements
+## What was measured in this audit
 
-### (1) Where stage 1 sits against link 1b's J2 plate and strap
+### (1) The density re-weight, worn exact
 
-Measured with the model and the verifier unchanged, using `tools/alignment_desmo_slipper_s1level.py geom` (new file).
-It runs the frozen protocol's fit model on fast Bench(60,160) with the verifier's `--blend` IK at the verified config.
-All levels are along the J2 axis u2, over hub 2's face. The face is H2 = c2.u2 + f[1] = 62.044 mm, the CAD's own
-definition (`user_style_desmo.py` H2 via `joints4`). The J2 axis passes through GH (offset 0.0).
-Source: `docs/alignment/remeasure/desmo-slipper-knuckle-3r_s1level_scan_fast.json`, `measured_at_verified_config`.
+The instrument is the new file `tools/alignment_density_rewear_desmo.py`.
+- It loads the verifier (`docs/concepts/verify/desmo-slipper-knuckle-3r.py`, `--blend`) through the 06:18 audit's
+  unchanged `tools/alignment_desmo_slipper_s1level.py`.
+- It thins roller, horn and ring2 with `tools/sample_density.py`'s own `_thin` (a greedy 2 mm Poisson disc). The thin
+  happens on the Frozen wear model, right after it copies the fitted shape and before any pose is scored.
+- The fit itself runs unthinned. The model, verifier and bench run unchanged.
 
-| part | level over hub 2's face (mm) | radius from the J2 axis (mm) |
-|---|---|---|
-| crank pivot PV | **-1.300** (desmo-conecut: -1.289) | 16.02 |
-| groove layer = ring samples (link 2 metal) | **0.60 .. 2.10** (mid 1.35) | ring 10 .. 11.05 sampled (rigid), the whole ring 1.6 .. 11.05 contact |
-| stage-1 pin (O1.5) | 0.60 .. 2.10 | 9.49 (inside the O20 footprint) |
-| short arm samples, root to pin | -1.75 .. +0.35 | 16.0 -> 9.5 |
-| link 1b's J2 lower member (the plate) | **0 .. 3.0** (tools/concept_kit.py line 24) | 0 .. 10 |
-| link 2's J2 member | from 3.15 | 0 .. 10 |
+Why a new file was needed: `CB_EXACT=1 python3 tools/sample_density.py rewear desmo-slipper-knuckle-3r bench|held`
+crashes before any wear, on both wears.
+- The error is `TypeError: _thin() takes from 2 to 3 positional arguments but 4 were given`. `fitted()` (line 146)
+  passes `thin = (names, step, wear)` through `*thin`.
+- On held, its Bench patch would also fire on the polish file's `Bench(20, 20)`, not on the fit bench.
 
-What the table shows:
+Source files: `remeasure/desmo-slipper-knuckle-3r_density_rewear_{bench,held}.json` (thin_at truncate, a_s 9.5 /
+psi 150). The control is `verify/desmo-slipper-knuckle-3r_v_{bench,held}_frozen_fix.json`.
 
-- The whole stage 1 lies inside link 1b's plate layer. The groove ring is link 2 metal, and link 2 turns about u2
-  against link 1b by q2. So the relief that link 1b would need is not the verifier's assumed "5 x 4 x 1.5 mm pocket"
-  for the pin and arm. It would be an annular cut through the plate, spanning the 99.9-deg ring sector plus the J2
-  travel. That cut is not measured here; the angle is from the model's `ring_az_deg`.
-- **The box excludes every buildable level.** The level formula hmid = PV.u2 + 3.15 + glev (model line 148) treats
-  the pivot as if it sat on the face, so the groove mid is F + 1.85 + glev. The box glev [-1.0, 1.5] (line 87)
-  therefore puts the groove bottom at F+0.10 .. 2.60, inside the plate for every value. The search could never have
-  found a buildable placement.
-- **Link 1b's strap** is not sampled within 12 mm of the J2 axis in the model (`l1b_samples_r_le_12` n = 0), so the
-  model holds no strap metal to read there. The desmo-conecut CAD found its strap crossed by 0.79-0.87 mm at the model
-  level. No CAD of this design exists.
+| | bench, as sampled | bench, kit density (exact) | held, as sampled | held, kit density (exact) |
+|---|---|---|---|---|
+| gap | 18.95 | **18.85** | 23.90 | **23.81** |
+| re-weight on the row | - | 18.81 | - | 23.77 |
+| in-band 2-14 (clip frames) | 0.8909 | 0.8919 | 0.8898 | 0.8907 |
+| reach / follow / contact | 0.725 / 1.0 / 0.0054 | same | 0.6828 / 1.0 / 0.0116 | same |
+| losses (fold / slide / contact) | 88 / 9 / 2 | same | 260 / 32 / 10 | same |
+| near-touch 1 / 2 mm (gap; poses) | 20.58 / 33.45; 3 / 30 | 20.48 / 33.27; 3 / 30 | 26.99 / 37.47; 14 / 67 | 26.90 / 37.31; 14 / 67 |
+| samples roller / horn / ring2 | 19 / 61 / 19 | 3 / 16 / 7 | 19 / 61 / 19 | 3 / 16 / 7 |
 
-### (2) Re-wear at the nearest buildable level
+- The fast fit is the control's exactly (13.53).
+- Every unthinned part's in-band, the contact poses (237 at -9.0 mm, 264 at -5.72 mm) and the overhead taken count
+  (8 / 28) equal the control's.
+- So the 0.10 comes from the weighting alone. The ring2 sector (0.54 in band) lost its 4x weight, and the well-placed
+  horn and roller (0.95 / 0.94) lost their extra weight the other way.
+- The 2 mm Poisson disc keeps fewer horn and roller samples (16 / 3) than the re-weight's n / ratio (27.1 / 4.3), so
+  the exact reading sits 0.04 above the re-weight.
 
-The instrument applies glev AFTER the model's clamp; the verifier's own `wear()` is unchanged.
+**A trap I fell into, and caught.** My first exact run took the verifier's `BEST`, which is the row's `best_params`:
+the REFUTED claim placement 9.25 / 154. It read 18.77 thinned, with ring2 at 9 samples instead of 19. I caught it only
+by comparing ring2 counts with the control, then discarded it and re-ran at 9.5 / 150. The adapter now defaults to
+`verification.verified_config` (finding NEW-refuted-best-params).
 
-- **Control:** glev -0.5 at the verified pin reproduces **18.95 exactly** (`remeasure/desmo-slipper-knuckle-3r_s1level_control_bench.json`).
-- **The level:** F+3.9, groove layer F+3.15 .. 4.65, glev 2.050. This is the nearest level that clears the plate top
-  F+3.0 by the 0.15 running gap. It is the same criterion desmo-conecut's audit used, and the most lenient one: the
-  short arm still runs F+0.74 .. 2.9, and the strap is not shown clear.
+### (2) The plate-clearing level at the kit's density
 
-**The pin pick, on the fast bench, before any exact or held-out wear.** At F+3.9 the verified pin 9.5/150 is dead: its
-pitch is 10.074, past R_HI 9.94, so the s1-pitch gate cuts dK_lim to 0 and the fast gap reads 101.19. Of 9 pins tried:
+This uses the same adapter with `--glev 2.0497 --set a_s=9.8 --set psi=150`: the 06:18 audit's nearest plate-clearing
+level, F+3.9, and its re-placed pin. Source files: `remeasure/desmo-slipper-knuckle-3r_density_rewear_s1level3p9_{bench,held}.json`.
 
-- 9.8/150 and 9.9/150 keep the drive with a groove centreline radius at or above the 0.75 pin radius. They read fast
-  14.94, rc 0.95 / 0.94, crank-free play 0.169 deg, desmo_fail [], dK_lim 49.5.
-- 9.7/152 and 9.8/152 read 14.21, but with rc 0.64, which is under the pin radius. That is the defect the verifier
-  refuted the claim placement on, so they are excluded.
-- The pick is 9.8/150, the same pin as desmo-conecut's F+3.9 candidate.
-
-**Exact frozen at F+3.9, pin 9.8/150** (`remeasure/desmo-slipper-knuckle-3r_s1level3p9_{bench,held}.json` with
-per-pose dumps; the dumps recompute to 20.38 / 25.34):
-
-| | verified level (F+1.35) | plate-clearing level (F+3.9) | delta |
+| | verified level (F+1.35) | plate-clearing (F+3.9) | lift |
 |---|---|---|---|
-| bench gap | 18.95 | **20.38** | +1.43 |
-| reach / follow / contact | 0.725 / 1.0 / 0.0054 | 0.725 / 1.0 / 0.0054 | 0 |
-| in-band 2-14 (clip frames) | 0.8909 | 0.8766 | -0.0143 |
-| ring sector samples, in band, median | 19, 0.54, 13.8 mm | 29, 0.175, 16.3 mm | the larger pin needs a larger ring, and it rides higher |
-| held-out gap | 23.90 | **25.33** | +1.43 |
-| near-touch 1 / 2 mm, bench | 20.58 / 33.45 | 22.01 / 34.96 | +1.4 / +1.5 |
-| stage-1 pa_pin / pa_cap max (gate 38.03 at mu 0.087) | 33.94 / 35.25 | 31.61 / 35.73 | |
+| bench, as sampled | 18.95 | 20.38 | +1.43 |
+| bench, kit density (exact) | 18.85 | **19.21** | **+0.36** |
+| held, as sampled | 23.90 | 25.33 | +1.43 |
+| held, kit density (exact) | 23.81 | **24.17** | **+0.36** |
+| ring2 samples (as sampled -> kit), in band, median | 19 -> 7, 0.54, 13.8 mm | 29 -> 8, 0.18, 16.3 mm | |
+| near-touch 1 / 2 mm, bench, kit density | 20.48 / 33.27 | 20.84 / 33.65 | |
 
-**Levels fully above link 1b** (fast only; `_s1level_scan_fast.json`):
-
-- At F+4.6, 2 of 6 pins tried keep a cuttable groove: 10.1/151 (rc 0.83, dK_lim 48.0, fast 15.02) and 10.3/150
-  (rc 1.05, dK_lim 45.25, fast 16.28).
-- At F+6.15, the CAD's "all of stage 1 above link 1b" layout (`user_style_desmo.stage1_layout`), **0 of 11** pins tried
-  keep the drive with rc >= 0.75. The drive-keeping ones have rc 0.20-0.54, and 3 of them fail groove-slop.
-- The scan is not exhaustive. On what was tried, a truly buildable version of this drive costs +1.4 to +2.75 fast, or
-  has no feasible pin.
+- The fit at F+3.9 equals the 06:18 control's (fast 14.94, dK_lim 49.5). Only the three thinned parts differ.
+- The metal did not move between the two readings. The raised ring is still 0.18 in band at a median of 16.3 mm. As
+  sampled, its 29 samples at 1 per mm2 counted 4x.
+- At the kit's density the lift is +0.36. That sits inside the lead's "+0.31..0.44" for desmo-conecut.
 
 ## What the wearer gets (measured)
 
-All figures are on the frozen verified config unless a column says otherwise. Sources: the per-pose dumps
-`remeasure/desmo-slipper-knuckle-3r_{bench,held}_perpose.json` (the verifier's, 18.94 / 23.91) and
-`_s1level3p9_{bench,held}_perpose.json` (this audit), plus `remeasure/desmo-slipper-knuckle-3r_probe_bench.json`.
-Counts of taken poses use 0 <= min metal < x.
+All figures are on the frozen verified config, as sampled, unless a column says otherwise. The pose counts are
+geometric: the density change moves no pose. Sources: the per-pose dumps
+`remeasure/desmo-slipper-knuckle-3r_{bench,held}_perpose.json` (re-counted this audit) and
+`_s1level3p9_{bench,held}_perpose.json`, plus `remeasure/desmo-slipper-knuckle-3r_probe_bench.json`. Counts of taken
+poses use 0 <= min metal < x.
 
 | | bench, verified level | bench, F+3.9 | held, verified | held, F+3.9 |
 |---|---|---|---|---|
@@ -112,96 +103,124 @@ Counts of taken poses use 0 <= min metal < x.
 | taken overhead poses < 2 mm | 2 | 3 | 8 | 8 |
 | closest taken metal | 0.072 mm | 0.072 mm | 0.33 mm | 0.33 mm |
 | contact poses, summed depth, deepest | 2, 14.72 mm, 9.01 mm at (15, 165, -60): crank / lug | same | 10, 46.14 mm, 9.05 mm at (30, 165, -45) | same |
+| clip in-band 2-14, as sampled / kit density | 0.8909 / 0.8919 | 0.8766 / 0.8883 | 0.8898 / 0.8907 | 0.8755 / 0.8871 |
 | workspace in-band, all taken / elev 90-140 / overhead (unscored) | 0.853 / 0.801 / 0.938 | not probed | - | - |
 
 - **Springs:** none. K is held both ways, by the groove (stage 1) and the two-walled slot (stage 2).
-- **Stops:** the slot's end cap is stop A. The drive range ends at K 49.5 (stage-2 horn pressure angle) at both
-  levels. J2 fold losses: 88 bench / 260 held.
-- **Friction:** the drive jams from mu 0.136 on the linear reading at the verified level, and from **mu 0.128** at F+3.9
-  (pa_cap 35.73). The lead's rolling stage 1 keeps its drive at mu 0.15.
-- **Cuff twist / K play:** crank-free play is 0.174 deg at the verified level and 0.169 at F+3.9 (the model's scan;
-  the verifier's dense scan reads 0.188). Cuff twist and drag are not measured, because no CAD exists (G3).
+- **Stops:** the drive range ends at K 49.5 (the stage-2 horn's pressure angle) at both levels. J2 fold losses are 88
+  bench / 260 held.
+- **Friction:** the drive jams from mu 0.136 on the linear reading at the verified level, and from mu 0.128 at F+3.9.
+  The lead's rolling stage 1 keeps its drive at mu 0.15.
+- **Cuff twist / K play:** crank-free play is 0.174 deg (the verifier's dense scan reads 0.188). Cuff twist and drag
+  are not measured, because no CAD of this row exists (G3).
 - **Near-singular postures:** the min fold margin in th is 5.181 bench and 5.006 held, with K on its law. K play costs
   about 0.1 deg of that (T3).
 
 ## Findings (all watch; `docs/alignment/desmo-slipper-knuckle-3r.findings.json`)
 
-1. **M3, measured now.**
-   - *Evidence:* the clash and the re-wear above. The 18.95 sits at a stage-1 level inside link 1b's plate. The
-     plate-clearing re-wear costs +1.43 bench and +1.43 held, all of it in-band; above link 1b there is no or a more
-     costly pin.
-   - *Why the exo is not better than its number:* the built drive must ride higher. It then puts the ring sector's
-     metal further off the skin (median 16.3 mm), so the 1-cm band reads worse, and the drive jams at a lower friction.
-   - *Why watch:* the design is not the leader before or after. The rows it would fall behind (sidecar-parallelogram
-     19.13 / 22.03, sidecar-roller-flank 20.08 / 22.23) are much worse at 2 mm near-touch (50.14 / 46.82 vs 34.96), and
-     their held numbers come from older harnesses.
-   - *Action:* re-claim at a buildable level before any CAD.
-2. **NEW-inherited-stack (proposed catalogue M6), seen from the source.**
-   - *Evidence:* the formula (line 148) and the box (line 87) are this model's. desmo-conecut and, through it,
-     lowarm-halfring (17.96, the plain-gap top row) inherit them. A second chain shows the same 1.30 mm pivot offset
-     and the same ~1.4-1.5 point in-band cost.
-   - *Reporting error:* the lead's note on this row says it "inherits desmo-conecut's" layer. It is the reverse.
-   - *Action:* one fix in the family model, then re-claim the family's rows.
-3. **NEW-friction-cliff (carried):** the jam friction moves from 0.136 to 0.128 at the buildable level.
-4. **NEW-silent-check (carried):** RC_MIN 1.5 still never cuts. At the buildable levels, the pins that score best pass
-   the model with rc 0.28-0.64, under the pin radius. A re-placement search needs the gate enforced first.
-5. **NEW-refuted-best-params (carried):** best_params is still the refuted 9.25/154. At F+3.9 that pin keeps the drive
-   but has rc 0.51.
-6. **R1:** the row and the dashboard still show 18.95 with "unmeasured on this row". It is measured now.
-7. **R2 (tool reporting):** the sweep best is 12.79 (score 95.35) against the verified 18.95.
-8. **T3 (carried):** held fold margin 5.006 with K on its law.
-9. **T5 (carried, report only):** contact depth 14.72 mm bench and 46.14 mm held, unchanged at F+3.9.
-10. **NEW-ws-inband (carried):** the raised-arm workspace reads in-band 0.801, unscored. The raised ring adds metal over
-    14 mm.
-11. **G3 (missing measurement):** no CAD, R17, cuff twist or drag for this row. The sibling's CAD twists the cuff
-    11.74 deg at f 0.05.
+1. **S6, the new number.**
+   - *Evidence:* section (1). The re-weight 18.81 / 23.77 is confirmed exact at 18.85 / 23.81. The documented
+     confirmation command crashes.
+   - *Why the exo is not better:* no metal moved. The kit-density reading weights the same metal by area instead of
+     by sampler pitch.
+   - *Why watch, not gamed:* v_gap stays 18.95. The change is cross-row and was not made with this design. At the
+     kit's density the row stays behind:
+
+     | row | bench | held |
+     |---|---|---|
+     | conecut-knee (lead) | 18.28 | 22.43 |
+     | slipper-nose | 18.56 | 23.52 |
+     | trimlug | 18.58 | 23.54 |
+     | desmo-conecut (re-weight) | 18.68 | 22.89 |
+
+   - *Action:* put the exact pair on the row next to v_gap. Fix `sample_density.py rewear`.
+2. **M3, carried; magnitude corrected.**
+   - *Still true:* stage 1 sits inside link 1b's J2 plate, and the verified pin is dead at F+3.9.
+   - *Corrected:* the buildable reading is 19.21 / 24.17 at the kit's density, a lift of +0.36 / +0.36. Most of the
+     06:18 audit's +1.43 was the 4x ring2 sampler.
+   - *Rank at the kit's density:* 0.08 behind sidecar-parallelogram (19.13) and ahead of sidecar-roller-flank (20.15)
+     on the bench; behind both held out (22.03 / 22.42). Not the leader under any reading.
+   - *Why the exo is not better:* the 18.95 belongs to a drive that cannot be built.
+   - *Action:* re-claim at a buildable level with the radius gate enforced, and carry the plate-clearing reading in
+     both conventions.
+3. **NEW-inherited-stack (proposed M6), carried.**
+   - The level formula (model line 148) and the box (line 87) are this model's. desmo-conecut and lowarm-halfring
+     inherit them.
+   - The row's note now names the source correctly.
+4. **NEW-friction-cliff, carried.** The drive jams from mu 0.136 (0.128 at F+3.9). The score reads one mu (0.087).
+5. **NEW-silent-check, carried.** RC_MIN 1.5 never cuts. The 06:27 skeptic's missed[1] is added: enforced as declared,
+   the gate would cut the verified claim itself (rc_min 0.90, lim_by_gate.radius 0.5 deg). The physical floor
+   (0.75) passes, with a 0.14 mm ridge that has no stress number.
+6. **NEW-refuted-best-params, carried; it bit this audit.** best_params is still 9.25 / 154. It is the third instrument
+   that silently wears the refuted placement.
+7. **R1, partly fixed.**
+   - *Fixed:* the row now records the plate-clearing numbers, names the source correctly, and gives the verified
+     paired reading ahead of the "HISTORICAL TEXT" (the skeptic's missed[0]).
+   - *Open:* the verdict pairs 20.38 / 25.33 (as sampled) with 18.81 / 23.77 (kit density, re-weight). Subtracting
+     them suggests a 1.57 cost; the like-for-like cost is +1.43 as sampled or +0.36 at the kit's density.
+8. **R2 (tool reporting), carried.** The dashboard's sweep best of 12.79 (score 95.35) sits 6.16 below the verified
+   number.
+9. **T3, carried.** The held fold margin is 5.006 deg, with K on its law. No per-pose margin with K play is on file.
+10. **NEW-ws-inband, carried.** The raised-arm workspace reads 0.801 in band (unscored). That is not a ring2 sampling
+    artefact.
+11. **G3, carried.** There is still no CAD, R17, cuff-twist or drag reading for this row (re-checked 22:50).
+
+T5 is dropped. The 06:27 skeptic refuted it against the documented reference (the current lead: x0.73 bench / x0.76
+held), and the tool's contact_depth check reads ok.
 
 ## Patterns walked and found clean
 
-- **T1 / T2:** 14.5 points live in the 1-2 mm shell at the verified level (the tool's reading: 2 mm near-touch minus
-  plain), and 14.58 at F+3.9. Both are under the 15-point line. The band read as 3-14 mm costs 0.15.
+- **T1 / T2:** 14.4 points live in the 1-2 mm shell at the kit's density (33.27 - 18.85) and 14.5 as sampled. Both are
+  under the 15-point line.
 - **T4:** blend 10 sits at its box edge. It spends groove radius, not a fold margin (NEW-silent-check).
-- **S1 / P1:** held +4.95, the family's.
+- **S1 / P1:** held is +4.96 at the kit's density and +4.95 as sampled, the family's usual gap.
 - **S2:** sample-weighted 0.890 vs part-weighted 0.898. **S3:** every moving body is sampled.
-- **S4:** the sample is the standard bench's.
-- **S5:** full flood = static 18.95.
-- **M1 / M2:** O20 hubs, 0 passive translations, ISO 8734 pins, MR63ZZ crank pair. M1 is not counted under M3: the
-  parts are real components; they are placed in another part's volume.
-- **M4:** K moves 45.6 deg. **M5:** no spring.
-- **P2:** the pin pick here was made on fast only, before the held wear.
-- **P3 / R3:** convergence gate 0/0/0. This audit's control reproduced the claim; it was not re-measured until lucky.
-- **P4:** no bench / judge / metric file changed in the row's 4 commits.
+- **S4:** the standard bench sample. **S5:** the full flood equals static (18.95).
+- **M1 / M2:** O20 hubs, 0 passive translations, ISO 8734 pins, an MR63ZZ crank pair. **M4:** K moves 45.6 deg.
+  **M5:** no spring.
+- **P2:** the F+3.9 pin was picked on fast only, before any held wear. **P3 / R3:** convergence gate 0/0/0. Both
+  re-wears here reproduce the control on every unthinned term. The discarded run was at the wrong placement, not a
+  re-roll.
+- **P4:** no bench, judge or metric file changed in the row's 7 commits. The density tool is new and cross-row, and it
+  changes no v_gap.
+- **R4:** the dashboard's v_gap 18.95 equals the row's and recomputes from its own terms (0.91 in-band + 17.50
+  reach + 0.54 contact). The kit-density reading is not on the dashboard as a number.
 - **G1 / G2:** no spring. **G4:** same seats as the lead. **G5 / G6:** complexity 15.75 recomputed, 3 active DOF.
 
 ## Re-wear rule (step 2)
 
-The row's last commit (2f4e435, 06:00:55) changed only its verdict text. The claim, best_params and verification are
-unchanged, so `tools/alignment_audit.py remeasure` was not re-run. The control above re-wears the verified claim
-through the same harness today, at 18.95. The existing `remeasure/desmo-slipper-knuckle-3r_{bench,held}.json` (17:31,
-19.00 / 23.95 on the model's linear IK) stand.
+The row's last commit (ea9371b, 07:42) changed only its verdict text: the density note. The claim, best_params and
+verification are unchanged, so `tools/alignment_audit.py remeasure` was not re-run. The existing
+`remeasure/desmo-slipper-knuckle-3r_{bench,held}.json` (19.00 / 23.95 on the model's linear IK) stand. The new number
+on the row is the density reading, and that was re-worn exact, at both levels, bench and held (sections 1 and 2).
 
 ## Numbers I could not get, and why
 
-- **The real relief swept in link 1b by the ring sector:** the ring sector plus the J2 travel. Not computed here;
-  no CAD of this row exists.
-- **Strap clearance:** there are no link 1b strap samples near J2 in the model.
-- **A wide pin scan at F+4.6 and F+6.15** (20 pins tried in all, time box), and an exact wear above link 1b.
-- **The workspace wear probe at F+3.9:** time box.
+- **The real relief that the ring sector would sweep in link 1b:** no CAD of this row exists.
+- **Strap clearance:** the model has no link 1b strap samples near J2.
+- **A wider pin scan above link 1b** (F+4.6 / F+6.15) and an exact wear there: time box.
+- **The workspace wear probe at F+3.9 and at the kit's density:** time box.
 - **Cuff twist and drag:** no CAD.
+- **Exact kit-density readings of the rows this one is ranked against:** they are re-weights from
+  `docs/alignment/sample_density.md`. conecut-knee's roller is 4.55x, for example. I did not wear them.
 
 ## Proposals (not applied; none feeds the verdict)
 
-1. **Family level fix (measurement change).** Measure stage 1's level from hub 2's face, not the crank pivot. Re-base
-   the glev box so that the groove bottom is >= F+3.15. Enforce RC_MIN, or a floor of pin radius + ridge.
-   - Measured effect on the verified rows: this row 18.95 -> 20.38 bench / 23.90 -> 25.33 held at the nearest
-     plate-clearing pin. desmo-conecut 18.98 -> 20.50 bench (its audit).
-   - lowarm-halfring 17.96: not measured. It runs the same layer at glev -1.0.
-   - No other verified row has a desmo stage 1.
-2. **A layer check in every verifier of a stacked drive:** sample each drive part against the members of the joint
-   whose layer it shares (here link 1b's J2 plate F+0..3 and its strap). This row is the first measured case where a
-   verifier's "relief pocket" assumption hid a layer conflict.
-3. **Reporting:** write the measured plate-clearing number on the row as a separate field next to v_gap. Do not
-   replace v_gap without a verifier.
+1. **Fix `tools/sample_density.py rewear` (instrument fix).**
+   - Pass `(names, step)` to `_thin`. Detect the fit bench by size or call order, not as "the first Bench".
+   - Thin on the Frozen model after it copies the fit, not before the fit runs.
+   - Then run it on every row the table re-weights.
+   - Measured effect: here, bench 18.81 -> 18.85 and held 23.77 -> 23.81 (re-weight -> exact). No rank change.
+2. **One convention per sentence on rows (reporting).**
+   - When a measurement change is pending, a row shows each reading in the same convention as the number it is compared
+     with.
+   - Here: as sampled 18.95 -> 20.38 / 23.90 -> 25.33; kit density 18.85 -> 19.21 / 23.81 -> 24.17.
+3. **Family level fix (carried; a measurement change).** Measure stage 1's level from hub 2's face, re-base the glev box
+   above F+3.15, and enforce the radius gate. Measured effect on this row: 18.95 -> 20.38 as sampled, or 18.85 -> 19.21
+   at the kit's density. desmo-conecut's is in its own audit.
+4. **best_params = the verified placement (reporting).** Keep the claim's 9.25 / 154 in a `claim_params` field.
+   Measured effect: none on any number. Three instruments, this audit's adapter among them, stop landing on the refuted
+   placement.
 
 ---
 
