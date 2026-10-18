@@ -1,0 +1,195 @@
+{
+ "fit_fast": {
+  "gap": 13.53,
+  "reach": 0.775,
+  "follow": 1.0,
+  "inband14": 0.8897,
+  "inband10": 0.5114,
+  "contact": 0.0,
+  "l2": {
+   "n": 184,
+   "clear_min": 13.98,
+   "lost": 0
+  }
+ },
+ "frozen": {
+  "gap": 19.23,
+  "reach": 0.725,
+  "follow": 1.0,
+  "inband14": 0.8881,
+  "inband10": 0.5059,
+  "contact": 0.0054
+ },
+ "mode": "exact",
+ "n": 470,
+ "why": {
+  "fold": 88,
+  "slide": 9,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 2
+ },
+ "parts_ib14": {
+  "hub1": [
+   0.999,
+   8.6,
+   80
+  ],
+  "hubK": [
+   0.992,
+   7.9,
+   80
+  ],
+  "hub2": [
+   0.955,
+   11.1,
+   80
+  ],
+  "hub3": [
+   0.739,
+   11.5,
+   80
+  ],
+  "E": [
+   0.966,
+   6.5,
+   104
+  ],
+  "boss": [
+   0.988,
+   8.5,
+   32
+  ],
+  "pad": [
+   1.0,
+   8.1,
+   32
+  ],
+  "knee": [
+   0.941,
+   10.7,
+   85
+  ],
+  "crank": [
+   0.819,
+   11.2,
+   129
+  ],
+  "roller": [
+   0.938,
+   10.0,
+   19
+  ],
+  "horn": [
+   0.954,
+   8.2,
+   16
+  ],
+  "ring2": [
+   0.54,
+   13.8,
+   19
+  ],
+  "L1a": [
+   0.981,
+   10.1,
+   8
+  ],
+  "L1b": [
+   0.931,
+   8.1,
+   36
+  ],
+  "L2": [
+   0.737,
+   12.0,
+   124
+  ]
+ },
+ "overhead": {
+  "ws": 28,
+  "taken": 8
+ },
+ "dK_lim": 49.5,
+ "why_lim": "pressure_horn",
+ "contacts": [
+  {
+   "i": 237,
+   "kind": "ws",
+   "elev": 165.0,
+   "plane": 15.0,
+   "axial": -60.0,
+   "mm": -9.0
+  },
+  {
+   "i": 264,
+   "kind": "ws",
+   "elev": 165.0,
+   "plane": 30.0,
+   "axial": -60.0,
+   "mm": -5.72
+  }
+ ],
+ "audit": {
+  "gap_near1": 20.86,
+  "near1_poses": 3,
+  "gap_near2": 33.7,
+  "near2_poses": 30,
+  "near_touch_min_mm": 0.07
+ },
+ "id": "desmo-slipper-knuckle-3r",
+ "wear": "bench",
+ "exact": true,
+ "params": {
+  "a_s": 9.5,
+  "psi": 150.0,
+  "glev": -0.5,
+  "blend": 10.0,
+  "capK": 0.0,
+  "c_slot": 0.01,
+  "rho_e": 1.0,
+  "nose_r": 1.25,
+  "mu": 0.087,
+  "g": 2.3934,
+  "beta": -176.684,
+  "r_c": 15.3739,
+  "lift": 0.7882,
+  "hl": 1.9442,
+  "zr": 4.0293,
+  "s_arm": 4.0,
+  "r_lobe": 8.2661,
+  "az2": 45.8211,
+  "el2": 41.0855,
+  "lE": 67.832,
+  "phiE": -2.7863,
+  "lc": 21.1499,
+  "phib": -58.8084,
+  "a1max": 58.7678,
+  "kK": 2.1534,
+  "smhi": 16.8433,
+  "bk1": 26.0,
+  "bk2": 38.0336,
+  "wall_rows": "0.75",
+  "wall_step": 2.0
+ },
+ "sets": {},
+ "thinned": {
+  "horn": [
+   61,
+   16
+  ]
+ },
+ "thin_names": [
+  "horn"
+ ],
+ "thin_at": "truncate",
+ "blend": true,
+ "glev_used": [
+  -0.5
+ ],
+ "secs": 97.0,
+ "tool": "tools/alignment_density_rewear_desmo.py",
+ "note": "verifier harness unchanged (--blend); thinning = tools/sample_density.py _thin at 2 mm on the fitted shape before the wear"
+}

@@ -351,3 +351,73 @@ Final verdict (`tools/alignment_ledger.py skeptic`, entry 2026-10-18T06:26:41Z):
 
 **Proposal (measurement change, not an input to this verdict):** none new. The audit's family level fix and the 2026-10-17
 skeptic's "gate on the built groove" proposal cover the open items.
+
+## Skeptic (2026-10-18 ~23:30 UTC, skeptic:desmo-slipper-knuckle-3r), on the 22:54 re-audit
+
+Final verdict (`tools/alignment_ledger.py skeptic`, entry 2026-10-18T23:30:44Z): **WATCH**.
+- All 13 reasons are upheld; none is refuted. The rulings file `docs/alignment/desmo-slipper-knuckle-3r.rulings.json`
+  replaces the 06:27 file, whose rulings are kept in the section above.
+- Local only: niced, OMP_NUM_THREADS=1, 2 processes at a time, about 100 s per wear, $0. Model, verifier, bench and
+  kit unchanged; I ran the auditor's adapter `tools/alignment_density_rewear_desmo.py` as committed.
+
+### Re-measured (exact Bench(110,360), CB_EXACT=1, verifier --blend harness)
+
+| run | auditor | my re-run | file (`docs/alignment/remeasure/`) |
+|---|---|---|---|
+| kit density, verified 9.5 / 150 | 18.85 | **18.85** (ib14 0.8919; thinned 19->3, 61->16, 19->7) | `desmo-slipper-knuckle-3r_skeptic_density_rewear_bench.json` |
+| kit density, F+3.9, pin 9.8 / 150 | 19.21 | **19.21** (ring2 29->8, 0.184 in band, 16.3 mm) | `desmo-slipper-knuckle-3r_skeptic_density_rewear_s1level3p9_bench.json` |
+| horn alone at kit density | re-weight 19.16 | **19.23** (+0.28) | `desmo-slipper-knuckle-3r_skeptic_density_rewear_horn_bench.json` |
+| ring2 alone at kit density | re-weight 18.54 | **18.50** (-0.45) | `desmo-slipper-knuckle-3r_skeptic_density_rewear_ring2_bench.json` |
+
+- Held 23.81 and 24.17 recompute by hand from the auditor's frozen terms (100[(0.90 - ib14) + (0.90 - reach)] + 100
+  contact).
+- I diffed every `parts_ib14` key against the control `verify/desmo-slipper-knuckle-3r_v_{bench,held}_frozen_fix.json`:
+  only roller, horn and ring2 differ. Fit 13.53, losses 88 / 9 / 2 (held 260 / 32 / 10), contact poses and near-touch
+  pose counts equal the control.
+- The crash is real: `tools/sample_density.py` line 284 passes `thin=(names, KIT_STEP, wear)`, line 146 calls
+  `_thin(M1, *thin)`, and `_thin(M, names, step=KIT_STEP)` (line 204) takes at most 3 positional arguments.
+- The density watch now rests on exact numbers, not only re-weights: both single-part moves are over TH
+  density_shift 0.1. They cancel in sign, so the all-over-dense exact shift is -0.10 bench / -0.09 held. The over-sampling
+  costs this row 0.10; it does not flatter it.
+
+### Rulings
+
+| key | ruling | evidence (short; the full text is in the rulings file) |
+|---|---|---|
+| density | upheld | Ratios 4.402 / 2.254 / 2.449 > TH 2.0. Exact single-part moves horn +0.28, ring2 -0.45 > TH 0.1 (table above). |
+| reporting | upheld | `morphs.json` sweep_gap 12.79 vs v_gap 18.95 (6.16 > the sg < vg - 5 trigger), unchanged. |
+| S6 | upheld | Reproduced 18.85 to the digit, with the control diffed key by key. desmo-conecut's exact kit-density wear (18.65 / 22.86) is within 0.03 of the re-weight used in the rank, so the order holds. The exact pair is still not on the row. |
+| M3 | upheld | Reproduced 19.21 at F+3.9. Lift +0.36 kit density vs +1.43 as sampled. It is still a lower bound, because the short arm stays in the plate. Model unchanged since c4960fe. |
+| NEW-inherited-stack | upheld | Lines 87 / 148 re-read. desmo-conecut's own exact kit-density lift is +0.38 (19.03 vs 18.65), the same order as +0.36 here. |
+| NEW-friction-cliff | upheld | tan(7.75) = 0.136 and tan(7.27) = 0.128. The score reads mu 0.087 only. No force analysis exists on a built groove. |
+| NEW-silent-check | upheld | Line 71 RC_MIN 1.5. The radius check appears only in lim_by_gate (line 286), not in the cutting gates (line 182). My wears again report dK_lim 49.5. |
+| NEW-refuted-best-params | upheld | The row's best_params is still 9.25 / 154. The adapter now reads verified_config (lines 66-68), and my runs wore 9.5 / 150. |
+| R1 | upheld | The verdict text mixes 20.38 / 25.33 (as sampled) with 18.81 / 23.77 (re-weight). Its lift "+0.31..0.44" is desmo-conecut's range, not this row's +0.36. 18.85 / 23.81 and 19.21 / 24.17 are absent. |
+| R2 | upheld | Sweep best 12.79 (2026-10-17 15:38) predates the re-placement. Nothing re-wears it at the verified placement or at a buildable level. |
+| T3 | upheld (missing) | The only K-play numbers are the slop scan (max 0.174, worst_tol 0.261, held+free 0.289 deg). There is no per-pose th margin with play, and the held min is 5.006 against TH 5.0. |
+| NEW-ws-inband | upheld | `probe_bench.json` ws_elev90_140 reads 0.8009 in band, 0.1983 over 14 mm (38 taken of 85). The probe's IK differs from the verifier's by 0.0005 ib14. |
+| G3 | upheld (missing) | No desmo_slipper build in `pipeline/full-exo/designs`, and no cad / judge / r17 / cuff_twist key on the row. |
+
+### Missed (for the next audit; not counted in this verdict)
+
+0. **The direction of the S6 change depends on which parts count as "the kit's density".**
+   * What the auditor normalised: only the over-dense parts (roller, horn, ring2).
+   * What it left alone: link 2 (124 samples, 0.737 in band, the row's worst-placed big part) at 0.843x the nominal
+     1 pt / 4 mm2 (hull 0.799x), and L1b at 0.727x. Both are on the kit's own radius-scaled strap grid.
+   * Re-weighted from the control's saved per-part in-band with `sample_density`'s ratios (my computation):
+     * over-dense parts plus L2 at nominal: 19.20 bench / 24.15 held;
+     * every part except the masked lattice L1a at nominal: 19.11 / 24.07.
+   * So at true nominal area weighting the row reads 0.16 HIGHER than as sampled, not 0.10 lower.
+   * The tool's `all_parts_at_kit` (18.96 / 23.91) is not a clean reading either: it also sets L1a, a masked lattice
+     that the tool itself credits one kit cell per sample, to 24.3 samples.
+   * Not gaming: the strap grid is the kit's and is the same on every row. But "at the kit's area weighting the row
+     reads 0.10 lower" holds only under the kit's radius-scaled grid, and the convention band here is about ±0.25.
+   * Proposal (a measurement change, not applied): before ranking rows 0.1-0.2 apart on kit-density numbers, read
+     L2's density on the neighbours as well.
+1. **The re-weight's per-part error is up to 0.07, larger than its net error.**
+   * Measured: horn alone exact 19.23 vs re-weight 19.16; ring2 alone exact 18.50 vs re-weight 18.54.
+   * The net all-over-dense error is only 0.04 because the two errors cancel.
+   * Effect: on rows that carry only one over-dense part, the re-weight can miss by about 0.07. That matters for a
+     lead change decided by under 0.1 (e.g. slipper-nose / trimlug vs conecut-knee, roller only).
+   * Action: wear such rows exact (this adapter, or `sample_density.py rewear` once fixed) before a lead decision rests
+     on the re-weight.
