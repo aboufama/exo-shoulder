@@ -1,0 +1,47 @@
+[
+ {
+  "key": "dominance",
+  "refuted": false,
+  "evidence": "Measurement re-derived from the per-pose dumps on one basis (metal = min(min_mm, cmin), the deep_audit basis; docs/alignment/remeasure/offset-shortcar-relay-4r_skeptic.json): bench plain 13.73 vs the lead's 18.29, 2 mm 45.56 vs 34.84 (the tool's deep.gap_near2 46.08 counts one more pose, 57 vs 56); the lead's 34.84 reproduces exactly, so it is the same harness (frozen exact Bench(110,360), both). The mechanism the reason names is in the data: on the 372 poses BOTH take, 48 have metal < 2 mm against the lead's 33, and 8 of the 24 new takes are < 2 mm. Held, same basis: 47.71 vs 37.11. Threshold: the tool's c_dominance reports watch (never gamed) since the A1 gate was retired 2026-10-17; that is its documented reading. Not refuted. Note: the plain gain 4.54 includes 1.02 points of pooled in-band from the relay hardware's 344 samples per frame (parts_ib14.relay_hw_inband 0.98); on the claim's own gate the gain is 3.52."
+ },
+ {
+  "key": "continuity",
+  "refuted": true,
+  "evidence": "The flood is on file for the claim, bench and held: docs/concepts/verify/offset-shortcar-relay-4r/verifier_claim.json pick.continuity: dropped_relayed 0, phi0_taken_not_connected 0, static gap 13.74 = connected plain 13.74; flood env 1432, env_relayed 154, env_relayed_connected 153, edges 3039 / ok 3014 (refused: open 3, phi_jump 21, passive_jump 0, active_jump 1), seeds 513. verifier_held.json pick.continuity: dropped_relayed 0, static 16.64 = plain 16.64. The audit's own re-wear repeats it: docs/alignment/remeasure/offset-shortcar-relay-4r_bench.json continuity.dropped_relayed 0. The flood is the rule's: AA.flood_relay(step_deg=2.0, passive_jump=10.0) (docs/concepts/models/armarc-relay-knuckle-4r.py:118), relay never > 10 deg per 2-deg slerp edge, K / knee pins never > 10 deg, seeds at phi 0. It is kinematic and keyed on PHI / tilt / taz / sgn only (flood_PHI35_t12_a235_s1.json), which this claim shares with its prepare. The 'no flood on file' reading is the tool not reading <verify>/<id>/*.json:pick.continuity, as the auditor wrote."
+ },
+ {
+  "key": "judgement:T5",
+  "refuted": false,
+  "evidence": "Re-derived (docs/alignment/remeasure/offset-shortcar-relay-4r_skeptic.json). Bench: 13 contacts, 46.18 mm summed, deepest 9.79 mm (pose 262, ws (30,135,0)); the lead 4 contacts, 20.24 mm, deepest 8.93: x2.28, +25.94 mm. Held (verifier_held_perpose.json, which reproduces held plain 16.63): 43 contacts, 172.14 mm on min_mm (173.02 with the crown sets), deepest 12.23 mm; the lead 14 contacts, 60.97 mm: x2.82-2.84, +111.2 mm. TH depth_ratio 2.0 and depth_floor_mm 5.0 are both passed on a wear both have. The 4 bench / 14 held shared contacts have IDENTICAL depth in both designs (20.24 / 60.97), so the whole excess is the 9 bench / 29 held new contacts, every one a pose the lead does not evaluate (ev false: lost to the fold). That is the T5 pattern as written (ALIGNMENT.md T5: 'taking a pose in deep contact that another design loses to the fold'). Upheld."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "Bench re-derived on the deep_audit basis: 2 mm 45.56 (tool 46.08) vs the lead's 34.84, 1 mm 17.91 vs 19.92; taken poses < 2 mm 56 vs 33; on the 372 common taken poses 48 vs 33; new takes < 2 mm 8 of 24, < 1 mm 4 (0.46 / 0.69 / 0.77 and 0.996 at pose 369; the auditor listed 3). The held comparison in the reason mixes bases: 41.29 is the model's own near2 (the proxtrack near() over B.res, no crown sets M.cmin) against the lead's 37.10 on the deep basis. On one basis (verifier_held_perpose.json, min(min_mm, cmin)) held reads 47.71 vs 37.11 (-10.60, not -4.19); held taken poses < 2 mm 135 vs 71, common 105 vs 71, new takes 30 of 81 < 2 mm. The finding is understated, not wrong. Report-only under the user's 2026-10-17 ruling, so watch. Upheld."
+ },
+ {
+  "key": "judgement:NEW-clearance-floor",
+  "refuted": false,
+  "evidence": "Measured on file: docs/concepts/verify/offset-shortcar-relay-4r/verifier_claim.json pick.xcheck.clearance_margin_taken: lt1 0, lt1.1 112, lt1.2 182, lt2 284 (ws 61 / 110 / 185); the lowest 15 are clip frames at 1.002 mm, part E over hw car. verifier_held.json: lt1.1 270, lt1.2 400. verifier_bump12.log: bump 1.2 -> gate 14.88, chain-only ib 0.8886, plain 13.74, 0 jams (+0.12). best_params.bump 1.002 sits 0.002 mm past the model's 1 mm floor (proxtrack's own table used bump 1.0). No documented threshold exists for a part-to-part floor, and the cost is small and measured, so it stays a watch. Upheld."
+ },
+ {
+  "key": "judgement:T4",
+  "refuted": false,
+  "evidence": "Measured on file: verifier_delta_probe.log delta 4.5 -> 14.76 (0 jams), delta 5.0 -> 27.53 (37 jams, follow 0.8818, ws taken 262); envsel_s2.log ds 34 / delta 4.5 -> 47.80 (77 jams), ds 31 / delta 6 -> 119.05 (211 jams); envsel_s1.log delta 0 -> 15.64 vs delta 4.5 -> 15.61 (the offset buys 0.03). 0.5 deg at R_t 80.6 mm = 0.70 mm. The documented T4 is a singularity-margin walk, which this is not (th margin min 5.000, 0 of 396 below 5); the measured fact the reason rests on (no robustness margin: a 0.7 mm build error moves the reading by 12.77, and a 3 mm station error at delta 4.5 by 33) stands. Upheld."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "A missing measurement; none on file. docs/concepts/offset-shortcar-relay-4r.md:166 and :297 ('the R17 preload covers gravity only (no carriage friction or coil hysteresis)'; '3 bistable relay poses ... worth <= ~0.6-0.8 points'); docs/concepts/proxtrack-relay-knuckle-4r.md:72 (R17 = gravity check, 1.5 x max opening torque). No friction, return or hysteresis run exists for proxtrack or this row in docs/research, docs/FINDINGS.md or judge/. Upheld."
+ },
+ {
+  "key": "judgement:G6",
+  "refuted": false,
+  "evidence": "Recomputed: python3 tools/simplicity.py (v2.2) prints offset-shortcar-relay-4r cx 52.5, act 4 against conecut-knee-knuckle-3r 18.5, act 3. Overhead (elev >= 140) taken 8/28 for both on the bench, 19/71 vs 18/71 held; the 24 new bench takes span elev 30-135 (81 held span 30-165) (docs/alignment/remeasure/offset-shortcar-relay-4r_skeptic.json). The count is honest (active_dof 4) and docs/HANDOFF.md:662 labels it 'the best verified 4-joint design'; the watch is the display rule (3-joint leaders are the real leaders, user 2026-10-17), which stays in force. Upheld."
+ },
+ {
+  "key": "judgement:P1",
+  "refuted": true,
+  "evidence": "P1 is in-sample tuning and its documented detector is held_out (ALIGNMENT.md P1: 'Detected by held_out; see S1'). Held - bench = 17.77 - 14.76 = +3.01, under TH held_watch 6.0 (row held_out.gate 17.77, v_gap 14.76), and under the lead's +4.10 and proxtrack's +4.0. The gain over the proxtrack-buildable control GROWS held out: bench 14.76 vs 17.46 (-2.70, controls.log), held 17.77 vs 21.46 (-3.69, held.log), paired held plain -1.73 with P(better) 1.00 (paired_held.json). The station was not chosen by the claim bench: on envsel at delta 0, ds 31 ranks first by itself (15.64 vs ds 34 15.68, ds 28 15.94, ds 19.5 18.87; envsel_s1.log). And the claimed config is NOT the claim-bench optimum: on the claim bench ds 31 / delta 0 / no coil reads 14.26 (controls.log) and delta 4.5 with the lug coil or no coil 14.23 (diag_coil.log), both better than the claimed 14.76. A claim-bench-tuned pick would have taken one of those. The forward risk (a lug-coil re-claim separated only on the claim bench) is about a future claim, not this one; it is carried in the Skeptic section as a note."
+ }
+]

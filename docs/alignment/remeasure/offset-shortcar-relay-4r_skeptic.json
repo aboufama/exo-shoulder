@@ -1,0 +1,141 @@
+{
+ "id": "offset-shortcar-relay-4r",
+ "ref": "conecut-knee-knuckle-3r",
+ "by": "skeptic",
+ "basis": "metal = min(min_mm, cmin) per pose (the deep_audit basis); near-t: a taken pose with metal < t counts as contact and is not taken; in-band = the dump report pooled inband14",
+ "files": {
+  "bench": [
+   "docs/alignment/remeasure/offset-shortcar-relay-4r_bench_perpose.json",
+   "docs/alignment/remeasure/conecut-knee-knuckle-3r_bench_perpose.json"
+  ],
+  "held": [
+   "docs/concepts/verify/offset-shortcar-relay-4r/verifier_held_perpose.json",
+   "docs/alignment/remeasure/conecut-knee-knuckle-3r_held_perpose.json"
+  ]
+ },
+ "bench": {
+  "design": {
+   "plain": 13.73,
+   "near1": 17.91,
+   "near2": 45.56,
+   "near3": 100.05,
+   "n_eval": 409,
+   "n_taken": 396,
+   "contacts": 13,
+   "depth_sum_min_mm": 46.18,
+   "depth_sum_with_cmin": 46.18,
+   "deepest": -9.79
+  },
+  "ref": {
+   "plain": 18.29,
+   "near1": 19.92,
+   "near2": 34.84,
+   "near3": 86.16,
+   "n_eval": 376,
+   "n_taken": 372,
+   "contacts": 4,
+   "depth_sum_min_mm": 20.24,
+   "depth_sum_with_cmin": 20.24,
+   "deepest": -8.93
+  },
+  "common_taken": 372,
+  "new_takes": 24,
+  "ref_only_takes": 0,
+  "common_lt2": {
+   "design": 48,
+   "ref": 33
+  },
+  "new_lt2": 8,
+  "new_lt1": 4,
+  "new_take_elev": [
+   30.0,
+   135.0
+  ],
+  "shared_contacts": {
+   "n": 4,
+   "design_depth": 20.24,
+   "ref_depth": 20.24
+  },
+  "new_contacts": {
+   "n": 9,
+   "ref_ev_false": 9,
+   "depth": 25.94
+  },
+  "overhead140": {
+   "design": [
+    8,
+    28
+   ],
+   "ref": [
+    8,
+    28
+   ]
+  }
+ },
+ "held": {
+  "design": {
+   "plain": 16.63,
+   "near1": 22.83,
+   "near2": 47.71,
+   "near3": 96.78,
+   "n_eval": 985,
+   "n_taken": 942,
+   "contacts": 43,
+   "depth_sum_min_mm": 172.14,
+   "depth_sum_with_cmin": 173.02,
+   "deepest": -12.23
+  },
+  "ref": {
+   "plain": 22.38,
+   "near1": 25.23,
+   "near2": 37.11,
+   "near3": 82.52,
+   "n_eval": 875,
+   "n_taken": 861,
+   "contacts": 14,
+   "depth_sum_min_mm": 60.97,
+   "depth_sum_with_cmin": 60.97,
+   "deepest": -9.86
+  },
+  "common_taken": 861,
+  "new_takes": 81,
+  "ref_only_takes": 0,
+  "common_lt2": {
+   "design": 105,
+   "ref": 71
+  },
+  "new_lt2": 30,
+  "new_lt1": 13,
+  "new_take_elev": [
+   30.0,
+   165.0
+  ],
+  "shared_contacts": {
+   "n": 14,
+   "design_depth": 60.97,
+   "ref_depth": 60.97
+  },
+  "new_contacts": {
+   "n": 29,
+   "ref_ev_false": 29,
+   "depth": 111.17
+  },
+  "overhead140": {
+   "design": [
+    19,
+    71
+   ],
+   "ref": [
+    18,
+    71
+   ]
+  }
+ },
+ "row_near2_basis": {
+  "note": "row frozen_exact.near2 / held near2 come from the proxtrack model near() over B.res only (no crown sets M.cmin)",
+  "row_bench": 37.7,
+  "row_held": 41.29,
+  "ref_row_bench": 34.84,
+  "ref_row_held": 37.1
+ }
+}

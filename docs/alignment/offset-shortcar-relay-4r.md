@@ -166,3 +166,49 @@ Files from this audit:
 - docs/alignment/remeasure/offset-shortcar-relay-4r_bench.json
 - docs/alignment/remeasure/offset-shortcar-relay-4r_bench_perpose.json
 - tools/alignment_wear_offset_relay.py
+
+## Skeptic (2026-10-18 15:05-15:17 UTC)
+
+Ledger: `python3 tools/alignment_ledger.py skeptic offset-shortcar-relay-4r --rulings docs/alignment/offset-shortcar-relay-4r.rulings.json --by skeptic --run skeptic:offset-shortcar-relay-4r`.
+**Final verdict: WATCH** (2 refuted, 7 upheld). Models, benches and scores unchanged.
+
+Re-derived from the rawest files: the per-pose dumps (the audit's bench re-wear, the verifier's held dump, the lead's
+bench / held re-measure dumps), all on one basis (metal = min(min_mm, cmin), the deep_audit basis). Written to
+docs/alignment/remeasure/offset-shortcar-relay-4r_skeptic.json. The lead's 18.29 / 19.92 / 34.84 bench and
+22.38 / 25.23 / 37.11 held come out exactly, so the basis is the same harness for both rows.
+
+| key | ruling | evidence |
+|---|---|---|
+| dominance | upheld | Bench 2 mm 45.56 (tool 46.08, one more pose) vs 34.84. On the 372 poses both take, 48 sit < 2 mm against 33, and 8 of the 24 new takes do too. Held on the same basis: 47.71 vs 37.11. Watch is the tool's reading after the A1 gate was retired. The plain gain 4.54 includes 1.02 points of pooled in-band from relay hardware; on the gate it is 3.52. |
+| continuity | **refuted** | The flood is on file. verifier_claim.json pick.continuity: dropped_relayed 0, phi0_taken_not_connected 0, static 13.74 = connected 13.74. Same in verifier_held.json (16.64 = 16.64). It is the rule's flood: armarc flood_relay, step 2 deg, passive jump 10 deg (models/armarc-relay-knuckle-4r.py:118). |
+| T5 | upheld | Bench 46.18 vs 20.24 mm (x2.28, +25.94). Held 172.14 (173.02 with crowns) vs 60.97 (x2.82). The 4 / 14 shared contacts have identical depth in both rows, so the whole excess is the 9 / 29 new contacts. Every one is a pose the lead does not evaluate (ev false, folded). |
+| G1 | upheld, understated | Held in the reason mixed bases: 41.29 is the model's near2, which leaves out the crown sets, against the lead's 37.10 on the deep basis. On one basis held reads 47.71 vs 37.11 (-10.60, not -4.19). New takes < 1 mm number 4, not 3 (pose 369 at 0.996 mm). |
+| NEW-clearance-floor | upheld | xcheck.clearance_margin_taken: lt1.1 112, lt1.2 182 (held 270 / 400). verifier_bump12.log: 14.88, 0 jams. bump 1.002 against proxtrack's 1.0. |
+| T4 | upheld | delta 5.0 reads 27.53 (37 jams). ds 34 / delta 4.5 reads 47.80. delta 6 reads 119.05. The offset buys 0.03. The label is not the documented T4 (no singularity: th min 5.000), but the measured lack of robustness stands. |
+| M5 | upheld | No friction, return or hysteresis run on file. The row doc lines 166 and 297 say R17 covers gravity only. |
+| G6 | upheld | simplicity v2.2: 52.5 / 4 act vs 18.5 / 3 act. Overhead 8/28 = 8/28 bench, 19/71 vs 18/71 held. New takes span elev 30-135 bench. |
+| P1 | **refuted** | Its detector is held_out: +3.01 < TH held_watch 6.0. The gain over the proxtrack control grows held out (-2.70 bench, -3.69 held; paired P 1.00). envsel ranks ds 31 first by itself (15.64 / 15.68 / 15.94 / 18.87). The claimed config is not the claim-bench optimum: 14.26 (delta 0, no coil) and 14.23 (lug or no coil) both beat the claimed 14.76. |
+
+Carried forward from P1 (a note, not part of this verdict): a lug-coil re-claim would be separated from the arm coil only
+on the claim bench (envsel ties at 15.61 / 15.61). It must say so and be confirmed held out.
+
+**Missed by the auditor** (for the next audit; not counted in this verdict):
+
+1. **The row's near2 column is on a different basis from the lead's.** The row has frozen_exact.near2 37.7 and
+   held_out near2 41.29 (held.log). Both come from the proxtrack model's near() over B.res only, with no crown sets
+   (M.cmin). The lead's row near2 (34.84 / 37.1) does include its crowns. Read from the row, the 2 mm deficit is
+   2.86 bench and 4.19 held. On one basis it is 10.72-11.24 bench and 10.60 held. Every proxtrack-family row inherits
+   this (R-class: a column that flatters through its basis).
+   - Proposal: the near columns of relay rows should be read through deep_audit, or should name their basis.
+2. **The auditor's held G1 comparison mixed those two bases** (41.29 vs 37.10). On one basis it is 47.71 vs 37.11.
+3. **The plain-gap dominance flatters this family.** The plain reading pools 344 relay-hardware samples per clip frame
+   (0.98 in band) into in-band, which is worth 1.02 points here. The claim rightly refuses this with its chain-only gate.
+   The tool's `dominance` and the G1 text quote the pooled plain gain (+4.54) and not the claim's (+3.52).
+   - Proposal: compare the gate with the gate.
+4. **The new takes below 1 mm are 4, not 3.** Pose 369, ws (90, 135, -90), sits at 0.996 mm.
+
+Instrument notes (no verdict effect): the `continuity` check still does not read
+`<verify>/<id>/*.json:pick.continuity`, so it will print the same false watch on every relay-family row until it is
+fixed. The self-test will now hold the tool to this refuted ruling.
+
+Final verdict (ledger, skeptic stage, 15:16:21Z): **watch**.
