@@ -5,21 +5,20 @@
  "complexity": 18.5,
  "verdict": "watch",
  "reasons": [
-  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
-  "dominance: cannot compare with conecut-knee-knuckle-3r at 2 mm",
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
-  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
   "complexity: recomputed 0.0 vs row 18.5; MISMATCH",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 12.5 (score 95.45) sits 5.78 below the verified number"
  ],
  "checks": [
   {
    "check": "held_out",
-   "level": "watch",
-   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
-   "v_gap": 18.28
+   "level": "ok",
+   "reason": "held out 22.45 vs bench 18.28 (+4.17; re-measured (this audit))",
+   "held_gap": 22.45,
+   "v_gap": 18.28,
+   "drop": 4.17,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -31,8 +30,26 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "level": "ok",
+   "reason": "plain 18.28, <1 mm 19.92, <2 mm 34.84, <3 mm 86.16, band read 3-14 mm 18.41, 16.56 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 16.56,
+   "plain": 18.28,
+   "n1": 19.92,
+   "n2": 34.84,
+   "n3": 86.16,
+   "band3": 18.41,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0,
+    "2-3": 0.0018,
+    "3-4": 0.0142,
+    "4-6": 0.1249,
+    "6-10": 0.4328,
+    "10-14": 0.3268,
+    ">14": 0.0995
+   },
+   "minmm": 0.263,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
@@ -55,7 +72,7 @@
       "gap": 18.28,
       "src": "docs/alignment/remeasure/conecut-l2jog-knuckle-3r_bench_perpose.json",
       "cross_check": {
-       "files": 1,
+       "files": 2,
        "sums": [
         20.24
        ],
@@ -91,8 +108,11 @@
   },
   {
    "check": "dominance",
-   "level": "watch",
-   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+   "level": "ok",
+   "reason": "vs conecut-knee-knuckle-3r: plain +0.00, 2 mm +0.00",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": 0.0,
+   "gain_2mm": 0.0
   },
   {
    "check": "continuity",
@@ -108,14 +128,103 @@
    "check": "idle",
    "level": "ok",
    "reason": "no moving drive / joint declared",
-   "spans": [],
+   "spans": [
+    [
+     "re-measured dK span",
+     45.61
+    ],
+    [
+     "re-measured K.ang span",
+     46.67
+    ],
+    [
+     "re-measured K.qa span",
+     46.67
+    ],
+    [
+     "re-measured K.qb span",
+     49.66
+    ]
+   ],
    "declared": [],
    "rigid": []
   },
   {
    "check": "sampling",
-   "level": "watch",
-   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.900 vs part-weighted 0.924 (-2.40 points); thinly sampled parts: L1a 8 (re-measured)",
+   "parts": {
+    "hub1": [
+     1.0,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.912,
+     11.6,
+     80
+    ],
+    "hub3": [
+     0.742,
+     11.5,
+     80
+    ],
+    "E": [
+     0.979,
+     6.0,
+     164
+    ],
+    "boss": [
+     1.0,
+     7.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     6.2,
+     32
+    ],
+    "knee": [
+     0.999,
+     9.7,
+     90
+    ],
+    "crank": [
+     0.801,
+     11.3,
+     133
+    ],
+    "roller": [
+     0.938,
+     10.0,
+     19
+    ],
+    "horn": [
+     0.955,
+     7.5,
+     23
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.918,
+     8.2,
+     36
+    ],
+    "L2": [
+     0.726,
+     12.0,
+     124
+    ]
+   }
   },
   {
    "check": "density",
@@ -150,14 +259,14 @@
   }
  ],
  "remeasured": {
-  "bench": false,
-  "held": false
+  "bench": true,
+  "held": true
  },
  "verifier_files": [
   "docs/concepts/verify/conecut-l2jog-knuckle-3r_v_truecut_scan_held.json",
   "docs/concepts/verify/conecut-l2jog-knuckle-3r_v_truecut_scan_bench.json"
  ],
- "git": "cc26ec4",
+ "git": "271bc98",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T16:25:26Z"
+ "t": "2026-10-18T16:37:51Z"
 }

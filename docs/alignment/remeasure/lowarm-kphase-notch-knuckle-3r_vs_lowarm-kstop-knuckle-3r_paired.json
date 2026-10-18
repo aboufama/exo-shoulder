@@ -1,0 +1,94 @@
+{
+ "A": "lowarm-kphase-notch-knuckle-3r",
+ "B": "lowarm-kstop-knuckle-3r",
+ "note": "diff = gap A - gap B (negative: A better); split per gap term; paired bootstrap over poses within kind",
+ "bench": {
+  "gap_A": 18.47,
+  "gap_B": 18.69,
+  "diff": -0.22,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": -0.22,
+   "contact": 0.0
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 0,
+   "contact_both": 4
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -0.3,
+    0.0
+   ],
+   "sd": 0.12,
+   "p_A_better": 0.651
+  },
+  "model_frozen": {
+   "A": 18.47,
+   "B": 18.69
+  }
+ },
+ "held": {
+  "gap_A": 22.87,
+  "gap_B": 22.88,
+  "diff": -0.0,
+  "split": {
+   "reach": 0.32,
+   "follow": 0.0,
+   "inband": -0.21,
+   "contact": -0.11
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 3,
+   "contact_A_only": 0,
+   "contact_B_only": 1,
+   "contact_both": 13
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -0.34,
+    0.44
+   ],
+   "sd": 0.24,
+   "p_A_better": 0.437
+  },
+  "model_frozen": {
+   "A": 22.87,
+   "B": 22.88
+  }
+ },
+ "pooled_bench_plus_held": {
+  "gap_A": 21.65,
+  "gap_B": 21.7,
+  "diff": -0.06,
+  "split": {
+   "reach": 0.23,
+   "follow": 0.0,
+   "inband": -0.21,
+   "contact": -0.08
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 3,
+   "contact_A_only": 0,
+   "contact_B_only": 1,
+   "contact_both": 17
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -0.29,
+    0.31
+   ],
+   "sd": 0.18,
+   "p_A_better": 0.549
+  }
+ }
+}
