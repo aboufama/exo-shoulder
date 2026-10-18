@@ -3966,5 +3966,30 @@
    "F": 55.12,
    "child_status": 11
   }
- ]
+ ],
+ "j3_stop_built": {
+  "rule": "exported dowel (member 3) vs exported link 2 + J3 hub parts riding link 2, turned by q3' about J3 (signed mm, < 0 = metal in metal)",
+  "inside_window_min_mm": 0.0324,
+  "at_J3MIN_mm": -0.0,
+  "at_J3MAX_mm": -0.0004,
+  "past_0p25_mm": [
+   -0.0328,
+   -0.0332
+  ],
+  "inside_0p25_mm": [
+   0.0325,
+   0.0324
+  ],
+  "past_2deg_mm": [
+   -0.2625,
+   -0.178
+  ],
+  "others_min_mm": {
+   "J3 cap O20, torispherical dome R63.6 / R": 4.843,
+   "J3 outer spacer 17-4PH": 2.8888,
+   "J3 bearing 2 MR117-2RS 7x11x3": 3.4475,
+   "J3 bearing 1 MR117-2RS 7x11x3": 1.0
+  },
+  "verdict": "stop"
+ }
 }
