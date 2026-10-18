@@ -3436,7 +3436,7 @@
   "name": "Half-ring desmo knuckle at the buildable stage-1 level (F+3.9), held in the dwell by a K-own set-screw stop inside hub K (pad deleted, short-arm plate notch)",
   "family": "slaved-knuckle 3R with an unsensed two-pin cuff knee (desmo K drive, half ring, low arm)",
   "lens": "round15:B lowarm-adjpad-buildable (cell A at F+3.9, sided dwell hold on K's own angle)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-18T13:28:19Z",
   "source": "round 15 (main, re-launch) judge (docs/concepts/round15_ideation.md)",
   "merged_from": [

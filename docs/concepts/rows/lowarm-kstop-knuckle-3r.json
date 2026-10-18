@@ -8,7 +8,7 @@
  "passive_translations": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": "2026-10-18T13:56:00Z",
+ "t_screened": "2026-10-18T14:24:00Z",
  "reach": 0.7278,
  "follow": 1.0,
  "inband14": 0.896,
@@ -20,7 +20,7 @@
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 13,
+ "n_configs": 18,
  "bench": "Bench(110,360) exact, frozen cell-A shape (fit Bench(60,160) fast), per-pose worst of the sided dwell wears +0.264 / -0.210 deg of K (P5 worst corners)",
  "best_params": {
   "r_c": 16.176,
@@ -224,9 +224,55 @@
   "T": "bareti NOT run: step 0 passed, but it needs the auditor's Hertz-based RC_MIN acceptance (35 N corner over Ti first yield)",
   "combined": "the claim cell (kstop + conecut-h2facet c 0.5 + conecut-l2jog dl 1.0) is NOT measured: those rows have not landed; projection from the judge's measured rates: 203 ~0.47, 139 ~0.49, probe reading = plain ~18.69"
  },
- "verdict": "",
- "limiter": "",
- "note": "",
+ "verdict": "SCREENED (step 0 passes): frozen exact Bench(110,360) per-pose worst of the P5 sided wears 18.69 (score 93.20; +0.264 18.60 / -0.210 18.68), reach 0.7278, ib14 0.896, 4 contacts, overhead 8/28; 203 = 0.158 >= 0.15 at P5 worst; held 22.876 paired +0.498 vs the lead (inside the 0.5 kill line by 0.002, CI90 [0, 0.55], P(better) 0); cx 16.75, 0 passive translations, M3 closed (stage 1 F+3.9 + short-arm pocket + 1.38 mm arm tip). Alone it fails the +0.2 mm probe (19.77: 139 + 203 flip) - the claim is the combined cell with conecut-h2facet + conecut-l2jog (not yet measured). Not a lead change: +0.40 bench / +0.50 held vs conecut-knee, all in-band, same takes and contacts.",
+ "limiter": "in-band (the whole 0.40 / 0.50 to the lead: link 2's 440C ring insert at F+3.15..4.65 and the low crank arm sit higher over the skin); pose 203 (hub 2 c10 ring, 0.158 at the wall-side P5 corner, 0.118 at P0) bounds the dwell phase and the probe; 139 (link 2, 0.072) the +0.1 probe; reach 0.7278 is the parent's (fold 88, J3 stop 6, contact 4)",
+ "note": "Step 0 only (13 fits / gate corners + 9 frozen wears; no search). Convergence gate: not applicable - no sweep run, so no 'dead' verdict is possible; the step-9 fit (near-touch on env, envsel, >= 2 LHS + sigma-0.8 restart) is next. Inner wall blocks +K: drho/dK -0.0606 mm/deg at the dwell exit. Spec correction: the catalogue's V.BEST | CELL_A merge would carry cell B's l2_lift 1.5; this row is CELL_A (l2_lift 0). Red team: 203 margin 0.008; unmodelled long-arm compliance 0.06-0.22 mm at 203 per 0.05 N.m; a_s 9.7 trips the skirt pitch gate (rho 9.904 vs R_HI 9.94); pocket cuts ~30-35 % of link 1b's bar root section (estimate); stop-A groove-to-seat wall 0.95. Kit density not re-measured (parent's shifts -0.06 / +0.08). Outputs: /tmp/claude-0/-home-user-exo-shoulder/55c580fc-1103-56e5-9e17-3e425f438838/scratchpad/kstop/",
  "doc": "docs/concepts/lowarm-kstop-knuckle-3r.md",
- "model": "docs/concepts/models/lowarm-kstop-knuckle-3r.py"
+ "model": "docs/concepts/models/lowarm-kstop-knuckle-3r.py",
+ "held": {
+  "plus_0264": {
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.8957,
+   "inband10": 0.57,
+   "contact": 0.016,
+   "gap": 22.81
+  },
+  "minus_0210": {
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.895,
+   "inband10": 0.5694,
+   "contact": 0.016,
+   "gap": 22.88
+  },
+  "worst_gap": 22.876,
+  "paired_vs_lead": {
+   "diff": 0.498,
+   "ci90": [
+    0.0,
+    0.55
+   ],
+   "p_better": 0.0,
+   "split": "in-band 0.50; 0 discordant takes / contacts (14 shared)"
+  },
+  "probes": "no held pose under 0.2 mm (min metal 0.33)"
+ },
+ "bench_paired_vs_lead": {
+  "diff": 0.4,
+  "ci90": [
+   0.0,
+   0.58
+  ],
+  "p_better": 0.0,
+  "split": "in-band 0.40; 0 discordant takes / contacts (4 shared)"
+ },
+ "report_P0": {
+  "plus_0363": 18.58,
+  "p203_at_0363": 0.118,
+  "minus_0408": 18.71,
+  "worst": 18.72,
+  "probe_0p1": 19.26,
+  "probe_0p2": 19.81
+ }
 }

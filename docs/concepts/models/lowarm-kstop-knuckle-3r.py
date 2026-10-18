@@ -252,6 +252,20 @@ def gates(outp):
     json.dump(dict(id=ID, rows=rows, rule="bind first-fail >= 47.35 (dowel 46.35 + 1.0) at a_s +-0.1 and mu 0.17; RC_MIN (rc >= 1.0) is a cut"), open(outp, "w"), indent=1, default=float)
 
 
+CLAIM_DELTA = 0.264      # the wall-side P5 worst corner; the - side (-0.210) is worn with `wear` and combined per pose
+
+
+def frozen(P=None, delta=CLAIM_DELTA):
+    """the claim's frozen protocol at one sided dwell play (for tools that call mod.frozen: sample_density, verifiers)"""
+    T, V, LM, DS, S, PLAY = _harness(); PLAY.update(delta=float(delta), on=True, info={})
+    return LM.frozen(params(T, LM, {k: v for k, v in (P or {}).items() if k in KSTOP or k in LM.CELL_A}))
+
+
+def frozen_held(P=None, delta=CLAIM_DELTA):
+    T, V, LM, DS, S, PLAY = _harness(); PLAY.update(delta=float(delta), on=True, info={})
+    return LM.frozen_held(params(T, LM, {k: v for k, v in (P or {}).items() if k in KSTOP or k in LM.CELL_A}))
+
+
 if __name__ == "__main__":
     mode = sys.argv[1]
     sets = {}
