@@ -1,0 +1,139 @@
+{
+ "id": "rollcone-hubspot-pinknee-3r",
+ "name": "Rolling-cone J2 (strap-held cone pair, apex GH) at H1's hub-2 spot on the pin-knee 3R",
+ "lens": "round501:rolling-j2 (lens C, WEIRD)",
+ "family": "rolling-contact J2 (cone pair, apex GH) on the cx-0 pin-knee 3R",
+ "active_dof": 3,
+ "passive_dof": 2,
+ "passive_translations": 0,
+ "status": "screened",
+ "t_ideated": null,
+ "t_screened": "2026-10-19T03:38:50Z",
+ "reach": 0.7312,
+ "follow": 1.0,
+ "inband14": 0.8987,
+ "inband10": 0.5603,
+ "contact": 0.0167,
+ "gap": 18.68,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 64,
+ "best_k": "3-r-1",
+ "best_params": {
+  "alpha_s": 10.3125,
+  "alpha_p": 6.8417,
+  "beta": 36.1529,
+  "bh": 8.3286,
+  "az1": 97.1013,
+  "el1": 63.2313,
+  "az2": 29.9405,
+  "el2": 43.5974,
+  "wd": 72.7458,
+  "wa": -11.9633,
+  "b3": 0.2478,
+  "lE": 59.7678,
+  "lc": 27.5063,
+  "phiE": -3.196,
+  "phib": -47.7649
+ },
+ "best_near": {
+  "min_mm": 0.49,
+  "gap1": 21.39,
+  "gap2": 29.65,
+  "n1": 4
+ },
+ "best_roll": {
+  "rho": 0.6654,
+  "yspan": [
+   -34.3,
+   56.0
+  ],
+  "xspan": [
+   -22.8,
+   37.3
+  ],
+  "sun_arc_mm": 10.5,
+  "Rb": [
+   63.2,
+   64.7
+  ],
+  "band_lift": 0.0,
+  "th_window": [
+   19.9,
+   108.9
+  ],
+  "kin_ws": 120,
+  "min_mdy_taken": 5.08,
+  "min_mseg_taken": 5.15,
+  "min_jac_taken": 0.182
+ },
+ "best_why": {
+  "fold": 31,
+  "slide": 9,
+  "flip": 0,
+  "closure": 0,
+  "skin": 3,
+  "parts": 0,
+  "contact": 0
+ },
+ "best_parts_ib14": {
+  "hub1": [
+   0.989,
+   8.8,
+   80
+  ],
+  "sun": [
+   0.93,
+   12.2,
+   20
+  ],
+  "planet": [
+   0.907,
+   12.4,
+   20
+  ],
+  "hub3": [
+   0.686,
+   12.3,
+   80
+  ],
+  "E": [
+   0.926,
+   7.4,
+   88
+  ],
+  "boss": [
+   0.959,
+   8.0,
+   32
+  ],
+  "pad": [
+   1.0,
+   7.9,
+   32
+  ],
+  "knee": [
+   0.912,
+   10.8,
+   100
+  ],
+  "L1": [
+   0.996,
+   8.5,
+   56
+  ],
+  "L2": [
+   0.861,
+   9.2,
+   145
+  ]
+ },
+ "doc": "docs/concepts/rollcone-hubspot-pinknee-3r.md",
+ "model_file": "docs/concepts/models/rollcone-hubspot-pinknee-3r.py",
+ "verdict": "WIP: first measured configs (search running)",
+ "limiter": "tbd",
+ "note": "work in progress"
+}
