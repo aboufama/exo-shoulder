@@ -89,8 +89,12 @@ the distal-ring lever), not at a fixed pin height.
   bar outside the stack keep >= 1 mm on every pose (0 jams).
 - **The optimistic number:** the ideal 10.27 has no R4 metal at all, and its hub 3 (0.79) is fitted in-sample on
   Bench(60,160) at the (84, -15) seat; the hardware read is ONE unswept geometry (great-circle bar, no planform turn).
-  Spring preload vs gravity per pose is not modelled. The chest cliff partners at ae 50-55 were not worn: at rB 86 the
-  boss keeps >= 2.4 mm everywhere at ae 45, but no partner line was run.
+  Spring preload vs gravity per pose is not modelled.
+- **Chest cliff partners** (the boss alone, arm-fixed, worn on EVERY Bench(110,360) pose, closing or not; scratch cliff.py):
+  ae 45 / 46.5 / 50 / 55 -> 3 / 4 / 4 / 29 poses in the skin, worst at the across-body pose (150, 120, -180) -21.96 / -21.82 / -21.38 / -65.24 mm. On closing poses the
+  boss keeps >= 2.4 mm (those poses are lost to the fold first), so the cliff is latent at ae 45-50; at ae 55 the line's max exit jumps to 170 mm (it meets the chest on fit poses) and
+  the boss stands off the arm entirely - the measured az 50-55 cliff, 5-10 deg from the spec's line.
+- **Continuity flood** (ideal, claim params, 1432-pose envelope grid): static 1173, connected 1172 (relayed 312 / 311).
 - **Shoulder slip** (standing price, not scored): misfit p95 4.83 / max 5.14 mm at a 3 mm GH offset; this build assumes a
   3 mm liner.
 
