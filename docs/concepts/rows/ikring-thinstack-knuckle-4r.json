@@ -8,7 +8,7 @@
  "passive_translations": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": "2026-10-19T02:25:14Z",
+ "t_screened": "2026-10-19T02:37:05Z",
  "reach": 0.8222,
  "follow": 1.0,
  "inband14": 0.8901,
@@ -328,9 +328,343 @@
    }
   }
  },
- "held_out": null,
+ "held_out": {
+  "sample": "every held ws pose (952) + every 100th held clip frame",
+  "rule": "take-only (spec)",
+  "reverted": [
+   193,
+   248,
+   254,
+   256,
+   329,
+   330,
+   332,
+   335,
+   402,
+   405,
+   477,
+   481,
+   760,
+   922,
+   928,
+   935
+  ],
+  "k0_states": {
+   "193": {
+    "mm": null,
+    "why": "j3stop",
+    "pose": [
+     -15.0,
+     90.0,
+     30.0
+    ]
+   },
+   "248": {
+    "mm": -0.20651620709393415,
+    "why": "contact",
+    "pose": [
+     0.0,
+     90.0,
+     30.0
+    ]
+   },
+   "254": {
+    "mm": null,
+    "why": "j3stop",
+    "pose": [
+     0.0,
+     105.0,
+     30.0
+    ]
+   },
+   "256": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     0.0,
+     120.0,
+     -30.0
+    ]
+   },
+   "329": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     15.0,
+     120.0,
+     -15.0
+    ]
+   },
+   "330": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     15.0,
+     120.0,
+     0.0
+    ]
+   },
+   "332": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     15.0,
+     135.0,
+     -30.0
+    ]
+   },
+   "335": {
+    "mm": -7.082059124405258,
+    "why": "contact",
+    "pose": [
+     15.0,
+     150.0,
+     -60.0
+    ]
+   },
+   "402": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     30.0,
+     120.0,
+     0.0
+    ]
+   },
+   "405": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     30.0,
+     135.0,
+     -15.0
+    ]
+   },
+   "477": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     45.0,
+     135.0,
+     -15.0
+    ]
+   },
+   "481": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     45.0,
+     150.0,
+     -15.0
+    ]
+   },
+   "760": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     105.0,
+     135.0,
+     -120.0
+    ]
+   },
+   "922": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     150.0,
+     45.0,
+     -120.0
+    ]
+   },
+   "928": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     150.0,
+     60.0,
+     -105.0
+    ]
+   },
+   "935": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     150.0,
+     75.0,
+     -105.0
+    ]
+   }
+  },
+  "gap_sample": 10.09,
+  "gate_sample": 10.1,
+  "reach": 0.813,
+  "ws_taken": 774,
+  "n_contacts": 11,
+  "T5_sum": 55.91,
+  "overhead": [
+   32,
+   71
+  ],
+  "mid": [
+   159,
+   229
+  ],
+  "new_takes": 119,
+  "new_under1": 10,
+  "new_1to2": 15,
+  "new_overhead": 14,
+  "new_overhead_under2": 3,
+  "k0": {
+   "summary": {
+    "gate": 23.86,
+    "chain_only": 23.86,
+    "plain": 23.86,
+    "near1": 35.75,
+    "near2": 55.73,
+    "ibc": 0.963,
+    "ib": 0.9713,
+    "ib10": 0.6397,
+    "reach": 0.688,
+    "fol": 1.0,
+    "con": 0.0266,
+    "ncon": 18,
+    "jams": 0,
+    "ws_taken": 655,
+    "overhead": [
+     18,
+     71
+    ],
+    "by_cause": {
+     "chain": 11,
+     "hardware": 4,
+     "chain+hw": 3
+    },
+    "hwc": [
+     [
+      20,
+      -0.22,
+      -4.3
+     ],
+     [
+      24,
+      -0.17,
+      4.6
+     ],
+     [
+      25,
+      -3.49,
+      -4.3
+     ],
+     [
+      26,
+      -5.51,
+      -4.3
+     ],
+     [
+      52,
+      -0.12,
+      1.6
+     ],
+     [
+      53,
+      -1.6,
+      0.1
+     ],
+     [
+      106,
+      -0.01,
+      0.1
+     ]
+    ],
+    "stack": 0.0,
+    "arc": [
+     -4.34,
+     49.85
+    ],
+    "R_t": 76.75,
+    "shell_min": {
+     "i": 47,
+     "mm": 1.84,
+     "az_rel": -1.4
+    },
+    "bracket": [
+     28.9
+    ],
+    "secs": 267.2,
+    "R_b": 79.35,
+    "ends": {
+     "-6": [
+      1.96,
+      47
+     ],
+     "-4": [
+      1.89,
+      47
+     ],
+     "+36": [
+      4.19,
+      251
+     ],
+     "+38": [
+      4.56,
+      251
+     ],
+     "+40": [
+      4.91,
+      251
+     ],
+     "+42": [
+      5.48,
+      251
+     ],
+     "+44": [
+      5.85,
+      251
+     ],
+     "+46": [
+      6.07,
+      12
+     ],
+     "+48": [
+      4.58,
+      12
+     ]
+    },
+    "conn": null
+   },
+   "ws_taken": 655,
+   "overhead": 18,
+   "mid": 105
+  },
+  "first_run": {
+   "gap": 11.82,
+   "gate": 11.82,
+   "contacts": 25,
+   "overhead": [
+    32,
+    71
+   ],
+   "ws_taken": 774
+  },
+  "summary_line": {
+   "overhead": [
+    32,
+    71
+   ],
+   "mid": [
+    159,
+    229
+   ],
+   "ws_taken": 774,
+   "contacts": 11,
+   "T5": 55.91,
+   "gap_sample": 10.09,
+   "new_overhead": 14,
+   "new_overhead_under2": 3
+  }
+ },
  "doc": "docs/concepts/ikring-thinstack-knuckle-4r.md",
- "verdict": "screened (a LABELLED 4-JOINT OPTION, 4 active joints, never the lead): Bench(110,360) exact frozen chain-only gate 9.75 (score 96.45), plain 8.76, reach 0.8222 (296/360), overhead 13/28 connected (lead 8), elev 90-140 60/85 (lead 39), 4 contacts (T5 19.48 mm vs the lead 20.24); pre-registered gates: pass <= 13.75 chain-only yes, connected overhead >= 12/28 yes (13), ring-added overhead takes under 2 mm 1 (<= 2) yes; held: pending at the time box. Beats phi40-thinstack-relay-4r (14.06) and the unpowered least-phi control on the same hardware (14.46): actuation buys 4.71 gate points. Not converged (one pre-registered cell, no envsel sweep): not a dead verdict.",
+ "verdict": "screened (a LABELLED 4-JOINT OPTION, 4 active joints, never the lead): Bench(110,360) exact frozen chain-only gate 9.75 (score 96.45), plain 8.76, reach 0.8222 (296/360), overhead 13/28 connected (lead 8), elev 90-140 60/85 (lead 39), 4 contacts (T5 19.48 mm vs the lead 20.24); pre-registered gates: pass <= 13.75 chain-only yes, connected overhead >= 12/28 yes (13), ring-added overhead takes under 2 mm 1 (<= 2) yes; held (every held ws pose + every 100th held clip frame, report only, spec rule): overhead [32, 71] (gate >= 25/71), reach 0.813, 11 contacts, gap on that sample 10.09; k = 0 parked: overhead 18/71, 655/952. Beats phi40-thinstack-relay-4r (14.06) and the unpowered least-phi control on the same hardware (14.46): actuation buys 4.71 gate points. Not converged (one pre-registered cell, no envsel sweep): not a dead verdict.",
  "limiter": "(1) the ring hardware itself: parked at psi 0 it costs 2.09 gate points over the verified lead (20.37 vs 18.28: chain-only ib14 0.8901 vs 0.9012 from the 1.2 mm E-strap / knee-link bump over band 8; 2 contacts 127 / 139 at the POSTERIOR shell end and the L-lug bracket / flange at the pad azimuth; 9 of 110 fit-clip frames under 2 mm, 7 under 1 mm, the lead 0) - at 8.5 / 243 the shell sits 3.35 mm lower than at 12 / 235 (R_t 76.75 vs 80.1, bracket ramp 28.9 vs 24.1 deg); (2) the fold: 64 ws lost = fold 55, J3 stop 5, contact 4; the abduction cone stays 0/10 (J1 / J2 seat-level wall, the ring cannot reach it) and 5 stretched-fold IR overhead poses (plane 105-120, axial -120..-150) close at no k in [0, 40]; (3) the slot end: 14 of the 36 new takes choose k = 40.",
- "note": "Model: phi40-thinstack-relay-4r imported read-only, coil deleted, pre-registered cell PHI 40 / delta 3.5 / axis 8.5 toward taz 243 / ds 31 / tsh 1.0 / band 8 / bump 1.2 / lean / L-lug bracket. k-table: the frozen lead (fit Bench(60,160) fast at k = 0 = 12.50) worn exact on Bench(110,360) at k = 0..40 step 2.5 WITH the ring metal and jam rule; lead-first proximity IK (psi 0 where the lead takes the pose, else the taking k with the largest min metal; a pose no k takes stays at psi 0); one final wear (rechoose, ik_bench_spec.json). SPEC GAP CLOSED: the first run closed no-take poses at their least-deep contact k (9 lost poses -> ring-made contacts to -15.4 mm, gate 11.87, T5 76.2); the controller-sensible rule is the claim. Continuity: an IK STATE flood (1432 nodes x 17 k, contiguous feasible-k runs as states, greedy |dk| <= 10, K / knee <= 10, actives <= 25): 1214 / 1215 nodes and 179 / 180 ring-only nodes connected; the spec seed set (state A at elev 0) is empty, so seeds = every k = 0 state-A node (513, the verified convention) and, second reading, every k = 0 elev-0 node (171): same 1214. 0 relayed takes dropped. th margin min 5.083 (0 under 5). New takes 36 (5 overhead: 316 3.50, 343 3.70, 370 1.70, 372 3.27, 399 3.14; 21 at elev 90-140): 1 under 1 mm (127, bracket 0.10 at k 2.5, single-k), 4 at 1-2 mm, median 3.59; k histogram 40: 14, 37.5: 3, 32.5: 6, rest spread. 1 / 2 mm readings 19.65 / 47.00 (lead 2 mm 34.84, phi40 47.16). RED TEAM: psi*(pose) jumps > 20 deg between 3 of 176 adjacent taken pose pairs (15 deg apart; max 32.5) - the kinematic path exists but the skin along the J4 sweep is unchecked; 2 single-k takes, 12 with a taking run < 10 deg; J4 holding torque / drive / slot friction unmodelled. CONTROL (unpowered least-phi, coil deleted, same hardware): 14.46 / 13.47, 291/360, overhead 10/28, 18 contacts (T5 77.49). CONVERGENCE GATE: not run - one pre-registered cell + parked + control (4 readings: best gained 0 over the last third trivially; top-5 spread n/a); the envsel sweep (axis 6-12 / 225-250, PHI 35, delta 2-5, ds, liner, floors 0/1/2) is the next step, with 12 / 235 in IK mode as the first control. Not run (time box, local CPU at load 25): Bench(60,160) IK reading, PHI 35, 12 / 235 IK, the full held in-band. held: pending at the time box."
+ "note": "Model: phi40-thinstack-relay-4r imported read-only, coil deleted, pre-registered cell PHI 40 / delta 3.5 / axis 8.5 toward taz 243 / ds 31 / tsh 1.0 / band 8 / bump 1.2 / lean / L-lug bracket. k-table: the frozen lead (fit Bench(60,160) fast at k = 0 = 12.50) worn exact on Bench(110,360) at k = 0..40 step 2.5 WITH the ring metal and jam rule; lead-first proximity IK (psi 0 where the lead takes the pose, else the taking k with the largest min metal; a pose no k takes stays at psi 0); one final wear (rechoose, ik_bench_spec.json). SPEC GAP CLOSED: the first run closed no-take poses at their least-deep contact k (9 lost poses -> ring-made contacts to -15.4 mm, gate 11.87, T5 76.2); the controller-sensible rule is the claim. Continuity: an IK STATE flood (1432 nodes x 17 k, contiguous feasible-k runs as states, greedy |dk| <= 10, K / knee <= 10, actives <= 25): 1214 / 1215 nodes and 179 / 180 ring-only nodes connected; the spec seed set (state A at elev 0) is empty, so seeds = every k = 0 state-A node (513, the verified convention) and, second reading, every k = 0 elev-0 node (171): same 1214. 0 relayed takes dropped. th margin min 5.083 (0 under 5). New takes 36 (5 overhead: 316 3.50, 343 3.70, 370 1.70, 372 3.27, 399 3.14; 21 at elev 90-140): 1 under 1 mm (127, bracket 0.10 at k 2.5, single-k), 4 at 1-2 mm, median 3.59; k histogram 40: 14, 37.5: 3, 32.5: 6, rest spread. 1 / 2 mm readings 19.65 / 47.00 (lead 2 mm 34.84, phi40 47.16). RED TEAM: psi*(pose) jumps > 20 deg between 3 of 176 adjacent taken pose pairs (15 deg apart; max 32.5) - the kinematic path exists but the skin along the J4 sweep is unchecked; 2 single-k takes, 12 with a taking run < 10 deg; J4 holding torque / drive / slot friction unmodelled. CONTROL (unpowered least-phi, coil deleted, same hardware): 14.46 / 13.47, 291/360, overhead 10/28, 18 contacts (T5 77.49). CONVERGENCE GATE: not run - one pre-registered cell + parked + control (4 readings: best gained 0 over the last third trivially; top-5 spread n/a); the envsel sweep (axis 6-12 / 225-250, PHI 35, delta 2-5, ds, liner, floors 0/1/2) is the next step, with 12 / 235 in IK mode as the first control. Not run (time box, local CPU at load 25): Bench(60,160) IK reading, PHI 35, 12 / 235 IK, the full held in-band. held (every held ws pose + every 100th held clip frame, report only, spec rule): overhead [32, 71] (gate >= 25/71), reach 0.813, 11 contacts, gap on that sample 10.09; k = 0 parked: overhead 18/71, 655/952."
 }

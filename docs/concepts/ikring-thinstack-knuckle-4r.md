@@ -123,3 +123,38 @@ The POSTERIOR shell end (az -4.3 rel the pad) is: 127 shell 1.15 / bracket 0.10,
 reach the cone: the round-301 lens C measurement, a J1 / J2 seat-level wall); 5 stretched-fold IR poses at plane 105-120,
 axial -120..-150 (397, 398, 424, 425, 426) that no k in [0, 40] closes. Whole bench: 64 ws lost = fold 55, J3 stop 5,
 contact 4.
+
+### Held out (report only; never tuned or selected on)
+
+Sample: every held ws pose (952) + every 100th held fit-clip frame (the IK changes ws poses only; clip frames are at
+psi 0, so the held in-band / follow of this sample are a SAMPLE, not the full held clip set - the full held wear did not
+fit the time box at load 25). Same k-table / IK / one final wear (ik_heldws.json, first-run rule), re-read under the spec
+rule with the 16 no-take poses at their k = 0 state measured directly (k0probe_heldws.json: 14 lost, 248 -0.21 and 335
+-7.08 contacts) - ik_heldws_specrule.json / _perpose.json.
+
+| held reading | ws taken /952 | overhead /71 | elev 90-140 /229 | contacts (T5 mm) | gap on the sample |
+|---|---|---|---|---|---|
+| ring parked at psi 0 | 655 (0.688) | 18 (= the lead's 18) | - | 18 | 23.86 |
+| IK, spec rule | **774 (0.813)** | **32** | 159 | 11 (55.91) | 10.09 |
+
+Held overhead 18 -> **32/71** (gate >= 25: pass; the proposer's chain-only table read 32/71 too). New held takes 119
+(14 overhead): 10 under 1 mm, 15 at 1-2 mm; ring-added held overhead takes under 2 mm: 3; 48 of 119 choose k = 40.
+min th margin over the held takes 5.000.
+
+## Verdict
+
+**Screened, a labelled 4-joint option (4 ACTIVE joints), never the lead.** Every pre-registered gate passes:
+chain-only gate **9.75** (score 96.45; plain 8.76) <= 13.75, connected overhead **13/28** >= 12, ring-added overhead takes
+under 2 mm **1** <= 2, held overhead **32/71** >= 25. It beats phi40-thinstack-relay-4r (14.06, held 16.69 / 22 of 71) and
+its own unpowered least-phi control (14.46) on the same hardware. Not converged (one pre-registered cell): not dead.
+The price: 4 active joints, complexity 48.0 (tools/simplicity.py v2.2: phi40's 51.25 minus the coil), a 2 mm reading
+47.00 (lead 34.84), an oracle IK whose psi*(pose) jumps up to 32.5 deg between neighbouring poses.
+
+## Next (the loop)
+
+1. Verifier: re-run `rechoose` (or `ik`) on Bench(110,360) exact and the held-out bench with the full clip set;
+   re-measure the skin along the J4 sweep between neighbouring psi* (the IK hindsight item).
+2. Envsel sweep (never Bench(110,360)): axis 6-12 / 225-250 under the shell-roundness constraint, 12 / 235 in IK mode
+   first (R_t 80.1: the bracket / flange near-touch should drop), delta 2-5, ds, liner 4-6, clearance floors 0 / 1 / 2.
+3. The hardware near-touch is the lever: the parked ring costs 2.09 points and 9 fit-clip frames under 2 mm; a bracket
+   that leaves the carriage outward (not down the 28.9-deg ramp) and a flange recessed in the liner are the first tries.
