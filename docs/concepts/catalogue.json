@@ -3818,7 +3818,7 @@
   "name": "Isoceles short-dyad pin knee (a1 40.5 / a2 44.9, hub 2 posterolateral): the cx-0 knee-class frontier, run with the posterior-slot (a1 47.5 / a2 73.4) and lateral-hub-2 pole-J1 (a1 64.3 / a2 45.8) cells as two more seeds",
   "family": "pin-knee 3R, cx 0: H1's morphology (plain O20 3R through GH + MR63ZZ two-pin cuff knee) re-seated in three new basins, with the kit parts H1 never had (J2 / J3 own-angle dowel stops, H2 facet, 60-deg climbs, re-centred knee)",
   "lens": "round501:cx0-knee-frontier (lens A)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-19T02:38:53Z",
   "source": "round 501 (G1, track golden) judge (docs/concepts/round501_ideation.md)",
   "merged_from": [
