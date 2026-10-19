@@ -278,3 +278,73 @@ all stand at 'watch'. The claim is 18.40 (pick1).
 - Under GH drift, hub-only sensing reads up to about 2 deg of false arm rotation per mm on pick1, and up to 7.7 on BDp.
   Is that acceptable for MVP2 control? Or should "no encoders needed" be conditional on a bound on that error, for
   example under 1 deg/mm at the taken poses? That bound would be a tightening, and it would be measured per row.
+
+## Skeptic (2026-10-19, 02:12-02:30 UTC, hourly audit of 01:38)
+
+The skeptic was a separate agent. It edited no bench, judge, kit, model, row, dashboard page or CLAUDE.md, and changed
+no score. It re-derived each reason from the probe, verify and as-built verifier files, the rows, `morphs.json`,
+`sweeps.json`, `build.json` and the model source. It ran two new measurements, both read-only on the claim (local CPU,
+at most 2 niced processes, farm spend $0):
+- **stk 6.0 alone** (ang_min kept at the claim's 26.1449), bench, through `docs/concepts/verify/minarc-final-polish-verify.py`
+  unchanged (`remeasure/minarc-stop-knuckle-4r_pick1stk6only_bench_verifier.json`, 455 s). It separates the auditor's two
+  as-built changes on the bench.
+- **`tools/sample_density.py` measure() with the claim's pick1 params** (`write=False`, the auditor's file untouched;
+  `remeasure/minarc-stop-knuckle-4r_skeptic_sample_density_pick1.json`).
+
+**Final verdict (ledger, `stage skeptic`, 2026-10-19T02:26:34Z): WATCH.** 1 of 15 reasons refuted (S2), 14 upheld, all
+at 'watch'. The claim stays 18.40 (pick1).
+
+**What the stk-only run shows** (bench, same harness and fit protocol):
+
+| config | gap | in-band14 | contact (poses) | why: slide / contact | overhead taken |
+|---|---|---|---|---|---|
+| claim pick1 (stk 5.791, ang_min 26.14) | 18.40 | 0.8941 | 0.0281 (11) | 9 / 11 | 7 / 28 |
+| stk 6.0 only (MR63ZZ pair) | **18.45** | 0.8936 | 0.0281 (11) | 9 / 11 | 7 / 28 |
+| as built (stk 6.0 + knee stop ang_min 30.5) | 18.20 | 0.8936 | 0.0256 (10) | 10 / 10 | 7 / 28 |
+
+So the MR63ZZ stack costs +0.05 on the bench, and the whole -0.25 comes from the knee stop. That stop refuses one pose
+that touched in the claim. The knee window is checked before contact on every reached pose, and its refusals are
+labelled 'slide' (`minarc-stop-knuckle-4r-pinknee.py` line 161). Held out the same bookkeeping moves slide 23 -> 31 and
+contact 35 -> 31: the stop refuses 8 poses, 4 taken and 4 that touched.
+
+**Rulings** (also in `docs/alignment/minarc-stop-knuckle-4r.rulings.json`):
+
+| key | refuted | evidence |
+|---|---|---|
+| contact_depth | no | **Re-derived** from the probes' `contact_poses`: bench 11 poses / 34.43 mm summed / deepest -13.17; held out 35 / 126.1 / -14.61. sidecar-longdyad `_perpose_claim`: 4 / 6.23 / -4.61 and 10 / 35.66 / -8.37. **Threshold.** TH depth_ratio 2.0 and floor 5 mm, on summed depth: x5.53 (+28.2 mm), x3.54 (+90.4 mm). The earlier label slip is fixed. Pricing the reference could only lower its depth. |
+| sampling | no | No per-part in-band record in any probe, verify or density file. My density run gives counts only. |
+| reporting | no | The 18.4 half is a false positive (it is pick1's confirmed final.gap). The sweep half is true: `sweeps.json` entry 12666 still carries 6.19 with is_record true, 13.35 below the verified number. |
+| G6 | no | Board recomputed from `morphs.json`: 8th. The 2026-10-17 caveat stands: pick1 is priced at 5.5, and I did not check the 3-joint rows' pricing, so the -0.12 margin is not shown like-for-like. The conclusion does not depend on it. |
+| NEW-overhead-traded | no | overhead140_ws: 7 vs 8 of 28 (bench), 12 vs 16 of 71 (held out). K is open on 0 of 7 ws and 0 of 10 clip poses at elevation >= 140. Unchanged by stk or the stop. |
+| T5 | no | Depths as above. No minarc per-pose dump anywhere under `docs/`. |
+| M2 | no | stk is the knee pin stack (`skin-normal-3r-pin-knee.py` line 19: 5.0 iglidur, 6.0 MR63ZZ pair). The claim has 5.791, and the CAD uses GSM-0405-03 sleeves. As-built files re-read: 18.2 / 22.75, and only stk and ang_min differ. **Correction:** stk alone reads 18.45 (+0.05). The "0.20 better on the bench (less contact)" belongs to the knee stop, not the bearing. |
+| T4 | no | `build.json` line 624 ang_stop 149.5. verifier.knee held out: max 152.746, outside_H1 4. **Correction:** the stop refuses 1 bench and 8 held-out poses as 'slide'. 4 of the held-out poses and the bench pose touched in the claim. The "less contact" is those poses re-labelled as knee-stop refusals (contact term -0.25 bench, -0.41 held out), not less metal on poses the arm reaches. The auditor's "the bench change is stk's alone" read the knee range over taken poses only. |
+| R2 | no | README line 33 "Best verified overall", row and dashboard "VERIFIED LEADER", the 6.19 record and the stale mechanism.notes are all still there. |
+| NEW-mixed-protocol | no | README 21.31 = `polished_held_out.env_fit` (env fit). 22.67 = sidecar-longdyad fit-60. pick1 fit-60 is 22.69. |
+| G4 | no | th_margin_own_state min 5.623, lt10 107 of 380, plain dyad on forced -22.763 (held out 5.586 / 273). J1 31 deg per frame: red-team line 137. |
+| M5 | no | `pick1_k_hold_check.md` lines 12, 16 and 43-49: 3.72 upright; 5.69 / 6.12 / 4.12 / 7.70 tilted; twist up to 3.83. |
+| T1 | no | Probe near1 / 2 / 3: 13 / 38 / 171 (23.36 / 41.29 / 156.01). 6 of the 7 overhead poses have a floor under 2 mm. |
+| P4 | no | 3ceacea and ec77d25 confirmed. `tools/simplicity.py` v2.2 gives 32.5 = the row. |
+| **S2** | **yes** | **The 0.42x is the BDp config.** The auditor's density file carries BDp's params (stk 5.2691, ang_min 24.95, lE 64.66). With pick1's params, the same tool and model give L1a 24 samples on 150.2 mm2, ratio **0.639**, above FLAG_LO 0.5 (`tools/sample_density.py` line 40). No part is flagged, so the -0.28..+2.35 bound does not apply to 18.40. The missing per-part in-band record stays under 'sampling'. |
+
+**Missed by the audit** (not counted in this verdict; for the next audit):
+1. **Stop-laundered contact.** The score charges a pose that touches twice: it is not taken (reach) AND it counts in
+   the contact share. A pose refused by a physical stop is charged once, on reach only. So a tighter stop that refuses
+   poses which would touch lowers the gap, while the wearer meets a hard knee stop there instead of metal on the skin.
+   - Here the CAD knee stop converts 1 bench and 4 held-out contact poses into refusals. That is worth -0.25 / -0.41
+     contact points, and it carries the whole as-built "improvement": bench 18.45 -> 18.20 from the stop; held out,
+     the +0.42 reach cost is offset by -0.41 of contact.
+   - The auditor reported it as "less contact pays most of that back" and "0.20 BETTER on the bench (less contact)".
+   - **Proposal (a reporting change, not used in any verdict):** report poses refused by a physical stop, and say
+     which of them touched without it, with every as-built re-wear. Read a stop's net effect as reach lost plus
+     contacts hidden, not as "less contact".
+2. **The separation in "Not measured" was wrong, and is now measured.** "On the bench the knee never passes 143.6 deg,
+   so the bench change there is stk's alone" used `verifier.knee.ang_range`, which covers taken poses only. Contact
+   poses are not taken, but they do pass the knee window check. The stk-only run puts the bench change at +0.05 for stk
+   and -0.25 for the stop.
+3. **Config mismatch in the density check.** `sample_density_minarc-stop-knuckle-4r.json` was measured on the v_gap
+   config (BDp). The audit applied its 0.42x to the polished_gap claim (pick1), where L1a is 0.639x and nothing is
+   flagged. For this row the tool's `density` line and S2 should read the claim's params (the same caution applies to
+   any row whose claim field is not v_gap).
+4. **Carried over, still open:** held out, K reaches 56.55 deg against stop B at 56.65 deg (the as-built file reads
+   56.551 too), and stop B carries no build tolerance. Not re-measured here.
