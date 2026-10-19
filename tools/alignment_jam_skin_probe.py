@@ -11,7 +11,7 @@ of every pose the model records as a part jam (same metal + contact-only samples
 The model runs UNCHANGED: only its run() on the EXACT wear bench is swapped for a copy of the loop that stops after the
 jam poses (the fit bench keeps the original run). No score is changed; the 'as if contact' gap is a proposal reading.
 
-    CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_jam_skin_probe.py <id> <out.json> [ModelClassName, default Model]
+    CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_jam_skin_probe.py <id> <out.json> [ModelClassName|-] [bench|held]
 """
 import json, os, sys, time
 import numpy as np
@@ -23,7 +23,7 @@ class _Done(Exception):
     pass
 
 
-def run(rid, cls_name=None):
+def run(rid, cls_name=None, wear="bench"):
     row = json.load(open(os.path.join(AA.ROWS, rid + ".json"))); P = dict(row["best_params"])
     mod = AA._load("jamprobe_" + rid.replace("-", "_"), os.path.join(AA.MODELS, rid + ".py"))
     S = mod.PK.S; Model = getattr(mod, cls_name or "Model"); box = {}
@@ -35,7 +35,7 @@ def run(rid, cls_name=None):
 
     def jam_run(self, B=None):
         B = self.B
-        if B.mode != "exact" or len(B.idx) != 470: return orig(self)      # the fit bench Bench(60,160) keeps the original run
+        if B.mode != "exact" or len(B.idx) == 220: return orig(self)      # the fit bench Bench(60,160) keeps the original run
         B.reset(); self.fit()
         valid = set(self.poses_fit.tolist()); dropped = set(self.poses_fit[self.drop].tolist()); self.last_pair = {}
         names = list(self.rigid) + list(self.link_pts)
@@ -62,14 +62,20 @@ def run(rid, cls_name=None):
     base.run = jam_run
     t = time.time()
     try:
-        mod.frozen(P)
+        if wear == "bench": mod.frozen(P)
+        elif hasattr(mod, "frozen_held"): mod.frozen_held(P)
+        else:   # the H1-family held bench (docs/concepts/verify/skin-normal-3r-pin-knee-polish.py held_bench()) in place of Bench(110,360)
+            import alignment_weldk_overstrap_adapter as WA
+            real = mod.CB; mod.CB = WA._HeldCB(real, WA._held_mod().held_bench)
+            try: mod.frozen(P)
+            finally: mod.CB = real
     except _Done:
         pass
     finally:
         base.run = orig
     J = box.get("jams", [])
     ins = [j for j in J if j["inside"]]
-    out = dict(id=rid, params=P, exact=os.environ.get("CB_EXACT") == "1", secs=round(time.time() - t, 1), git=AA._git("rev-parse", "--short", "HEAD"),
+    out = dict(id=rid, wear=wear, params=P, exact=os.environ.get("CB_EXACT") == "1", secs=round(time.time() - t, 1), git=AA._git("rev-parse", "--short", "HEAD"),
                n_valid=box.get("n_valid"), n_jam=len(J), n_jam_inside=len(ins),
                n_jam_inside_by_kind={k: sum(1 for j in ins if j["kind"] == k) for k in ("clip", "ws")},
                jam_inside_sum_mm=round(float(-sum(min(j["min_metal_mm"], j["contact_only_min_mm"]) for j in ins)), 2),
@@ -82,5 +88,5 @@ def run(rid, cls_name=None):
 
 if __name__ == "__main__":
     rid, path = sys.argv[1], sys.argv[2]
-    out = run(rid, sys.argv[3] if len(sys.argv) > 3 else None); json.dump(out, open(path, "w"), indent=1, default=float)
+    out = run(rid, sys.argv[3] if len(sys.argv) > 3 and sys.argv[3] != "-" else None, sys.argv[4] if len(sys.argv) > 4 else "bench"); json.dump(out, open(path, "w"), indent=1, default=float)
     print(json.dumps({k: v for k, v in out.items() if k != "jams"}, default=float))

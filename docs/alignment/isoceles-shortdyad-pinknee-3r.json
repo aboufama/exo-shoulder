@@ -1,0 +1,247 @@
+{
+ "id": "isoceles-shortdyad-pinknee-3r",
+ "status": "verified",
+ "v_gap": 27.91,
+ "complexity": 0,
+ "verdict": "watch",
+ "reasons": [
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "reporting: verdict text still reads as a self-measured screen; dashboard shows no verified number (row v_gap 27.91); dashboard sweep best 19.63 (score 92.86) sits 8.28 below the verified number; dashboard status 'screened' vs row 'verified'"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 30.3 vs bench 27.91 (+2.39; docs/concepts/verify/isoceles-shortdyad-pinknee-3r_claim_held_frozen.json)",
+   "held_gap": 30.3,
+   "v_gap": 27.91,
+   "drop": 2.39,
+   "source": "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_claim_held_frozen.json"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 21.85 -> verified 27.91 (+6.06)",
+   "fast": 21.85,
+   "verified": 27.91,
+   "drop": 6.06
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 28.36, <1 mm 33.87, <2 mm 59.41, 31.05 points live in the 1-2 mm shell (docs/concepts/verify/isoceles-shortdyad-pinknee-3r_diag_nostop_bench_frozen.json)",
+   "shell2": 31.05,
+   "plain": 28.36,
+   "n1": 33.87,
+   "n2": 59.41,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.28,
+   "source": "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_diag_nostop_bench_frozen.json"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 27.91: bench 8 contact poses, sum 27.48 mm, deepest 14.35 mm at ['ws', 120.0, 30.0, -180.0], 3 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+7.24 mm, x1.36); held 13 contact poses, sum 51.06 mm, deepest 14.4 mm at ['ws', 105.0, 30.0, -165.0], 4 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-9.91 mm, x0.84)",
+   "depths": {
+    "v_gap 27.91": {
+     "bench": {
+      "n": 8,
+      "sum_mm": 27.48,
+      "max_mm": 14.35,
+      "n_deeper3": 3,
+      "overhead140": 1,
+      "deepest": [
+       "ws",
+       120.0,
+       30.0,
+       -180.0
+      ],
+      "gap": 27.91,
+      "src": "docs/alignment/remeasure/isoceles-shortdyad-pinknee-3r_v_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        27.48
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 13,
+      "sum_mm": 51.06,
+      "max_mm": 14.4,
+      "n_deeper3": 4,
+      "overhead140": 0,
+      "deepest": [
+       "ws",
+       105.0,
+       30.0,
+       -165.0
+      ],
+      "gap": 30.3,
+      "src": "docs/alignment/remeasure/isoceles-shortdyad-pinknee-3r_v_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        51.06
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 27.91",
+     "wear": "bench",
+     "sum": 27.48,
+     "ref_sum": 20.24,
+     "excess": 7.24,
+     "ratio": 1.36,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 27.91",
+     "wear": "held",
+     "sum": 51.06,
+     "ref_sum": 60.97,
+     "excess": -9.91,
+     "ratio": 0.84,
+     "watch": false
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs conecut-knee-knuckle-3r: plain -10.08, 2 mm -24.57",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -10.08,
+   "gain_2mm": -24.57
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.072 deg (frozen_exact.cond.th_margin_min; 2 readings)",
+   "min_margin": 5.072,
+   "where": "frozen_exact.cond.th_margin_min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.883 vs part-weighted 0.917 (-3.44 points) (docs/concepts/verify/isoceles-shortdyad-pinknee-3r_diag_nostop_bench_frozen.json)",
+   "parts": {
+    "hub1": [
+     0.997,
+     9.4,
+     80
+    ],
+    "hub2": [
+     0.96,
+     10.6,
+     80
+    ],
+    "hub3": [
+     0.857,
+     10.6,
+     80
+    ],
+    "E": [
+     0.776,
+     10.0,
+     200
+    ],
+    "boss": [
+     0.958,
+     9.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.6,
+     32
+    ],
+    "knee": [
+     0.888,
+     11.1,
+     115
+    ],
+    "L1": [
+     0.971,
+     6.3,
+     52
+    ],
+    "L2": [
+     0.846,
+     8.7,
+     92
+    ]
+   }
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 0.0 vs row 0.0",
+   "recomputed": 0.0,
+   "row": 0.0
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard shows no verified number (row v_gap 27.91); dashboard sweep best 19.63 (score 92.86) sits 8.28 below the verified number; dashboard status 'screened' vs row 'verified'"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_v_contact_parts.json",
+  "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_v_champbig_frozen.json",
+  "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_v_tolprobe_held.json",
+  "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_v_tolprobe_bench.json",
+  "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_v_flood_held.json",
+  "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_v_flood_bench.json",
+  "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_v_bench_frozen.json",
+  "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_v_held_frozen.json",
+  "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_diag_nostop_bench_frozen.json",
+  "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_claim_held_frozen.json",
+  "docs/concepts/verify/isoceles-shortdyad-pinknee-3r_claim_bench_frozen.json"
+ ],
+ "git": "70f34ad",
+ "tool_version": "2026-10-19.1",
+ "t": "2026-10-19T04:43:53Z"
+}

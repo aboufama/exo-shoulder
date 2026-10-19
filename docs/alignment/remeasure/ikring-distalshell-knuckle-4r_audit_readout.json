@@ -1,0 +1,1523 @@
+{
+ "id": "ikring-distalshell-knuckle-4r",
+ "rule": "near-touch: a taken pose with min(min_mm, cmin) < N mm counted as contact (report only)",
+ "dumps": {
+  "distal_bench_verifier": {
+   "src": "docs/concepts/verify/ikring-distalshell-knuckle-4r/verifier/v_bench_perpose.json",
+   "dump_report_gap": 9.94,
+   "recomputed": {
+    "gap": 9.94,
+    "reach": 0.8056,
+    "follow": 1.0,
+    "inband14": 0.9225,
+    "contact": 0.005,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 290,
+    "contact_poses": 2
+   },
+   "clip": {
+    "n": 110,
+    "taken": 110,
+    "under1": 0,
+    "under2": 7,
+    "under3": 26,
+    "median_min_mm": 3.52,
+    "min_mm": 1.726
+   },
+   "ws": {
+    "n": 360,
+    "taken": 290,
+    "under1": 4,
+    "under2": 28,
+    "under3": 87,
+    "median_min_mm": 3.57,
+    "min_mm": 0.072,
+    "overhead140": [
+     13,
+     28
+    ],
+    "overhead140_under2": 6,
+    "raised90": [
+     68,
+     113
+    ],
+    "raised90_under2": 13
+   },
+   "gap_near1": 12.05,
+   "gap_near2": 27.79,
+   "gap_near3": 80.85,
+   "contacts": [
+    {
+     "i": 237,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -9.005
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -5.741
+    }
+   ],
+   "contact_n": 2,
+   "contact_sum_mm": 14.75,
+   "contact_max_mm": 9.01,
+   "contact_overhead140": 2
+  },
+  "distal_bench_claim": {
+   "src": "docs/concepts/verify/ikring-distalshell-knuckle-4r/ik_bench_fixk_perpose.json",
+   "dump_report_gap": 9.94,
+   "recomputed": {
+    "gap": 9.94,
+    "reach": 0.8056,
+    "follow": 1.0,
+    "inband14": 0.9225,
+    "contact": 0.005,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 290,
+    "contact_poses": 2
+   },
+   "clip": {
+    "n": 110,
+    "taken": 110,
+    "under1": 0,
+    "under2": 7,
+    "under3": 26,
+    "median_min_mm": 3.52,
+    "min_mm": 1.726
+   },
+   "ws": {
+    "n": 360,
+    "taken": 290,
+    "under1": 4,
+    "under2": 28,
+    "under3": 87,
+    "median_min_mm": 3.57,
+    "min_mm": 0.072,
+    "overhead140": [
+     13,
+     28
+    ],
+    "overhead140_under2": 6,
+    "raised90": [
+     68,
+     113
+    ],
+    "raised90_under2": 13
+   },
+   "gap_near1": 12.05,
+   "gap_near2": 27.79,
+   "gap_near3": 80.85,
+   "contacts": [
+    {
+     "i": 237,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -9.005
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -5.741
+    }
+   ],
+   "contact_n": 2,
+   "contact_sum_mm": 14.75,
+   "contact_max_mm": 9.01,
+   "contact_overhead140": 2
+  },
+  "distal_bench_importedtable": {
+   "src": "docs/concepts/verify/ikring-distalshell-knuckle-4r/ik_bench_perpose.json",
+   "dump_report_gap": 11.16,
+   "recomputed": {
+    "gap": 11.16,
+    "reach": 0.8056,
+    "follow": 1.0,
+    "inband14": 0.9225,
+    "contact": 0.0172,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 290,
+    "contact_poses": 7
+   },
+   "clip": {
+    "n": 110,
+    "taken": 110,
+    "under1": 0,
+    "under2": 7,
+    "under3": 26,
+    "median_min_mm": 3.52,
+    "min_mm": 1.726
+   },
+   "ws": {
+    "n": 360,
+    "taken": 290,
+    "under1": 4,
+    "under2": 28,
+    "under3": 87,
+    "median_min_mm": 3.57,
+    "min_mm": 0.072,
+    "overhead140": [
+     13,
+     28
+    ],
+    "overhead140_under2": 6,
+    "raised90": [
+     68,
+     113
+    ],
+    "raised90_under2": 13
+   },
+   "gap_near1": 13.26,
+   "gap_near2": 28.91,
+   "gap_near3": 81.73,
+   "contacts": [
+    {
+     "i": 237,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -9.005
+    },
+    {
+     "i": 431,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      30.0,
+      -150.0
+     ],
+     "mm": -6.904
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -5.741
+    },
+    {
+     "i": 464,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      90.0,
+      -90.0
+     ],
+     "mm": -4.612
+    },
+    {
+     "i": 354,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      45.0,
+      -150.0
+     ],
+     "mm": -3.548
+    },
+    {
+     "i": 441,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      90.0,
+      -105.0
+     ],
+     "mm": -3.46
+    },
+    {
+     "i": 417,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      90.0,
+      -120.0
+     ],
+     "mm": -1.265
+    }
+   ],
+   "contact_n": 7,
+   "contact_sum_mm": 34.54,
+   "contact_max_mm": 9.01,
+   "contact_overhead140": 2
+  },
+  "distal_heldws_importedtable": {
+   "src": "docs/concepts/verify/ikring-distalshell-knuckle-4r/ik_heldws_perpose.json",
+   "dump_report_gap": 15.63,
+   "recomputed": {
+    "gap": 15.63,
+    "reach": 0.7847,
+    "follow": 1.0,
+    "inband14": 0.9755,
+    "contact": 0.0409,
+    "n_ws": 952,
+    "n_clip": 3,
+    "ws_taken": 747,
+    "contact_poses": 32
+   },
+   "clip": {
+    "n": 3,
+    "taken": 3,
+    "under1": 0,
+    "under2": 0,
+    "under3": 0,
+    "median_min_mm": 3.6,
+    "min_mm": 3.013
+   },
+   "ws": {
+    "n": 952,
+    "taken": 747,
+    "under1": 22,
+    "under2": 71,
+    "under3": 186,
+    "median_min_mm": 3.6,
+    "min_mm": 0.105,
+    "overhead140": [
+     32,
+     71
+    ],
+    "overhead140_under2": 14,
+    "raised90": [
+     182,
+     300
+    ],
+    "raised90_under2": 34
+   },
+   "gap_near1": 20.75,
+   "gap_near2": 32.16,
+   "gap_near3": 58.95,
+   "contacts": [
+    {
+     "i": 941,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      90.0,
+      -105.0
+     ],
+     "mm": -10.331
+    },
+    {
+     "i": 879,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      90.0,
+      -120.0
+     ],
+     "mm": -9.982
+    },
+    {
+     "i": 484,
+     "kind": "ws",
+     "pose": [
+      45.0,
+      165.0,
+      -30.0
+     ],
+     "mm": -9.938
+    },
+    {
+     "i": 411,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -45.0
+     ],
+     "mm": -9.055
+    },
+    {
+     "i": 786,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      30.0,
+      -165.0
+     ],
+     "mm": -8.96
+    },
+    {
+     "i": 873,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      75.0,
+      -120.0
+     ],
+     "mm": -8.956
+    },
+    {
+     "i": 714,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      30.0,
+      -165.0
+     ],
+     "mm": -8.907
+    },
+    {
+     "i": 778,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      15.0,
+      -180.0
+     ],
+     "mm": -8.266
+    },
+    {
+     "i": 707,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      15.0,
+      -165.0
+     ],
+     "mm": -7.717
+    },
+    {
+     "i": 335,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      150.0,
+      -60.0
+     ],
+     "mm": -7.066
+    },
+    {
+     "i": 556,
+     "kind": "ws",
+     "pose": [
+      60.0,
+      165.0,
+      -30.0
+     ],
+     "mm": -6.869
+    },
+    {
+     "i": 787,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      30.0,
+      -150.0
+     ],
+     "mm": -6.639
+    },
+    {
+     "i": 715,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      30.0,
+      -150.0
+     ],
+     "mm": -6.569
+    },
+    {
+     "i": 636,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      15.0,
+      -150.0
+     ],
+     "mm": -6.557
+    },
+    {
+     "i": 867,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      60.0,
+      -120.0
+     ],
+     "mm": -6.452
+    },
+    {
+     "i": 861,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      45.0,
+      -135.0
+     ],
+     "mm": -6.41
+    },
+    {
+     "i": 643,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      30.0,
+      -150.0
+     ],
+     "mm": -6.316
+    },
+    {
+     "i": 483,
+     "kind": "ws",
+     "pose": [
+      45.0,
+      165.0,
+      -45.0
+     ],
+     "mm": -5.797
+    },
+    {
+     "i": 26,
+     "kind": "ws",
+     "pose": [
+      -90.0,
+      60.0,
+      120.0
+     ],
+     "mm": -5.514
+    },
+    {
+     "i": 408,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      150.0,
+      -45.0
+     ],
+     "mm": -5.335
+    },
+    {
+     "i": 779,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      15.0,
+      -165.0
+     ],
+     "mm": -4.829
+    },
+    {
+     "i": 565,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      15.0,
+      -135.0
+     ],
+     "mm": -4.214
+    },
+    {
+     "i": 929,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      60.0,
+      -90.0
+     ],
+     "mm": -3.815
+    },
+    {
+     "i": 936,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      75.0,
+      -90.0
+     ],
+     "mm": -3.754
+    },
+    {
+     "i": 25,
+     "kind": "ws",
+     "pose": [
+      -90.0,
+      60.0,
+      105.0
+     ],
+     "mm": -3.49
+    },
+    {
+     "i": 924,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      45.0,
+      -75.0
+     ],
+     "mm": -3.011
+    },
+    {
+     "i": 708,
+     "kind": "ws",
+     "pose": [
+      105.0,
+      15.0,
+      -150.0
+     ],
+     "mm": -2.098
+    },
+    {
+     "i": 53,
+     "kind": "ws",
+     "pose": [
+      -75.0,
+      60.0,
+      105.0
+     ],
+     "mm": -1.602
+    },
+    {
+     "i": 326,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      105.0,
+      15.0
+     ],
+     "mm": -1.216
+    },
+    {
+     "i": 795,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      45.0,
+      -135.0
+     ],
+     "mm": -0.805
+    },
+    {
+     "i": 952,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      120.0,
+      -105.0
+     ],
+     "mm": -0.279
+    },
+    {
+     "i": 401,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      120.0,
+      -15.0
+     ],
+     "mm": -0.257
+    }
+   ],
+   "contact_n": 32,
+   "contact_sum_mm": 181.01,
+   "contact_max_mm": 10.33,
+   "contact_overhead140": 6
+  },
+  "distal_heldws_ownfix": {
+   "src": "docs/alignment/remeasure/ikring-distalshell-knuckle-4r_heldfix_perpose.json",
+   "missing": true
+  },
+  "lead_bench": {
+   "src": "docs/alignment/remeasure/conecut-knee-knuckle-3r_bench_perpose.json",
+   "dump_report_gap": 18.29,
+   "recomputed": {
+    "gap": 18.29,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.9012,
+    "contact": 0.0106,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 262,
+    "contact_poses": 4
+   },
+   "clip": {
+    "n": 110,
+    "taken": 110,
+    "under1": 0,
+    "under2": 5,
+    "under3": 25,
+    "median_min_mm": 3.48,
+    "min_mm": 1.837
+   },
+   "ws": {
+    "n": 360,
+    "taken": 262,
+    "under1": 3,
+    "under2": 28,
+    "under3": 80,
+    "median_min_mm": 3.47,
+    "min_mm": 0.072,
+    "overhead140": [
+     8,
+     28
+    ],
+    "overhead140_under2": 4,
+    "raised90": [
+     47,
+     113
+    ],
+    "raised90_under2": 10
+   },
+   "gap_near1": 19.92,
+   "gap_near2": 34.84,
+   "gap_near3": 86.16,
+   "contacts": [
+    {
+     "i": 237,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -8.928
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -5.797
+    },
+    {
+     "i": 205,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      105.0,
+      15.0
+     ],
+     "mm": -4.28
+    },
+    {
+     "i": 316,
+     "kind": "ws",
+     "pose": [
+      60.0,
+      150.0,
+      -105.0
+     ],
+     "mm": -1.235
+    }
+   ],
+   "contact_n": 4,
+   "contact_sum_mm": 20.24,
+   "contact_max_mm": 8.93,
+   "contact_overhead140": 3
+  },
+  "lead_held": {
+   "src": "docs/alignment/remeasure/conecut-knee-knuckle-3r_held_perpose.json",
+   "dump_report_gap": 22.38,
+   "recomputed": {
+    "gap": 22.38,
+    "reach": 0.6922,
+    "follow": 1.0,
+    "inband14": 0.9,
+    "contact": 0.016,
+    "n_ws": 952,
+    "n_clip": 202,
+    "ws_taken": 659,
+    "contact_poses": 14
+   },
+   "clip": {
+    "n": 202,
+    "taken": 202,
+    "under1": 0,
+    "under2": 8,
+    "under3": 45,
+    "median_min_mm": 3.47,
+    "min_mm": 1.837
+   },
+   "ws": {
+    "n": 952,
+    "taken": 659,
+    "under1": 13,
+    "under2": 63,
+    "under3": 172,
+    "median_min_mm": 3.56,
+    "min_mm": 0.325,
+    "overhead140": [
+     18,
+     71
+    ],
+    "overhead140_under2": 10,
+    "raised90": [
+     123,
+     300
+    ],
+    "raised90_under2": 25
+   },
+   "gap_near1": 25.23,
+   "gap_near2": 37.11,
+   "gap_near3": 82.52,
+   "contacts": [
+    {
+     "i": 683,
+     "kind": "ws",
+     "pose": [
+      45.0,
+      165.0,
+      -30.0
+     ],
+     "mm": -9.864
+    },
+    {
+     "i": 610,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -45.0
+     ],
+     "mm": -9.133
+    },
+    {
+     "i": 534,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      150.0,
+      -60.0
+     ],
+     "mm": -7.082
+    },
+    {
+     "i": 755,
+     "kind": "ws",
+     "pose": [
+      60.0,
+      165.0,
+      -30.0
+     ],
+     "mm": -6.923
+    },
+    {
+     "i": 682,
+     "kind": "ws",
+     "pose": [
+      45.0,
+      165.0,
+      -45.0
+     ],
+     "mm": -5.853
+    },
+    {
+     "i": 225,
+     "kind": "ws",
+     "pose": [
+      -90.0,
+      60.0,
+      120.0
+     ],
+     "mm": -5.51
+    },
+    {
+     "i": 607,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      150.0,
+      -45.0
+     ],
+     "mm": -5.389
+    },
+    {
+     "i": 835,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      15.0,
+      -150.0
+     ],
+     "mm": -3.553
+    },
+    {
+     "i": 224,
+     "kind": "ws",
+     "pose": [
+      -90.0,
+      60.0,
+      105.0
+     ],
+     "mm": -3.487
+    },
+    {
+     "i": 252,
+     "kind": "ws",
+     "pose": [
+      -75.0,
+      60.0,
+      105.0
+     ],
+     "mm": -1.6
+    },
+    {
+     "i": 978,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      15.0,
+      -165.0
+     ],
+     "mm": -1.327
+    },
+    {
+     "i": 525,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      105.0,
+      15.0
+     ],
+     "mm": -0.862
+    },
+    {
+     "i": 447,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      90.0,
+      30.0
+     ],
+     "mm": -0.207
+    },
+    {
+     "i": 820,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      150.0,
+      -90.0
+     ],
+     "mm": -0.177
+    }
+   ],
+   "contact_n": 14,
+   "contact_sum_mm": 60.97,
+   "contact_max_mm": 9.86,
+   "contact_overhead140": 7
+  },
+  "pick1_bench_verifier": {
+   "src": "docs/concepts/verify/ikring-thinstack-knuckle-4r/verifier/v_bench_full_perpose.json",
+   "dump_report_gap": 8.75,
+   "recomputed": {
+    "gap": 8.75,
+    "reach": 0.8222,
+    "follow": 1.0,
+    "inband14": 0.9034,
+    "contact": 0.0098,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 296,
+    "contact_poses": 4
+   },
+   "clip": {
+    "n": 110,
+    "taken": 110,
+    "under1": 7,
+    "under2": 14,
+    "under3": 52,
+    "median_min_mm": 3.18,
+    "min_mm": 0.419
+   },
+   "ws": {
+    "n": 360,
+    "taken": 296,
+    "under1": 17,
+    "under2": 69,
+    "under3": 133,
+    "median_min_mm": 3.13,
+    "min_mm": 0.099,
+    "overhead140": [
+     13,
+     28
+    ],
+    "overhead140_under2": 6,
+    "raised90": [
+     73,
+     113
+    ],
+    "raised90_under2": 14
+   },
+   "gap_near1": 20.76,
+   "gap_near2": 55.89,
+   "gap_near3": 136.36,
+   "contacts": [
+    {
+     "i": 237,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -8.928
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -5.797
+    },
+    {
+     "i": 205,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      105.0,
+      15.0
+     ],
+     "mm": -4.28
+    },
+    {
+     "i": 139,
+     "kind": "ws",
+     "pose": [
+      -60.0,
+      60.0,
+      105.0
+     ],
+     "mm": -0.475
+    }
+   ],
+   "contact_n": 4,
+   "contact_sum_mm": 19.48,
+   "contact_max_mm": 8.93,
+   "contact_overhead140": 2
+  },
+  "pick1_heldws": {
+   "src": "docs/concepts/verify/ikring-thinstack-knuckle-4r/ik_heldws_specrule_perpose.json",
+   "dump_report_gap": 10.09,
+   "recomputed": {
+    "gap": 10.09,
+    "reach": 0.813,
+    "follow": 1.0,
+    "inband14": 0.9713,
+    "contact": 0.014,
+    "n_ws": 952,
+    "n_clip": 3,
+    "ws_taken": 774,
+    "contact_poses": 11
+   },
+   "clip": {
+    "n": 3,
+    "taken": 3,
+    "under1": 0,
+    "under2": 0,
+    "under3": 2,
+    "median_min_mm": 2.44,
+    "min_mm": 2.38
+   },
+   "ws": {
+    "n": 952,
+    "taken": 774,
+    "under1": 60,
+    "under2": 158,
+    "under3": 322,
+    "median_min_mm": 3.17,
+    "min_mm": 0.02,
+    "overhead140": [
+     32,
+     71
+    ],
+    "overhead140_under2": 14,
+    "raised90": [
+     191,
+     300
+    ],
+    "raised90_under2": 38
+   },
+   "gap_near1": 24.01,
+   "gap_near2": 46.74,
+   "gap_near3": 146.7,
+   "contacts": [
+    {
+     "i": 484,
+     "kind": "ws",
+     "pose": [
+      45.0,
+      165.0,
+      -30.0
+     ],
+     "mm": -9.864
+    },
+    {
+     "i": 411,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -45.0
+     ],
+     "mm": -9.133
+    },
+    {
+     "i": 335,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      150.0,
+      -60.0
+     ],
+     "mm": -7.082
+    },
+    {
+     "i": 556,
+     "kind": "ws",
+     "pose": [
+      60.0,
+      165.0,
+      -30.0
+     ],
+     "mm": -6.923
+    },
+    {
+     "i": 483,
+     "kind": "ws",
+     "pose": [
+      45.0,
+      165.0,
+      -45.0
+     ],
+     "mm": -5.853
+    },
+    {
+     "i": 26,
+     "kind": "ws",
+     "pose": [
+      -90.0,
+      60.0,
+      120.0
+     ],
+     "mm": -5.51
+    },
+    {
+     "i": 408,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      150.0,
+      -45.0
+     ],
+     "mm": -5.389
+    },
+    {
+     "i": 25,
+     "kind": "ws",
+     "pose": [
+      -90.0,
+      60.0,
+      105.0
+     ],
+     "mm": -3.487
+    },
+    {
+     "i": 53,
+     "kind": "ws",
+     "pose": [
+      -75.0,
+      60.0,
+      105.0
+     ],
+     "mm": -1.6
+    },
+    {
+     "i": 326,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      105.0,
+      15.0
+     ],
+     "mm": -0.862
+    },
+    {
+     "i": 248,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      90.0,
+      30.0
+     ],
+     "mm": -0.207
+    }
+   ],
+   "contact_n": 11,
+   "contact_sum_mm": 55.91,
+   "contact_max_mm": 9.86,
+   "contact_overhead140": 6
+  },
+  "phi40_bench": {
+   "src": "docs/alignment/remeasure/phi40-thinstack-relay-4r_bench_perpose.json",
+   "dump_report_gap": 13.52,
+   "recomputed": {
+    "gap": 13.52,
+    "reach": 0.8056,
+    "follow": 1.0,
+    "inband14": 0.9169,
+    "contact": 0.0408,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 290,
+    "contact_poses": 17
+   },
+   "clip": {
+    "n": 110,
+    "taken": 110,
+    "under1": 0,
+    "under2": 12,
+    "under3": 28,
+    "median_min_mm": 3.27,
+    "min_mm": 1.351
+   },
+   "ws": {
+    "n": 360,
+    "taken": 290,
+    "under1": 9,
+    "under2": 47,
+    "under3": 116,
+    "median_min_mm": 3.27,
+    "min_mm": 0.072,
+    "overhead140": [
+     9,
+     28
+    ],
+    "overhead140_under2": 5,
+    "raised90": [
+     67,
+     113
+    ],
+    "raised90_under2": 17
+   },
+   "gap_near1": 18.18,
+   "gap_near2": 46.63,
+   "gap_near3": 100.73,
+   "contacts": [
+    {
+     "i": 263,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      150.0,
+      -30.0
+     ],
+     "mm": -15.366
+    },
+    {
+     "i": 459,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      60.0,
+      -120.0
+     ],
+     "mm": -13.783
+    },
+    {
+     "i": 262,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      135.0,
+      0.0
+     ],
+     "mm": -9.787
+    },
+    {
+     "i": 237,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -8.928
+    },
+    {
+     "i": 206,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      120.0,
+      -15.0
+     ],
+     "mm": -6.071
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "pose": [
+      30.0,
+      165.0,
+      -60.0
+     ],
+     "mm": -5.797
+    },
+    {
+     "i": 205,
+     "kind": "ws",
+     "pose": [
+      0.0,
+      105.0,
+      15.0
+     ],
+     "mm": -4.28
+    },
+    {
+     "i": 457,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      45.0,
+      -105.0
+     ],
+     "mm": -1.997
+    },
+    {
+     "i": 448,
+     "kind": "ws",
+     "pose": [
+      135.0,
+      135.0,
+      -90.0
+     ],
+     "mm": -1.924
+    },
+    {
+     "i": 343,
+     "kind": "ws",
+     "pose": [
+      75.0,
+      150.0,
+      -105.0
+     ],
+     "mm": -1.727
+    },
+    {
+     "i": 233,
+     "kind": "ws",
+     "pose": [
+      15.0,
+      120.0,
+      -30.0
+     ],
+     "mm": -1.268
+    },
+    {
+     "i": 316,
+     "kind": "ws",
+     "pose": [
+      60.0,
+      150.0,
+      -105.0
+     ],
+     "mm": -1.235
+    },
+    {
+     "i": 421,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      120.0,
+      -120.0
+     ],
+     "mm": -0.948
+    },
+    {
+     "i": 182,
+     "kind": "ws",
+     "pose": [
+      -15.0,
+      90.0,
+      45.0
+     ],
+     "mm": -0.709
+    },
+    {
+     "i": 423,
+     "kind": "ws",
+     "pose": [
+      120.0,
+      135.0,
+      -90.0
+     ],
+     "mm": -0.703
+    },
+    {
+     "i": 466,
+     "kind": "ws",
+     "pose": [
+      150.0,
+      105.0,
+      -105.0
+     ],
+     "mm": -0.328
+    },
+    {
+     "i": 372,
+     "kind": "ws",
+     "pose": [
+      90.0,
+      165.0,
+      -90.0
+     ],
+     "mm": -0.068
+    }
+   ],
+   "contact_n": 17,
+   "contact_sum_mm": 74.92,
+   "contact_max_mm": 15.37,
+   "contact_overhead140": 6
+  },
+  "phi40_held": {
+   "src": "docs/alignment/remeasure/phi40-thinstack-relay-4r_held_perpose.json",
+   "dump_report_gap": 16.02,
+   "recomputed": {
+    "gap": 16.02,
+    "reach": 0.7878,
+    "follow": 1.0,
+    "inband14": 0.916,
+    "contact": 0.048,
+    "n_ws": 952,
+    "n_clip": 202,
+    "ws_taken": 750,
+    "contact_poses": 48
+   },
+   "clip": {
+    "n": 202,
+    "taken": 202,
+    "under1": 0,
+    "under2": 21,
+    "under3": 52,
+    "median_min_mm": 3.26,
+    "min_mm": 1.351
+   },
+   "ws": {
+    "n": 952,
+    "taken": 750,
+    "under1": 34,
+    "under2": 119,
+    "under3": 271,
+    "median_min_mm": 3.31,
+    "min_mm": 0.1,
+    "overhead140": [
+     22,
+     71
+    ],
+    "overhead140_under2": 14,
+    "raised90": [
+     176,
+     300
+    ],
+    "raised90_under2": 46
+   },
+   "gap_near1": 22.99,
+   "gap_near2": 47.91,
+   "gap_near3": 97.53,
+   "contact_n": 48,
+   "contact_sum_mm": 197.82,
+   "contact_max_mm": 13.89,
+   "contact_overhead140": 16
+  }
+ },
+ "strict_shell_bench": {
+  "poses": [
+   354,
+   417,
+   431,
+   441,
+   454,
+   457,
+   459,
+   464,
+   466
+  ],
+  "plain_strict": 12.18,
+  "plain": 9.94,
+  "note": "pooled-in-band plain; the chain-only gate adds +0.60 on the bench (0.894 vs 0.90)"
+ },
+ "psi_jumps_bench": {
+  "pairs": 175,
+  "over20": 3,
+  "over10": 3,
+  "max": 32.5,
+  "top": [
+   [
+    32.5,
+    366,
+    393
+   ],
+   [
+    25.0,
+    313,
+    340
+   ],
+   [
+    25.0,
+    309,
+    336
+   ],
+   [
+    10.0,
+    369,
+    396
+   ],
+   [
+    7.5,
+    396,
+    423
+   ],
+   [
+    7.5,
+    393,
+    420
+   ]
+  ],
+  "psi_nonzero_taken": 30
+ },
+ "parked_psi0": {
+  "k0_parked": {
+   "ws_taken": 261,
+   "overhead": 8
+  },
+  "chain_psi0": {
+   "ws_taken": 261,
+   "overhead": 8
+  }
+ }
+}

@@ -1,5 +1,6 @@
 {
  "id": "weldk-overstrap-pinknee-3r",
+ "wear": "bench",
  "params": {
   "az2": 29.3466,
   "el2": 47.9274,
@@ -15,8 +16,8 @@
   "kinv": 1
  },
  "exact": true,
- "secs": 35.9,
- "git": "8b1bc00",
+ "secs": 26.1,
+ "git": "f9282a6",
  "n_valid": 366,
  "n_jam": 34,
  "n_jam_inside": 14,
