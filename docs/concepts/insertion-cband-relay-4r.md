@@ -252,6 +252,14 @@ contact on Bench(110,360).
   - 54 fold and 6 J3-stop poses.
 - On envsel, 11 of the 13 contacts are hub 2: the burial is the limiter there.
 
+**Caveat on kc 2 (how far the bar can be trusted).**
+- Hub K's stack carries link 1a and link 1b at different plate levels, so a real one-bar link 1 climbs between those
+  levels near hub K. A 20 mm pad with a 3 mm top does not model that climb.
+- If the phantom crown contacts sit below the top link's level, part of the 4.12-point correction is optimistic.
+- The diagnostic (scratch icb_audit/hubk_levels.py) prints the height of each hub-K contact entry above the underside,
+  and the link levels near hub K, at every contact pose. It was still running at commit time; its result is appended
+  below when it lands.
+
 ### Levers tried (none reverses the ruling)
 
 1. **Fit the chain metal on the relayed poses** (`fitrel 1`). The default fits on the un-relayed Bench(60,160) poses
