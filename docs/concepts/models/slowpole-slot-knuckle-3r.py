@@ -135,6 +135,8 @@ def slot(P=None, r_p=13.5, ph=17.0, dwell=60.0, dq=0.05, mu=0.087, R_mm=61.0, pi
 def wear(P, bench="envsel"):
     out, M, B = SK.wear(dict(PARAMS, **P), bench)
     out["id"] = ID; out["law_slowpole"] = law_report(P)
+    out["bk_model"] = [float(M.D.p["bk1"]), float(M.D.p["bk2"])]            # the J7 kit trap: the dyad the model actually ran
+    assert abs(out["bk_model"][0] - float(_clamp(dict(PARAMS, **P))["bk1"])) < 1e-9 and abs(out["bk_model"][1] - float(_clamp(dict(PARAMS, **P))["bk2"])) < 1e-9
     taken = np.array([B.res[j] is not None and float(np.min(B.res[j])) >= 0 for j in range(len(B.idx))])
     try:
         th = np.degrees(np.asarray(M.th, float)) if hasattr(M, "th") else None
@@ -154,7 +156,7 @@ def evaluate(B, params):
     return p, r
 
 
-def viz_export(par): return CC.viz_export(_clamp(dict(PARAMS, **par)))
+def viz_export(par): return CC.RF.viz_export(_clamp(dict(PARAMS, **par)))     # not CC.viz_export: CC._clamp re-boxes bk1 / bk2
 
 
 if __name__ == "__main__":
