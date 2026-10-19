@@ -1,0 +1,48 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-19T03:58:49Z",
+  "params": {
+   "bk1": 40.0,
+   "bk2": 40.0,
+   "rho": 0.5,
+   "cell": "ghost (drive metal deleted)",
+   "bench": "Bench(110,360) exact frozen",
+   "th_on": 56.82,
+   "DKLIM": 30.99
+  },
+  "inband14": 0.7379,
+  "inband10": 0.4844,
+  "reach": 0.7056,
+  "follow": 0.9545,
+  "contact": 0.0452,
+  "gap": 40.17,
+  "ws_taken": 254,
+  "near1": 40.72,
+  "near2": 54.32,
+  "fit_fast": {
+   "gap": 33.4,
+   "reach": 0.7562,
+   "follow": 0.95,
+   "inband14": 0.7371,
+   "inband10": 0.4816,
+   "contact": 0.0273,
+   "near1": 34.57,
+   "near2": 45.12
+  },
+  "overhead": "4/28",
+  "parts_ib14": {
+   "hub1": 1.0,
+   "hubK": 0.033,
+   "hub2": 0.93,
+   "hub3": 0.748,
+   "E": 0.979,
+   "boss": 1.0,
+   "pad": 1.0,
+   "knee": 1.0,
+   "L1a": 0.182,
+   "L1b": 0.32,
+   "L2": 0.777
+  }
+ }
+]

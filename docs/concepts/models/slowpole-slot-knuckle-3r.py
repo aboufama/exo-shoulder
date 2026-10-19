@@ -132,6 +132,57 @@ def slot(P=None, r_p=13.5, ph=17.0, dwell=60.0, dq=0.05, mu=0.087, R_mm=61.0, pi
                 pin_from_uK_deg=[round(float(np.degrees(np.arccos(np.clip(cb[ri] @ uK, -1, 1))).min()), 2), round(float(np.degrees(np.arccos(np.clip(cb[ri] @ uK, -1, 1))).max()), 2)])
 
 
+def slot_geo(P=None, r_p=13.5, ph=17.0, R_mm=68.0, dq=1.0, dwell=60.0):
+    """the preview's drive geometry: the pin in link 2's frame (q2 = 0) and the slot locus in link 1a's frame (mm, base frame)"""
+    P = _clamp(dict(PARAMS, **(P or {}))); b1, b2, rho = P["bk1"], P["bk2"], P["rho"]
+    L = SK.law_for(dict(P, WALL="lead")); G = SK._geo(b1, b2); an = SK.anchor(); D = G["D"]
+    u2, uK = D.u[1], D.uK; sp = float(np.sign(D.psiA)) or 1.0; s_q = an["s_q"]
+    e = S.unit(np.cross(u2, np.cross(uK, u2))); f = np.cross(u2, e); t = r_p / R_mm
+    q2e = math.radians(L["q2_end"]); q2on = math.radians(L["q2_on"]); kend = math.radians(L["k_end"])
+    pe = math.cos(t) * u2 + math.sin(t) * (math.cos(math.radians(ph)) * e + math.sin(math.radians(ph)) * f)
+    p0 = S.rotm(u2, -q2e)[0] @ pe
+    q2s = q2on + s_q * np.radians(np.arange(-dwell, math.degrees(q2e - q2on) * s_q + 1e-9, dq))
+    K = np.clip(rho * s_q * (q2s - q2on), 0.0, kend)
+    c = np.einsum("nij,nj->ni", S.rotm(uK, sp * K), np.einsum("nij,j->ni", S.rotm(u2, q2s), p0))
+    R = lambda v: [round(float(x), 3) for x in v]
+    return dict(pin=R(p0 * R_mm), pinAx=[round(float(x), 5) for x in p0], slot=[R(x * R_mm) for x in c])
+
+
+def slot_varlaw(P=None, r_p=13.5, ph=-60.0, R_mm=61.0, dq=0.25, mu=0.087, rhos=np.linspace(0.02, 3.0, 150)):
+    """the VARIABLE-RATIO slot law a single pin can carry: integrate BACKWARD from the lead's end state (q2_end, K_end on this
+    dyad) choosing at each dq deg of q2 the LARGEST ratio rho = dK / d(-q2) in (0, 3] whose plate PA <= 43 - atan(mu) (so the
+    onset is as late as the pin allows). PA(C, rho) = angle(C x unit(v_rel), uK x C), v_rel = (s_q u2 + sp rho uK) x C (link 1b
+    frame; the slot normal passes through the relative pole of the instantaneous ratio). Reports the q2 travel, the onset th,
+    msub along the law (the kit's J1-K-J3 sub-dyad rule >= 5) and the law (q2, K, rho, PA) every 1 deg of q2."""
+    P = _clamp(dict(PARAMS, **(P or {}))); b1, b2 = P["bk1"], P["bk2"]
+    L = SK.law_for(dict(P, WALL="lead")); G = SK._geo(b1, b2); an = SK.anchor(); D = G["D"]
+    u1, u2, u3 = D.u; uK = D.uK; sp = float(np.sign(D.psiA)) or 1.0; s_q = an["s_q"]; gate = SN.pa_kin(mu)
+    e = S.unit(np.cross(u2, np.cross(uK, u2))); f = np.cross(u2, e); t = r_p / R_mm
+    q2e = math.radians(L["q2_end"]); kend = math.radians(L["k_end"])
+    pe = math.cos(t) * u2 + math.sin(t) * (math.cos(math.radians(ph)) * e + math.sin(math.radians(ph)) * f)
+    p0 = S.rotm(u2, -q2e)[0] @ pe
+    q2 = q2e; K = kend; law = []
+    for _ in range(4000):
+        if K <= 0: break
+        C = S.rotm(u2, q2)[0] @ p0; vK = np.cross(uK, C); vKn = np.linalg.norm(vK)
+        vr = np.cross((s_q * u2)[None, :] + sp * rhos[:, None] * uK[None, :], C[None, :]); nr = np.linalg.norm(vr, axis=1)
+        n = np.cross(C[None, :], vr / np.maximum(nr, 1e-12)[:, None])
+        pa = np.degrees(np.arccos(np.clip(np.abs(n @ vK) / max(vKn, 1e-12), 0, 1)))
+        okr = np.nonzero((pa <= gate) & (nr > 1e-9))[0]
+        if not len(okr): return dict(ok=False, r_p=r_p, ph=ph, K_left=round(math.degrees(K), 2), q2_travel=round(len(law) * dq, 2))
+        rho = float(rhos[okr[-1]]); law.append((math.degrees(q2), math.degrees(K), rho, float(pa[okr[-1]])))
+        K -= rho * math.radians(dq); q2 -= s_q * math.radians(dq)
+    A = np.array(law)
+    ths = np.array([G["th"](math.radians(q), k)[0] for q, k, _, _ in A])
+    cK = np.array([math.degrees(math.acos(np.clip(float(uK @ (S.rotm(u2, math.radians(q))[0] @ u3)), -1, 1))) for q in A[:, 0]])
+    msub = np.minimum(ths - np.abs(b1 - cK), b1 + cK - ths)
+    step = max(1, int(round(1.0 / dq)))
+    return dict(ok=True, r_p=r_p, ph=ph, gate=round(gate, 2), q2_travel=round(len(A) * dq, 2), th_on=round(float(ths[-1]), 2), th_end=round(float(ths[0]), 2),
+                msub_min=round(float(msub.min()), 2), rho=[round(float(A[:, 2].min()), 3), round(float(A[:, 2].mean()), 3), round(float(A[:, 2].max()), 3)],
+                rho_on=round(float(A[-1, 2]), 3), rho_end=round(float(A[0, 2]), 3), th_monotone=bool(np.all(np.diff(ths) < 0)),
+                law=[[round(float(x), 3) for x in r] + [round(float(th), 2)] for r, th in zip(A[::-step][::1], ths[::-step])])
+
+
 def wear(P, bench="envsel"):
     out, M, B = SK.wear(dict(PARAMS, **P), bench)
     out["id"] = ID; out["law_slowpole"] = law_report(P)
@@ -173,6 +224,12 @@ if __name__ == "__main__":
     if mode == "slot":
         kw = json.loads(sys.argv[3]) if len(sys.argv) > 3 else {}
         print(json.dumps(slot(par, **kw), default=float)); sys.exit()
+    if mode == "varlaw":
+        kw = json.loads(sys.argv[3]) if len(sys.argv) > 3 else {}
+        print(json.dumps(slot_varlaw(par, **kw), default=float)); sys.exit()
+    if mode == "slotgeo":
+        kw = json.loads(sys.argv[3]) if len(sys.argv) > 3 else {}
+        print(json.dumps(slot_geo(par, **kw), default=float)); sys.exit()
     if mode == "viz":
         print(json.dumps(viz_export(par), default=float)); sys.exit()
     B = CB.Bench(n_clip=60, n_ws=160); t = time.time()
