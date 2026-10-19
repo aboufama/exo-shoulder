@@ -61,6 +61,19 @@ search loop that kept going.
 
 ## 0. Latest (2026-10-18 ~22:00 UTC)
 
+- **PAUSED 2026-10-19 ~04:50 UTC by the user ("pause all progress for now").** Stopped: round 301 (O1 overhead,
+  wf_1095e69a: screened + verified ikring-thinstack-knuckle-4r 9.75 and ikring-distalshell-knuckle-4r 10.54, both
+  labelled 4-joint options with an oracle-IK J4, audit WATCH (M5 / P1 / P2 / T1, unpowered control 14.46); weldk-*
+  dead; it was in its alignment-audit stage, close not written), round 402 (K2 knee-less, wf_a8760d85: plan written,
+  ideation in progress; lead note on the determinate 13.75 bar in ROUNDS.md), round 501 (G1 golden, wf_9d5134b3:
+  rollcone-hubspot-pinknee-3r screened 22.16 frozen exact at cx 6.5, its verify unfinished; isoceles-shortdyad
+  verified 27.91; rolling-cone-3r dead; slowpole-slot-knuckle-3r modelling), and the backlog audit (crown-ring,
+  acromial-rocker, meridian-goniometer, offset-pointer-slip-sleeve: partial files only). Crons cancelled; exo-cpu1
+  workersMax 0 (balance $20.70; the $1.09/h still billing is the user's own pod veridien-train, not ours).
+  **To resume** (only when the user says): relaunch each round FRESH at its round number with n_rounds 1 and a focus
+  naming what is on file (OPERATIONS section 3 "After a container restart"), re-create the watchdog + hourly audit
+  crons, and reopen the farm only within a window the user renews.
+
 - ~22:30 UTC the user switched to the 3-joint lead conecut-knee-knuckle-3r (drawing set docs/drawings/A, 15 sheets, all
   7 joints - J1, K, J2, J3, crank pivot, pin a, pin b - close to 0.000 mm at the rest pose); "not fully sold" on the knee.
   The zc-frontier (simplest, no knee, 87.8) CAD build was started then stopped at the user's switch.

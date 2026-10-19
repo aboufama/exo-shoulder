@@ -36,7 +36,7 @@ work and do it well!"): agents may run tools/cloud_run.py batches on the exo-cpu
 (until 2026-10-17 ~17:20 UTC; renew with the user after). GPU renders (exo-blender-cycles) still need a separate yes.
 Keep workersMin 0; tools/runpod_guard.py audit before and after each batch. BUDGET LINE: the account balance was
 ~$32.40 at the approval, so the $8 is spent when tools/runpod_guard.py audit shows balance <= $24.40 - from then on
-run locally (<= 2 niced processes) unless the user renews (first window SPENT 2026-10-17 15:49 UTC at $24.24). RENEWED by the user 2026-10-19 ~01:05 UTC ("Yes, $8 per 12 h"): exo-cpu1 workersMax 9 again (workersMin 0) at 01:26; window until 2026-10-19 ~13:05 UTC; BUDGET LINE balance <= $13.61 (it was $21.61 at the approval) - from then on local only and exo-cpu1 workersMax back to 0 unless the user renews again.
+run locally (<= 2 niced processes) unless the user renews (first window SPENT 2026-10-17 15:49 UTC at $24.24). RENEWED by the user 2026-10-19 ~01:05 UTC ("Yes, $8 per 12 h"): exo-cpu1 workersMax 9 again (workersMin 0) at 01:26; window until 2026-10-19 ~13:05 UTC; BUDGET LINE balance <= $13.61 (it was $21.61 at the approval) - from then on local only and exo-cpu1 workersMax back to 0 unless the user renews again. PAUSED 2026-10-19 ~04:50 UTC by the user ("pause all progress for now"): every round and audit stopped, crons cancelled, exo-cpu1 workersMax 0 (balance $20.70); the renewal's remaining window is the user's to reopen.
 (6) Sensing is OUT OF SCOPE (user 2026-10-17: "dont wory about the sensor stuff the purpose of this is to find a
 kinematic solution if we sensor every joint we can just use inverse kinematics to get a perfect position"): encoders
 cost 0 complexity (tools/simplicity.py v2.2), and no agent spends time on sensing, determinacy-from-encoders or
@@ -53,6 +53,9 @@ sprung / slaved redundant joint). Relay tuning (jump track, all relay designs ca
 User 2026-10-19 ~01:00 UTC: (11) "Keep pushing, I want something better than 95 with very low complexity" -> track G1
 (golden, round 501+): verified gap <= 13.75 at complexity <= 6 (tools/simplicity.py v2.2; 3 active joints, every
 coordinate determined in MVP1), running beside O1 and K1.
+User 2026-10-19 ~04:50 UTC: (12) "pause all progress for now" -> ALL tracks (O1 round 301, K1 round 402, G1 round 501),
+the hourly audit and the watchdog are STOPPED; do not relaunch anything until the user says to resume (HANDOFF section 0
+lists where each round stood and how to relaunch it fresh).
 The user wants the design's evolution recorded for a final time-lapse visual: add every judged design to
 docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge loop.
 
