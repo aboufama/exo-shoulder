@@ -1,0 +1,283 @@
+{
+ "id": "acromial-rocker-3r",
+ "wear": "held",
+ "params": {
+  "beta": 23.0,
+  "psi": 220.0,
+  "gam": 29.3,
+  "psiA": 13.9,
+  "dl": 22.9,
+  "psiC": 199.9,
+  "q0r": 13.7,
+  "hA": 10.6,
+  "hC": 12.2,
+  "rA_fitted": 70.6,
+  "rC_fitted": 75.8,
+  "cap": 75.0,
+  "trans": 25.0,
+  "ball": 30.0,
+  "uj": 40.0
+ },
+ "frozen": {
+  "gap": 126.94,
+  "reach": 0.2111,
+  "follow": 0.5842,
+  "inband14": 0.7842,
+  "inband10": 0.4301,
+  "contact": 0.0989
+ },
+ "fit_fast": {
+  "gap": 125.84,
+  "reach": 0.2,
+  "follow": 0.6,
+  "inband14": 0.7849,
+  "inband10": 0.431,
+  "contact": 0.0933
+ },
+ "why": {
+  "fold": 0,
+  "rod": 797,
+  "slide": 0,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 3,
+  "contact": 35
+ },
+ "parts_ib14": {
+  "hub1": [
+   1.0,
+   8.6,
+   80
+  ],
+  "hub2": [
+   0.997,
+   10.8,
+   80
+  ],
+  "hub3": [
+   0.772,
+   11.2,
+   80
+  ],
+  "E": [
+   0.842,
+   8.6,
+   28
+  ],
+  "boss": [
+   0.863,
+   8.1,
+   32
+  ],
+  "pad": [
+   0.857,
+   10.0,
+   32
+  ],
+  "knee": [
+   0.768,
+   11.3,
+   90
+  ],
+  "pvt": [
+   0.902,
+   12.6,
+   37
+  ],
+  "rk1": [
+   0.375,
+   14.5,
+   48
+  ],
+  "rk2": [
+   0.662,
+   13.0,
+   60
+  ],
+  "brk": [
+   0.837,
+   8.8,
+   32
+  ],
+  "ball": [
+   0.0,
+   19.8,
+   12
+  ],
+  "ujt": [
+   0.554,
+   12.9,
+   12
+  ],
+  "L1": [
+   0.924,
+   6.9,
+   36
+  ],
+  "L2": [
+   0.919,
+   5.3,
+   141
+  ]
+ },
+ "audit": {
+  "near_touch_min_mm": 0.14,
+  "near_touch_low": [
+   {
+    "mm": 0.14,
+    "i": 488,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 30.0,
+    "axial": -15.0
+   },
+   {
+    "mm": 0.3,
+    "i": 479,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 15.0,
+    "axial": -45.0
+   },
+   {
+    "mm": 0.34,
+    "i": 325,
+    "kind": "ws",
+    "plane": -30.0,
+    "elev": 30.0,
+    "axial": 30.0
+   },
+   {
+    "mm": 0.42,
+    "i": 353,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 15.0,
+    "axial": 0.0
+   },
+   {
+    "mm": 0.46,
+    "i": 317,
+    "kind": "ws",
+    "plane": -30.0,
+    "elev": 15.0,
+    "axial": 15.0
+   }
+  ],
+  "gap_near1": 130.9,
+  "near1_poses": 9,
+  "gap_near2": 140.42,
+  "near2_poses": 29,
+  "overhead140": {
+   "ws": 71,
+   "reach": 0.0,
+   "clip": 19,
+   "follow": 0.0,
+   "inband14": null,
+   "inband10": null,
+   "why_not": {
+    "fold": 0,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ },
+ "deep": {
+  "plain": 126.94,
+  "reach": 0.2111,
+  "follow": 0.5842,
+  "inband14": 0.7842,
+  "contact": 0.0989,
+  "n_poses": 1154,
+  "n_taken": 319,
+  "min_metal_mm": 0.139,
+  "gap_near1": 130.9,
+  "near1_poses": 9,
+  "gap_near2": 140.42,
+  "near2_poses": 29,
+  "gap_near3": 182.82,
+  "near3_poses": 124,
+  "clip_metal_hist": {
+   "0-1": 0.0,
+   "1-2": 0.0007,
+   "2-3": 0.0036,
+   "3-4": 0.0144,
+   "4-6": 0.1231,
+   "6-10": 0.289,
+   "10-14": 0.3542,
+   ">14": 0.215
+  },
+  "gap_band3_14": 127.3,
+  "inband3_14": 0.7806,
+  "overhead_min_metal_p10": null,
+  "coord_spans": {
+   "kin_ok": [
+    1.0,
+    1.0
+   ],
+   "res_deg": [
+    0.0,
+    0.0156
+   ],
+   "q0deg": [
+    -74.8856,
+    72.1945
+   ],
+   "tb": [
+    0.0008,
+    11.7278
+   ],
+   "tu": [
+    6.0328,
+    39.6337
+   ],
+   "okr": [
+    1.0,
+    1.0
+   ],
+   "clear": [
+    1.5048,
+    1.6161
+   ],
+   "K.phi": [
+    -0.1856,
+    0.1272
+   ],
+   "K.th": [
+    -0.1856,
+    0.1272
+   ],
+   "K.psi": [
+    -1.6948,
+    -1.4317
+   ],
+   "K.ang": [
+    83.5538,
+    95.4712
+   ],
+   "K.ok": [
+    1.0,
+    1.0
+   ],
+   "K.qa": [
+    -1.6833,
+    -1.4753
+   ],
+   "K.qb": [
+    -0.124,
+    0.1391
+   ]
+  }
+ },
+ "mode": "exact",
+ "n_wear_poses": 1154,
+ "secs": 185.0,
+ "exact": true,
+ "git": "3c3c70a",
+ "harness": "model frozen() unchanged; wear bench = skin-normal-3r-pin-knee-polish.py held_bench() (tools/alignment_acromial_rocker_held.py)"
+}

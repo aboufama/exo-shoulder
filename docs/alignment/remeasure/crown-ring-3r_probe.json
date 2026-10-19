@@ -1,0 +1,290 @@
+{
+ "id": "crown-ring-3r",
+ "params": {
+  "az1": 11.3025,
+  "el1": 74.313,
+  "p1": 37.5102,
+  "a12": 84.1189,
+  "a23": 67.8288,
+  "wd": 95.4289,
+  "wa": 8.7573,
+  "sigma": -1,
+  "margin": 10.0,
+  "width": 14.0,
+  "t_link": 3.0,
+  "w2": 12.0,
+  "q": 0.9969,
+  "h1": 60.0,
+  "lug": 0.0
+ },
+ "claim": {
+  "gap": 82.37,
+  "reach": 0.9,
+  "follow": 0.9167,
+  "inband14": 0.1146,
+  "inband10": 0.0457,
+  "contact": 0.005,
+  "honest": true,
+  "h1_used": 113.0,
+  "ring1_F": 113.0,
+  "levels": {
+   "ring1": 113.0,
+   "hub2": 134.7,
+   "hub3": 67.0,
+   "neck": 99.0,
+   "link1": 140.7,
+   "link2": 138.7
+  },
+  "inband_member": {
+   "ring1": 0.0092,
+   "hub2": 0.0,
+   "hub3": 0.5829,
+   "link1": 0.0,
+   "link2": 0.0419,
+   "neck": 0.6377
+  },
+  "park": {
+   "ring1": [
+    113.0,
+    6.34
+   ],
+   "hub2": [
+    134.7,
+    8.76
+   ],
+   "hub3": [
+    67.0,
+    4.24
+   ]
+  },
+  "park_ok": true,
+  "min_margin": 10.66,
+  "mass_g": 302.7
+ },
+ "root": {
+  "ring_level_F": 113.0,
+  "rotor_top": 122.0,
+  "land_radial": [
+   29.51,
+   45.51
+  ],
+  "root_axial_above_top_mm": {
+   "min": 2.12,
+   "median": 2.12,
+   "max": 2.32
+  },
+  "root_radial_mm": {
+   "min": 38.21,
+   "median": 38.21,
+   "max": 40.39
+  },
+  "strap_over_land_gap_mm": {
+   "n": 199,
+   "min": 1.8,
+   "median": 1.8,
+   "max": 1.8
+  },
+  "link1_level_mm": {
+   "min": 82.79,
+   "max": 140.75
+  },
+  "n_taken": 199,
+  "root_dir_off_a1_deg": 17.09
+ },
+ "sing": {
+  "det_min": 0.3484,
+  "det_p5": 0.5715,
+  "det_median": 0.8913,
+  "th_margin_min": 10.655,
+  "th_margin_p5": 23.061,
+  "n": 199
+ },
+ "spans_deg": {
+  "J1": 349.21,
+  "J2": 345.44,
+  "J3": 350.25
+ },
+ "sizes": {
+  "KA025XP0": {
+   "p1": 34.9,
+   "gap": 82.02,
+   "reach": 0.9,
+   "follow": 0.9167,
+   "inband14": 0.1181,
+   "inband10": 0.0472,
+   "contact": 0.005,
+   "honest": true,
+   "h1_used": 110.0,
+   "ring1_F": 110.0,
+   "levels": {
+    "ring1": 110.0,
+    "hub2": 134.7,
+    "hub3": 67.0,
+    "neck": 99.0,
+    "link1": 140.7,
+    "link2": 138.7
+   },
+   "inband_member": {
+    "ring1": 0.0103,
+    "hub2": 0.0,
+    "hub3": 0.5829,
+    "link1": 0.0,
+    "link2": 0.0419,
+    "neck": 0.6377
+   },
+   "park": {
+    "ring1": [
+     110.0,
+     5.87
+    ],
+    "hub2": [
+     134.7,
+     8.76
+    ],
+    "hub3": [
+     67.0,
+     4.24
+    ]
+   },
+   "park_ok": true,
+   "min_margin": 10.66,
+   "mass_g": 291.7
+  },
+  "KA030XP0": {
+   "p1": 41.3,
+   "gap": 82.94,
+   "reach": 0.9,
+   "follow": 0.9167,
+   "inband14": 0.1089,
+   "inband10": 0.0433,
+   "contact": 0.005,
+   "honest": true,
+   "h1_used": 117.0,
+   "ring1_F": 117.0,
+   "levels": {
+    "ring1": 117.0,
+    "hub2": 134.7,
+    "hub3": 67.0,
+    "neck": 99.0,
+    "link1": 140.7,
+    "link2": 138.7
+   },
+   "inband_member": {
+    "ring1": 0.0073,
+    "hub2": 0.0,
+    "hub3": 0.5829,
+    "link1": 0.0,
+    "link2": 0.0419,
+    "neck": 0.6377
+   },
+   "park": {
+    "ring1": [
+     117.0,
+     6.65
+    ],
+    "hub2": [
+     134.7,
+     8.76
+    ],
+    "hub3": [
+     67.0,
+     4.24
+    ]
+   },
+   "park_ok": true,
+   "min_margin": 10.66,
+   "mass_g": 319.5
+  },
+  "claim": {
+   "p1": 37.5102,
+   "gap": 82.37,
+   "reach": 0.9,
+   "follow": 0.9167,
+   "inband14": 0.1146,
+   "inband10": 0.0457,
+   "contact": 0.005,
+   "honest": true,
+   "h1_used": 113.0,
+   "ring1_F": 113.0,
+   "levels": {
+    "ring1": 113.0,
+    "hub2": 134.7,
+    "hub3": 67.0,
+    "neck": 99.0,
+    "link1": 140.7,
+    "link2": 138.7
+   },
+   "inband_member": {
+    "ring1": 0.0092,
+    "hub2": 0.0,
+    "hub3": 0.5829,
+    "link1": 0.0,
+    "link2": 0.0419,
+    "neck": 0.6377
+   },
+   "park": {
+    "ring1": [
+     113.0,
+     6.34
+    ],
+    "hub2": [
+     134.7,
+     8.76
+    ],
+    "hub3": [
+     67.0,
+     4.24
+    ]
+   },
+   "park_ok": true,
+   "min_margin": 10.66,
+   "mass_g": 302.7
+  }
+ },
+ "margin5": {
+  "gap": 79.51,
+  "reach": 0.9062,
+  "follow": 1.0,
+  "inband14": 0.1098,
+  "inband10": 0.0431,
+  "contact": 0.0049,
+  "honest": true,
+  "h1_used": 113.0,
+  "ring1_F": 113.0,
+  "levels": {
+   "ring1": 113.0,
+   "hub2": 134.7,
+   "hub3": 67.0,
+   "neck": 99.0,
+   "link1": 140.7,
+   "link2": 138.7
+  },
+  "inband_member": {
+   "ring1": 0.0155,
+   "hub2": 0.0,
+   "hub3": 0.544,
+   "link1": 0.0001,
+   "link2": 0.0346,
+   "neck": 0.5963
+  },
+  "park": {
+   "ring1": [
+    113.0,
+    6.34
+   ],
+   "hub2": [
+    134.7,
+    8.74
+   ],
+   "hub3": [
+    67.0,
+    4.24
+   ]
+  },
+  "park_ok": true,
+  "min_margin": 6.92,
+  "mass_g": 303.4
+ },
+ "secs": 38.1,
+ "source": "tools/alignment_crownring_probe.py: model crown-ring-3r.py unchanged (bench_eval, two-pass ring level, every kit check on), Bench(60,160) fast"
+}

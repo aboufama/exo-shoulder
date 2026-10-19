@@ -76,12 +76,33 @@ def fit_fast(par):
     return M1, P2, fit
 
 
+TRIM = os.environ.get("RV_TRIM") == "1"
+
+
+def trim_L1(M):
+    """the verifier's geometry correction (RV_TRIM=1): cut link 1's strap end where it enters the planet band's swept volume
+    (the planet's mid wall at every roll y of the frozen sectors, 0.25 deg steps, link-1 frame) closer than the adjacent
+    running gap; pose-independent (the design, not the bench). Returns a report; rebuilds contact-only and solids."""
+    D = M.D; h = S.T_LINK / 2; hb = MOD.WALL / 2; mem, pts = M.link_pts["L1"]
+    mid = pts + h * S.unit(pts); _, Pl = M.band_mid["planet"]; _, Su = M.band_mid["sun"]
+    ys = np.arange(M.yspan[0], M.yspan[1] + 1e-9, 0.25) * D2R
+    Rr = D.Rroll(ys) @ D.R2r; sw = np.einsum("nij,kj->nki", Rr, Pl).reshape(-1, 3)
+    d = cKDTree(sw).query(mid)[0] - h - hb; cut = d < M.ADJ + 0.05
+    M.link_pts["L1"] = (mem, pts[~cut]); M._contact_only(); M._solids()
+    rem = mid[~cut]; att = float(cKDTree(Su).query(rem)[0].min()) - h - hb if len(rem) else 1e9
+    return dict(L1_points=int(len(pts)), trimmed=int(cut.sum()), trimmed_rows_radius_mm=[round(float(np.linalg.norm(pts[cut], axis=1).min()), 1), round(float(np.linalg.norm(pts[cut], axis=1).max()), 1)] if cut.any() else None, min_swept_before=round(float(d.min()), 2),
+                trimmed_max_dist_to_sun_mm=round(float(cKDTree(Su).query(mid[cut])[0].max()), 2) if cut.any() else None,
+                remaining_to_sun_band_mm=round(att, 2))
+
+
 def worn(M1, P2, B):
     class Frozen(MOD.Model):
         def fit(self):
             for a in COPY:
                 if hasattr(M1, a): setattr(self, a, getattr(M1, a))
+            self.link_pts = dict(M1.link_pts)
             self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
+            self.trim = trim_L1(self) if TRIM else None
     return Frozen(B, P2)
 
 
@@ -204,20 +225,20 @@ def wear(which, outp):
     dump = dict(id=ID, wear=which, params=P, frozen=corrected, report=rc, poses=poses, recomputed=AP.gap_parts(poses),
                 secs=round(time.time() - t0, 1), exact=os.environ.get("CB_EXACT") == "1", git=git,
                 note="written by docs/concepts/verify/rollcone-hubspot-pinknee-3r.py (verifier extra checks applied)")
-    os.makedirs(REM, exist_ok=True); dpath = os.path.join(REM, f"{ID}_v_{which}_perpose.json"); json.dump(dump, open(dpath, "w"), default=float)
+    os.makedirs(REM, exist_ok=True); dpath = os.path.join(REM, f"{ID}_v_{which}{'_trim' if TRIM else ''}_perpose.json"); json.dump(dump, open(dpath, "w"), default=float)
     contacts = [dict(i=int(i), kind=B.kind[i], plane=B.poses[i]["plane"], elev=B.poses[i]["elev"], axial=B.poses[i]["axial"],
                      depth=round(float(np.min(B.res[i])), 2)) for i in range(len(B.idx)) if B.res[i] is not None and len(B.res[i]) and float(np.min(B.res[i])) < 0]
     el = np.array([p["elev"] for p in B.poses]); kind = np.array(B.kind); tk = set(taken_list(B))
     oh = np.nonzero((el >= 140) & (kind == "ws"))[0]
     B.res = res0
-    out = dict(wear=which, params=P, P2={k: v for k, v in P2.items() if isinstance(v, (int, float, str, list)) and k not in ("unresolved",)},
+    out = dict(wear=which, trim=TRIM, trim_report=getattr(M, "trim", None), params=P, P2={k: v for k, v in P2.items() if isinstance(v, (int, float, str, list)) and k not in ("unresolved",)},
                mode=B.mode, exact=os.environ.get("CB_EXACT") == "1", fit_fast=fit, model=model, why=why, model_audit=aud0, extra=ex,
                removed=sorted(int(i) for i in bad), corrected=corrected, corrected_audit=aud, contacts=contacts,
                contact_depth_sum=round(float(sum(c["depth"] for c in contacts)), 2),
                overhead=dict(total=int(len(oh)), taken=int(sum(1 for i in oh if i in tk))),
                dump=dict(path=os.path.relpath(dpath, REPO), recomputed=dump["recomputed"]), secs=round(time.time() - t0, 1))
     json.dump(out, open(outp, "w"), indent=1, default=float)
-    print(json.dumps(dict(wear=which, mode=B.mode, fit=fit, model=model, corrected=corrected, removed=len(bad), near1=aud.get("gap_near1"),
+    print(json.dumps(dict(wear=which, trim=out["trim_report"], mode=B.mode, fit=fit, model=model, corrected=corrected, removed=len(bad), near1=aud.get("gap_near1"),
                           extra=ex, overhead=out["overhead"], recomputed=dump["recomputed"], contacts=contacts, secs=out["secs"]), default=float), flush=True)
 
 
