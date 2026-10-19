@@ -77,3 +77,59 @@
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | lead (control, onetooth row) | 0 | 77.9 | 10.75 | 12.50 | **18.28** | 262 | 4 | 0.901 | 0.992 (7.9) | - | 8/28 |
 | **40/40 rho 0.5 (spec)** | 14.57 | 56.82 | 5.93 | 33.40 | **40.17** | 254 | 17 | 0.738 | **0.033 (45.7)** | 0.18 / 0.32 | 4/28 |
+| 34/40 rho 0.67 (limiter variant) | 8.08 | 63.12 | 6.16 | 13.12 | 19.38 | 260 | 6 | 0.918 | - | - | 7/28 |
+| **32/38 rho 0.67 (limiter variant)** | 6.41 | 59.26 | 5.00 | 13.12 | **18.83** | 261 | 5 | 0.920 | - | - | 8/28 |
+| **32/38 rho 0.84 (slot law at pin r 18)** | 6.41 | 65.77 | 7.75 | 13.12 | **18.83** | 261 | 5 | 0.908 | 0.973 | 0.98 / 0.95 | 8/28 |
+| 32/38 rho 1.04 (slot law at pin r 20) | 6.41 | 70.47 | 10.22 | 13.12 | 18.83 | 261 | 5 | 0.918 | 0.972 | 0.98 / 0.91 | 8/28 |
+
+All of these are fit on Bench(60,160) fast, frozen, and worn on Bench(110,360) exact. Every number is a ghost, so it
+bounds the morphology from above. It is not a claim. The 32/38 rho 0.84 row reads near1 19.92 (the lead's is 19.92),
+near2 34.64 (the lead's is 34.84), min metal 0.07 mm and fold 88 (the lead's is 88).
+
+**The spec cell dies on hub K, not on the law.** On 40/40, uK sits 14.6 deg from the lead's K axis. Hub K is fixed on
+link 1a along that axis, so it has to clear the highest skin it ever passes over. That puts it **45.7 mm (median) off
+the skin**: 3 % of poses are in band, and it still touches on 17 poses (overhead IR, plane 30-75 elev 135-165). Links
+1a and 1b follow it, at 0.18 / 0.32 in band. Reach is close to the lead's: 254 takes against 262, with fold 88 in both.
+The slow law itself is not the cost:
+
+- On the 32/38 dyad, rho 0.67, 0.84 and 1.04 read **exactly 18.83** (261 takes, the same 5 contact poses).
+- The shortk row's 34/30 dyad reads 18.83 at every rho from 1.1 to 2.5.
+- The onetooth row lost takes at rho 0.8-0.9 on the lead's dyad because msub fell below 5 there. With msub >= 5,
+  the law's onset does not matter.
+
+The re-seat costs the lead one take and one contact: 18.83 against 18.28. Pose 139 is the new contact (plane -60,
+elev 60, axial 105, 0.2-0.5 mm), on hub K / hub 2. The other four are the lead's own (205, 237, 264, 316, hub 2).
+
+**Where the hub-K cliff sits.** The uK shift is 6.4 deg at 32/38 (18.83), 8.1 deg at 34/40 (19.38) and 14.6 deg at
+40/40 (40.17). A slow law needs msub >= 5, and msub grows with bk1. So the slowest law the kill gate allows lives on
+dyads within ~7 deg of the lead's K axis.
+
+## Step 1a - can ONE pin in ONE slot carry the law? (closed form, exact spherical kinematics)
+
+`slot`, `varlaw` and `dwell` modes. The gate is PA <= 43 - atan(0.087) = 38.03 deg (crowned 440C pin on DLC, sliding).
+
+1. **Constant ratio: no.** At a constant rho the relative pole P is fixed in link 1b's frame, and the slot normal always
+   passes through it. The PA-passing band is the neighbourhood of the Thales circle over uK-P, and a pin turning round
+   u2 cannot stay in that band for the whole stroke.
+   - **40/40, rho 0.5.** Over 3,024 placements per cell (r 4-45 mm x 5 deg phase, 4 cells), the longest PA-passing run
+     is **49.5 of the 60.5 deg of q2** needed. At r <= 20 mm (a lug on hub 2's rotor) it is **46.4**.
+   - The spec pin (r 13.5, phase 17) passes only 26.45 deg (PA 56 at the onset).
+   - The other cells: rho 0.55 47.1 / 55.0, rho 0.6 44.8 / 50.4, 42/42 50.3 / 56.8.
+   - On 32/38, rho 0.67, the best run is 39.8 of 55.8.
+   - **The spec's slot drive fails its own kill** (PA span < 60.5 deg of q2).
+2. **Variable ratio: yes.** A form-closed slot can carry any monotone K(q2). Integrating backward from the end state,
+   with the largest ratio whose PA <= 38 at each 0.25 deg of q2, finds the latest-onset law a given pin can carry:
+   - **40/40, pin r 13.5 / phase -60.** rho 0.38-0.56 (mean 0.508) completes 30.3 deg of K over 59.75 deg of q2 from
+     th 57.49 (msub 6.24). That is the spec's law with a ratio that varies +-0.1.
+   - Below r 11 no law completes, because the pin is too close to u2.
+   - Faster laws need bigger radii: r 16 (onset 65.8), r 20 (onset 73.7).
+   - **32/38.** 73 of 576 placements complete (r 8-20).
+3. **The dwell lock kills the slow placements.** The dwell arc (concentric with u2) reacts a K torque with lock angle
+   angle(n, uK x C). It reaches 90 deg (K unlocked: the plate slides along its own arc) where the pin crosses the
+   u2-uK great circle. At the 40/40 r 13.5 / phase -60 law, the pin is on that circle at the onset: **lock max 89.1 deg**.
+   On 32/38, 8 placements keep lock <= 80 deg and msub >= 5:
+   - **pin r 18 / phase 5**: law rho 0.62-0.94 (mean 0.84), onset th 66.1, lock <= 36.3, play 0.08 deg per 0.05 mm of slot clearance;
+   - **pin r 20 / phase 5**: rho 0.82-1.14 (mean 1.04), onset th 70.8, lock <= 31.1.
+
+   The constant-ratio ghosts at rho 0.84 and 1.04 stand in for these two laws: same onset, same end state, same
+   stroke. Both read 18.83.

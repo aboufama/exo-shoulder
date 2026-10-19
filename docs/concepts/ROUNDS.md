@@ -5931,3 +5931,125 @@ screened morphology writes docs/concepts/viz/concepts/<id>.js, passes `node docs
   re-read (polished 18.40).
 - Lens C's hubless rolling J2 and its straps, against the O20 and no-cables rules.
 - The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule and O20 hubs stay.
+
+## Round 401 results (Round K1, track kneeless; 2026-10-18 ~23:41 - 2026-10-19 ~04:25 UTC, closer)
+
+Ledger re-checked at close (`tools/alignment_ledger.py get <id>`, 04:20 UTC): kneeless-steer-midbracket-relay-4r,
+insertion-cband-relay-4r, kfree-o20pin-highexit-relay-4r and distal-cband-sq95-relay-4r all **exit 2 (no entry)**: the
+auditor did not run on this round's dead rows (the round's audit list is empty), so none is gamed and the verifiers'
+findings are carried below at watch level. The judge (8558ad3, docs/concepts/round401_ideation.md) took 4 picks from the
+9 restart ideas, merged 4 (capshell and ebracket into pick 1, kfree-o20pin-steered into pick 3, distal-vroller's rolling
+J4 into picks 2 and 4) and rejected kfree-slimpin-lowexit-relay-4r (O20 rule). No bench, judge or kit file changed
+during the round: no number below moved because the measurement changed. Two verifiers found measurement faults in
+shared helpers (the stripped-drive horn top, the rig's self-intersection); they are flagged below as measurement
+issues, not applied to any row. Farm closed: everything ran locally (box at load 12-25). The held-out split was never
+used by any row.
+
+| design (lens) | ideal bound (no J4 metal) | metal reading (row) | verifier | act / P / cx | outcome |
+|---|---|---|---|---|---|
+| kneeless-steer-midbracket-relay-4r (A: phi40 hardware with the knee deleted, E cut at the carriage lug, seat (80,-15), relay tilt 12 / taz 235) | bracket-honest proxy 15.60 envsel (PHI 58, s0 -80; reach 0.803, 17 contacts, overhead 6/26); PHI 40: 18.38 envsel | 22.39 envsel (PHI 58, s0 -80; 12 shell-end + 2 flange contacts), 22.85 at s0 -55 | **19.50 envsel** at PHI 40 / s0 -80 (reach 0.761, ib14 0.882, 13 chain + 2 flange contacts, overhead 4/26): the claim was pessimistic by 2.9 (all 3 metal reads past the +48 deg shell-end cliff) | 4 / 0 / 51.75 | **DEAD** at the step-0 kill (proxy > 15.4 at every cell); the ideal at the shell-legal PHI 40 is already above the lead |
+| insertion-cband-relay-4r (C at s 0.30: arm-fixed C-band race + V-wheel carriage, 93 mm strap, psi2 -45, J3 re-aim (95,-8.2)) | row 16.86 frozen exact Bench(110,360) / 19.70 envsel; **verifier-corrected 12.74 / 16.59** (horn-top phantom removed, kc 2) | 74.53 frozen exact Bench(110,360) (one unswept cell; carriage floats 10-22 mm, in band 0.34; strap 54 contact poses; band in the torso on 10) | death stands, re-based: envsel still fails 14.0 (11 of 13 contacts hub-2 burials under the acromion from psi2 -45); hardware 57 over the 17.0 kill | 4 / 0 / 34.25 | **DEAD** at the hardware kill (and at the ideal kill on envsel) |
+| kfree-o20pin-highexit-relay-4r (B: plain O20 3R, K welded, R4 O20 pin coaxial with the arm-fixed line wdir(55,45), 86 mm bar from hub 3) | **10.27 frozen exact Bench(110,360)** at J3 seat (84,-15), a2 55.78 (reach 0.817, 294/360, follow 1.0, ib14 0.914, 8 contacts / 30.1 mm, overhead 10/28, min th 5.001; flood 1172/1173 connected) | **56.42 frozen exact Bench(110,360)** (reach 0.756, ib14 0.687, 46 contacts / 65.1 mm, overhead 6/28); steered envsel 52.20 | **reproduced 56.42 exactly**; boss walls were scored in band (stricter than the kit): with the kit's convention a perfect contact-free bar would read 12.35-13.48, so the kill is boss + bar (bar as measured 0.602 in band bounds 25.85, best bar 0.756 bounds 20.82; passing 17.0 needs >= 0.873 with 0 contacts) | 4 / 0 / 31.75 | **DEAD** at the hardware kill; gate not converged (6 cells, farm closed) - the death rests on the bar bound |
+| distal-cband-sq95-relay-4r (C at s 0.70-0.75: race about raxis(2.74,-116.6), 220 mm strap) | 12.40 frozen exact Bench(110,360) at the spec cell (reach 0.839, follow 0.936, 21 contacts / 121 mm, overhead 11/28) | 35.48 frozen exact Bench(110,360) at the sweep best (55 contacts / 635 mm, overhead 11/28), 41.15 spec cell; strap gate fires | reproduced 29.56 on Bench(60,160) fast (in-sample); 35.48 not re-run; rig self-intersection forgiven 27.34 (17 of 19 lost poses still penetrate); strap outlier cut lifts strap in-band 0.83 -> 0.94, gap unchanged | 4 / 0 / 34.25 | **DEAD** at the hardware kill (torso over the distal arm across the whole race arc on ~10 % of poses) |
+| conecut-knee-knuckle-3r (the lead, reference) | - | 18.28 (held 22.38) | - | 3 / 0 / 18.5 | stays the verified lead |
+
+**Winner (by the rule): kfree-o20pin-highexit-relay-4r, v_gap 56.42 frozen exact Bench(110,360) (score 79.48), 4
+counted joints, 0 passive translations, complexity 31.75, no ledger entry (not gamed: exit 2 at close).** It is the only
+design whose number an independent verifier reproduced on the verification protocol (insertion-cband's 74.53 is the
+row's own reading re-tallied, not re-run; kneeless-steer's 19.50 is envsel, distal-cband's 29.56 is the in-sample fast
+bench). The best number any verifier confirmed on any bench is kneeless-steer-midbracket-relay-4r's 19.50 envsel, which
+is not on the protocol and whose Bench(110,360) and held-out were never run. **No design beats the previous verified
+lead 18.28 (conecut-knee-knuckle-3r)**: the winner trails it by 38.14; kneeless-steer trails it on envsel by 1.22 at best.
+All four rows are dead at their pre-registered kills, so none is a build candidate: no generation CAD for K1, the
+generation CAD of record stays the lead's, no judge_all run, no EVOLUTION row. Passed over as gamed: none. The K1 goal
+(a knee-less 4-joint design "way higher" than the knee designs) is not met; on the knuckle chain it is measured out of
+reach (below), on the plain O20 3R it is open only through a J4 guide that does not ride the arm surface.
+
+**Alignment (round designs; no ledger verdicts on file, the verifiers' findings carried at watch level, with the numbers).**
+- *kneeless-steer-midbracket-relay-4r (no entry):*
+  - reporting: the claim number (22.39) came from 3 metal reads, all at PHI 58, past the design's own +48 deg
+    anterior shell-end cliff (all-pose bins; the taken-pose bins said +68 because a contact pose is not a lost pose); at
+    PHI 40 it reads 19.50. A pessimistic error, not an inflation, but the row's death sentence quoted the worse number.
+  - misattribution: the s0 -55 in-band loss (0.825) is the PLAIN in-band (the 1.0 mm shell's own samples float over the
+    deltoid); chain-only in-band there is ~0.877 (chain_only_gap 17.67). The row field metal.s0_55.ib14_chain is
+    ib14_gate.
+  - proxy optimism (judge red team + row): the 'bracket' proxy kept 154 boss / pad / knee samples of deleted parts and
+    read 1.4-3.5 points optimistic at every seat; any knee-less proxy with knee-side samples on file should be re-read.
+  - T5: step-0 proxy 48.5 mm over 17 contacts (max 8.29, pose 361 relayed by phi 45.8) vs the lead's 20.24 / 4; the PHI
+    58 metal adds 9 anterior-end contacts up to 11.9 mm deep.
+  - not run: Bench(110,360), held-out, PHI 44-50 metal, s0 -65 bump 0; the spec's bump 0 changes <= 0.01.
+- *insertion-cband-relay-4r (no entry):*
+  - over-strict reading: `_strip_drive` (docs/concepts/models/kfree-armarc-relay-4r.py) deletes the drive horn's
+    samples but keeps its contact top (appended 3 mm off, matched at 0.5 mm): 9 of 19 Bench(110,360) contact poses
+    (-1.35 to -9.41 mm), 4.12 gap points; corrected ideal 12.74 (claim bench) / 16.59 envsel.
+  - by construction: the row's `kneeless_noK` reading never deleted hub K's contact entries (noK = full, 16.86); a level
+    diagnostic shows hub K's walls clear at 4-18 mm, so it costs nothing here.
+  - v_* is the hardware reading (74.53, re-tallied) so a no-J4-metal number never shows as verified; the hardware is ONE
+    unswept configuration, so its death is not gate-converged (the swept sibling distal-cband died at the same kill).
+  - T5: ideal 19 contacts / 101.9 mm (x5.0 the lead), corrected 10 / 30.9 mm.
+- *kfree-o20pin-highexit-relay-4r (no entry):*
+  - stricter than the kit: the R4 boss's 64 side-wall samples sit in the in-band pool (the kit scores hub discs only),
+    so the row's 'weightless bar' bound (26.4 / 18.8) is not a lower bound and 'the boss alone kills' is over-stated.
+  - convergence: 6 cells mixing ideal / hardware and envsel / Bench(110,360), top-5 spread 14.5 score points (gate not
+    met); the death rests on the bar bound, not on convergence.
+  - under-fit bar: the `_fitted` out_mm 15 filter drops the bunched-deltoid rays (39 contact poses, <= 2.32 mm); fixing
+    it raises the bar and makes the hardware worse.
+  - T5: hardware 46 contacts / 65.1 mm; ideal 8 / 30.1 mm (max 8.75 at (15,165,-60)) vs the lead's 4 / 20.24.
+  - family flag (shared with the two cband rows and kfree-armarc-relay-4r): the phantom horn top of drive-0 lead_eval
+    readings, up to ~4 gap points.
+- *distal-cband-sq95-relay-4r (no entry):*
+  - claim bench not re-run by the verifier (v_* = the in-sample fast reproduction 29.56; the 35.48 stands as the row's).
+  - fit artefact: the strap was fitted with out_strap 80 (effectively no outlier cut); out 12 / 25 lifts strap in-band
+    0.83 -> 0.94 / 0.93 and fixes strap-gate item 1; item 2 (torso losses 11+2 / 10+2) and the gap (29.56-30.67) stay.
+  - bench issue (measurement, for the lead): the concept bench's winding-number sign counts the rig's own arm-in-chest
+    self-intersection as metal contact where R2 forgives it - about 2.2 points (29.56 -> 27.34) against any distal
+    arm-mounted metal.
+  - T5: ideal 21 contacts / 121.2 mm (hub-2 burials under the acromion to 13.6 mm, x6 the lead); hardware 55 / 635 mm,
+    torso contacts 13-43 mm deep.
+- *The lead conecut-knee-knuckle-3r* keeps its WATCH reasons (dashboard sweep 12.5 shown as 95.45; T1 pose 203 at
+  0.263 mm; T3 held th margin 5.006; self-reference).
+- Determinacy and continuity: kfree-o20pin's one-sided pin relay floods 1172 of 1173 static envelope nodes connected
+  (311 of 312 relayed): the continuity rule costs nothing there. kneeless-steer reuses phi40's CF lug coil + slot-end
+  PHI stop (the S3 / M5 watch reasons of phi40 apply unchanged: CF strip unmodelled, R17 unmeasured). The cband rows ran
+  no flood (dead first); their J4 return is a 2 N strip. No null-space coordinate was claimed to hold that the model
+  does not enforce.
+- Shoulder slip (all four, not re-measured; the track's standing price): rigid-cuff misfit p95 4.83 / max 5.14 mm at a
+  3 mm GH offset, ~6.4 / 6.9 mm at the R10 4 mm slip, 13-31 N if the skin takes it (2-4.5 N/mm) vs the R17 5 N cap;
+  each row assumes a ~3 mm compliant liner, stated as such.
+
+**Lessons (measured).**
+1. **The knee-less kinematics can make 95; the J4 guide's metal cannot, so far.** Three knee-less ideal bounds (no J4
+   metal) pass 95 on frozen exact Bench(110,360): kfree-o20pin 10.27 (plain O20 3R at J3 seat (84,-15), a2 55.78, PHI 75
+   about raxis(55,45)), distal-cband 12.40, insertion-cband 12.74 (verifier-corrected). Every J4 guide tested adds 6.8-60
+   points: arm-fixed shell end into the flank past +48 deg (knuckle relay), skin swing 6-12 mm under the race at s 0.30
+   (carriage floats 10-22 mm, in band 0.34), torso across the whole race arc at s 0.70-0.75 on ~10 % of poses, and an
+   axis-exit pin whose boss floats ~19 mm with an 86 mm bar climbing to it (in band 0.60, 39 contact poses).
+2. **The knuckle chain is closed for K1.** The ideal relay at the shell-legal PHI 40 already reads 18.38 envsel, so no
+   metal there beats the lead; the reachable set saturates at PHI 58 (PHI 62 +0 poses, +3 contacts); 54 poses have no
+   stop-legal relay angle. The knee's real value on the relay was letting the carriage sit 31 mm from the chain: deleting
+   it costs 6.8-7.3 metal points against 0.8-1.4 the proxies suggested.
+3. **The J3 seat is worth ~8 points on the knee-less relay ideal**: (84,-15) with a2 ~56 lifts hub 3 from 0.44 to 0.79
+   in band and follow to 1.0 (18.22 -> 10.27 frozen exact) against the champion seat (77.25,-8.2). Every knee-less relay
+   should start there. The psi2 -45 J2 re-placement needed for a2 67 buries hub 2 under the acromion at abduction
+   105-150 (11 of 13 envsel contacts on insertion-cband); a2 ~56 avoids it.
+4. **An axis-exit pin pays at the exit's spread**: on 120 lines through GH, a disc at the maximum skin exit + 2 mm
+   floats a median 14-20 mm (exit p5-max spread 20-25 mm as the deltoid moves under any humerus-fixed line); the best
+   boss in-band is 0.60 at wdir(35,0) (lateral distal, rB 122). The chest cliff at de 55 sits between ae 50 and 55.
+5. **Measurement faults found (not applied to any row; a fix would be a measurement change, reported separately):**
+   the stripped-drive horn top in `_strip_drive` (up to ~4 points on every drive-0 lead_eval row); the concept bench's
+   winding sign counting the rig's arm-in-chest self-intersection (~2.2 points on distal arm metal); K.requirement's
+   default t1 220 mm leaving distal parts unfitted (falls back silently); boss side walls scored in band where the kit
+   scores discs only.
+
+**Next round (K2) should attack the J4 guide on the plain O20 3R at J3 seat (84,-15), a2 ~56**, because that chain's
+ideal (10.27 frozen exact, flood-connected) is the only knee-less number on file with 3.5 points of headroom under 95
+and the verifier's arithmetic says its whole kill is the R4 bar (a perfect contact-free bar reads 12.35-13.48; the
+measured bar 0.602-0.756 in band costs 8-13 points). Concretely: (i) first fix `_strip_drive`'s horn top and re-read
+the four drive-0 lead_eval rows (kfree-armarc-relay-4r, kfree-o20pin-highexit, insertion-cband, distal-cband) as a
+measurement change, stated separately; (ii) a joint scan of the relay line (de 30-60, ae -10..50) scoring the ideal
+take together with the boss in-band at that line's exit AND the bar's length from hub 3's swept path - the kinematic
+optimum (55,45) and the low-swing exit (35,0) are 20+ deg apart, and nobody has priced the lines between; (iii) a bar
+that is part of member 3 (L2 / hub 3 plate extended to R4, no separate climbing bar) so its in-band is the link's
+(~0.9) not a strap's. Kill: the bar bound > 17.0 at every scanned line. Not to retry: arm-fixed C-band races at s 0.30
+or s 0.70-0.75, the knee-less knuckle relay, psi2 -45 seats. Scores are far from 95 on metal (best 19.50 envsel), so
+the objective stays the gap, not complexity.
