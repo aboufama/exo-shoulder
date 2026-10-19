@@ -1,0 +1,89 @@
+{
+ "report": {
+  "gap": 69.84,
+  "reach": 0.5,
+  "follow": 0.9333,
+  "inband14": 0.6739,
+  "inband10": 0.5209,
+  "contact": 0.0556
+ },
+ "rho": 81.83,
+ "shoe_volume": {
+  "w": [
+   98.051,
+   126.051
+  ],
+  "r": [
+   81.83,
+   89.83
+  ],
+  "arc_deg": 39.464
+ },
+ "link2": {
+  "poses_with_samples_in_shoe_volume": 0,
+  "of_taken": 144,
+  "samples_in": 0,
+  "example": []
+ },
+ "link1": {
+  "poses_with_samples_in_shoe_volume": 0,
+  "of_taken": 144,
+  "samples_in": 0,
+  "example": []
+ },
+ "hub2": {
+  "poses_with_samples_in_shoe_volume": 0,
+  "of_taken": 144,
+  "samples_in": 0,
+  "example": []
+ },
+ "hub1": {
+  "poses_with_samples_in_shoe_volume": 0,
+  "of_taken": 144,
+  "samples_in": 0,
+  "example": []
+ },
+ "band": {
+  "poses_with_samples_in_shoe_volume": 144,
+  "of_taken": 144,
+  "samples_in": 60550,
+  "example": [
+   {
+    "i": 0,
+    "plane": 30.0,
+    "elev": 3.0,
+    "axial": -30.0
+   },
+   {
+    "i": 1,
+    "plane": 30.0,
+    "elev": 15.389328956604004,
+    "axial": -32.52843475341797
+   },
+   {
+    "i": 2,
+    "plane": 30.0,
+    "elev": 65.94078063964844,
+    "axial": -42.84505844116211
+   },
+   {
+    "i": 3,
+    "plane": 30.0,
+    "elev": 124.50949096679688,
+    "axial": -54.797855377197266
+   },
+   {
+    "i": 4,
+    "plane": 30.0,
+    "elev": 149.40573120117188,
+    "axial": -59.878719329833984
+   }
+  ]
+ },
+ "neck": {
+  "poses_with_samples_in_shoe_volume": 0,
+  "of_taken": 144,
+  "samples_in": 0,
+  "example": []
+ }
+}

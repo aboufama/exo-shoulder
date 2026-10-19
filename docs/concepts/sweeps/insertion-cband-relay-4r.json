@@ -786,5 +786,49 @@
 "jams": 2,
 "jams_ws": 2
 }
+},
+{
+"k": 11,
+"t": "2026-10-19T03:51:40Z",
+"params": {
+"PHI": 45.0,
+"tilt": 8.75,
+"taz": -90.0,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": 122.55,
+"kc": 1
+},
+"bench": "envsel",
+"mode": "exact",
+"step": "AUDIT: mirror J2 seat (other psi2 root, a2 67.34), ideal, K welded as one bar (kc 2)",
+"inband14": 0.5341,
+"inband10": 0.4366,
+"reach": 0.3028,
+"follow": 0.2,
+"contact": 0.0368,
+"gap": 174.99,
+"gap_near1": 180.05,
+"gap_near2": 196.0,
+"overhead": [
+0,
+26
+],
+"n_contact": 5,
+"a1a2": [
+37.552,
+67.343
+],
+"why_ws": {
+"": 108,
+"parts": 181,
+"j3stop": 8,
+"contact": 6,
+"fold": 57
+}
 }
 ]

@@ -78,52 +78,58 @@ def law_report(P):
                 kdyad_ok=P["kdyad_ok"], uK_vs_lead_deg=round(math.degrees(math.acos(np.clip(float(uK @ SK._geo(*SK.LEAD_DYAD)["D"].uK), -1, 1))), 2))
 
 
-def slot(P=None, r_p=13.5, ph=17.0, dq=0.05, mu=0.087, R_mm=61.0, pin_r=1.25):
-    """STEP 1: the slot locus in link 1a's frame and its gates. The pin sits on hub 2's rotor ring (link 2) at r_p mm from u2,
-    phase ph deg off the u2 -> uK arc (measured at the stroke end, about u2). Over the dwell (K = 0) its path in link 1a's
-    frame is an arc about u2; over the rise (K = rho t) the path is c(q2) = R(uK, -sp K) R(u2, q2) p0 (link 1b frame -> link 1a).
-    Pressure angle: the plate (link 1a) is driven: the force on the plate acts along the slot-wall normal n at the pin; the
-    plate's velocity there for unit q2 is v_a = (dK/dq2) * (-sp uK x c); PA = angle(n, v_a). The pin's own velocity along
-    the slot (the sliding speed) is reported too. Undercut: the locus' geodesic curvature radius >= pin_r."""
+def slot(P=None, r_p=13.5, ph=17.0, dwell=60.0, dq=0.05, mu=0.087, R_mm=61.0, pin_r=1.25):
+    """STEP 1: the slot locus in link 1a's frame and its gates (exact spherical kinematics, all axes through GH).
+    Frames (the model's _ik_phys / G["th"]): a point fixed in link 2 is, in link 1a's frame, c = R(uK, sp K) R(u2, q2) p0
+    (sp = sign psiA; K = |dK| = rho t past the onset, t = s_q (q2 - q2_on)); in link 1b's frame cb = R(u2, q2) p0. The pin
+    sits on hub 2's rotor ring (link 2) at r_p mm from u2 (sphere R_mm), phase ph deg about u2 off the u2 -> uK arc AT THE
+    STROKE END. The slot is the pin's path in link 1a's frame: DWELL (K = 0, `dwell` deg of q2 before the onset) = an arc
+    about u2; RISE = the conjugate path. In link 1b's frame (the common ground of K and J2) the plate point at the pin moves
+    v1 = (dK/dq2) d/dK[R(uK, -sp K)] = -sp rho (uK x cb) and the wall normal is n_1b = R(uK, -sp K) n_1a (n_1a: normal of the
+    locus, tangent to the sphere). Drive PA (rise) = angle(n_1b, v1): the slot wall pushes the plate along n. Dwell LOCK
+    angle = angle(n, uK x cb) over the dwell: a K torque on the plate is reacted by the wall unless this nears 90 (then the
+    plate slides along its own slot: K unlocked). Undercut: geodesic curvature radius of the locus >= pin_r. Relative pole:
+    min |v_pin - v_plate| over the rise (the locus cusps there; lantern-gear rule)."""
     P = _clamp(dict(PARAMS, **(P or {}))); b1, b2, rho = P["bk1"], P["bk2"], P["rho"]
     L = SK.law_for(dict(P, WALL="lead")); G = SK._geo(b1, b2); an = SK.anchor(); D = G["D"]
     u1, u2, u3 = D.u; uK = D.uK; sp = float(np.sign(D.psiA)) or 1.0; s_q = an["s_q"]
     e = S.unit(np.cross(u2, np.cross(uK, u2))); f = np.cross(u2, e)
-    t = r_p / R_mm
-    # pin position in LINK 2 at the stroke end (q2 = q2_end): phase ph off the u2->uK arc; carry it back to q2 = 0 in link 2
+    t = r_p / R_mm; kend = math.radians(L["k_end"])
     q2e = math.radians(L["q2_end"]); q2on = math.radians(L["q2_on"])
     pe = math.cos(t) * u2 + math.sin(t) * (math.cos(math.radians(ph)) * e + math.sin(math.radians(ph)) * f)
-    p0 = S.rotm(u2, -q2e)[0] @ pe                                # pin in link 2's own frame (link 1b frame at q2 = 0)
-    # q2 from 60 deg before the onset (dwell) to the end + 2 deg
-    q2s = np.radians(np.arange(math.degrees(q2on) - s_q * 60.0, math.degrees(q2e) + s_q * 2.0, s_q * dq))
-    tt = s_q * (q2s - q2on); K = np.clip(rho * tt, 0.0, math.radians(L["k_end"]))
-    dKdq = np.where((tt > 0) & (K < math.radians(L["k_end"])), rho, 0.0)
-    cb = np.einsum("nij,j->ni", S.rotm(u2, q2s), p0)           # pin in link 1b's frame
-    c = np.einsum("nij,nj->ni", S.rotm(uK, -sp * K), cb)       # pin in link 1a's frame (the slot locus)
+    p0 = S.rotm(u2, -q2e)[0] @ pe                             # the pin in link 2's frame (link 1b's frame at q2 = 0)
+    q2s = q2on + s_q * np.radians(np.arange(-dwell, math.degrees(q2e - q2on) * s_q + 1e-9, dq))
+    tt = s_q * (q2s - q2on); K = np.clip(rho * tt, 0.0, kend)
+    rise = tt > 1e-9; dKdq = np.where(rise, rho, 0.0)
+    cb = np.einsum("nij,j->ni", S.rotm(u2, q2s), p0)          # pin, link 1b frame
+    c = np.einsum("nij,nj->ni", S.rotm(uK, sp * K), cb)       # pin, link 1a frame: the slot locus
     tg = np.gradient(c, axis=0); tgn = np.linalg.norm(tg, axis=1); tgu = tg / np.maximum(tgn, 1e-15)[:, None]
-    n = np.cross(c, tgu)                                       # wall normal (tangent to the sphere, normal to the locus)
-    va = dKdq[:, None] * (-sp * np.cross(uK, cb))              # plate point velocity (link 1b frame ~ link 1a frame up to R(uK))
-    va = np.einsum("nij,nj->ni", S.rotm(uK, -sp * K), va)      # into link 1a's frame
-    vn = np.linalg.norm(va, axis=1)
-    pa = np.degrees(np.arccos(np.clip(np.abs(np.einsum("ij,ij->i", n, va)) / np.maximum(vn, 1e-15), 0, 1)))
+    n1a = np.cross(c, tgu); n1b = np.einsum("nij,nj->ni", S.rotm(uK, -sp * K), n1a)
+    vK = np.cross(uK, cb)                                     # plate velocity per unit K (direction), link 1b frame
+    def ang(nv, v): return np.degrees(np.arccos(np.clip(np.abs(np.einsum("ij,ij->i", nv, v)) / np.maximum(np.linalg.norm(v, axis=1), 1e-15), 0, 1)))
+    pa = ang(n1b, vK)
+    vpin = s_q * np.cross(u2, cb); vpl = -sp * dKdq[:, None] * vK; vrel = np.linalg.norm(vpin - vpl, axis=1) * R_mm   # mm / rad of q2
     gate = SN.pa_kin(mu)
-    rise = dKdq > 0
-    # geodesic curvature radius of the locus (mm): kappa_g = |c . (c' x c'')| / |c'|^3
     d2 = np.gradient(tg, axis=0)
-    kg = np.abs(np.einsum("ij,ij->i", c, np.cross(tg, d2))) / np.maximum(tgn ** 3, 1e-30)
-    rc = R_mm / np.maximum(kg, 1e-12)
-    pa_ok = pa[rise] <= gate
-    span = float(np.degrees(np.sum(pa_ok) * math.radians(dq)))
-    first_fail = float(np.degrees(tt[rise][int(np.argmin(pa_ok))])) if not pa_ok.all() else None
-    travel = float(np.linalg.norm(c[rise][-1] - c[rise][0]) * R_mm) if rise.any() else 0.0
-    # hub 2's centre on the skin-side sphere in link 1a's frame (how far the plate must reach)
-    h2 = np.einsum("nij,j->ni", S.rotm(uK, -sp * K), u2)
-    h2_travel = float(np.linalg.norm(h2[rise][-1] - h2[rise][0]) * R_mm) if rise.any() else 0.0
-    return dict(r_p=r_p, ph=ph, rho=rho, gate=round(gate, 2), dq2_rise=round(float(np.degrees(np.sum(rise) * math.radians(dq))), 2),
-                pa_rise_max=round(float(pa[rise].max()), 2) if rise.any() else None, pa_rise_min=round(float(pa[rise].min()), 2) if rise.any() else None,
-                pa_span_q2=round(span, 2), pa_first_fail_t=first_fail, rc_min_rise_mm=round(float(rc[rise][2:-2].min()), 3) if rise.sum() > 5 else None,
-                undercut=bool(rise.sum() > 5 and rc[rise][2:-2].min() < pin_r), slot_travel_mm=round(travel, 2), hub2_travel_mm=round(h2_travel, 2),
-                pin_from_uK_end_deg=round(math.degrees(math.acos(np.clip(float(pe @ uK), -1, 1))), 2))
+    kg = np.abs(np.einsum("ij,ij->i", c, np.cross(tg, d2))) / np.maximum(tgn ** 3, 1e-30); rc = R_mm / np.maximum(kg, 1e-12)
+    ri = np.nonzero(rise)[0]; di = np.nonzero(~rise)[0]
+    pa_r = pa[ri]; ok = pa_r <= gate
+    span = float(np.sum(ok) * dq)
+    run = 0; best = 0
+    for o in ok:
+        run = run + 1 if o else 0; best = max(best, run)
+    h2 = np.einsum("nij,j->ni", S.rotm(uK, sp * K), u2)
+    return dict(r_p=r_p, ph=ph, rho=rho, gate=round(gate, 2), dq2_rise=round(len(ri) * dq, 2), k_end=round(L["k_end"], 2),
+                pa_rise=[round(float(pa_r.min()), 1), round(float(np.median(pa_r)), 1), round(float(pa_r.max()), 1)],
+                pa_rise_at_onset=round(float(pa_r[0]), 1), pa_rise_at_end=round(float(pa_r[-1]), 1),
+                pa_span_q2=round(span, 2), pa_longest_run_q2=round(best * dq, 2), pa_frac=round(float(ok.mean()), 3),
+                dwell_lock=[round(float(pa[di].min()), 1), round(float(pa[di].max()), 1)],
+                rc_min_rise_mm=round(float(rc[ri][3:-3].min()), 3), undercut=bool(rc[ri][3:-3].min() < pin_r),
+                vrel_min_mm_per_deg=round(float(vrel[ri].min()) * math.pi / 180, 4),
+                slot_len_rise_mm=round(float(np.sum(np.linalg.norm(np.diff(c[ri], axis=0), axis=1)) * R_mm), 2),
+                hub2_travel_1a_mm=round(float(np.linalg.norm(h2[ri][-1] - h2[ri][0]) * R_mm), 2),
+                pin_r_deg=round(math.degrees(t), 2),
+                pin_from_uK_deg=[round(float(np.degrees(np.arccos(np.clip(cb[ri] @ uK, -1, 1))).min()), 2), round(float(np.degrees(np.arccos(np.clip(cb[ri] @ uK, -1, 1))).max()), 2)])
 
 
 def wear(P, bench="envsel"):

@@ -51,3 +51,28 @@ rolling-cone-3r, which zeroes the roll at the reference Q = I) does not hold wit
 one level both bands read 0.97-0.98 in band (Bench(60,160) fast). (3) The rollcam (non-circular) and the internal
 (ring) cells are NOT modelled here (time box); the external constant-ratio cell was searched over the full spec range
 (alpha_s 8-35, alpha_p 4-16, beta +-60) jointly with H1's seats +-5 deg and the knee.
+
+## Search (local, niced, <= 2 processes; the farm is closed)
+
+Bench(60,160) fast, objective = the near-touch gap (metal < 1 mm counted as contact), every configuration in
+docs/concepts/sweeps/rollcone-hubspot-pinknee-3r.json in order. Free: alpha_s 8-35, alpha_p 4-16 (rho 0.15-1.7),
+beta +-60, band height bh 6-10, H1's seats +-5 deg (az1, el1, az2, el2, wd, wa), b3 0.15-0.40, knee lE / lc / phiE /
+phib; fixed: ang_min 30.46 (H1), stk 6.0 (MR63ZZ), sector margin 3 deg + 4 mm clamps. Seeds: the catalogue cell
+25/10/30 (fast 25.04: follow 0.917, 12 poses dropped as contact), the sibling's band-legal 8.73/14.23/42 (18.92),
+12/12/20; random stage (1/3 uniform over the box, 2/3 Gaussian around the seed), then a (3/3, 6)-ES from the top.
+
+### The control (the rail-elbow lesson): is the gain the rolling pair or the seats?
+
+Same code path for every part but J2 (H1's model, today's kit, stk 6.0), Bench(60,160) fast:
+
+| configuration | gap | near-1 gap | reach | follow | ib14 | contact | kinematic ws |
+|---|---|---|---|---|---|---|---|
+| H1 seats, O20 pin J2 | 23.71 | 27.29 | 0.700 | 0.950 | 0.897 | 0.034 | 119 |
+| best seats + knee, O20 pin J2 | 23.73 | 27.38 | 0.669 | 1.000 | 0.914 | 0.006 | 113 |
+| best seats + knee, ROLLING J2 (2-es8-98) | 13.82 | 16.17 | 0.7625 | 1.000 | 0.899 | 0.000 | 122 |
+
+The rolling pair is worth ~10 fast gap points (11.2 near-touch) at identical seats: the seats alone buy nothing. Two
+causes, measured: (1) the window opens on the stretched side (rolling segment 26.4-108.0 vs the pin's 26.6-102.4 at
+these seats, 9 more kinematic ws poses) and (2) no metal losses: all 122 kinematic ws poses are taken (the pin chain
+loses 6 to the O20 hub-2 disc: skin / parts), because the 6.6 mm bands at ~61 mm sit inside the hub-2 disc's footprint
+without its 12.25 mm stack and 20 mm disc.

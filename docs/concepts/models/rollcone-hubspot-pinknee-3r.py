@@ -161,7 +161,10 @@ class Model(PK.Model):
         bad = self.kin_ok & (self.res_deg >= 0.5); self.why[bad] = "closure"; self.kin_ok &= ~bad
         self.riser = None
         yy = np.r_[np.degrees(q[self.kin_ok, 1]), np.degrees(qc[okc, 1])]
-        if P.get("y_fix") is not None: self.yspan = tuple(P["y_fix"])
+        if P.get("y_fix") is not None:                           # frozen shape: a pose that rolls the contact off the worn bands
+            self.yspan = tuple(P["y_fix"]); yd = np.degrees(q[:, 1])     # is out of the joint's range (recorded as 'slide')
+            off = self.kin_ok & ((yd < self.yspan[0]) | (yd > self.yspan[1])); self.why[off] = "slide"; self.kin_ok &= ~off
+            self.roll_off = int(off.sum())
         else: self.yspan = (float(yy.min()) - P["sec_m"], float(yy.max()) + P["sec_m"]) if len(yy) else (-5.0, 5.0)
 
     # members: 0 scapula, 1 link 1 (+ sun band), 2 link 2 (+ planet band), 3 hub 3 + E, 5 arm pad, 6 knee link
@@ -414,8 +417,15 @@ def frozen(P, nc=110, nw=360):
             self.contact = list(M1.contact); self.poses_fit = np.nonzero(self.kin_ok)[0]; self.drop = np.zeros(len(self.poses_fit), bool)
     B = CB.Bench(n_clip=nc, n_ws=nw); M = Frozen(B, P2); r = M.run()
     rep = {k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}
+    ws = np.array([k == "ws" for k in B.kind]); fl = (M.why == "fold") & ws
+    thp = np.degrees(np.arccos(np.clip(np.einsum("ni,i->n", M.Q[fl] @ M.D.u[2], M.D.u[0]), -1, 1)))
+    lo, hi = float(M.D.th_tab.min()), float(M.D.th_tab.max())
+    tk = [i for i in range(len(B.idx)) if B.res[i] is not None and float(np.min(B.res[i])) >= 0]
     return dict(fit_fast=fit, frozen=rep, mode=B.mode, bench=[nc, nw], why=r.get("why"), parts_pairs=r.get("parts_pairs"),
-                parts_ib14=r.get("parts_ib14"), audit=PK.audit(M, B))
+                parts_ib14=r.get("parts_ib14"), audit=PK.audit(M, B), roll_off=getattr(M, "roll_off", None), yspan=list(M.yspan),
+                fold_ws=dict(n=int(fl.sum()), folded=int((thp < lo + FM).sum()), stretched=int((thp > hi - FM).sum()), window=[round(lo, 1), round(hi, 1)]),
+                min_fold_margin_taken=round(float(np.minimum(M.fold["mdy"], M.fold["mseg"])[tk].min()), 2) if tk else None,
+                min_jac_taken=round(float(M.fold["jac"][tk].min()), 3) if tk else None, rho=M.D.rho)
 
 
 if __name__ == "__main__" and (len(sys.argv) < 2 or sys.argv[1] != "search"):

@@ -7,6 +7,7 @@
  "reasons": [
   "held_out: no verified bench gap on the row",
   "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): gap 69.84: bench 8 contact poses, sum 72.56 mm, deepest 15.67 mm at ['ws', 0.0, 150.0, 0.0], 7 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+52.32 mm, x3.58) - CLEARLY DEEPER; held depths not on file",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out"
  ],
@@ -28,11 +29,46 @@
   },
   {
    "check": "contact_depth",
-   "level": "ok",
-   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump pointer-cslide bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "level": "watch",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): gap 69.84: bench 8 contact poses, sum 72.56 mm, deepest 15.67 mm at ['ws', 0.0, 150.0, 0.0], 7 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+52.32 mm, x3.58) - CLEARLY DEEPER; held depths not on file",
    "depths": {
-    "gap 69.84": {}
-   }
+    "gap 69.84": {
+     "bench": {
+      "n": 8,
+      "sum_mm": 72.56,
+      "max_mm": 15.67,
+      "n_deeper3": 7,
+      "overhead140": 1,
+      "deepest": [
+       "ws",
+       0.0,
+       150.0,
+       0.0
+      ],
+      "gap": 69.84,
+      "src": "docs/alignment/remeasure/pointer-cslide_probe_fitfast.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        72.56
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": [
+    {
+     "claim": "gap 69.84",
+     "wear": "bench",
+     "sum": 72.56,
+     "ref_sum": 20.24,
+     "excess": 52.32,
+     "ratio": 3.58,
+     "watch": true
+    }
+   ]
   },
   {
    "check": "dominance",
@@ -95,7 +131,7 @@
   "held": false
  },
  "verifier_files": [],
- "git": "884c23b",
+ "git": "0c380f8",
  "tool_version": "2026-10-19.1",
- "t": "2026-10-19T03:28:56Z"
+ "t": "2026-10-19T03:51:45Z"
 }

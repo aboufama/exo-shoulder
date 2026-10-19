@@ -203,3 +203,99 @@ Then **the hardware**: strap contacts, a carriage out of band (0.34) and band-to
    the envelope sample (env) instead of Bench(60,160).
 4. **Lead-quality ideal bounds must be read off the fit bench.** The in-sample Bench(60,160) reads 7-10 points better
    than envsel or frozen Bench(110,360).
+
+## Audit (dead-row auditor, 2026-10-19 ~03:45 UTC)
+
+**Ruling: the death stands, but for a different reason than the row gave.** The step-1 reading was over-strict. With the
+welded K modelled as the one bar link 1 is, the ideal bound reads **12.74 on the claim bench** (frozen exact
+Bench(110,360)), which passes the 14.0 kill. It still reads **16.59 on envsel**, the bench the spec names first, so the
+pre-registered kill still fires there. The step-2 hardware reading (74.53, one configuration that was never swept) is
+untouched by the correction and is still 57 points past the 17.0 hardware kill. A green claim-bench reading on one
+bench is not a refutation. Nothing here is a claim, and held-out was not used.
+
+### What was wrong: the welded K kept the walls and crowns of an O20 stack that does not exist
+
+The row's mechanism record says "K welded (link 1 one bar)": there is no hub K. The ideal reading kept that stack anyway:
+- The `kneeless` reading kept hub K's rigid underside, plus every contact-only entry of member 1 that hub K owns
+  (14 entries: wall rings up the stack and the crown disc).
+- The `kneeless_noK` reading claimed to delete the stack. It dropped only the scored underside samples; the
+  contact-only re-read still filtered by member (`m not in (5, 6)`), so hub K's walls and crowns stayed in.
+  That is why noK equalled the full reading (16.86) **by construction**, not by measurement.
+- The row's "contact-list members 9" were all hub K (attributed by `contact_owner`: each contact entry goes to the
+  same-member part with the least median nearest-neighbour distance, then the deepest entry is picked per pose). The
+  B110 contact parts read `contact-only:hubK 9, hub2 6, hubK 2, L2 2`.
+- Seven of those nine are the overhead fit clip (30, 138-150, -60) at -4.0 to -9.4 mm. Those are the clip's 7
+  unfollowed frames: follow 0.9364 is 103/110.
+
+**A smaller leak with no effect here.** The members-5/6 filter also keeps the knee-side contact entries on member 3: the
+E-strap top (164 points) and the two O12 boss rings. Dropping them (`kc 1`) changes nothing (16.86): none of them is in
+contact on Bench(110,360).
+
+**The corrected reading** (`kc 2`, in the model file: `ideal '{"psi2": -45, "kc": 2}' b110`) does three things:
+- deletes hub K's walls and crowns;
+- keeps its 20 mm skin-facing underside disc as scored metal (wider than the 12 mm bar it stands for);
+- adds a 3 mm top face and rim as contact-only metal, so the joint between link 1a and link 1b is still sampled.
+
+| reading (cell 0: psi2 -45, a2 67.34, PHI 45, raxis(8.75, -90), J3 wdir(95, -8.2)) | bench | gap | reach | follow | ib14 | contact (n, depth sum mm) | overhead | near-1 / near-2 |
+|---|---|---|---|---|---|---|---|---|
+| row (kneeless, hub K walls / crowns kept) | Bench(110,360) exact frozen | 16.86 | 0.7917 | 0.9364 | 0.9209 | 0.0467 (19, 101.9) | 7/28 | 20.00 / 35.42 |
+| audit kc 1 (knee-side member-3 entries dropped as well) | same | 16.86 | 0.7917 | 0.9364 | 0.9209 | 0.0467 (19, 101.9) | 7/28 | 20.00 / 35.42 |
+| **audit kc 2 (K welded as one bar)** | same | **12.74** | 0.7972 | 1.000 | 0.9206 | 0.0246 (10, 30.9) | 8/28 | 17.80 / 34.90 |
+| row | envsel exact | 19.70 | 0.7667 | 0.9364 | 0.9209 | 0.0501 (20, 102.9) | 5/26 | 24.46 / 39.98 |
+| **audit kc 2** | envsel exact | **16.59** | 0.7667 | 1.000 | 0.9206 | 0.0326 (13, 39.6) | 5/26 | 23.30 / 39.98 |
+
+- min th margin: 5.001 (0 taken poses below 5).
+- What is left on Bench(110,360) after the correction is real:
+  - hub 2 under the acromion (6 poses, to -14.43 mm at (30, 135, 0)), the price of the psi2 -45 J2 re-placement;
+  - link 2 (2 poses);
+  - hub K's underside (2 poses);
+  - 54 fold and 6 J3-stop poses.
+- On envsel, 11 of the 13 contacts are hub 2: the burial is the limiter there.
+
+### Levers tried (none reverses the ruling)
+
+1. **Fit the chain metal on the relayed poses** (`fitrel 1`). The default fits on the un-relayed Bench(60,160) poses
+   only; this fits on the fit bench as the relayed design takes it. Result: 16.86 B110 and 19.70 envsel, identical gaps
+   (ib14 0.9166). Only 5 of the 19 B110 contacts are relayed, so the fit set is not the cause.
+2. **The mirror J2 seat** (the other psi2 root for a2 67.34: psi2 +122.55, J2 at az ~132, el ~36.5, the dyad's other
+   branch), with kc 2 on envsel: **174.99**. The conecut metal there collides with itself (181 ws parts, hub 2 floating
+   at a median 32.5 mm), so that region is dead for this chain's metal, not missed.
+
+### The gate, recomputed from the sweep
+
+Ideal envsel cells in order: 19.70, 24.42, 23.14, 19.70, 36.15, 20.13.
+- Gain: 0 score points over the second half and 0 over the last third.
+- Top 5: within 1.72 score points.
+
+The gate passes formally, but k 3 duplicates k 0 (the q2 dowel never binds), so it is 5 distinct cells and no search.
+The hardware has ONE configuration, so the step-2 death is not gate-converged. The binding hardware costs are measured
+geometry, not tuning:
+- the carriage floats 10-22 mm (in band 0.34), because a race of revolution clears the per-azimuth maximum of skin that
+  swings 6-12 mm against the bone;
+- strap contacts on 54 poses;
+- band against the torso on 10 poses.
+
+The sibling distal-cband-sq95-relay-4r (s 0.72, swept) died at the same hardware kill: best 35.48, ideal 13.56.
+
+### Consequences beyond this row (for the judge and the alignment auditor)
+
+- **Every knee-less row whose ideal is read through this file's `readings`, or a copy of it, should be re-read.**
+  - The "noK" reading never deleted hub K.
+  - The "kneeless" reading keeps a hub K stack that a welded-K design does not have: up to 9 contact poses, the
+    follow term of an overhead clip, and ~4 gap points here.
+  - The judge's 14.0 bars, read through this reading, were all over-strict by that much.
+- **The correction can also cut the other way:** it deletes metal. A row that claims a gain from `kc 2` must show its
+  link 1 really is one bar at a buildable height, in its CAD and its viz.
+
+### Measured reason, in one line
+
+Corrected for the phantom hub K stack, the ideal bound passes on the claim bench (12.74 < 14.0) but not on envsel
+(16.59 > 14.0: 11 hub-2 burials of the psi2 -45 J2 re-placement under the acromion). The J4 hardware still reads 74.53
+(carriage in band 0.34, 54 strap contacts), so the row stays dead. The next lever, if anyone takes it:
+- an axis-centre sweep that makes the race concentric with the arm's cross-section at s 0.30;
+- with a J1 / a1 change that reaches a2 67 without turning J2 45 deg round J1.
+
+Audit files:
+- docs/concepts/models/insertion-cband-relay-4r.py (`contact_owner`, `kc 1 / 2`, `fitrel`; the defaults are unchanged)
+- scratch icb_audit/hubk_levels.py (the height of each hub-K contact entry above its underside, at every hub-K
+  contact pose)
