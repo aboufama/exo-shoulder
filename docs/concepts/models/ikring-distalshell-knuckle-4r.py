@@ -36,6 +36,7 @@ KNEE_KEYS = ("lE", "lc", "phiE", "phib", "ang_min")
 KNEE = dict(lE=69.52, lc=18.63, phiE=-5.44, phib=-80.96, ang_min=25.64)
 CLAIM = dict(IK.CLAIM); CLAIM.update(KNEE); CLAIM.update(ds=-24.0, delta=12.0, bump=1.0, band=8.0)
 LEAD = dict(AA.LEAD)
+PICK1_TABLE = os.path.join(REPO, "docs", "concepts", "verify", "ikring-thinstack-knuckle-4r", "ik_bench_spec.json")   # pick 1 IK table (imported, not rebuilt)
 
 
 def fit(base):
@@ -124,6 +125,28 @@ def chain(base, outp, hw=False):
     return e
 
 
+def fixk(base, prev_path, outp):
+    """THIS design's own k-table on the poses where the imported pick-1 choice disagrees with this wear (ik.mismatch:
+    pick 1's table said 'take' at k, this metal says contact / lost): k = 0..PHI with this knee + distal metal, the
+    take-only rule (max min metal among takes, ties -> smaller k; no take -> 0); then one final wear of the whole bench"""
+    prev = json.load(open(prev_path)); mis = [int(j) for j in prev["ik"]["mismatch"]]
+    F = fit(base); hw = dict(base); os.environ["CB_EXACT"] = "1"; KS = IK.kgrid(float(F["rp"]["PHI"]))
+    Bf = CB.Bench(110, 360); Bf = IK.subbench(Bf, np.arange(len(Bf.idx))); kd = np.array(Bf.kind)
+    cl = np.nonzero(kd == "clip")[0][:6]; sel = np.r_[cl, np.array(mis, int)]; Bs = IK.subbench(Bf, sel); nZ = len(AA.Z0["HG"]); tab = {}
+    for k in KS:
+        phi = np.zeros(nZ); phi[Bf.idx[mis]] = k; o_, Sk = IK.wear_phi(F, Bs, phi, hw); mm, wy = IK.pose_state(Bs, Sk["M"])
+        tab[k] = [mm[len(cl) + q] for q in range(len(mis))]; print(json.dumps(dict(k=k, mm=tab[k])), flush=True)
+    choice = dict(prev["ik"]["choice"]); fixed = {}
+    for q, j in enumerate(mis):
+        tks = [(tab[k][q], k) for k in KS if tab[k][q] is not None and tab[k][q] >= 0]
+        if tks: m, k = max(tks, key=lambda x: (round(x[0], 6), -x[1])); c = dict(k=k, mm=m, n_take_k=len(tks), takes={str(kk): round(mv, 2) for mv, kk in tks})
+        else: c = dict(k=0.0, mm=tab[0.0][q], n_take_k=0, takes={}, reverted=True)
+        if str(j) in choice or c["k"] != 0: choice[str(j)] = c
+        fixed[str(j)] = dict(k=c["k"], mm=c["mm"], n_take_k=c["n_take_k"], table={str(k): tab[k][q] for k in KS})
+    tf = outp.replace(".json", "_choice.json"); json.dump(dict(ik=dict(choice=choice, k0=prev["ik"]["k0"]), fixed=fixed), open(tf, "w"), default=float)
+    o = IK.ik_run(base, "bench", outp, choice_from=tf); o["ik"]["fixk"] = fixed; json.dump(o, open(outp, "w"), default=float); return o
+
+
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "help"
     par = dict(CLAIM, **(json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}))
@@ -132,6 +155,9 @@ if __name__ == "__main__":
     if mode == "chain": chain(par, sys.argv[3]); sys.exit(0)
     if mode == "k0": chain(par, sys.argv[3], hw=True); sys.exit(0)
     if mode == "ik": IK.ik_run(par, sys.argv[3], sys.argv[4]); sys.exit(0)
+    if mode == "rechoose":                                   # pick 1's IK table (its k per pose, take-only rule) worn with THIS knee + distal metal
+        IK.ik_run(par, sys.argv[3], sys.argv[4], choice_from=sys.argv[5] if len(sys.argv) > 5 else PICK1_TABLE); sys.exit(0)
+    if mode == "fixk": fixk(par, sys.argv[3], sys.argv[4]); sys.exit(0)        # fixk '<json>' prev_ik_bench.json out.json
     if mode == "viz":                                        # the lead's viz export with the short knee (motion preview P / G)
         v = CC.viz_export({**LEAD, **{k: par[k] for k in KNEE_KEYS}}); json.dump(v, open(sys.argv[3], "w"), default=float); print(list(v)); sys.exit(0)
     print(__doc__)

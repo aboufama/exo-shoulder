@@ -1,0 +1,249 @@
+{
+ "id": "ikring-distalshell-knuckle-4r",
+ "name": "The lead with a short knee and the round slotted shell DISTAL of every mover (s ~118, axis 8.5 deg / taz 243 through GH): an active one-sided J4 ring with no E bump and no knee lift (ikring-mirrork-knuckle-4r's ring hardware merged)",
+ "lens": "round301:rocker-redundant-4r (judge pick 3; ikring-mirrork-knuckle-4r ring hardware merged)",
+ "family": "redundant 4R: the verified lead with a short knee + an arm-side counted J4 on a circular shell DISTAL of every mover",
+ "active_dof": 4,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "screened",
+ "t_ideated": null,
+ "t_screened": "2026-10-19T03:20:44Z",
+ "reach": 0.8056,
+ "follow": 1.0,
+ "inband14": 0.894,
+ "inband10": 0.6072,
+ "contact": 0.0172,
+ "gap": 11.76,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 104,
+ "complexity": 48.0,
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 6,
+  "joints": 9,
+  "closed_loops": 3,
+  "sliding_pairs": 2,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 14,
+  "catalogue_parts": 18,
+  "notes": "ikring-thinstack-knuckle-4r's record (lead + ACTIVE J4 ring, no coil) with the shell moved DISTAL of every mover and the knee re-proportioned (same part and joint counts: no bump parts were ever counted)",
+  "source": "ikring-distalshell-knuckle-4r screen 2026-10-19",
+  "confidence": "medium",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "closed_loops": 1,
+   "rule": "user 2026-10-17: unsensed two-pin cuff knee = 0 (docs/concepts/skin-normal-3r-pin-knee.md line 584); v2.1 knee loop free"
+  }
+ },
+ "best_params": {
+  "PHI": 40.0,
+  "tilt": 8.5,
+  "taz": 243.0,
+  "sgn": 1,
+  "hw": 1,
+  "hwv": "plain",
+  "ds": -26.0,
+  "liner": 4.0,
+  "plate": 1.5,
+  "flange": 1,
+  "rt_extra": 1.5,
+  "pre": 0.0,
+  "bump": 1.0,
+  "band": 8.0,
+  "ramp": 6.0,
+  "flood": 0,
+  "delta": 0.0,
+  "carw": 14.0,
+  "coil": "none",
+  "lean": 1,
+  "h_c": 1.7,
+  "coilD": 12.0,
+  "coilL": 10.0,
+  "tsh": 1.0,
+  "lbr": 1,
+  "lE": 69.52,
+  "lc": 18.63,
+  "phiE": -5.44,
+  "phib": -80.96,
+  "ang_min": 25.64,
+  "IK_RULE": "take-only (pick 1 table)",
+  "kstep": 2.5
+ },
+ "claim": {
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast at k = 0: 13.15)",
+  "gate_chain_only": 11.76,
+  "plain": 11.16,
+  "score": 95.72,
+  "near1": 12.21,
+  "near2": 24.43,
+  "ib14_pooled": 0.9225,
+  "ib14_chain_only": 0.894,
+  "ws_taken": 290,
+  "overhead": [
+   13,
+   28
+  ],
+  "mid_90_140": [
+   55,
+   85
+  ],
+  "contacts": [
+   [
+    237,
+    15.0,
+    165.0,
+    -60.0,
+    0.0,
+    -9.0
+   ],
+   [
+    264,
+    30.0,
+    165.0,
+    -60.0,
+    0.0,
+    -5.74
+   ],
+   [
+    354,
+    90.0,
+    45.0,
+    -150.0,
+    40.0,
+    -3.55
+   ],
+   [
+    417,
+    120.0,
+    90.0,
+    -120.0,
+    37.5,
+    -1.26
+   ],
+   [
+    431,
+    135.0,
+    30.0,
+    -150.0,
+    25.0,
+    -6.9
+   ],
+   [
+    441,
+    135.0,
+    90.0,
+    -105.0,
+    40.0,
+    -3.46
+   ],
+   [
+    464,
+    150.0,
+    90.0,
+    -90.0,
+    40.0,
+    -4.61
+   ]
+  ],
+  "T5_sum_mm": 34.52,
+  "T5_max_mm": 9.0,
+  "th_margin_min": 5.097,
+  "new_takes": 31,
+  "new_overhead": 5,
+  "new_under1": 1,
+  "new_1to2": 5,
+  "new_median_mm": 3.41,
+  "ring_added_overhead_under2": 1,
+  "k_hist_new": {
+   "2.5": 1,
+   "0.0": 1,
+   "27.5": 1,
+   "22.5": 2,
+   "7.5": 1,
+   "10.0": 1,
+   "32.5": 6,
+   "40.0": 11,
+   "30.0": 2,
+   "25.0": 2,
+   "37.5": 2,
+   "35.0": 1
+  },
+  "continuity": {
+   "dropped_relayed": 0,
+   "static": {
+    "gap": 11.16,
+    "reach": 0.8056,
+    "follow": 1.0,
+    "inband14": 0.9225,
+    "inband10": 0.6072,
+    "contact": 0.0172
+   },
+   "flood": "pick 1 IK flood imported (lead knee; this knee loses 1 lead take)"
+  },
+  "relay_hw": {
+   "R_t": 71.86,
+   "R_liner": 70.86,
+   "R_bump": 74.26,
+   "h_c": 1.4,
+   "rpad": 74.03,
+   "s0": -117.1,
+   "s_pad": -91.1,
+   "s_pad_edge": -96.3,
+   "th0": -107.2,
+   "arc": [
+    -115.6,
+    -60.4
+   ],
+   "pre_arc": 8.37,
+   "pre_floor": 8.37,
+   "band": 8.0,
+   "ramp": 6.0,
+   "ramp_floor": 2.0,
+   "skin_p90_arc_max": 65.36
+  },
+  "jams": 0,
+  "perpose": "docs/concepts/verify/ikring-distalshell-knuckle-4r/ik_bench_perpose.json",
+  "chain_psi0": {
+   "gap": 18.9,
+   "ws_taken": 261,
+   "lost_vs_lead": [
+    203
+   ],
+   "overhead": 8,
+   "follow": 1.0
+  },
+  "k0_parked": {
+   "gate": 18.9,
+   "plain": 18.3,
+   "near1": 19.39,
+   "near2": 29.45,
+   "ws_taken": 261,
+   "overhead": 8,
+   "follow": 1.0,
+   "shell_min_taken": {
+    "mm": 1.04,
+    "i": 460,
+    "az_rel": 45.8
+   },
+   "shell_under2_taken": 1
+  }
+ },
+ "held_out": null,
+ "doc": "docs/concepts/ikring-distalshell-knuckle-4r.md"
+}
