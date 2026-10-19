@@ -1,0 +1,27 @@
+{
+ "id": "conecut-knee-knuckle-3r",
+ "params": {
+  "stk": 6.0,
+  "lE": 97.1443,
+  "lc": 24.3508,
+  "phiE": 0.7526,
+  "phib": -91.8041,
+  "J3MIN": -111.9036,
+  "J3MAX": 122.7417
+ },
+ "exact": true,
+ "secs": 8.5,
+ "git": "4461bee",
+ "n_valid": 376,
+ "n_jam": 0,
+ "n_jam_inside": 0,
+ "n_jam_inside_by_kind": {
+  "clip": 0,
+  "ws": 0
+ },
+ "jam_inside_sum_mm": 0.0,
+ "jam_inside_max_mm": 0.0,
+ "jam_inside_deepest_parts": {},
+ "jam_inside_overhead140": 0,
+ "jams": []
+}

@@ -1,0 +1,32 @@
+[
+ {
+  "key": "NEW-jam-masks-contact",
+  "level": "watch",
+  "reason": "At the cone poses the model scores a part jam, and it never checks those poses against the skin. On Bench(110,360) exact, frozen claim, 34 poses are part jams; 14 of them (all workspace, elev 90-165, 9 overhead, all E-L2stack) have metal INSIDE the arm. The summed depth is 209.13 mm, the deepest 33.09 mm (ws 238, plane 15 / elev 165 / axial 0), and the deepest part is hub 3 on 11 of them. Held out: 78 jams, 36 inside, 391.55 mm summed, deepest 33.14 mm, 20 overhead. The H1 run loop records a jam pose as not taken and never evaluates its skin distance, and the bench's contact term counts only evaluated poses. So these presses cost reach only, not contact. Read as contact (proposal only): bench 45.96 -> 49.97 (+4.01, contact 0.009 -> 0.049), held 51.09 -> 55.33 (+4.24). The reference lead conecut-knee-knuckle-3r has 0 part jams on the same bench and harness, so nothing is masked there. The CMA neighbour (fast 39.93) reads 49.07 frozen with contact 0.0457, because the same cone poses are scored as contacts there. The best's 3.11-point lead over its neighbour is about the 3.67 contact points the relabel removes: hub 3 is no shallower. The rank does not change (the next verified rows are 44.79 above and >= 60 below, at either reading), so this is a watch.",
+  "evidence": "docs/alignment/remeasure/weldk-overstrap-pinknee-3r_bench_jamskin.json, docs/alignment/remeasure/weldk-overstrap-pinknee-3r_held_jamskin.json (tools/alignment_jam_skin_probe.py; model unchanged, the run loop copied from docs/concepts/models/skin-normal-3r-pin-knee.py _run_batched lines 386-405); reference: the same probe on conecut-knee-knuckle-3r (n_jam 0, scratch); row exact_frozen_neighbour; tools/concept_bench.py report() lines 185-195"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Near the skin, metal hugs it, and overhead most of all (report-only since the user's 2026-10-17 ruling). Gap with metal < 1 mm read as contact: 53.04 (8 taken poses). At < 2 mm: 90.67 (49 poses; 44.71 points live in the 0-2 mm shell). At < 3 mm: 123.47 (90 poses). Overhead (ws elev >= 140): 7/28 taken, with lowest metal 0.29 / 1.32 / 1.34 / 1.60 / 1.93 / 2.21 / 2.61 mm, so 6 of 7 are under 2 mm. All 10 overhead clip frames are taken, 8 of them under 2 mm and 5 under 1 mm. Held out: overhead 11/71 taken, 9 under 2 mm, 5 under 1 mm. The row's verdict compares 'overhead 7/28 (lead 8, H1 5)' as if like for like, but on a bulging real arm every one of those 7 overhead takes is metal on skin.",
+  "evidence": "docs/alignment/remeasure/weldk-overstrap-pinknee-3r_bench.json (deep), docs/alignment/remeasure/weldk-overstrap-pinknee-3r_bench_probe.json (ws_overhead140, clip_overhead140), docs/alignment/remeasure/weldk-overstrap-pinknee-3r_held_probe.json, docs/alignment/remeasure/weldk-overstrap-pinknee-3r_bench_perpose.json"
+ },
+ {
+  "key": "M4",
+  "level": "watch",
+  "reason": "The named feature carries no taken pose. That feature is the E-over-link-2 crossover: link 2 on hub 3's lower plate and the E rim lifted to F3 + 3.15. The verifier found link 2 under the E on none of the 329 taken poses: the stacked clearance reads 'no overlap' on every one, all 18 E-L2stack poses are jams, and the E ramps from its 64.52 rim down to 61.87 at x 13 mm. The crossover's only effects on the scored number are the 3.15 mm rim lift (a cost) and the stacked-pair jam at the cone, which hides 14 deep presses (finding NEW-jam-masks-contact). Complexity is 0 either way, so the count is not inflated. The name and the lesson 'the crossover is free where E points into link 2's free sector' describe a mechanism the score never exercises.",
+  "evidence": "docs/concepts/rows/weldk-overstrap-pinknee-3r.json note (VERIFIED, red-team 1); docs/concepts/weldk-overstrap-pinknee-3r.md 'Verification' 1; docs/concepts/verify/weldk-overstrap-pinknee-3r_v_bench_frozen.json"
+ },
+ {
+  "key": "M3",
+  "level": "watch",
+  "reason": "The model replaced H1's kd E-L2 clearance test with a plan-view stacked-pair test that only looks inside the E footprint (|y| <= W/2 + 1). At its root the E dips to F3 + 0.5, level with link 2, so a link 2 running beside the E is not checked. The E boss vs hubs 1-2 and link 1 is not in collide() either. The verifier priced both. Sharp edge test: 0.333 mm (ws 232) and 0.761 mm (ws 290), which pass the 0.15 mm running gap but are tolerance-sensitive. H1's own kd test reads -0.29 / -0.12 mm there, giving a conservative 46.53 (+0.57, overhead 6/28). The E boss is at least 6.29 mm clear. No rank change.",
+  "evidence": "docs/concepts/models/weldk-overstrap-pinknee-3r.py collide() / stacked(); docs/concepts/verify/weldk-overstrap-pinknee-3r_v_el2.json; docs/concepts/verify/weldk-overstrap-pinknee-3r_v_bench_frozen.json extra.boss_low"
+ },
+ {
+  "key": "S3",
+  "level": "watch",
+  "reason": "The arm pad's leg to the cuff is not sampled. kinv 1 (the inverted knee stack the CMA chose) puts the arm pad ABOVE the knee link at pin b, tp + RUN higher than H1's pad. Its leg down to the cuff must step past the knee-link layer, and no metal group samples that leg. The verifier measured the free sector the leg can use as 46 deg at 9 mm from pin b, 230 deg at 11 mm and 242 deg at 13 mm, so a leg is buildable but unscored. The pad itself already sits at a median 16.5 mm (0.235 in band), and the boss at a median 19.9 mm (0.186). H1 also leaves the pad-to-cuff connection unmodelled; kinv 1 makes the missing piece taller.",
+  "evidence": "docs/concepts/rows/weldk-overstrap-pinknee-3r.json note (red-team 2) and exact_frozen.parts_ib14; docs/concepts/models/weldk-overstrap-pinknee-3r.py _lv()"
+ }
+]
