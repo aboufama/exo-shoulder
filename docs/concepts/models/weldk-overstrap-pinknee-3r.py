@@ -42,7 +42,7 @@ NAME = "Welded-K crossover pin-knee 3R (E strap over link 2, no K, no drive, no 
 PARAMS = dict(PK.PARAMS)
 PARAMS.update(az1=95.3929, el1=67.8974, az2=28.93, el2=44.90, wd=95.0, wa=8.0, b3=0.6,       # catalogue spec seats
               lE=80.0, lc=28.24, phiE=-5.81, phib=-90.0, ang_min=30.46, stk=6.0,
-              rad1=10.0, rad2=10.0, rad3=10.0, over=1, dg=0.0)
+              rad1=10.0, rad2=10.0, rad3=10.0, over=1, dg=0.0, kinv=0)
 
 
 class Model(PK.Model):
@@ -50,6 +50,75 @@ class Model(PK.Model):
 
     def __init__(self, B, params=None, verbose=False):
         super().__init__(B, dict(PARAMS, **(params or {})), verbose)
+
+    def _lv(self, tr):
+        """(boss / pad underside zb, knee-link underside zk) from the knee level tr. kinv 0 = H1's knee stack (boss and
+        pad at tr, knee link over them at tr + tp + RUN); kinv 1 = INVERTED knee stack (knee link lowest at tr, boss and
+        pad over it at tr + tp + RUN), so the E strap - already the upper member at hub 3 - stays the upper layer
+        from hub 3 to pin a and never meets the knee link sweeping under it"""
+        off_k = self.p["tp"] + S.RUN
+        return (tr + off_k, tr) if int(self.p.get("kinv", 0)) else (tr, tr + off_k)
+
+    def fit(self):
+        """= H1's fit, with the knee-stack need taken at the stack order kinv"""
+        D = self.D; P = D.p
+        poses = np.nonzero(self.kin_ok)[0]; self.poses_fit = poses
+        g = self._geo(); self.g = g; off_k = P["tp"] + S.RUN
+        order = ["hub1", "hub2", "hub3", "boss", "pad", "knee", "E"]
+        items = [(g[n][0], g[n][1], np.broadcast_to(g[n][2], g[n][1].shape).copy(), 140.0) for n in order]
+        res = dict(zip(order, self.needed(items, poses)))
+        if int(P.get("kinv", 0)): st = np.concatenate([res["boss"] - off_k, res["pad"] - off_k, res["knee"]], 1)
+        else: st = np.concatenate([res["boss"], res["pad"], res["knee"] - off_k], 1)
+        H = {"hub1": res["hub1"], "hub2": res["hub2"], "h3": res["hub3"], "stack": st}
+        self.Hneed, self.Lneed = H, {}; self._HE = res["E"]
+        self.greedy_drop(links=False); keep1 = ~self.drop
+        f1 = H["hub1"][keep1].max(); f2 = H["hub2"][keep1].max(); tr = H["stack"][keep1].max(); f3 = H["h3"][keep1].max()
+        geo = PK._Geo(D, self.hr); geo.add_links(f1, f2, f3); self.geo = geo
+        self._tr_fit = tr
+        items, idx = [], []
+        for lk in geo.links:
+            avoid = ("knee", "pad") if lk["name"] == "L2" else ()
+            for ri, (dv, keep, sarc) in enumerate(lk["rows"]):
+                items.append((lk["mem"], np.zeros((len(dv), 3)), dv, 170.0, avoid)); idx.append((lk["name"], ri))
+        res = self.needed(items, poses); L = {}
+        for (nm, ri), r in zip(idx, res): L.setdefault(nm, []).append(r)
+        L["E"] = [self._HE]; self.Lneed = L
+        self.greedy_drop(keep0=keep1)
+        self.finalize()
+
+    def _boxes_at(self, i):
+        D = self.D; P = D.p; zb, zk = self._lv(self._tr_fit); tp = P["tp"]; fr = self.fr; lc = float(P["lc"]); out = {}
+        Rk = np.stack([fr["eK"], fr["nK"], D.sn], 1); ck = fr["A0m"] + (lc / 2) * fr["eK"] + (zk + tp / 2) * D.sn
+        R, t = self.T(6, i); out["knee"] = (R @ ck + t, R @ Rk, np.array([lc / 2 + BOSS_R, PK.KNEE_W / 2, tp / 2]))
+        Rp = np.stack([D.sa, D.st, D.sn], 1); cp = fr["Bm"] + (zb + tp / 2) * D.sn
+        R, t = self.T(5, i); out["pad"] = (R @ cp + t, R @ Rp, np.array([PK.PAD_R, PK.PAD_R, tp / 2]))
+        return out
+
+    def _contact_only(self):
+        """H1's contact-only samples at the stack order kinv"""
+        D = self.D; P = D.p; u, c = D.u, D.c; F = self.f; tp = P["tp"]; out = []; zb, zk = self._lv(self.tr)
+        ang = np.linspace(0, 2 * np.pi, 32, endpoint=False)
+        for k, mem in ((0, 0), (1, 1), (2, 3)):
+            e, f = S.frame_of(u[k]); ring = self.hr[k] * (np.cos(ang)[:, None] * e + np.sin(ang)[:, None] * f)
+            for z in np.linspace(F[k], F[k] + S.CROWN, 4): out.append((mem, c[k] + z * u[k] + ring))
+            dd = S.disc(self.hr[k], 2.0); out.append((mem, c[k] + (F[k] + S.CROWN) * u[k] + dd[:, :1] * e + dd[:, 1:] * f))
+        for nm, (mem, pts) in self.link_pts.items():
+            if len(pts): out.append((mem, pts + S.T_LINK * unit(pts)))
+        sn = D.sn; out.append((3, self.rigid["E"][1] + S.T_LINK * sn))
+        fr = self.fr
+        for mem, cen, z0, z1, R_ in ((3, fr["A0"], zb, zb + tp, BOSS_R), (5, fr["Bm"], zb, zb + tp, PK.PAD_R)):
+            e, f = S.frame_of(sn); ring = R_ * (np.cos(ang)[:, None] * e + np.sin(ang)[:, None] * f)
+            for z in (z0, z1): out.append((mem, cen + z * sn + ring))
+        out.append((5, self.rigid["pad"][1] + tp * sn))
+        z0 = zk; z1 = z0 + tp; lc = float(P["lc"]); L = lc + 2 * BOSS_R; W = PK.KNEE_W
+        pts = []
+        for z in (z0, z1):
+            for x in np.arange(-L / 2, L / 2 + 1e-6, S.SPACING): pts += [(x, -W / 2, z), (x, W / 2, z)]
+            for y in np.arange(-W / 2, W / 2 + 1e-6, S.SPACING): pts += [(-L / 2, y, z), (L / 2, y, z)]
+        a = np.array(pts); cen = fr["A0m"] + (lc / 2) * fr["eK"]
+        out.append((6, cen + a[:, :1] * fr["eK"] + a[:, 1:2] * fr["nK"] + a[:, 2:] * sn))
+        out.append((6, self.rigid["knee"][1] + tp * sn))
+        self.contact = out
 
     def greedy_drop(self, keep0=None, links=True):
         """H1's greedy drop, started (first pass) without the poses whose need on a hub / the knee stack exceeds that
@@ -113,17 +182,22 @@ class Model(PK.Model):
             if b.any(): req_tr = max(req_tr, float(h[b].max()) + self.ADJ)
         return xs, req, req_tr
 
+    FLAT = 10.0        # mm: the E strap is flat at the boss level over the last FLAT mm (the knee link's footprint at pin a)
+
     def _E_profile(self, hE, f3, tr):
-        """as H1's, with the E rim at F3 + UP (over=1) and the stacked-pair requirement folded into the need"""
+        """as H1's, with the E rim at F3 + UP (over=1), the stacked-pair requirement folded into the need, and the E
+        flat at the boss level tr (= zb) over the last FLAT mm before pin a: kinv 0 - the knee link rides over E there
+        (E higher than the boss -> the boss / knee rise); kinv 1 - the knee link passes under E there (E >= boss level)"""
         up = S.UP if int(self.p.get("over", 1)) else 0.0
         x = self._Ex; xs = np.unique(np.round(x, 6)); k = math.tan(S.RAMP * D2R)
         need = np.array([hE[np.isclose(x, v)].max() for v in xs])
         if getattr(self, "_req", None) is not None: need = np.maximum(need, self._req)
-        lb = float(self.p["lE"]) - BOSS_R
-        for _ in range(6):
-            r = np.maximum(need, np.maximum(f3 + up - k * np.abs(xs - self.hr[2]), tr - k * np.abs(xs - lb)))
+        lb = float(self.p["lE"]) - BOSS_R; zone = xs >= lb - self.FLAT
+        for _ in range(8):
+            r = np.maximum(need, np.maximum(f3 + up - k * np.abs(xs - self.hr[2]), tr - k * np.maximum(np.abs(xs - lb) - self.FLAT, 0)))
             r = np.max(r[None, :] - k * np.abs(xs[:, None] - xs[None, :]), axis=1)
             r0 = r[0] - k * abs(xs[0] - self.hr[2]); r1 = r[-1] - k * abs(lb - xs[-1])
+            if not int(self.p.get("kinv", 0)) and zone.any(): r1 = max(r1, float(r[zone].max()))
             ch = False
             if r0 > f3 + up + 0.15: f3 = r0 - up; ch = True
             if r1 > tr + 0.15: tr = r1; ch = True
@@ -135,21 +209,23 @@ class Model(PK.Model):
         f1 = H["hub1"][keep].max(); f2 = H["hub2"][keep].max(); tr = H["stack"][keep].max(); f3 = H["h3"][keep].max()
         hE = self._HE[keep].max(0) if keep.any() else self._HE.max(0)
         poses = self.poses_fit[keep]; self._req = None; self.req_tr = None
+        zb, _ = self._lv(tr); dz = zb - tr
         for it in range(5):
             self._links(f1, f2, f3, keep)
             if int(P.get("over", 1)):
                 xs, req, rtr = self._L2_req(poses); self._req = req; self.req_tr = rtr
-                tr = max(tr, rtr)
-            xs, rE, f3n, trn = self._E_profile(hE, f3, tr)
+                zb = max(zb, rtr)
+            xs, rE, f3n, zbn = self._E_profile(hE, f3, zb)
             moved = f3n > f3 + 1e-6
-            f3, tr = f3n, trn
+            f3, zb = f3n, zbn
             if not moved: break
-        self.f = [f1, f2, f3]; self.tr = tr; self.zb = tr
+        tr = zb - dz
+        self.f = [f1, f2, f3]; self.tr = tr; self.zb = zb; zk = self._lv(tr)[1]
         u = D.u; sn = D.sn
         hx = np.interp(self._Ex, xs, rE); self.hEx = hx; self._xsE, self._rE = xs, rE
         self.rigid = {"hub1": (0, g["hub1"][1] + f1 * u[0]), "hub2": (1, g["hub2"][1] + f2 * u[1]), "hub3": (3, g["hub3"][1] + f3 * u[2]),
-                      "E": (3, g["E"][1] + hx[:, None] * sn), "boss": (3, g["boss"][1] + tr * sn), "pad": (5, g["pad"][1] + tr * sn),
-                      "knee": (6, g["knee"][1] + (tr + off_k) * sn)}
+                      "E": (3, g["E"][1] + hx[:, None] * sn), "boss": (3, g["boss"][1] + zb * sn), "pad": (5, g["pad"][1] + zb * sn),
+                      "knee": (6, g["knee"][1] + zk * sn)}
         self._contact_only(); self._solids()
 
     def stacked(self, i):
@@ -160,7 +236,7 @@ class Model(PK.Model):
         if m.any(): out = min(out, float((np.interp(x[m], xs, rE) - h[m]).min()))
         A0 = self.fr["A0"] - self.D.c[2]; ax0, ay0 = float(A0 @ self.fr["eE"]), float(A0 @ self.fr["nE"])
         b = np.hypot(x - ax0, y - ay0) <= BOSS_R + 1.0
-        if b.any(): out = min(out, float((self.tr - h[b]).min()))
+        if b.any(): out = min(out, float((self.zb - h[b]).min()))
         return out
 
     def collide(self, i):
