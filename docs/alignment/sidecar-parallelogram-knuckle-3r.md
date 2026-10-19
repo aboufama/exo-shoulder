@@ -182,3 +182,77 @@ Checked and not present:
   - run a 2 mm near-touch search (31 points of the gap sit in the 1-2 mm shell, overhead most of all);
   - run R17 for the clock-spring hold.
 - The hourly audit loop re-audits this row when its row or verifier files change.
+
+## Skeptic (2026-10-19, 02:00-02:20 UTC)
+
+Ledger entry 2026-10-19T02:15:01Z (`by skeptic`, run `skeptic:sidecar-parallelogram-knuckle-3r`). **Final verdict:
+WATCH.** Of 14 reasons, 2 are refuted with evidence and 12 are upheld. Rulings with full evidence are in
+`docs/alignment/sidecar-parallelogram-knuckle-3r.rulings.json`. This replaces the 2026-10-16 rulings, whose
+near-touch and dominance keys were rulings on the retired 'gamed' levels.
+
+**How it ran:**
+- Local only: CB_EXACT=1, nice, OMP_NUM_THREADS=1, at most 2 processes, $0.
+- Bench probe: I re-ran `tools/alignment_msub_rest_probe_model.py sidecar-parallelogram-knuckle-3r bench` myself. It
+  took 385 s on a loaded box and reproduced gap 19.13, saved as
+  `remeasure/sidecar-parallelogram-knuckle-3r_msub_rest_bench_skeptic.json`.
+- Held-out twin: I stopped it at the time box, so it is not measured.
+- Everything else was re-derived from the raw verify, remeasure, row, sweep and dashboard files.
+
+**Refuted (2):**
+- **fold_margin.** Measured on the claim's own frozen exact wear, the family th reading over all 369 taken poses gives
+  min 5.011 deg with 0 poses under 5. That reading is m_plain where K rests and min(m_sub, m_eff) where K is open. The
+  effective-dyad reading m_eff is >= 5.011 on every taken pose. The result equals the auditor's `_msub_rest_bench.json`
+  and clears TH fold_min 5.0. The watch came from where the tool looks (row and verify files only), not from a short
+  margin. The held-out margin is still not measured. The 0.011 deg closeness is ruled under NEW-unpriced-stops.
+- **judgement:S1.** The documented S1 detector is the held-out drop, and it reads +2.90 (`_held.json` 22.03, exact)
+  against the watch line of 6.0. The claim was not the best-wearing tie: `_tie_spread.json` has 18.54 and 19.97 around
+  19.13, and the tie-break was declared before the wear. "Rank inside noise" is a statement about the ranking, with no
+  wearer cost measured. Recount: this row is 19th of 38, not 17th, with 15 verified rows within 0.85.
+
+**Upheld (12):**
+- **dominance.** Re-derived from both sides' own frozen exact verifier files, both read by the same PK.audit:
+  frontload is 22.82 plain and 44.08 at 2 mm (34 poses); this row is 19.13 and 50.14 (44 poses). The wording is loose:
+  the plain gain is the in-band 0.855 -> 0.905, and at 1 mm this row is better (20.22 vs 24.46). Still, 10 more poses
+  graze at 1-2 mm, and section 1 counts that as metal on a real arm.
+- **continuity.** On the row, the full flood loses 0.00 and the knn flood loses 3.08, which is over conn_gamed 3.0.
+  The tool turns that into a watch as coded. Nothing on file shows the 11 knn-dropped poses can be reached without the
+  envelope stepping stones.
+- **reporting.** The row and `morphs.json` verdict reads "SCREENED ... (self-measured)" and "complexity 49" (it is
+  25.5). The dashboard sweep_gap 10.63 sits 8.50 below the verified number.
+- **judgement:NEW-catalogue-drive.** The O7 socket and K at 37.31 / 37.06 deg are confirmed. There is one correction:
+  the 35.4 deg pinch was measured on sidecar-longdyad's geometry (La 16.55, beta -86.45). This row's own geometry is
+  La 14.90, beta -95.83, s_arm 4.40, so the +1.12 / +0.63 is a borrowed estimate. This row's own pinch angle is not
+  measured.
+- **judgement:M2.** stk 4.8534 is inherited from the old lead (frontload line 45). It is below both of the kit's
+  figures (5.0 and 6.0). At stk 6.0 the held-out in-band is 0.8994.
+- **judgement:NEW-unpriced-stops.** smlo is 5.0 in 1341 of the 3962 sweep configs, so the bound binds. The rule holds
+  by 0.011 deg.
+- **judgement:G4.** Reproduced: m_sub_rest is under 5 deg on 117 of 222 rest poses and under 1 on 51, min 0.000. What
+  the wearer feels there is not measured, and B1 is open with the user.
+- **judgement:M5.** No R17, K-lag or cuff-twist file exists for this id in judge/ or pipeline/.
+- **judgement:S3.** The follower, the short arm and the lobe ring are not among the sampled parts (doc lines 285-287).
+- **judgement:G1.** Confirmed: 44 of 369 taken poses (bench) and 96 of 859 (held) have metal under 2 mm. 7 of 8 taken
+  overhead poses have their floor at 1-2 mm.
+- **judgement:G5.** Recomputed with tools/simplicity.py v2.2: this row 25.5 and sidecar-longdyad 25.5 (identical
+  records), against 28.0 for the kneeless twin.
+- **judgement:R1.** Same raw reading as reporting. The row carries no fold-margin, stk or contact-depth key.
+
+**Missed by the audit (for the next one; not counted in this verdict):**
+1. **The T5 depth reference read crashes, so "no depth of conecut-knee on file" is false.**
+   - Cause: `docs/alignment/remeasure/desmo-geom-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json` (commit 46af77e,
+     2026-10-18 11:37) has `"held": "missing dump"`, a string. `_depth_sources('conecut-knee-knuckle-3r')`
+     (tools/alignment_audit.py line 351) then raises AttributeError, and the check reports that the reference has no
+     depth.
+   - The depth is on file: `conecut-knee-knuckle-3r_bench_perpose.json` (bench: 4 contact poses, sum 20.24 mm,
+     deepest 8.93) and `_held_perpose.json` (held: 14 poses, sum 60.97 mm, deepest 9.86). Both are on disk since
+     2026-10-17 16:27.
+   - For this row the miss is harmless: it is shallower (bench 1.82 / held 18.22 mm). But every T5 reading against
+     the current lead since 2026-10-18 11:37 has been vacuous. The fix is a tool change (type-guard the paired
+     reader), so it needs a VERSION bump and a selftest run; I did not make it.
+2. **The in-band pass is met on clip frames only.** The scored in-band 0.9049 is the clip score
+   (`_probe.json` probe.clip_scored). The taken workspace poses read 0.870.
+   - The whole family shows this: conecut-knee 0.901 / 0.868, sidecar-longdyad 0.897 / 0.874.
+   - So it is a bench property, not this design's gaming. It does mean the 0.0049 in-band margin exists only on the
+     clips.
+
+**Final verdict (ledger): WATCH.**
