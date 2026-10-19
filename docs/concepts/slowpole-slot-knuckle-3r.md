@@ -133,3 +133,24 @@ dyads within ~7 deg of the lead's K axis.
 
    The constant-ratio ghosts at rho 0.84 and 1.04 stand in for these two laws: same onset, same end state, same
    stroke. Both read 18.83.
+
+## Red team (own best cell: 32/38, pin r 18 / phase 5, the rho 0.62-0.94 slot law)
+
+- **The optimistic number: PA rides the gate.** The greedy law sits at PA = 38.0 over part of the stroke, with zero
+  margin. With margin the same pin still carries the stroke:
+
+  | PA gate | onset th | msub | rho range |
+  |---|---|---|---|
+  | 35 | 64.4 | 7.1 | 0.54-0.92 |
+  | 32 | 62.5 | 6.3 | 0.46-0.90 |
+
+  Both onsets stay inside the band where the ghost reads 18.83 (onset 59.3-70.5 all read 18.83).
+- **The constant-ratio stand-in.** The ghost runs a constant rho with the slot law's onset and end. On 32/38 the law
+  does not move the number (three rho values give identical takes and contact poses), so the stand-in is safe.
+- **The pose that jams.** At the spec's slow placements, the dwell lock goes to 89 deg (K unlocked at the onset). At r 18 /
+  phase 5 it is <= 36.3 deg, with 0.08 deg of K play per 0.05 mm of slot clearance.
+- **Undercut.** The constant-ratio locus at r 18 has its minimum curvature radius at 2.19 mm, against a pin radius of
+  1.25 (no undercut). The relative-pole approach is 0.049 mm per deg.
+- **The point that pinches.** The chain's new contact is pose 139 (plane -60, elev 60, axial 105: across-the-body ER),
+  0.2-0.5 mm into the skin at hub K / hub 2. The worst contact is the lead's own pose 237 (15 / 165 / -60), -5.45 mm on hub 2.
+- **The drive metal** is the real test: see step 1b.
