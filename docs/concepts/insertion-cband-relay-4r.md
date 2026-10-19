@@ -147,7 +147,7 @@ On Bench(110,360) the contacts break down as follows:
 - **Wheels / carriage.** 1 pose each.
 - **Jams.** 2 ws.
 
-This is one unswept hardware configuration, so it is not the design's floor; the kill is already decided at step 1.
+This is one unswept hardware configuration, so it is not the design's floor; the kill is already decided at step 1. A second read with the strap fitted without the 15 mm outlier cut (out_strap 80) is identical (74.53). The strap's 54 shallow contacts are therefore fit-set generalisation: a q 1 fit on Bench(60,160) does not cover Bench(110,360)'s deltoid bunching.
 What it measures:
 
 - **The carriage cannot sit in band at the insertion.** The race must clear the worst skin at every azimuth it covers,

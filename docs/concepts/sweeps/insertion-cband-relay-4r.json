@@ -697,5 +697,94 @@
 15.0
 ]
 }
+},
+{
+"k": 10,
+"t": "2026-10-19T01:49:13Z",
+"params": {
+"PHI": 45,
+"tilt": 8.75,
+"taz": -90.0,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -45,
+"j4": 1,
+"q_strap": 1.0,
+"out_strap": 80.0
+},
+"bench": "b110",
+"mode": "exact",
+"step": "HARDWARE, strap fit without the 15 mm outlier cut (out_strap 80)",
+"inband14": 0.7597,
+"inband10": 0.4281,
+"reach": 0.6806,
+"follow": 0.7545,
+"contact": 0.1901,
+"gap": 74.53,
+"gap_near1": 90.18,
+"gap_near2": 103.81,
+"overhead": [
+0,
+28
+],
+"n_contact": 77,
+"depth_sum": 207.96,
+"min_metal_taken": 0.091,
+"J4": {
+"band": {
+"min": 0.39,
+"n_lt0": 0,
+"n_lt1": 1,
+"n_lt2": 7,
+"contact_poses_all": 10,
+"contact_ws": 10,
+"depth_max_all": 11.96
+},
+"car": {
+"min": 6.46,
+"n_lt0": 0,
+"n_lt1": 0,
+"n_lt2": 0,
+"contact_poses_all": 1,
+"contact_ws": 1,
+"depth_max_all": 9.12
+},
+"wheels": {
+"min": 2.93,
+"n_lt0": 0,
+"n_lt1": 0,
+"n_lt2": 0,
+"contact_poses_all": 1,
+"contact_ws": 1,
+"depth_max_all": 13.8
+},
+"strap": {
+"min": 0.09,
+"n_lt0": 0,
+"n_lt1": 20,
+"n_lt2": 38,
+"contact_poses_all": 54,
+"contact_ws": 34,
+"depth_max_all": 2.59
+},
+"car_ib14": 0.34,
+"car_p5_50_95": [
+10.13,
+15.73,
+21.88
+],
+"band_ib14": 0.918,
+"band_p5_50_95": [
+3.97,
+7.18,
+15.45
+],
+"jams": 2,
+"jams_ws": 2
+}
 }
 ]
