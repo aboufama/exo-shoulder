@@ -201,3 +201,38 @@ points. **It PASSES.**
    - **A J4 guide that is not on the arm surface at all is the open lever** (see the open levers in ROUNDS).
 3. **A rigid strap cannot follow the arm.** A rigid 220 mm strap along the arm reads in-band 0.83, because it must clear
    the highest skin it ever passes over: p95 33 mm at its carriage end.
+
+## Audit (2026-10-19, death auditor)
+
+**Verdict: the death STANDS.** The hardware kill (> 17.0) fires under every correction tried. Measured reason in one
+line: the J4 losses are real torso / forearm penetrations at the deep across-body IR and hanging-ER poses; forgiving the
+rig's own self-intersection under the metal and repairing the strap's float leave the in-sample hardware at 27.3-29.6,
+10+ points over the kill on the metal's own fit set.
+
+- **Convergence gate.** Re-read from the sweep file: 26 valid cells, gain 0.156 over the second half, 0.0 over the last
+  third, top-5 spread 0.156. It passes, though the sweep is a coarse grid rather than CMA. The kill does not rest on it.
+- **Reproduction.** The sweep-best hardware cell reads 29.56 on Bench(60,160) fast, exactly as entry k 28 (reach 0.7812,
+  follow 0.900, ib14 0.9291, ib10 0.7646, contact 0.1268, 26 contacts). Its ideal reads 5.29. The Bench(110,360) exact
+  claim of 35.48 was not re-run, because the box load is 12 on 4 cores.
+- **Is the "torso over the arm" the rig's self-intersection?** REQUIREMENTS R2 notes that the rig has no soft tissue:
+  its arm passes into its chest. The bench's winding-number sign counts that overlap as inside.
+  - The test: for every penetrating J4 sample, take the arm-skin vertex under it (skin vertices rigid in the humerus
+    frame), offset it 1 mm outward and check whether it lies inside another body part.
+  - Of the 19 ideal-taken poses the J4 metal loses on the fit bench, 13 are mostly self-intersection under the metal and
+    3 wholly.
+  - Forgiving every self-intersecting sample (the R2 attributable-depth idea; a MEASUREMENT change, not a design change)
+    moves the hardware from 29.56 to 27.34 (contacts 26 -> 24, reach 0.781 -> 0.794).
+  - 17 of the 19 poses keep real penetration. The strap stands above the arm with torso skin in the gap between, and the
+    race's anterior end sits at -6.7 mm in the hanging-ER poses at elbow flexion 90.
+- **The strap's float is a fit artefact, but it does not matter to the gap.**
+  - The row ran the strap with an effectively absent outlier cut (out_strap 80). Cutting it at 12 or 25 mm lifts the
+    strap's own in-band from 0.83 to 0.94 / 0.93 (p95 30 -> 14.5 / 15.1 mm). Strap-gate item 1 then PASSES.
+  - Strap-gate item 2 still sits at or over 11 (strap 11 + 2 / 10 + 2).
+  - The hardware gap does not move (30.67 / 29.56).
+  - The kill does not depend on the strap's in-band. The poses are lost to contact either way.
+- **Out-of-date refutation line.** The template's line ("within 10 of 68.93 on Bench(60,160)") is out of date: this row
+  is far better than the old champion. The death is judged at the round-401 pre-registered gate, and nothing found
+  brings the hardware anywhere near 17.
+- **What happens next.** The open lever stands as the row wrote it: a J4 guide that is NOT on the distal arm surface. A
+  bench issue is flagged for the lead. The concept bench counts the rig's self-intersection as contact, while R2 forgives
+  it. Here that costs ~2.2 points, which is small but systematic against any distal arm metal.

@@ -16,11 +16,11 @@
  "contact": 0.1303,
  "gap": 35.48,
  "gap_near1": 43.84,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7812,
+ "v_follow": 0.9,
+ "v_inband14": 0.9291,
+ "v_inband10": 0.7646,
+ "v_gap": 29.56,
  "n_configs": 39,
  "best_params": {
   "PHI": 55.0,
@@ -364,5 +364,18 @@
     28
    ]
   }
+ },
+ "v_bench": "Bench(60,160) fast, in-sample (audit reproduction of the sweep-best hardware cell, identical to entry k 28); the row's claim bench reading 35.48 (Bench(110,360) exact frozen) was not re-run (box load 12 on 4 cores)",
+ "audit": {
+  "t": "2026-10-19T04:20:00Z",
+  "verdict": "DEATH STANDS",
+  "refuted": false,
+  "gate": "sweep gate re-read from the file: 26 valid cells, gain 2nd half 0.156, last third 0.0, top-5 spread 0.156 -> passes (a coarse grid, not CMA; the kill does not rest on it: best in-sample 29.56 vs kill 17)",
+  "reproduction": "best cell fast 29.56 (reach 0.7812, follow 0.90, ib14 0.9291, ib10 0.7646, contact 0.1268, 26 contacts) reproduced exactly; ideal at the cell 5.29",
+  "selfx": "rig self-intersection test (arm-skin vertex under every penetrating J4 sample, offset 1 mm out, inside another body part = the rig's own overlap): 19 ideal-taken poses lost to J4 metal on the fit bench, 13 mostly self-intersection under the metal, 3 wholly; forgiving every self-intersecting sample (R2 attributable-depth idea, a MEASUREMENT change) moves the hardware 29.56 -> 27.34 (contacts 26 -> 24, reach 0.781 -> 0.794): 17 of 19 poses keep real penetration (strap standing above the arm with torso skin between, hanging-ER anterior end -6.7 mm)",
+  "strap_cut": "strap outlier cut (out_strap 80 -> 12 / 25; the row ran effectively no cut): strap own in-band 0.83 -> 0.94 / 0.93, p95 30 -> 14.5 / 15.1 mm (gate item 1 is a fit artefact and now PASSES), strap losses 11+2 / 10+2 (item 2 still at or over 11), hardware gap 30.67 / 29.56 (unchanged): the float was not what lost the poses",
+  "champion_same_bench": 68.93,
+  "note": "The template's refutation line (within 10 of 68.93 on Bench(60,160)) is out of date: the row is already far better than the old champion; the death is at the round-401 pre-registered hardware kill 17.0, and no correction found brings the hardware below 27.3 in-sample",
+  "files": "scratch dcbaudit/selfx.py, selfx_fast.json, os12.json, os25.json (not committed)"
  }
 }
