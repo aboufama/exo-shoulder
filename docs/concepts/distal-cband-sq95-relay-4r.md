@@ -33,7 +33,8 @@
 **DEAD at the judge's pre-registered gates.** The ideal bound passes, but the strap gate and the hardware kill both fire.
 
 - **Ideal bound passes.** No J4 metal, frozen exact Bench(110,360): **12.40** (score 95.49), against the 14.0 kill.
-- **Hardware kill fires.** Every J4 part sampled, frozen exact Bench(110,360): **41.15** (score 85.04), against the 17.0 kill.
+- **Hardware kill fires.** Every J4 part sampled, frozen exact Bench(110,360): **41.15** (score 85.04) at the spec cell and
+  **35.48** (score 87.10) at the sweep's best cell, against the 17.0 kill.
 - **Strap gate fires on two of its three items.** See step 0.
 
 **The measured limiter is the torso over the distal arm.**
@@ -107,9 +108,11 @@
 | build | bench | gap | reach | follow | ib14 | contact (n) | overhead | carriage ib14 / p5-50-95 mm |
 |---|---|---|---|---|---|---|---|---|
 | q_band 0.95, psi0 -45 | Bench(60,160) fast (in-sample) | 35.39 | 0.775 | 0.867 | 0.934 | 0.146 (30) | 5/12 | 0.999 / 6.9-8.8-11.5 |
-| q_band 0.95, psi0 -40 (best of the fast sweep so far) | Bench(60,160) fast | 34.29 | 0.781 | 0.867 | 0.938 | 0.141 | 5/12 | 1.0 |
+| q_band 0.95, psi0 -40 | Bench(60,160) fast | 34.29 | 0.781 | 0.867 | 0.938 | 0.141 | 5/12 | 1.0 |
+| **sweep best**: q_band 0.96, psi0 -40, s 0.72, PHI 55, raxis(1.888, -90), hb 2.5 | Bench(60,160) fast (in-sample) | 29.56 | 0.781 | 0.900 | 0.929 | 0.127 | 5/12 | 1.0 |
 | q_band 1 (race 71-74 mm: the carriage floats) | Bench(60,160) fast | 51.55 | 0.775 | 0.900 | 0.695 | 0.136 | 5/12 | 0.007 / 15.9-18.1-20.3 |
 | **q_band 0.95, psi0 -45** | **Bench(110,360) exact, frozen** | **41.15** | 0.739 (266/360) | 0.855 | 0.932 | 0.155 (66, 754 mm / 42.7) | 11/28 | 1.0 / 6.9-8.7-11.5 |
+| **sweep best (the row's reading)** | **Bench(110,360) exact, frozen** | **35.48** | 0.753 (271/360) | 0.873 | 0.932 | 0.130 (55, 635 mm / 42.0) | 11/28 | 0.999 / 6.8-8.6-11.1 |
 
 **Hardware loss attribution on Bench(110,360).**
 - **Over the ideal.** The hardware costs 28.75 points: contact +10.6, reach +10.0 (36 ws: strap 19, band 16,
@@ -122,6 +125,37 @@
   16-20 mm (ib14 0.007).
 - q 0.95 puts the carriage in band (1.00), but its underside meets the 5 % bulges.
 - Neither touches the torso losses, which run across the WHOLE arc.
+
+**The sweep-best cell.**
+- **Ideal (no J4 metal).** PHI 55 about raxis(1.888, -90) reads 13.56 frozen exact: reach 0.828, follow 0.936, 21
+  contacts / 113.5 mm, overhead 11/28.
+- **Hardware.** 35.48: J4 costs 21.9 points (contact +8.1, reach +7.5, follow +6.4).
+- **Strap gate on Bench(110,360).** Strap in-band 0.830; losses strap 16 ws + 4 clip, band 11 + 3.
+
+## Sweep and convergence gate (Bench(60,160) fast, hardware readings; local, farm closed)
+
+**Sweep.** 39 entries in order: 11 SUPERSEDED by the modelling fixes below (10 fast, plus the first Bench(110,360)
+hardware read; that read's ideal stands), 26 valid fast hardware cells, and 2 valid Bench(110,360) reads.
+
+**Ranges swept.**
+- q_band 0.95-0.99
+- psi0 -50 / -45 / -40 / -35 / -30
+- station s 0.70 / 0.72 / 0.75 / 0.78 / 0.80 / 0.82
+- PHI 55 / 60
+- axis centre 0-5 mm medial x 7.5-12.5 mm posterior (tilt 1.9-3.2)
+- carriage 20 / 24 deg
+- band t (hb) 2.5 / 3
+- band outlier cut 12 / 15 mm
+- psi2 -45 / -40 / -36.5 (first sweep only)
+
+**Gate.** On the 26 valid cells: gain over the second half 0.156, over the last third 0.0, top-5 spread 0.156 score
+points. **It PASSES.**
+
+**What the sweep shows.**
+- **Best in-sample cell.** 29.56, which is 12.6 points over the 17.0 kill on the metal's own fit set.
+- **s >= 0.78 is worse.** Elbow-flexion band losses grow: clip 5 -> 17 at s 0.82, 63.24.
+- **psi0.** -35 / -30 move the race's anterior end into more hanging-ER contact. -50 lengthens the strap's posterior
+  route: strap losses 17-21.
 
 ## Modelling fixes made here (and measured reasons; the insertion row's machinery is imported, not edited)
 

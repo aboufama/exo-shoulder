@@ -4951,5 +4951,289 @@
 "strap": 20
 }
 }
+},
+{
+"k": 37,
+"t": "2026-10-19T02:54:16Z",
+"params": {
+"PHI": 60.0,
+"tilt": 1.888,
+"taz": -90.0,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -45.0,
+"j4": 1,
+"pose_cut": 1,
+"out_mm": 12,
+"out_strap": 80,
+"strap_floor": 1,
+"q_band": 0.96,
+"psi0": -40.0,
+"s_frac": 0.82,
+"post": 7.5,
+"car_half": 10.0,
+"hb": 2.5,
+"band_lo": -53.0,
+"band_hi": 33.0
+},
+"bench": "fast",
+"mode": "fast",
+"step": "hardware (every J4 part sampled)",
+"inband14": 0.8896,
+"inband10": 0.6839,
+"reach": 0.7937,
+"follow": 0.6333,
+"contact": 0.199,
+"gap": 63.24,
+"gap_near1": 71.01,
+"gap_near2": 104.32,
+"overhead": [
+5,
+12
+],
+"n_contact": 41,
+"depth_sum": 292.62,
+"min_metal_taken": 0.684,
+"a1a2": [
+37.552,
+67.341
+],
+"why_ws": {
+"": 142,
+"fold": 10,
+"contact": 4,
+"j3stop": 1,
+"parts": 3
+},
+"th": {
+"min_th_margin_taken": 5.0,
+"window": [
+29.79,
+104.89
+],
+"n_below5": 0
+},
+"ideal": {
+"gap": 4.65,
+"reach": 0.8875,
+"follow": 0.95,
+"inband14": 0.9216,
+"inband10": 0.4996,
+"contact": 0.034,
+"near1": 10.21,
+"overhead": [
+5,
+12
+],
+"n_contact": 7
+},
+"strap_gate": {
+"strap_ib14_taken_clip": 0.831,
+"strap_ib10_taken_clip": 0.615,
+"strap_p5_50_95": [
+3.72,
+8.97,
+31.12
+],
+"losses_ws_clip": {
+"strap": [
+6,
+2
+],
+"band": [
+9,
+17
+],
+"car_wheels": [
+0,
+0
+],
+"jam": [
+0,
+0
+]
+},
+"strap_band_losses": 34,
+"deflection_3N": {
+"L": 250.5,
+"strong_mm": 0.319,
+"weak_mm": 5.107,
+"twist_deg": 0.054,
+"twist_mm_at_car": 0.0047
+},
+"kill": true
+},
+"J4": {
+"car_ib14": 0.783,
+"car_p5_50_95": [
+6.94,
+8.99,
+15.55
+],
+"band_ib14": 0.999,
+"band_p5_50_95": [
+2.43,
+3.23,
+6.26
+],
+"jams": 0,
+"R_race": [
+58.5,
+54.5,
+55.5
+],
+"contact_poses": {
+"band": 34,
+"car": 9,
+"wheels": 9,
+"strap": 8
+}
+}
+},
+{
+"k": 38,
+"t": "2026-10-19T02:55:51Z",
+"params": {
+"PHI": 60.0,
+"tilt": 1.888,
+"taz": -90.0,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -45.0,
+"j4": 1,
+"pose_cut": 1,
+"out_mm": 12,
+"out_strap": 80,
+"strap_floor": 1,
+"q_band": 0.98,
+"psi0": -40.0,
+"s_frac": 0.75,
+"post": 7.5,
+"car_half": 10.0,
+"hb": 2.5,
+"band_lo": -53.0,
+"band_hi": 33.0
+},
+"bench": "fast",
+"mode": "fast",
+"step": "hardware (every J4 part sampled)",
+"inband14": 0.9281,
+"inband10": 0.7638,
+"reach": 0.7812,
+"follow": 0.9,
+"contact": 0.1311,
+"gap": 29.99,
+"gap_near1": 35.53,
+"gap_near2": 58.71,
+"overhead": [
+5,
+12
+],
+"n_contact": 27,
+"depth_sum": 274.55,
+"min_metal_taken": 0.795,
+"a1a2": [
+37.552,
+67.341
+],
+"why_ws": {
+"": 142,
+"fold": 10,
+"contact": 4,
+"j3stop": 1,
+"parts": 3
+},
+"th": {
+"min_th_margin_taken": 5.0,
+"window": [
+29.79,
+104.89
+],
+"n_below5": 0
+},
+"ideal": {
+"gap": 4.65,
+"reach": 0.8875,
+"follow": 0.95,
+"inband14": 0.9216,
+"inband10": 0.4996,
+"contact": 0.034,
+"near1": 10.21,
+"overhead": [
+5,
+12
+],
+"n_contact": 7
+},
+"strap_gate": {
+"strap_ib14_taken_clip": 0.815,
+"strap_ib10_taken_clip": 0.589,
+"strap_p5_50_95": [
+3.84,
+9.07,
+30.67
+],
+"losses_ws_clip": {
+"strap": [
+8,
+2
+],
+"band": [
+9,
+1
+],
+"car_wheels": [
+0,
+0
+],
+"jam": [
+0,
+0
+]
+},
+"strap_band_losses": 20,
+"deflection_3N": {
+"L": 230.5,
+"strong_mm": 0.249,
+"weak_mm": 3.979,
+"twist_deg": 0.049,
+"twist_mm_at_car": 0.0043
+},
+"kill": true
+},
+"J4": {
+"car_ib14": 1.0,
+"car_p5_50_95": [
+7.27,
+8.88,
+10.95
+],
+"band_ib14": 1.0,
+"band_p5_50_95": [
+2.49,
+3.36,
+7.26
+],
+"jams": 0,
+"R_race": [
+55.5,
+57.5,
+60.5
+],
+"contact_poses": {
+"band": 19,
+"car": 9,
+"wheels": 9,
+"strap": 10
+}
+}
 }
 ]

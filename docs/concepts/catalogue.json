@@ -3699,7 +3699,7 @@
   "name": "Knee-less plain O20 3R with J3 square to the arm (wdir 95, -8.2) + one-sided relay on an arm-fixed C-band at s 0.70, parked posterolateral (race -58..+28 about a 2.74-deg tilted axis), strap on BOTTOM's line, rolling V-wheel carriage (from distal-vroller-cband-relay-4r)",
   "family": "knee-less rigid-cuff spherical 4R, lever (b) at the distal station, one-sided relay, rolling guide",
   "lens": "round401:C distal-longaxis-ring-4r at s 0.70 (the highest kinematic ceiling of the round; the 120-mm strap kill re-registered by the judge as the measured quantity it stood for; distal-vroller's rolling J4 merged)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-19T00:51:46Z",
   "source": "round 401 (K1, track kneeless) judge (docs/concepts/round401_ideation.md)",
   "merged_from": [
