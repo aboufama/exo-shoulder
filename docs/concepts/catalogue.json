@@ -3623,7 +3623,7 @@
   "name": "Knee-less steered relay on the knuckle chain: J3 re-seated square on a GH ray (84, -15), own-angle stops q2 <= 100 and J3 [-100, 115], one rigid member 3 (hub 3 plate + E-path Ti bracket of 15-60 mm) into a T-nut carriage on a slotted shell; station s0 swept -55..-80 (the cap-shell neck and the full E-bracket are its end cells), PHI 50-58",
   "family": "spherical 4R with a one-sided cuff relay on the knuckle chain, knee-less (rigid cuff)",
   "lens": "round401:A kneeless-relay-knuckle-4r (REACH, highest odds; merges kneeless-steer-capshell-relay-4r as the s0 -55 neck cell and kneeless-steer-ebracket-relay-4r as the s0 -80 control)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-19T00:51:46Z",
   "source": "round 401 (K1, track kneeless) judge (docs/concepts/round401_ideation.md)",
   "merged_from": [

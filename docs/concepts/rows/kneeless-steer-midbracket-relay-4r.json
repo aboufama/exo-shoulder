@@ -1,0 +1,157 @@
+{
+ "id": "kneeless-steer-midbracket-relay-4r",
+ "name": "Knee-less steered relay on the knuckle chain (J3 re-seated on a GH ray, own-angle stops q2 <= 100 / J3 [-100,115], one rigid member 3 to a T-nut carriage on an arm-fixed slotted shell)",
+ "lens": "round401:A kneeless-relay-knuckle-4r",
+ "family": "spherical 4R with a one-sided cuff relay on the knuckle chain, knee-less (rigid cuff)",
+ "active_dof": 4,
+ "passive_dof": 1,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-19T01:59:26Z",
+ "reach": 0.7667,
+ "follow": 1.0,
+ "inband14": 0.8815,
+ "inband10": 0.5534,
+ "contact": 0.0721,
+ "gap": 22.39,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 93,
+ "bench": "envsel exact (the round's selection bench; no Bench(60,160) or claim bench run: the pre-registered step-0 kill fired)",
+ "step0": {
+  "best_cell": {
+   "PHI": 58,
+   "wd": 80,
+   "wa": -15,
+   "q2max": 100,
+   "J3MIN": -100,
+   "J3MAX": 115,
+   "s0": -80
+  },
+  "honest_lug": 15.6,
+  "honest_ctr": 15.39,
+  "bracket": 13.81,
+  "deleted": 16.2,
+  "reach": 0.8028,
+  "inband14": 0.8821,
+  "contact": 0.0409,
+  "n_contact": 17,
+  "overhead": [
+   6,
+   26
+  ],
+  "near1": 22.78,
+  "near2": 34.93,
+  "depth_sum": 48.49,
+  "depth_max": 8.29,
+  "contact_parts": {
+   "hub2": 6,
+   "contact-only": 1,
+   "E": 1,
+   "horn": 3,
+   "L2": 6
+  },
+  "pass_line": 15.4,
+  "kill_line": 16.28
+ },
+ "metal": {
+  "s0_80": {
+   "gate": 22.39,
+   "wear": 20.88,
+   "reach": 0.7667,
+   "ib14_chain": 0.8815,
+   "contact": 0.0721,
+   "causes": {
+    "chain": 16,
+    "hardware": 13,
+    "chain+hw": 1
+   },
+   "near1_gate": 31.13,
+   "near2": 45.92,
+   "arc": [
+    -4.01,
+    67.58
+   ],
+   "R_t": 80.12,
+   "ws": 276,
+   "overhead": [
+    6,
+    26
+   ]
+  },
+  "s0_55": {
+   "gate": 22.85,
+   "wear": 22.85,
+   "reach": 0.7944,
+   "ib14_chain": 0.8252,
+   "contact": 0.0481,
+   "causes": {
+    "chain": 16,
+    "hardware": 3,
+    "chain+hw": 1
+   },
+   "near1_gate": 33.13,
+   "near2": 44.77,
+   "arc": [
+    -3.98,
+    67.56
+   ],
+   "R_t": 80.38,
+   "ws": 286,
+   "overhead": [
+    6,
+    26
+   ]
+  }
+ },
+ "best_params": {
+  "PHI": 58,
+  "wd": 80,
+  "wa": -15,
+  "b3": 0.0,
+  "q2max": 100,
+  "J3MIN": -100,
+  "J3MAX": 115,
+  "tilt": 12,
+  "taz": 235,
+  "s0": -80,
+  "delta": 3.5,
+  "tsh": 1.0,
+  "carw": 14.0,
+  "lean": 1,
+  "coil": "lug",
+  "coilD": 12.0,
+  "coilL": 10.0,
+  "band": 8.0,
+  "bump": 1.2,
+  "flange": 1
+ },
+ "complexity": 51.75,
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 2,
+  "moving_bodies": 5,
+  "joints": 7,
+  "closed_loops": 2,
+  "sliding_pairs": 2,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 2,
+  "custom_parts": 9,
+  "catalogue_parts": 13,
+  "notes": "phi40-thinstack-relay-4r's record minus its cuff knee (2 MR63ZZ pairs, knee link, pad, the knee loop) and minus the L-lug bracket (the member-3 bracket is hub 3's lower plate continued down E's line): J1, K (slaved, slipper nose: lobe - bell crank - nose - flank), J2, J3, relay (14 x 14 Ti T-nut carriage in a 1.0 mm slotted Ti shell, constant-force coil on the lug, 1 ISO 8734 zero dowel, slot end = PHI stop, iglidur tape); stops are dowels in existing members (0 parts added). Complexity 51.75 (v2.2) vs phi40 51.25: the knee is free under v2.1/v2.2, so deleting it saves nothing on this ruler.",
+  "source": "kneeless-steer-midbracket-relay-4r screen 2026-10-19",
+  "confidence": "medium"
+ },
+ "verdict": "DEAD by the pre-registered step-0 kill. The bracket-honest proxy is > 15.4 at every cell; the best is 15.60 at seat (80,-15), PHI 58, s0 -80 (reach 0.803, ib14 0.882, 17 contacts). With the knee-less metal on the phi40 hardware the claim number is 22.39 at s0 -80 (the shell's anterior end hits the torso: 13 hardware contacts) and 22.85 at s0 -55 (the bump over the shell band lifts the chain out of band: ib14 0.825). Both are worse than the 3-joint lead (18.28) and the knee-less 3-joint best (21.07).",
+ "limiter": "REACH at the relay's saturation: 289/360 workspace poses even at PHI 58, the same 289 at PHI 62 (fold 49, J3 stop 5, and 54 poses with no stop-legal relay angle). Then CONTACT of relayed overhead poses: 13 of 17 contacts are relayed, at elevation 150-167, on hub 2 / L2 / horn. The real metal adds a station dilemma: at s0 -80 the shell's anterior end lies past the torso cliff (clean only to ~+48 deg, measured per 2-deg bin over all poses; the shell needs +67.6 for PHI 58), and at s0 -55 the shell band sits under hub 3 / L2 and the 60-deg bump lifts them out of band.",
+ "note": "Convergence gate on the 40 bracket-honest (lug) entries in order: gain over the 2nd half 0.0 score points, over the last third 0.0, top-5 spread 0.09 points. The best cell came 3rd of 8 and is pinned on its four seat neighbours. This is a grid on the judge's pre-registered stencil + 4 probes, not a CMA. q2 95 stops and PHI 50 were not run (PHI 54 < 58 < 62-dominated trend, and q2 95 only removes poses). Envsel only: Bench(110,360) and held-out never run (the kill fired first; the held-out split stays untouched). Shoulder slip (the standing price of every rigid-cuff spherical chain) is reported, not re-measured: p95 4.83 / max 5.14 mm at a 3 mm GH offset, ~6.4 / 6.9 mm at 4 mm.",
+ "doc": "docs/concepts/kneeless-steer-midbracket-relay-4r.md",
+ "model_file": "docs/concepts/models/kneeless-steer-midbracket-relay-4r.py"
+}

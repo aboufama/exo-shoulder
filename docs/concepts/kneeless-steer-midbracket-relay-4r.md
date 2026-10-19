@@ -89,3 +89,78 @@ J3 [-100, 115], relay axis tilt 12 / taz 235.
   E 1, crown 1; 13 of the 17 are RELAYED, mostly overhead at elevation 150-167), in-band 0.882 (1.8 points: hub 3
   0.636, L2 0.726). Contact depth: T5 sum 48.5 mm over 17 poses (lead 20.24, phi40 74.93), max 8.29 mm at pose 361
   (plane -21, elev 90, axial 50). Near-touch: 1 mm 22.78, 2 mm 34.93. Overhead 6/26 taken.
+* PHI 62 at the best seat: honest 16.28 (s0 -80). Reach stays 0.8028, the same 289 poses as PHI 58, and contacts go up
+  17 -> 20. The relay-reachable set **saturates by PHI 58**. More travel only buys contact, so PHI 50 (dominated:
+  PHI 54 < 58) and q2 95 (it only removes poses) were not run.
+
+## Step 1 (the knee-less metal on the phi40 hardware; envsel exact, best cell)
+
+The knee-less member 3, plus the shell (1.0 mm Ti, R_t 80.1-80.4), the 14 x 14 lean carriage, the lug coil, the
+flange and the bump 1.2 with the 60-deg ramp. The carriage rests delta deg anterior of the old pad azimuth. E's end lies
++12.45 deg (s0 -80) / +8.8 deg (s0 -55) anterior of it.
+
+| s0 | delta | gate gap (claim reading) | wear | reach | ib14 chain | contacts (chain / hw / both) | shell arc rel pad | what limits it |
+|---|---|---|---|---|---|---|---|---|
+| -80 | 12.45 (carriage under E's end) | 28.31 | 28.31 | 0.753 | 0.890 | 16 / 26 / 1 | [+4.9, +76.5] | the anterior shell end past the torso: 25 shell contacts at +69..+76.5 |
+| **-80** | **3.5** | **22.39** | 20.88 | 0.767 | 0.882 | 16 / 13 / 1 | [-4.0, +67.6] | 9 un-relayed IR / behind-back poses on the anterior end (+67.5, up to 11.9 mm), 3 relayed cross-body poses on the zero end (-2.6..-4, 11.5-12 mm), 2 flange |
+| -55 | 3.5 | 22.85 | 22.85 | 0.794 | **0.825** | 16 / 3 / 1 | [-4.0, +67.6] | clean shell, but the band at s0 -55 sits under hub 3 / L2: the 60-deg bump lifts them out of band |
+
+**The metal costs 6.8-7.3 gap points over the proxy** at either station. Both station choices fail, for different
+measured reasons:
+
+* **s0 -80:** the shell end-clearance bins over ALL poses (not only taken ones) are clean only to **+48 deg**. Bin +48
+  is 3.33 mm at pose 117, +50 is -0.48 and +66 is -11.9: arm at the side with internal rotation, shell end into the
+  flank. The taken-pose bins read clean to +68 and are misleading: a shell end must be read over every pose, because a
+  contact is not a lost pose. PHI 58 needs +67.6. The spec's "+51 cliff at -80" is confirmed on this kit to within
+  3 deg.
+* **s0 -55:** the shell is clean (3 hardware contacts). But the station is 47 mm from hub 3 (hub 3 at s -7.5), so the
+  parent's bump band (s0 +- 8 + ramp) catches hub 3's skirt and L2. Chain-only in-band drops 0.882 -> 0.825.
+
+No station in between was metal-read (time box). The proxy says s0 is nearly flat (15.60-15.93 over -80..-55). The
+metal says the clean-shell side and the in-band side pull in opposite directions, so a middle station trades one
+loss for the other.
+
+## Red team (own best config)
+
+* **The pose that jams:** none jammed. The jam list is empty at s0 -80 delta 3.5, with the widened rule (every chain
+  part vs the shell / carriage sectors). The losses are contacts and stop-illegal poses, not jams.
+* **The point that pinches:** pose 361 (plane -21, elev 90, axial +50, relayed phi 45.8), 7.7-8.3 mm deep on the
+  chain (hub 2 class). Pose 377 (plane 29, elev 123, axial -14, phi 30.9) is 7.4 mm deep. Both are RELAYED: the stop
+  steers the chain onto the relay, and the relayed frame drives hub 2 / L2 into the acromion-deltoid shoulder. The
+  burial is shallower than phi40's (T5 48.5 mm over 17 poses in the proxy vs phi40's 74.93) but deeper than the
+  lead's 20.24.
+* **The optimistic numbers:** (1) the 'bracket' proxy (+1.4-3.5 points everywhere); (2) the 'ctr' cut (-0.2: E
+  samples over the carriage); (3) the taken-pose shell-end bins (clean to +68 vs the all-pose truth of +48); (4) the
+  carriage lug extension. At delta 3.5, E's end lands ~5.6 mm anterior of the carriage edge, and the ~6 mm lug joining
+  them is not sampled. It sits at the bumped E height over the shell, so the omission is small, but it is metal.
+* **Unmeasured:** R17 (CF strip 2 N vs gravity 0.79 N + mu 0.15-0.25 x normal load), flood continuity, th margin and
+  Bench(110,360) / held-out. None were run, because the kill fired at step 0 and the held-out split stays untouched.
+
+## Verdict
+
+**Dead (pre-registered step-0 kill: every cell > 15.4 bracket-honest; best 15.60).** With the real metal it is 22.39
+(s0 -80) / 22.85 (s0 -55). That is worse than the 3-joint lead (18.28) and the knee-less 3-joint best on file
+(kneeless-roller 21.07), at 4 counted joints and complexity 51.75. Deleting the knee saves nothing on the v2.2 ruler,
+because the knee is free there.
+
+## New knowledge (beyond this morphology)
+
+1. **The relay's reachable set saturates by PHI ~58 on the knuckle chain with own-angle stops.** PHI 62 adds 0 poses
+   and +3 contacts at the best seat. The remaining reach loss (fold 49 + J3 stop 5 of 360) is not a travel problem.
+   It sits in poses where no relay angle makes the stopped chain legal.
+2. **An arm-fixed shell end must be read over ALL poses, not taken poses.** The taken-pose bins said clean to +68 at
+   s0 -80; the all-pose bins say +48. A contact pose is not lost, so it never shows in the taken bins.
+3. **The knee-less relay has a station dilemma.** Distal stations (s0 -80) hit the flank with the shell's anterior end
+   on IR-at-the-side poses. Proximal stations (s0 -55) put the bump band under hub 3 / L2 and cost 0.06 chain in-band.
+   The knee used to buy this freedom by letting the carriage sit 31 mm from the chain. The measured price of
+   deleting it on the relay is ~6.8-7.3 gap points of metal, not the ~0.8-1.4 the step-0 proxies suggest.
+4. **The proposer's 'bracket' proxy is systematically optimistic by 1.4-3.5 points** (the knee-side samples pad the
+   in-band share). Every knee-less proxy on file that keeps knee-side samples should be re-read.
+
+## Next
+
+The open lever is not this station sweep. It is a relay whose shell does not need +67 deg of arm-fixed arc. Two
+candidates: a two-segment shell (an anterior segment that is not arm-fixed past +48), or the distal ring (lever 2:
+the GH-elbow line at s 0.65-0.8, where the arc spread is 4.0-4.4 mm). The reach saturation (finding 1) says the next
+points come from making the stopped chain legal at the 54 stop-illegal poses (J3 groove / q2 slot shape), not from
+travel.
