@@ -135,3 +135,45 @@ mismatched poses, then one final wear) is the `fixk` mode; its reading follows.
   k 40). (5) psi*(pose) jumps between neighbouring poses (pick 1 measured > 20 deg on 3 of 176 adjacent pairs); the skin
   along a J4 sweep is not checked. (6) J4 holding torque, slot friction and the bracket / carriage moment on a 14 mm
   T-nut are not modelled.
+
+## Step 3, claim reading: own k-table on the mismatched poses (fixk)
+
+This design's own k-table (k 0..40, this knee + distal metal, take-only rule) on the 7 poses where the imported table
+disagreed: 139 takes at k 0 (0.07 mm); 182 closes at no k; 354 / 417 contact only at k 37.5-40 (carriage / bracket /
+pad metal moving with k); 431 / 441 / 464 contact at EVERY closing k with the same depth (-6.90 / -3.46 / -4.61: the
+ARM-FIXED shell). Under take-only all six revert to psi 0 (not closing there).
+
+**Claim (Bench(110,360) exact frozen, verify/ikring-distalshell-knuckle-4r/ik_bench_fixk.json + _perpose.json):
+chain-only gate 10.54 (score 96.17), plain 9.94, 1 mm 11.00, 2 mm 23.30 (lead 34.84), reach 0.8056 (290/360), follow
+1.0, in-band chain-only 0.894 (pooled 0.9225), contacts 2 (237 / 264, the lead's own drive contacts; T5 14.74 vs the
+lead 20.24), overhead 13/28 connected (lead 8), elev 90-140 55/85, th margin min 5.097, 31 new takes (1 under 1 mm,
+5 at 1-2), ring-added overhead takes under 2 mm 1, cx 48.0 (tools/simplicity.py v2.2, pick 1's record).**
+
+Held (report only, never selected on; pick 1's held IK table worn with this metal, not fixk-corrected): every held ws
+pose + every 100th clip frame: gate 15.62, overhead 32/71 (psi 0: 18), 747/952 ws, 32 contacts (T5 181.0) - the held
+contacts include the same imported-table artefact; 14 new held overhead takes, 3 of them under 2 mm.
+
+Pre-registered gates: pass <= 13.75 chain-only YES (10.54); connected overhead >= 12/28 YES (13, pick 1's flood);
+held overhead >= 25/71 YES (32); ring-added overhead takes under 2 mm <= 2 YES (1).
+
+## RED TEAM, new: the arm-fixed shell is on the arm at every pose
+
+The bench scores metal only on poses where the chain closes. An ARM-FIXED part is on the arm whether the exo follows
+or not, so its skin distance was read at all 360 ws poses (`shellall`, verify/.../shellall.json): the shell sits IN
+the torso on **30 ws poses** (plane 90-150, elev 30-120, deep IR axial -105..-180: the arm across the body), up to
+-11.9 mm, along the whole arc (az_rel -8.4..+45.8), 0 clip frames. None of them closes, so none is scored. Counted as
+contacts, the gate reads **17.48** (vs 10.54) - still under the lead's 18.28, but the ring's edge is mostly gone.
+The same convention holds for pick 1 and phi40's arm-fixed shells (not measured there): **every arm-fixed part must
+be skin-checked on every pose, closing or not** (auditor item). The physical reading: a round shell at s 118 of
+radius 71.9 about an axis through GH stands too far out on the medial-anterior arc for deep across-body IR, where the
+chest wall comes to the arm. Next lever: a shorter arc (PHI 35), a smaller-radius shell nearer the elbow side of the
+deltoid insertion, or a shell that only spans the anterior travel the overhead takes need (k 22.5-40) - read with
+shellall on every pose.
+
+## Verdict
+
+Screened, a labelled 4-joint option (4 active joints), never the lead: claim 10.54 chain-only on Bench(110,360) exact
+frozen, overhead 13/28, held overhead 32/71; all pre-registered gates pass; but the own red team's all-pose shell read
+(30 non-closing poses with the shell in the torso, 17.48 if counted) must go to the verifier and the auditor before
+this number stands. Convergence: the knee sweep passes the gate (0.0 / 0.0 / 0.32 score points, 98 configs); the
+hardware cell does not (5 readings, no envsel sweep), so this is not a dead verdict on the morphology.
