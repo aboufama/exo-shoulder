@@ -236,5 +236,280 @@
 ],
 "relayed_ws": 59,
 "note": "ideal reading only: this run's hardware pass sampled the lug's first 12 mm inside BOTTOM's own boss (lug contact on 355 poses, hw gap 300.89) - superseded by the fixed lug"
+},
+{
+"k": 4,
+"t": "2026-10-19T02:29:44Z",
+"params": {
+"PHI": 75.0,
+"tilt": 55.0,
+"taz": 45.0,
+"sgn": 1.0,
+"hw": 1,
+"drive": 0,
+"wd": 84.0,
+"wa": -15.0,
+"b3": 0.0,
+"psi2": -14.0
+},
+"bench": "b110",
+"mode": "exact",
+"step": "hardware (R4 boss + bar + lug)",
+"inband14": 0.6874,
+"inband10": 0.396,
+"reach": 0.7556,
+"follow": 0.8545,
+"contact": 0.1117,
+"gap": 56.42,
+"gap_near1": 70.38,
+"gap_near2": 94.08,
+"overhead": [
+6,
+28
+],
+"n_contact": 46,
+"depth_sum": 65.09,
+"min_metal_taken": 0.053,
+"ideal_gap": 10.27,
+"a1a2": [
+37.552,
+55.781
+],
+"why_ws": {
+"": 294,
+"j3stop": 8,
+"fold": 50,
+"contact": 8
+},
+"th": {
+"min_th_margin_taken": 5.001,
+"window": [
+18.23,
+93.33
+],
+"n_below5": 0
+},
+"kin_ws": 302,
+"kin_overhead": [
+14,
+28
+],
+"relayed_ws": 82,
+"R4": {
+"boss": {
+"min": 2.39,
+"n_lt0": 0,
+"n_lt2_taken": 0,
+"relayed_taken_lt2": 0,
+"contact_ws": 0,
+"depth_max": 0.0,
+"ib14": 0.191,
+"ib10": 0.04,
+"p5_50_95": [
+10.47,
+18.77,
+28.23
+]
+},
+"bar": {
+"min": 0.05,
+"n_lt0": 39,
+"n_lt2_taken": 42,
+"relayed_taken_lt2": 12,
+"contact_ws": 23,
+"depth_max": 2.32,
+"ib14": 0.602,
+"ib10": 0.331,
+"p5_50_95": [
+5.06,
+12.42,
+22.38
+]
+},
+"lug": {
+"min": 0.98,
+"n_lt0": 0,
+"n_lt2_taken": 2,
+"relayed_taken_lt2": 2,
+"contact_ws": 0,
+"depth_max": 0.0
+},
+"jams": 0,
+"jams_ws": 0,
+"jam_by": {},
+"jams_relayed": 0
+},
+"R4_geom": {
+"rB": 86.0,
+"exit_axis_min_p50_max": [
+48.0,
+65.0,
+78.0
+],
+"bar_len_mm": 85.7,
+"lug_len_mm": 41.8,
+"hub3": [
+-18.5,
+-7.5,
+69.1
+],
+"hub3_r": 71.9,
+"bar_r": [
+65.8,
+74.0,
+95.2
+],
+"lug_r": [
+82.9,
+87.0,
+95.0
+],
+"n": {
+"boss": 145,
+"bar": 258,
+"lug": 90
+},
+"obliquity_deg": null
+}
+},
+{
+"k": 5,
+"t": "2026-10-19T02:29:50Z",
+"params": {
+"PHI": 60.0,
+"tilt": 55.0,
+"taz": 45.0,
+"sgn": 1.0,
+"hw": 1,
+"drive": 0,
+"wd": 84.0,
+"wa": -15.0,
+"b3": 0.0,
+"psi2": -14.0,
+"q2max": 100.0,
+"J3MIN": -100.0,
+"J3MAX": 115.0,
+"q_bar": 0.97,
+"bar_low": 1
+},
+"bench": "envsel",
+"mode": "exact",
+"step": "hardware (R4 boss + bar + lug)",
+"inband14": 0.7336,
+"inband10": 0.4262,
+"reach": 0.725,
+"follow": 0.8545,
+"contact": 0.0851,
+"gap": 52.2,
+"gap_near1": 63.98,
+"gap_near2": 83.0,
+"overhead": [
+7,
+26
+],
+"n_contact": 33,
+"depth_sum": 57.98,
+"min_metal_taken": 0.027,
+"ideal_gap": 14.92,
+"a1a2": [
+37.552,
+55.781
+],
+"why_ws": {
+"": 274,
+"fold": 75,
+"contact": 4,
+"j3stop": 7
+},
+"th": {
+"min_th_margin_taken": 5.0,
+"window": [
+18.23,
+93.33
+],
+"n_below5": 0
+},
+"kin_ws": 278,
+"kin_overhead": [
+12,
+26
+],
+"relayed_ws": 73,
+"R4": {
+"boss": {
+"min": 2.45,
+"n_lt0": 0,
+"n_lt2_taken": 0,
+"relayed_taken_lt2": 0,
+"contact_ws": 0,
+"depth_max": 0.0,
+"ib14": 0.227,
+"ib10": 0.056,
+"p5_50_95": [
+9.74,
+18.07,
+27.48
+]
+},
+"bar": {
+"min": 0.03,
+"n_lt0": 29,
+"n_lt2_taken": 48,
+"relayed_taken_lt2": 14,
+"contact_ws": 13,
+"depth_max": 2.55,
+"ib14": 0.756,
+"ib10": 0.502,
+"p5_50_95": [
+3.57,
+9.92,
+18.34
+]
+},
+"lug": {
+"min": 1.28,
+"n_lt0": 0,
+"n_lt2_taken": 2,
+"relayed_taken_lt2": 2,
+"contact_ws": 0,
+"depth_max": 0.0
+},
+"jams": 0,
+"jams_ws": 0,
+"jam_by": {},
+"jams_relayed": 0
+},
+"R4_geom": {
+"rB": 85.0,
+"exit_axis_min_p50_max": [
+48.0,
+65.0,
+78.0
+],
+"bar_len_mm": 85.1,
+"lug_len_mm": 41.6,
+"hub3": [
+-18.5,
+-7.5,
+69.1
+],
+"hub3_r": 71.9,
+"bar_r": [
+65.8,
+71.0,
+85.0
+],
+"lug_r": [
+80.0,
+88.0,
+95.0
+],
+"n": {
+"boss": 145,
+"bar": 258,
+"lug": 90
+},
+"obliquity_deg": null
+}
 }
 ]

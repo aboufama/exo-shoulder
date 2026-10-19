@@ -1,6 +1,6 @@
 /* kfree-o20pin-highexit-relay-4r (round 401 K1, judge pick 3, lens B): a KNEE-LESS plain O20 spherical 3R at the lead's J1 seat
- * (back of the shoulder / acromion top, bvec(95.39, 67.90)), J2 placed by psi2 -14 (a1 37.55, a2 64.56), J3 on a GH ray at the
- * champion seat wdir(77.25, -8.2) (b3 0), K welded (no knuckle, no drive). Member 3 = hub 3's lower plate + ONE bent 10 x 3 Ti
+ * (back of the shoulder / acromion top, bvec(95.39, 67.90)), J2 placed by psi2 -14 (a1 37.55, a2 55.78), J3 on a GH ray at lens A's
+ * seat wdir(84, -15) (b3 0; the spec's champion seat (77.25, -8.2) read hub 3 in band 0.44), K welded (no knuckle, no drive). Member 3 = hub 3's lower plate + ONE bent 10 x 3 Ti
  * bar forward and down over the anterolateral deltoid to a FOURTH O20 v5 stack R4 whose axis is the GH-through line wdir(55, 45):
  * R4 sits where that line leaves the arm (max skin exit + 2 mm) and its lower plate is carried by BOTTOM through a 10 x 3 Ti lug.
  * R4 is the counted 4th joint, one-sided [0, PHI 75]: a clock spring holds member 3 on its zero dowel; when the arm leaves the
@@ -9,8 +9,8 @@
  * scored model wears the lead's fitted metal); R4 is drawn at the measured exit radius. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
-  const P = { az1: 95.3929, el1: 67.8974, a1: 37.552, a2: 64.556, wd: 77.25, wa: -8.2, branch: -1, PHI: 75, margin: 5,
-              ax: [-0.5792, 0.5736, -0.5792], rB: 81.0, faces: [50.5, 62.5, 67.0], hub_r: 10, stack: 12.25 };
+  const P = { az1: 95.3929, el1: 67.8974, a1: 37.552, a2: 55.781, wd: 84.0, wa: -15.0, branch: -1, PHI: 75, margin: 5,
+              ax: [-0.5792, 0.5736, -0.5792], rB: 86.0, faces: [50.5, 62.5, 67.0], hub_r: 10, stack: 12.25 };
   const C3 = K.sph3r(K.bvec(P.az1, P.el1), K.wdir(P.wd, P.wa), P.a1, P.a2, P.branch);
   const ax = V.unit(P.ax), exitDir = V.scale(ax, -1);                     // R4 sits on -ax = wdir(55, 45), the anterolateral exit
   const relayed = (ctx, ph) => Object.assign({}, ctx, { H: M.mul(ctx.H, M.rot(ax, ph)) });
@@ -54,7 +54,7 @@
         { kind: 'arc', role: 'link', name: 'link 1 (12 x 3 Ti, K welded: one bar)', u: F.p1, v: F.p2, r0: Fh[0] + 7, r1: Fh[1] + 2, r: 2.5 },
         { kind: 'hub', role: 'active', name: 'J2 (O20; own-angle dowel stops at the 5-deg th margin)', c: V.scale(F.p2, Fh[1]), axis: F.p2, r: P.hub_r, h },
         { kind: 'arc', role: 'link', name: 'link 2 (12 x 3 Ti)', u: F.p2, v: F.p3, r0: Fh[1] + 9, r1: Fh[2] + 2, r: 2.5 },
-        { kind: 'hub', role: 'active', name: 'J3 (O20 on a GH ray, wdir(77.25, -8.2), b3 0)', c: V.scale(F.p3, Fh[2]), axis: F.p3, r: P.hub_r, h },
+        { kind: 'hub', role: 'active', name: 'J3 (O20 on a GH ray, wdir(84, -15), b3 0)', c: V.scale(F.p3, Fh[2]), axis: F.p3, r: P.hub_r, h },
         { kind: 'arc', role: 'link', name: 'member 3 bar (10 x 3 Ti, hub 3 lower plate -> R4 crown plate)', u: F.p3, v: exW, r0: Fh[2] - 3, r1: P.rB + h - 1.5, r: 2 },
         { kind: 'hub', role: 'passive', name: 'R4 relay (COUNTED 4th joint: O20 v5 stack on an MR117-2RS pair, axis = the GH-through line wdir(55, 45); clock spring to the zero dowel, PHI 75 dowel on its own angle)', c: r4c, axis: exW, r: P.hub_r, h },
         { kind: 'link', role: 'fixed-arm', name: 'lug (10 x 3 Ti, part of BOTTOM) -> R4 lower plate', a: lugA, b: r4low, r: 2 },

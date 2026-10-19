@@ -36,7 +36,7 @@ _src = _src.replace(_oldc, _oldc + "; _bp = (np.nan_to_num(t, nan=-1e9) > -1e8).
                     "t = np.where(_bp[:, None] & bool(h.get('pose_cut', 0)), np.nan, t)")                            # the band's fit set whole (it is LOST in the wear)
 _olds = "rS = np.where(np.isfinite(rq), blend * np.maximum(rq, 0) + (1 - blend) * rlin, rlin)"
 assert _src.count(_olds) == 1                               # strap_floor 1: the strap underside never below its own fitted
-_src = _src.replace(_olds, _olds + "; rS = np.where(np.isfinite(rq) & bool(h.get('strap_floor', 0)), np.maximum(rS, rq), rS)")  # requirement:
+_src = _src.replace(_olds, _olds + "; rS = np.where(np.isfinite(rq) & bool(h.get('strap_floor', 0)) & (blend >= 1), np.maximum(rS, rq), rS)")  # requirement:
 # the hub-3 end is a joggle onto the OUTER face of hub 3's lower plate where the deltoid stands above the plate's underside
 # (the insertion row's 10-mm ramp to the plate underside put 27 of 38 Bench(60,160) strap contacts at t = 0, 0.1-1.6 mm)
 _oldt = 't = K.requirement(B1, I, np.einsum("pij,nj->pni", Rw_, sdir).reshape(-1, 3), clr=float(h["clr"]))'

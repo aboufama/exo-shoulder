@@ -3674,7 +3674,7 @@
   "name": "O20 axis-exit pin relay at the high anterolateral exit: the plain knee-less O20 3R + member 3 swinging on a 4th O20 v5 hub where the GH-through line wdir(55, 45) leaves the anterolateral arm; one-sided clock spring, own-angle dowels; no rail, track, shell, knee, knuckle or drive (the steered stop cell merged)",
   "family": "kneeless spherical 4R, one-sided sprung relay, pin guide (track K1)",
   "lens": "round401:B kfree-moving-rail-relay-4r's low-complexity slot, as an O20 axis-exit pin (merges kfree-o20pin-steered-relay-4r as its stop / PHI 55-60 cell)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-19T00:51:46Z",
   "source": "round 401 (K1, track kneeless) judge (docs/concepts/round401_ideation.md)",
   "merged_from": [
