@@ -126,4 +126,6 @@ if __name__ == "__main__":
     if mode == "chain": chain(par, sys.argv[3]); sys.exit(0)
     if mode == "k0": chain(par, sys.argv[3], hw=True); sys.exit(0)
     if mode == "ik": IK.ik_run(par, sys.argv[3], sys.argv[4]); sys.exit(0)
+    if mode == "viz":                                        # the lead's viz export with the short knee (motion preview P / G)
+        v = CC.viz_export({**LEAD, **{k: par[k] for k in KNEE_KEYS}}); json.dump(v, open(sys.argv[3], "w"), default=float); print(list(v)); sys.exit(0)
     print(__doc__)
