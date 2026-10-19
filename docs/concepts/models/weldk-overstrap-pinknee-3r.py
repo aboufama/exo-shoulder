@@ -182,22 +182,28 @@ class Model(PK.Model):
             if b.any(): req_tr = max(req_tr, float(h[b].max()) + self.ADJ)
         return xs, req, req_tr
 
-    FLAT = 10.0        # mm: the E strap is flat at the boss level over the last FLAT mm (the knee link's footprint at pin a)
+    FLAT = 10.0        # mm: the knee link's footprint at pin a along E (box corner radius 7.8 + margin)
 
     def _E_profile(self, hE, f3, tr):
         """as H1's, with the E rim at F3 + UP (over=1), the stacked-pair requirement folded into the need, and the E
-        flat at the boss level tr (= zb) over the last FLAT mm before pin a: kinv 0 - the knee link rides over E there
-        (E higher than the boss -> the boss / knee rise); kinv 1 - the knee link passes under E there (E >= boss level)"""
+        kept clear of the knee link over the last FLAT mm before pin a: kinv 0 - the knee link rides over E there, so
+        E's underside <= zb + tp + RUN - T_LINK - ADJ (else the boss / knee rise); kinv 1 - the knee link passes under E
+        there, so E's underside >= zb - RUN + ADJ"""
         up = S.UP if int(self.p.get("over", 1)) else 0.0
         x = self._Ex; xs = np.unique(np.round(x, 6)); k = math.tan(S.RAMP * D2R)
         need = np.array([hE[np.isclose(x, v)].max() for v in xs])
         if getattr(self, "_req", None) is not None: need = np.maximum(need, self._req)
-        lb = float(self.p["lE"]) - BOSS_R; zone = xs >= lb - self.FLAT
+        lb = float(self.p["lE"]) - BOSS_R; zone = xs >= lb - self.FLAT; kinv = int(self.p.get("kinv", 0))
+        c_top = float(self.p["tp"]) + S.RUN - S.T_LINK - self.ADJ    # kinv 0: E under <= zb + c_top under the knee link
         for _ in range(8):
-            r = np.maximum(need, np.maximum(f3 + up - k * np.abs(xs - self.hr[2]), tr - k * np.maximum(np.abs(xs - lb) - self.FLAT, 0)))
+            if kinv:     # the knee link (top at zb - RUN) passes under E near pin a: E >= zb - RUN + ADJ there
+                lo_b = np.where(zone, tr - S.RUN + self.ADJ, tr - k * np.maximum(np.abs(xs - lb) - self.FLAT, 0))
+            else:        # H1's bound: E may slope down from the boss (the knee link rides over it)
+                lo_b = tr - k * np.abs(xs - lb)
+            r = np.maximum(need, np.maximum(f3 + up - k * np.abs(xs - self.hr[2]), lo_b))
             r = np.max(r[None, :] - k * np.abs(xs[:, None] - xs[None, :]), axis=1)
             r0 = r[0] - k * abs(xs[0] - self.hr[2]); r1 = r[-1] - k * abs(lb - xs[-1])
-            if not int(self.p.get("kinv", 0)) and zone.any(): r1 = max(r1, float(r[zone].max()))
+            if not kinv and zone.any(): r1 = max(r1, float(r[zone].max()) - c_top)
             ch = False
             if r0 > f3 + up + 0.15: f3 = r0 - up; ch = True
             if r1 > tr + 0.15: tr = r1; ch = True

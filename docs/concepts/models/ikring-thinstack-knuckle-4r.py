@@ -41,6 +41,7 @@ PT.VDIR = VDIR; OS.VDIR = VDIR; P4.VDIR = VDIR
 CLAIM = dict(P4.CLAIM_PARENT, **P4.HW0)
 CLAIM.update(PHI=40.0, tilt=8.5, taz=243.0, delta=3.5, coil="none", flood=0)     # pre-registered cell (judge): coil deleted
 KSTEP = 2.5
+RULE = os.environ.get("IK_RULE", "take-only")       # 'take-only' (the spec: the ring moves only for a take) | 'closest-contact'
 ATTR = ("g", "fr", "geo", "rigid", "link_pts", "f", "fK", "tr", "zb", "_tr_fit", "cyl", "box", "strap", "cyl_surf", "Emid",
         "Hneed", "Lneed", "hEx", "_Ex", "_rod_info", "_viz_rod", "_crown_ok", "_scg", "_sc_info", "_wedge_info", "cyl_r")
 
@@ -239,8 +240,10 @@ def ik_run(base, which, outp, ks=None):
     t0 = time.time(); F = fit(base); hw = dict(base); KS = ks or kgrid(float(F["rp"]["PHI"]))
     print(json.dumps(dict(fit=F["fit"], axis=np.round(F["ax"], 4).tolist(), ks=KS)), flush=True)
     os.environ["CB_EXACT"] = "1"
-    Bf = AA.held_bench() if which == "held" else CB.Bench(110, 360)
-    if which != "held": Bf = subbench(Bf, np.arange(len(Bf.idx)))          # unbounded skin / distance caches (470 poses fit in RAM)
+    Bf = AA.held_bench() if which in ("held", "heldws") else CB.Bench(110, 360)
+    if which == "heldws":                                   # every held ws pose + every 100th held clip frame (in-band / follow: a sample)
+        kd = np.array(Bf.kind); Bf = subbench(Bf, np.r_[np.nonzero(kd == "clip")[0][::100], np.nonzero(kd == "ws")[0]])
+    elif which != "held": Bf = subbench(Bf, np.arange(len(Bf.idx)))          # unbounded skin / distance caches (470 poses fit in RAM)
     nZ = len(AA.Z0["HG"]); kind = np.array(Bf.kind); ws = kind == "ws"
     # k = 0: the whole bench (the lead with the ring hardware parked at psi 0)
     o0, S0 = wear_phi(F, Bf, np.zeros(nZ), hw); mm0, why0 = pose_state(Bf, S0["M"])
@@ -260,8 +263,8 @@ def ik_run(base, which, outp, ks=None):
         tks = [(tab[k]["mm"][jj], k) for k in KS if tab[k]["mm"][jj] is not None and tab[k]["mm"][jj] >= 0]
         cls = [(tab[k]["mm"][jj], k) for k in KS if tab[k]["mm"][jj] is not None]
         if tks: m, k = max(tks, key=lambda x: (round(x[0], 6), -x[1]))
-        elif cls: m, k = max(cls, key=lambda x: (round(x[0], 6), -x[1]))
-        else: m, k = None, 0.0
+        elif cls and RULE == "closest-contact": m, k = max(cls, key=lambda x: (round(x[0], 6), -x[1]))   # (first run's rule: closes 9 lost poses in contact)
+        else: m, k = tab[0.0]["mm"][jj], 0.0                 # the spec: no take at any k -> psi stays 0 (the pose's k = 0 state, the lead's own)
         choice[int(j)] = dict(k=k, mm=m, n_take_k=len(tks), takes={str(kk): round(mv, 2) for mv, kk in tks})
     phiF = np.zeros(nZ)
     for j, c in choice.items(): phiF[Bf.idx[j]] = c["k"]

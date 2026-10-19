@@ -1,0 +1,81 @@
+{
+ "rule": "spec: ring moves only for a take",
+ "run_rule_recomputed": {
+  "gap": 10.88,
+  "reach": 0.8222,
+  "follow": 1.0,
+  "inband14": 0.9034,
+  "contact": 0.031,
+  "n_ws": 360,
+  "n_clip": 110,
+  "ws_taken": 296,
+  "contact_poses": 13
+ },
+ "spec": {
+  "gap": 8.75,
+  "reach": 0.8222,
+  "follow": 1.0,
+  "inband14": 0.9034,
+  "contact": 0.0098,
+  "n_ws": 360,
+  "n_clip": 110,
+  "ws_taken": 296,
+  "contact_poses": 4
+ },
+ "gate_chain_only": 9.75,
+ "plain": 8.75,
+ "near1": 19.65,
+ "near2": 47.0,
+ "contacts": [
+  [
+   139,
+   -60.0,
+   60.0,
+   105.0,
+   -0.475
+  ],
+  [
+   205,
+   0.0,
+   105.0,
+   15.0,
+   -4.28
+  ],
+  [
+   237,
+   15.0,
+   165.0,
+   -60.0,
+   -8.928
+  ],
+  [
+   264,
+   30.0,
+   165.0,
+   -60.0,
+   -5.797
+  ]
+ ],
+ "T5_sum": 19.48,
+ "T5_max": 8.93,
+ "overhead": [
+  13,
+  28
+ ],
+ "mid": [
+  60,
+  85
+ ],
+ "ws_taken": 296,
+ "reverted": [
+  206,
+  233,
+  260,
+  262,
+  263,
+  454,
+  457,
+  459,
+  466
+ ]
+}
