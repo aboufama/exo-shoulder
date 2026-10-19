@@ -1,0 +1,62 @@
+[
+ {
+  "key": "held_out",
+  "refuted": true,
+  "evidence": "Measured, not missing. c_held_out (tools/alignment_audit.py line 222) fires only because rows/baseline-3r.json v_gap is null; the drop it guards is on file and I re-measured it. My own exact re-wear of the frozen claim (2026-10-19 04:13-04:21 UTC, CB_EXACT=1, docs/concepts/models/baseline-3r-kit.py unchanged, BASELINE conventions, outputs in my scratchpad, never the auditor's files): held 74.42 (reach 0.7278, in-band 0.4380, contact 0.1100) and Bench(110,360) 73.76 (reach 0.7389, in-band 0.4367, contact 0.1132), resample [] (no strap resampled). Same as remeasure/baseline-3r_held.json:frozen.gap 74.42 and _bench.json:frozen.gap 73.76. Recomputed by my own arithmetic from _held_perpose.json / _bench_perpose.json: 74.43 / 73.76. Held minus frozen exact bench +0.66, and held minus the fast claim +5.49. Both are under TH held_watch 6.0. Same handling as longstroke-slipper and inband-rssr (held_out refuted when the drop is measured)."
+ },
+ {
+  "key": "contact_depth",
+  "refuted": false,
+  "evidence": "Upheld. Re-derived from remeasure/baseline-3r_fit60_perpose.json: 21 contact poses of 205 evaluated, 220.83 mm, deepest 28.37 mm at ws (30, 150, 0), 15 deeper than 3 mm. The tool's pairing is not apples to apples: it compares the Bench(60,160) fast dump (220 poses, labelled wear 'bench' by the adapter) with the lead's Bench(110,360) exact dump (conecut-knee-knuckle-3r_bench_perpose.json: 470 poses, 4 contact, 20.24 mm, deepest 8.93). On the same Bench(110,360) exact, my own re-wear gives 48 contact poses, 526.66 mm, deepest 28.63 mm: x26.0 and +506.4 mm against the lead. That is clearly deeper than the x10.91 the reason states (>= TH depth_ratio 2.0 and depth_floor 5 mm). Wearer cost: 28-29 mm of metal into the arm at elev 120-150 blocks the arm. The score counts that as one pose."
+ },
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "On file and measured myself, >= TH fold_min 5.0 (gamed only below 4.95). I computed th = angle(J1, J3) from the built chain's own joints, with margin = min(th - |a1 - a2|, a1 + a2 - th, 360 - a1 - a2 - th) (tools/concept_kit.py closure line 95, the metric of lines 25-30). Over taken poses: fit60 min 10.096 deg (n 184, lt5 0; my sk_fit60 run, claim gap 68.93 reproduced). My exact re-wears: Bench(110,360) min 10.096 (n 376, lt5 0) and held 12.117 (n 372, lt5 0). On file: remeasure/baseline-3r_bench.json:th_margin.min 10.096 and _held.json:th_margin.min 12.117. The check stays watch only because c_fold_margin reads the row and V[:6] verifier files, never rem_b."
+ },
+ {
+  "key": "sampling",
+  "refuted": false,
+  "evidence": "Upheld. The missing counts are measured now and they confirm the watch. Per-pose samples (my sk_fit60 run, member direction counts): hub1 49, hub2 49, hub3 49, link1 235, link2 205, neck 80 (667). Sample-weighted in-band 0.4381 vs part-weighted 0.3646 = +7.35 points on fit60; on my exact re-wears +7.30 bench and +7.28 held. All are > part_weight_watch 3.0 and < gamed 8.0 (TH line 64). hub2 0.00, neck 0.015-0.018, hub3 0.13, link2 0.32-0.33 are below 0.5 in band, which is the c_sampling 'mostly out-of-band' trigger. No part has fewer than 16 samples or zero samples."
+ },
+ {
+  "key": "judge_change",
+  "refuted": true,
+  "evidence": "The commit added the row; the changed judge files are outside the bench. git show --stat 12a6c0e (2026-10-15 17:22, handoff bulk commit) creates docs/concepts/rows/baseline-3r.json (+27, the number written by tools/concept_baseline.py at 15:59). The same commit touches judge/fea.py, fea_sizing.py and scorecard.py, plus judge/requirements.json, whose diff changes only R9 (the FEA entry). None of them is on the bench path: grep of tools/concept_bench.py, tools/concept_kit.py, tools/concept_baseline.py and docs/concepts/models/baseline-3r-kit.py finds no fea / fea_sizing / scorecard / requirements import. concept_bench puts judge/ on sys.path only for sdist under CB_SDIST=1, and 12a6c0e did not touch sdist. Importing tools/concept_kit.py loads none of fea / fea_sizing / scorecard / sdist (a sys.modules check). The number reproduces on today's code: 68.93 (my sk_fit60 claim.gap, and q0.95 in my sk_fast2 sweep)."
+ },
+ {
+  "key": "judgement:P1",
+  "refuted": true,
+  "evidence": "Measured against P1's documented detector, not argued. ALIGNMENT.md line 208: P1 is detected by held_out, with TH held_watch 6.0. My own exact re-wears read held 74.42 against frozen exact bench 73.76 (+0.66) and against the fast in-sample claim 68.93 (+5.49). Both are under 6.0. Fast to frozen exact is +4.83, under ff_watch 14.0 (c_fast_frozen) and at the low end of the 4.6-14 drop seen on verified rows. The fit is not tuned to its sample. The leftover point, a fast number compared with frozen exact rows, is a protocol mismatch, not in-sample tuning. It stands under NEW-stale-bar (c), which I uphold."
+ },
+ {
+  "key": "judgement:R3",
+  "refuted": true,
+  "evidence": "Measured: the best-of-6 pick bought no in-sample luck. I re-ran the spread on Bench(60,160) with the model unchanged (sk_fast2.json): p60 142.75, p70 115.46, p80 88.59, p90 73.20, p95 68.93, p100 74.21, identical to remeasure/baseline-3r_readouts.json q. Held out, p95 74.42 (my own exact re-wear) is the best of the measured neighbours: p90 79.14 and p100 79.72 (readouts.json qheld). The fast-to-held drop of the pick is +5.49, against +5.94 (p90) and +5.51 (p100). Its selection premium is therefore -0.45 / -0.02 points. R3's detector (fast_frozen, ALIGNMENT.md line 239) reads +4.83, under ff_watch 14.0. The spread is now on file."
+ },
+ {
+  "key": "judgement:T5",
+  "refuted": false,
+  "evidence": "Upheld, re-derived from my own exact re-wears' per-pose dumps. Bench(110,360): 48 contact poses of 424 evaluated, 526.66 mm, deepest 28.63 mm at ws (0, 120, -15), 41 deeper than 3 mm. Held: 46 poses, 548.95 mm, deepest 28.93 mm at (0, 120, -30). The lead on the same Bench(110,360) has 4 poses and 20.24 mm. Contact share of the pick vs p100: 0.1024 vs 0.0341 fast (my sk_fast2 run), 0.110 vs 0.038 held (readouts.json qheld)."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "Upheld, re-derived from the per-pose dumps (min_mm over taken poses). My exact bench re-wear: 376 of 376 taken poses under 3 mm, 66 under 2 mm, 2 under 1 mm; held 372 / 372, 63, 3; fit60 184 / 184, 24, 1. 2 mm near-touch gap 116.93 bench and 117.01 held (my re-wears' deep_audit). That is 43.17 points over the plain gap, above shell2_watch 15. Near-touch is report-only (user 2026-10-17), so watch. Note: under the kit's honest march placement (remeasure/baseline-3r_honest_fit60_perpose.json) only 2 of 184 taken poses are under 2 mm, so the 1-2 mm shell comes from the claim's 'outer' placement. The claim is what is audited."
+ },
+ {
+  "key": "judgement:S2",
+  "refuted": false,
+  "evidence": "Upheld. Counts measured: hub1-3 49 each, link1 235, link2 205, neck 80. Part-weighted in-band 0.3646 vs sample-weighted 0.4381 (+7.35) on fit60, +7.30 on the exact bench and +7.28 held (my re-wears' parts_ib14). hub2 reads 0.00 in band on every wear. Its fitted cap radius is 107.37 mm (my sk_fit60 prof_max) against hub1's 52.31 mm, so hub 2 floats well off the skin: median >= 31.8 mm, the fast cache's cap."
+ },
+ {
+  "key": "judgement:M2",
+  "refuted": false,
+  "evidence": "Upheld, reproduced independently. I wrapped build() and reset a cap_dirs call counter at every build, rather than once per wear as in the auditor's readouts. Results (sk_fit60.json): hub1 fitted at 52.31 mm, so its disc radius is 10 x 52.31 / 70 = 7.47 mm (the kit's audit reads 'covers 0.54, reaches 7.4 mm'). At a true O20 hub1 (reach 10.0 mm, refitted 53.51 mm) the gap stays 68.93, but 34 taken poses have metal under 2 mm instead of 24. With all hubs at true O20 the gap is 66.69 (hub2 refitted at 102.25 mm, contact 0.0927). The built exo carries a real O20 at J1, so the model under-reads J1's near-touch."
+ },
+ {
+  "key": "judgement:NEW-stale-bar",
+  "refuted": false,
+  "evidence": "Upheld, components reproduced. Kit honest conventions read 70.27 (flips 0, collide 0); sing_deg 5 reads 67.12 (both from my sk_fast2 run). The frozen exact numbers are 73.76 bench and 74.42 held (my re-wears). docs/concepts/events.jsonl has 46 lines containing 'baseline 68.93' (grep -c). rows/pointer-cslide.json:verdict calls its 69.84 'level with the spherical 3R champion (68.93 / 74.93)', while the honest baseline reads 70.27. The reference's protocol is not the one its comparisons use."
+ }
+]

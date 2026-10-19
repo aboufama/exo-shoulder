@@ -154,3 +154,63 @@ before 702373b, the comparison with the lead was vacuous. There is no earlier re
   baseline-3r 68.93 (outer, 10 deg, fast) vs honest 70.27, at 5 deg 67.12, frozen exact 73.76."
 - **D. fold_margin should also read `docs/alignment/remeasure/<id>_*.json` `th_margin`.** Effect on this row: the
   check would go from watch to ok (10.10 deg). A tool change, so its VERSION would be bumped and the selftest run.
+
+## Skeptic (2026-10-19 04:25 UTC)
+
+Final verdict, as the ledger computed it: **WATCH**. I refuted 5 of the 12 reasons with measured numbers and upheld 7,
+all at watch level. Rulings are in `docs/alignment/baseline-3r.rulings.json`; the ledger entry is
+`python3 tools/alignment_ledger.py get baseline-3r` (stage skeptic).
+
+How I re-measured (model unchanged, niced, at most 2 processes, no farm):
+- My own Bench(60,160) runs, in `remeasure/baseline-3r_sk_fit60.json` and `_sk_fast2.json` (`tools/alignment_baseline3r_skeptic.py`):
+  - claim 68.93;
+  - th margin from the chain's own J1 / J3;
+  - member sample counts;
+  - the O20 what-if with a counter reset at every build;
+  - honest, sing_deg 5 and the q spread.
+- Both exact wears again (CB_EXACT=1), with the outputs redirected to my scratchpad:
+  - Bench(110,360): 73.76; held: 74.42.
+  - The per-pose dumps are identical to the auditor's.
+  - Summary in `remeasure/baseline-3r_sk_exact.json`.
+- Every number in the audit table reproduces to the digit. The auditor's files are untouched (mtime 03:30).
+
+| key | ruling | evidence (short) |
+|---|---|---|
+| held_out | **refuted** | Re-wear: held 74.42 against the exact bench 73.76, a drop of +0.66; against the fast claim it is +5.49. Both are under held_watch 6.0. The check fires only because v_gap is null. |
+| contact_depth | upheld | 21 poses / 220.83 mm / deepest 28.37 mm on fit60. Paired with the lead on the same Bench(110,360) exact: 526.66 mm over 48 poses vs 20.24 mm over 4, x26.0 (the reason says x10.91; see missed 1). |
+| fold_margin | **refuted** | th min 10.096 deg (fit60 n 184, exact bench n 376) and 12.117 deg held (n 372), 0 under 5. On file: `remeasure/baseline-3r_bench.json:th_margin.min`. Above fold_min 5.0. |
+| sampling | upheld | Counts measured: hub 49 x 3, link1 235, link2 205, neck 80. Sample-weighted minus part-weighted is +7.35 / +7.30 / +7.28 (watch 3, gamed 8). hub2 is 0.00 in band. |
+| judge_change | **refuted** | 12a6c0e created the row. Its judge files are R9 FEA only (the requirements.json diff touches R9 alone). No bench file imports them, and importing the kit loads none of them. 68.93 reproduces today. |
+| judgement:P1 | **refuted** | P1's detector is held_out at 6.0: +0.66 against the exact bench, +5.49 against the claim. Fast to frozen is +4.83, under ff_watch 14. The protocol mismatch is left to NEW-stale-bar (upheld). |
+| judgement:R3 | **refuted** | Spread reproduced. Held out, p95 74.42 beats p90 79.14 and p100 79.72. The pick's fast-to-held drop is +5.49, against +5.94 and +5.51 for its neighbours, so the selection premium is 0 or less. |
+| judgement:T5 | upheld | Exact bench: 48 poses / 526.66 mm, deepest 28.63 mm. Held: 46 poses / 548.95 mm, deepest 28.93 mm. |
+| judgement:G1 | upheld | Every taken pose has metal under 3 mm (376 / 376 bench, 372 / 372 held). Under 2 mm: 66 (bench) and 63 (held). The 2 mm gap is 116.93 / 117.01. The 1-2 mm shell comes from the claim's 'outer' placement: the honest march placement has 2 of 184 under 2 mm. |
+| judgement:S2 | upheld | Part-weighted vs sample-weighted gives +7.35. hub2 is fitted at 107.37 mm against hub1's 52.31 mm, and reads 0.00 in band on every wear. |
+| judgement:M2 | upheld | hub1's disc reaches 7.47 mm. At a true O20: gap 68.93 unchanged, but 34 taken poses under 2 mm instead of 24. With all hubs at true O20 the gap is 66.69. |
+| judgement:NEW-stale-bar | upheld | honest 70.27, sing5 67.12, frozen exact 73.76 / 74.42, 46 'baseline 68.93' events, and pointer-cslide called 'level with the champion'. |
+
+**T5 under 2026-10-19.1.** This is the design's first T5 reading: the ledger held one entry before mine, the audit.
+Under the type-guarded reader the lead's reference reads 20.24 mm over 4 poses
+(`conecut-knee-knuckle-3r_bench_perpose.json`), so the comparison is real. It is mis-paired by bench, though (missed 1).
+
+**Missed by the audit, for the next one.** These do not change this verdict.
+1. **T5 compares different benches.** `tools/alignment_baseline3r_rewear.py` line 101 labels the Bench(60,160) fast
+   fit60 per-pose dump as wear 'bench'.
+   - So `c_contact_depth` compared 220 fast poses (`baseline-3r.json` checks.contact_depth.compare, src
+     `_fit60_perpose.json`) with the lead's 470 exact poses. That is not "a wear both have" (ALIGNMENT.md section 5).
+   - Like for like on Bench(110,360) exact: 526.66 vs 20.24 mm, x26.02. The finding is stronger than stated.
+   - The reason's "held depths not on file" is also wrong: `_held_perpose.json` carries 548.95 mm over 46 poses. The
+     reader drops it because its gap (74.43) is not the claim's.
+   - Fix (a tool change, not an input to the verdict): label fit60 dumps 'fit60', and let T5 pair the frozen exact
+     bench dump.
+2. **The held sets differ across rows.** The baseline's held is `held_bench(110,360)`: 110 clip + 360 ws = 470
+   poses. The lead's held dump has 202 clip + 952 ws = 1154 poses.
+   - So the audit's held readings (74.42, 548.95 mm, 63 near-2 poses) are not paired with the leaderboard's held
+     numbers (for example the lead's 60.97 mm over 14 held contact poses).
+   - Compare held numbers only within a row (HANDOFF line 149).
+3. **The O20 what-if's audit line is a false flag.** With hub1 laid out as a true O20 (reach 10.0 mm), the kit still
+   prints "covers 0.57 of the disc". hub2 likewise prints "covers 2.08" at reach 9.5 mm.
+   - Cause: the coverage cell area uses the Member's r_ref, which stays at 70 mm (`tools/concept_kit.py` line 526).
+     The what-if changed only `cap_dirs`' r_ref.
+   - M2 stands on the reach (10.0 mm), not on that audit line. Do not quote the readouts' `audit` field as evidence of
+     the what-if's hub size.

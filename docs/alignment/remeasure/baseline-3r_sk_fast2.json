@@ -1,0 +1,66 @@
+{
+ "honest": {
+  "gap": 70.27,
+  "reach": 0.775,
+  "inband14": 0.4247,
+  "contact": 0.1024,
+  "flips": 0,
+  "collide": 0.0
+ },
+ "sing5": {
+  "gap": 67.12,
+  "reach": 0.8,
+  "inband14": 0.4336,
+  "contact": 0.1048,
+  "flips": 0,
+  "collide": 0.0
+ },
+ "q0.6": {
+  "gap": 142.75,
+  "reach": 0.475,
+  "inband14": 0.7442,
+  "contact": 0.4634,
+  "flips": 0,
+  "collide": 0.0
+ },
+ "q0.7": {
+  "gap": 115.46,
+  "reach": 0.5375,
+  "inband14": 0.7335,
+  "contact": 0.3756,
+  "flips": 0,
+  "collide": 0.0
+ },
+ "q0.8": {
+  "gap": 88.59,
+  "reach": 0.6312,
+  "inband14": 0.663,
+  "contact": 0.2634,
+  "flips": 0,
+  "collide": 0.0
+ },
+ "q0.9": {
+  "gap": 73.2,
+  "reach": 0.7063,
+  "inband14": 0.5324,
+  "contact": 0.1707,
+  "flips": 0,
+  "collide": 0.0
+ },
+ "q0.95": {
+  "gap": 68.93,
+  "reach": 0.775,
+  "inband14": 0.4381,
+  "contact": 0.1024,
+  "flips": 0,
+  "collide": 0.0
+ },
+ "q1.0": {
+  "gap": 74.21,
+  "reach": 0.8625,
+  "inband14": 0.2295,
+  "contact": 0.0341,
+  "flips": 0,
+  "collide": 0.0
+ }
+}
