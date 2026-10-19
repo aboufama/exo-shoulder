@@ -1,0 +1,152 @@
+{
+ "id": "weldk-overstrap-pinknee-3r",
+ "status": "verified",
+ "v_gap": 45.96,
+ "complexity": 0.0,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "dominance: cannot compare with conecut-knee-knuckle-3r at 2 mm",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "idle: a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 39.09 (score 85.79) sits 6.87 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 45.96
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 39.09 -> verified 45.96 (+6.87)",
+   "fast": 39.09,
+   "verified": 45.96,
+   "drop": 6.87
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 45.96: bench 3 contact poses, sum 7.37 mm, deepest 5.84 mm at ['ws', 15.0, 135.0, -60.0], 1 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (-12.87 mm, x0.36); held depths not on file",
+   "depths": {
+    "v_gap 45.96": {
+     "bench": {
+      "n": 3,
+      "sum_mm": 7.37,
+      "max_mm": 5.84,
+      "n_deeper3": 1,
+      "overhead140": 1,
+      "deepest": [
+       "ws",
+       15.0,
+       135.0,
+       -60.0
+      ],
+      "gap": 45.96,
+      "src": "docs/alignment/remeasure/weldk-overstrap-pinknee-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        7.37
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 45.96",
+     "wear": "bench",
+     "sum": 7.37,
+     "ref_sum": 20.24,
+     "excess": -12.87,
+     "ratio": 0.36,
+     "watch": false
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.078 deg (exact_frozen_neighbour.min_th_margin_taken; 3 readings)",
+   "min_margin": 5.078,
+   "where": "exact_frozen_neighbour.min_th_margin_taken"
+  },
+  {
+   "check": "idle",
+   "level": "watch",
+   "reason": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 0.0 vs row 0.0",
+   "recomputed": 0.0,
+   "row": 0.0
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 39.09 (score 85.79) sits 6.87 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/weldk-overstrap-pinknee-3r_v_el2.json",
+  "docs/concepts/verify/weldk-overstrap-pinknee-3r_v_bench_frozen.json"
+ ],
+ "git": "4a8beec",
+ "tool_version": "2026-10-19.1",
+ "t": "2026-10-19T04:24:24Z"
+}
