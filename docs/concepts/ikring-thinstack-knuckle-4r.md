@@ -117,3 +117,9 @@ The POSTERIOR shell end (az -4.3 rel the pad) is: 127 shell 1.15 / bracket 0.10,
   model), the skin along the J4 self-motion between psi values, iglidur friction in the slot.
 * **Determinacy (R17):** J4 is a counted active joint whose value the IK sets: in an unpowered MVP1 it is a self-motion
   nothing holds (a brake or the motor holds it) - a labelled 4-joint option, never the lead.
+
+**Where the overhead still goes (claim, 15 of 28 lost):** the abduction cone 0 / 10 unchanged (209 / 210 / 211 / 236 /
+238 / 263 / 265 / 292 fold or J3 stop, 237 / 264 the lead's drive contacts at -8.93 / -5.80 - the ring about a_r does not
+reach the cone: the round-301 lens C measurement, a J1 / J2 seat-level wall); 5 stretched-fold IR poses at plane 105-120,
+axial -120..-150 (397, 398, 424, 425, 426) that no k in [0, 40] closes. Whole bench: 64 ws lost = fold 55, J3 stop 5,
+contact 4.

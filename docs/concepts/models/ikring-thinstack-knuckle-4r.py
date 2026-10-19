@@ -313,6 +313,20 @@ def ik_run(base, which, outp, ks=None, choice_from=None):
     return o
 
 
+def k0probe(base, which, outp, js):
+    """the k = 0 state (min metal, why) of chosen poses of the ik bench 'which' (same pose order as ik_run): used to re-read a
+    closest-contact run under the spec rule without a full re-wear"""
+    F = fit(base); hw = dict(base); os.environ["CB_EXACT"] = "1"
+    Bf = AA.held_bench() if which in ("held", "heldws") else CB.Bench(110, 360)
+    if which == "heldws":
+        kd = np.array(Bf.kind); Bf = subbench(Bf, np.r_[np.nonzero(kd == "clip")[0][::100], np.nonzero(kd == "ws")[0]])
+    elif which != "held": Bf = subbench(Bf, np.arange(len(Bf.idx)))
+    kd = np.array(Bf.kind); cl = np.nonzero(kd == "clip")[0][:6]; sel = np.r_[cl, np.array(js, int)]
+    Bs = subbench(Bf, sel); o, S = wear_phi(F, Bs, np.zeros(len(AA.Z0["HG"])), hw); mm, wy = pose_state(Bs, S["M"])
+    out = {str(int(j)): dict(mm=mm[len(cl) + q], why=wy[len(cl) + q], pose=[Bs.poses[len(cl) + q][k] for k in ("plane", "elev", "axial")]) for q, j in enumerate(js)}
+    json.dump(out, open(outp, "w"), indent=1); print(json.dumps(out)); return out
+
+
 def control(base, outp):
     """the unpowered control: phi40's least-phi relay at the same axis / hardware (coil deleted), Bench(110,360) exact"""
     os.environ["CB_EXACT"] = "1"; b = dict(base, flood=1); S = P4.prepare(b, 110, 360, exact=True); o = P4.wear(S, b)
@@ -329,4 +343,5 @@ if __name__ == "__main__":
     if mode == "ik": ik_run(par, sys.argv[3], sys.argv[4]); sys.exit(0)
     if mode == "rechoose": ik_run(par, sys.argv[3], sys.argv[4], choice_from=sys.argv[5]); sys.exit(0)   # rechoose '<json>' bench out.json prev_ik.json
     if mode == "control": control(par, sys.argv[3]); sys.exit(0)
+    if mode == "k0probe": k0probe(par, sys.argv[3], sys.argv[4], [int(x) for x in sys.argv[5].split(",")]); sys.exit(0)   # k0probe '<json>' heldws out.json j1,j2,...
     print(__doc__)

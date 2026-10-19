@@ -3724,7 +3724,7 @@
   "name": "The verified lead plus phi40-thinstack's arm-fixed slotted shell and T-nut carriage with the coil deleted: an ACTIVE one-sided J4 ring (psi 0..+40) about a GH-through axis tilted 8.5 deg toward taz 243, psi set per pose by a lead-first proximity IK",
   "family": "redundant 4R: the verified lead (conecut-knee-knuckle-3r) + an arm-side counted J4 about a GH-through axis, built as a plain curved slide (phi40-thinstack-relay-4r's verified 1.0 mm Ti shell + 14 x 14 T-nut carriage), active instead of sprung",
   "lens": "round301:rocker-redundant-4r (Keemink 2018 redundant non-orthogonal 4R at the arm end; the J0 under J1 is measured dead; resubmits deltoid-ring-knuckle-4r with buildable hardware: a profiled band is not a revolute and a circle about the humeral long axis does not fit the arm, a p90 defect of 19 mm)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-19T01:32:54Z",
   "source": "round 301 (O1, track overhead) judge (docs/concepts/round301_ideation.md)",
   "merged_from": [],
