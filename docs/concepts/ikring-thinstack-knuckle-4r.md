@@ -158,3 +158,51 @@ The price: 4 active joints, complexity 48.0 (tools/simplicity.py v2.2: phi40's 5
    first (R_t 80.1: the bracket / flange near-touch should drop), delta 2-5, ds, liner 4-6, clearance floors 0 / 1 / 2.
 3. The hardware near-touch is the lever: the parked ring costs 2.09 points and 9 fit-clip frames under 2 mm; a bracket
    that leaves the carriage outward (not down the 28.9-deg ramp) and a flange recessed in the liner are the first tries.
+
+## Verification (independent skeptic, 2026-10-19)
+
+**Verdict: VERIFIED as a labelled 4-joint option (4 counted joints), never the lead.** v_gap **9.75** on Bench(110,360)
+exact, frozen shape (chain-only gate; plain 8.76; score 96.45). The champion on the same bench and checks reads 75.94
+(the risley-turret verifier's champion, kit checks + 1 mm clearance, the convention the phi40 verifier used).
+Files: `docs/concepts/verify/ikring-thinstack-knuckle-4r/verifier/`.
+
+| reading | gate | plain | reach (ws) | ib14 chain / pooled | contacts (T5) | overhead | note |
+|---|---|---|---|---|---|---|---|
+| claim | 9.75 | 8.76 | 0.8222 (296) | 0.8901 / 0.9034 | 4 (19.48) | 13/28 | rechoose of the first run's k-table |
+| verifier: full re-run from scratch | 9.75 | 8.76 | 0.8222 (296) | 0.8901 / 0.9034 | 4 (19.48) | 13/28 | k-table counts, k = 0 summary and all IK choices identical |
+| verifier: + X1 + X2 (phi40 verifier's extra checks) | 9.75 | 8.76 | 0.8222 (296) | 0.8901 / 0.9034 | 4 (19.48) | 13/28 | 0 extra jams, 0 poses lost |
+| verifier: partly metal-aware IK flood | 9.75 | - | 36/36 new takes connected | - | - | 13/28 | 1201 nodes connected (kinematic flood: 1214) |
+
+What was checked:
+1. **DOF.** J1, J2, J3 and the J4 ring are counted joints: 4, at the R5 cap. R5-aim (3) is not met, so the design is a
+   labelled 4-joint option. The K drive is slaved. The two MR63ZZ knee pins sit outside the count. Passive translations: 0.
+2. **Real parts.** The ring hardware is phi40's verified shell, carriage, L-lug bracket and flange, without the coil. The
+   phi40 verifier's X1 (every chain set, crowns included, against shell / carriage / bracket) and X2 (bracket top layer) ran
+   on this design's final wear at its own axis (8.5 / 243) and k values. Result: 0 extra jams and 0 poses lost.
+   - Closest non-adjacent chain-to-relay distance: 1.199 mm (E strap to shell).
+   - Knee crown to bracket: 0.869 mm at pose 399 (k 40). This is the adjacent pair, whose limit is 0.15 mm.
+   - The coil-strip check X3 does not apply (no coil).
+3. **Honest pose-taking.** The full re-run from scratch reproduces everything: the k = 0 wear, the 16 exact k-table
+   wears, the IK choice and the final wear. The verifier's per-pose dump equals the claim's at all 470 poses (recomputed
+   plain 8.75). Other readings:
+   - min th margin 5.083 (0 taken poses under 5);
+   - mismatch between the k-table and the final wear: none;
+   - continuity drop: 0.
+4. **Metal-aware continuity (new red team).** At the 100 bench ws poses the IK had to move, the IK flood was re-run with a
+   (pose, k) state kept only if that k takes the pose with metal (min metal >= 0, no jam). No path or self-motion may pass a
+   bench pose through a contact, jam or non-closing ring state. All 36 new takes stay connected. This check is partial:
+   - Edges and non-bench envelope nodes stay kinematic. The skin along the J4 sweep between bench poses is still unmeasured.
+   - At 9 of the 36 new takes, some kinematically feasible k at the same pose is metal-bad.
+5. **Controller resolution and travel** (re-read from the claim's own k-table):
+   - A 5 or 10 deg k step keeps 35 of 36 new takes (~10.03).
+   - Shorter travel costs points: 37.5 deg -> 10.03, 35 -> 11.14, 30 -> 11.97, 20 -> 14.47. The slot end carries 14 of
+     the 36 new takes.
+
+Issues that stand (not refutations):
+- **R17 (proposed: no undriven spare joint).** The coil is deleted, so in the unpowered MVP1 J4 is free. The 9.75 holds
+  only when the IK commands psi, i.e. in the final powered product. An unpowered build of this hardware needs the
+  centring spring back: least-phi control 14.46 at this axis; phi40 reads 14.06 at 12 / 235.
+- **T1.** Pose 127 is taken at 0.099 mm, at one k only (2.5). At k = 0 it is a -0.15 mm hardware contact.
+- **Near-touch.** The 2 mm reading is 47.00 against the lead's 34.84 (reported only, not a gate).
+- **Held-out not re-run** (time box). The proposer's held sample reads gate 10.10, overhead 32/71, 11 contacts, T5 55.91.
+- **Not modelled:** the J4 drive and holding torque (kinematic proof, by the user's rule).
