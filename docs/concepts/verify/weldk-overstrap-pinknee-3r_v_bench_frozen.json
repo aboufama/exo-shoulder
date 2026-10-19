@@ -45,9 +45,9 @@
   "contact": 3
  },
  "model_parts_pairs": {
-  "E-L2stack": 18,
+  "knee-E": 5,
   "L1-L2": 11,
-  "knee-E": 5
+  "E-L2stack": 18
  },
  "model_audit": {
   "near_touch_min_mm": 0.07,
@@ -250,11 +250,57 @@
     "axial": -54.91339874267578
    }
   ],
+  "E-L2kd_low": [
+   {
+    "mm": -0.29,
+    "i": 232,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 105.0,
+    "axial": 0.0
+   },
+   {
+    "mm": -0.12,
+    "i": 290,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 150.0,
+    "axial": -45.0
+   },
+   {
+    "mm": 0.34,
+    "i": 8,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.34,
+    "i": 9,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.34,
+    "i": 10,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   }
+  ],
   "removed": {
    "closure": [],
    "knee-hub3low": [],
    "pad-hub3low": [],
-   "boss": []
+   "boss": [],
+   "E-L2kd": [
+    232,
+    290
+   ]
   },
   "min_th_margin_taken": 5.262,
   "knee_window": {
@@ -306,15 +352,30 @@
   ],
   "taken_bench_ws_islands": []
  },
- "removed_total": 0,
- "removed_poses": [],
+ "removed_total": 2,
+ "removed_poses": [
+  {
+   "i": 232,
+   "kind": "ws",
+   "plane": 15.0,
+   "elev": 105.0,
+   "axial": 0.0
+  },
+  {
+   "i": 290,
+   "kind": "ws",
+   "plane": 45.0,
+   "elev": 150.0,
+   "axial": -45.0
+  }
+ ],
  "verified": {
-  "gap": 45.96,
-  "reach": 0.6306,
+  "gap": 46.53,
+  "reach": 0.625,
   "follow": 0.9273,
   "inband14": 0.7415,
   "inband10": 0.4473,
-  "contact": 0.009
+  "contact": 0.0091
  },
  "verified_audit": {
   "near_touch_min_mm": 0.07,
@@ -360,17 +421,17 @@
     "axial": -60.0
    }
   ],
-  "gap_near1": 53.04,
+  "gap_near1": 53.61,
   "near1_poses": 8,
-  "gap_near2": 90.67,
-  "near2_poses": 49,
+  "gap_near2": 90.16,
+  "near2_poses": 47,
   "overhead140": {
    "ws": 28,
-   "reach": 0.25,
+   "reach": 0.2143,
    "clip": 10,
    "follow": 1.0,
-   "inband14": 0.8184,
-   "inband10": 0.6863,
+   "inband14": 0.8308,
+   "inband10": 0.6977,
    "why_not": {
     "fold": 11,
     "slide": 0,
@@ -382,5 +443,5 @@
    }
   }
  },
- "secs": 239.2
+ "secs": 281.0
 }

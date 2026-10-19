@@ -1,0 +1,370 @@
+{
+ "o20_fit60": {
+  "o20_hub1_fit60": {
+   "gap": 68.93,
+   "reach": 0.775,
+   "inband14": 0.4381,
+   "contact": 0.1024,
+   "near1": 70.04,
+   "near2": 117.06,
+   "near2_poses": 34,
+   "min_mm": 0.816,
+   "th_min": 10.096,
+   "overhead": {
+    "n": 12,
+    "taken": 4,
+    "evaluated": 9,
+    "contact": 5
+   },
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.57 of the disc, reaches 10.0 mm)"
+   ],
+   "parts": {
+    "hub1": 0.9942,
+    "hub2": 0.0,
+    "hub3": 0.132,
+    "link1": 0.7177,
+    "link2": 0.328,
+    "neck": 0.0146
+   },
+   "hub_radii_mm": [
+    52.3,
+    107.4,
+    73.0
+   ]
+  },
+  "o20_all_fit60": {
+   "gap": 66.69,
+   "reach": 0.7875,
+   "inband14": 0.4383,
+   "contact": 0.0927,
+   "near1": 70.02,
+   "near2": 117.05,
+   "near2_poses": 36,
+   "min_mm": 0.336,
+   "th_min": 10.096,
+   "overhead": {
+    "n": 12,
+    "taken": 4,
+    "evaluated": 9,
+    "contact": 5
+   },
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.57 of the disc, reaches 10.0 mm)",
+    "hub2: hub of J2 smaller than O20 (covers 2.08 of the disc, reaches 9.5 mm)"
+   ],
+   "parts": {
+    "hub1": 0.9942,
+    "hub2": 0.0,
+    "hub3": 0.1333,
+    "link1": 0.7177,
+    "link2": 0.3283,
+    "neck": 0.0146
+   },
+   "hub_radii_mm": [
+    52.3,
+    107.4,
+    73.0
+   ]
+  }
+ },
+ "q": {
+  "q0.6": {
+   "gap": 142.75,
+   "reach": 0.475,
+   "inband14": 0.7442,
+   "contact": 0.4634,
+   "near1": 161.33,
+   "near2": 250.84,
+   "near2_poses": 78,
+   "min_mm": 0.361,
+   "th_min": 10.301,
+   "overhead": {
+    "n": 12,
+    "taken": 0,
+    "evaluated": 9,
+    "contact": 9
+   },
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)",
+    "hub2: hub of J2 smaller than O20 (covers 0.83 of the disc, reaches 9.1 mm)",
+    "hub3: hub of J3 smaller than O20 (covers 0.83 of the disc, reaches 9.1 mm)"
+   ],
+   "parts": {
+    "hub1": 0.9916,
+    "hub2": 0.9052,
+    "hub3": 0.7389,
+    "link1": 0.8526,
+    "link2": 0.6914,
+    "neck": 0.314
+   }
+  },
+  "q0.7": {
+   "gap": 115.46,
+   "reach": 0.5375,
+   "inband14": 0.7335,
+   "contact": 0.3756,
+   "near1": 137.23,
+   "near2": 216.5,
+   "near2_poses": 70,
+   "min_mm": 0.088,
+   "th_min": 10.096,
+   "overhead": {
+    "n": 12,
+    "taken": 1,
+    "evaluated": 9,
+    "contact": 8
+   },
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)",
+    "hub2: hub of J2 smaller than O20 (covers 0.88 of the disc, reaches 9.4 mm)",
+    "hub3: hub of J3 smaller than O20 (covers 0.85 of the disc, reaches 9.3 mm)"
+   ],
+   "parts": {
+    "hub1": 0.9932,
+    "hub2": 0.8343,
+    "hub3": 0.6798,
+    "link1": 0.9151,
+    "link2": 0.6878,
+    "neck": 0.1295
+   }
+  },
+  "q0.8": {
+   "gap": 88.59,
+   "reach": 0.6312,
+   "inband14": 0.663,
+   "contact": 0.2634,
+   "near1": 108.15,
+   "near2": 174.45,
+   "near2_poses": 63,
+   "min_mm": 0.213,
+   "th_min": 10.096,
+   "overhead": {
+    "n": 12,
+    "taken": 1,
+    "evaluated": 9,
+    "contact": 8
+   },
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)"
+   ],
+   "parts": {
+    "hub1": 0.991,
+    "hub2": 0.6208,
+    "hub3": 0.4788,
+    "link1": 0.8702,
+    "link2": 0.6193,
+    "neck": 0.1037
+   }
+  },
+  "q0.9": {
+   "gap": 73.2,
+   "reach": 0.7063,
+   "inband14": 0.5324,
+   "contact": 0.1707,
+   "near1": 79.89,
+   "near2": 109.46,
+   "near2_poses": 25,
+   "min_mm": 0.155,
+   "th_min": 10.096,
+   "overhead": {
+    "n": 12,
+    "taken": 3,
+    "evaluated": 9,
+    "contact": 6
+   },
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)"
+   ],
+   "parts": {
+    "hub1": 0.9961,
+    "hub2": 0.0272,
+    "hub3": 0.2585,
+    "link1": 0.8088,
+    "link2": 0.4687,
+    "neck": 0.077
+   }
+  },
+  "q0.95": {
+   "gap": 68.93,
+   "reach": 0.775,
+   "inband14": 0.4381,
+   "contact": 0.1024,
+   "near1": 70.04,
+   "near2": 99.21,
+   "near2_poses": 24,
+   "min_mm": 0.816,
+   "th_min": 10.096,
+   "overhead": {
+    "n": 12,
+    "taken": 4,
+    "evaluated": 9,
+    "contact": 5
+   },
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)"
+   ],
+   "parts": {
+    "hub1": 0.9956,
+    "hub2": 0.0,
+    "hub3": 0.132,
+    "link1": 0.7172,
+    "link2": 0.328,
+    "neck": 0.0146
+   }
+  },
+  "q1.0": {
+   "gap": 74.21,
+   "reach": 0.8625,
+   "inband14": 0.2295,
+   "contact": 0.0341,
+   "near1": 74.21,
+   "near2": 89.45,
+   "near2_poses": 13,
+   "min_mm": 1.268,
+   "th_min": 10.096,
+   "overhead": {
+    "n": 12,
+    "taken": 6,
+    "evaluated": 9,
+    "contact": 3
+   },
+   "audit": [
+    "hub2: sparse sampling (8.12 mm median spacing > 4 mm)",
+    "hub3: sparse sampling (9.49 mm median spacing > 4 mm)",
+    "link2: sparse sampling (7.66 mm median spacing > 4 mm)",
+    "neck: sparse sampling (7.84 mm median spacing > 4 mm)",
+    "hub1: hub of J1 smaller than O20 (covers 0.55 of the disc, reaches 7.4 mm)"
+   ],
+   "parts": {
+    "hub1": 0.9983,
+    "hub2": 0.0,
+    "hub3": 0.0,
+    "link1": 0.4432,
+    "link2": 0.0,
+    "neck": 0.0
+   }
+  }
+ },
+ "qheld": {
+  "q0.9_held": {
+   "gap": 79.14,
+   "reach": 0.6583,
+   "inband14": 0.5297,
+   "contact": 0.1794,
+   "near1": 83.36,
+   "near2": 144.82,
+   "near2_poses": 88,
+   "min_mm": 0.118,
+   "th_min": 12.117,
+   "overhead": {
+    "n": 26,
+    "taken": 5,
+    "evaluated": 16,
+    "contact": 11
+   },
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)"
+   ],
+   "parts": {
+    "hub1": 0.9896,
+    "hub2": 0.0381,
+    "hub3": 0.2588,
+    "link1": 0.8004,
+    "link2": 0.4648,
+    "neck": 0.0862
+   }
+  },
+  "q1.0_held": {
+   "gap": 79.72,
+   "reach": 0.8111,
+   "inband14": 0.23,
+   "contact": 0.0383,
+   "near1": 80.75,
+   "near2": 87.35,
+   "near2_poses": 15,
+   "min_mm": 0.158,
+   "th_min": 12.117,
+   "overhead": {
+    "n": 26,
+    "taken": 9,
+    "evaluated": 16,
+    "contact": 7
+   },
+   "audit": [
+    "hub2: sparse sampling (8.12 mm median spacing > 4 mm)",
+    "hub3: sparse sampling (9.49 mm median spacing > 4 mm)",
+    "link2: sparse sampling (7.66 mm median spacing > 4 mm)",
+    "neck: sparse sampling (7.84 mm median spacing > 4 mm)",
+    "hub1: hub of J1 smaller than O20 (covers 0.55 of the disc, reaches 7.4 mm)"
+   ],
+   "parts": {
+    "hub1": 0.9987,
+    "hub2": 0.0,
+    "hub3": 0.0,
+    "link1": 0.4446,
+    "link2": 0.0,
+    "neck": 0.0
+   }
+  }
+ },
+ "sing5": {
+  "sing5_fit60": {
+   "gap": 67.12,
+   "reach": 0.8,
+   "inband14": 0.4336,
+   "contact": 0.1048,
+   "near1": 68.22,
+   "near2": 98.27,
+   "near2_poses": 25,
+   "min_mm": 0.7,
+   "th_min": 5.451,
+   "overhead": {
+    "n": 12,
+    "taken": 4,
+    "evaluated": 9,
+    "contact": 5
+   },
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)"
+   ],
+   "parts": {
+    "hub1": 0.9956,
+    "hub2": 0.0,
+    "hub3": 0.1327,
+    "link1": 0.7032,
+    "link2": 0.3324,
+    "neck": 0.0063
+   }
+  },
+  "sing5_held": {
+   "gap": 71.51,
+   "reach": 0.7611,
+   "inband14": 0.4328,
+   "contact": 0.109,
+   "near1": 73.04,
+   "near2": 114.15,
+   "near2_poses": 64,
+   "min_mm": 0.098,
+   "th_min": 5.365,
+   "overhead": {
+    "n": 26,
+    "taken": 9,
+    "evaluated": 18,
+    "contact": 9
+   },
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)"
+   ],
+   "parts": {
+    "hub1": 0.9929,
+    "hub2": 0.0,
+    "hub3": 0.1384,
+    "link1": 0.7051,
+    "link2": 0.3264,
+    "neck": 0.0081
+   }
+  }
+ },
+ "source": "tools/alignment_baseline3r_readouts.py (claim conventions of docs/concepts/models/baseline-3r-kit.py, model unchanged); fit60 = Bench(60,160) fast, held = held_bench(110,360) exact, profiles frozen from the fit60 fit"
+}

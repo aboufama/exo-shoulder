@@ -446,6 +446,39 @@ if __name__ == "__main__" and (len(sys.argv) < 2 or sys.argv[1] != "search"):
               "th window", M.D.th_tab.min(), M.D.th_tab.max(), "noslip err deg", no_slip_check(M.D, np.linspace(M.yspan[0], M.yspan[1], 9)))
         sys.exit()
     r, M = _report(B, par)
+    if mode == "redteam":                                         # the pose that jams, the point that pinches, the optimistic number
+        taken = lambda i: B.res[i] is not None and float(np.min(B.res[i])) >= 0
+        lab = lambda i: f"#{i} {B.kind[i]} {B.clip[i][:20]:20s} pl {B.poses[i]['plane']:6.1f} el {B.poses[i]['elev']:6.1f} ax {B.poses[i]['axial']:6.1f}"
+        a = PK.audit(M, B); out = dict(report={k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, why=r["why"],
+                                       roll=r.get("roll"), parts_ib14=r.get("parts_ib14"), parts_pairs=r.get("parts_pairs"),
+                                       near_touch=dict(min_mm=a["near_touch_min_mm"], low=a["near_touch_low"], gap1=a["gap_near1"], gap2=a["gap_near2"]),
+                                       overhead140=a["overhead140"])
+        names = list(M.rigid) + list(M.link_pts); sizes = [len(X) for _, X in M.rigid.values()] + [len(X) for _, X in M.link_pts.values()]
+        cut = np.cumsum([0] + sizes); low = {}
+        for i in range(len(B.idx)):
+            if not taken(i): continue
+            d = B.res[i][:cut[-1]]
+            for k, nm in enumerate(names):
+                v = float(d[cut[k]:cut[k + 1]].min()) if cut[k + 1] > cut[k] else 1e9
+                if v < low.get(nm, (1e9,))[0]: low[nm] = (round(v, 2), lab(i))
+        out["closest_per_part"] = low
+        el = np.array([pp["elev"] for pp in B.poses]); pl = np.array([pp["plane"] for pp in B.poses])
+        groups = dict(rest=np.argsort(el)[:5], overhead=np.nonzero(el >= 140)[0], across=np.nonzero((pl >= 100) & (el >= 40))[0],
+                      behind=np.array([i for i in range(len(B.idx)) if "back" in B.clip[i].lower() or (pl[i] < -30 and el[i] > 20)], int))
+        out["groups"] = {}
+        for gname, ii in groups.items():
+            ii = list(ii); tk = [i for i in ii if taken(i)]; dd = np.concatenate([B.res[i] for i in tk]) if tk else np.array([np.nan])
+            out["groups"][gname] = dict(taken=f"{len(tk)}/{len(ii)}", median_mm=round(float(np.nanmedian(dd)), 1),
+                                        ib14=round(float(((dd >= 2) & (dd <= 14)).mean()), 3), not_taken={w: int(sum(1 for i in ii if not taken(i) and M.why[i] == w)) for w in set(M.why[ii]) if w})
+        fl = [i for i in range(len(B.idx)) if M.why[i] == "fold" and B.kind[i] == "ws"]
+        thp = np.degrees(np.arccos(np.clip(np.einsum("ni,i->n", M.Q[fl] @ M.D.u[2], M.D.u[0]), -1, 1))) if fl else np.zeros(0)
+        out["fold_ws"] = dict(n=len(fl), th_below=int((thp < M.D.th_tab.min() + FM).sum()), th_above=int((thp > M.D.th_tab.max() - FM).sum()),
+                              window=[round(float(M.D.th_tab.min()), 1), round(float(M.D.th_tab.max()), 1)])
+        out["parts_poses"] = [(lab(i), M.last_pair.get(i)) for i in range(len(B.idx)) if M.why[i] == "parts"][:8]
+        out["contact_poses"] = [(lab(i), M.why[i]) for i in range(len(B.idx)) if M.why[i] in ("skin", "contact")][:12]
+        print(json.dumps(out, default=float, indent=1))
+        if len(sys.argv) > 3 and not sys.argv[3].startswith("--"): json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
+        sys.exit()
     print({k: r[k] for k in ("gap", "reach", "follow", "inband14", "inband10", "contact")}, "why", r["why"], "roll", r.get("roll"),
           "knee", r.get("knee"), f"{time.time() - t:.0f}s", B.mode)
     print("parts", r.get("parts_ib14"), r.get("parts_pairs"), "min clear", r.get("min_clear_taken"), "res", r.get("res_max"))

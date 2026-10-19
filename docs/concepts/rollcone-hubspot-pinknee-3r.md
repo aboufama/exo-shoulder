@@ -20,3 +20,34 @@
 4. **What shows the number is right, other than me.** The bench's report (gap from its own distances), the frozen
    exact Bench(110,360) wear, the auditor / verifier re-run of this model file, and the red-team pose list
    (redteam mode: poses not taken with cause, closest metal per part, near-touch at 1 / 2 mm, named pose groups).
+
+## The model (docs/concepts/models/rollcone-hubspot-pinknee-3r.py)
+
+H1 (skin-normal-3r-pin-knee H-g107-1 seats, O20 v5 J1 / J3, flat two-pin knee on MR63ZZ pairs, stack 6.0, knee window
+[ang_min, 180 - ang_min]) with hub 2 deleted. J2 is a rolling cone pair, apex GH:
+
+- contact generator at rest c = u2 (H1's hub-2 axis, link-1 frame); split direction tb = cos(beta) t0 + sin(beta)
+  (c x t0), t0 = the tangent at c pointing away from u1; sun axis uK = R(c x tb, -alpha_s) c (link 1), planet axis
+  v2 = R(c x tb, +alpha_p) c (link 2);
+- rolling without slip: link 2 = link 1 R(uK, rho y) R(v2, y) R(u2, q2_rest), rho = sin(alpha_p) / sin(alpha_s); the
+  `kin` mode checks numerically that the relative angular velocity lies on the contact line R(uK, rho y) c (error
+  0.003 deg); at rest the chain IS H1;
+- IK: th(y) = angle(u1, J3 direction) tabulated at 0.25 deg; the monotone segment holding the rest is the branch; y by
+  interpolation, q1 / q3 / the knee exactly as H1 (both virtual axes pass GH, so the knee closure theorem holds);
+- fold: the instantaneous dyad (u1, contact line, J3) margin >= 5 deg AND th >= 5 deg from the segment extrema (the
+  two are the same singularity: dth/dy is proportional to u1 . (c x w));
+- metal: a sun band on link 1 and a planet band on link 2, each a 2.5 mm Ti wall + 0.15 mm strap stack, `bh` mm tall
+  radially from ONE level per band (one R_lo for the whole band, never a per-direction contour), the two levels within
+  1.5 mm (common strap radius), sectors = the taken roll span + 3 deg + a 4 mm clamp at each end; bottom edges scored
+  (2 rows across the wall, 2 mm pitch), both faces and the top edge skin-checked (contact only); link 1 hub 1 -> sun
+  band mid sector, link 2 planet band mid sector -> hub 3 (H1 straps, 60 deg ramps, the link end held >= the band
+  bottom); collisions: sun-planet adjacent (0.15 mm) outside 3 mm of the contact line, bands vs hub 1 / hub 3 / the
+  other link / E strap / knee / pad (1 mm), and every H1 pair; seed VModel rules (closure < 0.5 deg, 10 fps continuity
+  incl. the roll and the knee, jam rule).
+
+Spec corrections: (1) the catalogue prices the knee pins as MR63ZZ (stack 6.0) - H1's verified best used 5.68; this
+model uses 6.0 throughout (the lead's build rule). (2) The judge's 25/10/30 reading "planet band in-band 0.007" (sibling
+rolling-cone-3r, which zeroes the roll at the reference Q = I) does not hold with the roll zeroed at REST (the spec): at
+one level both bands read 0.97-0.98 in band (Bench(60,160) fast). (3) The rollcam (non-circular) and the internal
+(ring) cells are NOT modelled here (time box); the external constant-ratio cell was searched over the full spec range
+(alpha_s 8-35, alpha_p 4-16, beta +-60) jointly with H1's seats +-5 deg and the knee.

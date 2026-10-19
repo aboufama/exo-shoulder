@@ -175,9 +175,38 @@ def counterfactual(out_dir):
     print(json.dumps(out, default=float))
 
 
+def clash(out_dir):
+    """M3 probe (fast fit bench): the shoe as the model's own outer_contact draws it (crown over the whole band width,
+    rows s-13..s+15, track bottom rho to crown rho+8, arc Ls about its centre) is a volume; the model samples only its
+    distal wall at rho, and link 2 ends on the band's proximal edge at the window centre c. Count link-2 / link-1 / hub
+    samples inside (or < 1 mm from) that shoe volume over the taken poses."""
+    old = os.environ.pop("CB_EXACT", None)
+    try: B = CB.Bench(n_clip=60, n_ws=160)
+    finally:
+        if old is not None: os.environ["CB_EXACT"] = old
+    B._kitF = K.frames(B); rep = MOD.bench_eval(B, P); D = MOD.design(B, P); L = B._kit_last
+    F = B._kitF; a1, p2, d3, xP, yP, E1, E2, th, ok, margin = MOD.kin(F, P)
+    rho, s = D["rho"], P["s"]; Pi = np.nonzero(L["take"])[0]; hs = P["Ls"] / 2
+    out = dict(report={k: rep[k] for k in KEYS}, rho=round(rho, 2), shoe_volume=dict(w=[s - 13, s + 15], r=[round(rho, 2), round(rho + 8, 2)], arc_deg=P["Ls"]))
+    for nm in ("link2", "link1", "hub2", "hub1", "band", "neck"):
+        X = L["pts"][nm][Pi]                                                              # (n, m, 3) thorax, GH origin
+        w = (X * d3[Pi][:, None]).sum(-1); R = X - w[..., None] * d3[Pi][:, None]; r = np.linalg.norm(R, axis=-1)
+        ps = np.radians(P["phi_s"]); sd = np.cos(ps) * E1[Pi] + np.sin(ps) * E2[Pi]; sd2 = np.cross(d3[Pi], sd)
+        ang = np.degrees(np.arctan2((R * sd2[:, None]).sum(-1), (R * sd[:, None]).sum(-1)))   # angle from the shoe centre
+        t = next(m.t for m in L["chain"].members if m.name == nm)
+        inside = (w >= s - 13 - 1) & (w <= s + 15 + 1) & (np.abs(ang) <= hs + np.degrees(1.0 / max(rho, 1))) & (r + t >= rho - 1) & (r <= rho + 8 + 1)
+        npos = inside.any(1)
+        out[nm] = dict(poses_with_samples_in_shoe_volume=int(npos.sum()), of_taken=int(len(Pi)),
+                       samples_in=int(inside.sum()), example=[dict(i=int(Pi[j]), plane=B.poses[Pi[j]]["plane"], elev=B.poses[Pi[j]]["elev"], axial=B.poses[Pi[j]]["axial"])
+                                                              for j in np.nonzero(npos)[0][:5]])
+    json.dump(out, open(os.path.join(out_dir, f"{ID}_shoe_clash.json"), "w"), indent=1, default=float)
+    print(json.dumps(out, default=float))
+
+
 def main(which, out_dir):
     os.makedirs(out_dir, exist_ok=True)
     if which == "cf": return counterfactual(out_dir)
+    if which == "clash": return clash(out_dir)
     old = os.environ.pop("CB_EXACT", None)
     try: B1 = CB.Bench(n_clip=60, n_ws=160)
     finally:
