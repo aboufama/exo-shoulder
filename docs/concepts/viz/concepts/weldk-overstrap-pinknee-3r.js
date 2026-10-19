@@ -4,15 +4,15 @@
  * normal, line misses GH) and the J3 stack INVERTED: link 2 on hub 3's LOWER plate, member 3 (hub 3's upper member +
  * E strap) leaves hub 3 at F3 + 3.15 and rides over link 2 (stacked-pair rule +0.15 mm in plan view), then the two-pin
  * MR63ZZ knee closes to the arm pad. No hub K, no drive, no J3 stop. Exported from
- * docs/concepts/models/weldk-overstrap-pinknee-3r.py at its best screened configuration on Bench(60,160) (fast 39.93, round-301 CMA best, inverted knee stack kinv 1).
+ * docs/concepts/models/weldk-overstrap-pinknee-3r.py at its best screened configuration on Bench(60,160) (fast 39.09, the CMA best, inverted knee stack kinv 1; frozen exact Bench(110,360) 49.07 at the 39.93 neighbour).
  * Red = the J2 fold (J1-J3 axis-angle window, 5 deg margin) or the knee outside [ang_min, 180 - ang_min] / its span. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;
   // best configuration (bench model parameters) and the home-frame geometry the model builds from it (exported from the
   // model's Design / fit on Bench(60,160): axis directions u, line points c, hub face levels f along u, hub 3's plane
   // basis sa / st / sn = u3, mid drift m, knee level tr, pin a / pin b home points, fitted link centrelines)
-  const P = {"az1": 95.3929, "el1": 67.8974, "az2": 28.811, "el2": 47.408, "wd": 99.185, "wa": 7.994, "b3": 0.673, "lE": 33.69, "lc": 22.968, "phiE": 41.08, "phib": -58.578, "stk": 6.0, "ang_min": 30.17};
-  const G = {"u":[[0.03536,0.92651,0.3746],[-0.55226,0.66122,0.50775],[0.19003,0.32315,0.92707]],"c":[[0.0,0.0,0.0],[-0.0,0.0,-0.0],[-1.574,-9.428,3.609]],"sa":[0.06489,-0.94635,0.31657],"st":[0.97963,0.0,-0.20081],"sn":[0.19003,0.32315,0.92707],"A":[38.437,54.589],"branch":-1.0,"m":[-9.954,2.267,0.0],"f":[49.88,62.47,62.17],"tr":60.87,"tp":2.75,"RUN":0.5,"SING":5.0,"hr":[10.0,10.0,10.0],"UP":3.15,"zb":64.12,"zk":60.87,"A0":[21.761,-33.46,7.203],"A0m":[23.336,-24.04,3.596],"Bm":[4.912,-35.372,11.323],"eE":[0.69264,-0.71335,0.10667],"eK":[-0.80214,-0.49337,0.3364],"L1":[[-8.14,46.47,22.92],[-9.49,43.8,22.36],[-12.19,43.38,23.31],[-15.8,45.35,25.63],[-20.35,48.37,28.8],[-25.3,51.01,31.97]],"L2":[[-27.97,39.15,43.18],[-22.01,33.96,43.68],[-18.93,32.26,47.0],[-15.62,30.22,49.89],[-11.43,27.4,52.82],[-7.83,24.82,54.85],[-4.15,22.03,56.42],[0.34,18.9,59.2]]};
+  const P = {"az1": 95.3929, "el1": 67.8974, "az2": 29.3466, "el2": 47.9274, "wd": 99.6817, "wa": 8.5831, "b3": 0.6991, "lE": 31.81, "lc": 22.9242, "phiE": 41.3818, "phib": -50.305, "stk": 6.0, "ang_min": 31.2052};
+  const G = {"u":[[0.03536,0.92651,0.3746],[-0.54303,0.66754,0.50943],[0.20559,0.33026,0.92123]],"c":[[0.0,0.0,0.0],[-0.0,0.0,-0.0],[-1.879,-9.357,3.774]],"sa":[0.07193,-0.94389,0.32233],"st":[0.97599,0.0,-0.21781],"sn":[0.20559,0.33026,0.92123],"A":[37.804,54.682],"branch":-1.0,"m":[-9.912,2.651,0.0],"f":[49.64,61.83,61.37],"tr":60.93,"tp":2.75,"RUN":0.5,"SING":5.0,"hr":[10.0,10.0,10.0],"UP":3.15,"zb":64.18,"zk":60.93,"A0":[20.362,-31.886,6.887],"A0m":[22.236,-22.53,3.115],"Bm":[6.073,-36.35,11.676],"eE":[0.69917,-0.70822,0.09786],"eK":[-0.70504,-0.60286,0.37346],"L1":[[-7.92,46.25,22.78],[-9.28,43.79,22.33],[-11.92,43.38,23.27],[-15.35,45.04,25.41],[-19.76,48.05,28.53],[-24.57,50.68,31.66]],"L2":[[-27.03,39.2,42.79],[-21.34,34.31,43.61],[-18.25,32.62,46.9],[-14.92,30.59,49.77],[-10.75,27.82,52.74],[-7.14,25.2,54.68],[-3.47,22.42,56.26],[1.0,19.18,58.64]]};
   const u = G.u, c = G.c, sn = G.sn, sa = G.sa, st = G.st, a1 = G.A[0], a2 = G.A[1], hub = 12.25, rad = 10;
   const wrapR = a => { a = (a + Math.PI) % (2 * Math.PI); return (a < 0 ? a + 2 * Math.PI : a) - Math.PI; };
   const pe = P.phiE * D2R, pb = P.phib * D2R, lE = P.lE, lc = P.lc;

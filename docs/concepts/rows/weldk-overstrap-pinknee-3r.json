@@ -1,0 +1,716 @@
+{
+ "id": "weldk-overstrap-pinknee-3r",
+ "name": "Welded-K crossover pin-knee 3R (cx 0): lead J1, straight link 1, J3 re-aimed (station ~(95-99, 7-8), b3 ~0.6-0.67), link 2 on hub 3 lower plate, E strap stacked over link 2, two-pin MR63ZZ knee, no K / drive / J3 stop",
+ "lens": "round301:drive-free-cone (O1 overhead track)",
+ "family": "plain spherical 3R + two-pin cuff knee (H1 family) with the inverted J3 stack",
+ "active_dof": 3,
+ "passive_dof": 2,
+ "passive_translations": 0,
+ "status": "screened",
+ "t_ideated": "2026-10-19T01:32:54Z",
+ "t_screened": "2026-10-19T02:27:34Z",
+ "reach": 0.7188,
+ "follow": 0.9333,
+ "inband14": 0.7354,
+ "inband10": 0.4397,
+ "contact": 0.0284,
+ "gap": 39.09,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 191,
+ "verdict": "screened (sweep not converged; recommend stop): fast best 39.09 on Bench(60,160), worn FROZEN on Bench(110,360) exact 45.96 (score 83.3; reach 0.631, follow 0.927, ib14 0.742, contact 0.009), overhead 7/28 (lead 8, H1 5), all in the 0-2.6 mm shell; fails the judge's kill line (> 27.20), follow < 0.95 and the step-0 E-strap test (0.48 < 0.80). cx 0, 0 passive translations.",
+ "limiter": "the re-aimed J3 station (wd ~99, wa ~8.5, b3 ~0.7) opens the abduction cone kinematically (0 cone folds) but hub 3 sits 8-18 mm inside the bunched deltoid there at its fitted level (209 -17.7, 236 -16.5, 292 -15.4, 263 -9.1, 237 -7.9 mm; neighbour), and the knee lands on skin falling away from hub 3's plane (boss 0.19, pad 0.24, knee 0.39, E 0.48 in band); hub 2 at the lead J1 / a1 ~41 parks 15-27 mm high on 3 pure-abduction poses (dg pre-drop needed)",
+ "note": "Bench(60,160) fast fit (H1 code path: exact IK, two-circle knee, seed VModel rules, MR63ZZ stk 6.0, O20, margin 5); E strap stacked over link 2 by a plan-view rule (+0.15 mm) over every kept pose; inverted knee stack (kinv 1) chosen by the CMA. Controls: over=0 at H1 params reproduces H1 fit 23.64 exactly; over=1 at H1 params 23.43 (crossover free where E points into link 2's free sector). Gate (191 configs): +1.44 score points over the 2nd half, +0.67 over the last third, top-5 spread 0.33 -> NOT converged. Frozen exact best 45.96 / neighbour 49.07; near1 53.04, near2 90.67, min metal 0.07 mm (ws 345); min th margin 5.262. Held not run (bench claim already fails).",
+ "doc": "docs/concepts/weldk-overstrap-pinknee-3r.md",
+ "model_file": "docs/concepts/models/weldk-overstrap-pinknee-3r.py",
+ "best_k": 152,
+ "best_params": {
+  "az2": 29.3466,
+  "el2": 47.9274,
+  "wd": 99.6817,
+  "wa": 8.5831,
+  "b3": 0.6991,
+  "lE": 31.81,
+  "lc": 22.9242,
+  "phiE": 41.3818,
+  "phib": -50.305,
+  "ang_min": 31.2052,
+  "dg": 15.8681,
+  "kinv": 1
+ },
+ "exact_frozen": {
+  "protocol": "fit Bench(60,160) fast, shape frozen, worn on Bench(110,360) exact (round-3 / H1 protocol), margin 5, O20, stk 6.0",
+  "fit_fast": {
+   "gap": 39.09,
+   "reach": 0.7188,
+   "follow": 0.9333,
+   "inband14": 0.7354,
+   "inband10": 0.4397,
+   "contact": 0.0284
+  },
+  "frozen": {
+   "gap": 45.96,
+   "reach": 0.6306,
+   "follow": 0.9273,
+   "inband14": 0.7415,
+   "inband10": 0.4473,
+   "contact": 0.009
+  },
+  "why": {
+   "fold": 104,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 34,
+   "contact": 3
+  },
+  "parts_pairs": {
+   "E-L2stack": 18,
+   "L1-L2": 11,
+   "knee-E": 5
+  },
+  "parts_ib14": {
+   "hub1": [
+    0.993,
+    7.8,
+    80
+   ],
+   "hub2": [
+    0.914,
+    11.8,
+    80
+   ],
+   "hub3": [
+    0.935,
+    9.5,
+    80
+   ],
+   "E": [
+    0.478,
+    14.2,
+    32
+   ],
+   "boss": [
+    0.186,
+    19.9,
+    32
+   ],
+   "pad": [
+    0.235,
+    16.5,
+    32
+   ],
+   "knee": [
+    0.393,
+    15.5,
+    85
+   ],
+   "L1": [
+    0.869,
+    6.5,
+    32
+   ],
+   "L2": [
+    0.953,
+    8.4,
+    88
+   ]
+  },
+  "overhead_ws": {
+   "n": 28,
+   "taken": 7,
+   "why": {
+    "parts": 9,
+    "fold": 11,
+    "contact": 1
+   }
+  },
+  "mid_ws_90_140": {
+   "n": 85,
+   "taken": 37
+  },
+  "min_th_margin_taken": 5.262,
+  "stacked_min_taken": 1000000000.0,
+  "knee_ang": [
+   59.9,
+   125.9
+  ],
+  "named": {
+   "205": {
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": 15.0,
+    "taken": true,
+    "min_mm": 3.13,
+    "why": ""
+   },
+   "235": {
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 135.0,
+    "axial": 0.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "parts"
+   },
+   "262": {
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 135.0,
+    "axial": 0.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "parts"
+   },
+   "237": {
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": -60.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "parts"
+   },
+   "264": {
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -60.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "parts"
+   },
+   "209": {
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 150.0,
+    "axial": -15.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "parts"
+   },
+   "236": {
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 150.0,
+    "axial": -30.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "parts"
+   },
+   "263": {
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -30.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "parts"
+   },
+   "292": {
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -15.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "parts"
+   },
+   "316": {
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 150.0,
+    "axial": -105.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "fold"
+   }
+  },
+  "f": [
+   49.64,
+   61.83,
+   61.37
+  ],
+  "tr": 60.93,
+  "secs": 187.9,
+  "params": {
+   "az2": 29.3466,
+   "el2": 47.9274,
+   "wd": 99.6817,
+   "wa": 8.5831,
+   "b3": 0.6991,
+   "lE": 31.81,
+   "lc": 22.9242,
+   "phiE": 41.3818,
+   "phib": -50.305,
+   "ang_min": 31.2052,
+   "dg": 15.8681,
+   "kinv": 1
+  },
+  "near_touch": {
+   "min_mm": 0.07,
+   "gap_near1": 53.04,
+   "gap_near2": 90.67,
+   "near1_poses": 8,
+   "near2_poses": 49,
+   "low": [
+    {
+     "mm": 0.07,
+     "i": 345,
+     "kind": "ws",
+     "plane": 75.0,
+     "elev": 165.0,
+     "axial": -75.0
+    },
+    {
+     "mm": 0.3,
+     "i": 118,
+     "kind": "ws",
+     "plane": -90.0,
+     "elev": 60.0,
+     "axial": 75.0
+    },
+    {
+     "mm": 0.41,
+     "i": 8,
+     "kind": "clip",
+     "plane": 30.0,
+     "elev": 150.0,
+     "axial": -60.0
+    },
+    {
+     "mm": 0.41,
+     "i": 9,
+     "kind": "clip",
+     "plane": 30.0,
+     "elev": 150.0,
+     "axial": -60.0
+    },
+    {
+     "mm": 0.41,
+     "i": 10,
+     "kind": "clip",
+     "plane": 30.0,
+     "elev": 150.0,
+     "axial": -60.0
+    }
+   ]
+  },
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.25,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.8184,
+   "inband10": 0.6863,
+   "why_not": {
+    "fold": 11,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 9,
+    "contact": 1
+   }
+  }
+ },
+ "exact_frozen_neighbour": {
+  "params": {
+   "az2": 28.811,
+   "el2": 47.408,
+   "wd": 99.185,
+   "wa": 7.994,
+   "b3": 0.673,
+   "lE": 33.69,
+   "lc": 22.968,
+   "phiE": 41.08,
+   "phib": -58.578,
+   "ang_min": 30.17,
+   "dg": 17.146,
+   "kinv": 1
+  },
+  "fit_fast": {
+   "gap": 39.93,
+   "reach": 0.725,
+   "follow": 0.9333,
+   "inband14": 0.7206,
+   "inband10": 0.4202,
+   "contact": 0.0282
+  },
+  "frozen": {
+   "gap": 49.07,
+   "reach": 0.6417,
+   "follow": 0.9364,
+   "inband14": 0.7269,
+   "inband10": 0.425,
+   "contact": 0.0457
+  },
+  "why": {
+   "fold": 100,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 20,
+   "contact": 16
+  },
+  "parts_pairs": {
+   "knee-E": 6,
+   "E-L2stack": 2,
+   "L1-L2": 12
+  },
+  "parts_ib14": {
+   "hub1": [
+    0.995,
+    8.1,
+    80
+   ],
+   "hub2": [
+    0.862,
+    12.2,
+    80
+   ],
+   "hub3": [
+    0.901,
+    10.1,
+    80
+   ],
+   "E": [
+    0.399,
+    14.7,
+    36
+   ],
+   "boss": [
+    0.17,
+    20.3,
+    32
+   ],
+   "pad": [
+    0.311,
+    15.6,
+    32
+   ],
+   "knee": [
+    0.412,
+    15.5,
+    85
+   ],
+   "L1": [
+    0.861,
+    6.8,
+    32
+   ],
+   "L2": [
+    0.945,
+    8.3,
+    88
+   ]
+  },
+  "overhead_ws": {
+   "n": 28,
+   "taken": 6,
+   "why": {
+    "contact": 10,
+    "fold": 11,
+    "parts": 1
+   }
+  },
+  "mid_ws_90_140": {
+   "n": 85,
+   "taken": 40
+  },
+  "min_th_margin_taken": 5.078,
+  "stacked_min_taken": 0.15,
+  "near_touch": {
+   "min_mm": 0.25,
+   "gap_near1": 54.04,
+   "gap_near2": 89.06
+  },
+  "named": {
+   "205": {
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": 15.0,
+    "taken": true,
+    "min_mm": 3.09,
+    "why": ""
+   },
+   "235": {
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 135.0,
+    "axial": 0.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "contact"
+   },
+   "262": {
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 135.0,
+    "axial": 0.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "contact"
+   },
+   "237": {
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": -60.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "contact"
+   },
+   "264": {
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -60.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "contact"
+   },
+   "209": {
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 150.0,
+    "axial": -15.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "contact"
+   },
+   "236": {
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 150.0,
+    "axial": -30.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "parts"
+   },
+   "263": {
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -30.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "contact"
+   },
+   "292": {
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -15.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "contact"
+   },
+   "316": {
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 150.0,
+    "axial": -105.0,
+    "taken": false,
+    "min_mm": null,
+    "why": "fold"
+   }
+  }
+ },
+ "cone_part_attribution": {
+  "note": "exact skin distance (mm, negative = inside) per part at the cone / shell poses, frozen shape of the neighbour (fast 39.93); kin = not closing",
+  "poses": {
+   "209": {
+    "hub1": 0.79,
+    "hub2": 5.38,
+    "hub3": -17.71,
+    "E": 1.18,
+    "boss": 17.93,
+    "pad": 27.47,
+    "knee": 15.58,
+    "L1": 3.56,
+    "L2": 2.69,
+    "contact_only_min": -19.22,
+    "clear": 4.72,
+    "pair": "E-L2stack"
+   },
+   "236": {
+    "hub1": 0.6,
+    "hub2": 6.66,
+    "hub3": -16.48,
+    "E": -0.25,
+    "boss": 13.72,
+    "pad": 26.01,
+    "knee": 13.77,
+    "L1": 3.97,
+    "L2": -0.78,
+    "contact_only_min": -18.25,
+    "clear": -1.0,
+    "pair": "E-L2stack"
+   },
+   "237": {
+    "hub1": -0.15,
+    "hub2": 9.04,
+    "hub3": -7.93,
+    "E": 1.6,
+    "boss": 12.17,
+    "pad": 22.61,
+    "knee": 10.11,
+    "L1": 4.8,
+    "L2": -4.81,
+    "contact_only_min": -8.13,
+    "clear": 4.85,
+    "pair": "E-L2stack"
+   },
+   "263": {
+    "hub1": 0.86,
+    "hub2": 8.87,
+    "hub3": -9.12,
+    "E": 4.21,
+    "boss": 17.16,
+    "pad": 25.88,
+    "knee": 15.15,
+    "L1": 4.7,
+    "L2": 2.73,
+    "contact_only_min": -9.74,
+    "clear": 3.24,
+    "pair": "E-L2stack"
+   },
+   "264": {
+    "hub1": 0.33,
+    "hub2": 1.9,
+    "hub3": 0.12,
+    "E": 6.51,
+    "boss": 15.02,
+    "pad": 20.03,
+    "knee": 11.93,
+    "L1": 4.05,
+    "L2": -1.41,
+    "contact_only_min": -1.06,
+    "clear": 8.83,
+    "pair": "E-L2stack"
+   },
+   "292": {
+    "hub1": -0.09,
+    "hub2": 9.56,
+    "hub3": -15.44,
+    "E": -3.21,
+    "boss": 5.55,
+    "pad": 23.78,
+    "knee": 6.44,
+    "L1": 4.35,
+    "L2": -3.89,
+    "contact_only_min": -16.05,
+    "clear": 3.2,
+    "pair": "E-L2stack"
+   },
+   "235": {
+    "hub1": 1.71,
+    "hub2": 5.17,
+    "hub3": -6.44,
+    "E": 12.17,
+    "boss": 21.79,
+    "pad": 28.4,
+    "knee": 18.98,
+    "L1": 3.19,
+    "L2": 11.17,
+    "contact_only_min": -6.9,
+    "clear": 5.36,
+    "pair": "E-L2stack"
+   },
+   "262": {
+    "hub1": 1.6,
+    "hub2": 4.15,
+    "hub3": -8.01,
+    "E": 9.07,
+    "boss": 22.72,
+    "pad": 29.93,
+    "knee": 20.28,
+    "L1": 3.12,
+    "L2": 10.02,
+    "contact_only_min": -8.7,
+    "clear": 5.04,
+    "pair": "E-L2stack"
+   },
+   "210": {
+    "hub1": -0.41,
+    "hub2": 8.23,
+    "hub3": -25.55,
+    "E": -11.25,
+    "boss": 1.44,
+    "pad": 15.15,
+    "knee": 1.46,
+    "L1": 3.94,
+    "L2": -10.45,
+    "contact_only_min": -30.32,
+    "clear": 3.19,
+    "pair": "E-L2stack"
+   },
+   "316": {
+    "kin": "fold"
+   },
+   "343": {
+    "kin": "fold"
+   }
+  }
+ },
+ "controls": {
+  "h1_params_over0_fast": 23.64,
+  "h1_params_over1_fast": 23.43,
+  "best1_over0_fast": 90.77,
+  "best1_over1_fast": 39.93,
+  "note": "over=0 = H1 stack order; at H1 own params the model reproduces H1 fit_gap 23.64 exactly"
+ },
+ "step0_E_inband": {
+  "best": 0.478,
+  "best_over0_control": 0.533,
+  "range_taking_configs": "0.38-0.66",
+  "threshold": 0.8,
+  "verdict": "KILL (judge step-0 rule)"
+ },
+ "gate": {
+  "n": 191,
+  "best": 39.09,
+  "gain_2nd_half": 1.44,
+  "gain_last_third": 0.67,
+  "top5_spread": 0.33,
+  "converged": false
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 7,
+  "catalogue_parts": 6,
+  "notes": "H1 count with the K, drive and J3 stop deleted: bodies link 1, link 2, member 3 (hub 3 upper member + E strap + E boss); joints J1-J3 O20 v5 hubs (MR117-2RS pairs); the two-pin knee (pins a, b, MR63ZZ pairs, knee link, arm pad) is the cuff_knee block (simplicity v2.1/v2.2: 0, no encoders). custom: base, 2 links, member 3, 3 hub shafts (7); catalogue: 3 x MR117 pair x2 (6).",
+  "source": "docs/concepts/models/weldk-overstrap-pinknee-3r.py:1-25",
+  "confidence": "counted (proposer; checker to confirm)",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 4,
+   "bearings": "4 x MR63ZZ (3 x 6 x 2.5)",
+   "stop": "physical knee window [ang_min, 180 - ang_min] (dowel in an arc slot)"
+  }
+ },
+ "complexity": 0.0
+}

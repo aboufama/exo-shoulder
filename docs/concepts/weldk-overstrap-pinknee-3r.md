@@ -30,15 +30,18 @@ changes only the J3 stack order and the E-strap / link-2 rule). Sweep: `docs/con
 
 ## Results (2026-10-19, round 301 screen; local CPU only, farm closed)
 
-**Verdict: fails every gate the judge set for it.** Best fast fit 39.93 on Bench(60,160) (CMA, ~150 configurations,
-not converged), worn FROZEN on Bench(110,360) exact: **49.07** (score 82.2; reach 0.6417, follow 0.9364, ib14 0.7269,
-ib10 0.425, contact 0.0457) against the kill line 27.20 (H1) and the pass line 26.0; follow < 0.95 (the judge's second
-kill condition); step-0 E-strap in-band **0.38-0.66 < 0.80** in every configuration that takes poses at the spec's J3
-station. Overhead (elev >= 140, ws) **6/28** (the lead 8/28, H1 5/28), every one of the 6 in the 1-2.5 mm shell
-(1.27-2.49 mm); elev 90-140 band 40/85 (lead 39/85). Near-touch: min 0.25 mm, gap with metal < 1 mm as contact 54.04,
-< 2 mm 89.06 (46 poses in the 2 mm shell). Min th margin over taken poses 5.078 deg; stacked-pair (E over link 2)
-minimum over taken poses exactly 0.15 mm (the rule binds). Complexity 0.0 (tools/simplicity.py v2.2 --score on the
-row's mechanism record; the knee is the free cuff_knee block). 0 passive translations.
+**Verdict: fails every gate the judge set for it.** Best fast fit **39.09** on Bench(60,160) (CMA, 191 configurations,
+not converged; params in the row), worn FROZEN on Bench(110,360) exact: **45.96** (score 83.3; reach 0.6306, follow
+0.9273, ib14 0.7415, ib10 0.4473, contact 0.009) against the kill line 27.20 (H1) and the pass line 26.0; follow < 0.95
+(the judge's second kill condition); step-0 E-strap in-band **0.38-0.66 < 0.80** in every configuration that takes
+poses at the spec's J3 station (0.48 at the best). Overhead (elev >= 140, ws) **7/28** (the lead 8/28, H1 5/28), every
+one in the 1-2.6 mm shell or below (0.07, 1.04, 1.13, 1.18, 1.69, 1.74, 2.59 mm); elev 90-140 band 37/85 (lead 39/85).
+Near-touch: min 0.07 mm (ws 345, plane 75 / elev 165 / axial -75), gap with metal < 1 mm as contact 53.04, < 2 mm 90.67
+(49 poses in the 2 mm shell). Min th margin over taken poses 5.262 deg. Not taken: fold 104, part jams 34 (E-over-L2
+stacked 18 - every cone pose 209 / 235 / 236 / 262 / 263 / 292 -, L1-L2 11, knee-E 5), contact 3. Its CMA neighbour
+(fast 39.93) reads 49.07 frozen exact (overhead 6/28, contact 0.0457: the cone poses are contacts there, see below).
+Complexity 0.0 (tools/simplicity.py v2.2 --score on the row's mechanism record; the knee is the free cuff_knee block).
+0 passive translations. Claim files: the row's `exact_frozen` (best) and `exact_frozen_neighbour`.
 
 ### Code check (the model is H1 where it should be)
 
@@ -49,7 +52,8 @@ crossover is free there and passes the step-0 test). The losses below are the sp
 
 ### What limits it (measured)
 
-1. **Hub 3 at the re-aimed J3 station dives into the bunched deltoid at the cone.** The J3 re-aim works
+1. **Hub 3 at the re-aimed J3 station dives into the bunched deltoid at the cone** (measured on the 39.93 neighbour,
+   where the cone poses reach the skin check; at the best they jam first on the E-over-link-2 stack). The J3 re-aim works
    kinematically: the cone poses the lead loses to fold / J3 stop (209, 210, 236, 237, 263, 264, 292) all CLOSE here
    (0 cone folds). But worn frozen they are contacts: hub 3 sits **-17.7 (209), -16.5 (236), -7.9 (237), -9.1 (263),
    -15.4 (292), -25.6 (210)** mm inside the skin (exact distance, frozen shape; `conepart` probe, scratch), hub 1 at
@@ -87,8 +91,9 @@ crossover is free there and passes the step-0 test). The losses below are the sp
 
 ~150 configurations on Bench(60,160) fast (2 local processes, nice 10): 4 probes, a 64-config LHS over the spec box
 (random knees mostly fail the knee window), a knee-aware LHS (phib from a mid knee angle), then three CMA-ES runs
-(kinv 0, kinv 1, kinv 1 restart). Best fast 39.93 (kinv 1). Gate numbers are in the row (`gate`): the search was still
-gaining, so by the binding rule this is **screened, not dead** - but the frozen exact read (49.07) is 22 points past the
+(kinv 0, kinv 1, kinv 1 restart). Best fast 39.09 (kinv 1). Gate numbers are in the row (`gate`): the search was still
+gaining (gate: +1.44 score points over the 2nd half, +0.67 over the last third, top-5 spread 0.33), so by the binding
+rule this is **screened, not dead** - but the frozen exact read (45.96) is ~19 points past the
 kill line and the measured limiter (hub 3 inside the bunched deltoid at the cone) is geometric, so the recommendation
 is to stop here rather than spend the farm on it.
 
@@ -98,8 +103,8 @@ is to stop here rather than spend the farm on it.
   is 16.5 mm in the skin; link 2 / link 1 crossings (L1-L2 12 poses) are the most common jam.
 - The point that pinches: ws 118 (plane -90, elev 60, axial 75, behind the back) 0.25 mm; 313 (60 / 120 / -105) 0.42;
   288 (45 / 135 / -60) 0.59; clips 8 / 9 (30 / 150 / -60) 0.97 mm.
-- The optimistic number: the fast fit (39.93) - worn frozen exact it is 49.07; and every overhead take sits at
-  1.27-2.49 mm (the 2 mm reading is 89.06).
+- The optimistic number: the fast fit (39.09) - worn frozen exact it is 45.96; and every overhead take sits at
+  0.07-2.59 mm (the 2 mm reading is 90.67).
 - Held out: not run (the bench claim already fails the kill line; held cannot rescue it and must not be used to tune).
 
 ### New knowledge
