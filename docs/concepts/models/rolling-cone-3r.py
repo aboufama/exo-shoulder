@@ -210,9 +210,25 @@ def check_rolling():
         print(f"t {t:+.2f}: angle(omega, contact) {np.degrees(np.arccos(abs(unit(om) @ wn))):.2e} deg, |omega| {np.linalg.norm(om):.4f}")
 
 
+def export_viz(cell, seats=H1):
+    """geometry for docs/concepts/viz/concepts/rolling-cone-3r.js: per joint the sun / planet cone axes, the contact at
+    rest, the ratio r (all in the scapula frame at the reference configuration Q = I), the rest-pose joint values"""
+    G = Ghost(cell, seats); spec = importlib.util.spec_from_file_location("osn_rc2", os.path.join(HERE, "offset-skin-normal-3r.py"))
+    OSN = importlib.util.module_from_spec(spec); spec.loader.exec_module(OSN); Q0 = OSN.rest()["Q0"]
+    ok, t, m, th = G.take(Q0[None])
+    J = []
+    for j in G.j:
+        if j.kind == "pin": J.append(dict(kind="pin", w=[round(float(x), 5) for x in j.w]))
+        else: J.append(dict(kind="roll", c=[round(float(x), 5) for x in j.c], m0=[round(float(x), 5) for x in j.m0],
+                            w=[round(float(x), 5) for x in j.w], r=round(float(j.r), 5), ga=j.ga, gb=j.gb))
+    return dict(J=J, rigid=int(G.rigid), u3h=[round(float(x), 5) for x in G.u3h], branch=G.branch,
+                t_rest_deg=[round(float(x), 3) for x in np.degrees(t[0])], rest_ok=bool(ok[0]), rest_margin=round(float(m[0]), 2))
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "ghost"
     if cmd == "checkroll": check_rolling(); sys.exit()
+    if cmd == "viz": print(json.dumps(export_viz(json.loads(sys.argv[2])))); sys.exit()
     cell = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
     t0 = time.time(); res, _ = run(cell); res["sec"] = round(time.time() - t0, 1)
     print(json.dumps(dict(cell=cell, **res)))
