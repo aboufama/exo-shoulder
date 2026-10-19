@@ -153,4 +153,81 @@ dyads within ~7 deg of the lead's K axis.
   1.25 (no undercut). The relative-pole approach is 0.049 mm per deg.
 - **The point that pinches.** The chain's new contact is pose 139 (plane -60, elev 60, axial 105: across-the-body ER),
   0.2-0.5 mm into the skin at hub K / hub 2. The worst contact is the lead's own pose 237 (15 / 165 / -60), -5.45 mm on hub 2.
-- **The drive metal** is the real test: see step 1b.
+- **The drive metal** is the real test: see step 1b. It fails.
+
+## Step 1b - the drive metal (proxy on the frozen ghost's 371 taken poses, Bench(110,360) exact)
+
+Script: scratch `slowpole/metal.py`. It places an O6 x 3 lug with an O2.5 pin, 2 mm proud, on hub 2's rotor (link 2)
+at the pin radius, plus the slot plate (locus +-3 mm, 1.5 mm thick, at the pin top) on link 1a. Each face is
+skin-checked with the bench's signed distance, using the shortk row's metal-proxy transforms. The level is the lug's
+underside above hub 2's skin-side face f2 = 62.2 mm.
+
+| pin (r mm / phase) | lug level | lug contacts (min mm) | pin contacts (min) | plate contacts (min) |
+|---|---|---|---|---|
+| 18 / 5 (the slot law's pin) | hub face (0) | 31 (-8.3) | 19 (-7.1) | 30 (-10.1) |
+| 18 / 5 | top of the stack (+9.25) | 20 (-10.6) | 16 (-9.2) | 23 (-12.0) |
+| 13.5 / 5 (closest legal lug) | +9.25 | 14 (-5.6) | 12 (-3.9) | 15 (-6.3) |
+
+The worst poses are always the same overhead set: the clip frames 7-12 at plane 30 / elev 142-150 / axial -60, plus
+ws 287 (45 / 120 / -30) and 290 (45 / 150 / -45). There the arm's own bulk rises beside hub 2, so raising the lug makes
+it worse. The lead's link-2 sweep proxy shows the same: 2 contacts at -14 mm for a link-2 point 12 deg from u2. The spec's
+kill is > 4 sweep contacts; this is 12-31.
+
+Caveat: only phase 5 was skin-checked. The other lock-safe, PA-passing placements on 32/38 are r 18-20 at phase 5-15,
+next to it, so a fix by phase alone is not expected.
+
+## Verdict
+
+**DEAD.** Two pre-registered kills are met.
+
+1. **The spec cell fails step 0.** On a 40/40 dyad with rho 0.5, the law-only ghost reads **40.17** frozen exact
+   Bench(110,360): 254 ws takes and 17 contacts, against the 19.0 / 258 gate. The cause is hub K. The long symmetric
+   dyad moves K's axis 14.6 deg, to where hub K must stand 45.7 mm off the skin.
+2. **The limiter variant survives step 0 but fails step 1.**
+   - **Step 0.** On 32/38 (uK 6.4 deg off the lead's), the ghost bound is **18.83** at any law from rho 0.67 to 1.04:
+     261 takes, 5 contacts, ib14 0.908-0.920, overhead 8/28. That is the lead's 18.28 minus one take and plus one
+     contact.
+   - **The constant-ratio slot.** It cannot carry the law at PA <= 38 at any pin placement.
+   - **The variable-ratio slot.** It can (rho 0.62-0.94 at a pin r 18 mm / phase 5, onset th 66, dwell lock <= 36 deg).
+   - **The metal.** The pin lug and slot plate sit 4-12 mm inside the skin on 12-31 overhead poses.
+
+Even as a ghost the row cannot pass the lead (18.83 > 18.28), and the free-K oracle caps it at 17.69. Its only possible
+value was the Pareto cell, cx 10.75 at <= 18.95. The ghost leaves 0.12 points of room there, and the drive metal costs
+far more.
+
+**Convergence gate (stated, not passed):**
+- 5 ghost configurations;
+- best gain over the second half 0.0 points and over the last third 0.0;
+- top-5 spread 7.75 score points (21.3 gap, the 40/40 spec cell included);
+- 0.20 points over the four limiter variants.
+
+The death rests on the pre-registered kills and on the closed-form scans, which are exhaustive over pin placements
+(12,672 constant-ratio and 576 variable-ratio slots), not on a search optimum.
+
+## New knowledge (predicts beyond this row)
+
+1. **A slow K law is free on a mid dyad; a long dyad is not.** With msub >= 5, the law's onset and rate do not move the
+   ghost: 32/38 reads 18.83 at rho 0.67 / 0.84 / 1.04, and 34/30 reads 18.83 at rho 1.1-2.5. What costs points is
+   where uK sits. The hub-K proximity cliff:
+
+   | uK shift from the lead | ghost |
+   |---|---|
+   | 6.4 deg | 18.83 |
+   | 8.1 deg | 19.38 |
+   | 14.6 deg | 40.17 (hub K in band 0.03, 45.7 mm median) |
+
+   So any re-seated-K drive must keep uK within ~7 deg of the lead's.
+2. **A single pin in a slot cannot hold a constant ratio over a long stroke.** The relative pole is fixed, so the PA
+   band is the Thales neighbourhood of uK-P. With a variable ratio the pole moves with the pin, and one pin then carries
+   the full stroke from r ~11 mm upward (faster laws need larger r).
+3. **A dwell arc concentric with J2 unlocks K where the pin crosses the J2-K great circle** (lock angle 90). A
+   form-closed dwell-and-rise slot needs the pin's whole phase sweep (dwell + rise, ~100-120 deg about u2) on one side
+   of that circle. That rules out the slow, small-radius placements.
+4. **Any link-2-mounted drive element outside hub 2's rim (r >= 13.5 mm) goes 4-12 mm into the skin at overhead IR**
+   (plane 30-45, elev 142-150, axial -45 to -60), because the arm rises beside hub 2. Raising the element makes it
+   worse. Drives for K must live on link 1a / 1b or inside hub 2's rim.
+
+## What next
+
+The fold lever cannot come from a re-seated K with a link-2 pin. The open cells are a K drive whose drive element stays
+on links 1a / 1b or inside hub 2's O20 rim (the lead's lobe class, priced 18.5), and round 301's mirrored-K crossover.

@@ -3870,7 +3870,7 @@
   "name": "Slow-pole cam-slot knuckle: the lead's chain with a 40/40 K dyad, a slow law (rho 0.5, onset th 57.2, stroke 30.3 deg) and ONE crowned pin on hub 2's rotor rim in a form-closed dwell-and-rise slot on a link-1a plate (no spring, no crank); the rim-roller and spherical-coupler drives are step-1 fallbacks on the same ghost",
   "family": "slaved-knuckle 3R with a pin knee (the lead family), one-loop form-closed drive; the 40/40 re-dyad of onetooth-slowlaw-knuckle-3r's spring-free cell D",
   "lens": "round501:rod-dwell-lowcx (lens B)",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-19T02:38:53Z",
   "source": "round 501 (G1, track golden) judge (docs/concepts/round501_ideation.md)",
   "merged_from": [
