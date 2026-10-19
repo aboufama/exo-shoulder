@@ -250,3 +250,80 @@ Action: report a per-part exact standoff (median and p90) beside in-band.
    the record is matched against `v_gap`, which is null, so the error is the full gap. Match it against the ledger's
    claim (`claim_of`) instead. Likewise, let `c_fold_margin` read a re-measured `th_margin` from
    `remeasure/<id>_*.json`. Effect on verified rows: none, because they have v_gap.
+
+## Skeptic (2026-10-19, about 03:45-04:12 UTC)
+
+Run label `skeptic:fold-sph3r`. My rulings are in `docs/alignment/fold-sph3r.rulings.json`. Final verdict, as computed
+by `tools/alignment_ledger.py skeptic`: **WATCH (2 of 8 reasons refuted, near_touch and fold_margin; 6 upheld, all at watch)**.
+
+**What I re-measured, and how.**
+- I wrote my own re-wear, `tools/alignment_fsph3r_skeptic.py`, a new file. It does not import the auditor's adapter.
+  - It runs the model's `evaluate()` unchanged on Bench(60,160) fast.
+  - It reads near-touch, th margin, per-part in-band, overhead and contact straight from `B.res` and `B._kit_last`.
+- Output: `docs/alignment/remeasure/fold-sph3r_skeptic.json`. Every number the auditor gave on the claim bench
+  reproduces to the hundredth:
+
+  | config | gap | < 1 / < 2 mm poses | near1 / near2 | min th taken |
+  |---|---|---|---|---|
+  | F (claim) | 44.72 | 8 / 24 | 53.66 / 76.53 | 10.052 deg |
+  | G | 49.03 | 0 / 1 | 49.03 / 50.14 | 10.536 deg |
+  | F's axes at q 1.0 | 50.72 | 0 / 1 | 50.72 / 51.84 | 10.052 deg |
+  | G's axes at q 0.9805 | 52.26 | 4 / 21 | 56.74 / 80.26 | 10.536 deg |
+
+- **Exact re-read of F's near-skin poses (new).** I took the same frozen shape and the same pose index on a
+  `CB_EXACT=1` bench, and measured F's 25 near-skin poses (the 24 taken poses under 2 mm, plus the contact pose) with
+  the exact libigl distance. The result is in `fold-sph3r_skeptic.json` `F_exact_near`:
+  - Pose 152 (ws plane 60, elevation 165, axial -90): 0.004 mm fast, **-0.281 mm exact**.
+  - Pose 104 (ws plane 0, elevation 150, axial 0): 0.144 mm fast, **-0.059 mm exact**.
+  - Pose 180 (the known contact): -1.384 mm fast, -1.452 mm exact.
+  - Fast minus exact over the 25 poses: mean -0.073 mm, worst -0.285 mm.
+- **Frozen Bench(110,360) exact and held-out wears of F.** I ran them with the auditor's adapter, model unchanged and
+  output redirected to my scratch. Both reproduced the fit, 44.72, and then got 33-34 % of a core each at load 24-27 on 4 cores: 1.5 CPU-minutes each in 4.5 minutes wall. The design doc times one such wear at 21 minutes on 2 vCPU, so at this share it would need about an hour. I stopped both, and neither left a file. The farm was not used, because the budget is spent (CLAUDE.md decision 7).
+
+**Rulings, by key.**
+
+| key | ruling | evidence (short; full text in the rulings file) |
+|---|---|---|
+| held_out | upheld | Missing measurement, not on file: `v_gap`, `frozen_big` and every `v_*` are null, `.cache/fsph3r` is missing, and there is no `remeasure/fold-sph3r_bench.json` or `_held.json`. My own frozen and held wears of F could not finish in the time box |
+| near_touch | **refuted** | The record is on file: row `gap_near1` 53.66, in the same top-level record as `gap` 44.72, and `remeasure/fold-sph3r_claim.json` `F.deep` (53.66 / 76.53). I re-measured the same numbers. The tool misses it only because `_near_numbers` matches against the null `v_gap`. Since 2026-10-17 `c_near_touch` reads any on-file record as ok (report-only). The substance stays under T1 |
+| fold_margin | **refuted** | Measured on th = angle(J1, J3) with the kit's closure formula: min over taken poses 10.052 deg (F) and 10.536 deg (G), 0 poses under 5. This holds by construction: `K.closure` keeps only margin >= `margin_deg` (10.0) |
+| sampling | upheld | With the record read, it is still watch. hub2 is 0.00 in band, link1 0.389 and link2 0.096, all under 0.5, which is `c_sampling`'s "mostly out-of-band parts" rule. Every body is sampled, and the weighting is not flattering (-6.52 points) |
+| judgement:T1 | upheld | Reproduced. On the exact path 2 of F's 6 taken overhead poses are metal inside the skin |
+| judgement:NEW-fitq | upheld | The swap reproduces: 50.72 and 52.26, and hub 2 sits at 159 mm at q 1.0 against 154 mm at q 0.9805. On exact, the extra overhead pose that q buys is contact |
+| judgement:NEW-stale-pending | upheld | "pending" is at char 731 of both the row verdict and the board verdict, and on design-doc lines 150-151 and 226-227. `.cache/fsph3r` is missing, `frozen_big` is null, and the row's last commits are d3a6dcd and ff5e51e (2026-10-16) |
+| judgement:NEW-oob-standoff | upheld | hub2 is 0.00 in band, with median and p90 both at the 31.75 mm clamp (a floor), fitted 154 mm from GH. The design doc puts it at 73 mm exact at k2221 |
+
+**The T5 instrument change (702373b).** I confirm the auditor's reading:
+- The reference side is no longer vacuous: conecut-knee-knuckle-3r reads 20.24 mm over 4 poses.
+- fold-sph3r's own side is unchanged: 1 pose, 1.38 mm.
+- With my exact re-read, F's claim-bench depth would be 3 poses summing 1.79 mm (1.452 + 0.281 + 0.059). That is still
+  far under 2x the reference and under the 5 mm floor, so T5 stays ok either way.
+- The comparison is still not apples to apples: this row's fast Bench(60,160) dump against the lead's Bench(110,360)
+  exact.
+
+**Missed by the auditor (for the next audit; not counted in this verdict).**
+1. **The fast grid's error at the 0 mm cutoff is part of what the q knob buys (proposed catalogue entry T7, "the search
+   instrument's error at the cutoff").**
+   - The search and the claim both run on the fast grid: 4 mm voxels, int8 at 0.25 mm, trilinear.
+   - With q < 1 the search parks metal at the fast grid's 0 mm line, and that line is up to 0.29 mm inside the skin on
+     the exact path.
+   - On the claim's own poses and shape, F's 0.004 and 0.144 mm read as contact on exact (-0.281 and -0.059 mm).
+   - Reading those two poses exact moves the claim-bench gap from 44.72 to about 46.96:
+     - contact 3 / 203: +0.99;
+     - workspace reach 142 / 160: +1.25;
+     - clip in-band was not re-read, but every clip pose under 2 mm stays at 1.52 mm or more on exact, so no clip pose
+       turns into contact.
+   - F's lead over G falls from 4.31 to at most 2.07.
+   - F's overhead count falls to 4 of 12, below G's 5 of 12. G's lowest metal is 1.368 mm fast; at the worst error I
+     measured that stays clear of the skin, though I did not measure G exact.
+   - Detect: re-read exact every taken pose under 0.5 mm fast in a claim. This is a measurement step, not a threshold.
+2. **Checked, not gaming: follow slack.**
+   - F drops 2 "Raise overhead" clip frames (bench idx 3 and 7, th margin 9.7 deg under its own 10 deg margin). They cost
+     0 points, because follow is 0.9667 against the 0.95 limit, and they leave the in-band denominator. G takes all 60.
+   - At the user's 5 deg rule both frames would be taken. So the design is stricter than the rule here, not gaming it.
+
+**What happens next.**
+- Run `CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_fsph3r_rewear.py bench F`, `held F` and
+  `bench G` when the box is quieter, or on the farm when the budget is renewed. That gives the row a frozen and
+  held-out number and closes NEW-stale-pending.
+- Carry G (q 1.0) forward as the row's number.
