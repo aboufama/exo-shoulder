@@ -14,11 +14,11 @@
   {
    "check": "held_out",
    "level": "ok",
-   "reason": "held out 22.03 vs bench 19.13 (+2.90; row held_out)",
+   "reason": "held out 22.03 vs bench 19.13 (+2.90; re-measured (this audit))",
    "held_gap": 22.03,
    "v_gap": 19.13,
    "drop": 2.9,
-   "source": "row held_out"
+   "source": "re-measured (this audit)"
   },
   {
    "check": "fast_frozen",
@@ -54,10 +54,58 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump sidecar-parallelogram-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged) (frontload-lobe-stopb-knuckle-3r has no depth on file; compared with conecut-knee-knuckle-3r): v_gap 19.13: bench 4 contact poses, sum 1.82 mm, deepest 0.9 mm at ['ws', 60.0, 150.0, -105.0], 0 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 9 contact poses, sum 18.22 mm, deepest 4.99 mm at ['ws', -90.0, 60.0, 120.0], 3 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
    "depths": {
-    "v_gap 19.13": {}
-   }
+    "v_gap 19.13": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 1.82,
+      "max_mm": 0.9,
+      "n_deeper3": 0,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       60.0,
+       150.0,
+       -105.0
+      ],
+      "gap": 19.13,
+      "src": "docs/alignment/remeasure/sidecar-parallelogram-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        1.82,
+        1.83
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 9,
+      "sum_mm": 18.22,
+      "max_mm": 4.99,
+      "n_deeper3": 3,
+      "overhead140": 4,
+      "deepest": [
+       "ws",
+       -90.0,
+       60.0,
+       120.0
+      ],
+      "gap": 22.03,
+      "src": "docs/alignment/remeasure/sidecar-parallelogram-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        18.22
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
   },
   {
    "check": "dominance",
@@ -246,7 +294,7 @@
  ],
  "remeasured": {
   "bench": true,
-  "held": false
+  "held": true
  },
  "verifier_files": [
   "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_zb45.json",
@@ -254,7 +302,7 @@
   "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_held_frozen.json",
   "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "acb1ad3",
+ "git": "c7316ce",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-19T00:47:00Z"
+ "t": "2026-10-19T01:09:05Z"
 }
