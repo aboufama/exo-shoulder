@@ -3844,7 +3844,7 @@
   "name": "Rolling-cone J2 at H1's hub-2 spot: a strap-held external cone pair (apex GH, virtual centres on both sides of the contact, constant ratio 0.41) replaces hub 2 on the H1 chain; the non-circular dwell law (rollcam) and the internal sign (ringroll, span-capped) run as cells of the same model",
   "family": "rolling-contact J2 (CORE / Rolamite cone pair, apex at GH) on the cx-0 pin-knee 3R: a slaved knuckle with a fixed law and no hub, crank, spring or loop",
   "lens": "round501:rolling-j2 (lens C, WEIRD)",
-  "status": "ideated",
+  "status": "screened",
   "t_ideated": "2026-10-19T02:38:53Z",
   "source": "round 501 (G1, track golden) judge (docs/concepts/round501_ideation.md)",
   "merged_from": [
