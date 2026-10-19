@@ -57,7 +57,7 @@ OUT = os.path.join(REPO, "docs", "alignment")
 REM = os.path.join(OUT, "remeasure")
 sys.path.insert(0, os.path.join(REPO, "tools"))
 
-VERSION = "2026-10-18.1"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
+VERSION = "2026-10-19.1"   # bump on every change of a check, threshold or reading: a change of the instrument (docs/ALIGNMENT.md section 6)
 ROUND8 = ["sidecar-longdyad-knuckle-3r", "sidecar-parallelogram-knuckle-3r", "sidecar-roller-flank-knuckle-3r", "twist-long-a2-knuckle-3r"]
 # thresholds (gap points unless stated); calibrated on the verified rows, docs/ALIGNMENT.md "Thresholds"
 TH = dict(held_watch=6.0, held_gamed=10.0, shell2_watch=15.0, shell2_gamed=25.0, dom_gamed=0.0, conn_watch=1.0, conn_gamed=3.0,
@@ -348,10 +348,12 @@ def _depth_sources(rid):
         side = "A" if d.get("A") == rid else "B" if d.get("B") == rid else None
         if not side: continue
         for w in ("bench", "held"):
-            cd = ((d.get(w) or {}).get("contact_depth") or {}).get(rid)
+            dw = d.get(w)
+            if not isinstance(dw, dict): continue                       # e.g. "held": "missing dump" (a string) in a paired file
+            cd = (dw.get("contact_depth") or {}).get(rid)
             if not isinstance(cd, dict) or not isinstance(cd.get("all"), list): continue
             dep = [(-float(a[0]), "ws", a[1], a[2], a[3]) for a in cd["all"]]
-            out.append(dict(wear=w, key=(f, "paired"), gap=_num((d.get(w) or {}).get("gap_" + side)), depths=dep, n_poses=None,
+            out.append(dict(wear=w, key=(f, "paired"), gap=_num(dw.get("gap_" + side)), depths=dep, n_poses=None,
                             src=os.path.relpath(f, REPO) + f":{w}.contact_depth", rank=2))
     return out
 
