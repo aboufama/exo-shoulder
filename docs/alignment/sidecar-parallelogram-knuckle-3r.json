@@ -5,6 +5,7 @@
  "complexity": 25.5,
  "verdict": "watch",
  "reasons": [
+  "dominance: beats frontload-lobe-stopb-knuckle-3r by 3.69 plain but loses by 6.06 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
   "continuity: static 19.13, connected full 19.13, knn 22.21, bench 45.03 (row continuity); the knn flood (no envelope stepping stones) loses 3.08",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 10.63 (score 96.13) sits 8.50 below the verified number"
@@ -60,11 +61,11 @@
   },
   {
    "check": "dominance",
-   "level": "ok",
-   "reason": "vs slipper-nose-knuckle-3r: plain -0.64, 2 mm -17.12",
-   "ref": "slipper-nose-knuckle-3r",
-   "gain_plain": -0.64,
-   "gain_2mm": -17.12
+   "level": "watch",
+   "reason": "beats frontload-lobe-stopb-knuckle-3r by 3.69 plain but loses by 6.06 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
+   "ref": "frontload-lobe-stopb-knuckle-3r",
+   "gain_plain": 3.69,
+   "gain_2mm": -6.06
   },
   {
    "check": "continuity",
@@ -216,6 +217,11 @@
    }
   },
   {
+   "check": "density",
+   "level": "ok",
+   "reason": "no part sampled > 2x the kit's density; under-dense: L1a 0.48x"
+  },
+  {
    "check": "complexity",
    "level": "ok",
    "reason": "recomputed 25.5 vs row 25.5; hand count (not derived from the model)",
@@ -248,7 +254,7 @@
   "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_held_frozen.json",
   "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json"
  ],
- "git": "06f7b8d",
- "tool_version": "2026-10-17.2",
- "t": "2026-10-17T08:03:54Z"
+ "git": "acb1ad3",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-19T00:47:00Z"
 }
