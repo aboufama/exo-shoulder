@@ -1,0 +1,65 @@
+[
+ {
+  "key": "T3",
+  "level": "gamed",
+  "reason": "The claim keeps the 5 deg fold rule only under a reading the model chose for itself. The row records fold_margin 5.0 ('margin 5'), but the model never checks th, the J1-J3 angle's distance from the J1-J2-J3 dyad's fold (tools/concept_kit.py lines 25-30, the one metric the rule names). J2 is placed by the slot law (q2 = f(q1)), the J2-J3-J4 dyad is clamped at m3 = 0.5 deg, and the 5 deg is applied to a different angle: the slaved map's singular distance (sing_deg 5). Measured with the model unchanged. Claim bench (Bench(60,160) fast, 50.67 reproduced): th margin min 0.00 deg, median 0.19; 186 of 203 taken poses (91.6 %) under 5. Frozen Bench(110,360) exact wear: min 0.00, median 0.18; 359 of 388 (92.5 %) under 5. J2 sits within 2.1 deg (p05) to 7.4 deg (median) of straight and passes through straight. Under the rule as written, the design keeps 17 of 203 taken poses (fast) and 29 of 388 (exact), so the number exists only under its own reading. The model's own reading holds: sing min 8.04 deg fast, 7.27 deg exact. The J3-dyad margin min is 0.80 deg fast and 0.97 deg exact (3 and 7 poses under 5). The same pattern is gamed on dipped-law-groove-knuckle-3r. CLAUDE.md: 'A different reading is the user's call, not the model's.'",
+  "evidence": "docs/alignment/remeasure/cam-coupled-4r_fast.json and _bench.json kin.th_margin_J1J3_deg / th_margin_lt5 / J2_deg / sing_deg / j3_dyad_margin_deg (tools/alignment_cam_coupled_probe.py fast); docs/concepts/models/cam-coupled-4r.py Kin.at() closure margin_deg=p['m3'], kinematics() sing >= sing_deg; row best_params m3 0.5, sing_deg 5.0, margin 5.0 (margin is used only by park(), the tie-break reference, which tiebreak=1 bypasses)",
+  "action": "Ask the user whether a cam-slaved J2's fold margin may be read on the slaved map's singular distance (w1 = u1 + f'(q1) p2 against the plane of J3, J4) instead of th. If yes, this resolves to ok (sing min 8.04 >= 5); the J3 dyad's 0.5 deg clamp would then need its own ruling. If no, the claim must be re-measured with th >= 5 on the J1-J2-J3 dyad (17 of 203 fast / 29 of 388 exact taken poses survive)."
+ },
+ {
+  "key": "S5",
+  "level": "gamed",
+  "reason": "Reach is a static count. The design has a slaved coordinate on a closed loop: the pin-in-slot has several roots per pose on two J3-dyad branches, and a pose-local tie-break picks one. Yet no continuity flood is on file, which the continuity rule requires of every such claim. This audit ran the flood: kNN-8 edges by frame angle among the taken workspace poses, 2 deg slerp, the model's own build() at every step (closure, cam transmission, singular distance, slot arc), no joint value or axis stepping more than 10 deg, seeds at elevation 0. Claim bench (Bench(60,160) fast): 129 of 146 taken workspace poses connect; connected reach 0.806 against 0.9125 static, about +9.4 to +10.6 gap; overhead 4 connected against 6 static, of 12. Frozen Bench(110,360) exact: 259 of 287 connect (1322 of 1414 edges hold); connected reach 0.719 against 0.797 static, +7.8 gap; overhead 7 connected against 8 static, of 28. The results are identical at the kit's 25 deg jump. Both exceed the tool's conn_gamed threshold of 3.0.",
+  "evidence": "docs/alignment/remeasure/cam-coupled-4r_fast.json and cam-coupled-4r_bench.json flood.jump10 / flood.jump25 (tools/alignment_cam_coupled_probe.py flood()); tools/alignment_audit.py TH conn_gamed 3.0; CLAUDE.md 'Reach must be reachable by moving (continuity rule)'",
+  "action": "Any re-claim scores reach on the connected set. The verifier runs its own flood (full and bench-graph) to confirm or refute this kNN flood."
+ },
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "Contact is deep where it happens. The frozen Bench(110,360) exact wear has 5 contact poses: 82.02 mm into the skin at plane 0 / elev 165 / axial 15, 29.96 mm at 150 / 120 / -180, then 2.35, 1.42 and 1.09 mm. That sums to 116.8 mm, against the lead's 6.23 mm. The claim bench has 2 contact poses (5.33 and 1.02 mm). The contact term counts them as 1.29 % of poses whatever the depth. Instrument note (VERSION 2026-10-19.1): the tool's contact_depth still reads 'not measured' here. It reads paired / dump / wear-probe files, not this adapter's remeasure file, so the type-guard change does not move this design's T5 reading.",
+  "evidence": "docs/alignment/remeasure/cam-coupled-4r_bench.json probe.contact_poses; docs/alignment/remeasure/cam-coupled-4r_fast.json probe.contact_poses; docs/alignment/cam-coupled-4r.json contact_depth",
+  "action": "Watch only (T5 never changes the gap). An 82 mm penetration overhead is a part through the arm: a verifier attributes it (which member, which pose)."
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "The overhead the design takes, it takes with metal on the skin. Claim bench: 3 of the 4 taken overhead workspace poses (elev >= 140) have metal under 1 mm and all 4 are under 2 mm; the minimum metal is 0.25 mm. Frozen Bench(110,360) exact: 3 of 6 taken overhead workspace poses are under 1 mm, 4 under 2 mm and all 6 under 3 mm; the overhead p10 minimum is 0.38 mm and the overall minimum 0.06 mm. Near-touch is report-only (user 2026-10-17). Exact: plain 65.73; under 1 mm 70.55 (9 poses); under 2 mm 86.59 (33); under 3 mm 135.05 (95 of 383 taken). That puts 20.86 points in the 1-2 mm shell, against the tool's former shell2 watch level of 15. Fast: 57.37 / 67.42 / 130.97.",
+  "evidence": "docs/alignment/remeasure/cam-coupled-4r_bench.json and _fast.json deep.gap_near1/2/3, near*_poses, overhead_min_metal_p10; probe.ws_overhead140 floor_hist_mm; docs/alignment/cam-coupled-4r.json near_touch (re-measured, report-only)",
+  "action": "Report only (user ruling). The wearer-side reading: overhead reach on this design is skin contact on a real, bulging arm."
+ },
+ {
+  "key": "NEW-hinge",
+  "level": "watch",
+  "reason": "The number is parked on the score's hinges. All 25 best configurations of the honest CMA (cma2-housing-rule, 4116 tries) sit at reach 0.900 and follow 0.950 exactly; one sits at reach 0.906. Reach above 0.90 and follow above 0.95 earn nothing, and in-band reads only the taken clip frames, so the search drops exactly the poses that cost in-band and stops. The frozen exact wear shows the cost. Fast 50.67 becomes 65.73 frozen exact: +15.06, of which 14.85 is the two hinge terms. Reach falls 0.900 to 0.783 (+11.67) and follow 0.950 to 0.918 (+3.18), while in-band14 stays put (0.4032 to 0.4041). A number parked on both hinges has no slack, and the poses it drops are motions the wearer cannot make with the exo on.",
+  "evidence": "docs/concepts/sweeps/cam-coupled-4r.json stage cma2-housing-rule, the 25 lowest gaps (k 9706 ... 9665); docs/alignment/remeasure/cam-coupled-4r_bench.json fit_fast vs frozen",
+  "action": "Proposal T6 in docs/alignment/cam-coupled-4r.md (report the claim's slack above each hinge). No change to the verdict beyond watch."
+ },
+ {
+  "key": "NEW-cam-pressure",
+  "level": "watch",
+  "reason": "The cam may take poses at pressure angles where a roller-in-groove binds. The model accepts a pose at pa = cos(pressure angle) >= 0.25, i.e. up to 75.5 deg. Over the taken poses pa is min 0.59 (53.8 deg), p05 0.67 (47.9 deg), median 0.96 on the claim bench, and min 0.58 (54.5 deg), p05 0.66 (48.7 deg) on the frozen exact wear. So at least 5 % of taken poses drive the slaved J2 through the groove at more than 45 deg, beyond the usual 30-45 deg limit for a roller follower. In the unpowered MVP1 the arm drives J1 and the groove must push J2, so this shows up as friction or a stick the wearer feels. The bench prices none of it.",
+  "evidence": "docs/alignment/remeasure/cam-coupled-4r_fast.json kin.pa; docs/concepts/models/cam-coupled-4r.py kinematics() pa >= p['pa_min'], row best_params pa_min 0.25",
+  "action": "A verifier re-scores with pa >= cos 45 deg = 0.707 and reports the loss. The search bound pa_min should be a physical limit, not 0.25."
+ },
+ {
+  "key": "R2",
+  "level": "watch",
+  "reason": "The dashboard's sweep record for this design is a refuted configuration. docs/dashboard/data/morphs.json gives sweep_gap 50.67 with sweep_reach 0.7937, sweep_follow 1.0, sweep_inband14 0.5102 and sweep_contact 0.0106. That is k 2432 (stage cma1-no-housing-rule), which ties the honest 50.67 and was measured earlier, so tools/dash_build.py picks it (min by gap, then time). Its groove's inner edge is -3.7 mm from J1's axis at r 50, so it cuts J1's O20 housing. Re-run here with the unchanged model, which enforces the housing rule: 196.65 (reach 0.38, follow 0.25, in-band14 0.15). The 147 other cma1 configurations at gap >= 50.67 are not passed over either. The gap shown equals the honest one, so no rank moves, but the dashboard shows the components of a refuted configuration.",
+  "evidence": "docs/alignment/remeasure/cam-coupled-4r_k2432_housing.json; docs/dashboard/data/morphs.json (cam-coupled-4r sweep_*); docs/dashboard/data/sweeps.json (cma1-no-housing-rule: 118 passed over, 147 not); tools/dash_build.py lines 523-527",
+  "action": "Proposal: dash_build marks a sweep stage that a later red team refuted as not counting for the best (a row field such as refuted_stages)."
+ },
+ {
+  "key": "P1",
+  "level": "watch",
+  "reason": "The number is the search bench's own best. 50.67 is the best of 4116 honest CMA tries (11604 in all) on Bench(60,160) fast, which is also the bench it was found on; the top 20 span 50.67-50.94. There is no held-out set and no verifier. This audit ran the model's own frozen() (fit fast, every level and the slot arc frozen, worn on Bench(110,360) exact): gap 65.73, reach 0.7833, follow 0.9182, in-band14 0.4041, contact 0.0129, honest. That is +15.06, inside the 4.6-14 point drop seen on the verified rows and just past it.",
+  "evidence": "docs/alignment/remeasure/cam-coupled-4r_bench.json (fit_fast 50.67, frozen 65.73; tools/alignment_cam_coupled_probe.py bench, CB_EXACT=1); docs/concepts/sweeps/cam-coupled-4r.json",
+  "action": "A re-claim reports the frozen exact 65.73 (not 50.67), the connected reach and a held-out wear, with the CMA's spread."
+ },
+ {
+  "key": "G6",
+  "level": "watch",
+  "reason": "'3 active' hides a 4-joint chain. The row lists 3 active DOF: the mobility is 3, and J2 is slaved, not sensed. The metal is a 4R, though: 4 O20 hub stacks (J1-J4), a closed loop and a groove flange carrying a 29.8 mm roller post. tools/simplicity.py counts it at 11.75 (1 passive rotation, an extra body and joint, a loop, a sliding pair), so the complexity is not hidden. The 'active_dof 3' column does group it with the 3-joint designs, which the user called the real leaders (2026-10-17).",
+  "evidence": "docs/concepts/rows/cam-coupled-4r.json mechanism (joints 5, moving_bodies 4, closed_loops 1); docs/dashboard/data/morphs.json active_dof 3",
+  "action": "Report only: the dashboard could show joints (4) next to active DOF (3) for slaved designs."
+ }
+]

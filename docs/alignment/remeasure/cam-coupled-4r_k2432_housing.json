@@ -1,0 +1,27 @@
+{
+ "k": 2432,
+ "stage": "cma1-no-housing-rule",
+ "sweep_record": {
+  "gap": 50.67,
+  "reach": 0.7937,
+  "follow": 1.0,
+  "inband14": 0.5102,
+  "contact": 0.0106
+ },
+ "with_housing_rule": {
+  "gap": 196.65,
+  "reach": 0.3812,
+  "follow": 0.25,
+  "inband14": 0.1523,
+  "inband10": 0.0461,
+  "contact": 0.0,
+  "honest": true,
+  "groove_inner_mm": -3.7,
+  "groove_on_hub1": true,
+  "gap_near1": 202.47,
+  "min_metal_skin": 0.49
+ },
+ "model": "docs/concepts/models/cam-coupled-4r.py (unchanged; enforces the housing rule since round 5 CMA2)",
+ "bench": "Bench(60,160) fast",
+ "by": "alignment audit 2026-10-19"
+}

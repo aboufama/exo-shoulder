@@ -6,11 +6,10 @@
  "verdict": "watch",
  "reasons": [
   "held_out: no verified bench gap on the row",
-  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
   "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "idle: a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file",
-  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out"
+  "sampling: per-part sample counts not on file (fractions only); mostly out-of-band parts: hub2 0.00, hub3 0.14, link1 0.02, tail 0.00, link2 0.03, link3 0.09 (re-measured)"
  ],
  "checks": [
   {
@@ -25,8 +24,26 @@
   },
   {
    "check": "near_touch",
-   "level": "watch",
-   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+   "level": "ok",
+   "reason": "plain 65.73, <1 mm 70.55, <2 mm 86.59, <3 mm 135.05, band read 3-14 mm 65.93, 20.86 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 20.86,
+   "plain": 65.73,
+   "n1": 70.55,
+   "n2": 86.59,
+   "n3": 135.05,
+   "band3": 65.93,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0,
+    "2-3": 0.002,
+    "3-4": 0.0107,
+    "4-6": 0.0446,
+    "6-10": 0.149,
+    "10-14": 0.1979,
+    ">14": 0.5958
+   },
+   "minmm": 0.064,
+   "source": "re-measured (this audit)"
   },
   {
    "check": "contact_depth",
@@ -65,7 +82,19 @@
   {
    "check": "sampling",
    "level": "watch",
-   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+   "reason": "per-part sample counts not on file (fractions only); mostly out-of-band parts: hub2 0.00, hub3 0.14, link1 0.02, tail 0.00, link2 0.03, link3 0.09 (re-measured)",
+   "parts": {
+    "hub1": 1.0,
+    "hub2": 0.0,
+    "hub3": 0.1397,
+    "hub4": 0.6665,
+    "slot": 0.6317,
+    "link1": 0.0214,
+    "tail": 0.0,
+    "link2": 0.0272,
+    "link3": 0.0943,
+    "neck": 0.7697
+   }
   },
   {
    "check": "density",
@@ -96,11 +125,11 @@
   }
  ],
  "remeasured": {
-  "bench": false,
+  "bench": true,
   "held": false
  },
  "verifier_files": [],
- "git": "d42ed86",
+ "git": "786424a",
  "tool_version": "2026-10-19.1",
- "t": "2026-10-19T03:02:40Z"
+ "t": "2026-10-19T03:17:16Z"
 }
