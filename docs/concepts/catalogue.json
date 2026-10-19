@@ -3649,7 +3649,7 @@
   "name": "Short-strap ring at the deltoid insertion: knee-less O20 3R with J3 re-aimed square (wdir 95, -8.2) + one-sided relay on an arm-fixed Ti C-band at s 0.30 (97.5 mm) about a GH axis tilted 8.75 deg posterior; rolling V-wheel carriage (from distal-vroller-cband-relay-4r) for a determinate zero return",
   "family": "knee-less rigid-cuff spherical 4R, lever (b) at a proximal-distal station, one-sided relay, rolling guide",
   "lens": "round401:C distal-longaxis-ring-4r at the insertion station (strap 93 mm: the 120-mm strap kill does not fire); distal-vroller-cband-relay-4r's rolling J4 merged as the default J4 hardware",
-  "status": "ideated",
+  "status": "dead",
   "t_ideated": "2026-10-19T00:51:46Z",
   "source": "round 401 (K1, track kneeless) judge (docs/concepts/round401_ideation.md)",
   "merged_from": [

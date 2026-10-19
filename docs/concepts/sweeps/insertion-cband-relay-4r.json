@@ -321,5 +321,381 @@
 ],
 "n_below5": 0
 }
+},
+{
+"k": 6,
+"t": "2026-10-19T01:36:45Z",
+"params": {
+"PHI": 45,
+"tilt": 8.75,
+"taz": -90.0,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -45,
+"j4": 1,
+"q_strap": 1.0
+},
+"bench": "envsel",
+"mode": "exact",
+"step": "ideal (no J4 metal, knee-less readings)",
+"inband14": 0.9209,
+"inband10": 0.5072,
+"reach": 0.7667,
+"follow": 0.9364,
+"contact": 0.0501,
+"gap": 19.7,
+"gap_near1": 24.46,
+"gap_near2": 39.98,
+"overhead": [
+5,
+26
+],
+"n_contact": 20,
+"depth_sum": 102.88,
+"min_metal_taken": 0.026,
+"a1a2": [
+37.552,
+67.341
+],
+"why_ws": {
+"": 274,
+"parts": 2,
+"fold": 59,
+"j3stop": 10,
+"contact": 15
+},
+"kin_ws": 291,
+"th": {
+"min_th_margin_taken": 5.001,
+"window": [
+29.79,
+104.89
+],
+"n_below5": 0
+}
+},
+{
+"k": 7,
+"t": "2026-10-19T01:36:45Z",
+"params": {
+"PHI": 45,
+"tilt": 8.75,
+"taz": -90.0,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -45,
+"j4": 1,
+"q_strap": 1.0
+},
+"bench": "envsel",
+"mode": "exact",
+"step": "HARDWARE: + J4 metal (2D-contoured band q1, race R(w), carriage, 4 wheel blocks, strap q1)",
+"inband14": 0.7597,
+"inband10": 0.4281,
+"reach": 0.6444,
+"follow": 0.7545,
+"contact": 0.2065,
+"gap": 79.79,
+"gap_near1": 92.37,
+"gap_near2": 105.62,
+"overhead": [
+0,
+26
+],
+"n_contact": 82,
+"depth_sum": 213.28,
+"min_metal_taken": 0.047,
+"a1a2": [
+37.552,
+67.341
+],
+"why_ws": {
+"": 274,
+"parts": 2,
+"fold": 59,
+"j3stop": 10,
+"contact": 15
+},
+"kin_ws": 291,
+"th": {
+"min_th_margin_taken": 5.001,
+"window": [
+29.79,
+104.89
+],
+"n_below5": 0
+},
+"J4": {
+"band": {
+"min": 0.24,
+"n_lt0": 0,
+"n_lt1": 1,
+"n_lt2": 6,
+"contact_poses_all": 8,
+"contact_ws": 8,
+"depth_max_all": 14.39
+},
+"car": {
+"min": 5.72,
+"n_lt0": 0,
+"n_lt1": 0,
+"n_lt2": 0,
+"contact_poses_all": 3,
+"contact_ws": 3,
+"depth_max_all": 10.39
+},
+"wheels": {
+"min": 2.02,
+"n_lt0": 0,
+"n_lt1": 0,
+"n_lt2": 0,
+"contact_poses_all": 4,
+"contact_ws": 4,
+"depth_max_all": 13.36
+},
+"strap": {
+"min": 0.05,
+"n_lt0": 0,
+"n_lt1": 15,
+"n_lt2": 28,
+"contact_poses_all": 61,
+"contact_ws": 41,
+"depth_max_all": 3.32
+},
+"car_ib14": 0.317,
+"car_p5_50_95": [
+10.53,
+15.97,
+22.03
+],
+"band_ib14": 0.914,
+"band_p5_50_95": [
+4.05,
+7.38,
+15.57
+],
+"jams": 2,
+"jams_ws": 2
+},
+"J4_geom": {
+"R_race": [
+76.0,
+72.0,
+76.0
+],
+"s_ax": -98.65,
+"strap_len_mm": 94.7,
+"hub3": [
+-9.6,
+5.9,
+66.6
+],
+"n": {
+"band": 515,
+"car": 144,
+"wheels": 280,
+"strap": 329
+},
+"band_th": [
+3.0,
+15.0
+]
+}
+},
+{
+"k": 8,
+"t": "2026-10-19T01:36:45Z",
+"params": {
+"PHI": 45,
+"tilt": 8.75,
+"taz": -90.0,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -45,
+"j4": 1,
+"q_strap": 1.0
+},
+"bench": "b110",
+"mode": "exact",
+"step": "ideal (no J4 metal, knee-less readings)",
+"inband14": 0.9209,
+"inband10": 0.5072,
+"reach": 0.7917,
+"follow": 0.9364,
+"contact": 0.0467,
+"gap": 16.86,
+"gap_near1": 20.0,
+"gap_near2": 35.42,
+"overhead": [
+7,
+28
+],
+"n_contact": 19,
+"depth_sum": 101.88,
+"min_metal_taken": 0.068,
+"a1a2": [
+37.552,
+67.341
+],
+"why_ws": {
+"": 285,
+"fold": 54,
+"j3stop": 6,
+"contact": 12,
+"parts": 3
+},
+"kin_ws": 300,
+"th": {
+"min_th_margin_taken": 5.001,
+"window": [
+29.79,
+104.89
+],
+"n_below5": 0
+}
+},
+{
+"k": 9,
+"t": "2026-10-19T01:36:45Z",
+"params": {
+"PHI": 45,
+"tilt": 8.75,
+"taz": -90.0,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -45,
+"j4": 1,
+"q_strap": 1.0
+},
+"bench": "b110",
+"mode": "exact",
+"step": "HARDWARE: + J4 metal (2D-contoured band q1, race R(w), carriage, 4 wheel blocks, strap q1)",
+"inband14": 0.7597,
+"inband10": 0.4281,
+"reach": 0.6806,
+"follow": 0.7545,
+"contact": 0.1901,
+"gap": 74.53,
+"gap_near1": 90.18,
+"gap_near2": 103.81,
+"overhead": [
+0,
+28
+],
+"n_contact": 77,
+"depth_sum": 207.96,
+"min_metal_taken": 0.091,
+"a1a2": [
+37.552,
+67.341
+],
+"why_ws": {
+"": 285,
+"fold": 54,
+"j3stop": 6,
+"contact": 12,
+"parts": 3
+},
+"kin_ws": 300,
+"th": {
+"min_th_margin_taken": 5.001,
+"window": [
+29.79,
+104.89
+],
+"n_below5": 0
+},
+"J4": {
+"band": {
+"min": 0.39,
+"n_lt0": 0,
+"n_lt1": 1,
+"n_lt2": 7,
+"contact_poses_all": 10,
+"contact_ws": 10,
+"depth_max_all": 11.96
+},
+"car": {
+"min": 6.46,
+"n_lt0": 0,
+"n_lt1": 0,
+"n_lt2": 0,
+"contact_poses_all": 1,
+"contact_ws": 1,
+"depth_max_all": 9.12
+},
+"wheels": {
+"min": 2.93,
+"n_lt0": 0,
+"n_lt1": 0,
+"n_lt2": 0,
+"contact_poses_all": 1,
+"contact_ws": 1,
+"depth_max_all": 13.8
+},
+"strap": {
+"min": 0.09,
+"n_lt0": 0,
+"n_lt1": 20,
+"n_lt2": 38,
+"contact_poses_all": 54,
+"contact_ws": 34,
+"depth_max_all": 2.59
+},
+"car_ib14": 0.34,
+"car_p5_50_95": [
+10.13,
+15.73,
+21.88
+],
+"band_ib14": 0.918,
+"band_p5_50_95": [
+3.97,
+7.18,
+15.45
+],
+"jams": 2,
+"jams_ws": 2
+},
+"J4_geom": {
+"R_race": [
+76.0,
+72.0,
+76.0
+],
+"s_ax": -98.65,
+"strap_len_mm": 94.7,
+"hub3": [
+-9.6,
+5.9,
+66.6
+],
+"n": {
+"band": 515,
+"car": 144,
+"wheels": 280,
+"strap": 329
+},
+"band_th": [
+3.0,
+15.0
+]
+}
 }
 ]

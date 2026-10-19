@@ -10,7 +10,7 @@
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M, D2R = Math.PI / 180;
   const P = { az1: 95.3929, el1: 67.8974, a1: 37.552, a2: 67.341, wd: 95.0, wa: -8.2, branch: -1, PHI: 45, margin: 5,
-              ax: [0.1521, 0.9884, 0.0], s_mm: 97.5, psi0: -15, band: [-28, 42], Rb: 46, faces: [50.5, 62.5, 58.0],
+              ax: [0.1521, 0.9884, 0.0], s_mm: 97.5, psi0: -15, band: [-28, 42], Rb: 62, faces: [50.5, 62.5, 67.0],
               hub_r: 10, stack: 12.25 };
   const C3 = K.sph3r(K.bvec(P.az1, P.el1), K.wdir(P.wd, P.wa), P.a1, P.a2, P.branch);
   const ax = V.unit(P.ax), lat = K.wdir(90, 0), e = V.unit(V.reject(lat, ax)), f = V.cross(ax, e);
@@ -50,7 +50,7 @@
       const c2 = relayed(ctx, q[3]), F = C3.fk(q.slice(0, 3), c2), Fh = P.faces, h = P.stack;
       const Hc = c2.H, arm = p => M.mulv(ctx.H, p), mem3 = p => M.mulv(Hc, p);
       const bandPts = []; for (let t = P.band[0]; t <= P.band[1] + 1e-9; t += 5) bandPts.push(arm(V.madd(V.scale(ax, sAx), dPsi(t), P.Rb)));
-      const carC = mem3(V.madd(V.scale(ax, sAx), dPsi(P.psi0), P.Rb + 3)), carN = mem3(dPsi(P.psi0));
+      const carC = mem3(V.madd(V.scale(ax, sAx), dPsi(P.psi0), P.Rb + 11)), carN = mem3(dPsi(P.psi0));
       const strapTop = V.scale(F.p3, Fh[2] - 1);
       const axW = M.mulv(ctx.H, ax);
       return [

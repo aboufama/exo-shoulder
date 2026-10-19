@@ -124,7 +124,7 @@ def th_margin(M1, B, phi_b, ax, taken):
 
 HW = dict(s_frac=0.30, L_arm=325.0, post=15.0, psi0=-15.0, band_lo=-28.0, band_hi=42.0, saddle_w=26.0, band_w=22.0, hb=3.0,
           car_half=10.0, car_w=34.0, car_t=2.5, wheel_psi=7.0, wheel_w=8.0, wheel_drop=3.0, run=0.5, clr=2.0, q_band=1.0,
-          strap_w=12.0, strap_t=3.0, q_strap=0.95, step=2.0, out_mm=15.0)
+          strap_w=12.0, strap_t=3.0, q_strap=0.95, step=2.0, out_mm=15.0, out_strap=15.0)
 
 
 def _basis(ax):
@@ -191,7 +191,7 @@ def j4_geometry(AR, M1, B1, phi, ax, h):
     sdir = np.array(sdir); tS = np.repeat(tt, len(np.arange(-h["strap_w"] / 2, h["strap_w"] / 2 + 1e-6, st)))
     I = np.repeat(fit, len(sdir)); Rw_ = np.einsum("pij,pjk->pik", F1.RHG[fit], R1[fit])
     t = K.requirement(B1, I, np.einsum("pij,nj->pni", Rw_, sdir).reshape(-1, 3), clr=float(h["clr"])).reshape(len(fit), len(sdir))
-    t = np.where(np.isfinite(t), t, np.nan); med = np.nanmedian(t, 0); t = np.where(t <= med[None, :] + float(h["out_mm"]), t, np.nan)
+    t = np.where(np.isfinite(t), t, np.nan); med = np.nanmedian(t, 0); t = np.where(t <= med[None, :] + float(h.get("out_strap", h["out_mm"])), t, np.nan)
     rq = np.nanquantile(t, float(h["q_strap"]), 0)
     r0, r1 = float(np.linalg.norm(h3)) - 6.125, float(np.linalg.norm(cC))       # ends: hub 3 lower plate / carriage top
     blend = np.clip(np.minimum(tS * L, (1 - tS) * L) / 10.0, 0, 1)            # 10 mm ramps into the end heights
