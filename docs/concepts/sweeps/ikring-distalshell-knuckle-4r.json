@@ -1,0 +1,2354 @@
+[
+{
+"k": 0,
+"t": "2026-10-19T02:30:44Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 59.6,
+"lc": 28.2,
+"phiE": -5.8,
+"phib": -54.9,
+"ang_min": 30.5
+},
+"inband14": 0.8989,
+"inband10": 0.5211,
+"reach": 0.7438,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 16.29,
+"mover_s_max": 101.7,
+"pad_s": [
+90.0,
+99.8
+],
+"ws_kin": 120
+},
+{
+"k": 1,
+"t": "2026-10-19T02:30:50Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 61.11,
+"lc": 22.32,
+"phiE": -23.48,
+"phib": -118.6,
+"ang_min": 30.73
+},
+"inband14": 0.8282,
+"inband10": 0.4648,
+"reach": 0.725,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 25.24,
+"mover_s_max": 91.4,
+"pad_s": [
+60.4,
+70.2
+],
+"ws_kin": 123
+},
+{
+"k": 2,
+"t": "2026-10-19T02:30:55Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 69.38,
+"lc": 27.71,
+"phiE": 1.99,
+"phib": -73.79,
+"ang_min": 31.56
+},
+"inband14": 0.8999,
+"inband10": 0.52,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 13.67,
+"mover_s_max": 105.7,
+"pad_s": [
+91.6,
+101.4
+],
+"ws_kin": 124
+},
+{
+"k": 3,
+"t": "2026-10-19T02:30:57Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 66.48,
+"lc": 18.04,
+"phiE": 6.72,
+"phib": -117.15,
+"ang_min": 30.17
+},
+"inband14": 0.8987,
+"inband10": 0.5793,
+"reach": 0.1938,
+"follow": 0.3167,
+"contact": 0.0,
+"gap": 134.08,
+"mover_s_max": 100.5,
+"pad_s": [
+72.9,
+82.7
+],
+"ws_kin": 43
+},
+{
+"k": 4,
+"t": "2026-10-19T02:31:03Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 47.27,
+"lc": 31.81,
+"phiE": -4.97,
+"phib": -94.52,
+"ang_min": 28.09
+},
+"inband14": 0.8609,
+"inband10": 0.4794,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 18.21,
+"mover_s_max": 84.5,
+"pad_s": [
+59.6,
+69.4
+],
+"ws_kin": 123
+},
+{
+"k": 5,
+"t": "2026-10-19T02:31:08Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 42.85,
+"lc": 19.99,
+"phiE": -0.19,
+"phib": -64.99,
+"ang_min": 29.39
+},
+"inband14": 0.8795,
+"inband10": 0.4868,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 16.35,
+"mover_s_max": 79.7,
+"pad_s": [
+66.2,
+76.0
+],
+"ws_kin": 123
+},
+{
+"k": 6,
+"t": "2026-10-19T02:31:14Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 53.51,
+"lc": 33.96,
+"phiE": 11.29,
+"phib": -61.73,
+"ang_min": 29.63
+},
+"inband14": 0.8635,
+"inband10": 0.4604,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0108,
+"gap": 17.85,
+"mover_s_max": 95.2,
+"pad_s": [
+83.3,
+93.1
+],
+"ws_kin": 125
+},
+{
+"k": 7,
+"t": "2026-10-19T02:31:19Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 62.65,
+"lc": 24.22,
+"phiE": -20.0,
+"phib": -58.67,
+"ang_min": 28.78
+},
+"inband14": 0.8861,
+"inband10": 0.552,
+"reach": 0.6813,
+"follow": 1.0,
+"contact": 0.0059,
+"gap": 23.85,
+"mover_s_max": 97.7,
+"pad_s": [
+86.1,
+95.8
+],
+"ws_kin": 110
+},
+{
+"k": 8,
+"t": "2026-10-19T02:31:25Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 51.31,
+"lc": 25.77,
+"phiE": 7.91,
+"phib": -40.61,
+"ang_min": 27.65
+},
+"inband14": 0.8721,
+"inband10": 0.4917,
+"reach": 0.7375,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 19.6,
+"mover_s_max": 97.1,
+"pad_s": [
+85.1,
+94.8
+],
+"ws_kin": 119
+},
+{
+"k": 9,
+"t": "2026-10-19T02:31:30Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 59.15,
+"lc": 23.15,
+"phiE": -3.01,
+"phib": -91.28,
+"ang_min": 27.88
+},
+"inband14": 0.894,
+"inband10": 0.5178,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 14.26,
+"mover_s_max": 96.7,
+"pad_s": [
+73.4,
+83.1
+],
+"ws_kin": 124
+},
+{
+"k": 10,
+"t": "2026-10-19T02:31:36Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 68.71,
+"lc": 21.63,
+"phiE": -1.94,
+"phib": -112.86,
+"ang_min": 30.87
+},
+"inband14": 0.9013,
+"inband10": 0.5376,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 13.66,
+"mover_s_max": 105.7,
+"pad_s": [
+75.2,
+84.9
+],
+"ws_kin": 124
+},
+{
+"k": 11,
+"t": "2026-10-19T02:31:40Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 65.61,
+"lc": 21.83,
+"phiE": 7.43,
+"phib": -115.02,
+"ang_min": 27.5
+},
+"inband14": 0.9046,
+"inband10": 0.576,
+"reach": 0.4,
+"follow": 0.3833,
+"contact": 0.0,
+"gap": 106.67,
+"mover_s_max": 102.3,
+"pad_s": [
+71.0,
+80.8
+],
+"ws_kin": 76
+},
+{
+"k": 12,
+"t": "2026-10-19T02:31:46Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 46.51,
+"lc": 25.21,
+"phiE": 4.46,
+"phib": -100.4,
+"ang_min": 25.57
+},
+"inband14": 0.889,
+"inband10": 0.5116,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 15.4,
+"mover_s_max": 84.5,
+"pad_s": [
+56.7,
+66.5
+],
+"ws_kin": 123
+},
+{
+"k": 13,
+"t": "2026-10-19T02:31:51Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 54.14,
+"lc": 21.18,
+"phiE": -21.64,
+"phib": -70.67,
+"ang_min": 27.25
+},
+"inband14": 0.8683,
+"inband10": 0.5124,
+"reach": 0.6875,
+"follow": 1.0,
+"contact": 0.0058,
+"gap": 25.0,
+"mover_s_max": 88.4,
+"pad_s": [
+72.1,
+81.9
+],
+"ws_kin": 111
+},
+{
+"k": 14,
+"t": "2026-10-19T02:31:59Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 62.16,
+"lc": 21.19,
+"phiE": 9.86,
+"phib": -88.97,
+"ang_min": 25.94
+},
+"inband14": 0.8834,
+"inband10": 0.4977,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 15.32,
+"mover_s_max": 99.8,
+"pad_s": [
+76.5,
+86.2
+],
+"ws_kin": 124
+},
+{
+"k": 15,
+"t": "2026-10-19T02:32:05Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 60.87,
+"lc": 32.83,
+"phiE": -8.71,
+"phib": -38.86,
+"ang_min": 28.61
+},
+"inband14": 0.8941,
+"inband10": 0.5384,
+"reach": 0.6625,
+"follow": 0.95,
+"contact": 0.0,
+"gap": 24.34,
+"mover_s_max": 111.3,
+"pad_s": [
+100.1,
+109.9
+],
+"ws_kin": 106
+},
+{
+"k": 16,
+"t": "2026-10-19T02:32:11Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 54.76,
+"lc": 27.92,
+"phiE": 11.82,
+"phib": -39.34,
+"ang_min": 28.34
+},
+"inband14": 0.8615,
+"inband10": 0.4825,
+"reach": 0.7438,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 20.03,
+"mover_s_max": 101.6,
+"pad_s": [
+89.7,
+99.5
+],
+"ws_kin": 120
+},
+{
+"k": 17,
+"t": "2026-10-19T02:32:18Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 64.73,
+"lc": 25.96,
+"phiE": -5.42,
+"phib": -53.21,
+"ang_min": 28.03
+},
+"inband14": 0.8982,
+"inband10": 0.5108,
+"reach": 0.7438,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 15.8,
+"mover_s_max": 106.5,
+"pad_s": [
+94.6,
+104.3
+],
+"ws_kin": 119
+},
+{
+"k": 18,
+"t": "2026-10-19T02:32:25Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 64.03,
+"lc": 29.38,
+"phiE": 9.49,
+"phib": -110.23,
+"ang_min": 30.16
+},
+"inband14": 0.898,
+"inband10": 0.5244,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 14.5,
+"mover_s_max": 102.0,
+"pad_s": [
+67.9,
+77.7
+],
+"ws_kin": 123
+},
+{
+"k": 19,
+"t": "2026-10-19T02:32:31Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 69.82,
+"lc": 33.49,
+"phiE": -24.46,
+"phib": -46.59,
+"ang_min": 31.87
+},
+"inband14": 0.8389,
+"inband10": 0.5304,
+"reach": 0.625,
+"follow": 0.9167,
+"contact": 0.0,
+"gap": 36.94,
+"mover_s_max": 112.8,
+"pad_s": [
+100.7,
+110.5
+],
+"ws_kin": 100
+},
+{
+"k": 20,
+"t": "2026-10-19T02:32:37Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 70.72,
+"lc": 20.38,
+"phiE": 10.99,
+"phib": -44.36,
+"ang_min": 30.8
+},
+"inband14": 0.8534,
+"inband10": 0.4651,
+"reach": 0.7438,
+"follow": 0.95,
+"contact": 0.0,
+"gap": 20.28,
+"mover_s_max": 109.7,
+"pad_s": [
+98.2,
+107.9
+],
+"ws_kin": 119
+},
+{
+"k": 21,
+"t": "2026-10-19T02:32:42Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 56.4,
+"lc": 21.72,
+"phiE": 4.67,
+"phib": -41.5,
+"ang_min": 27.02
+},
+"inband14": 0.8771,
+"inband10": 0.5084,
+"reach": 0.725,
+"follow": 0.95,
+"contact": 0.0057,
+"gap": 20.36,
+"mover_s_max": 99.2,
+"pad_s": [
+87.1,
+96.9
+],
+"ws_kin": 117
+},
+{
+"k": 22,
+"t": "2026-10-19T02:32:46Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 58.17,
+"lc": 25.08,
+"phiE": 9.45,
+"phib": -116.56,
+"ang_min": 30.18
+},
+"inband14": 0.9168,
+"inband10": 0.6091,
+"reach": 0.4625,
+"follow": 0.3833,
+"contact": 0.0102,
+"gap": 101.44,
+"mover_s_max": 94.7,
+"pad_s": [
+61.1,
+70.8
+],
+"ws_kin": 75
+},
+{
+"k": 23,
+"t": "2026-10-19T02:32:49Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 60.43,
+"lc": 18.45,
+"phiE": 1.61,
+"phib": -118.64,
+"ang_min": 30.36
+},
+"inband14": 0.908,
+"inband10": 0.5916,
+"reach": 0.225,
+"follow": 0.35,
+"contact": 0.0,
+"gap": 127.5,
+"mover_s_max": 95.4,
+"pad_s": [
+66.8,
+76.6
+],
+"ws_kin": 60
+},
+{
+"k": 24,
+"t": "2026-10-19T02:32:54Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 57.38,
+"lc": 32.87,
+"phiE": -22.55,
+"phib": -48.49,
+"ang_min": 25.67
+},
+"inband14": 0.8662,
+"inband10": 0.5337,
+"reach": 0.65,
+"follow": 0.9333,
+"contact": 0.0,
+"gap": 30.05,
+"mover_s_max": 100.4,
+"pad_s": [
+89.2,
+98.9
+],
+"ws_kin": 104
+},
+{
+"k": 25,
+"t": "2026-10-19T02:32:59Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 52.33,
+"lc": 24.88,
+"phiE": 10.74,
+"phib": -72.21,
+"ang_min": 26.98
+},
+"inband14": 0.8699,
+"inband10": 0.4728,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 16.67,
+"mover_s_max": 88.3,
+"pad_s": [
+73.9,
+83.7
+],
+"ws_kin": 124
+},
+{
+"k": 26,
+"t": "2026-10-19T02:33:05Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 49.25,
+"lc": 32.21,
+"phiE": -16.64,
+"phib": -109.41,
+"ang_min": 27.17
+},
+"inband14": 0.7731,
+"inband10": 0.4445,
+"reach": 0.7312,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 30.13,
+"mover_s_max": 84.2,
+"pad_s": [
+51.7,
+61.5
+],
+"ws_kin": 122
+},
+{
+"k": 27,
+"t": "2026-10-19T02:33:11Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 59.58,
+"lc": 26.87,
+"phiE": 4.96,
+"phib": -72.36,
+"ang_min": 27.18
+},
+"inband14": 0.8877,
+"inband10": 0.4988,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 14.89,
+"mover_s_max": 95.9,
+"pad_s": [
+82.3,
+92.0
+],
+"ws_kin": 124
+},
+{
+"k": 28,
+"t": "2026-10-19T02:33:16Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 54.39,
+"lc": 31.09,
+"phiE": -1.82,
+"phib": -38.48,
+"ang_min": 27.72
+},
+"inband14": 0.8986,
+"inband10": 0.5297,
+"reach": 0.6875,
+"follow": 1.0,
+"contact": 0.0058,
+"gap": 21.97,
+"mover_s_max": 105.8,
+"pad_s": [
+93.2,
+103.0
+],
+"ws_kin": 111
+},
+{
+"k": 29,
+"t": "2026-10-19T02:33:22Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 58.58,
+"lc": 27.5,
+"phiE": 6.39,
+"phib": -107.63,
+"ang_min": 27.98
+},
+"inband14": 0.9003,
+"inband10": 0.5316,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 14.3,
+"mover_s_max": 96.6,
+"pad_s": [
+64.8,
+74.5
+],
+"ws_kin": 123
+},
+{
+"k": 30,
+"t": "2026-10-19T02:33:28Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 69.3,
+"lc": 18.69,
+"phiE": 5.44,
+"phib": -84.69,
+"ang_min": 30.85
+},
+"inband14": 0.8952,
+"inband10": 0.5209,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 14.14,
+"mover_s_max": 107.0,
+"pad_s": [
+85.4,
+95.2
+],
+"ws_kin": 124
+},
+{
+"k": 31,
+"t": "2026-10-19T02:33:32Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 42.3,
+"lc": 23.84,
+"phiE": -22.09,
+"phib": -64.53,
+"ang_min": 27.08
+},
+"inband14": 0.876,
+"inband10": 0.5278,
+"reach": 0.6687,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 25.53,
+"mover_s_max": 77.4,
+"pad_s": [
+64.3,
+74.0
+],
+"ws_kin": 107
+},
+{
+"k": 32,
+"t": "2026-10-19T02:33:36Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 63.08,
+"lc": 33.1,
+"phiE": -20.31,
+"phib": -46.49,
+"ang_min": 25.62
+},
+"inband14": 0.8828,
+"inband10": 0.5726,
+"reach": 0.65,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 26.72,
+"mover_s_max": 108.8,
+"pad_s": [
+96.3,
+106.1
+],
+"ws_kin": 104
+},
+{
+"k": 33,
+"t": "2026-10-19T02:33:39Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 53.42,
+"lc": 24.88,
+"phiE": -6.91,
+"phib": -37.0,
+"ang_min": 30.48
+},
+"inband14": 0.8941,
+"inband10": 0.5633,
+"reach": 0.65,
+"follow": 0.9167,
+"contact": 0.0063,
+"gap": 29.55,
+"mover_s_max": 98.8,
+"pad_s": [
+87.6,
+97.3
+],
+"ws_kin": 105
+},
+{
+"k": 34,
+"t": "2026-10-19T02:33:43Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 51.27,
+"lc": 22.32,
+"phiE": 6.94,
+"phib": -45.09,
+"ang_min": 28.68
+},
+"inband14": 0.8781,
+"inband10": 0.5,
+"reach": 0.7438,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 18.37,
+"mover_s_max": 93.0,
+"pad_s": [
+81.4,
+91.2
+],
+"ws_kin": 120
+},
+{
+"k": 35,
+"t": "2026-10-19T02:33:47Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 52.33,
+"lc": 33.92,
+"phiE": -13.31,
+"phib": -104.47,
+"ang_min": 31.19
+},
+"inband14": 0.82,
+"inband10": 0.4701,
+"reach": 0.75,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 23.55,
+"mover_s_max": 88.2,
+"pad_s": [
+57.6,
+67.4
+],
+"ws_kin": 123
+},
+{
+"k": 36,
+"t": "2026-10-19T02:33:50Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 66.37,
+"lc": 28.69,
+"phiE": 10.46,
+"phib": -41.31,
+"ang_min": 30.29
+},
+"inband14": 0.8627,
+"inband10": 0.4794,
+"reach": 0.75,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 18.73,
+"mover_s_max": 112.4,
+"pad_s": [
+101.1,
+110.8
+],
+"ws_kin": 120
+},
+{
+"k": 37,
+"t": "2026-10-19T02:33:53Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 67.82,
+"lc": 21.95,
+"phiE": -19.77,
+"phib": -63.04,
+"ang_min": 30.07
+},
+"inband14": 0.8815,
+"inband10": 0.5343,
+"reach": 0.6875,
+"follow": 1.0,
+"contact": 0.0058,
+"gap": 23.68,
+"mover_s_max": 101.7,
+"pad_s": [
+88.3,
+98.0
+],
+"ws_kin": 111
+},
+{
+"k": 38,
+"t": "2026-10-19T02:33:57Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 47.01,
+"lc": 24.33,
+"phiE": 8.68,
+"phib": -72.28,
+"ang_min": 29.14
+},
+"inband14": 0.8708,
+"inband10": 0.4709,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 16.58,
+"mover_s_max": 83.4,
+"pad_s": [
+68.8,
+78.6
+],
+"ws_kin": 124
+},
+{
+"k": 39,
+"t": "2026-10-19T02:34:00Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 47.82,
+"lc": 26.42,
+"phiE": -5.63,
+"phib": -112.44,
+"ang_min": 31.88
+},
+"inband14": 0.8748,
+"inband10": 0.5162,
+"reach": 0.7438,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 18.7,
+"mover_s_max": 84.8,
+"pad_s": [
+52.7,
+62.5
+],
+"ws_kin": 120
+},
+{
+"k": 40,
+"t": "2026-10-19T02:34:04Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 59.14,
+"lc": 18.1,
+"phiE": 3.59,
+"phib": -36.85,
+"ang_min": 29.22
+},
+"inband14": 0.8992,
+"inband10": 0.5546,
+"reach": 0.7,
+"follow": 0.85,
+"contact": 0.0061,
+"gap": 30.69,
+"mover_s_max": 99.9,
+"pad_s": [
+88.1,
+97.8
+],
+"ws_kin": 113
+},
+{
+"k": 41,
+"t": "2026-10-19T02:34:07Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 51.59,
+"lc": 21.0,
+"phiE": -0.12,
+"phib": -103.42,
+"ang_min": 29.14
+},
+"inband14": 0.8966,
+"inband10": 0.5246,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 14.64,
+"mover_s_max": 89.4,
+"pad_s": [
+61.7,
+71.5
+],
+"ws_kin": 123
+},
+{
+"k": 42,
+"t": "2026-10-19T02:34:10Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 60.07,
+"lc": 33.4,
+"phiE": -22.33,
+"phib": -77.5,
+"ang_min": 30.26
+},
+"inband14": 0.8151,
+"inband10": 0.4924,
+"reach": 0.7,
+"follow": 1.0,
+"contact": 0.0058,
+"gap": 29.07,
+"mover_s_max": 93.3,
+"pad_s": [
+77.5,
+87.3
+],
+"ws_kin": 113
+},
+{
+"k": 43,
+"t": "2026-10-19T02:34:14Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 47.32,
+"lc": 24.21,
+"phiE": -22.67,
+"phib": -58.3,
+"ang_min": 25.82
+},
+"inband14": 0.8608,
+"inband10": 0.4922,
+"reach": 0.675,
+"follow": 0.95,
+"contact": 0.0,
+"gap": 26.42,
+"mover_s_max": 82.8,
+"pad_s": [
+71.1,
+80.9
+],
+"ws_kin": 108
+},
+{
+"k": 44,
+"t": "2026-10-19T02:34:17Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 53.85,
+"lc": 31.98,
+"phiE": -7.52,
+"phib": -42.43,
+"ang_min": 30.41
+},
+"inband14": 0.9113,
+"inband10": 0.579,
+"reach": 0.675,
+"follow": 1.0,
+"contact": 0.0059,
+"gap": 23.09,
+"mover_s_max": 103.3,
+"pad_s": [
+91.5,
+101.2
+],
+"ws_kin": 109
+},
+{
+"k": 45,
+"t": "2026-10-19T02:34:21Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 69.46,
+"lc": 20.04,
+"phiE": -22.28,
+"phib": -114.02,
+"ang_min": 31.11
+},
+"inband14": 0.8367,
+"inband10": 0.4566,
+"reach": 0.7438,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 22.51,
+"mover_s_max": 99.9,
+"pad_s": [
+71.1,
+80.8
+],
+"ws_kin": 124
+},
+{
+"k": 46,
+"t": "2026-10-19T02:34:25Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 61.02,
+"lc": 25.95,
+"phiE": -18.95,
+"phib": -62.73,
+"ang_min": 27.38
+},
+"inband14": 0.8714,
+"inband10": 0.5193,
+"reach": 0.6875,
+"follow": 1.0,
+"contact": 0.0058,
+"gap": 24.69,
+"mover_s_max": 96.0,
+"pad_s": [
+84.3,
+94.0
+],
+"ws_kin": 111
+},
+{
+"k": 47,
+"t": "2026-10-19T02:34:28Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 63.33,
+"lc": 25.37,
+"phiE": -6.22,
+"phib": -52.88,
+"ang_min": 25.85
+},
+"inband14": 0.8963,
+"inband10": 0.5063,
+"reach": 0.7438,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 15.99,
+"mover_s_max": 105.2,
+"pad_s": [
+92.9,
+102.7
+],
+"ws_kin": 119
+},
+{
+"k": 48,
+"t": "2026-10-19T02:34:32Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 59.36,
+"lc": 21.16,
+"phiE": 4.9,
+"phib": -78.45,
+"ang_min": 31.92
+},
+"inband14": 0.8894,
+"inband10": 0.5047,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 14.72,
+"mover_s_max": 96.7,
+"pad_s": [
+78.2,
+88.0
+],
+"ws_kin": 124
+},
+{
+"k": 49,
+"t": "2026-10-19T02:34:35Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 47.49,
+"lc": 33.41,
+"phiE": 4.63,
+"phib": -79.09,
+"ang_min": 30.74
+},
+"inband14": 0.8802,
+"inband10": 0.485,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 15.64,
+"mover_s_max": 84.0,
+"pad_s": [
+68.4,
+78.2
+],
+"ws_kin": 124
+},
+{
+"k": 50,
+"t": "2026-10-19T02:34:38Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 60.09,
+"lc": 28.48,
+"phiE": 8.81,
+"phib": -114.45,
+"ang_min": 30.88
+},
+"inband14": 0.8995,
+"inband10": 0.5322,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 14.35,
+"mover_s_max": 98.0,
+"pad_s": [
+62.5,
+72.3
+],
+"ws_kin": 123
+},
+{
+"k": 51,
+"t": "2026-10-19T02:34:42Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 53.45,
+"lc": 23.21,
+"phiE": 11.78,
+"phib": -53.6,
+"ang_min": 28.51
+},
+"inband14": 0.8603,
+"inband10": 0.465,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 17.63,
+"mover_s_max": 93.3,
+"pad_s": [
+80.9,
+90.6
+],
+"ws_kin": 124
+},
+{
+"k": 52,
+"t": "2026-10-19T02:34:46Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 54.68,
+"lc": 32.04,
+"phiE": -21.79,
+"phib": -59.78,
+"ang_min": 30.57
+},
+"inband14": 0.8403,
+"inband10": 0.488,
+"reach": 0.675,
+"follow": 0.95,
+"contact": 0.0,
+"gap": 28.47,
+"mover_s_max": 93.1,
+"pad_s": [
+81.5,
+91.2
+],
+"ws_kin": 108
+},
+{
+"k": 53,
+"t": "2026-10-19T02:34:51Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 65.98,
+"lc": 23.16,
+"phiE": 4.48,
+"phib": -100.85,
+"ang_min": 27.68
+},
+"inband14": 0.8977,
+"inband10": 0.5229,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 13.89,
+"mover_s_max": 104.0,
+"pad_s": [
+76.3,
+86.0
+],
+"ws_kin": 124
+},
+{
+"k": 54,
+"t": "2026-10-19T02:34:56Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 54.52,
+"lc": 26.66,
+"phiE": -20.83,
+"phib": -85.41,
+"ang_min": 25.22
+},
+"inband14": 0.8438,
+"inband10": 0.4884,
+"reach": 0.7188,
+"follow": 1.0,
+"contact": 0.0057,
+"gap": 24.31,
+"mover_s_max": 88.6,
+"pad_s": [
+68.0,
+77.7
+],
+"ws_kin": 121
+},
+{
+"k": 55,
+"t": "2026-10-19T02:35:01Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 64.33,
+"lc": 31.63,
+"phiE": -19.86,
+"phib": -60.18,
+"ang_min": 30.79
+},
+"inband14": 0.8479,
+"inband10": 0.5076,
+"reach": 0.6875,
+"follow": 1.0,
+"contact": 0.0058,
+"gap": 27.04,
+"mover_s_max": 102.7,
+"pad_s": [
+90.8,
+100.5
+],
+"ws_kin": 111
+},
+{
+"k": 56,
+"t": "2026-10-19T02:35:04Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 71.45,
+"lc": 31.5,
+"phiE": -9.31,
+"phib": -36.73,
+"ang_min": 31.82
+},
+"inband14": 0.8978,
+"inband10": 0.5423,
+"reach": 0.6438,
+"follow": 0.9167,
+"contact": 0.0,
+"gap": 29.17,
+"mover_s_max": 122.1,
+"pad_s": [
+109.9,
+119.7
+],
+"ws_kin": 103
+},
+{
+"k": 57,
+"t": "2026-10-19T02:35:08Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 57.11,
+"lc": 30.06,
+"phiE": 8.81,
+"phib": -79.53,
+"ang_min": 31.08
+},
+"inband14": 0.8798,
+"inband10": 0.482,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 15.68,
+"mover_s_max": 93.5,
+"pad_s": [
+76.8,
+86.5
+],
+"ws_kin": 124
+},
+{
+"k": 58,
+"t": "2026-10-19T02:35:12Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 63.05,
+"lc": 22.7,
+"phiE": 3.4,
+"phib": -71.49,
+"ang_min": 25.86
+},
+"inband14": 0.8931,
+"inband10": 0.5129,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 14.35,
+"mover_s_max": 99.7,
+"pad_s": [
+84.9,
+94.6
+],
+"ws_kin": 124
+},
+{
+"k": 59,
+"t": "2026-10-19T02:35:17Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 53.74,
+"lc": 19.18,
+"phiE": -7.38,
+"phib": -83.57,
+"ang_min": 28.09
+},
+"inband14": 0.8894,
+"inband10": 0.5071,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 15.36,
+"mover_s_max": 91.0,
+"pad_s": [
+70.4,
+80.1
+],
+"ws_kin": 124
+},
+{
+"k": 60,
+"t": "2026-10-19T02:35:20Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 59.59,
+"lc": 19.96,
+"phiE": 9.55,
+"phib": -61.86,
+"ang_min": 30.81
+},
+"inband14": 0.8754,
+"inband10": 0.4854,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 16.12,
+"mover_s_max": 95.2,
+"pad_s": [
+82.9,
+92.6
+],
+"ws_kin": 124
+},
+{
+"k": 61,
+"t": "2026-10-19T02:35:24Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 68.9,
+"lc": 27.33,
+"phiE": -23.51,
+"phib": -59.52,
+"ang_min": 29.08
+},
+"inband14": 0.8484,
+"inband10": 0.5125,
+"reach": 0.675,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 27.66,
+"mover_s_max": 103.7,
+"pad_s": [
+91.4,
+101.2
+],
+"ws_kin": 108
+},
+{
+"k": 62,
+"t": "2026-10-19T02:35:29Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 66.78,
+"lc": 26.51,
+"phiE": 5.09,
+"phib": -35.25,
+"ang_min": 27.6
+},
+"inband14": 0.8796,
+"inband10": 0.5172,
+"reach": 0.7125,
+"follow": 0.9333,
+"contact": 0.0058,
+"gap": 23.04,
+"mover_s_max": 113.8,
+"pad_s": [
+102.3,
+112.1
+],
+"ws_kin": 115
+},
+{
+"k": 63,
+"t": "2026-10-19T02:35:33Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 47.13,
+"lc": 24.27,
+"phiE": 2.86,
+"phib": -82.67,
+"ang_min": 29.21
+},
+"inband14": 0.8826,
+"inband10": 0.4927,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 15.4,
+"mover_s_max": 84.6,
+"pad_s": [
+65.1,
+74.8
+],
+"ws_kin": 124
+},
+{
+"k": 64,
+"t": "2026-10-19T02:35:37Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 45.82,
+"lc": 29.62,
+"phiE": -14.64,
+"phib": -103.8,
+"ang_min": 31.07
+},
+"inband14": 0.8064,
+"inband10": 0.4574,
+"reach": 0.7312,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 26.8,
+"mover_s_max": 81.6,
+"pad_s": [
+52.4,
+62.2
+],
+"ws_kin": 121
+},
+{
+"k": 65,
+"t": "2026-10-19T02:35:41Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 58.93,
+"lc": 25.75,
+"phiE": 8.26,
+"phib": -112.69,
+"ang_min": 29.94
+},
+"inband14": 0.8997,
+"inband10": 0.5325,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 14.33,
+"mover_s_max": 96.8,
+"pad_s": [
+63.3,
+73.1
+],
+"ws_kin": 123
+},
+{
+"k": 66,
+"t": "2026-10-19T02:35:46Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 51.84,
+"lc": 20.81,
+"phiE": -0.03,
+"phib": -89.16,
+"ang_min": 27.46
+},
+"inband14": 0.8905,
+"inband10": 0.5109,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 14.61,
+"mover_s_max": 89.7,
+"pad_s": [
+67.0,
+76.8
+],
+"ws_kin": 124
+},
+{
+"k": 67,
+"t": "2026-10-19T02:35:51Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 70.31,
+"lc": 21.19,
+"phiE": -6.05,
+"phib": -117.96,
+"ang_min": 26.33
+},
+"inband14": 0.9256,
+"inband10": 0.6136,
+"reach": 0.5375,
+"follow": 0.4333,
+"contact": 0.0088,
+"gap": 88.8,
+"mover_s_max": 105.9,
+"pad_s": [
+74.9,
+84.7
+],
+"ws_kin": 124
+},
+{
+"k": 68,
+"t": "2026-10-19T02:35:55Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 68.5,
+"lc": 30.63,
+"phiE": -4.4,
+"phib": -101.09,
+"ang_min": 29.0
+},
+"inband14": 0.8869,
+"inband10": 0.5072,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 14.97,
+"mover_s_max": 105.7,
+"pad_s": [
+77.3,
+87.0
+],
+"ws_kin": 124
+},
+{
+"k": 69,
+"t": "2026-10-19T02:36:00Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 42.36,
+"lc": 29.41,
+"phiE": 1.52,
+"phib": -65.09,
+"ang_min": 29.36
+},
+"inband14": 0.8755,
+"inband10": 0.4717,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 16.75,
+"mover_s_max": 81.7,
+"pad_s": [
+69.6,
+79.3
+],
+"ws_kin": 123
+},
+{
+"k": 70,
+"t": "2026-10-19T02:30:44Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 57.35,
+"lc": 33.21,
+"phiE": -19.67,
+"phib": -39.36,
+"ang_min": 27.33
+},
+"inband14": 0.8896,
+"inband10": 0.5508,
+"reach": 0.6438,
+"follow": 0.9167,
+"contact": 0.0,
+"gap": 29.99,
+"mover_s_max": 106.4,
+"pad_s": [
+94.0,
+103.7
+],
+"ws_kin": 103
+},
+{
+"k": 71,
+"t": "2026-10-19T02:30:49Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 54.7,
+"lc": 31.24,
+"phiE": -9.86,
+"phib": -73.28,
+"ang_min": 25.41
+},
+"inband14": 0.8701,
+"inband10": 0.4795,
+"reach": 0.7562,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 17.92,
+"mover_s_max": 90.8,
+"pad_s": [
+77.6,
+87.4
+],
+"ws_kin": 124
+},
+{
+"k": 72,
+"t": "2026-10-19T02:30:54Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 64.61,
+"lc": 26.61,
+"phiE": -12.8,
+"phib": -52.98,
+"ang_min": 27.28
+},
+"inband14": 0.9098,
+"inband10": 0.5785,
+"reach": 0.6875,
+"follow": 1.0,
+"contact": 0.0058,
+"gap": 21.83,
+"mover_s_max": 104.9,
+"pad_s": [
+93.5,
+103.3
+],
+"ws_kin": 111
+},
+{
+"k": 73,
+"t": "2026-10-19T02:30:59Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 55.6,
+"lc": 20.14,
+"phiE": -10.08,
+"phib": -102.71,
+"ang_min": 27.0
+},
+"inband14": 0.8865,
+"inband10": 0.5091,
+"reach": 0.7562,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 16.28,
+"mover_s_max": 92.0,
+"pad_s": [
+65.4,
+75.1
+],
+"ws_kin": 123
+},
+{
+"k": 74,
+"t": "2026-10-19T02:31:05Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 64.51,
+"lc": 22.49,
+"phiE": -7.05,
+"phib": -36.64,
+"ang_min": 31.74
+},
+"inband14": 0.9131,
+"inband10": 0.5794,
+"reach": 0.6562,
+"follow": 0.8667,
+"contact": 0.0,
+"gap": 32.71,
+"mover_s_max": 108.1,
+"pad_s": [
+96.6,
+106.4
+],
+"ws_kin": 105
+},
+{
+"k": 75,
+"t": "2026-10-19T02:31:11Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 63.74,
+"lc": 26.66,
+"phiE": -14.76,
+"phib": -106.34,
+"ang_min": 31.8
+},
+"inband14": 0.8449,
+"inband10": 0.4722,
+"reach": 0.7562,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 20.44,
+"mover_s_max": 98.7,
+"pad_s": [
+69.2,
+79.0
+],
+"ws_kin": 124
+},
+{
+"k": 76,
+"t": "2026-10-19T02:31:17Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 57.48,
+"lc": 19.85,
+"phiE": -1.93,
+"phib": -53.98,
+"ang_min": 29.38
+},
+"inband14": 0.9035,
+"inband10": 0.548,
+"reach": 0.725,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 18.06,
+"mover_s_max": 95.8,
+"pad_s": [
+83.9,
+93.6
+],
+"ws_kin": 117
+},
+{
+"k": 77,
+"t": "2026-10-19T02:31:22Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 69.52,
+"lc": 18.63,
+"phiE": -5.44,
+"phib": -80.96,
+"ang_min": 25.64
+},
+"inband14": 0.8935,
+"inband10": 0.5125,
+"reach": 0.775,
+"follow": 1.0,
+"contact": 0.0,
+"gap": 13.15,
+"mover_s_max": 106.9,
+"pad_s": [
+87.0,
+96.8
+],
+"ws_kin": 124
+},
+{
+"k": 78,
+"t": "2026-10-19T02:31:28Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 61.24,
+"lc": 31.64,
+"phiE": -3.06,
+"phib": -97.89,
+"ang_min": 30.91
+},
+"inband14": 0.8795,
+"inband10": 0.4943,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 15.71,
+"mover_s_max": 98.6,
+"pad_s": [
+71.7,
+81.5
+],
+"ws_kin": 124
+},
+{
+"k": 79,
+"t": "2026-10-19T02:31:35Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 57.28,
+"lc": 26.17,
+"phiE": 2.86,
+"phib": -107.43,
+"ang_min": 30.78
+},
+"inband14": 0.9006,
+"inband10": 0.534,
+"reach": 0.7625,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 14.3,
+"mover_s_max": 95.2,
+"pad_s": [
+64.3,
+74.0
+],
+"ws_kin": 123
+},
+{
+"k": 80,
+"t": "2026-10-19T02:31:40Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 62.5,
+"lc": 30.59,
+"phiE": -17.91,
+"phib": -51.8,
+"ang_min": 26.52
+},
+"inband14": 0.8869,
+"inband10": 0.5484,
+"reach": 0.6813,
+"follow": 1.0,
+"contact": 0.0059,
+"gap": 23.77,
+"mover_s_max": 104.3,
+"pad_s": [
+92.9,
+102.6
+],
+"ws_kin": 110
+},
+{
+"k": 81,
+"t": "2026-10-19T02:31:46Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 44.45,
+"lc": 31.68,
+"phiE": 6.87,
+"phib": -45.49,
+"ang_min": 28.42
+},
+"inband14": 0.8698,
+"inband10": 0.4832,
+"reach": 0.7562,
+"follow": 1.0,
+"contact": 0.0055,
+"gap": 17.95,
+"mover_s_max": 93.2,
+"pad_s": [
+81.1,
+90.9
+],
+"ws_kin": 122
+},
+{
+"k": 82,
+"t": "2026-10-19T02:31:51Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 50.22,
+"lc": 18.11,
+"phiE": -1.11,
+"phib": -58.81,
+"ang_min": 30.89
+},
+"inband14": 0.8967,
+"inband10": 0.5349,
+"reach": 0.7312,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 17.77,
+"mover_s_max": 86.9,
+"pad_s": [
+74.5,
+84.2
+],
+"ws_kin": 118
+},
+{
+"k": 83,
+"t": "2026-10-19T02:31:58Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 50.46,
+"lc": 21.44,
+"phiE": -1.34,
+"phib": -51.57,
+"ang_min": 31.75
+},
+"inband14": 0.8949,
+"inband10": 0.5286,
+"reach": 0.7188,
+"follow": 1.0,
+"contact": 0.0057,
+"gap": 19.2,
+"mover_s_max": 90.9,
+"pad_s": [
+78.6,
+88.4
+],
+"ws_kin": 116
+},
+{
+"k": 84,
+"t": "2026-10-19T02:32:05Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 46.52,
+"lc": 25.72,
+"phiE": 8.1,
+"phib": -84.07,
+"ang_min": 29.22
+},
+"inband14": 0.8766,
+"inband10": 0.4828,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 16.0,
+"mover_s_max": 83.8,
+"pad_s": [
+63.6,
+73.4
+],
+"ws_kin": 124
+},
+{
+"k": 85,
+"t": "2026-10-19T02:32:11Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 42.73,
+"lc": 28.78,
+"phiE": 9.01,
+"phib": -49.72,
+"ang_min": 31.22
+},
+"inband14": 0.8557,
+"inband10": 0.4524,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 18.09,
+"mover_s_max": 87.0,
+"pad_s": [
+75.7,
+85.4
+],
+"ws_kin": 124
+},
+{
+"k": 86,
+"t": "2026-10-19T02:32:18Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 61.81,
+"lc": 21.93,
+"phiE": 3.44,
+"phib": -102.01,
+"ang_min": 30.86
+},
+"inband14": 0.8964,
+"inband10": 0.5209,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 14.02,
+"mover_s_max": 99.9,
+"pad_s": [
+72.1,
+81.8
+],
+"ws_kin": 124
+},
+{
+"k": 87,
+"t": "2026-10-19T02:32:26Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 43.88,
+"lc": 31.21,
+"phiE": -18.91,
+"phib": -88.11,
+"ang_min": 27.37
+},
+"inband14": 0.8214,
+"inband10": 0.4725,
+"reach": 0.7063,
+"follow": 1.0,
+"contact": 0.0057,
+"gap": 27.8,
+"mover_s_max": 79.0,
+"pad_s": [
+57.5,
+67.3
+],
+"ws_kin": 120
+},
+{
+"k": 88,
+"t": "2026-10-19T02:32:31Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 62.74,
+"lc": 20.86,
+"phiE": -10.34,
+"phib": -119.5,
+"ang_min": 27.0
+},
+"inband14": 0.9302,
+"inband10": 0.591,
+"reach": 0.6062,
+"follow": 0.6667,
+"contact": 0.0072,
+"gap": 58.43,
+"mover_s_max": 97.3,
+"pad_s": [
+66.6,
+76.3
+],
+"ws_kin": 123
+},
+{
+"k": 89,
+"t": "2026-10-19T02:32:37Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 54.64,
+"lc": 19.69,
+"phiE": -1.57,
+"phib": -87.66,
+"ang_min": 30.14
+},
+"inband14": 0.893,
+"inband10": 0.5159,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 14.36,
+"mover_s_max": 92.4,
+"pad_s": [
+70.3,
+80.1
+],
+"ws_kin": 124
+},
+{
+"k": 90,
+"t": "2026-10-19T02:32:43Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 61.62,
+"lc": 24.9,
+"phiE": 7.09,
+"phib": -66.27,
+"ang_min": 30.71
+},
+"inband14": 0.8835,
+"inband10": 0.4953,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0108,
+"gap": 15.85,
+"mover_s_max": 97.5,
+"pad_s": [
+85.9,
+95.6
+],
+"ws_kin": 125
+},
+{
+"k": 91,
+"t": "2026-10-19T02:32:48Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 52.25,
+"lc": 26.7,
+"phiE": -17.74,
+"phib": -35.33,
+"ang_min": 26.87
+},
+"inband14": 0.9007,
+"inband10": 0.5758,
+"reach": 0.6375,
+"follow": 0.8833,
+"contact": 0.0,
+"gap": 32.92,
+"mover_s_max": 97.3,
+"pad_s": [
+86.0,
+95.7
+],
+"ws_kin": 102
+},
+{
+"k": 92,
+"t": "2026-10-19T02:32:53Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 49.71,
+"lc": 19.17,
+"phiE": -15.46,
+"phib": -55.13,
+"ang_min": 29.95
+},
+"inband14": 0.907,
+"inband10": 0.5812,
+"reach": 0.6625,
+"follow": 1.0,
+"contact": 0.006,
+"gap": 24.35,
+"mover_s_max": 86.0,
+"pad_s": [
+73.6,
+83.4
+],
+"ws_kin": 107
+},
+{
+"k": 93,
+"t": "2026-10-19T02:32:58Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 45.86,
+"lc": 24.02,
+"phiE": -9.43,
+"phib": -63.48,
+"ang_min": 28.31
+},
+"inband14": 0.887,
+"inband10": 0.4989,
+"reach": 0.7188,
+"follow": 1.0,
+"contact": 0.0057,
+"gap": 19.99,
+"mover_s_max": 82.5,
+"pad_s": [
+70.7,
+80.4
+],
+"ws_kin": 116
+},
+{
+"k": 94,
+"t": "2026-10-19T02:33:05Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 59.6,
+"lc": 31.43,
+"phiE": 1.88,
+"phib": -88.97,
+"ang_min": 28.26
+},
+"inband14": 0.895,
+"inband10": 0.5205,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 14.16,
+"mover_s_max": 96.8,
+"pad_s": [
+74.8,
+84.6
+],
+"ws_kin": 124
+},
+{
+"k": 95,
+"t": "2026-10-19T02:33:11Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 53.03,
+"lc": 19.76,
+"phiE": -17.48,
+"phib": -95.88,
+"ang_min": 27.35
+},
+"inband14": 0.8678,
+"inband10": 0.4903,
+"reach": 0.7375,
+"follow": 1.0,
+"contact": 0.0056,
+"gap": 20.03,
+"mover_s_max": 88.0,
+"pad_s": [
+63.6,
+73.3
+],
+"ws_kin": 123
+},
+{
+"k": 96,
+"t": "2026-10-19T02:33:18Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 51.39,
+"lc": 27.23,
+"phiE": 10.95,
+"phib": -54.15,
+"ang_min": 30.58
+},
+"inband14": 0.8601,
+"inband10": 0.4617,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0054,
+"gap": 17.65,
+"mover_s_max": 93.6,
+"pad_s": [
+81.2,
+91.0
+],
+"ws_kin": 124
+},
+{
+"k": 97,
+"t": "2026-10-19T02:33:24Z",
+"stage": "knee re-centre: Bench(60,160) fast, psi 0, chain only (lead chain + knee override)",
+"params": {
+"lE": 64.78,
+"lc": 27.55,
+"phiE": 8.95,
+"phib": -61.38,
+"ang_min": 28.61
+},
+"inband14": 0.8772,
+"inband10": 0.4865,
+"reach": 0.7688,
+"follow": 1.0,
+"contact": 0.0108,
+"gap": 16.48,
+"mover_s_max": 103.9,
+"pad_s": [
+91.7,
+101.5
+],
+"ws_kin": 125
+}
+]
