@@ -178,6 +178,62 @@ held-out poses.
 - The ghost's continuity flood, and the real rod drive at kK 3.0 held out: not run, and not needed for this verdict.
 - Per-part density (`tools/sample_density.py measure`): not run. The crank's 61 samples are on file through the sampling check.
 
+## Skeptic (2026-10-19, 01:50-02:10 UTC)
+
+My job was to try to refute each of the auditor's 7 reasons by re-measuring or by reading the file behind it. I used
+local compute only: 2 niced processes, OMP_NUM_THREADS=1, load about 25. Farm spend: $0.
+
+**My own exact re-wear of the frozen claim.** Run with `LS_DRIVE=rssr CB_EXACT=1`, through the model's own CLI
+`frozen`, on the row's best_params (byte-identical to the remeasure file's params). The output stays in my scratchpad
+and is not committed. It took 610 s.
+- frozen 21.27: reach 0.7222, in-band 0.8731, contact 0.008; lost to fold 87, slide 10, contact 3.
+- fit_fast 14.54.
+- Contact depth: 3 poses, 18.54 mm summed, 12.80 mm deepest.
+- min th 5.036; overhead taken 7 / 28; the crank is [0.499, 14.0, 61].
+
+Every number equals the auditor's re-wear and the row. A held-out re-wear was still running when the time box closed,
+so the held numbers below come from the auditor's file.
+
+**Final verdict (computed by `tools/alignment_ledger.py skeptic`): WATCH.** I refuted 2 of the 7 reasons, and 5 watch
+reasons stand.
+
+| key | ruling | evidence (short; full text in `longstroke-slipper-knuckle-3r.rulings.json`) |
+|---|---|---|
+| held_out | **refuted** | The check fires only because v_gap is null (alignment_audit.py line 222). The drop it guards is measured: my re-wear gives 21.27, equal to the row's frozen.gap and to remeasure `_bench.json`. Held out is 26.19 (`_held.json`, re-derived from its fields). The drop is +4.92, under TH held_watch 6.0. |
+| sampling | upheld | Reproduced: the crank is [0.499, 14.0, 61], 6.86 % of 889 samples. Part-weighted in-band is -0.48 points, under the 3-point line, and the weighting does not flatter the row. The S2 rule that fires is "a part mostly out of band": half the crank's metal sits more than 14 mm off the skin, which is a bump. Per-part density is not measured. |
+| NEW-ghost-ceiling | **refuted** | The premise "the row's sentence does not label the ghost" is false. The row's `verdict` and the dashboard's verdict both say "drive metal DELETED (attribution only)", and the same sentence gives the with-metal numbers 25.83 and 23.31 / 27.67. The label has been there since 91acb18 (08:49 on 2026-10-17, before the first audit); I checked 91acb18, 3d9dc71 and 8f69bd6. No scored field holds the ghost: dashboard gap 14.54 is the claim's with-metal fast number, frozen_gap is 21.27, v_gap is null. The bare "2.34" is the leaky law pick, which P2 covers. |
+| P2 | upheld | `stroke_curve.py` lines 24-25 wear held_bench() in the law table. g65d held is 22.69 against slipper-nose's 23.45 (-0.76, reproduced). k30 held is -2.35, CI [-3.70, -0.86]. The row still quotes "2.34" with no interval. |
+| S1 | upheld | The class files reproduce the numbers. k30 vs slipper-nose held out: +30 / -5 poses, 17 of them below elevation 60, 3 overhead (21 vs 18 of 71). k30 vs g65d: +17 / -6, 0 overhead. Contacts go from 7 to 14, and the deepest press from 6.09 to 9.21 mm. |
+| G2 | upheld | At the steep law the spring is 0.282 N.m (1.88-2.35 N at the cuff); at the claim it is 0.178 N.m. There is no R17 / judge/dynamics.py output for this design anywhere (verify/, the row, judge/, pipeline/). That is a missing measurement. |
+| G5 | upheld | simplicity v2.2 gives 26.5 and raises the topology flag. joints 9 gives 25.5, and loops 4 gives 30.5. There is also a third consistent reading the auditor did not list: moving_bodies 7 gives 27.5 (sidecar-longdyad records 7 bodies for the same drive). The notes' "loops unchanged" matches 25.5. The design is behind under every reading. |
+
+Two more rulings, `idle` and `M4`, are carried unchanged from the 2026-10-17 skeptic, both refuted. They are not
+reasons in this audit. I kept them in the rulings file so the selftest keeps this row's regression.
+
+**Missed by the auditor (does not change this verdict; for the next audit):**
+1. **The M2 ball links' swivel range is never checked.**
+   - The RSSR drive-range gate (`docs/concepts/models/sidecar-longdyad-knuckle-3r.py` lines 200-216) ends the range
+     on only four conditions: transmission < 30 deg, ROD-hub2 < 1 mm, ROD-L1b < 1 mm and CRK-hub2 < 1 mm.
+   - `grep -i 'misalign|swivel|stud'` finds nothing in the model or in `docs/research/longstroke_drive.md`.
+   - A catalogue M2 ball link has a limited swivel cone. If the rod has to tilt past it over the 41.6 deg of K used,
+     that joint has no real component, which breaks CLAUDE.md's per-joint rule.
+   - Unmeasured. Next audit: compute the angle between the rod and the crank-pin axis, and between the rod and the K
+     axis, over the RSSR table, and compare them with the chosen part's datasheet swivel.
+2. **The dashboard's alignment text for this row is stale.**
+   - `docs/dashboard/data/morphs.json` row: alignment_t 2026-10-17T09:32:33Z, alignment_reasons is the old
+     NEW-ghost-ceiling wording, and alignment_stale is False.
+   - The ledger has had a newer audit entry since 2026-10-19T01:04:30Z, with G5.
+   - This is a reporting lag, not gaming. The stale flag should have fired.
+
+**Instrument notes (no tool edited).**
+- `held_out` fires on every screened row, whatever the measured drop, so two skeptics have now refuted it here. The
+  selftest reports this as an info-line false positive for this row.
+- Proposal: c_held_out could take the bench from a remeasured exact file whose frozen.gap reproduces the row's
+  `frozen.gap`, and apply TH held_watch to that drop. Measured effect: this row's held_out goes ok (+4.92). It moves
+  no score and no verified row, since verified rows have a v_gap.
+- `fold_margin` reports 5.003 deg from `claims.ghost_g65d_ATTRIBUTION_ONLY.held.th_margin_min`, an attribution's
+  field. The claim's own value is 5.036 bench / 5.058 held. That reading is conservative and only a labelling issue.
+
 ------------------------------------------------------------------------------------------------------------------------
 Earlier skeptic section (kept unchanged, dated 2026-10-17):
 
