@@ -6052,5 +6052,8 @@ take together with the boss in-band at that line's exit AND the bar's length fro
 optimum (55,45) and the low-swing exit (35,0) are 20+ deg apart, and nobody has priced the lines between; (iii) a bar
 that is part of member 3 (L2 / hub 3 plate extended to R4, no separate climbing bar) so its in-band is the link's
 (~0.9) not a strap's. Kill: the bar bound > 17.0 at every scanned line. Not to retry: arm-fixed C-band races at s 0.30
-or s 0.70-0.75, the knee-less knuckle relay, psi2 -45 seats. Scores are far from 95 on metal (best 19.50 envsel), so
+or s 0.70-0.75, the knee-less knuckle relay, psi2 -45 seats. Context for K2's bar: during this round the overhead track verified two WITH-knee 4-joint options,
+ikring-thinstack-knuckle-4r 9.75 and ikring-distalshell-knuckle-4r 10.54 (cx 48 each, no ledger entry yet), so a
+knee-less 4-joint row is worth the user's switch only near or under ~9.75, i.e. a J4 guide costing <= ~0.5 over the
+10.27 ideal - K2's kill should be set against that, not against 18.28. Scores are far from 95 on metal (best 19.50 envsel), so
 the objective stays the gap, not complexity.
