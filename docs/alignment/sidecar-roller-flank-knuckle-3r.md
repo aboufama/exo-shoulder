@@ -222,3 +222,108 @@ Checked and not present:
   - run a 2 mm near-touch search (26.7 points sit in the 1-2 mm shell, overhead most of all);
   - run R17 for the clock-spring hold and the 0.15 mm arm-over-lug gap.
 - The hourly audit loop re-audits this row when its row or verifier files change.
+
+## Skeptic (2026-10-19, 02:07-02:30 UTC)
+
+Ledger entry 2026-10-19T02:18:22Z (`by skeptic`, run `skeptic:sidecar-roller-flank-knuckle-3r`). Rulings:
+`docs/alignment/sidecar-roller-flank-knuckle-3r.rulings.json`. This replaces the 2026-10-16 file, which is still in
+git history.
+
+How I checked:
+- I re-derived every number from the raw files: the per-pose dumps, the probes, the verify JSON, and tools/simplicity.py
+  score().
+- I re-ran no wear. The box was at load 18 on 4 cores, and every reading I needed is on file in a file that reproduces
+  the claim.
+- I edited no bench, judge, kit, model, row or dashboard, and changed no score. Cost: $0.
+
+**Final verdict (ledger): WATCH.** 3 reasons are refuted and 9 are upheld, all of them watch.
+
+### Refuted (with evidence)
+
+**dominance.** The numbers reproduce, but the stated cause does not.
+- Frontload (`verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json`) reads 22.82 plain and 44.08 at 2 mm
+  (34 poses). This design reads 20.08 and 46.82 (45 poses).
+- Decomposed with `gap_of`, the 2.74 gain is all in-band: +3.57 (inband14 0.8546 -> 0.8903). Reach costs -0.56 (0.7278
+  -> 0.7222) and contact -0.27.
+- In-band counts only metal at 2-14 mm (concept_bench.py line 191), and this design reaches fewer poses than frontload.
+  So no part of the gain is metal moved into the 1-2 mm shell. The gain is a real lower profile.
+- What is left, 11 more taken poses under 2 mm, is G1's cost, and G1 stands.
+
+**fold_margin.** The margin is on file, and it passes.
+- `_probe_bench.json` `extras.th_margin_own_state` reads min 5.49 (0 < 5). `_probe_held.json` reads min 5.02 (0 < 5).
+  `_msub_rest_bench.json` `family_reading` reads min 5.49. All three reproduce the claim.
+- Recomputed from the 370 per-pose rows: rest m_plain min 6.075, moved min(m_sub, m_eff) min 5.49.
+- By c_fold_margin's own rule, that reads ok. The missing entry on the row stays under R1.
+
+**judgement:T5.** The documented rule (>= 2x the reference's summed depth AND >= 5 mm more) is not met against the
+documented reference, the current lead conecut-knee. I compared on the same 470 pose indices.
+
+| wear | this design | lead conecut-knee | ratio | excess |
+|---|---|---|---|---|
+| bench | 22.09 mm (5 contacts) | 20.24 mm (4 contacts) | x1.09 | +1.85 mm |
+| held out | 59.91 mm (10 contacts) | 60.97 mm (14 contacts) | x0.98 | -1.06 mm |
+
+- Both designs lose the 3 shared overhead contact poses.
+- This design presses deeper at (15,165,-60), +3.64 mm (12.57 vs 8.93). That is under the 5 mm floor.
+- It presses shallower at (30,165,-60) and (60,150,-105).
+- The only reference that meets the rule is sidecar-longdyad, which the tool comment marks stale since 2026-10-17 05:00.
+
+### Upheld
+
+- **reporting.** The verdict opens 'Contender, self-measured'. The dashboard's sweep_gap is 11.25 (score 95.91,
+  above the 95 line) against the verified 20.08, a difference of 8.83 (the trigger is > 5).
+- **judgement:G1.** Re-derived: 45 of 370 taken poses are under 2 mm, and all 8 taken overhead poses are under 2 mm
+  (0.65-1.98). The shell holds 26.74 points (TH watch 15). Two corrections:
+  - On the walls basis, 2 poses are under 1 mm (0.32 and 0.65), not 1.
+  - 183 poses are under 3 mm on the walls basis. The 171 is the sampled basis.
+- **judgement:M2.** The model inherits stk 4.8534, which is under even the iglidur figure of 5.0. At the MR63ZZ 6.0,
+  the bench reads 20.34 (+0.26). The held-out stk 6.0 wear is still not on file.
+- **judgement:G4.** Recounted: rest m_sub is under 5 on 85 of 185 poses, under 1 on 39, min 0.000. The stiffness of K's
+  rest stop is unmeasured, and B1 is open with the user. Correction: 33 of the 85 are at elev >= 90, so the near-fold is
+  not only in the low arm.
+- **judgement:M5.** The clock spring holds K off its rest on 185 / 443 poses, up to 51.68 / 53.37 deg. There is no CAD,
+  so R17 has never run.
+- **judgement:M3.** The 0.15 mm gap is confirmed (model line 142, RUNG 0.15).
+  - It meets the kit's written clearance for adjacent parts (>= 0.15 mm, skin-normal-3r-pin-knee.py docstring), since
+    arm and lug are a cam pair.
+  - The open question is whether a 51.5 mm bent cantilever under ~2.5 N holds 0.15 mm. No number is on file.
+- **judgement:S3.** The crank's short arm and its follower are not separate sampled metal. No model is on file.
+- **judgement:G5.** Reproduced: 21.75 on the row, 24.25 with the twin delta. cuff_knee over-subtracts bodies 1, made 2
+  and bought 2.
+- **judgement:R1.** Confirmed. The row also still compares against 'the verified lead 22.82' (frontload). Its mechanism
+  notes say the knee is 'sensed as the lead', while `cuff_knee.sensed` is false.
+
+### Missed by the auditor (for the next audit; not in this verdict)
+
+1. **The T5 tool check has been silently off against the lead for every design since 46af77e (2026-10-18 11:37).**
+   - *Cause:* `docs/alignment/remeasure/desmo-geom-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json` has
+     `"held": "missing dump"`, a string. `_depth_sources` (tools/alignment_audit.py line 351) calls `.get` on it and
+     raises AttributeError. `ref_depths()` in `c_contact_depth` swallows the exception and returns {}.
+   - *Effect:* every contact_depth check reads "no bench depth of conecut-knee-knuckle-3r on file" and ok. The lead's
+     dumps are claim-matched (bench frozen 18.28 / recomputed 18.29, held 22.38 / 22.38). So this audit's text "ok only
+     because the lead has no claim-matched depth file" is wrong.
+   - *Scale:* 16 audit JSONs carry the false ok. 5 of them meet the documented rule against the lead and should have
+     read watch from the tool:
+
+     | design | bench sum | ratio to lead | excess |
+     |---|---|---|---|
+     | freek-oracle-route-knuckle-4r | 78.55 mm | x3.88 | +58.31 mm |
+     | phi40-thinstack-relay-4r | 74.92 mm | x3.70 | +54.68 mm |
+     | proxtrack-relay-knuckle-4r | 50.36 mm | x2.49 | +30.12 mm |
+     | offset-shortcar-relay-4r | 46.18 mm | x2.28 | +25.94 mm |
+     | underpass-bridge-relay-4r | 43.23 mm | x2.14 | +22.99 mm |
+
+   - *Status:* their judgement passes caught it by hand. The tool did not.
+   - *Fix:* a tool change (guard the paired loop, bump VERSION, run the selftest), for the auditor. It was not made here.
+2. **G1 mixes count bases.** "45 < 2 mm" is counted with the walls. "1 < 1 mm" and "171 < 3 mm" are counted on sampled
+   metal. On one basis (walls) the counts are 45 / 2 / 183.
+3. **G4's "low-arm workspace" understates where the sub-chain folds.** 33 of the 85 rest poses with m_sub under 5 are
+   raised-arm (elev >= 90): ws 20 at 90-140 and 3 at >= 140, clip 4 and 6.
+4. **The row's verdict names a stale lead and the notes a sensed knee.** The verdict compares against 'the verified lead
+   22.82' (frontload, displaced 2026-10-17). The mechanism notes say the knee is 'sensed as the lead' while `cuff_knee`
+   says `sensed: false`. Both belong in the R1 clean-up.
+
+What happens next:
+- The auditor fixes the paired-file crash in `_depth_sources`, then re-runs contact_depth on the 16 affected audits.
+- The lead writes the fold margin (5.49 / 5.02) and the knee stack onto this row.
+- The held-out stk 6.0 wear runs when the box has CPU to spare.
