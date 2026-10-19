@@ -166,8 +166,9 @@ own instruments:
 
 The bench and held wears were started at 01:42 with CB_EXACT=1, nice 10, 1 thread each. Under CB_EXACT=1 the
 Bench(60,160) fit also runs on the exact path, which is how the row's own 50.06 was made ("the fit, re-run on the exact
-path, reproduces 42.73"). With the box at load 21-31 on 4 cores, both processes were still in the exact fit after 7 CPU
-minutes each (about 20 wall minutes). They did not reach the wear inside the time box.
+path, reproduces 42.73"). With the box at load 21-31 on 4 cores, both processes were still in the exact fit after 11.5
+CPU minutes each (27 wall minutes). I stopped them at 02:09, by PID, at the end of the time box. Neither reached the
+wear, and neither wrote a file.
 
 Numbers I could not get, and why: the 2 mm / 3 mm near-touch, the band read as 3-14 mm, taken poses < 2 mm, contact
 depth, workspace in-band, per-pose th margin and the held-out gap. All need that re-wear. The farm is closed: the $8
