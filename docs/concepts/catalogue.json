@@ -3770,7 +3770,7 @@
   "name": "The lead with a short knee and the round slotted shell DISTAL of every mover (s ~118, axis 8.5 deg / taz 243 through GH): an active one-sided J4 ring with no E bump and no knee lift (ikring-mirrork-knuckle-4r's ring hardware merged)",
   "family": "redundant 4R: the lead chain (K + slipper drive) with the knee re-proportioned + an arm-side counted J4 on a circular shell below the knee",
   "lens": "round301:rocker-redundant-4r (replaces deltoid-ring-pinknee-4r: the drive-free pin-knee host reads 280 / 8/28 / 14.48-14.72 at the buildable axes, no overhead gain; the ring's overhead gain needs K's folded-side window, so this keeps the lead's chain and fixes the hardware)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-19T01:32:54Z",
   "source": "round 301 (O1, track overhead) judge (docs/concepts/round301_ideation.md)",
   "merged_from": [
@@ -3795,7 +3795,7 @@
   "name": "Kneeless welded crossover 3R (cx 0, no knee): three O20 hubs on GH rays, a straight 40.5-deg link 1, J3 re-aimed to wdir(105, 10) through GH, the E leg of ONE rigid bracket crossing over link 2 and bolted to the arm pad (no K, no drive, no knee)",
   "family": "spherical 3R with a rigid cuff bracket (the baseline-3r topology) with lens A's J3 re-aim and the inverted J3 stack (deltoid-crest-j3-3r re-seated at the lead's J1 with the lead's a2)",
   "lens": "round301:drive-free-cone (minimum-parts branch; the user's 2026-10-18 rulings: not fully sold on the knee, prefers a no-knee setup that scores high)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-19T01:32:54Z",
   "source": "round 301 (O1, track overhead) judge (docs/concepts/round301_ideation.md)",
   "merged_from": [],
