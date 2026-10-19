@@ -164,3 +164,52 @@ candidates: a two-segment shell (an anterior segment that is not arm-fixed past 
 the GH-elbow line at s 0.65-0.8, where the arc spread is 4.0-4.4 mm). The reach saturation (finding 1) says the next
 points come from making the stopped chain legal at the 54 stop-illegal poses (J3 groove / q2 slot shape), not from
 travel.
+
+## Audit (death refutation, 2026-10-19 ~03:30 UTC)
+
+The auditor re-ran this model file with the same envsel exact path and seat (80, -15), stops q2 <= 100 and J3 [-100, 115],
+and relay axis tilt 12 / taz 235. No bench, kit or parent file was changed. Raw readings:
+`docs/concepts/verify/kneeless-steer-midbracket-relay-4r/audit_*`.
+
+**Convergence gate.** The 45 proxy (lug) entries form a pre-registered grid, not a CMA. On that grid the gate is met:
+gain 0.0 / 0.0 and top-5 within 0.09 points. The CLAIM number (metal), however, came from 3 reads, all at PHI 58. Those
+3 reads are not a converged sweep. They also skipped the region the design's own data points to. The parent's PHI 41/42
+were rejected for the same anterior shell end at +51.9. The spec says "PHI <= 50 by the +51 torso cliff" at s0 -80. This
+row's all-pose bins say the shell is clean only to +48.
+
+**What the audit measured (envsel exact, metal, same code):**
+
+| cell | gate (claim reading) | plain wear | reach | ib14 gate | contacts (chain / hw) | overhead /26 | proxy (honest lug) |
+|---|---|---|---|---|---|---|---|
+| PHI 58, s0 -80, delta 3.5 (agent) | 22.39 | 20.88 | 0.767 | 0.882 | 16 / 13 (+1) | 6 | 15.60 |
+| **PHI 40, s0 -80, delta 3.5 (audit)** | **19.50** | 17.65 | 0.761 | 0.882 | 13 / 2 | 4 | 18.38 |
+| PHI 40, s0 -80, bump 0 (spec value) | 19.49 | 17.65 | 0.761 | 0.882 | 13 / 2 | 4 | - |
+| PHI 58, s0 -55, bump 0 (spec value) | 22.84 | 22.84 | 0.794 | 0.825 | 16 / 3 (+1) | 6 | 15.93 |
+
+* **The reported claim number was pessimistic by 2.9 points.** At PHI 40 the anterior shell end sits at +49.6, inside the
+  clean bin. All 9 anterior-end contacts and the 3 zero-end contacts on the phi 55-57 relayed cross-body poses go away.
+  Only the 2 flange contacts remain (poses 259 / 264, phi 0). The knee-less metal reads **19.50**, not 22.39.
+* **The death still stands.** The proxy at PHI 40 is already 18.38. The ideal relay carries no hardware, so the metal
+  cannot read below it. That is above the 3-joint lead (18.28). At PHI 58 the proxy floor is 15.60, and the
+  arm-fixed shell end costs 6.8 points there. A middle PHI (44-50) interpolates between a proxy of ~17 and 3-5 extra
+  anterior-end contacts, so by this data it lands at ~18.5-19.5. Even the best proxy cell (15.60) is above phi40's
+  verified 14.06. A knee-less 4R that "scores way higher" (K1) is out of reach on this chain.
+* **bump 0 (the spec's step-1 value; the agent used the parent's 1.2) changes nothing:** 19.49 vs 19.50 and 22.84 vs
+  22.85. Not a cause.
+* **Attribution correction at s0 -55.** The doc and row say the 60-deg bump lifts hub 3 / L2 and that "chain-only in-band
+  drops 0.882 -> 0.825". That is wrong. The record's `chain_only_gap` at s0 -55 is 17.67, so the chain-only in-band is
+  ~0.877. The 0.825 is the PLAIN in-band (shell / carriage samples included), and the gate takes min(plain, chain-only).
+  bump 0 leaves it unchanged, which confirms the bump is not the cause. At s0 -55 the circular 1.0 mm shell floats out of
+  band over the deltoid's non-circular section. Its own in-band is what costs the 5 points. (The row's `ib14_chain` field
+  for s0_55 is really ib14_gate.)
+* **No modelling bug found** in the parts read. The J2 stop reads q2 = `M.D.ik(Q)[0][:, 1]`, the same column as every other
+  knuckle model. Stop-lost poses are counted lost, never taken. Contact poses count as reach-lost as well as contact, as
+  in the bench for every row. The gate reading (min of plain and chain-only in-band) is the convention phi40's verified
+  14.06 used.
+* Not run (time box): PHI 58 s0 -65 bump 0 (the one middle station; stopped unread), PHI 44-50 metal, Bench(110,360),
+  held-out.
+
+**Audit verdict: the death stands. The claim number is corrected to 19.50 envsel (PHI 40, s0 -80).** One-line reason:
+the knee-less relay's ideal bound at a clean-shell PHI (18.38 at PHI 40) is already above the 3-joint lead (18.28). A
+PHI that beats it puts the arm-fixed shell end past the +48 deg torso cliff (6.8 points of metal at PHI 58), so no
+station/PHI cell reaches the lead, let alone phi40's 14.06.

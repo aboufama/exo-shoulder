@@ -15,11 +15,11 @@
  "inband10": 0.5534,
  "contact": 0.0721,
  "gap": 22.39,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7611,
+ "v_follow": 1.0,
+ "v_inband14": 0.8815,
+ "v_inband10": 0.597,
+ "v_gap": 19.5,
  "n_configs": 93,
  "bench": "envsel exact (the round's selection bench; no Bench(60,160) or claim bench run: the pre-registered step-0 kill fired)",
  "step0": {
@@ -151,7 +151,49 @@
  },
  "verdict": "DEAD by the pre-registered step-0 kill. The bracket-honest proxy is > 15.4 at every cell; the best is 15.60 at seat (80,-15), PHI 58, s0 -80 (reach 0.803, ib14 0.882, 17 contacts). With the knee-less metal on the phi40 hardware the claim number is 22.39 at s0 -80 (the shell's anterior end hits the torso: 13 hardware contacts) and 22.85 at s0 -55 (the bump over the shell band lifts the chain out of band: ib14 0.825). Both are worse than the 3-joint lead (18.28) and the knee-less 3-joint best (21.07).",
  "limiter": "REACH at the relay's saturation: 289/360 workspace poses even at PHI 58, the same 289 at PHI 62 (fold 49, J3 stop 5, and 54 poses with no stop-legal relay angle). Then CONTACT of relayed overhead poses: 13 of 17 contacts are relayed, at elevation 150-167, on hub 2 / L2 / horn. The real metal adds a station dilemma: at s0 -80 the shell's anterior end lies past the torso cliff (clean only to ~+48 deg, measured per 2-deg bin over all poses; the shell needs +67.6 for PHI 58), and at s0 -55 the shell band sits under hub 3 / L2 and the 60-deg bump lifts them out of band.",
- "note": "Convergence gate on the 40 bracket-honest (lug) entries in order: gain over the 2nd half 0.0 score points, over the last third 0.0, top-5 spread 0.09 points. The best cell came 3rd of 8 and is pinned on its four seat neighbours. This is a grid on the judge's pre-registered stencil + 4 probes, not a CMA. q2 95 stops and PHI 50 were not run (PHI 54 < 58 < 62-dominated trend, and q2 95 only removes poses). Envsel only: Bench(110,360) and held-out never run (the kill fired first; the held-out split stays untouched). Shoulder slip (the standing price of every rigid-cuff spherical chain) is reported, not re-measured: p95 4.83 / max 5.14 mm at a 3 mm GH offset, ~6.4 / 6.9 mm at 4 mm.",
+ "note": "Convergence gate on the 40 bracket-honest (lug) entries in order: gain over the 2nd half 0.0 score points, over the last third 0.0, top-5 spread 0.09 points. The best cell came 3rd of 8 and is pinned on its four seat neighbours. This is a grid on the judge's pre-registered stencil + 4 probes, not a CMA. q2 95 stops and PHI 50 were not run (PHI 54 < 58 < 62-dominated trend, and q2 95 only removes poses). Envsel only: Bench(110,360) and held-out never run (the kill fired first; the held-out split stays untouched). Shoulder slip (the standing price of every rigid-cuff spherical chain) is reported, not re-measured: p95 4.83 / max 5.14 mm at a 3 mm GH offset, ~6.4 / 6.9 mm at 4 mm. AUDIT 2026-10-19: death stands; corrected metal claim 19.50 envsel at PHI 40 s0 -80 (agent's 22.39 was read only at PHI 58, past the +48 shell cliff); ideal bound at PHI 40 18.38 > lead 18.28.",
  "doc": "docs/concepts/kneeless-steer-midbracket-relay-4r.md",
- "model_file": "docs/concepts/models/kneeless-steer-midbracket-relay-4r.py"
+ "model_file": "docs/concepts/models/kneeless-steer-midbracket-relay-4r.py",
+ "audit": {
+  "t": "2026-10-19T03:32:00Z",
+  "bench": "envsel exact (same code, same seat/stops/axis)",
+  "refuted": false,
+  "corrected_claim": {
+   "PHI": 40,
+   "s0": -80,
+   "delta": 3.5,
+   "gate": 19.5,
+   "wear": 17.65,
+   "reach": 0.7611,
+   "ib14_gate": 0.8815,
+   "ib10": 0.597,
+   "contact": 0.0376,
+   "contacts": {
+    "chain": 13,
+    "hardware": 2
+   },
+   "overhead": [
+    4,
+    26
+   ],
+   "near2": 39.99,
+   "arc": [
+    -4.01,
+    49.58
+   ],
+   "proxy_honest_lug": 18.38
+  },
+  "bump0": {
+   "P40_s80": 19.49,
+   "P58_s55": 22.84
+  },
+  "findings": [
+   "claim number pessimistic by 2.9: the 3 metal reads were all at PHI 58, past the +48 deg anterior shell cliff the design's own bins show; PHI 40 removes 12 hardware contacts (9 anterior end, 3 zero end at phi 55-57) -> 19.50",
+   "death stands: the ideal (no-hardware) bound at PHI 40 is 18.38 > the 3-joint lead 18.28; PHI > ~40 brings back anterior-end contacts; best proxy 15.60 > phi40 verified 14.06",
+   "s0 -55 attribution wrong: chain-only in-band ~0.877 (chain_only_gap 17.67); the 0.825 is the plain in-band (shell/carriage samples); bump 0 leaves it unchanged",
+   "spec bump 0 vs agent bump 1.2: no effect (<= 0.01)",
+   "no modelling bug found (q2 column, stop-lost handling, gate convention match the parent and phi40's verified reading)"
+  ],
+  "raw": "docs/concepts/verify/kneeless-steer-midbracket-relay-4r/audit_*"
+ }
 }
