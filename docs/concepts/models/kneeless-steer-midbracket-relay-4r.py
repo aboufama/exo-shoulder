@@ -299,21 +299,87 @@ def metal_run(cell, s0hw, nc, nw, outp, exact=True, flood=False):
     return S, res
 
 
+def write_viz(cell, rec, outp):
+    """docs/concepts/viz/concepts/<id>.js: phi40's preview (same chain, relay solve, shell / carriage / coil) with the knee
+    deleted: member 3 = hub 3 + the bracket to the carriage lug, rigid with the relayed arm frame; the q2 / J3 stops in
+    the check (the relay takes the least phi at which they pass)"""
+    par = dict(LEAD0, b3=0.0, wd=float(cell["wd"]), wa=float(cell["wa"]), J3MIN=float(cell["J3MIN"]), J3MAX=float(cell["J3MAX"]))
+    vx = PT.CC.viz_export(PT.CC._clamp(dict(PT.CC.PARAMS, **par))) if hasattr(PT.CC, "_clamp") else PT.CC.viz_export(par)
+    P, G = (vx["P"], vx["G"]) if isinstance(vx, dict) and "P" in vx else vx
+    P = dict(P, J3MIN=float(cell["J3MIN"]), J3MAX=float(cell["J3MAX"]), Q2MAX=float(cell["q2max"]))
+    ax = AA.raxis(float(cell.get("tilt", 12)), float(cell.get("taz", 235))); e, f = AA._basis(ax)
+    th, off, kl = rec["thin_hw"], rec["offset_hw"], rec["kneeless"]; th0 = off["th0_pad"]; thc = th0 + off["delta"]
+    cc = th["coil_c"]
+    RL = dict(ax=[round(float(x), 5) for x in ax], e=[round(float(x), 5) for x in e], f=[round(float(x), 5) for x in f], s0=kl["s0"], Rt=th["R_t"],
+              lo=round(th0 + th["arc"][0], 2), hi=round(th0 + th["arc"][1], 2), th0=round(th0, 2), hc=1.4, PHI=float(cell["PHI"]), sgn=1.0, sw=12.0,
+              cw=14.0, cl=CAR_L, thc=round(thc, 2), coil=(None if cc is None else cc[1]), coilS=(None if cc is None else cc[0]), coilR=(None if cc is None else cc[2]),
+              coilD=12.0, coilL=10.0, bump=1.2)
+    src = open(os.path.join(REPO, "docs", "concepts", "viz", "concepts", "phi40-thinstack-relay-4r.js")).read()
+    lines = src.split("\n")
+    i0 = next(k for k, l in enumerate(lines) if l.startswith("(function () {"))
+    body = "\n".join(lines[i0:])
+    import re
+    body = re.sub(r"  const P = \{.*?\};\n", "  const P = " + json.dumps(P, default=float) + ";\n", body, count=1)
+    body = re.sub(r"  const G = \{.*?\};\n", "  const G = " + json.dumps(G, default=float) + ";\n", body, count=1)
+    body = re.sub(r"  const RL = \{.*?\};\n", "  const RL = " + json.dumps(RL, default=float) + ";\n", body, count=1)
+    a = body.index("  function solveQ(Q) {"); b = body.index("  const check = (q, ctx) => checkQ(q, Qof(ctx));")
+    body = body[:a] + """  function solveQ(Q) {
+    const k = ik(Q), R12 = M.mul(M.mul(M.rot(u[0], k.q1), M.rot(uK, k.dK)), M.rot(u[1], k.q2));
+    const q3 = K.axisAngle(u[2], vref, M.mulv(M.T(R12), M.mulv(Q, vref)));
+    return [k.q1, k.dK, k.q2, K.wrap180(q3)];
+  }
+  function fk(q) { const X = chain(q[0], q[1], q[2], q[3]); return Object.assign(X, { Rm3: X.R123 }); }
+""" + body[b:]
+    a = body.index("    const F = fk(q), sv = M.mulv(M.T(Q), F.t3), kn = knee("); b = body.index("    if (q[3] < P.J3MIN)")
+    body = body[:a] + "    if (k.L.state === 0 && k.q2 > P.Q2MAX) return `J2 on its stretched dowel stop (q2 ${k.q2.toFixed(1)} > ${P.Q2MAX} deg: own-angle slot in hub 2's lower member)`;\n" + body[b:]
+    body = body.replace("    const F = fk(q), sv = M.mulv(M.T(Q), F.t3), kn = knee([V.dot(sv, sa), V.dot(sv, st)]);\n", "")
+    a = body.index("    id: 'phi40-thinstack-relay-4r'"); b = body.index("    solve: solveC,")
+    body = body[:a] + """    id: '""" + ID + """', name: 'Knee-less steered relay: phi40 chain with the cuff knee deleted, J3 on a GH ray (""" + f"{cell['wd']:g}, {cell['wa']:g}" + """), own-angle stops q2 <= """ + f"{cell['q2max']:g}" + """ / J3 [""" + f"{cell['J3MIN']:g}, {cell['J3MAX']:g}" + """], one rigid member 3 (hub 3 + bracket + T-nut carriage) on an arm-fixed 1.0 mm shell at s0 """ + f"{kl['s0']:g}" + """, PHI """ + f"{cell['PHI']:g}" + """ (4 counted joints)',
+    dof: { active: 4, passive: 1 },   // J1, J2, J3 + the counted relay; K slaved (slipper nose); no knee, no cuff slides
+    params: P,
+    q0: ctx => solve(ctx),
+    qNames: ['J1', 'K (passive, slaved to q2 by the lobe - bell crank - sliding nose - flank)', 'J2', 'J3', 'relay phi (carriage on the arm arc; constant-force strip on its zero dowel)'], qUnits: ['deg', 'deg', 'deg', 'deg', 'deg'],
+    resUnits: ['deg', 'deg', 'deg', 'mm', 'mm', 'mm', 'deg'],
+""" + body[b:]
+    body = body.replace("residual: (q, ctx) => { const F = fk(q); return M.rotErrDeg(F.R5, Qof(ctx)).concat(F.t5, [q[6] - phiOf(ctx)]); },",
+                        "residual: (q, ctx) => { const F = fk(q); return M.rotErrDeg(F.Rm3, Qof(ctx)).concat(F.t3, [q[4] - phiOf(ctx)]); },")
+    body = body.replace("name: 'J3 (skin-normal tilt, line misses GH; hard stop", "name: 'J3 (axis on a GH ray, re-seated; hard stop")
+    keep = []
+    for l in body.split("\n"):
+        if any(t in l for t in ("name: 'knee pin a", "name: 'knee link", "name: 'knee pin b", "name: 'arm pad (on the cuff", "name: 'L-lug bracket", "name: 'E strap (member 3")): continue
+        keep.append(l)
+    body = "\n".join(keep)
+    body = body.replace("      const n3 = Wd(M.mulv(F.Rm3, sn)), lvl = (p, h) => V.madd(W(p), n3, h), kz = G.tr + G.tp + G.RUN + G.tp / 2;\n", "")
+    body = body.replace(", padC = arm(V.madd(G.Bm, sn, G.tr + G.tp / 2)), padN = M.mulv(Hc, sn);", ";")
+    body = body.replace("      const axW = M.mulv(ctx.H, RL.ax);",
+                        "      const axW = M.mulv(ctx.H, RL.ax), lug = M.mulv(Hc, V.madd(V.scale(RL.ax, RL.s0 + RL.cl / 2), dTh(RL.thc), RL.Rt + RL.hc + RL.bump));")
+    body = body.replace("        h3,\n", "        h3,\n        { kind: 'link', role: 'link', name: 'member 3 bracket: one bent 3 x 10 Ti-6Al-4V bar down E\\'s fitted line, hub 3 lower plate -> the carriage posterior-proximal lug (60-deg climb, bend R >= 15)', a: rim, b: lug, r: 2.5 },\n", 1)
+    body = body.replace("RL.s0), dTh(t), RL.Rt))", "RL.s0), dTh(t), RL.Rt))")
+    head = ("/* " + ID + ": the knee-less steered relay at its best measured configuration (envsel). phi40-thinstack-relay-4r's chain\n"
+            " * (J1 - K slaved by the slipper nose - J2 - J3) with J3 re-seated on a GH ray and the two-pin cuff knee DELETED: member 3\n"
+            " * (hub 3 lower plate + one bent Ti bracket + a 14 x 14 T-nut carriage) is rigid with the relayed arm frame. Own-angle\n"
+            " * stops (J2 dowel slot q2 <= Q2MAX, J3 groove [J3MIN, J3MAX]) steer the relay: per frame the relay takes the LEAST phi in\n"
+            " * [0, PHI] at which the lead's gates and the stops pass. 4 counted joints, K passive (slaved), 0 passive translations.\n"
+            " * Geometry: CC.viz_export at this seat + the relay geometry of the metal wear record. */\n")
+    open(outp, "w").write(head + body)
+    return outp
+
+
 if __name__ == "__main__":
     if MODE == "step0":
         cells = json.loads(sys.argv[2]); s0s = json.loads(sys.argv[3]); outp = sys.argv[4]
         mlist = json.loads(sys.argv[5]) if len(sys.argv) > 5 else []          # optional knee-less metal on the same prepare
         for cell in cells:
             o, S = step0_cell(cell, s0s)
-            short = {k: (v["gap"], v["n_contact"], v["inband14"], v["reach"], v["overhead"][0]) for k, v in o.items() if not k.startswith("meta")}
-            print(json.dumps(dict(cell=cell, short=short, meta={k: o["meta"][k] for k in ("s_pad", "sE", "s_hub3", "E_kept", "relayed", "nan", "secs", "why")}), default=float), flush=True)
+            shrt = {k: (v["gap"], v["n_contact"], v["inband14"], v["reach"], v["overhead"][0]) for k, v in o.items() if not k.startswith("meta")}
+            print(json.dumps(dict(cell=cell, short=shrt, meta={k: o["meta"][k] for k in ("s_pad", "sE", "s_hub3", "E_kept", "relayed", "nan", "secs", "why")}), default=float), flush=True)
             with open(outp, "a") as f: f.write(json.dumps(o, default=float) + "\n")
             if mlist:
                 base = set_cell(cell); base["flood"] = 0; stop_lost(S)
                 for s0, hw in mlist:
                     w = wear_kneeless(S, base, s0, hw); w["cell"] = cell; w["tag"] = f"s0{s0:g}_{json.dumps(hw, sort_keys=True)}"
-                    print(json.dumps(dict(tag=w["tag"], cell=cell, **short(w)), default=float), flush=True)
                     with open(outp.replace(".jsonl", "_metal.jsonl"), "a") as f: f.write(json.dumps(w, default=float) + "\n")
+                    print(json.dumps(dict(tag=w["tag"], cell=cell, **short(w)), default=float), flush=True)
                 KL["on"] = False
                 if "_orig" in S: S["M"].rigid, S["M"].link_pts, S["M"].contact = S["_orig"]
         sys.exit(0)
@@ -324,4 +390,7 @@ if __name__ == "__main__":
             sub = os.path.join(VDIR, "flood_" + "_".join(f"{k}{cell[k]:g}" for k in sorted(cell) if isinstance(cell[k], (int, float))))
             os.makedirs(sub, exist_ok=True); PT.VDIR = sub; OS.VDIR = sub; P4.VDIR = sub
         metal_run(cell, lst, nc, nw, outp, exact=(nc in (-2, -1) or os.environ.get("CB_EXACT") == "1"), flood=fl); sys.exit(0)
-    print("modes: step0 | metal")
+    if MODE == "viz":                                       # viz '<cell>' metal.jsonl line
+        rec = [json.loads(l) for l in open(sys.argv[3])][int(sys.argv[4])]
+        print(write_viz(json.loads(sys.argv[2]), rec, os.path.join(REPO, "docs", "concepts", "viz", "concepts", ID + ".js"))); sys.exit(0)
+    print("modes: step0 | metal | viz")
