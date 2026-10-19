@@ -134,3 +134,69 @@ big-bench poses, 50 of them at |axial| >= 120) bounds reach, as the proposer's o
    (tools/alignment_paired.py dump) - not written here (time box).
 2. The J3 stop window: re-fit it with a margin on the search bench (j3stop_margin 5-10) - see the diagnostic above.
 3. Seeds B / C: knee-only CMA at their seats before any verdict (step 0 only so far).
+
+## Verification (independent verifier, 2026-10-19 04:18-04:34 UTC, local exact, <= 2 niced processes)
+
+Harness: `docs/concepts/verify/isoceles-shortdyad-pinknee-3r.py`. It does not run the claimant's model file. It builds the
+claimed configuration (the claim read's `params_resolved`, every key, J2 seat as re-solved) in the crest-knee verifier's own
+instance of the model, switched to `CK.JogModel`
+(`docs/concepts/verify/crest-knee-3r.py` + `crest-knee-3r-joggle.py` -> `crest-knee-3r.py` -> `skin-normal-3r-pin-knee.py`).
+The protocol is frozen shape: fit on Bench(60,160) FAST, then worn without refit on Bench(110,360) and on the disjoint
+held-out bench, both CB_EXACT=1.
+
+| read | gap | score | reach | follow | ib14 | ib10 | contact | overhead ws |
+|---|---|---|---|---|---|---|---|---|
+| claim, frozen exact Bench(110,360) | 27.91 | 89.85 | 0.6611 | 0.9818 | 0.8824 | 0.5138 | 0.0226 | 9/28 |
+| **verifier, same bench, all checks** | **27.91** | **89.85** | 0.6611 | 0.9818 | 0.8824 | 0.5138 | 0.0226 (8 poses) | 9/28 |
+| verifier, connected set (flood) | 27.90 | 89.85 | 0.6611 | 0.9818 | 0.8824 | | 0.0226 | |
+| verifier, held out, all checks | 30.30 | 88.98 | 0.6528 | 0.9909 | 0.8806 | 0.5082 | 0.0364 (13 poses) | 8/26 |
+| champion spherical 3R, same bench + protocol (re-run here, fold margin 5) | 64.93 | 76.39 | 0.7278 | 0.9182 | 0.565 | 0.3504 | 0.1103 | |
+
+Checks, all on the corrected taken set:
+
+- **DOF.** 3 active O20 hubs (rad 10 at all three, ruling 2). The cuff knee is 2 MR63ZZ pins, stack 6, outside the count
+  (decision 5). The knee is set by the closure: knee angle 105.1-112.8 deg taken, inside [25.22, 154.78]. No
+  undetermined coordinate, 0 passive translations, no springs, loops, gears, pulleys or cables.
+- **Seats.** The J2 re-solve is exact: angle(u1, u2) = 40.9681 = a1 and angle(u2, u3) = 53.6261 = a2, on branch -1 as
+  claimed. J1 sits at bvec(83.2, 61.0) with anterior -0.057, legal under ruling 4 (az -110..135, el -20..90, anterior
+  <= 0.20). Hub centres sit 53.3 / 63.0 / 64.2 mm from GH.
+- **Pin-knee extra checks.** Independent 3D closure max 0.023 deg. Knee vs hub 3 upper: 0 bad. E boss vs hubs / links: 0 bad.
+  The arm pad sits 129.6 mm from GH on the humerus, so the 115 mm E strap ends on the cuff.
+- **Crest checks.** J3 window [269.13, +265.13]: 0 taken poses outside it, min margin 4.85 bench / 1.0 held. th fold
+  margin min 5.072 bench / 5.667 held (rule 5). Radial drift 0. Closure residual max 0.015 deg.
+- **Joggle checks.** Step 6.29 mm over a 21.0 mm ramp (16.7 deg). A bent 3 mm bar with R15 can rise 7.57 mm, so it is
+  buildable bent. Knee, pad and boss samples follow the joggle law exactly (0.0 mm error). Every knee slice clears hubs
+  1 / 2 and L1 / L2 by >= 54 mm, and the pad clears the boss and strap by >= 19.7 mm. 0 bad poses.
+  **Removed by all checks: 0 poses** (bench and held).
+- **Continuity flood.** Full 1432-pose workspace grid, J3 window and knee branch as walls, 2-deg slerp edges, no step
+  > 10 deg. 983 kinematic nodes, 982 connected, 1 island at (-15, 105, 45), which is not a bench pose. 811 / 811 edges
+  passed. **0 bench or held poses dropped**: connected = static.
+- **Per-pose dumps (T5 rule).** `docs/alignment/remeasure/isoceles-shortdyad-pinknee-3r_v_bench_perpose.json` recomputes
+  27.90 and `..._v_held_perpose.json` recomputes 30.30. Both are within +-0.05 of the claim.
+
+Red team (this verifier):
+
+- **Contact depth (T5).** Bench: 8 contacts, depth sum 27.47 mm. Held: 13 contacts, depth sum 51.06 mm. The lead's T5
+  is 20.24 mm. Attribution by part (`..._v_contact_parts.json`):
+  - The shallow contacts (0.1-3.5 mm, elev 60-90) are hub 2's wall or crown on the posterior shoulder.
+  - The deep ones are the cuff knee + arm pad pressed into the torso with the arm across the body, low, in full internal
+    rotation: bench pose 405 (plane 120, elev 30, axial -180) at -14.35 mm; held poses 378 / 431 / 454 (plane 105-150,
+    elev 30, axial -165) at -14.4 / -12.0 / -9.1 mm.
+  - The gap already charges them as contact. They are not a refutation, but that sector would be felt hard.
+- **Knee-over-strap stack.** The joggled knee rides over the E strap at pin a with a constant 0.25 mm gap at every
+  taken pose (bench and held; rule 0.15). That makes it a joint-stack running gap, set by a shim, not a pose-dependent
+  near miss. The tolerance probe shows a stack error of 0.1 mm closes it at 145 of 346 taken poses, and 0.2 mm at all
+  of them (`..._v_tolprobe_bench.json`, `..._v_tolprobe_held.json`). The CAD must hold this stack with a thrust washer,
+  as at every hub.
+- **Near touch** (reported, not a gate): 1 mm near-touch gap 31.83 bench / 31.42 held. Minimum 0.28 mm, at overhead
+  pose 237 (15 / 165 / -60), on a crown or wall.
+- **Conditioning.** min |u1.(u2 x w)| is 0.187 bench / 0.179 held, with 9 / 14 takes below H1's 0.233. The fold margin
+  in th holds at >= 5.07 deg, which is the user's rule, so this is a feel / torque watch item for the powered product.
+- **Selection.** The pre-registered rule (best near-touch at ib14 >= 0.88 over the 253-config sweep) does pick
+  isoA-g18-0 (near-touch 23.05). The better-scoring isoA2-g9-1 (19.63 plain) has ib14 0.871 and was correctly not
+  picked. One held read.
+
+**Verdict: VERIFIED at 27.91 (score 89.85), held 30.30. Not refuted** (champion 64.93 on the same bench and checks, re-run
+here). All checks remove 0 poses and the flood drops 0. At cx 0 it is the second verified cx-0 design, 0.71 behind H1's 27.20
+and ahead of crest-knee 31.50. It is not a leader (the lead is conecut-knee-knuckle-3r at 18.28) and not a 95 (95 needs
+gap <= 13.75). Its limiter is still the J2 fold: 82 ws poses, 10 of them overhead. The J3 stop costs 29 more.

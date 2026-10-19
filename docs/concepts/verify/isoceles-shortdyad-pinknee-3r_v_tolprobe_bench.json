@@ -1,0 +1,64 @@
+{
+ "wear": "bench",
+ "cell": "joggle",
+ "taken": 346,
+ "min_mm": 0.25,
+ "rows": [
+  {
+   "strap_level_error_mm": 0.0,
+   "jam_poses": 0,
+   "gap": 27.91,
+   "reach": 0.6611,
+   "follow": 0.9818,
+   "inband14": 0.8824
+  },
+  {
+   "strap_level_error_mm": 0.05,
+   "jam_poses": 0,
+   "gap": 27.91,
+   "reach": 0.6611,
+   "follow": 0.9818,
+   "inband14": 0.8824
+  },
+  {
+   "strap_level_error_mm": 0.1,
+   "jam_poses": 145,
+   "gap": 88.8,
+   "reach": 0.3639,
+   "follow": 0.6364,
+   "inband14": 0.9047
+  },
+  {
+   "strap_level_error_mm": 0.2,
+   "jam_poses": 346,
+   "gap": 375.0,
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband14": 0.0
+  },
+  {
+   "strap_level_error_mm": 0.3,
+   "jam_poses": 346,
+   "gap": 375.0,
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband14": 0.0
+  },
+  {
+   "strap_level_error_mm": 0.5,
+   "jam_poses": 346,
+   "gap": 375.0,
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband14": 0.0
+  },
+  {
+   "strap_level_error_mm": 1.0,
+   "jam_poses": 346,
+   "gap": 375.0,
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband14": 0.0
+  }
+ ]
+}
