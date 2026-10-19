@@ -24,6 +24,7 @@ tilted 8.5 deg toward taz 243) whose value is set per pose by a LEAD-FIRST PROXI
     CB_EXACT=1 ... ik '<json>' bench out.json        # k-table + IK + final wear on Bench(110,360) exact (frozen)
     CB_EXACT=1 ... ik '<json>' held out.json         # the same on the held-out bench (report only)
     CB_EXACT=1 ... control '<json>' out.json         # least-phi unpowered control, Bench(110,360) exact
+    CB_EXACT=1 ... rechoose '<json>' bench out.json prev.json   # final wear only, a previous run's k-table choice under IK_RULE
 """
 import importlib.util, json, math, os, sys, time
 import numpy as np
@@ -236,7 +237,7 @@ def ik_flood(F, step_deg=2.0, pj=10.0, aj=25.0, dkmax=10.0):
 
 
 # ---------------------------------------------------------------- the IK wear ------------------------------------------------
-def ik_run(base, which, outp, ks=None):
+def ik_run(base, which, outp, ks=None, choice_from=None):
     t0 = time.time(); F = fit(base); hw = dict(base); KS = ks or kgrid(float(F["rp"]["PHI"]))
     print(json.dumps(dict(fit=F["fit"], axis=np.round(F["ax"], 4).tolist(), ks=KS)), flush=True)
     os.environ["CB_EXACT"] = "1"
@@ -245,27 +246,37 @@ def ik_run(base, which, outp, ks=None):
         kd = np.array(Bf.kind); Bf = subbench(Bf, np.r_[np.nonzero(kd == "clip")[0][::100], np.nonzero(kd == "ws")[0]])
     elif which != "held": Bf = subbench(Bf, np.arange(len(Bf.idx)))          # unbounded skin / distance caches (470 poses fit in RAM)
     nZ = len(AA.Z0["HG"]); kind = np.array(Bf.kind); ws = kind == "ws"
-    # k = 0: the whole bench (the lead with the ring hardware parked at psi 0)
-    o0, S0 = wear_phi(F, Bf, np.zeros(nZ), hw); mm0, why0 = pose_state(Bf, S0["M"])
-    tk0 = np.array([m is not None and m >= 0 for m in mm0])
-    print(json.dumps(dict(k=0.0, summary=P4.summary(o0), secs=round(time.time() - t0, 1)), default=float), flush=True)
-    need = np.nonzero(ws & ~tk0)[0]; cl = np.nonzero(~ws)[0]; sel = np.r_[cl[::max(1, len(cl) // 6)][:6], need]
-    Bs = subbench(Bf, sel); tab = {0.0: dict(mm=[mm0[j] for j in sel], why=[why0[j] for j in sel])}
-    for k in KS[1:]:
-        t1 = time.time(); phi = np.zeros(nZ); phi[Bf.idx[need]] = k
-        ok_, Sk = wear_phi(F, Bs, phi, hw); mm, wy = pose_state(Bs, Sk["M"]); tab[k] = dict(mm=mm, why=wy)
-        print(json.dumps(dict(k=k, taken_new=int(sum(1 for jj, j in enumerate(sel) if ws[j] and mm[jj] is not None and mm[jj] >= 0)),
-                              secs=round(time.time() - t1, 1))), flush=True)
-    # the IK: lead-first, max min metal among takes (ties -> smaller k); else the least-deep closing k (a contact); else 0
-    choice = {}
-    for jj, j in enumerate(sel):
-        if not ws[j]: continue
-        tks = [(tab[k]["mm"][jj], k) for k in KS if tab[k]["mm"][jj] is not None and tab[k]["mm"][jj] >= 0]
-        cls = [(tab[k]["mm"][jj], k) for k in KS if tab[k]["mm"][jj] is not None]
-        if tks: m, k = max(tks, key=lambda x: (round(x[0], 6), -x[1]))
-        elif cls and RULE == "closest-contact": m, k = max(cls, key=lambda x: (round(x[0], 6), -x[1]))   # (first run's rule: closes 9 lost poses in contact)
-        else: m, k = tab[0.0]["mm"][jj], 0.0                 # the spec: no take at any k -> psi stays 0 (the pose's k = 0 state, the lead's own)
-        choice[int(j)] = dict(k=k, mm=m, n_take_k=len(tks), takes={str(kk): round(mv, 2) for mv, kk in tks})
+    if choice_from:                                         # RECHOOSE: a previous run's k-table choice, re-read under RULE (final wear only)
+        prev = json.load(open(choice_from)); choice = {}
+        for j, c in prev["ik"]["choice"].items():
+            c = dict(c)
+            if RULE == "take-only" and c["k"] != 0 and not c["takes"]: c.update(k=0.0, mm=None, reverted=True)
+            choice[int(j)] = c
+        o0 = dict(prev["ik"]["k0"]["summary"]); tk0 = np.array([bool(ws[j]) and (j not in choice) for j in range(len(Bf.idx))])   # k = 0 takes = ws poses the IK never had to move
+        k0sum = prev["ik"]["k0"]
+    else: choice = None
+    if choice is None:
+      # k = 0: the whole bench (the lead with the ring hardware parked at psi 0)
+      o0, S0 = wear_phi(F, Bf, np.zeros(nZ), hw); mm0, why0 = pose_state(Bf, S0["M"])
+      tk0 = np.array([m is not None and m >= 0 for m in mm0])
+      print(json.dumps(dict(k=0.0, summary=P4.summary(o0), secs=round(time.time() - t0, 1)), default=float), flush=True)
+      need = np.nonzero(ws & ~tk0)[0]; cl = np.nonzero(~ws)[0]; sel = np.r_[cl[::max(1, len(cl) // 6)][:6], need]
+      Bs = subbench(Bf, sel); tab = {0.0: dict(mm=[mm0[j] for j in sel], why=[why0[j] for j in sel])}
+      for k in KS[1:]:
+          t1 = time.time(); phi = np.zeros(nZ); phi[Bf.idx[need]] = k
+          ok_, Sk = wear_phi(F, Bs, phi, hw); mm, wy = pose_state(Bs, Sk["M"]); tab[k] = dict(mm=mm, why=wy)
+          print(json.dumps(dict(k=k, taken_new=int(sum(1 for jj, j in enumerate(sel) if ws[j] and mm[jj] is not None and mm[jj] >= 0)),
+                                secs=round(time.time() - t1, 1))), flush=True)
+      # the IK: lead-first, max min metal among takes (ties -> smaller k); else the least-deep closing k (a contact); else 0
+      choice = {}
+      for jj, j in enumerate(sel):
+          if not ws[j]: continue
+          tks = [(tab[k]["mm"][jj], k) for k in KS if tab[k]["mm"][jj] is not None and tab[k]["mm"][jj] >= 0]
+          cls = [(tab[k]["mm"][jj], k) for k in KS if tab[k]["mm"][jj] is not None]
+          if tks: m, k = max(tks, key=lambda x: (round(x[0], 6), -x[1]))
+          elif cls and RULE == "closest-contact": m, k = max(cls, key=lambda x: (round(x[0], 6), -x[1]))   # (first run's rule: closes 9 lost poses in contact)
+          else: m, k = tab[0.0]["mm"][jj], 0.0                 # the spec: no take at any k -> psi stays 0 (the pose's k = 0 state, the lead's own)
+          choice[int(j)] = dict(k=k, mm=m, n_take_k=len(tks), takes={str(kk): round(mv, 2) for mv, kk in tks})
     phiF = np.zeros(nZ)
     for j, c in choice.items(): phiF[Bf.idx[j]] = c["k"]
     # continuity: the IK flood (bench ws poses are envelope-grid nodes; held ws too)
@@ -281,8 +292,9 @@ def ik_run(base, which, outp, ks=None):
     nm = np.array([mmF[j] for j in new]) if new else np.zeros(0)
     hist = {}
     for j in new: hist[str(phiF[B.idx[j]])] = hist.get(str(phiF[B.idx[j]]), 0) + 1
-    o["ik"] = dict(which=which, ks=KS, k0=dict(summary=P4.summary(o0), ws_taken=int((ws & tk0).sum()), overhead=int((ws & tk0 & (el >= 140)).sum()),
-                                             mid=int((ws & tk0 & (el >= 90) & (el < 140)).sum())),
+    o["ik"] = dict(which=which, ks=KS, rule=RULE, rechoose_from=choice_from,
+                   k0=(k0sum if choice_from else dict(summary=P4.summary(o0), ws_taken=int((ws & tk0).sum()), overhead=int((ws & tk0 & (el >= 140)).sum()),
+                                             mid=int((ws & tk0 & (el >= 90) & (el < 140)).sum()))),
                    static_ws_taken=o["continuity"]["static"] if o.get("continuity") else None,
                    new_takes=len(new), new_overhead=int(sum(1 for j in new if el[j] >= 140)), new_mid=int(sum(1 for j in new if 90 <= el[j] < 140)),
                    new_under1=int((nm < 1).sum()), new_1to2=int(((nm >= 1) & (nm < 2)).sum()), new_median=round(float(np.median(nm)), 2) if len(nm) else None,
@@ -315,5 +327,6 @@ if __name__ == "__main__":
     par = dict(CLAIM, **(json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}))
     if mode == "flood": F = fit(par); print(json.dumps(ik_flood(F)["stats"])); sys.exit(0)
     if mode == "ik": ik_run(par, sys.argv[3], sys.argv[4]); sys.exit(0)
+    if mode == "rechoose": ik_run(par, sys.argv[3], sys.argv[4], choice_from=sys.argv[5]); sys.exit(0)   # rechoose '<json>' bench out.json prev_ik.json
     if mode == "control": control(par, sys.argv[3]); sys.exit(0)
     print(__doc__)
