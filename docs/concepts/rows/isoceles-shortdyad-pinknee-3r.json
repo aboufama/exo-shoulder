@@ -20,10 +20,10 @@
  "v_inband14": null,
  "v_inband10": null,
  "v_gap": null,
- "n_configs": 172,
- "verdict": "SCREENED (not dead, not converged): cx 0, 0 passive translations, 3 active. Frozen exact Bench(110,360) 27.91 (score 89.85; reach 0.6611, follow 0.9818, ib14 0.8824, contact 0.0226, overhead 9/28), held 30.30; fast fit 21.85 / near-touch 23.05. 0.71 points short of H1's verified 27.20 (pass line), CMA still descending when the time box ended it. The descent left the isoceles box (a2 44.9 -> 53.6, lE 97 -> 115 at the clamp). Seeds B / B2b / C measured at step 0 only (54.6 / 81.8 / 93.6 at the coarse knee).",
+ "n_configs": 253,
+ "verdict": "SCREENED (not dead, not converged): cx 0, 0 passive translations, 3 active. Frozen exact Bench(110,360) 27.91 (score 89.85; reach 0.6611, follow 0.9818, ib14 0.8824, contact 0.0226, overhead 9/28), held 30.30; fast fit 21.85 / near-touch 23.05. 0.71 points short of H1's verified 27.20 (pass line), CMA nearly converged (gate 1.34 / 0.19 / 0.32; fast best 22.52 near-touch at ib14 0.871). The descent left the isoceles box (a2 44.9 -> 53.6, lE 97 -> 115 at the clamp). Seeds B / B2b / C measured at step 0 only (54.6 / 81.8 / 93.6 at the coarse knee).",
  "limiter": "the J2 fold: 82 of 470 big-bench poses (50 at |axial| >= 120, 40 across the body; window [12.7, 94.6] vs the stretched poses), then the frozen J3 stop window (29 poses, 8 overhead), E strap 0.776 and link 2 0.846 in band, hub 3 0.857; 7 takes under 1 mm (min 0.28 mm, overhead pose 237)",
- "note": "Convergence gate (near-touch objective, score points): 2nd half 4.36, last third 1.15, top-5 spread 1.15 -> NOT converged; plain 4.79 / 0.44. a1/a2 re-solve at every b3 (J2 seat solved from J1, tilted J3 and the arcs). Conditioning min |u1.(u2 x w)| 0.187 over big-bench takes (9 below H1's 0.233, 3 clip); min th margin 5.07. Search Bench(60,160) fast, local 2 niced processes (farm closed). Pick pre-registered (best near-touch at ib14 >= 0.88); one frozen + one held read. No T5 per-pose dump written (verifier's job, time box). Diagnostic (same shape, no J3 stop): 28.36 - the stop earns 0.45 (17 poses become E-strap vs link-2 hits without it).",
+ "note": "Convergence gate over all 253 configs (near-touch objective, score points): 2nd half 1.34, last third 0.19, top-5 spread 0.32 -> NOT converged (2nd half fails by 0.34); plain 1.25 / 0.81 / 0.84. Resume best isoA2-g9-1 near-touch 22.52 / plain 19.63 fast (reach 0.744, ib14 0.871 < the pre-registered 0.88, so not the pick). a1/a2 re-solve at every b3 (J2 seat solved from J1, tilted J3 and the arcs). Conditioning min |u1.(u2 x w)| 0.187 over big-bench takes (9 below H1's 0.233, 3 clip); min th margin 5.07. Search Bench(60,160) fast, local 2 niced processes (farm closed). Pick pre-registered (best near-touch at ib14 >= 0.88); one frozen + one held read. No T5 per-pose dump written (verifier's job, time box). Diagnostic (same shape, no J3 stop): 28.36 - the stop earns 0.45 (17 poses become E-strap vs link-2 hits without it).",
  "doc": "docs/concepts/isoceles-shortdyad-pinknee-3r.md",
  "mechanism": {
   "joints": [
@@ -245,5 +245,31 @@
   }
  },
  "score_frozen": 89.85,
- "complexity": 0
+ "complexity": 0,
+ "resume_best": {
+  "tag": "isoA2-g9-1",
+  "gap_near1": 22.52,
+  "gap": 19.63,
+  "reach": 0.7438,
+  "follow": 1.0,
+  "inband14": 0.8709,
+  "inband10": 0.4864,
+  "contact": 0.011,
+  "params": {
+   "a1": 39.8106,
+   "a2": 53.8574,
+   "az1": 84.5803,
+   "el1": 62.8112,
+   "az2": 22.97655,
+   "el2": 43.29797,
+   "wd": 100.2592,
+   "wa": -1.3422,
+   "b3": 0.1171,
+   "lE": 115.0,
+   "lc": 33.1034,
+   "phiE": 1.3854,
+   "phib": -79.8966,
+   "kj": 1
+  }
+ }
 }

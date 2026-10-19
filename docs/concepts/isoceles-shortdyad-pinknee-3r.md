@@ -75,7 +75,12 @@ every configuration in order (172 incl. the probes).
   53.6, so the posterolateral J2 seat tolerates a longer link 2 than the proposer's frontier allowed.
 - **Convergence gate NOT passed** (near-touch objective, score points, time order): gain over the second half 4.36
   (needs < 1), over the last third 1.15 (needs < 0.5), top-5 spread 1.15 (passes, < 3). Plain gap: 4.79 / 0.44. The run
-  was still descending (gen 11 -> 18: 31.89 -> 23.05) when the time box ended it.
+  was still descending (gen 11 -> 18: 31.89 -> 23.05) when the first budget ended it.
+- **Resume (03:28-03:40, isoA2, sigma 0.4 from isoA-g18-0, 10 generations, 81 evaluations):** best isoA2-g9-1
+  near-touch 22.52 / plain 19.63 fast (reach 0.744, follow 1.0, ib14 **0.871**, contact 0.011; a1 39.81, a2 53.86, J1
+  bvec(84.58, 62.81), lE 115 again at the clamp). Its ib14 is below the pre-registered 0.88, so the pick (and the one
+  frozen read) stays isoA-g18-0. **Gate over all 253 configurations: 1.34 / 0.19 / 0.32** - the last third and the
+  top-5 pass, the second half fails by 0.34 (plain 1.25 / 0.81 / 0.84). The basin is nearly closed at fast ~22.5.
 
 **The claim read (pre-registered pick: best near-touch at ib14 >= 0.88 = isoA-g18-0), frozen shape, exact:**
 
@@ -117,7 +122,7 @@ Bench(110,360) attribution (not taken: fold 82, J3 stop 29, contact 8, parts 5; 
 ## Verdict
 
 Screened, not dead: frozen exact **27.91** (score 89.85) at **cx 0**, 0 passive translations, 3 active - 0.71 points
-behind H1's verified 27.20, held 30.30. Not a pass yet and not converged (gate 4.36 / 1.15 / 1.15). The proposer's
+behind H1's verified 27.20, held 30.30. Not a pass yet and not converged (gate 1.34 / 0.19 / 0.32 after the resume: one of three fails). The proposer's
 isoceles cell is not where this class wants to be: the descent took a2 to 53.6. No cx-0 95 here: the fold (82 of 470
 big-bench poses, 50 of them at |axial| >= 120) bounds reach, as the proposer's own frontier said.
 
