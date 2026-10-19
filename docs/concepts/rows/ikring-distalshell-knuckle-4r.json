@@ -6,7 +6,7 @@
  "active_dof": 4,
  "passive_dof": 4,
  "passive_translations": 0,
- "status": "screened",
+ "status": "verified",
  "t_ideated": null,
  "t_screened": "2026-10-19T03:36:54Z",
  "reach": 0.8056,
@@ -15,11 +15,11 @@
  "inband10": 0.6072,
  "contact": 0.005,
  "gap": 10.54,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.8056,
+ "v_follow": 1.0,
+ "v_inband14": 0.894,
+ "v_inband10": 0.6072,
+ "v_gap": 10.54,
  "n_configs": 104,
  "complexity": 48.0,
  "mechanism": {
@@ -671,5 +671,69 @@
  "doc": "docs/concepts/ikring-distalshell-knuckle-4r.md",
  "verdict": "screened (a LABELLED 4-JOINT OPTION, 4 active joints, never the lead): Bench(110,360) exact frozen chain-only gate 10.54 (score 96.17), plain 9.94, reach 0.8056 (290/360), overhead 13/28 (lead 8), elev 90-140 55/85, 2 contacts (T5 14.74 mm), 2 mm reading 23.30 (lead 34.84, pick 1 47.00); pre-registered gates: pass <= 13.75 chain-only yes; connected overhead >= 12/28 yes; ring-added overhead takes under 2 mm <= 2 yes; held overhead >= 25/71 yes. Step 1 (short knee keeps 261/262 lead takes, follow 1.0) and step 2 (distal shell parked costs 0 gate points: 18.90 = chain-only; shell in-band 1.0; 0 shell-torso contacts at delta 0) pass. vs pick 1 (9.75): better in-band (0.894 vs 0.890) and 2 mm (23.30 vs 47.00), worse contacts / reach at the imported IK table. RED TEAM (own, new): the ARM-FIXED shell sits in the torso on 30 of 360 ws poses the chain does not close (plane 90-150, IR -105..-180, to -11.9 mm, along the whole arc), unscored by the bench's closing-pose convention; counted as contacts the gate reads 17.48. The same convention applies to pick 1 / phi40 (unmeasured there).",
  "limiter": "(1) the fold: the abduction cone stays shut (J1 / J2 seat-level wall, the ring cannot reach it) and the stretched-fold IR overhead poses close at no k in [0, 40]; (2) the ANTERIOR shell end meets the torso at the hanging-IR posture: the measured cap at s 118 is ~+47-49 deg from the pad azimuth (delta 0 puts the end at +46.8, 1.04 mm clear at pose 460; delta 3.5 -> -1.37 mm on 5 ws + 2 clip; delta 12 -> -10.55), so the travel cannot grow anteriorly and the IK rides the slot end; (3) ring-made contacts at k 25-40 on IR poses plane 90-150 (cause: hardware). (4) the arm-fixed shell meets the torso on 30 non-closing across-body IR poses (to -11.9 mm): a round shell at s 118 is too large in radius on the medial-anterior side for deep IR; the measured window between the hanging-IR anterior cap and the across-body posterior contacts is narrower than the 55-deg arc.",
- "note": "Model docs/concepts/models/ikring-distalshell-knuckle-4r.py imports pick 1 (ikring-thinstack-knuckle-4r) read-only; changes: knee keys overridable in the fit, NO BUMP (zero amounts; the jam rule is the guard), the knee link added to the carriage / bracket jam lists, private verify dir. Knee: 98-config random sweep on Bench(60,160) fast psi 0 chain only (gate: best gained 0.0 score points over the 2nd half and 0.0 over the last third, top-5 spread 0.32 -> converged for the knee; best 13.15 at lE 69.52, movers <= s 106.9; lE 61.81 at <= 99.9 ties on the exact bench 18.88). Hardware cell: 5 parked readings on Bench(110,360) exact (delta 12 / 3.5 / 3.5+rt4 / 0, ds -26; NOT converged - a pre-registered cell plus the anterior-end correction, no envsel sweep of tilt / taz / PHI 35 / liner). IK: pick 1's table + flood imported (lead note), then fixk = this design's own k-table on the mismatched poses. Spec corrections: carriage delta 0 (not 10-15: the binding end is anterior), knee lE 69.5 (not the pin knee's 59.6), knee link jam-checked. Held: pick 1's held IK table worn with this metal (report only, never selected on). Local CPU only (load 25-27)."
+ "note": "Model docs/concepts/models/ikring-distalshell-knuckle-4r.py imports pick 1 (ikring-thinstack-knuckle-4r) read-only; changes: knee keys overridable in the fit, NO BUMP (zero amounts; the jam rule is the guard), the knee link added to the carriage / bracket jam lists, private verify dir. Knee: 98-config random sweep on Bench(60,160) fast psi 0 chain only (gate: best gained 0.0 score points over the 2nd half and 0.0 over the last third, top-5 spread 0.32 -> converged for the knee; best 13.15 at lE 69.52, movers <= s 106.9; lE 61.81 at <= 99.9 ties on the exact bench 18.88). Hardware cell: 5 parked readings on Bench(110,360) exact (delta 12 / 3.5 / 3.5+rt4 / 0, ds -26; NOT converged - a pre-registered cell plus the anterior-end correction, no envsel sweep of tilt / taz / PHI 35 / liner). IK: pick 1's table + flood imported (lead note), then fixk = this design's own k-table on the mismatched poses. Spec corrections: carriage delta 0 (not 10-15: the binding end is anterior), knee lE 69.5 (not the pin knee's 59.6), knee link jam-checked. Held: pick 1's held IK table worn with this metal (report only, never selected on). Local CPU only (load 25-27). VERIFIER (2026-10-19, skeptic): VERIFIED as a labelled 4-joint option: v_gap 10.54 chain-only gate (plain 9.94, score 96.17) on Bench(110,360) exact frozen, re-worn from the claim's k choice with the IK flood REBUILT for this knee (the claim dir's flood was byte-identical to pick 1's lead-knee flood; rebuilt 1206 connected nodes vs 1214, cmap changes only at 203 / 205, neither taken -> 0 effect); per-pose dump equals the claim at all 470 poses; th margin 5.097. Champion on the same bench and checks 75.94 (risley-turret verifier convention, as the pick-1 / phi40 verifiers). Red team: phi40's X2 bracket-top check reads 302 jams (142.73) but it is the 2-mm-sampling allowance: the exact slab distance knee-to-bracket is 0.741 mm min (adjacent pair, 0.15 limit), non-adjacent >= 6.18 mm -> 0 jams. Shell-aware flood (126 of 1432 envelope nodes have the arm-fixed shell in the skin) keeps all 290 takes connected; but 9 bench ws poses (354 417 431 441 454 457 459 464 466) are kinematically reachable at k 12.5-40 with the shell -0.14..-10.82 mm in the torso - the take-only IK holds psi 0 there; counted as contacts the gate reads ~12.73 (still < 13.75). Issues: R17 (J4 undriven unpowered), T1 139 at 0.072 mm, delta / ds chosen on the claim bench, held not re-run (proposer 15.62, 32 contacts).",
+ "v_contact": 0.005,
+ "verification": {
+  "t": "2026-10-19T04:25:00Z",
+  "bench": "Bench(110,360) exact frozen, claim k choice (ik_bench_fixk_choice.json, take-only), IK flood REBUILT with this knee",
+  "v_gap_gate": 10.54,
+  "v_plain": 9.94,
+  "score": 96.17,
+  "champion_same_bench": 75.94,
+  "perpose": "docs/concepts/verify/ikring-distalshell-knuckle-4r/verifier/v_bench_perpose.json",
+  "perpose_diff_vs_claim": 0,
+  "th_margin_min": 5.097,
+  "dropped_relayed": 0,
+  "flood": {
+   "claim_file": "byte-identical to pick 1 (lead lE 97 knee), not rebuilt",
+   "rebuilt_nodes_conn": 1206,
+   "pick1_nodes_conn": 1214,
+   "cmap_changes": [
+    203,
+    205
+   ],
+   "takes_changed": 0
+  },
+  "x2_bracket": {
+   "phi40_X2_reading": "302 extra jams, gate 142.73 (nearest 2-mm sample minus 1 mm allowance)",
+   "exact_slab_min_mm": {
+    "knee_underside_c29": 0.741,
+    "knee": 0.958,
+    "non_adjacent_min": 6.182
+   },
+   "exact_jams": 0,
+   "verdict": "X2 artefact: the knee link rides 0.74-0.96 mm over the bracket top face (adjacent pair, 0.15 mm limit)"
+  },
+  "shell_aware_flood": {
+   "envelope_nodes_shell_in_skin": 126,
+   "of": 1432,
+   "of_them_kinematically_connected": 35,
+   "claimed_takes_connected": 290,
+   "lost": 0
+  },
+  "strict_contact_reading": {
+   "bench_ws_poses_connected_with_shell_in_torso": [
+    354,
+    417,
+    431,
+    441,
+    454,
+    457,
+    459,
+    464,
+    466
+   ],
+   "depth_mm": [
+    -0.14,
+    -10.82
+   ],
+   "gate_if_counted": 12.73
+  },
+  "issues": [
+   "R17: J4 undriven in an unpowered MVP1 (no coil); the 10.54 needs psi commanded by the IK",
+   "T1: pose 139 taken at 0.072 mm (k 0); 460 at 1.04 mm (shell anterior end)",
+   "carriage delta / ds picked from 5 readings on the claim bench",
+   "held not re-run: proposer held 15.62, 32 contacts (20 at the shell ends, pick 1 held IK table not re-chosen)"
+  ]
+ }
 }

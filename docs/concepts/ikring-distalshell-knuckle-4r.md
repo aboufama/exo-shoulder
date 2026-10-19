@@ -177,3 +177,64 @@ frozen, overhead 13/28, held overhead 32/71; all pre-registered gates pass; but 
 (30 non-closing poses with the shell in the torso, 17.48 if counted) must go to the verifier and the auditor before
 this number stands. Convergence: the knee sweep passes the gate (0.0 / 0.0 / 0.32 score points, 98 configs); the
 hardware cell does not (5 readings, no envsel sweep), so this is not a dead verdict on the morphology.
+
+## Verification (independent skeptic, 2026-10-19)
+
+**Verdict: VERIFIED as a labelled 4-joint option (4 counted joints), never the lead.** v_gap **10.54** on Bench(110,360)
+exact, frozen shape (chain-only gate; plain 9.94; score 96.17). The champion on the same bench and checks reads 75.94
+(the risley-turret verifier's champion, kit checks + 1 mm clearance; the convention the pick-1 and phi40 verifiers
+used). Files: `docs/concepts/verify/ikring-distalshell-knuckle-4r/verifier/` (vw.py, slab.py, sflood.py and their JSON).
+
+| reading | gate | plain | reach (ws) | ib14 chain / pooled | contacts (T5) | overhead | note |
+|---|---|---|---|---|---|---|---|
+| claim (fixk) | 10.54 | 9.94 | 0.8056 (290) | 0.894 / 0.9225 | 2 (14.74) | 13/28 | pick 1's IK flood file |
+| verifier: re-wear, IK flood rebuilt for this knee | 10.54 | 9.94 | 0.8056 (290) | 0.894 / 0.9225 | 2 (14.74) | 13/28 | per-pose dump equals the claim at all 470 poses |
+| + phi40 X1 + X2 as written | 142.73 | - | 0.1972 (71) | - | 2 | 13/28 | 302 X2 "jams": a sampling artefact, see 2 |
+| + exact bracket slab (replaces X2) | 10.54 | 9.94 | 0.8056 (290) | 0.894 / 0.9225 | 2 | 13/28 | 0 jams; knee 0.741 mm over the bracket top |
+| strict: arm-fixed shell in the torso at a reachable k counts as contact | ~12.73 | - | 0.8056 | - | 11 | 13/28 | 9 bench ws poses, see 4 |
+
+What was checked:
+1. **DOF.** J1, J2, J3 and the J4 ring are counted joints: 4, at the cap. K is slaved by the lead's drive. The two
+   MR63ZZ knee pins sit outside the count. Passive translations: 0. The knee's ang_min is 25.64, above the rule's
+   25.22.
+2. **Real parts and the bracket (new red team).** phi40's X2 check samples the bracket's 2 mm top layer and takes
+   "nearest 2-mm sample minus 1 mm". Here it flags the knee member on 302 poses: knee underside samples -0.234 and the
+   knee rigid set -0.042 against the adjacent limit of 0.15. The cause is that the short knee's link runs straight over
+   the L-lug bracket at s 96-98. An exact signed distance to the bracket's slab volume (underside r_a 73.26 -> r_b 74.03
+   from s 110.1 to s 96.3, top + 2 mm, pad azimuth +- 5 mm) clears it:
+   - knee underside 0.741 mm above the top face, knee rigid set 0.958 mm (adjacent pair: the knee pin b sits on the
+     pad that the bracket carries, limit 0.15);
+   - every non-adjacent set >= 6.18 mm;
+   - 0 jams, re-score identical (9.94).
+   So X2's 1 mm allowance is too coarse for a part that rides over the bracket face. The model's own rule (knee vs the
+   bracket underside, sample - 1 mm < 1 -> jam) holds. Running gap at the knee over the bracket: 0.74 mm (build note).
+3. **Honest pose-taking and continuity.** The claim dir's IK flood file is byte-identical to pick 1's, so it was built
+   on the lead's lE 97 knee and not rebuilt, as the model docstring says it is. Rebuilt with this knee:
+   - 1206 nodes connected vs 1214;
+   - the cmap changes only at 203 and 205, and neither is taken, so the effect is 0;
+   - dropped relayed takes 0; min th margin 5.097 (0 taken poses under 5).
+4. **The arm-fixed shell at every pose (the claim's own red team, extended).** The shell's skin distance was measured
+   exact at all 1432 envelope-grid nodes. On the 360 bench nodes it matches the claim's shellall.json to 0.005 mm.
+   - 126 nodes have the shell in the skin.
+   - A shell-aware IK flood (those nodes removed at every k) keeps all 290 claimed takes connected, so no claimed take
+     is reached through a torso-contact pose.
+   - But 35 of the 126 nodes, 9 of them bench ws poses (354, 417, 431, 441, 454, 457, 459, 464, 466), are
+     kinematically reachable and connected at k 12.5-40. There the shell sits -0.14 to -10.82 mm in the torso. The
+     take-only IK holds psi 0 at them (the chain opens: lost, not contact). That is a controller wall: it needs J4
+     held by the drive.
+   - Counted as contacts, the gate reads ~12.73. That is still under 13.75 and far from the champion, so it is not a
+     refutation.
+   - The claim's all-pose reading of 17.48 also counts 21 poses that no k closes. There the chain itself stops the
+     arm, so that reading over-counts.
+5. **Exact path.** Every number above is CB_EXACT=1. The fit (Bench(60,160) fast, k = 0) reproduces 13.15.
+
+Issues that stand (not refutations):
+- **R17.** No coil, so in the unpowered MVP1 J4 is free. Both the 10.54 and the psi-0 wall in item 4 need psi commanded
+  by the IK. This is the same caveat as pick 1.
+- **T1.** Pose 139 is taken at 0.072 mm (k 0). Pose 460 is taken at 1.04 mm (the shell's anterior end). The 2 mm
+  reading is 23.30 against the lead's 34.84.
+- **Selection.** The carriage delta (12 -> 3.5 -> 0) and ds were chosen from 5 readings on the claim bench itself.
+- **Held-out not re-run** (time box). The proposer's held sample reads gate 15.62, overhead 32/71 and 32 contacts. 20
+  of those contacts are at the shell ends, -0.8 to -10.3 mm, with pick 1's held IK table not re-chosen for this metal.
+  Pick 1's held sample reads 10.10; the lead's held reads 22.38.
+- **IK table imported.** Pose 203 is feasible at k 12.5-40 with this knee, but the IK never tries it there.

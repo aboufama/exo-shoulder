@@ -1,0 +1,37 @@
+{
+ "stats": {
+  "nodes": 1432,
+  "feasible_nodes": 1171,
+  "feasible_k0": 1023,
+  "runs": 1176,
+  "edges": 2987,
+  "seeds_stateA_k0": 511,
+  "seeds_elev0_k0": 171,
+  "nodes_conn": 1171,
+  "nodes_conn_elev0": 1171,
+  "relayed_only_nodes": 148,
+  "relayed_only_conn": 148,
+  "edge_dirs": {
+   "open": 35,
+   "ok": 5963
+  },
+  "secs": 21.4,
+  "rule": {
+   "step_deg": 2.0,
+   "passive_jump": 10.0,
+   "active_jump": 25.0,
+   "dk_max": 10.0,
+   "kstep": 2.5
+  }
+ },
+ "in_skin_nodes": 126,
+ "xcheck_max_abs": 0.005000000000000782,
+ "kept": 290,
+ "lost": [],
+ "shell_hist": {
+  "lt0": 126,
+  "lt1": 130,
+  "lt2": 145
+ },
+ "secs": 787.0
+}
