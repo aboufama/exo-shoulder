@@ -13,7 +13,8 @@ near-touch / overhead report it already runs after K.evaluate) is wrapped to ALS
         Bench(60,160) fast (the screen's bench): the row's best (CMA F, q 0.98) and best_near_touch_clean (CMA G, q 1.0)
         -> docs/alignment/remeasure/fold-sph3r_claim.json + fold-sph3r_claim_bench_perpose.json (F) + _G_ variant
     CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_fsph3r_rewear.py bench|held [F|G]
-        the model's own frozen() (fit Bench(60,160), freeze every underside, wear Bench(110,360) exact); held = the same
+        the model's own frozen() (fit Bench(60,160) on its fast cache = the claim's shape, freeze every underside, wear
+        Bench(110,360) exact; the model's frozen() alone fits on the exact path when CB_EXACT=1, 51.33 -> 51.36 at k2221); held = the same
         with Bench(110,360) replaced by the held-out bench (poses disjoint from Bench(110,360), = tools/osn_polish.py
         held_bench) -> docs/alignment/remeasure/fold-sph3r_<wear>.json (+ _perpose)
 """
@@ -123,7 +124,13 @@ def main(a):
     K = mod.K; kb = K.bench; cap = {}
 
     def bench(n_clip=60, n_ws=160):
-        B = held_bench(n_clip, n_ws) if (mode == "held" and (n_clip, n_ws) == (110, 360)) else kb(n_clip, n_ws)
+        if mode == "held" and (n_clip, n_ws) == (110, 360): B = held_bench(n_clip, n_ws)
+        elif (n_clip, n_ws) == (60, 160):                     # the fit runs on the claim's own fast bench (= the 44.72 shape),
+            ex = os.environ.pop("CB_EXACT", None)               # as tools/alignment_kit_rewear.py: fit fast, freeze, wear exact
+            try: B = kb(n_clip, n_ws)
+            finally:
+                if ex is not None: os.environ["CB_EXACT"] = ex
+        else: B = kb(n_clip, n_ws)
         cap[(n_clip, n_ws)] = B; return B
     ex0 = mod.extras; box = {}
 
@@ -146,7 +153,7 @@ def main(a):
                frozen={k: fz.get(k) for k in keep}, parts_ib14=rd["parts_ib14"], th_margin=rd["th_margin"], hub_F=rd["hub_F"],
                deep=rd["deep"], probe=rd["probe"], exact=os.environ.get("CB_EXACT") == "1", secs=round(time.time() - t0, 1), git=git,
                source=f"tools/alignment_fsph3r_rewear.py {mode} {which}: the model's own frozen() unchanged (extras wrapped to record more); "
-                      f"fit Bench(60,160) {'exact' if os.environ.get('CB_EXACT') == '1' else 'fast'}, worn "
+                      f"fit Bench(60,160) fast (the claim's own shape) and frozen, worn "
                       f"{'Bench(110,360)' if mode == 'bench' else 'held_bench(110,360) (poses disjoint from Bench(110,360))'}")
     json.dump(out, open(os.path.join(AA.REM, f"{RID}_{mode}{sfx}.json"), "w"), indent=1, default=float)
     json.dump(dict(id=RID, wear=mode, config=which, frozen=dict(gap=fz.get("gap")), git=git, poses=poses),

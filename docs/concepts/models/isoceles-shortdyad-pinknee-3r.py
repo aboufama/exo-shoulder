@@ -137,6 +137,23 @@ def conditioning(M, B):
                 below_h1=int(lowc.sum()), below_h1_clip=int((lowc & (kind == "clip")).sum()))
 
 
+def regions(M, B):
+    """red-team split of the bench: taken / total and the not-taken causes per pose region (workspace poses)"""
+    tk = np.array([B.res[i] is not None and float(np.min(B.res[i])) >= 0 for i in range(len(B.idx))])
+    el = np.array([p["elev"] for p in B.poses]); pl = np.array([p["plane"] for p in B.poses]); ax = np.array([p["axial"] for p in B.poses])
+    kind = np.array(B.kind); why = np.array([str(w) for w in M.why])
+    R = {"overhead (elev >= 140)": el >= 140, "across the body (plane >= 100, elev < 140)": (pl >= 100) & (el < 140),
+         "behind the back (plane <= -20)": pl <= -20, "rest / low (elev < 40)": el < 40, "axial |ax| >= 120": np.abs(ax) >= 120}
+    out = {}
+    for name, m in R.items():
+        for k in ("ws", "clip"):
+            s = m & (kind == k)
+            if not s.any(): continue
+            out[f"{name} {k}"] = dict(n=int(s.sum()), taken=int((s & tk).sum()),
+                                      why={w: int((s & ~tk & (why == w)).sum()) for w in set(why[s & ~tk])})
+    return out
+
+
 def report(B, params):
     p = _clamp(dict(PARAMS, **params))
     r, M = CK.report(B, p)
@@ -174,7 +191,7 @@ def held_bench():
     V = importlib.util.module_from_spec(_v); _v.loader.exec_module(V); return V.held_bench()
 
 
-def frozen(P, nc=110, nw=360, bench=None):
+def frozen(P, nc=110, nw=360, bench=None, keep=False):
     """fit on Bench(60,160) FAST, wear that shape (heights, knee centre m, E profile, J3 window) on Bench(nc,nw) or `bench`
     without refit (CK.frozen's protocol; `bench` = 'held' wears it on the held-out bench)"""
     p = _clamp(dict(PARAMS, **P))
@@ -188,7 +205,8 @@ def frozen(P, nc=110, nw=360, bench=None):
         finally: CB.Bench = real
         out["bench"] = "held"
     out["cond"] = conditioning(M, B); out["params_resolved"] = {k: v for k, v in p.items() if isinstance(v, (int, float, str, bool)) or v is None}
-    return out
+    out["regions"] = regions(M, B)
+    return (out, M, B) if keep else out
 
 
 def viz_geom(B, params):
