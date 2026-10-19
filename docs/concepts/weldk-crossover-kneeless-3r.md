@@ -48,7 +48,11 @@ asserted on every bench: knee angle ptp 0.000 deg, |s| max 0.000 mm (the three h
 |---|---|---|---|---|---|---|---|
 | fast fit Bench(60,160) k82 | 31.83 | 0.7438 | 0.9167 | 0.8152 | 0.4270 | 0.0440 | (fast 1/12) |
 | frozen exact Bench(110,360) | **37.42** | 0.6833 | 0.9364 | 0.8129 | 0.4343 | 0.0568 | 6 |
-| held out (frozen, exact) | see row `held_frozen` | | | | | | |
+| held out (frozen exact, tools/osn_polish.py held_bench(110,360): disjoint 110 clip frames + 360 ws) | 34.59 | 0.7000 | 0.9455 | 0.8093 | 0.4219 | 0.0507 | 4/26 (all in 1-2 mm) |
+
+The held read is the disjoint-complement bench of tools/osn_polish.py, not the verifiers' held set with 71 overhead
+poses (not run here). Held: min metal 0.11 mm, 1 mm 37.31, 2 mm 60.34, contact 19 poses (sum 126.8 mm, max 29.79),
+min th margin 5.485 deg, elev 90-140 band 42/86.
 
 ### What limits it (measured)
 
