@@ -5799,3 +5799,135 @@ rigid-cuff spherical 4R.
 - The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule, O20 hubs and the transmission guard stay.
 
 Restart note (2026-10-18 ~23:41 UTC, fresh relaunch after the ~23:38 container restart stopped the first run after ideation): this plan is adopted as written (same state, lenses, carry, exclusions); ideators start from the 9 unjudged ideas in docs/concepts/ideas_restart/r401_unjudged_ideas.json (their step-0 measurements stand, not re-derived); nothing was screened, no row written; open for the judge: the distal ideas trip lens C's 120-mm strap kill (strap 185-215 mm) while measuring its stated reason (in-band < 0.85) false (strap in band 0.99 on the q=1 fit).
+
+## Round 501 plan (Round G1, track golden; 2026-10-19 ~01:20 UTC, lead verified gap 18.28)
+
+Track goal (user 2026-10-19 ~01:00 UTC, verbatim: "Keep pushing, I want something better than 95 with very low
+complexity"): a verified plain gap <= 13.75 (score >= 95) on frozen exact Bench(110,360), 3 active joints, complexity
+<= 6 on tools/simplicity.py v2.2 (fallback worth reporting: >= 95 at cx 6-12). Planner's read: ROUNDS.md (rounds 301 /
+108 / 401 plans and restart notes), FINDINGS.md headings to Round J7, take_bound_3dof.md (banner, table, [R1]-[R5]),
+fold_ceiling.md 2-4, reach_attribution.md 4, docs/research/golden/README.md (zc class exhaustive search + frontier),
+SIMPLICITY.md 2-5, rows (lead, H1, minarc-stop-knuckle-4r, stop-relay-rocker-3r, geneva-tail-knuckle-pinknee-3r,
+desmo-slipper, desmo-vrocker-longdyad, phi40, arm-parked-knee-4r), catalogue (25 ideated), ideas_restart r301 / r401,
+events tail to 01:05:05Z, ledger latest, running processes. No bench, judge or kit file changed: no number below moved
+because the measurement changed.
+
+### State
+
+- **Lead (3 active, not gamed): conecut-knee-knuckle-3r 18.28** (93.35), held 22.38, reach 0.7278 (262/360), ib14
+  0.9012, 4 contacts (T5 20.24 mm), overhead 8/28 (18/71 held), cx 18.5 (prot 4, loops 3 = 12 pts, spring 1, sliding 1).
+  Lost 98: fold 88 (73 stretched at th >= 106.6, 64 of them IR >= 90 across the body; 15 folded, hub 2 the wall), 4
+  contacts, J3 stop / parts the rest. WATCH carried: dashboard sweep 12.5 shown as 95.45, T1 (203 at 0.263 mm), T3 (held
+  th margin 5.006), self-reference. Tie conecut-h2facet 18.28 / held 22.16 (WATCH: no flood, cx record mismatch).
+- **Complexity ladder (verified 3-active):** cx 0 H1 27.20 (reach 0.6583, ib14 0.895, follow 0.964, contact 0.026;
+  the user's build base) / crest-knee 31.50 / zc-frontier 31.04 fit, 33.51 frozen; cx 12 geneva-tail-knuckle-pinknee-3r
+  rod 23.57 (**reach 0.7306 - above the lead's - at in-band 0.846: the rod and rod ends 20-22 mm over the skin, 0 % in
+  band; hub 3 0.59, L2 0.77; old kit**); cx 15.75 desmo-slipper 18.95; cx 16.5 desmo-conecut 18.98; cx 18.5 the lead.
+- **What cx <= 6 buys, priced with tools/simplicity.py --score (this plan):** a form-closed one-loop slaved K (K pin,
+  one groove / follower pair, no spring, no crank) = **10.5**; the same with a spring = 13.5; a sprung K with no loop =
+  7.0. So a <= 6 design is a 3R + the cuff knee (0) + stops / routes / a few parts (0-3) - every slaved fold lever on
+  file costs >= 10.5 because its loop alone is 4.
+- **Class (a) of the brief, the stop-relay knuckle, is CLOSED for this track by the user's own ruling.** It is
+  minarc-stop-knuckle-4r (K on a clock spring at stop A, J2 stops on its own angle, K opened by the arm past the window):
+  verified 19.54 at the kit rule, polished 18.40, reach 0.8438 on its bench; user 2026-10-17: "Sensed 4 joint does not
+  count as passive obviously" -> counted active 4, cx 32.5; CLAUDE.md decision 6 keeps it ("DOF counting is unchanged:
+  a joint in the shoulder chain is a joint"). Mechanical reason, too: in the relay state J2 sits on its stop and K is
+  unpowered, so in the final powered product 3 motors control only 2 coordinates there. The brief's cx 6 for it is the
+  under-count the auditor watches for. (stop-relay-rocker-3r's 7.5 predates the ruling and was refuted 50.36: its
+  overhead poses sit on the other closure root, q0 -49.5 -> +44.2.)
+- **Class (c), knee pins not parallel to J3, is static on the bench.** With GH an exact fixed point the knee closure
+  |pa - pb| = lc has isolated solutions, so tilted pins only re-aim J3 by a constant (= b3 / J3 seat, already searched;
+  the knee-less rows measured the bench price of b3 at ~2.2 frozen). It changes nothing a pose can use, and costs GH
+  slip / cuff twist (knee-less p95 misfit 4.83 mm at 3 mm offset). Not a lens.
+- **Measured ceilings (why 95 is hard at 3 active):** take bound - 95 needs 275 takes at zero contact (279 at the lead's
+  contact); the K-law cap is 272 (~94.7); the free-K oracle bounds every K law at 17.25 (k33) / 17.69 (lead seats, 277
+  takes, 13 contacts); best ideal-drive ghost 16.91 (269). cx-0 plain spherical 3R: exhaustive (560,478 Sobol bounded,
+  108,768 CMA) ceiling 31.04 frozen; its reach / in-band frontier: reach >= 0.70 -> ib14 0.761 (link 2 0.52), >= 0.75
+  -> 0.645 (link 2 0.36, neck 0.33), >= 0.80 -> 0.520 (hub 2 0.00). The PIN-KNEE class frontier was never mapped (only
+  local CMA G1-G4 from H1 / P5 / raglan: best in-sample 20.81, the GPU polish 20.26 refuted held out). H1's limiter:
+  window 2 min(a1, a2) - 10 ~60-70 vs th 27-141 needed; widening a1 parks hub 2 93-115 mm off GH.
+- **Kinematics is not the wall:** over every legal seat pair a window of width >= 80 holds 0.99 of the 360; at the
+  lead's J1 with J3 free on the lateral arm 0.867 at W 86.3 (J3 wdir(45, 10)); at the lead's seats 0.797 at W 86.3.
+- **Running elsewhere (borrow, do not repeat):** round 301 found a mirrored K (sK +1) whose crossover cell parks
+  276 takes / 14 of 28 overhead (ghost, one-level parking, calibrated on the lead to one pose) - the only 3-active ghost
+  above the 272 law cap; round 401 is modelling kneeless-steer-midbracket-relay-4r and insertion-cband-relay-4r now.
+- **Dead, do not rescreen:** single pin-flank K drives (pole-bounded 21-32 deg vs 44-46 needed); one-tooth involute
+  (sweep 7-19 mm into the shoulder top, 35 contacts; and the gear question); link-2 drive elements 20-30 mm from u2;
+  K laws with rho < 1.0 (msub fold); the long dyad (166.76); posteromedial seat (202.93); cap-pole plain 3R (hub 2 <=
+  0.12 in band); antcrest; two-sided relays; window re-placement (a2 59.98: 20.84).
+- **Compute:** farm CLOSED (spent 15:49 UTC 2026-10-18); local only, nice -n 10, OMP_NUM_THREADS=1, <= 2 processes
+  per agent; 4 cores shared with rounds 301 / 401 (4 model processes running at 01:07) and the hourly audit.
+
+### Lenses
+
+**A. cx0-knee-frontier (cx 0-3: the decisive cx <= 6 measurement, and a Pareto win if it exists; 2 processes,
+<= 120 min).** Map the reach / in-band frontier of the pin-knee class (plain O20 3R through GH + the MR63ZZ two-pin knee
+with its window stop) under today's kit: J3 tilt b3 and seat free (the free-J3 kinematic optimum wdir(45, 10) region
+included), J2 own-angle stops, the J3 dowel stop, 60-deg climbs, the H2 facet / hub-2 chamfer, the re-centred knee
+(lE ~97 / lc ~24) - parts the H1 search never had. J1 at the lead's (95.39, 67.90), H1's (101.2, 63.9) and the
+acromion-top band only.
+- Step 0 (no CMA, <= 30 min): hub-2-in-band take bound per (a1, a2, J3 seat) cell - closure at the 5-deg th margin +
+  dense continuity + the three O20 discs at their K3 levels (the golden stage A / B bound, b3 added), exact skin.
+  Kill if no cell holds >= 266 takes with hub 2 in band (a cx-0 design then cannot beat ~17.2 even at zero contact).
+- Then near-touch CMA on envsel at reach floors 0.66 / 0.70 / 0.74 / 0.77 (best ib14 at each floor), seeded from H1,
+  the lead's chain with K welded at stop A, and the step-0 best cells. Pre-register the pick rule (best envsel near-touch
+  at ib14 >= 0.88), ONE frozen exact read + ONE held read.
+- Pass = verified <= 18.28 at cx <= 3 (beats the lead on both axes); 95 = <= 13.75. Kill = envsel frontier ib14 < 0.85
+  at reach >= 0.70. Either way write the knee-class frontier table beside the plain class's (the cx <= 6 answer, proved
+  from data); report which member leaves the band at each floor.
+
+**B. rod-dwell-lowcx (cx 10.5-12, the fallback band; the lead's reach at ~60 % of its complexity; 2 processes,
+<= 120 min).** The only cx-12 lever on file already reaches 0.7306 (geneva-tail-knuckle-pinknee-3r rod, 23.57) and
+loses on in-band alone (rod / rod ends 20-22 mm over the skin, hub 3 0.59). Rebuild a ONE-loop dwell drive (K parked in
+the window, driven past it, no spring if form-closed) on the modern lead chain (conecut knee, J3 dowel, h2 facet),
+with the coupling routed in band.
+- Price first: the tools/simplicity.py record before any metal; proceed only at cx <= 12 (one loop; a spring costs 3).
+- Step 0: the lever's achievable law (its real stroke, dwell and pressure angle) as a law-only ghost on the lead's
+  frozen chain, frozen exact; kill if > 19.0 or < 258 takes. Then its coupling metal on every face on envsel (rod /
+  rod-end / tail at kit density, routed under the 14 mm band); kill if > 4 sweep contacts or the coupling's in-band
+  < 0.70.
+- Pass = verified <= 18.28 at cx <= 12 (the lead's number at <= 2/3 of its complexity); Pareto pass <= 18.95 at cx <= 12;
+  kill > 19.5. If round 301 verifies its mirrored-K geometry first, re-target the same drive to it (borrow its seats,
+  do not re-search them).
+
+**C. rolling-j2 (WEIRD, cx ~3-6: a fold lever with no K hub, no crank and no loop; 1 process, <= 90 min).** A strap-held
+rolling-contact J2 (conical CORE / Rolamite pair, apex at GH; catalogue rolling-cone-3r applied at J2 only) moves its
+instantaneous axis as it turns, so the J1-J2 / J2-J3 arcs change with q2: a slaved window opener built into the joint.
+Kinematically it is a knuckle with a fixed linear law (K = q2 x r1 / (r1 + r2)), the one law family never read.
+- Step 0 (no metal, <= 30 min): the lead's chain with its law replaced by the linear rolling law (ratio 0.3-0.7,
+  arc between the cone axes 10-30 deg), and the H1 chain with J2 split the same way, envsel then frozen exact. Kill if
+  no cell reads <= 21.0 or none holds >= 255 takes: a non-dwell law cannot open the window - new knowledge either way.
+- Rule questions to the auditor BEFORE any claim: (1) a hubless rolling J2 vs "O20 v5 hubs only"; (2) the crossed
+  straps vs "no gears, pulleys or cables"; (3) strap count as flexures (3 each, so 2 straps = 6). The verdict text names
+  them for the user.
+- Hardware only past step 0: cone rims at kit density on every face, strap stack, slip-free torque check (R17).
+
+Rules for all lenses: search on the near-touch gap, select on envsel / envh, pre-register picks, never tune or select on
+held out; fold margin 5 deg in th (tools/concept_kit.py) with min th over taken poses reported; stops on a joint's own
+angle; MR63ZZ knee pins + the physical knee window; O20 v5 hubs; J1 back / acromion top; real envelopes on every face;
+no gears, pulleys, cables; no drive or motor in any metric. Every claim reports plain + near1 + the 2 mm reading on the
+lead's basis, T5 dumps bench + held (`python3 tools/alignment_paired.py dump`), overhead /28 and /71, contacts, the
+cx record from tools/simplicity.py, and the continuity flood where a coordinate is slaved through a contact. Every
+screened morphology writes docs/concepts/viz/concepts/<id>.js, passes `node docs/concepts/viz/test.mjs <id>`, re-runs
+`node docs/concepts/viz/thumbs.mjs`. Commit after every step.
+
+### Carried (ideated, never screened)
+
+- rolling-cone-3r (catalogue, ideated) - as lens C's seed, at J2 only.
+- The other 20 ideated catalogue entries stay under measured closures (round 106 / 107 plans).
+
+### Elsewhere, not to be duplicated
+
+- Round 301 (overhead): J3 re-aim and mirrored K on the lead (mirrork-raisedj3 / -overstrap / -conej3), deltoid-ring
+  4R ideas, drive-free-cone ideas (involute-pair-cone, innerknuckle-drive, kseat-cone). Lens B borrows its geometry only.
+- Round 401 (knee-less 4R): kneeless-steer-midbracket-relay-4r and insertion-cband-relay-4r (modelling),
+  kfree-o20pin-highexit-relay-4r, distal-cband-sq95-relay-4r (picks), and its unjudged ideas.
+- Alignment re-measures in flight: sidecar-parallelogram-knuckle-3r, longstroke-slipper-knuckle-3r.
+
+### Needs the user's say
+
+- The brief priced the stop-relay knuckle at cx 6; the user's 2026-10-17 ruling counts it as 4 DOF (minarc 32.5).
+  This plan keeps the ruling. If the user wants a sprung K counted as passive, minarc-stop-knuckle-4r is the row to
+  re-read (polished 18.40).
+- Lens C's hubless rolling J2 and its straps, against the O20 and no-cables rules.
+- The 1 cm rule, the DOF cap, the 5-deg fold margin, the J1 seat rule and O20 hubs stay.
