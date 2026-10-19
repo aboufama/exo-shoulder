@@ -36,7 +36,7 @@ work and do it well!"): agents may run tools/cloud_run.py batches on the exo-cpu
 (until 2026-10-17 ~17:20 UTC; renew with the user after). GPU renders (exo-blender-cycles) still need a separate yes.
 Keep workersMin 0; tools/runpod_guard.py audit before and after each batch. BUDGET LINE: the account balance was
 ~$32.40 at the approval, so the $8 is spent when tools/runpod_guard.py audit shows balance <= $24.40 - from then on
-run locally (<= 2 niced processes) unless the user renews (status 15:49 UTC: SPENT - balance $24.24, $0.16 past the line from the round-12 desmo-slipper claim batch that was in flight when it was crossed; exo-cpu1 workersMax set to 0 by the lead at 15:49 - restore 9 only when the user renews).
+run locally (<= 2 niced processes) unless the user renews (first window SPENT 2026-10-17 15:49 UTC at $24.24). RENEWED by the user 2026-10-19 ~01:05 UTC ("Yes, $8 per 12 h"): exo-cpu1 workersMax 9 again (workersMin 0) at 01:26; window until 2026-10-19 ~13:05 UTC; BUDGET LINE balance <= $13.61 (it was $21.61 at the approval) - from then on local only and exo-cpu1 workersMax back to 0 unless the user renews again.
 (6) Sensing is OUT OF SCOPE (user 2026-10-17: "dont wory about the sensor stuff the purpose of this is to find a
 kinematic solution if we sensor every joint we can just use inverse kinematics to get a perfect position"): encoders
 cost 0 complexity (tools/simplicity.py v2.2), and no agent spends time on sensing, determinacy-from-encoders or
