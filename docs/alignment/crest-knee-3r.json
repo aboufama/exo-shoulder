@@ -68,9 +68,9 @@
        -60.0
       ],
       "gap": 31.5,
-      "src": "docs/alignment/remeasure/crest-knee-3r_bench_probe.json",
+      "src": "docs/alignment/remeasure/crest-knee-3r_v3jog_bench_perpose.json",
       "cross_check": {
-       "files": 1,
+       "files": 2,
        "sums": [
         5.15
        ],
@@ -90,9 +90,9 @@
        -45.0
       ],
       "gap": 28.45,
-      "src": "docs/alignment/remeasure/crest-knee-3r_held_probe.json",
+      "src": "docs/alignment/remeasure/crest-knee-3r_v3jog_held_perpose.json",
       "cross_check": {
-       "files": 1,
+       "files": 2,
        "sums": [
         2.04
        ],
@@ -107,7 +107,10 @@
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "no reference"
+   "reason": "vs conecut-knee-knuckle-3r: plain -13.22, 2 mm -24.72",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -13.22,
+   "gain_2mm": -24.72
   },
   {
    "check": "continuity",
@@ -242,7 +245,7 @@
   "docs/concepts/verify/crest-knee-3r_v_flood_bench.json",
   "docs/concepts/verify/crest-knee-3r_v_held_frozen.json"
  ],
- "git": "0e9df59",
+ "git": "e6aff2c",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-19T01:34:53Z"
+ "t": "2026-10-19T01:49:57Z"
 }
