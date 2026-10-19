@@ -50,10 +50,7 @@
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs slipper-nose-knuckle-3r: plain -26.30, 2 mm -38.66",
-   "ref": "slipper-nose-knuckle-3r",
-   "gain_plain": -26.3,
-   "gain_2mm": -38.66
+   "reason": "no reference"
   },
   {
    "check": "continuity",
@@ -163,6 +160,11 @@
    }
   },
   {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
    "check": "complexity",
    "level": "ok",
    "reason": "recomputed 4.0 vs row 4.0",
@@ -192,7 +194,7 @@
  "verifier_files": [
   "docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json"
  ],
- "git": "06f7b8d",
- "tool_version": "2026-10-17.2",
- "t": "2026-10-17T08:03:47Z"
+ "git": "e4a9a92",
+ "tool_version": "2026-10-19.1",
+ "t": "2026-10-19T02:47:15Z"
 }

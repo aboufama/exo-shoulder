@@ -58,9 +58,26 @@ def _bench(which):
     raise SystemExit(f"bench {which}: envsel | b110 | fast (held-out is the verifier's)")
 
 
-def readings(M, B, phi_b, extra=None, jam=None):
+def contact_owner(M):
+    """AUDIT: the part each contact-only entry (M.contact) belongs to = the rigid / link sample set of the SAME member with
+    the least median nearest-neighbour distance (body coordinates); -> list of (member, owner, n, median mm)"""
+    from scipy.spatial import cKDTree
+    src = dict(M.rigid); src.update(M.link_pts); out = []
+    for m, Pc in M.contact:
+        Pc = np.asarray(Pc); best = (1e9, "?")
+        for n, (mm, X) in src.items():
+            if mm != m or not len(X) or not len(Pc): continue
+            dmed = float(np.median(cKDTree(np.asarray(X)).query(Pc)[0])); best = min(best, (dmed, n))
+        out.append((int(m), best[1], len(Pc), round(best[0], 2)))
+    return out
+
+
+def readings(M, B, phi_b, extra=None, jam=None, kc=0):
     """full and knee-less readings of the frozen wear (lens A k1.py layout: list(rigid) + list(link_pts), optional appended
-    contact-only min re-read without the pad / knee contact members)"""
+    contact-only min re-read without the pad / knee contact members). kc 1 (AUDIT): the knee-less contact-only re-read
+    also drops the member-3 contact entries OWNED by knee-side parts (E strap top, O12 boss ring: contact_owner), which
+    the members-5/6 filter keeps"""
+    own = contact_owner(M); keepC = [not (kc and o[1] in KNEE_PARTS) for o in own]
     names = list(M.rigid) + list(M.link_pts); sizes = [len(X) for _, X in M.rigid.values()] + [len(X) for _, X in M.link_pts.values()]
     cut = np.cumsum([0] + sizes); keep = np.ones(cut[-1], bool); keepK = np.ones(cut[-1], bool)
     for k, n in enumerate(names):
@@ -75,7 +92,7 @@ def readings(M, B, phi_b, extra=None, jam=None):
             if d is None: R.append(None); continue
             if mask is not None:
                 if len(d) == len(mask) + 1:
-                    Wc = [M.world(m, j, Pc) for m, Pc in M.contact if m not in (5, 6)]; Wc = [w for w in Wc if len(w)]
+                    Wc = [M.world(m, j, Pc) for (m, Pc), kp in zip(M.contact, keepC) if kp and m not in (5, 6)]; Wc = [w for w in Wc if len(w)]
                     dck = float(B.dist(j, np.concatenate(Wc)).min()) if Wc else 1e9
                     d = np.r_[d[:-1][mask], dck] if dck < 0 else d[:-1][mask]
                 elif len(d) != len(mask): raise SystemExit(f"layout mismatch {len(d)} vs {len(mask)}")
@@ -98,7 +115,12 @@ def readings(M, B, phi_b, extra=None, jam=None):
         cpart = {}
         for j in np.nonzero(con)[0]:
             x = res0[j]; best = min(((float(x[cut[k]:cut[k + 1]].min()), n) for k, n in enumerate(names) if (mask is None or mask[cut[k]:cut[k + 1]].any())), default=(9, "?"))
-            nm = best[1] if best[0] < 0 else "contact-only"; cpart[nm] = cpart.get(nm, 0) + 1
+            nm = best[1] if best[0] < 0 else "contact-only"
+            if nm == "contact-only":                                  # AUDIT: which contact entry (by owner part) is deepest
+                dmin = [(float(B.dist(int(j), M.world(m, int(j), Pc)).min()), own[e][1]) for e, (m, Pc) in enumerate(M.contact)
+                        if len(Pc) and (mask is None or (keepC[e] and m not in (5, 6)))]
+                if dmin: nm = "contact-only:" + min(dmin)[1]
+            cpart[nm] = cpart.get(nm, 0) + 1
         rel = np.isfinite(phi_b) & (np.abs(phi_b) > 0)
         rep.update(contact_parts=cpart, relayed_contacts=int((con & rel).sum()), ws_taken=int((ws & tk).sum()), ws=int(ws.sum()),
                    overhead=[int((ov & tk).sum()), int(ov.sum())], n_contact=int(con.sum()), depth_sum=round(float(-mins[con].sum()), 2),
@@ -250,6 +272,15 @@ def ideal(params, which="envsel", flood=False):
         if old is not None: os.environ["CB_EXACT"] = old
     P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]
     phi, ax = AR.solve_phi(M1, rp); phi_fill = np.where(np.isfinite(phi), phi, 0.0); Zr = AR.relayed_Z(phi_fill, ax)
+    if int(prm.get("fitrel", 0)):                                   # AUDIT option: re-fit the chain metal on the RELAYED fit bench
+        old = os.environ.pop("CB_EXACT", None)                      # (Bench(60,160) poses in the state the relayed design takes them;
+        try:                                                        #  the default fits on the un-relayed poses only), then frozen wear
+            with AR.patched(Zr):
+                M1 = AR.CC.CCModel(B1, dict(P)); M1.run()
+            for k in ("wd", "wa", "b3"): assert abs(float(M1.p[k]) - float(prm[k])) < 1e-6
+        finally:
+            if old is not None: os.environ["CB_EXACT"] = old
+        P2 = dict(M1.p); P2["m_fix"] = [float(x) for x in M1.D.m]
 
     class Frozen(AR.CC.CCModel):
         def fit(self):
@@ -267,7 +298,8 @@ def ideal(params, which="envsel", flood=False):
         B.res[i] = None
         if why[i] in ("", "contact", "skin"): why[i] = "kfold"
     M.why = why
-    rd = readings(M, B, phi_b); ws = np.array(B.kind) == "ws"
+    rd = readings(M, B, phi_b, kc=int(prm.get("kc", 0))); ws = np.array(B.kind) == "ws"
+    rd["contact_owner"] = contact_owner(M)
     if int(prm.get("j4", 0)):
         G = j4_geometry(AR, M1, B1, phi, ax, dict(HW, **{k: prm[k] for k in HW if k in prm}))
         ex, jam = j4_wear(AR, M, B, G, phi_b, ax)

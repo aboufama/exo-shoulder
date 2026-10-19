@@ -167,8 +167,26 @@ def bench_eval(B, params):
     r, M = report(B, params); r.pop("params", None); return r
 
 
-def frozen(P, nc=110, nw=360):
-    p = _clamp(dict(PARAMS, **P)); out, M, B = CK.frozen(p, nc, nw, keep=True)
+def held_bench():
+    """the verifier's held-out bench (docs/concepts/verify/crest-knee-3r.py held_bench: poses disjoint from Bench(110,360),
+    held-out clips still excluded, exact path) - read ONCE for the pre-registered pick, never selected on"""
+    _v = importlib.util.spec_from_file_location("ck_verify_for_iso", os.path.join(REPO, "docs", "concepts", "verify", "crest-knee-3r.py"))
+    V = importlib.util.module_from_spec(_v); _v.loader.exec_module(V); return V.held_bench()
+
+
+def frozen(P, nc=110, nw=360, bench=None):
+    """fit on Bench(60,160) FAST, wear that shape (heights, knee centre m, E profile, J3 window) on Bench(nc,nw) or `bench`
+    without refit (CK.frozen's protocol; `bench` = 'held' wears it on the held-out bench)"""
+    p = _clamp(dict(PARAMS, **P))
+    if bench is None:
+        out, M, B = CK.frozen(p, nc, nw, keep=True)
+    else:
+        real = CB.Bench
+        try:
+            CB.Bench = lambda n_clip=60, n_ws=160: (held_bench() if (n_clip, n_ws) == (nc, nw) else real(n_clip, n_ws))
+            out, M, B = CK.frozen(p, nc, nw, keep=True)
+        finally: CB.Bench = real
+        out["bench"] = "held"
     out["cond"] = conditioning(M, B); out["params_resolved"] = {k: v for k, v in p.items() if isinstance(v, (int, float, str, bool)) or v is None}
     return out
 
@@ -203,8 +221,8 @@ if __name__ == "__main__":
     if mode == "seeds":
         for k in SEEDS: print(k, {kk: round(v, 3) for kk, v in cell_arcs(k).items()})
         sys.exit()
-    if mode == "frozen":
-        t = time.time(); out = frozen(par); out["params"] = par; out["secs"] = round(time.time() - t, 1)
+    if mode in ("frozen", "held"):
+        t = time.time(); out = frozen(par, bench="held" if mode == "held" else None); out["params"] = par; out["secs"] = round(time.time() - t, 1)
         if len(sys.argv) > 3: json.dump(out, open(sys.argv[3], "w"), indent=1, default=float)
         print(json.dumps(out, default=float)); sys.exit()
     nc, nw = (110, 360) if "--big" in sys.argv else (60, 160)

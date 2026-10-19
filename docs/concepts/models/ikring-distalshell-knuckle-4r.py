@@ -111,7 +111,13 @@ def chain(base, outp, hw=False):
              contacts=[[int(j)] + [B.poses[j][q] for q in ("plane", "elev", "axial")] + [round(mm[j], 2)] for j in range(len(mm)) if mm[j] is not None and mm[j] < 0],
              taken=[int(j) for j in np.nonzero(ws & tk)[0]], why={w: int(((why == w) & ws).sum()) for w in set(why[ws].tolist())},
              stations_fit=stations(F["M1"], F["B1"]), secs=round(time.time() - t0, 1))
-    if hw: e["ring"] = {k: o[k] for k in ("gate_gap", "chain_only_gap", "near1_gap", "near2_gap", "relay_hw", "hw") if k in o}
+    if hw:
+        e["ring"] = {k: o[k] for k in ("gate_gap", "chain_only_gap", "near1_gap", "near2_gap", "relay_hw", "hw") if k in o}
+        pr = lambda d: {k: (round(v, 2) if isinstance(v, float) else v) for k, v in d.items()} if isinstance(d, dict) else d
+        e["contact_parts"] = {str(c[0]): pr(OS.PARTS.get(c[0])) for c in e["contacts"]}
+        sh = [(OS.PARTS[j]["shell"], j) for j in e["taken"] if j in OS.PARTS and "shell" in OS.PARTS[j]]
+        e["shell_min_taken"] = (lambda m: dict(mm=round(m[0], 2), i=m[1], az_rel=OS.PARTS[m[1]]["shell_az"]))(min(sh)) if sh else None
+        e["shell_under2_taken"] = int(sum(1 for v, j in sh if v < 2.0))
     try: e["th"] = BV.th_margin(M, B)
     except Exception as ex: e["th"] = repr(ex)[:200]
     json.dump(e, open(outp, "w"), default=float); print(json.dumps({k: v for k, v in e.items() if k != "taken"}, default=float), flush=True)
