@@ -6057,3 +6057,130 @@ ikring-thinstack-knuckle-4r 9.75 and ikring-distalshell-knuckle-4r 10.54 (cx 48 
 knee-less 4-joint row is worth the user's switch only near or under ~9.75, i.e. a J4 guide costing <= ~0.5 over the
 10.27 ideal - K2's kill should be set against that, not against 18.28. Scores are far from 95 on metal (best 19.50 envsel), so
 the objective stays the gap, not complexity.
+
+## Round 402 plan (Round K2, track kneeless; 2026-10-19 ~04:35 UTC, lead verified gap 18.28)
+
+Planner's read: Round 401 plan + results (above), FINDINGS "Round K1", rows kfree-o20pin-highexit-relay-4r (ideal /
+hardware / audit blocks), ikring-thinstack / ikring-distalshell, phi40-thinstack, the catalogue's 4R entries, events
+tail (04:30Z), ledger latest. No bench, judge or kit file changed since K1 closed: no number below moved because the
+measurement changed. The adopted focus is the K1 closer's (the J4 guide on the plain O20 3R at J3 seat (84,-15)).
+
+### State
+
+- **Lead (3 joints, the user's 2026-10-17 rule): conecut-knee-knuckle-3r 18.28** (93.35), held 22.38, reach 0.7278,
+  ib14 0.9012, 4 contacts / 20.24 mm (T5 reference), cx 18.5. WATCH carried: dashboard sweep 12.5 shown as 95.45; T1
+  pose 203 at 0.263 mm; T3 held th margin 5.006; self-reference. Tie conecut-h2facet 18.28 / held 22.16 (WATCH: no
+  flood, cx 0 vs 18.5 mismatch).
+- **4-joint options on file (all WITH the knee):** ikring-thinstack-knuckle-4r **9.75** verified (J4 ACTIVE, set per
+  pose by IK = a POWERED assumption; its unpowered spring-parked control on the same hardware reads gate 14.46 / plain
+  13.47, 291 ws, 18 contacts), cx 48, reach 0.822, ib14 0.890, T1 pose 127 at 0.099 mm, no ledger entry;
+  ikring-distalshell-knuckle-4r **10.54** (plain 9.94), cx 48, red team: the arm-fixed shell is in the torso on 30
+  non-closing across-body IR poses to -11.9 mm (strict ~12.73), no ledger entry; phi40-thinstack-relay-4r **14.06**
+  (the best UNPOWERED verified 4-joint number), held 16.69, cx 51.25, WATCH (metal in the 1-2 mm shell 47.16 vs 34.84;
+  T5 74.93 mm x3.7; CF strip / 1.0 mm shell unmodelled; R17 unmeasured); offset-shortcar 14.76 / 17.77, cx 52.5.
+  Do not buy points the same ways: metal parked at 0-2 mm, deep contacts, shells in the torso on unscored poses.
+- **Knee-less (track K):** no metal reading under 19.50 (kneeless-steer envsel). The ideal bounds pass 95 frozen exact
+  Bench(110,360): **kfree-o20pin 10.27** (plain O20 3R, K welded, J3 seat (84,-15), a1/a2 37.55/55.78, psi2 -14,
+  one-sided relay PHI 75 about wdir(55,45); reach 0.817, 294 ws, follow 1.0, ib14 0.914, 8 contacts / 30.1 mm, max 8.75,
+  overhead 10/28, min th 5.001; lost ws: fold 50, j3stop 8, contact 8; 82 taken poses relayed, phi p90 60.8; flood
+  1172/1173 connected; envsel 12.36), distal-cband 12.40, insertion-cband 12.74 (corrected). Ideal parts ib14: hub1/K
+  0.991, hub2 0.959, hub3 0.789, L1a 0.98, L1b 0.961, L2 0.823.
+- **The measured limiter is the R4 guide's metal, not the kinematics.** kfree-o20pin hardware 56.42 frozen exact
+  (verifier reproduced): R4 boss at the line's max exit (rB 86, exit p5/p50 59/68, spread 48-78 mm) floats a median
+  18.8 mm (boss ib14 0.19); the 86 mm member-3 bar climbs ~20 mm to it (ib14 0.602, 39 contact poses, <= 2.32 mm).
+  Verifier's arithmetic (kit convention: disc only in band, walls contact-only): perfect contact-free bar 12.35-13.48;
+  bar as measured with contacts deleted 25.85; best bar 0.756 -> 20.82; passing 17.0 needs bar ib14 >= 0.873, 0
+  contacts. Over 120 GH lines a disc at max exit + 2 mm floats 14-20 mm median (spread 20-25 mm) on EVERY line; best
+  boss ib14 0.60 at wdir(35,0) (rB 122), 0.51 at (40,0); chest cliff at de 55 between ae 50 and 55. The lines between
+  the kinematic optimum (55,45) and the low-swing exit (35,0) were never priced with ideal + boss + bar together.
+- **Arm-surface guides are measured dead:** C-band at s 0.30 (skin swings 6-12 mm, carriage floats 10-22 mm, in band
+  0.34), s 0.70-0.75 (torso over the race arc on ~10 % of poses, 6-43 mm deep), knuckle-relay shell end past +48 deg,
+  long-axis ring at the pad (49-68 mm float). Base relays (J0 under / beside J1) gain <= ~2 (lead-relay-j0 22.18,
+  wobble 32.92, backbridge 32.13); acromion-relay 42.74, cap-nullspace 57.7, cam-coupled 50.67 (GAMED T3). The arm-end
+  relay is where the reach is (82 relayed takes); 3 DOF cannot make 95 at the legal seats (take bound: lead 4.53 short).
+- **Measurement faults on file (not applied; any fix is a MEASUREMENT change, reported apart from design numbers):**
+  `_strip_drive` (docs/concepts/models/kfree-armarc-relay-4r.py:257) keeps the stripped horn's contact top (appended 3 mm
+  off, matched at 0.5 mm): up to ~4 points on every drive-0 lead_eval row (insertion-cband 16.86 -> 12.74); the concept
+  bench's winding sign counts the rig's arm-in-chest self-intersection as contact (~2.2 on distal arm metal);
+  K.requirement's default t1 220 mm leaves distal parts unfitted (pass t1 explicitly); boss walls in the in-band pool.
+- **Bars K2 is judged against:** pass = 13.75 (95), which also beats every unpowered 4-joint row (phi40 14.06, ikring
+  control 14.46); switch-worthy = <= ~10.25 (the IK option 9.75 + 0.5, the closer's bar; a knee-less spring relay is
+  unpowered by construction, so say both); kill > 17.0 frozen exact on hardware.
+- **Shoulder slip (standing price, every claim restates it):** rigid-cuff misfit p95 4.83 / max 5.14 mm at a 3 mm GH
+  offset, ~6.4 / 6.9 mm at the R10 4 mm slip, 13-31 N at 2-4.5 N/mm skin vs the R17 5 N cap; ~3 mm compliant liner
+  assumed, stated as such.
+- Compute: farm OPEN (user renewal ~01:05 UTC: exo-cpu1 up to 9 workers via tools/cloud_run.py until ~13:05 UTC; stop at
+  balance <= $13.61; runpod_guard audit before and after each batch). Box load is high (rounds 301 / 501 verifiers and
+  audits): local jobs nice -n 10, OMP_NUM_THREADS=1, <= 2 per agent; the line scans go to the farm.
+
+### Lenses
+
+**A. pinline-member3bar (REACH, the closer's focus, highest odds; 4 joints, 0 P; <= 150 min).** The kfree-o20pin chain
+(seat (84,-15), a2 55.78, psi2 -14) with R4 an O20 v5 stack on MR117-2RS coaxial with an arm-fixed GH line, one-sided
+clock spring to a zero dowel + PHI dowel on R4's own angle; the bar is PART OF member 3 (hub 3's lower plate extended to
+R4 as one bent 3 mm Ti link: ramps <= 60 deg, inner bend R >= 15 mm), no separate climbing bar.
+- Step 0 (measurement, <= 20 min, own commit): fix `_strip_drive` (drop the horn top by tag, or match at the 3 mm
+  offset) and re-read kfree-armarc (26.42), kfree-o20pin (56.42 / ideal 10.27), insertion-cband (74.53 / 12.74),
+  distal-cband (35.48 / 12.40) on their own benches; record as a measurement change in each row and FINDINGS. Adopt the
+  kit's disc-only boss convention (walls contact-only) and say so.
+- Step 1 (joint line scan, farm): R4 wdir(de 30..60 step 5, ae -10..50 step 5) = 91 lines x PHI {60, 75}: (i) ideal take
+  on envsel; (ii) R4 disc at the line's max exit + 2 mm on the envelope sample (never Bench(110,360)); (iii) the member-3
+  link from hub 3's swept positions to R4's plate at link height, sampled, in band + contacts counted. Priced bound =
+  (i) worn with (ii) + (iii). Pre-register the top 3 lines by priced envsel bound before any frozen exact read.
+  Kill: priced bound > 15.4 envsel at every line.
+- Step 2 (hardware): CMA on the near-touch gap over line (the 3 registered), PHI, member-3 route, R4 seat height, on
+  envsel; ONE frozen exact Bench(110,360) + ONE held; flood. Pass <= 13.75; kill > 17.0.
+- Red team: the link over the bunched deltoid (refit without the out_mm 15 filter that hid 39 contact poses), the boss
+  walls at the relayed across-body poses, cliff partners (+-1.5 deg lines), T5 depth vs the lead (4 / 20.24 mm).
+
+**B. hub3-wobble-relay-4r (LOW COMPLEXITY at the same reach: no bar, no remote boss, no lug; <= 120 min).** R4 lies
+INSIDE hub 3's footprint: its GH line 8-20 deg from J3's axis, stacked as BOTTOM's R4 O20 stack -> a wedge plate (member
+3, tilted by the R4-J3 angle) -> J3's O20 stack -> link 2. Rotating member 3 about R4 swings J3's axis on a cone of that
+half-angle, shifting the J1-J3 angle by up to twice it: a fold lever with no arm-surface guide (the base wobble died
+because a base relay gains <= ~2; the arm-end relay is where the 82 relayed takes are). cx target <= ~26 (o20pin 31.75
+less the bar / lug parts; tools/simplicity.py reads it).
+- Step 0 (<= 30 min): ideal take over cone half-angle 8 / 12 / 16 / 20, cone azimuth around J3 0-330 step 30, PHI 90-180,
+  with hub 3 raised by one O20 v5 stack + the wedge as sampled metal; envsel. Kill if every cell > 14.0 envsel or the
+  relay recovers < 40 of the locked 3R's fold losses.
+- Then CMA on the near-touch gap on envsel, pick pre-registered, ONE frozen exact + ONE held, flood (phi to 180: 10 deg
+  jump rule per 2-deg edge).
+- Red team: the double stack's height vs hub 3's 0.789 in band, the wedge moment on the MR117 pairs and R17 at the
+  fold, the clock spring's windup over PHI 180, the 5-deg th margin read on the effective J1-J3 angle.
+
+**C. midlink-relay-4r (WEIRD: the redundancy inside the dyad, nothing arm-fixed but the 3R's own cuff; <= 120 min).**
+Link 2 split by a 4th O20 v5 stack M on link 2's own path (axis through GH): a clock spring holds M on an own-angle
+stop at the nominal a2 ~56 (a2a + a2b > 56), M yields only at the stretched fold (sign a variable); hub M rides the
+chain's swept path (hub ib14 0.96-0.99 class), no boss float. Older levers in link 2 / at the arm end sit at 26.7
+(cam-unfold-4th, slaved) and 26.71 (arm-parked-knee-4r) at seats K1 measured ~8 points worse.
+- Step 0: ideal on envsel over split ratio a2a / (a2a + a2b) 0.3-0.7, total 60-90 deg, stop angle, sign, a1 re-solved,
+  hub M disc sampled at link height. Kill if > 14.0 envsel at every cell. State the th margin on both readings (the 3R
+  at the stop, the 4R's J1-J3 angle vs a1 + a2a + a2b).
+- Red team: hub M over the deltoid overhead, link 2b vs the acromion at abduction 105-150 (the psi2 -45 burial), branch
+  change in the flood, the stop's feel near the edge.
+
+Rules for all lenses: select on envsel / envh only, pre-register picks, never tune or select on the held-out split or
+on Bench(110,360) binders; search on the near-touch gap; every part sampled on every face; O20 v5 on MR117-2RS at every
+counted joint; stops on a joint's own angle; no gears, pulleys, cables; continuity flood (static and connected) for every
+relay; report plain gap frozen exact + held, overhead /28 and /71, contacts + T5 depth vs the lead, 2 mm reading, min th
+margin, determinacy (spring, stops, flood: the relay is unpowered by construction), shoulder slip at 4 mm with the liner
+compliance assumed. Every screened morphology writes docs/concepts/viz/concepts/<id>.js, passes
+`node docs/concepts/viz/test.mjs <id>`, re-runs `node docs/concepts/viz/thumbs.mjs`. Commit after every step.
+
+### Carried (ideated, never screened)
+
+None. The 20 older ideated catalogue entries sit under measured closures (the K1 planner's reading holds); none is a
+knee-less rigid-cuff spherical 4R; slowpole-slot-knuckle-3r is round 501's.
+
+### Elsewhere, not to be duplicated
+
+Round 501 (G1): isoceles-shortdyad-pinknee-3r (verifier running), slowpole-slot-knuckle-3r (metal proxy running),
+rollcone-hubspot-pinknee-3r (screened, rule-gated). Round 301 (O1, closing): ikring-thinstack-knuckle-4r and
+weldk-overstrap-pinknee-3r (audits running), ikring-distalshell-knuckle-4r, weldk-crossover-kneeless-3r. Auditor:
+pointer-cslide. Not to retry: arm-fixed C-band races at s 0.30 or 0.70-0.75, the knee-less knuckle relay, psi2 -45 J2
+seats.
+
+### Needs the user's say
+
+The shoulder-slip price of a rigid cuff (liner taking ~6.4 mm p95 at R10 4 mm); whether a switch from the knee needs
+<= ~10.25 (vs the IK option) or <= 13.75 (vs every unpowered 4-joint row). The 1 cm rule, DOF cap, 5-deg fold margin, J1
+seats, O20 hubs and transmission guard stay.
