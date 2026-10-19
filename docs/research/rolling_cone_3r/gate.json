@@ -1,0 +1,164 @@
+{
+ "J2": {
+  "n": 597,
+  "best_ws": 138,
+  "best_over": 7,
+  "gain_2nd_half": 0.23,
+  "gain_last_third": 0.23,
+  "top5_spread": 0.23,
+  "best_cell": {
+   "J2": {
+    "kind": "roll",
+    "ga": 28.75,
+    "gb": 6.124,
+    "beta": -140.652,
+    "sign": -1
+   }
+  },
+  "arcs": [
+   [
+    41.7,
+    188.2,
+    21.0
+   ]
+  ]
+ },
+ "R0": {
+  "n": 1,
+  "best_ws": 123
+ },
+ "R3": {
+  "n": 803,
+  "best_ws": 127,
+  "best_over": 5,
+  "gain_2nd_half": 0.23,
+  "gain_last_third": 0.0,
+  "top5_spread": 0.23,
+  "best_cell": {
+   "rigid": 1,
+   "J3": {
+    "kind": "roll",
+    "ga": 17.169,
+    "gb": 5.89,
+    "beta": 91.254,
+    "sign": 1
+   }
+  },
+  "arcs": [
+   [
+    65.4,
+    188.2,
+    20.2
+   ]
+  ]
+ },
+ "J1": {
+  "n": 700,
+  "best_ws": 127,
+  "best_over": 6,
+  "gain_2nd_half": 0.0,
+  "gain_last_third": 0.0,
+  "top5_spread": 0.0,
+  "best_cell": {
+   "J1": {
+    "kind": "roll",
+    "ga": 14.666,
+    "gb": 7.752,
+    "beta": 76.705,
+    "sign": 1
+   }
+  },
+  "arcs": [
+   [
+    75.1,
+    140.9,
+    19.9
+   ]
+  ]
+ },
+ "J12": {
+  "n": 540,
+  "best_ws": 138,
+  "best_over": 7,
+  "gain_2nd_half": 0.0,
+  "gain_last_third": 0.0,
+  "top5_spread": 0.0,
+  "best_cell": {
+   "J1": {
+    "kind": "roll",
+    "ga": 11.427,
+    "gb": 5.901,
+    "beta": 18.843,
+    "sign": 1
+   },
+   "J2": {
+    "kind": "roll",
+    "ga": 29.374,
+    "gb": 5.76,
+    "beta": -126.805,
+    "sign": -1
+   }
+  },
+  "arcs": [
+   [
+    86.9,
+    167.5,
+    18.0
+   ],
+   [
+    38.1,
+    186.3,
+    19.6
+   ]
+  ]
+ },
+ "R123": {
+  "n": 500,
+  "best_ws": 141,
+  "best_over": 6,
+  "gain_2nd_half": 0.68,
+  "gain_last_third": 0.23,
+  "top5_spread": 0.23,
+  "best_cell": {
+   "rigid": 1,
+   "J1": {
+    "kind": "roll",
+    "ga": 13.669,
+    "gb": 6.217,
+    "beta": 39.543,
+    "sign": 1
+   },
+   "J2": {
+    "kind": "roll",
+    "ga": 30.629,
+    "gb": 5.659,
+    "beta": -147.16,
+    "sign": -1
+   },
+   "J3": {
+    "kind": "roll",
+    "ga": 15.275,
+    "gb": 3.151,
+    "beta": 87.177,
+    "sign": 1
+   }
+  },
+  "arcs": [
+   [
+    80.1,
+    174.8,
+    19.8
+   ],
+   [
+    38.1,
+    197.1,
+    20.4
+   ],
+   [
+    47.3,
+    226.6,
+    13.0
+   ]
+  ]
+ }
+}

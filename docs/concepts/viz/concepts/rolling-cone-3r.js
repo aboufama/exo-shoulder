@@ -6,20 +6,20 @@
  * (J2 is an INTERNAL pair: the planet rolls inside a concave sun ring, r < 0). The instantaneous joint axis is the
  * contact line R(c_k, x) w_k: it walks along both bands as the joint turns. FK: M3 = T1 T2 T3 (reference Q = I), the
  * arm = M3. 3 ACTIVE (t1..t3), 0 passive. Seats: H1 (skin-normal-3r-pin-knee H-g107-1) with J3 on its GH ray (b3 0),
- * the best all-rolling cell of the step-0 search (seeded CMA on Bench(60,160) ws, read on Bench(110,360): 292 ws /
- * 104 clip / 14 overhead kinematic, vs 265 / 110 / 12 for the same seats with three pins). Rim arcs = the joint
- * values over the taken Bench(110,360) poses (+-5 deg); band radii are the schematic one-level R of the step-0 band
- * check. Red = the instantaneous-dyad fold (contact lines w1, w2, w3 within 5 deg of coplanar, or the other branch)
+ * the best all-rolling cell of the step-0 search (seeded CMA on Bench(60,160) ws, read on Bench(110,360): 297 ws /
+ * 110 clip / 15 overhead kinematic, vs 265 / 110 / 12 for the same seats with three pins, 292 / 110 / 16 J2 rolling only). Rim arcs = the joint
+ * values over the taken Bench(110,360) poses (+-5 deg); band radii = the one-level R_lo of the step-0 band check (51 / 64 / 80 mm;
+ * the J2 planet band would need 135 mm in 6 of 201 poses, drawn at 64). Red = the instantaneous-dyad fold (contact lines w1, w2, w3 within 5 deg of coplanar, or the other branch)
  * or a contact rolled off its band. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
   // exported by `python3 docs/concepts/models/rolling-cone-3r.py viz '<cell>'` (scapula frame at the reference Q = I)
-  const G = {"J": [{"kind": "roll", "c": [0.08665, 0.98976, 0.11344], "m0": [0.08432, 0.87921, 0.46891], "w": [0.08518, 0.89802, 0.43164], "r": 7.82187, "ga": 19.062, "gb": 2.393},
-                   {"kind": "roll", "c": [-0.92657, 0.25697, 0.27466], "m0": [-0.66129, 0.61576, 0.4284], "w": [-0.58009, 0.67877, 0.4503], "r": -5.23458, "ga": 33.322, "gb": 6.024},
-                   {"kind": "roll", "c": [-0.0222, -0.18886, 0.98175], "m0": [-0.1759, -0.39051, 0.90364], "w": [-0.13314, -0.33557, 0.93256], "r": 2.51544, "ga": 10.925, "gb": 4.321}],
-             "branch": -1.0, "t_rest_deg": [-10.661, -4.292, 6.99]};
-  const P = { R: [58, 60, 60], rim_h: 8, margin: 5, pad: 5, range: [[-103.6, 142.7], [-67.1, 87.6], [-146.0, 150.5]], neck_deg: 25, cuff_at: 165,
-              cell: { J1: [19.062, 2.393, 78.869, 1], J2: [33.322, 6.024, -129.74, -1], J3: [10.925, 4.321, 51.966, 1] } };
+  const G = {"J": [{"kind": "roll", "c": [0.23539, 0.93877, 0.25158], "m0": [0.01474, 0.8624, 0.50601], "w": [0.08518, 0.89802, 0.43164], "r": 2.18213, "ga": 13.669, "gb": 6.217},
+                   {"kind": "roll", "c": [-0.90978, 0.38118, 0.16433], "m0": [-0.65674, 0.63619, 0.40492], "w": [-0.58009, 0.67877, 0.4503], "r": -5.16671, "ga": 30.629, "gb": 5.659},
+                   {"kind": "roll", "c": [-0.12807, -0.07584, 0.98886], "m0": [-0.13301, -0.38678, 0.91253], "w": [-0.13314, -0.33557, 0.93256], "r": 4.79286, "ga": 15.275, "gb": 3.151}],
+             "branch": -1.0, "t_rest_deg": [-10.766, -4.269, 6.942]};
+  const P = { R: [51, 64, 80], rim_h: 8, margin: 5, pad: 5, range: [[-112.1, 159.9], [-79.0, 86.2], [-157.9, 149.2]], neck_deg: 25, cuff_at: 165,
+              cell: { J1: [13.669, 6.217, 39.543, 1], J2: [30.629, 5.659, -147.16, -1], J3: [15.275, 3.151, 87.177, 1] } };
   const J = G.J.map((j, k) => {
     const lo = P.range[k][0] - P.pad, hi = P.range[k][1] + P.pad, f = 1 / (1 + j.r), xs = [lo * f, hi * f], ys = [lo * j.r * f, hi * j.r * f];
     return Object.assign({}, j, { f, lo, hi, x: [Math.min(...xs), Math.max(...xs)], y: [Math.min(...ys), Math.max(...ys)] });
