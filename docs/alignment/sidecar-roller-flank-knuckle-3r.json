@@ -5,6 +5,7 @@
  "complexity": 21.75,
  "verdict": "watch",
  "reasons": [
+  "dominance: beats frontload-lobe-stopb-knuckle-3r by 2.74 plain but loses by 2.74 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
   "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
   "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 11.25 (score 95.91) sits 8.83 below the verified number"
  ],
@@ -52,18 +53,65 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump sidecar-roller-flank-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged) (frontload-lobe-stopb-knuckle-3r has no depth on file; compared with conecut-knee-knuckle-3r): v_gap 20.08: bench 5 contact poses, sum 22.09 mm, deepest 12.57 mm at ['ws', 15.0, 165.0, -60.0], 3 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 10 contact poses, sum 59.91 mm, deepest 11.08 mm at ['ws', 30.0, 165.0, -45.0], 8 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
    "depths": {
-    "v_gap 20.08": {}
-   }
+    "v_gap 20.08": {
+     "bench": {
+      "n": 5,
+      "sum_mm": 22.09,
+      "max_mm": 12.57,
+      "n_deeper3": 3,
+      "overhead140": 3,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 20.08,
+      "src": "docs/alignment/remeasure/sidecar-roller-flank-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        22.09
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 10,
+      "sum_mm": 59.91,
+      "max_mm": 11.08,
+      "n_deeper3": 8,
+      "overhead140": 6,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -45.0
+      ],
+      "gap": 22.35,
+      "src": "docs/alignment/remeasure/sidecar-roller-flank-knuckle-3r_probe_held.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        59.91
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
   },
   {
    "check": "dominance",
-   "level": "ok",
-   "reason": "vs slipper-nose-knuckle-3r: plain -1.59, 2 mm -13.80",
-   "ref": "slipper-nose-knuckle-3r",
-   "gain_plain": -1.59,
-   "gain_2mm": -13.8
+   "level": "watch",
+   "reason": "beats frontload-lobe-stopb-knuckle-3r by 2.74 plain but loses by 2.74 at 2 mm: part of the gain is metal moved into the 1-2 mm shell (A1 gate retired 2026-10-17)",
+   "ref": "frontload-lobe-stopb-knuckle-3r",
+   "gain_plain": 2.74,
+   "gain_2mm": -2.74
   },
   {
    "check": "continuity",
@@ -210,6 +258,15 @@
    }
   },
   {
+   "check": "density",
+   "level": "ok",
+   "reason": "over-dense parts roller 2.02x; bench 20.08 -> 20.15 at the kit's density; held 22.35 -> 22.42 at the kit's density",
+   "over": {
+    "roller": 2.023
+   },
+   "src": "remeasure/sample_density_sidecar-roller-flank-knuckle-3r.json"
+  },
+  {
    "check": "complexity",
    "level": "ok",
    "reason": "recomputed 21.75 vs row 21.75",
@@ -242,7 +299,7 @@
   "docs/concepts/verify/sidecar-roller-flank-knuckle-3r_v_bench_frozen_env.json",
   "docs/concepts/verify/sidecar-roller-flank-knuckle-3r_v_held_frozen.json"
  ],
- "git": "06f7b8d",
- "tool_version": "2026-10-17.2",
- "t": "2026-10-17T08:03:55Z"
+ "git": "c136a8c",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-19T01:26:06Z"
 }

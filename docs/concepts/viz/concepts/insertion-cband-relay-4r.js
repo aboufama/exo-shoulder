@@ -13,7 +13,7 @@
               ax: [0.1521, 0.9884, 0.0], s_mm: 97.5, psi0: -15, band: [-28, 42], Rb: 46, faces: [50.5, 62.5, 58.0],
               hub_r: 10, stack: 12.25 };
   const C3 = K.sph3r(K.bvec(P.az1, P.el1), K.wdir(P.wd, P.wa), P.a1, P.a2, P.branch);
-  const ax = V.unit(P.ax), lat = K.wdir(0, 0), e = V.unit(V.reject(lat, ax)), f = V.cross(ax, e);
+  const ax = V.unit(P.ax), lat = K.wdir(90, 0), e = V.unit(V.reject(lat, ax)), f = V.cross(ax, e);
   const sAx = -Math.hypot(P.s_mm, P.s_mm * Math.tan(8.75 * D2R));          // band station on the axis (below GH)
   const dPsi = t => V.add(V.scale(e, Math.cos(t * D2R)), V.scale(f, Math.sin(t * D2R)));
   const relayed = (ctx, ph) => Object.assign({}, ctx, { H: M.mul(ctx.H, M.rot(ax, ph)) });

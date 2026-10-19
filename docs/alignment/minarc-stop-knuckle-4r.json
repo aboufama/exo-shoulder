@@ -5,7 +5,7 @@
  "complexity": 32.5,
  "verdict": "watch",
  "reasons": [
-  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): polished_gap 18.4: bench 11 contact poses, sum 34.43 mm, deepest 13.17 mm at ['ws', 15.0, 165.0, -60.0], 4 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (+19.68 mm, x2.33) - CLEARLY DEEPER; held 35 contact poses, sum 126.1 mm, deepest 14.61 mm at ['ws', 45.0, 165.0, -30.0], 15 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (+79.98 mm, x2.73) - CLEARLY DEEPER | v_gap 19.54: bench 4 contact poses, sum 10.03 mm, deepest 6.41 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (-4.72 mm, x0.68); held 13 contact poses, sum 36.4 mm, deepest 7.27 mm at ['ws', 60.0, 165.0, -30.0], 6 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (-9.72 mm, x0.79)",
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): polished_gap 18.4: bench 11 contact poses, sum 34.43 mm, deepest 13.17 mm at ['ws', 15.0, 165.0, -60.0], 4 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+28.20 mm, x5.53) - CLEARLY DEEPER; held 35 contact poses, sum 126.1 mm, deepest 14.61 mm at ['ws', 45.0, 165.0, -30.0], 15 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+90.44 mm, x3.54) - CLEARLY DEEPER | v_gap 19.54: bench 4 contact poses, sum 10.03 mm, deepest 6.41 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+3.80 mm, x1.61); held 13 contact poses, sum 36.4 mm, deepest 7.27 mm at ['ws', 60.0, 165.0, -30.0], 6 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+0.74 mm, x1.02)",
   "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
   "reporting: dashboard v_gap 18.4 vs verifier 19.54 (-1.14; the dashboard flatters the design); dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
  ],
@@ -53,7 +53,7 @@
   {
    "check": "contact_depth",
    "level": "watch",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): polished_gap 18.4: bench 11 contact poses, sum 34.43 mm, deepest 13.17 mm at ['ws', 15.0, 165.0, -60.0], 4 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (+19.68 mm, x2.33) - CLEARLY DEEPER; held 35 contact poses, sum 126.1 mm, deepest 14.61 mm at ['ws', 45.0, 165.0, -30.0], 15 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (+79.98 mm, x2.73) - CLEARLY DEEPER | v_gap 19.54: bench 4 contact poses, sum 10.03 mm, deepest 6.41 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (-4.72 mm, x0.68); held 13 contact poses, sum 36.4 mm, deepest 7.27 mm at ['ws', 60.0, 165.0, -30.0], 6 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (-9.72 mm, x0.79)",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): polished_gap 18.4: bench 11 contact poses, sum 34.43 mm, deepest 13.17 mm at ['ws', 15.0, 165.0, -60.0], 4 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+28.20 mm, x5.53) - CLEARLY DEEPER; held 35 contact poses, sum 126.1 mm, deepest 14.61 mm at ['ws', 45.0, 165.0, -30.0], 15 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+90.44 mm, x3.54) - CLEARLY DEEPER | v_gap 19.54: bench 4 contact poses, sum 10.03 mm, deepest 6.41 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+3.80 mm, x1.61); held 13 contact poses, sum 36.4 mm, deepest 7.27 mm at ['ws', 60.0, 165.0, -30.0], 6 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+0.74 mm, x1.02)",
    "depths": {
     "polished_gap 18.4": {
      "bench": {
@@ -148,42 +148,42 @@
      }
     }
    },
-   "ref": "slipper-nose-knuckle-3r",
+   "ref": "sidecar-longdyad-knuckle-3r",
    "compare": [
     {
      "claim": "polished_gap 18.4",
      "wear": "bench",
      "sum": 34.43,
-     "ref_sum": 14.75,
-     "excess": 19.68,
-     "ratio": 2.33,
+     "ref_sum": 6.23,
+     "excess": 28.2,
+     "ratio": 5.53,
      "watch": true
     },
     {
      "claim": "polished_gap 18.4",
      "wear": "held",
      "sum": 126.1,
-     "ref_sum": 46.12,
-     "excess": 79.98,
-     "ratio": 2.73,
+     "ref_sum": 35.66,
+     "excess": 90.44,
+     "ratio": 3.54,
      "watch": true
     },
     {
      "claim": "v_gap 19.54",
      "wear": "bench",
      "sum": 10.03,
-     "ref_sum": 14.75,
-     "excess": -4.72,
-     "ratio": 0.68,
+     "ref_sum": 6.23,
+     "excess": 3.8,
+     "ratio": 1.61,
      "watch": false
     },
     {
      "claim": "v_gap 19.54",
      "wear": "held",
      "sum": 36.4,
-     "ref_sum": 46.12,
-     "excess": -9.72,
-     "ratio": 0.79,
+     "ref_sum": 35.66,
+     "excess": 0.74,
+     "ratio": 1.02,
      "watch": false
     }
    ]
@@ -191,10 +191,10 @@
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs slipper-nose-knuckle-3r: plain -1.05, 2 mm -8.67",
-   "ref": "slipper-nose-knuckle-3r",
-   "gain_plain": -1.05,
-   "gain_2mm": -8.67
+   "reason": "vs sidecar-longdyad-knuckle-3r: plain -0.63, 2 mm -7.66",
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "gain_plain": -0.63,
+   "gain_2mm": -7.66
   },
   {
    "check": "continuity",
@@ -232,6 +232,11 @@
    "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
   },
   {
+   "check": "density",
+   "level": "ok",
+   "reason": "no part sampled > 2x the kit's density; under-dense: L1a 0.42x"
+  },
+  {
    "check": "complexity",
    "level": "ok",
    "reason": "recomputed 32.5 vs row 32.5",
@@ -259,7 +264,7 @@
   "held": true
  },
  "verifier_files": [],
- "git": "06f7b8d",
- "tool_version": "2026-10-17.2",
- "t": "2026-10-17T08:03:49Z"
+ "git": "c7316ce",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-19T01:07:34Z"
 }
