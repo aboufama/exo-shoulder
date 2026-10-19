@@ -1,0 +1,77 @@
+[
+ {
+  "key": "continuity",
+  "refuted": false,
+  "evidence": "Upheld. Re-read docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json connected: static 23.19, connected_full 23.19 (0 dropped), connected_knn 32.18 (84 of 355 forced-taken dropped), connected_bench 24.47 (12). The tool's rule (tools/alignment_audit.py lines 500-505: full flood loses 0 <= 1, but knn loses 8.99 > conn_gamed 3 -> watch) is applied as coded. Note: the level rests on the held file only (the tool takes the newest verify file by mtime, line 187). On the claim's own bench file (_v_bench_frozen_blend.json connected) full 18.98 (0 dropped) and knn 20.67 (+1.69, under the 3-point trigger), so the bench alone would read ok. The held knn loss is a real number I cannot price as an artefact without a flood run, so it stands."
+ },
+ {
+  "key": "density",
+  "refuted": false,
+  "evidence": "Upheld; every number re-derived. sample_density_desmo-conecut-knuckle-3r.json parts: horn ratio 2.519, ring2 2.445 (> density_ratio 2.0). Recomputed from the verifier's own per-part in-band (_v_{bench,held}_frozen_blend.json claim_frozen_out.parts_ib14, recomputed ib14 0.8929 / 0.892): over-dense at kit 18.68 / 22.89, ring2 alone 18.59 / 22.80 (moves 0.39 > density_shift 0.1), horn alone 19.07 / 23.28. The model's ring2 sampler (desmo-conecut-knuckle-3r.py lines 252-254: 0.5 mm radial x 2.0/r rad = 2 mm arc) is 1 sample per mm2 against the kit's 4 mm2, so ring2 is over-dense under any reading but the hull's."
+ },
+ {
+  "key": "judgement:S6",
+  "refuted": false,
+  "evidence": "Upheld. The crash is real: _thin's signature is (M, names, step=KIT_STEP) (ast of tools/sample_density.py line 204) and rewear passes thin=(names, KIT_STEP, wear) unpacked at line 146, 4 positional args into a 3-parameter function -> TypeError before any wear (the auditor's '3 into 2' counts without M; same crash). Exact thinned wears on file: remeasure/desmo-conecut-knuckle-3r_density_rewear_bench.json frozen 18.65 (ib14 0.8963, thinned horn [27,10] ring2 [19,7], fit_fast 13.27 = the verifier's fit_fast 13.27), _held.json 22.86. Re-weight readings re-derived: ring2 4x 18.57, hull (horn only) 19.07, over + L2 + L1b 19.02, all parts 18.87. Correction to the auditor's 'one-sided' reading: its 19.02 omits L1a, the sparsest strap (0.33x, in-band 0.981); over-dense + all three sparse straps reads 18.88 / 23.09, within 0.01 of all-parts. The dependency on the density reading (18.57-19.07) stands."
+ },
+ {
+  "key": "judgement:M3",
+  "refuted": false,
+  "evidence": "Upheld. pipeline/full-exo/designs/user_desmo_conecut/judge/part_contact.json: frames_checked 451, max_depth 1.5, violation 'drive stage-1 pin ... IN l1b' link 1b; build.json stage1.levels_over_hub2_face_mm insert [0.111, 1.611], groove_mid 0.861 = model_groove_mid. stage1_level_scan.json level 0.861 feasible 21. remeasure/desmo-conecut-knuckle-3r_s1level3p9_density_rewear_bench.json: frozen 19.03 (ib14 0.8925, ring2 [29,8] at 0.143 in band, median 16.9 mm; glev 2.039, a_s 9.8, psi 150), as sampled _s1level3p9_bench.json 20.50. Attribution note: the 19.03 run has fix_ring_frame true while the 18.65 run has it false (both files' fix_ring_frame), so the +0.38 includes the S7 frame (+0.03 by the auditor's own re-weight); the level alone is ~+0.35. 19.03 stands as the buildable estimate. The row verdict (ea9371b) already says 'VERIFIED 18.98 AS THE MODEL'S NUMBER, NOT AS A BUILDABLE DRIVE', but quotes the buildable variant at 18.80-19.01, 0.02 under this measurement."
+ },
+ {
+  "key": "judgement:NEW-inherited-stack",
+  "refuted": false,
+  "evidence": "Upheld on this row's measured part: the clash is the CAD's (part_contact.json max_depth 1.5 on 451 frames) and the level formula is the model's (hmid = pivot + 3.15 + glev, glev -1.0 at the box edge). The cross-row numbers (lowarm-halfring +0.11, desmo-slipper 20.38 / 25.33) are cited from their own audits; not re-measured here."
+ },
+ {
+  "key": "judgement:NEW-sample-frame",
+  "refuted": false,
+  "evidence": "Upheld. remeasure/desmo-conecut-knuckle-3r_ringframe_bench.json frozen 19.07, _ringframe_held.json 23.28; ring_frame_log q_on_deg 7.279, ring_az_model_deg [-3.0, 92.94] vs ring_az_fixed_deg [-10.28, 85.66], n_ring 19. build.json stage1.insert_sector_deg 123.88 vs the model's ~96 deg sampled span; past_O20_mm 0.96. The unsampled ~28 deg sector has no wear on file (searched remeasure/ and verify/), so that half stands as missing."
+ },
+ {
+  "key": "judgement:T3",
+  "refuted": false,
+  "evidence": "Upheld. _v_bench_frozen_blend.json v3_th_margin min 5.181 lt5 0; _v_held_frozen_blend.json min 5.006 lt5 0, lowest 1054 (5.006, dK 46.27, dth_dK 0.403), 274 (5.031, 46.17), 1068 (5.110, 45.88). No file reports th at stop B (grep for th-at-stop fields over docs/concepts/verify, docs/alignment/remeasure and the row: none). The CLAUDE.md stop-buildability rule requires it for a design that clamps another angle (K here), so the missing measurement stands."
+ },
+ {
+  "key": "judgement:NEW-stop-through-drive",
+  "refuted": false,
+  "evidence": "Upheld from the CAD's numbers. build.json stage1.groove_q2_deg [-14.282, 103.068] (groove rise ends at q2 -14.282) and stop_engagement_built 'J2 dowel' lo window -14.315, engages -14.455 (past 0.14): the drive reaches its end before the dowel engages, so the stop load passes through the stage-1 pin. No force number on file."
+ },
+ {
+  "key": "judgement:G3",
+  "refuted": false,
+  "evidence": "Upheld. pipeline/full-exo/designs/user_desmo_conecut/judge/dynamics.json verdict.per_case: mu0.005|s1|hub twist 3.97, 0 lags, free; f0.05|s1 11.74 deg, 23 lags, free false; f0.2|s1 25.0 deg, 57 lags; mu0.06 hub 19.21; every case's slaved_law_err_deg (0.055-11.0) shows K is driven by the law, so the drive's own force flow is unmeasured."
+ },
+ {
+  "key": "judgement:NEW-pa-reread",
+  "refuted": false,
+  "evidence": "Upheld. remeasure/desmo-conecut-knuckle-3r_blendband_fast.json cap_above_gate_K [0.0, 8.995], cap_above_60_K [0.0, 3.14], cap_above_self_lock_K [0.0, 0.326]; _s1read_check.json claim_linear_mu15 plain 86.52 (why_lim s1-pa-cap, pa_cap_max 35.05 vs gate 34.47), claim_linear_mu135 plain 13.31 (slot-end). tan(43 - 35.05) = 0.1396. The row verdict still carries the 'mu 0.15 on BOTH stages' wording. Score unaffected (mu087_linear 13.31 = best 13.31 in the row's friction_probe)."
+ },
+ {
+  "key": "judgement:NEW-friction-cliff",
+  "refuted": false,
+  "evidence": "Upheld. Row verification.friction_probe (from _v_probe_fast.json): as9.60 [14.56, 44.75, s1b-pa-pin], as9.65 [15.17, 43.0], mu0.17 and psi +0.5 as cited; held taken stroke 46.27 (_v_held_frozen_blend.json v3_th_margin lowest 1054) is above each bind."
+ },
+ {
+  "key": "judgement:NEW-silent-check",
+  "refuted": false,
+  "evidence": "Upheld. _v_bench_frozen_blend.json v1_fit_gates stage1_rc_min 1.01, stage1_ridge_mm 0.247, stage1_linear_lim_by_gate.radius 0.25; row verification.gates worst_tol_c015_dense_deg 0.281 > 0.25 (dense_groove_worst_deg 0.187 nominal)."
+ },
+ {
+  "key": "judgement:NEW-ws-inband",
+  "refuted": false,
+  "evidence": "Upheld. remeasure/desmo-conecut-knuckle-3r_probe_bench.json probe.ws_elev90_140 inband14 0.8308, over14 0.1683, d_max 30.74; clip_scored inband14 0.8924; ws_overhead140 taken 8, poses_floor_lt2 4 (share 0.5)."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Upheld. remeasure/desmo-conecut-knuckle-3r_msub_rest_bench.json: n 205, lt1 50, lt2 65, p10 0.267, min 0.0. What the wearer feels there is unmeasured."
+ },
+ {
+  "key": "judgement:P2",
+  "refuted": false,
+  "evidence": "Upheld (hygiene). docs/concepts/desmo-conecut-knuckle-3r.md line 15 names 'held 46.27 deg of K' as a reason for the slot length; model line 93 clamps kslot to [30, 70], so it is a free design variable set at 46.5; bench dK_taken_max 45.62 (_v_bench_frozen_blend.json), held poses 1054 / 274 / 1068 taken at 46.27 / 46.17 / 45.88. A full held dK histogram is not on file."
+ }
+]

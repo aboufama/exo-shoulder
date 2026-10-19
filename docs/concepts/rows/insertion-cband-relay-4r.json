@@ -1,0 +1,267 @@
+{
+ "id": "insertion-cband-relay-4r",
+ "name": "Short-strap ring at the deltoid insertion: knee-less O20 3R with J3 re-aimed square (wdir 95, -8.2) + one-sided relay on an arm-fixed Ti C-band at s 0.30 (97.5 mm) about a GH axis tilted 8.75 deg posterior; rolling V-wheel carriage (from distal-vroller-cband-relay-4r) for a determinate zero return",
+ "lens": "round401:C distal-longaxis-ring-4r at the insertion station (strap 93 mm: the 120-mm strap kill does not fire); distal-vroller-cband-relay-4r's rolling J4 merged as the default J4 hardware",
+ "family": "knee-less rigid-cuff spherical 4R, lever (b) at a proximal-distal station, one-sided relay, rolling guide",
+ "active_dof": 4,
+ "passive_dof": 0,
+ "passive_translations": 0,
+ "t_ideated": null,
+ "status": "dead",
+ "t_screened": "2026-10-19T01:38:19Z",
+ "reach": 0.6806,
+ "follow": 0.7545,
+ "inband14": 0.7597,
+ "inband10": 0.4281,
+ "contact": 0.1901,
+ "gap": 74.53,
+ "gap_near1": 90.18,
+ "v_reach": 0.6806,
+ "v_follow": 0.7545,
+ "v_inband14": 0.7597,
+ "v_inband10": 0.4281,
+ "v_gap": 74.53,
+ "n_configs": 9,
+ "best_params": {
+  "PHI": 45,
+  "tilt": 8.75,
+  "taz": -90.0,
+  "sgn": 1.0,
+  "hw": 0,
+  "drive": 0,
+  "wd": 95.0,
+  "wa": -8.2,
+  "b3": 0.0,
+  "psi2": -45,
+  "q_strap": 1.0
+ },
+ "verdict": "DEAD (the judge's pre-registered step-1 kill, ideal bound > 14.0, fires on both benches): the IDEAL bound (lead-quality chain = conecut's own fitted metal, frozen, K welded, drive stripped, knee-side samples dropped, J3 re-aim wdir(95, -8.2) b3 0 asserted, psi2 -45 -> a2 67.34, relay PHI 45 about raxis(8.75, -90), NO J4 metal) reads 16.86 frozen exact Bench(110,360) (reach 0.792, follow 0.936, ib14 0.921, 19 contacts / 101.9 mm, overhead 7/28) and 19.70 on envsel (reach 0.767, overhead 5/26); best of 6 ideal cells (a2 62 / 67 / 72-ish, PHI 45 / 50, J3 stops, q2 dowel, J3 wdir(90, -8.2), and the no-re-aim control 36.15). Reach + follow alone cost 14.7 envsel points and J4 metal cannot add reach. The J4 hardware built across the full 26 mm width (2D-contoured band at q 1, race a surface of revolution, carriage, 4 wheel blocks, 95 mm strap) reads 74.53 frozen exact Bench(110,360) (79.79 envsel): carriage in band 0.34 (floats 10-22 mm: the race must clear the worst skin per azimuth), strap contacts on 54 poses, band vs torso 10. Row fields carry the hardware reading (every part sampled); the ideal is in ideal_frozen_exact.",
+ "limiter": "reach on the ideal: 75 of 360 ws lost on Bench(110,360) exact frozen - fold 54 (no welded solution within PHI 45), hub-2 burials 12 (under the acromion at abduction 105-150, to 14.4 mm, the price of the psi2 -45 J2 re-placement), J3 stop 6, parts 3; then the J4 hardware: the arm-fixed race must clear the skin's per-azimuth maximum (skin swings 6-12 mm vs the humerus frame at s 0.30), so the carriage floats out of band (0.34), the strap meets the deltoid bunching (54 poses <= 2.6 mm) and the band meets the torso at across-body / extreme axial rotation (10 poses <= 12 mm)",
+ "note": "Gate (ideal sweep, 6 envsel cells in order 19.70, 24.42, 23.14, 19.70, 36.15, 20.13): gain 0 score points over the second half, 0 over the last third, top-5 within 1.72 score points - passes formally on a thin local sweep (farm closed, <= 2 local processes). Bench(60,160) fast of the ideal is IN-SAMPLE (the metal's fit set): 9.62 - not a claim. Axis convention checked against the judge's kin_static (312/360, 22/28 at a2 67 reproduce with raxis(8.75,-90) sgn +1). th margin min 5.001 on every taken pose. Near-touch: ideal 20.00 (1 mm) / 35.42 (2 mm); hardware 90.18 / 103.81. T5: ideal 19 contacts / 101.88 mm vs the lead's 4 / 20.24. Hardware is ONE unswept configuration (diagnostic). Not run: continuity flood (connected <= static), held-out (untouched), per-pose zero-return margin. Shoulder slip: standing price (p95 4.83 / max 5.14 mm at 3 mm GH offset; ~6.4/6.9 mm at R10 4 mm; 13-31 N vs 5 N); this build assumes a 2 mm liner under the band. A second hardware read with the strap fitted WITHOUT the 15 mm outlier cut (out_strap 80) is identical (74.53, strap contacts 54 <= 2.6 mm): the strap contacts are fit-set generalisation (q 1 on Bench(60,160) does not cover Bench(110,360)'s deltoid bunching), not the cut.",
+ "doc": "docs/concepts/insertion-cband-relay-4r.md",
+ "complexity": 34.25,
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 0,
+  "moving_bodies": 4,
+  "joints": 4,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 4,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 11,
+  "catalogue_parts": 15,
+  "notes": "J1-J3 O20 v5 stacks on MR117-2RS pairs, K welded (link 1 one bar), J2 own-angle dowel stops, J3 dowel stop; J4 = roller carriage (4 x MR63ZZ in 17-4PH V-sleeves on M3 shoulder studs, eccentric preload) on an arm-fixed 17-4PH C-band race on a 2D-contoured Ti saddle fused into BOTTOM's cut end at s 0.30; 2 N constant-force strip to the zero dowel, end dowel at PHI; member 3 = hub-3 plate + 12 x 3 Ti strap; no knee, no cuff slides",
+  "source": "insertion-cband-relay-4r screen 2026-10-19 (judge re-read 34.25, tools/simplicity.py v2.2)",
+  "confidence": "medium"
+ },
+ "ideal_frozen_exact": {
+  "bench": "Bench(110,360) exact, frozen",
+  "gap": 16.86,
+  "reach": 0.7917,
+  "follow": 0.9364,
+  "inband14": 0.9209,
+  "inband10": 0.5072,
+  "contact": 0.0467,
+  "n_contact": 19,
+  "depth_sum": 101.88,
+  "depth_max": 14.43,
+  "overhead": [
+   7,
+   28
+  ],
+  "near1": 20.0,
+  "near2": 35.42,
+  "min_metal_taken": 0.068,
+  "why_ws": {
+   "": 285,
+   "fold": 54,
+   "j3stop": 6,
+   "contact": 12,
+   "parts": 3
+  },
+  "kin_ws": 300,
+  "relayed_ws": 67,
+  "th": {
+   "min_th_margin_taken": 5.001,
+   "window": [
+    29.79,
+    104.89
+   ],
+   "n_below5": 0
+  }
+ },
+ "ideal_envsel": {
+  "bench": "envsel exact (pick selection)",
+  "gap": 19.7,
+  "reach": 0.7667,
+  "follow": 0.9364,
+  "inband14": 0.9209,
+  "inband10": 0.5072,
+  "contact": 0.0501,
+  "n_contact": 20,
+  "depth_sum": 102.88,
+  "depth_max": 13.19,
+  "overhead": [
+   5,
+   26
+  ],
+  "near1": 24.46,
+  "near2": 39.98
+ },
+ "hw_envsel": {
+  "gap": 79.79,
+  "reach": 0.6444,
+  "follow": 0.7545,
+  "inband14": 0.7597,
+  "contact": 0.2065,
+  "n_contact": 82,
+  "overhead": [
+   0,
+   26
+  ]
+ },
+ "J4": {
+  "band": {
+   "min": 0.39,
+   "n_lt0": 0,
+   "n_lt1": 1,
+   "n_lt2": 7,
+   "contact_poses_all": 10,
+   "contact_ws": 10,
+   "depth_max_all": 11.96
+  },
+  "car": {
+   "min": 6.46,
+   "n_lt0": 0,
+   "n_lt1": 0,
+   "n_lt2": 0,
+   "contact_poses_all": 1,
+   "contact_ws": 1,
+   "depth_max_all": 9.12
+  },
+  "wheels": {
+   "min": 2.93,
+   "n_lt0": 0,
+   "n_lt1": 0,
+   "n_lt2": 0,
+   "contact_poses_all": 1,
+   "contact_ws": 1,
+   "depth_max_all": 13.8
+  },
+  "strap": {
+   "min": 0.09,
+   "n_lt0": 0,
+   "n_lt1": 20,
+   "n_lt2": 38,
+   "contact_poses_all": 54,
+   "contact_ws": 34,
+   "depth_max_all": 2.59
+  },
+  "car_ib14": 0.34,
+  "car_p5_50_95": [
+   10.13,
+   15.73,
+   21.88
+  ],
+  "band_ib14": 0.918,
+  "band_p5_50_95": [
+   3.97,
+   7.18,
+   15.45
+  ],
+  "jams": 2,
+  "jams_ws": 2,
+  "geom": {
+   "R_race": [
+    76.0,
+    72.0,
+    76.0
+   ],
+   "s_ax": -98.65,
+   "strap_len_mm": 94.7,
+   "hub3": [
+    -9.6,
+    5.9,
+    66.6
+   ],
+   "n": {
+    "band": 515,
+    "car": 144,
+    "wheels": 280,
+    "strap": 329
+   },
+   "band_th": [
+    3.0,
+    15.0
+   ]
+  }
+ },
+ "v_contact": 0.1901,
+ "audit": {
+  "t": "2026-10-19T03:51:40Z",
+  "by": "dead-row auditor",
+  "result": "DEATH STANDS, RE-BASED (not refuted)",
+  "bar": "the judge's pre-registered kills (ideal > 14.0 at step 1; hardware > 17.0). The template's 68.93 Bench(60,160) champion default is stale for this round; the lead's chain reads 18.28 on frozen exact Bench(110,360)",
+  "v_source": "v_* = the row's own J4-hardware reading on frozen exact Bench(110,360) (author's scratch icb/b110_hw.json; CB.gap_of re-tally reproduces 74.53). Not re-run with the hub-K correction: that correction removes up to 9 phantom contact poses, but leaves the carriage float (in band 0.34) and the 54 strap contacts, which dominate.",
+  "finding_hubK": "CORRECTED by the level diagnostic (scratch icb_audit/hubk_levels.py): the over-strict metal is the STRIPPED DRIVE's horn contact top, not hub K's stack. Contact entry 31 (member 1, 24 pts, 5.09 mm above hub K's underside, 8.16 mm from its samples) carries every deep reading (-1.35 to -9.41 mm, the 7 overhead fit-clip frames included). The base model appends (1, horn + T_LINK*uK) (coupler-longdyad-knuckle-3r.py line 276). kfree-armarc-relay-4r.py _strip_drive deletes the rigid horn but matches contact entries with a median < 0.5 mm, and the top sits 3 mm off, so it survives; contact_owner then assigned it to the nearest part left, hub K. Hub K's walls and crowns at 4-18 mm are clear (+1.7 to +18.6 mm) at all 13 poses. The 'kneeless_noK' reading also never deleted hub K's contact entries (noK = full by construction).",
+  "finding_kneeside": "The members-5/6 filter also keeps the knee-side member-3 contact entries (the E-strap top and 2 O12 boss rings). Dropping them (kc 1) changes nothing: 16.86.",
+  "corrected_ideal_b110": {
+   "reading": "kc 2: K welded as one bar (hub K walls / crowns deleted; 20 mm underside disc kept scored + 3 mm top face and rim as contact-only)",
+   "gap": 12.74,
+   "reach": 0.7972,
+   "follow": 1.0,
+   "inband14": 0.9206,
+   "inband10": 0.5044,
+   "contact": 0.0246,
+   "n_contact": 10,
+   "depth_sum": 30.92,
+   "depth_max": 14.43,
+   "overhead": [
+    8,
+    28
+   ],
+   "near1": 17.8,
+   "near2": 34.9,
+   "ws_taken": 287,
+   "min_th_margin": 5.001,
+   "contact_parts": {
+    "hub2": 6,
+    "hubK underside": 2,
+    "L2": 2
+   }
+  },
+  "corrected_ideal_envsel": {
+   "gap": 16.59,
+   "reach": 0.7667,
+   "follow": 1.0,
+   "inband14": 0.9206,
+   "contact": 0.0326,
+   "n_contact": 13,
+   "depth_sum": 39.59,
+   "overhead": [
+    5,
+    26
+   ],
+   "contact_parts": {
+    "hub2": 11,
+    "hubK underside": 1,
+    "L2": 1
+   }
+  },
+  "levers": {
+   "fitrel": "metal re-fit on the RELAYED Bench(60,160) poses: 16.86 B110 / 19.70 envsel, gaps identical (ib14 0.9166); only 5 of the 19 B110 contacts are relayed",
+   "mirror_J2": "the other psi2 root for a2 67.34 (psi2 +122.55, J2 az ~132 el ~36.5, the dyad's other branch), kc 2, envsel: 174.99 (181 ws parts collisions, hub 2 median 32.5 mm): dead for this chain's metal, not a missed region"
+  },
+  "gate": "Recomputed from the sweep: ideal envsel 19.70, 24.42, 23.14, 19.70, 36.15, 20.13; gain 0 / 0 score points; top-5 within 1.72. Passes formally, but k 3 duplicates k 0, and the hardware has ONE configuration, so the step-2 death is not gate-converged. The hardware costs are measured geometry (race of revolution vs a 6-12 mm skin swing; carriage floats 10-22 mm), and the swept sibling distal-cband-sq95-relay-4r died at the same hardware kill (35.48).",
+  "reason": "Corrected for the stripped drive's surviving horn-top contact entry, the ideal passes on the claim bench (12.74 < 14.0) but still fails on envsel (16.59: 11 hub-2 burials of the psi2 -45 re-placement), and the unswept J4 hardware reads 74.53 (carriage in band 0.34, 54 strap contacts).",
+  "family_flag": "Every drive-0 row read through kfree-armarc-relay-4r.py lead_eval/_strip_drive (kfree-armarc-relay-4r, kfree-o20pin-highexit-relay-4r, distal-cband-sq95-relay-4r, this row) keeps the deleted horn's contact top; here that is worth 4.12 gap points on the claim bench. Fix: also strip member-1 contact entries within T_LINK + 0.5 of the horn. Hub K's walls at 4-18 mm are clear, so the kc-2 bar reading is not optimistic about link 1's climb.",
+  "files": [
+   "docs/concepts/models/insertion-cband-relay-4r.py (contact_owner, kc 1/2, fitrel; defaults unchanged)",
+   "docs/concepts/insertion-cband-relay-4r.md#audit"
+  ]
+ }
+}

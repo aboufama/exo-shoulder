@@ -1,0 +1,77 @@
+[
+ {
+  "tag": "ls-cma3-s65n2a",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm && python3 tools/concept_cma.py docs/concepts/models/longstroke-slipper-knuckle-3r.py --x0 '{\"bk1\": 28.0, \"bk2\": 50.0, \"a1max\": 73.0, \"La\": 21.623, \"s_arm\": 4.204, \"r_h\": 16.8264, \"beta\": -132.0686, \"gam\": 10.2237, \"hl\": 2.8907, \"zr\": 2.1898, \"kK\": 1.7146, \"r_lobe\": 7.6066, \"smhi\": 16.8433}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zr\": 1.0, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 21 --label ls-cma3-s65n2a --out docs/research/longstroke_drive/farm/cma_cma3_s65n2a.json > docs/research/longstroke_drive/farm/cma_cma3_s65n2a.log 2>&1; tail -3 docs/research/longstroke_drive/farm/cma_cma3_s65n2a.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/cma_cma3_s65n2a*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "LS_STROKE_MIN": "65",
+   "LS_OBJ": "near2"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ls-cma3-s65n2b",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm && python3 tools/concept_cma.py docs/concepts/models/longstroke-slipper-knuckle-3r.py --x0 '{\"bk1\": 28.0, \"bk2\": 50.0, \"a1max\": 73.0, \"La\": 24.4909, \"s_arm\": 4.1862, \"r_h\": 16.3269, \"beta\": -138.8245, \"gam\": 16.0072, \"hl\": 2.4576, \"zr\": 4.7166, \"kK\": 1.9611, \"r_lobe\": 7.3765, \"smhi\": 16.8433}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zr\": 1.0, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 22 --label ls-cma3-s65n2b --out docs/research/longstroke_drive/farm/cma_cma3_s65n2b.json > docs/research/longstroke_drive/farm/cma_cma3_s65n2b.log 2>&1; tail -3 docs/research/longstroke_drive/farm/cma_cma3_s65n2b.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/cma_cma3_s65n2b*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "LS_STROKE_MIN": "65",
+   "LS_OBJ": "near2"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ls-cma3-s65n2d",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm && python3 tools/concept_cma.py docs/concepts/models/longstroke-slipper-knuckle-3r.py --x0 '{\"bk1\": 32.0, \"bk2\": 48.0, \"a1max\": 75.0, \"La\": 22.0352, \"s_arm\": 4.4924, \"r_h\": 16.0364, \"beta\": -139.9978, \"gam\": 17.4855, \"hl\": 2.925, \"zr\": 1.5, \"kK\": 1.6, \"r_lobe\": 7.402, \"smhi\": 16.8433}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zr\": 1.0, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 24 --label ls-cma3-s65n2d --out docs/research/longstroke_drive/farm/cma_cma3_s65n2d.json > docs/research/longstroke_drive/farm/cma_cma3_s65n2d.log 2>&1; tail -3 docs/research/longstroke_drive/farm/cma_cma3_s65n2d.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/cma_cma3_s65n2d*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "LS_STROKE_MIN": "65",
+   "LS_OBJ": "near2"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ls-cma3-s65n1a",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm && python3 tools/concept_cma.py docs/concepts/models/longstroke-slipper-knuckle-3r.py --x0 '{\"bk1\": 28.0, \"bk2\": 50.0, \"a1max\": 73.0, \"La\": 21.623, \"s_arm\": 4.204, \"r_h\": 16.8264, \"beta\": -132.0686, \"gam\": 10.2237, \"hl\": 2.8907, \"zr\": 2.1898, \"kK\": 1.7146, \"r_lobe\": 7.6066, \"smhi\": 16.8433}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zr\": 1.0, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 31 --label ls-cma3-s65n1a --out docs/research/longstroke_drive/farm/cma_cma3_s65n1a.json > docs/research/longstroke_drive/farm/cma_cma3_s65n1a.log 2>&1; tail -3 docs/research/longstroke_drive/farm/cma_cma3_s65n1a.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/cma_cma3_s65n1a*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "LS_STROKE_MIN": "65",
+   "LS_OBJ": "near1"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ls-cma3-s65n1b",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm && python3 tools/concept_cma.py docs/concepts/models/longstroke-slipper-knuckle-3r.py --x0 '{\"bk1\": 28.0, \"bk2\": 50.0, \"a1max\": 73.0, \"La\": 24.4909, \"s_arm\": 4.1862, \"r_h\": 16.3269, \"beta\": -138.8245, \"gam\": 16.0072, \"hl\": 2.4576, \"zr\": 4.7166, \"kK\": 1.9611, \"r_lobe\": 7.3765, \"smhi\": 16.8433}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zr\": 1.0, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 32 --label ls-cma3-s65n1b --out docs/research/longstroke_drive/farm/cma_cma3_s65n1b.json > docs/research/longstroke_drive/farm/cma_cma3_s65n1b.log 2>&1; tail -3 docs/research/longstroke_drive/farm/cma_cma3_s65n1b.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/cma_cma3_s65n1b*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "LS_STROKE_MIN": "65",
+   "LS_OBJ": "near1"
+  },
+  "timeout": 2100.0
+ }
+]

@@ -1,0 +1,181 @@
+{
+ "id": "inband-rssr-knuckle-3r",
+ "wear": "bench",
+ "override": {
+  "CONE": [
+   30.0,
+   25.0
+  ]
+ },
+ "params": {
+  "La": 19.5042,
+  "s_arm": 4.0515,
+  "r_h": 14.6248,
+  "beta": -140.3863,
+  "gam": 7.7146,
+  "hl": 3.15,
+  "zr": 0.0,
+  "kK": 1.7901,
+  "r_lobe": 7.0,
+  "bk1": 26.0,
+  "bk2": 38.0,
+  "a1max": 59.0,
+  "smhi": 19.0991,
+  "eta": -12.4092,
+  "clay": 1,
+  "zc": 0.8032,
+  "bl_c": 2,
+  "bl_h": 0
+ },
+ "frozen": {
+  "gap": 96.44,
+  "reach": 0.3444,
+  "follow": 0.5545,
+  "inband14": 0.8974,
+  "inband10": 0.4734,
+  "contact": 0.0107
+ },
+ "fit_fast": {
+  "gap": 98.59,
+  "reach": 0.3312,
+  "follow": 0.5333,
+  "inband14": 0.8996,
+  "inband10": 0.471,
+  "contact": 0.0
+ },
+ "why": {
+  "fold": 274,
+  "slide": 9,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 2
+ },
+ "audit": {
+  "near_touch_min_mm": 0.7,
+  "near_touch_low": [
+   {
+    "mm": 0.7,
+    "i": 230,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "mm": 1.23,
+    "i": 284,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "mm": 1.54,
+    "i": 234,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 135.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 1.7,
+    "i": 257,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "mm": 1.81,
+    "i": 291,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -75.0
+   }
+  ],
+  "gap_near1": 97.24,
+  "near1_poses": 1,
+  "gap_near2": 108.26,
+  "near2_poses": 11,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.1429,
+   "clip": 10,
+   "follow": 0.6,
+   "inband14": 0.8396,
+   "inband10": 0.4546,
+   "why_not": {
+    "fold": 22,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   }
+  }
+ },
+ "th_margin": {
+  "min": 5.389,
+  "n": 185,
+  "lt5": 0,
+  "forced": 0,
+  "th_max_taken": 75.61,
+  "dK_taken_max": 0.0,
+  "lowest": {
+   "own": 5.389,
+   "forced": false,
+   "kind": "ws",
+   "plane": 15.0,
+   "elev": 90.0,
+   "axial": -30.0
+  }
+ },
+ "cam": {
+  "dK_lim": 0.0,
+  "why_lim": "cone",
+  "pa_crank_max_taken": null,
+  "pa_horn_max_taken": null,
+  "pa_kin_max": null,
+  "friction_deg": null,
+  "pa_eff_horn": null,
+  "pa_eff_crank": null,
+  "flank_rho_min": null,
+  "clear_hubK_min": null,
+  "clear_roll_hubK_min": null,
+  "clear_lowarm_lug_min": null,
+  "arm_len": null,
+  "contact_r": null,
+  "lug_r_max": null,
+  "nose_r": null,
+  "mu": null,
+  "trans_min_taken": 52.0,
+  "ratio_range": [
+   0.696,
+   0.748
+  ],
+  "rod_len": 25.5,
+  "La": 19.5,
+  "r_h": 14.6,
+  "crest_exact": 9.41
+ },
+ "contact_depth": {
+  "n": 2,
+  "sum_mm": 9.812,
+  "max_mm": 9.724,
+  "per_pose": [
+   9.724,
+   0.088
+  ]
+ },
+ "overhead": {
+  "ws": 28,
+  "taken": 4
+ },
+ "secs": 68.9,
+ "exact": true,
+ "git": "e6b3131"
+}

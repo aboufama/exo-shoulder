@@ -1,0 +1,61 @@
+{
+ "rise_mm": 3.5999999999999996,
+ "seconds": 391,
+ "cands": {
+  "(iv) radial offset: dwell r 9.6": {
+   "min_sd_mm": 0.409,
+   "where": [
+    "Raise overhead 78",
+    7.05,
+    12.2,
+    61.4
+   ],
+   "frames_under_2mm": 65,
+   "frames": 1337,
+   "pass_0p3": true,
+   "raise_overhead_flank_min_mm": 0.896,
+   "raise_overhead_dwell_min_mm": 2.169,
+   "lobe": {
+    "profile_r": [
+     10.186,
+     12.207
+    ],
+    "profile_az": [
+     48.27,
+     61.34
+    ],
+    "past_skirt": 2.207,
+    "flank_to_roller_at_stopB": 0.076,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.19,
+    "lobe_r_end": 12.21,
+    "dK_end": null,
+    "pa_deg": [
+     14.1,
+     35.9
+    ],
+    "lift_mm": 2.277,
+    "rocker_turn_deg": 14.56,
+    "rod_cap_clear_min": 3.58,
+    "horn_arm_eff": [
+     1.785,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.6
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.27,
+     1.49
+    ]
+   }
+  }
+ }
+}

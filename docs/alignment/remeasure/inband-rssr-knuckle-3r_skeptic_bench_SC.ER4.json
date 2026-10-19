@@ -1,0 +1,125 @@
+{
+ "id": "inband-rssr-knuckle-3r",
+ "wear": "bench",
+ "override": {
+  "SC.ER": [
+   3.5,
+   4.0
+  ]
+ },
+ "params": {
+  "La": 19.5042,
+  "s_arm": 4.0515,
+  "r_h": 14.6248,
+  "beta": -140.3863,
+  "gam": 7.7146,
+  "hl": 3.15,
+  "zr": 0.0,
+  "kK": 1.7901,
+  "r_lobe": 7.0,
+  "bk1": 26.0,
+  "bk2": 38.0,
+  "a1max": 59.0,
+  "smhi": 19.0991,
+  "eta": -12.4092,
+  "clay": 1,
+  "zc": 0.8032,
+  "bl_c": 2,
+  "bl_h": 0
+ },
+ "frozen": {
+  "gap": 275.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "contact": 0.0
+ },
+ "fit_fast": {
+  "gap": 275.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "contact": 0.0
+ },
+ "why": {
+  "fold": 88,
+  "slide": 9,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 373,
+  "contact": 0
+ },
+ "audit": {
+  "near_touch_min_mm": null,
+  "near_touch_low": [],
+  "gap_near1": 275.0,
+  "near1_poses": 0,
+  "gap_near2": 275.0,
+  "near2_poses": 0,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.0,
+   "clip": 10,
+   "follow": 0.0,
+   "inband14": null,
+   "inband10": null,
+   "why_not": {
+    "fold": 14,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 20,
+    "contact": 0
+   }
+  }
+ },
+ "th_margin": {
+  "min": null,
+  "n": 0
+ },
+ "cam": {
+  "dK_lim": 65.8,
+  "why_lim": "law",
+  "pa_crank_max_taken": null,
+  "pa_horn_max_taken": null,
+  "pa_kin_max": null,
+  "friction_deg": null,
+  "pa_eff_horn": null,
+  "pa_eff_crank": null,
+  "flank_rho_min": null,
+  "clear_hubK_min": null,
+  "clear_roll_hubK_min": null,
+  "clear_lowarm_lug_min": null,
+  "arm_len": null,
+  "contact_r": null,
+  "lug_r_max": null,
+  "nose_r": null,
+  "mu": null,
+  "trans_min_taken": 52.0,
+  "ratio_range": [
+   0.696,
+   0.748
+  ],
+  "rod_len": 25.5,
+  "La": 19.5,
+  "r_h": 14.6,
+  "crest_exact": 9.41
+ },
+ "contact_depth": {
+  "n": 0,
+  "sum_mm": 0.0,
+  "max_mm": 0.0,
+  "per_pose": []
+ },
+ "overhead": {
+  "ws": 28,
+  "taken": 0
+ },
+ "secs": 5.4,
+ "exact": true,
+ "git": "ab4b2e1"
+}

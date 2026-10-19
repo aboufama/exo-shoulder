@@ -1,0 +1,123 @@
+{
+ "what": "audit forward-stroke bound for M5 (14:05 UTC): the lead proxy (judge_m5) de-rates the K clock-spring preload by the worst-PA efficiency eta (0.08 x 0.890/0.851/0.815) for the WHOLE clip, i.e. the return stroke; on the forward stroke the arm pushes the spring THROUGH the sliding contact, so the same quasi-static bound is preload / eta. Same judge (judge/dynamics.py --quick --general, nominal rolling mu 0.005, unchanged), same L1 build (pipeline/full-exo/designs/l1_slipper-nose copied to a scratch dir with design.json build_fixes.spring.preload set), nothing else changed.",
+ "cmd": "OMP_NUM_THREADS=1 nice -n 10 python3 judge/dynamics.py <copy> --quick --no-validate --general --jobs 1",
+ "runs": {
+  "0.087": {
+   "preload_Nm": 0.0899,
+   "moves_freely_nominal": true,
+   "per_case": {
+    "passive|mu0.005|t0.001|s1|hub": {
+     "moment_gh_peak_Nm": 0.148,
+     "force_peak_N": 0.67,
+     "twist_peak_deg": 4.5,
+     "lags_over_10deg": 0,
+     "contact": false,
+     "spare_drift_deg": null,
+     "lock_clips": [],
+     "free": true,
+     "drives": true,
+     "slaved_law_err_deg": 0.122,
+     "slaved_liftoff_share": 0.0,
+     "cuff_pressure_peak_kPa": 0.098,
+     "within_pressure_budget": true,
+     "under_iso_15066": true
+    },
+    "passive|mu0.005|t0.001|s1|hub|krate0.01": {
+     "moment_gh_peak_Nm": 0.148,
+     "force_peak_N": 0.67,
+     "twist_peak_deg": 4.4,
+     "lags_over_10deg": 0,
+     "contact": false,
+     "spare_drift_deg": null,
+     "lock_clips": [],
+     "free": true,
+     "drives": true,
+     "slaved_law_err_deg": 0.122,
+     "slaved_liftoff_share": 0.0,
+     "cuff_pressure_peak_kPa": 0.098,
+     "within_pressure_budget": true,
+     "under_iso_15066": true
+    }
+   },
+   "seconds": 95
+  },
+  "0.15": {
+   "preload_Nm": 0.0982,
+   "moves_freely_nominal": true,
+   "per_case": {
+    "passive|mu0.005|t0.001|s1|hub": {
+     "moment_gh_peak_Nm": 0.165,
+     "force_peak_N": 0.75,
+     "twist_peak_deg": 4.9,
+     "lags_over_10deg": 0,
+     "contact": false,
+     "spare_drift_deg": null,
+     "lock_clips": [],
+     "free": true,
+     "drives": true,
+     "slaved_law_err_deg": 0.127,
+     "slaved_liftoff_share": 0.0,
+     "cuff_pressure_peak_kPa": 0.11,
+     "within_pressure_budget": true,
+     "under_iso_15066": true
+    },
+    "passive|mu0.005|t0.001|s1|hub|krate0.01": {
+     "moment_gh_peak_Nm": 0.165,
+     "force_peak_N": 0.75,
+     "twist_peak_deg": 4.81,
+     "lags_over_10deg": 0,
+     "contact": false,
+     "spare_drift_deg": null,
+     "lock_clips": [],
+     "free": true,
+     "drives": true,
+     "slaved_law_err_deg": 0.127,
+     "slaved_liftoff_share": 0.0,
+     "cuff_pressure_peak_kPa": 0.11,
+     "within_pressure_budget": true,
+     "under_iso_15066": true
+    }
+   },
+   "seconds": 94
+  }
+ },
+ "lead_runs_nominal": {
+  "0.08 (judge default, judge/)": {
+   "moment_gh_peak_Nm": 0.127,
+   "force_peak_N": 0.58,
+   "twist_peak_deg": 4.01,
+   "slaved_law_err_deg": 0.137,
+   "slaved_liftoff_share": 0.0006,
+   "free": true
+  },
+  "0.0712 return mu 0.087 (judge_m5)": {
+   "moment_gh_peak_Nm": 0.11,
+   "force_peak_N": 0.5,
+   "twist_peak_deg": 3.58,
+   "slaved_law_err_deg": 0.131,
+   "slaved_liftoff_share": 0.0,
+   "free": true
+  },
+  "0.0681 return mu 0.12": {
+   "moment_gh_peak_Nm": 0.105,
+   "force_peak_N": 0.47,
+   "twist_peak_deg": 3.42,
+   "slaved_law_err_deg": 0.129,
+   "slaved_liftoff_share": 0.0,
+   "free": true
+  },
+  "0.0652 return mu 0.15": {
+   "moment_gh_peak_Nm": 0.101,
+   "force_peak_N": 0.44,
+   "twist_peak_deg": 3.28,
+   "slaved_law_err_deg": 0.127,
+   "slaved_liftoff_share": 0.0006,
+   "free": true
+  }
+ },
+ "limit": {
+  "twist_deg": 5.0,
+  "moment_gh_Nm": 1.0,
+  "force_N": 5.0
+ }
+}

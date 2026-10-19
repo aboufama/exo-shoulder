@@ -1,0 +1,162 @@
+[
+ {
+  "n": 3,
+  "az": 20.0,
+  "el": 50.0,
+  "a": [
+   60.0,
+   60.0
+  ],
+  "w": [
+   80.0,
+   20.0
+  ],
+  "branch": 1,
+  "order": [
+   1,
+   1,
+   1
+  ],
+  "_tag": "posterior arch: J1 on the scapular spine / acromion top, J3 on the posterior-lateral upper arm"
+ },
+ {
+  "n": 3,
+  "az": 20.0,
+  "el": 50.0,
+  "a": [
+   60.0,
+   60.0
+  ],
+  "w": [
+   80.0,
+   20.0
+  ],
+  "branch": -1,
+  "order": [
+   1,
+   1,
+   1
+  ],
+  "_tag": "posterior arch: J1 on the scapular spine / acromion top, J3 on the posterior-lateral upper arm"
+ },
+ {
+  "n": 3,
+  "az": 90.0,
+  "el": 70.0,
+  "a": [
+   45.0,
+   50.0
+  ],
+  "w": [
+   70.0,
+   0.0
+  ],
+  "branch": 1,
+  "order": [
+   1,
+   1,
+   1
+  ],
+  "_tag": "lateral cap: J1 on the acromion top, short links over the deltoid cap"
+ },
+ {
+  "n": 3,
+  "az": 90.0,
+  "el": 70.0,
+  "a": [
+   45.0,
+   50.0
+  ],
+  "w": [
+   70.0,
+   0.0
+  ],
+  "branch": -1,
+  "order": [
+   1,
+   1,
+   1
+  ],
+  "_tag": "lateral cap: J1 on the acromion top, short links over the deltoid cap"
+ },
+ {
+  "n": 3,
+  "az": 160.0,
+  "el": 45.0,
+  "a": [
+   60.0,
+   60.0
+  ],
+  "w": [
+   80.0,
+   160.0
+  ],
+  "branch": 1,
+  "order": [
+   1,
+   1,
+   1
+  ],
+  "_tag": "anterior arch: J1 over the clavicle / coracoid, J3 on the anterior-lateral arm"
+ },
+ {
+  "n": 3,
+  "az": 160.0,
+  "el": 45.0,
+  "a": [
+   60.0,
+   60.0
+  ],
+  "w": [
+   80.0,
+   160.0
+  ],
+  "branch": -1,
+  "order": [
+   1,
+   1,
+   1
+  ],
+  "_tag": "anterior arch: J1 over the clavicle / coracoid, J3 on the anterior-lateral arm"
+ },
+ {
+  "n": 3,
+  "az": 235.4,
+  "el": 16.0,
+  "a": [
+   75.0,
+   75.0
+  ],
+  "w": [
+   60.0,
+   30.0
+  ],
+  "branch": 1,
+  "order": [
+   1,
+   1,
+   1
+  ],
+  "_tag": "high posterior: J1 behind-above the shoulder, long links, singular axis along the never-points direction"
+ },
+ {
+  "n": 3,
+  "az": 235.4,
+  "el": 16.0,
+  "a": [
+   75.0,
+   75.0
+  ],
+  "w": [
+   60.0,
+   30.0
+  ],
+  "branch": -1,
+  "order": [
+   1,
+   1,
+   1
+  ],
+  "_tag": "high posterior: J1 behind-above the shoulder, long links, singular axis along the never-points direction"
+ }
+]

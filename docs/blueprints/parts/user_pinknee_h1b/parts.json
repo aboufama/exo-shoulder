@@ -1,0 +1,785 @@
+{
+ "design": "user_pinknee_h1b",
+ "source": "pipeline/full-exo/designs/user_pinknee_h1b/exo.glb + parts_full.json",
+ "parts": [
+  {
+   "file": "000.png",
+   "title": "J1 bearing 1 MR117-2RS 7x11x3",
+   "desc": "J1 bearing 1 MR117-2RS 7x11x3",
+   "descs": [
+    "J1 bearing 1 MR117-2RS 7x11x3",
+    "J1 bearing 2 MR117-2RS 7x11x3",
+    "J2 bearing 1 MR117-2RS 7x11x3",
+    "J2 bearing 2 MR117-2RS 7x11x3",
+    "J3 bearing 1 MR117-2RS 7x11x3",
+    "J3 bearing 2 MR117-2RS 7x11x3"
+   ],
+   "qty": 6,
+   "ks": [
+    13,
+    12,
+    7,
+    6,
+    1,
+    0
+   ],
+   "bodies": [
+    "base (on the scapula handler)",
+    "link 2"
+   ],
+   "material": "bearing steel",
+   "mass_g": 1.32,
+   "size_mm": [
+    10.99,
+    10.99,
+    3.0
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "001.png",
+   "title": "J1 outer spacer 17-4PH",
+   "desc": "J1 outer spacer 17-4PH",
+   "descs": [
+    "J1 outer spacer 17-4PH",
+    "J2 outer spacer 17-4PH",
+    "J3 outer spacer 17-4PH"
+   ],
+   "qty": 3,
+   "ks": [
+    14,
+    8,
+    2
+   ],
+   "bodies": [
+    "base (on the scapula handler)",
+    "link 2"
+   ],
+   "material": "17-4PH",
+   "mass_g": 0.09,
+   "size_mm": [
+    10.99,
+    10.99,
+    0.6
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "002.png",
+   "title": "J1 inner spacer",
+   "desc": "J1 inner spacer (ground, preload)",
+   "descs": [
+    "J1 inner spacer (ground, preload)",
+    "J2 inner spacer (ground, preload)",
+    "J3 inner spacer (ground, preload)"
+   ],
+   "qty": 3,
+   "ks": [
+    15,
+    9,
+    3
+   ],
+   "bodies": [
+    "link 1",
+    "member 3"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.04,
+   "size_mm": [
+    8.19,
+    8.19,
+    0.6
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "003.png",
+   "title": "J1 ring nut M7x0.5",
+   "desc": "J1 ring nut M7x0.5 (Ti-6Al-4V)",
+   "descs": [
+    "J1 ring nut M7x0.5 (Ti-6Al-4V)",
+    "J2 ring nut M7x0.5 (Ti-6Al-4V)",
+    "J3 ring nut M7x0.5 (Ti-6Al-4V)"
+   ],
+   "qty": 3,
+   "ks": [
+    16,
+    10,
+    4
+   ],
+   "bodies": [
+    "link 1",
+    "member 3"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.08,
+   "size_mm": [
+    8.59,
+    8.59,
+    0.9
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "004.png",
+   "title": "J1 cap O20 G2 dome",
+   "desc": "J1 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "descs": [
+    "J1 cap O20 G2 dome, threaded (Ti-6Al-4V)"
+   ],
+   "qty": 1,
+   "ks": [
+    5
+   ],
+   "bodies": [
+    "base (on the scapula handler)"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 2.01,
+   "size_mm": [
+    19.99,
+    19.99,
+    3.45
+   ],
+   "faces": 3256,
+   "user_part": false
+  },
+  {
+   "file": "005.png",
+   "title": "J2 cap O20 G2 dome",
+   "desc": "J2 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "descs": [
+    "J2 cap O20 G2 dome, threaded (Ti-6Al-4V)"
+   ],
+   "qty": 1,
+   "ks": [
+    11
+   ],
+   "bodies": [
+    "link 2"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 2.01,
+   "size_mm": [
+    19.99,
+    19.99,
+    3.45
+   ],
+   "faces": 2414,
+   "user_part": false
+  },
+  {
+   "file": "006.png",
+   "title": "J3 cap O20 G2 dome",
+   "desc": "J3 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "descs": [
+    "J3 cap O20 G2 dome, threaded (Ti-6Al-4V)"
+   ],
+   "qty": 1,
+   "ks": [
+    17
+   ],
+   "bodies": [
+    "link 2"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 2.01,
+   "size_mm": [
+    19.99,
+    19.99,
+    3.45
+   ],
+   "faces": 3420,
+   "user_part": false
+  },
+  {
+   "file": "007.png",
+   "title": "D8-02 link 1",
+   "desc": "D8-02 link 1: 8x3 bar on a line/arc chain + J1/J2 pads + integral O7 pins (5-axis machined from solid Ti-6Al-4V: follows the model strap; bends down to R3 on the centre line (1.5 mm inner), below the 15 mm bent-bar rule)",
+   "descs": [
+    "D8-02 link 1: 8x3 bar on a line/arc chain + J1/J2 pads + integral O7 pins (5-axis machined from solid Ti-6Al-4V: follows the model strap; bends down to R3 on the centre line (1.5 mm inner), below the 15 mm bent-bar rule)"
+   ],
+   "qty": 1,
+   "ks": [
+    18
+   ],
+   "bodies": [
+    "link 1"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 13.44,
+   "size_mm": [
+    60.76,
+    17.39,
+    17.37
+   ],
+   "faces": 31462,
+   "user_part": false
+  },
+  {
+   "file": "008.png",
+   "title": "D8-03 link 2",
+   "desc": "D8-03 link 2: 8x3 bar on a line/arc chain + J2/J3 hubs, flies over the knee and the pad (5-axis machined from solid Ti-6Al-4V: follows the model strap; bends down to R3.5 on the centre line (2 mm inner), below the 15 mm bent-bar rule)",
+   "descs": [
+    "D8-03 link 2: 8x3 bar on a line/arc chain + J2/J3 hubs, flies over the knee and the pad (5-axis machined from solid Ti-6Al-4V: follows the model strap; bends down to R3.5 on the centre line (2 mm inner), below the 15 mm bent-bar rule)"
+   ],
+   "qty": 1,
+   "ks": [
+    19
+   ],
+   "bodies": [
+    "link 2"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 19.42,
+   "size_mm": [
+    110.25,
+    20.41,
+    19.71
+   ],
+   "faces": 58662,
+   "user_part": false
+  },
+  {
+   "file": "009.png",
+   "title": "D8-04 member 3",
+   "desc": "D8-04 member 3: J3 disc + integral O7 pin, E strap (one side-view sketch of lines and tangent arcs, 8 x 3, its top stepping to the boss), E boss O12 x 2.59075 + integral O4 pin a (Ti-6Al-4V)",
+   "descs": [
+    "D8-04 member 3: J3 disc + integral O7 pin, E strap (one side-view sketch of lines and tangent arcs, 8 x 3, its top stepping to the boss), E boss O12 x 2.59075 + integral O4 pin a (Ti-6Al-4V)"
+   ],
+   "qty": 1,
+   "ks": [
+    20
+   ],
+   "bodies": [
+    "member 3"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 11.87,
+   "size_mm": [
+    75.98,
+    20.0,
+    11.98
+   ],
+   "faces": 2962,
+   "user_part": false
+  },
+  {
+   "file": "010.png",
+   "title": "pin a",
+   "desc": "pin a: iglidur thrust washer 4 x 8 x 0.5 (igus GTM-0408-005 class, in the 0.5 mm running gap; confirm the size, else cut from iglidur sheet)",
+   "descs": [
+    "pin a: iglidur thrust washer 4 x 8 x 0.5 (igus GTM-0408-005 class, in the 0.5 mm running gap; confirm the size, else cut from iglidur sheet)",
+    "pin b: iglidur thrust washer 4 x 8 x 0.5 (igus GTM-0408-005 class, in the 0.5 mm running gap; confirm the size, else cut from iglidur sheet)"
+   ],
+   "qty": 2,
+   "ks": [
+    26,
+    21
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)",
+    "member 3"
+   ],
+   "material": "iglidur",
+   "mass_g": 0.03,
+   "size_mm": [
+    7.99,
+    7.99,
+    0.5
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "011.png",
+   "title": "pin a",
+   "desc": "pin a: iglidur G sleeve bearing igus GSM-0405-03 (4 x 5.5 x 3) faced to 1.89, pressed in the knee link",
+   "descs": [
+    "pin a: iglidur G sleeve bearing igus GSM-0405-03 (4 x 5.5 x 3) faced to 1.89, pressed in the knee link",
+    "pin b: iglidur G sleeve bearing igus GSM-0405-03 (4 x 5.5 x 3) faced to 1.89, pressed in the knee link"
+   ],
+   "qty": 2,
+   "ks": [
+    27,
+    22
+   ],
+   "bodies": [
+    "knee link"
+   ],
+   "material": "iglidur",
+   "mass_g": 0.03,
+   "size_mm": [
+    5.5,
+    5.5,
+    1.89
+   ],
+   "faces": 672,
+   "user_part": false
+  },
+  {
+   "file": "012.png",
+   "title": "pin a",
+   "desc": "pin a: retaining E-clip DIN 6799 - 3.2 (groove O3.2 on the O4 pin, O7.3 x 0.6), A2 stainless (polished), seated in the knee link's O8 x 0.7 counterbore",
+   "descs": [
+    "pin a: retaining E-clip DIN 6799 - 3.2 (groove O3.2 on the O4 pin, O7.3 x 0.6), A2 stainless (polished), seated in the knee link's O8 x 0.7 counterbore",
+    "pin b: retaining E-clip DIN 6799 - 3.2 (groove O3.2 on the O4 pin, O7.3 x 0.6), A2 stainless (polished), seated in the knee link's O8 x 0.7 counterbore"
+   ],
+   "qty": 2,
+   "ks": [
+    28,
+    23
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)",
+    "member 3"
+   ],
+   "material": "stainless (polished)",
+   "mass_g": 0.13,
+   "size_mm": [
+    7.3,
+    6.93,
+    0.6
+   ],
+   "faces": 560,
+   "user_part": false
+  },
+  {
+   "file": "013.png",
+   "title": "D8-05 knee link",
+   "desc": "D8-05 knee link: flat plate 40.2 x 10 x 2.59075 (lines + R1 arcs), O5.5 sleeve bores, O8 x 0.7 clip counterbores (Ti-6Al-4V)",
+   "descs": [
+    "D8-05 knee link: flat plate 40.2 x 10 x 2.59075 (lines + R1 arcs), O5.5 sleeve bores, O8 x 0.7 clip counterbores (Ti-6Al-4V)"
+   ],
+   "qty": 1,
+   "ks": [
+    24
+   ],
+   "bodies": [
+    "knee link"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 3.9,
+   "size_mm": [
+    40.24,
+    10.0,
+    2.59
+   ],
+   "faces": 1700,
+   "user_part": false
+  },
+  {
+   "file": "014.png",
+   "title": "D8-06 BOTTOM + arm pad + pad mount, one 5-axis part",
+   "desc": "D8-06 BOTTOM + arm pad + pad mount, one 5-axis part (user's bar cut square to the arm 3.7 mm distal of pin b; O12 pad at pin b + integral O4 h9 pin, hard-anodised; 2.59 mm mount 23.4 long at the pad level, riser 1 mm into BOTTOM's underside; 7075-T6)",
+   "descs": [
+    "D8-06 BOTTOM + arm pad + pad mount, one 5-axis part (user's bar cut square to the arm 3.7 mm distal of pin b; O12 pad at pin b + integral O4 h9 pin, hard-anodised; 2.59 mm mount 23.4 long at the pad level, riser 1 mm into BOTTOM's underside; 7075-T6)"
+   ],
+   "qty": 1,
+   "ks": [
+    25
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "7075-T6 (BOTTOM merged with the pad mount)",
+   "mass_g": 66.21,
+   "size_mm": [
+    267.16,
+    55.94,
+    13.68
+   ],
+   "faces": 16856,
+   "user_part": false
+  },
+  {
+   "file": "015.png",
+   "title": "D8-01 scapula base AT THE J1 RING",
+   "desc": "D8-01 scapula base AT THE J1 RING: the J1 upper member alone (O20 ring + seat disc + M18 x 0.5 spigot); the user's scapula handler bracket threads onto the spigot in place of the dome cap - no ears, no tab (Ti-6Al-4V, 5-axis machined)",
+   "descs": [
+    "D8-01 scapula base AT THE J1 RING: the J1 upper member alone (O20 ring + seat disc + M18 x 0.5 spigot); the user's scapula handler bracket threads onto the spigot in place of the dome cap - no ears, no tab (Ti-6Al-4V, 5-axis machined)"
+   ],
+   "qty": 1,
+   "ks": [
+    29
+   ],
+   "bodies": [
+    "base (on the scapula handler)"
+   ],
+   "material": "Ti-6Al-4V",
+   "mass_g": 6.49,
+   "size_mm": [
+    20.0,
+    20.0,
+    7.07
+   ],
+   "faces": 8446,
+   "user_part": false
+  },
+  {
+   "file": "016.png",
+   "title": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW",
+   "desc": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
+   "descs": [
+    "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL"
+   ],
+   "qty": 3,
+   "ks": [
+    44,
+    36,
+    30
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    7.3,
+    6.97,
+    6.97
+   ],
+   "faces": 2612,
+   "user_part": true
+  },
+  {
+   "file": "017.png",
+   "title": "FOREARM CUFF",
+   "desc": "FOREARM CUFF",
+   "descs": [
+    "FOREARM CUFF"
+   ],
+   "qty": 1,
+   "ks": [
+    31
+   ],
+   "bodies": [
+    "forearm cuff"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    110.0,
+    105.02,
+    80.93
+   ],
+   "faces": 5284,
+   "user_part": true
+  },
+  {
+   "file": "018.png",
+   "title": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "desc": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "descs": [
+    "Hex socket head countersunk screw grade C M4x0.7 x 8"
+   ],
+   "qty": 6,
+   "ks": [
+    42,
+    41,
+    40,
+    35,
+    34,
+    32
+   ],
+   "bodies": [
+    "forearm cuff"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    8.0,
+    7.49,
+    7.49
+   ],
+   "faces": 769,
+   "user_part": true
+  },
+  {
+   "file": "019.png",
+   "title": "TOP",
+   "desc": "TOP",
+   "descs": [
+    "TOP"
+   ],
+   "qty": 1,
+   "ks": [
+    33
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    42.3,
+    42.3,
+    2.8
+   ],
+   "faces": 1930,
+   "user_part": true
+  },
+  {
+   "file": "020.png",
+   "title": "IGUS THRUST WASHER",
+   "desc": "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
+   "descs": [
+    "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J"
+   ],
+   "qty": 2,
+   "ks": [
+    39,
+    37
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    38.81,
+    38.81,
+    1.5
+   ],
+   "faces": 256,
+   "user_part": true
+  },
+  {
+   "file": "021.png",
+   "title": "MIDDLE",
+   "desc": "MIDDLE",
+   "descs": [
+    "MIDDLE"
+   ],
+   "qty": 1,
+   "ks": [
+    38
+   ],
+   "bodies": [
+    "forearm cuff"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    161.23,
+    42.49,
+    5.39
+   ],
+   "faces": 3858,
+   "user_part": true
+  },
+  {
+   "file": "022.png",
+   "title": "5mm D",
+   "desc": "5mm D, 2.5mm H, N42 MAGNET",
+   "descs": [
+    "5mm D, 2.5mm H, N42 MAGNET"
+   ],
+   "qty": 1,
+   "ks": [
+    43
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    4.98,
+    4.98,
+    2.5
+   ],
+   "faces": 252,
+   "user_part": true
+  },
+  {
+   "file": "023.png",
+   "title": "CirPattern1[15]",
+   "desc": "CirPattern1[15]",
+   "descs": [
+    "CirPattern1[10]",
+    "CirPattern1[11]",
+    "CirPattern1[12]",
+    "CirPattern1[13]",
+    "CirPattern1[14]",
+    "CirPattern1[15]",
+    "CirPattern1[16]",
+    "CirPattern1[17]",
+    "CirPattern1[1]",
+    "CirPattern1[2]",
+    "CirPattern1[3]",
+    "CirPattern1[4]",
+    "CirPattern1[5]",
+    "CirPattern1[6]",
+    "CirPattern1[7]",
+    "CirPattern1[8]",
+    "CirPattern1[9]",
+    "Revolve4"
+   ],
+   "qty": 18,
+   "ks": [
+    66,
+    65,
+    64,
+    63,
+    62,
+    60,
+    59,
+    57,
+    56,
+    55,
+    54,
+    53,
+    52,
+    51,
+    49,
+    48,
+    47,
+    45
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    2.34,
+    2.34,
+    2.34
+   ],
+   "faces": 528,
+   "user_part": true
+  },
+  {
+   "file": "024.png",
+   "title": "Revolve1[2]",
+   "desc": "Revolve1[2]",
+   "descs": [
+    "Revolve1[2]",
+    "Revolve1[3]"
+   ],
+   "qty": 2,
+   "ks": [
+    61,
+    46
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    24.88,
+    24.88,
+    0.38
+   ],
+   "faces": 256,
+   "user_part": true
+  },
+  {
+   "file": "025.png",
+   "title": "Revolve1[1]",
+   "desc": "Revolve1[1]",
+   "descs": [
+    "Revolve1[1]"
+   ],
+   "qty": 1,
+   "ks": [
+    50
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    26.87,
+    26.87,
+    4.0
+   ],
+   "faces": 1026,
+   "user_part": true
+  },
+  {
+   "file": "026.png",
+   "title": "Revolve3",
+   "desc": "Revolve3",
+   "descs": [
+    "Revolve3"
+   ],
+   "qty": 1,
+   "ks": [
+    58
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "user part",
+   "mass_g": null,
+   "size_mm": [
+    21.84,
+    21.84,
+    4.0
+   ],
+   "faces": 1026,
+   "user_part": true
+  },
+  {
+   "file": "027.png",
+   "title": "UPPER ARM CUFF",
+   "desc": "UPPER ARM CUFF (one sketch: flat land + inner/outer R arcs, both side arcs trimmed clear of the trunk, extruded; AlSi10Mg bead blasted)",
+   "descs": [
+    "UPPER ARM CUFF (one sketch: flat land + inner/outer R arcs, both side arcs trimmed clear of the trunk, extruded; AlSi10Mg bead blasted)"
+   ],
+   "qty": 1,
+   "ks": [
+    67
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "AlSi10Mg",
+   "mass_g": 36.71,
+   "size_mm": [
+    87.8,
+    80.8,
+    2.64
+   ],
+   "faces": 9758,
+   "user_part": false
+  },
+  {
+   "file": "028.png",
+   "title": "M4x6 ISO 10642 hexagon socket countersunk screw",
+   "desc": "M4x6 ISO 10642 hexagon socket countersunk screw (upper cuff -> BOTTOM), polished A2",
+   "descs": [
+    "M4x6 ISO 10642 hexagon socket countersunk screw (upper cuff -> BOTTOM), polished A2"
+   ],
+   "qty": 6,
+   "ks": [
+    73,
+    72,
+    71,
+    70,
+    69,
+    68
+   ],
+   "bodies": [
+    "arm pad / cuff (BOTTOM)"
+   ],
+   "material": "stainless (polished)",
+   "mass_g": 0.84,
+   "size_mm": [
+    7.89,
+    7.89,
+    6.0
+   ],
+   "faces": 752,
+   "user_part": false
+  }
+ ]
+}

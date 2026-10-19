@@ -1,0 +1,637 @@
+{
+ "fit_fast": {
+  "gap": 16.88,
+  "reach": 0.7312,
+  "follow": 1.0,
+  "inband14": 0.9079,
+  "inband10": 0.5522,
+  "contact": 0.0,
+  "extra": {
+   "n_taken": 177,
+   "closure_max_mm": 0.0,
+   "roller_lug_min_mm": 1.494,
+   "roller_lug_max_mm": 3.221,
+   "pa_crank_max": 11.7,
+   "pa_horn_max": 36.4,
+   "wrong_sense": 0,
+   "sp": -1.0,
+   "dK_sign_counts": {
+    "pos": 0,
+    "neg": 81,
+    "zero": 96
+   },
+   "poses_failing": 0,
+   "why_failing": {},
+   "poses_failing_ids": [],
+   "pa_lobe_real_max": 25.62,
+   "dK_taken_max_deg": 41.52,
+   "dK_lim_deg": 44.5,
+   "why_lim": "pressure_horn",
+   "drive_idle": false,
+   "corrected": {
+    "gap": 16.88,
+    "reach": 0.7312,
+    "follow": 1.0,
+    "inband14": 0.9079,
+    "inband10": 0.5522,
+    "contact": 0.0
+   },
+   "pa_rule": {
+    "mu": 0.087,
+    "friction_deg": 4.97,
+    "cap_kin": 38.03,
+    "pa_eff_horn_max": 41.37,
+    "pa_eff_crank_max": 16.67
+   },
+   "at_pa45_friction": {
+    "poses_failing": 0,
+    "why_failing": {},
+    "corrected": {
+     "gap": 16.88,
+     "reach": 0.7312,
+     "follow": 1.0,
+     "inband14": 0.9079,
+     "inband10": 0.5522,
+     "contact": 0.0
+    }
+   },
+   "th_margin": {
+    "min": 6.247,
+    "n": 177,
+    "lt5": 0,
+    "forced": 81,
+    "th_max_taken": 105.23,
+    "lowest": {
+     "own": 6.247,
+     "forced": true,
+     "kind": "ws",
+     "plane": -45.0,
+     "elev": 15.0,
+     "axial": 135.0
+    }
+   },
+   "nose": {
+    "nose_r": 1.1839,
+    "n_steps": 831,
+    "k_range_deg": 41.5,
+    "undercut_points": 0,
+    "undercut_max_mm": 0.0,
+    "undercut_k_deg": [],
+    "vrel_min_mm_per_rad": 1.567,
+    "vrel_min_k_deg": 0.0,
+    "vrel_at_0": 1.567,
+    "vrel_at_end": 8.732,
+    "flank_rho_min_mm": 1.917,
+    "flank_rho_min_k_deg": 0.5,
+    "path_len_mm": 3.74,
+    "flank_len_mm": 4.65
+   },
+   "cam_claim": {
+    "dK_lim": 44.5,
+    "why_lim": "pressure_horn",
+    "pa_crank_max_taken": 11.7,
+    "pa_horn_max_taken": 38.0,
+    "pa_eff_horn": 43.0,
+    "pa_eff_crank": 16.7,
+    "pa_kin_max": 38.03,
+    "flank_rho_min": 1.9,
+    "clear_hubK_min": 1.4,
+    "clear_roll_hubK_min": 4.01,
+    "nose_r": 1.1839,
+    "mu": 0.087
+   },
+   "th_margin_own_state": {
+    "min": 6.247,
+    "n": 177,
+    "lt5": 0,
+    "lt5p5": 0,
+    "forced": 81,
+    "a_deg": [
+     37.27,
+     58.14
+    ],
+    "lowest": {
+     "own": 6.247,
+     "forced": true,
+     "kind": "ws",
+     "plane": -45.0,
+     "elev": 15.0,
+     "axial": 135.0
+    }
+   }
+  }
+ },
+ "frozen": {
+  "gap": 24.04,
+  "reach": 0.6702,
+  "follow": 1.0,
+  "inband14": 0.907,
+  "inband10": 0.5547,
+  "contact": 0.0106
+ },
+ "mode": "exact",
+ "n": 1154,
+ "why": {
+  "fold": 267,
+  "slide": 38,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 9
+ },
+ "parts_pairs": {},
+ "parts_ib14": {
+  "hub1": [
+   0.999,
+   8.7,
+   80
+  ],
+  "hubK": [
+   0.991,
+   7.7,
+   80
+  ],
+  "hub2": [
+   0.976,
+   10.6,
+   80
+  ],
+  "hub3": [
+   0.723,
+   11.6,
+   80
+  ],
+  "E": [
+   0.969,
+   6.6,
+   104
+  ],
+  "boss": [
+   0.993,
+   8.3,
+   32
+  ],
+  "pad": [
+   1.0,
+   7.6,
+   32
+  ],
+  "knee": [
+   0.962,
+   10.4,
+   80
+  ],
+  "crank": [
+   0.86,
+   11.0,
+   129
+  ],
+  "roller": [
+   0.945,
+   9.1,
+   19
+  ],
+  "horn": [
+   0.959,
+   6.3,
+   27
+  ],
+  "L1a": [
+   0.978,
+   10.6,
+   8
+  ],
+  "L1b": [
+   0.95,
+   8.1,
+   36
+  ],
+  "L2": [
+   0.753,
+   11.4,
+   128
+  ]
+ },
+ "audit": {
+  "near_touch_min_mm": 0.31,
+  "near_touch_low": [
+   {
+    "mm": 0.31,
+    "i": 1106,
+    "kind": "ws",
+    "plane": 150.0,
+    "elev": 15.0,
+    "axial": -180.0
+   },
+   {
+    "mm": 0.4,
+    "i": 961,
+    "kind": "ws",
+    "plane": 105.0,
+    "elev": 135.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 0.49,
+    "i": 1047,
+    "kind": "ws",
+    "plane": 135.0,
+    "elev": 15.0,
+    "axial": -165.0
+   },
+   {
+    "mm": 0.58,
+    "i": 978,
+    "kind": "ws",
+    "plane": 120.0,
+    "elev": 15.0,
+    "axial": -165.0
+   },
+   {
+    "mm": 0.66,
+    "i": 663,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 90.0,
+    "axial": 45.0
+   }
+  ],
+  "gap_near1": 26.94,
+  "near1_poses": 13,
+  "gap_near2": 48.07,
+  "near2_poses": 90,
+  "overhead140": {
+   "ws": 71,
+   "reach": 0.2254,
+   "clip": 19,
+   "follow": 1.0,
+   "inband14": 0.8995,
+   "inband10": 0.5838,
+   "why_not": {
+    "fold": 36,
+    "slide": 15,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 4
+   }
+  }
+ },
+ "extra": {
+  "n_taken": 840,
+  "closure_max_mm": 0.0,
+  "roller_lug_min_mm": 1.494,
+  "roller_lug_max_mm": 3.274,
+  "pa_crank_max": 11.7,
+  "pa_horn_max": 37.5,
+  "wrong_sense": 0,
+  "sp": -1.0,
+  "dK_sign_counts": {
+   "pos": 0,
+   "neg": 377,
+   "zero": 463
+  },
+  "poses_failing": 0,
+  "why_failing": {},
+  "poses_failing_ids": [],
+  "pa_lobe_real_max": 25.62,
+  "dK_taken_max_deg": 43.53,
+  "dK_lim_deg": 44.5,
+  "why_lim": "pressure_horn",
+  "drive_idle": false,
+  "corrected": {
+   "gap": 24.04,
+   "reach": 0.6702,
+   "follow": 1.0,
+   "inband14": 0.907,
+   "inband10": 0.5547,
+   "contact": 0.0106
+  },
+  "pa_rule": {
+   "mu": 0.087,
+   "friction_deg": 4.97,
+   "cap_kin": 38.03,
+   "pa_eff_horn_max": 42.47,
+   "pa_eff_crank_max": 16.67
+  },
+  "at_pa45_friction": {
+   "poses_failing": 0,
+   "why_failing": {},
+   "corrected": {
+    "gap": 24.04,
+    "reach": 0.6702,
+    "follow": 1.0,
+    "inband14": 0.907,
+    "inband10": 0.5547,
+    "contact": 0.0106
+   }
+  },
+  "th_margin": {
+   "min": 5.716,
+   "n": 840,
+   "lt5": 0,
+   "forced": 377,
+   "th_max_taken": 106.41,
+   "lowest": {
+    "own": 5.716,
+    "forced": true,
+    "kind": "ws",
+    "plane": -60.0,
+    "elev": 45.0,
+    "axial": 120.0
+   }
+  },
+  "nose": {
+   "nose_r": 1.1839,
+   "n_steps": 871,
+   "k_range_deg": 43.5,
+   "undercut_points": 0,
+   "undercut_max_mm": 0.0,
+   "undercut_k_deg": [],
+   "vrel_min_mm_per_rad": 1.567,
+   "vrel_min_k_deg": 0.0,
+   "vrel_at_0": 1.567,
+   "vrel_at_end": 9.07,
+   "flank_rho_min_mm": 1.917,
+   "flank_rho_min_k_deg": 0.5,
+   "path_len_mm": 4.05,
+   "flank_len_mm": 4.99
+  },
+  "cam_claim": {
+   "dK_lim": 44.5,
+   "why_lim": "pressure_horn",
+   "pa_crank_max_taken": 11.7,
+   "pa_horn_max_taken": 38.0,
+   "pa_eff_horn": 43.0,
+   "pa_eff_crank": 16.7,
+   "pa_kin_max": 38.03,
+   "flank_rho_min": 1.9,
+   "clear_hubK_min": 1.4,
+   "clear_roll_hubK_min": 4.01,
+   "nose_r": 1.1839,
+   "mu": 0.087
+  },
+  "th_margin_own_state": {
+   "min": 5.716,
+   "n": 840,
+   "lt5": 0,
+   "lt5p5": 0,
+   "forced": 377,
+   "a_deg": [
+    37.27,
+    58.14
+   ],
+   "lowest": {
+    "own": 5.716,
+    "forced": true,
+    "kind": "ws",
+    "plane": -60.0,
+    "elev": 45.0,
+    "axial": 120.0
+   }
+  },
+  "depth": {
+   "n": 9,
+   "sum": 40.475,
+   "max": 8.742,
+   "below90": 3,
+   "ovh140": 4,
+   "deepest": [
+    {
+     "mm": 8.74,
+     "elev": 150.0,
+     "kind": "ws",
+     "plane": 15.0,
+     "axial": -60.0
+    },
+    {
+     "mm": 7.08,
+     "elev": 150.0,
+     "kind": "ws",
+     "plane": 30.0,
+     "axial": -45.0
+    },
+    {
+     "mm": 6.95,
+     "elev": 165.0,
+     "kind": "ws",
+     "plane": 60.0,
+     "axial": -30.0
+    },
+    {
+     "mm": 6.09,
+     "elev": 60.0,
+     "kind": "ws",
+     "plane": -90.0,
+     "axial": 120.0
+    },
+    {
+     "mm": 5.62,
+     "elev": 165.0,
+     "kind": "ws",
+     "plane": 45.0,
+     "axial": -45.0
+    }
+   ]
+  },
+  "ws_inband": {
+   "all": [
+    0.8747,
+    0.5454
+   ],
+   "e90_140": [
+    0.8367,
+    0.5168
+   ],
+   "ovh140": [
+    0.9398,
+    0.6269
+   ]
+  },
+  "ghoff": {
+   "3mm": {
+    "within_liner": 0.381,
+    "slide_within_liner": 0.393,
+    "knee_equiv_within_liner": 0.615,
+    "knee_equiv_median": 2.5,
+    "knee_equiv_max": 5.61
+   },
+   "5mm": {
+    "within_liner": 0.158,
+    "slide_within_liner": 0.168,
+    "knee_equiv_within_liner": 0.334,
+    "knee_equiv_median": 4.17,
+    "knee_equiv_max": 9.36
+   },
+   "n_poses": 1154,
+   "liner_mm": 3.0,
+   "u3": [
+    -0.1507,
+    -0.2417,
+    0.9586
+   ]
+  }
+ },
+ "sidecar": {
+  "boss_level": 62.2,
+  "lev_L1b": 59.0,
+  "arm_tip_level": 62.9,
+  "g": 2.396,
+  "sig": 1.0,
+  "r_c": 15.46,
+  "beta": -171.16,
+  "arm_len": 52.0,
+  "arc_deg": 120.0,
+  "rssr_closed": true,
+  "pa_crank_rest": 11.7,
+  "pa_horn_rest": 2.0,
+  "vel_angle_rest": 5.7,
+  "pa_crank_max_taken": 11.7,
+  "pa_horn_max_taken": 38.0,
+  "flank_rho_min": 1.9,
+  "contact_r": [
+   15.4,
+   19.8
+  ],
+  "clear_hubK_min": 1.4,
+  "clear_roll_hubK_min": 4.01,
+  "clear_lowarm_lug_min": 15.67,
+  "n_lowarm": 32,
+  "phi_max_taken": 18.6,
+  "cprog": 0.0,
+  "crest_exact": 9.62,
+  "dK_lim": 44.5,
+  "why_lim": "pressure_horn",
+  "law_dK_max": 49.7,
+  "lug_r_max": 23.1,
+  "nose_r": 1.1839,
+  "mu": 0.087,
+  "friction_deg": 4.97,
+  "pa_kin_max": 38.03,
+  "pa_eff_horn": 43.0,
+  "pa_eff_crank": 16.7
+ },
+ "min_clear_taken": 1.4,
+ "head": false,
+ "env": null,
+ "connected": {
+  "static": {
+   "gap": 24.04,
+   "reach": 0.6702,
+   "follow": 1.0,
+   "inband14": 0.907,
+   "contact": 0.0106
+  },
+  "connected_bench": {
+   "gap": 25.1,
+   "reach": 0.6597,
+   "dropped": 10,
+   "dropped_forced": 10,
+   "forced_taken": 311,
+   "forced_taken_connected": 301,
+   "dropped_with_no_taken_neighbour": 6
+  },
+  "connected_knn": {
+   "gap": 30.75,
+   "reach": 0.604,
+   "dropped": 63,
+   "dropped_forced": 63,
+   "forced_taken": 311,
+   "forced_taken_connected": 248
+  },
+  "connected_full": {
+   "gap": 24.04,
+   "reach": 0.6702,
+   "dropped": 0,
+   "dropped_forced": 0,
+   "forced_taken": 311,
+   "forced_taken_connected": 311,
+   "envelope": {
+    "env_ok": 1003,
+    "env_forced_ok": 495,
+    "env_forced_connected": 495
+   }
+  },
+  "secs": 2.0
+ },
+ "fit_protocol": "fit60",
+ "wear": "held",
+ "which": "docs/research/slipper_env_polish/picks/pick1.json",
+ "nominal": {
+  "bk1": 26.9021,
+  "bk2": 38.2893,
+  "a1max": 55.9298,
+  "kK": 2.3893,
+  "g": 2.396,
+  "beta": -171.1589,
+  "r_c": 15.4552,
+  "lift": 1.5793,
+  "hl": 1.1735,
+  "zr": 3.8439,
+  "s_arm": 4.0,
+  "r_lobe": 8.3187,
+  "smhi": 15.8428,
+  "smlo": 6.0676,
+  "az1": 96.6333,
+  "el1": 67.9008,
+  "az2": 47.0214,
+  "el2": 41.4274,
+  "wd": 65.8471,
+  "wa": -11.7942,
+  "b3": 0.3167,
+  "ang_min": 25.9609,
+  "lc": 20.9314,
+  "phib": -55.2501,
+  "law_mode": "lin",
+  "chain": "free",
+  "cprog": 0.0,
+  "near2": 1,
+  "nose_r": 1.1839,
+  "lE": 67.832,
+  "phiE": -2.7863,
+  "mu": 0.087
+ },
+ "priced": {
+  "bk1": 26.9021,
+  "bk2": 38.2893,
+  "a1max": 55.9298,
+  "kK": 2.3893,
+  "g": 2.396,
+  "beta": -171.1589,
+  "r_c": 15.4552,
+  "lift": 1.5793,
+  "hl": 1.1735,
+  "zr": 3.8439,
+  "s_arm": 4.0,
+  "r_lobe": 8.3187,
+  "smhi": 15.8428,
+  "smlo": 6.0676,
+  "az1": 96.6333,
+  "el1": 67.9008,
+  "az2": 47.0214,
+  "el2": 41.4274,
+  "wd": 65.8471,
+  "wa": -11.7942,
+  "b3": 0.3167,
+  "ang_min": 25.9609,
+  "lc": 20.9314,
+  "phib": -55.2501,
+  "law_mode": "lin",
+  "chain": "free",
+  "cprog": 0.0,
+  "near2": 1,
+  "nose_r": 1.1839,
+  "lE": 67.832,
+  "phiE": -2.7863,
+  "mu": 0.087
+ },
+ "price": {
+  "why": "unpriced reading (nominal stops)",
+  "margin": 5.0,
+  "pa_max": 38.028
+ },
+ "margin": 5.0,
+ "secs": 269.2
+}

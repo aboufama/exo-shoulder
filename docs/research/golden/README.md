@@ -1,0 +1,359 @@
+# Golden push: shared frontier and compute notes
+
+Target (CLAUDE.md "The golden solution", user 2026-10-16 ~05:50 UTC): verified score >= 95 (gap <= 13.75 on
+Bench(110,360) exact, frozen shape) at complexity ~0; fold margin 5 deg; O20 hubs only; J1 on the back of the shoulder +
+acromion top only.
+
+## GPU bench (tools/gpu_bench.py) - pod exo-gpu-bench
+
+- Why: the CPU farm is capped at ~5 serverless workers by the account quota and the 4-core box sits at load ~33, so the
+  search is compute-bound. A RunPod POD is outside the serverless worker quota.
+- Pod: **exo-gpu-bench (id 2odeqs93uh5ua5; the first one, 9qh3ze1zhuu235, was terminated at 06:47 UTC when its parity job hung on a fork after CUDA init - the CPU reference pool now spawns), 1x NVIDIA RTX PRO 4000 Blackwell (24 GB), secure cloud EU-RO-1, $0.57/h** (started 06:12 UTC; the RTX 2000 Ada at $0.24/h had no instance with the volume, so the next cheapest that can mount
+  the farm's network volume exo-farm-cas, where the Bench(110,360) signed-distance grid already lives; community pods
+  are cheaper per hour only for the 4080 SUPER class and cannot see the volume). No public port: the pod runs job
+  scripts that farm jobs drop on the private network volume and writes results back there. Stopped / terminated the
+  moment the search ends (idle self-stop after 30 min as a safety net).
+- How work reaches the pod: `python3 tools/gpu_pod.py submit <job.sh> <name> --include tools/gpu_bench.py` (one farm
+  job drops the script + files on the volume; the pod's spool runs it), `python3 tools/gpu_pod.py fetch <name>
+  --outdir DIR` (one farm job brings exo-farm/gpu/out/<name>/ back). Jobs: pipeline/gpu_pod/*.sh.
+
+### The port (tools/gpu_bench.py)
+
+Family = docs/concepts/models/zc-frontier-3r.py exactly (three active pins through GH, O20 hubs, 12 x 3 straps with the
+kit's skin-fitted K3 undersides + ramps + `over` + 60 deg climb, the K7 14 x 6 neck, stack orders inv2 / inv3, fold
+margin 5, 1 mm radial K6, hub crowns / walls, every member's top face, the audit's sampling and pose-locality rules,
+hub_F <= 140, the J1 seat region). Every step is the kit's own arithmetic in float64 on the device (the K6 dot
+products in float32, as the kit); continuity slerps come from scipy tables (the kit's Slerp). Configs are batched
+(48-72 per call, grouped by stack order); strap sample counts vary per config and are padded with duplicates of the
+last sample (zero weight in the in-band share). Protocols: same-bench (the golden search: fit = wear = Bench(110,360))
+and frozen (fit Bench(60,160) -> wear Bench(110,360), the verifier's protocol).
+
+### Parity (the gate): GPU port vs the CPU kit model (zc-frontier-3r evaluate, tools/concept_bench.py fast path)
+
+Same configs, same bench, CPU reference = the kit model itself run on the pod's CPUs (`python3 tools/gpu_bench.py parity
+--n 50 --sane --leaders ...`). Configs: 50 random configs inside the rulings (J1 seat region, the zc-frontier BOUNDS, both
+branches, all four stack orders, q 0.85-1, end_extra 0-6) whose metal stays inside the +-260 mm grid box (a GPU
+pre-pass picks them from 500 draws: the rest have a member at the 400 mm "no clearance" sentinel, are dishonest
+(+100) and cost the CPU minutes on libigl's exact path) + the 4 verified / screened leaders' configs (spine-parked
+k7008 axes at O20 / margin 5, the spine-parked polish, fold-sph3r and raglan-routed bests - one of them does put
+1.57 M points outside the box: the port hands those to the kit's own exact function, `GB_EXACT_OUTSIDE=1`, and matches).
+
+| protocol | configs | max abs diff: gap | reach | follow | in-band 14 | in-band 10 | contact | configs > 1 gap point | GPU s | CPU s (procs) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| same-bench Bench(110,360) (the golden search objective) | 54 | **0.0** | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | **0** | 251.9 (one leader's 1.57 M outside-box points on libigl) | 249.4 (15) |
+| frozen: fit Bench(60,160) -> wear Bench(110,360) (the verifier's protocol) | 54 | **0.0** | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | **0** | 5.7 | 14.8 (15) |
+
+Files: docs/research/golden/gpu_parity_same110.json, gpu_parity_frozen.json (per config: params, GPU and CPU metrics,
+honest, hub_F, CPU seconds).
+
+Also measured: Bench(60,160) component parity on the CPU torch path (closure masks, dense K2 masks and every member's
+fitted underside identical to the kit, 3 configs incl. inv2 = inv3 = 1) and end-to-end on 2 configs with ~0.5 M
+outside-box points each (every metric identical). Parity is exact, not approximate: the port replays the kit's
+arithmetic step for step (float64, the kit's integer march, numpy's quantile rule, float32 K6 dots), so the gap of
+every config on the list is the same number to the last digit. Gap values of the 54: 46.8 ... 250.3 (median 171).
+
+The first frozen-protocol run (20 configs) disagreed on 6: a bug in the parity script's CPU side (it re-fitted on the
+wear bench whenever the FIT-bench gap was >= 200); fixed (= tools/zc_frontier.py cmd_frozen) and re-run: identical.
+
+### Speed (Bench(110,360) same-bench, RTX PRO 4000 Blackwell, `speed --n 576`, metal outside the box on the grid only)
+
+| | evals/s | s per config | notes |
+|---|---|---|---|
+| GPU pod, chunk 96 | **8.46** | 0.118 | per 96 configs: K2 0.39 s, K3 march + profiles 7.1 s, K6 + skin / crown / top distances 3.6 s - the GPU is saturated (chunk 192 scales linearly) |
+| CPU kit, one process (pod EPYC core) | 0.27 | 3.75 median, 6.8 p90 | the parity set (sane configs); the 400 mm-sentinel configs take 1-4 min each on libigl |
+| CPU farm worker (8 vCPU, 4 jobs) | ~1.1 | | 4 processes |
+| GPU pod, frozen protocol (fit 60/160, wear 110/360), chunk 96 | 12.1 | 0.083 | the fit runs on the smaller bench |
+
+Per dollar: the pod ($0.57/h) gives ~53 k evals/$; a farm worker ($0.288/h) ~13 k evals/$ -> ~4x per dollar, ~8x per
+worker slot, and outside the serverless worker quota (the farm's 9 workers would give ~10 evals/s in total).
+
+### First GPU hill-climb (pipeline/gpu_pod/gpu6.sh, same-bench Bench(110,360) = the golden search objective)
+
+`search`: a uniform map of 6144 configs over the whole zero-complexity box (zc-frontier BOUNDS, J1 seat region only,
+both branches, all four stack orders) + the 4 leaders as seeds, then (1 + 16) evolution around the 24 best distinct
+configs (Gaussian steps on the zc SCALE, x1.25 / x0.85 step control, 5 % sigma / inv flips) until the 30 min budget.
+Metal outside the grid box is read on the grid there (`GB_EXACT_OUTSIDE=0`, the configs that have any are counted per
+row in `outside` and are dishonest, +100, anyway). Frontier: docs/research/golden/gpu_climb_gpu6.json (best 64 + history; was gpu_frontier.json).
+
+What it measured (new knowledge): the uniform map of 6144 configs found nothing better than the leaders' basin (best
+45.2 after the map, the spine-parked polish seed scores 46.8 on this objective); the climb then moved the basin to
+**36.66 at 20 min** (honest, hub F 53 / 62 / 70 mm, reach 0.625, follow 0.936, in-band 14 0.874, contact 0.052) - every
+top config is the spine-parked family (J1 az ~90, el ~62, a1 ~39, a2 ~66, J3 wdir ~(88, -22), sigma -1) with **inv3 = 1**
+(link 2 on hub 3's lower plate, member 3 + neck bridging over it). The gap is still reach (27.5 of 36.7 points), as
+docs/research/reach_attribution.md says: every top-64 config sits at reach 0.58-0.64; a 95+ (gap <= 13.75) needs reach
+~0.80+ with contact ~0, which the climb has not approached in this family on this bench.
+
+Pod log: exo-gpu-bench #1 (9qh3ze1zhuu235) 06:11-06:47 UTC, #2 (2odeqs93uh5ua5) 06:47-08:01 UTC, both terminated;
+~1.7 h x $0.57 = ~$1.0. Lesson: the pod's cgroup holds 31 GB, so a 40-process CPU reference pool got OOM-killed workers
+and hung (multiprocessing waits forever) - keep the CPU pool at <= 15 processes on this pod type.
+
+Next (the loop): (1) verify the frontier's top configs on the exact path (`python3 tools/zc_frontier.py frozen
+'<params>' OUT.json` on the farm: fit 110/360 fast -> wear exact, and the verifier protocol 60/160 -> 110/360 exact);
+(2) restart the pod (`tools/gpu_pod.py create`, queue pipeline/gpu_pod/boot.sh then a search job) for longer climbs
+from the inv3 = 1 basin and a 4-DOF / fold-lever family port - reach, not proximity, is what is left to win.
+
+## Exhaustive GPU search of the zero-complexity class (2026-10-16, from 08:10 UTC)
+
+Pods (outside the serverless worker quota, both mounting the farm volume exo-farm-cas, secure cloud EU-RO-1; work
+reaches them through the volume spool as before): **exo-gpu-bench = 1x NVIDIA RTX PRO 4000 Blackwell (24 GB), $0.57/h**
+(spool exo-farm/gpux0) and **exo-gpu-bench2 = 1x NVIDIA RTX 5090 (32 GB), $1.19/h** (spool exo-farm/gpux1; wall clock
+is the constraint). Time box ~2.3 h, ~$4 at most; both are terminated the moment the search ends. The farm queue was
+31 jobs deep (golden-push), so the first pods (08:09, spool only) were terminated after 9 min unused and re-created at
+08:18 carrying their code and jobs in the pod definition (`tools/gpu_pod.py create --payload ... --jobs ...`: an env
+var with the tar.gz of the code, unpacked at start, jobs queued in the pod's own spool) - no farm round trip to start.
+
+Third pod: **exo-gpu-bench3 = 1x NVIDIA RTX 5090 (32 GB), $1.19/h** from 08:30 UTC (spool exo-farm/gpux3; a first one on an
+RTX PRO 4500 Blackwell at $0.72/h ran 08:28-08:30 and was terminated to fix its sweep budget), for an independent ~10^6-config Sobol sweep (pipeline/gpu_pod/xs2.sh, scramble seed 12): the
+first halves (57,652 configs each) took ~1 min for the bounds and ~1 min for the full bench of what passed them.
+
+Method (pipeline/gpu_pod/xs.sh, `tools/gpu_bench.py screen` / `cma`, both pods = 2 halves of one Sobol sequence):
+1. **Sobol map of the whole class** (scrambled Sobol, seed 11, 11 dims = tools/zc_frontier.py cmd_sobol's map: J1 seat
+   az / el area-uniform over the allowed back + acromion-top region only, J3 direction area-uniform over the arm-frame
+   sphere wd 20-175 (both ends of the J3 line), arcs a1 / a2 12-168 (both ends of the J2 line), branch, q 0.8-1, end
+   hold 0-8), on **Bench(110,360)** (the verification pose set).
+2. **Exact lower bounds, no strap needed**: stage A = K1 closure + K2 dense continuity (the full bench's own mask) ->
+   reach / follow upper bounds; stage B = the three O20 hub discs alone: their K3 levels (= the full bench's hub F,
+   which no strap changes; > 140 mm = +100) and the poses where a hub underside / crown / wall / top face is inside the
+   skin at that level (never `good` in the full bench). Bound = 100 (max(0, .90 - reach_ub) + max(0, .95 - follow_ub))
+   (+100 if a hub F > 140): reach / follow can only drop further, in-band and contact only add, so the plain AND the
+   near-touch gap of every config are >= its bound.
+3. **Full bench in bound order** for every config with bound < 45, at both J3 stack orders (inv2 = 0, inv3 = 0 / 1),
+   until the budget: the certificate is the bound of the first config left out (nothing below it was skipped).
+4. **Batched multi-start CMA-ES** (one CMA per basin, lambda 12, all populations in one GPU call, near-touch objective
+   by the CLAUDE.md rule) from the 50 best distinct basins of both screens (+ the CPU optimum 28.85 and the 20-min climb's
+   36.66 as seeds), a converged start (sigma or 15 generations without a 0.05 gain) hands its slot to the next basin.
+5. **Outside judge**: the 10 best distinct configs by GPU plain gap -> `tools/zc_frontier.py frozen` (the zc model's
+   checks + docs/concepts/verify/spine-parked-j2-3r.py top_check, O20, margin 5) on the pods' CPUs: fit Bench(110,360)
+   fast -> wear Bench(110,360) EXACT, and the verifier protocol fit Bench(60,160) fast -> wear Bench(110,360) EXACT.
+
+## Pin-knee port (tools/gpu_bench_knee.py) - pod exo-gpu-pinknee
+
+Why: the leader family (skin-normal-3r-pin-knee, H1; raglan-knee-3r routes) is searched by tools/knee_polish.py on
+the CPU farm, which is capped at 5 serverless workers and had a 37-job queue; the zero-complexity port showed a pod runs
+outside that quota. Pod: **exo-gpu-pinknee = 1x NVIDIA RTX PRO 4500 Blackwell (32 GB), 10 vCPU, secure EU-RO-1, $0.72/h**
+(the RTX PRO 4000 at $0.57/h, A4000, 4000 Ada, 2000 Ada, A5000, L4 and A4500 had no instance with the volume at 08:31 UTC;
+this was the cheapest in stock), spool exo-farm/gpuk (`tools/gpu_pod.py create --name exo-gpu-pinknee --spool gpuk`),
+code through the volume (pipeline/gpu_pod/knee0.sh boots and waits for the code tarball; knee1.sh / knee2.sh run
+knee_run.sh / knee_run2.sh). The pod terminates itself when its search ends (idle self-stop 30 min as the safety net).
+
+### What the port is: the kit, accelerated - not a re-model
+
+Every configuration is built by the CPU kit's own code, unchanged: knee_polish.evaluate (same bench) or
+knee_polish.frozen_on + score_model (frozen) -> the pin-knee model (seats on the rest skin along GH rays for J1 / J2,
+the tilted J3 line b3, the spherical IK and fold margin, the closed-form planar knee, its window [ang_min, 180 - ang_min]
+and fixed branch, 10 fps continuity incl. the knee, the part geometry: O20 hubs with the 12.25 stack, 8 x 3 straps with
+skin-fitted undersides and 60 deg ramps, E strap + E boss (O12) on hub 3's member, knee link, arm pad, pin stack, the
+greedy pose drop, finalize, contact-only walls / crowns / tops / edges) -> the verifier's checks -> the near-touch
+audit. tools/gpu_bench_knee.py replaces only the per-pose loops, with batched torch code on the device:
+
+| replaced | by | arithmetic |
+|---|---|---|
+| S.Model.needed (sphere-traced skin requirement, 16 steps, per-pose break, inside-at-start -> BIG, slab test vs the knee / pad boxes for link 2) | `needed`: every pose at once, a per-pose `done` mask = the CPU break | the model's transforms (numpy, all poses at once), float64 |
+| the run loop (`_run_batched`: every non-adjacent pair >= 1 mm - hubs, straps, E strap, knee link, pad; adjacent E-L2 / knee-hub 3 / knee-E >= 0.15 mm; jam rule; metal + contact-only distances; B.res, cmin, why) | `run` + `collide_all`: all valid poses at once, nearest-neighbour minima by brute force (exact distances, as cKDTree) | same sd_cyl / sd_box formulas |
+| the verifier's extra_checks (independent 3D closure of hub 3 / pin a / pin b / both knee axes, knee vs hub 3's upper half 1 mm, E boss vs hubs 1-2, link 1 (1 mm) and link 2 (0.15 mm)) | `extra_checks`, all taken poses at once | same |
+| Bench.dist (trilinear on the int8 grid) | `GridDev.dist` on the device | concept_bench's corner order, float32 corners x float64 weights; points outside the +-260 mm box -> the kit's exact libigl path |
+| v2 only: the seats' exact distance on the rest skin; S.Design.ik | `ExactCached` (the same libigl AABB + fast-winding-number BVH, built once instead of per call: max diff 0.0 on 6.5k points); `ik_vec` (rotm batched instead of per frame: bitwise equal on 6000 frames x 7 configs) | identical |
+
+Margin is a parameter (`--margin`, CB_FOLD_MARGIN set before the kit loads; 5 = the user's ruling); hubs O20 only;
+raglan-knee-3r's routed links (r1t / r1d / r2t / r2d / rc) are installed on the verifier's pin-knee model by the
+raglan model's own `routed_add_links` (great circle bit for bit when |r1d|, |r2d| < 0.25) in BOTH the port and the CPU
+reference.
+
+### Parity (the gate): port on the pod's GPU vs the CPU kit itself on the pod's CPUs, same configs, same bench
+
+Configs (`--mix --leaders`, seed 0): H1, k4598, P5 (+ raglan-knee-3r's best in v2) + 50 inside the rulings: 40 near the
+three leaders at 0.5 / 1 / 2 / 3 x knee_polish's CMA scale, 10 uniform in the polish bounds (FREE), O20, J1 seat on the
+back / acromion top (anterior component <= 0.20). Metrics compared: the knee_polish objective set - gap (verifier-
+corrected), near-touch gap (metal < 1 mm = contact) and < 2 mm, the model's own gap, reach, follow, in-band 2-14 /
+2-10, contact.
+
+| protocol (margin 5, O20) | configs compared | max abs diff: gap | near-touch gap (< 1 mm) | < 2 mm | model gap | reach | follow | in-band 14 | in-band 10 | contact | configs > 0.5 (gap / near-touch) | GPU s | CPU s (procs) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| same-bench Bench(110,360) (the polish objective) | 53 / 53 | **0.0** | **0.0** | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | **0** / 0 | 363.9 (6 workers) | 411.4 (3) |
+| frozen: fit Bench(60,160) -> wear Bench(110,360) (the round-3 verifier's protocol) | 53 / 53 | **0.0** | **0.0** | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | **0** / 0 | 278.4 (6 workers) | 334.3 (3) |
+
+Port v1 (no CPU-side changes), RTX PRO 4500 pod, 2026-10-16 08:36-08:48 UTC. Every one of the 53 configs agrees to the
+last printed digit on every metric in both protocols (parity is exact, not approximate: the kit's arithmetic is replayed
+step for step; the device's float64 matmuls differ from BLAS by ulps at most, and no threshold sat that close). The set
+spans gap 21.5 ... 375 (29 configs < 100; 13 all-contact at 375 same-bench). Leaders, same-bench (plain / near-touch):
+H1 24.57 / 25.68 (= the rebase track's H1 objective at margin 5, 25.68), k4598 29.97 / 34.23, P5 21.54 / 22.08;
+frozen: H1 27.28 / 30.62, k4598 29.63 / 34.48, P5 24.94 / 31.46 (fast grid on the wear bench; the exact-path claims stay
+with the verifier). Also measured on this box before the pod (CPU torch, Bench(60,160) same-bench): 10 configs incl. the
+three leaders and raglan-knee-3r's routed best (22.69 / 29.82 on both sides) - identical.
+
+Files: docs/research/golden/knee_parity_same110.json, knee_parity_frozen.json (per config: params, GPU and CPU metrics).
+
+
+Port v2 (+ the bit-identical CPU-side speed-ups and raglan routes; 08:48-08:58 UTC, 8 GPU workers; the CPU rows of v1
+reused for the same 53 configs - the CPU side does not depend on the port - and raglan-knee-3r's best run fresh on
+the CPU):
+
+| protocol (margin 5, O20) | configs compared | max abs diff: gap | near-touch | < 2 mm | model gap | reach | follow | in-band 14 | in-band 10 | contact | configs > 0.5 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| same-bench Bench(110,360) | 54 / 54 | **0.0** | **0.0** | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | **0** / 0 |
+| fit Bench(60,160) -> wear Bench(110,360) | 54 / 54 | **0.0** | **0.0** | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | **0** / 0 |
+
+raglan-knee-3r's best (routed link 1: r1t 0.80, r1d -30.6): same-bench 32.31 / near-touch 36.82, frozen 27.88 / 32.97
+(its verified 27.82 at margin 5 is the exact wear path) - identical on both sides.
+Files: knee_parity2_same110.json, knee_parity2_frozen.json.
+
+### Speed
+
+| | s per config, configs with gap < 100 (median / mean) | notes |
+|---|---|---|
+| CPU kit (knee_polish.evaluate / frozen_on), one process on the pod | same-bench 8.18 / 8.69, frozen 10.94 / 12.07 | the parity reference, 2-3 processes beside the GPU workers |
+| port v1 (6 workers, 3 CPU processes beside them) | 4.32 / 5.46, frozen 11.42 / 11.43 | v1 still ran the seats' libigl trees per call (1.7 s / config) and the per-frame IK |
+| **port v2** (8 workers) | **0.86 / 1.99, frozen 0.72 / 0.76** | **9.5x (same-bench) - 15x (frozen) per process**; the rest is the kit's CPU-side Python (greedy drop, finalize, report, audit) |
+| port v2, ONE worker alone on the GPU (`speed --n 18 --workers 1`) | **0.26 median** (v1 alone: 1.40) | ~30x the kit per process; the 18-config wall clock (243 s) is again set by uniform-random configs on the exact path |
+| port v2, 9 workers, frozen protocol (`speed --n 36 --fit 60,160`) | 0.64 median, 0.31 evals/s overall (2 configs close on no fit pose) | same tail |
+| port v2, 9 workers, `speed --n 72` (the parity mix incl. 14 uniform-random configs) | 0.91 median, 0.29 evals/s overall | the wall clock is set by 3 junk configs (uniform draws, gap 375) whose traced samples leave the +-260 mm grid box: the kit's exact libigl path per pose, 1-4 min each on the CPU in BOTH implementations (r42: 263 s port, 257 s kit) |
+
+Where the time goes (cProfile, v2 on CPU torch, Bench(60,160)): the batched distance / pair work is the only large
+item and it moves to the GPU; the seats' rest-skin distances fell from 1.72 s to 0.009 s per config (ExactCached). Measured
+throughput in the polish (4 CMA streams x 2 workers, popsize 16, Bench(110,360)): **12 004 evaluations in 20.4 min =
+9.8 evals/s** on the one pod (GPU 85 % busy, 18.4 of 32 GB) for $0.72/h = ~49 k evals/$, against ~0.4 evals/s for a
+farm worker at $0.288/h (4 kit processes at ~10 s; ~5 k evals/$): **~10x per dollar, ~25x per worker slot**, outside
+the serverless worker quota. Pod cost of this whole task: 08:32-09:30 UTC = ~$0.70. Next lever: batch configurations inside one process (the
+zero-complexity port's design) and port the greedy drop - the CPU-side Python is now the limit, not the GPU.
+
+### GPU FINAL POLISH (pipeline/gpu_pod/knee_run2.sh, gated on the v2 parity)
+
+knee_polish's CMA unchanged - same FREE parameters, bounds and scales, the near-touch objective (the verifier-corrected
+gap with metal < 1 mm as contact; CLAUDE.md "Search on the near-touch gap"), Bench(110,360) fast with the shape fitted
+there, margin 5, O20 - with its pool initializer swapped for the device one (`python3 tools/gpu_bench_knee.py cma
+<knee_polish cma args>`). 4 streams x 2 workers, popsize 16, from 09:10 UTC (budget 2400 s; every stream converged by 09:30): G1 from H1 (sigma 0.5), G2 from
+P5 (0.5), G3 from H1 wide (1.5), G4 from raglan-knee-3r's best with its route fixed (r1t / r1d / r2t / r2d / rc).
+Rows + CMA state: docs/research/golden/knee_cma_G1..G4.json (+ .state.json, resumable by knee_polish's `--state`).
+
+| stream | start (near-touch) | evals | generations | best near-touch | plain gap | reach | follow | in-band 14 | contact | min metal mm | knee angle | tag |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| G1 | H1 (25.68) | 2497 | 156 | **22.29** | 21.19 | 0.6972 | 1.0 | 0.8991 | 0.0082 | 0.2 | [100.6, 146.9] | G1-g124-13 |
+| G2 | P5 (22.08) | 2833 | 177 | **21.89** | 21.34 | 0.7056 | 0.9909 | 0.8973 | 0.0163 | 0.04 | [93.6, 144.3] | G2-g171-14 |
+| G3 | H1 wide (25.68) | 4337 | 271 | **20.81** | 20.26 | 0.7056 | 1.0 | 0.9001 | 0.0082 | 0.46 | [100.7, 153.5] | G3-g115-2 |
+| G4 | raglan best (36.82) | 2337 | 146 | **24.18** | 24.18 | 0.6639 | 1.0 | 0.9 | 0.0057 | 1.01 | [95.4, 149.4] | G4-g106-5 |
+
+Final (09:10-09:30 UTC, every stream stopped on its own: sigma collapsed; the pod terminated itself at 09:30): 12004 evaluations. Best in-sample near-touch gap 20.81 (G3, G3-g115-2) vs H1 25.68 on the same objective (P5 22.08). Its parameters (CANDIDATE, self-measured, fast grid, not verified):
+`{"az1": 98.2985, "el1": 64.7969, "az2": 33.5049, "el2": 44.7883, "wd": 63.9916, "wa": -9.3012, "b3": 0.3252, "lE": 72.1759, "lc": 37.5419, "phiE": -4.4957, "phib": -56.7105, "ang_min": 24.2314, "stk": 5.6834}`
+
+What it measured: from H1 the polish lands at or below P5's in-sample level in minutes (G1 22.29, G3 20.81 - G3, the
+wide stream, in a new corner: lE 72 / lc 37.5 / ang_min 24.2 vs H1's 59.6 / 28.2 / 30.5); from P5 only 0.19 more
+(21.89); the raglan route, fixed, polishes 36.82 -> 24.18 but stays above the great-circle links.
+
+Caveat (P5, refuted out of sample at 08:22 UTC): these are IN-SAMPLE numbers on the polish bench. A candidate replaces
+H1 only after the independent verifier confirms a gain >= 1 gap point on the polish protocol with the EXACT wear path,
+the round-3 protocol, the disjoint held-out bench and the continuity flood fill (docs/concepts/verify/
+skin-normal-3r-pin-knee-polish.py + -continuity.py). Next: a held-out-aware objective on the GPU (fit on Bench(110,360),
+score on a second disjoint fast bench - the port takes any Bench with a grid) so the polish stops paying for in-sample
+gains.
+
+### Exhaustive zero-complexity search: results (2026-10-16, 08:18-09:35 UTC; Bench(110,360), O20, margin 5, J1 back + acromion top)
+
+| step | where | configs / evaluations | best (plain gap, Bench(110,360) fast) | note |
+|---|---|---|---|---|
+| Sobol seed 11 (2 halves), bounds A + B | 5090 + PRO 4000 | 112,100 bounded (61 s / 184 s) | - | 1,124 with bound < 45 |
+| full bench of every config with bound < 45 (inv3 0 / 1) | same | 2,252 evals | **66.38** (Sobol points); seeds 28.85 / 36.66 | certificate cut 45 |
+| Sobol seed 12 (2 halves), bounds A + B | 5090 | 448,378 bounded (199 s / 207 s) | - | 2,698 with bound < 35 |
+| full bench of every config with bound < 35 (inv3 0 / 1) | 5090 | 5,396 evals | **63.63** | certificate cut 35 |
+| CMA-ES from the 45 + 45 best distinct (seed 11) and 40 (seed 12) points, near-touch objective | all three | 108,768 evals, 130 runs | 28.85 (unchanged), near-touch **33.60** (plain 32.44) | two families only (spine-parked narrow window; medial acromion-top wide window) |
+| deep polish: 8 branch x stack variants per basin + IPOP CMA (lambda 24 / 48) on near-touch and plain gap | 5090 + PRO 4000 | 27,016 evals | 28.85 unchanged (3 restarts, lambda 24 / 48: a strict local optimum); from the other basins plain 29.12 / 29.24, near-touch 33.48 (plain 32.90) | |
+| reach / in-band frontier: CMA on best in-band at reach >= R (R 0.62-0.85) | 5090 | 42,816 evals, 81 runs | - | see the frontier table |
+
+Reach / in-band frontier of the class (best in-band14 found at reach >= R; fast, same bench):
+
+| reach >= | 0.62 | 0.65 | 0.68 | 0.70 | 0.72 | 0.75 | 0.80 | 0.85 |
+|---|---|---|---|---|---|---|---|---|
+| in-band14 | 0.890 | 0.828 | 0.833 (contact 0.054) | 0.761 | 0.694 | 0.645 | 0.520 | 0.420 |
+| plain gap there | 28.85 | 34.40 | 33.46 | 40.75 | 48.24 | 50.27 | 49.00 | 57.98 |
+| member that leaves the band | - | link 2 0.72, hub 3 0.70 | link 2 0.72, hub 3 0.69 | link 2 0.52 | link 2 0.49, neck 0.61 | link 2 0.36, neck 0.33 | hub 2 0.00, link 2 0.08 | hub 2 0.00, link 2 0.05 |
+
+**Verification (the outside judge: the CPU kit, `tools/zc_frontier.py frozen` = the zc model's checks + the
+spine-parked verifier's top_check at O20 / margin 5, run on the pods' CPUs; the 10 best distinct configs by GPU gap):**
+
+| config (src) | GPU fast gap / near | CPU fast (fit 110/360) gap / near | **exact frozen wear 110/360** gap / near | verifier protocol fit 60/160 -> exact 110/360 |
+|---|---|---|---|---|
+| CPU CMA optimum, seed (J1 bvec(109.4, 65.9), a1 36.7 / a2 69.1, J3 wdir(85.7, -16.2), inv3 1) | 28.85 / 38.13 | 28.85 / 38.14 | **31.04** / 38.03 | 33.51 / 40.57 |
+| deep polish, plain gap, cmag_p1/basin5 (J1 bvec(106.4, 66.7), a1 35.6 / a2 71.2, J3 wdir(90.2, -14.6), inv3 1) | 29.12 / 39.05 | 29.12 / 39.04 | **32.08** / 39.62 | 32.95 / 41.18 |
+| cma_p1/basin23 (J1 bvec(104.3, 66.8), a1 35.4 / a2 70.7, J3 wdir(90.3, -12.9), inv3 1) | 32.44 / 33.6 | 32.44 / 33.6 | **32.37** / 34.69 | 33.7 / 36.6 |
+| cma_p1/basin0 (J1 bvec(98.5, 64.5), a1 36.2 / a2 68.7, J3 wdir(88.1, -13.5), inv3 1) | 34.62 / 37.51 | 34.62 / 37.51 | **34.52** / 40.31 | 39.8 / 44.19 |
+| cma_p1/basin31 (J1 bvec(101.3, 64.0), a1 40.2 / a2 68.3, J3 wdir(70.5, -15.9), inv3 1) | 34.4 / 36.07 | 34.4 / 36.07 | **34.84** / 37.63 | 39.63 / 42.97 |
+| cma_p1/basin16 (J1 bvec(93.1, 64.4), a1 37.1 / a2 70.8, J3 wdir(68.1, -18.0), inv3 0) | 35.52 / 38.36 | 35.52 / 38.37 | **35.98** / 38.83 | 53.2 / 55.53 |
+| cma_p0/basin17 (J1 bvec(94.4, 62.7), a1 38.2 / a2 69.8, J3 wdir(68.0, -19.5), inv3 1) | 36.49 / 38.77 | 36.49 / 38.77 | **36.36** / 38.64 | 42.92 / 45.77 |
+| 20-min GPU climb best, seed (J1 bvec(92.7, 61.6), a1 40.4 / a2 64.7, J3 wdir(89.1, -22.7), inv3 1) | 36.66 / 48.25 | 36.66 / 48.26 | **37.73** / 48.73 | 43.92 / 53.5 |
+| cma_p1/basin44 (J1 bvec(89.4, 62.9), a1 38.6 / a2 71.7, J3 wdir(63.8, -19.6), inv3 0) | 38.13 / 39.85 | 38.13 / 39.85 | **38.07** / 39.79 | 43.45 / 44.6 |
+| cma_p1/basin32 (J1 bvec(81.6, 61.7), a1 36.6 / a2 43.4, J3 wdir(108.4, -7.9), inv3 1) | 38.01 / 42.22 | 38.01 / 42.21 | **38.61** / 43.41 | 39.2 / 43.41 |
+| cma_p0/basin1 (J1 bvec(103.1, 68.1), a1 34.1 / a2 72.6, J3 wdir(84.4, -14.4), inv3 0) | 38.83 / 39.42 | 38.83 / 39.42 | **38.69** / 41.62 | 36.07 / 40.17 |
+
+The CPU fast numbers equal the GPU's on every config (gap identical, near-touch within 0.01). **Nothing reaches the
+golden 13.75: the class's measured ceiling is 31.04 exact frozen (score 88.7)**, the near-touch optimum holds best
+under the exact path (32.44 fast -> 32.37 exact). Pods: exo-gpu-bench (RTX PRO 4000, $0.57/h) 08:18-09:35,
+exo-gpu-bench2 (RTX 5090, $1.19/h) 08:18-09:19, exo-gpu-bench3 (RTX 5090, $1.19/h) 08:30-09:14, plus the first
+spool-only pair 08:09-08:18 and a 2-min RTX PRO 4500; total 3.36 pod-hours, **~$3.10**. All terminated.
+
+Files: docs/research/golden/gpu_frontier.json (every screen's summary + certificate + best rows, all 154 CMA / polish /
+frontier basins with start, best (near-touch or plain objective) and best plain gap seen, the 11 verified configs with
+their CPU fast, exact frozen and fit-60 numbers and the pose attribution), docs/research/golden/xs_ceiling.json (the
+stage A / B counts behind the ceiling: which hub floats where the fold would allow 95). Raw outputs (Sobol bounds of all
+560,478 configs as .npz, every full-bench row, CMA logs, the CPU-kit verify JSONs): farm volume exo-farm-cas,
+exo-farm/gpu/out/xs, xs2, xs3, xs4, xs5 (`python3 tools/gpu_pod.py fetch xs --outdir DIR`).
+Reproduce: `python3 tools/gpu_pod.py create --gpu "NVIDIA GeForce RTX 5090" --name exo-gpu-bench --spool gpux0 --payload
+<the files in pipeline/gpu_pod/xs.sh's header> --jobs pipeline/gpu_pod/boot.sh,pipeline/gpu_pod/xs_p0.sh` (jobs
+pipeline/gpu_pod/xs*.sh; merge with pipeline/gpu_pod/xs_merge.py, ceiling with pipeline/gpu_pod/xs_ceiling.py).
+
+## Verification of the GPU zero-complexity claim (independent skeptic, 2026-10-16 09:37-10:20 UTC)
+
+Harness: `docs/concepts/verify/zc-frontier-3r-gpu-skeptic.py` (not the claimant's `tools/zc_frontier.py` or
+`tools/gpu_bench.py parity`): it drives the kit model (zc-frontier-3r = the spine-parked model checks + the
+spine-parked verifier's top_check: 1 mm radial K6, every member's top face, near-touch over all faces, hub crowns /
+walls, hub_F <= 140, closure residual), builds the benches itself (fit bench = fast grid, wear bench = EXACT libigl,
+CB_EXACT forced on the wear bench only), re-derives gap / near-touch from their components with `concept_bench.gap_of`,
+re-counts reach / follow / overhead from the per-pose residuals and checks the rulings on the config itself.
+
+**(1) Parity on 20 NEW configs** (seed 20261016, none from the claimant's parity sets: 10 perturbations of the claimed
+basin at 1.5x the zc step scale over all four stack orders and both branches, 10 uniform draws over the zc box inside the
+J1 seat region - all 10 uniform ones put metal outside the +-260 mm grid box, 40 k - 0.73 M points each, which the port
+hands to the kit's exact function). The port's own math re-run on this box's CPU (`tools/gpu_bench.py eval --device
+cpu --bench 60,160`, torch 2.14 CPU) against the kit model on the same bench (Bench(60,160) fast, the local cache;
+the Bench(110,360) grid is only on the farm volume):
+
+| configs | max abs diff: gap | reach | follow | in-band 14 | in-band 10 | contact | configs > 1 gap point |
+|---|---|---|---|---|---|---|---|
+| 20 (10 honest, 10 dishonest) | **0.01** (rounding, 3 configs) | 0.0001 | 0.0 | 0.0 | 0.0 | 0.0 | **0** |
+
+One definitional difference found: on a DISHONEST config (+100) the port also adds the +100 to `near`; the kit model's
+`near` carries no penalty. On honest configs near-touch agrees within 0.01 (the 10 basin configs). It cannot change
+any honest ranking (the port's near-touch objective just pushes dishonest configs further away). Per config:
+docs/research/golden/skeptic/port_parity_cpu60.json. A second parity set, 20 GPU-scored rows sampled from
+gpu_frontier.json (basins + screens, seed 1610, metal inside the box) re-run on the kit FAST on Bench(110,360), was
+queued on the farm (`kitparity`, docs/research/golden/skeptic/kitparity_frontier110.json) - see below for whether it returned.
+
+**(2) The best claim re-measured** - J1 bvec(109.3565, 65.94), a1 36.7226 / a2 69.0575, J3 wdir(85.7423, -16.1921),
+sigma -1, inv2 0, inv3 1, q 0.978, end_extra 1.784:
+
+| protocol | gap | near-touch | reach | follow | in-band 14 | in-band 10 | contact | claim | diff |
+|---|---|---|---|---|---|---|---|---|---|
+| verifier protocol: fit Bench(60,160) fast -> frozen -> worn Bench(110,360) EXACT (this box, 892 s) | **33.51** | 40.57 | 0.6167 | 0.9364 | 0.8917 | 0.4302 | 0.0299 | 33.51 / 40.57 | **0.00** |
+| claim protocol: fit Bench(110,360) fast -> worn Bench(110,360) EXACT | not re-measured in the time box | | | | | | | 31.04 / 38.03 | - |
+
+The fit-110 protocol needs the Bench(110,360) fast grid, which lives only on the farm volume; the farm job (`frozen ... --fits fit110,fit60`) sat in an 11-deep exo-cpu1 queue for the whole time box. Its output will land in docs/research/golden/skeptic/farm_frozen_v00.json. The wear step is the same code path that reproduced 33.51 to the digit, so only the fit bench differs.
+
+Checks on the 33.51 wear (all pass): honest, audit empty; gap re-derived from its components 33.51, near-touch 40.57;
+reach / follow re-counted from the per-pose residuals 0.6167 / 0.9364; hub_F 51.0 / 58.37 / 71.0 mm (<= 140); hub
+crowns 0 contact poses; member top faces: 1 contact pose (hub 1), min metal over all faces 0.02 mm; 10 taken poses
+with metal under 1 mm (these are what the near-touch gap charges); closure residual 0.0 deg, min fold margin on the taken
+poses 5.0 deg; overhead (elevation >= 140): 5 of 28 workspace poses taken (reach 0.179), overhead clip follow 0.80,
+in-band 0.96 there; per member in-band hub1 0.98, hub2 1.00, hub3 0.81, link1 0.95, link2 0.88, neck 0.82. Lost poses
+(attribution): workspace 138 of 360 = 44 folded + 77 stretched + 9 parts + 8 contact; across-body 49 of 68 lost to the
+stretched fold. Red-team number (not scored): the bench's in-band counts the taken CLIP frames only; over every taken
+pose (workspace too) in-band 14 is 0.853 - the class sits ~4 points worse in band on the workspace poses it reaches.
+
+Rulings on the config: J1 seat allowed (anterior component 0.135 <= 0.20: acromion top / back), O20 at all three joints
+(rad 10, kit HUB_R 10 / STACK 3.15 / CROWN 12.25), fold margin 5, 12 x 3 straps, K7 neck, nothing clamped by the
+model's snap; zero passive joints (complexity 0). No ruling broken.
+
+**(3) Pods**: RunPod account listing at 09:41 UTC: no pod named exo-gpu* exists (all terminated, not merely stopped);
+the only pods are the user's crl-* (all EXITED since 2026-10-13, not touched). Farm note: exo-cpu1 queue 11 deep at
+10:02 UTC (4 of 9 workers running) and the account **balance is $10.85 at $3.57/h spend** - about 3 h of runway.
+
+Verdict: **not refuted** - the claim reproduces to the digit on the verifier protocol (33.51, score 87.8), parity holds
+(0 of 20 new configs differ by > 1 gap point), no ruling is broken. The zero-complexity class stays ~19 points short of the
+golden 13.75 (score 95).

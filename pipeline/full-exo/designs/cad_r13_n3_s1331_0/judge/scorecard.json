@@ -1,0 +1,122 @@
+[
+ {
+  "id": "R1",
+  "name": "Proximity: covered skin 2-10 mm from the metal while following",
+  "value": 0.3483048249723056,
+  "target": ">= 0.9",
+  "status": "FAIL",
+  "judge": "full-exo/score_design.py (exact posed skin, 30 fps clips)"
+ },
+ {
+  "id": "R2",
+  "name": "No part enters the body, any frame of any clip",
+  "value": 21.88,
+  "target": "<= 0.5 mm",
+  "status": "FAIL",
+  "judge": "judge/body_contact.py (exact signed distance)"
+ },
+ {
+  "id": "R3",
+  "name": "Follows the arm (frames tracked, not held at a limit)",
+  "value": 0.6095321543201572,
+  "target": ">= 0.95",
+  "status": "FAIL",
+  "judge": "full-exo/score_design.py"
+ },
+ {
+  "id": "R4",
+  "name": "Overhead works (Raise overhead clip score)",
+  "value": 0.20530217762806965,
+  "target": ">= 0.8",
+  "status": "FAIL",
+  "judge": "full-exo/score_design.py"
+ },
+ {
+  "id": "R5",
+  "name": "At most 4 DOF (3R + sliding cuff, or 4R)",
+  "value": 4,
+  "target": "<= 4",
+  "status": "PASS",
+  "judge": "design.json"
+ },
+ {
+  "id": "R6",
+  "name": "No interference between parts that move relative to each other",
+  "value": 0.55,
+  "target": "<= 0.15 mm",
+  "status": "FAIL",
+  "judge": "judge/part_contact.py (geometry only)"
+ },
+ {
+  "id": "R7",
+  "name": "Every custom part is one valid closed solid",
+  "value": true,
+  "target": "== True",
+  "status": "PASS",
+  "judge": "judge/part_validity.py (OCC BRepCheck on the exported STEP)"
+ },
+ {
+  "id": "R8",
+  "name": "Custom-part mass budget (proposed)",
+  "value": 436.1,
+  "target": "<= 300 g",
+  "status": "FAIL",
+  "judge": "parts_full.json (mesh volume x density)"
+ },
+ {
+  "id": "R9",
+  "name": "Strength: SF >= 1.5 at 25 N.m worst direction; deflection and fatigue bounded",
+  "value": null,
+  "target": "",
+  "status": "UNVERIFIED",
+  "judge": "independent FEA (CalculiX) - only the in-house hex8 study exists (pipeline/conformal/thin_study)"
+ },
+ {
+  "id": "R10",
+  "name": "Base mounts to a thorax-fixed back plate; shoulder-centre misalignment bounded",
+  "value": null,
+  "target": "",
+  "status": "OPEN",
+  "judge": "OpenSim (Seth 2016 thoracoscapular model): today the base is modelled scapula-fixed"
+ },
+ {
+  "id": "R11",
+  "name": "Interface pressure under ISO/TS 15066 body-region limits",
+  "value": null,
+  "target": "",
+  "status": "NOT MEASURED",
+  "judge": "coupled human-exo contact sim (MuJoCo/Drake) then pressure film / FSRs on a prototype"
+ },
+ {
+  "id": "R12",
+  "name": "CAD standard: G2 surfaces, flat seats under every seat, no visible screws or seams",
+  "value": null,
+  "target": "",
+  "status": "PARTIAL",
+  "judge": "zebra / curvature check (full-exo/parts.html) + user review"
+ },
+ {
+  "id": "R13",
+  "name": "Manufacturable",
+  "value": null,
+  "target": "",
+  "status": "NOT DONE",
+  "judge": "supplier DFM review + quote (CNC Ti / 7075, SLM AlSi10Mg)"
+ },
+ {
+  "id": "R14",
+  "name": "Generalises: holds on motions and body shapes never used to design it",
+  "value": null,
+  "target": "",
+  "status": "NO DATA",
+  "judge": "held-out OpenCap / AMASS clips and SMPL-X bodies (data/raw)"
+ },
+ {
+  "id": "R15",
+  "name": "Works on real bodies",
+  "value": null,
+  "target": "",
+  "status": "NOT DONE",
+  "judge": "printed prototype on the user + one very different body: OpenCap reach vs bare arm, zero skin-contact on FSR strips"
+ }
+]

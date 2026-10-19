@@ -1,0 +1,128 @@
+{
+ "A": "freek-oracle-route-knuckle-4r (cell B q3max 86, CONNECTED set = the claim)",
+ "B": "conecut-knee-knuckle-3r",
+ "note": "diff = gap A - gap B (negative: A better); tools/alignment_paired.compare_sets on the auditor adapter dumps (_conn_perpose) vs the lead verifier dumps (_perpose)",
+ "bench": {
+  "gap_A": 17.35,
+  "gap_B": 18.29,
+  "diff": -0.93,
+  "split": {
+   "reach": -3.89,
+   "follow": 0.0,
+   "inband": 0.23,
+   "contact": 2.72
+  },
+  "discordant": {
+   "ws_taken_A_only": 24,
+   "ws_taken_B_only": 10,
+   "contact_A_only": 13,
+   "contact_B_only": 2,
+   "contact_both": 2
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -4.08,
+    4.09
+   ],
+   "sd": 2.49,
+   "p_A_better": 0.563
+  }
+ },
+ "bench_family_margin_consistent": {
+  "refused": [
+   12,
+   47,
+   49,
+   52
+  ],
+  "gap": {
+   "gap": 20.68,
+   "reach": 0.7667,
+   "follow": 0.9182,
+   "inband14": 0.8966,
+   "contact": 0.0383,
+   "n_ws": 360,
+   "n_clip": 110,
+   "ws_taken": 276,
+   "contact_poses": 15
+  },
+  "vs_lead": 2.39
+ },
+ "held": {
+  "gap_A": 22.66,
+  "gap_B": 22.38,
+  "diff": 0.29,
+  "split": {
+   "reach": -3.57,
+   "follow": 0.0,
+   "inband": 0.42,
+   "contact": 3.43
+  },
+  "discordant": {
+   "ws_taken_A_only": 63,
+   "ws_taken_B_only": 29,
+   "contact_A_only": 37,
+   "contact_B_only": 4,
+   "contact_both": 10
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -1.96,
+    2.99
+   ],
+   "sd": 1.5,
+   "p_A_better": 0.404
+  }
+ },
+ "held_family_margin_consistent": {
+  "refused": [
+   11,
+   12,
+   21,
+   86,
+   91,
+   99
+  ],
+  "gap": {
+   "gap": 24.56,
+   "reach": 0.7279,
+   "follow": 0.9307,
+   "inband14": 0.8964,
+   "contact": 0.0506,
+   "n_ws": 952,
+   "n_clip": 202,
+   "ws_taken": 693,
+   "contact_poses": 47
+  },
+  "vs_lead": 2.19
+ },
+ "pooled_bench_plus_held": {
+  "gap_A": 21.16,
+  "gap_B": 21.24,
+  "diff": -0.08,
+  "split": {
+   "reach": -3.66,
+   "follow": 0.0,
+   "inband": 0.36,
+   "contact": 3.22
+  },
+  "discordant": {
+   "ws_taken_A_only": 87,
+   "ws_taken_B_only": 39,
+   "contact_A_only": 50,
+   "contact_B_only": 6,
+   "contact_both": 12
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -1.91,
+    2.18
+   ],
+   "sd": 1.25,
+   "p_A_better": 0.508
+  }
+ }
+}

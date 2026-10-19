@@ -1,0 +1,84 @@
+{
+ "overall": 0.23743153505183565,
+ "follow": 0.8868457981365264,
+ "in_band": 0.26772583864154925,
+ "clips": [
+  {
+   "name": "Raise overhead",
+   "frames": 181,
+   "score": 0.1607885661895543,
+   "follow": 0.5573770491803278,
+   "in_band_when_following": 0.2884736040459651,
+   "median_gap": 14.024253848981866,
+   "min_gap": 0.9060056230598189
+  },
+  {
+   "name": "Drink from a cup",
+   "frames": 178,
+   "score": 0.20368467788474623,
+   "follow": 1.0,
+   "in_band_when_following": 0.20368467788474623,
+   "median_gap": 14.337126974964868,
+   "min_gap": 2.471873120364025
+  },
+  {
+   "name": "Comb hair",
+   "frames": 202,
+   "score": 0.26827443116364547,
+   "follow": 1.0,
+   "in_band_when_following": 0.26827443116364547,
+   "median_gap": 12.838340127426335,
+   "min_gap": 2.098123818711318
+  },
+  {
+   "name": "Reach a high shelf",
+   "frames": 157,
+   "score": 0.31388242376679004,
+   "follow": 1.0,
+   "in_band_when_following": 0.31388242376679004,
+   "median_gap": 12.217975205320275,
+   "min_gap": 2.2192919873824675
+  },
+  {
+   "name": "Wash opposite shoulder",
+   "frames": 193,
+   "score": 0.12989033327499175,
+   "follow": 1.0,
+   "in_band_when_following": 0.12989033327499175,
+   "median_gap": 17.764022627172224,
+   "min_gap": 2.5689179732146257
+  },
+  {
+   "name": "Reach back pocket",
+   "frames": 145,
+   "score": 0.4122751028516051,
+   "follow": 1.0,
+   "in_band_when_following": 0.4122751028516051,
+   "median_gap": 10.571534289183809,
+   "min_gap": 1.2903643201490822
+  },
+  {
+   "name": "Wave",
+   "frames": 172,
+   "score": 0.19485269361487798,
+   "follow": 0.5862068965517241,
+   "in_band_when_following": 0.3323957714606742,
+   "median_gap": 11.973308146211155,
+   "min_gap": 1.5129188955864687
+  },
+  {
+   "name": "Walking arm swing",
+   "frames": 109,
+   "score": 0.2775504225390141,
+   "follow": 1.0,
+   "in_band_when_following": 0.2775504225390141,
+   "median_gap": 11.55945755195397,
+   "min_gap": 2.692534069971314
+  }
+ ],
+ "band": [
+  2.0,
+  10.0
+ ],
+ "step": 3
+}

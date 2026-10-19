@@ -1,0 +1,152 @@
+[
+ {
+  "k": "beta",
+  "d": -0.25,
+  "dK_lim": 50.0,
+  "why": "pressure_horn",
+  "pa_crank": 31.4,
+  "pa_horn": 34.4,
+  "near1": 14.25,
+  "honest": true
+ },
+ {
+  "k": "beta",
+  "d": -0.5,
+  "dK_lim": 50.3,
+  "why": "pressure_horn",
+  "pa_crank": 33.6,
+  "pa_horn": 34.3,
+  "near1": 14.25,
+  "honest": true
+ },
+ {
+  "k": "beta",
+  "d": -0.75,
+  "dK_lim": 50.5,
+  "why": "pressure_horn",
+  "pa_crank": 36.0,
+  "pa_horn": 34.1,
+  "near1": 14.26,
+  "honest": true
+ },
+ {
+  "k": "beta",
+  "d": 0.25,
+  "dK_lim": 49.5,
+  "why": "pressure_horn",
+  "pa_crank": 27.8,
+  "pa_horn": 34.7,
+  "near1": 14.25,
+  "honest": true
+ },
+ {
+  "k": "beta",
+  "d": 0.5,
+  "dK_lim": 49.2,
+  "why": "pressure_horn",
+  "pa_crank": 26.3,
+  "pa_horn": 34.8,
+  "near1": 14.25,
+  "honest": true
+ },
+ {
+  "k": "r_c",
+  "d": -0.05,
+  "dK_lim": 50.0,
+  "why": "pressure_horn",
+  "pa_crank": 31.8,
+  "pa_horn": 34.4,
+  "near1": 14.26,
+  "honest": true
+ },
+ {
+  "k": "r_c",
+  "d": -0.1,
+  "dK_lim": 50.3,
+  "why": "pressure_horn",
+  "pa_crank": 34.1,
+  "pa_horn": 34.3,
+  "near1": 14.27,
+  "honest": true
+ },
+ {
+  "k": "r_c",
+  "d": -0.15,
+  "dK_lim": 50.3,
+  "why": "pressure_horn",
+  "pa_crank": 36.2,
+  "pa_horn": 34.1,
+  "near1": 14.37,
+  "honest": true
+ },
+ {
+  "k": "r_c",
+  "d": -0.2,
+  "dK_lim": 0.0,
+  "why": "pressure_crank",
+  "pa_crank": 38.2,
+  "pa_horn": 32.4,
+  "near1": 86.12,
+  "honest": false
+ },
+ {
+  "k": "r_c",
+  "d": 0.1,
+  "dK_lim": 49.2,
+  "why": "pressure_horn",
+  "pa_crank": 24.5,
+  "pa_horn": 34.8,
+  "near1": 14.24,
+  "honest": true
+ },
+ {
+  "k": "g",
+  "d": -0.01,
+  "dK_lim": 50.3,
+  "why": "pressure_horn",
+  "pa_crank": 34.2,
+  "pa_horn": 34.2,
+  "near1": 14.24,
+  "honest": true
+ },
+ {
+  "k": "g",
+  "d": -0.02,
+  "dK_lim": 0.0,
+  "why": "pressure_crank",
+  "pa_crank": 38.5,
+  "pa_horn": 32.8,
+  "near1": 85.97,
+  "honest": false
+ },
+ {
+  "k": "g",
+  "d": -0.03,
+  "dK_lim": 0.0,
+  "why": "pressure_crank",
+  "pa_crank": 42.4,
+  "pa_horn": 36.9,
+  "near1": 85.98,
+  "honest": false
+ },
+ {
+  "k": "g",
+  "d": -0.04,
+  "dK_lim": 0.0,
+  "why": "pressure_crank",
+  "pa_crank": 45.9,
+  "pa_horn": 40.5,
+  "near1": 85.98,
+  "honest": false
+ },
+ {
+  "k": "g",
+  "d": 0.02,
+  "dK_lim": 48.5,
+  "why": "pressure_horn",
+  "pa_crank": 18.7,
+  "pa_horn": 35.2,
+  "near1": 14.24,
+  "honest": true
+ }
+]

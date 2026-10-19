@@ -1,0 +1,1826 @@
+{
+ "id": "user_desmo_conecut",
+ "source": "docs/concepts/desmo-conecut-knuckle-3r.md (the verified config: docs/concepts/rows/desmo-conecut-knuckle-3r.json best_params on the claim model's PARAMS (SN_CELL=lead) = docs/concepts/verify/desmo-conecut-knuckle-3r.py BEST, ang_min 25.2189, nose_r 0.75, mu 0.15), fit on Bench(60,160) fast at fold margin 5.0 = the shape the verifier wore frozen on Bench(110,360) exact (v_gap 18.49, score 93.28, envelope-corrected 18.44; held out 23.45; min fold margin th 5.006)",
+ "params": {
+  "r_c": 16.176,
+  "beta": -177.169,
+  "nose_r2": 0.75,
+  "wall2": 0.9,
+  "kslot": 46.5,
+  "boss_r": 2.5,
+  "glev": -1.0,
+  "blend": 10.0,
+  "a_s": 9.529,
+  "psi": 149.71,
+  "mu": 0.15,
+  "stage2": "B",
+  "c_slot2": 0.01,
+  "s1_read": "built",
+  "s2_gate": 1,
+  "stk": 6.0,
+  "lE": 97.1443,
+  "lc": 24.3508,
+  "phiE": 0.7526,
+  "phib": -91.8041,
+  "J3MIN": -111.9036,
+  "J3MAX": 122.7417,
+  "ang_min": 25.2189
+ },
+ "n_joints": 4,
+ "sliding_cuff": false,
+ "dof": 3,
+ "passive": {
+  "count": 2,
+  "translations": 0,
+  "rotations": 2,
+  "outside_dof_count": true,
+  "sensed": 0,
+  "kind": "flat two-pin knee closing the loop at the cuff (pins a, b parallel to J3; NO encoders - pose from the 3 hub encoders, user 2026-10-17); set by loop closure. K (4th revolute) is NOT a DOF: slaved to q2 by the roller-flank drive past the onset, spring-held on stop A below it; the bell crank is set by the law phi = |dK| / g",
+  "components": [
+   {
+    "pin": "a",
+    "between": "member 3 (E boss) / knee link",
+    "part": "MR63ZZ pair (3x6x2.5) in an O9 x 5.5 knee-link boss (J6 housing, 0.5 shoulder) on an ISO 8734 O3 m6 440C pin pressed H7/m6 in the E boss; DIN 6799 RS 2.3 e-clip over a 0.1 shim",
+    "stack_mm": 9.75,
+    "model_stack_mm": 6.0,
+    "plates_mm": [
+     2.75,
+     2.75
+    ]
+   },
+   {
+    "pin": "b",
+    "between": "knee link / arm pad (cuff)",
+    "part": "MR63ZZ pair (as pin a), pin pressed H7/m6 in the arm pad",
+    "stack_mm": 9.75,
+    "model_stack_mm": 6.0,
+    "plates_mm": [
+     2.75,
+     2.75
+    ]
+   }
+  ],
+  "knee_stop": {
+   "window_deg": [
+    25.2189,
+    154.7811
+   ],
+   "part": "tooth on the knee link vs the E strap's side (physical stop at 180 - ang_min; ang_min side never reached, the fold side of the knee)"
+  }
+ },
+ "joints": [
+  {
+   "joint": "J1",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "K",
+   "part": "O20 v5 hub, MR117-2RS pair, cap 12.25 mm (clock spring: holds stop A, force-closes both rolling pairs); stops A / B = an opposed pair of O3 dowels in two 62.8-deg arc slots; slaved (no encoder)",
+   "axis_offset_mm": 0.0,
+   "passive": false,
+   "slaved": true,
+   "sensed": false
+  },
+  {
+   "joint": "J2",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder; drive lobe on its rotor; q2 stops = O3 dowel in a 116.4-deg arc slot (folded stop q2lo, stop B at the drive's range)",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "J3",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair, encoder",
+   "axis_offset_mm": 13.84
+  }
+ ],
+ "drive": {
+  "kind": "slipper-nose: hub-2 rim lobe -> bell crank on link 1b (MR63ZZ pair on an O3 pin; follower on the short arm s_arm, bent long arm to r_c about hub K) -> pressed ISO 8734 O2.5 m6 440C dowel, nose ground O2.368 -> SLIDES (mu 0.087, a-C:H DLC, greased) on the conjugate spherical flank wire-EDM'd into link 1a's lateral boss (5-axis / tilting-head wire-EDM); one clock spring on K force-closes both rolling pairs; no rod, no ball links",
+  "components": [
+   "MR63ZZ 3x6x2.5 x 2 (crank pivot)",
+   "ISO 8734 O3 m6 pin pressed H7/m6 in link 1b + DIN 6799 RS 2.3",
+   "ISO 8734 O2.5 x 6 m6 440C nose dowel (nose ground O2.368 g5)",
+   "follower on the short arm (L2)"
+  ],
+  "drive_cell": "desmo cell B",
+  "ring": {
+   "level_from_hub2_face_mm": [
+    0.111,
+    1.611,
+    3.65
+   ],
+   "groove_mid_from_hub2_face_mm": 0.861,
+   "pitch_mm": [
+    7.214,
+    9.4
+   ],
+   "inner_wall_r_mm": 6.3,
+   "groove_r_mm": [
+    6.455,
+    10.16
+   ],
+   "r_out_mm": 10.96,
+   "past_O20_mm": 0.96,
+   "sector_deg": 116.66,
+   "model_sector_deg": 99.94,
+   "end_margins_deg": [
+    10.05,
+    12.67
+   ],
+   "groove_az_deg": 93.83,
+   "az_monotone": false,
+   "drift_mm": 0.286,
+   "azimuth_deg": [
+    -10.05,
+    106.61
+   ],
+   "note": "the groove's mid-plane sits at the crank pivot's level + 3.15 + glev along u2 (the model's rule); the pivot is 1.29 mm below hub 2's face, so the groove layer lands at F+0.11..F+1.61: INSIDE link 1b's J2 lower-plate layer (F+0..F+3, O20) - the stack conflict this L1 reports (R6)"
+  },
+  "arm": {
+   "root_mm": 4.0,
+   "stations": 27,
+   "raised_root_rows": 4,
+   "lifted_over_strap_mm": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "level_root_mm": 66.84,
+   "level_tip_mm": 63.16,
+   "arc_rows_kept": 17,
+   "arc_rows_model": 18,
+   "arm_to_slot_path_mm": 1.06,
+   "ends_at_beta_deg": -172.777,
+   "note": "the arc ends where its section clears the slot by >= 0.3 mm; the tip plate joins it"
+  },
+  "plate": {
+   "slot_len_mm": 3.722,
+   "slot_w_mm": 1.52,
+   "plate_w_mm": 3.32,
+   "plate_len_mm": 7.042,
+   "radial_mm": [
+    63.164,
+    65.664
+   ]
+  },
+  "stage1": {
+   "arm_len_mm": 6.8,
+   "arm_level_from_hub2_face_mm": [
+    -1.825,
+    -0.325
+   ],
+   "a_s": 9.299,
+   "pin_from_hub2_face_mm": [
+    -1.825,
+    1.225
+   ],
+   "axial_drift_mm": 0.286,
+   "pin_into_groove_mm": 1.11,
+   "pin_into_groove_at_worst_drift_mm": 0.83,
+   "crank_axis_at_arm_u2_level_mm": -1.222
+  },
+  "boss": {
+   "boss_d_mm": 5.0,
+   "boss_radial_mm": [
+    60.014,
+    63.014
+   ],
+   "boss_rK_mm": 16.176,
+   "boss_to_hubK_rim_mm": 3.676,
+   "root_w_mm": 4.0,
+   "nose_radial_from_C0_mm": [
+    -1.0,
+    4.0
+   ],
+   "nose_d_mm": 1.5
+  },
+  "boss_level_mm": 66.839,
+  "seat_C0_mm": [
+   -13.653,
+   59.209,
+   -9.585
+  ],
+  "seat_R0_mm": 61.514,
+  "r_c": 16.176,
+  "beta_deg": -177.169,
+  "g": 2.3934,
+  "sig": 1.0,
+  "dK_lim_deg": 46.5,
+  "mu": 0.15,
+  "cam": {
+   "dK_lim": 46.5,
+   "why_lim": "slot-end",
+   "pa_crank_max_taken": 14.6,
+   "pa_horn_max_taken": 24.6,
+   "pa_eff_horn": 33.1,
+   "pa_eff_crank": 23.1,
+   "friction_deg": 8.53,
+   "pa_kin_max": 34.47
+  },
+  "desmo": {
+   "calib": {
+    "s_th": -0.4644,
+    "inv_kK": 0.4644,
+    "q_on_deg": 7.28,
+    "dwell_deg": [
+     12.6,
+     90.9
+    ],
+    "fit_rms_deg": 0.0,
+    "n": 61
+   },
+   "stage1": {
+    "a_s": 9.529,
+    "psi": 149.7,
+    "pitch": [
+     9.4,
+     9.4
+    ],
+    "r_out": 10.96,
+    "pa_pin_max": 33.74,
+    "pa_cap_max": 35.05,
+    "pa_gate": 34.47,
+    "drift_max": 0.286,
+    "tilt_max_deg": 4.76,
+    "crown_needed": true,
+    "rc_min": 1.01,
+    "rc_onset": 1.01,
+    "ridge_mm": 0.247,
+    "blend_K_lead_deg": 2.614,
+    "arm_from_axis": 9.53,
+    "n_ring_rigid": 19,
+    "ring_az_deg": 99.9,
+    "lim_by_gate": {
+     "pitch": 52.5,
+     "pa_pin": 47.5,
+     "pa_cap": 0.0,
+     "drift": null,
+     "radius": 0.25
+    }
+   },
+   "stage1_built": {
+    "read": "built",
+    "half_blend_K_deg": 10.767,
+    "pin_max_moving": 62.07,
+    "cap_max_outside_blend": 54.17,
+    "cap_inside_blend": [
+     28.35,
+     89.91
+    ],
+    "pin_first_fail_K": 47.504,
+    "cap_first_fail_K": 58.529,
+    "note": "cap side gated for x >= half-blend (outside the blend); inside it the cap side is the dwell lock (reported) - a re-reading of desmo-slipper's linear-law gate, stated for the auditor"
+   },
+   "stage2B": {
+    "nose_r": 0.75,
+    "c_slot": 0.01,
+    "wall": 0.9,
+    "boss_r": 2.5,
+    "seat_rK": 16.18,
+    "seat_R": 61.51,
+    "boss_hubK_margin": 3.68,
+    "slot_len_mm": 3.72,
+    "plate_len_mm": 7.04,
+    "plate_w_mm": 3.32,
+    "rel_speed_rest_mm_per_rad": 0.525,
+    "pa_horn_max": 24.73,
+    "pa_crank_max": 14.56,
+    "dK_lim_pa_by_mu": {
+     "0.087": 64.5,
+     "0.120": 64.5,
+     "0.135": 64.5,
+     "0.150": 64.5,
+     "0.200": 61.0
+    },
+    "clear_plate_hubK": 1.23,
+    "clear_plate_hub2": 41.74,
+    "clear_lowarm_boss": 19.93,
+    "n_plate_rigid": 8,
+    "n_boss_rigid": 27
+   },
+   "slop": {
+    "slotB": {
+     "slop_max": 0.04,
+     "slop_at": [
+      1.0,
+      -1
+     ],
+     "pocket_pa_max_horn": 25.5,
+     "pocket_pa_max_crank": 32.0,
+     "pocket_pa_gate": 34.47,
+     "pocket_pa_fail_K0": null,
+     "pole_rows": [
+      [
+       0.0,
+       1,
+       0.0375,
+       15.8,
+       14.0
+      ],
+      [
+       0.0,
+       -1,
+       0.0375,
+       0.2,
+       2.0
+      ],
+      [
+       0.5,
+       1,
+       0.0375,
+       14.1,
+       12.0
+      ],
+      [
+       0.5,
+       -1,
+       0.0375,
+       12.1,
+       10.0
+      ],
+      [
+       1.0,
+       1,
+       0.0375,
+       12.5,
+       10.0
+      ],
+      [
+       1.0,
+       -1,
+       0.04,
+       10.4,
+       8.0
+      ],
+      [
+       1.5,
+       1,
+       0.0375,
+       10.8,
+       8.0
+      ],
+      [
+       1.5,
+       -1,
+       0.04,
+       10.7,
+       8.0
+      ],
+      [
+       2.0,
+       1,
+       0.0375,
+       11.1,
+       8.0
+      ],
+      [
+       2.0,
+       -1,
+       0.04,
+       11.0,
+       8.0
+      ],
+      [
+       2.5,
+       1,
+       0.0375,
+       11.4,
+       8.0
+      ],
+      [
+       2.5,
+       -1,
+       0.04,
+       11.4,
+       8.0
+      ],
+      [
+       3.0,
+       1,
+       0.0375,
+       9.7,
+       6.0
+      ],
+      [
+       3.0,
+       -1,
+       0.04,
+       11.7,
+       8.0
+      ],
+      [
+       3.5,
+       1,
+       0.0375,
+       10.0,
+       6.0
+      ],
+      [
+       3.5,
+       -1,
+       0.04,
+       10.0,
+       6.0
+      ],
+      [
+       4.0,
+       1,
+       0.0375,
+       10.4,
+       6.0
+      ],
+      [
+       4.0,
+       -1,
+       0.0375,
+       10.3,
+       6.0
+      ],
+      [
+       4.5,
+       1,
+       0.0375,
+       8.7,
+       4.0
+      ],
+      [
+       4.5,
+       -1,
+       0.0375,
+       10.6,
+       6.0
+      ],
+      [
+       5.0,
+       1,
+       0.0375,
+       9.0,
+       4.0
+      ],
+      [
+       5.0,
+       -1,
+       0.0375,
+       9.0,
+       4.0
+      ]
+     ],
+     "n_rows": 188,
+     "note": "rows (K0 deg, sign, slop deg, pa link 1a, pa crank) at the built pocket; K0 0 sign -1 = stop A (the closed end)"
+    },
+    "crank_free": {
+     "c_mm": 0.010000000000000009,
+     "dwell_deg": 0.167,
+     "rise_deg": 0.174,
+     "corner": {
+      "max": 0.167,
+      "rows": [
+       [
+        -4.0,
+        1.064,
+        0.15,
+        0.151
+       ],
+       [
+        -2.0,
+        1.786,
+        0.161,
+        0.153
+       ],
+       [
+        -1.0,
+        2.217,
+        0.15,
+        0.149
+       ],
+       [
+        0.0,
+        2.693,
+        0.145,
+        0.146
+       ],
+       [
+        1.0,
+        3.216,
+        0.145,
+        0.146
+       ],
+       [
+        2.0,
+        3.785,
+        0.15,
+        0.146
+       ],
+       [
+        4.0,
+        5.065,
+        0.167,
+        0.15
+       ],
+       [
+        8.0,
+        8.179,
+        0.151,
+        0.154
+       ],
+       [
+        15.0,
+        15.0,
+        0.166,
+        0.16
+       ]
+      ],
+      "note": "(x0 deg of the K law from the onset, K, +K play, -K play), deg of K"
+     },
+     "max_deg": 0.174,
+     "worst_tol_c015_deg": 0.261,
+     "held_plus_free_deg": 0.214
+    }
+   },
+   "fail": []
+  },
+  "stack_fix": {
+   "boss_underside_model_mm": 63.289,
+   "boss_underside_built_mm": 66.839,
+   "raised_mm": 3.55,
+   "why": "the model stacks the boss on its 6 link-1b strap samples nearest the pivot; the built boss + the arm root sit on the strap's highest top under the O10 footprint + 0.15 (raised only if the strap climbs there); the arm keeps the model's levels from there, the nose / flank (the cam) are unchanged"
+  }
+ },
+ "kinematics": {
+  "az": 95.3929,
+  "el": 67.89739999985892,
+  "a": [
+   37.551659306338074,
+   57.218408376139465
+  ],
+  "w": [
+   77.25454830347874,
+   -8.200075855810184
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   1
+  ],
+  "axis_points_mm": [
+   [
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    -0.0,
+    0.0,
+    -0.0
+   ],
+   [
+    -0.739,
+    -13.446,
+    -3.179
+   ]
+  ],
+  "axes": [
+   [
+    0.035363,
+    0.926512,
+    0.374601
+   ],
+   [
+    -0.465446,
+    0.616819,
+    0.63474
+   ],
+   [
+    -0.139116,
+    -0.22062,
+    0.965388
+   ]
+  ],
+  "axis_line_offsets_mm": [
+   0.0,
+   0.0,
+   13.84
+  ],
+  "u2_check_deg": 9e-05,
+  "seats": {
+   "az1": 95.3929,
+   "el1": 67.8974,
+   "az2": 45.8211,
+   "el2": 41.0855,
+   "wd": 66.8662,
+   "wa": -10.6559,
+   "b3": 0.329
+  },
+  "knee": {
+   "lE": 97.1443,
+   "lc": 24.3508,
+   "phiE": 0.7526,
+   "phib": -91.8041,
+   "stk": 6.0,
+   "ang_min": 25.2189
+  },
+  "knee_mid_m_mm": [
+   -11.739,
+   1.163,
+   0.0
+  ],
+  "hub_r_mm": [
+   10.0,
+   10.0,
+   10.0
+  ],
+  "knuckle": {
+   "uK": [
+    -0.314411,
+    0.944796,
+    0.092227
+   ],
+   "bk1": 26.0,
+   "bk2": 38.0336,
+   "psiA_deg": -71.686,
+   "a1max": 58.7678,
+   "dK_stop_B_deg": -62.849,
+   "q2_stops_deg": [
+    102.068,
+    -14.315
+   ],
+   "smlo": 5.0,
+   "smhi": 16.8433,
+   "slaved": {
+    "law": "dK = kK (q2 - q2hi) along the stretching sense (lin), cut at the drive's own range dK_lim",
+    "kK": 2.1534,
+    "q2_onset_deg": 7.279,
+    "s_q": -1.0,
+    "dK_lim_deg": 46.5,
+    "r_lobe": 8.2661,
+    "s_arm": 4.0,
+    "g": 2.3934,
+    "beta": -177.169,
+    "r_c": 16.176,
+    "lift": 0.7882,
+    "hl": 1.9442,
+    "zr": 4.0293
+   },
+   "note": "az/el/a/w = the 3R with K on stop A; past the onset q2hi K is SLAVED to q2 by the slipper-nose drive (lobe -> bell crank -> sliding dowel nose -> conjugate flank on link 1a; 3 active DOF; K never free, never read); the bell crank (dk) is a posed side member of link 1b"
+  }
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "slipper_nose_knuckle",
+  "note": "base rides the scapula on the user's scapula handler, carried directly at the J1 hub ring (no tab)"
+ },
+ "built_with": "pipeline/conformal/param_cad/user_style_desmo.py (imports user_style_conecut (gen-8 full CAD: slot-end fix, link 2 70-deg drop, J3 stop, checks) then build_desmo_l1 (gen-9 L1: the verifier's DCModel --blend), user_style_slipper's parts unchanged: v5 O20 hubs (K plain, no spring), link 1a chain + nose boss, 4-strip machined bars 1b / 2, O3 dowel-in-arc-slot K / J2 stops, the J3 stop, member 3 + E strap, knee link with MR63ZZ-pair bosses + knee stop, BOTTOM fused with the pad mount; the desmo drive) on the L1 design's frames (l1_desmo-conecut)",
+ "label": "desmo-conecut-knuckle-3r (verified config: conecut-knee + J3 stop [-111.90, 122.74] + the spring-free desmo K drive cell B; verified 18.98 / held 23.19), full CAD in the user's style",
+ "fit_bench": [
+  60,
+  160
+ ],
+ "fold_margin": 5.0,
+ "build_fixes": {
+  "k_pair": true,
+  "j2_single_dowel_push_limit": true,
+  "e_cap": true,
+  "knee_stop_deg": 154.7811,
+  "ang_min": 25.2189,
+  "knee_pins": "MR63ZZ pairs",
+  "link1a": "line/arc chain (gen-6 fix)"
+ },
+ "fits": [
+  {
+   "where": "crank pivot pin in link 1b",
+   "fit": "O3 H7/m6 press (ISO 8734 3 m6), pin through the crank boss; DIN 6799 RS 2.3 e-clip groove on the pin end"
+  },
+  {
+   "where": "knee pins a, b (2 x MR63ZZ each, knee link boss O9 x 5.5)",
+   "fit": "pin ISO 8734 O3 m6 pressed H7/m6 in the lower plate (E boss / arm pad, full plate depth); bearing seats shaft O3 j5 on the pin's free length, housing O6 J6 with a 0.5 mm shoulder; DIN 6799 RS 2.3 e-clip over a 0.1 shim"
+  },
+  {
+   "where": "hubs J1 / K / J2 / J3 (v5 O20 stack)",
+   "fit": "MR117-2RS pair: shaft O7 j5 / housing O11 J6 (the v5 stack drawing)"
+  },
+  {
+   "where": "knee stop tooth vs E strap side",
+   "fit": "+-0.02 mm on the tooth face and the E strap side face (stop at 180 - ang_min = 154.78 deg; conecut's taken knee max 107.07 deg held out: 47.7 deg / 12.8 mm in d below it)"
+  },
+  {
+   "where": "J3 stop dowel in hub 3's lower plate",
+   "fit": "ISO 8734 (DIN 6325) 2 m6 x 5 (or x 4), 440C grade >= 56 HRC with cert, surface-ground to 3.90 +-0.02, edges re-broken; through hole reamed O2.000 -0.005/0 (2-13 um interference: H7/m6 is a transition fit), at r 7.500, true position 0.02 (+-0.01 tangential) to the J3 bore and member 3's angular datum, perpendicular 0.01 to the J3 face, 0.1 x 45 top chamfer; pressed from the top to a gauge: top 0.85 +-0.02 above the plate (F+4.00), skin end recessed 0.10 (never proud)"
+  },
+  {
+   "where": "J3 stop acceptance + rating",
+   "fit": "assembled stop -112.40 <= J3MIN <= -111.25 and 119.85 <= J3MAX <= 123.78 deg on the J3 encoder (the windows that keep the verified bench and held numbers); stop rated 1.8 N.m about J3 (J3 bearing-1 s0 = 1); dowel / groove good to 10 N.m (dowel shear SF 2.6, bending 1.95, groove-end bearing 1.66) - docs/research/conecut_mechanism_redteam.md"
+  },
+  {
+   "where": "stage-2 nose dowel in link 1a's boss",
+   "fit": "ISO 8734 1.5 x 5 m6 440C, pressed H7/m6 radially in the O5 x 3 Ti boss (2.5 mm engagement), true position 0.01 to hub K's bore and link 1a's angular datum (seat r_c 16.176: r_c 15.95-16.05 flat on the fast bench), Ra <= 0.1"
+  },
+  {
+   "where": "stop dowels (K pair, J2) and their arc slots",
+   "fit": "O3 H7/m6 press in the upper boss (ISO 8734 3 m6 x 6 faced to 5.65); slot width 3.10 (3 + 2 x 0.05), centre radius 7.75; the semicircular slot ends' centres sit (1.55 - 1.50 - 0.02) / 7.75 rad = 0.22 deg INSIDE the dowel-centre stop angles (toward the slot's middle): the dowel meets an end when its centre is 0.05 mm beyond the end centre, so it stops 0.02 mm (0.15 deg) past the model's stop. The gen-4..7 rule (end centres BEYOND the stop) let the built K / J2 stops run 0.88 deg past (K stop A = K's sprung rest phase); end-centre true position 0.02 (+-0.01 tangential)"
+  },
+  {
+   "where": "J3 stop groove under link 2's ring",
+   "fit": "arc slot 2.10 +0.02/0 wide x 1.00 +0.05/0 deep (F+3.15..4.15) at centre radius 7.500, walls concentric to the J3 bore within 0.02 (dowel floats 0.046 per side, >= 0.026 running), FULL R1.05 ends whose centres sit 0.382 deg INSIDE the dowel-centre stop angles (toward the groove's middle; the O2 dowel meets an R1.05 end when its centre is 0.05 mm beyond the end centre = exactly at J3MIN / J3MAX - the L1 / red-team note 'beyond' would stop 0.76 deg late, outside the 0.585 deg held margin), true position 0.02 (+-0.01 tangential); 3+2-axis from below with an O2.0 / O1.5 end mill; cut BEFORE the bearing-1 seat finish bore (0.95 wall)"
+  },
+  {
+   "where": "stage-1 groove insert (link 2, hub 2)",
+   "fit": "440C ring sector, through-hardened 58-60 HRC, 1.5 thick, r 6.05..10.96 over 123.9 deg (0.96 past O20 under link 2's 0.8 roof lip); the groove = a 2-axis wire-EDM THROUGH slot 1.520 +-0.003 wide, walls parallel to u2, centreline = the pin's locus at the built level F+0.86 through the model's blended law (profile +-0.005 to the J2 bore; 29 arcs a side in the CAD, 4.4 um from the exact offset); under link 2's Ti roof (to F+3.65, one with the J2 pad), the insert layer F+0.11..F+1.61, keyed by an ISO 8734 1 m6 x 4 dowel reamed at assembly; K LEAD +0.25 deg: phase the key +0.116 deg of q2 (red team)"
+  },
+  {
+   "where": "stage-1 pin in the crank's short arm",
+   "fit": "ISO 8734 1.5 m6 440C ground +-0.002, crowned R4 over the groove band (end drop 0.039 vs the 4.76-deg tilt mismatch), pressed H7/m6 (reamed 1.500 -0.005/0) through the 1.5 mm short arm along u2, Ra <= 0.1, greased; true position to the crank bore 0.01 (a_s 9.529 +-0.01: a hole error is a K-law error, +-0.095 deg)"
+  },
+  {
+   "where": "stage-2 slot in the crank's tip plate",
+   "fit": "width 1.52 +0.01/0, 4-axis UV wire EDM (the walls are ruled by radial lines through GH, turning 0-2.24 deg; a straight 2-axis cut is 49 um off at the plate faces against a 10 um running clearance); the CAD shows the mid-thickness section extruded along the radial; cut to kslot 46.9 (red team: K lead) with J2's own stop B at K_law 46.30 (q2 -14.22); plate 17-4PH H900 or a-C:H DLC"
+  },
+  {
+   "where": "crank pivot bearings + axial stack (2 x MR63ZZ in the O10 x 6 boss; D3)",
+   "fit": "pin O3 h5 17-4PH H900 (pressed H7/m6 in link 1b), housings O6 J6 at both boss ends with a 1.0 mm web; ground inner-ring spacer O3.1 x O3.9 x 0.175 (select 0.15-0.20) on link 1b's spot-faced O5 land, inner-ring shim 0.10 + wave washer (5-10 N) under the DIN 6799 RS 2.3 clip at the boss top + 0.30"
+  },
+  {
+   "where": "crank running faces (D9-01 against links 1a / 1b / 2, the insert and the facing pads; D1)",
+   "fit": "profile +-0.02 mm on the crank's boss faces, short arm faces and plate sides and on the facing pads / relief / insert faces (worst two-face stack 0.04 < the smallest posed running gap, build.json drive_posed)"
+  },
+  {
+   "where": "K free play (no spring preload; red team)",
+   "fit": "one-sided band 0.217 / 0.276 deg (wire-EDM fits nominal / worst); build a +0.25 deg K lead (insert key +0.116 deg of q2, slot to kslot 46.9, J2 stop B at K_law 46.30, K stop-A dowel at K -0.25): held-out th >= 5.004, 0 poses under 5 (red team re-solve); every stop load bypasses stage 1 (stops on their own joint angles)"
+  },
+  {
+   "where": "desmo drive wear test (pass line)",
+   "fit": "stage-1 forward pressure-angle bind not before K 46.5 at the MEASURED mu after the wear run (claim mu 0.15; the family's 43-deg rule first fails at mu 0.17 at K 45.98; efficiency 0.84 at mu 0.15); 440C insert + crowned 440C pin + grease, DLC dowel in a 17-4PH / DLC slot (bare Ti on 440C galls: ~0.5 mm of groove per 1e6 strokes)"
+  }
+ ],
+ "faces_mm": [
+  50.47,
+  62.52,
+  78.17
+ ],
+ "fK_mm": 55.12,
+ "tr": 86.97,
+ "stack_mm": {
+  "pin_stack_mm": 6.0,
+  "plate_tp": 2.75,
+  "run": 0.5,
+  "knee_level_tr": 86.969,
+  "f": [
+   50.468,
+   62.517,
+   78.167
+  ],
+  "fK": 55.117,
+  "capK_mm": 0.0,
+  "hubK_crown_mm": 12.25,
+  "boss": [
+   86.969,
+   89.719
+  ],
+  "knee": [
+   90.219,
+   92.969
+  ],
+  "E": {
+   "x": [
+    8.0,
+    92.64
+   ],
+   "under": [
+    78.17,
+    86.97
+   ],
+   "thin_from": 91.0,
+   "rim": 91.14,
+   "cap": 89.719,
+   "top_before_cap": 89.719,
+   "stations_capped": 3,
+   "min_thickness": 2.75,
+   "knee_link_underside": 90.219
+  },
+  "knee_link_mm": [
+   36.35,
+   10.0,
+   2.75
+  ],
+  "hubs_r": [
+   10.0,
+   10.0,
+   10.0,
+   10.0
+  ],
+  "retainer": [
+   95.819,
+   96.719
+  ],
+  "full_pin_stack_mm": 9.75,
+  "stops": {
+   "K": {
+    "stop_A_deg": 0.0,
+    "stop_B_deg": -62.849,
+    "a1max": 58.7678,
+    "travel_deg": 62.849,
+    "dowel_home_angle_deg": 259.0,
+    "dowel_home_angles_deg": [
+     259.0,
+     439.0
+    ],
+    "pair": true,
+    "slot_deg": [
+     184.84,
+     270.31
+    ],
+    "clearance_to_lower_strap_deg": 13.95,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   },
+   "J2": {
+    "q2_stops_deg": [
+     102.068,
+     -14.315
+    ],
+    "q2_onset_deg": 7.279,
+    "window_deg": [
+     -14.315,
+     102.068
+    ],
+    "stop_B": "the drive's own range: |dK| = dK_lim 46.50 deg (slot-end) at t = 21.59 deg past the onset",
+    "travel_deg": 116.383,
+    "dowel_home_angle_deg": 195.0,
+    "dowel_home_angles_deg": [
+     195.0
+    ],
+    "pair": false,
+    "slot_deg": [
+     169.37,
+     308.38
+    ],
+    "clearance_to_lower_strap_deg": 77.63,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   },
+   "J3": {
+    "window_deg": [
+     -111.9036,
+     122.7417
+    ],
+    "dowel_home_angle_deg": 201.0,
+    "groove_deg": [
+     81.434,
+     331.404
+    ],
+    "groove_arc_deg": 249.97,
+    "web_deg": 110.03,
+    "dowel_touch_half_deg": 7.662,
+    "r_mm": 7.5,
+    "dowel_d_mm": 2.0,
+    "groove_w_mm": 2.1,
+    "groove_depth_mm": 1.0,
+    "groove_layer_mm": [
+     3.15,
+     4.15
+    ],
+    "dowel_z_mm": [
+     0.1,
+     4.0
+    ],
+    "dowel_into_groove_mm": 0.85,
+    "groove_floor_clear_mm": 0.15,
+    "bearing_od_r_mm": 5.5,
+    "rim_r_mm": 10.0,
+    "clearance_to_link2_strap_deg": 21.8,
+    "link2_strap_samples_in_band": 225,
+    "frame": "angles in frame_of(u3); dowel centre in link 2's frame = home angle + q3' (C1: R2^T R3 = rot(u3, q3'), offset 0)",
+    "end_shape": "L1 mesh: radial groove ends where the O2 dowel touches at the window edge; drawing: full-radius R1.05 ends, end centres 0.36 deg past the stop angle",
+    "sweep": {
+     "rule": "dowel (member 3) vs link 2's groove ring / boss / strap over q3' (signed mm, < 0 = metal in metal)",
+     "inside_window_min_mm": 0.0324,
+     "at_J3MIN": {
+      "J3 upper boss groove ring": 3.293506734124834e-05,
+      "J3 upper boss + cap": 0.14999999999981606,
+      "link 2 strap": 3.795653995730026
+     },
+     "at_J3MAX": {
+      "J3 upper boss groove ring": 0.00017945400017784147,
+      "J3 upper boss + cap": 0.14999999999982838,
+      "link 2 strap": 3.7424449287841677
+     },
+     "past_J3MIN_0p25": {
+      "J3 upper boss groove ring": -0.032364281694474605,
+      "J3 upper boss + cap": 0.14999999999982788,
+      "link 2 strap": 3.7634845571419655
+     },
+     "past_J3MAX_0p25": {
+      "J3 upper boss groove ring": -0.032170516295662664,
+      "J3 upper boss + cap": 0.14999999999982863,
+      "link 2 strap": 3.7095565763877363
+     },
+     "inside_0p25": {
+      "lo": {
+       "J3 upper boss groove ring": 0.03243015120212461,
+       "J3 upper boss + cap": 0.14999999999982835,
+       "link 2 strap": 3.827870720310515
+      },
+      "hi": {
+       "J3 upper boss groove ring": 0.03252942087947232,
+       "J3 upper boss + cap": 0.1499999999998285,
+       "link 2 strap": 3.7753572588551685
+      }
+     },
+     "past_2deg": {
+      "lo": {
+       "J3 upper boss groove ring": -0.25908626050763,
+       "J3 upper boss + cap": 0.14999999999982683,
+       "link 2 strap": 3.5361803073287152
+      },
+      "hi": null
+     },
+     "verdict": "stop"
+    },
+    "tolerance": {
+     "drawing": "true position 0.02 (+-0.01 tangential) on the dowel hole and both groove end-arc centres, relative to the J3 bore and each part's angular datum; groove walls concentric to the J3 bore within 0.02",
+     "random_deg": {
+      "dowel_hole_true_position_10um": 0.076,
+      "groove_end_centre_true_position_10um": 0.076,
+      "pin_a_bore_member3_datum": 0.012,
+      "link2_J2_J3_bores": 0.019
+     },
+     "bias_deg": {
+      "groove_width_2p10_plus0p02": [
+       0.0,
+       0.0764
+      ],
+      "dowel_m6_radius": [
+       -0.03056,
+       -0.00764
+      ]
+     },
+     "rss_deg": 0.11,
+     "worst_in_deg": 0.214,
+     "worst_out_deg": 0.26,
+     "at_pm0p02_worst_deg": 0.41,
+     "at_iso2768f_worst_deg": 0.87,
+     "margin_held_low_deg": [
+      0.74,
+      0.585
+     ],
+     "margin_held_high_deg": [
+      2.99,
+      1.13
+     ],
+     "acceptance": "-112.40 <= J3MIN <= -111.25 and 119.85 <= J3MAX <= 123.78, read on the J3 encoder at assembly",
+     "verdict": "fits: worst 0.21 in / 0.26 out inside the 0.74 / 0.585 held margins at +-0.01; +-0.02 (0.41) still fits; ISO 2768-f (0.87) fails",
+     "source": "docs/research/conecut_mechanism_redteam.md section 4 (stack) / verdict 3 (acceptance bands)",
+     "linear_deg": 0.26
+    },
+    "dowel_calc": {
+     "6Nm": {
+      "F_N": 800.0,
+      "shear_MPa": 255.0,
+      "bending_MPa": 586.0,
+      "bearing_on_Ti_groove_MPa": 471.0,
+      "SF_shear_vs_0p58x1900": 4.33,
+      "SF_bending_vs_1900": 3.24,
+      "SF_bearing_vs_Ti_880": 1.87,
+      "J3_bearing1_s0": 0.3
+     },
+     "10Nm": {
+      "F_N": 1333.0,
+      "shear_MPa": 424.0,
+      "bending_MPa": 976.0,
+      "bearing_on_Ti_groove_MPa": 784.0,
+      "SF_shear_vs_0p58x1900": 2.6,
+      "SF_bending_vs_1900": 1.95,
+      "SF_bearing_vs_Ti_880": 1.12,
+      "J3_bearing1_s0": 0.18
+     },
+     "note": "440C 58 HRC yield ~1900 MPa (shear 0.58 x); bearing on the Ti-6Al-4V groove end over the 0.85 mm engagement (projected; the red team rates it on Fbry ~1.3 GPa: SF 1.66 at 10 N.m); the single-dowel force returns through J3's MR117 pair as a radial load, 155 N per N.m on bearing 1 (C0r ~280 N): s0 = 1 at 1.81 N.m about J3 - the stop's rating; the cuff (slips ~1.06 N.m) is the torque fuse (docs/research/conecut_mechanism_redteam.md section 1-2; the same caveat as every gen-4..7 single-dowel stop)"
+    }
+   }
+  },
+  "drive": {
+   "drive_cell": "desmo cell B",
+   "ring": {
+    "level_from_hub2_face_mm": [
+     0.111,
+     1.611,
+     3.65
+    ],
+    "groove_mid_from_hub2_face_mm": 0.861,
+    "pitch_mm": [
+     7.214,
+     9.4
+    ],
+    "inner_wall_r_mm": 6.3,
+    "groove_r_mm": [
+     6.455,
+     10.16
+    ],
+    "r_out_mm": 10.96,
+    "past_O20_mm": 0.96,
+    "sector_deg": 116.66,
+    "model_sector_deg": 99.94,
+    "end_margins_deg": [
+     10.05,
+     12.67
+    ],
+    "groove_az_deg": 93.83,
+    "az_monotone": false,
+    "drift_mm": 0.286,
+    "azimuth_deg": [
+     -10.05,
+     106.61
+    ],
+    "note": "the groove's mid-plane sits at the crank pivot's level + 3.15 + glev along u2 (the model's rule); the pivot is 1.29 mm below hub 2's face, so the groove layer lands at F+0.11..F+1.61: INSIDE link 1b's J2 lower-plate layer (F+0..F+3, O20) - the stack conflict this L1 reports (R6)"
+   },
+   "arm": {
+    "root_mm": 4.0,
+    "stations": 27,
+    "raised_root_rows": 4,
+    "lifted_over_strap_mm": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "level_root_mm": 66.84,
+    "level_tip_mm": 63.16,
+    "arc_rows_kept": 17,
+    "arc_rows_model": 18,
+    "arm_to_slot_path_mm": 1.06,
+    "ends_at_beta_deg": -172.777,
+    "note": "the arc ends where its section clears the slot by >= 0.3 mm; the tip plate joins it"
+   },
+   "plate": {
+    "slot_len_mm": 3.722,
+    "slot_w_mm": 1.52,
+    "plate_w_mm": 3.32,
+    "plate_len_mm": 7.042,
+    "radial_mm": [
+     63.164,
+     65.664
+    ]
+   },
+   "stage1": {
+    "arm_len_mm": 6.8,
+    "arm_level_from_hub2_face_mm": [
+     -1.825,
+     -0.325
+    ],
+    "a_s": 9.299,
+    "pin_from_hub2_face_mm": [
+     -1.825,
+     1.225
+    ],
+    "axial_drift_mm": 0.286,
+    "pin_into_groove_mm": 1.11,
+    "pin_into_groove_at_worst_drift_mm": 0.83,
+    "crank_axis_at_arm_u2_level_mm": -1.222
+   },
+   "boss": {
+    "boss_d_mm": 5.0,
+    "boss_radial_mm": [
+     60.014,
+     63.014
+    ],
+    "boss_rK_mm": 16.176,
+    "boss_to_hubK_rim_mm": 3.676,
+    "root_w_mm": 4.0,
+    "nose_radial_from_C0_mm": [
+     -1.0,
+     4.0
+    ],
+    "nose_d_mm": 1.5
+   },
+   "boss_level_mm": 66.839,
+   "seat_C0_mm": [
+    -13.653,
+    59.209,
+    -9.585
+   ],
+   "seat_R0_mm": 61.514,
+   "r_c": 16.176,
+   "beta_deg": -177.169,
+   "g": 2.3934,
+   "sig": 1.0,
+   "dK_lim_deg": 46.5,
+   "mu": 0.15,
+   "cam": {
+    "dK_lim": 46.5,
+    "why_lim": "slot-end",
+    "pa_crank_max_taken": 14.6,
+    "pa_horn_max_taken": 24.6,
+    "pa_eff_horn": 33.1,
+    "pa_eff_crank": 23.1,
+    "friction_deg": 8.53,
+    "pa_kin_max": 34.47
+   },
+   "desmo": {
+    "calib": {
+     "s_th": -0.4644,
+     "inv_kK": 0.4644,
+     "q_on_deg": 7.28,
+     "dwell_deg": [
+      12.6,
+      90.9
+     ],
+     "fit_rms_deg": 0.0,
+     "n": 61
+    },
+    "stage1": {
+     "a_s": 9.529,
+     "psi": 149.7,
+     "pitch": [
+      9.4,
+      9.4
+     ],
+     "r_out": 10.96,
+     "pa_pin_max": 33.74,
+     "pa_cap_max": 35.05,
+     "pa_gate": 34.47,
+     "drift_max": 0.286,
+     "tilt_max_deg": 4.76,
+     "crown_needed": true,
+     "rc_min": 1.01,
+     "rc_onset": 1.01,
+     "ridge_mm": 0.247,
+     "blend_K_lead_deg": 2.614,
+     "arm_from_axis": 9.53,
+     "n_ring_rigid": 19,
+     "ring_az_deg": 99.9,
+     "lim_by_gate": {
+      "pitch": 52.5,
+      "pa_pin": 47.5,
+      "pa_cap": 0.0,
+      "drift": null,
+      "radius": 0.25
+     }
+    },
+    "stage1_built": {
+     "read": "built",
+     "half_blend_K_deg": 10.767,
+     "pin_max_moving": 62.07,
+     "cap_max_outside_blend": 54.17,
+     "cap_inside_blend": [
+      28.35,
+      89.91
+     ],
+     "pin_first_fail_K": 47.504,
+     "cap_first_fail_K": 58.529,
+     "note": "cap side gated for x >= half-blend (outside the blend); inside it the cap side is the dwell lock (reported) - a re-reading of desmo-slipper's linear-law gate, stated for the auditor"
+    },
+    "stage2B": {
+     "nose_r": 0.75,
+     "c_slot": 0.01,
+     "wall": 0.9,
+     "boss_r": 2.5,
+     "seat_rK": 16.18,
+     "seat_R": 61.51,
+     "boss_hubK_margin": 3.68,
+     "slot_len_mm": 3.72,
+     "plate_len_mm": 7.04,
+     "plate_w_mm": 3.32,
+     "rel_speed_rest_mm_per_rad": 0.525,
+     "pa_horn_max": 24.73,
+     "pa_crank_max": 14.56,
+     "dK_lim_pa_by_mu": {
+      "0.087": 64.5,
+      "0.120": 64.5,
+      "0.135": 64.5,
+      "0.150": 64.5,
+      "0.200": 61.0
+     },
+     "clear_plate_hubK": 1.23,
+     "clear_plate_hub2": 41.74,
+     "clear_lowarm_boss": 19.93,
+     "n_plate_rigid": 8,
+     "n_boss_rigid": 27
+    },
+    "slop": {
+     "slotB": {
+      "slop_max": 0.04,
+      "slop_at": [
+       1.0,
+       -1
+      ],
+      "pocket_pa_max_horn": 25.5,
+      "pocket_pa_max_crank": 32.0,
+      "pocket_pa_gate": 34.47,
+      "pocket_pa_fail_K0": null,
+      "pole_rows": [
+       [
+        0.0,
+        1,
+        0.0375,
+        15.8,
+        14.0
+       ],
+       [
+        0.0,
+        -1,
+        0.0375,
+        0.2,
+        2.0
+       ],
+       [
+        0.5,
+        1,
+        0.0375,
+        14.1,
+        12.0
+       ],
+       [
+        0.5,
+        -1,
+        0.0375,
+        12.1,
+        10.0
+       ],
+       [
+        1.0,
+        1,
+        0.0375,
+        12.5,
+        10.0
+       ],
+       [
+        1.0,
+        -1,
+        0.04,
+        10.4,
+        8.0
+       ],
+       [
+        1.5,
+        1,
+        0.0375,
+        10.8,
+        8.0
+       ],
+       [
+        1.5,
+        -1,
+        0.04,
+        10.7,
+        8.0
+       ],
+       [
+        2.0,
+        1,
+        0.0375,
+        11.1,
+        8.0
+       ],
+       [
+        2.0,
+        -1,
+        0.04,
+        11.0,
+        8.0
+       ],
+       [
+        2.5,
+        1,
+        0.0375,
+        11.4,
+        8.0
+       ],
+       [
+        2.5,
+        -1,
+        0.04,
+        11.4,
+        8.0
+       ],
+       [
+        3.0,
+        1,
+        0.0375,
+        9.7,
+        6.0
+       ],
+       [
+        3.0,
+        -1,
+        0.04,
+        11.7,
+        8.0
+       ],
+       [
+        3.5,
+        1,
+        0.0375,
+        10.0,
+        6.0
+       ],
+       [
+        3.5,
+        -1,
+        0.04,
+        10.0,
+        6.0
+       ],
+       [
+        4.0,
+        1,
+        0.0375,
+        10.4,
+        6.0
+       ],
+       [
+        4.0,
+        -1,
+        0.0375,
+        10.3,
+        6.0
+       ],
+       [
+        4.5,
+        1,
+        0.0375,
+        8.7,
+        4.0
+       ],
+       [
+        4.5,
+        -1,
+        0.0375,
+        10.6,
+        6.0
+       ],
+       [
+        5.0,
+        1,
+        0.0375,
+        9.0,
+        4.0
+       ],
+       [
+        5.0,
+        -1,
+        0.0375,
+        9.0,
+        4.0
+       ]
+      ],
+      "n_rows": 188,
+      "note": "rows (K0 deg, sign, slop deg, pa link 1a, pa crank) at the built pocket; K0 0 sign -1 = stop A (the closed end)"
+     },
+     "crank_free": {
+      "c_mm": 0.010000000000000009,
+      "dwell_deg": 0.167,
+      "rise_deg": 0.174,
+      "corner": {
+       "max": 0.167,
+       "rows": [
+        [
+         -4.0,
+         1.064,
+         0.15,
+         0.151
+        ],
+        [
+         -2.0,
+         1.786,
+         0.161,
+         0.153
+        ],
+        [
+         -1.0,
+         2.217,
+         0.15,
+         0.149
+        ],
+        [
+         0.0,
+         2.693,
+         0.145,
+         0.146
+        ],
+        [
+         1.0,
+         3.216,
+         0.145,
+         0.146
+        ],
+        [
+         2.0,
+         3.785,
+         0.15,
+         0.146
+        ],
+        [
+         4.0,
+         5.065,
+         0.167,
+         0.15
+        ],
+        [
+         8.0,
+         8.179,
+         0.151,
+         0.154
+        ],
+        [
+         15.0,
+         15.0,
+         0.166,
+         0.16
+        ]
+       ],
+       "note": "(x0 deg of the K law from the onset, K, +K play, -K play), deg of K"
+      },
+      "max_deg": 0.174,
+      "worst_tol_c015_deg": 0.261,
+      "held_plus_free_deg": 0.214
+     }
+    },
+    "fail": []
+   },
+   "stack_fix": {
+    "boss_underside_model_mm": 63.289,
+    "boss_underside_built_mm": 66.839,
+    "raised_mm": 3.55,
+    "why": "the model stacks the boss on its 6 link-1b strap samples nearest the pivot; the built boss + the arm root sit on the strap's highest top under the O10 footprint + 0.15 (raised only if the strap climbs there); the arm keeps the model's levels from there, the nose / flank (the cam) are unchanged"
+   }
+  },
+  "knee_pins": {
+   "kind": "MR63ZZ pair",
+   "boss": [
+    90.219,
+    95.719
+   ],
+   "boss_d": 9.0,
+   "proud_of_bar_mm": 2.75,
+   "model_stack_mm": 6.0,
+   "built_stack_mm": 9.75
+  },
+  "knee_stop": {
+   "ang_stop": 154.7811,
+   "side": 1.0,
+   "alpha_home_deg": 87.443,
+   "check": {
+    "poses": 27,
+    "max_err_deg": 0.0,
+    "sides": [
+     1
+    ]
+   },
+   "tooth_r_min": 7.889,
+   "face": {
+    "s": [
+     6.8,
+     9.2
+    ],
+    "l": 4.0,
+    "z": [
+     88.219,
+     89.719
+    ]
+   },
+   "contact_area_mm2": 3.6,
+   "model_window_edge_deg": 154.7811,
+   "fit_bench_knee_max_deg": 101.647,
+   "fit_bench_poses_past_stop": 0
+  }
+ },
+ "bench": {
+  "near_touch_gap": 13.27,
+  "reach": 0.775,
+  "follow": 1.0,
+  "inband14": 0.8923,
+  "contact": 0.0,
+  "inband10": 0.5613
+ },
+ "note": "R17's dynamics judge orders posed groups as a serial chain (base, l<k>[a-z], cuff); the drive's side member dk rides link 1b (build.json 'slaved', drive_groups)",
+ "row_id": "desmo-conecut-knuckle-3r",
+ "l1_design": "l1_desmo-conecut",
+ "level": "L2 user-style (full CAD of the generation-9 winner)",
+ "build_fixes_2026_10_18": {
+  "k_cap": "plain v5 cap, no clock spring",
+  "link_margin_mm": {
+   "l1b": 0.1,
+   "l2": 0.0
+  },
+  "link2_climb_max_deg": 70.0,
+  "stage1": {
+   "mode": "model",
+   "level_over_hub2_face_mm": {
+    "insert": [
+     0.111,
+     1.611
+    ],
+    "roof": [
+     1.611,
+     3.65
+    ],
+    "short_arm": [
+     -1.825,
+     -0.325
+    ],
+    "pin": [
+     -1.825,
+     1.225
+    ]
+   },
+   "why": "built at the VERIFIED model's levels (the verified metal); it crosses link 1b's J2 lower plate and strap by 1.39-1.50 mm (R6) and the short arm cannot attach to the crank boss (it hangs under link 1b's strap; separate part D9-03). Lifting stage 1 above link 1b breaks the stage-1 transmission: stage1_level_scan.json (0 pins with PA <= 34.47 and groove radius >= 1.0 at F+4.6..6.03; 2 at F+3.9; 21 at the model level). A discovery-loop item."
+  }
+ },
+ "drive_build": {
+  "kind": "desmo cell B (spring-free, roller-free, positive both ways): stage 1 = crowned O1.5 440C pin on the bell crank's short arm in a 1.52 wire-EDM through slot of a 440C insert in link 2's J2 ring (at the verified model's level: crosses link 1b's J2 plate / strap, the open stage-1 item); bell crank on link 1b (2 x MR63ZZ on an O3 pin, D3 stack); stage 2 = ISO 8734 O1.5 440C nose (link 1a's boss) in the 1.52 slot of the crank's tip plate (UV wire EDM)",
+  "mu": 0.15,
+  "stage1": {
+   "levels_over_hub2_face_mm": {
+    "link1b_top_under_arm": null,
+    "short_arm": [
+     -1.825,
+     -0.325
+    ],
+    "relief": [
+     3.15,
+     0.111
+    ],
+    "insert": [
+     0.111,
+     1.611
+    ],
+    "roof_lip": [
+     1.611,
+     3.65
+    ],
+    "pin": [
+     -1.825,
+     1.225
+    ],
+    "groove_mid": 0.861,
+    "model_groove_mid": 0.861
+   },
+   "delta_mm": 0.0,
+   "glev_equivalent": -1.0,
+   "axial_drift_mm": 0.286,
+   "pin_into_groove_mm": 1.114,
+   "pin_into_groove_at_worst_drift_mm": 0.828,
+   "a_s": 9.332,
+   "pitch_mm": [
+    7.215,
+    9.4
+   ],
+   "groove_r_mm": [
+    6.455,
+    10.16
+   ],
+   "insert_r_mm": [
+    6.05,
+    10.96
+   ],
+   "past_O20_mm": 0.96,
+   "insert_deg": [
+    -23.46,
+    100.42
+   ],
+   "insert_sector_deg": 123.88,
+   "relief_deg": [
+    -39.87,
+    108.96
+   ],
+   "relief_sector_deg": 148.83,
+   "groove_q2_deg": [
+    -14.282,
+    103.068
+   ],
+   "slot": {
+    "arcs_per_side": 29,
+    "max_dev_from_exact_offset_mm": 0.00438,
+    "length_mm": 17.957
+   },
+   "insert_valid": true,
+   "insert_debug": {
+    "sector_valid": true,
+    "slot_valid": true,
+    "slot_solids": 1,
+    "insert_valid": true,
+    "insert_solids": 1
+   },
+   "groove_rc_min_mm": 1.007,
+   "ridge_r_mm": 0.247,
+   "pin_search": null,
+   "crown": {
+    "R_mm": 4.0,
+    "band": [
+     0.111,
+     1.225
+    ],
+    "end_drop_mm": 0.0388
+   },
+   "relief_vs_link2": {
+    "note": "relief (link 2 frame) must miss the J2 stop dowel and link 2's bar root"
+   },
+   "mode": "model"
+  },
+  "crank": {
+   "boss_mm": [
+    67.251,
+    73.251
+   ],
+   "boss_model_mm": 63.289,
+   "raised_over_model_mm": 3.962,
+   "trim": {
+    "root_mm": 4.0,
+    "stations": 27,
+    "raised_root_rows": 4,
+    "lifted_over_strap_mm": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "level_root_mm": 67.25,
+    "level_tip_mm": 63.16,
+    "arc_rows_kept": 17,
+    "arc_rows_model": 18,
+    "arm_to_slot_path_mm": 1.06,
+    "ends_at_beta_deg": -172.777,
+    "note": "the arc ends where its section clears the slot by >= 0.3 mm; the tip plate joins it"
+   },
+   "plate": {
+    "slot_len_mm": 3.901,
+    "slot_w_mm": 1.52,
+    "plate_w_mm": 3.465,
+    "plate_len_mm": 7.361,
+    "plate_valid": true,
+    "plate_solids": 1,
+    "radial_mid_mm": 64.414,
+    "outline": {
+     "max_dev_from_exact_offset_mm": 0.0,
+     "chord_mm": 3.896,
+     "sag_mm": 0.0726,
+     "half_width_mm": 1.733
+    },
+    "arcs": 6,
+    "arc_dev_mm": 0.00206,
+    "note": "mid-thickness section extruded along the slot-centre radial; drawing: exact ruled walls (radial lines through GH), 4-axis UV wire EDM"
+   },
+   "crank_valid": true,
+   "crank_solids": 1,
+   "fuse": {
+    "straight run": "glued",
+    "arc": "glued",
+    "tip plate": "glued"
+   },
+   "land": {
+    "top_mm": 67.0756,
+    "rise_over_l1b_mm": 1.0795,
+    "fused": true
+   },
+   "spacer_t_mm": 0.175,
+   "pivot_pin_mm": [
+    60.1,
+    74.651
+   ],
+   "clip_mm": [
+    73.551,
+    74.151
+   ],
+   "short_arm_separate": {
+    "valid": true,
+    "solids": 1,
+    "why": "model level: under link 1b's strap (the L1's finding 5)"
+   },
+   "pivot_pin": "O3 h6 pressed in an O3 H7 bore through link 1b (bore cut; STEP round trip 0 bad faces, 0 zero-area)"
+  },
+  "nose_boss": {
+   "boss_d_mm": 5.0,
+   "boss_radial_mm": [
+    60.014,
+    63.014
+   ],
+   "boss_rK_mm": 16.176,
+   "boss_centre_over_hubK_face_mm": 4.232,
+   "root": {
+    "w_mm": 4.0,
+    "flush_with_K_plate_to_r_mm": 10.4,
+    "ramp_deg": 40.0,
+    "level_under_boss_mm": [
+     2.185,
+     5.185
+    ]
+   }
+  },
+  "verified": {
+   "bench": {
+    "gap": 18.98,
+    "score": 93.1,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.893,
+    "inband10": 0.5629,
+    "contact": 0.0106,
+    "overhead": "8/28"
+   },
+   "claim_linear_ik": {
+    "gap": 19.04,
+    "score": 93.08
+   },
+   "held": {
+    "gap": 23.19,
+    "score": 91.57,
+    "reach": 0.6922,
+    "inband14": 0.8919,
+    "contact": 0.016,
+    "overhead": "18/71"
+   },
+   "th_margin": {
+    "bench_min": 5.181,
+    "held_min": 5.006,
+    "dth_dK_at_min": 0.403,
+    "k_play_nominal_deg": 0.227,
+    "k_play_worst_tol_deg": 0.281,
+    "held_min_with_play": [
+     4.915,
+     4.893
+    ]
+   },
+   "groove_scan": {
+    "crank_free_worst_deg": 0.187,
+    "at_K": 44.0,
+    "held_slot_slop_deg": 0.04
+   },
+   "mu_claim": "0.15 nominal only (a_s +0.07 mm binds stage 1 at K 44.75)",
+   "complexity": 16.5,
+   "ledger": "WATCH (docs/alignment/desmo-conecut-knuckle-3r.md)",
+   "harness": "docs/concepts/verify/desmo-conecut-knuckle-3r.py --blend",
+   "dumps": [
+    "docs/concepts/verify/desmo-conecut-knuckle-3r_v_bench_frozen_blend.json",
+    "docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json"
+   ]
+  }
+ },
+ "j3_stop": {
+  "built": {
+   "home_angle_deg": 201.0,
+   "window_deg": [
+    -111.9036,
+    122.7417
+   ],
+   "r_mm": 7.5,
+   "end_centre_inside_stop_deg": 0.382,
+   "groove_deg": [
+    89.478,
+    323.36
+   ],
+   "groove_arc_deg": 249.98,
+   "groove_z_mm": [
+    3.15,
+    4.15
+   ],
+   "groove_w_mm": 2.1,
+   "end_R_mm": 1.05,
+   "link2_after_groove": {
+    "valid": true,
+    "solids": 1,
+    "slivers": "no zero-area faces",
+    "removed_mm3": 67.76
+   },
+   "member3_after_hole": {
+    "valid": true,
+    "solids": 1,
+    "removed_mm3": 9.425
+   },
+   "placement": {
+    "dowel_vs_E_strap_deg": 18.43,
+    "web_centre_deg": 26.42,
+    "link2_bar_root_deg": 24.88,
+    "web_vs_bar_root_deg": 1.54,
+    "note": "frame_of(u3) angles; the web (108.6 deg of uncut ring) sits under link 2's ring wherever it lands - the groove is inside the O20 ring (r 6.45..8.55, walls 0.95 to the bearing seat / 1.45 to the rim), never in the bar"
+   }
+  }
+ }
+}

@@ -1,0 +1,357 @@
+{
+ "id": "cap-nullspace-4r",
+ "name": "Cap-pole redundant 4R: spare J1 on a back-seat J0, null-space set by torsion springs (J0 + J2 + J3) inside own-angle stops",
+ "lens": "round103:clearance-nullspace-4r (lens 2: the low-complexity cell of the 4-DOF class)",
+ "family": "track jump / 4-DOF redundant spherical chain (Keemink 2018 class), plain pins, spring-determined",
+ "active_dof": 4,
+ "passive_dof": 0,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-18T03:20:31Z",
+ "reach": 0.825,
+ "follow": 1.0,
+ "inband14": 0.547,
+ "inband10": 0.356,
+ "contact": 0.0352,
+ "gap": 46.32,
+ "v_reach": 0.7444,
+ "v_follow": 1.0,
+ "v_inband14": 0.5476,
+ "v_inband10": 0.3593,
+ "v_gap": 57.7,
+ "n_configs": 1267,
+ "verdict": "DEAD (4-DOF, cx ~34.5; closes the spring-set cap-pole null-space class): 57.7 frozen exact Bench(110,360) (score 79.0; reach 0.7444, ib14 0.5476, contact 0.069, overhead 11/28, 1 flood island) vs its own plain cap 3R control 60.61 (searched to the gate, same kit) - 2.9 points for one more counted joint and three springs that must wind ~+-170 deg - and 39 points behind the lead (18.28, 3 joints). Fast 46.32 (sweep best 45.58) does not survive frozen; frozen plateau 59.44 -> 59.05 -> 57.87 -> 57.7. Gate on the claim-law sweep passed.",
+ "limiter": "hub 2: fitted 121 mm from GH at the cap pole, in band 0.0 frozen (control 0.06); the 1-D null-space is spent on hub 0 / link 0 / hub 1 (0.98-1.0 in band); contact grows frozen (plain-gap search); springs must wind ~+-170 deg (dmax 120 collapses the cell to 102+ fast); J0 sweeps ~320 deg about the back seat",
+ "note": "Assembly mode fixed (both fold stops pin the branch signs; the proposer's any-branch 69.80 / 70.36 -> 63.75 fast, 70.64 frozen exact). Flood: 1432-node envelope grid, path-tracked spring descent, symmetric edges, push / snap <= 10 deg. Searches: random + elitist ES on Bench(60,160) fast (local, niced, farm closed); claim = Bench(60,160) levels frozen on Bench(110,360) exact, K6 1 mm. Gate (score points, gain 2nd half / last third / top-5 spread): all spring sweeps 1.42 / 0.17 / 0.13; dmax-170 sweep 0.27 / 0.11 / 0.12 over 262; control 0.71 / 0.48 / 0.48. Plain-gap objective (not near-touch): near-touch gaps reported alongside.",
+ "doc": "docs/concepts/cap-nullspace-4r.md",
+ "complexity": 34.5,
+ "mechanism": {
+  "active_joints": 4,
+  "passive_rotations": 0,
+  "passive_translations": 0,
+  "sliding_pairs": 0,
+  "closed_loops": 0,
+  "springs": 3,
+  "components": "4 x O20 v5 hub (MR117-2RS pair, 12.25 stack; J0 on the scapula handler's ring, no tab); preloaded double-leg torsion springs on J0 (to the base), J2 and J3 (to the arm-end plate) - the best cell uses three, the proposer's claim cell two (J0 + J3); ISO 8734 O2 dowel stops in arc slots on the J0-J1-J2 and J1-J2-J3 folds (own angles, >= 5 deg); 3 x 12x3 Ti straps; K7 neck"
+ },
+ "best_params": {
+  "b_az": 43.2,
+  "b_el": 59.9,
+  "a0": 25.844339286882043,
+  "beta": 298.7815130295237,
+  "a1": 56.38737789088655,
+  "a2": 63.551277395894246,
+  "wd": 83.89917039229606,
+  "wa": -14.235323616842141,
+  "sB": 1,
+  "sig": -1,
+  "m": 5.0,
+  "T": 180.0,
+  "nq": 360,
+  "policy": "spring",
+  "k": [
+   0.6486,
+   0.0,
+   0.0756,
+   0.2616
+  ],
+  "r": [
+   -9.45,
+   -3.15,
+   44.18,
+   -143.35
+  ],
+  "q": 0.9788580455234306,
+  "connect": 1,
+  "dmax": 170
+ },
+ "claim_bench": "Bench(110,360) exact frozen (Bench(60,160) levels, K6 1 mm, full-grid flood)",
+ "frozen_exact": {
+  "gap": 57.7,
+  "reach": 0.7444,
+  "follow": 1.0,
+  "inband14": 0.5476,
+  "inband10": 0.3593,
+  "contact": 0.069,
+  "gap_near1": 64.51,
+  "min_metal_skin": 0.16,
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.3929,
+   "n_clip": 10,
+   "follow": 1.0,
+   "n_taken": 21,
+   "inband14": 0.582,
+   "inband10": 0.4503
+  },
+  "inband_member": {
+   "hub0": 1.0,
+   "hub1": 0.9789,
+   "hub2": 0.0,
+   "hub3": 0.6888,
+   "link0": 0.9949,
+   "link1": 0.3673,
+   "link2": 0.1883,
+   "neck": 0.7952
+  },
+  "islands_dropped": 1,
+  "flood": {
+   "grid_conn": 0.806,
+   "off_grid": 0
+  },
+  "ws_taken": 296,
+  "th_fold_margin_min": 5.04,
+  "sub_margin_min": 5.0,
+  "q0_range": [
+   -165.0,
+   151.0
+  ],
+  "fit_fast_k6_1mm": 46.97,
+  "honest": true
+ },
+ "control": {
+  "name": "plain cap 3R (J1 locked at the cap pole), same kit",
+  "base_fast": 60.79,
+  "base_frozen_exact": 66.26,
+  "searched_fast": 54.15,
+  "searched_fast_k6_1mm": 54.45,
+  "searched_frozen_exact": 60.61,
+  "gate": {
+   "n": 198,
+   "best_score": 80.43,
+   "best_gap": 53.83,
+   "gain_2nd_half": 0.71,
+   "gain_last_third": 0.48,
+   "top5_spread": 0.48,
+   "converged": true
+  }
+ },
+ "ghost_bound": {
+  "fast_quoted": 44.97,
+  "fast_on_file": 48.55,
+  "note": "oracle, in-sample, K2 off, proposer's psi-grid model; not worn frozen (no unpowered realisation)"
+ },
+ "gate": {
+  "all_spring_sweeps": {
+   "n": 1030,
+   "best_score": 83.53,
+   "best_gap": 45.3,
+   "gain_2nd_half": 1.42,
+   "gain_last_third": 0.17,
+   "top5_spread": 0.13,
+   "converged": false
+  },
+  "dmax170_sweep": {
+   "n": 262,
+   "best_score": 83.43,
+   "best_gap": 45.58,
+   "gain_2nd_half": 0.27,
+   "gain_last_third": 0.11,
+   "top5_spread": 0.12,
+   "converged": true
+  }
+ },
+ "gap_near1_fast": 54.22,
+ "frozen_other": {
+  "proposer_cell_sig_fixed": 70.64,
+  "best1": 59.44,
+  "best2": 59.05,
+  "best3_wrapped_law": 57.87
+ },
+ "best_params_note": "effective (snapped) params of the claim cell: the fold margin m snaps to the 5-deg rule; k / r = spring stiffness ratios (J0, J1, J2, J3) and rests (deg)",
+ "v_contact": 0.069,
+ "audit": {
+  "t": "2026-10-18T03:48:00Z",
+  "verdict": "death stands",
+  "refuted": false,
+  "reproduced": {
+   "fit_fast_bench60_160": {
+    "gap": 46.97,
+    "reach": 0.8187,
+    "ib14": 0.547,
+    "contact": 0.0354,
+    "note": "K6 1 mm + flood; the row's 46.32 is the sweep-time number (0.65 apart), the doc already lists 46.97"
+   },
+   "frozen_exact_bench110_360": {
+    "gap": 57.7,
+    "reach": 0.7444,
+    "follow": 1.0,
+    "ib14": 0.5476,
+    "ib10": 0.3593,
+    "contact": 0.069,
+    "gap_near1": 64.51,
+    "overhead": "11/28",
+    "islands_dropped": 1,
+    "secs": 397,
+    "note": "matches the claim to the digit"
+   }
+  },
+  "gate": {
+   "dmax170_sweep": {
+    "n": 262,
+    "gain_2nd_half": 0.27,
+    "gain_last_third": 0.11,
+    "top5_spread": 0.12,
+    "converged": true
+   },
+   "all_spring": {
+    "n": 1069,
+    "gain_2nd_half": 0.88,
+    "gain_last_third": 0.06,
+    "top5_spread": 0.13,
+    "converged": true
+   },
+   "ctrl": {
+    "n": 198,
+    "gain_2nd_half": 0.71,
+    "gain_last_third": 0.48,
+    "top5_spread": 0.48,
+    "converged": true
+   },
+   "note": "recomputed by the auditor from the sweep file in order (failed / dishonest rows at 275); no CMA needed"
+  },
+  "binder_bounds_frozen_exact": {
+   "contact_members": {
+    "link2": 15,
+    "hub1": 12,
+    "hub2": 16,
+    "link1": 15,
+    "link0": 7,
+    "hub3": 6,
+    "neck": 7
+   },
+   "n_contact_poses": 28,
+   "hub2_deleted": 53.1,
+   "hub2_ideal_8mm": 50.25,
+   "hub2_link1_link2_ideal_8mm": 19.84,
+   "every_member_ideal": 18.26,
+   "floor_inband_perfect": 22.46,
+   "note": "ideal = member samples set to 8 mm on every taken pose (its skin contacts forgiven); the crown check column is kept. Even with hub 2 + links 1-2 perfect the frozen gap is 19.84 > 17.5 kill line and > the lead 18.28"
+  },
+  "oracle": {
+   "ghost_k2_off_claim_geometry": {
+    "gap": 71.01,
+    "hub2": 0.0368,
+    "link1": 0.1913,
+    "link2": 0.3582
+   },
+   "ghost_k2_on": {
+    "gap": 158.89,
+    "follow": 0.1333
+   },
+   "note": "the skin-reading oracle that picks the null-space state per pose cannot put hub 2 in band at the claim geometry: the binder is the J2 circle, not the spring law"
+  },
+  "missed_region": {
+   "region": "a1 < 45, a2 < 54 (never sampled by the 4R or the control search)",
+   "ghost_k2_off_grid": [
+    {
+     "a1": 35.0,
+     "a2": 45.0,
+     "gap": 115.99,
+     "reach": 0.2875,
+     "ib14": 0.7651,
+     "contact": 0.0125,
+     "hub2": 0.5574,
+     "link1": 0.4832,
+     "link2": 0.5418
+    },
+    {
+     "a1": 35.0,
+     "a2": 52.0,
+     "gap": 94.25,
+     "reach": 0.4,
+     "ib14": 0.7688,
+     "contact": 0.028,
+     "hub2": 0.6404,
+     "link1": 0.4769,
+     "link2": 0.5334
+    },
+    {
+     "a1": 35.0,
+     "a2": 58.0,
+     "gap": 104.25,
+     "reach": 0.4625,
+     "ib14": 0.6039,
+     "contact": 0.0256,
+     "hub2": 0.0,
+     "link1": 0.1146,
+     "link2": 0.4947
+    },
+    {
+     "a1": 40.0,
+     "a2": 45.0,
+     "gap": 104.99,
+     "reach": 0.3937,
+     "ib14": 0.7019,
+     "contact": 0.0288,
+     "hub2": 0.2417,
+     "link1": 0.4183,
+     "link2": 0.3625
+    },
+    {
+     "a1": 40.0,
+     "a2": 52.0,
+     "gap": 87.32,
+     "reach": 0.4813,
+     "ib14": 0.6281,
+     "contact": 0.0159,
+     "hub2": 0.046,
+     "link1": 0.2293,
+     "link2": 0.4146
+    },
+    {
+     "a1": 40.0,
+     "a2": 58.0,
+     "gap": 92.42,
+     "reach": 0.5625,
+     "ib14": 0.5279,
+     "contact": 0.0146,
+     "hub2": 0.0,
+     "link1": 0.0889,
+     "link2": 0.4256
+    },
+    {
+     "a1": 45.0,
+     "a2": 45.0,
+     "gap": 108.94,
+     "reach": 0.4313,
+     "ib14": 0.5806,
+     "contact": 0.018,
+     "hub2": 0.3972,
+     "link1": 0.2825,
+     "link2": 0.3534
+    },
+    {
+     "a1": 45.0,
+     "a2": 52.0,
+     "gap": 103.32,
+     "reach": 0.525,
+     "ib14": 0.4814,
+     "contact": 0.0229,
+     "hub2": 0.0008,
+     "link1": 0.1596,
+     "link2": 0.3831
+    },
+    {
+     "a1": 45.0,
+     "a2": 58.0,
+     "gap": 83.31,
+     "reach": 0.625,
+     "ib14": 0.4614,
+     "contact": 0.0195,
+     "hub2": 0.0145,
+     "link1": 0.1115,
+     "link2": 0.3897
+    }
+   ],
+   "note": "short links put hub 2 in band (0.56-0.64 at a1 35, a2 45-52) only by losing reach (0.29-0.40); best oracle gap in the region 83.31 vs the claim's 46.97"
+  },
+  "reason": "Claim reproduces to the digit (57.70 frozen exact) and its sweep passed the gate; the binder is geometric - the skin-reading oracle puts hub 2 in band 0.04 at the claim geometry, short links that put hub 2 in band (0.56-0.64) drop reach to 0.29-0.40, and even hub 2 + links 1-2 perfect in band leaves 19.84 frozen (> 17.5, > lead 18.28)",
+  "files": [
+   "docs/concepts/verify/cap-nullspace-4r-audit.py",
+   "docs/concepts/verify/cap-nullspace-4r-audit.json"
+  ],
+  "template_note": "the template's round-3 bar (within 10 of 68.93 on Bench(60,160)) is passed trivially (46.97 fast); the death is against the round-103 17.5 kill line, the lead's 18.28 and its own control (60.61 frozen), and it stands"
+ }
+}

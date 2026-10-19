@@ -1,0 +1,411 @@
+{
+ "parts": [
+  {
+   "file": "00_J1_bearing_1_MR117-2RS_7x11x3.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.17,
+   "bbox_mm": [
+    11.1,
+    7.3,
+    11.2
+   ]
+  },
+  {
+   "file": "01_J1_bearing_2_MR117-2RS_7x11x3.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.17,
+   "bbox_mm": [
+    11.1,
+    7.3,
+    11.2
+   ]
+  },
+  {
+   "file": "02_J1_outer_spacer_17-4PH.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.012,
+   "bbox_mm": [
+    11.0,
+    5.2,
+    10.2
+   ]
+  },
+  {
+   "file": "03_J1_inner_spacer_(ground,_preload).step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.009,
+   "bbox_mm": [
+    8.2,
+    4.0,
+    7.7
+   ]
+  },
+  {
+   "file": "04_J1_ring_nut_M7x0.5_(Ti-6Al-4V).step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.018,
+   "bbox_mm": [
+    8.6,
+    4.4,
+    8.2
+   ]
+  },
+  {
+   "file": "05_J1_cap_O20_G2_dome,_threaded_(Ti-6Al-4V).step",
+   "valid": true,
+   "solids": 1,
+   "faces": 7,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 0.454,
+   "bbox_mm": [
+    20.2,
+    10.8,
+    19.2
+   ]
+  },
+  {
+   "file": "06_J2_bearing_1_MR117-2RS_7x11x3.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.17,
+   "bbox_mm": [
+    10.6,
+    9.4,
+    11.4
+   ]
+  },
+  {
+   "file": "07_J2_bearing_2_MR117-2RS_7x11x3.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.17,
+   "bbox_mm": [
+    10.6,
+    9.4,
+    11.4
+   ]
+  },
+  {
+   "file": "08_J2_outer_spacer_17-4PH.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.012,
+   "bbox_mm": [
+    9.1,
+    7.6,
+    10.8
+   ]
+  },
+  {
+   "file": "09_J2_inner_spacer_(ground,_preload).step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.009,
+   "bbox_mm": [
+    6.9,
+    5.8,
+    8.1
+   ]
+  },
+  {
+   "file": "10_J2_ring_nut_M7x0.5_(Ti-6Al-4V).step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.018,
+   "bbox_mm": [
+    7.4,
+    6.3,
+    8.6
+   ]
+  },
+  {
+   "file": "11_J2_cap_O20_G2_dome,_threaded_(Ti-6Al-4V).step",
+   "valid": true,
+   "solids": 1,
+   "faces": 7,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 0.454,
+   "bbox_mm": [
+    17.4,
+    14.9,
+    20.0
+   ]
+  },
+  {
+   "file": "12_J3_bearing_1_MR117-2RS_7x11x3.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.17,
+   "bbox_mm": [
+    11.4,
+    11.2,
+    5.3
+   ]
+  },
+  {
+   "file": "13_J3_bearing_2_MR117-2RS_7x11x3.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.17,
+   "bbox_mm": [
+    11.4,
+    11.2,
+    5.3
+   ]
+  },
+  {
+   "file": "14_J3_outer_spacer_17-4PH.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.012,
+   "bbox_mm": [
+    10.9,
+    11.0,
+    3.0
+   ]
+  },
+  {
+   "file": "15_J3_inner_spacer_(ground,_preload).step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.009,
+   "bbox_mm": [
+    8.2,
+    8.2,
+    2.4
+   ]
+  },
+  {
+   "file": "16_J3_ring_nut_M7x0.5_(Ti-6Al-4V).step",
+   "valid": true,
+   "solids": 1,
+   "faces": 4,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.018,
+   "bbox_mm": [
+    8.6,
+    8.6,
+    2.7
+   ]
+  },
+  {
+   "file": "17_J3_cap_O20_G2_dome,_threaded_(Ti-6Al-4V).step",
+   "valid": true,
+   "solids": 1,
+   "faces": 7,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 0.454,
+   "bbox_mm": [
+    20.1,
+    20.2,
+    7.1
+   ]
+  },
+  {
+   "file": "18_D7-02_link_1.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 58,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 3.147,
+   "bbox_mm": [
+    58.9,
+    17.9,
+    27.1
+   ]
+  },
+  {
+   "file": "19_D7-03_link_2.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 118,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 4.515,
+   "bbox_mm": [
+    43.0,
+    84.5,
+    79.7
+   ]
+  },
+  {
+   "file": "20_D7-04_member_3.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 48,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.639,
+   "bbox_mm": [
+    20.0,
+    58.2,
+    18.9
+   ]
+  },
+  {
+   "file": "23_along_guide_block_THK_RSR3M_(=_HIWIN_MGN.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 18,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.211,
+   "bbox_mm": [
+    8.5,
+    12.4,
+    6.2
+   ]
+  },
+  {
+   "file": "24_along_guide_rail_THK_RSR3R3_3_x_2.6_x_26.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 31,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.173,
+   "bbox_mm": [
+    3.9,
+    26.7,
+    5.4
+   ]
+  },
+  {
+   "file": "25_carriage_A.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 26,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.252,
+   "bbox_mm": [
+    28.7,
+    26.6,
+    7.0
+   ]
+  },
+  {
+   "file": "26_across_guide_rail_THK_RSR3R3_3_x_2.6_x_2.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 34,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.192,
+   "bbox_mm": [
+    29.0,
+    3.2,
+    8.5
+   ]
+  },
+  {
+   "file": "27_carriage_B_=_across_guide_block_THK_RSR3.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 18,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.211,
+   "bbox_mm": [
+    12.5,
+    8.2,
+    6.0
+   ]
+  },
+  {
+   "file": "28_D7-01_scapula_base.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 60,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 3.732,
+   "bbox_mm": [
+    54.3,
+    27.8,
+    45.9
+   ]
+  },
+  {
+   "file": "29_D7-05_BOTTOM_+_stage_base,_one_5-axis_pa.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 125,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 26.703,
+   "bbox_mm": [
+    42.4,
+    305.3,
+    37.8
+   ]
+  },
+  {
+   "file": "69_UPPER_ARM_CUFF_(lines_and_arcs.step",
+   "valid": true,
+   "solids": 1,
+   "faces": 50,
+   "bad_faces": 0,
+   "watertight": false,
+   "volume_cm3": 28.313,
+   "bbox_mm": [
+    126.4,
+    86.9,
+    92.2
+   ]
+  }
+ ],
+ "all_ok": true
+}

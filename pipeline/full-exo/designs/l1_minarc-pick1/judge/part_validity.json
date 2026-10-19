@@ -1,0 +1,381 @@
+{
+ "parts": [
+  {
+   "file": "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
+   "valid": true,
+   "solids": 1,
+   "faces": 7954,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 15.223,
+   "bbox_mm": [
+    86.8,
+    81.7,
+    45.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue) + cut square to the arm 4.9 mm distal of pin b, clear of the knee sweep",
+   "valid": true,
+   "solids": 1,
+   "faces": 4096,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 20.824,
+   "bbox_mm": [
+    42.4,
+    234.7,
+    29.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|pad mount to BOTTOM (proxy) (2.65 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)",
+   "valid": true,
+   "solids": 1,
+   "faces": 44,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.913,
+   "bbox_mm": [
+    21.7,
+    21.7,
+    12.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|pin b retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip land + pin end, over the 0.5 mm GTM washer on the knee link)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.045,
+   "bbox_mm": [
+    8.0,
+    8.0,
+    3.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|pin a retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip land + pin end, over the 0.5 mm GTM washer on the knee link)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.045,
+   "bbox_mm": [
+    8.0,
+    8.0,
+    2.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee stop web keep-out (knee link level, 2.65 mm, joins the tooth to the knee link's back edge)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.07,
+   "bbox_mm": [
+    7.6,
+    8.4,
+    4.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee stop tooth keep-out (2.4 x 2 mm, hangs 4.65 mm from the knee link top behind pin a; its face meets the E strap's side at knee angle 149.5 deg)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.022,
+   "bbox_mm": [
+    3.3,
+    3.9,
+    5.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|arm pad = pin b lower plate (O12 x 2.65 mm, tr..tr+tp, arm-fixed on the cuff)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.299,
+   "bbox_mm": [
+    12.3,
+    12.1,
+    5.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee link keep-out (flat Ti bar 40.7 x 10 x 2.65 mm, pins a, b 6 mm from its ends, tr+tp+0.5)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.077,
+   "bbox_mm": [
+    38.1,
+    32.2,
+    13.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|E boss = pin a lower plate (O12 x 2.65 mm, tr..tr+tp, member 3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.299,
+   "bbox_mm": [
+    12.2,
+    12.3,
+    5.6
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to 2.65 at the boss, top capped at the boss top tr+tp under the knee's reach)",
+   "valid": true,
+   "solids": 1,
+   "faces": 572,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.467,
+   "bbox_mm": [
+    10.6,
+    62.2,
+    10.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|J3 lower plate keep-out (O20 x 3, member 3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.2,
+    20.2,
+    8.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    21.0,
+    21.5,
+    13.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 812,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.56,
+   "bbox_mm": [
+    22.2,
+    65.4,
+    36.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    22.0,
+    21.3,
+    21.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.04,
+   "bbox_mm": [
+    5.2,
+    5.9,
+    5.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 113.3 deg of travel + the dowel; its ends = the stops)",
+   "valid": true,
+   "solids": 1,
+   "faces": 8592,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.771,
+   "bbox_mm": [
+    19.3,
+    17.4,
+    17.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)",
+   "valid": true,
+   "solids": 1,
+   "faces": 380,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.747,
+   "bbox_mm": [
+    15.1,
+    18.4,
+    32.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|K upper boss + clock-spring cap keep-out (O20, F+3.15..F+18.25: cap 6 mm taller - 0.3 x 5 mm 1.4310 +C1900 strip 217 mm, 0.01 N.m/rad, 0.08 N.m preload; K sensed: 4th encoder)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 4.736,
+   "bbox_mm": [
+    23.5,
+    20.4,
+    21.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.04,
+   "bbox_mm": [
+    4.5,
+    6.3,
+    3.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.04,
+   "bbox_mm": [
+    4.5,
+    6.3,
+    3.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|K lower plate keep-out (O20 x 3, link 1a) with the K stop slots (an opposed pair) (r 7.75 mm, 3.1 wide, 56.7 deg of travel + the dowel; its ends = the stops)",
+   "valid": true,
+   "solids": 1,
+   "faces": 8496,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.743,
+   "bbox_mm": [
+    20.0,
+    8.8,
+    20.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|link 1a strap keep-out (8 x 3 mm Ti, fitted underside, J1 -> K)",
+   "valid": true,
+   "solids": 1,
+   "faces": 164,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.322,
+   "bbox_mm": [
+    16.0,
+    14.4,
+    14.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|J1 lower plate keep-out (O20 x 3, link 1a)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.2,
+    10.3,
+    19.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member, carried directly by the scapula handler at the hub ring)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    20.6,
+    16.0,
+    21.9
+   ],
+   "level": "L1 mesh"
+  }
+ ],
+ "level": "L1",
+ "all_ok": true
+}

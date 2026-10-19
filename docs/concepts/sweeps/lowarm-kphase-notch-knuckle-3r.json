@@ -1,0 +1,827 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-18T14:38Z",
+  "params": {
+   "beta": -160,
+   "notch": {
+    "on": false,
+    "n": 0.0,
+    "a0": 0.0,
+    "a1": 0.0,
+    "z0": 0.0,
+    "z1": 0.0,
+    "bypass": true
+   },
+   "delta": null
+  },
+  "bench": "Bench(60,160) fast fit",
+  "inband14": 0.873,
+  "inband10": 0.5967,
+  "reach": 0.2062,
+  "follow": 0.1167,
+  "contact": 0.0,
+  "gap": 155.41,
+  "dK_lim": 46.75,
+  "why_lim": "slot-end",
+  "pa": [
+   9.8,
+   32.8,
+   41.3
+  ],
+  "clear_plate_hubK": 99.0,
+  "plateK_true_min": -1.108
+ },
+ {
+  "k": 1,
+  "t": "2026-10-18T14:40Z",
+  "params": {
+   "beta": -160,
+   "notch": {
+    "on": true,
+    "n": 2.2,
+    "a0": 44,
+    "a1": 92,
+    "z0": 6.0,
+    "z1": 12.3,
+    "bypass": false
+   },
+   "delta": null
+  },
+  "bench": "Bench(60,160) fast fit",
+  "inband14": 0.8976,
+  "inband10": 0.576,
+  "reach": 0.775,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 12.74,
+  "dK_lim": 46.75,
+  "why_lim": "slot-end",
+  "pa": [
+   9.8,
+   32.8,
+   41.3
+  ],
+  "clear_plate_hubK": 1.07,
+  "plateK_true_min": null
+ },
+ {
+  "k": 2,
+  "t": "2026-10-18T14:42Z",
+  "params": {
+   "beta": -160,
+   "notch": {
+    "on": true,
+    "n": 2.4,
+    "a0": 44,
+    "a1": 92,
+    "z0": 6.0,
+    "z1": 12.3,
+    "bypass": false
+   },
+   "delta": null
+  },
+  "bench": "Bench(60,160) fast fit",
+  "inband14": 0.8976,
+  "inband10": 0.576,
+  "reach": 0.775,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 12.74,
+  "dK_lim": 46.75,
+  "why_lim": "slot-end",
+  "pa": [
+   9.8,
+   32.8,
+   41.3
+  ],
+  "clear_plate_hubK": 1.07,
+  "plateK_true_min": null
+ },
+ {
+  "k": 3,
+  "t": "2026-10-18T14:44Z",
+  "params": {
+   "beta": -160,
+   "notch": {
+    "on": true,
+    "n": 2.2,
+    "a0": 44,
+    "a1": 92,
+    "z0": 6.0,
+    "z1": 12.3,
+    "bypass": false
+   },
+   "delta": null
+  },
+  "bench": "Bench(60,160) fast fit + exact guard poses 139/203/205/237/264/316 (frozen)",
+  "inband14": 0.8976,
+  "inband10": 0.576,
+  "reach": 0.775,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 12.74,
+  "dK_lim": 46.75,
+  "why_lim": "slot-end",
+  "pa": [
+   9.8,
+   32.8,
+   41.3
+  ],
+  "clear_plate_hubK": 1.07,
+  "plateK_true_min": null,
+  "guard": {
+   "139": [
+    [
+     0.072,
+     "L:L2"
+    ]
+   ],
+   "203": [
+    [
+     0.263,
+     "c10:hub2"
+    ],
+    [
+     0.716,
+     "r:hub2"
+    ]
+   ],
+   "205": [
+    [
+     -4.28,
+     "c10:hub2"
+    ],
+    [
+     -3.928,
+     "r:hub2"
+    ],
+    [
+     -3.192,
+     "c11:hub2"
+    ],
+    [
+     -1.932,
+     "c33:ring2"
+    ],
+    [
+     -1.904,
+     "r:ring2"
+    ]
+   ],
+   "237": [
+    [
+     -9.823,
+     "c31:crank/plate"
+    ],
+    [
+     -9.422,
+     "r:crank"
+    ],
+    [
+     -9.137,
+     "c35:crank/plate"
+    ],
+    [
+     -8.315,
+     "c32:hubK/horn"
+    ],
+    [
+     -7.36,
+     "r:plate"
+    ]
+   ],
+   "264": [
+    [
+     -0.159,
+     "c33:ring2"
+    ],
+    [
+     -0.128,
+     "c12:hub2"
+    ],
+    [
+     -0.114,
+     "r:ring2"
+    ],
+    [
+     -0.015,
+     "c13:hub2"
+    ],
+    [
+     0.256,
+     "c32:hubK/horn"
+    ]
+   ],
+   "316": [
+    [
+     -1.235,
+     "L:L2"
+    ],
+    [
+     0.672,
+     "c10:hub2"
+    ]
+   ]
+  }
+ },
+ {
+  "k": 4,
+  "t": "2026-10-18T14:46Z",
+  "params": {
+   "beta": -160,
+   "notch": {
+    "on": true,
+    "n": 2.2,
+    "a0": 44,
+    "a1": 92,
+    "z0": 6.0,
+    "z1": 12.3,
+    "bypass": false
+   },
+   "delta": -0.21
+  },
+  "bench": "Bench(60,160) fast fit + exact guard poses 139/203/205/237/264/316 (frozen)",
+  "inband14": 0.8976,
+  "inband10": 0.576,
+  "reach": 0.775,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 12.74,
+  "dK_lim": 46.75,
+  "why_lim": "slot-end",
+  "pa": [
+   9.8,
+   32.8,
+   41.3
+  ],
+  "clear_plate_hubK": 1.07,
+  "plateK_true_min": null,
+  "guard": {
+   "139": [
+    [
+     0.072,
+     "L:L2"
+    ]
+   ],
+   "203": [
+    [
+     0.347,
+     "c10:hub2"
+    ]
+   ],
+   "205": [
+    [
+     -4.154,
+     "c10:hub2"
+    ],
+    [
+     -3.807,
+     "r:hub2"
+    ],
+    [
+     -3.057,
+     "c11:hub2"
+    ],
+    [
+     -1.793,
+     "c33:ring2"
+    ],
+    [
+     -1.766,
+     "r:ring2"
+    ]
+   ],
+   "237": [
+    [
+     -9.805,
+     "c31:crank/plate"
+    ],
+    [
+     -9.564,
+     "r:crank"
+    ],
+    [
+     -9.116,
+     "c35:crank/plate"
+    ],
+    [
+     -8.227,
+     "c32:hubK/horn"
+    ],
+    [
+     -7.52,
+     "r:plate"
+    ]
+   ],
+   "264": [
+    [
+     -0.087,
+     "c33:ring2"
+    ],
+    [
+     -0.058,
+     "c12:hub2"
+    ],
+    [
+     -0.042,
+     "r:ring2"
+    ],
+    [
+     0.058,
+     "c13:hub2"
+    ],
+    [
+     0.103,
+     "c32:hubK/horn"
+    ]
+   ],
+   "316": [
+    [
+     -1.235,
+     "L:L2"
+    ],
+    [
+     0.672,
+     "c10:hub2"
+    ]
+   ]
+  }
+ },
+ {
+  "k": 5,
+  "t": "2026-10-18T14:48Z",
+  "params": {
+   "beta": -157,
+   "notch": {
+    "on": false,
+    "n": 0.0,
+    "a0": 0.0,
+    "a1": 0.0,
+    "z0": 0.0,
+    "z1": 0.0,
+    "bypass": true
+   },
+   "delta": null
+  },
+  "bench": "Bench(60,160) fast fit",
+  "inband14": 0.8742,
+  "inband10": 0.5972,
+  "reach": 0.2,
+  "follow": 0.1167,
+  "contact": 0.0,
+  "gap": 155.91,
+  "dK_lim": 46.0,
+  "why_lim": "pocket-pa",
+  "pa": [
+   10.3,
+   34.1,
+   42.6
+  ],
+  "clear_plate_hubK": 99.0,
+  "plateK_true_min": -1.403
+ },
+ {
+  "k": 6,
+  "t": "2026-10-18T14:50Z",
+  "params": {
+   "beta": -155,
+   "notch": {
+    "on": false,
+    "n": 0.0,
+    "a0": 0.0,
+    "a1": 0.0,
+    "z0": 0.0,
+    "z1": 0.0,
+    "bypass": true
+   },
+   "delta": null
+  },
+  "bench": "Bench(60,160) fast fit",
+  "inband14": 0.8741,
+  "inband10": 0.6,
+  "reach": 0.2125,
+  "follow": 0.1167,
+  "contact": 0.0,
+  "gap": 154.67,
+  "dK_lim": 44.0,
+  "why_lim": "pocket-pa",
+  "pa": [
+   10.3,
+   34.1,
+   42.6
+  ],
+  "clear_plate_hubK": 99.0,
+  "plateK_true_min": -1.212
+ },
+ {
+  "k": 7,
+  "t": "2026-10-18T14:52Z",
+  "params": {
+   "beta": -152,
+   "notch": {
+    "on": false,
+    "n": 0.0,
+    "a0": 0.0,
+    "a1": 0.0,
+    "z0": 0.0,
+    "z1": 0.0,
+    "bypass": true
+   },
+   "delta": null
+  },
+  "bench": "Bench(60,160) fast fit",
+  "inband14": 0.885,
+  "inband10": 0.6076,
+  "reach": 0.2562,
+  "follow": 0.15,
+  "contact": 0.0,
+  "gap": 145.88,
+  "dK_lim": 41.0,
+  "why_lim": "pocket-pa",
+  "pa": [
+   10.3,
+   34.1,
+   42.6
+  ],
+  "clear_plate_hubK": 99.0,
+  "plateK_true_min": -0.899
+ },
+ {
+  "k": 8,
+  "t": "2026-10-18T14:54Z",
+  "params": {
+   "beta": -157,
+   "notch": {
+    "on": true,
+    "n": 2.45,
+    "a0": 46,
+    "a1": 98,
+    "z0": 6.0,
+    "z1": 12.3,
+    "bypass": false
+   },
+   "delta": null
+  },
+  "bench": "Bench(60,160) fast fit + exact guard poses 139/203/205/237/264/316 (frozen)",
+  "inband14": 0.8979,
+  "inband10": 0.577,
+  "reach": 0.7688,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 13.33,
+  "dK_lim": 46.0,
+  "why_lim": "pocket-pa",
+  "pa": [
+   10.3,
+   34.1,
+   42.6
+  ],
+  "clear_plate_hubK": 1.05,
+  "plateK_true_min": null,
+  "guard": {
+   "139": [
+    [
+     0.072,
+     "L:L2"
+    ]
+   ],
+   "203": [
+    [
+     0.263,
+     "c10:hub2"
+    ],
+    [
+     0.716,
+     "r:hub2"
+    ]
+   ],
+   "205": [
+    [
+     -4.28,
+     "c10:hub2"
+    ],
+    [
+     -3.928,
+     "r:hub2"
+    ],
+    [
+     -3.192,
+     "c11:hub2"
+    ],
+    [
+     -1.932,
+     "c33:ring2"
+    ],
+    [
+     -1.904,
+     "r:ring2"
+    ]
+   ],
+   "237": [
+    [
+     -9.571,
+     "c31:crank/plate"
+    ],
+    [
+     -9.422,
+     "r:crank"
+    ],
+    [
+     -8.944,
+     "c35:crank/plate"
+    ],
+    [
+     -8.642,
+     "c32:hubK/horn"
+    ],
+    [
+     -7.522,
+     "r:plate"
+    ]
+   ],
+   "264": [
+    [
+     -0.159,
+     "c33:ring2"
+    ],
+    [
+     -0.128,
+     "c12:hub2"
+    ],
+    [
+     -0.114,
+     "r:ring2"
+    ],
+    [
+     -0.015,
+     "c13:hub2"
+    ],
+    [
+     0.569,
+     "c11:hub2"
+    ]
+   ],
+   "316": [
+    [
+     -1.235,
+     "L:L2"
+    ],
+    [
+     0.672,
+     "c10:hub2"
+    ]
+   ]
+  }
+ },
+ {
+  "k": 9,
+  "t": "2026-10-18T14:56Z",
+  "params": {
+   "beta": -157,
+   "notch": {
+    "on": true,
+    "n": 2.45,
+    "a0": 46,
+    "a1": 98,
+    "z0": 6.0,
+    "z1": 12.3,
+    "bypass": false
+   },
+   "delta": -0.21
+  },
+  "bench": "Bench(60,160) fast fit + exact guard poses 139/203/205/237/264/316 (frozen)",
+  "inband14": 0.8979,
+  "inband10": 0.577,
+  "reach": 0.7688,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 13.33,
+  "dK_lim": 46.0,
+  "why_lim": "pocket-pa",
+  "pa": [
+   10.3,
+   34.1,
+   42.6
+  ],
+  "clear_plate_hubK": 1.05,
+  "plateK_true_min": null,
+  "guard": {
+   "139": [
+    [
+     0.072,
+     "L:L2"
+    ]
+   ],
+   "203": [
+    [
+     0.347,
+     "c10:hub2"
+    ]
+   ],
+   "205": [
+    [
+     -4.154,
+     "c10:hub2"
+    ],
+    [
+     -3.807,
+     "r:hub2"
+    ],
+    [
+     -3.057,
+     "c11:hub2"
+    ],
+    [
+     -1.793,
+     "c33:ring2"
+    ],
+    [
+     -1.766,
+     "r:ring2"
+    ]
+   ],
+   "237": [
+    [
+     -9.743,
+     "c31:crank/plate"
+    ],
+    [
+     -9.564,
+     "r:crank"
+    ],
+    [
+     -9.115,
+     "c35:crank/plate"
+    ],
+    [
+     -8.785,
+     "c32:hubK/horn"
+    ],
+    [
+     -7.512,
+     "r:plate"
+    ]
+   ],
+   "264": [
+    [
+     -0.087,
+     "c33:ring2"
+    ],
+    [
+     -0.058,
+     "c12:hub2"
+    ],
+    [
+     -0.042,
+     "r:ring2"
+    ],
+    [
+     0.058,
+     "c13:hub2"
+    ],
+    [
+     0.484,
+     "c32:hubK/horn"
+    ]
+   ],
+   "316": [
+    [
+     -1.235,
+     "L:L2"
+    ],
+    [
+     0.672,
+     "c10:hub2"
+    ]
+   ]
+  }
+ },
+ {
+  "k": 10,
+  "t": "2026-10-18T14:58Z",
+  "params": {
+   "beta": -157,
+   "notch": {
+    "on": true,
+    "n": 2.45,
+    "a0": 46,
+    "a1": 98,
+    "z0": 6.0,
+    "z1": 12.3,
+    "bypass": false
+   },
+   "delta": 0.264
+  },
+  "bench": "Bench(60,160) fast fit + exact guard poses 139/203/205/237/264/316 (frozen)",
+  "inband14": 0.8979,
+  "inband10": 0.577,
+  "reach": 0.7688,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 13.33,
+  "dK_lim": 46.0,
+  "why_lim": "pocket-pa",
+  "pa": [
+   10.3,
+   34.1,
+   42.6
+  ],
+  "clear_plate_hubK": 1.05,
+  "plateK_true_min": null,
+  "guard": {
+   "139": [
+    [
+     0.072,
+     "L:L2"
+    ]
+   ],
+   "203": [
+    [
+     0.158,
+     "c10:hub2"
+    ],
+    [
+     0.61,
+     "r:hub2"
+    ]
+   ],
+   "205": [
+    [
+     -4.437,
+     "c10:hub2"
+    ],
+    [
+     -4.081,
+     "r:hub2"
+    ],
+    [
+     -3.362,
+     "c11:hub2"
+    ],
+    [
+     -2.106,
+     "c33:ring2"
+    ],
+    [
+     -2.078,
+     "r:ring2"
+    ]
+   ],
+   "237": [
+    [
+     -9.339,
+     "c31:crank/plate"
+    ],
+    [
+     -9.213,
+     "r:crank"
+    ],
+    [
+     -8.709,
+     "c35:crank/plate"
+    ],
+    [
+     -8.654,
+     "c32:hubK/horn"
+    ],
+    [
+     -7.628,
+     "r:plate"
+    ]
+   ],
+   "264": [
+    [
+     -0.249,
+     "c33:ring2"
+    ],
+    [
+     -0.214,
+     "c12:hub2"
+    ],
+    [
+     -0.204,
+     "r:ring2"
+    ],
+    [
+     -0.106,
+     "c13:hub2"
+    ],
+    [
+     0.484,
+     "c11:hub2"
+    ]
+   ],
+   "316": [
+    [
+     -1.235,
+     "L:L2"
+    ],
+    [
+     0.672,
+     "c10:hub2"
+    ]
+   ]
+  }
+ }
+]

@@ -1,0 +1,66 @@
+{
+ "what": "skeptic re-measure (2026-10-17 ~14:20 UTC) of the audit's M5 forward-stroke bound: the audit de-rated the clock-spring PRELOAD by 1/eta but left the RATE at the judge's 0.015 N.m/rad; on the forward stroke the arm pushes the whole spring torque (preload + rate x dK) through the sliding nose, so the rate is de-rated too. eta 0.815 (mu 0.15, the lead's worst-PA efficiency). judge/dynamics.py UNCHANGED on disk, run through a wrapper that sets K_RATES = (0.015, 0.010)/eta in-process; scratch copy of pipeline/full-exo/designs/l1_slipper-nose with design.json build_fixes.spring.preload 0.0982.",
+ "cmd": "OMP_NUM_THREADS=1 nice -n 10 python3 <wrapper> 0.815 <copy> --quick --no-validate --general --jobs 1",
+ "wrapper": "spec_from_file_location('dynamics', judge/dynamics.py); exec; m.K_RATES = (r0/eta, r1/eta); m.GenDesign.__init__.__defaults__ = (m.K_RATES[0],); sys.argv = [...]; m.main()",
+ "preload_Nm": 0.0982,
+ "rates_Nm_per_rad": [
+  0.018405,
+  0.01227
+ ],
+ "springs": {
+  "K": {
+   "rate_Nm_per_rad": 0.018405,
+   "preload_Nm_at_stop_A": 0.0982,
+   "preload_source": "design.json build_fixes.spring.preload",
+   "rates_run": [
+    0.018405,
+    0.01227
+   ]
+  }
+ },
+ "per_case": {
+  "passive|mu0.005|t0.001|s1|hub": {
+   "moment_gh_peak_Nm": 0.165,
+   "force_peak_N": 0.75,
+   "twist_peak_deg": 4.97,
+   "lags_over_10deg": 0,
+   "contact": false,
+   "free": true,
+   "drives": true,
+   "slaved_law_err_deg": 0.127,
+   "slaved_liftoff_share": 0.0,
+   "cuff_pressure_peak_kPa": 0.11
+  },
+  "passive|mu0.005|t0.001|s1|hub|krate0.01227": {
+   "moment_gh_peak_Nm": 0.165,
+   "force_peak_N": 0.75,
+   "twist_peak_deg": 4.85,
+   "lags_over_10deg": 0,
+   "contact": false,
+   "free": true,
+   "drives": true,
+   "slaved_law_err_deg": 0.127,
+   "slaved_liftoff_share": 0.0,
+   "cuff_pressure_peak_kPa": 0.11
+  }
+ },
+ "compare": {
+  "audit forward bound, preload only (mu 0.15)": {
+   "twist_peak_deg": 4.9,
+   "moment_gh_peak_Nm": 0.165
+  },
+  "audit forward bound, preload only, krate 0.010 (mu 0.15)": {
+   "twist_peak_deg": 4.81
+  },
+  "lead return-stroke proxy (mu 0.15)": {
+   "twist_peak_deg": 3.28,
+   "moment_gh_peak_Nm": 0.101
+  },
+  "R17 limit": {
+   "twist_deg": 5.0,
+   "moment_gh_Nm": 1.0,
+   "force_N": 5.0
+  }
+ },
+ "reading": "forward bound with rate de-rated: twist 4.97 deg against the 5.0 limit (margin 0.03 deg; preload-only bound 4.90), M_GH 0.165 N.m, cuff 0.75 N, K vs law 0.13 deg, lift-off 0: R17 still PASS, by 0.03 deg."
+}

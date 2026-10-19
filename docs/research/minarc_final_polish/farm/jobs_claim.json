@@ -1,0 +1,114 @@
+[
+ {
+  "tag": "envcl-BDp-env-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim env held BDp docs/research/minarc_final_polish/farm/claim_BDp_env_held.json > docs/research/minarc_final_polish/farm/claim_BDp_env_held.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim_BDp_env_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim_BDp_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envcl-BDp-fit60-bench",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim fit60 bench BDp docs/research/minarc_final_polish/farm/claim_BDp_fit60_bench.json > docs/research/minarc_final_polish/farm/claim_BDp_fit60_bench.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim_BDp_fit60_bench.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim_BDp_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envcl-pick1-env-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim env held docs/research/minarc_final_polish/picks/pick1.json docs/research/minarc_final_polish/farm/claim_pick1_env_held.json > docs/research/minarc_final_polish/farm/claim_pick1_env_held.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim_pick1_env_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim_pick1_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envcl-pick1-fit60-bench",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim fit60 bench docs/research/minarc_final_polish/picks/pick1.json docs/research/minarc_final_polish/farm/claim_pick1_fit60_bench.json > docs/research/minarc_final_polish/farm/claim_pick1_fit60_bench.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim_pick1_fit60_bench.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim_pick1_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envcl-pick2-env-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim env held docs/research/minarc_final_polish/picks/pick2.json docs/research/minarc_final_polish/farm/claim_pick2_env_held.json > docs/research/minarc_final_polish/farm/claim_pick2_env_held.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim_pick2_env_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim_pick2_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envcl-pick2-fit60-bench",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim fit60 bench docs/research/minarc_final_polish/picks/pick2.json docs/research/minarc_final_polish/farm/claim_pick2_fit60_bench.json > docs/research/minarc_final_polish/farm/claim_pick2_fit60_bench.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim_pick2_fit60_bench.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim_pick2_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envcl-pick3-env-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim env held docs/research/minarc_final_polish/picks/pick3.json docs/research/minarc_final_polish/farm/claim_pick3_env_held.json > docs/research/minarc_final_polish/farm/claim_pick3_env_held.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim_pick3_env_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim_pick3_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envcl-pick3-fit60-bench",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim fit60 bench docs/research/minarc_final_polish/picks/pick3.json docs/research/minarc_final_polish/farm/claim_pick3_fit60_bench.json > docs/research/minarc_final_polish/farm/claim_pick3_fit60_bench.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim_pick3_fit60_bench.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim_pick3_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ }
+]

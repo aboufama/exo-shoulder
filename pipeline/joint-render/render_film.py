@@ -1,6 +1,6 @@
 """Blender Cycles: the mannequin film (film_frames.py chunk -> PNG frames).
 
-Matte-black mannequin (smooth egg head, muscle relief from the rig), every design's exo parts parented to one empty per
+Matte-black mannequin (film_frames.py / mannequin.py: smooth featureless display head, muscle relief from the rig), every design's exo parts parented to one empty per
 (design, group) whose world matrix comes from the chunk file each frame; the showing design swaps with a shrink/grow
 about the shoulder. Dark studio: charcoal gradient seen by the camera, cool rim softboxes that draw the black body's
 outline, a warm key for the metal. Exo look = the user's: bead-blasted metal with grain, polished screws, iglidur orange.
@@ -45,10 +45,16 @@ def principled(name, color, metal, rough, bump=None, coat=0.0, sheen=0.0):
     return m
 alu = principled("blasted", (0.60, 0.615, 0.635), 1.0, 0.36, bump=(9.0, 0.18)); stainless = principled("stainless", (0.80, 0.80, 0.81), 1.0, 0.09)
 iglide = principled("iglide", (0.80, 0.42, 0.03), 0.0, 0.42); steel = principled("steel", (0.82, 0.83, 0.85), 1.0, 0.13)
-black = principled("mannequin", (0.012, 0.012, 0.013), 0.0, 0.62, coat=0.12, sheen=0.35)
+# matte black display mannequin (user look): no coat, no sheen, rough, half the default specular. The old base colour
+# (0.008 + coat 0.04 + sheen 0.05) read charcoal and slightly glossy under these lights, about the background's grey;
+# 0.004 keeps it black face-on while the soft broad highlights and the softbox rims still draw the form (local Cycles
+# look checks against 0.004/0.9/0.12 and 0.002/0.85/0.5, 2026-10-15).
+black = principled("mannequin", (0.004, 0.004, 0.0043), 0.0, 0.8)
+for nd in black.node_tree.nodes:
+    if nd.type == "BSDF_PRINCIPLED" and "Specular IOR Level" in nd.inputs: nd.inputs["Specular IOR Level"].default_value = 0.25
 def mat_for(n):
     l = n.lower()
-    if any(k in l for k in ("din 7984", "dowel", "screw")): return stainless
+    if any(k in l for k in ("din 7984", "iso 10642", "dowel", "screw")): return stainless           # every screw polished (user look)
     if any(k in l for k in ("igus", "iglidur", "liner", "gib")): return iglide
     if "bearing" in l and "igus" not in l: return steel
     return alu

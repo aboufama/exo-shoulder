@@ -1,0 +1,441 @@
+{
+ "step": 1,
+ "tol_mm": 0.15,
+ "frames_checked": 1337,
+ "pairs": 3738,
+ "seconds": 1375,
+ "setup_seconds": 74,
+ "jobs": 2,
+ "cpu_seconds": 2685,
+ "cpu_s_per_frame": 1.969,
+ "violations": {
+  "H|J4 ring nut M8x0.5 18x1 (Ti-6Al-4V)  IN  l3|J4 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "max_depth": 0.85,
+   "frames": 1337,
+   "worst": [
+    "Raise overhead",
+    10
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|10": 0.85,
+    "Raise overhead|170": 0.85,
+    "Drink from a cup|7": 0.85,
+    "Drink from a cup|23": 0.85,
+    "Drink from a cup|26": 0.85,
+    "Drink from a cup|44": 0.85,
+    "Drink from a cup|46": 0.85,
+    "Drink from a cup|65": 0.85,
+    "Drink from a cup|70": 0.85,
+    "Drink from a cup|115": 0.85,
+    "Drink from a cup|120": 0.85,
+    "Drink from a cup|142": 0.85
+   }
+  },
+  "H|J4 washer B (igus GTM-1018-005)  IN  l3|D4-04 link 3 (Ti-6Al-4V)": {
+   "max_depth": 0.56,
+   "frames": 1337,
+   "worst": [
+    "Wash opposite shoulder",
+    63
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Comb hair|70": 0.56,
+    "Reach a high shelf|31": 0.56,
+    "Wash opposite shoulder|61": 0.56,
+    "Wash opposite shoulder|63": 0.56,
+    "Comb hair|67": 0.55,
+    "Comb hair|68": 0.55,
+    "Comb hair|69": 0.55,
+    "Comb hair|71": 0.55,
+    "Comb hair|72": 0.55,
+    "Comb hair|168": 0.55,
+    "Comb hair|169": 0.55,
+    "Comb hair|170": 0.55
+   }
+  },
+  "H|J4 washer B (igus GTM-1018-005)  IN  l3|J4 cap \u00d822 G2 dome (Ti-6Al-4V)": {
+   "max_depth": 0.42,
+   "frames": 1337,
+   "worst": [
+    "Reach back pocket",
+    12
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Raise overhead|0": 0.42,
+    "Raise overhead|1": 0.42,
+    "Raise overhead|2": 0.42,
+    "Raise overhead|3": 0.42,
+    "Raise overhead|4": 0.42,
+    "Raise overhead|5": 0.42,
+    "Raise overhead|6": 0.42,
+    "Raise overhead|7": 0.42,
+    "Raise overhead|8": 0.42,
+    "Raise overhead|9": 0.42,
+    "Raise overhead|10": 0.42,
+    "Raise overhead|11": 0.42
+   }
+  },
+  "l3|D4-04 link 3 (Ti-6Al-4V)  IN  H|J4 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.25,
+   "frames": 1337,
+   "worst": [
+    "Wave",
+    163
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 0.25,
+    "Raise overhead|1": 0.25,
+    "Raise overhead|2": 0.25,
+    "Raise overhead|3": 0.25,
+    "Raise overhead|4": 0.25,
+    "Raise overhead|5": 0.25,
+    "Raise overhead|6": 0.25,
+    "Raise overhead|7": 0.25,
+    "Raise overhead|8": 0.25,
+    "Raise overhead|9": 0.25,
+    "Raise overhead|10": 0.25,
+    "Raise overhead|11": 0.25
+   }
+  },
+  "l3|J4 cap \u00d822 G2 dome (Ti-6Al-4V)  IN  H|J4 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "max_depth": 0.37,
+   "frames": 1337,
+   "worst": [
+    "Reach a high shelf",
+    68
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Reach a high shelf|68": 0.37,
+    "Reach a high shelf|111": 0.37,
+    "Raise overhead|0": 0.36,
+    "Raise overhead|1": 0.36,
+    "Raise overhead|2": 0.36,
+    "Raise overhead|3": 0.36,
+    "Raise overhead|4": 0.36,
+    "Raise overhead|5": 0.36,
+    "Raise overhead|6": 0.36,
+    "Raise overhead|7": 0.36,
+    "Raise overhead|8": 0.36,
+    "Raise overhead|9": 0.36
+   }
+  },
+  "l3|J4 cap \u00d822 G2 dome (Ti-6Al-4V)  IN  H|J4 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.25,
+   "frames": 1337,
+   "worst": [
+    "Raise overhead",
+    0
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 0.25,
+    "Raise overhead|1": 0.25,
+    "Raise overhead|2": 0.25,
+    "Raise overhead|3": 0.25,
+    "Raise overhead|4": 0.25,
+    "Raise overhead|5": 0.25,
+    "Raise overhead|6": 0.25,
+    "Raise overhead|8": 0.25,
+    "Raise overhead|9": 0.25,
+    "Raise overhead|10": 0.25,
+    "Raise overhead|11": 0.25,
+    "Raise overhead|12": 0.25
+   }
+  },
+  "l3|J3 M1.6x3 ISO 10642 Ti (cap)  IN  l2|J3 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.17,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 0.17,
+    "Raise overhead|1": 0.17,
+    "Raise overhead|2": 0.17,
+    "Raise overhead|3": 0.17,
+    "Raise overhead|4": 0.17,
+    "Raise overhead|5": 0.17,
+    "Raise overhead|6": 0.17,
+    "Raise overhead|7": 0.17,
+    "Raise overhead|8": 0.17,
+    "Raise overhead|9": 0.17,
+    "Raise overhead|10": 0.17,
+    "Raise overhead|11": 0.17
+   }
+  },
+  "l1|D4-02 link 1 (Ti-6Al-4V)  IN  base|D4-01 scapula base (Ti-6Al-4V)": {
+   "max_depth": 0.62,
+   "frames": 659,
+   "worst": [
+    "Raise overhead",
+    24
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|24": 0.62,
+    "Raise overhead|25": 0.62,
+    "Raise overhead|26": 0.62,
+    "Raise overhead|27": 0.62,
+    "Raise overhead|28": 0.62,
+    "Raise overhead|29": 0.62,
+    "Raise overhead|30": 0.62,
+    "Raise overhead|31": 0.62,
+    "Raise overhead|32": 0.62,
+    "Raise overhead|33": 0.62,
+    "Raise overhead|34": 0.62,
+    "Raise overhead|35": 0.62
+   }
+  },
+  "l1|J2 M1.6x3 ISO 10642 Ti (cap)  IN  l2|J2 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.17,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 0.17,
+    "Raise overhead|1": 0.17,
+    "Raise overhead|2": 0.17,
+    "Raise overhead|3": 0.17,
+    "Raise overhead|4": 0.17,
+    "Raise overhead|5": 0.17,
+    "Raise overhead|6": 0.17,
+    "Raise overhead|7": 0.17,
+    "Raise overhead|8": 0.17,
+    "Raise overhead|9": 0.17,
+    "Raise overhead|10": 0.17,
+    "Raise overhead|11": 0.17
+   }
+  },
+  "l1|J1 M1.6x3 ISO 10642 Ti (cap)  IN  base|J1 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.17,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 0.17,
+    "Raise overhead|1": 0.17,
+    "Raise overhead|2": 0.17,
+    "Raise overhead|3": 0.17,
+    "Raise overhead|4": 0.17,
+    "Raise overhead|5": 0.17,
+    "Raise overhead|6": 0.17,
+    "Raise overhead|7": 0.17,
+    "Raise overhead|8": 0.17,
+    "Raise overhead|9": 0.17,
+    "Raise overhead|10": 0.17,
+    "Raise overhead|11": 0.17
+   }
+  },
+  "base|D4-01 scapula base (Ti-6Al-4V)  IN  l1|D4-02 link 1 (Ti-6Al-4V)": {
+   "max_depth": 0.26,
+   "frames": 665,
+   "worst": [
+    "Raise overhead",
+    24
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|24": 0.26,
+    "Raise overhead|26": 0.26,
+    "Raise overhead|28": 0.26,
+    "Raise overhead|29": 0.26,
+    "Raise overhead|31": 0.26,
+    "Raise overhead|33": 0.26,
+    "Raise overhead|34": 0.26,
+    "Raise overhead|35": 0.26,
+    "Raise overhead|36": 0.26,
+    "Raise overhead|37": 0.26,
+    "Raise overhead|38": 0.26,
+    "Raise overhead|39": 0.26
+   }
+  },
+  "l3|J4 M1.6x3 ISO 10642 Ti (cap)  IN  H|J4 ring nut M8x0.5 18x1 (Ti-6Al-4V)": {
+   "max_depth": 0.5,
+   "frames": 292,
+   "worst": [
+    "Reach a high shelf",
+    69
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Reach a high shelf|69": 0.5,
+    "Reach a high shelf|70": 0.5,
+    "Reach a high shelf|71": 0.5,
+    "Reach a high shelf|72": 0.5,
+    "Reach a high shelf|73": 0.5,
+    "Reach a high shelf|74": 0.5,
+    "Reach a high shelf|75": 0.5,
+    "Reach a high shelf|76": 0.5,
+    "Reach a high shelf|77": 0.5,
+    "Reach a high shelf|78": 0.5,
+    "Reach a high shelf|79": 0.5,
+    "Reach a high shelf|80": 0.5
+   }
+  },
+  "H|J4 washer B (igus GTM-1018-005)  IN  l3|J4 M1.6x3 ISO 10642 Ti (cap)": {
+   "max_depth": 0.28,
+   "frames": 171,
+   "worst": [
+    "Reach a high shelf",
+    64
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Reach a high shelf|64": 0.28,
+    "Reach a high shelf|65": 0.28,
+    "Reach a high shelf|48": 0.26,
+    "Reach a high shelf|61": 0.26,
+    "Reach a high shelf|63": 0.26,
+    "Reach a high shelf|66": 0.26,
+    "Reach a high shelf|70": 0.26,
+    "Reach a high shelf|71": 0.26,
+    "Reach a high shelf|72": 0.26,
+    "Reach a high shelf|73": 0.26,
+    "Reach a high shelf|104": 0.26,
+    "Reach a high shelf|105": 0.26
+   }
+  },
+  "l3|J4 M1.6x3 ISO 10642 Ti (cap)  IN  H|J4 washer B (igus GTM-1018-005)": {
+   "max_depth": 0.25,
+   "frames": 171,
+   "worst": [
+    "Reach a high shelf",
+    48
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Reach a high shelf|48": 0.25,
+    "Reach a high shelf|61": 0.25,
+    "Reach a high shelf|62": 0.25,
+    "Reach a high shelf|63": 0.25,
+    "Reach a high shelf|64": 0.25,
+    "Reach a high shelf|65": 0.25,
+    "Reach a high shelf|66": 0.25,
+    "Reach a high shelf|67": 0.25,
+    "Reach a high shelf|68": 0.25,
+    "Reach a high shelf|69": 0.25,
+    "Reach a high shelf|70": 0.25,
+    "Reach a high shelf|71": 0.25
+   }
+  },
+  "H|J4 ring nut M8x0.5 18x1 (Ti-6Al-4V)  IN  l3|J4 M1.6x3 ISO 10642 Ti (cap)": {
+   "max_depth": 0.29,
+   "frames": 56,
+   "worst": [
+    "Reach a high shelf",
+    69
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Reach a high shelf|69": 0.29,
+    "Reach a high shelf|109": 0.29,
+    "Reach a high shelf|63": 0.28,
+    "Reach a high shelf|74": 0.28,
+    "Reach a high shelf|75": 0.28,
+    "Reach a high shelf|76": 0.28,
+    "Reach a high shelf|77": 0.28,
+    "Reach a high shelf|78": 0.28,
+    "Reach a high shelf|79": 0.28,
+    "Reach a high shelf|80": 0.28,
+    "Reach a high shelf|81": 0.28,
+    "Reach a high shelf|82": 0.28
+   }
+  }
+ },
+ "open_parts_not_tested_as_container": [],
+ "samples": {
+  "h_mm": 1.0,
+  "sharp_deg": 30.0,
+  "total": 1872661,
+  "per_part": {
+   "H|M4x6 ISO 10642 countersunk (upper cuff)": 13021,
+   "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": 148138,
+   "H|CirPattern1[13]": 2865,
+   "H|CirPattern1[17]": 2865,
+   "H|CirPattern1[3]": 2865,
+   "H|CirPattern1[6]": 2865,
+   "H|CirPattern1[1]": 2865,
+   "H|Revolve1[3]": 1684,
+   "H|CirPattern1[9]": 2865,
+   "H|CirPattern1[2]": 2865,
+   "H|Revolve3": 6905,
+   "H|CirPattern1[4]": 2865,
+   "H|CirPattern1[10]": 2865,
+   "H|CirPattern1[8]": 2865,
+   "H|CirPattern1[14]": 2865,
+   "H|CirPattern1[12]": 2865,
+   "H|CirPattern1[16]": 2865,
+   "H|CirPattern1[7]": 2865,
+   "H|Revolve1[1]": 7189,
+   "H|CirPattern1[5]": 2865,
+   "H|Revolve4": 2865,
+   "H|CirPattern1[11]": 2865,
+   "H|Revolve1[2]": 1684,
+   "H|CirPattern1[15]": 2865,
+   "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": 30080,
+   "H|5mm D, 2.5mm H, N42 MAGNET": 2015,
+   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": 40345,
+   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": 15128,
+   "F|MIDDLE": 115268,
+   "H|TOP": 32759,
+   "F|FOREARM CUFF": 632813,
+   "H|J4 ring nut M8x0.5 18x1 (Ti-6Al-4V)": 8338,
+   "H|J4 magnet \u00d84x2 N52 diametric": 1233,
+   "H|J4 washer B (igus GTM-1018-005)": 3578,
+   "H|J4 washer A (igus GTM-1018-005, recessed)": 3578,
+   "H|BOTTOM + neck + JN hub (one 5-axis part, 7075-T6 bead blasted)": 311929,
+   "l3|D4-04 link 3 (Ti-6Al-4V)": 62501,
+   "l3|J4 M1.6x3 ISO 10642 Ti (cap)": 4214,
+   "l3|J4 cap \u00d822 G2 dome (Ti-6Al-4V)": 13127,
+   "l3|J4 angle sensor IC (placeholder)": 166,
+   "l3|J4 position PCB \u00d816 (placeholder)": 2016,
+   "l3|J4 sleeve (igus GSM-1012-04)": 4758,
+   "l3|J3 M1.6x3 ISO 10642 Ti (cap)": 4212,
+   "l3|J3 cap \u00d822 G2 dome (Ti-6Al-4V)": 12601,
+   "l3|J3 angle sensor IC (placeholder)": 162,
+   "l3|J3 position PCB \u00d816 (placeholder)": 2036,
+   "l3|J3 sleeve (igus GSM-1012-04)": 4418,
+   "l2|D4-03 link 2 (Ti-6Al-4V)": 92850,
+   "l2|J3 ring nut M8x0.5 18x1 (Ti-6Al-4V)": 8338,
+   "l2|J3 magnet \u00d84x2 N52 diametric": 1306,
+   "l2|J3 washer B (igus GTM-1018-005)": 3578,
+   "l2|J3 washer A (igus GTM-1018-005, recessed)": 3578,
+   "l2|J2 ring nut M8x0.5 18x1 (Ti-6Al-4V)": 8343,
+   "l2|J2 magnet \u00d84x2 N52 diametric": 1204,
+   "l2|J2 washer B (igus GTM-1018-005)": 3578,
+   "l2|J2 washer A (igus GTM-1018-005, recessed)": 3578,
+   "l1|D4-02 link 1 (Ti-6Al-4V)": 99827,
+   "l1|J2 M1.6x3 ISO 10642 Ti (cap)": 4224,
+   "l1|J2 cap \u00d822 G2 dome (Ti-6Al-4V)": 13015,
+   "l1|J2 angle sensor IC (placeholder)": 166,
+   "l1|J2 position PCB \u00d816 (placeholder)": 2128,
+   "l1|J2 sleeve (igus GSM-1012-04)": 4750,
+   "l1|J1 M1.6x3 ISO 10642 Ti (cap)": 4212,
+   "l1|J1 cap \u00d822 G2 dome (Ti-6Al-4V)": 12601,
+   "l1|J1 angle sensor IC (placeholder)": 162,
+   "l1|J1 position PCB \u00d816 (placeholder)": 2036,
+   "l1|J1 sleeve (igus GSM-1012-04)": 4418,
+   "base|D4-01 scapula base (Ti-6Al-4V)": 44600,
+   "base|J1 ring nut M8x0.5 18x1 (Ti-6Al-4V)": 8343,
+   "base|J1 magnet \u00d84x2 N52 diametric": 1204,
+   "base|J1 washer B (igus GTM-1018-005)": 3578,
+   "base|J1 washer A (igus GTM-1018-005, recessed)": 3578
+  },
+  "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
+ },
+ "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
+ "max_depth": 0.85
+}

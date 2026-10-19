@@ -1,0 +1,174 @@
+{
+ "id": "groove-desmo-knuckle-3r",
+ "wear": "bench",
+ "proposal": "groove width = the verifier's fix 1 for the binding straight dowel",
+ "constants_before": {
+  "GROOVE_W": 1.52,
+  "R_LO": 7.06,
+  "R_HI": 8.44
+ },
+ "constants_after": {
+  "GROOVE_W": 1.59,
+  "R_LO": 7.095,
+  "R_HI": 8.405
+ },
+ "frozen": {
+  "gap": 23.48,
+  "reach": 0.6722,
+  "follow": 1.0,
+  "inband14": 0.8986,
+  "inband10": 0.5296,
+  "contact": 0.0056
+ },
+ "corrected": {
+  "gap": 23.48,
+  "reach": 0.6722,
+  "follow": 1.0,
+  "inband14": 0.8986,
+  "inband10": 0.5296,
+  "contact": 0.0056
+ },
+ "poses_failing": 0,
+ "why_failing": {},
+ "why": {
+  "fold": 107,
+  "slide": 9,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 2
+ },
+ "audit": {
+  "gap_near1": 24.6,
+  "gap_near2": 35.4,
+  "near_touch_min_mm": 0.07,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.2857,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.899,
+   "inband10": 0.5912,
+   "why_not": {
+    "fold": 14,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   }
+  }
+ },
+ "roller": {
+  "closure_max_mm": 0.0,
+  "roller_lug_min_mm": 2.805,
+  "roller_lug_max_mm": 2.953,
+  "pa_crank_max": 13.9,
+  "pa_horn_max": 38.5,
+  "dK_taken_max_deg": 30.97,
+  "dK_lim_deg": 31.0,
+  "why_lim": "groove-fit-3d",
+  "drive_idle": false
+ },
+ "groove": {
+  "n": 352,
+  "n_rise": 142,
+  "hub2_axis_offset_from_GH_mm": 0.0,
+  "dq2_dK_frames": -0.4644,
+  "q_onset_deg": 7.28,
+  "law_fit_err_deg": 0.0,
+  "crank_axis_tilt_from_u2_deg": 14.78,
+  "dowel_path_vs_frames_mm": 0.0,
+  "pitch_r_taken": [
+   7.095,
+   8.397
+  ],
+  "window": [
+   7.09,
+   8.4
+  ],
+  "pitch_r_grid": [
+   7.095,
+   8.398
+  ],
+  "axial_travel_taken_mm": 0.158,
+  "axial_travel_grid_mm": 0.158,
+  "tilt_taken_max_deg": 3.19,
+  "runout_across_groove_taken_mm": 0.082,
+  "groove_clearance_mm": 0.02,
+  "groove_width_needed_mm": 1.587,
+  "slop_K_deg_needed": 1.57,
+  "pa_groove_3d_taken_max": 35.27,
+  "pa_groove_3d_grid_max": 35.27,
+  "pa_groove_gate": 37.29,
+  "pa_groove_claim": 29.5,
+  "cap_q2_span_deg": 108.3,
+  "centreline_self_clear_mm": 2.411,
+  "centreline_rule_mm": 2.09,
+  "cap_points_on_centreline_mm": 0.035,
+  "groove_pa_fail": false,
+  "channels_merge": false,
+  "stroke_true_window_deg": 31.0,
+  "stroke_true_wall04_deg": 31.0,
+  "n_taken_over_wall04": 0,
+  "n_taken_over_window": 0,
+  "l2_true_min_mm": 1.222,
+  "l2_true_lt1": 0,
+  "l2_exit_az_abs_min": 70.2
+ },
+ "th_margin": {
+  "min": 5.389,
+  "n": 352,
+  "lt5": 0,
+  "forced": 148,
+  "lowest": {
+   "own": 5.389,
+   "forced": false,
+   "kind": "ws",
+   "plane": 15.0,
+   "elev": 90.0,
+   "axial": -30.0
+  }
+ },
+ "corrected_overhead": {
+  "ws": 28,
+  "taken": 8
+ },
+ "sc_info": {
+  "dK_lim": 31.0,
+  "why_lim": "groove-fit-3d",
+  "groove": {
+   "r_pitch": [
+    7.095,
+    8.275
+   ],
+   "window": [
+    7.09,
+    8.4
+   ],
+   "s_arm": 4.048,
+   "pivot_d": 16.02,
+   "theta_F": -14.6,
+   "sig": 1.0,
+   "s_q": -1.0,
+   "lam": 0.872,
+   "arrangement": "with",
+   "pa_groove_max": 29.5,
+   "pa_groove_gate": 37.29,
+   "pa_radial_formula": 26.4,
+   "slop_K_deg": 0.54
+  },
+  "wall2": {
+   "n": 77,
+   "rho_min": 4.1,
+   "cusp_K": null,
+   "convex_lt_rhomin_K": null,
+   "clear_lowarm": 19.27
+  }
+ },
+ "secs": 100.4,
+ "exact": true,
+ "git": "73cf024"
+}

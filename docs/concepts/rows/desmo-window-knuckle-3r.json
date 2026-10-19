@@ -1,0 +1,641 @@
+{
+ "id": "desmo-window-knuckle-3r",
+ "name": "Buildable desmo: stage-1 groove moved into link 2's underside, one-piece hardened crank through a window in link 1b's J2 plate",
+ "lens": "round104:C low-cx-same-reach (the built cx frontier: fixes the gen-9 R6 stack conflict)",
+ "family": "slaved knuckle, spring-free 2-contact crank (desmo); the family's structural cx floor",
+ "active_dof": 3,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": "2026-10-18T05:16:06Z",
+ "t_screened": "2026-10-18T06:08:16Z",
+ "reach": 0.775,
+ "follow": 1.0,
+ "inband14": 0.8782,
+ "inband10": 0.5606,
+ "contact": 0.0,
+ "gap": 14.68,
+ "v_reach": 0.7278,
+ "v_follow": 1.0,
+ "v_inband14": 0.8927,
+ "v_inband10": null,
+ "v_gap": 19.01,
+ "n_configs": 32,
+ "complexity": 16.25,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 5,
+  "joints": 8,
+  "closed_loops": 3,
+  "sensed_passive": 0,
+  "custom_parts": 13,
+  "sliding_pairs": 2,
+  "rolling_pairs": 0,
+  "springs_or_flexures": 0,
+  "catalogue_parts": 13,
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  },
+  "notes": "desmo-conecut-knuckle-3r's record (cell B) with stage 1 lifted: the crowned O1.5 440C stage-1 pin that was pressed in the crank's short arm is now INTEGRAL to a one-piece 17-4PH H900 crank (5-axis + wire EDM + crown grind): -1 catalogue part. The 440C groove insert moves from link 2's J2 ring to link 2's underside (same made-part count); the window in link 1b's J2 plate is a machined feature (no part). No body, joint, loop or sliding pair added or removed. Knee pins MR63ZZ pairs, outside the count.",
+  "source": "desmo-window-knuckle-3r screen 2026-10-18",
+  "confidence": "medium"
+ },
+ "best_params": {
+  "lev": 3.9,
+  "a_s": 9.9,
+  "psi": 150.0,
+  "blend": 8.0,
+  "kdrive": 47.5,
+  "kj2": 46.5,
+  "arm_w": 3.0,
+  "win_c": 0.3
+ },
+ "fast": {
+  "bench": "Bench(60,160) fast, the frozen protocol's fit",
+  "k": 4,
+  "plain": 14.68,
+  "near_touch": 20.52,
+  "reach": 0.775,
+  "inband14": 0.8782,
+  "why": {
+   "fold": 31,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  }
+ },
+ "frozen_self": {
+  "bench": "Bench(110,360) exact, frozen shape (fit on Bench(60,160) fast, no refit), blended IK (as desmo-conecut's 18.98)",
+  "frozen": {
+   "gap": 20.43,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.8785,
+   "inband10": 0.5622,
+   "contact": 0.0106
+  },
+  "why": {
+   "fold": 88,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 4
+  },
+  "near1": 22.07,
+  "near2": 36.57,
+  "min_metal_mm": 0.07,
+  "overhead": {
+   "ws": 28,
+   "taken": 8
+  },
+  "dK_taken_max": 45.62,
+  "contacts": [
+   {
+    "i": 205,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": 15.0,
+    "mm": -4.28
+   },
+   {
+    "i": 237,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": -60.0,
+    "mm": -9.47
+   },
+   {
+    "i": 264,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -60.0,
+    "mm": -1.17
+   },
+   {
+    "i": 316,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 150.0,
+    "axial": -105.0,
+    "mm": -1.23
+   }
+  ],
+  "th_margin": {
+   "min": 5.181,
+   "n": 372,
+   "lt5": 0,
+   "forced": 186,
+   "lowest": [
+    {
+     "own": 5.181,
+     "forced": true,
+     "i": 313,
+     "th": 106.3,
+     "dK": 45.62,
+     "dth_dK": 0.405,
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 120.0,
+     "axial": -105.0
+    },
+    {
+     "own": 5.389,
+     "forced": false,
+     "i": 229,
+     "th": 25.06,
+     "dK": 0.0,
+     "dth_dK": -0.198,
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 90.0,
+     "axial": -30.0
+    },
+    {
+     "own": 5.714,
+     "forced": true,
+     "i": 309,
+     "th": 105.18,
+     "dK": 43.66,
+     "dth_dK": 0.412,
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 90.0,
+     "axial": -105.0
+    },
+    {
+     "own": 6.01,
+     "forced": true,
+     "i": 409,
+     "th": 104.56,
+     "dK": 42.59,
+     "dth_dK": 0.416,
+     "kind": "ws",
+     "plane": 120.0,
+     "elev": 45.0,
+     "axial": -105.0
+    },
+    {
+     "own": 6.069,
+     "forced": true,
+     "i": 366,
+     "th": 104.44,
+     "dK": 42.38,
+     "dth_dK": 0.416,
+     "kind": "ws",
+     "plane": 90.0,
+     "elev": 105.0,
+     "axial": -90.0
+    }
+   ]
+  },
+  "plate_horn": {
+   "R0": 61.514,
+   "rPu": 63.164,
+   "horn_under_r": [
+    58.181,
+    60.014
+   ],
+   "horn_top_r_max": 63.014,
+   "n_plate": 56,
+   "n_horn": 27,
+   "poses_overlapping": 372,
+   "min_radial_gap_mm": 0.15,
+   "at": {
+    "i": 204,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": -45.0
+   },
+   "poses_below_running_gap": 0,
+   "rule": "radial gap >= 0.15 - 0.02 wherever plate and horn overlap within 1 mm across the sphere"
+  },
+  "parts_ib14": {
+   "hub1": [
+    1.0,
+    8.6,
+    80
+   ],
+   "hubK": [
+    0.992,
+    7.9,
+    80
+   ],
+   "hub2": [
+    0.93,
+    11.4,
+    68
+   ],
+   "hub3": [
+    0.742,
+    11.5,
+    80
+   ],
+   "E": [
+    0.979,
+    6.0,
+    164
+   ],
+   "boss": [
+    1.0,
+    7.5,
+    32
+   ],
+   "pad": [
+    1.0,
+    6.2,
+    32
+   ],
+   "knee": [
+    0.999,
+    9.7,
+    90
+   ],
+   "crank": [
+    0.803,
+    11.2,
+    133
+   ],
+   "horn": [
+    0.949,
+    8.9,
+    27
+   ],
+   "ring2": [
+    0.151,
+    16.8,
+    29
+   ],
+   "plate": [
+    0.715,
+    12.3,
+    8
+   ],
+   "L1a": [
+    0.981,
+    10.1,
+    8
+   ],
+   "L1b": [
+    0.918,
+    8.2,
+    36
+   ],
+   "L2": [
+    0.732,
+    12.0,
+    124
+   ]
+  },
+  "file": "docs/concepts/verify/desmo-window-knuckle-3r_v_bench_frozen.json"
+ },
+ "held_self": {
+  "frozen": {
+   "gap": 24.62,
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.8776,
+   "inband10": 0.5614,
+   "contact": 0.016
+  },
+  "why": {
+   "fold": 260,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 14
+  },
+  "near1": 27.47,
+  "min_metal_mm": 0.33,
+  "overhead": {
+   "ws": 71,
+   "taken": 18
+  },
+  "dK_taken_max": 46.27,
+  "th_margin": {
+   "min": 5.006,
+   "n": 861,
+   "lt5": 0,
+   "forced": 439,
+   "lowest": [
+    {
+     "own": 5.006,
+     "forced": true,
+     "i": 1054,
+     "th": 106.67,
+     "dK": 46.27,
+     "dth_dK": 0.403,
+     "kind": "ws",
+     "plane": 135.0,
+     "elev": 30.0,
+     "axial": -135.0
+    },
+    {
+     "own": 5.031,
+     "forced": true,
+     "i": 274,
+     "th": 106.62,
+     "dK": 46.17,
+     "dth_dK": 0.403,
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 45.0,
+     "axial": 120.0
+    },
+    {
+     "own": 5.11,
+     "forced": true,
+     "i": 1068,
+     "th": 106.45,
+     "dK": 45.88,
+     "dth_dK": 0.404,
+     "kind": "ws",
+     "plane": 135.0,
+     "elev": 60.0,
+     "axial": -90.0
+    },
+    {
+     "own": 5.248,
+     "forced": true,
+     "i": 859,
+     "th": 106.16,
+     "dK": 45.37,
+     "dth_dK": 0.406,
+     "kind": "ws",
+     "plane": 90.0,
+     "elev": 60.0,
+     "axial": -105.0
+    },
+    {
+     "own": 5.267,
+     "forced": true,
+     "i": 699,
+     "th": 106.12,
+     "dK": 45.3,
+     "dth_dK": 0.406,
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 30.0,
+     "axial": -120.0
+    }
+   ]
+  },
+  "file": "docs/concepts/verify/desmo-window-knuckle-3r_v_held_frozen.json"
+ },
+ "drive": {
+  "window_gates": {
+   "fail": [],
+   "dK_lim": 47.5,
+   "why_lim": "slot-end",
+   "pitch": [
+    9.851,
+    9.851
+   ],
+   "r_out": 11.41,
+   "drift": 0.297,
+   "rc_min": 0.89,
+   "ridge": 0.135,
+   "pa_built_pin": 61.98,
+   "pa_built_cap_out": 54.84,
+   "pin_fail_K": 49.399,
+   "cap_fail_K": 58.702,
+   "lim_by_gate": {
+    "pitch": null,
+    "pa_pin": 49.5,
+    "pa_cap": 0.0,
+    "drift": null,
+    "radius": 0.25
+   },
+   "n_ring_rigid": 29,
+   "ring_az": 99.9,
+   "kplay": 0.167,
+   "kplay_worst": 0.251,
+   "slot_slop": 0.04,
+   "win": {
+    "window": {
+     "r_in": 6.545,
+     "r_out": 18.691,
+     "rim_r": 10.0,
+     "wall_over_O11_seat": 1.045,
+     "past_rim_mm": 8.691,
+     "sector_deg": 48.1,
+     "n_l1b_samples_deleted": 22
+    },
+    "pairs": {
+     "insert_layer": [
+      3.15,
+      4.65
+     ],
+     "arm_layer": [
+      1.6,
+      3.1
+     ],
+     "insert_vs_l1b_plate_top": 0.15,
+     "l1b_sampled_top_under_insert": 12.25,
+     "arm_vs_window_wall": 0.3,
+     "arm_top_vs_insert": 0.05,
+     "pin_tip_under_roof": 0.1,
+     "crank_boss_note": "boss on link 1b's top outside link 2's pad; crank vs link 2 per pose by the parent's part checks (parts_pairs)",
+     "insert_vs_l1b_sampled_top": -9.1
+    },
+    "stop": {
+     "kj2_window": 46.5,
+     "j2_engage_K": 46.8,
+     "drive_end_K": 47.5,
+     "drive_end_why": "slot-end",
+     "need": 47.05,
+     "margin": 0.45,
+     "order": "J2 dowel first"
+    },
+    "fails": [],
+    "lev": 3.9,
+    "glev_eff": 2.039,
+    "zc_minus_F2": -1.289,
+    "a_s": 9.9,
+    "psi": 150.0
+   }
+  }
+ },
+ "red_team": {
+  "crank_axis_r_from_hub2_axis": 17.17,
+  "crank_axis_az": 58.9,
+  "pin_pitch": 9.851,
+  "window": {
+   "r_in": 6.545,
+   "r_out": 18.691,
+   "rim_r": 10.0,
+   "wall_over_O11_seat": 1.045,
+   "past_rim_mm": 8.691,
+   "sector_deg": 48.1,
+   "n_l1b_samples_deleted": 22
+  },
+  "l1b_samples_in_insert_slab": 32,
+  "slab_hits_r": [
+   10.0
+  ],
+  "slab_hits_lvl": [
+   4.08
+  ],
+  "hub2_cyl_member": 7,
+  "l1b_member": 7,
+  "l2_member": 2,
+  "l1b_levels_in_annulus": [
+   -0.0,
+   4.1,
+   8.2,
+   12.2
+  ],
+  "section_by_radius": [
+   {
+    "r": 6.0,
+    "l1b_arc_mm": 31.2,
+    "window_arc_mm": 0.0,
+    "n_l1b": 7
+   },
+   {
+    "r": 7.0,
+    "l1b_arc_mm": 42.0,
+    "window_arc_mm": 1.9,
+    "n_l1b": 9
+   },
+   {
+    "r": 8.0,
+    "l1b_arc_mm": 43.8,
+    "window_arc_mm": 3.7,
+    "n_l1b": 7
+   },
+   {
+    "r": 9.0,
+    "l1b_arc_mm": 54.6,
+    "window_arc_mm": 5.1,
+    "n_l1b": 19
+   },
+   {
+    "r": 10.0,
+    "l1b_arc_mm": 86.4,
+    "window_arc_mm": 6.3,
+    "n_l1b": 29
+   }
+  ],
+  "crank_arm_vs_link2_min_mm": 0.04,
+  "at": 60
+ },
+ "verdict": "DEAD (pre-registered kill, both conditions): frozen exact Bench(110,360) 20.43 (score 92.57) > 19.45 kill line (lead 18.28, desmo-conecut 18.98); held 24.62, paired vs the lead +2.23 (90% CI 1.17..2.31) > 0.5. The buildable stack works kinematically - identical 262/360 takes and 4 contacts as desmo-conecut, every drive gate passes at mu 0.15, J2's dowel engages before the drive's ends (drive 47.5 vs need 47.05) - but lifting stage 1 above link 1b's J2 plate lifts the insert's out-of-O20 sector 3.04 mm and it leaves the band: ring2 29 samples at mean 16.8 mm, 15.1% in band (was 19 at 54%), +1.45 bench / +1.42 held vs desmo-conecut, all in-band. Built desmo frontier stays at 18.25-18.5.",
+ "limiter": "In-band of the raised stage-1 insert sector outside the O20 rim (ring2 0.151 in band, mean 16.8 mm, 29 samples; ring_rigid=0 ablation recovers ib14 0.9001). Fixed by the stack (insert underside = link 1b plate top + 0.15 -> groove mid F2+3.9) and by the PA gate (only 2 legal pins at mid 3.9, pitch hi 9.85-9.90 -> r_out 11.41-11.46). Reach unchanged: the J2 fold, 88 of 360 lost (held 260), overhead 8/28.",
+ "note": "SPEC CORRECTIONS: (1) stage1_level_scan levels are groove MID-planes; an insert on link 2's underside at F2+3.15 has its mid at 3.9 (2 legal pins, not 6; mid 3.15 puts the insert in link 1b's plate - run only as illegal control k18, 14.62 fast). (2) No legal pin has pitch <= 9.0 (confirmed): r_out 11.41 with the model's 0.8 wall (the verified 0.8 kept, = the gen-9 CAD insert). (3) Stop order: drive built and gated to kdrive 47.5, J2 window kj2 46.5 (engages ~46.80) -> 0.45 deg margin over the 0.25 K lead; slot can run to 48.0 (k19-21), 48.5 kills the drive (tip plate within 1.0 mm of hub K's O20 at rest); the re-placed pin's built PA first fails at K 49.40. (4) Arm layer F2+1.6..3.1 leaves 0.05 mm under the insert (red team: arm top vs link 2 0.04 mm at fast pose 60) - drop it to 1.45..2.95 (interior metal, no bench change). CONTROLS: claim level reproduces desmo-conecut's fit exactly (k17, 13.27 plain fast); new pin at old level cuts the drive at K 36.75; old pin at new level fails pitch at K 0. Window: crank axis 17.2 mm from hub 2's axis -> an arm kept in the plate layer needs a window r 6.55..18.69 over 48.1 deg (8.7 mm past the O20 rim; 1.05 mm wall over the O11 seat); M5/FEA of the open-rim housing NOT run. K play 0.167 nominal / 0.251 worst tolerance; th margin 5.181 bench / 5.006 held (parent's). Convergence gate (score pts, near-touch, 18 legal of 32): 0.007 / 0.007 / 0.011 - passed. Local only (farm closed), 2 niced processes. Complexity 16.25 (tools/simplicity.py v2.2: integral stage-1 pin = -1 bought part vs desmo-conecut 16.5).",
+ "convergence_gate": {
+  "rows": "18 legal of 32 tries, near-touch objective, score points",
+  "gain_second_half": 0.007,
+  "gain_last_third": 0.007,
+  "top5_spread": 0.011,
+  "passed": true
+ },
+ "paired": {
+  "vs_lead_conecut-knee-knuckle-3r": {
+   "bench": 2.15,
+   "bench_ci90": [
+    0.79,
+    2.36
+   ],
+   "held": 2.23,
+   "held_ci90": [
+    1.17,
+    2.31
+   ],
+   "split": "all in-band; 0 discordant takes / contacts",
+   "file": "docs/alignment/remeasure/desmo-window-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json"
+  },
+  "vs_desmo-conecut-knuckle-3r+blend": {
+   "bench": 1.45,
+   "bench_ci90": [
+    0.79,
+    1.56
+   ],
+   "held": 1.42,
+   "held_ci90": [
+    1.17,
+    1.51
+   ],
+   "file": "docs/alignment/remeasure/desmo-window-knuckle-3r_vs_desmo-conecut-knuckle-3r+blend_paired.json"
+  }
+ },
+ "bar": "18.28 (conecut-knee-knuckle-3r frozen exact; stated by hand - the verify template default 68.93 / 75.94 / 30.35 is stale)",
+ "pre_registered": "kill if frozen exact > 19.45, held paired worse than the lead by > 0.5, or any drive part overlaps link 1b; pass as a buildable frontier point at <= 19.45 with cx <= 16.25 and 0 overlaps",
+ "doc": "docs/concepts/desmo-window-knuckle-3r.md",
+ "model_file": "docs/concepts/models/desmo-window-knuckle-3r.py",
+ "death_audit": {
+  "time": "2026-10-18",
+  "verdict": "death STANDS (held kill line); cause re-measured",
+  "gate": "reproduced 0.007 / 0.007 / 0.011 - passed; the narrow sweep is forced by the stack (lev pinned at plate top + 0.15) and the 2 legal pins at mid 3.9",
+  "finding": "ring2 (stage-1 insert sector outside O20, desmo-conecut model lines 252-261, inherited) sampled 0.5 mm x 2 mm = 1 pt / 1 mm2, 4x the kit's 4 mm2 cell (tools/concept_kit.py line 293; concept_bench 'sampled evenly ~1 pt / 4 mm2'): 29 samples on ~28 mm2 (kit: ~7)",
+  "fast_kit_density": {
+   "near_touch": 19.02,
+   "inband14": 0.8924,
+   "was": 20.52,
+   "file": "docs/alignment/remeasure/desmo-window-knuckle-3r_ringfix_fast.json"
+  },
+  "frozen_reweight": {
+   "bench": [
+    19.01,
+    18.8
+   ],
+   "held": [
+    23.2,
+    23.0
+   ],
+   "parent_bench": [
+    18.57,
+    18.49
+   ],
+   "parent_held": [
+    22.76,
+    22.68
+   ],
+   "note": "[kit subsample 10 (conservative), area-exact 7]; exact re-weighting of saved parts_ib14; reach/follow/contact unchanged",
+   "file": "docs/alignment/remeasure/desmo-window-knuckle-3r_ringdensity_reweight.json"
+  },
+  "lift_cost_corrected": {
+   "bench": [
+    0.31,
+    0.44
+   ],
+   "held": [
+    0.32,
+    0.44
+   ],
+   "screened": [
+    1.45,
+    1.42
+   ]
+  },
+  "kill_lines": {
+   "bench_19_45": "PASSES at the kit density (18.80-19.01)",
+   "held_vs_lead_0_5": "FAILS: +0.62..+0.82 over the lead's 22.38 (0 discordant takes/contacts; all in-band)"
+  },
+  "family_flag": "desmo-conecut (verified 18.98) reads 18.49-18.57 at the kit density; desmo-slipper (model line 283) and descendants share the sampler - re-wear before ranking",
+  "script": "docs/concepts/verify/desmo-window-knuckle-3r_ringfix_audit.py",
+  "one_line": "Dead on held-out in-band (+0.62..0.82 over the lead at the corrected density, identical takes/contacts); the screened 1.45-pt lift cost was mostly ring2's 4x over-sampling (true 0.3-0.44)"
+ }
+}

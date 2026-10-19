@@ -1,0 +1,309 @@
+{
+ "id": "rollcone-hubspot-pinknee-3r",
+ "name": "Rolling-cone J2 (strap-held cone pair, apex GH) at H1's hub-2 spot on the pin-knee 3R",
+ "lens": "round501:rolling-j2 (lens C, WEIRD)",
+ "family": "rolling-contact J2 (cone pair, apex GH) on the cx-0 pin-knee 3R",
+ "active_dof": 3,
+ "passive_dof": 2,
+ "passive_translations": 0,
+ "status": "screened",
+ "t_ideated": null,
+ "t_screened": "2026-10-19T04:08:31Z",
+ "reach": 0.775,
+ "follow": 1.0,
+ "inband14": 0.8966,
+ "inband10": 0.6001,
+ "contact": 0.0054,
+ "gap": 13.38,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 439,
+ "best_k": "4-es32-202",
+ "best_params": {
+  "alpha_s": 12.8114,
+  "alpha_p": 7.2019,
+  "beta": 45.1638,
+  "bh": 6.3368,
+  "az1": 96.5609,
+  "el1": 67.5273,
+  "az2": 30.7025,
+  "el2": 46.4626,
+  "wd": 73.46,
+  "wa": -6.8255,
+  "b3": 0.3205,
+  "lE": 61.569,
+  "lc": 28.2303,
+  "phiE": -3.2574,
+  "phib": -60.3692
+ },
+ "best_near": {
+  "min_mm": 1.07,
+  "gap1": 13.38,
+  "gap2": 20.48,
+  "n1": 0
+ },
+ "best_roll": {
+  "rho": 0.5654,
+  "yspan": [
+   -38.5,
+   54.3
+  ],
+  "xspan": [
+   -21.8,
+   30.7
+  ],
+  "sun_arc_mm": 11.4,
+  "Rb": [
+   60.6,
+   62.1
+  ],
+  "band_lift": 0.0,
+  "th_window": [
+   26.8,
+   109.6
+  ],
+  "kin_ws": 126,
+  "min_mdy_taken": 5.17,
+  "min_mseg_taken": 5.89,
+  "min_jac_taken": 0.222
+ },
+ "best_why": {
+  "fold": 31,
+  "slide": 3,
+  "flip": 0,
+  "closure": 0,
+  "skin": 1,
+  "parts": 1,
+  "contact": 0
+ },
+ "best_parts_ib14": {
+  "hub1": [
+   0.994,
+   8.0,
+   80
+  ],
+  "sun": [
+   0.99,
+   10.6,
+   20
+  ],
+  "planet": [
+   0.988,
+   11.0,
+   20
+  ],
+  "hub3": [
+   0.698,
+   11.8,
+   80
+  ],
+  "E": [
+   0.887,
+   7.6,
+   92
+  ],
+  "boss": [
+   0.968,
+   7.1,
+   32
+  ],
+  "pad": [
+   0.992,
+   8.5,
+   32
+  ],
+  "knee": [
+   0.891,
+   10.6,
+   100
+  ],
+  "L1": [
+   1.0,
+   6.8,
+   48
+  ],
+  "L2": [
+   0.866,
+   9.1,
+   149
+  ]
+ },
+ "doc": "docs/concepts/rollcone-hubspot-pinknee-3r.md",
+ "model_file": "docs/concepts/models/rollcone-hubspot-pinknee-3r.py",
+ "verdict": "SCREENED, rule-gated (not verified): frozen exact Bench(110,360) 22.16 (score 91.94; reach 0.689, follow 1.0, ib14 0.898, contact 0.008, near-1 22.72, overhead 8/28) at cx 6.5 and 0 passive translations - fast 13.38. Beats H1 (27.20, cx 0) by 5.0 and geneva-tail (23.57, cx 12) by 1.4; the same seats with an O20 pin J2 read 27.55 frozen (the rolling pair is worth 4.2 gap, 6.5 near-touch). Not 95: the stretched fold still costs 68 ws poses.",
+ "limiter": "the J2 fold, stretched side: 97 of 360 ws fold losses frozen (68 stretched th > 104.6, 24 folded); rolling segment 26.8-109.6 (no wider than H1's pin window - the search bought the metal: no hub-2 stack, bands 0.99 in band at one level, and seats where a pin would be narrower); across-the-body in-band 0.54 (hub 3 0.70, L2 0.87); overhead 8/28",
+ "note": "Model docs/concepts/models/rollcone-hubspot-pinknee-3r.py (subclass of H1's model: O20 hubs 1/3, kit near-touch, closure, jam rule, MR63ZZ knee stack 6.0, knee window). Rolling J2 zeroed at REST (spec), x = rho y, IK by tabulated th(y) on the rest segment; fold = instantaneous dyad (u1, contact line, J3) >= 5 AND segment-extremum margin >= 5 (min over taken 5.23). Bands: ONE level each, common strap radius within 1.5 mm, sectors = taken span + 3 deg + 4 mm clamps, frozen sectors enforced on the big bench (roll-off 0). Search: 439 configs, Bench(60,160) fast, near-touch objective, random + (3/3,6)-ES, local niced <= 2 processes (farm closed). Convergence gate (score pts of the objective; gain 2nd half / last third / top-5 spread): all 439 merged 1.01 / 0.20 / 0.03; final ES run (205) 0.17 / 0.08 / 0.03 -> converged locally. Frozen exact Bench(110,360): 22.16 (final pick), 23.33 (intermediate), pin-J2 control 27.55. rollcam and internal cells NOT run. Not held out; not envsel. Raw reads docs/research/rollcone_hubspot_pinknee_3r/.",
+ "frozen_exact": {
+  "bench": "Bench(110,360) exact, shape frozen from Bench(60,160) fast",
+  "gap": 22.16,
+  "reach": 0.6889,
+  "follow": 1.0,
+  "inband14": 0.8978,
+  "inband10": 0.6025,
+  "contact": 0.0083,
+  "near_touch_min_mm": 0.15,
+  "gap_near1": 22.72,
+  "gap_near2": 35.23,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.2857,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.8926,
+   "inband10": 0.6445,
+   "why_not": {
+    "fold": 14,
+    "slide": 6,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  },
+  "why": {
+   "fold": 97,
+   "slide": 8,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 4,
+   "contact": 3
+  },
+  "parts_pairs": {
+   "E-L2": 4
+  },
+  "fold_ws": {
+   "n": 97,
+   "folded": 24,
+   "stretched": 68,
+   "window": [
+    26.8,
+    109.6
+   ]
+  },
+  "min_fold_margin_taken": 5.23,
+  "min_jac_taken": 0.215,
+  "parts_ib14": {
+   "hub1": [
+    0.994,
+    8.0,
+    80
+   ],
+   "sun": [
+    0.99,
+    10.5,
+    20
+   ],
+   "planet": [
+    0.991,
+    11.0,
+    20
+   ],
+   "hub3": [
+    0.699,
+    11.7,
+    80
+   ],
+   "E": [
+    0.889,
+    7.6,
+    92
+   ],
+   "boss": [
+    0.966,
+    7.2,
+    32
+   ],
+   "pad": [
+    0.992,
+    8.5,
+    32
+   ],
+   "knee": [
+    0.892,
+    10.6,
+    100
+   ],
+   "L1": [
+    1.0,
+    6.8,
+    48
+   ],
+   "L2": [
+    0.87,
+    9.1,
+    149
+   ]
+  },
+  "file": "docs/research/rollcone_hubspot_pinknee_3r/frozen_exact_110x360_final_pick.json"
+ },
+ "frozen_exact_intermediate": {
+  "k": "2-es8-98",
+  "gap": 23.33,
+  "reach": 0.6806,
+  "follow": 1.0,
+  "inband14": 0.9005,
+  "inband10": 0.5675,
+  "contact": 0.0139,
+  "gap_near1": 23.89
+ },
+ "control_pin_j2": {
+  "note": "2-es8-98 seats + knee with an O20 pin J2 (H1 model, today's kit, stk 6.0)",
+  "fast": {
+   "gap": 23.73,
+   "reach": 0.6687,
+   "follow": 1.0,
+   "inband14": 0.9141,
+   "inband10": 0.5824,
+   "contact": 0.006
+  },
+  "frozen": {
+   "gap": 27.55,
+   "reach": 0.6333,
+   "follow": 1.0,
+   "inband14": 0.9126,
+   "inband10": 0.584,
+   "contact": 0.0088
+  },
+  "frozen_gap_near1": 30.41
+ },
+ "complexity": 6.5,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 2,
+  "moving_bodies": 5,
+  "joints": 5,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 4,
+  "sensed_passive": 0,
+  "springs_or_flexures": 2,
+  "custom_parts": 12,
+  "catalogue_parts": 10,
+  "notes": "H1's record with hub 2 replaced: J2 = a strap-held rolling cone pair (sun band integral with link 1, planet band integral with link 2, apex GH; 2 crossed NiTi / 301 straps as flexures, clamped by Ti plates + M1.6 screws). bodies: link 1, link 2, member 3 (hub-3 lower plate + E strap), knee link, arm pad. joints: J1, J3 O20 hubs (MR117 pairs), J2 rolling pair (no bearing), knee pins a, b on MR63ZZ pairs (cuff_knee, 0 per the user's 2026-10-17 ruling). custom: base, 2 links (with integral bands), member 3, knee link, arm pad, 2 hub shafts, 2 knee pins, 2 strap clamp sets (est. 12); catalogue: 2 x MR117 pair + 2 x MR63ZZ pair + straps + screws (est.). Open chain, GH closes it; nothing sags.",
+  "source": "docs/concepts/models/rollcone-hubspot-pinknee-3r.py:1-25",
+  "confidence": "estimated",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
+ },
+ "rule_questions": [
+  "hubless rolling J2 vs 'Keep O20 only' (user 2026-10-16)",
+  "strap-held pitch cones vs MVP1 'no gears, pulleys or cables' (straps carry no drive)",
+  "straps priced as flexures (2 x 3 -> cx 6.5)",
+  "coupled-fold reading: instantaneous dyad of the contact line"
+ ]
+}

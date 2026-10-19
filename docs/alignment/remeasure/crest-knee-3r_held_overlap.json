@@ -1,0 +1,39 @@
+{
+ "n": 470,
+ "overlap": 60,
+ "overlap_clip": 20,
+ "overlap_ws": 40,
+ "all": {
+  "gap": 29.81,
+  "reach": 0.6667,
+  "follow": 1.0,
+  "inband14": 0.8521,
+  "contact": 0.0169,
+  "n_ws": 360,
+  "n_clip": 110,
+  "ws_taken": 240,
+  "contact_poses": 6
+ },
+ "disjoint": {
+  "gap": 30.88,
+  "reach": 0.6562,
+  "follow": 1.0,
+  "inband14": 0.8514,
+  "contact": 0.0164,
+  "n_ws": 320,
+  "n_clip": 90,
+  "ws_taken": 210,
+  "contact_poses": 5
+ },
+ "overlap_only": {
+  "gap": 21.43,
+  "reach": 0.75,
+  "follow": 1.0,
+  "inband14": 0.8553,
+  "contact": 0.0196,
+  "n_ws": 40,
+  "n_clip": 20,
+  "ws_taken": 30,
+  "contact_poses": 1
+ }
+}

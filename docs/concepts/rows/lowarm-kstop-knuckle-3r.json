@@ -1,0 +1,403 @@
+{
+ "id": "lowarm-kstop-knuckle-3r",
+ "name": "Half-ring desmo knuckle at the buildable stage-1 level (F+3.9), held in the dwell by a K-own set-screw stop inside hub K (pad deleted, short-arm plate notch)",
+ "lens": "round15:B lowarm-adjpad-buildable (cell A at F+3.9, sided dwell hold on K's own angle)",
+ "family": "slaved-knuckle 3R with an unsensed two-pin cuff knee (desmo K drive, half ring, low arm)",
+ "active_dof": 3,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-18T14:24:00Z",
+ "reach": 0.7278,
+ "follow": 1.0,
+ "inband14": 0.896,
+ "inband10": 0.5703,
+ "contact": 0.0106,
+ "gap": 18.69,
+ "v_reach": 0.7278,
+ "v_follow": 1.0,
+ "v_inband14": 0.896,
+ "v_inband10": 0.5703,
+ "v_gap": 18.69,
+ "n_configs": 18,
+ "bench": "Bench(110,360) exact, frozen cell-A shape (fit Bench(60,160) fast), per-pose worst of the sided dwell wears +0.264 / -0.210 deg of K (P5 worst corners)",
+ "best_params": {
+  "r_c": 16.176,
+  "beta": -177.169,
+  "nose_r2": 0.75,
+  "wall2": 0.9,
+  "boss_r": 2.5,
+  "glev": 2.039,
+  "blend": 10.0,
+  "kslot": 46.9,
+  "a_s": 9.8,
+  "psi": 150.0,
+  "mu": 0.15,
+  "owd_margin": 2.0,
+  "zr": 2.0,
+  "l2_lift": 0.0,
+  "dwell_play_worn": [
+   0.264,
+   -0.21
+  ],
+  "j2_dowel_K": 46.35,
+  "stopB_K": 46.6
+ },
+ "step0": {
+  "plus_0264": {
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.8968,
+   "inband10": 0.5707,
+   "contact": 0.0106,
+   "gap": 18.6
+  },
+  "minus_0210": {
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.896,
+   "inband10": 0.5703,
+   "contact": 0.0106,
+   "gap": 18.68
+  },
+  "worst": {
+   "gap": 18.69,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.896,
+   "contact": 0.0106,
+   "n_ws": 360,
+   "n_clip": 110,
+   "ws_taken": 262,
+   "contact_poses": 4,
+   "flipped": []
+  },
+  "probe_0p1": {
+   "gap": 19.23,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.896,
+   "contact": 0.0133,
+   "n_ws": 360,
+   "n_clip": 110,
+   "ws_taken": 261,
+   "contact_poses": 5,
+   "flipped": [
+    139
+   ]
+  },
+  "probe_0p2": {
+   "gap": 19.77,
+   "reach": 0.7222,
+   "follow": 1.0,
+   "inband14": 0.896,
+   "contact": 0.016,
+   "n_ws": 360,
+   "n_clip": 110,
+   "ws_taken": 260,
+   "contact_poses": 6,
+   "flipped": [
+    139,
+    203
+   ]
+  },
+  "named_worst": {
+   "139": {
+    "min_mm": 0.072,
+    "cmin": 1.7,
+    "taken": true
+   },
+   "203": {
+    "min_mm": 0.61,
+    "cmin": 0.158,
+    "taken": true
+   },
+   "205": {
+    "min_mm": -4.437,
+    "cmin": -4.437,
+    "taken": false
+   },
+   "237": {
+    "min_mm": -9.64,
+    "cmin": -9.64,
+    "taken": false
+   },
+   "264": {
+    "min_mm": -1.304,
+    "cmin": -1.304,
+    "taken": false
+   },
+   "316": {
+    "min_mm": -1.235,
+    "cmin": 0.672,
+    "taken": false
+   }
+  },
+  "parent_cellA_F39_delta0": 18.65,
+  "lead": {
+   "gap": 18.28,
+   "probe_0p2": 18.83,
+   "held": 22.38
+  },
+  "gates": {
+   "kill_19_05": "pass (18.69)",
+   "p203_P5_worst": "pass (0.158 >= 0.15)",
+   "probe_0p2": "FAIL alone (19.77: 139 0.072, 203 0.158) - needs the h2facet + l2jog cell",
+   "e_minus_P5": "pass (0.210 <= 0.29; P0 0.408 fails: P5 stated)",
+   "cx": "16.75 <= 17.0",
+   "rc_min": "1.02 pass",
+   "bind": "pin first-fail >= 48.11 at every legal corner (mu 0.17); a_s 9.7 is past the skirt pitch limit (dK_lim 0)",
+   "m3": "pass as a build spec: short arm's swept metal inside r 10.15 at level 2.53-3.15, az 9.9-43.1; pocket to F+1.0 needs a 1.38 mm arm tip"
+  }
+ },
+ "sidedness": {
+  "drho_dK_mm_per_deg": -0.0606,
+  "wall_blocking_plusK": "inner",
+  "rho_mm_K0_2": [
+   9.9035,
+   9.783
+  ]
+ },
+ "stopA": {
+  "groove_r": [
+   6.45,
+   8.55
+  ],
+  "groove_z_over_FK": [
+   3.15,
+   4.75
+  ],
+  "groove_to_seat": 0.95,
+  "thread_to_seat": 1.2,
+  "groove_to_O20": 1.45,
+  "access_bore_exit_az_about_uK": -10.0,
+  "occupied_az_about_uK": {
+   "L1a": [
+    -89.2,
+    -55.0
+   ],
+   "L1b": [
+    -158.7,
+    -128.8
+   ],
+   "stage2_boss": 39.0
+  },
+  "reaction_N_per_Nm": 133
+ },
+ "mechanism": {
+  "stops": [
+   "K-own stop A (M1.6 set screw on a lug, inside hub K)",
+   "K-own stop B (groove end 46.6)",
+   "J2 low-end dowel at K-eq 46.35",
+   "J3 dowel (conecut)",
+   "knee window"
+  ],
+  "loops": 2,
+  "springs": 0,
+  "sensed_passive": 0,
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  },
+  "complexity": "16.75 (lowarm record 16.5 + 1 bought part; 16.5 if simplicity.py leaves the set screw out as a fastener)",
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 5,
+  "closed_loops": 3,
+  "custom_parts": 13,
+  "sliding_pairs": 2,
+  "rolling_pairs": 0,
+  "springs_or_flexures": 0,
+  "catalogue_parts": 15,
+  "joints_desc": {
+   "active": [
+    "J1 O20 v5",
+    "J2 O20 v5 (MR117 pair ISO P5 stated)",
+    "J3 O20 v5"
+   ],
+   "passive_rot": [
+    "K O20 v5 (slaved, never read)",
+    "crank pivot MR63ZZ pair",
+    "knee pin a MR63ZZ pair",
+    "knee pin b MR63ZZ pair"
+   ],
+   "passive_trans": [],
+   "higher_pairs": [
+    "stage 1: O1.5 pin in link 2's half-ring groove",
+    "stage 2: link 1a's O1.5 nose in the crank-tip slot"
+   ]
+  },
+  "joints": 8,
+  "schema_note": "verifier 2026-10-18: the claim's record lacked docs/SIMPLICITY.md's count fields (tools/simplicity.py read 0); merged lowarm-halfring-knuckle-3r's record (16.5) + 1 bought part (the M1.6 stop-A set screw) = 16.75; the descriptive joint list moved to joints_desc. The pad deletion removes no counted part (the parent's pad was integral to link 1b)."
+ },
+ "cells": {
+  "K": "this row (step 0 measured)",
+  "C": "adjpad control NOT run: dominated by construction (same + side, - side 0.273 vs 0.210, pad block metal added, 355 vs 133 N per N.m, cx 17.0)",
+  "P": "kpreload NOT run: no auditor flexure ruling in the ledger (cx 19.75 if ruled a flexure -> dead)",
+  "T": "bareti NOT run: step 0 passed, but it needs the auditor's Hertz-based RC_MIN acceptance (35 N corner over Ti first yield)",
+  "combined": "the claim cell (kstop + conecut-h2facet c 0.5 + conecut-l2jog dl 1.0) is NOT measured: those rows have not landed; projection from the judge's measured rates: 203 ~0.47, 139 ~0.49, probe reading = plain ~18.69"
+ },
+ "verdict": "SCREENED (step 0 passes): frozen exact Bench(110,360) per-pose worst of the P5 sided wears 18.69 (score 93.20; +0.264 18.60 / -0.210 18.68), reach 0.7278, ib14 0.896, 4 contacts, overhead 8/28; 203 = 0.158 >= 0.15 at P5 worst; held 22.876 paired +0.498 vs the lead (inside the 0.5 kill line by 0.002, CI90 [0, 0.55], P(better) 0); cx 16.75, 0 passive translations, M3 closed (stage 1 F+3.9 + short-arm pocket + 1.38 mm arm tip). Alone it fails the +0.2 mm probe (19.77: 139 + 203 flip) - the claim is the combined cell with conecut-h2facet + conecut-l2jog (not yet measured). Not a lead change: +0.40 bench / +0.50 held vs conecut-knee, all in-band, same takes and contacts.",
+ "limiter": "in-band (the whole 0.40 / 0.50 to the lead: link 2's 440C ring insert at F+3.15..4.65 and the low crank arm sit higher over the skin); pose 203 (hub 2 c10 ring, 0.158 at the wall-side P5 corner, 0.118 at P0) bounds the dwell phase and the probe; 139 (link 2, 0.072) the +0.1 probe; reach 0.7278 is the parent's (fold 88, J3 stop 6, contact 4)",
+ "note": "Step 0 only (13 fits / gate corners + 9 frozen wears; no search). Convergence gate: not applicable - no sweep run, so no 'dead' verdict is possible; the step-9 fit (near-touch on env, envsel, >= 2 LHS + sigma-0.8 restart) is next. Inner wall blocks +K: drho/dK -0.0606 mm/deg at the dwell exit. Spec correction: the catalogue's V.BEST | CELL_A merge would carry cell B's l2_lift 1.5; this row is CELL_A (l2_lift 0). Red team: 203 margin 0.008; unmodelled long-arm compliance 0.06-0.22 mm at 203 per 0.05 N.m; a_s 9.7 trips the skirt pitch gate (rho 9.904 vs R_HI 9.94); pocket cuts ~30-35 % of link 1b's bar root section (estimate); stop-A groove-to-seat wall 0.95. Kit density not re-measured (parent's shifts -0.06 / +0.08). Outputs: /tmp/claude-0/-home-user-exo-shoulder/55c580fc-1103-56e5-9e17-3e425f438838/scratchpad/kstop/ | VERIFIED 2026-10-18 ~15:30 UTC by an independent skeptic: v_gap 18.69 (score 93.20) frozen exact Bench(110,360), per-pose worst of the P5 sided wears reproduced bit-identically (+0.264 18.60 / -0.210 18.68; probes 19.23 / 19.77); champion 75.94 on the same bench (risley-turret verifier checks; the family's verifiers use the same reference). Added checks: V-ARM (short-arm underside at t 1.38 sampled as skin metal) 0 poses change; continuity flood connected_full 18.60 (0 dropped); J2 dowel cuts 0; complexity record merged into the simplicity schema (16.75; it read 0). Held reproduced bit-identically: 22.81 / 22.88, worst 22.876 (14 contacts, depth 44.95 mm; dwell th min 5.317, forced 5.006 = the lead's T3 item). Paired vs the lead: bench +0.40, held +0.4977, pooled +0.46, P(better) 0 - not a lead change; ranked at the +0.2 probe it is 19.77 vs the lead's 18.83.",
+ "doc": "docs/concepts/lowarm-kstop-knuckle-3r.md",
+ "model": "docs/concepts/models/lowarm-kstop-knuckle-3r.py",
+ "held": {
+  "plus_0264": {
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.8957,
+   "inband10": 0.57,
+   "contact": 0.016,
+   "gap": 22.81
+  },
+  "minus_0210": {
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.895,
+   "inband10": 0.5694,
+   "contact": 0.016,
+   "gap": 22.88
+  },
+  "worst_gap": 22.876,
+  "paired_vs_lead": {
+   "diff": 0.498,
+   "ci90": [
+    0.0,
+    0.55
+   ],
+   "p_better": 0.0,
+   "split": "in-band 0.50; 0 discordant takes / contacts (14 shared)"
+  },
+  "probes": "no held pose under 0.2 mm (min metal 0.33)"
+ },
+ "bench_paired_vs_lead": {
+  "diff": 0.4,
+  "ci90": [
+   0.0,
+   0.58
+  ],
+  "p_better": 0.0,
+  "split": "in-band 0.40; 0 discordant takes / contacts (4 shared)"
+ },
+ "report_P0": {
+  "plus_0363": 18.58,
+  "p203_at_0363": 0.118,
+  "minus_0408": 18.71,
+  "worst": 18.72,
+  "probe_0p1": 19.26,
+  "probe_0p2": 19.81
+ },
+ "verification": {
+  "t": "2026-10-18T15:39:00Z",
+  "harness": "docs/concepts/verify/lowarm-kstop-knuckle-3r.py",
+  "bench": "frozen exact Bench(110,360), per-pose worst of the P5 sided dwell wears (+0.264 18.60 / -0.210 18.68), reproduced bit-identically",
+  "v_gap_worst": 18.69,
+  "score": 93.2,
+  "probe_0p1": 19.23,
+  "probe_0p2": 19.77,
+  "ws_taken": 262,
+  "contacts": [
+   [
+    205,
+    -4.437
+   ],
+   [
+    237,
+    -9.64
+   ],
+   [
+    264,
+    -1.304
+   ],
+   [
+    316,
+    -1.235
+   ]
+  ],
+  "overhead": "8/28",
+  "near_touch_min_mm": 0.07,
+  "v_arm": {
+   "t": 1.38,
+   "poses_changed": 0,
+   "underside_min_skin_mm_fit": 7.92,
+   "note": "short-arm underside (unsampled in the claim: the sheet is the arm's top face) added as skin-checked metal; no pose changes"
+  },
+  "flood": {
+   "connected_full": 18.6,
+   "dropped": 0,
+   "knn": 20.29,
+   "bench_only": 50.45
+  },
+  "dowel_cut": 0,
+  "dK_taken_max": 45.615,
+  "paired_vs_lead": {
+   "bench": {
+    "diff": 0.3998,
+    "ci90": [
+     0.0,
+     0.58
+    ],
+    "p_better": 0.0,
+    "split": "in-band only; 0 discordant takes / contacts"
+   },
+   "held": {
+    "diff": 0.4977,
+    "ci90": [
+     0.0,
+     0.55
+    ],
+    "p_better": 0.0
+   },
+   "pooled": {
+    "diff": 0.46,
+    "ci90": [
+     0.0,
+     0.55
+    ],
+    "p_better": 0.0
+   },
+   "file": "docs/alignment/remeasure/lowarm-kstop-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json"
+  },
+  "dumps": [
+   "docs/alignment/remeasure/lowarm-kstop-knuckle-3r_bench_perpose.json",
+   "docs/alignment/remeasure/lowarm-kstop-knuckle-3r_held_perpose.json"
+  ],
+  "champion_same_bench": 75.94,
+  "held": {
+   "plus_0264": 22.81,
+   "minus_0210": 22.88,
+   "worst": 22.876,
+   "reach": 0.6922,
+   "inband14": 0.895,
+   "contact": 0.016,
+   "contacts": 14,
+   "contact_depth_mm": 44.95,
+   "overhead": "18/71",
+   "dK_taken_max": 46.268,
+   "dowel_cut": 0,
+   "reproduced": "bit-identically (0 per-pose diffs vs the claim's held dumps)",
+   "v3b_th": {
+    "dwell_min": 5.317,
+    "dwell_n": 457,
+    "forced_min": 5.006,
+    "forced_min_pose": 1054,
+    "lt5": 0,
+    "msub_lt1_dwell": 100,
+    "note": "th read with the effective dyad on dwell poses (V3 / V4 misfile them under play); forced 5.006 is the lead's T3 item (~4.92 with 0.23 deg of groove play)"
+   }
+  },
+  "bench_contact_depth_mm": 16.62
+ }
+}

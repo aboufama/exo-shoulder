@@ -1,0 +1,40 @@
+{
+ "which": "docs/research/inband_env_polish/picks/pick3.json",
+ "grid": 1432,
+ "kin_ok": 1012,
+ "known": 1312,
+ "taken_known": 907,
+ "seed_elev": 15.0,
+ "kinematic_strict": {
+  "nodes": 1012,
+  "seeds": 47,
+  "connected": 1012,
+  "taken_dropped": 0,
+  "taken_dropped_held": 0,
+  "dropped_poses": []
+ },
+ "contact_cons_strict": {
+  "nodes": 907,
+  "seeds": 45,
+  "connected": 907,
+  "taken_dropped": 0,
+  "taken_dropped_held": 0,
+  "dropped_poses": []
+ },
+ "contact_opt_strict": {
+  "nodes": 1003,
+  "seeds": 47,
+  "connected": 1003,
+  "taken_dropped": 0,
+  "taken_dropped_held": 0,
+  "dropped_poses": []
+ },
+ "contact_cons_unforced": {
+  "nodes": 907,
+  "seeds": 417,
+  "connected": 907,
+  "taken_dropped": 0,
+  "taken_dropped_held": 0,
+  "dropped_poses": []
+ }
+}

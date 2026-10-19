@@ -1,0 +1,44 @@
+[
+ {
+  "key": "M2",
+  "level": "watch",
+  "reason": "NEW since the last audit (the lead's build rule 2026-10-17, CLAUDE.md decision 5: knee pins are MR63ZZ ball-bearing pairs). The verified claim carries the knee pin stack stk 4.8534 mm (inherited from docs/concepts/models/frontload-lobe-stopb-knuckle-3r.py line 45; not in the row's best_params). The kit's own scale is 5.0 = iglidur pin, 6.0 = MR63ZZ pair (docs/concepts/models/skin-normal-3r-pin-knee.py lines 19, 54). So the knee's metal is 0.15 mm thinner than any listed component and 1.15 mm thinner than the required one. The gen-6 CAD reaches 4.85 only by facing a 3 mm GSM-0405-03 sleeve to 1.48 mm (pipeline/full-exo/designs/user_roller_longdyad/build.json). Re-worn UNCHANGED except stk 6.0 (tools/alignment_knee_stack_probe.py, new): bench 18.67 -> 18.93 (+0.26; reach 0.725 and contact 0.0054 unchanged, in-band 0.8937 -> 0.8911, all of it the knee link 0.941 -> 0.913, median 10.7 -> 11.3 mm; no new clash, why counts identical) docs/alignment/remeasure/roller-longdyad-knuckle-3r_stk6_bench.json; held out 23.73 -> 24.00 (+0.27; reach 0.6817 and contact 0.0116 unchanged, in-band 0.8926 -> 0.8899) (_stk6_held.json). Why not gamed: no ranking flip against rows measured at stk 6.0 (desmo-conecut 18.98 stays behind by 0.05, conecut-knee 18.28 stays ahead). The neighbours at 4.85 (slipper-nose, sidecar-longdyad, ...) need their own stk-6 wear before a like-for-like order exists. Action: state the row at stk 6.0 next to 18.67 (proposal 1).",
+  "evidence": "docs/alignment/remeasure/roller-longdyad-knuckle-3r_stk6_bench.json; docs/alignment/remeasure/roller-longdyad-knuckle-3r_stk6_held.json; tools/alignment_knee_stack_probe.py; docs/concepts/models/skin-normal-3r-pin-knee.py:19,54; docs/concepts/models/frontload-lobe-stopb-knuckle-3r.py:45; pipeline/full-exo/designs/user_roller_longdyad/build.json"
+ },
+ {
+  "key": "G5",
+  "level": "watch",
+  "reason": "Updated for simplicity v2.1 (ec77d25). The row's 20.25 is 3.5 points under the faithful knee-free count of this mechanism, 23.75. Two independent counts give 23.75 (tools/simplicity.py): the kneeless twin's record (docs/concepts/rows/kneeless-roller-knuckle-3r.json), and subtracting this row's own recorded knee (1 made, 2 bought, 1 body, its loop). Under v2 the spurious knee-closure loop (+4) offset the template over-subtraction (24.25, +0.5). v2.1 freed that loop without correcting the base record (bodies 6, not 7; bought 15, not 19 with the MR63ZZ knee), so the offset is gone. Split: 1.5 = the template's made-part residual that docs/SIMPLICITY.md line 233 names ('<= 1.5'); 2.0 = the uncorrected base record (1 body + 4 bought). Base record corrected with the template kept: 22.25. Result: the design WITH a two-pin knee reads simpler than the identical design WITHOUT it (20.25 vs 23.75). The slaved-knuckle rows that copy this record (slipper-nose / trimlug 18.25, conecut-knee 18.5, dipped 20.25, ...) carry the same offset, so the order inside the family holds. Not in the score, and no design is at score 95 where complexity decides, so watch. The row's name still ends '(cx 43.75)' (stale label).",
+  "evidence": "tools/simplicity.py on docs/concepts/rows/roller-longdyad-knuckle-3r.json mechanism (20.25) vs docs/concepts/rows/kneeless-roller-knuckle-3r.json (23.75); docs/SIMPLICITY.md:229-233"
+ },
+ {
+  "key": "S1",
+  "level": "watch",
+  "reason": "Carried (claim unchanged; skeptic 04:42 upheld). The 0.24 bench win over sidecar-longdyad (18.67 vs 18.91) is inside the paired noise: SD 1.35, 90 % [-2.62, +1.73]. Held out, sidecar-longdyad is better: 22.67 vs 23.73, P(this better) 0.135, pooled 0.191 (docs/alignment/remeasure/roller-longdyad-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_claim.json). The whole 18.28-18.98 3-joint cluster sits inside that noise.",
+  "evidence": "docs/alignment/remeasure/roller-longdyad-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_claim.json"
+ },
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "Carried as the catalogue entry (was NEW-contact-depth); report only, the score counts contact poses. Against the row it outranks, sidecar-longdyad: bench 2 contacts summing 16.46 mm (deepest 10.55 mm at ws 15/165/-60, metal 1 cm into the arm overhead) vs 4 / 6.23 mm (x2.64, +10.23 mm); held out 10 / 49.88 mm (7 deeper than 3 mm) vs 10 / 35.66 mm. Against the current lead conecut-knee-knuckle-3r (its per-pose dumps reproduce 18.28 / 22.38): less in total (bench 20.25 mm over 4, held 60.96 mm over 14) but a deeper single bench press (10.55 vs 8.93 mm at the same pose). The tool check reads ok only because it finds no claim-named depth dump for conecut-knee.",
+  "evidence": "docs/alignment/remeasure/roller-longdyad-knuckle-3r_bench_perpose_claim.json, _held_perpose_claim.json; docs/alignment/remeasure/conecut-knee-knuckle-3r_bench_perpose.json, _held_perpose.json"
+ },
+ {
+  "key": "NEW-ws-inband",
+  "level": "watch",
+  "reason": "Carried. Unscored raised-arm standoff is worse than sidecar-longdyad's: workspace in-band at elev 90-140 0.798 vs 0.841, metal over 14 mm 0.201 vs 0.157 (docs/alignment/live_audit_2026-10-16/probe_*). Against the current lead: this row takes 46 / 114 raised-arm poses (bench / held) vs 47 / 123, and has 25 / 61 taken poses with metal < 2 mm vs 23 / 57 (per-pose dumps).",
+  "evidence": "docs/alignment/live_audit_2026-10-16/probe_*; remeasure per-pose dumps"
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "Carried on the knee (the pressure-angle part was answered by the red team; the sensing part is out of scope since the user's ruling 2026-10-17). The taken knee reaches 151.92 deg on the bench (re-wear coord_spans K.ang 86.21-151.92) and 153.16 held out. That is 2.86 / 1.62 deg from the physical knee stop at 180 - ang_min = 154.78, and past H1's 149.54 window on 3 bench and 2 held-out poses. Near straight, the knee link sits 31.6 mm from J3 and takes 31.6 N per N.m about J3, vs 12.0 N on the current lead's re-centred knee (docs/concepts/conecut-knee-knuckle-3r.md lines 95-101). ang_min walked 30.46 -> 26.88 -> 25.22 with no held-out gain (skeptic: 23.55 / 23.72 / 23.73).",
+  "evidence": "docs/alignment/remeasure/roller-longdyad-knuckle-3r_bench.json deep.coord_spans K.ang; docs/concepts/conecut-knee-knuckle-3r.md:95-101"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "Carried, narrowed. One clock-spring cap force-closes both rolling pairs and holds K on its law; K moves on 167 of 371 bench and 400 of 852 held-out taken poses. Now measured: R17 on the built gen-6 CAD passes with K slaved (K vs law 0.115 deg), with 2x-speed cuff twist 4.10 / 4.02 deg (limit 5; docs/research/roller-longdyad-gen6_fix_check.md). The red team's static lift-off factor is 2.42-2.79, but a throw exceeds the q2 acceleration limit of 43.7 rad/s2 (roller_mechanism/results_bench.json). Lift-off on the clips is still unrun, and an unread K that leaves its law also leaves the fold margin unguarded.",
+  "evidence": "docs/research/roller-longdyad-gen6_fix_check.md; docs/research/roller_mechanism_redteam.md; roller_mechanism/results_bench.json"
+ }
+]

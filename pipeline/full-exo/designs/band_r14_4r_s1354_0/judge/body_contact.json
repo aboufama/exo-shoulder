@@ -1,0 +1,242 @@
+{
+ "step": 2,
+ "tol_mm": 0.5,
+ "frames_checked": 671,
+ "seconds": 587,
+ "jobs": 4,
+ "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
+ "parts": {
+  "H|BOTTOM JN hub block (proxy)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "F|FOREARM CUFF": {
+   "max_depth": 24.87,
+   "frames": 671,
+   "worst": [
+    "Wash opposite shoulder",
+    150,
+    [
+     138,
+     59,
+     -50,
+     112,
+     0
+    ]
+   ]
+  },
+  "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
+   "max_depth": 8.37,
+   "frames": 671,
+   "worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ]
+  },
+  "H|TOP": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
+   "max_depth": 2.82,
+   "frames": 671,
+   "worst": [
+    "Comb hair",
+    162,
+    [
+     76,
+     136,
+     -65,
+     113,
+     0
+    ]
+   ]
+  },
+  "F|MIDDLE": {
+   "max_depth": 5.79,
+   "frames": 671,
+   "worst": [
+    "Comb hair",
+    68,
+    [
+     60,
+     121,
+     -59,
+     119,
+     0
+    ]
+   ]
+  },
+  "H|5mm D, 2.5mm H, N42 MAGNET": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[15]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve1[2]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[11]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve4": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[5]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve1[1]": {
+   "max_depth": 1.03,
+   "frames": 400,
+   "worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ]
+  },
+  "H|CirPattern1[7]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[16]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[12]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[14]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[8]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[10]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[4]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve3": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[2]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[9]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|Revolve1[3]": {
+   "max_depth": 0.6,
+   "frames": 33,
+   "worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ]
+  },
+  "H|CirPattern1[1]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[6]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[3]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[17]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "H|CirPattern1[13]": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l3|D4 member l3 (proxy)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l2|D4 member l2 (proxy)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "l1|D4 member l1 (proxy)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  },
+  "base|D4 member base (proxy)": {
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null
+  }
+ },
+ "worst_part": "F|FOREARM CUFF",
+ "max_depth": 24.87
+}

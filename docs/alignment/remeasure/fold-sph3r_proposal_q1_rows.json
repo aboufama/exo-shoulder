@@ -1,0 +1,68 @@
+{
+ "arm-parked-knee-4r": {
+  "v_gap": 26.71,
+  "row_gap": 19.32,
+  "fast": {
+   "claim_q": {
+    "q": 0.9801,
+    "gap": 19.32,
+    "near1": 21.6,
+    "inband14": 0.8076,
+    "reach": 0.825,
+    "contact": 0.0258
+   },
+   "q1.0": {
+    "q": 1.0,
+    "gap": 92.19,
+    "near1": 94.54,
+    "inband14": 0.2116,
+    "reach": 0.7438,
+    "contact": 0.044
+   }
+  }
+ },
+ "j3-neck-over-3r": {
+  "v_gap": 28.46,
+  "row_gap": 22.87,
+  "fast": {
+   "claim_q": {
+    "q": 0.9647,
+    "gap": 26.26,
+    "near1": 26.26,
+    "inband14": 0.837,
+    "reach": 0.7812,
+    "contact": 0.0808
+   },
+   "q1.0": {
+    "q": 1.0,
+    "gap": 67.37,
+    "near1": 67.37,
+    "inband14": 0.3016,
+    "reach": 0.85,
+    "contact": 0.0253
+   }
+  }
+ },
+ "zc-frontier-3r": {
+  "v_gap": 33.51,
+  "row_gap": 28.85,
+  "fast": {
+   "claim_q": {
+    "q": 0.978,
+    "gap": 30.04,
+    "near1": 39.73,
+    "inband14": 0.891,
+    "reach": 0.6438,
+    "contact": 0.0185
+   },
+   "q1.0": {
+    "q": 1.0,
+    "gap": 90.23,
+    "near1": 91.46,
+    "inband14": 0.2845,
+    "reach": 0.6813,
+    "contact": 0.0181
+   }
+  }
+ }
+}

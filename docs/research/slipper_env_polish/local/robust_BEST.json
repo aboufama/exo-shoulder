@@ -1,0 +1,72 @@
+[
+ {
+  "ok": false,
+  "n_fail": 3,
+  "min_dK_lim": 0.0,
+  "dK_need": 43.4,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 0.0,
+    "why": "pressure_crank",
+    "pa_horn": 33.7,
+    "pa_crank": 38.8,
+    "honest": false,
+    "ok": false
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 48.8,
+    "why": "pressure_horn",
+    "pa_horn": 35.1,
+    "pa_crank": 23.7,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 0.0,
+    "why": "pressure_crank",
+    "pa_horn": 34.4,
+    "pa_crank": 40.2,
+    "honest": false,
+    "ok": false
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 48.5,
+    "why": "pressure_horn",
+    "pa_horn": 35.2,
+    "pa_crank": 16.4,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 0.0,
+    "why": "pressure_crank",
+    "pa_horn": 43.8,
+    "pa_crank": 49.0,
+    "honest": false,
+    "ok": false
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 46.8,
+    "why": "pressure_horn",
+    "pa_horn": 36.2,
+    "pa_crank": 7.5,
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "BEST",
+  "secs": 30.1
+ }
+]

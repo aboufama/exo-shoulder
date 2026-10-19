@@ -1,0 +1,2866 @@
+{
+ "poses": 120,
+ "step": 12,
+ "share_passing": 0.3917,
+ "static_fits_left_to_R6": [
+  "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_",
+  "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x",
+  "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0",
+  "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.",
+  "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0",
+  "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+  "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1"
+ ],
+ "arm_near_mm": 110.0,
+ "fails": {
+  "chain_does_not_close": 0.1083,
+  "body_contact": 0.0,
+  "part_interference": 0.5
+ },
+ "evaluator_agreement": 0.533,
+ "skip_groups": [
+  "F"
+ ],
+ "tol_body_mm": 0.5,
+ "tol_parts_mm": 0.15,
+ "seconds": 20,
+ "per_pose": [
+  {
+   "k": 0,
+   "p": [
+    -90.0,
+    0.0,
+    75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 1,
+   "p": [
+    -90.0,
+    15.0,
+    135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.55
+   },
+   "parts_motion_mm": 0.55
+  },
+  {
+   "k": 2,
+   "p": [
+    -90.0,
+    45.0,
+    75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.8,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.8
+  },
+  {
+   "k": 3,
+   "p": [
+    -90.0,
+    60.0,
+    135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 4,
+   "p": [
+    -75.0,
+    15.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 5,
+   "p": [
+    -75.0,
+    30.0,
+    120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.19,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.47
+   },
+   "parts_motion_mm": 0.47
+  },
+  {
+   "k": 6,
+   "p": [
+    -75.0,
+    60.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.4,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN BOTTOM (user's bar, cut at s 255, 2x M3 ": 0.96,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 upper boss + cap keep-out (O20, F+3.1 IN BOTTOM (user's bar, cut at s 255, 2x M3 ": 1.31,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN BOTTOM (user's bar, cut at s 255, 2x M3 ": 0.91,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 1.31
+  },
+  {
+   "k": 7,
+   "p": [
+    -60.0,
+    0.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.56
+   },
+   "parts_motion_mm": 0.56
+  },
+  {
+   "k": 8,
+   "p": [
+    -60.0,
+    30.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.73,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.19
+   },
+   "parts_motion_mm": 0.73
+  },
+  {
+   "k": 9,
+   "p": [
+    -60.0,
+    45.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.74,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.66
+   },
+   "parts_motion_mm": 0.74
+  },
+  {
+   "k": 10,
+   "p": [
+    -45.0,
+    0.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 11,
+   "p": [
+    -45.0,
+    15.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.75
+   },
+   "parts_motion_mm": 0.75
+  },
+  {
+   "k": 12,
+   "p": [
+    -45.0,
+    45.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.79,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.79
+  },
+  {
+   "k": 13,
+   "p": [
+    -45.0,
+    60.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.65,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.19,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.75
+   },
+   "parts_motion_mm": 0.75
+  },
+  {
+   "k": 14,
+   "p": [
+    -30.0,
+    0.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.78
+   },
+   "parts_motion_mm": 0.78
+  },
+  {
+   "k": 15,
+   "p": [
+    -30.0,
+    15.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.83
+   },
+   "parts_motion_mm": 0.83
+  },
+  {
+   "k": 16,
+   "p": [
+    -30.0,
+    30.0,
+    120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.76
+   },
+   "parts_motion_mm": 0.76
+  },
+  {
+   "k": 17,
+   "p": [
+    -30.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 18,
+   "p": [
+    -15.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 19,
+   "p": [
+    -15.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.19
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 20,
+   "p": [
+    -15.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.33,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.33
+  },
+  {
+   "k": 21,
+   "p": [
+    -15.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.65,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.65
+  },
+  {
+   "k": 22,
+   "p": [
+    -15.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.71,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.76
+   },
+   "parts_motion_mm": 0.76
+  },
+  {
+   "k": 23,
+   "p": [
+    -15.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.43,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.69
+   },
+   "parts_motion_mm": 0.69
+  },
+  {
+   "k": 24,
+   "p": [
+    -15.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.4,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.81
+   },
+   "parts_motion_mm": 0.81
+  },
+  {
+   "k": 25,
+   "p": [
+    0.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 26,
+   "p": [
+    0.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 27,
+   "p": [
+    0.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.18,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.18
+  },
+  {
+   "k": 28,
+   "p": [
+    0.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.71,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.71
+  },
+  {
+   "k": 29,
+   "p": [
+    0.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.71,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.77
+   },
+   "parts_motion_mm": 0.77
+  },
+  {
+   "k": 30,
+   "p": [
+    0.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.74,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.84
+   },
+   "parts_motion_mm": 0.84
+  },
+  {
+   "k": 31,
+   "p": [
+    0.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.69,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.76
+   },
+   "parts_motion_mm": 0.76
+  },
+  {
+   "k": 32,
+   "p": [
+    0.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.79,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.79
+  },
+  {
+   "k": 33,
+   "p": [
+    0.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "BOTTOM (user's bar, cut at s 255, 2x M3  IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.71,
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.79,
+    "neck neck to BOTTOM's bar keep-out (14 x IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.8,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN BOTTOM (user's bar, cut at s 255, 2x M3 ": 0.76,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 1.26,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.22
+   },
+   "parts_motion_mm": 1.26
+  },
+  {
+   "k": 34,
+   "p": [
+    15.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 35,
+   "p": [
+    15.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 36,
+   "p": [
+    15.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 37,
+   "p": [
+    15.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.77,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.63
+   },
+   "parts_motion_mm": 0.77
+  },
+  {
+   "k": 38,
+   "p": [
+    15.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.65,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.19,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.79
+   },
+   "parts_motion_mm": 0.79
+  },
+  {
+   "k": 39,
+   "p": [
+    15.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.72,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.76
+   },
+   "parts_motion_mm": 0.76
+  },
+  {
+   "k": 40,
+   "p": [
+    15.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.78,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.78
+  },
+  {
+   "k": 41,
+   "p": [
+    15.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.65,
+    "neck neck to BOTTOM's bar keep-out (14 x IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.47,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.47,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.65
+  },
+  {
+   "k": 42,
+   "p": [
+    15.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.46,
+    "neck neck to BOTTOM's bar keep-out (14 x IN link1 strap keep-out (12 x 3 mm Ti at r_": 1.0,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 1.98,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 1.98
+  },
+  {
+   "k": 43,
+   "p": [
+    30.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 44,
+   "p": [
+    30.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 45,
+   "p": [
+    30.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.19
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 46,
+   "p": [
+    30.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.53,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.77
+   },
+   "parts_motion_mm": 0.77
+  },
+  {
+   "k": 47,
+   "p": [
+    30.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.71,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.81
+   },
+   "parts_motion_mm": 0.81
+  },
+  {
+   "k": 48,
+   "p": [
+    30.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.66,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.33
+   },
+   "parts_motion_mm": 0.66
+  },
+  {
+   "k": 49,
+   "p": [
+    30.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.71,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.71
+  },
+  {
+   "k": 50,
+   "p": [
+    30.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 51,
+   "p": [
+    30.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 52,
+   "p": [
+    45.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 53,
+   "p": [
+    45.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 54,
+   "p": [
+    45.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.76
+   },
+   "parts_motion_mm": 0.76
+  },
+  {
+   "k": 55,
+   "p": [
+    45.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.23,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.84
+   },
+   "parts_motion_mm": 0.84
+  },
+  {
+   "k": 56,
+   "p": [
+    45.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.78,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.75
+   },
+   "parts_motion_mm": 0.78
+  },
+  {
+   "k": 57,
+   "p": [
+    45.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.65,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.19
+   },
+   "parts_motion_mm": 0.65
+  },
+  {
+   "k": 58,
+   "p": [
+    45.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.88,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.71,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 59,
+   "p": [
+    45.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.41,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 60,
+   "p": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 1.68,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 61,
+   "p": [
+    60.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 62,
+   "p": [
+    60.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.65
+   },
+   "parts_motion_mm": 0.65
+  },
+  {
+   "k": 63,
+   "p": [
+    60.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.73
+   },
+   "parts_motion_mm": 0.73
+  },
+  {
+   "k": 64,
+   "p": [
+    60.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.79
+   },
+   "parts_motion_mm": 0.79
+  },
+  {
+   "k": 65,
+   "p": [
+    60.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.58,
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.58
+  },
+  {
+   "k": 66,
+   "p": [
+    60.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.88,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.71,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 67,
+   "p": [
+    60.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.66,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 68,
+   "p": [
+    60.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.73,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 69,
+   "p": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.05,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 70,
+   "p": [
+    75.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.56
+   },
+   "parts_motion_mm": 0.56
+  },
+  {
+   "k": 71,
+   "p": [
+    75.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.78
+   },
+   "parts_motion_mm": 0.78
+  },
+  {
+   "k": 72,
+   "p": [
+    75.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.83
+   },
+   "parts_motion_mm": 0.83
+  },
+  {
+   "k": 73,
+   "p": [
+    75.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.76
+   },
+   "parts_motion_mm": 0.76
+  },
+  {
+   "k": 74,
+   "p": [
+    75.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 1.63,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 75,
+   "p": [
+    75.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.68,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 76,
+   "p": [
+    75.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.28,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 77,
+   "p": [
+    75.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 1.24,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.19
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 78,
+   "p": [
+    75.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.57,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 79,
+   "p": [
+    90.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.78
+   },
+   "parts_motion_mm": 0.78
+  },
+  {
+   "k": 80,
+   "p": [
+    90.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.84
+   },
+   "parts_motion_mm": 0.84
+  },
+  {
+   "k": 81,
+   "p": [
+    90.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.75
+   },
+   "parts_motion_mm": 0.75
+  },
+  {
+   "k": 82,
+   "p": [
+    90.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.7,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.22
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 83,
+   "p": [
+    90.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 1.49,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 84,
+   "p": [
+    90.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.2,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 85,
+   "p": [
+    90.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.29,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.19
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 86,
+   "p": [
+    90.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 1.96,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 87,
+   "p": [
+    90.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 88,
+   "p": [
+    105.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.84
+   },
+   "parts_motion_mm": 0.84
+  },
+  {
+   "k": 89,
+   "p": [
+    105.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.75
+   },
+   "parts_motion_mm": 0.75
+  },
+  {
+   "k": 90,
+   "p": [
+    105.0,
+    45.0,
+    -165.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 91,
+   "p": [
+    105.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.69,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 92,
+   "p": [
+    105.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 1.05,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 93,
+   "p": [
+    105.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.72,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 94,
+   "p": [
+    105.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 1.07,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 95,
+   "p": [
+    105.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 96,
+   "p": [
+    105.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 97,
+   "p": [
+    120.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.85,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.85,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.76
+   },
+   "parts_motion_mm": 0.76
+  },
+  {
+   "k": 98,
+   "p": [
+    120.0,
+    30.0,
+    -180.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 99,
+   "p": [
+    120.0,
+    45.0,
+    -165.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 100,
+   "p": [
+    120.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.54,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 101,
+   "p": [
+    120.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 102,
+   "p": [
+    120.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 103,
+   "p": [
+    120.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.02,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 104,
+   "p": [
+    120.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 105,
+   "p": [
+    120.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 106,
+   "p": [
+    135.0,
+    15.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 107,
+   "p": [
+    135.0,
+    30.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.27
+   },
+   "parts_motion_mm": 0.27
+  },
+  {
+   "k": 108,
+   "p": [
+    135.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.76,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.83
+   },
+   "parts_motion_mm": 0.83
+  },
+  {
+   "k": 109,
+   "p": [
+    135.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 110,
+   "p": [
+    135.0,
+    90.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 1.68,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.22,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.76
+   },
+   "parts_motion_mm": 0.76
+  },
+  {
+   "k": 111,
+   "p": [
+    135.0,
+    105.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 1.35,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.2
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 112,
+   "p": [
+    135.0,
+    135.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 113,
+   "p": [
+    150.0,
+    0.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.56
+   },
+   "parts_motion_mm": 0.56
+  },
+  {
+   "k": 114,
+   "p": [
+    150.0,
+    15.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.75
+   },
+   "parts_motion_mm": 0.75
+  },
+  {
+   "k": 115,
+   "p": [
+    150.0,
+    45.0,
+    -150.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 116,
+   "p": [
+    150.0,
+    60.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.33,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.22,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.76
+   },
+   "parts_motion_mm": 0.76
+  },
+  {
+   "k": 117,
+   "p": [
+    150.0,
+    75.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 2.84,
+   "parts_pair": "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1",
+   "pairs": {
+    "neck neck to BOTTOM's bar keep-out (14 x IN J3 upper boss + cap keep-out (O20, F+3.1": 2.84,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN neck neck to BOTTOM's bar keep-out (14 x": 0.18,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J3 lower plate keep-out (O20 x 3, F 68.0": 0.45,
+    "link2 strap keep-out (12 x 3 mm Ti at r_ IN J2 lower plate keep-out (O20 x 3, F 145.": 0.16,
+    "link1 strap keep-out (12 x 3 mm Ti at r_ IN J1 lower plate keep-out (O20 x 3, F 52.0": 0.51,
+    "J3 upper boss + cap keep-out (O20, F+3.1 IN neck neck to BOTTOM's bar keep-out (14 x": 2.72,
+    "J2 lower plate keep-out (O20 x 3, F 145. IN link2 strap keep-out (12 x 3 mm Ti at r_": 0.21,
+    "J1 lower plate keep-out (O20 x 3, F 52.0 IN link1 strap keep-out (12 x 3 mm Ti at r_": 0.7
+   },
+   "parts_motion_mm": 0.7
+  },
+  {
+   "k": 118,
+   "p": [
+    150.0,
+    105.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 119,
+   "p": [
+    150.0,
+    120.0,
+    -105.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  }
+ ]
+}

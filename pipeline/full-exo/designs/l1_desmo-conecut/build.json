@@ -1,0 +1,7799 @@
+{
+ "fit": {
+  "params": {
+   "r_c": 16.176,
+   "beta": -177.169,
+   "nose_r2": 0.75,
+   "wall2": 0.9,
+   "kslot": 46.5,
+   "boss_r": 2.5,
+   "glev": -1.0,
+   "blend": 10.0,
+   "a_s": 9.529,
+   "psi": 149.71,
+   "mu": 0.15,
+   "stage2": "B",
+   "c_slot2": 0.01,
+   "s1_read": "built",
+   "s2_gate": 1,
+   "stk": 6.0,
+   "lE": 97.1443,
+   "lc": 24.3508,
+   "phiE": 0.7526,
+   "phib": -91.8041,
+   "J3MIN": -111.9036,
+   "J3MAX": 122.7417,
+   "ang_min": 25.2189
+  },
+  "source": "docs/concepts/rows/desmo-conecut-knuckle-3r.json best_params (ang_min 25.2189) through the claim's SNModel (SN_CELL=lead)",
+  "bench": "60,160",
+  "mode": "fast",
+  "fold_margin": 5.0,
+  "report": {
+   "gap": 13.27,
+   "plain": null,
+   "gap_near1": 14.43,
+   "gap_near2": 19.05,
+   "near_touch_min_mm": 0.2,
+   "reach": 0.775,
+   "follow": 1.0,
+   "inband14": 0.8923,
+   "inband10": 0.5613,
+   "contact": 0.0,
+   "why": {
+    "fold": 31,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   },
+   "min_clear_taken": 1.46,
+   "parts_ib14": {
+    "hub1": [
+     1.0,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.988,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.912,
+     11.6,
+     80
+    ],
+    "hub3": [
+     0.747,
+     11.5,
+     80
+    ],
+    "E": [
+     0.98,
+     6.0,
+     164
+    ],
+    "boss": [
+     1.0,
+     7.4,
+     32
+    ],
+    "pad": [
+     1.0,
+     6.2,
+     32
+    ],
+    "knee": [
+     1.0,
+     9.7,
+     90
+    ],
+    "crank": [
+     0.804,
+     11.2,
+     133
+    ],
+    "horn": [
+     0.935,
+     9.0,
+     27
+    ],
+    "ring2": [
+     0.539,
+     13.9,
+     19
+    ],
+    "plate": [
+     0.735,
+     12.3,
+     8
+    ],
+    "L1a": [
+     0.979,
+     10.2,
+     8
+    ],
+    "L1b": [
+     0.92,
+     8.3,
+     36
+    ],
+    "L2": [
+     0.729,
+     12.0,
+     124
+    ]
+   }
+  },
+  "m": [
+   -11.739,
+   1.163,
+   0.0
+  ],
+  "tr": 86.969,
+  "fK": 55.117,
+  "cam": {
+   "boss_level": 63.3,
+   "lev_L1b": 60.1,
+   "arm_tip_level": 63.2,
+   "g": 2.393,
+   "sig": 1.0,
+   "r_c": 16.18,
+   "beta": -177.17,
+   "arm_len": 55.4,
+   "arc_deg": 127.3,
+   "rssr_closed": true,
+   "vel_angle_rest": 1.8,
+   "contact_r": [
+    16.4,
+    22.2
+   ],
+   "clear_hubK_min": 2.04,
+   "n_lowarm": 32,
+   "phi_max_taken": 19.3,
+   "cprog": 0.0,
+   "crest_exact": 9.62,
+   "dK_lim": 46.5,
+   "why_lim": "slot-end",
+   "law_dK_max": 62.7,
+   "nose_r": 0.75,
+   "mu": 0.15,
+   "friction_deg": 8.53,
+   "pa_kin_max": 34.47,
+   "flank_deleted": true,
+   "dK_lim_parent_flank": 64.5,
+   "why_lim_parent_flank": "law",
+   "pa_crank_max_taken": 14.6,
+   "pa_horn_max_taken": 24.6,
+   "pa_eff_crank": 23.1,
+   "pa_eff_horn": 33.1,
+   "dK_lim_parent": 64.5,
+   "why_lim_parent": "law",
+   "desmo": {
+    "calib": {
+     "s_th": -0.4644,
+     "inv_kK": 0.4644,
+     "q_on_deg": 7.28,
+     "dwell_deg": [
+      12.6,
+      90.9
+     ],
+     "fit_rms_deg": 0.0,
+     "n": 61
+    },
+    "stage1": {
+     "a_s": 9.529,
+     "psi": 149.7,
+     "pitch": [
+      9.4,
+      9.4
+     ],
+     "r_out": 10.96,
+     "pa_pin_max": 33.74,
+     "pa_cap_max": 35.05,
+     "pa_gate": 34.47,
+     "drift_max": 0.286,
+     "tilt_max_deg": 4.76,
+     "crown_needed": true,
+     "rc_min": 1.01,
+     "rc_onset": 1.01,
+     "ridge_mm": 0.247,
+     "blend_K_lead_deg": 2.614,
+     "arm_from_axis": 9.53,
+     "n_ring_rigid": 19,
+     "ring_az_deg": 99.9,
+     "lim_by_gate": {
+      "pitch": 52.5,
+      "pa_pin": 47.5,
+      "pa_cap": 0.0,
+      "drift": null,
+      "radius": 0.25
+     }
+    },
+    "stage1_built": {
+     "read": "built",
+     "half_blend_K_deg": 10.767,
+     "pin_max_moving": 62.07,
+     "cap_max_outside_blend": 54.17,
+     "cap_inside_blend": [
+      28.35,
+      89.91
+     ],
+     "pin_first_fail_K": 47.504,
+     "cap_first_fail_K": 58.529,
+     "note": "cap side gated for x >= half-blend (outside the blend); inside it the cap side is the dwell lock (reported) - a re-reading of desmo-slipper's linear-law gate, stated for the auditor"
+    },
+    "stage2B": {
+     "nose_r": 0.75,
+     "c_slot": 0.01,
+     "wall": 0.9,
+     "boss_r": 2.5,
+     "seat_rK": 16.18,
+     "seat_R": 61.51,
+     "boss_hubK_margin": 3.68,
+     "slot_len_mm": 3.72,
+     "plate_len_mm": 7.04,
+     "plate_w_mm": 3.32,
+     "rel_speed_rest_mm_per_rad": 0.525,
+     "pa_horn_max": 24.73,
+     "pa_crank_max": 14.56,
+     "dK_lim_pa_by_mu": {
+      "0.087": 64.5,
+      "0.120": 64.5,
+      "0.135": 64.5,
+      "0.150": 64.5,
+      "0.200": 61.0
+     },
+     "clear_plate_hubK": 1.23,
+     "clear_plate_hub2": 41.74,
+     "clear_lowarm_boss": 19.93,
+     "n_plate_rigid": 8,
+     "n_boss_rigid": 27
+    },
+    "slop": {
+     "slotB": {
+      "slop_max": 0.04,
+      "slop_at": [
+       1.0,
+       -1
+      ],
+      "pocket_pa_max_horn": 25.5,
+      "pocket_pa_max_crank": 32.0,
+      "pocket_pa_gate": 34.47,
+      "pocket_pa_fail_K0": null,
+      "pole_rows": [
+       [
+        0.0,
+        1,
+        0.0375,
+        15.8,
+        14.0
+       ],
+       [
+        0.0,
+        -1,
+        0.0375,
+        0.2,
+        2.0
+       ],
+       [
+        0.5,
+        1,
+        0.0375,
+        14.1,
+        12.0
+       ],
+       [
+        0.5,
+        -1,
+        0.0375,
+        12.1,
+        10.0
+       ],
+       [
+        1.0,
+        1,
+        0.0375,
+        12.5,
+        10.0
+       ],
+       [
+        1.0,
+        -1,
+        0.04,
+        10.4,
+        8.0
+       ],
+       [
+        1.5,
+        1,
+        0.0375,
+        10.8,
+        8.0
+       ],
+       [
+        1.5,
+        -1,
+        0.04,
+        10.7,
+        8.0
+       ],
+       [
+        2.0,
+        1,
+        0.0375,
+        11.1,
+        8.0
+       ],
+       [
+        2.0,
+        -1,
+        0.04,
+        11.0,
+        8.0
+       ],
+       [
+        2.5,
+        1,
+        0.0375,
+        11.4,
+        8.0
+       ],
+       [
+        2.5,
+        -1,
+        0.04,
+        11.4,
+        8.0
+       ],
+       [
+        3.0,
+        1,
+        0.0375,
+        9.7,
+        6.0
+       ],
+       [
+        3.0,
+        -1,
+        0.04,
+        11.7,
+        8.0
+       ],
+       [
+        3.5,
+        1,
+        0.0375,
+        10.0,
+        6.0
+       ],
+       [
+        3.5,
+        -1,
+        0.04,
+        10.0,
+        6.0
+       ],
+       [
+        4.0,
+        1,
+        0.0375,
+        10.4,
+        6.0
+       ],
+       [
+        4.0,
+        -1,
+        0.0375,
+        10.3,
+        6.0
+       ],
+       [
+        4.5,
+        1,
+        0.0375,
+        8.7,
+        4.0
+       ],
+       [
+        4.5,
+        -1,
+        0.0375,
+        10.6,
+        6.0
+       ],
+       [
+        5.0,
+        1,
+        0.0375,
+        9.0,
+        4.0
+       ],
+       [
+        5.0,
+        -1,
+        0.0375,
+        9.0,
+        4.0
+       ]
+      ],
+      "n_rows": 188,
+      "note": "rows (K0 deg, sign, slop deg, pa link 1a, pa crank) at the built pocket; K0 0 sign -1 = stop A (the closed end)"
+     },
+     "crank_free": {
+      "c_mm": 0.010000000000000009,
+      "dwell_deg": 0.167,
+      "rise_deg": 0.174,
+      "corner": {
+       "max": 0.167,
+       "rows": [
+        [
+         -4.0,
+         1.064,
+         0.15,
+         0.151
+        ],
+        [
+         -2.0,
+         1.786,
+         0.161,
+         0.153
+        ],
+        [
+         -1.0,
+         2.217,
+         0.15,
+         0.149
+        ],
+        [
+         0.0,
+         2.693,
+         0.145,
+         0.146
+        ],
+        [
+         1.0,
+         3.216,
+         0.145,
+         0.146
+        ],
+        [
+         2.0,
+         3.785,
+         0.15,
+         0.146
+        ],
+        [
+         4.0,
+         5.065,
+         0.167,
+         0.15
+        ],
+        [
+         8.0,
+         8.179,
+         0.151,
+         0.154
+        ],
+        [
+         15.0,
+         15.0,
+         0.166,
+         0.16
+        ]
+       ],
+       "note": "(x0 deg of the K law from the onset, K, +K play, -K play), deg of K"
+      },
+      "max_deg": 0.174,
+      "worst_tol_c015_deg": 0.261,
+      "held_plus_free_deg": 0.214
+     }
+    },
+    "fail": []
+   }
+  }
+ },
+ "law": {
+  "kK": 2.1534,
+  "s_q": -1.0,
+  "q2hi_deg": 7.279,
+  "t_stop_deg": 21.594,
+  "dK_stop_deg": 46.5,
+  "law_end_t_deg": 29.1,
+  "law_end_dK_deg": 62.664,
+  "why_end": "stopB",
+  "pressure_angle_deg": 23.53
+ },
+ "stops": {
+  "K": {
+   "stop_A_deg": 0.0,
+   "stop_B_deg": -62.849,
+   "a1max": 58.7678,
+   "travel_deg": 62.849,
+   "dowel_home_angle_deg": 259.0,
+   "dowel_home_angles_deg": [
+    259.0,
+    439.0
+   ],
+   "pair": true,
+   "slot_deg": [
+    184.84,
+    270.31
+   ],
+   "clearance_to_lower_strap_deg": 13.95,
+   "dowel_mm": [
+    3.0,
+    0.5,
+    6.15
+   ],
+   "slot_r_mm": 7.75,
+   "slot_w_mm": 3.1,
+   "end_clearance_mm": 0.02,
+   "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+  },
+  "J2": {
+   "q2_stops_deg": [
+    102.068,
+    -14.315
+   ],
+   "q2_onset_deg": 7.279,
+   "window_deg": [
+    -14.315,
+    102.068
+   ],
+   "stop_B": "the drive's own range: |dK| = dK_lim 46.50 deg (slot-end) at t = 21.59 deg past the onset",
+   "travel_deg": 116.383,
+   "dowel_home_angle_deg": 195.0,
+   "dowel_home_angles_deg": [
+    195.0
+   ],
+   "pair": false,
+   "slot_deg": [
+    169.37,
+    308.38
+   ],
+   "clearance_to_lower_strap_deg": 77.63,
+   "dowel_mm": [
+    3.0,
+    0.5,
+    6.15
+   ],
+   "slot_r_mm": 7.75,
+   "slot_w_mm": 3.1,
+   "end_clearance_mm": 0.02,
+   "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+  },
+  "J3": {
+   "window_deg": [
+    -111.9036,
+    122.7417
+   ],
+   "dowel_home_angle_deg": 201.0,
+   "groove_deg": [
+    81.434,
+    331.404
+   ],
+   "groove_arc_deg": 249.97,
+   "web_deg": 110.03,
+   "dowel_touch_half_deg": 7.662,
+   "r_mm": 7.5,
+   "dowel_d_mm": 2.0,
+   "groove_w_mm": 2.1,
+   "groove_depth_mm": 1.0,
+   "groove_layer_mm": [
+    3.15,
+    4.15
+   ],
+   "dowel_z_mm": [
+    0.1,
+    4.0
+   ],
+   "dowel_into_groove_mm": 0.85,
+   "groove_floor_clear_mm": 0.15,
+   "bearing_od_r_mm": 5.5,
+   "rim_r_mm": 10.0,
+   "clearance_to_link2_strap_deg": 21.8,
+   "link2_strap_samples_in_band": 225,
+   "frame": "angles in frame_of(u3); dowel centre in link 2's frame = home angle + q3' (C1: R2^T R3 = rot(u3, q3'), offset 0)",
+   "end_shape": "L1 mesh: radial groove ends where the O2 dowel touches at the window edge; drawing: full-radius R1.05 ends, end centres 0.36 deg past the stop angle",
+   "sweep": {
+    "rule": "dowel (member 3) vs link 2's groove ring / boss / strap over q3' (signed mm, < 0 = metal in metal)",
+    "inside_window_min_mm": 0.0324,
+    "at_J3MIN": {
+     "J3 upper boss groove ring": 3.293506734124834e-05,
+     "J3 upper boss + cap": 0.14999999999981606,
+     "link 2 strap": 3.795653995730026
+    },
+    "at_J3MAX": {
+     "J3 upper boss groove ring": 0.00017945400017784147,
+     "J3 upper boss + cap": 0.14999999999982838,
+     "link 2 strap": 3.7424449287841677
+    },
+    "past_J3MIN_0p25": {
+     "J3 upper boss groove ring": -0.032364281694474605,
+     "J3 upper boss + cap": 0.14999999999982788,
+     "link 2 strap": 3.7634845571419655
+    },
+    "past_J3MAX_0p25": {
+     "J3 upper boss groove ring": -0.032170516295662664,
+     "J3 upper boss + cap": 0.14999999999982863,
+     "link 2 strap": 3.7095565763877363
+    },
+    "inside_0p25": {
+     "lo": {
+      "J3 upper boss groove ring": 0.03243015120212461,
+      "J3 upper boss + cap": 0.14999999999982835,
+      "link 2 strap": 3.827870720310515
+     },
+     "hi": {
+      "J3 upper boss groove ring": 0.03252942087947232,
+      "J3 upper boss + cap": 0.1499999999998285,
+      "link 2 strap": 3.7753572588551685
+     }
+    },
+    "past_2deg": {
+     "lo": {
+      "J3 upper boss groove ring": -0.25908626050763,
+      "J3 upper boss + cap": 0.14999999999982683,
+      "link 2 strap": 3.5361803073287152
+     },
+     "hi": null
+    },
+    "verdict": "stop"
+   },
+   "tolerance": {
+    "drawing": "true position 0.02 (+-0.01 tangential) on the dowel hole and both groove end-arc centres, relative to the J3 bore and each part's angular datum; groove walls concentric to the J3 bore within 0.02",
+    "random_deg": {
+     "dowel_hole_true_position_10um": 0.076,
+     "groove_end_centre_true_position_10um": 0.076,
+     "pin_a_bore_member3_datum": 0.012,
+     "link2_J2_J3_bores": 0.019
+    },
+    "bias_deg": {
+     "groove_width_2p10_plus0p02": [
+      0.0,
+      0.0764
+     ],
+     "dowel_m6_radius": [
+      -0.03056,
+      -0.00764
+     ]
+    },
+    "rss_deg": 0.11,
+    "worst_in_deg": 0.214,
+    "worst_out_deg": 0.26,
+    "at_pm0p02_worst_deg": 0.41,
+    "at_iso2768f_worst_deg": 0.87,
+    "margin_held_low_deg": [
+     0.74,
+     0.585
+    ],
+    "margin_held_high_deg": [
+     2.99,
+     1.13
+    ],
+    "acceptance": "-112.40 <= J3MIN <= -111.25 and 119.85 <= J3MAX <= 123.78, read on the J3 encoder at assembly",
+    "verdict": "fits: worst 0.21 in / 0.26 out inside the 0.74 / 0.585 held margins at +-0.01; +-0.02 (0.41) still fits; ISO 2768-f (0.87) fails",
+    "source": "docs/research/conecut_mechanism_redteam.md section 4 (stack) / verdict 3 (acceptance bands)",
+    "linear_deg": 0.26
+   },
+   "dowel_calc": {
+    "6Nm": {
+     "F_N": 800.0,
+     "shear_MPa": 255.0,
+     "bending_MPa": 586.0,
+     "bearing_on_Ti_groove_MPa": 471.0,
+     "SF_shear_vs_0p58x1900": 4.33,
+     "SF_bending_vs_1900": 3.24,
+     "SF_bearing_vs_Ti_880": 1.87,
+     "J3_bearing1_s0": 0.3
+    },
+    "10Nm": {
+     "F_N": 1333.0,
+     "shear_MPa": 424.0,
+     "bending_MPa": 976.0,
+     "bearing_on_Ti_groove_MPa": 784.0,
+     "SF_shear_vs_0p58x1900": 2.6,
+     "SF_bending_vs_1900": 1.95,
+     "SF_bearing_vs_Ti_880": 1.12,
+     "J3_bearing1_s0": 0.18
+    },
+    "note": "440C 58 HRC yield ~1900 MPa (shear 0.58 x); bearing on the Ti-6Al-4V groove end over the 0.85 mm engagement (projected; the red team rates it on Fbry ~1.3 GPa: SF 1.66 at 10 N.m); the single-dowel force returns through J3's MR117 pair as a radial load, 155 N per N.m on bearing 1 (C0r ~280 N): s0 = 1 at 1.81 N.m about J3 - the stop's rating; the cuff (slips ~1.06 N.m) is the torque fuse (docs/research/conecut_mechanism_redteam.md section 1-2; the same caveat as every gen-4..7 single-dowel stop)"
+   }
+  }
+ },
+ "stack": {
+  "pin_stack_mm": 6.0,
+  "plate_tp": 2.75,
+  "run": 0.5,
+  "knee_level_tr": 86.969,
+  "f": [
+   50.468,
+   62.517,
+   78.167
+  ],
+  "fK": 55.117,
+  "capK_mm": 0.0,
+  "hubK_crown_mm": 12.25,
+  "boss": [
+   86.969,
+   89.719
+  ],
+  "knee": [
+   90.219,
+   92.969
+  ],
+  "E": {
+   "x": [
+    8.0,
+    92.64
+   ],
+   "under": [
+    78.17,
+    86.97
+   ],
+   "thin_from": 91.0,
+   "rim": 91.14,
+   "cap": 89.719,
+   "top_before_cap": 89.719,
+   "stations_capped": 3,
+   "min_thickness": 2.75,
+   "knee_link_underside": 90.219
+  },
+  "knee_link_mm": [
+   36.35,
+   10.0,
+   2.75
+  ],
+  "hubs_r": [
+   10.0,
+   10.0,
+   10.0,
+   10.0
+  ],
+  "retainer": [
+   95.819,
+   96.719
+  ],
+  "full_pin_stack_mm": 9.75,
+  "stops": {
+   "K": {
+    "stop_A_deg": 0.0,
+    "stop_B_deg": -62.849,
+    "a1max": 58.7678,
+    "travel_deg": 62.849,
+    "dowel_home_angle_deg": 259.0,
+    "dowel_home_angles_deg": [
+     259.0,
+     439.0
+    ],
+    "pair": true,
+    "slot_deg": [
+     184.84,
+     270.31
+    ],
+    "clearance_to_lower_strap_deg": 13.95,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   },
+   "J2": {
+    "q2_stops_deg": [
+     102.068,
+     -14.315
+    ],
+    "q2_onset_deg": 7.279,
+    "window_deg": [
+     -14.315,
+     102.068
+    ],
+    "stop_B": "the drive's own range: |dK| = dK_lim 46.50 deg (slot-end) at t = 21.59 deg past the onset",
+    "travel_deg": 116.383,
+    "dowel_home_angle_deg": 195.0,
+    "dowel_home_angles_deg": [
+     195.0
+    ],
+    "pair": false,
+    "slot_deg": [
+     169.37,
+     308.38
+    ],
+    "clearance_to_lower_strap_deg": 77.63,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   },
+   "J3": {
+    "window_deg": [
+     -111.9036,
+     122.7417
+    ],
+    "dowel_home_angle_deg": 201.0,
+    "groove_deg": [
+     81.434,
+     331.404
+    ],
+    "groove_arc_deg": 249.97,
+    "web_deg": 110.03,
+    "dowel_touch_half_deg": 7.662,
+    "r_mm": 7.5,
+    "dowel_d_mm": 2.0,
+    "groove_w_mm": 2.1,
+    "groove_depth_mm": 1.0,
+    "groove_layer_mm": [
+     3.15,
+     4.15
+    ],
+    "dowel_z_mm": [
+     0.1,
+     4.0
+    ],
+    "dowel_into_groove_mm": 0.85,
+    "groove_floor_clear_mm": 0.15,
+    "bearing_od_r_mm": 5.5,
+    "rim_r_mm": 10.0,
+    "clearance_to_link2_strap_deg": 21.8,
+    "link2_strap_samples_in_band": 225,
+    "frame": "angles in frame_of(u3); dowel centre in link 2's frame = home angle + q3' (C1: R2^T R3 = rot(u3, q3'), offset 0)",
+    "end_shape": "L1 mesh: radial groove ends where the O2 dowel touches at the window edge; drawing: full-radius R1.05 ends, end centres 0.36 deg past the stop angle",
+    "sweep": {
+     "rule": "dowel (member 3) vs link 2's groove ring / boss / strap over q3' (signed mm, < 0 = metal in metal)",
+     "inside_window_min_mm": 0.0324,
+     "at_J3MIN": {
+      "J3 upper boss groove ring": 3.293506734124834e-05,
+      "J3 upper boss + cap": 0.14999999999981606,
+      "link 2 strap": 3.795653995730026
+     },
+     "at_J3MAX": {
+      "J3 upper boss groove ring": 0.00017945400017784147,
+      "J3 upper boss + cap": 0.14999999999982838,
+      "link 2 strap": 3.7424449287841677
+     },
+     "past_J3MIN_0p25": {
+      "J3 upper boss groove ring": -0.032364281694474605,
+      "J3 upper boss + cap": 0.14999999999982788,
+      "link 2 strap": 3.7634845571419655
+     },
+     "past_J3MAX_0p25": {
+      "J3 upper boss groove ring": -0.032170516295662664,
+      "J3 upper boss + cap": 0.14999999999982863,
+      "link 2 strap": 3.7095565763877363
+     },
+     "inside_0p25": {
+      "lo": {
+       "J3 upper boss groove ring": 0.03243015120212461,
+       "J3 upper boss + cap": 0.14999999999982835,
+       "link 2 strap": 3.827870720310515
+      },
+      "hi": {
+       "J3 upper boss groove ring": 0.03252942087947232,
+       "J3 upper boss + cap": 0.1499999999998285,
+       "link 2 strap": 3.7753572588551685
+      }
+     },
+     "past_2deg": {
+      "lo": {
+       "J3 upper boss groove ring": -0.25908626050763,
+       "J3 upper boss + cap": 0.14999999999982683,
+       "link 2 strap": 3.5361803073287152
+      },
+      "hi": null
+     },
+     "verdict": "stop"
+    },
+    "tolerance": {
+     "drawing": "true position 0.02 (+-0.01 tangential) on the dowel hole and both groove end-arc centres, relative to the J3 bore and each part's angular datum; groove walls concentric to the J3 bore within 0.02",
+     "random_deg": {
+      "dowel_hole_true_position_10um": 0.076,
+      "groove_end_centre_true_position_10um": 0.076,
+      "pin_a_bore_member3_datum": 0.012,
+      "link2_J2_J3_bores": 0.019
+     },
+     "bias_deg": {
+      "groove_width_2p10_plus0p02": [
+       0.0,
+       0.0764
+      ],
+      "dowel_m6_radius": [
+       -0.03056,
+       -0.00764
+      ]
+     },
+     "rss_deg": 0.11,
+     "worst_in_deg": 0.214,
+     "worst_out_deg": 0.26,
+     "at_pm0p02_worst_deg": 0.41,
+     "at_iso2768f_worst_deg": 0.87,
+     "margin_held_low_deg": [
+      0.74,
+      0.585
+     ],
+     "margin_held_high_deg": [
+      2.99,
+      1.13
+     ],
+     "acceptance": "-112.40 <= J3MIN <= -111.25 and 119.85 <= J3MAX <= 123.78, read on the J3 encoder at assembly",
+     "verdict": "fits: worst 0.21 in / 0.26 out inside the 0.74 / 0.585 held margins at +-0.01; +-0.02 (0.41) still fits; ISO 2768-f (0.87) fails",
+     "source": "docs/research/conecut_mechanism_redteam.md section 4 (stack) / verdict 3 (acceptance bands)",
+     "linear_deg": 0.26
+    },
+    "dowel_calc": {
+     "6Nm": {
+      "F_N": 800.0,
+      "shear_MPa": 255.0,
+      "bending_MPa": 586.0,
+      "bearing_on_Ti_groove_MPa": 471.0,
+      "SF_shear_vs_0p58x1900": 4.33,
+      "SF_bending_vs_1900": 3.24,
+      "SF_bearing_vs_Ti_880": 1.87,
+      "J3_bearing1_s0": 0.3
+     },
+     "10Nm": {
+      "F_N": 1333.0,
+      "shear_MPa": 424.0,
+      "bending_MPa": 976.0,
+      "bearing_on_Ti_groove_MPa": 784.0,
+      "SF_shear_vs_0p58x1900": 2.6,
+      "SF_bending_vs_1900": 1.95,
+      "SF_bearing_vs_Ti_880": 1.12,
+      "J3_bearing1_s0": 0.18
+     },
+     "note": "440C 58 HRC yield ~1900 MPa (shear 0.58 x); bearing on the Ti-6Al-4V groove end over the 0.85 mm engagement (projected; the red team rates it on Fbry ~1.3 GPa: SF 1.66 at 10 N.m); the single-dowel force returns through J3's MR117 pair as a radial load, 155 N per N.m on bearing 1 (C0r ~280 N): s0 = 1 at 1.81 N.m about J3 - the stop's rating; the cuff (slips ~1.06 N.m) is the torque fuse (docs/research/conecut_mechanism_redteam.md section 1-2; the same caveat as every gen-4..7 single-dowel stop)"
+    }
+   }
+  },
+  "drive": {
+   "drive_cell": "desmo cell B",
+   "ring": {
+    "level_from_hub2_face_mm": [
+     0.111,
+     1.611,
+     3.65
+    ],
+    "groove_mid_from_hub2_face_mm": 0.861,
+    "pitch_mm": [
+     7.214,
+     9.4
+    ],
+    "inner_wall_r_mm": 6.3,
+    "groove_r_mm": [
+     6.455,
+     10.16
+    ],
+    "r_out_mm": 10.96,
+    "past_O20_mm": 0.96,
+    "sector_deg": 116.66,
+    "model_sector_deg": 99.94,
+    "end_margins_deg": [
+     10.05,
+     12.67
+    ],
+    "groove_az_deg": 93.83,
+    "az_monotone": false,
+    "drift_mm": 0.286,
+    "azimuth_deg": [
+     -10.05,
+     106.61
+    ],
+    "note": "the groove's mid-plane sits at the crank pivot's level + 3.15 + glev along u2 (the model's rule); the pivot is 1.29 mm below hub 2's face, so the groove layer lands at F+0.11..F+1.61: INSIDE link 1b's J2 lower-plate layer (F+0..F+3, O20) - the stack conflict this L1 reports (R6)"
+   },
+   "arm": {
+    "root_mm": 4.0,
+    "stations": 27,
+    "raised_root_rows": 4,
+    "lifted_over_strap_mm": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "level_root_mm": 66.84,
+    "level_tip_mm": 63.16,
+    "arc_rows_kept": 17,
+    "arc_rows_model": 18,
+    "arm_to_slot_path_mm": 1.06,
+    "ends_at_beta_deg": -172.777,
+    "note": "the arc ends where its section clears the slot by >= 0.3 mm; the tip plate joins it"
+   },
+   "plate": {
+    "slot_len_mm": 3.722,
+    "slot_w_mm": 1.52,
+    "plate_w_mm": 3.32,
+    "plate_len_mm": 7.042,
+    "radial_mm": [
+     63.164,
+     65.664
+    ]
+   },
+   "stage1": {
+    "arm_len_mm": 6.8,
+    "arm_level_from_hub2_face_mm": [
+     -1.825,
+     -0.325
+    ],
+    "a_s": 9.299,
+    "pin_from_hub2_face_mm": [
+     -1.825,
+     1.225
+    ],
+    "axial_drift_mm": 0.286,
+    "pin_into_groove_mm": 1.11,
+    "pin_into_groove_at_worst_drift_mm": 0.83,
+    "crank_axis_at_arm_u2_level_mm": -1.222
+   },
+   "boss": {
+    "boss_d_mm": 5.0,
+    "boss_radial_mm": [
+     60.014,
+     63.014
+    ],
+    "boss_rK_mm": 16.176,
+    "boss_to_hubK_rim_mm": 3.676,
+    "root_w_mm": 4.0,
+    "nose_radial_from_C0_mm": [
+     -1.0,
+     4.0
+    ],
+    "nose_d_mm": 1.5
+   },
+   "boss_level_mm": 66.839,
+   "seat_C0_mm": [
+    -13.653,
+    59.209,
+    -9.585
+   ],
+   "seat_R0_mm": 61.514,
+   "r_c": 16.176,
+   "beta_deg": -177.169,
+   "g": 2.3934,
+   "sig": 1.0,
+   "dK_lim_deg": 46.5,
+   "mu": 0.15,
+   "cam": {
+    "dK_lim": 46.5,
+    "why_lim": "slot-end",
+    "pa_crank_max_taken": 14.6,
+    "pa_horn_max_taken": 24.6,
+    "pa_eff_horn": 33.1,
+    "pa_eff_crank": 23.1,
+    "friction_deg": 8.53,
+    "pa_kin_max": 34.47
+   },
+   "desmo": {
+    "calib": {
+     "s_th": -0.4644,
+     "inv_kK": 0.4644,
+     "q_on_deg": 7.28,
+     "dwell_deg": [
+      12.6,
+      90.9
+     ],
+     "fit_rms_deg": 0.0,
+     "n": 61
+    },
+    "stage1": {
+     "a_s": 9.529,
+     "psi": 149.7,
+     "pitch": [
+      9.4,
+      9.4
+     ],
+     "r_out": 10.96,
+     "pa_pin_max": 33.74,
+     "pa_cap_max": 35.05,
+     "pa_gate": 34.47,
+     "drift_max": 0.286,
+     "tilt_max_deg": 4.76,
+     "crown_needed": true,
+     "rc_min": 1.01,
+     "rc_onset": 1.01,
+     "ridge_mm": 0.247,
+     "blend_K_lead_deg": 2.614,
+     "arm_from_axis": 9.53,
+     "n_ring_rigid": 19,
+     "ring_az_deg": 99.9,
+     "lim_by_gate": {
+      "pitch": 52.5,
+      "pa_pin": 47.5,
+      "pa_cap": 0.0,
+      "drift": null,
+      "radius": 0.25
+     }
+    },
+    "stage1_built": {
+     "read": "built",
+     "half_blend_K_deg": 10.767,
+     "pin_max_moving": 62.07,
+     "cap_max_outside_blend": 54.17,
+     "cap_inside_blend": [
+      28.35,
+      89.91
+     ],
+     "pin_first_fail_K": 47.504,
+     "cap_first_fail_K": 58.529,
+     "note": "cap side gated for x >= half-blend (outside the blend); inside it the cap side is the dwell lock (reported) - a re-reading of desmo-slipper's linear-law gate, stated for the auditor"
+    },
+    "stage2B": {
+     "nose_r": 0.75,
+     "c_slot": 0.01,
+     "wall": 0.9,
+     "boss_r": 2.5,
+     "seat_rK": 16.18,
+     "seat_R": 61.51,
+     "boss_hubK_margin": 3.68,
+     "slot_len_mm": 3.72,
+     "plate_len_mm": 7.04,
+     "plate_w_mm": 3.32,
+     "rel_speed_rest_mm_per_rad": 0.525,
+     "pa_horn_max": 24.73,
+     "pa_crank_max": 14.56,
+     "dK_lim_pa_by_mu": {
+      "0.087": 64.5,
+      "0.120": 64.5,
+      "0.135": 64.5,
+      "0.150": 64.5,
+      "0.200": 61.0
+     },
+     "clear_plate_hubK": 1.23,
+     "clear_plate_hub2": 41.74,
+     "clear_lowarm_boss": 19.93,
+     "n_plate_rigid": 8,
+     "n_boss_rigid": 27
+    },
+    "slop": {
+     "slotB": {
+      "slop_max": 0.04,
+      "slop_at": [
+       1.0,
+       -1
+      ],
+      "pocket_pa_max_horn": 25.5,
+      "pocket_pa_max_crank": 32.0,
+      "pocket_pa_gate": 34.47,
+      "pocket_pa_fail_K0": null,
+      "pole_rows": [
+       [
+        0.0,
+        1,
+        0.0375,
+        15.8,
+        14.0
+       ],
+       [
+        0.0,
+        -1,
+        0.0375,
+        0.2,
+        2.0
+       ],
+       [
+        0.5,
+        1,
+        0.0375,
+        14.1,
+        12.0
+       ],
+       [
+        0.5,
+        -1,
+        0.0375,
+        12.1,
+        10.0
+       ],
+       [
+        1.0,
+        1,
+        0.0375,
+        12.5,
+        10.0
+       ],
+       [
+        1.0,
+        -1,
+        0.04,
+        10.4,
+        8.0
+       ],
+       [
+        1.5,
+        1,
+        0.0375,
+        10.8,
+        8.0
+       ],
+       [
+        1.5,
+        -1,
+        0.04,
+        10.7,
+        8.0
+       ],
+       [
+        2.0,
+        1,
+        0.0375,
+        11.1,
+        8.0
+       ],
+       [
+        2.0,
+        -1,
+        0.04,
+        11.0,
+        8.0
+       ],
+       [
+        2.5,
+        1,
+        0.0375,
+        11.4,
+        8.0
+       ],
+       [
+        2.5,
+        -1,
+        0.04,
+        11.4,
+        8.0
+       ],
+       [
+        3.0,
+        1,
+        0.0375,
+        9.7,
+        6.0
+       ],
+       [
+        3.0,
+        -1,
+        0.04,
+        11.7,
+        8.0
+       ],
+       [
+        3.5,
+        1,
+        0.0375,
+        10.0,
+        6.0
+       ],
+       [
+        3.5,
+        -1,
+        0.04,
+        10.0,
+        6.0
+       ],
+       [
+        4.0,
+        1,
+        0.0375,
+        10.4,
+        6.0
+       ],
+       [
+        4.0,
+        -1,
+        0.0375,
+        10.3,
+        6.0
+       ],
+       [
+        4.5,
+        1,
+        0.0375,
+        8.7,
+        4.0
+       ],
+       [
+        4.5,
+        -1,
+        0.0375,
+        10.6,
+        6.0
+       ],
+       [
+        5.0,
+        1,
+        0.0375,
+        9.0,
+        4.0
+       ],
+       [
+        5.0,
+        -1,
+        0.0375,
+        9.0,
+        4.0
+       ]
+      ],
+      "n_rows": 188,
+      "note": "rows (K0 deg, sign, slop deg, pa link 1a, pa crank) at the built pocket; K0 0 sign -1 = stop A (the closed end)"
+     },
+     "crank_free": {
+      "c_mm": 0.010000000000000009,
+      "dwell_deg": 0.167,
+      "rise_deg": 0.174,
+      "corner": {
+       "max": 0.167,
+       "rows": [
+        [
+         -4.0,
+         1.064,
+         0.15,
+         0.151
+        ],
+        [
+         -2.0,
+         1.786,
+         0.161,
+         0.153
+        ],
+        [
+         -1.0,
+         2.217,
+         0.15,
+         0.149
+        ],
+        [
+         0.0,
+         2.693,
+         0.145,
+         0.146
+        ],
+        [
+         1.0,
+         3.216,
+         0.145,
+         0.146
+        ],
+        [
+         2.0,
+         3.785,
+         0.15,
+         0.146
+        ],
+        [
+         4.0,
+         5.065,
+         0.167,
+         0.15
+        ],
+        [
+         8.0,
+         8.179,
+         0.151,
+         0.154
+        ],
+        [
+         15.0,
+         15.0,
+         0.166,
+         0.16
+        ]
+       ],
+       "note": "(x0 deg of the K law from the onset, K, +K play, -K play), deg of K"
+      },
+      "max_deg": 0.174,
+      "worst_tol_c015_deg": 0.261,
+      "held_plus_free_deg": 0.214
+     }
+    },
+    "fail": []
+   },
+   "stack_fix": {
+    "boss_underside_model_mm": 63.289,
+    "boss_underside_built_mm": 66.839,
+    "raised_mm": 3.55,
+    "why": "the model stacks the boss on its 6 link-1b strap samples nearest the pivot; the built boss + the arm root sit on the strap's highest top under the O10 footprint + 0.15 (raised only if the strap climbs there); the arm keeps the model's levels from there, the nose / flank (the cam) are unchanged"
+   }
+  },
+  "knee_pins": {
+   "kind": "MR63ZZ pair",
+   "boss": [
+    90.219,
+    95.719
+   ],
+   "boss_d": 9.0,
+   "proud_of_bar_mm": 2.75,
+   "model_stack_mm": 6.0,
+   "built_stack_mm": 9.75
+  },
+  "knee_stop": {
+   "ang_stop": 154.7811,
+   "side": 1.0,
+   "alpha_home_deg": 87.443,
+   "check": {
+    "poses": 27,
+    "max_err_deg": 0.0,
+    "sides": [
+     1
+    ]
+   },
+   "tooth_r_min": 7.889,
+   "face": {
+    "s": [
+     6.8,
+     9.2
+    ],
+    "l": 4.0,
+    "z": [
+     88.219,
+     89.719
+    ]
+   },
+   "contact_area_mm2": 3.6,
+   "model_window_edge_deg": 154.7811,
+   "fit_bench_knee_max_deg": 101.647,
+   "fit_bench_poses_past_stop": 0
+  }
+ },
+ "mount": {
+  "route": "sweep-clear",
+  "angle_deg": 26.0,
+  "length": 31.4,
+  "riser_top_rel_tr": 11.04,
+  "bottom_underside_rel_tr": 10.04,
+  "dir_along_across": [
+   0.899,
+   0.438
+  ],
+  "clearance_rule_mm": 1.0,
+  "bottom": {
+   "cut": true,
+   "verts_in_sweep": 1802,
+   "cut_along_from_pad_mm": 19.83,
+   "bar_along_was": [
+    -42.7,
+    231.7
+   ],
+   "bottom_watertight_after_cut": true
+  },
+  "sweep": {
+   "poses": 2769,
+   "closing_used": 1186,
+   "stride": 2
+  }
+ },
+ "kin_u2_check_deg": 9e-05,
+ "dowel_check": {
+  "O2": {
+   "shear_MPa": 245.0,
+   "bending_MPa": 1373.0,
+   "bearing_on_Ti_MPa": 154.0,
+   "SF_bending_vs_1500MPa_yield": 1.09,
+   "SF_shear_vs_0p58x1500": 3.55
+  },
+  "O3": {
+   "shear_MPa": 109.0,
+   "bending_MPa": 407.0,
+   "bearing_on_Ti_MPa": 103.0,
+   "SF_bending_vs_1500MPa_yield": 3.69,
+   "SF_shear_vs_0p58x1500": 7.99
+  },
+  "bearing_pair_static": {
+   "radial_N": 770.0,
+   "per_bearing_N": 385.0,
+   "C0_N_each": 280.0,
+   "s0": 0.73,
+   "note": "MR117 C0 ~0.28 kN (docs/HARDWARE.md); s0 < 1 = raceway brinelling at the jam push"
+  },
+  "load": {
+   "F_N": 770.0,
+   "r_mm": 7.75,
+   "joint_torque_Nm": 5.97,
+   "lever_mm": 1.4
+  }
+ },
+ "slaved": [
+  {
+   "slaved": [
+    "l1a",
+    "l1b"
+   ],
+   "driver": [
+    "l1b",
+    "l2"
+   ],
+   "x_key": "q.1",
+   "y_key": "knuckle.dK",
+   "law_x_deg": [
+    -14.321,
+    -14.271,
+    -14.221,
+    -14.171,
+    -14.121,
+    -14.071,
+    -14.021,
+    -13.971,
+    -13.921,
+    -13.871,
+    -13.821,
+    -13.771,
+    -13.721,
+    -13.671,
+    -13.621,
+    -13.571,
+    -13.521,
+    -13.471,
+    -13.421,
+    -13.371,
+    -13.321,
+    -13.271,
+    -13.221,
+    -13.171,
+    -13.121,
+    -13.071,
+    -13.021,
+    -12.971,
+    -12.921,
+    -12.871,
+    -12.821,
+    -12.771,
+    -12.721,
+    -12.671,
+    -12.621,
+    -12.571,
+    -12.521,
+    -12.471,
+    -12.421,
+    -12.371,
+    -12.321,
+    -12.271,
+    -12.221,
+    -12.171,
+    -12.121,
+    -12.071,
+    -12.021,
+    -11.971,
+    -11.921,
+    -11.871,
+    -11.821,
+    -11.771,
+    -11.721,
+    -11.671,
+    -11.621,
+    -11.571,
+    -11.521,
+    -11.471,
+    -11.421,
+    -11.371,
+    -11.321,
+    -11.271,
+    -11.221,
+    -11.171,
+    -11.121,
+    -11.071,
+    -11.021,
+    -10.971,
+    -10.921,
+    -10.871,
+    -10.821,
+    -10.771,
+    -10.721,
+    -10.671,
+    -10.621,
+    -10.571,
+    -10.521,
+    -10.471,
+    -10.421,
+    -10.371,
+    -10.321,
+    -10.271,
+    -10.221,
+    -10.171,
+    -10.121,
+    -10.071,
+    -10.021,
+    -9.971,
+    -9.921,
+    -9.871,
+    -9.821,
+    -9.771,
+    -9.721,
+    -9.671,
+    -9.621,
+    -9.571,
+    -9.521,
+    -9.471,
+    -9.421,
+    -9.371,
+    -9.321,
+    -9.271,
+    -9.221,
+    -9.171,
+    -9.121,
+    -9.071,
+    -9.021,
+    -8.971,
+    -8.921,
+    -8.871,
+    -8.821,
+    -8.771,
+    -8.721,
+    -8.671,
+    -8.621,
+    -8.571,
+    -8.521,
+    -8.471,
+    -8.421,
+    -8.371,
+    -8.321,
+    -8.271,
+    -8.221,
+    -8.171,
+    -8.121,
+    -8.071,
+    -8.021,
+    -7.971,
+    -7.921,
+    -7.871,
+    -7.821,
+    -7.771,
+    -7.721,
+    -7.671,
+    -7.621,
+    -7.571,
+    -7.521,
+    -7.471,
+    -7.421,
+    -7.371,
+    -7.321,
+    -7.271,
+    -7.221,
+    -7.171,
+    -7.121,
+    -7.071,
+    -7.021,
+    -6.971,
+    -6.921,
+    -6.871,
+    -6.821,
+    -6.771,
+    -6.721,
+    -6.671,
+    -6.621,
+    -6.571,
+    -6.521,
+    -6.471,
+    -6.421,
+    -6.371,
+    -6.321,
+    -6.271,
+    -6.221,
+    -6.171,
+    -6.121,
+    -6.071,
+    -6.021,
+    -5.971,
+    -5.921,
+    -5.871,
+    -5.821,
+    -5.771,
+    -5.721,
+    -5.671,
+    -5.621,
+    -5.571,
+    -5.521,
+    -5.471,
+    -5.421,
+    -5.371,
+    -5.321,
+    -5.271,
+    -5.221,
+    -5.171,
+    -5.121,
+    -5.071,
+    -5.021,
+    -4.971,
+    -4.921,
+    -4.871,
+    -4.821,
+    -4.771,
+    -4.721,
+    -4.671,
+    -4.621,
+    -4.571,
+    -4.521,
+    -4.471,
+    -4.421,
+    -4.371,
+    -4.321,
+    -4.271,
+    -4.221,
+    -4.171,
+    -4.121,
+    -4.071,
+    -4.021,
+    -3.971,
+    -3.921,
+    -3.871,
+    -3.821,
+    -3.771,
+    -3.721,
+    -3.671,
+    -3.621,
+    -3.571,
+    -3.521,
+    -3.471,
+    -3.421,
+    -3.371,
+    -3.321,
+    -3.271,
+    -3.221,
+    -3.171,
+    -3.121,
+    -3.071,
+    -3.021,
+    -2.971,
+    -2.921,
+    -2.871,
+    -2.821,
+    -2.771,
+    -2.721,
+    -2.671,
+    -2.621,
+    -2.571,
+    -2.521,
+    -2.471,
+    -2.421,
+    -2.371,
+    -2.321,
+    -2.271,
+    -2.221,
+    -2.171,
+    -2.121,
+    -2.071,
+    -2.021,
+    -1.971,
+    -1.921,
+    -1.871,
+    -1.821,
+    -1.771,
+    -1.721,
+    -1.671,
+    -1.621,
+    -1.571,
+    -1.521,
+    -1.471,
+    -1.421,
+    -1.371,
+    -1.321,
+    -1.271,
+    -1.221,
+    -1.171,
+    -1.121,
+    -1.071,
+    -1.021,
+    -0.971,
+    -0.921,
+    -0.871,
+    -0.821,
+    -0.771,
+    -0.721,
+    -0.671,
+    -0.621,
+    -0.571,
+    -0.521,
+    -0.471,
+    -0.421,
+    -0.371,
+    -0.321,
+    -0.271,
+    -0.221,
+    -0.171,
+    -0.121,
+    -0.071,
+    -0.021,
+    0.029,
+    0.079,
+    0.129,
+    0.179,
+    0.229,
+    0.279,
+    0.329,
+    0.379,
+    0.429,
+    0.479,
+    0.529,
+    0.579,
+    0.629,
+    0.679,
+    0.729,
+    0.779,
+    0.829,
+    0.879,
+    0.929,
+    0.979,
+    1.029,
+    1.079,
+    1.129,
+    1.179,
+    1.229,
+    1.279,
+    1.329,
+    1.379,
+    1.429,
+    1.479,
+    1.529,
+    1.579,
+    1.629,
+    1.679,
+    1.729,
+    1.779,
+    1.829,
+    1.879,
+    1.929,
+    1.979,
+    2.029,
+    2.079,
+    2.129,
+    2.179,
+    2.229,
+    2.279,
+    2.329,
+    2.379,
+    2.429,
+    2.479,
+    2.529,
+    2.579,
+    2.629,
+    2.679,
+    2.729,
+    2.779,
+    2.829,
+    2.879,
+    2.929,
+    2.979,
+    3.029,
+    3.079,
+    3.129,
+    3.179,
+    3.229,
+    3.279,
+    3.329,
+    3.379,
+    3.429,
+    3.479,
+    3.529,
+    3.579,
+    3.629,
+    3.679,
+    3.729,
+    3.779,
+    3.829,
+    3.879,
+    3.929,
+    3.979,
+    4.029,
+    4.079,
+    4.129,
+    4.179,
+    4.229,
+    4.279,
+    4.329,
+    4.379,
+    4.429,
+    4.479,
+    4.529,
+    4.579,
+    4.629,
+    4.679,
+    4.729,
+    4.779,
+    4.829,
+    4.879,
+    4.929,
+    4.979,
+    5.029,
+    5.079,
+    5.129,
+    5.179,
+    5.229,
+    5.279,
+    5.329,
+    5.379,
+    5.429,
+    5.479,
+    5.529,
+    5.579,
+    5.629,
+    5.679,
+    5.729,
+    5.779,
+    5.829,
+    5.879,
+    5.929,
+    5.979,
+    6.029,
+    6.079,
+    6.129,
+    6.179,
+    6.229,
+    6.279,
+    6.329,
+    6.379,
+    6.429,
+    6.479,
+    6.529,
+    6.579,
+    6.629,
+    6.679,
+    6.729,
+    6.779,
+    6.829,
+    6.879,
+    6.929,
+    6.979,
+    7.029,
+    7.079,
+    7.129,
+    7.179,
+    7.229,
+    7.279,
+    7.329,
+    7.379,
+    7.429,
+    7.479,
+    7.529,
+    7.579,
+    7.629,
+    7.679,
+    7.729,
+    7.779,
+    7.829,
+    7.879,
+    7.929,
+    7.979,
+    8.029,
+    8.079,
+    8.129,
+    8.179,
+    8.229,
+    8.279,
+    8.329,
+    8.379,
+    8.429,
+    8.479,
+    8.529,
+    8.579,
+    8.629,
+    8.679,
+    8.729,
+    8.779,
+    8.829,
+    8.879,
+    8.929,
+    8.979,
+    9.029,
+    9.079,
+    9.129,
+    9.179,
+    9.229,
+    9.279,
+    9.329,
+    9.379,
+    9.429,
+    9.479,
+    9.529,
+    9.579,
+    9.629,
+    9.679,
+    9.729,
+    9.779,
+    9.829,
+    9.879,
+    9.929,
+    9.979,
+    10.029,
+    10.079,
+    10.129,
+    10.179,
+    10.229,
+    10.279,
+    10.329,
+    10.379,
+    10.429,
+    10.479,
+    10.529,
+    10.579,
+    10.629,
+    10.679,
+    10.729,
+    10.779,
+    10.829,
+    10.879,
+    10.929,
+    10.979,
+    11.029,
+    11.079,
+    11.129,
+    11.179,
+    11.229,
+    11.279,
+    11.329,
+    11.379,
+    11.429,
+    11.479,
+    11.529,
+    11.579,
+    11.629,
+    11.679,
+    11.729,
+    11.779,
+    11.829,
+    11.879,
+    11.929,
+    11.979,
+    12.029,
+    12.079,
+    12.129,
+    12.179,
+    12.229,
+    12.279,
+    12.329,
+    12.379,
+    12.429,
+    12.479,
+    12.529,
+    12.579,
+    12.629,
+    12.679,
+    12.729,
+    12.779,
+    12.829,
+    12.879,
+    12.929,
+    12.979,
+    13.029,
+    13.079,
+    13.129,
+    13.179,
+    13.229,
+    13.279,
+    13.329,
+    13.379,
+    13.429,
+    13.479,
+    13.529,
+    13.579,
+    13.629,
+    13.679,
+    13.729,
+    13.779,
+    13.829,
+    13.879,
+    13.929,
+    13.979,
+    14.029,
+    14.079,
+    14.129,
+    14.179,
+    14.229,
+    14.279
+   ],
+   "law_y_deg": [
+    -46.5,
+    -46.4058,
+    -46.2981,
+    -46.1904,
+    -46.0828,
+    -45.9751,
+    -45.8674,
+    -45.7598,
+    -45.6521,
+    -45.5444,
+    -45.4367,
+    -45.3291,
+    -45.2214,
+    -45.1137,
+    -45.0061,
+    -44.8984,
+    -44.7907,
+    -44.6831,
+    -44.5754,
+    -44.4677,
+    -44.36,
+    -44.2524,
+    -44.1447,
+    -44.037,
+    -43.9294,
+    -43.8217,
+    -43.714,
+    -43.6064,
+    -43.4987,
+    -43.391,
+    -43.2833,
+    -43.1757,
+    -43.068,
+    -42.9603,
+    -42.8527,
+    -42.745,
+    -42.6373,
+    -42.5297,
+    -42.422,
+    -42.3143,
+    -42.2066,
+    -42.099,
+    -41.9913,
+    -41.8836,
+    -41.776,
+    -41.6683,
+    -41.5606,
+    -41.453,
+    -41.3453,
+    -41.2376,
+    -41.1299,
+    -41.0223,
+    -40.9146,
+    -40.8069,
+    -40.6993,
+    -40.5916,
+    -40.4839,
+    -40.3763,
+    -40.2686,
+    -40.1609,
+    -40.0532,
+    -39.9456,
+    -39.8379,
+    -39.7302,
+    -39.6226,
+    -39.5149,
+    -39.4072,
+    -39.2996,
+    -39.1919,
+    -39.0842,
+    -38.9765,
+    -38.8689,
+    -38.7612,
+    -38.6535,
+    -38.5459,
+    -38.4382,
+    -38.3305,
+    -38.2229,
+    -38.1152,
+    -38.0075,
+    -37.8998,
+    -37.7922,
+    -37.6845,
+    -37.5768,
+    -37.4692,
+    -37.3615,
+    -37.2538,
+    -37.1462,
+    -37.0385,
+    -36.9308,
+    -36.8231,
+    -36.7155,
+    -36.6078,
+    -36.5001,
+    -36.3925,
+    -36.2848,
+    -36.1771,
+    -36.0695,
+    -35.9618,
+    -35.8541,
+    -35.7464,
+    -35.6388,
+    -35.5311,
+    -35.4234,
+    -35.3158,
+    -35.2081,
+    -35.1004,
+    -34.9928,
+    -34.8851,
+    -34.7774,
+    -34.6697,
+    -34.5621,
+    -34.4544,
+    -34.3467,
+    -34.2391,
+    -34.1314,
+    -34.0237,
+    -33.9161,
+    -33.8084,
+    -33.7007,
+    -33.593,
+    -33.4854,
+    -33.3777,
+    -33.27,
+    -33.1624,
+    -33.0547,
+    -32.947,
+    -32.8394,
+    -32.7317,
+    -32.624,
+    -32.5163,
+    -32.4087,
+    -32.301,
+    -32.1933,
+    -32.0857,
+    -31.978,
+    -31.8703,
+    -31.7627,
+    -31.655,
+    -31.5473,
+    -31.4396,
+    -31.332,
+    -31.2243,
+    -31.1166,
+    -31.009,
+    -30.9013,
+    -30.7936,
+    -30.686,
+    -30.5783,
+    -30.4706,
+    -30.3629,
+    -30.2553,
+    -30.1476,
+    -30.0399,
+    -29.9323,
+    -29.8246,
+    -29.7169,
+    -29.6093,
+    -29.5016,
+    -29.3939,
+    -29.2862,
+    -29.1786,
+    -29.0709,
+    -28.9632,
+    -28.8556,
+    -28.7479,
+    -28.6402,
+    -28.5326,
+    -28.4249,
+    -28.3172,
+    -28.2095,
+    -28.1019,
+    -27.9942,
+    -27.8865,
+    -27.7789,
+    -27.6712,
+    -27.5635,
+    -27.4559,
+    -27.3482,
+    -27.2405,
+    -27.1328,
+    -27.0252,
+    -26.9175,
+    -26.8098,
+    -26.7022,
+    -26.5945,
+    -26.4868,
+    -26.3792,
+    -26.2715,
+    -26.1638,
+    -26.0561,
+    -25.9485,
+    -25.8408,
+    -25.7331,
+    -25.6255,
+    -25.5178,
+    -25.4101,
+    -25.3025,
+    -25.1948,
+    -25.0871,
+    -24.9794,
+    -24.8718,
+    -24.7641,
+    -24.6564,
+    -24.5488,
+    -24.4411,
+    -24.3334,
+    -24.2258,
+    -24.1181,
+    -24.0104,
+    -23.9027,
+    -23.7951,
+    -23.6874,
+    -23.5797,
+    -23.4721,
+    -23.3644,
+    -23.2567,
+    -23.1491,
+    -23.0414,
+    -22.9337,
+    -22.826,
+    -22.7184,
+    -22.6107,
+    -22.503,
+    -22.3954,
+    -22.2877,
+    -22.18,
+    -22.0724,
+    -21.9647,
+    -21.857,
+    -21.7493,
+    -21.6417,
+    -21.534,
+    -21.4263,
+    -21.3187,
+    -21.211,
+    -21.1033,
+    -20.9957,
+    -20.888,
+    -20.7803,
+    -20.6726,
+    -20.565,
+    -20.4573,
+    -20.3496,
+    -20.242,
+    -20.1343,
+    -20.0266,
+    -19.919,
+    -19.8113,
+    -19.7036,
+    -19.5959,
+    -19.4883,
+    -19.3806,
+    -19.2729,
+    -19.1653,
+    -19.0576,
+    -18.9499,
+    -18.8423,
+    -18.7346,
+    -18.6269,
+    -18.5192,
+    -18.4116,
+    -18.3039,
+    -18.1962,
+    -18.0886,
+    -17.9809,
+    -17.8732,
+    -17.7656,
+    -17.6579,
+    -17.5502,
+    -17.4425,
+    -17.3349,
+    -17.2272,
+    -17.1195,
+    -17.0119,
+    -16.9042,
+    -16.7965,
+    -16.6889,
+    -16.5812,
+    -16.4735,
+    -16.3658,
+    -16.2582,
+    -16.1505,
+    -16.0428,
+    -15.9352,
+    -15.8275,
+    -15.7198,
+    -15.6122,
+    -15.5045,
+    -15.3968,
+    -15.2891,
+    -15.1815,
+    -15.0738,
+    -14.9661,
+    -14.8585,
+    -14.7508,
+    -14.6431,
+    -14.5355,
+    -14.4278,
+    -14.3201,
+    -14.2124,
+    -14.1048,
+    -13.9971,
+    -13.8894,
+    -13.7818,
+    -13.6741,
+    -13.5664,
+    -13.4588,
+    -13.3511,
+    -13.2434,
+    -13.1357,
+    -13.0281,
+    -12.9204,
+    -12.8127,
+    -12.7051,
+    -12.5974,
+    -12.4897,
+    -12.3821,
+    -12.2744,
+    -12.1667,
+    -12.059,
+    -11.9514,
+    -11.8437,
+    -11.736,
+    -11.6284,
+    -11.5207,
+    -11.413,
+    -11.3054,
+    -11.1977,
+    -11.09,
+    -10.9823,
+    -10.8747,
+    -10.767,
+    -10.6596,
+    -10.5527,
+    -10.4464,
+    -10.3406,
+    -10.2354,
+    -10.1307,
+    -10.0265,
+    -9.9229,
+    -9.8198,
+    -9.7172,
+    -9.6152,
+    -9.5137,
+    -9.4128,
+    -9.3124,
+    -9.2125,
+    -9.1132,
+    -9.0144,
+    -8.9162,
+    -8.8184,
+    -8.7213,
+    -8.6246,
+    -8.5285,
+    -8.433,
+    -8.338,
+    -8.2435,
+    -8.1495,
+    -8.0561,
+    -7.9633,
+    -7.8709,
+    -7.7792,
+    -7.6879,
+    -7.5972,
+    -7.507,
+    -7.4174,
+    -7.3283,
+    -7.2397,
+    -7.1517,
+    -7.0642,
+    -6.9773,
+    -6.8909,
+    -6.805,
+    -6.7197,
+    -6.6349,
+    -6.5506,
+    -6.4669,
+    -6.3838,
+    -6.3011,
+    -6.219,
+    -6.1375,
+    -6.0564,
+    -5.976,
+    -5.896,
+    -5.8166,
+    -5.7377,
+    -5.6594,
+    -5.5816,
+    -5.5044,
+    -5.4276,
+    -5.3515,
+    -5.2758,
+    -5.2007,
+    -5.1262,
+    -5.0521,
+    -4.9787,
+    -4.9057,
+    -4.8333,
+    -4.7614,
+    -4.6901,
+    -4.6193,
+    -4.5491,
+    -4.4793,
+    -4.4102,
+    -4.3415,
+    -4.2734,
+    -4.2059,
+    -4.1388,
+    -4.0723,
+    -4.0064,
+    -3.941,
+    -3.8761,
+    -3.8118,
+    -3.748,
+    -3.6847,
+    -3.622,
+    -3.5598,
+    -3.4982,
+    -3.4371,
+    -3.3765,
+    -3.3165,
+    -3.257,
+    -3.1981,
+    -3.1397,
+    -3.0818,
+    -3.0245,
+    -2.9677,
+    -2.9114,
+    -2.8557,
+    -2.8005,
+    -2.7459,
+    -2.6918,
+    -2.6382,
+    -2.5852,
+    -2.5327,
+    -2.4807,
+    -2.4293,
+    -2.3784,
+    -2.3281,
+    -2.2783,
+    -2.229,
+    -2.1803,
+    -2.1321,
+    -2.0845,
+    -2.0374,
+    -1.9908,
+    -1.9448,
+    -1.8993,
+    -1.8543,
+    -1.8099,
+    -1.7661,
+    -1.7227,
+    -1.6799,
+    -1.6377,
+    -1.5959,
+    -1.5548,
+    -1.5141,
+    -1.474,
+    -1.4344,
+    -1.3954,
+    -1.3569,
+    -1.319,
+    -1.2815,
+    -1.2447,
+    -1.2083,
+    -1.1725,
+    -1.1373,
+    -1.1025,
+    -1.0684,
+    -1.0347,
+    -1.0016,
+    -0.969,
+    -0.937,
+    -0.9055,
+    -0.8745,
+    -0.8441,
+    -0.8143,
+    -0.7849,
+    -0.7561,
+    -0.7278,
+    -0.7001,
+    -0.6729,
+    -0.6463,
+    -0.6202,
+    -0.5946,
+    -0.5696,
+    -0.5451,
+    -0.5211,
+    -0.4977,
+    -0.4748,
+    -0.4525,
+    -0.4307,
+    -0.4094,
+    -0.3887,
+    -0.3685,
+    -0.3489,
+    -0.3297,
+    -0.3112,
+    -0.2931,
+    -0.2756,
+    -0.2587,
+    -0.2423,
+    -0.2264,
+    -0.211,
+    -0.1962,
+    -0.182,
+    -0.1682,
+    -0.155,
+    -0.1424,
+    -0.1303,
+    -0.1187,
+    -0.1077,
+    -0.0972,
+    -0.0872,
+    -0.0778,
+    -0.0689,
+    -0.0606,
+    -0.0528,
+    -0.0455,
+    -0.0388,
+    -0.0326,
+    -0.0269,
+    -0.0218,
+    -0.0172,
+    -0.0132,
+    -0.0097,
+    -0.0067,
+    -0.0043,
+    -0.0024,
+    -0.0011,
+    -0.0003,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0,
+    -0.0
+   ],
+   "rest_y_deg": 0.0,
+   "closure": "form",
+   "drive_groups": {
+    "dk": "l1b"
+   },
+   "source": "build.json law: the built groove's blended law (verifier B1: C1 quadratic over blend 10 deg of q2), cut at the slot end dK_lim 46.5",
+   "check_fit_bench_max_err_deg": 0.0007,
+   "check_fit_bench_poses": 99,
+   "free_play_deg": {
+    "nominal": 0.227,
+    "worst_tolerance": 0.281,
+    "parts": "slot slop crank held 0.04 + stage-1 crank-free 0.187 (dense scan)"
+   },
+   "note": "K = law(q2): stage 1 (pin in the cap-ring groove: dwell holds K on stop A, the rise drives it) -> bell crank -> stage 2 (link 1a's nose in the crank's slot): form-closed both ways, no spring; the judge's equality is rigid - the 0.227 deg free play is not in the sim (stated)"
+  }
+ ],
+ "drive_sweep": {
+  "rule": "signed distance (mm, negative = inside), worst over the J2 window in link 1b's frame; (mm, q2 deg, |dK| deg, first |dK| where < 0.15 mm)",
+  "pairs": {
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | J2 lower plate keep-out (O20 x 3, link 1b) w": [
+    -1.5,
+    -12.3,
+    42.2,
+    0.0
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | J2 lower plate keep-out (O20 x 3, link 1b) w": [
+    -1.495,
+    1.7,
+    12.0,
+    0.0
+   ],
+   "drive cap-ring roof keep-out (the sector ove | J2 lower plate keep-out (O20 x 3, link 1b) w": [
+    -1.389,
+    35.7,
+    0.0,
+    0.0
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | link 1b strap keep-out (8 x 3 mm Ti, fitted ": [
+    -0.868,
+    7.7,
+    0.0,
+    0.0
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | link 1b strap keep-out (8 x 3 mm Ti, fitted ": [
+    -0.791,
+    101.7,
+    0.0,
+    0.0
+   ],
+   "drive cap-ring roof keep-out (the sector ove | link 1b strap keep-out (8 x 3 mm Ti, fitted ": [
+    -0.785,
+    13.7,
+    0.0,
+    0.0
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | drive stage-1 pin keep-out (ISO 8734 1.5 m6 ": [
+    -0.644,
+    101.7,
+    0.0,
+    0.0
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | drive cap-ring groove layer keep-out (link 2": [
+    -0.595,
+    101.7,
+    0.0,
+    0.0
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | J2 lower plate keep-out (O20 x 3, link 1b) w": [
+    -0.132,
+    -14.3,
+    46.5,
+    16.4
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | drive cap-ring groove layer keep-out (link 2": [
+    0.012,
+    -14.3,
+    46.5,
+    29.3
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | drive crank tip plate keep-out (7.04 x 3.32 ": [
+    0.012,
+    -14.3,
+    46.5,
+    0.0
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | drive nose dowel keep-out (ISO 8734 1.5 x 5 ": [
+    0.013,
+    -14.3,
+    46.5,
+    0.0
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | drive crank short arm keep-out (6.8 x 3 x 1.": [
+    0.015,
+    -14.3,
+    46.5,
+    29.3
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | drive cap-ring roof keep-out (the sector ove": [
+    0.037,
+    -14.3,
+    46.5,
+    29.3
+   ],
+   "drive cap-ring roof keep-out (the sector ove | drive stage-1 pin keep-out (ISO 8734 1.5 m6 ": [
+    0.044,
+    -14.3,
+    46.5,
+    29.3
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | link 1b strap keep-out (8 x 3 mm Ti, fitted ": [
+    0.083,
+    1.7,
+    12.0,
+    0.0
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | drive bell crank bent arm keep-out (6 x 3 mm": [
+    0.086,
+    -0.3,
+    16.4,
+    0.0
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | drive nose boss keep-out (link 1a: O5 x 3 Ti": [
+    0.09,
+    -14.3,
+    46.5,
+    0.0
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | drive crank pivot pin keep-out (O3 h6 harden": [
+    0.098,
+    5.7,
+    3.4,
+    0.0
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | drive nose boss keep-out (link 1a: O5 x 3 Ti": [
+    0.098,
+    -10.3,
+    37.9,
+    0.0
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | drive crank tip plate keep-out (7.04 x 3.32 ": [
+    0.098,
+    -4.3,
+    25.0,
+    0.0
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | drive bell crank boss keep-out (O10 x 6 mm, ": [
+    0.098,
+    5.7,
+    3.4,
+    0.0
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | drive bell crank bent arm keep-out (6 x 3 mm": [
+    0.138,
+    -8.3,
+    33.6,
+    0.0
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | drive nose boss root keep-out (link 1a: 4 x ": [
+    0.143,
+    -2.3,
+    20.7,
+    20.7
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | drive crank tip plate keep-out (7.04 x 3.32 ": [
+    0.148,
+    3.7,
+    7.7,
+    0.0
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | drive nose boss root keep-out (link 1a: 4 x ": [
+    0.149,
+    -4.3,
+    25.0,
+    0.0
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | drive crank pin clip keep-out (DIN 6799 RS 2": [
+    0.15,
+    1.7,
+    12.0,
+    0.0
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | drive bell crank boss keep-out (O10 x 6 mm, ": [
+    0.15,
+    -14.3,
+    46.5,
+    0.0
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | link 1b strap keep-out (8 x 3 mm Ti, fitted ": [
+    0.182,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | drive bell crank bent arm keep-out (6 x 3 mm": [
+    0.34,
+    -12.3,
+    42.2,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | drive nose dowel keep-out (ISO 8734 1.5 x 5 ": [
+    0.348,
+    -12.3,
+    42.2,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | K upper boss + cap keep-out (O20, F+3.15..F+": [
+    0.359,
+    -4.3,
+    25.0,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
+    0.921,
+    1.7,
+    12.0,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | drive cap-ring roof keep-out (the sector ove": [
+    1.123,
+    5.7,
+    3.4,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | drive bell crank boss keep-out (O10 x 6 mm, ": [
+    1.125,
+    -12.3,
+    42.2,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | link 1b strap keep-out (8 x 3 mm Ti, fitted ": [
+    1.177,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | K upper boss + cap keep-out (O20, F+3.15..F+": [
+    1.254,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | drive crank short arm keep-out (6.8 x 3 x 1.": [
+    1.509,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | drive cap-ring roof keep-out (the sector ove": [
+    1.509,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | J2 upper boss + cap keep-out (O20, F+3.15..F": [
+    1.576,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | J2 upper boss + cap keep-out (O20, F+3.15..F": [
+    2.083,
+    -0.3,
+    16.4,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | drive bell crank boss keep-out (O10 x 6 mm, ": [
+    2.121,
+    5.7,
+    3.4,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | drive cap-ring groove layer keep-out (link 2": [
+    2.121,
+    5.7,
+    3.4,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | J2 lower plate keep-out (O20 x 3, link 1b) w": [
+    2.124,
+    5.7,
+    3.4,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | drive crank short arm keep-out (6.8 x 3 x 1.": [
+    2.273,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | drive crank pivot pin keep-out (O3 h6 harden": [
+    2.284,
+    -12.3,
+    42.2,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
+    2.322,
+    3.7,
+    7.7,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | drive bell crank bent arm keep-out (6 x 3 mm": [
+    2.711,
+    5.7,
+    3.4,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | drive crank pivot pin keep-out (O3 h6 harden": [
+    2.744,
+    3.7,
+    7.7,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | J2 upper boss + cap keep-out (O20, F+3.15..F": [
+    3.018,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | K lower plate keep-out (O20 x 3, link 1a) wi": [
+    3.216,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | K upper boss + cap keep-out (O20, F+3.15..F+": [
+    3.22,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | K upper boss + cap keep-out (O20, F+3.15..F+": [
+    3.373,
+    -4.3,
+    25.0,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | drive bell crank bent arm keep-out (6 x 3 mm": [
+    3.574,
+    3.7,
+    7.7,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | drive crank pin clip keep-out (DIN 6799 RS 2": [
+    3.608,
+    1.7,
+    12.0,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | drive crank pivot pin keep-out (O3 h6 harden": [
+    3.752,
+    21.7,
+    0.0,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | drive cap-ring groove layer keep-out (link 2": [
+    3.752,
+    5.7,
+    3.4,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
+    4.13,
+    3.7,
+    7.7,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | drive crank pivot pin keep-out (O3 h6 harden": [
+    4.132,
+    21.7,
+    0.0,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | drive cap-ring roof keep-out (the sector ove": [
+    4.133,
+    67.7,
+    0.0,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
+    4.138,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | K lower plate keep-out (O20 x 3, link 1a) wi": [
+    4.226,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | K upper boss + cap keep-out (O20, F+3.15..F+": [
+    5.19,
+    3.7,
+    7.7,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | J2 upper boss + cap keep-out (O20, F+3.15..F": [
+    5.453,
+    49.7,
+    0.0,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | J2 upper boss + cap keep-out (O20, F+3.15..F": [
+    5.576,
+    -0.3,
+    16.4,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
+    5.95,
+    3.7,
+    7.7,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | drive cap-ring roof keep-out (the sector ove": [
+    6.029,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | drive bell crank bent arm keep-out (6 x 3 mm": [
+    6.031,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | drive bell crank bent arm keep-out (6 x 3 mm": [
+    6.059,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | drive cap-ring groove layer keep-out (link 2": [
+    6.059,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | drive crank pivot pin keep-out (O3 h6 harden": [
+    6.716,
+    5.7,
+    3.4,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | drive stage-1 pin keep-out (ISO 8734 1.5 m6 ": [
+    6.717,
+    -12.3,
+    42.2,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | drive crank pin clip keep-out (DIN 6799 RS 2": [
+    6.956,
+    -6.3,
+    29.3,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | drive cap-ring roof keep-out (the sector ove": [
+    6.956,
+    -6.3,
+    29.3,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | J2 lower plate keep-out (O20 x 3, link 1b) w": [
+    6.99,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | J2 upper boss + cap keep-out (O20, F+3.15..F": [
+    7.061,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
+    7.234,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | link 2 strap keep-out (8 x 3 mm Ti, fitted u": [
+    7.546,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | drive crank pin clip keep-out (DIN 6799 RS 2": [
+    8.589,
+    -6.3,
+    29.3,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | drive cap-ring groove layer keep-out (link 2": [
+    8.589,
+    -6.3,
+    29.3,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.": [
+    8.835,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | drive crank pin clip keep-out (DIN 6799 RS 2": [
+    9.531,
+    3.7,
+    7.7,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | drive crank short arm keep-out (6.8 x 3 x 1.": [
+    9.531,
+    3.7,
+    7.7,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.": [
+    9.77,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | link 2 strap keep-out (8 x 3 mm Ti, fitted u": [
+    9.935,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | drive crank pin clip keep-out (DIN 6799 RS 2": [
+    10.84,
+    -12.3,
+    42.2,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | drive stage-1 pin keep-out (ISO 8734 1.5 m6 ": [
+    10.84,
+    -12.3,
+    42.2,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | link 2 strap keep-out (8 x 3 mm Ti, fitted u": [
+    10.902,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | link 2 strap keep-out (8 x 3 mm Ti, fitted u": [
+    11.003,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | link 2 strap keep-out (8 x 3 mm Ti, fitted u": [
+    11.121,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | K upper boss + cap keep-out (O20, F+3.15..F+": [
+    11.924,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | K lower plate keep-out (O20 x 3, link 1a) wi": [
+    12.464,
+    -8.3,
+    33.6,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    12.658,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | K lower plate keep-out (O20 x 3, link 1a) wi": [
+    13.016,
+    5.7,
+    3.4,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
+    13.096,
+    5.7,
+    3.4,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    13.227,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
+    15.082,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | link 1b strap keep-out (8 x 3 mm Ti, fitted ": [
+    15.27,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.": [
+    15.662,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | link 2 strap keep-out (8 x 3 mm Ti, fitted u": [
+    16.57,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | K lower plate keep-out (O20 x 3, link 1a) wi": [
+    17.056,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | K upper boss + cap keep-out (O20, F+3.15..F+": [
+    17.2,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    17.242,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | J1 lower plate keep-out (O20 x 3, link 1a)": [
+    17.273,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    17.304,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
+    17.43,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.": [
+    18.008,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
+    18.435,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
+    18.563,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | J1 lower plate keep-out (O20 x 3, link 1a)": [
+    18.572,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | link 1b strap keep-out (8 x 3 mm Ti, fitted ": [
+    18.676,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.": [
+    18.749,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | J1 lower plate keep-out (O20 x 3, link 1a)": [
+    19.031,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | K lower plate keep-out (O20 x 3, link 1a) wi": [
+    19.076,
+    -8.3,
+    33.6,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.": [
+    19.278,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | J1 lower plate keep-out (O20 x 3, link 1a)": [
+    19.695,
+    11.7,
+    0.0,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | K lower plate keep-out (O20 x 3, link 1a) wi": [
+    19.953,
+    5.7,
+    3.4,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | K upper boss + cap keep-out (O20, F+3.15..F+": [
+    20.074,
+    13.7,
+    0.0,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | link 1b strap keep-out (8 x 3 mm Ti, fitted ": [
+    20.306,
+    -8.3,
+    33.6,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
+    20.382,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | link 1b strap keep-out (8 x 3 mm Ti, fitted ": [
+    20.493,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | J1 lower plate keep-out (O20 x 3, link 1a)": [
+    20.799,
+    11.7,
+    0.0,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | K lower plate keep-out (O20 x 3, link 1a) wi": [
+    20.877,
+    5.7,
+    3.4,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | K lower plate keep-out (O20 x 3, link 1a) wi": [
+    20.891,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | K upper boss + cap keep-out (O20, F+3.15..F+": [
+    20.902,
+    13.7,
+    0.0,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
+    20.931,
+    9.7,
+    0.0,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | K upper boss + cap keep-out (O20, F+3.15..F+": [
+    21.416,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | J1 lower plate keep-out (O20 x 3, link 1a)": [
+    21.771,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
+    21.854,
+    53.7,
+    0.0,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | J1 lower plate keep-out (O20 x 3, link 1a)": [
+    22.036,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened": [
+    22.378,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    22.625,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    22.989,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    23.742,
+    7.7,
+    0.0,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    24.625,
+    13.7,
+    0.0,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | J1 lower plate keep-out (O20 x 3, link 1a)": [
+    25.213,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | J1 lower plate keep-out (O20 x 3, link 1a)": [
+    25.462,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | link 1a strap keep-out (8 x 3 mm Ti, J1 -> K": [
+    26.498,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
+    28.104,
+    -10.3,
+    37.9,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | drive nose boss root keep-out (link 1a: 4 x ": [
+    28.805,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | drive bell crank boss keep-out (O10 x 6 mm, ": [
+    28.806,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | drive crank pivot pin keep-out (O3 h6 harden": [
+    28.956,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | drive nose boss root keep-out (link 1a: 4 x ": [
+    28.956,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | drive nose boss keep-out (link 1a: O5 x 3 Ti": [
+    31.99,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | drive bell crank boss keep-out (O10 x 6 mm, ": [
+    31.99,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | drive crank pivot pin keep-out (O3 h6 harden": [
+    32.453,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | drive nose boss keep-out (link 1a: O5 x 3 Ti": [
+    32.453,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
+    32.95,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | drive nose boss root keep-out (link 1a: 4 x ": [
+    33.544,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | drive crank short arm keep-out (6.8 x 3 x 1.": [
+    33.544,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | drive bell crank boss keep-out (O10 x 6 mm, ": [
+    33.775,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | drive nose dowel keep-out (ISO 8734 1.5 x 5 ": [
+    33.776,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | drive crank pin clip keep-out (DIN 6799 RS 2": [
+    33.811,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | drive nose boss root keep-out (link 1a: 4 x ": [
+    33.811,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | drive crank pivot pin keep-out (O3 h6 harden": [
+    34.272,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | drive nose dowel keep-out (ISO 8734 1.5 x 5 ": [
+    34.272,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | drive crank pivot pin keep-out (O3 h6 harden": [
+    34.302,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | drive crank tip plate keep-out (7.04 x 3.32 ": [
+    34.302,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | drive nose boss root keep-out (link 1a: 4 x ": [
+    35.898,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | drive cap-ring groove layer keep-out (link 2": [
+    35.898,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
+    36.045,
+    17.7,
+    0.0,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | J2 lower plate keep-out (O20 x 3, link 1b) w": [
+    36.623,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
+    36.704,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | drive nose boss root keep-out (link 1a: 4 x ": [
+    36.787,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | drive cap-ring roof keep-out (the sector ove": [
+    36.787,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | drive nose boss keep-out (link 1a: O5 x 3 Ti": [
+    36.887,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | drive crank short arm keep-out (6.8 x 3 x 1.": [
+    36.887,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened": [
+    36.969,
+    29.7,
+    0.0,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | drive crank pin clip keep-out (DIN 6799 RS 2": [
+    37.065,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | drive nose boss keep-out (link 1a: O5 x 3 Ti": [
+    37.065,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | drive nose boss root keep-out (link 1a: 4 x ": [
+    37.512,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | drive stage-1 pin keep-out (ISO 8734 1.5 m6 ": [
+    37.512,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | drive crank pin clip keep-out (DIN 6799 RS 2": [
+    37.92,
+    3.7,
+    7.7,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | drive crank tip plate keep-out (7.04 x 3.32 ": [
+    37.92,
+    3.7,
+    7.7,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | J2 upper boss + cap keep-out (O20, F+3.15..F": [
+    38.493,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | drive nose dowel keep-out (ISO 8734 1.5 x 5 ": [
+    38.707,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | drive crank short arm keep-out (6.8 x 3 x 1.": [
+    38.707,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | drive crank pin clip keep-out (DIN 6799 RS 2": [
+    38.815,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | drive nose dowel keep-out (ISO 8734 1.5 x 5 ": [
+    38.815,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | drive nose boss keep-out (link 1a: O5 x 3 Ti": [
+    39.19,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | drive cap-ring groove layer keep-out (link 2": [
+    39.19,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | J2 lower plate keep-out (O20 x 3, link 1b) w": [
+    39.938,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | drive nose boss keep-out (link 1a: O5 x 3 Ti": [
+    40.031,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | drive cap-ring roof keep-out (the sector ove": [
+    40.031,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | drive nose boss keep-out (link 1a: O5 x 3 Ti": [
+    40.894,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | drive stage-1 pin keep-out (ISO 8734 1.5 m6 ": [
+    40.894,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | drive crank tip plate keep-out (7.04 x 3.32 ": [
+    40.935,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | drive cap-ring groove layer keep-out (link 2": [
+    40.935,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring groove layer keep-out (link 2 | drive nose dowel keep-out (ISO 8734 1.5 x 5 ": [
+    41.009,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | drive cap-ring groove layer keep-out (link 2": [
+    41.009,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | drive crank tip plate keep-out (7.04 x 3.32 ": [
+    41.69,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | drive cap-ring roof keep-out (the sector ove": [
+    41.69,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | J2 upper boss + cap keep-out (O20, F+3.15..F": [
+    41.708,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | J2 lower plate keep-out (O20 x 3, link 1b) w": [
+    41.722,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | J2 lower plate keep-out (O20 x 3, link 1b) w": [
+    41.757,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive cap-ring roof keep-out (the sector ove | drive nose dowel keep-out (ISO 8734 1.5 x 5 ": [
+    41.85,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | drive cap-ring roof keep-out (the sector ove": [
+    41.85,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | drive nose dowel keep-out (ISO 8734 1.5 x 5 ": [
+    42.708,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | drive stage-1 pin keep-out (ISO 8734 1.5 m6 ": [
+    42.708,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | link 2 strap keep-out (8 x 3 mm Ti, fitted u": [
+    42.907,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | J2 upper boss + cap keep-out (O20, F+3.15..F": [
+    43.318,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | J2 upper boss + cap keep-out (O20, F+3.15..F": [
+    43.525,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | link 2 strap keep-out (8 x 3 mm Ti, fitted u": [
+    45.065,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | link 2 strap keep-out (8 x 3 mm Ti, fitted u": [
+    46.545,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.": [
+    46.906,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | link 2 strap keep-out (8 x 3 mm Ti, fitted u": [
+    48.358,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.": [
+    50.04,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.": [
+    51.847,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.": [
+    52.051,
+    -14.3,
+    46.5,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | J3 upper boss groove ring keep-out (O20 x 1,": [
+    63.475,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose boss root keep-out (link 1a: 4 x  | J3 upper boss + cap keep-out (O20, F+4.15..F": [
+    64.163,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | J3 upper boss groove ring keep-out (O20 x 1,": [
+    64.181,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | J3 upper boss groove ring keep-out (O20 x 1,": [
+    64.291,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive bell crank boss keep-out (O10 x 6 mm,  | J3 upper boss + cap keep-out (O20, F+4.15..F": [
+    64.751,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | J3 upper boss groove ring keep-out (O20 x 1,": [
+    64.873,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose boss keep-out (link 1a: O5 x 3 Ti | J3 upper boss + cap keep-out (O20, F+4.15..F": [
+    64.964,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank tip plate keep-out (7.04 x 3.32  | J3 upper boss + cap keep-out (O20, F+4.15..F": [
+    65.505,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | J3 upper boss groove ring keep-out (O20 x 1,": [
+    65.907,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | J3 upper boss groove ring keep-out (O20 x 1,": [
+    66.102,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank pivot pin keep-out (O3 h6 harden | J3 upper boss + cap keep-out (O20, F+4.15..F": [
+    66.565,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive nose dowel keep-out (ISO 8734 1.5 x 5  | J3 upper boss + cap keep-out (O20, F+4.15..F": [
+    66.773,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | J3 upper boss groove ring keep-out (O20 x 1,": [
+    67.678,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | J3 upper boss groove ring keep-out (O20 x 1,": [
+    68.148,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive bell crank bent arm keep-out (6 x 3 mm | J3 upper boss + cap keep-out (O20, F+4.15..F": [
+    68.317,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank pin clip keep-out (DIN 6799 RS 2 | J3 upper boss + cap keep-out (O20, F+4.15..F": [
+    68.653,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | J3 upper boss groove ring keep-out (O20 x 1,": [
+    69.426,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive crank short arm keep-out (6.8 x 3 x 1. | J3 upper boss + cap keep-out (O20, F+4.15..F": [
+    70.077,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | J3 upper boss groove ring keep-out (O20 x 1,": [
+    73.337,
+    101.7,
+    0.0,
+    null
+   ],
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | J3 upper boss + cap keep-out (O20, F+4.15..F": [
+    74.002,
+    101.7,
+    0.0,
+    null
+   ]
+  },
+  "worst": [
+   "drive stage-1 pin keep-out (ISO 8734 1.5 m6  | J2 lower plate keep-out (O20 x 3, link 1b) w",
+   [
+    -1.5,
+    -12.3,
+    42.2,
+    0.0
+   ]
+  ]
+ },
+ "check": [
+  {
+   "label": "arm at side",
+   "bench_pose": 60,
+   "pose": [
+    -90.0,
+    0.0,
+    75.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 6.8969,
+   "rigid_samples_outside_max_mm": 6.8969,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.8969,
+     4.0793,
+     6.8969
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0001,
+     0.0,
+     0.0
+    ],
+    "crank": [
+     6.8969,
+     4.0793,
+     6.8969
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1297,
+     1.1297,
+     0.0
+    ],
+    "L1b": [
+     0.0985,
+     0.0945,
+     0.0985
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 0.000114,
+   "res_deg": 0.0001,
+   "knee_angle": 59.5,
+   "q3p_deg": 1.115,
+   "m3e": 15.18,
+   "stops": {
+    "K": {
+     "angle_deg": -8.829,
+     "from_stop_lo_deg": 54.02,
+     "to_stop_hi_deg": 8.829,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 3.223,
+     "from_stop_lo_deg": 17.542,
+     "to_stop_hi_deg": 98.846,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 1.115,
+     "model_q3p_deg": 1.115,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 113.019,
+     "to_stop_hi_deg": 121.627,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 60,
+    "state": 1,
+    "q2_deg": 3.223,
+    "dK_deg": -8.829,
+    "dK_law_deg": -8.83,
+    "err_deg": 0.0006,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0029,
+    "cam_closure_mm": 0.0029
+   }
+  },
+  {
+   "label": "first",
+   "bench_pose": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1296,
+     1.1296,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 5.8e-05,
+   "res_deg": 0.0,
+   "knee_angle": 59.93,
+   "q3p_deg": -3.908,
+   "m3e": 17.04,
+   "stops": {
+    "K": {
+     "angle_deg": -2.565,
+     "from_stop_lo_deg": 60.284,
+     "to_stop_hi_deg": 2.565,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 7.397,
+     "from_stop_lo_deg": 21.717,
+     "to_stop_hi_deg": 94.672,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": -3.908,
+     "model_q3p_deg": -3.908,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 107.996,
+     "to_stop_hi_deg": 126.65,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 0,
+    "state": 1,
+    "q2_deg": 7.397,
+    "dK_deg": -2.565,
+    "dK_law_deg": -2.566,
+    "err_deg": 0.0004,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0006,
+    "cam_closure_mm": 0.0006
+   }
+  },
+  {
+   "label": "middle",
+   "bench_pose": 97,
+   "pose": [
+    0.0,
+    45.0,
+    -30.0
+   ],
+   "taken": true,
+   "state": 0,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1297,
+     1.1297,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 8.8e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 59.4,
+   "q3p_deg": 13.462,
+   "m3e": 31.97,
+   "stops": {
+    "K": {
+     "angle_deg": 0.0,
+     "from_stop_lo_deg": 62.849,
+     "to_stop_hi_deg": -0.001,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 54.647,
+     "from_stop_lo_deg": 68.966,
+     "to_stop_hi_deg": 47.422,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 13.462,
+     "model_q3p_deg": 13.462,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 125.366,
+     "to_stop_hi_deg": 109.28,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 97,
+    "state": 0,
+    "q2_deg": 54.647,
+    "dK_deg": 0.0,
+    "dK_law_deg": -0.0,
+    "err_deg": 0.0,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0008,
+    "cam_closure_mm": 0.0008
+   }
+  },
+  {
+   "label": "highest",
+   "bench_pose": 140,
+   "pose": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1296,
+     1.1296,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 9.6e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 99.4,
+   "q3p_deg": 113.345,
+   "m3e": 16.37,
+   "stops": {
+    "K": {
+     "angle_deg": -4.418,
+     "from_stop_lo_deg": 58.432,
+     "to_stop_hi_deg": 4.417,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 5.873,
+     "from_stop_lo_deg": 20.193,
+     "to_stop_hi_deg": 96.196,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 113.345,
+     "model_q3p_deg": 113.345,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 225.249,
+     "to_stop_hi_deg": 9.397,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 140,
+    "state": 1,
+    "q2_deg": 5.873,
+    "dK_deg": -4.418,
+    "dK_law_deg": -4.418,
+    "err_deg": 0.0004,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0029,
+    "cam_closure_mm": 0.0029
+   }
+  },
+  {
+   "label": "2nd highest",
+   "bench_pose": 152,
+   "pose": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0001,
+     0.0,
+     0.0001
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1296,
+     1.1296,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 9.4e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 101.65,
+   "q3p_deg": 116.771,
+   "m3e": 11.99,
+   "stops": {
+    "K": {
+     "angle_deg": -21.592,
+     "from_stop_lo_deg": 41.258,
+     "to_stop_hi_deg": 21.591,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -2.748,
+     "from_stop_lo_deg": 11.571,
+     "to_stop_hi_deg": 104.817,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 116.771,
+     "model_q3p_deg": 116.771,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 228.675,
+     "to_stop_hi_deg": 5.971,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 152,
+    "state": 1,
+    "q2_deg": -2.748,
+    "dK_deg": -21.592,
+    "dK_law_deg": -21.592,
+    "err_deg": 0.0006,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0,
+    "cam_closure_mm": 0.0
+   }
+  },
+  {
+   "label": "behind the back",
+   "bench_pose": 62,
+   "pose": [
+    -90.0,
+    30.0,
+    105.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 6.8969,
+   "rigid_samples_outside_max_mm": 6.8969,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.8969,
+     4.0793,
+     6.8969
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "crank": [
+     6.8969,
+     4.0793,
+     6.8969
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1297,
+     1.1297,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 4.9e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 72.59,
+   "q3p_deg": -47.811,
+   "m3e": 14.36,
+   "stops": {
+    "K": {
+     "angle_deg": -12.358,
+     "from_stop_lo_deg": 50.492,
+     "to_stop_hi_deg": 12.357,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 1.54,
+     "from_stop_lo_deg": 15.859,
+     "to_stop_hi_deg": 100.529,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": -47.811,
+     "model_q3p_deg": -47.811,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 64.093,
+     "to_stop_hi_deg": 170.553,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 62,
+    "state": 1,
+    "q2_deg": 1.54,
+    "dK_deg": -12.358,
+    "dK_law_deg": -12.358,
+    "err_deg": 0.0007,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0016,
+    "cam_closure_mm": 0.0016
+   }
+  },
+  {
+   "label": "across the body",
+   "bench_pose": 214,
+   "pose": [
+    150.0,
+    45.0,
+    -60.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0001,
+     36
+    ],
+    "hub3": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "E": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1297,
+     1.1297,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 6.4e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 60.01,
+   "q3p_deg": 21.098,
+   "m3e": 12.36,
+   "stops": {
+    "K": {
+     "angle_deg": -20.243,
+     "from_stop_lo_deg": 42.606,
+     "to_stop_hi_deg": 20.243,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -2.122,
+     "from_stop_lo_deg": 12.197,
+     "to_stop_hi_deg": 104.191,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 21.098,
+     "model_q3p_deg": 21.098,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 133.002,
+     "to_stop_hi_deg": 101.644,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 214,
+    "state": 1,
+    "q2_deg": -2.122,
+    "dK_deg": -20.243,
+    "dK_law_deg": -20.244,
+    "err_deg": 0.0007,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0028,
+    "cam_closure_mm": 0.0028
+   }
+  },
+  {
+   "label": "overhead raise peak",
+   "bench_pose": 5,
+   "pose": [
+    30.0,
+    150.0,
+    -60.0
+   ],
+   "taken": true,
+   "state": 0,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1297,
+     1.1297,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 0.000106,
+   "res_deg": 0.0002,
+   "knee_angle": 87.5,
+   "q3p_deg": 94.278,
+   "m3e": 23.46,
+   "stops": {
+    "K": {
+     "angle_deg": 0.0,
+     "from_stop_lo_deg": 62.849,
+     "to_stop_hi_deg": -0.001,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 68.637,
+     "from_stop_lo_deg": 82.956,
+     "to_stop_hi_deg": 33.432,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 94.278,
+     "model_q3p_deg": 94.278,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 206.182,
+     "to_stop_hi_deg": 28.464,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 5,
+    "state": 0,
+    "q2_deg": 68.637,
+    "dK_deg": 0.0,
+    "dK_law_deg": -0.0,
+    "err_deg": 0.0,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0024,
+    "cam_closure_mm": 0.0024
+   }
+  },
+  {
+   "label": "K most open, taken (drive extreme)",
+   "bench_pose": 174,
+   "pose": [
+    90.0,
+    120.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0001,
+     36
+    ],
+    "hub3": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "E": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1297,
+     1.1297,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 0.000112,
+   "res_deg": 0.0002,
+   "knee_angle": 93.19,
+   "q3p_deg": 103.636,
+   "m3e": 5.01,
+   "stops": {
+    "K": {
+     "angle_deg": -46.248,
+     "from_stop_lo_deg": 16.602,
+     "to_stop_hi_deg": 46.247,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -14.198,
+     "from_stop_lo_deg": 0.121,
+     "to_stop_hi_deg": 116.267,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 103.636,
+     "model_q3p_deg": 103.636,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 215.54,
+     "to_stop_hi_deg": 19.106,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 174,
+    "state": 1,
+    "q2_deg": -14.198,
+    "dK_deg": -46.248,
+    "dK_law_deg": -46.248,
+    "err_deg": 0.0006,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0,
+    "cam_closure_mm": 0.0
+   }
+  },
+  {
+   "label": "K most open, closes (nearest stop B)",
+   "bench_pose": 174,
+   "pose": [
+    90.0,
+    120.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0001,
+     36
+    ],
+    "hub3": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "E": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1297,
+     1.1297,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 0.000112,
+   "res_deg": 0.0002,
+   "knee_angle": 93.19,
+   "q3p_deg": 103.636,
+   "m3e": 5.01,
+   "stops": {
+    "K": {
+     "angle_deg": -46.248,
+     "from_stop_lo_deg": 16.602,
+     "to_stop_hi_deg": 46.247,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -14.198,
+     "from_stop_lo_deg": 0.121,
+     "to_stop_hi_deg": 116.267,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 103.636,
+     "model_q3p_deg": 103.636,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 215.54,
+     "to_stop_hi_deg": 19.106,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 174,
+    "state": 1,
+    "q2_deg": -14.198,
+    "dK_deg": -46.248,
+    "dK_law_deg": -46.248,
+    "err_deg": 0.0006,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0,
+    "cam_closure_mm": 0.0
+   }
+  },
+  {
+   "label": "J3 q3' min, taken (nearest J3 stop low)",
+   "bench_pose": 91,
+   "pose": [
+    -15.0,
+    75.0,
+    90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1297,
+     1.1297,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 9.5e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 99.68,
+   "q3p_deg": -98.431,
+   "m3e": 9.29,
+   "stops": {
+    "K": {
+     "angle_deg": -31.159,
+     "from_stop_lo_deg": 31.69,
+     "to_stop_hi_deg": 31.159,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -7.191,
+     "from_stop_lo_deg": 7.128,
+     "to_stop_hi_deg": 109.26,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": -98.431,
+     "model_q3p_deg": -98.431,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 13.473,
+     "to_stop_hi_deg": 221.173,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 91,
+    "state": 1,
+    "q2_deg": -7.191,
+    "dK_deg": -31.159,
+    "dK_law_deg": -31.16,
+    "err_deg": 0.0006,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0007,
+    "cam_closure_mm": 0.0007
+   }
+  },
+  {
+   "label": "J3 q3' max, taken (nearest J3 stop high)",
+   "bench_pose": 152,
+   "pose": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0001,
+     0.0,
+     0.0001
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1296,
+     1.1296,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 9.4e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 101.65,
+   "q3p_deg": 116.771,
+   "m3e": 11.99,
+   "stops": {
+    "K": {
+     "angle_deg": -21.592,
+     "from_stop_lo_deg": 41.258,
+     "to_stop_hi_deg": 21.591,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -2.748,
+     "from_stop_lo_deg": 11.571,
+     "to_stop_hi_deg": 104.817,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 116.771,
+     "model_q3p_deg": 116.771,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 228.675,
+     "to_stop_hi_deg": 5.971,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 152,
+    "state": 1,
+    "q2_deg": -2.748,
+    "dK_deg": -21.592,
+    "dK_law_deg": -21.592,
+    "err_deg": 0.0006,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0,
+    "cam_closure_mm": 0.0
+   }
+  },
+  {
+   "label": "knee angle min, taken",
+   "bench_pose": 89,
+   "pose": [
+    -15.0,
+    60.0,
+    -15.0
+   ],
+   "taken": true,
+   "state": 0,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "boss": [
+     0.0001,
+     0.0001,
+     0.0001
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1297,
+     1.1297,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 8.7e-05,
+   "res_deg": 0.0001,
+   "knee_angle": 59.27,
+   "q3p_deg": 8.426,
+   "m3e": 13.25,
+   "stops": {
+    "K": {
+     "angle_deg": 0.0,
+     "from_stop_lo_deg": 62.849,
+     "to_stop_hi_deg": -0.001,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": 85.894,
+     "from_stop_lo_deg": 100.213,
+     "to_stop_hi_deg": 16.175,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 8.426,
+     "model_q3p_deg": 8.426,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 120.33,
+     "to_stop_hi_deg": 114.316,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 89,
+    "state": 0,
+    "q2_deg": 85.894,
+    "dK_deg": 0.0,
+    "dK_law_deg": -0.0,
+    "err_deg": 0.0,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0012,
+    "cam_closure_mm": 0.0012
+   }
+  },
+  {
+   "label": "knee angle max, taken",
+   "bench_pose": 152,
+   "pose": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "taken": true,
+   "state": 1,
+   "rigid_samples_max_mm": 6.897,
+   "rigid_samples_outside_max_mm": 6.897,
+   "strap_samples_max_mm": 1.6264,
+   "drive_samples_mm": {
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ]
+   },
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hubK (slot band)": [
+     1.4163,
+     56
+    ],
+    "hubK": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "hub2 (slot band)": [
+     1.4163,
+     56
+    ],
+    "hub2": [
+     0.0,
+     0.0,
+     3.15
+    ],
+    "hub3 (slot band)": [
+     0.0,
+     36
+    ],
+    "hub3": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "E": [
+     0.0001,
+     0.0,
+     0.0001
+    ],
+    "boss": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "pad": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "knee": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "crank": [
+     6.897,
+     4.0793,
+     6.897
+    ],
+    "horn": [
+     0.0396,
+     0.0396,
+     0.0396
+    ],
+    "ring2": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "plate": [
+     0.0021,
+     0.0021,
+     0.0
+    ],
+    "L1a": [
+     1.1296,
+     1.1296,
+     0.0
+    ],
+    "L1b": [
+     0.0986,
+     0.0945,
+     0.0986
+    ],
+    "L2": [
+     1.6264,
+     0.2,
+     1.6264
+    ]
+   },
+   "frame_dev_mm": 9.4e-05,
+   "res_deg": 0.0002,
+   "knee_angle": 101.65,
+   "q3p_deg": 116.771,
+   "m3e": 11.99,
+   "stops": {
+    "K": {
+     "angle_deg": -21.592,
+     "from_stop_lo_deg": 41.258,
+     "to_stop_hi_deg": 21.591,
+     "inside": true
+    },
+    "J2": {
+     "angle_deg": -2.748,
+     "from_stop_lo_deg": 11.571,
+     "to_stop_hi_deg": 104.817,
+     "inside": true
+    },
+    "J3": {
+     "angle_deg": 116.771,
+     "model_q3p_deg": 116.771,
+     "frame_vs_model_deg": 0.0,
+     "from_stop_lo_deg": 228.675,
+     "to_stop_hi_deg": 5.971,
+     "inside": true,
+     "dowel_r_in_link2_mm": 7.5
+    }
+   },
+   "desmo_law": {
+    "pose": 152,
+    "state": 1,
+    "q2_deg": -2.748,
+    "dK_deg": -21.592,
+    "dK_law_deg": -21.592,
+    "err_deg": 0.0006,
+    "slot_closure_mm": 0.0,
+    "groove_closure_mm": 0.0,
+    "cam_closure_mm": 0.0
+   }
+  }
+ ],
+ "law_check": [
+  {
+   "pose": 60,
+   "state": 1,
+   "q2_deg": 3.223,
+   "dK_deg": -8.829,
+   "dK_law_deg": -8.83,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0029,
+   "cam_closure_mm": 0.0029
+  },
+  {
+   "pose": 0,
+   "state": 1,
+   "q2_deg": 7.397,
+   "dK_deg": -2.565,
+   "dK_law_deg": -2.566,
+   "err_deg": 0.0004,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0006,
+   "cam_closure_mm": 0.0006
+  },
+  {
+   "pose": 97,
+   "state": 0,
+   "q2_deg": 54.647,
+   "dK_deg": 0.0,
+   "dK_law_deg": -0.0,
+   "err_deg": 0.0,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0008,
+   "cam_closure_mm": 0.0008
+  },
+  {
+   "pose": 140,
+   "state": 1,
+   "q2_deg": 5.873,
+   "dK_deg": -4.418,
+   "dK_law_deg": -4.418,
+   "err_deg": 0.0004,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0029,
+   "cam_closure_mm": 0.0029
+  },
+  {
+   "pose": 152,
+   "state": 1,
+   "q2_deg": -2.748,
+   "dK_deg": -21.592,
+   "dK_law_deg": -21.592,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0,
+   "cam_closure_mm": 0.0
+  },
+  {
+   "pose": 62,
+   "state": 1,
+   "q2_deg": 1.54,
+   "dK_deg": -12.358,
+   "dK_law_deg": -12.358,
+   "err_deg": 0.0007,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0016,
+   "cam_closure_mm": 0.0016
+  },
+  {
+   "pose": 214,
+   "state": 1,
+   "q2_deg": -2.122,
+   "dK_deg": -20.243,
+   "dK_law_deg": -20.244,
+   "err_deg": 0.0007,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0028,
+   "cam_closure_mm": 0.0028
+  },
+  {
+   "pose": 5,
+   "state": 0,
+   "q2_deg": 68.637,
+   "dK_deg": 0.0,
+   "dK_law_deg": -0.0,
+   "err_deg": 0.0,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0024,
+   "cam_closure_mm": 0.0024
+  },
+  {
+   "pose": 174,
+   "state": 1,
+   "q2_deg": -14.198,
+   "dK_deg": -46.248,
+   "dK_law_deg": -46.248,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0,
+   "cam_closure_mm": 0.0
+  },
+  {
+   "pose": 174,
+   "state": 1,
+   "q2_deg": -14.198,
+   "dK_deg": -46.248,
+   "dK_law_deg": -46.248,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0,
+   "cam_closure_mm": 0.0
+  },
+  {
+   "pose": 91,
+   "state": 1,
+   "q2_deg": -7.191,
+   "dK_deg": -31.159,
+   "dK_law_deg": -31.16,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0007,
+   "cam_closure_mm": 0.0007
+  },
+  {
+   "pose": 152,
+   "state": 1,
+   "q2_deg": -2.748,
+   "dK_deg": -21.592,
+   "dK_law_deg": -21.592,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0,
+   "cam_closure_mm": 0.0
+  },
+  {
+   "pose": 89,
+   "state": 0,
+   "q2_deg": 85.894,
+   "dK_deg": 0.0,
+   "dK_law_deg": -0.0,
+   "err_deg": 0.0,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0012,
+   "cam_closure_mm": 0.0012
+  },
+  {
+   "pose": 152,
+   "state": 1,
+   "q2_deg": -2.748,
+   "dK_deg": -21.592,
+   "dK_law_deg": -21.592,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0,
+   "cam_closure_mm": 0.0
+  },
+  {
+   "pose": 0,
+   "state": 1,
+   "q2_deg": 7.397,
+   "dK_deg": -2.565,
+   "dK_law_deg": -2.566,
+   "err_deg": 0.0004,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0006,
+   "cam_closure_mm": 0.0006
+  },
+  {
+   "pose": 10,
+   "state": 1,
+   "q2_deg": 7.397,
+   "dK_deg": -2.565,
+   "dK_law_deg": -2.566,
+   "err_deg": 0.0004,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0006,
+   "cam_closure_mm": 0.0006
+  },
+  {
+   "pose": 20,
+   "state": 1,
+   "q2_deg": 7.806,
+   "dK_deg": -2.154,
+   "dK_law_deg": -2.154,
+   "err_deg": 0.0003,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0007,
+   "cam_closure_mm": 0.0007
+  },
+  {
+   "pose": 26,
+   "state": 1,
+   "q2_deg": 5.01,
+   "dK_deg": -5.689,
+   "dK_law_deg": -5.689,
+   "err_deg": 0.0005,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0011,
+   "cam_closure_mm": 0.0011
+  },
+  {
+   "pose": 29,
+   "state": 1,
+   "q2_deg": 6.305,
+   "dK_deg": -3.842,
+   "dK_law_deg": -3.843,
+   "err_deg": 0.0004,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0005,
+   "cam_closure_mm": 0.0005
+  },
+  {
+   "pose": 31,
+   "state": 1,
+   "q2_deg": 8.695,
+   "dK_deg": -1.383,
+   "dK_law_deg": -1.383,
+   "err_deg": 0.0003,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.001,
+   "cam_closure_mm": 0.001
+  },
+  {
+   "pose": 32,
+   "state": 1,
+   "q2_deg": 10.7,
+   "dK_deg": -0.268,
+   "dK_law_deg": -0.269,
+   "err_deg": 0.0001,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0003,
+   "cam_closure_mm": 0.0003
+  },
+  {
+   "pose": 33,
+   "state": 1,
+   "q2_deg": 7.745,
+   "dK_deg": -2.213,
+   "dK_law_deg": -2.213,
+   "err_deg": 0.0003,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0009,
+   "cam_closure_mm": 0.0009
+  },
+  {
+   "pose": 34,
+   "state": 1,
+   "q2_deg": -2.584,
+   "dK_deg": -21.239,
+   "dK_law_deg": -21.24,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0016,
+   "cam_closure_mm": 0.0016
+  },
+  {
+   "pose": 35,
+   "state": 1,
+   "q2_deg": -5.048,
+   "dK_deg": -26.545,
+   "dK_law_deg": -26.545,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0,
+   "cam_closure_mm": 0.0
+  },
+  {
+   "pose": 36,
+   "state": 1,
+   "q2_deg": -6.332,
+   "dK_deg": -29.31,
+   "dK_law_deg": -29.31,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0016,
+   "cam_closure_mm": 0.0016
+  },
+  {
+   "pose": 37,
+   "state": 1,
+   "q2_deg": -6.332,
+   "dK_deg": -29.31,
+   "dK_law_deg": -29.31,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0016,
+   "cam_closure_mm": 0.0016
+  },
+  {
+   "pose": 38,
+   "state": 1,
+   "q2_deg": 0.414,
+   "dK_deg": -14.783,
+   "dK_law_deg": -14.784,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0015,
+   "cam_closure_mm": 0.0015
+  },
+  {
+   "pose": 40,
+   "state": 1,
+   "q2_deg": 6.513,
+   "dK_deg": -3.579,
+   "dK_law_deg": -3.579,
+   "err_deg": 0.0004,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0016,
+   "cam_closure_mm": 0.0016
+  },
+  {
+   "pose": 42,
+   "state": 1,
+   "q2_deg": 10.226,
+   "dK_deg": -0.454,
+   "dK_law_deg": -0.454,
+   "err_deg": 0.0001,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0037,
+   "cam_closure_mm": 0.0037
+  },
+  {
+   "pose": 43,
+   "state": 1,
+   "q2_deg": -0.018,
+   "dK_deg": -15.713,
+   "dK_law_deg": -15.713,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0025,
+   "cam_closure_mm": 0.0025
+  },
+  {
+   "pose": 44,
+   "state": 1,
+   "q2_deg": -3.067,
+   "dK_deg": -22.279,
+   "dK_law_deg": -22.28,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0021,
+   "cam_closure_mm": 0.0021
+  },
+  {
+   "pose": 45,
+   "state": 1,
+   "q2_deg": -3.209,
+   "dK_deg": -22.584,
+   "dK_law_deg": -22.585,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0012,
+   "cam_closure_mm": 0.0012
+  },
+  {
+   "pose": 46,
+   "state": 1,
+   "q2_deg": 4.899,
+   "dK_deg": -5.863,
+   "dK_law_deg": -5.863,
+   "err_deg": 0.0005,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0003,
+   "cam_closure_mm": 0.0003
+  },
+  {
+   "pose": 47,
+   "state": 1,
+   "q2_deg": -4.235,
+   "dK_deg": -24.793,
+   "dK_law_deg": -24.794,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0015,
+   "cam_closure_mm": 0.0015
+  },
+  {
+   "pose": 48,
+   "state": 1,
+   "q2_deg": 4.899,
+   "dK_deg": -5.863,
+   "dK_law_deg": -5.863,
+   "err_deg": 0.0005,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0003,
+   "cam_closure_mm": 0.0003
+  },
+  {
+   "pose": 49,
+   "state": 1,
+   "q2_deg": 10.628,
+   "dK_deg": -0.293,
+   "dK_law_deg": -0.293,
+   "err_deg": 0.0001,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0036,
+   "cam_closure_mm": 0.0036
+  },
+  {
+   "pose": 51,
+   "state": 1,
+   "q2_deg": 9.407,
+   "dK_deg": -0.888,
+   "dK_law_deg": -0.888,
+   "err_deg": 0.0002,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0008,
+   "cam_closure_mm": 0.0008
+  },
+  {
+   "pose": 54,
+   "state": 1,
+   "q2_deg": 11.411,
+   "dK_deg": -0.081,
+   "dK_law_deg": -0.081,
+   "err_deg": 0.0001,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0015,
+   "cam_closure_mm": 0.0015
+  },
+  {
+   "pose": 55,
+   "state": 1,
+   "q2_deg": 1.163,
+   "dK_deg": -13.17,
+   "dK_law_deg": -13.171,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0015,
+   "cam_closure_mm": 0.0015
+  },
+  {
+   "pose": 56,
+   "state": 1,
+   "q2_deg": 1.163,
+   "dK_deg": -13.17,
+   "dK_law_deg": -13.171,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0015,
+   "cam_closure_mm": 0.0015
+  },
+  {
+   "pose": 57,
+   "state": 1,
+   "q2_deg": 4.149,
+   "dK_deg": -7.116,
+   "dK_law_deg": -7.117,
+   "err_deg": 0.0005,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0004,
+   "cam_closure_mm": 0.0004
+  },
+  {
+   "pose": 59,
+   "state": 1,
+   "q2_deg": 9.407,
+   "dK_deg": -0.888,
+   "dK_law_deg": -0.888,
+   "err_deg": 0.0002,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0008,
+   "cam_closure_mm": 0.0008
+  },
+  {
+   "pose": 60,
+   "state": 1,
+   "q2_deg": 3.223,
+   "dK_deg": -8.829,
+   "dK_law_deg": -8.83,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0029,
+   "cam_closure_mm": 0.0029
+  },
+  {
+   "pose": 61,
+   "state": 1,
+   "q2_deg": 7.543,
+   "dK_deg": -2.415,
+   "dK_law_deg": -2.415,
+   "err_deg": 0.0003,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0012,
+   "cam_closure_mm": 0.0012
+  },
+  {
+   "pose": 62,
+   "state": 1,
+   "q2_deg": 1.54,
+   "dK_deg": -12.358,
+   "dK_law_deg": -12.358,
+   "err_deg": 0.0007,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0016,
+   "cam_closure_mm": 0.0016
+  },
+  {
+   "pose": 63,
+   "state": 1,
+   "q2_deg": -9.569,
+   "dK_deg": -36.28,
+   "dK_law_deg": -36.281,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0017,
+   "cam_closure_mm": 0.0017
+  },
+  {
+   "pose": 65,
+   "state": 1,
+   "q2_deg": 0.271,
+   "dK_deg": -15.089,
+   "dK_law_deg": -15.09,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0025,
+   "cam_closure_mm": 0.0025
+  },
+  {
+   "pose": 66,
+   "state": 1,
+   "q2_deg": -11.253,
+   "dK_deg": -39.906,
+   "dK_law_deg": -39.907,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0004,
+   "cam_closure_mm": 0.0004
+  },
+  {
+   "pose": 69,
+   "state": 1,
+   "q2_deg": 4.919,
+   "dK_deg": -5.832,
+   "dK_law_deg": -5.833,
+   "err_deg": 0.0005,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0023,
+   "cam_closure_mm": 0.0023
+  },
+  {
+   "pose": 71,
+   "state": 1,
+   "q2_deg": 6.373,
+   "dK_deg": -3.755,
+   "dK_law_deg": -3.755,
+   "err_deg": 0.0004,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0029,
+   "cam_closure_mm": 0.0029
+  },
+  {
+   "pose": 72,
+   "state": 1,
+   "q2_deg": -4.545,
+   "dK_deg": -25.461,
+   "dK_law_deg": -25.461,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0004,
+   "cam_closure_mm": 0.0004
+  },
+  {
+   "pose": 74,
+   "state": 1,
+   "q2_deg": -2.927,
+   "dK_deg": -21.977,
+   "dK_law_deg": -21.978,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0024,
+   "cam_closure_mm": 0.0024
+  },
+  {
+   "pose": 75,
+   "state": 1,
+   "q2_deg": -12.886,
+   "dK_deg": -43.423,
+   "dK_law_deg": -43.424,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0009,
+   "cam_closure_mm": 0.0009
+  },
+  {
+   "pose": 78,
+   "state": 1,
+   "q2_deg": 0.803,
+   "dK_deg": -13.944,
+   "dK_law_deg": -13.945,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0002,
+   "cam_closure_mm": 0.0002
+  },
+  {
+   "pose": 79,
+   "state": 1,
+   "q2_deg": 3.619,
+   "dK_deg": -8.073,
+   "dK_law_deg": -8.074,
+   "err_deg": 0.0005,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0024,
+   "cam_closure_mm": 0.0024
+  },
+  {
+   "pose": 80,
+   "state": 1,
+   "q2_deg": -4.056,
+   "dK_deg": -24.407,
+   "dK_law_deg": -24.408,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0008,
+   "cam_closure_mm": 0.0008
+  },
+  {
+   "pose": 81,
+   "state": 1,
+   "q2_deg": 11.199,
+   "dK_deg": -0.126,
+   "dK_law_deg": -0.126,
+   "err_deg": 0.0001,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0005,
+   "cam_closure_mm": 0.0005
+  },
+  {
+   "pose": 84,
+   "state": 1,
+   "q2_deg": -2.284,
+   "dK_deg": -20.593,
+   "dK_law_deg": -20.594,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0016,
+   "cam_closure_mm": 0.0016
+  },
+  {
+   "pose": 85,
+   "state": 1,
+   "q2_deg": -6.634,
+   "dK_deg": -29.96,
+   "dK_law_deg": -29.96,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0014,
+   "cam_closure_mm": 0.0014
+  },
+  {
+   "pose": 86,
+   "state": 1,
+   "q2_deg": 4.345,
+   "dK_deg": -6.776,
+   "dK_law_deg": -6.777,
+   "err_deg": 0.0005,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0008,
+   "cam_closure_mm": 0.0008
+  },
+  {
+   "pose": 91,
+   "state": 1,
+   "q2_deg": -7.191,
+   "dK_deg": -31.159,
+   "dK_law_deg": -31.16,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0007,
+   "cam_closure_mm": 0.0007
+  },
+  {
+   "pose": 94,
+   "state": 1,
+   "q2_deg": 0.271,
+   "dK_deg": -15.089,
+   "dK_law_deg": -15.09,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0025,
+   "cam_closure_mm": 0.0025
+  },
+  {
+   "pose": 99,
+   "state": 1,
+   "q2_deg": 2.082,
+   "dK_deg": -11.191,
+   "dK_law_deg": -11.191,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0027,
+   "cam_closure_mm": 0.0027
+  },
+  {
+   "pose": 105,
+   "state": 1,
+   "q2_deg": -5.905,
+   "dK_deg": -28.39,
+   "dK_law_deg": -28.39,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0007,
+   "cam_closure_mm": 0.0007
+  },
+  {
+   "pose": 106,
+   "state": 1,
+   "q2_deg": -2.927,
+   "dK_deg": -21.977,
+   "dK_law_deg": -21.978,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0024,
+   "cam_closure_mm": 0.0024
+  },
+  {
+   "pose": 111,
+   "state": 1,
+   "q2_deg": -0.217,
+   "dK_deg": -16.141,
+   "dK_law_deg": -16.141,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0023,
+   "cam_closure_mm": 0.0023
+  },
+  {
+   "pose": 117,
+   "state": 1,
+   "q2_deg": -2.284,
+   "dK_deg": -20.593,
+   "dK_law_deg": -20.594,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0016,
+   "cam_closure_mm": 0.0016
+  },
+  {
+   "pose": 118,
+   "state": 1,
+   "q2_deg": -6.634,
+   "dK_deg": -29.96,
+   "dK_law_deg": -29.96,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0014,
+   "cam_closure_mm": 0.0014
+  },
+  {
+   "pose": 123,
+   "state": 1,
+   "q2_deg": 1.758,
+   "dK_deg": -11.889,
+   "dK_law_deg": -11.889,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0008,
+   "cam_closure_mm": 0.0008
+  },
+  {
+   "pose": 129,
+   "state": 1,
+   "q2_deg": 0.803,
+   "dK_deg": -13.944,
+   "dK_law_deg": -13.945,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0002,
+   "cam_closure_mm": 0.0002
+  },
+  {
+   "pose": 130,
+   "state": 1,
+   "q2_deg": -7.593,
+   "dK_deg": -32.024,
+   "dK_law_deg": -32.025,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0005,
+   "cam_closure_mm": 0.0005
+  },
+  {
+   "pose": 131,
+   "state": 1,
+   "q2_deg": 6.272,
+   "dK_deg": -3.885,
+   "dK_law_deg": -3.885,
+   "err_deg": 0.0004,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0028,
+   "cam_closure_mm": 0.0028
+  },
+  {
+   "pose": 135,
+   "state": 1,
+   "q2_deg": 0.106,
+   "dK_deg": -15.445,
+   "dK_law_deg": -15.446,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0006,
+   "cam_closure_mm": 0.0006
+  },
+  {
+   "pose": 138,
+   "state": 1,
+   "q2_deg": 2.697,
+   "dK_deg": -9.885,
+   "dK_law_deg": -9.886,
+   "err_deg": 0.0007,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0006,
+   "cam_closure_mm": 0.0006
+  },
+  {
+   "pose": 140,
+   "state": 1,
+   "q2_deg": 5.873,
+   "dK_deg": -4.418,
+   "dK_law_deg": -4.418,
+   "err_deg": 0.0004,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0029,
+   "cam_closure_mm": 0.0029
+  },
+  {
+   "pose": 141,
+   "state": 1,
+   "q2_deg": 3.223,
+   "dK_deg": -8.829,
+   "dK_law_deg": -8.83,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0029,
+   "cam_closure_mm": 0.0029
+  },
+  {
+   "pose": 142,
+   "state": 1,
+   "q2_deg": -4.308,
+   "dK_deg": -24.951,
+   "dK_law_deg": -24.952,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0011,
+   "cam_closure_mm": 0.0011
+  },
+  {
+   "pose": 143,
+   "state": 1,
+   "q2_deg": 1.708,
+   "dK_deg": -11.996,
+   "dK_law_deg": -11.997,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0008,
+   "cam_closure_mm": 0.0008
+  },
+  {
+   "pose": 147,
+   "state": 1,
+   "q2_deg": -2.165,
+   "dK_deg": -20.336,
+   "dK_law_deg": -20.337,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.002,
+   "cam_closure_mm": 0.002
+  },
+  {
+   "pose": 150,
+   "state": 1,
+   "q2_deg": -2.947,
+   "dK_deg": -22.02,
+   "dK_law_deg": -22.021,
+   "err_deg": 0.0007,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0001,
+   "cam_closure_mm": 0.0001
+  },
+  {
+   "pose": 152,
+   "state": 1,
+   "q2_deg": -2.748,
+   "dK_deg": -21.592,
+   "dK_law_deg": -21.592,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0,
+   "cam_closure_mm": 0.0
+  },
+  {
+   "pose": 153,
+   "state": 1,
+   "q2_deg": 4.919,
+   "dK_deg": -5.832,
+   "dK_law_deg": -5.833,
+   "err_deg": 0.0005,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0023,
+   "cam_closure_mm": 0.0023
+  },
+  {
+   "pose": 154,
+   "state": 1,
+   "q2_deg": -1.709,
+   "dK_deg": -19.354,
+   "dK_law_deg": -19.354,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0013,
+   "cam_closure_mm": 0.0013
+  },
+  {
+   "pose": 159,
+   "state": 1,
+   "q2_deg": -4.916,
+   "dK_deg": -26.261,
+   "dK_law_deg": -26.262,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0019,
+   "cam_closure_mm": 0.0019
+  },
+  {
+   "pose": 162,
+   "state": 1,
+   "q2_deg": -8.55,
+   "dK_deg": -34.085,
+   "dK_law_deg": -34.086,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0001,
+   "cam_closure_mm": 0.0001
+  },
+  {
+   "pose": 165,
+   "state": 1,
+   "q2_deg": 5.471,
+   "dK_deg": -4.99,
+   "dK_law_deg": -4.99,
+   "err_deg": 0.0005,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0026,
+   "cam_closure_mm": 0.0026
+  },
+  {
+   "pose": 166,
+   "state": 1,
+   "q2_deg": 0.081,
+   "dK_deg": -15.499,
+   "dK_law_deg": -15.499,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0026,
+   "cam_closure_mm": 0.0026
+  },
+  {
+   "pose": 171,
+   "state": 1,
+   "q2_deg": -8.021,
+   "dK_deg": -32.946,
+   "dK_law_deg": -32.946,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.002,
+   "cam_closure_mm": 0.002
+  },
+  {
+   "pose": 174,
+   "state": 1,
+   "q2_deg": -14.198,
+   "dK_deg": -46.248,
+   "dK_law_deg": -46.248,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0,
+   "cam_closure_mm": 0.0
+  },
+  {
+   "pose": 177,
+   "state": 1,
+   "q2_deg": 4.674,
+   "dK_deg": -6.226,
+   "dK_law_deg": -6.227,
+   "err_deg": 0.0005,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.003,
+   "cam_closure_mm": 0.003
+  },
+  {
+   "pose": 178,
+   "state": 1,
+   "q2_deg": 0.937,
+   "dK_deg": -13.655,
+   "dK_law_deg": -13.656,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0019,
+   "cam_closure_mm": 0.0019
+  },
+  {
+   "pose": 182,
+   "state": 1,
+   "q2_deg": 7.925,
+   "dK_deg": -2.041,
+   "dK_law_deg": -2.041,
+   "err_deg": 0.0003,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0033,
+   "cam_closure_mm": 0.0033
+  },
+  {
+   "pose": 183,
+   "state": 1,
+   "q2_deg": -11.37,
+   "dK_deg": -40.158,
+   "dK_law_deg": -40.159,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0017,
+   "cam_closure_mm": 0.0017
+  },
+  {
+   "pose": 189,
+   "state": 1,
+   "q2_deg": 2.817,
+   "dK_deg": -9.639,
+   "dK_law_deg": -9.64,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0021,
+   "cam_closure_mm": 0.0021
+  },
+  {
+   "pose": 190,
+   "state": 1,
+   "q2_deg": 0.785,
+   "dK_deg": -13.983,
+   "dK_law_deg": -13.983,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0021,
+   "cam_closure_mm": 0.0021
+  },
+  {
+   "pose": 191,
+   "state": 1,
+   "q2_deg": -14.039,
+   "dK_deg": -45.907,
+   "dK_law_deg": -45.907,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0006,
+   "cam_closure_mm": 0.0006
+  },
+  {
+   "pose": 194,
+   "state": 1,
+   "q2_deg": 3.999,
+   "dK_deg": -7.38,
+   "dK_law_deg": -7.381,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0003,
+   "cam_closure_mm": 0.0003
+  },
+  {
+   "pose": 201,
+   "state": 1,
+   "q2_deg": -6.634,
+   "dK_deg": -29.96,
+   "dK_law_deg": -29.96,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0014,
+   "cam_closure_mm": 0.0014
+  },
+  {
+   "pose": 202,
+   "state": 1,
+   "q2_deg": -2.11,
+   "dK_deg": -20.217,
+   "dK_law_deg": -20.218,
+   "err_deg": 0.0007,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0013,
+   "cam_closure_mm": 0.0013
+  },
+  {
+   "pose": 203,
+   "state": 1,
+   "q2_deg": 1.598,
+   "dK_deg": -12.233,
+   "dK_law_deg": -12.234,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0005,
+   "cam_closure_mm": 0.0005
+  },
+  {
+   "pose": 204,
+   "state": 1,
+   "q2_deg": 5.306,
+   "dK_deg": -5.235,
+   "dK_law_deg": -5.236,
+   "err_deg": 0.0005,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0005,
+   "cam_closure_mm": 0.0005
+  },
+  {
+   "pose": 205,
+   "state": 1,
+   "q2_deg": 10.242,
+   "dK_deg": -0.447,
+   "dK_law_deg": -0.447,
+   "err_deg": 0.0002,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0015,
+   "cam_closure_mm": 0.0015
+  },
+  {
+   "pose": 209,
+   "state": 1,
+   "q2_deg": 7.201,
+   "dK_deg": -2.776,
+   "dK_law_deg": -2.776,
+   "err_deg": 0.0004,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0001,
+   "cam_closure_mm": 0.0001
+  },
+  {
+   "pose": 210,
+   "state": 1,
+   "q2_deg": 1.499,
+   "dK_deg": -12.446,
+   "dK_law_deg": -12.446,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0003,
+   "cam_closure_mm": 0.0003
+  },
+  {
+   "pose": 211,
+   "state": 1,
+   "q2_deg": -6.634,
+   "dK_deg": -29.96,
+   "dK_law_deg": -29.96,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0014,
+   "cam_closure_mm": 0.0014
+  },
+  {
+   "pose": 212,
+   "state": 1,
+   "q2_deg": -4.5,
+   "dK_deg": -25.363,
+   "dK_law_deg": -25.364,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0001,
+   "cam_closure_mm": 0.0001
+  },
+  {
+   "pose": 213,
+   "state": 1,
+   "q2_deg": -3.183,
+   "dK_deg": -22.528,
+   "dK_law_deg": -22.529,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0017,
+   "cam_closure_mm": 0.0017
+  },
+  {
+   "pose": 214,
+   "state": 1,
+   "q2_deg": -2.122,
+   "dK_deg": -20.243,
+   "dK_law_deg": -20.244,
+   "err_deg": 0.0007,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0028,
+   "cam_closure_mm": 0.0028
+  },
+  {
+   "pose": 215,
+   "state": 1,
+   "q2_deg": -1.075,
+   "dK_deg": -17.989,
+   "dK_law_deg": -17.989,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0028,
+   "cam_closure_mm": 0.0028
+  },
+  {
+   "pose": 216,
+   "state": 1,
+   "q2_deg": -0.557,
+   "dK_deg": -16.874,
+   "dK_law_deg": -16.874,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0011,
+   "cam_closure_mm": 0.0011
+  },
+  {
+   "pose": 217,
+   "state": 1,
+   "q2_deg": -1.009,
+   "dK_deg": -17.848,
+   "dK_law_deg": -17.848,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0013,
+   "cam_closure_mm": 0.0013
+  },
+  {
+   "pose": 218,
+   "state": 1,
+   "q2_deg": -2.724,
+   "dK_deg": -21.541,
+   "dK_law_deg": -21.541,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0027,
+   "cam_closure_mm": 0.0027
+  },
+  {
+   "pose": 219,
+   "state": 1,
+   "q2_deg": -5.83,
+   "dK_deg": -28.228,
+   "dK_law_deg": -28.228,
+   "err_deg": 0.0006,
+   "slot_closure_mm": 0.0,
+   "groove_closure_mm": 0.0019,
+   "cam_closure_mm": 0.0019
+  }
+ ],
+ "law_check_summary": {
+  "poses": 113,
+  "stretched": 110,
+  "max_err_deg": 0.0007,
+  "dK_max_deg": 46.248,
+  "cam_closure_max_mm": 0.0037
+ },
+ "clips": {
+  "Raise overhead": {
+   "frames": 181,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 1.54,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    59.3,
+    87.5
+   ],
+   "knuckle": {
+    "frames_K_open": 24,
+    "dK_max": 2.56
+   }
+  },
+  "Drink from a cup": {
+   "frames": 178,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.84,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    59.3,
+    61.3
+   ],
+   "knuckle": {
+    "frames_K_open": 24,
+    "dK_max": 2.15
+   }
+  },
+  "Comb hair": {
+   "frames": 202,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.37,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    59.3,
+    91.6
+   ],
+   "knuckle": {
+    "frames_K_open": 55,
+    "dK_max": 5.69
+   }
+  },
+  "Reach a high shelf": {
+   "frames": 157,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.34,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    59.3,
+    91.8
+   ],
+   "knuckle": {
+    "frames_K_open": 133,
+    "dK_max": 29.31
+   }
+  },
+  "Wash opposite shoulder": {
+   "frames": 193,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.84,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    59.3,
+    62.2
+   ],
+   "knuckle": {
+    "frames_K_open": 154,
+    "dK_max": 24.79
+   }
+  },
+  "Reach back pocket": {
+   "frames": 145,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.5,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    60.2,
+    79.6
+   ],
+   "knuckle": {
+    "frames_K_open": 77,
+    "dK_max": 13.17
+   }
+  },
+  "Wave": {
+   "frames": 172,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.12,
+   "min_adj_mm": 0.32,
+   "knee_angle": [
+    59.3,
+    77.2
+   ],
+   "knuckle": {
+    "frames_K_open": 16,
+    "dK_max": 1.27
+   }
+  },
+  "Walking arm swing": {
+   "frames": 109,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "adjacent_pairs": {},
+   "min_skin_mm": 2.83,
+   "min_adj_mm": 0.33,
+   "knee_angle": [
+    59.3,
+    59.7
+   ],
+   "knuckle": {
+    "frames_K_open": 109,
+    "dK_max": 10.29
+   }
+  }
+ },
+ "slaved_vs_clips": {
+  "driven_frames": 595,
+  "driven_max_err_deg": 0.002,
+  "dwell_frames": 742,
+  "dwell_max_dK_deg": 0.0
+ },
+ "workspace": {
+  "poses": 1432,
+  "closes": 0.7228,
+  "feasible_kin_parts": 0.7228,
+  "driven_feasible": 556
+ },
+ "drive_skin": {
+  "rule": ">= 0.3 mm on every frame (gen-5 lobe ring: -0.26)",
+  "frames": 1337,
+  "every": 1,
+  "min_mm": 1.536,
+  "where": "drive cap-ring groove layer keep-out (li: Raise overhead frame 77",
+  "passes": true,
+  "per_part": {
+   "drive nose dowel keep-out (ISO 8734 1.5 ": {
+    "min_mm": 7.602,
+    "at": "Reach a high shelf frame 34",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive nose boss root keep-out (link 1a: ": {
+    "min_mm": 6.511,
+    "at": "Comb hair frame 161",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive nose boss keep-out (link 1a: O5 x ": {
+    "min_mm": 6.315,
+    "at": "Comb hair frame 105",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive stage-1 pin keep-out (ISO 8734 1.5": {
+    "min_mm": 6.769,
+    "at": "Reach a high shelf frame 75",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive crank short arm keep-out (6.8 x 3 ": {
+    "min_mm": 6.427,
+    "at": "Reach a high shelf frame 75",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive crank tip plate keep-out (7.04 x 3": {
+    "min_mm": 9.411,
+    "at": "Comb hair frame 105",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive bell crank bent arm keep-out (6 x ": {
+    "min_mm": 4.494,
+    "at": "Comb hair frame 88",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 0
+   },
+   "drive cap-ring roof keep-out (the sector": {
+    "min_mm": 1.585,
+    "at": "Raise overhead frame 77",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 57
+   },
+   "drive cap-ring groove layer keep-out (li": {
+    "min_mm": 1.536,
+    "at": "Raise overhead frame 77",
+    "frames_lt_0p3": 0,
+    "frames_lt_2": 61
+   }
+  },
+  "per_clip": {
+   "Raise overhead": 1.536,
+   "Drink from a cup": 5.84,
+   "Comb hair": 4.494,
+   "Reach a high shelf": 5.579,
+   "Wash opposite shoulder": 5.771,
+   "Reach back pocket": 5.346,
+   "Wave": 2.125,
+   "Walking arm swing": 6.196
+  }
+ },
+ "j3stop_clip_frames": {
+  "total": 0,
+  "per_clip": {}
+ },
+ "j3_on_clip_frames": {
+  "frames": 1337,
+  "held": 0,
+  "q3p_deg": [
+   -62.4,
+   101.41
+  ],
+  "margin_to_stops_deg": [
+   49.5,
+   21.33
+  ],
+  "knee_deg": [
+   59.27,
+   91.81
+  ],
+  "knee_stop_margin_deg": 62.97
+ },
+ "verified": {
+  "bench": {
+   "gap": 18.98,
+   "score": 93.1,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.893,
+   "inband10": 0.5629,
+   "contact": 0.0106,
+   "overhead": "8/28"
+  },
+  "claim_linear_ik": {
+   "gap": 19.04,
+   "score": 93.08
+  },
+  "held": {
+   "gap": 23.19,
+   "score": 91.57,
+   "reach": 0.6922,
+   "inband14": 0.8919,
+   "contact": 0.016,
+   "overhead": "18/71"
+  },
+  "th_margin": {
+   "bench_min": 5.181,
+   "held_min": 5.006,
+   "dth_dK_at_min": 0.403,
+   "k_play_nominal_deg": 0.227,
+   "k_play_worst_tol_deg": 0.281,
+   "held_min_with_play": [
+    4.915,
+    4.893
+   ]
+  },
+  "groove_scan": {
+   "crank_free_worst_deg": 0.187,
+   "at_K": 44.0,
+   "held_slot_slop_deg": 0.04
+  },
+  "mu_claim": "0.15 nominal only (a_s +0.07 mm binds stage 1 at K 44.75)",
+  "complexity": 16.5,
+  "ledger": "WATCH (docs/alignment/desmo-conecut-knuckle-3r.md)",
+  "harness": "docs/concepts/verify/desmo-conecut-knuckle-3r.py --blend",
+  "dumps": [
+   "docs/concepts/verify/desmo-conecut-knuckle-3r_v_bench_frozen_blend.json",
+   "docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json"
+  ]
+ },
+ "ring_patch": {
+  "note": "cap-ring sector widened past the groove's round ends (asin((GW/2 + RW)/rho) + 0.5 deg) and the nose-boss root started RUNG outside hub K's O20 by --patch-ring; every other part untouched",
+  "parts": {
+   "drive cap-ring groove layer": "drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 116.7 deg, r 6.30..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)",
+   "drive cap-ring roof": "drive cap-ring roof keep-out (the sector over the groove, F+1.61..F+3.65, one with hub 2's upper boss)",
+   "drive nose boss root": "drive nose boss root keep-out (link 1a: 4 x 3 Ti from hub K's rim to the boss)"
+  },
+  "valid": {
+   "drive cap-ring groove layer keep-out (li": [
+    true,
+    1
+   ],
+   "drive cap-ring roof keep-out (the sector": [
+    true,
+    1
+   ],
+   "drive nose boss root keep-out (link 1a: ": [
+    true,
+    1
+   ]
+  }
+ }
+}

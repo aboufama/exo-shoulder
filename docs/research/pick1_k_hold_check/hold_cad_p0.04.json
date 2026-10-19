@@ -1,0 +1,356 @@
+{
+ "design": "user_minarc_pick1",
+ "preload": 0.04,
+ "runs": {
+  "up2g": {
+   "Raise overhead": {
+    "drift": 0.02,
+    "lift_max_deg": -0.008,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.97
+   },
+   "Drink from a cup": {
+    "drift": 0.02,
+    "lift_max_deg": -0.015,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.41
+   },
+   "Comb hair": {
+    "drift": 0.02,
+    "lift_max_deg": -0.014,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.91
+   },
+   "Reach a high shelf": {
+    "drift": 2.27,
+    "lift_max_deg": -0.001,
+    "lift_share_gt0p5": 0.0,
+    "twist": 2.32
+   },
+   "Wash opposite shoulder": {
+    "drift": 0.69,
+    "lift_max_deg": 0.473,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.46
+   },
+   "Reach back pocket": {
+    "drift": 0.02,
+    "lift_max_deg": -0.016,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.8
+   },
+   "Wave": {
+    "drift": 0.02,
+    "lift_max_deg": -0.014,
+    "lift_share_gt0p5": 0.0,
+    "twist": 2.65
+   },
+   "Walking arm swing": {
+    "drift": 0.02,
+    "lift_max_deg": -0.017,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.7
+   }
+  },
+  "fwd1g": {
+   "Raise overhead": {
+    "drift": 0.03,
+    "lift_max_deg": -0.024,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.85
+   },
+   "Drink from a cup": {
+    "drift": 0.02,
+    "lift_max_deg": -0.022,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.85
+   },
+   "Comb hair": {
+    "drift": 0.03,
+    "lift_max_deg": -0.023,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.84
+   },
+   "Reach a high shelf": {
+    "drift": 5.69,
+    "lift_max_deg": -0.022,
+    "lift_share_gt0p5": 0.0,
+    "twist": 2.83
+   },
+   "Wash opposite shoulder": {
+    "drift": 1.75,
+    "lift_max_deg": -0.021,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.76
+   },
+   "Reach back pocket": {
+    "drift": 0.03,
+    "lift_max_deg": -0.022,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.02
+   },
+   "Wave": {
+    "drift": 0.03,
+    "lift_max_deg": -0.024,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.18
+   },
+   "Walking arm swing": {
+    "drift": 0.02,
+    "lift_max_deg": -0.024,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.96
+   }
+  },
+  "back1g": {
+   "Raise overhead": {
+    "drift": 0.02,
+    "lift_max_deg": -0.015,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.84
+   },
+   "Drink from a cup": {
+    "drift": 0.02,
+    "lift_max_deg": -0.019,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.84
+   },
+   "Comb hair": {
+    "drift": 0.02,
+    "lift_max_deg": -0.016,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.83
+   },
+   "Reach a high shelf": {
+    "drift": 6.12,
+    "lift_max_deg": -0.019,
+    "lift_share_gt0p5": 0.0,
+    "twist": 3.28
+   },
+   "Wash opposite shoulder": {
+    "drift": 1.56,
+    "lift_max_deg": 0.001,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.58
+   },
+   "Reach back pocket": {
+    "drift": 0.02,
+    "lift_max_deg": -0.017,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.92
+   },
+   "Wave": {
+    "drift": 0.02,
+    "lift_max_deg": -0.016,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.97
+   },
+   "Walking arm swing": {
+    "drift": 0.02,
+    "lift_max_deg": -0.019,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.92
+   }
+  },
+  "side1g": {
+   "Raise overhead": {
+    "drift": 0.03,
+    "lift_max_deg": -0.022,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.82
+   },
+   "Drink from a cup": {
+    "drift": 0.02,
+    "lift_max_deg": -0.017,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.52
+   },
+   "Comb hair": {
+    "drift": 0.02,
+    "lift_max_deg": -0.02,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.34
+   },
+   "Reach a high shelf": {
+    "drift": 4.12,
+    "lift_max_deg": -0.014,
+    "lift_share_gt0p5": 0.0,
+    "twist": 2.09
+   },
+   "Wash opposite shoulder": {
+    "drift": 0.8,
+    "lift_max_deg": 0.095,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.91
+   },
+   "Reach back pocket": {
+    "drift": 0.02,
+    "lift_max_deg": -0.02,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.87
+   },
+   "Wave": {
+    "drift": 0.03,
+    "lift_max_deg": -0.022,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.58
+   },
+   "Walking arm swing": {
+    "drift": 0.02,
+    "lift_max_deg": -0.022,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.38
+   }
+  },
+  "side1gn": {
+   "Raise overhead": {
+    "drift": 0.02,
+    "lift_max_deg": -0.018,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.8
+   },
+   "Drink from a cup": {
+    "drift": 0.03,
+    "lift_max_deg": -0.021,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.57
+   },
+   "Comb hair": {
+    "drift": 0.02,
+    "lift_max_deg": -0.021,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.22
+   },
+   "Reach a high shelf": {
+    "drift": 7.7,
+    "lift_max_deg": -0.021,
+    "lift_share_gt0p5": 0.0,
+    "twist": 3.83
+   },
+   "Wash opposite shoulder": {
+    "drift": 2.61,
+    "lift_max_deg": -0.021,
+    "lift_share_gt0p5": 0.0,
+    "twist": 2.43
+   },
+   "Reach back pocket": {
+    "drift": 0.02,
+    "lift_max_deg": -0.019,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.83
+   },
+   "Wave": {
+    "drift": 0.02,
+    "lift_max_deg": -0.017,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.49
+   },
+   "Walking arm swing": {
+    "drift": 0.02,
+    "lift_max_deg": -0.021,
+    "lift_share_gt0p5": 0.0,
+    "twist": 0.45
+   }
+  },
+  "fwd2g": {
+   "Raise overhead": {
+    "drift": 0.03,
+    "lift_max_deg": -0.026,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.66
+   },
+   "Drink from a cup": {
+    "drift": 0.03,
+    "lift_max_deg": -0.023,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.67
+   },
+   "Comb hair": {
+    "drift": 0.03,
+    "lift_max_deg": -0.024,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.66
+   },
+   "Reach a high shelf": {
+    "drift": 5.56,
+    "lift_max_deg": -0.023,
+    "lift_share_gt0p5": 0.0,
+    "twist": 2.75
+   },
+   "Wash opposite shoulder": {
+    "drift": 1.91,
+    "lift_max_deg": -0.02,
+    "lift_share_gt0p5": 0.0,
+    "twist": 2.33
+   },
+   "Reach back pocket": {
+    "drift": 0.03,
+    "lift_max_deg": -0.024,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.86
+   },
+   "Wave": {
+    "drift": 0.03,
+    "lift_max_deg": -0.026,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.93
+   },
+   "Walking arm swing": {
+    "drift": 0.03,
+    "lift_max_deg": -0.026,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.81
+   }
+  },
+  "back2g": {
+   "Raise overhead": {
+    "drift": 0.02,
+    "lift_max_deg": -0.008,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.63
+   },
+   "Drink from a cup": {
+    "drift": 0.02,
+    "lift_max_deg": -0.015,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.65
+   },
+   "Comb hair": {
+    "drift": 0.02,
+    "lift_max_deg": -0.01,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.63
+   },
+   "Reach a high shelf": {
+    "drift": 6.91,
+    "lift_max_deg": -0.015,
+    "lift_share_gt0p5": 0.0,
+    "twist": 3.72
+   },
+   "Wash opposite shoulder": {
+    "drift": 1.47,
+    "lift_max_deg": 0.261,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.75
+   },
+   "Reach back pocket": {
+    "drift": 0.02,
+    "lift_max_deg": -0.012,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.63
+   },
+   "Wave": {
+    "drift": 0.02,
+    "lift_max_deg": -0.01,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.62
+   },
+   "Walking arm swing": {
+    "drift": 0.02,
+    "lift_max_deg": -0.015,
+    "lift_share_gt0p5": 0.0,
+    "twist": 1.77
+   }
+  }
+ }
+}

@@ -1,0 +1,62 @@
+[
+ {
+  "key": "dominance",
+  "refuted": true,
+  "evidence": "The numbers reproduce, but the stated cause does not. verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json frozen {gap 22.82, reach 0.7278, inband14 0.8546, contact 0.0106}, audit gap_near2 44.08 (34 poses); verify/sidecar-roller-flank-knuckle-3r_v_bench_frozen.json frozen {gap 20.08, reach 0.7222, inband14 0.8903, contact 0.0133}, audit gap_near2 46.82 (45 poses): +2.74 plain, -2.74 at 2 mm. Decomposed with tools/concept_bench.py gap_of (line 54): in-band +3.57 (4.54 -> 0.97), reach -0.56 (17.22 -> 17.78), contact -0.27 (1.06 -> 1.33). In-band14 counts only metal at 2-14 mm (concept_bench.py line 191: (d >= 2) & (d <= 14)), so metal moved into the 1-2 mm shell can only lower it, and the roller design reaches FEWER poses than frontload, so no part of the plain gain is poses taken with metal at 1-2 mm. The whole gain is a lower profile (in-band share up, the 2026-10-16 skeptic's 'far metal' finding). What remains, 11 more taken poses under 2 mm (45 vs 34), is a real cost for the wearer, but it is G1's reading, which stands below. The A1 gate itself is retired (CLAUDE.md, user 2026-10-17)."
+ },
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "The margin is on file and I re-derived it. On file: remeasure/sidecar-roller-flank-knuckle-3r_probe_bench.json extras.th_margin_own_state {min 5.49, n 370, lt5 0, lt5p5 1, forced 185}; _probe_held.json extras.th_margin_own_state {min 5.02, n 868, lt5 0, lt5p5 2, forced 443}; _msub_rest_bench.json family_reading {min 5.49, lt5 0}. All three files reproduce the claim (model_frozen gap 20.08 / 22.35 / 20.08). Recomputed from the 370 per-pose rows of _msub_rest_bench.json: rest poses (185) m_plain min 6.075, moved poses (185) min(m_sub, m_eff) min 5.49 (m_eff), so 0 under 5. This is the th reading of tools/concept_kit.py lines 25-30. By c_fold_margin's own rule (tools/alignment_audit.py line 544: gamed only below fold_min 5.0 - 0.05, otherwise ok) it reads ok at 5.02. The watch exists only because c_fold_margin does not read remeasure files (the auditor's proposal 4). The missing entry on the row is a reporting defect, and it is already carried by R1. Precedent: conecut-l2jog and slotted-eccentric fold_margin rulings, refuted on remeasure files."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Confirmed. rows/sidecar-roller-flank-knuckle-3r.json has status 'verified', but the verdict opens 'Contender, self-measured: ...' and ends 'Needs the adversarial verifier'. That matches c_reporting's trigger ('self-measured' in verdict[:200], tools/alignment_audit.py line 736). docs/dashboard/data/morphs.json row: gap 11.73, reach 0.7937, sweep_gap 11.25, v_gap 20.08. 20.08 - 11.25 = 8.83 > 5, the documented trigger (sg < vg - 5). 100(1 - 11.25/275) = 95.91, which sits above the board's 95 line for a design whose verified score is 92.70."
+ },
+ {
+  "key": "judgement:T5",
+  "refuted": true,
+  "evidence": "The depths reproduce, but the documented T5 rule is not met against the documented reference. The rule (tools/alignment_audit.py c_contact_depth docstring; docs/ALIGNMENT.md section 5) is watch when the claim presses >= TH depth_ratio 2.0 x the reference's summed depth AND >= depth_floor_mm 5.0 more. The reference is DEPTH_REF = conecut-knee-knuckle-3r, the current lead. sidecar-longdyad is the retired reference that the code comment marks stale since 2026-10-17 05:00. Re-derived from the dumps on the same 470 pose indices (order checked identical), metal = min(min_mm, cmin). Roller, remeasure/sidecar-roller-flank-knuckle-3r_bench_perpose.json (recomputed 20.08): 5 contacts, 22.09 mm. Lead, remeasure/conecut-knee-knuckle-3r_bench_perpose.json (frozen 18.28, recomputed 18.29, so claim-matched): 4 contacts, 20.24 mm. That is x1.09, +1.85 mm. Held: _probe_held.json contact_poses 10, 59.91 mm (8 > 3 mm, deepest 11.08) vs the lead's _held_perpose.json (22.38 = 22.38) 14, 60.97 mm: x0.98, -1.06 mm. Pose by pose, both designs lose the 3 shared overhead contact poses (taken false). The roller is deeper at i237 (15,165,-60), 12.57 vs 8.93 (+3.64 mm, under the 5 mm floor). It is shallower at i264 (5.45 vs 5.80) and i316 (0.91 vs 1.24). That press is charged by the contact term, as for the whole family. The auditor's 'tool reads ok only because the lead has no claim-matched depth file' is wrong: see missed[0]."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "Upheld, re-derived from remeasure/sidecar-roller-flank-knuckle-3r_bench_perpose.json (370 taken poses, recomputed 20.08). Metal under 2 mm: 45 counting walls (min(min_mm, cmin)), 41 on sampled metal; min 0.316 mm. All 8 taken overhead workspace poses (elev >= 140) are under 2 mm: 0.65, 1.18, 1.41, 1.49, 1.63, 1.64, 1.83, 1.98. 8 of the 10 overhead clip frames sit at 1.02-1.52 mm and 2 at 2.07. 46.82 - 20.08 = 26.74 > TH shell2_watch 15. verify _v_held_frozen.json audit: gap_near2 50.38 (108 poses), near_touch_min_mm 0.17. Metal at 1-2 mm on the model is metal on a real, bulging arm (docs/ALIGNMENT.md section 1), so the cost to the wearer is real. Two count corrections: on the walls basis, 2 poses are under 1 mm (0.32 and 0.65), not 1, and 183 are under 3 mm (171 is the sampled basis)."
+ },
+ {
+  "key": "judgement:M2",
+  "refuted": false,
+  "evidence": "Upheld. rows best_params has no stk. The model inherits stk 4.8534 from docs/concepts/models/sidecar-longdyad-knuckle-3r.py line 48, under even the iglidur figure 5.0 and under the MR63ZZ pair's 6.0 (docs/concepts/models/skin-normal-3r-pin-knee.py lines 19 and 54). The lead's build rule of 2026-10-17 (CLAUDE.md item 5) requires MR63ZZ pairs. remeasure/sidecar-roller-flank-knuckle-3r_stk6_bench.json (params = the claim, with stk 6.0): frozen gap 20.34, inband14 0.8877, reach 0.7222, contact 0.0133, why unchanged. The claim understates the real component by +0.26 bench, and the held-out stk 6.0 wear is still not on file. Box load 18 on 4 cores, so I did not re-run it."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Upheld with a band correction. Recounted from the 370 rows of remeasure/sidecar-roller-flank-knuckle-3r_msub_rest_bench.json (model_frozen 20.08): rest 185 / moved 185; rest m_sub < 5 on 85, < 2 on 53, < 1 on 39, min 0.000 at i176 ws (-15,60,15) (th 33.04, m_plain 12.94). The documented th reading holds (family min 5.49, 0 < 5). Whether the K-at-rest sub-chain fold costs the wearer depends on how stiff K's rest stop is against the clock spring, and no file measures that. B1 is open with the user. Correction: the 85 are not all low-arm. By elevation they are ws 18 (< 60), 27 (60-90), 20 (90-140) and 3 (>= 140), plus clip 4 / 3 / 4 / 6, so 33 of the 85 are at elev >= 90."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Upheld, a missing measurement. verify _v_bench_frozen.json extra dK_sign_counts {neg 185, zero 185}, dK_taken_max_deg 51.68; _v_held_frozen.json {neg 443, zero 425}, 53.37; mechanism springs_or_flexures 1, rolling_pairs 2. ls pipeline/full-exo/designs/ shows no CAD of this design (only l1_/user_ roller-longdyad and l1_sidecar-longdyad), so R17 (K lag, lift-off, cuff twist) has never run. No arm-deflection or spring-hold number is on file."
+ },
+ {
+  "key": "judgement:M3",
+  "refuted": false,
+  "evidence": "Upheld, a missing measurement, with one threshold note. docs/concepts/models/sidecar-roller-flank-knuckle-3r.py line 142: lug shell [rL, rL + 3] with rL = R0 - 1.5, and the arm tip at rA = R0 + 1.5 + RUNG, where RUNG = 0.15 (sidecar-longdyad-knuckle-3r.py line 43). So the gap is 0.15 mm, as stated. The kit's documented clearance for ADJACENT parts is 0.15 mm (skin-normal-3r-pin-knee.py docstring: '>= 1 mm non-adjacent, >= 0.15 mm adjacent'). Arm and lug are a cam pair through the roller, so the gap meets the written rule. The open question is the one the auditor raises: whether a 51.5 mm, 130-deg bent cantilever under the ~2.5 N spring load and build tolerance holds 0.15 mm, when the kit's adjacent examples are bearing-located pairs at a joint. No deflection, FEA or tolerance number is on file."
+ },
+ {
+  "key": "judgement:S3",
+  "refuted": false,
+  "evidence": "Upheld, a missing measurement. Row best_params s_arm 4.4442 and r_lobe 8.1395 (inside hub 2's O20 radius of 10). verify parts_ib14 lists crank [0.856, 11.4, 125] and no separate follower or short-arm group. docs/research/sidecar_mechanism_redteam.md finding 3 (IKO CFS2.5, lobe ring r 10.29-13.43) is not modelled. No bench model of these parts is on file."
+ },
+ {
+  "key": "judgement:G5",
+  "refuted": false,
+  "evidence": "Reproduced with tools/simplicity.py VERSION 2.2 score(). Row mechanism: 21.75 (prot 3, loops 2 x 4, bodies 1, joints 4, spring 3, made 2.0, bought 0.75, knee 0). sidecar-longdyad 25.5; kneeless-sidecar 28.0. Twin record deltas (sidecar-longdyad vs kneeless-sidecar): bodies 7/6, joints 10/8, prot 6/4, loops 3/2, made 16/14, bought 16/12. cuff_knee subtracts bodies 2, joints 2, prot 2, loops 1, made 4, bought 6, an over-subtraction of bodies 1, made 2 and bought 2 = 1 + 1 + 0.5 = 2.5. Applied to this row: bodies 5, made 13, bought 11 -> 24.25. The user's knee = 0 rule (CLAUDE.md item 5) says the knee is free. It does not say the subtraction may exceed what the record counts for the knee. No part list resolves which count is right. Stands; no decision rides on it below 95."
+ },
+ {
+  "key": "judgement:R1",
+  "refuted": false,
+  "evidence": "Confirmed. The rows/sidecar-roller-flank-knuckle-3r.json verdict opens 'Contender, self-measured' and says 'complexity 45.25 (lead 49, rod sidecar 49)' and 'vs the verified lead 22.82' (frontload, no longer the lead). The note carries 45.25 at char 2616. docs/concepts/sidecar-roller-flank-knuckle-3r.md has 45.25 twice. Row complexity is 21.75 (= simplicity.py 2.2). morphs.json shows gap 11.73 / reach 0.7937 / sweep_gap 11.25. The mechanism notes say 'pin knee (2 iglidur pins, sensed as the lead)' while cuff_knee.sensed is false and the build rule is MR63ZZ. Neither the row nor a verify file has the fold margin, contact depth or knee stack."
+ }
+]

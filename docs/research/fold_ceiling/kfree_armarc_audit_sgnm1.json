@@ -1,0 +1,94 @@
+[
+{
+"k": 0,
+"t": "2026-10-18T08:33:38Z",
+"params": {
+"PHI": 60,
+"sgn": -1,
+"hw": 0,
+"psi2": -12
+},
+"inband14": 0.9271,
+"inband10": 0.6815,
+"reach": 0.7188,
+"follow": 0.9167,
+"contact": 0.0761,
+"gap": 29.06,
+"gap_near1": 31.4,
+"bench": [
+60,
+160
+],
+"mode": "fast",
+"relayed": {
+"n_ws": 21,
+"taken_ws": 9,
+"contact": 11,
+"jam": 1,
+"jam_ws": 1,
+"clip": 0,
+"clip_taken": 0,
+"phi_max": 56.94,
+"phi_max_taken": 56.38
+},
+"why_ws": {
+"": 115,
+"contact": 11,
+"fold": 29,
+"j3stop": 3,
+"parts": 2
+},
+"overhead": [
+1,
+12
+],
+"min_metal_taken": 0.555
+},
+{
+"k": 1,
+"t": "2026-10-18T08:33:42Z",
+"params": {
+"PHI": 60,
+"sgn": -1,
+"hw": 0,
+"tilt": 12.05,
+"taz": 236.92,
+"psi2": -8.92
+},
+"inband14": 0.9356,
+"inband10": 0.6875,
+"reach": 0.725,
+"follow": 0.95,
+"contact": 0.0389,
+"gap": 21.39,
+"gap_near1": 21.39,
+"bench": [
+60,
+160
+],
+"mode": "fast",
+"relayed": {
+"n_ws": 17,
+"taken_ws": 10,
+"contact": 7,
+"jam": 0,
+"jam_ws": 0,
+"clip": 0,
+"clip_taken": 0,
+"phi_max": 47.38,
+"phi_max_taken": 45.38
+},
+"why_ws": {
+"": 116,
+"contact": 7,
+"fold": 33,
+"j3stop": 3,
+"parts": 1
+},
+"overhead": [
+1,
+12
+],
+"min_metal_taken": 1.217
+}
+]

@@ -1,0 +1,52 @@
+[
+ {
+  "key": "NEW-catalogue-drive",
+  "level": "watch",
+  "reason": "The claim samples an O7 acetal ball-link socket (ends 'rc', ER 3.5) and lets the drive run to the model's own stop B at dK 41.0 deg (ROD-hub2). The catalogued M2 ball link is the igus KBRM-02 (head O9 x 4); the gen-6 drive red team found its eye pinches hub 2 past dK ~35.4 deg on the same drive core (docs/research/sidecar_mechanism_redteam.md finding 2). This row takes K to 37.31 deg on the worn bench and 37.06 held out (row verification.added_checks; verify _v_held_frozen.json extra), past what the real eye allows. Measured this audit, the claim unchanged except the drive range capped at 35.4 (tools/alignment_drive_cap_wear_sc.py, the model's own frozen protocol, CB_EXACT=1): bench 20.25 (+1.12; reach 0.7194 -> 0.7083, 4 workspace poses lost to the cap, in-band 0.9049 unchanged), held out 22.66 (+0.63; reach 0.6838, 1 / 2 mm 25.09 / 49.19). The O9 head's own envelope is not sampled in this reading either (only the range cap). Not gamed: the custom O7 eye the model carries is a plausible machined part, and the user has not ruled which eye is built. [evidence: docs/alignment/remeasure/sidecar-parallelogram-knuckle-3r_cap354_bench.json, _cap354_held.json]"
+ },
+ {
+  "key": "M2",
+  "level": "watch",
+  "reason": "The knee is claimed on a pin stack thinner than any knee hardware the build may use: stk 4.8534 mm (best_params has no stk; the model's PARAMS resolve it from the old lead, docs/concepts/models/frontload-lobe-stopb-knuckle-3r.py line 45). The kit's own figures are 5.0 (iglidur pin over two plates) and 6.0 (MR63ZZ pair; docs/concepts/models/skin-normal-3r-pin-knee.py lines 19, 54). The lead's build rule of 2026-10-17 (CLAUDE.md) requires MR63ZZ pairs because plain iglidur pins fail R17 (~10 deg cuff twist, ~10 N); the row's mechanism notes still say '2 iglidur pins'. Measured this audit with stk 6.0 only (tools/alignment_knee_stack_probe.py, CB_EXACT=1): bench 19.13 (+0.00), but in-band14 0.9049 -> 0.9014 (knee part 0.93 -> 0.90 in band, median 10.5 -> 11.0 mm), 2 mm near-touch 50.14 -> 50.19; held out 22.09 (+0.06; in-band14 0.9031 -> 0.8994, knee in band 0.899 at a median 11.1 mm). The bench gap does not move only because in-band stays 0.0014 over the 0.90 target: the claim's in-band margin is spent. [evidence: docs/alignment/remeasure/sidecar-parallelogram-knuckle-3r_stk6_bench.json, _stk6_held.json]"
+ },
+ {
+  "key": "NEW-unpriced-stops",
+  "level": "watch",
+  "reason": "The folded J2 stop sits exactly on the user's 5 deg floor with no build tolerance: smlo 5.0 (best_params; 1341 of the 3962 sweep configs sit at smlo 5.0, docs/concepts/sweeps/sidecar-parallelogram-knuckle-3r.json). Measured this audit in the th metric on the worn exact bench (tools/alignment_msub_rest_probe_model.py, family reading: m_plain at rest, min(m_sub, m_eff) where K is forced): min 5.011 deg, 0 poses under 5, so the rule holds - by 0.011 deg; the lowest taken poses (135, 30, -150) 5.011, (150, 45, -105) 5.051, (150, 30, -150) 5.132 all sit on the folded stop with K open ~37 deg. Priced at +0.5 deg (smlo 5.5, nothing else changed, tools/alignment_drive_cap_wear_sc.py with no cap): bench 19.41 (+0.28, 1 pose lost to the fold). A dowel-in-slot stop has a few tenths of a degree of tolerance, so part of the claim's fold reach is the stop's tolerance. [evidence: docs/alignment/remeasure/sidecar-parallelogram-knuckle-3r_msub_rest_bench.json, _smlo55_bench.json]"
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "Family-wide (B1 open with the user, docs/HANDOFF.md section 7). The claim's fold reading holds (min 5.011 deg, 0 under 5), but with K at rest on stop A (222 of 369 taken bench poses) the J1-K-J3 sub-chain margin m_sub is under 5 deg on 117, under 2 on 67 and under 1 on 51, min 0.000 deg at (75, 75, 0) (tools/alignment_msub_rest_probe_model.py, CB_EXACT=1, gap reproduced 19.13). If stop A is not rigid (a clock spring is its only preload), that sub-chain sits at its fold over much of the low-arm workspace. Same size as sidecar-longdyad (145 of 250 under 5, min 0.000) and roller-longdyad (106 of 204). Not gamed: the reading is the family's and the user has not ruled. [evidence: docs/alignment/remeasure/sidecar-parallelogram-knuckle-3r_msub_rest_bench.json]"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "One clock spring (springs_or_flexures 1, mechanism notes: 'K slaved (clock-spring cap, stop A ...)') keeps the whole K drive (hub-2 rim lobe, bell crank on an MR63ZZ pair, O3 rod, horn) in contact and K on its law; K leaves stop A on 147 of 369 taken bench poses (msub probe). R17 (K lag, lift-off, cuff twist) has never run on this design: no CAD of it exists (pipeline/full-exo/designs/ has only l1_sidecar-longdyad). The drive red team's loads on the shared core are small (rod 5-13 N, J2 step 0.13-0.20 N.m; docs/research/sidecar_mechanism_redteam.md finding 5), but the lag and the cuff twist are unmeasured, so the score assumes the spring holds K on its law in every pose."
+ },
+ {
+  "key": "S3",
+  "level": "watch",
+  "reason": "Family-wide (as on sidecar-longdyad and trimlug-k165). The claim does not sample drive parts the build must carry: the design doc and the verifier say 'the crank's short arm and follower are unmodelled metal, and the lobe sits inside hub 2's O20 housing radius' (docs/concepts/sidecar-parallelogram-knuckle-3r.md lines 285-287). The drive red team's real follower on the same core is an IKO CFS2.5 on a 6.0 mm arm, riding a lobe ring of profile r 10.29-13.43 mm that stands up to 3.4 mm outside the O20 hub (docs/research/sidecar_mechanism_redteam.md finding 3). Not measured: no bench model of these parts exists and building one does not fit this time box."
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Report only (near-touch is not a gate, user 2026-10-17); the skeptic refuted it as 'gamed' (docs/alignment/sidecar-parallelogram-knuckle-3r.rulings.json) and it stands as wearer evidence. Re-worn this audit, identical to the digit: bench 44 of 369 taken poses have metal < 2 mm, 2 < 1 mm (min 0.651 mm), 169 < 3 mm; held out 96 of 859 < 2 mm, 11 < 1 mm (min 0.275 mm). gap_near2 50.14 bench / 48.71 held against plain 19.13 / 22.03; 31.0 points live in the 1-2 mm shell (sidecar-longdyad on the same drive: 15.1). The hugging is worst overhead: 7 of the 8 taken overhead workspace poses (elev >= 140) and 8 of the 10 overhead clip frames have their metal floor at 1-2 mm (probe), overhead p10 floor 1.17 mm bench, 0.83 held. On a real, bulging arm overhead, this exo's metal touches. [evidence: docs/alignment/remeasure/sidecar-parallelogram-knuckle-3r_bench.json, _held.json, _probe.json ws_overhead140 / clip_overhead140]"
+ },
+ {
+  "key": "G5",
+  "level": "watch",
+  "reason": "The knee credit flatters this row by 2.5 points of complexity, as on its sibling. The mechanism record is field for field identical to sidecar-longdyad-knuckle-3r (same drive core, same knee): tools/simplicity.py 2.2 reads 25.5 for both, while the kneeless twin of that core (kneeless-sidecar-knuckle-3r, the knee link, 2 pins and the knee loop replaced by one rigid bracket) reads 28.0. So the design WITH the knee reads simpler than the same core WITHOUT it; the user's ruling ('no added complexity') implies equal, 28.0. Cause: the standard knee subtraction (docs/concepts/skin-normal-3r-pin-knee.md line 584: 2 bodies, 4 made, 6 bought parts) is larger than this knee's own delta by its twin (1 body, 2 made, 4 bought). No ranking flips: no verified row within 1 gap point of 19.13 has a complexity between 25.5 and 28.0. Hand count."
+ },
+ {
+  "key": "S1",
+  "level": "watch",
+  "reason": "The plain order is inside sampling noise: this row is 17th on the verified plain board, and the 14 3-joint rows from 18.28 to 19.13 span 0.85 points (3 workspace poses of 0.278). Held out it is the best 3-joint wear on file (22.03 vs conecut-knee 22.38, sidecar-longdyad 22.67, desmo-conecut 23.24, trimlug-k165 23.47, roller-longdyad 23.73), so the sample does not flatter it; watch only because ranks this close are not evidence either way. The claim is not a lucky pick among its 209 fit-bench ties: the tie-break (max fit in-band) was declared before any frozen wear, and two sibling ties worn frozen read 18.54 and 19.97 (docs/alignment/remeasure/sidecar-parallelogram-knuckle-3r_tie_spread.json), so the claim sits mid-spread."
+ },
+ {
+  "key": "R1",
+  "level": "watch",
+  "reason": "Stale records on a verified row. The row verdict (and the dashboard row, docs/dashboard/data/morphs.json) opens 'SCREENED, a candidate for the verifier (self-measured)' and says 'complexity 49'; the complexity is 25.5. The row's reach / in-band / gap fields are the fast fit-bench 10.63 / 0.794, and the dashboard's sweep best 10.63 (score 96.13) sits 8.50 below the verified 19.13 (tool check 'reporting'). The fold margin, the per-pose contact depths and the knee stack are not on the row or the verifier files (this audit measured them: remeasure/*_msub_rest_bench.json, *_perpose.json, *_stk6_*.json)."
+ }
+]

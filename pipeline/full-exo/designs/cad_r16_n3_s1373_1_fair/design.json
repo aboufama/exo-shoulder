@@ -1,0 +1,32 @@
+{
+ "id": "cad_r16_n3_s1373_1_fair",
+ "source": "pipeline/conformal/band_cad/inputs/r16_n3_s1373_1_fair.json (= gpu_client/band_eval_r16diag_ramp60.json #3)",
+ "n_joints": 3,
+ "sliding_cuff": false,
+ "dof": 3,
+ "kinematics": {
+  "az": 338.5451180007818,
+  "el": 88.57691877224975,
+  "a": [
+   73.21033870327359,
+   69.81006390557873
+  ],
+  "w": [
+   65.66452326282949,
+   31.70745769468427
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   0
+  ]
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "spherical",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "built_with": "pipeline/conformal/fair_cad/fair_pipeline.sh (POSES_FILE=band_poses_ws.b64; t_link 4, ramp 60.0 deg; v4 joint stacks)",
+ "label": "CAD r16 3R s1373 #1, 2-D fair fields, FAIR_LAM 30 (proximity test)"
+}

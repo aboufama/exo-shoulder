@@ -1,0 +1,237 @@
+{
+ "id": "shortk-onetooth-knuckle-3r",
+ "name": "Re-seated short-K one-tooth knuckle: K dyad 34 / 30 (J1 / J2 seats and rest arc 37.55 kept), one pin on link 1a pushed by one link-2 tooth, clock spring + stop A",
+ "lens": "round107:B one-stage drive (the 'just outside the O20 rim' cell: move K, not the law)",
+ "family": "slaved-knuckle 3R, one-stage K drive on a re-seated K dyad",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-18T20:34:35Z",
+ "reach": 0.7688,
+ "follow": 1.0,
+ "inband14": 0.9049,
+ "inband10": 0.5847,
+ "contact": 0.0,
+ "gap": 13.12,
+ "gap_near1": 13.12,
+ "gap_near2": 29.6,
+ "v_reach": 0.6813,
+ "v_follow": 0.9667,
+ "v_inband14": 0.9028,
+ "v_inband10": 0.5761,
+ "v_gap": 21.87,
+ "n_configs": 7,
+ "best_params": {
+  "bk1": 34.0,
+  "bk2": 30.0,
+  "rho": 1.1,
+  "cell": "ghost (drive metal deleted)",
+  "WALL": "lead (a1e 55.52 = the lead's K 50 wall)",
+  "DKLIM": 48.43,
+  "smhi": 32.507,
+  "th_on": 62.26,
+  "anchor": "K 44.15 (a1e 54.27 = the lead's end arc) at th 106.30 (the lead's end th, read from the lead's kinematics)",
+  "seats_knee_J3stop": "conecut-knee-knuckle-3r best_params unchanged"
+ },
+ "frozen": {
+  "bench110_360_exact": {
+   "rho1.1_ghost": {
+    "gap": 18.83,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.9054,
+    "inband10": 0.5883,
+    "contact": 0.0133,
+    "ws_taken": 261,
+    "near1": 19.38,
+    "near2": 40.34,
+    "min_metal": 0.38,
+    "dK_taken_max": 44.14,
+    "kdyad_margin_min": 9.74,
+    "overhead": "8/28",
+    "contact_poses": [
+     [
+      139,
+      -0.49
+     ],
+     [
+      205,
+      -4.21
+     ],
+     [
+      237,
+      -0.32
+     ],
+     [
+      264,
+      -0.12
+     ],
+     [
+      316,
+      -1.21
+     ]
+    ]
+   },
+   "rho1.1_ghost_built_range_29.7": {
+    "gap": 31.8,
+    "reach": 0.6139,
+    "follow": 0.9273,
+    "inband14": 0.909,
+    "inband10": 0.5844,
+    "contact": 0.0092,
+    "ws_taken": 221,
+    "near2": 55.11,
+    "dK_taken_max": 29.27,
+    "overhead": "8/28"
+   },
+   "rho2.1534_ghost": {
+    "gap": 18.83,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.9174,
+    "contact": 0.0133,
+    "ws_taken": 261,
+    "near2": 45.24
+   },
+   "rho2.5_ghost": {
+    "gap": 18.83,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.9162,
+    "contact": 0.0133,
+    "ws_taken": 261,
+    "near2": 45.24
+   },
+   "lead_control_parent_harness": {
+    "gap": 18.28,
+    "ws_taken": 262,
+    "note": "onetooth-slowlaw paired control: the lead's law + dyad, drive deleted = the verified lead"
+   }
+  },
+  "envsel_exact": {
+   "rho1.1_ghost": {
+    "gap": 23.87,
+    "reach": 0.6833,
+    "follow": 1.0,
+    "inband14": 0.9054,
+    "contact": 0.022,
+    "ws_taken": 246,
+    "near2": 51.23,
+    "min_metal": 0.03
+   },
+   "rho2.0_ghost_34_30": {
+    "gap": 23.87,
+    "inband14": 0.9178,
+    "ws_taken": 246,
+    "near2": 51.23
+   },
+   "rho2.0_ghost_32_32": {
+    "gap": 23.87,
+    "inband14": 0.9178,
+    "ws_taken": 246,
+    "near2": 49.18
+   },
+   "lead_control_parent_harness": {
+    "gap": 24.14,
+    "ws_taken": 245
+   }
+  }
+ },
+ "pin_scan": {
+  "n_pin_starts": 302595,
+  "grid": "r 4-45 mm from u2 x az 360 (1 mm x 3 deg; spec box 0.25 mm x 1 deg), K step 0.05 deg, nose r 1.25, dyads 34/30 32/32 33/31 35/29 36/28, rho 0.85-2.5, mu 0.087 (crowned pin) and 0.005 (rolling follower)",
+  "best_built_range_deg": {
+   "34/30 rho1.1 mu0.087": 29.7,
+   "34/30 rho1.1 mu0.005": 35.85,
+   "34/30 rho1.5 mu0.087": 35.9,
+   "34/30 rho2.0 mu0.005": 47.0,
+   "34/30 rho2.5 mu0.087": 46.7,
+   "spec box r16.5-20 / az12-24 rho1.1": 24.85
+  },
+  "stroke_needed_deg": 44.14,
+  "spec_pin_r19_az18_rho1p1": "pole at K 22.2, undercut 1.25 mm over K 0-21.4: drive range 0",
+  "full_stroke_outside_hubK_rim": "sliding: none at any rho / dyad (the only full-stroke pins, rho 2.5, sit 8.7-9.7 mm from uK, inside hub K's O20 rim; 12.6 needed); rolling: rho 2.0 only, 6 pins over 3 dyads (34/30: r 28 / az +24, 12.9 mm from uK)",
+  "file": "docs/research/shortk_onetooth/pinscan_summary.json"
+ },
+ "metal_proxy": {
+  "bench": "envsel exact, frozen rho-2.0 ghost taken poses",
+  "parts": "radial pin O2.5 + O6 boss + 8x3 horn on link 1a at hub K level; link-2 tooth lug = the exact flank locus + 1.5 / 3 mm behind it + a root bar from hub 2's rim, 3 mm thick at level Lt",
+  "frame_check": "pin centre on the tooth locus at the matching K on every K-open pose (<= 0.011 deg)",
+  "tooth_contact_poses": {
+   "34/30 r28/az24": {
+    "61": 57,
+    "63": 46,
+    "65": 37,
+    "67": 33
+   },
+   "34/30 r27/az21": {
+    "61": 47,
+    "63": 38,
+    "65": 34,
+    "67": 32
+   },
+   "32/32 r22/az-9": {
+    "61": 29,
+    "63": 27,
+    "65": 24,
+    "67": 19
+   },
+   "32/32 r22/az-6": {
+    "61": 29,
+    "63": 26,
+    "65": 23,
+    "67": 19
+   },
+   "32/32 r30/az24": {
+    "61": 66,
+    "note": "run stopped after R 61 (pin 20 contacts, min -0.64)"
+   }
+  },
+  "tooth_min_mm": {
+   "34/30": -18.59,
+   "32/32": -10.06
+  },
+  "tooth_ib14_at_67": {
+   "34/30": 0.312,
+   "32/32": 0.146
+  },
+  "contact_pose_kind": "overhead scaption: envsel ws 382 (30.8 / 137.5 / -45.1), 453 (29.7 / 149.6 / -56.5), 378, 375 and the clip frames 5-13 (plane 30, elev 107-150, axial -51..-60)",
+  "file": "docs/research/shortk_onetooth/metal_34_30_r2.0_env.json"
+ },
+ "complexity": null,
+ "complexity_note": "not built (dead at step 0); the proposer / judge estimate was 10.25-11.0 (one pin, one tooth, one sliding pair, one loop); a rolling follower adds one bearing",
+ "mechanism": null,
+ "verdict": "DEAD at step 0 (pre-registered kill: no PA-passing pin start leaves the tooth with <= 4 skin-contact poses at a level <= R 64). (1) At the spec law (rho 1.05-1.1) NO single pin-flank pair carries the stroke: over 302,595 pin starts the built drive range from stop A is <= 29.7 deg (crowned pin, mu 0.087) / 35.85 (rolling) against the 44.14 deg the taken poses need; the spec's PA-passing start (r 19 / az 18) crosses the relative pole at K 22.2 and is undercut 1.25 mm over K 0-21.4 (range 0). With the range the best sliding pin can carry (29.7 deg) the law-only ghost reads 31.80 frozen exact Bench(110,360) (221 ws takes). (2) A full-stroke one pair exists only at fast laws: sliding at rho 2.5 with the pin inside hub K's O20 rim (8.7-9.7 mm from uK); rolling at rho 2.0 just outside it (12.9-13.6 mm). Its tooth, 20-30 mm from hub 2's axis, then touches the skin on 19-66 envsel poses at R 61-67 (min -9.4..-18.6 mm), all overhead scaption at the stretched end. (3) The re-seat itself costs 0.55: the law-only ghost reads 18.83 (261 ws takes) frozen exact at rho 1.1, 2.15 and 2.5 alike, vs the lead's 18.28 / 262 - a bound that passes the 19.0 ghost gate, but no buildable drive reaches it.",
+ "limiter": "(1) THE PITCH POINT (exact spherical kinematics): with a constant law the pin (link 1a) and the flank (link 2) have a fixed relative pole on the uK-u2 arc, ~bk2 / (1 + rho) from uK (14.3 deg at rho 1.1, 8.6 at 2.5); both pressure angles pass 43 - atan(mu) only in a lens around it, and a pin circle about uK stays in that lens for <= 30 deg of K (sliding) / 36 (rolling) at rho 1.1. A full 44-deg stroke needs rho >= 2.0 (rolling) / 2.5 (sliding), which puts the pole - and the pin - at or inside hub K's O20 rim. (2) THE TOOTH SWEEP: the PA-passing contact is 20-30 mm from u2, so the tooth on link 2 sweeps the skin as q2 turns; at the stretched end (overhead scaption, elev 107-150, axial -45..-60) it dips 9-19 mm into the shoulder-top skin at every level up to R 67. Not shape: the ghost (no drive metal) is 18.83.",
+ "note": "Model docs/concepts/models/shortk-onetooth-knuckle-3r.py loads onetooth-slowlaw-knuckle-3r (itself the verified lead conecut-knee-knuckle-3r, SN_CELL=lead, with its ghost cell and built-flank check) and changes: (a) the K dyad 34 / 30, restored AFTER the lead's chain clamp (roller-longdyad clamps bk1 to [26, 32] and bk2 to [38, 48] - a naive re-seat silently runs 32 / 38; caught by the a1e(K) check); (b) the law anchored on the lead's END STATE (a1e 54.27 at th 106.30, both read from the lead's own kinematics; K 45.62 on the old dyad is a1e 57.33 on the new one), onset solved on the new dyad's exact th(q2, K): rho 1.1 -> th_on 62.26, q2_on 36.76, K_end 44.15 at q2 -3.37 (the spec's 62.2 / 36.9 / 44.2 / -3.3 reproduced); (c) the drive range DKLIM = the K at the lead's wall a1e 55.52 (48.43; K dyad 8.48 deg from its stretch, min over taken 9.74; the spec's 5.23 applies only to a1max 58.77); DKCAP = the built pair's range. A LAW / SEAT change, not a metric change: no bench, judge or kit file touched. Frozen protocol: fit Bench(60,160) fast -> shape frozen -> worn exact on envsel (selection) and Bench(110,360). Fast fit (ghost, rho 1.1): 13.12 plain / 29.60 near-2 (lead-law ghost 12.50 / 18.80). Convergence gate: not a search death - the three full-stroke ghosts (rho 1.1 / 2.15 / 2.5) read 18.83 identically (gain over the 2nd half 0.00, over the last third 0.00, top-3 spread 0.00 points); the kill is the pre-registered step-0 scan plus the kinematic bound over 302,595 pin starts (5 dyads x 5-6 laws x 2 frictions). Red team: the pose that jams - none applies to a ghost; the poses the drive loses are the stretched end (K > 29.7 deg: 40 ws takes, follow 1.0 -> 0.927); the point that pinches - the tooth's end of flank at overhead scaption (envsel 453: 29.7 / 149.6 / -56.5, -18.6 mm on 34/30), and hub 2 at 205 (-4.21) and 139 (-0.49, new vs the lead) on the ghost itself; the optimistic numbers - the 18.83 ghost (no drive metal) and the proposer's proxy (0 tooth contacts at hand-placed patches, no fold rule, no re-fit, no pole). Scripts: docs/research/shortk_onetooth/ (fscan.py pin scan, metal.py tooth / pin skin proxy, framecheck.py, vizbuild.py). SCOPE: the arc-of-action bound is for a PIN (point / cylinder nose) on one flank, the spec's drive; the parent's dead-row audit (f9ceb81) shows a spherical involute tooth-tooth pair (contact through the pitch point) carries 46.7-47.3 deg at rho 1.0-1.5 at the LEAD's dyad with the same 18.83 / 261 ghost, so the re-seat buys nothing on that path; its link-2 tooth sweep (pole ~15-17 mm from u2) is unmeasured - docs/research/shortk_onetooth/metal.py measures it on any flank locus.",
+ "doc": "docs/concepts/shortk-onetooth-knuckle-3r.md",
+ "v_contact": 0.0,
+ "audit": {
+  "time": "2026-10-18T21:20:20Z",
+  "by": "dead-row auditor",
+  "verdict": "DEATH STANDS on the pre-registered tooth-sweep kill; two corrections to the record (an over-strict undercut test and a law-grid gap), neither of which survives the tooth sweep",
+  "v_fields": "Bench(60,160) fast fit of the drive-metal-free ghost at the CORRECTED built sliding range (rho 1.1, DKCAP 32.3); frozen exact Bench(110,360) of the same: 26.99 (reach 0.6389, follow 0.9636, ib14 0.903, contact 0.0088, 230 ws takes, overhead 8/28, near-2 48.61). A bound: the tooth is not in it",
+  "corrections": [
+   "fscan's undercut test cut the flank with pin positions over the whole DKLIM (48.43 deg), also those beyond the stroke the pin actually runs. Stroke-limited re-scan (audit_fscan_L.py, 34/30, mu 0.087, same 1 mm x 3 deg grid): rho 1.1 best 29.7 -> 32.3 deg (pin r21 / az24, 15.6 mm from uK); rho 1.5 unchanged 35.9. The buildable ghost bound moves 31.80 -> 26.99 frozen exact (fast 27.29 -> 21.87). The PA cliff sits 0.09 deg past the 32.21 deg stroke used (51 deg at +0.5 deg), so it has no tolerance margin",
+   "The law grid jumped from rho 1.5 to 2.0. At rho 1.6-1.9 rolling full-stroke pins exist OUTSIDE hub K's rim (rho 1.7: r19.5 / az-6, 44.45 deg, 13.21 mm from uK; r26.5 / az24, 45.95 deg, 13.19 mm; rho 1.8: r27 / az24, 45.8 deg, 13.06 mm), so 'rolling: rho 2.0 only' is a grid artefact. The rim margin is 0.3-0.6 mm"
+  ],
+  "tooth_sweep_at_corrected_pins": [
+   "rho 1.1 sliding r21 / az24, DKCAP 32.3, claim bench Bench(110,360) exact: 35 tooth contact poses at R 61 (min -11.14 mm; ws 287, 229, 290, 256, clip 13), pin 1 (-0.13)",
+   "rho 1.7 rolling r19.5 / az-6, envsel exact: 26 at R 61 and 19 at R 63 (min -7.3 mm), same overhead-scaption poses 378 / 453 / 382 / 375 as the row's"
+  ],
+  "kill": "pre-registered: <= 4 tooth contact poses at <= R 64; measured 19-35 at every corrected pin",
+  "checked_ok": [
+   "the spec pin r19 / az18 at rho 1.1 reproduces exactly (pole K 22.2, undercut 1.25 mm over K 0-21.4, drive range 0)",
+   "the dyad restore after the lead's bk clamp (read in _clamp)",
+   "the ghost harness (DKCAP 32.3 frozen exact reproduced 26.99 twice, wear and metal.py)",
+   "convergence gate: not a search death; the 3 full-stroke ghosts read 18.83 identically"
+  ],
+  "files": [
+   "docs/research/shortk_onetooth/audit_fscan_L.py",
+   "docs/research/shortk_onetooth/audit_summary.json",
+   "docs/research/shortk_onetooth/audit_wear_rho1.1_dkcap32.3_bench.json"
+  ]
+ }
+}

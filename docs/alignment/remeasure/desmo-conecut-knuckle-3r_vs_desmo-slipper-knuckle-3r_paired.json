@@ -1,0 +1,94 @@
+{
+ "A": "desmo-conecut-knuckle-3r+blend",
+ "B": "desmo-slipper-knuckle-3r",
+ "note": "diff = gap A - gap B (negative: A better); split per gap term; paired bootstrap over poses within kind",
+ "bench": {
+  "gap_A": 18.99,
+  "gap_B": 18.94,
+  "diff": 0.05,
+  "split": {
+   "reach": -0.28,
+   "follow": 0.0,
+   "inband": -0.2,
+   "contact": 0.53
+  },
+  "discordant": {
+   "ws_taken_A_only": 1,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 2,
+   "contact_B_only": 0,
+   "contact_both": 2
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -0.74,
+    0.89
+   ],
+   "sd": 0.5,
+   "p_A_better": 0.473
+  },
+  "model_frozen": {
+   "A": 18.98,
+   "B": 18.95
+  }
+ },
+ "held": {
+  "gap_A": 23.19,
+  "gap_B": 23.91,
+  "diff": -0.72,
+  "split": {
+   "reach": -0.95,
+   "follow": 0.0,
+   "inband": -0.21,
+   "contact": 0.44
+  },
+  "discordant": {
+   "ws_taken_A_only": 11,
+   "ws_taken_B_only": 2,
+   "contact_A_only": 4,
+   "contact_B_only": 0,
+   "contact_both": 10
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -1.54,
+    0.14
+   ],
+   "sd": 0.51,
+   "p_A_better": 0.915
+  },
+  "model_frozen": {
+   "A": 23.19,
+   "B": 23.9
+  }
+ },
+ "pooled_bench_plus_held": {
+  "gap_A": 22.02,
+  "gap_B": 22.52,
+  "diff": -0.5,
+  "split": {
+   "reach": -0.76,
+   "follow": 0.0,
+   "inband": -0.21,
+   "contact": 0.47
+  },
+  "discordant": {
+   "ws_taken_A_only": 12,
+   "ws_taken_B_only": 2,
+   "contact_A_only": 6,
+   "contact_B_only": 0,
+   "contact_both": 12
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -1.14,
+    0.16
+   ],
+   "sd": 0.4,
+   "p_A_better": 0.89
+  }
+ }
+}

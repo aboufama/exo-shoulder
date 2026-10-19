@@ -1,0 +1,3426 @@
+{
+ "drive": "rssr",
+ "dK_lim": 64.0,
+ "a1": 37.55,
+ "a2": 57.22,
+ "bk": [
+  28.0,
+  50.0
+ ],
+ "a1max": 73.0,
+ "law": {
+  "dK_max": 62.1
+ },
+ "bench": {
+  "n_ws": 360,
+  "kin_law": 194,
+  "by_cap": {
+   "40": [
+    194,
+    7
+   ],
+   "46.25": [
+    194,
+    7
+   ],
+   "50": [
+    194,
+    7
+   ],
+   "52": [
+    194,
+    7
+   ],
+   "55": [
+    194,
+    7
+   ],
+   "57.5": [
+    194,
+    7
+   ],
+   "60": [
+    194,
+    7
+   ],
+   "62.5": [
+    194,
+    7
+   ],
+   "65": [
+    194,
+    7
+   ],
+   "70": [
+    194,
+    7
+   ],
+   "75": [
+    194,
+    7
+   ],
+   "90": [
+    194,
+    7
+   ]
+  },
+  "n_ovh": 28,
+  "dK_hist": [
+   182,
+   12,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "th_taken_max": {
+   "40": 92.4,
+   "46.25": 92.4,
+   "50": 92.4,
+   "52": 92.4,
+   "55": 92.4,
+   "57.5": 92.4,
+   "60": 92.4,
+   "62.5": 92.4,
+   "65": 92.4,
+   "70": 92.4,
+   "75": 92.4,
+   "90": 92.4
+  },
+  "law_table": [
+   {
+    "pose": 451,
+    "plane": -90.0,
+    "elev": 0.0,
+    "axial": 75.0,
+    "th": 83.23,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 455,
+    "plane": -90.0,
+    "elev": 0.0,
+    "axial": 135.0,
+    "th": 83.75,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 459,
+    "plane": -90.0,
+    "elev": 15.0,
+    "axial": 75.0,
+    "th": 76.83,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 463,
+    "plane": -90.0,
+    "elev": 15.0,
+    "axial": 135.0,
+    "th": 92.41,
+    "dK": 5.71,
+    "kin": true
+   },
+   {
+    "pose": 467,
+    "plane": -90.0,
+    "elev": 30.0,
+    "axial": 75.0,
+    "th": 71.65,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 471,
+    "plane": -90.0,
+    "elev": 30.0,
+    "axial": 135.0,
+    "th": 102.99,
+    "dK": 24.82,
+    "kin": false
+   },
+   {
+    "pose": 475,
+    "plane": -90.0,
+    "elev": 45.0,
+    "axial": 75.0,
+    "th": 67.24,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 479,
+    "plane": -90.0,
+    "elev": 45.0,
+    "axial": 135.0,
+    "th": 112.86,
+    "dK": 42.3,
+    "kin": false
+   },
+   {
+    "pose": 483,
+    "plane": -90.0,
+    "elev": 60.0,
+    "axial": 75.0,
+    "th": 63.73,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 487,
+    "plane": -90.0,
+    "elev": 60.0,
+    "axial": 135.0,
+    "th": 119.06,
+    "dK": 54.76,
+    "kin": false
+   },
+   {
+    "pose": 491,
+    "plane": -75.0,
+    "elev": 0.0,
+    "axial": 60.0,
+    "th": 83.23,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 495,
+    "plane": -75.0,
+    "elev": 0.0,
+    "axial": 120.0,
+    "th": 83.75,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 499,
+    "plane": -75.0,
+    "elev": 15.0,
+    "axial": 60.0,
+    "th": 73.51,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 503,
+    "plane": -75.0,
+    "elev": 15.0,
+    "axial": 120.0,
+    "th": 88.97,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 507,
+    "plane": -75.0,
+    "elev": 30.0,
+    "axial": 60.0,
+    "th": 65.22,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 511,
+    "plane": -75.0,
+    "elev": 30.0,
+    "axial": 120.0,
+    "th": 96.23,
+    "dK": 12.86,
+    "kin": false
+   },
+   {
+    "pose": 515,
+    "plane": -75.0,
+    "elev": 45.0,
+    "axial": 60.0,
+    "th": 58.26,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 519,
+    "plane": -75.0,
+    "elev": 45.0,
+    "axial": 120.0,
+    "th": 103.34,
+    "dK": 25.41,
+    "kin": false
+   },
+   {
+    "pose": 523,
+    "plane": -75.0,
+    "elev": 60.0,
+    "axial": 60.0,
+    "th": 53.22,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 527,
+    "plane": -75.0,
+    "elev": 60.0,
+    "axial": 120.0,
+    "th": 108.06,
+    "dK": 33.65,
+    "kin": false
+   },
+   {
+    "pose": 531,
+    "plane": -60.0,
+    "elev": 0.0,
+    "axial": 45.0,
+    "th": 83.23,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 535,
+    "plane": -60.0,
+    "elev": 0.0,
+    "axial": 105.0,
+    "th": 83.75,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 539,
+    "plane": -60.0,
+    "elev": 15.0,
+    "axial": 45.0,
+    "th": 70.8,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 543,
+    "plane": -60.0,
+    "elev": 15.0,
+    "axial": 105.0,
+    "th": 85.3,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 547,
+    "plane": -60.0,
+    "elev": 30.0,
+    "axial": 45.0,
+    "th": 59.98,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 551,
+    "plane": -60.0,
+    "elev": 30.0,
+    "axial": 105.0,
+    "th": 89.28,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 555,
+    "plane": -60.0,
+    "elev": 45.0,
+    "axial": 45.0,
+    "th": 50.69,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 559,
+    "plane": -60.0,
+    "elev": 45.0,
+    "axial": 105.0,
+    "th": 93.9,
+    "dK": 8.54,
+    "kin": false
+   },
+   {
+    "pose": 563,
+    "plane": -60.0,
+    "elev": 60.0,
+    "axial": 45.0,
+    "th": 43.8,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 567,
+    "plane": -60.0,
+    "elev": 60.0,
+    "axial": 105.0,
+    "th": 97.43,
+    "dK": 15.02,
+    "kin": false
+   },
+   {
+    "pose": 571,
+    "plane": -45.0,
+    "elev": 0.0,
+    "axial": 30.0,
+    "th": 83.23,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 575,
+    "plane": -45.0,
+    "elev": 0.0,
+    "axial": 90.0,
+    "th": 83.75,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 579,
+    "plane": -45.0,
+    "elev": 15.0,
+    "axial": 30.0,
+    "th": 68.9,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 583,
+    "plane": -45.0,
+    "elev": 15.0,
+    "axial": 90.0,
+    "th": 81.62,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 587,
+    "plane": -45.0,
+    "elev": 30.0,
+    "axial": 30.0,
+    "th": 56.29,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 591,
+    "plane": -45.0,
+    "elev": 30.0,
+    "axial": 90.0,
+    "th": 82.46,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 594,
+    "plane": -45.0,
+    "elev": 30.0,
+    "axial": 135.0,
+    "th": 114.38,
+    "dK": 45.17,
+    "kin": false
+   },
+   {
+    "pose": 598,
+    "plane": -45.0,
+    "elev": 45.0,
+    "axial": 75.0,
+    "th": 72.67,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 602,
+    "plane": -45.0,
+    "elev": 45.0,
+    "axial": 135.0,
+    "th": 123.46,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 606,
+    "plane": -45.0,
+    "elev": 60.0,
+    "axial": 75.0,
+    "th": 73.2,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 610,
+    "plane": -45.0,
+    "elev": 60.0,
+    "axial": 135.0,
+    "th": 130.09,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 614,
+    "plane": -30.0,
+    "elev": 0.0,
+    "axial": 15.0,
+    "th": 83.23,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 618,
+    "plane": -30.0,
+    "elev": 0.0,
+    "axial": 75.0,
+    "th": 83.75,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 622,
+    "plane": -30.0,
+    "elev": 15.0,
+    "axial": -30.0,
+    "th": 82.74,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 626,
+    "plane": -30.0,
+    "elev": 15.0,
+    "axial": 30.0,
+    "th": 67.11,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 630,
+    "plane": -30.0,
+    "elev": 15.0,
+    "axial": 90.0,
+    "th": 85.22,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 634,
+    "plane": -30.0,
+    "elev": 30.0,
+    "axial": -15.0,
+    "th": 61.91,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 638,
+    "plane": -30.0,
+    "elev": 30.0,
+    "axial": 45.0,
+    "th": 60.17,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 642,
+    "plane": -30.0,
+    "elev": 30.0,
+    "axial": 105.0,
+    "th": 96.89,
+    "dK": 14.06,
+    "kin": false
+   },
+   {
+    "pose": 646,
+    "plane": -30.0,
+    "elev": 45.0,
+    "axial": 0.0,
+    "th": 42.49,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 650,
+    "plane": -30.0,
+    "elev": 45.0,
+    "axial": 60.0,
+    "th": 64.58,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 654,
+    "plane": -30.0,
+    "elev": 45.0,
+    "axial": 120.0,
+    "th": 114.5,
+    "dK": 45.39,
+    "kin": false
+   },
+   {
+    "pose": 658,
+    "plane": -30.0,
+    "elev": 60.0,
+    "axial": 15.0,
+    "th": 30.9,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 662,
+    "plane": -30.0,
+    "elev": 60.0,
+    "axial": 75.0,
+    "th": 77.16,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 666,
+    "plane": -15.0,
+    "elev": 0.0,
+    "axial": -45.0,
+    "th": 95.78,
+    "dK": 12.04,
+    "kin": false
+   },
+   {
+    "pose": 670,
+    "plane": -15.0,
+    "elev": 0.0,
+    "axial": 15.0,
+    "th": 81.24,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 674,
+    "plane": -15.0,
+    "elev": 0.0,
+    "axial": 75.0,
+    "th": 87.21,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 678,
+    "plane": -15.0,
+    "elev": 15.0,
+    "axial": -30.0,
+    "th": 77.79,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 682,
+    "plane": -15.0,
+    "elev": 15.0,
+    "axial": 30.0,
+    "th": 66.88,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 686,
+    "plane": -15.0,
+    "elev": 15.0,
+    "axial": 90.0,
+    "th": 89.76,
+    "dK": 0.42,
+    "kin": true
+   },
+   {
+    "pose": 690,
+    "plane": -15.0,
+    "elev": 30.0,
+    "axial": -15.0,
+    "th": 58.66,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 694,
+    "plane": -15.0,
+    "elev": 30.0,
+    "axial": 45.0,
+    "th": 62.36,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 698,
+    "plane": -15.0,
+    "elev": 30.0,
+    "axial": 105.0,
+    "th": 101.57,
+    "dK": 22.34,
+    "kin": false
+   },
+   {
+    "pose": 702,
+    "plane": -15.0,
+    "elev": 45.0,
+    "axial": 0.0,
+    "th": 42.13,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 706,
+    "plane": -15.0,
+    "elev": 45.0,
+    "axial": 60.0,
+    "th": 68.29,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 710,
+    "plane": -15.0,
+    "elev": 60.0,
+    "axial": -45.0,
+    "th": 52.56,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 714,
+    "plane": -15.0,
+    "elev": 60.0,
+    "axial": 15.0,
+    "th": 34.06,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 718,
+    "plane": -15.0,
+    "elev": 60.0,
+    "axial": 75.0,
+    "th": 81.08,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 722,
+    "plane": -15.0,
+    "elev": 75.0,
+    "axial": -30.0,
+    "th": 29.65,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 726,
+    "plane": -15.0,
+    "elev": 75.0,
+    "axial": 30.0,
+    "th": 40.62,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 730,
+    "plane": -15.0,
+    "elev": 75.0,
+    "axial": 90.0,
+    "th": 97.55,
+    "dK": 15.24,
+    "kin": false
+   },
+   {
+    "pose": 734,
+    "plane": -15.0,
+    "elev": 90.0,
+    "axial": -15.0,
+    "th": 7.68,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 738,
+    "plane": -15.0,
+    "elev": 90.0,
+    "axial": 45.0,
+    "th": 56.75,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 742,
+    "plane": -15.0,
+    "elev": 90.0,
+    "axial": 105.0,
+    "th": 114.91,
+    "dK": 46.19,
+    "kin": false
+   },
+   {
+    "pose": 746,
+    "plane": -15.0,
+    "elev": 105.0,
+    "axial": 15.0,
+    "th": 32.77,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 750,
+    "plane": 0.0,
+    "elev": 0.0,
+    "axial": -45.0,
+    "th": 90.75,
+    "dK": 2.44,
+    "kin": true
+   },
+   {
+    "pose": 754,
+    "plane": 0.0,
+    "elev": 0.0,
+    "axial": 15.0,
+    "th": 80.65,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 758,
+    "plane": 0.0,
+    "elev": 0.0,
+    "axial": 75.0,
+    "th": 91.65,
+    "dK": 4.22,
+    "kin": true
+   },
+   {
+    "pose": 762,
+    "plane": 0.0,
+    "elev": 15.0,
+    "axial": -30.0,
+    "th": 73.66,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 766,
+    "plane": 0.0,
+    "elev": 15.0,
+    "axial": 30.0,
+    "th": 68.22,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 770,
+    "plane": 0.0,
+    "elev": 15.0,
+    "axial": 90.0,
+    "th": 94.96,
+    "dK": 10.52,
+    "kin": false
+   },
+   {
+    "pose": 774,
+    "plane": 0.0,
+    "elev": 30.0,
+    "axial": -15.0,
+    "th": 56.6,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 778,
+    "plane": 0.0,
+    "elev": 30.0,
+    "axial": 45.0,
+    "th": 65.69,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 782,
+    "plane": 0.0,
+    "elev": 45.0,
+    "axial": -60.0,
+    "th": 71.62,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 786,
+    "plane": 0.0,
+    "elev": 45.0,
+    "axial": 0.0,
+    "th": 43.13,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 790,
+    "plane": 0.0,
+    "elev": 45.0,
+    "axial": 60.0,
+    "th": 72.36,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 794,
+    "plane": 0.0,
+    "elev": 60.0,
+    "axial": -45.0,
+    "th": 51.41,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 798,
+    "plane": 0.0,
+    "elev": 60.0,
+    "axial": 15.0,
+    "th": 37.8,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 802,
+    "plane": 0.0,
+    "elev": 60.0,
+    "axial": 75.0,
+    "th": 84.73,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 806,
+    "plane": 0.0,
+    "elev": 75.0,
+    "axial": -30.0,
+    "th": 30.78,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 810,
+    "plane": 0.0,
+    "elev": 75.0,
+    "axial": 30.0,
+    "th": 44.29,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 814,
+    "plane": 0.0,
+    "elev": 75.0,
+    "axial": 90.0,
+    "th": 100.35,
+    "dK": 20.2,
+    "kin": false
+   },
+   {
+    "pose": 818,
+    "plane": 0.0,
+    "elev": 90.0,
+    "axial": -15.0,
+    "th": 12.65,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 822,
+    "plane": 0.0,
+    "elev": 90.0,
+    "axial": 45.0,
+    "th": 58.68,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 826,
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": -45.0,
+    "th": 27.04,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 830,
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": 15.0,
+    "th": 32.25,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 834,
+    "plane": 0.0,
+    "elev": 120.0,
+    "axial": -15.0,
+    "th": 9.01,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 838,
+    "plane": 0.0,
+    "elev": 135.0,
+    "axial": -45.0,
+    "th": 18.41,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 842,
+    "plane": 0.0,
+    "elev": 135.0,
+    "axial": 15.0,
+    "th": 43.33,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 846,
+    "plane": 0.0,
+    "elev": 150.0,
+    "axial": -15.0,
+    "th": 25.27,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 850,
+    "plane": 0.0,
+    "elev": 165.0,
+    "axial": -45.0,
+    "th": 19.7,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 854,
+    "plane": 0.0,
+    "elev": 165.0,
+    "axial": 15.0,
+    "th": 56.22,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 858,
+    "plane": 15.0,
+    "elev": 0.0,
+    "axial": -45.0,
+    "th": 86.48,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 862,
+    "plane": 15.0,
+    "elev": 0.0,
+    "axial": 15.0,
+    "th": 81.51,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 866,
+    "plane": 15.0,
+    "elev": 0.0,
+    "axial": 75.0,
+    "th": 96.79,
+    "dK": 13.86,
+    "kin": false
+   },
+   {
+    "pose": 870,
+    "plane": 15.0,
+    "elev": 15.0,
+    "axial": -30.0,
+    "th": 70.67,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 874,
+    "plane": 15.0,
+    "elev": 15.0,
+    "axial": 30.0,
+    "th": 71.01,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 878,
+    "plane": 15.0,
+    "elev": 30.0,
+    "axial": -75.0,
+    "th": 86.1,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 881,
+    "plane": 15.0,
+    "elev": 30.0,
+    "axial": -30.0,
+    "th": 60.36,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 885,
+    "plane": 15.0,
+    "elev": 30.0,
+    "axial": 30.0,
+    "th": 62.26,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 889,
+    "plane": 15.0,
+    "elev": 45.0,
+    "axial": -75.0,
+    "th": 80.78,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 893,
+    "plane": 15.0,
+    "elev": 45.0,
+    "axial": -15.0,
+    "th": 46.17,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 897,
+    "plane": 15.0,
+    "elev": 45.0,
+    "axial": 45.0,
+    "th": 65.54,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 901,
+    "plane": 15.0,
+    "elev": 60.0,
+    "axial": -60.0,
+    "th": 62.86,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 905,
+    "plane": 15.0,
+    "elev": 60.0,
+    "axial": 0.0,
+    "th": 36.37,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 909,
+    "plane": 15.0,
+    "elev": 60.0,
+    "axial": 60.0,
+    "th": 74.75,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 913,
+    "plane": 15.0,
+    "elev": 75.0,
+    "axial": -45.0,
+    "th": 43.99,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 917,
+    "plane": 15.0,
+    "elev": 75.0,
+    "axial": 15.0,
+    "th": 36.05,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 921,
+    "plane": 15.0,
+    "elev": 75.0,
+    "axial": 75.0,
+    "th": 87.91,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 925,
+    "plane": 15.0,
+    "elev": 90.0,
+    "axial": -30.0,
+    "th": 25.06,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 929,
+    "plane": 15.0,
+    "elev": 90.0,
+    "axial": 30.0,
+    "th": 45.62,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 933,
+    "plane": 15.0,
+    "elev": 105.0,
+    "axial": -60.0,
+    "th": 45.31,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 937,
+    "plane": 15.0,
+    "elev": 105.0,
+    "axial": 0.0,
+    "th": 17.84,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 941,
+    "plane": 15.0,
+    "elev": 120.0,
+    "axial": -30.0,
+    "th": 11.47,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 945,
+    "plane": 15.0,
+    "elev": 135.0,
+    "axial": -60.0,
+    "th": 36.9,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 949,
+    "plane": 15.0,
+    "elev": 135.0,
+    "axial": 0.0,
+    "th": 21.82,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 953,
+    "plane": 15.0,
+    "elev": 150.0,
+    "axial": -30.0,
+    "th": 11.89,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 957,
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": -60.0,
+    "th": 32.47,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 961,
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": 0.0,
+    "th": 32.54,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 965,
+    "plane": 30.0,
+    "elev": 0.0,
+    "axial": -60.0,
+    "th": 86.48,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 969,
+    "plane": 30.0,
+    "elev": 0.0,
+    "axial": 0.0,
+    "th": 81.51,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 973,
+    "plane": 30.0,
+    "elev": 0.0,
+    "axial": 60.0,
+    "th": 96.79,
+    "dK": 13.86,
+    "kin": false
+   },
+   {
+    "pose": 977,
+    "plane": 30.0,
+    "elev": 15.0,
+    "axial": -45.0,
+    "th": 73.25,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 981,
+    "plane": 30.0,
+    "elev": 15.0,
+    "axial": 15.0,
+    "th": 70.19,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 985,
+    "plane": 30.0,
+    "elev": 30.0,
+    "axial": -90.0,
+    "th": 92.74,
+    "dK": 6.35,
+    "kin": false
+   },
+   {
+    "pose": 989,
+    "plane": 30.0,
+    "elev": 30.0,
+    "axial": -30.0,
+    "th": 59.78,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 993,
+    "plane": 30.0,
+    "elev": 30.0,
+    "axial": 30.0,
+    "th": 66.5,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 997,
+    "plane": 30.0,
+    "elev": 45.0,
+    "axial": -75.0,
+    "th": 78.95,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1001,
+    "plane": 30.0,
+    "elev": 45.0,
+    "axial": -15.0,
+    "th": 48.24,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1005,
+    "plane": 30.0,
+    "elev": 45.0,
+    "axial": 45.0,
+    "th": 69.66,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1009,
+    "plane": 30.0,
+    "elev": 60.0,
+    "axial": -60.0,
+    "th": 63.33,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1013,
+    "plane": 30.0,
+    "elev": 60.0,
+    "axial": 0.0,
+    "th": 40.28,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1017,
+    "plane": 30.0,
+    "elev": 60.0,
+    "axial": 60.0,
+    "th": 77.56,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1021,
+    "plane": 30.0,
+    "elev": 75.0,
+    "axial": -45.0,
+    "th": 46.75,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1025,
+    "plane": 30.0,
+    "elev": 75.0,
+    "axial": 15.0,
+    "th": 39.32,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1029,
+    "plane": 30.0,
+    "elev": 90.0,
+    "axial": -90.0,
+    "th": 82.29,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1033,
+    "plane": 30.0,
+    "elev": 90.0,
+    "axial": -30.0,
+    "th": 30.04,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1037,
+    "plane": 30.0,
+    "elev": 90.0,
+    "axial": 30.0,
+    "th": 46.15,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1041,
+    "plane": 30.0,
+    "elev": 105.0,
+    "axial": -60.0,
+    "th": 50.48,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1045,
+    "plane": 30.0,
+    "elev": 105.0,
+    "axial": 0.0,
+    "th": 18.75,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1049,
+    "plane": 30.0,
+    "elev": 120.0,
+    "axial": -30.0,
+    "th": 18.59,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1053,
+    "plane": 30.0,
+    "elev": 135.0,
+    "axial": -60.0,
+    "th": 44.76,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1057,
+    "plane": 30.0,
+    "elev": 135.0,
+    "axial": 0.0,
+    "th": 13.67,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1061,
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -30.0,
+    "th": 15.77,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1065,
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -60.0,
+    "th": 42.44,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1069,
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": 0.0,
+    "th": 21.97,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1073,
+    "plane": 45.0,
+    "elev": 0.0,
+    "axial": -60.0,
+    "th": 83.23,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1077,
+    "plane": 45.0,
+    "elev": 0.0,
+    "axial": 0.0,
+    "th": 83.75,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1081,
+    "plane": 45.0,
+    "elev": 15.0,
+    "axial": -105.0,
+    "th": 98.1,
+    "dK": 16.22,
+    "kin": false
+   },
+   {
+    "pose": 1085,
+    "plane": 45.0,
+    "elev": 15.0,
+    "axial": -45.0,
+    "th": 71.74,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1089,
+    "plane": 45.0,
+    "elev": 15.0,
+    "axial": 15.0,
+    "th": 74.21,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1093,
+    "plane": 45.0,
+    "elev": 30.0,
+    "axial": -90.0,
+    "th": 89.47,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1097,
+    "plane": 45.0,
+    "elev": 30.0,
+    "axial": -30.0,
+    "th": 60.64,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1101,
+    "plane": 45.0,
+    "elev": 30.0,
+    "axial": 30.0,
+    "th": 71.24,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1105,
+    "plane": 45.0,
+    "elev": 45.0,
+    "axial": -75.0,
+    "th": 78.16,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1109,
+    "plane": 45.0,
+    "elev": 45.0,
+    "axial": -15.0,
+    "th": 51.28,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1113,
+    "plane": 45.0,
+    "elev": 45.0,
+    "axial": 45.0,
+    "th": 73.55,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1117,
+    "plane": 45.0,
+    "elev": 60.0,
+    "axial": -60.0,
+    "th": 64.9,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1121,
+    "plane": 45.0,
+    "elev": 60.0,
+    "axial": 0.0,
+    "th": 44.24,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1125,
+    "plane": 45.0,
+    "elev": 75.0,
+    "axial": -105.0,
+    "th": 100.98,
+    "dK": 21.3,
+    "kin": false
+   },
+   {
+    "pose": 1129,
+    "plane": 45.0,
+    "elev": 75.0,
+    "axial": -45.0,
+    "th": 50.41,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1133,
+    "plane": 45.0,
+    "elev": 75.0,
+    "axial": 15.0,
+    "th": 42.0,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1137,
+    "plane": 45.0,
+    "elev": 90.0,
+    "axial": -90.0,
+    "th": 86.36,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1141,
+    "plane": 45.0,
+    "elev": 90.0,
+    "axial": -30.0,
+    "th": 35.39,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1145,
+    "plane": 45.0,
+    "elev": 90.0,
+    "axial": 30.0,
+    "th": 45.85,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1149,
+    "plane": 45.0,
+    "elev": 105.0,
+    "axial": -60.0,
+    "th": 56.56,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1153,
+    "plane": 45.0,
+    "elev": 120.0,
+    "axial": -90.0,
+    "th": 83.91,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1157,
+    "plane": 45.0,
+    "elev": 120.0,
+    "axial": -30.0,
+    "th": 26.35,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1161,
+    "plane": 45.0,
+    "elev": 135.0,
+    "axial": -60.0,
+    "th": 53.52,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1165,
+    "plane": 45.0,
+    "elev": 150.0,
+    "axial": -90.0,
+    "th": 81.39,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1168,
+    "plane": 45.0,
+    "elev": 150.0,
+    "axial": -45.0,
+    "th": 38.81,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1172,
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -75.0,
+    "th": 66.88,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1176,
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -15.0,
+    "th": 16.65,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1180,
+    "plane": 60.0,
+    "elev": 0.0,
+    "axial": -75.0,
+    "th": 83.23,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1184,
+    "plane": 60.0,
+    "elev": 0.0,
+    "axial": -15.0,
+    "th": 83.75,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1188,
+    "plane": 60.0,
+    "elev": 15.0,
+    "axial": -120.0,
+    "th": 101.38,
+    "dK": 22.0,
+    "kin": false
+   },
+   {
+    "pose": 1192,
+    "plane": 60.0,
+    "elev": 15.0,
+    "axial": -60.0,
+    "th": 75.01,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1196,
+    "plane": 60.0,
+    "elev": 15.0,
+    "axial": 0.0,
+    "th": 74.37,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1200,
+    "plane": 60.0,
+    "elev": 30.0,
+    "axial": -105.0,
+    "th": 96.46,
+    "dK": 13.26,
+    "kin": false
+   },
+   {
+    "pose": 1204,
+    "plane": 60.0,
+    "elev": 30.0,
+    "axial": -45.0,
+    "th": 66.02,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1208,
+    "plane": 60.0,
+    "elev": 30.0,
+    "axial": 15.0,
+    "th": 69.44,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1212,
+    "plane": 60.0,
+    "elev": 45.0,
+    "axial": -90.0,
+    "th": 88.61,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1216,
+    "plane": 60.0,
+    "elev": 45.0,
+    "axial": -30.0,
+    "th": 56.96,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1220,
+    "plane": 60.0,
+    "elev": 45.0,
+    "axial": 30.0,
+    "th": 68.12,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1224,
+    "plane": 60.0,
+    "elev": 60.0,
+    "axial": -75.0,
+    "th": 78.14,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1228,
+    "plane": 60.0,
+    "elev": 60.0,
+    "axial": -15.0,
+    "th": 47.53,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1232,
+    "plane": 60.0,
+    "elev": 75.0,
+    "axial": -120.0,
+    "th": 117.18,
+    "dK": 50.73,
+    "kin": false
+   },
+   {
+    "pose": 1236,
+    "plane": 60.0,
+    "elev": 75.0,
+    "axial": -60.0,
+    "th": 65.62,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1240,
+    "plane": 60.0,
+    "elev": 75.0,
+    "axial": 0.0,
+    "th": 39.5,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1244,
+    "plane": 60.0,
+    "elev": 90.0,
+    "axial": -105.0,
+    "th": 105.18,
+    "dK": 28.62,
+    "kin": false
+   },
+   {
+    "pose": 1248,
+    "plane": 60.0,
+    "elev": 90.0,
+    "axial": -45.0,
+    "th": 51.64,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1252,
+    "plane": 60.0,
+    "elev": 90.0,
+    "axial": 15.0,
+    "th": 35.47,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1256,
+    "plane": 60.0,
+    "elev": 105.0,
+    "axial": -75.0,
+    "th": 77.17,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1260,
+    "plane": 60.0,
+    "elev": 120.0,
+    "axial": -105.0,
+    "th": 106.3,
+    "dK": 30.57,
+    "kin": false
+   },
+   {
+    "pose": 1264,
+    "plane": 60.0,
+    "elev": 120.0,
+    "axial": -45.0,
+    "th": 48.1,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1268,
+    "plane": 60.0,
+    "elev": 135.0,
+    "axial": -75.0,
+    "th": 77.15,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1272,
+    "plane": 60.0,
+    "elev": 150.0,
+    "axial": -105.0,
+    "th": 105.33,
+    "dK": 28.88,
+    "kin": false
+   },
+   {
+    "pose": 1276,
+    "plane": 60.0,
+    "elev": 150.0,
+    "axial": -45.0,
+    "th": 48.99,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1280,
+    "plane": 60.0,
+    "elev": 165.0,
+    "axial": -75.0,
+    "th": 78.19,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1284,
+    "plane": 75.0,
+    "elev": 0.0,
+    "axial": -135.0,
+    "th": 95.78,
+    "dK": 12.04,
+    "kin": false
+   },
+   {
+    "pose": 1288,
+    "plane": 75.0,
+    "elev": 0.0,
+    "axial": -75.0,
+    "th": 81.24,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1292,
+    "plane": 75.0,
+    "elev": 0.0,
+    "axial": -15.0,
+    "th": 87.21,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1296,
+    "plane": 75.0,
+    "elev": 15.0,
+    "axial": -120.0,
+    "th": 96.91,
+    "dK": 14.09,
+    "kin": false
+   },
+   {
+    "pose": 1300,
+    "plane": 75.0,
+    "elev": 15.0,
+    "axial": -60.0,
+    "th": 75.08,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1304,
+    "plane": 75.0,
+    "elev": 15.0,
+    "axial": 0.0,
+    "th": 79.27,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1308,
+    "plane": 75.0,
+    "elev": 30.0,
+    "axial": -105.0,
+    "th": 94.39,
+    "dK": 9.46,
+    "kin": false
+   },
+   {
+    "pose": 1312,
+    "plane": 75.0,
+    "elev": 30.0,
+    "axial": -45.0,
+    "th": 68.27,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1316,
+    "plane": 75.0,
+    "elev": 30.0,
+    "axial": 15.0,
+    "th": 74.35,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1320,
+    "plane": 75.0,
+    "elev": 45.0,
+    "axial": -90.0,
+    "th": 89.23,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1324,
+    "plane": 75.0,
+    "elev": 45.0,
+    "axial": -30.0,
+    "th": 60.62,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1328,
+    "plane": 75.0,
+    "elev": 60.0,
+    "axial": -135.0,
+    "th": 127.01,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1332,
+    "plane": 75.0,
+    "elev": 60.0,
+    "axial": -75.0,
+    "th": 80.91,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1336,
+    "plane": 75.0,
+    "elev": 60.0,
+    "axial": -15.0,
+    "th": 51.43,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1340,
+    "plane": 75.0,
+    "elev": 75.0,
+    "axial": -120.0,
+    "th": 120.37,
+    "dK": 57.81,
+    "kin": false
+   },
+   {
+    "pose": 1344,
+    "plane": 75.0,
+    "elev": 75.0,
+    "axial": -60.0,
+    "th": 69.92,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1348,
+    "plane": 75.0,
+    "elev": 75.0,
+    "axial": 0.0,
+    "th": 42.22,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1352,
+    "plane": 75.0,
+    "elev": 90.0,
+    "axial": -105.0,
+    "th": 110.33,
+    "dK": 37.67,
+    "kin": false
+   },
+   {
+    "pose": 1356,
+    "plane": 75.0,
+    "elev": 90.0,
+    "axial": -45.0,
+    "th": 56.97,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1360,
+    "plane": 75.0,
+    "elev": 90.0,
+    "axial": 15.0,
+    "th": 35.29,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1364,
+    "plane": 75.0,
+    "elev": 105.0,
+    "axial": -75.0,
+    "th": 83.71,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1368,
+    "plane": 75.0,
+    "elev": 120.0,
+    "axial": -105.0,
+    "th": 114.01,
+    "dK": 44.46,
+    "kin": false
+   },
+   {
+    "pose": 1372,
+    "plane": 75.0,
+    "elev": 120.0,
+    "axial": -45.0,
+    "th": 55.71,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1376,
+    "plane": 75.0,
+    "elev": 135.0,
+    "axial": -75.0,
+    "th": 86.01,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1380,
+    "plane": 75.0,
+    "elev": 150.0,
+    "axial": -105.0,
+    "th": 114.74,
+    "dK": 45.87,
+    "kin": false
+   },
+   {
+    "pose": 1384,
+    "plane": 75.0,
+    "elev": 150.0,
+    "axial": -45.0,
+    "th": 59.18,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1388,
+    "plane": 75.0,
+    "elev": 165.0,
+    "axial": -75.0,
+    "th": 89.22,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1392,
+    "plane": 90.0,
+    "elev": 0.0,
+    "axial": -135.0,
+    "th": 90.75,
+    "dK": 2.44,
+    "kin": true
+   },
+   {
+    "pose": 1396,
+    "plane": 90.0,
+    "elev": 0.0,
+    "axial": -75.0,
+    "th": 80.65,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1400,
+    "plane": 90.0,
+    "elev": 0.0,
+    "axial": -15.0,
+    "th": 91.65,
+    "dK": 4.22,
+    "kin": true
+   },
+   {
+    "pose": 1404,
+    "plane": 90.0,
+    "elev": 15.0,
+    "axial": -120.0,
+    "th": 93.35,
+    "dK": 7.51,
+    "kin": false
+   },
+   {
+    "pose": 1408,
+    "plane": 90.0,
+    "elev": 15.0,
+    "axial": -60.0,
+    "th": 76.64,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1412,
+    "plane": 90.0,
+    "elev": 15.0,
+    "axial": 0.0,
+    "th": 84.7,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1416,
+    "plane": 90.0,
+    "elev": 30.0,
+    "axial": -105.0,
+    "th": 93.44,
+    "dK": 7.67,
+    "kin": false
+   },
+   {
+    "pose": 1420,
+    "plane": 90.0,
+    "elev": 30.0,
+    "axial": -45.0,
+    "th": 71.62,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1424,
+    "plane": 90.0,
+    "elev": 45.0,
+    "axial": -150.0,
+    "th": 127.81,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1428,
+    "plane": 90.0,
+    "elev": 45.0,
+    "axial": -90.0,
+    "th": 90.86,
+    "dK": 2.64,
+    "kin": true
+   },
+   {
+    "pose": 1432,
+    "plane": 90.0,
+    "elev": 45.0,
+    "axial": -30.0,
+    "th": 64.66,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1436,
+    "plane": 90.0,
+    "elev": 60.0,
+    "axial": -135.0,
+    "th": 128.33,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1440,
+    "plane": 90.0,
+    "elev": 60.0,
+    "axial": -75.0,
+    "th": 84.32,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1444,
+    "plane": 90.0,
+    "elev": 60.0,
+    "axial": -15.0,
+    "th": 55.04,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1448,
+    "plane": 90.0,
+    "elev": 75.0,
+    "axial": -120.0,
+    "th": 124.17,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1452,
+    "plane": 90.0,
+    "elev": 75.0,
+    "axial": -60.0,
+    "th": 74.37,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1455,
+    "plane": 90.0,
+    "elev": 75.0,
+    "axial": -15.0,
+    "th": 47.28,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1459,
+    "plane": 90.0,
+    "elev": 90.0,
+    "axial": -120.0,
+    "th": 129.68,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1463,
+    "plane": 90.0,
+    "elev": 90.0,
+    "axial": -60.0,
+    "th": 74.75,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1467,
+    "plane": 90.0,
+    "elev": 90.0,
+    "axial": 0.0,
+    "th": 34.69,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1471,
+    "plane": 90.0,
+    "elev": 105.0,
+    "axial": -90.0,
+    "th": 104.44,
+    "dK": 27.32,
+    "kin": false
+   },
+   {
+    "pose": 1475,
+    "plane": 90.0,
+    "elev": 120.0,
+    "axial": -120.0,
+    "th": 135.61,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1479,
+    "plane": 90.0,
+    "elev": 120.0,
+    "axial": -60.0,
+    "th": 77.41,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1483,
+    "plane": 90.0,
+    "elev": 135.0,
+    "axial": -90.0,
+    "th": 108.55,
+    "dK": 34.52,
+    "kin": false
+   },
+   {
+    "pose": 1487,
+    "plane": 90.0,
+    "elev": 150.0,
+    "axial": -120.0,
+    "th": 134.48,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1491,
+    "plane": 90.0,
+    "elev": 150.0,
+    "axial": -60.0,
+    "th": 83.04,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1495,
+    "plane": 90.0,
+    "elev": 165.0,
+    "axial": -90.0,
+    "th": 111.79,
+    "dK": 40.32,
+    "kin": false
+   },
+   {
+    "pose": 1499,
+    "plane": 105.0,
+    "elev": 0.0,
+    "axial": -150.0,
+    "th": 90.75,
+    "dK": 2.44,
+    "kin": true
+   },
+   {
+    "pose": 1503,
+    "plane": 105.0,
+    "elev": 0.0,
+    "axial": -90.0,
+    "th": 80.65,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1507,
+    "plane": 105.0,
+    "elev": 0.0,
+    "axial": -30.0,
+    "th": 91.65,
+    "dK": 4.22,
+    "kin": true
+   },
+   {
+    "pose": 1511,
+    "plane": 105.0,
+    "elev": 15.0,
+    "axial": -135.0,
+    "th": 96.27,
+    "dK": 12.93,
+    "kin": false
+   },
+   {
+    "pose": 1515,
+    "plane": 105.0,
+    "elev": 15.0,
+    "axial": -75.0,
+    "th": 80.4,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1519,
+    "plane": 105.0,
+    "elev": 15.0,
+    "axial": -15.0,
+    "th": 85.8,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1523,
+    "plane": 105.0,
+    "elev": 30.0,
+    "axial": -120.0,
+    "th": 100.4,
+    "dK": 20.29,
+    "kin": false
+   },
+   {
+    "pose": 1527,
+    "plane": 105.0,
+    "elev": 30.0,
+    "axial": -60.0,
+    "th": 78.24,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1531,
+    "plane": 105.0,
+    "elev": 45.0,
+    "axial": -165.0,
+    "th": 133.17,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1535,
+    "plane": 105.0,
+    "elev": 45.0,
+    "axial": -105.0,
+    "th": 101.93,
+    "dK": 22.95,
+    "kin": false
+   },
+   {
+    "pose": 1539,
+    "plane": 105.0,
+    "elev": 45.0,
+    "axial": -45.0,
+    "th": 72.66,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1543,
+    "plane": 105.0,
+    "elev": 60.0,
+    "axial": -150.0,
+    "th": 139.48,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1547,
+    "plane": 105.0,
+    "elev": 60.0,
+    "axial": -90.0,
+    "th": 98.59,
+    "dK": 17.1,
+    "kin": false
+   },
+   {
+    "pose": 1551,
+    "plane": 105.0,
+    "elev": 60.0,
+    "axial": -30.0,
+    "th": 62.75,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1555,
+    "plane": 105.0,
+    "elev": 75.0,
+    "axial": -135.0,
+    "th": 140.63,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1559,
+    "plane": 105.0,
+    "elev": 75.0,
+    "axial": -75.0,
+    "th": 90.67,
+    "dK": 2.27,
+    "kin": true
+   },
+   {
+    "pose": 1563,
+    "plane": 105.0,
+    "elev": 75.0,
+    "axial": -15.0,
+    "th": 49.95,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1567,
+    "plane": 105.0,
+    "elev": 90.0,
+    "axial": -120.0,
+    "th": 135.03,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1571,
+    "plane": 105.0,
+    "elev": 90.0,
+    "axial": -60.0,
+    "th": 79.57,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1575,
+    "plane": 105.0,
+    "elev": 105.0,
+    "axial": -150.0,
+    "th": 168.38,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1579,
+    "plane": 105.0,
+    "elev": 105.0,
+    "axial": -90.0,
+    "th": 110.24,
+    "dK": 37.52,
+    "kin": false
+   },
+   {
+    "pose": 1583,
+    "plane": 105.0,
+    "elev": 120.0,
+    "axial": -120.0,
+    "th": 141.39,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1587,
+    "plane": 105.0,
+    "elev": 135.0,
+    "axial": -150.0,
+    "th": 154.28,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1591,
+    "plane": 105.0,
+    "elev": 135.0,
+    "axial": -90.0,
+    "th": 115.47,
+    "dK": 47.29,
+    "kin": false
+   },
+   {
+    "pose": 1595,
+    "plane": 105.0,
+    "elev": 150.0,
+    "axial": -120.0,
+    "th": 138.7,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1599,
+    "plane": 105.0,
+    "elev": 165.0,
+    "axial": -150.0,
+    "th": 135.06,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1603,
+    "plane": 105.0,
+    "elev": 165.0,
+    "axial": -90.0,
+    "th": 120.02,
+    "dK": 56.96,
+    "kin": false
+   },
+   {
+    "pose": 1607,
+    "plane": 120.0,
+    "elev": 0.0,
+    "axial": -150.0,
+    "th": 86.48,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1611,
+    "plane": 120.0,
+    "elev": 0.0,
+    "axial": -90.0,
+    "th": 81.51,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1615,
+    "plane": 120.0,
+    "elev": 0.0,
+    "axial": -30.0,
+    "th": 96.79,
+    "dK": 13.86,
+    "kin": false
+   },
+   {
+    "pose": 1619,
+    "plane": 120.0,
+    "elev": 15.0,
+    "axial": -135.0,
+    "th": 93.83,
+    "dK": 8.41,
+    "kin": false
+   },
+   {
+    "pose": 1623,
+    "plane": 120.0,
+    "elev": 15.0,
+    "axial": -75.0,
+    "th": 83.3,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1627,
+    "plane": 120.0,
+    "elev": 30.0,
+    "axial": -180.0,
+    "th": 121.38,
+    "dK": 60.3,
+    "kin": false
+   },
+   {
+    "pose": 1631,
+    "plane": 120.0,
+    "elev": 30.0,
+    "axial": -120.0,
+    "th": 100.68,
+    "dK": 20.77,
+    "kin": false
+   },
+   {
+    "pose": 1635,
+    "plane": 120.0,
+    "elev": 30.0,
+    "axial": -60.0,
+    "th": 82.42,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1639,
+    "plane": 120.0,
+    "elev": 45.0,
+    "axial": -165.0,
+    "th": 131.77,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1643,
+    "plane": 120.0,
+    "elev": 45.0,
+    "axial": -105.0,
+    "th": 104.56,
+    "dK": 27.54,
+    "kin": false
+   },
+   {
+    "pose": 1647,
+    "plane": 120.0,
+    "elev": 45.0,
+    "axial": -45.0,
+    "th": 76.81,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1651,
+    "plane": 120.0,
+    "elev": 60.0,
+    "axial": -150.0,
+    "th": 141.19,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1655,
+    "plane": 120.0,
+    "elev": 60.0,
+    "axial": -90.0,
+    "th": 102.48,
+    "dK": 23.92,
+    "kin": false
+   },
+   {
+    "pose": 1659,
+    "plane": 120.0,
+    "elev": 60.0,
+    "axial": -30.0,
+    "th": 66.01,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1663,
+    "plane": 120.0,
+    "elev": 75.0,
+    "axial": -135.0,
+    "th": 144.89,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1667,
+    "plane": 120.0,
+    "elev": 75.0,
+    "axial": -75.0,
+    "th": 94.85,
+    "dK": 10.32,
+    "kin": false
+   },
+   {
+    "pose": 1671,
+    "plane": 120.0,
+    "elev": 90.0,
+    "axial": -180.0,
+    "th": 161.02,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1675,
+    "plane": 120.0,
+    "elev": 90.0,
+    "axial": -120.0,
+    "th": 140.05,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1679,
+    "plane": 120.0,
+    "elev": 90.0,
+    "axial": -60.0,
+    "th": 83.69,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1683,
+    "plane": 120.0,
+    "elev": 105.0,
+    "axial": -150.0,
+    "th": 170.77,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1687,
+    "plane": 120.0,
+    "elev": 105.0,
+    "axial": -90.0,
+    "th": 115.08,
+    "dK": 46.51,
+    "kin": false
+   },
+   {
+    "pose": 1691,
+    "plane": 120.0,
+    "elev": 120.0,
+    "axial": -120.0,
+    "th": 144.97,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1695,
+    "plane": 120.0,
+    "elev": 135.0,
+    "axial": -150.0,
+    "th": 148.52,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1699,
+    "plane": 120.0,
+    "elev": 135.0,
+    "axial": -90.0,
+    "th": 120.64,
+    "dK": 58.45,
+    "kin": false
+   },
+   {
+    "pose": 1703,
+    "plane": 120.0,
+    "elev": 150.0,
+    "axial": -120.0,
+    "th": 139.12,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1707,
+    "plane": 120.0,
+    "elev": 165.0,
+    "axial": -150.0,
+    "th": 127.34,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1711,
+    "plane": 120.0,
+    "elev": 165.0,
+    "axial": -90.0,
+    "th": 125.97,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1715,
+    "plane": 135.0,
+    "elev": 0.0,
+    "axial": -120.0,
+    "th": 80.65,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1719,
+    "plane": 135.0,
+    "elev": 0.0,
+    "axial": -60.0,
+    "th": 91.65,
+    "dK": 4.22,
+    "kin": true
+   },
+   {
+    "pose": 1723,
+    "plane": 135.0,
+    "elev": 15.0,
+    "axial": -135.0,
+    "th": 92.64,
+    "dK": 6.15,
+    "kin": false
+   },
+   {
+    "pose": 1727,
+    "plane": 135.0,
+    "elev": 15.0,
+    "axial": -75.0,
+    "th": 87.31,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1731,
+    "plane": 135.0,
+    "elev": 30.0,
+    "axial": -150.0,
+    "th": 111.06,
+    "dK": 39.0,
+    "kin": false
+   },
+   {
+    "pose": 1735,
+    "plane": 135.0,
+    "elev": 30.0,
+    "axial": -90.0,
+    "th": 93.39,
+    "dK": 7.58,
+    "kin": false
+   },
+   {
+    "pose": 1739,
+    "plane": 135.0,
+    "elev": 45.0,
+    "axial": -165.0,
+    "th": 131.14,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1742,
+    "plane": 135.0,
+    "elev": 45.0,
+    "axial": -120.0,
+    "th": 115.17,
+    "dK": 46.69,
+    "kin": false
+   },
+   {
+    "pose": 1746,
+    "plane": 135.0,
+    "elev": 45.0,
+    "axial": -60.0,
+    "th": 86.53,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1750,
+    "plane": 135.0,
+    "elev": 60.0,
+    "axial": -135.0,
+    "th": 136.31,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1754,
+    "plane": 135.0,
+    "elev": 60.0,
+    "axial": -75.0,
+    "th": 95.99,
+    "dK": 12.42,
+    "kin": false
+   },
+   {
+    "pose": 1758,
+    "plane": 135.0,
+    "elev": 75.0,
+    "axial": -150.0,
+    "th": 159.27,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1762,
+    "plane": 135.0,
+    "elev": 75.0,
+    "axial": -90.0,
+    "th": 111.42,
+    "dK": 39.65,
+    "kin": false
+   },
+   {
+    "pose": 1766,
+    "plane": 135.0,
+    "elev": 90.0,
+    "axial": -165.0,
+    "th": 171.71,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1770,
+    "plane": 135.0,
+    "elev": 90.0,
+    "axial": -105.0,
+    "th": 129.8,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1774,
+    "plane": 135.0,
+    "elev": 90.0,
+    "axial": -45.0,
+    "th": 72.99,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1778,
+    "plane": 135.0,
+    "elev": 105.0,
+    "axial": -120.0,
+    "th": 147.11,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1782,
+    "plane": 135.0,
+    "elev": 105.0,
+    "axial": -60.0,
+    "th": 89.31,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1786,
+    "plane": 135.0,
+    "elev": 120.0,
+    "axial": -135.0,
+    "th": 153.34,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1790,
+    "plane": 135.0,
+    "elev": 120.0,
+    "axial": -75.0,
+    "th": 107.39,
+    "dK": 32.46,
+    "kin": false
+   },
+   {
+    "pose": 1794,
+    "plane": 135.0,
+    "elev": 135.0,
+    "axial": -150.0,
+    "th": 140.61,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1798,
+    "plane": 135.0,
+    "elev": 135.0,
+    "axial": -90.0,
+    "th": 123.45,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1802,
+    "plane": 150.0,
+    "elev": 0.0,
+    "axial": -180.0,
+    "th": 86.48,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1806,
+    "plane": 150.0,
+    "elev": 0.0,
+    "axial": -120.0,
+    "th": 81.51,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1810,
+    "plane": 150.0,
+    "elev": 0.0,
+    "axial": -60.0,
+    "th": 96.79,
+    "dK": 13.86,
+    "kin": false
+   },
+   {
+    "pose": 1814,
+    "plane": 150.0,
+    "elev": 15.0,
+    "axial": -135.0,
+    "th": 92.77,
+    "dK": 6.4,
+    "kin": false
+   },
+   {
+    "pose": 1818,
+    "plane": 150.0,
+    "elev": 15.0,
+    "axial": -75.0,
+    "th": 92.14,
+    "dK": 5.19,
+    "kin": true
+   },
+   {
+    "pose": 1822,
+    "plane": 150.0,
+    "elev": 30.0,
+    "axial": -150.0,
+    "th": 111.07,
+    "dK": 39.01,
+    "kin": false
+   },
+   {
+    "pose": 1826,
+    "plane": 150.0,
+    "elev": 30.0,
+    "axial": -90.0,
+    "th": 97.56,
+    "dK": 15.26,
+    "kin": false
+   },
+   {
+    "pose": 1830,
+    "plane": 150.0,
+    "elev": 45.0,
+    "axial": -165.0,
+    "th": 131.28,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1834,
+    "plane": 150.0,
+    "elev": 45.0,
+    "axial": -105.0,
+    "th": 111.7,
+    "dK": 40.17,
+    "kin": false
+   },
+   {
+    "pose": 1838,
+    "plane": 150.0,
+    "elev": 60.0,
+    "axial": -180.0,
+    "th": 145.76,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1842,
+    "plane": 150.0,
+    "elev": 60.0,
+    "axial": -120.0,
+    "th": 131.07,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1846,
+    "plane": 150.0,
+    "elev": 60.0,
+    "axial": -60.0,
+    "th": 89.07,
+    "dK": 0.0,
+    "kin": true
+   },
+   {
+    "pose": 1850,
+    "plane": 150.0,
+    "elev": 75.0,
+    "axial": -135.0,
+    "th": 153.67,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1854,
+    "plane": 150.0,
+    "elev": 75.0,
+    "axial": -75.0,
+    "th": 101.41,
+    "dK": 22.06,
+    "kin": false
+   },
+   {
+    "pose": 1858,
+    "plane": 150.0,
+    "elev": 90.0,
+    "axial": -150.0,
+    "th": 175.96,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1862,
+    "plane": 150.0,
+    "elev": 90.0,
+    "axial": -90.0,
+    "th": 117.94,
+    "dK": 52.32,
+    "kin": false
+   },
+   {
+    "pose": 1866,
+    "plane": 150.0,
+    "elev": 105.0,
+    "axial": -165.0,
+    "th": 155.11,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1870,
+    "plane": 150.0,
+    "elev": 105.0,
+    "axial": -105.0,
+    "th": 134.23,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1874,
+    "plane": 150.0,
+    "elev": 120.0,
+    "axial": -180.0,
+    "th": 128.82,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1878,
+    "plane": 150.0,
+    "elev": 120.0,
+    "axial": -120.0,
+    "th": 142.93,
+    "dK": 0.0,
+    "kin": false
+   },
+   {
+    "pose": 1882,
+    "plane": 150.0,
+    "elev": 120.0,
+    "axial": -60.0,
+    "th": 95.68,
+    "dK": 11.85,
+    "kin": false
+   }
+  ]
+ },
+ "held": {
+  "n_ws": 952,
+  "kin_law": 473,
+  "by_cap": {
+   "40": [
+    473,
+    20
+   ],
+   "46.25": [
+    473,
+    20
+   ],
+   "50": [
+    473,
+    20
+   ],
+   "52": [
+    473,
+    20
+   ],
+   "55": [
+    473,
+    20
+   ],
+   "57.5": [
+    473,
+    20
+   ],
+   "60": [
+    473,
+    20
+   ],
+   "62.5": [
+    473,
+    20
+   ],
+   "65": [
+    473,
+    20
+   ],
+   "70": [
+    473,
+    20
+   ],
+   "75": [
+    473,
+    20
+   ],
+   "90": [
+    473,
+    20
+   ]
+  },
+  "n_ovh": 71,
+  "dK_hist": [
+   431,
+   42,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "th_taken_max": {
+   "40": 92.4,
+   "46.25": 92.4,
+   "50": 92.4,
+   "52": 92.4,
+   "55": 92.4,
+   "57.5": 92.4,
+   "60": 92.4,
+   "62.5": 92.4,
+   "65": 92.4,
+   "70": 92.4,
+   "75": 92.4,
+   "90": 92.4
+  }
+ }
+}

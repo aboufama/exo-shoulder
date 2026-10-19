@@ -1,0 +1,262 @@
+{
+ "step": 1,
+ "tol_mm": 0.15,
+ "frames_checked": 1337,
+ "pairs": 44,
+ "seconds": 67,
+ "setup_seconds": 23,
+ "jobs": 2,
+ "cpu_seconds": 108,
+ "cpu_s_per_frame": 0.064,
+ "violations": {
+  "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)  IN  l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)": {
+   "max_depth": 2.73,
+   "frames": 1337,
+   "worst": [
+    "Reach a high shelf",
+    15
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Reach a high shelf|15": 2.73,
+    "Reach a high shelf|16": 2.73,
+    "Reach a high shelf|20": 2.73,
+    "Reach a high shelf|137": 2.73,
+    "Reach a high shelf|141": 2.73,
+    "Walking arm swing|8": 2.73,
+    "Walking arm swing|28": 2.73,
+    "Walking arm swing|44": 2.73,
+    "Walking arm swing|64": 2.73,
+    "Walking arm swing|80": 2.73,
+    "Walking arm swing|100": 2.73,
+    "Raise overhead|12": 2.72
+   }
+  },
+  "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)  IN  cuff|J3 lower plate keep-out (O23 x 3.0)": {
+   "max_depth": 1.5,
+   "frames": 1337,
+   "worst": [
+    "Raise overhead",
+    0
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 1.5,
+    "Raise overhead|1": 1.5,
+    "Raise overhead|2": 1.5,
+    "Raise overhead|3": 1.5,
+    "Raise overhead|4": 1.5,
+    "Raise overhead|5": 1.5,
+    "Raise overhead|6": 1.5,
+    "Raise overhead|7": 1.5,
+    "Raise overhead|8": 1.5,
+    "Raise overhead|9": 1.5,
+    "Raise overhead|10": 1.5,
+    "Raise overhead|11": 1.5
+   }
+  },
+  "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)  IN  l1|J2 lower plate keep-out (O23 x 3.0)": {
+   "max_depth": 1.5,
+   "frames": 1337,
+   "worst": [
+    "Raise overhead",
+    0
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 1.5,
+    "Raise overhead|1": 1.5,
+    "Raise overhead|2": 1.5,
+    "Raise overhead|3": 1.5,
+    "Raise overhead|4": 1.5,
+    "Raise overhead|5": 1.5,
+    "Raise overhead|6": 1.5,
+    "Raise overhead|7": 1.5,
+    "Raise overhead|8": 1.5,
+    "Raise overhead|9": 1.5,
+    "Raise overhead|10": 1.5,
+    "Raise overhead|11": 1.5
+   }
+  },
+  "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)  IN  l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)": {
+   "max_depth": 2.02,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    93
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Walking arm swing|15": 2.02,
+    "Walking arm swing|16": 2.02,
+    "Walking arm swing|20": 2.02,
+    "Walking arm swing|21": 2.02,
+    "Walking arm swing|51": 2.02,
+    "Walking arm swing|52": 2.02,
+    "Walking arm swing|56": 2.02,
+    "Walking arm swing|57": 2.02,
+    "Walking arm swing|87": 2.02,
+    "Walking arm swing|88": 2.02,
+    "Walking arm swing|92": 2.02,
+    "Walking arm swing|93": 2.02
+   }
+  },
+  "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)  IN  l2|J2 upper hub + cap keep-out (O23 x 7.32)": {
+   "max_depth": 2.4,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    106
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 2.4,
+    "Raise overhead|1": 2.4,
+    "Raise overhead|2": 2.4,
+    "Raise overhead|3": 2.4,
+    "Raise overhead|4": 2.4,
+    "Raise overhead|5": 2.4,
+    "Raise overhead|6": 2.4,
+    "Raise overhead|7": 2.4,
+    "Raise overhead|8": 2.4,
+    "Raise overhead|9": 2.4,
+    "Raise overhead|10": 2.4,
+    "Raise overhead|11": 2.4
+   }
+  },
+  "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)  IN  base|J1 lower plate keep-out (O23 x 3.0)": {
+   "max_depth": 1.49,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 1.49,
+    "Raise overhead|1": 1.49,
+    "Raise overhead|2": 1.49,
+    "Raise overhead|3": 1.49,
+    "Raise overhead|4": 1.49,
+    "Raise overhead|5": 1.49,
+    "Raise overhead|6": 1.49,
+    "Raise overhead|7": 1.49,
+    "Raise overhead|8": 1.49,
+    "Raise overhead|9": 1.49,
+    "Raise overhead|10": 1.49,
+    "Raise overhead|11": 1.49
+   }
+  },
+  "cuff|J3 lower plate keep-out (O23 x 3.0)  IN  l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)": {
+   "max_depth": 2.28,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    105
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 2.28,
+    "Raise overhead|1": 2.28,
+    "Raise overhead|2": 2.28,
+    "Raise overhead|3": 2.28,
+    "Raise overhead|4": 2.28,
+    "Raise overhead|5": 2.28,
+    "Raise overhead|6": 2.28,
+    "Raise overhead|7": 2.28,
+    "Raise overhead|8": 2.28,
+    "Raise overhead|9": 2.28,
+    "Raise overhead|10": 2.28,
+    "Raise overhead|11": 2.28
+   }
+  },
+  "l2|J2 upper hub + cap keep-out (O23 x 7.32)  IN  l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)": {
+   "max_depth": 2.12,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 2.12,
+    "Raise overhead|1": 2.12,
+    "Raise overhead|2": 2.12,
+    "Raise overhead|3": 2.12,
+    "Raise overhead|4": 2.12,
+    "Raise overhead|5": 2.12,
+    "Raise overhead|6": 2.12,
+    "Raise overhead|7": 2.12,
+    "Raise overhead|8": 2.12,
+    "Raise overhead|9": 2.12,
+    "Raise overhead|10": 2.12,
+    "Raise overhead|11": 2.12
+   }
+  },
+  "l1|J2 lower plate keep-out (O23 x 3.0)  IN  l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)": {
+   "max_depth": 1.69,
+   "frames": 1337,
+   "worst": [
+    "Wash opposite shoulder",
+    59
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Wash opposite shoulder|59": 1.69,
+    "Reach back pocket|18": 1.69,
+    "Raise overhead|32": 1.68,
+    "Raise overhead|48": 1.68,
+    "Raise overhead|51": 1.68,
+    "Raise overhead|63": 1.68,
+    "Raise overhead|117": 1.68,
+    "Raise overhead|129": 1.68,
+    "Raise overhead|132": 1.68,
+    "Raise overhead|148": 1.68,
+    "Drink from a cup|29": 1.68,
+    "Drink from a cup|62": 1.68
+   }
+  },
+  "base|J1 lower plate keep-out (O23 x 3.0)  IN  l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)": {
+   "max_depth": 2.53,
+   "frames": 1337,
+   "worst": [
+    "Wave",
+    117
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|9": 2.53,
+    "Raise overhead|11": 2.53,
+    "Raise overhead|12": 2.53,
+    "Raise overhead|17": 2.53,
+    "Raise overhead|21": 2.53,
+    "Raise overhead|23": 2.53,
+    "Raise overhead|40": 2.53,
+    "Raise overhead|45": 2.53,
+    "Raise overhead|46": 2.53,
+    "Raise overhead|48": 2.53,
+    "Raise overhead|66": 2.53,
+    "Raise overhead|67": 2.53
+   }
+  }
+ },
+ "open_parts_not_tested_as_container": [],
+ "samples": {
+  "h_mm": 1.0,
+  "sharp_deg": 30.0,
+  "total": 115779,
+  "per_part": {
+   "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)": 55649,
+   "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)": 26710,
+   "l2|J3 upper hub + cap keep-out (O23 x 7.32)": 6242,
+   "cuff|J3 lower plate keep-out (O23 x 3.0)": 4898,
+   "l2|J2 upper hub + cap keep-out (O23 x 7.32)": 6242,
+   "l1|J2 lower plate keep-out (O23 x 3.0)": 4898,
+   "l1|J1 upper hub + cap keep-out (O23 x 7.32)": 6242,
+   "base|J1 lower plate keep-out (O23 x 3.0)": 4898
+  },
+  "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
+ },
+ "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
+ "max_depth": 2.73
+}

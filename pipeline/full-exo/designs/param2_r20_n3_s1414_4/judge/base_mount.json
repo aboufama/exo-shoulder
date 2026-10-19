@@ -1,0 +1,63 @@
+{
+ "base": {
+  "mount": "girdle",
+  "chain": "spherical",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "model": "base_slip.py: handler = acromion marker cluster analogue; per-axis ISB scapula error angles vs humeral elevation/plane from Karduna 2001, van Andel 2009, Lempereur 2014 + 4.2 mm translation slip (McQuade & Smidt 1998); lever GH - flat of the acromion from the OpenSim Seth 2016 scapula, scaled to the rig",
+ "law": "central",
+ "frames_checked": 451,
+ "step": 3,
+ "lever_mm": [
+  20.1,
+  -34.0,
+  21.1
+ ],
+ "lever_scale": 1.093,
+ "max_mm": 15.21,
+ "p95_mm": 13.78,
+ "share_over_4mm": 0.404,
+ "per_law_max_mm": {
+  "central": 15.21,
+  "low": 5.53,
+  "high": 23.14
+ },
+ "per_law_share_over_4mm": {
+  "central": 0.404,
+  "low": 0.337,
+  "high": 1.0
+ },
+ "central_max_by_elevation_mm": {
+  "<= 60": 4.56,
+  "<= 90": 6.91,
+  "<= 100": 7.49,
+  "<= 120": 9.65,
+  "<= 150": 15.21,
+  "<= 180": 15.21
+ },
+ "central_max_anchor_sensitivity_mm": {
+  "mid": 15.21,
+  "aa": 21.58,
+  "ac": 13.77
+ },
+ "worst": [
+  "Raise overhead",
+  78,
+  [
+   30,
+   150,
+   -60
+  ]
+ ],
+ "per_clip": {
+  "Raise overhead": 15.21,
+  "Drink from a cup": 4.26,
+  "Comb hair": 13.89,
+  "Reach a high shelf": 11.87,
+  "Wash opposite shoulder": 3.69,
+  "Reach back pocket": 3.3,
+  "Wave": 7.49,
+  "Walking arm swing": 1.49
+ },
+ "note": "design-independent for a spherical chain on a girdle mount: only the handler (grip, footprint), the motions and a passive slider can change it"
+}

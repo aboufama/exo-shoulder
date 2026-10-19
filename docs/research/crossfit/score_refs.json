@@ -1,0 +1,362 @@
+[
+ {
+  "tag": "P5",
+  "params": {
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "az1": 101.3136,
+   "el1": 63.0475,
+   "az2": 31.6253,
+   "el2": 44.9795,
+   "wd": 67.6795,
+   "wa": -5.4589,
+   "b3": 0.3392,
+   "lE": 59.5912,
+   "lc": 23.7175,
+   "phiE": -7.4584,
+   "phib": -71.5498,
+   "ang_min": 35.9262,
+   "stk": 5.5412
+  },
+  "obj": 28.625,
+  "xfit": {
+   "folds": [
+    {
+     "fit": 0,
+     "ins": {
+      "gap": 21.77,
+      "gap_near1": 24.4,
+      "reach": 0.725,
+      "follow": 0.987,
+      "inband14": 0.8807,
+      "inband10": 0.5036,
+      "contact": 0.0234,
+      "near1_poses": 6,
+      "near_min": 0.21,
+      "oh_follow": 1.0,
+      "oh_reach": 0.2222,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "oof": {
+      "gap": 23.55,
+      "gap_near1": 29.75,
+      "reach": 0.6958,
+      "follow": 0.974,
+      "inband14": 0.885,
+      "inband10": 0.515,
+      "contact": 0.0163,
+      "near1_poses": 8,
+      "near_min": 0.06,
+      "oh_follow": 1.0,
+      "oh_reach": 0.2632,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "conn": {
+      "nodes": 1014,
+      "connected": 1014
+     },
+     "secs": 6.1
+    },
+    {
+     "fit": 1,
+     "ins": {
+      "gap": 22.96,
+      "gap_near1": 32.6,
+      "reach": 0.6958,
+      "follow": 0.974,
+      "inband14": 0.8948,
+      "inband10": 0.5638,
+      "contact": 0.0202,
+      "near1_poses": 11,
+      "near_min": 0.08,
+      "oh_follow": 1.0,
+      "oh_reach": 0.2632,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "oof": {
+      "gap": 21.23,
+      "gap_near1": 27.5,
+      "reach": 0.7125,
+      "follow": 0.987,
+      "inband14": 0.8911,
+      "inband10": 0.5547,
+      "contact": 0.0159,
+      "near1_poses": 9,
+      "near_min": 0.14,
+      "oh_follow": 1.0,
+      "oh_reach": 0.1667,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "conn": {
+      "nodes": 1002,
+      "connected": 1002
+     },
+     "secs": 5.3
+    }
+   ],
+   "obj": 28.625,
+   "oof_near1": 28.625,
+   "oof_gap": 22.39,
+   "ins_near1": 28.5,
+   "drop_near1": 0.125
+  },
+  "secs": 11.4
+ },
+ {
+  "tag": "C1-nostops-m5",
+  "params": {
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "az1": 96.9026,
+   "el1": 64.7202,
+   "az2": 29.7578,
+   "el2": 45.5349,
+   "wd": 70.1215,
+   "wa": -6.2602,
+   "b3": 0.3277,
+   "lE": 59.7929,
+   "lc": 26.5582,
+   "phiE": -5.4456,
+   "phib": -62.7842,
+   "ang_min": 29.6329,
+   "stk": 5.6258
+  },
+  "obj": 23.15,
+  "xfit": {
+   "folds": [
+    {
+     "fit": 0,
+     "ins": {
+      "gap": 19.97,
+      "gap_near1": 22.41,
+      "reach": 0.7208,
+      "follow": 0.987,
+      "inband14": 0.8875,
+      "inband10": 0.4967,
+      "contact": 0.008,
+      "near1_poses": 3,
+      "near_min": 0.17,
+      "oh_follow": 1.0,
+      "oh_reach": 0.2222,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "oof": {
+      "gap": 23.46,
+      "gap_near1": 23.46,
+      "reach": 0.6875,
+      "follow": 0.974,
+      "inband14": 0.8902,
+      "inband10": 0.5064,
+      "contact": 0.0123,
+      "near1_poses": 0,
+      "near_min": 1.04,
+      "oh_follow": 1.0,
+      "oh_reach": 0.2632,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "conn": {
+      "nodes": 986,
+      "connected": 986
+     },
+     "secs": 5.9
+    },
+    {
+     "fit": 1,
+     "ins": {
+      "gap": 23.73,
+      "gap_near1": 25.4,
+      "reach": 0.6792,
+      "follow": 0.974,
+      "inband14": 0.9078,
+      "inband10": 0.5722,
+      "contact": 0.0165,
+      "near1_poses": 2,
+      "near_min": 0.66,
+      "oh_follow": 1.0,
+      "oh_reach": 0.2632,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "oof": {
+      "gap": 20.38,
+      "gap_near1": 22.84,
+      "reach": 0.7083,
+      "follow": 0.974,
+      "inband14": 0.9068,
+      "inband10": 0.5631,
+      "contact": 0.0121,
+      "near1_poses": 3,
+      "near_min": 0.34,
+      "oh_follow": 1.0,
+      "oh_reach": 0.2222,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "conn": {
+      "nodes": 985,
+      "connected": 985
+     },
+     "secs": 5.6
+    }
+   ],
+   "obj": 23.15,
+   "oof_near1": 23.15,
+   "oof_gap": 21.92,
+   "ins_near1": 23.905,
+   "drop_near1": -0.755
+  },
+  "secs": 11.5
+ },
+ {
+  "tag": "H1",
+  "params": {
+   "rad1": 10.0,
+   "rad2": 10.0,
+   "rad3": 10.0,
+   "az1": 101.1634,
+   "el1": 63.8986,
+   "az2": 30.153,
+   "el2": 47.0108,
+   "wd": 70.3931,
+   "wa": -8.1248,
+   "b3": 0.2842,
+   "lE": 59.5534,
+   "lc": 28.2401,
+   "phiE": -5.8107,
+   "phib": -54.914,
+   "ang_min": 30.4611,
+   "stk": 5.6815
+  },
+  "obj": 28.13,
+  "xfit": {
+   "folds": [
+    {
+     "fit": 0,
+     "ins": {
+      "gap": 21.8,
+      "gap_near1": 23.44,
+      "reach": 0.7,
+      "follow": 1.0,
+      "inband14": 0.8901,
+      "inband10": 0.482,
+      "contact": 0.0081,
+      "near1_poses": 2,
+      "near_min": 0.22,
+      "oh_follow": 1.0,
+      "oh_reach": 0.2222,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "oof": {
+      "gap": 26.23,
+      "gap_near1": 27.89,
+      "reach": 0.6625,
+      "follow": 1.0,
+      "inband14": 0.8878,
+      "inband10": 0.4844,
+      "contact": 0.0126,
+      "near1_poses": 2,
+      "near_min": 0.45,
+      "oh_follow": 1.0,
+      "oh_reach": 0.1579,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "conn": {
+      "nodes": 968,
+      "connected": 968
+     },
+     "secs": 5.8
+    },
+    {
+     "fit": 1,
+     "ins": {
+      "gap": 25.82,
+      "gap_near1": 30.17,
+      "reach": 0.6625,
+      "follow": 1.0,
+      "inband14": 0.9019,
+      "inband10": 0.585,
+      "contact": 0.0207,
+      "near1_poses": 7,
+      "near_min": 0.1,
+      "oh_follow": 1.0,
+      "oh_reach": 0.1579,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "oof": {
+      "gap": 24.1,
+      "gap_near1": 28.37,
+      "reach": 0.6833,
+      "follow": 1.0,
+      "inband14": 0.9017,
+      "inband10": 0.58,
+      "contact": 0.0243,
+      "near1_poses": 7,
+      "near_min": 0.06,
+      "oh_follow": 1.0,
+      "oh_reach": 0.1667,
+      "oh_lost": 0,
+      "bad": 0,
+      "unconnected": 0,
+      "n": 317,
+      "mode": "fast"
+     },
+     "conn": {
+      "nodes": 985,
+      "connected": 984
+     },
+     "secs": 5.2
+    }
+   ],
+   "obj": 28.13,
+   "oof_near1": 28.13,
+   "oof_gap": 25.165,
+   "ins_near1": 26.805,
+   "drop_near1": 1.325
+  },
+  "secs": 10.9
+ }
+]

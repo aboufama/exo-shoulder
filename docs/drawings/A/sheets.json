@@ -1,0 +1,131 @@
+{
+ "set": "A",
+ "design": "conecut-knee-knuckle-3r (3-joint lead)",
+ "pdf": "A_drawings.pdf",
+ "sheets": [
+  {
+   "file": "01_KIN.png",
+   "title": "Cone-cut chain, kinematic layout"
+  },
+  {
+   "file": "02_GA.png",
+   "title": "Cone-cut pin knee (3-joint lead), general arrangement"
+  },
+  {
+   "file": "03_HUB.png",
+   "title": "\u00d820 hub stack, section"
+  },
+  {
+   "pn": "D8-01",
+   "title": "Scapula base (J1 upper member)",
+   "ends": [
+    "J1"
+   ],
+   "scale": "2:1",
+   "file": "04_D8-01.png"
+  },
+  {
+   "pn": "D8-02a",
+   "title": "Link 1a (J1 to K, flank lug)",
+   "ends": [
+    "K",
+    "J1"
+   ],
+   "scale": "1:1",
+   "file": "05_D8-02a.png"
+  },
+  {
+   "pn": "D8-02b",
+   "title": "Link 1b (K to J2, crank pin)",
+   "ends": [
+    "K",
+    "crank pivot",
+    "J2"
+   ],
+   "scale": "2:1",
+   "file": "06_D8-02b.png"
+  },
+  {
+   "pn": "D8-03",
+   "title": "Link 2 (J2 to J3, J3 stop groove)",
+   "ends": [
+    "J2",
+    "J3"
+   ],
+   "scale": "1:1",
+   "file": "07_D8-03.png"
+  },
+  {
+   "pn": "D8-04",
+   "title": "Member 3 (J3 disc + E strap)",
+   "ends": [
+    "J3",
+    "pin a"
+   ],
+   "scale": "1:1",
+   "file": "08_D8-04.png"
+  },
+  {
+   "pn": "D8-05",
+   "title": "Knee link (with stop tooth)",
+   "ends": [
+    "pin b",
+    "pin a"
+   ],
+   "scale": "2:1",
+   "file": "09_D8-05.png"
+  },
+  {
+   "pn": "D8-06",
+   "title": "Arm pad + pad mount + BOTTOM (one part)",
+   "ends": [
+    "pin b"
+   ],
+   "scale": "1:2",
+   "file": "10_D8-06.png"
+  },
+  {
+   "pn": "D9-01",
+   "title": "Drive bell crank",
+   "ends": [
+    "nose dowel",
+    "crank pivot"
+   ],
+   "scale": "2:1",
+   "file": "11_D9-01.png"
+  },
+  {
+   "pn": "D9-02",
+   "title": "Drive lobe ring (cam)",
+   "ends": [
+    "J2 cap seat"
+   ],
+   "scale": "2:1",
+   "file": "12_D9-02.png"
+  },
+  {
+   "pn": "H-05",
+   "title": "K hub cap with spring chamber",
+   "scale": "2:1",
+   "features": 4,
+   "mass_g": 6.54,
+   "file": "13_H-05.png"
+  },
+  {
+   "pn": "H-06",
+   "title": "J2 cap (lobe ring seat)",
+   "scale": "5:1",
+   "features": 3,
+   "mass_g": 2.73,
+   "file": "14_H-06.png"
+  },
+  {
+   "pn": "D8-07",
+   "title": "Upper-arm cuff plate",
+   "scale": "1:1",
+   "features": 6,
+   "mass_g": 36.57,
+   "file": "15_D8-07.png"
+  }
+ ]
+}

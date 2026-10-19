@@ -1,0 +1,30 @@
+[
+ {
+  "tag": "ib-claimD-o_bench",
+  "cmd": "mkdir -p docs/research/inband_drive/farm/claimD && python3 docs/concepts/models/inband-rssr-knuckle-3r.py claims '[{\"tag\": \"o_bench\", \"mode\": \"frozen\", \"params\": {\"La\": 25.9092, \"s_arm\": 5.3886, \"r_h\": 14.7868, \"beta\": -154.4704, \"gam\": 16.6733, \"hl\": 2.2268, \"zr\": 0.0, \"kK\": 1.7402, \"r_lobe\": 7.771, \"bk1\": 28.4028, \"bk2\": 41.0644, \"a1max\": 64.46719999999999, \"smhi\": 14.8924, \"eta\": 13.9068, \"clay\": 1, \"zc\": 0.4815, \"bl_c\": 0, \"bl_h\": 0}}]' docs/research/inband_drive/farm/claimD > docs/research/inband_drive/farm/claimD/o_bench.run.log 2>&1; tail -c 2500 docs/research/inband_drive/farm/claimD/o_bench.log",
+  "out": [
+   "docs/research/inband_drive/farm/claimD/o_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "ib-claimD-o_held",
+  "cmd": "mkdir -p docs/research/inband_drive/farm/claimD && python3 docs/concepts/models/inband-rssr-knuckle-3r.py claims '[{\"tag\": \"o_held\", \"mode\": \"held\", \"params\": {\"La\": 25.9092, \"s_arm\": 5.3886, \"r_h\": 14.7868, \"beta\": -154.4704, \"gam\": 16.6733, \"hl\": 2.2268, \"zr\": 0.0, \"kK\": 1.7402, \"r_lobe\": 7.771, \"bk1\": 28.4028, \"bk2\": 41.0644, \"a1max\": 64.46719999999999, \"smhi\": 14.8924, \"eta\": 13.9068, \"clay\": 1, \"zc\": 0.4815, \"bl_c\": 0, \"bl_h\": 0}}]' docs/research/inband_drive/farm/claimD > docs/research/inband_drive/farm/claimD/o_held.run.log 2>&1; tail -c 2500 docs/research/inband_drive/farm/claimD/o_held.log",
+  "out": [
+   "docs/research/inband_drive/farm/claimD/o_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3000
+ }
+]

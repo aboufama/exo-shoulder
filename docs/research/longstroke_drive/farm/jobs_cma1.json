@@ -1,0 +1,54 @@
+[
+ {
+  "tag": "ls-cma1-rs1",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm && python3 tools/concept_cma.py docs/concepts/models/longstroke-slipper-knuckle-3r.py --x0 '{\"bk1\": 28.0, \"bk2\": 50.0, \"a1max\": 73.0, \"La\": 17.5685, \"s_arm\": 4.0646, \"r_h\": 15.3454, \"beta\": -126.3626, \"gam\": 26.7611, \"hl\": 2.5388, \"zr\": 3.4996, \"kK\": 1.7034, \"r_lobe\": 8.0629, \"smhi\": 16.8433}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zr\": 1.0, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 1 --label ls-cma1-rs1 --out docs/research/longstroke_drive/farm/cma_cma1_rs1.json > docs/research/longstroke_drive/farm/cma_cma1_rs1.log 2>&1; tail -3 docs/research/longstroke_drive/farm/cma_cma1_rs1.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/cma_cma1_rs1*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ls-cma1-rs2",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm && python3 tools/concept_cma.py docs/concepts/models/longstroke-slipper-knuckle-3r.py --x0 '{\"bk1\": 28.0, \"bk2\": 50.0, \"a1max\": 73.0, \"La\": 22.4301, \"s_arm\": 4.6007, \"r_h\": 16.1034, \"beta\": -145.2303, \"gam\": 51.0384, \"hl\": 0.3119, \"zr\": 3.2236, \"kK\": 1.6825, \"r_lobe\": 7.3108, \"smhi\": 16.8433}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zr\": 1.0, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 2 --label ls-cma1-rs2 --out docs/research/longstroke_drive/farm/cma_cma1_rs2.json > docs/research/longstroke_drive/farm/cma_cma1_rs2.log 2>&1; tail -3 docs/research/longstroke_drive/farm/cma_cma1_rs2.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/cma_cma1_rs2*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ls-cma1-rs3",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm && python3 tools/concept_cma.py docs/concepts/models/longstroke-slipper-knuckle-3r.py --x0 '{\"bk1\": 28.0, \"bk2\": 50.0, \"a1max\": 73.0, \"La\": 20.0, \"s_arm\": 4.5, \"r_h\": 15.0, \"beta\": -110.0, \"gam\": 10.0, \"hl\": 2.5, \"zr\": 3.0, \"kK\": 1.8, \"r_lobe\": 7.8, \"smhi\": 16.8433}' --scales '{\"La\": 3.0, \"s_arm\": 0.5, \"r_h\": 2.0, \"beta\": 15.0, \"gam\": 15.0, \"hl\": 0.8, \"zr\": 1.0, \"kK\": 0.25, \"r_lobe\": 0.4, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 3 --label ls-cma1-rs3 --out docs/research/longstroke_drive/farm/cma_cma1_rs3.json > docs/research/longstroke_drive/farm/cma_cma1_rs3.log 2>&1; tail -3 docs/research/longstroke_drive/farm/cma_cma1_rs3.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/cma_cma1_rs3*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "rssr"
+  },
+  "timeout": 2100.0
+ },
+ {
+  "tag": "ls-cma1-ns1",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm && python3 tools/concept_cma.py docs/concepts/models/longstroke-slipper-knuckle-3r.py --x0 '{\"bk1\": 28.0, \"bk2\": 50.0, \"a1max\": 73.0, \"g\": 2.9101, \"beta\": -178.9001, \"r_c\": 17.1802, \"lift\": 2.329, \"hl\": 1.6266, \"zr\": 4.3117, \"kK\": 1.6356, \"s_arm\": 4.0108, \"r_lobe\": 7.7695, \"nose_r\": 1.0203, \"smhi\": 16.8433}' --scales '{\"g\": 0.3, \"beta\": 8.0, \"r_c\": 1.5, \"lift\": 0.8, \"hl\": 0.6, \"zr\": 1.0, \"kK\": 0.25, \"s_arm\": 0.5, \"r_lobe\": 0.4, \"nose_r\": 0.15, \"bk1\": 2.0, \"bk2\": 3.0, \"a1max\": 3.0, \"smhi\": 2.0}' --sigma 0.5 --popsize 8 --jobs 2 --budget-s 1500 --max-gen 400 --seed 4 --label ls-cma1-ns1 --out docs/research/longstroke_drive/farm/cma_cma1_ns1.json > docs/research/longstroke_drive/farm/cma_cma1_ns1.log 2>&1; tail -3 docs/research/longstroke_drive/farm/cma_cma1_ns1.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/cma_cma1_ns1*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_DRIVE": "nose"
+  },
+  "timeout": 2100.0
+ }
+]

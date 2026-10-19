@@ -1,0 +1,61 @@
+[
+ {
+  "tag": "envcl2-pick1_priced-fit60-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim fit60 held docs/research/minarc_final_polish/picks/pick1.json docs/research/minarc_final_polish/farm/claim2_pick1_priced_fit60_held.json > docs/research/minarc_final_polish/farm/claim2_pick1_priced_fit60_held.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim2_pick1_priced_fit60_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim2_pick1_priced_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envcl2-BDp_nominal-env-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim env held BDp docs/research/minarc_final_polish/farm/claim2_BDp_nominal_env_held.json > docs/research/minarc_final_polish/farm/claim2_BDp_nominal_env_held.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim2_BDp_nominal_env_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim2_BDp_nominal_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envcl2-pick1_nominal-env-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim env held docs/research/minarc_final_polish/picks/pick1.json docs/research/minarc_final_polish/farm/claim2_pick1_nominal_env_held.json > docs/research/minarc_final_polish/farm/claim2_pick1_nominal_env_held.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim2_pick1_nominal_env_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim2_pick1_nominal_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envcl2-pick1_nominal-fit60-bench",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim fit60 bench docs/research/minarc_final_polish/picks/pick1.json docs/research/minarc_final_polish/farm/claim2_pick1_nominal_fit60_bench.json > docs/research/minarc_final_polish/farm/claim2_pick1_nominal_fit60_bench.log 2>&1; tail -1 docs/research/minarc_final_polish/farm/claim2_pick1_nominal_fit60_bench.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/claim2_pick1_nominal_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 3000
+ }
+]

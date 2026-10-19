@@ -1,0 +1,47 @@
+{
+ "id": "band_r16_3r_s1373_1",
+ "source": "pipeline/conformal/gpu_client/band_eval_r16diag_ramp60.json #3 (r16 seed 1373 rank 1 (fit 0.180))",
+ "n_joints": 3,
+ "sliding_cuff": false,
+ "dof": 3,
+ "kinematics": {
+  "az": 338.5451180007818,
+  "el": 88.57691877224975,
+  "a": [
+   73.21033870327359,
+   69.81006390557873
+  ],
+  "w": [
+   65.66452326282949,
+   31.70745769468427
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   0
+  ]
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "spherical",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "built_with": "pipeline/full-exo/band_to_design.py (L1 proxies from the evaluator's fitted shape; POSES_FILE=band_poses_ws.b64; user arm parts from cad_r13_n4_s1343_1 minus its custom arm end)",
+ "evaluator": {
+  "score": 0.18448871969034997,
+  "follow": 0.8131004571914673,
+  "in_band": 0.5902259349822998,
+  "workspace": {
+   "follow": 0.3716346025466919,
+   "lost_because": {
+    "kinematics": 0.14807692170143127,
+    "part_collision": 0.03557692468166351,
+    "skin_above_shape": 0.4596153795719147,
+    "squeezed_top": 0.14567308127880096
+   },
+   "poses": 2080,
+   "weight": 1
+  }
+ }
+}

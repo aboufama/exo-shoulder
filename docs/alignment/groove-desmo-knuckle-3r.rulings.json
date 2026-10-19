@@ -1,0 +1,67 @@
+[
+ {
+  "key": "held_out",
+  "refuted": false,
+  "evidence": "Re-derived from the per-pose dumps (remeasure/groove-desmo-knuckle-3r_{bench,held}_perpose.json): bench ws 245/360 = 0.6806, clip 110/110, in-band 0.8986, contact 2/470 -> 22.64; held ws 595/952 = 0.6250, clip 202/202, in-band 0.8972, contact 0.0099 -> 28.77. Drop +6.13 (+6.12 against the dump's own 22.65) > TH held_watch 6.0 (tools/alignment_audit.py line 61; ALIGNMENT.md section 5), same harness both sides (verifier --truewin, exact). The cost is real: stop B removes 37 held-out ws poses ((0.6639 - 0.6250) x 952, row held_out.reach vs remeasure) against 12 on the bench ((0.7139 - 0.6806) x 360). Stands, 0.13 above the line."
+ },
+ {
+  "key": "idle",
+  "refuted": true,
+  "evidence": "The rigid-knee assertion belongs to the other cell. rows/groove-desmo-knuckle-3r.json best_params.cell 'lead' and mechanism.cuff_knee.pins 2; model line 55 CELL defaults to 'lead', which loads roller-longdyad-knuckle-3r.py (pin knee, lines 70-73). knee_moved is set only in kneeless-roller-knuckle-3r.py:166 and kneeless-sidecar-knuckle-3r.py:150 (GD_CELL=kneeless); the groove model only reads r.get('knee_moved') at line 305, and that string is what c_idle's regex matched. The knee's 86.21-151.92 deg (held 153.16) is the pin knee's designed motion, inside its window [25.22, 154.78] (remeasure _bench.json extras.knee_window). The declared drives move: K 32.02 deg (verify _v_bench_frozen_truewin.json roller.dK_taken_max_deg; deep.coord_spans dK -0.5589 rad), crank 32.02 / g 2.47 = 13.0 deg on the cut stroke (lin law, cprog 0; extras.sc_info.phi_max_taken 16.7 is the pre-cut 41.25 / 2.47), both far above TH idle_deg 2.0. No M4."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Confirmed. rows/groove-desmo-knuckle-3r.json verdict begins 'SCREENED - a complexity / hold Pareto point' and states 19.29, +0.62, held out 24.96 (+1.23), slop +-0.54, the c_reporting trigger. docs/dashboard/data/morphs.json (refresh 1b9ffbd, 06:58) shows v_gap 22.64 with the same verdict text and sweep_gap 17.21: 22.64 - 17.21 = 5.43 > 5. Stands."
+ },
+ {
+  "key": "judgement:S1",
+  "refuted": false,
+  "evidence": "Every number re-derived. Held 28.77 / bench 22.64 (per-pose dumps). Lead rows/roller-longdyad-knuckle-3r.json v_gap 18.67, held_out.gap 23.73: +5.06, so 5.04 behind held out and 3.97 on the bench. 37 / 12 lost poses from the claim-to-truewin reach (above). Paired SD 1.35: remeasure/roller-longdyad-knuckle-3r_vs_sidecar-longdyad-knuckle-3r_paired_claim.json (boot SD). One small correction: frontload's verifier held-out is 26.75 (rows/frontload-lobe-stopb-knuckle-3r.json verification.corrected.held_out), not the row's 26.65, so this design is 2.02 behind held out, not 2.12. Still a tie on the gap (frontload's complexity is 25.5 against 18.25-19.25 here). Stands."
+ },
+ {
+  "key": "judgement:NEW-planar-gate",
+  "refuted": false,
+  "evidence": "Numbers confirmed: verify _v_bench_frozen.json groove pitch_r_grid [7.06, 8.934] vs window 8.44, so the outer wall is 0.8 - 0.494 = 0.31 mm; crank_axis_tilt 14.78; pa_groove_3d 36.17 vs the claim's 30.5; 22.64 - 19.29 = 3.35. The 22.64 itself is clean (truewin pitch_r_taken max 8.421 <= 8.44, n_taken_over_window 0). But the gate is still live in the model file. Inside the truewin wear the model's own sc_info.groove still reads r_pitch [7.06, 8.24], pa_groove_max 30.5 and slop_K_deg 0.54. Run on its own (row.fast dK_lim 41.2, why_lim pressure_horn) it buys the stroke back, so any search or derivative on docs/concepts/models/groove-desmo-knuckle-3r.py outside the verifier's wrapper re-buys it. The lead family's crest gate is the same planar r_lobe + s_arm phi (sidecar-roller-flank-knuckle-3r.py:256, sidecar-longdyad-knuckle-3r.py:229/268) and is unchecked in 3-D. Stands."
+ },
+ {
+  "key": "judgement:M2",
+  "refuted": false,
+  "evidence": "Binding confirmed at the cut stroke: verify _v_bench_frozen_truewin.json groove tilt_taken_max 3.3 deg, runout 0.085 mm against a 0.02 clearance, groove_width_needed_mm 1.59. Size corrected by measurement. The auditor's 1.61 groove (23.77) sizes the groove for the claim's 41.25 stroke (runout 0.108). Re-worn here with the groove sized at the cut stroke: tools/alignment_groove_width_probe.py 1.59 bench, models unchanged, CB_EXACT=1, 100 s -> remeasure/groove-desmo-knuckle-3r_groove1.59_bench.json: window [7.095, 8.405], stop B 31.0 deg, gap 23.48 (reach 0.6722, 3 more lost ws poses), width needed at that stroke 1.587 <= 1.59, groove pa 35.27. So fix 1 costs +0.84 (1.59, 5 um over run-out) to +1.13 (1.61, 20 um). Both are above frontload's 22.82. Stands."
+ },
+ {
+  "key": "judgement:G5",
+  "refuted": false,
+  "evidence": "Recomputed with tools/simplicity.py v2.2 score(): the row's mechanism gives 18.25; with sliding_pairs 2 / rolling_pairs 0 it gives 19.25 (the items differ only in '2 track (sliding) pairs x 1'). simplicity.py line 42 counts a 'slot' as a track pair. Precedent: rows/slotted-eccentric-j2-3r.json (MR52ZZ roller in a 2.6 slot) and rows/cam-coupled-4r.json (MR63 roller in a 6.1 groove) both carry sliding_pairs 1. Lead 20.25. Stands: the edge is 1.0, not 2.0."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "On file: slop_K_deg_needed 1.62 bench / 1.61 held (truewin), 2.03-2.04 at the claim stroke (verify _v_bench_frozen / _v_held_frozen groove). The models have no slop state. No measurement of K slop's effect on metal or on the hub-only pose exists (grep of verify, remeasure and row): missing measurement, so it stands. Size note (a derivation, not a measurement, and no input to this ruling): the verifier's formula (verify script line 255) divides the half-play by s_arm 4.05, the radial lever. The play acts along the groove normal n. With the model's own kinematics (pivot_d 16.02, theta_F -14.6, r 7.06-8.42) |v_F| is 8.2-9.4 mm/rad, and the 3-D pressure angle 36.17 gives v_F.n = |v_F| cos pa = 6.6-7.6 mm/rad. That would put the slop near +-0.9-1.0 deg, not +-1.6."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Confirmed: truewin groove pa_groove_3d_taken_max 36.17 = grid max 36.17; gate 37.29 = PA_GATE 43 - atan(MU_GROOVE 0.10) (model constants). The friction coefficient at the gate is tan(43 - 36.17) = 0.120. At mu 0.15 the gate is 43 - 8.53 = 34.47 < 36.17, which fails. With the 1.59 groove (measured here) pa 35.27, so mu <= 0.135. Horn 39.0 at the cut stroke (truewin roller.pa_horn_max) vs the lead's 43.0. A thin friction margin on a sliding pair is felt when the grease goes. Stands."
+ },
+ {
+  "key": "judgement:M3",
+  "refuted": false,
+  "evidence": "Missing measurement. 'pocket' has 0 hits in docs/concepts/models/groove-desmo-knuckle-3r.py and docs/concepts/verify/groove-desmo-knuckle-3r.py. docs/concepts/groove-desmo-knuckle-3r.md line 305 says 'needs a pocket there. This is not modelled.' There is no CAD (no pipeline/full-exo/designs/*groove*). The lin-law onset blend is not modelled either. Stands."
+ },
+ {
+  "key": "judgement:T5",
+  "refuted": false,
+  "evidence": "Re-derived from the per-pose dumps: bench 2 contacts, (15,165,-60) 10.97 and (30,165,-60) 6.03 mm, sum 17.00; held 8, sum 44.81, deepest 9.93 at (30,165,-45), 3 of them below elev 150 (3.49 / 1.60 at elev 60, 1.22 at (15,105,15)). Against roller-longdyad the tool's contact_depth reads ok (x1.03 / x0.90). Against the other verified 3-active leader, sidecar-longdyad (6.23 mm over 4 bench poses, roller-longdyad rulings contact_depth), it is x2.73 and +10.77 mm, past both documented triggers (TH depth_ratio 2.0, depth_floor_mm 5). The lead's own NEW-contact-depth was upheld on that same comparison. Metal 11 mm into the arm at elevation 165 is a wearer cost the count hides. Stands."
+ },
+ {
+  "key": "judgement:NEW-ws-inband",
+  "refuted": false,
+  "evidence": "Confirmed: remeasure/groove-desmo-knuckle-3r_bench_probe.json ws_elev90_140 inband14 0.781, over14 0.2182 (n 85, taken 35); _held_probe.json 0.807, over14 0.1917 (n 229, taken 85). Lead: live_audit_2026-10-16/probe_roller-longdyad-knuckle-3r.json 0.7979 (over14 0.2012); sidecar-longdyad 0.8409. Metal over 14 mm at the raised arm is felt bulk, and the score never reads it. Stands."
+ },
+ {
+  "key": "judgement:R1",
+  "refuted": false,
+  "evidence": "Confirmed: rows/groove-desmo-knuckle-3r.json verdict (19.29, +0.62, held 24.96 +1.23, slop +-0.54), frozen.gap 19.29, held_out.gap 24.96, while verification.corrected says gap 22.64 and held_out 28.9. morphs.json carries the same verdict text and sweep_gap 17.21. The row's sc_info-derived claims (pa 30.5, slop 0.54) also remain in the record. Stands."
+ }
+]

@@ -1,0 +1,370 @@
+{
+ "fold": {
+  "law_margin": [
+   3.02,
+   13.69
+  ],
+  "taken_margin_min": 5.11,
+  "n_stretched_taken": 120,
+  "da1e_dK": 0.422,
+  "sens": [
+   {
+    "K_offset_deg": -2.0,
+    "law_margin_min": 3.25,
+    "taken_margin_min": 4.98,
+    "taken_below5": 1,
+    "taken_out_of_prefix": 0,
+    "monotone": false
+   },
+   {
+    "K_offset_deg": -1.0,
+    "law_margin_min": 3.14,
+    "taken_margin_min": 5.04,
+    "taken_below5": 0,
+    "taken_out_of_prefix": 0,
+    "monotone": false
+   },
+   {
+    "K_offset_deg": -0.5,
+    "law_margin_min": 3.08,
+    "taken_margin_min": 5.08,
+    "taken_below5": 0,
+    "taken_out_of_prefix": 0,
+    "monotone": false
+   },
+   {
+    "K_offset_deg": 0.0,
+    "law_margin_min": 3.02,
+    "taken_margin_min": 5.11,
+    "taken_below5": 0,
+    "taken_out_of_prefix": 0,
+    "monotone": true
+   },
+   {
+    "K_offset_deg": 0.5,
+    "law_margin_min": 2.96,
+    "taken_margin_min": 5.15,
+    "taken_below5": 0,
+    "taken_out_of_prefix": 0,
+    "monotone": true
+   },
+   {
+    "K_offset_deg": 1.0,
+    "law_margin_min": 2.9,
+    "taken_margin_min": 5.18,
+    "taken_below5": 0,
+    "taken_out_of_prefix": 0,
+    "monotone": true
+   },
+   {
+    "K_offset_deg": 2.0,
+    "law_margin_min": 2.79,
+    "taken_margin_min": 5.25,
+    "taken_below5": 0,
+    "taken_out_of_prefix": 0,
+    "monotone": true
+   }
+  ],
+  "msub_min": 15.31,
+  "m3e_min": 5.11
+ },
+ "armgrav": {
+  "Mg_max_Nm": 11.42,
+  "tauK_abs_max_stretched": 4.68,
+  "open_load_max_stretched": 4.68,
+  "close_load_max_stretched": 2.63,
+  "tauK_abs_max_window": 6.53,
+  "open_load_max_window": 6.53
+ },
+ "drive": {
+  "V0 model ratio 1, r_h 2.49, MR63 roller": {
+   "spring": {
+    "F_rod_N": [
+     32.8,
+     51.8
+    ],
+    "F_follower_N": [
+     34.5,
+     45.1
+    ],
+    "J2_reflected_Nm": [
+     0.254,
+     0.3
+    ],
+    "J2_check_kK_tau": [
+     0.254,
+     0.299
+    ],
+    "hertz_MPa": 635.0,
+    "horn_pin_MPa": 73.0,
+    "post_root_MPa": 97.0,
+    "post_top_defl_um": 28.4,
+    "crank_root_MPa": 58.0
+   },
+   "spring+MVP1": {
+    "F_rod_N": [
+     46.4,
+     69.9
+    ],
+    "F_follower_N": [
+     48.1,
+     61.0
+    ],
+    "J2_reflected_Nm": [
+     0.359,
+     0.405
+    ],
+    "J2_check_kK_tau": [
+     0.359,
+     0.404
+    ],
+    "hertz_MPa": 738.0,
+    "horn_pin_MPa": 99.0,
+    "post_root_MPa": 130.0,
+    "post_top_defl_um": 38.3,
+    "crank_root_MPa": 79.0
+   }
+  },
+  "V0b r_h 2.49, base r 9 (model r_lobe)": {
+   "spring": {
+    "F_rod_N": [
+     32.8,
+     51.8
+    ],
+    "F_follower_N": [
+     37.5,
+     46.7
+    ],
+    "J2_reflected_Nm": [
+     0.254,
+     0.3
+    ],
+    "J2_check_kK_tau": [
+     0.254,
+     0.299
+    ],
+    "hertz_MPa": 649.0,
+    "horn_pin_MPa": 73.0,
+    "post_root_MPa": 97.0,
+    "post_top_defl_um": 28.4,
+    "crank_root_MPa": 58.0
+   },
+   "spring+MVP1": {
+    "F_rod_N": [
+     46.4,
+     69.9
+    ],
+    "F_follower_N": [
+     52.1,
+     63.1
+    ],
+    "J2_reflected_Nm": [
+     0.359,
+     0.406
+    ],
+    "J2_check_kK_tau": [
+     0.359,
+     0.404
+    ],
+    "hertz_MPa": 755.0,
+    "horn_pin_MPa": 99.0,
+    "post_root_MPa": 131.0,
+    "post_top_defl_um": 38.3,
+    "crank_root_MPa": 79.0
+   }
+  },
+  "V0s r_h 2.49, sliding O3 nose (rr 1.5)": {
+   "spring": {
+    "F_rod_N": [
+     32.8,
+     51.8
+    ],
+    "F_follower_N": [
+     38.8,
+     47.5
+    ],
+    "J2_reflected_Nm": [
+     0.254,
+     0.3
+    ],
+    "J2_check_kK_tau": [
+     0.254,
+     0.299
+    ],
+    "hertz_MPa": 796.0,
+    "horn_pin_MPa": 73.0,
+    "post_root_MPa": 97.0,
+    "post_top_defl_um": 28.4,
+    "crank_root_MPa": 58.0
+   },
+   "spring+MVP1": {
+    "F_rod_N": [
+     46.4,
+     69.9
+    ],
+    "F_follower_N": [
+     53.9,
+     64.2
+    ],
+    "J2_reflected_Nm": [
+     0.359,
+     0.406
+    ],
+    "J2_check_kK_tau": [
+     0.359,
+     0.404
+    ],
+    "hertz_MPa": 925.0,
+    "horn_pin_MPa": 99.0,
+    "post_root_MPa": 131.0,
+    "post_top_defl_um": 38.3,
+    "crank_root_MPa": 79.0
+   }
+  },
+  "V1 r_h 4.0, ratio 1": {
+   "spring": {
+    "F_rod_N": [
+     20.4,
+     32.9
+    ],
+    "F_follower_N": [
+     24.9,
+     28.6
+    ],
+    "J2_reflected_Nm": [
+     0.254,
+     0.3
+    ],
+    "J2_check_kK_tau": [
+     0.254,
+     0.299
+    ],
+    "hertz_MPa": 515.0,
+    "horn_pin_MPa": 46.0,
+    "post_root_MPa": 61.0,
+    "post_top_defl_um": 18.0,
+    "crank_root_MPa": 37.0
+   },
+   "spring+MVP1": {
+    "F_rod_N": [
+     28.8,
+     44.4
+    ],
+    "F_follower_N": [
+     34.4,
+     38.7
+    ],
+    "J2_reflected_Nm": [
+     0.359,
+     0.405
+    ],
+    "J2_check_kK_tau": [
+     0.359,
+     0.404
+    ],
+    "hertz_MPa": 598.0,
+    "horn_pin_MPa": 63.0,
+    "post_root_MPa": 83.0,
+    "post_top_defl_um": 24.3,
+    "crank_root_MPa": 50.0
+   }
+  },
+  "V2 r_h 4.0, crank 14.4 (ratio 1.6)": {
+   "spring": {
+    "F_rod_N": [
+     20.1,
+     37.7
+    ],
+    "F_follower_N": [
+     34.1,
+     50.9
+    ],
+    "J2_reflected_Nm": [
+     0.254,
+     0.3
+    ],
+    "J2_check_kK_tau": [
+     0.254,
+     0.299
+    ],
+    "hertz_MPa": 694.0,
+    "horn_pin_MPa": 53.0,
+    "post_root_MPa": 76.0,
+    "post_top_defl_um": 20.7,
+    "crank_root_MPa": 68.0
+   },
+   "spring+MVP1": {
+    "F_rod_N": [
+     28.4,
+     51.0
+    ],
+    "F_follower_N": [
+     48.1,
+     68.8
+    ],
+    "J2_reflected_Nm": [
+     0.359,
+     0.406
+    ],
+    "J2_check_kK_tau": [
+     0.359,
+     0.404
+    ],
+    "hertz_MPa": 806.0,
+    "horn_pin_MPa": 72.0,
+    "post_root_MPa": 103.0,
+    "post_top_defl_um": 27.9,
+    "crank_root_MPa": 92.0
+   }
+  },
+  "V3 r_h 5.0, crank 18 (ratio 2)": {
+   "spring": {
+    "F_rod_N": [
+     16.2,
+     34.1
+    ],
+    "F_follower_N": [
+     34.1,
+     55.7
+    ],
+    "J2_reflected_Nm": [
+     0.254,
+     0.301
+    ],
+    "J2_check_kK_tau": [
+     0.254,
+     0.299
+    ],
+    "hertz_MPa": 734.0,
+    "horn_pin_MPa": 48.0,
+    "post_root_MPa": 72.0,
+    "post_top_defl_um": 18.7,
+    "crank_root_MPa": 77.0
+   },
+   "spring+MVP1": {
+    "F_rod_N": [
+     22.9,
+     46.1
+    ],
+    "F_follower_N": [
+     48.2,
+     75.3
+    ],
+    "J2_reflected_Nm": [
+     0.358,
+     0.406
+    ],
+    "J2_check_kK_tau": [
+     0.359,
+     0.404
+    ],
+    "hertz_MPa": 853.0,
+    "horn_pin_MPa": 65.0,
+    "post_root_MPa": 98.0,
+    "post_top_defl_um": 25.3,
+    "crank_root_MPa": 104.0
+   }
+  }
+ },
+ "mvp2_rod_force_N_at_r_h_2.49": 2600.0
+}

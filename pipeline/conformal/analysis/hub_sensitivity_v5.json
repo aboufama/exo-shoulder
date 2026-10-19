@@ -1,0 +1,140 @@
+{
+ "design": {
+  "n": 3,
+  "az": 98.92799273521032,
+  "el": 69.44529513118657,
+  "a": [
+   72.23934699347542,
+   54.714630488635116
+  ],
+  "w": [
+   55.87416113637332,
+   -13.955840613299602
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   0
+  ],
+  "hm": 0.8928519809429056,
+  "_src": "search n3 seed 1351 rank 1 (fit score 0.414)"
+ },
+ "rows": [
+  {
+   "variant": "baseline (v4 plain bearings)",
+   "G10": {
+    "score": 0.357,
+    "follow": 0.935,
+    "in_band": 0.449,
+    "ceiling": 0.74,
+    "member_in_band": {
+     "member 1": 0.633,
+     "member 2": 0.14
+    }
+   },
+   "G14": {
+    "score": 0.465,
+    "follow": 0.935,
+    "in_band": 0.569,
+    "ceiling": 0.825,
+    "member_in_band": {
+     "member 1": 0.777,
+     "member 2": 0.222
+    }
+   }
+  },
+  {
+   "variant": "v5: drum hub R13",
+   "G10": {
+    "score": 0.308,
+    "follow": 0.853,
+    "in_band": 0.423,
+    "ceiling": 0.709,
+    "member_in_band": {
+     "member 1": 0.583,
+     "member 2": 0.147
+    }
+   },
+   "G14": {
+    "score": 0.413,
+    "follow": 0.857,
+    "in_band": 0.545,
+    "ceiling": 0.807,
+    "member_in_band": {
+     "member 1": 0.73,
+     "member 2": 0.225
+    }
+   }
+  },
+  {
+   "variant": "v5: 2x 6700 in the hub (hub 8.5)",
+   "G10": {
+    "score": 0.357,
+    "follow": 0.935,
+    "in_band": 0.449,
+    "ceiling": 0.74,
+    "member_in_band": {
+     "member 1": 0.633,
+     "member 2": 0.14
+    }
+   },
+   "G14": {
+    "score": 0.465,
+    "follow": 0.935,
+    "in_band": 0.569,
+    "ceiling": 0.825,
+    "member_in_band": {
+     "member 1": 0.777,
+     "member 2": 0.222
+    }
+   }
+  },
+  {
+   "variant": "v5: drum R13 + 6700 pair",
+   "G10": {
+    "score": 0.308,
+    "follow": 0.853,
+    "in_band": 0.423,
+    "ceiling": 0.709,
+    "member_in_band": {
+     "member 1": 0.583,
+     "member 2": 0.147
+    }
+   },
+   "G14": {
+    "score": 0.413,
+    "follow": 0.857,
+    "in_band": 0.545,
+    "ceiling": 0.807,
+    "member_in_band": {
+     "member 1": 0.73,
+     "member 2": 0.225
+    }
+   }
+  },
+  {
+   "variant": "v5 + ramp 60",
+   "G10": {
+    "score": 0.397,
+    "follow": 0.937,
+    "in_band": 0.496,
+    "ceiling": 0.714,
+    "member_in_band": {
+     "member 1": 0.642,
+     "member 2": 0.243
+    }
+   },
+   "G14": {
+    "score": 0.521,
+    "follow": 0.941,
+    "in_band": 0.632,
+    "ceiling": 0.811,
+    "member_in_band": {
+     "member 1": 0.745,
+     "member 2": 0.435
+    }
+   }
+  }
+ ]
+}

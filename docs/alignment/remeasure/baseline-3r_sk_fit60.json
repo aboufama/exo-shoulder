@@ -1,0 +1,74 @@
+{
+ "claim": {
+  "gap": 68.93,
+  "reach": 0.775,
+  "follow": 1.0,
+  "inband14": 0.4381,
+  "contact": 0.1024,
+  "audit": [
+   "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)"
+  ],
+  "inband_member": {
+   "hub1": 0.9956,
+   "hub2": 0.0,
+   "hub3": 0.132,
+   "link1": 0.7172,
+   "link2": 0.328,
+   "neck": 0.0146
+  },
+  "th": {
+   "min": 10.096,
+   "n": 184,
+   "lt5": 0,
+   "min_all_ok": 10.096
+  },
+  "secs": 1.1,
+  "samples": {
+   "hub1": 49,
+   "hub2": 49,
+   "hub3": 49,
+   "link1": 235,
+   "link2": 205,
+   "neck": 80
+  },
+  "prof_max": {
+   "hub1": 52.31,
+   "hub2": 107.37,
+   "hub3": 73.03
+  },
+  "taken_lt2": 24
+ },
+ "hub1": {
+  "gap": 68.93,
+  "reach": 0.775,
+  "inband14": 0.4381,
+  "contact": 0.1024,
+  "audit": [
+   "hub1: hub of J1 smaller than O20 (covers 0.57 of the disc, reaches 10.0 mm)"
+  ],
+  "taken_lt2": 34,
+  "taken": 184,
+  "prof_max": {
+   "hub1": 53.51,
+   "hub2": 107.37,
+   "hub3": 73.03
+  }
+ },
+ "all": {
+  "gap": 66.69,
+  "reach": 0.7875,
+  "inband14": 0.4383,
+  "contact": 0.0927,
+  "audit": [
+   "hub1: hub of J1 smaller than O20 (covers 0.57 of the disc, reaches 10.0 mm)",
+   "hub2: hub of J2 smaller than O20 (covers 2.08 of the disc, reaches 9.5 mm)"
+  ],
+  "taken_lt2": 36,
+  "taken": 186,
+  "prof_max": {
+   "hub1": 53.51,
+   "hub2": 102.25,
+   "hub3": 72.93
+  }
+ }
+}

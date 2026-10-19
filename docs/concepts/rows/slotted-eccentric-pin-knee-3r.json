@@ -1,0 +1,502 @@
+{
+ "id": "slotted-eccentric-pin-knee-3r",
+ "name": "Pin knee 3R with the eccentric slotted-lever J2 (moving fold boundary): inverted slot cam, O20 knee hub K slaved to q2",
+ "lens": "round14:lens 3 cell B (crest-pinknee-cx0) - eccentric + slot as a fold lever on the pin-knee chain",
+ "family": "offset 3R (skin-normal J3) + planar 2-pin cuff knee + slaved J2 eccentric (determined 4-revolute loop closed by a roller in a slot)",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "passive_translations": 0,
+ "status": "screened",
+ "t_ideated": "2026-10-16T05:47:46Z",
+ "t_screened": "2026-10-18T06:46:00Z",
+ "reach": 0.5188,
+ "follow": 0.7167,
+ "inband14": 0.6845,
+ "inband10": 0.3464,
+ "contact": 0.0382,
+ "gap": 86.82,
+ "v_reach": 0.4611,
+ "v_follow": 0.6818,
+ "v_inband14": 0.699,
+ "v_inband10": 0.3538,
+ "v_gap": 97.04,
+ "n_configs": 1747,
+ "model_file": "docs/concepts/models/slotted-eccentric-pin-knee-3r.py",
+ "doc": "docs/concepts/slotted-eccentric-pin-knee-3r.md",
+ "best_k": "E1-g13-3",
+ "best_params": {
+  "az": 93.9976,
+  "el": 58.4469,
+  "a1": 49.9579,
+  "wd": 68.3776,
+  "wa": -20.0988,
+  "Amin": 56.4817,
+  "Amax": 81.9072,
+  "w": 2.2735,
+  "sl": 0.9293,
+  "b": 24.3621,
+  "c": 73.2273,
+  "emax": 49.7455,
+  "sigma": -1,
+  "sk": 1,
+  "margin": 5.23
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 1,
+  "moving_bodies": 4,
+  "joints": 5,
+  "closed_loops": 1,
+  "sliding_pairs": 1,
+  "rolling_pairs": 4,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 11,
+  "catalogue_parts": 5,
+  "notes": "the pin-knee 3R chain (J1-J3 O20 v5 hubs, MR117-2RS pairs) with link 2 split at a passive knee K (O20 v5 stack, MR117-2RS pair; O20-only rule) slaved to q2 by an MR52ZZ roller on an O2 dowel in an arm of link 2b riding a 2 mm slotted track plate fixed to link 1 around hub 2 (the inverted, non-singular cam of slotted-eccentric-j2-3r). Bodies: link 1 (+ spoke + track), crank 2a, link 2b (+ roller arm + stud), member 3 (hub-3 lower plate + E strap); the cuff knee (pins a, b, knee link, arm pad) is recorded under cuff_knee. Joints: J1, J2, K, J3 revolutes + the roller-in-slot pair. One closed loop (link 1 - crank - 2b - roller/track) determines K (R17: nothing sags).",
+  "source": "docs/concepts/models/slotted-eccentric-pin-knee-3r.py:1-25 + docs/concepts/models/slotted-eccentric-j2-3r.py:1-25",
+  "confidence": "counted",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
+ },
+ "exact_frozen": {
+  "protocol": "fit Bench(60,160) fast at the 1 mm radial part-part rule, every level frozen, worn on Bench(110,360) exact (parent harness SE.frozen)",
+  "config": "D2-g9-0",
+  "fit": {
+   "gap": 115.07,
+   "reach": 0.4625,
+   "follow": 0.65,
+   "inband14": 0.5606,
+   "contact": 0.0738
+  },
+  "frozen": {
+   "gap": 117.68,
+   "reach": 0.4333,
+   "follow": 0.6545,
+   "inband14": 0.566,
+   "inband10": 0.3051,
+   "contact": 0.0806,
+   "closure": 0.6277,
+   "collide": 0.1593,
+   "gap_near1": 126.06,
+   "min_metal_skin": 0.08,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.0,
+    "n_clip": 10,
+    "follow": 0.0,
+    "n_taken": 0,
+    "inband14": null
+   },
+   "th_need": {
+    "p5": 26.3,
+    "p95": 144.2,
+    "kin_reach": 0.575
+   },
+   "window": [
+    66.5,
+    128.25
+   ],
+   "post_lift": {
+    "hub2": 0.85,
+    "hub3": 4.0,
+    "pinK": 7.01
+   },
+   "secs": 232.3
+  },
+  "paired_controls": {
+   "locked_at_D2g90_seats": {
+    "a2_64": {
+     "gap": 61.33,
+     "reach": 0.7188,
+     "follow": 1.0,
+     "inband14": 0.522,
+     "contact": 0.0541,
+     "collide": 0.0464,
+     "window": [
+      16.25,
+      111.75
+     ]
+    },
+    "a2_68": {
+     "gap": 55.09,
+     "reach": 0.7375,
+     "follow": 1.0,
+     "inband14": 0.5546,
+     "contact": 0.043,
+     "collide": 0.0412,
+     "window": [
+      20.25,
+      115.75
+     ]
+    },
+    "a2_72": {
+     "gap": 58.11,
+     "reach": 0.75,
+     "follow": 1.0,
+     "inband14": 0.5115,
+     "contact": 0.0426,
+     "collide": 0.0457,
+     "window": [
+      24.25,
+      119.75
+     ]
+    },
+    "a2_76": {
+     "gap": 64.19,
+     "reach": 0.75,
+     "follow": 0.95,
+     "inband14": 0.4716,
+     "contact": 0.0635,
+     "collide": 0.0455,
+     "window": [
+      28.25,
+      123.75
+     ]
+    },
+    "a2_80": {
+     "gap": 70.7,
+     "reach": 0.7375,
+     "follow": 0.9167,
+     "inband14": 0.4735,
+     "contact": 0.0847,
+     "collide": 0.0308,
+     "window": [
+      32.25,
+      127.75
+     ]
+    }
+   },
+   "note": "Bench(60,160) fast, same code (lock=1: link 2 rigid through K = the plain 3R); best control a2 68: 55.09 vs the eccentric 115.07 fast -> paired deficit +60.0 fast"
+  }
+ },
+ "gate": {
+  "n": 1750,
+  "gain_2nd_half": 24.24,
+  "gain_last_third": 23.91,
+  "top5_spread": 0.52,
+  "converged": false,
+  "best_index": 1388,
+  "unit": "score points; ordered history A + B + C + AUD + D1 / D2 / D3 (as before) then the second audit's AUD2 streams E1-E4 in file order; honest only; top-5 over distinct gaps; then audit 3's AUD3 stream (5 seat probes + F1 / F2 wide restarts) in file order",
+  "previous": {
+   "n": 1641,
+   "gain_2nd_half": 24.24,
+   "gain_last_third": 24.24,
+   "top5_spread": 0.52,
+   "best": "E1-g13-3 86.82"
+  },
+  "note": "audit 3 added 109 tries (86 honest), none better than 86.82; the 2nd-half rule needs n >= 2777 (about 1027 more no-gain tries), the last-third rule n >= 2082"
+ },
+ "complexity": 5.0,
+ "verdict": "DEATH AUDIT 3 2026-10-18 07:08-07:25 UTC: NOT REFUTED, status stays screened (far behind, no lead path; gate not converged, so not dead). E1-g13-3 reproduces 86.82 fast (frozen exact Bench(110,360) 97.04 from audit 2), 7.9 above the bar 78.93; two more wide restarts (sigma 1.0 / 0.8, 104 tries) gained nothing; at the H1 seats the slot does open the folded side (window [29.75, 124.25], kin reach 0.88) but collides on 201/201 closing poses, and an attribution-only ghost with every crossing exempted still reads 105.33 (track to 129 mm, L2b 0.08 in band). | SECOND DEATH AUDIT 2026-10-18 06:22-06:47 UTC: NOT REFUTED, status stays screened (far behind, no lead path). The re-dispatch's new basin was never refined: a local CMA from D2-g9-0 took it 115.07 -> 86.82 fast (E1-g13-3, score 68.43; reach 0.519, follow 0.717, ib14 0.685, contact 0.038) and frozen exact Bench(110,360) 97.04 (score 64.7; reach 0.461, follow 0.682, ib14 0.699, contact 0.062, near-touch 103.66, overhead 0/28). That is still 7.9 fast points short of the refutation bar (78.93) and 27.7 fast points behind its own locked control at the same seats (plain 3R a2 72: 59.15, reach 0.744, follow 1.0). Gate 24.24 / 24.24 / 0.52 (n 1641): the last 253 tries incl. two sigma-0.6 restarts gained nothing, so the basin has plateaued locally but the 2nd-half rule stays open. Previous verdict text kept in audit2.previous / the md.",
+ "limiter": "(re-dispatch, D2-g9-0) the slot's lock: the lock-held track spans only th [66.5, 128.25] (kinematic reach 0.575 big bench vs the locked control's window [20.25, 115.75]); the crank + K sweep q2's 201.5 deg around J2 and cross link 1, so the search lifts hub 2 / K / crank / L2b out of the band (0.19 / 0.36 / 0.23 / 0.19 in band; frozen post lift K 7.0 mm). | the eccentric's own metal around hub 2: the roller track must sit on link 1 in the annulus e = dist(J2, G) in [b - dG, b + dG] (dG >= 14.5 mm for the roller to clear K's boss), i.e. on the same circle the knee hub K sweeps (b >= 20 deg for two O20 hubs side by side) over a q2 span of 170-235 deg (the J2 interior angle sweeps ~0 -> 180 across any wide window); so K and the crank cross link 1, hub 1, the spoke and the track (top K6 pairs at H1: pinK|link1 137, link1|crank 132, hub1|pinK 123, pinK|trk 92 of 199 closing poses). Stacking them honestly makes hub 2 a 3-layer stack (link 1 + track + crank, K above): hub 2 lifts to 71 mm and leaves the band (0.00), crank 0.37, L2b 0.38. CMA escapes the collisions only by shrinking the lock-held track to th [74, 133.5] (kinematic reach 0.50 fast / 0.41 big, below the plain 0.775): overhead and rest poses fall outside the slot.",
+ "note": "Model = the parent's kit model (docs/concepts/models/slotted-eccentric-j2-3r.py, inverted cam, every check unchanged: K3 march, K2 dense incl. axes K and G, K6 with same-body exemption, honest posts, crowns + walls, declared pins, slot gate) at the pin-knee chain's J1 / J3 axis directions (H1: bvec(101.16, 63.90), J3 = the tilted d3 = wdir(78.55, -5.34), a1 41.02, a2 68.26), O20 enforced at K (rad 10, 12.25 mm), margin >= 5.23 (5 + K play), psi in [15, 165], lock >= 50 deg, b >= 20 deg - all hard box edges. Member 3 = the kit neck in both arms of every paired comparison: the eccentric's metal is upstream of member 3, so the cuff knee cannot change it. Sweep (local, farm closed, niced, 2 processes): A 113 (H1 two-sided start, stopped at 238.25), B 697 (parent-best start: 275 at O20 -> 153.49), C 113 (stretched-only start Amin 68: best honest 271, best 112.55 dishonest = every eccentric part lifted out of band, ib14 0.11, sparse samples) + 13 paired controls / probes. Gate 0 (slot_design, 432 law cells per seat): 217/432 pass at H1. Frozen exact of the best: fit at 1 mm part-part 188.47 -> Bench(110,360) exact 201.20 (closure 0.37, collide 0.55 of closing poses, min metal 0.09 mm, post lifts hub 2 0.85 / K 3.25 / hub 3 2.82 mm). Complexity v2.2 5.0 (closed loop 4 + track pair 1; slaved K and cuff knee 0). 0 passive translations, 3 active. What would be needed (unmeasured, judged not worth it): a cam whose track lies OUTSIDE K's sweep annulus (dG > b + 10 mm: a long roller arm, more metal over the deltoid) or a track under link 1's skin face (no room at 2-14 mm). | Re-dispatch 05:28-06:10 UTC: sweep appended as streams D1 (161 evaluations, 157 honest, best 149.91), D2 (97, 63 honest, best 115.07 = D2-g9-0, also 115.83 D2-g3-6), D3 (17, 11 honest, none better; slow gens ~150-300 s at box load 10-14). Frozen exact of D2-g9-0: fit at 1 mm 115.07 (no 0.5-1 mm part pair) -> 117.68 in 232 s. Lesson (predicts beyond this row): a slaved length-changing hinge inherits the swept angle of the body it rides on. Downstream of J2 (this row) the crank + K sweep q2's 170-235 deg relative to link 1 and must cross link 1 / hub 1 / the track; upstream of J2 on link 1 (the knuckle family: link 1a -> K -> link 1b -> J2, lead conecut-knee-knuckle-3r 18.28 verified) the slaved body turns only by the law's span (dK cap 57 deg) and link 2 keeps the plain 3R sweep.",
+ "audit": {
+  "t": "2026-10-18T02:08:00Z",
+  "refuted": false,
+  "bar": "honest gap <= 78.93 on Bench(60,160) fast",
+  "reproduced": {
+   "fast": 153.49,
+   "fit_1mm": 188.47,
+   "frozen_exact_Bench110_360": 201.2,
+   "note": "the model file unchanged; fast and frozen exact reproduce to the digit"
+  },
+  "gate": {
+   "agent": "8.51 / 0.00 / 2.61 (n 915, honest, file order) reproduced",
+   "combined": "5.97 / 0.00 / 2.49 (n 1014 incl. 99 audit configs; 424 configs since the best, no gain); the 2nd-half rule is still open, so the status stays screened"
+  },
+  "o20_attribution": "parent best (CMA E gen 13) through this model at margin 5.23: O10 knee 70.07 fast (inside the bar, but the plan rules it out, and it is the parent refuted at 115.21 frozen exact vs its control 46.60) vs O20 knee 209.85 (collide 0.88). The row's 'it is NOT the O20 rule' holds only at the H1 gate cells",
+  "missed_regions": "emax fixed at 40 in all streams: emax 50/64/80 at best 197.07 dishonest; knee branch sk=-1: 313-375; dG 40 (track outside K's sweep) 275; parent seats b 28/32/36 220.6/303.4/305.1; best b36 emax64 136.83 dishonest (ib14 0.25)",
+  "over_strict": "pinK carries no `over` list in the parent build (fitted at its own skin level, K6 counts every crossing of link 1); stacking pinK over link1+spoke+track: best 153.86, parent seats 160.72 (from 209.85), H1 gate cell 110.41 dishonest (ib14 0.30)",
+  "cma": "local continuation, sigma 0.5, emax freed, 81 evals (69 honest), best unchanged 153.49",
+  "reason": "at the O20 knee the knee hub, crank and track must cross link 1 / hub 1 over the slot's window: every honest variant reads >= 152 fast vs the 78.93 bar"
+ },
+ "previous_best": {
+  "best_k": "B-g47-2",
+  "best_params": {
+   "az": 85.4825,
+   "el": 59.0892,
+   "a1": 51.4594,
+   "wd": 79.8489,
+   "wa": -19.0564,
+   "Amin": 59.0335,
+   "Amax": 87.4236,
+   "w": 7.8251,
+   "sl": 1.0834,
+   "b": 28.3396,
+   "c": 81.6486,
+   "sigma": -1,
+   "sk": 1,
+   "margin": 5.23
+  },
+  "gap": 153.49,
+  "v_gap": 201.2,
+  "reach": 0.4,
+  "follow": 0.2333,
+  "inband14": 0.6306,
+  "contact": 0.0488
+ },
+ "exact_frozen_previous_best": {
+  "protocol": "fit Bench(60,160) fast at the 1 mm radial part-part rule, every level frozen, worn on Bench(110,360) exact (parent harness SE.frozen)",
+  "fit": {
+   "gap": 188.47,
+   "reach": 0.2375,
+   "follow": 0.0667,
+   "inband14": 0.6066,
+   "contact": 0.0455
+  },
+  "frozen": {
+   "gap": 201.2,
+   "reach": 0.1806,
+   "follow": 0.0545,
+   "inband14": 0.6042,
+   "inband10": 0.3623,
+   "contact": 0.1013,
+   "closure": 0.3745,
+   "collide": 0.5511,
+   "gap_near1": 222.88,
+   "min_metal_skin": 0.09,
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.0,
+    "n_clip": 10,
+    "follow": 0.2,
+    "n_taken": 2,
+    "inband14": 0.738
+   },
+   "th_need": {
+    "p5": 24.9,
+    "p95": 144.4,
+    "kin_reach": 0.4111
+   },
+   "window": [
+    74.0,
+    133.5
+   ],
+   "post_lift": {
+    "hub2": 0.85,
+    "hub3": 2.82,
+    "pinK": 3.25
+   }
+  },
+  "paired_controls": {
+   "control_at_best_seats_a2_66": {
+    "fit": 57.07,
+    "frozen": 58.53,
+    "reach": 0.7028,
+    "follow": 1.0,
+    "inband14": 0.549,
+    "contact": 0.0371,
+    "gap_near1": 64.51,
+    "overhead_ws": "6/28 (0.2143)"
+   },
+   "control_H1_directions_a2_68.26": {
+    "fit": 34.78,
+    "frozen": 36.83,
+    "reach": 0.6611,
+    "follow": 1.0,
+    "inband14": 0.8012,
+    "contact": 0.0306,
+    "gap_near1": 41.39,
+    "overhead_ws": "6/28 (0.2143)"
+   },
+   "paired_delta_frozen": "+142.67 at the best config's own seats, +164.37 vs the H1-direction control (same code, same protocol)"
+  }
+ },
+ "audit2": {
+  "time": "2026-10-18T06:22-06:47Z",
+  "by": "death auditor (did not build the model)",
+  "refuted": false,
+  "reproduction": "D2-g9-0 115.07 fast exactly (reach 0.4625, follow 0.65, ib14 0.5606, contact 0.0738, honest); gate 13.97 / 13.97 / 12.63 recomputed from the sweep",
+  "cma": "local, niced, OMP 1, <= 2 processes, model file unchanged: E1 sigma 0.3 from D2-g9-0 (185 evals, best E1-g13-3 86.82), E2 sigma 0.2 from E1-g2-4 (105, none better), E3 / E4 sigma 0.6 from E1-g13-3 (66, none better)",
+  "best_fast": {
+   "tag": "E1-g13-3",
+   "gap": 86.82,
+   "score": 68.43,
+   "reach": 0.5188,
+   "follow": 0.7167,
+   "inband14": 0.6845,
+   "inband10": 0.3464,
+   "contact": 0.0382,
+   "collide": 0.1603
+  },
+  "frozen_exact": {
+   "protocol": "model frozen mode: fit Bench(60,160) fast at the 1 mm radial part-part rule (89.42), every level frozen, worn on Bench(110,360) CB_EXACT=1",
+   "gap": 97.04,
+   "score": 64.71,
+   "reach": 0.4611,
+   "follow": 0.6818,
+   "inband14": 0.699,
+   "inband10": 0.3538,
+   "contact": 0.0623,
+   "gap_near1": 103.66,
+   "min_metal_skin": 0.24,
+   "overhead_ws_taken": "0/28",
+   "kin_reach": 0.6083,
+   "th_need_p5_p95": [
+    27.1,
+    143.2
+   ],
+   "window_fit": [
+    62.25,
+    125.75
+   ],
+   "q2_span": 203.8,
+   "slot_len_mm": 66.1,
+   "lock_full_run": 39.6,
+   "inband_member": {
+    "hub2": 0.8602,
+    "hub3": 0.5519,
+    "pinK": 0.5926,
+    "crank": 0.3564,
+    "L2b": 0.2261,
+    "armG": 0.7136,
+    "trk1": 0.5745
+   }
+  },
+  "paired_control_same_seats": {
+   "60": {
+    "gap": 61.13,
+    "reach": 0.7188,
+    "follow": 1.0,
+    "inband14": 0.503,
+    "contact": 0.0331,
+    "window": [
+     15.5,
+     104.5
+    ]
+   },
+   "64": {
+    "gap": 61.8,
+    "reach": 0.7188,
+    "follow": 1.0,
+    "inband14": 0.4963,
+    "contact": 0.0331,
+    "window": [
+     19.5,
+     108.5
+    ]
+   },
+   "68": {
+    "gap": 60.6,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.5125,
+    "contact": 0.0435,
+    "window": [
+     23.5,
+     112.5
+    ]
+   },
+   "72": {
+    "gap": 59.15,
+    "reach": 0.7438,
+    "follow": 1.0,
+    "inband14": 0.5023,
+    "contact": 0.0376,
+    "window": [
+     27.5,
+     116.5
+    ]
+   },
+   "76": {
+    "gap": 61.99,
+    "reach": 0.7375,
+    "follow": 0.95,
+    "inband14": 0.4967,
+    "contact": 0.0541,
+    "window": [
+     31.5,
+     120.5
+    ]
+   }
+  },
+  "paired_deficit_fast": 27.67,
+  "attribution_lock_min": {
+   "note": "ATTRIBUTION ONLY (the 50 deg lock is a round-14 hard edge): D2-g9-0 with the slot lock gate relaxed",
+   "lock_40": {
+    "gap": 120.62,
+    "honest": false,
+    "window": [
+     13.0,
+     128.5
+    ],
+    "reach": 0.5625,
+    "follow": 0.8167,
+    "inband14": 0.2561,
+    "contact": 0.0915
+   },
+   "lock_30": {
+    "gap": 113.68,
+    "honest": false,
+    "window": [
+     13.75,
+     128.5
+    ],
+    "reach": 0.5875,
+    "follow": 0.8167,
+    "inband14": 0.2682,
+    "contact": 0.0592
+   }
+  },
+  "previous": {
+   "best_k": "D2-g9-0",
+   "gap": 115.07,
+   "v_gap": 117.68
+  }
+ },
+ "audit3": {
+  "time": "2026-10-18T07:08-07:25Z",
+  "by": "death auditor 3 (did not build the model)",
+  "refuted": false,
+  "bar": "honest gap <= 78.93 on Bench(60,160) fast",
+  "reproduction": "E1-g13-3 86.82 fast exactly (reach 0.5188, follow 0.7167, ib14 0.6845, contact 0.0382, window [62.25, 125.75]); gate 24.24 / 24.24 / 0.52 (n 1641) recomputed; gap formula checked by hand (21.55 + 23.33 + 38.12 + 3.82)",
+  "seat_probes": {
+   "H1 seats + E1 law": "275.0 dishonest (sparse track sampling), window [26.5, 117.25]",
+   "H1 seats + E1 law shifted by a1 difference (+8.94)": "275.0 honest, window [29.75, 124.25], kin reach 0.881, collide 201/201 closing poses: hub1|trk2 201, pinK|link1 138, pinK|spoke 121, hub1|pinK 103, pinK|trk3 81; track to 129 mm from GH (9 segments)",
+   "H1 seats, a1 49.96": "275.19 dishonest",
+   "E1 seats, J3 at H1": "283.5",
+   "E1 seats, J1 at H1": "122.33 dishonest"
+  },
+  "ghost_attribution": {
+   "note": "ATTRIBUTION ONLY, never a claim: the H1-seat open-window config with K6 crossings exempted",
+   "track vs hub1 / armG exempted": {
+    "gap": 213.73,
+    "reach": 0.2313,
+    "follow": 0.1,
+    "inband14": 0.4545,
+    "contact": 0.1731,
+    "collide": 0.7413
+   },
+   "plus K and crank vs link1 / spoke / hub1 / track exempted": {
+    "gap": 105.33,
+    "reach": 0.6438,
+    "follow": 0.6667,
+    "inband14": 0.4754,
+    "contact": 0.0892,
+    "collide": 0.2189,
+    "inband_member": {
+     "hub2": 0.17,
+     "crank": 0.24,
+     "L2b": 0.08,
+     "trk6": 0.25,
+     "trk7": 0.03,
+     "trk8": 0.0,
+     "trk9": 0.03
+    }
+   }
+  },
+  "cma": "local, niced, OMP 1, 2 processes, model file unchanged, box load 9-18: F1 sigma 1.0 from E1-g13-3 (40 evals, best 107.18), F2 sigma 0.8 from D2-g9-0 (64 evals, best 184.07); emax free in both",
+  "reason": "the slot only opens the folded side of the window where its track runs 67-129 mm from GH and the knee hub crosses link 1 / hub 1: at the H1 seats the window is [29.75, 124.25] (kin reach 0.88) but every closing pose collides, and even with every crossing exempted the out-of-band track and L2b leave 105.33; the E1 basin plateaus at 86.82 (7.9 above the bar) after two more wide restarts"
+ }
+}

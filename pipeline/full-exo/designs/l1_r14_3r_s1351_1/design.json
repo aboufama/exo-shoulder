@@ -1,0 +1,28 @@
+{
+ "id": "l1_r14_3r_s1351_1",
+ "source": "pipeline/girdle/hug.py (L1 keep-out)",
+ "n_joints": 3,
+ "sliding_cuff": false,
+ "dof": 3,
+ "kinematics": {
+  "arch": "band design ../conformal/gpu_client/band_search_r14.json:0:1 (girdle-riding base)",
+  "b": [
+   98.92799273521032,
+   69.44529513118657
+  ],
+  "a1": 72.23934699347542,
+  "a2": 54.714630488635116,
+  "branch": -1,
+  "w": [
+   55.87416113637332,
+   -13.955840613299602
+  ]
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "spherical",
+  "note": "option A: the base rides the shoulder girdle; its error is acromion skin slip, not modelled"
+ },
+ "built_with": "L1 keep-out: cylinders + slabs, no fairing",
+ "note": "3R, offset axes"
+}

@@ -1,0 +1,435 @@
+{
+ "fit_fast": {
+  "gap": 13.62,
+  "reach": 0.7688,
+  "follow": 1.0,
+  "inband14": 0.895,
+  "inband10": 0.5127,
+  "contact": 0.0,
+  "extra": {
+   "n_taken": 183,
+   "closure_max_mm": 0.0,
+   "roller_lug_min_mm": 2.725,
+   "roller_lug_max_mm": 3.335,
+   "pa_crank_max": 29.5,
+   "pa_horn_max": 36.1,
+   "wrong_sense": 0,
+   "sp": -1.0,
+   "dK_sign_counts": {
+    "pos": 0,
+    "neg": 89,
+    "zero": 94
+   },
+   "poses_failing": 0,
+   "why_failing": {},
+   "poses_failing_ids": [],
+   "pa_lobe_real_max": 23.53,
+   "dK_taken_max_deg": 45.91,
+   "dK_lim_deg": 46.0,
+   "why_lim": "pressure_horn",
+   "drive_idle": false,
+   "corrected": {
+    "gap": 13.62,
+    "reach": 0.7688,
+    "follow": 1.0,
+    "inband14": 0.895,
+    "inband10": 0.5127,
+    "contact": 0.0
+   },
+   "pa_rule": {
+    "mu": 0.12,
+    "friction_deg": 6.84,
+    "cap_kin": 36.16,
+    "pa_eff_horn_max": 42.94,
+    "pa_eff_crank_max": 36.34
+   },
+   "at_pa45_friction": {
+    "poses_failing": 0,
+    "why_failing": {},
+    "corrected": {
+     "gap": 13.62,
+     "reach": 0.7688,
+     "follow": 1.0,
+     "inband14": 0.895,
+     "inband10": 0.5127,
+     "contact": 0.0
+    }
+   },
+   "th_margin": {
+    "min": 5.103,
+    "n": 183,
+    "lt5": 0,
+    "forced": 89,
+    "th_max_taken": 106.47,
+    "lowest": {
+     "own": 5.103,
+     "forced": true,
+     "kind": "ws",
+     "plane": 120.0,
+     "elev": 30.0,
+     "axial": -135.0
+    }
+   },
+   "nose": {
+    "nose_r": 1.25,
+    "n_steps": 919,
+    "k_range_deg": 45.9,
+    "undercut_points": 0,
+    "undercut_max_mm": 0.0,
+    "undercut_k_deg": [],
+    "vrel_min_mm_per_rad": 0.659,
+    "vrel_min_k_deg": 0.0,
+    "vrel_at_0": 0.659,
+    "vrel_at_end": 8.538,
+    "flank_rho_min_mm": 1.351,
+    "flank_rho_min_k_deg": 0.5,
+    "path_len_mm": 3.68,
+    "flank_len_mm": 5.09
+   },
+   "cam_claim": {
+    "dK_lim": 46.0,
+    "why_lim": "pressure_horn",
+    "pa_crank_max_taken": 29.5,
+    "pa_horn_max_taken": 36.1,
+    "pa_eff_horn": 42.9,
+    "pa_eff_crank": 36.3,
+    "pa_kin_max": 36.16,
+    "flank_rho_min": 1.4,
+    "clear_hubK_min": 1.31,
+    "clear_roll_hubK_min": 3.85,
+    "nose_r": 1.25,
+    "mu": 0.12
+   }
+  }
+ },
+ "frozen": {
+  "gap": 23.66,
+  "reach": 0.6807,
+  "follow": 1.0,
+  "inband14": 0.8943,
+  "inband10": 0.5148,
+  "contact": 0.0116
+ },
+ "mode": "exact",
+ "n": 1154,
+ "why": {
+  "fold": 262,
+  "slide": 32,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 10
+ },
+ "parts_pairs": {},
+ "parts_ib14": {
+  "hub1": [
+   0.999,
+   8.6,
+   80
+  ],
+  "hubK": [
+   0.99,
+   7.9,
+   80
+  ],
+  "hub2": [
+   0.951,
+   11.1,
+   80
+  ],
+  "hub3": [
+   0.734,
+   11.5,
+   80
+  ],
+  "E": [
+   0.966,
+   6.5,
+   104
+  ],
+  "boss": [
+   0.989,
+   8.5,
+   32
+  ],
+  "pad": [
+   1.0,
+   8.1,
+   32
+  ],
+  "knee": [
+   0.943,
+   10.8,
+   85
+  ],
+  "crank": [
+   0.816,
+   11.2,
+   129
+  ],
+  "roller": [
+   0.935,
+   10.0,
+   19
+  ],
+  "horn": [
+   0.955,
+   7.4,
+   23
+  ],
+  "L1a": [
+   0.979,
+   10.1,
+   8
+  ],
+  "L1b": [
+   0.932,
+   8.2,
+   36
+  ],
+  "L2": [
+   0.734,
+   12.0,
+   124
+  ]
+ },
+ "audit": {
+  "near_touch_min_mm": 0.33,
+  "near_touch_low": [
+   {
+    "mm": 0.33,
+    "i": 1106,
+    "kind": "ws",
+    "plane": 150.0,
+    "elev": 15.0,
+    "axial": -180.0
+   },
+   {
+    "mm": 0.49,
+    "i": 893,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 150.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 0.5,
+    "i": 1047,
+    "kind": "ws",
+    "plane": 135.0,
+    "elev": 15.0,
+    "axial": -165.0
+   },
+   {
+    "mm": 0.54,
+    "i": 663,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 90.0,
+    "axial": 45.0
+   },
+   {
+    "mm": 0.62,
+    "i": 978,
+    "kind": "ws",
+    "plane": 120.0,
+    "elev": 15.0,
+    "axial": -165.0
+   }
+  ],
+  "gap_near1": 26.76,
+  "near1_poses": 14,
+  "gap_near2": 36.97,
+  "near2_poses": 66,
+  "overhead140": {
+   "ws": 71,
+   "reach": 0.2535,
+   "clip": 19,
+   "follow": 1.0,
+   "inband14": 0.8963,
+   "inband10": 0.5701,
+   "why_not": {
+    "fold": 36,
+    "slide": 11,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 6
+   }
+  }
+ },
+ "extra": {
+  "n_taken": 850,
+  "closure_max_mm": 0.0,
+  "roller_lug_min_mm": 2.725,
+  "roller_lug_max_mm": 3.338,
+  "pa_crank_max": 29.5,
+  "pa_horn_max": 36.1,
+  "wrong_sense": 0,
+  "sp": -1.0,
+  "dK_sign_counts": {
+   "pos": 0,
+   "neg": 398,
+   "zero": 452
+  },
+  "poses_failing": 0,
+  "why_failing": {},
+  "poses_failing_ids": [],
+  "pa_lobe_real_max": 23.53,
+  "dK_taken_max_deg": 46.0,
+  "dK_lim_deg": 46.0,
+  "why_lim": "pressure_horn",
+  "drive_idle": false,
+  "corrected": {
+   "gap": 23.66,
+   "reach": 0.6807,
+   "follow": 1.0,
+   "inband14": 0.8943,
+   "inband10": 0.5148,
+   "contact": 0.0116
+  },
+  "pa_rule": {
+   "mu": 0.12,
+   "friction_deg": 6.84,
+   "cap_kin": 36.16,
+   "pa_eff_horn_max": 42.94,
+   "pa_eff_crank_max": 36.34
+  },
+  "at_pa45_friction": {
+   "poses_failing": 0,
+   "why_failing": {},
+   "corrected": {
+    "gap": 23.66,
+    "reach": 0.6807,
+    "follow": 1.0,
+    "inband14": 0.8943,
+    "inband10": 0.5148,
+    "contact": 0.0116
+   }
+  },
+  "th_margin": {
+   "min": 5.078,
+   "n": 850,
+   "lt5": 0,
+   "forced": 398,
+   "th_max_taken": 106.52,
+   "lowest": {
+    "own": 5.078,
+    "forced": true,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 15.0,
+    "axial": -150.0
+   }
+  },
+  "nose": {
+   "nose_r": 1.25,
+   "n_steps": 921,
+   "k_range_deg": 46.0,
+   "undercut_points": 0,
+   "undercut_max_mm": 0.0,
+   "undercut_k_deg": [],
+   "vrel_min_mm_per_rad": 0.659,
+   "vrel_min_k_deg": 0.0,
+   "vrel_at_0": 0.659,
+   "vrel_at_end": 8.555,
+   "flank_rho_min_mm": 1.351,
+   "flank_rho_min_k_deg": 0.5,
+   "path_len_mm": 3.69,
+   "flank_len_mm": 5.1
+  },
+  "cam_claim": {
+   "dK_lim": 46.0,
+   "why_lim": "pressure_horn",
+   "pa_crank_max_taken": 29.5,
+   "pa_horn_max_taken": 36.1,
+   "pa_eff_horn": 42.9,
+   "pa_eff_crank": 36.3,
+   "pa_kin_max": 36.16,
+   "flank_rho_min": 1.4,
+   "clear_hubK_min": 1.31,
+   "clear_roll_hubK_min": 3.85,
+   "nose_r": 1.25,
+   "mu": 0.12
+  }
+ },
+ "sidecar": {
+  "boss_level": 62.8,
+  "lev_L1b": 59.7,
+  "arm_tip_level": 63.0,
+  "g": 2.393,
+  "sig": 1.0,
+  "r_c": 15.37,
+  "beta": -176.68,
+  "arm_len": 53.3,
+  "arc_deg": 125.0,
+  "rssr_closed": true,
+  "pa_crank_rest": 29.5,
+  "pa_horn_rest": 23.2,
+  "vel_angle_rest": 2.1,
+  "pa_crank_max_taken": 29.5,
+  "pa_horn_max_taken": 36.1,
+  "flank_rho_min": 1.4,
+  "contact_r": [
+   14.9,
+   19.3
+  ],
+  "clear_hubK_min": 1.31,
+  "clear_roll_hubK_min": 3.85,
+  "clear_lowarm_lug_min": 16.07,
+  "n_lowarm": 32,
+  "phi_max_taken": 19.2,
+  "cprog": 0.0,
+  "crest_exact": 9.61,
+  "dK_lim": 46.0,
+  "why_lim": "pressure_horn",
+  "law_dK_max": 62.7,
+  "lug_r_max": 22.5,
+  "nose_r": 1.25,
+  "mu": 0.12,
+  "friction_deg": 6.84,
+  "pa_kin_max": 36.16,
+  "pa_eff_horn": 42.9,
+  "pa_eff_crank": 36.3
+ },
+ "min_clear_taken": 1.31,
+ "head": false,
+ "env": null,
+ "wear": "held",
+ "secs": 401.9,
+ "exact": true,
+ "params": {
+  "g": 2.3934,
+  "beta": -176.684,
+  "r_c": 15.3739,
+  "lift": 0.7882,
+  "hl": 1.9442,
+  "zr": 4.0293,
+  "s_arm": 4.0,
+  "r_lobe": 8.2661,
+  "nose_r": 1.25,
+  "az2": 45.8211,
+  "el2": 41.0855,
+  "lE": 67.832,
+  "phiE": -2.7863,
+  "lc": 21.1499,
+  "phib": -58.8084,
+  "a1max": 58.7678,
+  "kK": 2.1534,
+  "smhi": 16.8433,
+  "bk1": 26.0,
+  "bk2": 38.0336,
+  "mu": 0.12
+ },
+ "sets": [
+  "--set=nose_r=1.25",
+  "--set=mu=0.12"
+ ],
+ "audit_note": {
+  "by": "alignment auditor, hourly 2026-10-17 16:03 UTC",
+  "cmd": "SN_CELL=lead CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/verify/slipper-nose-knuckle-3r.py wear held <out> --set=nose_r=1.25 --set=mu=0.12 (verifier unchanged, local, 1 process, 402 s)",
+  "reading": "The built stock O2.5 nose (r 1.25) at mu 0.12, flank re-cut by the claim's own synthesis at PA_kin 36.16: held out 23.66 (r 1.25 at mu 0.087: 23.45, docs/concepts/verify/slipper-nose-knuckle-3r_v_held_r125.json). The horn cap shortens the stroke to dK 46.0 (taken max at mu 0.087 46.27): 2 more held-out poses to the fold (260 -> 262), reach 0.6828 -> 0.6807; contact, in-band, near-touch and overhead unchanged; th min 5.078. The row's 'holds its fast number to mu 0.12' was measured at nose_r 1.1839 on the bench; for the built r 1.25 it holds to about mu 0.1175 (tan(43 - 36.3)) held out. The lead's wear-test pass line mu <= 0.105 sits under both."
+ }
+}

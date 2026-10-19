@@ -1,0 +1,205 @@
+{
+ "id": "phi40-thinstack-relay-4r",
+ "kind": "audit diagnostic (not a claim, not used to move any number)",
+ "wear": "bench(110,360) exact, own prepare",
+ "question": "the thin shell (tsh 1.0) share of the verified gate: the pre-registered pick worn at tsh 1.5 (the parent family shell) vs tsh 1.0 (control)",
+ "model": "docs/concepts/models/phi40-thinstack-relay-4r.py UNCHANGED (prepare(BASE,110,360,exact=True); wear(S, dict(BASE, **pick.json) + override))",
+ "prepare_secs": 148.8,
+ "ideal": {
+  "gap": 13.01,
+  "reach": 0.8083,
+  "follow": 1.0,
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "contact": 0.0384
+ },
+ "pick": {
+  "carw": 14.0,
+  "pre": 0.0,
+  "ds": 31.0,
+  "delta": 3.5,
+  "coil": "lug",
+  "coilD": 12.0,
+  "coilL": 10.0,
+  "flange": 1,
+  "lean": 1,
+  "band": 8.0,
+  "bump": 1.2,
+  "tsh": 1.0,
+  "lbr": 1
+ },
+ "cells": [
+  {
+   "tag": "tsh1.5",
+   "override": {
+    "tsh": 1.5
+   },
+   "summary": {
+    "gate": 14.3,
+    "chain_only": 14.3,
+    "plain": 13.52,
+    "near1": 18.18,
+    "near2": 38.82,
+    "ibc": 0.8922,
+    "ib": 0.915,
+    "ib10": 0.566,
+    "reach": 0.8056,
+    "fol": 1.0,
+    "con": 0.0408,
+    "ncon": 17,
+    "jams": 0,
+    "ws_taken": 290,
+    "overhead": [
+     9,
+     28
+    ],
+    "R_t": 80.6,
+    "R_b": 83.2,
+    "shell_min": {
+     "i": 139,
+     "mm": 0.98,
+     "az_rel": -4.0
+    },
+    "hwc": [
+     [
+      459,
+      -13.85,
+      -2.5
+     ],
+     [
+      466,
+      -0.27,
+      -4.0
+     ]
+    ],
+    "ends": {
+     "-4": [
+      0.98,
+      139
+     ],
+     "+36": [
+      4.31,
+      201
+     ],
+     "+38": [
+      4.54,
+      201
+     ],
+     "+40": [
+      4.79,
+      201
+     ],
+     "+42": [
+      5.73,
+      201
+     ],
+     "+44": [
+      6.13,
+      201
+     ],
+     "+46": [
+      5.13,
+      451
+     ],
+     "+48": [
+      3.76,
+      214
+     ]
+    },
+    "conn": {
+     "dropped_relayed": 0,
+     "phi0_not_conn": 0,
+     "static_gap": 13.52
+    }
+   }
+  },
+  {
+   "tag": "control_tsh1.0",
+   "override": {},
+   "summary": {
+    "gate": 14.06,
+    "chain_only": 14.06,
+    "plain": 13.52,
+    "near1": 18.18,
+    "near2": 38.82,
+    "ibc": 0.8946,
+    "ib": 0.9169,
+    "ib10": 0.5765,
+    "reach": 0.8056,
+    "fol": 1.0,
+    "con": 0.0408,
+    "ncon": 17,
+    "jams": 0,
+    "ws_taken": 290,
+    "overhead": [
+     9,
+     28
+    ],
+    "R_t": 80.1,
+    "R_b": 82.7,
+    "shell_min": {
+     "i": 139,
+     "mm": 0.98,
+     "az_rel": -4.0
+    },
+    "hwc": [
+     [
+      459,
+      -13.78,
+      -4.0
+     ],
+     [
+      466,
+      -0.33,
+      -4.0
+     ]
+    ],
+    "ends": {
+     "-6": [
+      0.98,
+      139
+     ],
+     "-4": [
+      1.03,
+      139
+     ],
+     "+36": [
+      4.07,
+      201
+     ],
+     "+38": [
+      4.57,
+      201
+     ],
+     "+40": [
+      4.88,
+      201
+     ],
+     "+42": [
+      5.8,
+      201
+     ],
+     "+44": [
+      6.19,
+      201
+     ],
+     "+46": [
+      4.88,
+      214
+     ],
+     "+48": [
+      3.52,
+      451
+     ]
+    },
+    "conn": {
+     "dropped_relayed": 0,
+     "phi0_not_conn": 0,
+     "static_gap": 13.52
+    }
+   }
+  }
+ ],
+ "script": "\"\"\"Audit diagnostic (not a claim): the thin shell's share. Claim model UNCHANGED, own exact Bench(110,360) prepare,\nwear the pre-registered pick with tsh 1.5 (the parent's shell) and then tsh 1.0 (the pick, control).\"\"\"\nimport importlib.util, json, os, sys, time\nREPO = \"/home/user/exo-shoulder\"; sys.path.insert(0, os.path.join(REPO, \"tools\"))\nos.environ[\"CB_EXACT\"] = \"1\"\nsp = importlib.util.spec_from_file_location(\"phi40_aud\", os.path.join(REPO, \"docs/concepts/models/phi40-thinstack-relay-4r.py\"))\nOM = importlib.util.module_from_spec(sp); sp.loader.exec_module(OM)\nPICK = json.load(open(os.path.join(REPO, \"docs/concepts/verify/phi40-thinstack-relay-4r/pick.json\")))\nBASE = dict(OM.CLAIM_PARENT, **OM.HW0)\nout = sys.argv[1]; t0 = time.time()\nS = OM.prepare(BASE, 110, 360, exact=True)\nres = dict(prepared=round(time.time() - t0, 1), ideal=S[\"ideal\"], pick=PICK, cells=[])\njson.dump(res, open(out, \"w\"), indent=1); print(\"prepared\", res[\"prepared\"], flush=True)\nfor tag, ov in ((\"tsh1.5\", dict(tsh=1.5)), (\"control_tsh1.0\", {})):\n    hw = dict(BASE, **PICK.get(\"hw\", PICK)); hw.update(ov)\n    o = OM.wear(S, hw); s = OM.summary(o)\n    cell = dict(tag=tag, override=ov, summary=s, secs=round(time.time() - t0, 1))\n    res[\"cells\"].append(cell); json.dump(res, open(out, \"w\"), indent=1, default=str)\n    print(json.dumps(dict(tag=tag, gate=s.get(\"gate\"), plain=s.get(\"plain\"), ibc=s.get(\"ibc\"), reach=s.get(\"reach\"), ncon=s.get(\"ncon\"), jams=s.get(\"jams\"))), flush=True)\n",
+ "t": "2026-10-18T21:34Z"
+}

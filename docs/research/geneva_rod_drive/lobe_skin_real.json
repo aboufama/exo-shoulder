@@ -1,0 +1,831 @@
+{
+ "rise_mm": 3.5999999999999996,
+ "seconds": 1606,
+ "cands": {
+  "R0 real parts, no lobe fix (a_c 9, r_h 2.493)": {
+   "min_sd_mm": -0.091,
+   "where": [
+    "Raise overhead 78",
+    7.24,
+    12.68,
+    60.6
+   ],
+   "frames_under_2mm": 69,
+   "frames": 375,
+   "pass_0p3": false,
+   "raise_overhead_flank_min_mm": 0.4,
+   "raise_overhead_dwell_min_mm": 2.17,
+   "lobe": {
+    "profile_r": [
+     10.68,
+     12.682
+    ],
+    "profile_az": [
+     47.93,
+     60.63
+    ],
+    "past_skirt": 2.682,
+    "flank_to_roller_at_stopB": 0.076,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.68,
+    "lobe_r_end": 12.68,
+    "dK_end": null,
+    "pa_deg": [
+     10.8,
+     32.7
+    ],
+    "lift_mm": 2.267,
+    "rocker_turn_deg": 14.56,
+    "rod_cap_clear_min": 3.58,
+    "horn_arm_eff": [
+     1.785,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.6
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.23,
+     1.47
+    ]
+   }
+  },
+  "(i) stop B at dK 50": {
+   "min_sd_mm": -0.039,
+   "where": [
+    "Raise overhead 78",
+    7.24,
+    12.59,
+    59.9
+   ],
+   "frames_under_2mm": 69,
+   "frames": 375,
+   "pass_0p3": false,
+   "raise_overhead_flank_min_mm": 0.447,
+   "raise_overhead_dwell_min_mm": 2.187,
+   "lobe": {
+    "profile_r": [
+     10.68,
+     12.591
+    ],
+    "profile_az": [
+     47.93,
+     59.92
+    ],
+    "past_skirt": 2.591,
+    "flank_to_roller_at_stopB": 0.074,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.68,
+    "lobe_r_end": 12.59,
+    "dK_end": 49.92,
+    "pa_deg": [
+     12.7,
+     32.7
+    ],
+    "lift_mm": 2.267,
+    "rocker_turn_deg": 14.56,
+    "rod_cap_clear_min": 3.58,
+    "horn_arm_eff": [
+     1.785,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.6
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.23,
+     1.47
+    ]
+   }
+  },
+  "(i) stop B at dK 47": {
+   "min_sd_mm": 0.016,
+   "where": [
+    "Raise overhead 78",
+    7.91,
+    12.5,
+    59.3
+   ],
+   "frames_under_2mm": 69,
+   "frames": 375,
+   "pass_0p3": false,
+   "raise_overhead_flank_min_mm": 0.48,
+   "raise_overhead_dwell_min_mm": 2.181,
+   "lobe": {
+    "profile_r": [
+     10.68,
+     12.506
+    ],
+    "profile_az": [
+     47.93,
+     59.28
+    ],
+    "past_skirt": 2.506,
+    "flank_to_roller_at_stopB": 0.072,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.68,
+    "lobe_r_end": 12.51,
+    "dK_end": 46.74,
+    "pa_deg": [
+     14.4,
+     32.7
+    ],
+    "lift_mm": 2.267,
+    "rocker_turn_deg": 14.56,
+    "rod_cap_clear_min": 3.58,
+    "horn_arm_eff": [
+     1.785,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.6
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.23,
+     1.47
+    ]
+   }
+  },
+  "(i) stop B at dK 44": {
+   "min_sd_mm": 0.06,
+   "where": [
+    "Raise overhead 78",
+    7.91,
+    12.42,
+    58.7
+   ],
+   "frames_under_2mm": 69,
+   "frames": 375,
+   "pass_0p3": false,
+   "raise_overhead_flank_min_mm": 0.532,
+   "raise_overhead_dwell_min_mm": 2.169,
+   "lobe": {
+    "profile_r": [
+     10.68,
+     12.424
+    ],
+    "profile_az": [
+     47.93,
+     58.7
+    ],
+    "past_skirt": 2.424,
+    "flank_to_roller_at_stopB": 0.07,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.68,
+    "lobe_r_end": 12.42,
+    "dK_end": 43.88,
+    "pa_deg": [
+     15.9,
+     32.7
+    ],
+    "lift_mm": 2.267,
+    "rocker_turn_deg": 14.56,
+    "rod_cap_clear_min": 3.58,
+    "horn_arm_eff": [
+     1.785,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.6
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.23,
+     1.47
+    ]
+   }
+  },
+  "(i) stop B at dK 40": {
+   "min_sd_mm": 0.155,
+   "where": [
+    "Raise overhead 78",
+    8.75,
+    12.3,
+    57.8
+   ],
+   "frames_under_2mm": 67,
+   "frames": 375,
+   "pass_0p3": false,
+   "raise_overhead_flank_min_mm": 0.521,
+   "raise_overhead_dwell_min_mm": 2.198,
+   "lobe": {
+    "profile_r": [
+     10.68,
+     12.298
+    ],
+    "profile_az": [
+     47.93,
+     57.83
+    ],
+    "past_skirt": 2.298,
+    "flank_to_roller_at_stopB": 0.068,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.68,
+    "lobe_r_end": 12.3,
+    "dK_end": 39.75,
+    "pa_deg": [
+     18.0,
+     32.7
+    ],
+    "lift_mm": 2.267,
+    "rocker_turn_deg": 14.56,
+    "rod_cap_clear_min": 3.58,
+    "horn_arm_eff": [
+     1.785,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.6
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.23,
+     1.47
+    ]
+   }
+  },
+  "(i) stop B at dK 35": {
+   "min_sd_mm": 0.258,
+   "where": [
+    "Raise overhead 78",
+    8.75,
+    12.14,
+    56.8
+   ],
+   "frames_under_2mm": 65,
+   "frames": 375,
+   "pass_0p3": false,
+   "raise_overhead_flank_min_mm": 0.603,
+   "raise_overhead_dwell_min_mm": 2.192,
+   "lobe": {
+    "profile_r": [
+     10.68,
+     12.141
+    ],
+    "profile_az": [
+     47.93,
+     56.8
+    ],
+    "past_skirt": 2.141,
+    "flank_to_roller_at_stopB": 0.064,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.68,
+    "lobe_r_end": 12.14,
+    "dK_end": 34.98,
+    "pa_deg": [
+     20.3,
+     32.7
+    ],
+    "lift_mm": 2.267,
+    "rocker_turn_deg": 14.56,
+    "rod_cap_clear_min": 3.58,
+    "horn_arm_eff": [
+     1.785,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.6
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.23,
+     1.47
+    ]
+   }
+  },
+  "(iv) radial offset: dwell r 9.6": {
+   "min_sd_mm": 0.409,
+   "where": [
+    "Raise overhead 78",
+    7.05,
+    12.2,
+    61.4
+   ],
+   "frames_under_2mm": 65,
+   "frames": 375,
+   "pass_0p3": true,
+   "raise_overhead_flank_min_mm": 0.896,
+   "raise_overhead_dwell_min_mm": 2.169,
+   "lobe": {
+    "profile_r": [
+     10.186,
+     12.207
+    ],
+    "profile_az": [
+     48.27,
+     61.34
+    ],
+    "past_skirt": 2.207,
+    "flank_to_roller_at_stopB": 0.076,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.19,
+    "lobe_r_end": 12.21,
+    "dK_end": null,
+    "pa_deg": [
+     14.1,
+     35.9
+    ],
+    "lift_mm": 2.277,
+    "rocker_turn_deg": 14.56,
+    "rod_cap_clear_min": 3.58,
+    "horn_arm_eff": [
+     1.785,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.6
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.27,
+     1.49
+    ]
+   }
+  },
+  "(iv) radial offset: dwell r 9.1": {
+   "min_sd_mm": 0.902,
+   "where": [
+    "Raise overhead 78",
+    7.02,
+    11.72,
+    61.9
+   ],
+   "frames_under_2mm": 59,
+   "frames": 375,
+   "pass_0p3": true,
+   "raise_overhead_flank_min_mm": 1.421,
+   "raise_overhead_dwell_min_mm": 2.179,
+   "lobe": {
+    "profile_r": [
+     9.688,
+     11.726
+    ],
+    "profile_az": [
+     48.48,
+     61.99
+    ],
+    "past_skirt": 1.726,
+    "flank_to_roller_at_stopB": 0.075,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 9.69,
+    "lobe_r_end": 11.73,
+    "dK_end": null,
+    "pa_deg": [
+     17.5,
+     39.2
+    ],
+    "lift_mm": 2.28,
+    "rocker_turn_deg": 14.56,
+    "rod_cap_clear_min": 3.58,
+    "horn_arm_eff": [
+     1.785,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.6
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.31,
+     1.51
+    ]
+   }
+  },
+  "(iv) phase: mirrored follower (side -1)": {
+   "min_sd_mm": 2.255,
+   "where": [
+    "Raise overhead 78",
+    8.75,
+    10.1,
+    53.4
+   ],
+   "frames_under_2mm": 0,
+   "frames": 375,
+   "pass_0p3": true,
+   "raise_overhead_flank_min_mm": 7.423,
+   "raise_overhead_dwell_min_mm": 2.255,
+   "lobe": {
+    "profile_r": [
+     10.515,
+     12.762
+    ],
+    "profile_az": [
+     -21.88,
+     -5.79
+    ],
+    "past_skirt": 2.762,
+    "flank_to_roller_at_stopB": 0.078,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.51,
+    "lobe_r_end": 12.76,
+    "dK_end": null,
+    "pa_deg": [
+     26.5,
+     38.2
+    ],
+    "lift_mm": 2.321,
+    "rocker_turn_deg": 14.91,
+    "rod_cap_clear_min": 3.6,
+    "horn_arm_eff": [
+     1.914,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.5
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.34,
+     1.53
+    ]
+   }
+  },
+  "(v) thinner band 6.65-8.75 (2.1)": {
+   "min_sd_mm": -0.094,
+   "where": [
+    "Raise overhead 78",
+    7.06,
+    12.67,
+    60.6
+   ],
+   "frames_under_2mm": 69,
+   "frames": 375,
+   "pass_0p3": false,
+   "raise_overhead_flank_min_mm": 0.457,
+   "raise_overhead_dwell_min_mm": 2.198,
+   "lobe": {
+    "profile_r": [
+     10.68,
+     12.682
+    ],
+    "profile_az": [
+     47.93,
+     60.63
+    ],
+    "past_skirt": 2.682,
+    "flank_to_roller_at_stopB": 0.076,
+    "band": [
+     6.65,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.68,
+    "lobe_r_end": 12.68,
+    "dK_end": null,
+    "pa_deg": [
+     10.8,
+     32.7
+    ],
+    "lift_mm": 2.267,
+    "rocker_turn_deg": 14.56,
+    "rod_cap_clear_min": 3.58,
+    "horn_arm_eff": [
+     1.785,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.6
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.23,
+     1.47
+    ]
+   }
+  },
+  "(v) thinner band 7.15-8.75 (1.6)": {
+   "min_sd_mm": -0.096,
+   "where": [
+    "Raise overhead 78",
+    7.15,
+    12.68,
+    60.6
+   ],
+   "frames_under_2mm": 69,
+   "frames": 375,
+   "pass_0p3": false,
+   "raise_overhead_flank_min_mm": 0.378,
+   "raise_overhead_dwell_min_mm": 2.176,
+   "lobe": {
+    "profile_r": [
+     10.68,
+     12.682
+    ],
+    "profile_az": [
+     47.93,
+     60.63
+    ],
+    "past_skirt": 2.682,
+    "flank_to_roller_at_stopB": 0.076,
+    "band": [
+     7.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.68,
+    "lobe_r_end": 12.68,
+    "dK_end": null,
+    "pa_deg": [
+     10.8,
+     32.7
+    ],
+    "lift_mm": 2.267,
+    "rocker_turn_deg": 14.56,
+    "rod_cap_clear_min": 3.58,
+    "horn_arm_eff": [
+     1.785,
+     2.425
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.18,
+     1.6
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.23,
+     1.47
+    ]
+   }
+  },
+  "(iii) crank 12, horn r 2.0": {
+   "min_sd_mm": 0.931,
+   "where": [
+    "Raise overhead 78",
+    8.07,
+    11.56,
+    59.3
+   ],
+   "frames_under_2mm": 57,
+   "frames": 375,
+   "pass_0p3": true,
+   "raise_overhead_flank_min_mm": 1.21,
+   "raise_overhead_dwell_min_mm": 2.159,
+   "lobe": {
+    "profile_r": [
+     10.356,
+     11.567
+    ],
+    "profile_az": [
+     45.3,
+     59.43
+    ],
+    "past_skirt": 1.567,
+    "flank_to_roller_at_stopB": 0.048,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.36,
+    "lobe_r_end": 11.57,
+    "dK_end": null,
+    "pa_deg": [
+     6.5,
+     21.5
+    ],
+    "lift_mm": 1.351,
+    "rocker_turn_deg": 8.63,
+    "rod_cap_clear_min": 3.89,
+    "horn_arm_eff": [
+     1.344,
+     1.956
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.46,
+     2.13
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.9,
+     2.58
+    ]
+   }
+  },
+  "(iii) crank 13, horn r 2.0": {
+   "min_sd_mm": 1.046,
+   "where": [
+    "Raise overhead 78",
+    8.16,
+    11.43,
+    59.1
+   ],
+   "frames_under_2mm": 57,
+   "frames": 375,
+   "pass_0p3": true,
+   "raise_overhead_flank_min_mm": 1.309,
+   "raise_overhead_dwell_min_mm": 2.183,
+   "lobe": {
+    "profile_r": [
+     10.324,
+     11.436
+    ],
+    "profile_az": [
+     44.94,
+     59.2
+    ],
+    "past_skirt": 1.436,
+    "flank_to_roller_at_stopB": 0.045,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.32,
+    "lobe_r_end": 11.44,
+    "dK_end": null,
+    "pa_deg": [
+     5.8,
+     20.2
+    ],
+    "lift_mm": 1.24,
+    "rocker_turn_deg": 7.91,
+    "rod_cap_clear_min": 4.0,
+    "horn_arm_eff": [
+     1.31,
+     1.96
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.46,
+     2.19
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     2.04,
+     2.86
+    ]
+   }
+  },
+  "(iii) crank 14, horn r 2.493": {
+   "min_sd_mm": 0.864,
+   "where": [
+    "Raise overhead 78",
+    8.0,
+    11.62,
+    59.1
+   ],
+   "frames_under_2mm": 59,
+   "frames": 375,
+   "pass_0p3": true,
+   "raise_overhead_flank_min_mm": 1.148,
+   "raise_overhead_dwell_min_mm": 2.19,
+   "lobe": {
+    "profile_r": [
+     10.393,
+     11.636
+    ],
+    "profile_az": [
+     45.69,
+     59.41
+    ],
+    "past_skirt": 1.636,
+    "flank_to_roller_at_stopB": 0.05,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.39,
+    "lobe_r_end": 11.64,
+    "dK_end": null,
+    "pa_deg": [
+     6.2,
+     23.1
+    ],
+    "lift_mm": 1.419,
+    "rocker_turn_deg": 9.06,
+    "rod_cap_clear_min": 4.14,
+    "horn_arm_eff": [
+     1.579,
+     2.449
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.17,
+     1.81
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     1.79,
+     2.55
+    ]
+   }
+  },
+  "(iii) crank 14, horn r 1.8": {
+   "min_sd_mm": 1.26,
+   "where": [
+    "Raise overhead 78",
+    8.37,
+    11.19,
+    58.6
+   ],
+   "frames_under_2mm": 53,
+   "frames": 375,
+   "pass_0p3": true,
+   "raise_overhead_flank_min_mm": 1.483,
+   "raise_overhead_dwell_min_mm": 2.17,
+   "lobe": {
+    "profile_r": [
+     10.263,
+     11.198
+    ],
+    "profile_az": [
+     44.15,
+     58.79
+    ],
+    "past_skirt": 1.198,
+    "flank_to_roller_at_stopB": 0.038,
+    "band": [
+     6.15,
+     8.75
+    ],
+    "valid": true
+   },
+   "drive": {
+    "lobe_r_onset": 10.26,
+    "lobe_r_end": 11.2,
+    "dK_end": null,
+    "pa_deg": [
+     4.8,
+     17.2
+    ],
+    "lift_mm": 1.032,
+    "rocker_turn_deg": 6.58,
+    "rod_cap_clear_min": 4.12,
+    "horn_arm_eff": [
+     1.151,
+     1.768
+    ],
+    "dK_per_0.05mm_rod_deg": [
+     1.62,
+     2.49
+    ],
+    "dK_per_0.05mm_lobe_deg": [
+     2.4,
+     3.5
+    ]
+   }
+  }
+ }
+}

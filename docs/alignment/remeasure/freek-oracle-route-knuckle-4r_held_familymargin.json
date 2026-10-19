@@ -1,0 +1,70 @@
+{
+ "wear": "held",
+ "n_taken": 887,
+ "own_min_taken": 0.317,
+ "states_taken": {
+  "0": 660,
+  "1": 173,
+  "2": 54
+ },
+ "taken_own_lt5": 6,
+ "taken_own_lt5p5": 6,
+ "taken_kin_refused": 6,
+ "lt5": [
+  {
+   "i": 12,
+   "kind": "clip",
+   "state": 2,
+   "own": 0.32,
+   "plane": 30.0,
+   "elev": 145.80648803710938,
+   "axial": -59.14418029785156
+  },
+  {
+   "i": 21,
+   "kind": "clip",
+   "state": 2,
+   "own": 0.32,
+   "plane": 30.0,
+   "elev": 145.80648803710938,
+   "axial": -59.14418029785156
+  },
+  {
+   "i": 11,
+   "kind": "clip",
+   "state": 2,
+   "own": 0.76,
+   "plane": 30.0,
+   "elev": 142.3291778564453,
+   "axial": -58.43452453613281
+  },
+  {
+   "i": 86,
+   "kind": "clip",
+   "state": 2,
+   "own": 1.93,
+   "plane": 70.30000305175781,
+   "elev": 137.8000030517578,
+   "axial": -63.54999923706055
+  },
+  {
+   "i": 99,
+   "kind": "clip",
+   "state": 2,
+   "own": 4.05,
+   "plane": 75.75421142578125,
+   "elev": 136.3162384033203,
+   "axial": -65.2906723022461
+  },
+  {
+   "i": 91,
+   "kind": "clip",
+   "state": 2,
+   "own": 4.28,
+   "plane": 73.8067626953125,
+   "elev": 140.18280029296875,
+   "axial": -65.14602661132812
+  }
+ ],
+ "note": "own = RM.kin_nodes margin (forced states: min(dmargin(th, b1, angle(jK, j3)), dmargin(th, a1e, a2e)); state A: dmargin(th, a1, a2)); taken = the connected per-pose dump of this adapter"
+}

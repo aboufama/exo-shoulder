@@ -1,0 +1,47 @@
+[
+ {
+  "tag": "ibc-longdyad-env-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim env held docs/research/inband_env_polish/picks/longdyad_report.json docs/research/inband_env_polish/farm/claim_longdyad_env_held.json > docs/research/inband_env_polish/farm/claim_longdyad_env_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_longdyad_env_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_longdyad_env_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-longdyad-fit60-bench",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 bench docs/research/inband_env_polish/picks/longdyad_report.json docs/research/inband_env_polish/farm/claim_longdyad_fit60_bench.json > docs/research/inband_env_polish/farm/claim_longdyad_fit60_bench.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_longdyad_fit60_bench.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_longdyad_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "ibc-longdyad-fit60-held",
+  "cmd": "mkdir -p docs/research/inband_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/inband_env_polish.py claim fit60 held docs/research/inband_env_polish/picks/longdyad_report.json docs/research/inband_env_polish/farm/claim_longdyad_fit60_held.json > docs/research/inband_env_polish/farm/claim_longdyad_fit60_held.log 2>&1; tail -c 1500 docs/research/inband_env_polish/farm/claim_longdyad_fit60_held.log",
+  "out": [
+   "docs/research/inband_env_polish/farm/claim_longdyad_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "CB_QUIET_EXACT": "1"
+  },
+  "timeout": 3300
+ }
+]

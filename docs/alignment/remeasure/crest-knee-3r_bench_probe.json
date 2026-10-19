@@ -1,0 +1,269 @@
+{
+ "design": "crest-knee-3r",
+ "wear": "bench",
+ "params_key": "best_params_joggle",
+ "model_class": "JogModel",
+ "model_frozen": {
+  "gap": 31.5,
+  "reach": 0.6278,
+  "follow": 1.0,
+  "inband14": 0.8719,
+  "inband10": 0.4475,
+  "contact": 0.0147
+ },
+ "probe": {
+  "n": 470,
+  "mode": "exact",
+  "scored": {
+   "reach": 0.6278,
+   "follow": 1.0,
+   "inband14": 0.8719,
+   "inband10": 0.4475,
+   "contact": 0.0147,
+   "mode": "exact",
+   "gap": 31.5
+  },
+  "clip_scored": {
+   "n": 110,
+   "taken": 110,
+   "share_taken": 1.0,
+   "inband14": 0.8719,
+   "inband10": 0.4475,
+   "below2": 0.0012,
+   "over14": 0.1269,
+   "over20": 0.0108,
+   "d_median": 10.39,
+   "d_p95": 16.89,
+   "d_max": 27.54,
+   "pose_p95_median": 13.88,
+   "pose_p95_max": 21.38,
+   "poses_floor_lt1": 4,
+   "poses_floor_lt2": 19,
+   "poses_floor_lt3": 28,
+   "share_floor_lt2": 0.1727,
+   "floor_hist_mm": {
+    "0-1": 4,
+    "1-2": 15,
+    "2-3": 9,
+    "3-4": 14,
+    "4-6": 19,
+    "6-10": 49,
+    "10-99": 0
+   }
+  },
+  "ws_unscored": {
+   "n": 360,
+   "taken": 226,
+   "share_taken": 0.6278,
+   "inband14": 0.8174,
+   "inband10": 0.4348,
+   "below2": 0.001,
+   "over14": 0.1817,
+   "over20": 0.0183,
+   "d_median": 10.55,
+   "d_p95": 17.64,
+   "d_max": 29.95,
+   "pose_p95_median": 14.29,
+   "pose_p95_max": 27.12,
+   "poses_floor_lt1": 2,
+   "poses_floor_lt2": 15,
+   "poses_floor_lt3": 47,
+   "share_floor_lt2": 0.0664,
+   "floor_hist_mm": {
+    "0-1": 2,
+    "1-2": 13,
+    "2-3": 32,
+    "3-4": 28,
+    "4-6": 89,
+    "6-10": 62,
+    "10-99": 0
+   }
+  },
+  "ws_overhead140": {
+   "n": 28,
+   "taken": 7,
+   "share_taken": 0.25,
+   "inband14": 0.9439,
+   "inband10": 0.7016,
+   "below2": 0.0242,
+   "over14": 0.0318,
+   "over20": 0.0007,
+   "d_median": 7.48,
+   "d_p95": 13.43,
+   "d_max": 22.4,
+   "pose_p95_median": 12.63,
+   "pose_p95_max": 14.78,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 7,
+   "share_floor_lt2": 0.7143,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 4,
+    "2-3": 2,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "clip_overhead140": {
+   "n": 10,
+   "taken": 10,
+   "share_taken": 1.0,
+   "inband14": 0.9537,
+   "inband10": 0.5719,
+   "below2": 0.0034,
+   "over14": 0.0429,
+   "over20": 0.0027,
+   "d_median": 9.38,
+   "d_p95": 13.77,
+   "d_max": 22.43,
+   "pose_p95_median": 14.01,
+   "pose_p95_max": 14.38,
+   "poses_floor_lt1": 4,
+   "poses_floor_lt2": 10,
+   "poses_floor_lt3": 10,
+   "share_floor_lt2": 1.0,
+   "floor_hist_mm": {
+    "0-1": 4,
+    "1-2": 6,
+    "2-3": 0,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_elev90_140": {
+   "n": 85,
+   "taken": 27,
+   "share_taken": 0.3176,
+   "inband14": 0.8142,
+   "inband10": 0.5034,
+   "below2": 0.0006,
+   "over14": 0.1852,
+   "over20": 0.031,
+   "d_median": 9.97,
+   "d_p95": 18.44,
+   "d_max": 29.95,
+   "pose_p95_median": 14.5,
+   "pose_p95_max": 27.12,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 16,
+   "share_floor_lt2": 0.1852,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 5,
+    "2-3": 11,
+    "3-4": 2,
+    "4-6": 9,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_below90": {
+   "n": 247,
+   "taken": 192,
+   "share_taken": 0.7773,
+   "inband14": 0.8132,
+   "inband10": 0.4155,
+   "below2": 0.0002,
+   "over14": 0.1866,
+   "over20": 0.0172,
+   "d_median": 10.71,
+   "d_p95": 17.63,
+   "d_max": 29.77,
+   "pose_p95_median": 14.34,
+   "pose_p95_max": 23.34,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 24,
+   "share_floor_lt2": 0.026,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 4,
+    "2-3": 19,
+    "3-4": 26,
+    "4-6": 80,
+    "6-10": 62,
+    "10-99": 0
+   }
+  },
+  "ws_reach_by_elev": {
+   "0-60": [
+    156,
+    172
+   ],
+   "60-90": [
+    36,
+    75
+   ],
+   "90-120": [
+    16,
+    51
+   ],
+   "120-140": [
+    11,
+    34
+   ],
+   "140-160": [
+    5,
+    13
+   ],
+   "160-200": [
+    2,
+    15
+   ]
+  },
+  "contact_poses": [
+   {
+    "mm": -1.96,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -60.0
+   },
+   {
+    "mm": -1.68,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 75.0,
+    "axial": 15.0
+   },
+   {
+    "mm": -0.82,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 165.0,
+    "axial": -75.0
+   },
+   {
+    "mm": -0.36,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 75.0,
+    "axial": 15.0
+   },
+   {
+    "mm": -0.33,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": -60.0
+   }
+  ],
+  "ws_overhead_why_not": {
+   "fold": 10,
+   "contact": 3,
+   "j3stop": 8
+  }
+ },
+ "bench_key": "14f156cb6fc8",
+ "n": 470,
+ "secs": 163.6,
+ "exact": true,
+ "git": "05eab63",
+ "note": "tools/alignment_crest_knee_joggle_adapter.py: same worn (M, B) as the remeasure file; joggle cell (kj=1)"
+}

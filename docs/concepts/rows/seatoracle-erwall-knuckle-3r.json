@@ -1,0 +1,185 @@
+{
+ "id": "seatoracle-erwall-knuckle-3r",
+ "name": "Seat oracle at the second wall: free-K bound at the lead's seats with a long stop B and with J1 slid forward along the acromion top (INSTRUMENT, never a claim)",
+ "lens": "round105:B er-wall-seat-oracle (instrument row; take-bound table cells)",
+ "family": "knuckle (k33 skinnormal-shortk / minarc kitrule harness, free-K oracle v2b)",
+ "active_dof": 3,
+ "passive_dof": 2,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-18T11:47:18Z",
+ "reach": 0.7694,
+ "follow": 1.0,
+ "inband14": 0.8862,
+ "inband10": 0.5527,
+ "contact": 0.0325,
+ "gap": 17.69,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 10,
+ "bench": "Bench(110,360) exact, fit Bench(60,160) fast, frozen shape, CB_FOLD_MARGIN 5.5, oracle NSR 7, connected = the cell's own kinematic flood",
+ "cells": {
+  "L0": {
+   "kit": 174.65,
+   "oracle_static": 165.18,
+   "oracle_connected": 221.45,
+   "near_connected": 225.18,
+   "ws_taken_connected": 2,
+   "contacts": 13,
+   "ib14": 0.8509,
+   "ib10": 0.6445,
+   "follow": 0.1273,
+   "reach_connected": 0.0056,
+   "moved": 52,
+   "min_mm": 0.006,
+   "lost_ws": {
+    "parts": 192,
+    "fold": 60,
+    "slide": 10
+   },
+   "overhead_ws_taken": 2,
+   "overhead_ws_contact": 2,
+   "min_th_margin": 4.013
+  },
+  "L0b": {
+   "kit": 18.26,
+   "oracle_static": 17.69,
+   "oracle_connected": 17.69,
+   "near_connected": 22.11,
+   "ws_taken_connected": 277,
+   "contacts": 13,
+   "ib14": 0.8862,
+   "ib10": 0.5527,
+   "follow": 1.0,
+   "reach_connected": 0.7694,
+   "moved": 26,
+   "min_mm": 0.052,
+   "lost_ws": {
+    "fold": 60,
+    "slide": 8,
+    "parts": 2
+   },
+   "overhead_ws_taken": 9,
+   "overhead_ws_contact": 5,
+   "min_th_margin": 5.5
+  },
+  "C0": {
+   "kit": 19.71,
+   "oracle_static": 18.83,
+   "oracle_connected": 20.52,
+   "near_connected": 22.16,
+   "ws_taken_connected": 255,
+   "contacts": 5,
+   "ib14": 0.9128,
+   "ib10": 0.5785,
+   "follow": 1.0,
+   "reach_connected": 0.7083,
+   "moved": 39,
+   "min_mm": 0.056,
+   "lost_ws": {
+    "fold": 87,
+    "slide": 7
+   },
+   "overhead_ws_taken": 8,
+   "overhead_ws_contact": 3,
+   "min_th_margin": 5.5
+  },
+  "S1": {
+   "kit": 22.9,
+   "oracle_static": 21.73,
+   "oracle_connected": 21.73,
+   "near_connected": 26.47,
+   "ws_taken_connected": 272,
+   "contacts": 27,
+   "ib14": 0.8986,
+   "ib10": 0.51,
+   "follow": 0.9455,
+   "reach_connected": 0.7556,
+   "moved": 32,
+   "min_mm": 0.469,
+   "lost_ws": {
+    "fold": 59,
+    "slide": 8
+   },
+   "overhead_ws_taken": 5,
+   "overhead_ws_contact": 9,
+   "min_th_margin": 5.5
+  },
+  "S2": {
+   "kit": 24.54,
+   "oracle_static": 22.91,
+   "oracle_connected": 22.91,
+   "near_connected": 28.72,
+   "ws_taken_connected": 273,
+   "contacts": 26,
+   "ib14": 0.8816,
+   "ib10": 0.4406,
+   "follow": 0.9455,
+   "reach_connected": 0.7583,
+   "moved": 34,
+   "min_mm": 0.163,
+   "lost_ws": {
+    "fold": 55,
+    "slide": 12
+   },
+   "overhead_ws_taken": 4,
+   "overhead_ws_contact": 10,
+   "min_th_margin": 5.5
+  }
+ },
+ "stroke_vs_control": {
+  "new": 24,
+  "cls": {
+   "skin": 9,
+   "clear": 13,
+   "near": 2
+  },
+  "lost_new": 0,
+  "common": {
+   "taken->taken": 260,
+   "contact->contact": 3,
+   "taken->contact": 1,
+   "contact->taken": 2
+  }
+ },
+ "fast_attribution": {
+  "bench": "Bench(60,160) fast, kit K law, fit = wear (pre-checks)",
+  "C0_lead_dyad_stroke58": {
+   "gap": 15.0,
+   "ib14": 0.912,
+   "contact": 0.0,
+   "reach": 0.75
+  },
+  "C0p_dyad32_52_stroke58": {
+   "gap": 15.47,
+   "ib14": 0.9088,
+   "contact": 0.0109,
+   "reach": 0.7562
+  },
+  "L0b_dyad32_52_stroke76": {
+   "gap": 11.42,
+   "ib14": 0.8862,
+   "contact": 0.0254,
+   "reach": 0.825
+  },
+  "dyad26_55p56_any_stroke": "jam: link 1b over hub 1 (L1b-hub1) at 0.89 mm (stroke 76.04) / -0.09 mm (stroke 58.77) in every state-A pose"
+ },
+ "verdict": "DEAD (instrument: KILL by the pre-registered rule, every cell > 17.25; gate >= 279 connected takes at <= 4 contacts fails in every cell). Best cell L0b (the lead's seats, stop B 76.04, K dyad 32 / 52): 17.69 connected = static (277 ws takes, 13 contacts, ib14 0.8862, follow 1.0; near-touch 22.11; kit 18.26). The plan's L0 (bk1 26) cannot carry stop B 76.04: the K rule forces bk2 >= 55.55 and the flat K triangle (26 / 37.55 / 55.56) puts link 1b over hub 1 (0.89 mm in every state-A pose) - 165.18 static. Control C0 (lead seats, the lead's stroke 58.77, kit metal): 20.52 connected / 18.83 static (255 / 261 takes, 5 contacts, ib14 0.9128). J1 forward on the k33 seats: S1 (+15) 21.73, S2 (+25) 22.91 (k33 control 17.25): ER binders 117 / 148 clear at S2 (0.79 / 0.66 mm) but in-band falls to 0.8816 and the overhead clip frames 7-11 / 234 / 290 stay in the skin (contacts 26-27 vs ~21). No-go on 'longer stroke on the lead' (bound 17.69 > 13.75 even before its 13 contacts; at zero contact 277 takes would read 13.06 only with ib14 >= 0.90, which the stroke itself costs) and on 'J1 forward' (worse than its own seat).",
+ "limiter": "Stretched poses the stroke newly closes carry their own contacts: L0b vs C0 newly closes 24 ws poses (13 clear, 2 near, 9 in the skin: 119 -13.2, 405 -10.3, 448 -5.1, 399 -4.6, 117 -2.2, 372 -1.8, 423 -1.3, 431 -0.8, 343 -0.5 mm) with the best legal K already picked by the oracle, and the stroke costs in-band (fast: ib14 0.909 -> 0.886 at equal K dyad). J1 forward trades the ER wall (117 / 148 cleared) for the overhead clip (frames 7-11 in the skin at -3.5..-4.4 mm) and in-band. Overhead clip frames 7-11 / 234 / 290 are TAKEN at the lead's seats (C0 1.5-1.9 mm, L0b 0.3-0.9 mm) and in the skin at the k33 / forward seats: the '9 overhead parking contacts' are a seat property (J1 az), not a K property.",
+ "note": "Instrument, never a claim; no search, so the convergence gate does not apply (4 pre-registered cells + the L0 repair; plan cap 4 exact cells, 5 exact wears run because L0 as specified jams). Spec corrections: L0 bk2 55.04 / C0 bk2 38.0336 break the K rule a1max <= bk1 + bk2 - 5.5 (k_ok False, every pose refused); raised to 55.56 / 38.28; L0 at 55.56 then jams (L1b-hub1), so L0b uses the k33 K dyad 32 / 52. Cell 4 = C0 (stroke control) instead of L1: acroant-conecut died by its pre-registered stop. Proxy check: L0 predicted 27 newly closing (15 clear / 2 near / 10 skin), measured 24 (13 / 2 / 9) - the proxy's pose classes hold; its gap (16.0-16.6) was 1.1-1.7 optimistic (in-band). S1 binder shifts vs k33: 117 +1.08, 119 +3.35, 129 +1.05, 148 -0.62 mm (proxy +1.1 / +3.1 / +2.0 / +0.2). Kit metal, not the lead's drive: 237 / 264 are contacts here at every seat (L0b -14.7 / -7.4) - the kit's parking metal, not the lead's crank / lobe. Per-part in-band (L2 / hub 2 / hub K) not computed (no per-part band tool in this harness).",
+ "doc": "docs/concepts/seatoracle-erwall-knuckle-3r.md",
+ "model_file": "docs/concepts/models/seatoracle-erwall-knuckle-3r.py",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 2,
+  "notes": "instrument: the k33 kit harness (O20 J1 / K / J2 / J3, two-pin cuff knee on MR63ZZ pairs); K is the oracle coordinate (no hardware realises a per-pose pick); complexity n/a",
+  "source": "docs/concepts/models/seatoracle-erwall-knuckle-3r.py (imports freek-oracle-route-knuckle-4r.py unchanged)",
+  "confidence": "bound"
+ }
+}

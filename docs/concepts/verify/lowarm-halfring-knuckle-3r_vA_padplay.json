@@ -1,0 +1,754 @@
+{
+ "id": "lowarm-halfring-knuckle-3r",
+ "t": "2026-10-18T07:40:00Z",
+ "what": "verifier re-issue (cell A): the crank stop pad at its TRUE lever, and the resulting dwell K play worn as metal; plus the same play on the plate-clearing stage-1 level",
+ "scripts": [
+  "docs/concepts/verify/lowarm-halfring-knuckle-3r_padcheck.py (pad seat + pad block as metal)",
+  "docs/concepts/models/lowarm-halfring-knuckle-3r-kplay.py (K = law + delta on dwell poses, chain re-solved)",
+  "combined run: the same kplay script with glev 2.039 re-applied after the clamp and pin a_s 9.8 / psi 150 (the auditor tools/alignment_lowarm_s1level.py placement), a scratch copy"
+ ],
+ "padcheck": {
+  "id": "lowarm-halfring-knuckle-3r",
+  "cell": "A",
+  "params": {
+   "r_c": 16.176,
+   "beta": -177.169,
+   "nose_r2": 0.75,
+   "wall2": 0.9,
+   "boss_r": 2.5,
+   "glev": -1.0,
+   "blend": 10.0,
+   "kslot": 46.0,
+   "a_s": 9.2,
+   "psi": 149.5,
+   "mu": 0.15,
+   "owd_margin": 2.0,
+   "zr": 2.0
+  },
+  "fit_fast": {
+   "gap": 13.12,
+   "reach": 0.7688,
+   "follow": 1.0,
+   "inband14": 0.9002,
+   "inband10": 0.5699,
+   "contact": 0.0
+  },
+  "lowarm_gate": {
+   "pin_wall_mm_per_rad": 7.802,
+   "dphi_dK": 0.4178,
+   "K_deg_per_mm_at_pin": 17.576,
+   "pad": {
+    "lever_mm": 12.29,
+    "n_arm_over": 7,
+    "n_arm": 28,
+    "lever_range": [
+     0.0,
+     12.29
+    ]
+   },
+   "pad_seat_ok": true,
+   "pad_lever_used": 12.29,
+   "dwell_K_play": {
+    "runout": 0.176,
+    "conc": 0.088,
+    "pad_lap": 0.335,
+    "slot": 0.04,
+    "total": 0.638,
+    "gate": 0.25,
+    "ok": false,
+    "inputs": {
+     "runout_mm": 0.01,
+     "conc_mm": 0.005,
+     "pad_tol_mm": 0.03
+    }
+   },
+   "owd": {
+    "owd_margin": 2.0,
+    "n_used": 135,
+    "n_all": 462
+   },
+   "l2_lift": null
+  },
+  "P1_pad_seat": {
+   "L1b_spacing_mm": 1.94,
+   "n_crank_samples": 133,
+   "n_crank_truly_over_L1b": 25,
+   "true_pad_lever_mm": 6.75,
+   "claim_pad_lever_mm": 12.29,
+   "claim_pad": {
+    "lever_mm": 12.29,
+    "n_arm_over": 7,
+    "n_arm": 28,
+    "lever_range": [
+     0.0,
+     12.29
+    ]
+   },
+   "dphi_dK": 0.4178,
+   "k_pad_at_claim_lever": 0.335,
+   "k_pad_at_true_lever": 0.609,
+   "claim_play": {
+    "runout": 0.176,
+    "conc": 0.088,
+    "pad_lap": 0.335,
+    "slot": 0.04,
+    "total": 0.638,
+    "gate": 0.25,
+    "ok": false,
+    "inputs": {
+     "runout_mm": 0.01,
+     "conc_mm": 0.005,
+     "pad_tol_mm": 0.03
+    }
+   },
+   "total_play_at_true_lever": 0.912
+  },
+  "P2_pad_metal": {
+   "pad_centre_level_ref": 56.1,
+   "arm_underside": 59.26,
+   "pad_base": 59.1,
+   "pad_top": 62.26,
+   "n_pad": 48,
+   "pad_footprint_over_L1b": [
+    true,
+    true,
+    true,
+    true
+   ],
+   "n_taken": 372,
+   "min_L2": {
+    "i": 229,
+    "kind": "ws",
+    "dK": 0.0,
+    "L2": 18.461,
+    "L1a": 5.485,
+    "crank": 0.529,
+    "r_hub1": 25.01,
+    "r_hubK": 15.01,
+    "r_hub2": 20.13,
+    "r_hub3": 58.88
+   },
+   "min_L1a": {
+    "i": 65,
+    "kind": "clip",
+    "dK": 28.21,
+    "L2": 32.235,
+    "L1a": 5.373,
+    "crank": 1.033,
+    "r_hub1": 31.66,
+    "r_hubK": 15.01,
+    "r_hub2": 20.13,
+    "r_hub3": 70.04
+   },
+   "min_crank_forced": {
+    "i": 377,
+    "kind": "ws",
+    "dK": 4.17,
+    "L2": 31.841,
+    "L1a": 5.389,
+    "crank": 0.479,
+    "r_hub1": 26.09,
+    "r_hubK": 15.01,
+    "r_hub2": 20.13,
+    "r_hub3": 70.22
+   },
+   "min_crank_dwell": {
+    "i": 1,
+    "kind": "clip",
+    "dK": 0.0,
+    "L2": 31.657,
+    "L1a": 5.485,
+    "crank": 0.529,
+    "r_hub1": 25.01,
+    "r_hubK": 15.01,
+    "r_hub2": 20.13,
+    "r_hub3": 70.23
+   },
+   "hub_axis_r_min": {
+    "hub1": 25.01,
+    "hubK": 15.01,
+    "hub2": 20.13,
+    "hub3": 58.88
+   },
+   "L2_lt1": 0,
+   "L1a_lt1": 0,
+   "crank_forced_lt0_15": 0
+  },
+  "secs": 10.3,
+  "note": "pad = 3 x 2 mm block beside the arm on its -sig side at the largest lever where the arm truly crosses link 1b, from link 1b's top to the arm's top; nearest-sample distances; non-adjacent rule 1 mm"
+ },
+ "kplay_true_lever": {
+  "+0.912": {
+   "delta": 0.912,
+   "report": {
+    "gap": 18.83,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.9021,
+    "inband10": 0.5737,
+    "contact": 0.0133
+   },
+   "recomputed": {
+    "gap": 18.83,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.9021,
+    "contact": 0.0133,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 261,
+    "contact_poses": 5
+   },
+   "why": {
+    "fold": 88,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 5
+   },
+   "overhead": "8/28",
+   "near1": 20.46,
+   "near2": 35.93,
+   "minmetal": 0.07,
+   "named": {
+    "139": {
+     "min_mm": 0.072,
+     "dwell": false,
+     "pose": {
+      "plane": -60.0,
+      "elev": 60.0,
+      "axial": 105.0
+     }
+    },
+    "316": {
+     "min_mm": -1.235,
+     "dwell": false,
+     "pose": {
+      "plane": 60.0,
+      "elev": 150.0,
+      "axial": -105.0
+     }
+    },
+    "203": {
+     "min_mm": -0.102,
+     "dwell": false,
+     "pose": {
+      "plane": 0.0,
+      "elev": 90.0,
+      "axial": 45.0
+     }
+    },
+    "379": {
+     "min_mm": 0.747,
+     "dwell": false,
+     "pose": {
+      "plane": 105.0,
+      "elev": 30.0,
+      "axial": -120.0
+     }
+    },
+    "205": {
+     "min_mm": -4.822,
+     "dwell": false,
+     "pose": {
+      "plane": 0.0,
+      "elev": 105.0,
+      "axial": 15.0
+     }
+    },
+    "237": {
+     "min_mm": -9.504,
+     "dwell": false,
+     "pose": {
+      "plane": 15.0,
+      "elev": 165.0,
+      "axial": -60.0
+     }
+    },
+    "264": {
+     "min_mm": -0.579,
+     "dwell": false,
+     "pose": {
+      "plane": 30.0,
+      "elev": 165.0,
+      "axial": -60.0
+     }
+    }
+   },
+   "contacts": [
+    {
+     "i": 203,
+     "kind": "ws",
+     "plane": 0.0,
+     "elev": 90.0,
+     "axial": 45.0,
+     "mm": -0.102,
+     "dwell": false
+    },
+    {
+     "i": 205,
+     "kind": "ws",
+     "plane": 0.0,
+     "elev": 105.0,
+     "axial": 15.0,
+     "mm": -4.822,
+     "dwell": false
+    },
+    {
+     "i": 237,
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "mm": -9.504,
+     "dwell": false
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "mm": -0.579,
+     "dwell": false
+    },
+    {
+     "i": 316,
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 150.0,
+     "axial": -105.0,
+     "mm": -1.235,
+     "dwell": false
+    }
+   ]
+  },
+  "-0.912": {
+   "delta": -0.912,
+   "report": {
+    "gap": 18.34,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8994,
+    "inband10": 0.571,
+    "contact": 0.0106
+   },
+   "recomputed": {
+    "gap": 18.35,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8994,
+    "contact": 0.0106,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 262,
+    "contact_poses": 4
+   },
+   "why": {
+    "fold": 88,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 4
+   },
+   "overhead": "8/28",
+   "near1": 19.98,
+   "near2": 34.29,
+   "minmetal": 0.07,
+   "named": {
+    "139": {
+     "min_mm": 0.072,
+     "dwell": false,
+     "pose": {
+      "plane": -60.0,
+      "elev": 60.0,
+      "axial": 105.0
+     }
+    },
+    "316": {
+     "min_mm": -1.235,
+     "dwell": false,
+     "pose": {
+      "plane": 60.0,
+      "elev": 150.0,
+      "axial": -105.0
+     }
+    },
+    "203": {
+     "min_mm": 1.083,
+     "dwell": false,
+     "pose": {
+      "plane": 0.0,
+      "elev": 90.0,
+      "axial": 45.0
+     }
+    },
+    "379": {
+     "min_mm": 0.747,
+     "dwell": false,
+     "pose": {
+      "plane": 105.0,
+      "elev": 30.0,
+      "axial": -120.0
+     }
+    },
+    "205": {
+     "min_mm": -3.733,
+     "dwell": false,
+     "pose": {
+      "plane": 0.0,
+      "elev": 105.0,
+      "axial": 15.0
+     }
+    },
+    "237": {
+     "min_mm": -10.215,
+     "dwell": false,
+     "pose": {
+      "plane": 15.0,
+      "elev": 165.0,
+      "axial": -60.0
+     }
+    },
+    "264": {
+     "min_mm": -1.753,
+     "dwell": false,
+     "pose": {
+      "plane": 30.0,
+      "elev": 165.0,
+      "axial": -60.0
+     }
+    }
+   },
+   "contacts": [
+    {
+     "i": 205,
+     "kind": "ws",
+     "plane": 0.0,
+     "elev": 105.0,
+     "axial": 15.0,
+     "mm": -3.733,
+     "dwell": false
+    },
+    {
+     "i": 237,
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "mm": -10.215,
+     "dwell": false
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "mm": -1.753,
+     "dwell": false
+    },
+    {
+     "i": 316,
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 150.0,
+     "axial": -105.0,
+     "mm": -1.235,
+     "dwell": false
+    }
+   ]
+  }
+ },
+ "kplay_true_lever_stage1_F39": {
+  "+0.000": {
+   "delta": 0.0,
+   "report": {
+    "gap": 18.65,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8963,
+    "inband10": 0.5703,
+    "contact": 0.0106
+   },
+   "recomputed": {
+    "gap": 18.66,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8963,
+    "contact": 0.0106,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 262,
+    "contact_poses": 4
+   },
+   "why": {
+    "fold": 88,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 4
+   },
+   "overhead": "8/28",
+   "near1": 20.29,
+   "near2": 34.84,
+   "minmetal": 0.07,
+   "named": {
+    "139": {
+     "min_mm": 0.072,
+     "dwell": false,
+     "pose": {
+      "plane": -60.0,
+      "elev": 60.0,
+      "axial": 105.0
+     }
+    },
+    "316": {
+     "min_mm": -1.235,
+     "dwell": false,
+     "pose": {
+      "plane": 60.0,
+      "elev": 150.0,
+      "axial": -105.0
+     }
+    },
+    "203": {
+     "min_mm": 0.716,
+     "dwell": false,
+     "pose": {
+      "plane": 0.0,
+      "elev": 90.0,
+      "axial": 45.0
+     }
+    },
+    "379": {
+     "min_mm": 0.747,
+     "dwell": false,
+     "pose": {
+      "plane": 105.0,
+      "elev": 30.0,
+      "axial": -120.0
+     }
+    },
+    "205": {
+     "min_mm": -4.28,
+     "dwell": false,
+     "pose": {
+      "plane": 0.0,
+      "elev": 105.0,
+      "axial": 15.0
+     }
+    },
+    "237": {
+     "min_mm": -9.469,
+     "dwell": false,
+     "pose": {
+      "plane": 15.0,
+      "elev": 165.0,
+      "axial": -60.0
+     }
+    },
+    "264": {
+     "min_mm": -1.169,
+     "dwell": false,
+     "pose": {
+      "plane": 30.0,
+      "elev": 165.0,
+      "axial": -60.0
+     }
+    }
+   },
+   "contacts": [
+    {
+     "i": 205,
+     "kind": "ws",
+     "plane": 0.0,
+     "elev": 105.0,
+     "axial": 15.0,
+     "mm": -4.28,
+     "dwell": false
+    },
+    {
+     "i": 237,
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "mm": -9.469,
+     "dwell": false
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "mm": -1.169,
+     "dwell": false
+    },
+    {
+     "i": 316,
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 150.0,
+     "axial": -105.0,
+     "mm": -1.235,
+     "dwell": false
+    }
+   ]
+  },
+  "+0.912": {
+   "delta": 0.912,
+   "report": {
+    "gap": 19.05,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.8978,
+    "inband10": 0.5724,
+    "contact": 0.0133
+   },
+   "recomputed": {
+    "gap": 19.05,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.8978,
+    "contact": 0.0133,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 261,
+    "contact_poses": 5
+   },
+   "why": {
+    "fold": 88,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 5
+   },
+   "overhead": "8/28",
+   "near1": 20.68,
+   "near2": 35.56,
+   "minmetal": 0.07,
+   "named": {
+    "139": {
+     "min_mm": 0.072,
+     "dwell": false,
+     "pose": {
+      "plane": -60.0,
+      "elev": 60.0,
+      "axial": 105.0
+     }
+    },
+    "316": {
+     "min_mm": -1.235,
+     "dwell": false,
+     "pose": {
+      "plane": 60.0,
+      "elev": 150.0,
+      "axial": -105.0
+     }
+    },
+    "203": {
+     "min_mm": -0.102,
+     "dwell": false,
+     "pose": {
+      "plane": 0.0,
+      "elev": 90.0,
+      "axial": 45.0
+     }
+    },
+    "379": {
+     "min_mm": 0.747,
+     "dwell": false,
+     "pose": {
+      "plane": 105.0,
+      "elev": 30.0,
+      "axial": -120.0
+     }
+    },
+    "205": {
+     "min_mm": -4.822,
+     "dwell": false,
+     "pose": {
+      "plane": 0.0,
+      "elev": 105.0,
+      "axial": 15.0
+     }
+    },
+    "237": {
+     "min_mm": -9.504,
+     "dwell": false,
+     "pose": {
+      "plane": 15.0,
+      "elev": 165.0,
+      "axial": -60.0
+     }
+    },
+    "264": {
+     "min_mm": -0.579,
+     "dwell": false,
+     "pose": {
+      "plane": 30.0,
+      "elev": 165.0,
+      "axial": -60.0
+     }
+    }
+   },
+   "contacts": [
+    {
+     "i": 203,
+     "kind": "ws",
+     "plane": 0.0,
+     "elev": 90.0,
+     "axial": 45.0,
+     "mm": -0.102,
+     "dwell": false
+    },
+    {
+     "i": 205,
+     "kind": "ws",
+     "plane": 0.0,
+     "elev": 105.0,
+     "axial": 15.0,
+     "mm": -4.822,
+     "dwell": false
+    },
+    {
+     "i": 237,
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "mm": -9.504,
+     "dwell": false
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "mm": -0.579,
+     "dwell": false
+    },
+    {
+     "i": 316,
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 150.0,
+     "axial": -105.0,
+     "mm": -1.235,
+     "dwell": false
+    }
+   ]
+  }
+ }
+}

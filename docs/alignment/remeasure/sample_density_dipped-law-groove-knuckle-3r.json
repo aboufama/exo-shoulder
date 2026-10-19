@@ -1,0 +1,362 @@
+{
+ "id": "dipped-law-groove-knuckle-3r",
+ "tool": "tools/sample_density.py",
+ "version": "2026-10-18.1",
+ "kit_cell_mm2": 4.0,
+ "flag": [
+  0.5,
+  2.0
+ ],
+ "model": "docs/concepts/models/dipped-law-groove-knuckle-3r.py",
+ "params": {
+  "bk1": 26.0,
+  "bk2": 38.0336,
+  "a1max": 58.7678,
+  "kK": 2.1534,
+  "smhi": 16.8433,
+  "smlo": 5.0,
+  "g": 2.4696,
+  "beta": -173.4638,
+  "r_c": 15.2211,
+  "lift": 1.027,
+  "hl": 2.1535,
+  "zr": 4.0242,
+  "s_arm": 4.0484,
+  "r_lobe": 8.2409,
+  "az1": 95.3929,
+  "el1": 67.8974,
+  "az2": 45.8211,
+  "el2": 41.0855,
+  "wd": 66.8662,
+  "wa": -10.6559,
+  "b3": 0.329,
+  "lc": 27.0,
+  "phib": -96.6,
+  "ang_min": 20.0,
+  "cprog": 0.0,
+  "chain": "free",
+  "near2": 1,
+  "law_mode": "lin",
+  "lE": 82.0,
+  "phiE": 3.8,
+  "dipD": 1.0,
+  "dip_ref": 1.0,
+  "dip_thc": 53.0,
+  "dip_w": 12.0,
+  "dip_shape": 1
+ },
+ "fit_secs": 4.6,
+ "row_v_gap": 18.64,
+ "row_status": "verified",
+ "parts": {
+  "hub1": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.3,
+   "cell_median": 3.995,
+   "d1": 1.996,
+   "d2": 2.001,
+   "one_row_share": 0.0,
+   "ratio": 1.002,
+   "hull_area_mm2": 339.7,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hubK": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.4,
+   "cell_median": 4.0,
+   "d1": 1.998,
+   "d2": 2.002,
+   "one_row_share": 0.0,
+   "ratio": 1.002,
+   "hull_area_mm2": 339.7,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hub2": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.1,
+   "cell_median": 3.988,
+   "d1": 1.992,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.003,
+   "hull_area_mm2": 339.5,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hub3": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.9,
+   "cell_median": 3.996,
+   "d1": 1.999,
+   "d2": 1.999,
+   "one_row_share": 0.0,
+   "ratio": 1.0,
+   "hull_area_mm2": 339.9,
+   "ratio_hull": 0.941,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "E": {
+   "n": 132,
+   "n_unique": 132,
+   "area_mm2": 535.8,
+   "cell_median": 4.018,
+   "d1": 1.998,
+   "d2": 2.008,
+   "one_row_share": 0.0,
+   "ratio": 0.985,
+   "hull_area_mm2": 532.5,
+   "ratio_hull": 0.992,
+   "flatness": 0.043,
+   "masked_lattice": false
+  },
+  "boss": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 127.8,
+   "cell_median": 3.988,
+   "d1": 1.995,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.002,
+   "hull_area_mm2": 131.2,
+   "ratio_hull": 0.976,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "pad": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 127.9,
+   "cell_median": 3.996,
+   "d1": 1.998,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 131.2,
+   "ratio_hull": 0.975,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "knee": {
+   "n": 95,
+   "n_unique": 95,
+   "area_mm2": 379.1,
+   "cell_median": 3.994,
+   "d1": 1.996,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.002,
+   "hull_area_mm2": 380.1,
+   "ratio_hull": 1.0,
+   "flatness": 0.0,
+   "masked_lattice": false
+  },
+  "crank": {
+   "n": 129,
+   "n_unique": 129,
+   "area_mm2": 489.4,
+   "cell_median": 4.042,
+   "d1": 1.912,
+   "d2": 2.1,
+   "one_row_share": 0.0,
+   "ratio": 1.054,
+   "hull_area_mm2": 761.6,
+   "ratio_hull": 0.678,
+   "flatness": 0.096,
+   "masked_lattice": false
+  },
+  "roller": {
+   "n": 37,
+   "n_unique": 37,
+   "area_mm2": 66.6,
+   "cell_median": 1.76,
+   "d1": 1.321,
+   "d2": 1.332,
+   "one_row_share": 0.0,
+   "ratio": 2.223,
+   "hull_area_mm2": 41.7,
+   "ratio_hull": 3.549,
+   "flatness": 0.488,
+   "masked_lattice": false
+  },
+  "horn": {
+   "n": 31,
+   "n_unique": 31,
+   "area_mm2": 68.4,
+   "cell_median": 2.342,
+   "d1": 1.069,
+   "d2": 1.933,
+   "one_row_share": 0.0,
+   "ratio": 1.812,
+   "hull_area_mm2": 89.9,
+   "ratio_hull": 1.379,
+   "flatness": 0.097,
+   "masked_lattice": false
+  },
+  "L1a": {
+   "n": 8,
+   "n_unique": 8,
+   "area_mm2": 97.0,
+   "cell_median": 12.292,
+   "d1": 2.342,
+   "d2": 4.659,
+   "one_row_share": 0.0,
+   "ratio": 0.33,
+   "hull_area_mm2": 73.2,
+   "ratio_hull": 0.437,
+   "flatness": 0.353,
+   "masked_lattice": true
+  },
+  "L1b": {
+   "n": 36,
+   "n_unique": 36,
+   "area_mm2": 197.9,
+   "cell_median": 4.111,
+   "d1": 1.95,
+   "d2": 2.076,
+   "one_row_share": 0.0,
+   "ratio": 0.728,
+   "hull_area_mm2": 177.9,
+   "ratio_hull": 0.809,
+   "flatness": 0.368,
+   "masked_lattice": false
+  },
+  "L2": {
+   "n": 124,
+   "n_unique": 124,
+   "area_mm2": 588.2,
+   "cell_median": 4.337,
+   "d1": 2.017,
+   "d2": 2.111,
+   "one_row_share": 0.0,
+   "ratio": 0.843,
+   "hull_area_mm2": 618.8,
+   "ratio_hull": 0.802,
+   "flatness": 0.12,
+   "masked_lattice": false
+  }
+ },
+ "flagged": {
+  "roller": 2.223,
+  "L1a": 0.33
+ },
+ "over_dense": [
+  "roller"
+ ],
+ "masked_lattice": [
+  "L1a"
+ ],
+ "note": "ratio = samples / mm2 over the kit's 1 / 4 mm2 (cell = d1 x d2, the grid's two pitches; a one-row part is credited 2 mm across). Re-weight: each flagged part's count set to n / ratio in the saved per-part in-band; exact for the counts, assumes the part's in-band share is uniform over its samples.",
+ "bench": {
+  "file": "docs/concepts/verify/dipped-law-groove-knuckle-3r_v_bench_frozen.json",
+  "path": "/",
+  "frozen": {
+   "gap": 18.64,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8993,
+   "inband10": 0.5197,
+   "contact": 0.0107
+  },
+  "recomputed_ib14": 0.8993,
+  "variants": {
+   "over_at_kit": {
+    "ib14": 0.8985,
+    "gap": 18.72,
+    "n": {
+     "roller": 16.64
+    }
+   },
+   "over_at_kit_hull": {
+    "ib14": 0.8983,
+    "gap": 18.74,
+    "n": {
+     "roller": 10.43
+    }
+   },
+   "flagged_at_kit": {
+    "ib14": 0.8999,
+    "gap": 18.58,
+    "n": {
+     "roller": 16.64,
+     "L1a": 24.24
+    }
+   },
+   "per_part": {
+    "roller": 18.72,
+    "L1a": 18.57
+   },
+   "all_parts_at_kit": {
+    "ib14": 0.8965,
+    "gap": 18.92
+   },
+   "as_sampled": {
+    "ib14": 0.8993,
+    "gap": 18.64
+   }
+  },
+  "count_mismatch": {}
+ },
+ "held": {
+  "file": "docs/concepts/verify/dipped-law-groove-knuckle-3r_v_held_frozen.json",
+  "path": "/",
+  "frozen": {
+   "gap": 24.07,
+   "reach": 0.6807,
+   "follow": 1.0,
+   "inband14": 0.8982,
+   "inband10": 0.5188,
+   "contact": 0.0196
+  },
+  "recomputed_ib14": 0.8982,
+  "variants": {
+   "over_at_kit": {
+    "ib14": 0.8974,
+    "gap": 24.15,
+    "n": {
+     "roller": 16.64
+    }
+   },
+   "over_at_kit_hull": {
+    "ib14": 0.8972,
+    "gap": 24.17,
+    "n": {
+     "roller": 10.43
+    }
+   },
+   "flagged_at_kit": {
+    "ib14": 0.8988,
+    "gap": 24.01,
+    "n": {
+     "roller": 16.64,
+     "L1a": 24.24
+    }
+   },
+   "per_part": {
+    "roller": 24.15,
+    "L1a": 23.94
+   },
+   "all_parts_at_kit": {
+    "ib14": 0.8954,
+    "gap": 24.35
+   },
+   "as_sampled": {
+    "ib14": 0.8982,
+    "gap": 24.07
+   }
+  },
+  "count_mismatch": {}
+ },
+ "exact_rewear_cmd": "CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/sample_density.py rewear dipped-law-groove-knuckle-3r bench|held",
+ "secs": 4.8
+}

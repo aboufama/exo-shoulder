@@ -1,0 +1,250 @@
+{
+ "rule": "the full CAD must not lose R1 / R6 / R16 against its own L1 (same judges, same steps: judge_all fast - R1 step 3, R2 6, R6 3, R16 12, R17 full; FEA skipped as the L1)",
+ "L1": "l1_conecut-knee",
+ "full": "user_conecut_knee",
+ "R1": {
+  "L1": 0.8194603862019425,
+  "full": 0.8155591450934774,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -0.39
+ },
+ "R1-aim": {
+  "L1": 0.5333272254450716,
+  "full": 0.5272056148357128,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -0.61
+ },
+ "R2": {
+  "L1": 24.87,
+  "full": 24.87,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": 0.0
+ },
+ "R3": {
+  "L1": 1.0,
+  "full": 1.0,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": 0.0
+ },
+ "R4": {
+  "L1": 0.7492174195826468,
+  "full": 0.7413144706102074,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -0.79
+ },
+ "R6": {
+  "L1": 0.0,
+  "full": 0.0,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": 0.0
+ },
+ "R7": {
+  "L1": true,
+  "full": true,
+  "L1_status": "PASS",
+  "full_status": "PASS"
+ },
+ "R8": {
+  "L1": 121.0,
+  "full": 216.1,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": 95.1
+ },
+ "R11": {
+  "L1": 0.366,
+  "full": 0.253,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": -0.11
+ },
+ "R16": {
+  "L1": 0.6667,
+  "full": 0.6667,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": 0.0
+ },
+ "R17": {
+  "L1": true,
+  "full": true,
+  "L1_status": "PASS",
+  "full_status": "PASS"
+ },
+ "passing": {
+  "L1": 8,
+  "full": 8
+ },
+ "R1_by_clip_14mm": {
+  "Raise overhead": [
+   74.9,
+   74.1
+  ],
+  "Drink from a cup": [
+   89.0,
+   87.8
+  ],
+  "Comb hair": [
+   91.6,
+   91.3
+  ],
+  "Reach a high shelf": [
+   89.4,
+   89.4
+  ],
+  "Wash opposite shoulder": [
+   65.7,
+   65.6
+  ],
+  "Reach back pocket": [
+   95.7,
+   95.4
+  ],
+  "Wave": [
+   70.9,
+   70.5
+  ],
+  "Walking arm swing": [
+   81.4,
+   81.7
+  ]
+ },
+ "R1aim_by_clip_10mm": {
+  "Raise overhead": [
+   45.5,
+   44.9
+  ],
+  "Drink from a cup": [
+   49.8,
+   48.8
+  ],
+  "Comb hair": [
+   63.9,
+   63.5
+  ],
+  "Reach a high shelf": [
+   68.0,
+   67.7
+  ],
+  "Wash opposite shoulder": [
+   36.6,
+   35.7
+  ],
+  "Reach back pocket": [
+   69.6,
+   68.7
+  ],
+  "Wave": [
+   42.7,
+   42.4
+  ],
+  "Walking arm swing": [
+   56.2,
+   55.9
+  ]
+ },
+ "loses_against_L1": [
+  "R1"
+ ],
+ "R1_attribution_step9": {
+  "tool": "tools/r1_attrib.py <dir> 9 (score_design covered-skin rule, nearest part recorded)",
+  "frame_mean_share": {
+   "L1": 0.8211,
+   "full": 0.8173
+  },
+  "by_group": {
+   "base": {
+    "in_band": [
+     59,
+     27
+    ],
+    "over14": [
+     16264,
+     16885
+    ]
+   },
+   "dk": {
+    "in_band": [
+     166809,
+     163978
+    ],
+    "over14": [
+     96588,
+     99077
+    ]
+   },
+   "l1a": {
+    "in_band": [
+     782558,
+     785002
+    ],
+    "over14": [
+     132319,
+     137580
+    ]
+   },
+   "l1b": {
+    "in_band": [
+     370890,
+     380826
+    ],
+    "over14": [
+     23799,
+     24129
+    ]
+   },
+   "l2": {
+    "in_band": [
+     441765,
+     423678
+    ],
+    "over14": [
+     187099,
+     201812
+    ]
+   },
+   "l2 cap/lobe": {
+    "in_band": [
+     0,
+     14830
+    ],
+    "over14": [
+     0,
+     1756
+    ]
+   },
+   "l3": {
+    "in_band": [
+     1065276,
+     1082603
+    ],
+    "over14": [
+     240693,
+     237899
+    ]
+   },
+   "l4": {
+    "in_band": [
+     273376,
+     277326
+    ],
+    "over14": [
+     78901,
+     79192
+    ]
+   }
+  },
+  "reading": "the whole R1 deficit is link 2 (in band -18.1 k, over 14 +14.7 k samples): the built bar rides 0.55-0.85 mm over the model strap at r 63-72 mm from GH (model L2 samples 0.55-0.85 mm nearer GH than the bar: build.json kinematics_exact L2 1.63, all outward) - the J2-drop region; the 68-deg drop (machined from solid) and margin 0 are in, the rest is the bar's R2 convex rounds / pads / rings over the strap; link 1a's lug web +5.3 k and the crank +2.5 k over 14 are the real drive hardware; member 3 is net +17 k in band; no skin-side metal (all misses outward)"
+ },
+ "M5_forward_bound": {
+  "0.087": 4.539896185152806,
+  "0.105": 4.665969656637284,
+  "0.12": 4.772167218969575
+ }
+}

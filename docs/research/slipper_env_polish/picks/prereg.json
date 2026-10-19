@@ -1,0 +1,56 @@
+{
+ "rule": "the single CAD pick = the highest-ranked pick (picks: depth-ok on envsel, ranked by the envsel 1 mm mean over the two fits) whose flank passes the synthesis-robustness check (robust: beta +-1, r_c +-0.25, g +-0.05 on Bench(60,160), priced) - if none passes, pick1; fixed BEFORE any claim number exists; the other picks are report-only",
+ "picks": [
+  "pick1.json",
+  "pick2.json",
+  "pick3.json"
+ ],
+ "robust": {
+  "pick1.json": {
+   "ok": true,
+   "n_fail": 0,
+   "min_dK_lim": 41.5,
+   "dK_need": 41.5
+  },
+  "pick2.json": {
+   "ok": false,
+   "n_fail": 3,
+   "min_dK_lim": 0.0,
+   "dK_need": 41.0
+  },
+  "pick3.json": {
+   "ok": false,
+   "n_fail": 3,
+   "min_dK_lim": 0.0,
+   "dK_need": 48.3
+  }
+ },
+ "chosen": "pick1.json",
+ "chosen_params": {
+  "bk1": 26.9021,
+  "bk2": 38.2893,
+  "a1max": 55.9298,
+  "kK": 2.3893,
+  "g": 2.396,
+  "beta": -171.1589,
+  "r_c": 15.4552,
+  "lift": 1.5793,
+  "hl": 1.1735,
+  "zr": 3.8439,
+  "s_arm": 4.0,
+  "r_lobe": 8.3187,
+  "smhi": 15.8428,
+  "smlo": 6.0676,
+  "az1": 96.6333,
+  "el1": 67.9008,
+  "az2": 47.0214,
+  "el2": 41.4274,
+  "wd": 65.8471,
+  "wa": -11.7942,
+  "b3": 0.3167,
+  "ang_min": 25.9609,
+  "lc": 20.9314,
+  "phib": -55.2501
+ },
+ "t": "2026-10-17T13:17:28Z"
+}

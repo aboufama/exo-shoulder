@@ -1,7 +1,63 @@
 [
  {
+  "id": "l1_3r-k2221",
+  "label": "plain 3R at rail-elbow k2221's axes (control), L1 keep-out: R1 56.1 %"
+ },
+ {
+  "id": "l1_rail-elbow",
+  "label": "rail-elbow k2221 (telescopic curved-rail J2), L1 keep-out: R1 44.9 %"
+ },
+ {
+  "id": "l1_seed-offset-3r-slides",
+  "label": "seed-offset-3r-slides k403 (offset 3R + 3 passive cuff slides), L1 keep-out"
+ },
+ {
+  "id": "param_r20_n3_s1414_4",
+  "label": "3R champion r20 s1414 #4, parametric B-rep CAD (v5 joints, 8x3 straps)"
+ },
+ {
+  "id": "cad_r20_n3_s1414_4",
+  "label": "3R champion r20 s1414 #4"
+ },
+ {
+  "id": "cad_r20_n3_s1414_4_s10",
+  "label": "CAD r20 s1414 #4 strap R10"
+ },
+ {
+  "id": "cad_r20_n3_s1414_4_f300",
+  "label": "3R r20 s1414 #4 (O20 v5, fair links 300)"
+ },
+ {
+  "id": "cad_r20_n3_s1411_2",
+  "label": "3R r20 s1411 #2: v5 joint + strap links"
+ },
+ {
+  "id": "cad_r18_n3_s1392_1_v5",
+  "label": "3R r18 s1392 #1: v5 joint (O20, 2x MR117 preloaded) + strap links"
+ },
+ {
+  "id": "cad_r18_n3_s1392_1_v5f",
+  "label": "3R r18 s1392 #1: v5 joint + strap links (fair spine)"
+ },
+ {
+  "id": "cad_r18_n3_s1392_1_c1",
+  "label": "r18 s1392 #1, fair links, J3 hardware on its axis + level neck root (agent C)"
+ },
+ {
+  "id": "cad_r18_n3_s1392_1_f300",
+  "label": "FINAL 2026-10-15: 3R range first, fair links (r18 s1392 #1)"
+ },
+ {
+  "id": "cad_r18_n3_s1392_1",
+  "label": "3R range first, swept links (r18 s1392 #1)"
+ },
+ {
   "id": "cad_r13_n4_s1343_1",
   "label": "4 joints (r13), fair CAD - current reference"
+ },
+ {
+  "id": "cad_r13_n3_s1331_0",
+  "label": "3R + sliding cuff (r13 n3), iteration CAD - every part valid"
  },
  {
   "id": "band_4c_best",

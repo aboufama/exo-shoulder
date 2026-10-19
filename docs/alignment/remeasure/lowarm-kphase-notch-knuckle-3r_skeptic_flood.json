@@ -1,0 +1,230 @@
+{
+ "id": "lowarm-kphase-notch-knuckle-3r",
+ "by": "skeptic",
+ "t": "2026-10-18",
+ "how": "tools/alignment_remeasure_kphase.py side held <delta> <out> --flood (the verifier's harness, corrections off, the parent's wear(), model unchanged; --flood = the verifier's flood(), minarc connected_report on the post-dowel held set), CB_EXACT=1, OMP_NUM_THREADS=1, nice 15, 2 processes",
+ "held_m0210": {
+  "frozen": {
+   "reach": 0.6891,
+   "follow": 1.0,
+   "inband14": 0.8971,
+   "inband10": 0.5774,
+   "contact": 0.0149,
+   "gap": 22.87
+  },
+  "recomputed": {
+   "gap": 22.87,
+   "reach": 0.6891,
+   "follow": 1.0,
+   "inband14": 0.8971,
+   "contact": 0.0149,
+   "n_ws": 952,
+   "n_clip": 202,
+   "ws_taken": 656,
+   "contact_poses": 13
+  },
+  "dK_taken_max": 45.367,
+  "th_margin": {
+   "min_th_dwell": 5.317,
+   "min_own_forced": 5.248,
+   "lt5_dwell": 0,
+   "lt5_forced": 0,
+   "msub_lt1_dwell": 100,
+   "n": 858
+  },
+  "dowel": {
+   "K": 45.75,
+   "n_cut": 2,
+   "cut": [
+    {
+     "i": 835,
+     "kind": "ws",
+     "dK": 46.0
+    },
+    {
+     "i": 1068,
+     "kind": "ws",
+     "dK": 45.881
+    }
+   ],
+   "dK_taken_max": 45.367,
+   "n_taken_pre": 859
+  },
+  "connected": {
+   "connected_bench": {
+    "gap": 24.05,
+    "reach": 0.6775,
+    "dropped": 11,
+    "dropped_forced": 11,
+    "forced_taken": 329,
+    "forced_taken_connected": 318,
+    "dropped_with_no_taken_neighbour": 4
+   },
+   "connected_knn": {
+    "gap": 30.89,
+    "reach": 0.6103,
+    "dropped": 75,
+    "dropped_forced": 75,
+    "forced_taken": 329,
+    "forced_taken_connected": 254
+   },
+   "connected_full": {
+    "gap": 22.87,
+    "reach": 0.6891,
+    "dropped": 0,
+    "dropped_forced": 0,
+    "forced_taken": 329,
+    "forced_taken_connected": 329,
+    "envelope": {
+     "env_ok": 1065,
+     "env_forced_ok": 526,
+     "env_forced_connected": 526
+    }
+   },
+   "secs": 2.2
+  },
+  "connected_error": null,
+  "secs": 828.1,
+  "deep": {
+   "plain": 22.87,
+   "reach": 0.6891,
+   "follow": 1.0,
+   "inband14": 0.8971,
+   "contact": 0.0149,
+   "n_poses": 1154,
+   "n_taken": 858,
+   "min_metal_mm": 0.325,
+   "gap_near1": 25.74,
+   "near1_poses": 13,
+   "gap_near2": 37.37,
+   "near2_poses": 72,
+   "gap_near3": 82.47,
+   "near3_poses": 214,
+   "clip_metal_hist": {
+    "0-1": 0.0,
+    "1-2": 0.0,
+    "2-3": 0.0019,
+    "3-4": 0.0138,
+    "4-6": 0.1261,
+    "6-10": 0.4357,
+    "10-14": 0.3197,
+    ">14": 0.1029
+   },
+   "gap_band3_14": 23.06,
+   "inband3_14": 0.8952,
+   "overhead_min_metal_p10": 1.5
+  }
+ },
+ "held_p0264": {
+  "frozen": {
+   "reach": 0.6891,
+   "follow": 1.0,
+   "inband14": 0.8978,
+   "inband10": 0.5781,
+   "contact": 0.0149,
+   "gap": 22.8
+  },
+  "recomputed": {
+   "gap": 22.8,
+   "reach": 0.6891,
+   "follow": 1.0,
+   "inband14": 0.8978,
+   "contact": 0.0149,
+   "n_ws": 952,
+   "n_clip": 202,
+   "ws_taken": 656,
+   "contact_poses": 13
+  },
+  "dK_taken_max": 45.367,
+  "th_margin": {
+   "min_th_dwell": 5.517,
+   "min_own_forced": 5.248,
+   "lt5_dwell": 0,
+   "lt5_forced": 0,
+   "msub_lt1_dwell": 98,
+   "n": 858
+  },
+  "dowel": {
+   "K": 45.75,
+   "n_cut": 2,
+   "cut": [
+    {
+     "i": 835,
+     "kind": "ws",
+     "dK": 46.0
+    },
+    {
+     "i": 1068,
+     "kind": "ws",
+     "dK": 45.881
+    }
+   ],
+   "dK_taken_max": 45.367,
+   "n_taken_pre": 859
+  },
+  "connected": {
+   "connected_bench": {
+    "gap": 23.98,
+    "reach": 0.6775,
+    "dropped": 11,
+    "dropped_forced": 11,
+    "forced_taken": 329,
+    "forced_taken_connected": 318,
+    "dropped_with_no_taken_neighbour": 4
+   },
+   "connected_knn": {
+    "gap": 30.82,
+    "reach": 0.6103,
+    "dropped": 75,
+    "dropped_forced": 75,
+    "forced_taken": 329,
+    "forced_taken_connected": 254
+   },
+   "connected_full": {
+    "gap": 22.8,
+    "reach": 0.6891,
+    "dropped": 0,
+    "dropped_forced": 0,
+    "forced_taken": 329,
+    "forced_taken_connected": 329,
+    "envelope": {
+     "env_ok": 1065,
+     "env_forced_ok": 526,
+     "env_forced_connected": 526
+    }
+   },
+   "secs": 2.2
+  },
+  "connected_error": null,
+  "secs": 826.6,
+  "deep": {
+   "plain": 22.8,
+   "reach": 0.6891,
+   "follow": 1.0,
+   "inband14": 0.8978,
+   "contact": 0.0149,
+   "n_poses": 1154,
+   "n_taken": 858,
+   "min_metal_mm": 0.325,
+   "gap_near1": 25.67,
+   "near1_poses": 13,
+   "gap_near2": 37.37,
+   "near2_poses": 72,
+   "gap_near3": 83.32,
+   "near3_poses": 217,
+   "clip_metal_hist": {
+    "0-1": 0.0,
+    "1-2": 0.0001,
+    "2-3": 0.002,
+    "3-4": 0.0136,
+    "4-6": 0.1262,
+    "6-10": 0.4362,
+    "10-14": 0.3197,
+    ">14": 0.1021
+   },
+   "gap_band3_14": 23.0,
+   "inband3_14": 0.8958,
+   "overhead_min_metal_p10": 1.48
+  }
+ }
+}

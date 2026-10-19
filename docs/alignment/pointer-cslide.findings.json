@@ -1,0 +1,74 @@
+[
+ {
+  "key": "NEW-inband-padding",
+  "level": "watch",
+  "reason": "About 49 of the claim's in-band points come from the underside of a filler body under the track, not from any moving part getting closer to the arm. Same params, same Bench(60,160) fast bench, model unchanged, only saddle switched: saddle=1 (the claim) reads gap 69.84 (in-band14 0.674, reach 0.50, follow 0.9333, contact 0.0556); saddle=0 (the spec's one-radius band) reads gap 120.30 (in-band14 0.182, the same reach 0.50 and follow 0.9333, contact 0.0685). The saddle moves the in-band of the band from 0.0006 to 0.849, and every other part stays where it was (hub1 0.017, hub2 0.176, link1 0.189, shoe 0.00, neck 0.9945 in both). The track the shoe runs on stays 29.4 mm off the skin at its outer face (median; p10 25.0) against 31.5 mm for the cylinder, and the shoe crown stays at least 31.7 mm off (the fast grid clamps at 31.75) in both. To do this, the filler body is 23.3 mm thick at the median (p10 12.2, max 31.4) and takes the mass from 275 g to 741 g. The wearer gets the same 30 mm-proud track and shoe plus 466 g; the score says 50 points better. The design doc's 'New knowledge 2' sells this as a trick for 'any arc rail or ring bearing in the catalogue' without its price. This is held at watch, not gamed: the saddle=0 twin has 1.3 points more contact, so it is not cleanly better for the wearer.",
+  "evidence": "docs/alignment/remeasure/pointer-cslide_saddle_counterfactual.json (tools/alignment_wear_probe_pointer_cslide.py cf); docs/concepts/models/pointer-cslide.py design() saddle branch and build_chain lines for 'prof'; docs/concepts/pointer-cslide.md 'New knowledge' 2"
+ },
+ {
+  "key": "S2",
+  "level": "watch",
+  "reason": "In-band is weighted by sample, and the two skin-fitted bodies hold 65 % of the samples. Fast fit: band 1470 and neck 200 of 2585 samples per pose, against hub1 81, hub2 81, link1 385, link2 308 and shoe 60. Sample-weighted in-band14 is 0.674; part-weighted it is 0.414 (+26.0 points). Mostly out of band: hub1 0.017 (median >= 31.8 mm, the fast grid's clamp), shoe 0.00 (median 29.4 mm), link1 0.19 (median 23.1 mm) and hub2 0.18 (median 17.3 mm). Together they are 607 samples (23.5 %). The tool's own sampling threshold (+8 points) would read gamed if this record were in its parts_ib14 format. I hold it at watch: every part is sampled at the kit's 2 x 2 mm, so this is area weighting of a big skin-fitted body, not sparse sampling. Its price to the wearer is carried by NEW-inband-padding.",
+  "evidence": "docs/alignment/remeasure/pointer-cslide_probe_fitfast.json (sample_counts, inband_member, inband_sample_weighted, inband_part_weighted)"
+ },
+ {
+  "key": "NEW-oob-standoff",
+  "level": "watch",
+  "reason": "The bearing that carries the humeral twist (track + shoe) and the J1 hub ride about 30 mm off the arm in every taken pose, and in-band counts a sample at 15 mm and one at 31 mm alike. Fast fit, clip frames: shoe 29.4 mm median (p10 27.6, p90 31.1), hub1 >= 31.7 mm everywhere (the fast grid clamps at 31.75, so the true standoff is unmeasured), link1 23.1 mm median (p90 >= 31.8). 32.4 % of the scored metal is above 14 mm and 19.1 % above 20 mm. The row admits this is structural ('the track radius is set by the fattest skin it ever passes over'). The score sees it only through the in-band fraction, and the filler (NEW-inband-padding) dilutes even that.",
+  "evidence": "docs/alignment/remeasure/pointer-cslide_probe_fitfast.json inband_member and probe.clip_scored (over14 0.3239, over20 0.1908)"
+ },
+ {
+  "key": "T1",
+  "level": "watch",
+  "reason": "29.8 points of the gap depend on the 1-2 mm shell. On the fast fit, near-touch (min metal, outer band face and shoe crown included) reads 76.34 at 1 mm, 106.17 at 2 mm and 185.41 at 3 mm, against 69.84 plain. 4 of the 136 contact-free taken poses have metal < 1 mm, 19 < 2 mm and 61 < 3 mm. This is above the old 25-point line, but near-touch is not a gate (user 2026-10-17), so it is reported only.",
+  "evidence": "docs/alignment/remeasure/pointer-cslide_probe_fitfast.json near_touch, taken_floor_lt"
+ },
+ {
+  "key": "T2",
+  "level": "watch",
+  "reason": "The skin-fitted members are fitted at the band's 2 mm edge by construction. radial_req marches each sample to the first radius with skin distance >= 2.0 mm (clr=2.0), then takes the q_ring 0.991 / q 0.983 quantile over the bench poses. So the neck (p10 2.9 mm, median 4.5) and the band (p10 4.1, median 7.7) sit just inside the 2 mm line. Every scored clip frame has its lowest metal below 4 mm (floor histogram 0-1: 1, 1-2: 8, 2-3: 28, 3-4: 19 of 56 taken). In-band10 is 0.521. The aim is 10 mm.",
+  "evidence": "docs/concepts/models/pointer-cslide.py radial_req (clr=2.0) and design(); docs/alignment/remeasure/pointer-cslide_probe_fitfast.json probe.clip_scored.floor_hist_mm, inband_member"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "The arm-fixed neck and the saddle hug the arm at 2-3 mm. Of the 61 taken poses whose floor is < 3 mm, the neck is below 3 mm in 44 and the band in 34 (links: link2 14, link1 8, hub2 3). Of the 19 poses < 2 mm: band 9, neck 8, link1 6, link2 3. The neck is a 14 mm strap fitted per sample to the 98th-percentile pose, on a real arm that bulges. That is metal on skin through a sleeve.",
+  "evidence": "docs/alignment/remeasure/pointer-cslide_probe_fitfast.json taken_floor_lt_by_member"
+ },
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "The claim takes 8 poses in deep contact and the score charges 5.56 points for them, whatever their depth. Summed penetration is 72.56 mm and 7 of the 8 are deeper than 3 mm. Hub1 and link1 sit 15.67 / 14.69 mm inside the deltoid at abduction 150 (overhead, plane 0). Hub2 sits 12.87 mm inside at extension (plane -75, elev 60, axial +60). The band is 11.44 mm and the neck 11.28 mm inside at across-body (plane 150, elev 60-75, axial -60). The band's outer face meets the torso at plane 150, elev 90-105 (5.7 / 5.1 mm). The tool reads this as x3.58 the lead's 20.24 mm over 4. That comparison is on a smaller bench (220 fast poses vs the lead's 470 exact), so it understates the excess. Instrument note: before this audit nothing reproduced the claim, so T5 read 'not measured'. The 2026-10-19.1 type guard changes the reference side only: the lead's 20.24 mm is now read.",
+  "evidence": "docs/alignment/remeasure/pointer-cslide_probe_fitfast.json contact_poses; docs/alignment/pointer-cslide.json contact_depth"
+ },
+ {
+  "key": "P1",
+  "level": "watch",
+  "reason": "The claim is in-sample by construction and has never been worn off its own bench. design() fits the J3 travel window from the scoring bench's own poses: the smallest arc holding cov 0.661 of the 220 Bench(60,160) closing poses, c 27.4 deg, T 97.9 deg. It also fits the band / shoe / neck radii (quantiles q_ring 0.991 / q 0.983 of those poses' radial march). It then scores on the same 220 poses, as the best of 479 configs on that bench. The taken poses sit exactly on the window edge: min edge margin -0.0 deg, so the window ends at a bench pose. S1 makes it worse for this morphology: the window is a twist range, and the search benches under-sample |axial| >= 150 (6 % vs 11 % held out). The frozen exact-bench and held-out wears (tools/alignment_wear_probe_pointer_cslide.py bench|held, the shape frozen from the fast fit through the model's own cache) did not finish in the time box. On a load-25 box they ran at about 25-35 % of one core, and the bench wear hit its 1500 s wall timeout after about 8 CPU-min. So the off-bench number is still unmeasured.",
+  "evidence": "docs/concepts/models/pointer-cslide.py window() and design(); docs/alignment/remeasure/pointer-cslide_probe_fitfast.json j3_window_edge_min_deg, shape"
+ },
+ {
+  "key": "M2",
+  "level": "watch",
+  "reason": "The J3 component as declared cannot carry the declared stroke. The row's mechanism says J3 is 'the arm-fixed shoe on the open wire-race band (caged balls; cage excluded as a rolling element, needs anti-creep)'. In a non-recirculating caged-ball guide the cage moves half the stroke relative to the shoe. So the shoe must be at least as long as the cage plus T/2: T/2 = 48.97 deg, but the shoe arc is Ls = 39.46 deg. The cage leaves the shoe for ANY cage length: 144 mm of stroke on the 84 mm track radius against a 58 mm shoe. A shoe long enough (>= 49 deg + cage) adds the same arc to the band (band arc = T + Ls + stops, now 141 deg), which pushes it toward the ~150-180 deg torso-free sector the row names as the limiter. A plain iglidur-lined shoe would fit the modelled 2 + 6 + 2 envelope (the simplicity count already prices the track as a sliding pair, 2.75 unchanged), so the number may stand. But the component list (ball set, cage, 4 race wires) names a part that does not work at this stroke.",
+  "evidence": "docs/concepts/rows/pointer-cslide.json mechanism.notes and best_params (Ls 39.464), shape T 97.9 (docs/alignment/remeasure/pointer-cslide_probe_fitfast.json); docs/concepts/models/pointer-cslide.py angles()"
+ },
+ {
+  "key": "S3",
+  "level": "watch",
+  "reason": "The wall that joins the shoe to the neck is not sampled. In saddle mode the shoe is sampled only at its distal wall rows s+13 / s+15 at the track radius rho 81.8 mm (60 samples, 27-31 mm off the arm). The neck ('down') starts at s+19 at its skin-fitted radius (median 4.5 mm off), and neck_from is used only by the 'bar' neck. So the ~25 mm radial riser, 14 mm wide, that carries the arm-fixed shoe down to the neck belongs to no member. At the kit's 2 x 2 mm it would be about 88 samples, all above 14 mm. Estimated effect: in-band 0.674 -> about 0.652, about +2.2 gap points (an estimate, not run).",
+  "evidence": "docs/concepts/models/pointer-cslide.py build_chain (saddle branch: Xs = ring_pts(... rowsS[-2:] ..., rho)), neck_layout (rows from s + BAND_W/2 + 6)"
+ },
+ {
+  "key": "NEW-ws-inband",
+  "level": "watch",
+  "reason": "The score reads in-band on the 60 clip frames only. On the 80 workspace poses it takes (unscored), in-band14 is 0.545 (in-band10 0.368), with 44.6 % of the metal above 14 mm and 24.7 % above 20 mm. Overhead is not reached at all: 0 of 12 workspace poses at elev >= 140 are taken (9 lost to the J3 window, 2 to collisions, 1 to contact). Raised-arm reach (elev >= 90, all poses) is 34 / 67.",
+  "evidence": "docs/alignment/remeasure/pointer-cslide_probe_fitfast.json probe.ws_unscored, overhead_ws140, overhead_ws140_why_not, raised_arm_reach"
+ },
+ {
+  "key": "NEW-skin-wrapped-body",
+  "level": "watch",
+  "reason": "The number depends on a surface the user's CAD rule forbids. The saddle's underside is a free-form grid of 14 x 105 independent radii, each the 0.991 quantile of that sample's radial requirement over the bench poses: a surface fitted to skin data. CLAUDE.md 'No lofts, ever' says 'no surfaces fitted or shrink-wrapped to skin data'. L1 CAD wants links as constant-thickness slabs. A buildable band (lines and tangent arcs, or a stepped body) can only sit at or above this envelope, so its in-band would be lower. How much lower is unmeasured.",
+  "evidence": "docs/concepts/models/pointer-cslide.py design() 'prof' and build_chain saddle branch; CLAUDE.md 'No lofts, ever'"
+ }
+]

@@ -1,0 +1,162 @@
+[
+ {
+  "tag": "p1rt-env-held-K7",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-pick1-redteam.py attr env pick1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_K7.json > docs/research/minarc_pick1_redteam/attr_pick1_env_held_K7.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_K7.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_env_held_K7*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "LIFT": "{\"hubK\": 7}",
+   "WEAR": "held"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-env-held-L4",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-pick1-redteam.py attr env pick1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_L4.json > docs/research/minarc_pick1_redteam/attr_pick1_env_held_L4.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_L4.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_env_held_L4*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "LIFT": "{\"L2\": 4, \"hub2\": 4}",
+   "WEAR": "held"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-env-held-K7L4",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-pick1-redteam.py attr env pick1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_K7L4.json > docs/research/minarc_pick1_redteam/attr_pick1_env_held_K7L4.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_K7L4.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_env_held_K7L4*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "LIFT": "{\"hubK\": 7, \"L2\": 4, \"hub2\": 4}",
+   "WEAR": "held"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-env-held-K3L2",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-pick1-redteam.py attr env pick1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_K3L2.json > docs/research/minarc_pick1_redteam/attr_pick1_env_held_K3L2.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_env_held_K3L2.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_env_held_K3L2*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "LIFT": "{\"hubK\": 3, \"L2\": 2, \"hub2\": 2}",
+   "WEAR": "held"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-fit60-bench-none",
+  "cmd": "python3 docs/concepts/verify/minarc-pick1-redteam.py attr fit60 pick1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_none.json > docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_none.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_none.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_none*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "LIFT": "{}",
+   "WEAR": "bench"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-fit60-bench-K7L4",
+  "cmd": "python3 docs/concepts/verify/minarc-pick1-redteam.py attr fit60 pick1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K7L4.json > docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K7L4.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K7L4.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K7L4*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "LIFT": "{\"hubK\": 7, \"L2\": 4, \"hub2\": 4}",
+   "WEAR": "bench"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-fit60-bench-K3L2",
+  "cmd": "python3 docs/concepts/verify/minarc-pick1-redteam.py attr fit60 pick1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K3L2.json > docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K3L2.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K3L2.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K3L2*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "LIFT": "{\"hubK\": 3, \"L2\": 2, \"hub2\": 2}",
+   "WEAR": "bench"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-fit60-bench-K7",
+  "cmd": "python3 docs/concepts/verify/minarc-pick1-redteam.py attr fit60 pick1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K7.json > docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K7.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K7.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_fit60_bench_K7*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "LIFT": "{\"hubK\": 7}",
+   "WEAR": "bench"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-fit60-held-K7L4",
+  "cmd": "python3 docs/concepts/verify/minarc-pick1-redteam.py attr fit60 pick1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_held_K7L4.json > docs/research/minarc_pick1_redteam/attr_pick1_fit60_held_K7L4.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_held_K7L4.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_fit60_held_K7L4*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "LIFT": "{\"hubK\": 7, \"L2\": 4, \"hub2\": 4}",
+   "WEAR": "held"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-fit60-held-K3L2",
+  "cmd": "python3 docs/concepts/verify/minarc-pick1-redteam.py attr fit60 pick1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_held_K3L2.json > docs/research/minarc_pick1_redteam/attr_pick1_fit60_held_K3L2.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_fit60_held_K3L2.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_fit60_held_K3L2*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "LIFT": "{\"hubK\": 3, \"L2\": 2, \"hub2\": 2}",
+   "WEAR": "held"
+  },
+  "timeout": 3000
+ }
+]

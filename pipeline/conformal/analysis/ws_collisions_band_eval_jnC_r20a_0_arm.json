@@ -1,0 +1,20 @@
+{
+ "src": "../gpu_client/band_eval_jnC_r20a.json",
+ "idx": 0,
+ "jn_low": "arm",
+ "n": 1432,
+ "valid": 0.8561452513966481,
+ "collide": 0.14175977653631286,
+ "pairs": {
+  "base-link 1": 0.0,
+  "base-link 2": 0.0,
+  "link 1-link 2": 0.0,
+  "base-neck": 0.0,
+  "link 1-neck": 0.0,
+  "link 1-tab": 0.0,
+  "link 2-neck": 0.14175977653631286,
+  "link 2-tab": 0.0,
+  "link 1-bar": 0.0,
+  "link 2-bar": 0.002094972067039106
+ }
+}

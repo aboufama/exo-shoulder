@@ -1,0 +1,154 @@
+[
+ {
+  "tag": "snc-BEST-env-held-p",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && python3 tools/slipper_env_polish.py claim env held BEST docs/research/slipper_env_polish/farm/claim_BEST_env_held_p.json > docs/research/slipper_env_polish/farm/claim_BEST_env_held_p.log 2>&1; tail -1 docs/research/slipper_env_polish/farm/claim_BEST_env_held_p.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/claim_BEST_env_held_p*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "SN_CELL": "lead",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "snc-BEST-env-held-u",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && python3 tools/slipper_env_polish.py claim env held BEST docs/research/slipper_env_polish/farm/claim_BEST_env_held_u.json > docs/research/slipper_env_polish/farm/claim_BEST_env_held_u.log 2>&1; tail -1 docs/research/slipper_env_polish/farm/claim_BEST_env_held_u.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/claim_BEST_env_held_u*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "SN_CELL": "lead",
+   "CB_FOLD_MARGIN": "5",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "snc-pick1-env-held-p",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && python3 tools/slipper_env_polish.py claim env held docs/research/slipper_env_polish/picks/pick1.json docs/research/slipper_env_polish/farm/claim_pick1_env_held_p.json > docs/research/slipper_env_polish/farm/claim_pick1_env_held_p.log 2>&1; tail -1 docs/research/slipper_env_polish/farm/claim_pick1_env_held_p.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/claim_pick1_env_held_p*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "SN_CELL": "lead",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "snc-pick1-env-held-u",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && python3 tools/slipper_env_polish.py claim env held docs/research/slipper_env_polish/picks/pick1.json docs/research/slipper_env_polish/farm/claim_pick1_env_held_u.json > docs/research/slipper_env_polish/farm/claim_pick1_env_held_u.log 2>&1; tail -1 docs/research/slipper_env_polish/farm/claim_pick1_env_held_u.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/claim_pick1_env_held_u*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "SN_CELL": "lead",
+   "CB_FOLD_MARGIN": "5",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "snc-pick2-env-held-p",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && python3 tools/slipper_env_polish.py claim env held docs/research/slipper_env_polish/picks/pick2.json docs/research/slipper_env_polish/farm/claim_pick2_env_held_p.json > docs/research/slipper_env_polish/farm/claim_pick2_env_held_p.log 2>&1; tail -1 docs/research/slipper_env_polish/farm/claim_pick2_env_held_p.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/claim_pick2_env_held_p*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "SN_CELL": "lead",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "snc-pick3-env-held-p",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && python3 tools/slipper_env_polish.py claim env held docs/research/slipper_env_polish/picks/pick3.json docs/research/slipper_env_polish/farm/claim_pick3_env_held_p.json > docs/research/slipper_env_polish/farm/claim_pick3_env_held_p.log 2>&1; tail -1 docs/research/slipper_env_polish/farm/claim_pick3_env_held_p.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/claim_pick3_env_held_p*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "SN_CELL": "lead",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "snc-BEST-fit60-bench-p",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && python3 tools/slipper_env_polish.py claim fit60 bench BEST docs/research/slipper_env_polish/farm/claim_BEST_fit60_bench_p.json > docs/research/slipper_env_polish/farm/claim_BEST_fit60_bench_p.log 2>&1; tail -1 docs/research/slipper_env_polish/farm/claim_BEST_fit60_bench_p.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/claim_BEST_fit60_bench_p*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "SN_CELL": "lead",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "snc-pick1-fit60-bench-p",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && python3 tools/slipper_env_polish.py claim fit60 bench docs/research/slipper_env_polish/picks/pick1.json docs/research/slipper_env_polish/farm/claim_pick1_fit60_bench_p.json > docs/research/slipper_env_polish/farm/claim_pick1_fit60_bench_p.log 2>&1; tail -1 docs/research/slipper_env_polish/farm/claim_pick1_fit60_bench_p.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/claim_pick1_fit60_bench_p*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "SN_CELL": "lead",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "snc-pick2-fit60-bench-p",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && python3 tools/slipper_env_polish.py claim fit60 bench docs/research/slipper_env_polish/picks/pick2.json docs/research/slipper_env_polish/farm/claim_pick2_fit60_bench_p.json > docs/research/slipper_env_polish/farm/claim_pick2_fit60_bench_p.log 2>&1; tail -1 docs/research/slipper_env_polish/farm/claim_pick2_fit60_bench_p.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/claim_pick2_fit60_bench_p*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "SN_CELL": "lead",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "snc-pick3-fit60-bench-p",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && python3 tools/slipper_env_polish.py claim fit60 bench docs/research/slipper_env_polish/picks/pick3.json docs/research/slipper_env_polish/farm/claim_pick3_fit60_bench_p.json > docs/research/slipper_env_polish/farm/claim_pick3_fit60_bench_p.log 2>&1; tail -1 docs/research/slipper_env_polish/farm/claim_pick3_fit60_bench_p.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/claim_pick3_fit60_bench_p*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "SN_CELL": "lead",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ }
+]

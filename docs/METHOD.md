@@ -77,3 +77,62 @@ the model, produce the pressure map, write the quote request), never writing a c
 2. Depth: which professional instrument does the work, which raw data does it start from, which judge decides?
 3. Range: which other field's method applies here, and who is the red team?
 4. Close with the scorecard (`tools/judge_all.sh`), before vs after, and what was learned in docs/FINDINGS.md.
+
+## Running agents (the essay applied to orchestration - hard rules for the lead and every subagent)
+
+Learned the hard way on 2026-10-15: screening agents sat unlaunched while the lead waited for a faster bench, a
+workflow ran 2 agents at a time without anyone counting, a GPU endpoint sat stuck for 26 minutes, and stopped agents
+went unnoticed. The user: "the goal of this project is to iterate as quick as possible ... don't ever waste time like
+this again". So:
+
+- **Speed is assumed** (the essay takes it as given): every slot busy - agents, GPU, CPU. Never hold work behind
+  infrastructure that can be built in parallel; agents start on the current tools and switch when the better one lands.
+  Count a workflow's concurrency before launching it (min(16, CPUs - 2) per workflow) and split the work so everything
+  runs at once. A 15-minute watchdog checks every workflow, agent, endpoint and core and launches the next work.
+- **Altitude in every prompt**: the prompt names the outcome (all 19 requirements, a wearer who does not feel it), the
+  loop the agent's result feeds (bench -> verifier -> GPU -> L1 CAD -> judges -> dashboard) and what happens next.
+- **Depth in every prompt**: a specific hard numeric target stated as reasonable (gap 0; R1-aim >= 90 %), a tight
+  time box (the "Fast" list: audacious goals, short deadlines), the instrument of the field to use, the rawest data to
+  start from, and the outside judge that decides. No agent grades itself: every result that matters passes an
+  adversarial verifier before it is reported as a win.
+- **Range in the crew**: agents do the work of distinct fields (kinematician, orthotist, machinist, biomechanist,
+  inventor) plus a red team; they produce artefacts (a model, a measurement, a quote request), not characters.
+- **Honest reporting**: measured numbers before/after, measurement changes separate from design changes, failures said
+  plainly, and every result logged on the dashboard as it lands.
+- **Brief agents fully up front.** A message sent to an agent that a workflow is running can start a second copy of it
+  (2026-10-15: two cloud-farm agents built the same endpoint in parallel and collided). Put every constraint in the
+  first prompt; to change a running agent's brief, say which instance keeps the work and which stops.
+
+## The brief template (every agent prompt, from the essay's own words - lead and subagents)
+
+Read the essay itself, not only this paraphrase (2026-10-15: the lead's first fetch returned a summary; the full text
+was then read). Every brief to an agent carries these parts, in this order:
+
+1. **Altitude - the outcome and what happens next.** "Keep the apps crash-free", not "fix this crash": name the
+   outcome (all 19 requirements on a mechanism the wearer does not feel), the loop the result feeds (idea -> bench ->
+   verifier -> GPU sweep -> L1 CAD -> judges -> dashboard) and what runs unattended afterwards.
+2. **Depth - the essay's prompt, answered before any work starts:** "I want a deeper version of this task, not a
+   bigger one. Before rewriting it: (1) say what a top professional in this field would do here that I'm not asking
+   for; (2) name the rawest material they would start from instead of what has already been digested for me; (3) name
+   the specific methods and tools they would use; (4) say what, other than you or me, would show the result is right.
+   Then rewrite my prompt to ask for exactly that." The agent writes its four answers at the top of its report.
+3. **An unreasonable goal, stated as reasonable.** "You need your website to load in 5s instead of 10s? Ask for
+   200ms." Here: bench gap 0, R1-aim >= 90 %, a 5 s evaluation. When it looks impossible: it is solvable, keep going -
+   change the morphology, prove the impossibility from data only as the last resort.
+4. **Challenge what we know** from the raw data, and **produce new knowledge** that predicts on data it has not seen.
+5. **Outside judge:** a tool the agent can run for immediate feedback, then an adversarial verifier; never self-grading.
+6. **Range:** the verbs of the task (follow a translating joint, hug a moving surface, carry load through soft tissue,
+   never pinch), the fields that own them, and a red team - doing what each field does, never role-play.
+7. **Fast:** a tight time box and permission to fail early with the measured reason (self-efficacy: specific hard
+   goals and tight deadlines beat "do your best").
+
+## Screening statistics: a death needs a converged sweep (2026-10-15)
+
+A morphology's sweep samples its parameter space: a cap of good settings above a long tail of bad ones, and only the
+best point is reported. The user asked how we know a low number is not just an unlucky sample. Measured on the swarm's
+own sweeps: five of the morphologies declared dead were still climbing when stopped (best found on the last try, or
++6.5 to +27 score points in the second half). So a design may be called dead only when its sweep passes the
+**convergence gate**: < 1 score point gained over the second half of the tries, < 0.5 point gained over the last third,
+and the top-5 configurations within 3 points (score = 100 x (1 - gap / 275), higher is better). Otherwise it gets a
+local optimiser (CMA-ES) from its top configurations first. Cheap next check, not yet run: a budget-matched comparison
+(the 3-hinge chain's best-of-N on the same bench at the same N as the design's sweep).

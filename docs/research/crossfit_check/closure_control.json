@@ -1,0 +1,221 @@
+{
+ "H1": {
+  "pool": 0.7104,
+  "held": 0.6618,
+  "grid": 0.6781,
+  "pool_minus_held": 0.0487,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.2286,
+  "held_rw_axial": 0.6978
+ },
+ "P5": {
+  "pool": 0.7542,
+  "held": 0.6849,
+  "grid": 0.7081,
+  "pool_minus_held": 0.0693,
+  "ax150_pool": 0.2069,
+  "ax150_held": 0.2476,
+  "held_rw_axial": 0.719
+ },
+ "C1": {
+  "pool": 0.7312,
+  "held": 0.6691,
+  "grid": 0.6899,
+  "pool_minus_held": 0.0621,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.2381,
+  "held_rw_axial": 0.7056
+ },
+ "F2": {
+  "pool": 0.7271,
+  "held": 0.6586,
+  "grid": 0.6816,
+  "pool_minus_held": 0.0685,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.2095,
+  "held_rw_axial": 0.6931
+ },
+ "F7": {
+  "pool": 0.7292,
+  "held": 0.667,
+  "grid": 0.6878,
+  "pool_minus_held": 0.0621,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.2095,
+  "held_rw_axial": 0.7017
+ },
+ "XP1": {
+  "pool": 0.75,
+  "held": 0.6891,
+  "grid": 0.7095,
+  "pool_minus_held": 0.0609,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.219,
+  "held_rw_axial": 0.7255
+ },
+ "XP2": {
+  "pool": 0.7333,
+  "held": 0.6712,
+  "grid": 0.692,
+  "pool_minus_held": 0.0621,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.2,
+  "held_rw_axial": 0.7056
+ },
+ "R00": {
+  "pool": 0.6708,
+  "held": 0.6166,
+  "grid": 0.6348,
+  "pool_minus_held": 0.0542,
+  "ax150_pool": 0.1034,
+  "ax150_held": 0.2095,
+  "held_rw_axial": 0.6499
+ },
+ "R01": {
+  "pool": 0.6479,
+  "held": 0.6292,
+  "grid": 0.6355,
+  "pool_minus_held": 0.0187,
+  "ax150_pool": 0.2759,
+  "ax150_held": 0.4476,
+  "held_rw_axial": 0.6448
+ },
+ "R02": {
+  "pool": 0.6687,
+  "held": 0.6239,
+  "grid": 0.639,
+  "pool_minus_held": 0.0448,
+  "ax150_pool": 0.2069,
+  "ax150_held": 0.2762,
+  "held_rw_axial": 0.6532
+ },
+ "R03": {
+  "pool": 0.4813,
+  "held": 0.4632,
+  "grid": 0.4693,
+  "pool_minus_held": 0.018,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.2,
+  "held_rw_axial": 0.4833
+ },
+ "R04": {
+  "pool": 0.8146,
+  "held": 0.7532,
+  "grid": 0.7737,
+  "pool_minus_held": 0.0614,
+  "ax150_pool": 0.2069,
+  "ax150_held": 0.2857,
+  "held_rw_axial": 0.7882
+ },
+ "R05": {
+  "pool": 0.6188,
+  "held": 0.5809,
+  "grid": 0.5936,
+  "pool_minus_held": 0.0379,
+  "ax150_pool": 0.2069,
+  "ax150_held": 0.3238,
+  "held_rw_axial": 0.6006
+ },
+ "R06": {
+  "pool": 0.6542,
+  "held": 0.6155,
+  "grid": 0.6285,
+  "pool_minus_held": 0.0386,
+  "ax150_pool": 0.1034,
+  "ax150_held": 0.1524,
+  "held_rw_axial": 0.654
+ },
+ "R07": {
+  "pool": 0.6,
+  "held": 0.5704,
+  "grid": 0.5803,
+  "pool_minus_held": 0.0296,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.2,
+  "held_rw_axial": 0.6062
+ },
+ "R08": {
+  "pool": 0.7271,
+  "held": 0.6702,
+  "grid": 0.6892,
+  "pool_minus_held": 0.0569,
+  "ax150_pool": 0.1034,
+  "ax150_held": 0.1714,
+  "held_rw_axial": 0.7077
+ },
+ "R09": {
+  "pool": 0.5375,
+  "held": 0.5095,
+  "grid": 0.5189,
+  "pool_minus_held": 0.028,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.2762,
+  "held_rw_axial": 0.5312
+ },
+ "R10": {
+  "pool": 0.6042,
+  "held": 0.5935,
+  "grid": 0.5971,
+  "pool_minus_held": 0.0107,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.1714,
+  "held_rw_axial": 0.6205
+ },
+ "R11": {
+  "pool": 0.6312,
+  "held": 0.5903,
+  "grid": 0.6041,
+  "pool_minus_held": 0.0409,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.1524,
+  "held_rw_axial": 0.624
+ },
+ "R12": {
+  "pool": 0.675,
+  "held": 0.6523,
+  "grid": 0.6599,
+  "pool_minus_held": 0.0227,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.1619,
+  "held_rw_axial": 0.692
+ },
+ "R13": {
+  "pool": 0.6708,
+  "held": 0.625,
+  "grid": 0.6404,
+  "pool_minus_held": 0.0458,
+  "ax150_pool": 0.1034,
+  "ax150_held": 0.1429,
+  "held_rw_axial": 0.6604
+ },
+ "R14": {
+  "pool": 0.5708,
+  "held": 0.5378,
+  "grid": 0.5489,
+  "pool_minus_held": 0.033,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.2762,
+  "held_rw_axial": 0.5578
+ },
+ "R15": {
+  "pool": 0.6188,
+  "held": 0.5903,
+  "grid": 0.5999,
+  "pool_minus_held": 0.0284,
+  "ax150_pool": 0.1379,
+  "ax150_held": 0.2095,
+  "held_rw_axial": 0.6227
+ },
+ "_summary": {
+  "random_draws": {
+   "n": 16,
+   "pool_minus_held": 0.0356,
+   "pool_minus_held_rw_axial": 0.0059
+  },
+  "polished": {
+   "n": 7,
+   "pool_minus_held": 0.062,
+   "pool_minus_held_rw_axial": 0.0267
+  }
+ }
+}

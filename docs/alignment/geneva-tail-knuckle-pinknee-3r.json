@@ -1,0 +1,276 @@
+{
+ "id": "geneva-tail-knuckle-pinknee-3r",
+ "status": "verified",
+ "v_gap": 23.57,
+ "complexity": 12.0,
+ "verdict": "watch",
+ "reasons": [
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: sample-weighted in-band 0.846 vs part-weighted 0.787 (+5.90 points); thinly sampled parts: rod 14; mostly out-of-band parts: rod (0.00 in band, median 20.5 mm, 1.7 % of samples); rodends (0.00 in band, median 22.0 mm, 3.8 % of samples) (re-measured)",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 16.53 (score 93.99) sits 7.04 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 28.12 vs bench 23.57 (+4.55; docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_corr_held_frozen.json)",
+   "held_gap": 28.12,
+   "v_gap": 23.57,
+   "drop": 4.55,
+   "source": "docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_corr_held_frozen.json"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 16.53 -> verified 23.57 (+7.04)",
+   "fast": 16.53,
+   "verified": 23.57,
+   "drop": 7.04
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 23.37, <1 mm 25.01, <2 mm 38.63, <3 mm 91.0, band read 3-14 mm 23.67, 15.26 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 15.26,
+   "plain": 23.37,
+   "n1": 25.01,
+   "n2": 38.63,
+   "n3": 91.0,
+   "band3": 23.67,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0008,
+    "2-3": 0.003,
+    "3-4": 0.0092,
+    "4-6": 0.0823,
+    "6-10": 0.4377,
+    "10-14": 0.3142,
+    ">14": 0.1529
+   },
+   "minmm": 0.452,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 23.57: bench 4 contact poses, sum 12.51 mm, deepest 6.76 mm at ['ws', -75.0, 60.0, 120.0], 1 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (-2.24 mm, x0.85); held depths not on file",
+   "depths": {
+    "v_gap 23.57": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 12.51,
+      "max_mm": 6.76,
+      "n_deeper3": 1,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       -75.0,
+       60.0,
+       120.0
+      ],
+      "gap": 23.57,
+      "src": "docs/alignment/live_audit_2026-10-16/probe_geneva-tail-knuckle-pinknee-3r.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        12.51
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "slipper-nose-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 23.57",
+     "wear": "bench",
+     "sum": 12.51,
+     "ref_sum": 14.75,
+     "excess": -2.24,
+     "ratio": 0.85,
+     "watch": false
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs slipper-nose-knuckle-3r: plain -4.88, 2 mm -5.61",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -4.88,
+   "gain_2mm": -5.61
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 23.37, connected full 23.37, knn 25.9, bench 46.45 (docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_claim_bench_frozen.json)",
+   "static": 23.37,
+   "connected_full": 23.37,
+   "connected_knn": 25.9,
+   "connected_bench": 46.45
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 44.0 deg (docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_claim_bench_frozen.json:drive.dK_taken_max); crank: declared moving, no span on file; knee moves: smallest recorded span 71.8 deg (re-measured K.qb span)",
+   "spans": [
+    [
+     "docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_corr_held_frozen.json:drive.dK_taken_max",
+     44.5
+    ],
+    [
+     "docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_claim_bench_frozen.json:drive.dK_taken_max",
+     44.0
+    ],
+    [
+     "docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_corr_bench_frozen.json:drive.dK_taken_max",
+     44.0
+    ],
+    [
+     "docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_claim_held_frozen.json:drive.dK_taken_max",
+     44.5
+    ],
+    [
+     "re-measured dK span",
+     44.02
+    ],
+    [
+     "re-measured K.ang span",
+     72.11
+    ],
+    [
+     "re-measured K.qa span",
+     72.11
+    ],
+    [
+     "re-measured K.qb span",
+     71.8
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "sample-weighted in-band 0.846 vs part-weighted 0.787 (+5.90 points); thinly sampled parts: rod 14; mostly out-of-band parts: rod (0.00 in band, median 20.5 mm, 1.7 % of samples); rodends (0.00 in band, median 22.0 mm, 3.8 % of samples) (re-measured)",
+   "parts": {
+    "hub1": [
+     0.993,
+     7.8,
+     80
+    ],
+    "hubK": [
+     0.945,
+     9.3,
+     80
+    ],
+    "hub2": [
+     0.986,
+     10.0,
+     80
+    ],
+    "hub3": [
+     0.591,
+     13.0,
+     80
+    ],
+    "E": [
+     0.952,
+     7.5,
+     104
+    ],
+    "boss": [
+     1.0,
+     7.2,
+     32
+    ],
+    "pad": [
+     1.0,
+     7.6,
+     32
+    ],
+    "knee": [
+     0.982,
+     9.6,
+     95
+    ],
+    "rocker": [
+     0.932,
+     12.6,
+     21
+    ],
+    "rod": [
+     0.0,
+     20.5,
+     14
+    ],
+    "rodends": [
+     0.0,
+     22.0,
+     32
+    ],
+    "L1a": [
+     0.95,
+     9.7,
+     16
+    ],
+    "L1b": [
+     0.925,
+     8.6,
+     36
+    ],
+    "L2": [
+     0.767,
+     11.3,
+     144
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 12.0 vs row 12.0",
+   "recomputed": 12.0,
+   "row": 12.0
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 16.53 (score 93.99) sits 7.04 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_corr_held_frozen.json",
+  "docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_claim_bench_frozen.json",
+  "docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_corr_bench_frozen.json",
+  "docs/concepts/verify/geneva-tail-knuckle-pinknee-3r_claim_held_frozen.json"
+ ],
+ "git": "06f7b8d",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T08:03:45Z"
+}

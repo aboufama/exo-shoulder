@@ -1,0 +1,143 @@
+{
+ "id": "minarc-stop-knuckle-4r",
+ "config": "pick1",
+ "params_file": "docs/research/minarc_final_polish/verify/v_pick1_fit60_bench_params.json",
+ "knee_centre_m": [
+  -12.5743,
+  0.6694,
+  0.0
+ ],
+ "sn_vs_u3_deg": 0.000115,
+ "grid_taken": {
+  "n": 1056,
+  "nonfinite_dropped": 0,
+  "hub4_sigma_min": {
+   "min": 0.3691,
+   "p5": 0.4904,
+   "median": 0.5286
+  },
+  "hub4_cond_max": 2.54,
+  "hub4_raw_J_cond_max": 10.66,
+  "hub3_Kfree_sigma_min_max": 0.0,
+  "law_hub3_sigma_min": {
+   "min": 0.0,
+   "p5": 0.0,
+   "median": 0.5591
+  },
+  "law_cond_max": 905476608327.29,
+  "forced": {
+   "n": 294,
+   "hub4_sigma_min": 0.3691,
+   "law_sigma_min": 0.0
+  },
+  "stateA": {
+   "n": 762,
+   "hub4_sigma_min": 0.3797
+  },
+  "closure_vs_model_q_deg_max": 6e-10,
+  "member3_axis_err_deg_max": 0.0155,
+  "knee_ang": [
+   93.51,
+   152.75
+  ],
+  "corr_s4_knee_ang": -0.473,
+  "gh_drift_twist_deg_per_mm": {
+   "max": 1.694,
+   "median": 0.786
+  },
+  "hub4_worst_pose": {
+   "plane": 150.0,
+   "elev": 120.0,
+   "axial": -75.0
+  },
+  "hub4_worst_dK_deg": -35.16,
+  "hub4_worst_knee_ang": 145.03,
+  "expected": 1056
+ },
+ "grid_taken_overhead140": {
+  "n": 20,
+  "nonfinite_dropped": 0,
+  "hub4_sigma_min": {
+   "min": 0.3902,
+   "p5": 0.4081,
+   "median": 0.4617
+  },
+  "hub4_cond_max": 2.41,
+  "hub4_raw_J_cond_max": 6.85,
+  "hub3_Kfree_sigma_min_max": 0.0,
+  "law_hub3_sigma_min": {
+   "min": 0.3904,
+   "p5": 0.4082,
+   "median": 0.4691
+  },
+  "law_cond_max": 2.36,
+  "forced": {
+   "n": 0,
+   "hub4_sigma_min": null,
+   "law_sigma_min": null
+  },
+  "stateA": {
+   "n": 20,
+   "hub4_sigma_min": 0.3902
+  },
+  "closure_vs_model_q_deg_max": 1.75e-10,
+  "member3_axis_err_deg_max": 0.0107,
+  "knee_ang": [
+   119.6,
+   142.4
+  ],
+  "corr_s4_knee_ang": -0.92,
+  "gh_drift_twist_deg_per_mm": {
+   "max": 1.271,
+   "median": 0.99
+  },
+  "hub4_worst_pose": {
+   "plane": 45.0,
+   "elev": 165.0,
+   "axial": -90.0
+  },
+  "hub4_worst_dK_deg": 0.0,
+  "hub4_worst_knee_ang": 142.4
+ },
+ "library_kinematic": {
+  "n": 1556,
+  "nonfinite_dropped": 0,
+  "hub4_sigma_min": {
+   "min": 0.2839,
+   "p5": 0.4667,
+   "median": 0.5279
+  },
+  "hub4_cond_max": 3.3,
+  "hub4_raw_J_cond_max": 10.66,
+  "hub3_Kfree_sigma_min_max": 0.0,
+  "law_hub3_sigma_min": {
+   "min": 0.0,
+   "p5": 0.0,
+   "median": 0.5617
+  },
+  "law_cond_max": 905476608327.29,
+  "forced": {
+   "n": 367,
+   "hub4_sigma_min": 0.2857,
+   "law_sigma_min": 0.0
+  },
+  "stateA": {
+   "n": 1189,
+   "hub4_sigma_min": 0.2839
+  },
+  "closure_vs_model_q_deg_max": 6e-10,
+  "member3_axis_err_deg_max": 0.0155,
+  "knee_ang": [
+   93.51,
+   153.6
+  ],
+  "corr_s4_knee_ang": -0.611,
+  "gh_drift_twist_deg_per_mm": {
+   "max": 1.745,
+   "median": 0.784
+  },
+  "of": 1883
+ },
+ "secs": 7.0,
+ "note": "hub4 sigma_min > 0 with a finite condition at every pose = the 4 hub encoders (J1, J2, J3, K) fix both knee pins and the GH rotation (GH a ball joint; GH translation, R10, is not in the model: the pins absorb it, gh_drift_twist is the hub-only arm-twist error per mm of that drift). hub3_Kfree = 0 means K's own encoder is required (it is in the CAD). Calibration: skin-normal-3r-pin-knee 8-row 0.39 (docs/concepts/skin-normal-3r-pin-knee.md line 566), 0.383 re-run with tools/alignment_knee_sensing.py."
+}

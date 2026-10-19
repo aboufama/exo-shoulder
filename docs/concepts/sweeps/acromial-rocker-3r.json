@@ -1,0 +1,2694 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-16T02:11:40Z",
+  "params": {
+   "rocker": 0
+  },
+  "inband14": 0.8419,
+  "inband10": 0.4001,
+  "reach": 0.7063,
+  "follow": 0.9667,
+  "contact": 0.0116,
+  "gap": 26.34,
+  "why": {
+   "fold": 47,
+   "skin": 2
+  },
+  "src": "local:control (plain pin-knee leader k10, same file)"
+ },
+ {
+  "k": 1,
+  "t": "2026-10-16T02:15:30Z",
+  "params": {
+   "beta": 30.0,
+   "psi": 261.1,
+   "gam": 58.8,
+   "psiA": 262.4,
+   "dl": 11.3,
+   "psiC": 84.0,
+   "q0r": -18.0,
+   "rA": 58.8,
+   "rC": 79.2
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0063,
+  "follow": 0.0,
+  "contact": 0.9811,
+  "gap": 372.48,
+  "why": {
+   "fold": 4,
+   "rod": 26,
+   "skin": 52,
+   "parts": 137
+  },
+  "src": "local:first spec build (unconstrained proxy pick; arm bracket strap)"
+ },
+ {
+  "k": 2,
+  "t": "2026-10-16T02:26:00Z",
+  "params": {
+   "beta": 25,
+   "psi": 250,
+   "gam": 60,
+   "psiA": 270,
+   "dl": 10,
+   "psiC": 80,
+   "q0r": -20,
+   "hA": 12,
+   "hC": 12
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 6,
+   "rod": 83,
+   "skin": 36,
+   "parts": 95
+  },
+  "src": "local:smoke"
+ },
+ {
+  "k": 3,
+  "t": "2026-10-16T02:51:26Z",
+  "params": {
+   "beta": 12.95,
+   "psi": 352.92,
+   "gam": 51.34,
+   "psiA": 252.87,
+   "dl": 0.0,
+   "psiC": 276.82,
+   "q0r": -26.68,
+   "hA": 13.33,
+   "hC": 9.7
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 2,
+   "rod": 77,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 15,
+   "parts": 126,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "brk-hub3": 124,
+   "pvt-hub1": 2
+  },
+  "levels": {
+   "pvt": 48.2,
+   "rk1": 53.3,
+   "rk2": 76.1,
+   "brk": 73.6,
+   "ball": 79.1,
+   "ujt": 76.6
+  },
+  "src": "local:proxy hill-climbed"
+ },
+ {
+  "k": 4,
+  "t": "2026-10-16T02:51:26Z",
+  "params": {
+   "beta": 9.82,
+   "psi": 329.19,
+   "gam": 43.03,
+   "psiA": 276.88,
+   "dl": 2.03,
+   "psiC": 193.33,
+   "q0r": -56.09,
+   "hA": 11.2,
+   "hC": 10.38
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 8,
+   "rod": 91,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 7,
+   "parts": 114,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "pvt-hub1": 114
+  },
+  "levels": {
+   "pvt": 47.0,
+   "rk1": 52.6,
+   "rk2": 72.7,
+   "brk": 74.0,
+   "ball": 76.1,
+   "ujt": 77.0
+  },
+  "src": "local:proxy hill-climbed"
+ },
+ {
+  "k": 5,
+  "t": "2026-10-16T02:51:26Z",
+  "params": {
+   "beta": 15.45,
+   "psi": 169.65,
+   "gam": 68.39,
+   "psiA": 67.39,
+   "dl": 4.14,
+   "psiC": 89.35,
+   "q0r": -45.66,
+   "hA": 15.73,
+   "hC": 9.18
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 3,
+   "rod": 129,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 1,
+   "parts": 87,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "brk-hub3": 85,
+   "pvt-hub1": 2
+  },
+  "levels": {
+   "pvt": 55.5,
+   "rk1": 58.6,
+   "rk2": 64.7,
+   "brk": 73.9,
+   "ball": 67.7,
+   "ujt": 76.9
+  },
+  "src": "local:proxy hill-climbed"
+ },
+ {
+  "k": 6,
+  "t": "2026-10-16T02:51:26Z",
+  "params": {
+   "beta": 24.64,
+   "psi": 31.54,
+   "gam": 89.13,
+   "psiA": 254.93,
+   "dl": 6.49,
+   "psiC": 360.0,
+   "q0r": -38.3,
+   "hA": 14.66,
+   "hC": 9.64
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 24,
+   "rod": 69,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 45,
+   "parts": 82,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "brk-hub3": 72,
+   "ujt-hub3": 10
+  },
+  "levels": {
+   "pvt": 50.1,
+   "rk1": 55.6,
+   "rk2": 81.5,
+   "brk": 73.9,
+   "ball": 84.5,
+   "ujt": 76.9
+  },
+  "src": "local:proxy hill-climbed"
+ },
+ {
+  "k": 7,
+  "t": "2026-10-16T02:51:26Z",
+  "params": {
+   "beta": 8.0,
+   "psi": 120.92,
+   "gam": 64.36,
+   "psiA": 185.89,
+   "dl": 16.25,
+   "psiC": 262.03,
+   "q0r": -30.3,
+   "hA": 9.0,
+   "hC": 12.71
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 8,
+   "rod": 126,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 86,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "pvt-hub1": 86
+  },
+  "levels": {
+   "pvt": 48.3,
+   "rk1": 51.5,
+   "rk2": 84.1,
+   "brk": 66.1,
+   "ball": 87.1,
+   "ujt": 69.1
+  },
+  "src": "local:proxy hill-climbed"
+ },
+ {
+  "k": 8,
+  "t": "2026-10-16T02:51:26Z",
+  "params": {
+   "beta": 22.82,
+   "psi": 213.84,
+   "gam": 52.24,
+   "psiA": 0.5,
+   "dl": 10.33,
+   "psiC": 233.77,
+   "q0r": -29.09,
+   "hA": 9.0,
+   "hC": 14.25
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 0,
+   "rod": 114,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 11,
+   "parts": 95,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 6,
+   "rk2-L1": 6,
+   "ball-hub2": 69,
+   "ujt-hub3": 14
+  },
+  "levels": {
+   "pvt": 57.8,
+   "rk1": 60.9,
+   "rk2": 60.9,
+   "brk": 69.4,
+   "ball": 63.9,
+   "ujt": 72.4
+  },
+  "src": "local:proxy hill-climbed"
+ },
+ {
+  "k": 9,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 23.7,
+   "psi": 179.7,
+   "gam": 44.1,
+   "psiA": 10.3,
+   "dl": 23.7,
+   "psiC": 334.2,
+   "q0r": -43.0,
+   "hA": 9.6,
+   "hC": 13.7
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 0,
+   "rod": 130,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 2,
+   "parts": 88,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rk2-L1": 1,
+   "rk2-sL2": 2,
+   "rod-sL2": 9,
+   "rod-brk": 8,
+   "ball-sL2": 3,
+   "ball-hub2": 65
+  },
+  "levels": {
+   "pvt": 54.4,
+   "rk1": 57.6,
+   "rk2": 57.6,
+   "brk": 67.3,
+   "ball": 60.6,
+   "ujt": 70.3
+  },
+  "rA": 70.3,
+  "rC": 76.3,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 10,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 30.1,
+   "psi": 132.8,
+   "gam": 40.5,
+   "psiA": 238.6,
+   "dl": 26.9,
+   "psiC": 49.7,
+   "q0r": 28.8,
+   "hA": 12.4,
+   "hC": 11.6
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 0,
+   "rod": 204,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 16,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "brk-knee": 8,
+   "rod-sL1": 4,
+   "rod-pad": 4
+  },
+  "levels": {
+   "pvt": 61.8,
+   "rk1": 64.9,
+   "rk2": 64.9,
+   "brk": 94.3,
+   "ball": 67.9,
+   "ujt": 97.3
+  },
+  "rA": 73.9,
+  "rC": 103.3,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 11,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 32.6,
+   "psi": 197.7,
+   "gam": 59.2,
+   "psiA": 73.6,
+   "dl": 33.8,
+   "psiC": 174.1,
+   "q0r": -14.7,
+   "hA": 12.0,
+   "hC": 10.2
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 0,
+   "rod": 220,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0
+  },
+  "parts_pairs": null,
+  "levels": null,
+  "rA": null,
+  "rC": null,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 12,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 32.4,
+   "psi": 312.2,
+   "gam": 25.2,
+   "psiA": 168.1,
+   "dl": 26.9,
+   "psiC": 29.9,
+   "q0r": 39.6,
+   "hA": 11.1,
+   "hC": 9.7
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 0,
+   "rod": 188,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 4,
+   "parts": 28,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "pvt-hub2": 3,
+   "rod-sL2": 10,
+   "rk2-L1": 15
+  },
+  "levels": {
+   "pvt": 51.7,
+   "rk1": 54.8,
+   "rk2": 54.8,
+   "brk": 88.0,
+   "ball": 57.8,
+   "ujt": 91.0
+  },
+  "rA": 63.8,
+  "rC": 97.0,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 13,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 30.8,
+   "psi": 72.8,
+   "gam": 56.1,
+   "psiA": 78.2,
+   "dl": 20.8,
+   "psiC": 72.3,
+   "q0r": -15.4,
+   "hA": 11.3,
+   "hC": 13.5
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 9,
+   "rod": 145,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 4,
+   "parts": 62,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-pad": 4,
+   "ujt-knee": 16,
+   "rk2-hub3": 1,
+   "rod-knee": 40,
+   "rk1-L1": 1
+  },
+  "levels": {
+   "pvt": 55.9,
+   "rk1": 59.1,
+   "rk2": 79.7,
+   "brk": 87.9,
+   "ball": 82.7,
+   "ujt": 90.9
+  },
+  "rA": 88.7,
+  "rC": 96.9,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 14,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 31.1,
+   "psi": 122.2,
+   "gam": 20.7,
+   "psiA": 57.5,
+   "dl": 44.9,
+   "psiC": 165.5,
+   "q0r": 19.1,
+   "hA": 9.3,
+   "hC": 9.2
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 4,
+   "rod": 173,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 43,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 39,
+   "rk2-sL2": 2,
+   "ball-hub3": 2
+  },
+  "levels": {
+   "pvt": 56.4,
+   "rk1": 59.6,
+   "rk2": 62.0,
+   "brk": 76.0,
+   "ball": 65.0,
+   "ujt": 79.0
+  },
+  "rA": 71.0,
+  "rC": 85.0,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 15,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 33.0,
+   "psi": 211.6,
+   "gam": 32.3,
+   "psiA": 114.3,
+   "dl": 22.2,
+   "psiC": 62.2,
+   "q0r": -47.5,
+   "hA": 13.2,
+   "hC": 11.3
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 32,
+   "rod": 124,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 18,
+   "parts": 46,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 1,
+   "rod-knee": 40,
+   "rod-Em": 5
+  },
+  "levels": {
+   "pvt": 68.8,
+   "rk1": 71.9,
+   "rk2": 83.8,
+   "brk": 87.4,
+   "ball": 86.8,
+   "ujt": 90.4
+  },
+  "rA": 92.8,
+  "rC": 96.4,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 16,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 23.7,
+   "psi": 266.1,
+   "gam": 27.8,
+   "psiA": 22.3,
+   "dl": 35.0,
+   "psiC": 322.5,
+   "q0r": -47.3,
+   "hA": 13.0,
+   "hC": 10.0
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 10,
+   "rod": 171,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 39,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-hub1": 8,
+   "rod-brk": 6,
+   "brk-sL2": 12,
+   "rod-sL2": 13
+  },
+  "levels": {
+   "pvt": 43.1,
+   "rk1": 50.6,
+   "rk2": 47.6,
+   "brk": 59.4,
+   "ball": 50.6,
+   "ujt": 62.4
+  },
+  "rA": 56.6,
+  "rC": 68.4,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 17,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 23.2,
+   "psi": 6.5,
+   "gam": 31.7,
+   "psiA": 261.8,
+   "dl": 32.3,
+   "psiC": 307.1,
+   "q0r": -28.3,
+   "hA": 10.6,
+   "hC": 10.3
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 5,
+   "rod": 127,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 88,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-hub1": 20,
+   "brk-sL2": 40,
+   "rod-sL2": 4,
+   "rod-rk1": 10,
+   "rod-brk": 14
+  },
+  "levels": {
+   "pvt": 50.0,
+   "rk1": 54.6,
+   "rk2": 54.0,
+   "brk": 61.4,
+   "ball": 57.0,
+   "ujt": 64.4
+  },
+  "rA": 63.0,
+  "rC": 70.4,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 18,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 34.7,
+   "psi": 338.8,
+   "gam": 33.6,
+   "psiA": 157.0,
+   "dl": 27.9,
+   "psiC": 268.7,
+   "q0r": -46.0,
+   "hA": 9.3,
+   "hC": 11.0
+  },
+  "inband14": 0.8684,
+  "inband10": 0.6267,
+  "reach": 0.0187,
+  "follow": 0.0167,
+  "contact": 0.6923,
+  "gap": 253.85,
+  "why": {
+   "fold": 3,
+   "rod": 130,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 9,
+   "parts": 74,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rk2-hub2": 2,
+   "rod-hub1": 14,
+   "rod-sL1": 28,
+   "rod-sL2": 3,
+   "rod-hub2": 9,
+   "ball-hub2": 18
+  },
+  "levels": {
+   "pvt": 55.7,
+   "rk1": 58.8,
+   "rk2": 74.3,
+   "brk": 60.1,
+   "ball": 77.3,
+   "ujt": 63.1
+  },
+  "rA": 83.3,
+  "rC": 71.7,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 19,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 25.2,
+   "psi": 304.3,
+   "gam": 49.7,
+   "psiA": 196.5,
+   "dl": 36.5,
+   "psiC": 249.2,
+   "q0r": 28.1,
+   "hA": 13.6,
+   "hC": 9.7
+  },
+  "inband14": 0.761,
+  "inband10": 0.3332,
+  "reach": 0.0187,
+  "follow": 0.0667,
+  "contact": 0.125,
+  "gap": 202.86,
+  "why": {
+   "fold": 0,
+   "rod": 179,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 1,
+   "parts": 33,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "pvt-sL2": 1,
+   "brk-sL2": 9,
+   "rod-brk": 7,
+   "pvt-L1": 6,
+   "rk1-L1": 10
+  },
+  "levels": {
+   "pvt": 48.5,
+   "rk1": 52.1,
+   "rk2": 54.5,
+   "brk": 60.3,
+   "ball": 57.5,
+   "ujt": 63.3
+  },
+  "rA": 63.5,
+  "rC": 69.3,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 20,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 30.1,
+   "psi": 51.7,
+   "gam": 37.7,
+   "psiA": 283.1,
+   "dl": 42.4,
+   "psiC": 273.3,
+   "q0r": -46.5,
+   "hA": 10.8,
+   "hC": 9.8
+  },
+  "inband14": 0.7106,
+  "inband10": 0.4362,
+  "reach": 0.0375,
+  "follow": 0.0833,
+  "contact": 0.1538,
+  "gap": 207.24,
+  "why": {
+   "fold": 0,
+   "rod": 162,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 2,
+   "parts": 45,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rk2-L1": 27,
+   "rod-hub1": 4,
+   "rk1-L1": 2,
+   "rk2-sL2": 10,
+   "pvt-L1": 2
+  },
+  "levels": {
+   "pvt": 52.2,
+   "rk1": 56.8,
+   "rk2": 55.4,
+   "brk": 55.3,
+   "ball": 58.4,
+   "ujt": 58.3
+  },
+  "rA": 64.4,
+  "rC": 64.4,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 21,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 35.0,
+   "psi": 51.8,
+   "gam": 29.8,
+   "psiA": 128.6,
+   "dl": 21.5,
+   "psiC": 313.3,
+   "q0r": 13.6,
+   "hA": 9.8,
+   "hC": 11.5
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 0,
+   "rod": 220,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0
+  },
+  "parts_pairs": null,
+  "levels": null,
+  "rA": null,
+  "rC": null,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 22,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 23.0,
+   "psi": 220.0,
+   "gam": 29.3,
+   "psiA": 13.9,
+   "dl": 22.9,
+   "psiC": 199.9,
+   "q0r": 13.7,
+   "hA": 10.6,
+   "hC": 12.2
+  },
+  "inband14": 0.7849,
+  "inband10": 0.431,
+  "reach": 0.2,
+  "follow": 0.6,
+  "contact": 0.0933,
+  "gap": 125.84,
+  "why": {
+   "fold": 0,
+   "rod": 144,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 7,
+   "parts": 1,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rk2-L1": 1
+  },
+  "levels": {
+   "pvt": 50.7,
+   "rk1": 53.9,
+   "rk2": 53.9,
+   "brk": 65.1,
+   "ball": 56.9,
+   "ujt": 68.1
+  },
+  "rA": 70.6,
+  "rC": 75.8,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 23,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 26.6,
+   "psi": 47.0,
+   "gam": 32.6,
+   "psiA": 142.3,
+   "dl": 42.8,
+   "psiC": 41.6,
+   "q0r": -41.4,
+   "hA": 11.8,
+   "hC": 13.8
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 2,
+   "rod": 167,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 4,
+   "parts": 47,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "ball-hub3": 2,
+   "rk2-sL2": 25,
+   "rod-sL2": 3,
+   "rod-brk": 9,
+   "rk1-L1": 8
+  },
+  "levels": {
+   "pvt": 51.9,
+   "rk1": 55.7,
+   "rk2": 60.4,
+   "brk": 87.3,
+   "ball": 63.4,
+   "ujt": 90.3
+  },
+  "rA": 69.4,
+  "rC": 98.3,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 24,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 33.8,
+   "psi": 252.1,
+   "gam": 22.7,
+   "psiA": 290.3,
+   "dl": 37.1,
+   "psiC": 51.8,
+   "q0r": -3.5,
+   "hA": 9.2,
+   "hC": 13.0
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 3,
+   "rod": 130,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 17,
+   "parts": 70,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 1,
+   "rod-rk1": 69
+  },
+  "levels": {
+   "pvt": 73.8,
+   "rk1": 79.6,
+   "rk2": 81.4,
+   "brk": 94.9,
+   "ball": 84.4,
+   "ujt": 97.9
+  },
+  "rA": 90.4,
+  "rC": 103.9,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 25,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 31.3,
+   "psi": 289.7,
+   "gam": 50.4,
+   "psiA": 96.2,
+   "dl": 39.7,
+   "psiC": 89.7,
+   "q0r": -36.2,
+   "hA": 11.0,
+   "hC": 11.5
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 17,
+   "rod": 110,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 47,
+   "parts": 46,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 46
+  },
+  "levels": {
+   "pvt": 48.2,
+   "rk1": 56.6,
+   "rk2": 171.4,
+   "brk": 112.7,
+   "ball": 174.4,
+   "ujt": 115.7
+  },
+  "rA": 269.0,
+  "rC": 121.7,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 26,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 25.7,
+   "psi": 218.1,
+   "gam": 44.1,
+   "psiA": 86.3,
+   "dl": 35.6,
+   "psiC": 128.6,
+   "q0r": 23.5,
+   "hA": 10.5,
+   "hC": 13.0
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 22,
+   "rod": 158,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 40,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 40
+  },
+  "levels": {
+   "pvt": 43.5,
+   "rk1": 56.4,
+   "rk2": 55.1,
+   "brk": 98.6,
+   "ball": 58.1,
+   "ujt": 101.6
+  },
+  "rA": 80.2,
+  "rC": 108.2,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 27,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 27.4,
+   "psi": 199.2,
+   "gam": 46.9,
+   "psiA": 186.6,
+   "dl": 26.4,
+   "psiC": 352.6,
+   "q0r": -40.4,
+   "hA": 10.6,
+   "hC": 11.7
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 22,
+   "rod": 142,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 27,
+   "parts": 29,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 23,
+   "rod-sL2": 6
+  },
+  "levels": {
+   "pvt": 61.7,
+   "rk1": 64.9,
+   "rk2": 82.0,
+   "brk": 76.4,
+   "ball": 85.0,
+   "ujt": 79.4
+  },
+  "rA": 91.0,
+  "rC": 85.4,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 28,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 22.4,
+   "psi": 55.8,
+   "gam": 52.0,
+   "psiA": 282.2,
+   "dl": 35.9,
+   "psiC": 324.6,
+   "q0r": 25.6,
+   "hA": 10.5,
+   "hC": 12.2
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 5,
+   "rod": 175,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 8,
+   "parts": 32,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-hub2": 2,
+   "rod-brk": 16,
+   "rod-sL1": 6,
+   "rod-sL2": 8
+  },
+  "levels": {
+   "pvt": 53.5,
+   "rk1": 56.6,
+   "rk2": 83.3,
+   "brk": 87.0,
+   "ball": 91.4,
+   "ujt": 90.0
+  },
+  "rA": 97.4,
+  "rC": 96.0,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 29,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 26.4,
+   "psi": 269.9,
+   "gam": 35.4,
+   "psiA": 55.2,
+   "dl": 41.9,
+   "psiC": 248.5,
+   "q0r": 24.5,
+   "hA": 11.8,
+   "hC": 12.9
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 14,
+   "rod": 178,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 14,
+   "parts": 14,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 14
+  },
+  "levels": {
+   "pvt": 44.9,
+   "rk1": 56.6,
+   "rk2": 73.6,
+   "brk": 59.8,
+   "ball": 76.9,
+   "ujt": 62.8
+  },
+  "rA": 88.5,
+  "rC": 68.8,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 30,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 27.8,
+   "psi": 203.7,
+   "gam": 22.5,
+   "psiA": 199.8,
+   "dl": 40.4,
+   "psiC": 254.0,
+   "q0r": 30.3,
+   "hA": 11.5,
+   "hC": 13.4
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 10,
+   "rod": 201,
+   "slide": 0,
+   "flip": 1,
+   "closure": 0,
+   "skin": 3,
+   "parts": 5,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-hub1": 1,
+   "rod-sL1": 1,
+   "brk-sL2": 2,
+   "rod-rk1": 1
+  },
+  "levels": {
+   "pvt": 46.6,
+   "rk1": 53.0,
+   "rk2": 49.7,
+   "brk": 54.0,
+   "ball": 52.7,
+   "ujt": 57.0
+  },
+  "rA": 58.7,
+  "rC": 65.6,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 31,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 23.4,
+   "psi": 315.3,
+   "gam": 34.9,
+   "psiA": 32.7,
+   "dl": 35.5,
+   "psiC": 163.8,
+   "q0r": -7.2,
+   "hA": 13.3,
+   "hC": 9.7
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 5,
+   "rod": 204,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 11,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 11
+  },
+  "levels": {
+   "pvt": 48.5,
+   "rk1": 51.7,
+   "rk2": 75.3,
+   "brk": 79.9,
+   "ball": 83.8,
+   "ujt": 82.9
+  },
+  "rA": 271.3,
+  "rC": 88.9,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 32,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 30.0,
+   "psi": 149.0,
+   "gam": 41.1,
+   "psiA": 179.8,
+   "dl": 23.4,
+   "psiC": 184.3,
+   "q0r": 36.2,
+   "hA": 9.9,
+   "hC": 9.1
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 13,
+   "rod": 179,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 28,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 28
+  },
+  "levels": {
+   "pvt": 53.0,
+   "rk1": 57.2,
+   "rk2": 56.1,
+   "brk": 70.9,
+   "ball": 59.1,
+   "ujt": 73.9
+  },
+  "rA": 66.4,
+  "rC": 79.9,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 33,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 22.9,
+   "psi": 165.5,
+   "gam": 59.0,
+   "psiA": 15.9,
+   "dl": 44.8,
+   "psiC": 193.0,
+   "q0r": -38.0,
+   "hA": 11.1,
+   "hC": 10.0
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 10,
+   "rod": 145,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 10,
+   "parts": 55,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rk2-hub2": 10,
+   "rod-brk": 32,
+   "rk2-sL2": 1,
+   "rod-sL2": 12
+  },
+  "levels": {
+   "pvt": 49.5,
+   "rk1": 55.8,
+   "rk2": 65.4,
+   "brk": 63.2,
+   "ball": 68.4,
+   "ujt": 66.2
+  },
+  "rA": 74.4,
+  "rC": 72.2,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 34,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 31.3,
+   "psi": 194.9,
+   "gam": 31.5,
+   "psiA": 92.0,
+   "dl": 41.7,
+   "psiC": 275.8,
+   "q0r": -6.4,
+   "hA": 11.0,
+   "hC": 12.7
+  },
+  "inband14": 0.7109,
+  "inband10": 0.4349,
+  "reach": 0.0875,
+  "follow": 0.3333,
+  "contact": 0.0556,
+  "gap": 167.39,
+  "why": {
+   "fold": 9,
+   "rod": 154,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 2,
+   "parts": 21,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "brk-sL2": 15,
+   "rod-sL2": 2,
+   "brk-hub1": 4
+  },
+  "levels": {
+   "pvt": 64.7,
+   "rk1": 67.8,
+   "rk2": 67.8,
+   "brk": 58.1,
+   "ball": 70.8,
+   "ujt": 61.1
+  },
+  "rA": 76.8,
+  "rC": 67.1,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 35,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 34.6,
+   "psi": 28.7,
+   "gam": 26.4,
+   "psiA": 130.4,
+   "dl": 32.7,
+   "psiC": 25.7,
+   "q0r": -44.7,
+   "hA": 10.1,
+   "hC": 10.9
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 19,
+   "rod": 193,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 1,
+   "parts": 7,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rk2-hub2": 5,
+   "pvt-hub2": 2
+  },
+  "levels": {
+   "pvt": 52.7,
+   "rk1": 61.1,
+   "rk2": 57.8,
+   "brk": 73.7,
+   "ball": 60.8,
+   "ujt": 76.7
+  },
+  "rA": 66.8,
+  "rC": 82.7,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 36,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 31.6,
+   "psi": 219.6,
+   "gam": 21.2,
+   "psiA": 16.2,
+   "dl": 31.3,
+   "psiC": 314.9,
+   "q0r": 41.5,
+   "hA": 10.8,
+   "hC": 13.4
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 16,
+   "rod": 191,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 13,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-hub1": 2,
+   "rod-brk": 11
+  },
+  "levels": {
+   "pvt": 66.2,
+   "rk1": 69.3,
+   "rk2": 69.3,
+   "brk": 76.7,
+   "ball": 72.3,
+   "ujt": 79.7
+  },
+  "rA": 78.3,
+  "rC": 85.7,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 37,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 34.1,
+   "psi": 146.4,
+   "gam": 49.8,
+   "psiA": 131.5,
+   "dl": 23.8,
+   "psiC": 207.1,
+   "q0r": -41.4,
+   "hA": 12.3,
+   "hC": 13.0
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 0,
+   "rod": 220,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0
+  },
+  "parts_pairs": null,
+  "levels": null,
+  "rA": null,
+  "rC": null,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 38,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 33.9,
+   "psi": 161.3,
+   "gam": 24.7,
+   "psiA": 324.9,
+   "dl": 41.8,
+   "psiC": 348.3,
+   "q0r": 9.4,
+   "hA": 12.4,
+   "hC": 10.9
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 5,
+   "rod": 155,
+   "slide": 0,
+   "flip": 1,
+   "closure": 0,
+   "skin": 0,
+   "parts": 59,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 13,
+   "rod-sL2": 46
+  },
+  "levels": {
+   "pvt": 54.8,
+   "rk1": 58.0,
+   "rk2": 58.0,
+   "brk": 64.9,
+   "ball": 61.0,
+   "ujt": 67.9
+  },
+  "rA": 67.0,
+  "rC": 73.9,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 39,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 24.4,
+   "psi": 105.0,
+   "gam": 48.8,
+   "psiA": 117.0,
+   "dl": 37.3,
+   "psiC": 180.8,
+   "q0r": -5.1,
+   "hA": 13.8,
+   "hC": 9.8
+  },
+  "inband14": 0.9004,
+  "inband10": 0.5543,
+  "reach": 0.0813,
+  "follow": 0.1167,
+  "contact": 0.0,
+  "gap": 165.2,
+  "why": {
+   "fold": 0,
+   "rod": 198,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 2,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rk2-sL2": 1,
+   "rk2-hub3": 1
+  },
+  "levels": {
+   "pvt": 55.2,
+   "rk1": 58.3,
+   "rk2": 68.9,
+   "brk": 70.2,
+   "ball": 71.9,
+   "ujt": 73.2
+  },
+  "rA": 77.9,
+  "rC": 79.2,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 40,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 28.3,
+   "psi": 57.5,
+   "gam": 57.5,
+   "psiA": 175.9,
+   "dl": 28.3,
+   "psiC": 60.6,
+   "q0r": 9.4,
+   "hA": 11.0,
+   "hC": 9.6
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 11,
+   "rod": 94,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 9,
+   "parts": 106,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-hub3": 12,
+   "rod-Em": 4,
+   "rod-sL2": 4,
+   "rod-brk": 48,
+   "rod-knee": 27,
+   "rk1-L1": 11
+  },
+  "levels": {
+   "pvt": 55.2,
+   "rk1": 58.3,
+   "rk2": 76.0,
+   "brk": 98.1,
+   "ball": 80.3,
+   "ujt": 101.1
+  },
+  "rA": 93.8,
+  "rC": 107.1,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 41,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 22.4,
+   "psi": 140.9,
+   "gam": 43.3,
+   "psiA": 186.8,
+   "dl": 42.5,
+   "psiC": 328.2,
+   "q0r": 43.6,
+   "hA": 13.0,
+   "hC": 11.4
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 15,
+   "rod": 194,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 11,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 8,
+   "rod-sL1": 1,
+   "rod-sL2": 2
+  },
+  "levels": {
+   "pvt": 53.9,
+   "rk1": 58.9,
+   "rk2": 57.0,
+   "brk": 90.5,
+   "ball": 60.0,
+   "ujt": 93.5
+  },
+  "rA": 66.0,
+  "rC": 99.5,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 42,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 28.8,
+   "psi": 143.0,
+   "gam": 36.0,
+   "psiA": 15.0,
+   "dl": 40.0,
+   "psiC": 88.6,
+   "q0r": -47.1,
+   "hA": 11.3,
+   "hC": 12.6
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 15,
+   "rod": 103,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 7,
+   "parts": 95,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rk2-hub2": 52,
+   "pvt-hub2": 8,
+   "rod-sL2": 17,
+   "rod-brk": 15,
+   "ball-hub2": 3
+  },
+  "levels": {
+   "pvt": 60.2,
+   "rk1": 63.4,
+   "rk2": 63.4,
+   "brk": 116.1,
+   "ball": 66.4,
+   "ujt": 119.1
+  },
+  "rA": 72.4,
+  "rC": 125.1,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 43,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 27.7,
+   "psi": 131.1,
+   "gam": 46.3,
+   "psiA": 58.6,
+   "dl": 20.3,
+   "psiC": 213.3,
+   "q0r": 3.0,
+   "hA": 13.3,
+   "hC": 11.1
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0063,
+  "follow": 0.0,
+  "contact": 0.5,
+  "gap": 324.37,
+  "why": {
+   "fold": 0,
+   "rod": 190,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 1,
+   "parts": 28,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-hub3": 1,
+   "ball-sL2": 3,
+   "rk2-sL2": 2,
+   "ball-hub3": 22
+  },
+  "levels": {
+   "pvt": 53.3,
+   "rk1": 56.5,
+   "rk2": 67.8,
+   "brk": 63.6,
+   "ball": 70.8,
+   "ujt": 66.6
+  },
+  "rA": 76.8,
+  "rC": 72.6,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 44,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 32.2,
+   "psi": 6.5,
+   "gam": 21.1,
+   "psiA": 215.5,
+   "dl": 25.7,
+   "psiC": 24.2,
+   "q0r": -37.2,
+   "hA": 10.9,
+   "hC": 10.7
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 3,
+   "rod": 162,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 7,
+   "parts": 48,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 27,
+   "pvt-hub2": 16,
+   "rk2-sL2": 1,
+   "rod-sL2": 4
+  },
+  "levels": {
+   "pvt": 53.2,
+   "rk1": 56.8,
+   "rk2": 56.4,
+   "brk": 86.1,
+   "ball": 59.4,
+   "ujt": 89.1
+  },
+  "rA": 65.4,
+  "rC": 95.1,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 45,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 29.3,
+   "psi": 319.5,
+   "gam": 34.6,
+   "psiA": 66.3,
+   "dl": 34.5,
+   "psiC": 0.8,
+   "q0r": -11.5,
+   "hA": 10.6,
+   "hC": 10.9
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 10,
+   "rod": 132,
+   "slide": 0,
+   "flip": 1,
+   "closure": 0,
+   "skin": 8,
+   "parts": 69,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 58,
+   "rod-hub2": 10,
+   "rk1-L1": 1
+  },
+  "levels": {
+   "pvt": 51.6,
+   "rk1": 54.7,
+   "rk2": 126.0,
+   "brk": 86.8,
+   "ball": 129.0,
+   "ujt": 89.8
+  },
+  "rA": 135.0,
+  "rC": 95.8,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 46,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 22.7,
+   "psi": 199.5,
+   "gam": 45.0,
+   "psiA": 269.8,
+   "dl": 43.9,
+   "psiC": 127.7,
+   "q0r": 15.6,
+   "hA": 11.2,
+   "hC": 10.1
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 3,
+   "rod": 197,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 1,
+   "parts": 19,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 19
+  },
+  "levels": {
+   "pvt": 42.9,
+   "rk1": 54.2,
+   "rk2": 48.6,
+   "brk": 108.5,
+   "ball": 51.6,
+   "ujt": 111.5
+  },
+  "rA": 57.6,
+  "rC": 117.5,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 47,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 33.6,
+   "psi": 268.5,
+   "gam": 57.7,
+   "psiA": 295.8,
+   "dl": 42.9,
+   "psiC": 46.1,
+   "q0r": -48.4,
+   "hA": 10.0,
+   "hC": 11.1
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 16,
+   "rod": 153,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 8,
+   "parts": 43,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rod-brk": 30,
+   "rod-sL2": 13
+  },
+  "levels": {
+   "pvt": 43.9,
+   "rk1": 52.7,
+   "rk2": 58.4,
+   "brk": 90.6,
+   "ball": 61.4,
+   "ujt": 93.6
+  },
+  "rA": 67.4,
+  "rC": 99.6,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "k": 48,
+  "t": "2026-10-16T03:03:22Z",
+  "params": {
+   "beta": 30.9,
+   "psi": 157.8,
+   "gam": 40.5,
+   "psiA": 274.0,
+   "dl": 21.8,
+   "psiC": 244.2,
+   "q0r": -45.1,
+   "hA": 10.2,
+   "hC": 12.6
+  },
+  "inband14": 0.9182,
+  "inband10": 0.5098,
+  "reach": 0.1,
+  "follow": 0.0333,
+  "contact": 0.28,
+  "gap": 199.67,
+  "why": {
+   "fold": 0,
+   "rod": 189,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 7,
+   "parts": 6,
+   "contact": 0
+  },
+  "parts_pairs": {
+   "rk1-L1": 6
+  },
+  "levels": {
+   "pvt": 53.6,
+   "rk1": 56.9,
+   "rk2": 56.8,
+   "brk": 54.3,
+   "ball": 59.8,
+   "ujt": 57.3
+  },
+  "rA": 67.6,
+  "rC": 69.7,
+  "src": "local:constrained random (beta>=22, dl>=20, gam 20-60)"
+ },
+ {
+  "t": "2026-10-16T03:07:36Z",
+  "params": {
+   "beta": 22.2,
+   "psi": 227.7,
+   "gam": 28.2,
+   "psiA": 9.2,
+   "dl": 20,
+   "psiC": 196.7,
+   "q0r": 22.6,
+   "hA": 11.0,
+   "hC": 13.2
+  },
+  "inband14": 0.8157,
+  "inband10": 0.4547,
+  "reach": 0.2062,
+  "follow": 0.6167,
+  "contact": 0.1139,
+  "gap": 122.53,
+  "why": {
+   "fold": 0,
+   "rod": 140,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 9,
+   "parts": 1,
+   "contact": 0
+  },
+  "k": 49,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:07:47Z",
+  "params": {
+   "beta": 22.9,
+   "psi": 233.6,
+   "gam": 29.1,
+   "psiA": -15.8,
+   "dl": 23.4,
+   "psiC": 204.3,
+   "q0r": 26.6,
+   "hA": 9.3,
+   "hC": 11.5
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 0,
+   "rod": 134,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 3,
+   "parts": 83,
+   "contact": 0
+  },
+  "k": 50,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:07:57Z",
+  "params": {
+   "beta": 22,
+   "psi": 220.7,
+   "gam": 29.7,
+   "psiA": 8.5,
+   "dl": 22.1,
+   "psiC": 187.1,
+   "q0r": 25.1,
+   "hA": 11.4,
+   "hC": 12.5
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 0,
+   "rod": 138,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 1,
+   "parts": 81,
+   "contact": 0
+  },
+  "k": 51,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:08:10Z",
+  "params": {
+   "beta": 27.4,
+   "psi": 236.0,
+   "gam": 34.2,
+   "psiA": -0.1,
+   "dl": 20,
+   "psiC": 191.5,
+   "q0r": 21.7,
+   "hA": 11.6,
+   "hC": 13.4
+  },
+  "inband14": 0.5939,
+  "inband10": 0.4035,
+  "reach": 0.225,
+  "follow": 0.65,
+  "contact": 0.0385,
+  "gap": 131.96,
+  "why": {
+   "fold": 0,
+   "rod": 141,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 3,
+   "parts": 1,
+   "contact": 0
+  },
+  "k": 52,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:08:22Z",
+  "params": {
+   "beta": 22,
+   "psi": 213.3,
+   "gam": 25.6,
+   "psiA": 27.5,
+   "dl": 20,
+   "psiC": 200.4,
+   "q0r": 26.0,
+   "hA": 9.5,
+   "hC": 13.2
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 0,
+   "rod": 151,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 4,
+   "parts": 65,
+   "contact": 0
+  },
+  "k": 53,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:08:31Z",
+  "params": {
+   "beta": 26.1,
+   "psi": 197.5,
+   "gam": 26.6,
+   "psiA": 7.6,
+   "dl": 20,
+   "psiC": 204.2,
+   "q0r": 22.1,
+   "hA": 9.5,
+   "hC": 14.0
+  },
+  "inband14": 0.7571,
+  "inband10": 0.4537,
+  "reach": 0.2062,
+  "follow": 0.5333,
+  "contact": 0.058,
+  "gap": 131.14,
+  "why": {
+   "fold": 0,
+   "rod": 151,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 4,
+   "parts": 0,
+   "contact": 0
+  },
+  "k": 54,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:08:41Z",
+  "params": {
+   "beta": 24.2,
+   "psi": 241.9,
+   "gam": 35.4,
+   "psiA": 14.6,
+   "dl": 20.5,
+   "psiC": 177.2,
+   "q0r": 27.5,
+   "hA": 10.4,
+   "hC": 12.7
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0187,
+  "follow": 0.0,
+  "contact": 0.7,
+  "gap": 343.13,
+  "why": {
+   "fold": 0,
+   "rod": 210,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 5,
+   "parts": 0,
+   "contact": 2
+  },
+  "k": 55,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:08:52Z",
+  "params": {
+   "beta": 22,
+   "psi": 213.2,
+   "gam": 25.5,
+   "psiA": 28.5,
+   "dl": 20,
+   "psiC": 174.8,
+   "q0r": 24.5,
+   "hA": 12.4,
+   "hC": 13.8
+  },
+  "inband14": 0.7114,
+  "inband10": 0.4593,
+  "reach": 0.2313,
+  "follow": 0.5833,
+  "contact": 0.0526,
+  "gap": 127.66,
+  "why": {
+   "fold": 0,
+   "rod": 141,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 4,
+   "parts": 3,
+   "contact": 0
+  },
+  "k": 56,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:09:02Z",
+  "params": {
+   "beta": 22,
+   "psi": 189.9,
+   "gam": 30.0,
+   "psiA": -1.8,
+   "dl": 20,
+   "psiC": 211.4,
+   "q0r": 31.4,
+   "hA": 11.2,
+   "hC": 13.4
+  },
+  "inband14": 0.7831,
+  "inband10": 0.4172,
+  "reach": 0.1562,
+  "follow": 0.5,
+  "contact": 0.0517,
+  "gap": 136.24,
+  "why": {
+   "fold": 0,
+   "rod": 162,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 3,
+   "parts": 0,
+   "contact": 0
+  },
+  "k": 57,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:09:09Z",
+  "params": {
+   "beta": 23.5,
+   "psi": 251.6,
+   "gam": 31.3,
+   "psiA": 17.0,
+   "dl": 22.2,
+   "psiC": 173.2,
+   "q0r": 32.9,
+   "hA": 12.0,
+   "hC": 13.7
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 0.0,
+  "gap": 275.0,
+  "why": {
+   "fold": 0,
+   "rod": 209,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 11,
+   "contact": 0
+  },
+  "k": 58,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:09:26Z",
+  "params": {
+   "beta": 22,
+   "psi": 218.2,
+   "gam": 32.4,
+   "psiA": -18.0,
+   "dl": 20,
+   "psiC": 212.0,
+   "q0r": 12.1,
+   "hA": 12.6,
+   "hC": 13.8
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 0,
+   "rod": 133,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 1,
+   "parts": 86,
+   "contact": 0
+  },
+  "k": 59,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:09:37Z",
+  "params": {
+   "beta": 22,
+   "psi": 232.6,
+   "gam": 31.4,
+   "psiA": 11.0,
+   "dl": 24.6,
+   "psiC": 186.8,
+   "q0r": 19.3,
+   "hA": 12.0,
+   "hC": 13.2
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 0,
+   "rod": 133,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 3,
+   "parts": 84,
+   "contact": 0
+  },
+  "k": 60,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:09:49Z",
+  "params": {
+   "beta": 22,
+   "psi": 241.9,
+   "gam": 35.5,
+   "psiA": 2.5,
+   "dl": 20,
+   "psiC": 194.7,
+   "q0r": 21.4,
+   "hA": 10.7,
+   "hC": 14.6
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 0,
+   "rod": 135,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 3,
+   "parts": 82,
+   "contact": 0
+  },
+  "k": 61,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:09:58Z",
+  "params": {
+   "beta": 22,
+   "psi": 246.6,
+   "gam": 21.9,
+   "psiA": -2.6,
+   "dl": 22.5,
+   "psiC": 213.6,
+   "q0r": 29.5,
+   "hA": 11.3,
+   "hC": 13.3
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 0,
+   "rod": 150,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 7,
+   "parts": 63,
+   "contact": 0
+  },
+  "k": 62,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:10:07Z",
+  "params": {
+   "beta": 22.7,
+   "psi": 236.3,
+   "gam": 27.3,
+   "psiA": 13.4,
+   "dl": 22.3,
+   "psiC": 196.7,
+   "q0r": 28.7,
+   "hA": 11.6,
+   "hC": 15.2
+  },
+  "inband14": 0.8156,
+  "inband10": 0.4594,
+  "reach": 0.1938,
+  "follow": 0.6,
+  "contact": 0.0822,
+  "gap": 122.28,
+  "why": {
+   "fold": 0,
+   "rod": 146,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 6,
+   "parts": 1,
+   "contact": 0
+  },
+  "k": 63,
+  "note": "audit: local perturbation of best"
+ },
+ {
+  "t": "2026-10-16T03:10:16Z",
+  "params": {
+   "beta": 23.7,
+   "psi": 229.9,
+   "gam": 25.4,
+   "psiA": 13.2,
+   "dl": 26.0,
+   "psiC": 191.7,
+   "q0r": 31.8,
+   "hA": 13.4,
+   "hC": 12.6
+  },
+  "inband14": 0.0,
+  "inband10": 0.0,
+  "reach": 0.0,
+  "follow": 0.0,
+  "contact": 1.0,
+  "gap": 375.0,
+  "why": {
+   "fold": 0,
+   "rod": 139,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 7,
+   "parts": 74,
+   "contact": 0
+  },
+  "k": 64,
+  "note": "audit: local perturbation of best"
+ }
+]

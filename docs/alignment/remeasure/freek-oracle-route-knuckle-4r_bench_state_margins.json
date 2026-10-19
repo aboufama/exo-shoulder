@@ -1,0 +1,583 @@
+{
+ "id": "freek-oracle-route-knuckle-4r",
+ "wear": "bench",
+ "reading": "claim's cell B (q3max 86, model q3 reading), taken poses of the claim's per-pose dump",
+ "dump_gap": {
+  "gap": 16.21,
+  "reach": 0.7778,
+  "follow": 0.9545,
+  "inband14": 0.8977,
+  "contact": 0.0375,
+  "n_ws": 360,
+  "n_clip": 110,
+  "ws_taken": 280,
+  "contact_poses": 15
+ },
+ "n_taken": 385,
+ "states": {
+  "0": {
+   "n": 283,
+   "clip": 88,
+   "m3e": {
+    "min": 8.1,
+    "p5": 9.9,
+    "at": 256,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "family_own": {
+    "min": 8.1,
+    "p5": 9.9,
+    "at": 256,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "msub": {
+    "min": 0.0,
+    "p5": 0.03,
+    "at": 285,
+    "at_kind": "ws",
+    "lt5": 234,
+    "lt55": 246
+   },
+   "kdyad": {
+    "min": 17.91,
+    "p5": 17.91,
+    "at": 296,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "oop_A": {
+    "min": 23.13,
+    "p5": 35.66,
+    "at": 256,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "oop_1": {
+    "min": 0.07,
+    "p5": 2.13,
+    "at": 285,
+    "at_kind": "ws",
+    "lt5": 30,
+    "lt55": 36
+   },
+   "oop_2": {
+    "min": 37.31,
+    "p5": 37.31,
+    "at": 178,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "dK_deg": [
+    0.0,
+    0.0
+   ]
+  },
+  "1": {
+   "n": 70,
+   "clip": 3,
+   "m3e": {
+    "min": 5.91,
+    "p5": 6.46,
+    "at": 363,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "family_own": {
+    "min": 5.91,
+    "p5": 6.46,
+    "at": 363,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "msub": {
+    "min": 10.22,
+    "p5": 10.47,
+    "at": 83,
+    "at_kind": "clip",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "kdyad": {
+    "min": 8.15,
+    "p5": 9.34,
+    "at": 363,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "oop_A": {
+    "min": 21.1,
+    "p5": 22.36,
+    "at": 363,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "oop_1": {
+    "min": 45.1,
+    "p5": 46.11,
+    "at": 363,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "oop_2": {
+    "min": 36.06,
+    "p5": 37.64,
+    "at": 363,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "dK_deg": [
+    -81.39,
+    -0.48
+   ]
+  },
+  "2": {
+   "n": 32,
+   "clip": 14,
+   "m3e": {
+    "min": 9.6,
+    "p5": 10.13,
+    "at": 63,
+    "at_kind": "clip",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "family_own": {
+    "min": 0.14,
+    "p5": 0.57,
+    "at": 317,
+    "at_kind": "ws",
+    "lt5": 7,
+    "lt55": 8
+   },
+   "msub": {
+    "min": 0.14,
+    "p5": 0.57,
+    "at": 317,
+    "at_kind": "ws",
+    "lt5": 7,
+    "lt55": 8
+   },
+   "kdyad": {
+    "min": 8.12,
+    "p5": 15.32,
+    "at": 396,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "oop_A": {
+    "min": 30.84,
+    "p5": 35.65,
+    "at": 340,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "oop_1": {
+    "min": 4.81,
+    "p5": 9.32,
+    "at": 317,
+    "at_kind": "ws",
+    "lt5": 1,
+    "lt55": 1
+   },
+   "oop_2": {
+    "min": 35.99,
+    "p5": 37.8,
+    "at": 396,
+    "at_kind": "ws",
+    "lt5": 0,
+    "lt55": 0
+   },
+   "dK_deg": [
+    -81.49,
+    -0.4
+   ]
+  }
+ },
+ "state2_rows": [
+  {
+   "i": 12,
+   "kind": "clip",
+   "m3e": 23.34,
+   "msub": 0.76,
+   "kdyad": 18.12,
+   "oop_2": 37.56,
+   "dK": -0.4,
+   "cuff_moment_per_spring_torque": 1.911,
+   "dowel_torque_per_spring_torque": 1.313
+  },
+  {
+   "i": 47,
+   "kind": "clip",
+   "m3e": 24.75,
+   "msub": 4.28,
+   "kdyad": 22.58,
+   "oop_2": 42.56,
+   "dK": -8.85,
+   "cuff_moment_per_spring_torque": 1.888,
+   "dowel_torque_per_spring_torque": 1.555
+  },
+  {
+   "i": 48,
+   "kind": "clip",
+   "m3e": 24.98,
+   "msub": 8.0,
+   "kdyad": 27.66,
+   "oop_2": 47.26,
+   "dK": -18.46,
+   "cuff_moment_per_spring_torque": 1.899,
+   "dowel_torque_per_spring_torque": 1.537
+  },
+  {
+   "i": 49,
+   "kind": "clip",
+   "m3e": 24.79,
+   "msub": 1.93,
+   "kdyad": 18.71,
+   "oop_2": 38.26,
+   "dK": -1.52,
+   "cuff_moment_per_spring_torque": 1.906,
+   "dowel_torque_per_spring_torque": 1.593
+  },
+  {
+   "i": 52,
+   "kind": "clip",
+   "m3e": 24.75,
+   "msub": 4.28,
+   "kdyad": 22.58,
+   "oop_2": 42.56,
+   "dK": -8.85,
+   "cuff_moment_per_spring_torque": 1.888,
+   "dowel_torque_per_spring_torque": 1.555
+  },
+  {
+   "i": 53,
+   "kind": "clip",
+   "m3e": 24.87,
+   "msub": 7.8,
+   "kdyad": 27.36,
+   "oop_2": 47.01,
+   "dK": -17.89,
+   "cuff_moment_per_spring_torque": 1.898,
+   "dowel_torque_per_spring_torque": 1.536
+  },
+  {
+   "i": 63,
+   "kind": "clip",
+   "m3e": 9.6,
+   "msub": 11.81,
+   "kdyad": 21.35,
+   "oop_2": 41.26,
+   "dK": -6.53,
+   "cuff_moment_per_spring_torque": 1.89,
+   "dowel_torque_per_spring_torque": 1.144
+  },
+  {
+   "i": 64,
+   "kind": "clip",
+   "m3e": 10.22,
+   "msub": 12.46,
+   "kdyad": 22.58,
+   "oop_2": 42.57,
+   "dK": -8.86,
+   "cuff_moment_per_spring_torque": 1.888,
+   "dowel_torque_per_spring_torque": 1.161
+  },
+  {
+   "i": 65,
+   "kind": "clip",
+   "m3e": 15.86,
+   "msub": 17.59,
+   "kdyad": 31.46,
+   "oop_2": 50.45,
+   "dK": -27.81,
+   "cuff_moment_per_spring_torque": 1.943,
+   "dowel_torque_per_spring_torque": 1.321
+  },
+  {
+   "i": 66,
+   "kind": "clip",
+   "m3e": 16.88,
+   "msub": 18.61,
+   "kdyad": 29.67,
+   "oop_2": 51.22,
+   "dK": -31.32,
+   "cuff_moment_per_spring_torque": 1.967,
+   "dowel_torque_per_spring_torque": 1.355
+  },
+  {
+   "i": 67,
+   "kind": "clip",
+   "m3e": 16.88,
+   "msub": 18.61,
+   "kdyad": 29.67,
+   "oop_2": 51.22,
+   "dK": -31.32,
+   "cuff_moment_per_spring_torque": 1.967,
+   "dowel_torque_per_spring_torque": 1.355
+  },
+  {
+   "i": 68,
+   "kind": "clip",
+   "m3e": 16.88,
+   "msub": 18.61,
+   "kdyad": 29.67,
+   "oop_2": 51.22,
+   "dK": -31.32,
+   "cuff_moment_per_spring_torque": 1.967,
+   "dowel_torque_per_spring_torque": 1.355
+  },
+  {
+   "i": 69,
+   "kind": "clip",
+   "m3e": 16.28,
+   "msub": 17.88,
+   "kdyad": 30.86,
+   "oop_2": 50.74,
+   "dK": -29.0,
+   "cuff_moment_per_spring_torque": 1.95,
+   "dowel_torque_per_spring_torque": 1.335
+  },
+  {
+   "i": 70,
+   "kind": "clip",
+   "m3e": 10.07,
+   "msub": 10.96,
+   "kdyad": 20.9,
+   "oop_2": 40.77,
+   "dK": -5.68,
+   "cuff_moment_per_spring_torque": 1.892,
+   "dowel_torque_per_spring_torque": 1.173
+  },
+  {
+   "i": 286,
+   "kind": "ws",
+   "m3e": 14.53,
+   "msub": 7.24,
+   "kdyad": 20.36,
+   "oop_2": 40.17,
+   "dK": -4.66,
+   "cuff_moment_per_spring_torque": 1.895,
+   "dowel_torque_per_spring_torque": 1.358
+  },
+  {
+   "i": 289,
+   "kind": "ws",
+   "m3e": 28.12,
+   "msub": 10.25,
+   "kdyad": 31.97,
+   "oop_2": 50.16,
+   "dK": -26.71,
+   "cuff_moment_per_spring_torque": 1.936,
+   "dowel_torque_per_spring_torque": 1.584
+  },
+  {
+   "i": 291,
+   "kind": "ws",
+   "m3e": 41.69,
+   "msub": 5.41,
+   "kdyad": 31.49,
+   "oop_2": 49.89,
+   "dK": -25.78,
+   "cuff_moment_per_spring_torque": 1.931,
+   "dowel_torque_per_spring_torque": 1.643
+  },
+  {
+   "i": 313,
+   "kind": "ws",
+   "m3e": 10.82,
+   "msub": 27.87,
+   "kdyad": 25.34,
+   "oop_2": 52.0,
+   "dK": -39.99,
+   "cuff_moment_per_spring_torque": 2.045,
+   "dowel_torque_per_spring_torque": 1.134
+  },
+  {
+   "i": 315,
+   "kind": "ws",
+   "m3e": 21.58,
+   "msub": 3.97,
+   "kdyad": 20.45,
+   "oop_2": 40.27,
+   "dK": -4.83,
+   "cuff_moment_per_spring_torque": 1.894,
+   "dowel_torque_per_spring_torque": 1.528
+  },
+  {
+   "i": 316,
+   "kind": "ws",
+   "m3e": 22.99,
+   "msub": 31.43,
+   "kdyad": 13.62,
+   "oop_2": 44.84,
+   "dK": -66.23,
+   "cuff_moment_per_spring_torque": 2.521,
+   "dowel_torque_per_spring_torque": 1.782
+  },
+  {
+   "i": 317,
+   "kind": "ws",
+   "m3e": 29.81,
+   "msub": 0.14,
+   "kdyad": 18.48,
+   "oop_2": 37.99,
+   "dK": -1.08,
+   "cuff_moment_per_spring_torque": 1.908,
+   "dowel_torque_per_spring_torque": 1.457
+  },
+  {
+   "i": 318,
+   "kind": "ws",
+   "m3e": 36.06,
+   "msub": 11.42,
+   "kdyad": 27.14,
+   "oop_2": 51.87,
+   "dK": -36.34,
+   "cuff_moment_per_spring_torque": 2.009,
+   "dowel_torque_per_spring_torque": 1.696
+  },
+  {
+   "i": 340,
+   "kind": "ws",
+   "m3e": 10.18,
+   "msub": 28.88,
+   "kdyad": 18.75,
+   "oop_2": 49.77,
+   "dK": -54.07,
+   "cuff_moment_per_spring_torque": 2.245,
+   "dowel_torque_per_spring_torque": 1.151
+  },
+  {
+   "i": 342,
+   "kind": "ws",
+   "m3e": 19.55,
+   "msub": 9.99,
+   "kdyad": 26.89,
+   "oop_2": 46.62,
+   "dK": -16.99,
+   "cuff_moment_per_spring_torque": 1.895,
+   "dowel_torque_per_spring_torque": 1.437
+  },
+  {
+   "i": 344,
+   "kind": "ws",
+   "m3e": 39.17,
+   "msub": 0.33,
+   "kdyad": 20.35,
+   "oop_2": 40.16,
+   "dK": -4.65,
+   "cuff_moment_per_spring_torque": 1.895,
+   "dowel_torque_per_spring_torque": 1.585
+  },
+  {
+   "i": 345,
+   "kind": "ws",
+   "m3e": 33.08,
+   "msub": 20.15,
+   "kdyad": 19.35,
+   "oop_2": 50.16,
+   "dK": -52.72,
+   "cuff_moment_per_spring_torque": 2.221,
+   "dowel_torque_per_spring_torque": 1.811
+  },
+  {
+   "i": 369,
+   "kind": "ws",
+   "m3e": 17.74,
+   "msub": 31.23,
+   "kdyad": 16.72,
+   "oop_2": 48.17,
+   "dK": -58.71,
+   "cuff_moment_per_spring_torque": 2.336,
+   "dowel_torque_per_spring_torque": 1.513
+  },
+  {
+   "i": 371,
+   "kind": "ws",
+   "m3e": 29.19,
+   "msub": 11.44,
+   "kdyad": 30.14,
+   "oop_2": 51.04,
+   "dK": -30.4,
+   "cuff_moment_per_spring_torque": 1.96,
+   "dowel_torque_per_spring_torque": 1.607
+  },
+  {
+   "i": 396,
+   "kind": "ws",
+   "m3e": 19.75,
+   "msub": 24.12,
+   "kdyad": 8.12,
+   "oop_2": 35.99,
+   "dK": -81.49,
+   "cuff_moment_per_spring_torque": 3.114,
+   "dowel_torque_per_spring_torque": 1.999
+  },
+  {
+   "i": 444,
+   "kind": "ws",
+   "m3e": 12.94,
+   "msub": 8.84,
+   "kdyad": 21.0,
+   "oop_2": 40.88,
+   "dK": -5.87,
+   "cuff_moment_per_spring_torque": 1.892,
+   "dowel_torque_per_spring_torque": 1.293
+  },
+  {
+   "i": 446,
+   "kind": "ws",
+   "m3e": 19.85,
+   "msub": 29.31,
+   "kdyad": 17.22,
+   "oop_2": 48.6,
+   "dK": -57.56,
+   "cuff_moment_per_spring_torque": 2.312,
+   "dowel_torque_per_spring_torque": 1.573
+  },
+  {
+   "i": 469,
+   "kind": "ws",
+   "m3e": 26.34,
+   "msub": 20.01,
+   "kdyad": 22.55,
+   "oop_2": 51.59,
+   "dK": -45.8,
+   "cuff_moment_per_spring_torque": 2.115,
+   "dowel_torque_per_spring_torque": 1.639
+  }
+ ],
+ "state2_statics": {
+  "cuff_moment_per_spring_torque": [
+   1.888,
+   1.933,
+   3.114
+  ],
+  "dowel_torque_per_spring_torque": [
+   1.134,
+   1.521,
+   1.999
+  ],
+  "how": "[min, median, max] over taken state-2 poses; rigid links, frictionless pins, J1 / J2 unloaded"
+ },
+ "moving_chain_min_th": {
+  "how": "state 0: dyad (J1-J2-J3) m3e; state 1: min(msub, m3e) (the model's forced-state rule); state 2: kdyad (J1-K-J2, the moving dyad) and m3e",
+  "min": 5.91
+ },
+ "secs": 1.5
+}

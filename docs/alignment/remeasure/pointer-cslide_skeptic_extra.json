@@ -1,0 +1,55 @@
+{
+ "report": {
+  "gap": 69.84,
+  "reach": 0.5,
+  "follow": 0.9333,
+  "inband14": 0.6739,
+  "inband10": 0.5209,
+  "contact": 0.0556
+ },
+ "rho": 81.82972058733404,
+ "T": 97.94649391169978,
+ "c": 27.422187266718254,
+ "saddle_grid": [
+  14,
+  79
+ ],
+ "saddle_step_axial_mm": {
+  "max": 2.1,
+  "p95": 0.83,
+  "share_over_60deg": 0.0,
+  "limit_mm": 3.46
+ },
+ "saddle_step_circ_mm": {
+  "pitch_mm": 2.68,
+  "max": 2.15,
+  "p95": 0.93,
+  "share_over_60deg": 0.0,
+  "limit_mm": 4.64
+ },
+ "saddle_max_climb_deg": {
+  "axial": 46.3,
+  "circ": 38.7
+ },
+ "neck_first_row": {
+  "w": 19.0,
+  "radius_mm": {
+   "min": 54.2,
+   "max": 54.67
+  },
+  "shoe_radius": 81.83,
+  "step_mm": 27.45,
+  "climb_deg_over_4mm": 81.7
+ },
+ "neck_rows_raised": 7,
+ "k5_riser": {
+  "clip_taken": 56,
+  "samples_per_pose": 2585,
+  "neck_samples_in_to_out": 1725,
+  "out_to_in": 16,
+  "inband14_delta": -0.0118,
+  "gap_delta_est": 1.18,
+  "neck_inband_before": 0.9945,
+  "neck_inband_after": 0.8419
+ }
+}

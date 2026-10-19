@@ -1,0 +1,9 @@
+{
+ "base": {
+  "mount": "girdle",
+  "chain": "osn3_pinknee",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "max_mm": null,
+ "note": "girdle mount: the skin-slip model (judge/base_slip.py) handles a spherical chain centred on the GH centre without a slider; this design needs the lever / slider mapping first"
+}

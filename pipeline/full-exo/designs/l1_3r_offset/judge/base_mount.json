@@ -1,0 +1,64 @@
+{
+ "girdle_law": "avg/body_pose.py (rig) - not yet OpenSim/OpenCap",
+ "base": {
+  "mount": "thorax",
+  "chain": "offset3",
+  "prm": {
+   "b": [
+    163.5,
+    61.0
+   ],
+   "a1": 106.9,
+   "a2": 107.1,
+   "branch": 1.0,
+   "w": [
+    121.5,
+    93.4
+   ]
+  },
+  "axis_points_mm": [
+   [
+    25.981252422507737,
+    60.0,
+    8.704171731997375
+   ],
+   [
+    34.47462379309541,
+    2.1618480894462255,
+    60.0
+   ],
+   [
+    60.0,
+    43.217772926070815,
+    -3.68871337425845
+   ]
+  ]
+ },
+ "frames_checked": 194,
+ "step": 7,
+ "max_mm": 5.83,
+ "p95_mm": 5.62,
+ "share_over_4mm": 0.335,
+ "per_clip": {
+  "Raise overhead": 4.74,
+  "Drink from a cup": 3.51,
+  "Comb hair": 4.41,
+  "Reach a high shelf": 4.63,
+  "Wash opposite shoulder": 4.6,
+  "Reach back pocket": 4.3,
+  "Wave": 5.83,
+  "Walking arm swing": 2.69
+ },
+ "base_part_enters_body_mm": 31.74,
+ "base_part_worst": [
+  "Comb hair",
+  154,
+  [
+   78,
+   143,
+   -67
+  ]
+ ],
+ "singular_margin_deg_min": 12.5,
+ "closes": 1.0
+}

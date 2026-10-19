@@ -1,0 +1,228 @@
+{
+ "id": "dogring-draglink-knuckle-3r",
+ "status": "refuted",
+ "v_gap": 97.83,
+ "complexity": null,
+ "verdict": "watch",
+ "reasons": [
+  "fast_frozen: self/fast 17.19 -> verified 97.83 (+80.64) - the row's headline 'gap' is a number the design does not hold",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "idle: no moving drive / joint declared; knee: asserted rigid by design (model asserts the knee angle constant (knee_moved -> dishonest)) but moves 65.47 deg (re-measured K.qa span) > 0.5",
+  "sampling: sample-weighted in-band 0.864 vs part-weighted 0.852 (+1.23 points); mostly out-of-band parts: horn (0.23 in band, median 16.8 mm, 3.4 % of samples) (re-measured)",
+  "complexity: no mechanism record: complexity unaudited",
+  "reporting: dashboard sweep best 17.19 (score 93.75) sits 80.64 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 25.36 vs bench 97.83 (-72.47; re-measured (this audit))",
+   "held_gap": 25.36,
+   "v_gap": 97.83,
+   "drop": -72.47,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "watch",
+   "reason": "self/fast 17.19 -> verified 97.83 (+80.64) - the row's headline 'gap' is a number the design does not hold",
+   "fast": 17.19,
+   "verified": 97.83,
+   "drop": 80.64
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 22.64, <1 mm 31.89, <2 mm 53.61, <3 mm 160.21, band read 3-14 mm 23.2, 30.97 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 30.97,
+   "plain": 22.64,
+   "n1": 31.89,
+   "n2": 53.61,
+   "n3": 160.21,
+   "band3": 23.2,
+   "hist": {
+    "0-1": 0.0006,
+    "1-2": 0.0016,
+    "2-3": 0.0057,
+    "3-4": 0.0117,
+    "4-6": 0.087,
+    "6-10": 0.4154,
+    "10-14": 0.344,
+    ">14": 0.134
+   },
+   "minmm": 0.064,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump dogring-draglink-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 97.83": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs slipper-nose-knuckle-3r: plain -4.15, 2 mm -20.59",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -4.15,
+   "gain_2mm": -20.59
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.189 deg (docs/concepts/verify/dogring-draglink-knuckle-3r_v_held_frozen.json:th_margin.min; 3 readings)",
+   "min_margin": 5.189,
+   "where": "docs/concepts/verify/dogring-draglink-knuckle-3r_v_held_frozen.json:th_margin.min"
+  },
+  {
+   "check": "idle",
+   "level": "watch",
+   "reason": "no moving drive / joint declared; knee: asserted rigid by design (model asserts the knee angle constant (knee_moved -> dishonest)) but moves 65.47 deg (re-measured K.qa span) > 0.5",
+   "spans": [
+    [
+     "docs/concepts/verify/dogring-draglink-knuckle-3r_v_held_frozen.json:th_margin.dK_taken_max",
+     45.73
+    ],
+    [
+     "docs/concepts/verify/dogring-draglink-knuckle-3r_v_bench_frozen.json:th_margin.dK_taken_max",
+     44.04
+    ],
+    [
+     "re-measured dK span",
+     44.04
+    ],
+    [
+     "re-measured K.ang span",
+     65.47
+    ],
+    [
+     "re-measured K.qa span",
+     65.47
+    ],
+    [
+     "re-measured K.qb span",
+     60.29
+    ]
+   ],
+   "declared": [],
+   "rigid": [
+    "knee"
+   ]
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "sample-weighted in-band 0.864 vs part-weighted 0.852 (+1.23 points); mostly out-of-band parts: horn (0.23 in band, median 16.8 mm, 3.4 % of samples) (re-measured)",
+   "parts": {
+    "hub1": [
+     0.991,
+     7.6,
+     80
+    ],
+    "hubK": [
+     0.934,
+     9.1,
+     80
+    ],
+    "hub2": [
+     0.988,
+     10.4,
+     80
+    ],
+    "hub3": [
+     0.591,
+     13.2,
+     80
+    ],
+    "E": [
+     0.95,
+     7.4,
+     104
+    ],
+    "boss": [
+     0.999,
+     7.6,
+     32
+    ],
+    "pad": [
+     1.0,
+     7.2,
+     32
+    ],
+    "knee": [
+     0.973,
+     9.8,
+     85
+    ],
+    "crank": [
+     0.895,
+     11.2,
+     77
+    ],
+    "rod": [
+     0.683,
+     13.3,
+     52
+    ],
+    "horn": [
+     0.227,
+     16.8,
+     32
+    ],
+    "L1a": [
+     0.964,
+     7.4,
+     24
+    ],
+    "L1b": [
+     0.949,
+     8.2,
+     56
+    ],
+    "L2": [
+     0.779,
+     11.1,
+     124
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "watch",
+   "reason": "no mechanism record: complexity unaudited"
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "dashboard sweep best 17.19 (score 93.75) sits 80.64 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 2 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [
+  "docs/concepts/verify/dogring-draglink-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/dogring-draglink-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "b391a5f",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T12:36:17Z"
+}

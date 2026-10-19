@@ -1,0 +1,301 @@
+{
+ "design": "user_minarc_pick1",
+ "law": {
+  "preload": 0.04,
+  "g": 2.0
+ },
+ "runs": {
+  "rate0.015": {
+   "Raise overhead": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.01,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.01,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.01,
+    "twist_peak_deg": 1.97,
+    "moment_gh_peak_Nm": 0.074,
+    "force_peak_N": 0.35,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   },
+   "Drink from a cup": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.01,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.01,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.01,
+    "twist_peak_deg": 1.41,
+    "moment_gh_peak_Nm": 0.073,
+    "force_peak_N": 0.34,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   },
+   "Comb hair": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.01,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.01,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.01,
+    "twist_peak_deg": 1.91,
+    "moment_gh_peak_Nm": 0.076,
+    "force_peak_N": 0.35,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   },
+   "Reach a high shelf": {
+    "drift_deg": 2.27,
+    "K_open_plan_max_deg": 15.82,
+    "K_open_sim_max_deg": 13.56,
+    "lag_max_deg": 2.27,
+    "lead_max_deg": -0.0,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.0,
+    "twist_peak_deg": 2.32,
+    "moment_gh_peak_Nm": 0.076,
+    "force_peak_N": 0.34,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 4.8,
+    "on_limit_share": {
+     "K": 0.512,
+     "J2": 0.517
+    }
+   },
+   "Wash opposite shoulder": {
+    "drift_deg": 0.69,
+    "K_open_plan_max_deg": 6.19,
+    "K_open_sim_max_deg": 6.38,
+    "lag_max_deg": 0.05,
+    "lead_max_deg": 0.69,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": 0.47,
+    "twist_peak_deg": 1.46,
+    "moment_gh_peak_Nm": 0.069,
+    "force_peak_N": 0.32,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 0.781,
+     "J2": 0.222
+    }
+   },
+   "Reach back pocket": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.02,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.02,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.02,
+    "twist_peak_deg": 1.8,
+    "moment_gh_peak_Nm": 0.08,
+    "force_peak_N": 0.36,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   },
+   "Wave": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.01,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.01,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.01,
+    "twist_peak_deg": 2.65,
+    "moment_gh_peak_Nm": 0.087,
+    "force_peak_N": 0.36,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   },
+   "Walking arm swing": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.02,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.02,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.02,
+    "twist_peak_deg": 0.7,
+    "moment_gh_peak_Nm": 0.075,
+    "force_peak_N": 0.34,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   }
+  },
+  "rate0.01": {
+   "Raise overhead": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.01,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.01,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.01,
+    "twist_peak_deg": 1.97,
+    "moment_gh_peak_Nm": 0.074,
+    "force_peak_N": 0.35,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   },
+   "Drink from a cup": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.01,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.01,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.01,
+    "twist_peak_deg": 1.41,
+    "moment_gh_peak_Nm": 0.073,
+    "force_peak_N": 0.34,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   },
+   "Comb hair": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.01,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.01,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.01,
+    "twist_peak_deg": 1.91,
+    "moment_gh_peak_Nm": 0.076,
+    "force_peak_N": 0.35,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   },
+   "Reach a high shelf": {
+    "drift_deg": 2.13,
+    "K_open_plan_max_deg": 15.82,
+    "K_open_sim_max_deg": 13.7,
+    "lag_max_deg": 2.13,
+    "lead_max_deg": -0.0,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.0,
+    "twist_peak_deg": 2.32,
+    "moment_gh_peak_Nm": 0.076,
+    "force_peak_N": 0.34,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 4.8,
+    "on_limit_share": {
+     "K": 0.512,
+     "J2": 0.517
+    }
+   },
+   "Wash opposite shoulder": {
+    "drift_deg": 0.7,
+    "K_open_plan_max_deg": 6.19,
+    "K_open_sim_max_deg": 6.4,
+    "lag_max_deg": 0.05,
+    "lead_max_deg": 0.7,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": 0.48,
+    "twist_peak_deg": 1.46,
+    "moment_gh_peak_Nm": 0.069,
+    "force_peak_N": 0.32,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 0.781,
+     "J2": 0.222
+    }
+   },
+   "Reach back pocket": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.02,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.02,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.02,
+    "twist_peak_deg": 1.8,
+    "moment_gh_peak_Nm": 0.08,
+    "force_peak_N": 0.36,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   },
+   "Wave": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.01,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.01,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.01,
+    "twist_peak_deg": 2.65,
+    "moment_gh_peak_Nm": 0.087,
+    "force_peak_N": 0.36,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   },
+   "Walking arm swing": {
+    "drift_deg": 0.02,
+    "K_open_plan_max_deg": 0.0,
+    "K_open_sim_max_deg": -0.02,
+    "lag_max_deg": 0.02,
+    "lead_max_deg": -0.02,
+    "unplanned_lift_share": 0.0,
+    "unplanned_lift_max_deg": -0.02,
+    "twist_peak_deg": 0.7,
+    "moment_gh_peak_Nm": 0.075,
+    "force_peak_N": 0.34,
+    "lags_over_10deg": 0,
+    "worst_missed_deg": 0.0,
+    "on_limit_share": {
+     "K": 1.0,
+     "J2": 0.0
+    }
+   }
+  }
+ }
+}

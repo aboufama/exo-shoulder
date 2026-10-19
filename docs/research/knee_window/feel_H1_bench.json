@@ -1,0 +1,132 @@
+{
+ "design": "H1",
+ "wear_json": "docs/research/knee_window/wear_H1_bench.json",
+ "T_joint_Nmm": 3.0,
+ "T_pin_Nmm": 3.0,
+ "r_cuff_mm": 118.0,
+ "lE": 59.5534,
+ "lc": 28.2401,
+ "ang_min": 30.4611,
+ "knee_edge_deg": 149.54,
+ "clip_frames": 356,
+ "clip_taken": 356,
+ "clip_pairs": 312,
+ "clip_knee_branch_flips": 0,
+ "clip_ang": [
+  103.02,
+  148.23
+ ],
+ "clip_to_straight_min": 31.77,
+ "F_total": {
+  "max": 0.193,
+  "p99": 0.188,
+  "median": 0.086,
+  "n": 312
+ },
+ "F_knee": {
+  "max": 0.04,
+  "p99": 0.039,
+  "median": 0.005,
+  "n": 312
+ },
+ "F_sph": {
+  "max": 0.153,
+  "p99": 0.149,
+  "median": 0.077,
+  "n": 312
+ },
+ "F_knee_near_straight_lt35": {
+  "max": 0.037,
+  "p99": 0.037,
+  "median": 0.036,
+  "n": 10
+ },
+ "F_knee_far": {
+  "max": 0.04,
+  "p99": 0.039,
+  "median": 0.005,
+  "n": 302
+ },
+ "pins_rate_per_arm": {
+  "max": 1.589,
+  "p99": 1.552,
+  "median": 0.206,
+  "n": 312
+ },
+ "pins_rate_near_lt35": {
+  "max": 1.44,
+  "p99": 1.44,
+  "median": 1.436,
+  "n": 10
+ },
+ "drift_mm_per_rad": {
+  "max": 17.499,
+  "p99": 17.274,
+  "median": 6.582,
+  "n": 312
+ },
+ "F_knee_edge_bound": 0.077,
+ "F_knee_edge_bound_note": "worst-case knee-pin friction force at the cuff if the clips' fastest drift (mm per rad of arm) happened with the knee AT its straight-side edge: pins <= v (2 / lc + 1 / lE) / sin(ang_min)",
+ "amp_1_over_sin": {
+  "max_taken": 1.851,
+  "at_edge": 1.973
+ },
+ "J3_lever_mm": {
+  "min_taken": 32.17,
+  "at_edge": 30.19
+ },
+ "knee_force_per_J3_Nm_N": {
+  "max_taken": 31.1,
+  "at_edge": 33.1
+ },
+ "transmission_angle_min_deg": 32.7,
+ "jam": {
+  "rho_J3_mm": 0.0175,
+  "rho_pin_mm": 0.5,
+  "hC_min_mm": 32.17,
+  "hC_at_edge_mm": 30.19,
+  "jam_needs_to_straight_deg": 0.979,
+  "note": "a two-force knee link with friction circles rho at its pins jams J3 only if its force line passes within rho_J3 + 2 rho_pin of J3's centre, i.e. lE sin(ang) < that sum"
+ },
+ "worst": [
+  {
+   "clip": "Reach a high shelf",
+   "k": 34,
+   "ang": 138.42504647336546,
+   "to_straight": 41.574953526634545,
+   "arm_dps": 1.7129351554048007,
+   "drift_mm_per_rad": 12.873893702385962,
+   "pins_rate_per_arm": 1.5890364508102772,
+   "F_sph": 0.10648229909624411,
+   "F_knee": 0.04039283476540284,
+   "F_total": 0.14687513386164697,
+   "forced": false
+  },
+  {
+   "clip": "Reach a high shelf",
+   "k": 24,
+   "ang": 138.42504647336546,
+   "to_straight": 41.574953526634545,
+   "arm_dps": 3.1479255378757878,
+   "drift_mm_per_rad": 12.73302092361907,
+   "pins_rate_per_arm": 1.5698686422288846,
+   "F_sph": 0.10617121359181572,
+   "F_knee": 0.039905594762539305,
+   "F_total": 0.14607680835435502,
+   "forced": false
+  },
+  {
+   "clip": "Reach a high shelf",
+   "k": 35,
+   "ang": 138.26299541419215,
+   "to_straight": 41.73700458580785,
+   "arm_dps": 10.817431244462457,
+   "drift_mm_per_rad": 12.82003487859397,
+   "pins_rate_per_arm": 1.5667038724946694,
+   "F_sph": 0.10628231197382862,
+   "F_knee": 0.039825147255573984,
+   "F_total": 0.1461074592294026,
+   "forced": false
+  }
+ ]
+}

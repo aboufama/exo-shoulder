@@ -1,0 +1,199 @@
+{
+ "id": "weldk-crossover-kneeless-3r",
+ "status": "verified",
+ "v_gap": 37.42,
+ "complexity": null,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): v_gap 37.42: bench 21 contact poses, sum 145.28 mm, deepest 27.15 mm at ['ws', 15.0, 165.0, 0.0], 9 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+125.04 mm, x7.18) - CLEARLY DEEPER; held 53 contact poses, sum 309.46 mm, deepest 29.79 mm at ['ws', 15.0, 165.0, 15.0], 19 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (+248.49 mm, x5.08) - CLEARLY DEEPER",
+  "dominance: cannot compare with conecut-knee-knuckle-3r at 2 mm",
+  "idle: a drive is declared but no range of it over the taken poses is on file; knee: rigid by design, not a joint (mechanism notes: knee deleted, one rigid bracket); measured span 0.0 deg (row:exact_frozen.knee_rigid.knee_ptp_deg) <= 0.5; K: declared moving, no span on file; crank: declared moving, no span on file",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: verdict text still reads as a self-measured screen; dashboard shows no verified number (row v_gap 37.42); dashboard sweep best 31.83 (score 88.43) sits 5.59 below the verified number; dashboard status 'screened' vs row 'verified'"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 37.42
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 31.83 -> verified 37.42 (+5.59)",
+   "fast": 31.83,
+   "verified": 37.42,
+   "drop": 5.59
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "watch",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 37.42: bench 21 contact poses, sum 145.28 mm, deepest 27.15 mm at ['ws', 15.0, 165.0, 0.0], 9 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+125.04 mm, x7.18) - CLEARLY DEEPER; held 53 contact poses, sum 309.46 mm, deepest 29.79 mm at ['ws', 15.0, 165.0, 15.0], 19 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (+248.49 mm, x5.08) - CLEARLY DEEPER",
+   "depths": {
+    "v_gap 37.42": {
+     "bench": {
+      "n": 21,
+      "sum_mm": 145.28,
+      "max_mm": 27.15,
+      "n_deeper3": 9,
+      "overhead140": 16,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       0.0
+      ],
+      "gap": 37.42,
+      "src": "docs/alignment/remeasure/weldk-crossover-kneeless-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        145.28
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 53,
+      "sum_mm": 309.46,
+      "max_mm": 29.79,
+      "n_deeper3": 19,
+      "overhead140": 35,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       15.0
+      ],
+      "gap": 38.52,
+      "src": "docs/alignment/remeasure/weldk-crossover-kneeless-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        309.46
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 37.42",
+     "wear": "bench",
+     "sum": 145.28,
+     "ref_sum": 20.24,
+     "excess": 125.04,
+     "ratio": 7.18,
+     "watch": true
+    },
+    {
+     "claim": "v_gap 37.42",
+     "wear": "held",
+     "sum": 309.46,
+     "ref_sum": 60.97,
+     "excess": 248.49,
+     "ratio": 5.08,
+     "watch": true
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "no passive coordinate; flood not required"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.092 deg (verification.held.min_th_margin_taken; 6 readings)",
+   "min_margin": 5.092,
+   "where": "verification.held.min_th_margin_taken"
+  },
+  {
+   "check": "idle",
+   "level": "watch",
+   "reason": "a drive is declared but no range of it over the taken poses is on file; knee: rigid by design, not a joint (mechanism notes: knee deleted, one rigid bracket); measured span 0.0 deg (row:exact_frozen.knee_rigid.knee_ptp_deg) <= 0.5; K: declared moving, no span on file; crank: declared moving, no span on file",
+   "spans": [
+    [
+     "row:exact_frozen.knee_rigid.knee_ptp_deg",
+     0.0
+    ],
+    [
+     "docs/concepts/verify/weldk-crossover-kneeless-3r_v_held_frozen.json:extra.knee_rigid.knee_ptp_deg",
+     0.0
+    ],
+    [
+     "docs/concepts/verify/weldk-crossover-kneeless-3r_v_bench_frozen.json:extra.knee_rigid.knee_ptp_deg",
+     0.0
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank"
+   ],
+   "rigid": [
+    "knee"
+   ]
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 0.0 vs row None",
+   "recomputed": 0.0,
+   "row": null
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard shows no verified number (row v_gap 37.42); dashboard sweep best 31.83 (score 88.43) sits 5.59 below the verified number; dashboard status 'screened' vs row 'verified'"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/weldk-crossover-kneeless-3r_v_el2_held.json",
+  "docs/concepts/verify/weldk-crossover-kneeless-3r_v_el2_bench.json",
+  "docs/concepts/verify/weldk-crossover-kneeless-3r_v_held_frozen.json",
+  "docs/concepts/verify/weldk-crossover-kneeless-3r_v_bench_frozen.json"
+ ],
+ "git": "98e0fe4",
+ "tool_version": "2026-10-19.1",
+ "t": "2026-10-19T04:52:36Z"
+}

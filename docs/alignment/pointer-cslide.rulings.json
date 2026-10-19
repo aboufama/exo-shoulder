@@ -1,0 +1,87 @@
+[
+ {
+  "key": "held_out",
+  "refuted": false,
+  "evidence": "Stands: not measured. The row has no v_gap and no held-out number, and none is on file (docs/alignment/remeasure/ holds only probe_fitfast, saddle_counterfactual, shoe_clash and now skeptic_extra for this id). I re-ran the probe's frozen exact wears myself: Bench(110,360) exact and the disjoint held bench, model unchanged, shape frozen from the fast fit, 2 niced processes. Both re-fit fast to 69.84 first. At load 14-17 on 4 cores each got ~35-45 % of a core. I stopped them at the time box after 7:50 wall and 3.6 CPU-min each, with no exact output; the auditor's bench wear had already used 8 CPU-min without finishing. Farm not used: the approval is spent (CLAUDE.md rule 7)."
+ },
+ {
+  "key": "near_touch",
+  "refuted": true,
+  "evidence": "On file, and re-measured. docs/alignment/remeasure/pointer-cslide_probe_fitfast.json near_touch: gap_near1 76.34, gap_near2 106.17, gap_near3 185.41 against plain 69.84, on the claim's own Bench(60,160) fast with the claim's shape. My own re-run of the same probe (model unchanged, row best_params) reproduces them to the digit (and the claim, 69.84). With the numbers on file, c_near_touch's documented level is ok: near-touch is report-only since 2026-10-17 (tools/alignment_audit.py c_near_touch, lvl = 'ok'; CLAUDE.md user decision 3). The size of the 1-2 mm shell is carried by judgement:T1, which I uphold."
+ },
+ {
+  "key": "contact_depth",
+  "refuted": false,
+  "evidence": "Measurement right, and it stands. My re-run reads 8 contact poses, 72.56 mm summed, deepest 15.67 mm at ws (0, 150, 0) (hub1 15.67, link1 14.69), 7 deeper than 3 mm; this is identical to probe_fitfast contact_poses. (c) Not apples to apples: the tool pairs this 220-pose fast fit with the lead's 470-pose Bench(110,360) exact dump (conecut-knee-knuckle-3r_bench_perpose.json: 470 poses, exact, 4 contact, 20.24 mm). The mismatch understates the excess: per pose it is 0.330 vs 0.043 mm (x7.7), and the excess (+52.3 mm) is 10x TH depth_floor_mm. The same-bench exact wear did not finish (see held_out). 'Held depths not on file' is true."
+ },
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "Measured, in th. K.closure (tools/concept_kit.py lines 88-97) returns margin = min(th - |A1 - A2|, A1 + A2 - th, 360 - A1 - A2 - th) with th = angle(J1, J3) = angle(a1, d3): the line 25-30 reading. The model keeps a pose only at margin >= sing = 15 (best_params.sing; pointer-cslide.py kin()). On file: docs/alignment/remeasure/pointer-cslide_probe_fitfast.json singular_margin_min_taken 38.55 (p05 41.64) over the 136 taken poses; my own re-run reads 38.55 / 41.64. 38.55 > TH fold_min 5.0."
+ },
+ {
+  "key": "sampling",
+  "refuted": false,
+  "evidence": "The per-part record does exist, but it does not clear the check. probe_fitfast sample_counts (hub1 81, hub2 81, link1 385, link2 308, band 1470, shoe 60, neck 200) and inband_member, and the row's inband_member. Fed to c_sampling's own arithmetic, that record reads sample-weighted 0.6739 against part-weighted 0.4136. That is +26.0 points, over TH part_weight_gamed 8, and four parts are under 0.5 in band. Also, the shoe-to-neck riser is a body with no samples (S3, below), so 'unsampled bodies cannot be ruled out' is borne out. Upheld at watch, the auditor's level."
+ },
+ {
+  "key": "judgement:NEW-inband-padding",
+  "refuted": false,
+  "evidence": "Re-measured myself: the probe's own cf() re-run gives a file identical to docs/alignment/remeasure/pointer-cslide_saddle_counterfactual.json. saddle1: gap 69.84 = 100 x (0.2261 + 0.0167 + 0.40) + 5.56. saddle0: gap 120.30 = 113.45 + 6.85. The in-band term moves 49.17 points. The band alone moves 0.0006 -> 0.8494 on 1470 of 2585 samples (+48.3), and link2 moves 0.6631 -> 0.6689; hub1, hub2, link1, shoe and neck are identical. Band outer face median 29.4 mm (31.5 without), shoe crown 31.7 (31.8). Body thickness median 23.3, max 31.4. Mass 741.2 vs 274.7 g. New on the wearer's side: 741 g is past REQUIREMENTS.md R8 (custom-part mass <= 500 g, a placeholder budget), and the 275 g twin is under it. Upheld at watch."
+ },
+ {
+  "key": "judgement:S2",
+  "refuted": false,
+  "evidence": "Re-derived from my own re-run (sample_counts x inband_member): sample-weighted 0.67387, part-weighted 0.41364, +26.0 points; hub1 0.0174, shoe 0.00, link1 0.1889, hub2 0.1764 = 607 of 2585 samples (23.5 %). The band (1470) and neck (200) are 64.6 % of the samples. Same harness and bench as the claim."
+ },
+ {
+  "key": "judgement:NEW-oob-standoff",
+  "refuted": false,
+  "evidence": "Re-measured identically (my fit_fast probe_fitfast probe.clip_scored): over14 0.3239, over20 0.1908. Shoe median 29.4 mm (p10 27.6), hub1 median 31.8 (fast-grid clamp 31.75, so a lower bound). docs/ALIGNMENT.md section 1: every piece of metal rides ~1 cm off, so a 30 mm-proud twist bearing costs the wearer the goal itself."
+ },
+ {
+  "key": "judgement:T1",
+  "refuted": false,
+  "evidence": "Re-measured identically: gap_near1 76.34, gap_near2 106.17, so 29.83 points sit in the 1-2 mm shell (36.33 between 0 and 2 mm, the tool's shell2 = n2 - plain). Both are over the documented watch line of 15 points (docs/ALIGNMENT.md section 5; TH shell2_watch). 19 of the 136 taken poses have metal < 2 mm (taken_floor_lt). That is metal on a real, bulging arm (section 1). Report-only, upheld at watch."
+ },
+ {
+  "key": "judgement:T2",
+  "refuted": false,
+  "evidence": "Re-measured identically: the clip-frame floor histogram (probe.clip_scored.floor_hist_mm) is 0-1: 1, 1-2: 8, 2-3: 28, 3-4: 19, 4+: 0. Every one of the 56 taken clip frames has its lowest metal below 4 mm, and in-band10 is 0.5209. The 2 mm march clearance is the kit's K3 convention for every kit row (docs/concepts/KIT.md line 65), so the cause is not unique to this design. The cost to the wearer (2-4 mm floors against the 10 mm aim) is real, so this stands."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "Re-measured identically (taken_floor_lt_by_member). Below 3 mm: neck 44, band 34, link2 14, link1 8, hub2 3 of the 61 poses. Below 2 mm: band 9, neck 8, link1 6, link2 3 of the 19 poses."
+ },
+ {
+  "key": "judgement:T5",
+  "refuted": false,
+  "evidence": "Stands (same numbers as contact_depth: 8 poses, 72.56 mm, 15.67 / 12.87 / 11.44 / 11.28 mm deepest, re-measured identically). Instrument statement checked against 702373b. Before 2026-10-19.1, _depth_sources('conecut-knee-knuckle-3r') raised on the string 'held' in the desmo-geom paired file, so ref_depths() returned {} and the line read 'no bench depth of conecut-knee-knuckle-3r on file' (level ok). Now it reads the lead's 20.24 mm over 4 and fires watch. For this design, T5 reads differently because of the type guard AND because the probe file is new; each one alone would not."
+ },
+ {
+  "key": "judgement:P1",
+  "refuted": false,
+  "evidence": "Stands. Checked in the model: design() fits (c, T) by window(th, ok, cov) and rho, the saddle profile and the neck profile by quantiles over the same bench poses that bench_eval then scores (pointer-cslide.py design() / build_chain). The row reports best of 479 with the convergence gate failed (row gate.converged false). The taken poses reach the window edge (j3_window_edge_min_deg -0.0, re-measured). The off-bench number is still unmeasured: my exact and held wears did not finish (see held_out)."
+ },
+ {
+  "key": "judgement:M2",
+  "refuted": true,
+  "evidence": "The geometry is right, but 'for any cage length' is not. Numbers: T 97.946 (probe_fitfast shape.T), Ls 39.464 (row best_params.Ls), rho 81.83. pointer-cslide.py angles() gives the band arc T + Ls + 2 x deg(3/(rho+2)) = 97.95 + 39.46 + 4.10 = 141.51 deg. The cage walks x/2 while the shoe walks x in [-T/2, T/2]. Take a cage longer than the shoe, Lc = Ls + T/2 = 88.43 deg: then the shoe always sits over cage-held balls. Over the stroke the cage spans Lc + T/2 = T + Ls = 137.41 deg, which is the band arc 141.51 less its two 2.05-deg end stops. The cage reaches the stop face together with the shoe at full stroke. So the declared caged-ball J3 fits the modelled 141.5-deg band unchanged; the row already declares the custom cage and the anti-creep (row mechanism.notes). Unloaded balls ride outside the shoe, as in a ball-retainer telescopic slide. Neither the band nor the claim changes."
+ },
+ {
+  "key": "judgement:S3",
+  "refuted": false,
+  "evidence": "Upheld, and now measured as a lower bound: +1.18 gap points. Shoe walls sit at radius rho = 81.83 (rows s+13, s+15; pointer-cslide.py build_chain rowsS[-2:]). The 'down' neck's first row is at s+19 at radius 54.2-54.7 (neck_layout; neck_from is used only by the 'bar' neck): a 27.45 mm step over 4 mm axial, 81.7 deg. The kit's K5 climb limit is 60 deg (docs/concepts/KIT.md K5; CAD ruling 2). In my K5-consistent riser the neck rows are lifted to the 60-deg line from the shoe wall, with no new wall samples. On the claim's bench and shape it raises 7 neck rows, takes neck in-band from 0.9945 to 0.8419 (1725 samples in -> out, 16 out -> in over 56 taken clip frames) and in-band14 down by 0.0118: gap 69.84 -> ~71.02 (docs/alignment/remeasure/pointer-cslide_skeptic_extra.json k5_riser; tools/alignment_skeptic_extra_pointer_cslide.py). Wall samples (the auditor's ~88) would add to that."
+ },
+ {
+  "key": "judgement:NEW-ws-inband",
+  "refuted": false,
+  "evidence": "Re-measured identically. probe.ws_unscored: inband14 0.5446, over14 0.4462, over20 0.2466 on 80 taken workspace poses. overhead_ws140 is 0 / 12 (window 9, collide 2, contact 1). raised_arm_reach is 34 / 67. ws_reach_by_elev at 140-200 is 0 / 12."
+ },
+ {
+  "key": "judgement:NEW-skin-wrapped-body",
+  "refuted": false,
+  "evidence": "Upheld. Measured: the saddle's fitted grid is 14 x 79 per-sample quantile radii, interpolated onto the 14 x 105 sampled columns. It is not steeper than a kit strap: max axial step 2.1 mm per 2 mm (46.3 deg), max circumferential step 2.15 mm per 2.68 mm (38.7 deg), none past the K5 60-deg line (pointer-cslide_skeptic_extra.json saddle_step_*). So steepness does not set it apart from the K3 straps that every kit row uses. Its form does: a doubly-curved underside 26 mm x 141 deg with a body 6.0-31.4 mm thick (saddle_counterfactual band_body_thickness_mm), carrying 1470 of 2585 samples and ~48 in-band points. A K3 strap is a constant 3 mm section that becomes a bent bar. CLAUDE.md forbids 'surfaces fitted or shrink-wrapped to skin data', and no line/arc approximation of the saddle has been worn, so its in-band is unmeasured."
+ }
+]

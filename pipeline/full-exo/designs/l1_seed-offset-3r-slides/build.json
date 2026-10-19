@@ -1,0 +1,313 @@
+{
+ "fit": {
+  "k": 403,
+  "bench": "60,160",
+  "mode": "fast",
+  "report": {
+   "gap": 54.95,
+   "reach": 0.8,
+   "follow": 0.9167,
+   "inband14": 0.5734,
+   "inband10": 0.3115,
+   "contact": 0.0896,
+   "why": {
+    "fold": 19,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 18,
+    "parts": 0,
+    "contact": 0
+   },
+   "f": [
+    57.6,
+    94.4,
+    65.2
+   ],
+   "min_clear_taken": 1.93,
+   "parts_ib14": {
+    "hub1": [
+     1.0,
+     6.6,
+     80
+    ],
+    "hub2": [
+     0.008,
+     31.6,
+     80
+    ],
+    "hub3": [
+     0.949,
+     10.4,
+     80
+    ],
+    "neck": [
+     0.403,
+     16.9,
+     36
+    ],
+    "rail": [
+     0.637,
+     11.9,
+     92
+    ],
+    "carA": [
+     0.27,
+     17.7,
+     160
+    ],
+    "bridge": [
+     0.0,
+     26.9,
+     24
+    ],
+    "L1": [
+     0.685,
+     12.4,
+     198
+    ],
+    "L2": [
+     0.722,
+     8.8,
+     145
+    ]
+   }
+  },
+  "S": [
+   12.8,
+   9.9,
+   7.6
+  ]
+ },
+ "rail_mount": {
+  "along": [
+   21.8,
+   33.9
+  ],
+  "across": [
+   -29.1,
+   4.0
+  ],
+  "height": [
+   68.0,
+   72.0
+  ]
+ },
+ "clips": {
+  "Raise overhead": {
+   "frames": 181,
+   "held": 83,
+   "follow": 0.541,
+   "reasons": {
+    "parts": 4,
+    "fold": 79
+   },
+   "min_skin_mm": 0.83
+  },
+  "Drink from a cup": {
+   "frames": 178,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.43
+  },
+  "Comb hair": {
+   "frames": 202,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.08
+  },
+  "Reach a high shelf": {
+   "frames": 157,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.2
+  },
+  "Wash opposite shoulder": {
+   "frames": 193,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.5
+  },
+  "Reach back pocket": {
+   "frames": 145,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 1.57
+  },
+  "Wave": {
+   "frames": 172,
+   "held": 74,
+   "follow": 0.57,
+   "reasons": {
+    "parts": 21,
+    "held": 9,
+    "flip": 26,
+    "skin": 18
+   },
+   "min_skin_mm": -8.58
+  },
+  "Walking arm swing": {
+   "frames": 109,
+   "held": 0,
+   "follow": 1.0,
+   "reasons": {},
+   "min_skin_mm": 2.67
+  }
+ },
+ "workspace": {
+  "poses": 1432,
+  "closes": 0.8422,
+  "feasible_kin_parts": 0.8373
+ },
+ "check": [
+  {
+   "bench_pose": 0,
+   "pose": [
+    30.0,
+    3.0,
+    -30.0
+   ],
+   "max_mm": 0.0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0,
+     0.0
+    ],
+    "rail": [
+     0.0,
+     0.0
+    ],
+    "carA": [
+     0.0,
+     0.0
+    ],
+    "bridge": [
+     0.0,
+     0.0
+    ],
+    "L1": [
+     0.0,
+     0.0
+    ],
+    "L2": [
+     0.0,
+     0.0
+    ]
+   },
+   "res_deg": 0.0
+  },
+  {
+   "bench_pose": 117,
+   "pose": [
+    30.0,
+    0.0,
+    -75.0
+   ],
+   "max_mm": 0.0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0,
+     0.0
+    ],
+    "rail": [
+     0.0,
+     0.0
+    ],
+    "carA": [
+     0.0,
+     0.0
+    ],
+    "bridge": [
+     0.0,
+     0.0
+    ],
+    "L1": [
+     0.0,
+     0.0
+    ],
+    "L2": [
+     0.0,
+     0.0
+    ]
+   },
+   "res_deg": 0.0001
+  },
+  {
+   "bench_pose": 140,
+   "pose": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "max_mm": 0.0,
+   "per_part": {
+    "hub1": [
+     0.0,
+     0.0
+    ],
+    "hub2": [
+     0.0,
+     0.0
+    ],
+    "hub3": [
+     0.0,
+     0.0
+    ],
+    "neck": [
+     0.0,
+     0.0
+    ],
+    "rail": [
+     0.0,
+     0.0
+    ],
+    "carA": [
+     0.0,
+     0.0
+    ],
+    "bridge": [
+     0.0,
+     0.0
+    ],
+    "L1": [
+     0.0,
+     0.0
+    ],
+    "L2": [
+     0.0,
+     0.0
+    ]
+   },
+   "res_deg": 0.0002
+  }
+ ]
+}

@@ -1,0 +1,396 @@
+# Alignment audit: phi40-thinstack-relay-4r (round 107, lens A fallback, slice r107-B)
+
+Auditor run 2026-10-18 ~21:21-21:55 UTC, after the row turned verified (commit 36a87d4, 21:09). The tool is
+tools/alignment_audit.py version 2026-10-18.1, run with reference conecut-knee-knuckle-3r (the verified 3-active lead).
+The earlier audit of the screened claim (21:05, same day) is replaced by this one. Ledger:
+`python3 tools/alignment_ledger.py get phi40-thinstack-relay-4r`.
+
+## Verdict: WATCH (verified v_gap 14.06, score 94.89; held 16.69)
+
+- The claim is v_gap 14.06 on frozen exact Bench(110,360) (chain-only buildable gate, plain 13.52), read once at the
+  pre-registered envsel pick PHI 40 / delta 3.5. Held out it reads 16.69 (plain 16.02). It misses the 95 line (13.75)
+  by 0.31.
+- The verifier (docs/concepts/verify/phi40-thinstack-relay-4r-verify.py) reproduces 14.06 / 16.69 and adds X1-X3 with 0
+  new jams and 0 new contacts.
+- Three per-pose dumps exist: the row's, this auditor's re-wear and the verifier's. They are identical pose for pose:
+  470 bench and 1154 held poses, 0 differences in the taken / contact / evaluated flags, max metal difference 0.000 mm.
+  The verifier imports the claim model unchanged, so this agreement shows a deterministic re-run, not a second
+  implementation (see proposal A4).
+- No hard rule is broken: O20 hubs, fold margin min 5.000 deg in th (0 of 400 taken bench poses and 0 of 952 held
+  below 5), 0 passive translations, 4 DOF (at the cap). Complexity recomputes to 51.25.
+- Nothing here shows the number ranking this design above a design that is better for the wearer under a gate the user
+  keeps, so nothing is gamed. The verdict is watch: 3 tool items and 7 judgement findings.
+
+## Re-wear
+
+- No new re-wear was run. The verification commit changed no parameter: the row diff only adds the v_* fields, the
+  status and the verifier's text, and the claim is unchanged at 14.06. Re-wearing the same configuration would repeat
+  the 20:56 / 21:03 re-wears (docs/alignment/remeasure/phi40-thinstack-relay-4r_{bench,held}.json, gate 14.06 / 16.69
+  reproduced to 0.00). Those re-wears now agree with the verifier's dumps to the bit.
+- In their place this audit ran one new diagnostic, the thin shell's share (finding M2): the claim model unchanged, its
+  own exact Bench(110,360) prepare, and the pick worn at tsh 1.5 and at tsh 1.0 as the control
+  (docs/alignment/remeasure/phi40-thinstack-relay-4r_tsh.json; numbers in M2). One niced process with OMP_NUM_THREADS=1. The machine was at load
+  ~10 from other agents' re-wears.
+
+## Tool checks (docs/alignment/phi40-thinstack-relay-4r.json)
+
+Three of the 14 checks read watch. The other 11 read ok.
+
+- **dominance (watch):** the row beats conecut-knee-knuckle-3r by 4.76 plain and loses to it by 12.32 at 2 mm. The A1
+  gate is retired, so this is report-only.
+- **continuity (watch):** this is a gap in the instrument, not in the design. The tool reads "no flood on file", but
+  the PHI 40 flood is on file in claim_phi40.json and held.json (pick.continuity). The verifier re-ran it: 0 relayed
+  poses dropped, 0 phi-0 poses not connected, static gap = plain on both benches (verifier_claim.log and
+  verifier_held.log, conn).
+- **reporting (watch):** the row's `verdict` field still reads "SCREENED ... Needs an independent verifier", but its
+  status is verified and v_gap is set. The dashboard row (docs/dashboard/data/morphs.json) carries the same stale text,
+  and its alignment_reasons still show the old "held_out: no verified bench gap". The stale text understates the row,
+  so it flatters nothing. The row's owner should update it.
+- **held_out (now ok):** held 16.69 against bench 14.06, +2.63, under the 6.0 watch line.
+
+## What the wearer gets (measured)
+
+Sources: docs/alignment/remeasure/phi40-thinstack-relay-4r_{bench,held}.json and _perpose.json. These are identical to
+docs/concepts/verify/phi40-thinstack-relay-4r/verifier_{claim,held}_perpose.json.
+
+| | bench | held |
+|---|---|---|
+| Overhead taken (elev >= 140) | 9 / 28 | 22 / 71 |
+| Raised arm taken (elev >= 90) | 67 / 113 | 176 / 300 |
+| Elev >= 160 taken | 3 / 15 | 9 / 36 |
+| Workspace taken | 290 / 360 | 750 / 952 |
+| Taken poses with metal < 1 / 2 / 3 mm | 9 / 50 / 136 (overhead 0 / 3 / 8) | 32 / 123 / 305 (overhead 4 / 9 / 20) |
+| Min metal on a taken pose | 0.072 mm | 0.10 mm |
+| Overhead metal, 10th percentile | 1.80 mm | 0.62 mm |
+| Contact poses / summed depth / deeper than 3 mm | 17 / 74.92 mm / 7 | 48 / 198.11 mm / 23 |
+| Deepest contact | 15.37 mm at ws (30, 150, -30), relay phi 39.7 | 13.89 mm at ws (45, 150, -15), phi 35.2 |
+| In-band 2-14 chain-only / pooled | 0.8946 / 0.9169 | 0.8933 / 0.9160 |
+| Gap at metal < 1 / 2 / 3 mm (deep basis) | 18.18 / 47.16 / 100.73 | 22.99 / 47.92 / 97.52 |
+
+For comparison, the 3-active lead conecut-knee-knuckle-3r takes 8 / 28 overhead on the bench (18 / 71 held) and
+47 / 113 raised (123 / 300). Its contacts are 4 / 20.24 mm on the bench and 14 / 60.97 mm held, recomputed here from
+docs/alignment/remeasure/conecut-knee-knuckle-3r_{bench,held}_perpose.json, which reproduce 18.29 / 22.38.
+
+**Springs, stops, cuff, singular postures**
+
+- The relay is a constant-force coil (12 x 10) on the carriage lug. Its margin over gravity plus tape friction is
+  0.22-0.62 N on 2.0 N. Return, hysteresis and cuff twist are not on file (M5).
+- The J2 stops hold th at 5.000 deg minimum. The 5 lowest taken poses sit at 5.000-5.003 deg (verifier_claim.json
+  pick.th_margin), so the stops are in use.
+- The relay travels up to phi 39.88 deg (bench: 41 relayed poses, 28 taken, 13 contacts, 0 jams). The cuff knee moves
+  46.7 deg.
+- Internal clearances (verifier X1, taken poses):
+  - The E strap rides over the carriage at 1.200 mm, 0.2 mm above the 1 mm non-adjacent rule. 255 of 400 bench and
+    578 held taken poses sit under 1.5 mm.
+  - The knee crown sits 0.52 mm from the L-lug bracket (read as an adjacent pair).
+  - Both are looser than the verified parent's (E over carriage 1.002 mm, crown vs bracket 0.216 mm, 182 bench poses
+    under 1.2 mm; docs/concepts/verify/offset-shortcar-relay-4r/verifier_claim.json). This row raised the margin, so it
+    is not a finding.
+  - Note: the verifier's text calls the parent's crown clearance 1.4 mm, but the parent's own verifier file reads
+    0.216 mm. The error runs against this row, not for it.
+
+## Findings
+
+1. **T5, contact depth (watch).**
+   - Bench: 17 contacts, 74.92 mm summed, against the lead's 4 / 20.24 mm (x3.70).
+   - Held: 48 contacts, 198.11 mm, against 14 / 60.97 mm (x3.25).
+   - The PHI 35 -> 40 band turns 4 relay-stop poses into presses: 15.37 mm at an overhead scapular-plane raise, 13.78,
+     1.27 and 0.95 mm, summed 31.36 mm.
+   - Since this audit the depths are verified depths: three identical dumps.
+   - Why this is not a better exo: the score charges these poses no more than a lost pose plus a contact share. The
+     wearer gets a 15 mm press where PHI 35 gives a stop.
+   - Action: a skin-aware relay stop near phi 37, or price the band's contacts before calling PHI 40 a reach gain.
+2. **G1, metal hugging in the PHI band (watch).**
+   - PHI 40 against PHI 35 on the same hardware and harness: plain -0.21, 1 mm +0.27, 2 mm +1.08.
+   - Of the 8 bench poses the band evaluates, 4 are contacts, and 3 of the 4 takes are under 2 mm (0.21 / 1.08 /
+     1.74 mm).
+   - Held: every overhead take the row adds over the lead and the parent sits at 0.10-0.62 mm.
+   - Against the parent the row is ahead plain and behind at 1 mm and 2 mm.
+   - This is report-only under the 2026-10-17 ruling.
+3. **S3, the coil strip (watch).**
+   - The verified number stands only for a free steel strip that sags 2.49 mm into the 4 mm cuff liner (r 76.61
+     against R_liner 79.1). It passes 1.30-1.90 mm from the skin on 4 held poses (800, 865, 793, 929, phi 33-38) and
+     at 1.94 mm on 1 bench pose.
+   - Guiding the strip instead loses 326 / 417 bench and 776 / 1000 held poses (172.40 / 175.85).
+   - The liner groove is in neither the model nor the mechanism record, the strip is not sampled in the in-band, and
+     its liner friction is not in the spring budget.
+   - Action: put the strip and its liner relief in the model (sampled as metal) and in the mechanism record, then
+     re-wear.
+4. **M5, return spring (watch).** The margin is 0.22-0.62 N on 2.0 N. The coil is on a new lug, the travel is now
+   40 deg, and strip-on-liner friction (S3) is not budgeted. Action: a return / hysteresis / cuff-twist test on this
+   hardware.
+5. **M2, the 1.0 mm slotted shell (watch).** The thin shell carries a third of the row's gain over its parent, and its stiffness is not shown.
+   - This audit's diagnostic (docs/alignment/remeasure/phi40-thinstack-relay-4r_tsh.json) wore the pick twice on its
+     own exact Bench(110,360) prepare, with the claim model unchanged:
+     - tsh 1.5 (the parent family's shell) reads **14.30**: chain-only in-band 0.8922, pooled 0.9150.
+     - The control, tsh 1.0, reads **14.06**: 0.8946 / 0.9169, which reproduces the verified number to 0.00.
+     - Plain 13.52, reach 0.8056, 17 contacts, 0 jams, near1 18.18 and near2 38.82 are the same in both.
+   - So the 1.0 mm shell is worth 0.24 of the row's 0.70 over offset-shortcar-relay-4r (14.76), all of it chain
+     in-band. The E strap and knee link ride 0.5 mm lower: R_b falls from 83.2 to 82.7 mm.
+   - Stiffness: the verifier estimates that the two 4 x 1 mm lips deflect about 0.6 mm at 5 N mid-span when
+     unsupported. Checked here: F L^3 / 48 E I with E 114 GPa, I 2 x (4 x 1^3 / 12) mm^4 and L 75 mm gives 0.58 mm.
+     The liner carries inward loads only.
+   - The E strap clears the carriage by 1.200 mm, 0.2 mm above the 1 mm rule. On 255 of 400 bench and 578 held taken
+     poses the clearance is under 1.5 mm. An outward cuff load of a few newtons, lifting the carriage on its lips,
+     would take those poses under the rule.
+   - Why watch and not gamed: a 1.0 mm Ti sheet is a real part, the margin is better than the parent's, and the row
+     misses 95 at either thickness.
+   - Action: build the shell section as L1 CAD and run a CalculiX check of the lips under an outward carriage load (or
+     state a liner bond or a back-up strap) before the 0.24 is counted as real.
+   - This diagnostic is a seventh reading of the claim bench (14.30). It is worse than the claim and changes no pick.
+6. **G6, 4th joint (watch).**
+   - The 4.22-point lead over the 3-active lead comes from a counted 4th joint: complexity 51.25 against 18.5.
+   - The overhead it adds is skin-hugging: bench +1 take at 1.08 mm, held +4 at 0.10-0.62 mm.
+   - The real gain is the raised arm, 67 against 47 of 113.
+   - The count is honest. Never display this row as the overall leader.
+7. **P1, forward (watch).**
+   - The claim bench has now been read at six configurations of this hardware: 14.06 (claim), 13.67 (delta 5.0),
+     13.55 (lean 0), 14.02 (delta 6.0, 5 jams), 14.28 (PHI 35) and 14.01 (the verifier's delta 3.0 red team).
+   - The two best readings sit under the 95 line, and the row's next step plans exactly those levers.
+   - Action: that row must claim on held or on a fresh bench, never on Bench(110,360).
+
+Checked and not present:
+- **T1, T2:** covered by G1. The band read as 3-14 mm leaves 13.52 / 16.02 unchanged.
+- **T3:** the margin is read on th, 5.000.
+- **T4:** the no-jam delta window on the claim bench is at least [3.0, 5.5] (verifier post0 14.01). The pick has
+  0.5 deg of margin below and about 2 deg above before jams.
+- **S1:** held is +2.63 over the bench.
+- **S2:** part-weighted in-band is 0.926 against sample-weighted 0.917.
+- **S4:** contact is read on min_mm and cmin of every set, crowns included.
+- **S5:** the verifier's flood drops 0 poses.
+- **S6:** per-part density was not run (time box).
+- **M1:** hubs are O20.
+- **M3:** X1 / X2 check every chain set, crowns included, against every relay body, and the clearances listed above
+  hold.
+- **M4:** K, the knee and the relay all move.
+- **P2:** held was read once at the pick.
+- **P3 / R3:** the pick was pre-registered on envsel. The spread is on file: 9 readings, top-5 spread 0.41.
+- **P4:** no bench, judge or kit file is in the row's 4 commits.
+- **R1:** the number shown is verified, and only the verdict text is stale (the tool's reporting item).
+- **R2:** nothing is refuted.
+- **R4:** the dashboard v_gap 14.06 equals the verified number, and v_contact is set.
+- **G2 / G3:** inside M5.
+- **G4:** min th is 5.000, and no T4 walk is seen.
+- **G5:** complexity recomputes to 51.25.
+
+## Proposals (measurement changes, not applied, not used in the verdict)
+
+- **A1. A band-end column for travel levers.** A row that extends a relay or stop travel reports the takes and
+  contacts the extension adds, with metal and depth for each. Measured on this row: PHI 35 -> 40 adds 8 evaluated
+  bench poses, 4 of them contacts (31.36 mm), and 3 of the 4 takes are under 2 mm. Of the verified rows, only
+  offset-shortcar-relay-4r has such a lever, and its PHI 35 was never compared with a shorter travel.
+- **A2. Depth-weighted contact as a reported column, not in the score.** Measured, in mm per evaluated pose: this row
+  74.92 / 417 = 0.180, the parent 46.18 / 409 = 0.113, the lead 20.24 / 376 = 0.054. This is the reverse of their gap
+  order.
+- **A3. The strip / tendon rule.** A spring strip, cable or tendon is sampled as metal along its path in the claim
+  model. Measured on this row: 14.06 with the chord, 172.40 with a guide. No other verified row carries a strip.
+- **A4. A verifier recomputes at least one reading outside the claim's code.** For example, it recomputes skin
+  distance from the posed meshes for the taken poses, or rebuilds the relay geometry from the mechanism record. Here
+  the row, the auditor and the verifier all import the same model, and their dumps agree to 0.000 mm. A shared bug
+  would pass all three. The proposal changes no number on any verified row. It adds a check whose cost is one extra
+  wear per verification.
+- **Tool fixes (for the tool owner):** continuity and contact_depth should read `<verify>/<id>/*.json` (pick.continuity)
+  and the reference's remeasure dumps.
+
+## Numbers this audit could not get
+
+- **R17 return, friction, hysteresis and cuff twist:** no judge exists for this hardware.
+- **Shell lip stiffness by FEA:** the verifier gives a hand estimate only (M2). No CalculiX run was made within the
+  time box.
+- **PHI 35 held on the same hardware:** it needs a held prepare, ~15-25 min at the current load, and no slot was free.
+- **The th distribution between 5 and 6 deg:** only the min and the 5 lowest are on file.
+- **Per-part density (tools/sample_density.py):** not run, time box.
+
+Files from this audit:
+- docs/alignment/phi40-thinstack-relay-4r.json
+- docs/alignment/phi40-thinstack-relay-4r.findings.json
+- docs/alignment/phi40-thinstack-relay-4r.md
+- docs/alignment/ledger.jsonl
+- docs/alignment/remeasure/phi40-thinstack-relay-4r_tsh.json (the M2 diagnostic)
+
+## Skeptic (2026-10-18 ~21:42 UTC)
+
+The skeptic re-derived every reason from the raw files and ran no new wear (models unchanged). Raw files:
+- the verifier's per-pose dumps (docs/concepts/verify/phi40-thinstack-relay-4r/verifier_{claim,held}_perpose.json);
+- the PHI 35 dump (diag_phi35_claimbench_s0_perpose.json);
+- the lead's dumps (docs/alignment/remeasure/conecut-knee-knuckle-3r_{bench,held}_perpose.json);
+- the verifier JSON and logs, the flood file, the tsh diagnostic, and a fresh `tools/simplicity.py` run.
+
+All rows use one formula: metal = min(min_mm, cmin), and a taken pose under t mm counts as contact and is not taken. It
+reproduces every plain gap (13.52, 16.02, 18.29, 22.38, 13.73). Rulings are in
+docs/alignment/phi40-thinstack-relay-4r.rulings.json.
+
+**Rulings (1 of 10 refuted)**
+
+- **dominance: upheld.**
+  - Plain: the row reads 13.52 against the lead's 18.29 (+4.77 for the row).
+  - At 2 mm: 46.63 against 34.84 (-11.79). The tool's B.report deep basis reads 47.16, -12.32, the same sign.
+  - Held at 2 mm: 47.91 against 37.11.
+  - Both rows are on the same Bench(110,360) exact frozen. Metal at 1-2 mm costs the wearer (ALIGNMENT.md s1).
+- **continuity: REFUTED.**
+  - verifier_claim.json pick.continuity: dropped_relayed 0, phi0_taken_not_connected 0, static 13.52 = plain.
+  - verifier_held.json: the same, static 16.02 = plain. claim_phi40.json[0] and held.json[0] agree.
+  - The flood (flood_PHI40_t12_a235_s1.json) is run with flood_relay(step_deg 2.0, passive_jump 10.0), which is the
+    2026-10-16 rule. It has 0 passive-jump edge failures.
+  - Under change log 2026-10-17.1 this counts as connected = static. The item is a gap in the tool's reader.
+- **reporting: upheld.**
+  - rows/phi40-thinstack-relay-4r.json is verified with v_gap 14.06, but its verdict opens "SCREENED". morphs.json
+    (v149) carries the same text.
+  - This is the documented trigger (c_reporting, line 736). The kneeless-sidecar precedent was upheld the same way.
+- **T5: upheld.**
+  - Bench: 17 contacts, 74.92 mm, 7 deeper than 3 mm, deepest 15.37 mm (i263). The lead has 4 / 20.24 mm: x3.70,
+    +54.68 mm.
+  - Held: 48 contacts, 198.11 mm (197.82 on min_mm alone), deepest 13.89 mm (i680). The lead has 14 / 60.97 mm:
+    x3.25, +137.14 mm.
+  - Both wears exceed TH (x2 and +5 mm).
+  - The contacts present at PHI 40 and absent at PHI 35 are exactly 233, 263, 421 and 459, 31.36 mm in all. None of
+    them is evaluated at PHI 35.
+  - None of the 13 bench contacts beyond the lead's 4 is evaluated for the lead.
+- **G1: upheld.**
+  - PHI 40 against PHI 35: plain -0.21, 1 mm +0.27, 2 mm +1.07, 3 mm +0.68.
+  - The 8 band poses: 233 c -1.27, 260 0.21, 263 c -15.37, 370 1.08 (overhead), 394 1.74, 417 3.79, 421 c -0.95,
+    459 c -13.78.
+  - Overhead takes added over the lead: on the bench only 370; held 896 0.10, 963 0.52, 969 0.24 and 1036 0.62. The
+    row loses no overhead take the lead has.
+- **S3: upheld.**
+  - From X3 on file: chord_rmin 76.61 against R_liner 79.1.
+  - Chord within 2 mm of the skin: 1 bench pose (357, 1.943 mm) and 4 held poses (1.301-1.899 mm).
+  - Guide clashes: 326 of 417 bench and 776 of 1000 held poses.
+  - The strip and the liner groove are in neither the claim model nor the mechanism record.
+- **M5: upheld.**
+  - The row's own md marks R17 "Not priced" (line 178) and "Inherited and unpriced" (line 323). The verify folder has
+    no return or hysteresis file.
+  - Margin arithmetic re-derived: 0.22-0.62 N (11-31 %).
+- **M2: upheld.**
+  - From the tsh diagnostic: tsh 1.5 reads 14.30, the control tsh 1.0 reads 14.06. Everything outside the chain-only
+    in-band is identical.
+  - Lip deflection F L^3 / 48 E I = 0.578 mm. At 1.5 mm lips the same formula gives 0.17 mm, so the deflection risk
+    is specific to the thin shell.
+  - The E-over-carriage clearance of 1.200 mm is set by bump 1.2 and holds only while the lips do not lift. Poses
+    under 1.5 mm: 255 bench and 578 held.
+  - No FEA is on file.
+- **G6: upheld.**
+  - `tools/simplicity.py` re-run: cx 51.25 with 4 active joints, against 18.5 with 3.
+  - Overhead taken: bench 9/28 against 8/28, held 22/71 against 18/71. Raised arm: 67 against 47 and 176 against 123.
+  - The user asks for 3 DOF before 4, so the 4th joint is a real cost.
+- **P1: upheld.**
+  - Six claim-bench readings are on file: 14.06, 14.01, 13.67, 14.02 (5 jams), 13.55 and 14.28. The audit's
+    tsh 1.5 reading (14.30) is a seventh.
+  - 13.55 and 13.67 sit under the 95 line. The next row registers those levers (md lines 217-221).
+
+**Missed by the auditor** (for the next audit, not in this verdict)
+
+1. **The "What the wearer gets" near-skin counts are on chain metal only.**
+   - They come from remeasure metal_shell_taken, which uses min_mm without cmin: bench <2 / <3 mm 50 / 136, held
+     <1 / <2 / <3 mm 32 / 123 / 305.
+   - On the near-touch basis the tool itself scores (min(min_mm, cmin): the deep near*_poses, recomputed here from the
+     verifier dumps) they are bench 9 / 60 / 144 and held 34 / 140 / 323.
+   - So the table understates the near-skin takes by 6-17 %. The extra metal is the crowns, the extra walls and the
+     relay hardware: clip frames 12 against 7 under 2 mm on the bench, 21 against 13 held.
+2. **The overhead 10th-percentile metal (1.80 bench / 0.62 held) pools clip frames with workspace poses** (deep_audit
+   `ov` uses every taken pose with elev >= 140).
+   - On the workspace overhead poses alone it is 1.58 mm on the bench (9 poses) and 0.49 mm held (22 poses).
+   - The wearer's overhead reading is closer to the skin than reported.
+3. **The 2 mm gap is not reproduced to the digit from the dumps.**
+   - The dumps give 46.63 on the bench against the tool's 47.16 (held 47.91 against 47.92). 1 mm and 3 mm match
+     exactly.
+   - The cause is likely the 3-decimal rounding in the dumps, or the clip in-band re-read inside B.report.
+   - No finding moves, but "one formula that reproduces each gap exactly" holds only for plain, 1 mm and 3 mm. The
+     next audit should name its basis.
+
+**Final verdict (ledger): WATCH.** Refuted: continuity. Upheld: dominance, reporting, T5, G1, S3, M5, M2, G6, P1.
+
+## Skeptic, second pass (2026-10-18 ~21:47 UTC)
+
+This is a second, independent skeptic on the same audit. It had the 21:05 reason list plus the two keys the 21:34 entry
+added (reporting, M2), and it ruled on all 11. It ran no new wear (the models are unchanged).
+
+It re-derived every number from the raw dumps with `alignment_paired._gap`, using one rule: metal = min(min_mm, cmin),
+and a pose under t mm counts as contact.
+- Rows and references: verifier_{claim,held}_perpose.json, diag_phi35_claimbench_s0_perpose.json, and the lead and
+  parent dumps under docs/alignment/remeasure/.
+- Gate checks: `tools/alignment_neartouch_dumps.py` (row, lead, parent), `tools/simplicity.py`, and the verifier JSON
+  fields pick.continuity, pick.xcheck.X3, clearance_margin_taken and th_margin.
+- Plain gaps reproduce: 13.52 / 16.02 (row), 13.73 (PHI 35), 18.29 / 22.38 (lead), 13.73 (parent).
+- The verifier's dumps equal the auditor's re-wear pose for pose: 0 differences in the flags, and the metal differs by
+  at most 0.000 mm.
+
+The rulings are in docs/alignment/phi40-thinstack-relay-4r.rulings.json. This pass replaced the 21:42 file; its version
+is in git at 4601d2c. Three of the 11 reasons are refuted.
+
+- **held_out: REFUTED.**
+  - The row is verified: v_gap 14.06 and v_held 16.69.
+  - verifier_held.log gives gate 16.69 and plain 16.02. The re-derived plain is also 16.02.
+  - The tool's held_out check reads ok: the drop is +2.63, under the 6.0 watch line.
+  - The 21:34 audit entry has already dropped this reason.
+- **dominance: upheld.**
+  - Plain: 13.52 against the lead's 18.29.
+  - At 2 mm: 46.63 on the dump basis (59 poses) or 47.16 on deep_audit (60 poses). The lead reads 34.84 on both
+    bases. So the row loses by 11.79-12.32.
+  - Both read the same bench indices.
+  - The 4.76 uses the row's pooled in-band. On the chain-only gate the gain is 4.22, which favours the row.
+- **continuity: REFUTED.**
+  - verifier_claim.json and verifier_held.json, pick.continuity: dropped_relayed 0, phi0_taken_not_connected 0, and
+    static = plain (13.52 / 16.02).
+  - The flood has 0 edge failures from a passive jump.
+  - cmap is keyed by the bench grid index, and a missing node counts as not connected, so the reading is exact. The
+    gap is in the tool's reader.
+- **reporting: REFUTED.** This pass disagrees with the 21:42 skeptic.
+  - The trigger fires: the verdict text opens "SCREENED".
+  - But the R1 pattern is absent. R1 means a self-measured number shown as verified. Here the number shown, 14.06
+    (row v_gap, and morphs.json v_gap 14.06), is the verifier's own reading (verifier_claim.log gate 14.06), held 16.69
+    is the same, and the dumps are identical pose for pose.
+  - The stale text understates the row and costs the wearer nothing. It is a housekeeping item for the row's owner.
+  - The next audit should settle which reading of c_reporting stands: the trigger, or the pattern behind it.
+- **T5: upheld.**
+  - Bench: 17 contacts, 74.92 mm, deepest 15.37 at i263, 7 deeper than 3 mm.
+  - Held: 48 contacts, 198.11 mm, deepest 13.89.
+  - Lead: 4 / 20.24 and 14 / 60.97. Parent: 13 / 46.18 (bench). Ratios: 3.70, 3.25, 1.62.
+  - The PHI 35 dump differs on exactly 8 poses, all relay stops (ev False). At PHI 40 four of them are contacts:
+    1.268 + 15.366 + 0.948 + 13.783 = 31.365 mm.
+- **G1: upheld.**
+  - PHI 40 against PHI 35, same hardware: -0.21 plain, +0.27 at 1 mm, +1.07 at 2 mm (+1.08 on B.report).
+  - Band takes: 0.211, 1.084 (elevation 150), 1.744 and 3.786 mm.
+  - New held overhead takes over the lead: 0.10, 0.52, 0.24 and 0.62 mm.
+  - On envsel, PHI 40 also wins at 1 mm (22.25 against PHI 35's 22.45), so the 1 mm search rule would have picked
+    the same.
+- **S3: upheld.** The strip is not modelled.
+  - X3 chord_rmin is 76.61 against the 79.1 liner, so the strip sits 2.49 mm into it.
+  - The chord comes within 2 mm of the skin on 1 bench and 4 held poses.
+  - A guide clashes with the chain on 326 of 417 bench and 776 of 1000 held poses.
+- **M5: upheld.** Nothing on file measures it: no R17, hysteresis or twist output. The margin re-derives to
+  0.22-0.62 N.
+- **M2: upheld.** There is no FEA on file.
+  - The tsh diagnostic reads 14.30 against 14.06.
+  - The lip deflection re-derives to 0.578 mm.
+  - Clearance: lt1.5 is 255 (bench) and 578 (held), with the lowest at 1.200 mm.
+- **G6: upheld.**
+  - Complexity: 51.25 against 18.5. Gate: 14.06 against 18.28.
+  - Overhead extras over the lead: 1 on the bench (1.08 mm) and 4 held (0.10-0.62 mm). The lead takes no overhead pose
+    the row loses.
+  - Raised arm: 67 against 47 on the bench, 176 against 123 held.
+- **P1: upheld (forward risk).**
+  - Two post-claim readings sit under 95: delta 5 at 13.67 and lean 0 at 13.55. The next row registers exactly those
+    levers.
+  - This claim itself was pre-registered: pick.json was written at 19:50, before the claim log, and PHI 41 / 42 failed
+    the pre-stated +0.5 cliff clause.
+
+**Missed by the auditor** (for the next audit; none of these changes this verdict):
+
+1. **The tool's dominance check compares unlike in-band readings.**
+   - It reads the row's plain gap, which pools the relay hardware's 372 in-band samples (relay_hw_inband 0.9756),
+     against the lead's chain gap.
+   - On the row's chain-only gate the gain is 4.22, not 4.76.
+   - The 0.54 difference flatters the row.
+   - Proposal (instrument, not applied): read dominance on the claim's own gate field.
+2. **The flood has failures on the envelope grid.**
+   - edge_fail: 26 phi-jump edges and 1 active-jump edge.
+   - 3 relayed envelope nodes are not connected (177 against 174).
+   - None maps to a bench or held pose: 0 dropped. They do mark regions the arm cannot reach continuously.
+   - The tool does not report flood edge failures. A next audit could list which grid nodes they are.
+3. **Two skeptics read c_reporting differently on this row.** This pass refuted it; the 21:42 pass upheld it. The next
+   audit should settle the rule.
+
+**Final verdict (ledger, this pass): WATCH.**
+- Refuted: held_out, continuity, reporting.
+- Upheld: dominance, T5, G1, S3, M5, M2, G6, P1.

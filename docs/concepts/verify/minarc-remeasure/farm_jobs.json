@@ -1,0 +1,135 @@
+[
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 bench B docs/concepts/verify/minarc-remeasure/wear_B_fit60_bench_m5.json --conn docs/concepts/verify/minarc-remeasure/conn_B_fit60_m5.json",
+  "tag": "wear_B_fit60_bench_m5",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_B_fit60_bench_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 bench H1 docs/concepts/verify/minarc-remeasure/wear_H1_fit60_bench_m5.json --conn docs/concepts/verify/minarc-remeasure/conn_H1_fit60_m5.json",
+  "tag": "wear_H1_fit60_bench_m5",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_H1_fit60_bench_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 held B docs/concepts/verify/minarc-remeasure/wear_B_fit60_held_m5.json",
+  "tag": "wear_B_fit60_held_m5",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_B_fit60_held_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 held H1 docs/concepts/verify/minarc-remeasure/wear_H1_fit60_held_m5.json",
+  "tag": "wear_H1_fit60_held_m5",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_H1_fit60_held_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fitbig held B docs/concepts/verify/minarc-remeasure/wear_B_fitbig_held_m5.json",
+  "tag": "wear_B_fitbig_held_m5",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_B_fitbig_held_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fitbig held H1 docs/concepts/verify/minarc-remeasure/wear_H1_fitbig_held_m5.json",
+  "tag": "wear_H1_fitbig_held_m5",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_H1_fitbig_held_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=10 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 bench B docs/concepts/verify/minarc-remeasure/wear_B_fit60_bench_m10.json --conn docs/concepts/verify/minarc-remeasure/conn_B_fit60_m10.json",
+  "tag": "wear_B_fit60_bench_m10",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_B_fit60_bench_m10.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=10 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 bench H1 docs/concepts/verify/minarc-remeasure/wear_H1_fit60_bench_m10.json --conn docs/concepts/verify/minarc-remeasure/conn_H1_fit60_m10.json",
+  "tag": "wear_H1_fit60_bench_m10",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_H1_fit60_bench_m10.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=10 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fitbig bench B docs/concepts/verify/minarc-remeasure/wear_B_fitbig_bench_m10.json",
+  "tag": "wear_B_fitbig_bench_m10",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_B_fitbig_bench_m10.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=10 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fitbig bench H1 docs/concepts/verify/minarc-remeasure/wear_H1_fitbig_bench_m10.json",
+  "tag": "wear_H1_fitbig_bench_m10",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_H1_fitbig_bench_m10.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=10 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fitbig held B docs/concepts/verify/minarc-remeasure/wear_B_fitbig_held_m10.json",
+  "tag": "wear_B_fitbig_held_m10",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_B_fitbig_held_m10.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=10 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fitbig held H1 docs/concepts/verify/minarc-remeasure/wear_H1_fitbig_held_m10.json",
+  "tag": "wear_H1_fitbig_held_m10",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_H1_fitbig_held_m10.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 bench B docs/concepts/verify/minarc-remeasure/wear_Bmstop1_fit60_bench_m5.json '{\"mstop\": 1}' --conn docs/concepts/verify/minarc-remeasure/conn_Bmstop1_fit60_m5.json",
+  "tag": "wear_Bmstop1_fit60_bench_m5",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_Bmstop1_fit60_bench_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fitbig bench B docs/concepts/verify/minarc-remeasure/wear_B_fitbig_bench_m5.json --conn docs/concepts/verify/minarc-remeasure/conn_B_fitbig_m5.json",
+  "tag": "wear_B_fitbig_bench_m5",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_B_fitbig_bench_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fitbig bench H1 docs/concepts/verify/minarc-remeasure/wear_H1_fitbig_bench_m5.json --conn docs/concepts/verify/minarc-remeasure/conn_H1_fitbig_m5.json",
+  "tag": "wear_H1_fitbig_bench_m5",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_H1_fitbig_bench_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=10 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 held B docs/concepts/verify/minarc-remeasure/wear_B_fit60_held_m10.json",
+  "tag": "wear_B_fit60_held_m10",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_B_fit60_held_m10.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=10 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 held H1 docs/concepts/verify/minarc-remeasure/wear_H1_fit60_held_m10.json",
+  "tag": "wear_H1_fit60_held_m10",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/wear_H1_fit60_held_m10.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py conn-taken fit60 B docs/concepts/verify/minarc-remeasure/conntaken_B_fit60_m5.json",
+  "tag": "conntaken_B_m5",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/conntaken_B_fit60_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py conn-taken fit60 H1 docs/concepts/verify/minarc-remeasure/conntaken_H1_fit60_m5.json",
+  "tag": "conntaken_H1_m5",
+  "out": [
+   "docs/concepts/verify/minarc-remeasure/conntaken_H1_fit60_m5.json"
+  ]
+ }
+]

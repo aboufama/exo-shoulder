@@ -1,0 +1,259 @@
+{
+ "report": {
+  "gap": 13.38,
+  "reach": 0.775,
+  "follow": 1.0,
+  "inband14": 0.8966,
+  "inband10": 0.6001,
+  "contact": 0.0054
+ },
+ "why": {
+  "fold": 31,
+  "slide": 3,
+  "flip": 0,
+  "closure": 0,
+  "skin": 1,
+  "parts": 1,
+  "contact": 0
+ },
+ "roll": {
+  "rho": 0.5654,
+  "yspan": [
+   -38.5,
+   54.3
+  ],
+  "xspan": [
+   -21.8,
+   30.7
+  ],
+  "sun_arc_mm": 11.4,
+  "Rb": [
+   60.6,
+   62.1
+  ],
+  "band_lift": 0.0,
+  "th_window": [
+   26.8,
+   109.6
+  ],
+  "kin_ws": 126,
+  "min_mdy_taken": 5.17,
+  "min_mseg_taken": 5.89,
+  "min_jac_taken": 0.222
+ },
+ "parts_ib14": {
+  "hub1": [
+   0.994,
+   8.0,
+   80
+  ],
+  "sun": [
+   0.99,
+   10.6,
+   20
+  ],
+  "planet": [
+   0.988,
+   11.0,
+   20
+  ],
+  "hub3": [
+   0.698,
+   11.8,
+   80
+  ],
+  "E": [
+   0.887,
+   7.6,
+   92
+  ],
+  "boss": [
+   0.968,
+   7.1,
+   32
+  ],
+  "pad": [
+   0.992,
+   8.5,
+   32
+  ],
+  "knee": [
+   0.891,
+   10.6,
+   100
+  ],
+  "L1": [
+   1.0,
+   6.8,
+   48
+  ],
+  "L2": [
+   0.866,
+   9.1,
+   149
+  ]
+ },
+ "parts_pairs": {
+  "E-L2": 1
+ },
+ "near_touch": {
+  "min_mm": 1.07,
+  "low": [
+   {
+    "mm": 1.07,
+    "i": 5,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 1.12,
+    "i": 4,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 149.40573120117188,
+    "axial": -59.878719329833984
+   },
+   {
+    "mm": 1.12,
+    "i": 6,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 149.40573120117188,
+    "axial": -59.878719329833984
+   },
+   {
+    "mm": 1.16,
+    "i": 63,
+    "kind": "ws",
+    "plane": -90.0,
+    "elev": 45.0,
+    "axial": 120.0
+   },
+   {
+    "mm": 1.83,
+    "i": 179,
+    "kind": "ws",
+    "plane": 105.0,
+    "elev": 30.0,
+    "axial": -135.0
+   }
+  ],
+  "gap1": 13.38,
+  "gap2": 20.48
+ },
+ "overhead140": {
+  "ws": 12,
+  "reach": 0.1667,
+  "clip": 5,
+  "follow": 1.0,
+  "inband14": 0.8917,
+  "inband10": 0.6557,
+  "why_not": {
+   "fold": 7,
+   "slide": 3,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  }
+ },
+ "closest_per_part": {
+  "hub1": [
+   1.28,
+   "#5 clip Raise overhead       pl   30.0 el  150.0 ax  -60.0"
+  ],
+  "sun": [
+   2.8,
+   "#100 ws Workspace (envelope) pl    0.0 el   75.0 ax   45.0"
+  ],
+  "planet": [
+   2.05,
+   "#100 ws Workspace (envelope) pl    0.0 el   75.0 ax   45.0"
+  ],
+  "hub3": [
+   2.05,
+   "#191 ws Workspace (envelope) pl  120.0 el   30.0 ax -135.0"
+  ],
+  "E": [
+   2.05,
+   "#179 ws Workspace (envelope) pl  105.0 el   30.0 ax -135.0"
+  ],
+  "boss": [
+   2.05,
+   "#91 ws Workspace (envelope) pl  -15.0 el   75.0 ax   90.0"
+  ],
+  "pad": [
+   1.19,
+   "#63 ws Workspace (envelope) pl  -90.0 el   45.0 ax  120.0"
+  ],
+  "knee": [
+   4.34,
+   "#63 ws Workspace (envelope) pl  -90.0 el   45.0 ax  120.0"
+  ],
+  "L1": [
+   2.05,
+   "#124 ws Workspace (envelope) pl   30.0 el   75.0 ax   45.0"
+  ],
+  "L2": [
+   1.69,
+   "#63 ws Workspace (envelope) pl  -90.0 el   45.0 ax  120.0"
+  ]
+ },
+ "groups": {
+  "rest": {
+   "taken": "5/5",
+   "median_mm": 9.4,
+   "ib14": 0.882,
+   "not_taken": {}
+  },
+  "overhead": {
+   "taken": "7/17",
+   "median_mm": 8.1,
+   "ib14": 0.892,
+   "not_taken": {
+    "fold": 7,
+    "slide": 3
+   }
+  },
+  "across": {
+   "taken": "24/36",
+   "median_mm": 13.4,
+   "ib14": 0.538,
+   "not_taken": {
+    "fold": 12
+   }
+  },
+  "behind": {
+   "taken": "16/19",
+   "median_mm": 7.8,
+   "ib14": 0.977,
+   "not_taken": {
+    "fold": 3
+   }
+  }
+ },
+ "fold_ws": {
+  "n": 31,
+  "th_below": 9,
+  "th_above": 22,
+  "window": [
+   26.8,
+   109.6
+  ]
+ },
+ "parts_poses": [
+  [
+   "#92 ws Workspace (envelope) pl  -15.0 el   90.0 ax   60.0",
+   "E-L2"
+  ]
+ ],
+ "contact_poses": [
+  [
+   "#93 ws Workspace (envelope) pl  -15.0 el  105.0 ax   45.0",
+   "skin"
+  ]
+ ]
+}

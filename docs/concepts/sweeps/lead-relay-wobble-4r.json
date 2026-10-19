@@ -1,0 +1,8417 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-18T02:25:00Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 0.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.25,
+   "h_lift": 15.25,
+   "hub0_offset_mm": 5.4,
+   "riser_h": 20.9,
+   "hub1_exposed": 35,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7164,
+  "inband10": 0.4262,
+  "reach": 0.0563,
+  "follow": 0.0833,
+  "contact": 0.0,
+  "gap": 189.4,
+  "ws_taken": 9,
+  "contacts": 0,
+  "parts_lost": 170,
+  "parts_why": {
+   "riser": 102,
+   "hub0:hubK": 68
+  },
+  "part_inband": {
+   "chain": [
+    0.725,
+    11.0,
+    2.4,
+    4465
+   ],
+   "hub1": [
+    0.0,
+    20.9,
+    16.9,
+    175
+   ],
+   "L1a": [
+    0.0,
+    31.3,
+    28.8,
+    40
+   ],
+   "hub0": [
+    1.0,
+    5.2,
+    2.2,
+    405
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 1,
+  "t": "2026-10-18T02:25:01Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 30.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 52.25,
+   "h_lift": 16.2,
+   "hub0_offset_mm": 5.5,
+   "riser_h": 21.8,
+   "hub1_exposed": 35,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7468,
+  "inband10": 0.448,
+  "reach": 0.1,
+  "follow": 0.1333,
+  "contact": 0.0,
+  "gap": 176.99,
+  "ws_taken": 16,
+  "contacts": 0,
+  "parts_lost": 160,
+  "parts_why": {
+   "riser": 102,
+   "hub0:hubK": 58
+  },
+  "part_inband": {
+   "chain": [
+    0.76,
+    10.7,
+    2.4,
+    7144
+   ],
+   "hub1": [
+    0.0,
+    23.3,
+    18.2,
+    280
+   ],
+   "L1a": [
+    0.0,
+    31.5,
+    29.4,
+    64
+   ],
+   "hub0": [
+    1.0,
+    6.7,
+    2.2,
+    648
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 2,
+  "t": "2026-10-18T02:25:02Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 60.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 52.75,
+   "h_lift": 16.65,
+   "hub0_offset_mm": 5.5,
+   "riser_h": 22.3,
+   "hub1_exposed": 34,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8462,
+  "inband10": 0.5286,
+  "reach": 0.2313,
+  "follow": 0.3333,
+  "contact": 0.0,
+  "gap": 133.92,
+  "ws_taken": 37,
+  "contacts": 0,
+  "parts_lost": 127,
+  "parts_why": {
+   "riser": 86,
+   "hub0:hubK": 41
+  },
+  "part_inband": {
+   "chain": [
+    0.873,
+    9.7,
+    2.4,
+    17860
+   ],
+   "hub1": [
+    0.0,
+    24.5,
+    19.7,
+    680
+   ],
+   "L1a": [
+    0.0,
+    31.6,
+    29.7,
+    160
+   ],
+   "hub0": [
+    0.992,
+    8.6,
+    2.1,
+    1620
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 3,
+  "t": "2026-10-18T02:25:03Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 90.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 54.75,
+   "h_lift": 18.6,
+   "hub0_offset_mm": 5.7,
+   "riser_h": 24.2,
+   "hub1_exposed": 37,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8634,
+  "inband10": 0.5455,
+  "reach": 0.3688,
+  "follow": 0.7,
+  "contact": 0.0,
+  "gap": 81.78,
+  "ws_taken": 59,
+  "contacts": 0,
+  "parts_lost": 83,
+  "parts_why": {
+   "riser": 62,
+   "hub0:hubK": 21
+  },
+  "part_inband": {
+   "chain": [
+    0.917,
+    9.1,
+    2.4,
+    37506
+   ],
+   "hub1": [
+    0.0,
+    26.7,
+    21.0,
+    1554
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    31.0,
+    336
+   ],
+   "hub0": [
+    0.757,
+    12.3,
+    3.8,
+    3402
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 4,
+  "t": "2026-10-18T02:25:05Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 120.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 80.75,
+   "h_lift": 44.6,
+   "hub0_offset_mm": 8.4,
+   "riser_h": 50.2,
+   "hub1_exposed": 48,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7946,
+  "inband10": 0.5144,
+  "reach": 0.525,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 54.71,
+  "ws_taken": 84,
+  "contacts": 0,
+  "parts_lost": 47,
+  "parts_why": {
+   "riser": 47
+  },
+  "part_inband": {
+   "chain": [
+    0.917,
+    9.2,
+    2.4,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    2544
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    424
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    23.0,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 5,
+  "t": "2026-10-18T02:25:08Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 82.75,
+   "h_lift": 46.6,
+   "hub0_offset_mm": 8.6,
+   "riser_h": 52.2,
+   "hub1_exposed": 50,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7777,
+  "inband10": 0.4923,
+  "reach": 0.6125,
+  "follow": 0.9667,
+  "contact": 0.0,
+  "gap": 40.98,
+  "ws_taken": 98,
+  "contacts": 0,
+  "parts_lost": 28,
+  "parts_why": {
+   "riser": 28
+  },
+  "part_inband": {
+   "chain": [
+    0.899,
+    9.4,
+    2.4,
+    51794
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    2900
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    464
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    22.5,
+    4698
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 6,
+  "t": "2026-10-18T02:25:10Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 81.75,
+   "h_lift": 45.6,
+   "hub0_offset_mm": 8.5,
+   "riser_h": 51.2,
+   "hub1_exposed": 48,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7857,
+  "inband10": 0.4975,
+  "reach": 0.7188,
+  "follow": 0.9167,
+  "contact": 0.0,
+  "gap": 32.88,
+  "ws_taken": 115,
+  "contacts": 0,
+  "parts_lost": 14,
+  "parts_why": {
+   "riser": 14
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    2640
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    440
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    21.3,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 7,
+  "t": "2026-10-18T02:25:13Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 210.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 79.0,
+   "h_lift": 42.8,
+   "hub0_offset_mm": 8.3,
+   "riser_h": 48.4,
+   "hub1_exposed": 47,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7909,
+  "inband10": 0.5026,
+  "reach": 0.675,
+  "follow": 0.8667,
+  "contact": 0.0,
+  "gap": 41.74,
+  "ws_taken": 108,
+  "contacts": 0,
+  "parts_lost": 24,
+  "parts_why": {
+   "riser": 24
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    46436
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    2444
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    416
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    21.0,
+    4212
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 8,
+  "t": "2026-10-18T02:25:14Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 240.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 48.5,
+   "h_lift": 12.5,
+   "hub0_offset_mm": 5.1,
+   "riser_h": 18.1,
+   "hub1_exposed": 32,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8533,
+  "inband10": 0.552,
+  "reach": 0.525,
+  "follow": 0.4667,
+  "contact": 0.0,
+  "gap": 90.5,
+  "ws_taken": 84,
+  "contacts": 0,
+  "parts_lost": 72,
+  "parts_why": {
+   "riser": 50,
+   "hub0:hubK": 22
+  },
+  "part_inband": {
+   "chain": [
+    0.878,
+    9.6,
+    2.7,
+    25004
+   ],
+   "hub1": [
+    0.0,
+    20.1,
+    16.6,
+    896
+   ],
+   "L1a": [
+    0.0,
+    29.1,
+    25.6,
+    224
+   ],
+   "hub0": [
+    1.0,
+    7.4,
+    4.3,
+    2268
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 9,
+  "t": "2026-10-18T02:25:15Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 270.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 48.5,
+   "h_lift": 12.45,
+   "hub0_offset_mm": 5.1,
+   "riser_h": 18.1,
+   "hub1_exposed": 33,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7877,
+  "inband10": 0.4948,
+  "reach": 0.3812,
+  "follow": 0.1833,
+  "contact": 0.0,
+  "gap": 139.78,
+  "ws_taken": 61,
+  "contacts": 0,
+  "parts_lost": 112,
+  "parts_why": {
+   "riser": 67,
+   "hub0:hubK": 45
+  },
+  "part_inband": {
+   "chain": [
+    0.805,
+    10.3,
+    2.9,
+    9823
+   ],
+   "hub1": [
+    0.0,
+    20.3,
+    18.1,
+    363
+   ],
+   "L1a": [
+    0.0,
+    29.0,
+    25.5,
+    88
+   ],
+   "hub0": [
+    1.0,
+    6.6,
+    4.3,
+    891
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 10,
+  "t": "2026-10-18T02:25:16Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 300.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "h_lift": 13.45,
+   "hub0_offset_mm": 5.2,
+   "riser_h": 19.1,
+   "hub1_exposed": 33,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.6947,
+  "inband10": 0.3358,
+  "reach": 0.25,
+  "follow": 0.1167,
+  "contact": 0.0,
+  "gap": 168.86,
+  "ws_taken": 40,
+  "contacts": 0,
+  "parts_lost": 137,
+  "parts_why": {
+   "hub0:hubK": 78,
+   "riser": 59
+  },
+  "part_inband": {
+   "chain": [
+    0.699,
+    12.3,
+    5.3,
+    6251
+   ],
+   "hub1": [
+    0.0,
+    23.0,
+    20.5,
+    231
+   ],
+   "L1a": [
+    0.0,
+    30.2,
+    27.6,
+    56
+   ],
+   "hub0": [
+    1.0,
+    7.3,
+    5.1,
+    567
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 11,
+  "t": "2026-10-18T02:25:17Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 330.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.25,
+   "h_lift": 14.25,
+   "hub0_offset_mm": 5.3,
+   "riser_h": 19.9,
+   "hub1_exposed": 33,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.6517,
+  "inband10": 0.2943,
+  "reach": 0.1625,
+  "follow": 0.0667,
+  "contact": 0.0,
+  "gap": 186.91,
+  "ws_taken": 26,
+  "contacts": 0,
+  "parts_lost": 154,
+  "parts_why": {
+   "hub0:hubK": 97,
+   "riser": 57
+  },
+  "part_inband": {
+   "chain": [
+    0.65,
+    12.9,
+    6.6,
+    3572
+   ],
+   "hub1": [
+    0.0,
+    24.2,
+    21.8,
+    132
+   ],
+   "L1a": [
+    0.0,
+    30.9,
+    28.7,
+    32
+   ],
+   "hub0": [
+    1.0,
+    7.5,
+    5.6,
+    324
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 12,
+  "t": "2026-10-18T02:25:18Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 0.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.25,
+   "h_lift": 15.2,
+   "hub0_offset_mm": 7.1,
+   "riser_h": 20.8,
+   "hub1_exposed": 48,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7074,
+  "inband10": 0.4208,
+  "reach": 0.0875,
+  "follow": 0.0833,
+  "contact": 0.0,
+  "gap": 187.18,
+  "ws_taken": 14,
+  "contacts": 0,
+  "parts_lost": 165,
+  "parts_why": {
+   "hub0:hubK": 98,
+   "riser": 67
+  },
+  "part_inband": {
+   "chain": [
+    0.725,
+    11.0,
+    2.4,
+    4465
+   ],
+   "hub1": [
+    0.0,
+    20.5,
+    16.9,
+    240
+   ],
+   "L1a": [
+    0.0,
+    31.3,
+    28.7,
+    40
+   ],
+   "hub0": [
+    1.0,
+    4.8,
+    2.0,
+    405
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 13,
+  "t": "2026-10-18T02:25:19Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 30.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 52.5,
+   "h_lift": 16.5,
+   "hub0_offset_mm": 7.3,
+   "riser_h": 22.1,
+   "hub1_exposed": 46,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7577,
+  "inband10": 0.4602,
+  "reach": 0.1187,
+  "follow": 0.15,
+  "contact": 0.0,
+  "gap": 172.36,
+  "ws_taken": 19,
+  "contacts": 0,
+  "parts_lost": 156,
+  "parts_why": {
+   "riser": 77,
+   "hub0:hubK": 79
+  },
+  "part_inband": {
+   "chain": [
+    0.782,
+    10.5,
+    2.4,
+    8037
+   ],
+   "hub1": [
+    0.0,
+    23.5,
+    18.1,
+    414
+   ],
+   "L1a": [
+    0.0,
+    31.6,
+    29.6,
+    72
+   ],
+   "hub0": [
+    1.0,
+    6.5,
+    2.1,
+    729
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 14,
+  "t": "2026-10-18T02:25:20Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 60.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.5,
+   "h_lift": 17.45,
+   "hub0_offset_mm": 7.4,
+   "riser_h": 23.1,
+   "hub1_exposed": 47,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8528,
+  "inband10": 0.5324,
+  "reach": 0.2437,
+  "follow": 0.4667,
+  "contact": 0.0,
+  "gap": 118.68,
+  "ws_taken": 39,
+  "contacts": 0,
+  "parts_lost": 117,
+  "parts_why": {
+   "hub1:L1b": 2,
+   "riser": 66,
+   "hub0:hubK": 49
+  },
+  "part_inband": {
+   "chain": [
+    0.895,
+    9.5,
+    2.4,
+    25004
+   ],
+   "hub1": [
+    0.0,
+    25.7,
+    19.4,
+    1316
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    30.3,
+    224
+   ],
+   "hub0": [
+    0.968,
+    9.7,
+    2.0,
+    2268
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 15,
+  "t": "2026-10-18T02:25:22Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 90.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 56.0,
+   "h_lift": 20.0,
+   "hub0_offset_mm": 7.8,
+   "riser_h": 25.6,
+   "hub1_exposed": 48,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8384,
+  "inband10": 0.5129,
+  "reach": 0.3937,
+  "follow": 0.8167,
+  "contact": 0.0,
+  "gap": 70.12,
+  "ws_taken": 63,
+  "contacts": 0,
+  "parts_lost": 72,
+  "parts_why": {
+   "riser": 47,
+   "hub0:hubK": 25
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.4,
+    43757
+   ],
+   "hub1": [
+    0.0,
+    28.0,
+    21.2,
+    2352
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.4,
+    392
+   ],
+   "hub0": [
+    0.623,
+    13.3,
+    3.9,
+    3969
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 16,
+  "t": "2026-10-18T02:25:24Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 120.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 83.5,
+   "h_lift": 47.75,
+   "hub0_offset_mm": 11.6,
+   "riser_h": 53.4,
+   "hub1_exposed": 64,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.778,
+  "inband10": 0.4995,
+  "reach": 0.5563,
+  "follow": 0.9167,
+  "contact": 0.0,
+  "gap": 49.9,
+  "ws_taken": 89,
+  "contacts": 0,
+  "parts_lost": 40,
+  "parts_why": {
+   "riser": 40
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.2,
+    2.4,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    3520
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    440
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    23.0,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 17,
+  "t": "2026-10-18T02:25:27Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 84.5,
+   "h_lift": 48.75,
+   "hub0_offset_mm": 11.8,
+   "riser_h": 54.4,
+   "hub1_exposed": 64,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7673,
+  "inband10": 0.4857,
+  "reach": 0.6625,
+  "follow": 0.9667,
+  "contact": 0.0,
+  "gap": 37.02,
+  "ws_taken": 106,
+  "contacts": 0,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 20
+  },
+  "part_inband": {
+   "chain": [
+    0.899,
+    9.4,
+    2.4,
+    51794
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    3712
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    464
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    21.5,
+    4698
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 18,
+  "t": "2026-10-18T02:25:29Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 83.75,
+   "h_lift": 48.0,
+   "hub0_offset_mm": 11.7,
+   "riser_h": 53.6,
+   "hub1_exposed": 64,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7737,
+  "inband10": 0.4898,
+  "reach": 0.7375,
+  "follow": 0.9167,
+  "contact": 0.0,
+  "gap": 32.21,
+  "ws_taken": 118,
+  "contacts": 0,
+  "parts_lost": 11,
+  "parts_why": {
+   "riser": 11
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    3520
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    440
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    20.4,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 19,
+  "t": "2026-10-18T02:25:32Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 210.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 80.75,
+   "h_lift": 45.0,
+   "hub0_offset_mm": 11.2,
+   "riser_h": 50.6,
+   "hub1_exposed": 62,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7794,
+  "inband10": 0.4944,
+  "reach": 0.6937,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 39.36,
+  "ws_taken": 111,
+  "contacts": 0,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 20
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    3286
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    424
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    20.6,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 20,
+  "t": "2026-10-18T02:25:33Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 240.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 47.75,
+   "h_lift": 12.25,
+   "hub0_offset_mm": 6.6,
+   "riser_h": 17.9,
+   "hub1_exposed": 43,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8588,
+  "inband10": 0.565,
+  "reach": 0.5312,
+  "follow": 0.6,
+  "contact": 0.0,
+  "gap": 76.0,
+  "ws_taken": 85,
+  "contacts": 0,
+  "parts_lost": 63,
+  "parts_why": {
+   "riser": 30,
+   "hub0:hubK": 33
+  },
+  "part_inband": {
+   "chain": [
+    0.895,
+    9.4,
+    2.7,
+    32148
+   ],
+   "hub1": [
+    0.0,
+    20.1,
+    16.4,
+    1548
+   ],
+   "L1a": [
+    0.0,
+    28.9,
+    25.3,
+    288
+   ],
+   "hub0": [
+    1.0,
+    7.0,
+    4.0,
+    2916
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 21,
+  "t": "2026-10-18T02:25:34Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 270.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 48.0,
+   "h_lift": 12.25,
+   "hub0_offset_mm": 6.7,
+   "riser_h": 17.9,
+   "hub1_exposed": 41,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7989,
+  "inband10": 0.4734,
+  "reach": 0.3937,
+  "follow": 0.2667,
+  "contact": 0.0,
+  "gap": 129.07,
+  "ws_taken": 63,
+  "contacts": 0,
+  "parts_lost": 105,
+  "parts_why": {
+   "hub0:hubK": 73,
+   "riser": 32
+  },
+  "part_inband": {
+   "chain": [
+    0.824,
+    10.4,
+    2.9,
+    14288
+   ],
+   "hub1": [
+    0.0,
+    20.2,
+    17.9,
+    656
+   ],
+   "L1a": [
+    0.0,
+    28.9,
+    25.3,
+    128
+   ],
+   "hub0": [
+    1.0,
+    6.1,
+    3.5,
+    1296
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 22,
+  "t": "2026-10-18T02:25:35Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 300.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.25,
+   "h_lift": 13.2,
+   "hub0_offset_mm": 6.9,
+   "riser_h": 18.8,
+   "hub1_exposed": 46,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.6859,
+  "inband10": 0.3348,
+  "reach": 0.2687,
+  "follow": 0.1167,
+  "contact": 0.0,
+  "gap": 167.87,
+  "ws_taken": 43,
+  "contacts": 0,
+  "parts_lost": 134,
+  "parts_why": {
+   "hub0:hubK": 102,
+   "riser": 32
+  },
+  "part_inband": {
+   "chain": [
+    0.699,
+    12.3,
+    5.3,
+    6251
+   ],
+   "hub1": [
+    0.0,
+    22.6,
+    20.1,
+    322
+   ],
+   "L1a": [
+    0.0,
+    30.1,
+    27.4,
+    56
+   ],
+   "hub0": [
+    1.0,
+    6.8,
+    4.4,
+    567
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 23,
+  "t": "2026-10-18T02:25:36Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 330.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.25,
+   "h_lift": 14.25,
+   "hub0_offset_mm": 7.0,
+   "riser_h": 19.9,
+   "hub1_exposed": 44,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.6616,
+  "inband10": 0.3092,
+  "reach": 0.1625,
+  "follow": 0.0833,
+  "contact": 0.0,
+  "gap": 184.26,
+  "ws_taken": 26,
+  "contacts": 0,
+  "parts_lost": 153,
+  "parts_why": {
+   "hub0:hubK": 116,
+   "riser": 37
+  },
+  "part_inband": {
+   "chain": [
+    0.669,
+    12.7,
+    6.2,
+    4465
+   ],
+   "hub1": [
+    0.0,
+    23.9,
+    21.4,
+    220
+   ],
+   "L1a": [
+    0.0,
+    30.9,
+    28.7,
+    40
+   ],
+   "hub0": [
+    1.0,
+    7.1,
+    5.2,
+    405
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 24,
+  "t": "2026-10-18T02:25:37Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 0.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "h_lift": 15.8,
+   "hub0_offset_mm": 8.9,
+   "riser_h": 21.4,
+   "hub1_exposed": 56,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7144,
+  "inband10": 0.4331,
+  "reach": 0.1125,
+  "follow": 0.1167,
+  "contact": 0.0,
+  "gap": 180.64,
+  "ws_taken": 18,
+  "contacts": 0,
+  "parts_lost": 159,
+  "parts_why": {
+   "hub0:hubK": 110,
+   "riser": 49
+  },
+  "part_inband": {
+   "chain": [
+    0.74,
+    10.8,
+    2.4,
+    6251
+   ],
+   "hub1": [
+    0.0,
+    22.0,
+    17.4,
+    392
+   ],
+   "L1a": [
+    0.0,
+    31.5,
+    29.2,
+    56
+   ],
+   "hub0": [
+    1.0,
+    5.3,
+    2.2,
+    567
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 25,
+  "t": "2026-10-18T02:25:38Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 30.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "h_lift": 17.35,
+   "hub0_offset_mm": 9.2,
+   "riser_h": 23.0,
+   "hub1_exposed": 57,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7939,
+  "inband10": 0.499,
+  "reach": 0.125,
+  "follow": 0.2167,
+  "contact": 0.0,
+  "gap": 161.44,
+  "ws_taken": 20,
+  "contacts": 0,
+  "parts_lost": 151,
+  "parts_why": {
+   "riser": 64,
+   "hub0:hubK": 87
+  },
+  "part_inband": {
+   "chain": [
+    0.833,
+    10.0,
+    2.4,
+    11609
+   ],
+   "hub1": [
+    0.0,
+    24.2,
+    18.8,
+    741
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    30.2,
+    104
+   ],
+   "hub0": [
+    1.0,
+    6.7,
+    2.1,
+    1053
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 26,
+  "t": "2026-10-18T02:25:39Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 60.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 54.5,
+   "h_lift": 18.85,
+   "hub0_offset_mm": 9.5,
+   "riser_h": 24.5,
+   "hub1_exposed": 58,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8527,
+  "inband10": 0.5351,
+  "reach": 0.2562,
+  "follow": 0.6,
+  "contact": 0.0,
+  "gap": 104.11,
+  "ws_taken": 41,
+  "contacts": 0,
+  "parts_lost": 107,
+  "parts_why": {
+   "riser": 50,
+   "hub0:hubK": 55,
+   "hub1:L1b": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.908,
+    9.2,
+    2.4,
+    32148
+   ],
+   "hub1": [
+    0.0,
+    27.0,
+    20.5,
+    2088
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    31.1,
+    288
+   ],
+   "hub0": [
+    0.933,
+    10.4,
+    2.2,
+    2916
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 27,
+  "t": "2026-10-18T02:25:41Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 90.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 76.25,
+   "h_lift": 40.95,
+   "hub0_offset_mm": 13.2,
+   "riser_h": 46.6,
+   "hub1_exposed": 72,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7765,
+  "inband10": 0.5027,
+  "reach": 0.45,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 64.02,
+  "ws_taken": 72,
+  "contacts": 0,
+  "parts_lost": 59,
+  "parts_why": {
+   "riser": 59
+  },
+  "part_inband": {
+   "chain": [
+    0.917,
+    9.2,
+    2.4,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    3816
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    424
+   ],
+   "hub0": [
+    0.0,
+    31.4,
+    18.5,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 28,
+  "t": "2026-10-18T02:25:43Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 120.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 84.5,
+   "h_lift": 49.3,
+   "hub0_offset_mm": 14.7,
+   "riser_h": 54.9,
+   "hub1_exposed": 76,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7692,
+  "inband10": 0.4938,
+  "reach": 0.6,
+  "follow": 0.9167,
+  "contact": 0.0,
+  "gap": 46.41,
+  "ws_taken": 96,
+  "contacts": 0,
+  "parts_lost": 33,
+  "parts_why": {
+   "riser": 33
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.2,
+    2.4,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    4180
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    440
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    21.1,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 29,
+  "t": "2026-10-18T02:25:45Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 85.5,
+   "h_lift": 50.35,
+   "hub0_offset_mm": 14.8,
+   "riser_h": 56.0,
+   "hub1_exposed": 76,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7522,
+  "inband10": 0.4717,
+  "reach": 0.7063,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 34.15,
+  "ws_taken": 113,
+  "contacts": 0,
+  "parts_lost": 11,
+  "parts_why": {
+   "riser": 11
+  },
+  "part_inband": {
+   "chain": [
+    0.891,
+    9.5,
+    2.4,
+    53580
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    4560
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    480
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    19.8,
+    4860
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 30,
+  "t": "2026-10-18T02:25:48Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 84.0,
+   "h_lift": 48.8,
+   "hub0_offset_mm": 14.6,
+   "riser_h": 54.4,
+   "hub1_exposed": 76,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 120,
+  "contacts": 0,
+  "parts_lost": 9,
+  "parts_why": {
+   "riser": 9
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    4180
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    440
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    18.4,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 31.84,
+   "inband14": 0.7649,
+   "inband10": 0.4843,
+   "reach": 0.75,
+   "follow": 0.9167,
+   "contact": 0.0
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 31,
+  "t": "2026-10-18T02:25:50Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 210.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 81.5,
+   "h_lift": 46.3,
+   "hub0_offset_mm": 14.2,
+   "riser_h": 51.9,
+   "hub1_exposed": 74,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7705,
+  "inband10": 0.4888,
+  "reach": 0.7063,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 38.99,
+  "ws_taken": 113,
+  "contacts": 0,
+  "parts_lost": 18,
+  "parts_why": {
+   "riser": 18
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    3922
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    424
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    19.6,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 32,
+  "t": "2026-10-18T02:25:51Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 240.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 47.5,
+   "h_lift": 12.25,
+   "hub0_offset_mm": 8.2,
+   "riser_h": 17.9,
+   "hub1_exposed": 53,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8562,
+  "inband10": 0.5671,
+  "reach": 0.5563,
+  "follow": 0.6833,
+  "contact": 0.0,
+  "gap": 65.42,
+  "ws_taken": 89,
+  "contacts": 0,
+  "parts_lost": 54,
+  "parts_why": {
+   "riser": 19,
+   "hub0:hubK": 35
+  },
+  "part_inband": {
+   "chain": [
+    0.902,
+    9.3,
+    2.7,
+    36613
+   ],
+   "hub1": [
+    0.0,
+    20.3,
+    16.4,
+    2173
+   ],
+   "L1a": [
+    0.0,
+    28.9,
+    25.3,
+    328
+   ],
+   "hub0": [
+    1.0,
+    6.9,
+    3.8,
+    3321
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 33,
+  "t": "2026-10-18T02:25:52Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 270.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 47.75,
+   "h_lift": 12.25,
+   "hub0_offset_mm": 8.3,
+   "riser_h": 17.9,
+   "hub1_exposed": 53,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8143,
+  "inband10": 0.5096,
+  "reach": 0.4188,
+  "follow": 0.35,
+  "contact": 0.0,
+  "gap": 116.69,
+  "ws_taken": 67,
+  "contacts": 0,
+  "parts_lost": 96,
+  "parts_why": {
+   "hub0:hubK": 82,
+   "riser": 14
+  },
+  "part_inband": {
+   "chain": [
+    0.853,
+    10.0,
+    2.7,
+    18753
+   ],
+   "hub1": [
+    0.0,
+    20.4,
+    17.9,
+    1113
+   ],
+   "L1a": [
+    0.0,
+    28.9,
+    25.3,
+    168
+   ],
+   "hub0": [
+    1.0,
+    5.8,
+    2.8,
+    1701
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 34,
+  "t": "2026-10-18T02:25:53Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 300.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.0,
+   "h_lift": 13.3,
+   "hub0_offset_mm": 8.5,
+   "riser_h": 18.9,
+   "hub1_exposed": 54,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.6806,
+  "inband10": 0.3343,
+  "reach": 0.3,
+  "follow": 0.1167,
+  "contact": 0.0,
+  "gap": 165.27,
+  "ws_taken": 48,
+  "contacts": 0,
+  "parts_lost": 129,
+  "parts_why": {
+   "hub0:hubK": 106,
+   "riser": 23
+  },
+  "part_inband": {
+   "chain": [
+    0.699,
+    12.3,
+    5.3,
+    6251
+   ],
+   "hub1": [
+    0.0,
+    22.5,
+    20.2,
+    378
+   ],
+   "L1a": [
+    0.0,
+    30.1,
+    27.5,
+    56
+   ],
+   "hub0": [
+    1.0,
+    6.1,
+    3.7,
+    567
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 35,
+  "t": "2026-10-18T02:25:54Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 330.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.25,
+   "h_lift": 14.55,
+   "hub0_offset_mm": 8.7,
+   "riser_h": 20.2,
+   "hub1_exposed": 55,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.687,
+  "inband10": 0.3573,
+  "reach": 0.1875,
+  "follow": 0.1333,
+  "contact": 0.0,
+  "gap": 174.22,
+  "ws_taken": 30,
+  "contacts": 0,
+  "parts_lost": 146,
+  "parts_why": {
+   "hub0:hubK": 121,
+   "riser": 25
+  },
+  "part_inband": {
+   "chain": [
+    0.707,
+    11.8,
+    2.4,
+    7144
+   ],
+   "hub1": [
+    0.0,
+    23.0,
+    16.3,
+    440
+   ],
+   "L1a": [
+    0.0,
+    30.9,
+    28.2,
+    64
+   ],
+   "hub0": [
+    1.0,
+    5.9,
+    2.3,
+    648
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 36,
+  "t": "2026-10-18T02:25:56Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 0.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.75,
+   "h_lift": 16.5,
+   "hub0_offset_mm": 10.8,
+   "riser_h": 22.1,
+   "hub1_exposed": 64,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7021,
+  "inband10": 0.4143,
+  "reach": 0.1562,
+  "follow": 0.1333,
+  "contact": 0.0,
+  "gap": 175.84,
+  "ws_taken": 25,
+  "contacts": 0,
+  "parts_lost": 151,
+  "parts_why": {
+   "hub0:hubK": 101,
+   "hub0:L1b": 22,
+   "riser": 28
+  },
+  "part_inband": {
+   "chain": [
+    0.732,
+    11.0,
+    2.4,
+    7144
+   ],
+   "hub1": [
+    0.0,
+    22.9,
+    18.1,
+    512
+   ],
+   "L1a": [
+    0.0,
+    31.6,
+    29.6,
+    64
+   ],
+   "hub0": [
+    1.0,
+    5.4,
+    2.3,
+    648
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 37,
+  "t": "2026-10-18T02:25:57Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 30.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.5,
+   "h_lift": 18.3,
+   "hub0_offset_mm": 11.1,
+   "riser_h": 23.9,
+   "hub1_exposed": 66,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7871,
+  "inband10": 0.4955,
+  "reach": 0.1375,
+  "follow": 0.2167,
+  "contact": 0.0,
+  "gap": 160.87,
+  "ws_taken": 22,
+  "contacts": 0,
+  "parts_lost": 149,
+  "parts_why": {
+   "riser": 55,
+   "hub0:L1b": 18,
+   "hub0:hubK": 76
+  },
+  "part_inband": {
+   "chain": [
+    0.833,
+    10.0,
+    2.4,
+    11609
+   ],
+   "hub1": [
+    0.0,
+    24.9,
+    19.7,
+    858
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    30.8,
+    104
+   ],
+   "hub0": [
+    1.0,
+    6.6,
+    2.1,
+    1053
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 38,
+  "t": "2026-10-18T02:25:58Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 60.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 55.25,
+   "h_lift": 20.1,
+   "hub0_offset_mm": 11.5,
+   "riser_h": 25.7,
+   "hub1_exposed": 68,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8456,
+  "inband10": 0.5331,
+  "reach": 0.3,
+  "follow": 0.6167,
+  "contact": 0.0,
+  "gap": 98.77,
+  "ws_taken": 48,
+  "contacts": 0,
+  "parts_lost": 99,
+  "parts_why": {
+   "riser": 37,
+   "hub0:hubK": 49,
+   "hub0:L1b": 12,
+   "hub0:L2": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.91,
+    9.2,
+    2.4,
+    33041
+   ],
+   "hub1": [
+    0.0,
+    28.1,
+    21.2,
+    2516
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.5,
+    296
+   ],
+   "hub0": [
+    0.925,
+    10.5,
+    2.0,
+    2997
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 39,
+  "t": "2026-10-18T02:26:00Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 90.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 79.25,
+   "h_lift": 44.65,
+   "hub0_offset_mm": 16.5,
+   "riser_h": 50.3,
+   "hub1_exposed": 80,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7707,
+  "inband10": 0.4989,
+  "reach": 0.5125,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 58.35,
+  "ws_taken": 82,
+  "contacts": 0,
+  "parts_lost": 49,
+  "parts_why": {
+   "riser": 49
+  },
+  "part_inband": {
+   "chain": [
+    0.917,
+    9.2,
+    2.4,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    4240
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    424
+   ],
+   "hub0": [
+    0.0,
+    31.7,
+    17.9,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 40,
+  "t": "2026-10-18T02:26:02Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 120.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 85.5,
+   "h_lift": 51.0,
+   "hub0_offset_mm": 17.8,
+   "riser_h": 56.6,
+   "hub1_exposed": 80,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7638,
+  "inband10": 0.4883,
+  "reach": 0.6312,
+  "follow": 0.9333,
+  "contact": 0.0,
+  "gap": 42.17,
+  "ws_taken": 101,
+  "contacts": 0,
+  "parts_lost": 27,
+  "parts_why": {
+   "riser": 27
+  },
+  "part_inband": {
+   "chain": [
+    0.908,
+    9.3,
+    2.4,
+    50008
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    4480
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    448
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    18.9,
+    4536
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 41,
+  "t": "2026-10-18T02:26:04Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 86.0,
+   "h_lift": 51.55,
+   "hub0_offset_mm": 17.9,
+   "riser_h": 57.2,
+   "hub1_exposed": 80,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 123,
+  "contacts": 0,
+  "parts_lost": 1,
+  "parts_why": {
+   "riser": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.891,
+    9.5,
+    2.4,
+    53580
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    4800
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    480
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    17.8,
+    4860
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 28.19,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.7688,
+   "follow": 1.0,
+   "contact": 0.0
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 42,
+  "t": "2026-10-18T02:26:07Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 84.5,
+   "h_lift": 50.0,
+   "hub0_offset_mm": 17.6,
+   "riser_h": 55.6,
+   "hub1_exposed": 80,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 121,
+  "contacts": 0,
+  "parts_lost": 3,
+  "parts_why": {
+   "riser": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.891,
+    9.5,
+    2.4,
+    53580
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    4800
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    480
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    16.7,
+    4860
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 29.45,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.7562,
+   "follow": 1.0,
+   "contact": 0.0
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 43,
+  "t": "2026-10-18T02:26:09Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 210.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 83.0,
+   "h_lift": 48.45,
+   "hub0_offset_mm": 17.3,
+   "riser_h": 54.1,
+   "hub1_exposed": 80,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 116,
+  "contacts": 0,
+  "parts_lost": 13,
+  "parts_why": {
+   "riser": 13
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.7,
+    4400
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    440
+   ],
+   "hub0": [
+    0.0,
+    31.8,
+    19.0,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 34.63,
+   "inband14": 0.762,
+   "inband10": 0.4825,
+   "reach": 0.725,
+   "follow": 0.9167,
+   "contact": 0.0
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 44,
+  "t": "2026-10-18T02:26:11Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 240.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 48.0,
+   "h_lift": 12.7,
+   "hub0_offset_mm": 10.0,
+   "riser_h": 18.3,
+   "hub1_exposed": 61,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8502,
+  "inband10": 0.5599,
+  "reach": 0.5813,
+  "follow": 0.7,
+  "contact": 0.0,
+  "gap": 61.85,
+  "ws_taken": 93,
+  "contacts": 0,
+  "parts_lost": 49,
+  "parts_why": {
+   "riser": 12,
+   "hub0:hubK": 36,
+   "hub0:L1b": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.902,
+    9.3,
+    2.7,
+    37506
+   ],
+   "hub1": [
+    0.0,
+    20.9,
+    16.7,
+    2562
+   ],
+   "L1a": [
+    0.0,
+    29.3,
+    25.8,
+    336
+   ],
+   "hub0": [
+    1.0,
+    7.4,
+    4.2,
+    3402
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 45,
+  "t": "2026-10-18T02:26:12Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 270.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 48.25,
+   "h_lift": 12.95,
+   "hub0_offset_mm": 10.0,
+   "riser_h": 18.6,
+   "hub1_exposed": 63,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8106,
+  "inband10": 0.5128,
+  "reach": 0.45,
+  "follow": 0.3667,
+  "contact": 0.0,
+  "gap": 112.27,
+  "ws_taken": 72,
+  "contacts": 0,
+  "parts_lost": 90,
+  "parts_why": {
+   "hub0:hubK": 83,
+   "riser": 5,
+   "hub0:L1b": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.858,
+    9.9,
+    2.7,
+    19646
+   ],
+   "hub1": [
+    0.0,
+    21.2,
+    18.6,
+    1386
+   ],
+   "L1a": [
+    0.0,
+    29.5,
+    26.0,
+    176
+   ],
+   "hub0": [
+    1.0,
+    6.0,
+    2.8,
+    1782
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 46,
+  "t": "2026-10-18T02:26:13Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 300.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.0,
+   "h_lift": 13.7,
+   "hub0_offset_mm": 10.2,
+   "riser_h": 19.3,
+   "hub1_exposed": 62,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.6754,
+  "inband10": 0.3324,
+  "reach": 0.3187,
+  "follow": 0.1167,
+  "contact": 0.0,
+  "gap": 163.92,
+  "ws_taken": 51,
+  "contacts": 0,
+  "parts_lost": 126,
+  "parts_why": {
+   "hub0:hubK": 106,
+   "riser": 16,
+   "hub0:L1b": 4
+  },
+  "part_inband": {
+   "chain": [
+    0.699,
+    12.3,
+    5.3,
+    6251
+   ],
+   "hub1": [
+    0.0,
+    22.8,
+    20.6,
+    434
+   ],
+   "L1a": [
+    0.0,
+    30.4,
+    27.9,
+    56
+   ],
+   "hub0": [
+    1.0,
+    5.6,
+    3.1,
+    567
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 47,
+  "t": "2026-10-18T02:26:14Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 330.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.0,
+   "h_lift": 14.75,
+   "hub0_offset_mm": 10.4,
+   "riser_h": 20.4,
+   "hub1_exposed": 63,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.6734,
+  "inband10": 0.3613,
+  "reach": 0.2062,
+  "follow": 0.1667,
+  "contact": 0.0,
+  "gap": 170.37,
+  "ws_taken": 33,
+  "contacts": 0,
+  "parts_lost": 141,
+  "parts_why": {
+   "hub0:hubK": 115,
+   "riser": 17,
+   "hub0:L1b": 9
+  },
+  "part_inband": {
+   "chain": [
+    0.697,
+    11.8,
+    2.4,
+    8930
+   ],
+   "hub1": [
+    0.0,
+    22.3,
+    16.5,
+    630
+   ],
+   "L1a": [
+    0.0,
+    31.1,
+    28.4,
+    80
+   ],
+   "hub0": [
+    1.0,
+    5.0,
+    2.1,
+    810
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 48,
+  "t": "2026-10-18T02:26:47Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.0,
+   "r0_rule": "set",
+   "h_lift": 15.0,
+   "hub0_offset_mm": 5.3,
+   "riser_h": 20.6,
+   "hub1_exposed": 33,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8801,
+  "inband10": 0.5521,
+  "reach": 0.5875,
+  "follow": 0.9167,
+  "contact": 0.0067,
+  "gap": 37.24,
+  "ws_taken": 94,
+  "contacts": 1,
+  "parts_lost": 34,
+  "parts_why": {
+   "riser": 34
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.2,
+    2.4,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    22.6,
+    16.8,
+    1815
+   ],
+   "L1a": [
+    0.0,
+    31.2,
+    28.0,
+    440
+   ],
+   "hub0": [
+    0.982,
+    10.2,
+    1.3,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 49,
+  "t": "2026-10-18T02:26:48Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 55.0,
+   "r0_rule": "set",
+   "h_lift": 18.95,
+   "hub0_offset_mm": 5.7,
+   "riser_h": 24.6,
+   "hub1_exposed": 35,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8393,
+  "inband10": 0.5214,
+  "reach": 0.5813,
+  "follow": 0.9167,
+  "contact": 0.0133,
+  "gap": 42.6,
+  "ws_taken": 93,
+  "contacts": 2,
+  "parts_lost": 34,
+  "parts_why": {
+   "riser": 34
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.2,
+    2.4,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    26.5,
+    20.7,
+    1925
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    31.1,
+    440
+   ],
+   "hub0": [
+    0.491,
+    14.1,
+    5.1,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 50,
+  "t": "2026-10-18T02:26:49Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 60.0,
+   "r0_rule": "set",
+   "h_lift": 23.85,
+   "hub0_offset_mm": 6.3,
+   "riser_h": 29.5,
+   "hub1_exposed": 41,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8011,
+  "inband10": 0.511,
+  "reach": 0.5875,
+  "follow": 0.9167,
+  "contact": 0.0132,
+  "gap": 45.79,
+  "ws_taken": 94,
+  "contacts": 2,
+  "parts_lost": 33,
+  "parts_why": {
+   "riser": 33
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.2,
+    2.4,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    30.9,
+    25.5,
+    2255
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    440
+   ],
+   "hub0": [
+    0.071,
+    18.9,
+    8.9,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 51,
+  "t": "2026-10-18T02:26:50Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 52.0,
+   "r0_rule": "set",
+   "h_lift": 16.0,
+   "hub0_offset_mm": 7.2,
+   "riser_h": 21.6,
+   "hub1_exposed": 45,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8636,
+  "inband10": 0.5321,
+  "reach": 0.5938,
+  "follow": 0.9167,
+  "contact": 0.0196,
+  "gap": 39.55,
+  "ws_taken": 95,
+  "contacts": 3,
+  "parts_lost": 31,
+  "parts_why": {
+   "riser": 30,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.2,
+    2.4,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    23.7,
+    17.8,
+    2475
+   ],
+   "L1a": [
+    0.0,
+    31.5,
+    29.0,
+    440
+   ],
+   "hub0": [
+    0.903,
+    11.4,
+    1.9,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 52,
+  "t": "2026-10-18T02:26:51Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 56.0,
+   "r0_rule": "set",
+   "h_lift": 20.0,
+   "hub0_offset_mm": 7.8,
+   "riser_h": 25.6,
+   "hub1_exposed": 49,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8135,
+  "inband10": 0.5129,
+  "reach": 0.5938,
+  "follow": 0.9167,
+  "contact": 0.0196,
+  "gap": 44.56,
+  "ws_taken": 95,
+  "contacts": 3,
+  "parts_lost": 31,
+  "parts_why": {
+   "riser": 30,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.2,
+    2.4,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    27.7,
+    21.7,
+    2695
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.4,
+    440
+   ],
+   "hub0": [
+    0.308,
+    15.3,
+    4.5,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 53,
+  "t": "2026-10-18T02:26:52Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 62.0,
+   "r0_rule": "set",
+   "h_lift": 26.05,
+   "hub0_offset_mm": 8.6,
+   "riser_h": 31.7,
+   "hub1_exposed": 51,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7801,
+  "inband10": 0.4922,
+  "reach": 0.5938,
+  "follow": 0.9667,
+  "contact": 0.0192,
+  "gap": 44.53,
+  "ws_taken": 95,
+  "contacts": 3,
+  "parts_lost": 28,
+  "parts_why": {
+   "riser": 28
+  },
+  "part_inband": {
+   "chain": [
+    0.899,
+    9.4,
+    2.4,
+    51794
+   ],
+   "hub1": [
+    0.0,
+    31.7,
+    27.2,
+    2958
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    464
+   ],
+   "hub0": [
+    0.041,
+    21.2,
+    8.3,
+    4698
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 54,
+  "t": "2026-10-18T02:26:53Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 52.0,
+   "r0_rule": "set",
+   "h_lift": 15.95,
+   "hub0_offset_mm": 7.2,
+   "riser_h": 21.6,
+   "hub1_exposed": 48,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.853,
+  "inband10": 0.5098,
+  "reach": 0.6687,
+  "follow": 0.9167,
+  "contact": 0.0241,
+  "gap": 33.57,
+  "ws_taken": 107,
+  "contacts": 4,
+  "parts_lost": 18,
+  "parts_why": {
+   "riser": 12,
+   "hub0:hubK": 6
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    23.7,
+    20.2,
+    2640
+   ],
+   "L1a": [
+    0.0,
+    31.5,
+    28.9,
+    440
+   ],
+   "hub0": [
+    0.856,
+    12.1,
+    4.3,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 55,
+  "t": "2026-10-18T02:26:54Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 56.0,
+   "r0_rule": "set",
+   "h_lift": 20.0,
+   "hub0_offset_mm": 7.8,
+   "riser_h": 25.6,
+   "hub1_exposed": 48,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7983,
+  "inband10": 0.4983,
+  "reach": 0.6687,
+  "follow": 0.9167,
+  "contact": 0.0241,
+  "gap": 39.04,
+  "ws_taken": 107,
+  "contacts": 4,
+  "parts_lost": 18,
+  "parts_why": {
+   "riser": 15,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    27.7,
+    23.6,
+    2640
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.5,
+    440
+   ],
+   "hub0": [
+    0.16,
+    16.1,
+    6.5,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 56,
+  "t": "2026-10-18T02:26:56Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 62.0,
+   "r0_rule": "set",
+   "h_lift": 26.05,
+   "hub0_offset_mm": 8.6,
+   "riser_h": 31.7,
+   "hub1_exposed": 50,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7849,
+  "inband10": 0.4965,
+  "reach": 0.6937,
+  "follow": 0.9167,
+  "contact": 0.0235,
+  "gap": 37.82,
+  "ws_taken": 111,
+  "contacts": 4,
+  "parts_lost": 14,
+  "parts_why": {
+   "riser": 13,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    31.7,
+    28.1,
+    2750
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    440
+   ],
+   "hub0": [
+    0.009,
+    21.9,
+    9.2,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 57,
+  "t": "2026-10-18T02:26:57Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 165.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 17.35,
+   "hub0_offset_mm": 9.2,
+   "riser_h": 23.0,
+   "hub1_exposed": 57,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 104,
+  "contacts": 5,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    25.2,
+    21.6,
+    3135
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    30.2,
+    440
+   ],
+   "hub0": [
+    0.667,
+    13.3,
+    2.8,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 38.29,
+   "inband14": 0.8309,
+   "inband10": 0.5029,
+   "reach": 0.65,
+   "follow": 0.9167,
+   "contact": 0.0305
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 58,
+  "t": "2026-10-18T02:26:58Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 165.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 58.0,
+   "r0_rule": "set",
+   "h_lift": 22.4,
+   "hub0_offset_mm": 10.1,
+   "riser_h": 28.0,
+   "hub1_exposed": 60,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 106,
+  "contacts": 4,
+  "parts_lost": 19,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    30.1,
+    25.6,
+    3300
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    440
+   ],
+   "hub0": [
+    0.095,
+    18.2,
+    4.7,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 41.09,
+   "inband14": 0.7841,
+   "inband10": 0.4928,
+   "reach": 0.6625,
+   "follow": 0.9167,
+   "contact": 0.0242
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 59,
+  "t": "2026-10-18T02:26:59Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 165.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 64.0,
+   "r0_rule": "set",
+   "h_lift": 28.5,
+   "hub0_offset_mm": 11.1,
+   "riser_h": 34.1,
+   "hub1_exposed": 64,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 109,
+  "contacts": 4,
+  "parts_lost": 11,
+  "parts_why": {
+   "riser": 10,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.891,
+    9.5,
+    2.4,
+    53580
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    28.7,
+    3840
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    480
+   ],
+   "hub0": [
+    0.03,
+    24.0,
+    7.3,
+    4860
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 37.87,
+   "inband14": 0.7631,
+   "inband10": 0.4774,
+   "reach": 0.6813,
+   "follow": 1.0,
+   "contact": 0.0231
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 60,
+  "t": "2026-10-18T02:27:00Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 54.0,
+   "r0_rule": "set",
+   "h_lift": 18.8,
+   "hub0_offset_mm": 11.2,
+   "riser_h": 24.4,
+   "hub1_exposed": 67,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 100,
+  "contacts": 4,
+  "parts_lost": 22,
+  "parts_why": {
+   "riser": 20,
+   "hub0:hubK": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.899,
+    9.4,
+    2.4,
+    51794
+   ],
+   "hub1": [
+    0.0,
+    26.7,
+    20.2,
+    3886
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    31.1,
+    464
+   ],
+   "hub0": [
+    0.54,
+    13.8,
+    0.1,
+    4698
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 39.29,
+   "inband14": 0.8068,
+   "inband10": 0.4988,
+   "reach": 0.625,
+   "follow": 0.9667,
+   "contact": 0.0247
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 61,
+  "t": "2026-10-18T02:27:01Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 60.0,
+   "r0_rule": "set",
+   "h_lift": 24.95,
+   "hub0_offset_mm": 12.5,
+   "riser_h": 30.6,
+   "hub1_exposed": 71,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 104,
+  "contacts": 4,
+  "parts_lost": 18,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.899,
+    9.4,
+    2.4,
+    51794
+   ],
+   "hub1": [
+    0.0,
+    31.5,
+    25.3,
+    4118
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    464
+   ],
+   "hub0": [
+    0.137,
+    19.7,
+    3.3,
+    4698
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 40.14,
+   "inband14": 0.7727,
+   "inband10": 0.4856,
+   "reach": 0.65,
+   "follow": 0.9667,
+   "contact": 0.0241
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 62,
+  "t": "2026-10-18T02:27:02Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 68.0,
+   "r0_rule": "set",
+   "h_lift": 33.15,
+   "hub0_offset_mm": 14.1,
+   "riser_h": 38.8,
+   "hub1_exposed": 75,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 109,
+  "contacts": 3,
+  "parts_lost": 12,
+  "parts_why": {
+   "riser": 12
+  },
+  "part_inband": {
+   "chain": [
+    0.891,
+    9.5,
+    2.4,
+    53580
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    30.0,
+    4500
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    480
+   ],
+   "hub0": [
+    0.027,
+    27.6,
+    6.7,
+    4860
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 38.11,
+   "inband14": 0.755,
+   "inband10": 0.4725,
+   "reach": 0.6813,
+   "follow": 1.0,
+   "contact": 0.0174
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 63,
+  "t": "2026-10-18T02:27:03Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 54.0,
+   "r0_rule": "set",
+   "h_lift": 18.8,
+   "hub0_offset_mm": 11.2,
+   "riser_h": 24.4,
+   "hub1_exposed": 66,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 113,
+  "contacts": 5,
+  "parts_lost": 11,
+  "parts_why": {
+   "hub0:hubK": 9,
+   "riser": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    26.8,
+    21.3,
+    3630
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.1,
+    440
+   ],
+   "hub0": [
+    0.299,
+    14.9,
+    2.6,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 36.06,
+   "inband14": 0.7953,
+   "inband10": 0.4946,
+   "reach": 0.7063,
+   "follow": 0.9167,
+   "contact": 0.0289
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 64,
+  "t": "2026-10-18T02:27:04Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 60.0,
+   "r0_rule": "set",
+   "h_lift": 24.95,
+   "hub0_offset_mm": 12.5,
+   "riser_h": 30.6,
+   "hub1_exposed": 71,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 115,
+  "contacts": 4,
+  "parts_lost": 10,
+  "parts_why": {
+   "riser": 7,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    31.6,
+    25.3,
+    3905
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    440
+   ],
+   "hub0": [
+    0.048,
+    20.8,
+    4.9,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 36.53,
+   "inband14": 0.7722,
+   "inband10": 0.4875,
+   "reach": 0.7188,
+   "follow": 0.9167,
+   "contact": 0.023
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 65,
+  "t": "2026-10-18T02:27:05Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 68.0,
+   "r0_rule": "set",
+   "h_lift": 33.15,
+   "hub0_offset_mm": 14.1,
+   "riser_h": 38.8,
+   "hub1_exposed": 76,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 116,
+  "contacts": 4,
+  "parts_lost": 9,
+  "parts_why": {
+   "riser": 6,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    31.8,
+    31.1,
+    4180
+   ],
+   "L1a": [
+    0.0,
+    31.8,
+    31.7,
+    440
+   ],
+   "hub0": [
+    0.014,
+    28.7,
+    7.0,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 36.53,
+   "inband14": 0.7659,
+   "inband10": 0.4845,
+   "reach": 0.725,
+   "follow": 0.9167,
+   "contact": 0.0229
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 66,
+  "t": "2026-10-18T02:27:06Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 135.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 52.0,
+   "r0_rule": "set",
+   "h_lift": 15.95,
+   "hub0_offset_mm": 7.2,
+   "riser_h": 21.6,
+   "hub1_exposed": 46,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8649,
+  "inband10": 0.5353,
+  "reach": 0.5437,
+  "follow": 0.9167,
+  "contact": 0.0207,
+  "gap": 44.54,
+  "ws_taken": 87,
+  "contacts": 3,
+  "parts_lost": 39,
+  "parts_why": {
+   "riser": 39
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.2,
+    2.4,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    23.7,
+    17.8,
+    2530
+   ],
+   "L1a": [
+    0.0,
+    31.5,
+    28.9,
+    440
+   ],
+   "hub0": [
+    0.93,
+    11.0,
+    1.2,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 67,
+  "t": "2026-10-18T02:27:08Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 195.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 52.0,
+   "r0_rule": "set",
+   "h_lift": 16.05,
+   "hub0_offset_mm": 7.2,
+   "riser_h": 21.7,
+   "hub1_exposed": 45,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8599,
+  "inband10": 0.514,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0122,
+  "gap": 33.77,
+  "ws_taken": 109,
+  "contacts": 2,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 9,
+   "hub0:hubK": 11
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    23.8,
+    19.4,
+    2385
+   ],
+   "L1a": [
+    0.0,
+    31.5,
+    29.0,
+    424
+   ],
+   "hub0": [
+    0.858,
+    12.1,
+    5.3,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 68,
+  "t": "2026-10-18T02:27:09Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.0,
+   "r0_rule": "set",
+   "h_lift": 15.0,
+   "hub0_offset_mm": 5.3,
+   "riser_h": 20.6,
+   "hub1_exposed": 35,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8733,
+  "inband10": 0.5296,
+  "reach": 0.675,
+  "follow": 0.9167,
+  "contact": 0.0061,
+  "gap": 29.11,
+  "ws_taken": 108,
+  "contacts": 1,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    22.6,
+    19.3,
+    1925
+   ],
+   "L1a": [
+    0.0,
+    31.2,
+    28.0,
+    440
+   ],
+   "hub0": [
+    0.974,
+    10.8,
+    4.7,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 69,
+  "t": "2026-10-18T02:27:10Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 150.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 17.35,
+   "hub0_offset_mm": 9.2,
+   "riser_h": 23.0,
+   "hub1_exposed": 56,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8322,
+  "inband10": 0.5066,
+  "reach": 0.5938,
+  "follow": 0.9667,
+  "contact": 0.0192,
+  "gap": 39.32,
+  "ws_taken": 95,
+  "contacts": 3,
+  "parts_lost": 28,
+  "parts_why": {
+   "riser": 27,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.899,
+    9.4,
+    2.4,
+    51794
+   ],
+   "hub1": [
+    0.0,
+    25.1,
+    19.0,
+    3248
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    30.2,
+    464
+   ],
+   "hub0": [
+    0.756,
+    12.6,
+    1.1,
+    4698
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 70,
+  "t": "2026-10-18T02:27:11Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 17.35,
+   "hub0_offset_mm": 9.2,
+   "riser_h": 23.0,
+   "hub1_exposed": 56,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 110,
+  "contacts": 5,
+  "parts_lost": 14,
+  "parts_why": {
+   "hub0:hubK": 9,
+   "riser": 5
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    25.2,
+    21.6,
+    3080
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    30.2,
+    440
+   ],
+   "hub0": [
+    0.63,
+    13.5,
+    3.5,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 34.64,
+   "inband14": 0.8288,
+   "inband10": 0.5013,
+   "reach": 0.6875,
+   "follow": 0.9167,
+   "contact": 0.0294
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 71,
+  "t": "2026-10-18T02:27:12Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 165.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 54.0,
+   "r0_rule": "set",
+   "h_lift": 18.8,
+   "hub0_offset_mm": 11.2,
+   "riser_h": 24.4,
+   "hub1_exposed": 66,
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "inband10": null,
+  "reach": null,
+  "follow": null,
+  "contact": null,
+  "gap": null,
+  "ws_taken": 109,
+  "contacts": 5,
+  "parts_lost": 10,
+  "parts_why": {
+   "riser": 7,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.891,
+    9.5,
+    2.4,
+    53580
+   ],
+   "hub1": [
+    0.0,
+    26.7,
+    20.2,
+    3960
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    31.1,
+    480
+   ],
+   "hub0": [
+    0.416,
+    14.4,
+    1.0,
+    4860
+   ]
+  },
+  "lead_same_bench": 12.5,
+  "measured_seat_illegal": {
+   "gap": 35.59,
+   "inband14": 0.7915,
+   "inband10": 0.4878,
+   "reach": 0.6813,
+   "follow": 1.0,
+   "contact": 0.0287
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 72,
+  "t": "2026-10-18T02:27:22Z",
+  "params": {
+   "a0": 8.0,
+   "azu": 180.0,
+   "lo": 0.0,
+   "hi": 8.0,
+   "r0": 52.0,
+   "h_lift": 15.95,
+   "q0": "policy (ii) relay",
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.853,
+  "reach": 0.675,
+  "contact": 0.024,
+  "gap": 32.93,
+  "inband10": 0.5098,
+  "follow": 0.9167,
+  "ghost_gap": 11.88,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 8.0,
+   "gap": 32.93,
+   "ghost": 11.88,
+   "reach": 0.675,
+   "inband14": 0.853,
+   "contact": 0.024,
+   "ws_taken": 108,
+   "contacts": 4,
+   "relay_taken": 1,
+   "relay_contact": 0,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 33.57,
+  "cand": 3,
+  "relay_taken": 1,
+  "relay_contact": 0,
+  "relay_parts": 0,
+  "n_windows": 6
+ },
+ {
+  "k": 73,
+  "t": "2026-10-18T02:27:24Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 150.0,
+   "lo": 0.0,
+   "hi": 36.0,
+   "r0": 86.0,
+   "h_lift": 51.55,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.05,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 36.0,
+   "gap": 26.76,
+   "ghost": 11.05,
+   "reach": 0.7937,
+   "inband14": 0.7493,
+   "contact": 0.0106,
+   "ws_taken": 127,
+   "contacts": 2,
+   "relay_taken": 4,
+   "relay_contact": 2,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 28.19,
+  "cand": 8,
+  "relay_taken": 4,
+  "relay_contact": 2,
+  "relay_parts": 0,
+  "n_windows": 18,
+  "measured_seat_illegal": {
+   "gap": 26.76,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.7937,
+   "follow": 1.0,
+   "contact": 0.0106
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 74,
+  "t": "2026-10-18T02:28:22Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 180.0,
+   "lo": 0.0,
+   "hi": 21.0,
+   "r0": 51.0,
+   "h_lift": 15.0,
+   "q0": "policy (ii) relay",
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8733,
+  "reach": 0.6813,
+  "contact": 0.0061,
+  "gap": 28.48,
+  "inband10": 0.5296,
+  "follow": 0.9167,
+  "ghost_gap": 11.88,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 21.0,
+   "gap": 28.48,
+   "ghost": 11.88,
+   "reach": 0.6813,
+   "inband14": 0.8733,
+   "contact": 0.0061,
+   "ws_taken": 109,
+   "contacts": 1,
+   "relay_taken": 1,
+   "relay_contact": 0,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 29.11,
+  "cand": 1,
+  "relay_taken": 1,
+  "relay_contact": 0,
+  "relay_parts": 0,
+  "n_windows": 2
+ },
+ {
+  "k": 75,
+  "t": "2026-10-18T02:29:17Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 135.0,
+   "lo": 0.0,
+   "hi": 39.0,
+   "r0": 86.5,
+   "h_lift": 52.05,
+   "q0": "policy (ii) relay",
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7493,
+  "reach": 0.725,
+  "contact": 0.0112,
+  "gap": 33.69,
+  "inband10": 0.4699,
+  "follow": 1.0,
+  "ghost_gap": 11.69,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 39.0,
+   "gap": 33.69,
+   "ghost": 11.69,
+   "reach": 0.725,
+   "inband14": 0.7493,
+   "contact": 0.0112,
+   "ws_taken": 116,
+   "contacts": 2,
+   "relay_taken": 3,
+   "relay_contact": 2,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 34.44,
+  "cand": 9,
+  "relay_taken": 3,
+  "relay_contact": 2,
+  "relay_parts": 0,
+  "n_windows": 28
+ },
+ {
+  "k": 76,
+  "t": "2026-10-18T02:29:30Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 165.0,
+   "lo": 0.0,
+   "hi": 10.0,
+   "r0": 85.5,
+   "h_lift": 51.0,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.25,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 10.0,
+   "gap": 26.95,
+   "ghost": 11.25,
+   "reach": 0.7812,
+   "inband14": 0.7493,
+   "contact": 0.0,
+   "ws_taken": 125,
+   "contacts": 0,
+   "relay_taken": 2,
+   "relay_contact": 0,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 28.19,
+  "cand": 7,
+  "relay_taken": 2,
+  "relay_contact": 0,
+  "relay_parts": 0,
+  "n_windows": 18,
+  "measured_seat_illegal": {
+   "gap": 26.95,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.7812,
+   "follow": 1.0,
+   "contact": 0.0
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 77,
+  "t": "2026-10-18T02:29:47Z",
+  "params": {
+   "a0": 11.0,
+   "azu": 150.0,
+   "lo": 0.0,
+   "hi": 39.0,
+   "r0": 85.75,
+   "h_lift": 50.9,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.05,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 39.0,
+   "gap": 31.17,
+   "ghost": 11.05,
+   "reach": 0.75,
+   "inband14": 0.7493,
+   "contact": 0.011,
+   "ws_taken": 120,
+   "contacts": 2,
+   "relay_taken": 4,
+   "relay_contact": 2,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 32.57,
+  "cand": 8,
+  "relay_taken": 4,
+  "relay_contact": 2,
+  "relay_parts": 0,
+  "n_windows": 18,
+  "measured_seat_illegal": {
+   "gap": 31.17,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.75,
+   "follow": 1.0,
+   "contact": 0.011
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 78,
+  "t": "2026-10-18T02:30:03Z",
+  "params": {
+   "a0": 13.0,
+   "azu": 150.0,
+   "lo": 0.0,
+   "hi": 34.0,
+   "r0": 87.0,
+   "h_lift": 52.95,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.05,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 34.0,
+   "gap": 26.76,
+   "ghost": 11.05,
+   "reach": 0.7937,
+   "inband14": 0.7493,
+   "contact": 0.0106,
+   "ws_taken": 127,
+   "contacts": 2,
+   "relay_taken": 4,
+   "relay_contact": 2,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 28.19,
+  "cand": 9,
+  "relay_taken": 4,
+  "relay_contact": 2,
+  "relay_parts": 0,
+  "n_windows": 21,
+  "measured_seat_illegal": {
+   "gap": 26.76,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.7937,
+   "follow": 1.0,
+   "contact": 0.0106
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 79,
+  "t": "2026-10-18T02:30:21Z",
+  "params": {
+   "a0": 14.0,
+   "azu": 150.0,
+   "lo": 0.0,
+   "hi": 32.0,
+   "r0": 87.75,
+   "h_lift": 54.15,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.05,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 32.0,
+   "gap": 26.12,
+   "ghost": 11.05,
+   "reach": 0.8,
+   "inband14": 0.7493,
+   "contact": 0.0105,
+   "ws_taken": 128,
+   "contacts": 2,
+   "relay_taken": 4,
+   "relay_contact": 2,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 27.57,
+  "cand": 10,
+  "relay_taken": 4,
+  "relay_contact": 2,
+  "relay_parts": 0,
+  "n_windows": 24,
+  "measured_seat_illegal": {
+   "gap": 26.12,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.8,
+   "follow": 1.0,
+   "contact": 0.0105
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 80,
+  "t": "2026-10-18T02:30:40Z",
+  "params": {
+   "a0": 14.0,
+   "azu": 165.0,
+   "lo": 0.0,
+   "hi": 6.0,
+   "r0": 85.75,
+   "h_lift": 52.1,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.25,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 6.0,
+   "gap": 26.95,
+   "ghost": 11.25,
+   "reach": 0.7812,
+   "inband14": 0.7493,
+   "contact": 0.0,
+   "ws_taken": 125,
+   "contacts": 0,
+   "relay_taken": 2,
+   "relay_contact": 0,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 28.19,
+  "cand": 8,
+  "relay_taken": 2,
+  "relay_contact": 0,
+  "relay_parts": 0,
+  "n_windows": 21,
+  "measured_seat_illegal": {
+   "gap": 26.95,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.7812,
+   "follow": 1.0,
+   "contact": 0.0
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 81,
+  "t": "2026-10-18T02:31:00Z",
+  "params": {
+   "a0": 10.0,
+   "azu": 150.0,
+   "lo": 0.0,
+   "hi": 42.0,
+   "r0": 85.5,
+   "h_lift": 50.35,
+   "q0": "policy (ii) relay",
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.7522,
+  "reach": 0.7312,
+  "contact": 0.0112,
+  "gap": 32.78,
+  "inband10": 0.4717,
+  "follow": 1.0,
+  "ghost_gap": 11.05,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 42.0,
+   "gap": 32.78,
+   "ghost": 11.05,
+   "reach": 0.7312,
+   "inband14": 0.7522,
+   "contact": 0.0112,
+   "ws_taken": 117,
+   "contacts": 2,
+   "relay_taken": 4,
+   "relay_contact": 2,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 34.15,
+  "cand": 8,
+  "relay_taken": 4,
+  "relay_contact": 2,
+  "relay_parts": 0,
+  "n_windows": 18
+ },
+ {
+  "k": 82,
+  "t": "2026-10-18T02:31:17Z",
+  "params": {
+   "a0": 12.0,
+   "azu": 180.0,
+   "lo": 0.0,
+   "hi": 31.0,
+   "r0": 84.5,
+   "h_lift": 50.0,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.16,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 31.0,
+   "gap": 28.11,
+   "ghost": 11.16,
+   "reach": 0.775,
+   "inband14": 0.7493,
+   "contact": 0.0054,
+   "ws_taken": 124,
+   "contacts": 1,
+   "relay_taken": 3,
+   "relay_contact": 1,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 29.45,
+  "cand": 6,
+  "relay_taken": 3,
+  "relay_contact": 1,
+  "relay_parts": 0,
+  "n_windows": 12,
+  "measured_seat_illegal": {
+   "gap": 28.11,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.775,
+   "follow": 1.0,
+   "contact": 0.0054
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 83,
+  "t": "2026-10-18T02:31:32Z",
+  "params": {
+   "a0": 13.0,
+   "azu": 165.0,
+   "lo": 0.0,
+   "hi": 8.0,
+   "r0": 85.75,
+   "h_lift": 51.65,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.25,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 8.0,
+   "gap": 26.95,
+   "ghost": 11.25,
+   "reach": 0.7812,
+   "inband14": 0.7493,
+   "contact": 0.0,
+   "ws_taken": 125,
+   "contacts": 0,
+   "relay_taken": 2,
+   "relay_contact": 0,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 28.19,
+  "cand": 8,
+  "relay_taken": 2,
+  "relay_contact": 0,
+  "relay_parts": 0,
+  "n_windows": 21,
+  "measured_seat_illegal": {
+   "gap": 26.95,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.7812,
+   "follow": 1.0,
+   "contact": 0.0
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 84,
+  "t": "2026-10-18T02:31:49Z",
+  "params": {
+   "a0": 14.0,
+   "azu": 135.0,
+   "lo": 0.0,
+   "hi": 34.0,
+   "r0": 89.5,
+   "h_lift": 55.95,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.05,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 34.0,
+   "gap": 26.76,
+   "ghost": 11.05,
+   "reach": 0.7937,
+   "inband14": 0.7493,
+   "contact": 0.0106,
+   "ws_taken": 127,
+   "contacts": 2,
+   "relay_taken": 4,
+   "relay_contact": 2,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 28.19,
+  "cand": 11,
+  "relay_taken": 4,
+  "relay_contact": 2,
+  "relay_parts": 0,
+  "n_windows": 36,
+  "measured_seat_illegal": {
+   "gap": 26.76,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.7937,
+   "follow": 1.0,
+   "contact": 0.0106
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 85,
+  "t": "2026-10-18T02:32:06Z",
+  "params": {
+   "a0": 16.0,
+   "azu": 150.0,
+   "lo": 0.0,
+   "hi": 29.0,
+   "r0": 89.25,
+   "h_lift": 56.7,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.05,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 29.0,
+   "gap": 26.12,
+   "ghost": 11.05,
+   "reach": 0.8,
+   "inband14": 0.7493,
+   "contact": 0.0105,
+   "ws_taken": 128,
+   "contacts": 2,
+   "relay_taken": 4,
+   "relay_contact": 2,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 27.57,
+  "cand": 10,
+  "relay_taken": 4,
+  "relay_contact": 2,
+  "relay_parts": 0,
+  "n_windows": 24,
+  "measured_seat_illegal": {
+   "gap": 26.12,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.8,
+   "follow": 1.0,
+   "contact": 0.0105
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 86,
+  "t": "2026-10-18T02:32:23Z",
+  "params": {
+   "a0": 11.0,
+   "azu": 165.0,
+   "lo": 0.0,
+   "hi": 36.0,
+   "r0": 85.25,
+   "h_lift": 50.4,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.16,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 36.0,
+   "gap": 27.49,
+   "ghost": 11.16,
+   "reach": 0.7812,
+   "inband14": 0.7493,
+   "contact": 0.0054,
+   "ws_taken": 125,
+   "contacts": 1,
+   "relay_taken": 3,
+   "relay_contact": 1,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 28.82,
+  "cand": 6,
+  "relay_taken": 3,
+  "relay_contact": 1,
+  "relay_parts": 0,
+  "n_windows": 15,
+  "measured_seat_illegal": {
+   "gap": 27.49,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.7812,
+   "follow": 1.0,
+   "contact": 0.0054
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 87,
+  "t": "2026-10-18T02:36:59Z",
+  "params": {
+   "a0": 16.0,
+   "azu": 140.0,
+   "lo": 0.0,
+   "hi": 26.0,
+   "r0": 90.5,
+   "h_lift": 58.0,
+   "q0": "policy (ii) relay",
+   "seat_legal": false
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": null,
+  "reach": null,
+  "contact": null,
+  "gap": null,
+  "inband10": null,
+  "follow": null,
+  "ghost_gap": 11.05,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 26.0,
+   "gap": 26.12,
+   "ghost": 11.05,
+   "reach": 0.8,
+   "inband14": 0.7493,
+   "contact": 0.0105,
+   "ws_taken": 128,
+   "contacts": 2,
+   "relay_taken": 4,
+   "relay_contact": 2,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 27.57,
+  "cand": 12,
+  "relay_taken": 4,
+  "relay_contact": 2,
+  "relay_parts": 0,
+  "n_windows": 30,
+  "measured_seat_illegal": {
+   "gap": 26.12,
+   "inband14": 0.7493,
+   "inband10": 0.4699,
+   "reach": 0.8,
+   "follow": 1.0,
+   "contact": 0.0105
+  },
+  "status": "seat-illegal (hub 0's axis outside the J1 seat rule; measured numbers kept under measured_seat_illegal)"
+ },
+ {
+  "k": 88,
+  "t": "2026-10-18T02:37:58Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.35,
+   "hub0_offset_mm": 4.3,
+   "riser_h": 19.0,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8884,
+  "inband10": 0.5738,
+  "reach": 0.6,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 37.83,
+  "ws_taken": 96,
+  "contacts": 0,
+  "parts_lost": 35,
+  "parts_why": {
+   "riser": 35
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    20.9,
+    17.7,
+    1537
+   ],
+   "L1a": [
+    0.0,
+    30.2,
+    26.4,
+    424
+   ],
+   "hub0": [
+    1.0,
+    8.9,
+    2.9,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 89,
+  "t": "2026-10-18T02:38:03Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.35,
+   "hub0_offset_mm": 4.4,
+   "riser_h": 20.0,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8883,
+  "inband10": 0.5585,
+  "reach": 0.6,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 37.84,
+  "ws_taken": 96,
+  "contacts": 0,
+  "parts_lost": 35,
+  "parts_why": {
+   "riser": 35
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.9,
+    18.7,
+    1537
+   ],
+   "L1a": [
+    0.0,
+    30.9,
+    27.4,
+    424
+   ],
+   "hub0": [
+    0.998,
+    9.9,
+    3.8,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 90,
+  "t": "2026-10-18T02:38:06Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.4,
+   "hub0_offset_mm": 4.5,
+   "riser_h": 21.0,
+   "hub1_exposed": 30,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8845,
+  "inband10": 0.5414,
+  "reach": 0.5938,
+  "follow": 0.8833,
+  "contact": 0.0067,
+  "gap": 39.51,
+  "ws_taken": 95,
+  "contacts": 1,
+  "parts_lost": 35,
+  "parts_why": {
+   "riser": 35
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    23.0,
+    19.7,
+    1590
+   ],
+   "L1a": [
+    0.0,
+    31.3,
+    28.4,
+    424
+   ],
+   "hub0": [
+    0.962,
+    10.9,
+    4.8,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 91,
+  "t": "2026-10-18T02:38:10Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.9,
+   "hub0_offset_mm": 4.6,
+   "riser_h": 22.5,
+   "hub1_exposed": 30,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8725,
+  "inband10": 0.5268,
+  "reach": 0.6,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 39.42,
+  "ws_taken": 96,
+  "contacts": 0,
+  "parts_lost": 35,
+  "parts_why": {
+   "riser": 35
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    24.5,
+    21.2,
+    1590
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.8,
+    424
+   ],
+   "hub0": [
+    0.812,
+    12.3,
+    6.0,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 92,
+  "t": "2026-10-18T02:38:13Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.35,
+   "hub0_offset_mm": 4.3,
+   "riser_h": 19.0,
+   "hub1_exposed": 28,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8893,
+  "inband10": 0.5733,
+  "reach": 0.6375,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 33.99,
+  "ws_taken": 102,
+  "contacts": 0,
+  "parts_lost": 29,
+  "parts_why": {
+   "riser": 28,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    20.9,
+    17.7,
+    1484
+   ],
+   "L1a": [
+    0.0,
+    30.2,
+    26.4,
+    424
+   ],
+   "hub0": [
+    1.0,
+    9.0,
+    3.2,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 93,
+  "t": "2026-10-18T02:38:17Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.35,
+   "hub0_offset_mm": 4.4,
+   "riser_h": 20.0,
+   "hub1_exposed": 28,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.889,
+  "inband10": 0.5577,
+  "reach": 0.6375,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 34.02,
+  "ws_taken": 102,
+  "contacts": 0,
+  "parts_lost": 29,
+  "parts_why": {
+   "riser": 28,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.9,
+    18.7,
+    1484
+   ],
+   "L1a": [
+    0.0,
+    30.9,
+    27.4,
+    424
+   ],
+   "hub0": [
+    0.997,
+    10.0,
+    4.1,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 94,
+  "t": "2026-10-18T02:38:21Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.35,
+   "hub0_offset_mm": 4.5,
+   "riser_h": 21.0,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8851,
+  "inband10": 0.5402,
+  "reach": 0.6312,
+  "follow": 0.8833,
+  "contact": 0.0065,
+  "gap": 35.69,
+  "ws_taken": 101,
+  "contacts": 1,
+  "parts_lost": 29,
+  "parts_why": {
+   "riser": 28,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    22.9,
+    19.7,
+    1537
+   ],
+   "L1a": [
+    0.0,
+    31.3,
+    28.4,
+    424
+   ],
+   "hub0": [
+    0.959,
+    11.0,
+    5.0,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 95,
+  "t": "2026-10-18T02:38:24Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.85,
+   "hub0_offset_mm": 4.6,
+   "riser_h": 22.5,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8725,
+  "inband10": 0.5263,
+  "reach": 0.6375,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 35.67,
+  "ws_taken": 102,
+  "contacts": 0,
+  "parts_lost": 29,
+  "parts_why": {
+   "riser": 28,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    24.4,
+    21.1,
+    1537
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.7,
+    424
+   ],
+   "hub0": [
+    0.801,
+    12.4,
+    6.3,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 96,
+  "t": "2026-10-18T02:38:28Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.35,
+   "hub0_offset_mm": 4.3,
+   "riser_h": 19.0,
+   "hub1_exposed": 28,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8814,
+  "inband10": 0.5621,
+  "reach": 0.6625,
+  "follow": 0.9167,
+  "contact": 0.0,
+  "gap": 28.94,
+  "ws_taken": 106,
+  "contacts": 0,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 22,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    20.9,
+    17.7,
+    1540
+   ],
+   "L1a": [
+    0.0,
+    30.2,
+    26.4,
+    440
+   ],
+   "hub0": [
+    1.0,
+    9.1,
+    3.5,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 97,
+  "t": "2026-10-18T02:38:32Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.35,
+   "hub0_offset_mm": 4.4,
+   "riser_h": 20.0,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8803,
+  "inband10": 0.5458,
+  "reach": 0.6625,
+  "follow": 0.9167,
+  "contact": 0.0,
+  "gap": 29.05,
+  "ws_taken": 106,
+  "contacts": 0,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 22,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    21.9,
+    18.7,
+    1595
+   ],
+   "L1a": [
+    0.0,
+    30.9,
+    27.4,
+    440
+   ],
+   "hub0": [
+    0.996,
+    10.1,
+    4.4,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 98,
+  "t": "2026-10-18T02:38:35Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.35,
+   "hub0_offset_mm": 4.5,
+   "riser_h": 21.0,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8773,
+  "inband10": 0.5286,
+  "reach": 0.6625,
+  "follow": 0.9167,
+  "contact": 0.0,
+  "gap": 29.35,
+  "ws_taken": 106,
+  "contacts": 0,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 22,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    22.9,
+    19.7,
+    1595
+   ],
+   "L1a": [
+    0.0,
+    31.3,
+    28.4,
+    440
+   ],
+   "hub0": [
+    0.959,
+    11.0,
+    5.3,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 99,
+  "t": "2026-10-18T02:38:39Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.85,
+   "hub0_offset_mm": 4.6,
+   "riser_h": 22.5,
+   "hub1_exposed": 30,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8629,
+  "inband10": 0.5143,
+  "reach": 0.6625,
+  "follow": 0.9167,
+  "contact": 0.0,
+  "gap": 30.79,
+  "ws_taken": 106,
+  "contacts": 0,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 22,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    24.4,
+    21.1,
+    1650
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.7,
+    440
+   ],
+   "hub0": [
+    0.79,
+    12.5,
+    6.6,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 100,
+  "t": "2026-10-18T02:38:42Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.35,
+   "hub0_offset_mm": 4.3,
+   "riser_h": 19.0,
+   "hub1_exposed": 28,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8858,
+  "inband10": 0.5654,
+  "reach": 0.6875,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 29.34,
+  "ws_taken": 110,
+  "contacts": 0,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 19,
+   "hub0:hubK": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    20.9,
+    17.7,
+    1484
+   ],
+   "L1a": [
+    0.0,
+    29.8,
+    26.4,
+    424
+   ],
+   "hub0": [
+    1.0,
+    9.1,
+    3.8,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 101,
+  "t": "2026-10-18T02:38:47Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.4,
+   "hub0_offset_mm": 4.4,
+   "riser_h": 20.0,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8846,
+  "inband10": 0.5492,
+  "reach": 0.6875,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 29.46,
+  "ws_taken": 110,
+  "contacts": 0,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 19,
+   "hub0:hubK": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.9,
+    18.7,
+    1537
+   ],
+   "L1a": [
+    0.0,
+    30.6,
+    27.5,
+    424
+   ],
+   "hub0": [
+    0.996,
+    10.1,
+    4.7,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 102,
+  "t": "2026-10-18T02:38:50Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.4,
+   "hub0_offset_mm": 4.5,
+   "riser_h": 21.0,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8814,
+  "inband10": 0.532,
+  "reach": 0.6875,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 29.78,
+  "ws_taken": 110,
+  "contacts": 0,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 19,
+   "hub0:hubK": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    22.9,
+    19.7,
+    1537
+   ],
+   "L1a": [
+    0.0,
+    31.3,
+    28.4,
+    424
+   ],
+   "hub0": [
+    0.956,
+    11.1,
+    5.7,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 103,
+  "t": "2026-10-18T02:38:53Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.9,
+   "hub0_offset_mm": 4.6,
+   "riser_h": 22.5,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8683,
+  "inband10": 0.5181,
+  "reach": 0.6875,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 31.09,
+  "ws_taken": 110,
+  "contacts": 0,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 19,
+   "hub0:hubK": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    24.4,
+    21.2,
+    1537
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.8,
+    424
+   ],
+   "hub0": [
+    0.792,
+    12.5,
+    7.0,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 104,
+  "t": "2026-10-18T02:38:57Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.4,
+   "hub0_offset_mm": 4.3,
+   "riser_h": 19.0,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8849,
+  "inband10": 0.5656,
+  "reach": 0.675,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 30.68,
+  "ws_taken": 108,
+  "contacts": 0,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 20,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.0,
+    17.7,
+    1537
+   ],
+   "L1a": [
+    0.0,
+    29.8,
+    26.5,
+    424
+   ],
+   "hub0": [
+    1.0,
+    9.1,
+    4.1,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 105,
+  "t": "2026-10-18T02:39:00Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.4,
+   "hub0_offset_mm": 4.4,
+   "riser_h": 20.0,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8846,
+  "inband10": 0.5502,
+  "reach": 0.675,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 30.71,
+  "ws_taken": 108,
+  "contacts": 0,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 20,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.9,
+    18.7,
+    1537
+   ],
+   "L1a": [
+    0.0,
+    30.6,
+    27.5,
+    424
+   ],
+   "hub0": [
+    0.996,
+    10.0,
+    5.1,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 106,
+  "t": "2026-10-18T02:39:04Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.4,
+   "hub0_offset_mm": 4.5,
+   "riser_h": 21.0,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8813,
+  "inband10": 0.5329,
+  "reach": 0.675,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 31.04,
+  "ws_taken": 108,
+  "contacts": 0,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 20,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    22.9,
+    19.7,
+    1537
+   ],
+   "L1a": [
+    0.0,
+    31.3,
+    28.4,
+    424
+   ],
+   "hub0": [
+    0.956,
+    11.0,
+    6.0,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 107,
+  "t": "2026-10-18T02:39:08Z",
+  "params": {
+   "a0": 5.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.9,
+   "hub0_offset_mm": 4.6,
+   "riser_h": 22.5,
+   "hub1_exposed": 29,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8693,
+  "inband10": 0.5175,
+  "reach": 0.675,
+  "follow": 0.8833,
+  "contact": 0.0,
+  "gap": 32.24,
+  "ws_taken": 108,
+  "contacts": 0,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 20,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    24.4,
+    21.2,
+    1537
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.8,
+    424
+   ],
+   "hub0": [
+    0.805,
+    12.5,
+    7.5,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 108,
+  "t": "2026-10-18T02:39:12Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.5,
+   "hub0_offset_mm": 5.2,
+   "riser_h": 19.1,
+   "hub1_exposed": 33,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8849,
+  "inband10": 0.5691,
+  "reach": 0.5938,
+  "follow": 0.8833,
+  "contact": 0.0199,
+  "gap": 40.79,
+  "ws_taken": 95,
+  "contacts": 3,
+  "parts_lost": 33,
+  "parts_why": {
+   "riser": 32,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.1,
+    17.8,
+    1749
+   ],
+   "L1a": [
+    0.0,
+    30.3,
+    26.6,
+    424
+   ],
+   "hub0": [
+    1.0,
+    9.1,
+    2.6,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 109,
+  "t": "2026-10-18T02:39:15Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.5,
+   "hub0_offset_mm": 5.3,
+   "riser_h": 20.1,
+   "hub1_exposed": 34,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8835,
+  "inband10": 0.5529,
+  "reach": 0.6062,
+  "follow": 0.8833,
+  "contact": 0.0066,
+  "gap": 38.36,
+  "ws_taken": 97,
+  "contacts": 1,
+  "parts_lost": 33,
+  "parts_why": {
+   "riser": 32,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    22.1,
+    18.8,
+    1802
+   ],
+   "L1a": [
+    0.0,
+    31.0,
+    27.5,
+    424
+   ],
+   "hub0": [
+    0.994,
+    10.1,
+    3.5,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 110,
+  "t": "2026-10-18T02:39:19Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.45,
+   "hub0_offset_mm": 5.4,
+   "riser_h": 21.1,
+   "hub1_exposed": 35,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.879,
+  "inband10": 0.536,
+  "reach": 0.6062,
+  "follow": 0.8833,
+  "contact": 0.0066,
+  "gap": 38.81,
+  "ws_taken": 97,
+  "contacts": 1,
+  "parts_lost": 33,
+  "parts_why": {
+   "riser": 32,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    23.1,
+    19.7,
+    1855
+   ],
+   "L1a": [
+    0.0,
+    31.4,
+    28.5,
+    424
+   ],
+   "hub0": [
+    0.948,
+    11.1,
+    4.5,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 111,
+  "t": "2026-10-18T02:39:22Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.95,
+   "hub0_offset_mm": 5.5,
+   "riser_h": 22.6,
+   "hub1_exposed": 35,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8661,
+  "inband10": 0.5241,
+  "reach": 0.6,
+  "follow": 0.8833,
+  "contact": 0.0132,
+  "gap": 41.38,
+  "ws_taken": 96,
+  "contacts": 2,
+  "parts_lost": 33,
+  "parts_why": {
+   "riser": 32,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    24.6,
+    21.2,
+    1855
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.8,
+    424
+   ],
+   "hub0": [
+    0.786,
+    12.5,
+    5.5,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 112,
+  "t": "2026-10-18T02:39:26Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.5,
+   "hub0_offset_mm": 5.2,
+   "riser_h": 19.1,
+   "hub1_exposed": 34,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.884,
+  "inband10": 0.5672,
+  "reach": 0.6375,
+  "follow": 0.8833,
+  "contact": 0.0064,
+  "gap": 35.16,
+  "ws_taken": 102,
+  "contacts": 1,
+  "parts_lost": 28,
+  "parts_why": {
+   "riser": 26,
+   "hub0:hubK": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.1,
+    17.8,
+    1802
+   ],
+   "L1a": [
+    0.0,
+    30.3,
+    26.6,
+    424
+   ],
+   "hub0": [
+    1.0,
+    9.2,
+    2.9,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 113,
+  "t": "2026-10-18T02:39:29Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.5,
+   "hub0_offset_mm": 5.3,
+   "riser_h": 20.1,
+   "hub1_exposed": 35,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8826,
+  "inband10": 0.5504,
+  "reach": 0.6375,
+  "follow": 0.8833,
+  "contact": 0.0064,
+  "gap": 35.3,
+  "ws_taken": 102,
+  "contacts": 1,
+  "parts_lost": 28,
+  "parts_why": {
+   "riser": 26,
+   "hub0:hubK": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    22.1,
+    18.8,
+    1855
+   ],
+   "L1a": [
+    0.0,
+    31.0,
+    27.5,
+    424
+   ],
+   "hub0": [
+    0.993,
+    10.2,
+    3.9,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 114,
+  "t": "2026-10-18T02:39:33Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.5,
+   "hub0_offset_mm": 5.4,
+   "riser_h": 21.1,
+   "hub1_exposed": 35,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8786,
+  "inband10": 0.534,
+  "reach": 0.6375,
+  "follow": 0.8833,
+  "contact": 0.0064,
+  "gap": 35.7,
+  "ws_taken": 102,
+  "contacts": 1,
+  "parts_lost": 28,
+  "parts_why": {
+   "riser": 26,
+   "hub0:hubK": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    23.1,
+    19.8,
+    1855
+   ],
+   "L1a": [
+    0.0,
+    31.4,
+    28.5,
+    424
+   ],
+   "hub0": [
+    0.942,
+    11.2,
+    4.8,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 115,
+  "t": "2026-10-18T02:39:36Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.8,
+   "hub0_offset_mm": 5.5,
+   "riser_h": 22.4,
+   "hub1_exposed": 37,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8637,
+  "inband10": 0.5219,
+  "reach": 0.6312,
+  "follow": 0.8833,
+  "contact": 0.0128,
+  "gap": 38.46,
+  "ws_taken": 101,
+  "contacts": 2,
+  "parts_lost": 28,
+  "parts_why": {
+   "riser": 26,
+   "hub0:hubK": 2
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    24.4,
+    21.1,
+    1961
+   ],
+   "L1a": [
+    0.0,
+    31.6,
+    29.7,
+    424
+   ],
+   "hub0": [
+    0.777,
+    12.6,
+    5.8,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 116,
+  "t": "2026-10-18T02:39:40Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.5,
+   "hub0_offset_mm": 5.2,
+   "riser_h": 19.1,
+   "hub1_exposed": 33,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8771,
+  "inband10": 0.5566,
+  "reach": 0.675,
+  "follow": 0.9167,
+  "contact": 0.0061,
+  "gap": 28.73,
+  "ws_taken": 108,
+  "contacts": 1,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    21.1,
+    17.8,
+    1815
+   ],
+   "L1a": [
+    0.0,
+    30.3,
+    26.6,
+    440
+   ],
+   "hub0": [
+    1.0,
+    9.3,
+    3.2,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 117,
+  "t": "2026-10-18T02:39:43Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.5,
+   "hub0_offset_mm": 5.3,
+   "riser_h": 20.1,
+   "hub1_exposed": 34,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8758,
+  "inband10": 0.5392,
+  "reach": 0.675,
+  "follow": 0.9167,
+  "contact": 0.0061,
+  "gap": 28.86,
+  "ws_taken": 108,
+  "contacts": 1,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    22.1,
+    18.8,
+    1870
+   ],
+   "L1a": [
+    0.0,
+    31.0,
+    27.5,
+    440
+   ],
+   "hub0": [
+    0.995,
+    10.3,
+    4.2,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 118,
+  "t": "2026-10-18T02:39:47Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.5,
+   "hub0_offset_mm": 5.4,
+   "riser_h": 21.1,
+   "hub1_exposed": 35,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8706,
+  "inband10": 0.5223,
+  "reach": 0.675,
+  "follow": 0.9167,
+  "contact": 0.0061,
+  "gap": 29.38,
+  "ws_taken": 108,
+  "contacts": 1,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    23.1,
+    19.8,
+    1925
+   ],
+   "L1a": [
+    0.0,
+    31.4,
+    28.5,
+    440
+   ],
+   "hub0": [
+    0.94,
+    11.3,
+    5.1,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 119,
+  "t": "2026-10-18T02:39:51Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 17.0,
+   "hub0_offset_mm": 5.5,
+   "riser_h": 22.6,
+   "hub1_exposed": 37,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8553,
+  "inband10": 0.5104,
+  "reach": 0.675,
+  "follow": 0.9167,
+  "contact": 0.0061,
+  "gap": 30.91,
+  "ws_taken": 108,
+  "contacts": 1,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    24.6,
+    21.3,
+    2035
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.9,
+    440
+   ],
+   "hub0": [
+    0.769,
+    12.7,
+    6.1,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 120,
+  "t": "2026-10-18T02:39:55Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.5,
+   "hub0_offset_mm": 5.2,
+   "riser_h": 19.1,
+   "hub1_exposed": 33,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8814,
+  "inband10": 0.5604,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 31.01,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 18,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.1,
+    17.8,
+    1749
+   ],
+   "L1a": [
+    0.0,
+    29.9,
+    26.6,
+    424
+   ],
+   "hub0": [
+    1.0,
+    9.3,
+    3.6,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 121,
+  "t": "2026-10-18T02:39:58Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.5,
+   "hub0_offset_mm": 5.3,
+   "riser_h": 20.1,
+   "hub1_exposed": 34,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8802,
+  "inband10": 0.5431,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 31.13,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 18,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    22.1,
+    18.8,
+    1802
+   ],
+   "L1a": [
+    0.0,
+    30.7,
+    27.5,
+    424
+   ],
+   "hub0": [
+    0.995,
+    10.3,
+    4.6,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 122,
+  "t": "2026-10-18T02:40:02Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.45,
+   "hub0_offset_mm": 5.4,
+   "riser_h": 21.1,
+   "hub1_exposed": 35,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8752,
+  "inband10": 0.5257,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 31.63,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 18,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    23.1,
+    19.7,
+    1855
+   ],
+   "L1a": [
+    0.0,
+    31.3,
+    28.5,
+    424
+   ],
+   "hub0": [
+    0.944,
+    11.3,
+    5.5,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 123,
+  "t": "2026-10-18T02:40:05Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.95,
+   "hub0_offset_mm": 5.5,
+   "riser_h": 22.6,
+   "hub1_exposed": 35,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8605,
+  "inband10": 0.5144,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 33.1,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 18,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    24.5,
+    21.2,
+    1855
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.8,
+    424
+   ],
+   "hub0": [
+    0.759,
+    12.7,
+    6.6,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 124,
+  "t": "2026-10-18T02:40:08Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.5,
+   "hub0_offset_mm": 5.2,
+   "riser_h": 19.1,
+   "hub1_exposed": 32,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8823,
+  "inband10": 0.5614,
+  "reach": 0.675,
+  "follow": 0.8833,
+  "contact": 0.0062,
+  "gap": 31.56,
+  "ws_taken": 108,
+  "contacts": 1,
+  "parts_lost": 22,
+  "parts_why": {
+   "riser": 12,
+   "hub0:hubK": 10
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.1,
+    17.8,
+    1696
+   ],
+   "L1a": [
+    0.0,
+    29.9,
+    26.6,
+    424
+   ],
+   "hub0": [
+    1.0,
+    9.2,
+    4.1,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 125,
+  "t": "2026-10-18T02:40:11Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.5,
+   "hub0_offset_mm": 5.3,
+   "riser_h": 20.1,
+   "hub1_exposed": 34,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8802,
+  "inband10": 0.5438,
+  "reach": 0.675,
+  "follow": 0.8833,
+  "contact": 0.0062,
+  "gap": 31.77,
+  "ws_taken": 108,
+  "contacts": 1,
+  "parts_lost": 22,
+  "parts_why": {
+   "riser": 12,
+   "hub0:hubK": 10
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    22.1,
+    18.2,
+    1802
+   ],
+   "L1a": [
+    0.0,
+    30.7,
+    27.5,
+    424
+   ],
+   "hub0": [
+    0.995,
+    10.2,
+    5.0,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 126,
+  "t": "2026-10-18T02:40:15Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.4,
+   "hub0_offset_mm": 5.4,
+   "riser_h": 21.0,
+   "hub1_exposed": 36,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8748,
+  "inband10": 0.5256,
+  "reach": 0.675,
+  "follow": 0.8833,
+  "contact": 0.0062,
+  "gap": 32.31,
+  "ws_taken": 108,
+  "contacts": 1,
+  "parts_lost": 22,
+  "parts_why": {
+   "riser": 12,
+   "hub0:hubK": 10
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    23.0,
+    19.0,
+    1908
+   ],
+   "L1a": [
+    0.0,
+    31.3,
+    28.4,
+    424
+   ],
+   "hub0": [
+    0.95,
+    11.2,
+    6.0,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 127,
+  "t": "2026-10-18T02:40:18Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.9,
+   "hub0_offset_mm": 5.5,
+   "riser_h": 22.5,
+   "hub1_exposed": 36,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8602,
+  "inband10": 0.5131,
+  "reach": 0.675,
+  "follow": 0.8833,
+  "contact": 0.0062,
+  "gap": 33.77,
+  "ws_taken": 108,
+  "contacts": 1,
+  "parts_lost": 22,
+  "parts_why": {
+   "riser": 12,
+   "hub0:hubK": 10
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    24.5,
+    20.0,
+    1908
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.8,
+    424
+   ],
+   "hub0": [
+    0.766,
+    12.7,
+    7.2,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 128,
+  "t": "2026-10-18T02:40:22Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.5,
+   "hub0_offset_mm": 6.0,
+   "riser_h": 19.1,
+   "hub1_exposed": 38,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8806,
+  "inband10": 0.5642,
+  "reach": 0.6,
+  "follow": 0.8833,
+  "contact": 0.0197,
+  "gap": 40.58,
+  "ws_taken": 96,
+  "contacts": 3,
+  "parts_lost": 32,
+  "parts_why": {
+   "riser": 31,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.2,
+    17.8,
+    2014
+   ],
+   "L1a": [
+    0.0,
+    30.3,
+    26.6,
+    424
+   ],
+   "hub0": [
+    1.0,
+    9.3,
+    2.1,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 129,
+  "t": "2026-10-18T02:40:26Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.5,
+   "hub0_offset_mm": 6.2,
+   "riser_h": 20.1,
+   "hub1_exposed": 39,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.879,
+  "inband10": 0.547,
+  "reach": 0.6,
+  "follow": 0.8833,
+  "contact": 0.0197,
+  "gap": 40.74,
+  "ws_taken": 96,
+  "contacts": 3,
+  "parts_lost": 32,
+  "parts_why": {
+   "riser": 31,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    22.2,
+    18.8,
+    2067
+   ],
+   "L1a": [
+    0.0,
+    31.0,
+    27.5,
+    424
+   ],
+   "hub0": [
+    0.991,
+    10.3,
+    3.1,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 130,
+  "t": "2026-10-18T02:40:29Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.45,
+   "hub0_offset_mm": 6.3,
+   "riser_h": 21.1,
+   "hub1_exposed": 40,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.874,
+  "inband10": 0.5315,
+  "reach": 0.6,
+  "follow": 0.8833,
+  "contact": 0.0197,
+  "gap": 41.24,
+  "ws_taken": 96,
+  "contacts": 3,
+  "parts_lost": 32,
+  "parts_why": {
+   "riser": 31,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    23.1,
+    19.7,
+    2120
+   ],
+   "L1a": [
+    0.0,
+    31.4,
+    28.5,
+    424
+   ],
+   "hub0": [
+    0.939,
+    11.2,
+    3.9,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 131,
+  "t": "2026-10-18T02:40:33Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 160.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.95,
+   "hub0_offset_mm": 6.5,
+   "riser_h": 22.6,
+   "hub1_exposed": 40,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.86,
+  "inband10": 0.5216,
+  "reach": 0.6,
+  "follow": 0.8833,
+  "contact": 0.0197,
+  "gap": 42.64,
+  "ws_taken": 96,
+  "contacts": 3,
+  "parts_lost": 32,
+  "parts_why": {
+   "riser": 31,
+   "hub0:hubK": 1
+  },
+  "part_inband": {
+   "chain": [
+    0.915,
+    9.2,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    24.6,
+    21.2,
+    2120
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.8,
+    424
+   ],
+   "hub0": [
+    0.762,
+    12.7,
+    4.8,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 132,
+  "t": "2026-10-18T02:40:36Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.45,
+   "hub0_offset_mm": 6.0,
+   "riser_h": 19.1,
+   "hub1_exposed": 39,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8719,
+  "inband10": 0.5516,
+  "reach": 0.6438,
+  "follow": 0.9167,
+  "contact": 0.0186,
+  "gap": 33.62,
+  "ws_taken": 103,
+  "contacts": 3,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 20,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    21.2,
+    17.8,
+    2145
+   ],
+   "L1a": [
+    0.0,
+    30.3,
+    26.5,
+    440
+   ],
+   "hub0": [
+    1.0,
+    9.4,
+    2.4,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 133,
+  "t": "2026-10-18T02:40:39Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.45,
+   "hub0_offset_mm": 6.2,
+   "riser_h": 20.1,
+   "hub1_exposed": 39,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.871,
+  "inband10": 0.5337,
+  "reach": 0.65,
+  "follow": 0.9167,
+  "contact": 0.0124,
+  "gap": 32.47,
+  "ws_taken": 104,
+  "contacts": 2,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 20,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    22.1,
+    18.8,
+    2145
+   ],
+   "L1a": [
+    0.0,
+    30.9,
+    27.5,
+    440
+   ],
+   "hub0": [
+    0.988,
+    10.4,
+    3.4,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 134,
+  "t": "2026-10-18T02:40:42Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.45,
+   "hub0_offset_mm": 6.3,
+   "riser_h": 21.1,
+   "hub1_exposed": 40,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8657,
+  "inband10": 0.5191,
+  "reach": 0.65,
+  "follow": 0.9167,
+  "contact": 0.0124,
+  "gap": 33.0,
+  "ws_taken": 104,
+  "contacts": 2,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 20,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    23.1,
+    19.7,
+    2200
+   ],
+   "L1a": [
+    0.0,
+    31.4,
+    28.5,
+    440
+   ],
+   "hub0": [
+    0.932,
+    11.4,
+    4.2,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 135,
+  "t": "2026-10-18T02:40:45Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 170.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.95,
+   "hub0_offset_mm": 6.5,
+   "riser_h": 22.6,
+   "hub1_exposed": 40,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8506,
+  "inband10": 0.51,
+  "reach": 0.6438,
+  "follow": 0.9167,
+  "contact": 0.0186,
+  "gap": 35.75,
+  "ws_taken": 103,
+  "contacts": 3,
+  "parts_lost": 23,
+  "parts_why": {
+   "riser": 20,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    24.6,
+    21.2,
+    2200
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.8,
+    440
+   ],
+   "hub0": [
+    0.742,
+    12.9,
+    5.1,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 136,
+  "t": "2026-10-18T02:40:48Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.45,
+   "hub0_offset_mm": 6.0,
+   "riser_h": 19.1,
+   "hub1_exposed": 39,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8719,
+  "inband10": 0.5501,
+  "reach": 0.6625,
+  "follow": 0.9167,
+  "contact": 0.0183,
+  "gap": 31.72,
+  "ws_taken": 106,
+  "contacts": 3,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    21.1,
+    17.8,
+    2145
+   ],
+   "L1a": [
+    0.0,
+    30.3,
+    26.5,
+    440
+   ],
+   "hub0": [
+    1.0,
+    9.5,
+    2.8,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 137,
+  "t": "2026-10-18T02:40:51Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.45,
+   "hub0_offset_mm": 6.2,
+   "riser_h": 20.1,
+   "hub1_exposed": 39,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8709,
+  "inband10": 0.5324,
+  "reach": 0.675,
+  "follow": 0.9167,
+  "contact": 0.0061,
+  "gap": 29.35,
+  "ws_taken": 108,
+  "contacts": 1,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    22.1,
+    18.7,
+    2145
+   ],
+   "L1a": [
+    0.0,
+    30.9,
+    27.5,
+    440
+   ],
+   "hub0": [
+    0.987,
+    10.5,
+    3.7,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 138,
+  "t": "2026-10-18T02:40:54Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.45,
+   "hub0_offset_mm": 6.3,
+   "riser_h": 21.1,
+   "hub1_exposed": 39,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.866,
+  "inband10": 0.5184,
+  "reach": 0.6687,
+  "follow": 0.9167,
+  "contact": 0.0122,
+  "gap": 31.08,
+  "ws_taken": 107,
+  "contacts": 2,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    23.1,
+    19.7,
+    2145
+   ],
+   "L1a": [
+    0.0,
+    31.4,
+    28.5,
+    440
+   ],
+   "hub0": [
+    0.925,
+    11.5,
+    4.6,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 139,
+  "t": "2026-10-18T02:40:57Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 180.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.95,
+   "hub0_offset_mm": 6.5,
+   "riser_h": 22.6,
+   "hub1_exposed": 40,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.85,
+  "inband10": 0.5088,
+  "reach": 0.6687,
+  "follow": 0.9167,
+  "contact": 0.0122,
+  "gap": 32.68,
+  "ws_taken": 107,
+  "contacts": 2,
+  "parts_lost": 20,
+  "parts_why": {
+   "riser": 17,
+   "hub0:hubK": 3
+  },
+  "part_inband": {
+   "chain": [
+    0.906,
+    9.3,
+    2.7,
+    49115
+   ],
+   "hub1": [
+    0.0,
+    24.6,
+    21.2,
+    2200
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.8,
+    440
+   ],
+   "hub0": [
+    0.734,
+    12.9,
+    5.5,
+    4455
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 140,
+  "t": "2026-10-18T02:40:59Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.5,
+   "hub0_offset_mm": 6.0,
+   "riser_h": 19.1,
+   "hub1_exposed": 38,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8771,
+  "inband10": 0.5541,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 31.44,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 12,
+   "hub0:hubK": 9
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.2,
+    17.8,
+    2014
+   ],
+   "L1a": [
+    0.0,
+    29.9,
+    26.6,
+    424
+   ],
+   "hub0": [
+    1.0,
+    9.5,
+    3.3,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 141,
+  "t": "2026-10-18T02:41:02Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.45,
+   "hub0_offset_mm": 6.2,
+   "riser_h": 20.1,
+   "hub1_exposed": 39,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8753,
+  "inband10": 0.536,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 31.62,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 12,
+   "hub0:hubK": 9
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    22.1,
+    18.7,
+    2067
+   ],
+   "L1a": [
+    0.0,
+    30.7,
+    27.5,
+    424
+   ],
+   "hub0": [
+    0.989,
+    10.5,
+    4.2,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 142,
+  "t": "2026-10-18T02:41:06Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.45,
+   "hub0_offset_mm": 6.3,
+   "riser_h": 21.1,
+   "hub1_exposed": 39,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8703,
+  "inband10": 0.5215,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 32.12,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 12,
+   "hub0:hubK": 9
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    23.1,
+    19.7,
+    2067
+   ],
+   "L1a": [
+    0.0,
+    31.3,
+    28.5,
+    424
+   ],
+   "hub0": [
+    0.926,
+    11.5,
+    5.1,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 143,
+  "t": "2026-10-18T02:41:09Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 190.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.95,
+   "hub0_offset_mm": 6.5,
+   "riser_h": 22.6,
+   "hub1_exposed": 41,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8539,
+  "inband10": 0.5111,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 33.76,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 12,
+   "hub0:hubK": 9
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    24.6,
+    21.2,
+    2173
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.8,
+    424
+   ],
+   "hub0": [
+    0.74,
+    12.9,
+    6.1,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 144,
+  "t": "2026-10-18T02:41:13Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 49.5,
+   "r0_rule": "set",
+   "h_lift": 13.45,
+   "hub0_offset_mm": 6.0,
+   "riser_h": 19.1,
+   "hub1_exposed": 41,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8745,
+  "inband10": 0.5537,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 31.7,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 9,
+   "hub0:hubK": 12
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    21.1,
+    17.3,
+    2173
+   ],
+   "L1a": [
+    0.0,
+    29.9,
+    26.5,
+    424
+   ],
+   "hub0": [
+    1.0,
+    9.4,
+    3.8,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 145,
+  "t": "2026-10-18T02:41:16Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 50.5,
+   "r0_rule": "set",
+   "h_lift": 14.45,
+   "hub0_offset_mm": 6.2,
+   "riser_h": 20.1,
+   "hub1_exposed": 41,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8741,
+  "inband10": 0.5364,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 31.74,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 9,
+   "hub0:hubK": 12
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    22.1,
+    18.2,
+    2173
+   ],
+   "L1a": [
+    0.0,
+    30.7,
+    27.5,
+    424
+   ],
+   "hub0": [
+    0.994,
+    10.4,
+    4.7,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 146,
+  "t": "2026-10-18T02:41:19Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 51.5,
+   "r0_rule": "set",
+   "h_lift": 15.45,
+   "hub0_offset_mm": 6.3,
+   "riser_h": 21.1,
+   "hub1_exposed": 41,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8692,
+  "inband10": 0.5208,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 32.23,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 9,
+   "hub0:hubK": 12
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    23.1,
+    19.0,
+    2173
+   ],
+   "L1a": [
+    0.0,
+    31.3,
+    28.5,
+    424
+   ],
+   "hub0": [
+    0.933,
+    11.4,
+    5.6,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 147,
+  "t": "2026-10-18T02:41:22Z",
+  "params": {
+   "a0": 7.0,
+   "azu": 200.0,
+   "q0": "0 (no relay: metal price)",
+   "r0": 53.0,
+   "r0_rule": "set",
+   "h_lift": 16.95,
+   "hub0_offset_mm": 6.5,
+   "riser_h": 22.6,
+   "hub1_exposed": 42,
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8536,
+  "inband10": 0.5096,
+  "reach": 0.6813,
+  "follow": 0.8833,
+  "contact": 0.0061,
+  "gap": 33.79,
+  "ws_taken": 109,
+  "contacts": 1,
+  "parts_lost": 21,
+  "parts_why": {
+   "riser": 9,
+   "hub0:hubK": 12
+  },
+  "part_inband": {
+   "chain": [
+    0.911,
+    9.3,
+    2.7,
+    47329
+   ],
+   "hub1": [
+    0.0,
+    24.6,
+    20.1,
+    2226
+   ],
+   "L1a": [
+    0.0,
+    31.7,
+    29.8,
+    424
+   ],
+   "hub0": [
+    0.746,
+    12.9,
+    6.8,
+    4293
+   ]
+  },
+  "lead_same_bench": 12.5
+ },
+ {
+  "k": 148,
+  "t": "2026-10-18T02:49:01Z",
+  "params": {
+   "a0": 6.0,
+   "azu": 180.0,
+   "lo": 0.0,
+   "hi": 21.0,
+   "r0": 49.5,
+   "h_lift": 13.5,
+   "q0": "policy (ii) relay",
+   "seat_legal": true
+  },
+  "bench": "Bench(60,160) fast",
+  "inband14": 0.8771,
+  "reach": 0.6813,
+  "contact": 0.0061,
+  "gap": 28.1,
+  "inband10": 0.5566,
+  "follow": 0.9167,
+  "ghost_gap": 11.88,
+  "ghost_best": {
+   "lo": 0.0,
+   "hi": 21.0,
+   "gap": 28.1,
+   "ghost": 11.88,
+   "reach": 0.6813,
+   "inband14": 0.8771,
+   "contact": 0.0061,
+   "ws_taken": 109,
+   "contacts": 1,
+   "relay_taken": 1,
+   "relay_contact": 0,
+   "relay_parts": 0
+  },
+  "q0_zero_gap": 28.73,
+  "cand": 1,
+  "relay_taken": 1,
+  "relay_contact": 0,
+  "relay_parts": 0,
+  "n_windows": 2
+ }
+]

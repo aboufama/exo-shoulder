@@ -1,0 +1,62 @@
+{
+ "src": "docs/alignment/remeasure/crest-knee-3r-joggle_v_held_perpose.json",
+ "n": 470,
+ "overlap_search_index": 60,
+ "overlap_search_vector": 72,
+ "overlap_claimbench_vector": 32,
+ "all": {
+  "gap": 28.45,
+  "reach": 0.65,
+  "follow": 1.0,
+  "inband14": 0.8713,
+  "contact": 0.0058,
+  "n_ws": 360,
+  "n_clip": 110,
+  "ws_taken": 234,
+  "contact_poses": 2
+ },
+ "disjoint_search_index": {
+  "gap": 29.28,
+  "reach": 0.6406,
+  "follow": 1.0,
+  "inband14": 0.8699,
+  "contact": 0.0034,
+  "n_ws": 320,
+  "n_clip": 90,
+  "ws_taken": 205,
+  "contact_poses": 1
+ },
+ "disjoint_search_vector": {
+  "gap": 29.4,
+  "reach": 0.6406,
+  "follow": 1.0,
+  "inband14": 0.8689,
+  "contact": 0.0035,
+  "n_ws": 320,
+  "n_clip": 78,
+  "ws_taken": 205,
+  "contact_poses": 1
+ },
+ "clean_unseen": {
+  "gap": 26.4,
+  "reach": 0.6406,
+  "follow": 1.0,
+  "inband14": 0.8991,
+  "contact": 0.0037,
+  "n_ws": 320,
+  "n_clip": 63,
+  "ws_taken": 205,
+  "contact_poses": 1
+ },
+ "overlap_only_index": {
+  "gap": 21.74,
+  "reach": 0.725,
+  "follow": 1.0,
+  "inband14": 0.8776,
+  "contact": 0.02,
+  "n_ws": 40,
+  "n_clip": 20,
+  "ws_taken": 29,
+  "contact_poses": 1
+ }
+}

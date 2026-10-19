@@ -1,0 +1,93 @@
+{
+ "id": "skin-normal-3r-knuckle-cufflink",
+ "status": "verified",
+ "v_gap": 29.1,
+ "complexity": null,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "idle: a drive is declared but no range of it over the taken poses is on file",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 29.1
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 24.47 -> verified 29.1 (+4.63)",
+   "fast": 24.47,
+   "verified": 29.1,
+   "drop": 4.63
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "watch",
+   "reason": "a drive is declared but no range of it over the taken poses is on file",
+   "spans": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 29.25 vs row None; info: 3 active + 3 sensed passive coordinates = 6 read coordinates (cuff-side passives are outside the count by the user's ruling)",
+   "recomputed": 29.25,
+   "row": null
+  },
+  {
+   "check": "reporting",
+   "level": "ok",
+   "reason": "row, verifier files and dashboard agree"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/skin-normal-3r-knuckle-cufflink.results.json"
+ ],
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:30Z"
+}

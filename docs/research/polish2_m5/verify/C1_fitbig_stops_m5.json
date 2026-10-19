@@ -1,0 +1,378 @@
+{
+ "protocol": "fitbig",
+ "params": {
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "az1": 96.9026,
+  "el1": 64.7202,
+  "az2": 29.7578,
+  "el2": 45.5349,
+  "wd": 70.1215,
+  "wa": -6.2602,
+  "b3": 0.3277,
+  "lE": 59.7929,
+  "lc": 26.5582,
+  "phiE": -5.4456,
+  "phib": -62.7842,
+  "ang_min": 29.6329,
+  "stk": 5.6258,
+  "m_lo": 5.4014,
+  "m_hi": 5.1188
+ },
+ "fit_mode": "fast",
+ "wear_mode": "exact",
+ "n_wear": 470,
+ "exact": true,
+ "fold_margin_rule": 5.0,
+ "o20_only": true,
+ "fit": {
+  "gap": 23.09,
+  "reach": 0.6889,
+  "follow": 1.0,
+  "inband14": 0.8967,
+  "inband10": 0.5561,
+  "contact": 0.0165,
+  "mode": "fast"
+ },
+ "model": {
+  "gap": 23.04,
+  "reach": 0.6889,
+  "follow": 1.0,
+  "inband14": 0.8972,
+  "inband10": 0.5591,
+  "contact": 0.0165
+ },
+ "extra": {
+  "axis_sn_vs_u3_deg": 0.0001,
+  "closure_max": {
+   "hub3c": 0.0,
+   "rot3_axis": 0.0155,
+   "pin_a": 0.0,
+   "pin_b": 0.0,
+   "knee_rot_axis": 0.0219,
+   "arm_rot": 0.0
+  },
+  "closure_bad_poses": 0,
+  "res_deg_max_taken": 0.0151,
+  "knee_vs_hub3_upper_low": [
+   {
+    "mm": 42.03,
+    "i": 6,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 137.6106719970703,
+    "axial": -57.47156524658203
+   },
+   {
+    "mm": 42.03,
+    "i": 469,
+    "kind": "ws",
+    "plane": 150.0,
+    "elev": 120.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 42.03,
+    "i": 291,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 42.03,
+    "i": 318,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 165.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 42.04,
+    "i": 12,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 142.3291778564453,
+    "axial": -58.43452453613281
+   }
+  ],
+  "knee_vs_hub3_upper_bad": 0,
+  "boss_low": [
+   {
+    "mm": 41.96,
+    "pair": "boss-L2",
+    "i": 149,
+    "kind": "ws",
+    "plane": -45.0,
+    "elev": 60.0,
+    "axial": 75.0
+   },
+   {
+    "mm": 42.29,
+    "pair": "boss-L2",
+    "i": 163,
+    "kind": "ws",
+    "plane": -30.0,
+    "elev": 60.0,
+    "axial": 75.0
+   },
+   {
+    "mm": 43.11,
+    "pair": "boss-L2",
+    "i": 180,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 75.0,
+    "axial": 90.0
+   },
+   {
+    "mm": 43.18,
+    "pair": "boss-L2",
+    "i": 228,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 75.0,
+    "axial": 75.0
+   },
+   {
+    "mm": 43.19,
+    "pair": "boss-L2",
+    "i": 179,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 75.0,
+    "axial": 30.0
+   }
+  ],
+  "boss_bad": 0,
+  "spans_deg": {
+   "q3": 183.2,
+   "pin_a": 55.8,
+   "pin_b": 52.0
+  },
+  "pad": {
+   "home_dist_from_GH": 78.8,
+   "tr": 82.85,
+   "c3_dist_from_GH": 12.5,
+   "pad_minus_c3": [
+    60.9,
+    -26.7,
+    0.0
+   ]
+  }
+ },
+ "bad_removed": 0,
+ "corrected": {
+  "gap": 23.04,
+  "reach": 0.6889,
+  "follow": 1.0,
+  "inband14": 0.8972,
+  "inband10": 0.5591,
+  "contact": 0.0165
+ },
+ "gap_near1": 24.15,
+ "near1_poses": 2,
+ "min_metal_mm": 0.04,
+ "overhead140": {
+  "ws": 28,
+  "reach": 0.25,
+  "clip": 10,
+  "follow": 1.0,
+  "inband14": 0.8619,
+  "inband10": 0.5999,
+  "why_not": {
+   "fold": 15,
+   "slide": 6,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 0
+  }
+ },
+ "knee_edge_all_deg": 2.68,
+ "knee_edge_overhead_deg": 3.52,
+ "stops": {
+  "m_lo": 5.4014,
+  "m_hi": 5.1188,
+  "lo_margin_taken": 6.97,
+  "hi_margin_taken": 5.19,
+  "window": [
+   27.28,
+   108.08
+  ],
+  "chain_vs_arm_angle_maxdiff_deg": 0.0
+ },
+ "envelope": {
+  "hubs": [
+   10.0,
+   10.0,
+   10.0
+  ],
+  "o20": true,
+  "stk": 5.6258,
+  "stk_in_catalogue_range": true,
+  "lc": 26.5582,
+  "lc_ge_two_O12_bosses_plus_2": true,
+  "lE": 59.7929,
+  "lE_in_20_90": true,
+  "ang_min": 29.6329,
+  "ang_min_ge_20": true,
+  "b1": 0.0,
+  "b2": 0.0,
+  "R_tol": 0.5
+ },
+ "corrected_audit": {
+  "near_touch_min_mm": 0.04,
+  "near_touch_low": [
+   {
+    "mm": 0.04,
+    "i": 284,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "mm": 0.3,
+    "i": 200,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 75.0,
+    "axial": 30.0
+   },
+   {
+    "mm": 1.06,
+    "i": 291,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 1.26,
+    "i": 8,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 1.26,
+    "i": 9,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   }
+  ],
+  "gap_near1": 24.15,
+  "near1_poses": 2,
+  "gap_near2": 35.36,
+  "near2_poses": 25,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.25,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.8619,
+   "inband10": 0.5999,
+   "why_not": {
+    "fold": 15,
+    "slide": 6,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ },
+ "redteam": {
+  "fold_margin_rule_deg": 5.0,
+  "fold_margin_min_taken_deg": 5.19,
+  "fold_window_deg": [
+   27.28,
+   108.08
+  ],
+  "a_deg": [
+   40.4,
+   67.68
+  ],
+  "knee_ang_taken": [
+   91.9,
+   147.7
+  ],
+  "knee_sing_dist_min_deg": 32.3,
+  "arm_side": {
+   "poses": 107,
+   "taken": 107,
+   "lt1": 0,
+   "lt2": 1,
+   "low": [
+    {
+     "mm": 1.77,
+     "i": 376,
+     "kind": "ws",
+     "plane": 105.0,
+     "elev": 15.0,
+     "axial": -135.0
+    },
+    {
+     "mm": 2.2,
+     "i": 349,
+     "kind": "ws",
+     "plane": 90.0,
+     "elev": 15.0,
+     "axial": -120.0
+    },
+    {
+     "mm": 2.29,
+     "i": 403,
+     "kind": "ws",
+     "plane": 120.0,
+     "elev": 15.0,
+     "axial": -135.0
+    },
+    {
+     "mm": 2.35,
+     "i": 322,
+     "kind": "ws",
+     "plane": 75.0,
+     "elev": 15.0,
+     "axial": -120.0
+    }
+   ]
+  },
+  "j1_seat": {
+   "anterior": 0.0513,
+   "up": 0.9042,
+   "lateral": 0.4239
+  },
+  "hubs": [
+   10.0,
+   10.0,
+   10.0
+  ],
+  "stk": 5.6258,
+  "tp": 2.563,
+  "ang_min": 29.6329,
+  "tr": 82.85,
+  "f": [
+   50.97,
+   61.59,
+   75.71
+  ],
+  "why": {
+   "fold": 98,
+   "slide": 8,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 6
+  }
+ },
+ "secs": 89.7
+}

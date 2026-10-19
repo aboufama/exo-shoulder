@@ -1,0 +1,205 @@
+{
+ "id": "deltoid-crest-j3-3r",
+ "status": "verified",
+ "v_gap": 47.86,
+ "complexity": 0,
+ "verdict": "watch",
+ "reasons": [
+  "reporting: dashboard sweep best 26.78 (score 90.26) sits 21.08 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 50.05 vs bench 47.86 (+2.19; re-measured (this audit))",
+   "held_gap": 50.05,
+   "v_gap": 47.86,
+   "drop": 2.19,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 36.63 -> verified 47.86 (+11.23)",
+   "fast": 36.63,
+   "verified": 47.86,
+   "drop": 11.23
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 47.86, <1 mm 64.84, <2 mm 95.56, <3 mm 122.84, band read 3-14 mm 49.44, 47.7 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 47.7,
+   "plain": 47.86,
+   "n1": 64.84,
+   "n2": 95.56,
+   "n3": 122.84,
+   "band3": 49.44,
+   "hist": {
+    "0-1": 0.0007,
+    "1-2": 0.0047,
+    "2-3": 0.0158,
+    "3-4": 0.0179,
+    "4-6": 0.0905,
+    "6-10": 0.3549,
+    "10-14": 0.3879,
+    ">14": 0.1276
+   },
+   "minmm": 0.047,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 47.86: bench 20 contact poses, sum 26.4 mm, deepest 3.26 mm at ['ws', 15.0, 150.0, -30.0], 1 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+6.16 mm, x1.3); held 22 contact poses, sum 42.84 mm, deepest 10.51 mm at ['ws', 30.0, 165.0, -15.0], 2 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-18.13 mm, x0.7)",
+   "depths": {
+    "v_gap 47.86": {
+     "bench": {
+      "n": 20,
+      "sum_mm": 26.4,
+      "max_mm": 3.26,
+      "n_deeper3": 1,
+      "overhead140": 9,
+      "deepest": [
+       "ws",
+       15.0,
+       150.0,
+       -30.0
+      ],
+      "gap": 47.86,
+      "src": "docs/alignment/remeasure/deltoid-crest-j3-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        26.4
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 22,
+      "sum_mm": 42.84,
+      "max_mm": 10.51,
+      "n_deeper3": 2,
+      "overhead140": 11,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -15.0
+      ],
+      "gap": 50.05,
+      "src": "docs/alignment/remeasure/deltoid-crest-j3-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        42.84
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 47.86",
+     "wear": "bench",
+     "sum": 26.4,
+     "ref_sum": 20.24,
+     "excess": 6.16,
+     "ratio": 1.3,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 47.86",
+     "wear": "held",
+     "sum": 42.84,
+     "ref_sum": 60.97,
+     "excess": -18.13,
+     "ratio": 0.7,
+     "watch": false
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs conecut-knee-knuckle-3r: plain -29.58, 2 mm -60.72",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -29.58,
+   "gain_2mm": -60.72
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "no passive coordinate; flood not required"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.313 deg (verification.held.th_margin_min; 7 readings)",
+   "min_margin": 5.313,
+   "where": "verification.held.th_margin_min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "no moving drive / joint declared",
+   "spans": [],
+   "declared": [],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "per-part sample counts not on file (fractions only) (re-measured)",
+   "parts": {
+    "hub1": 0.9858,
+    "hub2": 0.9989,
+    "hub3": 0.9046,
+    "link2": 0.9751,
+    "link1": 0.6738,
+    "neck": 0.8276
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 0.0 vs row 0.0",
+   "recomputed": 0.0,
+   "row": 0.0
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "dashboard sweep best 26.78 (score 90.26) sits 21.08 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [
+  "docs/concepts/verify/deltoid-crest-j3-3r_skeptic_frozen_s10.json",
+  "docs/concepts/verify/deltoid-crest-j3-3r_skeptic_held.json",
+  "docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s10.json",
+  "docs/concepts/verify/deltoid-crest-j3-3r_skeptic_fit60.json",
+  "docs/concepts/verify/deltoid-crest-j3-3r_skeptic_frozen.json",
+  "docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact_s6.json",
+  "docs/concepts/verify/deltoid-crest-j3-3r_frozen_exact.json"
+ ],
+ "git": "1027be3",
+ "tool_version": "2026-10-17.6",
+ "t": "2026-10-18T00:25:18Z"
+}

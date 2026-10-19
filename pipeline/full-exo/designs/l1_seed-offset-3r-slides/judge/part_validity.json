@@ -1,0 +1,186 @@
+{
+ "parts": [
+  {
+   "file": "l4|carriage A keep-out (20 x (20 + 2 S_t) x 4, along slide)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 3.184,
+   "bbox_mm": [
+    38.1,
+    20.0,
+    19.6
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|carriage B keep-out (20 x 20 x 4, across + radial slides)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.6,
+   "bbox_mm": [
+    19.9,
+    20.0,
+    11.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|member-3 bridge keep-out (8 wide, underside at carriage B's underside, top flush with the neck)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.829,
+   "bbox_mm": [
+    10.1,
+    14.8,
+    9.6
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|member-3 neck keep-out (8 x 3 mm, ramp <= 60 deg from the J3 plate to carriage B's top)",
+   "valid": true,
+   "solids": 1,
+   "faces": 488,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.47,
+   "bbox_mm": [
+    17.9,
+    19.6,
+    27.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "valid": true,
+   "solids": 1,
+   "faces": 932,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.311,
+   "bbox_mm": [
+    74.4,
+    9.8,
+    28.6
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|link 1 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "valid": true,
+   "solids": 1,
+   "faces": 1244,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.7,
+   "bbox_mm": [
+    45.0,
+    55.1,
+    76.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|J3 lower plate keep-out (O20 x 3, member 3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    19.5,
+    20.0,
+    10.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    22.0,
+    20.0,
+    16.4
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    21.1,
+    20.2,
+    19.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|J2 lower plate keep-out (O20 x 3, link 1)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    17.2,
+    20.1,
+    15.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|J1 lower plate keep-out (O20 x 3, link 1)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.0,
+    8.9,
+    20.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    21.8,
+    14.7,
+    20.0
+   ],
+   "level": "L1 mesh"
+  }
+ ],
+ "level": "L1",
+ "all_ok": true
+}

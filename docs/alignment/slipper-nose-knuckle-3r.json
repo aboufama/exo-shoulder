@@ -1,0 +1,319 @@
+{
+ "id": "slipper-nose-knuckle-3r",
+ "status": "verified",
+ "v_gap": 18.49,
+ "complexity": 18.25,
+ "verdict": "watch",
+ "reasons": [
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): v_gap 18.49: bench 2 contact poses, sum 14.75 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+8.52 mm, x2.37) - CLEARLY DEEPER; held 10 contact poses, sum 46.12 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+10.46 mm, x1.29)",
+  "reporting: dashboard sweep best 13.0 (score 95.27) sits 5.49 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 23.45 vs bench 18.49 (+4.96; re-measured (this audit))",
+   "held_gap": 23.45,
+   "v_gap": 18.49,
+   "drop": 4.96,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 13.0 -> verified 18.49 (+5.49)",
+   "fast": 13.0,
+   "verified": 18.49,
+   "drop": 5.49
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 18.49, <1 mm 20.12, <2 mm 33.02, <3 mm 83.15, band read 3-14 mm 18.64, 14.53 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 14.53,
+   "plain": 18.49,
+   "n1": 20.12,
+   "n2": 33.02,
+   "n3": 83.15,
+   "band3": 18.64,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0001,
+    "2-3": 0.0015,
+    "3-4": 0.0091,
+    "4-6": 0.0899,
+    "6-10": 0.4157,
+    "10-14": 0.3793,
+    ">14": 0.1044
+   },
+   "minmm": 0.072,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "watch",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.49: bench 2 contact poses, sum 14.75 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+8.52 mm, x2.37) - CLEARLY DEEPER; held 10 contact poses, sum 46.12 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+10.46 mm, x1.29)",
+   "depths": {
+    "v_gap 18.49": {
+     "bench": {
+      "n": 2,
+      "sum_mm": 14.75,
+      "max_mm": 9.01,
+      "n_deeper3": 2,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.49,
+      "src": "docs/alignment/remeasure/slipper-nose-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        14.74,
+        14.75
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 10,
+      "sum_mm": 46.12,
+      "max_mm": 9.05,
+      "n_deeper3": 7,
+      "overhead140": 6,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -45.0
+      ],
+      "gap": 23.45,
+      "src": "docs/alignment/remeasure/slipper-nose-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        46.12,
+        46.13
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 18.49",
+     "wear": "bench",
+     "sum": 14.75,
+     "ref_sum": 6.23,
+     "excess": 8.52,
+     "ratio": 2.37,
+     "watch": true
+    },
+    {
+     "claim": "v_gap 18.49",
+     "wear": "held",
+     "sum": 46.12,
+     "ref_sum": 35.66,
+     "excess": 10.46,
+     "ratio": 1.29,
+     "watch": false
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 18.49, connected full 18.49, knn 20.16, bench 50.11 (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_frozen.json)",
+   "static": 18.49,
+   "connected_full": 18.49,
+   "connected_knn": 20.16,
+   "connected_bench": 50.11
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.006 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_held_r125.json:extra.th_margin.min; 10 readings)",
+   "min_margin": 5.006,
+   "where": "docs/concepts/verify/slipper-nose-knuckle-3r_v_held_r125.json:extra.th_margin.min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 45.61 deg (re-measured dK span); crank moves: smallest recorded span 19.3 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:sidecar.phi_max_taken); knee moves: smallest recorded span 64.22 deg (re-measured K.qb span)",
+   "spans": [
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_held_r125.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_held_r125.json:extra.dK_taken_max_deg",
+     46.27
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r100.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r100.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_held_r125.json:sidecar.phi_max_taken",
+     19.3
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_roller_at_A.json:sidecar.phi_max_taken",
+     19.3
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json:sidecar.phi_max_taken",
+     19.3
+    ],
+    [
+     "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r100.json:sidecar.phi_max_taken",
+     19.3
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.895 vs part-weighted 0.924 (-2.87 points); thinly sampled parts: L1a 8 (re-measured)",
+   "parts": {
+    "hub1": [
+     0.999,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.953,
+     11.1,
+     80
+    ],
+    "hub3": [
+     0.739,
+     11.5,
+     80
+    ],
+    "E": [
+     0.966,
+     6.5,
+     104
+    ],
+    "boss": [
+     0.988,
+     8.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.1,
+     32
+    ],
+    "knee": [
+     0.941,
+     10.7,
+     85
+    ],
+    "crank": [
+     0.818,
+     11.2,
+     129
+    ],
+    "roller": [
+     0.938,
+     10.0,
+     19
+    ],
+    "horn": [
+     0.956,
+     7.4,
+     23
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.931,
+     8.2,
+     36
+    ],
+    "L2": [
+     0.736,
+     12.0,
+     124
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 18.25 vs row 18.25",
+   "recomputed": 18.25,
+   "row": 18.25
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "dashboard sweep best 13.0 (score 95.27) sits 5.49 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_held_r125.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_roller_at_A.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_mu12.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r100.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r125.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_edge.json",
+  "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "c4960fe",
+ "tool_version": "2026-10-17.3",
+ "t": "2026-10-17T17:03:55Z"
+}

@@ -1,0 +1,138 @@
+{
+ "over": {
+  "r_h": 15.5
+ },
+ "wear": "held",
+ "fit": {
+  "gap": 10.31,
+  "reach": 0.8,
+  "follow": 1.0,
+  "inband14": 0.8969,
+  "inband10": 0.5292,
+  "contact": 0.0
+ },
+ "frozen": {
+  "gap": 22.69,
+  "reach": 0.6901,
+  "follow": 1.0,
+  "inband14": 0.8945,
+  "inband10": 0.5322,
+  "contact": 0.0115
+ },
+ "near1": 25.77,
+ "near2": 37.24,
+ "minmetal": 0.14,
+ "ovh": {
+  "ws": 71,
+  "reach": 0.2535,
+  "clip": 19,
+  "follow": 1.0,
+  "inband14": 0.8739,
+  "inband10": 0.5815,
+  "why_not": {
+   "fold": 37,
+   "slide": 11,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 5
+  }
+ },
+ "why": {
+  "fold": 259,
+  "slide": 21,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 5,
+  "contact": 10
+ },
+ "parts_pairs": {
+  "E-L2": 5
+ },
+ "extra": {
+  "n_taken": 859,
+  "closure_horn_max_mm": 0.0,
+  "closure_tip_max_mm": 0.0,
+  "tilt_crank_max": 9.9,
+  "tilt_horn_max": 22.3,
+  "tilt_crank_p95": 9.9,
+  "tilt_horn_p95": 20.0,
+  "poses_failing": 0,
+  "poses_failing_ids": [],
+  "pa_real_max": 40.28,
+  "ratio_over_small": [
+   0.844,
+   0.984
+  ],
+  "dK_taken_max_deg": 38.47,
+  "dK_lim_deg": 40.5,
+  "why_lim": "ROD-hub2",
+  "corrected": {
+   "gap": 22.69,
+   "reach": 0.6901,
+   "follow": 1.0,
+   "inband14": 0.8945,
+   "inband10": 0.5322,
+   "contact": 0.0115
+  }
+ },
+ "sidecar": {
+  "boss_level": 61.1,
+  "lev_L1b": 57.9,
+  "arm_tip_level": 57.9,
+  "rod_len": 26.8,
+  "La": 16.5,
+  "r_h": 15.5,
+  "i_rock": 3.77,
+  "rssr_closed": true,
+  "trans_min_taken": 40.2,
+  "ratio_range": [
+   0.792,
+   0.922
+  ],
+  "ratio_small_angle": 0.937,
+  "phi_max_taken": 33.2,
+  "crest_exact": 10.29,
+  "dK_lim": 40.5,
+  "why_lim": "ROD-hub2"
+ },
+ "min_clear_taken": {
+  "ROD-hubK": 1.7,
+  "ROD-hub2": 1.4,
+  "ROD-L1b": 3.8,
+  "CRK-hub1": 13.0,
+  "CRK-hubK": 8.8,
+  "CRK-hub3": 65.7,
+  "CRK-hub2": 5.0,
+  "CRK-L1a": 11.8,
+  "CRK-L2": 7.5,
+  "HORN-L1b": 1.4,
+  "HORN-hub2": 18.2,
+  "HORN-L2": 34.8,
+  "knee-CRK": 73.5,
+  "pad-CRK": 71.0,
+  "knee-HORN": 92.3,
+  "pad-HORN": 89.0,
+  "E-CRK": 69.8,
+  "E-HORN": 85.0
+ },
+ "m3e_min_taken": 5.021,
+ "msub_min_taken": 10.716,
+ "consts": {
+  "HUB_R": 10.0,
+  "UP": 3.15,
+  "T_LINK": 3.0,
+  "CROWN": 12.25,
+  "RUN": 0.5,
+  "W_LINK": 8.0
+ },
+ "f": [
+  49.72348100098733,
+  60.340912230713656,
+  78.56281034239952
+ ],
+ "fK": 55.37541190381168,
+ "secs": 294
+}

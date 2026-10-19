@@ -1,0 +1,36 @@
+{
+ "what": "skeptic re-measure (2026-10-17 ~15:20 UTC) of the full CAD's M5 forward-stroke bound at mu 0.15 with the twist read UNROUNDED. judge/dynamics.py rounds twist_peak to 2 decimals (line 903) and compares the ROUNDED value with the 5.0 deg limit (line 1222), so the builder's 'twist 5.0 = the limit, PASS' could be any raw value up to 5.00499.",
+ "design_copy": "scratch copy of pipeline/full-exo/designs/user_slipper_nose (build.json, clips.json, design.json, parts_full.json, workspace.json, exo.glb, score.json, step/) at git c93c86a, design.json build_fixes.spring.preload 0.0982 (= 0.08 / 0.815), as the builder's forward_bound_mu150.json m5_forward_bound.method states",
+ "cmd": "OMP_NUM_THREADS=1 nice -n 10 python3 <wrapper> 0.815 <repo> <copy> --quick --no-validate --general --jobs 1 --out <out>",
+ "wrapper": "spec_from_file_location('dynamics', judge/dynamics.py); exec; m.K_RATES = (0.015/eta, 0.010/eta); m.GenDesign.__init__.__defaults__ = (m.K_RATES[0],); m.round = 2-dp roundings returned raw (every other rounding unchanged); sys.argv = [...]; m.main(). judge/dynamics.py UNCHANGED on disk.",
+ "reproduces_builder_file": "pipeline/full-exo/designs/user_slipper_nose/judge_m5/forward_bound_mu150.json: twist 5.0 (raw 5.00081 -> 5.0), tracking 5.01 (raw 5.00503 -> 5.01), krate case 4.89 (raw 4.88659), M_GH 0.166, K vs law 0.126, lift-off 0.0: identical to the displayed digits",
+ "per_case": {
+  "passive|mu0.005|t0.001|s1|hub": {
+   "twist_peak_deg_raw": 5.00081,
+   "twist_peak_deg_judge_2dp": 5.0,
+   "free_by_judge_rule_on_raw": false,
+   "worst_twist_clip": "Reach a high shelf",
+   "tracking_peak_deg_raw": 5.00503,
+   "moment_gh_peak_Nm": 0.166,
+   "force_peak_N": 0.751,
+   "slaved_law_err_max_deg": 0.126,
+   "slaved_liftoff_share_max": 0.0
+  },
+  "passive|mu0.005|t0.001|s1|hub|krate0.0122699": {
+   "twist_peak_deg_raw": 4.88659,
+   "twist_peak_deg_judge_2dp": 4.89,
+   "free_by_judge_rule_on_raw": true,
+   "worst_twist_clip": "Reach a high shelf",
+   "tracking_peak_deg_raw": 4.89075,
+   "moment_gh_peak_Nm": 0.166,
+   "force_peak_N": 0.751,
+   "slaved_law_err_max_deg": 0.126,
+   "slaved_liftoff_share_max": 0.0
+  }
+ },
+ "verdict_raw": {
+  "moves_freely_nominal": false
+ },
+ "reading": "At mu 0.15 the forward bound's cuff twist is 5.0008 deg on the Reach a high shelf clip: OVER the 5.0 deg R17 limit by 0.0008 deg. The judge's own rule applied to the unrounded value reads free = False; the PASS in forward_bound_mu150.json and the gen-7 EVOLUTION row is a 2-decimal rounding artefact. Physically negligible (0.0008 deg), but the bound is a FAIL by the stated rule, not 'at the limit, PASS'. The krate 0.0123 case (4.887) passes. The official R17 (nominal, judge/dynamics.json 4.04 deg) is unaffected; mu 0.12 (4.78) is unaffected.",
+ "secs": 53
+}

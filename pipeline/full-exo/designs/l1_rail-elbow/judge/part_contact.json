@@ -1,0 +1,273 @@
+{
+ "step": 1,
+ "tol_mm": 0.15,
+ "frames_checked": 1337,
+ "pairs": 774,
+ "seconds": 194,
+ "setup_seconds": 61,
+ "jobs": 2,
+ "cpu_seconds": 309,
+ "cpu_s_per_frame": 0.191,
+ "violations": {
+  "l2|carriage keep-out (L section: 4 mm overhang x 9 + plate over the rail, 20 long)  IN  l3|rail stage 2 (driven 2:1, its own group) keep-out (8 x 5 mm section, r 127.0 mm)": {
+   "max_depth": 2.49,
+   "frames": 1337,
+   "worst": [
+    "Raise overhead",
+    9
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Raise overhead|9": 2.49,
+    "Raise overhead|10": 2.49,
+    "Raise overhead|11": 2.49,
+    "Raise overhead|12": 2.49,
+    "Raise overhead|13": 2.49,
+    "Raise overhead|18": 2.49,
+    "Raise overhead|19": 2.49,
+    "Raise overhead|24": 2.49,
+    "Raise overhead|25": 2.49,
+    "Raise overhead|26": 2.49,
+    "Raise overhead|30": 2.49,
+    "Raise overhead|31": 2.49
+   }
+  },
+  "H|neck neck to BOTTOM's bar keep-out (14 x 6 mm Ti at r_ref 70, fitted underside)  IN  l2|bridge strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)": {
+   "max_depth": 1.36,
+   "frames": 1322,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 1.36,
+    "Raise overhead|1": 1.36,
+    "Raise overhead|2": 1.36,
+    "Raise overhead|3": 1.36,
+    "Raise overhead|4": 1.36,
+    "Raise overhead|5": 1.36,
+    "Raise overhead|6": 1.36,
+    "Raise overhead|7": 1.36,
+    "Raise overhead|8": 1.36,
+    "Raise overhead|9": 1.36,
+    "Raise overhead|10": 1.36,
+    "Raise overhead|11": 1.36
+   }
+  },
+  "H|neck neck to BOTTOM's bar keep-out (14 x 6 mm Ti at r_ref 70, fitted underside)  IN  l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25)": {
+   "max_depth": 2.84,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 2.84,
+    "Raise overhead|1": 2.84,
+    "Raise overhead|2": 2.84,
+    "Raise overhead|3": 2.84,
+    "Raise overhead|4": 2.84,
+    "Raise overhead|5": 2.84,
+    "Raise overhead|6": 2.84,
+    "Raise overhead|7": 2.84,
+    "Raise overhead|8": 2.84,
+    "Raise overhead|9": 2.84,
+    "Raise overhead|10": 2.84,
+    "Raise overhead|11": 2.84
+   }
+  },
+  "l2|bridge strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)  IN  H|neck neck to BOTTOM's bar keep-out (14 x 6 mm Ti at r_ref 70, fitted underside)": {
+   "max_depth": 2.86,
+   "frames": 1323,
+   "worst": [
+    "Walking arm swing",
+    96
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 2.86,
+    "Raise overhead|1": 2.86,
+    "Raise overhead|2": 2.86,
+    "Raise overhead|3": 2.86,
+    "Raise overhead|4": 2.86,
+    "Raise overhead|5": 2.86,
+    "Raise overhead|6": 2.86,
+    "Raise overhead|7": 2.86,
+    "Raise overhead|8": 2.86,
+    "Raise overhead|9": 2.86,
+    "Raise overhead|10": 2.86,
+    "Raise overhead|11": 2.86
+   }
+  },
+  "l2|bridge strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)  IN  H|J3 lower plate keep-out (O20 x 3, F 68.0 mm)": {
+   "max_depth": 0.49,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 0.49,
+    "Raise overhead|1": 0.49,
+    "Raise overhead|2": 0.49,
+    "Raise overhead|3": 0.49,
+    "Raise overhead|4": 0.49,
+    "Raise overhead|5": 0.49,
+    "Raise overhead|6": 0.49,
+    "Raise overhead|7": 0.49,
+    "Raise overhead|8": 0.49,
+    "Raise overhead|9": 0.49,
+    "Raise overhead|10": 0.49,
+    "Raise overhead|11": 0.49
+   }
+  },
+  "l1|strap1 strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)  IN  base|J1 lower plate keep-out (O20 x 3, F 52.0 mm)": {
+   "max_depth": 0.65,
+   "frames": 1337,
+   "worst": [
+    "Raise overhead",
+    0
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 0.65,
+    "Raise overhead|1": 0.65,
+    "Raise overhead|2": 0.65,
+    "Raise overhead|3": 0.65,
+    "Raise overhead|4": 0.65,
+    "Raise overhead|5": 0.65,
+    "Raise overhead|6": 0.65,
+    "Raise overhead|7": 0.65,
+    "Raise overhead|8": 0.65,
+    "Raise overhead|9": 0.65,
+    "Raise overhead|10": 0.65,
+    "Raise overhead|11": 0.65
+   }
+  },
+  "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25)  IN  H|neck neck to BOTTOM's bar keep-out (14 x 6 mm Ti at r_ref 70, fitted underside)": {
+   "max_depth": 2.77,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 2.77,
+    "Raise overhead|1": 2.77,
+    "Raise overhead|2": 2.77,
+    "Raise overhead|3": 2.77,
+    "Raise overhead|4": 2.77,
+    "Raise overhead|5": 2.77,
+    "Raise overhead|6": 2.77,
+    "Raise overhead|7": 2.77,
+    "Raise overhead|8": 2.77,
+    "Raise overhead|9": 2.77,
+    "Raise overhead|10": 2.77,
+    "Raise overhead|11": 2.77
+   }
+  },
+  "H|J3 lower plate keep-out (O20 x 3, F 68.0 mm)  IN  l2|bridge strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)": {
+   "max_depth": 0.48,
+   "frames": 1337,
+   "worst": [
+    "Raise overhead",
+    0
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 0.48,
+    "Raise overhead|1": 0.48,
+    "Raise overhead|2": 0.48,
+    "Raise overhead|3": 0.48,
+    "Raise overhead|4": 0.48,
+    "Raise overhead|5": 0.48,
+    "Raise overhead|6": 0.48,
+    "Raise overhead|7": 0.48,
+    "Raise overhead|8": 0.48,
+    "Raise overhead|9": 0.48,
+    "Raise overhead|10": 0.48,
+    "Raise overhead|11": 0.48
+   }
+  },
+  "base|J1 lower plate keep-out (O20 x 3, F 52.0 mm)  IN  l1|strap1 strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)": {
+   "max_depth": 0.87,
+   "frames": 1337,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 0.87,
+    "Raise overhead|1": 0.87,
+    "Raise overhead|2": 0.87,
+    "Raise overhead|3": 0.87,
+    "Raise overhead|4": 0.87,
+    "Raise overhead|5": 0.87,
+    "Raise overhead|6": 0.87,
+    "Raise overhead|7": 0.87,
+    "Raise overhead|8": 0.87,
+    "Raise overhead|9": 0.87,
+    "Raise overhead|10": 0.87,
+    "Raise overhead|11": 0.87
+   }
+  }
+ },
+ "open_parts_not_tested_as_container": [],
+ "samples": {
+  "h_mm": 1.0,
+  "sharp_deg": 30.0,
+  "total": 880614,
+  "per_part": {
+   "H|M4x6 ISO 10642 countersunk (upper cuff)": 6087,
+   "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": 62921,
+   "H|CirPattern1[13]": 282,
+   "H|CirPattern1[17]": 282,
+   "H|CirPattern1[3]": 282,
+   "H|CirPattern1[6]": 282,
+   "H|CirPattern1[1]": 282,
+   "H|Revolve1[3]": 1988,
+   "H|CirPattern1[9]": 282,
+   "H|CirPattern1[2]": 282,
+   "H|Revolve3": 6014,
+   "H|CirPattern1[4]": 282,
+   "H|CirPattern1[10]": 282,
+   "H|CirPattern1[8]": 282,
+   "H|CirPattern1[14]": 282,
+   "H|CirPattern1[12]": 282,
+   "H|CirPattern1[16]": 282,
+   "H|CirPattern1[7]": 282,
+   "H|Revolve1[1]": 6974,
+   "H|CirPattern1[5]": 282,
+   "H|Revolve4": 282,
+   "H|CirPattern1[11]": 282,
+   "H|Revolve1[2]": 1988,
+   "H|CirPattern1[15]": 282,
+   "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": 9519,
+   "H|5mm D, 2.5mm H, N42 MAGNET": 827,
+   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": 12234,
+   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": 10376,
+   "F|MIDDLE": 78680,
+   "H|TOP": 14699,
+   "F|FOREARM CUFF": 264978,
+   "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue)": 291431,
+   "l2|carriage keep-out (L section: 4 mm overhang x 9 + plate over the rail, 20 long)": 10564,
+   "l3|rail stage 2 (driven 2:1, its own group) keep-out (8 x 5 mm section, r 127.0 mm)": 6183,
+   "l1|rail stage 1 (link 1) keep-out (8 x 5 mm section, r 143.0 mm)": 7290,
+   "H|neck neck to BOTTOM's bar keep-out (14 x 6 mm Ti at r_ref 70, fitted underside)": 11767,
+   "l2|bridge strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)": 12901,
+   "l1|strap1 strap keep-out (12 x 3 mm Ti at r_ref 70, fitted underside)": 25085,
+   "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25)": 10498,
+   "H|J3 lower plate keep-out (O20 x 3, F 68.0 mm)": 6018,
+   "l1|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25)": 10498,
+   "base|J1 lower plate keep-out (O20 x 3, F 52.0 mm)": 6018
+  },
+  "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
+ },
+ "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
+ "max_depth": 2.86
+}

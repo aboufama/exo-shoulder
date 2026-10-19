@@ -1,0 +1,50 @@
+{
+ "leader": "pin-knee",
+ "a1": 40.12156972114674,
+ "a2": 72.31408064104474,
+ "a1_relay": 84.0,
+ "n_ws": 360,
+ "A_ws": 0.6306,
+ "AorB_ws": 0.9472,
+ "B_only_ws": 114,
+ "B_only_overhead": 17,
+ "hub2_ray_requirement_mm": {
+  "A_sigma+1": {
+   "n": 337,
+   "med": 45.0,
+   "p10": 40.0,
+   "p90": 78.0,
+   "overhead_med": 103.0,
+   "share_le_60": 0.831,
+   "share_le_75": 0.887
+  },
+  "A_sigma-1": {
+   "n": 337,
+   "med": 53.0,
+   "p10": 51.0,
+   "p90": 55.0,
+   "overhead_med": 53.0,
+   "share_le_60": 0.997,
+   "share_le_75": 0.997
+  },
+  "B_sigma+1": {
+   "n": 114,
+   "med": 80.0,
+   "p10": 54.0,
+   "p90": 400.0,
+   "overhead_med": 113.0,
+   "share_le_60": 0.298,
+   "share_le_75": 0.439
+  },
+  "B_sigma-1": {
+   "n": 114,
+   "med": 70.5,
+   "p10": 55.0,
+   "p90": 205.0,
+   "overhead_med": 67.0,
+   "share_le_60": 0.298,
+   "share_le_75": 0.588
+  }
+ },
+ "secs": 331.1
+}

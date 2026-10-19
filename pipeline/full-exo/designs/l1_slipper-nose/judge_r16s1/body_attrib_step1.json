@@ -1,0 +1,363 @@
+{
+ "rule": "R16 body-contact poses (> 0.5 mm) of judge/workspace.py --step 1; depth = deepest point inside the posed body (body_pose, exact closest point + winding number), model metal vs built parts at the same frame",
+ "step": 1,
+ "poses": 1432,
+ "body_contact": 12,
+ "model_own": 4,
+ "per_pose": [
+  {
+   "k": 34,
+   "pose": [
+    -90.0,
+    60.0,
+    105.0
+   ],
+   "judge_body_mm": 4.21,
+   "judge_part": "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)",
+   "dK": -20.72,
+   "state": 1,
+   "built_deepest": [
+    "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted under",
+    4.22
+   ],
+   "model_deepest": [
+    "L2",
+    3.49
+   ],
+   "verdict": "build excess 0.73 mm",
+   "built_inside": {
+    "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted under": 4.22
+   },
+   "model_inside": {
+    "L2": 3.49
+   }
+  },
+  {
+   "k": 35,
+   "pose": [
+    -90.0,
+    60.0,
+    120.0
+   ],
+   "judge_body_mm": 6.2,
+   "judge_part": "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)",
+   "dK": -43.12,
+   "state": 1,
+   "built_deepest": [
+    "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted under",
+    6.2
+   ],
+   "model_deepest": [
+    "L2",
+    5.51
+   ],
+   "verdict": "build excess 0.69 mm",
+   "built_inside": {
+    "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted under": 6.2,
+    "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with ": 1.03
+   },
+   "model_inside": {
+    "hub2": 0.73,
+    "L2": 5.51
+   }
+  },
+  {
+   "k": 75,
+   "pose": [
+    -75.0,
+    60.0,
+    105.0
+   ],
+   "judge_body_mm": 2.31,
+   "judge_part": "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)",
+   "dK": -25.4,
+   "state": 1,
+   "built_deepest": [
+    "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted under",
+    2.31
+   ],
+   "model_deepest": [
+    "L2",
+    1.6
+   ],
+   "verdict": "build excess 0.71 mm",
+   "built_inside": {
+    "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted under": 2.31
+   },
+   "model_inside": {
+    "L2": 1.6
+   }
+  },
+  {
+   "k": 116,
+   "pose": [
+    -60.0,
+    60.0,
+    105.0
+   ],
+   "judge_body_mm": 0.53,
+   "judge_part": "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)",
+   "dK": -30.97,
+   "state": 1,
+   "built_deepest": [
+    "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted under",
+    0.53
+   ],
+   "model_deepest": [
+    "L2",
+    -0.07
+   ],
+   "verdict": "build excess 0.60 mm",
+   "built_inside": {
+    "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted under": 0.53
+   },
+   "model_inside": {}
+  },
+  {
+   "k": 487,
+   "pose": [
+    15.0,
+    105.0,
+    15.0
+   ],
+   "judge_body_mm": 1.22,
+   "judge_part": "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 117.9 deg of travel + the dowel; its ends = the stops)",
+   "dK": 0.0,
+   "state": 0,
+   "built_deepest": [
+    "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with ",
+    1.22
+   ],
+   "model_deepest": [
+    "hub2",
+    1.07
+   ],
+   "verdict": "model's own contact",
+   "built_inside": {
+    "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with ": 1.22
+   },
+   "model_inside": {
+    "hub2": 1.07
+   }
+  },
+  {
+   "k": 500,
+   "pose": [
+    15.0,
+    150.0,
+    -60.0
+   ],
+   "judge_body_mm": 7.07,
+   "judge_part": "l1a|drive flank lug keep-out (link 1a: the conjugate flank band 0.3..6 mm behind the contact over the used stroke 0..49.75 deg of K, 3 mm Ti on the sphere r 59.81, root from hub K's rim; 5-axis / tilting-head wire-EDM flank)",
+   "dK": 0.0,
+   "state": 0,
+   "built_deepest": [
+    "l1a|drive flank lug keep-out (link 1a: the conjugate",
+    7.41
+   ],
+   "model_deepest": [
+    "horn",
+    7.07
+   ],
+   "verdict": "model's own contact",
+   "built_inside": {
+    "l1a|drive flank lug keep-out (link 1a: the conjugate": 7.41,
+    "dk|drive nose dowel keep-out (ISO 8734 O2.5 x 6 m6 ": 0.68,
+    "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti:": 1.31
+   },
+   "model_inside": {
+    "crank": 1.32,
+    "roller": 0.48,
+    "horn": 7.07
+   }
+  },
+  {
+   "k": 506,
+   "pose": [
+    15.0,
+    165.0,
+    -60.0
+   ],
+   "judge_body_mm": 9.0,
+   "judge_part": "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti: straight run 19.8 mm at the model's stepped levels, tangent arc r_c 15.37 about hub K's axis over 125.0 deg at radius 62.96 from GH, 3 mm past the roller)",
+   "dK": 0.0,
+   "state": 0,
+   "built_deepest": [
+    "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti:",
+    9.22
+   ],
+   "model_deepest": [
+    "crank",
+    8.5
+   ],
+   "verdict": "build excess 0.72 mm",
+   "built_inside": {
+    "l1a|drive flank lug keep-out (link 1a: the conjugate": 8.49,
+    "dk|drive nose dowel keep-out (ISO 8734 O2.5 x 6 m6 ": 8.28,
+    "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti:": 9.22,
+    "l1b|K upper boss + clock-spring cap keep-out (O20, F": 2.77,
+    "l1b|K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened, r ": 1.95,
+    "l1a|K lower plate keep-out (O20 x 3, link 1a) with t": 3.15
+   },
+   "model_inside": {
+    "hubK": 2.65,
+    "crank": 8.5,
+    "roller": 4.16,
+    "horn": 7.07
+   }
+  },
+  {
+   "k": 609,
+   "pose": [
+    30.0,
+    150.0,
+    -45.0
+   ],
+   "judge_body_mm": 5.33,
+   "judge_part": "l1a|drive flank lug keep-out (link 1a: the conjugate flank band 0.3..6 mm behind the contact over the used stroke 0..49.75 deg of K, 3 mm Ti on the sphere r 59.81, root from hub K's rim; 5-axis / tilting-head wire-EDM flank)",
+   "dK": 0.0,
+   "state": 0,
+   "built_deepest": [
+    "l1a|drive flank lug keep-out (link 1a: the conjugate",
+    5.52
+   ],
+   "model_deepest": [
+    "horn",
+    4.45
+   ],
+   "verdict": "build excess 1.07 mm",
+   "built_inside": {
+    "l1a|drive flank lug keep-out (link 1a: the conjugate": 5.52,
+    "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti:": 0.2
+   },
+   "model_inside": {
+    "crank": 0.2,
+    "horn": 4.45
+   }
+  },
+  {
+   "k": 614,
+   "pose": [
+    30.0,
+    165.0,
+    -60.0
+   ],
+   "judge_body_mm": 5.74,
+   "judge_part": "l1a|drive flank lug keep-out (link 1a: the conjugate flank band 0.3..6 mm behind the contact over the used stroke 0..49.75 deg of K, 3 mm Ti on the sphere r 59.81, root from hub K's rim; 5-axis / tilting-head wire-EDM flank)",
+   "dK": 0.0,
+   "state": 0,
+   "built_deepest": [
+    "l1a|drive flank lug keep-out (link 1a: the conjugate",
+    5.74
+   ],
+   "model_deepest": [
+    "horn",
+    5.34
+   ],
+   "verdict": "model's own contact",
+   "built_inside": {
+    "l1a|drive flank lug keep-out (link 1a: the conjugate": 5.74,
+    "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti:": 0.43,
+    "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.": 0.15
+   },
+   "model_inside": {
+    "crank": 0.26,
+    "horn": 5.34
+   }
+  },
+  {
+   "k": 615,
+   "pose": [
+    30.0,
+    165.0,
+    -45.0
+   ],
+   "judge_body_mm": 9.06,
+   "judge_part": "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti: straight run 19.8 mm at the model's stepped levels, tangent arc r_c 15.37 about hub K's axis over 125.0 deg at radius 62.96 from GH, 3 mm past the roller)",
+   "dK": 0.0,
+   "state": 0,
+   "built_deepest": [
+    "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti:",
+    9.43
+   ],
+   "model_deepest": [
+    "crank",
+    7.98
+   ],
+   "verdict": "build excess 1.45 mm",
+   "built_inside": {
+    "l1a|drive flank lug keep-out (link 1a: the conjugate": 8.13,
+    "dk|drive nose dowel keep-out (ISO 8734 O2.5 x 6 m6 ": 8.24,
+    "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti:": 9.43,
+    "l1b|K upper boss + clock-spring cap keep-out (O20, F": 3.43,
+    "l1b|K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened, r ": 2.89,
+    "l1a|K lower plate keep-out (O20 x 3, link 1a) with t": 3.02
+   },
+   "model_inside": {
+    "hubK": 1.34,
+    "crank": 7.98,
+    "roller": 3.86,
+    "horn": 6.62
+   }
+  },
+  {
+   "k": 723,
+   "pose": [
+    45.0,
+    165.0,
+    -45.0
+   ],
+   "judge_body_mm": 5.8,
+   "judge_part": "l1a|drive flank lug keep-out (link 1a: the conjugate flank band 0.3..6 mm behind the contact over the used stroke 0..49.75 deg of K, 3 mm Ti on the sphere r 59.81, root from hub K's rim; 5-axis / tilting-head wire-EDM flank)",
+   "dK": 0.0,
+   "state": 0,
+   "built_deepest": [
+    "l1a|drive flank lug keep-out (link 1a: the conjugate",
+    5.8
+   ],
+   "model_deepest": [
+    "horn",
+    5.3
+   ],
+   "verdict": "model's own contact",
+   "built_inside": {
+    "l1a|drive flank lug keep-out (link 1a: the conjugate": 5.8,
+    "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti:": 0.19
+   },
+   "model_inside": {
+    "crank": 0.18,
+    "horn": 5.3
+   }
+  },
+  {
+   "k": 832,
+   "pose": [
+    60.0,
+    165.0,
+    -30.0
+   ],
+   "judge_body_mm": 6.87,
+   "judge_part": "l1a|drive flank lug keep-out (link 1a: the conjugate flank band 0.3..6 mm behind the contact over the used stroke 0..49.75 deg of K, 3 mm Ti on the sphere r 59.81, root from hub K's rim; 5-axis / tilting-head wire-EDM flank)",
+   "dK": 0.0,
+   "state": 0,
+   "built_deepest": [
+    "l1a|drive flank lug keep-out (link 1a: the conjugate",
+    6.87
+   ],
+   "model_deepest": [
+    "horn",
+    6.2
+   ],
+   "verdict": "build excess 0.67 mm",
+   "built_inside": {
+    "l1a|drive flank lug keep-out (link 1a: the conjugate": 6.87,
+    "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti:": 1.07,
+    "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.": 0.05
+   },
+   "model_inside": {
+    "crank": 1.0,
+    "horn": 6.2
+   }
+  }
+ ]
+}

@@ -1,0 +1,88 @@
+{
+ "id": "freek-oracle-route-knuckle-4r",
+ "wear": "bench",
+ "adapter": "tools/alignment_remeasure_freek_polish.py (wraps tools/alignment_remeasure_freek.py)",
+ "params": {
+  "q3max": 84.7705,
+  "smhi": 8.1472,
+  "smlo": 8.5843,
+  "a1max": 70.7149,
+  "bk1": 29.3309,
+  "bk2": 48.851,
+  "az2": 48.9176,
+  "el2": 41.3495,
+  "wd": 66.7214,
+  "wa": -13.7533,
+  "b3": 0.2933
+ },
+ "nominal_diff_nonpriced": {},
+ "static_gap": 15.4,
+ "refused": 6,
+ "refused_kit_contacts": 4,
+ "refused_kit_contact_depth_mm": 11.92,
+ "gap_refusals_as_contacts": 16.39,
+ "side_report": {
+  "gap": 16.39,
+  "reach": 0.7639,
+  "follow": 1.0,
+  "inband14": 0.9008,
+  "contact": 0.0278
+ },
+ "refused_rows": [
+  {
+   "i": 316,
+   "kind": "ws",
+   "plane": 60.0,
+   "elev": 150.0,
+   "axial": -105.0,
+   "taken_with_dowel": false,
+   "kit_min_mm": -2.41
+  },
+  {
+   "i": 343,
+   "kind": "ws",
+   "plane": 75.0,
+   "elev": 150.0,
+   "axial": -105.0,
+   "taken_with_dowel": false,
+   "kit_min_mm": -4.11
+  },
+  {
+   "i": 372,
+   "kind": "ws",
+   "plane": 90.0,
+   "elev": 165.0,
+   "axial": -90.0,
+   "taken_with_dowel": false,
+   "kit_min_mm": null
+  },
+  {
+   "i": 396,
+   "kind": "ws",
+   "plane": 105.0,
+   "elev": 135.0,
+   "axial": -90.0,
+   "taken_with_dowel": false,
+   "kit_min_mm": -1.26
+  },
+  {
+   "i": 399,
+   "kind": "ws",
+   "plane": 105.0,
+   "elev": 165.0,
+   "axial": -90.0,
+   "taken_with_dowel": false,
+   "kit_min_mm": null
+  },
+  {
+   "i": 423,
+   "kind": "ws",
+   "plane": 120.0,
+   "elev": 135.0,
+   "axial": -90.0,
+   "taken_with_dowel": false,
+   "kit_min_mm": -4.14
+  }
+ ],
+ "secs": 149.0
+}

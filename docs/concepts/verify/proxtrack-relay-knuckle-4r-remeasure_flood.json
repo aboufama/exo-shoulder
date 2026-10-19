@@ -1,0 +1,127 @@
+{
+ "env": 1432,
+ "feasible": 1189,
+ "measured": 1312,
+ "unmeasured_feasible": 107,
+ "edges": 3039,
+ "edge_closes": 3036,
+ "edge_branch": 0,
+ "edge_fail_strict": {
+  "dphi": 21,
+  "dpas": 0,
+  "dact10": 30,
+  "dact25": 18
+ },
+ "kin_family": {
+  "seeds": 513,
+  "connected": 1188,
+  "bench": {
+   "ws": 360,
+   "static_taken": 285,
+   "connected_taken": 285,
+   "dropped": 0,
+   "dropped_relayed": 0,
+   "dropped_phi0": 0,
+   "not_on_grid": 0,
+   "reach_connected": 0.7917,
+   "gap_plain_connected": 14.02,
+   "gap_gate_connected": 14.4
+  },
+  "held": {
+   "ws": 952,
+   "static_taken": 731,
+   "connected_taken": 731,
+   "dropped": 0,
+   "dropped_relayed": 0,
+   "dropped_phi0": 0,
+   "not_on_grid": 0,
+   "reach_connected": 0.7679,
+   "gap_plain_connected": 18.01,
+   "gap_gate_connected": 18.51
+  }
+ },
+ "kin_strict": {
+  "seeds": 513,
+  "connected": 1188,
+  "bench": {
+   "ws": 360,
+   "static_taken": 285,
+   "connected_taken": 285,
+   "dropped": 0,
+   "dropped_relayed": 0,
+   "dropped_phi0": 0,
+   "not_on_grid": 0,
+   "reach_connected": 0.7917,
+   "gap_plain_connected": 14.02,
+   "gap_gate_connected": 14.4
+  },
+  "held": {
+   "ws": 952,
+   "static_taken": 731,
+   "connected_taken": 731,
+   "dropped": 0,
+   "dropped_relayed": 0,
+   "dropped_phi0": 0,
+   "not_on_grid": 0,
+   "reach_connected": 0.7679,
+   "gap_plain_connected": 18.01,
+   "gap_gate_connected": 18.51
+  }
+ },
+ "contact_family": {
+  "seeds": 502,
+  "connected": 1123,
+  "bench": {
+   "ws": 360,
+   "static_taken": 285,
+   "connected_taken": 285,
+   "dropped": 0,
+   "dropped_relayed": 0,
+   "dropped_phi0": 0,
+   "not_on_grid": 0,
+   "reach_connected": 0.7917,
+   "gap_plain_connected": 14.02,
+   "gap_gate_connected": 14.4
+  },
+  "held": {
+   "ws": 952,
+   "static_taken": 731,
+   "connected_taken": 731,
+   "dropped": 0,
+   "dropped_relayed": 0,
+   "dropped_phi0": 0,
+   "not_on_grid": 0,
+   "reach_connected": 0.7679,
+   "gap_plain_connected": 18.01,
+   "gap_gate_connected": 18.51
+  }
+ },
+ "contact_strict": {
+  "seeds": 502,
+  "connected": 1123,
+  "bench": {
+   "ws": 360,
+   "static_taken": 285,
+   "connected_taken": 285,
+   "dropped": 0,
+   "dropped_relayed": 0,
+   "dropped_phi0": 0,
+   "not_on_grid": 0,
+   "reach_connected": 0.7917,
+   "gap_plain_connected": 14.02,
+   "gap_gate_connected": 14.4
+  },
+  "held": {
+   "ws": 952,
+   "static_taken": 731,
+   "connected_taken": 731,
+   "dropped": 0,
+   "dropped_relayed": 0,
+   "dropped_phi0": 0,
+   "not_on_grid": 0,
+   "reach_connected": 0.7679,
+   "gap_plain_connected": 18.01,
+   "gap_gate_connected": 18.51
+  }
+ }
+}

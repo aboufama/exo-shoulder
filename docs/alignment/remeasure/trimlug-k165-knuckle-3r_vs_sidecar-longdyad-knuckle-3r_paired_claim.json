@@ -1,0 +1,130 @@
+{
+ "A": "trimlug-k165-knuckle-3r",
+ "B": "sidecar-longdyad-knuckle-3r",
+ "note": "diff = gap A - gap B (negative: A better); paired bootstrap over poses within kind (tools/alignment_paired.compare_sets)",
+ "bench": {
+  "gap_A": 18.5,
+  "gap_B": 18.91,
+  "diff": -0.4,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": 0.13,
+   "contact": -0.53
+  },
+  "discordant": {
+   "ws_taken_A_only": 8,
+   "ws_taken_B_only": 8,
+   "contact_A_only": 1,
+   "contact_B_only": 3,
+   "contact_both": 1
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -2.74,
+    1.67
+   ],
+   "sd": 1.35,
+   "p_A_better": 0.64
+  },
+  "model_frozen": {
+   "A": 18.51,
+   "B": 18.91
+  },
+  "depth": {
+   "A": {
+    "n": 2,
+    "sum_mm": 13.19,
+    "max_mm": 9.01,
+    "gt3": 2
+   },
+   "B": {
+    "n": 4,
+    "sum_mm": 6.23,
+    "max_mm": 4.61,
+    "gt3": 1
+   }
+  },
+  "files": [
+   "trimlug-k165-knuckle-3r_bench_perpose.json",
+   "sidecar-longdyad-knuckle-3r_bench_perpose_claim.json"
+  ]
+ },
+ "held": {
+  "gap_A": 23.48,
+  "gap_B": 22.67,
+  "diff": 0.81,
+  "split": {
+   "reach": 0.74,
+   "follow": 0.0,
+   "inband": 0.07,
+   "contact": 0.01
+  },
+  "discordant": {
+   "ws_taken_A_only": 21,
+   "ws_taken_B_only": 28,
+   "contact_A_only": 3,
+   "contact_B_only": 3,
+   "contact_both": 7
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -0.68,
+    2.16
+   ],
+   "sd": 0.87,
+   "p_A_better": 0.188
+  },
+  "model_frozen": {
+   "A": 23.47,
+   "B": 22.67
+  },
+  "depth": {
+   "A": {
+    "n": 10,
+    "sum_mm": 40.58,
+    "max_mm": 9.05,
+    "gt3": 7
+   },
+   "B": {
+    "n": 10,
+    "sum_mm": 35.66,
+    "max_mm": 8.37,
+    "gt3": 5
+   }
+  },
+  "files": [
+   "trimlug-k165-knuckle-3r_held_perpose.json",
+   "sidecar-longdyad-knuckle-3r_held_perpose_claim.json"
+  ]
+ },
+ "pooled_bench_plus_held": {
+  "gap_A": 22.08,
+  "gap_B": 21.62,
+  "diff": 0.47,
+  "split": {
+   "reach": 0.53,
+   "follow": 0.0,
+   "inband": 0.09,
+   "contact": -0.15
+  },
+  "discordant": {
+   "ws_taken_A_only": 29,
+   "ws_taken_B_only": 36,
+   "contact_A_only": 4,
+   "contact_B_only": 6,
+   "contact_both": 8
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -0.77,
+    1.62
+   ],
+   "sd": 0.72,
+   "p_A_better": 0.273
+  }
+ }
+}

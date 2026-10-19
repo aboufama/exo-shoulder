@@ -1,0 +1,305 @@
+{
+ "id": "sidecar-longdyad-knuckle-3r",
+ "status": "verified",
+ "v_gap": 18.91,
+ "complexity": 25.5,
+ "verdict": "watch",
+ "reasons": [
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 10.3 (score 96.25) sits 8.61 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 22.67 vs bench 18.91 (+3.76; re-measured (this audit))",
+   "held_gap": 22.67,
+   "v_gap": 18.91,
+   "drop": 3.76,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 10.3 -> verified 18.91 (+8.61)",
+   "fast": 10.3,
+   "verified": 18.91,
+   "drop": 8.61
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 18.91, <1 mm 20.0, <2 mm 34.03, <3 mm 155.98, band read 3-14 mm 19.22, 15.12 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 15.12,
+   "plain": 18.91,
+   "n1": 20.0,
+   "n2": 34.03,
+   "n3": 155.98,
+   "band3": 19.22,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0007,
+    "2-3": 0.0031,
+    "3-4": 0.0117,
+    "4-6": 0.0777,
+    "6-10": 0.4411,
+    "10-14": 0.363,
+    ">14": 0.1027
+   },
+   "minmm": 0.278,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged) (frontload-lobe-stopb-knuckle-3r has no depth on file; compared with conecut-knee-knuckle-3r): v_gap 18.91: bench 4 contact poses, sum 6.23 mm, deepest 4.61 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 10 contact poses, sum 35.66 mm, deepest 8.37 mm at ['ws', 15.0, 150.0, -60.0], 5 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
+   "depths": {
+    "v_gap 18.91": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 6.23,
+      "max_mm": 4.61,
+      "n_deeper3": 1,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.91,
+      "src": "docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_bench_perpose_claim.json",
+      "cross_check": {
+       "files": 5,
+       "sums": [
+        6.23
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 10,
+      "sum_mm": 35.66,
+      "max_mm": 8.37,
+      "n_deeper3": 5,
+      "overhead140": 5,
+      "deepest": [
+       "ws",
+       15.0,
+       150.0,
+       -60.0
+      ],
+      "gap": 22.67,
+      "src": "docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_held_perpose_claim.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        35.66,
+        35.67
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs frontload-lobe-stopb-knuckle-3r: plain +3.91, 2 mm +10.05",
+   "ref": "frontload-lobe-stopb-knuckle-3r",
+   "gain_plain": 3.91,
+   "gain_2mm": 10.05
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 18.91, connected full 18.91, knn 21.72, bench 43.4 (docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json)",
+   "static": 18.91,
+   "connected_full": 18.91,
+   "connected_knn": 21.72,
+   "connected_bench": 43.4
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.232 deg (final_polish.min_th_margin; 2 readings)",
+   "min_margin": 5.232,
+   "where": "final_polish.min_th_margin"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 37.8 deg (docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:extra.dK_taken_max_deg); crank moves: smallest recorded span 31.6 deg (docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken); knee moves: smallest recorded span 56.08 deg (re-measured K.qb span)",
+   "spans": [
+    [
+     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     38.13
+    ],
+    [
+     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:extra.dK_taken_max_deg",
+     37.8
+    ],
+    [
+     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     38.13
+    ],
+    [
+     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
+     38.47
+    ],
+    [
+     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken",
+     31.6
+    ],
+    [
+     "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken",
+     31.6
+    ],
+    [
+     "re-measured dK span",
+     37.8
+    ],
+    [
+     "re-measured K.ang span",
+     57.44
+    ],
+    [
+     "re-measured K.qa span",
+     57.44
+    ],
+    [
+     "re-measured K.qb span",
+     56.08
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.897 vs part-weighted 0.923 (-2.63 points); thinly sampled parts: rod 13, L1a 12 (re-measured)",
+   "parts": {
+    "hub1": [
+     0.994,
+     8.0,
+     80
+    ],
+    "hubK": [
+     0.976,
+     7.6,
+     80
+    ],
+    "hub2": [
+     0.987,
+     10.2,
+     80
+    ],
+    "hub3": [
+     0.599,
+     13.0,
+     80
+    ],
+    "E": [
+     0.932,
+     7.3,
+     104
+    ],
+    "boss": [
+     0.985,
+     8.1,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.3,
+     32
+    ],
+    "knee": [
+     0.942,
+     10.4,
+     95
+    ],
+    "crank": [
+     0.91,
+     12.4,
+     57
+    ],
+    "horn": [
+     0.964,
+     7.2,
+     20
+    ],
+    "rod": [
+     0.893,
+     12.3,
+     13
+    ],
+    "rodends": [
+     0.962,
+     11.3,
+     32
+    ],
+    "L1a": [
+     0.982,
+     8.9,
+     12
+    ],
+    "L1b": [
+     0.969,
+     8.4,
+     36
+    ],
+    "L2": [
+     0.749,
+     11.6,
+     132
+    ]
+   }
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "no part sampled > 2x the kit's density"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 25.5 vs row 25.5; hand count (not derived from the model)",
+   "recomputed": 25.5,
+   "row": 25.5
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 10.3 (score 96.25) sits 8.61 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [
+  "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_bench_frozen.json",
+  "docs/concepts/verify/sidecar-longdyad-knuckle-3r_v_held_frozen.json"
+ ],
+ "git": "f892bc9",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T22:31:07Z"
+}

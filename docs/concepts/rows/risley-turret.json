@@ -1,0 +1,107 @@
+{
+ "id": "risley-turret",
+ "name": "Risley turret: J1 and J2 as two overlapping rings on top of the scapula",
+ "lens": "",
+ "family": "spherical 3R (ring J1)",
+ "active_dof": 3,
+ "passive_dof": 0,
+ "status": "refuted",
+ "t_ideated": null,
+ "t_screened": "2026-10-15T19:34:29Z",
+ "reach": 0.7312,
+ "follow": 0.9167,
+ "inband14": 0.5699,
+ "inband10": 0.3973,
+ "contact": 0.0995,
+ "gap": 63.17,
+ "v_reach": 0.6528,
+ "v_follow": 0.9182,
+ "v_inband14": 0.5243,
+ "v_inband10": 0.3705,
+ "v_gap": 74.66,
+ "n_configs": 66,
+ "verdict": "worth a GPU sweep as a SUBTYPE of the spherical 3R: a flat J1 ring bearing on the scapula top cap (93 % in band) + O20 hubs at J2/J3, honest gap 63.17 vs the champion's 68.93 (70.27 on the same kit checks); the spec's two-ring turret itself is dead (best 75.79, ring 2 floats 80-150 mm)",
+ "note": "best k 42: J2 as an O20 hub (j2hub=1), b bvec(90,75), W0 wdir(71.38,4.78), A1 45, A2 75, branch -1, margin 5, q 0.95; Bench(60,160) fast grid, kit march + dense K2 + K6, honest; J1 ring 15-24 x 8 mm 93 % in band (99.7 % at 12-18); two-ring spec version best 75.79 (k62, same axes), spec start 94.73",
+ "doc": "docs/concepts/risley-turret.md",
+ "limiter": "J2 travel: closure needs A1 >= 38-43 deg for ANY axis pair (sep spread half-width 32.6 deg at 95 % of poses), and a 40-45 deg circle around any b leaves the stable cap (best b keeps 33-39 % of it on skin <= 60 mm): J2 sits at 72 mm (q 0.95), 5.7 % in band; overhead 39 % taken (13/41 sep outside the band, 12/41 contact)",
+ "model_file": "docs/concepts/models/risley-turret.py",
+ "best_params": {
+  "az": 90.0,
+  "el": 75.0,
+  "wd": 71.38,
+  "wa": 4.78,
+  "a1": 45.0,
+  "a2": 75.0,
+  "sigma": -1,
+  "margin": 5.0,
+  "r_in": 15.0,
+  "r_out": 24.0,
+  "ring_h": 8.0,
+  "j2_gap": 1.0,
+  "width": 14.0,
+  "t_link": 3.0,
+  "lens_min": 60.0,
+  "q": 0.95,
+  "j2hub": 1
+ },
+ "inband_member": {
+  "ring1": 0.9333,
+  "ring2": 0.0566,
+  "hub3": 0.5439,
+  "link2": 0.4351,
+  "neck": 0.7922,
+  "bridge": 0.0
+ },
+ "mass_g": 114.9,
+ "honest": true,
+ "checks": {
+  "mode": "march",
+  "cont": true,
+  "collide": true,
+  "q": 0.95
+ },
+ "audit": [],
+ "hubless": [
+  "J1",
+  "L2",
+  "L1a",
+  "L1b"
+ ],
+ "verification": {
+  "bench": "Bench(110, 360) exact path (CB_EXACT=1, libigl), kit march + dense K2 + K6 with 1 mm radial part-part clearance",
+  "v_contact": 0.0919,
+  "v_closure": 0.7957,
+  "kit_k6_05mm_gap": 75.63,
+  "exact_60_160": {
+   "kit": 63.12,
+   "strict_1mm": 65.71
+  },
+  "fast_60_160": {
+   "kit": 63.17,
+   "strict_1mm": 63.74
+  },
+  "champion_same_checks_110_360": {
+   "baseline_conventions": 73.8,
+   "kit_strict_1mm": 75.94
+  },
+  "reason": "corrected gap 74.66 > 68.93: the screening axes were tuned on Bench(60,160); on the larger bench closure drops 0.87 -> 0.80 and reach 0.73 -> 0.65, J2 hub rises 72 -> 77 mm (1.5 % in band), link 2 in band 0.44 -> 0.30. No hard rule broken. On identical checks and bench it still edges the champion (74.66 vs 75.94)."
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 7,
+  "catalogue_parts": 5,
+  "notes": "counted at the best config (j2hub = 1: J2 an O20 hub, the spec's second ring dropped). bodies: L1 (J1 ring's upper race housing + bridge strap + J2 lower member), L2 (J2 upper member + 14 x 3 strap), arm-end (hub-3 plate + K7 neck). joints: J1 flat thin-section ring bearing about b (hubless, KAA15XL0 class), J2, J3 O20 hubs. custom: ring base housing, upper race housing, bridge, link 2, neck, 2 hub shafts (est.); catalogue: 1 thin-section ring bearing + 2 x MR117 pair (est.).",
+  "source": "docs/concepts/models/risley-turret.py:1-33 (topology, parts), 54-56 (j2hub)",
+  "confidence": "counted"
+ }
+}

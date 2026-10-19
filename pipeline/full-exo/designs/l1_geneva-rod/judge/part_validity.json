@@ -1,0 +1,471 @@
+{
+ "parts": [
+  {
+   "file": "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
+   "valid": true,
+   "solids": 1,
+   "faces": 7954,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 15.223,
+   "bbox_mm": [
+    86.8,
+    81.7,
+    45.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue) + cut square to the arm 11.8 mm distal of pin b, clear of the knee sweep",
+   "valid": true,
+   "solids": 1,
+   "faces": 4096,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 21.08,
+   "bbox_mm": [
+    42.4,
+    237.8,
+    29.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|pad mount to BOTTOM (proxy) (2.18 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)",
+   "valid": true,
+   "solids": 1,
+   "faces": 44,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.994,
+   "bbox_mm": [
+    25.6,
+    26.7,
+    12.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|pin b retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip land + pin end, over the 0.5 mm GTM washer on the knee link)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.045,
+   "bbox_mm": [
+    8.0,
+    8.0,
+    2.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|pin a retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip land + pin end, over the 0.5 mm GTM washer on the knee link)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.045,
+   "bbox_mm": [
+    8.0,
+    8.0,
+    2.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee stop web keep-out (knee link level, 2.18 mm, joins the tooth to the knee link's back edge)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.057,
+   "bbox_mm": [
+    7.2,
+    9.4,
+    3.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee stop tooth keep-out (2.4 x 2 mm, hangs 4.18 mm from the knee link top behind pin a; its face meets the E strap's side at knee angle 152.15 deg)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.02,
+   "bbox_mm": [
+    3.4,
+    4.0,
+    4.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|arm pad = pin b lower plate (O12 x 2.18 mm, tr..tr+tp, arm-fixed on the cuff)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.246,
+   "bbox_mm": [
+    12.2,
+    12.1,
+    5.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee link keep-out (flat Ti bar 37.8 x 10 x 2.18 mm, pins a, b 6 mm from its ends, tr+tp+0.5)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.823,
+   "bbox_mm": [
+    38.4,
+    24.5,
+    11.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|E boss = pin a lower plate (O12 x 2.18 mm, tr..tr+tp, member 3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.246,
+   "bbox_mm": [
+    12.1,
+    12.2,
+    5.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to 2.18 at the boss, top capped at the boss top tr+tp under the knee's reach)",
+   "valid": true,
+   "solids": 1,
+   "faces": 524,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.315,
+   "bbox_mm": [
+    10.2,
+    56.3,
+    10.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|drive horn plate keep-out (O13.0 x 1.5 mm on hub K's cap top, F+18.25..F+19.75; clamped on link 1a's K axle through the bearing bore and the spring arbor; carries the horn pin)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.198,
+   "bbox_mm": [
+    12.6,
+    6.3,
+    13.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|drive pushrod keep-out (O3 x 33.0 mm steel rod, head mid to head mid)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.233,
+   "bbox_mm": [
+    12.8,
+    12.4,
+    31.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|drive rod-end head at the horn (M3 rod end, O10 x 5 keep-out, on the horn pin r 2.49 mm off K's axis)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.392,
+   "bbox_mm": [
+    11.1,
+    8.4,
+    10.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|drive rod-end head at the rocker (M3 rod end, O10 x 5 keep-out)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.392,
+   "bbox_mm": [
+    11.2,
+    10.0,
+    11.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|drive rocker post keep-out (O10 x 19.0 mm on link 1b beside hub 2, base at 60.8 mm from GH; the verifier's post height: the straight rod clears hub K's cap by 1 mm)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.49,
+   "bbox_mm": [
+    17.6,
+    21.2,
+    16.6
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|drive lobe keep-out (constant-pressure spiral on hub 2's rotor rim, link 2: r 9 -> 11.32 mm over 16.8 deg of q2, 3 mm band F+4.15..F+7.15; past the O20 skirt by 1.32 mm at stop B)",
+   "valid": true,
+   "solids": 1,
+   "faces": 476,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.024,
+   "bbox_mm": [
+    4.6,
+    4.3,
+    5.6
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|J3 lower plate keep-out (O20 x 3, member 3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.2,
+    20.1,
+    8.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    20.8,
+    21.6,
+    13.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 908,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.739,
+   "bbox_mm": [
+    24.9,
+    72.2,
+    39.4
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2; the rotor that carries the drive lobe)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    21.9,
+    21.2,
+    21.4
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.04,
+   "bbox_mm": [
+    5.3,
+    5.9,
+    5.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 115.2 deg of travel + the dowel; its ends = the stops)",
+   "valid": true,
+   "solids": 1,
+   "faces": 8580,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.769,
+   "bbox_mm": [
+    19.0,
+    17.2,
+    17.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)",
+   "valid": true,
+   "solids": 1,
+   "faces": 260,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.504,
+   "bbox_mm": [
+    13.1,
+    16.0,
+    22.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|K upper boss + clock-spring cap keep-out (O20, F+3.15..F+18.25: cap 6 mm taller - 0.3 x 5 mm 1.4310 +C1900 strip, outer end on this cap, inner end on link 1a's K axle; holds K on stop A below the drive's onset; K SLAVED to q2 by the lobe-rod drive, never read)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 4.736,
+   "bbox_mm": [
+    24.2,
+    21.5,
+    20.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.04,
+   "bbox_mm": [
+    4.9,
+    6.4,
+    3.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.04,
+   "bbox_mm": [
+    4.9,
+    6.4,
+    3.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|K lower plate keep-out (O20 x 3, link 1a) with the K stop slots (an opposed pair) (r 7.75 mm, 3.1 wide, 53.6 deg of travel + the dowel; its ends = the stops)",
+   "valid": true,
+   "solids": 1,
+   "faces": 8544,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.751,
+   "bbox_mm": [
+    19.7,
+    10.3,
+    20.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|link 1a strap keep-out (8 x 3 mm Ti, fitted underside, J1 -> K)",
+   "valid": true,
+   "solids": 1,
+   "faces": 140,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.274,
+   "bbox_mm": [
+    15.6,
+    13.5,
+    12.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|J1 lower plate keep-out (O20 x 3, link 1a)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.1,
+    10.5,
+    19.6
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member, carried directly by the scapula handler at the hub ring)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    20.2,
+    16.1,
+    22.0
+   ],
+   "level": "L1 mesh"
+  }
+ ],
+ "level": "L1",
+ "all_ok": true
+}

@@ -1,0 +1,4298 @@
+{
+"fit_fast": {
+"gap": 29.32,
+"reach": 0.725,
+"follow": 0.9667,
+"inband14": 0.7987,
+"contact": 0.0169
+},
+"honest_fit": true,
+"audit": [],
+"frozen": {
+"gap": 35.38,
+"reach": 0.6694,
+"follow": 0.9818,
+"inband14": 0.7965,
+"inband10": 0.5333,
+"contact": 0.0197
+},
+"why": {
+"fold": 100,
+"flip": 0,
+"parts": 12,
+"contact": 7
+},
+"gap_near1": 35.25,
+"gap_near2": 56.81,
+"min_metal_mm": -16.106,
+"depth_mm_max": 16.106,
+"overhead": "8/28",
+"inband_member": {
+"hub1": 1.0,
+"hubK": 0.9129,
+"hub2": 0.9872,
+"hub3": 0.8795,
+"link1a": 0.9611,
+"link1b": 0.9443,
+"link2": 0.3645,
+"neck": 0.8029
+},
+"mass_g": 125.8,
+"info": null,
+"which": "bench",
+"mode": "exact",
+"poses": [
+{
+"i": 0,
+"kind": "clip",
+"plane": 30.0,
+"elev": 3.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 2.597
+},
+{
+"i": 1,
+"kind": "clip",
+"plane": 30.0,
+"elev": 4.885390758514404,
+"axial": -30.38477325439453,
+"taken": true,
+"min_mm": 2.532
+},
+{
+"i": 2,
+"kind": "clip",
+"plane": 30.0,
+"elev": 21.349760055541992,
+"axial": -33.744850158691406,
+"taken": true,
+"min_mm": 4.135
+},
+{
+"i": 3,
+"kind": "clip",
+"plane": 30.0,
+"elev": 45.80817413330078,
+"axial": -38.73636245727539,
+"taken": true,
+"min_mm": 2.857
+},
+{
+"i": 4,
+"kind": "clip",
+"plane": 30.0,
+"elev": 76.5,
+"axial": -45.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 5,
+"kind": "clip",
+"plane": 30.0,
+"elev": 107.19182586669922,
+"axial": -51.26363754272461,
+"taken": true,
+"min_mm": 2.936
+},
+{
+"i": 6,
+"kind": "clip",
+"plane": 30.0,
+"elev": 137.6106719970703,
+"axial": -57.47156524658203,
+"taken": true,
+"min_mm": 2.248
+},
+{
+"i": 7,
+"kind": "clip",
+"plane": 30.0,
+"elev": 148.11460876464844,
+"axial": -59.61522674560547,
+"taken": true,
+"min_mm": 2.075
+},
+{
+"i": 8,
+"kind": "clip",
+"plane": 30.0,
+"elev": 150.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 1.949
+},
+{
+"i": 9,
+"kind": "clip",
+"plane": 30.0,
+"elev": 150.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 1.949
+},
+{
+"i": 10,
+"kind": "clip",
+"plane": 30.0,
+"elev": 150.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 1.949
+},
+{
+"i": 11,
+"kind": "clip",
+"plane": 30.0,
+"elev": 149.40573120117188,
+"axial": -59.878719329833984,
+"taken": true,
+"min_mm": 1.992
+},
+{
+"i": 12,
+"kind": "clip",
+"plane": 30.0,
+"elev": 142.3291778564453,
+"axial": -58.43452453613281,
+"taken": true,
+"min_mm": 2.166
+},
+{
+"i": 13,
+"kind": "clip",
+"plane": 30.0,
+"elev": 124.50949096679688,
+"axial": -54.797855377197266,
+"taken": true,
+"min_mm": 2.514
+},
+{
+"i": 14,
+"kind": "clip",
+"plane": 30.0,
+"elev": 87.05921936035156,
+"axial": -47.15494155883789,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 15,
+"kind": "clip",
+"plane": 30.0,
+"elev": 55.6302490234375,
+"axial": -40.740867614746094,
+"taken": true,
+"min_mm": 1.652
+},
+{
+"i": 16,
+"kind": "clip",
+"plane": 30.0,
+"elev": 28.490510940551758,
+"axial": -35.202144622802734,
+"taken": true,
+"min_mm": 4.67
+},
+{
+"i": 17,
+"kind": "clip",
+"plane": 30.0,
+"elev": 10.670828819274902,
+"axial": -31.565475463867188,
+"taken": true,
+"min_mm": 2.56
+},
+{
+"i": 18,
+"kind": "clip",
+"plane": 30.0,
+"elev": 3.078885793685913,
+"axial": -30.01609992980957,
+"taken": true,
+"min_mm": 2.592
+},
+{
+"i": 19,
+"kind": "clip",
+"plane": 40.11091232299805,
+"elev": 4.089838981628418,
+"axial": -40.043922424316406,
+"taken": true,
+"min_mm": 2.564
+},
+{
+"i": 20,
+"kind": "clip",
+"plane": 45.17578125,
+"elev": 8.1923828125,
+"axial": -42.04961013793945,
+"taken": true,
+"min_mm": 2.527
+},
+{
+"i": 21,
+"kind": "clip",
+"plane": 59.20137405395508,
+"elev": 19.553112030029297,
+"axial": -47.60374450683594,
+"taken": true,
+"min_mm": 2.511
+},
+{
+"i": 22,
+"kind": "clip",
+"plane": 80.99969482421875,
+"elev": 37.209754943847656,
+"axial": -56.23588180541992,
+"taken": true,
+"min_mm": 3.427
+},
+{
+"i": 23,
+"kind": "clip",
+"plane": 89.1973876953125,
+"elev": 43.849884033203125,
+"axial": -59.4821662902832,
+"taken": true,
+"min_mm": 4.293
+},
+{
+"i": 24,
+"kind": "clip",
+"plane": 90.08026123046875,
+"elev": 44.888465881347656,
+"axial": -59.613792419433594,
+"taken": true,
+"min_mm": 4.418
+},
+{
+"i": 25,
+"kind": "clip",
+"plane": 92.5,
+"elev": 56.599998474121094,
+"axial": -54.0,
+"taken": true,
+"min_mm": 4.514
+},
+{
+"i": 26,
+"kind": "clip",
+"plane": 95.0,
+"elev": 68.69999694824219,
+"axial": -48.20000076293945,
+"taken": true,
+"min_mm": 4.214
+},
+{
+"i": 27,
+"kind": "clip",
+"plane": 95.0,
+"elev": 68.69999694824219,
+"axial": -48.20000076293945,
+"taken": true,
+"min_mm": 4.214
+},
+{
+"i": 28,
+"kind": "clip",
+"plane": 95.0,
+"elev": 68.69999694824219,
+"axial": -48.20000076293945,
+"taken": true,
+"min_mm": 4.214
+},
+{
+"i": 29,
+"kind": "clip",
+"plane": 95.0,
+"elev": 68.69999694824219,
+"axial": -48.20000076293945,
+"taken": true,
+"min_mm": 4.214
+},
+{
+"i": 30,
+"kind": "clip",
+"plane": 94.94233703613281,
+"elev": 68.42090606689453,
+"axial": -48.33378219604492,
+"taken": true,
+"min_mm": 4.226
+},
+{
+"i": 31,
+"kind": "clip",
+"plane": 93.01656341552734,
+"elev": 59.100162506103516,
+"axial": -52.80157470703125,
+"taken": true,
+"min_mm": 4.485
+},
+{
+"i": 32,
+"kind": "clip",
+"plane": 90.3820571899414,
+"elev": 46.34914779663086,
+"axial": -58.913631439208984,
+"taken": true,
+"min_mm": 4.45
+},
+{
+"i": 33,
+"kind": "clip",
+"plane": 89.83674621582031,
+"elev": 44.367767333984375,
+"axial": -59.7353515625,
+"taken": true,
+"min_mm": 4.384
+},
+{
+"i": 34,
+"kind": "clip",
+"plane": 77.68184661865234,
+"elev": 34.52229309082031,
+"axial": -54.9220085144043,
+"taken": true,
+"min_mm": 3.195
+},
+{
+"i": 35,
+"kind": "clip",
+"plane": 58.39412307739258,
+"elev": 18.89923858642578,
+"axial": -47.28407287597656,
+"taken": true,
+"min_mm": 2.509
+},
+{
+"i": 36,
+"kind": "clip",
+"plane": 43.4739990234375,
+"elev": 6.813939094543457,
+"axial": -41.375701904296875,
+"taken": true,
+"min_mm": 2.537
+},
+{
+"i": 37,
+"kind": "clip",
+"plane": 30.0,
+"elev": 4.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 2.546
+},
+{
+"i": 38,
+"kind": "clip",
+"plane": 30.983179092407227,
+"elev": 7.712654113769531,
+"axial": -31.0222225189209,
+"taken": true,
+"min_mm": 2.515
+},
+{
+"i": 39,
+"kind": "clip",
+"plane": 35.81357955932617,
+"elev": 25.953086853027344,
+"axial": -36.0444450378418,
+"taken": true,
+"min_mm": 3.792
+},
+{
+"i": 40,
+"kind": "clip",
+"plane": 43.849998474121094,
+"elev": 56.29999923706055,
+"axial": -44.400001525878906,
+"taken": true,
+"min_mm": 3.983
+},
+{
+"i": 41,
+"kind": "clip",
+"plane": 53.96184539794922,
+"elev": 94.48407745361328,
+"axial": -54.91339874267578,
+"taken": true,
+"min_mm": 3.538
+},
+{
+"i": 42,
+"kind": "clip",
+"plane": 57.38054275512695,
+"elev": 107.39366912841797,
+"axial": -58.467857360839844,
+"taken": true,
+"min_mm": 3.85
+},
+{
+"i": 43,
+"kind": "clip",
+"plane": 57.75535583496094,
+"elev": 108.8756332397461,
+"axial": -58.813838958740234,
+"taken": true,
+"min_mm": 3.718
+},
+{
+"i": 44,
+"kind": "clip",
+"plane": 59.60409927368164,
+"elev": 118.0808334350586,
+"axial": -59.276023864746094,
+"taken": true,
+"min_mm": 3.026
+},
+{
+"i": 45,
+"kind": "clip",
+"plane": 62.44464111328125,
+"elev": 132.224365234375,
+"axial": -59.98616027832031,
+"taken": true,
+"min_mm": 2.276
+},
+{
+"i": 46,
+"kind": "clip",
+"plane": 64.1148452758789,
+"elev": 133.59725952148438,
+"axial": -60.734962463378906,
+"taken": true,
+"min_mm": 1.934
+},
+{
+"i": 47,
+"kind": "clip",
+"plane": 73.8067626953125,
+"elev": 140.18280029296875,
+"axial": -65.14602661132812,
+"taken": true,
+"min_mm": 1.213
+},
+{
+"i": 48,
+"kind": "clip",
+"plane": 78.0999984741211,
+"elev": 143.10000610351562,
+"axial": -67.0999984741211,
+"taken": true,
+"min_mm": 1.254
+},
+{
+"i": 49,
+"kind": "clip",
+"plane": 70.30000305175781,
+"elev": 137.8000030517578,
+"axial": -63.54999923706055,
+"taken": true,
+"min_mm": 1.289
+},
+{
+"i": 50,
+"kind": "clip",
+"plane": 62.75041580200195,
+"elev": 132.67015075683594,
+"axial": -60.11397171020508,
+"taken": true,
+"min_mm": 2.209
+},
+{
+"i": 51,
+"kind": "clip",
+"plane": 64.1148452758789,
+"elev": 133.59725952148438,
+"axial": -60.734962463378906,
+"taken": true,
+"min_mm": 1.934
+},
+{
+"i": 52,
+"kind": "clip",
+"plane": 73.8067626953125,
+"elev": 140.18280029296875,
+"axial": -65.14602661132812,
+"taken": true,
+"min_mm": 1.213
+},
+{
+"i": 53,
+"kind": "clip",
+"plane": 77.99330139160156,
+"elev": 142.79144287109375,
+"axial": -67.0177001953125,
+"taken": true,
+"min_mm": 1.235
+},
+{
+"i": 54,
+"kind": "clip",
+"plane": 73.12089538574219,
+"elev": 128.7009735107422,
+"axial": -63.25957107543945,
+"taken": true,
+"min_mm": 1.394
+},
+{
+"i": 55,
+"kind": "clip",
+"plane": 59.62827682495117,
+"elev": 89.68177795410156,
+"axial": -52.85258102416992,
+"taken": true,
+"min_mm": 4.107
+},
+{
+"i": 56,
+"kind": "clip",
+"plane": 43.23748016357422,
+"elev": 42.28136444091797,
+"axial": -40.21019744873047,
+"taken": true,
+"min_mm": 4.512
+},
+{
+"i": 57,
+"kind": "clip",
+"plane": 30.772113800048828,
+"elev": 6.232867240905762,
+"axial": -30.595539093017578,
+"taken": true,
+"min_mm": 2.522
+},
+{
+"i": 58,
+"kind": "clip",
+"plane": 60.0,
+"elev": 4.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 2.629
+},
+{
+"i": 59,
+"kind": "clip",
+"plane": 60.709877014160156,
+"elev": 7.939815044403076,
+"axial": -60.709877014160156,
+"taken": true,
+"min_mm": 2.531
+},
+{
+"i": 60,
+"kind": "clip",
+"plane": 64.1975326538086,
+"elev": 27.296297073364258,
+"axial": -64.1975326538086,
+"taken": true,
+"min_mm": 2.478
+},
+{
+"i": 61,
+"kind": "clip",
+"plane": 72.06625366210938,
+"elev": 70.96768951416016,
+"axial": -72.06625366210938,
+"taken": true,
+"min_mm": 1.999
+},
+{
+"i": 62,
+"kind": "clip",
+"plane": 77.30097198486328,
+"elev": 100.0203857421875,
+"axial": -77.30097198486328,
+"taken": true,
+"min_mm": 2.19
+},
+{
+"i": 63,
+"kind": "clip",
+"plane": 79.76934051513672,
+"elev": 113.71985626220703,
+"axial": -79.76934051513672,
+"taken": true,
+"min_mm": 2.038
+},
+{
+"i": 64,
+"kind": "clip",
+"plane": 80.0465316772461,
+"elev": 115.39549255371094,
+"axial": -80.0465316772461,
+"taken": true,
+"min_mm": 2.003
+},
+{
+"i": 65,
+"kind": "clip",
+"plane": 81.7105941772461,
+"elev": 129.54006958007812,
+"axial": -81.7105941772461,
+"taken": true,
+"min_mm": 1.098
+},
+{
+"i": 66,
+"kind": "clip",
+"plane": 82.0,
+"elev": 132.0,
+"axial": -82.0,
+"taken": true,
+"min_mm": 0.742
+},
+{
+"i": 67,
+"kind": "clip",
+"plane": 82.0,
+"elev": 132.0,
+"axial": -82.0,
+"taken": true,
+"min_mm": 0.742
+},
+{
+"i": 68,
+"kind": "clip",
+"plane": 82.0,
+"elev": 132.0,
+"axial": -82.0,
+"taken": true,
+"min_mm": 0.742
+},
+{
+"i": 69,
+"kind": "clip",
+"plane": 81.74627685546875,
+"elev": 130.5238037109375,
+"axial": -81.74627685546875,
+"taken": true,
+"min_mm": 0.969
+},
+{
+"i": 70,
+"kind": "clip",
+"plane": 79.03106689453125,
+"elev": 114.72621154785156,
+"axial": -79.03106689453125,
+"taken": true,
+"min_mm": 1.967
+},
+{
+"i": 71,
+"kind": "clip",
+"plane": 73.27287292480469,
+"elev": 81.2239990234375,
+"axial": -73.27287292480469,
+"taken": true,
+"min_mm": 1.965
+},
+{
+"i": 72,
+"kind": "clip",
+"plane": 66.56532287597656,
+"elev": 42.1982421875,
+"axial": -66.56532287597656,
+"taken": true,
+"min_mm": 2.387
+},
+{
+"i": 73,
+"kind": "clip",
+"plane": 60.78086471557617,
+"elev": 8.54321002960205,
+"axial": -60.78086471557617,
+"taken": true,
+"min_mm": 2.526
+},
+{
+"i": 74,
+"kind": "clip",
+"plane": 60.0,
+"elev": 4.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 2.629
+},
+{
+"i": 75,
+"kind": "clip",
+"plane": 31.065629959106445,
+"elev": 4.307925701141357,
+"axial": -30.5720272064209,
+"taken": true,
+"min_mm": 2.552
+},
+{
+"i": 76,
+"kind": "clip",
+"plane": 49.39259338378906,
+"elev": 9.603703498840332,
+"axial": -40.40987777709961,
+"taken": true,
+"min_mm": 2.829
+},
+{
+"i": 77,
+"kind": "clip",
+"plane": 76.19999694824219,
+"elev": 17.350000381469727,
+"axial": -54.79999923706055,
+"taken": true,
+"min_mm": 3.799
+},
+{
+"i": 78,
+"kind": "clip",
+"plane": 103.00740814208984,
+"elev": 25.096296310424805,
+"axial": -69.19012451171875,
+"taken": true,
+"min_mm": 4.896
+},
+{
+"i": 79,
+"kind": "clip",
+"plane": 119.12036895751953,
+"elev": 29.752315521240234,
+"axial": -77.83950805664062,
+"taken": true,
+"min_mm": 5.04
+},
+{
+"i": 80,
+"kind": "clip",
+"plane": 122.66064453125,
+"elev": 30.877605438232422,
+"axial": -79.48236846923828,
+"taken": true,
+"min_mm": 5.06
+},
+{
+"i": 81,
+"kind": "clip",
+"plane": 131.36514282226562,
+"elev": 36.80898666381836,
+"axial": -75.55378723144531,
+"taken": true,
+"min_mm": 5.073
+},
+{
+"i": 82,
+"kind": "clip",
+"plane": 143.27310180664062,
+"elev": 44.92326736450195,
+"axial": -70.17938995361328,
+"taken": true,
+"min_mm": 5.086
+},
+{
+"i": 83,
+"kind": "clip",
+"plane": 144.88368225097656,
+"elev": 46.414066314697266,
+"axial": -68.95565795898438,
+"taken": true,
+"min_mm": 5.084
+},
+{
+"i": 84,
+"kind": "clip",
+"plane": 140.7235107421875,
+"elev": 57.64652633666992,
+"axial": -53.06380081176758,
+"taken": true,
+"min_mm": 4.931
+},
+{
+"i": 85,
+"kind": "clip",
+"plane": 140.11631774902344,
+"elev": 59.28593444824219,
+"axial": -50.74434280395508,
+"taken": true,
+"min_mm": 4.903
+},
+{
+"i": 86,
+"kind": "clip",
+"plane": 143.16058349609375,
+"elev": 51.06641387939453,
+"axial": -62.37344741821289,
+"taken": true,
+"min_mm": 5.029
+},
+{
+"i": 87,
+"kind": "clip",
+"plane": 145.0,
+"elev": 46.099998474121094,
+"axial": -69.4000015258789,
+"taken": true,
+"min_mm": 5.087
+},
+{
+"i": 88,
+"kind": "clip",
+"plane": 141.83941650390625,
+"elev": 54.63358688354492,
+"axial": -57.32655334472656,
+"taken": true,
+"min_mm": 4.979
+},
+{
+"i": 89,
+"kind": "clip",
+"plane": 140.0,
+"elev": 59.599998474121094,
+"axial": -50.29999923706055,
+"taken": true,
+"min_mm": 4.898
+},
+{
+"i": 90,
+"kind": "clip",
+"plane": 134.63540649414062,
+"elev": 56.88844299316406,
+"axial": -49.30998992919922,
+"taken": true,
+"min_mm": 4.871
+},
+{
+"i": 91,
+"kind": "clip",
+"plane": 109.7271728515625,
+"elev": 44.2984619140625,
+"axial": -44.713287353515625,
+"taken": true,
+"min_mm": 4.764
+},
+{
+"i": 92,
+"kind": "clip",
+"plane": 60.2728271484375,
+"elev": 19.301538467407227,
+"axial": -35.58671188354492,
+"taken": true,
+"min_mm": 3.588
+},
+{
+"i": 93,
+"kind": "clip",
+"plane": 35.36458969116211,
+"elev": 6.711556434631348,
+"axial": -30.99001121520996,
+"taken": true,
+"min_mm": 2.617
+},
+{
+"i": 94,
+"kind": "clip",
+"plane": 30.0,
+"elev": 4.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 2.546
+},
+{
+"i": 95,
+"kind": "clip",
+"plane": -1.1220519542694092,
+"elev": 4.579485893249512,
+"axial": 1.3387572765350342,
+"taken": true,
+"min_mm": 2.534
+},
+{
+"i": 96,
+"kind": "clip",
+"plane": -19.23700523376465,
+"elev": 13.934991836547852,
+"axial": 22.952306747436523,
+"taken": true,
+"min_mm": 2.49
+},
+{
+"i": 97,
+"kind": "clip",
+"plane": -43.056480407714844,
+"elev": 26.236608505249023,
+"axial": 51.372108459472656,
+"taken": true,
+"min_mm": 2.897
+},
+{
+"i": 98,
+"kind": "clip",
+"plane": -62.66425704956055,
+"elev": 36.36308670043945,
+"axial": 74.76679992675781,
+"taken": true,
+"min_mm": 3.052
+},
+{
+"i": 99,
+"kind": "clip",
+"plane": -69.74494171142578,
+"elev": 40.019920349121094,
+"axial": 83.21499633789062,
+"taken": true,
+"min_mm": 2.472
+},
+{
+"i": 100,
+"kind": "clip",
+"plane": -72.67959594726562,
+"elev": 39.797271728515625,
+"axial": 88.27117156982422,
+"taken": true,
+"min_mm": 2.374
+},
+{
+"i": 101,
+"kind": "clip",
+"plane": -78.9544906616211,
+"elev": 39.113868713378906,
+"axial": 99.26777648925781,
+"taken": true,
+"min_mm": 2.399
+},
+{
+"i": 102,
+"kind": "clip",
+"plane": -80.0,
+"elev": 39.0,
+"axial": 101.0999984741211,
+"taken": true,
+"min_mm": 2.393
+},
+{
+"i": 103,
+"kind": "clip",
+"plane": -80.0,
+"elev": 39.0,
+"axial": 101.0999984741211,
+"taken": true,
+"min_mm": 2.393
+},
+{
+"i": 104,
+"kind": "clip",
+"plane": -80.0,
+"elev": 39.0,
+"axial": 101.0999984741211,
+"taken": true,
+"min_mm": 2.393
+},
+{
+"i": 105,
+"kind": "clip",
+"plane": -78.46273803710938,
+"elev": 38.32744598388672,
+"axial": 99.15727996826172,
+"taken": true,
+"min_mm": 2.467
+},
+{
+"i": 106,
+"kind": "clip",
+"plane": -63.209877014160156,
+"elev": 31.654321670532227,
+"axial": 79.88148498535156,
+"taken": true,
+"min_mm": 3.401
+},
+{
+"i": 107,
+"kind": "clip",
+"plane": -35.014793395996094,
+"elev": 19.318973541259766,
+"axial": 44.24994659423828,
+"taken": true,
+"min_mm": 2.732
+},
+{
+"i": 108,
+"kind": "clip",
+"plane": -4.633600234985352,
+"elev": 6.027200222015381,
+"axial": 5.855711936950684,
+"taken": true,
+"min_mm": 2.523
+},
+{
+"i": 109,
+"kind": "clip",
+"plane": 0.0,
+"elev": 4.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 2.54
+},
+{
+"i": 110,
+"kind": "ws",
+"plane": -90.0,
+"elev": 0.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 2.666
+},
+{
+"i": 111,
+"kind": "ws",
+"plane": -90.0,
+"elev": 0.0,
+"axial": 135.0,
+"taken": true,
+"min_mm": 4.998
+},
+{
+"i": 112,
+"kind": "ws",
+"plane": -90.0,
+"elev": 15.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 3.121
+},
+{
+"i": 113,
+"kind": "ws",
+"plane": -90.0,
+"elev": 15.0,
+"axial": 135.0,
+"taken": true,
+"min_mm": 5.079
+},
+{
+"i": 114,
+"kind": "ws",
+"plane": -90.0,
+"elev": 30.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 2.588
+},
+{
+"i": 115,
+"kind": "ws",
+"plane": -90.0,
+"elev": 30.0,
+"axial": 135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 116,
+"kind": "ws",
+"plane": -90.0,
+"elev": 45.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 2.264
+},
+{
+"i": 117,
+"kind": "ws",
+"plane": -90.0,
+"elev": 45.0,
+"axial": 135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 118,
+"kind": "ws",
+"plane": -90.0,
+"elev": 60.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 2.32
+},
+{
+"i": 119,
+"kind": "ws",
+"plane": -90.0,
+"elev": 60.0,
+"axial": 135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 120,
+"kind": "ws",
+"plane": -75.0,
+"elev": 0.0,
+"axial": 60.0,
+"taken": true,
+"min_mm": 2.666
+},
+{
+"i": 121,
+"kind": "ws",
+"plane": -75.0,
+"elev": 0.0,
+"axial": 120.0,
+"taken": true,
+"min_mm": 4.998
+},
+{
+"i": 122,
+"kind": "ws",
+"plane": -75.0,
+"elev": 15.0,
+"axial": 60.0,
+"taken": true,
+"min_mm": 3.632
+},
+{
+"i": 123,
+"kind": "ws",
+"plane": -75.0,
+"elev": 15.0,
+"axial": 120.0,
+"taken": true,
+"min_mm": 5.051
+},
+{
+"i": 124,
+"kind": "ws",
+"plane": -75.0,
+"elev": 30.0,
+"axial": 60.0,
+"taken": true,
+"min_mm": 3.267
+},
+{
+"i": 125,
+"kind": "ws",
+"plane": -75.0,
+"elev": 30.0,
+"axial": 120.0,
+"taken": true,
+"min_mm": 3.749
+},
+{
+"i": 126,
+"kind": "ws",
+"plane": -75.0,
+"elev": 45.0,
+"axial": 60.0,
+"taken": true,
+"min_mm": 2.266
+},
+{
+"i": 127,
+"kind": "ws",
+"plane": -75.0,
+"elev": 45.0,
+"axial": 120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 128,
+"kind": "ws",
+"plane": -75.0,
+"elev": 60.0,
+"axial": 60.0,
+"taken": true,
+"min_mm": 2.939
+},
+{
+"i": 129,
+"kind": "ws",
+"plane": -75.0,
+"elev": 60.0,
+"axial": 120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 130,
+"kind": "ws",
+"plane": -60.0,
+"elev": 0.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 2.666
+},
+{
+"i": 131,
+"kind": "ws",
+"plane": -60.0,
+"elev": 0.0,
+"axial": 105.0,
+"taken": true,
+"min_mm": 4.998
+},
+{
+"i": 132,
+"kind": "ws",
+"plane": -60.0,
+"elev": 15.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 4.043
+},
+{
+"i": 133,
+"kind": "ws",
+"plane": -60.0,
+"elev": 15.0,
+"axial": 105.0,
+"taken": true,
+"min_mm": 4.992
+},
+{
+"i": 134,
+"kind": "ws",
+"plane": -60.0,
+"elev": 30.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 4.116
+},
+{
+"i": 135,
+"kind": "ws",
+"plane": -60.0,
+"elev": 30.0,
+"axial": 105.0,
+"taken": true,
+"min_mm": 3.932
+},
+{
+"i": 136,
+"kind": "ws",
+"plane": -60.0,
+"elev": 45.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 2.424
+},
+{
+"i": 137,
+"kind": "ws",
+"plane": -60.0,
+"elev": 45.0,
+"axial": 105.0,
+"taken": true,
+"min_mm": 1.941
+},
+{
+"i": 138,
+"kind": "ws",
+"plane": -60.0,
+"elev": 60.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 2.916
+},
+{
+"i": 139,
+"kind": "ws",
+"plane": -60.0,
+"elev": 60.0,
+"axial": 105.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 140,
+"kind": "ws",
+"plane": -45.0,
+"elev": 0.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 2.666
+},
+{
+"i": 141,
+"kind": "ws",
+"plane": -45.0,
+"elev": 0.0,
+"axial": 90.0,
+"taken": true,
+"min_mm": 4.998
+},
+{
+"i": 142,
+"kind": "ws",
+"plane": -45.0,
+"elev": 15.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 4.391
+},
+{
+"i": 143,
+"kind": "ws",
+"plane": -45.0,
+"elev": 15.0,
+"axial": 90.0,
+"taken": true,
+"min_mm": 4.932
+},
+{
+"i": 144,
+"kind": "ws",
+"plane": -45.0,
+"elev": 30.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 4.707
+},
+{
+"i": 145,
+"kind": "ws",
+"plane": -45.0,
+"elev": 30.0,
+"axial": 90.0,
+"taken": true,
+"min_mm": 4.32
+},
+{
+"i": 146,
+"kind": "ws",
+"plane": -45.0,
+"elev": 30.0,
+"axial": 135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 147,
+"kind": "ws",
+"plane": -45.0,
+"elev": 45.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 2.83
+},
+{
+"i": 148,
+"kind": "ws",
+"plane": -45.0,
+"elev": 45.0,
+"axial": 135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 149,
+"kind": "ws",
+"plane": -45.0,
+"elev": 60.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 1.462
+},
+{
+"i": 150,
+"kind": "ws",
+"plane": -45.0,
+"elev": 60.0,
+"axial": 135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 151,
+"kind": "ws",
+"plane": -30.0,
+"elev": 0.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 2.666
+},
+{
+"i": 152,
+"kind": "ws",
+"plane": -30.0,
+"elev": 0.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 4.998
+},
+{
+"i": 153,
+"kind": "ws",
+"plane": -30.0,
+"elev": 15.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 2.114
+},
+{
+"i": 154,
+"kind": "ws",
+"plane": -30.0,
+"elev": 15.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 2.541
+},
+{
+"i": 155,
+"kind": "ws",
+"plane": -30.0,
+"elev": 15.0,
+"axial": 90.0,
+"taken": true,
+"min_mm": 4.873
+},
+{
+"i": 156,
+"kind": "ws",
+"plane": -30.0,
+"elev": 30.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 4.18
+},
+{
+"i": 157,
+"kind": "ws",
+"plane": -30.0,
+"elev": 30.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 3.556
+},
+{
+"i": 158,
+"kind": "ws",
+"plane": -30.0,
+"elev": 30.0,
+"axial": 105.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 159,
+"kind": "ws",
+"plane": -30.0,
+"elev": 45.0,
+"axial": 0.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 160,
+"kind": "ws",
+"plane": -30.0,
+"elev": 45.0,
+"axial": 60.0,
+"taken": true,
+"min_mm": 4.224
+},
+{
+"i": 161,
+"kind": "ws",
+"plane": -30.0,
+"elev": 45.0,
+"axial": 120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 162,
+"kind": "ws",
+"plane": -30.0,
+"elev": 60.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 2.111
+},
+{
+"i": 163,
+"kind": "ws",
+"plane": -30.0,
+"elev": 60.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 1.806
+},
+{
+"i": 164,
+"kind": "ws",
+"plane": -15.0,
+"elev": 0.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 2.025
+},
+{
+"i": 165,
+"kind": "ws",
+"plane": -15.0,
+"elev": 0.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 2.818
+},
+{
+"i": 166,
+"kind": "ws",
+"plane": -15.0,
+"elev": 0.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 4.962
+},
+{
+"i": 167,
+"kind": "ws",
+"plane": -15.0,
+"elev": 15.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 2.482
+},
+{
+"i": 168,
+"kind": "ws",
+"plane": -15.0,
+"elev": 15.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 3.178
+},
+{
+"i": 169,
+"kind": "ws",
+"plane": -15.0,
+"elev": 15.0,
+"axial": 90.0,
+"taken": true,
+"min_mm": 4.817
+},
+{
+"i": 170,
+"kind": "ws",
+"plane": -15.0,
+"elev": 30.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 2.097
+},
+{
+"i": 171,
+"kind": "ws",
+"plane": -15.0,
+"elev": 30.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 4.557
+},
+{
+"i": 172,
+"kind": "ws",
+"plane": -15.0,
+"elev": 30.0,
+"axial": 105.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 173,
+"kind": "ws",
+"plane": -15.0,
+"elev": 45.0,
+"axial": 0.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 174,
+"kind": "ws",
+"plane": -15.0,
+"elev": 45.0,
+"axial": 60.0,
+"taken": true,
+"min_mm": 4.313
+},
+{
+"i": 175,
+"kind": "ws",
+"plane": -15.0,
+"elev": 60.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 3.37
+},
+{
+"i": 176,
+"kind": "ws",
+"plane": -15.0,
+"elev": 60.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 2.491
+},
+{
+"i": 177,
+"kind": "ws",
+"plane": -15.0,
+"elev": 60.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 2.496
+},
+{
+"i": 178,
+"kind": "ws",
+"plane": -15.0,
+"elev": 75.0,
+"axial": -30.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 179,
+"kind": "ws",
+"plane": -15.0,
+"elev": 75.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 3.17
+},
+{
+"i": 180,
+"kind": "ws",
+"plane": -15.0,
+"elev": 75.0,
+"axial": 90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 181,
+"kind": "ws",
+"plane": -15.0,
+"elev": 90.0,
+"axial": -15.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 182,
+"kind": "ws",
+"plane": -15.0,
+"elev": 90.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 2.552
+},
+{
+"i": 183,
+"kind": "ws",
+"plane": -15.0,
+"elev": 90.0,
+"axial": 105.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 184,
+"kind": "ws",
+"plane": -15.0,
+"elev": 105.0,
+"axial": 15.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 185,
+"kind": "ws",
+"plane": 0.0,
+"elev": 0.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 2.175
+},
+{
+"i": 186,
+"kind": "ws",
+"plane": 0.0,
+"elev": 0.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 4.542
+},
+{
+"i": 187,
+"kind": "ws",
+"plane": 0.0,
+"elev": 0.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 4.93
+},
+{
+"i": 188,
+"kind": "ws",
+"plane": 0.0,
+"elev": 15.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 3.533
+},
+{
+"i": 189,
+"kind": "ws",
+"plane": 0.0,
+"elev": 15.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 4.613
+},
+{
+"i": 190,
+"kind": "ws",
+"plane": 0.0,
+"elev": 15.0,
+"axial": 90.0,
+"taken": true,
+"min_mm": 4.768
+},
+{
+"i": 191,
+"kind": "ws",
+"plane": 0.0,
+"elev": 30.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 2.865
+},
+{
+"i": 192,
+"kind": "ws",
+"plane": 0.0,
+"elev": 30.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 4.398
+},
+{
+"i": 193,
+"kind": "ws",
+"plane": 0.0,
+"elev": 45.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 3.026
+},
+{
+"i": 194,
+"kind": "ws",
+"plane": 0.0,
+"elev": 45.0,
+"axial": 0.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 195,
+"kind": "ws",
+"plane": 0.0,
+"elev": 45.0,
+"axial": 60.0,
+"taken": true,
+"min_mm": 4.116
+},
+{
+"i": 196,
+"kind": "ws",
+"plane": 0.0,
+"elev": 60.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 3.629
+},
+{
+"i": 197,
+"kind": "ws",
+"plane": 0.0,
+"elev": 60.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 3.474
+},
+{
+"i": 198,
+"kind": "ws",
+"plane": 0.0,
+"elev": 60.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 3.587
+},
+{
+"i": 199,
+"kind": "ws",
+"plane": 0.0,
+"elev": 75.0,
+"axial": -30.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 200,
+"kind": "ws",
+"plane": 0.0,
+"elev": 75.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 3.042
+},
+{
+"i": 201,
+"kind": "ws",
+"plane": 0.0,
+"elev": 75.0,
+"axial": 90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 202,
+"kind": "ws",
+"plane": 0.0,
+"elev": 90.0,
+"axial": -15.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 203,
+"kind": "ws",
+"plane": 0.0,
+"elev": 90.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 2.837
+},
+{
+"i": 204,
+"kind": "ws",
+"plane": 0.0,
+"elev": 105.0,
+"axial": -45.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 205,
+"kind": "ws",
+"plane": 0.0,
+"elev": 105.0,
+"axial": 15.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 206,
+"kind": "ws",
+"plane": 0.0,
+"elev": 120.0,
+"axial": -15.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 207,
+"kind": "ws",
+"plane": 0.0,
+"elev": 135.0,
+"axial": -45.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 208,
+"kind": "ws",
+"plane": 0.0,
+"elev": 135.0,
+"axial": 15.0,
+"taken": false,
+"min_mm": -4.084
+},
+{
+"i": 209,
+"kind": "ws",
+"plane": 0.0,
+"elev": 150.0,
+"axial": -15.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 210,
+"kind": "ws",
+"plane": 0.0,
+"elev": 165.0,
+"axial": -45.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 211,
+"kind": "ws",
+"plane": 0.0,
+"elev": 165.0,
+"axial": 15.0,
+"taken": false,
+"min_mm": -16.106
+},
+{
+"i": 212,
+"kind": "ws",
+"plane": 15.0,
+"elev": 0.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 2.869
+},
+{
+"i": 213,
+"kind": "ws",
+"plane": 15.0,
+"elev": 0.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 5.034
+},
+{
+"i": 214,
+"kind": "ws",
+"plane": 15.0,
+"elev": 0.0,
+"axial": 75.0,
+"taken": true,
+"min_mm": 4.905
+},
+{
+"i": 215,
+"kind": "ws",
+"plane": 15.0,
+"elev": 15.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 4.861
+},
+{
+"i": 216,
+"kind": "ws",
+"plane": 15.0,
+"elev": 15.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 4.758
+},
+{
+"i": 217,
+"kind": "ws",
+"plane": 15.0,
+"elev": 30.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 2.382
+},
+{
+"i": 218,
+"kind": "ws",
+"plane": 15.0,
+"elev": 30.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 3.208
+},
+{
+"i": 219,
+"kind": "ws",
+"plane": 15.0,
+"elev": 30.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 4.293
+},
+{
+"i": 220,
+"kind": "ws",
+"plane": 15.0,
+"elev": 45.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 1.732
+},
+{
+"i": 221,
+"kind": "ws",
+"plane": 15.0,
+"elev": 45.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 3.649
+},
+{
+"i": 222,
+"kind": "ws",
+"plane": 15.0,
+"elev": 45.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 3.935
+},
+{
+"i": 223,
+"kind": "ws",
+"plane": 15.0,
+"elev": 60.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 2.699
+},
+{
+"i": 224,
+"kind": "ws",
+"plane": 15.0,
+"elev": 60.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 1.919
+},
+{
+"i": 225,
+"kind": "ws",
+"plane": 15.0,
+"elev": 60.0,
+"axial": 60.0,
+"taken": true,
+"min_mm": 3.817
+},
+{
+"i": 226,
+"kind": "ws",
+"plane": 15.0,
+"elev": 75.0,
+"axial": -45.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 227,
+"kind": "ws",
+"plane": 15.0,
+"elev": 75.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 2.726
+},
+{
+"i": 228,
+"kind": "ws",
+"plane": 15.0,
+"elev": 75.0,
+"axial": 75.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 229,
+"kind": "ws",
+"plane": 15.0,
+"elev": 90.0,
+"axial": -30.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 230,
+"kind": "ws",
+"plane": 15.0,
+"elev": 90.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 2.018
+},
+{
+"i": 231,
+"kind": "ws",
+"plane": 15.0,
+"elev": 105.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 2.643
+},
+{
+"i": 232,
+"kind": "ws",
+"plane": 15.0,
+"elev": 105.0,
+"axial": 0.0,
+"taken": false,
+"min_mm": -0.355
+},
+{
+"i": 233,
+"kind": "ws",
+"plane": 15.0,
+"elev": 120.0,
+"axial": -30.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 234,
+"kind": "ws",
+"plane": 15.0,
+"elev": 135.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 1.806
+},
+{
+"i": 235,
+"kind": "ws",
+"plane": 15.0,
+"elev": 135.0,
+"axial": 0.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 236,
+"kind": "ws",
+"plane": 15.0,
+"elev": 150.0,
+"axial": -30.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 237,
+"kind": "ws",
+"plane": 15.0,
+"elev": 165.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 1.149
+},
+{
+"i": 238,
+"kind": "ws",
+"plane": 15.0,
+"elev": 165.0,
+"axial": 0.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 239,
+"kind": "ws",
+"plane": 30.0,
+"elev": 0.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 2.869
+},
+{
+"i": 240,
+"kind": "ws",
+"plane": 30.0,
+"elev": 0.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 5.034
+},
+{
+"i": 241,
+"kind": "ws",
+"plane": 30.0,
+"elev": 0.0,
+"axial": 60.0,
+"taken": true,
+"min_mm": 4.905
+},
+{
+"i": 242,
+"kind": "ws",
+"plane": 30.0,
+"elev": 15.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 4.776
+},
+{
+"i": 243,
+"kind": "ws",
+"plane": 30.0,
+"elev": 15.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 4.746
+},
+{
+"i": 244,
+"kind": "ws",
+"plane": 30.0,
+"elev": 30.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 2.04
+},
+{
+"i": 245,
+"kind": "ws",
+"plane": 30.0,
+"elev": 30.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 4.499
+},
+{
+"i": 246,
+"kind": "ws",
+"plane": 30.0,
+"elev": 30.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 4.317
+},
+{
+"i": 247,
+"kind": "ws",
+"plane": 30.0,
+"elev": 45.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 2.752
+},
+{
+"i": 248,
+"kind": "ws",
+"plane": 30.0,
+"elev": 45.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 2.85
+},
+{
+"i": 249,
+"kind": "ws",
+"plane": 30.0,
+"elev": 45.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 3.835
+},
+{
+"i": 250,
+"kind": "ws",
+"plane": 30.0,
+"elev": 60.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 1.597
+},
+{
+"i": 251,
+"kind": "ws",
+"plane": 30.0,
+"elev": 60.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 2.801
+},
+{
+"i": 252,
+"kind": "ws",
+"plane": 30.0,
+"elev": 60.0,
+"axial": 60.0,
+"taken": true,
+"min_mm": 3.779
+},
+{
+"i": 253,
+"kind": "ws",
+"plane": 30.0,
+"elev": 75.0,
+"axial": -45.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 254,
+"kind": "ws",
+"plane": 30.0,
+"elev": 75.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 2.969
+},
+{
+"i": 255,
+"kind": "ws",
+"plane": 30.0,
+"elev": 90.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 2.128
+},
+{
+"i": 256,
+"kind": "ws",
+"plane": 30.0,
+"elev": 90.0,
+"axial": -30.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 257,
+"kind": "ws",
+"plane": 30.0,
+"elev": 90.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 2.494
+},
+{
+"i": 258,
+"kind": "ws",
+"plane": 30.0,
+"elev": 105.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 2.264
+},
+{
+"i": 259,
+"kind": "ws",
+"plane": 30.0,
+"elev": 105.0,
+"axial": 0.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 260,
+"kind": "ws",
+"plane": 30.0,
+"elev": 120.0,
+"axial": -30.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 261,
+"kind": "ws",
+"plane": 30.0,
+"elev": 135.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 2.29
+},
+{
+"i": 262,
+"kind": "ws",
+"plane": 30.0,
+"elev": 135.0,
+"axial": 0.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 263,
+"kind": "ws",
+"plane": 30.0,
+"elev": 150.0,
+"axial": -30.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 264,
+"kind": "ws",
+"plane": 30.0,
+"elev": 165.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 1.55
+},
+{
+"i": 265,
+"kind": "ws",
+"plane": 30.0,
+"elev": 165.0,
+"axial": 0.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 266,
+"kind": "ws",
+"plane": 45.0,
+"elev": 0.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 2.666
+},
+{
+"i": 267,
+"kind": "ws",
+"plane": 45.0,
+"elev": 0.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 4.998
+},
+{
+"i": 268,
+"kind": "ws",
+"plane": 45.0,
+"elev": 15.0,
+"axial": -105.0,
+"taken": true,
+"min_mm": 1.607
+},
+{
+"i": 269,
+"kind": "ws",
+"plane": 45.0,
+"elev": 15.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 2.565
+},
+{
+"i": 270,
+"kind": "ws",
+"plane": 45.0,
+"elev": 15.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 4.725
+},
+{
+"i": 271,
+"kind": "ws",
+"plane": 45.0,
+"elev": 30.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 2.497
+},
+{
+"i": 272,
+"kind": "ws",
+"plane": 45.0,
+"elev": 30.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 2.322
+},
+{
+"i": 273,
+"kind": "ws",
+"plane": 45.0,
+"elev": 30.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 4.209
+},
+{
+"i": 274,
+"kind": "ws",
+"plane": 45.0,
+"elev": 45.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 4.201
+},
+{
+"i": 275,
+"kind": "ws",
+"plane": 45.0,
+"elev": 45.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 2.4
+},
+{
+"i": 276,
+"kind": "ws",
+"plane": 45.0,
+"elev": 45.0,
+"axial": 45.0,
+"taken": true,
+"min_mm": 3.83
+},
+{
+"i": 277,
+"kind": "ws",
+"plane": 45.0,
+"elev": 60.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 3.723
+},
+{
+"i": 278,
+"kind": "ws",
+"plane": 45.0,
+"elev": 60.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 3.83
+},
+{
+"i": 279,
+"kind": "ws",
+"plane": 45.0,
+"elev": 75.0,
+"axial": -105.0,
+"taken": true,
+"min_mm": 0.204
+},
+{
+"i": 280,
+"kind": "ws",
+"plane": 45.0,
+"elev": 75.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 2.327
+},
+{
+"i": 281,
+"kind": "ws",
+"plane": 45.0,
+"elev": 75.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 2.995
+},
+{
+"i": 282,
+"kind": "ws",
+"plane": 45.0,
+"elev": 90.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 2.115
+},
+{
+"i": 283,
+"kind": "ws",
+"plane": 45.0,
+"elev": 90.0,
+"axial": -30.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 284,
+"kind": "ws",
+"plane": 45.0,
+"elev": 90.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 2.407
+},
+{
+"i": 285,
+"kind": "ws",
+"plane": 45.0,
+"elev": 105.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 2.069
+},
+{
+"i": 286,
+"kind": "ws",
+"plane": 45.0,
+"elev": 120.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 1.47
+},
+{
+"i": 287,
+"kind": "ws",
+"plane": 45.0,
+"elev": 120.0,
+"axial": -30.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 288,
+"kind": "ws",
+"plane": 45.0,
+"elev": 135.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 1.726
+},
+{
+"i": 289,
+"kind": "ws",
+"plane": 45.0,
+"elev": 150.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 0.073
+},
+{
+"i": 290,
+"kind": "ws",
+"plane": 45.0,
+"elev": 150.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 1.982
+},
+{
+"i": 291,
+"kind": "ws",
+"plane": 45.0,
+"elev": 165.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 1.289
+},
+{
+"i": 292,
+"kind": "ws",
+"plane": 45.0,
+"elev": 165.0,
+"axial": -15.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 293,
+"kind": "ws",
+"plane": 60.0,
+"elev": 0.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 2.666
+},
+{
+"i": 294,
+"kind": "ws",
+"plane": 60.0,
+"elev": 0.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 4.998
+},
+{
+"i": 295,
+"kind": "ws",
+"plane": 60.0,
+"elev": 15.0,
+"axial": -120.0,
+"taken": true,
+"min_mm": 1.286
+},
+{
+"i": 296,
+"kind": "ws",
+"plane": 60.0,
+"elev": 15.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 2.51
+},
+{
+"i": 297,
+"kind": "ws",
+"plane": 60.0,
+"elev": 15.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 4.747
+},
+{
+"i": 298,
+"kind": "ws",
+"plane": 60.0,
+"elev": 30.0,
+"axial": -105.0,
+"taken": true,
+"min_mm": 1.878
+},
+{
+"i": 299,
+"kind": "ws",
+"plane": 60.0,
+"elev": 30.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 2.299
+},
+{
+"i": 300,
+"kind": "ws",
+"plane": 60.0,
+"elev": 30.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 4.343
+},
+{
+"i": 301,
+"kind": "ws",
+"plane": 60.0,
+"elev": 45.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 3.014
+},
+{
+"i": 302,
+"kind": "ws",
+"plane": 60.0,
+"elev": 45.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 2.34
+},
+{
+"i": 303,
+"kind": "ws",
+"plane": 60.0,
+"elev": 45.0,
+"axial": 30.0,
+"taken": true,
+"min_mm": 3.805
+},
+{
+"i": 304,
+"kind": "ws",
+"plane": 60.0,
+"elev": 60.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 3.212
+},
+{
+"i": 305,
+"kind": "ws",
+"plane": 60.0,
+"elev": 60.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 2.708
+},
+{
+"i": 306,
+"kind": "ws",
+"plane": 60.0,
+"elev": 75.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": -1.027
+},
+{
+"i": 307,
+"kind": "ws",
+"plane": 60.0,
+"elev": 75.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 4.034
+},
+{
+"i": 308,
+"kind": "ws",
+"plane": 60.0,
+"elev": 75.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 3.486
+},
+{
+"i": 309,
+"kind": "ws",
+"plane": 60.0,
+"elev": 90.0,
+"axial": -105.0,
+"taken": true,
+"min_mm": 0.147
+},
+{
+"i": 310,
+"kind": "ws",
+"plane": 60.0,
+"elev": 90.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 3.986
+},
+{
+"i": 311,
+"kind": "ws",
+"plane": 60.0,
+"elev": 90.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 2.665
+},
+{
+"i": 312,
+"kind": "ws",
+"plane": 60.0,
+"elev": 105.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 2.205
+},
+{
+"i": 313,
+"kind": "ws",
+"plane": 60.0,
+"elev": 120.0,
+"axial": -105.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 314,
+"kind": "ws",
+"plane": 60.0,
+"elev": 120.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 2.484
+},
+{
+"i": 315,
+"kind": "ws",
+"plane": 60.0,
+"elev": 135.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 1.354
+},
+{
+"i": 316,
+"kind": "ws",
+"plane": 60.0,
+"elev": 150.0,
+"axial": -105.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 317,
+"kind": "ws",
+"plane": 60.0,
+"elev": 150.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 2.042
+},
+{
+"i": 318,
+"kind": "ws",
+"plane": 60.0,
+"elev": 165.0,
+"axial": -75.0,
+"taken": false,
+"min_mm": -0.597
+},
+{
+"i": 319,
+"kind": "ws",
+"plane": 75.0,
+"elev": 0.0,
+"axial": -135.0,
+"taken": true,
+"min_mm": 2.025
+},
+{
+"i": 320,
+"kind": "ws",
+"plane": 75.0,
+"elev": 0.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 2.818
+},
+{
+"i": 321,
+"kind": "ws",
+"plane": 75.0,
+"elev": 0.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 4.962
+},
+{
+"i": 322,
+"kind": "ws",
+"plane": 75.0,
+"elev": 15.0,
+"axial": -120.0,
+"taken": true,
+"min_mm": 1.78
+},
+{
+"i": 323,
+"kind": "ws",
+"plane": 75.0,
+"elev": 15.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 3.378
+},
+{
+"i": 324,
+"kind": "ws",
+"plane": 75.0,
+"elev": 15.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 4.731
+},
+{
+"i": 325,
+"kind": "ws",
+"plane": 75.0,
+"elev": 30.0,
+"axial": -105.0,
+"taken": true,
+"min_mm": 2.429
+},
+{
+"i": 326,
+"kind": "ws",
+"plane": 75.0,
+"elev": 30.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 3.841
+},
+{
+"i": 327,
+"kind": "ws",
+"plane": 75.0,
+"elev": 30.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 4.378
+},
+{
+"i": 328,
+"kind": "ws",
+"plane": 75.0,
+"elev": 45.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 2.302
+},
+{
+"i": 329,
+"kind": "ws",
+"plane": 75.0,
+"elev": 45.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 4.241
+},
+{
+"i": 330,
+"kind": "ws",
+"plane": 75.0,
+"elev": 60.0,
+"axial": -135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 331,
+"kind": "ws",
+"plane": 75.0,
+"elev": 60.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 2.124
+},
+{
+"i": 332,
+"kind": "ws",
+"plane": 75.0,
+"elev": 60.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 4.093
+},
+{
+"i": 333,
+"kind": "ws",
+"plane": 75.0,
+"elev": 75.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 334,
+"kind": "ws",
+"plane": 75.0,
+"elev": 75.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 1.975
+},
+{
+"i": 335,
+"kind": "ws",
+"plane": 75.0,
+"elev": 75.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 3.64
+},
+{
+"i": 336,
+"kind": "ws",
+"plane": 75.0,
+"elev": 90.0,
+"axial": -105.0,
+"taken": true,
+"min_mm": 0.989
+},
+{
+"i": 337,
+"kind": "ws",
+"plane": 75.0,
+"elev": 90.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 2.546
+},
+{
+"i": 338,
+"kind": "ws",
+"plane": 75.0,
+"elev": 90.0,
+"axial": 15.0,
+"taken": true,
+"min_mm": 2.976
+},
+{
+"i": 339,
+"kind": "ws",
+"plane": 75.0,
+"elev": 105.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 2.115
+},
+{
+"i": 340,
+"kind": "ws",
+"plane": 75.0,
+"elev": 120.0,
+"axial": -105.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 341,
+"kind": "ws",
+"plane": 75.0,
+"elev": 120.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 3.672
+},
+{
+"i": 342,
+"kind": "ws",
+"plane": 75.0,
+"elev": 135.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 1.52
+},
+{
+"i": 343,
+"kind": "ws",
+"plane": 75.0,
+"elev": 150.0,
+"axial": -105.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 344,
+"kind": "ws",
+"plane": 75.0,
+"elev": 150.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 1.62
+},
+{
+"i": 345,
+"kind": "ws",
+"plane": 75.0,
+"elev": 165.0,
+"axial": -75.0,
+"taken": false,
+"min_mm": -1.412
+},
+{
+"i": 346,
+"kind": "ws",
+"plane": 90.0,
+"elev": 0.0,
+"axial": -135.0,
+"taken": true,
+"min_mm": 2.175
+},
+{
+"i": 347,
+"kind": "ws",
+"plane": 90.0,
+"elev": 0.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 4.542
+},
+{
+"i": 348,
+"kind": "ws",
+"plane": 90.0,
+"elev": 0.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 4.93
+},
+{
+"i": 349,
+"kind": "ws",
+"plane": 90.0,
+"elev": 15.0,
+"axial": -120.0,
+"taken": true,
+"min_mm": 2.68
+},
+{
+"i": 350,
+"kind": "ws",
+"plane": 90.0,
+"elev": 15.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 4.766
+},
+{
+"i": 351,
+"kind": "ws",
+"plane": 90.0,
+"elev": 15.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 4.724
+},
+{
+"i": 352,
+"kind": "ws",
+"plane": 90.0,
+"elev": 30.0,
+"axial": -105.0,
+"taken": true,
+"min_mm": 2.988
+},
+{
+"i": 353,
+"kind": "ws",
+"plane": 90.0,
+"elev": 30.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 4.726
+},
+{
+"i": 354,
+"kind": "ws",
+"plane": 90.0,
+"elev": 45.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 355,
+"kind": "ws",
+"plane": 90.0,
+"elev": 45.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 4.223
+},
+{
+"i": 356,
+"kind": "ws",
+"plane": 90.0,
+"elev": 45.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 4.547
+},
+{
+"i": 357,
+"kind": "ws",
+"plane": 90.0,
+"elev": 60.0,
+"axial": -135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 358,
+"kind": "ws",
+"plane": 90.0,
+"elev": 60.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 4.679
+},
+{
+"i": 359,
+"kind": "ws",
+"plane": 90.0,
+"elev": 60.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 4.245
+},
+{
+"i": 360,
+"kind": "ws",
+"plane": 90.0,
+"elev": 75.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 361,
+"kind": "ws",
+"plane": 90.0,
+"elev": 75.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 3.685
+},
+{
+"i": 362,
+"kind": "ws",
+"plane": 90.0,
+"elev": 75.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 3.493
+},
+{
+"i": 363,
+"kind": "ws",
+"plane": 90.0,
+"elev": 90.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 364,
+"kind": "ws",
+"plane": 90.0,
+"elev": 90.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 3.676
+},
+{
+"i": 365,
+"kind": "ws",
+"plane": 90.0,
+"elev": 90.0,
+"axial": 0.0,
+"taken": true,
+"min_mm": 1.65
+},
+{
+"i": 366,
+"kind": "ws",
+"plane": 90.0,
+"elev": 105.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 367,
+"kind": "ws",
+"plane": 90.0,
+"elev": 120.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 368,
+"kind": "ws",
+"plane": 90.0,
+"elev": 120.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 2.367
+},
+{
+"i": 369,
+"kind": "ws",
+"plane": 90.0,
+"elev": 135.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 370,
+"kind": "ws",
+"plane": 90.0,
+"elev": 150.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 371,
+"kind": "ws",
+"plane": 90.0,
+"elev": 150.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 0.98
+},
+{
+"i": 372,
+"kind": "ws",
+"plane": 90.0,
+"elev": 165.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 373,
+"kind": "ws",
+"plane": 105.0,
+"elev": 0.0,
+"axial": -150.0,
+"taken": true,
+"min_mm": 2.175
+},
+{
+"i": 374,
+"kind": "ws",
+"plane": 105.0,
+"elev": 0.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 4.542
+},
+{
+"i": 375,
+"kind": "ws",
+"plane": 105.0,
+"elev": 0.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 4.93
+},
+{
+"i": 376,
+"kind": "ws",
+"plane": 105.0,
+"elev": 15.0,
+"axial": -135.0,
+"taken": true,
+"min_mm": 2.484
+},
+{
+"i": 377,
+"kind": "ws",
+"plane": 105.0,
+"elev": 15.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 4.924
+},
+{
+"i": 378,
+"kind": "ws",
+"plane": 105.0,
+"elev": 15.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 4.77
+},
+{
+"i": 379,
+"kind": "ws",
+"plane": 105.0,
+"elev": 30.0,
+"axial": -120.0,
+"taken": true,
+"min_mm": 3.04
+},
+{
+"i": 380,
+"kind": "ws",
+"plane": 105.0,
+"elev": 30.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 4.903
+},
+{
+"i": 381,
+"kind": "ws",
+"plane": 105.0,
+"elev": 45.0,
+"axial": -165.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 382,
+"kind": "ws",
+"plane": 105.0,
+"elev": 45.0,
+"axial": -105.0,
+"taken": true,
+"min_mm": 3.982
+},
+{
+"i": 383,
+"kind": "ws",
+"plane": 105.0,
+"elev": 45.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 4.749
+},
+{
+"i": 384,
+"kind": "ws",
+"plane": 105.0,
+"elev": 60.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 385,
+"kind": "ws",
+"plane": 105.0,
+"elev": 60.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 4.414
+},
+{
+"i": 386,
+"kind": "ws",
+"plane": 105.0,
+"elev": 60.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 4.507
+},
+{
+"i": 387,
+"kind": "ws",
+"plane": 105.0,
+"elev": 75.0,
+"axial": -135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 388,
+"kind": "ws",
+"plane": 105.0,
+"elev": 75.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 4.711
+},
+{
+"i": 389,
+"kind": "ws",
+"plane": 105.0,
+"elev": 75.0,
+"axial": -15.0,
+"taken": true,
+"min_mm": 4.082
+},
+{
+"i": 390,
+"kind": "ws",
+"plane": 105.0,
+"elev": 90.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 391,
+"kind": "ws",
+"plane": 105.0,
+"elev": 90.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 4.667
+},
+{
+"i": 392,
+"kind": "ws",
+"plane": 105.0,
+"elev": 105.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 393,
+"kind": "ws",
+"plane": 105.0,
+"elev": 105.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 394,
+"kind": "ws",
+"plane": 105.0,
+"elev": 120.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 395,
+"kind": "ws",
+"plane": 105.0,
+"elev": 135.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 396,
+"kind": "ws",
+"plane": 105.0,
+"elev": 135.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 397,
+"kind": "ws",
+"plane": 105.0,
+"elev": 150.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 398,
+"kind": "ws",
+"plane": 105.0,
+"elev": 165.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 399,
+"kind": "ws",
+"plane": 105.0,
+"elev": 165.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 400,
+"kind": "ws",
+"plane": 120.0,
+"elev": 0.0,
+"axial": -150.0,
+"taken": true,
+"min_mm": 2.869
+},
+{
+"i": 401,
+"kind": "ws",
+"plane": 120.0,
+"elev": 0.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 5.034
+},
+{
+"i": 402,
+"kind": "ws",
+"plane": 120.0,
+"elev": 0.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 4.905
+},
+{
+"i": 403,
+"kind": "ws",
+"plane": 120.0,
+"elev": 15.0,
+"axial": -135.0,
+"taken": true,
+"min_mm": 3.057
+},
+{
+"i": 404,
+"kind": "ws",
+"plane": 120.0,
+"elev": 15.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 4.999
+},
+{
+"i": 405,
+"kind": "ws",
+"plane": 120.0,
+"elev": 30.0,
+"axial": -180.0,
+"taken": false,
+"min_mm": -1.214
+},
+{
+"i": 406,
+"kind": "ws",
+"plane": 120.0,
+"elev": 30.0,
+"axial": -120.0,
+"taken": true,
+"min_mm": 4.802
+},
+{
+"i": 407,
+"kind": "ws",
+"plane": 120.0,
+"elev": 30.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 4.929
+},
+{
+"i": 408,
+"kind": "ws",
+"plane": 120.0,
+"elev": 45.0,
+"axial": -165.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 409,
+"kind": "ws",
+"plane": 120.0,
+"elev": 45.0,
+"axial": -105.0,
+"taken": true,
+"min_mm": 4.212
+},
+{
+"i": 410,
+"kind": "ws",
+"plane": 120.0,
+"elev": 45.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 4.798
+},
+{
+"i": 411,
+"kind": "ws",
+"plane": 120.0,
+"elev": 60.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 412,
+"kind": "ws",
+"plane": 120.0,
+"elev": 60.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 4.192
+},
+{
+"i": 413,
+"kind": "ws",
+"plane": 120.0,
+"elev": 60.0,
+"axial": -30.0,
+"taken": true,
+"min_mm": 4.588
+},
+{
+"i": 414,
+"kind": "ws",
+"plane": 120.0,
+"elev": 75.0,
+"axial": -135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 415,
+"kind": "ws",
+"plane": 120.0,
+"elev": 75.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 4.405
+},
+{
+"i": 416,
+"kind": "ws",
+"plane": 120.0,
+"elev": 90.0,
+"axial": -180.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 417,
+"kind": "ws",
+"plane": 120.0,
+"elev": 90.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 418,
+"kind": "ws",
+"plane": 120.0,
+"elev": 90.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 4.59
+},
+{
+"i": 419,
+"kind": "ws",
+"plane": 120.0,
+"elev": 105.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 420,
+"kind": "ws",
+"plane": 120.0,
+"elev": 105.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 421,
+"kind": "ws",
+"plane": 120.0,
+"elev": 120.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 422,
+"kind": "ws",
+"plane": 120.0,
+"elev": 135.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 423,
+"kind": "ws",
+"plane": 120.0,
+"elev": 135.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 424,
+"kind": "ws",
+"plane": 120.0,
+"elev": 150.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 425,
+"kind": "ws",
+"plane": 120.0,
+"elev": 165.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 426,
+"kind": "ws",
+"plane": 120.0,
+"elev": 165.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 427,
+"kind": "ws",
+"plane": 135.0,
+"elev": 0.0,
+"axial": -120.0,
+"taken": true,
+"min_mm": 4.542
+},
+{
+"i": 428,
+"kind": "ws",
+"plane": 135.0,
+"elev": 0.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 4.93
+},
+{
+"i": 429,
+"kind": "ws",
+"plane": 135.0,
+"elev": 15.0,
+"axial": -135.0,
+"taken": true,
+"min_mm": 4.645
+},
+{
+"i": 430,
+"kind": "ws",
+"plane": 135.0,
+"elev": 15.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 4.995
+},
+{
+"i": 431,
+"kind": "ws",
+"plane": 135.0,
+"elev": 30.0,
+"axial": -150.0,
+"taken": true,
+"min_mm": 2.388
+},
+{
+"i": 432,
+"kind": "ws",
+"plane": 135.0,
+"elev": 30.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 5.138
+},
+{
+"i": 433,
+"kind": "ws",
+"plane": 135.0,
+"elev": 45.0,
+"axial": -165.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 434,
+"kind": "ws",
+"plane": 135.0,
+"elev": 45.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 435,
+"kind": "ws",
+"plane": 135.0,
+"elev": 45.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 4.977
+},
+{
+"i": 436,
+"kind": "ws",
+"plane": 135.0,
+"elev": 60.0,
+"axial": -135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 437,
+"kind": "ws",
+"plane": 135.0,
+"elev": 60.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 5.122
+},
+{
+"i": 438,
+"kind": "ws",
+"plane": 135.0,
+"elev": 75.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 439,
+"kind": "ws",
+"plane": 135.0,
+"elev": 75.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 440,
+"kind": "ws",
+"plane": 135.0,
+"elev": 90.0,
+"axial": -165.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 441,
+"kind": "ws",
+"plane": 135.0,
+"elev": 90.0,
+"axial": -105.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 442,
+"kind": "ws",
+"plane": 135.0,
+"elev": 90.0,
+"axial": -45.0,
+"taken": true,
+"min_mm": 4.665
+},
+{
+"i": 443,
+"kind": "ws",
+"plane": 135.0,
+"elev": 105.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 444,
+"kind": "ws",
+"plane": 135.0,
+"elev": 105.0,
+"axial": -60.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 445,
+"kind": "ws",
+"plane": 135.0,
+"elev": 120.0,
+"axial": -135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 446,
+"kind": "ws",
+"plane": 135.0,
+"elev": 120.0,
+"axial": -75.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 447,
+"kind": "ws",
+"plane": 135.0,
+"elev": 135.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 448,
+"kind": "ws",
+"plane": 135.0,
+"elev": 135.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 449,
+"kind": "ws",
+"plane": 150.0,
+"elev": 0.0,
+"axial": -180.0,
+"taken": true,
+"min_mm": 2.869
+},
+{
+"i": 450,
+"kind": "ws",
+"plane": 150.0,
+"elev": 0.0,
+"axial": -120.0,
+"taken": true,
+"min_mm": 5.034
+},
+{
+"i": 451,
+"kind": "ws",
+"plane": 150.0,
+"elev": 0.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 4.905
+},
+{
+"i": 452,
+"kind": "ws",
+"plane": 150.0,
+"elev": 15.0,
+"axial": -135.0,
+"taken": true,
+"min_mm": 5.166
+},
+{
+"i": 453,
+"kind": "ws",
+"plane": 150.0,
+"elev": 15.0,
+"axial": -75.0,
+"taken": true,
+"min_mm": 4.995
+},
+{
+"i": 454,
+"kind": "ws",
+"plane": 150.0,
+"elev": 30.0,
+"axial": -150.0,
+"taken": true,
+"min_mm": 3.526
+},
+{
+"i": 455,
+"kind": "ws",
+"plane": 150.0,
+"elev": 30.0,
+"axial": -90.0,
+"taken": true,
+"min_mm": 5.159
+},
+{
+"i": 456,
+"kind": "ws",
+"plane": 150.0,
+"elev": 45.0,
+"axial": -165.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 457,
+"kind": "ws",
+"plane": 150.0,
+"elev": 45.0,
+"axial": -105.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 458,
+"kind": "ws",
+"plane": 150.0,
+"elev": 60.0,
+"axial": -180.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 459,
+"kind": "ws",
+"plane": 150.0,
+"elev": 60.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 460,
+"kind": "ws",
+"plane": 150.0,
+"elev": 60.0,
+"axial": -60.0,
+"taken": true,
+"min_mm": 5.034
+},
+{
+"i": 461,
+"kind": "ws",
+"plane": 150.0,
+"elev": 75.0,
+"axial": -135.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 462,
+"kind": "ws",
+"plane": 150.0,
+"elev": 75.0,
+"axial": -75.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 463,
+"kind": "ws",
+"plane": 150.0,
+"elev": 90.0,
+"axial": -150.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 464,
+"kind": "ws",
+"plane": 150.0,
+"elev": 90.0,
+"axial": -90.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 465,
+"kind": "ws",
+"plane": 150.0,
+"elev": 105.0,
+"axial": -165.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 466,
+"kind": "ws",
+"plane": 150.0,
+"elev": 105.0,
+"axial": -105.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 467,
+"kind": "ws",
+"plane": 150.0,
+"elev": 120.0,
+"axial": -180.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 468,
+"kind": "ws",
+"plane": 150.0,
+"elev": 120.0,
+"axial": -120.0,
+"taken": false,
+"min_mm": null
+},
+{
+"i": 469,
+"kind": "ws",
+"plane": 150.0,
+"elev": 120.0,
+"axial": -60.0,
+"taken": false,
+"min_mm": null
+}
+],
+"params": {
+"az1": 60.35845282311528,
+"el1": 66.58903475535574,
+"d3": 99.67965502070095,
+"a3": -6.539243799867873,
+"lo": 26.37846540787528,
+"off": 38.633280287960304,
+"cap": 54.56395748791015,
+"a2": 46.008775963716396,
+"f": null,
+"bk1": 25.834871595277782,
+"bk2": 34.17908589263237,
+"sK": -1,
+"sigma": -1,
+"margin": 5.23,
+"width": 12.0,
+"t_link": 3.0,
+"q": 0.9719169367302719,
+"cell": "C",
+"doff": 7.3754956757560945
+},
+"secs": 220.2
+}

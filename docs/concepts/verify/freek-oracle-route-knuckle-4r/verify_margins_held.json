@@ -1,0 +1,120 @@
+{
+ "state0": {
+  "n": 660,
+  "clip": 163,
+  "m3e_min": 7.94,
+  "family_own_min": 7.94,
+  "family_lt5": 0,
+  "family_lt55": 0,
+  "family_lt5_clip": 0,
+  "wrist_moving_min": 23.26,
+  "wrist_moving_p5": 36.12
+ },
+ "state1": {
+  "n": 173,
+  "clip": 4,
+  "m3e_min": 6.5,
+  "family_own_min": 6.5,
+  "family_lt5": 0,
+  "family_lt55": 0,
+  "family_lt5_clip": 0,
+  "wrist_moving_min": 45.46,
+  "wrist_moving_p5": 47.13
+ },
+ "state2": {
+  "n": 61,
+  "clip": 27,
+  "m3e_min": 8.62,
+  "family_own_min": 0.01,
+  "family_lt5": 13,
+  "family_lt55": 13,
+  "family_lt5_clip": 6,
+  "wrist_moving_min": 37.56,
+  "wrist_moving_p5": 39.04
+ },
+ "family_reading_refuses_taken": {
+  "n": 13,
+  "clip": 6,
+  "ws": 7,
+  "idx_state": [
+   [
+    11,
+    2,
+    0.76,
+    23.34
+   ],
+   [
+    12,
+    2,
+    0.32,
+    25.45
+   ],
+   [
+    21,
+    2,
+    0.32,
+    25.45
+   ],
+   [
+    86,
+    2,
+    1.93,
+    24.79
+   ],
+   [
+    91,
+    2,
+    4.28,
+    24.75
+   ],
+   [
+    99,
+    2,
+    4.05,
+    22.61
+   ],
+   [
+    605,
+    2,
+    0.59,
+    42.33
+   ],
+   [
+    677,
+    2,
+    2.46,
+    33.98
+   ],
+   [
+    678,
+    2,
+    0.01,
+    35.26
+   ],
+   [
+    750,
+    2,
+    0.98,
+    35.7
+   ],
+   [
+    753,
+    2,
+    4.35,
+    42.76
+   ],
+   [
+    822,
+    2,
+    4.8,
+    31.04
+   ],
+   [
+    826,
+    2,
+    3.74,
+    44.7
+   ]
+  ]
+ }
+}

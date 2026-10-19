@@ -37,13 +37,19 @@ async def main():
             subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", lst, "-c:v", "libx264", "-preset", "slow", "-crf", "15", "-pix_fmt", "yuv420p", "-movflags", "+faststart", out], check=True)
             print("WROTE", out)
     else:
-        glb, motion, out = args.a1, args.a2, args.a3; os.makedirs(out, exist_ok=True); n = len(json.load(open(motion))["frames"])
-        job = await ep.run({"job": dict(glb=b64z(glb), motion=b64z(motion), script=open(os.path.join(HERE, "render_stills.py")).read(), a=0, b=n - 1, w=args.w, h=args.h, spp=args.spp, fps=1, png=True)})
+        glb, motion, out = args.a1, args.a2, args.a3; os.makedirs(out, exist_ok=True); M = json.load(open(motion)); n = len(M["frames"])
+        # The worker renders into /tmp/job_<a> and counts EVERY png there: on a warm worker a second stills job with a = 0
+        # finds the previous job's frames and fails ("frames": stale count) - the 10-16 "bodyless scenes fail" and "5 sets
+        # at once fail" were this. A fresh, unique a per job: pad the motion with copies of frame 0 so the real frames sit
+        # at off..off+n-1, then name the returned files back 0000..n-1. (Client-side only: the endpoint is unchanged.)
+        off = 100 + int(time.time()) % 2000; M["frames"] = [M["frames"][0]] * off + M["frames"]
+        mp = os.path.join(out, ".motion_offset.json"); json.dump(M, open(mp, "w"))
+        job = await ep.run({"job": dict(glb=b64z(glb), motion=b64z(mp), script=open(os.path.join(HERE, "render_stills.py")).read(), a=off, b=off + n - 1, w=args.w, h=args.h, spp=args.spp, fps=1, png=True)})
         await job.wait(); r = job.output or {}
         if isinstance(r, dict) and "output" in r and "ok" not in r: r = r["output"]
-        if not r.get("ok"): print("failed", str(r)[:2000]); return
+        if not r.get("ok"): print("failed", {k: v for k, v in r.items() if k != "log"}, "LOG TAIL", str(r.get("log", ""))[-1500:]); return
         if "png" in r:
-            for f, b in r["png"].items(): open(os.path.join(out, f), "wb").write(base64.b64decode(b))
+            for f, b in r["png"].items(): open(os.path.join(out, f"{int(f[:-4]) - off:04d}.png"), "wb").write(base64.b64decode(b))
         else:                                                                         # older worker: frames come back as a short MP4
             mp = os.path.join(out, "stills.mp4"); open(mp, "wb").write(base64.b64decode(r["mp4"]))
             subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp, "-vsync", "0", os.path.join(out, "%04d.png")], check=True)

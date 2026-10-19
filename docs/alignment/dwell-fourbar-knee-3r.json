@@ -1,0 +1,107 @@
+{
+ "id": "dwell-fourbar-knee-3r",
+ "status": "verified",
+ "v_gap": 37.66,
+ "complexity": 16.0,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "dominance: cannot compare with slipper-nose-knuckle-3r at 2 mm",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 30.46 (score 88.92) sits 7.20 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 37.66
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 30.46 -> verified 37.66 (+7.20)",
+   "fast": 30.46,
+   "verified": 37.66,
+   "drop": 7.2
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump dwell-fourbar-knee-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 37.66": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with slipper-nose-knuckle-3r at 2 mm"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 16.0 vs row 16.0",
+   "recomputed": 16.0,
+   "row": 16.0
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 30.46 (score 88.92) sits 7.20 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/dwell-fourbar-knee-3r_big_frozen.json"
+ ],
+ "git": "06f7b8d",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T08:03:43Z"
+}

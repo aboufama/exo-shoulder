@@ -1,0 +1,681 @@
+{
+ "key": "r20_n3_s1414_4",
+ "n": 3,
+ "FACES": {
+  "1": 53.37790421905751,
+  "2": 93.17675018310547,
+  "3": 71.84564208984375
+ },
+ "parts": [
+  {
+   "k": 0,
+   "group": "base",
+   "name": "D5-01 scapula base: J1 boss + handler tab, 2x M4 (Ti-6Al-4V)",
+   "vol_cm3": 3.257,
+   "material": "Ti-6Al-4V",
+   "mass_g": 14.43,
+   "valid": true,
+   "faces": 30
+  },
+  {
+   "k": 1,
+   "group": "base",
+   "name": "J1 bearing 1 MR117-2RS 7x11x3",
+   "vol_cm3": 0.17,
+   "material": "bearing steel",
+   "mass_g": 1.32,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 2,
+   "group": "base",
+   "name": "J1 bearing 2 MR117-2RS 7x11x3",
+   "vol_cm3": 0.17,
+   "material": "bearing steel",
+   "mass_g": 1.32,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 3,
+   "group": "base",
+   "name": "J1 outer spacer 17-4PH",
+   "vol_cm3": 0.012,
+   "material": "17-4PH",
+   "mass_g": 0.09,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 4,
+   "group": "l1",
+   "name": "J1 inner spacer (ground, preload)",
+   "vol_cm3": 0.009,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.04,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 5,
+   "group": "l1",
+   "name": "J1 ring nut M7x0.5 (Ti-6Al-4V)",
+   "vol_cm3": 0.018,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.08,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 6,
+   "group": "base",
+   "name": "J1 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "vol_cm3": 0.454,
+   "material": "Ti-6Al-4V",
+   "mass_g": 2.01,
+   "valid": true,
+   "faces": 7
+  },
+  {
+   "k": 7,
+   "group": "l2",
+   "name": "J2 bearing 1 MR117-2RS 7x11x3",
+   "vol_cm3": 0.17,
+   "material": "bearing steel",
+   "mass_g": 1.32,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 8,
+   "group": "l2",
+   "name": "J2 bearing 2 MR117-2RS 7x11x3",
+   "vol_cm3": 0.17,
+   "material": "bearing steel",
+   "mass_g": 1.32,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 9,
+   "group": "l2",
+   "name": "J2 outer spacer 17-4PH",
+   "vol_cm3": 0.012,
+   "material": "17-4PH",
+   "mass_g": 0.09,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 10,
+   "group": "l1",
+   "name": "J2 inner spacer (ground, preload)",
+   "vol_cm3": 0.009,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.04,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 11,
+   "group": "l1",
+   "name": "J2 ring nut M7x0.5 (Ti-6Al-4V)",
+   "vol_cm3": 0.018,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.08,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 12,
+   "group": "l2",
+   "name": "J2 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "vol_cm3": 0.454,
+   "material": "Ti-6Al-4V",
+   "mass_g": 2.01,
+   "valid": true,
+   "faces": 7
+  },
+  {
+   "k": 13,
+   "group": "H",
+   "name": "D5-04 arm end: J3 pad + pin + neck + lap plate on BOTTOM (Ti-6Al-4V)",
+   "vol_cm3": 4.511,
+   "material": "Ti-6Al-4V",
+   "mass_g": 19.99,
+   "valid": true,
+   "faces": 32
+  },
+  {
+   "k": 14,
+   "group": "l2",
+   "name": "J3 bearing 1 MR117-2RS 7x11x3",
+   "vol_cm3": 0.17,
+   "material": "bearing steel",
+   "mass_g": 1.32,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 15,
+   "group": "l2",
+   "name": "J3 bearing 2 MR117-2RS 7x11x3",
+   "vol_cm3": 0.17,
+   "material": "bearing steel",
+   "mass_g": 1.32,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 16,
+   "group": "l2",
+   "name": "J3 outer spacer 17-4PH",
+   "vol_cm3": 0.012,
+   "material": "17-4PH",
+   "mass_g": 0.09,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 17,
+   "group": "H",
+   "name": "J3 inner spacer (ground, preload)",
+   "vol_cm3": 0.009,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.04,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 18,
+   "group": "H",
+   "name": "J3 ring nut M7x0.5 (Ti-6Al-4V)",
+   "vol_cm3": 0.018,
+   "material": "Ti-6Al-4V",
+   "mass_g": 0.08,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 19,
+   "group": "l2",
+   "name": "J3 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "vol_cm3": 0.454,
+   "material": "Ti-6Al-4V",
+   "mass_g": 2.01,
+   "valid": true,
+   "faces": 7
+  },
+  {
+   "k": 20,
+   "group": "l1",
+   "name": "D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "vol_cm3": 4.227,
+   "material": "Ti-6Al-4V",
+   "mass_g": 18.73,
+   "valid": true,
+   "faces": 44
+  },
+  {
+   "k": 21,
+   "group": "l2",
+   "name": "D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)",
+   "vol_cm3": 4.822,
+   "material": "Ti-6Al-4V",
+   "mass_g": 21.36,
+   "valid": true,
+   "faces": 35
+  },
+  {
+   "k": 22,
+   "group": "H",
+   "name": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
+   "vol_cm3": 0.106,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 32
+  },
+  {
+   "k": 23,
+   "group": "H",
+   "name": "BOTTOM (user's bar, cut at s 265, 4x M3 countersunk for the neck tongue)",
+   "vol_cm3": 25.063,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 107
+  },
+  {
+   "k": 24,
+   "group": "F",
+   "name": "FOREARM CUFF",
+   "vol_cm3": 132.891,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 52
+  },
+  {
+   "k": 25,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 26,
+   "group": "H",
+   "name": "TOP",
+   "vol_cm3": 2.196,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 17
+  },
+  {
+   "k": 27,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 28,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 29,
+   "group": "H",
+   "name": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
+   "vol_cm3": 0.106,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 32
+  },
+  {
+   "k": 30,
+   "group": "H",
+   "name": "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
+   "vol_cm3": 0.732,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 31,
+   "group": "F",
+   "name": "MIDDLE",
+   "vol_cm3": 12.203,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 105
+  },
+  {
+   "k": 32,
+   "group": "H",
+   "name": "IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J",
+   "vol_cm3": 0.732,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 33,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 34,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 35,
+   "group": "F",
+   "name": "Hex socket head countersunk screw grade C M4x0.7 x 8",
+   "vol_cm3": 0.139,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 20
+  },
+  {
+   "k": 36,
+   "group": "H",
+   "name": "5mm D, 2.5mm H, N42 MAGNET",
+   "vol_cm3": 0.049,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 5
+  },
+  {
+   "k": 37,
+   "group": "H",
+   "name": "M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL",
+   "vol_cm3": 0.106,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 32
+  },
+  {
+   "k": 38,
+   "group": "H",
+   "name": "CirPattern1[15]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 39,
+   "group": "H",
+   "name": "Revolve1[2]",
+   "vol_cm3": 0.042,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 40,
+   "group": "H",
+   "name": "CirPattern1[11]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 41,
+   "group": "H",
+   "name": "Revolve4",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 42,
+   "group": "H",
+   "name": "CirPattern1[5]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 43,
+   "group": "H",
+   "name": "Revolve1[1]",
+   "vol_cm3": 0.275,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 8
+  },
+  {
+   "k": 44,
+   "group": "H",
+   "name": "CirPattern1[7]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 45,
+   "group": "H",
+   "name": "CirPattern1[16]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 46,
+   "group": "H",
+   "name": "CirPattern1[12]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 47,
+   "group": "H",
+   "name": "CirPattern1[14]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 48,
+   "group": "H",
+   "name": "CirPattern1[8]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 49,
+   "group": "H",
+   "name": "CirPattern1[10]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 50,
+   "group": "H",
+   "name": "CirPattern1[4]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 51,
+   "group": "H",
+   "name": "Revolve3",
+   "vol_cm3": 0.22,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 8
+  },
+  {
+   "k": 52,
+   "group": "H",
+   "name": "CirPattern1[2]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 53,
+   "group": "H",
+   "name": "CirPattern1[9]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 54,
+   "group": "H",
+   "name": "Revolve1[3]",
+   "vol_cm3": 0.042,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 55,
+   "group": "H",
+   "name": "CirPattern1[1]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 56,
+   "group": "H",
+   "name": "CirPattern1[6]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 57,
+   "group": "H",
+   "name": "CirPattern1[3]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 58,
+   "group": "H",
+   "name": "CirPattern1[17]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 59,
+   "group": "H",
+   "name": "CirPattern1[13]",
+   "vol_cm3": 0.007,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 1
+  },
+  {
+   "k": 60,
+   "group": "H",
+   "name": "UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
+   "vol_cm3": 15.756,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 17
+  },
+  {
+   "k": 61,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 62,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 63,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 64,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 65,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  },
+  {
+   "k": 66,
+   "group": "H",
+   "name": "M4x6 ISO 10642 countersunk (upper cuff)",
+   "vol_cm3": 0.13,
+   "material": "user part",
+   "mass_g": null,
+   "valid": true,
+   "faces": 4
+  }
+ ]
+}

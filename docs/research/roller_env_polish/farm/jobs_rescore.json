@@ -1,0 +1,31 @@
+[
+ {
+  "tag": "rlp-rescore-nominal",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py rescore BEST docs/research/roller_env_polish/farm/rescore_nominal.json > docs/research/roller_env_polish/farm/rescore_nominal.log 2>&1; tail -2 docs/research/roller_env_polish/farm/rescore_nominal.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/rescore_nominal*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 2700
+ },
+ {
+  "tag": "rlp-rescore-priced",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py rescore BEST_am docs/research/roller_env_polish/farm/rescore_priced.json > docs/research/roller_env_polish/farm/rescore_priced.log 2>&1; tail -2 docs/research/roller_env_polish/farm/rescore_priced.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/rescore_priced*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2700
+ }
+]

@@ -1,0 +1,876 @@
+{
+ "model_file": ".cache/ext/seth2016/x/ShoulderModel/ScapulothorachicJoint_Shoulder.osim",
+ "opensim": "4.6-2026-06-22-85aaf64",
+ "nq": 18,
+ "nu": 17,
+ "joints": {
+  "ground_thorax": {
+   "type": "CustomJoint",
+   "parent": "ground",
+   "child": "thorax",
+   "parent_offset": {
+    "t": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "child_offset": {
+    "t": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "coords": [
+    {
+     "axis_name": "rotation1",
+     "coord": "ground_thorax_rot_x",
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "axis_name": "rotation2",
+     "coord": "ground_thorax_rot_y",
+     "axis": [
+      0.0,
+      1.0,
+      0.0
+     ]
+    },
+    {
+     "axis_name": "rotation3",
+     "coord": "ground_thorax_rot_z",
+     "axis": [
+      0.0,
+      0.0,
+      1.0
+     ]
+    },
+    {
+     "axis_name": "translation1",
+     "coord": "ground_thorax_tx",
+     "axis": [
+      1.0,
+      0.0,
+      0.0
+     ]
+    },
+    {
+     "axis_name": "translation2",
+     "coord": "ground_thorax_ty",
+     "axis": [
+      0.0,
+      1.0,
+      0.0
+     ]
+    },
+    {
+     "axis_name": "translation3",
+     "coord": "ground_thorax_tz",
+     "axis": [
+      0.0,
+      0.0,
+      1.0
+     ]
+    }
+   ]
+  },
+  "sternoclavicular": {
+   "type": "CustomJoint",
+   "parent": "thorax",
+   "child": "clavicle",
+   "parent_offset": {
+    "t": [
+     0.006325,
+     0.00693,
+     0.025465
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "child_offset": {
+    "t": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "coords": [
+    {
+     "axis_name": "rotation1",
+     "coord": "clav_prot",
+     "axis": [
+      0.0153,
+      0.9893,
+      -0.1451
+     ]
+    },
+    {
+     "axis_name": "rotation2",
+     "coord": "clav_elev",
+     "axis": [
+      -0.99447,
+      0.0,
+      -0.105
+     ]
+    }
+   ]
+  },
+  "scapulothoracic": {
+   "type": "ScapulothoracicJoint",
+   "parent": "thorax",
+   "child": "scapula",
+   "parent_offset": {
+    "t": [
+     -0.02,
+     -0.0173,
+     0.07
+    ],
+    "r": [
+     0.0,
+     -0.87,
+     0.0
+    ]
+   },
+   "child_offset": {
+    "t": [
+     -0.05982,
+     -0.03904,
+     -0.056
+    ],
+    "r": [
+     -0.5181,
+     -1.1416,
+     -0.2854
+    ]
+   },
+   "coords": []
+  },
+  "glenohumeral": {
+   "type": "CustomJoint",
+   "parent": "scapula",
+   "child": "humerus",
+   "parent_offset": {
+    "t": [
+     -0.00955,
+     -0.034,
+     0.009
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "child_offset": {
+    "t": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "coords": [
+    {
+     "axis_name": "rotation1",
+     "coord": "shoulder_elv",
+     "axis": [
+      -0.993,
+      -0.0793,
+      0.0879
+     ]
+    },
+    {
+     "axis_name": "rotation2",
+     "coord": "plane_of_elev",
+     "axis": [
+      0.0828,
+      0.0654,
+      0.9944
+     ]
+    },
+    {
+     "axis_name": "rotation3",
+     "coord": "axial_rot",
+     "axis": [
+      -0.0846,
+      0.9947,
+      -0.0584
+     ]
+    }
+   ]
+  },
+  "elbow": {
+   "type": "CustomJoint",
+   "parent": "humerus",
+   "child": "ulna",
+   "parent_offset": {
+    "t": [
+     0.0061,
+     -0.2904,
+     -0.0123
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "child_offset": {
+    "t": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "coords": [
+    {
+     "axis_name": "rotation3",
+     "coord": "elbow_flexion",
+     "axis": [
+      0.0494,
+      0.0366,
+      0.99811
+     ]
+    }
+   ]
+  },
+  "radioulnar": {
+   "type": "CustomJoint",
+   "parent": "ulna",
+   "child": "radius",
+   "parent_offset": {
+    "t": [
+     0.0004,
+     -0.011503,
+     0.019999
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "child_offset": {
+    "t": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "coords": [
+    {
+     "axis_name": "rotation2",
+     "coord": "pro_sup",
+     "axis": [
+      -0.01716,
+      0.99267,
+      -0.11967
+     ]
+    }
+   ]
+  },
+  "rc": {
+   "type": "WeldJoint",
+   "parent": "radius",
+   "child": "hand",
+   "parent_offset": {
+    "t": [
+     0.018,
+     -0.242,
+     0.025
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "child_offset": {
+    "t": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "r": [
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "coords": []
+  }
+ },
+ "ellipsoid": {
+  "radii_xyz_m": [
+   0.07,
+   0.15,
+   0.07
+  ],
+  "winging_axis_origin": [
+   0.0,
+   0.0
+  ],
+  "winging_axis_direction_rad": 0.0,
+  "centre_in_thorax_m": [
+   -0.02,
+   -0.0173,
+   0.07
+  ],
+  "orientation_in_thorax_rad": [
+   0.0,
+   -0.87,
+   0.0
+  ]
+ },
+ "coordinates": {
+  "ground_thorax_rot_x": {
+   "range_deg": [
+    -89.99999999971945,
+    89.99999999971945
+   ],
+   "default_deg": 0.0,
+   "clamped": true,
+   "locked": true,
+   "joint": "ground_thorax"
+  },
+  "ground_thorax_rot_y": {
+   "range_deg": [
+    -89.99999999971945,
+    89.99999999971945
+   ],
+   "default_deg": 0.0,
+   "clamped": true,
+   "locked": true,
+   "joint": "ground_thorax"
+  },
+  "ground_thorax_rot_z": {
+   "range_deg": [
+    -89.99999999971945,
+    89.99999999971945
+   ],
+   "default_deg": 0.0,
+   "clamped": true,
+   "locked": true,
+   "joint": "ground_thorax"
+  },
+  "ground_thorax_tx": {
+   "range_deg": [
+    -57.29577951308232,
+    57.29577951308232
+   ],
+   "default_deg": 0.0,
+   "clamped": false,
+   "locked": true,
+   "joint": "ground_thorax"
+  },
+  "ground_thorax_ty": {
+   "range_deg": [
+    -57.29577951308232,
+    57.29577951308232
+   ],
+   "default_deg": 0.0,
+   "clamped": false,
+   "locked": true,
+   "joint": "ground_thorax"
+  },
+  "ground_thorax_tz": {
+   "range_deg": [
+    -57.29577951308232,
+    57.29577951308232
+   ],
+   "default_deg": 0.0,
+   "clamped": false,
+   "locked": true,
+   "joint": "ground_thorax"
+  },
+  "clav_prot": {
+   "range_deg": [
+    -44.99999999957325,
+    44.99999999957325
+   ],
+   "default_deg": 0.0,
+   "clamped": true,
+   "locked": false,
+   "joint": "sternoclavicular"
+  },
+  "clav_elev": {
+   "range_deg": [
+    -44.99999999957325,
+    44.99999999957325
+   ],
+   "default_deg": 0.0,
+   "clamped": true,
+   "locked": false,
+   "joint": "sternoclavicular"
+  },
+  "scapula_abduction": {
+   "range_deg": [
+    -44.99999999957325,
+    44.99999999957325
+   ],
+   "default_deg": 0.0,
+   "clamped": true,
+   "locked": false,
+   "joint": "scapulothoracic"
+  },
+  "scapula_elevation": {
+   "range_deg": [
+    -44.99999999957325,
+    44.99999999957325
+   ],
+   "default_deg": 0.0,
+   "clamped": true,
+   "locked": false,
+   "joint": "scapulothoracic"
+  },
+  "scapula_upward_rot": {
+   "range_deg": [
+    -44.99999999957325,
+    44.99999999957325
+   ],
+   "default_deg": 0.0,
+   "clamped": true,
+   "locked": false,
+   "joint": "scapulothoracic"
+  },
+  "scapula_winging": {
+   "range_deg": [
+    -44.99999999957325,
+    44.99999999957325
+   ],
+   "default_deg": 0.0,
+   "clamped": false,
+   "locked": false,
+   "joint": "scapulothoracic"
+  },
+  "shoulder_elv": {
+   "range_deg": [
+    -89.99999999971945,
+    144.95832216809828
+   ],
+   "default_deg": 9.999999999459531,
+   "clamped": false,
+   "locked": false,
+   "joint": "glenohumeral"
+  },
+  "plane_of_elev": {
+   "range_deg": [
+    -89.99999999971945,
+    179.99999979432002
+   ],
+   "default_deg": 0.0,
+   "clamped": true,
+   "locked": false,
+   "joint": "glenohumeral"
+  },
+  "axial_rot": {
+   "range_deg": [
+    -179.99999979432002,
+    179.99999979432002
+   ],
+   "default_deg": 0.0,
+   "clamped": true,
+   "locked": false,
+   "joint": "glenohumeral"
+  },
+  "elbow_flexion": {
+   "range_deg": [
+    0.0,
+    179.99999979432002
+   ],
+   "default_deg": 0.0,
+   "clamped": false,
+   "locked": true,
+   "joint": "elbow"
+  },
+  "pro_sup": {
+   "range_deg": [
+    -90.0000001836389,
+    90.0000001836389
+   ],
+   "default_deg": -90.0000001836389,
+   "clamped": false,
+   "locked": true,
+   "joint": "radioulnar"
+  }
+ },
+ "AC_constraint": {
+  "body_1": "clavicle",
+  "point_1_m": [
+   -0.02924,
+   0.02024,
+   0.12005
+  ],
+  "body_2": "scapula",
+  "point_2_m": [
+   -0.01357,
+   0.00011,
+   -0.01523
+  ]
+ },
+ "coordinate_limit_forces": {
+  "ClavicleElevationLimits": {
+   "coord": "clav_elev",
+   "lower_deg": -20.0,
+   "upper_deg": 25.0
+  },
+  "ClavicleProtractionLimits": {
+   "coord": "clav_prot",
+   "lower_deg": -10.0,
+   "upper_deg": 25.0
+  },
+  "ScapulaRotationLimits": {
+   "coord": "scapula_upward_rot",
+   "lower_deg": -20.0,
+   "upper_deg": 50.0
+  },
+  "ShoulderRotationLimits": {
+   "coord": "shoulder_elv",
+   "lower_deg": -85.0,
+   "upper_deg": 180.0
+  },
+  "ElbowFlexLimit": {
+   "coord": "elbow_flexion",
+   "lower_deg": 0.0,
+   "upper_deg": 140.0
+  }
+ },
+ "markers": {
+  "ij": {
+   "body": "thorax",
+   "loc_m": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "c7": {
+   "body": "thorax",
+   "loc_m": [
+    -0.0899063,
+    0.0327569,
+    0.0
+   ]
+  },
+  "t8": {
+   "body": "thorax",
+   "loc_m": [
+    -0.111155,
+    -0.154433,
+    0.0
+   ]
+  },
+  "px": {
+   "body": "thorax",
+   "loc_m": [
+    0.0697635,
+    -0.164311,
+    0.0
+   ]
+  },
+  "ClavicleMassCenter": {
+   "body": "clavicle",
+   "loc_m": [
+    -0.02172,
+    0.01007,
+    0.06704
+   ]
+  },
+  "acc": {
+   "body": "clavicle",
+   "loc_m": [
+    -0.028301,
+    0.018552,
+    0.117034
+   ]
+  },
+  "sc": {
+   "body": "clavicle",
+   "loc_m": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "ScapulaMassCenter": {
+   "body": "scapula",
+   "loc_m": [
+    -0.04612,
+    -0.0319,
+    -0.04565
+   ]
+  },
+  "ScapulaThoracicContactPt": {
+   "body": "scapula",
+   "loc_m": [
+    -0.05982,
+    -0.03904,
+    -0.056
+   ]
+  },
+  "ac": {
+   "body": "scapula",
+   "loc_m": [
+    -0.0119247,
+    -0.00196687,
+    -0.0176399
+   ]
+  },
+  "ai": {
+   "body": "scapula",
+   "loc_m": [
+    -0.115393,
+    -0.116437,
+    -0.0826482
+   ]
+  },
+  "ts": {
+   "body": "scapula",
+   "loc_m": [
+    -0.0921861,
+    -0.00870938,
+    -0.095417
+   ]
+  },
+  "aa": {
+   "body": "scapula",
+   "loc_m": [
+    -0.044807,
+    -4.28397e-05,
+    0.00490913
+   ]
+  },
+  "HumerusMassCenter": {
+   "body": "humerus",
+   "loc_m": [
+    0.00537,
+    -0.11493,
+    -0.00261
+   ]
+  },
+  "gu": {
+   "body": "humerus",
+   "loc_m": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "EpL": {
+   "body": "humerus",
+   "loc_m": [
+    0.00134695,
+    -0.285625,
+    0.022249
+   ]
+  },
+  "EpM": {
+   "body": "humerus",
+   "loc_m": [
+    0.00148415,
+    -0.282015,
+    -0.0446513
+   ]
+  },
+  "centelbow": {
+   "body": "humerus",
+   "loc_m": [
+    0.0009,
+    -0.2842,
+    -0.0097
+   ]
+  },
+  "centijc7": {
+   "body": "thorax",
+   "loc_m": [
+    -0.0415,
+    0.0163,
+    0.0
+   ]
+  },
+  "centpxt8": {
+   "body": "thorax",
+   "loc_m": [
+    -0.0207,
+    -0.1601,
+    0.0004
+   ]
+  },
+  "ijc": {
+   "body": "clavicle",
+   "loc_m": [
+    -0.00953974,
+    -0.00184817,
+    -0.0253392
+   ]
+  }
+ },
+ "isb_thorax": {
+  "axes_in_model_thorax_columns": [
+   [
+    0.9906089500485714,
+    -0.13672566724527996,
+    0.0
+   ],
+   [
+    0.13672566724527999,
+    0.9906089500485713,
+    0.0
+   ],
+   [
+    -0.0,
+    0.0,
+    0.9999999999999999
+   ]
+  ],
+  "origin_IJ_mm": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "tilt_about_z_deg": 7.85841872078782
+ },
+ "frame_mapping": {
+  "scapula_isb_axes_in_scapula_body": [
+   [
+    0.886,
+    0.1836,
+    0.4257
+   ],
+   [
+    -0.238,
+    0.9681,
+    0.0779
+   ],
+   [
+    -0.3979,
+    -0.1703,
+    0.9015
+   ]
+  ],
+  "scapula_body_to_isb_rotation_deg": 28.61879601001215,
+  "humerus_isb_axes_in_humerus_body": [
+   [
+    1.0,
+    -0.005,
+    -0.0021
+   ],
+   [
+    0.0049,
+    0.9992,
+    -0.0394
+   ],
+   [
+    0.0023,
+    0.0394,
+    0.9992
+   ]
+  ],
+  "humerus_body_to_isb_rotation_deg": 2.281543917747702,
+  "clavicle_isb_Zc_in_clavicle_body": [
+   -0.2323,
+   0.1523,
+   0.9606
+  ],
+  "note": "ISB frames are built from the model's own bony-landmark markers (thorax ij/c7/px/t8, clavicle sc/acc, scapula aa/ts/ai, humerus gu/EpL/EpM), so the body-frame conventions of the model do not enter the angles; these are the fixed rotations between them"
+ },
+ "check_st_joint_vs_plugin_max_diff": 3.3306690738754696e-13,
+ "check_gh_centre": {
+  "humerus_origin_in_scapula_mm": [
+   -9.55,
+   -34.00000000000001,
+   9.0
+  ],
+  "gh_joint_location_in_scapula_mm": [
+   -9.549999999999999,
+   -34.0,
+   9.0
+  ],
+  "max_move_over_gh_coords_mm": 0.0,
+  "head_sphere_centre_mm": [
+   0.2967638028335982,
+   0.9191485240681567,
+   1.7969469288664948
+  ],
+  "head_sphere_r_mm": 23.40835917324608,
+  "head_sphere_rms_mm": 1.5759373193032518
+ },
+ "default_posture": {
+  "girdle_coords_deg": {
+   "clav_prot": 2.1456800863223067,
+   "clav_elev": -2.184038481140752,
+   "scapula_abduction": -0.776512264050602,
+   "scapula_elevation": 2.2281821852034778,
+   "scapula_upward_rot": 2.018511633466342,
+   "scapula_winging": 1.4844569118118913
+  },
+  "isb_girdle_deg": {
+   "ret": 10.396639743336776,
+   "elev": 8.117026472586254,
+   "IR": 42.61378202876812,
+   "UR": -9.425935946823001,
+   "PT": -9.557088884310375
+  },
+  "isb_humerus_deg": {
+   "plane": -154.6018681956731,
+   "elev": 6.76366021029246,
+   "axial": 170.8715051770866
+  }
+ },
+ "geometry": {
+  "clavicle_SC_acc_mm": 121.82807747395503,
+  "clavicle_SC_ACjoint_mm": 125.20638042847492,
+  "AC_to_GH_isb_default_mm": [
+   6.971094800052575,
+   -39.17873400349748,
+   13.534254289463801
+  ],
+  "SC_to_GH_isb_default_mm": [
+   -15.39362627154944,
+   -20.30774991900465,
+   135.27308503410435
+  ],
+  "IJ_to_GH_isb_default_mm": [
+   -8.180515788482435,
+   -14.307619740494445,
+   160.73808503410436
+  ]
+ }
+}

@@ -1,0 +1,45 @@
+[
+ {
+  "tag": "chk-BEST_m5_nominal",
+  "cmd": "mkdir -p docs/research/roller-longdyad-gen6_fix_check && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 bench BEST docs/research/roller-longdyad-gen6_fix_check/claim_BEST_m5_nominal_fit60_bench.json > docs/research/roller-longdyad-gen6_fix_check/claim_BEST_m5_nominal_fit60_bench.log 2>&1; tail -1 docs/research/roller-longdyad-gen6_fix_check/claim_BEST_m5_nominal_fit60_bench.log",
+  "out": [
+   "docs/research/roller-longdyad-gen6_fix_check/claim_BEST_m5_nominal_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "chk-BESTam_m5_priced",
+  "cmd": "mkdir -p docs/research/roller-longdyad-gen6_fix_check && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 bench BEST_am docs/research/roller-longdyad-gen6_fix_check/claim_BESTam_m5_priced_fit60_bench.json > docs/research/roller-longdyad-gen6_fix_check/claim_BESTam_m5_priced_fit60_bench.log 2>&1; tail -1 docs/research/roller-longdyad-gen6_fix_check/claim_BESTam_m5_priced_fit60_bench.log",
+  "out": [
+   "docs/research/roller-longdyad-gen6_fix_check/claim_BESTam_m5_priced_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "chk-pick3_m5_priced",
+  "cmd": "mkdir -p docs/research/roller-longdyad-gen6_fix_check && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py claim fit60 bench docs/research/roller_env_polish/picks/pick3.json docs/research/roller-longdyad-gen6_fix_check/claim_pick3_m5_priced_fit60_bench.json > docs/research/roller-longdyad-gen6_fix_check/claim_pick3_m5_priced_fit60_bench.log 2>&1; tail -1 docs/research/roller-longdyad-gen6_fix_check/claim_pick3_m5_priced_fit60_bench.log",
+  "out": [
+   "docs/research/roller-longdyad-gen6_fix_check/claim_pick3_m5_priced_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5"
+  },
+  "timeout": 3300
+ }
+]

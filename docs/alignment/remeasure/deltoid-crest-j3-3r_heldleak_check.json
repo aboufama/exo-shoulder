@@ -1,0 +1,34 @@
+{
+ "fit60_n": 220,
+ "held_n": 470,
+ "leaked": 60,
+ "leaked_kinds": {
+  "clip": 20,
+  "ws": 40
+ },
+ "held_gap_all": 50.05,
+ "held_clean": {
+  "gap": 53.98,
+  "reach": 0.5656,
+  "follow": 0.8556,
+  "inband14": 0.8676,
+  "contact": 0.0786,
+  "n_ws": 320,
+  "n_clip": 90,
+  "ws_taken": 181,
+  "contact_poses": 22
+ },
+ "leaked_taken": 45,
+ "method": "held_bench(110,360) of docs/concepts/verify/deltoid-crest-j3-3r-skeptic.py vs CB._select(60,160) (the search bench); gap recomputed from the held per-pose dump on the poses outside the search bench",
+ "by_pose_vector": {
+  "leaked": 72,
+  "extra_vs_index": 12,
+  "extra_kind": "clip frames whose 5-D pose vector equals a Bench(60,160) clip frame (duplicate frames in the pool)",
+  "extra_taken": 8,
+  "extra_contact": 1,
+  "held_gap_clean": 51.08,
+  "note": "the 60 index matches plus 12 identical-pose clip frames removed; tools/alignment_paired.gap_parts on the remaining 398 poses"
+ },
+ "reading": "held 50.05 reported; on the poses the search never saw 51.08 (pose-vector match, 398 poses) to 53.98 (index match, 410 poses): +3.22 to +6.12 over the bench 47.86 against +2.19 reported",
+ "all_rows": "docs/alignment/remeasure/heldleak_fit60_all.json (coordinate match on every held per-pose dump: the 1154-pose held sets of the knuckle family share 30 poses with Bench(60,160); removing them moves their held gap by -0.64..+0.09)"
+}

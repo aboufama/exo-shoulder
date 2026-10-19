@@ -1,0 +1,21 @@
+gap 29.38 reach 0.675 follow 0.9167 ib14 0.9014 contact 0.0355
+part-part poses 18 of 220
+pairs {'hub2-neck': 10, 'hub1-hub3': 9, 'hub1-link2': 9, 'hub1-neck': 4, 'link1-link2': 2}
+76 ws [-45.0, 45.0, 30.0] ['hub1-hub3', 'hub1-link2']
+83 ws [-30.0, 60.0, 15.0] ['hub1-hub3', 'hub1-link2', 'hub1-neck', 'hub2-neck']
+88 ws [-15.0, 45.0, 15.0] ['hub1-hub3', 'hub1-link2', 'hub1-neck', 'link1-link2']
+96 ws [0.0, 30.0, 0.0] ['hub1-hub3', 'hub1-link2']
+101 ws [0.0, 90.0, 15.0] ['hub2-neck']
+102 ws [0.0, 105.0, 0.0] ['hub2-neck']
+104 ws [0.0, 150.0, 0.0] ['hub2-neck']
+108 ws [15.0, 30.0, 0.0] ['hub1-hub3', 'hub1-link2']
+109 ws [15.0, 45.0, -30.0] ['hub1-hub3', 'hub1-link2', 'hub1-neck']
+113 ws [15.0, 90.0, 15.0] ['hub2-neck']
+114 ws [15.0, 105.0, 0.0] ['hub2-neck']
+116 ws [15.0, 150.0, 0.0] ['hub2-neck']
+121 ws [30.0, 45.0, -30.0] ['hub1-hub3', 'hub1-link2', 'hub1-neck']
+125 ws [30.0, 90.0, 15.0] ['hub2-neck']
+126 ws [30.0, 105.0, 0.0] ['hub2-neck']
+128 ws [30.0, 150.0, 0.0] ['hub2-neck']
+133 ws [45.0, 45.0, -30.0] ['hub1-hub3', 'hub1-link2', 'link1-link2']
+145 ws [60.0, 45.0, -30.0] ['hub1-hub3', 'hub1-link2']

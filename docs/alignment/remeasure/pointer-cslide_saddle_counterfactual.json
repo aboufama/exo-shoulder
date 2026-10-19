@@ -1,0 +1,77 @@
+{
+ "saddle1": {
+  "report": {
+   "gap": 69.84,
+   "reach": 0.5,
+   "follow": 0.9333,
+   "inband14": 0.6739,
+   "inband10": 0.5209,
+   "contact": 0.0556
+  },
+  "inband_member": {
+   "hub1": 0.0174,
+   "hub2": 0.1764,
+   "link1": 0.1889,
+   "link2": 0.6689,
+   "band": 0.8494,
+   "shoe": 0.0,
+   "neck": 0.9945
+  },
+  "mass_g": 741.2,
+  "rho": 81.83,
+  "T": 97.9,
+  "c": 27.4,
+  "outer_contact_poses": 4,
+  "band_outer_face_mm": {
+   "p10": 25.0,
+   "median": 29.4,
+   "p90": 31.8
+  },
+  "shoe_crown_mm": {
+   "p10": 29.9,
+   "median": 31.7,
+   "p90": 31.8
+  },
+  "band_body_thickness_mm": {
+   "min": 6.0,
+   "p10": 12.2,
+   "median": 23.3,
+   "p90": 28.0,
+   "max": 31.4
+  }
+ },
+ "saddle0": {
+  "report": {
+   "gap": 120.3,
+   "reach": 0.5,
+   "follow": 0.9333,
+   "inband14": 0.1822,
+   "inband10": 0.1354,
+   "contact": 0.0685
+  },
+  "inband_member": {
+   "hub1": 0.0174,
+   "hub2": 0.1764,
+   "link1": 0.1889,
+   "link2": 0.6631,
+   "band": 0.0006,
+   "shoe": 0.0,
+   "neck": 0.9945
+  },
+  "mass_g": 274.7,
+  "rho": 83.52,
+  "T": 97.9,
+  "c": 27.4,
+  "outer_contact_poses": 4,
+  "band_outer_face_mm": {
+   "p10": 28.6,
+   "median": 31.5,
+   "p90": 31.8
+  },
+  "shoe_crown_mm": {
+   "p10": 31.7,
+   "median": 31.8,
+   "p90": 31.8
+  }
+ }
+}

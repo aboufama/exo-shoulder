@@ -1,0 +1,72 @@
+--- a/pipeline/conformal/gpu/band_impl.py
++++ b/pipeline/conformal/gpu/band_impl.py
+@@ -281,6 +281,7 @@
+         self.WT = self.P["WT"]
+         self.b_ant_max = float(job.get("b_ant_max", 0.15)); self.neck_cfg = job.get("neck"); self.mount_dir = job.get("mount_dir", [0.0, 0.6, -0.8])
+         self.min_arc = float(job.get("min_arc", MIN_ARC)); self.min_arm = float(job.get("min_arm_mm", MIN_ARM_MM))   # every link has a real arm
++        self.jn_low0 = str(job.get("jn_low", "arm")); self.jn_link = False      # "link": link N-1 under the arm hub at JN (analysis/jn_flip_patch.py)
+ 
+     # -- helpers
+     def _unit(self, x): return x / (self.t.linalg.norm(x, dim=-1, keepdim=True) + 1e-12)
+@@ -385,6 +386,7 @@
+ 
+     def evaluate(self, d, detail=False):
+         self.hub_margin = float(d.get("hm", self.hub_margin0))                # per-design contour margin (searched)
++        self.jn_link = str(d.get("jn_low", self.jn_low0)) == "link"
+         ok_, err_ = link_arcs_ok(d, self.min_arc, self.R_REF, HUB_R)          # every link a real arm (FINDINGS "Short link")
+         if not ok_: return self._reject(err_)
+         if bvec(d["az"], d["el"])[0] > self.b_ant_max:                       # J1 on the front of the shoulder: no back anchor
+@@ -474,7 +476,7 @@
+         # BOTTOM hub face: clear of the arm skin under the disc at every bin (arm-fixed)  -> link N-1 face on top
+         self._zj4_fixed = d.get("zj4_fixed")                                                       # None: fitted with the shape
+         zj4 = self._zj4_fixed if self._zj4_fixed is not None else self.bottom_face(d)
+-        F_top_bottom = zj4 + T_BOT + T_W
++        F_top_bottom = zj4 + (0.0 if self.jn_link else T_BOT + T_W)
+         self._bot_gap = (zj4 - F_top_bottom)                                   # scored height offset of the JN samples (BOTTOM's disc under link N-1)
+         # ---- collisions need heights: computed inside the loop
+         rng_iters = int(d.get("iters", 4)); WT = self.WT; BIG = 1e4; ar = t.arange(NP, device=self.dev)
+@@ -679,12 +681,13 @@
+             rail_under = None
+             if NR:                                                                              # carriage rides 0.5 mm over the rail's turned top
+                 rail_under = Lm[rail_m] + self.hub_margin; zb = t.maximum(zb, rail_under.max() + RAIL_D + 0.5)
+-            Fb = zb + T_BOT + T_W
++            Fb = zb + (0.0 if self.jn_link else T_BOT + T_W)
+             Fj = {}
+             for J in range(1, N):
+                 m_lo = is_low & (JA == J); m_up = (kindA > 0) & (JA == J) & ~is_low
+                 Fj[J] = t.maximum((Lm[m_lo] * cosA[m_lo]).max(), (Lm[m_up] * cosA[m_up]).max() - STACK)
+             for _pass in range(3):
++                Fb = zb + (0.0 if self.jn_link else T_BOT + T_W)
+                 h = Lm.clone(); faces = {}
+                 for J in range(1, N):
+                     m_lo = is_low & (JA == J); m_up = (kindA > 0) & (JA == J) & ~is_low; F = Fj[J]; faces[J] = F
+@@ -709,6 +712,11 @@
+                     if not bool(near.any()): continue
+                     req = h[near].max() + T_LO - STACK + 0.1                                      # rim of the lower plate under the upper hub
+                     if float(req) > float(Fj[J]) + 1e-3: Fj[J] = req; moved = True
++                if self.jn_link:
++                    near = rib & (memA == N - 1) & (dBA < HUB_R + 2.5)
++                    if bool(near.any()):
++                        req = h[near].max() + T_LO - STACK + 0.1
++                        if float(req) > float(zb) + 1e-3: zb = req if hasattr(req, 'shape') else t.tensor(req); moved = True
+                 if not moved: break
+             if self.hub_relief > 0 and self._rail is None:                                     # BOTTOM / cuff hub: arm-side part, link N-1 turns on it ->
+                 bu = zb / cosA                                                                  # its contour is axisymmetric (one height per ring, turned)
+@@ -723,7 +731,7 @@
+             aux_u = []
+             for ax_ in self._aux:                                                                 # neck / tab: hug the kept frames, ramp out of their start
+                 La = t.where(S[:, None], ax_["LO"], t.full_like(ax_["LO"], -1e4)).max(0).values + self.hub_margin
+-                hs0 = zb if ax_["start"] == "hub" else ((rail_under.max() + 4.0 - 4.0) if (ax_["start"] == "rail" and rail_under is not None) else (Fj[1] if 1 in Fj else zb))
++                hs0 = (zb + (STACK if self.jn_link else 0.0)) if ax_["start"] == "hub" else ((rail_under.max() + 4.0 - 4.0) if (ax_["start"] == "rail" and rail_under is not None) else (Fj[1] if 1 in Fj else zb))
+                 u_ = t.maximum(La, hs0 - self.RAMP * t.clamp(ax_["dA"] - 6.0, min=0))
+                 if ax_["h_end"] is not None: u_ = t.maximum(u_, t.tensor(ax_["h_end"], device=self.dev) - self.RAMP * t.clamp(ax_["dB"] - 6.0, min=0))
+                 aux_u.append(u_)
+@@ -789,7 +797,7 @@
+                 if int(kd[k_]) == 0: continue
+                 J = (mi if int(kd[k_]) == 1 else mi + 1) if mi > 0 else 1
+                 if J == N:                                                                       # link N-1 on BOTTOM's hub / the carriage
+-                    bot[k_] = F["zj4"]; top[k_] = F[N] + HUB_UP + CAP_UP
++                    bot[k_] = F["zj4"]; top[k_] = (F["zj4"] + T_LO) if self.jn_link else (F[N] + HUB_UP + CAP_UP)
+                 elif lower.get(J) == mi: top[k_] = F[J] + T_LO
+                 else: bot[k_] = F[J] + STACK; top[k_] = F[J] + STACK + HUB_UP + CAP_UP
+             ivs.append((bot, top, kd, dA, dB))

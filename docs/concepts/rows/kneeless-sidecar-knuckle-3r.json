@@ -1,0 +1,537 @@
+{
+ "id": "kneeless-sidecar-knuckle-3r",
+ "name": "The verified lead with its knee deleted: strap-level RSSR sidecar knuckle, J3 on a GH ray (b3 0), one rigid bent 3 mm Ti bracket to the arm pad",
+ "lens": "round9:simplest-drive (lens 3, conservative twin of kneeless-roller)",
+ "family": "redundant 4R with a determined spare (cam-slaved knuckle, RSSR sidecar) on a spherical (zero-closure) cuff",
+ "active_dof": 3,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": "2026-10-16T21:14:47Z",
+ "t_screened": "2026-10-16T22:51:21Z",
+ "reach": 0.7812,
+ "follow": 1.0,
+ "inband14": 0.8888,
+ "inband10": 0.5154,
+ "contact": 0.0263,
+ "gap": 15.63,
+ "v_reach": 0.7139,
+ "v_follow": 1.0,
+ "v_inband14": 0.8884,
+ "v_inband10": 0.5242,
+ "v_gap": 21.11,
+ "n_configs": 2492,
+ "complexity": 28.0,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 6,
+  "joints": 8,
+  "closed_loops": 2,
+  "sliding_pairs": 0,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 14,
+  "catalogue_parts": 12,
+  "notes": "J1/K/J2/J3 O20 MR117-2RS, all four on GH rays; K slaved (clock-spring cap, stops A/B), never read; hub-2 rim lobe -> bell crank (MR63ZZ pair on link 1b) -> O3 Ti rod + 2 M2 ball links -> horn lug of link 1a; member 3 = hub 3 lower plate + ONE rigid bent 3 mm Ti bracket (E leg -> bend -> flat leg -> arm pad); knee link, 2 iglidur pins and 2 knee encoders deleted; loops: drive RSSR + K slaving (the knee loop is gone)",
+  "source": "kneeless-sidecar-knuckle-3r screen 2026-10-16",
+  "confidence": "hand count (catalogue estimate 27.0)"
+ },
+ "best_params": {
+  "az1": 98.7889,
+  "el1": 66.9506,
+  "az2": 42.8324,
+  "el2": 44.8734,
+  "wd": 82.2523,
+  "wa": -8.9425,
+  "lE": 68.1237,
+  "phiE": -5.7125,
+  "lc": 22.355,
+  "phib": -57.1173,
+  "bk1": 28.9414,
+  "bk2": 40.8876,
+  "a1max": 60.1994,
+  "smhi": 16.7699,
+  "kK": 1.3737,
+  "r_h": 15.366,
+  "beta": -88.3964,
+  "La": 15.7146,
+  "s_arm": 4.3872,
+  "hl": 3.15,
+  "zr": 0.0,
+  "r_lobe": 7.7447,
+  "gam": 0.0,
+  "b3": 0.0,
+  "stk": 6.5,
+  "ang_min": 0.0,
+  "near2": 1,
+  "law_mode": "lin"
+ },
+ "fast": {
+  "bench": "Bench(60,160) fast",
+  "objective": "2 mm near-touch (near2)",
+  "gap_near2": 20.32,
+  "plain": 15.63,
+  "near1": 16.78,
+  "min_metal_mm": 0.32,
+  "overhead_taken": "1/12",
+  "ws_inband": {
+   "all": [
+    0.8087,
+    0.4777
+   ],
+   "e90_140": [
+    0.7396,
+    0.4951
+   ],
+   "ovh140": [
+    1.0,
+    0.8804
+   ]
+  },
+  "knee_ptp_deg": 0.0,
+  "bracket_bend_deg": 128.6,
+  "drift_max_mm": 0.0,
+  "rssr": {
+   "trans_min_taken": 45.5,
+   "dK_lim": 38.5,
+   "why_lim": "ROD-hub2",
+   "phi_max_taken": 34.1
+  },
+  "min_th_margin_taken_deg": 5.01,
+  "a_deg": [
+   36.43,
+   56.62
+  ],
+  "min_sub_margin_deg": 9.4
+ },
+ "frozen": {
+  "gap": 21.11,
+  "reach": 0.7139,
+  "follow": 1.0,
+  "inband14": 0.8884,
+  "inband10": 0.5242,
+  "contact": 0.0134,
+  "score": 92.32,
+  "near_touch_gap": 22.75,
+  "near_touch_2mm": 33.15,
+  "min_metal_mm": 0.48,
+  "overhead_taken": "8/28",
+  "why": {
+   "fold": 90,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 8,
+   "contact": 5
+  },
+  "parts_pairs": {
+   "E-L2": 8
+  },
+  "parts_ib14": {
+   "hub1": 1.0,
+   "hubK": 0.978,
+   "hub2": 0.99,
+   "hub3": 0.555,
+   "E": 0.867,
+   "boss": 0.954,
+   "pad": 0.972,
+   "knee": 0.971,
+   "crank": 0.832,
+   "horn": 0.919,
+   "rod": 0.869,
+   "rodends": 0.949,
+   "L1a": 0.97,
+   "L1b": 0.96,
+   "L2": 0.778
+  },
+  "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast",
+  "connected": {
+   "full": 21.11,
+   "full_dropped": 0,
+   "knn": 23.65,
+   "knn_dropped": 9,
+   "bench_grid": 44.84,
+   "lead_same_protocol": {
+    "full": 18.91,
+    "knn": 21.72,
+    "bench_grid": 43.4
+   }
+  }
+ },
+ "held_out": {
+  "gap": 25.34,
+  "reach": 0.6838,
+  "follow": 1.0,
+  "inband14": 0.8868,
+  "inband10": 0.5233,
+  "contact": 0.024,
+  "score": 90.79,
+  "near_touch_gap": 28.41,
+  "near_touch_2mm": 37.26,
+  "min_metal_mm": 0.02,
+  "overhead_taken": "17/71",
+  "why": {
+   "fold": 263,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 17,
+   "contact": 21
+  },
+  "parts_pairs": {
+   "E-L2": 17
+  },
+  "parts_ib14": {
+   "hub1": 1.0,
+   "hubK": 0.975,
+   "hub2": 0.989,
+   "hub3": 0.552,
+   "E": 0.863,
+   "boss": 0.953,
+   "pad": 0.974,
+   "knee": 0.972,
+   "crank": 0.83,
+   "horn": 0.91,
+   "rod": 0.866,
+   "rodends": 0.947,
+   "L1a": 0.97,
+   "L1b": 0.959,
+   "L2": 0.777
+  }
+ },
+ "frozen_cma_A": {
+  "gap": 24.24,
+  "reach": 0.7194,
+  "follow": 1.0,
+  "inband14": 0.8594,
+  "inband10": 0.5434,
+  "contact": 0.0212,
+  "score": 91.19,
+  "near_touch_gap": 27.35,
+  "near_touch_2mm": 37.61,
+  "min_metal_mm": 0.01,
+  "overhead_taken": "6/28",
+  "why": {
+   "fold": 88,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 5,
+   "contact": 8
+  },
+  "parts_pairs": {
+   "E-L2": 5
+  },
+  "parts_ib14": {
+   "hub1": 0.994,
+   "hubK": 0.969,
+   "hub2": 0.975,
+   "hub3": 0.402,
+   "E": 0.802,
+   "boss": 0.985,
+   "pad": 1.0,
+   "knee": 0.995,
+   "crank": 0.783,
+   "horn": 0.965,
+   "rod": 0.815,
+   "rodends": 0.94,
+   "L1a": 0.978,
+   "L1b": 0.938,
+   "L2": 0.749
+  },
+  "params": {
+   "az1": 96.6954,
+   "el1": 67.5865,
+   "az2": 43.7348,
+   "el2": 44.7496,
+   "wd": 79.6162,
+   "wa": -2.7093,
+   "lE": 69.9921,
+   "phiE": -4.5923,
+   "lc": 25.0835,
+   "phib": -54.4785,
+   "bk1": 28.9414,
+   "bk2": 39.236,
+   "a1max": 63.1774,
+   "smhi": 16.5464,
+   "kK": 1.6232,
+   "r_h": 14.8706,
+   "beta": -86.447,
+   "La": 16.5467,
+   "s_arm": 4.3872,
+   "hl": 3.15,
+   "zr": 0.0,
+   "r_lobe": 7.7447,
+   "gam": 0.0
+  },
+  "fast_plain": 17.38,
+  "fast_near2": 20.24
+ },
+ "frozen_seed": {
+  "gap": 22.68,
+  "near_touch_gap": 27.02,
+  "near_touch_2mm": 47.67,
+  "reach": 0.7194,
+  "inband14": 0.8776,
+  "contact": 0.0238,
+  "why": {
+   "fold": 90,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 2,
+   "contact": 9
+  },
+  "params": "lead best_params, b3 0, wd 75, wa -7, rigid bracket",
+  "fast_plain": 17.27
+ },
+ "gh_offset_redteam": {
+  "note": "cuff misfit |(I - R) d| over the taken fit-bench poses, worst of 26 directions of d (the chain turns about its centre, the arm about the true GH); across = left after ONE passive slide along the humerus; knee_left = what the lead's planar knee in hub 3's plane would leave",
+  "3mm": {
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "max_mm": 5.14,
+   "p95_mm": 4.83,
+   "mean_mm": 2.9,
+   "across_max_mm": 5.03,
+   "across_p95_mm": 4.74,
+   "along_max_mm": 2.93,
+   "clip_p95_mm": 4.34,
+   "ovh_max_mm": 4.31,
+   "knee_left_max_mm": 4.19,
+   "knee_left_p95_mm": 4.14
+  },
+  "5mm": {
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "max_mm": 8.57,
+   "p95_mm": 8.05,
+   "mean_mm": 4.83,
+   "across_max_mm": 8.39,
+   "across_p95_mm": 7.91,
+   "along_max_mm": 4.88,
+   "clip_p95_mm": 7.24,
+   "ovh_max_mm": 7.18,
+   "knee_left_max_mm": 6.99,
+   "knee_left_p95_mm": 6.9
+  },
+  "10mm": {
+   "dir": [
+    -1.0,
+    0.0,
+    0.0
+   ],
+   "max_mm": 17.13,
+   "p95_mm": 16.11,
+   "mean_mm": 9.66,
+   "across_max_mm": 16.78,
+   "across_p95_mm": 15.81,
+   "along_max_mm": 9.76,
+   "clip_p95_mm": 14.48,
+   "ovh_max_mm": 14.36,
+   "knee_left_max_mm": 13.98,
+   "knee_left_p95_mm": 13.81
+  }
+ },
+ "gate": {
+  "note": "score points = gap / 2.75; objective 2 mm near-touch gap",
+  "A": {
+   "evals": 745,
+   "gain_2nd_half_gap": 0.0,
+   "gain_last_third_gap": 0.0,
+   "top5_spread_gap": 0.07
+  },
+  "B": {
+   "evals": 1585,
+   "gain_2nd_half_gap": 1.01,
+   "gain_last_third_gap": 0.29,
+   "top5_spread_gap": 0.19,
+   "gain_2nd_half_pts": 0.37,
+   "gain_last_third_pts": 0.11,
+   "top5_spread_pts": 0.07
+  },
+  "lhs": {
+   "evals": 161,
+   "best_near2": 25.91
+  },
+  "converged": true,
+  "spec_gate": {
+   "passed": false,
+   "why": "fast plain 15.63 > 12.5, 2 mm 20.32 > 14.5, contact 0.026 > 0.012, hub 3 in band 0.551 < 0.60, workspace in-band 0.809 / 0.740 < 0.874 / 0.841; follow 1.0 and RSSR transmission 45.5 >= 30 pass"
+  }
+ },
+ "verdict": "SCREENED, a Pareto point and not a lead change. Frozen Bench(110,360) exact 21.11 (score 92.32) at complexity 28, against the lead's 18.91 at 49. It sits between minarc (18.40 at cx 33) and H1 (27.20 at cx 19.5). At 2 mm it scores 33.15, better than the lead's 34.03; plain it is 2.20 worse, so it fails the A1 dominance gate. Held out 25.34 (lead 22.67). Flood fill: full 21.11 with 0 dropped, knn 23.65 (lead 21.72). Knee angle constant (ptp 0.0 deg, drift 0.0 mm): the knee carried nothing on the bench. The bench cannot see a GH offset: at 3 mm it gives a cuff misfit of 4.8 mm p95, and one slide along the arm absorbs almost none of it. The search converged (2 CMA runs, 2331 evals); the spec's gate (fast 12.5) was not met.",
+ "limiter": "REACH (fold 90 of 360 frozen, as the lead's 86): the drive stroke wall is unchanged (dK_lim 38.5, ROD-hub2). Then hub 3 OBLIQUITY: on a GH ray hub 3 is 0.555 in band (median 13.5 mm; lead 0.599 at b3 0.345), and the CMA trades it against L2 (0.778). New with the bracket: E-L2, where the bracket's E leg rides 0.15 mm from link 2 at J3, costs 8 frozen and 17 held-out poses that the fit bench never shows (parts 0 on the fit bench). Contact: the drive (crank, rod, horn, hub K, hub 2) on 4-5 elevated poses; the bracket never touches. Workspace in-band is 0.809 / 0.740 at elevation 90-140, below the lead's 0.874 / 0.841: the 2 mm objective parks workspace metal at 2.05 mm and lifts it out of band (gaming pattern L2 watch).",
+ "note": "Model: docs/concepts/models/kneeless-sidecar-knuckle-3r.py wraps the lead's verified model (VModel checks, kit rule, capK, RSSR table, drive truncation, frozen). It forces b3 0, refuses any pose whose drift moves the bracket by > 0.5 mm / 0.5 deg, drops the knee plate from the pin stack to the bracket level (3 mm, pad 3 mm), and removes the knee-E and knee-hub3 adjacency (same body). The bracket vs hub 3 housing check stays at 1 mm and E-L2 stays at 0.15 mm. Seed (lead seats, wd 75 / wa -7): fast plain 17.27, frozen 22.68. LHS 161 (best 2 mm 25.91). CMA A (8 shape vars, 745 evals) 2 mm 20.24, plain 17.38, frozen 24.24. CMA B (+J1 seats + drive, 1585 evals) 2 mm 20.32, plain 15.63, frozen 21.11. Gate (score points): B gains 0.37 over the 2nd half and 0.11 over the last third, top-5 spread 0.07; A 0 / 0 / 0.03, so converged. Farm cost ~$0.18. | VERIFIED 2026-10-16 ~23:10 UTC (skeptic, docs/concepts/verify/kneeless-sidecar-knuckle-3r.py, farm): frozen exact Bench(110,360) 21.11 reproduced exactly (score 92.32; reach 0.714, ib14 0.888, ib10 0.524, contact 0.013; 1 mm 22.75, 2 mm 33.15; overhead 8/28), held out 25.34, fit bench exact frozen 14.00; added checks (world RSSR closure 0.0 mm, ball-link tilt 12.1/21.4 <= 30, real lobe pressure angle 37.1 <= 45, rigid bracket measured from the transforms: member 3 and plate drift 0.000 mm in the pad frame, every taken pose re-collided: min clearance 1.58 mm, E-L2 3.94, min th margin 5.29) remove 0 poses; flood full 21.11 (0 dropped), knn 23.65. Champion same bench 75.94 (risley-turret table; the added checks do not apply to a rodless 3R). Not a lead: fails the A1 dominance gate (plain 21.11 vs 18.91; 2 mm 33.15 vs 34.03 better). Watch (L2): unscored workspace in-band 0.843 / 0.805 at elevation 90-140 on the worn bench vs the lead's 0.874 / 0.841.",
+ "doc": "docs/concepts/kneeless-sidecar-knuckle-3r.md",
+ "verification": {
+  "t": "2026-10-16T23:10:00Z",
+  "harness": "docs/concepts/verify/kneeless-sidecar-knuckle-3r.py",
+  "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast (claim protocol, farm)",
+  "v_gap": 21.11,
+  "score": 92.32,
+  "contact": 0.0134,
+  "near1": 22.75,
+  "near2": 33.15,
+  "min_metal_mm": 0.48,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.2857,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.9149,
+   "inband10": 0.634,
+   "why_not": {
+    "fold": 13,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 4,
+    "contact": 3
+   }
+  },
+  "lost": {
+   "fold": 90,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 8,
+   "contact": 5
+  },
+  "parts_pairs": {
+   "E-L2": 8
+  },
+  "held_out": {
+   "gap": 25.34,
+   "reach": 0.6838,
+   "inband14": 0.8868,
+   "contact": 0.024,
+   "near1": 28.41,
+   "near2": 37.26,
+   "min_metal_mm": 0.02
+  },
+  "fit_bench_exact_frozen": 14.0,
+  "flood": {
+   "full": 21.11,
+   "full_dropped": 0,
+   "knn": 23.65,
+   "knn_dropped": 9,
+   "bench_grid": 44.84
+  },
+  "added_checks": {
+   "poses_removed": 0,
+   "rssr_closure_max_mm": 0.0,
+   "balllink_tilt_max_deg": {
+    "crank": 12.1,
+    "horn": 21.4,
+    "limit": 30
+   },
+   "lobe_pressure_angle_real_max_deg": 37.09,
+   "pa_limit": 45,
+   "bracket_drift_in_pad_frame_mm": {
+    "member3_in_pad_frame": 0.0,
+    "plate6_in_pad_frame": 0.0
+   },
+   "knee_ptp_deg": 0.0,
+   "min_clear_taken_mm": {
+    "worst": [
+     [
+      1.58,
+      "_overall"
+     ],
+     [
+      1.6,
+      "ROD-hub2"
+     ],
+     [
+      1.7,
+      "ROD-hubK"
+     ],
+     [
+      2.3,
+      "HORN-L1b"
+     ],
+     [
+      2.7,
+      "L2-hub1"
+     ],
+     [
+      3.94,
+      "E-L2"
+     ],
+     [
+      4.7,
+      "ROD-L1b"
+     ],
+     [
+      5.0,
+      "CRK-hub2"
+     ]
+    ],
+    "E_L2": 3.94,
+    "knee_hub3": 50.5,
+    "overall": 1.58
+   },
+   "min_th_margin_deg": 5.293,
+   "min_th_margin_held_deg": 5.106,
+   "dK_taken_max_deg": 35.77,
+   "dK_lim_deg": 38.5
+  },
+  "ws_inband_unscored": {
+   "bench": {
+    "all": [
+     0.8426,
+     0.5
+    ],
+    "e90_140": [
+     0.8049,
+     0.4985
+    ],
+    "ovh140": [
+     0.9439,
+     0.6826
+    ]
+   },
+   "held": {
+    "all": [
+     0.8465,
+     0.5048
+    ],
+    "e90_140": [
+     0.8282,
+     0.5309
+    ],
+    "ovh140": [
+     0.9486,
+     0.6582
+    ]
+   },
+   "lead_ref": {
+    "all": 0.874,
+    "e90_140": 0.841
+   }
+  },
+  "dominance_A1": {
+   "plain": "21.11 vs lead 18.91 (worse by 2.2)",
+   "near2": "33.15 vs lead 34.03 (better)",
+   "passes": false
+  },
+  "champion_same_bench": 75.94
+ }
+}

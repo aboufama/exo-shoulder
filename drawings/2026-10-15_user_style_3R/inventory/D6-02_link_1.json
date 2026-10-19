@@ -1,0 +1,8148 @@
+{
+ "part": "D6-02",
+ "title": "D6-02 link 1: bent bar 8x3 + J1/J2 pads + integral O7 pins (Ti-6Al-4V)",
+ "step_file": "pipeline/full-exo/designs/param2_r20_n3_s1414_4/step/00_D6-02_link_1.step",
+ "units": "mm, degrees, g",
+ "frame": "STEP coordinates = the part's group-local frame (equal to the rig frame when the group is at identity: x anterior, y up, z lateral, origin = GH centre)",
+ "summary": {
+  "valid": true,
+  "solids": 1,
+  "faces": 98,
+  "edges": 218,
+  "face_types": {
+   "cylinder": 40,
+   "torus": 42,
+   "B-spline": 2,
+   "plane": 14
+  },
+  "volume_mm3": 4321.9422,
+  "volume_cm3": 4.3219,
+  "surface_area_mm2": 3998.2197,
+  "centre_of_volume": [
+   44.1185,
+   49.8481,
+   0.0
+  ],
+  "bbox_part_frame": {
+   "min": [
+    11.4638,
+    -10.0127,
+    -10.0124
+   ],
+   "max": [
+    64.5323,
+    102.4097,
+    10.0125
+   ],
+   "size": [
+    53.0685,
+    112.4225,
+    20.025
+   ]
+  },
+  "principal_axes_extents": {
+   "note": "extents of the part along its principal axes of inertia (density-free)",
+   "axes": [
+    [
+     -0.321,
+     0.9471,
+     -0.0
+    ],
+    [
+     0.9471,
+     0.321,
+     0.0
+    ],
+    [
+     -0.0,
+     -0.0,
+     1.0
+    ]
+   ],
+   "extents": [
+    117.9243,
+    32.5732,
+    19.9994
+   ]
+  },
+  "material": "Ti-6Al-4V",
+  "mass_g": {
+   "Ti-6Al-4V": 19.1462,
+   "7075-T6": 12.1447,
+   "AlSi10Mg": 11.5396
+  },
+  "mass_g_as_specified": 19.1462
+ },
+ "holes": [],
+ "edge_rounds": {
+  "R0.4": {
+   "radius": 0.4,
+   "convex_rounds": 10,
+   "concave_fillets": 0,
+   "faces_convex": [
+    2,
+    6,
+    10,
+    22,
+    27,
+    30,
+    32,
+    53,
+    55,
+    56
+   ],
+   "faces_concave": []
+  },
+  "R0.5": {
+   "radius": 0.5,
+   "convex_rounds": 40,
+   "concave_fillets": 0,
+   "faces_convex": [
+    3,
+    7,
+    11,
+    14,
+    16,
+    17,
+    18,
+    19,
+    23,
+    28,
+    38,
+    39,
+    40,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    75,
+    76,
+    78,
+    86,
+    87,
+    89,
+    90,
+    91,
+    92
+   ],
+   "faces_concave": []
+  }
+ },
+ "joint_axes": [
+  {
+   "joint": "J2",
+   "axis_dir": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "passes_GH_within_mm": 0.0,
+   "z_measured_from": "GH along axis_dir",
+   "build_face_level": 93.1768,
+   "rings": [
+    {
+     "diameter": 20.0,
+     "z": [
+      93.6767,
+      95.6767
+     ],
+     "convex": true,
+     "span_deg": 282.6356,
+     "faces": [
+      51
+     ]
+    },
+    {
+     "diameter": 8.2,
+     "z": [
+      96.1767,
+      96.8267
+     ],
+     "convex": true,
+     "span_deg": 360.0,
+     "faces": [
+      20
+     ]
+    },
+    {
+     "diameter": 7.0,
+     "z": [
+      96.8267,
+      104.3267
+     ],
+     "convex": true,
+     "span_deg": 360.0,
+     "faces": [
+      88
+     ]
+    }
+   ],
+   "other_revolved_faces": [
+    {
+     "face": 87,
+     "type": "torus",
+     "z": [
+      93.1767,
+      93.6767
+     ],
+     "convex": true,
+     "span_deg": 282.6356,
+     "major_radius": 9.5,
+     "minor_radius": 0.5,
+     "radius_range": [
+      9.5,
+      10.0
+     ]
+    },
+    {
+     "face": 19,
+     "type": "torus",
+     "z": [
+      95.6767,
+      96.1767
+     ],
+     "convex": true,
+     "span_deg": 282.6356,
+     "major_radius": 9.5,
+     "minor_radius": 0.5,
+     "radius_range": [
+      9.5,
+      10.0
+     ]
+    }
+   ],
+   "planes_square_to_axis": [
+    {
+     "face": 79,
+     "z": 93.1767,
+     "faces_toward": "-axis",
+     "boundary_radius_range": [
+      9.5,
+      14.4309
+     ]
+    },
+    {
+     "face": 5,
+     "z": 96.1767,
+     "faces_toward": "+axis",
+     "boundary_radius_range": [
+      4.1,
+      14.4309
+     ]
+    },
+    {
+     "face": 52,
+     "z": 96.8267,
+     "faces_toward": "+axis",
+     "boundary_radius_range": [
+      3.5,
+      4.1
+     ]
+    },
+    {
+     "face": 94,
+     "z": 104.3267,
+     "faces_toward": "+axis",
+     "boundary_radius_range": [
+      3.5,
+      3.5
+     ]
+    }
+   ]
+  },
+  {
+   "joint": "J1",
+   "axis_dir": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "passes_GH_within_mm": 0.0,
+   "z_measured_from": "GH along axis_dir",
+   "build_face_level": 53.3779,
+   "rings": [
+    {
+     "diameter": 20.0,
+     "z": [
+      53.8779,
+      55.8779
+     ],
+     "convex": true,
+     "span_deg": 282.6356,
+     "faces": [
+      74
+     ]
+    },
+    {
+     "diameter": 8.2,
+     "z": [
+      56.3779,
+      57.0279
+     ],
+     "convex": true,
+     "span_deg": 360.0,
+     "faces": [
+      93
+     ]
+    },
+    {
+     "diameter": 7.0,
+     "z": [
+      57.0279,
+      64.5279
+     ],
+     "convex": true,
+     "span_deg": 360.0,
+     "faces": [
+      96
+     ]
+    }
+   ],
+   "other_revolved_faces": [
+    {
+     "face": 91,
+     "type": "torus",
+     "z": [
+      53.3779,
+      53.8779
+     ],
+     "convex": true,
+     "span_deg": 282.6356,
+     "major_radius": 9.5,
+     "minor_radius": 0.5,
+     "radius_range": [
+      9.5,
+      10.0
+     ]
+    },
+    {
+     "face": 92,
+     "type": "torus",
+     "z": [
+      55.8779,
+      56.3779
+     ],
+     "convex": true,
+     "span_deg": 282.6356,
+     "major_radius": 9.5,
+     "minor_radius": 0.5,
+     "radius_range": [
+      9.5,
+      10.0
+     ]
+    }
+   ],
+   "planes_square_to_axis": [
+    {
+     "face": 85,
+     "z": 53.3779,
+     "faces_toward": "-axis",
+     "boundary_radius_range": [
+      9.5,
+      14.4309
+     ]
+    },
+    {
+     "face": 77,
+     "z": 56.3779,
+     "faces_toward": "+axis",
+     "boundary_radius_range": [
+      4.1,
+      14.4309
+     ]
+    },
+    {
+     "face": 95,
+     "z": 57.0279,
+     "faces_toward": "+axis",
+     "boundary_radius_range": [
+      3.5,
+      4.1
+     ]
+    },
+    {
+     "face": 97,
+     "z": 64.5279,
+     "faces_toward": "+axis",
+     "boundary_radius_range": [
+      3.5,
+      3.5
+     ]
+    }
+   ]
+  }
+ ],
+ "angle_between_joint_axes_deg": 76.9017,
+ "build_json_check_arc_deg": 76.9017,
+ "bar": {
+  "sketch_plane": {
+   "note": "the plane of the two joint axes through GH; 2D x = joint J1 axis, y = in-plane toward joint J2; the bar is this outline extruded symmetric to its width (both sides of the plane)",
+   "origin": [
+    0,
+    0,
+    0
+   ],
+   "x_axis": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "y_axis": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ]
+  },
+  "centre_line_chain": [
+   {
+    "kind": "arc",
+    "turn": "right (CW)",
+    "radius": 27.0,
+    "signed_radius": -27.0,
+    "curvature_per_mm": -0.037,
+    "centre": [
+     81.8779,
+     14.0
+    ],
+    "start": [
+     54.8779,
+     14.0
+    ],
+    "end": [
+     55.5594,
+     20.0279
+    ],
+    "sweep_deg": -12.9004,
+    "length": 6.0792,
+    "inner_outer_face_radii": [
+     25.5,
+     28.5
+    ],
+    "other_coaxial_face_radii": [
+     26.5
+    ],
+    "faces": [
+     31,
+     54,
+     70,
+     84
+    ]
+   },
+   {
+    "kind": "arc",
+    "turn": "left (CCW, centre on the GH side when heading out)",
+    "radius": 65.0,
+    "signed_radius": 65.0,
+    "curvature_per_mm": 0.0154,
+    "centre": [
+     -7.8,
+     34.5396
+    ],
+    "start": [
+     55.5594,
+     20.0279
+    ],
+    "end": [
+     56.5595,
+     25.4374
+    ],
+    "sweep_deg": 4.8505,
+    "length": 5.5028,
+    "inner_outer_face_radii": [
+     63.5,
+     66.5
+    ],
+    "other_coaxial_face_radii": [
+     65.5
+    ],
+    "faces": [
+     26,
+     33,
+     69,
+     83
+    ]
+   },
+   {
+    "kind": "arc",
+    "turn": "left (CCW, centre on the GH side when heading out)",
+    "radius": 82.5,
+    "signed_radius": 82.5,
+    "curvature_per_mm": 0.0121,
+    "centre": [
+     -25.1276,
+     36.9902
+    ],
+    "start": [
+     56.5595,
+     25.4374
+    ],
+    "end": [
+     57.1776,
+     31.3238
+    ],
+    "sweep_deg": 4.1114,
+    "length": 5.92,
+    "inner_outer_face_radii": [
+     81.0,
+     84.0
+    ],
+    "other_coaxial_face_radii": [
+     83.0
+    ],
+    "faces": [
+     9,
+     25,
+     34,
+     82
+    ]
+   },
+   {
+    "kind": "arc",
+    "turn": "left (CCW, centre on the GH side when heading out)",
+    "radius": 100.0,
+    "signed_radius": 100.0,
+    "curvature_per_mm": 0.01,
+    "centre": [
+     -42.5862,
+     38.1922
+    ],
+    "start": [
+     57.1776,
+     31.3238
+    ],
+    "end": [
+     49.716,
+     76.6669
+    ],
+    "sweep_deg": 26.5664,
+    "length": 46.3672,
+    "inner_outer_face_radii": [
+     98.5,
+     101.5
+    ],
+    "other_coaxial_face_radii": [
+     100.5
+    ],
+    "faces": [
+     1,
+     8,
+     35,
+     81
+    ]
+   },
+   {
+    "kind": "arc",
+    "turn": "left (CCW, centre on the GH side when heading out)",
+    "radius": 21.0,
+    "signed_radius": 21.0,
+    "curvature_per_mm": 0.0476,
+    "centre": [
+     30.3325,
+     68.5872
+    ],
+    "start": [
+     49.716,
+     76.6669
+    ],
+    "end": [
+     35.0916,
+     89.0408
+    ],
+    "sweep_deg": 54.2737,
+    "length": 19.8924,
+    "inner_outer_face_radii": [
+     19.5,
+     22.5
+    ],
+    "other_coaxial_face_radii": [
+     21.5
+    ],
+    "faces": [
+     0,
+     36,
+     80
+    ]
+   }
+  ],
+  "centre_line_length": 83.7615,
+  "chain_start": [
+   54.8779,
+   14.0
+  ],
+  "chain_end": [
+   35.0916,
+   89.0408
+  ],
+  "build_json_check": {
+   "start": [
+    54.8779,
+    14.0,
+    "heading +y"
+   ],
+   "segs_curvature_length": [
+    [
+     -0.037,
+     6.0792
+    ],
+    [
+     0.0154,
+     5.5028
+    ],
+    [
+     0.0121,
+     5.92
+    ],
+    [
+     0.01,
+     46.3672
+    ],
+    [
+     0.0476,
+     19.8924
+    ]
+   ],
+   "radii": [
+    -27.0,
+    65.0,
+    82.5,
+    100.0,
+    21.0
+   ],
+   "compare": [
+    {
+     "seg": 0,
+     "build_radius": -27.0,
+     "build_length": 6.0792,
+     "build_sweep_deg": -12.9004,
+     "build_centre": [
+      81.8779,
+      14.0
+     ],
+     "measured_radius": -27.0,
+     "measured_length": 6.0792,
+     "measured_sweep_deg": -12.9004,
+     "measured_centre": [
+      81.8779,
+      14.0
+     ],
+     "d_centre_mm": 0.0,
+     "d_radius_mm": 0.0,
+     "d_length_mm": -0.0
+    },
+    {
+     "seg": 1,
+     "build_radius": 65.0,
+     "build_length": 5.5028,
+     "build_sweep_deg": 4.8505,
+     "build_centre": [
+      -7.8,
+      34.5396
+     ],
+     "measured_radius": 65.0,
+     "measured_length": 5.5028,
+     "measured_sweep_deg": 4.8505,
+     "measured_centre": [
+      -7.8,
+      34.5396
+     ],
+     "d_centre_mm": 0.0,
+     "d_radius_mm": 0.0,
+     "d_length_mm": -0.0
+    },
+    {
+     "seg": 2,
+     "build_radius": 82.5,
+     "build_length": 5.92,
+     "build_sweep_deg": 4.1114,
+     "build_centre": [
+      -25.1276,
+      36.9902
+     ],
+     "measured_radius": 82.5,
+     "measured_length": 5.92,
+     "measured_sweep_deg": 4.1114,
+     "measured_centre": [
+      -25.1276,
+      36.9902
+     ],
+     "d_centre_mm": 0.0,
+     "d_radius_mm": 0.0,
+     "d_length_mm": -0.0
+    },
+    {
+     "seg": 3,
+     "build_radius": 100.0,
+     "build_length": 46.3672,
+     "build_sweep_deg": 26.5664,
+     "build_centre": [
+      -42.5862,
+      38.1922
+     ],
+     "measured_radius": 100.0,
+     "measured_length": 46.3672,
+     "measured_sweep_deg": 26.5664,
+     "measured_centre": [
+      -42.5862,
+      38.1922
+     ],
+     "d_centre_mm": 0.0,
+     "d_radius_mm": 0.0,
+     "d_length_mm": -0.0
+    },
+    {
+     "seg": 4,
+     "build_radius": 21.0,
+     "build_length": 19.8924,
+     "build_sweep_deg": 54.2737,
+     "build_centre": [
+      30.3325,
+      68.5872
+     ],
+     "measured_radius": 21.0,
+     "measured_length": 19.8924,
+     "measured_sweep_deg": 54.2737,
+     "measured_centre": [
+      30.3325,
+      68.5872
+     ],
+     "d_centre_mm": 0.0,
+     "d_radius_mm": 0.0,
+     "d_length_mm": 0.0
+    }
+   ],
+   "build_total_length": 83.7615
+  },
+  "planes_parallel_to_sketch_plane": [
+   {
+    "face": 12,
+    "offset_along_plane_normal": -2.5,
+    "area": 46.0808
+   },
+   {
+    "face": 13,
+    "offset_along_plane_normal": -4.0,
+    "area": 173.563
+   },
+   {
+    "face": 21,
+    "offset_along_plane_normal": 2.5,
+    "area": 46.0808
+   },
+   {
+    "face": 24,
+    "offset_along_plane_normal": 4.0,
+    "area": 173.563
+   }
+  ],
+  "cross_section_mid_longest_arc": {
+   "note": "section square to the centre line at the middle of the longest arc; x = radial (away from that arc's centre), y = along the sketch-plane normal (bar width)",
+   "at_point": [
+    56.0866,
+    54.4298,
+    0.0
+   ],
+   "loops": [
+    {
+     "closed": true,
+     "n_segments": 14,
+     "perimeter": 22.7982,
+     "segments": [
+      {
+       "kind": "line",
+       "start": [
+        1.5,
+        3.5
+       ],
+       "end": [
+        1.5,
+        2.9
+       ],
+       "length": 0.6
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        1.5,
+        2.9
+       ],
+       "end": [
+        1.1,
+        2.5
+       ],
+       "length": 0.6283
+      },
+      {
+       "kind": "line",
+       "start": [
+        1.1,
+        2.5
+       ],
+       "end": [
+        0.5,
+        2.5
+       ],
+       "length": 0.6
+      },
+      {
+       "kind": "line",
+       "start": [
+        0.5,
+        2.5
+       ],
+       "end": [
+        0.5,
+        -2.5
+       ],
+       "length": 5.0
+      },
+      {
+       "kind": "line",
+       "start": [
+        0.5,
+        -2.5
+       ],
+       "end": [
+        1.1,
+        -2.5
+       ],
+       "length": 0.6
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        1.1,
+        -2.5
+       ],
+       "end": [
+        1.5,
+        -2.9
+       ],
+       "length": 0.6283
+      },
+      {
+       "kind": "line",
+       "start": [
+        1.5,
+        -2.9
+       ],
+       "end": [
+        1.5,
+        -3.5
+       ],
+       "length": 0.6
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        1.5,
+        -3.5
+       ],
+       "end": [
+        1.0,
+        -4.0
+       ],
+       "length": 0.7854
+      },
+      {
+       "kind": "line",
+       "start": [
+        1.0,
+        -4.0
+       ],
+       "end": [
+        -1.0,
+        -4.0
+       ],
+       "length": 2.0
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        -1.0,
+        -4.0
+       ],
+       "end": [
+        -1.5,
+        -3.5
+       ],
+       "length": 0.7854
+      },
+      {
+       "kind": "line",
+       "start": [
+        -1.5,
+        -3.5
+       ],
+       "end": [
+        -1.5,
+        3.5
+       ],
+       "length": 7.0
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -1.0,
+        3.5
+       ],
+       "radius": 0.5,
+       "start": [
+        -1.5,
+        3.5
+       ],
+       "end": [
+        -1.0,
+        4.0
+       ],
+       "sweep_deg": -90.0,
+       "length": 0.7854
+      },
+      {
+       "kind": "line",
+       "start": [
+        -1.0,
+        4.0
+       ],
+       "end": [
+        1.0,
+        4.0
+       ],
+       "length": 2.0
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        1.0,
+        3.5
+       ],
+       "radius": 0.5,
+       "start": [
+        1.0,
+        4.0
+       ],
+       "end": [
+        1.5,
+        3.5
+       ],
+       "sweep_deg": -90.0,
+       "length": 0.7854
+      }
+     ]
+    }
+   ]
+  },
+  "side_view_outline_z3.2": {
+   "note": "section by the plane parallel to the sketch plane at +3.2 mm (inside the 1.5 mm pocket rim, clear of the 0.5 rounds): the drawn side-view outline, 2D in the sketch-plane axes",
+   "loops": [
+    {
+     "closed": true,
+     "n_segments": 36,
+     "perimeter": 299.1375,
+     "segments": [
+      {
+       "kind": "arc",
+       "centre": [
+        30.3325,
+        68.5872
+       ],
+       "radius": 22.5,
+       "start": [
+        51.1005,
+        77.244
+       ],
+       "end": [
+        35.4315,
+        90.5018
+       ],
+       "sweep_deg": 54.2737,
+       "length": 21.3132
+      },
+      {
+       "kind": "line",
+       "start": [
+        35.4315,
+        90.5018
+       ],
+       "end": [
+        24.2923,
+        93.0936
+       ],
+       "length": 11.4368
+      },
+      {
+       "kind": "line",
+       "start": [
+        24.2923,
+        93.0936
+       ],
+       "end": [
+        24.4396,
+        93.7267
+       ],
+       "length": 0.65
+      },
+      {
+       "kind": "line",
+       "start": [
+        24.4396,
+        93.7267
+       ],
+       "end": [
+        23.3239,
+        93.9863
+       ],
+       "length": 1.1455
+      },
+      {
+       "kind": "line",
+       "start": [
+        23.3239,
+        93.9863
+       ],
+       "end": [
+        25.0236,
+        101.2912
+       ],
+       "length": 7.5
+      },
+      {
+       "kind": "line",
+       "start": [
+        25.0236,
+        101.2912
+       ],
+       "end": [
+        22.2619,
+        101.9337
+       ],
+       "length": 2.8355
+      },
+      {
+       "kind": "line",
+       "start": [
+        22.2619,
+        101.9337
+       ],
+       "end": [
+        20.5622,
+        94.6289
+       ],
+       "length": 7.5
+      },
+      {
+       "kind": "line",
+       "start": [
+        20.5622,
+        94.6289
+       ],
+       "end": [
+        19.4465,
+        94.8885
+       ],
+       "length": 1.1455
+      },
+      {
+       "kind": "line",
+       "start": [
+        19.4465,
+        94.8885
+       ],
+       "end": [
+        19.2992,
+        94.2554
+       ],
+       "length": 0.65
+      },
+      {
+       "kind": "line",
+       "start": [
+        19.2992,
+        94.2554
+       ],
+       "end": [
+        13.0836,
+        95.7016
+       ],
+       "length": 6.3816
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        13.0836,
+        95.7016
+       ],
+       "end": [
+        12.4547,
+        95.3346
+       ],
+       "length": 0.8088
+      },
+      {
+       "kind": "line",
+       "start": [
+        12.4547,
+        95.3346
+       ],
+       "end": [
+        12.0015,
+        93.3866
+       ],
+       "length": 2.0
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        12.0015,
+        93.3866
+       ],
+       "end": [
+        12.4038,
+        92.7796
+       ],
+       "length": 0.8088
+      },
+      {
+       "kind": "line",
+       "start": [
+        12.4038,
+        92.7796
+       ],
+       "end": [
+        34.7516,
+        87.5798
+       ],
+       "length": 22.9448
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        30.3325,
+        68.5872
+       ],
+       "radius": 19.5,
+       "start": [
+        34.7516,
+        87.5798
+       ],
+       "end": [
+        48.3314,
+        76.0897
+       ],
+       "sweep_deg": -54.2737,
+       "length": 18.4715
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -42.5862,
+        38.1922
+       ],
+       "radius": 98.5,
+       "start": [
+        48.3314,
+        76.0897
+       ],
+       "end": [
+        55.6812,
+        31.4268
+       ],
+       "sweep_deg": -26.5664,
+       "length": 45.6717
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -25.1276,
+        36.9902
+       ],
+       "radius": 81.0,
+       "start": [
+        55.6812,
+        31.4268
+       ],
+       "end": [
+        55.0743,
+        25.6474
+       ],
+       "sweep_deg": -4.1114,
+       "length": 5.8124
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -7.8,
+        34.5396
+       ],
+       "radius": 63.5,
+       "start": [
+        55.0743,
+        25.6474
+       ],
+       "end": [
+        54.0972,
+        20.3628
+       ],
+       "sweep_deg": -4.8505,
+       "length": 5.3758
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        81.8779,
+        14.0
+       ],
+       "radius": 28.5,
+       "start": [
+        54.0972,
+        20.3628
+       ],
+       "end": [
+        53.3779,
+        14.0
+       ],
+       "sweep_deg": 12.9004,
+       "length": 6.4169
+      },
+      {
+       "kind": "line",
+       "start": [
+        53.3779,
+        14.0
+       ],
+       "end": [
+        53.3779,
+        -8.9448
+       ],
+       "length": 22.9448
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        53.3779,
+        -8.9448
+       ],
+       "end": [
+        53.8779,
+        -9.4742
+       ],
+       "length": 0.8088
+      },
+      {
+       "kind": "line",
+       "start": [
+        53.8779,
+        -9.4742
+       ],
+       "end": [
+        55.8779,
+        -9.4742
+       ],
+       "length": 2.0
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        55.8779,
+        -9.4742
+       ],
+       "end": [
+        56.3779,
+        -8.9448
+       ],
+       "length": 0.8088
+      },
+      {
+       "kind": "line",
+       "start": [
+        56.3779,
+        -8.9448
+       ],
+       "end": [
+        56.3779,
+        -2.5632
+       ],
+       "length": 6.3816
+      },
+      {
+       "kind": "line",
+       "start": [
+        56.3779,
+        -2.5632
+       ],
+       "end": [
+        57.0279,
+        -2.5632
+       ],
+       "length": 0.65
+      },
+      {
+       "kind": "line",
+       "start": [
+        57.0279,
+        -2.5632
+       ],
+       "end": [
+        57.0279,
+        -1.4177
+       ],
+       "length": 1.1455
+      },
+      {
+       "kind": "line",
+       "start": [
+        57.0279,
+        -1.4177
+       ],
+       "end": [
+        64.5279,
+        -1.4177
+       ],
+       "length": 7.5
+      },
+      {
+       "kind": "line",
+       "start": [
+        64.5279,
+        -1.4177
+       ],
+       "end": [
+        64.5279,
+        1.4177
+       ],
+       "length": 2.8355
+      },
+      {
+       "kind": "line",
+       "start": [
+        64.5279,
+        1.4177
+       ],
+       "end": [
+        57.0279,
+        1.4177
+       ],
+       "length": 7.5
+      },
+      {
+       "kind": "line",
+       "start": [
+        57.0279,
+        1.4177
+       ],
+       "end": [
+        57.0279,
+        2.5632
+       ],
+       "length": 1.1455
+      },
+      {
+       "kind": "line",
+       "start": [
+        57.0279,
+        2.5632
+       ],
+       "end": [
+        56.3779,
+        2.5632
+       ],
+       "length": 0.65
+      },
+      {
+       "kind": "line",
+       "start": [
+        56.3779,
+        2.5632
+       ],
+       "end": [
+        56.3779,
+        14.0
+       ],
+       "length": 11.4368
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        81.8779,
+        14.0
+       ],
+       "radius": 25.5,
+       "start": [
+        56.3779,
+        14.0
+       ],
+       "end": [
+        57.0215,
+        19.693
+       ],
+       "sweep_deg": -12.9004,
+       "length": 5.7414
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -7.8,
+        34.5396
+       ],
+       "radius": 66.5,
+       "start": [
+        57.0215,
+        19.693
+       ],
+       "end": [
+        58.0448,
+        25.2273
+       ],
+       "sweep_deg": 4.8505,
+       "length": 5.6297
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -25.1276,
+        36.9902
+       ],
+       "radius": 84.0,
+       "start": [
+        58.0448,
+        25.2273
+       ],
+       "end": [
+        58.6741,
+        31.2207
+       ],
+       "sweep_deg": 4.1114,
+       "length": 6.0277
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -42.5862,
+        38.1922
+       ],
+       "radius": 101.5,
+       "start": [
+        58.6741,
+        31.2207
+       ],
+       "end": [
+        51.1005,
+        77.244
+       ],
+       "sweep_deg": 26.5664,
+       "length": 47.0627
+      }
+     ]
+    }
+   ]
+  },
+  "side_view_mid_plane_z0": {
+   "note": "section by the sketch plane itself (through the pocket)",
+   "loops": [
+    {
+     "closed": true,
+     "n_segments": 44,
+     "perimeter": 301.6878,
+     "segments": [
+      {
+       "kind": "arc",
+       "centre": [
+        30.3325,
+        68.5872
+       ],
+       "radius": 22.5,
+       "start": [
+        36.7121,
+        90.1638
+       ],
+       "end": [
+        35.4315,
+        90.5018
+       ],
+       "sweep_deg": 3.3733,
+       "length": 1.3247
+      },
+      {
+       "kind": "line",
+       "start": [
+        35.4315,
+        90.5018
+       ],
+       "end": [
+        25.7891,
+        92.7453
+       ],
+       "length": 9.9
+      },
+      {
+       "kind": "line",
+       "start": [
+        25.7891,
+        92.7453
+       ],
+       "end": [
+        25.9364,
+        93.3784
+       ],
+       "length": 0.65
+      },
+      {
+       "kind": "line",
+       "start": [
+        25.9364,
+        93.3784
+       ],
+       "end": [
+        25.352,
+        93.5144
+       ],
+       "length": 0.6
+      },
+      {
+       "kind": "line",
+       "start": [
+        25.352,
+        93.5144
+       ],
+       "end": [
+        27.0517,
+        100.8193
+       ],
+       "length": 7.5
+      },
+      {
+       "kind": "line",
+       "start": [
+        27.0517,
+        100.8193
+       ],
+       "end": [
+        20.2338,
+        102.4056
+       ],
+       "length": 7.0
+      },
+      {
+       "kind": "line",
+       "start": [
+        20.2338,
+        102.4056
+       ],
+       "end": [
+        18.5341,
+        95.1008
+       ],
+       "length": 7.5
+      },
+      {
+       "kind": "line",
+       "start": [
+        18.5341,
+        95.1008
+       ],
+       "end": [
+        17.9497,
+        95.2367
+       ],
+       "length": 0.6
+      },
+      {
+       "kind": "line",
+       "start": [
+        17.9497,
+        95.2367
+       ],
+       "end": [
+        17.8024,
+        94.6036
+       ],
+       "length": 0.65
+      },
+      {
+       "kind": "line",
+       "start": [
+        17.8024,
+        94.6036
+       ],
+       "end": [
+        12.5429,
+        95.8274
+       ],
+       "length": 5.4
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        12.5429,
+        95.8274
+       ],
+       "end": [
+        11.9426,
+        95.4537
+       ],
+       "length": 0.7854
+      },
+      {
+       "kind": "line",
+       "start": [
+        11.9426,
+        95.4537
+       ],
+       "end": [
+        11.4894,
+        93.5058
+       ],
+       "length": 2.0
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        11.4894,
+        93.5058
+       ],
+       "end": [
+        11.863,
+        92.9055
+       ],
+       "length": 0.7854
+      },
+      {
+       "kind": "line",
+       "start": [
+        11.863,
+        92.9055
+       ],
+       "end": [
+        34.7516,
+        87.5798
+       ],
+       "length": 23.5
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        30.3325,
+        68.5872
+       ],
+       "radius": 19.5,
+       "start": [
+        34.7516,
+        87.5798
+       ],
+       "end": [
+        48.3314,
+        76.0897
+       ],
+       "sweep_deg": -54.2737,
+       "length": 18.4715
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -42.5862,
+        38.1922
+       ],
+       "radius": 98.5,
+       "start": [
+        48.3314,
+        76.0897
+       ],
+       "end": [
+        55.6812,
+        31.4268
+       ],
+       "sweep_deg": -26.5664,
+       "length": 45.6717
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -25.1276,
+        36.9902
+       ],
+       "radius": 81.0,
+       "start": [
+        55.6812,
+        31.4268
+       ],
+       "end": [
+        55.0743,
+        25.6474
+       ],
+       "sweep_deg": -4.1114,
+       "length": 5.8124
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -7.8,
+        34.5396
+       ],
+       "radius": 63.5,
+       "start": [
+        55.0743,
+        25.6474
+       ],
+       "end": [
+        54.0972,
+        20.3628
+       ],
+       "sweep_deg": -4.8505,
+       "length": 5.3758
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        81.8779,
+        14.0
+       ],
+       "radius": 28.5,
+       "start": [
+        54.0972,
+        20.3628
+       ],
+       "end": [
+        53.3779,
+        14.0
+       ],
+       "sweep_deg": 12.9004,
+       "length": 6.4169
+      },
+      {
+       "kind": "line",
+       "start": [
+        53.3779,
+        14.0
+       ],
+       "end": [
+        53.3779,
+        -9.5
+       ],
+       "length": 23.5
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        53.3779,
+        -9.5
+       ],
+       "end": [
+        53.8779,
+        -10.0
+       ],
+       "length": 0.7854
+      },
+      {
+       "kind": "line",
+       "start": [
+        53.8779,
+        -10.0
+       ],
+       "end": [
+        55.8779,
+        -10.0
+       ],
+       "length": 2.0
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        55.8779,
+        -10.0
+       ],
+       "end": [
+        56.3779,
+        -9.5
+       ],
+       "length": 0.7854
+      },
+      {
+       "kind": "line",
+       "start": [
+        56.3779,
+        -9.5
+       ],
+       "end": [
+        56.3779,
+        -4.1
+       ],
+       "length": 5.4
+      },
+      {
+       "kind": "line",
+       "start": [
+        56.3779,
+        -4.1
+       ],
+       "end": [
+        57.0279,
+        -4.1
+       ],
+       "length": 0.65
+      },
+      {
+       "kind": "line",
+       "start": [
+        57.0279,
+        -4.1
+       ],
+       "end": [
+        57.0279,
+        -3.5
+       ],
+       "length": 0.6
+      },
+      {
+       "kind": "line",
+       "start": [
+        57.0279,
+        -3.5
+       ],
+       "end": [
+        64.5279,
+        -3.5
+       ],
+       "length": 7.5
+      },
+      {
+       "kind": "line",
+       "start": [
+        64.5279,
+        -3.5
+       ],
+       "end": [
+        64.5279,
+        3.5
+       ],
+       "length": 7.0
+      },
+      {
+       "kind": "line",
+       "start": [
+        64.5279,
+        3.5
+       ],
+       "end": [
+        57.0279,
+        3.5
+       ],
+       "length": 7.5
+      },
+      {
+       "kind": "line",
+       "start": [
+        57.0279,
+        3.5
+       ],
+       "end": [
+        57.0279,
+        4.1
+       ],
+       "length": 0.6
+      },
+      {
+       "kind": "line",
+       "start": [
+        57.0279,
+        4.1
+       ],
+       "end": [
+        56.3779,
+        4.1
+       ],
+       "length": 0.65
+      },
+      {
+       "kind": "line",
+       "start": [
+        56.3779,
+        4.1
+       ],
+       "end": [
+        56.3779,
+        14.0
+       ],
+       "length": 9.9
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        81.8779,
+        14.0
+       ],
+       "radius": 25.5,
+       "start": [
+        56.3779,
+        14.0
+       ],
+       "end": [
+        56.3944,
+        14.9164
+       ],
+       "sweep_deg": -2.0594,
+       "length": 0.9166
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        56.3944,
+        14.9164
+       ],
+       "end": [
+        56.0537,
+        15.3264
+       ],
+       "length": 0.5834
+      },
+      {
+       "kind": "line",
+       "start": [
+        56.0537,
+        15.3264
+       ],
+       "end": [
+        55.2992,
+        15.439
+       ],
+       "length": 0.7629
+      },
+      {
+       "kind": "line",
+       "start": [
+        55.2992,
+        15.439
+       ],
+       "end": [
+        56.0372,
+        20.3842
+       ],
+       "length": 5.0
+      },
+      {
+       "kind": "line",
+       "start": [
+        56.0372,
+        20.3842
+       ],
+       "end": [
+        56.1485,
+        20.3676
+       ],
+       "length": 0.1125
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -7.8,
+        34.5396
+       ],
+       "radius": 65.5,
+       "start": [
+        56.1485,
+        20.3676
+       ],
+       "end": [
+        57.0546,
+        25.3673
+       ],
+       "sweep_deg": 4.4459,
+       "length": 5.0825
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -25.1276,
+        36.9902
+       ],
+       "radius": 83.0,
+       "start": [
+        57.0546,
+        25.3673
+       ],
+       "end": [
+        57.6764,
+        31.2894
+       ],
+       "sweep_deg": 4.1114,
+       "length": 5.9559
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        -42.5862,
+        38.1922
+       ],
+       "radius": 100.5,
+       "start": [
+        57.6764,
+        31.2894
+       ],
+       "end": [
+        50.1775,
+        76.8592
+       ],
+       "sweep_deg": 26.5664,
+       "length": 46.599
+      },
+      {
+       "kind": "arc",
+       "centre": [
+        30.3325,
+        68.5872
+       ],
+       "radius": 21.5,
+       "start": [
+        50.1775,
+        76.8592
+       ],
+       "end": [
+        39.0814,
+        88.2266
+       ],
+       "sweep_deg": 43.3602,
+       "length": 16.2707
+      },
+      {
+       "kind": "line",
+       "start": [
+        39.0814,
+        88.2266
+       ],
+       "end": [
+        36.7977,
+        89.2439
+       ],
+       "length": 2.5
+      },
+      {
+       "kind": "line",
+       "start": [
+        36.7977,
+        89.2439
+       ],
+       "end": [
+        36.9641,
+        89.6174
+       ],
+       "length": 0.4089
+      },
+      {
+       "kind": "bspline",
+       "start": [
+        36.9641,
+        89.6174
+       ],
+       "end": [
+        36.7121,
+        90.1638
+       ],
+       "length": 0.681
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "pads": [
+  {
+   "joint": "J2",
+   "axis_dir": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "pad_levels_expected": [
+    93.1768,
+    96.1768
+   ],
+   "planes_square_to_axis_within_pad": [
+    {
+     "face": 79,
+     "z": 93.1767,
+     "faces_toward": "-axis",
+     "boundary_radius_range": [
+      9.5,
+      14.4309
+     ]
+    },
+    {
+     "face": 5,
+     "z": 96.1767,
+     "faces_toward": "+axis",
+     "boundary_radius_range": [
+      4.1,
+      14.4309
+     ]
+    }
+   ],
+   "planform": {
+    "plane_x_axis_seat_dir": [
+     0.974,
+     -0.2266,
+     0.0
+    ],
+    "plane_y_axis": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "arcs": [
+     {
+      "face": 41,
+      "radius": 6.0,
+      "centre": [
+       12.49,
+       10.0
+      ],
+      "convex": false,
+      "span_deg": 51.3178,
+      "z": [
+       93.6767,
+       95.6767
+      ]
+     },
+     {
+      "face": 50,
+      "radius": 6.0,
+      "centre": [
+       12.49,
+       -10.0
+      ],
+      "convex": false,
+      "span_deg": 51.3178,
+      "z": [
+       93.6767,
+       95.6767
+      ]
+     }
+    ],
+    "lines": [
+     {
+      "face": 12,
+      "normal_2d": [
+       -0.0,
+       -1.0
+      ],
+      "offset": -2.5,
+      "x_range": [
+       18.0705,
+       50.7588
+      ],
+      "y_range": [
+       2.5,
+       2.5
+      ],
+      "z": [
+       30.0612,
+       95.377
+      ],
+      "role": "pocket wall (inside the bar width)"
+     },
+     {
+      "face": 13,
+      "normal_2d": [
+       0.0,
+       1.0
+      ],
+      "offset": 4.0,
+      "x_range": [
+       12.49,
+       51.5936
+      ],
+      "y_range": [
+       4.0,
+       4.0
+      ],
+      "z": [
+       24.3749,
+       95.6767
+      ],
+      "role": "straight side of pad/bar (half width 4)"
+     },
+     {
+      "face": 21,
+      "normal_2d": [
+       0.0,
+       1.0
+      ],
+      "offset": -2.5,
+      "x_range": [
+       18.0705,
+       50.7588
+      ],
+      "y_range": [
+       -2.5,
+       -2.5
+      ],
+      "z": [
+       30.0612,
+       95.377
+      ],
+      "role": "pocket wall (inside the bar width)"
+     },
+     {
+      "face": 24,
+      "normal_2d": [
+       -0.0,
+       -1.0
+      ],
+      "offset": 4.0,
+      "x_range": [
+       12.49,
+       51.5936
+      ],
+      "y_range": [
+       -4.0,
+       -4.0
+      ],
+      "z": [
+       24.3749,
+       95.6767
+      ],
+      "role": "straight side of pad/bar (half width 4)"
+     }
+    ]
+   }
+  },
+  {
+   "joint": "J1",
+   "axis_dir": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "pad_levels_expected": [
+    53.3779,
+    56.3779
+   ],
+   "planes_square_to_axis_within_pad": [
+    {
+     "face": 85,
+     "z": 53.3779,
+     "faces_toward": "-axis",
+     "boundary_radius_range": [
+      9.5,
+      14.4309
+     ]
+    },
+    {
+     "face": 77,
+     "z": 56.3779,
+     "faces_toward": "+axis",
+     "boundary_radius_range": [
+      4.1,
+      14.4309
+     ]
+    }
+   ],
+   "planform": {
+    "plane_x_axis_seat_dir": [
+     -0.0,
+     1.0,
+     0.0
+    ],
+    "plane_y_axis": [
+     -0.0,
+     -0.0,
+     1.0
+    ],
+    "arcs": [
+     {
+      "face": 37,
+      "radius": 6.0,
+      "centre": [
+       12.49,
+       -10.0
+      ],
+      "convex": false,
+      "span_deg": 51.3178,
+      "z": [
+       53.8779,
+       55.8779
+      ]
+     },
+     {
+      "face": 68,
+      "radius": 6.0,
+      "centre": [
+       12.49,
+       10.0
+      ],
+      "convex": false,
+      "span_deg": 51.3178,
+      "z": [
+       53.8779,
+       55.8779
+      ]
+     }
+    ],
+    "lines": [
+     {
+      "face": 12,
+      "normal_2d": [
+       -0.0,
+       1.0
+      ],
+      "offset": -2.5,
+      "x_range": [
+       17.823,
+       88.7747
+      ],
+      "y_range": [
+       -2.5,
+       -2.5
+      ],
+      "z": [
+       39.0814,
+       58.5103
+      ],
+      "role": "pocket wall (inside the bar width)"
+     },
+     {
+      "face": 13,
+      "normal_2d": [
+       0.0,
+       -1.0
+      ],
+      "offset": 4.0,
+      "x_range": [
+       12.49,
+       90.357
+      ],
+      "y_range": [
+       -4.0,
+       -4.0
+      ],
+      "z": [
+       33.3942,
+       58.4103
+      ],
+      "role": "straight side of pad/bar (half width 4)"
+     },
+     {
+      "face": 21,
+      "normal_2d": [
+       0.0,
+       -1.0
+      ],
+      "offset": -2.5,
+      "x_range": [
+       17.823,
+       88.7747
+      ],
+      "y_range": [
+       2.5,
+       2.5
+      ],
+      "z": [
+       39.0814,
+       58.5103
+      ],
+      "role": "pocket wall (inside the bar width)"
+     },
+     {
+      "face": 24,
+      "normal_2d": [
+       -0.0,
+       1.0
+      ],
+      "offset": 4.0,
+      "x_range": [
+       12.49,
+       90.357
+      ],
+      "y_range": [
+       4.0,
+       4.0
+      ],
+      "z": [
+       33.3942,
+       58.4103
+      ],
+      "role": "straight side of pad/bar (half width 4)"
+     }
+    ]
+   }
+  }
+ ],
+ "pocket": {
+  "walls": [
+   {
+    "face": 12,
+    "offset": -2.5,
+    "area": 46.0808
+   },
+   {
+    "face": 21,
+    "offset": 2.5,
+    "area": 46.0808
+   }
+  ],
+  "wall_half_offsets": [
+   2.5
+  ],
+  "floors": [
+   {
+    "arc_radius": -27.0,
+    "floor_face_radius": 26.5,
+    "depth_below_face": 1.0,
+    "on_side": "outer (away from GH)"
+   },
+   {
+    "arc_radius": 65.0,
+    "floor_face_radius": 65.5,
+    "depth_below_face": 1.0,
+    "on_side": "outer (away from GH)"
+   },
+   {
+    "arc_radius": 82.5,
+    "floor_face_radius": 83.0,
+    "depth_below_face": 1.0,
+    "on_side": "outer (away from GH)"
+   },
+   {
+    "arc_radius": 100.0,
+    "floor_face_radius": 100.5,
+    "depth_below_face": 1.0,
+    "on_side": "outer (away from GH)"
+   },
+   {
+    "arc_radius": 21.0,
+    "floor_face_radius": 21.5,
+    "depth_below_face": 1.0,
+    "on_side": "outer (away from GH)"
+   }
+  ],
+  "round_ends": [
+   {
+    "face": 15,
+    "radius": 2.5,
+    "axis_dir": [
+     0.4069,
+     0.9135,
+     0.0
+    ],
+    "axis_point": [
+     39.0813,
+     88.2266,
+     0.0
+    ],
+    "span_deg": 180.0,
+    "axis_point_2d": [
+     39.0814,
+     88.2266
+    ],
+    "station_along_centre_line": 79.7615
+   },
+   {
+    "face": 29,
+    "radius": 2.5,
+    "axis_dir": [
+     0.989,
+     -0.1476,
+     0.0
+    ],
+    "axis_point": [
+     55.6682,
+     17.9116,
+     0.0
+    ],
+    "span_deg": 180.0,
+    "axis_point_2d": [
+     55.6682,
+     17.9116
+    ],
+    "station_along_centre_line": 4.0
+   },
+   {
+    "face": 73,
+    "radius": 2.5,
+    "axis_dir": [
+     0.989,
+     -0.1476,
+     0.0
+    ],
+    "axis_point": [
+     55.6682,
+     17.9116,
+     0.0
+    ],
+    "span_deg": 180.0,
+    "axis_point_2d": [
+     55.6682,
+     17.9116
+    ],
+    "station_along_centre_line": 4.0
+   }
+  ],
+  "note": "pocket width = 2 x wall offset; rim = bar half-width - wall offset; end radius = pocket half-width"
+ },
+ "faces": [
+  {
+   "id": 0,
+   "area_mm2": 36.9528,
+   "centroid": [
+    41.9134,
+    86.6952,
+    0.0
+   ],
+   "bbox": [
+    35.4314,
+    77.244,
+    -3.5,
+    51.1004,
+    90.5018,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 22.5,
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "axis_point": [
+    30.3325,
+    68.5872,
+    -3.5
+   ],
+   "axis_foot_GH": [
+    30.3325,
+    68.5872,
+    0.0
+   ],
+   "u_span_deg": 54.2737,
+   "v_range": [
+    0.0,
+    7.0
+   ],
+   "start_dir": [
+    0.923,
+    0.3847,
+    0.0
+   ],
+   "end_dir": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "u_ccw_about": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    44.8658,
+    85.7637,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.6459,
+    0.7634,
+    0.0
+   ],
+   "neighbours": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+   ]
+  },
+  {
+   "id": 1,
+   "area_mm2": 28.2376,
+   "centroid": [
+    56.672,
+    54.5261,
+    -3.2
+   ],
+   "bbox": [
+    51.1004,
+    31.2208,
+    -3.5,
+    58.9137,
+    77.244,
+    -2.9
+   ],
+   "type": "cylinder",
+   "radius": 101.5,
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "axis_point": [
+    -42.5863,
+    38.1921,
+    -3.5
+   ],
+   "axis_foot_GH": [
+    -42.5863,
+    38.1921,
+    -0.0
+   ],
+   "u_span_deg": 26.5664,
+   "v_range": [
+    0.0,
+    0.6
+   ],
+   "start_dir": [
+    0.9976,
+    -0.0687,
+    0.0
+   ],
+   "end_dir": [
+    0.923,
+    0.3847,
+    0.0
+   ],
+   "u_ccw_about": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    57.5667,
+    54.6733,
+    -3.2
+   ],
+   "outward_normal_at_surface_point": [
+    0.9867,
+    0.1624,
+    0.0
+   ],
+   "neighbours": [
+    0,
+    9,
+    10,
+    11
+   ]
+  },
+  {
+   "id": 2,
+   "area_mm2": 10.6296,
+   "centroid": [
+    45.9507,
+    83.8328,
+    -2.6459
+   ],
+   "bbox": [
+    39.3255,
+    77.0901,
+    -2.9,
+    51.1004,
+    89.1401,
+    -2.5
+   ],
+   "type": "torus",
+   "centre": [
+    30.3325,
+    68.5872,
+    -2.9
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 22.1,
+   "minor_radius": 0.4,
+   "u_span_deg": 43.3602,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    46.3495,
+    84.222,
+    -2.6171
+   ],
+   "outward_normal_at_surface_point": [
+    0.506,
+    0.4939,
+    0.7071
+   ],
+   "neighbours": [
+    0,
+    4,
+    10,
+    12
+   ]
+  },
+  {
+   "id": 3,
+   "area_mm2": 16.6042,
+   "centroid": [
+    44.2161,
+    84.9959,
+    -3.8173
+   ],
+   "bbox": [
+    35.3181,
+    77.0517,
+    -4.0,
+    51.1004,
+    90.5018,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    30.3325,
+    68.5872,
+    -3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 22.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 54.2737,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    44.7712,
+    85.6519,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    0.4567,
+    0.5398,
+    -0.7071
+   ],
+   "neighbours": [
+    0,
+    11,
+    13,
+    14
+   ]
+  },
+  {
+   "id": 4,
+   "area_mm2": 5.4678,
+   "centroid": [
+    37.8204,
+    89.6299,
+    0.0
+   ],
+   "bbox": [
+    36.7121,
+    88.7747,
+    -2.9,
+    39.4882,
+    90.1638,
+    2.9
+   ],
+   "type": "B-spline",
+   "degree_uv": [
+    2,
+    6
+   ],
+   "poles_uv": [
+    3,
+    22
+   ],
+   "surface_point": [
+    36.9619,
+    89.9478,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.9081,
+    0.4188,
+    -0.0
+   ],
+   "neighbours": [
+    0,
+    2,
+    6,
+    15
+   ]
+  },
+  {
+   "id": 5,
+   "area_mm2": 267.416,
+   "centroid": [
+    23.3209,
+    93.3196,
+    0.0
+   ],
+   "bbox": [
+    12.5428,
+    90.5018,
+    -9.5,
+    35.4314,
+    95.8274,
+    9.5
+   ],
+   "type": "plane",
+   "normal": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "offset_from_GH": 96.1767,
+   "point": [
+    23.3209,
+    93.3196,
+    0.0
+   ],
+   "surface_point": [
+    24.1241,
+    93.1328,
+    0.2834
+   ],
+   "outward_normal_at_surface_point": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "neighbours": [
+    0,
+    14,
+    16,
+    17,
+    18,
+    19,
+    20
+   ]
+  },
+  {
+   "id": 6,
+   "area_mm2": 10.6296,
+   "centroid": [
+    45.9507,
+    83.8328,
+    2.646
+   ],
+   "bbox": [
+    39.3254,
+    77.0901,
+    2.5,
+    51.1004,
+    89.1401,
+    2.9
+   ],
+   "type": "torus",
+   "centre": [
+    30.3324,
+    68.5872,
+    2.9
+   ],
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "major_radius": 22.1,
+   "minor_radius": 0.4,
+   "u_span_deg": 43.3602,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    46.3494,
+    84.222,
+    2.6172
+   ],
+   "outward_normal_at_surface_point": [
+    0.506,
+    0.4939,
+    -0.7071
+   ],
+   "neighbours": [
+    0,
+    4,
+    21,
+    22
+   ]
+  },
+  {
+   "id": 7,
+   "area_mm2": 16.6042,
+   "centroid": [
+    44.2161,
+    84.9959,
+    3.8174
+   ],
+   "bbox": [
+    35.3181,
+    77.0517,
+    3.5,
+    51.1004,
+    90.5018,
+    4.0
+   ],
+   "type": "torus",
+   "centre": [
+    30.3324,
+    68.5872,
+    3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 22.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 54.2737,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    44.7712,
+    85.6519,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    0.4567,
+    0.5398,
+    0.7071
+   ],
+   "neighbours": [
+    0,
+    16,
+    23,
+    24
+   ]
+  },
+  {
+   "id": 8,
+   "area_mm2": 28.2376,
+   "centroid": [
+    56.6719,
+    54.5261,
+    3.2
+   ],
+   "bbox": [
+    51.1004,
+    31.2208,
+    2.9,
+    58.9137,
+    77.244,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 101.5,
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "axis_point": [
+    -42.5863,
+    38.1921,
+    -3.5
+   ],
+   "axis_foot_GH": [
+    -42.5863,
+    38.1921,
+    -0.0
+   ],
+   "u_span_deg": 26.5664,
+   "v_range": [
+    6.4,
+    7.0
+   ],
+   "start_dir": [
+    0.9976,
+    -0.0687,
+    0.0
+   ],
+   "end_dir": [
+    0.923,
+    0.3847,
+    0.0
+   ],
+   "u_ccw_about": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    57.5667,
+    54.6733,
+    3.2
+   ],
+   "outward_normal_at_surface_point": [
+    0.9867,
+    0.1624,
+    0.0
+   ],
+   "neighbours": [
+    0,
+    22,
+    23,
+    25
+   ]
+  },
+  {
+   "id": 9,
+   "area_mm2": 3.6166,
+   "centroid": [
+    58.3952,
+    28.2203,
+    -3.2
+   ],
+   "bbox": [
+    58.0447,
+    25.2274,
+    -3.5,
+    58.674,
+    31.2208,
+    -2.9
+   ],
+   "type": "cylinder",
+   "radius": 84.0,
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "axis_point": [
+    -25.1276,
+    36.9902,
+    -3.5
+   ],
+   "axis_foot_GH": [
+    -25.1276,
+    36.9902,
+    -0.0
+   ],
+   "u_span_deg": 4.1114,
+   "v_range": [
+    0.0,
+    0.6
+   ],
+   "start_dir": [
+    0.9901,
+    -0.14,
+    0.0
+   ],
+   "end_dir": [
+    0.9976,
+    -0.0687,
+    0.0
+   ],
+   "u_ccw_about": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    58.4132,
+    28.2184,
+    -3.2
+   ],
+   "outward_normal_at_surface_point": [
+    0.9945,
+    -0.1044,
+    0.0
+   ],
+   "neighbours": [
+    1,
+    26,
+    27,
+    28
+   ]
+  },
+  {
+   "id": 10,
+   "area_mm2": 29.528,
+   "centroid": [
+    56.53,
+    54.5027,
+    -2.6454
+   ],
+   "bbox": [
+    50.7312,
+    31.2208,
+    -2.9,
+    58.9137,
+    77.244,
+    -2.5
+   ],
+   "type": "torus",
+   "centre": [
+    -42.5863,
+    38.1921,
+    -2.9
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 101.1,
+   "minor_radius": 0.4,
+   "u_span_deg": 26.5664,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    57.4511,
+    54.6543,
+    -2.6171
+   ],
+   "outward_normal_at_surface_point": [
+    0.6977,
+    0.1148,
+    0.7071
+   ],
+   "neighbours": [
+    1,
+    2,
+    12,
+    27
+   ]
+  },
+  {
+   "id": 11,
+   "area_mm2": 36.8968,
+   "centroid": [
+    56.4945,
+    54.4969,
+    -3.818
+   ],
+   "bbox": [
+    50.6389,
+    31.2208,
+    -4.0,
+    58.9137,
+    77.244,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    -42.5863,
+    38.1921,
+    -3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 101.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 26.5664,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    57.4222,
+    54.6496,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    0.6977,
+    0.1148,
+    -0.7071
+   ],
+   "neighbours": [
+    1,
+    3,
+    13,
+    28
+   ]
+  },
+  {
+   "id": 12,
+   "area_mm2": 46.0808,
+   "centroid": [
+    53.9508,
+    55.3761,
+    -2.5
+   ],
+   "bbox": [
+    39.0813,
+    17.8231,
+    -2.5,
+    58.5137,
+    88.7747,
+    -2.5
+   ],
+   "type": "plane",
+   "normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "offset_from_GH": -2.5,
+   "point": [
+    53.9508,
+    55.3761,
+    -2.5
+   ],
+   "surface_point": [
+    47.9465,
+    53.2801,
+    -2.5
+   ],
+   "outward_normal_at_surface_point": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "neighbours": [
+    2,
+    10,
+    15,
+    27,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36
+   ]
+  },
+  {
+   "id": 13,
+   "area_mm2": 173.563,
+   "centroid": [
+    52.2988,
+    54.6202,
+    -4.0
+   ],
+   "bbox": [
+    33.3942,
+    12.49,
+    -4.0,
+    58.4137,
+    90.357,
+    -4.0
+   ],
+   "type": "plane",
+   "normal": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "offset_from_GH": 4.0,
+   "point": [
+    52.2988,
+    54.6202,
+    -4.0
+   ],
+   "surface_point": [
+    45.904,
+    51.4235,
+    -4.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "neighbours": [
+    3,
+    11,
+    14,
+    28,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48
+   ]
+  },
+  {
+   "id": 14,
+   "area_mm2": 1.186,
+   "centroid": [
+    34.6549,
+    90.496,
+    -3.8183
+   ],
+   "bbox": [
+    33.8474,
+    90.0148,
+    -4.0,
+    35.4314,
+    90.844,
+    -3.5
+   ],
+   "type": "cylinder",
+   "radius": 0.5,
+   "axis_dir": [
+    -0.974,
+    0.2266,
+    -0.0
+   ],
+   "axis_point": [
+    35.3181,
+    90.0148,
+    -3.5
+   ],
+   "axis_foot_GH": [
+    21.6824,
+    93.1875,
+    -3.5
+   ],
+   "u_span_deg": 90.0,
+   "v_range": [
+    -0.0,
+    1.51
+   ],
+   "start_dir": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "end_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "u_ccw_about": [
+    -0.974,
+    0.2266,
+    -0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    34.6629,
+    90.5303,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    0.1602,
+    0.6887,
+    -0.7071
+   ],
+   "neighbours": [
+    3,
+    5,
+    13,
+    17
+   ]
+  },
+  {
+   "id": 15,
+   "area_mm2": 3.9627,
+   "centroid": [
+    37.8237,
+    89.068,
+    0.0
+   ],
+   "bbox": [
+    36.7976,
+    88.2266,
+    -2.5,
+    39.3255,
+    89.6175,
+    2.5
+   ],
+   "type": "cylinder",
+   "radius": 2.5,
+   "axis_dir": [
+    0.4069,
+    0.9135,
+    0.0
+   ],
+   "axis_point": [
+    39.0813,
+    88.2266,
+    0.0
+   ],
+   "axis_foot_GH": [
+    -0.1847,
+    0.0823,
+    -0.0
+   ],
+   "u_span_deg": 180.0,
+   "v_range": [
+    -0.0,
+    0.6
+   ],
+   "start_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "end_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "u_ccw_about": [
+    0.4069,
+    0.9135,
+    0.0
+   ],
+   "convex": false,
+   "surface_point": [
+    36.9197,
+    89.518,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.9135,
+    -0.4069,
+    0.0
+   ],
+   "neighbours": [
+    4,
+    12,
+    21,
+    49
+   ]
+  },
+  {
+   "id": 16,
+   "area_mm2": 1.186,
+   "centroid": [
+    34.6549,
+    90.496,
+    3.8183
+   ],
+   "bbox": [
+    33.8474,
+    90.0148,
+    3.5,
+    35.4314,
+    90.844,
+    4.0
+   ],
+   "type": "cylinder",
+   "radius": 0.5,
+   "axis_dir": [
+    0.974,
+    -0.2266,
+    0.0
+   ],
+   "axis_point": [
+    33.8474,
+    90.357,
+    3.5
+   ],
+   "axis_foot_GH": [
+    21.6823,
+    93.1875,
+    3.5
+   ],
+   "u_span_deg": 90.0,
+   "v_range": [
+    -0.0,
+    1.51
+   ],
+   "start_dir": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "end_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "u_ccw_about": [
+    0.974,
+    -0.2266,
+    0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    34.6629,
+    90.5303,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    0.1602,
+    0.6887,
+    0.7071
+   ],
+   "neighbours": [
+    5,
+    7,
+    18,
+    24
+   ]
+  },
+  {
+   "id": 17,
+   "area_mm2": 4.3485,
+   "centroid": [
+    31.3979,
+    91.2574,
+    -4.6089
+   ],
+   "bbox": [
+    29.0187,
+    90.357,
+    -6.25,
+    33.9607,
+    91.9939,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    33.8474,
+    90.357,
+    -10.0
+   ],
+   "axis_dir": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "major_radius": 6.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 51.3178,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    31.3353,
+    91.3045,
+    -4.4596
+   ],
+   "outward_normal_at_surface_point": [
+    0.4585,
+    0.6193,
+    -0.6374
+   ],
+   "neighbours": [
+    5,
+    14,
+    19,
+    41
+   ]
+  },
+  {
+   "id": 18,
+   "area_mm2": 4.3485,
+   "centroid": [
+    31.3979,
+    91.2574,
+    4.609
+   ],
+   "bbox": [
+    29.0186,
+    90.357,
+    3.5,
+    33.9607,
+    91.9939,
+    6.25
+   ],
+   "type": "torus",
+   "centre": [
+    33.8474,
+    90.357,
+    10.0
+   ],
+   "axis_dir": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "major_radius": 6.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 51.3178,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    31.3353,
+    91.3045,
+    4.4597
+   ],
+   "outward_normal_at_surface_point": [
+    0.4585,
+    0.6193,
+    0.6374
+   ],
+   "neighbours": [
+    5,
+    16,
+    19,
+    50
+   ]
+  },
+  {
+   "id": 19,
+   "area_mm2": 38.0391,
+   "centroid": [
+    19.3302,
+    94.0594,
+    0.0
+   ],
+   "bbox": [
+    11.9425,
+    91.4185,
+    -10.0,
+    29.302,
+    95.8404,
+    10.0
+   ],
+   "type": "torus",
+   "centre": [
+    21.6823,
+    93.1875,
+    0.0
+   ],
+   "axis_dir": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "major_radius": 9.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 282.6356,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    12.1653,
+    95.7649,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    -0.5285,
+    0.849,
+    -0.0
+   ],
+   "neighbours": [
+    5,
+    17,
+    18,
+    51
+   ]
+  },
+  {
+   "id": 20,
+   "area_mm2": 16.7447,
+   "centroid": [
+    21.8693,
+    93.9911,
+    0.0
+   ],
+   "bbox": [
+    17.8023,
+    92.7454,
+    -4.1,
+    25.9363,
+    95.2367,
+    4.1
+   ],
+   "type": "cylinder",
+   "radius": 4.1,
+   "axis_dir": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "axis_point": [
+    21.4557,
+    92.2135,
+    0.0
+   ],
+   "axis_foot_GH": [
+    -0.0,
+    0.0,
+    0.0
+   ],
+   "u_span_deg": 360.0,
+   "v_range": [
+    1.5,
+    2.15
+   ],
+   "start_dir": [
+    -0.9495,
+    0.2209,
+    -0.2227
+   ],
+   "end_dir": [
+    -0.9495,
+    0.2209,
+    -0.2227
+   ],
+   "u_ccw_about": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    25.7624,
+    93.0852,
+    0.9129
+   ],
+   "outward_normal_at_surface_point": [
+    0.9495,
+    -0.2209,
+    0.2227
+   ],
+   "neighbours": [
+    5,
+    52
+   ]
+  },
+  {
+   "id": 21,
+   "area_mm2": 46.0808,
+   "centroid": [
+    53.9507,
+    55.3761,
+    2.5
+   ],
+   "bbox": [
+    39.0813,
+    17.8231,
+    2.5,
+    58.5137,
+    88.7747,
+    2.5
+   ],
+   "type": "plane",
+   "normal": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "offset_from_GH": -2.5,
+   "point": [
+    53.9507,
+    55.3761,
+    2.5
+   ],
+   "surface_point": [
+    47.9465,
+    53.2801,
+    2.5
+   ],
+   "outward_normal_at_surface_point": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "neighbours": [
+    6,
+    15,
+    22,
+    29,
+    33,
+    34,
+    35,
+    36,
+    53,
+    54,
+    55,
+    56
+   ]
+  },
+  {
+   "id": 22,
+   "area_mm2": 29.528,
+   "centroid": [
+    56.53,
+    54.5027,
+    2.6455
+   ],
+   "bbox": [
+    50.7312,
+    31.2208,
+    2.5,
+    58.9137,
+    77.244,
+    2.9
+   ],
+   "type": "torus",
+   "centre": [
+    -42.5863,
+    38.1921,
+    2.9
+   ],
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "major_radius": 101.1,
+   "minor_radius": 0.4,
+   "u_span_deg": 26.5664,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    57.4511,
+    54.6543,
+    2.6172
+   ],
+   "outward_normal_at_surface_point": [
+    0.6977,
+    0.1148,
+    -0.7071
+   ],
+   "neighbours": [
+    6,
+    8,
+    21,
+    56
+   ]
+  },
+  {
+   "id": 23,
+   "area_mm2": 36.8968,
+   "centroid": [
+    56.4945,
+    54.4969,
+    3.8181
+   ],
+   "bbox": [
+    50.6389,
+    31.2208,
+    3.5,
+    58.9137,
+    77.244,
+    4.0
+   ],
+   "type": "torus",
+   "centre": [
+    -42.5863,
+    38.1921,
+    3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 101.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 26.5664,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    57.4222,
+    54.6496,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    0.6977,
+    0.1148,
+    0.7071
+   ],
+   "neighbours": [
+    7,
+    8,
+    24,
+    57
+   ]
+  },
+  {
+   "id": 24,
+   "area_mm2": 173.563,
+   "centroid": [
+    52.2988,
+    54.6202,
+    4.0
+   ],
+   "bbox": [
+    33.3941,
+    12.49,
+    4.0,
+    58.4137,
+    90.357,
+    4.0
+   ],
+   "type": "plane",
+   "normal": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "offset_from_GH": 4.0,
+   "point": [
+    52.2988,
+    54.6202,
+    4.0
+   ],
+   "surface_point": [
+    45.9039,
+    51.4235,
+    4.0
+   ],
+   "outward_normal_at_surface_point": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "neighbours": [
+    7,
+    16,
+    23,
+    50,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68
+   ]
+  },
+  {
+   "id": 25,
+   "area_mm2": 3.6166,
+   "centroid": [
+    58.3952,
+    28.2203,
+    3.2
+   ],
+   "bbox": [
+    58.0447,
+    25.2274,
+    2.9,
+    58.674,
+    31.2208,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 84.0,
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "axis_point": [
+    -25.1276,
+    36.9902,
+    -3.5
+   ],
+   "axis_foot_GH": [
+    -25.1276,
+    36.9902,
+    -0.0
+   ],
+   "u_span_deg": 4.1114,
+   "v_range": [
+    6.4,
+    7.0
+   ],
+   "start_dir": [
+    0.9901,
+    -0.14,
+    0.0
+   ],
+   "end_dir": [
+    0.9976,
+    -0.0687,
+    0.0
+   ],
+   "u_ccw_about": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    58.4131,
+    28.2184,
+    3.2
+   ],
+   "outward_normal_at_surface_point": [
+    0.9945,
+    -0.1044,
+    0.0
+   ],
+   "neighbours": [
+    8,
+    56,
+    57,
+    69
+   ]
+  },
+  {
+   "id": 26,
+   "area_mm2": 3.3778,
+   "centroid": [
+    57.5722,
+    22.453,
+    -3.2
+   ],
+   "bbox": [
+    57.0215,
+    19.6931,
+    -3.5,
+    58.0447,
+    25.2274,
+    -2.9
+   ],
+   "type": "cylinder",
+   "radius": 66.5,
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "axis_point": [
+    -7.8,
+    34.5396,
+    -3.5
+   ],
+   "axis_foot_GH": [
+    -7.8,
+    34.5396,
+    -0.0
+   ],
+   "u_span_deg": 4.8505,
+   "v_range": [
+    0.0,
+    0.6
+   ],
+   "start_dir": [
+    0.9748,
+    -0.2233,
+    0.0
+   ],
+   "end_dir": [
+    0.9901,
+    -0.14,
+    0.0
+   ],
+   "u_ccw_about": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    57.5917,
+    22.4494,
+    -3.2
+   ],
+   "outward_normal_at_surface_point": [
+    0.9833,
+    -0.1818,
+    0.0
+   ],
+   "neighbours": [
+    9,
+    32,
+    40,
+    70
+   ]
+  },
+  {
+   "id": 27,
+   "area_mm2": 3.7807,
+   "centroid": [
+    58.2509,
+    28.2355,
+    -2.6455
+   ],
+   "bbox": [
+    57.6487,
+    25.2274,
+    -2.9,
+    58.674,
+    31.2483,
+    -2.5
+   ],
+   "type": "torus",
+   "centre": [
+    -25.1276,
+    36.9902,
+    -2.9
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 83.6,
+   "minor_radius": 0.4,
+   "u_span_deg": 4.1114,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    58.2966,
+    28.2307,
+    -2.6171
+   ],
+   "outward_normal_at_surface_point": [
+    0.7032,
+    -0.0738,
+    0.7071
+   ],
+   "neighbours": [
+    9,
+    10,
+    12,
+    32
+   ]
+  },
+  {
+   "id": 28,
+   "area_mm2": 4.7239,
+   "centroid": [
+    58.2149,
+    28.2393,
+    -3.818
+   ],
+   "bbox": [
+    57.5497,
+    25.2274,
+    -4.0,
+    58.674,
+    31.2551,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    -25.1276,
+    36.9902,
+    -3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 83.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 4.1114,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    58.2675,
+    28.2337,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    0.7032,
+    -0.0738,
+    -0.7071
+   ],
+   "neighbours": [
+    9,
+    11,
+    13,
+    40
+   ]
+  },
+  {
+   "id": 29,
+   "area_mm2": 5.3514,
+   "centroid": [
+    55.7632,
+    16.2242,
+    0.0
+   ],
+   "bbox": [
+    55.2991,
+    15.3264,
+    -2.5,
+    56.2616,
+    17.9116,
+    2.5
+   ],
+   "type": "cylinder",
+   "radius": 2.5,
+   "axis_dir": [
+    0.989,
+    -0.1476,
+    0.0
+   ],
+   "axis_point": [
+    55.6682,
+    17.9116,
+    0.0
+   ],
+   "axis_foot_GH": [
+    3.8278,
+    25.6483,
+    0.0
+   ],
+   "u_span_deg": 180.0,
+   "v_range": [
+    -0.0,
+    0.7629
+   ],
+   "start_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "end_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "u_ccw_about": [
+    0.989,
+    -0.1476,
+    0.0
+   ],
+   "convex": false,
+   "surface_point": [
+    55.6764,
+    15.3827,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.1476,
+    0.989,
+    0.0
+   ],
+   "neighbours": [
+    12,
+    21,
+    71,
+    72
+   ]
+  },
+  {
+   "id": 30,
+   "area_mm2": 1.2408,
+   "centroid": [
+    56.6836,
+    18.758,
+    -2.6448
+   ],
+   "bbox": [
+    56.2616,
+    17.764,
+    -2.9,
+    57.0215,
+    19.7824,
+    -2.5
+   ],
+   "type": "torus",
+   "centre": [
+    81.8779,
+    14.0001,
+    -2.8999
+   ],
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "major_radius": 25.9,
+   "minor_radius": 0.4,
+   "u_span_deg": 4.4121,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    56.7057,
+    18.7538,
+    -2.6171
+   ],
+   "outward_normal_at_surface_point": [
+    0.6948,
+    -0.1312,
+    0.7071
+   ],
+   "neighbours": [
+    12,
+    32,
+    70,
+    71
+   ]
+  },
+  {
+   "id": 31,
+   "area_mm2": 0.643,
+   "centroid": [
+    55.9453,
+    19.4407,
+    -2.1999
+   ],
+   "bbox": [
+    55.6682,
+    17.9116,
+    -2.5,
+    56.0467,
+    19.9163,
+    -1.447
+   ],
+   "type": "cylinder",
+   "radius": 26.5,
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "axis_point": [
+    81.8779,
+    14.0001,
+    0.0001
+   ],
+   "axis_foot_GH": [
+    81.8779,
+    14.0001,
+    0.0001
+   ],
+   "u_span_deg": 4.4121,
+   "v_range": [
+    1.447,
+    2.5
+   ],
+   "start_dir": [
+    -0.989,
+    0.1476,
+    -0.0
+   ],
+   "end_dir": [
+    -0.9748,
+    0.2233,
+    -0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "convex": false,
+   "surface_point": [
+    55.8382,
+    18.9176,
+    -1.9735
+   ],
+   "outward_normal_at_surface_point": [
+    0.9826,
+    -0.1856,
+    0.0
+   ],
+   "neighbours": [
+    12,
+    33,
+    73
+   ]
+  },
+  {
+   "id": 32,
+   "area_mm2": 3.5295,
+   "centroid": [
+    57.4295,
+    22.4794,
+    -2.6455
+   ],
+   "bbox": [
+    56.6316,
+    19.6931,
+    -2.9,
+    58.0447,
+    25.2834,
+    -2.5
+   ],
+   "type": "torus",
+   "centre": [
+    -7.8,
+    34.5396,
+    -2.9
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 66.1,
+   "minor_radius": 0.4,
+   "u_span_deg": 4.8505,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    57.4765,
+    22.4707,
+    -2.6171
+   ],
+   "outward_normal_at_surface_point": [
+    0.6953,
+    -0.1286,
+    0.7071
+   ],
+   "neighbours": [
+    12,
+    26,
+    27,
+    30
+   ]
+  },
+  {
+   "id": 33,
+   "area_mm2": 26.815,
+   "centroid": [
+    56.6061,
+    22.7209,
+    0.0
+   ],
+   "bbox": [
+    56.0467,
+    19.9163,
+    -2.5,
+    57.0546,
+    25.3674,
+    2.5
+   ],
+   "type": "cylinder",
+   "radius": 65.5,
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "axis_point": [
+    -7.8,
+    34.5396,
+    -0.0
+   ],
+   "axis_foot_GH": [
+    -7.8,
+    34.5396,
+    -0.0
+   ],
+   "u_span_deg": 4.8505,
+   "v_range": [
+    -2.5,
+    2.5
+   ],
+   "start_dir": [
+    0.9901,
+    -0.14,
+    0.0
+   ],
+   "end_dir": [
+    0.9748,
+    -0.2233,
+    0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    56.6084,
+    22.6312,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.9833,
+    -0.1818,
+    0.0
+   ],
+   "neighbours": [
+    12,
+    21,
+    31,
+    34,
+    54,
+    73
+   ]
+  },
+  {
+   "id": 34,
+   "area_mm2": 29.7796,
+   "centroid": [
+    57.4009,
+    28.3247,
+    0.0
+   ],
+   "bbox": [
+    57.0546,
+    25.3674,
+    -2.5,
+    57.6764,
+    31.2895,
+    2.5
+   ],
+   "type": "cylinder",
+   "radius": 83.0,
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "axis_point": [
+    -25.1276,
+    36.9902,
+    -0.0
+   ],
+   "axis_foot_GH": [
+    -25.1276,
+    36.9902,
+    -0.0
+   ],
+   "u_span_deg": 4.1114,
+   "v_range": [
+    -2.5,
+    2.5
+   ],
+   "start_dir": [
+    0.9976,
+    -0.0687,
+    0.0
+   ],
+   "end_dir": [
+    0.9901,
+    -0.14,
+    0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    57.4186,
+    28.3229,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.9945,
+    -0.1044,
+    0.0
+   ],
+   "neighbours": [
+    12,
+    21,
+    33,
+    35
+   ]
+  },
+  {
+   "id": 35,
+   "area_mm2": 232.995,
+   "centroid": [
+    55.694,
+    54.3652,
+    0.0
+   ],
+   "bbox": [
+    50.1774,
+    31.2895,
+    -2.5,
+    57.9137,
+    76.8593,
+    2.5
+   ],
+   "type": "cylinder",
+   "radius": 100.5,
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "axis_point": [
+    -42.5863,
+    38.1921,
+    -0.0
+   ],
+   "axis_foot_GH": [
+    -42.5863,
+    38.1921,
+    -0.0
+   ],
+   "u_span_deg": 26.5664,
+   "v_range": [
+    -2.5,
+    2.5
+   ],
+   "start_dir": [
+    0.923,
+    0.3847,
+    0.0
+   ],
+   "end_dir": [
+    0.9976,
+    -0.0687,
+    0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    56.58,
+    54.511,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.9867,
+    0.1624,
+    0.0
+   ],
+   "neighbours": [
+    12,
+    21,
+    34,
+    36
+   ]
+  },
+  {
+   "id": 36,
+   "area_mm2": 81.3537,
+   "centroid": [
+    45.3532,
+    83.2495,
+    0.0
+   ],
+   "bbox": [
+    39.0813,
+    76.8593,
+    -2.5,
+    50.1774,
+    88.2266,
+    2.5
+   ],
+   "type": "cylinder",
+   "radius": 21.5,
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "axis_point": [
+    30.3325,
+    68.5872,
+    0.0
+   ],
+   "axis_foot_GH": [
+    30.3325,
+    68.5872,
+    0.0
+   ],
+   "u_span_deg": 43.3602,
+   "v_range": [
+    -2.5,
+    2.5
+   ],
+   "start_dir": [
+    0.4069,
+    0.9135,
+    0.0
+   ],
+   "end_dir": [
+    0.923,
+    0.3847,
+    0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    45.7177,
+    83.6053,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.7156,
+    0.6985,
+    0.0
+   ],
+   "neighbours": [
+    12,
+    21,
+    35,
+    49
+   ]
+  },
+  {
+   "id": 37,
+   "area_mm2": 10.748,
+   "centroid": [
+    54.8779,
+    9.9779,
+    -4.7706
+   ],
+   "bbox": [
+    53.8779,
+    7.8063,
+    -6.25,
+    55.8779,
+    12.49,
+    -4.0
+   ],
+   "type": "cylinder",
+   "radius": 6.0,
+   "axis_dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "axis_point": [
+    53.3779,
+    12.49,
+    -10.0
+   ],
+   "axis_foot_GH": [
+    -0.0,
+    12.49,
+    -10.0
+   ],
+   "u_span_deg": 51.3178,
+   "v_range": [
+    -2.5,
+    -0.5
+   ],
+   "start_dir": [
+    0.0,
+    -0.7806,
+    0.625
+   ],
+   "end_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "u_ccw_about": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "convex": false,
+   "surface_point": [
+    54.8779,
+    9.892,
+    -4.5916
+   ],
+   "outward_normal_at_surface_point": [
+    0.0,
+    0.433,
+    -0.9014
+   ],
+   "neighbours": [
+    13,
+    74,
+    75,
+    76
+   ]
+  },
+  {
+   "id": 38,
+   "area_mm2": 1.186,
+   "centroid": [
+    56.1962,
+    13.245,
+    -3.8183
+   ],
+   "bbox": [
+    55.8779,
+    12.49,
+    -4.0,
+    56.3779,
+    14.0,
+    -3.5
+   ],
+   "type": "cylinder",
+   "radius": 0.5,
+   "axis_dir": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "axis_point": [
+    55.8779,
+    12.49,
+    -3.5
+   ],
+   "axis_foot_GH": [
+    55.8779,
+    0.0001,
+    -3.5
+   ],
+   "u_span_deg": 90.0,
+   "v_range": [
+    0.0,
+    1.51
+   ],
+   "start_dir": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "end_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "u_ccw_about": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    56.2314,
+    13.245,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    0.7071,
+    0.0,
+    -0.7071
+   ],
+   "neighbours": [
+    13,
+    39,
+    76,
+    77
+   ]
+  },
+  {
+   "id": 39,
+   "area_mm2": 4.5414,
+   "centroid": [
+    56.4117,
+    16.8791,
+    -3.8191
+   ],
+   "bbox": [
+    55.8779,
+    14.0,
+    -4.0,
+    57.0215,
+    19.8047,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    81.8779,
+    14.0001,
+    -3.4999
+   ],
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "major_radius": 26.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 12.9004,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    56.3938,
+    16.8812,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    0.7026,
+    -0.0794,
+    -0.7071
+   ],
+   "neighbours": [
+    13,
+    38,
+    40,
+    70
+   ]
+  },
+  {
+   "id": 40,
+   "area_mm2": 4.4095,
+   "centroid": [
+    57.3939,
+    22.486,
+    -3.8179
+   ],
+   "bbox": [
+    56.5341,
+    19.6931,
+    -4.0,
+    58.0447,
+    25.2974,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    -7.8,
+    34.5396,
+    -3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 66.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 4.8505,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    57.4477,
+    22.476,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    0.6953,
+    -0.1286,
+    -0.7071
+   ],
+   "neighbours": [
+    13,
+    26,
+    28,
+    39
+   ]
+  },
+  {
+   "id": 41,
+   "area_mm2": 10.748,
+   "centroid": [
+    31.174,
+    89.9523,
+    -4.7706
+   ],
+   "bbox": [
+    28.8323,
+    88.4091,
+    -6.25,
+    33.8474,
+    91.4185,
+    -4.0
+   ],
+   "type": "cylinder",
+   "radius": 6.0,
+   "axis_dir": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "axis_point": [
+    33.2808,
+    87.9221,
+    -10.0
+   ],
+   "axis_foot_GH": [
+    12.1651,
+    -2.8305,
+    -10.0
+   ],
+   "u_span_deg": 51.3178,
+   "v_range": [
+    -2.5,
+    -0.5
+   ],
+   "start_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "end_dir": [
+    -0.7603,
+    0.1769,
+    0.625
+   ],
+   "u_ccw_about": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "convex": false,
+   "surface_point": [
+    31.0903,
+    89.9718,
+    -4.5916
+   ],
+   "outward_normal_at_surface_point": [
+    0.4217,
+    -0.0981,
+    -0.9014
+   ],
+   "neighbours": [
+    13,
+    17,
+    51,
+    78
+   ]
+  },
+  {
+   "id": 42,
+   "area_mm2": 1.186,
+   "centroid": [
+    34.0574,
+    87.9279,
+    -3.8183
+   ],
+   "bbox": [
+    33.2808,
+    87.5799,
+    -4.0,
+    34.8649,
+    88.4091,
+    -3.5
+   ],
+   "type": "cylinder",
+   "radius": 0.5,
+   "axis_dir": [
+    -0.974,
+    0.2266,
+    -0.0
+   ],
+   "axis_point": [
+    34.8649,
+    88.0669,
+    -3.5
+   ],
+   "axis_foot_GH": [
+    21.2291,
+    91.2396,
+    -3.5
+   ],
+   "u_span_deg": 90.0,
+   "v_range": [
+    -0.0,
+    1.51
+   ],
+   "start_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "end_dir": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "u_ccw_about": [
+    -0.974,
+    0.2266,
+    -0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    34.0494,
+    87.8936,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    -0.1602,
+    -0.6887,
+    -0.7071
+   ],
+   "neighbours": [
+    13,
+    43,
+    78,
+    79
+   ]
+  },
+  {
+   "id": 43,
+   "area_mm2": 14.6426,
+   "centroid": [
+    42.5761,
+    83.0576,
+    -3.8194
+   ],
+   "bbox": [
+    34.7516,
+    76.0898,
+    -4.0,
+    48.7929,
+    88.0669,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    30.3325,
+    68.5872,
+    -3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 20.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 54.2737,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    43.0226,
+    83.5853,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    -0.4567,
+    -0.5398,
+    -0.7071
+   ],
+   "neighbours": [
+    13,
+    42,
+    44,
+    80
+   ]
+  },
+  {
+   "id": 44,
+   "area_mm2": 35.9366,
+   "centroid": [
+    53.9161,
+    54.0726,
+    -3.8185
+   ],
+   "bbox": [
+    48.3314,
+    31.3925,
+    -4.0,
+    56.4137,
+    76.2822,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    -42.5863,
+    38.1921,
+    -3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 99.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 26.5664,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    54.751,
+    54.21,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    -0.6977,
+    -0.1148,
+    -0.7071
+   ],
+   "neighbours": [
+    13,
+    43,
+    45,
+    81
+   ]
+  },
+  {
+   "id": 45,
+   "area_mm2": 4.5753,
+   "centroid": [
+    55.5932,
+    28.5145,
+    -3.8185
+   ],
+   "bbox": [
+    55.0743,
+    25.5774,
+    -4.0,
+    56.1799,
+    31.4269,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    -25.1276,
+    36.9902,
+    -3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 81.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 4.1114,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    55.5752,
+    28.5164,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    -0.7032,
+    0.0738,
+    -0.7071
+   ],
+   "neighbours": [
+    13,
+    44,
+    46,
+    82
+   ]
+  },
+  {
+   "id": 46,
+   "area_mm2": 4.2342,
+   "centroid": [
+    54.802,
+    22.9652,
+    -3.8186
+   ],
+   "bbox": [
+    54.0972,
+    20.2512,
+    -4.0,
+    55.5694,
+    25.6475,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    -7.8,
+    34.5396,
+    -3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 64.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 4.8505,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    54.7857,
+    22.9682,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    -0.6953,
+    0.1286,
+    -0.7071
+   ],
+   "neighbours": [
+    13,
+    45,
+    47,
+    83
+   ]
+  },
+  {
+   "id": 47,
+   "area_mm2": 5.0077,
+   "centroid": [
+    53.7974,
+    17.1747,
+    -3.8175
+   ],
+   "bbox": [
+    53.3779,
+    14.0,
+    -4.0,
+    54.5846,
+    20.3629,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    81.8779,
+    14.0001,
+    -3.4999
+   ],
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "major_radius": 28.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 12.9004,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    53.7038,
+    17.1853,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    -0.7026,
+    0.0794,
+    -0.7071
+   ],
+   "neighbours": [
+    13,
+    46,
+    48,
+    84
+   ]
+  },
+  {
+   "id": 48,
+   "area_mm2": 1.186,
+   "centroid": [
+    53.5596,
+    13.245,
+    -3.8183
+   ],
+   "bbox": [
+    53.3779,
+    12.49,
+    -4.0,
+    53.8779,
+    14.0,
+    -3.5
+   ],
+   "type": "cylinder",
+   "radius": 0.5,
+   "axis_dir": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "axis_point": [
+    53.8779,
+    12.49,
+    -3.5
+   ],
+   "axis_foot_GH": [
+    53.8779,
+    0.0,
+    -3.5
+   ],
+   "u_span_deg": 90.0,
+   "v_range": [
+    0.0,
+    1.51
+   ],
+   "start_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "end_dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "u_ccw_about": [
+    -0.0,
+    1.0,
+    0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    53.5243,
+    13.245,
+    -3.8535
+   ],
+   "outward_normal_at_surface_point": [
+    -0.7071,
+    -0.0,
+    -0.7071
+   ],
+   "neighbours": [
+    13,
+    47,
+    75,
+    85
+   ]
+  },
+  {
+   "id": 49,
+   "area_mm2": 9.8175,
+   "centroid": [
+    38.1121,
+    88.6584,
+    0.0
+   ],
+   "bbox": [
+    36.7976,
+    88.2266,
+    -2.5,
+    39.0813,
+    89.244,
+    2.5
+   ],
+   "type": "plane",
+   "normal": [
+    0.4069,
+    0.9135,
+    0.0
+   ],
+   "offset_from_GH": 96.4948,
+   "point": [
+    38.1121,
+    88.6584,
+    0.0
+   ],
+   "surface_point": [
+    38.0857,
+    88.6702,
+    -0.1249
+   ],
+   "outward_normal_at_surface_point": [
+    0.4069,
+    0.9135,
+    0.0
+   ],
+   "neighbours": [
+    15,
+    36
+   ]
+  },
+  {
+   "id": 50,
+   "area_mm2": 10.748,
+   "centroid": [
+    31.174,
+    89.9523,
+    4.7707
+   ],
+   "bbox": [
+    28.8323,
+    88.4091,
+    4.0,
+    33.8474,
+    91.4185,
+    6.25
+   ],
+   "type": "cylinder",
+   "radius": 6.0,
+   "axis_dir": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "axis_point": [
+    33.2808,
+    87.9221,
+    10.0
+   ],
+   "axis_foot_GH": [
+    12.165,
+    -2.8305,
+    10.0
+   ],
+   "u_span_deg": 51.3178,
+   "v_range": [
+    -2.5,
+    -0.5
+   ],
+   "start_dir": [
+    -0.7603,
+    0.1769,
+    -0.625
+   ],
+   "end_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "u_ccw_about": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "convex": false,
+   "surface_point": [
+    31.0903,
+    89.9718,
+    4.5917
+   ],
+   "outward_normal_at_surface_point": [
+    0.4217,
+    -0.0981,
+    0.9014
+   ],
+   "neighbours": [
+    18,
+    24,
+    51,
+    86
+   ]
+  },
+  {
+   "id": 51,
+   "area_mm2": 98.6584,
+   "centroid": [
+    18.9877,
+    92.7878,
+    0.0
+   ],
+   "bbox": [
+    11.4893,
+    89.4705,
+    -10.0,
+    29.2855,
+    95.4537,
+    10.0
+   ],
+   "type": "cylinder",
+   "radius": 10.0,
+   "axis_dir": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "axis_point": [
+    21.1158,
+    90.7526,
+    0.0
+   ],
+   "axis_foot_GH": [
+    -0.0,
+    0.0,
+    0.0
+   ],
+   "u_span_deg": 282.6356,
+   "v_range": [
+    -2.5,
+    -0.5
+   ],
+   "start_dir": [
+    0.7603,
+    -0.1769,
+    0.625
+   ],
+   "end_dir": [
+    0.7603,
+    -0.1769,
+    -0.625
+   ],
+   "u_ccw_about": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    11.7159,
+    94.4797,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    -0.974,
+    0.2266,
+    -0.0
+   ],
+   "neighbours": [
+    19,
+    41,
+    50,
+    87
+   ]
+  },
+  {
+   "id": 52,
+   "area_mm2": 14.3257,
+   "centroid": [
+    21.943,
+    94.3076,
+    0.0
+   ],
+   "bbox": [
+    17.9496,
+    93.3785,
+    -4.1,
+    25.9363,
+    95.2367,
+    4.1
+   ],
+   "type": "plane",
+   "normal": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "offset_from_GH": 96.8267,
+   "point": [
+    21.943,
+    94.3076,
+    0.0
+   ],
+   "surface_point": [
+    21.943,
+    94.3076,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "neighbours": [
+    20,
+    88
+   ]
+  },
+  {
+   "id": 53,
+   "area_mm2": 1.2408,
+   "centroid": [
+    56.6836,
+    18.758,
+    2.6449
+   ],
+   "bbox": [
+    56.2616,
+    17.764,
+    2.5,
+    57.0215,
+    19.7824,
+    2.9
+   ],
+   "type": "torus",
+   "centre": [
+    81.8779,
+    14.0001,
+    2.9001
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 25.9,
+   "minor_radius": 0.4,
+   "u_span_deg": 4.4121,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    56.7057,
+    18.7538,
+    2.6172
+   ],
+   "outward_normal_at_surface_point": [
+    0.6948,
+    -0.1312,
+    -0.7071
+   ],
+   "neighbours": [
+    21,
+    55,
+    70,
+    71
+   ]
+  },
+  {
+   "id": 54,
+   "area_mm2": 0.643,
+   "centroid": [
+    55.9453,
+    19.4407,
+    2.2
+   ],
+   "bbox": [
+    55.6682,
+    17.9116,
+    1.4471,
+    56.0467,
+    19.9163,
+    2.5
+   ],
+   "type": "cylinder",
+   "radius": 26.5,
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "axis_point": [
+    81.8779,
+    14.0001,
+    0.0001
+   ],
+   "axis_foot_GH": [
+    81.8779,
+    14.0001,
+    0.0001
+   ],
+   "u_span_deg": 4.4121,
+   "v_range": [
+    -2.5,
+    -1.447
+   ],
+   "start_dir": [
+    -0.989,
+    0.1476,
+    -0.0
+   ],
+   "end_dir": [
+    -0.9748,
+    0.2233,
+    -0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "convex": false,
+   "surface_point": [
+    55.8382,
+    18.9176,
+    1.9736
+   ],
+   "outward_normal_at_surface_point": [
+    0.9826,
+    -0.1856,
+    0.0
+   ],
+   "neighbours": [
+    21,
+    33,
+    73
+   ]
+  },
+  {
+   "id": 55,
+   "area_mm2": 3.5295,
+   "centroid": [
+    57.4295,
+    22.4794,
+    2.6456
+   ],
+   "bbox": [
+    56.6316,
+    19.6931,
+    2.5,
+    58.0447,
+    25.2834,
+    2.9
+   ],
+   "type": "torus",
+   "centre": [
+    -7.8,
+    34.5396,
+    2.9
+   ],
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "major_radius": 66.1,
+   "minor_radius": 0.4,
+   "u_span_deg": 4.8505,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    57.4765,
+    22.4707,
+    2.6172
+   ],
+   "outward_normal_at_surface_point": [
+    0.6953,
+    -0.1286,
+    -0.7071
+   ],
+   "neighbours": [
+    21,
+    53,
+    56,
+    69
+   ]
+  },
+  {
+   "id": 56,
+   "area_mm2": 3.7807,
+   "centroid": [
+    58.2509,
+    28.2355,
+    2.6456
+   ],
+   "bbox": [
+    57.6487,
+    25.2274,
+    2.5,
+    58.674,
+    31.2483,
+    2.9
+   ],
+   "type": "torus",
+   "centre": [
+    -25.1276,
+    36.9902,
+    2.9
+   ],
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "major_radius": 83.6,
+   "minor_radius": 0.4,
+   "u_span_deg": 4.1114,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    58.2966,
+    28.2307,
+    2.6172
+   ],
+   "outward_normal_at_surface_point": [
+    0.7032,
+    -0.0738,
+    -0.7071
+   ],
+   "neighbours": [
+    21,
+    22,
+    25,
+    55
+   ]
+  },
+  {
+   "id": 57,
+   "area_mm2": 4.7239,
+   "centroid": [
+    58.2148,
+    28.2393,
+    3.8181
+   ],
+   "bbox": [
+    57.5497,
+    25.2274,
+    3.5,
+    58.674,
+    31.2551,
+    4.0
+   ],
+   "type": "torus",
+   "centre": [
+    -25.1276,
+    36.9902,
+    3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 83.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 4.1114,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    58.2675,
+    28.2337,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    0.7032,
+    -0.0738,
+    0.7071
+   ],
+   "neighbours": [
+    23,
+    24,
+    25,
+    65
+   ]
+  },
+  {
+   "id": 58,
+   "area_mm2": 1.186,
+   "centroid": [
+    53.5596,
+    13.245,
+    3.8184
+   ],
+   "bbox": [
+    53.3779,
+    12.49,
+    3.5,
+    53.8779,
+    14.0,
+    4.0
+   ],
+   "type": "cylinder",
+   "radius": 0.5,
+   "axis_dir": [
+    0.0,
+    -1.0,
+    -0.0
+   ],
+   "axis_point": [
+    53.8779,
+    14.0,
+    3.5
+   ],
+   "axis_foot_GH": [
+    53.8779,
+    0.0,
+    3.5
+   ],
+   "u_span_deg": 90.0,
+   "v_range": [
+    0.0,
+    1.51
+   ],
+   "start_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "end_dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    -1.0,
+    -0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    53.5243,
+    13.245,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    -0.7071,
+    -0.0,
+    0.7071
+   ],
+   "neighbours": [
+    24,
+    59,
+    85,
+    89
+   ]
+  },
+  {
+   "id": 59,
+   "area_mm2": 5.0077,
+   "centroid": [
+    53.7974,
+    17.1747,
+    3.8176
+   ],
+   "bbox": [
+    53.3779,
+    14.0,
+    3.5,
+    54.5846,
+    20.3629,
+    4.0
+   ],
+   "type": "torus",
+   "centre": [
+    81.8779,
+    14.0001,
+    3.5001
+   ],
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "major_radius": 28.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 12.9004,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    53.7038,
+    17.1853,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    -0.7026,
+    0.0794,
+    0.7071
+   ],
+   "neighbours": [
+    24,
+    58,
+    60,
+    84
+   ]
+  },
+  {
+   "id": 60,
+   "area_mm2": 4.2342,
+   "centroid": [
+    54.802,
+    22.9652,
+    3.8187
+   ],
+   "bbox": [
+    54.0972,
+    20.2512,
+    3.5,
+    55.5694,
+    25.6475,
+    4.0
+   ],
+   "type": "torus",
+   "centre": [
+    -7.8,
+    34.5396,
+    3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 64.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 4.8505,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    54.7857,
+    22.9682,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    -0.6953,
+    0.1286,
+    0.7071
+   ],
+   "neighbours": [
+    24,
+    59,
+    61,
+    83
+   ]
+  },
+  {
+   "id": 61,
+   "area_mm2": 4.5753,
+   "centroid": [
+    55.5932,
+    28.5145,
+    3.8186
+   ],
+   "bbox": [
+    55.0743,
+    25.5774,
+    3.5,
+    56.1799,
+    31.4269,
+    4.0
+   ],
+   "type": "torus",
+   "centre": [
+    -25.1276,
+    36.9902,
+    3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 81.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 4.1114,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    55.5752,
+    28.5164,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    -0.7032,
+    0.0738,
+    0.7071
+   ],
+   "neighbours": [
+    24,
+    60,
+    62,
+    82
+   ]
+  },
+  {
+   "id": 62,
+   "area_mm2": 35.9366,
+   "centroid": [
+    53.9161,
+    54.0726,
+    3.8186
+   ],
+   "bbox": [
+    48.3314,
+    31.3925,
+    3.5,
+    56.4137,
+    76.2822,
+    4.0
+   ],
+   "type": "torus",
+   "centre": [
+    -42.5863,
+    38.1921,
+    3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 99.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 26.5664,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    54.751,
+    54.21,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    -0.6977,
+    -0.1148,
+    0.7071
+   ],
+   "neighbours": [
+    24,
+    61,
+    63,
+    81
+   ]
+  },
+  {
+   "id": 63,
+   "area_mm2": 14.6426,
+   "centroid": [
+    42.5761,
+    83.0576,
+    3.8194
+   ],
+   "bbox": [
+    34.7516,
+    76.0898,
+    3.5,
+    48.7929,
+    88.0669,
+    4.0
+   ],
+   "type": "torus",
+   "centre": [
+    30.3324,
+    68.5872,
+    3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 20.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 54.2737,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    43.0226,
+    83.5853,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    -0.4567,
+    -0.5398,
+    0.7071
+   ],
+   "neighbours": [
+    24,
+    62,
+    64,
+    80
+   ]
+  },
+  {
+   "id": 64,
+   "area_mm2": 1.186,
+   "centroid": [
+    34.0574,
+    87.9279,
+    3.8183
+   ],
+   "bbox": [
+    33.2808,
+    87.5799,
+    3.5,
+    34.8649,
+    88.4091,
+    4.0
+   ],
+   "type": "cylinder",
+   "radius": 0.5,
+   "axis_dir": [
+    0.974,
+    -0.2266,
+    0.0
+   ],
+   "axis_point": [
+    33.3941,
+    88.4091,
+    3.5
+   ],
+   "axis_foot_GH": [
+    21.2291,
+    91.2396,
+    3.5
+   ],
+   "u_span_deg": 90.0,
+   "v_range": [
+    0.0,
+    1.51
+   ],
+   "start_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "end_dir": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "u_ccw_about": [
+    0.974,
+    -0.2266,
+    0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    34.0494,
+    87.8936,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    -0.1602,
+    -0.6887,
+    0.7071
+   ],
+   "neighbours": [
+    24,
+    63,
+    79,
+    86
+   ]
+  },
+  {
+   "id": 65,
+   "area_mm2": 4.4095,
+   "centroid": [
+    57.3939,
+    22.486,
+    3.818
+   ],
+   "bbox": [
+    56.5341,
+    19.6931,
+    3.5,
+    58.0447,
+    25.2974,
+    4.0
+   ],
+   "type": "torus",
+   "centre": [
+    -7.8,
+    34.5396,
+    3.5
+   ],
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "major_radius": 66.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 4.8505,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    57.4477,
+    22.476,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    0.6953,
+    -0.1286,
+    0.7071
+   ],
+   "neighbours": [
+    24,
+    57,
+    66,
+    69
+   ]
+  },
+  {
+   "id": 66,
+   "area_mm2": 4.5414,
+   "centroid": [
+    56.4117,
+    16.8791,
+    3.8192
+   ],
+   "bbox": [
+    55.8779,
+    14.0,
+    3.5,
+    57.0215,
+    19.8047,
+    4.0
+   ],
+   "type": "torus",
+   "centre": [
+    81.8779,
+    14.0001,
+    3.5001
+   ],
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "major_radius": 26.0,
+   "minor_radius": 0.5,
+   "u_span_deg": 12.9004,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    56.3938,
+    16.8812,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    0.7026,
+    -0.0794,
+    0.7071
+   ],
+   "neighbours": [
+    24,
+    65,
+    67,
+    70
+   ]
+  },
+  {
+   "id": 67,
+   "area_mm2": 1.186,
+   "centroid": [
+    56.1962,
+    13.245,
+    3.8184
+   ],
+   "bbox": [
+    55.8779,
+    12.49,
+    3.5,
+    56.3779,
+    14.0,
+    4.0
+   ],
+   "type": "cylinder",
+   "radius": 0.5,
+   "axis_dir": [
+    0.0,
+    -1.0,
+    -0.0
+   ],
+   "axis_point": [
+    55.8779,
+    14.0,
+    3.5
+   ],
+   "axis_foot_GH": [
+    55.8779,
+    0.0001,
+    3.5
+   ],
+   "u_span_deg": 90.0,
+   "v_range": [
+    -0.0,
+    1.51
+   ],
+   "start_dir": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "end_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    -1.0,
+    -0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    56.2314,
+    13.245,
+    3.8536
+   ],
+   "outward_normal_at_surface_point": [
+    0.7071,
+    0.0,
+    0.7071
+   ],
+   "neighbours": [
+    24,
+    66,
+    77,
+    90
+   ]
+  },
+  {
+   "id": 68,
+   "area_mm2": 10.748,
+   "centroid": [
+    54.8779,
+    9.9779,
+    4.7707
+   ],
+   "bbox": [
+    53.8779,
+    7.8063,
+    4.0,
+    55.8779,
+    12.49,
+    6.25
+   ],
+   "type": "cylinder",
+   "radius": 6.0,
+   "axis_dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "axis_point": [
+    53.3779,
+    12.49,
+    10.0
+   ],
+   "axis_foot_GH": [
+    -0.0,
+    12.49,
+    10.0
+   ],
+   "u_span_deg": 51.3178,
+   "v_range": [
+    -2.5,
+    -0.5
+   ],
+   "start_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "end_dir": [
+    0.0,
+    -0.7806,
+    -0.625
+   ],
+   "u_ccw_about": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "convex": false,
+   "surface_point": [
+    54.8779,
+    9.892,
+    4.5917
+   ],
+   "outward_normal_at_surface_point": [
+    -0.0,
+    0.433,
+    0.9014
+   ],
+   "neighbours": [
+    24,
+    74,
+    89,
+    90
+   ]
+  },
+  {
+   "id": 69,
+   "area_mm2": 3.3778,
+   "centroid": [
+    57.5722,
+    22.453,
+    3.2
+   ],
+   "bbox": [
+    57.0215,
+    19.6931,
+    2.9,
+    58.0447,
+    25.2274,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 66.5,
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "axis_point": [
+    -7.8,
+    34.5396,
+    -3.5
+   ],
+   "axis_foot_GH": [
+    -7.8,
+    34.5396,
+    -0.0
+   ],
+   "u_span_deg": 4.8505,
+   "v_range": [
+    6.4,
+    7.0
+   ],
+   "start_dir": [
+    0.9748,
+    -0.2233,
+    0.0
+   ],
+   "end_dir": [
+    0.9901,
+    -0.14,
+    0.0
+   ],
+   "u_ccw_about": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    57.5917,
+    22.4494,
+    3.2
+   ],
+   "outward_normal_at_surface_point": [
+    0.9833,
+    -0.1818,
+    0.0
+   ],
+   "neighbours": [
+    25,
+    55,
+    65,
+    70
+   ]
+  },
+  {
+   "id": 70,
+   "area_mm2": 15.7736,
+   "centroid": [
+    56.4856,
+    15.7547,
+    0.0
+   ],
+   "bbox": [
+    56.3779,
+    14.0,
+    -3.5,
+    57.0215,
+    19.6931,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 25.5,
+   "axis_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "axis_point": [
+    81.8779,
+    14.0001,
+    -3.4999
+   ],
+   "axis_foot_GH": [
+    81.8779,
+    14.0001,
+    0.0001
+   ],
+   "u_span_deg": 12.9004,
+   "v_range": [
+    0.0,
+    7.0
+   ],
+   "start_dir": [
+    -0.9748,
+    0.2233,
+    -0.0
+   ],
+   "end_dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "u_ccw_about": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "convex": false,
+   "surface_point": [
+    56.5393,
+    16.8647,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.9937,
+    -0.1123,
+    0.0
+   ],
+   "neighbours": [
+    26,
+    30,
+    39,
+    53,
+    66,
+    69,
+    71,
+    77
+   ]
+  },
+  {
+   "id": 71,
+   "area_mm2": 5.0218,
+   "centroid": [
+    56.3475,
+    16.1348,
+    0.0
+   ],
+   "bbox": [
+    56.0537,
+    14.9164,
+    -2.9,
+    56.6572,
+    17.8231,
+    2.9
+   ],
+   "type": "B-spline",
+   "degree_uv": [
+    2,
+    6
+   ],
+   "poles_uv": [
+    3,
+    22
+   ],
+   "surface_point": [
+    56.3023,
+    15.1864,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.7691,
+    0.6391,
+    0.0
+   ],
+   "neighbours": [
+    29,
+    30,
+    53,
+    70
+   ]
+  },
+  {
+   "id": 72,
+   "area_mm2": 19.6349,
+   "centroid": [
+    55.6682,
+    17.9116,
+    0.0
+   ],
+   "bbox": [
+    55.2991,
+    15.439,
+    -2.5,
+    56.0372,
+    20.3842,
+    2.5
+   ],
+   "type": "plane",
+   "normal": [
+    0.989,
+    -0.1476,
+    0.0
+   ],
+   "offset_from_GH": 52.4145,
+   "point": [
+    55.6682,
+    17.9116,
+    0.0
+   ],
+   "surface_point": [
+    55.6682,
+    17.9116,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.989,
+    -0.1476,
+    0.0
+   ],
+   "neighbours": [
+    29,
+    73
+   ]
+  },
+  {
+   "id": 73,
+   "area_mm2": 0.4546,
+   "centroid": [
+    56.023,
+    19.9981,
+    0.0
+   ],
+   "bbox": [
+    55.6682,
+    17.9116,
+    -2.5,
+    56.1484,
+    20.3842,
+    2.5
+   ],
+   "type": "cylinder",
+   "radius": 2.5,
+   "axis_dir": [
+    0.989,
+    -0.1476,
+    0.0
+   ],
+   "axis_point": [
+    55.6682,
+    17.9116,
+    0.0
+   ],
+   "axis_foot_GH": [
+    3.8278,
+    25.6483,
+    0.0
+   ],
+   "u_span_deg": 180.0,
+   "v_range": [
+    -0.0,
+    0.1125
+   ],
+   "start_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "end_dir": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "u_ccw_about": [
+    0.989,
+    -0.1476,
+    0.0
+   ],
+   "convex": false,
+   "surface_point": [
+    56.0928,
+    20.3759,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    -0.1476,
+    -0.989,
+    -0.0
+   ],
+   "neighbours": [
+    31,
+    33,
+    54,
+    72
+   ]
+  },
+  {
+   "id": 74,
+   "area_mm2": 98.6584,
+   "centroid": [
+    54.8779,
+    -2.5339,
+    0.0
+   ],
+   "bbox": [
+    53.8779,
+    -9.9999,
+    -10.0,
+    55.8779,
+    7.8063,
+    10.0
+   ],
+   "type": "cylinder",
+   "radius": 10.0,
+   "axis_dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "axis_point": [
+    53.3779,
+    0.0,
+    0.0
+   ],
+   "axis_foot_GH": [
+    -0.0,
+    -0.0,
+    -0.0
+   ],
+   "u_span_deg": 282.6356,
+   "v_range": [
+    -2.5,
+    -0.5
+   ],
+   "start_dir": [
+    -0.0,
+    0.7806,
+    -0.625
+   ],
+   "end_dir": [
+    -0.0,
+    0.7806,
+    0.625
+   ],
+   "u_ccw_about": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    54.8779,
+    -9.9999,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.0,
+    -1.0,
+    -0.0
+   ],
+   "neighbours": [
+    37,
+    68,
+    91,
+    92
+   ]
+  },
+  {
+   "id": 75,
+   "area_mm2": 4.3485,
+   "centroid": [
+    53.5561,
+    9.9003,
+    -4.6089
+   ],
+   "bbox": [
+    53.3779,
+    7.416,
+    -6.25,
+    53.8779,
+    12.49,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    53.8779,
+    12.49,
+    -10.0
+   ],
+   "axis_dir": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "major_radius": 6.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 51.3178,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    53.5243,
+    9.8286,
+    -4.4596
+   ],
+   "outward_normal_at_surface_point": [
+    -0.7071,
+    0.3062,
+    -0.6374
+   ],
+   "neighbours": [
+    37,
+    48,
+    85,
+    91
+   ]
+  },
+  {
+   "id": 76,
+   "area_mm2": 4.3485,
+   "centroid": [
+    56.1997,
+    9.9003,
+    -4.6089
+   ],
+   "bbox": [
+    55.8779,
+    7.416,
+    -6.25,
+    56.3779,
+    12.49,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    55.8779,
+    12.49,
+    -10.0
+   ],
+   "axis_dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "major_radius": 6.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 51.3178,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    56.2314,
+    9.8286,
+    -4.4596
+   ],
+   "outward_normal_at_surface_point": [
+    0.7071,
+    0.3062,
+    -0.6374
+   ],
+   "neighbours": [
+    37,
+    38,
+    77,
+    92
+   ]
+  },
+  {
+   "id": 77,
+   "area_mm2": 267.416,
+   "centroid": [
+    56.3779,
+    1.566,
+    0.0
+   ],
+   "bbox": [
+    56.3779,
+    -9.4999,
+    -9.5,
+    56.3779,
+    14.0,
+    9.5
+   ],
+   "type": "plane",
+   "normal": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "offset_from_GH": 56.3779,
+   "point": [
+    56.3779,
+    1.566,
+    0.0
+   ],
+   "surface_point": [
+    56.3779,
+    2.0325,
+    0.0795
+   ],
+   "outward_normal_at_surface_point": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "neighbours": [
+    38,
+    67,
+    70,
+    76,
+    90,
+    92,
+    93
+   ]
+  },
+  {
+   "id": 78,
+   "area_mm2": 4.3485,
+   "centroid": [
+    30.7988,
+    88.6825,
+    -4.6089
+   ],
+   "bbox": [
+    28.3388,
+    87.9221,
+    -6.25,
+    33.3942,
+    89.4705,
+    -3.5
+   ],
+   "type": "torus",
+   "centre": [
+    33.3942,
+    88.4091,
+    -10.0
+   ],
+   "axis_dir": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "major_radius": 6.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 51.3178,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    30.7218,
+    88.6679,
+    -4.4596
+   ],
+   "outward_normal_at_surface_point": [
+    0.138,
+    -0.7581,
+    -0.6374
+   ],
+   "neighbours": [
+    41,
+    42,
+    79,
+    87
+   ]
+  },
+  {
+   "id": 79,
+   "area_mm2": 320.2262,
+   "centroid": [
+    22.3895,
+    90.4562,
+    0.0
+   ],
+   "bbox": [
+    11.863,
+    87.5799,
+    -9.5,
+    34.7516,
+    92.9055,
+    9.5
+   ],
+   "type": "plane",
+   "normal": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "offset_from_GH": -93.1767,
+   "point": [
+    22.3895,
+    90.4562,
+    0.0
+   ],
+   "surface_point": [
+    23.4442,
+    90.2108,
+    0.2834
+   ],
+   "outward_normal_at_surface_point": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "neighbours": [
+    42,
+    64,
+    78,
+    80,
+    86,
+    87
+   ]
+  },
+  {
+   "id": 80,
+   "area_mm2": 129.3003,
+   "centroid": [
+    42.4623,
+    82.9232,
+    0.0
+   ],
+   "bbox": [
+    34.7516,
+    76.0898,
+    -3.5,
+    48.3314,
+    87.5799,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 19.5,
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "axis_point": [
+    30.3324,
+    68.5872,
+    3.5
+   ],
+   "axis_foot_GH": [
+    30.3325,
+    68.5872,
+    0.0
+   ],
+   "u_span_deg": 54.2737,
+   "v_range": [
+    0.0,
+    7.0
+   ],
+   "start_dir": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "end_dir": [
+    0.923,
+    0.3847,
+    0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "convex": false,
+   "surface_point": [
+    42.928,
+    83.4735,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    -0.6459,
+    -0.7634,
+    -0.0
+   ],
+   "neighbours": [
+    43,
+    63,
+    79,
+    81
+   ]
+  },
+  {
+   "id": 81,
+   "area_mm2": 319.7016,
+   "centroid": [
+    53.7382,
+    54.0433,
+    0.0
+   ],
+   "bbox": [
+    48.3314,
+    31.4269,
+    -3.5,
+    55.9137,
+    76.0898,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 98.5,
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "axis_point": [
+    -42.5863,
+    38.1921,
+    3.5
+   ],
+   "axis_foot_GH": [
+    -42.5863,
+    38.1921,
+    -0.0
+   ],
+   "u_span_deg": 26.5664,
+   "v_range": [
+    0.0,
+    7.0
+   ],
+   "start_dir": [
+    0.923,
+    0.3847,
+    0.0
+   ],
+   "end_dir": [
+    0.9976,
+    -0.0687,
+    0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "convex": false,
+   "surface_point": [
+    54.6065,
+    54.1862,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    -0.9867,
+    -0.1624,
+    -0.0
+   ],
+   "neighbours": [
+    44,
+    62,
+    80,
+    82
+   ]
+  },
+  {
+   "id": 82,
+   "area_mm2": 40.6868,
+   "centroid": [
+    55.4123,
+    28.5335,
+    0.0
+   ],
+   "bbox": [
+    55.0743,
+    25.6475,
+    -3.5,
+    55.6811,
+    31.4269,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 81.0,
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "axis_point": [
+    -25.1276,
+    36.9902,
+    3.5
+   ],
+   "axis_foot_GH": [
+    -25.1276,
+    36.9902,
+    -0.0
+   ],
+   "u_span_deg": 4.1114,
+   "v_range": [
+    0.0,
+    7.0
+   ],
+   "start_dir": [
+    0.9976,
+    -0.0687,
+    0.0
+   ],
+   "end_dir": [
+    0.9901,
+    -0.14,
+    0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "convex": false,
+   "surface_point": [
+    55.4296,
+    28.5317,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    -0.9945,
+    0.1044,
+    -0.0
+   ],
+   "neighbours": [
+    45,
+    61,
+    81,
+    83
+   ]
+  },
+  {
+   "id": 83,
+   "area_mm2": 37.6304,
+   "centroid": [
+    54.623,
+    22.9983,
+    0.0
+   ],
+   "bbox": [
+    54.0972,
+    20.3629,
+    -3.5,
+    55.0743,
+    25.6475,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 63.5,
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "axis_point": [
+    -7.8,
+    34.5396,
+    3.5
+   ],
+   "axis_foot_GH": [
+    -7.8,
+    34.5396,
+    -0.0
+   ],
+   "u_span_deg": 4.8505,
+   "v_range": [
+    0.0,
+    7.0
+   ],
+   "start_dir": [
+    0.9901,
+    -0.14,
+    0.0
+   ],
+   "end_dir": [
+    0.9748,
+    -0.2233,
+    0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "convex": false,
+   "surface_point": [
+    54.6417,
+    22.9948,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    -0.9833,
+    0.1818,
+    -0.0
+   ],
+   "neighbours": [
+    46,
+    60,
+    82,
+    84
+   ]
+  },
+  {
+   "id": 84,
+   "area_mm2": 44.9182,
+   "centroid": [
+    53.6181,
+    17.195,
+    0.0
+   ],
+   "bbox": [
+    53.3779,
+    14.0,
+    -3.5,
+    54.0972,
+    20.3629,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 28.5,
+   "axis_dir": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "axis_point": [
+    81.8779,
+    14.0001,
+    3.5001
+   ],
+   "axis_foot_GH": [
+    81.8779,
+    14.0001,
+    0.0001
+   ],
+   "u_span_deg": 12.9004,
+   "v_range": [
+    -0.0,
+    7.0
+   ],
+   "start_dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "end_dir": [
+    -0.9748,
+    0.2233,
+    -0.0
+   ],
+   "u_ccw_about": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "convex": true,
+   "surface_point": [
+    53.5583,
+    17.2017,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    -0.9937,
+    0.1123,
+    -0.0
+   ],
+   "neighbours": [
+    47,
+    59,
+    83,
+    85
+   ]
+  },
+  {
+   "id": 85,
+   "area_mm2": 320.2262,
+   "centroid": [
+    53.3779,
+    1.3078,
+    0.0
+   ],
+   "bbox": [
+    53.3779,
+    -9.5,
+    -9.5,
+    53.3779,
+    14.0,
+    9.5
+   ],
+   "type": "plane",
+   "normal": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "offset_from_GH": -53.3779,
+   "point": [
+    53.3779,
+    1.3078,
+    0.0
+   ],
+   "surface_point": [
+    53.3779,
+    2.0324,
+    0.0795
+   ],
+   "outward_normal_at_surface_point": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "neighbours": [
+    48,
+    58,
+    75,
+    84,
+    89,
+    91
+   ]
+  },
+  {
+   "id": 86,
+   "area_mm2": 4.3485,
+   "centroid": [
+    30.7988,
+    88.6825,
+    4.609
+   ],
+   "bbox": [
+    28.3388,
+    87.9221,
+    3.5,
+    33.3941,
+    89.4705,
+    6.25
+   ],
+   "type": "torus",
+   "centre": [
+    33.3941,
+    88.4091,
+    10.0
+   ],
+   "axis_dir": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "major_radius": 6.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 51.3178,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    30.7218,
+    88.6679,
+    4.4597
+   ],
+   "outward_normal_at_surface_point": [
+    0.138,
+    -0.7581,
+    0.6374
+   ],
+   "neighbours": [
+    50,
+    64,
+    79,
+    87
+   ]
+  },
+  {
+   "id": 87,
+   "area_mm2": 38.0391,
+   "centroid": [
+    18.7337,
+    91.4956,
+    0.0
+   ],
+   "bbox": [
+    11.4763,
+    89.064,
+    -10.0,
+    28.8323,
+    93.5058,
+    10.0
+   ],
+   "type": "torus",
+   "centre": [
+    21.2291,
+    91.2396,
+    0.0
+   ],
+   "axis_dir": [
+    -0.2266,
+    -0.974,
+    -0.0
+   ],
+   "major_radius": 9.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 282.6356,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    11.5518,
+    93.1282,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    -0.849,
+    -0.5285,
+    -0.0
+   ],
+   "neighbours": [
+    51,
+    78,
+    79,
+    86
+   ]
+  },
+  {
+   "id": 88,
+   "area_mm2": 164.9336,
+   "centroid": [
+    22.7928,
+    97.96,
+    0.0
+   ],
+   "bbox": [
+    18.534,
+    93.5144,
+    -3.5,
+    27.0516,
+    102.4056,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 3.5,
+   "axis_dir": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "axis_point": [
+    21.943,
+    94.3076,
+    0.0
+   ],
+   "axis_foot_GH": [
+    -0.0,
+    0.0,
+    -0.0
+   ],
+   "u_span_deg": 360.0,
+   "v_range": [
+    0.0,
+    7.5
+   ],
+   "start_dir": [
+    -0.9495,
+    0.2209,
+    -0.2227
+   ],
+   "end_dir": [
+    -0.9495,
+    0.2209,
+    -0.2227
+   ],
+   "u_ccw_about": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    26.1162,
+    97.1868,
+    0.7793
+   ],
+   "outward_normal_at_surface_point": [
+    0.9495,
+    -0.2209,
+    0.2227
+   ],
+   "neighbours": [
+    52,
+    94
+   ]
+  },
+  {
+   "id": 89,
+   "area_mm2": 4.3485,
+   "centroid": [
+    53.5561,
+    9.9003,
+    4.609
+   ],
+   "bbox": [
+    53.3779,
+    7.416,
+    3.5,
+    53.8779,
+    12.49,
+    6.25
+   ],
+   "type": "torus",
+   "centre": [
+    53.8779,
+    12.49,
+    10.0
+   ],
+   "axis_dir": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "major_radius": 6.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 51.3178,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    53.5243,
+    9.8286,
+    4.4597
+   ],
+   "outward_normal_at_surface_point": [
+    -0.7071,
+    0.3062,
+    0.6374
+   ],
+   "neighbours": [
+    58,
+    68,
+    85,
+    91
+   ]
+  },
+  {
+   "id": 90,
+   "area_mm2": 4.3485,
+   "centroid": [
+    56.1997,
+    9.9003,
+    4.609
+   ],
+   "bbox": [
+    55.8779,
+    7.416,
+    3.5,
+    56.3779,
+    12.49,
+    6.25
+   ],
+   "type": "torus",
+   "centre": [
+    55.8779,
+    12.49,
+    10.0
+   ],
+   "axis_dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "major_radius": 6.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 51.3178,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    56.2314,
+    9.8286,
+    4.4597
+   ],
+   "outward_normal_at_surface_point": [
+    0.7071,
+    0.3062,
+    0.6374
+   ],
+   "neighbours": [
+    67,
+    68,
+    77,
+    92
+   ]
+  },
+  {
+   "id": 91,
+   "area_mm2": 38.0391,
+   "centroid": [
+    53.5618,
+    -2.4885,
+    0.0
+   ],
+   "bbox": [
+    53.3779,
+    -10.0,
+    -10.0,
+    53.8779,
+    7.8063,
+    10.0
+   ],
+   "type": "torus",
+   "centre": [
+    53.8779,
+    0.0,
+    0.0
+   ],
+   "axis_dir": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "major_radius": 9.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 282.6356,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    53.5244,
+    -9.8535,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    -0.7071,
+    -0.7071,
+    -0.0
+   ],
+   "neighbours": [
+    74,
+    75,
+    85,
+    89
+   ]
+  },
+  {
+   "id": 92,
+   "area_mm2": 38.0391,
+   "centroid": [
+    56.194,
+    -2.4885,
+    0.0
+   ],
+   "bbox": [
+    55.8779,
+    -9.9999,
+    -10.0,
+    56.3779,
+    7.8063,
+    10.0
+   ],
+   "type": "torus",
+   "centre": [
+    55.8779,
+    0.0001,
+    0.0
+   ],
+   "axis_dir": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "major_radius": 9.5,
+   "minor_radius": 0.5,
+   "u_span_deg": 282.6356,
+   "v_span_deg": 90.0,
+   "convex": true,
+   "surface_point": [
+    56.2315,
+    -9.8535,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.7071,
+    -0.7071,
+    0.0
+   ],
+   "neighbours": [
+    74,
+    76,
+    77,
+    90
+   ]
+  },
+  {
+   "id": 93,
+   "area_mm2": 16.7447,
+   "centroid": [
+    56.7029,
+    0.0001,
+    0.0
+   ],
+   "bbox": [
+    56.3779,
+    -4.0999,
+    -4.1,
+    57.0279,
+    4.1001,
+    4.1
+   ],
+   "type": "cylinder",
+   "radius": 4.1,
+   "axis_dir": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "axis_point": [
+    54.8779,
+    0.0,
+    0.0
+   ],
+   "axis_foot_GH": [
+    -0.0,
+    -0.0,
+    -0.0
+   ],
+   "u_span_deg": 360.0,
+   "v_range": [
+    1.5,
+    2.15
+   ],
+   "start_dir": [
+    -0.0,
+    0.6894,
+    -0.7243
+   ],
+   "end_dir": [
+    -0.0,
+    0.6894,
+    -0.7243
+   ],
+   "u_ccw_about": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    56.7029,
+    -2.8266,
+    2.9699
+   ],
+   "outward_normal_at_surface_point": [
+    0.0,
+    -0.6894,
+    0.7243
+   ],
+   "neighbours": [
+    77,
+    95
+   ]
+  },
+  {
+   "id": 94,
+   "area_mm2": 38.4845,
+   "centroid": [
+    23.6426,
+    101.6125,
+    0.0
+   ],
+   "bbox": [
+    20.2337,
+    100.8193,
+    -3.5,
+    27.0516,
+    102.4056,
+    3.5
+   ],
+   "type": "plane",
+   "normal": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "offset_from_GH": 104.3267,
+   "point": [
+    23.6426,
+    101.6125,
+    0.0
+   ],
+   "surface_point": [
+    23.6426,
+    101.6125,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    0.2266,
+    0.974,
+    0.0
+   ],
+   "neighbours": [
+    88
+   ]
+  },
+  {
+   "id": 95,
+   "area_mm2": 14.3257,
+   "centroid": [
+    57.0279,
+    0.0001,
+    0.0
+   ],
+   "bbox": [
+    57.0279,
+    -4.0999,
+    -4.1,
+    57.0279,
+    4.1001,
+    4.1
+   ],
+   "type": "plane",
+   "normal": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "offset_from_GH": 57.0279,
+   "point": [
+    57.0279,
+    0.0001,
+    0.0
+   ],
+   "surface_point": [
+    57.0279,
+    0.0001,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "neighbours": [
+    93,
+    96
+   ]
+  },
+  {
+   "id": 96,
+   "area_mm2": 164.9336,
+   "centroid": [
+    60.7779,
+    0.0001,
+    0.0
+   ],
+   "bbox": [
+    57.0279,
+    -3.4999,
+    -3.5,
+    64.5279,
+    3.5001,
+    3.5
+   ],
+   "type": "cylinder",
+   "radius": 3.5,
+   "axis_dir": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "axis_point": [
+    57.0279,
+    0.0001,
+    0.0
+   ],
+   "axis_foot_GH": [
+    -0.0,
+    0.0,
+    -0.0
+   ],
+   "u_span_deg": 360.0,
+   "v_range": [
+    0.0,
+    7.5
+   ],
+   "start_dir": [
+    -0.0,
+    0.6894,
+    -0.7243
+   ],
+   "end_dir": [
+    -0.0,
+    0.6894,
+    -0.7243
+   ],
+   "u_ccw_about": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "convex": true,
+   "surface_point": [
+    60.7779,
+    -2.413,
+    2.5353
+   ],
+   "outward_normal_at_surface_point": [
+    0.0,
+    -0.6894,
+    0.7243
+   ],
+   "neighbours": [
+    95,
+    97
+   ]
+  },
+  {
+   "id": 97,
+   "area_mm2": 38.4845,
+   "centroid": [
+    64.5279,
+    0.0001,
+    0.0
+   ],
+   "bbox": [
+    64.5279,
+    -3.4999,
+    -3.4999,
+    64.5279,
+    3.5001,
+    3.5
+   ],
+   "type": "plane",
+   "normal": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "offset_from_GH": 64.5279,
+   "point": [
+    64.5279,
+    0.0001,
+    0.0
+   ],
+   "surface_point": [
+    64.5279,
+    0.0001,
+    0.0
+   ],
+   "outward_normal_at_surface_point": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "neighbours": [
+    96
+   ]
+  }
+ ]
+}

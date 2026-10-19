@@ -1,0 +1,176 @@
+{
+ "id": "underpass-bridge-relay-4r",
+ "status": "refuted",
+ "v_gap": 20.6,
+ "complexity": 53.0,
+ "verdict": "watch",
+ "reasons": [
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "dominance: cannot compare with conecut-knee-knuckle-3r at 2 mm",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "idle: a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: dashboard shows no verified number (row v_gap 20.6); dashboard sweep best 13.74 (score 95.0) sits 6.86 below the verified number; dashboard status 'screened' vs row 'refuted'"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 16.64 vs bench 20.6 (-3.96; row held_out_gap)",
+   "held_gap": 16.64,
+   "v_gap": 20.6,
+   "drop": -3.96,
+   "source": "row held_out_gap"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 13.74 -> verified 20.6 (+6.86)",
+   "fast": 13.74,
+   "verified": 20.6,
+   "drop": 6.86
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 20.6: bench 12 contact poses, sum 43.23 mm, deepest 9.79 mm at ['ws', 30.0, 135.0, 0.0], 5 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 43 contact poses, sum 173.02 mm, deepest 12.23 mm at ['ws', 15.0, 135.0, -15.0], 21 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
+   "depths": {
+    "v_gap 20.6": {
+     "bench": {
+      "n": 12,
+      "sum_mm": 43.23,
+      "max_mm": 9.79,
+      "n_deeper3": 5,
+      "overhead140": 5,
+      "deepest": [
+       "ws",
+       30.0,
+       135.0,
+       0.0
+      ],
+      "gap": 20.6,
+      "src": "docs/alignment/remeasure/underpass-bridge-relay-4r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        43.23
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 43,
+      "sum_mm": 173.02,
+      "max_mm": 12.23,
+      "n_deeper3": 21,
+      "overhead140": 15,
+      "deepest": [
+       "ws",
+       15.0,
+       135.0,
+       -15.0
+      ],
+      "gap": 24.33,
+      "src": "docs/alignment/remeasure/underpass-bridge-relay-4r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        173.02
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with conecut-knee-knuckle-3r at 2 mm"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.0 deg (docs/concepts/verify/underpass-bridge-relay-4r/verifier_held.json:pick.th_margin.min; 1 readings)",
+   "min_margin": 5.0,
+   "where": "docs/concepts/verify/underpass-bridge-relay-4r/verifier_held.json:pick.th_margin.min"
+  },
+  {
+   "check": "idle",
+   "level": "watch",
+   "reason": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 53.0 vs row 53.0",
+   "recomputed": 53.0,
+   "row": 53.0
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "dashboard shows no verified number (row v_gap 20.6); dashboard sweep best 13.74 (score 95.0) sits 6.86 below the verified number; dashboard status 'screened' vs row 'refuted'"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_fixheld.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_fixheld_A_up1.2_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_fix.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_fix_B_up1.0_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_held.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_fix_A_up1.2_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_held_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_claim.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/verifier_claim_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/held_perpose.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/held.json",
+  "docs/concepts/verify/underpass-bridge-relay-4r/diag_claimbench_postH_1_perpose.json"
+ ],
+ "git": "36a87d4",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T21:16:13Z"
+}

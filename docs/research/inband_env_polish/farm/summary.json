@@ -1,0 +1,1568 @@
+[
+ {
+  "nm": "PICK_env_held",
+  "gap": 24.75,
+  "static": 24.75,
+  "n1": 25.87,
+  "n2": 35.64,
+  "reach": 0.6723,
+  "follow": 1.0,
+  "ib14": 0.8908,
+  "contact": 0.0106,
+  "depth_n": 9,
+  "depth_sum": 24.653,
+  "depth_max": 8.839,
+  "th": 5.601,
+  "why": {
+   "fold": 271,
+   "slide": 32,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 9
+  },
+  "dK": 44.62,
+  "dK_lim": 63.5,
+  "tilt": [
+   26.0,
+   16.8
+  ],
+  "trans": 51.7,
+  "spring": {
+   "kK": 1.7901,
+   "dK_taken_deg": 44.62,
+   "J2_Nm": 0.164,
+   "cuff_N_150": 1.09,
+   "cuff_N_120": 1.37,
+   "share_1Nm": 0.164,
+   "share_5N": 0.274
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 57,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 24,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 20,
+    "contact": 4,
+    "depth": 9.675
+   },
+   "across": {
+    "n": 175,
+    "taken": 41,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 20
+  },
+  "ws90": [
+   0.829,
+   0.4875
+  ],
+  "bk": [
+   26.0,
+   38.0,
+   58.5
+  ],
+  "kK": 1.7901,
+  "margin": 5.5
+ },
+ {
+  "nm": "PICK_fit60_bench",
+  "gap": 19.43,
+  "static": 19.43,
+  "n1": 20.53,
+  "n2": 34.72,
+  "reach": 0.7167,
+  "follow": 1.0,
+  "ib14": 0.8971,
+  "contact": 0.0081,
+  "depth_n": 3,
+  "depth_sum": 9.856,
+  "depth_max": 9.724,
+  "th": 5.799,
+  "why": {
+   "fold": 90,
+   "slide": 9,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 3
+  },
+  "dK": 43.98,
+  "dK_lim": 63.5,
+  "tilt": [
+   25.5,
+   14.5
+  ],
+  "trans": 52.0,
+  "spring": {
+   "kK": 1.7901,
+   "dK_taken_deg": 43.98,
+   "J2_Nm": 0.164,
+   "cuff_N_150": 1.09,
+   "cuff_N_120": 1.37,
+   "share_1Nm": 0.164,
+   "share_5N": 0.273
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 36,
+    "taken": 23,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 28,
+    "taken": 8,
+    "contact": 2,
+    "depth": 9.812
+   },
+   "ax150": {
+    "n": 27,
+    "taken": 3,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "across": {
+    "n": 68,
+    "taken": 20,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 28,
+   "taken": 8
+  },
+  "ws90": [
+   0.816,
+   0.5036
+  ],
+  "bk": [
+   26.0,
+   38.0,
+   58.5
+  ],
+  "kK": 1.7901,
+  "margin": 5.5
+ },
+ {
+  "nm": "PICK_fit60_held",
+  "gap": 24.38,
+  "static": 24.38,
+  "n1": 27.5,
+  "n2": 37.35,
+  "reach": 0.6712,
+  "follow": 1.0,
+  "ib14": 0.8956,
+  "contact": 0.0106,
+  "depth_n": 9,
+  "depth_sum": 23.2,
+  "depth_max": 8.708,
+  "th": 5.601,
+  "why": {
+   "fold": 271,
+   "slide": 33,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 9
+  },
+  "dK": 44.62,
+  "dK_lim": 63.5,
+  "tilt": [
+   25.5,
+   14.5
+  ],
+  "trans": 52.0,
+  "spring": {
+   "kK": 1.7901,
+   "dK_taken_deg": 44.62,
+   "J2_Nm": 0.164,
+   "cuff_N_150": 1.09,
+   "cuff_N_120": 1.37,
+   "share_1Nm": 0.164,
+   "share_5N": 0.274
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 57,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 24,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 19,
+    "contact": 5,
+    "depth": 10.843
+   },
+   "across": {
+    "n": 175,
+    "taken": 41,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 19
+  },
+  "ws90": [
+   0.8331,
+   0.495
+  ],
+  "bk": [
+   26.0,
+   38.0,
+   58.5
+  ],
+  "kK": 1.7901,
+  "margin": 5.5
+ },
+ {
+  "nm": "PICKnominal_fit60_bench",
+  "gap": 18.87,
+  "static": 18.87,
+  "n1": 19.96,
+  "n2": 34.12,
+  "reach": 0.7222,
+  "follow": 1.0,
+  "ib14": 0.8971,
+  "contact": 0.008,
+  "depth_n": 3,
+  "depth_sum": 9.856,
+  "depth_max": 9.724,
+  "th": 5.231,
+  "why": {
+   "fold": 88,
+   "slide": 9,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 3
+  },
+  "dK": 45.83,
+  "dK_lim": 65.8,
+  "tilt": [
+   25.5,
+   15.1
+  ],
+  "trans": 52.0,
+  "spring": {
+   "kK": 1.7901,
+   "dK_taken_deg": 45.83,
+   "J2_Nm": 0.165,
+   "cuff_N_150": 1.1,
+   "cuff_N_120": 1.37,
+   "share_1Nm": 0.165,
+   "share_5N": 0.274
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 36,
+    "taken": 23,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 28,
+    "taken": 8,
+    "contact": 2,
+    "depth": 9.812
+   },
+   "ax150": {
+    "n": 27,
+    "taken": 3,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "across": {
+    "n": 68,
+    "taken": 20,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 28,
+   "taken": 8
+  },
+  "ws90": [
+   0.8123,
+   0.5049
+  ],
+  "bk": [
+   26.0,
+   38.0,
+   59.0
+  ],
+  "kK": 1.7901,
+  "margin": 5.0
+ },
+ {
+  "nm": "PICKnominal_fit60_held",
+  "gap": 23.21,
+  "static": 23.21,
+  "n1": 26.53,
+  "n2": 36.97,
+  "reach": 0.6828,
+  "follow": 1.0,
+  "ib14": 0.8956,
+  "contact": 0.0105,
+  "depth_n": 9,
+  "depth_sum": 23.2,
+  "depth_max": 8.708,
+  "th": 5.045,
+  "why": {
+   "fold": 260,
+   "slide": 33,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 9
+  },
+  "dK": 46.44,
+  "dK_lim": 65.8,
+  "tilt": [
+   25.5,
+   15.1
+  ],
+  "trans": 52.0,
+  "spring": {
+   "kK": 1.7901,
+   "dK_taken_deg": 46.44,
+   "J2_Nm": 0.165,
+   "cuff_N_150": 1.1,
+   "cuff_N_120": 1.37,
+   "share_1Nm": 0.165,
+   "share_5N": 0.275
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 62,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 25,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 19,
+    "contact": 5,
+    "depth": 10.843
+   },
+   "across": {
+    "n": 175,
+    "taken": 43,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 19
+  },
+  "ws90": [
+   0.8326,
+   0.4996
+  ],
+  "bk": [
+   26.0,
+   38.0,
+   59.0
+  ],
+  "kK": 1.7901,
+  "margin": 5.0
+ },
+ {
+  "nm": "ROBUST_fit60_held",
+  "gap": 24.33,
+  "static": 24.33,
+  "n1": 27.45,
+  "n2": 37.35,
+  "reach": 0.6712,
+  "follow": 1.0,
+  "ib14": 0.8961,
+  "contact": 0.0106,
+  "depth_n": 9,
+  "depth_sum": 23.374,
+  "depth_max": 8.742,
+  "th": 5.601,
+  "why": {
+   "fold": 271,
+   "slide": 33,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 9
+  },
+  "dK": 44.62,
+  "dK_lim": 63.5,
+  "tilt": [
+   25.9,
+   14.5
+  ],
+  "trans": 51.6,
+  "spring": {
+   "kK": 1.7901,
+   "dK_taken_deg": 44.62,
+   "J2_Nm": 0.164,
+   "cuff_N_150": 1.09,
+   "cuff_N_120": 1.37,
+   "share_1Nm": 0.164,
+   "share_5N": 0.274
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 57,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 24,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 19,
+    "contact": 5,
+    "depth": 11.017000000000001
+   },
+   "across": {
+    "n": 175,
+    "taken": 41,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 19
+  },
+  "ws90": [
+   0.8334,
+   0.4957
+  ],
+  "bk": [
+   26.0,
+   38.0,
+   58.5
+  ],
+  "kK": 1.7901,
+  "margin": 5.5
+ },
+ {
+  "nm": "longdyad_env_held",
+  "gap": 23.03,
+  "static": 23.03,
+  "n1": 25.02,
+  "n2": 33.4,
+  "reach": 0.687,
+  "follow": 1.0,
+  "ib14": 0.8942,
+  "contact": 0.0115,
+  "depth_n": 10,
+  "depth_sum": 42.732,
+  "depth_max": 8.297,
+  "th": 5.515,
+  "why": {
+   "fold": 251,
+   "slide": 37,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 10
+  },
+  "dK": 37.69,
+  "dK_lim": 64.8,
+  "tilt": [
+   13.4,
+   16.0
+  ],
+  "trans": 59.3,
+  "spring": {
+   "kK": 2.8219,
+   "dK_taken_deg": 37.69,
+   "J2_Nm": 0.254,
+   "cuff_N_150": 1.69,
+   "cuff_N_120": 2.11,
+   "share_1Nm": 0.254,
+   "share_5N": 0.423
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 66,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 26,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 16,
+    "contact": 4,
+    "depth": 27.804000000000002
+   },
+   "across": {
+    "n": 175,
+    "taken": 45,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 16
+  },
+  "ws90": [
+   0.8368,
+   0.5027
+  ],
+  "bk": [
+   28.9545,
+   44.6185,
+   68.073
+  ],
+  "kK": 2.8219,
+  "margin": 5.5
+ },
+ {
+  "nm": "longdyad_fit60_bench",
+  "gap": 20.44,
+  "static": 20.44,
+  "n1": 22.08,
+  "n2": 34.73,
+  "reach": 0.7139,
+  "follow": 1.0,
+  "ib14": 0.8898,
+  "contact": 0.0081,
+  "depth_n": 3,
+  "depth_sum": 10.766,
+  "depth_max": 5.582,
+  "th": 6.314,
+  "why": {
+   "fold": 87,
+   "slide": 13,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 3
+  },
+  "dK": 32.69,
+  "dK_lim": 66.0,
+  "tilt": [
+   12.8,
+   13.5
+  ],
+  "trans": 59.7,
+  "spring": {
+   "kK": 2.8219,
+   "dK_taken_deg": 32.69,
+   "J2_Nm": 0.25,
+   "cuff_N_150": 1.67,
+   "cuff_N_120": 2.08,
+   "share_1Nm": 0.25,
+   "share_5N": 0.416
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 36,
+    "taken": 23,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 28,
+    "taken": 7,
+    "contact": 1,
+    "depth": 5.582
+   },
+   "ax150": {
+    "n": 27,
+    "taken": 3,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "across": {
+    "n": 68,
+    "taken": 19,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 28,
+   "taken": 7
+  },
+  "ws90": [
+   0.8276,
+   0.5114
+  ],
+  "bk": [
+   28.9545,
+   44.6185,
+   68.073
+  ],
+  "kK": 2.8219,
+  "margin": 5.5
+ },
+ {
+  "nm": "longdyad_fit60_held",
+  "gap": 23.72,
+  "static": 23.72,
+  "n1": 25.72,
+  "n2": 41.97,
+  "reach": 0.6849,
+  "follow": 1.0,
+  "ib14": 0.8883,
+  "contact": 0.0104,
+  "depth_n": 9,
+  "depth_sum": 40.856,
+  "depth_max": 9.007,
+  "th": 5.515,
+  "why": {
+   "fold": 251,
+   "slide": 40,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 9
+  },
+  "dK": 37.69,
+  "dK_lim": 66.0,
+  "tilt": [
+   12.8,
+   13.5
+  ],
+  "trans": 59.7,
+  "spring": {
+   "kK": 2.8219,
+   "dK_taken_deg": 37.69,
+   "J2_Nm": 0.254,
+   "cuff_N_150": 1.69,
+   "cuff_N_120": 2.11,
+   "share_1Nm": 0.254,
+   "share_5N": 0.423
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 66,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 26,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 14,
+    "contact": 4,
+    "depth": 29.282
+   },
+   "across": {
+    "n": 175,
+    "taken": 45,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 14
+  },
+  "ws90": [
+   0.833,
+   0.5039
+  ],
+  "bk": [
+   28.9545,
+   44.6185,
+   68.073
+  ],
+  "kK": 2.8219,
+  "margin": 5.5
+ },
+ {
+  "nm": "pick1_env_held",
+  "gap": 22.43,
+  "static": 22.43,
+  "n1": 25.97,
+  "n2": 35.09,
+  "reach": 0.6838,
+  "follow": 1.0,
+  "ib14": 0.9032,
+  "contact": 0.0081,
+  "depth_n": 7,
+  "depth_sum": 22.023,
+  "depth_max": 6.652,
+  "th": 5.505,
+  "why": {
+   "fold": 260,
+   "slide": 34,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 7
+  },
+  "dK": 50.3,
+  "dK_lim": 63.0,
+  "tilt": [
+   21.0,
+   18.9
+  ],
+  "trans": 59.7,
+  "spring": {
+   "kK": 1.9796,
+   "dK_taken_deg": 50.3,
+   "J2_Nm": 0.184,
+   "cuff_N_150": 1.23,
+   "cuff_N_120": 1.54,
+   "share_1Nm": 0.184,
+   "share_5N": 0.307
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 64,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 26,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 21,
+    "contact": 2,
+    "depth": 7.191
+   },
+   "across": {
+    "n": 175,
+    "taken": 44,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 21
+  },
+  "ws90": [
+   0.8389,
+   0.5113
+  ],
+  "bk": [
+   26.0,
+   38.0,
+   58.1358
+  ],
+  "kK": 1.9796,
+  "margin": 5.5
+ },
+ {
+  "nm": "pick1_fit60_bench",
+  "gap": 19.15,
+  "static": 19.15,
+  "n1": 21.9,
+  "n2": 28.19,
+  "reach": 0.7139,
+  "follow": 1.0,
+  "ib14": 0.9002,
+  "contact": 0.0054,
+  "depth_n": 2,
+  "depth_sum": 3.696,
+  "depth_max": 3.401,
+  "th": 6.565,
+  "why": {
+   "fold": 90,
+   "slide": 11,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 2
+  },
+  "dK": 46.83,
+  "dK_lim": 63.0,
+  "tilt": [
+   20.4,
+   18.9
+  ],
+  "trans": 59.7,
+  "spring": {
+   "kK": 1.9796,
+   "dK_taken_deg": 46.83,
+   "J2_Nm": 0.183,
+   "cuff_N_150": 1.22,
+   "cuff_N_120": 1.52,
+   "share_1Nm": 0.183,
+   "share_5N": 0.304
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 36,
+    "taken": 23,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 28,
+    "taken": 9,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 27,
+    "taken": 3,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "across": {
+    "n": 68,
+    "taken": 20,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 28,
+   "taken": 9
+  },
+  "ws90": [
+   0.8368,
+   0.5353
+  ],
+  "bk": [
+   26.0,
+   38.0,
+   58.1358
+  ],
+  "kK": 1.9796,
+  "margin": 5.5
+ },
+ {
+  "nm": "pick1_fit60_held",
+  "gap": 23.12,
+  "static": 23.12,
+  "n1": 25.77,
+  "n2": 35.42,
+  "reach": 0.6807,
+  "follow": 1.0,
+  "ib14": 0.8986,
+  "contact": 0.0105,
+  "depth_n": 9,
+  "depth_sum": 21.679,
+  "depth_max": 6.105,
+  "th": 5.505,
+  "why": {
+   "fold": 260,
+   "slide": 35,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 9
+  },
+  "dK": 50.3,
+  "dK_lim": 63.0,
+  "tilt": [
+   20.4,
+   18.9
+  ],
+  "trans": 59.7,
+  "spring": {
+   "kK": 1.9796,
+   "dK_taken_deg": 50.3,
+   "J2_Nm": 0.184,
+   "cuff_N_150": 1.23,
+   "cuff_N_120": 1.54,
+   "share_1Nm": 0.184,
+   "share_5N": 0.307
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 64,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 26,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 18,
+    "contact": 4,
+    "depth": 8.301
+   },
+   "across": {
+    "n": 175,
+    "taken": 44,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 18
+  },
+  "ws90": [
+   0.8338,
+   0.5066
+  ],
+  "bk": [
+   26.0,
+   38.0,
+   58.1358
+  ],
+  "kK": 1.9796,
+  "margin": 5.5
+ },
+ {
+  "nm": "pick2_env_held",
+  "gap": 23.47,
+  "static": 23.47,
+  "n1": 24.57,
+  "n2": 34.43,
+  "reach": 0.6796,
+  "follow": 1.0,
+  "ib14": 0.8985,
+  "contact": 0.0128,
+  "depth_n": 11,
+  "depth_sum": 27.258,
+  "depth_max": 7.849,
+  "th": 5.594,
+  "why": {
+   "fold": 259,
+   "slide": 35,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 11
+  },
+  "dK": 45.86,
+  "dK_lim": 58.5,
+  "tilt": [
+   18.2,
+   19.8
+  ],
+  "trans": 59.6,
+  "spring": {
+   "kK": 1.876,
+   "dK_taken_deg": 45.86,
+   "J2_Nm": 0.173,
+   "cuff_N_150": 1.15,
+   "cuff_N_120": 1.44,
+   "share_1Nm": 0.173,
+   "share_5N": 0.288
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 62,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 25,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 19,
+    "contact": 4,
+    "depth": 8.485
+   },
+   "across": {
+    "n": 175,
+    "taken": 44,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 19
+  },
+  "ws90": [
+   0.8406,
+   0.5116
+  ],
+  "bk": [
+   26.0088,
+   38.0,
+   57.1507
+  ],
+  "kK": 1.876,
+  "margin": 5.5
+ },
+ {
+  "nm": "pick2_fit60_bench",
+  "gap": 19.49,
+  "static": 19.49,
+  "n1": 22.23,
+  "n2": 33.34,
+  "reach": 0.7167,
+  "follow": 1.0,
+  "ib14": 0.8965,
+  "contact": 0.0081,
+  "depth_n": 3,
+  "depth_sum": 5.193,
+  "depth_max": 4.065,
+  "th": 6.132,
+  "why": {
+   "fold": 89,
+   "slide": 10,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 3
+  },
+  "dK": 44.13,
+  "dK_lim": 58.5,
+  "tilt": [
+   17.9,
+   18.6
+  ],
+  "trans": 60.1,
+  "spring": {
+   "kK": 1.876,
+   "dK_taken_deg": 44.13,
+   "J2_Nm": 0.172,
+   "cuff_N_150": 1.15,
+   "cuff_N_120": 1.43,
+   "share_1Nm": 0.172,
+   "share_5N": 0.286
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 36,
+    "taken": 23,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 28,
+    "taken": 8,
+    "contact": 1,
+    "depth": 0.478
+   },
+   "ax150": {
+    "n": 27,
+    "taken": 3,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "across": {
+    "n": 68,
+    "taken": 21,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 28,
+   "taken": 8
+  },
+  "ws90": [
+   0.8387,
+   0.5535
+  ],
+  "bk": [
+   26.0088,
+   38.0,
+   57.1507
+  ],
+  "kK": 1.876,
+  "margin": 5.5
+ },
+ {
+  "nm": "pick2_fit60_held",
+  "gap": 23.39,
+  "static": 23.39,
+  "n1": 27.14,
+  "n2": 38.16,
+  "reach": 0.6817,
+  "follow": 1.0,
+  "ib14": 0.8949,
+  "contact": 0.0105,
+  "depth_n": 9,
+  "depth_sum": 24.781,
+  "depth_max": 6.793,
+  "th": 5.594,
+  "why": {
+   "fold": 259,
+   "slide": 35,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 9
+  },
+  "dK": 45.86,
+  "dK_lim": 58.5,
+  "tilt": [
+   17.9,
+   18.6
+  ],
+  "trans": 60.1,
+  "spring": {
+   "kK": 1.876,
+   "dK_taken_deg": 45.86,
+   "J2_Nm": 0.173,
+   "cuff_N_150": 1.15,
+   "cuff_N_120": 1.44,
+   "share_1Nm": 0.173,
+   "share_5N": 0.288
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 62,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 25,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 18,
+    "contact": 5,
+    "depth": 9.898
+   },
+   "across": {
+    "n": 175,
+    "taken": 44,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 18
+  },
+  "ws90": [
+   0.8389,
+   0.5301
+  ],
+  "bk": [
+   26.0088,
+   38.0,
+   57.1507
+  ],
+  "kK": 1.876,
+  "margin": 5.5
+ },
+ {
+  "nm": "pick3_env_held",
+  "gap": 23.57,
+  "static": 23.57,
+  "n1": 25.13,
+  "n2": 34.16,
+  "reach": 0.6807,
+  "follow": 1.0,
+  "ib14": 0.8929,
+  "contact": 0.0093,
+  "depth_n": 8,
+  "depth_sum": 21.601,
+  "depth_max": 6.646,
+  "th": 5.524,
+  "why": {
+   "fold": 263,
+   "slide": 33,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 8
+  },
+  "dK": 47.68,
+  "dK_lim": 65.5,
+  "tilt": [
+   20.0,
+   18.0
+  ],
+  "trans": 53.8,
+  "spring": {
+   "kK": 1.8622,
+   "dK_taken_deg": 47.68,
+   "J2_Nm": 0.172,
+   "cuff_N_150": 1.15,
+   "cuff_N_120": 1.44,
+   "share_1Nm": 0.172,
+   "share_5N": 0.287
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 61,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 25,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 20,
+    "contact": 3,
+    "depth": 6.9590000000000005
+   },
+   "across": {
+    "n": 175,
+    "taken": 44,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 20
+  },
+  "ws90": [
+   0.8335,
+   0.4955
+  ],
+  "bk": [
+   26.0374,
+   38.0,
+   58.5374
+  ],
+  "kK": 1.8622,
+  "margin": 5.5
+ },
+ {
+  "nm": "pick3_fit60_bench",
+  "gap": 18.33,
+  "static": 18.33,
+  "n1": 20.52,
+  "n2": 33.38,
+  "reach": 0.7194,
+  "follow": 1.0,
+  "ib14": 0.9071,
+  "contact": 0.0027,
+  "depth_n": 1,
+  "depth_sum": 0.217,
+  "depth_max": 0.217,
+  "th": 5.589,
+  "why": {
+   "fold": 90,
+   "slide": 10,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 1
+  },
+  "dK": 47.47,
+  "dK_lim": 65.5,
+  "tilt": [
+   19.6,
+   16.6
+  ],
+  "trans": 54.1,
+  "spring": {
+   "kK": 1.8622,
+   "dK_taken_deg": 47.47,
+   "J2_Nm": 0.172,
+   "cuff_N_150": 1.15,
+   "cuff_N_120": 1.43,
+   "share_1Nm": 0.172,
+   "share_5N": 0.287
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 36,
+    "taken": 23,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 28,
+    "taken": 9,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 27,
+    "taken": 3,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "across": {
+    "n": 68,
+    "taken": 21,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 28,
+   "taken": 9
+  },
+  "ws90": [
+   0.8319,
+   0.537
+  ],
+  "bk": [
+   26.0374,
+   38.0,
+   58.5374
+  ],
+  "kK": 1.8622,
+  "margin": 5.5
+ },
+ {
+  "nm": "pick3_fit60_held",
+  "gap": 22.86,
+  "static": 22.86,
+  "n1": 26.19,
+  "n2": 36.65,
+  "reach": 0.6807,
+  "follow": 1.0,
+  "ib14": 0.9056,
+  "contact": 0.0093,
+  "depth_n": 8,
+  "depth_sum": 21.157,
+  "depth_max": 6.09,
+  "th": 5.524,
+  "why": {
+   "fold": 263,
+   "slide": 33,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 8
+  },
+  "dK": 47.68,
+  "dK_lim": 65.5,
+  "tilt": [
+   19.6,
+   16.6
+  ],
+  "trans": 54.1,
+  "spring": {
+   "kK": 1.8622,
+   "dK_taken_deg": 47.68,
+   "J2_Nm": 0.172,
+   "cuff_N_150": 1.15,
+   "cuff_N_120": 1.44,
+   "share_1Nm": 0.172,
+   "share_5N": 0.287
+  },
+  "dropped": 0,
+  "fresh": {
+   "poses": 0,
+   "forced": 0,
+   "connected": 0
+  },
+  "byc": {
+   "lowarm_xrot": {
+    "n": 110,
+    "taken": 61,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "ax150": {
+    "n": 105,
+    "taken": 25,
+    "contact": 0,
+    "depth": 0.0
+   },
+   "overhead": {
+    "n": 71,
+    "taken": 19,
+    "contact": 4,
+    "depth": 8.360000000000001
+   },
+   "across": {
+    "n": 175,
+    "taken": 44,
+    "contact": 0,
+    "depth": 0.0
+   }
+  },
+  "ovh": {
+   "ws": 71,
+   "taken": 19
+  },
+  "ws90": [
+   0.8453,
+   0.5221
+  ],
+  "bk": [
+   26.0374,
+   38.0,
+   58.5374
+  ],
+  "kK": 1.8622,
+  "margin": 5.5
+ }
+]

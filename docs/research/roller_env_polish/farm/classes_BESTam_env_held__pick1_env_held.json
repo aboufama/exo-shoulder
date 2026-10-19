@@ -1,0 +1,127 @@
+{
+ "a": "docs/research/roller_env_polish/farm/claim_BESTam_env_held_perpose.json",
+ "b": "docs/research/roller_env_polish/farm/claim_pick1_env_held_perpose.json",
+ "classes": {
+  "el0": {
+   "n": 318,
+   "a_taken": 300,
+   "b_taken": 301,
+   "a_contact": 0,
+   "b_contact": 0,
+   "a_lost": 18,
+   "b_lost": 17,
+   "gained": 1,
+   "lost_new": 0
+  },
+  "ax>=0": {
+   "n": 290,
+   "a_taken": 236,
+   "b_taken": 236,
+   "a_contact": 5,
+   "b_contact": 5,
+   "a_lost": 49,
+   "b_lost": 49,
+   "gained": 2,
+   "lost_new": 2
+  },
+  "all": {
+   "n": 952,
+   "a_taken": 639,
+   "b_taken": 643,
+   "a_contact": 10,
+   "b_contact": 10,
+   "a_lost": 303,
+   "b_lost": 299,
+   "gained": 10,
+   "lost_new": 6
+  },
+  "|ax|>=150": {
+   "n": 105,
+   "a_taken": 24,
+   "b_taken": 24,
+   "a_contact": 0,
+   "b_contact": 0,
+   "a_lost": 81,
+   "b_lost": 81,
+   "gained": 0,
+   "lost_new": 0
+  },
+  "behind": {
+   "n": 64,
+   "a_taken": 34,
+   "b_taken": 36,
+   "a_contact": 4,
+   "b_contact": 4,
+   "a_lost": 26,
+   "b_lost": 24,
+   "gained": 2,
+   "lost_new": 0
+  },
+  "ax<0": {
+   "n": 557,
+   "a_taken": 379,
+   "b_taken": 383,
+   "a_contact": 5,
+   "b_contact": 5,
+   "a_lost": 173,
+   "b_lost": 169,
+   "gained": 8,
+   "lost_new": 4
+  },
+  "el35": {
+   "n": 137,
+   "a_taken": 125,
+   "b_taken": 126,
+   "a_contact": 0,
+   "b_contact": 0,
+   "a_lost": 12,
+   "b_lost": 11,
+   "gained": 1,
+   "lost_new": 0
+  },
+  "el70": {
+   "n": 114,
+   "a_taken": 80,
+   "b_taken": 79,
+   "a_contact": 0,
+   "b_contact": 0,
+   "a_lost": 34,
+   "b_lost": 35,
+   "gained": 1,
+   "lost_new": 2
+  },
+  "el105": {
+   "n": 89,
+   "a_taken": 40,
+   "b_taken": 41,
+   "a_contact": 1,
+   "b_contact": 1,
+   "a_lost": 48,
+   "b_lost": 47,
+   "gained": 2,
+   "lost_new": 1
+  },
+  "overhead": {
+   "n": 71,
+   "a_taken": 19,
+   "b_taken": 16,
+   "a_contact": 5,
+   "b_contact": 5,
+   "a_lost": 47,
+   "b_lost": 50,
+   "gained": 0,
+   "lost_new": 3
+  },
+  "across": {
+   "n": 159,
+   "a_taken": 41,
+   "b_taken": 44,
+   "a_contact": 0,
+   "b_contact": 0,
+   "a_lost": 118,
+   "b_lost": 115,
+   "gained": 3,
+   "lost_new": 0
+  }
+ }
+}

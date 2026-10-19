@@ -1,0 +1,242 @@
+{
+ "rebuilt baseline V0": {
+  "min_sd_mm": -0.264,
+  "where": [
+   "Raise overhead 78",
+   7.24,
+   12.87,
+   60.7
+  ],
+  "frames_under_2mm": 71,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.23,
+  "raise_overhead_dwell_min_mm": 2.206,
+  "lobe": {
+   "profile_r": [
+    10.738,
+    12.869
+   ],
+   "profile_az": [
+    48.28,
+    60.73
+   ],
+   "past_skirt": 2.869,
+   "flank_to_roller_at_stopB": 0.08,
+   "band": [
+    6.15,
+    8.75
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.74,
+   "lobe_r_end": 12.87,
+   "pa_deg": [
+    11.5,
+    34.3
+   ],
+   "lift_mm": 2.416,
+   "rocker_turn_deg": 15.53,
+   "rod_cap_clear_min": 1.1
+  }
+ },
+ "(ii) band up 1.0": {
+  "min_sd_mm": -0.269,
+  "where": [
+   "Raise overhead 78",
+   7.15,
+   12.87,
+   60.7
+  ],
+  "frames_under_2mm": 69,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.249,
+  "raise_overhead_dwell_min_mm": 2.144,
+  "lobe": {
+   "profile_r": [
+    10.738,
+    12.869
+   ],
+   "profile_az": [
+    48.28,
+    60.73
+   ],
+   "past_skirt": 2.869,
+   "flank_to_roller_at_stopB": 0.08,
+   "band": [
+    7.15,
+    9.75
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.74,
+   "lobe_r_end": 12.87,
+   "pa_deg": [
+    11.5,
+    34.3
+   ],
+   "lift_mm": 2.416,
+   "rocker_turn_deg": 15.53,
+   "rod_cap_clear_min": 1.1
+  }
+ },
+ "(ii) band up 2.0": {
+  "min_sd_mm": -0.245,
+  "where": [
+   "Raise overhead 78",
+   8.15,
+   12.87,
+   60.7
+  ],
+  "frames_under_2mm": 67,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.274,
+  "raise_overhead_dwell_min_mm": 2.133,
+  "lobe": {
+   "profile_r": [
+    10.738,
+    12.869
+   ],
+   "profile_az": [
+    48.28,
+    60.73
+   ],
+   "past_skirt": 2.869,
+   "flank_to_roller_at_stopB": 0.08,
+   "band": [
+    8.15,
+    10.75
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.74,
+   "lobe_r_end": 12.87,
+   "pa_deg": [
+    11.5,
+    34.3
+   ],
+   "lift_mm": 2.416,
+   "rocker_turn_deg": 15.53,
+   "rod_cap_clear_min": 1.1
+  }
+ },
+ "(iii) follower arm 7.5": {
+  "min_sd_mm": -0.015,
+  "where": [
+   "Raise overhead 78",
+   8.75,
+   12.38,
+   54.6
+  ],
+  "frames_under_2mm": 69,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.406,
+  "raise_overhead_dwell_min_mm": 2.191,
+  "lobe": {
+   "profile_r": [
+    10.525,
+    12.38
+   ],
+   "profile_az": [
+    40.27,
+    54.62
+   ],
+   "past_skirt": 2.38,
+   "flank_to_roller_at_stopB": 0.069,
+   "band": [
+    6.15,
+    8.75
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.52,
+   "lobe_r_end": 12.38,
+   "pa_deg": [
+    13.6,
+    35.2
+   ],
+   "lift_mm": 2.027,
+   "rocker_turn_deg": 15.53,
+   "rod_cap_clear_min": 1.1
+  }
+ },
+ "(iii) crank arm 10": {
+  "min_sd_mm": 0.026,
+  "where": [
+   "Raise overhead 78",
+   7.24,
+   12.55,
+   60.5
+  ],
+  "frames_under_2mm": 69,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.478,
+  "raise_overhead_dwell_min_mm": 2.179,
+  "lobe": {
+   "profile_r": [
+    10.649,
+    12.551
+   ],
+   "profile_az": [
+    47.74,
+    60.5
+   ],
+   "past_skirt": 2.551,
+   "flank_to_roller_at_stopB": 0.073,
+   "band": [
+    6.15,
+    8.75
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.65,
+   "lobe_r_end": 12.55,
+   "pa_deg": [
+    10.2,
+    31.7
+   ],
+   "lift_mm": 2.166,
+   "rocker_turn_deg": 13.9,
+   "rod_cap_clear_min": 1.19
+  }
+ },
+ "(iii) roller O5 (MR52ZZ 2x5x2.5)": {
+  "min_sd_mm": -0.249,
+  "where": [
+   "Raise overhead 78",
+   7.24,
+   12.82,
+   60.3
+  ],
+  "frames_under_2mm": 71,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 0.245,
+  "raise_overhead_dwell_min_mm": 2.163,
+  "lobe": {
+   "profile_r": [
+    10.613,
+    12.824
+   ],
+   "profile_az": [
+    46.77,
+    60.29
+   ],
+   "past_skirt": 2.824,
+   "flank_to_roller_at_stopB": 0.079,
+   "band": [
+    6.15,
+    8.75
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.61,
+   "lobe_r_end": 12.82,
+   "pa_deg": [
+    14.8,
+    37.5
+   ],
+   "lift_mm": 2.427,
+   "rocker_turn_deg": 15.53,
+   "rod_cap_clear_min": 1.1
+  }
+ }
+}

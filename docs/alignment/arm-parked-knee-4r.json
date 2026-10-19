@@ -1,0 +1,106 @@
+{
+ "id": "arm-parked-knee-4r",
+ "status": "verified",
+ "v_gap": 26.71,
+ "complexity": 32.25,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: plain 26.65, <1 mm 31.99, 2 mm near-touch not measured (row exact_frozen_others.O2n.gap_near1)",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 19.32 (score 92.97) sits 7.39 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 26.71
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 19.32 -> verified 26.71 (+7.39)",
+   "fast": 19.32,
+   "verified": 26.71,
+   "drop": 7.39
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "plain 26.65, <1 mm 31.99, 2 mm near-touch not measured (row exact_frozen_others.O2n.gap_near1)",
+   "shell2": null,
+   "plain": 26.65,
+   "n1": 31.99,
+   "n2": null,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": null,
+   "source": "row exact_frozen_others.O2n.gap_near1"
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "no slaved drive declared",
+   "spans": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 32.25 vs row 32.25",
+   "recomputed": 32.25,
+   "row": 32.25
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 19.32 (score 92.97) sits 7.39 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/arm-parked-knee-4r_champbig_frozen.json",
+  "docs/concepts/verify/arm-parked-knee-4r_big_frozen_m5.json",
+  "docs/concepts/verify/arm-parked-knee-4r_big_frozen_m10.json",
+  "docs/concepts/verify/arm-parked-knee-4r_big_frozen_r12_botharc.json",
+  "docs/concepts/verify/arm-parked-knee-4r_big_frozen_hist.json"
+ ],
+ "git": "c932f10",
+ "t": "2026-10-16T20:26:26Z"
+}

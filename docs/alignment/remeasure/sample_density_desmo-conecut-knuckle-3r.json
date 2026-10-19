@@ -1,0 +1,374 @@
+{
+ "id": "desmo-conecut-knuckle-3r",
+ "tool": "tools/sample_density.py",
+ "version": "2026-10-18.1",
+ "kit_cell_mm2": 4.0,
+ "flag": [
+  0.5,
+  2.0
+ ],
+ "model": "docs/concepts/models/desmo-conecut-knuckle-3r.py",
+ "params": {
+  "r_c": 16.176,
+  "beta": -177.169,
+  "nose_r2": 0.75,
+  "wall2": 0.9,
+  "kslot": 46.5,
+  "boss_r": 2.5,
+  "glev": -1.0,
+  "blend": 10.0,
+  "a_s": 9.529,
+  "psi": 149.71,
+  "mu": 0.15,
+  "stage2": "B",
+  "c_slot2": 0.01,
+  "s1_read": "built",
+  "s2_gate": 1,
+  "stk": 6.0,
+  "lE": 97.1443,
+  "lc": 24.3508,
+  "phiE": 0.7526,
+  "phib": -91.8041,
+  "J3MIN": -111.9036,
+  "J3MAX": 122.7417,
+  "ang_min": 25.2189
+ },
+ "fit_secs": 6.4,
+ "row_v_gap": 18.98,
+ "row_status": "verified",
+ "parts": {
+  "hub1": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.3,
+   "cell_median": 3.995,
+   "d1": 1.996,
+   "d2": 2.001,
+   "one_row_share": 0.0,
+   "ratio": 1.002,
+   "hull_area_mm2": 339.7,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hubK": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.6,
+   "cell_median": 4.0,
+   "d1": 1.998,
+   "d2": 2.002,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 339.7,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hub2": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.1,
+   "cell_median": 3.985,
+   "d1": 1.992,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.003,
+   "hull_area_mm2": 339.5,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hub3": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.8,
+   "cell_median": 3.996,
+   "d1": 1.999,
+   "d2": 1.999,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 339.9,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "E": {
+   "n": 164,
+   "n_unique": 164,
+   "area_mm2": 663.8,
+   "cell_median": 4.007,
+   "d1": 1.999,
+   "d2": 2.004,
+   "one_row_share": 0.0,
+   "ratio": 0.988,
+   "hull_area_mm2": 659.8,
+   "ratio_hull": 0.994,
+   "flatness": 0.047,
+   "masked_lattice": false
+  },
+  "boss": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 127.8,
+   "cell_median": 4.0,
+   "d1": 1.999,
+   "d2": 2.001,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 131.3,
+   "ratio_hull": 0.975,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "pad": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 127.9,
+   "cell_median": 3.998,
+   "d1": 1.998,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 131.2,
+   "ratio_hull": 0.975,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "knee": {
+   "n": 90,
+   "n_unique": 90,
+   "area_mm2": 359.7,
+   "cell_median": 3.996,
+   "d1": 1.999,
+   "d2": 1.999,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 360.2,
+   "ratio_hull": 1.0,
+   "flatness": 0.0,
+   "masked_lattice": false
+  },
+  "crank": {
+   "n": 133,
+   "n_unique": 133,
+   "area_mm2": 527.7,
+   "cell_median": 4.016,
+   "d1": 1.907,
+   "d2": 2.024,
+   "one_row_share": 0.0,
+   "ratio": 1.008,
+   "hull_area_mm2": 841.8,
+   "ratio_hull": 0.632,
+   "flatness": 0.098,
+   "masked_lattice": false
+  },
+  "horn": {
+   "n": 27,
+   "n_unique": 27,
+   "area_mm2": 42.9,
+   "cell_median": 0.951,
+   "d1": 0.973,
+   "d2": 0.977,
+   "one_row_share": 0.0,
+   "ratio": 2.519,
+   "hull_area_mm2": 39.5,
+   "ratio_hull": 2.734,
+   "flatness": 0.169,
+   "masked_lattice": false
+  },
+  "ring2": {
+   "n": 19,
+   "n_unique": 19,
+   "area_mm2": 31.1,
+   "cell_median": 1.09,
+   "d1": 0.626,
+   "d2": 1.925,
+   "one_row_share": 0.158,
+   "ratio": 2.445,
+   "hull_area_mm2": 52.5,
+   "ratio_hull": 1.448,
+   "flatness": 0.0,
+   "masked_lattice": false
+  },
+  "plate": {
+   "n": 8,
+   "n_unique": 8,
+   "area_mm2": 35.7,
+   "cell_median": 4.32,
+   "d1": 1.757,
+   "d2": 2.487,
+   "one_row_share": 0.0,
+   "ratio": 0.895,
+   "hull_area_mm2": 28.7,
+   "ratio_hull": 1.117,
+   "flatness": 0.012,
+   "masked_lattice": false
+  },
+  "L1a": {
+   "n": 8,
+   "n_unique": 8,
+   "area_mm2": 97.0,
+   "cell_median": 12.294,
+   "d1": 2.345,
+   "d2": 4.655,
+   "one_row_share": 0.0,
+   "ratio": 0.33,
+   "hull_area_mm2": 73.3,
+   "ratio_hull": 0.436,
+   "flatness": 0.352,
+   "masked_lattice": true
+  },
+  "L1b": {
+   "n": 36,
+   "n_unique": 36,
+   "area_mm2": 200.4,
+   "cell_median": 4.098,
+   "d1": 1.937,
+   "d2": 2.108,
+   "one_row_share": 0.0,
+   "ratio": 0.719,
+   "hull_area_mm2": 176.9,
+   "ratio_hull": 0.814,
+   "flatness": 0.368,
+   "masked_lattice": false
+  },
+  "L2": {
+   "n": 124,
+   "n_unique": 124,
+   "area_mm2": 587.4,
+   "cell_median": 4.309,
+   "d1": 2.012,
+   "d2": 2.107,
+   "one_row_share": 0.0,
+   "ratio": 0.844,
+   "hull_area_mm2": 625.0,
+   "ratio_hull": 0.794,
+   "flatness": 0.119,
+   "masked_lattice": false
+  }
+ },
+ "flagged": {
+  "horn": 2.519,
+  "ring2": 2.445,
+  "L1a": 0.33
+ },
+ "over_dense": [
+  "horn",
+  "ring2"
+ ],
+ "masked_lattice": [
+  "L1a"
+ ],
+ "note": "ratio = samples / mm2 over the kit's 1 / 4 mm2 (cell = d1 x d2, the grid's two pitches; a one-row part is credited 2 mm across). Re-weight: each flagged part's count set to n / ratio in the saved per-part in-band; exact for the counts, assumes the part's in-band share is uniform over its samples.",
+ "bench": {
+  "file": "docs/concepts/verify/desmo-conecut-knuckle-3r_v_bench_frozen_blend.json",
+  "path": "/claim_frozen_out",
+  "frozen": {
+   "gap": 18.98,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.893,
+   "inband10": 0.5629,
+   "contact": 0.0106
+  },
+  "recomputed_ib14": 0.8929,
+  "variants": {
+   "over_at_kit": {
+    "ib14": 0.896,
+    "gap": 18.68,
+    "n": {
+     "horn": 10.72,
+     "ring2": 7.77
+    }
+   },
+   "over_at_kit_hull": {
+    "ib14": 0.896,
+    "gap": 18.68,
+    "n": {
+     "horn": 9.88,
+     "ring2": 7.77
+    }
+   },
+   "flagged_at_kit": {
+    "ib14": 0.8974,
+    "gap": 18.54,
+    "n": {
+     "horn": 10.72,
+     "ring2": 7.77,
+     "L1a": 24.24
+    }
+   },
+   "per_part": {
+    "horn": 19.07,
+    "ring2": 18.59,
+    "L1a": 18.84
+   },
+   "all_parts_at_kit": {
+    "ib14": 0.8941,
+    "gap": 18.87
+   },
+   "as_sampled": {
+    "ib14": 0.893,
+    "gap": 18.98
+   }
+  },
+  "count_mismatch": {}
+ },
+ "held": {
+  "file": "docs/concepts/verify/desmo-conecut-knuckle-3r_v_held_frozen_blend.json",
+  "path": "/claim_frozen_out",
+  "frozen": {
+   "gap": 23.19,
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.8919,
+   "inband10": 0.5621,
+   "contact": 0.016
+  },
+  "recomputed_ib14": 0.892,
+  "variants": {
+   "over_at_kit": {
+    "ib14": 0.8949,
+    "gap": 22.89,
+    "n": {
+     "horn": 10.72,
+     "ring2": 7.77
+    }
+   },
+   "over_at_kit_hull": {
+    "ib14": 0.8949,
+    "gap": 22.89,
+    "n": {
+     "horn": 9.88,
+     "ring2": 7.77
+    }
+   },
+   "flagged_at_kit": {
+    "ib14": 0.8963,
+    "gap": 22.75,
+    "n": {
+     "horn": 10.72,
+     "ring2": 7.77,
+     "L1a": 24.24
+    }
+   },
+   "per_part": {
+    "horn": 23.28,
+    "ring2": 22.8,
+    "L1a": 23.05
+   },
+   "all_parts_at_kit": {
+    "ib14": 0.893,
+    "gap": 23.08
+   },
+   "as_sampled": {
+    "ib14": 0.8919,
+    "gap": 23.19
+   }
+  },
+  "count_mismatch": {}
+ },
+ "exact_rewear_cmd": "CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/sample_density.py rewear desmo-conecut-knuckle-3r bench|held",
+ "secs": 6.7
+}

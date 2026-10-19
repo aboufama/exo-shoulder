@@ -1,0 +1,47 @@
+[
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "Report only (the score counts contact poses, not depth; user 2026-10-17). Per-pose dumps / probes re-worn this audit, gaps reproduced 20.08 / 22.35. Bench: 5 contact poses summing 22.09 mm, 3 deeper than 3 mm, deepest 12.57 mm at ws (15, 165, -60), overhead: metal 1.26 cm into the arm; next 5.45 mm at (30, 165, -60). Held out: 10 poses, 59.91 mm, 8 deeper than 3 mm, deepest 11.08 mm at (30, 165, -45). Against the same-core rod sidecar sidecar-longdyad (claim dumps): bench 6.23 mm over 4 (x3.55, +15.86 mm), held 35.66 mm over 10 (x1.68, +24.25 mm) - the tool's T5 rule reads watch on that reference; against sidecar-parallelogram 1.82 / 18.22 mm. Against the lead conecut-knee's dumps (bench 20.24 mm over 4, held 60.97 over 14) the totals are alike, but this design's deepest bench press is 3.6 mm deeper at the same overhead pose (12.57 vs 8.93). The tool's own check reads ok only because conecut-knee has no claim-matched depth file. Not gamed: depth blindness does not rank this design above any of those rows (it is behind all of them plain: 20.08 vs 18.28 / 18.91 / 19.13). [evidence: docs/alignment/remeasure/sidecar-roller-flank-knuckle-3r_bench_perpose.json; docs/alignment/remeasure/sidecar-roller-flank-knuckle-3r_probe_held.json probe.contact_poses; docs/alignment/remeasure/sidecar-longdyad-knuckle-3r_*_perpose_claim.json; conecut-knee-knuckle-3r_*_perpose.json]"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Report only (near-touch is not a gate, user 2026-10-17; the skeptic refuted 'gamed' on 2026-10-16, rulings.json). Re-worn identical to the digit. Bench: 26.74 of the 2 mm near-touch gap's points live in the 1-2 mm shell (plain 20.08, 1 mm 21.17, 2 mm 46.82); 45 of 370 taken poses have metal < 2 mm counting the model's walls (41 on sampled metal alone), 1 < 1 mm (min 0.32 mm), 171 < 3 mm. Overhead is where it hugs: all 8 taken overhead workspace poses have their floor < 2 mm (1 < 1 mm) and 8 of 10 overhead clip frames sit at 1-2 mm. Held out: 1 mm 25.41, 2 mm 50.38 (108 poses < 2 mm), min 0.17 mm; all 19 taken overhead poses < 2 mm, 7 of them < 1 mm; 18 of 19 overhead clip frames at 1-2 mm. Tool dominance: +2.74 plain over frontload, -2.74 at 2 mm. [evidence: docs/alignment/remeasure/sidecar-roller-flank-knuckle-3r_bench.json; docs/alignment/remeasure/sidecar-roller-flank-knuckle-3r_bench_perpose.json; docs/alignment/remeasure/sidecar-roller-flank-knuckle-3r_probe_bench.json / _probe_held.json ws_overhead140, clip_overhead140; docs/concepts/verify/sidecar-roller-flank-knuckle-3r_v_held_frozen.json audit]"
+ },
+ {
+  "key": "M2",
+  "level": "watch",
+  "reason": "The knee is claimed on a pin stack thinner than any knee hardware the build may use: stk 4.8534 mm (best_params has no stk; resolved from docs/concepts/models/sidecar-longdyad-knuckle-3r.py line 48, the old lead's search). The kit's figures are 5.0 (iglidur pin) and 6.0 (MR63ZZ pair; docs/concepts/models/skin-normal-3r-pin-knee.py lines 19, 54); the lead's build rule of 2026-10-17 requires MR63ZZ pairs (iglidur pins fail R17: ~10 deg cuff twist, ~10 N), and the row's mechanism notes still say '2 iglidur pins'. Measured this audit with stk 6.0 only (tools/alignment_knee_stack_probe.py, CB_EXACT=1): bench 20.08 -> 20.34 (+0.26); reach 0.7222, contact 0.0133 and every why-count unchanged; in-band14 0.8903 -> 0.8877, all of it the knee (0.935 -> 0.904 in band, median 10.8 -> 11.4 mm); 2 mm near-touch 46.82 -> 47.03. Held out at stk 6.0 not run (time box). No rank flip: 20.34 stays between minarc 19.54 and kneeless-roller 21.07. [evidence: docs/alignment/remeasure/sidecar-roller-flank-knuckle-3r_stk6_bench.json]"
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "Family-wide (B1 open with the user, docs/HANDOFF.md section 7). The claim's fold reading holds: min th margin 5.49 deg bench (370 taken, 0 < 5, 1 < 5.5) and 5.02 deg held out (868 taken, 0 < 5, 2 < 5.5) - the held-out minimum is 0.02 deg over the rule, at (105, 60, -105) with K forced. But with K at rest on its stop (185 of 370 taken bench poses) the J1-K-J3 sub-chain margin m_sub is under 5 deg on 85, under 2 on 53 and under 1 on 39, min 0.000 deg at (-15, 60, 15) (tools/alignment_msub_rest_probe_model.py, gap reproduced 20.08). If K's rest stop is not rigid (the clock spring is its only preload), that sub-chain sits at its fold over much of the low-arm workspace. Same size as the family (sidecar-parallelogram 117 of 222 under 5, sidecar-longdyad 145 of 250). [evidence: docs/alignment/remeasure/sidecar-roller-flank-knuckle-3r_msub_rest_bench.json; docs/alignment/remeasure/sidecar-roller-flank-knuckle-3r_probe_bench.json / _probe_held.json extras.th_margin_own_state]"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "One clock spring (springs_or_flexures 1; 'K slaved (clock-spring cap), never read') force-closes BOTH rolling pairs (hub-2 rim lobe -> crank follower, MR63ZZ roller -> link 1a flank) and holds K on its law; K is off its rest on 185 of 370 taken bench poses and 443 of 868 held out, up to 51.68 / 53.37 deg (verifier dK_sign_counts, dK_taken_max_deg). The design's red team puts the contact force at ~2.5 N and says the 51.5 mm, 130 deg bent Ti arm's deflection under it is not modelled (0.1 mm at the tip reads ~0.3 deg of K). R17 (K lag, lift-off, cuff twist) has never run on this design: no CAD of it exists (pipeline/full-exo/designs/). The score assumes the spring keeps the flank on the roller in every pose. [evidence: docs/concepts/verify/sidecar-roller-flank-knuckle-3r_v_bench_frozen.json, _v_held_frozen.json extra; docs/concepts/sidecar-roller-flank-knuckle-3r.md red team]"
+ },
+ {
+  "key": "M3",
+  "level": "watch",
+  "reason": "New to this drive. The bent arm's arc rides 0.15 mm over the lug's spherical shell: two 5-axis spherical surfaces about GH that move against each other over the whole K / crank swing (crank to 23.6 deg, K to 53.4 deg). The verifier accepted it as the cam pair's running gap (docs/concepts/sidecar-roller-flank-knuckle-3r.md, Verification, 'Running gap'), not as the core's 1 mm clearance between non-adjacent parts, and the arm carrying it is the unmodelled 51.5 mm cantilever above. A build error or deflection over 0.15 mm turns it into a sliding pair that the mechanism record does not count (sliding_pairs 0) and friction in the K drive that the wearer feels. Not measured: lifting the arc to a 1 mm clearance needs a model change (the gap is the core's RUNG 0.15, docs/concepts/models/sidecar-longdyad-knuckle-3r.py line 43), and the arm metal it would move sits at crank in-band 0.856 / median 11.4 mm, so the cost is likely small but unknown. [evidence: docs/concepts/models/sidecar-roller-flank-knuckle-3r.py lines 107-178; row frozen.cam]"
+ },
+ {
+  "key": "S3",
+  "level": "watch",
+  "reason": "Family-wide (as on sidecar-longdyad and sidecar-parallelogram). The bell crank's short arm (s_arm 4.44 mm) and its follower on the hub-2 rim lobe (r_lobe 8.14, inside hub 2's O20 housing radius) are not separate sampled metal: the crank group is the boss disc (r 5.0) plus the long arm's underside (docs/concepts/models/sidecar-roller-flank-knuckle-3r.py lines 228-234). The drive red team's real follower on this core is an IKO CFS2.5 on a 6.0 mm arm riding a lobe ring of profile r 10.29-13.43 mm, up to 3.4 mm outside the O20 hub (docs/research/sidecar_mechanism_redteam.md finding 3). Not measured: no bench model of these parts exists, and building one does not fit this time box."
+ },
+ {
+  "key": "G5",
+  "level": "watch",
+  "reason": "The knee credit flatters this row by 2.5 complexity points, as on its siblings. tools/simplicity.py 2.2 reads 21.75 (= row). Applying the knee as the twin pair sidecar-longdyad -> kneeless-sidecar-knuckle-3r measures it (passive rot 2, bodies 1, joints 2, loops 1, made 2, bought 4) gives 24.25, both as cuff_knee and as the knee-free mechanism: the design WITH its two-pin knee reads simpler than the same mechanism WITHOUT it. Not in the score; no decision rides on it (score 92.70 < 95). [evidence: tools/simplicity.py score() on docs/concepts/rows/sidecar-roller-flank-knuckle-3r.json mechanism, with cuff_knee set to the twin delta]"
+ },
+ {
+  "key": "R1",
+  "level": "watch",
+  "reason": "Stale records on a verified row. The row verdict and the dashboard row (docs/dashboard/data/morphs.json) open 'Contender, self-measured ... Needs the adversarial verifier' and say 'complexity 45.25 (lead 49, rod sidecar 49)'; the row note's VERIFIED text and the design doc (claim table, verification) also say 45.25; the complexity is 21.75. The dashboard's gap / reach fields carry the fast 11.73 / 0.794, and sweep_gap 11.25 (score 95.91) is P1d, which the designer wore to 20.48 frozen and did not claim (tool check 'reporting'). The note's rank ('behind the rod sidecar and the parallelogram, ahead of frontload') is from 2026-10-16; it is now 19th of 37 verified rows. The fold margin (5.49 / 5.02), contact depth and knee stack are not on the row or a verify file, so the tool's fold_margin check cannot see them."
+ }
+]

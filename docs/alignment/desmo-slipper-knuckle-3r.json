@@ -1,0 +1,303 @@
+{
+ "id": "desmo-slipper-knuckle-3r",
+ "status": "verified",
+ "v_gap": 18.95,
+ "complexity": 15.75,
+ "verdict": "watch",
+ "reasons": [
+  "density: over-dense parts roller 4.40x, horn 2.25x, ring2 2.45x; bench 18.95 -> 18.81 at the kit's density; held 23.90 -> 23.77 at the kit's density; moves > 0.1: bench horn 18.95 -> 19.16; bench ring2 18.95 -> 18.54; bench all over-dense 18.95 -> 18.81; held horn 23.90 -> 24.12; held ring2 23.90 -> 23.49; held all over-dense 23.90 -> 23.77",
+  "reporting: dashboard sweep best 12.79 (score 95.35) sits 6.16 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 23.95 vs bench 18.95 (+5.00; re-measured (this audit))",
+   "held_gap": 23.95,
+   "v_gap": 18.95,
+   "drop": 5.0,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 13.19 -> verified 18.95 (+5.76)",
+   "fast": 13.19,
+   "verified": 18.95,
+   "drop": 5.76
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 19.0, <1 mm 20.63, <2 mm 33.5, <3 mm 83.87, band read 3-14 mm 19.15, 14.5 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 14.5,
+   "plain": 19.0,
+   "n1": 20.63,
+   "n2": 33.5,
+   "n3": 83.87,
+   "band3": 19.15,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0001,
+    "2-3": 0.0015,
+    "3-4": 0.0088,
+    "4-6": 0.0854,
+    "6-10": 0.4181,
+    "10-14": 0.3766,
+    ">14": 0.1094
+   },
+   "minmm": 0.072,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.95: bench 2 contact poses, sum 14.72 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 10 contact poses, sum 46.14 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
+   "depths": {
+    "v_gap 18.95": {
+     "bench": {
+      "n": 2,
+      "sum_mm": 14.72,
+      "max_mm": 9.01,
+      "n_deeper3": 2,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.95,
+      "src": "docs/alignment/remeasure/desmo-slipper-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        14.72
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 10,
+      "sum_mm": 46.14,
+      "max_mm": 9.05,
+      "n_deeper3": 7,
+      "overhead140": 6,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -45.0
+      ],
+      "gap": 23.9,
+      "src": "docs/alignment/remeasure/desmo-slipper-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        46.14
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 18.95, connected full 18.95, knn 20.62, bench 51.97 (docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_fix.json)",
+   "static": 18.95,
+   "connected_full": 18.95,
+   "connected_knn": 20.62,
+   "connected_bench": 51.97
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.006 deg (verification.v_held_frozen_exact.th_margin_min; 6 readings)",
+   "min_margin": 5.006,
+   "where": "verification.v_held_frozen_exact.th_margin_min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 45.61 deg (re-measured dK span); crank: declared moving, no span on file",
+   "spans": [
+    [
+     "row:frozen_self.dK_taken_max",
+     45.62
+    ],
+    [
+     "row:frozen_self.held.dK_taken_max",
+     46.27
+    ],
+    [
+     "docs/concepts/verify/desmo-slipper-knuckle-3r_v_held_frozen_fix.json:extra.dK_taken_max_deg",
+     46.27
+    ],
+    [
+     "docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_fix.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "re-measured dK span",
+     45.61
+    ],
+    [
+     "re-measured K.ang span",
+     65.71
+    ],
+    [
+     "re-measured K.qa span",
+     65.71
+    ],
+    [
+     "re-measured K.qb span",
+     64.22
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.890 vs part-weighted 0.898 (-0.73 points); thinly sampled parts: L1a 8 (re-measured)",
+   "parts": {
+    "hub1": [
+     0.999,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.953,
+     11.1,
+     80
+    ],
+    "hub3": [
+     0.739,
+     11.5,
+     80
+    ],
+    "E": [
+     0.966,
+     6.5,
+     104
+    ],
+    "boss": [
+     0.988,
+     8.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.1,
+     32
+    ],
+    "knee": [
+     0.941,
+     10.7,
+     85
+    ],
+    "crank": [
+     0.818,
+     11.2,
+     129
+    ],
+    "roller": [
+     0.938,
+     10.0,
+     19
+    ],
+    "horn": [
+     0.95,
+     8.6,
+     61
+    ],
+    "ring2": [
+     0.533,
+     13.9,
+     19
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.931,
+     8.2,
+     36
+    ],
+    "L2": [
+     0.736,
+     12.0,
+     124
+    ]
+   }
+  },
+  {
+   "check": "density",
+   "level": "watch",
+   "reason": "over-dense parts roller 4.40x, horn 2.25x, ring2 2.45x; bench 18.95 -> 18.81 at the kit's density; held 23.90 -> 23.77 at the kit's density; moves > 0.1: bench horn 18.95 -> 19.16; bench ring2 18.95 -> 18.54; bench all over-dense 18.95 -> 18.81; held horn 23.90 -> 24.12; held ring2 23.90 -> 23.49; held all over-dense 23.90 -> 23.77",
+   "over": {
+    "roller": 4.402,
+    "horn": 2.254,
+    "ring2": 2.449
+   },
+   "src": "remeasure/sample_density_desmo-slipper-knuckle-3r.json"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 15.75 vs row 15.75",
+   "recomputed": 15.75,
+   "row": 15.75
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "dashboard sweep best 12.79 (score 95.35) sits 6.16 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 7 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_groove_scan_fix.json",
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_groove_scan_claim.json",
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_v_held_frozen_fix.json",
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_fix.json",
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen_blend.json",
+  "docs/concepts/verify/desmo-slipper-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "f892bc9",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T22:31:27Z"
+}

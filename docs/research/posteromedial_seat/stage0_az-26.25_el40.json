@@ -1,0 +1,140 @@
+{
+ "cell": [
+  -26.25,
+  40.0
+ ],
+ "seed": [
+  {
+   "share": 0.8909,
+   "wd": 95.0,
+   "wa": -180.0,
+   "th_rest": 79.96,
+   "br": -1.0,
+   "az2": -73.95,
+   "el2": 67.08,
+   "r1": 75.4,
+   "r2": 57.8
+  },
+  {
+   "share": 0.85,
+   "wd": 110.0,
+   "wa": 160.0,
+   "th_rest": 84.79,
+   "br": -1.0,
+   "az2": -42.25,
+   "el2": 76.92,
+   "r1": 75.4,
+   "r2": 52.2
+  },
+  {
+   "share": 0.8091,
+   "wd": 70.0,
+   "wa": -160.0,
+   "th_rest": 81.16,
+   "br": 1.0,
+   "az2": -31.46,
+   "el2": 2.75,
+   "r1": 75.4,
+   "r2": 107.2
+  }
+ ],
+ "params": {
+  "az1": -26.25,
+  "el1": 40.0,
+  "wd": 95.0,
+  "wa": -180.0,
+  "br": -1.0
+ },
+ "near1": 366.75,
+ "plain": {
+  "gap": 366.75,
+  "reach": 0.0187,
+  "follow": 0.0,
+  "inband14": 0.0,
+  "contact": 0.9362
+ },
+ "gap_near2": 366.75,
+ "reach": 0.0187,
+ "inband14": 0.0,
+ "contact": 0.9362,
+ "why": {
+  "fold": 53,
+  "slide": 119,
+  "flip": 0,
+  "closure": 0,
+  "skin": 43,
+  "parts": 1,
+  "contact": 1
+ },
+ "cam": {
+  "dK_lim": 0.0,
+  "why_lim": "pressure_crank",
+  "pa_crank_max_taken": 77.6,
+  "pa_horn_max_taken": 74.1,
+  "phi_max_taken": 0.0,
+  "flank_rho_min": 2.4,
+  "clear_hubK_min": 1.25,
+  "clear_roll_hubK_min": 3.95,
+  "clear_lowarm_lug_min": 20.27,
+  "arm_len": 60.5,
+  "arc_deg": 113.8,
+  "law_dK_max": 62.7,
+  "nose_r": 1.1839,
+  "mu": 0.087,
+  "friction_deg": 4.97,
+  "pa_kin_max": 38.03,
+  "pa_eff_horn": 79.1,
+  "pa_eff_crank": 82.6
+ },
+ "seats": {
+  "az1": -26.25,
+  "el1": 40.0,
+  "az2": -73.954,
+  "el2": 67.08,
+  "wd": 95.0,
+  "wa": -180.0,
+  "b3": 0.329,
+  "br": -1.0,
+  "legal": true,
+  "unresolved": false,
+  "a1": 37.552,
+  "a2": 57.218
+ },
+ "parts": {},
+ "knee": {
+  "n": 3,
+  "ang": [
+   111.88,
+   136.88
+  ],
+  "margin_deg": [
+   86.66,
+   17.9
+  ],
+  "margin_mm": [
+   32.77,
+   3.51
+  ],
+  "d_perp_mm": [
+   66.4,
+   66.4
+  ],
+  "knee_N_per_Nm_max": 15.1,
+  "q3p": [
+   -63.26,
+   -55.25
+  ],
+  "stop_margin_deg": 48.64,
+  "stop_hi_margin_deg": 177.99,
+  "dowel_N_per_Nm": 133.3,
+  "j3stop": 0
+ },
+ "honest": false,
+ "flags": {
+  "sidecar_fail": null,
+  "drive_idle": null,
+  "pa_fail": true,
+  "knee_moved": null
+ },
+ "secs": 210.5
+}

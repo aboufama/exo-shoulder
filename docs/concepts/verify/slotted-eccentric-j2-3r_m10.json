@@ -1,0 +1,1181 @@
+{
+ "model": "docs/concepts/models/slotted-eccentric-j2-3r.py",
+ "params": {
+  "az": 95.1794,
+  "el": 60.9584,
+  "a1": 41.1225,
+  "wd": 86.2389,
+  "wa": -14.1326,
+  "sigma": -1,
+  "margin": 10.0,
+  "width": 12.0,
+  "t_link": 3.0,
+  "q": 0.9632,
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "end_extra": 0.0,
+  "Amin": 61.0402,
+  "Amax": 92.6581,
+  "w": 4.1157,
+  "sl": 0.9729,
+  "b": 22.0925,
+  "c": 75.066,
+  "sk": 1,
+  "psi_lo": 15.0,
+  "dG": null,
+  "gG": null,
+  "seg_mm": 12.0,
+  "wL": -0.0,
+  "emax": 64.2273,
+  "rpin": 5.0,
+  "pin_t": 6.5,
+  "t_lev": 2.0,
+  "lock_min": 50.0,
+  "g_min": 0.2,
+  "a2": 74.2679,
+  "lock": 0,
+  "near": 0,
+  "ov": 1
+ },
+ "overlap": 1.0,
+ "exact": true,
+ "runs": {
+  "fit": {
+   "reach": 0.1625,
+   "follow": 0.0667,
+   "inband14": 0.6507,
+   "inband10": 0.5536,
+   "contact": 0.0909,
+   "poses": {
+    "clip": 60,
+    "ws": 160
+   },
+   "mode": "fast",
+   "gap": 196.1,
+   "inband_member": {
+    "hub1": 1.0,
+    "hub2": 0.0648,
+    "hub3": 1.0,
+    "pinK": 1.0,
+    "studG": 1.0,
+    "link1": 0.7143,
+    "spoke": 0.4967,
+    "trk1": 1.0,
+    "trk2": 1.0,
+    "trk3": 1.0,
+    "trk4": 1.0,
+    "trk5": 1.0,
+    "trk6": 1.0,
+    "trk7": 1.0,
+    "trk8": 0.4097,
+    "trk9": 0.0,
+    "trk10": 0.0,
+    "neck": 0.9933,
+    "crank": 0.3291,
+    "L2b": 0.288,
+    "armG": 0.0972
+   },
+   "mass_g": 174.4,
+   "mass_g_strap55": 238.9,
+   "closure": 0.8818,
+   "flips": 0,
+   "collide": 0.8299,
+   "q": 0.9632,
+   "kmode": "march",
+   "residual_deg": 0.0,
+   "window": [
+    30.0,
+    123.75
+   ],
+   "a2eff_range": [
+    61.0,
+    92.7
+   ],
+   "knee_range": [
+    47.5,
+    141.7
+   ],
+   "psi_min": 38.3,
+   "slot_gate": {
+    "q2_monotone": true,
+    "q2_span": 201.6,
+    "stats": {
+     "n": 624,
+     "e_min": 0,
+     "lock": 483,
+     "self": 483
+    },
+    "nodes_e": [
+     23.802398701340344,
+     23.840431760744384,
+     25.330052512352935,
+     32.224748906181496,
+     39.747882893318135,
+     45.55609496402983,
+     48.325618973587275,
+     49.029623750832876,
+     49.14906661494526,
+     49.167683225413946,
+     49.17111469909659
+    ],
+    "nodes_eta": [
+     26.147974398813005,
+     0.10968306179113818,
+     -25.061427766345222,
+     -41.83099201872531,
+     -54.20119943603937,
+     -66.34276775401945,
+     -78.99603280074841,
+     -91.67732605590122,
+     -104.30343168970212,
+     -116.91658616231506,
+     -129.52759539125918
+    ],
+    "width": 7.99,
+    "dev_mm": 0.74,
+    "lock_min": 50.7,
+    "g_min": 0.22,
+    "lock_full_run": 50.7,
+    "e": [
+     23.8,
+     49.2
+    ],
+    "slot_len_mm": 108.2,
+    "eta_span": 141.0,
+    "spoke_node": 1,
+    "th_track": [
+     30.0,
+     123.75
+    ],
+    "need_cover": 1.0
+   },
+   "slot_passed": true,
+   "dG": 29.0,
+   "gG": 7.5,
+   "bodies": [
+    [
+     "link1",
+     "spoke"
+    ],
+    [
+     "link1",
+     "trk1"
+    ],
+    [
+     "link1",
+     "trk2"
+    ],
+    [
+     "link1",
+     "trk3"
+    ],
+    [
+     "link1",
+     "trk4"
+    ],
+    [
+     "link1",
+     "trk5"
+    ],
+    [
+     "link1",
+     "trk6"
+    ],
+    [
+     "link1",
+     "trk7"
+    ],
+    [
+     "link1",
+     "trk8"
+    ],
+    [
+     "link1",
+     "trk9"
+    ],
+    [
+     "link1",
+     "trk10"
+    ],
+    [
+     "spoke",
+     "trk1"
+    ],
+    [
+     "spoke",
+     "trk2"
+    ],
+    [
+     "spoke",
+     "trk3"
+    ],
+    [
+     "spoke",
+     "trk4"
+    ],
+    [
+     "spoke",
+     "trk5"
+    ],
+    [
+     "spoke",
+     "trk6"
+    ],
+    [
+     "spoke",
+     "trk7"
+    ],
+    [
+     "spoke",
+     "trk8"
+    ],
+    [
+     "spoke",
+     "trk9"
+    ],
+    [
+     "spoke",
+     "trk10"
+    ],
+    [
+     "trk1",
+     "trk2"
+    ],
+    [
+     "trk1",
+     "trk3"
+    ],
+    [
+     "trk1",
+     "trk4"
+    ],
+    [
+     "trk1",
+     "trk5"
+    ],
+    [
+     "trk1",
+     "trk6"
+    ],
+    [
+     "trk1",
+     "trk7"
+    ],
+    [
+     "trk1",
+     "trk8"
+    ],
+    [
+     "trk1",
+     "trk9"
+    ],
+    [
+     "trk1",
+     "trk10"
+    ],
+    [
+     "trk2",
+     "trk3"
+    ],
+    [
+     "trk2",
+     "trk4"
+    ],
+    [
+     "trk2",
+     "trk5"
+    ],
+    [
+     "trk2",
+     "trk6"
+    ],
+    [
+     "trk2",
+     "trk7"
+    ],
+    [
+     "trk2",
+     "trk8"
+    ],
+    [
+     "trk2",
+     "trk9"
+    ],
+    [
+     "trk2",
+     "trk10"
+    ],
+    [
+     "trk3",
+     "trk4"
+    ],
+    [
+     "trk3",
+     "trk5"
+    ],
+    [
+     "trk3",
+     "trk6"
+    ],
+    [
+     "trk3",
+     "trk7"
+    ],
+    [
+     "trk3",
+     "trk8"
+    ],
+    [
+     "trk3",
+     "trk9"
+    ],
+    [
+     "trk3",
+     "trk10"
+    ],
+    [
+     "trk4",
+     "trk5"
+    ],
+    [
+     "trk4",
+     "trk6"
+    ],
+    [
+     "trk4",
+     "trk7"
+    ],
+    [
+     "trk4",
+     "trk8"
+    ],
+    [
+     "trk4",
+     "trk9"
+    ],
+    [
+     "trk4",
+     "trk10"
+    ],
+    [
+     "trk5",
+     "trk6"
+    ],
+    [
+     "trk5",
+     "trk7"
+    ],
+    [
+     "trk5",
+     "trk8"
+    ],
+    [
+     "trk5",
+     "trk9"
+    ],
+    [
+     "trk5",
+     "trk10"
+    ],
+    [
+     "trk6",
+     "trk7"
+    ],
+    [
+     "trk6",
+     "trk8"
+    ],
+    [
+     "trk6",
+     "trk9"
+    ],
+    [
+     "trk6",
+     "trk10"
+    ],
+    [
+     "trk7",
+     "trk8"
+    ],
+    [
+     "trk7",
+     "trk9"
+    ],
+    [
+     "trk7",
+     "trk10"
+    ],
+    [
+     "trk8",
+     "trk9"
+    ],
+    [
+     "trk8",
+     "trk10"
+    ],
+    [
+     "trk9",
+     "trk10"
+    ],
+    [
+     "L2b",
+     "armG"
+    ],
+    [
+     "L2b",
+     "studG"
+    ],
+    [
+     "armG",
+     "studG"
+    ]
+   ],
+   "flat": {
+    "hub1": [
+     10.0,
+     12.25,
+     12.25
+    ],
+    "hub2": [
+     10.0,
+     13.099999999934312,
+     12.25
+    ],
+    "hub3": [
+     10.0,
+     15.25,
+     12.25
+    ],
+    "pinK": [
+     5.0,
+     28.63718707878808,
+     6.5
+    ],
+    "studG": [
+     3.5,
+     52.99999999989011,
+     6.0
+    ]
+   },
+   "verifier": {
+    "closure_max_deg": 0.0,
+    "slot_dev_max_mm": 0.0006,
+    "lock_min_deg": 52.42,
+    "align_min_deg": 30.83,
+    "closure_bad": 0,
+    "lock_bad": 0
+   },
+   "post_lift": {
+    "hub2": 0.85,
+    "hub3": 3.0,
+    "pinK": 22.14,
+    "studG": 47.0
+   },
+   "honest": true,
+   "audit": [],
+   "sample_mm": {
+    "hub1": 2.0,
+    "hub2": 2.0,
+    "hub3": 2.0,
+    "pinK": 1.25,
+    "studG": 0.5,
+    "link1": 1.6,
+    "spoke": 1.78,
+    "trk1": 1.54,
+    "trk2": 1.52,
+    "trk3": 1.54,
+    "trk4": 1.63,
+    "trk5": 1.72,
+    "trk6": 1.81,
+    "trk7": 2.12,
+    "trk8": 2.21,
+    "trk9": 2.72,
+    "trk10": 3.2,
+    "neck": 2.31,
+    "crank": 1.97,
+    "L2b": 2.66,
+    "armG": 2.75
+   },
+   "hubless": [],
+   "declared_hubs": {
+    "K": {
+     "member": "pinK",
+     "rad": 5.0,
+     "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+     "cover": 0.975,
+     "reach": 5.0
+    },
+    "G": {
+     "member": "studG",
+     "rad": 3.5,
+     "component": "roller stud: hardened O2 dowel + MR52ZZ (2 x 5 x 2.5) roller in an O7 Ti boss on link 1, post = link + 1 + lever 2 + 1",
+     "cover": 0.968,
+     "reach": 3.5
+    }
+   },
+   "crown_contact_poses": 0,
+   "crown_min": 1.6,
+   "min_metal_skin": 0.32,
+   "near_low": [
+    {
+     "mm": 0.32,
+     "i": 219,
+     "kind": "ws",
+     "plane": 150.0,
+     "elev": 120.0,
+     "axial": -60.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.84,
+     "i": 73,
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 60.0,
+     "axial": 120.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.97,
+     "i": 64,
+     "kind": "ws",
+     "plane": -90.0,
+     "elev": 60.0,
+     "axial": 135.0,
+     "crown": "face"
+    },
+    {
+     "mm": 1.0,
+     "i": 150,
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 120.0,
+     "axial": -90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 1.01,
+     "i": 105,
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 0.0,
+     "axial": -75.0,
+     "crown": "face"
+    }
+   ],
+   "gap_near1": 210.72,
+   "near1": {
+    "reach": 0.1375,
+    "follow": 0.0667,
+    "inband14": 0.6507,
+    "contact": 0.2121
+   },
+   "overhead": {
+    "n_ws": 12,
+    "reach": 0.0,
+    "n_clip": 5,
+    "follow": 0.0,
+    "n_taken": 0,
+    "inband14": null
+   },
+   "stack_mismatch": {
+    "link1@hub1": 0.0,
+    "link1@hub2": 0.0,
+    "spoke@hub2": 0.0,
+    "neck@hub3": 3.0,
+    "crank@hub2": 0.85,
+    "crank@pinK": 9.8,
+    "L2b@pinK": 22.14,
+    "L2b@hub3": 0.0,
+    "armG@pinK": 12.31,
+    "armG@studG": 47.0
+   },
+   "th_need": {
+    "p5": 24.6,
+    "p95": 130.4,
+    "kin_reach": 0.8375
+   },
+   "bench": [
+    60,
+    160
+   ]
+  },
+  "frozen": {
+   "reach": 0.1472,
+   "follow": 0.0818,
+   "inband14": 0.6163,
+   "inband10": 0.5066,
+   "contact": 0.0746,
+   "poses": {
+    "clip": 110,
+    "ws": 360
+   },
+   "mode": "exact",
+   "gap": 197.93,
+   "inband_member": {
+    "hub1": 0.9931,
+    "hub2": 0.0727,
+    "hub3": 0.8916,
+    "pinK": 0.9955,
+    "studG": 0.918,
+    "link1": 0.7082,
+    "spoke": 0.5052,
+    "trk1": 1.0,
+    "trk2": 1.0,
+    "trk3": 1.0,
+    "trk4": 1.0,
+    "trk5": 1.0,
+    "trk6": 0.9907,
+    "trk7": 0.9228,
+    "trk8": 0.3673,
+    "trk9": 0.0,
+    "trk10": 0.0,
+    "neck": 0.8919,
+    "crank": 0.3197,
+    "L2b": 0.2533,
+    "armG": 0.0802
+   },
+   "mass_g": 174.4,
+   "mass_g_strap55": 238.9,
+   "closure": 0.8426,
+   "flips": 0,
+   "collide": 0.8308,
+   "q": 0.9632,
+   "kmode": "march",
+   "residual_deg": 0.0,
+   "window": [
+    30.0,
+    123.75
+   ],
+   "a2eff_range": [
+    61.0,
+    92.7
+   ],
+   "knee_range": [
+    47.5,
+    141.7
+   ],
+   "psi_min": 38.3,
+   "slot_gate": {
+    "q2_monotone": true,
+    "q2_span": 201.6,
+    "stats": {
+     "n": 624,
+     "e_min": 0,
+     "lock": 483,
+     "self": 483
+    },
+    "nodes_e": [
+     23.802398701340344,
+     23.840431760744384,
+     25.330052512352935,
+     32.224748906181496,
+     39.747882893318135,
+     45.55609496402983,
+     48.325618973587275,
+     49.029623750832876,
+     49.14906661494526,
+     49.167683225413946,
+     49.17111469909659
+    ],
+    "nodes_eta": [
+     26.147974398813005,
+     0.10968306179113818,
+     -25.061427766345222,
+     -41.83099201872531,
+     -54.20119943603937,
+     -66.34276775401945,
+     -78.99603280074841,
+     -91.67732605590122,
+     -104.30343168970212,
+     -116.91658616231506,
+     -129.52759539125918
+    ],
+    "width": 7.99,
+    "dev_mm": 0.74,
+    "lock_min": 50.7,
+    "g_min": 0.22,
+    "lock_full_run": 50.7,
+    "e": [
+     23.8,
+     49.2
+    ],
+    "slot_len_mm": 108.2,
+    "eta_span": 141.0,
+    "spoke_node": 1,
+    "th_track": [
+     30.0,
+     123.75
+    ],
+    "need_cover": 1.0
+   },
+   "slot_passed": true,
+   "dG": 29.0,
+   "gG": 7.5,
+   "bodies": [
+    [
+     "link1",
+     "spoke"
+    ],
+    [
+     "link1",
+     "trk1"
+    ],
+    [
+     "link1",
+     "trk2"
+    ],
+    [
+     "link1",
+     "trk3"
+    ],
+    [
+     "link1",
+     "trk4"
+    ],
+    [
+     "link1",
+     "trk5"
+    ],
+    [
+     "link1",
+     "trk6"
+    ],
+    [
+     "link1",
+     "trk7"
+    ],
+    [
+     "link1",
+     "trk8"
+    ],
+    [
+     "link1",
+     "trk9"
+    ],
+    [
+     "link1",
+     "trk10"
+    ],
+    [
+     "spoke",
+     "trk1"
+    ],
+    [
+     "spoke",
+     "trk2"
+    ],
+    [
+     "spoke",
+     "trk3"
+    ],
+    [
+     "spoke",
+     "trk4"
+    ],
+    [
+     "spoke",
+     "trk5"
+    ],
+    [
+     "spoke",
+     "trk6"
+    ],
+    [
+     "spoke",
+     "trk7"
+    ],
+    [
+     "spoke",
+     "trk8"
+    ],
+    [
+     "spoke",
+     "trk9"
+    ],
+    [
+     "spoke",
+     "trk10"
+    ],
+    [
+     "trk1",
+     "trk2"
+    ],
+    [
+     "trk1",
+     "trk3"
+    ],
+    [
+     "trk1",
+     "trk4"
+    ],
+    [
+     "trk1",
+     "trk5"
+    ],
+    [
+     "trk1",
+     "trk6"
+    ],
+    [
+     "trk1",
+     "trk7"
+    ],
+    [
+     "trk1",
+     "trk8"
+    ],
+    [
+     "trk1",
+     "trk9"
+    ],
+    [
+     "trk1",
+     "trk10"
+    ],
+    [
+     "trk2",
+     "trk3"
+    ],
+    [
+     "trk2",
+     "trk4"
+    ],
+    [
+     "trk2",
+     "trk5"
+    ],
+    [
+     "trk2",
+     "trk6"
+    ],
+    [
+     "trk2",
+     "trk7"
+    ],
+    [
+     "trk2",
+     "trk8"
+    ],
+    [
+     "trk2",
+     "trk9"
+    ],
+    [
+     "trk2",
+     "trk10"
+    ],
+    [
+     "trk3",
+     "trk4"
+    ],
+    [
+     "trk3",
+     "trk5"
+    ],
+    [
+     "trk3",
+     "trk6"
+    ],
+    [
+     "trk3",
+     "trk7"
+    ],
+    [
+     "trk3",
+     "trk8"
+    ],
+    [
+     "trk3",
+     "trk9"
+    ],
+    [
+     "trk3",
+     "trk10"
+    ],
+    [
+     "trk4",
+     "trk5"
+    ],
+    [
+     "trk4",
+     "trk6"
+    ],
+    [
+     "trk4",
+     "trk7"
+    ],
+    [
+     "trk4",
+     "trk8"
+    ],
+    [
+     "trk4",
+     "trk9"
+    ],
+    [
+     "trk4",
+     "trk10"
+    ],
+    [
+     "trk5",
+     "trk6"
+    ],
+    [
+     "trk5",
+     "trk7"
+    ],
+    [
+     "trk5",
+     "trk8"
+    ],
+    [
+     "trk5",
+     "trk9"
+    ],
+    [
+     "trk5",
+     "trk10"
+    ],
+    [
+     "trk6",
+     "trk7"
+    ],
+    [
+     "trk6",
+     "trk8"
+    ],
+    [
+     "trk6",
+     "trk9"
+    ],
+    [
+     "trk6",
+     "trk10"
+    ],
+    [
+     "trk7",
+     "trk8"
+    ],
+    [
+     "trk7",
+     "trk9"
+    ],
+    [
+     "trk7",
+     "trk10"
+    ],
+    [
+     "trk8",
+     "trk9"
+    ],
+    [
+     "trk8",
+     "trk10"
+    ],
+    [
+     "trk9",
+     "trk10"
+    ],
+    [
+     "L2b",
+     "armG"
+    ],
+    [
+     "L2b",
+     "studG"
+    ],
+    [
+     "armG",
+     "studG"
+    ]
+   ],
+   "flat": {
+    "hub1": [
+     10.0,
+     12.25,
+     12.25
+    ],
+    "hub2": [
+     10.0,
+     13.099999999934312,
+     12.25
+    ],
+    "hub3": [
+     10.0,
+     15.25,
+     12.25
+    ],
+    "pinK": [
+     5.0,
+     28.63718707878808,
+     6.5
+    ],
+    "studG": [
+     3.5,
+     52.99999999989011,
+     6.0
+    ]
+   },
+   "verifier": {
+    "closure_max_deg": 0.0,
+    "slot_dev_max_mm": 0.0006,
+    "lock_min_deg": 52.41,
+    "align_min_deg": 30.83,
+    "closure_bad": 0,
+    "lock_bad": 0
+   },
+   "post_lift": {
+    "hub2": 0.85,
+    "hub3": 3.0,
+    "pinK": 22.14,
+    "studG": 47.0
+   },
+   "honest": true,
+   "audit": [],
+   "sample_mm": {
+    "hub1": 2.0,
+    "hub2": 2.0,
+    "hub3": 2.0,
+    "pinK": 1.25,
+    "studG": 0.5,
+    "link1": 1.6,
+    "spoke": 1.78,
+    "trk1": 1.54,
+    "trk2": 1.52,
+    "trk3": 1.54,
+    "trk4": 1.63,
+    "trk5": 1.72,
+    "trk6": 1.81,
+    "trk7": 2.12,
+    "trk8": 2.21,
+    "trk9": 2.72,
+    "trk10": 3.2,
+    "neck": 2.31,
+    "crank": 1.97,
+    "L2b": 2.66,
+    "armG": 2.75
+   },
+   "hubless": [],
+   "declared_hubs": {
+    "K": {
+     "member": "pinK",
+     "rad": 5.0,
+     "component": "passive pin: MR63ZZ pair (3 x 6 x 2.5) in an O10 Ti boss, two 3 mm plates, 6.5 mm stack (catalogue: passive pin)",
+     "cover": 0.975,
+     "reach": 5.0
+    },
+    "G": {
+     "member": "studG",
+     "rad": 3.5,
+     "component": "roller stud: hardened O2 dowel + MR52ZZ (2 x 5 x 2.5) roller in an O7 Ti boss on link 1, post = link + 1 + lever 2 + 1",
+     "cover": 0.968,
+     "reach": 3.5
+    }
+   },
+   "crown_contact_poses": 0,
+   "crown_min": 0.1,
+   "min_metal_skin": 0.09,
+   "near_low": [
+    {
+     "mm": 0.09,
+     "i": 446,
+     "kind": "ws",
+     "plane": 135.0,
+     "elev": 120.0,
+     "axial": -75.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.16,
+     "i": 369,
+     "kind": "ws",
+     "plane": 90.0,
+     "elev": 135.0,
+     "axial": -90.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.33,
+     "i": 456,
+     "kind": "ws",
+     "plane": 150.0,
+     "elev": 45.0,
+     "axial": -165.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.35,
+     "i": 433,
+     "kind": "ws",
+     "plane": 135.0,
+     "elev": 45.0,
+     "axial": -165.0,
+     "crown": "face"
+    },
+    {
+     "mm": 0.36,
+     "i": 333,
+     "kind": "ws",
+     "plane": 75.0,
+     "elev": 75.0,
+     "axial": -120.0,
+     "crown": "face"
+    }
+   ],
+   "gap_near1": 220.95,
+   "near1": {
+    "reach": 0.1111,
+    "follow": 0.0818,
+    "inband14": 0.6163,
+    "contact": 0.2687
+   },
+   "overhead": {
+    "n_ws": 28,
+    "reach": 0.0,
+    "n_clip": 10,
+    "follow": 0.0,
+    "n_taken": 0,
+    "inband14": null
+   },
+   "stack_mismatch": {
+    "link1@hub1": 0.0,
+    "link1@hub2": 0.0,
+    "spoke@hub2": 0.0,
+    "neck@hub3": 3.0,
+    "crank@hub2": 0.85,
+    "crank@pinK": 9.8,
+    "L2b@pinK": 22.14,
+    "L2b@hub3": 0.0,
+    "armG@pinK": 12.31,
+    "armG@studG": 47.0
+   },
+   "th_need": {
+    "p5": 25.1,
+    "p95": 141.9,
+    "kin_reach": 0.7944
+   },
+   "bench": [
+    110,
+    360
+   ],
+   "secs": 43.7
+  }
+ },
+ "verifier": {
+  "own_checks_only": false,
+  "exempt_knee_mm": 7.0,
+  "exempt_stud_mm": 5.5,
+  "exempt_hub_mm": 12.0,
+  "closure_max_deg": 0.0,
+  "slot_dev_max_mm": 0.0006,
+  "lock_min_deg_taken": 73.41,
+  "align_min_deg_taken": 30.86,
+  "closure_bad_last": 0,
+  "lock_bad_last": 0,
+  "fold_margin_param": 10.0,
+  "kit_fold_margin": 10.0,
+  "o20_only": true
+ }
+}

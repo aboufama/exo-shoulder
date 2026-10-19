@@ -1,0 +1,316 @@
+{
+ "id": "kneeless-roller-knuckle-3r",
+ "status": "verified",
+ "v_gap": 21.07,
+ "complexity": 23.75,
+ "verdict": "watch",
+ "reasons": [
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): v_gap 21.07: bench 10 contact poses, sum 44.0 mm, deepest 12.0 mm at ['ws', 15.0, 165.0, -60.0], 7 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+37.77 mm, x7.06) - CLEARLY DEEPER; held 26 contact poses, sum 112.17 mm, deepest 11.35 mm at ['ws', 30.0, 165.0, -45.0], 13 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+76.51 mm, x3.15) - CLEARLY DEEPER",
+  "reporting: verdict text still reads as a self-measured screen"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 24.59 vs bench 21.07 (+3.52; re-measured (this audit))",
+   "held_gap": 24.59,
+   "v_gap": 21.07,
+   "drop": 3.52,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 16.7 -> verified 21.07 (+4.37)",
+   "fast": 16.7,
+   "verified": 21.07,
+   "drop": 4.37
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 21.07, <1 mm 23.23, <2 mm 32.25, <3 mm 87.37, band read 3-14 mm 21.41, 11.18 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 11.18,
+   "plain": 21.07,
+   "n1": 23.23,
+   "n2": 32.25,
+   "n3": 87.37,
+   "band3": 21.41,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0002,
+    "2-3": 0.0035,
+    "3-4": 0.0129,
+    "4-6": 0.0834,
+    "6-10": 0.4584,
+    "10-14": 0.3324,
+    ">14": 0.1093
+   },
+   "minmm": 0.006,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "watch",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 21.07: bench 10 contact poses, sum 44.0 mm, deepest 12.0 mm at ['ws', 15.0, 165.0, -60.0], 7 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+37.77 mm, x7.06) - CLEARLY DEEPER; held 26 contact poses, sum 112.17 mm, deepest 11.35 mm at ['ws', 30.0, 165.0, -45.0], 13 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+76.51 mm, x3.15) - CLEARLY DEEPER",
+   "depths": {
+    "v_gap 21.07": {
+     "bench": {
+      "n": 10,
+      "sum_mm": 44.0,
+      "max_mm": 12.0,
+      "n_deeper3": 7,
+      "overhead140": 4,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 21.07,
+      "src": "docs/alignment/remeasure/kneeless-roller-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        44.0
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 26,
+      "sum_mm": 112.17,
+      "max_mm": 11.35,
+      "n_deeper3": 13,
+      "overhead140": 13,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -45.0
+      ],
+      "gap": 24.59,
+      "src": "docs/alignment/remeasure/kneeless-roller-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        112.17
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 21.07",
+     "wear": "bench",
+     "sum": 44.0,
+     "ref_sum": 6.23,
+     "excess": 37.77,
+     "ratio": 7.06,
+     "watch": true
+    },
+    {
+     "claim": "v_gap 21.07",
+     "wear": "held",
+     "sum": 112.17,
+     "ref_sum": 35.66,
+     "excess": 76.51,
+     "ratio": 3.15,
+     "watch": true
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs sidecar-longdyad-knuckle-3r: plain -2.16, 2 mm +1.78",
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "gain_plain": -2.16,
+   "gain_2mm": 1.78
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 21.07, connected full 21.07, knn 23.35, bench 49.5 (docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_frozen.json)",
+   "static": 21.07,
+   "connected_full": 21.07,
+   "connected_knn": 23.35,
+   "connected_bench": 49.5
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.091 deg (verification.checks.th_margin_min_held_deg; 9 readings)",
+   "min_margin": 5.091,
+   "where": "verification.checks.th_margin_min_held_deg"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "knee: rigid by design, not a joint (mechanism notes: knee deleted, one rigid bracket; model asserts the knee angle constant (knee_moved -> dishonest)); measured span 0.0 deg (row:fast.knee_rigid.ang_ptp_deg) <= 0.5; K moves: smallest recorded span 43.53 deg (docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_frozen.json:extra.dK_taken_max_deg); crank moves: smallest recorded span 20.5 deg (docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken)",
+   "spans": [
+    [
+     "row:verification.checks.dK_taken_max_deg",
+     43.53
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_head.json:fit_fast.extra.dK_taken_max_deg",
+     45.61
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_head.json:extra.dK_taken_max_deg",
+     43.53
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_held_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     45.61
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
+     45.78
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     45.61
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_frozen.json:extra.dK_taken_max_deg",
+     43.53
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_head.json:sidecar.phi_max_taken",
+     20.5
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_held_frozen.json:sidecar.phi_max_taken",
+     20.5
+    ],
+    [
+     "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_frozen.json:sidecar.phi_max_taken",
+     20.5
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank"
+   ],
+   "rigid": [
+    "knee"
+   ]
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.891 vs part-weighted 0.912 (-2.15 points); thinly sampled parts: L1a 8 (re-measured)",
+   "parts": {
+    "hub1": [
+     1.0,
+     9.1,
+     80
+    ],
+    "hubK": [
+     0.99,
+     8.2,
+     80
+    ],
+    "hub2": [
+     0.986,
+     10.6,
+     80
+    ],
+    "hub3": [
+     0.505,
+     13.9,
+     80
+    ],
+    "E": [
+     0.934,
+     7.8,
+     132
+    ],
+    "boss": [
+     1.0,
+     7.4,
+     32
+    ],
+    "pad": [
+     0.988,
+     9.3,
+     32
+    ],
+    "knee": [
+     0.997,
+     7.6,
+     105
+    ],
+    "crank": [
+     0.863,
+     11.5,
+     129
+    ],
+    "roller": [
+     0.934,
+     10.0,
+     37
+    ],
+    "horn": [
+     0.955,
+     6.6,
+     33
+    ],
+    "L1a": [
+     0.96,
+     10.8,
+     8
+    ],
+    "L1b": [
+     0.949,
+     8.8,
+     32
+    ],
+    "L2": [
+     0.71,
+     11.8,
+     108
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 23.75 vs row 23.75",
+   "recomputed": 23.75,
+   "row": 23.75
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [
+  "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_head.json",
+  "docs/concepts/verify/kneeless-roller-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/kneeless-roller-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "59539d6",
+ "tool_version": "2026-10-17.1",
+ "t": "2026-10-17T03:17:34Z"
+}

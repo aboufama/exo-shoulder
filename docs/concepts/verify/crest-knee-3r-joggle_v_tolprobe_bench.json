@@ -1,0 +1,55 @@
+{
+ "wear": "bench",
+ "taken": 336,
+ "min_mm": 0.2,
+ "rows": [
+  {
+   "strap_level_error_mm": 0.0,
+   "jam_poses": 0,
+   "gap": 31.5,
+   "reach": 0.6278,
+   "follow": 1.0,
+   "inband14": 0.8719
+  },
+  {
+   "strap_level_error_mm": 0.05,
+   "jam_poses": 1,
+   "gap": 31.78,
+   "reach": 0.625,
+   "follow": 1.0,
+   "inband14": 0.8719
+  },
+  {
+   "strap_level_error_mm": 0.1,
+   "jam_poses": 1,
+   "gap": 31.78,
+   "reach": 0.625,
+   "follow": 1.0,
+   "inband14": 0.8719
+  },
+  {
+   "strap_level_error_mm": 0.2,
+   "jam_poses": 25,
+   "gap": 39.9,
+   "reach": 0.5833,
+   "follow": 0.9182,
+   "inband14": 0.8653
+  },
+  {
+   "strap_level_error_mm": 0.3,
+   "jam_poses": 46,
+   "gap": 51.64,
+   "reach": 0.5472,
+   "follow": 0.8455,
+   "inband14": 0.8578
+  },
+  {
+   "strap_level_error_mm": 0.5,
+   "jam_poses": 90,
+   "gap": 79.67,
+   "reach": 0.4806,
+   "follow": 0.6636,
+   "inband14": 0.829
+  }
+ ]
+}

@@ -1,0 +1,790 @@
+{
+ "prepare_secs": 148.5,
+ "ideal": {
+  "gap": 13.21,
+  "reach": 0.7972,
+  "follow": 1.0,
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "contact": 0.0293
+ },
+ "params": {
+  "PHI": 35.0,
+  "ds": 31.0,
+  "rt_extra": 1.5,
+  "pre": 0.0,
+  "bump": 1.002,
+  "band": 9.272,
+  "ramp": 6.0,
+  "tilt": 12,
+  "taz": 235,
+  "sgn": 1,
+  "flood": 1,
+  "hw": 1,
+  "hwv": "plain",
+  "carw": 14.0,
+  "delta": 4.5,
+  "coil": "arm",
+  "flange": 1,
+  "lean": 0
+ },
+ "pick": {
+  "summary": {
+   "gate": 14.76,
+   "chain_only": 14.76,
+   "plain": 13.74,
+   "near1": 17.91,
+   "near2": 37.7,
+   "ibc": 0.8898,
+   "ib": 0.9132,
+   "ib10": 0.5608,
+   "reach": 0.7944,
+   "fol": 1.0,
+   "con": 0.0318,
+   "ncon": 13,
+   "jams": 0,
+   "ws_taken": 286,
+   "overhead": [
+    8,
+    28
+   ],
+   "by_cause": {
+    "chain": 12,
+    "hardware": 1,
+    "chain+hw": 0
+   },
+   "hwc": [
+    [
+     466,
+     -2.95,
+     -1.9
+    ]
+   ],
+   "stack": 1.23,
+   "arc": [
+    -1.9,
+    45.9
+   ],
+   "R_t": 80.6,
+   "shell_min": {
+    "i": 139,
+    "mm": 1.03,
+    "az_rel": -0.5
+   },
+   "bracket": [
+    25.0
+   ],
+   "secs": 197.6
+  },
+  "contacts": [
+   {
+    "i": 182,
+    "kind": "ws",
+    "pose": [
+     -15.0,
+     90.0,
+     45.0
+    ],
+    "phi": 11.3,
+    "min_mm": -0.71,
+    "parts": {
+     "chain": -0.13,
+     "shell": 5.88,
+     "shell_az": 33.6,
+     "coil_arm": 14.11,
+     "car": 8.27,
+     "bracket": 3.12,
+     "flange": 5.56
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 205,
+    "kind": "ws",
+    "pose": [
+     0.0,
+     105.0,
+     15.0
+    ],
+    "phi": 0.0,
+    "min_mm": -4.28,
+    "parts": {
+     "chain": -3.93,
+     "shell": 8.51,
+     "shell_az": 35.1,
+     "coil_arm": 17.13,
+     "car": 12.85,
+     "bracket": 6.75,
+     "flange": 10.37
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 206,
+    "kind": "ws",
+    "pose": [
+     0.0,
+     120.0,
+     -15.0
+    ],
+    "phi": 17.4,
+    "min_mm": -6.07,
+    "parts": {
+     "chain": -5.52,
+     "shell": 9.76,
+     "shell_az": 33.6,
+     "coil_arm": 17.09,
+     "car": 12.31,
+     "bracket": 5.31,
+     "flange": 9.63
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 237,
+    "kind": "ws",
+    "pose": [
+     15.0,
+     165.0,
+     -60.0
+    ],
+    "phi": 0.0,
+    "min_mm": -8.93,
+    "parts": {
+     "chain": -8.59,
+     "shell": 8.21,
+     "shell_az": 22.3,
+     "coil_arm": 12.86,
+     "car": 10.39,
+     "bracket": 5.9,
+     "flange": 7.7
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 262,
+    "kind": "ws",
+    "pose": [
+     30.0,
+     135.0,
+     0.0
+    ],
+    "phi": 11.3,
+    "min_mm": -9.79,
+    "parts": {
+     "chain": -9.62,
+     "shell": 9.97,
+     "shell_az": 33.6,
+     "coil_arm": 17.51,
+     "car": 13.07,
+     "bracket": 6.07,
+     "flange": 10.43
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 264,
+    "kind": "ws",
+    "pose": [
+     30.0,
+     165.0,
+     -60.0
+    ],
+    "phi": 0.0,
+    "min_mm": -5.8,
+    "parts": {
+     "chain": -5.39,
+     "shell": 7.32,
+     "shell_az": 22.3,
+     "coil_arm": 11.89,
+     "car": 9.29,
+     "bracket": 5.6,
+     "flange": 6.73
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 316,
+    "kind": "ws",
+    "pose": [
+     60.0,
+     150.0,
+     -105.0
+    ],
+    "phi": 0.0,
+    "min_mm": -1.23,
+    "parts": {
+     "chain": -1.23,
+     "shell": 4.21,
+     "shell_az": 20.9,
+     "coil_arm": 9.11,
+     "car": 6.24,
+     "bracket": 3.99,
+     "flange": 3.95
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 343,
+    "kind": "ws",
+    "pose": [
+     75.0,
+     150.0,
+     -105.0
+    ],
+    "phi": 8.4,
+    "min_mm": -1.73,
+    "parts": {
+     "chain": -1.73,
+     "shell": 4.89,
+     "shell_az": 26.5,
+     "coil_arm": 9.78,
+     "car": 6.57,
+     "bracket": 3.63,
+     "flange": 4.27
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 372,
+    "kind": "ws",
+    "pose": [
+     90.0,
+     165.0,
+     -90.0
+    ],
+    "phi": 19.4,
+    "min_mm": -0.07,
+    "parts": {
+     "chain": -0.07,
+     "shell": 5.06,
+     "shell_az": 26.5,
+     "coil_arm": 10.66,
+     "car": 6.6,
+     "bracket": 3.15,
+     "flange": 4.27
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 423,
+    "kind": "ws",
+    "pose": [
+     120.0,
+     135.0,
+     -90.0
+    ],
+    "phi": 16.0,
+    "min_mm": -0.7,
+    "parts": {
+     "chain": -0.69,
+     "shell": 8.15,
+     "shell_az": 10.9,
+     "coil_arm": 12.46,
+     "car": 9.96,
+     "bracket": 4.75,
+     "flange": 7.34
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 448,
+    "kind": "ws",
+    "pose": [
+     135.0,
+     135.0,
+     -90.0
+    ],
+    "phi": 29.4,
+    "min_mm": -1.92,
+    "parts": {
+     "chain": -1.33,
+     "shell": 9.36,
+     "shell_az": 10.9,
+     "coil_arm": 13.67,
+     "car": 11.14,
+     "bracket": 4.69,
+     "flange": 8.56
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 457,
+    "kind": "ws",
+    "pose": [
+     150.0,
+     45.0,
+     -105.0
+    ],
+    "phi": 15.1,
+    "min_mm": -2.0,
+    "parts": {
+     "chain": -1.18,
+     "shell": 7.52,
+     "shell_az": -1.9,
+     "coil_arm": 10.27,
+     "car": 10.77,
+     "bracket": 4.48,
+     "flange": 8.09
+    },
+    "cause": "chain"
+   },
+   {
+    "i": 466,
+    "kind": "ws",
+    "pose": [
+     150.0,
+     105.0,
+     -105.0
+    ],
+    "phi": 28.0,
+    "min_mm": -2.95,
+    "parts": {
+     "chain": 4.32,
+     "shell": 0.68,
+     "shell_az": -1.9,
+     "coil_arm": -2.95,
+     "car": 13.08,
+     "bracket": 5.66,
+     "flange": 10.4
+    },
+    "cause": "hardware"
+   }
+  ],
+  "th_margin": {
+   "min": 5.0,
+   "n": 396,
+   "lt5": 0,
+   "lowest": [
+    {
+     "own": 5.0,
+     "i": 340,
+     "pose": [
+      75.0,
+      120.0,
+      -105.0
+     ]
+    },
+    {
+     "own": 5.0,
+     "i": 464,
+     "pose": [
+      150.0,
+      90.0,
+      -90.0
+     ]
+    },
+    {
+     "own": 5.001,
+     "i": 390,
+     "pose": [
+      105.0,
+      90.0,
+      -120.0
+     ]
+    },
+    {
+     "own": 5.002,
+     "i": 439,
+     "pose": [
+      135.0,
+      75.0,
+      -90.0
+     ]
+    },
+    {
+     "own": 5.003,
+     "i": 330,
+     "pose": [
+      75.0,
+      60.0,
+      -135.0
+     ]
+    }
+   ]
+  },
+  "xcheck": {
+   "nC": 981,
+   "clearance_margin_taken": {
+    "lt1": 0,
+    "lt1.1": 112,
+    "lt1.2": 182,
+    "lt1.5": 274,
+    "lt2": 284,
+    "ws_lt1": 0,
+    "ws_lt1.1": 61,
+    "ws_lt1.2": 110,
+    "ws_lt1.5": 176,
+    "ws_lt2": 185,
+    "lowest": [
+     {
+      "i": 15,
+      "kind": "clip",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 4.68,
+      "adj_mm": 1.45
+     },
+     {
+      "i": 23,
+      "kind": "clip",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 3.99,
+      "adj_mm": 1.451
+     },
+     {
+      "i": 24,
+      "kind": "clip",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 4.1,
+      "adj_mm": 1.457
+     },
+     {
+      "i": 32,
+      "kind": "clip",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 4.13,
+      "adj_mm": 1.461
+     },
+     {
+      "i": 33,
+      "kind": "clip",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 4.07,
+      "adj_mm": 1.455
+     },
+     {
+      "i": 40,
+      "kind": "clip",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 3.89,
+      "adj_mm": 1.451
+     },
+     {
+      "i": 60,
+      "kind": "clip",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 3.66,
+      "adj_mm": 1.438
+     },
+     {
+      "i": 81,
+      "kind": "clip",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 5.29,
+      "adj_mm": 1.436
+     },
+     {
+      "i": 164,
+      "kind": "ws",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 1.49,
+      "adj_mm": 1.451
+     },
+     {
+      "i": 319,
+      "kind": "ws",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 1.49,
+      "adj_mm": 1.451
+     },
+     {
+      "i": 376,
+      "kind": "ws",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 1.09,
+      "adj_mm": 1.462
+     },
+     {
+      "i": 435,
+      "kind": "ws",
+      "mm": 1.002,
+      "part": "E",
+      "hw": "car",
+      "metal": 6.31,
+      "adj_mm": 1.459
+     },
+     {
+      "i": 167,
+      "kind": "ws",
+      "mm": 1.003,
+      "part": "E",
+      "hw": "car",
+      "metal": 2.53,
+      "adj_mm": 1.471
+     },
+     {
+      "i": 185,
+      "kind": "ws",
+      "mm": 1.003,
+      "part": "E",
+      "hw": "car",
+      "metal": 1.86,
+      "adj_mm": 1.43
+     },
+     {
+      "i": 188,
+      "kind": "ws",
+      "mm": 1.003,
+      "part": "E",
+      "hw": "car",
+      "metal": 2.99,
+      "adj_mm": 1.43
+     }
+    ]
+   },
+   "extra_jam_rows": [],
+   "n_extra_jam": 0,
+   "lost_new": 0,
+   "lost_new_ws": 0,
+   "rescored": {
+    "wear": {
+     "gap": 13.74,
+     "reach": 0.7944,
+     "follow": 1.0,
+     "inband14": 0.9132,
+     "inband10": 0.5608,
+     "contact": 0.0318
+    },
+    "ib14_chain_only": 0.8898,
+    "gate_gap": 14.76,
+    "ws_taken": 286,
+    "overhead": [
+     8,
+     28
+    ]
+   },
+   "closest": {
+    "c29:m6|bracket": [
+     0.216,
+     343
+    ],
+    "knee|bracket": [
+     0.554,
+     372
+    ],
+    "E|car": [
+     1.002,
+     81
+    ],
+    "E|shell": [
+     1.116,
+     316
+    ],
+    "E|bracket": [
+     1.452,
+     89
+    ],
+    "c23:m3|bracket": [
+     1.806,
+     85
+    ],
+    "c30:m6|bracket": [
+     2.867,
+     448
+    ],
+    "c23:m3|shell": [
+     3.539,
+     448
+    ],
+    "c23:m3|car": [
+     3.733,
+     448
+    ],
+    "c29:m6|shell": [
+     5.3,
+     448
+    ],
+    "c25:m3|bracket": [
+     5.7,
+     448
+    ],
+    "c24:m3|shell": [
+     5.9,
+     448
+    ],
+    "c24:m3|bracket": [
+     6.211,
+     448
+    ],
+    "boss|shell": [
+     6.217,
+     448
+    ],
+    "c25:m3|shell": [
+     6.297,
+     448
+    ],
+    "boss|bracket": [
+     6.405,
+     448
+    ],
+    "knee|shell": [
+     6.505,
+     448
+    ],
+    "c25:m3|car": [
+     7.642,
+     448
+    ],
+    "c24:m3|car": [
+     7.95,
+     448
+    ],
+    "c30:m6|shell": [
+     8.0,
+     448
+    ],
+    "c29:m6|car": [
+     8.636,
+     448
+    ],
+    "boss|car": [
+     8.723,
+     448
+    ],
+    "knee|car": [
+     9.656,
+     448
+    ],
+    "c30:m6|car": [
+     9.922,
+     448
+    ],
+    "c23:m3|coil": [
+     13.777,
+     71
+    ],
+    "E|coil": [
+     13.824,
+     71
+    ],
+    "c29:m6|coil": [
+     21.146,
+     76
+    ],
+    "c30:m6|coil": [
+     22.542,
+     316
+    ],
+    "knee|coil": [
+     22.659,
+     76
+    ],
+    "c25:m3|coil": [
+     24.279,
+     316
+    ],
+    "c24:m3|coil": [
+     24.802,
+     316
+    ],
+    "boss|coil": [
+     25.084,
+     316
+    ],
+    "c13:m7|shell": [
+     37.373,
+     206
+    ],
+    "c14:m7|shell": [
+     37.431,
+     206
+    ],
+    "c35:m1|shell": [
+     38.394,
+     237
+    ],
+    "c18:m3|car": [
+     38.403,
+     296
+    ],
+    "c17:m3|car": [
+     38.654,
+     386
+    ],
+    "c36:m1|shell": [
+     38.688,
+     237
+    ],
+    "c19:m3|car": [
+     39.047,
+     449
+    ],
+    "c16:m3|car": [
+     39.218,
+     296
+    ]
+   },
+   "bracket": {
+    "n_under": 66,
+    "ramp_deg": 25.0,
+    "turn_mm": 6.46
+   }
+  },
+  "why": {
+   "": 396,
+   "contact": 13,
+   "fold": 56,
+   "j3stop": 5
+  },
+  "relayed": {
+   "n": 33,
+   "taken": 24,
+   "contact": 9,
+   "jam": 0,
+   "clip_relayed": 0,
+   "phi_max": 32.94
+  },
+  "continuity": {
+   "static": {
+    "gap": 13.74,
+    "reach": 0.7944,
+    "follow": 1.0,
+    "inband14": 0.9132,
+    "inband10": 0.5608,
+    "contact": 0.0318
+   },
+   "dropped_relayed": 0,
+   "phi0_taken_not_connected": 0,
+   "flood": {
+    "env": 1432,
+    "env_ok": 1189,
+    "env_ok_phi0": 1035,
+    "env_relayed": 154,
+    "env_relayed_connected": 153,
+    "env_phi0_connected": 1035,
+    "edges": 3039,
+    "edges_ok": 3014,
+    "edge_fail": {
+     "open": 3,
+     "phi_jump": 21,
+     "passive_jump": 0,
+     "active_jump": 1
+    },
+    "seeds": 513
+   }
+  }
+ }
+}

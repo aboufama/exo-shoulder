@@ -1,0 +1,509 @@
+{
+ "id": "baseline-3r",
+ "conv": "claim",
+ "conventions": {
+  "mode": "outer",
+  "cont": false,
+  "collide": false
+ },
+ "overrides": {},
+ "wear": "fit60",
+ "params": {
+  "az": 2.4305071427308924,
+  "el": 80.67633718429899,
+  "a1": 76.90180446920043,
+  "a2": 66.74921235407174,
+  "wd": 86.32769021001913,
+  "wa": 21.829657347343378,
+  "sigma": -1,
+  "sing_deg": 10.0,
+  "width": 8.0,
+  "t_link": 3.0,
+  "neck_deg": 25.0,
+  "q": 0.95
+ },
+ "fit_fast": {
+  "gap": 68.93,
+  "reach": 0.775,
+  "follow": 1.0,
+  "inband14": 0.4381,
+  "inband10": 0.2789,
+  "contact": 0.1024,
+  "honest": false,
+  "audit": [
+   "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)"
+  ],
+  "closure": 0.9318,
+  "flips": 0,
+  "collide": 0.0,
+  "residual_deg": 0.0,
+  "inband_member": {
+   "hub1": 0.9956,
+   "hub2": 0.0,
+   "hub3": 0.132,
+   "link1": 0.7172,
+   "link2": 0.328,
+   "neck": 0.0146
+  },
+  "mass_g": 48.9
+ },
+ "git": "a947760",
+ "frozen": {
+  "gap": 68.93,
+  "reach": 0.775,
+  "follow": 1.0,
+  "inband14": 0.4381,
+  "inband10": 0.2789,
+  "contact": 0.1024,
+  "honest": false,
+  "audit": [
+   "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)"
+  ],
+  "closure": 0.9318,
+  "flips": 0,
+  "collide": 0.0,
+  "residual_deg": 0.0,
+  "inband_member": {
+   "hub1": 0.9956,
+   "hub2": 0.0,
+   "hub3": 0.132,
+   "link1": 0.7172,
+   "link2": 0.328,
+   "neck": 0.0146
+  },
+  "mass_g": 48.9
+ },
+ "parts_ib14": {
+  "hub1": 0.9956,
+  "hub2": 0.0,
+  "hub3": 0.132,
+  "link1": 0.7172,
+  "link2": 0.328,
+  "neck": 0.0146
+ },
+ "deep": {
+  "plain": 68.93,
+  "reach": 0.775,
+  "follow": 1.0,
+  "inband14": 0.4381,
+  "contact": 0.1024,
+  "n_poses": 220,
+  "n_taken": 184,
+  "min_metal_mm": 0.816,
+  "gap_near1": 70.04,
+  "near1_poses": 1,
+  "gap_near2": 99.21,
+  "near2_poses": 24,
+  "gap_near3": 375.0,
+  "near3_poses": 184,
+  "clip_metal_hist": {
+   "0-1": 0.0,
+   "1-2": 0.0052,
+   "2-3": 0.0176,
+   "3-4": 0.029,
+   "4-6": 0.0882,
+   "6-10": 0.1441,
+   "10-14": 0.1592,
+   ">14": 0.5567
+  },
+  "gap_band3_14": 70.69,
+  "inband3_14": 0.4205,
+  "overhead_min_metal_p10": 1.63,
+  "coord_spans": {}
+ },
+ "probe": {
+  "n": 220,
+  "mode": "fast",
+  "scored": {
+   "reach": 0.775,
+   "follow": 1.0,
+   "inband14": 0.4381,
+   "inband10": 0.2789,
+   "contact": 0.1024,
+   "mode": "fast",
+   "gap": 68.93
+  },
+  "clip_scored": {
+   "n": 60,
+   "taken": 60,
+   "share_taken": 1.0,
+   "inband14": 0.4381,
+   "inband10": 0.2789,
+   "below2": 0.0052,
+   "over14": 0.5567,
+   "over20": 0.3595,
+   "d_median": 15.77,
+   "d_p95": 31.75,
+   "d_max": 31.75,
+   "pose_p95_median": 31.75,
+   "pose_p95_max": 31.75,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 9,
+   "poses_floor_lt3": 60,
+   "share_floor_lt2": 0.15,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 9,
+    "2-3": 51,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_unscored": {
+   "n": 160,
+   "taken": 124,
+   "share_taken": 0.775,
+   "inband14": 0.4054,
+   "inband10": 0.2602,
+   "below2": 0.0027,
+   "over14": 0.5919,
+   "over20": 0.3667,
+   "d_median": 16.58,
+   "d_p95": 31.75,
+   "d_max": 31.75,
+   "pose_p95_median": 31.75,
+   "pose_p95_max": 31.75,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 15,
+   "poses_floor_lt3": 124,
+   "share_floor_lt2": 0.121,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 14,
+    "2-3": 109,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_overhead140": {
+   "n": 12,
+   "taken": 4,
+   "share_taken": 0.3333,
+   "inband14": 0.6784,
+   "inband10": 0.5011,
+   "below2": 0.0191,
+   "over14": 0.3025,
+   "over20": 0.2076,
+   "d_median": 9.72,
+   "d_p95": 31.75,
+   "d_max": 31.75,
+   "pose_p95_median": 31.75,
+   "pose_p95_max": 31.75,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 1,
+   "poses_floor_lt3": 4,
+   "share_floor_lt2": 0.25,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 1,
+    "2-3": 3,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "clip_overhead140": {
+   "n": 5,
+   "taken": 5,
+   "share_taken": 1.0,
+   "inband14": 0.4177,
+   "inband10": 0.316,
+   "below2": 0.0606,
+   "over14": 0.5217,
+   "over20": 0.3472,
+   "d_median": 14.67,
+   "d_p95": 31.75,
+   "d_max": 31.75,
+   "pose_p95_median": 31.75,
+   "pose_p95_max": 31.75,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 3,
+   "poses_floor_lt3": 5,
+   "share_floor_lt2": 0.6,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 3,
+    "2-3": 2,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_elev90_140": {
+   "n": 38,
+   "taken": 25,
+   "share_taken": 0.6579,
+   "inband14": 0.439,
+   "inband10": 0.2772,
+   "below2": 0.0066,
+   "over14": 0.5544,
+   "over20": 0.3284,
+   "d_median": 15.15,
+   "d_p95": 31.75,
+   "d_max": 31.75,
+   "pose_p95_median": 31.75,
+   "pose_p95_max": 31.75,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 9,
+   "poses_floor_lt3": 25,
+   "share_floor_lt2": 0.36,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 8,
+    "2-3": 16,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_below90": {
+   "n": 110,
+   "taken": 95,
+   "share_taken": 0.8636,
+   "inband14": 0.385,
+   "inband10": 0.2456,
+   "below2": 0.001,
+   "over14": 0.614,
+   "over20": 0.3835,
+   "d_median": 17.25,
+   "d_p95": 31.75,
+   "d_max": 31.75,
+   "pose_p95_median": 31.75,
+   "pose_p95_max": 31.75,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 95,
+   "share_floor_lt2": 0.0526,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 5,
+    "2-3": 90,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_reach_by_elev": {
+   "0-60": [
+    69,
+    76
+   ],
+   "60-90": [
+    26,
+    34
+   ],
+   "90-120": [
+    14,
+    23
+   ],
+   "120-140": [
+    11,
+    15
+   ],
+   "140-160": [
+    0,
+    6
+   ],
+   "160-200": [
+    4,
+    6
+   ]
+  },
+  "contact_poses": [
+   {
+    "mm": -28.37,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": 0.0
+   },
+   {
+    "mm": -27.48,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 150.0,
+    "axial": 0.0
+   },
+   {
+    "mm": -27.3,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 150.0,
+    "axial": 0.0
+   },
+   {
+    "mm": -23.68,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 105.0,
+    "axial": 0.0
+   },
+   {
+    "mm": -19.84,
+    "kind": "ws",
+    "plane": -75.0,
+    "elev": 60.0,
+    "axial": 60.0
+   },
+   {
+    "mm": -17.02,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 105.0,
+    "axial": 45.0
+   },
+   {
+    "mm": -12.71,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 105.0,
+    "axial": 0.0
+   },
+   {
+    "mm": -12.58,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 90.0,
+    "axial": 15.0
+   },
+   {
+    "mm": -10.08,
+    "kind": "ws",
+    "plane": -45.0,
+    "elev": 60.0,
+    "axial": 45.0
+   },
+   {
+    "mm": -8.19,
+    "kind": "ws",
+    "plane": -30.0,
+    "elev": 60.0,
+    "axial": 15.0
+   },
+   {
+    "mm": -5.71,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -90.0
+   },
+   {
+    "mm": -5.23,
+    "kind": "ws",
+    "plane": -30.0,
+    "elev": 15.0,
+    "axial": -30.0
+   },
+   {
+    "mm": -4.95,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 75.0,
+    "axial": -90.0
+   },
+   {
+    "mm": -4.65,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 0.0,
+    "axial": -75.0
+   },
+   {
+    "mm": -3.94,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 15.0,
+    "axial": -105.0
+   },
+   {
+    "mm": -2.18,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 60.0,
+    "axial": -60.0
+   },
+   {
+    "mm": -1.85,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 165.0,
+    "axial": -90.0
+   },
+   {
+    "mm": -1.65,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 30.0,
+    "axial": -135.0
+   },
+   {
+    "mm": -1.33,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 105.0,
+    "axial": 0.0
+   },
+   {
+    "mm": -1.2,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 90.0,
+    "axial": 15.0
+   },
+   {
+    "mm": -0.87,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 120.0,
+    "axial": -90.0
+   }
+  ]
+ },
+ "th_margin": {
+  "min": 10.096,
+  "p05": 16.477,
+  "n": 184,
+  "lt5": 0,
+  "lt10": 0,
+  "declared": 10.0
+ },
+ "elev": {
+  "overhead_ge140": {
+   "n": 12,
+   "taken": 4,
+   "evaluated": 9,
+   "contact": 5
+  },
+  "raised_120_140": {
+   "n": 15,
+   "taken": 11,
+   "evaluated": 12,
+   "contact": 1
+  },
+  "el_90_120": {
+   "n": 23,
+   "taken": 14,
+   "evaluated": 20,
+   "contact": 6
+  },
+  "el_lt90": {
+   "n": 110,
+   "taken": 95,
+   "evaluated": 104,
+   "contact": 9
+  }
+ },
+ "resample": [],
+ "mode": "fast",
+ "exact": false,
+ "secs": 4.8,
+ "source": "tools/alignment_baseline3r_rewear.py: docs/concepts/models/baseline-3r-kit.py unchanged, K.evaluate with its BASELINE conventions; fit Bench(60,160) fast"
+}

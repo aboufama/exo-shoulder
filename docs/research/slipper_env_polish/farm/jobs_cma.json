@@ -1,0 +1,58 @@
+[
+ {
+  "tag": "snp-s1",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/slipper_env_polish.py cma --label snp-s1 --out docs/research/slipper_env_polish/farm/cma_snp-s1.json --sigma 0.3 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1500 --patience 12 --seed 1 > docs/research/slipper_env_polish/farm/cma_snp-s1.log 2>&1; tail -3 docs/research/slipper_env_polish/farm/cma_snp-s1.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/cma_snp-s1*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "SN_CELL": "lead"
+  },
+  "timeout": 2400
+ },
+ {
+  "tag": "snp-s2",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/slipper_env_polish.py cma --label snp-s2 --out docs/research/slipper_env_polish/farm/cma_snp-s2.json --sigma 0.3 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1500 --patience 12 --seed 2 > docs/research/slipper_env_polish/farm/cma_snp-s2.log 2>&1; tail -3 docs/research/slipper_env_polish/farm/cma_snp-s2.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/cma_snp-s2*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "SN_CELL": "lead"
+  },
+  "timeout": 2400
+ },
+ {
+  "tag": "snp-w3",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/slipper_env_polish.py cma --label snp-w3 --out docs/research/slipper_env_polish/farm/cma_snp-w3.json --sigma 0.5 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1500 --patience 12 --seed 3 > docs/research/slipper_env_polish/farm/cma_snp-w3.log 2>&1; tail -3 docs/research/slipper_env_polish/farm/cma_snp-w3.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/cma_snp-w3*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5",
+   "SN_CELL": "lead"
+  },
+  "timeout": 2400
+ },
+ {
+  "tag": "snp-rescore",
+  "cmd": "mkdir -p docs/research/slipper_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && { CB_FOLD_MARGIN=5.5 python3 tools/slipper_env_polish.py rescore BEST docs/research/slipper_env_polish/farm/rescore_BEST_priced.json > docs/research/slipper_env_polish/farm/rescore_BEST_priced.log 2>&1 & CB_FOLD_MARGIN=5 ENVP_NOPRICE=1 python3 tools/slipper_env_polish.py rescore BEST docs/research/slipper_env_polish/farm/rescore_BEST_unpriced.json > docs/research/slipper_env_polish/farm/rescore_BEST_unpriced.log 2>&1; wait; }; tail -1 docs/research/slipper_env_polish/farm/rescore_BEST_priced.log; tail -1 docs/research/slipper_env_polish/farm/rescore_BEST_unpriced.log",
+  "out": [
+   "docs/research/slipper_env_polish/farm/rescore_*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_EXACT": "1",
+   "SN_CELL": "lead"
+  },
+  "timeout": 2400
+ }
+]

@@ -1,0 +1,131 @@
+{
+ "geom": {
+  "s_a": -110.05051791509239,
+  "s_b": -96.34606562822123,
+  "r_a": 73.25652739787824,
+  "r_b": 74.02545144231135,
+  "hb_deg": 3.9868180099929336,
+  "th0_pad": -107.2118298542113
+ },
+ "per_set": {
+  "c29:m6": {
+   "min": 0.741,
+   "i": 72,
+   "n_lt_lim": 0,
+   "lim": 0.15,
+   "adj": true,
+   "h_over_underside": 2.741,
+   "s": -98.11
+  },
+  "knee": {
+   "min": 0.958,
+   "i": 460,
+   "n_lt_lim": 0,
+   "lim": 0.15,
+   "adj": true,
+   "h_over_underside": 2.958,
+   "s": -96.41
+  },
+  "c30:m6": {
+   "min": 3.579,
+   "i": 323,
+   "n_lt_lim": 0,
+   "lim": 0.15,
+   "adj": true,
+   "h_over_underside": 5.4,
+   "s": -98.33
+  },
+  "c24:m3": {
+   "min": 6.182,
+   "i": 2,
+   "n_lt_lim": 0,
+   "lim": 1.0,
+   "adj": false,
+   "h_over_underside": -0.898,
+   "s": -96.73
+  },
+  "c25:m3": {
+   "min": 6.424,
+   "i": 452,
+   "n_lt_lim": 0,
+   "lim": 1.0,
+   "adj": false,
+   "h_over_underside": 1.703,
+   "s": -98.33
+  },
+  "boss": {
+   "min": 7.113,
+   "i": 407,
+   "n_lt_lim": 0,
+   "lim": 1.0,
+   "adj": false,
+   "h_over_underside": -0.898,
+   "s": -96.49
+  },
+  "E": {
+   "min": 10.393,
+   "i": 56,
+   "n_lt_lim": 0,
+   "lim": 1.0,
+   "adj": false,
+   "h_over_underside": -0.846,
+   "s": -90.79
+  },
+  "c23:m3": {
+   "min": 10.401,
+   "i": 34,
+   "n_lt_lim": 0,
+   "lim": 1.0,
+   "adj": false,
+   "h_over_underside": 2.111,
+   "s": -91.29
+  },
+  "c18:m3": {
+   "min": 58.695,
+   "i": 410,
+   "n_lt_lim": 0,
+   "lim": 1.0,
+   "adj": false,
+   "h_over_underside": 11.021,
+   "s": -38.89
+  },
+  "c17:m3": {
+   "min": 58.842,
+   "i": 410,
+   "n_lt_lim": 0,
+   "lim": 1.0,
+   "adj": false,
+   "h_over_underside": 7.0,
+   "s": -38.19
+  },
+  "c19:m3": {
+   "min": 59.212,
+   "i": 410,
+   "n_lt_lim": 0,
+   "lim": 1.0,
+   "adj": false,
+   "h_over_underside": 11.173,
+   "s": -38.24
+  },
+  "c16:m3": {
+   "min": 59.273,
+   "i": 22,
+   "n_lt_lim": 0,
+   "lim": 1.0,
+   "adj": false,
+   "h_over_underside": 2.973,
+   "s": -37.51
+  }
+ },
+ "n_jam": 0,
+ "n_jam_ws": 0,
+ "rows": [],
+ "rescored": {
+  "gap": 9.94,
+  "reach": 0.8056,
+  "follow": 1.0,
+  "inband14": 0.9225,
+  "inband10": 0.6072,
+  "contact": 0.005
+ }
+}

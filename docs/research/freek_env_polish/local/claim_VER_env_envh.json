@@ -1,0 +1,169 @@
+{
+ "id": "freek-oracle-route-knuckle-4r",
+ "fit": "env",
+ "wear": "envh",
+ "which": "VER",
+ "n": 270,
+ "fold_margin": 5.5,
+ "nominal": {
+  "q3max": 86.0,
+  "smhi": 7.377,
+  "smlo": 7.3286,
+  "a1max": 76.04407954926171,
+  "bk1": 32.0,
+  "bk2": 52.0,
+  "az2": 44.39783582934589,
+  "el2": 43.87209089157488,
+  "wd": 66.5965,
+  "wa": -9.6278,
+  "b3": 0.4
+ },
+ "priced": {
+  "q3max": 86.0,
+  "smhi": 7.877,
+  "smlo": 7.8286,
+  "a1max": 76.04407954926171,
+  "bk1": 32.0,
+  "bk2": 52.0,
+  "az2": 44.39783582934589,
+  "el2": 43.87209089157488,
+  "wd": 66.5965,
+  "wa": -9.6278,
+  "b3": 0.4
+ },
+ "price": {
+  "why": "cut at stop B / no K opening",
+  "th": 129.4,
+  "dK_stopB": 82.0,
+  "a1max_nominal": 76.04407954926171,
+  "a1max_priced": 76.04407954926171
+ },
+ "fit_report": {
+  "gap": 15.54,
+  "reach": 0.781,
+  "follow": 0.95,
+  "inband14": 0.8985,
+  "inband10": 0.5396,
+  "contact": 0.0349,
+  "mode": "fast"
+ },
+ "static": {
+  "gap": 15.45,
+  "reach": 0.781,
+  "follow": 0.95,
+  "inband14": 0.8994,
+  "inband10": 0.5429,
+  "contact": 0.0349,
+  "near": 15.45,
+  "near1_poses": 0,
+  "min_mm": 1.393
+ },
+ "recomputed": {
+  "gap": 15.46,
+  "reach": 0.781,
+  "follow": 0.95,
+  "inband14": 0.8994,
+  "contact": 0.0349,
+  "n_ws": 210,
+  "n_clip": 60,
+  "ws_taken": 164,
+  "contact_poses": 8
+ },
+ "contact_poses": 8,
+ "contact_depth_mm": 17.21,
+ "overhead140_ws": [
+  5,
+  15
+ ],
+ "connected": {
+  "nodes": 1137,
+  "connected": 1137,
+  "islands": 0,
+  "fresh": {
+   "poses": 210,
+   "connected": 169
+  },
+  "refused": {
+   "rule": 0,
+   "jump": 0,
+   "branch": 0
+  },
+  "dropped": 0,
+  "dropped_idx": [],
+  "gap": 15.45,
+  "near": 15.45,
+  "reach": 0.781,
+  "follow": 0.95,
+  "inband14": 0.8994,
+  "contact": 0.0349,
+  "ws_taken": 164
+ },
+ "margins": {
+  "one_reading_min": 6.81,
+  "one_lt5": 0,
+  "family_min": 0.1,
+  "family_lt5": 3,
+  "state_counts": {
+   "0": 154,
+   "1": 50,
+   "2": 17
+  }
+ },
+ "j3stop": {
+  "taken": 221,
+  "engaged": 17,
+  "q3_engaged": [
+   86.0,
+   86.0
+  ],
+  "phi_engaged": [
+   10.98,
+   10.98
+  ],
+  "q3own_engaged": [
+   96.98,
+   96.98
+  ],
+  "q3_other_max": 80.91,
+  "q3own_other_max": 92.77,
+  "q3own_all_max": 96.98,
+  "phi_all": [
+   -15.44,
+   13.55
+  ]
+ },
+ "stop_refusal": {
+  "refused": 3,
+  "kit_contacts": 1,
+  "rows": [
+   {
+    "i": 245,
+    "kind": "ws",
+    "plane": 110.28022766113281,
+    "elev": 135.11404418945312,
+    "axial": -93.03156280517578,
+    "kit_min_mm": -0.55
+   },
+   {
+    "i": 251,
+    "kind": "ws",
+    "plane": 139.5791015625,
+    "elev": 120.53844451904297,
+    "axial": -86.41807556152344,
+    "kit_min_mm": 0.2
+   },
+   {
+    "i": 263,
+    "kind": "ws",
+    "plane": 91.25128173828125,
+    "elev": 158.85690307617188,
+    "axial": -95.71112823486328,
+    "kit_min_mm": null
+   }
+  ],
+  "gap_refusals_as_contacts": 15.87
+ },
+ "gap": 15.45,
+ "near": 15.45,
+ "secs": 84.7
+}

@@ -1,0 +1,108 @@
+{
+ "id": "sidecar-longdyad-knuckle-3r",
+ "wear": "bench",
+ "exact": true,
+ "fit_fast": 10.3,
+ "frozen": 18.91,
+ "n": 470,
+ "mode": "exact",
+ "poses_taken": 375,
+ "poses_K_open": 123,
+ "poses_K_on_stopA": 252,
+ "law": {
+  "k_slope_deg_per_deg": 1.6232,
+  "fit_resid_max_deg": 0.0,
+  "dK_span": [
+   -37.8,
+   0.0
+  ],
+  "q2_span": [
+   -27.13,
+   87.49
+  ]
+ },
+ "frame_consistency_max": {
+  "K_axis_1a_vs_1b": 2.54e-16,
+  "K_point": 0.0,
+  "J2_axis": 1.28e-12,
+  "J3_axis": 3.98e-07,
+  "J3_point_mm": 5.31e-06,
+  "pin_a_point_mm": 4.78e-12,
+  "pin_a_axis": 2.29e-16,
+  "pin_b_point_mm": 5.05e-06,
+  "pin_b_axis": 1.92e-16
+ },
+ "K_free": {
+  "mobility": [
+   4
+  ],
+  "chain_rank": [
+   5
+  ],
+  "hubs_plus_K_known_sigma_min": {
+   "min": 0.3315,
+   "p5": 0.4454,
+   "median": 0.5197,
+   "p95": 0.5296,
+   "max": 0.5337
+  },
+  "hubs_plus_K_known_cond": {
+   "min": 1.8034,
+   "p5": 1.8407,
+   "median": 1.9107,
+   "p95": 2.1679,
+   "max": 2.8661
+  },
+  "hubs_only_sigma_min": {
+   "min": 0.0,
+   "p5": 0.0,
+   "median": 0.0,
+   "p95": 0.0,
+   "max": 0.0
+  }
+ },
+ "K_slaved": {
+  "mobility": [
+   3
+  ],
+  "hubs_sigma_min": {
+   "min": 0.3098,
+   "p5": 0.3105,
+   "median": 0.5532,
+   "p95": 0.5838,
+   "max": 0.5855
+  },
+  "hubs_cond": {
+   "min": 1.5895,
+   "p5": 1.5922,
+   "median": 1.691,
+   "p95": 2.7136,
+   "max": 2.8049
+  },
+  "poses_sigma_lt_0_05": 0,
+  "passive_gain": {
+   "min": 1.3845,
+   "p5": 1.3908,
+   "median": 1.5058,
+   "p95": 2.6409,
+   "max": 2.8442
+  },
+  "knee_pin_gain": {
+   "min": 0.1198,
+   "p5": 0.1231,
+   "median": 0.4272,
+   "p95": 1.404,
+   "max": 2.3415
+  }
+ },
+ "worst_pose": {
+  "pose": 345,
+  "kind": "ws",
+  "sigma_min": 0.3098,
+  "dK": -6.49,
+  "q2": -7.84,
+  "knee_ang": 146.14
+ },
+ "reference": "skin-normal-3r-pin-knee (verified 2026-10-16): hubs_only sigma_min >= 0.39, cond <= 2.3, mobility 3",
+ "secs": 274.3
+}

@@ -1,0 +1,621 @@
+{
+ "parts": [
+  {
+   "file": "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member, carried directly by the scapula handler at the hub ring)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    20.3,
+    16.0,
+    21.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|J1 lower plate keep-out (O20 x 3, link 1a)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.1,
+    10.3,
+    19.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|link 1a strap keep-out (8 x 3 mm Ti, J1 -> K: the full CAD's line/arc chain, climb from J1's skirt + 0.15 on a 60-deg ramp, R2 bends)",
+   "valid": true,
+   "solids": 1,
+   "faces": 1156,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.318,
+   "bbox_mm": [
+    14.2,
+    10.4,
+    12.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|K lower plate keep-out (O20 x 3, link 1a) with the K stop slots (an opposed pair) (r 7.75 mm, 3.1 wide, 62.8 deg of travel + the dowel; its ends = the stops)",
+   "valid": true,
+   "solids": 1,
+   "faces": 8400,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.727,
+   "bbox_mm": [
+    19.9,
+    9.4,
+    20.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.04,
+   "bbox_mm": [
+    4.6,
+    6.3,
+    3.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.04,
+   "bbox_mm": [
+    4.6,
+    6.3,
+    3.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|K upper boss + cap keep-out (O20, F+3.15..F+12.25, link 1b: NO clock spring - K is held both ways by the desmo drive, slaved to q2, never read)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    21.8,
+    15.2,
+    20.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)",
+   "valid": true,
+   "solids": 1,
+   "faces": 260,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.5,
+   "bbox_mm": [
+    15.9,
+    13.5,
+    24.4
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 116.4 deg of travel + the dowel; its ends = the stops)",
+   "valid": true,
+   "solids": 1,
+   "faces": 8568,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.768,
+   "bbox_mm": [
+    19.1,
+    17.6,
+    17.4
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.04,
+   "bbox_mm": [
+    5.3,
+    5.8,
+    5.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2; the rotor that carries the drive lobe)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.854,
+   "bbox_mm": [
+    21.9,
+    21.3,
+    21.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 788,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.584,
+   "bbox_mm": [
+    23.6,
+    64.9,
+    34.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J3 upper boss + cap keep-out (O20, F+4.15..F+12.25, link 2; above the J3 stop groove ring)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.541,
+   "bbox_mm": [
+    20.9,
+    21.3,
+    13.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J3 upper boss groove ring keep-out (O20 x 1, F+3.15..F+4.15, link 2: the J3 stop's arc groove 2.1 wide at r 7.5 over 250.0 deg; its ends = the stops at q3' -111.90 / 122.74 deg)",
+   "valid": true,
+   "solids": 1,
+   "faces": 11484,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.245,
+   "bbox_mm": [
+    19.9,
+    19.7,
+    6.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|J3 lower plate keep-out (O20 x 3, member 3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.941,
+   "bbox_mm": [
+    20.2,
+    20.2,
+    8.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 116.7 deg, r 6.30..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)",
+   "valid": true,
+   "solids": 1,
+   "faces": 7456,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.082,
+   "bbox_mm": [
+    16.0,
+    7.1,
+    11.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|drive cap-ring roof keep-out (the sector over the groove, F+1.61..F+3.65, one with hub 2's upper boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 7452,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.167,
+   "bbox_mm": [
+    16.2,
+    7.4,
+    12.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "dk|drive bell crank boss keep-out (O10 x 6 mm, bore O3.2 on the O3 pivot pin, two MR63ZZ 3x6x2.5 inside; underside 66.84 mm from GH = link 1b's highest top under its footprint + 0.15; the model's 63.29)",
+   "valid": true,
+   "solids": 1,
+   "faces": 512,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.422,
+   "bbox_mm": [
+    11.6,
+    10.9,
+    11.6
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti: straight run 19.4 mm, tangent arc r_c 16.18 about hub K's axis at radius 63.16 from GH, ending on the tip plate clear of the slot)",
+   "valid": true,
+   "solids": 1,
+   "faces": 428,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.924,
+   "bbox_mm": [
+    24.3,
+    17.2,
+    42.0
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "dk|drive crank tip plate keep-out (7.04 x 3.32 x 2.5 Ti, R0+1.65: the stage-2 slot 1.52 x 3.72 wire-EDM'd through it on the nose's path; closed end = stop A, far end = stop B at dK 46.5)",
+   "valid": true,
+   "solids": 1,
+   "faces": 752,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.037,
+   "bbox_mm": [
+    5.3,
+    3.5,
+    7.4
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "dk|drive crank short arm keep-out (6.8 x 3 x 1.5 Ti, crank axis -> the stage-1 pin at a_s 9.30, top 0.15 + the 0.29 axial drift under the cap ring)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.031,
+   "bbox_mm": [
+    6.4,
+    6.7,
+    5.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "dk|drive stage-1 pin keep-out (ISO 8734 1.5 m6 440C, crowned, pressed through the short arm along u2, 1.11 into the groove, tip 0.10 + the 0.29 axial drift under the roof)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.005,
+   "bbox_mm": [
+    2.7,
+    3.1,
+    3.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|drive nose boss keep-out (link 1a: O5 x 3 Ti radial at the seat C0, r_c 16.18 from hub K's axis, 3.68 outside hub K's O20)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.059,
+   "bbox_mm": [
+    5.5,
+    4.2,
+    5.4
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|drive nose boss root keep-out (link 1a: 4 x 3 Ti from hub K's rim to the boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 156,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.076,
+   "bbox_mm": [
+    6.2,
+    5.7,
+    7.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1a|drive nose dowel keep-out (ISO 8734 1.5 x 5 m6 440C, pressed radially in link 1a's boss, C0-1..C0+4.00: runs in the crank's slot, 0.15 under the plate top)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.009,
+   "bbox_mm": [
+    2.6,
+    5.2,
+    2.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|drive crank pivot pin keep-out (O3 h6 hardened, pressed in link 1b's strap 60.1..63.1, through the boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.097,
+   "bbox_mm": [
+    8.6,
+    12.7,
+    8.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1b|drive crank pin clip keep-out (DIN 6799 RS 2.3, O6 x 0.9 over the boss top + 0.15)",
+   "valid": true,
+   "solids": 1,
+   "faces": 512,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.019,
+   "bbox_mm": [
+    5.8,
+    4.4,
+    5.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to 2.75 at the boss, top capped at the boss top tr+tp under the knee's reach)",
+   "valid": true,
+   "solids": 1,
+   "faces": 764,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 2.028,
+   "bbox_mm": [
+    10.9,
+    85.2,
+    14.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|E boss = pin a lower plate (O12 x 2.75 mm, tr..tr+tp, member 3)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.311,
+   "bbox_mm": [
+    12.3,
+    12.3,
+    5.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee link keep-out (flat Ti bar 36.4 x 10 x 2.75 mm, pins a, b 6 mm from its ends, tr+tp+0.5)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.0,
+   "bbox_mm": [
+    36.4,
+    11.5,
+    9.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|arm pad = pin b lower plate (O12 x 2.75 mm, tr..tr+tp, arm-fixed on the cuff)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.311,
+   "bbox_mm": [
+    12.3,
+    12.1,
+    5.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee stop tooth keep-out (2.4 x 2 mm, hangs 4.75 mm from the knee link top behind pin a; its face meets the E strap's side at knee angle 154.78 deg)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.023,
+   "bbox_mm": [
+    3.7,
+    3.8,
+    5.4
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee stop web keep-out (knee link level, 2.75 mm, joins the tooth to the knee link's back edge)",
+   "valid": true,
+   "solids": 1,
+   "faces": 12,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.072,
+   "bbox_mm": [
+    5.2,
+    10.4,
+    4.9
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee link bearing boss a keep-out (O9 x 5.5 mm on the knee link, z0..z0+5.5: 2 x MR63ZZ 3x6x2.5 in a J6 housing with a 0.5 mm shoulder between them; pin a ISO 8734 O3 m6 440C)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.349,
+   "bbox_mm": [
+    9.7,
+    10.0,
+    7.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l4|knee link bearing boss b keep-out (O9 x 5.5 mm on the knee link, z0..z0+5.5: 2 x MR63ZZ 3x6x2.5 in a J6 housing with a 0.5 mm shoulder between them; pin b ISO 8734 O3 m6 440C)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.349,
+   "bbox_mm": [
+    9.7,
+    10.0,
+    7.7
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|pin a retainer keep-out (O6 x 0.9 mm: DIN 6799 RS 2.3 e-clip + pin end over a 0.1 mm shim on the bearing pair; pin a pressed H7/m6 in the E boss)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.025,
+   "bbox_mm": [
+    6.1,
+    6.1,
+    2.4
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|pin b retainer keep-out (O6 x 0.9 mm: DIN 6799 RS 2.3 e-clip + pin end over a 0.1 mm shim on the bearing pair; pin b pressed H7/m6 in the arm pad)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.025,
+   "bbox_mm": [
+    6.0,
+    6.0,
+    2.5
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l3|J3 stop dowel (ISO 8734 2 m6 x 5, 440C grade, ground to 3.90; pressed in a reamed O2.000 -0.005/0 hole through hub 3's lower plate at r 7.5, F+0.10..F+4.00: 0.85 mm into link 2's groove, tip 0.15 off its floor; stops J3's own angle q3' at -111.90 / 122.74 deg)",
+   "valid": true,
+   "solids": 1,
+   "faces": 256,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 0.012,
+   "bbox_mm": [
+    2.5,
+    2.8,
+    4.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|pad mount to BOTTOM (proxy) (2.75 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)",
+   "valid": true,
+   "solids": 1,
+   "faces": 44,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.633,
+   "bbox_mm": [
+    25.2,
+    34.0,
+    16.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue) + cut square to the arm 19.8 mm distal of pin b, clear of the knee sweep",
+   "valid": true,
+   "solids": 1,
+   "faces": 4096,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 19.059,
+   "bbox_mm": [
+    42.4,
+    213.9,
+    27.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)",
+   "valid": true,
+   "solids": 1,
+   "faces": 7954,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 15.223,
+   "bbox_mm": [
+    86.8,
+    81.7,
+    45.0
+   ],
+   "level": "L1 mesh"
+  }
+ ],
+ "level": "L1",
+ "all_ok": true
+}

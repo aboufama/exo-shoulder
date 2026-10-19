@@ -1,0 +1,78 @@
+{
+ "id": "pinknee-scapular-relay-4r",
+ "name": "Pin-knee 3R on a spring-centred scapular relay J0 (H1 host unchanged, O20 J0 on the scapula, 4 joints, 0 passive translations)",
+ "lens": "round101:scapular spare relay (Keemink 2018 redundant 4R) on a verified host; 4 DOF, the user prefers 3",
+ "family": "redundant 4R with a scapular spare on a verified 3-active host (skin-normal pin-knee chain)",
+ "active_dof": 4,
+ "passive_dof": 2,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": "2026-10-17T17:29:15Z",
+ "t_screened": "2026-10-17T18:30:40Z",
+ "reach": 0.675,
+ "follow": 0.9167,
+ "inband14": 0.9058,
+ "inband10": 0.5499,
+ "contact": 0.0523,
+ "gap": 31.06,
+ "v_reach": 0.675,
+ "v_follow": 0.9167,
+ "v_inband14": 0.9058,
+ "v_inband10": 0.5499,
+ "v_gap": 31.06,
+ "n_configs": 35,
+ "best_params": {
+  "azu": 250,
+  "a0": 40,
+  "T": 40
+ },
+ "best_k": 24,
+ "verdict": "DEAD at gate 0 (Bench(60,160) fast, kit-honest host checks + the relay's own hub 0 / link 0 metal): best 31.06 (azu 250 / a0 40, J0 axis outside the seat rule), best seat-rule placement 33.33 (azu 280 / a0 25); the host H1 alone scores 23.64 on the same bench. Every placement measured (31 configs over the whole a0 20-85 / azimuth 0-360 disc, T 20-60, stops 5-12) LOSES 7.4-150 points to the host: the J0 hub and link 0 cannot be placed on back / acromion-top skin without crossing hub 2's orbit about J1. Gate 0 kill line 17.5: not reached; a frozen exact wear cannot recover 13+ points (frozen loses points on every row on file). A geometric impossibility at the host's seats, not a tuning miss: the convergence gate is not run (no sweep can move hub 2's orbit). AUDIT (death STANDS): with no J0 metal at all and no seat rule the best of 40 placements is 18.30 fast (> 17.5 before any frozen-exact loss); the real metal at those placements scores 65-176.",
+ "limiter": "hub 0 / link 0 vs hub 2's orbit. Hub 2 orbits J1 at a1 = 41 deg; over the 898 closing poses (1432-node envelope grid + fit clips, host H1 at q0 = 0) its azimuth about J1 covers every back / acromion-top direction (10-deg bins: 0-110 and 280-360 all populated; free sector 120-270 = in front of the acromion). A J0 hub needs a0 >= ~21 deg from J1 (hub 1 clearance) and either a0 <= a1 - 21 = 20 deg (inside the orbit: empty interval) or a0 >= 62 with link 0 crossing the orbit (L0-hub2 21-61 jams, L0-L1 28-57 jams, Bench(60,160) fast); placements inside the orbit's free sector are in front (seat rule x <= 0.2 / az <= 135 fails) or at the cap pole (T_eff cut to 15-16 deg by the J1 seat rule, 0-2 relayed poses taken, L1-hub0 6-12 jams). Back cell (proposer a0 35 phi 90): hub0-hub2 56-64 jams, gap 171-175; cap cell (a0 25 phi 60): L1-hub0 70 jams, gap 114.",
+ "note": "Model wraps skin-normal-3r-pin-knee.py H1 unchanged (seed VModel checks, knee window, slide tol, closure, jam rule) with J0 = tools/spare_flood Cfg clamp; whole chain = host chain for Q' = Rc^T Q mapped back with Rc; hub 0 (O20, member 8, scapula-fixed) + link 0 (12 x 3, member 0, rides at hub 1's UP level over link 1, hub 0's UP level) fitted like the host's parts; part checks hub0 / L0 vs every non-adjacent body (1 mm), L0-L1 adjacent 0.15. Clip frames: q0 path-tracked at 10 fps; ws poses: pose-local state + full-grid flood (1432 nodes, transit restricted to nodes where the host closes WITH its knee window). Lead's question (hub levels on relay poses): moot - the relay takes 0-7 ws poses at any collision-free-ish placement; host levels stay f 49.9-51.9 / 60.6-61.6 / 75.7-77.2, hub 0 at 50-98 mm (cap pole 50.1, front 75-78, back a0 >= 62 74-98). Knee window on relayed taken poses: inside [30.5, 149.5] (relay_ang 126.7-144.4 in the back-cell check). min th margin of taken poses 5.02. Overhead 0-1/12 (Bench(60,160)) everywhere. Convergence gate (score points): gain over the 2nd half 2.70, over the last third 0.49, top-5 spread 1.05 - NOT converged on the first criterion; the kill rests on gate 0 (best 31.06 vs kill line 17.5, 13.6 gap points short) and on the measured placement impossibility, not on convergence.",
+ "doc": "docs/concepts/pinknee-scapular-relay-4r.md",
+ "model_file": "docs/concepts/models/pinknee-scapular-relay-4r.py",
+ "host_same_bench": {
+  "gap": 23.64,
+  "reach": 0.7,
+  "follow": 0.95,
+  "inband14": 0.8979,
+  "contact": 0.0343,
+  "why": {
+   "fold": 36,
+   "slide": 5,
+   "skin": 6,
+   "parts": 4
+  }
+ },
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 2,
+  "moving_bodies": 6,
+  "joints": 6,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 6,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "notes": "pin-knee H1 + hub 0 (O20, J0, spring-centred double-leg torsion spring, own-angle dowel stops) + link 0 (12 x 3 Ti). Complexity per catalogue 31.5 (clamp)."
+ },
+ "complexity": 31.5,
+ "gate": "2nd half +2.70 score, last third +0.49, top-5 spread 1.05 (31 configs; gate 0 kill, not a converged-sweep kill)",
+ "audit": {
+  "t": "2026-10-17T19:21:29Z",
+  "verdict": "death STANDS",
+  "refuted": false,
+  "reproduced": "claimed best azu 250 / a0 40 / T 40 reproduced exactly on Bench(60,160) fast: 31.06 (reach 0.675, follow 0.9167, ib14 0.9058, contact 0.0523); host H1 alone 23.64 in the host's own model (current checks; the row's older 20.63 predates them)",
+  "ghost_bound": "relay with NO hub 0 / link 0 metal and NO seat rule, T 60, 40 placements a0 15-60 x azu 0-315: best 18.30 (azu 180 / a0 45, a front seat), best seat-legal 18.62 (azu 45 / a0 35); proposer cells as ghosts: back T40 20.18, back T60 20.56, cap T40 21.02; host retune +-10% (ang_min 27.4, lE, lc) does not move it (18.61-20.14). The relay recovers 26-29 of the host's 36 fold losses kinematically but only 5-10 ws poses survive the host's own knee/slide (+6-9), skin (+3-7) and L1-L2 (+2-5) checks.",
+  "real_at_ghost_best": "same placements with the real hub 0 / link 0: 65.03-176.2 (hub0-hub2 43-45, L1-hub0 53, L2-hub0 14-37, L0-L1 24-27 jams)",
+  "gate": "convergence gate reproduced: +2.70 over the 2nd half, +0.49 over the last third, top-5 spread 1.05 (not converged on criterion 1); superseded by the ghost bound, which is an upper bound over every placement that no further placement search can beat",
+  "criterion_note": "the template's 'within 10 of 68.93' test is stale (the claim's own 31.06 already beats it); judged on the round-101 gate 0 kill line 17.5",
+  "files": [
+   "docs/concepts/verify/pinknee-scapular-relay-4r-audit.py",
+   "docs/concepts/verify/pinknee-scapular-relay-4r-audit.results.json"
+  ]
+ }
+}

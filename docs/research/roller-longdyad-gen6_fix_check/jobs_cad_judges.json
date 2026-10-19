@@ -1,0 +1,30 @@
+[
+ {
+  "tag": "chk-cad-r6-step1",
+  "design": [
+   "user_roller_longdyad"
+  ],
+  "cmd": "python3 -W ignore judge/part_contact.py user_roller_longdyad --step 1 --jobs 8 2>&1 | tail -3",
+  "out": [
+   "pipeline/full-exo/designs/user_roller_longdyad/judge/part_contact.json"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "chk-cad-r16-step1",
+  "design": [
+   "user_roller_longdyad"
+  ],
+  "cmd": "python3 -W ignore judge/workspace.py user_roller_longdyad --step 1 --jobs 8 2>&1 | tail -3",
+  "out": [
+   "pipeline/full-exo/designs/user_roller_longdyad/judge/workspace.json"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1"
+  },
+  "timeout": 3000
+ }
+]

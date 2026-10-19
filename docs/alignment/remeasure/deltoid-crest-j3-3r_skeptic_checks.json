@@ -1,0 +1,211 @@
+{
+ "id": "deltoid-crest-j3-3r",
+ "t": "2026-10-18",
+ "by": "skeptic",
+ "heldleak": {
+  "method": "held dump vs tools/concept_bench._poses_all() POSE 5-D vectors (round 1e-4), CB._select(60,160) search and CB._select(110,360) claim bench; gap recomputed with the bench gap_of on per-pose taken / contact / ns / nib",
+  "all": {
+   "gap": 50.05,
+   "n": 470
+  },
+  "minus_search_index": {
+   "gap": 53.98,
+   "n": 410,
+   "removed": 60
+  },
+  "minus_search_vector": {
+   "gap": 51.09,
+   "n": 398,
+   "removed": 72,
+   "drop_vs_bench": 3.23
+  },
+  "minus_claimbench_vector": {
+   "gap": 46.24,
+   "n": 438,
+   "removed": 32,
+   "kind": "clip",
+   "taken": 27,
+   "contact": 2
+  },
+  "minus_both_vector": {
+   "gap": 49.4,
+   "n": 383,
+   "drop_vs_bench": 1.54
+  },
+  "held_internal_duplicate_vectors": 13,
+  "held_watch": 6.0
+ },
+ "s10_flood_rerun": {
+  "tool": "tools/alignment_kit_flood.py unchanged, params + poses from docs/concepts/verify/deltoid-crest-j3-3r_skeptic_frozen_s10.json",
+  "flood": {
+   "ws_taken_static": 218,
+   "ws_connected": 212,
+   "islands": 6,
+   "ws_connected_grid_edges": 76,
+   "edges": "kNN-8 by frame angle (grid-neighbour count kept for reference)",
+   "reach_static": 0.6056,
+   "reach_connected": 0.5889,
+   "island_poses": [
+    [
+     -15.0,
+     90.0,
+     45.0
+    ],
+    [
+     0.0,
+     90.0,
+     45.0
+    ],
+    [
+     15.0,
+     90.0,
+     30.0
+    ],
+    [
+     30.0,
+     90.0,
+     30.0
+    ],
+    [
+     45.0,
+     90.0,
+     30.0
+    ],
+    [
+     60.0,
+     90.0,
+     15.0
+    ]
+   ]
+  },
+  "lost_points": 1.67,
+  "th_margin_min_taken": 5.497
+ },
+ "s10_island_probe": {
+  "method": "same frame-angle matrix as extras(); edge = verifier edge test (K._slerp_frames 2 deg, ZC.build closure at the 5 deg margin, axis step <= 10 deg)",
+  "islands_in_knn8_of_connected_nodes": 0,
+  "per_island": [
+   {
+    "pose": [
+     -15,
+     90,
+     45
+    ],
+    "nearest_connected": [
+     -30,
+     60,
+     75
+    ],
+    "deg": 41.9,
+    "closure": 1.0,
+    "max_axis_step": 1.63,
+    "ok_edges_of_40_nearest_connected": 40
+   },
+   {
+    "pose": [
+     0,
+     90,
+     45
+    ],
+    "nearest_connected": [
+     15,
+     60,
+     60
+    ],
+    "deg": 38.2,
+    "closure": 1.0,
+    "max_axis_step": 0.65,
+    "ok_edges_of_40_nearest_connected": 40
+   },
+   {
+    "pose": [
+     15,
+     90,
+     30
+    ],
+    "nearest_connected": [
+     15,
+     60,
+     60
+    ],
+    "deg": 42.2,
+    "closure": 1.0,
+    "max_axis_step": 1.44,
+    "ok_edges_of_40_nearest_connected": 36
+   },
+   {
+    "pose": [
+     30,
+     90,
+     30
+    ],
+    "nearest_connected": [
+     15,
+     60,
+     60
+    ],
+    "deg": 41.9,
+    "closure": 1.0,
+    "max_axis_step": 1.84,
+    "ok_edges_of_40_nearest_connected": 36
+   },
+   {
+    "pose": [
+     45,
+     90,
+     30
+    ],
+    "nearest_connected": [
+     30,
+     60,
+     60
+    ],
+    "deg": 41.9,
+    "closure": 1.0,
+    "max_axis_step": 1.84,
+    "ok_edges_of_40_nearest_connected": 36
+   },
+   {
+    "pose": [
+     60,
+     90,
+     15
+    ],
+    "nearest_connected": [
+     60,
+     45,
+     30
+    ],
+    "deg": 47.3,
+    "closure": 1.0,
+    "max_axis_step": 1.79,
+    "ok_edges_of_40_nearest_connected": 30
+   }
+  ],
+  "reading": "with symmetric edges the s10 config has 0 islands; the directed kNN-8 flood misses poses whose nearest connected node has 8 closer taken neighbours"
+ },
+ "claim_held_flood_rerun": {
+  "flood": {
+   "ws_taken_static": 207,
+   "ws_connected": 207,
+   "islands": 0,
+   "ws_connected_grid_edges": 59,
+   "edges": "kNN-8 by frame angle (grid-neighbour count kept for reference)",
+   "reach_static": 0.575,
+   "reach_connected": 0.575,
+   "island_poses": []
+  },
+  "th_margin_min_taken": 5.313
+ },
+ "s10_near_touch_from_dump": {
+  "plain": 40.17,
+  "near1": 50.7,
+  "near2": 84.96,
+  "near3": 135.23,
+  "poses": [
+   16,
+   56,
+   121
+  ]
+ }
+}

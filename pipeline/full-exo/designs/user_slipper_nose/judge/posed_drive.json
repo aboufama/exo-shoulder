@@ -1,0 +1,92 @@
+{
+ "drive lobe follower roller | D9-02": [
+  -0.038,
+  -1.17
+ ],
+ "drive nose dowel | D8-02a": [
+  -0.025,
+  0.0
+ ],
+ "D9-01 | D8-02a": [
+  0.108,
+  0.0
+ ],
+ "D9-01 | D9-02": [
+  0.379,
+  -15.75
+ ],
+ "D9-01 | D8-02b": [
+  0.086,
+  0.0
+ ],
+ "D9-01 | D8-03": [
+  0.123,
+  0.0
+ ],
+ "D9-01 | J2 cap": [
+  1.339,
+  0.0
+ ],
+ "D9-01 | K clock-spring cap": [
+  2.882,
+  0.0
+ ],
+ "drive lobe follower roller | J2 cap": [
+  0.676,
+  0.0
+ ],
+ "drive lobe follower roller | D8-03": [
+  0.552,
+  0.0
+ ],
+ "drive follower pin | D9-02": [
+  1.422,
+  -1.17
+ ],
+ "drive follower inner-ring shim | D9-02": [
+  0.783,
+  -29.31
+ ],
+ "drive nose dowel | K clock-spring cap": [
+  5.103,
+  0.0
+ ],
+ "drive nose dowel | D8-02b": [
+  3.885,
+  0.0
+ ],
+ "D8-02a | D8-02b": [
+  0.15,
+  -29.31
+ ],
+ "D8-02a | K clock-spring cap": [
+  0.2,
+  -29.31
+ ],
+ "D8-02a | D8-01": [
+  0.15,
+  -29.31
+ ],
+ "drive crank pivot pin clip | D9-01": [
+  0.52,
+  -29.31
+ ],
+ "D9-02 | D8-02b": [
+  3.615,
+  -15.75
+ ],
+ "drive crank bearing 1 | D8-02b": [
+  0.158,
+  -29.31
+ ],
+ "contact drive lobe follower roller | D9-02 (driven frames: min, max of the per-frame min)": [
+  42,
+  -0.042,
+  0.001
+ ],
+ "contact drive nose dowel | D8-02a (driven frames: min, max of the per-frame min)": [
+  42,
+  -0.026,
+  -0.001
+ ]
+}

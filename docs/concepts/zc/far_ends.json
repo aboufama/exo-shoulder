@@ -1,0 +1,70 @@
+{
+ "bench": "Bench(60,160) fast, shape fitted there",
+ "note": "same axis LINES as the best (fold law identical: kin_ws equal), hub moved to the other end of the J2 / J3 line",
+ "rows": [
+  {
+   "tag": "best",
+   "kin_ws": 0.6813,
+   "gap": 30.04,
+   "near": 39.73,
+   "reach": 0.6438,
+   "follow": 0.9333,
+   "inband14": 0.891,
+   "contact": 0.0185,
+   "honest": true,
+   "hub_F": {
+    "hub1": 51.0,
+    "hub2": 58.37,
+    "hub3": 71.0
+   }
+  },
+  {
+   "tag": "J2 far end",
+   "kin_ws": 0.6813,
+   "gap": 343.68,
+   "near": 243.68,
+   "reach": 0.2,
+   "follow": 0.6,
+   "inband14": 0.0986,
+   "contact": 0.5854,
+   "honest": false,
+   "hub_F": {
+    "hub1": 51.0,
+    "hub2": 400.0,
+    "hub3": 71.0
+   }
+  },
+  {
+   "tag": "J3 far end",
+   "kin_ws": 0.6813,
+   "gap": 400.36,
+   "near": 300.36,
+   "reach": 0.0,
+   "follow": 0.4,
+   "inband14": 0.2018,
+   "contact": 0.8554,
+   "honest": false,
+   "hub_F": {
+    "hub1": 51.0,
+    "hub2": 58.37,
+    "hub3": 400.0
+   }
+  },
+  {
+   "tag": "J2 and J3 far ends",
+   "kin_ws": 0.6813,
+   "gap": 461.9,
+   "near": 361.9,
+   "reach": 0.0,
+   "follow": 0.05,
+   "inband14": 0.0444,
+   "contact": 0.9634,
+   "honest": false,
+   "hub_F": {
+    "hub1": 51.0,
+    "hub2": 400.0,
+    "hub3": 400.0
+   }
+  }
+ ]
+}

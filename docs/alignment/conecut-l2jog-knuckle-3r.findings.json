@@ -1,0 +1,86 @@
+[
+ {
+  "key": "NEW-hidden-lift",
+  "level": "gamed",
+  "reason": "The claim's only gain over the lead is a part the stated build does not make. The row says the design is a planform waist cut into link 2's flat profile before bending (cx +0). The model (jog_disp, docs/concepts/models/conecut-l2jog-knuckle-3r.py) moves link 2's rows in the plate plane and keeps each row's height. Link 2's skin-fitted underside at the binder is not flat: rows 0-3 sit at r 69.55 / 68.43 / 68.86 / 69.20 mm from GH, so edge row 0 is 1.1 mm higher than row 1. The moved edge therefore rides up to 0.95 mm above the original underside: an unstated radial lift of the edge zone. The verifier's true cut (each moved sample placed on the original section) removes all of the gain. I re-read all three per-pose dumps with tools/alignment_paired.py. Bench (exact Bench(110,360), frozen), plain / +0.1 / +0.2 / +0.35 mm probe: model 18.29 / 18.29 / 18.29 / 18.83; lead 18.29 / 18.83 / 18.83 / 19.37; true cut 18.29 / 18.83 / 18.83 / 19.37 (= the lead). Held: model 22.44 at every probe level; lead and true cut 22.38. Pose 139: 0.602 mm modelled, 0.073 mm as a true cut (lead 0.072). Held contact depth: model 58.09 mm, true cut 60.09 mm, lead 60.97 mm. Why this is 'gamed', not 'watch': round 15 ranks claims at the +0.2 mm probe (docs/concepts/ROUNDS.md line 4604: 'every claim at a rule-floor clearance carries a +0.1 / +0.2 mm tolerance probe and is ranked at the probe'). At that metric the row's recorded number (frozen_exact.probe02 18.28) puts the design 0.54 ahead of the lead (18.83). Under the same harness held out, it is 0.06 behind the lead at every probe level (22.44 vs 22.38). Built as stated, it reads exactly the lead's numbers on both wears. So the probe number ranks the design above a design that is at least as good for the wearer, and the advantage is a modelling artifact. This does not touch the plain v_gap: 18.28 stands either way (the true cut is also 18.28), and no pose changes status. Action: record the probe as the true cut's (18.83 / 18.83 / 19.37) and mark the hardening refuted on the row and in the doc's lessons (3) and (4). If the lift is wanted, model it explicitly as a machined raised edge zone with its own in-band cost. Proposed catalogue entry M6: 'a sample move the stated manufacturing operation cannot make'.",
+  "evidence": "docs/alignment/remeasure/conecut-l2jog-knuckle-3r_bench_perpose.json, _held_perpose.json, conecut-l2jog-knuckle-3r+truecut_bench_perpose.json, +truecut_held_perpose.json, conecut-knee-knuckle-3r_bench_perpose.json, _held_perpose.json (probes recomputed by this audit from the dumps); docs/concepts/verify/conecut-l2jog-knuckle-3r.py (true_disp); rows/conecut-l2jog-knuckle-3r.json verification.truecut; ROUNDS.md 4604"
+ },
+ {
+  "key": "R2",
+  "level": "watch",
+  "reason": "The row and the board still show refuted records. The row's frozen_exact carries p139 0.602 and probe01 / probe02 18.28, and lead_same_protocol carries 18.83 next to them as the lead's number. The verifier refuted these as the stated cut (true cut 139 0.073, probes 18.83, verification.truecut). The verdict string on the row and on morphs.json still opens 'removes the lead's only +0.1 / +0.2 mm probe flip'. The doc keeps lessons (3) 'waists, not jogs' and (4) 'planform cheaper than radial', which the verifier showed are mis-attributed: the waist is an edge-only lift. The claim 'far edge kept' is also wrong. y01 is normalised over the whole bar, so the far row moves +0.18-0.26 mm and the narrowing is about 1.33 mm, not 1.6. Held 898 (ws 90/165/-60, an overhead pose) moves 1.67 -> 1.528 mm under the model; the claim says unchanged. Watch: the plain verified number is right. Action: rewrite the verdict from the verification block and strike the refuted lessons.",
+  "evidence": "rows/conecut-l2jog-knuckle-3r.json (frozen_exact, verdict, verification.truecut, verification.other); docs/dashboard/data/morphs.json; docs/concepts/conecut-l2jog-knuckle-3r.md 'Verdict and what next' lessons; remeasure/conecut-l2jog-knuckle-3r_held_perpose.json pose 898"
+ },
+ {
+  "key": "R1",
+  "level": "watch",
+  "reason": "Screen strings sit on a verified row. status is 'verified', but the verdict opens 'SCREENED (measured negative for the hardening role)'. morphs.json carries gap / sweep_gap 12.5 beside v_gap 18.28. 12.5 is the lead's own Bench(60,160) fit number (score 95.45, above the board's 95 line), not a measurement of this design. The 540 sweep points are plotted there too. The alignment fields are empty because the row had never been audited. The tool's reporting check reads the same: 'verdict text still reads as a self-measured screen; dashboard sweep best 12.5 (score 95.45) sits 5.78 below the verified number'. Action: lead the verdict with the verified tie (18.28, held 22.45 vs 22.38) and the true-cut refutation.",
+  "evidence": "docs/alignment/conecut-l2jog-knuckle-3r.json reporting; docs/dashboard/data/morphs.json row conecut-l2jog-knuckle-3r"
+ },
+ {
+  "key": "G5",
+  "level": "watch",
+  "reason": "The board shows this design's complexity as 0 when it is 18.5. The row's mechanism block is a delta record ({source, record_delta '+0', complexity 18.5}), so tools/simplicity.py scores it as the anchor: recomputed 0.0 vs row 18.5. morphs.json carries complexity 0 with complexity_items 'none: the anchor (three pins on bearing pairs, three links)'. On the board's score-vs-simplicity view this design plots at (93.35, 0) and Pareto-dominates the lead (93.35, 18.5). The lead is the same chain, and better held out (22.38 vs 22.45). Measured on morphs.json's 37 verified rows: with the shown 0 this row dominates 33 of the other 36 on (v_gap, complexity); with its true 18.5 it dominates 12. Only conecut-h2facet (18.28, shown 0, the same defect) dominates it. Watch, not gamed: complexity is shown, never scored, and the row's own field is right. Action: write the lead's full mechanism record into the row with the +0 delta (a profile change; the narrower bar adds no part).",
+  "evidence": "docs/alignment/conecut-l2jog-knuckle-3r.json complexity; docs/dashboard/data/morphs.json (dominance counted by this audit)"
+ },
+ {
+  "key": "P1",
+  "level": "watch",
+  "reason": "The lever was placed and pre-registered on the claim bench. The binder is exact Bench(110,360) pose 139's link-2 sample 13, taken from the lead's verified claim-bench dump. The pre-registered filter '139 >= 0.4 mm' is read on the claim bench, and so are the guard poses 139 / 203 / 205 / 237 / 264 / 316. The search bench (envh) can move only one pose (150), so the search objective is flat (gate gain 0.008, spread 0.013) and the ES drove dl to its box edge, 1.6. The bench-side gains (139, the probes) are therefore in-sample on the claim bench. Held out, where nothing was tuned, the design loses: 22.45 vs 22.38, ib14 0.8993 vs 0.9000, near1 25.30 vs 25.23 (re-wear this audit). The selection itself used envsel, fresh draws with no held pose. Watch: the plain bench number is a tie.",
+  "evidence": "docs/concepts/conecut-l2jog-knuckle-3r.md Results / Selection; rows note; remeasure/conecut-l2jog-knuckle-3r_held.json"
+ },
+ {
+  "key": "T1",
+  "level": "watch",
+  "reason": "The design's whole purpose is a sub-millimetre move under the 1 mm line. Modelled, pose 139 goes 0.072 -> 0.602 mm, still inside the 1 mm near-touch shell, so near1 is unchanged (19.92 = the lead). The shell is the lead's: near2 34.84 with 33 taken bench poses under 2 mm, and 16.56 points live in the 1-2 mm shell. Held: 71 taken poses under 2 mm, near2 37.10 (= lead). On the wearer's side, a pose at 0.6 mm is metal on skin. Carried from the lead and unchanged by the waist. Watch (below the 25-point gamed line).",
+  "evidence": "remeasure/conecut-l2jog-knuckle-3r_bench.json, _held.json deep; docs/alignment/conecut-l2jog-knuckle-3r.json near_touch"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Where the modelled waist does move metal on an overhead pose, it moves it toward the skin. Held 898 (ws plane 90, elev 165, axial -60) goes 1.67 -> 1.528 mm. The held overhead (elev >= 140) 10th-percentile lowest metal falls from 1.50 to 1.42 mm, and the bench unscored overhead in-band from 0.9359 to 0.9341. All of it is inside the 1-2 mm hugging shell, at the raised arm where the goal needs clearance most. The true cut reads 1.691 there. Small (0.14 mm), so watch.",
+  "evidence": "remeasure/conecut-l2jog-knuckle-3r_held.json vs conecut-knee-knuckle-3r_held.json (overhead_min_metal_p10); held perpose dumps pose 898; remeasure/conecut-l2jog-knuckle-3r_probe_bench.json ws_overhead140"
+ },
+ {
+  "key": "NEW-ws-inband",
+  "level": "watch",
+  "reason": "Carried from the lead and re-measured here with the bench wear probe (model unchanged, gap 18.28 reproduced). The score reads in-band on the 110 clip frames only (0.9005). On the unscored taken workspace poses in-band is 0.8665 (262 poses; 13.1 % of the metal above 14 mm, max 30.74 mm). At elevation 90-140 it is 0.8309 (39 of 85 taken; 16.8 % above 14 mm). Overhead it is 0.9341, but only 8 of 28 poses are taken (fold 14, contact 3, J3 stop 3). The lead reads 0.8676 / 0.8315 / 0.9359: the waist is slightly worse on every slice. Link 2 itself, the edited part, is the worst-banded part: 0.726 bench / 0.723 held (lead 0.731 / 0.728).",
+  "evidence": "remeasure/conecut-l2jog-knuckle-3r_probe_bench.json vs conecut-knee-knuckle-3r_probe_bench.json; remeasure/*_bench.json, *_held.json parts_ib14"
+ },
+ {
+  "key": "NEW-strap-dilution",
+  "level": "watch",
+  "reason": "Carried from the lead and re-measured through the lead's verifier harness (tools/alignment_l2jog_verifier_adapter.py, c4). The bench in-band is carried by the long E strap (164 samples). At the displaced lead's strap count the bench reads 18.74 (lead 18.67), and chain-only ib14 is 0.8581 (lead 0.8590). Held ib14 is 0.8993, below the 0.90 hinge the lead sits on (0.9000). That is why any metal move costs held points 1:1.",
+  "evidence": "remeasure/conecut-l2jog-knuckle-3r_flood_bench.json c4_inband; docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_frozen.json c4_inband"
+ },
+ {
+  "key": "T3",
+  "level": "watch",
+  "reason": "Carried from the lead (same chain). Measured here through the lead's verifier harness: the own-state th fold margin is 5.181 deg on the bench (372 taken, 0 under 5; lowest ws 60/120/-105) and 5.006 deg held (861 taken, 0 under 5; lowest ws 135/30/-135): 0.006 deg over the line. The J3 dowel's held lower margin is 0.74 deg (q3' taken down to -111.16 vs J3MIN -111.90; 19 held poses stopped). The lead's audit measured that a +-0.3 deg K-phase build error crosses the 5 deg line, and that the J3 dowel's held number holds only inside a 1.33 deg window. The waist moves neither. The tool's fold_margin check cannot read this auditor file, so it says 'none on file'.",
+  "evidence": "remeasure/conecut-l2jog-knuckle-3r_flood_bench.json extra.th_margin, _flood_held.json; lead ledger T3"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "Carried from the lead, plus one new item. The K clock spring, the sliding-nose drive and the re-centred knee's cuff twist / R17 have never been measured on this chain (no dynamics run). New: the waist cuts link 2's out-of-plane section modulus 8.85 -> 6.45 mm3 (-27 %; the doc's own figure, 155 MPa per N.m in Ti-6Al-4V). It makes the waist the weakest station of link 2, the link that carries the J3 dowel stop's reaction (155 N per N.m through J3's MR117, lead ledger M5). The doc says this must be re-checked, and no check was run.",
+  "evidence": "docs/concepts/conecut-l2jog-knuckle-3r.md Red team 'Build'; lead ledger M5"
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "Carried from the lead. The chain's coordinate spans are bit-identical in this audit's bench re-wear (dK -0.796..0, K.ang 59.27..105.94, q3' -109.20..116.10, msub 10.81..99.0 deg, a1e 37.55..54.26). The lead family's near-singular sub-dyad at K rest (slipper-nose m_sub < 1 deg on 50 of 204 rest poses) was not re-measured for this row.",
+  "evidence": "remeasure/conecut-l2jog-knuckle-3r_bench.json deep.coord_spans; lead ledger G4"
+ },
+ {
+  "key": "P2",
+  "level": "watch",
+  "reason": "Carried from the lead in form, with zero measured effect. The chain's knee was re-centred by the lead's scripts on a drift cloud that included held-out poses (lead ledger P2: 0 of 352 prefilter verdicts change without them). This design adds no held selection of its own: held was worn only on the 4 cells already picked on the bench.",
+  "evidence": "lead ledger P2; docs/concepts/conecut-l2jog-knuckle-3r.md Verification point 3"
+ },
+ {
+  "key": "S5",
+  "level": "watch",
+  "reason": "The continuity flood was never run on this design, and the lead has no held flood. I ran both through the lead's verifier harness, unchanged (tools/alignment_l2jog_verifier_adapter.py --flood). Bench: static 18.28, connected full 18.28 (0 dropped), knn 19.97 (6 forced poses dropped), bench-graph 50.13: identical to the lead's flood. Held (new for this chain): static 22.45, connected full 22.45 (0 of 332 forced taken poses dropped), bench-graph 23.62 (11 dropped), knn 30.69. The knn flood has no envelope stepping stones and drops 77 of 332 forced taken held poses: +8.24 points, over the tool's 3-point knn line. The rule's flood passes. But the held connected reach rests entirely on the 526 envelope stepping-stone poses (env_forced_connected 526), not on held poses linked to each other. This is the lead chain's property; the waist changes no take. The tool's continuity check cannot read this auditor file, so it says 'no flood on file'.",
+  "evidence": "docs/alignment/remeasure/conecut-l2jog-knuckle-3r_flood_bench.json, _flood_held.json (connected)"
+ }
+]

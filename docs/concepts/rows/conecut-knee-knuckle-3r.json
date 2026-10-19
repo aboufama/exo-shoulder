@@ -1,0 +1,992 @@
+{
+ "id": "conecut-knee-knuckle-3r",
+ "name": "Re-centred never-binding pin knee + J3 hard stop on the lead slipper-nose (knee link ~90 deg to E, dowel stop on J3's own angle)",
+ "lens": "round12:overhead-cone (lens 2; the lead's knee column)",
+ "family": "slaved-knuckle 3R (pin knee)",
+ "active_dof": 3,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "t_ideated": null,
+ "v_reach": 0.7278,
+ "v_follow": 1.0,
+ "v_inband14": 0.9012,
+ "v_inband10": 0.5739,
+ "v_gap": 18.28,
+ "doc": "docs/concepts/conecut-knee-knuckle-3r.md",
+ "status": "verified",
+ "reach": 0.775,
+ "follow": 1.0,
+ "inband14": 0.9007,
+ "inband10": 0.5719,
+ "contact": 0.0,
+ "gap": 12.5,
+ "n_configs": 352,
+ "best_params": {
+  "stk": 6.0,
+  "lE": 97.1443,
+  "lc": 24.3508,
+  "phiE": 0.7526,
+  "phib": -91.8041,
+  "J3MIN": -111.9036,
+  "J3MAX": 122.7417
+ },
+ "verdict": "VERIFIED LEAD 18.28 (score 93.35), held out 22.38 (lead since 2026-10-17 ~18:21 UTC by the user's plain-verified-gap rule; ledger WATCH). Screen note as written: SCREENED - a measured TIE with the lead, not a new leader: frozen exact Bench(110,360) 18.28 (score 93.35) vs 18.49 (paired -0.20, CI90 [-1.05,+0.80]); held 22.38 vs 23.45 (-1.08, CI90 [-1.86,+0.06], P 0.935); flood full 18.28 / knn 19.97; complexity 18.5 (lead 18.25 + 1 dowel). No bench pose newly taken except 203 at 0.72 mm; T5 worse (bench 4 contacts 20.24 mm vs 2/14.75, held 14/60.97 vs 10/46.12); in-band gain is E-strap dilution (chain-only ib14 0.8590 vs 0.8689).",
+ "limiter": "reach 0.7278 (262/360) fixed by the lead's chain: fold 88 of the 98 lost bench poses; the J3-stopped poses (182/184/208/209/211/238) bind on hub 2 / K-housing metal 1-22 mm into the skin, so no knee geometry takes them; contacts 205 (hub 2 -4.28), 316 (link 2 -1.23), 237/264 (crank/horn, the lead's); held out the knee size is bounded by arm pad / knee-link contacts at elev 15, axial -135..-165",
+ "note": "Model loads the verified lead slipper-nose (SN_CELL=lead) unchanged; knee re-centred (lE 97.14, lc 24.35, phiE 0.75, phib -91.80, ang_min 25.22, MR63ZZ stk 6.0) + J3 hard stop on q3'=q3+phi (J3's own angle) in [-111.90, 122.74] as a 2 mm 440C dowel in hub 3's lower plate at r 7.5 in an arc groove under link 2 (inside the O20 stack, no new metal). Lead control reproduced 13.00 fast. Sweep 352 configs on Bench(60,160) fast, local (farm at its budget line): 200 coarse LHS (both knee assembly modes; phib>0 collides, best 17.48; 62 fail on parts) + CMA two-sided 80 + one-sided 72; objective 1 mm near-touch + knee-margin and stop-margin penalties. Gate passed: objective 0.08/0.04/0.02, plain 0.23/0.01/0.23 pts. Fast plain floor 12.50 = the reach term alone; 11.88 configs (J3MIN -112.8..-113.4) admit one pose with the stop 0.17-0.46 deg from it - rejected as tuned (on exact that pose class is 203 at 0.72 mm / 205 at -4.28 mm). Exact: knee 59.3-105.9 deg (held 59.3-107.1), margins 11.4/13.2 mm in d (lead 0.33), d_perp >= 83.5 mm (12.0 N per N m vs lead 31.6), q3' taken [-109.2,116.1] (held [-111.16,119.44]: stop 0.74 deg from a held taken pose), 356 fit-clip frames 0 cut; the upper stop is inert on exact (316 below it). Columns: spec one-sided (proposer, same code) 18.36/22.79; CMA one-sided (lE 101, lc 31.2) 18.84/23.90 (20 held contacts, 9 by pad/knee at elev 15 extreme rotation - the fast bench cannot bound the knee's size); row best at the lead's stk 4.85: knee-E clash on 329 poses (invalid). Stop sizing: dowel 133 N per N m, 440C single shear ~3.4 kN (x2.6 at 10 N m), groove bearing 0.67 GPa at 10 N m; knee MR63ZZ pairs 110-125 N at 10 N m (at/above C0r, fine at the 2-5 N m cuff-slip limit). Per-pose dumps and the paired comparison in docs/alignment/remeasure/. | VERIFIED 2026-10-17T17:20:07Z (skeptic, local exact, frozen protocol): Bench(110,360) exact 18.28 (reach 0.7278, follow 1.0, ib14 0.9012, ib10 0.5739, contact 0.0106) and held 22.38 reproduced exactly (per-pose dumps identical); flood full 18.28 / knn 19.97; lead checks 0 failing poses, th margin 5.181 / 5.006; the stop acts on J3's own angle (C1) and fits a 250.7 deg groove (C2). Champion same bench 75.94. NOT a leader: tie with 18.49; at equal E-strap weight the bench reads 18.67 (dilution), chain-only ib14 0.859; the dowel is worth 1.10 vs the no-stop control 19.38; held: 3 poses cut by the UPPER stop would be 2-3.4 mm contacts; T5 worse (bench 4/20.24 mm, held 14/60.97 mm). See verification.",
+ "t_screened": "2026-10-17T16:29:21Z",
+ "gap_near1": 13.66,
+ "gap_near2": 18.8,
+ "complexity": 18.5,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 5,
+  "joints": 8,
+  "closed_loops": 3,
+  "sliding_pairs": 1,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 12,
+  "catalogue_parts": 16,
+  "notes": "the lead slipper-nose-knuckle-3r record unchanged + 1 catalogue part (ISO 8734 2 m6 440C stop dowel pressed into hub 3's lower plate, running in an arc groove under link 2's ring: no body, joint, loop or sliding pair added - the dowel only touches the groove end at the stop); knee re-proportioned (lE, lc, phiE, phib), pins MR63ZZ pairs as the lead's build rule",
+  "source": "conecut-knee-knuckle-3r screen 2026-10-17",
+  "confidence": "medium",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  }
+ },
+ "frozen": {
+  "cell": "lead",
+  "fit_fast": {
+   "gap": 12.5,
+   "reach": 0.775,
+   "follow": 1.0,
+   "inband14": 0.9007,
+   "inband10": 0.5719,
+   "contact": 0.0
+  },
+  "frozen": {
+   "gap": 18.28,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9012,
+   "inband10": 0.5739,
+   "contact": 0.0106
+  },
+  "why": {
+   "fold": 88,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 4
+  },
+  "near1": 19.92,
+  "near2": 34.84,
+  "min_metal": 0.07,
+  "overhead": {
+   "ws": 28,
+   "taken": 8,
+   "why": {
+    "": 8,
+    "j3stop": 3,
+    "contact": 3,
+    "fold": 14
+   }
+  },
+  "knee": {
+   "n": 372,
+   "ang": [
+    59.27,
+    105.94
+   ],
+   "margin_deg": [
+    34.05,
+    48.84
+   ],
+   "margin_mm": [
+    11.42,
+    13.18
+   ],
+   "d_perp_mm": [
+    83.5,
+    87.7
+   ],
+   "knee_N_per_Nm_max": 12.0,
+   "q3p": [
+    -109.2,
+    116.1
+   ],
+   "stop_margin_deg": 2.7,
+   "stop_hi_margin_deg": 6.64,
+   "dowel_N_per_Nm": 133.3,
+   "j3stop": 6
+  },
+  "clips": {
+   "frames": 356,
+   "closed": 356,
+   "knee_ok": 356,
+   "q3p": [
+    -62.4,
+    101.41
+   ],
+   "cut_by_stop": 0,
+   "ang": [
+    59.27,
+    91.81
+   ]
+  },
+  "contact_poses": [
+   [
+    205,
+    [
+     0.0,
+     105.0,
+     15.0
+    ],
+    -4.28
+   ],
+   [
+    237,
+    [
+     15.0,
+     165.0,
+     -60.0
+    ],
+    -8.93
+   ],
+   [
+    264,
+    [
+     30.0,
+     165.0,
+     -60.0
+    ],
+    -5.8
+   ],
+   [
+    316,
+    [
+     60.0,
+     150.0,
+     -105.0
+    ],
+    -1.23
+   ]
+  ],
+  "stopped": [
+   182,
+   184,
+   208,
+   209,
+   211,
+   238
+  ],
+  "parts_ib14": {
+   "hub1": [
+    1.0,
+    8.6,
+    80
+   ],
+   "hubK": [
+    0.992,
+    7.9,
+    80
+   ],
+   "hub2": [
+    0.912,
+    11.6,
+    80
+   ],
+   "hub3": [
+    0.742,
+    11.5,
+    80
+   ],
+   "E": [
+    0.979,
+    6.0,
+    164
+   ],
+   "boss": [
+    1.0,
+    7.5,
+    32
+   ],
+   "pad": [
+    1.0,
+    6.2,
+    32
+   ],
+   "knee": [
+    0.999,
+    9.7,
+    90
+   ],
+   "crank": [
+    0.801,
+    11.3,
+    133
+   ],
+   "roller": [
+    0.938,
+    10.0,
+    19
+   ],
+   "horn": [
+    0.955,
+    7.5,
+    23
+   ],
+   "L1a": [
+    0.981,
+    10.1,
+    8
+   ],
+   "L1b": [
+    0.918,
+    8.2,
+    36
+   ],
+   "L2": [
+    0.731,
+    12.0,
+    124
+   ]
+  },
+  "cam": {
+   "dK_lim": 50.0,
+   "pa_crank_max_taken": 32.4,
+   "pa_horn_max_taken": 35.9,
+   "pa_kin_max": 38.03,
+   "pa_eff_horn": 40.9
+  },
+  "held": {
+   "frozen": {
+    "gap": 22.38,
+    "reach": 0.6922,
+    "follow": 1.0,
+    "inband14": 0.9,
+    "inband10": 0.5726,
+    "contact": 0.016
+   },
+   "why": {
+    "fold": 260,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 14
+   },
+   "near1": 25.23,
+   "near2": 37.1,
+   "min_metal": 0.33,
+   "overhead": {
+    "ws": 71,
+    "taken": 18,
+    "why": {
+     "": 18,
+     "fold": 36,
+     "j3stop": 10,
+     "contact": 7
+    }
+   },
+   "knee": {
+    "n": 861,
+    "ang": [
+     59.27,
+     107.07
+    ],
+    "margin_deg": [
+     34.05,
+     47.71
+    ],
+    "margin_mm": [
+     11.42,
+     12.77
+    ],
+    "d_perp_mm": [
+     83.5,
+     88.1
+    ],
+    "knee_N_per_Nm_max": 12.0,
+    "q3p": [
+     -111.16,
+     119.44
+    ],
+    "stop_margin_deg": 0.74,
+    "stop_hi_margin_deg": 3.3,
+    "dowel_N_per_Nm": 133.3,
+    "j3stop": 19
+   },
+   "contact_poses": [
+    [
+     224,
+     [
+      -90.0,
+      60.0,
+      105.0
+     ],
+     -3.49
+    ],
+    [
+     225,
+     [
+      -90.0,
+      60.0,
+      120.0
+     ],
+     -5.51
+    ],
+    [
+     252,
+     [
+      -75.0,
+      60.0,
+      105.0
+     ],
+     -1.6
+    ],
+    [
+     447,
+     [
+      0.0,
+      90.0,
+      30.0
+     ],
+     -0.21
+    ],
+    [
+     525,
+     [
+      15.0,
+      105.0,
+      15.0
+     ],
+     -0.86
+    ],
+    [
+     534,
+     [
+      15.0,
+      150.0,
+      -60.0
+     ],
+     -7.08
+    ],
+    [
+     607,
+     [
+      30.0,
+      150.0,
+      -45.0
+     ],
+     -5.39
+    ],
+    [
+     610,
+     [
+      30.0,
+      165.0,
+      -45.0
+     ],
+     -9.13
+    ],
+    [
+     682,
+     [
+      45.0,
+      165.0,
+      -45.0
+     ],
+     -5.85
+    ],
+    [
+     683,
+     [
+      45.0,
+      165.0,
+      -30.0
+     ],
+     -9.86
+    ],
+    [
+     755,
+     [
+      60.0,
+      165.0,
+      -30.0
+     ],
+     -6.92
+    ],
+    [
+     820,
+     [
+      75.0,
+      150.0,
+      -90.0
+     ],
+     -0.18
+    ],
+    [
+     835,
+     [
+      90.0,
+      15.0,
+      -150.0
+     ],
+     -3.55
+    ],
+    [
+     978,
+     [
+      120.0,
+      15.0,
+      -165.0
+     ],
+     -1.33
+    ]
+   ],
+   "split": {
+    "n": 14,
+    "by_part": {
+     "m1:hubK/horn": 6,
+     "horn": 6,
+     "crank": 6,
+     "m7:hub2": 4,
+     "m9:crank/roller": 4,
+     "roller": 3,
+     "m2:?": 2,
+     "hub2": 2,
+     "hubK": 2,
+     "m5:pad": 2,
+     "pad": 2,
+     "m6:knee": 1,
+     "knee": 1
+    }
+   }
+  },
+  "connected": {
+   "static": {
+    "gap": 18.28,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.9012,
+    "contact": 0.0106
+   },
+   "connected_knn": {
+    "gap": 19.97,
+    "reach": 0.7111,
+    "dropped": 6,
+    "dropped_forced": 6,
+    "forced_taken": 128,
+    "forced_taken_connected": 122
+   },
+   "connected_full": {
+    "gap": 18.28,
+    "reach": 0.7278,
+    "dropped": 0,
+    "dropped_forced": 0,
+    "forced_taken": 128,
+    "forced_taken_connected": 128,
+    "envelope": {
+     "env_ok": 1065,
+     "env_forced_ok": 526,
+     "env_forced_connected": 526
+    }
+   }
+  },
+  "paired_vs_lead": {
+   "bench": {
+    "gap_A": 18.29,
+    "gap_B": 18.48,
+    "diff": -0.2,
+    "split": {
+     "reach": -0.28,
+     "follow": 0.0,
+     "inband": -0.45,
+     "contact": 0.53
+    },
+    "discordant": {
+     "ws_taken_A_only": 1,
+     "ws_taken_B_only": 0,
+     "contact_A_only": 2,
+     "contact_B_only": 0,
+     "contact_both": 2
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -1.05,
+      0.8
+     ],
+     "sd": 0.59,
+     "p_A_better": 0.601
+    }
+   },
+   "held": {
+    "gap_A": 22.38,
+    "gap_B": 23.45,
+    "diff": -1.08,
+    "split": {
+     "reach": -0.95,
+     "follow": 0.0,
+     "inband": -0.57,
+     "contact": 0.44
+    },
+    "discordant": {
+     "ws_taken_A_only": 11,
+     "ws_taken_B_only": 2,
+     "contact_A_only": 4,
+     "contact_B_only": 0,
+     "contact_both": 10
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -1.86,
+      0.06
+     ],
+     "sd": 0.58,
+     "p_A_better": 0.935
+    }
+   },
+   "pooled_bench_plus_held": {
+    "gap_A": 21.24,
+    "gap_B": 22.06,
+    "diff": -0.82,
+    "split": {
+     "reach": -0.76,
+     "follow": 0.0,
+     "inband": -0.53,
+     "contact": 0.47
+    },
+    "discordant": {
+     "ws_taken_A_only": 12,
+     "ws_taken_B_only": 2,
+     "contact_A_only": 6,
+     "contact_B_only": 0,
+     "contact_both": 12
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -1.46,
+      0.09
+     ],
+     "sd": 0.48,
+     "p_A_better": 0.918
+    }
+   }
+  },
+  "T5": {
+   "bench": {
+    "n": 4,
+    "depth_sum": 20.24,
+    "max": 8.93,
+    "poses": [
+     [
+      205,
+      [
+       0.0,
+       105.0,
+       15.0
+      ],
+      "ws",
+      -4.28
+     ],
+     [
+      237,
+      [
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "ws",
+      -8.928
+     ],
+     [
+      264,
+      [
+       30.0,
+       165.0,
+       -60.0
+      ],
+      "ws",
+      -5.797
+     ],
+     [
+      316,
+      [
+       60.0,
+       150.0,
+       -105.0
+      ],
+      "ws",
+      -1.235
+     ]
+    ],
+    "lead": {
+     "n": 2,
+     "depth_sum": 14.75,
+     "max": 9.01
+    }
+   },
+   "held": {
+    "n": 14,
+    "depth_sum": 60.97,
+    "max": 9.86,
+    "poses": [
+     [
+      224,
+      [
+       -90.0,
+       60.0,
+       105.0
+      ],
+      "ws",
+      -3.487
+     ],
+     [
+      225,
+      [
+       -90.0,
+       60.0,
+       120.0
+      ],
+      "ws",
+      -5.51
+     ],
+     [
+      252,
+      [
+       -75.0,
+       60.0,
+       105.0
+      ],
+      "ws",
+      -1.6
+     ],
+     [
+      447,
+      [
+       0.0,
+       90.0,
+       30.0
+      ],
+      "ws",
+      -0.207
+     ],
+     [
+      525,
+      [
+       15.0,
+       105.0,
+       15.0
+      ],
+      "ws",
+      -0.862
+     ],
+     [
+      534,
+      [
+       15.0,
+       150.0,
+       -60.0
+      ],
+      "ws",
+      -7.082
+     ],
+     [
+      607,
+      [
+       30.0,
+       150.0,
+       -45.0
+      ],
+      "ws",
+      -5.389
+     ],
+     [
+      610,
+      [
+       30.0,
+       165.0,
+       -45.0
+      ],
+      "ws",
+      -9.133
+     ],
+     [
+      682,
+      [
+       45.0,
+       165.0,
+       -45.0
+      ],
+      "ws",
+      -5.853
+     ],
+     [
+      683,
+      [
+       45.0,
+       165.0,
+       -30.0
+      ],
+      "ws",
+      -9.864
+     ],
+     [
+      755,
+      [
+       60.0,
+       165.0,
+       -30.0
+      ],
+      "ws",
+      -6.923
+     ],
+     [
+      820,
+      [
+       75.0,
+       150.0,
+       -90.0
+      ],
+      "ws",
+      -0.177
+     ],
+     [
+      835,
+      [
+       90.0,
+       15.0,
+       -150.0
+      ],
+      "ws",
+      -3.553
+     ],
+     [
+      978,
+      [
+       120.0,
+       15.0,
+       -165.0
+      ],
+      "ws",
+      -1.327
+     ]
+    ],
+    "lead": {
+     "n": 10,
+     "depth_sum": 46.12,
+     "max": 9.05
+    }
+   }
+  },
+  "columns": {
+   "spec_one_sided_proposer": {
+    "params": {
+     "lE": 82,
+     "lc": 27,
+     "phiE": 3.8,
+     "phib": -96.6,
+     "J3MIN": -105,
+     "stk": 4.8534
+    },
+    "bench": 18.36,
+    "held": 22.79,
+    "contacts_bench": 3,
+    "contacts_held": 14,
+    "source": "proposer scratch cone/full_kw25stop*.json, same code"
+   },
+   "cma_one_sided": {
+    "params": {
+     "stk": 6.0,
+     "J3MAX": 999.0,
+     "lE": 100.9632,
+     "lc": 31.1686,
+     "phiE": -2.2483,
+     "phib": -86.0408,
+     "J3MIN": -110.2627
+    },
+    "fast": {
+     "gap": 13.44,
+     "reach": 0.775,
+     "follow": 1.0,
+     "inband14": 0.896,
+     "inband10": 0.5863,
+     "contact": 0.0054
+    },
+    "bench": {
+     "gap": 18.84,
+     "reach": 0.725,
+     "follow": 1.0,
+     "inband14": 0.8973,
+     "inband10": 0.5897,
+     "contact": 0.0107
+    },
+    "held": {
+     "gap": 23.9,
+     "reach": 0.688,
+     "follow": 1.0,
+     "inband14": 0.8958,
+     "inband10": 0.5889,
+     "contact": 0.0228
+    },
+    "contacts_bench": 4,
+    "contacts_held": 20,
+    "held_split": {
+     "n": 20,
+     "by_part": {
+      "hub2": 6,
+      "m7:hub2": 6,
+      "horn": 6,
+      "crank": 6,
+      "m1:hubK/horn": 6,
+      "m5:pad": 5,
+      "m9:crank/roller": 4,
+      "m6:knee": 4,
+      "knee": 4,
+      "pad": 4,
+      "m2:?": 3,
+      "roller": 3,
+      "hubK": 2
+     }
+    }
+   },
+   "row_best_at_stk_4p85": {
+    "fast": {
+     "gap": 160.0,
+     "reach": 0.1,
+     "follow": 0.15,
+     "inband14": 0.9186,
+     "inband10": 0.6916,
+     "contact": 0.0
+    },
+    "bench": {
+     "gap": 164.88,
+     "reach": 0.0861,
+     "follow": 0.1364,
+     "inband14": 0.9173,
+     "inband10": 0.691,
+     "contact": 0.0213
+    },
+    "why": {
+     "fold": 88,
+     "slide": 0,
+     "flip": 0,
+     "closure": 0,
+     "skin": 0,
+     "parts": 329,
+     "contact": 1
+    },
+    "parts_pairs": {
+     "knee-E": 329
+    },
+    "note": "knee vs E clearance fails on 329 poses at the lead's stack: the row is valid at stk 6.0 (MR63ZZ) only"
+   }
+  },
+  "dilution": {
+   "chain_only_ib14": 0.859,
+   "lead_chain_only_ib14": 0.8689,
+   "E_samples": [
+    164,
+    104
+   ],
+   "note": "ib14 without E/boss/pad/knee; the knee group's longer E strap carries the total over 0.90"
+  },
+  "gate": {
+   "objective": [
+    0.08,
+    0.04,
+    0.02
+   ],
+   "plain": [
+    0.23,
+    0.01,
+    0.23
+   ],
+   "n": 352,
+   "note": "gain over 2nd half / last third / top-5 spread, score points"
+  },
+  "perpose_dumps": [
+   "docs/alignment/remeasure/conecut-knee-knuckle-3r_bench_perpose.json",
+   "docs/alignment/remeasure/conecut-knee-knuckle-3r_held_perpose.json"
+  ]
+ },
+ "v_contact": 0.0106,
+ "t_verified": "2026-10-17T17:20:07Z",
+ "verification": {
+  "t": "2026-10-17T17:20:07Z",
+  "by": "skeptic verifier (local, 2 niced processes; farm at its budget line, balance $24.14)",
+  "harness": "docs/concepts/verify/conecut-knee-knuckle-3r.py (the lead's verifier chain retargeted at CCModel + C1-C4)",
+  "bench": {
+   "gap": 18.28,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9012,
+   "inband10": 0.5739,
+   "contact": 0.0106,
+   "near1": 19.92,
+   "min_metal": 0.07,
+   "overhead": "8/28",
+   "flood_full": 18.28,
+   "flood_knn": 19.97,
+   "file": "docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_frozen.json"
+  },
+  "held": {
+   "gap": 22.38,
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.9,
+   "inband10": 0.5726,
+   "contact": 0.016,
+   "near1": 25.23,
+   "min_metal": 0.33,
+   "overhead": "18/71",
+   "file": "docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json"
+  },
+  "per_pose_dumps": "docs/alignment/remeasure/conecut-knee-knuckle-3r_{bench,held}_perpose.json reproduced pose for pose (0 of 470 / 0 of 1154 differ; recomputed 18.29 / 22.38)",
+  "lead_checks": "0 failing taken poses (372 bench / 861 held): cam closure 0.0 mm, K sense 0 wrong, PA+friction horn 40.57 / crank 37.37 <= 43 (held 40.87), nose undercut 0, th margin 5.181 (held 5.006, 0 < 5), dK 45.6 of 50",
+  "c1_own_angle": "R2^T R3 is a rotation about u3 (axis residual <= 0.015 deg) equal to q3' to 0.0008 deg on 382 bench / 894 held poses: the stop acts on J3's own angle",
+  "c2_stop": "groove 250.7 deg (234.6 travel + 16.1 dowel) leaves a 109 deg web in link 2's ring: buildable; q3' taken bench [-109.2, 116.1] (margins 2.7 / 6.6), held [-111.16, 119.44] (0.74 / 3.3)",
+  "c3_stopped": "bench 6 stopped poses (182/184/208/209/211/238) all clash E strap vs link 2 AND put metal 0.95-14.5 mm into the skin (walls to 22.5): the dowel engages before the strap hits link 2; held 19 stopped (16 lower, 3 UPPER: 752/897/965, metal 2.0-3.4 mm in) - every one would be metal in the skin. The upper stop is inert on the bench but not held out.",
+  "nostop_control": {
+   "gap": 19.38,
+   "reach": 0.725,
+   "inband14": 0.8945,
+   "contact": 0.0133,
+   "why": "6 parts (E-L2), 5 contacts incl. 203 at -0.03 mm",
+   "note": "same knee, J3MIN off, same protocol: the dowel stop is worth 1.10 points, from the fit no longer clearing the unreachable poses (in-band 0.8945 -> 0.9012) and 203 contact -0.03 -> taken 0.72 mm"
+  },
+  "c4_inband": {
+   "bench_equal_strap_ib14": 0.8961,
+   "bench_equal_strap_gap": 18.67,
+   "bench_chain_only_ib14": 0.859,
+   "held_equal_strap_ib14": 0.8948,
+   "held_equal_strap_gap": 22.9,
+   "held_chain_only_ib14": 0.8571,
+   "note": "E strap weighted at the lead's sample count (104 of 164): the bench edge over the lead (18.28 vs 18.49) is the strap's dilution; at equal strap it reads 18.67 (0.18 worse than the lead); held keeps a 0.55 edge (22.90 vs 23.45)"
+  },
+  "champion_same_bench": 75.94,
+  "champion_note": "champion spherical 3R 75.94 on Bench(110,360) exact, kit checks + 1 mm clearance (risley-turret verifier; the lead's verifier used the same number; the knee / stop / cam checks do not apply to it)",
+  "refuted": false
+ },
+ "leader_ruling_withdrawn": "2026-10-17 ~18:21 UTC: the lead's 'tie' ruling (8e50534) is WITHDRAWN. The 18:21 skeptic upheld NEW-incumbent-tie-rule: the CI-includes-0 tie rule was the lead's own (round-12 plan), never put to the user, applied to challengers only (the incumbent won the lead on a smaller, seed-dependent edge), and its written reasons rest on retired or unadopted readings (2 mm near-touch, T5 vs a stale reference, equal-strap reweighting). The user's rule stands: the plain verified gap decides (18.28 / held 22.38 vs 18.49 / 23.45; the held edge survives at equal strap, 22.90). Whether a noise / tie rule should exist is put to the user."
+}

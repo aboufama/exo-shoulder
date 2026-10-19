@@ -1,0 +1,278 @@
+{
+ "id": "lowarm-kstop-knuckle-3r",
+ "status": "verified",
+ "v_gap": 18.69,
+ "complexity": null,
+ "verdict": "watch",
+ "reasons": [
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: sample-weighted in-band 0.897 vs part-weighted 0.861 (+3.57 points); thinly sampled parts: ring2 6, plate 8, L1a 8; mostly out-of-band parts: ring2 (0.18 in band, median 15.6 mm, 0.6 % of samples) (re-measured)",
+  "reporting: verdict text still reads as a self-measured screen"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 22.88 vs bench 18.69 (+4.19; re-measured (this audit))",
+   "held_gap": 22.88,
+   "v_gap": 18.69,
+   "drop": 4.19,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 18.69 -> verified 18.69 (+0.00)",
+   "fast": 18.69,
+   "verified": 18.69,
+   "drop": 0.0
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 18.69, <1 mm 20.86, <2 mm 34.84, <3 mm 85.66, band read 3-14 mm 18.81, 16.15 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 16.15,
+   "plain": 18.69,
+   "n1": 20.86,
+   "n2": 34.84,
+   "n3": 85.66,
+   "band3": 18.81,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0,
+    "2-3": 0.0021,
+    "3-4": 0.0138,
+    "4-6": 0.1217,
+    "6-10": 0.4332,
+    "10-14": 0.326,
+    ">14": 0.1032
+   },
+   "minmm": 0.072,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.69: bench 4 contact poses, sum 16.62 mm, deepest 9.64 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 14 contact poses, sum 44.95 mm, deepest 10.62 mm at ['ws', 45.0, 165.0, -30.0], 5 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
+   "depths": {
+    "v_gap 18.69": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 16.62,
+      "max_mm": 9.64,
+      "n_deeper3": 2,
+      "overhead140": 3,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.69,
+      "src": "docs/alignment/remeasure/lowarm-kstop-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        16.62
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 14,
+      "sum_mm": 44.95,
+      "max_mm": 10.62,
+      "n_deeper3": 5,
+      "overhead140": 7,
+      "deepest": [
+       "ws",
+       45.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 22.88,
+      "src": "docs/alignment/remeasure/lowarm-kstop-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        44.95
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs conecut-knee-knuckle-3r: plain -0.41, 2 mm +0.00",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -0.41,
+   "gain_2mm": 0.0
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "no moving drive / joint declared",
+   "spans": [
+    [
+     "row:verification.dK_taken_max",
+     45.615
+    ],
+    [
+     "row:verification.held.dK_taken_max",
+     46.268
+    ],
+    [
+     "re-measured dK span",
+     45.49
+    ],
+    [
+     "re-measured K.ang span",
+     46.75
+    ],
+    [
+     "re-measured K.qa span",
+     46.75
+    ],
+    [
+     "re-measured K.qb span",
+     49.66
+    ]
+   ],
+   "declared": [],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "sample-weighted in-band 0.897 vs part-weighted 0.861 (+3.57 points); thinly sampled parts: ring2 6, plate 8, L1a 8; mostly out-of-band parts: ring2 (0.18 in band, median 15.6 mm, 0.6 % of samples) (re-measured)",
+   "parts": {
+    "hub1": [
+     1.0,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.914,
+     11.6,
+     80
+    ],
+    "hub3": [
+     0.742,
+     11.4,
+     80
+    ],
+    "E": [
+     0.979,
+     6.0,
+     164
+    ],
+    "boss": [
+     1.0,
+     7.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     6.2,
+     32
+    ],
+    "knee": [
+     0.999,
+     9.7,
+     90
+    ],
+    "crank": [
+     0.815,
+     11.1,
+     133
+    ],
+    "horn": [
+     0.949,
+     8.9,
+     27
+    ],
+    "ring2": [
+     0.179,
+     15.6,
+     6
+    ],
+    "plate": [
+     0.715,
+     12.3,
+     8
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.918,
+     8.2,
+     36
+    ],
+    "L2": [
+     0.732,
+     12.0,
+     124
+    ]
+   }
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 16.75 vs row None",
+   "recomputed": 16.75,
+   "row": null
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [],
+ "git": "0781b77",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T16:23:44Z"
+}

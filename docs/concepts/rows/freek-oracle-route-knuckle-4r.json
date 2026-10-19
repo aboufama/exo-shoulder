@@ -1,0 +1,527 @@
+{
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 2,
+  "moving_bodies": 6,
+  "joints": 6,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 6,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 15,
+  "catalogue_parts": 17,
+  "notes": "Cell B as measured: skinnormal-shortk-knuckle-4r's chain (J1 / K / J2 / J3 O20 hubs, K sensed + clock spring to stop A + stop-B dowel, J2 own-angle dowel slot, two-pin cuff knee on MR63ZZ pairs) + a second end on J3's dowel groove (ISO 8734 2 m6 dowel at r 7.5, 2.1 x 1.0 groove inside the O20 stack): complexity 32.5 + 0.25 + 0.5 = 33.25 (catalogue estimate, not re-read by tools/simplicity.py). Cell A (the oracle) has no hardware: a bound.",
+  "source": "docs/concepts/models/freek-oracle-route-knuckle-4r.py (imports skinnormal-shortk-knuckle-4r.py -> minarc-stop-knuckle-4r-kitrule.py unchanged)",
+  "confidence": "counted (cell B); bound (cell A)",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
+ },
+ "id": "freek-oracle-route-knuckle-4r",
+ "name": "Free-K oracle bound with an anterior link-2 corridor (lens B instrument, never a claim), with two determined K splits as conditional cells",
+ "lens": "round104:B second-wall-route (the take-bound row of the jump track)",
+ "family": "knuckle 4R, sensed K: oracle bound + spring / stop-determined realisations",
+ "active_dof": 4,
+ "passive_dof": 2,
+ "passive_translations": 0,
+ "complexity": 33.25,
+ "status": "verified",
+ "t_ideated": "2026-10-18T05:16:06Z",
+ "t_screened": "2026-10-18T06:26:48Z",
+ "reach": 0.8375,
+ "follow": 0.95,
+ "inband14": 0.8974,
+ "inband10": 0.5385,
+ "contact": 0.0305,
+ "gap": 9.56,
+ "v_reach": 0.7778,
+ "v_follow": 0.9545,
+ "v_inband14": 0.8977,
+ "v_inband10": 0.5424,
+ "v_gap": 16.2,
+ "n_configs": 69,
+ "frozen_exact": {
+  "bench": "Bench(110,360) exact, fit Bench(60,160) fast, frozen k33 shape, CB_FOLD_MARGIN 5.5",
+  "kit": {
+   "gap": 18.61,
+   "reach": 0.7694,
+   "follow": 0.9455,
+   "inband14": 0.8965,
+   "inband10": 0.5433,
+   "contact": 0.0475,
+   "near": 23.36,
+   "ws_taken": 277
+  },
+  "oracle_static": {
+   "gap": 16.96,
+   "reach": 0.7806,
+   "follow": 0.9455,
+   "inband14": 0.899,
+   "inband10": 0.5445,
+   "contact": 0.0447,
+   "near": 21.17,
+   "ws_taken": 281,
+   "clear_ge_0p2": 384,
+   "clear_ge_1": 377,
+   "near1_poses": 8,
+   "min_mm": 0.092,
+   "moved": 36
+  },
+  "oracle_connected": {
+   "gap": 17.25,
+   "reach": 0.7778,
+   "follow": 0.9455,
+   "inband14": 0.899,
+   "inband10": 0.5445,
+   "contact": 0.0448,
+   "near": 21.46,
+   "ws_taken": 280,
+   "dropped": 1
+  },
+  "superseded_v2a": {
+   "gap": 15.27,
+   "connected": 15.55,
+   "why": "refused K samples allowed to dodge contacts (5 binders); red-teamed by this screen"
+  },
+  "corridor_rA12_25_55": {
+   "kit": 20.18,
+   "oracle_static": 18.42,
+   "oracle_connected": 18.71,
+   "near_connected": 23.45,
+   "ib14": 0.8844,
+   "binders_best_legal": {
+    "117": -0.46,
+    "129": -4.17,
+    "119": -8.48,
+    "148": 1.76,
+    "316": 1.19,
+    "369": 0.54,
+    "343": -2.48,
+    "423": -1.33
+   }
+  },
+  "cellB_q3max86": {
+   "static": {
+    "gap": 16.2,
+    "reach": 0.7778,
+    "follow": 0.9545,
+    "inband14": 0.8977,
+    "inband10": 0.5424,
+    "contact": 0.0375,
+    "near": 21.01,
+    "ws_taken": 280,
+    "near1_poses": 9,
+    "min_mm": 0.092
+   },
+   "connected": {
+    "gap": 17.35,
+    "reach": 0.7667,
+    "ws_taken": 276,
+    "contact": 0.0379,
+    "near": 22.19,
+    "nodes": 1108,
+    "islands": 0,
+    "dropped": 4
+   },
+   "overhead140": "5/28",
+   "j3stop_engaged_taken": 32,
+   "file": "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max86_bench.json"
+  },
+  "cellB_q3max80": {
+   "static_gap": 17.0,
+   "connected_gap": 17.86,
+   "near_connected": 22.7,
+   "ws_taken_connected": 276,
+   "file": "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max80_bench.json"
+  }
+ },
+ "frozen_gap": 17.35,
+ "frozen_score": 93.69,
+ "best_params": {
+  "seed": "k33 (verified priced params, docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_k33_fit60_bench_params.json)",
+  "cell": "B",
+  "q3max": 86,
+  "q3_convention": "model own: S.sub1 about u3 from vref = unit(u3 x (0.3, 0.5, 0.8))",
+  "route": "great circle (rA 0)"
+ },
+ "best_k": 66,
+ "gate": {
+  "n": 10,
+  "rule": "v2b rows only (k 51-60); 51 earlier rows are superseded v1 / v2a oracles",
+  "best_score": 95.95,
+  "gain_second_half": 0.01,
+  "gain_last_third": 0.01,
+  "top5_spread": 0.24,
+  "passed": false,
+  "comment": "v2b oracle rows k 51-60 (n 10) within thresholds numerically; cell B q3max sweep rows k 61-68 (n 8) best 9.56 at 86 with neighbours 10.16 / 10.74 - a 1-D sweep, not converged in the gate's sense; n is far below the brief's 100-300 + CMA (farm closed, local <= 2 processes)"
+ },
+ "preregistered_gate": {
+  "rule": ">= 279 takes at <= 4 contacts (or >= 275 at 0), every binder cleared by >= 0.2 mm",
+  "takes_connected": 280,
+  "contacts_poses": 21,
+  "binders_never_clear": [
+   117,
+   119,
+   129,
+   343,
+   423
+  ],
+  "result": "FAIL"
+ },
+ "verdict": "POLISHED 15.40 frozen exact Bench(110,360) (score 94.40; pick1 fe1-g10-7, final polish CONFIRMED by its independent verifier, ledger WATCH 11:24:30Z), held 20.5 like-for-like (verified 21.89; env-fit 20.24). Contacts 7 / 39.47 mm bench (verified 15 / 78.55; the lead 4 / 20.24). On the stop-refusal side reading (proposal B, open with the user) the gain shrinks to 0.06 bench / 0.74 held. 4 COUNTED JOINTS, complexity 33.25: NOT the headline lead (user 2026-10-17). The overhead clip passage now sits at 1.7 mm (1-2 mm shell). R17, the dowel force and the cuff twist are still open. | VERIFIED 16.20 frozen exact Bench(110,360) (score 94.11), held 21.89, on the model's one fold reading, which the 08:29 audit measured to be the right one (min th 5.91 bench / 6.50 held over every state's moving chain). The status was flipped by the lead at 2026-10-18 09:05 UTC after the ledger lowered GAMED to WATCH (auditor 08:29, skeptic 08:43). 4 COUNTED JOINTS (K sensed), complexity 33.25. It does NOT replace the 3-joint lead conecut-knee 18.28 (user 2026-10-17: the 3-joint leaders are the real leaders). The paired difference against the lead is a coin flip: -2.08 bench (P 0.745), -0.49 held (P 0.622). Its contact depth is 3.9x the lead's (15 vs 4 bench contact poses), and the J3 stop was placed from the claim bench's binders (P1 watch). The claim's own mixed-reading flood gave 17.35 / 22.67, and the family reading gives 20.68 / 24.56. Open before CAD: J3 dowel force, the K-spring hold (R17), cuff twist with the stop engaged, and a converged search (q3max was a 1-D 8-point sweep). | Cell A BOUND, gate FAIL: the free-K oracle moves the k33 frozen exact Bench(110,360) gap 18.61 -> 16.96 static / 17.25 connected plain (21.46 near-touch), rescuing only 148 / 316 / 369; 117 / 119 / 129 / 343 / 423 touch at every legal K; the anterior link-2 corridor is worse (+12 deg 18.71). Cell B BUILT (the plain bound met the 17.78 trigger): a J3 own-angle dowel stop at q3max 86 with K opening to hold it gives 16.20 static / 17.35 connected plain (score 93.69), 22.19 near-touch, 276 connected takes - the first 4-DOF row under the lead 18.28 on the plain reading (by 0.93), at complexity ~33.25 and overhead 5/28. UNVERIFIED. HELD-OUT (1154 poses, frozen, connected): cell B 22.67 vs its kit 23.37 vs the lead's 22.38 - it does NOT beat the lead held out (+0.29).",
+ "limiter": "metal parking at the ER binders (plane -90..-45, elev 45-60, axial 120-135): they want LESS K and still touch at the 5.5-deg floor (117 -1.14, 129 -5.87 with K >= 66 refused by the knee slide, 119 -10.74); the IR binders want K at stop B (82) and 343 / 423 still touch there (-0.19 / -1.33). The K self-motion cannot move hub 2 / link 2 off the skin at these seats - the wall is seat-level (where hub 2 and link 2 park), not K-level.",
+ "note": "Spec corrections: (1) the literal max-min oracle over hub 2 / L1b / L2 / hub K ignores member 3 and the knee moving with K (J3 misses GH by ~15 mm) - replaced by a run-based oracle (FO_HOW=scan keeps the literal one); (2) my first run-based rule (v2a) let 5 contact poses dodge to REFUSED K samples (read as lost, not contact): 15.27 / 15.55 was optimistic by 1.7; corrected (v2b) - only legal configurations compete; (3) the J2 slot stretched end is at the 5.5-deg rule for the bound (kit priced 7.877); (4) state-A contacts are not offered to the oracle (as specified). Cell B: built (see verdict); its gain over the bound's 2-rescue estimate comes from REFUSING 343 / 423 at the J3 stop (contact -> lost reach) and from opening K for state-A poses too; in the MODEL's own J3 convention (vref = unit(u3 x (0.3, 0.5, 0.8))) the IR binders sit at q3 99-113 at the kit and the rescuing K puts q3 at 77-82 (dq3/ddK ~ -0.67), the ER binders at q3 -60..-82 - so q3max ~ 78-82 deg is where a cell-B groove end would go (kscan3's reference is not this one). Near-touch: 8 taken poses under 1 mm (min 0.092, a state-A pose); the rescued 148 sits at 0.46. Local runs only (farm closed), niced, <= 2 processes. | VERIFIER 2026-10-18: reproduced 16.20 static / 17.35 connected (held 21.89 / 22.67). Under ONE fold reading (the model's; the state-2 moving wrist is >= 36 deg from singular) the flood connects every node: 16.20 bench / 21.89 held. Read the auditor's way, consistently: 20.68 / 24.56. The J3 dowel sits at J3's own angle q3' = 96.87 (q3 86 + phi 10.87, phi a function of q3 alone). Champion same bench 75.94. Not refuted. Ledger GAMED (P1) -> status kept 'screened'. 4 DOF: not a leader under the user's 3-DOF ruling.",
+ "doc": "docs/concepts/freek-oracle-route-knuckle-4r.md",
+ "model_file": "docs/concepts/models/freek-oracle-route-knuckle-4r.py",
+ "viz": "docs/concepts/viz/concepts/freek-oracle-route-knuckle-4r.js",
+ "held_out": {
+  "bench": "1154 disjoint poses (RM.PV.held_bench), exact, frozen, flood fill",
+  "cellB_q3max86": {
+   "static": 21.89,
+   "connected": 22.67,
+   "near": 26.22,
+   "ws_taken_connected": 693
+  },
+  "kit_k33": {
+   "static": 23.37,
+   "connected": 23.37,
+   "near": 26.74
+  },
+  "lead_held": 22.38,
+  "files": [
+   "docs/concepts/verify/freek-oracle-route-knuckle-4r/cellB_q3max86_held.json",
+   "docs/concepts/verify/freek-oracle-route-knuckle-4r/kit_k33_held.json"
+  ]
+ },
+ "held_out_gap": 21.89,
+ "v_contact": 0.0375,
+ "verification": {
+  "t": "2026-10-18T07:40:49Z",
+  "result": "NOT REFUTED; numbers reproduced. Status stays 'screened': the alignment ledger marks this row GAMED (P1, 2026-10-18 07:25), and CLAUDE.md forbids calling a gamed design verified until that finding is resolved.",
+  "bench": "Bench(110,360) exact, fit Bench(60,160) fast, frozen k33 shape, CB_FOLD_MARGIN 5.5, cell B q3max 86 (model q3)",
+  "reproduced": {
+   "static": 16.2,
+   "connected_claim_flood": 17.35,
+   "held_static": 21.89,
+   "held_connected_claim_flood": 22.67,
+   "dump_recomputed": [
+    16.21,
+    21.89
+   ]
+  },
+  "one_reading_model": {
+   "bench": 16.2,
+   "held": 21.89,
+   "flood_nodes": 1136,
+   "islands": 0,
+   "dropped": 0,
+   "jump_or_branch_refusals": 0,
+   "why": "In state 2 (J3 on its dowel, J2 free) the moving chain is the J1-K-J2 wrist: >= 35.99 deg from coplanar on the bench (37.56 held). Its th margin (effective dyad) is >= 9.6 (8.62 held), and stop B holds the K dyad. The claim's flood applies the state-1 sub-chain margin (J1-K-J3 with J2 rigid) to state-2 nodes. That drops ws 291 / 315 / 317 / 344 (margins 0.14-5.41), but the same rule is never applied to the 4 taken clip frames 12 / 47 / 49 / 52 (0.76-4.28)."
+  },
+  "family_reading_consistent": {
+   "bench": 20.68,
+   "held": 24.56,
+   "source": "alignment auditor docs/alignment/freek-oracle-route-knuckle-4r.md T3 (not re-run here)"
+  },
+  "j3_stop_reading": "q3 (the model's) = cuff vs link 2. J3's own angle is q3' = q3 + phi. The knee drift s = R3^T (c3 - R3 c3) depends on q3 alone, so phi is a function of q3: at all 32 bench / 61 held engaged poses phi = 10.87 deg exactly. The stop is a true own-angle dowel at q3' = 96.87 deg, and the groove must be cut there, not at 86. A dowel at q3' 86 reads fast 11.22 / near 12.36 (vs 9.56). Fit-bench q3' sweep 74 / 80 / 86 / 92 / 98 / 104: 20.62 / 20.97 / 12.36 / 10.75 / 9.59 / 10.84 near.",
+  "paired_vs_lead_static": {
+   "bench": -2.08,
+   "bench_ci90": [
+    -4.99,
+    2.98
+   ],
+   "p_better_bench": 0.745,
+   "held": -0.49,
+   "held_ci90": [
+    -2.7,
+    2.13
+   ],
+   "p_better_held": 0.622,
+   "contact_only_this_bench_held": [
+    13,
+    37
+   ],
+   "contact_only_lead_bench_held": [
+    2,
+    4
+   ]
+  },
+  "dof": "4 counted joints (K sensed); within the 4-DOF cap; 0 passive translations. User 2026-10-17: the 3-joint leaders are the real leaders, so this row cannot replace the 3-DOF lead (18.28, complexity 18.5).",
+  "not_run": "J3 dowel force / K-spring hold (R17 lag, preload), cuff twist with the stop engaged, farm convergence (q3max is a 1-D, 8-point fast sweep)",
+  "champion_same_bench": "75.94 (spherical 3R, risley-turret verifier checks on Bench(110,360) exact; this harness is the stricter k33 kit harness and was not used on the plain 3R)",
+  "files": [
+   "docs/concepts/verify/freek-oracle-route-knuckle-4r-verify.py",
+   "docs/concepts/verify/freek-oracle-route-knuckle-4r/verify_*.json",
+   "docs/alignment/remeasure/freek-oracle-route-knuckle-4r_{bench,held}_perpose.json"
+  ]
+ },
+ "polished_status": "CONFIRMED (independent verifier, 2026-10-18): held-out gain >= 1 gap point on the env-fit protocol. Does NOT replace the verified fields; the 3-joint lead stays the lead.",
+ "polished_id": "pick1 fe1-g10-7 (objective rank 1; picks committed 09:43:17 UTC in 6086e09, before any claim)",
+ "polished_params_nominal_file": "docs/research/freek_env_polish/picks/pick1.json",
+ "polished_params_priced": {
+  "q3max": 84.7705,
+  "smhi": 8.1472,
+  "smlo": 8.5843,
+  "a1max": 70.7149,
+  "bk1": 29.3309,
+  "bk2": 48.851,
+  "az2": 48.9176,
+  "el2": 41.3495,
+  "wd": 66.7214,
+  "wa": -13.7533,
+  "b3": 0.2933
+ },
+ "polished_price": {
+  "th_cut": 122.7,
+  "dK_cut": 75.923,
+  "dK_stopB": 83.031,
+  "psiA": -55.366,
+  "a1max_nominal": 72.6719,
+  "a1max_priced": 70.7149
+ },
+ "polished_search": "envh (Bench(60,160) clips + env positions 110..528 step 2, 210 fresh ws poses); 1 CMA start 161 tries; tools/freek_env_polish.py",
+ "polished_held_out_gap": 20.24,
+ "polished_held_out_protocol": "fit envh FAST -> held out (1154) EXACT, frozen, priced, one fold reading",
+ "polished_held_out_gain": 2.06,
+ "polished_held_out_ref_VER_same_protocol": 22.3,
+ "polished_held_out_paired": {
+  "diff": -2.06,
+  "ci90": [
+   -4.65,
+   -0.2
+  ],
+  "p_pick_better": 0.967,
+  "discordant": {
+   "ws_taken_A_only": 23,
+   "ws_taken_B_only": 27,
+   "contact_A_only": 7,
+   "contact_B_only": 28,
+   "contact_both": 22
+  }
+ },
+ "polished_held_out_side_reading": {
+  "how": "stop-refused poses that are contacts without the dowel (same frozen shape) counted as contacts (audit proposal B, not a ruled gate)",
+  "pick": 21.37,
+  "VER": 22.6,
+  "gain": 1.23,
+  "refused_kit_contacts": [
+   11,
+   3
+  ]
+ },
+ "polished_contact": {
+  "held_envfit": [
+   29,
+   134.76
+  ],
+  "held_envfit_VER": [
+   50,
+   241.47
+  ]
+ },
+ "polished_th_margin": {
+  "held_envfit": {
+   "one_min": 5.58,
+   "one_lt5": 0,
+   "one_min_at": {
+    "i": 880,
+    "state": 1,
+    "kind": "ws"
+   },
+   "family_min": 0.7,
+   "family_lt5": 6,
+   "j2_axis_link1b_vs_link2_maxdeg": 0.0002,
+   "states": {
+    "0": 630,
+    "1": 222,
+    "2": 44
+   }
+  },
+  "how": "member frames M.T(1|7|2): one reading per state's moving chain; family reading reported"
+ },
+ "polished_continuity": {
+  "held_envfit": {
+   "kinematic_dropped": 0,
+   "islands": 1,
+   "contact_aware": {
+    "blocked_nodes": 31,
+    "connected": 1079,
+    "dropped": 0,
+    "gap": 20.24,
+    "reach": 0.729
+   }
+  }
+ },
+ "polished_j3_stop_own_angle": [
+  93.1,
+  93.1
+ ],
+ "polished_verifier": "docs/concepts/verify/freek-oracle-route-knuckle-4r-polish-verify.py; results docs/concepts/verify/freek-oracle-route-knuckle-4r/polish_verify/",
+ "polished_held_out_fit60": {
+  "gap": 20.5,
+  "VER": 21.89,
+  "gain": 1.39,
+  "side_reading": 21.54,
+  "side_VER_polisher_not_rerun": 22.3,
+  "contact": [
+   29,
+   127.92
+  ],
+  "th": {
+   "one_min": 5.58,
+   "one_lt5": 0,
+   "one_min_at": {
+    "i": 880,
+    "state": 1,
+    "kind": "ws"
+   },
+   "family_min": 0.7,
+   "family_lt5": 6,
+   "j2_axis_link1b_vs_link2_maxdeg": 0.0002,
+   "states": {
+    "0": 629,
+    "1": 222,
+    "2": 43
+   }
+  },
+  "continuity": {
+   "kinematic_dropped": 0,
+   "contact_aware": {
+    "blocked_nodes": 32,
+    "connected": 1077,
+    "dropped": 0,
+    "gap": 20.5,
+    "reach": 0.7269
+   }
+  },
+  "paired_vs_verified_dump": {
+   "gap_A": 20.51,
+   "gap_B": 21.89,
+   "diff": -1.38,
+   "split": {
+    "reach": 0.84,
+    "follow": 0.0,
+    "inband": -0.37,
+    "contact": -1.85
+   },
+   "discordant": {
+    "ws_taken_A_only": 19,
+    "ws_taken_B_only": 27,
+    "contact_A_only": 8,
+    "contact_B_only": 26,
+    "contact_both": 21
+   },
+   "boot": {
+    "n": 4000,
+    "ci90": [
+     -3.71,
+     0.43
+    ],
+    "sd": 1.26,
+    "p_A_better": 0.892
+   }
+  }
+ },
+ "polished_gap": 15.4,
+ "polished_score": 94.4,
+ "polished_bench": {
+  "protocol": "fit Bench(60,160) FAST -> Bench(110,360) EXACT, frozen, priced, one fold reading",
+  "gap": 15.4,
+  "score": 94.4,
+  "VER": 16.2,
+  "VER_src": "verified on file (not re-run: the per-pose dump on file was compared pose by pose)",
+  "gain": 0.8,
+  "side_reading": 16.39,
+  "side_VER_polisher_not_rerun": 16.44,
+  "contact": 0.0179,
+  "contact_VER": [
+   15,
+   78.55
+  ],
+  "overhead": [
+   8,
+   28
+  ],
+  "th": {
+   "one_min": 5.59,
+   "one_lt5": 0,
+   "one_min_at": {
+    "i": 306,
+    "state": 1,
+    "kind": "ws"
+   },
+   "family_min": 5.59,
+   "family_lt5": 0,
+   "j2_axis_link1b_vs_link2_maxdeg": 0.0002,
+   "states": {
+    "0": 273,
+    "1": 89,
+    "2": 23
+   }
+  },
+  "continuity": {
+   "kinematic_dropped": 0,
+   "contact_aware": {
+    "blocked_nodes": 8,
+    "connected": 1101,
+    "dropped": 0,
+    "gap": 15.4,
+    "reach": 0.7639
+   }
+  },
+  "paired_vs_verified_dump": {
+   "gap_A": 15.4,
+   "gap_B": 16.21,
+   "diff": -0.81,
+   "split": {
+    "reach": 1.39,
+    "follow": 0.0,
+    "inband": -0.23,
+    "contact": -1.96
+   },
+   "discordant": {
+    "ws_taken_A_only": 6,
+    "ws_taken_B_only": 11,
+    "contact_A_only": 2,
+    "contact_B_only": 10,
+    "contact_both": 5
+   },
+   "boot": {
+    "n": 4000,
+    "ci90": [
+     -5.54,
+     1.84
+    ],
+    "sd": 2.23,
+    "p_A_better": 0.727
+   }
+  },
+  "reach": 0.7639,
+  "follow": 1.0,
+  "inband14": 0.9008,
+  "inband10": 0.5249,
+  "components_src": "docs/concepts/verify/freek-oracle-route-knuckle-4r/polish_verify/pick1_fit60_bench.json (connected) - added by the lead after the 11:24 audit R4"
+ },
+ "polished_t": "2026-10-18T10:59:20Z",
+ "polished_caveats": [
+  "Held-out gain with the CAD shape (fit Bench(60,160) -> held out): +1.38 paired vs the verified dump (P 0.89, CI90 -0.43..+3.71): >= 1 point but not significant.",
+  "Verified protocol (Bench(110,360)): 15.40 (score 94.40) vs 16.20: +0.81, P 0.73 - inside noise; no config reaches 95 (gap <= 13.75).",
+  "Stop-refusal side reading (refused poses that are kit contacts counted as contacts; audit proposal B, not a ruled gate): held env-fit +1.23 (21.37 vs 22.60), held fit60 +0.76 (21.54 vs the polisher's VER 22.30, under 1), bench 16.39 vs 16.44 (0). The polished J3 dowel (own angle 92.99-93.10 vs 96.87-96.98) refuses more kit-contact poses: held 3 -> 10-11, bench 1 -> 4.",
+  "Contact poses / summed depth: held env-fit 29 / 134.76 mm (VER 50 / 241.47); bench 7 / 39.47 mm (VER 15 / 78.55; lead 4 / 20.24).",
+  "Search-bench hygiene: no envh pose is a held-out pose; coordinate Chebyshev min 2.23 deg and thorax-humerus geodesic min 2.22 deg from every held-out pose (the env rule), but ONE envh pose is 1.66 deg from a held-out pose in the glenohumeral (HG) frame the mechanism sees (1 of 210 search poses). The CMA records hold only envh and Bench(60,160) scores (no held-out outcome); the picks were committed (6086e09, 09:43:17) before the first claim (09:48).",
+  "Not re-run by this verifier: VER on Bench(110,360) and VER fit60 -> held out (the on-file verified per-pose dumps were used; the polisher's harness reproduced them exactly). pick2 / pick3 not verified (pick3 was selected on the held-out set).",
+  "Open physical checks carry over (R17 with the state-2 spring hold, dowel force, cuff twist with the stop engaged)."
+ ],
+ "polished_held_out_gap_fit60": 20.5,
+ "polished_held_out_note": "Like-for-like with the verified held 21.89 and the lead's 22.38 (both fit Bench(60,160)) is the CAD-shape number 20.5 (+1.38, P 0.89, CI crosses 0); polished_held_out_gap 20.24 is the env-fit protocol (+2.06 vs VER 22.30 on that protocol). Audit 2026-10-18T11:24:30Z final WATCH (not gamed)."
+}

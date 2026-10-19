@@ -1,0 +1,148 @@
+{
+ "page": "docs/dashboard/public/index.html",
+ "morphs": "docs/dashboard/data/morphs.json",
+ "tie_rows": [
+  {
+   "id": "conecut-h2facet-knuckle-3r",
+   "v_gap": 18.28,
+   "target": "conecut-knee-knuckle-3r"
+  },
+  {
+   "id": "inband-rssr-knuckle-3r",
+   "v_gap": 18.33,
+   "target": "slipper-nose-knuckle-3r"
+  }
+ ],
+ "runs": [
+  {
+   "label": "as published",
+   "headline": "conecut-knee-knuckle-3r",
+   "headline_gap": 18.28,
+   "headline_text": "Re-centred cuff knee (tied with Re-centred knee, chamfered hub)",
+   "score": 93.4,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "A conecut-knee-knuckle-3r flagged gamed",
+   "headline": "lowarm-kphase-notch-knuckle-3r",
+   "headline_gap": 18.47,
+   "headline_text": "Phased half-ring drive",
+   "score": 93.3,
+   "lower_gap_3joint_verified_not_headline": [
+    {
+     "id": "conecut-h2facet-knuckle-3r",
+     "gap": 18.28,
+     "ruling": "tie: conecut-knee-knuckle-3r | ledger 20",
+     "named_in_headline": false
+    },
+    {
+     "id": "inband-rssr-knuckle-3r",
+     "gap": 18.33,
+     "ruling": "tie: slipper-nose-knuckle-3r | ledger 20",
+     "named_in_headline": false
+    }
+   ]
+  },
+  {
+   "label": "B conecut-knee-knuckle-3r refuted",
+   "headline": "lowarm-kphase-notch-knuckle-3r",
+   "headline_gap": 18.47,
+   "headline_text": "Phased half-ring drive",
+   "score": 93.3,
+   "lower_gap_3joint_verified_not_headline": [
+    {
+     "id": "conecut-h2facet-knuckle-3r",
+     "gap": 18.28,
+     "ruling": "tie: conecut-knee-knuckle-3r | ledger 20",
+     "named_in_headline": false
+    },
+    {
+     "id": "inband-rssr-knuckle-3r",
+     "gap": 18.33,
+     "ruling": "tie: slipper-nose-knuckle-3r | ledger 20",
+     "named_in_headline": false
+    }
+   ]
+  },
+  {
+   "label": "C new verified 3-joint row 0.04 below conecut-knee-knuckle-3r",
+   "headline": "whatif-new-leader-3r",
+   "headline_gap": 18.24,
+   "headline_text": "Re-centred cuff knee",
+   "score": 93.4,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "D conecut-h2facet-knuckle-3r ruling removed",
+   "headline": "conecut-h2facet-knuckle-3r",
+   "headline_gap": 18.28,
+   "headline_text": "Re-centred knee, chamfered hub",
+   "score": 93.4,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "E conecut-h2facet-knuckle-3r ruling with a leading space",
+   "headline": "conecut-knee-knuckle-3r",
+   "headline_gap": 18.28,
+   "headline_text": "Re-centred cuff knee (tied with Re-centred knee, chamfered hub)",
+   "score": 93.4,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "F conecut-h2facet-knuckle-3r status screened (before the polished promotion)",
+   "headline": "conecut-knee-knuckle-3r",
+   "headline_gap": 18.28,
+   "headline_text": "Re-centred cuff knee (tied with Re-centred knee, chamfered hub)",
+   "score": 93.4,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "A slipper-nose-knuckle-3r flagged gamed",
+   "headline": "conecut-knee-knuckle-3r",
+   "headline_gap": 18.28,
+   "headline_text": "Re-centred cuff knee (tied with Re-centred knee, chamfered hub)",
+   "score": 93.4,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "B slipper-nose-knuckle-3r refuted",
+   "headline": "conecut-knee-knuckle-3r",
+   "headline_gap": 18.28,
+   "headline_text": "Re-centred cuff knee (tied with Re-centred knee, chamfered hub)",
+   "score": 93.4,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "C new verified 3-joint row 0.04 below slipper-nose-knuckle-3r",
+   "headline": "conecut-knee-knuckle-3r",
+   "headline_gap": 18.28,
+   "headline_text": "Re-centred cuff knee (tied with Re-centred knee, chamfered hub)",
+   "score": 93.4,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "D inband-rssr-knuckle-3r ruling removed",
+   "headline": "conecut-knee-knuckle-3r",
+   "headline_gap": 18.28,
+   "headline_text": "Re-centred cuff knee (tied with Re-centred knee, chamfered hub)",
+   "score": 93.4,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "E inband-rssr-knuckle-3r ruling with a leading space",
+   "headline": "conecut-knee-knuckle-3r",
+   "headline_gap": 18.28,
+   "headline_text": "Re-centred cuff knee (tied with Re-centred knee, chamfered hub)",
+   "score": 93.4,
+   "lower_gap_3joint_verified_not_headline": []
+  },
+  {
+   "label": "F inband-rssr-knuckle-3r status screened (before the polished promotion)",
+   "headline": "conecut-knee-knuckle-3r",
+   "headline_gap": 18.28,
+   "headline_text": "Re-centred cuff knee (tied with Re-centred knee, chamfered hub)",
+   "score": 93.4,
+   "lower_gap_3joint_verified_not_headline": []
+  }
+ ]
+}

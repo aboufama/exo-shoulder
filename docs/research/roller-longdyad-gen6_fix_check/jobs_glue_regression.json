@@ -1,0 +1,44 @@
+[
+ {
+  "tag": "chk-glue-geneva",
+  "design": [
+   "l1_geneva-rod"
+  ],
+  "cmd": "python3 pipeline/conformal/param_cad/strip_glue_regression.py geneva --out user_geneva_rod --l1 l1_geneva-rod 2>&1 | grep -E 'REGRESS|glued|Traceback|Error' | tail -20",
+  "out": [
+   "docs/research/roller-longdyad-gen6_fix/strip_glue_regression_geneva_user_geneva_rod.json"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "chk-glue-bdp",
+  "design": [
+   "l1_minarc-bdp"
+  ],
+  "cmd": "python3 pipeline/conformal/param_cad/strip_glue_regression.py minarc --out user_minarc_bdp --l1 l1_minarc-bdp --params-file docs/concepts/verify/minarc-kitrule/params_floorBD5_phys_cap6.json --a1max 54.748 2>&1 | grep -E 'REGRESS|glued|Traceback|Error' | tail -20",
+  "out": [
+   "docs/research/roller-longdyad-gen6_fix/strip_glue_regression_minarc_user_minarc_bdp.json"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "chk-glue-pick1",
+  "design": [
+   "l1_minarc-pick1"
+  ],
+  "cmd": "python3 pipeline/conformal/param_cad/strip_glue_regression.py minarc --out user_minarc_pick1 --l1 l1_minarc-pick1 --params-file docs/research/minarc_final_polish/picks/pick1_priced.json --a1max 66.4696 2>&1 | grep -E 'REGRESS|glued|Traceback|Error' | tail -20",
+  "out": [
+   "docs/research/roller-longdyad-gen6_fix/strip_glue_regression_minarc_user_minarc_pick1.json"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1"
+  },
+  "timeout": 3000
+ }
+]

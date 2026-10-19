@@ -1,0 +1,121 @@
+{
+ "ROBUST_gam+0": {
+  "gam": 7.7146,
+  "near1": 14.01,
+  "near2": 16.58,
+  "dK_lim": 63.5,
+  "why_lim": "law",
+  "tilt_taken": [
+   25.9,
+   14.5
+  ],
+  "tilt_range": [
+   25.9,
+   19.0
+  ],
+  "trans": 51.6,
+  "honest": true
+ },
+ "ROBUST_gam+2": {
+  "gam": 9.7146,
+  "near1": 13.86,
+  "near2": 16.58,
+  "dK_lim": 63.5,
+  "why_lim": "law",
+  "tilt_taken": [
+   23.4,
+   14.7
+  ],
+  "tilt_range": [
+   23.4,
+   19.1
+  ],
+  "trans": 52.2,
+  "honest": true
+ },
+ "ROBUST_gam+3": {
+  "gam": 10.7146,
+  "near1": 13.81,
+  "near2": 16.58,
+  "dK_lim": 63.5,
+  "why_lim": "law",
+  "tilt_taken": [
+   22.2,
+   14.8
+  ],
+  "tilt_range": [
+   22.2,
+   19.2
+  ],
+  "trans": 52.5,
+  "honest": true
+ },
+ "ROBUST_gam+4": {
+  "gam": 11.7146,
+  "near1": 13.76,
+  "near2": 17.75,
+  "dK_lim": 63.5,
+  "why_lim": "law",
+  "tilt_taken": [
+   21.0,
+   14.9
+  ],
+  "tilt_range": [
+   21.0,
+   19.3
+  ],
+  "trans": 52.8,
+  "honest": true
+ },
+ "ROBUST_gam+5": {
+  "gam": 12.7146,
+  "near1": 13.75,
+  "near2": 17.75,
+  "dK_lim": 63.5,
+  "why_lim": "law",
+  "tilt_taken": [
+   19.8,
+   15.0
+  ],
+  "tilt_range": [
+   21.2,
+   19.3
+  ],
+  "trans": 53.1,
+  "honest": true
+ },
+ "ROBUST_gam+6": {
+  "gam": 13.7146,
+  "near1": 13.75,
+  "near2": 17.75,
+  "dK_lim": 63.5,
+  "why_lim": "law",
+  "tilt_taken": [
+   18.6,
+   15.1
+  ],
+  "tilt_range": [
+   22.0,
+   19.4
+  ],
+  "trans": 53.3,
+  "honest": true
+ },
+ "ROBUST_gam+8": {
+  "gam": 15.7146,
+  "near1": 13.75,
+  "near2": 17.75,
+  "dK_lim": 63.5,
+  "why_lim": "law",
+  "tilt_taken": [
+   16.3,
+   15.3
+  ],
+  "tilt_range": [
+   23.4,
+   19.5
+  ],
+  "trans": 53.7,
+  "honest": true
+ }
+}

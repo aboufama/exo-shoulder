@@ -1,0 +1,704 @@
+{
+ "step": 2,
+ "tol_mm": 0.5,
+ "frames_checked": 671,
+ "seconds": 320,
+ "jobs": 4,
+ "body_model": "rig",
+ "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
+ "parts": {
+  "H|M4x6 ISO 10642 countersunk (upper cuff)": {
+   "owner": "user",
+   "max_depth": 17.63,
+   "frames": 25,
+   "worst": [
+    "Wash opposite shoulder",
+    80,
+    [
+     145,
+     46,
+     -69,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": {
+   "owner": "user",
+   "max_depth": 19.89,
+   "frames": 42,
+   "worst": [
+    "Wash opposite shoulder",
+    80,
+    [
+     145,
+     46,
+     -69,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[13]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[17]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[3]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[6]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[1]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[3]": {
+   "owner": "user",
+   "max_depth": 0.62,
+   "frames": 21,
+   "worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_depth": 0.62,
+   "attributable_frames": 21,
+   "attributable_worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|CirPattern1[9]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[2]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve3": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[4]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[10]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[8]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[14]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[12]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[16]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[7]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[1]": {
+   "owner": "user",
+   "max_depth": 1.06,
+   "frames": 380,
+   "worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_depth": 1.06,
+   "attributable_frames": 380,
+   "attributable_worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|CirPattern1[5]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve4": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[11]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[2]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[15]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|5mm D, 2.5mm H, N42 MAGNET": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
+   "owner": "user",
+   "max_depth": 8.37,
+   "frames": 671,
+   "worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_depth": 8.37,
+   "attributable_frames": 671,
+   "attributable_worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
+   "owner": "user",
+   "max_depth": 2.78,
+   "frames": 648,
+   "worst": [
+    "Comb hair",
+    38,
+    [
+     53,
+     92,
+     -54,
+     106,
+     0
+    ]
+   ],
+   "attributable_depth": 2.78,
+   "attributable_frames": 648,
+   "attributable_worst": [
+    "Comb hair",
+    38,
+    [
+     53,
+     92,
+     -54,
+     106,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "F|MIDDLE": {
+   "owner": "user",
+   "max_depth": 5.77,
+   "frames": 671,
+   "worst": [
+    "Comb hair",
+    68,
+    [
+     60,
+     121,
+     -59,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 5.77,
+   "attributable_frames": 671,
+   "attributable_worst": [
+    "Comb hair",
+    68,
+    [
+     60,
+     121,
+     -59,
+     119,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|TOP": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "F|FOREARM CUFF": {
+   "owner": "user",
+   "max_depth": 24.87,
+   "frames": 671,
+   "worst": [
+    "Wash opposite shoulder",
+    150,
+    [
+     138,
+     59,
+     -50,
+     112,
+     0
+    ]
+   ],
+   "attributable_depth": 24.0,
+   "attributable_frames": 671,
+   "attributable_worst": [
+    "Wash opposite shoulder",
+    42,
+    [
+     115,
+     29,
+     -76,
+     114,
+     0
+    ]
+   ],
+   "attributable_kind": "other region, beyond the buried own skin"
+  },
+  "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue) + cut square to the arm 14.3 mm distal of pin b, clear of the knee sweep": {
+   "owner": "user",
+   "max_depth": 17.59,
+   "frames": 671,
+   "worst": [
+    "Wash opposite shoulder",
+    126,
+    [
+     145,
+     46,
+     -69,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 4.96,
+   "attributable_frames": 671,
+   "attributable_worst": [
+    "Comb hair",
+    164,
+    [
+     74,
+     131,
+     -64,
+     109,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|pad mount to BOTTOM (proxy) (2.38 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|pin b retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip land + pin end, over the 0.5 mm GTM washer on the knee link)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|pin a retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip land + pin end, over the 0.5 mm GTM washer on the knee link)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|arm pad = pin b lower plate (O12 x 2.38 mm, tr..tr+tp, arm-fixed on the cuff)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l4|knee link keep-out (flat Ti bar 42.4 x 10 x 2.38 mm, pins a, b 6 mm from its ends, tr+tp+0.5)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|E boss = pin a lower plate (O12 x 2.38 mm, tr..tr+tp, member 3)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to 2.38 at the boss)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|J3 lower plate keep-out (O20 x 3, member 3)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 125.8 deg of travel + the dowel; its ends = the stops)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K upper boss + clock-spring cap keep-out (O20, F+3.15..F+18.25: cap 6 mm taller - 0.3 x 5 mm 1.4310 +C1900 strip >= 145 mm, <= 0.015 N.m/rad, 0.08 N.m preload; K sensed: 4th encoder)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|K lower plate keep-out (O20 x 3, link 1a) with the K stop slot (r 7.75 mm, 3.1 wide, 34.5 deg of travel + the dowel; its ends = the stops)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|link 1a strap keep-out (8 x 3 mm Ti, fitted underside, J1 -> K)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|J1 lower plate keep-out (O20 x 3, link 1a)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member, carried directly by the scapula handler at the hub ring)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  }
+ },
+ "worst_part": "F|FOREARM CUFF",
+ "max_depth": 24.87,
+ "max_depth_ours": 0.0,
+ "max_depth_user": 24.87,
+ "attributable": {
+  "rule": "depth beyond the rig's own self-intersection (judge/body_regions.py): in full inside the part's own limb, elsewhere only below its own limb's skin",
+  "max_depth": 24.0,
+  "worst_part": "F|FOREARM CUFF",
+  "max_depth_ours": 0.0,
+  "worst_part_ours": "H|pad mount to BOTTOM (proxy) (2.38 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)",
+  "max_depth_user": 24.0,
+  "worst_part_user": "F|FOREARM CUFF"
+ }
+}

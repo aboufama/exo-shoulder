@@ -1,0 +1,84 @@
+{
+ "overall": 0.35403651248080115,
+ "follow": 1.0,
+ "in_band": 0.35403651248080115,
+ "clips": [
+  {
+   "name": "Raise overhead",
+   "frames": 181,
+   "score": 0.26864052294534646,
+   "follow": 1.0,
+   "in_band_when_following": 0.26864052294534646,
+   "median_gap": 15.600637104977107,
+   "min_gap": 0.7190033384963743
+  },
+  {
+   "name": "Drink from a cup",
+   "frames": 178,
+   "score": 0.33271494914078364,
+   "follow": 1.0,
+   "in_band_when_following": 0.33271494914078364,
+   "median_gap": 13.26050137964889,
+   "min_gap": 2.8569148112773317
+  },
+  {
+   "name": "Comb hair",
+   "frames": 202,
+   "score": 0.39865778844403826,
+   "follow": 1.0,
+   "in_band_when_following": 0.39865778844403826,
+   "median_gap": 11.351002920786687,
+   "min_gap": 1.648893758178457
+  },
+  {
+   "name": "Reach a high shelf",
+   "frames": 157,
+   "score": 0.41507120010702764,
+   "follow": 1.0,
+   "in_band_when_following": 0.41507120010702764,
+   "median_gap": 11.031548387213753,
+   "min_gap": 1.7066998500358137
+  },
+  {
+   "name": "Wash opposite shoulder",
+   "frames": 193,
+   "score": 0.2907003022849341,
+   "follow": 1.0,
+   "in_band_when_following": 0.2907003022849341,
+   "median_gap": 15.607578084166123,
+   "min_gap": 3.176639632149803
+  },
+  {
+   "name": "Reach back pocket",
+   "frames": 145,
+   "score": 0.5094875685925716,
+   "follow": 1.0,
+   "in_band_when_following": 0.5094875685925716,
+   "median_gap": 5.699699251433519,
+   "min_gap": 0.8270827149524899
+  },
+  {
+   "name": "Wave",
+   "frames": 172,
+   "score": 0.28712241223760043,
+   "follow": 1.0,
+   "in_band_when_following": 0.28712241223760043,
+   "median_gap": 13.749748380878101,
+   "min_gap": 2.4850731704539175
+  },
+  {
+   "name": "Walking arm swing",
+   "frames": 109,
+   "score": 0.3709968735080958,
+   "follow": 1.0,
+   "in_band_when_following": 0.3709968735080958,
+   "median_gap": 12.30512381605011,
+   "min_gap": 3.9270615253092114
+  }
+ ],
+ "band": [
+  2.0,
+  10.0
+ ],
+ "step": 3
+}

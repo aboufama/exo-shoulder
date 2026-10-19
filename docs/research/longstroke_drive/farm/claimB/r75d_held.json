@@ -1,0 +1,290 @@
+{
+ "cell": "lead",
+ "drive": "rssr",
+ "fit_fast": {
+  "gap": 14.53,
+  "reach": 0.7875,
+  "follow": 1.0,
+  "inband14": 0.8672,
+  "inband10": 0.5132,
+  "contact": 0.0
+ },
+ "frozen": {
+  "gap": 26.18,
+  "reach": 0.687,
+  "follow": 1.0,
+  "inband14": 0.8662,
+  "inband10": 0.5167,
+  "contact": 0.015
+ },
+ "mode": "exact",
+ "bench": [
+  -1,
+  -1
+ ],
+ "why": {
+  "fold": 253,
+  "slide": 32,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 13
+ },
+ "parts_pairs": {},
+ "th_margin": {
+  "min": 5.118,
+  "n": 856,
+  "lt5": 0,
+  "forced": 318,
+  "th_max_taken": 108.02,
+  "dK_taken_max": 42.68,
+  "lowest": {
+   "own": 5.118,
+   "forced": true,
+   "kind": "ws",
+   "plane": -30.0,
+   "elev": 30.0,
+   "axial": 120.0
+  }
+ },
+ "parts_ib14": {
+  "hub1": [
+   0.999,
+   8.6,
+   80
+  ],
+  "hubK": [
+   0.98,
+   7.4,
+   80
+  ],
+  "hub2": [
+   0.946,
+   11.1,
+   80
+  ],
+  "hub3": [
+   0.735,
+   11.6,
+   80
+  ],
+  "E": [
+   0.965,
+   6.5,
+   104
+  ],
+  "boss": [
+   0.988,
+   8.5,
+   32
+  ],
+  "pad": [
+   1.0,
+   8.1,
+   32
+  ],
+  "knee": [
+   0.942,
+   10.8,
+   85
+  ],
+  "crank": [
+   0.55,
+   13.8,
+   65
+  ],
+  "horn": [
+   0.955,
+   5.8,
+   20
+  ],
+  "rod": [
+   0.767,
+   11.5,
+   24
+  ],
+  "rodends": [
+   0.633,
+   12.0,
+   32
+  ],
+  "L1a": [
+   0.973,
+   10.3,
+   8
+  ],
+  "L1b": [
+   0.949,
+   7.4,
+   56
+  ],
+  "L2": [
+   0.726,
+   12.1,
+   124
+  ]
+ },
+ "audit": {
+  "near_touch_min_mm": 0.04,
+  "near_touch_low": [
+   {
+    "mm": 0.04,
+    "i": 681,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.18,
+    "i": 754,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 165.0,
+    "axial": -45.0
+   },
+   {
+    "mm": 0.29,
+    "i": 1106,
+    "kind": "ws",
+    "plane": 150.0,
+    "elev": 15.0,
+    "axial": -180.0
+   },
+   {
+    "mm": 0.44,
+    "i": 906,
+    "kind": "ws",
+    "plane": 105.0,
+    "elev": 15.0,
+    "axial": -165.0
+   },
+   {
+    "mm": 0.45,
+    "i": 14,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   }
+  ],
+  "gap_near1": 30.53,
+  "near1_poses": 24,
+  "gap_near2": 40.56,
+  "near2_poses": 70,
+  "overhead140": {
+   "ws": 71,
+   "reach": 0.2113,
+   "clip": 19,
+   "follow": 1.0,
+   "inband14": 0.9001,
+   "inband10": 0.601,
+   "why_not": {
+    "fold": 36,
+    "slide": 12,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 8
+   }
+  }
+ },
+ "ws_inband": {
+  "all": [
+   0.8416,
+   0.5015
+  ],
+  "e90_140": [
+   0.8199,
+   0.4886
+  ],
+  "ovh140": [
+   0.9426,
+   0.6271
+  ]
+ },
+ "split": {
+  "n": 13,
+  "by_part": {
+   "m1:hubK/horn": 6,
+   "horn": 6,
+   "rodends": 6,
+   "m8:rod/rodends": 6,
+   "hubK": 5,
+   "rod": 5,
+   "m2:?": 2,
+   "hub2": 2,
+   "m7:hub2": 2
+  }
+ },
+ "overhead": {
+  "ws": 71,
+  "taken": 15
+ },
+ "contact_depth": {
+  "n": 13,
+  "sum_mm": 60.685,
+  "max_mm": 13.541,
+  "per_pose": [
+   2.853,
+   5.916,
+   1.154,
+   1.269,
+   0.278,
+   9.262,
+   6.913,
+   0.155,
+   13.541,
+   8.944,
+   0.581,
+   9.804,
+   0.015
+  ]
+ },
+ "cam": {
+  "dK_lim": 48.8,
+  "why_lim": "transmission",
+  "pa_crank_max_taken": null,
+  "pa_horn_max_taken": null,
+  "pa_kin_max": null,
+  "friction_deg": null,
+  "pa_eff_horn": null,
+  "pa_eff_crank": null,
+  "flank_rho_min": null,
+  "clear_hubK_min": null,
+  "clear_roll_hubK_min": null,
+  "clear_lowarm_lug_min": null,
+  "arm_len": null,
+  "contact_r": null,
+  "lug_r_max": null,
+  "nose_r": null,
+  "mu": null,
+  "trans_min_taken": 51.1,
+  "ratio_range": [
+   0.668,
+   0.935
+  ],
+  "rod_len": 49.4,
+  "La": 20.2,
+  "r_h": 15.5,
+  "crest_exact": 10.73
+ },
+ "params": {
+  "La": 20.1662,
+  "s_arm": 5.0174,
+  "r_h": 15.475,
+  "beta": -140.3594,
+  "gam": 44.0765,
+  "hl": 3.15,
+  "zr": 1.4209,
+  "kK": 1.7907,
+  "r_lobe": 7.7965,
+  "bk1": 26.4604,
+  "bk2": 47.5588,
+  "a1max": 69.0192,
+  "smhi": 13.3023
+ },
+ "secs": 514.7
+}

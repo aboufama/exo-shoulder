@@ -1,0 +1,160 @@
+{
+ "task": "frozen",
+ "t0": "2026-10-18T08:38:59Z",
+ "variant": "neck_over_hub2",
+ "params": {
+  "az": 97.467,
+  "el": 62.7844,
+  "a1": 40.6347,
+  "a2": 47.4415,
+  "wd": 109.3974,
+  "wa": -1.1276,
+  "q": 0.9581,
+  "end_extra": 8.0,
+  "sigma": -1,
+  "inv2": 0,
+  "inv3": 1
+ },
+ "fit": {
+  "gap": 28.47,
+  "near": 45.94,
+  "reach": 0.6937,
+  "follow": 0.9167,
+  "inband14": 0.8954,
+  "inband10": 0.4231,
+  "contact": 0.0405,
+  "honest": true,
+  "hub_F": {
+   "hub1": 52.21,
+   "hub2": 60.0,
+   "hub3": 62.0
+  },
+  "inband_member": {
+   "hub1": 0.9684,
+   "hub2": 0.9989,
+   "hub3": 0.9196,
+   "link1": 0.9625,
+   "link2": 0.8999,
+   "neck": 0.8051
+  },
+  "overhead": {
+   "n_ws": 12,
+   "reach": 0.0,
+   "n_clip": 5,
+   "follow": 0.6,
+   "n_taken": 3,
+   "inband14": 0.9044,
+   "inband10": 0.5707
+  },
+  "min_metal_all_faces": 0.14
+ },
+ "wear_mode": "exact",
+ "wear": {
+  "gap": 36.05,
+  "near": 55.16,
+  "reach": 0.6083,
+  "follow": 0.9364,
+  "inband14": 0.8949,
+  "inband10": 0.4401,
+  "contact": 0.0501,
+  "honest": true,
+  "hub_F": {
+   "hub1": 52.21,
+   "hub2": 60.0,
+   "hub3": 62.0
+  },
+  "inband_member": {
+   "hub1": 0.9693,
+   "hub2": 0.9983,
+   "hub3": 0.9159,
+   "link1": 0.9638,
+   "link2": 0.9032,
+   "neck": 0.8017
+  },
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.2143,
+   "n_clip": 10,
+   "follow": 0.8,
+   "n_taken": 14,
+   "inband14": 0.8839,
+   "inband10": 0.6186
+  },
+  "min_metal_all_faces": 0.21,
+  "secs": 337.6,
+  "attribution": {
+   "table": {
+    "ws": {
+     "n": 360,
+     "taken": 219,
+     "fold_folded": 8,
+     "fold_stretched": 85,
+     "jam_K2": 0,
+     "parts": 33,
+     "contact": 15
+    },
+    "clip": {
+     "n": 110,
+     "taken": 103,
+     "fold_folded": 0,
+     "fold_stretched": 5,
+     "jam_K2": 0,
+     "parts": 0,
+     "contact": 2
+    },
+    "overhead": {
+     "n": 28,
+     "taken": 5,
+     "fold_folded": 0,
+     "fold_stretched": 15,
+     "jam_K2": 0,
+     "parts": 3,
+     "contact": 5
+    },
+    "across": {
+     "n": 68,
+     "taken": 20,
+     "fold_folded": 0,
+     "fold_stretched": 47,
+     "jam_K2": 0,
+     "parts": 1,
+     "contact": 0
+    },
+    "behind": {
+     "n": 25,
+     "taken": 15,
+     "fold_folded": 0,
+     "fold_stretched": 8,
+     "jam_K2": 0,
+     "parts": 1,
+     "contact": 1
+    }
+   },
+   "contact_by_member": {
+    "link2": 4,
+    "hub2": 7,
+    "hub3": 5,
+    "neck": 1
+   },
+   "kin_ws": 0.7417,
+   "kin_overhead": 0.4643,
+   "th_ws_p5_p95": [
+    18.3,
+    137.7
+   ],
+   "window": [
+    11.8,
+    83.1
+   ],
+   "inband_member": {
+    "hub1": 0.9693,
+    "hub2": 0.9983,
+    "hub3": 0.9159,
+    "link1": 0.9638,
+    "link2": 0.9032,
+    "neck": 0.8017
+   }
+  }
+ },
+ "score": 86.89
+}

@@ -1,0 +1,910 @@
+{
+ "id": "trimlug-k165-knuckle-3r",
+ "keep_held": [
+  224,
+  225,
+  252,
+  525,
+  534,
+  607,
+  610,
+  682,
+  755,
+  820
+ ],
+ "walls": {
+  "1.5": {
+   "bench_k165": {
+    "trim": {
+     "r_trim": 21.27,
+     "contact_r_max": 19.77,
+     "back_t": 6.0,
+     "rlift": 0.0,
+     "lift_r0": 17.3,
+     "horn_n": [
+      23,
+      20
+     ],
+     "dense_n": 648,
+     "crank_arc_n": 80
+    },
+    "t5": {
+     "n": 2,
+     "sum_mm": 13.18,
+     "poses": [
+      {
+       "j": 0,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        165.0,
+        -60.0
+       ],
+       "depth": 9.0,
+       "parts": {
+        "c9:crank/roller": -9.0,
+        "crank": -8.5,
+        "c1:hubK/horn": -8.35,
+        "horn": -6.75,
+        "roller": -4.16,
+        "hubK": -2.65
+       }
+      },
+      {
+       "j": 1,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        165.0,
+        -60.0
+       ],
+       "depth": 4.18,
+       "parts": {
+        "c1:hubK/horn": -4.18,
+        "horn": -3.29,
+        "crank": -0.26,
+        "c7:hub2": -0.09
+       }
+      }
+     ]
+    }
+   },
+   "held_contacts": {
+    "trim": {
+     "r_trim": 21.27,
+     "contact_r_max": 19.77,
+     "back_t": 6.0,
+     "rlift": 0.0,
+     "lift_r0": 17.3,
+     "horn_n": [
+      23,
+      20
+     ],
+     "dense_n": 648,
+     "crank_arc_n": 80
+    },
+    "t5": {
+     "n": 10,
+     "sum_mm": 40.59,
+     "poses": [
+      {
+       "j": 0,
+       "kind": "ws",
+       "pose": [
+        -90.0,
+        60.0,
+        105.0
+       ],
+       "depth": 3.49,
+       "parts": {
+        "c2:?": -1.7
+       }
+      },
+      {
+       "j": 1,
+       "kind": "ws",
+       "pose": [
+        -90.0,
+        60.0,
+        120.0
+       ],
+       "depth": 5.51,
+       "parts": {
+        "c2:?": -3.43,
+        "c7:hub2": -0.97,
+        "hub2": -0.73
+       }
+      },
+      {
+       "j": 2,
+       "kind": "ws",
+       "pose": [
+        -75.0,
+        60.0,
+        105.0
+       ],
+       "depth": 1.6,
+       "parts": {}
+      },
+      {
+       "j": 3,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        105.0,
+        15.0
+       ],
+       "depth": 1.22,
+       "parts": {
+        "c7:hub2": -1.22,
+        "hub2": -1.07
+       }
+      },
+      {
+       "j": 4,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        150.0,
+        -60.0
+       ],
+       "depth": 6.13,
+       "parts": {
+        "c1:hubK/horn": -6.13,
+        "horn": -5.69,
+        "crank": -1.32,
+        "c9:crank/roller": -0.66,
+        "roller": -0.48
+       }
+      },
+      {
+       "j": 5,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        150.0,
+        -45.0
+       ],
+       "depth": 4.07,
+       "parts": {
+        "c1:hubK/horn": -4.07,
+        "horn": -3.67,
+        "crank": -0.2
+       }
+      },
+      {
+       "j": 6,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        165.0,
+        -45.0
+       ],
+       "depth": 9.06,
+       "parts": {
+        "c9:crank/roller": -9.06,
+        "crank": -7.98,
+        "c1:hubK/horn": -7.02,
+        "horn": -5.04,
+        "roller": -3.86,
+        "hubK": -1.34
+       }
+      },
+      {
+       "j": 7,
+       "kind": "ws",
+       "pose": [
+        45.0,
+        165.0,
+        -45.0
+       ],
+       "depth": 4.18,
+       "parts": {
+        "c1:hubK/horn": -4.18,
+        "horn": -3.15,
+        "crank": -0.18
+       }
+      },
+      {
+       "j": 8,
+       "kind": "ws",
+       "pose": [
+        60.0,
+        165.0,
+        -30.0
+       ],
+       "depth": 5.15,
+       "parts": {
+        "c1:hubK/horn": -5.15,
+        "horn": -3.96,
+        "crank": -1.0,
+        "c9:crank/roller": -0.76
+       }
+      },
+      {
+       "j": 9,
+       "kind": "ws",
+       "pose": [
+        75.0,
+        150.0,
+        -90.0
+       ],
+       "depth": 0.18,
+       "parts": {}
+      }
+     ]
+    }
+   }
+  },
+  "1.95": {
+   "bench_k165": {
+    "trim": {
+     "r_trim": 21.72,
+     "contact_r_max": 19.77,
+     "back_t": 6.0,
+     "rlift": 0.0,
+     "lift_r0": 17.3,
+     "horn_n": [
+      23,
+      20
+     ],
+     "dense_n": 666,
+     "crank_arc_n": 80
+    },
+    "t5": {
+     "n": 2,
+     "sum_mm": 13.44,
+     "poses": [
+      {
+       "j": 0,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        165.0,
+        -60.0
+       ],
+       "depth": 9.0,
+       "parts": {
+        "c9:crank/roller": -9.0,
+        "crank": -8.5,
+        "c1:hubK/horn": -8.35,
+        "horn": -6.75,
+        "roller": -4.16,
+        "hubK": -2.65
+       }
+      },
+      {
+       "j": 1,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        165.0,
+        -60.0
+       ],
+       "depth": 4.44,
+       "parts": {
+        "c1:hubK/horn": -4.44,
+        "horn": -3.29,
+        "crank": -0.26,
+        "c7:hub2": -0.09
+       }
+      }
+     ]
+    }
+   },
+   "held_contacts": {
+    "trim": {
+     "r_trim": 21.72,
+     "contact_r_max": 19.77,
+     "back_t": 6.0,
+     "rlift": 0.0,
+     "lift_r0": 17.3,
+     "horn_n": [
+      23,
+      20
+     ],
+     "dense_n": 666,
+     "crank_arc_n": 80
+    },
+    "t5": {
+     "n": 10,
+     "sum_mm": 41.85,
+     "poses": [
+      {
+       "j": 0,
+       "kind": "ws",
+       "pose": [
+        -90.0,
+        60.0,
+        105.0
+       ],
+       "depth": 3.49,
+       "parts": {
+        "c2:?": -1.7
+       }
+      },
+      {
+       "j": 1,
+       "kind": "ws",
+       "pose": [
+        -90.0,
+        60.0,
+        120.0
+       ],
+       "depth": 5.51,
+       "parts": {
+        "c2:?": -3.43,
+        "c7:hub2": -0.97,
+        "hub2": -0.73
+       }
+      },
+      {
+       "j": 2,
+       "kind": "ws",
+       "pose": [
+        -75.0,
+        60.0,
+        105.0
+       ],
+       "depth": 1.6,
+       "parts": {}
+      },
+      {
+       "j": 3,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        105.0,
+        15.0
+       ],
+       "depth": 1.22,
+       "parts": {
+        "c7:hub2": -1.22,
+        "hub2": -1.07
+       }
+      },
+      {
+       "j": 4,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        150.0,
+        -60.0
+       ],
+       "depth": 6.45,
+       "parts": {
+        "c1:hubK/horn": -6.45,
+        "horn": -5.69,
+        "crank": -1.32,
+        "c9:crank/roller": -0.66,
+        "roller": -0.48
+       }
+      },
+      {
+       "j": 5,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        150.0,
+        -45.0
+       ],
+       "depth": 4.45,
+       "parts": {
+        "c1:hubK/horn": -4.45,
+        "horn": -3.67,
+        "crank": -0.2
+       }
+      },
+      {
+       "j": 6,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        165.0,
+        -45.0
+       ],
+       "depth": 9.06,
+       "parts": {
+        "c9:crank/roller": -9.06,
+        "crank": -7.98,
+        "c1:hubK/horn": -7.24,
+        "horn": -5.04,
+        "roller": -3.86,
+        "hubK": -1.34
+       }
+      },
+      {
+       "j": 7,
+       "kind": "ws",
+       "pose": [
+        45.0,
+        165.0,
+        -45.0
+       ],
+       "depth": 4.45,
+       "parts": {
+        "c1:hubK/horn": -4.45,
+        "horn": -3.15,
+        "crank": -0.18
+       }
+      },
+      {
+       "j": 8,
+       "kind": "ws",
+       "pose": [
+        60.0,
+        165.0,
+        -30.0
+       ],
+       "depth": 5.44,
+       "parts": {
+        "c1:hubK/horn": -5.44,
+        "horn": -3.96,
+        "crank": -1.0,
+        "c9:crank/roller": -0.76
+       }
+      },
+      {
+       "j": 9,
+       "kind": "ws",
+       "pose": [
+        75.0,
+        150.0,
+        -90.0
+       ],
+       "depth": 0.18,
+       "parts": {}
+      }
+     ]
+    }
+   }
+  },
+  "2.21": {
+   "bench_k165": {
+    "trim": {
+     "r_trim": 21.98,
+     "contact_r_max": 19.77,
+     "back_t": 6.0,
+     "rlift": 0.0,
+     "lift_r0": 17.3,
+     "horn_n": [
+      23,
+      21
+     ],
+     "dense_n": 675,
+     "crank_arc_n": 80
+    },
+    "t5": {
+     "n": 2,
+     "sum_mm": 13.7,
+     "poses": [
+      {
+       "j": 0,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        165.0,
+        -60.0
+       ],
+       "depth": 9.0,
+       "parts": {
+        "c9:crank/roller": -9.0,
+        "crank": -8.5,
+        "c1:hubK/horn": -8.35,
+        "horn": -6.75,
+        "roller": -4.16,
+        "hubK": -2.65
+       }
+      },
+      {
+       "j": 1,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        165.0,
+        -60.0
+       ],
+       "depth": 4.7,
+       "parts": {
+        "c1:hubK/horn": -4.7,
+        "horn": -4.32,
+        "crank": -0.26,
+        "c7:hub2": -0.09
+       }
+      }
+     ]
+    }
+   },
+   "held_contacts": {
+    "trim": {
+     "r_trim": 21.98,
+     "contact_r_max": 19.77,
+     "back_t": 6.0,
+     "rlift": 0.0,
+     "lift_r0": 17.3,
+     "horn_n": [
+      23,
+      21
+     ],
+     "dense_n": 675,
+     "crank_arc_n": 80
+    },
+    "t5": {
+     "n": 10,
+     "sum_mm": 42.89,
+     "poses": [
+      {
+       "j": 0,
+       "kind": "ws",
+       "pose": [
+        -90.0,
+        60.0,
+        105.0
+       ],
+       "depth": 3.49,
+       "parts": {
+        "c2:?": -1.7
+       }
+      },
+      {
+       "j": 1,
+       "kind": "ws",
+       "pose": [
+        -90.0,
+        60.0,
+        120.0
+       ],
+       "depth": 5.51,
+       "parts": {
+        "c2:?": -3.43,
+        "c7:hub2": -0.97,
+        "hub2": -0.73
+       }
+      },
+      {
+       "j": 2,
+       "kind": "ws",
+       "pose": [
+        -75.0,
+        60.0,
+        105.0
+       ],
+       "depth": 1.6,
+       "parts": {}
+      },
+      {
+       "j": 3,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        105.0,
+        15.0
+       ],
+       "depth": 1.22,
+       "parts": {
+        "c7:hub2": -1.22,
+        "hub2": -1.07
+       }
+      },
+      {
+       "j": 4,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        150.0,
+        -60.0
+       ],
+       "depth": 6.89,
+       "parts": {
+        "c1:hubK/horn": -6.89,
+        "horn": -5.69,
+        "crank": -1.32,
+        "c9:crank/roller": -0.66,
+        "roller": -0.48
+       }
+      },
+      {
+       "j": 5,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        150.0,
+        -45.0
+       ],
+       "depth": 4.49,
+       "parts": {
+        "c1:hubK/horn": -4.49,
+        "horn": -3.67,
+        "crank": -0.2
+       }
+      },
+      {
+       "j": 6,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        165.0,
+        -45.0
+       ],
+       "depth": 9.06,
+       "parts": {
+        "c9:crank/roller": -9.06,
+        "crank": -7.98,
+        "c1:hubK/horn": -7.5,
+        "horn": -5.04,
+        "roller": -3.86,
+        "hubK": -1.34
+       }
+      },
+      {
+       "j": 7,
+       "kind": "ws",
+       "pose": [
+        45.0,
+        165.0,
+        -45.0
+       ],
+       "depth": 4.72,
+       "parts": {
+        "c1:hubK/horn": -4.72,
+        "horn": -4.24,
+        "crank": -0.18
+       }
+      },
+      {
+       "j": 8,
+       "kind": "ws",
+       "pose": [
+        60.0,
+        165.0,
+        -30.0
+       ],
+       "depth": 5.73,
+       "parts": {
+        "c1:hubK/horn": -5.73,
+        "horn": -5.09,
+        "crank": -1.0,
+        "c9:crank/roller": -0.76
+       }
+      },
+      {
+       "j": 9,
+       "kind": "ws",
+       "pose": [
+        75.0,
+        150.0,
+        -90.0
+       ],
+       "depth": 0.18,
+       "parts": {}
+      }
+     ]
+    }
+   }
+  },
+  "99.0": {
+   "bench_k165": {
+    "trim": {
+     "r_trim": 118.77,
+     "contact_r_max": 19.77,
+     "back_t": 6.0,
+     "rlift": 0.0,
+     "lift_r0": 17.3,
+     "horn_n": [
+      23,
+      23
+     ],
+     "dense_n": 696,
+     "crank_arc_n": 80
+    },
+    "t5": {
+     "n": 2,
+     "sum_mm": 14.74,
+     "poses": [
+      {
+       "j": 0,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        165.0,
+        -60.0
+       ],
+       "depth": 9.0,
+       "parts": {
+        "c9:crank/roller": -9.0,
+        "crank": -8.5,
+        "c1:hubK/horn": -8.49,
+        "horn": -7.07,
+        "roller": -4.16,
+        "hubK": -2.65
+       }
+      },
+      {
+       "j": 1,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        165.0,
+        -60.0
+       ],
+       "depth": 5.74,
+       "parts": {
+        "c1:hubK/horn": -5.74,
+        "horn": -5.34,
+        "crank": -0.26,
+        "c7:hub2": -0.09
+       }
+      }
+     ]
+    }
+   },
+   "held_contacts": {
+    "trim": {
+     "r_trim": 118.77,
+     "contact_r_max": 19.77,
+     "back_t": 6.0,
+     "rlift": 0.0,
+     "lift_r0": 17.3,
+     "horn_n": [
+      23,
+      23
+     ],
+     "dense_n": 696,
+     "crank_arc_n": 80
+    },
+    "t5": {
+     "n": 10,
+     "sum_mm": 46.35,
+     "poses": [
+      {
+       "j": 0,
+       "kind": "ws",
+       "pose": [
+        -90.0,
+        60.0,
+        105.0
+       ],
+       "depth": 3.49,
+       "parts": {
+        "c2:?": -1.7
+       }
+      },
+      {
+       "j": 1,
+       "kind": "ws",
+       "pose": [
+        -90.0,
+        60.0,
+        120.0
+       ],
+       "depth": 5.51,
+       "parts": {
+        "c2:?": -3.43,
+        "c7:hub2": -0.97,
+        "hub2": -0.73
+       }
+      },
+      {
+       "j": 2,
+       "kind": "ws",
+       "pose": [
+        -75.0,
+        60.0,
+        105.0
+       ],
+       "depth": 1.6,
+       "parts": {}
+      },
+      {
+       "j": 3,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        105.0,
+        15.0
+       ],
+       "depth": 1.22,
+       "parts": {
+        "c7:hub2": -1.22,
+        "hub2": -1.07
+       }
+      },
+      {
+       "j": 4,
+       "kind": "ws",
+       "pose": [
+        15.0,
+        150.0,
+        -60.0
+       ],
+       "depth": 7.29,
+       "parts": {
+        "c1:hubK/horn": -7.29,
+        "horn": -7.07,
+        "crank": -1.32,
+        "c9:crank/roller": -0.66,
+        "roller": -0.48
+       }
+      },
+      {
+       "j": 5,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        150.0,
+        -45.0
+       ],
+       "depth": 5.33,
+       "parts": {
+        "c1:hubK/horn": -5.33,
+        "horn": -4.45,
+        "crank": -0.2
+       }
+      },
+      {
+       "j": 6,
+       "kind": "ws",
+       "pose": [
+        30.0,
+        165.0,
+        -45.0
+       ],
+       "depth": 9.06,
+       "parts": {
+        "c9:crank/roller": -9.06,
+        "c1:hubK/horn": -8.13,
+        "crank": -7.98,
+        "horn": -6.62,
+        "roller": -3.86,
+        "hubK": -1.34
+       }
+      },
+      {
+       "j": 7,
+       "kind": "ws",
+       "pose": [
+        45.0,
+        165.0,
+        -45.0
+       ],
+       "depth": 5.8,
+       "parts": {
+        "c1:hubK/horn": -5.8,
+        "horn": -5.3,
+        "crank": -0.18
+       }
+      },
+      {
+       "j": 8,
+       "kind": "ws",
+       "pose": [
+        60.0,
+        165.0,
+        -30.0
+       ],
+       "depth": 6.87,
+       "parts": {
+        "c1:hubK/horn": -6.87,
+        "horn": -6.2,
+        "crank": -1.0,
+        "c9:crank/roller": -0.76
+       }
+      },
+      {
+       "j": 9,
+       "kind": "ws",
+       "pose": [
+        75.0,
+        150.0,
+        -90.0
+       ],
+       "depth": 0.18,
+       "parts": {}
+      }
+     ]
+    }
+   }
+  }
+ },
+ "note": "Alignment audit probe (new file, 2026-10-18): does trimlug-k165-knuckle-3r's contact-depth gain depend on reading its\n\"1.5 mm wall\" at the lug's mid-plane only?\n\nThe CAD check of the round-11 winner CAD (docs/research/user_slipper_nose_fix_check.md, O2) found that the lug trim\nr_trim = farthest flank contact + trim_wall is read at the lug's mid-plane (contact max 19.80 mm); at the lug's top edge\n(+1.5 mm along ez) the farthest contact is 20.22 mm over [0, dK_lim] and 20.48 mm over the built stroke (51.75 deg), so\nthe wall left past the last contact is 1.08 / 0.82 mm, not 1.5. This probe wears the claim's frozen shape (the model\nUNCHANGED, only trim_wall varied) with the wall that keeps 1.5 mm at the top edge:\n  trim_wall 1.95 -> r_trim 21.72 (20.22 + 1.5), trim_wall 2.21 -> r_trim 21.98 (20.48 + 1.5); 1.5 = the claim; 99 = no trim.\n  bench: the model's own `k165` mode (the two elev-165 bench contact poses 237 / 264, Bench(110,360) exact)\n  held : the held-out set restricted to the claim's 10 held contact poses (docs/alignment/remeasure/<id>_held_perpose.json)\n\n    SN_CELL=lead CB_EXACT=1 CB_QUIET_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_trimlug_edgewall.py 1.5,1.95,2.21,99 out.json\n"
+}

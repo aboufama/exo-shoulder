@@ -1,0 +1,57 @@
+[
+ {
+  "key": "NEW-instrument-masked-T5",
+  "level": "watch",
+  "reason": "The tool's own contact_depth (T5) check now reads 'ok' for this row only because the reference's depth lookup crashes. docs/alignment/remeasure/desmo-geom-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json (commit 46af77e, 11:37 UTC) holds \"held\": \"missing dump\" (a string). tools/alignment_audit.py _depth_sources() calls .get() on it, raises AttributeError, and ref_depths() swallows the exception as 'no depth of conecut-knee-knuckle-3r on file'. With that one file skipped (scratch probe, tool unchanged) the same check reads WATCH: verified config 15 contacts / 78.55 mm vs the lead's 4 / 20.24 (x3.88) bench, 47 / 232.2 vs 14 / 60.97 (x3.81) held - the 11:18 audit's reading. The claim the ledger keys (pick1 15.40) is x1.95 bench / x2.10 held (finding T5). The same crash masks T5 on two other 4-joint rows audited since 15:00: offset-shortcar-relay-4r (the board's first verified row, 14.76: x2.28 bench, tool shows ok) and phi40-thinstack-relay-4r (x3.70 bench, tool shows ok); on the four 3-joint rows hit (conecut-h2facet, conecut-l2jog, lowarm-kphase-notch, lowarm-kstop) the level is ok either way. Not the design's doing: an instrument hole that turns a measured watch into an 'ok'. Action: proposal I (type-check the paired file, never read an exception as 'not on file'); re-audit offset-shortcar-relay-4r and phi40-thinstack-relay-4r after the fix."
+ },
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "Contact depth of the claim (pick1, re-worn this audit, 0 of 470 bench poses differ from the 11:18 re-wear and the polish verifier's dump): bench 7 contact poses / 39.47 mm summed, deepest 12.61 mm at ws 237 (plane 15, elev 165, axial -60, overhead), vs the lead conecut-knee-knuckle-3r 4 / 20.24 mm, deepest 8.93 at the same pose (x1.95). Held out, CAD shape (fit Bench(60,160)): 29 / 127.92 mm vs the lead's 14 / 60.97 (x2.10, +66.95 mm: over TH depth_ratio 2.0 and depth_floor 5 mm). The plain-gap lead over the 3-joint lead (-2.89 bench, -1.87 held) is reach (-3.61 / -3.47) paid with contact (+0.72 / +1.54); discordant contacts 5 vs 2 bench, 19 vs 4 held. Files: docs/alignment/remeasure/freek_polish_pick1/*_static_perpose.json, docs/concepts/verify/freek-oracle-route-knuckle-4r/polish_verify/pick1_fit60_{bench,held}_perpose.json. Action: report depth next to the gap; do not call it cleaner than the lead."
+ },
+ {
+  "key": "NEW-stop-refusal",
+  "level": "watch",
+  "reason": "The polished J3 dowel (own angle 93.1, model q3 84.77) refuses poses that the same frozen shape would press into the arm without it, and the score counts a refusal as lost reach only. Re-measured this audit (tools/alignment_remeasure_freek_polish.py bench, 149 s): pick1 refuses 6 bench poses, 4 are kit contacts (11.92 mm); side gap 16.39 vs the verified config's 16.45 on the same reading = gain 0.06 (plain 15.40 vs 16.21 = 0.81). Held, CAD shape (re-worn this audit, 292 s, 0 of 1154 poses differ from 11:18): pick1 refuses 14, 10 kit contacts (34.76 mm); side 21.54 vs 22.29 = gain 0.75 (plain 20.50 vs 21.89 = 1.38), under the 1-point polish rule. NEW since 11:24: the re-dispatched verifier's side check (docs/concepts/verify/freek-oracle-route-knuckle-4r/reverify_side_bench.json, WIP b31b802) re-reads the verified config with the k33 KIT's own fit as 'without the dowel' and gets 16.68 (2 refused kit contacts: 343 -2.67, 423 -1.66 mm), vs 16.45 on the same-shape reading (343 -2.89; 423 fold / slide refused) - proposal B's number depends by 0.23 on which shape stands in for 'no dowel'. Also NEW, clean: the dowel is reached by a continuous K self-motion at every engaged pose (reverifier VER: 47 / 100 engaged, 0 skipped infeasible bands, 0 q3 reversals; this audit's tools/alignment_freek_skipcheck_pick1.py for pick1: bench 31 engaged / 6 refused / 0 skipped / 0 reversals, held 66 / 14 / 0 / 0) - no static island hides behind the stop. Why only watch: at the refused held poses the lead also refuses, and a stop is better for the skin than 0.4-6.7 mm of metal; but it is a range limit the wearer feels and its force is unmeasured. Action: quote the polish gain on both readings; the user rules on proposal B (and on which shape it uses)."
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Report only (user 2026-10-17). pick1 re-worn: near-touch 1 / 2 / 3 mm 17.53 / 45.45 / 155.15 bench (lead 19.92 / 34.84 / 86.16): ahead at 1 mm, 10.61 behind at 2 mm; held 2 mm 49.86 vs 37.10 (-12.76). Taken poses with metal < 2 mm on the tool's metal (min of min_mm and crown / wall cmin): 48 vs the lead's 33 bench, 102 vs 71 held. The polished overhead clip passage (bench frames 6-12, elev 138-150) is taken at 1.70-1.80 mm where the lead sits at 1.84-2.12 mm; overhead taken p10 metal 1.67 mm. That is metal on a real, bulging arm (ALIGNMENT.md section 1). File: docs/alignment/remeasure/freek_polish_pick1/freek-oracle-route-knuckle-4r_bench.json deep."
+ },
+ {
+  "key": "G6",
+  "level": "watch",
+  "reason": "4 counted joints (K sensed) vs the 3-joint lead's 3; complexity 33.25 vs 18.5 (tools/simplicity.py recomputes 33.25 = row). Plain-gap lead over the 3-joint lead is significant (P 0.985 bench, 0.967 held), but the user's 2026-10-17 ruling keeps the 3-joint leaders as the real leaders. Presentation since be4c46e (11:33): short_name 'Free knuckle, front route (4 joints)', 4-joint rows kept out of core.js's leader KPI. The board's verified ranking now puts offset-shortcar-relay-4r (14.76, also 4 joints) first and this row second (15.40), both ahead of the 3-joint lead 18.28; leader_ruling is still empty. Action: keep the headline 3-joint; a leader_ruling 'no lead: 4 joints' would make every page agree."
+ },
+ {
+  "key": "R4",
+  "level": "watch",
+  "reason": "Mostly resolved by be4c46e: the board row now carries pick1's own components (v_reach 0.7639, v_follow 1.0, v_inband14 0.9008, v_contact 0.0179, recomputing to v_gap 15.40) and v_config 'pick1'. Left: gap / sweep_gap 9.56 (score 96.52) is the self-measured fast sweep, 5.84 under the confirmed 15.40, and top-level frozen_gap 17.35 is the VERIFIED config's mixed-reading connected number, not pick1's (pick1 frozen = 15.40 on its one reading; the page does not show frozen_gap for a verified row, docs/dashboard/public/index.html line 276). The tool's reporting check reads v_gap 15.4 vs the verifier's 16.2 as 'flattering'; that is the confirmed polish, not a flattery. Action: label sweep_gap as fast / self-measured where it is shown."
+ },
+ {
+  "key": "NEW-mixed-reading",
+  "level": "watch",
+  "reason": "Reduced by be4c46e: the row now carries polished_held_out_gap_fit60 20.5 (the claim's own CAD-shape protocol, like-for-like with the verified 21.89 and the lead's 22.38) with a note, and the verdict text quotes 20.5. But the field tools read, polished_held_out_gap, is still the env-fit 20.24 (+2.06, P 0.967) rather than the CAD-shape 20.50 (+1.38, P 0.89, CI90 -0.43..+3.71, crosses 0). Action: proposal F (swap the two fields)."
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "Carried, unchanged since 11:24: no R17, dowel force, K-spring preload / hold or cuff-twist output exists for either config (row 'not_run', polished_caveats). pick1 takes 89 bench / 222 held poses with J2 on its stop (the K spring reacted at the cuff) and 23 / 43 with J3 on the dowel; the dowel stops the arm on 6 / 14. Rigid statics (skeptic 11:24, ratios not forces): state-2 cuff moment 2.04 / 2.20 / 3.17 x the K spring torque over 23 bench poses, dowel 1.19-2.03 x. Action: run R17 with the state-2 spring hold, the dowel force and the cuff twist before CAD."
+ },
+ {
+  "key": "T4",
+  "level": "watch",
+  "reason": "Re-measured: min th over each state's moving chain 5.586 bench (ws 306, plane 60 / elev 75 / axial -120, state 1 stretched; 0 poses under 5.5) / 5.58 held, 0.09 above the bench's 5.5-deg refusal floor and 0.59 above the user's 5-deg rule (verified config 5.91 / 6.50). The CMA also walked K stop B into its own singularity cap: proposed a1max 76.09, clipped to bk1 + bk2 - 5.51 = 72.67, priced 70.71 (VER sat 2.45 below its cap); the measured K-dyad margin stays >= 7.56. File: docs/alignment/remeasure/freek_polish_pick1/freek-oracle-route-knuckle-4r_bench.json fold_margin_th. Action: red-team the feel near the fold edge in R17."
+ },
+ {
+  "key": "P1",
+  "level": "watch",
+  "reason": "Carried: the polish gain over the verified config is inside noise on the verified protocol (Bench(110,360) 15.40 vs 16.21, +0.81, P 0.73, CI90 -1.84..+5.54) and on the CAD-shape held set (+1.38, P 0.89). The search bench envh under-samples |axial| >= 150 (9.5 % vs 11.0 % held), the known polish-loss mechanism. Clean parts: the stop is a search variable on envh (not placed from claim-bench binders), the picks were committed (6086e09, 09:43) before any claim, bench -> held drop +5.11 (< 6)."
+ },
+ {
+  "key": "P4",
+  "level": "watch",
+  "reason": "Carried: the claim's continuity uses the design-specific one-reading flood (kin_nodes_model, only in the verify / polish-verify scripts and tools/freek_env_polish.py, none in MEASURE_PATHS). Through the shared harness's family flood the bench drops 0 (re-worn this audit: 1093 nodes, 0 islands, 0 dropped) but held out drops 6 overhead poses (elev 150-165): held 20.50 -> 21.15, overhead taken 18 -> 12 of 71. The 08:43 skeptic measured the moving-chain reading to be right, so the claim's reading stands. Action: proposal A of the 08:29 audit (a state-aware shared flood)."
+ }
+]

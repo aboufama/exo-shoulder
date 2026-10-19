@@ -1,0 +1,606 @@
+{
+ "id": "lowarm-kphase-notch-knuckle-3r",
+ "wear": "bench",
+ "params": {
+  "beta": -157.0,
+  "notch": {
+   "on": true,
+   "n": 2.45,
+   "a0": 46,
+   "a1": 98,
+   "z0": 6.0,
+   "z1": 12.3,
+   "bypass": false
+  },
+  "dowel_K": 45.75
+ },
+ "frozen": {
+  "gap": 18.47,
+  "reach": 0.7278,
+  "follow": 1.0,
+  "inband14": 0.8982,
+  "contact": 0.0106,
+  "n_ws": 360,
+  "n_clip": 110,
+  "ws_taken": 262,
+  "contact_poses": 4
+ },
+ "fit_fast": {
+  "gap": 13.33,
+  "reach": 0.7688,
+  "follow": 1.0,
+  "inband14": 0.8979,
+  "inband10": 0.577,
+  "contact": 0.0,
+  "l2": {
+   "n": 183,
+   "clear_min": 14.68,
+   "lost": 0
+  }
+ },
+ "why": {
+  "fold": 88,
+  "slide": 0,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 4
+ },
+ "parts_ib14": {
+  "hub1": [
+   1.0,
+   8.6,
+   80
+  ],
+  "hubK": [
+   0.992,
+   7.9,
+   80
+  ],
+  "hub2": [
+   0.914,
+   11.6,
+   80
+  ],
+  "hub3": [
+   0.742,
+   11.4,
+   80
+  ],
+  "E": [
+   0.979,
+   6.0,
+   164
+  ],
+  "boss": [
+   1.0,
+   7.5,
+   32
+  ],
+  "pad": [
+   1.0,
+   6.2,
+   32
+  ],
+  "knee": [
+   0.999,
+   9.7,
+   90
+  ],
+  "crank": [
+   0.817,
+   11.1,
+   125
+  ],
+  "horn": [
+   0.956,
+   7.7,
+   27
+  ],
+  "ring2": [
+   0.179,
+   15.6,
+   6
+  ],
+  "plate": [
+   0.846,
+   11.3,
+   10
+  ],
+  "L1a": [
+   0.981,
+   10.1,
+   8
+  ],
+  "L1b": [
+   0.918,
+   8.2,
+   36
+  ],
+  "L2": [
+   0.732,
+   12.0,
+   124
+  ]
+ },
+ "audit": null,
+ "deep": {
+  "plain": 18.47,
+  "reach": 0.7278,
+  "follow": 1.0,
+  "inband14": 0.8982,
+  "contact": 0.0106,
+  "n_poses": 470,
+  "n_taken": 372,
+  "min_metal_mm": 0.072,
+  "gap_near1": 20.64,
+  "near1_poses": 4,
+  "gap_near2": 34.84,
+  "near2_poses": 33,
+  "gap_near3": 85.33,
+  "near3_poses": 104,
+  "clip_metal_hist": {
+   "0-1": 0.0,
+   "1-2": 0.0,
+   "2-3": 0.0021,
+   "3-4": 0.0139,
+   "4-6": 0.1267,
+   "6-10": 0.4366,
+   "10-14": 0.3196,
+   ">14": 0.101
+  },
+  "gap_band3_14": 18.6,
+  "inband3_14": 0.8968,
+  "overhead_min_metal_p10": 1.63,
+  "coord_spans": {
+   "dK": [
+    -0.7961,
+    -0.0021
+   ],
+   "kstate": [
+    0.0,
+    1.0
+   ],
+   "a1e": [
+    37.6028,
+    54.2639
+   ],
+   "msub": [
+    10.8052,
+    99.0
+   ],
+   "kin_ok": [
+    1.0,
+    1.0
+   ],
+   "res_deg": [
+    0.0,
+    0.0151
+   ],
+   "q3p": [
+    -109.3365,
+    116.1029
+   ],
+   "clear": [
+    1.3309,
+    5.1958
+   ],
+   "K.phi": [
+    -0.1448,
+    0.1421
+   ],
+   "K.th": [
+    -0.1317,
+    0.1553
+   ],
+   "K.psi": [
+    -2.1119,
+    -1.2452
+   ],
+   "K.ang": [
+    59.2737,
+    106.0214
+   ],
+   "K.ok": [
+    1.0,
+    1.0
+   ],
+   "K.qa": [
+    -2.1071,
+    -1.2912
+   ],
+   "K.qb": [
+    -0.5096,
+    0.3571
+   ]
+  },
+  "overhead_taken": [
+   8,
+   28
+  ],
+  "near2_taken_poses": [
+   [
+    139,
+    "ws",
+    60.0,
+    0.072
+   ],
+   [
+    203,
+    "ws",
+    90.0,
+    0.158
+   ],
+   [
+    379,
+    "ws",
+    30.0,
+    0.616
+   ],
+   [
+    230,
+    "ws",
+    90.0,
+    0.948
+   ],
+   [
+    376,
+    "ws",
+    15.0,
+    1.089
+   ],
+   [
+    284,
+    "ws",
+    90.0,
+    1.12
+   ],
+   [
+    403,
+    "ws",
+    15.0,
+    1.123
+   ],
+   [
+    352,
+    "ws",
+    30.0,
+    1.285
+   ],
+   [
+    349,
+    "ws",
+    15.0,
+    1.415
+   ],
+   [
+    325,
+    "ws",
+    30.0,
+    1.417
+   ],
+   [
+    234,
+    "ws",
+    135.0,
+    1.424
+   ],
+   [
+    279,
+    "ws",
+    75.0,
+    1.441
+   ],
+   [
+    257,
+    "ws",
+    90.0,
+    1.582
+   ],
+   [
+    295,
+    "ws",
+    15.0,
+    1.595
+   ],
+   [
+    8,
+    "clip",
+    150.0,
+    1.634
+   ],
+   [
+    9,
+    "clip",
+    150.0,
+    1.634
+   ],
+   [
+    10,
+    "clip",
+    150.0,
+    1.634
+   ],
+   [
+    406,
+    "ws",
+    30.0,
+    1.636
+   ],
+   [
+    322,
+    "ws",
+    15.0,
+    1.651
+   ],
+   [
+    345,
+    "ws",
+    165.0,
+    1.709
+   ],
+   [
+    291,
+    "ws",
+    165.0,
+    1.82
+   ],
+   [
+    11,
+    "clip",
+    149.40573120117188,
+    1.821
+   ],
+   [
+    328,
+    "ws",
+    45.0,
+    1.838
+   ],
+   [
+    290,
+    "ws",
+    150.0,
+    1.87
+   ],
+   [
+    7,
+    "clip",
+    148.11460876464844,
+    1.881
+   ],
+   [
+    298,
+    "ws",
+    30.0,
+    1.892
+   ],
+   [
+    318,
+    "ws",
+    165.0,
+    1.906
+   ],
+   [
+    164,
+    "ws",
+    0.0,
+    1.911
+   ],
+   [
+    319,
+    "ws",
+    0.0,
+    1.911
+   ],
+   [
+    268,
+    "ws",
+    15.0,
+    1.94
+   ],
+   [
+    382,
+    "ws",
+    45.0,
+    1.972
+   ],
+   [
+    309,
+    "ws",
+    90.0,
+    1.985
+   ],
+   [
+    180,
+    "ws",
+    75.0,
+    1.991
+   ]
+  ],
+  "source_of_hist_band_spans": "wall-side (+0.264) wear: /tmp/claude-0/-home-user-exo-shoulder/55c580fc-1103-56e5-9e17-3e425f438838/scratchpad/kph/bench_p.json"
+ },
+ "mode": "exact",
+ "sides": {
+  "0.264": {
+   "frozen": {
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8989,
+    "inband10": 0.5793,
+    "contact": 0.0106,
+    "gap": 18.39
+   },
+   "recomputed": {
+    "gap": 18.39,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8989,
+    "contact": 0.0106,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 262,
+    "contact_poses": 4
+   },
+   "dK_taken_max": 45.615,
+   "dowel_would_cut": 0,
+   "secs": 545.0,
+   "deep": {
+    "plain": 18.39,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8989,
+    "contact": 0.0106,
+    "n_poses": 470,
+    "n_taken": 372,
+    "min_metal_mm": 0.072,
+    "gap_near1": 20.57,
+    "near1_poses": 4,
+    "gap_near2": 34.84,
+    "near2_poses": 33,
+    "gap_near3": 86.2,
+    "near3_poses": 105,
+    "clip_metal_hist": {
+     "0-1": 0.0,
+     "1-2": 0.0,
+     "2-3": 0.0021,
+     "3-4": 0.0139,
+     "4-6": 0.1267,
+     "6-10": 0.4366,
+     "10-14": 0.3196,
+     ">14": 0.101
+    },
+    "gap_band3_14": 18.6,
+    "inband3_14": 0.8968,
+    "overhead_min_metal_p10": 1.63
+   }
+  },
+  "-0.21": {
+   "frozen": {
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8982,
+    "inband10": 0.5788,
+    "contact": 0.0106,
+    "gap": 18.46
+   },
+   "recomputed": {
+    "gap": 18.47,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8982,
+    "contact": 0.0106,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 262,
+    "contact_poses": 4
+   },
+   "dK_taken_max": 45.615,
+   "dowel_would_cut": 0,
+   "secs": 542.3,
+   "deep": {
+    "plain": 18.46,
+    "reach": 0.7278,
+    "follow": 1.0,
+    "inband14": 0.8982,
+    "contact": 0.0106,
+    "n_poses": 470,
+    "n_taken": 372,
+    "min_metal_mm": 0.072,
+    "gap_near1": 20.1,
+    "near1_poses": 3,
+    "gap_near2": 34.84,
+    "near2_poses": 33,
+    "gap_near3": 85.32,
+    "near3_poses": 104,
+    "clip_metal_hist": {
+     "0-1": 0.0,
+     "1-2": 0.0,
+     "2-3": 0.002,
+     "3-4": 0.014,
+     "4-6": 0.1266,
+     "6-10": 0.4362,
+     "10-14": 0.3194,
+     ">14": 0.1018
+    },
+    "gap_band3_14": 18.66,
+    "inband3_14": 0.8962,
+    "overhead_min_metal_p10": 1.79
+   }
+  }
+ },
+ "secs": 1087.3,
+ "exact": true,
+ "note": "per-pose worst of the sided dwell wears (+0.264 / -0.210 deg K), re-worn by tools/alignment_remeasure_kphase.py through the verifier's harness (corrections off) and the parent's wear(): model unchanged, J2 dowel 45.75 cut applied",
+ "th_margin": {
+  "0.264": {
+   "min_th_dwell": 5.5,
+   "min_own_forced": 5.181,
+   "lt5_dwell": 0,
+   "lt5_forced": 0,
+   "msub_lt1_dwell": 50,
+   "n": 372
+  },
+  "-0.21": {
+   "min_th_dwell": 5.301,
+   "min_own_forced": 5.181,
+   "lt5_dwell": 0,
+   "lt5_forced": 0,
+   "msub_lt1_dwell": 50,
+   "n": 372
+  }
+ },
+ "dowel": {
+  "0.264": {
+   "K": 45.75,
+   "n_cut": 0,
+   "cut": [],
+   "dK_taken_max": 45.615,
+   "n_taken_pre": 372
+  },
+  "-0.21": {
+   "K": 45.75,
+   "n_cut": 0,
+   "cut": [],
+   "dK_taken_max": 45.615,
+   "n_taken_pre": 372
+  }
+ },
+ "connected_side": {
+  "delta": 0.264,
+  "connected": {
+   "connected_bench": {
+    "gap": 50.24,
+    "reach": 0.4139,
+    "dropped": 113,
+    "dropped_forced": 113,
+    "forced_taken": 128,
+    "forced_taken_connected": 15,
+    "dropped_with_no_taken_neighbour": 18
+   },
+   "connected_knn": {
+    "gap": 20.08,
+    "reach": 0.7111,
+    "dropped": 6,
+    "dropped_forced": 6,
+    "forced_taken": 128,
+    "forced_taken_connected": 122
+   },
+   "connected_full": {
+    "gap": 18.39,
+    "reach": 0.7278,
+    "dropped": 0,
+    "dropped_forced": 0,
+    "forced_taken": 128,
+    "forced_taken_connected": 128,
+    "envelope": {
+     "env_ok": 1065,
+     "env_forced_ok": 526,
+     "env_forced_connected": 526
+    }
+   },
+   "secs": 1.2
+  }
+ }
+}

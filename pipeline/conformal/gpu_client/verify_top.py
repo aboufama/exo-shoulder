@@ -7,7 +7,7 @@ import json, os, subprocess, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); FX = os.path.join(HERE, "..", "..", "full-exo")
 src = sys.argv[1]; per = int(sys.argv[2]) if len(sys.argv) > 2 else 2; tag = os.path.basename(src).replace("band_search_", "").replace(".json", "")
 S = json.load(open(src)); keys = ("n", "az", "el", "a", "w", "branch", "order", "cuff", "hm")
-GEO = ("hub_r", "hub_relief", "hub_margin", "stack", "t_link", "G")
+GEO = ("hub_r", "hub_relief", "hub_margin", "stack", "t_link", "G", "min_arc", "min_arm_mm")
 designs = []
 for job in S:
     if os.environ.get("SKIP_CUFF") == "1" and job["cfg"].get("cuff_range"): continue
@@ -26,6 +26,7 @@ for gi, ((q, geo), ds) in enumerate(by_q.items()):                           # o
 rows = []
 for k, (d, path, i, r) in enumerate(results):
     name = f"band_{tag}_{k}"
+    if r.get("err"): print(f"{name:18s} {d['_job']:8s} REJECTED by the evaluator: {r['err']}", flush=True); continue
     subprocess.run(["python3", "-W", "ignore", os.path.join(FX, "band_to_design.py"), path, str(i), name, f"{d['_job']} #{k}"], check=True, stdout=subprocess.DEVNULL)
     subprocess.run(["python3", "-W", "ignore", os.path.join(FX, "score_design.py"), os.path.join(FX, "designs", name), "3"], check=True, stdout=subprocess.DEVNULL)
     sc = json.load(open(os.path.join(FX, "designs", name, "score.json")))

@@ -1,5 +1,11 @@
 # CAD standard
 
+**Scope (user, 2026-10-14):** this standard is level **L2** - the CAD of a design that already passed the motion judges
+(R1-R6, R10) on held-out data and that the user chose (phase P4). Every iteration before that uses **L1 keep-out CAD**:
+joint keep-outs (hub diameter x real stack height), links as constant-thickness slabs at their real height over the
+skin, rail / carriage envelopes, one valid solid per part - no fillets, G2 blends, fairing or zebra checks. Fidelity
+that matters for the judges (heights, clearances, keep-outs, mass) must be right at L1; looks wait for L2.
+
 The user's own parts (`data/user_cad/RIGHT ARM SUBASSY.step`: TOP, MIDDLE, BOTTOM, FOREARM CUFF) set the bar: clean
 feature CAD, few faces (TOP = 17), planes / cylinders / cones + G2 B-spline blends.
 
@@ -19,6 +25,11 @@ feature CAD, few faces (TOP = 17), planes / cylinders / cones + G2 B-spline blen
 
 ## Construction rules learned the hard way
 
+0. **No lofts** (user, 2026-10-15, binding for every design): "lofts look horrible and introduce geometric problems, you
+   can combine arcs, but no lofts". Allowed: line/arc sketches extruded, revolved, or swept as one constant section along
+   a line/arc path; bends (an arc in the cross-section) and planform turns; fillets. Not allowed: lofts through
+   sections, twisted or variable-section sweeps, shrink-wrapped or data-fitted freeform shells.
+
 1. **Outlines are sketches**: lines + tangent arcs with set radii (the cuff saddle: 5 lines + 5 arcs; links: O23 hub
    circles + a 14 mm strip). Never a level set of a data field.
 2. **Surfaces are fair by construction**: a swept constant section along one fair profile (links), a revolve (hubs), or
@@ -34,3 +45,10 @@ feature CAD, few faces (TOP = 17), planes / cylinders / cones + G2 B-spline blen
 6. **Check before showing**: `judge/part_validity.py` (one valid solid each), then `parts.html` with the zebra mode -
    stripes must run continuously across every blend.
 7. OCC `Volume()` is unreliable on the sewn sheet bodies: use the closed tessellation (mesh volume).
+
+
+## Rulings 2026-10-16 (user)
+
+- Base: the scapula handler carries the base directly at the J1 hub ring - no tab from J1 to a remote terminal.
+- Link ramps: up to 60 deg near a hub (was 35 deg); bent Ti-6Al-4V 3 mm bars keep tangent bend arcs of inner radius
+  >= 15 mm (5 t); tighter transitions only on parts 5-axis machined from solid, marked as such.

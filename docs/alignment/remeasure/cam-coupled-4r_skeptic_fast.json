@@ -1,0 +1,370 @@
+{
+ "gap": 50.67,
+ "reach": 0.9,
+ "follow": 0.95,
+ "inband14": 0.4032,
+ "contact": 0.0099,
+ "honest": true,
+ "th_margin_J1J2J3": {
+  "min": 0.0,
+  "p05": 0.004,
+  "median": 0.193,
+  "max": 31.17,
+  "n": 203
+ },
+ "th_lt5": 186,
+ "J2_interior_from_straight_deg": {
+  "min": 0.015,
+  "p05": 0.971,
+  "median": 7.016,
+  "max": 109.443,
+  "n": 203
+ },
+ "J2_interior_lt5_from_straight": 52,
+ "J3dyad_margin_recomputed": {
+  "min": 0.796,
+  "p05": 11.333,
+  "median": 35.184,
+  "max": 46.639,
+  "n": 203
+ },
+ "J3dyad_lt5": 3,
+ "sing": {
+  "min": 8.044,
+  "p05": 25.655,
+  "median": 69.138,
+  "max": 88.61,
+  "n": 203
+ },
+ "pa_deg": {
+  "min": 0.274,
+  "p05": 2.857,
+  "median": 16.394,
+  "max": 54.114,
+  "n": 203
+ },
+ "J2_value_mod360": {
+  "min": 159.69,
+  "max": 289.44,
+  "span": 129.76,
+  "p05": 168.4,
+  "p95": 267.89
+ },
+ "J1_span_deg_taken": 324.6,
+ "parts": {
+  "hub1": [
+   1.0,
+   81
+  ],
+  "hub2": [
+   0.0,
+   81
+  ],
+  "hub3": [
+   0.146,
+   81
+  ],
+  "hub4": [
+   0.6595,
+   81
+  ],
+  "slot": [
+   0.6328,
+   776
+  ],
+  "link1": [
+   0.0214,
+   140
+  ],
+  "tail": [
+   0.0,
+   161
+  ],
+  "link2": [
+   0.0272,
+   245
+  ],
+  "link3": [
+   0.0901,
+   203
+  ],
+  "neck": [
+   0.7612,
+   224
+  ]
+ },
+ "sample_weighted": 0.4032,
+ "part_weighted": 0.3338,
+ "dd_points": 6.93,
+ "flood": {
+  "knn8": {
+   "edges": 704,
+   "graph_all_edges_ok_connected": 146,
+   "connected_jump10": 129,
+   "connected_okonly": 145,
+   "static": 146,
+   "static_reach": 0.9125,
+   "connected_reach": 0.8063,
+   "failed_edges": 70,
+   "fail_causes": {
+    "noroot": 4,
+    "pa": 0,
+    "hold": 0,
+    "sing": 10,
+    "slot": 7,
+    "notok": 18,
+    "jump_only": 52
+   },
+   "lost_poses": [
+    {
+     "plane": -45.0,
+     "elev": 45.0,
+     "axial": 30.0
+    },
+    {
+     "plane": -30.0,
+     "elev": 60.0,
+     "axial": 15.0
+    },
+    {
+     "plane": -15.0,
+     "elev": 45.0,
+     "axial": 15.0
+    },
+    {
+     "plane": -15.0,
+     "elev": 60.0,
+     "axial": -15.0
+    },
+    {
+     "plane": -15.0,
+     "elev": 75.0,
+     "axial": -45.0
+    },
+    {
+     "plane": 0.0,
+     "elev": 90.0,
+     "axial": 15.0
+    },
+    {
+     "plane": 0.0,
+     "elev": 105.0,
+     "axial": 0.0
+    },
+    {
+     "plane": 0.0,
+     "elev": 150.0,
+     "axial": 0.0
+    },
+    {
+     "plane": 15.0,
+     "elev": 90.0,
+     "axial": 15.0
+    },
+    {
+     "plane": 15.0,
+     "elev": 105.0,
+     "axial": 0.0
+    },
+    {
+     "plane": 15.0,
+     "elev": 150.0,
+     "axial": 0.0
+    },
+    {
+     "plane": 30.0,
+     "elev": 90.0,
+     "axial": 15.0
+    },
+    {
+     "plane": 30.0,
+     "elev": 105.0,
+     "axial": 0.0
+    },
+    {
+     "plane": 30.0,
+     "elev": 135.0,
+     "axial": -45.0
+    },
+    {
+     "plane": 45.0,
+     "elev": 90.0,
+     "axial": 15.0
+    },
+    {
+     "plane": 60.0,
+     "elev": 90.0,
+     "axial": 15.0
+    },
+    {
+     "plane": 75.0,
+     "elev": 90.0,
+     "axial": 15.0
+    }
+   ]
+  },
+  "knn16": {
+   "edges": 1409,
+   "graph_all_edges_ok_connected": 146,
+   "connected_jump10": 129,
+   "connected_okonly": 145,
+   "static": 146,
+   "static_reach": 0.9125,
+   "connected_reach": 0.8063,
+   "failed_edges": 181,
+   "fail_causes": {
+    "noroot": 15,
+    "pa": 0,
+    "hold": 0,
+    "sing": 24,
+    "slot": 15,
+    "notok": 43,
+    "jump_only": 138
+   },
+   "lost_poses": [
+    {
+     "plane": -45.0,
+     "elev": 45.0,
+     "axial": 30.0
+    },
+    {
+     "plane": -30.0,
+     "elev": 60.0,
+     "axial": 15.0
+    },
+    {
+     "plane": -15.0,
+     "elev": 45.0,
+     "axial": 15.0
+    },
+    {
+     "plane": -15.0,
+     "elev": 60.0,
+     "axial": -15.0
+    },
+    {
+     "plane": -15.0,
+     "elev": 75.0,
+     "axial": -45.0
+    },
+    {
+     "plane": 0.0,
+     "elev": 90.0,
+     "axial": 15.0
+    },
+    {
+     "plane": 0.0,
+     "elev": 105.0,
+     "axial": 0.0
+    },
+    {
+     "plane": 0.0,
+     "elev": 150.0,
+     "axial": 0.0
+    },
+    {
+     "plane": 15.0,
+     "elev": 90.0,
+     "axial": 15.0
+    },
+    {
+     "plane": 15.0,
+     "elev": 105.0,
+     "axial": 0.0
+    },
+    {
+     "plane": 15.0,
+     "elev": 150.0,
+     "axial": 0.0
+    },
+    {
+     "plane": 30.0,
+     "elev": 90.0,
+     "axial": 15.0
+    },
+    {
+     "plane": 30.0,
+     "elev": 105.0,
+     "axial": 0.0
+    },
+    {
+     "plane": 30.0,
+     "elev": 135.0,
+     "axial": -45.0
+    },
+    {
+     "plane": 45.0,
+     "elev": 90.0,
+     "axial": 15.0
+    },
+    {
+     "plane": 60.0,
+     "elev": 90.0,
+     "axial": 15.0
+    },
+    {
+     "plane": 75.0,
+     "elev": 90.0,
+     "axial": 15.0
+    }
+   ]
+  },
+  "secs": 78.1
+ },
+ "by": "alignment skeptic 2026-10-19 (models unchanged; Bench(60,160) fast, the row's claim bench)",
+ "k2432_rescored_now": {
+  "gap": 196.65,
+  "reach": 0.3812,
+  "follow": 0.25,
+  "inband14": 0.1523,
+  "contact": 0.0,
+  "honest": true,
+  "groove_inner_mm": -3.7,
+  "groove_on_hub1": true
+ },
+ "jump_diag": [
+  {
+   "edge": "(-15,45,15)->(0,30,0)",
+   "n": 10,
+   "ok_all": true,
+   "max_jump": {
+    "q1": 99.5,
+    "q2": 58.8,
+    "q3": 77.1,
+    "q4": 76.4,
+    "slot_s": 59.2
+   },
+   "s3_changes": 1,
+   "q1_path": [
+    102.4,
+    -158.1,
+    -155.5,
+    -153.7
+   ]
+  },
+  {
+   "edge": "(-15,45,15)->(-30,45,45)",
+   "n": 13,
+   "ok_all": true,
+   "max_jump": {
+    "q1": 101.8,
+    "q2": 58.6,
+    "q3": 76.0,
+    "q4": 79.9,
+    "slot_s": 58.0
+   },
+   "s3_changes": 1
+  },
+  {
+   "edge": "(0,90,15)->(15,90,15) and 3 more inside the elev 90-105 island",
+   "ok_all": true,
+   "max_jump_deg_max": 3.5,
+   "s3_changes": 0,
+   "q1_range": [
+    139.0,
+    151.2
+   ]
+  }
+ ],
+ "scripts": "scratch scripts skeptic_cam.py / skeptic_jump.py / skeptic_k2432.py (read-only on the model; same flood as tools/alignment_cam_coupled_probe.py flood(), plus kNN-16, an all-edges-ok control, a jump-free control and per-edge failure causes)"
+}

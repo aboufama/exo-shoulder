@@ -1,0 +1,67 @@
+[
+ {
+  "key": "fast_frozen",
+  "refuted": true,
+  "evidence": "Wrong number for the documented pattern. fast_frozen detects P3 / R3 inflation by search (docs/ALIGNMENT.md lines 215 and 239: 'the self-measured to verified drop ... over the verified rows 4.6-14 points'). For the claimed config, the like-for-like drop is verify _v_bench_frozen.json fit_fast.gap 17.19 -> frozen.gap 22.64 (same params, frozen protocol): +5.45. That is inside 4.6-14, under TH ff_watch 14 (tools/alignment_audit.py line 62), and equal to the lead's +5.49 (morphs.json slipper-nose sweep 13.0 -> v 18.49). 17.19 is not a best-of-many number: the sweep's best is 16.57 (rows best_fast.gap; min gap over docs/concepts/sweeps/dogring-draglink-knuckle-3r.json, 1448 rows). The other +75.19 of the 80.64 is the verifier's clash correction (verify why_failing m9_L1b 183, corrected.gap 97.83), ruled under judgement:M3. The display of 17.19 on the dashboard is ruled under reporting, which stands."
+ },
+ {
+  "key": "continuity",
+  "refuted": true,
+  "evidence": "Measured here; the flood is now on file. New adapter tools/alignment_flood_dogring_verifier.py runs connected_report() (docs/concepts/verify/minarc-stop-knuckle-4r-mechanism.py, the function the claim's own LS.frozen_flood calls) inside the verifier harness, unchanged (wear --ring, exact Bench(110,360), frozen). Output: docs/alignment/remeasure/dogring-draglink-knuckle-3r_vflood_bench.json. The number on record is flood.corrected.connected: static.gap 97.83, which reproduces v_gap. connected_full.gap 97.83, dropped 0 (envelope env_ok 1062, env_forced_ok 607, env_forced_connected 607). connected_knn.gap 97.83, dropped 0. Loss 0.00 <= TH conn_watch 1.0; the knn loss 0 is under conn_gamed 3. Read by c_continuity's own logic, this is ok. For transparency: the literal bench-grid reading is 99.03 (4 forced poses dropped, 1 with no taken neighbour), which the tool does not use as the rule. The claim wear reads full 22.64 (0 dropped), knn 25.47 (+2.83) and bench-grid 59.37."
+ },
+ {
+  "key": "idle",
+  "refuted": true,
+  "evidence": "Instrument false positive, re-checked on this design's files. 'knee_moved' is SET only in kneeless-roller-knuckle-3r.py:166 and kneeless-sidecar-knuckle-3r.py:150. dogring-draglink-knuckle-3r.py line 392 only READS r.get('knee_moved'), and that text is what c_idle matched. The model loads the longstroke parent (line 43), which is the lead chain with the two-pin cuff knee (row note 'cuff_knee as the lead'). The 65.47 deg is the pin knee's designed motion: remeasure _bench.json deep.coord_spans K.ang [86.20, 151.67] (lead 86.21-151.92). The declared drive moves above TH idle_deg 2.0 on BOTH wears. Claim wear: dK [-0.7686, 0] rad = 44.04 deg (verify th_margin.dK_taken_max 44.04; held 45.73). Wear on record (corrected): K up to 2.8 deg bench and 2.5 deg held (verify checks.arm_L1b_pass_K_max_deg). Every K-open pose with K >= 3.2 / 3.1 deg is dropped. Those are above 2.0, but only by 0.8 / 0.5 deg: see missed[0]. Same ruling as slipper-nose, inband-rssr and groove-desmo idle."
+ },
+ {
+  "key": "sampling",
+  "refuted": false,
+  "evidence": "Confirmed. verify _v_bench_frozen.json parts_ib14.horn [0.227, 16.8, 32] (held [0.219, 16.8, 32]). The horn is below 0.5 in band, which is the c_sampling 'mostly out-of-band' trigger. Sample-weighted minus part-weighted is +1.23, under part_weight_watch 3. The horn is not thinly sampled: 32 >= part_min_samples 16. It sits on the family's 2 mm grid (model line 262: radial step 2.0 x widths -3/-1/1/3; verify geometry.nn_horn_mm 2.0). So the in-band is not hiding it. But 77 % of the horn's metal sits beyond 14 mm, median 16.8 mm: real bulk on the arm, concentrated in one body. Stands, as the longstroke-slipper crank ruling."
+ },
+ {
+  "key": "complexity",
+  "refuted": false,
+  "evidence": "Missing record. rows/dogring-draglink-knuckle-3r.json has no 'mechanism' key, and docs/dashboard/data/morphs.json (a510cfe) shows complexity null. The only number on file is prose in docs/concepts/events.jsonl line 582: 'complexity 25.75 (~21.75 like-for-like)', not a record. Re-derived with tools/simplicity.py VERSION 2.2 on the lead's record (rows/slipper-nose-knuckle-3r.json mechanism, 22.25), set to the row note's counts (passive_rot 6, bodies 6, joints 9, loops 3, sliding 0, rolling 0, springs 1): 25.25 (12 made / 15 bought) to 27.25 (14 / 19), 3-5 points over the lead. The dashboard cannot show this until the row carries the record. Stands."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Confirmed. docs/dashboard/data/morphs.json (a510cfe 12:41): status 'refuted', gap 17.19, sweep_gap 17.19, v_gap 97.83, so 97.83 - 17.19 = 80.64 > 5 (c_reporting). The live headline and leader drop refuted rows (core.js line 9, leader.js line 4), and the bench chart plots v_gap first (bench.js line 5). But the bench table (bench.js line 131) lists every row with its 'Sweep best gap' and 'Claimed gap' columns, so 17.19 (score 93.75) is displayed next to 'refuted'. The column is also mislabelled: 17.19 is the claimed config's fast fit, while the sweep's best is 16.57 (rows best_fast). The row verdict still compares a gap with a score ('v_gap 97.83 vs champion 75.94 (score)'). Stands."
+ },
+ {
+  "key": "judgement:M3",
+  "refuted": false,
+  "evidence": "Re-derived from the verifier output and re-worn. verify _v_bench_frozen.json checks: m9_L1b_min_mm -0.18 at r_u2 15.23 and h_rel_f2 -0.37; m9_L1b_lt015 183 of n 374; arm_L1b_fail_K_deg [3.2, 44.0]; arm_L1b_pass_K_max_deg 2.8; arm_L1b_lt1 374 of 374. Held: 442 of 872, K [3.1, 45.7], lt1 872 of 872. My flood run re-wears the harness and gets corrected static 97.83 and claim 22.64 to the digit (remeasure _vflood_bench.json). The model has no per-pose arm-link 1b pair. The search parked dr_zr 0 and dl_lift 0 at their lower bounds, the lowest drive level, exactly where the unchecked overlap lives. Interpenetrating metal cannot be built. Not gamed, because v_gap 97.83 prices the clash. Stands."
+ },
+ {
+  "key": "judgement:NEW-silent-check",
+  "refuted": true,
+  "evidence": "The defect is real, but on this design it costs the wearer 0 on both benches, measured. Claim through the model's own frozen() / frozen_held(), RING-L2 skipped (remeasure _bench.json / _held.json): frozen.gap 22.64 / 25.36, why.parts 0 / 0. The same wear with RING-L2 re-instated (verify _v_bench_frozen.json / _v_held_frozen.json ring_fix true): 22.64 / 25.36, why.parts 0 / 0. The verifier's corrected 97.83 / 101.1 ran with the check on. The number on record does not depend on the skipped check, and the mechanism worn is identical. The whitelist defect is confirmed: longstroke-slipper-knuckle-3r.py lines 224-229 have no _dogg / _L2ring, and dogring line 355 returns early, with ring_layer 0 in best_params. It stays as proposal A (catalogue M6) for future claims. That is a tool / protocol proposal, not a cost of this claim."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": true,
+  "evidence": "The counts are confirmed, but they are near-touch readings, and the documented rule makes those report-only. remeasure _bench.json deep: near1_poses 20, near2_poses 52 of n_taken 374, overhead_min_metal_p10 0.06, gap_near1 31.89, gap_near2 53.61. Held: 50 / 122 of 872. Lead (slipper-nose _bench / _held): 3 / 30 and 14 / 67, p10 1.82. The documented level is ok: docs/ALIGNMENT.md section 6, entry 2026-10-17.2 ('near_touch is report-only (numbers kept, level always ok)'); tools/alignment_audit.py c_near_touch, lvl = 'ok'; CLAUDE.md user decisions (3) and (6) ('the 1 mm / 2 mm near-touch readings are reported only'). This audit's own near_touch check reads ok. The scored contact is priced in v_gap: corrected_contact_depth n 9, sum 26.11, max 10.92. Against the lead's 14.75 that is x1.77, under the T5 margin x2 AND +5 mm. The counts stay in the report, with no level. Same ruling as inband-rssr G1."
+ },
+ {
+  "key": "judgement:M2",
+  "refuted": false,
+  "evidence": "Confirmed. Model line 13 says 'O9 eyes on 2 x MR63ZZ'; line 51 has EYE_R = 4.0 (O8), used at line 266 (_disc(..., EYE_R)) and at line 262 (horn reach rh + EYE_R). An MR63ZZ is O6 OD, so O9 leaves a 1.5 mm wall and O8 leaves 1.0 mm. remeasure _vprobe_bench_EYE_R4.5.json override EYE_R [4.0, 4.5]: claim 22.76 (in-band 0.8626), corrected 97.95 (in-band 0.8683), against _vprobe_bench.json 22.64 / 97.83, same 183 failing poses. +0.12, optimistic toward the modelled part. Stands."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Missing measurement; no number on file. grep -rl dogring over judge/, pipeline/ and docs/research finds nothing, and there is no pipeline/full-exo/designs/*dog*. The doc's 'R17 ok' (docs/concepts/dogring-draglink-knuckle-3r.md lines 94-95) is static determinacy with K on stop A, plus the parents' lift-off gate on the law. It is not a back-drive / return-lag measurement through the 4R. The one-sided dog is confirmed by verify checks.dog_res_open_mm [-0.0, -0.0] (closure only while K opens) and dog_res_rest_max_mm -0.06. Stands, as on the lead."
+ },
+ {
+  "key": "judgement:R3",
+  "refuted": false,
+  "evidence": "Missing spread; not on file. docs/concepts/sweeps/dogring-draglink-knuckle-3r.json (1448 rows) has the keys batch, contact, dK_lim, follow, gap, gap_near2, honest, inband10, inband14, k, params, reach, t, why_lim, and no frozen field. .cache/cloud_sweeps/sweep-dogring-* holds no frozen record (grep 'frozen': 0 files). The doc (lines 89-90) says 'Selection was by frozen' and names 22.64, 24.34, 29.84 and 26.07. Mitigation, measured but not a refutation: held minus bench is +2.72 claim and +3.27 corrected, against the lead's +4.96. Stands."
+ },
+ {
+  "key": "judgement:G5",
+  "refuted": false,
+  "evidence": "Re-derived. tools/simplicity.py VERSION 2.2 score() on the lead's record gives 22.25 (rows/slipper-nose-knuckle-3r.json). The same record with the row note's counts (passive_rot 6, moving_bodies 6, joints 9, closed_loops 3, sliding 0, rolling 0, springs 1, cuff_knee unchanged) gives 25.25 / 25.75 / 26.25 at 12 made with 15 / 17 / 19 bought, up to 27.25 at 14 / 19. That is 3-5 points more complex than the lead, and no record on the row says so (morphs complexity null). Stands."
+ }
+]

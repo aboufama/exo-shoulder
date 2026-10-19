@@ -1,0 +1,1425 @@
+{
+ "model": "inband-rssr-knuckle-3r.py",
+ "drive": "rssr",
+ "bench": "bench",
+ "mode": "exact",
+ "params": {
+  "La": 25.7026,
+  "s_arm": 4.0,
+  "r_h": 15.491,
+  "beta": -147.3923,
+  "gam": 22.4633,
+  "hl": 2.929,
+  "zr": 2.091,
+  "r_lobe": 8.5,
+  "bk1": 30.0377,
+  "bk2": 42.9378,
+  "a1max": 67.9755,
+  "smhi": 15.2738,
+  "kK": 3.0,
+  "clay": 1,
+  "bl_c": 2
+ },
+ "reported": {
+  "gap": 28.72,
+  "reach": 0.6833,
+  "inband14": 0.9053,
+  "contact": 0.0705,
+  "why": {
+   "fold": 77,
+   "slide": 10,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 27
+  }
+ },
+ "recomputed": {
+  "reach": 0.6917,
+  "follow": 1.0,
+  "inband14": 0.9245,
+  "contact": 0.0627,
+  "gap": 27.1,
+  "terms": {
+   "inband": 0,
+   "reach": 20.833,
+   "follow": 0,
+   "contact": 6.266
+  },
+  "n_contact": 24,
+  "n_inband_pts": 83820
+ },
+ "ghost": {
+  "none": {
+   "reach": 0.6917,
+   "follow": 1.0,
+   "inband14": 0.9245,
+   "contact": 0.0627,
+   "gap": 27.1,
+   "terms": {
+    "inband": 0,
+    "reach": 20.833,
+    "follow": 0,
+    "contact": 6.266
+   },
+   "n_contact": 24,
+   "n_inband_pts": 83820
+  },
+  "crank": {
+   "reach": 0.6917,
+   "follow": 1.0,
+   "inband14": 0.9245,
+   "contact": 0.0627,
+   "gap": 27.1,
+   "terms": {
+    "inband": 0,
+    "reach": 20.833,
+    "follow": 0,
+    "contact": 6.266
+   },
+   "n_contact": 24,
+   "n_inband_pts": 76230
+  },
+  "ear": {
+   "reach": 0.6944,
+   "follow": 1.0,
+   "inband14": 0.9199,
+   "contact": 0.0601,
+   "gap": 26.56,
+   "terms": {
+    "inband": 0,
+    "reach": 20.556,
+    "follow": 0,
+    "contact": 6.005
+   },
+   "n_contact": 23,
+   "n_inband_pts": 78980
+  },
+  "horn": {
+   "reach": 0.6917,
+   "follow": 1.0,
+   "inband14": 0.9237,
+   "contact": 0.0627,
+   "gap": 27.1,
+   "terms": {
+    "inband": 0,
+    "reach": 20.833,
+    "follow": 0,
+    "contact": 6.266
+   },
+   "n_contact": 24,
+   "n_inband_pts": 81620
+  },
+  "rod": {
+   "reach": 0.6917,
+   "follow": 1.0,
+   "inband14": 0.9249,
+   "contact": 0.0627,
+   "gap": 27.1,
+   "terms": {
+    "inband": 0,
+    "reach": 20.833,
+    "follow": 0,
+    "contact": 6.266
+   },
+   "n_contact": 24,
+   "n_inband_pts": 82060
+  },
+  "rodends": {
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9256,
+   "contact": 0.0287,
+   "gap": 20.09,
+   "terms": {
+    "inband": 0,
+    "reach": 17.222,
+    "follow": 0,
+    "contact": 2.872
+   },
+   "n_contact": 11,
+   "n_inband_pts": 79420
+  },
+  "crank+ear": {
+   "reach": 0.6944,
+   "follow": 1.0,
+   "inband14": 0.9194,
+   "contact": 0.0601,
+   "gap": 26.56,
+   "terms": {
+    "inband": 0,
+    "reach": 20.556,
+    "follow": 0,
+    "contact": 6.005
+   },
+   "n_contact": 23,
+   "n_inband_pts": 71390
+  },
+  "crank+horn": {
+   "reach": 0.6917,
+   "follow": 1.0,
+   "inband14": 0.9237,
+   "contact": 0.0627,
+   "gap": 27.1,
+   "terms": {
+    "inband": 0,
+    "reach": 20.833,
+    "follow": 0,
+    "contact": 6.266
+   },
+   "n_contact": 24,
+   "n_inband_pts": 74030
+  },
+  "crank+rod": {
+   "reach": 0.6917,
+   "follow": 1.0,
+   "inband14": 0.925,
+   "contact": 0.0627,
+   "gap": 27.1,
+   "terms": {
+    "inband": 0,
+    "reach": 20.833,
+    "follow": 0,
+    "contact": 6.266
+   },
+   "n_contact": 24,
+   "n_inband_pts": 74470
+  },
+  "crank+rodends": {
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9258,
+   "contact": 0.0287,
+   "gap": 20.09,
+   "terms": {
+    "inband": 0,
+    "reach": 17.222,
+    "follow": 0,
+    "contact": 2.872
+   },
+   "n_contact": 11,
+   "n_inband_pts": 71830
+  },
+  "ear+horn": {
+   "reach": 0.6944,
+   "follow": 1.0,
+   "inband14": 0.9189,
+   "contact": 0.0601,
+   "gap": 26.56,
+   "terms": {
+    "inband": 0,
+    "reach": 20.556,
+    "follow": 0,
+    "contact": 6.005
+   },
+   "n_contact": 23,
+   "n_inband_pts": 76780
+  },
+  "ear+rod": {
+   "reach": 0.6944,
+   "follow": 1.0,
+   "inband14": 0.9202,
+   "contact": 0.0601,
+   "gap": 26.56,
+   "terms": {
+    "inband": 0,
+    "reach": 20.556,
+    "follow": 0,
+    "contact": 6.005
+   },
+   "n_contact": 23,
+   "n_inband_pts": 77220
+  },
+  "ear+rodends": {
+   "reach": 0.7306,
+   "follow": 1.0,
+   "inband14": 0.9208,
+   "contact": 0.0261,
+   "gap": 19.56,
+   "terms": {
+    "inband": 0,
+    "reach": 16.944,
+    "follow": 0,
+    "contact": 2.611
+   },
+   "n_contact": 10,
+   "n_inband_pts": 74580
+  },
+  "horn+rod": {
+   "reach": 0.6917,
+   "follow": 1.0,
+   "inband14": 0.9242,
+   "contact": 0.0627,
+   "gap": 27.1,
+   "terms": {
+    "inband": 0,
+    "reach": 20.833,
+    "follow": 0,
+    "contact": 6.266
+   },
+   "n_contact": 24,
+   "n_inband_pts": 79860
+  },
+  "horn+rodends": {
+   "reach": 0.7306,
+   "follow": 1.0,
+   "inband14": 0.9249,
+   "contact": 0.0261,
+   "gap": 19.56,
+   "terms": {
+    "inband": 0,
+    "reach": 16.944,
+    "follow": 0,
+    "contact": 2.611
+   },
+   "n_contact": 10,
+   "n_inband_pts": 77220
+  },
+  "rod+rodends": {
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9261,
+   "contact": 0.0287,
+   "gap": 20.09,
+   "terms": {
+    "inband": 0,
+    "reach": 17.222,
+    "follow": 0,
+    "contact": 2.872
+   },
+   "n_contact": 11,
+   "n_inband_pts": 77660
+  },
+  "all_drive": {
+   "reach": 0.7472,
+   "follow": 1.0,
+   "inband14": 0.9197,
+   "contact": 0.0104,
+   "gap": 16.32,
+   "terms": {
+    "inband": 0,
+    "reach": 15.278,
+    "follow": 0,
+    "contact": 1.044
+   },
+   "n_contact": 4,
+   "n_inband_pts": 63030
+  }
+ },
+ "parts": {
+  "E": {
+   "n_per_pose": 104,
+   "ib14": 0.949,
+   "hi": 0.051,
+   "lo": 0.0,
+   "med": 7.39,
+   "p90": 12.19,
+   "out_pts": 580,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 0.918,
+     "hi": 0.082,
+     "med": 7.3
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 10.2
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.1
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 6.9
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 8.7
+    }
+   },
+   "contact_poses": 0,
+   "contact_alone": 0,
+   "contact_depth_sum": 0,
+   "contact_list": []
+  },
+  "boss": {
+   "n_per_pose": 32,
+   "ib14": 0.998,
+   "hi": 0.002,
+   "lo": 0.0,
+   "med": 7.62,
+   "p90": 10.59,
+   "out_pts": 6,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 0.997,
+     "hi": 0.003,
+     "med": 7.3
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 9.5
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.8
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.3
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.9
+    }
+   },
+   "contact_poses": 0,
+   "contact_alone": 0,
+   "contact_depth_sum": 0,
+   "contact_list": []
+  },
+  "chain:m0": {
+   "contact_poses": 0,
+   "contact_alone": 0,
+   "contact_depth_sum": 0,
+   "contact_list": []
+  },
+  "chain:m1": {
+   "contact_poses": 1,
+   "contact_alone": 0,
+   "contact_depth_sum": 7.11,
+   "contact_list": [
+    {
+     "i": 237,
+     "kind": "ws",
+     "elev": 165.0,
+     "plane": 15.0,
+     "axial": -60.0,
+     "depth": 7.11,
+     "alone": false
+    }
+   ]
+  },
+  "chain:m2": {
+   "contact_poses": 2,
+   "contact_alone": 0,
+   "contact_depth_sum": 5.67,
+   "contact_list": [
+    {
+     "i": 129,
+     "kind": "ws",
+     "elev": 60.0,
+     "plane": -75.0,
+     "axial": 120.0,
+     "depth": 4.99,
+     "alone": false
+    },
+    {
+     "i": 139,
+     "kind": "ws",
+     "elev": 60.0,
+     "plane": -60.0,
+     "axial": 105.0,
+     "depth": 0.68,
+     "alone": false
+    }
+   ]
+  },
+  "chain:m3": {
+   "contact_poses": 0,
+   "contact_alone": 0,
+   "contact_depth_sum": 0,
+   "contact_list": []
+  },
+  "chain:m5": {
+   "contact_poses": 1,
+   "contact_alone": 0,
+   "contact_depth_sum": 0.0,
+   "contact_list": [
+    {
+     "i": 129,
+     "kind": "ws",
+     "elev": 60.0,
+     "plane": -75.0,
+     "axial": 120.0,
+     "depth": 0.0,
+     "alone": false
+    }
+   ]
+  },
+  "chain:m6": {
+   "contact_poses": 0,
+   "contact_alone": 0,
+   "contact_depth_sum": 0,
+   "contact_list": []
+  },
+  "chain:m7": {
+   "contact_poses": 3,
+   "contact_alone": 0,
+   "contact_depth_sum": 3.38,
+   "contact_list": [
+    {
+     "i": 129,
+     "kind": "ws",
+     "elev": 60.0,
+     "plane": -75.0,
+     "axial": 120.0,
+     "depth": 3.17,
+     "alone": false
+    },
+    {
+     "i": 139,
+     "kind": "ws",
+     "elev": 60.0,
+     "plane": -60.0,
+     "axial": 105.0,
+     "depth": 0.12,
+     "alone": false
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "elev": 165.0,
+     "plane": 30.0,
+     "axial": -60.0,
+     "depth": 0.09,
+     "alone": false
+    }
+   ]
+  },
+  "crank": {
+   "n_per_pose": 69,
+   "ib14": 0.924,
+   "hi": 0.076,
+   "lo": 0.0,
+   "med": 11.26,
+   "p90": 13.6,
+   "out_pts": 576,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 0.898,
+     "hi": 0.102,
+     "med": 11.6
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 0.932,
+     "hi": 0.068,
+     "med": 11.1
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 10.0
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 0.986,
+     "hi": 0.014,
+     "med": 9.9
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 0.945,
+     "hi": 0.055,
+     "med": 10.7
+    }
+   },
+   "contact_poses": 5,
+   "contact_alone": 0,
+   "contact_depth_sum": 5.59,
+   "contact_list": [
+    {
+     "i": 164,
+     "kind": "ws",
+     "elev": 0.0,
+     "plane": -15.0,
+     "axial": -45.0,
+     "depth": 1.56,
+     "alone": false
+    },
+    {
+     "i": 244,
+     "kind": "ws",
+     "elev": 30.0,
+     "plane": 30.0,
+     "axial": -90.0,
+     "depth": 0.37,
+     "alone": false
+    },
+    {
+     "i": 268,
+     "kind": "ws",
+     "elev": 15.0,
+     "plane": 45.0,
+     "axial": -105.0,
+     "depth": 1.09,
+     "alone": false
+    },
+    {
+     "i": 295,
+     "kind": "ws",
+     "elev": 15.0,
+     "plane": 60.0,
+     "axial": -120.0,
+     "depth": 1.01,
+     "alone": false
+    },
+    {
+     "i": 319,
+     "kind": "ws",
+     "elev": 0.0,
+     "plane": 75.0,
+     "axial": -135.0,
+     "depth": 1.56,
+     "alone": false
+    }
+   ]
+  },
+  "ear": {
+   "n_per_pose": 44,
+   "ib14": 1.0,
+   "hi": 0.0,
+   "lo": 0.0,
+   "med": 8.14,
+   "p90": 9.39,
+   "out_pts": 0,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 8.5
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.7
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.0
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.1
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.5
+    }
+   },
+   "contact_poses": 1,
+   "contact_alone": 1,
+   "contact_depth_sum": 0.21,
+   "contact_list": [
+    {
+     "i": 284,
+     "kind": "ws",
+     "elev": 90.0,
+     "plane": 45.0,
+     "axial": 30.0,
+     "depth": 0.21,
+     "alone": true
+    }
+   ]
+  },
+  "horn": {
+   "n_per_pose": 20,
+   "ib14": 0.953,
+   "hi": 0.04,
+   "lo": 0.008,
+   "med": 5.94,
+   "p90": 11.16,
+   "out_pts": 104,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 5.5
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 0.795,
+     "hi": 0.2,
+     "med": 6.4
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 0.889,
+     "hi": 0.111,
+     "med": 6.6
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 0.869,
+     "hi": 0.1,
+     "med": 7.4
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 0.955,
+     "hi": 0.005,
+     "med": 8.6
+    }
+   },
+   "contact_poses": 3,
+   "contact_alone": 0,
+   "contact_depth_sum": 18.88,
+   "contact_list": [
+    {
+     "i": 237,
+     "kind": "ws",
+     "elev": 165.0,
+     "plane": 15.0,
+     "axial": -60.0,
+     "depth": 14.73,
+     "alone": false
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "elev": 165.0,
+     "plane": 30.0,
+     "axial": -60.0,
+     "depth": 3.71,
+     "alone": false
+    },
+    {
+     "i": 318,
+     "kind": "ws",
+     "elev": 165.0,
+     "plane": 60.0,
+     "axial": -75.0,
+     "depth": 0.44,
+     "alone": false
+    }
+   ]
+  },
+  "hub1": {
+   "n_per_pose": 80,
+   "ib14": 0.999,
+   "hi": 0.0,
+   "lo": 0.001,
+   "med": 8.6,
+   "p90": 11.34,
+   "out_pts": 9,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 9.5
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 8.4
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.6
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 6.8
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 0.989,
+     "hi": 0.0,
+     "med": 5.8
+    }
+   },
+   "contact_poses": 0,
+   "contact_alone": 0,
+   "contact_depth_sum": 0,
+   "contact_list": []
+  },
+  "hub2": {
+   "n_per_pose": 80,
+   "ib14": 0.953,
+   "hi": 0.047,
+   "lo": 0.0,
+   "med": 11.14,
+   "p90": 13.44,
+   "out_pts": 410,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 0.927,
+     "hi": 0.073,
+     "med": 11.7
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 0.998,
+     "hi": 0.003,
+     "med": 10.8
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 0.988,
+     "hi": 0.013,
+     "med": 10.2
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 0.996,
+     "hi": 0.004,
+     "med": 9.1
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 8.8
+    }
+   },
+   "contact_poses": 1,
+   "contact_alone": 0,
+   "contact_depth_sum": 2.82,
+   "contact_list": [
+    {
+     "i": 129,
+     "kind": "ws",
+     "elev": 60.0,
+     "plane": -75.0,
+     "axial": 120.0,
+     "depth": 2.82,
+     "alone": false
+    }
+   ]
+  },
+  "hub3": {
+   "n_per_pose": 80,
+   "ib14": 0.593,
+   "hi": 0.407,
+   "lo": 0.0,
+   "med": 13.14,
+   "p90": 18.3,
+   "out_pts": 3586,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 0.583,
+     "hi": 0.417,
+     "med": 13.3
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 0.399,
+     "hi": 0.601,
+     "med": 14.9
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 0.872,
+     "hi": 0.128,
+     "med": 10.9
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 0.734,
+     "hi": 0.266,
+     "med": 12.0
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 0.412,
+     "hi": 0.588,
+     "med": 14.7
+    }
+   },
+   "contact_poses": 0,
+   "contact_alone": 0,
+   "contact_depth_sum": 0,
+   "contact_list": []
+  },
+  "hubK": {
+   "n_per_pose": 80,
+   "ib14": 0.976,
+   "hi": 0.024,
+   "lo": 0.0,
+   "med": 8.01,
+   "p90": 11.09,
+   "out_pts": 214,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 0.999,
+     "hi": 0.001,
+     "med": 7.8
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 0.939,
+     "hi": 0.061,
+     "med": 8.3
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 0.931,
+     "hi": 0.069,
+     "med": 8.2
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 0.93,
+     "hi": 0.069,
+     "med": 8.2
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 0.953,
+     "hi": 0.048,
+     "med": 10.7
+    }
+   },
+   "contact_poses": 1,
+   "contact_alone": 0,
+   "contact_depth_sum": 6.27,
+   "contact_list": [
+    {
+     "i": 237,
+     "kind": "ws",
+     "elev": 165.0,
+     "plane": 15.0,
+     "axial": -60.0,
+     "depth": 6.27,
+     "alone": false
+    }
+   ]
+  },
+  "knee": {
+   "n_per_pose": 85,
+   "ib14": 0.973,
+   "hi": 0.027,
+   "lo": 0.0,
+   "med": 9.84,
+   "p90": 12.32,
+   "out_pts": 254,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 0.96,
+     "hi": 0.04,
+     "med": 9.2
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 0.971,
+     "hi": 0.029,
+     "med": 11.4
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 10.1
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 9.9
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 10.4
+    }
+   },
+   "contact_poses": 0,
+   "contact_alone": 0,
+   "contact_depth_sum": 0,
+   "contact_list": []
+  },
+  "pad": {
+   "n_per_pose": 32,
+   "ib14": 1.0,
+   "hi": 0.0,
+   "lo": 0.0,
+   "med": 7.19,
+   "p90": 9.35,
+   "out_pts": 0,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 6.1
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 8.8
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.5
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.5
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 1.0,
+     "hi": 0.0,
+     "med": 7.9
+    }
+   },
+   "contact_poses": 0,
+   "contact_alone": 0,
+   "contact_depth_sum": 0,
+   "contact_list": []
+  },
+  "rod": {
+   "n_per_pose": 16,
+   "ib14": 0.905,
+   "hi": 0.095,
+   "lo": 0.0,
+   "med": 9.87,
+   "p90": 13.81,
+   "out_pts": 168,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 0.95,
+     "hi": 0.05,
+     "med": 9.4
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 0.919,
+     "hi": 0.081,
+     "med": 11.1
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 0.931,
+     "hi": 0.069,
+     "med": 9.4
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 0.885,
+     "hi": 0.115,
+     "med": 10.6
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 0.581,
+     "hi": 0.419,
+     "med": 12.4
+    }
+   },
+   "contact_poses": 6,
+   "contact_alone": 0,
+   "contact_depth_sum": 16.88,
+   "contact_list": [
+    {
+     "i": 164,
+     "kind": "ws",
+     "elev": 0.0,
+     "plane": -15.0,
+     "axial": -45.0,
+     "depth": 1.72,
+     "alone": false
+    },
+    {
+     "i": 237,
+     "kind": "ws",
+     "elev": 165.0,
+     "plane": 15.0,
+     "axial": -60.0,
+     "depth": 10.11,
+     "alone": false
+    },
+    {
+     "i": 244,
+     "kind": "ws",
+     "elev": 30.0,
+     "plane": 30.0,
+     "axial": -90.0,
+     "depth": 0.4,
+     "alone": false
+    },
+    {
+     "i": 268,
+     "kind": "ws",
+     "elev": 15.0,
+     "plane": 45.0,
+     "axial": -105.0,
+     "depth": 1.41,
+     "alone": false
+    },
+    {
+     "i": 295,
+     "kind": "ws",
+     "elev": 15.0,
+     "plane": 60.0,
+     "axial": -120.0,
+     "depth": 1.52,
+     "alone": false
+    },
+    {
+     "i": 319,
+     "kind": "ws",
+     "elev": 0.0,
+     "plane": 75.0,
+     "axial": -135.0,
+     "depth": 1.72,
+     "alone": false
+    }
+   ]
+  },
+  "rodends": {
+   "n_per_pose": 40,
+   "ib14": 0.904,
+   "hi": 0.09,
+   "lo": 0.006,
+   "med": 9.43,
+   "p90": 13.83,
+   "out_pts": 421,
+   "by_elev_clip": {
+    "e-1-60": {
+     "n": 68,
+     "ib14": 0.904,
+     "hi": 0.094,
+     "med": 9.5
+    },
+    "e60-90": {
+     "n": 10,
+     "ib14": 0.83,
+     "hi": 0.155,
+     "med": 10.0
+    },
+    "e90-120": {
+     "n": 9,
+     "ib14": 0.933,
+     "hi": 0.056,
+     "med": 8.7
+    },
+    "e120-140": {
+     "n": 13,
+     "ib14": 0.91,
+     "hi": 0.071,
+     "med": 8.8
+    },
+    "e140-999": {
+     "n": 10,
+     "ib14": 0.945,
+     "hi": 0.045,
+     "med": 9.1
+    }
+   },
+   "contact_poses": 21,
+   "contact_alone": 13,
+   "contact_depth_sum": 55.7,
+   "contact_list": [
+    {
+     "i": 164,
+     "kind": "ws",
+     "elev": 0.0,
+     "plane": -15.0,
+     "axial": -45.0,
+     "depth": 4.89,
+     "alone": false
+    },
+    {
+     "i": 185,
+     "kind": "ws",
+     "elev": 0.0,
+     "plane": 0.0,
+     "axial": -45.0,
+     "depth": 1.11,
+     "alone": true
+    },
+    {
+     "i": 201,
+     "kind": "ws",
+     "elev": 75.0,
+     "plane": 0.0,
+     "axial": 90.0,
+     "depth": 1.4,
+     "alone": true
+    },
+    {
+     "i": 217,
+     "kind": "ws",
+     "elev": 30.0,
+     "plane": 15.0,
+     "axial": -75.0,
+     "depth": 1.66,
+     "alone": true
+    },
+    {
+     "i": 237,
+     "kind": "ws",
+     "elev": 165.0,
+     "plane": 15.0,
+     "axial": -60.0,
+     "depth": 14.04,
+     "alone": false
+    },
+    {
+     "i": 244,
+     "kind": "ws",
+     "elev": 30.0,
+     "plane": 30.0,
+     "axial": -90.0,
+     "depth": 3.67,
+     "alone": false
+    },
+    {
+     "i": 255,
+     "kind": "ws",
+     "elev": 90.0,
+     "plane": 30.0,
+     "axial": -90.0,
+     "depth": 0.2,
+     "alone": true
+    },
+    {
+     "i": 264,
+     "kind": "ws",
+     "elev": 165.0,
+     "plane": 30.0,
+     "axial": -60.0,
+     "depth": 2.23,
+     "alone": false
+    },
+    {
+     "i": 268,
+     "kind": "ws",
+     "elev": 15.0,
+     "plane": 45.0,
+     "axial": -105.0,
+     "depth": 4.47,
+     "alone": false
+    },
+    {
+     "i": 271,
+     "kind": "ws",
+     "elev": 30.0,
+     "plane": 45.0,
+     "axial": -90.0,
+     "depth": 0.17,
+     "alone": true
+    },
+    {
+     "i": 285,
+     "kind": "ws",
+     "elev": 105.0,
+     "plane": 45.0,
+     "axial": -60.0,
+     "depth": 0.55,
+     "alone": true
+    },
+    {
+     "i": 288,
+     "kind": "ws",
+     "elev": 135.0,
+     "plane": 45.0,
+     "axial": -60.0,
+     "depth": 2.55,
+     "alone": true
+    },
+    {
+     "i": 291,
+     "kind": "ws",
+     "elev": 165.0,
+     "plane": 45.0,
+     "axial": -75.0,
+     "depth": 1.9,
+     "alone": true
+    },
+    {
+     "i": 295,
+     "kind": "ws",
+     "elev": 15.0,
+     "plane": 60.0,
+     "axial": -120.0,
+     "depth": 4.55,
+     "alone": false
+    },
+    {
+     "i": 314,
+     "kind": "ws",
+     "elev": 120.0,
+     "plane": 60.0,
+     "axial": -45.0,
+     "depth": 0.62,
+     "alone": true
+    },
+    {
+     "i": 317,
+     "kind": "ws",
+     "elev": 150.0,
+     "plane": 60.0,
+     "axial": -45.0,
+     "depth": 3.62,
+     "alone": true
+    },
+    {
+     "i": 318,
+     "kind": "ws",
+     "elev": 165.0,
+     "plane": 60.0,
+     "axial": -75.0,
+     "depth": 0.64,
+     "alone": false
+    },
+    {
+     "i": 319,
+     "kind": "ws",
+     "elev": 0.0,
+     "plane": 75.0,
+     "axial": -135.0,
+     "depth": 4.89,
+     "alone": false
+    },
+    {
+     "i": 322,
+     "kind": "ws",
+     "elev": 15.0,
+     "plane": 75.0,
+     "axial": -120.0,
+     "depth": 0.32,
+     "alone": true
+    },
+    {
+     "i": 346,
+     "kind": "ws",
+     "elev": 0.0,
+     "plane": 90.0,
+     "axial": -135.0,
+     "depth": 1.11,
+     "alone": true
+    },
+    {
+     "i": 373,
+     "kind": "ws",
+     "elev": 0.0,
+     "plane": 105.0,
+     "axial": -150.0,
+     "depth": 1.11,
+     "alone": true
+    }
+   ]
+  }
+ },
+ "crank_regions": {
+  "r0-5": {
+   "n": 33,
+   "ib14": 1.0,
+   "hi": 0.0,
+   "med": 11.1
+  },
+  "r5-10": {
+   "n": 8,
+   "ib14": 0.564,
+   "hi": 0.436,
+   "med": 13.8
+  },
+  "r10-15": {
+   "n": 12,
+   "ib14": 0.855,
+   "hi": 0.145,
+   "med": 11.3
+  },
+  "r15-20": {
+   "n": 8,
+   "ib14": 1.0,
+   "hi": 0.0,
+   "med": 10.9
+  },
+  "r20-30": {
+   "n": 8,
+   "ib14": 1.0,
+   "hi": 0.0,
+   "med": 10.9
+  },
+  "height_over_hub_axis_mm": {
+   "boss": 59.66
+  }
+ },
+ "sc_info": {
+  "boss_level": 59.7,
+  "lev_L1b": 59.7,
+  "arm_tip_level": 59.7,
+  "rod_len": 33.3,
+  "La": 25.7,
+  "r_h": 15.5,
+  "i_rock": 6.43,
+  "rssr_closed": true,
+  "trans_min_taken": 55.9,
+  "ratio_range": [
+   0.526,
+   0.597
+  ],
+  "ratio_small_angle": 0.603,
+  "phi_max_taken": 31.3,
+  "crest_exact": 10.68,
+  "dK_lim": 73.0,
+  "why_lim": "law",
+  "eta": 0.0,
+  "clay": 1,
+  "bl_c": 0,
+  "bl_h": 0,
+  "ear_pts": 44,
+  "pivot_off_hub2_mm": 15.22,
+  "tilt_max_taken": [
+   17.6,
+   19.6
+  ],
+  "tilt_max_range": [
+   28.3,
+   23.7
+  ]
+ },
+ "secs": 188.9
+}

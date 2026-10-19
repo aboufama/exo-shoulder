@@ -1,0 +1,58 @@
+[
+ {
+  "tag": "envrs-BDp-env",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim env env BDp docs/research/minarc_final_polish/farm/rescore_BDp_fitenv_env.json > docs/research/minarc_final_polish/farm/rescore_BDp_fitenv_env.log 2>&1; tail -2 docs/research/minarc_final_polish/farm/rescore_BDp_fitenv_env.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/rescore_BDp_fitenv_env*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envrs-BDp-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim env held BDp docs/research/minarc_final_polish/farm/rescore_BDp_fitenv_held.json > docs/research/minarc_final_polish/farm/rescore_BDp_fitenv_held.log 2>&1; tail -2 docs/research/minarc_final_polish/farm/rescore_BDp_fitenv_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/rescore_BDp_fitenv_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envrs-H1-env",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim env env H1 docs/research/minarc_final_polish/farm/rescore_H1_fitenv_env.json > docs/research/minarc_final_polish/farm/rescore_H1_fitenv_env.log 2>&1; tail -2 docs/research/minarc_final_polish/farm/rescore_H1_fitenv_env.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/rescore_H1_fitenv_env*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "envrs-H1-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py claim env held H1 docs/research/minarc_final_polish/farm/rescore_H1_fitenv_held.json > docs/research/minarc_final_polish/farm/rescore_H1_fitenv_held.log 2>&1; tail -2 docs/research/minarc_final_polish/farm/rescore_H1_fitenv_held.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/rescore_H1_fitenv_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5"
+  },
+  "timeout": 3000
+ }
+]

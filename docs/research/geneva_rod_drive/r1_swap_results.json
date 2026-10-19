@@ -1,0 +1,91 @@
+{
+ "swap:l1b": {
+  "variant": "swap:l1b",
+  "swapped": [
+   "l1b"
+  ],
+  "parts": 80,
+  "R1": 0.8044255926916035,
+  "R1_aim": 0.5018369898632559,
+  "secs": 566,
+  "clips": {
+   "Raise overhead": {
+    "score": 0.7154306292923048,
+    "min_gap": 1.1514580247028885
+   },
+   "Drink from a cup": {
+    "score": 0.8695908643609828,
+    "min_gap": 3.8587174832424864
+   },
+   "Comb hair": {
+    "score": 0.8831369959556123,
+    "min_gap": 2.6469508940262787
+   },
+   "Reach a high shelf": {
+    "score": 0.8852906487497916,
+    "min_gap": 2.6820564474351287
+   },
+   "Wash opposite shoulder": {
+    "score": 0.597977567758997,
+    "min_gap": 3.8647174904704453
+   },
+   "Reach back pocket": {
+    "score": 0.966961438543423,
+    "min_gap": 1.7332365177270126
+   },
+   "Wave": {
+    "score": 0.6580660808447415,
+    "min_gap": 2.2784743085785717
+   },
+   "Walking arm swing": {
+    "score": 0.9637261427723172,
+    "min_gap": 3.7496733093119894
+   }
+  }
+ },
+ "swap:l2": {
+  "variant": "swap:l2",
+  "swapped": [
+   "l2"
+  ],
+  "parts": 79,
+  "R1": 0.810063926886871,
+  "R1_aim": 0.5055230615925193,
+  "secs": 1581,
+  "clips": {
+   "Raise overhead": {
+    "score": 0.726836006089955,
+    "min_gap": 1.1514580247028885
+   },
+   "Drink from a cup": {
+    "score": 0.88018627874567,
+    "min_gap": 3.8587174832424864
+   },
+   "Comb hair": {
+    "score": 0.8852830591749807,
+    "min_gap": 2.3002755449913206
+   },
+   "Reach a high shelf": {
+    "score": 0.8845345903619716,
+    "min_gap": 2.279562312288285
+   },
+   "Wash opposite shoulder": {
+    "score": 0.6034861829081717,
+    "min_gap": 3.8647174904704453
+   },
+   "Reach back pocket": {
+    "score": 0.968198859361805,
+    "min_gap": 1.8900253777157374
+   },
+   "Wave": {
+    "score": 0.669373801733124,
+    "min_gap": 2.4689159666012297
+   },
+   "Walking arm swing": {
+    "score": 0.9645130741442532,
+    "min_gap": 3.7496733093119894
+   }
+  }
+ },
+ "_note": "r1_swap.py on user_geneva_rod vs l1_geneva-rod (score_design.py BANDS=10,14 step 3, local); swap:l1a / swap:base stopped unfinished to free the CPU for the v2 judges; the no-drive baseline (80.48 / 49.89) is section 4 r1_attr.py on the farm"
+}

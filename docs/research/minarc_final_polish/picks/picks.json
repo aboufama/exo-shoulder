@@ -1,0 +1,29 @@
+[
+ {
+  "tag": "envp-F7-g35-6",
+  "obj": 18.93,
+  "sel_near": 23.58,
+  "sel_gap": 21.98,
+  "env_gap": 16.6,
+  "g60": 15.94,
+  "file": "docs/research/minarc_final_polish/picks/pick1.json"
+ },
+ {
+  "tag": "envp-base-g15-7",
+  "obj": 22.25,
+  "sel_near": 23.93,
+  "sel_gap": 22.85,
+  "env_gap": 20.85,
+  "g60": 14.47,
+  "file": "docs/research/minarc_final_polish/picks/pick2.json"
+ },
+ {
+  "tag": "envp-base-g9-5",
+  "obj": 22.51,
+  "sel_near": 24.04,
+  "sel_gap": 22.4,
+  "env_gap": 21.52,
+  "g60": 13.44,
+  "file": "docs/research/minarc_final_polish/picks/pick3.json"
+ }
+]

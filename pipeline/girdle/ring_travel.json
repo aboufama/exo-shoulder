@@ -1,0 +1,41 @@
+{
+ "best": {
+  "b": [
+   79.0,
+   -0.5
+  ],
+  "a1": 110.0,
+  "a2": 89.1,
+  "branch": 1,
+  "ring_travel_fit": {
+   "min": -62.0,
+   "max": 4.7,
+   "span": 66.7
+  },
+  "ring_travel_all": {
+   "min": -62.0,
+   "max": 24.5,
+   "span": 86.5
+  },
+  "J1": {
+   "min": -43.3,
+   "max": 151.0,
+   "span": 194.4
+  },
+  "J2": {
+   "min": -73.2,
+   "max": 53.3,
+   "span": 126.5
+  }
+ },
+ "intrinsic_twist_spread_deg": 58.8,
+ "intrinsic_where": [
+  "Wave",
+  [
+   16,
+   83,
+   -56
+  ]
+ ],
+ "note": "intrinsic = largest spread of humeral twist among frames whose arm directions lie within 10 deg: no 2R pointing shoulder can make the ring travel less than this"
+}

@@ -1,0 +1,66 @@
+{
+ "R_under_frozen": 81.307,
+ "R_top_shell": 83.807,
+ "etop_sets": [
+  23
+ ],
+ "SH_W": 12.0,
+ "az_window": [
+  -100.95,
+  -53.16
+ ],
+ "by_edge_margin_mm": {
+  "0.0": {
+   "frames": 184,
+   "frames_with_top_in_footprint": 184,
+   "pen_gt0": 62,
+   "pen_gt0_5": 42,
+   "pen_gt1": 23,
+   "pen_max": [
+    1.562,
+    68
+   ],
+   "pen_median": -0.2845,
+   "E_underside_clear_min": [
+    1.316,
+    68
+   ],
+   "top_inside_shell_metal": 62
+  },
+  "1.0": {
+   "frames": 184,
+   "frames_with_top_in_footprint": 184,
+   "pen_gt0": 62,
+   "pen_gt0_5": 39,
+   "pen_gt1": 22,
+   "pen_max": [
+    1.502,
+    99
+   ],
+   "pen_median": -0.301,
+   "E_underside_clear_min": [
+    1.444,
+    113
+   ],
+   "top_inside_shell_metal": 62
+  },
+  "2.0": {
+   "frames": 184,
+   "frames_with_top_in_footprint": 184,
+   "pen_gt0": 60,
+   "pen_gt0_5": 32,
+   "pen_gt1": 18,
+   "pen_max": [
+    1.334,
+    68
+   ],
+   "pen_median": -0.3925,
+   "E_underside_clear_min": [
+    1.543,
+    68
+   ],
+   "top_inside_shell_metal": 60
+  }
+ },
+ "t": "2026-10-18 skeptic"
+}

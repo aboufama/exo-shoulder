@@ -1,0 +1,1114 @@
+{
+ "step": 2,
+ "tol_mm": 0.5,
+ "frames_checked": 671,
+ "seconds": 330,
+ "jobs": 4,
+ "body_model": "rig",
+ "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
+ "parts": {
+  "H|M4x6 ISO 10642 hexagon socket countersunk screw (upper cuff -> BOTTOM), polished A2": {
+   "owner": "ours",
+   "max_depth": 17.68,
+   "frames": 25,
+   "worst": [
+    "Wash opposite shoulder",
+    80,
+    [
+     145,
+     46,
+     -69,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|UPPER ARM CUFF (one sketch: flat land + inner/outer R arcs, both side arcs trimmed clear of the trunk, extruded; AlSi10Mg bead blasted)": {
+   "owner": "ours",
+   "max_depth": 17.71,
+   "frames": 25,
+   "worst": [
+    "Wash opposite shoulder",
+    80,
+    [
+     145,
+     46,
+     -69,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[13]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[17]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[3]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[6]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[1]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[3]": {
+   "owner": "user",
+   "max_depth": 0.62,
+   "frames": 21,
+   "worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_depth": 0.62,
+   "attributable_frames": 21,
+   "attributable_worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|CirPattern1[9]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[2]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve3": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[4]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[10]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[8]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[14]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[12]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[16]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[7]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[1]": {
+   "owner": "user",
+   "max_depth": 1.06,
+   "frames": 380,
+   "worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_depth": 1.06,
+   "attributable_frames": 380,
+   "attributable_worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|CirPattern1[5]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve4": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[11]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[2]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[15]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|5mm D, 2.5mm H, N42 MAGNET": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
+   "owner": "user",
+   "max_depth": 8.37,
+   "frames": 671,
+   "worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_depth": 8.37,
+   "attributable_frames": 671,
+   "attributable_worst": [
+    "Comb hair",
+    172,
+    [
+     63,
+     100,
+     -56,
+     86,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
+   "owner": "user",
+   "max_depth": 2.78,
+   "frames": 648,
+   "worst": [
+    "Comb hair",
+    38,
+    [
+     53,
+     92,
+     -54,
+     106,
+     0
+    ]
+   ],
+   "attributable_depth": 2.78,
+   "attributable_frames": 648,
+   "attributable_worst": [
+    "Comb hair",
+    38,
+    [
+     53,
+     92,
+     -54,
+     106,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "F|MIDDLE": {
+   "owner": "user",
+   "max_depth": 5.77,
+   "frames": 671,
+   "worst": [
+    "Comb hair",
+    68,
+    [
+     60,
+     121,
+     -59,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 5.77,
+   "attributable_frames": 671,
+   "attributable_worst": [
+    "Comb hair",
+    68,
+    [
+     60,
+     121,
+     -59,
+     119,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|TOP": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "F|FOREARM CUFF": {
+   "owner": "user",
+   "max_depth": 24.87,
+   "frames": 671,
+   "worst": [
+    "Wash opposite shoulder",
+    150,
+    [
+     138,
+     59,
+     -50,
+     112,
+     0
+    ]
+   ],
+   "attributable_depth": 24.0,
+   "attributable_frames": 671,
+   "attributable_worst": [
+    "Wash opposite shoulder",
+    42,
+    [
+     115,
+     29,
+     -76,
+     114,
+     0
+    ]
+   ],
+   "attributable_kind": "other region, beyond the buried own skin"
+  },
+  "base|D8-01 scapula base AT THE J1 RING: the J1 upper member alone (O20 ring + seat disc + M18 x 0.5 spigot); the user's scapula handler bracket threads onto the spigot in place of the dome cap - no ears, no tab (Ti-6Al-4V, 5-axis machined)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|pin b: retaining E-clip DIN 6799 - 3.2 (groove O3.2 on the O4 pin, O7.3 x 0.6), A2 stainless (polished), seated in the knee link's O8 x 0.7 counterbore": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l4|pin b: iglidur G sleeve bearing igus GSM-0405-03 (4 x 5.5 x 3) faced to 1.48, pressed in the knee link": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|pin b: iglidur thrust washer 4 x 8 x 0.5 (igus GTM-0408-005 class, in the 0.5 mm running gap; confirm the size, else cut from iglidur sheet)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|D8-06 BOTTOM + arm pad + pad mount, one 5-axis part (user's bar cut square to the arm 11.8 mm distal of pin b; O12 pad at pin b + integral O4 h9 pin, hard-anodised; 2.18 mm mount 24.7 long at the pad level, riser 1 mm into BOTTOM's underside; 7075-T6)": {
+   "owner": "ours",
+   "max_depth": 17.62,
+   "frames": 671,
+   "worst": [
+    "Wash opposite shoulder",
+    80,
+    [
+     145,
+     46,
+     -69,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 4.96,
+   "attributable_frames": 671,
+   "attributable_worst": [
+    "Comb hair",
+    164,
+    [
+     74,
+     131,
+     -64,
+     109,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "l4|D8-05 knee link: flat plate 37.8 x 10 x 2.1767 (lines + R1 arcs), O5.5 sleeve bores, O8 x 0.7 clip counterbores + knee stop tooth behind pin a (its face meets the E strap's side at knee angle 152.146 deg) (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|pin a: retaining E-clip DIN 6799 - 3.2 (groove O3.2 on the O4 pin, O7.3 x 0.6), A2 stainless (polished), seated in the knee link's O8 x 0.7 counterbore": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l4|pin a: iglidur G sleeve bearing igus GSM-0405-03 (4 x 5.5 x 3) faced to 1.48, pressed in the knee link": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|pin a: iglidur thrust washer 4 x 8 x 0.5 (igus GTM-0408-005 class, in the 0.5 mm running gap; confirm the size, else cut from iglidur sheet)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|D8-04 member 3: J3 disc + integral O7 pin, E strap (one side-view sketch of lines and tangent arcs, 8 x 3, its top stepping to the boss), E boss O12 x 2.1767 + integral O4 pin a (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|drive horn pin clip DIN 6799 RS 2.3 (polished)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|drive horn screw 2 M1.6x2.5 ISO 7046 countersunk (polished)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|drive horn screw 1 M1.6x2.5 ISO 7046 countersunk (polished)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|drive horn pin O3 h6 hardened, pressed + staked (polished)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|D9-05 drive horn plate: Ti-6Al-4V O13 x 1.4, horn pin at r 2.493 mm, 2x +-5 deg trim slots for M1.6 countersunk": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|D9-04 drive horn hub: Ti-6Al-4V O9.4 x 1.2, DD bore pressed on link 1a's arbor tip, 2x M1.6 tapped": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|drive igubal ball at the horn (iglidur, KGLM-03 class)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dr|drive igubal housing at the horn (iglidur, pressed, KGLM-03 class O10)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dr|drive igubal housing at the crank (iglidur, pressed, KGLM-03 class O10)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dr|D9-03 drive pushrod: Ti-6Al-4V dog-bone, O3 shank, centres 36.94 +- 0.02 mm, two O13 x 4 eyes": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dk|drive igubal ball at the crank (iglidur, KGLM-03 class)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dk|drive crank pin clip DIN 6799 RS 2.3 (polished)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dk|drive crank pin O3 h6 hardened (polished)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dk|drive roller pin O3 h6 hardened (polished)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dk|drive follower roller MR63ZZ 3x6x2.5 (polished)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dk|drive bell crank bearing 2 MR85ZZ 5x8x2.5 (wave-washer preloaded)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dk|drive bell crank bearing 1 MR85ZZ 5x8x2.5": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "dk|D9-02 drive bell crank (Ti-6Al-4V): tube O10 on the post, follower arm 9.00 mm, crank arm 9.00 mm + crank-pin boss tilted 29.0 deg (square to the rod)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|drive rocker post: O5 x 15.8 17-4PH H900, pressed 3.7 mm through link 1b's J2 pad + boss, axis ": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|drive rocker post bush: Ti-6Al-4V O9 x 3.5, in link 1b's J2 pad (bonded; the post is pressed through bush and pad)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|D9-01 drive lobe ring: 17-4PH H900, wire-EDM, the exact RSSR profile r 10.74 -> 12.87 mm (8 3-point arcs), R3 concave into the O20.2 dwell, bore O18 on link 2's turned ring, keyed by an O1 dowel at the onset q2 -5.011 deg, F+6.15..F+8.75": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|D8-03 link 2: 8x3 bar on a line/arc chain + J2 / J3 O20 rings, J2 dowel hole, upper ring turned to O18 over F+6.15..8.95 for the lobe ring, flies over the knee and the pad (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 stop dowel: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (q2 stops -21.81 / 93.40 deg), pressed 3 mm in the J2 upper boss, polished; stop push limit 4.3 N.m (J2 MR117 pair s0 1.0)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K stop dowel 2 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -53.64), pressed 3 mm in the K upper boss, polished": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K stop dowel 1 of 2: ISO 8734 O3 x 6 m6 hardened (stock length), faced to 5.65 mm (stop A dK 0 / stop B dK -53.64), pressed 3 mm in the K upper boss, polished": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|D8-02b link 1b: 8x3 bar on a line/arc chain, K upper pad + O20 ring + M18 spigot + bore (2 dowel holes), J2 pad (carries the rocker post bush) + integral O7 pin with the 115.2-deg q2 stop slot (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|D8-02a link 1a: 8x3 bar on a line/arc chain, J1 / K pads + integral O7 pins, K pin continued as the O5 spring arbor (0.4 mm slit, O3 magnet pocket); K's two opposed 53.6-deg stop slots in the K pad, both clear of the bar root (machined from solid Ti-6Al-4V (2.5-D: 4 side-view sketches side by side of lines + tangent arcs through the model's strap stations, extruded 2 mm; 3+2-axis milling - a wire cannot cut strips of different profiles side by side), rounds R2 / R0.5 in the profile)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J3 cap O20, torispherical dome R63.6 / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|J3 ring nut M7x0.5 (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l3|J3 inner spacer (ground, preload)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J3 outer spacer 17-4PH": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J3 bearing 2 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J3 bearing 1 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 cap O20, torispherical dome R63.6 / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|J2 ring nut M7x0.5 (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|J2 inner spacer (ground, preload)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 outer spacer 17-4PH": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 bearing 2 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 bearing 1 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K clock spring: 0.3 x 5 mm 1.4310 +C1900 strip, 145.6 mm, 9 half-turns R2.75..R7.55, outer hook in the cap slot, inner end in the arbor slit; 0.015 N.m/rad, 0.08 N.m preload on stop A = the drive's closing spring (polished spring steel)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K clock-spring cap O20 x crown F+18.25 (6 mm taller), FLAT crown with the O10 x 1.2 horn-hub counterbore and an O5.6 arbor bore; spring chamber O16 x 5.2, outer-hook slot, threaded M18x0.5, pinned to link 1b's ring at assembly (spring preload index) (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|K ring nut M7x0.5 (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|K inner spacer (ground, preload)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K outer spacer 17-4PH": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K bearing 2 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1b|K bearing 1 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "base|J1 cap O20, torispherical dome R63.6 / R1 (tangent arcs), threaded M18x0.5 (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|J1 ring nut M7x0.5 (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1a|J1 inner spacer (ground, preload)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "base|J1 outer spacer 17-4PH": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "base|J1 bearing 2 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "base|J1 bearing 1 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  }
+ },
+ "worst_part": "F|FOREARM CUFF",
+ "max_depth": 24.87,
+ "max_depth_ours": 17.71,
+ "max_depth_user": 24.87,
+ "attributable": {
+  "rule": "depth beyond the rig's own self-intersection (judge/body_regions.py): in full inside the part's own limb, elsewhere only below its own limb's skin",
+  "max_depth": 24.0,
+  "worst_part": "F|FOREARM CUFF",
+  "max_depth_ours": 4.96,
+  "worst_part_ours": "H|D8-06 BOTTOM + arm pad + pad mount, one 5-axis part (user's bar cut square to the arm 11.8 mm distal of pin b; O12 pad at pin b + integral O4 h9 pin, hard-anodised; 2.18 mm mount 24.7 long at the pad level, riser 1 mm into BOTTOM's underside; 7075-T6)",
+  "max_depth_user": 24.0,
+  "worst_part_user": "F|FOREARM CUFF"
+ }
+}

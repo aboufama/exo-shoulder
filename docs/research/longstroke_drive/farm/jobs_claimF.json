@@ -1,0 +1,14 @@
+[
+ {
+  "tag": "ls-claimF-s65n2d_flood",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm/claimF && python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py claims '[{\"tag\": \"s65n2d_flood\", \"drive\": \"rssr\", \"mode\": \"flood\", \"params\": {\"La\": 19.654, \"s_arm\": 4.0, \"r_h\": 14.6689, \"beta\": -124.0829, \"gam\": 14.5934, \"hl\": 3.15, \"zr\": 0.0, \"kK\": 1.957, \"r_lobe\": 7.0, \"bk1\": 26.0, \"bk2\": 47.2225, \"a1max\": 68.2225, \"smhi\": 12.1012}}]' docs/research/longstroke_drive/farm/claimF > docs/research/longstroke_drive/farm/claimF/s65n2d_flood.run.log 2>&1; tail -2 docs/research/longstroke_drive/farm/claimF/s65n2d_flood.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/claimF/s65n2d_flood*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1"
+  },
+  "timeout": 3600
+ }
+]

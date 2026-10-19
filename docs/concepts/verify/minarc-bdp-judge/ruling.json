@@ -1,0 +1,373 @@
+{
+ "confirmed": true,
+ "v_gap": 19.54,
+ "v_score": 92.89,
+ "held_out_gap": 24.18,
+ "rule_reading": {
+  "gap": 19.06,
+  "score": 93.07,
+  "held_out_gap": 23.24,
+  "note": "both J2 stops at exactly the 5.00-deg rule (both lenses, to the digit)"
+ },
+ "priced_mechanism_issues": {
+  "K stop B moved to dK 34.5 deg (buildability lens)": 0.0,
+  "clock-spring rate <= 0.015 N.m/rad, +C1900 (buildability lens)": 0.0,
+  "J2 stop slot drawn 5.0 +0.5 / -0 deg of J1-J3 margin with K stop B at dK 34.47 (judge; worst built pairing = J2 stops at 5.5, stop B at 34.47)": 0.48
+ },
+ "stop_tolerance": {
+  "bench_m5p5": 19.29,
+  "bench_cost": 0.23,
+  "held_m5p5": 23.36,
+  "held_cost": 0.12,
+  "bench_m6": 19.53
+ },
+ "checks": {
+  "bench_regap_matches": true,
+  "held_regap_matches": true,
+  "lenses_agree_bench": true,
+  "lenses_agree_held": true,
+  "margin_ge_5_bench": true,
+  "margin_ge_5_held": true,
+  "continuity_0_dropped": true,
+  "beats_h1_bench": true,
+  "beats_h1_held": true,
+  "bench_m5_B34_margin_ge_5": true,
+  "bench_m5p5_B34_margin_ge_5": true,
+  "held_m5p5_B34_margin_ge_5": true,
+  "tolerance_margin_ge_5": true,
+  "tolerance_continuity_0_dropped": true
+ },
+ "lenses_refuted": {
+  "remeasure": false,
+  "buildability": false
+ },
+ "runs": {
+  "bench_m5": {
+   "tag": "remeasure lens, bench, margin 5",
+   "margin": 5.0,
+   "fit_fast": 12.25,
+   "gap": 19.06,
+   "regap": 19.06,
+   "score": 93.07,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8951,
+   "inband10": 0.5969,
+   "contact": 0.0107,
+   "gap_near1": 26.15,
+   "near1_poses": 15,
+   "min_mm": 0.05,
+   "dropped_unconnected": 0,
+   "min_th": 5.015,
+   "lt5": 0,
+   "lt10": 99,
+   "q2_slot": [
+    -24.979,
+    100.843
+   ],
+   "dK_range": [
+    -33.947,
+    0.0
+   ]
+  },
+  "held_m5": {
+   "tag": "remeasure lens, held out, margin 5",
+   "margin": 5.0,
+   "fit_fast": 12.25,
+   "gap": 23.24,
+   "regap": 23.24,
+   "score": 91.55,
+   "reach": 0.6891,
+   "follow": 1.0,
+   "inband14": 0.8923,
+   "inband10": 0.5958,
+   "contact": 0.0138,
+   "gap_near1": 28.31,
+   "near1_poses": 28,
+   "min_mm": 0.05,
+   "dropped_unconnected": 0,
+   "min_th": 5.007,
+   "lt5": 0,
+   "lt10": 247,
+   "q2_slot": [
+    -24.979,
+    100.843
+   ],
+   "dK_range": [
+    -34.285,
+    0.0
+   ]
+  },
+  "h1_bench_m5": {
+   "tag": "H1, bench, margin 5",
+   "margin": 5.0,
+   "fit_fast": 23.64,
+   "gap": 27.2,
+   "regap": 27.2,
+   "score": 90.11,
+   "reach": 0.6583,
+   "follow": 0.9636,
+   "inband14": 0.8953,
+   "inband10": 0.5539,
+   "contact": 0.0256,
+   "gap_near1": 31.75,
+   "near1_poses": 8,
+   "min_mm": 0.086,
+   "dropped_unconnected": null,
+   "min_th": 5.49
+  },
+  "h1_held_m5": {
+   "tag": "H1, held out, margin 5",
+   "margin": 5.0,
+   "fit_fast": 23.64,
+   "gap": 31.39,
+   "regap": 31.39,
+   "score": 88.59,
+   "reach": 0.6197,
+   "follow": 0.9653,
+   "inband14": 0.8937,
+   "inband10": 0.5509,
+   "contact": 0.0273,
+   "gap_near1": 34.66,
+   "near1_poses": 15,
+   "min_mm": 0.086,
+   "dropped_unconnected": null,
+   "min_th": 5.323
+  },
+  "bench_m10": {
+   "tag": "remeasure lens, bench, margin 10",
+   "margin": 10.0,
+   "fit_fast": 15.37,
+   "gap": 22.4,
+   "regap": 22.4,
+   "score": 91.85,
+   "reach": 0.7139,
+   "follow": 1.0,
+   "inband14": 0.8702,
+   "inband10": 0.5579,
+   "contact": 0.0081,
+   "gap_near1": 26.21,
+   "near1_poses": 11,
+   "min_mm": 0.138,
+   "dropped_unconnected": 0,
+   "min_th": 10.017,
+   "lt5": 0,
+   "lt10": 0,
+   "q2_slot": [
+    -10.394,
+    90.587
+   ],
+   "dK_range": [
+    -48.465,
+    0.0
+   ]
+  },
+  "bench_m5p5": {
+   "tag": "judge, bench, stops at 5.5 (tolerance)",
+   "margin": 5.5,
+   "fit_fast": 13.1,
+   "gap": 19.29,
+   "regap": 19.29,
+   "score": 92.99,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8928,
+   "inband10": 0.5926,
+   "contact": 0.0107,
+   "gap_near1": 26.15,
+   "near1_poses": 15,
+   "min_mm": 0.05,
+   "dropped_unconnected": 0,
+   "min_th": 5.553,
+   "lt5": 0,
+   "lt10": 99,
+   "q2_slot": [
+    -23.293,
+    99.704
+   ],
+   "dK_range": [
+    -35.134,
+    0.0
+   ]
+  },
+  "held_m5p5": {
+   "tag": "judge, held out, stops at 5.5 (tolerance)",
+   "margin": 5.5,
+   "fit_fast": 13.1,
+   "gap": 23.36,
+   "regap": 23.36,
+   "score": 91.51,
+   "reach": 0.6912,
+   "follow": 1.0,
+   "inband14": 0.8901,
+   "inband10": 0.5914,
+   "contact": 0.0149,
+   "gap_near1": 28.2,
+   "near1_poses": 28,
+   "min_mm": 0.05,
+   "dropped_unconnected": 0,
+   "min_th": 5.517,
+   "lt5": 0,
+   "lt10": 249,
+   "q2_slot": [
+    -23.293,
+    99.704
+   ],
+   "dK_range": [
+    -35.878,
+    0.0
+   ]
+  },
+  "bench_m6": {
+   "tag": "judge, bench, stops at 6",
+   "margin": 6.0,
+   "fit_fast": 12.68,
+   "gap": 19.53,
+   "regap": 19.53,
+   "score": 92.9,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8904,
+   "inband10": 0.5887,
+   "contact": 0.0107,
+   "gap_near1": 26.15,
+   "near1_poses": 15,
+   "min_mm": 0.05,
+   "dropped_unconnected": 0,
+   "min_th": 6.0,
+   "lt5": 0,
+   "lt10": 99,
+   "q2_slot": [
+    -21.675,
+    98.6
+   ],
+   "dK_range": [
+    -36.329,
+    0.0
+   ]
+  },
+  "bench_m5_B34": {
+   "tag": "judge, bench, J2 stops 5.0, K stop B dK 34.47",
+   "margin": 5.0,
+   "fit_fast": 12.25,
+   "gap": 19.06,
+   "regap": 19.06,
+   "score": 93.07,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8951,
+   "inband10": 0.5969,
+   "contact": 0.0107,
+   "gap_near1": 26.15,
+   "near1_poses": 15,
+   "min_mm": 0.05,
+   "dropped_unconnected": 0,
+   "min_th": 5.015,
+   "lt5": 0,
+   "lt10": 99,
+   "q2_slot": [
+    -24.979,
+    100.843
+   ],
+   "dK_range": [
+    -33.947,
+    0.0
+   ]
+  },
+  "bench_m5p5_B34": {
+   "tag": "judge, bench, J2 stops 5.5, K stop B dK 34.47",
+   "margin": 5.5,
+   "fit_fast": 14.32,
+   "gap": 19.54,
+   "regap": 19.54,
+   "score": 92.89,
+   "reach": 0.7222,
+   "follow": 1.0,
+   "inband14": 0.8931,
+   "inband10": 0.594,
+   "contact": 0.0107,
+   "gap_near1": 26.44,
+   "near1_poses": 15,
+   "min_mm": 0.05,
+   "dropped_unconnected": 0,
+   "min_th": 5.553,
+   "lt5": 0,
+   "lt10": 98,
+   "q2_slot": [
+    -23.293,
+    99.704
+   ],
+   "dK_range": [
+    -34.041,
+    0.0
+   ]
+  },
+  "held_m5p5_B34": {
+   "tag": "judge, held out, J2 stops 5.5, K stop B dK 34.47",
+   "margin": 5.5,
+   "fit_fast": 14.32,
+   "gap": 24.18,
+   "regap": 24.18,
+   "score": 91.21,
+   "reach": 0.6828,
+   "follow": 1.0,
+   "inband14": 0.8904,
+   "inband10": 0.5928,
+   "contact": 0.015,
+   "gap_near1": 28.86,
+   "near1_poses": 27,
+   "min_mm": 0.05,
+   "dropped_unconnected": 0,
+   "min_th": 5.525,
+   "lt5": 0,
+   "lt10": 241,
+   "q2_slot": [
+    -23.293,
+    99.704
+   ],
+   "dK_range": [
+    -34.136,
+    0.0
+   ]
+  },
+  "conn_taken_m5": {
+   "nodes": 1014,
+   "connected": 1014,
+   "islands": 0,
+   "edges": "888/888"
+  },
+  "lens2_bench": {
+   "gap": 19.06,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8951,
+   "contact": 0.0107,
+   "regap": 19.06
+  },
+  "lens2_held": {
+   "gap": 23.24,
+   "reach": 0.6891,
+   "follow": 1.0,
+   "inband14": 0.8923,
+   "contact": 0.0138,
+   "regap": 23.24
+  },
+  "lens2_equil": {
+   "scan": {
+    "n": 1800,
+    "th_range_taken": [
+     25.7,
+     108.4
+    ],
+    "model_vs_global_min_mismatch": 0,
+    "mismatch_examples": [],
+    "multiple_equilibria": 0,
+    "multiple_in_model_ok": 0,
+    "multi_examples": []
+   },
+   "rule_cut_th": 108.5,
+   "physical_lock_th": 122.2,
+   "dK_stopB_deg": 62.827
+  }
+ }
+}

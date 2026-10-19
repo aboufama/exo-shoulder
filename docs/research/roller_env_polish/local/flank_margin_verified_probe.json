@@ -1,0 +1,97 @@
+{
+ "BEST_am": {
+  "dK_need": 43.4,
+  "dK_lim0": 44.0,
+  "beta-": {
+   "ok_to": 3.0,
+   "fails_at": null,
+   "why": null
+  },
+  "beta+": {
+   "ok_to": 1.5,
+   "fails_at": 2.0,
+   "why": [
+    "pressure_horn",
+    42.0
+   ]
+  },
+  "r_c-": {
+   "ok_to": 0.1,
+   "fails_at": 0.15,
+   "why": [
+    "CRK-hubK",
+    0.0
+   ]
+  },
+  "r_c+": {
+   "ok_to": 0.25,
+   "fails_at": 0.35,
+   "why": [
+    "flank_cusp",
+    0.0
+   ]
+  },
+  "g-": {
+   "ok_to": 0.1,
+   "fails_at": null,
+   "why": null
+  },
+  "g+": {
+   "ok_to": 0.02,
+   "fails_at": 0.03,
+   "why": [
+    "pressure_horn",
+    42.0
+   ]
+  }
+ },
+ "docs/research/roller_env_polish/local/probe_beta178.json": {
+  "dK_need": 43.4,
+  "dK_lim0": 48.0,
+  "beta-": {
+   "ok_to": 1.5,
+   "fails_at": 2.0,
+   "why": [
+    "pressure_crank",
+    0.0
+   ]
+  },
+  "beta+": {
+   "ok_to": 3.0,
+   "fails_at": null,
+   "why": null
+  },
+  "r_c-": {
+   "ok_to": 0.1,
+   "fails_at": 0.15,
+   "why": [
+    "CRK-hubK",
+    0.0
+   ]
+  },
+  "r_c+": {
+   "ok_to": 0.0,
+   "fails_at": 0.05,
+   "why": [
+    "flank_cusp",
+    0.0
+   ]
+  },
+  "g-": {
+   "ok_to": 0.03,
+   "fails_at": 0.05,
+   "why": [
+    "pressure_crank",
+    0.0
+   ]
+  },
+  "g+": {
+   "ok_to": 0.0,
+   "fails_at": 0.01,
+   "why": [
+    "flank_cusp",
+    0.0
+   ]
+  }
+ }
+}

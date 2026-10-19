@@ -1,0 +1,675 @@
+{
+ "id": "lead-relay-backbridge-4r",
+ "name": "Back-of-shoulder J0 outside hub 2's orbit with a link-0 bridge over the knuckle (4 joints: the user prefers 3)",
+ "lens": "round103:relay-under-lead (lens 1: the a0 >= 60 placement the PASS rule allows only with hub 2's orbit clearing J0 + 5 mm)",
+ "family": "base relay 4R, remote spare hub",
+ "active_dof": 4,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "dead",
+ "t_ideated": "2026-10-18T01:42:28Z",
+ "t_screened": "2026-10-18T02:22:05Z",
+ "reach": 0.725,
+ "follow": 1.0,
+ "inband14": 0.7722,
+ "inband10": 0.4847,
+ "contact": 0.0185,
+ "gap": 32.13,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.7722,
+ "v_inband10": 0.4847,
+ "v_gap": 32.13,
+ "n_configs": 8,
+ "verdict": "DEAD (gate 0 KILL, round 103 rule: > 17.5 frozen exact at every seat worn). Best 32.13 (score 88.32) frozen exact Bench(110,360) at a0 60 / azu 330 (great-circle bridge, window [-7, 0] picked on Bench(60,160)) vs lead 18.28; seats 55/345 34.01, 70/330 35.42, 60/0 38.64; ghosts at the same windows 16.35-18.22 (the relay buys <= 1.9 points). 4 counted joints (the user prefers 3), cx 50.75, 0 passive translations.",
+ "limiter": "LINK 0 (the bridge): 0-1.7 %% in band, median 24.3-30.3 mm over the skin, 140-224 samples - every station of every route (great circle and planform turns +-20/+-40 deg) is set by the chain's swept crowns (hub K / L1a / hub 2 / crank / L2 at 20-24 mm), not by the skin; ib14 0.9011 (chain) -> 0.772 at 60/330. Secondary: hub 0 at its skin-set seat sits inside the chain's sweep at 55/345 and 60/0 (24 / 17 lead poses lost to parts; chain-clear r0 83 / 96 mm); link 0 x L2 jams 4 lead poses at 60/330 and 70/330. Hub 0 itself is mostly IN band at azu 330/345 (0.73-0.88, median 10.9-11.4 mm).",
+ "note": "Frozen lead (conecut-knee-knuckle-3r fit on Bench(60,160) fast, gap 12.50 reproduced) worn on exact Bench(110,360) with relay policy (ii) (least |q0| in the window, |dK|, J3 stop, knee, sub-chain margin 5), relayed skin hits kept as contacts, hub 0 (O20, 81 underside samples + wall/crown contact) and link 0 (12 x 3 bar, 7 across x 2 mm, profile fitted on Bench(60,160) to max(skin + 2, chain top + 1 + t/2) with 60-deg ramps) as metal in in-band, contact and part checks. 60/330: reach 0.725 (261/360; 3 relayed taken, 3 relayed contacts, 4 lost to link0 x L2), contact 7 poses, overhead 8/28, near-touch 33.19, hub 0 min skin 2.82 mm (overhead elev 150-165, not behind the back), link 0 min skin 14.71 mm; in-band with hub 0 / link 0 left out 19.35. Routes (fit bench, 60/330): great circle 48 mm 0.000; -20 / -40 deg 0.000; +20 deg 0.129 (median 21.7); +40 deg 0.129 (median 31.5, skin-set at 31.8). Seat bound a0 55 x azu 285-0: hub 0 in band 0.10-0.94 by azimuth (r0 67.5-129.5). CONVERGENCE GATE: not a search (the round's gate-0 rule: one decisive wear, close > 17.5); over the 4 seat wears in order (32.13, 34.01, 35.42, 38.64) gain over 2nd half 0.00, over last third 0.00, top-4 spread 2.37 score points (6.51 gap) - passes formally; the kill rests on the arithmetic floor ib14 <= (884 + 81) / (1062 + n_link0): +9.7 at 140 samples > the 1.9-point relay gain + the 0.78 margin to 17.5. Judge's arithmetic corrected: hub 0 is not 0 %% in band (0.81); the bridge alone is the collapse. Continuity flood not run (it can only remove relay takes). Doc: docs/concepts/lead-relay-backbridge-4r.md.",
+ "doc": "docs/concepts/lead-relay-backbridge-4r.md",
+ "complexity": 50.75,
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 6,
+  "joints": 9,
+  "closed_loops": 3,
+  "sliding_pairs": 1,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 2,
+  "custom_parts": 14,
+  "catalogue_parts": 21,
+  "notes": "the lead conecut-knee-knuckle-3r record + J0 (counted joint: O20 v5 hub 0 on an MR117-2RS pair, 1 body = link 0, 1 joint, 1 torsion spring 0.95 wire D22, 2 made parts (link 0 bar, hub 0 housing), 5 bought (2 bearings, spring, 2 ISO 8734 stop dowels)); judge 103 recomputed 50.75",
+  "source": "lead-relay-backbridge-4r screen 2026-10-18",
+  "confidence": "medium",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  }
+ },
+ "gap_near1": 33.19,
+ "min_metal": 0.07,
+ "best_params": {
+  "a0": 60.0,
+  "azu": 330.0,
+  "route": "great circle",
+  "window": [
+   -7.0,
+   0.0
+  ],
+  "r0": 76.0,
+  "link0": {
+   "len_mm": 48.0,
+   "n_st": 24,
+   "rho": [
+    88.2,
+    84.6,
+    81.0,
+    77.4,
+    76.4,
+    76.8,
+    77.1,
+    77.1,
+    77.1,
+    76.9,
+    76.7,
+    76.4,
+    76.4,
+    76.4,
+    76.3,
+    76.1,
+    75.0,
+    75.0,
+    75.0,
+    75.0,
+    74.9,
+    74.8,
+    71.2,
+    67.6
+   ],
+   "skin_need": [
+    65.0,
+    63.5,
+    62.0,
+    60.5,
+    59.5,
+    58.5,
+    57.5,
+    56.5,
+    55.5,
+    54.5,
+    53.5,
+    52.5,
+    52.5,
+    52.0,
+    51.5,
+    51.5,
+    51.5,
+    51.5,
+    51.0,
+    51.0,
+    50.5,
+    50.5,
+    50.5,
+    50.5
+   ],
+   "chain_need": [
+    76.2,
+    76.3,
+    76.4,
+    76.4,
+    76.4,
+    76.8,
+    77.1,
+    77.1,
+    77.1,
+    76.9,
+    76.7,
+    76.4,
+    76.4,
+    76.4,
+    76.3,
+    76.1,
+    75.0,
+    75.0,
+    75.0,
+    75.0,
+    74.9,
+    74.8,
+    68.6,
+    62.5
+   ]
+  },
+  "c_bvec": [
+   -10.5,
+   38.8
+  ],
+  "lead": "conecut-knee-knuckle-3r best_params frozen"
+ },
+ "frozen": {
+  "seats": {
+   "60_330": {
+    "window": [
+     -7.0,
+     0.0
+    ],
+    "r0": 76.0,
+    "with_metal": {
+     "gap": 32.13,
+     "reach": 0.725,
+     "inband14": 0.7722,
+     "inband10": 0.4847,
+     "contact": 0.0185,
+     "ws_taken": 261,
+     "contacts": 7,
+     "why": {
+      "fold": 82,
+      "slide": 0,
+      "flip": 0,
+      "closure": 0,
+      "skin": 0,
+      "parts": 4,
+      "contact": 7
+     },
+     "parts_pairs": {
+      "link0-L2": 3,
+      "knee-E": 1
+     },
+     "gap_near1": 33.19,
+     "overhead": [
+      8,
+      28
+     ],
+     "hub0_min_skin_all_mm": 2.82,
+     "link0_min_skin_all_mm": 14.71
+    },
+    "parts_ib14_new": {
+     "hub0": [
+      0.811,
+      10.9,
+      81
+     ],
+     "link0": [
+      0.0,
+      25.8,
+      168
+     ]
+    },
+    "ghost": {
+     "gap": 18.22,
+     "reach": 0.7361,
+     "contact": 0.0183,
+     "ws_taken": 265,
+     "contacts": 7
+    },
+    "gap_without_hub0_link0_inband": 19.35
+   },
+   "55_345": {
+    "window": [
+     -22.0,
+     8.0
+    ],
+    "r0": 67.5,
+    "with_metal": {
+     "gap": 34.01,
+     "reach": 0.6944,
+     "inband14": 0.7951,
+     "inband10": 0.4887,
+     "contact": 0.0296,
+     "ws_taken": 250,
+     "contacts": 11,
+     "why": {
+      "fold": 67,
+      "slide": 0,
+      "flip": 0,
+      "closure": 0,
+      "skin": 0,
+      "parts": 26,
+      "contact": 11
+     },
+     "parts_pairs": {
+      "hub0": 18,
+      "link0-L2": 5,
+      "knee-E": 3
+     },
+     "gap_near1": 36.17,
+     "overhead": [
+      8,
+      28
+     ],
+     "hub0_min_skin_all_mm": 1.84,
+     "link0_min_skin_all_mm": 19.66
+    },
+    "parts_ib14_new": {
+     "hub0": [
+      0.884,
+      11.4,
+      81
+     ],
+     "link0": [
+      0.0,
+      27.7,
+      140
+     ]
+    },
+    "ghost": {
+     "gap": 17.16,
+     "reach": 0.7611,
+     "contact": 0.0327,
+     "ws_taken": 274,
+     "contacts": 13
+    },
+    "gap_without_hub0_link0_inband": 23.52
+   },
+   "70_330": {
+    "window": [
+     -7.0,
+     0.0
+    ],
+    "r0": 84.5,
+    "with_metal": {
+     "gap": 35.42,
+     "reach": 0.7278,
+     "inband14": 0.7365,
+     "inband10": 0.4604,
+     "contact": 0.0185,
+     "ws_taken": 262,
+     "contacts": 7,
+     "why": {
+      "fold": 81,
+      "slide": 0,
+      "flip": 0,
+      "closure": 0,
+      "skin": 0,
+      "parts": 4,
+      "contact": 7
+     },
+     "parts_pairs": {
+      "knee-E": 1,
+      "link0-L2": 3
+     },
+     "gap_near1": 36.74,
+     "overhead": [
+      8,
+      28
+     ],
+     "hub0_min_skin_all_mm": 2.63,
+     "link0_min_skin_all_mm": 11.27
+    },
+    "parts_ib14_new": {
+     "hub0": [
+      0.733,
+      11.4,
+      81
+     ],
+     "link0": [
+      0.017,
+      24.3,
+      224
+     ]
+    },
+    "ghost": {
+     "gap": 17.94,
+     "reach": 0.7389,
+     "contact": 0.0183,
+     "ws_taken": 266,
+     "contacts": 7
+    },
+    "gap_without_hub0_link0_inband": 19.07
+   },
+   "60_0": {
+    "window": [
+     -22.0,
+     1.0
+    ],
+    "r0": 75.5,
+    "with_metal": {
+     "gap": 38.64,
+     "reach": 0.7222,
+     "inband14": 0.7203,
+     "inband10": 0.4577,
+     "contact": 0.0289,
+     "ws_taken": 260,
+     "contacts": 11,
+     "why": {
+      "fold": 66,
+      "slide": 0,
+      "flip": 0,
+      "closure": 0,
+      "skin": 0,
+      "parts": 17,
+      "contact": 11
+     },
+     "parts_pairs": {
+      "link0-L2": 3,
+      "knee-E": 6,
+      "hub0": 8
+     },
+     "gap_near1": 41.0,
+     "overhead": [
+      8,
+      28
+     ],
+     "hub0_min_skin_all_mm": 2.04,
+     "link0_min_skin_all_mm": 18.67
+    },
+    "parts_ib14_new": {
+     "hub0": [
+      0.023,
+      20.9,
+      81
+     ],
+     "link0": [
+      0.0,
+      30.3,
+      168
+     ]
+    },
+    "ghost": {
+     "gap": 16.35,
+     "reach": 0.7667,
+     "contact": 0.0302,
+     "ws_taken": 276,
+     "contacts": 12
+    },
+    "gap_without_hub0_link0_inband": 20.67
+   }
+  },
+  "routes": [
+   {
+    "side": 0.0,
+    "len": 48.0,
+    "n": 168,
+    "rest_height": [
+     25.5,
+     19.5,
+     22.4,
+     25.1,
+     27.0,
+     28.4,
+     28.8,
+     29.7
+    ],
+    "chain_sets": 24,
+    "skin_sets": 0,
+    "ib14_fitclips": 0.0,
+    "med": 25.8
+   },
+   {
+    "side": -40.0,
+    "len": 88.4,
+    "n": 315,
+    "rest_height": [
+     26.3,
+     24.2,
+     31.8,
+     31.8,
+     31.7,
+     31.8,
+     31.8,
+     31.8,
+     31.8,
+     31.7,
+     31.8,
+     31.7,
+     31.5,
+     29.0,
+     29.8
+    ],
+    "chain_sets": 45,
+    "skin_sets": 0,
+    "ib14_fitclips": 0.0,
+    "med": 31.7
+   },
+   {
+    "side": -20.0,
+    "len": 60.1,
+    "n": 217,
+    "rest_height": [
+     26.6,
+     21.0,
+     27.6,
+     30.2,
+     31.7,
+     27.6,
+     29.1,
+     30.2,
+     30.2,
+     29.7,
+     23.8
+    ],
+    "chain_sets": 31,
+    "skin_sets": 0,
+    "ib14_fitclips": 0.0,
+    "med": 28.6
+   },
+   {
+    "side": 20.0,
+    "len": 60.1,
+    "n": 217,
+    "rest_height": [
+     22.6,
+     15.4,
+     16.2,
+     17.9,
+     19.6,
+     21.4,
+     24.2,
+     26.5,
+     28.1,
+     29.8,
+     24.6
+    ],
+    "chain_sets": 31,
+    "skin_sets": 0,
+    "ib14_fitclips": 0.129,
+    "med": 21.7
+   },
+   {
+    "side": 40.0,
+    "len": 88.4,
+    "n": 315,
+    "rest_height": [
+     19.8,
+     18.0,
+     24.2,
+     30.4,
+     31.8,
+     31.8,
+     31.8,
+     31.7,
+     31.8,
+     31.8,
+     31.8,
+     31.7,
+     31.7,
+     31.8,
+     31.8
+    ],
+    "chain_sets": 7,
+    "skin_sets": 38,
+    "ib14_fitclips": 0.129,
+    "med": 31.5
+   }
+  ],
+  "seat_bound_a55": [
+   {
+    "a0": 55,
+    "azu": 300,
+    "r0": 129.0,
+    "hub0_inband_clip": 0.105,
+    "hub0_med_mm": 28.6,
+    "link0_len": 66.1,
+    "kin_new_ub": 40
+   },
+   {
+    "a0": 55,
+    "azu": 315,
+    "r0": 95.5,
+    "hub0_inband_clip": 0.192,
+    "hub0_med_mm": 18.8,
+    "link0_len": 50.1,
+    "kin_new_ub": 41
+   },
+   {
+    "a0": 55,
+    "azu": 330,
+    "r0": 71.0,
+    "hub0_inband_clip": 0.944,
+    "hub0_med_mm": 9.5,
+    "link0_len": 38.3,
+    "kin_new_ub": 43
+   },
+   {
+    "a0": 55,
+    "azu": 345,
+    "r0": 67.5,
+    "hub0_inband_clip": 0.884,
+    "hub0_med_mm": 11.4,
+    "link0_len": 36.6,
+    "kin_new_ub": 54
+   },
+   {
+    "a0": 55,
+    "azu": 285,
+    "r0": 129.5,
+    "hub0_inband_clip": 0.171,
+    "hub0_med_mm": 19.0,
+    "link0_len": 66.4,
+    "kin_new_ub": 37
+   },
+   {
+    "a0": 55,
+    "azu": 0,
+    "r0": 69.0,
+    "hub0_inband_clip": 0.233,
+    "hub0_med_mm": 15.4,
+    "link0_len": 37.3,
+    "kin_new_ub": 73
+   }
+  ],
+  "hub0_closest_60_330": [
+   [
+    291,
+    [
+     45.0,
+     165.0,
+     -75.0
+    ],
+    2.82
+   ],
+   [
+    318,
+    [
+     60.0,
+     165.0,
+     -75.0
+    ],
+    2.88
+   ],
+   [
+    345,
+    [
+     75.0,
+     165.0,
+     -75.0
+    ],
+    2.91
+   ],
+   [
+    8,
+    [
+     30.0,
+     150.0,
+     -60.0
+    ],
+    2.92
+   ],
+   [
+    9,
+    [
+     30.0,
+     150.0,
+     -60.0
+    ],
+    2.92
+   ],
+   [
+    10,
+    [
+     30.0,
+     150.0,
+     -60.0
+    ],
+    2.92
+   ]
+  ],
+  "relayed_60_330": {
+   "taken": [
+    369,
+    336,
+    393
+   ],
+   "contact": [
+    129,
+    431,
+    454
+   ]
+  },
+  "lost_60_330": [
+   178,
+   204,
+   220,
+   229
+  ]
+ },
+ "audit": {
+  "t": "2026-10-18T03:40:00Z",
+  "verdict": "death stands",
+  "refuted": false,
+  "reproduced": {
+   "bench": "Bench(110,360) exact, frozen lead, a0 60 / azu 330, great circle, window [-7, 0] from the fit bench",
+   "gap": 32.13,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.7722,
+   "inband10": 0.4847,
+   "contact": 0.0185,
+   "ghost": 18.22,
+   "gap_near1": 33.19,
+   "min_metal_mm": 0.07,
+   "secs": 518
+  },
+  "gate": {
+   "metal_series": [
+    32.13,
+    34.01,
+    35.42,
+    38.64
+   ],
+   "gain_second_half_score": 0.0,
+   "gain_last_third_score": 0.0,
+   "top4_spread_score": 2.37,
+   "converged": "formally (4 decisive wears, not a search); the full-azimuth scan below replaces a CMA run"
+  },
+  "azimuth_scan": "a0 60, azu every 30 deg over the full circle (the screen covered 285-0 only), 3 routes each (great circle, +-30 deg planform turns): seat-legal azu 270-90; link 0 0-13 % in band on every route (chain-set at most stations); hub 0 in band only at azu 330 (0.81; 0.00-0.22 elsewhere); fit-clip in-band ceiling <= 0.772 at every seat (0.669-0.772). docs/concepts/verify/lead-relay-backbridge-4r-audit-scan.json",
+  "bridge_free_bound": "at 60/330 with link 0 deleted entirely (its 168 samples and its 4 L2 jams removed; hub 0 kept): ib14 949.8/1062 = 0.894, reach 0.7361, contact 0.0183 -> 18.78 > 17.5 kill line and > lead 18.28. The seat is dead even without the bridge; the bridge adds 13.4.",
+  "density": "link 0 sampled 168 per 48 x 12 mm (1 per 3.4 mm2, denser than the 1 per 4 mm2 rule): at 144 samples the claim is ~30.6, still dead",
+  "minor": "60/330 called clash-free: the current model gives r0_chain 77.0 vs r0 76.0 (1 fit pose enters hub 0); no hub0 pair on the claim bench, effect nil. The screen's logs print r0_chain 40.0 (older build_metal).",
+  "reason": "The relay's own reach gain is <= 1.93 points (zero-size ghosts 16.35-18.22 vs 18.28) and every seat that could use it has hub 0 out of band or in the chain's sweep; at the only in-band seat (60/330) the bridge-free bound is already 18.78, and link 0 must ride over the chain's crowns (0-13 % in band at every legal azimuth).",
+  "files": [
+   "docs/concepts/verify/lead-relay-backbridge-4r-audit-scan.py",
+   "docs/concepts/verify/lead-relay-backbridge-4r-audit-scan.json"
+  ],
+  "template_note": "the template's round-3 bar (within 10 of 68.93) is passed trivially; the death is against the round-103 17.5 kill line and the lead's 18.28, and it stands"
+ }
+}

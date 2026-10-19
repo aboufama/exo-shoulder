@@ -1,0 +1,51 @@
+{
+ "3mm": {
+  "knee_equiv_median": 2.27,
+  "knee_equiv_max": 5.55,
+  "knee_equiv_within_liner": 0.666,
+  "median": 3.4,
+  "p90": 4.83,
+  "max": 5.9,
+  "within_liner": 0.387,
+  "slide_median": 3.31,
+  "slide_p90": 4.74,
+  "slide_max": 5.83,
+  "slide_within_liner": 0.402
+ },
+ "5mm": {
+  "knee_equiv_median": 3.78,
+  "knee_equiv_max": 9.26,
+  "knee_equiv_within_liner": 0.362,
+  "median": 5.67,
+  "p90": 8.04,
+  "max": 9.84,
+  "within_liner": 0.177,
+  "slide_median": 5.51,
+  "slide_p90": 7.89,
+  "slide_max": 9.71,
+  "slide_within_liner": 0.189
+ },
+ "10mm": {
+  "knee_equiv_median": 7.56,
+  "knee_equiv_max": 18.51,
+  "knee_equiv_within_liner": 0.119,
+  "median": 11.34,
+  "p90": 16.09,
+  "max": 19.68,
+  "within_liner": 0.079,
+  "slide_median": 11.03,
+  "slide_p90": 15.78,
+  "slide_max": 19.42,
+  "slide_within_liner": 0.079
+ },
+ "rotation_from_rest_deg": {
+  "median": 69.4,
+  "p90": 107.2,
+  "max": 159.7
+ },
+ "n_poses": 470,
+ "liner_mm": 3.0,
+ "params": "rows/kneeless-roller-knuckle-3r.json best_params (claim A2)",
+ "cmd": "python3 docs/concepts/models/kneeless-roller-knuckle-3r.py redteam_gh <best_params> (model unchanged)",
+ "git": "9724c2d"
+}

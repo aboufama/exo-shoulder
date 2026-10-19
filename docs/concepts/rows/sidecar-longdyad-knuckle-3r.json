@@ -1,0 +1,353 @@
+{
+ "id": "sidecar-longdyad-knuckle-3r",
+ "name": "Sidecar drive on a longer K dyad: strap-level bell crank + rod + horn slaving K, link 1b lengthened (bk2 39.2 best; 44-47 walked back), stop B toward the dyad margin",
+ "lens": "round8:strap-level-drive x window-geometry (merged from wide-dyad-knuckle-3r)",
+ "family": "slaved knuckle, strap-level drive + stretched-wall lever",
+ "active_dof": 3,
+ "passive_dof": 6,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-16T19:06:44Z",
+ "reach": 0.8,
+ "follow": 1.0,
+ "inband14": 0.897,
+ "inband10": 0.5291,
+ "contact": 0.0,
+ "gap": 10.3,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.8966,
+ "v_inband10": 0.5336,
+ "v_gap": 18.91,
+ "n_configs": 7267,
+ "complexity": 25.5,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 6,
+  "moving_bodies": 7,
+  "joints": 10,
+  "closed_loops": 3,
+  "sliding_pairs": 0,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 16,
+  "catalogue_parts": 16,
+  "notes": "J1/K/J2/J3 O20 MR117-2RS; K slaved (clock-spring cap), never read; hub-2 rim lobe -> bell crank (MR63ZZ pair, pin in link 1b, boss stacked on link 1b, long arm La / short arm s_arm) -> O3 Ti rod + 2 M2 ball links -> lateral horn lug of link 1a at hub K (strap level); pin knee (2 iglidur pins, sensed twist as the lead); loops: drive (lobe-crank-rod-horn RSSR), K closure, knee closure",
+  "source": "sidecar-longdyad-knuckle-3r screen 2026-10-16",
+  "confidence": "hand count",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1
+  }
+ },
+ "best_params": {
+  "bk1": 28.9414,
+  "bk2": 39.236,
+  "a1max": 63.177400000000006,
+  "kK": 1.6232,
+  "r_h": 14.8706,
+  "beta": -86.447,
+  "La": 16.5467,
+  "s_arm": 4.3872,
+  "hl": 3.15,
+  "zr": 0.0,
+  "r_lobe": 7.7447,
+  "smhi": 16.5464,
+  "smlo": 5.0,
+  "az1": 96.6954,
+  "el1": 67.5865,
+  "az2": 42.2031,
+  "el2": 44.4209,
+  "wd": 67.5003,
+  "wa": -7.3175,
+  "b3": 0.345,
+  "ang_min": 26.8823,
+  "lc": 25.6915,
+  "phib": -60.7036,
+  "gam": 0.0,
+  "law_mode": "lin"
+ },
+ "frozen": {
+  "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast",
+  "gap": 18.91,
+  "score": 93.12,
+  "reach": 0.725,
+  "follow": 1.0,
+  "inband14": 0.8966,
+  "inband10": 0.5336,
+  "contact": 0.0107,
+  "near_touch_gap": 20.0,
+  "near_touch_2mm": 34.03,
+  "min_metal_mm": 0.28,
+  "overhead_taken": "8/28",
+  "why": {
+   "fold": 86,
+   "slide": 7,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 2,
+   "contact": 4
+  },
+  "parts_pairs": {
+   "E-L2": 2
+  },
+  "drive_range": {
+   "dK_lim": 43.0,
+   "why_lim": "ROD-hub2"
+  },
+  "parts_ib14": {
+   "hub1": 0.994,
+   "hubK": 0.976,
+   "hub2": 0.987,
+   "hub3": 0.599,
+   "E": 0.932,
+   "boss": 0.985,
+   "pad": 1.0,
+   "knee": 0.942,
+   "crank": 0.91,
+   "horn": 0.964,
+   "rod": 0.893,
+   "rodends": 0.962,
+   "L1a": 0.982,
+   "L1b": 0.969,
+   "L2": 0.749
+  },
+  "connected": {
+   "full": 18.91,
+   "knn": 21.72,
+   "bench_grid": 43.4,
+   "full_dropped": 0,
+   "knn_dropped": 10,
+   "lead_same_protocol": {
+    "full": 22.82,
+    "knn": 25.63,
+    "bench_grid": 46.09
+   }
+  },
+  "fold_margin": "kit rule (msub, m3e >= 5 deg of th in every taken state, as the lead; physical q2 dowel stops)"
+ },
+ "control_lead_dyad": {
+  "params": {
+   "bk1": 28.636,
+   "bk2": 34.6317,
+   "a1max": 58.267700000000005,
+   "kK": 1.8619,
+   "r_h": 15.343,
+   "beta": -93.3769,
+   "La": 16.8306,
+   "s_arm": 4.2756,
+   "hl": 2.5471,
+   "zr": 0.0426,
+   "r_lobe": 7.7744,
+   "smhi": 17.7672,
+   "smlo": 5.0,
+   "az1": 98.0555,
+   "el1": 67.4863,
+   "az2": 41.4565,
+   "el2": 44.4981,
+   "wd": 64.8727,
+   "wa": -10.4373,
+   "b3": 0.4478,
+   "ang_min": 26.7778,
+   "lc": 24.9347,
+   "phib": -72.0315,
+   "gam": 0.0,
+   "law_mode": "lin"
+  },
+  "fast": 10.63,
+  "frozen": {
+   "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast",
+   "gap": 19.97,
+   "score": 92.74,
+   "reach": 0.7111,
+   "follow": 1.0,
+   "inband14": 0.9015,
+   "inband10": 0.5214,
+   "contact": 0.0108,
+   "near_touch_gap": 21.61,
+   "near_touch_2mm": 35.91,
+   "min_metal_mm": 0.56,
+   "overhead_taken": "8/28",
+   "why": {
+    "fold": 91,
+    "slide": 9,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 4
+   },
+   "parts_pairs": {},
+   "drive_range": {
+    "dK_lim": 49.2,
+    "why_lim": "ROD-hub2"
+   },
+   "parts_ib14": {
+    "hub1": 0.995,
+    "hubK": 0.981,
+    "hub2": 0.99,
+    "hub3": 0.589,
+    "E": 0.954,
+    "boss": 0.995,
+    "pad": 0.991,
+    "knee": 0.925,
+    "crank": 0.926,
+    "horn": 0.938,
+    "rod": 0.895,
+    "rodends": 0.956,
+    "L1a": 0.968,
+    "L1b": 0.967,
+    "L2": 0.789
+   }
+  }
+ },
+ "gate": {
+  "gain_2nd_half": 0.29,
+  "gain_last_third": 0.13,
+  "top5_spread": 0.01,
+  "run": "CMA A1 (937 evals); all 8 runs listed in the doc"
+ },
+ "doc": "docs/concepts/sidecar-longdyad-knuckle-3r.md",
+ "held_out": {
+  "gap": 22.67,
+  "near_touch_gap": 25.75,
+  "near_touch_2mm": 37.24,
+  "reach": 0.6901,
+  "inband14": 0.8947,
+  "contact": 0.0115,
+  "min_metal_mm": 0.14,
+  "overhead_taken": "18/71",
+  "why": {
+   "fold": 259,
+   "slide": 21,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 5,
+   "contact": 10
+  },
+  "lead_same_protocol": {
+   "gap": 26.75,
+   "near_touch_gap": 29.39,
+   "reach": 0.6922
+  }
+ },
+ "limiter": "REACH, unchanged from the lead: frozen reach 0.725 (lead 0.728), overhead 8/28, fold 86 of 360. Fit-bench wall split at the best: law end 15 (the lobe skirt, th 119.3; lift-off at longer dyads), m3e 4, folded 7, mid 4. The stretched poses past th ~132 need a1e >= th - a2 + 5 = 76-100 at a2 62, beyond any stop B <= 75: the a2 wall, not the K dyad. Stop B (a1max) never binds: every cell measured identical at a1max -3 deg. The longer dyad also needs a larger K opening, and the strap-level RSSR's transmission angle falls with dK (36 -> 22 deg as bk2 goes 37.6 -> 47 at zero crank phase); phasing the crank to fix it swings the rod into hub 2 past dK ~42. So the CMA walks bk2 44-47 back to 39-41. In-band 0.897 frozen: hub 3 0.60 and L2 0.75 are now the parts out of band; the drive is 0.89-0.96.",
+ "verdict": "SCREENED, a candidate for the verifier. Best self-measured 3-active result so far: frozen exact Bench(110,360) plain 18.91 (score 93.12), near-touch 20.00 / 34.03 at 2 mm, held out 22.67 (near 25.75). Same protocol, the verified lead is 22.82 / 24.46 / 44.08, held out 26.75 / 29.39. 0 passive translations, complexity 49 (= the lead). Most of the gain is the strap-level sidecar (pick 1's lever; its lead-dyad control D measures 19.97 frozen). This row's own lever, the longer link 1b (bk2 39.2), adds 1.06 plain / 1.61 near-touch frozen (fold 91 -> 86). The asked-for bk2 42-48 / a1max 66-75 does not survive the CMA. Score 93.1 on the claim protocol; 95 needs the reach half (pick 3's a2 lever).",
+ "note": "Model on the verified lead's module (frontload-lobe-stopb-knuckle-3r.py, per-t gated linear law) with the sidecar metal per pose: bell crank (MR63ZZ pair, pin in link 1b, boss stacked on link 1b + 0.15, arm 3 x 6 joggled to link 1b's level where clear over the swing), O3 Ti rod + M2 ball links over the arm / horn tops, horn lug of link 1a at hub K. The RSSR loop is closed per bench pose (rod = member 8, crank = member 9). The drive's usable range (transmission >= 30 deg, rod / crank >= 1 mm off hub 2 and link 1b) truncates every bench. Gate grid (lead seats): bk2 38 -> 47 moves fold 30 -> 25-26 and the law end th 123.8 -> 132.1, but reach +0.0125 at most; a1max -3 identical in every cell; wide-dyad 35/45/75 contact 0.12 (dead); ball links under the arm put the rod into the skin (110 of 160 poses). Search: farm CMA x8 on the near-touch gap, 7248 configs; A1 10.30 fast (gate 0.29 / 0.13 / 0.01 score pts), E 11.07, G 11.57, A2 11.60, B 12.05, F 12.59, C 13.50, control D (lead dyad basin) 10.63. Red team: horn ball-link socket 1.37 mm off hub K's housing (tightest pair); near-touch CMA parks the horn at 1.00 mm and the crank at 1.24 mm; drive range ends at dK 43.0 (rod vs hub 2) vs 38.1 taken; transmission >= 38.8; ratio 0.74-0.88 (small-angle 0.90); crest 10.16; K slop 0.19 deg per 0.05 mm of play. Untuned seeds: frozen 20.46 (gam 0) / 21.06 (gam +15, before the range rule: ROD-hub2 lost 8 frozen / 24 held-out poses). | VERIFIED 2026-10-16 ~20:20 UTC (skeptic, docs/concepts/verify/sidecar-longdyad-knuckle-3r.py): frozen exact Bench(110,360) 18.91 reproduced exactly (score 93.12), held out 22.67; added checks (world RSSR closure, M2 ball-link tilt <= 30, real lobe pressure angle <= 45) remove 0 poses. Champion same bench 75.94 (risley-turret table; the added checks do not apply to a rodless 3R). Open CAD items: ball centre 3 mm over the arm is the optimistic end (+0.39 / +0.54 fast at 4 / 4.5 mm); the crank's short arm + follower are unmodelled metal and the lobe (r 7.7-10.2) sits inside hub 2's O20 housing radius on link 1b (inherited from the verified lead). Gain over the verified lead 22.82 -> 18.91 (3.91, mostly the sidecar drive; the longdyad lever alone ~1.06).",
+ "verification": {
+  "t": "2026-10-16T20:20:00Z",
+  "harness": "docs/concepts/verify/sidecar-longdyad-knuckle-3r.py",
+  "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast (claim's protocol, farm)",
+  "v_gap": 18.91,
+  "score": 93.12,
+  "contact": 0.0107,
+  "near1": 20.0,
+  "near2": 34.03,
+  "min_metal_mm": 0.28,
+  "overhead140": {
+   "reach": 0.2857,
+   "ws": 28,
+   "inband14": 0.8662
+  },
+  "lost": {
+   "fold": 86,
+   "slide": 7,
+   "parts": 2,
+   "contact": 4
+  },
+  "held_out": {
+   "gap": 22.67,
+   "reach": 0.6901,
+   "inband14": 0.8947,
+   "contact": 0.0115,
+   "near1": 25.75,
+   "near2": 37.24
+  },
+  "flood_full": 18.91,
+  "flood_knn": 21.72,
+  "added_checks": {
+   "rssr_closure_max_mm": 0.0,
+   "balllink_tilt_max_deg": {
+    "crank": 10.0,
+    "horn": 21.8,
+    "limit": 30
+   },
+   "lobe_pressure_angle_real_max_deg": 39.11,
+   "pa_limit": 45,
+   "poses_failing": 0
+  },
+  "zb_sensitivity_fast": {
+   "3.0": 10.3,
+   "4.0": 10.69,
+   "4.5": 10.84
+  },
+  "champion_same_bench": 75.94
+ },
+ "final_polish": {
+  "t": "2026-10-16T22:05:00Z",
+  "doc": "docs/research/sidecar-longdyad-knuckle-3r_final_polish.md",
+  "tool": "tools/sidecar_env_polish.py",
+  "verdict": "no replacement: the verified config stays the CAD config (robust held-out gain -0.31 < 1; no pick passes the dominance gate on the verified protocol)",
+  "min_th_margin": 5.232,
+  "min_th_margin_note": "own-state J1-J3 margin over taken poses, verified reading (margin 5, nominal stops), Bench(110,360) exact frozen; 0 poses < 5",
+  "priced": {
+   "reading": "smlo + 0.5, CB_FOLD_MARGIN 5.5, a1max <= bk1 + bk2 - 5.5",
+   "bench_gap": 19.36,
+   "score": 92.96,
+   "near1": 20.45,
+   "near2": 34.63,
+   "held_gap": 23.29,
+   "held_near1": 26.39,
+   "held_near2": 38.29,
+   "min_th_margin": 5.513
+  },
+  "env": {
+   "fit_env_wear_env_exact": {
+    "gap": 20.55,
+    "near1": 22.46,
+    "near2": 30.87
+   },
+   "fit_env_wear_held": {
+    "gap": 25.88,
+    "near1": 26.54,
+    "near2": 36.04
+   }
+  },
+  "cma": {
+   "runs": 8,
+   "configs": 1216,
+   "gate": {
+    "gain_2nd_half": 0.07,
+    "gain_last_third": 0.07,
+    "top5_spread": 0.39,
+    "passes": true
+   }
+  },
+  "picks_held_gain": {
+   "fit_env": {
+    "pick1": 2.32,
+    "pick2": 2.39,
+    "pick3": 2.45
+   },
+   "fit60": {
+    "pick1": -0.31,
+    "pick2": -0.71,
+    "pick3": -0.55
+   }
+  },
+  "cost_usd": 0.47
+ }
+}

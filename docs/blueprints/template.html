@@ -1,0 +1,365 @@
+<title>Shoulder Exo Blueprints</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a drawing set - one sheet per design (title block, chain, joints, geometry, parts on white plates), then the iteration wall. */
+:root {
+  --bg: #ffffff; --panel: #f3f5f7; --ink: #1b2430; --ink2: #4b5664; --ink3: #7a8593; --rule: #d8dde4;
+  --accent: #d06f1c; --accent-soft: #fbeee2; --steel: #8f9aa7; --plate: #ffffff; --plate-rule: #e3e7ec;
+  --good: #2c7a4b; --warn: #a86b12; --bad: #b0393b;
+  --f-display: "Archivo Narrow", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11151b; --panel: #19202a; --ink: #e5e9ef; --ink2: #aab3bf; --ink3: #7f8a98; --rule: #2b3440;
+  --accent: #ef9450; --accent-soft: #3a2616; --steel: #7d8896; --plate: #ffffff; --plate-rule: #3a4350;
+  --good: #5cc28a; --warn: #e0a54a; --bad: #ec7a7c; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11151b; --panel: #19202a; --ink: #e5e9ef; --ink2: #aab3bf; --ink3: #7f8a98; --rule: #2b3440;
+  --accent: #ef9450; --accent-soft: #3a2616; --steel: #7d8896; --plate: #ffffff; --plate-rule: #3a4350;
+  --good: #5cc28a; --warn: #e0a54a; --bad: #ec7a7c; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--f-body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg) }
+.wrap { max-width: 1160px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 64px }
+header.top { padding-block: 36px 18px; display: grid; gap: 10px }
+h1 { font: 700 clamp(30px, 5vw, 46px)/1.05 var(--f-display); letter-spacing: .01em; margin: 0; text-wrap: balance }
+.lede { color: var(--ink2); max-width: 70ch; margin: 0 }
+.asof { font: 500 12px var(--f-mono); color: var(--ink3); letter-spacing: .04em; text-transform: uppercase }
+nav.jump { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--rule); display: flex; gap: 6px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-block: 10px }
+nav.jump a { white-space: nowrap; flex: none }
+nav.jump a { font: 600 13px var(--f-body); color: var(--ink2); text-decoration: none; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--rule) }
+nav.jump a:hover, nav.jump a:focus-visible { color: var(--ink); border-color: var(--ink3); outline: none }
+nav.jump a.a { border-color: var(--accent); color: var(--accent) }
+section.sheet { padding-block: 34px 8px; border-bottom: 1px solid var(--rule); display: grid; gap: 22px }
+.tb { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: end }
+.tb h2 { font: 700 clamp(24px, 3.4vw, 34px)/1.1 var(--f-display); margin: 0; text-wrap: balance }
+.tb .eyebrow { font: 600 12px var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent) }
+.block { border: 1.5px solid var(--ink); font: 12px var(--f-mono); display: grid; grid-template-columns: auto auto; min-width: 0 }
+.block div { padding: 4px 9px; border-bottom: 1px solid var(--ink); white-space: nowrap }
+.block div:nth-child(odd) { border-right: 1px solid var(--ink); color: var(--ink3); text-transform: uppercase; letter-spacing: .05em; font-size: 10.5px; display: flex; align-items: center }
+.block div:nth-last-child(-n+2) { border-bottom: 0 }
+h3 { font: 600 20px/1.2 var(--f-display); margin: 0; letter-spacing: .01em }
+h3 .n { font-family: var(--f-mono); font-size: 13px; color: var(--ink3); font-weight: 500; margin-right: 8px }
+.sec { display: grid; gap: 12px; min-width: 0 }
+.sec > p, .prose { margin: 0; max-width: 72ch; color: var(--ink) }
+.hint { color: var(--ink3); font-size: 13px; margin: 0; max-width: 80ch }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 22px; align-items: start }
+.tw { overflow-x: auto; min-width: 0 }
+table.spec { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums }
+table.spec th { text-align: left; font: 600 11px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink3); border-bottom: 1.5px solid var(--ink); padding: 7px 10px 6px }
+table.spec td { border-bottom: 1px solid var(--rule); padding: 7px 10px; vertical-align: top }
+table.spec td:first-child { font-weight: 600; white-space: nowrap }
+table.cmp td:not(:first-child), table.cmp th:not(:first-child) { min-width: 170px }
+table.cmp td:first-child { font-weight: 500; color: var(--ink2); white-space: normal; min-width: 150px }
+.sub { color: var(--ink3); font-weight: 400; font-size: 12px }
+code { font: 12.5px var(--f-mono); background: var(--panel); padding: 1px 5px; border-radius: 4px; word-break: break-all }
+.diagram { overflow-x: auto; background: var(--panel); border-radius: 8px; padding: 14px }
+.diagram svg { display: block }
+.diagram svg text { font-family: var(--f-body) }
+.ln { stroke: var(--ink3); stroke-width: 1.5 }
+.bd { fill: var(--bg); stroke: var(--ink2); stroke-width: 1.3 }
+.tbx { font: 600 12.5px var(--f-body); fill: var(--ink); text-anchor: middle }
+.ts { font-size: 10.5px; fill: var(--ink3); text-anchor: middle }
+.tl { font-size: 11px; fill: var(--ink2) }
+.tj { font: 700 12px var(--f-mono); text-anchor: middle }
+.jh { fill: var(--ink); stroke: var(--ink); stroke-width: 1.5 } .jht { fill: var(--bg) }
+.jk { fill: var(--bg); stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 3 2 } .jkt { fill: var(--ink) }
+.jp { fill: var(--bg); stroke: var(--steel); stroke-width: 2 } .jpt { fill: var(--ink2); font-size: 10.5px }
+.jr { fill: var(--accent); stroke: var(--accent); stroke-width: 1.5 } .jrt { fill: #fff; font-size: 10.5px }
+.band14 { fill: var(--accent-soft) } .band10 { fill: var(--accent); opacity: .16 }
+.grid { stroke: var(--rule); stroke-width: 1 }
+.tax, .tax2 { font-size: 11px; fill: var(--ink3); text-anchor: middle } .tax2 { text-anchor: start }
+.taxr { font-size: 11px; fill: var(--ink3); text-anchor: end }
+.taxg { font-size: 11px; fill: var(--good); text-anchor: end } .goal { stroke: var(--good); stroke-width: 1.2; stroke-dasharray: 5 4 }
+.tlab { font-size: 12px; fill: var(--ink2); text-anchor: end } .tlab2 { font-size: 11.5px; fill: var(--ink2) }
+.tval { font: 500 11.5px var(--f-mono); fill: var(--ink) }
+.bar { fill: var(--steel) }
+.skin { fill: none; stroke: var(--ink3); stroke-width: 1.4; stroke-dasharray: 6 4 }
+.shell { fill: var(--steel); stroke: var(--ink2); stroke-width: .8 }
+.carr { fill: var(--accent); stroke: var(--ink); stroke-width: .8 }
+.carrghost { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 3 2 }
+.coil { fill: var(--panel); stroke: var(--ink2); stroke-width: 1.2 }
+.pad { fill: var(--ink2) }
+.trav { fill: none; stroke: var(--accent); stroke-width: 1.4 } .ahd { fill: var(--accent) }
+.sbar { stroke: var(--ink); stroke-width: 3 }
+.bal { fill: var(--bg); stroke: var(--ink); stroke-width: 1.2 } .baln { font: 600 11px var(--f-mono); fill: var(--ink); text-anchor: middle }
+ol.balloons { margin: 0; padding-left: 22px; display: grid; gap: 3px; font-size: 13px; color: var(--ink2) }
+ol.balloons li::marker { font: 600 12px var(--f-mono); color: var(--ink) }
+.tpt { font-size: 12px; fill: var(--ink) }
+.pB { fill: var(--accent) } .pA { fill: var(--bg); stroke: var(--accent); stroke-width: 2.5 } .pL { fill: var(--ink) } .pg { fill: var(--steel) }
+figure { margin: 0 }
+.plate { background: var(--plate); border: 1px solid var(--plate-rule); border-radius: 8px; overflow: hidden }
+.plate img { display: block; width: 100%; height: auto }
+figcaption { font-size: 12.5px; color: var(--ink3); padding-top: 6px }
+.renders { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px }
+.renders img { display: block; width: 100%; border-radius: 8px; aspect-ratio: 16/9; object-fit: cover; cursor: zoom-in; background: var(--panel) }
+.caveats { margin: 0; padding-left: 20px; display: grid; gap: 8px; max-width: 80ch }
+.caveats li::marker { color: var(--accent) }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; align-items: center }
+.chips button { font: 600 12.5px var(--f-body); color: var(--ink2); background: var(--bg); border: 1px solid var(--rule); border-radius: 999px; padding: 5px 12px; cursor: pointer }
+.chips button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink) }
+.chips button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+.chips .count { font: 12px var(--f-mono); color: var(--ink3); margin-left: 6px }
+.pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)); gap: 14px }
+.pc { display: grid; grid-template-rows: auto 1fr; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; background: var(--bg); min-width: 0 }
+.pc .im { background: var(--plate); border-bottom: 1px solid var(--plate-rule); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; cursor: zoom-in; padding: 6px }
+.pc .im img { max-width: 100%; max-height: 100%; object-fit: contain }
+.pc .bd2 { padding: 10px 12px 12px; display: grid; gap: 6px; align-content: start; min-width: 0 }
+.pc .t { font: 600 14px/1.3 var(--f-body); }
+.pc .q { font: 600 12px var(--f-mono); color: var(--accent); margin-right: 6px }
+.pc dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; font-size: 12.5px }
+.pc dt { color: var(--ink3) } .pc dd { margin: 0; font-variant-numeric: tabular-nums; min-width: 0; overflow-wrap: anywhere }
+.pc details { font-size: 12px; color: var(--ink2) } .pc summary { cursor: pointer; color: var(--ink3) }
+.pc details p { margin: 6px 0 0; overflow-wrap: anywhere }
+.tag { font: 600 10.5px var(--f-mono); letter-spacing: .05em; text-transform: uppercase; padding: 1px 6px; border-radius: 4px; background: var(--panel); color: var(--ink3) }
+.ggrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap: 16px }
+.gc { border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; min-width: 0 }
+.gc .im { background: #fff; cursor: zoom-in } .gc .im img { display: block; width: 100%; height: auto }
+.gc .bd2 { padding: 10px 12px 12px; display: grid; gap: 6px }
+.gc .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: baseline; justify-content: space-between }
+.gc .nm { font: 600 15px/1.3 var(--f-body) }
+.gc .when { font: 12px var(--f-mono); color: var(--ink3) }
+.meters { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--ink2); font-variant-numeric: tabular-nums }
+.meters b { color: var(--ink); font-weight: 600 }
+.lvl { font: 600 10.5px var(--f-mono); letter-spacing: .05em; text-transform: uppercase; padding: 1px 6px; border-radius: 4px }
+.lvl.full { background: var(--accent); color: #fff } .lvl.l1 { background: var(--panel); color: var(--ink2); border: 1px solid var(--rule) }
+.key { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 14px }
+.key div { background: var(--panel); border-radius: 8px; padding: 12px 14px; font-size: 13.5px }
+.key b { display: block; font: 600 13px var(--f-mono); color: var(--accent); margin-bottom: 4px }
+#lb { position: fixed; inset: 0; z-index: 20; background: rgba(10, 13, 18, .86); display: flex; align-items: center; justify-content: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); cursor: zoom-out }
+#lb[hidden] { display: none }
+#lb figure { max-width: min(1400px, 100%); max-height: 100%; display: grid; gap: 8px }
+#lb img { max-width: 100%; max-height: calc(100vh - 110px); object-fit: contain; background: #fff; border-radius: 6px; margin: 0 auto }
+#lb figcaption { color: #e7ebf0; text-align: center; font-size: 13.5px }
+@media (max-width: 620px) { .tb { grid-template-columns: 1fr } table.spec td:first-child { white-space: normal } }
+@media (prefers-reduced-motion: no-preference) { .pc, .gc { transition: border-color .15s } .pc:hover, .gc:hover { border-color: var(--ink3) } }
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="asof">Drawing set · as of %%ASOF%%</div>
+  <h1>Shoulder Exo Blueprints</h1>
+  <p class="lede">Two designs. <b>A</b> has the best verified score on file (4 joints). <b>B</b> is the simplest design that still scores 90 (3 joints, complexity 0). Every part of both built CADs is drawn below on white, to scale, and the snapshots at the end show every design that reached CAD.</p>
+</header>
+
+<nav class="jump" aria-label="Sections">
+  <a href="#compare">Compare</a><a href="#A" class="a">A · Best verified</a><a href="#A-parts">A parts</a><a href="#B" class="a">B · Simplest</a><a href="#B-parts">B parts</a><a href="#history">Every built design</a><a href="#key">How it's scored</a>
+</nav>
+
+<section class="sheet" id="compare">
+  <div class="sec">
+    <h3>Side by side</h3>
+    <p class="hint">Score = 100 × (1 − gap / 275). A gap of 13.75 or less (score ≥ 95) is the target. Lower gap is better.</p>
+    %%SUMMARY%%
+  </div>
+</section>
+
+<!-- ============================== A ============================== -->
+<section class="sheet" id="A">
+  <div class="tb">
+    <div><div class="eyebrow">Sheet A · best verified score</div><h2>Cone-cut pin knee with an offset cuff relay</h2></div>
+    <div class="block"><div>Id</div><div>offset-shortcar-relay-4r</div><div>Joints</div><div>4 (3 hubs + relay)</div><div>Score</div><div>94.63 · held-out gap 17.77</div><div>Built</div><div>chain yes · relay no</div></div>
+  </div>
+  <div class="sec">
+    <h3><span class="n">A1</span>How it works</h3>
+    <p class="prose">A is the current 3-joint lead with one extra joint at the cuff. Three encoded Ø20 hubs (J1, J2, J3) on MR117-2RS bearing pairs form a spherical linkage centred on the shoulder joint (GH). J1 sits on the acromion top, carried directly on your scapula handler. J1 and J2 point through GH. J3 sits 13.84 mm off GH, near the upper-arm axis, and follows axial rotation.</p>
+    <p class="prose">Link 1 is split by a slaved knuckle, K. A cam on hub 2 (lobe ring → bell crank → dowel nose on a flank) folds link 1 as J2 opens, which keeps the bars close to the skin as the arm rises. K has no encoder and adds no DOF; a clock spring holds it on its stop. At the arm, a flat two-pin knee on MR63ZZ pairs closes the loop to the arm pad, which is machined in one piece with your BOTTOM. A dowel in J3's own ring stops J3 at −111.9° and +122.7°, so the chain never enters poses that would push metal into the skin.</p>
+    <p class="prose">The relay is the 4th joint. A 14 × 14 mm titanium carriage slides 0–35° around a slotted shell strapped to the arm 31 mm above the pad, and a small constant-force coil holds it at zero. Where the chain alone would fold, the carriage turns the cuff side about an axis through GH. That is where A gains its extra reach.</p>
+  </div>
+  <div class="sec">
+    <h3><span class="n">A2</span>Joint chain</h3>
+    <div class="diagram">%%A_CHAIN%%</div>
+  </div>
+  <div class="sec">
+    <h3><span class="n">A3</span>Joints</h3>
+    %%A_JOINTS%%
+  </div>
+  <div class="two">
+    <div class="sec"><h3><span class="n">A4</span>Key geometry</h3>%%A_GEOM%%</div>
+    <div class="sec"><h3><span class="n">A5</span>How close each part rides to the skin</h3><p class="hint">Median over the bench poses, verified model of the lead's chain.</p><div class="diagram">%%A_CLEAR%%</div></div>
+  </div>
+  <div class="sec">
+    <h3><span class="n">A6</span>The relay (4th joint)</h3>
+    <p class="hint">Section along the relay axis, to scale. The dashed outline shows the carriage at full travel. The relay has not been built in CAD yet, so it has no part pictures.</p>
+    <div class="two">
+      <div class="sec"><div class="diagram">%%RELAY_SVG%%</div><ol class="balloons">%%RELAY_LEGEND%%</ol></div>
+      <div class="sec">%%RELAY_DIMS%%</div>
+    </div>
+    %%RELAY_PARTS%%
+  </div>
+  <div class="sec">
+    <h3><span class="n">A7</span>Built CAD of the chain on the body</h3>
+    <figure class="plate"><img src="evolution/user_conecut_knee.png" alt="Lead chain CAD on the body at rest, overhead and reach-back" loading="lazy" data-cap="Lead chain, full CAD (gen 8): rest, overhead peak, reach-back peak"></figure>
+    <figcaption>Full CAD of the lead's chain (generation 8) on the scanned body at three poses: rest, overhead peak, reach-back peak. The relay is not in this CAD.</figcaption>
+    %%A_CAD%%
+  </div>
+  <div class="sec">
+    <h3><span class="n">A8</span>Verified performance</h3>
+    <p class="hint">An independent verifier reproduced each number (frozen shape, exact skin model). Held-out poses were never used in design.</p>
+    %%A_PERF%%
+  </div>
+  <div class="sec">
+    <h3><span class="n">A9</span>Caveats and open items</h3>
+    <ul class="caveats">%%A_CAV%%</ul>
+  </div>
+</section>
+
+<section class="sheet" id="A-parts">
+  <div class="sec">
+    <h3><span class="n">A10</span>Every part of the lead chain's CAD</h3>
+    <p class="hint">%%A_NPARTS%% exo parts, %%A_MASS%% g with BOTTOM and the upper-arm cuff. Each card shows a true-scale plan view with dimensions and a scale bar, plus a 3D view. Identical parts share a card. Click a picture to enlarge it.</p>
+    <div class="chips" data-for="A" role="group" aria-label="Filter A parts"></div>
+    <div class="pgrid" id="grid-A"></div>
+  </div>
+</section>
+
+<!-- ============================== B ============================== -->
+<section class="sheet" id="B">
+  <div class="tb">
+    <div><div class="eyebrow">Sheet B · simplest high scorer</div><h2>Pin knee H1: three hubs, three links</h2></div>
+    <div class="block"><div>Id</div><div>skin-normal-3r-pin-knee</div><div>Joints</div><div>3 hubs</div><div>Score</div><div>90.11 · held-out gap 29.12</div><div>Complexity</div><div>0</div></div>
+  </div>
+  <div class="sec">
+    <h3><span class="n">B1</span>How it works</h3>
+    <p class="prose">B has three encoded Ø20 hubs on MR117-2RS pairs and three titanium links, with no cam, spring or extra knuckle. J1 sits on the acromion top. J1 and J2 point through the shoulder centre. J3 tilts toward the skin and misses GH by 10.72 mm, near the upper-arm axis.</p>
+    <p class="prose">A flat two-pin knee (pins parallel to J3) joins member 3's strap to the arm pad, which is machined in one piece with your BOTTOM. The knee closes the loop in closed form, so the arm pose sets every link and nothing sags.</p>
+    <p class="prose">Its limit is the J2 fold. The angle between the J1 and J3 axes must stay inside a ~27–109° window, but the full workspace needs 27–141°, so most overhead poses are out of reach.</p>
+  </div>
+  <div class="sec">
+    <h3><span class="n">B2</span>Renders of the built CAD</h3>
+    <div class="renders" id="renders"></div>
+    <p class="hint">Blender stills from 2026-10-16, made from the h1 build with bent bars. The reference build h1b has machined bars and is otherwise the same.</p>
+  </div>
+  <div class="sec">
+    <h3><span class="n">B3</span>Joint chain</h3>
+    <div class="diagram">%%B_CHAIN%%</div>
+  </div>
+  <div class="two">
+    <div class="sec"><h3><span class="n">B4</span>Joints</h3>%%B_JOINTS%%</div>
+    <div class="sec"><h3><span class="n">B5</span>Key geometry</h3>%%B_GEOM%%</div>
+  </div>
+  <div class="sec">
+    <h3><span class="n">B6</span>Built CAD on the body</h3>
+    <figure class="plate"><img src="evolution/user_pinknee_h1b.png" alt="Pin knee H1b CAD on the body at rest, overhead and reach-back" loading="lazy" data-cap="Pin knee H1b, full CAD: rest, overhead peak, reach-back peak"></figure>
+    <figcaption>Full CAD h1b on the scanned body: rest, overhead peak, reach-back peak.</figcaption>
+    %%B_CAD%%
+  </div>
+  <div class="sec">
+    <h3><span class="n">B7</span>Verified performance</h3>
+    %%B_PERF%%
+  </div>
+  <div class="sec">
+    <h3><span class="n">B8</span>Score against simplicity</h3>
+    <p class="hint">Each step right adds mechanism. B is the best design at complexity 0, and the next real steps up are the geneva knuckle and the lead.</p>
+    <div class="two"><div class="diagram">%%PARETO%%</div><div class="sec">%%TRADE%%</div></div>
+  </div>
+  <div class="sec">
+    <h3><span class="n">B9</span>Caveats and open items</h3>
+    <ul class="caveats">%%B_CAV%%</ul>
+  </div>
+</section>
+
+<section class="sheet" id="B-parts">
+  <div class="sec">
+    <h3><span class="n">B10</span>Every part of the h1b CAD</h3>
+    <p class="hint">%%B_NPARTS%% exo parts, %%B_MASS%% g with BOTTOM and the upper-arm cuff. Same drawing rules as A.</p>
+    <div class="chips" data-for="B" role="group" aria-label="Filter B parts"></div>
+    <div class="pgrid" id="grid-B"></div>
+  </div>
+</section>
+
+<!-- ============================== history ============================== -->
+<section class="sheet" id="history">
+  <div class="sec">
+    <h3>Every design that reached CAD</h3>
+    <p class="hint">%%NBUILT%% builds, oldest first. Each shows the CAD on the scanned body at rest, overhead peak and reach-back peak. <b>L1</b> is the quick keep-out CAD; <b>Full CAD</b> is built to your standard. The judge numbers come from the built CAD. The verified score belongs to the design's best config on the bench.</p>
+    <div class="chips" id="gchips" role="group" aria-label="Filter builds"></div>
+    <div class="ggrid" id="grid-G"></div>
+  </div>
+</section>
+
+<section class="sheet" id="key">
+  <div class="sec">
+    <h3>How it's scored</h3>
+    <div class="key">
+      <div><b>Gap</b>The shortfall below four targets, in points: reach under 90 %, skin in band under 90 %, follow under 95 %, plus the share of poses with metal in the skin. Score = 100 × (1 − gap / 275).</div>
+      <div><b>Reach</b>Share of 360 arm poses the exo follows without folding, jamming or touching the skin.</div>
+      <div><b>In-band</b>Share of the covered skin that sits 2–14 mm from the metal (the aim is 2–10 mm, the 1 cm rule).</div>
+      <div><b>Bench / held-out</b>The bench is 360 arm poses plus 110 motion-clip frames, with the shape frozen from a separate fit. The held-out set is 952 poses and 202 frames never used in design.</div>
+      <div><b>Complexity</b>0 means three pinned hubs and three links. Extra joints, loops, springs, sliders and parts add points. A 4th counted joint adds 25.</div>
+      <div><b>Audit</b>Every claim is re-measured by an independent verifier and checked by the alignment auditor. "Watch" means open findings, none blocking.</div>
+    </div>
+    <p class="hint">Sources: <code>docs/concepts/rows/*.json</code>, <code>docs/concepts/verify/</code>, <code>pipeline/full-exo/designs/user_conecut_knee</code> and <code>user_pinknee_h1b</code> (CAD, judges, VERIFY.md), <code>docs/alignment/ledger.jsonl</code>. Part drawings: <code>tools/part_cards.py</code>; page: <code>docs/blueprints/build_blueprints.py</code>.</p>
+  </div>
+</section>
+</div>
+
+<div id="lb" hidden role="dialog" aria-modal="true" aria-label="Enlarged picture"><figure><img alt=""><figcaption></figcaption></figure></div>
+
+<script>
+const D = %%DATA%%;
+const RENDERS = %%RENDERS%%;
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const fmt = (x, d = 1) => (x == null ? '–' : Number(x).toFixed(d));
+const lb = document.getElementById('lb');
+function openLB(src, cap) { lb.querySelector('img').src = src; lb.querySelector('img').alt = cap; lb.querySelector('figcaption').textContent = cap; lb.hidden = false; }
+lb.addEventListener('click', () => { lb.hidden = true; });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lb.hidden = true; });
+document.addEventListener('click', (e) => {
+  const im = e.target.closest('img[data-cap]'); if (im && !lb.contains(im)) openLB(im.src, im.dataset.cap);
+});
+
+function partCard(p) {
+  const size = p.s ? `${fmt(p.s[0])} × ${fmt(p.s[1])} × ${fmt(p.s[2])} mm` : '–';
+  const mass = p.g == null ? (p.u ? 'not on file' : '–') : `${fmt(p.g, 2)} g${p.q > 1 ? ' each' : ''}`;
+  const img = p.img ? `<img src="${esc(p.img)}" alt="${esc(p.t)}" loading="lazy" data-cap="${esc(p.t)}">` : '<span class="hint">no picture</span>';
+  return `<article class="pc"><div class="im">${img}</div><div class="bd2">
+    <div class="t"><span class="q">×${p.q}</span>${esc(p.t)}</div>
+    <dl><dt>Size</dt><dd>${size}</dd>${p.m ? `<dt>Material</dt><dd>${esc(p.m)}</dd>` : ''}<dt>Mass</dt><dd>${mass}</dd>
+    <dt>On</dt><dd>${esc(p.b.join(', '))}</dd></dl>
+    ${p.u ? '<div><span class="tag">your part, unchanged</span></div>' : ''}
+    <details><summary>CAD description</summary>${p.d.map((x) => `<p>${esc(x)}</p>`).join('')}</details>
+  </div></article>`;
+}
+function partGrid(key) {
+  const all = D[key], chips = document.querySelector(`.chips[data-for="${key}"]`), grid = document.getElementById('grid-' + key);
+  const groups = [['exo', 'Exo parts', (p) => !p.u], ['yours', 'Your cuff parts', (p) => p.u], ['all', 'All', () => true]];
+  let cur = 'exo';
+  try { cur = localStorage.getItem('bp-filter-' + key) || 'exo'; } catch (e) {}
+  function render() {
+    const f = groups.find((g) => g[0] === cur) || groups[0];
+    chips.innerHTML = groups.map((g) => `<button type="button" aria-pressed="${g[0] === cur}" data-k="${g[0]}">${g[1]}<span class="count">${all.filter(g[2]).length}</span></button>`).join('');
+    grid.innerHTML = all.filter(f[2]).map(partCard).join('');
+  }
+  chips.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; cur = b.dataset.k; try { localStorage.setItem('bp-filter-' + key, cur); } catch (e) {} render(); });
+  render();
+}
+partGrid('A'); partGrid('B');
+
+document.getElementById('renders').innerHTML = RENDERS.map((r) => `<img src="renders/${r}.jpg" alt="${esc(r.replace(/_/g, ' '))}" loading="lazy" data-cap="Pin knee H1 render: ${esc(r.replace(/_/g, ' '))}">`).join('');
+
+(function gallery() {
+  const G = D.G, grid = document.getElementById('grid-G'), chips = document.getElementById('gchips');
+  const opts = [['all', 'All builds'], ['full', 'Full CAD only'], ['l1', 'L1 only']];
+  let cur = 'all';
+  function card(g) {
+    const pct = (x) => (x == null ? '–' : (100 * x).toFixed(1) + ' %');
+    const vs = g.vgap == null ? '' : `<span>verified <b>${(100 * (1 - g.vgap / 275)).toFixed(2)}</b>${g.dof > 3 ? ' (4 joints)' : ''}</span>`;
+    return `<article class="gc"><div class="im"><img src="${esc(g.img)}" alt="${esc(g.name)} on the body" loading="lazy" data-cap="${esc(g.name)} · ${esc(g.t)} UTC"></div>
+      <div class="bd2"><div class="row"><span class="nm">${esc(g.name)}</span><span class="lvl ${g.full ? 'full' : 'l1'}">${g.full ? 'Full CAD' : 'L1'}</span></div>
+      <div class="when">${esc(g.t)} UTC · ${esc(g.id)}${g.note ? ' · ' + esc(g.note) : ''}</div>
+      <div class="meters">${g.n ? `<span>skin 2–14 mm <b>${pct(g.r1)}</b></span><span>2–10 mm <b>${pct(g.aim)}</b></span><span>overhead <b>${pct(g.r4)}</b></span><span>requirements <b>${g.pass}/${g.n}</b></span>` : '<span>no judge scorecard</span>'}${vs}</div>
+      </div></article>`;
+  }
+  function render() {
+    chips.innerHTML = opts.map((o) => `<button type="button" aria-pressed="${o[0] === cur}" data-k="${o[0]}">${o[1]}</button>`).join('');
+    grid.innerHTML = G.filter((g) => cur === 'all' || (cur === 'full') === g.full).map(card).join('');
+  }
+  chips.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { cur = b.dataset.k; render(); } });
+  render();
+})();
+</script>

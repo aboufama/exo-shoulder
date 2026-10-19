@@ -1,0 +1,154 @@
+{
+ "A": "inband-rssr-knuckle-3r",
+ "B": "slipper-nose-knuckle-3r",
+ "note": "diff = gap A - gap B (negative: A better)",
+ "bench": {
+  "gap_A": 18.87,
+  "gap_B": 18.48,
+  "diff": 0.39,
+  "split": {
+   "reach": 0.28,
+   "follow": 0.0,
+   "inband": -0.15,
+   "contact": 0.27
+  },
+  "discordant": {
+   "ws_taken_A_only": 0,
+   "ws_taken_B_only": 1,
+   "contact_A_only": 1,
+   "contact_B_only": 0,
+   "contact_both": 2
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -0.28,
+    1.54
+   ],
+   "sd": 0.56,
+   "p_A_better": 0.216
+  },
+  "by_class": {
+   "low_arm": {
+    "A_only_taken": 0,
+    "B_only_taken": 0,
+    "A_contact": 0,
+    "B_contact": 0,
+    "A_contact_depth": 0.0,
+    "B_contact_depth": 0.0
+   },
+   "mid_60_140": {
+    "A_only_taken": 0,
+    "B_only_taken": 1,
+    "A_contact": 1,
+    "B_contact": 0,
+    "A_contact_depth": 0.044,
+    "B_contact_depth": 0.0
+   },
+   "overhead_140": {
+    "A_only_taken": 0,
+    "B_only_taken": 0,
+    "A_contact": 2,
+    "B_contact": 2,
+    "A_contact_depth": 9.812,
+    "B_contact_depth": 14.746
+   },
+   "low_arm_rot": {
+    "A_only_taken": 0,
+    "B_only_taken": 0,
+    "A_contact": 0,
+    "B_contact": 0,
+    "A_contact_depth": 0.0,
+    "B_contact_depth": 0.0
+   }
+  }
+ },
+ "held": {
+  "gap_A": 23.21,
+  "gap_B": 23.45,
+  "diff": -0.24,
+  "split": {
+   "reach": 0.0,
+   "follow": 0.0,
+   "inband": -0.13,
+   "contact": -0.11
+  },
+  "discordant": {
+   "ws_taken_A_only": 1,
+   "ws_taken_B_only": 1,
+   "contact_A_only": 0,
+   "contact_B_only": 1,
+   "contact_both": 9
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -0.68,
+    0.17
+   ],
+   "sd": 0.26,
+   "p_A_better": 0.77
+  },
+  "by_class": {
+   "low_arm": {
+    "A_only_taken": 0,
+    "B_only_taken": 0,
+    "A_contact": 0,
+    "B_contact": 0,
+    "A_contact_depth": 0.0,
+    "B_contact_depth": 0.0
+   },
+   "mid_60_140": {
+    "A_only_taken": 0,
+    "B_only_taken": 1,
+    "A_contact": 4,
+    "B_contact": 4,
+    "A_contact_depth": 12.356,
+    "B_contact_depth": 11.82
+   },
+   "overhead_140": {
+    "A_only_taken": 1,
+    "B_only_taken": 0,
+    "A_contact": 5,
+    "B_contact": 6,
+    "A_contact_depth": 10.843,
+    "B_contact_depth": 34.301
+   },
+   "low_arm_rot": {
+    "A_only_taken": 0,
+    "B_only_taken": 0,
+    "A_contact": 0,
+    "B_contact": 0,
+    "A_contact_depth": 0.0,
+    "B_contact_depth": 0.0
+   }
+  }
+ },
+ "pooled_bench_plus_held": {
+  "gap_A": 22.0,
+  "gap_B": 22.06,
+  "diff": -0.06,
+  "split": {
+   "reach": 0.08,
+   "follow": 0.0,
+   "inband": -0.14,
+   "contact": 0.0
+  },
+  "discordant": {
+   "ws_taken_A_only": 1,
+   "ws_taken_B_only": 2,
+   "contact_A_only": 1,
+   "contact_B_only": 1,
+   "contact_both": 11
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -0.44,
+    0.39
+   ],
+   "sd": 0.25,
+   "p_A_better": 0.546
+  }
+ }
+}

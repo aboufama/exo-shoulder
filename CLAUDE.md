@@ -2,18 +2,113 @@
 
 Read first, in order: `docs/METHOD.md` (how we work: altitude, depth, range - from Felix Rieseberg's essay), `README.md`, `REQUIREMENTS.md`, `docs/PLAN.md`, `docs/FINDINGS.md`. Then `docs/CAD_STANDARD.md`
 before touching any part, `docs/PIPELINE.md` before running anything.
+The method's source: Felix Rieseberg, *How to be more ambitious: A tutorial for humans with models* - https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/ (docs/METHOD.md applies it).
 
 ## The goal (the user's words outrank everything)
 
 Shoulder exo, at most 4 DOF (3 joints + sliding cuff, or 4 joints), whose whole mechanism rides within ~1 cm of the
 skin over the full range of motion - overhead most of all - without ever touching the skin, at the user's CAD standard.
 Never relax the 1 cm rule or the DOF cap to buy range without asking.
+User decisions 2026-10-15 (REQUIREMENTS.md): pass at 14 mm, aim for 10; the base rides the scapula on the user's own
+scapula handler (a separate part, outside the DOF count); the shoulder chain should have exactly 3 DOF - "the minimum
+possible solution is 3 dof" - so push for 3 before settling for 4.
+Scope 2026-10-15: MVP1 is an UNPOWERED kinematic proof of concept that tracks the arm (basic rolling bearings, the
+user adds rotation sensing); no gears, pulleys or cables (MVP2 powers it, remote motors on cables). Passive
+self-aligning slides at the cuff (outside the count). Right shoulder; fit the user: 6'1" (185 cm), 6'4" wingspan.
+User decisions 2026-10-17: (1) "Sensed 4 joint does not count as passive obviously": a sensed joint is a joint, so
+minarc-stop-knuckle-4r pick1 is a 4-active design (4 DOF) and the 3-joint leaders are the real leaders. (2) Context
+for planners only: the FINAL product is powered, every joint cable driven and rotation tracked - that is WHY fewer
+joints and simplicity matter. "dont account for the powered stuff at all its just useful context for high level
+agents": all building and testing stays a KINEMATIC proof (no drives, cables or motor models in the metrics, benches
+or CAD). (3) Near-touch (2 mm) is not a gate (see Alignment auditor); the auditor reports it only. Lead's rule 2026-10-17
+(from the auditor's T5 contact-depth check): a verifier also writes a per-pose dump of the verified config
+(`python3 tools/alignment_paired.py dump`, bench and held out, reproducing the claim to +-0.05) so contact DEPTH is on
+file - without it the depth check cannot run (16 of 22 audited rows today). (4) Keep the alignment auditor (the
+exploit / gaming agent) running at all times.
+(5) The cuff knee (2026-10-17, after seeing the pin-knee renders): "if no encoders are needed, it doesn't count as added
+complexity" - the two-pin cuff knee carries NO encoders (the 3 hub encoders fix the pose; docs/concepts/
+skin-normal-3r-pin-knee.md lines 565-568), sits outside the DOF count like the cuff slides, and scores 0 in
+tools/simplicity.py (record key mechanism.cuff_knee, simplicity v2.1: the knee's closure loop is free too). Lead's
+build rules that follow (2026-10-17, from the audit): the knee pins are built as MR63ZZ ball-bearing pairs (with
+plain iglidur pins R17 fails: ~10 deg cuff twist, ~10 N), and the knee window [ang_min, 180 - ang_min] is a physical
+knee stop the model checks like the J2 stops. (7) CPU-farm spending APPROVED by the user 2026-10-17 ~05:20 UTC ("yes they can spend, i want higher scores! get to
+work and do it well!"): agents may run tools/cloud_run.py batches on the exo-cpu1 CPU endpoint within $8 per 12 hours
+(until 2026-10-17 ~17:20 UTC; renew with the user after). GPU renders (exo-blender-cycles) still need a separate yes.
+Keep workersMin 0; tools/runpod_guard.py audit before and after each batch. BUDGET LINE: the account balance was
+~$32.40 at the approval, so the $8 is spent when tools/runpod_guard.py audit shows balance <= $24.40 - from then on
+run locally (<= 2 niced processes) unless the user renews (first window SPENT 2026-10-17 15:49 UTC at $24.24). RENEWED by the user 2026-10-19 ~01:05 UTC ("Yes, $8 per 12 h"): exo-cpu1 workersMax 9 again (workersMin 0) at 01:26; window until 2026-10-19 ~13:05 UTC; BUDGET LINE balance <= $13.61 (it was $21.61 at the approval) - from then on local only and exo-cpu1 workersMax back to 0 unless the user renews again. PAUSED 2026-10-19 ~04:50 UTC by the user ("pause all progress for now"): every round and audit stopped, crons cancelled, exo-cpu1 workersMax 0 (balance $20.70); the renewal's remaining window is the user's to reopen.
+(6) Sensing is OUT OF SCOPE (user 2026-10-17: "dont wory about the sensor stuff the purpose of this is to find a
+kinematic solution if we sensor every joint we can just use inverse kinematics to get a perfect position"): encoders
+cost 0 complexity (tools/simplicity.py v2.2), and no agent spends time on sensing, determinacy-from-encoders or
+encoder-value analysis. DOF counting is unchanged: a joint in the shoulder chain is a joint (pick1 = 4 DOF); the cuff
+knee pins are cuff alignment outside the count. The leaderboard's plain verified gap counts contact as penetration
+(metal past 0 mm) as the verifiers compute it; the 1 mm / 2 mm near-touch readings are reported only.
+User decisions 2026-10-18 evening: (8) the user is modelling the 3-JOINT LEAD conecut-knee-knuckle-3r themselves from the
+drawing set docs/drawings/A (~22:30 UTC: "can we go to the current 3 powered link high score?"; "not fully sold" on the knee; it
+replaced design B, docs/drawings/B, which stays as the simpler reference; the zc-frontier CAD build was stopped) (tools/eng_interfaces.py; viewer https://claude.ai/artifact/SvYgkudJa7EKyJpy3xwFXz);
+(9) "Overhead needs to be solved, work on it in the background" (track O1, round 301+); (10) "if there is a 4 joints
+setup that scores way higher without a knee, I'd honestly prefer that" (track K1, round 401+: rigid cuff, no knee, no
+cuff slides, <= 4 counted joints; with a rigid cuff every axis must pass through GH, so it is a spherical 4R with a
+sprung / slaved redundant joint). Relay tuning (jump track, all relay designs carry the knee) is paused for these.
+User 2026-10-19 ~01:00 UTC: (11) "Keep pushing, I want something better than 95 with very low complexity" -> track G1
+(golden, round 501+): verified gap <= 13.75 at complexity <= 6 (tools/simplicity.py v2.2; 3 active joints, every
+coordinate determined in MVP1), running beside O1 and K1.
+User 2026-10-19 ~04:50 UTC: (12) "pause all progress for now" -> ALL tracks (O1 round 301, K1 round 402, G1 round 501),
+the hourly audit and the watchdog are STOPPED; do not relaunch anything until the user says to resume (HANDOFF section 0
+lists where each round stood and how to relaunch it fresh).
+The user wants the design's evolution recorded for a final time-lapse visual: add every judged design to
+docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge loop.
+
+## Ambition rules - every agent and subagent, every task (Felix Rieseberg's essay, docs/METHOD.md; user 2026-10-15:
+"make sure any findings from it are hard engrained in everything you and all subagents do")
+
+1. **Speed is assumed.** Never wait on something that can run in parallel; start now on the tools that exist and switch
+   when better ones land; keep every slot busy (agents, GPU, CPU); time-box your task tightly and report early when a
+   direction is dead (with the measured reason).
+2. **Altitude: the outcome, not the task.** The outcome is all 19 requirements passing on a mechanism the wearer does not
+   feel. Before you finish, say what happens next and leave a loop running instead of a one-off result (idea -> bench ->
+   verifier -> GPU sweep -> L1 CAD -> judges -> dashboard, unattended).
+3. **Depth: a specific, hard goal stated as reasonable.** Bench: gap 0 (in-band 2-14 mm >= 90 %, follow >= 95 %, reach
+   >= 90 %, zero contact); built CAD: R1-aim (2-10 mm) >= 90 %. Not "do your best". When it looks impossible, change the
+   morphology and prove the impossibility from data. Use the field's instruments (libigl, CalculiX, MuJoCo, OpenSim, ...),
+   start from the rawest data, and let an outside judge decide - never grade your own work (a verifier re-measures
+   every claim).
+4. **Range: do the work of other fields, never role-play them**, and always include a red team looking for the pose
+   that jams, the point that pinches, the number that is optimistic.
+5. **Produce new knowledge** and write it down (docs/FINDINGS.md, docs/concepts/): what you measured, what failed, why.
+6. **Chat with the user: big updates only** (user 2026-10-15): a new leader, a requirement newly passing, a blocker that
+   needs them. Everything else goes to the dashboard and the repo.
 
 ## Working method (docs/METHOD.md - start every session with its checklist)
 
+- **Never idle (user, 2026-10-15: "the goal of this project is to iterate as quick as possible ... don't let this
+  happen again").** Never hold work behind infrastructure that can be built in parallel: start agents on the current
+  tools and let them switch when the faster one lands. Before launching a workflow, count its concurrency (at most
+  min(16, CPUs - 2) agents run at once per workflow: 2 on a 4-core box) and split the work over several workflows so
+  everything runs at once. Keep a watchdog (a session cron every ~15 min) that checks every slot - workflows, agents,
+  GPU endpoints (`tools/runpod_guard.py audit`: a stuck queue or unhealthy workers -> retire the endpoint and move the
+  jobs at once), local CPU - and starts the next work when anything is idle. An interrupt can stop background agents:
+  after one, check what is still running and report what stopped.
+
+- **Discovery never stops at a round** (user, 2026-10-16: "dont just stop on round 4 go as far as you can!"): rounds run as
+  a self-driving loop (tools/workflows/: planner -> ideate -> screen + verify -> close, the next round steered by the
+  last round's measured lessons, docs/concepts/ROUNDS.md); the lead keeps the loop running, launches the polish + CAD of
+  each round's verified winner, and starts a new loop when one ends.
 - **Outside judges, never self-assessment.** After every design change run `tools/judge_all.sh <design id>` (or
   `... fast` while iterating) and report the scorecard before/after. If a number moved because the measurement changed
   (skin model, motions, metric), say so separately from design changes.
+- **Alignment auditor** (user, 2026-10-16 ~20:10 UTC: "at the same time as all the research is happening, please require
+  an agent on the side that is a superfan that targets misalgnment ... see if models are cheating the system or gaming
+  the system in some way to scro ehigher witout actually being beter ... it needs to be a crucial aprt of our loop"):
+  every claim, verification, new leader and judge / metric change gets an audit (tools/workflows/alignment-audit.js,
+  docs/ALIGNMENT.md; the loop runs it between Screen and Close, and on a timer); a design the ledger
+  (docs/alignment/ledger.jsonl, `python3 tools/alignment_ledger.py get <id>`) marks 'gamed' cannot be called verified,
+  a winner or a leader until the finding is resolved; the auditor's own claims get a skeptic.
+  User rulings on the auditor's first questions (2026-10-16 ~21:05 UTC): (1) contact stays metal < 1 mm ("Keep 1 mm,
+  report 2 mm") - SUPERSEDED 2026-10-17: the user "dont really care about the near touch stuff", so the 2 mm near-touch
+  is no longer a gate or a claim column (the A1 dominance gate is retired; a design replaces the lead on the plain
+  verified gap); contact stays metal < 1 mm and the 1 mm near-touch search objective stays as a robustness technique; (2) overhead: "Leave the score as
+  is" - no overhead condition or extra weight in the score or the 95 target (keep reporting overhead taken / 28).
 - Start from the rawest material available (`data/raw/README.md`); when the human model and real data disagree, the data
   wins and the model gets fixed.
 - Use the instruments of the field (OpenSim, MuJoCo/Drake, CalculiX, constrained parametric CAD) instead of ad-hoc
@@ -25,20 +120,145 @@ Never relax the 1 cm rule or the DOF cap to buy range without asking.
 - **User parts**: only BOTTOM may be modified (cut / merged with the neck). Never edit the user's Onshape model.
 - **Personal data**: body scans and motion recordings stay in `data/raw/private/` (git-ignored). The user's machine
   also has a `personal-shoulder-diagnosis` folder - never read it into this repo or commit it.
-- **Paid compute**: before any RunPod job or deploy, state the GPU type and estimated cost and wait for a yes. The key
+- **Paid compute**: before any RunPod job or deploy, state the GPU type and estimated cost and wait for a yes.
+  (User 2026-10-15 ~12:45 UTC: "you can spend more, i permit everything" - spend approved without a fixed cap for
+  this push; still state GPU type + cost per batch and keep the endpoint hygiene below. User 2026-10-15 ~15:00: RunPod may offload
+  work "only as cheap as possible if it provides a big speed up": cheapest worker type that works, scale to 0, keep small jobs local.
+  User 2026-10-15 ~23:15: "If anything could speed up research do it you don't need my approval just think about everything
+  intelligently and understand our main goal we can't just put 3 dof eveyrhwerr lol" - speed-ups (farm redeploys, more
+  slots, quota moves between our own endpoints, new tooling) need no approval; the hygiene rules here still hold, and the
+  goal is a buildable minimum-DOF exo, not more passive freedom.) The key
   comes from the `RUNPOD_API_KEY` environment variable (or `~/.runpod_key` locally) - never print it, never commit it.
   After a search, set the endpoint's `workersMin` back to 0. Never touch the user's other pods (names starting `crl-`).
-- **Downloads and licences**: ask first; licences (AMASS, SMPL-X) are accepted by the user, not the agent.
+- **Downloads and licences**: installs approved by the user 2026-10-15 ("install whatever you want": CalculiX, gmsh,
+  Blender 4.2.3 at /opt/blender are installed); licences (AMASS, SMPL-X) are still accepted by the user, not the agent.
 - **Renders/films**: show a cheap motion preview and get approval before any paid render. Mannequin: matte black,
   faceless (not uncanny), muscles OK. Parts: bead blasted metal, polished screws, iglidur orange; no black parts.
-- **CAD**: follow docs/CAD_STANDARD.md; every part passes `judge/part_validity.py` and the zebra check in
-  `pipeline/full-exo/parts.html` before it is shown.
+- **Manufacturable joints only** (user, 2026-10-15: "I do not think I am able to make a 3 dof translating passive device
+  ... two is probably the most I can make ... Make sure that all designs are thought of with manufacturability in mind, is
+  there actually a component that can be designed which serves these degrees of freedom for the size they are
+  presented at?" and, clarifying: "its not that there are two max, its more subtle than that, although two would be a
+  good max, its just hard to actually make a 2 dof passive translation component fit in such a small space, so max 2, 1
+  is better", and "like a linear rail, or some sort of passive joint that actually exists (the real component must exist
+  or be plausible) for it to be there, for example a ball and socket is fine because its a 3 dof passive joint but a 3dof
+  translation passive is not, its way more subtle!"): the test is PER JOINT - does a real component exist that gives
+  exactly that freedom at that size? Rotations are cheap: pin / bearing pair (1 rot), miniature U-joint (2 rot), ball and
+  socket / rod end / ball stud / spherical plain bearing (3 rot), rod in a linear-rotary bushing (1 rot + 1 trans).
+  Translations: a single slider / linear rail / miniature guide (1 trans) is cheap ("a slider is super easy for me to
+  fit") at its real length; two crossed rails
+  (2 trans) are bulky and must be shown to fit; a 3-translation passive joint does not exist as a compact part - never.
+  Prefer 0 passive translations, then 1; 2 is the hard maximum. Rank designs that tie on the bench by fewer passive
+  translations. Every joint, active or passive, maps to a real component - a catalogue part number (bearing, miniature guide,
+  bushing) or a simple machinable design - and the model carries that component's REAL envelope (assembly height,
+  footprint, rail length = travel + block length, mass) as sampled metal. A radial (skin-normal) slide counts as
+  standing up by its travel + block length. A few mm of radial play may go to the cuff liner's compliance, stated as
+  such. No virtual slides, no zero-height stages; the verifier rejects a design whose joints have no component.
+- **Every generation ends in a full CAD + render of its winner** (user, 2026-10-16: "after every new generation, make the
+  full cad of the winning verified design of that generation, just so it can be displayed in higher quality and I can see
+  with the humanoid with muscles"). A generation = one discovery round (ideate -> screen -> verify). Its winner = the best
+  design whose number an independent verifier confirmed (ties broken by fewer passive translations). Build it at the
+  user's CAD standard in the user's style (pipeline/conformal/param_cad/user_style.py: bent bars from line/arc sketches,
+  real hub stacks and catalogue parts, BOTTOM cut + arm end, no lofts), judge it, render stills on the muscled mannequin
+  (matte black, faceless; parts bead blasted, polished screws, iglidur orange; no black parts) and add it to
+  docs/EVOLUTION.md + the dashboard. This is the user's standing choice for L2 CAD of generation winners.
+  Before that CAD the winner gets a FINAL POLISH (user, 2026-10-16: "the winning designs get a big GPU run right just to
+  squeeze out that last possible optimization?"): a wide multi-start optimisation of every free parameter directly on
+  the verification bench (Bench(110,360), frozen-shape protocol, fast cache for the search and the exact path for the
+  claim) on the farm - this bench runs on CPU (libigl / the signed-distance cache), so the farm is the instrument; a GPU
+  port is worth building only if it measurably beats the farm per dollar. A polished config replaces the CAD's config
+  only after an independent verifier confirms a gain >= 1 gap point.
+  (User 2026-10-16 ~03:00: no film for now - "you dont need to do the film ... focus everything on solution hunting";
+  the generation-winner CAD + stills still run: "generation winner cad should still run". Quota while no film renders:
+  exo-blender-cycles workersMax 1 (stills), exo-cpu1 workersMax 9 - give the render endpoint its 4 back when a film or a
+  big render batch is approved.)
+- **Complexity is the second objective** (user, 2026-10-16: "it would be cool to have a simplicity score for each design
+  impacted by degrees of freedom moving parts, etc. I think thats a pretty major part and for now shouldn't impact overall
+  score but should show in the chart", then "when score start capping out around 95+ over the night, prioritize lowering
+  that simplicity number"). Every design carries a complexity count (tools/simplicity.py, docs/SIMPLICITY.md: 0 = three pins
+  on bearing pairs and three links with no passive freedom; each passive translation, crossed rail, passive rotation,
+  extra body / joint, closed loop, sliding pair and sensed passive ADDS points; lower = simpler), shown on the dashboard
+  next to the score and NOT folded into it. Once verified bench scores plateau at >= 95 (gap <= 13.75), the search
+  objective switches: minimise complexity subject to score >= 95 (a constrained / Pareto search - drop a passive joint,
+  merge bodies, swap a slide for a pin), and a simpler design at score >= 95 beats a more complex one at a higher score.
+- **Reach is the priority now** (user, 2026-10-16 ~05:00 UTC: "i feel like the reach numbers at 60s just isn't good, it seems
+  like they're plateauing near the top, lets try to max these out as much as we can"). Every verified leader sits at reach
+  0.59-0.62 on Bench(110,360) (overhead 0.17-0.25) while in-band (~0.90) and follow (~1.0) are met: the gap IS reach. Push
+  reach toward 0.9 with every lever inside the rules - fold levers (scheduled / relay / coupled elements), a 4th joint
+  (the DOF cap allows 4; MVP1 needs every coordinate determined: spring-centred + stops, or sensed), slimmer hardware,
+  re-seating - and attribute every lost pose to its cause before choosing the lever. Never relax the 1 cm rule or the
+  DOF cap, and never shrink the singularity / transmission margins to buy reach without a red-team and the user's say.
+- **Every tested design gets its motion preview** (user, 2026-10-16: "the newer ones dont have the motion diagram drawn, they
+  need to be drawn as they are tested!!! all need to have the little motion graphic"). Whoever models / screens a
+  morphology also writes docs/concepts/viz/concepts/<id>.js (docs/concepts/viz/README.md: the kinematic preview on the
+  primitive mannequin, honest topology), runs `node docs/concepts/viz/test.mjs <id>` until it passes and
+  `node docs/concepts/viz/thumbs.mjs` so docs/dashboard/data/motion.json carries it - in the same task, before the row
+  is called screened. Update the preview when the best configuration changes.
+- **The golden solution and the user's 2026-10-16 ~05:50 UTC rulings** ("The golden solution is something 95% plus with
+  complexity at 0 (or near), please push this through, and get here by any means"). Target: verified score >= 95
+  (gap <= 13.75 on Bench(110,360) exact, frozen shape) at complexity ~0 - and the user's answers to the last questions:
+  (1) **fold margin 5 deg** for the unpowered MVP1 (was 10; red-team the feel near the edge; numbers measured at 10 deg
+  are a MEASUREMENT change when re-measured at 5 - report both); (2) **hubs: "Keep O20 only"** - the v5 O20 stack at
+  every joint, no O15 / O17 / O12 slim hubs (designs and verified numbers that used slim hubs, e.g. spine-parked-j2-3r's
+  O15 J2/J3, do not stand under this rule: re-measure at O20); (3) complexity: "slider should count pretty low honestly,
+  have extra rotation degrees is not huge for me" - tools/simplicity.py re-weighted (passive translation 2, sliding pair
+  1, passive rotation 1); (4) **J1 seats: back of the shoulder + acromion top only** (the scapula handler's reach; no
+  seats over the front / clavicle).
+- **CAD rulings for built designs** (user, 2026-10-16 ~06:20 UTC, on the gen-2 CAD review): (1) "yes" - the scapula
+  handler can carry the base DIRECTLY at the J1 hub ring: no base tab running out from J1 (the tab cost R1 0.68 -> 0.49
+  and caused the R6 / R16 / skin hits on user_osn_k4216); (2) link climb angle "your choice but be realistic" - chosen:
+  ramps up to 60 deg near a hub (was the standard's 35), with tangent bend arcs of inner radius >= 15 mm (5 t) on a 3 mm
+  bent Ti-6Al-4V bar; a tighter transition only where the part is 5-axis machined from solid, stated on the part.
+- **Reach must be reachable by moving (continuity rule, 2026-10-16, measured by the stop-relay screen)**: the bench scores
+  every workspace pose on its own, so a design with a passive, sprung, relayed or redundant coordinate (relays, rockers,
+  spring-parked 4th joints, knees that can change branch) can "take" static islands no continuous arm motion reaches.
+  Every such design's claim and its verifier must run the workspace continuity flood fill (2-deg slerp edges from the
+  rest region, no passive / redundant joint jump > 10 deg, no branch change - `connected()` in
+  docs/concepts/models/stop-relay-rocker-3r.py) and score reach on the CONNECTED set only; report static and connected.
+- **Search on the near-touch gap, and treat fold stops as a design variable** (measured 2026-10-16 by the arm-parked-knee-4r
+  screen): plain-gap CMA optima put metal within 1 mm of the skin on 15-20 % of poses and lose 8-27 points when worn
+  frozen; searching on the near-touch gap (metal < 1 mm counted as contact) costs ~2 fast points and holds up frozen. So
+  every search objective is the near-touch gap; claims report plain and near-touch. Where a spring / knee / pin takes the
+  poses past a J2 stop, the stop's margin is a design variable (optimum 9-12 deg there); the user's 5 deg is the lower
+  bound for the plain fold window, not a target.
+- **The fold margin is read in ONE metric, and stops must be buildable** (measured 2026-10-16 by the minarc-stop-knuckle-4r
+  verification): the 5 deg margin is the J1-J3 angle's distance from the dyad's fold, `th` in tools/concept_kit.py lines
+  25-30, the metric H1 and every verified row use. A model that clamps another angle (e.g. the J2 interior angle) must
+  show its stops engage at >= 5 deg of `th` in every state. minarc's phi stops at 5 deg of interior angle sat 1.4 deg
+  from the fold and scored 15.42; at the true 5 deg they score 18.45. A different reading is the user's call, not the
+  model's. A hard stop acts on a joint's OWN angle (a dowel in an arc slot between the two bodies that joint connects),
+  never on a virtual angle between non-adjacent bodies. Each claim reports the min `th` margin over its taken poses.
+  Every in-sample polish so far lost ~5 points held out (polish 2: C1 23.04 in-sample, +0.33 held out). The cause is NOT
+  shape over-fit (a 2-fold cross-fit test: in-fold vs out-of-fold correlate 0.984; cross-fit picks lost to H1 held out,
+  docs/research/crossfit_polish.md). It is the search benches' workspace sample: chosen by linspace over the grid order,
+  it under-samples axial rotation (|axial| >= 150 deg 6 % vs 11 % held out), so polishes buy closure on the bench that
+  turns into skin contact elsewhere. Final polishes therefore search on a representative, jittered workspace-envelope
+  sample (never the held-out poses) and claim on the held-out set.
+- **No lofts, ever** (user, 2026-10-15: "for all the design you do, lofts look horrible and introduce geometric problems, you
+  can combine arcs, but no lofts!"): every surface comes from sketches of lines and tangent arcs - extrudes, revolves,
+  sweeps of ONE constant section along a line/arc path, fillets. No lofts, no surfaces fitted or shrink-wrapped to skin
+  data, no twisted sweeps. Change direction with bends (an arc in the cross-section) and planform turns instead.
+- **CAD has two levels** (user, 2026-10-14: "you dont need to make high quality CAD with smoothing for each iteration
+  and testing ... Just a basic CAD that has the expected keep outs of the joint, expected link height"). **L1 keep-out
+  CAD** for every iteration and test: joint keep-outs (hub diameter x the real stack height), links as constant-thickness
+  slabs at their real height over the skin, rail/carriage envelopes; one valid solid per part (`judge/part_validity.py`)
+  and the motion judges (R1-R6, R10) - no fillets, no G2, no zebra. **L2 user-standard CAD** (docs/CAD_STANDARD.md,
+  zebra check in `pipeline/full-exo/parts.html`) only for a design that passed the L1 judges on held-out data and that
+  the user chose (phase P4).
 - **Git**: commit and push after each meaningful, judged step; never commit caches, keys or personal data. Use the
   commit attribution your environment specifies.
 - Compute: use the machine's own CPUs (check `nproc`, parallelise searches across cores); GPU on RunPod only for final Blender renders, after cost approval. Keep local CPU jobs to <= 4 workers on the user's laptop (it overheats); no limit in the cloud.
 
 ## Where things stand
 
-See README "Status" and `pipeline/full-exo/designs/cad_r13_n4_s1343_1/judge/scorecard.md`. Next step: phase P0 in
-docs/PLAN.md (base-mount physics, R10) - it needs nothing from the user except permission to download OpenSim's
-shoulder model; the rig in `pipeline/avg/body_pose.py` already gives a first number.
+**Start with docs/HANDOFF.md** (written for a reader with no context: what the project is, the score, the verified
+leaderboard, the built CADs, what is dead, the open questions for the user, what was running and how to relaunch it,
+the next steps), then **docs/OPERATIONS.md** (how to run the machinery: workflows, farm, watchdog, dashboards, git).
+
+Cold start, one read order (the line-3 list above with the state inserted after METHOD): this file -> docs/METHOD.md
+(Felix Rieseberg, *How to be more ambitious: A tutorial for humans with models*,
+https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/) -> docs/HANDOFF.md ->
+docs/OPERATIONS.md -> README.md -> REQUIREMENTS.md -> docs/PLAN.md -> docs/FINDINGS.md -> docs/concepts/ROUNDS.md.
+The work lives on branch `claude/exciting-albattani-94w8cp` since 2026-10-17 (`claude/trusting-pasteur-6czobp` stopped at
+40dea1a, 2026-10-16 23:13; main stopped on 2026-10-14); if your environment assigned
+another branch, merge this branch into yours, then push yours (HANDOFF "Branch"). Workflow scripts need your own `branch` and
+`trailer` in their args. Git commit times are the clock.

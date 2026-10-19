@@ -1,0 +1,137 @@
+{
+ "gate": 17.46,
+ "plain": 14.4,
+ "secs": 344.2,
+ "relayed_taken": 23,
+ "relayed_th": [
+  5.0001,
+  5.0002,
+  5.0007,
+  5.0022,
+  5.003,
+  5.0045,
+  5.006,
+  5.0063,
+  5.0079,
+  5.0086,
+  5.0089,
+  5.0089,
+  5.0109,
+  5.011,
+  5.0116,
+  5.0142,
+  5.0155,
+  5.0166,
+  5.0194,
+  5.0221,
+  5.0472,
+  5.0483,
+  5.0542
+ ],
+ "relayed_th_le_5p01": 12,
+ "relayed_th_le_5p1": 23,
+ "relayed_th_median": 5.0089,
+ "all_th_le_5p01": 12,
+ "n_taken": 395,
+ "dK_taken_deg": {
+  "min": -46.29,
+  "max": 0.0,
+  "forced": 186
+ },
+ "phi_taken": {
+  "min": 0.0,
+  "max": 32.94,
+  "nonzero": 23
+ },
+ "M_arrays": {
+  "kstate": [
+   0.0,
+   1.0
+  ],
+  "a1e": [
+   37.5517,
+   54.4626
+  ],
+  "msub": [
+   10.8052,
+   99.0
+  ],
+  "kin_ok": [
+   1.0,
+   1.0
+  ],
+  "res_deg": [
+   0.0,
+   0.0151
+  ],
+  "q3p": [
+   -109.2015,
+   116.4349
+  ],
+  "clear": [
+   1.3146,
+   5.196
+  ]
+ },
+ "per_part": {
+  "rigid:hub1": {
+   "n": 31600,
+   "ib14": 1.0,
+   "min_mm": 2.0
+  },
+  "rigid:hubK": {
+   "n": 31600,
+   "ib14": 0.9747,
+   "min_mm": 2.44
+  },
+  "rigid:hub2": {
+   "n": 31600,
+   "ib14": 0.9385,
+   "min_mm": 0.72
+  },
+  "rigid:hub3": {
+   "n": 31600,
+   "ib14": 0.5806,
+   "min_mm": 0.89
+  },
+  "rigid:E": {
+   "n": 64780,
+   "ib14": 0.892,
+   "min_mm": 0.69
+  },
+  "rigid:boss": {
+   "n": 12640,
+   "ib14": 0.9953,
+   "min_mm": 6.14
+  },
+  "rigid:pad": {
+   "n": 12640,
+   "ib14": 0.9998,
+   "min_mm": 1.82
+  },
+  "rigid:knee": {
+   "n": 35550,
+   "ib14": 0.6595,
+   "min_mm": 5.16
+  },
+  "rigid:crank": {
+   "n": 52535,
+   "ib14": 0.8376,
+   "min_mm": 1.98
+  },
+  "rigid:roller": {
+   "n": 7505,
+   "ib14": 0.8645,
+   "min_mm": 6.76
+  },
+  "rigid:horn": {
+   "n": 9085,
+   "ib14": 0.9242,
+   "min_mm": 2.44
+  }
+ },
+ "per_part_note": "rigid parts only, over ALL 395 taken poses (clip + ws), buildable stack; per-pose counts match the verifier (knee 90, boss 32: buildability/price_stackfix.json knee_pts 90, stack.json 32 boss points). The link_pts entries of this run were mis-sliced (tuple length) and are dropped; not a clip-only in-band record.",
+ "id": "proxtrack-relay-knuckle-4r",
+ "wear": "bench Bench(110,360) exact, frozen, stackfix (row v_gap)",
+ "by": "skeptic 2026-10-18 ~22:00 UTC, tools/alignment_skeptic_probe_proxtrack.py (read-only; nice 10, 1 process)"
+}

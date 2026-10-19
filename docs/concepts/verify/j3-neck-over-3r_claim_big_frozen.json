@@ -1,0 +1,524 @@
+{
+ "model": "docs/concepts/models/j3-neck-over-3r.py",
+ "params": {
+  "az": 101.33,
+  "el": 68.9451,
+  "wd": 68.9274,
+  "wa": -3.17,
+  "a1": 35.2891,
+  "a2": 63.2258,
+  "b1": 30.0182,
+  "b2": 44.2122,
+  "a1max": 71.8786,
+  "phi_lo": 32.97329981402727,
+  "phi_hi": 136.8666326366137,
+  "sigma": -1,
+  "sK": -1,
+  "margin": 5.0,
+  "mstop": 0,
+  "width": 12.0,
+  "t_link": 3.0,
+  "q": 0.9647,
+  "near": 0,
+  "smhi": 8.0171,
+  "smlo": 8.8961,
+  "phys": 1,
+  "capK": 6.0,
+  "lay": 1,
+  "nw": 13.4109,
+  "stops_ok": 1,
+  "th_lo": 36.832800000000006,
+  "th_hi": 90.4978
+ },
+ "fold_margin": 5.0,
+ "wear": "bench",
+ "mode": "exact",
+ "n": 470,
+ "fit": {
+  "gap": 22.87,
+  "reach": 0.8,
+  "follow": 0.95,
+  "inband14": 0.837,
+  "inband10": 0.4678,
+  "contact": 0.0657,
+  "gap_near1": 26.26,
+  "min_metal_skin": 0.65,
+  "overhead": {
+   "n_ws": 12,
+   "reach": 0.0,
+   "n_clip": 5,
+   "follow": 0.4,
+   "n_taken": 2,
+   "inband14": 0.999,
+   "inband10": 0.8285
+  },
+  "honest": true
+ },
+ "static": {
+  "gap": 28.46,
+  "reach": 0.7389,
+  "follow": 0.9636,
+  "inband14": 0.8347,
+  "inband10": 0.4716,
+  "contact": 0.0582,
+  "gap_near1": 35.44,
+  "min_metal_skin": 0.0,
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.1786,
+   "n_clip": 10,
+   "follow": 0.6,
+   "n_taken": 11,
+   "inband14": 0.8958,
+   "inband10": 0.6453
+  },
+  "honest": true,
+  "forced": {
+   "ws_stretched": {
+    "n": 125,
+    "taken": 110,
+    "contact": 14
+   },
+   "ws_folded": {
+    "n": 0
+   },
+   "ws_A": {
+    "n": 161,
+    "taken": 156,
+    "contact": 5
+   },
+   "clip_forced": {
+    "n": 17,
+    "taken": 17,
+    "contact": 0
+   },
+   "clip_A": {
+    "n": 93,
+    "taken": 89,
+    "contact": 4
+   }
+  }
+ },
+ "connected": {
+  "gap": 28.46,
+  "reach": 0.7389,
+  "follow": 0.9636,
+  "inband14": 0.8347,
+  "inband10": 0.4716,
+  "contact": 0.0582,
+  "gap_near1": 35.44,
+  "min_metal_skin": 0.0,
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.1786,
+   "n_clip": 10,
+   "follow": 0.6,
+   "n_taken": 11,
+   "inband14": 0.8958,
+   "inband10": 0.6453
+  },
+  "forced": {
+   "ws_stretched": {
+    "n": 125,
+    "taken": 110,
+    "contact": 14
+   },
+   "ws_folded": {
+    "n": 0
+   },
+   "ws_A": {
+    "n": 161,
+    "taken": 156,
+    "contact": 5
+   },
+   "clip_forced": {
+    "n": 17,
+    "taken": 17,
+    "contact": 0
+   },
+   "clip_A": {
+    "n": 93,
+    "taken": 89,
+    "contact": 4
+   }
+  },
+  "score": 89.65
+ },
+ "dropped_unconnected": 0,
+ "min_margin_taken": 5.3,
+ "conn_stats": {
+  "nodes": 1143,
+  "connected": 1140,
+  "edges": 1124,
+  "refused": {
+   "fold_or_window": 1,
+   "jump": 0
+  },
+  "nodes_by_state": {
+   "A": 628,
+   "stretched": 515,
+   "folded": 0
+  },
+  "connected_by_state": {
+   "A": 628,
+   "stretched": 512,
+   "folded": 0
+  }
+ },
+ "secs": 344.7,
+ "variant": "claim",
+ "independent_audit": {
+  "n_taken": 395,
+  "n_taken_no_contact": 372,
+  "arc_err_deg": {
+   "b1": 0.0,
+   "b2": 0.0,
+   "a2": 0.0
+  },
+  "J1_drift_in_scapula_deg": 0.0001,
+  "J3_drift_in_humerus_deg": 0.0001,
+  "min_J1J3_margin_deg": 5.281,
+  "a1e_range": [
+   35.289,
+   64.536
+  ],
+  "a1max": 71.879,
+  "a1e_out_of_K_range": 0,
+  "free_state_K_off_stopA": 0,
+  "q2_stops_deg": [
+   -78.78,
+   177.326
+  ],
+  "q2_mid": -127.343,
+  "q2_window_wraps": false,
+  "q2_range_taken": [
+   -177.875,
+   179.345
+  ],
+  "q2_outside_stops": 0,
+  "states_taken": {
+   "free": 254,
+   "stretched": 141,
+   "folded": 0
+  },
+  "clip_max_joint_step_deg": 46.94,
+  "clip_flips_gt25": 13,
+  "clip_big_steps": [
+   {
+    "clip": "Comb hair",
+    "i": [
+     38,
+     39
+    ],
+    "joint": "J2",
+    "step": 25.1,
+    "arm_rot_deg": 14.9,
+    "steps": [
+     18.3,
+     0.0,
+     25.1,
+     0.6
+    ],
+    "th": [
+     84.1,
+     71.6
+    ],
+    "margin": [
+     14.4,
+     26.9
+    ]
+   },
+   {
+    "clip": "Comb hair",
+    "i": [
+     40,
+     41
+    ],
+    "joint": "J3",
+    "step": 26.8,
+    "arm_rot_deg": 26.2,
+    "steps": [
+     6.5,
+     0.0,
+     5.3,
+     26.8
+    ],
+    "th": [
+     61.6,
+     58.5
+    ],
+    "margin": [
+     33.6,
+     30.6
+    ]
+   },
+   {
+    "clip": "Comb hair",
+    "i": [
+     54,
+     55
+    ],
+    "joint": "J3",
+    "step": 36.4,
+    "arm_rot_deg": 34.4,
+    "steps": [
+     10.1,
+     0.0,
+     17.3,
+     36.4
+    ],
+    "th": [
+     69.7,
+     59.9
+    ],
+    "margin": [
+     28.8,
+     32.0
+    ]
+   },
+   {
+    "clip": "Comb hair",
+    "i": [
+     55,
+     56
+    ],
+    "joint": "J3",
+    "step": 30.7,
+    "arm_rot_deg": 32.9,
+    "steps": [
+     6.1,
+     0.0,
+     10.0,
+     30.7
+    ],
+    "th": [
+     59.9,
+     65.6
+    ],
+    "margin": [
+     32.0,
+     32.9
+    ]
+   },
+   {
+    "clip": "Comb hair",
+    "i": [
+     56,
+     57
+    ],
+    "joint": "J2",
+    "step": 38.7,
+    "arm_rot_deg": 25.7,
+    "steps": [
+     24.6,
+     0.0,
+     38.7,
+     4.3
+    ],
+    "th": [
+     65.6,
+     85.3
+    ],
+    "margin": [
+     32.9,
+     13.2
+    ]
+   },
+   {
+    "clip": "Wash opposite shoulder",
+    "i": [
+     91,
+     92
+    ],
+    "joint": "J1",
+    "step": 46.9,
+    "arm_rot_deg": 46.3,
+    "steps": [
+     46.9,
+     0.0,
+     6.4,
+     14.1
+    ],
+    "th": [
+     79.3,
+     76.1
+    ],
+    "margin": [
+     19.2,
+     22.4
+    ]
+   },
+   {
+    "clip": "Reach a high shelf",
+    "i": [
+     60,
+     61
+    ],
+    "joint": "J3",
+    "step": 29.1,
+    "arm_rot_deg": 29.9,
+    "steps": [
+     4.9,
+     0.0,
+     0.6,
+     29.1
+    ],
+    "th": [
+     80.6,
+     80.9
+    ],
+    "margin": [
+     17.9,
+     17.6
+    ]
+   },
+   {
+    "clip": "Reach a high shelf",
+    "i": [
+     61,
+     62
+    ],
+    "joint": "J3",
+    "step": 25.3,
+    "arm_rot_deg": 22.5,
+    "steps": [
+     9.0,
+     0.0,
+     9.6,
+     25.3
+    ],
+    "th": [
+     80.9,
+     85.2
+    ],
+    "margin": [
+     17.6,
+     13.3
+    ]
+   },
+   {
+    "clip": "Reach a high shelf",
+    "i": [
+     70,
+     71
+    ],
+    "joint": "J3",
+    "step": 30.7,
+    "arm_rot_deg": 26.5,
+    "steps": [
+     11.4,
+     0.0,
+     13.4,
+     30.7
+    ],
+    "th": [
+     87.3,
+     81.4
+    ],
+    "margin": [
+     11.3,
+     17.1
+    ]
+   },
+   {
+    "clip": "Reach a high shelf",
+    "i": [
+     71,
+     72
+    ],
+    "joint": "J3",
+    "step": 28.2,
+    "arm_rot_deg": 27.7,
+    "steps": [
+     5.8,
+     0.0,
+     3.7,
+     28.2
+    ],
+    "th": [
+     81.4,
+     79.6
+    ],
+    "margin": [
+     17.1,
+     18.9
+    ]
+   },
+   {
+    "clip": "Raise overhead",
+    "i": [
+     1,
+     2
+    ],
+    "joint": "J2",
+    "step": 27.0,
+    "arm_rot_deg": 15.4,
+    "steps": [
+     23.4,
+     0.0,
+     27.0,
+     0.3
+    ],
+    "th": [
+     86.5,
+     73.6
+    ],
+    "margin": [
+     12.0,
+     24.9
+    ]
+   },
+   {
+    "clip": "Raise overhead",
+    "i": [
+     5,
+     6
+    ],
+    "joint": "J3",
+    "step": 26.9,
+    "arm_rot_deg": 18.9,
+    "steps": [
+     16.0,
+     0.0,
+     6.6,
+     26.9
+    ],
+    "th": [
+     42.5,
+     39.1
+    ],
+    "margin": [
+     14.6,
+     11.2
+    ]
+   },
+   {
+    "clip": "Raise overhead",
+    "i": [
+     13,
+     14
+    ],
+    "joint": "J3",
+    "step": 32.0,
+    "arm_rot_deg": 22.7,
+    "steps": [
+     24.7,
+     0.0,
+     13.5,
+     32.0
+    ],
+    "th": [
+     40.0,
+     47.3
+    ],
+    "margin": [
+     12.1,
+     19.4
+    ]
+   }
+  ],
+  "audit_problems": null,
+  "neck_width": 13.4109
+ },
+ "secs_total": 344.8
+}

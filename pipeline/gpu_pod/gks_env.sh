@@ -1,0 +1,2 @@
+# deadlines for pipeline/gpu_pod/gks.sh (UTC 10:50 / 11:15 / 11:40)
+export GKS_RUN=gks1 GKS_T_SOBOL=1792147800 GKS_T_CMA=1792149300 GKS_T_VERIFY=1792150800 GKS_SCALE=1.0

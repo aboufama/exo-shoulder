@@ -1,0 +1,341 @@
+{
+ "design": "groove-desmo-knuckle-3r",
+ "wear": "bench",
+ "harness": "docs/concepts/verify/groove-desmo-knuckle-3r.py wear --truewin (the verified protocol), models unchanged, PK.audit wrapped",
+ "verifier_frozen": {
+  "gap": 22.64,
+  "reach": 0.6806,
+  "follow": 1.0,
+  "inband14": 0.8986,
+  "inband10": 0.5296,
+  "contact": 0.0056
+ },
+ "verifier_corrected": {
+  "gap": 22.64,
+  "reach": 0.6806,
+  "follow": 1.0,
+  "inband14": 0.8986,
+  "inband10": 0.5296,
+  "contact": 0.0056
+ },
+ "verifier_audit_near": {
+  "gap_near1": 23.76,
+  "gap_near2": 35.06,
+  "near_touch_min_mm": 0.07,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.2857,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.899,
+   "inband10": 0.5912,
+   "why_not": {
+    "fold": 14,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   }
+  }
+ },
+ "probe": {
+  "n": 470,
+  "mode": "exact",
+  "scored": {
+   "reach": 0.6806,
+   "follow": 1.0,
+   "inband14": 0.8986,
+   "inband10": 0.5296,
+   "contact": 0.0056,
+   "mode": "exact",
+   "gap": 22.64
+  },
+  "clip_scored": {
+   "n": 110,
+   "taken": 110,
+   "share_taken": 1.0,
+   "inband14": 0.8986,
+   "inband10": 0.5296,
+   "below2": 0.0001,
+   "over14": 0.1013,
+   "over20": 0.0108,
+   "d_median": 9.76,
+   "d_p95": 15.47,
+   "d_max": 28.14,
+   "pose_p95_median": 13.76,
+   "pose_p95_max": 23.08,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 35,
+   "share_floor_lt2": 0.0455,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 5,
+    "2-3": 30,
+    "3-4": 58,
+    "4-6": 6,
+    "6-10": 11,
+    "10-99": 0
+   }
+  },
+  "ws_unscored": {
+   "n": 360,
+   "taken": 245,
+   "share_taken": 0.6806,
+   "inband14": 0.8494,
+   "inband10": 0.4963,
+   "below2": 0.0015,
+   "over14": 0.1491,
+   "over20": 0.0311,
+   "d_median": 10.02,
+   "d_p95": 18.07,
+   "d_max": 30.8,
+   "pose_p95_median": 15.77,
+   "pose_p95_max": 27.52,
+   "poses_floor_lt1": 2,
+   "poses_floor_lt2": 20,
+   "poses_floor_lt3": 95,
+   "share_floor_lt2": 0.0816,
+   "floor_hist_mm": {
+    "0-1": 2,
+    "1-2": 18,
+    "2-3": 75,
+    "3-4": 55,
+    "4-6": 88,
+    "6-10": 7,
+    "10-99": 0
+   }
+  },
+  "ws_overhead140": {
+   "n": 28,
+   "taken": 8,
+   "share_taken": 0.2857,
+   "inband14": 0.937,
+   "inband10": 0.6465,
+   "below2": 0.0021,
+   "over14": 0.0609,
+   "over20": 0.0,
+   "d_median": 8.77,
+   "d_p95": 14.34,
+   "d_max": 19.52,
+   "pose_p95_median": 13.16,
+   "pose_p95_max": 17.95,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 4,
+   "poses_floor_lt3": 8,
+   "share_floor_lt2": 0.5,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 4,
+    "2-3": 4,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "clip_overhead140": {
+   "n": 10,
+   "taken": 10,
+   "share_taken": 1.0,
+   "inband14": 0.8687,
+   "inband10": 0.5469,
+   "below2": 0.0009,
+   "over14": 0.1305,
+   "over20": 0.0,
+   "d_median": 9.43,
+   "d_p95": 16.82,
+   "d_max": 19.97,
+   "pose_p95_median": 17.71,
+   "pose_p95_max": 18.05,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 10,
+   "share_floor_lt2": 0.5,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 5,
+    "2-3": 5,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_elev90_140": {
+   "n": 85,
+   "taken": 35,
+   "share_taken": 0.4118,
+   "inband14": 0.781,
+   "inband10": 0.4637,
+   "below2": 0.0009,
+   "over14": 0.2182,
+   "over20": 0.0541,
+   "d_median": 10.35,
+   "d_p95": 20.31,
+   "d_max": 30.8,
+   "pose_p95_median": 17.55,
+   "pose_p95_max": 27.52,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 4,
+   "poses_floor_lt3": 23,
+   "share_floor_lt2": 0.1143,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 3,
+    "2-3": 19,
+    "3-4": 5,
+    "4-6": 7,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_below90": {
+   "n": 247,
+   "taken": 202,
+   "share_taken": 0.8178,
+   "inband14": 0.8578,
+   "inband10": 0.496,
+   "below2": 0.0016,
+   "over14": 0.1406,
+   "over20": 0.0283,
+   "d_median": 10.02,
+   "d_p95": 17.69,
+   "d_max": 29.71,
+   "pose_p95_median": 15.74,
+   "pose_p95_max": 25.31,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 12,
+   "poses_floor_lt3": 64,
+   "share_floor_lt2": 0.0594,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 11,
+    "2-3": 52,
+    "3-4": 50,
+    "4-6": 81,
+    "6-10": 7,
+    "10-99": 0
+   }
+  },
+  "ws_reach_by_elev": {
+   "0-60": [
+    150,
+    172
+   ],
+   "60-90": [
+    52,
+    75
+   ],
+   "90-120": [
+    24,
+    51
+   ],
+   "120-140": [
+    11,
+    34
+   ],
+   "140-160": [
+    5,
+    13
+   ],
+   "160-200": [
+    3,
+    15
+   ]
+  },
+  "contact_poses": [
+   {
+    "mm": -10.97,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": -60.0
+   },
+   {
+    "mm": -6.03,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -60.0
+   }
+  ],
+  "ws_overhead_why_not": {
+   "contact": 2,
+   "fold": 14,
+   "slide": 4
+  }
+ },
+ "extras": {
+  "th_margin_own_state": {
+   "min": 5.389,
+   "n": 355,
+   "lt5": 0,
+   "lt5p5": 1,
+   "forced": 151,
+   "th_max_taken": 98.1,
+   "lowest": {
+    "own": 5.389,
+    "forced": false,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 90.0,
+    "axial": -30.0
+   }
+  },
+  "knee_ang_taken": [
+   86.21,
+   151.92
+  ],
+  "knee_window": [
+   25.2189,
+   154.7811
+  ],
+  "dK_taken_max_deg": 32.02,
+  "sc_info": {
+   "boss_level": 62.8,
+   "lev_L1b": 59.7,
+   "arm_tip_level": 63.6,
+   "g": 2.47,
+   "sig": 1.0,
+   "r_c": 16.0,
+   "beta": -170.0,
+   "arm_len": 52.9,
+   "arc_deg": 120.2,
+   "rssr_closed": true,
+   "pa_crank_rest": 13.9,
+   "pa_horn_rest": 28.0,
+   "vel_angle_rest": 6.4,
+   "pa_crank_max_taken": 13.9,
+   "pa_horn_max_taken": 42.9,
+   "flank_rho_min": 5.0,
+   "contact_r": [
+    17.0,
+    20.7
+   ],
+   "clear_hubK_min": 1.82,
+   "clear_roll_hubK_min": 3.3,
+   "clear_lowarm_lug_min": 16.66,
+   "n_lowarm": 36,
+   "phi_max_taken": 16.7,
+   "cprog": 0.0,
+   "crest_exact": 8.24,
+   "dK_lim": 32.25,
+   "why_lim": "groove-fit-3d",
+   "law_dK_max": 62.7,
+   "lug_r_max": 24.2,
+   "stub_head": [
+    3.5,
+    0.8
+   ],
+   "dK_lim_parent": 41.2,
+   "why_lim_parent": "pressure_horn",
+   "roll_r": 2.5
+  }
+ },
+ "secs": 178.9,
+ "exact": true,
+ "git": "7e44841"
+}

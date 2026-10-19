@@ -1,0 +1,130 @@
+{
+ "reading": "claim",
+ "fit_fast": {
+  "gap": 6.19,
+  "reach": 0.8438,
+  "follow": 1.0,
+  "inband14": 0.8994,
+  "inband10": 0.5756,
+  "contact": 0.0051
+ },
+ "frozen": {
+  "gap": 15.42,
+  "reach": 0.7694,
+  "follow": 1.0,
+  "inband14": 0.8991,
+  "inband10": 0.5805,
+  "contact": 0.0227
+ },
+ "why": {
+  "fold": 56,
+  "slide": 16,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 2,
+  "contact": 9
+ },
+ "audit": {
+  "a_deg": [
+   38.072,
+   58.749
+  ],
+  "phi_stops": [
+   12.282,
+   162.701
+  ],
+  "taken": 387,
+  "taken_ws": 277,
+  "taken_stateA": 337,
+  "taken_forced": 50,
+  "taken_forced_ws": 50,
+  "taken_forced_clip": 0,
+  "min_m3_stateA": 1.971,
+  "n_stateA_m3_lt5": 25,
+  "n_stateA_m3_lt10": 65,
+  "n_clip_stateA_m3_lt5": 3,
+  "min_m3_forced": -24.232,
+  "min_sub_margin_forced": 7.422,
+  "max_closure_deg_taken": 0.01514,
+  "dK_deg_taken": [
+   -58.65,
+   0.0
+  ],
+  "dK_one_sided": true,
+  "a1e_max_taken": 64.67,
+  "a1max": 66.1587,
+  "overhead_ws": [
+   8,
+   28
+  ]
+ },
+ "near": {
+  "near_touch_min_mm": 0.05,
+  "near_touch_low": [
+   {
+    "mm": 0.05,
+    "i": 8,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.05,
+    "i": 9,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.05,
+    "i": 10,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   },
+   {
+    "mm": 0.13,
+    "i": 11,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 149.40573120117188,
+    "axial": -59.878719329833984
+   },
+   {
+    "mm": 0.29,
+    "i": 139,
+    "kind": "ws",
+    "plane": -60.0,
+    "elev": 60.0,
+    "axial": 105.0
+   }
+  ],
+  "gap_near1": 22.17,
+  "near1_poses": 14,
+  "gap_near2": 35.0,
+  "near2_poses": 37,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.2857,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.8433,
+   "inband10": 0.5209,
+   "why_not": {
+    "fold": 9,
+    "slide": 9,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   }
+  }
+ },
+ "mode": "exact",
+ "secs": 382.2
+}

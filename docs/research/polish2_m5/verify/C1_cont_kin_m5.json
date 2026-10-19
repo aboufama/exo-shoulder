@@ -1,0 +1,73 @@
+{
+ "mode": "kin",
+ "fit": "fitbig",
+ "params": {
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "az1": 96.9026,
+  "el1": 64.7202,
+  "az2": 29.7578,
+  "el2": 45.5349,
+  "wd": 70.1215,
+  "wa": -6.2602,
+  "b3": 0.3277,
+  "lE": 59.7929,
+  "lc": 26.5582,
+  "phiE": -5.4456,
+  "phib": -62.7842,
+  "ang_min": 29.6329,
+  "stk": 5.6258,
+  "m_lo": 5.4014,
+  "m_hi": 5.1188
+ },
+ "fold_margin": 5.0,
+ "o20_only": true,
+ "m": [
+  -10.8077,
+  2.6277,
+  0.0
+ ],
+ "nodes_from": "kinematic closure",
+ "step_deg": 2.0,
+ "jump_deg": 10.0,
+ "grid": {
+  "poses": 1432,
+  "kin_ok": 985,
+  "nodes": 985,
+  "connected": 985,
+  "islands": 0,
+  "static_reach": 0.6878,
+  "connected_reach": 0.6878,
+  "overhead140": {
+   "poses": 108,
+   "nodes": 27,
+   "connected": 27
+  }
+ },
+ "bench110_360": {
+  "ws": 360,
+  "nodes": 254,
+  "connected": 254,
+  "static_reach": 0.7056,
+  "connected_reach": 0.7056
+ },
+ "knee_branch_signs": [
+  1.0
+ ],
+ "knee_ang_nodes": [
+  91.9,
+  150.3
+ ],
+ "edges": {
+  "tested": 814,
+  "passed": 814,
+  "refused": {
+   "fold_or_window": 0,
+   "jump": 0,
+   "branch": 0
+  }
+ },
+ "island_poses": [],
+ "secs": 1.8
+}

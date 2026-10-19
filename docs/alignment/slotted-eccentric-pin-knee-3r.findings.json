@@ -1,0 +1,50 @@
+[
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "The claim moved 201.20 -> 97.04 (config B-g47-2 -> E1-g13-3) and the presses got deeper while the contact share fell. Re-worn on Bench(110,360) exact (97.04 reproduced to the digit): 16 contact poses, summed depth 95.67 mm, deepest 34.90 mm, 10 deeper than 3 mm (docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json contact_depth). The 201.20 shape had 8 poses, 27.78 mm, deepest 9.92 mm. Held out: 16 poses, 55.50 mm, deepest 13.36 mm (was 9, 33.13 mm, 9.94 mm). The contact share went 0.101 -> 0.062 only because more poses close (taken 71 -> 241). Deepest: workspace plane 150, elevation 120, axial -180 (34.90 mm, metal 3.5 cm inside the arm); next 10.33 mm at plane -90 elev 60 axial 135. Against the reference conecut-knee-knuckle-3r: x4.73 and +75.43 mm on the bench (contact_depth check), x0.91 held out.",
+  "evidence": "docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json and _held.json (contact_depth, deepest); the 02:34 re-wear of 201.20 in the previous docs/alignment/slotted-eccentric-pin-knee-3r.md (git f804972)",
+  "why_not_better": "metal 1-3.5 cm into the arm is a block or a bruise, not something a liner absorbs; the depth-blind contact term charges a 34.9 mm press the same as a 0.1 mm one",
+  "action": "report only (the score stays as is, user 2026-10-17); watch, not gamed: the design is 78.76 plain points behind the lead and ranks above no better design"
+ },
+ {
+  "key": "T1",
+  "level": "watch",
+  "reason": "Every one of the 1763 configurations in docs/concepts/sweeps/slotted-eccentric-pin-knee-3r.json was searched with near=0, i.e. on the plain gap (CLAUDE.md: 'every search objective is the near-touch gap'), including the death auditors' AUD2 / AUD3 streams that produced the claim E1-g13-3. Measured cost on the re-wear: bench 97.04 plain -> 103.66 at 1 mm (+6.62, 6 poses), held out 93.02 -> 101.62 (+8.60, 11 poses). Minimum metal 0.237 mm bench, 0.146 mm held.",
+  "evidence": "sweep file params.near == 0 on 1763 / 1763 rows; docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json deep.gap_near1, _held.json deep.gap_near1",
+  "why_not_better": "a plain-gap optimum is free to park metal at 0.1-1 mm, which is metal on a real, bulging arm",
+  "action": "watch: dominance vs the lead is -78.76 plain and -83.27 at 2 mm, so it ranks above no better design; any further search on this row (the gate is a farm job) runs with near=1"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Metal hugging the skin on the claim's taken poses. Bench(110,360) exact: 6 / 21 / 128 of 241 taken poses have metal < 1 / 2 / 3 mm (gap 103.66 / 118.11 / 218.31); held out 11 / 27 / 144 of 255 (101.62 / 116.55 / 219.90). 21.07 points of the bench gap live in the 0-2 mm shell (catalogue watch line 15, gamed line 25). Per-pose clearance floors: 43 of 75 taken clip poses and 64 of 166 taken workspace poses have their closest metal at 2-3 mm (wear-probe floor_hist_mm). For comparison the lead conecut-knee-knuckle-3r has 33 of 372 < 2 mm and 105 of 372 < 3 mm (docs/alignment/remeasure/conecut-knee-knuckle-3r_bench.json).",
+  "evidence": "docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json deep / probe.clip_scored.floor_hist_mm / probe.ws_unscored.floor_hist_mm",
+  "why_not_better": "a pose whose closest metal is at 2-3 mm in the model is metal at 0 mm on a real arm with skin bulge, cuff slip and build tolerance",
+  "action": "report only (user 2026-10-17: near-touch is not a gate); watch"
+ },
+ {
+  "key": "S5",
+  "level": "watch",
+  "reason": "No continuity flood on file for a design with a slaved passive coordinate (K) and hard track-end stops at th 62.25 / 125.75. Bench-graph flood upper bound on this audit's per-pose dumps (tools/alignment_benchgraph_flood.py, no slerp edge checks, seeds = taken ws poses at elevation <= 30): bench 166 taken ws poses, at most 121 connected, reach 0.461 -> <= 0.336 (loss >= 12.50 points); held out 178 -> <= 120, 0.494 -> <= 0.333 (>= 16.11). The bench graph is sparse (1.13 neighbours per ws cell, 52 of 360 cells with none), so part of that loss is the graph, not the design. K stays on one branch (psi min 62.00 deg bench / 61.15 held, rule 15), so a branch flip is not the cause.",
+  "evidence": "python3 tools/alignment_benchgraph_flood.py slotted-eccentric-pin-knee-3r bench|held on docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_{bench,held}_perpose.json; kin.psi_taken in the re-wear files",
+  "why_not_better": "static reach counts poses the wearer may only reach by passing through a track-end stop or a contact pose",
+  "action": "watch: a flood (connected_full) is owed before any connected-reach claim; it can only lower this row's reach"
+ },
+ {
+  "key": "S3",
+  "level": "watch",
+  "reason": "Still present for the new claim E1-g13-3: the row's name, family and mechanism.cuff_knee declare the pin-knee cuff (pins a, b, knee link, arm pad), but the model builds member 3 as the kit neck (docs/concepts/models/slotted-eccentric-pin-knee-3r.py lines 9-15). The re-wear samples 17 metal groups (hub1-3, pinK, studG, link1, spoke, trk1-6, neck, crank, L2b, armG); none is the cuff knee.",
+  "evidence": "frozen.inband_member keys in docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_bench.json; model docstring lines 9-15",
+  "why_not_better": "the cuff knee's own clearance and twist are unscored; the number is the eccentric on the kit neck, not the named pin-knee design",
+  "action": "watch: the doc's paired controls show the kit neck costs ~7.6-10 points against the real pin knee, so it does not flatter; label the row 'eccentric J2 at pin-knee seats (kit neck)'"
+ },
+ {
+  "key": "R1",
+  "level": "watch",
+  "reason": "The dashboard's 'Verified gap' 97.04 (row v_gap, docs/dashboard/data/morphs.json) is the second death auditor's own frozen exact of a configuration the same auditor found with its own CMA (sweep stream AUD2, E1-g13-3, 185 evals). Death auditors ran 461 of the 1763 sweep configurations (AUD2 352, AUD3 109). There is no verifier file under docs/concepts/verify/ for this id and the status is 'screened'. The row is also internally stale: its top-level exact_frozen block and limiter text still describe D2-g9-0 (117.68), not the v_gap config. This audit re-wore E1-g13-3 independently: 97.04 to the digit, held out 93.02.",
+  "evidence": "docs/concepts/rows/slotted-eccentric-pin-knee-3r.json (v_gap, audit2.frozen_exact, exact_frozen.config D2-g9-0); sweep streams; docs/alignment/remeasure/slotted-eccentric-pin-knee-3r_{bench,held}.json",
+  "why_not_better": "a number found and frozen-worn by the same agent is self-measured whatever that agent's title; here it is independently reproduced, so it does not flatter",
+  "action": "labelling only: v_* stays the self-measured frozen exact of a screened row until a verifier writes a file; refresh exact_frozen / limiter to E1-g13-3"
+ }
+]

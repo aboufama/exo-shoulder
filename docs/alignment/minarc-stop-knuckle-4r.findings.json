@@ -1,0 +1,74 @@
+[
+ {
+  "key": "G6",
+  "level": "watch",
+  "reason": "A 4th sensed joint that no longer buys a lead. Under the user's 2026-10-17 ruling this is a 4-joint design. On today's verified board (docs/dashboard/data/morphs.json) pick1 18.40 (held out 22.69 fit-60, complexity 32.5, 4 joints) is 8th (seven verified rows ahead, one of them, conecut-l2jog, marked gamed by the ledger): the 3-joint lead conecut-knee-knuckle-3r is 18.28 / held out 22.38 / complexity 18.5 (the user's chosen build), conecut-h2facet 18.28 / 22.16, inband-rssr 18.33; three 4-joint relay rows sit at 14.06 / 14.76 / 15.40. So the 4th joint now buys nothing: the 3-joint lead is ahead on plain gap (-0.12), held out (-0.31), complexity (-14) and joint count. Earlier measured costs stand: the 4th joint buys 9 bench workspace poses over sidecar-longdyad (reach 0.750 vs 0.725), none overhead (7 vs 8 of 28), at 11 vs 4 bench contact poses (deepest -13.17 vs -4.61 mm). Not gamed: the board already ranks it below the better 3-joint rows; only the text calls it a leader (finding R2).",
+  "evidence": "docs/dashboard/data/morphs.json; rows/conecut-knee-knuckle-3r.json; docs/HANDOFF.md line 486; docs/alignment/remeasure/minarc-stop-knuckle-4r_pick1_probe_bench.json"
+ },
+ {
+  "key": "NEW-overhead-traded",
+  "level": "watch",
+  "reason": "Unchanged since the 2026-10-17 audit (the claim did not move): the polish that made pick1 the claim and the CAD config takes FEWER overhead poses than BDp. Overhead workspace taken (elevation >= 140): bench 7 vs 8 of 28; held out 12 vs 16 of 71 (fit-60), 16 vs 17 (env fit). K is closed on every taken pose at elevation >= 140 (bench 0 of 7 workspace, 0 of 10 clip; held out 0 of 12, 0 of 19): the 4th joint does nothing overhead. The gain is about 35 held-out mid / low-elevation workspace poses. Not gamed (BDp reaches fewer poses overall); reported because the goal puts overhead first and the user ruled the score stays as is.",
+  "evidence": "docs/alignment/remeasure/minarc-stop-knuckle-4r_{pick1,BDp}_probe_{bench,held}.json K_open_by_elev, probe.ws_overhead140"
+ },
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "Depth-blind contact (was NEW-depth-blind-contact; now catalogue T5, the tool's contact_depth check reads it too). pick1: bench 11 contact poses, sum 34.43 mm, deepest -13.17 mm (ws plane 15 / elev 165 / axial -60, overhead); held out 35 poses, sum 126.1 mm, deepest -14.61 mm (hub K's 18.25 mm stack wall in the raised deltoid), 15 deeper than 3 mm; against sidecar-longdyad 4 / 6.23 mm bench and 10 / 35.66 mm held out (x5.5 and x3.5). BDp: 4 / -6.41 mm bench, 13 / -7.27 mm held. The contact term charges a 14.6 mm press like a 0.1 mm graze. Not gamed: no clip frame touches and the contact poses already count as not taken. No alignment_paired per-pose dump exists for this design (its model needs the verifier harness); the depths come from the wear probes, whose gaps reproduce the claim to the digit.",
+  "evidence": "docs/alignment/minarc-stop-knuckle-4r.json contact_depth; docs/alignment/remeasure/minarc-stop-knuckle-4r_pick1_probe_{bench,held}.json probe.contact_poses"
+ },
+ {
+  "key": "M2",
+  "level": "watch",
+  "reason": "NEW since the last audit: the knee pins are not the build rule's component. The lead's build rule of 2026-10-17 (CLAUDE.md decision 5) says the knee pins are built as MR63ZZ ball-bearing pairs (plain iglidur pins failed R17 elsewhere: ~10 deg cuff twist, ~10 N), the kit's MR63ZZ-pair stack being stk 6.0 mm (docs/FINDINGS.md lines 2668, 2715; the desmo-conecut, roller-longdyad and sidecar-longdyad audits). pick1's claim carries stk 5.791 (BDp 5.2691), and its L2 CAD builds both pins with iglidur G sleeve bearings GSM-0405-03 + GTM-0408-005 thrust washers + DIN 6799 e-clips (pipeline/full-exo/designs/user_minarc_pick1/build.json). Re-worn here AS BUILT under the rules (stk 6.0 + the CAD's physical knee stop ang_min 30.5, everything else the verified pick1, through the verifier harness unchanged): bench 18.2 (claim 18.4; reach 0.75 vs 0.75, workspace taken 270, in-band14 0.8936 vs 0.8941, contact share 0.0256 vs 0.0281, near-touch 1 mm 23.14 vs 23.36, overhead taken 7 / 28 vs 7 / 28); held out (fit-60) 22.75 (claim 22.69; reach 0.7153 vs 0.7195, workspace taken 681, in-band14 0.8911 vs 0.8916, contact share 0.0339 vs 0.038, near-touch 1 mm 26.61 vs 26.73, overhead taken 12 / 71 vs 12 / 71) - kinematic continuity applied (0 dropped); the contact-aware continuity pass was stopped at the time box (it dropped 0 extra poses for the claim). Change vs the claim: bench -0.2, held out +0.06. So the build rule costs nothing here: the MR63ZZ stack plus the knee stop read 0.20 BETTER on the bench (less contact) and 0.06 worse held out. Not gamed: the verified number is not inflated by the plain pins; the finding is that the claimed and built knee differ. Action: state the row at the as-built numbers next to 18.40 / 22.69 (proposal C1).",
+  "evidence": "docs/alignment/remeasure/minarc-stop-knuckle-4r_pick1built_probe_{bench,held}_verifier.json, minarc-stop-knuckle-4r_pick1built_params_in.json"
+ },
+ {
+  "key": "T4",
+  "level": "watch",
+  "reason": "The knee window as claimed is not the knee stop as built. The polish searched the window with BDp's 24.95 as floor and pick1 sits at ang_min 26.14, below the >= 30 FINDINGS set for polishes after the GPU-knee case. Held out the taken knee reaches 152.75 deg (window margin 1.11 deg, 27.3 deg from straight), with 4 taken held-out poses past 149.5. The CAD's physical stop is at 149.5 (ang_min 30.5; pipeline/concept_l1/knee_stop_check.py), and the lead's rule of 2026-10-17 makes the knee window a physical stop the model checks like the J2 stops; FINDINGS (line 1847) still lists the stop's held-out cost as 'not re-scored'. Measured here with the stop applied (together with stk 6.0, finding M2): bench 18.2 (claim 18.4; reach 0.75 vs 0.75, workspace taken 270, in-band14 0.8936 vs 0.8941, contact share 0.0256 vs 0.0281, near-touch 1 mm 23.14 vs 23.36, overhead taken 7 / 28 vs 7 / 28); held out (fit-60) 22.75 (claim 22.69; reach 0.7153 vs 0.7195, workspace taken 681, in-band14 0.8911 vs 0.8916, contact share 0.0339 vs 0.038, near-touch 1 mm 26.61 vs 26.73, overhead taken 12 / 71 vs 12 / 71) - kinematic continuity applied (0 dropped); the contact-aware continuity pass was stopped at the time box (it dropped 0 extra poses for the claim). The stop takes exactly the 4 predicted held-out workspace poses (685 -> 681 taken, reach 0.7195 -> 0.7153, +0.42 gap points), and less contact pays most of it back, net held out +0.06. The open FINDINGS item now has a number: about +0.06 held out, -0.20 on the bench, as built.",
+  "evidence": "docs/research/minarc_final_polish/verify/v_pick1_fit60_held.json verifier.knee; docs/FINDINGS.md lines 1771-1795, 1847; docs/alignment/remeasure/minarc-stop-knuckle-4r_pick1built_probe_held_verifier.json"
+ },
+ {
+  "key": "R2",
+  "level": "watch",
+  "reason": "Stale leader text, now further from the board. README line 33 (last edited b263d10, 2026-10-16 20:30) still heads the status with 'Best verified overall: minarc-stop-knuckle-4r pick1, 18.40', while the verified board has phi40-thinstack-relay-4r 14.06, offset-shortcar-relay-4r 14.76, freek-oracle-route-knuckle-4r 15.40 and four 3-joint rows at 18.28-18.33 (conecut-h2facet, conecut-knee, conecut-l2jog - the last marked gamed by the ledger - and inband-rssr) ahead of it: it is 8th. The row's verdict / v_verdict and the dashboard row's verdict still open with 'VERIFIED LEADER' (BDp 19.54), and the dashboard pairs pick1's v_gap 18.40 with BDp's verdict text. docs/dashboard/data/sweeps.json still marks the refuted self-measured fast 6.19 (score 97.75) as is_record. mechanism.notes still says 'complexity 33.0' and 'sensed passive 2 = the knee pins' while the record has sensed_passive 0 and complexity 32.5 (the complexity field itself is now right). HANDOFF (line 142, 161) is correct: 'not a 3-joint leader'.",
+  "evidence": "README.md line 33; rows/minarc-stop-knuckle-4r.json verdict, v_verdict, mechanism.notes; docs/dashboard/data/morphs.json; docs/dashboard/data/sweeps.json"
+ },
+ {
+  "key": "NEW-mixed-protocol",
+  "level": "watch",
+  "reason": "Unchanged: README lines 33-35 put pick1 'held out 21.31' (env-fit protocol) next to sidecar-longdyad 'held out 22.67' (fit-60). On one protocol they tie (22.69 vs 22.67); the env fit flatters minarc by 1.38. The fit-60 number is the one comparable with the board (conecut-knee 22.38).",
+  "evidence": "README.md lines 33-36; rows/minarc-stop-knuckle-4r.json polished_held_out"
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "Near-singular postures, unchanged: own-state J1-J3 margin min 5.623 bench / 5.586 held out (rule 5.5 priced), but 107 of 380 taken bench poses sit under 10 deg; in the 86 forced bench poses the plain dyad is 22.8 deg past its own fold (held out -22.93 on 294 forced nodes), so the margin exists only because K opens; J1 swings up to 31 deg per 10-fps frame at the clips' peak arm speed.",
+  "evidence": "docs/research/minarc_final_polish/verify/v_pick1_fit60_bench.json extra.th_margin_own_state; v_pick1_fit60_held_conn_taken.json worn_checks; docs/research/minarc_pick1_redteam.md section 3"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "A spring with a narrow window (G3 cuff twist with it), unchanged: the bench treats K as geometry. As built (0.04 N.m preload) R17 passes upright only (drift 3.72 deg on Reach a high shelf); with gravity across the thorax it drifts 4.12-7.70 deg (fails the 5-deg rule in 3 of 4 directions) and the cuff twists up to 3.83 deg (2.00 upright). At 0.08 N.m it lags 9.28 deg upright. No posture sweep has been run since.",
+  "evidence": "docs/research/pick1_k_hold_check.md; docs/HANDOFF.md line 217"
+ },
+ {
+  "key": "T1",
+  "level": "watch",
+  "reason": "Metal parked just outside the contact line (reported; not a gate per the user's 2026-10-17 ruling): pick1 has 13 / 38 / 171 taken bench poses with metal under 1 / 2 / 3 mm (gap at 1 / 2 / 3 mm 23.36 / 41.29 / 156.01; held out 26.73 / 47.94 / 162.57), and 6 of its 7 taken overhead bench poses (11 of 12 held out) are under 2 mm; overhead p10 lowest metal 0.56 mm. sidecar-longdyad: 2 / 26 under 1 / 2 mm.",
+  "evidence": "docs/alignment/remeasure/minarc-stop-knuckle-4r_pick1_probe_{bench,held}.json"
+ },
+ {
+  "key": "P4",
+  "level": "watch",
+  "reason": "The complexity metric changed in the same commits as this row's complexity: 3ceacea (simplicity v2, record 52.0 -> 32.5) and ec77d25 (simplicity v2.1 in tools/simplicity.py + the row's complexity field 33.0 -> 32.5). Both are stated measurement changes following the user's rulings; the 0.5 in ec77d25 is v2's own recompute (the 04:27 audit already read 32.5 under v2), so v2.1 does not move this row, and v2.2 (encoders cost 0) leaves it at 32.5 (K is counted as an active joint). The tool's judge_change reads 'ok' because it follows only gap moves (proposal B7 of the last audit).",
+  "evidence": "git show --stat 3ceacea ec77d25; docs/alignment/minarc-stop-knuckle-4r.json complexity"
+ },
+ {
+  "key": "S2",
+  "level": "watch",
+  "reason": "Link 1a is sampled at 0.42x the kit's metal density: 16 samples on 151 mm2 (pitch 2.17 x 4.29 mm, masked lattice; tools/sample_density.py on the BDp params), and the harness exports no per-part in-band record (the tool's sampling check). Bound on the re-weight to the kit density (21.8 missing samples of about 828): from -0.28 gap points (L1a fully in band) to +2.35 (L1a wholly out of band); unmeasured because the per-part record does not exist. The pitch hides at most about 0.05 mm of depth on a convex arm (s^2 / 2R, R ~ 50 mm), so contact is not affected.",
+  "evidence": "docs/alignment/remeasure/sample_density_minarc-stop-knuckle-4r.json parts.L1a"
+ }
+]

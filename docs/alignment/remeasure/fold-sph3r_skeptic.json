@@ -1,0 +1,591 @@
+{
+ "id": "fold-sph3r",
+ "wear": "claim bench Bench(60,160) fast (model unchanged) + exact re-read of F near-skin poses (same shape, same pose idx, CB_EXACT bench)",
+ "source": "tools/alignment_fsph3r_skeptic.py (skeptic 2026-10-19)",
+ "F": {
+  "params": {
+   "az": 28.338,
+   "el": 65.3972,
+   "a1": 83.5065,
+   "a2": 62.9048,
+   "wd": 94.3254,
+   "wa": -9.3721,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.9805
+  },
+  "gap": 44.72,
+  "reach": 0.9,
+  "follow": 0.9667,
+  "inband14": 0.4577,
+  "contact": 0.0049,
+  "model_min_margin": 10.05,
+  "model_gap_near1": 53.66,
+  "n_eval": 203,
+  "n_taken": 202,
+  "n_taken_clip": 58,
+  "n_taken_ws": 144,
+  "n_lt1": 8,
+  "n_lt2": 24,
+  "near1": 53.66,
+  "near2": 76.53,
+  "min_metal_taken": 0.0039,
+  "th_min_taken": 10.052,
+  "th_min_eval": 10.052,
+  "n_th_lt5": 0,
+  "parts": {
+   "hub1": [
+    1.0,
+    5.74,
+    81,
+    7.59
+   ],
+   "hub2": [
+    0.0,
+    31.75,
+    81,
+    31.75
+   ],
+   "hub3": [
+    0.8682,
+    10.66,
+    81,
+    15.69
+   ],
+   "link1": [
+    0.3894,
+    30.12,
+    364,
+    31.75
+   ],
+   "link2": [
+    0.0959,
+    31.75,
+    273,
+    31.75
+   ],
+   "neck": [
+    0.7839,
+    10.19,
+    256,
+    17.32
+   ]
+  },
+  "sample_weighted": 0.4577,
+  "part_weighted": 0.5229,
+  "overhead_ws": 12,
+  "overhead_taken": 6,
+  "overhead_taken_min_mm": [
+   0.004,
+   0.144,
+   0.324,
+   0.399,
+   1.637,
+   2.525
+  ],
+  "contact_poses": [
+   {
+    "i": 180,
+    "kind": "ws",
+    "mm": -1.384,
+    "plane": 105.0,
+    "elev": 45.0,
+    "axial": -165.0
+   }
+  ],
+  "hubF": {
+   "hub1": 53.0,
+   "hub2": 154.0,
+   "hub3": 67.06
+  },
+  "secs": 5.2
+ },
+ "G": {
+  "params": {
+   "az": 29.1048,
+   "el": 79.4024,
+   "a1": 82.6297,
+   "a2": 65.3472,
+   "wd": 95.5323,
+   "wa": -3.285,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 1.0
+  },
+  "gap": 49.03,
+  "reach": 0.9,
+  "follow": 1.0,
+  "inband14": 0.4097,
+  "contact": 0.0,
+  "model_min_margin": 10.54,
+  "model_gap_near1": 49.03,
+  "n_eval": 204,
+  "n_taken": 204,
+  "n_taken_clip": 60,
+  "n_taken_ws": 144,
+  "n_lt1": 0,
+  "n_lt2": 1,
+  "near1": 49.03,
+  "near2": 50.14,
+  "min_metal_taken": 1.3682,
+  "th_min_taken": 10.536,
+  "th_min_eval": 10.536,
+  "n_th_lt5": 0,
+  "parts": {
+   "hub1": [
+    1.0,
+    6.17,
+    81,
+    8.81
+   ],
+   "hub2": [
+    0.0,
+    31.75,
+    81,
+    31.75
+   ],
+   "hub3": [
+    0.7975,
+    11.77,
+    81,
+    16.47
+   ],
+   "link1": [
+    0.3554,
+    31.38,
+    357,
+    31.75
+   ],
+   "link2": [
+    0.0608,
+    31.75,
+    280,
+    31.75
+   ],
+   "neck": [
+    0.6872,
+    11.74,
+    256,
+    19.08
+   ]
+  },
+  "sample_weighted": 0.4097,
+  "part_weighted": 0.4835,
+  "overhead_ws": 12,
+  "overhead_taken": 5,
+  "overhead_taken_min_mm": [
+   1.368,
+   2.0,
+   2.027,
+   2.03,
+   2.689
+  ],
+  "contact_poses": [],
+  "hubF": {
+   "hub1": 52.0,
+   "hub2": 154.0,
+   "hub3": 67.0
+  },
+  "secs": 4.2
+ },
+ "F_q1": {
+  "params": {
+   "az": 28.338,
+   "el": 65.3972,
+   "a1": 83.5065,
+   "a2": 62.9048,
+   "wd": 94.3254,
+   "wa": -9.3721,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 1.0
+  },
+  "gap": 50.72,
+  "reach": 0.9,
+  "follow": 0.9667,
+  "inband14": 0.3977,
+  "contact": 0.0049,
+  "model_min_margin": 10.05,
+  "model_gap_near1": 50.72,
+  "n_eval": 203,
+  "n_taken": 202,
+  "n_taken_clip": 58,
+  "n_taken_ws": 144,
+  "n_lt1": 0,
+  "n_lt2": 1,
+  "near1": 50.72,
+  "near2": 51.84,
+  "min_metal_taken": 1.1463,
+  "th_min_taken": 10.052,
+  "th_min_eval": 10.052,
+  "n_th_lt5": 0,
+  "parts": {
+   "hub1": [
+    1.0,
+    5.74,
+    81,
+    7.59
+   ],
+   "hub2": [
+    0.0,
+    31.75,
+    81,
+    31.75
+   ],
+   "hub3": [
+    0.579,
+    13.48,
+    81,
+    18.49
+   ],
+   "link1": [
+    0.3606,
+    31.75,
+    364,
+    31.75
+   ],
+   "link2": [
+    0.0389,
+    31.75,
+    273,
+    31.75
+   ],
+   "neck": [
+    0.7107,
+    11.61,
+    256,
+    18.75
+   ]
+  },
+  "sample_weighted": 0.3976,
+  "part_weighted": 0.4482,
+  "overhead_ws": 12,
+  "overhead_taken": 5,
+  "overhead_taken_min_mm": [
+   1.146,
+   2.0,
+   2.013,
+   2.037,
+   2.475
+  ],
+  "contact_poses": [
+   {
+    "i": 104,
+    "kind": "ws",
+    "mm": -0.89,
+    "plane": 0.0,
+    "elev": 150.0,
+    "axial": 0.0
+   }
+  ],
+  "hubF": {
+   "hub1": 53.0,
+   "hub2": 159.0,
+   "hub3": 70.0
+  },
+  "secs": 4.2
+ },
+ "G_q09805": {
+  "params": {
+   "az": 29.1048,
+   "el": 79.4024,
+   "a1": 82.6297,
+   "a2": 65.3472,
+   "wd": 95.5323,
+   "wa": -3.285,
+   "sigma": -1,
+   "margin": 10.0,
+   "width": 12.0,
+   "t_link": 3.0,
+   "q": 0.9805
+  },
+  "gap": 52.26,
+  "reach": 0.8625,
+  "follow": 1.0,
+  "inband14": 0.4347,
+  "contact": 0.0198,
+  "model_min_margin": 10.54,
+  "model_gap_near1": 56.74,
+  "n_eval": 202,
+  "n_taken": 198,
+  "n_taken_clip": 60,
+  "n_taken_ws": 138,
+  "n_lt1": 4,
+  "n_lt2": 21,
+  "near1": 56.74,
+  "near2": 80.26,
+  "min_metal_taken": 0.1267,
+  "th_min_taken": 10.536,
+  "th_min_eval": 10.536,
+  "n_th_lt5": 0,
+  "parts": {
+   "hub1": [
+    1.0,
+    6.17,
+    81,
+    8.81
+   ],
+   "hub2": [
+    0.0,
+    31.75,
+    81,
+    31.75
+   ],
+   "hub3": [
+    0.7975,
+    11.77,
+    81,
+    16.47
+   ],
+   "link1": [
+    0.3957,
+    21.98,
+    357,
+    31.75
+   ],
+   "link2": [
+    0.0641,
+    31.75,
+    280,
+    31.75
+   ],
+   "neck": [
+    0.7385,
+    10.89,
+    256,
+    17.85
+   ]
+  },
+  "sample_weighted": 0.4347,
+  "part_weighted": 0.4993,
+  "overhead_ws": 12,
+  "overhead_taken": 2,
+  "overhead_taken_min_mm": [
+   0.127,
+   1.094
+  ],
+  "contact_poses": [
+   {
+    "i": 98,
+    "kind": "ws",
+    "mm": -7.14,
+    "plane": 0.0,
+    "elev": 60.0,
+    "axial": -60.0
+   },
+   {
+    "i": 123,
+    "kind": "ws",
+    "mm": -2.13,
+    "plane": 30.0,
+    "elev": 75.0,
+    "axial": -90.0
+   },
+   {
+    "i": 152,
+    "kind": "ws",
+    "mm": -0.099,
+    "plane": 60.0,
+    "elev": 165.0,
+    "axial": -90.0
+   },
+   {
+    "i": 164,
+    "kind": "ws",
+    "mm": -0.272,
+    "plane": 75.0,
+    "elev": 165.0,
+    "axial": -90.0
+   }
+  ],
+  "hubF": {
+   "hub1": 52.0,
+   "hub2": 140.04,
+   "hub3": 67.0
+  },
+  "secs": 3.7
+ },
+ "F_exact_near": {
+  "4": {
+   "fast": 1.878,
+   "exact": 1.934,
+   "kind": "clip",
+   "elev": 149.40573120117188,
+   "secs": 0.9
+  },
+  "5": {
+   "fast": 1.916,
+   "exact": 1.926,
+   "kind": "clip",
+   "elev": 150.0,
+   "secs": 1.0
+  },
+  "6": {
+   "fast": 1.878,
+   "exact": 1.934,
+   "kind": "clip",
+   "elev": 149.40573120117188,
+   "secs": 1.0
+  },
+  "26": {
+   "fast": 1.633,
+   "exact": 1.632,
+   "kind": "clip",
+   "elev": 143.10000610351562,
+   "secs": 0.9
+  },
+  "28": {
+   "fast": 1.784,
+   "exact": 1.727,
+   "kind": "clip",
+   "elev": 137.8000030517578,
+   "secs": 1.1
+  },
+  "29": {
+   "fast": 1.616,
+   "exact": 1.52,
+   "kind": "clip",
+   "elev": 140.86712646484375,
+   "secs": 1.0
+  },
+  "73": {
+   "fast": 1.414,
+   "exact": 1.398,
+   "kind": "ws",
+   "elev": 60.0,
+   "secs": 0.9
+  },
+  "79": {
+   "fast": 1.972,
+   "exact": 1.963,
+   "kind": "ws",
+   "elev": 15.0,
+   "secs": 0.9
+  },
+  "91": {
+   "fast": 0.994,
+   "exact": 0.951,
+   "kind": "ws",
+   "elev": 75.0,
+   "secs": 1.0
+  },
+  "98": {
+   "fast": 0.281,
+   "exact": 0.175,
+   "kind": "ws",
+   "elev": 60.0,
+   "secs": 0.9
+  },
+  "104": {
+   "fast": 0.144,
+   "exact": -0.059,
+   "kind": "ws",
+   "elev": 150.0,
+   "secs": 1.0
+  },
+  "123": {
+   "fast": 1.255,
+   "exact": 1.249,
+   "kind": "ws",
+   "elev": 75.0,
+   "secs": 0.8
+  },
+  "130": {
+   "fast": 1.358,
+   "exact": 1.336,
+   "kind": "ws",
+   "elev": 15.0,
+   "secs": 0.8
+  },
+  "138": {
+   "fast": 1.908,
+   "exact": 1.908,
+   "kind": "ws",
+   "elev": 120.0,
+   "secs": 0.8
+  },
+  "140": {
+   "fast": 0.399,
+   "exact": 0.293,
+   "kind": "ws",
+   "elev": 165.0,
+   "secs": 1.0
+  },
+  "148": {
+   "fast": 0.584,
+   "exact": 0.38,
+   "kind": "ws",
+   "elev": 90.0,
+   "secs": 0.9
+  },
+  "150": {
+   "fast": 1.223,
+   "exact": 1.094,
+   "kind": "ws",
+   "elev": 120.0,
+   "secs": 0.8
+  },
+  "152": {
+   "fast": 0.004,
+   "exact": -0.281,
+   "kind": "ws",
+   "elev": 165.0,
+   "secs": 0.9
+  },
+  "155": {
+   "fast": 0.892,
+   "exact": 0.863,
+   "kind": "ws",
+   "elev": 30.0,
+   "secs": 0.8
+  },
+  "160": {
+   "fast": 1.164,
+   "exact": 1.019,
+   "kind": "ws",
+   "elev": 90.0,
+   "secs": 0.8
+  },
+  "162": {
+   "fast": 1.587,
+   "exact": 1.446,
+   "kind": "ws",
+   "elev": 120.0,
+   "secs": 0.9
+  },
+  "164": {
+   "fast": 0.324,
+   "exact": 0.197,
+   "kind": "ws",
+   "elev": 165.0,
+   "secs": 0.9
+  },
+  "176": {
+   "fast": 1.637,
+   "exact": 1.57,
+   "kind": "ws",
+   "elev": 165.0,
+   "secs": 1.0
+  },
+  "180": {
+   "fast": -1.384,
+   "exact": -1.452,
+   "kind": "ws",
+   "elev": 45.0,
+   "secs": 1.0
+  },
+  "192": {
+   "fast": 1.052,
+   "exact": 0.965,
+   "kind": "ws",
+   "elev": 45.0,
+   "secs": 1.0
+  }
+ }
+}

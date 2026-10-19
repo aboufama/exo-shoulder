@@ -1,0 +1,450 @@
+{
+ "id": "trimlug-k165-knuckle-3r",
+ "name": "Trimmed horn lug on the slipper-nose lead (lens 3 lever c, a T5 polish): the lug band cut at the flank's farthest contact + 1.5 mm wall",
+ "lens": "round11:overhead-cone (lens 3 lever c; run as a lead polish for T5)",
+ "family": "slaved-knuckle 3R (pin knee)",
+ "active_dof": 3,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-17T11:22:03Z",
+ "reach": 0.775,
+ "follow": 1.0,
+ "inband14": 0.8948,
+ "inband10": 0.5116,
+ "contact": 0.0,
+ "gap": 13.02,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.8953,
+ "v_inband10": 0.515,
+ "v_gap": 18.51,
+ "n_configs": 45,
+ "complexity": 18.25,
+ "best_params": {
+  "g": 2.3934,
+  "beta": -176.684,
+  "r_c": 15.3739,
+  "lift": 0.7882,
+  "hl": 1.9442,
+  "zr": 4.0293,
+  "s_arm": 4.0,
+  "r_lobe": 8.2661,
+  "nose_r": 1.1839,
+  "az2": 45.8211,
+  "el2": 41.0855,
+  "lE": 67.832,
+  "phiE": -2.7863,
+  "lc": 21.1499,
+  "phib": -58.8084,
+  "a1max": 58.7678,
+  "kK": 2.1534,
+  "smhi": 16.8433,
+  "bk1": 26.0,
+  "bk2": 38.0336,
+  "mu": 0.087,
+  "trim_wall": 1.5,
+  "back_t": 6.0,
+  "rlift": 0.0,
+  "crank_cut": 0.0,
+  "crank_edge": 0.0,
+  "cap_break": 0.0,
+  "dense": 1
+ },
+ "verdict": "screened - a T5 depth polish of the lead, not a lead change, and the spec's main lever is refuted. Frozen exact Bench(110,360) 18.51 (score 93.27) vs the lead's 18.49 through the same Frozen class (lead reproduced: 18.49 / held 23.45); held out 23.47. Same reach 261/360, overhead 8/28, same 2 bench contacts: pose 264 is NOT cleared. Contact depth T5 bench 14.74 -> 13.18 mm (264: 5.74 -> 4.18), held out 46.35 -> 40.59 mm (10 contacts, 5 of them the lug, each 1.2-1.7 mm shallower). The spec's radial lift makes both elev-165 contacts DEEPER (T5 16.07 even without the longer nose / raised arm it needs). The crank underside cut gains 0.02 mm at 264 and costs 0.21 fast. The cap edge break misses the hub-2 contact, which is its side wall 4 mm below the cap. The skin comes in laterally (from large r_K) and from above.",
+ "limiter": "Measured at ws 264 (30,165,-60), Bench(110,360) exact. The lug band directly behind the END of the flank's stroke (r_K 19.6-20.5 mm, 2.3 mm behind contacts at r_K 19.1-19.8) sits 2.2-3.3 mm in the skin. Clearing it needs the lug to end at r_K ~18.0, i.e. the flank to stop at dK ~35 deg vs the drive's 49.8 (taken 45.6), which is the lead's stroke wall (73 stretched fold losses). Secondary: the crank arm tip's outer side wall (-0.19 even after a 1 mm lower-edge chamfer; it needs a ~0.5 mm narrower tip) and hub 2's O20 housing wall (-0.09 at 8.17 of its 12.25 mm crown; it needs a ~0.3 mm flat). Pose 237 is hub K's own disc (-2.65) plus the crank at the nose (-9.00): no lug cut changes it.",
+ "note": "Search: a 21-config grid on Bench(60,160) fast. trim_wall {off, 2.5, 1.5, 1.0, 0.8} x back_t {6, 4, 3}, the spec's rlift 1.5 / 2.5, crank_cut 0.3 / 0.6, cap_break 0.5, and the spec's combination. Fast plain gap 13.00-13.40; the fit bench has no contact pose, so it reads only the in-band cost. Then 14 two-pose exact checks at 237 / 264, then the cone set (110 clips + 47 cone poses, exact) and the full claim columns on the farm: frozen exact Bench(110,360) + held out for lead sparse / lead dense / trim 1.5 / trim 1.0 / trim 1.5 + back 4. Convergence gate on the fast grid (score points): 0.00 / 0.00 / top-5 spread 0.004, which passes. No CMA: the fit bench is flat in these cuts, and on the frozen bench T5 is monotone in the trim, bounded by the wall rule. Cone set (the lead note's first test): in-band 0.8955 lead, 0.8954 rlift 2.5 (optimistic), 0.8953 trim 1.5, a drop of 0.0002 < 0.005. Pose 264 is not cleared, so the note's stop rule applies. Trim 1.0 gives T5 12.67 / held 38.71 at the same 18.51 / 23.47 but leaves a 1.0 mm wall. Back 4 gives 18.56 / 23.52 for the same bench T5. Dense lug sampling (0.5 mm, contact-only) is a measurement change: the lead + dense reads 18.49 / 23.45, T5 14.74 / held 46.35 (sparse 46.13). The +0.02 gap of the trim is in-band accounting: 3 of 23 scored lug samples removed (horn ib14 0.956 -> 0.955, pooled 0.8955 -> 0.8953). | VERIFIED 2026-10-17T12:25:48Z (skeptic, farm + one local repeat, CB_EXACT; harness docs/concepts/verify/trimlug-k165-knuckle-3r.py = the lead's verifier retargeted at TLModel + trim checks T1-T5): frozen exact Bench(110,360) 18.51 (score 93.27; reach 0.725 = 261/360, follow 1.0, ib14 0.8953, ib10 0.515, contact 0.0054 = 2 poses), overhead 8/28, near1 20.14, near2 33.02, min metal 0.07 mm; held out 23.47 (contact 10 poses); lead control through the same harness 18.49 (T5 14.74). Added checks: 0 failing taken poses (0/371 bench, 0/852 held): closure, nose-lug, K sense, PA+friction horn 40.77 / crank 34.47 <= 43 (and 45), th margin 5.181 (held 5.006), conjugate undercut 0. Trim: T1 contact line (dowel rings -1.25/0/+1.25 along the GH ruling) on retained metal, edge margin 2.53 mm at the trim's own radius (1.99 over the full 49.75-deg stroke; the trim is decided on the lug underside and carried up the GH ray, so the real margin is above the stated 1.5); T2 back thickness behind every used contact >= 4.30 mm (held 4.15; 6 untrimmed); T3 lug connectivity = the lead's; T4 no untrimmed member-1 sample; T5 the dense lug copy (contact-only in the claim) worn against every member at every taken pose: crank 0.153 mm (the arm's 0.15 running gap over the lug, same as the lead), nose 0.424 (its own sliding pair), every other member >= 20.96 mm - same minima as the lead. Flank-edge envelope (lead verifier's strip, trimmed): 18.47. T5 reproduced: bench 14.74 -> 13.18 mm, held 46.35 -> 40.59. Kinematics untouched (same why-list fold 88 / slide 9 / contact 2), so the lead's flood (18.49 / knn 20.16) carries. Champion same bench 75.94 (risley-turret verifier, Bench(110,360) exact, kit checks + 1 mm clearance; 66.97 through the offset-skin-normal verifier). Not refuted. NOT a lead change: +0.02 vs the lead's 18.49 (3 in-band lug samples removed); both elev-165 contacts remain (237: crank 9.00, lug 8.35, hub K 2.65; 264: lug 4.18). Reporting issues: the row's limiter says 237 is hub K's disc plus the crank, but the trimmed lug is also 8.35 mm deep there; the row verdict says 5 lug-deepest held contacts, the doc lists 4; the sweep file has 31 entries (one timestamp) vs n_configs 45.",
+ "doc": "docs/concepts/trimlug-k165-knuckle-3r.md",
+ "fast": {
+  "gap": 13.02,
+  "gap_near1": 14.18,
+  "gap_near2": 16.47,
+  "reach": 0.775,
+  "follow": 1.0,
+  "inband14": 0.8948,
+  "inband10": 0.5116,
+  "contact": 0.0
+ },
+ "frozen": {
+  "gap": 18.51,
+  "reach": 0.725,
+  "follow": 1.0,
+  "inband14": 0.8953,
+  "inband10": 0.515,
+  "contact": 0.0054,
+  "t5_n": 2,
+  "t5_mm": 13.18,
+  "near1": 20.14,
+  "near2": 33.02,
+  "min_metal_mm": 0.07,
+  "overhead140": [
+   8,
+   28
+  ],
+  "why": {
+   "fold": 88,
+   "slide": 9,
+   "contact": 2
+  }
+ },
+ "held_out": {
+  "gap": 23.47,
+  "reach": 0.6828,
+  "follow": 1.0,
+  "inband14": 0.8941,
+  "inband10": 0.5136,
+  "contact": 0.0116,
+  "t5_n": 10,
+  "t5_mm": 40.59,
+  "near1": 26.56,
+  "near2": 36.97,
+  "min_metal_mm": 0.33,
+  "overhead140": [
+   18,
+   71
+  ],
+  "why": {
+   "fold": 260,
+   "slide": 32,
+   "contact": 10
+  }
+ },
+ "claims": {
+  "lead_sparse-frozen": {
+   "gap": 18.49,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8955,
+   "inband10": 0.5163,
+   "contact": 0.0054,
+   "t5_n": 2,
+   "t5_mm": 14.74,
+   "near1": 20.12,
+   "near2": 33.02,
+   "min_metal_mm": 0.07,
+   "overhead140": [
+    8,
+    28
+   ],
+   "why": {
+    "fold": 88,
+    "slide": 9,
+    "contact": 2
+   }
+  },
+  "lead_sparse-held": {
+   "gap": 23.45,
+   "reach": 0.6828,
+   "follow": 1.0,
+   "inband14": 0.8943,
+   "inband10": 0.5148,
+   "contact": 0.0116,
+   "t5_n": 10,
+   "t5_mm": 46.13,
+   "near1": 26.54,
+   "near2": 36.95,
+   "min_metal_mm": 0.33,
+   "overhead140": [
+    18,
+    71
+   ],
+   "why": {
+    "fold": 260,
+    "slide": 32,
+    "contact": 10
+   }
+  },
+  "lead_dense-frozen": {
+   "gap": 18.49,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8955,
+   "inband10": 0.5163,
+   "contact": 0.0054,
+   "t5_n": 2,
+   "t5_mm": 14.74,
+   "near1": 20.12,
+   "near2": 33.02,
+   "min_metal_mm": 0.07,
+   "overhead140": [
+    8,
+    28
+   ],
+   "why": {
+    "fold": 88,
+    "slide": 9,
+    "contact": 2
+   }
+  },
+  "lead_dense-held": {
+   "gap": 23.45,
+   "reach": 0.6828,
+   "follow": 1.0,
+   "inband14": 0.8943,
+   "inband10": 0.5148,
+   "contact": 0.0116,
+   "t5_n": 10,
+   "t5_mm": 46.35,
+   "near1": 26.54,
+   "near2": 36.95,
+   "min_metal_mm": 0.33,
+   "overhead140": [
+    18,
+    71
+   ],
+   "why": {
+    "fold": 260,
+    "slide": 32,
+    "contact": 10
+   }
+  },
+  "trim15-frozen": {
+   "gap": 18.51,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8953,
+   "inband10": 0.515,
+   "contact": 0.0054,
+   "t5_n": 2,
+   "t5_mm": 13.18,
+   "near1": 20.14,
+   "near2": 33.02,
+   "min_metal_mm": 0.07,
+   "overhead140": [
+    8,
+    28
+   ],
+   "why": {
+    "fold": 88,
+    "slide": 9,
+    "contact": 2
+   }
+  },
+  "trim15-held": {
+   "gap": 23.47,
+   "reach": 0.6828,
+   "follow": 1.0,
+   "inband14": 0.8941,
+   "inband10": 0.5136,
+   "contact": 0.0116,
+   "t5_n": 10,
+   "t5_mm": 40.59,
+   "near1": 26.56,
+   "near2": 36.97,
+   "min_metal_mm": 0.33,
+   "overhead140": [
+    18,
+    71
+   ],
+   "why": {
+    "fold": 260,
+    "slide": 32,
+    "contact": 10
+   }
+  },
+  "trim10-frozen": {
+   "gap": 18.51,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8953,
+   "inband10": 0.515,
+   "contact": 0.0054,
+   "t5_n": 2,
+   "t5_mm": 12.67,
+   "near1": 20.14,
+   "near2": 33.02,
+   "min_metal_mm": 0.07,
+   "overhead140": [
+    8,
+    28
+   ],
+   "why": {
+    "fold": 88,
+    "slide": 9,
+    "contact": 2
+   }
+  },
+  "trim10-held": {
+   "gap": 23.47,
+   "reach": 0.6828,
+   "follow": 1.0,
+   "inband14": 0.8941,
+   "inband10": 0.5136,
+   "contact": 0.0116,
+   "t5_n": 10,
+   "t5_mm": 38.71,
+   "near1": 26.56,
+   "near2": 36.97,
+   "min_metal_mm": 0.33,
+   "overhead140": [
+    18,
+    71
+   ],
+   "why": {
+    "fold": 260,
+    "slide": 32,
+    "contact": 10
+   }
+  },
+  "trim15b4-frozen": {
+   "gap": 18.56,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8948,
+   "inband10": 0.5123,
+   "contact": 0.0054,
+   "t5_n": 2,
+   "t5_mm": 13.18,
+   "near1": 20.19,
+   "near2": 33.02,
+   "min_metal_mm": 0.07,
+   "overhead140": [
+    8,
+    28
+   ],
+   "why": {
+    "fold": 88,
+    "slide": 9,
+    "contact": 2
+   }
+  },
+  "trim15b4-held": {
+   "gap": 23.52,
+   "reach": 0.6828,
+   "follow": 1.0,
+   "inband14": 0.8936,
+   "inband10": 0.5109,
+   "contact": 0.0116,
+   "t5_n": 10,
+   "t5_mm": 40.22,
+   "near1": 26.61,
+   "near2": 37.02,
+   "min_metal_mm": 0.33,
+   "overhead140": [
+    18,
+    71
+   ],
+   "why": {
+    "fold": 260,
+    "slide": 32,
+    "contact": 10
+   }
+  }
+ },
+ "t5": {
+  "lead_bench": 14.74,
+  "bench": 13.18,
+  "lead_held_dense": 46.35,
+  "lead_held_sparse": 46.13,
+  "held": 40.59,
+  "k165_two_pose": {
+   "lead": [
+    9.0,
+    5.74,
+    14.74
+   ],
+   "rlift2.5_optimistic": [
+    10.21,
+    5.86,
+    16.07
+   ],
+   "crank_cut0.3": [
+    9.0,
+    5.74,
+    14.74
+   ],
+   "cap_break0.5": [
+    9.0,
+    5.74,
+    14.74
+   ],
+   "crank_edge0.5/1.0": "264 side wall -0.23 / -0.19 (underside clears)",
+   "trim1.5": [
+    9.0,
+    4.18,
+    13.18
+   ],
+   "trim1.0": [
+    9.0,
+    3.67,
+    12.67
+   ],
+   "trim1.5_back4": [
+    9.0,
+    4.18,
+    13.18
+   ],
+   "spec_combo": [
+    9.88,
+    4.21,
+    14.09
+   ]
+  }
+ },
+ "cone_set": {
+  "poses": "110 clip + 47 ws (plane -20..45, elev 90..165, + 316)",
+  "lead": 0.8955,
+  "rlift25": 0.8954,
+  "trim15": 0.8953
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 5,
+  "joints": 8,
+  "closed_loops": 3,
+  "sliding_pairs": 1,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 12,
+  "catalogue_parts": 15,
+  "notes": "the slipper-nose lead's mechanism unchanged: the trim is a cut on link 1a's horn lug (a feature on an existing custom part); 0 added parts, joints, bodies. the lead roller-longdyad-knuckle-3r with the MR63ZZ flank roller deleted: the crank's bent long arm ends in a pressed ISO 8734 m6 440C dowel (hardened, polished; O3 at nose_r 1.5, O2 at nose_r 1.0) that slides on the conjugate flank wire-EDM'd into link 1a's boss (a-C:H DLC, greased). -1 moving body",
+  "source": "slipper-nose-knuckle-3r screen 2026-10-17",
+  "confidence": "medium",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  }
+ },
+ "cam": {
+  "dK_lim": 49.8,
+  "why_lim": "pressure_horn",
+  "pa_horn_max_taken": 36.1,
+  "pa_eff_horn": 41.1,
+  "contact_r": [
+   14.9,
+   19.8
+  ],
+  "clear_lowarm_lug_min": 15.71,
+  "lug_r_max": 23.0
+ },
+ "trim": {
+  "r_trim": 21.27,
+  "contact_r_max": 19.77,
+  "back_t": 6.0,
+  "rlift": 0.0,
+  "lift_r0": 17.3,
+  "horn_n": [
+   23,
+   20
+  ],
+  "dense_n": 648,
+  "crank_arc_n": 80
+ },
+ "model": "docs/concepts/models/trimlug-k165-knuckle-3r.py",
+ "sweep": "docs/concepts/sweeps/trimlug-k165-knuckle-3r.json",
+ "v_contact": 0.0054,
+ "verified_t": "2026-10-17T12:25:48Z"
+}

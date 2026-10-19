@@ -1,0 +1,209 @@
+{
+ "bench": {
+  "frozen": {
+   "gap": 73.76,
+   "reach": 0.7389,
+   "follow": 1.0,
+   "inband14": 0.4367,
+   "inband10": 0.2801,
+   "contact": 0.1132,
+   "honest": false,
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)"
+   ],
+   "closure": 0.9021,
+   "flips": 0,
+   "collide": 0.0,
+   "residual_deg": 0.0,
+   "inband_member": {
+    "hub1": 0.9931,
+    "hub2": 0.0,
+    "hub3": 0.1319,
+    "link1": 0.7175,
+    "link2": 0.3229,
+    "neck": 0.0168
+   },
+   "mass_g": 48.9
+  },
+  "parts_ib14": {
+   "hub1": 0.9931,
+   "hub2": 0.0,
+   "hub3": 0.1319,
+   "link1": 0.7175,
+   "link2": 0.3229,
+   "neck": 0.0168
+  },
+  "th_margin": {
+   "min": 10.096,
+   "p05": 15.955,
+   "n": 376,
+   "lt5": 0,
+   "lt10": 0,
+   "declared": 10.0
+  },
+  "elev": {
+   "overhead_ge140": {
+    "n": 28,
+    "taken": 9,
+    "evaluated": 20,
+    "contact": 11
+   },
+   "raised_120_140": {
+    "n": 34,
+    "taken": 17,
+    "evaluated": 24,
+    "contact": 7
+   },
+   "el_90_120": {
+    "n": 51,
+    "taken": 34,
+    "evaluated": 43,
+    "contact": 9
+   },
+   "el_lt90": {
+    "n": 247,
+    "taken": 206,
+    "evaluated": 227,
+    "contact": 21
+   }
+  },
+  "resample": [],
+  "mode": "exact",
+  "secs": 458.3,
+  "git": "3ffc3a8",
+  "source": "tools/alignment_baseline3r_rewear.py: docs/concepts/models/baseline-3r-kit.py unchanged, K.evaluate with its BASELINE conventions; fit Bench(60,160) fast, profiles frozen, worn on Bench(110,360)",
+  "deep": {
+   "plain": 73.76,
+   "reach": 0.7389,
+   "follow": 1.0,
+   "inband14": 0.4367,
+   "contact": 0.1132,
+   "n_poses": 470,
+   "n_taken": 376,
+   "min_metal_mm": 0.35,
+   "gap_near1": 74.79,
+   "near1_poses": 2,
+   "gap_near2": 116.93,
+   "near2_poses": 66,
+   "gap_near3": 375.0,
+   "near3_poses": 376,
+   "clip_metal_hist": {
+    "0-1": 0.0,
+    "1-2": 0.0055,
+    "2-3": 0.0174,
+    "3-4": 0.0302,
+    "4-6": 0.089,
+    "6-10": 0.1436,
+    "10-14": 0.1566,
+    ">14": 0.5577
+   },
+   "gap_band3_14": 75.5,
+   "inband3_14": 0.4193,
+   "overhead_min_metal_p10": 1.57
+  }
+ },
+ "held": {
+  "frozen": {
+   "gap": 74.42,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.438,
+   "inband10": 0.2804,
+   "contact": 0.11,
+   "honest": false,
+   "audit": [
+    "hub1: hub of J1 smaller than O20 (covers 0.54 of the disc, reaches 7.4 mm)"
+   ],
+   "closure": 0.8894,
+   "flips": 0,
+   "collide": 0.0,
+   "residual_deg": 0.0,
+   "inband_member": {
+    "hub1": 0.9929,
+    "hub2": 0.0,
+    "hub3": 0.138,
+    "link1": 0.7197,
+    "link2": 0.3229,
+    "neck": 0.0175
+   },
+   "mass_g": 48.9
+  },
+  "parts_ib14": {
+   "hub1": 0.9929,
+   "hub2": 0.0,
+   "hub3": 0.138,
+   "link1": 0.7197,
+   "link2": 0.3229,
+   "neck": 0.0175
+  },
+  "th_margin": {
+   "min": 12.117,
+   "p05": 17.197,
+   "n": 372,
+   "lt5": 0,
+   "lt10": 0,
+   "declared": 10.0
+  },
+  "elev": {
+   "overhead_ge140": {
+    "n": 26,
+    "taken": 7,
+    "evaluated": 16,
+    "contact": 9
+   },
+   "raised_120_140": {
+    "n": 35,
+    "taken": 16,
+    "evaluated": 24,
+    "contact": 8
+   },
+   "el_90_120": {
+    "n": 51,
+    "taken": 32,
+    "evaluated": 41,
+    "contact": 9
+   },
+   "el_lt90": {
+    "n": 248,
+    "taken": 207,
+    "evaluated": 227,
+    "contact": 20
+   }
+  },
+  "resample": [],
+  "mode": "exact",
+  "secs": 456.5,
+  "git": "3ffc3a8",
+  "source": "tools/alignment_baseline3r_rewear.py: docs/concepts/models/baseline-3r-kit.py unchanged, K.evaluate with its BASELINE conventions; fit Bench(60,160) fast, profiles frozen, worn on held_bench(110,360)",
+  "deep": {
+   "plain": 74.42,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.438,
+   "contact": 0.11,
+   "n_poses": 470,
+   "n_taken": 372,
+   "min_metal_mm": 0.194,
+   "gap_near1": 75.98,
+   "near1_poses": 3,
+   "gap_near2": 117.01,
+   "near2_poses": 63,
+   "gap_near3": 375.0,
+   "near3_poses": 372,
+   "clip_metal_hist": {
+    "0-1": 0.0,
+    "1-2": 0.0056,
+    "2-3": 0.0172,
+    "3-4": 0.0299,
+    "4-6": 0.0896,
+    "6-10": 0.1437,
+    "10-14": 0.1576,
+    ">14": 0.5565
+   },
+   "gap_band3_14": 76.14,
+   "inband3_14": 0.4208,
+   "overhead_min_metal_p10": 1.57
+  }
+ },
+ "note": "skeptic re-wear 2026-10-19 04:13-04:21 UTC: tools/alignment_baseline3r_rewear.run('claim', wear) with alignment_audit.REM redirected to the skeptic's scratchpad (tools/alignment_baseline3r_skeptic.py wear); CB_EXACT=1, model unchanged; per-pose dumps identical to remeasure/baseline-3r_{bench,held}_perpose.json"
+}

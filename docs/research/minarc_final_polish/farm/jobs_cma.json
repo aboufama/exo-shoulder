@@ -1,0 +1,41 @@
+[
+ {
+  "tag": "envp-base",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py cma --x0 '{}' --label envp-base --out docs/research/minarc_final_polish/farm/cma_envp-base.json --sigma 0.4 --popsize 8 --jobs 8 --max-evals 640 --budget-s 1500 --patience 10 --seed 21 > docs/research/minarc_final_polish/farm/cma_envp-base.log 2>&1; tail -3 docs/research/minarc_final_polish/farm/cma_envp-base.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/cma_envp-base*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2400
+ },
+ {
+  "tag": "envp-F2",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py cma --x0 '{\"az1\": 98.4731, \"el1\": 64.9218, \"az2\": 33.0495, \"el2\": 45.1638, \"wd\": 63.0942, \"wa\": -9.8431, \"b3\": 0.3341, \"lE\": 76.9716, \"lc\": 38.8158, \"phiE\": -3.9757, \"phib\": -55.0689, \"ang_min\": 24.9512, \"stk\": 5.8703}' --label envp-F2 --out docs/research/minarc_final_polish/farm/cma_envp-F2.json --sigma 0.4 --popsize 8 --jobs 8 --max-evals 640 --budget-s 1500 --patience 10 --seed 22 > docs/research/minarc_final_polish/farm/cma_envp-F2.log 2>&1; tail -3 docs/research/minarc_final_polish/farm/cma_envp-F2.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/cma_envp-F2*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2400
+ },
+ {
+  "tag": "envp-F7",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/env_polish.py cma --x0 '{\"az1\": 100.8324, \"el1\": 64.4999, \"az2\": 34.1949, \"el2\": 45.0779, \"wd\": 63.9038, \"wa\": -9.5043, \"b3\": 0.3384, \"lE\": 76.0978, \"lc\": 31.0158, \"phiE\": -3.024, \"phib\": -59.3373, \"ang_min\": 24.9512, \"stk\": 5.5696}' --label envp-F7 --out docs/research/minarc_final_polish/farm/cma_envp-F7.json --sigma 0.4 --popsize 8 --jobs 8 --max-evals 640 --budget-s 1500 --patience 10 --seed 23 > docs/research/minarc_final_polish/farm/cma_envp-F7.log 2>&1; tail -3 docs/research/minarc_final_polish/farm/cma_envp-F7.log",
+  "out": [
+   "docs/research/minarc_final_polish/farm/cma_envp-F7*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2400
+ }
+]

@@ -1,0 +1,406 @@
+{
+ "id": "user_minarc_pick1",
+ "source": "docs/concepts/minarc-stop-knuckle-4r.md (Kit-rule re-optimisation, config pick1), docs/research/minarc_final_polish/picks/pick1_priced.json + a1max 66.4696 (K stop B fix), fit on Bench(60,160) fast at fold margin 5.5 = the shape the verifiers wore frozen on Bench(110,360) exact (docs/research/minarc_final_polish.md + minarc_pick1_redteam.md: 18.40, score 93.31; held out 21.31 / 22.69)",
+ "params": {
+  "o1a": 0.0,
+  "o1c": 0.0,
+  "o2a": 0.0,
+  "o2c": 0.0,
+  "o3a": 0.0,
+  "o3c": 0.0,
+  "S_a": 15.0,
+  "S_t": 15.0,
+  "R_r": 0.5,
+  "drop": 1,
+  "S_auto": 0,
+  "jam_contact": 1,
+  "remote": 0,
+  "neck": 13.0,
+  "ramp": 1,
+  "slides": 1,
+  "vfix": 1,
+  "branch": 0,
+  "flip3": 0,
+  "az1": 101.6411,
+  "el1": 67.8564,
+  "b1": 0.0,
+  "az2": 48.6927,
+  "el2": 42.0409,
+  "b2": 0.0,
+  "wd": 66.5965,
+  "wa": -9.6278,
+  "b3": 0.3354,
+  "S_max": 25.0,
+  "centre": 1,
+  "R_tol": 0.5,
+  "inv": 0,
+  "lE": 73.8692,
+  "lc": 28.6946,
+  "phiE": 1.3552,
+  "phib": -53.1496,
+  "stk": 5.791,
+  "ang_min": 26.1449,
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "bk1": 33.8083,
+  "bk2": 47.8921,
+  "sK": -1,
+  "a1max": 66.4696,
+  "phi_lo": 15.0,
+  "phi_hi": 170.0,
+  "mstop": 0,
+  "kitrule": 1,
+  "smhi": 7.377,
+  "smlo": 7.3286,
+  "near": 1,
+  "phys": 1,
+  "capK": 6.0,
+  "m3e": 1
+ },
+ "n_joints": 4,
+ "sliding_cuff": false,
+ "dof": 4,
+ "passive": {
+  "count": 2,
+  "translations": 0,
+  "rotations": 2,
+  "outside_dof_count": true,
+  "kind": "flat two-pin knee closing the loop at the cuff (pins a, b parallel to J3); set by loop closure, nothing sags. K (in the DOF count) is passive, spring-held on stop A by a clock spring and SENSED (4th encoder)",
+  "components": [
+   {
+    "pin": "a",
+    "between": "member 3 (E boss) / knee link",
+    "part": "IGLIDUR-PIN: iglidur GSM sleeve + 2 GTM washers on an integral O4 Ti pin, DIN 6799 RS 3.2 e-clip land",
+    "stack_mm": 5.791,
+    "plates_mm": [
+     2.6455,
+     2.6455
+    ]
+   },
+   {
+    "pin": "b",
+    "between": "knee link / arm pad (cuff)",
+    "part": "IGLIDUR-PIN (as pin a)",
+    "stack_mm": 5.791,
+    "plates_mm": [
+     2.6455,
+     2.6455
+    ]
+   }
+  ]
+ },
+ "joints": [
+  {
+   "joint": "J1",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "K",
+   "part": "O20 v5 hub, MR117-2RS pair, cap 18.25 mm (clock spring 0.3 x 5 1.4310 +C1900 217 mm, 0.01 N.m/rad, 0.04 N.m preload); stops A / B = an opposed pair of O3 dowels in two 56.7-deg arc slots; encoder",
+   "axis_offset_mm": 0.0,
+   "passive": true,
+   "sensed": true
+  },
+  {
+   "joint": "J2",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair; q2 stops = O3 dowel in a 113.3-deg arc slot",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "J3",
+   "part": "O20 x 12.25 v5 hub, MR117-2RS pair",
+   "axis_offset_mm": 14.16
+  }
+ ],
+ "kinematics": {
+  "az": 101.6411,
+  "el": 67.8563999998592,
+  "a": [
+   37.91369801714285,
+   57.42984227065394
+  ],
+  "w": [
+   77.28628971871456,
+   -7.48346673203337
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   1
+  ],
+  "axis_points_mm": [
+   [
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    -0.0,
+    0.0,
+    -0.0
+   ],
+   [
+    -0.266,
+    -13.8,
+    -3.175
+   ]
+  ],
+  "axes": [
+   [
+    0.076057,
+    0.926242,
+    0.369176
+   ],
+   [
+    -0.43371,
+    0.631005,
+    0.643217
+   ],
+   [
+    -0.127047,
+    -0.22008,
+    0.967173
+   ]
+  ],
+  "axis_line_offsets_mm": [
+   0.0,
+   0.0,
+   14.16
+  ],
+  "u2_check_deg": 9e-05,
+  "seats": {
+   "az1": 101.6411,
+   "el1": 67.8564,
+   "az2": 48.6927,
+   "el2": 42.0409,
+   "wd": 66.5965,
+   "wa": -9.6278,
+   "b3": 0.3354
+  },
+  "knee": {
+   "lE": 73.8692,
+   "lc": 28.6946,
+   "phiE": 1.3552,
+   "phib": -53.1496,
+   "stk": 5.791,
+   "ang_min": 30.5
+  },
+  "knee_mid_m_mm": [
+   -12.574,
+   0.669,
+   0.0
+  ],
+  "hub_r_mm": [
+   10.0,
+   10.0,
+   10.0
+  ],
+  "knuckle": {
+   "uK": [
+    -0.28464,
+    0.95476,
+    -0.0861
+   ],
+   "bk1": 33.8083,
+   "bk2": 47.8921,
+   "sK": -1,
+   "psiA_deg": -55.839,
+   "a1max": 66.4696,
+   "dK_stop_B_deg": -56.652,
+   "q2_stops_deg": [
+    97.419,
+    -15.848
+   ],
+   "smlo": 7.3286,
+   "smhi": 7.377,
+   "note": "az/el/a/w = the 3R with K on stop A (state A, every clip frame but 8 of Wash opposite shoulder); K opens about uK through GH past J2's stop"
+  }
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "minarc_kitrule_bdp",
+  "note": "base rides the scapula on the user's scapula handler, carried directly at the J1 hub ring (no tab)"
+ },
+ "built_with": "pipeline/conformal/param_cad/user_style_minarc.py (user_style / user_style_pinknee parts: v5 O20 hubs, K clock-spring cap, hugging machined bars 1a / 1b / 2, O3 dowel-in-arc-slot stops (K opposed pair), member 3, knee link + IGLIDUR-PIN stacks, BOTTOM fused with the pad mount) on the L1 design's frames and clips (l1_minarc-pick1)",
+ "label": "minarc-stop-knuckle-4r pick1 (docs/research/minarc_final_polish/picks/pick1_priced.json + a1max 66.4696 (K stop B fix)), full CAD in the user's style",
+ "fit_bench": [
+  60,
+  160
+ ],
+ "fold_margin": 5.5,
+ "build_fixes": {
+  "k_pair": true,
+  "e_cap": true,
+  "knee_stop_deg": 149.5,
+  "spring": {
+   "rate": 0.01,
+   "length_mm": 217.0,
+   "steel": "1.4310 +C1900",
+   "preload": 0.04,
+   "preload_note": "0.08 -> 0.04 N.m (2026-10-16, docs/research/pick1_k_hold.md): R17 drift 9.3 -> 3.7 deg; hold 1.13x the 2 g real-direction state-A demand (0.0355), 1.36x the 1 g any-direction demand; geometry unchanged (0.64 preload turns instead of 1.27)"
+  }
+ },
+ "faces_mm": [
+  49.11,
+  60.71,
+  79.97
+ ],
+ "fK_mm": 57.9,
+ "tr": 87.16,
+ "stack_mm": {
+  "pin_stack_mm": 5.791,
+  "plate_tp": 2.6455,
+  "run": 0.5,
+  "knee_level_tr": 87.161,
+  "f": [
+   49.11,
+   60.708,
+   79.966
+  ],
+  "fK": 57.902,
+  "capK_mm": 6.0,
+  "hubK_crown_mm": 18.25,
+  "boss": [
+   87.161,
+   89.807
+  ],
+  "knee": [
+   90.307,
+   92.952
+  ],
+  "E": {
+   "x": [
+    8.0,
+    69.37
+   ],
+   "under": [
+    79.97,
+    87.16
+   ],
+   "thin_from": 67.0,
+   "rim": 67.87,
+   "cap": 89.807,
+   "top_before_cap": 89.807,
+   "stations_capped": 0,
+   "min_thickness": 2.645,
+   "knee_link_underside": 90.307
+  },
+  "knee_link_mm": [
+   40.69,
+   10.0,
+   2.6455
+  ],
+  "hubs_r": [
+   10.0,
+   10.0,
+   10.0,
+   10.0
+  ],
+  "retainer": [
+   93.452,
+   94.352
+  ],
+  "full_pin_stack_mm": 7.191,
+  "stops": {
+   "K": {
+    "stop_A_deg": 0.0,
+    "stop_B_deg": -56.652,
+    "a1max": 66.4696,
+    "travel_deg": 56.652,
+    "dowel_home_angle_deg": 66.0,
+    "dowel_home_angles_deg": [
+     66.0,
+     246.0
+    ],
+    "pair": true,
+    "slot_deg": [
+     -1.96,
+     77.31
+    ],
+    "clearance_to_lower_strap_deg": 17.2,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   },
+   "J2": {
+    "q2_stops_deg": [
+     97.419,
+     -15.848
+    ],
+    "window_deg": [
+     -15.848,
+     97.419
+    ],
+    "travel_deg": 113.266,
+    "dowel_home_angle_deg": 205.0,
+    "dowel_home_angles_deg": [
+     205.0
+    ],
+    "pair": false,
+    "slot_deg": [
+     177.84,
+     313.73
+    ],
+    "clearance_to_lower_strap_deg": 79.06,
+    "dowel_mm": [
+     3.0,
+     0.5,
+     6.15
+    ],
+    "slot_r_mm": 7.75,
+    "slot_w_mm": 3.1,
+    "end_clearance_mm": 0.02,
+    "frame": "angles in frame_of(axis) of the lower member: dowel centre = home angle + joint angle"
+   }
+  },
+  "knee_stop": {
+   "ang_stop": 149.5,
+   "side": 1.0,
+   "alpha_home_deg": 125.495,
+   "check": {
+    "poses": 28,
+    "max_err_deg": 0.0,
+    "sides": [
+     1
+    ]
+   },
+   "tooth_r_min": 7.889,
+   "face": {
+    "s": [
+     6.8,
+     9.2
+    ],
+    "l": 4.0,
+    "z": [
+     88.307,
+     89.807
+    ]
+   },
+   "contact_area_mm2": 3.6,
+   "model_window_edge_deg": 153.855,
+   "fit_bench_knee_max_deg": 153.082,
+   "fit_bench_poses_past_stop": 2
+  }
+ },
+ "bench": {
+  "near_touch_gap": 15.94,
+  "gap": 11.57,
+  "reach": 0.8063,
+  "follow": 1.0,
+  "inband14": 0.8936,
+  "contact": 0.0156,
+  "inband10": 0.5596
+ },
+ "note": "R17's dynamics judge models the orientation-equivalent spherical 3R with K on stop A (kinematics az/el/a/w); K (opens past J2's stop on 8 frames of one clip, dK <= 2.2 deg), the J3 line offset and the knee's 2 passive pins are not in its MuJoCo model",
+ "level": "L2 user-style (full CAD of the generation-4 winner, gen 4b: the verified polished config pick1)",
+ "l1_design": "l1_minarc-pick1"
+}

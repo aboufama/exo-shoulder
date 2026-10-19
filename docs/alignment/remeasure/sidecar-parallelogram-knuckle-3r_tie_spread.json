@@ -1,0 +1,100 @@
+{
+ "what": "sibling fit-bench ties of sidecar-parallelogram-knuckle-3r worn frozen (fit Bench(60,160) fast -> Bench(110,360) exact) through docs/concepts/verify/sidecar-parallelogram-knuckle-3r.py frozen_wear, unchanged; skeptic review 2026-10-16",
+ "ties": [
+  {
+   "k": 947,
+   "fit_inband14": 0.9,
+   "fit_gap": 10.63,
+   "params": {
+    "az1": 100.2099,
+    "el1": 67.2374,
+    "az2": 43.3084,
+    "el2": 44.8363,
+    "wd": 66.0109,
+    "wa": -10.4069,
+    "b3": 0.4376,
+    "lc": 23.2867,
+    "phib": -66.9953,
+    "ang_min": 24.5519,
+    "smhi": 18.5307,
+    "smlo": 5.0,
+    "kK": 1.6598,
+    "r_lobe": 8.5,
+    "r_h": 15.5,
+    "beta": -92.9061,
+    "hl": 3.15,
+    "zr": 0.5686,
+    "La": 16.6852,
+    "s_arm": 4.0,
+    "chain": "lead",
+    "ends": "rc",
+    "law_mode": "lin"
+   },
+   "frozen": {
+    "gap": 18.54,
+    "reach": 0.7306,
+    "follow": 1.0,
+    "inband14": 0.8998,
+    "inband10": 0.5147,
+    "contact": 0.0158
+   },
+   "near1": 20.17,
+   "near2": 46.38,
+   "near2_poses": 42,
+   "min_mm": 0.73,
+   "secs": 238.3,
+   "exact": true
+  },
+  {
+   "k": 2797,
+   "fit_inband14": 0.9018,
+   "fit_gap": 10.63,
+   "params": {
+    "az1": 97.9409,
+    "el1": 66.8372,
+    "az2": 40.6503,
+    "el2": 44.6019,
+    "wd": 70.1058,
+    "wa": -10.5634,
+    "b3": 0.3446,
+    "lc": 28.8186,
+    "phib": -59.2288,
+    "ang_min": 24.8284,
+    "smhi": 19.2481,
+    "smlo": 5.0,
+    "kK": 1.2678,
+    "r_lobe": 7.3276,
+    "r_h": 15.5,
+    "beta": -96.8786,
+    "hl": 3.15,
+    "zr": 0.0,
+    "La": 14.4465,
+    "s_arm": 4.474,
+    "chain": "lead",
+    "ends": "rc",
+    "law_mode": "lin"
+   },
+   "frozen": {
+    "gap": 19.97,
+    "reach": 0.7111,
+    "follow": 1.0,
+    "inband14": 0.9015,
+    "inband10": 0.5181,
+    "contact": 0.0108
+   },
+   "near1": 21.06,
+   "near2": 47.17,
+   "near2_poses": 38,
+   "min_mm": 0.78,
+   "secs": 236.5,
+   "exact": true
+  }
+ ],
+ "claim_k2666": {
+  "fit_inband14": 0.9049,
+  "frozen_gap": 19.13,
+  "near1": 20.22,
+  "near2": 50.14,
+  "near2_poses": 44
+ }
+}

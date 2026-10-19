@@ -1,0 +1,478 @@
+{
+ "id": "dipped-law-groove-knuckle-3r",
+ "name": "Dipped K law: the slaved knuckle closes below stop A in the mid-folded band to lift hub 2 off the bunched deltoid (embodiment 1, spring-closed lobe dip, on the lead + kneewin's centred knee)",
+ "lens": "round10:low-complexity-at-the-lead's-reach (lens 3)",
+ "family": "slaved-knuckle 3R, non-monotone K law",
+ "active_dof": 3,
+ "passive_dof": 5,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-17T04:43:40Z",
+ "reach": 0.7688,
+ "follow": 1.0,
+ "inband14": 0.8987,
+ "inband10": 0.5168,
+ "contact": 0.0214,
+ "gap": 15.39,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.8993,
+ "v_inband10": 0.5197,
+ "v_gap": 18.64,
+ "n_configs": 14,
+ "complexity": 20.25,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 5,
+  "moving_bodies": 6,
+  "joints": 9,
+  "closed_loops": 3,
+  "sliding_pairs": 0,
+  "rolling_pairs": 2,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 12,
+  "catalogue_parts": 15,
+  "notes": "the lead's parts re-cut (embodiment 1, no new part): lobe in hub 2's cap re-ground with the dip (0.068 mm deep at dipD 1, s_arm 4.05 / g 2.47), stop-A dowel slot lengthened to the dip floor (-2.37 deg of K), flank re-synthesised over [-3.0, 43.8] deg of K with the bent arm built at the dip floor; clock spring now loads the lobe through the whole dwell (watch: unproven spring-closed cam). Knee = kneewin's centred two-pin knee, unsensed. J1/K/J2/J3 O20 MR117-2RS; K slaved (clock-spring cap), never read; lobe ground into hub 2's cap ring -> bell crank (MR63ZZ pair, pin in link 1b, boss stacked on link 1b) -> bent long arm (3 mm Ti, straight run + arc concentric with hub K, 5-axis tip) -> MR63ZZ roller on an integral O3 Ti stub of the crank (retaining head O4.5 x 0.8 under the roller, sampled as metal) -> conjugate flank milled into",
+  "source": "roller-longdyad-knuckle-3r screen 2026-10-16",
+  "confidence": "medium",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  }
+ },
+ "best_params": {
+  "bk1": 26.0,
+  "bk2": 38.0336,
+  "a1max": 58.7678,
+  "kK": 2.1534,
+  "smhi": 16.8433,
+  "smlo": 5.0,
+  "g": 2.4696,
+  "beta": -173.4638,
+  "r_c": 15.2211,
+  "lift": 1.027,
+  "hl": 2.1535,
+  "zr": 4.0242,
+  "s_arm": 4.0484,
+  "r_lobe": 8.2409,
+  "az1": 95.3929,
+  "el1": 67.8974,
+  "az2": 45.8211,
+  "el2": 41.0855,
+  "wd": 66.8662,
+  "wa": -10.6559,
+  "b3": 0.329,
+  "lc": 27.0,
+  "phib": -96.6,
+  "ang_min": 20.0,
+  "cprog": 0.0,
+  "chain": "free",
+  "near2": 1,
+  "law_mode": "lin",
+  "lE": 82.0,
+  "phiE": 3.8,
+  "dipD": 1.0,
+  "dip_ref": 1.0,
+  "dip_thc": 53.0,
+  "dip_w": 12.0,
+  "dip_shape": 1
+ },
+ "fast": {
+  "bench": "Bench(60,160) fast",
+  "plain": 15.39,
+  "near1": 15.39,
+  "near2": 23.71,
+  "min_metal_mm": 1.06,
+  "control_D0": {
+   "plain": 14.28,
+   "near2": 20.2,
+   "min_metal_mm": 0.19
+  }
+ },
+ "frozen": {
+  "bench": "Bench(110,360) exact, fit-60 shape frozen (self-measured, not a verifier)",
+  "gap": 18.64,
+  "reach": 0.725,
+  "follow": 1.0,
+  "inband14": 0.8993,
+  "inband10": 0.5197,
+  "contact": 0.0107,
+  "near1": 20.81,
+  "near2": 35.69,
+  "near2_poses": 34,
+  "min_metal_mm": 0.07,
+  "why": {
+   "fold": 90,
+   "parts": 5,
+   "contact": 4
+  },
+  "overhead": {
+   "ws": 28,
+   "reach": 0.2857,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.8949,
+   "inband10": 0.5665,
+   "why_not": {
+    "fold": 15,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 3,
+    "contact": 2
+   }
+  },
+  "parts_ib14": {
+   "hub1": 1.0,
+   "hubK": 0.992,
+   "hub2": 0.958,
+   "hub3": 0.743,
+   "E": 0.972,
+   "boss": 0.992,
+   "pad": 1.0,
+   "knee": 0.94,
+   "crank": 0.805,
+   "roller": 0.935,
+   "horn": 0.955,
+   "L1a": 0.98,
+   "L1b": 0.935,
+   "L2": 0.737
+  },
+  "near_touch_low": [
+   {
+    "mm": 0.07,
+    "i": 139,
+    "kind": "ws",
+    "plane": -60.0,
+    "elev": 60.0,
+    "axial": 105.0
+   },
+   {
+    "mm": 0.48,
+    "i": 203,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 90.0,
+    "axial": 45.0
+   },
+   {
+    "mm": 0.61,
+    "i": 379,
+    "kind": "ws",
+    "plane": 105.0,
+    "elev": 30.0,
+    "axial": -120.0
+   },
+   {
+    "mm": 0.94,
+    "i": 230,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "mm": 1.09,
+    "i": 376,
+    "kind": "ws",
+    "plane": 105.0,
+    "elev": 15.0,
+    "axial": -135.0
+   }
+  ],
+  "drive": {
+   "dK_lim": 43.8,
+   "why_lim": "pressure_horn",
+   "dK_neg": -3.0,
+   "why_neg": "CRK-hubK",
+   "dK_dip_taken": -2.37,
+   "clear_hubK_min": 1.04,
+   "pa_crank_max_taken": 8.3,
+   "pa_horn_max_taken": 43.0,
+   "pa_horn_dip_max": 16.6,
+   "crest_exact": 9.58
+  }
+ },
+ "frozen_D4": {
+  "bench": "Bench(110,360) exact, fit-60 shape frozen (self-measured, not a verifier)",
+  "gap": 21.1,
+  "reach": 0.6972,
+  "follow": 1.0,
+  "inband14": 0.9031,
+  "inband10": 0.5316,
+  "contact": 0.0082,
+  "near1": 22.75,
+  "near2": 78.38,
+  "near2_poses": 83,
+  "min_metal_mm": 0.07,
+  "why": {
+   "fold": 101,
+   "parts": 5,
+   "contact": 3
+  },
+  "overhead": {
+   "ws": 28,
+   "reach": 0.2857,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.8963,
+   "inband10": 0.5735,
+   "why_not": {
+    "fold": 15,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 3,
+    "contact": 2
+   }
+  },
+  "parts_ib14": {
+   "hub1": 1.0,
+   "hubK": 0.99,
+   "hub2": 0.971,
+   "hub3": 0.742,
+   "E": 0.972,
+   "boss": 0.992,
+   "pad": 1.0,
+   "knee": 0.94,
+   "crank": 0.833,
+   "roller": 0.936,
+   "horn": 0.942,
+   "L1a": 0.976,
+   "L1b": 0.941,
+   "L2": 0.735
+  },
+  "near_touch_low": [
+   {
+    "mm": 0.07,
+    "i": 139,
+    "kind": "ws",
+    "plane": -60.0,
+    "elev": 60.0,
+    "axial": 105.0
+   },
+   {
+    "mm": 0.61,
+    "i": 379,
+    "kind": "ws",
+    "plane": 105.0,
+    "elev": 30.0,
+    "axial": -120.0
+   },
+   {
+    "mm": 0.95,
+    "i": 48,
+    "kind": "clip",
+    "plane": 78.0999984741211,
+    "elev": 143.10000610351562,
+    "axial": -67.0999984741211
+   },
+   {
+    "mm": 0.99,
+    "i": 53,
+    "kind": "clip",
+    "plane": 77.99330139160156,
+    "elev": 142.79144287109375,
+    "axial": -67.0177001953125
+   },
+   {
+    "mm": 1.04,
+    "i": 371,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 150.0,
+    "axial": -60.0
+   }
+  ],
+  "drive": {
+   "dK_lim": 36.5,
+   "why_lim": "pressure_horn",
+   "dK_neg": -10.0,
+   "why_neg": "CRK-hubK",
+   "dK_dip_taken": -9.36,
+   "clear_hubK_min": 1.04,
+   "pa_crank_max_taken": 8.4,
+   "pa_horn_max_taken": 43.0,
+   "pa_horn_dip_max": 22.6,
+   "crest_exact": 9.57
+  }
+ },
+ "frozen_control_D0": {
+  "gap": 19.33,
+  "source": "kneewin (judge round 10, same code path; fast reproduced to the digit by this model at dipD 0)"
+ },
+ "lead": {
+  "id": "roller-longdyad-knuckle-3r",
+  "frozen": 18.67,
+  "near1": 20.3,
+  "near2": 33.1,
+  "held_out": 23.73
+ },
+ "held_out": {
+  "bench": "held-out set (verify/skin-normal-3r-pin-knee-polish.py held_bench), fit-60 shape frozen, exact",
+  "best_D1": {
+   "gap": 24.07,
+   "reach": 0.6807,
+   "follow": 1.0,
+   "inband14": 0.8982,
+   "inband10": 0.5188,
+   "contact": 0.0196,
+   "why": {
+    "fold": 273,
+    "parts": 14,
+    "contact": 17
+   },
+   "near1": 26.94,
+   "near2": 38.72,
+   "min_metal_mm": 0.33,
+   "overhead_reach": 0.2535
+  },
+  "control_D0": {
+   "gap": 22.97,
+   "reach": 0.6933,
+   "follow": 1.0,
+   "inband14": 0.8963,
+   "inband10": 0.5145,
+   "contact": 0.0193,
+   "why": {
+    "fold": 261,
+    "parts": 14,
+    "contact": 17
+   },
+   "near1": 26.26,
+   "near2": 37.52,
+   "min_metal_mm": 0.33,
+   "overhead_reach": 0.2535
+  },
+  "lead": 23.73
+ },
+ "convergence_gate": {
+  "gain_second_half": 0.0,
+  "gain_last_third": 0.0,
+  "top5_spread_score": 0.23,
+  "scope": "10-config 1-D trade sweep (dipD 1-3 x 3 band shapes at dip_ref 1 + D=0 control) and 4 local probes; the 242-config farm LHS co-fitting the drive did not return in the time box (farm showed 16 jobs in progress, 0 completions for 30+ min) - NOT a converged search of the drive co-fit, so not called dead"
+ },
+ "verdict": "Level with the lead, not a lead change. Frozen exact Bench(110,360) at the best dip (dipD 1, th_c 53, w 12, arm built at the dip floor) is 18.64 (score 93.22) against the lead's 18.67 and its own D=0 control (kneewin centred knee) 19.33. The dip recovers 2 contact poses (6 -> 4), but the shared flank stroke costs 2 fold poses (88 -> 90, dK_lim 46.2 -> 43.8). Reach stays 0.725 and overhead 8/28. That is -0.03, under the 1-point rule. The recovered 203 sits at 0.48 mm (near-1 20.81 vs the lead's 20.30). Held out, the dip LOSES: 24.07 vs its own D=0 control 22.97 (fold 261 -> 273, contacts 17 = 17) and the lead's 23.73. The bench gain is the two poses 182 / 203; the stroke cost generalises and the contact gain does not. Deeper dips lose on the bench too: dipD 4 gives 21.10.",
+ "limiter": "The roller-flank's pressure-angle-capped K stroke (~46 deg, counted from the arm's build phase) is shared by the dip and the stretched rise: a dip of D deg of a1e costs ~2.35 D deg of K off dK_lim (46.2 -> 43.8 / 41.2 / 38.8 / 36.5 at D 1 / 2 / 3 / 4), at ~1 fold pose per deg of K on Bench(110,360). Built at the old rest, the bent arm closes on hub K at 0.18 mm per deg of backward swing (CRK-hubK < 1 mm at -0.75 deg) and the flank cusps below -5 deg, so the arm must be built at the dip floor. Measured on the lead cell, frozen exact Bench(110,360), workspace poses at th ~109-112 (the stretched drive wall).",
+ "note": "Model: the lead's code loaded unchanged. A DipDesign subclass changes the state-A IK to a1e = a1 - D (1-x^2)^2 on the design's own closure branch; a DipModel subclass synthesises the drive over the closing range and puts the crank on the SIGNED opening. Spec corrections: (1) a C1 bump instead of the parabola, which kinks at the band edges; (2) msub (the stretched law's free-K rule) is not required on dipped poses: state-A poses sit at msub 0.2-0.6 and requiring it dropped all 41 dipped fit poses; (3) the cam is checked on q2: monotone, rate <= 1.9 (limit 3.45), lobe pressure angle <= 25 at D 8, lobe dip 0.07-0.53 mm. Frozen exact Bench(110,360): D 0 19.33 (control), D 1 18.64, D 4 21.10; the lead 18.67. Held out: D 1 24.07, D 0 control 22.97, lead 23.73. Side finding for the planner: the centred-knee control (kneewin), rejected on the bench at 19.33 vs 18.67, is 0.76 BETTER than the lead held out (22.97 vs 23.73). Red team: the 0.07 mm pinch at (-60, 60, 105) is unchanged; the recovered 203 is at 0.48 mm; at D 4, 83 poses sit under 2 mm (near-2 78.38); the arm vs hub K at the dip floor is 1.04 mm, the edge of the rule. Prediction: a 4-deg dip on top of the lead's 46-deg stretched stroke needs ~55.6 deg of flank in total, which is the round-9 long-flank regime measured dead (boss on the deltoid), so co-fitting the drive should not rescue the deep dip. The lever needs an independent K input below stop A (embodiment 2, groove + nose, after groove-desmo's fit gate). Kneeless control cell (b) not run: kneeless imports its own copy of the lead's module, and the patch did not fit the time box. VERIFIED 2026-10-17 06:12 UTC (independent skeptic, docs/concepts/verify/dipped-law-groove-knuckle-3r.py): v_gap 18.64 (score 93.22) on Bench(110,360) exact frozen with signed-K drive checks, frame and lobe-cam closure, coupled rate, flood (full 0 dropped, knn 20.32) - 0 of 371 bench / 0 of 850 held-out taken poses fail; envelope-corrected 18.57; held out 24.07; D=0 control through the same harness 19.33. Champion spherical 3R on the same bench: 75.94 (risley-turret verifier; 66.97 through the knuckle code and checks). Level with the lead, not a lead change.",
+ "doc": "docs/concepts/dipped-law-groove-knuckle-3r.md",
+ "verification": {
+  "t": "2026-10-17T06:12:00Z",
+  "harness": "docs/concepts/verify/dipped-law-groove-knuckle-3r.py (claim model unchanged; round roller-flank verifier retargeted at DipModel, drive checks rewritten on the SIGNED K and the crank build phase kref; added frame consistency, lobe cam closure on q2, whole-dwell cam monotonicity, coupled rate per dipped pose, lead th_margin in both readings, flood, --head envelope, D=0 control through the same harness)",
+  "bench_frozen_exact": {
+   "gap": 18.64,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8993,
+   "inband10": 0.5197,
+   "contact": 0.0107,
+   "near1": 20.81,
+   "near2": 35.69,
+   "min_metal_mm": 0.07,
+   "overhead_reach": 0.2857,
+   "why": {
+    "fold": 90,
+    "parts": 5,
+    "contact": 4
+   },
+   "poses_failing": 0,
+   "n_taken": 371
+  },
+  "bench_envelope": {
+   "gap": 18.57,
+   "near1": 20.74,
+   "near2": 35.69
+  },
+  "held_out": {
+   "gap": 24.07,
+   "reach": 0.6807,
+   "inband14": 0.8982,
+   "contact": 0.0196,
+   "near1": 26.94,
+   "near2": 38.72,
+   "poses_failing": 0,
+   "n_taken": 850
+  },
+  "control_D0_same_harness": {
+   "gap": 19.33,
+   "near1": 20.96,
+   "near2": 35.08,
+   "why": {
+    "fold": 88,
+    "parts": 5,
+    "contact": 6
+   }
+  },
+  "flood": {
+   "full": 18.64,
+   "knn": 20.32,
+   "full_dropped": 0,
+   "knn_dropped": 6
+  },
+  "drive": {
+   "closure_mm": 0.0,
+   "roller_lug_min_mm": 3.733,
+   "pa_crank": 8.3,
+   "pa_horn": 42.9,
+   "dK_range": [
+    -3.0,
+    43.75
+   ],
+   "dK_taken": [
+    -2.37,
+    43.66
+   ],
+   "lobe_pa_dip": 2.1,
+   "lobe_dip_mm": 0.068,
+   "K_deg_per_10um_lobe": 0.35
+  },
+  "cam": {
+   "frames_max_deg": 0.0001,
+   "lobe_cam_closure_deg": 0.0,
+   "whole_dwell_mono": true,
+   "whole_dwell_rate_max": 2.29,
+   "dipped_rate_max": 1.764,
+   "rate_rule": 3.45
+  },
+  "th_margin": {
+   "lead_rule_lt5": {
+    "bench": 84,
+    "held": 202
+   },
+   "lead_rule_min": {
+    "bench": 0.204,
+    "held": 0.184
+   },
+   "coupled_min": {
+    "bench": 5.389,
+    "held": 5.406
+   },
+   "coupled_lt5": 0,
+   "reason": "all lead-rule failures are dipped poses with m_sub 0.18-0.20; with K slaved to q2 the active Jacobian is singular iff the coupled dth/dq2 = 0 (<= 1.76 rate, m_eff >= 21.4 on dipped poses), so m_sub is not a singularity of this chain"
+  },
+  "champion_same_bench": 75.94,
+  "champion_through_knuckle_code": 66.97,
+  "verdict": "VERIFIED (not refuted): 18.64 vs champion 75.94 same bench. Level with the lead (18.67, -0.03, under the 1-point rule), not a lead change: worse at 1 mm (+0.51), 2 mm (+2.59), held out (+0.34); vs its own D=0 control better on the bench by 0.69 but worse held out by 1.10.",
+  "issues": [
+   "the dip is a 0.068 mm lobe feature: 10 um of profile error = 0.35 deg of K vs a 2.37 deg floor (15 %); the 2 recovered bench poses sit on that tolerance (203 at 0.48 mm)",
+   "bench gain (2 contact poses) does not generalise: held out 24.07 vs control 22.97 / lead 23.73",
+   "motion preview uses th_c 50 / w 8 (fast best D>0), not the row's best_params th_c 53 / w 12 whose frozen number is claimed",
+   "the lead verifier's literal th_margin fails 84 / 202 dipped poses (m_sub ~0.2); not a singularity here (coupled reading 0 under 5), but family verifiers need the coupled-rate check for non-monotone K laws",
+   "drive co-fit (242-config farm LHS) not converged: screened, not dead"
+  ]
+ }
+}

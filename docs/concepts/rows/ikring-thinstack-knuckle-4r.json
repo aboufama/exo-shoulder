@@ -1,0 +1,670 @@
+{
+ "id": "ikring-thinstack-knuckle-4r",
+ "name": "The verified lead plus phi40-thinstack's arm-fixed slotted shell and T-nut carriage with the coil deleted: an ACTIVE one-sided J4 ring (psi 0..+40) about a GH-through axis tilted 8.5 deg toward taz 243, psi set per pose by a lead-first proximity IK",
+ "lens": "round301:rocker-redundant-4r (Keemink 2018 redundant non-orthogonal 4R at the arm end; the J0 under J1 is measured dead; resubmits deltoid-ring-knuckle-4r with buildable hardware: a profiled band is not a revolute and a circle about the humeral long axis does not fit the arm, a p90 defect of 19 mm)",
+ "family": "redundant 4R: the verified lead (conecut-knee-knuckle-3r) + an arm-side counted J4 about a GH-through axis, built as a plain curved slide (phi40-thinstack-relay-4r's verified 1.0 mm Ti shell + 14 x 14 T-nut carriage), active instead of sprung",
+ "active_dof": 4,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-19T02:37:05Z",
+ "reach": 0.8222,
+ "follow": 1.0,
+ "inband14": 0.8901,
+ "inband10": 0.5381,
+ "contact": 0.0098,
+ "gap": 9.75,
+ "v_reach": 0.8222,
+ "v_follow": 1.0,
+ "v_inband14": 0.8901,
+ "v_inband10": 0.5381,
+ "v_gap": 9.75,
+ "n_configs": 4,
+ "complexity": 48.0,
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 6,
+  "joints": 9,
+  "closed_loops": 3,
+  "sliding_pairs": 2,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 14,
+  "catalogue_parts": 18,
+  "notes": "phi40-thinstack-relay-4r's record minus the constant-force coil (one spring and one bought part fewer); the relay carriage is an ACTIVE counted J4 (14 x 14 Ti T-nut, h_c 1.4, 1.0 mm slotted circular Ti shell on a 4 mm liner, iglidur tape, slot-end stops 0 / 40, one ISO 8734 dowel); the lead conecut-knee-knuckle-3r unchanged otherwise (K slipper / bell-crank drive, J3 dowel stop, E strap + knee link bumped 1.2 over band 8, two-pin MR63ZZ knee)",
+  "source": "ikring-thinstack-knuckle-4r screen 2026-10-19",
+  "confidence": "medium",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "closed_loops": 1,
+   "rule": "user 2026-10-17: unsensed two-pin cuff knee = 0 (docs/concepts/skin-normal-3r-pin-knee.md line 584); v2.1 knee loop free"
+  }
+ },
+ "best_params": {
+  "PHI": 40.0,
+  "tilt": 8.5,
+  "taz": 243.0,
+  "sgn": 1,
+  "hw": 1,
+  "hwv": "plain",
+  "ds": 31.0,
+  "liner": 4.0,
+  "plate": 1.5,
+  "flange": 1,
+  "rt_extra": 1.5,
+  "pre": 0.0,
+  "bump": 1.2,
+  "band": 8.0,
+  "ramp": 6.0,
+  "flood": 0,
+  "delta": 3.5,
+  "carw": 14.0,
+  "coil": "none",
+  "lean": 1,
+  "h_c": 1.7,
+  "coilD": 12.0,
+  "coilL": 10.0,
+  "tsh": 1.0,
+  "lbr": 1,
+  "IK_RULE": "take-only",
+  "kstep": 2.5
+ },
+ "claim": {
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast at k = 0: 12.50)",
+  "gate_chain_only": 9.75,
+  "plain": 8.76,
+  "score": 96.45,
+  "near1": 19.65,
+  "near2": 47.0,
+  "ib14_pooled": 0.9034,
+  "ib14_chain_only": 0.8901,
+  "ws_taken": 296,
+  "overhead": [
+   13,
+   28
+  ],
+  "mid_90_140": [
+   60,
+   85
+  ],
+  "contacts": [
+   [
+    139,
+    -60.0,
+    60.0,
+    105.0,
+    -0.475
+   ],
+   [
+    205,
+    0.0,
+    105.0,
+    15.0,
+    -4.28
+   ],
+   [
+    237,
+    15.0,
+    165.0,
+    -60.0,
+    -8.928
+   ],
+   [
+    264,
+    30.0,
+    165.0,
+    -60.0,
+    -5.797
+   ]
+  ],
+  "T5_sum_mm": 19.48,
+  "T5_max_mm": 8.93,
+  "th_margin_min": 5.083,
+  "new_takes": 36,
+  "new_overhead": 5,
+  "new_under1": 1,
+  "new_1to2": 4,
+  "new_median_mm": 3.59,
+  "ring_added_overhead_under2": 1,
+  "k_hist_new": {
+   "2.5": 1,
+   "27.5": 1,
+   "20.0": 1,
+   "22.5": 2,
+   "7.5": 1,
+   "10.0": 1,
+   "32.5": 6,
+   "40.0": 14,
+   "30.0": 2,
+   "25.0": 3,
+   "37.5": 3,
+   "35.0": 1
+  },
+  "continuity": {
+   "dropped_relayed": 0,
+   "flood": {
+    "nodes": 1432,
+    "feasible_nodes": 1215,
+    "feasible_k0": 1035,
+    "runs": 1219,
+    "edges": 3116,
+    "seeds_stateA_k0": 513,
+    "seeds_elev0_k0": 171,
+    "nodes_conn": 1214,
+    "nodes_conn_elev0": 1214,
+    "relayed_only_nodes": 180,
+    "relayed_only_conn": 179,
+    "edge_dirs": {
+     "open": 33,
+     "ok": 6220
+    },
+    "secs": 32.0,
+    "rule": {
+     "step_deg": 2.0,
+     "passive_jump": 10.0,
+     "active_jump": 25.0,
+     "dk_max": 10.0,
+     "kstep": 2.5
+    }
+   }
+  },
+  "perpose": "docs/concepts/verify/ikring-thinstack-knuckle-4r/ik_bench_spec_perpose.json",
+  "first_run_rule": {
+   "rule": "closest-contact",
+   "gate": 11.87,
+   "plain": 10.88,
+   "contacts": 13,
+   "T5_sum_mm": 76.2
+  },
+  "k0_parked": {
+   "gate": 20.37,
+   "chain_only": 20.37,
+   "plain": 19.38,
+   "near1": 30.21,
+   "near2": 56.49,
+   "ibc": 0.8901,
+   "ib": 0.9034,
+   "ib10": 0.5381,
+   "reach": 0.7222,
+   "fol": 1.0,
+   "con": 0.016,
+   "ncon": 6,
+   "jams": 0,
+   "ws_taken": 260,
+   "overhead": [
+    8,
+    28
+   ],
+   "by_cause": {
+    "chain": 4,
+    "hardware": 2,
+    "chain+hw": 0
+   },
+   "hwc": [
+    [
+     127,
+     -0.15,
+     -4.3
+    ],
+    [
+     139,
+     -0.48,
+     -2.8
+    ]
+   ],
+   "stack": 0.0,
+   "arc": [
+    -4.34,
+    49.85
+   ],
+   "R_t": 76.75,
+   "shell_min": {
+    "i": 295,
+    "mm": 2.18,
+    "az_rel": -4.3
+   },
+   "bracket": [
+    28.9
+   ],
+   "secs": 179.3,
+   "R_b": 79.35,
+   "ends": {
+    "-6": [
+     2.18,
+     295
+    ],
+    "-4": [
+     2.48,
+     295
+    ],
+    "+36": [
+     4.89,
+     201
+    ],
+    "+38": [
+     5.28,
+     201
+    ],
+    "+40": [
+     5.61,
+     201
+    ],
+    "+42": [
+     6.11,
+     201
+    ],
+    "+44": [
+     6.47,
+     201
+    ],
+    "+46": [
+     6.95,
+     201
+    ],
+    "+48": [
+     7.76,
+     201
+    ]
+   },
+   "conn": null
+  }
+ },
+ "control": {
+  "gate": 14.46,
+  "plain": 13.47,
+  "near2": 55.46,
+  "ws_taken": 291,
+  "overhead": [
+   10,
+   28
+  ],
+  "contacts": 18,
+  "relayed": {
+   "n": 43,
+   "taken": 31,
+   "contact": 12,
+   "jam": 0,
+   "clip_relayed": 0,
+   "phi_max": 39.75
+  },
+  "continuity": {
+   "static": {
+    "gap": 13.47,
+    "reach": 0.8083,
+    "follow": 1.0,
+    "inband14": 0.9034,
+    "inband10": 0.5381,
+    "contact": 0.043
+   },
+   "dropped_relayed": 0,
+   "phi0_taken_not_connected": 0,
+   "flood": {
+    "env": 1432,
+    "env_ok": 1216,
+    "env_ok_phi0": 1035,
+    "env_relayed": 181,
+    "env_relayed_connected": 179,
+    "env_phi0_connected": 1035,
+    "edges": 3119,
+    "edges_ok": 3086,
+    "edge_fail": {
+     "open": 7,
+     "phi_jump": 25,
+     "passive_jump": 0,
+     "active_jump": 1
+    },
+    "seeds": 513
+   }
+  }
+ },
+ "held_out": {
+  "sample": "every held ws pose (952) + every 100th held clip frame",
+  "rule": "take-only (spec)",
+  "reverted": [
+   193,
+   248,
+   254,
+   256,
+   329,
+   330,
+   332,
+   335,
+   402,
+   405,
+   477,
+   481,
+   760,
+   922,
+   928,
+   935
+  ],
+  "k0_states": {
+   "193": {
+    "mm": null,
+    "why": "j3stop",
+    "pose": [
+     -15.0,
+     90.0,
+     30.0
+    ]
+   },
+   "248": {
+    "mm": -0.20651620709393415,
+    "why": "contact",
+    "pose": [
+     0.0,
+     90.0,
+     30.0
+    ]
+   },
+   "254": {
+    "mm": null,
+    "why": "j3stop",
+    "pose": [
+     0.0,
+     105.0,
+     30.0
+    ]
+   },
+   "256": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     0.0,
+     120.0,
+     -30.0
+    ]
+   },
+   "329": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     15.0,
+     120.0,
+     -15.0
+    ]
+   },
+   "330": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     15.0,
+     120.0,
+     0.0
+    ]
+   },
+   "332": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     15.0,
+     135.0,
+     -30.0
+    ]
+   },
+   "335": {
+    "mm": -7.082059124405258,
+    "why": "contact",
+    "pose": [
+     15.0,
+     150.0,
+     -60.0
+    ]
+   },
+   "402": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     30.0,
+     120.0,
+     0.0
+    ]
+   },
+   "405": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     30.0,
+     135.0,
+     -15.0
+    ]
+   },
+   "477": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     45.0,
+     135.0,
+     -15.0
+    ]
+   },
+   "481": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     45.0,
+     150.0,
+     -15.0
+    ]
+   },
+   "760": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     105.0,
+     135.0,
+     -120.0
+    ]
+   },
+   "922": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     150.0,
+     45.0,
+     -120.0
+    ]
+   },
+   "928": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     150.0,
+     60.0,
+     -105.0
+    ]
+   },
+   "935": {
+    "mm": null,
+    "why": "fold",
+    "pose": [
+     150.0,
+     75.0,
+     -105.0
+    ]
+   }
+  },
+  "gap_sample": 10.09,
+  "gate_sample": 10.1,
+  "reach": 0.813,
+  "ws_taken": 774,
+  "n_contacts": 11,
+  "T5_sum": 55.91,
+  "overhead": [
+   32,
+   71
+  ],
+  "mid": [
+   159,
+   229
+  ],
+  "new_takes": 119,
+  "new_under1": 10,
+  "new_1to2": 15,
+  "new_overhead": 14,
+  "new_overhead_under2": 3,
+  "k0": {
+   "summary": {
+    "gate": 23.86,
+    "chain_only": 23.86,
+    "plain": 23.86,
+    "near1": 35.75,
+    "near2": 55.73,
+    "ibc": 0.963,
+    "ib": 0.9713,
+    "ib10": 0.6397,
+    "reach": 0.688,
+    "fol": 1.0,
+    "con": 0.0266,
+    "ncon": 18,
+    "jams": 0,
+    "ws_taken": 655,
+    "overhead": [
+     18,
+     71
+    ],
+    "by_cause": {
+     "chain": 11,
+     "hardware": 4,
+     "chain+hw": 3
+    },
+    "hwc": [
+     [
+      20,
+      -0.22,
+      -4.3
+     ],
+     [
+      24,
+      -0.17,
+      4.6
+     ],
+     [
+      25,
+      -3.49,
+      -4.3
+     ],
+     [
+      26,
+      -5.51,
+      -4.3
+     ],
+     [
+      52,
+      -0.12,
+      1.6
+     ],
+     [
+      53,
+      -1.6,
+      0.1
+     ],
+     [
+      106,
+      -0.01,
+      0.1
+     ]
+    ],
+    "stack": 0.0,
+    "arc": [
+     -4.34,
+     49.85
+    ],
+    "R_t": 76.75,
+    "shell_min": {
+     "i": 47,
+     "mm": 1.84,
+     "az_rel": -1.4
+    },
+    "bracket": [
+     28.9
+    ],
+    "secs": 267.2,
+    "R_b": 79.35,
+    "ends": {
+     "-6": [
+      1.96,
+      47
+     ],
+     "-4": [
+      1.89,
+      47
+     ],
+     "+36": [
+      4.19,
+      251
+     ],
+     "+38": [
+      4.56,
+      251
+     ],
+     "+40": [
+      4.91,
+      251
+     ],
+     "+42": [
+      5.48,
+      251
+     ],
+     "+44": [
+      5.85,
+      251
+     ],
+     "+46": [
+      6.07,
+      12
+     ],
+     "+48": [
+      4.58,
+      12
+     ]
+    },
+    "conn": null
+   },
+   "ws_taken": 655,
+   "overhead": 18,
+   "mid": 105
+  },
+  "first_run": {
+   "gap": 11.82,
+   "gate": 11.82,
+   "contacts": 25,
+   "overhead": [
+    32,
+    71
+   ],
+   "ws_taken": 774
+  },
+  "summary_line": {
+   "overhead": [
+    32,
+    71
+   ],
+   "mid": [
+    159,
+    229
+   ],
+   "ws_taken": 774,
+   "contacts": 11,
+   "T5": 55.91,
+   "gap_sample": 10.09,
+   "new_overhead": 14,
+   "new_overhead_under2": 3
+  }
+ },
+ "doc": "docs/concepts/ikring-thinstack-knuckle-4r.md",
+ "verdict": "screened (a LABELLED 4-JOINT OPTION, 4 active joints, never the lead): Bench(110,360) exact frozen chain-only gate 9.75 (score 96.45), plain 8.76, reach 0.8222 (296/360), overhead 13/28 connected (lead 8), elev 90-140 60/85 (lead 39), 4 contacts (T5 19.48 mm vs the lead 20.24); pre-registered gates: pass <= 13.75 chain-only yes, connected overhead >= 12/28 yes (13), ring-added overhead takes under 2 mm 1 (<= 2) yes; held (every held ws pose + every 100th held clip frame, report only, spec rule): overhead [32, 71] (gate >= 25/71), reach 0.813, 11 contacts, gap on that sample 10.09; k = 0 parked: overhead 18/71, 655/952. Beats phi40-thinstack-relay-4r (14.06) and the unpowered least-phi control on the same hardware (14.46): actuation buys 4.71 gate points. Not converged (one pre-registered cell, no envsel sweep): not a dead verdict.",
+ "limiter": "(1) the ring hardware itself: parked at psi 0 it costs 2.09 gate points over the verified lead (20.37 vs 18.28: chain-only ib14 0.8901 vs 0.9012 from the 1.2 mm E-strap / knee-link bump over band 8; 2 contacts 127 / 139 at the POSTERIOR shell end and the L-lug bracket / flange at the pad azimuth; 9 of 110 fit-clip frames under 2 mm, 7 under 1 mm, the lead 0) - at 8.5 / 243 the shell sits 3.35 mm lower than at 12 / 235 (R_t 76.75 vs 80.1, bracket ramp 28.9 vs 24.1 deg); (2) the fold: 64 ws lost = fold 55, J3 stop 5, contact 4; the abduction cone stays 0/10 (J1 / J2 seat-level wall, the ring cannot reach it) and 5 stretched-fold IR overhead poses (plane 105-120, axial -120..-150) close at no k in [0, 40]; (3) the slot end: 14 of the 36 new takes choose k = 40.",
+ "note": "Model: phi40-thinstack-relay-4r imported read-only, coil deleted, pre-registered cell PHI 40 / delta 3.5 / axis 8.5 toward taz 243 / ds 31 / tsh 1.0 / band 8 / bump 1.2 / lean / L-lug bracket. k-table: the frozen lead (fit Bench(60,160) fast at k = 0 = 12.50) worn exact on Bench(110,360) at k = 0..40 step 2.5 WITH the ring metal and jam rule; lead-first proximity IK (psi 0 where the lead takes the pose, else the taking k with the largest min metal; a pose no k takes stays at psi 0); one final wear (rechoose, ik_bench_spec.json). SPEC GAP CLOSED: the first run closed no-take poses at their least-deep contact k (9 lost poses -> ring-made contacts to -15.4 mm, gate 11.87, T5 76.2); the controller-sensible rule is the claim. Continuity: an IK STATE flood (1432 nodes x 17 k, contiguous feasible-k runs as states, greedy |dk| <= 10, K / knee <= 10, actives <= 25): 1214 / 1215 nodes and 179 / 180 ring-only nodes connected; the spec seed set (state A at elev 0) is empty, so seeds = every k = 0 state-A node (513, the verified convention) and, second reading, every k = 0 elev-0 node (171): same 1214. 0 relayed takes dropped. th margin min 5.083 (0 under 5). New takes 36 (5 overhead: 316 3.50, 343 3.70, 370 1.70, 372 3.27, 399 3.14; 21 at elev 90-140): 1 under 1 mm (127, bracket 0.10 at k 2.5, single-k), 4 at 1-2 mm, median 3.59; k histogram 40: 14, 37.5: 3, 32.5: 6, rest spread. 1 / 2 mm readings 19.65 / 47.00 (lead 2 mm 34.84, phi40 47.16). RED TEAM: psi*(pose) jumps > 20 deg between 3 of 176 adjacent taken pose pairs (15 deg apart; max 32.5) - the kinematic path exists but the skin along the J4 sweep is unchecked; 2 single-k takes, 12 with a taking run < 10 deg; J4 holding torque / drive / slot friction unmodelled. CONTROL (unpowered least-phi, coil deleted, same hardware): 14.46 / 13.47, 291/360, overhead 10/28, 18 contacts (T5 77.49). CONVERGENCE GATE: not run - one pre-registered cell + parked + control (4 readings: best gained 0 over the last third trivially; top-5 spread n/a); the envsel sweep (axis 6-12 / 225-250, PHI 35, delta 2-5, ds, liner, floors 0/1/2) is the next step, with 12 / 235 in IK mode as the first control. Not run (time box, local CPU at load 25): Bench(60,160) IK reading, PHI 35, 12 / 235 IK, the full held in-band. held (every held ws pose + every 100th held clip frame, report only, spec rule): overhead [32, 71] (gate >= 25/71), reach 0.813, 11 contacts, gap on that sample 10.09; k = 0 parked: overhead 18/71, 655/952. | VERIFIED 2026-10-19 (independent skeptic, docs/concepts/verify/ikring-thinstack-knuckle-4r/verifier/) as a LABELLED 4-JOINT OPTION (4 counted joints J1 J2 J3 + the J4 ring, R5 cap met, R5-aim 3 not met; 0 passive translations), never the lead: v_gap 9.75 on Bench(110,360) exact frozen (chain-only gate; plain 8.76; score 96.45), reach 0.8222 (296/360), follow 1.0, ib14 0.8901 chain-only (pooled 0.9034), ib10 0.5381, 4 contacts (139 -0.48 ring bracket, 205 -4.28, 237 -8.93, 264 -5.80; T5 19.48 vs the lead's 20.24), overhead 13/28 (lead 8), elev 90-140 60/85, min th margin 5.083. The champion on the same bench and checks is 75.94 (risley-turret verifier's champion, kit checks + 1 mm clearance; the same convention as the phi40 verifier). Checks: (1) FULL independent re-run from scratch (fit, k = 0 wear, 16-k exact k-table, IK, final wear): k-table counts, k = 0 summary and every IK choice identical, gate 9.75. (2) Extended checks X1 + X2 of the phi40 verifier on the same final wear (every chain set incl. crowns vs shell / carriage / bracket, bracket top layer): 0 extra jams, 0 poses lost, gate 9.75; min non-adjacent chain-relay clearance 1.199 mm (E strap vs shell), adjacent knee crown vs bracket 0.869 mm at pose 399 (k 40; adjacent rule 0.15). Verifier per-pose dump v_xcheck_perpose.json equals the claim dump at all 470 poses (recomputed plain 8.75). (3) Partly METAL-AWARE IK state flood: at the 100 bench ws poses the IK had to move, a (pose, k) state exists only if that k takes the pose with metal: 36/36 new takes stay connected (1201 nodes vs 1214 kinematic). Edges and non-bench nodes stay kinematic: the skin along the J4 sweep between bench poses is still unmeasured (9 of 36 new takes have kinematically feasible but metal-bad k at the same pose). (4) Controller-resolution / travel red team (from the claim's own k-table): step 5 or 10 deg keeps 35/36 new takes (~10.03); travel 37.5 -> 10.03, 35 -> 11.14, 30 -> 11.97, 20 -> 14.47: the slot end carries 14/36 new takes. Issues, not refutations: R17 (proposed) - with the coil deleted J4 is an undriven spare joint in the unpowered MVP1, so 9.75 needs J4 commanded by the IK (the final powered product); the unpowered reading of this hardware needs the centring spring back (least-phi control 14.46 at this axis; phi40 14.06 at 12/235). T1: pose 127 is taken at 0.099 mm at a single k (2.5; a -0.15 mm hardware contact at k = 0). 2 mm reading 47.00 vs the lead's 34.84. Held-out not re-run (time box): the proposer's held sample reads gate 10.10, overhead 32/71, 11 contacts, T5 55.91."
+}

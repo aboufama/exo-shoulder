@@ -1,0 +1,72 @@
+[
+ {
+  "key": "held_out",
+  "refuted": false,
+  "evidence": "Missing measurement, not on file: rows/cam-coupled-4r.json v_gap null, v_* null; no docs/concepts/verify/cam-coupled-4r* file; the audit's remeasured.held false. No held_bench in the model. Stands."
+ },
+ {
+  "key": "continuity",
+  "refuted": false,
+  "evidence": "The claim carries no flood (row has no flood/connected field). A flood now IS on file and it confirms the concern: remeasure/cam-coupled-4r_fast.json flood.jump10 connected_ws 129 of static 146, and my re-run (remeasure/cam-coupled-4r_skeptic_fast.json flood.knn8 / knn16) 129 of 146 at both kNN-8 and kNN-16. See judgement:S5. Stands."
+ },
+ {
+  "key": "fold_margin",
+  "refuted": false,
+  "evidence": "No min-th on the row (fold_margin 5.0 is the parameter, used only by park(), which tiebreak 1 bypasses). Measured now and it is worse than missing: my re-measure on the claim bench (50.67 reproduced) th margin J1-J2-J3 min 0.000, median 0.193, 186 of 203 taken under TH fold_min 5.0 (remeasure/cam-coupled-4r_skeptic_fast.json th_margin_J1J2J3, th_lt5). Stands (gamed level carried by judgement:T3)."
+ },
+ {
+  "key": "idle",
+  "refuted": true,
+  "evidence": "Parser false positive. tools/alignment_audit.py _declared_joints line 575 declares K and crank whenever name/notes match 'slaved|drive|lobe|cam|...': here the name 'Cam-scheduled 4R'. The mechanism (rows/cam-coupled-4r.json mechanism.notes: J1-J4 + the roller-in-groove pair) has no knuckle K and no crank. Its one slaved coordinate, J2, moves: J2 joint value over the 203 taken claim-bench poses (mod 360) min 159.69, max 289.44, span 129.8 deg, p05-p95 168.4-267.9 (99.5 deg); J1 span 324.6 deg (remeasure/cam-coupled-4r_skeptic_fast.json J2_value_mod360, J1_span_deg_taken), against TH idle_deg 2.0. (The probe's J2_span_deg 359.6 is a wrap artefact of ptp on +-180 values.)"
+ },
+ {
+  "key": "sampling",
+  "refuted": false,
+  "evidence": "The missing counts are measured now and they confirm the watch: per-part samples hub1-4 81 each, slot 776, link1 140, tail 161, link2 245, link3 203, neck 224 (2073); sample-weighted in-band 0.4032 vs part-weighted 0.3338 = +6.93 points > TH part_weight_watch 3.0 (under gamed 8.0); parts under 0.5 in band: hub2 0.00, tail 0.00, link1 0.02, link2 0.03, link3 0.09, hub3 0.15 (remeasure/cam-coupled-4r_skeptic_fast.json parts / dd_points). c_sampling with counts reads watch on both dd and the out-of-band parts. Stands."
+ },
+ {
+  "key": "judgement:T3",
+  "refuted": false,
+  "evidence": "Re-measured independently on Bench(60,160) fast (50.67 reproduced, model unchanged): th = angle(J1, J3) margin min 0.000, p05 0.004, median 0.193; 186 of 203 taken < 5 (TH fold_min 5.0, tools/concept_kit.py FOLD_MARGIN lines 25-30: 'a 3R (or any J1 -> J2 -> J3 dyad)'). J2 interior angle from straight: min 0.015, p05 0.97, median 7.0 deg; 52 of 203 within 5 deg of straight. The other dyad (J2-J3-J4, clamped at m3 0.5) min 0.796, 3 of 203 < 5. So the design keeps the 5 deg on NEITHER dyad. The verified 4R precedent reads every dyad: docs/concepts/verify/freek-oracle-route-knuckle-4r-polish-verify.py member_margins (one = min of meff and the sub-dyads), on file 5.59. The model's own reading holds (sing min 8.04 deg) and with J2 cam-held the J1-J2-J3 fold is not a singularity of the actuated map, so the wearer cost of the th reading is not shown; but CLAUDE.md: 'A different reading is the user's call, not the model's' (same ruling upheld on dipped-law-groove-knuckle-3r). Stands."
+ },
+ {
+  "key": "judgement:S5",
+  "refuted": false,
+  "evidence": "Re-run with controls (remeasure/cam-coupled-4r_skeptic_fast.json flood): kNN-8 704 edges and kNN-16 1409 edges both give 129 of 146 taken workspace poses connected (static 0.9125 -> connected 0.8063 ws reach, +10.6; +9.4 against the row's 0.90). Not a graph artefact: with every edge allowed the graph connects 146 / 146; with the jump test dropped 145 / 146, so the loss is branch switches. Example edge (-15,45,15) -> (0,30,0): J1 jumps 99.5 deg and J2 (passive) 58.8 deg in one 2 deg step with a J3-dyad branch change (q1 102.4 -> -158.1); the lost elev 90-105 island (planes 0-75) is internally smooth (jumps <= 3.5 deg, q1 139-151) but disconnected from the rest seeds. Over TH conn_gamed 3.0. Stands."
+ },
+ {
+  "key": "judgement:T5",
+  "refuted": false,
+  "evidence": "Depths re-read: remeasure/cam-coupled-4r_bench.json probe.contact_poses 82.02 + 29.96 + 2.35 + 1.42 + 1.09 = 116.84 mm (5 poses). CORRECTION: 6.23 mm is sidecar-longdyad's bench depth (RULINGS_DEPTH_REF, tools/alignment_audit.py line 307), not the lead's. The current lead (DEPTH_REF conecut-knee-knuckle-3r), read by the tool at 2026-10-19.1: bench 20.24 mm over 4 poses, deepest 8.93 (remeasure/conecut-knee-knuckle-3r_bench_perpose.json). Corrected: 116.84 vs 20.24 = x5.77, +96.6 mm, still over TH depth_ratio 2.0 and depth_floor_mm 5.0 on the same Bench(110,360) exact frozen wear. Instrument: under 2026-10-19.1 c_contact_depth on this row still reads 'not measured' (run by me), so T5 for THIS row reads the same as before; the reference's reading is now non-vacuous (20.24 / 60.97 mm). Stands."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "Reproduced from remeasure/cam-coupled-4r_bench.json: deep gap_near1 70.55 (9 poses), gap_near2 86.59 (33), gap_near3 135.05 (95), min_metal_mm 0.064; probe.ws_overhead140 taken 6, floor_hist 0-1: 3, 1-2: 1, 2-3: 2 (3 / 4 / 6 under 1 / 2 / 3 mm). Near-touch is report-only by the user's ruling, so watch (not gamed) is the right level, as ruled on dipped-law-groove. Stands."
+ },
+ {
+  "key": "judgement:NEW-hinge",
+  "refuted": false,
+  "evidence": "Reproduced from docs/concepts/sweeps/cam-coupled-4r.json stage cma2-housing-rule: 24 of the 26 lowest honest gaps sit at reach 0.9000 / follow 0.9500 exactly, 2 at reach 0.9062. Apples to apples: of the 38 verified / cad rows in docs/dashboard/data/morphs.json, 0 claim at both hinges, so the pattern is this row's own. Arithmetic checks: (0.900-0.7833)+(0.950-0.9182) = 14.85 of the +15.06 frozen exact drop. It overlaps judgement:P1 (same drop). Stands."
+ },
+ {
+  "key": "judgement:NEW-cam-pressure",
+  "refuted": false,
+  "evidence": "Re-derived from the model's kinematics() on the claim bench: pressure angle arccos(pa) over 203 taken poses max 54.11 deg, median 16.39; pa p05 0.67 = 47.9 deg at the 95th percentile (remeasure/cam-coupled-4r_skeptic_fast.json pa_deg; probe kin.pa); the model accepts pa >= 0.25 (75.5 deg, row best_params pa_min 0.25). The 45 deg limit is not a repo threshold (not in TH) and no friction model prices the feel, so it is a watch / proposal, not a gate. The measurement holds; not refuted."
+ },
+ {
+  "key": "judgement:R2",
+  "refuted": false,
+  "evidence": "Reproduced: docs/dashboard/data/morphs.json cam-coupled-4r sweep_t 2026-10-16T09:30:31Z, sweep_reach 0.7937, sweep_follow 1.0, sweep_inband14 0.5102 = sweep k 2432 (stage cma1-no-housing-rule), chosen over k 9706 (09:56:27Z, same 50.67) by tools/dash_build.py line 524 min(gap, t). I re-ran k 2432 through the unchanged model: gap 196.65, reach 0.3812, follow 0.25, in-band14 0.1523, groove_inner_mm -3.7. Stands."
+ },
+ {
+  "key": "judgement:P1",
+  "refuted": false,
+  "evidence": "Reproduced: my run of the model's evaluate() on Bench(60,160) fast gives 50.67 (reach 0.90, follow 0.95, ib14 0.4032, contact 0.0099); remeasure/cam-coupled-4r_bench.json fit_fast.gap 50.67 -> frozen.gap 65.73 (+15.06) through the model's frozen() with CB_EXACT=1, over TH ff_watch 14.0 (the fast -> verified drop the tool watches). No verifier, no held-out wear. Stands."
+ },
+ {
+  "key": "judgement:G6",
+  "refuted": false,
+  "evidence": "Facts check: the model builds 4 O20 hubs (hub1-hub4 in build()), rows/cam-coupled-4r.json active_dof 3, mechanism joints 5, closed_loops 1, complexity 11.75 (tool recomputes 11.75). CLAUDE.md track K1 counts 'a spherical 4R with a sprung / slaved redundant joint' as a 4-joint setup, which this is. Context, not a refutation: the 3-joint lead conecut-knee-knuckle-3r is also active_dof 3 with a slaved knuckle (mechanism joints 8, closed_loops 3, complexity 18.5), so the label follows the knuckle family's convention; which count the board uses for a slaved serial GH-centred joint is the user's call. Stands."
+ }
+]

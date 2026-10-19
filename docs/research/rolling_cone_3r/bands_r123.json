@@ -1,0 +1,137 @@
+{
+"cell": {
+"rigid": 1,
+"J1": {
+"kind": "roll",
+"ga": 13.669,
+"gb": 6.217,
+"beta": 39.543,
+"sign": 1
+},
+"J2": {
+"kind": "roll",
+"ga": 30.629,
+"gb": 5.659,
+"beta": -147.16,
+"sign": -1
+},
+"J3": {
+"kind": "roll",
+"ga": 15.275,
+"gb": 3.151,
+"beta": 87.177,
+"sign": 1
+}
+},
+"taken": 201,
+"members": [
+{
+"member": "J1 sun band (proximal)",
+"R_lo": 51.0,
+"off_body_rays": 0.0,
+"contact_poses": 0,
+"n_poses": 201,
+"inband14": 0.999,
+"inband10": 0.608,
+"min_mm": 1.2,
+"p95_mm": 11.6,
+"n_samples": 22
+},
+{
+"member": "J1 planet band (distal)",
+"R_lo": 51.0,
+"off_body_rays": 0.0,
+"contact_poses": 1,
+"n_poses": 201,
+"inband14": 1.0,
+"inband10": 0.756,
+"min_mm": 1.82,
+"p95_mm": 10.9,
+"n_samples": 22
+},
+{
+"member": "J1 O20 disc control (one level)",
+"R_lo": 51.0,
+"off_body_rays": 0.0,
+"contact_poses": 0,
+"n_poses": 201,
+"inband14": 0.998,
+"inband10": 0.627,
+"min_mm": 1.2,
+"p95_mm": 11.8,
+"n_samples": 81
+},
+{
+"member": "J2 sun band (proximal)",
+"R_lo": 64.0,
+"off_body_rays": 0.0021,
+"contact_poses": 4,
+"n_poses": 201,
+"inband14": 0.872,
+"inband10": 0.163,
+"min_mm": 1.99,
+"p95_mm": 14.6,
+"n_samples": 24
+},
+{
+"member": "J2 planet band (distal)",
+"R_lo": 135.0,
+"off_body_rays": 0.0031,
+"contact_poses": 6,
+"n_poses": 201,
+"inband14": 0.003,
+"inband10": 0.002,
+"min_mm": 2.08,
+"p95_mm": 31.8,
+"n_samples": 24
+},
+{
+"member": "J2 O20 disc control (one level)",
+"R_lo": 64.0,
+"off_body_rays": 0.0017,
+"contact_poses": 4,
+"n_poses": 201,
+"inband14": 0.824,
+"inband10": 0.165,
+"min_mm": 0.97,
+"p95_mm": 15.1,
+"n_samples": 81
+},
+{
+"member": "J3 sun band (proximal)",
+"R_lo": 80.0,
+"off_body_rays": 0.0,
+"contact_poses": 0,
+"n_poses": 201,
+"inband14": 0.432,
+"inband10": 0.223,
+"min_mm": 0.23,
+"p95_mm": 25.5,
+"n_samples": 16
+},
+{
+"member": "J3 planet band (distal)",
+"R_lo": 81.0,
+"off_body_rays": 0.0,
+"contact_poses": 0,
+"n_poses": 201,
+"inband14": 0.492,
+"inband10": 0.283,
+"min_mm": 1.01,
+"p95_mm": 24.7,
+"n_samples": 16
+},
+{
+"member": "J3 O20 disc control (one level)",
+"R_lo": 82.0,
+"off_body_rays": 0.0,
+"contact_poses": 0,
+"n_poses": 201,
+"inband14": 0.361,
+"inband10": 0.167,
+"min_mm": 0.9,
+"p95_mm": 27.9,
+"n_samples": 81
+}
+]
+}

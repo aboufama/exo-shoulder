@@ -1,0 +1,261 @@
+{
+ "rule": "the full CAD must not lose R1 / R6 / R16 against its own L1 (same judges, same steps: judge_all fast - R1 step 3, R2 6, R6 3, R16 12, R17 full; FEA skipped as the L1)",
+ "L1": "l1_slipper-nose",
+ "full": "user_slipper_nose",
+ "R1": {
+  "L1": 0.8203059124508549,
+  "full": 0.8109500242966065,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -0.94
+ },
+ "R1-aim": {
+  "L1": 0.4864932334363774,
+  "full": 0.47431306960132746,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -1.22
+ },
+ "R2": {
+  "L1": 24.87,
+  "full": 24.87,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": 0.0
+ },
+ "R3": {
+  "L1": 1.0,
+  "full": 1.0,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": 0.0
+ },
+ "R4": {
+  "L1": 0.7447736340013118,
+  "full": 0.7308386334122786,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": -1.39
+ },
+ "R6": {
+  "L1": 0.0,
+  "full": 0.0,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": 0.0
+ },
+ "R7": {
+  "L1": true,
+  "full": true,
+  "L1_status": "PASS",
+  "full_status": "PASS"
+ },
+ "R8": {
+  "L1": 112.0,
+  "full": 216.2,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": 104.2
+ },
+ "R11": {
+  "L1": 0.388,
+  "full": 0.26,
+  "L1_status": "PASS",
+  "full_status": "PASS",
+  "delta": -0.13
+ },
+ "R16": {
+  "L1": 0.6417,
+  "full": 0.6417,
+  "L1_status": "FAIL",
+  "full_status": "FAIL",
+  "delta": 0.0
+ },
+ "R17": {
+  "L1": true,
+  "full": true,
+  "L1_status": "PASS",
+  "full_status": "PASS"
+ },
+ "passing": {
+  "L1": 8,
+  "full": 8
+ },
+ "R1_by_clip_14mm": {
+  "Raise overhead": [
+   74.5,
+   73.1
+  ],
+  "Drink from a cup": [
+   87.1,
+   85.1
+  ],
+  "Comb hair": [
+   90.9,
+   90.3
+  ],
+  "Reach a high shelf": [
+   90.4,
+   90.1
+  ],
+  "Wash opposite shoulder": [
+   60.1,
+   59.3
+  ],
+  "Reach back pocket": [
+   95.8,
+   95.4
+  ],
+  "Wave": [
+   69.7,
+   68.4
+  ],
+  "Walking arm swing": [
+   97.6,
+   97.4
+  ]
+ },
+ "R1aim_by_clip_10mm": {
+  "Raise overhead": [
+   40.5,
+   39.3
+  ],
+  "Drink from a cup": [
+   41.4,
+   39.7
+  ],
+  "Comb hair": [
+   59.1,
+   57.9
+  ],
+  "Reach a high shelf": [
+   63.3,
+   62.4
+  ],
+  "Wash opposite shoulder": [
+   28.9,
+   27.9
+  ],
+  "Reach back pocket": [
+   66.9,
+   65.4
+  ],
+  "Wave": [
+   36.6,
+   35.7
+  ],
+  "Walking arm swing": [
+   63.4,
+   62.0
+  ]
+ },
+ "loses_against_L1": [
+  "R1"
+ ],
+ "R1_attribution": {
+  "method": "score_design.py's own covered-skin rule (nearest shoulder metal along the skin normal, cos >= 0.8, within 60 mm; same skin samples and seeds) with the nearest metal sample's PART recorded, every 9th clip frame (154 following frames), both designs; tools/r1_attrib.py <design dir> 9",
+  "L1": {
+   "covered": 3621234,
+   "in_band_2_14": 2845486,
+   "under2": 6,
+   "over14": 775742,
+   "frame_mean_share": 0.8242
+  },
+  "full": {
+   "covered": 3660858,
+   "in_band_2_14": 2844566,
+   "under2": 14,
+   "over14": 816278,
+   "frame_mean_share": 0.8152
+  },
+  "over14_delta_by_group": {
+   "base": 1076,
+   "dk": -946,
+   "l1a": 3904,
+   "l1b": 921,
+   "l2": 25274,
+   "l3": 5204,
+   "l4": 5103
+  },
+  "in_band_delta_by_group": {
+   "base": 1,
+   "dk": -213,
+   "l1a": 4906,
+   "l1b": 4186,
+   "l2": -16490,
+   "l3": -105,
+   "l4": 6795
+  },
+  "reading": "the in-band skin is the SAME (-920 of 2.85 M); the full CAD COVERS ~40 k more skin samples at > 14 mm (+1.1 %), which is the -0.9 point. By group: link 2 (l2) +25 k - its 4-strip machined bar sits MARGIN 0.1 + rounds above the model strap (underside over the L1 strap mean +0.15..0.19, max +0.83..1.24 mm at stations 27-29 / 2, raised by the user's <= 60-deg ramp ruling where the model strap drops 68 deg after J2 and before J3; 7.2 % of its surface lies 0.5-2.05 mm outside the L1 keep-outs, 98 % of that farther from GH): skin 13-14 mm under the model strap goes just out of band; member 3 (l3) +5 k (E strap side-view sketch, 13.8 % of its surface outside the L1 keep-out, median +2.0 mm); knee (l4) +5 k; link 1a (l1a) +4 k (the flank lug's back offset / web riser up to 13 mm over the L1's lug band); base +1 k; link 1b +1 k. The gen-6 cause (the CHORD arm: dk -15.6 k in band) is FIXED by the profile arm through the model's stations: dk in band 168.1 k vs the L1's 168.4 k, over-14 -0.9 k.",
+  "fix_route": "NOT fixed in this time box (a rebuild + R1 / R6 / R16 re-judge is ~50 min): (1) link 2 - MARGIN 0 and the model's 68-deg drops kept at J2 / J3 (link 2 is machined from solid: a tighter transition is allowed when stated, CAD ruling 2026-10-16), (2) member 3's E strap top and (3) link 1a's lug web riser trimmed to the L1 keep-out envelope; re-judge R1 / R6 / R16 against the L1."
+ },
+ "R16_step1": {
+  "L1": {
+   "share": 0.7032,
+   "fails": {
+    "chain_does_not_close": 0.2884,
+    "body_contact": 0.0084,
+    "part_interference": 0.0
+   }
+  },
+  "full": {
+   "share": 0.7039,
+   "fails": {
+    "chain_does_not_close": 0.2884,
+    "body_contact": 0.0077,
+    "part_interference": 0.0
+   }
+  },
+  "delta": 0.07,
+  "body_contact_attribution": {
+   "file": "pipeline/full-exo/designs/user_slipper_nose/judge_r16s1/body_attrib_step1.json",
+   "poses": 11,
+   "L1_poses": 12,
+   "reading": "11 body-contact poses (L1 12; the L1's near-touch k 116 [-60,60,105] no longer fails). At EVERY one the verified model's own metal is already inside the body at the same frame, 1.07-8.50 mm (link 2 behind the back at [-90..-75, 60, 105..120]: L2 1.6-5.5 mm; hub 2 at [15,105,15]: 1.07; the flank lug / crank overhead at elev 150-165: 4.45-8.50), so the bench already counts them lost: no pose is lost by the build. The tool's 'build excess' (7 of 11) is the built part 0.52-1.38 mm deeper than the model's sample rows at those already-lost poses (the 8-wide strap / lug back / crank boss edges past the model's samples). The gen-6 note 'link 1a overhead 6.4-10.4 mm' is the flank lug on link 1a + the crank arm."
+  }
+ },
+ "M5_R17": {
+  "return_mu0.087": {
+   "pass_": true,
+   "twist": 3.61,
+   "cuff_N": 0.5,
+   "M_GH": 0.111,
+   "K_vs_law": 0.133,
+   "liftoff": 0.0
+  },
+  "return_mu0.120": {
+   "pass_": true,
+   "twist": 3.46,
+   "cuff_N": 0.48,
+   "M_GH": 0.106,
+   "K_vs_law": 0.131,
+   "liftoff": 0.0006
+  },
+  "return_mu0.150": {
+   "pass_": true,
+   "twist": 3.32,
+   "cuff_N": 0.45,
+   "M_GH": 0.102,
+   "K_vs_law": 0.129,
+   "liftoff": 0.0
+  },
+  "forward_bound_mu0.120": {
+   "pass_": true,
+   "twist": 4.78,
+   "cuff_N": 0.71,
+   "M_GH": 0.158,
+   "K_vs_law": 0.124,
+   "liftoff": 0.0
+  },
+  "forward_bound_mu0.150": {
+   "pass_": true,
+   "twist": 5.0,
+   "cuff_N": 0.75,
+   "M_GH": 0.166,
+   "K_vs_law": 0.126,
+   "liftoff": 0.0
+  },
+  "L1_reference": "return proxy 3.58 / 3.42 / 3.28 deg twist; forward bound (rate + preload) at mu 0.15: 4.97 deg (skeptic 14:20)",
+  "method": "return: design.json build_fixes.spring.preload = 0.08 x eta (0.890 / 0.851 / 0.815), judge/dynamics.py full, on the farm (the L1's proxy); forward: preload 0.08 / eta AND rates / eta (the skeptic's bound), --quick, local. The judge does not model the nose's sliding friction directly: both are bounds."
+ }
+}

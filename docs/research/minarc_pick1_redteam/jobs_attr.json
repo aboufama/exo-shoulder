@@ -1,0 +1,30 @@
+[
+ {
+  "tag": "p1rt-attr-pick1-env",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-pick1-redteam.py attr env pick1 docs/research/minarc_pick1_redteam/attr_pick1_env.json > docs/research/minarc_pick1_redteam/attr_pick1_env.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_pick1_env.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_pick1_env*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ },
+ {
+  "tag": "p1rt-attr-BDp-env",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-pick1-redteam.py attr env BDp docs/research/minarc_pick1_redteam/attr_BDp_env.json > docs/research/minarc_pick1_redteam/attr_BDp_env.log 2>&1; tail -1 docs/research/minarc_pick1_redteam/attr_BDp_env.log",
+  "out": [
+   "docs/research/minarc_pick1_redteam/attr_BDp_env*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3000
+ }
+]

@@ -1,0 +1,28 @@
+[
+ {
+  "tag": "ls-claimD-ghost_g65d_bench",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm/claimD && python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py claims '[{\"tag\": \"ghost_g65d_bench\", \"drive\": \"rssr\", \"mode\": \"frozen\", \"params\": {\"La\": 25.7026, \"s_arm\": 5.6874, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"zr\": 2.091, \"kK\": 1.9768, \"r_lobe\": 7.6115, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.97550000000001, \"smhi\": 15.2738}}]' docs/research/longstroke_drive/farm/claimD > docs/research/longstroke_drive/farm/claimD/ghost_g65d_bench.run.log 2>&1; tail -2 docs/research/longstroke_drive/farm/claimD/ghost_g65d_bench.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/claimD/ghost_g65d_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_GHOST": "1"
+  },
+  "timeout": 3600
+ },
+ {
+  "tag": "ls-claimD-ghost_g65d_held",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm/claimD && python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py claims '[{\"tag\": \"ghost_g65d_held\", \"drive\": \"rssr\", \"mode\": \"held\", \"params\": {\"La\": 25.7026, \"s_arm\": 5.6874, \"r_h\": 15.491, \"beta\": -147.3923, \"gam\": 22.4633, \"hl\": 2.929, \"zr\": 2.091, \"kK\": 1.9768, \"r_lobe\": 7.6115, \"bk1\": 30.0377, \"bk2\": 42.9378, \"a1max\": 67.97550000000001, \"smhi\": 15.2738}}]' docs/research/longstroke_drive/farm/claimD > docs/research/longstroke_drive/farm/claimD/ghost_g65d_held.run.log 2>&1; tail -2 docs/research/longstroke_drive/farm/claimD/ghost_g65d_held.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/claimD/ghost_g65d_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "LS_GHOST": "1"
+  },
+  "timeout": 3600
+ }
+]

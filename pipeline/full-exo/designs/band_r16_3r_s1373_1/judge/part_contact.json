@@ -1,0 +1,108 @@
+{
+ "step": 1,
+ "tol_mm": 0.15,
+ "frames_checked": 1337,
+ "pairs": 348,
+ "seconds": 273,
+ "setup_seconds": 53,
+ "jobs": 1,
+ "cpu_seconds": 248,
+ "cpu_s_per_frame": 0.154,
+ "violations": {
+  "l2|D4 member l2 (proxy)  IN  l1|D4 member l1 (proxy)": {
+   "max_depth": 1.07,
+   "frames": 183,
+   "worst": [
+    "Raise overhead",
+    121
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|58": 1.07,
+    "Raise overhead|59": 1.07,
+    "Raise overhead|60": 1.07,
+    "Raise overhead|61": 1.07,
+    "Raise overhead|62": 1.07,
+    "Raise overhead|63": 1.07,
+    "Raise overhead|64": 1.07,
+    "Raise overhead|65": 1.07,
+    "Raise overhead|66": 1.07,
+    "Raise overhead|67": 1.07,
+    "Raise overhead|68": 1.07,
+    "Raise overhead|69": 1.07
+   }
+  },
+  "l1|D4 member l1 (proxy)  IN  l2|D4 member l2 (proxy)": {
+   "max_depth": 1.48,
+   "frames": 183,
+   "worst": [
+    "Raise overhead",
+    60
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Raise overhead|60": 1.48,
+    "Raise overhead|61": 1.48,
+    "Raise overhead|62": 1.48,
+    "Raise overhead|63": 1.48,
+    "Raise overhead|64": 1.48,
+    "Raise overhead|65": 1.48,
+    "Raise overhead|66": 1.48,
+    "Raise overhead|67": 1.48,
+    "Raise overhead|68": 1.48,
+    "Raise overhead|69": 1.48,
+    "Raise overhead|70": 1.48,
+    "Raise overhead|71": 1.48
+   }
+  }
+ },
+ "open_parts_not_tested_as_container": [],
+ "reoriented_parts": [
+  "H|BOTTOM JN hub block (proxy)",
+  "l2|D4 member l2 (proxy)",
+  "l1|D4 member l1 (proxy)"
+ ],
+ "samples": {
+  "h_mm": 1.0,
+  "sharp_deg": 30.0,
+  "total": 993624,
+  "per_part": {
+   "H|BOTTOM JN hub block (proxy)": 6193,
+   "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": 30080,
+   "F|FOREARM CUFF": 632813,
+   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": 40345,
+   "H|TOP": 32759,
+   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": 15128,
+   "F|MIDDLE": 115268,
+   "H|5mm D, 2.5mm H, N42 MAGNET": 2015,
+   "H|CirPattern1[15]": 2865,
+   "H|Revolve1[2]": 1684,
+   "H|CirPattern1[11]": 2865,
+   "H|Revolve4": 2865,
+   "H|CirPattern1[5]": 2865,
+   "H|Revolve1[1]": 7189,
+   "H|CirPattern1[7]": 2865,
+   "H|CirPattern1[16]": 2865,
+   "H|CirPattern1[12]": 2865,
+   "H|CirPattern1[14]": 2865,
+   "H|CirPattern1[8]": 2865,
+   "H|CirPattern1[10]": 2865,
+   "H|CirPattern1[4]": 2865,
+   "H|Revolve3": 6905,
+   "H|CirPattern1[2]": 2865,
+   "H|CirPattern1[9]": 2865,
+   "H|Revolve1[3]": 1684,
+   "H|CirPattern1[1]": 2865,
+   "H|CirPattern1[6]": 2865,
+   "H|CirPattern1[3]": 2865,
+   "H|CirPattern1[17]": 2865,
+   "H|CirPattern1[13]": 2865,
+   "l2|D4 member l2 (proxy)": 26055,
+   "l1|D4 member l1 (proxy)": 16766,
+   "base|D4 member base (proxy)": 7170
+  },
+  "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
+ },
+ "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
+ "max_depth": 1.48
+}

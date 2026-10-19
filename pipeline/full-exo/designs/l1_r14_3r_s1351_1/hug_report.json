@@ -1,0 +1,35 @@
+{
+ "name": "l1_r14_3r_s1351_1",
+ "arch": "band design ../conformal/gpu_client/band_search_r14.json:0:1 (girdle-riding base)",
+ "frames": 446,
+ "fitting_frames": 352,
+ "station_mm": 80.0,
+ "link1": {
+  "length_mm": 81.4,
+  "underside_mm": [
+   47.3,
+   79.2
+  ],
+  "blocked_frames_fit": 0,
+  "blocked_frames_held_out": 0,
+  "in_band_2_10_fit": 0.658,
+  "in_band_2_10_held_out": 0.677,
+  "in_band_2_14_fit": 0.825,
+  "median_gap": 7.1
+ },
+ "link2": {
+  "length_mm": 82.4,
+  "underside_mm": [
+   71.4,
+   99.8
+  ],
+  "blocked_frames_fit": 0,
+  "blocked_frames_held_out": 0,
+  "in_band_2_10_fit": 0.076,
+  "in_band_2_10_held_out": 0.01,
+  "in_band_2_14_fit": 0.173,
+  "median_gap": 20.6
+ },
+ "mass_custom_g": 110.9,
+ "all_watertight": true
+}

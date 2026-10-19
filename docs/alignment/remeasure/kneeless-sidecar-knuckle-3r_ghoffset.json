@@ -1,0 +1,59 @@
+{
+ "u3": [
+  -0.154,
+  -0.1348,
+  0.9788
+ ],
+ "claim_bench": {
+  "3mm": {
+   "within_liner": 0.387,
+   "median": 3.4,
+   "p90": 4.83,
+   "max": 5.9,
+   "slide_within_liner": 0.402,
+   "knee_equiv_within_liner": 0.664,
+   "knee_equiv_median": 2.31,
+   "knee_equiv_max": 5.48
+  },
+  "5mm": {
+   "within_liner": 0.177,
+   "median": 5.67,
+   "p90": 8.04,
+   "max": 9.84,
+   "slide_within_liner": 0.189,
+   "knee_equiv_within_liner": 0.368,
+   "knee_equiv_median": 3.85,
+   "knee_equiv_max": 9.13
+  },
+  "n_poses": 470
+ },
+ "fit_bench": {
+  "3mm": {
+   "within_liner": 0.386,
+   "median": 3.66,
+   "p90": 4.92,
+   "max": 5.62,
+   "slide_within_liner": 0.395,
+   "knee_equiv_within_liner": 0.645,
+   "knee_equiv_median": 2.3,
+   "knee_equiv_max": 5.07
+  },
+  "5mm": {
+   "within_liner": 0.168,
+   "median": 6.1,
+   "p90": 8.2,
+   "max": 9.37,
+   "slide_within_liner": 0.177,
+   "knee_equiv_within_liner": 0.377,
+   "knee_equiv_median": 3.83,
+   "knee_equiv_max": 8.45
+  },
+  "n_poses": 220
+ },
+ "liner_mm": 3.0,
+ "params": "rows/kneeless-sidecar-knuckle-3r.json best_params",
+ "harness": "the twin's redteam_gh logic (docs/concepts/models/kneeless-roller-knuckle-3r.py lines 190-221) with this design's hub-3 axis u3; all poses of the bench, no wear",
+ "cmd": "OMP_NUM_THREADS=1 python3 tools/alignment_ghoff_twin.py (models unchanged)",
+ "note": "within_liner (no knee) depends only on the poses and the rest pose, so it equals the twin's 0.387 for any rigid-bracket design; knee_equiv depends on u3",
+ "by": "skeptic 2026-10-17"
+}

@@ -1,0 +1,530 @@
+[
+ [
+  "pick",
+  {
+   "near1": 14.04,
+   "near2": 16.58,
+   "plain": 14.04,
+   "honest": true,
+   "dK_lim": 63.5,
+   "why_lim": "law",
+   "tilt": [
+    25.5,
+    14.5
+   ],
+   "why": {
+    "fold": 33,
+    "slide": 5,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L28-48-1.8",
+  {
+   "near1": 33.67,
+   "near2": 56.65,
+   "plain": 33.67,
+   "honest": true,
+   "dK_lim": 79.5,
+   "why_lim": "transmission",
+   "tilt": [
+    23.2,
+    15.5
+   ],
+   "why": {
+    "fold": 36,
+    "slide": 7,
+    "flip": 0,
+    "closure": 0,
+    "skin": 2,
+    "parts": 1,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L28-48-2.4",
+  {
+   "near1": 101.56,
+   "near2": 126.37,
+   "plain": 101.56,
+   "honest": false,
+   "dK_lim": 11.2,
+   "why_lim": "law",
+   "tilt": [
+    23.3,
+    4.2
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L28-48-3.0",
+  {
+   "near1": 101.56,
+   "near2": 126.37,
+   "plain": 101.56,
+   "honest": false,
+   "dK_lim": 11.2,
+   "why_lim": "law",
+   "tilt": [
+    23.3,
+    4.2
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L28-50-1.8",
+  {
+   "near1": 106.46,
+   "near2": 113.39,
+   "plain": 103.88,
+   "honest": true,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    24.6,
+    24.2
+   ],
+   "why": {
+    "fold": 129,
+    "slide": 6,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L28-50-2.4",
+  {
+   "near1": 101.39,
+   "near2": 116.37,
+   "plain": 98.55,
+   "honest": false,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    24.8,
+    13.2
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L28-50-3.0",
+  {
+   "near1": 101.39,
+   "near2": 116.37,
+   "plain": 98.55,
+   "honest": false,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    24.8,
+    13.2
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L30-48-1.8",
+  {
+   "near1": 33.31,
+   "near2": 64.21,
+   "plain": 25.1,
+   "honest": true,
+   "dK_lim": 78.8,
+   "why_lim": "transmission",
+   "tilt": [
+    23.7,
+    16.2
+   ],
+   "why": {
+    "fold": 30,
+    "slide": 6,
+    "flip": 0,
+    "closure": 0,
+    "skin": 4,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L30-48-2.4",
+  {
+   "near1": 104.34,
+   "near2": 137.01,
+   "plain": 101.38,
+   "honest": false,
+   "dK_lim": 11.2,
+   "why_lim": "law",
+   "tilt": [
+    23.8,
+    5.6
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L30-48-3.0",
+  {
+   "near1": 104.34,
+   "near2": 137.01,
+   "plain": 101.38,
+   "honest": false,
+   "dK_lim": 11.2,
+   "why_lim": "law",
+   "tilt": [
+    23.8,
+    5.6
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L30-50-1.8",
+  {
+   "near1": 105.96,
+   "near2": 119.06,
+   "plain": 102.81,
+   "honest": true,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    24.3,
+    22.6
+   ],
+   "why": {
+    "fold": 129,
+    "slide": 6,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L30-50-2.4",
+  {
+   "near1": 101.39,
+   "near2": 122.8,
+   "plain": 98.55,
+   "honest": false,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    24.5,
+    12.2
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L30-50-3.0",
+  {
+   "near1": 101.39,
+   "near2": 122.8,
+   "plain": 98.55,
+   "honest": false,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    24.5,
+    12.2
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  }
+ ],
+ [
+  "L32-48-1.8",
+  {
+   "near1": 122.52,
+   "near2": 187.74,
+   "plain": 110.33,
+   "honest": true,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    25.2,
+    22.2
+   ],
+   "why": {
+    "fold": 129,
+    "slide": 6,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 3
+   }
+  }
+ ],
+ [
+  "L32-48-2.4",
+  {
+   "near1": 118.92,
+   "near2": 182.43,
+   "plain": 107.08,
+   "honest": false,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    25.3,
+    12.2
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 3
+   }
+  }
+ ],
+ [
+  "L32-48-3.0",
+  {
+   "near1": 118.92,
+   "near2": 182.43,
+   "plain": 107.08,
+   "honest": false,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    25.3,
+    12.2
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 3
+   }
+  }
+ ],
+ [
+  "L32-50-1.8",
+  {
+   "near1": 119.35,
+   "near2": 175.74,
+   "plain": 105.79,
+   "honest": true,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    24.6,
+    22.8
+   ],
+   "why": {
+    "fold": 129,
+    "slide": 6,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 1
+   }
+  }
+ ],
+ [
+  "L32-50-2.4",
+  {
+   "near1": 114.28,
+   "near2": 176.74,
+   "plain": 101.39,
+   "honest": false,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    24.7,
+    13.0
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 1
+   }
+  }
+ ],
+ [
+  "L32-50-3.0",
+  {
+   "near1": 114.28,
+   "near2": 176.74,
+   "plain": 101.39,
+   "honest": false,
+   "dK_lim": 0.0,
+   "why_lim": "transmission",
+   "tilt": [
+    24.7,
+    13.0
+   ],
+   "why": {
+    "fold": 131,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 1
+   }
+  }
+ ],
+ [
+  "ib-cma2-j-g10-1",
+  {
+   "near1": 21.75,
+   "near2": 48.23,
+   "plain": 17.11,
+   "honest": true,
+   "dK_lim": 62.0,
+   "why_lim": "law",
+   "tilt": [
+    15.3,
+    19.6
+   ],
+   "why": {
+    "fold": 27,
+    "slide": 6,
+    "flip": 0,
+    "closure": 0,
+    "skin": 3,
+    "parts": 0,
+    "contact": 3
+   }
+  }
+ ],
+ [
+  "ib-cma2-j-g12-7",
+  {
+   "near1": 23.55,
+   "near2": 46.44,
+   "plain": 15.32,
+   "honest": true,
+   "dK_lim": 62.8,
+   "why_lim": "law",
+   "tilt": [
+    15.2,
+    19.6
+   ],
+   "why": {
+    "fold": 24,
+    "slide": 7,
+    "flip": 0,
+    "closure": 0,
+    "skin": 2,
+    "parts": 0,
+    "contact": 3
+   }
+  }
+ ],
+ [
+  "ib-cma2-j-g11-3",
+  {
+   "near1": 25.37,
+   "near2": 43.64,
+   "plain": 24.2,
+   "honest": true,
+   "dK_lim": 70.0,
+   "why_lim": "law",
+   "tilt": [
+    20.3,
+    20.2
+   ],
+   "why": {
+    "fold": 25,
+    "slide": 7,
+    "flip": 0,
+    "closure": 0,
+    "skin": 3,
+    "parts": 0,
+    "contact": 10
+   }
+  }
+ ]
+]

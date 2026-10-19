@@ -1,0 +1,32 @@
+{
+ "id": "cad_r18_n3_s1394_0",
+ "source": "pipeline/conformal/band_cad/inputs/r18_n3_s1394_0.json (= gpu_client/band_eval_det3.json #0)",
+ "n_joints": 3,
+ "sliding_cuff": false,
+ "dof": 3,
+ "kinematics": {
+  "az": 68.6208832089223,
+  "el": 83.16039525005647,
+  "a": [
+   80.02499903070232,
+   80.6958834514788
+  ],
+  "w": [
+   70.8501254732693,
+   -4.236783349244221
+  ],
+  "branch": -1,
+  "order": [
+   1,
+   1,
+   1
+  ]
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "spherical",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "built_with": "pipeline/conformal/fair_cad/fair_pipeline.sh (POSES_FILE=band_poses_wsf.b64; t_link 3, ramp 60.0 deg; v4 joint stacks)",
+ "label": "3R balanced (r18 s1394 #0)"
+}

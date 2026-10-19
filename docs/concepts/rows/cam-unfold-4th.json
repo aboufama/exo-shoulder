@@ -1,0 +1,187 @@
+{
+ "id": "cam-unfold-4th",
+ "name": "Cam-unfolding link: a cam-slaved knee K = c(q2) in link 2 (pin-knee closure, sensor-free)",
+ "lens": "overhead-first; round 6 lens 1 (sensor-free knuckle), arm-side variant",
+ "family": "redundant 4R with a cam-slaved 4th joint (3 active)",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-16T13:09:22Z",
+ "reach": 0.7063,
+ "follow": 0.9667,
+ "inband14": 0.8907,
+ "inband10": 0.5515,
+ "contact": 0.0172,
+ "gap": 22.02,
+ "gap_plain": 25.85,
+ "gap_near1": 23.23,
+ "min_metal_mm": 0.85,
+ "v_reach": 0.6556,
+ "v_follow": 0.9818,
+ "v_inband14": 0.8889,
+ "v_inband10": 0.5491,
+ "v_gap": 26.7,
+ "n_configs": 9792,
+ "best_params": {
+  "az1": 93.002,
+  "el1": 67.5189,
+  "az2": 35.8113,
+  "el2": 48.1385,
+  "wd": 71.5803,
+  "wa": -5.6949,
+  "b3": 0.3015,
+  "lE": 66.4782,
+  "lc": 31.4648,
+  "phiE": -2.9631,
+  "phib": -60.4027,
+  "ang_min": 30.4611,
+  "stk": 5.6815,
+  "sK": -1,
+  "bk1": 21.1777,
+  "bk2": 50.6827,
+  "cs": 31.5898,
+  "ws": 47.4064,
+  "mons": 13.6962,
+  "cf": 12.8835,
+  "wf": 12.8935,
+  "monf": 15.2912,
+  "cam_r": 10.0,
+  "cam_h": 3.0
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 3,
+  "moving_bodies": 7,
+  "joints": 8,
+  "closed_loops": 1,
+  "sliding_pairs": 1,
+  "rolling_pairs": 6,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 16,
+  "catalogue_parts": 15,
+  "notes": "the pin knee (rows/skin-normal-3r-pin-knee.json mechanism) + K: link 2 split into 2a / 2b by an O20 passive bearing-pair pin, NOT sensed (K = c(q2) is read from q2), slaved by a groove face cam on link 1 at J2 (best build: a 3 mm grooved ring on hub 2's crown) (O3 iglidur-sleeved follower pin on a lever of 2a = 1 sliding pair) through an O2 pushrod (2 pins) to a 4 mm crank on 2b: +2 bodies (2b, pushrod), +3 joints, 1 closed loop; complexity 33.75 (tools/simplicity.py; the pin knee 19.5)",
+  "source": "docs/concepts/models/cam-unfold-4th.py",
+  "confidence": "counted",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584"
+  }
+ },
+ "complexity": 14.25,
+ "verdict": "Screened (gate passed: 9339 CMA tries, +0.52 / +0.21 score points over the 2nd half / last third, top-5 within 0.10). Best = C3, the CROWN cam (hub 2 stays O20, 15.25 tall) with a TWO-SIDED lobe: 22.02 plain / 23.23 near-touch fast; frozen on Bench(110,360) exact 26.70 (score 90.29), near-touch 28.40, reach 0.656, in-band 0.889, contact 0.012, overhead reach 8/28. The cam is worth 8.8 points over the plain pin knee at the same seats (30.85) and ties the verified pin knee H1 (27.20 same protocol; near-touch 31.75) at +14.25 complexity; 7.6 behind the verified minarc BDp (19.06). Sensor-free 3 active, 0 passive translations. Not a new leader; self-measured, unverified.",
+ "limiter": "The fold still takes 115 of the big bench's lost poses: the cam window is only th 34.5-97.9 because K can unfold a2 by just 4.8 deg (a2e 63.8-68.6) where its hub stays in band. Hub K rides on link 2 (moves with q1 AND q2): a GH-ray O20 disc there is in band only within ~21-30 deg of J2 (K-atlas: elsewhere the 5-95 % skin-height spread under it is 19-35 mm vs the 12 mm band); toward J1 it clashes with hub 1 over the q2 window, along link 2's line it is nearly straight (no leverage). The O30 flange cam made it worse (hub K 0.42 in band); the crown cam lets K sit at 21 deg (0.77). L2a is 0.17 in band (a 25 mm stub between two hubs).",
+ "note": "Coarse farm sweep 256 (best 40.91 near), K-atlas + targeted sweep 192 (59.47), CMA S1-S6 flange cam 5206 tries (27.07 near / 25.85 plain; frozen 31.88), S2 continuation 1354 (26.55), crown-cam CMA C1-C3 2779 (23.23). Controls at the best seats: cam off 30.81, no K 30.85 (plain). Red team: no jam (one q2 per pose), J2 dowel stop felt at th 97.9; pinch 0.83 mm frozen at plane 30 / elev 165 (hub 2 crown cam region on S2: 0.01 mm); MVP2 load path through the O2 pushrod fails at 10 N.m (2500 N on a 4 mm crank).",
+ "doc": "docs/concepts/cam-unfold-4th.md",
+ "model_file": "docs/concepts/models/cam-unfold-4th.py",
+ "best_k": null,
+ "best_label": "C3 (crown cam, two-sided lobe)",
+ "frozen_exact": {
+  "protocol": "fit Bench(60,160) fast -> wear frozen on Bench(110,360) CB_EXACT=1 (models/cam-unfold-4th.py frozen)",
+  "gap": 26.7,
+  "score": 90.29,
+  "reach": 0.6556,
+  "follow": 0.9818,
+  "inband14": 0.8889,
+  "inband10": 0.5491,
+  "contact": 0.0115,
+  "gap_near1": 28.4,
+  "near1_poses": 3,
+  "min_metal_mm": 0.83,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.2857,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.8775,
+   "inband10": 0.5926,
+   "why_not": {
+    "fold": 18,
+    "slide": 2,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  },
+  "why": {
+   "fold": 115,
+   "slide": 2,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 5,
+   "contact": 4
+  },
+  "file": ".cache/camunfold/frozen_C3_local.json (not committed)"
+ },
+ "frozen_exact_S2_flange_cam": {
+  "gap": 31.88,
+  "gap_near1": 35.21,
+  "reach": 0.6583,
+  "inband14": 0.8401,
+  "contact": 0.0172
+ },
+ "controls": {
+  "C3_seats_cam_off_rigid_K": {
+   "gap_near1": 32.06,
+   "gap": 30.81,
+   "reach": 0.6438,
+   "inband14": 0.9018
+  },
+  "C3_seats_no_K_plain_pin_knee": {
+   "gap": 30.85,
+   "reach": 0.6312,
+   "inband14": 0.9283
+  },
+  "S2_seats_cam_off": {
+   "gap_near1": 31.57,
+   "gap": 30.05,
+   "reach": 0.6875
+  },
+  "S2_seats_no_K": {
+   "gap": 27.68,
+   "reach": 0.6687,
+   "inband14": 0.9211
+  }
+ },
+ "gate": {
+  "all_streams": {
+   "n": 9339,
+   "gain_second_half": 0.52,
+   "gain_last_third": 0.21,
+   "top5_spread": 0.1,
+   "passes": true
+  },
+  "C3": {
+   "n": 825,
+   "gain_second_half": 0.52,
+   "gain_last_third": 0.31,
+   "top5_spread": 0.1,
+   "passes": true
+  },
+  "S2_family": {
+   "n": 2291,
+   "gain_second_half": 0.18,
+   "gain_last_third": 0.13,
+   "top5_spread": 0.04,
+   "passes": true
+  }
+ },
+ "v_contact": 0.0115,
+ "v_gap_near1": 28.4,
+ "v_min_metal_mm": 0.83,
+ "v_champion_same_bench": 66.97,
+ "v_note": "Independent verifier 2026-10-16 (docs/concepts/verify/cam-unfold-4th.py, model imported unchanged; outputs docs/concepts/verify/cam-unfold-4th/): fit Bench(60,160) fast -> frozen -> Bench(110,360) EXACT, fold margin 5, O20. Reproduces 26.70 (score 90.29) on the farm AND locally (identical digits); near-touch 28.40 (3 poses < 1 mm, min 0.83 mm); overhead >= 140 reach 8/28. Verifier checks written independently of the closed form (per-joint axes from member frames, hub-3 centre, knee pins, the cam law dK = sign(psiA) c(x(q2)) read back from the frames, q2 inside the dowel slot, effective-dyad margin >= 5, K interior angle, finite-difference transmission >= gmin) knock out 0 of 344 taken poses (max axis error 0.02 deg, cam-law error 0.00 deg, min effective margin 5.06, min gain 0.44 vs floor 0.29). Hardware red team (hub 2 crown +5: the follower lever must ride ABOVE a ring fixed to link 1, since the O20 v5 crown is link 2a's own cap; hub K crown +3 for the crank inside its O20 footprint): 26.70, unchanged. Champion 3R on the same bench and protocol: 66.97 (offset-skin-normal-3r verifier; 64.93 in the arm-parked champbig run; 75.94 risley-turret checks). Not refuted; NOT a new leader: ties the pin knee H1 (27.20 same protocol, 0.5 < 1 point) at +14.25 complexity, 7.6 behind minarc BDp. Open buildability items (not in the bench): the crown cam's pressure angle is ~41 deg at the <= 7 mm pitch radius an O20 crown ring allows (1.5 slope, 4 mm crank, 1:1 lever; the claimed 27 deg needs the 12 mm pitch of the O30 flange) - a 2:1 follower lever brings it to ~23 deg; link 1's pin must pass through hub 2's cap to carry the ring, displacing J2's magnet / PCB encoder; the pushrod must climb to crown height at both ends."
+}

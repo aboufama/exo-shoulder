@@ -1,0 +1,492 @@
+[
+ {
+  "ok": false,
+  "n_fail": 2,
+  "min_dK_lim": 63.5,
+  "dK_need": 43.76,
+  "near1_nominal": 14.04,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.37,
+    "tilt": [
+     26.4,
+     14.2
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 13.93,
+    "tilt": [
+     24.6,
+     14.7
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": -1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.37,
+    "tilt": [
+     26.7,
+     14.4
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": 1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 13.93,
+    "tilt": [
+     24.2,
+     14.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "eta",
+    "d": -1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 21.35,
+    "tilt": [
+     24.2,
+     7.2
+    ],
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "eta",
+    "d": 1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.01,
+    "tilt": [
+     25.5,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.05,
+    "tilt": [
+     26.0,
+     14.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.05,
+    "tilt": [
+     25.0,
+     14.4
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_h",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 275.0,
+    "tilt": [
+     25.1,
+     14.4
+    ],
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "r_h",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.04,
+    "tilt": [
+     25.9,
+     14.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.04,
+    "tilt": [
+     25.5,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.04,
+    "tilt": [
+     25.5,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "hl",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 13.97,
+    "tilt": [
+     25.3,
+     14.0
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "hl",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.04,
+    "tilt": [
+     25.5,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 13.86,
+    "tilt": [
+     25.6,
+     15.0
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.36,
+    "tilt": [
+     25.4,
+     13.9
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.04,
+    "tilt": [
+     25.5,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.04,
+    "tilt": [
+     25.5,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "PICK",
+  "secs": 55.5
+ },
+ {
+  "ok": true,
+  "n_fail": 0,
+  "min_dK_lim": 63.5,
+  "dK_need": 43.76,
+  "near1_nominal": 14.01,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.02,
+    "tilt": [
+     26.8,
+     14.3
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 13.89,
+    "tilt": [
+     25.0,
+     14.8
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": -1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.02,
+    "tilt": [
+     27.2,
+     14.4
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "gam",
+    "d": 1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 13.89,
+    "tilt": [
+     24.7,
+     14.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "eta",
+    "d": -1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.04,
+    "tilt": [
+     25.9,
+     14.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "eta",
+    "d": 1.0,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 13.94,
+    "tilt": [
+     25.9,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.02,
+    "tilt": [
+     26.4,
+     14.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "La",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.01,
+    "tilt": [
+     25.4,
+     14.4
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_h",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.01,
+    "tilt": [
+     25.5,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_h",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.0,
+    "tilt": [
+     26.3,
+     14.6
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.01,
+    "tilt": [
+     25.9,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "s_arm",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.01,
+    "tilt": [
+     25.9,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "hl",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 13.95,
+    "tilt": [
+     25.8,
+     14.0
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "hl",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.01,
+    "tilt": [
+     25.9,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 13.83,
+    "tilt": [
+     26.0,
+     15.1
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "zc",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.3,
+    "tilt": [
+     25.8,
+     14.0
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": -0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.01,
+    "tilt": [
+     25.9,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_lobe",
+    "d": 0.25,
+    "dK_lim": 63.5,
+    "why": "law",
+    "near1": 14.01,
+    "tilt": [
+     25.9,
+     14.5
+    ],
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "ROBUST",
+  "secs": 55.7
+ }
+]

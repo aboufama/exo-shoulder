@@ -1,0 +1,757 @@
+{
+ "id": "l1_offset-skin-normal-3r",
+ "step": 3,
+ "frames": 410,
+ "per_part": {
+  "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the BOTTOM bar)": {
+   "min_mm": 1.75,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0366,
+   "median_mm": 5.27
+  },
+  "member-3 bridge keep-out (8 wide, stepped: neck end at the neck top, over carriage B at the model's carriage-B top)": {
+   "min_mm": 13.42,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 15.97
+  },
+  "carriage B = across guide block (THK RSR3M / HIWIN MGN03C: W 8.0 x L 12.0, body 3.0 mm)": {
+   "min_mm": 10.22,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 12.98
+  },
+  "across guide rail (RSR3M rail 3.0 x 2.6 x 29.0 mm, crosswise on carriage A)": {
+   "min_mm": 8.5,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 12.14
+  },
+  "carriage A adapter keep-out (plus plate 1.0 mm, arms 5.0 wide, under both rails)": {
+   "min_mm": 7.32,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 10.89
+  },
+  "along guide rail (RSR3M rail 3.0 x 2.6 x 26.6 mm, rides with carriage A)": {
+   "min_mm": 5.12,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 8.5
+  },
+  "along guide block (proxy) (THK RSR3M / HIWIN MGN03C, inverted: W 8.0 x L 12.0, body 3.0 mm, on the cuff)": {
+   "min_mm": 4.43,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 7.38
+  },
+  "cuff base plate (proxy) (14 x 10 x 1.5 mm, arm-fixed, under the along block)": {
+   "min_mm": 2.81,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 5.69
+  },
+  "member-3 neck keep-out (8 x 3 mm, ramp <= 60 deg from the J3 plate to the bridge)": {
+   "min_mm": 3.91,
+   "at": {
+    "clip": "Reach a high shelf",
+    "frame": 120,
+    "pose": [
+     77.4,
+     105.1,
+     -77.4
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 7.8
+  },
+  "link 2 strap keep-out (8 x 3 mm Ti, fitted underside)": {
+   "min_mm": 2.21,
+   "at": {
+    "clip": "Comb hair",
+    "frame": 99,
+    "pose": [
+     76.5,
+     142.0,
+     -66.4
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 7.01
+  },
+  "link 1 strap keep-out (8 x 3 mm Ti, fitted underside)": {
+   "min_mm": 3.07,
+   "at": {
+    "clip": "Comb hair",
+    "frame": 105,
+    "pose": [
+     78.1,
+     143.1,
+     -67.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 5.17
+  },
+  "J3 lower plate keep-out (O20 x 3, member 3)": {
+   "min_mm": 5.88,
+   "at": {
+    "clip": "Reach a high shelf",
+    "frame": 39,
+    "pose": [
+     77.3,
+     100.0,
+     -77.3
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 10.11
+  },
+  "J3 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": {
+   "min_mm": 8.88,
+   "at": {
+    "clip": "Reach a high shelf",
+    "frame": 39,
+    "pose": [
+     77.3,
+     100.0,
+     -77.3
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 13.13
+  },
+  "J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2)": {
+   "min_mm": 3.03,
+   "at": {
+    "clip": "Wave",
+    "frame": 63,
+    "pose": [
+     15.0,
+     95.0,
+     -80.0
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 10.74
+  },
+  "J2 lower plate keep-out (O20 x 3, link 1)": {
+   "min_mm": 1.49,
+   "at": {
+    "clip": "Wave",
+    "frame": 114,
+    "pose": [
+     15.0,
+     94.7,
+     -77.9
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0561,
+   "median_mm": 7.72
+  },
+  "J1 lower plate keep-out (O20 x 3, link 1)": {
+   "min_mm": 4.37,
+   "at": {
+    "clip": "Comb hair",
+    "frame": 102,
+    "pose": [
+     77.8,
+     142.9,
+     -67.0
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 7.8
+  },
+  "J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member)": {
+   "min_mm": 7.49,
+   "at": {
+    "clip": "Comb hair",
+    "frame": 105,
+    "pose": [
+     78.1,
+     143.1,
+     -67.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 10.95
+  },
+  "across guide rail ends (outer 6 mm)": {
+   "min_mm": 8.5,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 12.15
+  },
+  "along guide rail ends (outer 6 mm)": {
+   "min_mm": 5.12,
+   "at": {
+    "clip": "Reach back pocket",
+    "frame": 72,
+    "pose": [
+     -80.0,
+     39.0,
+     101.1
+    ]
+   },
+   "share_lt1": 0.0,
+   "share_lt2": 0.0,
+   "median_mm": 8.53
+  }
+ },
+ "adjacent": {
+  "link 1 strap keep-out (8 x 3 / link 2 strap keep-out (8 x 3": [
+   0.199,
+   "Raise overhead",
+   36,
+   [
+    30.0,
+    65.9,
+    -42.9
+   ]
+  ],
+  "link 2 strap keep-out (8 x 3 / J3 lower plate keep-out (O20": [
+   0.35,
+   "Walking arm swing",
+   99,
+   [
+    90.0,
+    14.0,
+    -90.0
+   ]
+  ],
+  "link 2 strap keep-out (8 x 3 / member-3 neck keep-out (8 x ": [
+   5.462,
+   "Reach back pocket",
+   60,
+   [
+    -75.0,
+    39.5,
+    92.2
+   ]
+  ],
+  "link 2 strap keep-out (8 x 3 / member-3 bridge keep-out (8 ": [
+   22.312,
+   "Reach back pocket",
+   60,
+   [
+    -75.0,
+    39.5,
+    92.2
+   ]
+  ],
+  "link 1 strap keep-out (8 x 3 / J2 upper boss + cap keep-out": [
+   0.813,
+   "Walking arm swing",
+   105,
+   [
+    90.0,
+    4.7,
+    -90.0
+   ]
+  ],
+  "link 2 strap keep-out (8 x 3 / J2 lower plate keep-out (O20": [
+   0.35,
+   "Wave",
+   171,
+   [
+    20.0,
+    4.1,
+    -20.0
+   ]
+  ],
+  "member-3 bridge keep-out (8  / across guide rail (RSR3M rai": [
+   1.4,
+   "Walking arm swing",
+   105,
+   [
+    90.0,
+    4.7,
+    -90.0
+   ]
+  ],
+  "member-3 bridge keep-out (8  / carriage A adapter keep-out ": [
+   4.0,
+   "Walking arm swing",
+   105,
+   [
+    90.0,
+    4.7,
+    -90.0
+   ]
+  ],
+  "along guide rail (RSR3M rail / along guide block (proxy) (T": [
+   0.2,
+   "Walking arm swing",
+   105,
+   [
+    90.0,
+    4.7,
+    -90.0
+   ]
+  ],
+  "carriage A adapter keep-out  / along guide block (proxy) (T": [
+   1.0,
+   "Walking arm swing",
+   99,
+   [
+    90.0,
+    14.0,
+    -90.0
+   ]
+  ],
+  "along guide rail (RSR3M rail / cuff mount to BOTTOM (proxy)": [
+   1.4,
+   "Walking arm swing",
+   99,
+   [
+    90.0,
+    14.0,
+    -90.0
+   ]
+  ],
+  "along guide rail (RSR3M rail / cuff base plate (proxy) (14 ": [
+   1.4,
+   "Walking arm swing",
+   99,
+   [
+    90.0,
+    14.0,
+    -90.0
+   ]
+  ],
+  "member-3 neck keep-out (8 x  / along guide rail (RSR3M rail": [
+   6.598,
+   "Walking arm swing",
+   105,
+   [
+    90.0,
+    4.7,
+    -90.0
+   ]
+  ],
+  "link 2 strap keep-out (8 x 3 / across guide rail (RSR3M rai": [
+   36.826,
+   "Reach back pocket",
+   60,
+   [
+    -75.0,
+    39.5,
+    92.2
+   ]
+  ],
+  "link 2 strap keep-out (8 x 3 / carriage A adapter keep-out ": [
+   25.019,
+   "Reach back pocket",
+   60,
+   [
+    -75.0,
+    39.5,
+    92.2
+   ]
+  ],
+  "link 2 strap keep-out (8 x 3 / along guide rail (RSR3M rail": [
+   25.053,
+   "Reach back pocket",
+   60,
+   [
+    -75.0,
+    39.5,
+    92.2
+   ]
+  ]
+ },
+ "near_touch_neighbourhood": [
+  {
+   "pose": [
+    -90,
+    30,
+    105
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 2.29,
+   "arm_fixed_mm": 2.29
+  },
+  {
+   "pose": [
+    -90,
+    30,
+    120
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 2.22,
+   "arm_fixed_mm": 2.22
+  },
+  {
+   "pose": [
+    -90,
+    30,
+    135
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 2.55,
+   "arm_fixed_mm": 2.55
+  },
+  {
+   "pose": [
+    -90,
+    45,
+    105
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "lowest_mm": 0.54,
+   "arm_fixed_mm": 0.63
+  },
+  {
+   "pose": [
+    -90,
+    45,
+    120
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "lowest_mm": -0.24,
+   "arm_fixed_mm": 0.26
+  },
+  {
+   "pose": [
+    -90,
+    45,
+    135
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 0.4,
+   "arm_fixed_mm": 0.4
+  },
+  {
+   "pose": [
+    -90,
+    60,
+    105
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "lowest_mm": -3.76,
+   "arm_fixed_mm": -1.0
+  },
+  {
+   "pose": [
+    -90,
+    60,
+    120
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "lowest_mm": -5.43,
+   "arm_fixed_mm": -1.29
+  },
+  {
+   "pose": [
+    -90,
+    60,
+    135
+   ],
+   "closes": false,
+   "clear": null
+  },
+  {
+   "pose": [
+    -75,
+    30,
+    105
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 2.83,
+   "arm_fixed_mm": 2.83
+  },
+  {
+   "pose": [
+    -75,
+    30,
+    120
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 2.87,
+   "arm_fixed_mm": 2.87
+  },
+  {
+   "pose": [
+    -75,
+    30,
+    135
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 3.06,
+   "arm_fixed_mm": 3.06
+  },
+  {
+   "pose": [
+    -75,
+    45,
+    105
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 1.12,
+   "arm_fixed_mm": 1.12
+  },
+  {
+   "pose": [
+    -75,
+    45,
+    120
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 0.64,
+   "arm_fixed_mm": 0.64
+  },
+  {
+   "pose": [
+    -75,
+    45,
+    135
+   ],
+   "closes": false,
+   "clear": null
+  },
+  {
+   "pose": [
+    -75,
+    60,
+    105
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "lowest_mm": -2.06,
+   "arm_fixed_mm": -0.51
+  },
+  {
+   "pose": [
+    -75,
+    60,
+    120
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "lowest_mm": -3.42,
+   "arm_fixed_mm": -1.17
+  },
+  {
+   "pose": [
+    -75,
+    60,
+    135
+   ],
+   "closes": false,
+   "clear": null
+  },
+  {
+   "pose": [
+    -60,
+    30,
+    105
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 3.55,
+   "arm_fixed_mm": 3.55
+  },
+  {
+   "pose": [
+    -60,
+    30,
+    120
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 3.44,
+   "arm_fixed_mm": 3.44
+  },
+  {
+   "pose": [
+    -60,
+    30,
+    135
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 3.46,
+   "arm_fixed_mm": 3.46
+  },
+  {
+   "pose": [
+    -60,
+    45,
+    105
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 1.69,
+   "arm_fixed_mm": 1.69
+  },
+  {
+   "pose": [
+    -60,
+    45,
+    120
+   ],
+   "closes": true,
+   "lowest_part": "cuff mount to BOTTOM (proxy) (1.5 mm slab, base plate -> the",
+   "lowest_mm": 1.39,
+   "arm_fixed_mm": 1.39
+  },
+  {
+   "pose": [
+    -60,
+    45,
+    135
+   ],
+   "closes": false,
+   "clear": null
+  },
+  {
+   "pose": [
+    -60,
+    60,
+    105
+   ],
+   "closes": true,
+   "lowest_part": "link 2 strap keep-out (8 x 3 mm Ti, fitted underside)",
+   "lowest_mm": -1.12,
+   "arm_fixed_mm": 0.01
+  },
+  {
+   "pose": [
+    -60,
+    60,
+    120
+   ],
+   "closes": false,
+   "clear": null
+  },
+  {
+   "pose": [
+    -60,
+    60,
+    135
+   ],
+   "closes": false,
+   "clear": null
+  }
+ ],
+ "held_reasons": {
+  "Raise overhead": {
+   "fold": 36,
+   "flip": 71
+  },
+  "Drink from a cup": {},
+  "Comb hair": {},
+  "Reach a high shelf": {},
+  "Wash opposite shoulder": {},
+  "Reach back pocket": {},
+  "Wave": {
+   "fold": 14
+  },
+  "Walking arm swing": {}
+ },
+ "secs": 40.0
+}

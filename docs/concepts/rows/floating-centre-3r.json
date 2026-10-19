@@ -1,0 +1,102 @@
+{
+ "id": "floating-centre-3r",
+ "name": "Floating-centre 3R: the spherical chain on a closure-set 3-axis float (stage beside J1), rigid cuff",
+ "lens": "literature",
+ "family": "spherical 3R + passive base float",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "status": "refuted",
+ "t_ideated": null,
+ "t_screened": "2026-10-15T19:37:06Z",
+ "reach": 0.9062,
+ "follow": 1.0,
+ "inband14": 0.3183,
+ "inband10": 0.2269,
+ "contact": 0.0,
+ "gap": 58.17,
+ "v_reach": 0.5,
+ "v_follow": 0.7182,
+ "v_inband14": 0.1725,
+ "v_inband10": 0.1292,
+ "v_gap": 136.31,
+ "n_configs": 41,
+ "verdict": "Not worth a GPU sweep as a morphology. Plain bench: gap 58.17 vs its own parent's 65.05 on the same code, but the gain is the skin-contoured float plate's samples (0.83 in band); the chain itself gets worse (chain-only in-band 14 0.250 -> 0.161, plate-excluded gap 73.95). Slip bench (the float's real claim): direction right (in-band 0.35-0.41 vs cuff-slide parent 0.19-0.20) but the travel the slip law needs (+-20 tangent, 6-9 mm normal) makes the plate too big: best 73.46 (central) / 136.74 (high) vs the cuff-slide parent's 71.03 / 70.42.",
+ "limiter": "A flat slide face must clear the skin under its whole footprint: around J1 the skin ridge is tilted 17-42 deg to it, so under J1 hub 1 rises +13 mm at +-4 mm travel and +58 mm at +-12 (link 1 0 % in band); beside J1 (stage at az 0 / el 35 on the scapula) link 1 must pass over the stage + normal travel (link 1 0.25 -> 0.0 in band). Under slip, +-15..20 mm travel puts the plate's displaced slab under link 1 / the bracket: reach 0.39-0.81, follow 0.52-0.83 (central and high laws).",
+ "note": "Bench(60,160) fast cache, kit checks (march, K2 dense, K6, audit clean). Best: parent r20 s1414 #4, q 1.0, stage beside J1 at az 0 / el 35, +-8 mm XY, 4 mm normal, 5.5 mm XY stage, slide face = least-squares plane of the plate underside (28.6 deg from the stage axis), plate slab 24.3 mm, hub 1 at the parent's 54 mm. Slip extension per spec (judge/base_slip.py, samples classed by the skin they ride, offsets applied before the K3 fit). Spec corrections: the 5 mm J1 raise is wrong (flat face on a sloped ridge), the slip law needs +-20 / 6-9 mm travel not +-12 / 4.",
+ "doc": "docs/concepts/floating-centre-3r.md",
+ "model_file": "docs/concepts/models/floating-centre-3r.py",
+ "honest": true,
+ "checks": {
+  "mode": "march",
+  "cont": true,
+  "collide": true,
+  "q": 1.0
+ },
+ "audit": [],
+ "hubless": [
+  "JF"
+ ],
+ "inband14_chain": 0.1605,
+ "inband10_chain": 0.0973,
+ "best_k": 28,
+ "slip": {
+  "central": {
+   "parent_cuff_slides": 71.03,
+   "float_best": 73.46
+  },
+  "high": {
+   "parent_cuff_slides": 70.42,
+   "float_best": 136.74
+  }
+ },
+ "verification": {
+  "bench": "Bench(110,360) exact (CB_EXACT=1)",
+  "fixes": [
+   "bracket stage end raised onto the stage + normal travel + 1 mm",
+   "K6 re-run at 1 mm radial clearance"
+  ],
+  "v_contact": 0.0038,
+  "v_inband14_chain": 0.0599,
+  "v_gap_chain_only": 147.57,
+  "inband_member": {
+   "plate": 0.7691,
+   "bracket": 0.0282,
+   "hub1": 1.0,
+   "hub2": 0.0,
+   "hub3": 0.0,
+   "link1": 0.0604,
+   "link2": 0.0,
+   "neck": 0.0
+  },
+  "layout_r": [
+   120.0,
+   200.0
+  ]
+ },
+ "manufacturability": {
+  "verdict": "NOT BUILDABLE",
+  "passive_translations": 3,
+  "reason": "XY float + normal travel = 3 translations, over the cap; the slip law needs +-20 / 6-9 mm normal travel, which no part gives in band (radial +-6: >= 15 mm by any route)",
+  "buildable_variant": "champion 3R + 2 in-plane cuff slides (2 x RSR3M ~10.5 mm), radial residual <= 3 mm to the liner",
+  "t": "2026-10-16",
+  "source": "docs/research/manufacturability_summary.md; docs/research/passive_dof_hardware.md; docs/research/manufacturability_audit.md"
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 3,
+  "crossed_rails": true,
+  "passive_rot": 0,
+  "moving_bodies": 6,
+  "joints": 6,
+  "closed_loops": 0,
+  "sliding_pairs": 3,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 10,
+  "catalogue_parts": 9,
+  "notes": "spherical 3R on a 3-translation float under J1 (NOT BUILDABLE: 3P; the normal slide has no compact part). bodies: X carriage, Y carriage, normal-slide carriage = J1 lower member, link 1, link 2, arm member (neck rigid on the cuff, no cuff slides). joints: X, Y (crossed miniature roller slides), normal slide along J1, J1-J3 O20 hubs. Translations change no orientation: not sensed. custom: plate, 2 adapters, normal carriage, 2 straps, neck, 3 hub shafts (est.); catalogue: 3 slides + 3 x MR117 pair (est.).",
+  "source": "docs/concepts/models/floating-centre-3r.py:1-27 (chain, float parts)",
+  "confidence": "counted"
+ }
+}

@@ -1,0 +1,684 @@
+{
+ "id": "freek-oracle-route-knuckle-4r",
+ "mode": "wear",
+ "bench": "exact",
+ "fit_mode": "fast",
+ "over": {
+  "rA": 12,
+  "rsp": 25,
+  "rsr": 55
+ },
+ "fold_margin": 5.5,
+ "fit": {
+  "gap": 12.48,
+  "reach": 0.825,
+  "follow": 0.95,
+  "inband14": 0.881,
+  "inband10": 0.5109,
+  "contact": 0.0308,
+  "mode": "fast"
+ },
+ "kit": {
+  "gap": 20.18,
+  "reach": 0.7694,
+  "follow": 0.9455,
+  "inband14": 0.8808,
+  "inband10": 0.5151,
+  "contact": 0.0475,
+  "near": 25.45,
+  "ws_taken": 277,
+  "why": {
+   "slide": 15,
+   "contact": 19,
+   "fold": 55
+  }
+ },
+ "oracle": {
+  "gap": 18.42,
+  "reach": 0.7806,
+  "follow": 0.9455,
+  "inband14": 0.8844,
+  "inband10": 0.5178,
+  "contact": 0.0447,
+  "near": 23.15,
+  "near1_poses": 9,
+  "min_mm": 0.02,
+  "ws_taken": 281,
+  "clear02": 383,
+  "clear1": 376,
+  "why": {
+   "slide": 12,
+   "contact": 18,
+   "fold": 55
+  },
+  "moved": 37,
+  "state_free_taken": 28
+ },
+ "connected": {
+  "file": "docs/concepts/verify/skinnormal-shortk-knuckle-4r/c_k33_fit60_bench_conn.json",
+  "dropped": 1,
+  "gap": 18.71,
+  "reach": 0.7778,
+  "follow": 0.9455,
+  "inband14": 0.8844,
+  "inband10": 0.5178,
+  "contact": 0.0448,
+  "near": 23.45,
+  "ws_taken": 280
+ },
+ "binders": {
+  "117": {
+   "pose": {
+    "plane": -90.0,
+    "elev": 45.0,
+    "axial": 135.0
+   },
+   "th": 112.3,
+   "kit_dK": 50.050709710208544,
+   "pick_dK": 48.05373844677771,
+   "samples": [
+    [
+     50.1,
+     false,
+     -1.23,
+     "contact"
+    ],
+    [
+     41.3,
+     false,
+     null,
+     "fold"
+    ],
+    [
+     48.1,
+     false,
+     -0.46,
+     "contact"
+    ],
+    [
+     54.8,
+     false,
+     -3.07,
+     "contact"
+    ],
+    [
+     61.6,
+     false,
+     -5.39,
+     "contact"
+    ],
+    [
+     68.4,
+     false,
+     -7.55,
+     "contact"
+    ],
+    [
+     75.2,
+     false,
+     -9.68,
+     "contact"
+    ],
+    [
+     82.0,
+     false,
+     -11.68,
+     "contact"
+    ]
+   ],
+   "final_min": null
+  },
+  "127": {
+   "pose": {
+    "plane": -75.0,
+    "elev": 45.0,
+    "axial": 120.0
+   },
+   "th": 102.7,
+   "kit_dK": 31.5356382454962,
+   "pick_dK": null,
+   "samples": [
+    [
+     31.5,
+     true,
+     2.01,
+     ""
+    ],
+    [
+     22.3,
+     false,
+     null,
+     "fold"
+    ],
+    [
+     32.2,
+     true,
+     2.01,
+     ""
+    ],
+    [
+     42.2,
+     false,
+     -1.86,
+     "contact"
+    ],
+    [
+     52.1,
+     false,
+     -5.32,
+     "contact"
+    ],
+    [
+     62.1,
+     false,
+     -8.81,
+     "contact"
+    ],
+    [
+     72.0,
+     false,
+     -12.12,
+     "contact"
+    ],
+    [
+     82.0,
+     false,
+     -15.04,
+     "contact"
+    ]
+   ],
+   "final_min": 2.01
+  },
+  "129": {
+   "pose": {
+    "plane": -75.0,
+    "elev": 60.0,
+    "axial": 120.0
+   },
+   "th": 108.5,
+   "kit_dK": 42.93275752051107,
+   "pick_dK": 41.744640409607385,
+   "samples": [
+    [
+     42.9,
+     false,
+     -4.74,
+     "contact"
+    ],
+    [
+     33.7,
+     false,
+     null,
+     "fold"
+    ],
+    [
+     41.7,
+     false,
+     -4.17,
+     "contact"
+    ],
+    [
+     49.8,
+     false,
+     -7.99,
+     "contact"
+    ],
+    [
+     57.8,
+     false,
+     -11.34,
+     "contact"
+    ],
+    [
+     65.9,
+     false,
+     null,
+     "slide"
+    ],
+    [
+     73.9,
+     false,
+     null,
+     "slide"
+    ],
+    [
+     82.0,
+     false,
+     null,
+     "slide"
+    ]
+   ],
+   "final_min": null
+  },
+  "139": {
+   "pose": {
+    "plane": -60.0,
+    "elev": 60.0,
+    "axial": 105.0
+   },
+   "th": 97.5,
+   "kit_dK": 20.829476639614423,
+   "pick_dK": null,
+   "samples": [
+    [
+     20.8,
+     true,
+     0.74,
+     ""
+    ],
+    [
+     12.4,
+     false,
+     null,
+     "fold"
+    ],
+    [
+     24.0,
+     true,
+     0.57,
+     ""
+    ],
+    [
+     35.6,
+     false,
+     -4.63,
+     "contact"
+    ],
+    [
+     47.2,
+     false,
+     null,
+     "slide"
+    ],
+    [
+     58.8,
+     false,
+     null,
+     "slide"
+    ],
+    [
+     70.4,
+     false,
+     null,
+     "slide"
+    ],
+    [
+     82.0,
+     false,
+     null,
+     "slide"
+    ]
+   ],
+   "final_min": 0.74
+  },
+  "148": {
+   "pose": {
+    "plane": -45.0,
+    "elev": 45.0,
+    "axial": 135.0
+   },
+   "th": 121.7,
+   "kit_dK": 67.94160803268245,
+   "pick_dK": 62.08965837778892,
+   "samples": [
+    [
+     67.9,
+     true,
+     0.52,
+     ""
+    ],
+    [
+     62.1,
+     true,
+     1.76,
+     ""
+    ],
+    [
+     65.4,
+     true,
+     1.37,
+     ""
+    ],
+    [
+     68.7,
+     true,
+     0.3,
+     ""
+    ],
+    [
+     72.0,
+     false,
+     -0.67,
+     "contact"
+    ],
+    [
+     75.4,
+     false,
+     -1.61,
+     "contact"
+    ],
+    [
+     78.7,
+     false,
+     -2.53,
+     "contact"
+    ],
+    [
+     82.0,
+     false,
+     -3.54,
+     "contact"
+    ]
+   ],
+   "final_min": 1.76
+  },
+  "316": {
+   "pose": {
+    "plane": 60.0,
+    "elev": 150.0,
+    "axial": -105.0
+   },
+   "th": 105.9,
+   "kit_dK": 37.855288124212294,
+   "pick_dK": 82.00000000000004,
+   "samples": [
+    [
+     37.9,
+     false,
+     -3.8,
+     "contact"
+    ],
+    [
+     28.5,
+     false,
+     null,
+     "fold"
+    ],
+    [
+     37.4,
+     false,
+     -3.88,
+     "contact"
+    ],
+    [
+     46.3,
+     false,
+     -2.43,
+     "contact"
+    ],
+    [
+     55.3,
+     false,
+     -1.19,
+     "contact"
+    ],
+    [
+     64.2,
+     false,
+     -0.33,
+     "contact"
+    ],
+    [
+     73.1,
+     true,
+     0.43,
+     ""
+    ],
+    [
+     82.0,
+     true,
+     1.19,
+     ""
+    ]
+   ],
+   "final_min": 1.19
+  },
+  "343": {
+   "pose": {
+    "plane": 75.0,
+    "elev": 150.0,
+    "axial": -105.0
+   },
+   "th": 115.0,
+   "kit_dK": 55.14328269918992,
+   "pick_dK": 70.30398071445148,
+   "samples": [
+    [
+     55.1,
+     false,
+     -4.35,
+     "contact"
+    ],
+    [
+     46.9,
+     false,
+     null,
+     "fold"
+    ],
+    [
+     52.8,
+     false,
+     -4.62,
+     "contact"
+    ],
+    [
+     58.6,
+     false,
+     -3.95,
+     "contact"
+    ],
+    [
+     64.5,
+     false,
+     -3.19,
+     "contact"
+    ],
+    [
+     70.3,
+     false,
+     -2.48,
+     "contact"
+    ],
+    [
+     76.2,
+     false,
+     -2.66,
+     "contact"
+    ],
+    [
+     82.0,
+     false,
+     -2.62,
+     "contact"
+    ]
+   ],
+   "final_min": null
+  },
+  "369": {
+   "pose": {
+    "plane": 90.0,
+    "elev": 135.0,
+    "axial": -90.0
+   },
+   "th": 108.0,
+   "kit_dK": 41.99066830252391,
+   "pick_dK": 65.57278320679448,
+   "samples": [
+    [
+     42.0,
+     false,
+     -0.61,
+     "contact"
+    ],
+    [
+     32.7,
+     false,
+     null,
+     "fold"
+    ],
+    [
+     40.9,
+     false,
+     -0.73,
+     "contact"
+    ],
+    [
+     49.1,
+     false,
+     -0.1,
+     "contact"
+    ],
+    [
+     57.4,
+     true,
+     0.38,
+     ""
+    ],
+    [
+     65.6,
+     true,
+     0.54,
+     ""
+    ],
+    [
+     73.8,
+     true,
+     0.3,
+     ""
+    ],
+    [
+     82.0,
+     true,
+     0.3,
+     ""
+    ]
+   ],
+   "final_min": 0.54
+  },
+  "423": {
+   "pose": {
+    "plane": 120.0,
+    "elev": 135.0,
+    "axial": -90.0
+   },
+   "th": 119.5,
+   "kit_dK": 63.80114056208796,
+   "pick_dK": 77.8347162123472,
+   "samples": [
+    [
+     63.8,
+     false,
+     -1.66,
+     "contact"
+    ],
+    [
+     57.0,
+     false,
+     null,
+     "fold"
+    ],
+    [
+     61.2,
+     false,
+     null,
+     "slide"
+    ],
+    [
+     65.3,
+     false,
+     -1.61,
+     "contact"
+    ],
+    [
+     69.5,
+     false,
+     -1.53,
+     "contact"
+    ],
+    [
+     73.7,
+     false,
+     -1.37,
+     "contact"
+    ],
+    [
+     77.8,
+     false,
+     -1.33,
+     "contact"
+    ],
+    [
+     82.0,
+     false,
+     -1.42,
+     "contact"
+    ]
+   ],
+   "final_min": null
+  },
+  "119": {
+   "pose": {
+    "plane": -90.0,
+    "elev": 60.0,
+    "axial": 135.0
+   },
+   "th": 119.9,
+   "kit_dK": 64.43627527852085,
+   "pick_dK": 61.81351076868379,
+   "samples": [
+    [
+     64.4,
+     false,
+     -9.76,
+     "contact"
+    ],
+    [
+     57.8,
+     false,
+     null,
+     "fold"
+    ],
+    [
+     61.8,
+     false,
+     -8.48,
+     "contact"
+    ],
+    [
+     65.9,
+     false,
+     -10.35,
+     "contact"
+    ],
+    [
+     69.9,
+     false,
+     -11.93,
+     "contact"
+    ],
+    [
+     73.9,
+     false,
+     -13.37,
+     "contact"
+    ],
+    [
+     78.0,
+     false,
+     -14.6,
+     "contact"
+    ],
+    [
+     82.0,
+     false,
+     -15.8,
+     "contact"
+    ]
+   ],
+   "final_min": null
+  }
+ },
+ "secs": 382.4,
+ "score_oracle": 93.3,
+ "score_oracle_near": 91.58
+}

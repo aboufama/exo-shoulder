@@ -1,0 +1,1293 @@
+{
+ "rows": {
+  "BEST_env_held_p": {
+   "nm": "BEST_env_held_p",
+   "gap": 89.1,
+   "conn": 89.1,
+   "dropped": 0,
+   "n1": 89.75,
+   "n2": 102.64,
+   "reach": 0.3393,
+   "follow": 0.6436,
+   "ib14": 0.887,
+   "contact": 0.0109,
+   "depth_n": 5,
+   "depth_sum": 12.903,
+   "depth_max": 9.86,
+   "ovh_depth_n": 3,
+   "th": 6.378,
+   "why": {
+    "fold": 666,
+    "slide": 30,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 5
+   },
+   "dK": 0.0,
+   "dK_lim": 0.0,
+   "pa": [
+    38.0,
+    32.3
+   ],
+   "failing": 453,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 110,
+     "taken": 0,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "ax150": {
+     "n": 105,
+     "taken": 0,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 71,
+     "taken": 16,
+     "contact": 3,
+     "depth": 11.5
+    },
+    "across": {
+     "n": 175,
+     "taken": 13,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.7656,
+    0.3928
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 5.0,
+    "smlo_priced": 5.5,
+    "smhi": 16.8433,
+    "a1max_nominal": 58.7678,
+    "a1max_priced": 58.5336,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  },
+  "BEST_env_held_u": {
+   "nm": "BEST_env_held_u",
+   "gap": 89.0,
+   "conn": 89.0,
+   "dropped": 0,
+   "n1": 89.65,
+   "n2": 102.52,
+   "reach": 0.3403,
+   "follow": 0.6436,
+   "ib14": 0.887,
+   "contact": 0.0109,
+   "depth_n": 5,
+   "depth_sum": 12.903,
+   "depth_max": 9.86,
+   "ovh_depth_n": 3,
+   "th": 5.406,
+   "why": {
+    "fold": 665,
+    "slide": 30,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 5
+   },
+   "dK": 0.0,
+   "dK_lim": 0.0,
+   "pa": [
+    38.0,
+    32.3
+   ],
+   "failing": 454,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 110,
+     "taken": 0,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "ax150": {
+     "n": 105,
+     "taken": 0,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 71,
+     "taken": 16,
+     "contact": 3,
+     "depth": 11.5
+    },
+    "across": {
+     "n": 175,
+     "taken": 13,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.764,
+    0.3913
+   ],
+   "margin": 5.0,
+   "price": {
+    "why": "unpriced reading (nominal stops)",
+    "margin": 5.0,
+    "pa_max": 38.028
+   }
+  },
+  "BEST_fit60_bench_p": {
+   "nm": "BEST_fit60_bench_p",
+   "gap": 19.05,
+   "conn": 19.05,
+   "dropped": 0,
+   "n1": 20.69,
+   "n2": 34.17,
+   "reach": 0.7194,
+   "follow": 1.0,
+   "ib14": 0.8955,
+   "contact": 0.0054,
+   "depth_n": 2,
+   "depth_sum": 14.746,
+   "depth_max": 9.005,
+   "ovh_depth_n": 2,
+   "th": 5.714,
+   "why": {
+    "fold": 90,
+    "slide": 9,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   },
+   "dK": 43.66,
+   "dK_lim": 49.75,
+   "pa": [
+    29.5,
+    34.6
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 36,
+     "taken": 23,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 28,
+     "taken": 8,
+     "contact": 2,
+     "depth": 14.746
+    },
+    "ax150": {
+     "n": 27,
+     "taken": 3,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "across": {
+     "n": 68,
+     "taken": 20,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8047,
+    0.491
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 5.0,
+    "smlo_priced": 5.5,
+    "smhi": 16.8433,
+    "a1max_nominal": 58.7678,
+    "a1max_priced": 58.5336,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  },
+  "pick1_env_held_p": {
+   "nm": "pick1_env_held_p",
+   "gap": 24.44,
+   "conn": 24.44,
+   "dropped": 0,
+   "n1": 25.33,
+   "n2": 37.32,
+   "reach": 0.6691,
+   "follow": 1.0,
+   "ib14": 0.8971,
+   "contact": 0.0106,
+   "depth_n": 9,
+   "depth_sum": 41.844,
+   "depth_max": 8.723,
+   "ovh_depth_n": 4,
+   "th": 5.619,
+   "why": {
+    "fold": 269,
+    "slide": 37,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 9
+   },
+   "dK": 43.91,
+   "dK_lim": 44.5,
+   "pa": [
+    12.1,
+    37.6
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 110,
+     "taken": 59,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "ax150": {
+     "n": 105,
+     "taken": 24,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 71,
+     "taken": 16,
+     "contact": 4,
+     "depth": 28.321
+    },
+    "across": {
+     "n": 175,
+     "taken": 42,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8324,
+    0.5097
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 6.0676,
+    "smlo_priced": 6.5676,
+    "smhi": 15.8428,
+    "a1max_nominal": 55.9298,
+    "a1max_priced": 55.9298,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  },
+  "pick1_env_held_u": {
+   "nm": "pick1_env_held_u",
+   "gap": 24.23,
+   "conn": 24.23,
+   "dropped": 0,
+   "n1": 25.12,
+   "n2": 37.08,
+   "reach": 0.6712,
+   "follow": 1.0,
+   "ib14": 0.8971,
+   "contact": 0.0106,
+   "depth_n": 9,
+   "depth_sum": 41.844,
+   "depth_max": 8.723,
+   "ovh_depth_n": 4,
+   "th": 5.619,
+   "why": {
+    "fold": 267,
+    "slide": 37,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 9
+   },
+   "dK": 43.91,
+   "dK_lim": 44.5,
+   "pa": [
+    12.1,
+    37.6
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 110,
+     "taken": 59,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "ax150": {
+     "n": 105,
+     "taken": 24,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 71,
+     "taken": 16,
+     "contact": 4,
+     "depth": 28.321
+    },
+    "across": {
+     "n": 175,
+     "taken": 42,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8276,
+    0.5056
+   ],
+   "margin": 5.0,
+   "price": {
+    "why": "unpriced reading (nominal stops)",
+    "margin": 5.0,
+    "pa_max": 38.028
+   }
+  },
+  "pick1_fit60_bench_p": {
+   "nm": "pick1_fit60_bench_p",
+   "gap": 19.44,
+   "conn": 19.44,
+   "dropped": 0,
+   "n1": 21.09,
+   "n2": 45.24,
+   "reach": 0.7083,
+   "follow": 1.0,
+   "ib14": 0.9088,
+   "contact": 0.0027,
+   "depth_n": 1,
+   "depth_sum": 5.42,
+   "depth_max": 5.42,
+   "ovh_depth_n": 1,
+   "th": 5.705,
+   "why": {
+    "fold": 91,
+    "slide": 13,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 1
+   },
+   "dK": 43.58,
+   "dK_lim": 44.5,
+   "pa": [
+    11.7,
+    37.5
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 36,
+     "taken": 23,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 28,
+     "taken": 6,
+     "contact": 1,
+     "depth": 5.42
+    },
+    "ax150": {
+     "n": 27,
+     "taken": 3,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "across": {
+     "n": 68,
+     "taken": 19,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8289,
+    0.5232
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 6.0676,
+    "smlo_priced": 6.5676,
+    "smhi": 15.8428,
+    "a1max_nominal": 55.9298,
+    "a1max_priced": 55.9298,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  },
+  "pick2_env_held_p": {
+   "nm": "pick2_env_held_p",
+   "gap": 26.34,
+   "conn": 26.34,
+   "dropped": 0,
+   "n1": 26.79,
+   "n2": 35.05,
+   "reach": 0.6702,
+   "follow": 1.0,
+   "ib14": 0.877,
+   "contact": 0.0106,
+   "depth_n": 9,
+   "depth_sum": 43.586,
+   "depth_max": 8.297,
+   "ovh_depth_n": 4,
+   "th": 5.524,
+   "why": {
+    "fold": 271,
+    "slide": 34,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 9
+   },
+   "dK": 44.56,
+   "dK_lim": 46.0,
+   "pa": [
+    7.1,
+    37.2
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 110,
+     "taken": 60,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "ax150": {
+     "n": 105,
+     "taken": 24,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 71,
+     "taken": 16,
+     "contact": 4,
+     "depth": 30.341
+    },
+    "across": {
+     "n": 175,
+     "taken": 42,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8077,
+    0.4613
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 6.0904,
+    "smlo_priced": 6.5904,
+    "smhi": 15.5408,
+    "a1max_nominal": 56.2881,
+    "a1max_priced": 56.2881,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  },
+  "pick2_fit60_bench_p": {
+   "nm": "pick2_fit60_bench_p",
+   "gap": 19.71,
+   "conn": 19.71,
+   "dropped": 0,
+   "n1": 20.82,
+   "n2": 41.6,
+   "reach": 0.7056,
+   "follow": 1.0,
+   "ib14": 0.9037,
+   "contact": 0.0027,
+   "depth_n": 1,
+   "depth_sum": 7.086,
+   "depth_max": 7.086,
+   "ovh_depth_n": 1,
+   "th": 5.835,
+   "why": {
+    "fold": 93,
+    "slide": 12,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 1
+   },
+   "dK": 43.36,
+   "dK_lim": 44.75,
+   "pa": [
+    7.9,
+    37.2
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 36,
+     "taken": 23,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 28,
+     "taken": 6,
+     "contact": 1,
+     "depth": 7.086
+    },
+    "ax150": {
+     "n": 27,
+     "taken": 3,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "across": {
+     "n": 68,
+     "taken": 19,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8327,
+    0.5191
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 6.0904,
+    "smlo_priced": 6.5904,
+    "smhi": 15.5408,
+    "a1max_nominal": 56.2881,
+    "a1max_priced": 56.2881,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  },
+  "pick3_env_held_p": {
+   "nm": "pick3_env_held_p",
+   "gap": 24.17,
+   "conn": 24.17,
+   "dropped": 0,
+   "n1": 25.29,
+   "n2": 34.76,
+   "reach": 0.6702,
+   "follow": 1.0,
+   "ib14": 0.8964,
+   "contact": 0.0083,
+   "depth_n": 7,
+   "depth_sum": 44.036,
+   "depth_max": 8.619,
+   "ovh_depth_n": 4,
+   "th": 5.642,
+   "why": {
+    "fold": 265,
+    "slide": 42,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 7
+   },
+   "dK": 48.54,
+   "dK_lim": 48.75,
+   "pa": [
+    23.8,
+    37.9
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 110,
+     "taken": 64,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "ax150": {
+     "n": 105,
+     "taken": 26,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 71,
+     "taken": 15,
+     "contact": 4,
+     "depth": 30.735999999999997
+    },
+    "across": {
+     "n": 175,
+     "taken": 43,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8286,
+    0.4963
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 6.3916,
+    "smlo_priced": 6.8916,
+    "smhi": 17.2689,
+    "a1max_nominal": 55.8908,
+    "a1max_priced": 55.8908,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  },
+  "pick3_fit60_bench_p": {
+   "nm": "pick3_fit60_bench_p",
+   "gap": 21.2,
+   "conn": 21.2,
+   "dropped": 0,
+   "n1": 22.31,
+   "n2": 33.47,
+   "reach": 0.7,
+   "follow": 1.0,
+   "ib14": 0.8935,
+   "contact": 0.0055,
+   "depth_n": 2,
+   "depth_sum": 11.162,
+   "depth_max": 7.28,
+   "ovh_depth_n": 1,
+   "th": 6.023,
+   "why": {
+    "fold": 90,
+    "slide": 16,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   },
+   "dK": 47.15,
+   "dK_lim": 48.5,
+   "pa": [
+    22.1,
+    37.3
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 36,
+     "taken": 23,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 28,
+     "taken": 6,
+     "contact": 1,
+     "depth": 7.28
+    },
+    "ax150": {
+     "n": 27,
+     "taken": 3,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "across": {
+     "n": 68,
+     "taken": 19,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8353,
+    0.526
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 6.3916,
+    "smlo_priced": 6.8916,
+    "smhi": 17.2689,
+    "a1max_nominal": 55.8908,
+    "a1max_priced": 55.8908,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  },
+  "BEST_fit60_bench_u": {
+   "nm": "BEST_fit60_bench_u",
+   "gap": 18.49,
+   "conn": 18.49,
+   "dropped": 0,
+   "n1": 20.12,
+   "n2": 33.02,
+   "reach": 0.725,
+   "follow": 1.0,
+   "ib14": 0.8955,
+   "contact": 0.0054,
+   "depth_n": 2,
+   "depth_sum": 14.746,
+   "depth_max": 9.005,
+   "ovh_depth_n": 2,
+   "th": 5.181,
+   "why": {
+    "fold": 88,
+    "slide": 9,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   },
+   "dK": 45.62,
+   "dK_lim": 49.75,
+   "pa": [
+    29.5,
+    35.8
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 36,
+     "taken": 23,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 28,
+     "taken": 8,
+     "contact": 2,
+     "depth": 14.746
+    },
+    "ax150": {
+     "n": 27,
+     "taken": 3,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "across": {
+     "n": 68,
+     "taken": 20,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8004,
+    0.492
+   ],
+   "margin": 5.0,
+   "price": {
+    "why": "unpriced reading (nominal stops)",
+    "margin": 5.0,
+    "pa_max": 38.028
+   }
+  },
+  "BEST_fit60_held_p": {
+   "nm": "BEST_fit60_held_p",
+   "gap": 24.63,
+   "conn": 24.63,
+   "dropped": 0,
+   "n1": 27.51,
+   "n2": 37.34,
+   "reach": 0.6712,
+   "follow": 1.0,
+   "ib14": 0.8943,
+   "contact": 0.0118,
+   "depth_n": 10,
+   "depth_sum": 46.121,
+   "depth_max": 9.055,
+   "ovh_depth_n": 6,
+   "th": 5.529,
+   "why": {
+    "fold": 271,
+    "slide": 32,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 10
+   },
+   "dK": 44.34,
+   "dK_lim": 49.75,
+   "pa": [
+    29.5,
+    35.0
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 110,
+     "taken": 57,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "ax150": {
+     "n": 105,
+     "taken": 24,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 71,
+     "taken": 18,
+     "contact": 6,
+     "depth": 34.301
+    },
+    "across": {
+     "n": 175,
+     "taken": 41,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8218,
+    0.486
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 5.0,
+    "smlo_priced": 5.5,
+    "smhi": 16.8433,
+    "a1max_nominal": 58.7678,
+    "a1max_priced": 58.5336,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  },
+  "pick1_fit60_bench_u": {
+   "nm": "pick1_fit60_bench_u",
+   "gap": 19.44,
+   "conn": 19.44,
+   "dropped": 0,
+   "n1": 21.09,
+   "n2": 45.24,
+   "reach": 0.7083,
+   "follow": 1.0,
+   "ib14": 0.9088,
+   "contact": 0.0027,
+   "depth_n": 1,
+   "depth_sum": 5.42,
+   "depth_max": 5.42,
+   "ovh_depth_n": 1,
+   "th": 5.705,
+   "why": {
+    "fold": 90,
+    "slide": 14,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 1
+   },
+   "dK": 43.58,
+   "dK_lim": 44.5,
+   "pa": [
+    11.7,
+    37.5
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 36,
+     "taken": 23,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 28,
+     "taken": 6,
+     "contact": 1,
+     "depth": 5.42
+    },
+    "ax150": {
+     "n": 27,
+     "taken": 3,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "across": {
+     "n": 68,
+     "taken": 19,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.829,
+    0.5232
+   ],
+   "margin": 5.0,
+   "price": {
+    "why": "unpriced reading (nominal stops)",
+    "margin": 5.0,
+    "pa_max": 38.028
+   }
+  },
+  "pick1_fit60_held_p": {
+   "nm": "pick1_fit60_held_p",
+   "gap": 24.25,
+   "conn": 24.25,
+   "dropped": 0,
+   "n1": 27.16,
+   "n2": 48.31,
+   "reach": 0.6681,
+   "follow": 1.0,
+   "ib14": 0.907,
+   "contact": 0.0106,
+   "depth_n": 9,
+   "depth_sum": 40.475,
+   "depth_max": 8.742,
+   "ovh_depth_n": 4,
+   "th": 5.716,
+   "why": {
+    "fold": 269,
+    "slide": 38,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 9
+   },
+   "dK": 43.53,
+   "dK_lim": 44.5,
+   "pa": [
+    11.7,
+    37.5
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 110,
+     "taken": 59,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "ax150": {
+     "n": 105,
+     "taken": 24,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 71,
+     "taken": 16,
+     "contact": 4,
+     "depth": 28.39
+    },
+    "across": {
+     "n": 175,
+     "taken": 42,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8416,
+    0.5213
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 6.0676,
+    "smlo_priced": 6.5676,
+    "smhi": 15.8428,
+    "a1max_nominal": 55.9298,
+    "a1max_priced": 55.9298,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  },
+  "pick1_fit60_held_u": {
+   "nm": "pick1_fit60_held_u",
+   "gap": 24.04,
+   "conn": 24.04,
+   "dropped": 0,
+   "n1": 26.94,
+   "n2": 48.07,
+   "reach": 0.6702,
+   "follow": 1.0,
+   "ib14": 0.907,
+   "contact": 0.0106,
+   "depth_n": 9,
+   "depth_sum": 40.475,
+   "depth_max": 8.742,
+   "ovh_depth_n": 4,
+   "th": 5.716,
+   "why": {
+    "fold": 267,
+    "slide": 38,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 9
+   },
+   "dK": 43.53,
+   "dK_lim": 44.5,
+   "pa": [
+    11.7,
+    37.5
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 110,
+     "taken": 59,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "ax150": {
+     "n": 105,
+     "taken": 24,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 71,
+     "taken": 16,
+     "contact": 4,
+     "depth": 28.39
+    },
+    "across": {
+     "n": 175,
+     "taken": 42,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8367,
+    0.5168
+   ],
+   "margin": 5.0,
+   "price": {
+    "why": "unpriced reading (nominal stops)",
+    "margin": 5.0,
+    "pa_max": 38.028
+   }
+  },
+  "pick2_fit60_held_p": {
+   "nm": "pick2_fit60_held_p",
+   "gap": 24.03,
+   "conn": 24.03,
+   "dropped": 0,
+   "n1": 26.93,
+   "n2": 46.91,
+   "reach": 0.6691,
+   "follow": 1.0,
+   "ib14": 0.9019,
+   "contact": 0.0094,
+   "depth_n": 8,
+   "depth_sum": 41.049,
+   "depth_max": 8.459,
+   "ovh_depth_n": 4,
+   "th": 5.524,
+   "why": {
+    "fold": 271,
+    "slide": 36,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 8
+   },
+   "dK": 44.56,
+   "dK_lim": 44.75,
+   "pa": [
+    8.1,
+    37.8
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 110,
+     "taken": 60,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "ax150": {
+     "n": 105,
+     "taken": 24,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 71,
+     "taken": 16,
+     "contact": 4,
+     "depth": 30.206999999999997
+    },
+    "across": {
+     "n": 175,
+     "taken": 42,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8288,
+    0.4974
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 6.0904,
+    "smlo_priced": 6.5904,
+    "smhi": 15.5408,
+    "a1max_nominal": 56.2881,
+    "a1max_priced": 56.2881,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  },
+  "pick3_fit60_held_p": {
+   "nm": "pick3_fit60_held_p",
+   "gap": 24.76,
+   "conn": 24.76,
+   "dropped": 0,
+   "n1": 25.87,
+   "n2": 39.66,
+   "reach": 0.6691,
+   "follow": 1.0,
+   "ib14": 0.8916,
+   "contact": 0.0083,
+   "depth_n": 7,
+   "depth_sum": 41.813,
+   "depth_max": 8.589,
+   "ovh_depth_n": 4,
+   "th": 5.968,
+   "why": {
+    "fold": 266,
+    "slide": 42,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 7
+   },
+   "dK": 47.35,
+   "dK_lim": 48.5,
+   "pa": [
+    22.1,
+    37.4
+   ],
+   "failing": 0,
+   "byc": {
+    "lowarm_xrot": {
+     "n": 110,
+     "taken": 64,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "ax150": {
+     "n": 105,
+     "taken": 26,
+     "contact": 0,
+     "depth": 0.0
+    },
+    "overhead": {
+     "n": 71,
+     "taken": 15,
+     "contact": 4,
+     "depth": 30.502000000000002
+    },
+    "across": {
+     "n": 175,
+     "taken": 42,
+     "contact": 0,
+     "depth": 0.0
+    }
+   },
+   "ws90": [
+    0.8238,
+    0.4973
+   ],
+   "margin": 5.5,
+   "price": {
+    "smlo_nominal": 6.3916,
+    "smlo_priced": 6.8916,
+    "smhi": 17.2689,
+    "a1max_nominal": 55.8908,
+    "a1max_priced": 55.8908,
+    "margin": 5.5,
+    "pa_max": 38.028
+   }
+  }
+ },
+ "gains": {
+  "pick1_env_held_p": {
+   "gap": 64.66,
+   "n1": 64.42,
+   "n2": 65.32,
+   "depth": 28.94
+  },
+  "pick1_env_held_u": {
+   "gap": 64.77,
+   "n1": 64.53,
+   "n2": 65.44,
+   "depth": 28.94
+  },
+  "pick1_fit60_bench_p": {
+   "gap": -0.39,
+   "n1": -0.4,
+   "n2": -11.07,
+   "depth": -9.33
+  },
+  "pick1_fit60_bench_u": {
+   "gap": -0.95,
+   "n1": -0.97,
+   "n2": -12.22,
+   "depth": -9.33
+  },
+  "pick1_fit60_held_p": {
+   "gap": 0.38,
+   "n1": 0.35,
+   "n2": -10.97,
+   "depth": -5.65
+  },
+  "pick2_env_held_p": {
+   "gap": 62.76,
+   "n1": 62.96,
+   "n2": 67.59,
+   "depth": 30.68
+  },
+  "pick2_fit60_bench_p": {
+   "gap": -0.66,
+   "n1": -0.13,
+   "n2": -7.43,
+   "depth": -7.66
+  },
+  "pick2_fit60_held_p": {
+   "gap": 0.6,
+   "n1": 0.58,
+   "n2": -9.57,
+   "depth": -5.07
+  },
+  "pick3_env_held_p": {
+   "gap": 64.93,
+   "n1": 64.46,
+   "n2": 67.88,
+   "depth": 31.13
+  },
+  "pick3_fit60_bench_p": {
+   "gap": -2.15,
+   "n1": -1.62,
+   "n2": 0.7,
+   "depth": -3.58
+  },
+  "pick3_fit60_held_p": {
+   "gap": -0.13,
+   "n1": 1.64,
+   "n2": -2.32,
+   "depth": -4.31
+  }
+ }
+}

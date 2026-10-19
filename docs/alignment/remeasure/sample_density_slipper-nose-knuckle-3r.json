@@ -1,0 +1,348 @@
+{
+ "id": "slipper-nose-knuckle-3r",
+ "tool": "tools/sample_density.py",
+ "version": "2026-10-18.1",
+ "kit_cell_mm2": 4.0,
+ "flag": [
+  0.5,
+  2.0
+ ],
+ "model": "docs/concepts/models/slipper-nose-knuckle-3r.py",
+ "params": {
+  "g": 2.3934,
+  "beta": -176.684,
+  "r_c": 15.3739,
+  "lift": 0.7882,
+  "hl": 1.9442,
+  "zr": 4.0293,
+  "s_arm": 4.0,
+  "r_lobe": 8.2661,
+  "nose_r": 1.1839,
+  "az2": 45.8211,
+  "el2": 41.0855,
+  "lE": 67.832,
+  "phiE": -2.7863,
+  "lc": 21.1499,
+  "phib": -58.8084,
+  "a1max": 58.7678,
+  "kK": 2.1534,
+  "smhi": 16.8433,
+  "bk1": 26.0,
+  "bk2": 38.0336,
+  "mu": 0.087
+ },
+ "fit_secs": 4.5,
+ "row_v_gap": 18.49,
+ "row_status": "verified",
+ "parts": {
+  "hub1": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.1,
+   "cell_median": 3.995,
+   "d1": 1.996,
+   "d2": 2.001,
+   "one_row_share": 0.0,
+   "ratio": 1.003,
+   "hull_area_mm2": 339.5,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hubK": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.6,
+   "cell_median": 4.0,
+   "d1": 1.998,
+   "d2": 2.002,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 339.7,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hub2": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.1,
+   "cell_median": 3.987,
+   "d1": 1.992,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.003,
+   "hull_area_mm2": 339.5,
+   "ratio_hull": 0.943,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hub3": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.8,
+   "cell_median": 3.996,
+   "d1": 1.999,
+   "d2": 1.999,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 339.7,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "E": {
+   "n": 104,
+   "n_unique": 104,
+   "area_mm2": 422.4,
+   "cell_median": 4.049,
+   "d1": 1.999,
+   "d2": 2.024,
+   "one_row_share": 0.0,
+   "ratio": 0.985,
+   "hull_area_mm2": 422.2,
+   "ratio_hull": 0.985,
+   "flatness": 0.026,
+   "masked_lattice": false
+  },
+  "boss": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 127.9,
+   "cell_median": 4.001,
+   "d1": 1.999,
+   "d2": 2.001,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 131.3,
+   "ratio_hull": 0.975,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "pad": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 127.9,
+   "cell_median": 3.998,
+   "d1": 1.998,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 131.3,
+   "ratio_hull": 0.975,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "knee": {
+   "n": 85,
+   "n_unique": 85,
+   "area_mm2": 339.8,
+   "cell_median": 4.0,
+   "d1": 1.999,
+   "d2": 2.001,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 340.1,
+   "ratio_hull": 1.0,
+   "flatness": 0.0,
+   "masked_lattice": false
+  },
+  "crank": {
+   "n": 129,
+   "n_unique": 129,
+   "area_mm2": 507.4,
+   "cell_median": 4.035,
+   "d1": 1.912,
+   "d2": 2.102,
+   "one_row_share": 0.0,
+   "ratio": 1.017,
+   "hull_area_mm2": 793.1,
+   "ratio_hull": 0.651,
+   "flatness": 0.095,
+   "masked_lattice": false
+  },
+  "roller": {
+   "n": 19,
+   "n_unique": 19,
+   "area_mm2": 16.7,
+   "cell_median": 0.688,
+   "d1": 0.462,
+   "d2": 1.499,
+   "one_row_share": 0.0,
+   "ratio": 4.549,
+   "hull_area_mm2": 6.2,
+   "ratio_hull": 12.248,
+   "flatness": 0.54,
+   "masked_lattice": false
+  },
+  "horn": {
+   "n": 23,
+   "n_unique": 23,
+   "area_mm2": 67.1,
+   "cell_median": 2.781,
+   "d1": 1.438,
+   "d2": 1.94,
+   "one_row_share": 0.0,
+   "ratio": 1.37,
+   "hull_area_mm2": 88.9,
+   "ratio_hull": 1.035,
+   "flatness": 0.106,
+   "masked_lattice": false
+  },
+  "L1a": {
+   "n": 8,
+   "n_unique": 8,
+   "area_mm2": 97.2,
+   "cell_median": 12.352,
+   "d1": 2.354,
+   "d2": 4.651,
+   "one_row_share": 0.0,
+   "ratio": 0.329,
+   "hull_area_mm2": 73.6,
+   "ratio_hull": 0.435,
+   "flatness": 0.352,
+   "masked_lattice": true
+  },
+  "L1b": {
+   "n": 36,
+   "n_unique": 36,
+   "area_mm2": 198.1,
+   "cell_median": 4.094,
+   "d1": 1.954,
+   "d2": 2.073,
+   "one_row_share": 0.0,
+   "ratio": 0.727,
+   "hull_area_mm2": 178.2,
+   "ratio_hull": 0.808,
+   "flatness": 0.368,
+   "masked_lattice": false
+  },
+  "L2": {
+   "n": 124,
+   "n_unique": 124,
+   "area_mm2": 588.2,
+   "cell_median": 4.332,
+   "d1": 2.016,
+   "d2": 2.111,
+   "one_row_share": 0.0,
+   "ratio": 0.843,
+   "hull_area_mm2": 621.0,
+   "ratio_hull": 0.799,
+   "flatness": 0.12,
+   "masked_lattice": false
+  }
+ },
+ "flagged": {
+  "roller": 4.549,
+  "L1a": 0.329
+ },
+ "over_dense": [
+  "roller"
+ ],
+ "masked_lattice": [
+  "L1a"
+ ],
+ "note": "ratio = samples / mm2 over the kit's 1 / 4 mm2 (cell = d1 x d2, the grid's two pitches; a one-row part is credited 2 mm across). Re-weight: each flagged part's count set to n / ratio in the saved per-part in-band; exact for the counts, assumes the part's in-band share is uniform over its samples.",
+ "bench": {
+  "file": "docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_frozen.json",
+  "path": "/",
+  "frozen": {
+   "gap": 18.49,
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8955,
+   "inband10": 0.5163,
+   "contact": 0.0054
+  },
+  "recomputed_ib14": 0.8955,
+  "variants": {
+   "over_at_kit": {
+    "ib14": 0.8948,
+    "gap": 18.56,
+    "n": {
+     "roller": 4.18
+    }
+   },
+   "over_at_kit_hull": {
+    "ib14": 0.8947,
+    "gap": 18.57,
+    "n": {
+     "roller": 1.55
+    }
+   },
+   "flagged_at_kit": {
+    "ib14": 0.8963,
+    "gap": 18.41,
+    "n": {
+     "roller": 4.18,
+     "L1a": 24.32
+    }
+   },
+   "per_part": {
+    "roller": 18.56,
+    "L1a": 18.34
+   },
+   "all_parts_at_kit": {
+    "ib14": 0.8928,
+    "gap": 18.76
+   },
+   "as_sampled": {
+    "ib14": 0.8955,
+    "gap": 18.49
+   }
+  },
+  "count_mismatch": {}
+ },
+ "held": {
+  "file": "docs/concepts/verify/slipper-nose-knuckle-3r_v_held_frozen.json",
+  "path": "/",
+  "frozen": {
+   "gap": 23.45,
+   "reach": 0.6828,
+   "follow": 1.0,
+   "inband14": 0.8943,
+   "inband10": 0.5148,
+   "contact": 0.0116
+  },
+  "recomputed_ib14": 0.8943,
+  "variants": {
+   "over_at_kit": {
+    "ib14": 0.8936,
+    "gap": 23.52,
+    "n": {
+     "roller": 4.18
+    }
+   },
+   "over_at_kit_hull": {
+    "ib14": 0.8935,
+    "gap": 23.53,
+    "n": {
+     "roller": 1.55
+    }
+   },
+   "flagged_at_kit": {
+    "ib14": 0.8952,
+    "gap": 23.36,
+    "n": {
+     "roller": 4.18,
+     "L1a": 24.32
+    }
+   },
+   "per_part": {
+    "roller": 23.52,
+    "L1a": 23.3
+   },
+   "all_parts_at_kit": {
+    "ib14": 0.8916,
+    "gap": 23.72
+   },
+   "as_sampled": {
+    "ib14": 0.8943,
+    "gap": 23.45
+   }
+  },
+  "count_mismatch": {}
+ },
+ "exact_rewear_cmd": "CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/sample_density.py rewear slipper-nose-knuckle-3r bench|held",
+ "secs": 4.7
+}

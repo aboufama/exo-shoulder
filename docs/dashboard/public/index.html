@@ -1,0 +1,670 @@
+<title>Shoulder Exo Progress</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<style>
+/* Public mirror of the shoulder-exo dashboard: the production page on the Dashboard type's tokens, no store. */
+:root { --color-fg: #0b0b0b; --color-fg-muted: #898781; --color-bg: #f9f9f7; --color-panel: #fff; --color-border-line: rgb(11 11 11 / 10%); --color-ok: #006300; --color-warn: #734500; --color-bad: #8e2626; --cds-chart-muted: #c3c2b7; --cds-chart-status-critical: #d03b3b; --cds-chart-reference: #898781; --cds-surface-popover: #fff; --cds-shadow-popover: 0 8px 24px #0000001f, 0 2px 6px #00000014; --cds-border: rgb(11 11 11 / 10%); --cat-1: rgb(42 120 214); --cat-2: rgb(235 104 52); --cat-3: rgb(27 175 122); --cat-4: rgb(237 161 0); --cat-5: rgb(232 123 164); --cat-6: rgb(0 131 0); --cat-7: rgb(98 80 214); --cat-8: rgb(227 73 72); --cds-radius: .5rem; --cds-pad-lg: 1rem; --cds-gap-md: 1rem; --cds-gap-xl: 2.5rem; --cds-font-weight-medium: 500; --cds-font-size-caption: .75rem; --cds-font-size-title: 1.375rem; --cds-font-size-heading: .9375rem; --font-anthropic-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --font-anthropic-serif: ui-serif, Georgia, "Times New Roman", serif; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --color-fg: #f0efec; --color-fg-muted: #898781; --color-bg: #0b0b0b; --color-panel: #1a1a19; --color-border-line: rgb(255 255 255 / 10%); --color-ok: #0ca30c; --color-warn: #db9300; --color-bad: #ec7e7e; --cds-chart-muted: #5f5e5a; --cds-chart-status-critical: #d03b3b; --cds-chart-reference: #97958d; --cds-surface-popover: #20201f; --cds-shadow-popover: 0 8px 24px #00000052, 0 2px 6px #0003; --cds-border: rgb(255 255 255 / 10%); --cat-1: rgb(57 135 229); --cat-2: rgb(217 89 38); --cat-3: rgb(25 158 112); --cat-4: rgb(201 133 0); --cat-5: rgb(213 81 129); --cat-6: rgb(0 131 0); --cat-7: rgb(144 133 233); --cat-8: rgb(230 103 103); color-scheme: dark; } }
+:root[data-theme="dark"] { --color-fg: #f0efec; --color-fg-muted: #898781; --color-bg: #0b0b0b; --color-panel: #1a1a19; --color-border-line: rgb(255 255 255 / 10%); --color-ok: #0ca30c; --color-warn: #db9300; --color-bad: #ec7e7e; --cds-chart-muted: #5f5e5a; --cds-chart-status-critical: #d03b3b; --cds-chart-reference: #97958d; --cds-surface-popover: #20201f; --cds-shadow-popover: 0 8px 24px #00000052, 0 2px 6px #0003; --cds-border: rgb(255 255 255 / 10%); --cat-1: rgb(57 135 229); --cat-2: rgb(217 89 38); --cat-3: rgb(25 158 112); --cat-4: rgb(201 133 0); --cat-5: rgb(213 81 129); --cat-6: rgb(0 131 0); --cat-7: rgb(144 133 233); --cat-8: rgb(230 103 103); color-scheme: dark; }
+body { background: var(--color-bg); color: var(--color-fg); font-family: var(--font-anthropic-sans); font-size: 14px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 40px; }
+#dash-root { min-width: 0; }
+.pub-note { max-width: 1100px; margin: 0 auto 16px; font-size: .75rem; color: var(--color-fg-muted); }
+.pub-err { max-width: 1100px; margin: 0 auto 16px; font-size: .8125rem; color: var(--color-bad); }
+</style>
+<p class="pub-note">Public copy of the shoulder-exo dashboard, refreshed about every 15 minutes.</p>
+<p class="pub-err" id="pub-err" hidden></p>
+<script>
+/* A small stand-in for the Dashboard type's `dash` API: the same datasets, fetched from the files beside this page. */
+window.dash = (() => {
+  const IDS = ["morphs", "sweeps", "events", "reqs", "cad", "motion"], state = {}, calcs = [], cbs = [];
+  IDS.forEach((id) => { state[id] = { status: 'loading', data: [] }; });
+  const colors = [1, 2, 3, 4, 5, 6, 7, 8].map((i) => `var(--cat-${i})`);
+  const data = (id) => state[id] || { status: 'missing', data: [] };
+  const calc = (id, spec) => { calcs.push([id, spec]); state[id] = { status: 'loading', data: [] }; };
+  const recompute = () => {
+    for (const [id, s] of calcs) {
+      const ins = s.inputs.map((i) => data(i));
+      if (ins.every((x) => x.status === 'ok')) {
+        try { state[id] = { status: 'ok', data: s.fn(...ins.map((x) => x.data)) }; }
+        catch (e) { state[id] = { status: 'error', data: [], message: String(e) }; console.error(e); }
+      } else if (ins.some((x) => x.status === 'error')) state[id] = { status: 'error', data: [] };
+    }
+  };
+  const run = (f) => { try { f(); } catch (e) { console.error(e); } };
+  let queued = 0;
+  const fire = () => { if (queued) return; queued = requestAnimationFrame(() => { queued = 0; recompute(); cbs.forEach(run); }); };
+  const onData = (f) => { cbs.push(f); recompute(); run(f); };
+  const failed = [];
+  IDS.forEach((id) => {
+    fetch(`data/${id}.json`).then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      .then((j) => { state[id] = { status: 'ok', data: Array.isArray(j) ? j : (j.rows || j.data || j.results || []) }; fire(); })
+      .catch((e) => {
+        state[id] = { status: 'error', data: [], message: String(e) }; failed.push(id); fire();
+        const n = document.getElementById('pub-err'); if (n) { n.hidden = false; n.textContent = `Could not load: ${failed.join(', ')}. Reload the page to try again.`; }
+      });
+  });
+  let w = 0;
+  if ('ResizeObserver' in window) new ResizeObserver((es) => { const nw = Math.round(es[0].contentRect.width); if (nw !== w) { w = nw; fire(); } }).observe(document.documentElement);
+  return { data, calc, onData, colors, refresh: () => {}, params: () => ({}), setParams: () => {}, resetParams: () => {}, setLink: () => {} };
+})();
+</script>
+<div id="dash-root">
+<style>
+/* One page, read top to bottom: who is winning, why the others fail, progress, what is happening, the built prototype. */
+.sx { --sx-accent: var(--cds-chart-status-critical, #c2410c); display: grid; gap: var(--cds-gap-xl, 28px); font-family: var(--font-anthropic-sans); color: var(--color-fg); max-width: 1100px; margin-inline: auto; }
+.sx h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title, 28px); margin: 0; text-wrap: balance; }
+.sx h2 { font-size: var(--cds-font-size-heading, 18px); font-weight: var(--cds-font-weight-medium, 500); margin: 0 0 4px; }
+.sx p { margin: 0; line-height: 1.5; max-width: 70ch; }
+.sx .muted { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption, 13px); }
+.sx .lede { font-size: 17px; margin-top: 8px; }
+.sx .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--cds-gap-md, 12px); margin-top: 16px; }
+.sx .kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius, 10px); padding: var(--cds-pad-lg, 16px); display: grid; gap: 4px; }
+.sx .kpi.lead { border: 2px solid var(--color-ok); }
+.sx .kpi .big { font-family: var(--font-anthropic-serif); font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; }
+.sx .kpi .lab { font-size: var(--cds-font-size-caption, 13px); color: var(--color-fg-muted); }
+.sx .card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius, 10px); padding: var(--cds-pad-lg, 16px); min-width: 0; }
+.sx .chart { position: relative; min-height: 340px; }
+.sx svg text { fill: var(--color-fg-muted); font-size: 12px; font-family: var(--font-anthropic-sans); }
+.sx svg .lbl { fill: var(--color-fg); font-size: 12px; }
+.sx .tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover, var(--color-panel)); border: 1px solid var(--cds-border, var(--color-border-line)); border-radius: var(--cds-radius, 8px); box-shadow: var(--cds-shadow-popover, none); padding: 6px 10px; font-size: 12px; max-width: 260px; }
+.sx table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14px; }
+.sx th { text-align: left; font-weight: var(--cds-font-weight-medium, 500); color: var(--color-fg-muted); font-size: 12px; padding: 6px 8px; border-bottom: 1px solid var(--color-border-line); }
+.sx td { padding: 8px; border-bottom: 1px solid var(--color-border-line); vertical-align: middle; }
+.sx td.num, .sx th.num { text-align: right; }
+.sx td.unv { color: var(--color-fg-muted); font-size: 12px; }
+.sx .meter { display: inline-block; width: 60px; height: 6px; border-radius: 3px; background: var(--color-border-line); vertical-align: middle; margin-right: 6px; overflow: hidden; }
+.sx .meter > i { display: block; height: 100%; background: var(--color-fg-muted); }
+.sx .meter > i.ok { background: var(--color-ok); }
+.sx .pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; border: 1px solid var(--color-border-line); white-space: nowrap; }
+.sx .pill.ver { border-color: var(--color-ok); color: var(--color-ok); }
+.sx .pill.dead { color: var(--color-fg-muted); }
+.sx .pill.run { border-color: var(--color-warn); color: var(--color-warn); }
+.sx .scroll { overflow-x: auto; }
+.sx .events { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 8px; }
+.sx .events li { display: grid; grid-template-columns: 52px 1fr; gap: 8px; font-size: 14px; }
+.sx .events time { color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.sx .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.sx .chip { padding: 4px 10px; border-radius: 999px; font-size: 12px; border: 1px solid var(--color-border-line); }
+.sx .chip.pass { border-color: var(--color-ok); color: var(--color-ok); }
+.sx .chip.fail { border-color: var(--color-bad); color: var(--color-bad); }
+.sx .chip.none { color: var(--color-fg-muted); border-style: dashed; }
+.sx .detail-head { border-top: 1px solid var(--color-border-line); padding-top: 20px; }
+.sx .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--cds-gap-md, 12px); }
+.sx .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 8px 0 0; font-size: 12px; color: var(--color-fg-muted); }
+.sx .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+@media (max-width: 640px) { .sx .hide-sm { display: none; } .sx .kpi .big { font-size: 32px; } }
+/* motion previews (leaderboard, first column): monochrome, theme tokens only; the shoulder faint, the mechanism in the text colour */
+.sx th.mo, .sx td.mo { width: 56px; padding: 2px 8px 2px 0; }
+.sx td.mo svg { display: block; width: 56px; height: 56px; overflow: hidden; }
+.sx td.mo path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.sx td.mo .mo-b { stroke: var(--color-fg-muted); stroke-opacity: .55; stroke-width: 1; }
+/* on the dark card a faint muted line disappears: the shoulder gets more opacity there (still lighter than the mechanism) */
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sx td.mo .mo-b { stroke-opacity: .85; } }
+:root[data-theme="dark"] .sx td.mo .mo-b { stroke-opacity: .85; }
+.sx td.mo .mo-m { stroke: var(--color-fg); stroke-width: 1.2; }
+.sx td.mo .mo-j { stroke: var(--color-fg); stroke-width: 2.4; }
+/* tap / click a preview to enlarge it (user 2026-10-16: "pressing on a preview should enlarge it so its easier to see") */
+.sx td.mo svg { cursor: zoom-in; border-radius: 4px; }
+.sx td.mo svg:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 1px; }
+.sx dialog.mo-zoom { position: fixed; inset: 0; margin: auto; height: fit-content; background: var(--cds-surface-popover, var(--color-panel)); color: var(--color-fg); border: 1px solid var(--cds-border, var(--color-border-line)); border-radius: var(--cds-radius, 10px); box-shadow: var(--cds-shadow-popover, none); padding: 14px 16px 16px; width: min(92vw, 560px); max-width: 92vw; max-height: 92vh; overflow: auto; }
+.sx dialog.mo-zoom::backdrop { background: rgba(0, 0, 0, .55); }
+.sx .mo-zoom .zh { display: flex; align-items: flex-start; gap: 12px; }
+.sx .mo-zoom .zh h3 { margin: 0; font-size: 16px; line-height: 1.3; flex: 1; }
+.sx .mo-zoom .zx { background: none; border: 1px solid var(--color-border-line); color: var(--color-fg); border-radius: 999px; width: 30px; height: 30px; font-size: 18px; line-height: 1; cursor: pointer; flex: none; }
+.sx .mo-zoom .zm { margin: 4px 0 10px; font-size: 13px; color: var(--color-fg-muted); }
+.sx .mo-zoom svg { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; }
+.sx .mo-zoom path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.sx .mo-zoom .mo-b { stroke: var(--color-fg-muted); stroke-opacity: .6; stroke-width: 1.6; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sx .mo-zoom .mo-b { stroke-opacity: .85; } }
+:root[data-theme="dark"] .sx .mo-zoom .mo-b { stroke-opacity: .85; }
+.sx .mo-zoom .mo-m { stroke: var(--color-fg); stroke-width: 2.6; }
+.sx .mo-zoom .mo-j { stroke: var(--color-fg); stroke-width: 6; }
+/* the sections below the leaderboard hold ~46k chart dots: their rendering is skipped while they are off-screen, so a
+   preview tick repaints what is on screen, not every chart (round-2 review: the 10 fps previews kept 22-30 % of the main
+   thread busy, Layerize + Paint over the whole page). Placeholder heights ~ their drawn heights at 1280 px. */
+.sx #progress, .sx #now, .sx #built, .sx #all-configs, .sx #targets, .sx #built-time { content-visibility: auto; contain-intrinsic-size: auto 400px; }
+/* simplicity (the complexity count, lower = simpler): a number and a tiny bar, monochrome; a design with 3 passive
+   translations (not buildable, CLAUDE.md) in the fail colour */
+.sx th .cap { display: block; font-weight: 400; font-size: 11px; white-space: nowrap; }
+.sx td.cx { white-space: nowrap; }
+.sx .cxbar { display: inline-block; width: 36px; height: 6px; border-radius: 3px; background: var(--color-border-line); vertical-align: middle; margin-left: 6px; overflow: hidden; }
+.sx .cxbar > i { display: block; height: 100%; background: var(--color-fg-muted); }
+.sx td.cx.bad { color: var(--color-bad); }
+.sx td.cx.bad .cxbar > i { background: var(--color-bad); }
+/* the simplicity column needs room (the board was already full between 640 and 760 px): below 860 px the board's
+   meters shorten, the simplicity bar goes (the number stays), its caption wraps and a two-word status pill wraps */
+@media (max-width: 860px) {
+  .sx #board .meter { width: 36px; }
+  .sx #board .cxbar { display: none; }
+  .sx #board th.cx { font-size: 11px; }
+  .sx #board th.cx .cap { white-space: normal; }
+  .sx #board .pill { white-space: normal; text-align: center; }
+}
+@media (max-width: 520px) {
+  .sx #board th, .sx #board td { padding-left: 4px; padding-right: 4px; }
+  /* the simplicity column made the board 77 px too wide at 400 px. On a phone the board keeps the two numbers that do
+     not follow from each other, score and simplicity: close-to-skin goes the way of follows / reaches (the score's
+     parts, all three in the "Two ways to fail" chart) */
+  .sx #board .cl { display: none; }
+  .sx #board .meter { width: 30px; margin-right: 4px; }
+  .sx #board .pill { padding: 1px 6px; font-size: 11px; }
+  .sx #board th.mo, .sx #board td.mo { width: 44px; padding: 2px 6px 2px 0; }
+  .sx td.mo svg { width: 44px; height: 44px; }
+  .sx td.mo .mo-m { stroke-width: 1.1; }
+  .sx td.mo .mo-j { stroke-width: 2.1; }
+}
+</style>
+
+<div class="sx">
+  <header id="top">
+    <h1>Shoulder exo design search</h1>
+    <p class="muted" id="tz-note">All times are US Eastern.</p>
+    <p class="lede" id="lede" data-source="leader">—</p>
+    <div class="kpis">
+      <div class="kpi lead" id="kpi-best"><span class="lab">Best verified 3-joint design</span><span class="big" data-source="leader" data-field="score">—</span><span id="kpi-best-name" class="muted" data-source="leader" data-field="short">—</span><span id="kpi-best-cx" class="muted" data-source="leader" data-field="complexity"></span></div>
+      <div class="kpi"><span class="lab">Goal score</span><span class="big">100</span><span class="muted">every target met</span></div>
+    </div>
+    <p class="muted" style="margin-top:12px">Score, 0-100 (higher is better): how close a design comes to three targets at once - metal 2-14 mm from the skin (90 % of the metal), following the arm (95 % of motion frames) and reaching everyday arm poses (90 %) - minus a penalty wherever metal would touch the skin.</p>
+  </header>
+
+  <section class="card" id="camps">
+    <h2>Close to the skin vs moving with the arm</h2>
+    <p class="muted">Each dot is a design: further right moves with the arm in more poses, higher keeps more metal 2-14 mm from the skin. The goal is the green top-right corner; most designs manage only one of the two.</p>
+    <div class="chart" id="scatter" data-source="board"></div>
+  </section>
+
+  <section class="card" id="simp-sec">
+    <h2>Score vs simplicity</h2>
+    <p class="muted">Each dot is a design whose parts have been counted: further right scores higher, lower is simpler. Points start at 0 for the plainest buildable chain (three hinges, three links) and grow with every extra joint, slider, spring, loop or part; they never change the score. Goal: the bottom-right corner - at a score of 95 or more, the simpler design wins.</p>
+    <div class="chart" id="simp" data-source="board" style="min-height:300px"></div>
+    <p class="muted" id="simp-note" data-source="board"></p>
+  </section>
+
+  <section class="card" id="board-sec">
+    <h2>Leaderboard: every scored design</h2>
+    <p class="muted">Best score first: verified and self-measured scores, then dead ends (often a best case without their real hardware), then "fast search" scores, which usually drop 5-14 points once checked. 4-joint designs cannot take the lead. Checking = being re-measured; Flagged = the auditor found a measurement artefact, not a better exo; Stopped early = dropped while still improving. In the names, a knuckle is an extra hinge that folds a link, a "drive" is the cam, rod or groove that turns it from the middle hinge, a cuff knee is two pins at the arm cuff and a relay is a spring-loaded 4th joint. Tap a preview to enlarge it; hover a simplicity number for its breakdown.</p>
+    <div class="scroll"><table id="board" data-source="board" data-row-key="id">
+      <thead><tr><th class="mo" data-source="motion" data-field="mech">Motion</th><th data-field="short">Design</th><th class="num" data-field="score">Score</th><th class="num cx" data-field="complexity">Simplicity<span class="cap">lower = simpler</span></th><th data-field="close" class="cl">Close to skin</th><th data-field="follows" class="hide-sm">Follows arm</th><th data-field="reaches" class="hide-sm">Reaches</th><th data-field="state">Status</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  <section class="card" id="progress">
+    <h2>Best fast-search score over time</h2>
+    <p class="muted">The best score any configuration has reached in the agents' fast searches (higher is better). Unverified: a checked score is usually 5-14 points lower, so this line is not the leaderboard.</p>
+    <div class="chart" id="record" data-source="sweeps morphs" style="min-height:260px"></div>
+  </section>
+
+  <section class="card" id="now">
+    <h2>Latest activity</h2>
+    <p class="muted">The seven newest entries in the project log, newest first.</p>
+    <ul class="events" id="events" data-source="events"></ul>
+  </section>
+
+  <section class="card" id="built">
+    <h2>Requirements met by the best built design</h2>
+    <p class="muted" id="reqline" data-source="reqsum">—</p>
+    <div class="chips" id="chips" data-source="reqs"></div>
+  </section>
+  <section class="detail-head" id="details">
+    <h2>Details: every measurement over time</h2>
+    <p class="muted">Hover any dot for what it is.</p>
+  </section>
+
+  <section class="card" id="all-configs">
+    <h2>Every configuration tested</h2>
+    <p class="muted">Each dot is one parameter setting of a design, scored when its agent tested it (higher is better). Coloured: the top eight designs on the leaderboard; grey: the rest; hollow: set aside by its agent; line: the best score so far.</p>
+    <div class="legend" id="cfg-legend" data-source="sweeps"></div>
+    <div class="chart" id="cfg-chart" data-source="sweeps" style="min-height:340px"></div>
+  </section>
+
+  <section class="card" id="targets">
+    <h2>The three score targets over time</h2>
+    <p class="muted">Faint dots: every configuration tested; line: the best reached so far; dashed: the target. A winning design must hit all three at once.</p>
+    <div class="grid3">
+      <div><h3 class="muted">Metal 2-14 mm from the skin (target 90 %)</h3><div class="chart" id="t-close" data-source="sweeps" style="min-height:220px"></div></div>
+      <div><h3 class="muted">Follows the arm (target 95 %)</h3><div class="chart" id="t-follow" data-source="sweeps" style="min-height:220px"></div></div>
+      <div><h3 class="muted">Reaches everyday poses (target 90 %)</h3><div class="chart" id="t-reach" data-source="sweeps" style="min-height:220px"></div></div>
+    </div>
+  </section>
+
+  <section class="card" id="built-time">
+    <h2>Built CAD designs, as judged over time</h2>
+    <p class="muted">Each dot is a CAD build scored by the outside judges, at the time it was judged. Filled: 3 joints; hollow: 4 joints; grey: judged under older rules; dashed: the pass line.</p>
+    <div class="grid3">
+      <div><h3 class="muted">R1: metal 2-14 mm from the skin (pass 90 %)</h3><div class="chart" id="c-R1" data-source="cad" style="min-height:220px"></div></div>
+      <div><h3 class="muted">R3: follows the arm (pass 95 %)</h3><div class="chart" id="c-R3" data-source="cad" style="min-height:220px"></div></div>
+      <div><h3 class="muted">R16: everyday arm poses reached (pass 90 %)</h3><div class="chart" id="c-R16" data-source="cad" style="min-height:220px"></div></div>
+    </div>
+  </section>
+</div>
+
+<script>
+// US Eastern wall-clock time (EST/EDT, daylight saving handled): dates are shifted to New York local time, then drawn
+// with d3's UTC scales and formats, so every axis, tick and event time on the page reads in Eastern time.
+const ET_FMT = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+window.et = (v) => { const d = v instanceof Date ? v : new Date(v); if (isNaN(+d)) return d; const p = Object.fromEntries(ET_FMT.formatToParts(d).map((x) => [x.type, x.value])); return new Date(Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute, +p.second)); };
+window.etZone = () => (new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', timeZoneName: 'short' }).formatToParts(new Date()).find((x) => x.type === 'timeZoneName') || {}).value || 'ET';
+</script>
+<script>
+const live = (m) => !m.is_baseline && !['dead', 'refuted', 'duplicate'].includes(m.status);
+// a design's display name: the build's short_name (tools/dash_names.json); a dataset without it gets the id's words
+const idName = (id) => { const w = String(id || '').split('-').filter((x) => x && !/^[345]r$/.test(x)).join(' ') || String(id || ''); return w.charAt(0).toUpperCase() + w.slice(1); };
+const designName = (m) => { let s = String(m.short_name || '').trim() || idName(m.id); if (m.active_dof > 3 && !/joints\)/.test(s)) s += ` (${m.active_dof} joints)`; return s; };
+/** a label of at most n characters, cut at a word boundary with an ellipsis (never mid-word) */
+const fit = (s, n) => { s = String(s || ''); if (s.length <= n) return s; const c = s.slice(0, n).replace(/[\s,;:+-]+\S*$/, '').replace(/[\s,;:+(-]+$/, ''); return (c || s.slice(0, n)) + '\u2026'; };
+dash.calc('board', {
+  inputs: ['morphs', 'sweeps'], title: 'Scored designs',
+  description: 'Every morphology with a measured bench number: the verified number if one exists, else the agent\'s claim, else its best sweep so far; score = 100 x (1 - gap / 275) floored at 0, best first. A dead design whose sweep had not converged (still improving when stopped) is marked Stopped early. complexity = the simplicity number from the design\'s parts count (tools/simplicity.py: points, lower = simpler, 0 = three hinges and three links), shown beside the score and never part of it; complexity_items = where its points come from; passive_trans > 2 = not buildable.',
+  fn: (morphs, sweeps) => {
+    const sc = (g) => Math.max(0, (1 - g / 275) * 100), by = {};
+    sweeps.forEach((x) => { if (x.empty !== true && !x.passed_over && x.gap != null && x.gap < 999) (by[x.id] = by[x.id] || []).push(x); });
+    const conv = {};
+    Object.entries(by).forEach(([id, s]) => {
+      s.sort((a, b) => (a.t < b.t ? -1 : a.t > b.t ? 1 : (a.k || 0) - (b.k || 0))); const v = s.map((x) => sc(x.gap)), N = v.length; if (N < 3) return;
+      let b = -1; const run = v.map((x) => (b = Math.max(b, x)));
+      const gain = run[N - 1] - run[Math.floor(N / 2) - 1], best = run[N - 1], since = N - 1 - v.lastIndexOf(best), top = [...v].sort((p, q) => q - p);
+      const late = run[N - 1] - run[Math.max(0, N - 1 - Math.floor(N / 3))]; conv[id] = gain < 1 && late < 0.5 && top[0] - top[Math.min(4, N - 1)] < 3;
+    });
+    return morphs.filter((m) => m.empty !== true && m.status !== 'duplicate').map((m) => {
+    const v = m.v_gap !== null && m.v_gap !== undefined, c = m.gap !== null && m.gap !== undefined, s = m.sweep_gap !== null && m.sweep_gap !== undefined;
+    if (!v && !c && !s) return null;
+    const p = v ? 'v_' : c ? '' : 'sweep_';
+    // score basis (alignment audit 2026-10-16): only a verifier's frozen exact number ranks as a result; a self-measured frozen
+    // claim is labelled; a fast search number is never shown as a score that competes with verified ones
+    const fz = !v && m.frozen_gap !== null && m.frozen_gap !== undefined, basis = v ? 'verified' : fz ? 'self' : 'fast';
+    // the alignment auditor's ledger (docs/ALIGNMENT.md): 'gamed' = the gain is a measurement artefact; never shown as verified
+    const state = m.is_baseline ? 'Baseline' : m.alignment === 'gamed' ? 'Flagged' : m.status === 'verified' ? 'Verified' : m.status === 'refuted' ? 'Refuted' : m.status === 'dead' ? (conv[m.id] === false ? 'Stopped early' : 'Dead end') : c ? 'Checking' : 'Sweeping';
+    // the display name (tools/dash_names.json via the build's short_name; the row's long name is never cut mid-phrase); the
+    // verified configuration's code (pick1, ...) goes to the name's hover text, not into the name. Self-contained like the
+    // rest of this calc (the page's designName() is the same rule)
+    const w = String(m.id || '').split('-').filter((x) => x && !/^[345]r$/.test(x)).join(' ') || String(m.id || '');
+    let short = String(m.short_name || '').trim() || (w.charAt(0).toUpperCase() + w.slice(1));
+    if (m.active_dof > 3 && !/joints\)/.test(short)) short += ` (${m.active_dof} joints)`;
+    const g = fz ? m.frozen_gap : m[p + 'gap'];
+    return { id: m.id, short, config: m.v_config || '', basis, score: Math.max(0, Math.round((1 - g / 275) * 1000) / 10), gap: g, close: m[p + 'inband14'], follows: m[p + 'follow'], reaches: m[p + 'reach'], contact: m[p + 'contact'], state, is_baseline: !!m.is_baseline,
+      complexity: m.complexity ?? null, complexity_items: m.complexity_items || '', passive_trans: m.passive_trans ?? null, active_dof: m.active_dof ?? null, leader_ruling: m.leader_ruling || '', audited: !!m.alignment };
+  // dead / refuted rows rank below live ones: their number is often a ghost bound without the design's hardware (lead 2026-10-18:
+  // two dead ghosts at 16.9 / 17.2 ranked above the verified lead)
+  }).filter(Boolean).sort((a, b) => { const sink = (r) => (r.basis === 'fast' || r.state === 'Flagged') ? 2 : (['Dead end', 'Stopped early', 'Refuted'].includes(r.state) ? 1 : 0); return sink(a) - sink(b) || a.gap - b.gap; });
+  }
+});
+dash.calc('leader', {
+  inputs: ['board'], title: 'Best verified 3-joint design',
+  description: 'The highest-scoring design whose number an independent verifier confirmed (frozen exact bench). Score = 100 x (1 - gap / 275), floored at 0. complexity = its simplicity number (lower = simpler; not part of the score).',
+  fn: (board) => {
+    // user 2026-10-17: a sensed joint is a joint and the goal is 3 joints, so the headline is the best verified design with <= 3 active joints
+    // a row the lead ruled a tie after a leader-change audit ('tie: <leader id> | why') keeps its board place but not the headline
+    const ok3 = (r) => !r.is_baseline && r.state === 'Verified' && r.basis === 'verified' && (r.active_dof == null || r.active_dof <= 3);
+    const b = board.find((r) => ok3(r) && !/^(tie|no lead)/i.test((r.leader_ruling || '').trim())) || {};
+    const ties = board.filter((r) => !r.is_baseline && r.basis === 'verified' && /^tie/i.test((r.leader_ruling || '').trim()) && r.leader_ruling.trim().slice(4).split('|')[0].trim() === b.id);
+    const sc = (g) => (g == null ? null : Math.max(0, Math.round((1 - g / 275) * 1000) / 10));
+    const short = b.short == null ? null : ties.length ? `${b.short} (tied with ${ties.map((t) => t.short).join(', ')})` : b.short;
+    // every new leader gets an alignment audit (CLAUDE.md): until its ledger entry exists the headline says so
+    const pending = short != null && !b.audited, shortA = short == null ? null : (pending ? `${short} - alignment audit pending` : short);
+    return [{ id: b.id ?? null, short: shortA, name: short, pending, score: sc(b.gap), state: b.state ?? null, complexity: b.complexity ?? null }];
+  }
+});
+dash.calc('reqsum', {
+  inputs: ['reqs'], title: 'Requirements passing',
+  description: 'How many of the 19 requirements the best judged built design passes.',
+  fn: (reqs) => { const d = reqs.find((r) => r.design) || {}; return [{ pass: reqs.filter((r) => r.state === 'pass').length, total: reqs.filter((r) => r.empty !== true).length, design: d.design ?? null, design_name: d.design_name || d.design || null }]; }
+});
+
+const pct = d3.format('.0%'), g1 = d3.format('.1f'), cxf = d3.format('.1~f');
+const cxTip = (r) => `Simplicity ${cxf(r.complexity)} points (lower = simpler): ${r.complexity_items || 'not itemised'}`;
+const ok = (s) => s === 'ok';
+/** show `text` at the pointer, inside the chart box: flips above / left of the pointer near an edge (the detail sections
+ * clip at their card: content-visibility) */
+function tipAt(tip, box, ev, text) {
+  tip.hidden = false; tip.textContent = text;
+  const b = box.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight, x = ev.clientX - b.left, y = ev.clientY - b.top;
+  tip.style.left = Math.max(0, x + 12 + w > b.width ? x - 12 - w : x + 12) + 'px';
+  tip.style.top = Math.max(0, y + 12 + h > b.height ? y - 12 - h : y + 12) + 'px';
+}
+function tipper(box) { let t = box.querySelector('.tip'); if (!t) { t = document.createElement('div'); t.className = 'tip'; t.hidden = true; box.appendChild(t); } return t; }
+
+function drawScatter(all) {
+  const box = document.getElementById('scatter'); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const rows = all.filter((r) => !r.is_baseline);
+  if (!rows.length) return;
+  const W = Math.max(320, box.clientWidth), H = 340, m = { l: 48, r: 16, t: 12, b: 40 };
+  const x = d3.scaleLinear([0, 1], [m.l, W - m.r]), y = d3.scaleLinear([0, 1], [H - m.b, m.t]);
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  svg.append('rect').attr('x', x(0.925)).attr('y', y(1)).attr('width', x(1) - x(0.925)).attr('height', y(0.9) - y(1)).attr('fill', 'var(--color-ok)').attr('opacity', 0.18);
+  svg.append('text').attr('x', x(1) - 4).attr('y', y(1) + 14).attr('text-anchor', 'end').text('goal');
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(5).tickFormat(pct)).attr('font-size', null).attr('font-family', null);
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(pct)).attr('font-size', null).attr('font-family', null);
+  svg.append('text').attr('x', (m.l + W - m.r) / 2).attr('y', H - 6).attr('text-anchor', 'middle').text('moves with the arm (average of follow and reach)');
+  svg.append('text').attr('transform', `translate(12,${(H - m.b + m.t) / 2}) rotate(-90)`).attr('text-anchor', 'middle').text('metal 2-14 mm from skin');
+  const col = (r) => r.state === 'Verified' ? 'var(--color-ok)' : r.state === 'Dead end' || r.state === 'Refuted' ? 'var(--cds-chart-muted, var(--color-fg-muted))' : dash.colors[0];
+  const tip = tipper(box), mv = (r) => (r.follows + r.reaches) / 2;
+  const best = rows.filter((r) => !['Dead end', 'Refuted'].includes(r.state))[0];
+  svg.append('g').selectAll('circle').data(rows).join('circle').attr('cx', (r) => x(mv(r))).attr('cy', (r) => y(r.close)).attr('r', (r) => (r === best ? 8 : 6))
+    .attr('fill', col).attr('fill-opacity', (r) => (r.state === 'Dead end' ? 0.45 : 0.9)).attr('stroke', 'var(--color-panel)').attr('stroke-width', 1.5)
+    .on('mousemove', (ev, r) => tipAt(tip, box, ev, `${r.short} - score ${g1(r.score)} of 100 (${r.state}). Close to skin ${pct(r.close)}, follows ${pct(r.follows)}, reaches ${pct(r.reaches)}.`))
+    .on('mouseleave', () => { tip.hidden = true; });
+  const lab = rows.filter((r) => r === best || r.close >= 0.7 || mv(r) >= 0.85).slice(0, 7);
+  const used = [];
+  lab.forEach((r) => {
+    const t = fit(r.short, W < 480 ? 26 : 40), px = x(mv(r)), left = px + 10 + t.length * 6.6 > W - m.r; let py = y(r.close) + 4;
+    while (used.some((u) => Math.abs(u - py) < 14)) py += 14;
+    used.push(py);
+    svg.append('text').attr('class', 'lbl').attr('x', left ? px - 10 : px + 10).attr('y', py).attr('text-anchor', left ? 'end' : 'start').text(t);
+  });
+}
+
+// Score vs simplicity: x = bench score, y = the complexity count (points, lower = simpler); the goal is the bottom-right
+// corner (score 95+, fewest points). Scores under X0 sit on the left edge; 3 passive translations (not buildable) = x.
+function drawSimple(rows) {
+  const box = document.getElementById('simp'); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const pts = rows.filter((r) => !r.is_baseline && r.basis !== 'fast' && r.complexity != null && r.score != null), X0 = 50;
+  const under = pts.filter((r) => r.score < X0).length, nb = pts.filter((r) => r.passive_trans > 2).length;
+  document.getElementById('simp-note').textContent = [`${pts.length} of ${rows.length} designs counted so far.`,
+    under ? `${under} scoring under ${X0} sit on the left edge.` : '', nb ? 'x = three passive translations: not buildable.' : ''].filter(Boolean).join(' ');
+  if (!pts.length) return;
+  const W = Math.max(320, box.clientWidth), H = 300, m = { l: 44, r: 16, t: 12, b: 40 };
+  const x = d3.scaleLinear([X0, 100], [m.l, W - m.r]), y = d3.scaleLinear([0, Math.max(20, d3.max(pts, (r) => r.complexity))], [H - m.b, m.t]).nice();
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  svg.append('rect').attr('x', x(95)).attr('y', m.t).attr('width', x(100) - x(95)).attr('height', H - m.b - m.t).attr('fill', 'var(--color-ok)').attr('opacity', 0.12);
+  svg.append('line').attr('x1', x(95)).attr('x2', x(95)).attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--color-ok)').attr('stroke-dasharray', '4 4');
+  svg.append('text').attr('x', x(95) - 4).attr('y', m.t + 12).attr('text-anchor', 'end').text('score 95');
+  svg.append('text').attr('x', x(100) - 4).attr('y', H - m.b - 6).attr('text-anchor', 'end').text('goal');
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(W < 480 ? 5 : 10).tickFormat((v) => (v === X0 && under ? '≤' + v : v))).attr('font-size', null).attr('font-family', null);
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5)).attr('font-size', null).attr('font-family', null);
+  svg.append('text').attr('x', (m.l + W - m.r) / 2).attr('y', H - 6).attr('text-anchor', 'middle').text('score (higher is better)');
+  svg.append('text').attr('transform', `translate(12,${(H - m.b + m.t) / 2}) rotate(-90)`).attr('text-anchor', 'middle').text('simplicity points (lower = simpler)');
+  const col = (r) => r.state === 'Verified' ? 'var(--color-ok)' : r.state === 'Dead end' || r.state === 'Refuted' ? 'var(--cds-chart-muted, var(--color-fg-muted))' : dash.colors[0];
+  const live = pts.filter((r) => !['Dead end', 'Refuted'].includes(r.state)).sort((a, b) => b.score - a.score);
+  const best = live[0], px = (r) => x(Math.max(X0, r.score)), tip = tipper(box), nbk = (r) => r.passive_trans > 2;
+  const tipText = (r) => `${r.short} - score ${g1(r.score)} of 100 (${r.state}). ${cxTip(r)}`;
+  const order = [...pts].sort((a, b) => (a === best) - (b === best) || (a.state === 'Dead end') - (b.state === 'Dead end'));
+  svg.append('g').selectAll('circle').data(order.filter((r) => !nbk(r))).join('circle').attr('cx', px).attr('cy', (r) => y(r.complexity)).attr('r', (r) => (r === best ? 7 : 5))
+    .attr('fill', col).attr('fill-opacity', (r) => (r.state === 'Dead end' || r.state === 'Refuted' ? 0.45 : 0.9)).attr('stroke', 'var(--color-panel)').attr('stroke-width', 1.5)
+    .on('mousemove', (ev, r) => tipAt(tip, box, ev, tipText(r))).on('mouseleave', () => { tip.hidden = true; });
+  svg.append('g').selectAll('path').data(order.filter(nbk)).join('path').attr('d', (r) => { const a = px(r), b = y(r.complexity), k = 4.5; return `M${a - k},${b - k}L${a + k},${b + k}M${a - k},${b + k}L${a + k},${b - k}`; })
+    .attr('stroke', col).attr('stroke-width', 2).attr('stroke-linecap', 'round').attr('fill', 'none')
+    .on('mousemove', (ev, r) => tipAt(tip, box, ev, tipText(r))).on('mouseleave', () => { tip.hidden = true; });
+  // labels: the five best live designs (three on a phone), placed beside their dot without overlapping (a short tick
+  // joins a label moved off its dot's line)
+  const narrow = W < 480, lab = live.slice(0, narrow ? 3 : 5), placed = [], cw = 6.6;
+  lab.forEach((r) => {
+    const t = fit(r.short, narrow ? 26 : 40), w = t.length * cw, ax = px(r), ay = y(r.complexity);
+    for (const dy of [0, -14, 14, -28, 28, -42, 42, -56, 56]) for (const side of [1, -1]) {
+      const x0 = side > 0 ? ax + 10 : ax - 10 - w, yb = ay + 4 + dy;
+      if (x0 < m.l + 2 || x0 + w > W - m.r || yb - 11 < m.t || yb + 2 > H - m.b) continue;
+      if (placed.some((b) => x0 < b[1] && x0 + w > b[0] && yb - 11 < b[3] && yb + 2 > b[2])) continue;
+      placed.push([x0, x0 + w, yb - 11, yb + 2]);
+      if (dy) svg.append('line').attr('x1', ax + side * 6).attr('y1', ay).attr('x2', side > 0 ? x0 - 2 : x0 + w + 2).attr('y2', yb - 4).attr('stroke', 'var(--color-fg-muted)').attr('stroke-width', 0.8);
+      svg.append('text').attr('class', 'lbl').attr('x', x0).attr('y', yb).text(t);
+      return;
+    }
+  });
+}
+
+// Motion previews: one shared timer (~10 frames a second: the 56-frame loop takes ~5.6 s) animates every thumbnail on
+// screen; it stops while none is visible or the tab is hidden. Reduced motion shows one still frame (arm on its way
+// overhead). Frames are '|'-separated paths; '=' repeats the frame before (the key-pose holds).
+const MO = { src: null, prep: null, frame: 0, timer: 0, seen: new Set(), io: null, rm: window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null };
+const moStill = () => !!(MO.rm && MO.rm.matches), moAt = () => (MO.prep && moStill() ? MO.prep.still : MO.frame);
+const moFrames = (s) => { const o = []; String(s || '').split('|').forEach((d, k) => o.push(d === '=' && k > 0 ? o[k - 1] : d)); return o; };
+const moKey = (src) => `${src.length}:${src.reduce((s, r) => s + String(r.mech || '').length + String(r.joint || '').length + String(r.body || '').length, 0)}:${(src[0] || {}).id}:${(src[src.length - 1] || {}).id}`;
+function motionPrep(src) {                      // memoised on a fingerprint of the rows (each onData hands over a new array)
+  const key = moKey(src);
+  if (MO.src === key) return MO.prep;
+  const rows = src.filter((r) => r.empty !== true), sh = rows.find((r) => r.kind === 'shoulder') || {}, byId = new Map();
+  rows.forEach((r) => { if (r.kind === 'mechanism' && r.mech) byId.set(r.id, { m: moFrames(r.mech), j: moFrames(r.joint) }); });
+  const body = sh.body ? moFrames(sh.body) : [];
+  const n = Math.max(1, Number(sh.n) || body.length || 1), still = Math.min(n - 1, Math.max(0, Number(sh.still) || 0));
+  MO.src = key; MO.prep = { byId, body, n, still, view: sh.view || '0 0 100 100', ms: Math.round(Math.min(125, Math.max(80, 5600 / n))) };
+  MO.frame %= n;
+  if (MO.timer) { clearInterval(MO.timer); MO.timer = 0; }
+  return MO.prep;
+}
+function moPaint(svg, k) {
+  const p = MO.prep, r = p && p.byId.get(svg.dataset.id); if (!r) return;
+  const [b, m, j] = svg.children;
+  b.setAttribute('d', p.body[k] || ''); m.setAttribute('d', r.m[k] || ''); j.setAttribute('d', r.j[k] || '');
+}
+function moTick() { if (!MO.prep) return; MO.frame = (MO.frame + 1) % MO.prep.n; MO.seen.forEach((svg) => moPaint(svg, MO.frame)); }
+function moSync() {
+  const run = !!MO.prep && !moStill() && !document.hidden && MO.seen.size > 0;
+  if (run && !MO.timer) MO.timer = setInterval(moTick, MO.prep.ms);
+  if (!run && MO.timer) { clearInterval(MO.timer); MO.timer = 0; }
+}
+function moWatch(svgs) {
+  if (MO.io) MO.io.disconnect();
+  MO.seen.clear();
+  { const z = document.getElementById('mo-zoom'); if (z && z.open && z._svg) MO.seen.add(z._svg); }   // keep an open zoom animating
+  if (!svgs.length) { moSync(); return; }
+  if (!('IntersectionObserver' in window)) { svgs.forEach((svg) => MO.seen.add(svg)); moSync(); return; }
+  MO.io = MO.io || new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { MO.seen.add(e.target); moPaint(e.target, moAt()); } else MO.seen.delete(e.target);
+    });
+    moSync();
+  });
+  svgs.forEach((svg) => MO.io.observe(svg));
+}
+document.addEventListener('visibilitychange', moSync);
+if (MO.rm) {
+  const onRm = () => { document.querySelectorAll('#board td.mo svg, #mo-zoom svg').forEach((svg) => moPaint(svg, moAt())); moSync(); };
+  if (MO.rm.addEventListener) MO.rm.addEventListener('change', onRm); else if (MO.rm.addListener) MO.rm.addListener(onRm);
+}
+function moThumb(id, name, row) {
+  const NS = 'http://www.w3.org/2000/svg', svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', MO.prep.view); svg.setAttribute('role', row ? 'button' : 'img'); svg.setAttribute('aria-label', row ? `Enlarge the motion preview: ${name}` : `Motion preview: ${name}`);
+  svg.dataset.id = id;
+  ['mo-b', 'mo-m', 'mo-j'].forEach((c) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('class', c); svg.appendChild(p); });
+  moPaint(svg, moAt());
+  if (row) {
+    svg.setAttribute('tabindex', '0');
+    svg.addEventListener('click', () => moZoom(row));
+    svg.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); moZoom(row); } });
+  }
+  return svg;
+}
+// The enlarged preview: a <dialog> (Esc, the x button or a tap on the backdrop closes it), animated by the same timer.
+function moZoom(r) {
+  let dlg = document.getElementById('mo-zoom');
+  if (!dlg) {
+    dlg = document.createElement('dialog'); dlg.id = 'mo-zoom'; dlg.className = 'mo-zoom';
+    const head = document.createElement('div'); head.className = 'zh';
+    const h = document.createElement('h3'), x = document.createElement('button');
+    x.className = 'zx'; x.type = 'button'; x.setAttribute('aria-label', 'Close'); x.textContent = '\u00d7'; x.addEventListener('click', () => dlg.close());
+    head.append(h, x);
+    const meta = document.createElement('p'); meta.className = 'zm';
+    dlg.append(head, meta);
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });   // a tap on the backdrop
+    dlg.addEventListener('close', () => { if (dlg._svg) { MO.seen.delete(dlg._svg); dlg._svg.remove(); dlg._svg = null; } moSync(); });
+    (document.querySelector('.sx') || document.body).appendChild(dlg);
+  }
+  if (dlg.open) dlg.close();
+  dlg.querySelector('h3').textContent = r.short || r.id;
+  const bits = [];
+  if (r.score != null) bits.push(`score ${g1(r.score)}`);
+  if (r.reaches != null) bits.push(`reaches ${pct(r.reaches)}`);
+  if (r.follows != null) bits.push(`follows ${pct(r.follows)}`);
+  if (r.close != null) bits.push(`close to skin ${pct(r.close)}`);
+  if (r.complexity != null) bits.push(`simplicity ${cxf(r.complexity)}`);
+  if (r.state) bits.push(r.state);
+  dlg.querySelector('.zm').textContent = bits.join(' \u00b7 ');
+  const svg = moThumb(r.id, r.short || r.id, null); svg.setAttribute('aria-label', `Motion preview, enlarged: ${r.short || r.id}`);
+  dlg._svg = svg; dlg.appendChild(svg);
+  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+  MO.seen.add(svg); moPaint(svg, moAt()); moSync();
+}
+
+function drawBoard(rows, mo) {
+  const tb = document.querySelector('#board tbody'); tb.replaceChildren();
+  const meter = (v, target) => { const s = document.createElement('span'); const mtr = document.createElement('span'); mtr.className = 'meter'; const i = document.createElement('i'); i.style.width = Math.max(0, Math.min(1, v)) * 100 + '%'; if (v >= target) i.className = 'ok'; mtr.appendChild(i); s.append(mtr, pct(v)); return s; };
+  const thumbs = [], cxMax = Math.max(60, ...rows.map((r) => r.complexity || 0));
+  rows.forEach((r) => {
+    const tr = document.createElement('tr'); tr.dataset.key = r.id;
+    const td = (c, cls) => { const e = document.createElement('td'); if (cls) e.className = cls; if (c instanceof Node) e.appendChild(c); else e.textContent = c; tr.appendChild(e); return e; };
+    const has = mo && mo.byId.has(r.id), cell = td('', 'mo');
+    if (has) { const svg = moThumb(r.id, r.short, r); cell.appendChild(svg); thumbs.push(svg); }
+    // a 4-joint design is marked (user 2026-10-17: the 3-joint designs are the real leaders; audit 2026-10-18 freek G6)
+    const nm = td(r.active_dof > 3 ? `${r.short} - not ranked for the lead` : r.short); nm.title = r.config ? `${r.id} (verified configuration: ${r.config})` : r.id;
+    td(r.basis === 'verified' || r.is_baseline ? g1(r.score) : `${g1(r.score)} ${r.basis === 'self' ? 'self-measured' : 'fast search'}`, 'num' + (r.basis === 'verified' ? '' : ' unv'));
+    const cx = td('', 'num cx');
+    if (r.complexity != null) {
+      const bar = document.createElement('span'), i = document.createElement('i'); bar.className = 'cxbar'; i.style.width = Math.min(1, r.complexity / cxMax) * 100 + '%'; bar.appendChild(i);
+      cx.append(cxf(r.complexity), bar); cx.title = cxTip(r);
+      if (r.passive_trans > 2) cx.classList.add('bad');
+    } else { cx.textContent = '–'; cx.title = 'Not counted yet'; }
+    td(meter(r.close, 0.9), 'cl'); td(meter(r.follows, 0.95), 'hide-sm'); td(meter(r.reaches, 0.9), 'hide-sm');
+    const p = document.createElement('span'); p.className = 'pill ' + (r.state === 'Verified' ? 'ver' : r.state === 'Dead end' || r.state === 'Refuted' || r.state === 'Flagged' ? 'dead' : r.state === 'Baseline' ? '' : 'run'); p.textContent = r.state + (/^tie/i.test(r.leader_ruling || '') ? ' (tie)' : ''); if (r.leader_ruling) p.title = r.leader_ruling; td(p);
+    tb.appendChild(tr);
+  });
+  moWatch(thumbs);
+}
+
+function drawRecord(sweeps) {
+  const box = document.getElementById('record'); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const sc = (g) => Math.max(0, (1 - g / 275) * 100);
+  const rec = sweeps.filter((s) => s.is_record && !s.passed_over && s.record_gap != null).map((s) => ({ t: et(s.t), v: sc(s.record_gap) })).sort((a, b) => a.t - b.t);
+  if (!rec.length) return;
+  const now = new Date(Math.max(+rec[rec.length - 1].t, ...sweeps.map((s) => +et(s.t))));
+  const W = Math.max(320, box.clientWidth), H = 260, m = { l: 44, r: 16, t: 12, b: 28 };
+  const x = d3.scaleUtc([rec[0].t, now], [m.l, W - m.r]), y = d3.scaleLinear([0, 100], [H - m.b, m.t]);
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor(W / 120))).tickFormat(d3.utcFormat('%H:%M'))).attr('font-size', null).attr('font-family', null);
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5)).attr('font-size', null).attr('font-family', null);
+  svg.append('text').attr('x', W - m.r).attr('y', y(100) + 12).attr('text-anchor', 'end').text('goal 100');
+  const pts = [...rec, { t: now, v: rec[rec.length - 1].v }];
+  svg.append('path').attr('d', d3.line().curve(d3.curveStepAfter).x((p) => x(p.t)).y((p) => y(p.v))(pts)).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2).attr('stroke-linejoin', 'round');
+  const last = rec[rec.length - 1]; svg.append('circle').attr('cx', x(last.t)).attr('cy', y(last.v)).attr('r', 4).attr('fill', dash.colors[0]);
+  svg.append('text').attr('class', 'lbl').attr('x', Math.min(x(last.t) + 8, W - 60)).attr('y', y(last.v) - 8).text(g1(last.v));
+}
+
+function drawEvents(ev, names) {
+  const ul = document.getElementById('events'); ul.replaceChildren();
+  // a design id in the log text reads as its display name (longest ids first, whole ids only)
+  const ids = names ? [...names.keys()].filter((k) => k && /^[a-z0-9_-]+$/i.test(k)).sort((a, b) => b.length - a.length) : [];
+  const re = ids.length ? new RegExp(`(^|[^A-Za-z0-9_-])(${ids.join('|')})(?![A-Za-z0-9_-])`, 'g') : null;
+  ev.filter((e) => e.event).sort((a, b) => (a.time < b.time ? 1 : -1)).slice(0, 7).forEach((e) => {
+    const li = document.createElement('li'); const t = document.createElement('time'); t.textContent = d3.utcFormat('%H:%M')(et(e.time));
+    let txt = String(e.event).replace(/\{[^}]*\}/g, '');
+    for (let k = 0; k < 4 && /\([^()]*\)/.test(txt); k++) txt = txt.replace(/\([^()]*\)/g, '');   // nested asides too
+    txt = txt.replace(/\s+/g, ' ').replace(/ at( config \S+)?$/, '').replace(/ ([,:;.])(?=\s|$)/g, '$1').trim();
+    if (re) txt = txt.replace(re, (all, pre, id) => pre + names.get(id));
+    const s = document.createElement('span'); s.textContent = fit(txt, 170); s.title = String(e.event);
+    li.append(t, s); ul.appendChild(li);
+  });
+}
+
+function drawReqs(reqs) {
+  const box = document.getElementById('chips'); box.replaceChildren();
+  reqs.filter((r) => r.req).forEach((r) => { const c = document.createElement('span'); c.className = 'chip ' + (r.state === 'pass' ? 'pass' : r.state === 'fail' ? 'fail' : 'none'); c.textContent = `${r.req} ${r.name}`; box.appendChild(c); });
+}
+
+
+const scoreOf = (g) => Math.max(0, (1 - g / 275) * 100);
+function liveStart(ds) {                       // skip a sparse early stretch (< 5 % of the points before a > 30 min pause)
+  const t = ds.map((d) => +d).sort((a, b) => a - b); let cut = t[0], best = 0;
+  for (let i = 1; i < t.length; i++) if (t[i] - t[i - 1] > best) { best = t[i] - t[i - 1]; if (best > 1.8e6 && i < 0.05 * t.length) cut = t[i]; }
+  return new Date(cut);
+}
+const hm = (span) => (span < 864e5 ? d3.utcFormat('%H:%M') : d3.utcFormat('%b %-d %H:%M'));
+function timeAxes(svg, x, y, W, H, m, yfmt) {
+  const dm = x.domain(); svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(Math.max(2, Math.floor(W / 110))).tickFormat(hm(dm[1] - dm[0]))).attr('font-size', null).attr('font-family', null);
+  svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(yfmt)).attr('font-size', null).attr('font-family', null);
+}
+function hover(box, sel, text) {
+  const tip = tipper(box);
+  sel.on('mousemove', (ev, d) => tipAt(tip, box, ev, text(d)))
+     .on('mouseleave', () => { tip.hidden = true; });
+}
+function drawConfigs(sw, names, leaders) {
+  const box = document.getElementById('cfg-chart'); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const leg = document.getElementById('cfg-legend'); leg.replaceChildren();
+  const pts = sw.filter((r) => r.gap != null && r.t).map((r) => ({ ...r, d: et(r.t), s: scoreOf(r.gap) })).sort((a, b) => a.d - b.d);
+  if (!pts.length) return;
+  { const t0 = liveStart(pts.map((p) => p.d)); pts.splice(0, pts.findIndex((p) => p.d >= t0)); }
+  const col = new Map(leaders.slice(0, 8).map((id, i) => [id, dash.colors[i % dash.colors.length]]));
+  leaders.slice(0, 8).forEach((id) => { const e = document.createElement('span'); const i = document.createElement('i'); i.style.background = col.get(id); e.append(i, names.get(id) || idName(id)); leg.appendChild(e); });
+  const W = Math.max(320, box.clientWidth), H = 340, m = { l: 40, r: 12, t: 10, b: 26 };
+  const x = d3.scaleUtc(d3.extent(pts, (p) => p.d), [m.l, W - m.r]), y = d3.scaleLinear([0, 100], [H - m.b, m.t]);
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  timeAxes(svg, x, y, W, H, m, (v) => v);
+  const c = svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (p) => x(p.d)).attr('cy', (p) => y(p.s)).attr('r', 2.6)
+    .attr('fill', (p) => (p.passed_over ? 'none' : col.get(p.id) || 'var(--cds-chart-muted, var(--color-fg-muted))'))
+    .attr('stroke', (p) => (p.passed_over ? 'var(--color-fg-muted)' : 'none')).attr('fill-opacity', (p) => (col.has(p.id) ? 0.75 : 0.35));
+  hover(box, c, (p) => `${names.get(p.id) || idName(p.id)}: score ${g1(p.s)} - close to skin ${pct(p.inband14)}, follows ${pct(p.follow)}, reaches ${pct(p.reach)}${p.passed_over ? ' (superseded by its agent)' : ''}`);
+  const rec = pts.filter((p) => p.is_record && !p.passed_over && p.record_gap != null).map((p) => ({ d: p.d, s: scoreOf(p.record_gap) }));
+  if (rec.length) { rec.push({ d: pts[pts.length - 1].d, s: rec[rec.length - 1].s }); svg.append('path').attr('d', d3.line().curve(d3.curveStepAfter).x((p) => x(p.d)).y((p) => y(p.s))(rec)).attr('fill', 'none').attr('stroke', 'var(--color-fg)').attr('stroke-width', 1.5); }
+}
+function drawTarget(id, sw, field, target) {
+  const box = document.getElementById(id); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const pts = sw.filter((r) => r[field] != null && r.t && !r.passed_over).map((r) => ({ d: et(r.t), v: r[field], id: r.id })).sort((a, b) => a.d - b.d);
+  if (!pts.length) return;
+  { const t0 = liveStart(pts.map((p) => p.d)); pts.splice(0, pts.findIndex((p) => p.d >= t0)); }
+  const W = Math.max(260, box.clientWidth), H = 220, m = { l: 40, r: 10, t: 8, b: 24 };
+  const x = d3.scaleUtc(d3.extent(pts, (p) => p.d), [m.l, W - m.r]), y = d3.scaleLinear([0, 1], [H - m.b, m.t]);
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  timeAxes(svg, x, y, W, H, m, pct);
+  svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(target)).attr('y2', y(target)).attr('stroke', 'var(--color-ok)').attr('stroke-dasharray', '4 4');
+  svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (p) => x(p.d)).attr('cy', (p) => y(p.v)).attr('r', 1.8).attr('fill', dash.colors[0]).attr('fill-opacity', 0.18);
+  let best = -1; const line = pts.map((p) => ({ d: p.d, v: (best = Math.max(best, p.v)) }));
+  svg.append('path').attr('d', d3.line().curve(d3.curveStepAfter).x((p) => x(p.d)).y((p) => y(p.v))(line)).attr('fill', 'none').attr('stroke', dash.colors[0]).attr('stroke-width', 2);
+}
+function drawCad(id, cad, req) {
+  const box = document.getElementById(id); box.querySelectorAll('svg').forEach((n) => n.remove());
+  const pts = cad.filter((r) => r.req === req && r.value != null && r.time).map((r) => ({ ...r, d: et(r.time) })).sort((a, b) => a.d - b.d);
+  if (!pts.length) return;
+  const W = Math.max(260, box.clientWidth), H = 220, m = { l: 40, r: 10, t: 8, b: 24 };
+  const x = d3.scaleUtc(d3.extent(pts, (p) => p.d), [m.l, W - m.r]).nice(), y = d3.scaleLinear([0, 1], [H - m.b, m.t]);
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  timeAxes(svg, x, y, W, H, m, pct);
+  const thr = pts.find((p) => p.threshold != null); if (thr) svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(thr.threshold)).attr('y2', y(thr.threshold)).attr('stroke', 'var(--color-ok)').attr('stroke-dasharray', '4 4');
+  const cur = (p) => p.rules === 'current';
+  const c = svg.append('g').selectAll('circle').data(pts).join('circle').attr('cx', (p) => x(p.d)).attr('cy', (p) => y(Math.min(1, p.value))).attr('r', 4)
+    .attr('fill', (p) => (p.dof === 4 ? 'none' : cur(p) ? dash.colors[1] : 'var(--cds-chart-muted, var(--color-fg-muted))'))
+    .attr('stroke', (p) => (cur(p) ? dash.colors[1] : 'var(--cds-chart-muted, var(--color-fg-muted))')).attr('stroke-width', 1.5);
+  hover(box, c, (p) => `${p.design_name || p.design} (${p.dof} joints${cur(p) ? '' : ', older rules'}): ${req} ${pct(p.value)}`);
+}
+
+dash.onData(() => {
+  { const z = document.getElementById('tz-note'); if (z) z.textContent = `All times are US Eastern (${etZone()}).`; }
+  const B = dash.data('board'), L = dash.data('leader'), S = dash.data('sweeps'), E = dash.data('events'), R = dash.data('reqs'), RS = dash.data('reqsum'), M = dash.data('morphs');
+  const okd = (d) => d && d.status === 'ok';
+  { // data freshness: the newest sweep / event time in the datasets (the page itself is republished rarely; its data every ~15 min)
+    let last = 0;
+    if (okd(S)) for (const r of S.data) { const t = Date.parse(r.t); if (t > last) last = t; }
+    if (okd(E)) for (const r of E.data) { const t = Date.parse(r.time || r.t); if (t > last) last = t; }
+    const z = document.getElementById('tz-note');
+    if (z && last) {
+      const ago = Math.max(0, Math.round((Date.now() - last) / 60000));
+      const when = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(new Date(last));
+      z.textContent = `All times are US Eastern (${etZone()}). Newest result in the data: ${when} (${ago < 60 ? ago + ' min' : Math.round(ago / 60) + ' h'} ago); the data refreshes about every 15 minutes.`;
+    }
+  }
+  if (okd(L) && L.data[0] && L.data[0].score != null) {
+    const l = L.data[0];
+    document.getElementById('lede').textContent = `${l.name || l.short} leads with a verified score of ${g1(l.score)} out of 100${l.pending ? ' (alignment audit pending)' : ''}.${l.score < 100 ? ' No design meets every target yet.' : ''}`;
+  }
+  if (okd(L) && L.data[0]) { const l = L.data[0]; document.querySelector('#kpi-best .big').textContent = l.score == null ? '—' : g1(l.score); document.getElementById('kpi-best-name').textContent = l.short || '—'; document.getElementById('kpi-best-cx').textContent = l.complexity == null ? '' : `simplicity ${cxf(l.complexity)} points (lower = simpler)`; }
+  const MOT = dash.data('motion'), mo = okd(MOT) && Array.isArray(MOT.data) ? motionPrep(MOT.data) : null;
+  if (okd(B)) { const rows = B.data.filter((r) => r.empty !== true); drawScatter(rows); drawSimple(rows); drawBoard(rows, mo); }
+  if (okd(S)) drawRecord(S.data.filter((r) => r.empty !== true));
+  // display names by id: every concept (morphs), the board's names over them, and every built-CAD design (cad)
+  const C = dash.data('cad'), names = new Map();
+  if (okd(C)) C.data.forEach((r) => { if (r.design && r.design_name) names.set(r.design, r.design_name); });
+  if (okd(M)) M.data.forEach((m) => { if (m.id && m.empty !== true) names.set(m.id, designName(m)); });
+  if (okd(B)) B.data.forEach((r) => { if (r.id && r.short) names.set(r.id, r.short); });
+  if (okd(E)) drawEvents(E.data.filter((r) => r.empty !== true), names);
+  if (okd(R)) drawReqs(R.data.filter((r) => r.empty !== true));
+  if (okd(RS) && RS.data[0]) { const q = RS.data[0]; document.getElementById('reqline').textContent = `${q.pass} of ${q.total} pass on the best judged 3-joint build: ${q.design_name || q.design}. Green = pass, red = fail, dashed = not measured yet or waiting on the user.`; }
+  if (okd(S) && okd(B)) {
+    const sw = S.data.filter((r) => r.empty !== true), rows = B.data.filter((r) => r.empty !== true);
+    const leaders = rows.filter((r) => !r.is_baseline).map((r) => r.id);
+    drawConfigs(sw, names, leaders);
+    drawTarget('t-close', sw, 'inband14', 0.9); drawTarget('t-follow', sw, 'follow', 0.95); drawTarget('t-reach', sw, 'reach', 0.9);
+  }
+  if (okd(C)) { const cad = C.data.filter((r) => r.empty !== true); drawCad('c-R1', cad, 'R1'); drawCad('c-R3', cad, 'R3'); drawCad('c-R16', cad, 'R16'); }
+});
+</script>
+
+</div>

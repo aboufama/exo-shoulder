@@ -1,0 +1,84 @@
+{
+ "id": "sidecar-longdyad-knuckle-3r",
+ "wear": "bench",
+ "exact": true,
+ "fit_fast": 10.3,
+ "frozen": 18.91,
+ "n": 470,
+ "mode": "exact",
+ "poses_taken": 375,
+ "poses_K_open": 123,
+ "law_screw": {
+  "k_slope": 1.6232,
+  "resid_max_deg": 0.0,
+  "qK_span_deg": [
+   -37.8,
+   0.0
+  ]
+ },
+ "passive_block": {
+  "rank": [
+   5
+  ],
+  "sigma_min": {
+   "min": 0.1125,
+   "p5": 0.1959,
+   "median": 0.3481,
+   "p95": 0.3579,
+   "max": 0.358
+  },
+  "cond": {
+   "min": 7.8033,
+   "p5": 7.8042,
+   "median": 7.937,
+   "p95": 13.4165,
+   "max": 23.1356
+  }
+ },
+ "gh_drift": {
+  "hub_reading_deg_per_mm": {
+   "min": 0.8447,
+   "p5": 0.8447,
+   "median": 0.8472,
+   "p95": 1.1258,
+   "max": 1.5158
+  },
+  "j3_reading_deg_per_mm": {
+   "min": 0.8447,
+   "p5": 0.8447,
+   "median": 0.8472,
+   "p95": 1.1258,
+   "max": 1.5158
+  },
+  "estimated_arm_rotation_error_deg_per_mm": {
+   "min": 0.6998,
+   "p5": 0.7002,
+   "median": 0.7304,
+   "p95": 1.3729,
+   "max": 2.4102
+  },
+  "knee_pin_rate_deg_per_mm": {
+   "min": 3.1989,
+   "p5": 3.1993,
+   "median": 3.2678,
+   "p95": 4.8053,
+   "max": 6.6445
+  },
+  "unfollowable_direction_gain": {
+   "min": 1.0,
+   "p5": 1.0,
+   "median": 1.0,
+   "p95": 1.0,
+   "max": 1.0
+  }
+ },
+ "worst": {
+  "pose": 345,
+  "kind": "ws",
+  "est_rot_deg_per_mm": 2.41,
+  "j3_deg_per_mm": 1.516,
+  "knee_ang": 146.14,
+  "consistency_resid": 2.0749517469374498e-10
+ },
+ "secs": 206.7
+}

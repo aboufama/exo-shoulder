@@ -1,0 +1,62 @@
+[
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "The margin is on file five times, all >= TH fold_min 5.0 (gamed only below 4.95): rows/kneeless-sidecar-knuckle-3r.json verification.added_checks.min_th_margin_deg 5.293 and min_th_margin_held_deg 5.106, fast.min_th_margin_taken_deg 5.01; verify/kneeless-sidecar-knuckle-3r_v_bench_frozen.json th_margin {min 5.293, n 367, lt5 0}; _v_held_frozen.json th_margin {min 5.106, n 853, lt5 0}; _v_fitexact.json th_margin {min 5.007, n 185, lt5 0}. The verifier measures it in th, the kit's metric (verify/kneeless-sidecar-knuckle-3r.py lines 54-58: forced poses take min of both sub-chains). Tool read miss: c_fold_margin's regex (min_th|fold_margin_min|th_margin|own_state_margin_min)$ skips *_deg keys, and the dict th_margin gives no number."
+ },
+ {
+  "key": "idle",
+  "refuted": true,
+  "evidence": "The declared drive (slaved knuckle K via the RSSR sidecar) moves far above TH idle_deg 2.0. Exact files: remeasure/kneeless-sidecar-knuckle-3r_bench.json deep.coord_spans dK [-0.6242, 0] rad = 35.76 deg; _held.json dK [-0.6342, 0] = 36.34 deg; verify _v_bench_frozen.json extra.dK_taken_max_deg 35.77, _v_held_frozen.json 36.34, sidecar.phi_max_taken 34.1. Own exact re-wear this session (tools/alignment_audit.py remeasure unchanged, output redirected to the scratchpad, CB_EXACT=1, local, 115 s, git 14dd5d1): 21.11 / 22.75 / 33.15 and why {fold 90, parts 8, contact 5} reproduced, deep, frozen and parts_ib14 identical to the auditor's file; dK [-0.6242, 0] = 35.76 deg, K.ang [128.5952, 128.5952]. Own fast run (Bench(60,160), plain 15.63 reproduced): dK span 36.64 deg over 185 taken poses, K off stop A on 75. K.ang is the knee dict of the deleted knee: models/kneeless-sidecar-knuckle-3r.py KLDesign.knee wraps the knee only to place the pad; own run K.ang 128.5952 (span 3e-6 deg), bracket knee_ptp 0.0, drift_max_mm 0.0; verify bracket.bracket_drift_mm 0.0. No knee is a declared joint (mechanism.notes: knee link, pins and encoders deleted). M4 absent."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Confirmed: rows/kneeless-sidecar-knuckle-3r.json status 'verified' but verdict opens 'SCREENED, a Pareto point', which is the tool's documented trigger (alignment_audit.py c_reporting: verdict startswith SCREENED). The record also still decides on the retired A1 gate. A stale record is not refuted by a number. Watch stands."
+ },
+ {
+  "key": "judgement:NEW-idle-check-false-positive",
+  "refuted": true,
+  "evidence": "Every fact confirmed, and it describes a defect of tools/alignment_audit.py c_idle (regex dK|K\\.ang|phi|q[0-9]?K? takes the min span, and K.ang is the rigid bracket's constant 128.5952), not a pattern of this design that costs the wearer. Design-side numbers on file and re-measured: dK 35.76 bench (auditor's exact file and own exact re-wear, identical) / 36.34 held, 36.64 own fast run; th margin 5.293 / 5.106 (verify th_margin). The base-choice concern is moot now: the twin kneeless-roller was cleared to watch by its skeptic (ledger kneeless-roller-knuckle-3r stage skeptic, verdict watch, 2026-10-17T02:18:29Z), so both twins stand on the same footing. Proposal 1 (c_idle reads dK / phi only) stays open as a tool action."
+ },
+ {
+  "key": "judgement:NEW-free-deletion",
+  "refuted": false,
+  "evidence": "Measured for THIS design this session with the twin's harness (kneeless-roller-knuckle-3r.py redteam_gh logic, this design's hub-3 axis u3 [-0.154, -0.135, 0.979], Bench(110,360) all 470 poses, no wear): at a 3 mm GH-centre error 38.7 % of poses keep the cuff misfit within the 3 mm liner without a knee, 66.4 % with a planar knee in hub 3's plane (one slide along the arm: 40.2 %); at 5 mm 17.7 % vs 36.8 %. Fit bench: 38.6 % vs 64.5 %. Row gh_offset_redteam (3 mm p95 4.83, knee_left 4.14) confirmed. Note the no-knee share is design independent (identical to the twin's 0.387: it depends only on the poses and the rest pose), so every rigid-bracket row pays it and the score sees none of it. Wording correction: the deletion is not free on the bench either, it needs b3 = 0 (plain 21.11 vs the lead's 18.91 at b3 0.345, held 25.34 vs 22.67; seed frozen 22.68). No number refutes the misfit, so the wearer cost (cuff pressure / twist under real GH translation) stands."
+ },
+ {
+  "key": "judgement:NEW-contact-depth",
+  "refuted": false,
+  "evidence": "Confirmed: remeasure/_probe.json probe.contact_poses 5 poses, summed 27.45 mm, deepest -17.6 at (0,165,-45) and -7.3 at (15,165,-60); _probe_held.json 21 poses, 76.79 mm, deepest -16.47. Lead _probe.json 4 poses, 6.23 mm, deepest -4.61. Caveat on (c): the comparison mixes pose sets. In remeasure/sidecar-longdyad-knuckle-3r_bench_perpose_claim.json the lead does not evaluate either of this design's two deepest poses (ev false: lost before collision), and at (30,165,-60) the lead is in contact at -4.61 mm where this design takes the pose at 0.48 mm. So reach at elev 165 is the same; what differs is how the arm is stopped (a drive part 17.6 mm into the arm vs a kinematic limit). No number shows the deep intrusion costs the wearer nothing. Stands."
+ },
+ {
+  "key": "judgement:NEW-ws-inband",
+  "refuted": false,
+  "evidence": "Confirmed in two independent files: verify _v_bench_frozen.json ws_inband all 0.8426 / e90_140 0.8049 / ovh140 0.9439 (held 0.8465 / 0.8282 / 0.9486) and remeasure _probe.json ws_unscored / ws_elev90_140 (over14 0.1566, over20 0.037). Lead with the same probe and bench (remeasure/sidecar-longdyad-knuckle-3r_probe.json): 0.8736 / 0.8409, over14 0.1257, over20 0.0278. Not a selection artefact: this design takes fewer elev 90-140 poses (34 vs 37) and is still lower. Floor documented at ROUNDS.md lines 1017-1020 and 1265. Metal > 14 mm is the bump the goal names (ALIGNMENT section 1.1). Stands."
+ },
+ {
+  "key": "judgement:T1",
+  "refuted": false,
+  "evidence": "Confirmed in remeasure _bench.json deep (near1_poses 3, min_metal_mm 0.476, gap_near1 22.75) and the verifier's own audit (verify _v_bench_frozen.json audit.near_touch_low 0.48 / 0.51 / 0.67 mm; gap_near1 22.75); held _held.json 14 poses, min 0.025, 28.41. Lead remeasure: 2 poses, 0.278, 20.00 / held 25.75. The threshold is the user's (CLAUDE.md line 76: contact stays metal < 1 mm). The tool's documented T1 trigger (> 15 points in the 1-2 mm shell) is not met (33.15 - 21.11 = 12.04), but these are 0-1 mm poses, under the user's own contact line, and ALIGNMENT section 1.1 makes them metal on the skin. Stands."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "Confirmed: remeasure _probe.json ws_overhead140 floor_hist_mm {0-1: 1, 1-2: 5, 2-3: 2} (8 of 8 taken under 3 mm, 6 under 2, 1 under 1); held {3, 9, 5} of 17; deep.overhead_min_metal_p10 1.40 / 1.05. Lead same probe: {1, 4, 3} of 8, so overhead this design is one pose worse at < 2 mm and better overall (near3_poses 130 vs 178). The whole-bench shell (12.04) is under TH shell2_watch 15, but that number cannot see an 8-pose overhead subset, and the goal (ALIGNMENT section 1.1-1.2) puts overhead first and calls 1-2 mm metal on the skin. A goal gap, not a gamed number. Stands as watch."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Missing measurement. grep for this id finds no R17, dynamics or posture-sweep output in judge/, pipeline/ or docs/ (only row, doc, model, verify, viz, dashboard, alignment files). The lead's static load sheet (docs/research/sidecar_mechanism_redteam.md row 5: 0.08 N.m preload, factor 2.4 over 0.033 N.m) is for the lead's geometry and is not a posture sweep; line 112 there says R17 with the drive coupling is still pending. Stop-A share confirmed from the verifier's definition (verify/kneeless-sidecar-knuckle-3r.py line 54: forced = |dK| > 1e-6): 367 - 140 = 227 bench, 853 - 319 = 534 held; own fast run 110 of 185 at dK = 0. Stands."
+ },
+ {
+  "key": "judgement:S1",
+  "refuted": true,
+  "evidence": "(b) The documented S1 trigger is held-out minus bench gap > +6 (ALIGNMENT S1 Detect; TH held_watch 6.0): measured 25.34 - 21.11 = +4.23 (remeasure _held.json / _bench.json frozen.gap), the lead under the same protocol +3.76 (22.67 - 18.91). (a) 'The fit bench never shows the clash' holds only for fast labels: on the same 220 fit poses the exact wear shows E-L2 on 3 (verify _v_fitexact.json parts_pairs E-L2 3), a rate of 1.4 % against 1.7 % on the claim bench (8/470) and 1.5 % held out (17/1154), so the sample is not skewed against the clash. The fast mode loses the same poses under another label (fit_fast why fold 30 + skin 5 = exact fold 30 + parts 3 + contact 2; reach 0.7812 in both), so the search's objective was charged for them. The claim counts every loss (verify parts_pairs 8 / 17). No number shows an inflated claim or a hidden wearer cost."
+ },
+ {
+  "key": "judgement:R1",
+  "refuted": false,
+  "evidence": "Confirmed: rows/kneeless-sidecar-knuckle-3r.json verdict opens 'SCREENED, a Pareto point' and says 'fails the A1 dominance gate'; note ends 'Not a lead: fails the A1 dominance gate'; verification.dominance_A1.passes false. The twin rows/kneeless-roller-knuckle-3r.json is v_gap 21.07, held 24.59, complexity 23.75, ahead on all three, so 'Pareto point' is a stale label that flatters. docs/dashboard/data/morphs.json: sweep_gap 20.24, v_contact null beside v_gap 21.11. The conclusion (not a lead) is right under the plain-gap rule, but a stale, flattering record is not refuted by a number. Stands."
+ }
+]

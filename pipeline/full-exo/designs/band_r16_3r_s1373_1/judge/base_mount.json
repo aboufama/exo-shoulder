@@ -1,0 +1,9 @@
+{
+ "base": {
+  "mount": "girdle",
+  "chain": "spherical",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "max_mm": null,
+ "note": "girdle-riding base: R10 as written (thorax plate) does not apply; skin-slip error not modelled (literature: 5-7 deg below 100-120 deg elevation, up to 25 deg above)"
+}

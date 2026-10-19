@@ -1,0 +1,739 @@
+{
+ "id": "ikring-distalshell-knuckle-4r",
+ "name": "The lead with a short knee and the round slotted shell DISTAL of every mover (s ~118, axis 8.5 deg / taz 243 through GH): an active one-sided J4 ring with no E bump and no knee lift (ikring-mirrork-knuckle-4r's ring hardware merged)",
+ "lens": "round301:rocker-redundant-4r (judge pick 3; ikring-mirrork-knuckle-4r ring hardware merged)",
+ "family": "redundant 4R: the verified lead with a short knee + an arm-side counted J4 on a circular shell DISTAL of every mover",
+ "active_dof": 4,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-19T03:36:54Z",
+ "reach": 0.8056,
+ "follow": 1.0,
+ "inband14": 0.894,
+ "inband10": 0.6072,
+ "contact": 0.005,
+ "gap": 10.54,
+ "v_reach": 0.8056,
+ "v_follow": 1.0,
+ "v_inband14": 0.894,
+ "v_inband10": 0.6072,
+ "v_gap": 10.54,
+ "n_configs": 104,
+ "complexity": 48.0,
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 6,
+  "joints": 9,
+  "closed_loops": 3,
+  "sliding_pairs": 2,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 14,
+  "catalogue_parts": 18,
+  "notes": "ikring-thinstack-knuckle-4r's record (lead + ACTIVE J4 ring, no coil) with the shell moved DISTAL of every mover and the knee re-proportioned (same part and joint counts: no bump parts were ever counted)",
+  "source": "ikring-distalshell-knuckle-4r screen 2026-10-19",
+  "confidence": "medium",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "closed_loops": 1,
+   "rule": "user 2026-10-17: unsensed two-pin cuff knee = 0 (docs/concepts/skin-normal-3r-pin-knee.md line 584); v2.1 knee loop free"
+  }
+ },
+ "best_params": {
+  "PHI": 40.0,
+  "tilt": 8.5,
+  "taz": 243.0,
+  "sgn": 1,
+  "hw": 1,
+  "hwv": "plain",
+  "ds": -26.0,
+  "liner": 4.0,
+  "plate": 1.5,
+  "flange": 1,
+  "rt_extra": 1.5,
+  "pre": 0.0,
+  "bump": 1.0,
+  "band": 8.0,
+  "ramp": 6.0,
+  "flood": 0,
+  "delta": 0.0,
+  "carw": 14.0,
+  "coil": "none",
+  "lean": 1,
+  "h_c": 1.7,
+  "coilD": 12.0,
+  "coilL": 10.0,
+  "tsh": 1.0,
+  "lbr": 1,
+  "lE": 69.52,
+  "lc": 18.63,
+  "phiE": -5.44,
+  "phib": -80.96,
+  "ang_min": 25.64,
+  "IK_RULE": "take-only (pick 1 table)",
+  "kstep": 2.5
+ },
+ "claim": {
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast at k = 0: 13.15)",
+  "gate_chain_only": 10.54,
+  "plain": 9.94,
+  "score": 96.17,
+  "near1": 11.0,
+  "near2": 23.3,
+  "ib14_pooled": 0.9225,
+  "ib14_chain_only": 0.894,
+  "ws_taken": 290,
+  "overhead": [
+   13,
+   28
+  ],
+  "mid_90_140": [
+   55,
+   85
+  ],
+  "contacts": [
+   [
+    237,
+    15.0,
+    165.0,
+    -60.0,
+    0.0,
+    -9.0
+   ],
+   [
+    264,
+    30.0,
+    165.0,
+    -60.0,
+    0.0,
+    -5.74
+   ]
+  ],
+  "T5_sum_mm": 14.74,
+  "T5_max_mm": 9.0,
+  "th_margin_min": 5.097,
+  "new_takes": 31,
+  "new_overhead": 5,
+  "new_under1": 1,
+  "new_1to2": 5,
+  "new_median_mm": 3.41,
+  "ring_added_overhead_under2": 1,
+  "k_hist_new": {
+   "2.5": 1,
+   "0.0": 1,
+   "27.5": 1,
+   "22.5": 2,
+   "7.5": 1,
+   "10.0": 1,
+   "32.5": 6,
+   "40.0": 11,
+   "30.0": 2,
+   "25.0": 2,
+   "37.5": 2,
+   "35.0": 1
+  },
+  "continuity": {
+   "dropped_relayed": 0,
+   "static": {
+    "gap": 9.94,
+    "reach": 0.8056,
+    "follow": 1.0,
+    "inband14": 0.9225,
+    "inband10": 0.6072,
+    "contact": 0.005
+   },
+   "flood": "pick 1 IK flood imported (lead knee; this knee loses 1 lead take)"
+  },
+  "relay_hw": {
+   "R_t": 71.86,
+   "R_liner": 70.86,
+   "R_bump": 74.26,
+   "h_c": 1.4,
+   "rpad": 74.03,
+   "s0": -117.1,
+   "s_pad": -91.1,
+   "s_pad_edge": -96.3,
+   "th0": -107.2,
+   "arc": [
+    -115.6,
+    -60.4
+   ],
+   "pre_arc": 8.37,
+   "pre_floor": 8.37,
+   "band": 8.0,
+   "ramp": 6.0,
+   "ramp_floor": 2.0,
+   "skin_p90_arc_max": 65.36
+  },
+  "jams": 0,
+  "perpose": "docs/concepts/verify/ikring-distalshell-knuckle-4r/ik_bench_fixk_perpose.json",
+  "source": "ik_bench_fixk.json",
+  "table_import": {
+   "gate": 11.76,
+   "plain": 11.16,
+   "near2": 24.43,
+   "ws_taken": 290,
+   "overhead": [
+    13,
+    28
+   ],
+   "contacts": 7,
+   "mismatch": [
+    139,
+    182,
+    354,
+    417,
+    431,
+    441,
+    464
+   ]
+  },
+  "fixk": {
+   "139": {
+    "k": 0.0,
+    "mm": 0.07202744731792779,
+    "n_take_k": 1,
+    "table": {
+     "0.0": 0.07202744731792779,
+     "2.5": -0.694035580001401,
+     "5.0": -1.2210034256585383,
+     "7.5": -1.5196532169030739,
+     "10.0": null,
+     "12.5": null,
+     "15.0": null,
+     "17.5": null,
+     "20.0": null,
+     "22.5": null,
+     "25.0": null,
+     "27.5": null,
+     "30.0": null,
+     "32.5": null,
+     "35.0": null,
+     "37.5": null,
+     "40.0": null
+    }
+   },
+   "182": {
+    "k": 0.0,
+    "mm": null,
+    "n_take_k": 0,
+    "table": {
+     "0.0": null,
+     "2.5": null,
+     "5.0": null,
+     "7.5": null,
+     "10.0": null,
+     "12.5": null,
+     "15.0": null,
+     "17.5": null,
+     "20.0": null,
+     "22.5": null,
+     "25.0": null,
+     "27.5": null,
+     "30.0": null,
+     "32.5": null,
+     "35.0": null,
+     "37.5": null,
+     "40.0": null
+    }
+   },
+   "354": {
+    "k": 0.0,
+    "mm": null,
+    "n_take_k": 0,
+    "table": {
+     "0.0": null,
+     "2.5": null,
+     "5.0": null,
+     "7.5": null,
+     "10.0": null,
+     "12.5": null,
+     "15.0": null,
+     "17.5": null,
+     "20.0": null,
+     "22.5": null,
+     "25.0": null,
+     "27.5": null,
+     "30.0": null,
+     "32.5": null,
+     "35.0": null,
+     "37.5": null,
+     "40.0": -3.5479017950122413
+    }
+   },
+   "417": {
+    "k": 0.0,
+    "mm": null,
+    "n_take_k": 0,
+    "table": {
+     "0.0": null,
+     "2.5": null,
+     "5.0": null,
+     "7.5": null,
+     "10.0": null,
+     "12.5": null,
+     "15.0": null,
+     "17.5": null,
+     "20.0": null,
+     "22.5": null,
+     "25.0": null,
+     "27.5": null,
+     "30.0": null,
+     "32.5": null,
+     "35.0": null,
+     "37.5": -1.2649831320830955,
+     "40.0": -1.2649831320830955
+    }
+   },
+   "431": {
+    "k": 0.0,
+    "mm": null,
+    "n_take_k": 0,
+    "table": {
+     "0.0": null,
+     "2.5": null,
+     "5.0": null,
+     "7.5": null,
+     "10.0": null,
+     "12.5": null,
+     "15.0": null,
+     "17.5": null,
+     "20.0": null,
+     "22.5": null,
+     "25.0": -6.903547644604383,
+     "27.5": -6.903547644604383,
+     "30.0": -6.903547644604383,
+     "32.5": -6.903547644604383,
+     "35.0": -6.903547644604383,
+     "37.5": -6.903547644604383,
+     "40.0": -6.903547644604383
+    }
+   },
+   "441": {
+    "k": 0.0,
+    "mm": null,
+    "n_take_k": 0,
+    "table": {
+     "0.0": null,
+     "2.5": null,
+     "5.0": null,
+     "7.5": null,
+     "10.0": null,
+     "12.5": null,
+     "15.0": null,
+     "17.5": null,
+     "20.0": null,
+     "22.5": null,
+     "25.0": -3.460034948555031,
+     "27.5": -3.460034948555031,
+     "30.0": -3.460034948555031,
+     "32.5": -3.460034948555031,
+     "35.0": -3.460034948555031,
+     "37.5": -3.460034948555031,
+     "40.0": -3.460034948555031
+    }
+   },
+   "464": {
+    "k": 0.0,
+    "mm": null,
+    "n_take_k": 0,
+    "table": {
+     "0.0": null,
+     "2.5": null,
+     "5.0": null,
+     "7.5": null,
+     "10.0": null,
+     "12.5": -4.612029710343115,
+     "15.0": -4.612029710343115,
+     "17.5": -4.612029710343115,
+     "20.0": -4.612029710343115,
+     "22.5": -4.612029710343115,
+     "25.0": -4.612029710343115,
+     "27.5": -4.612029710343115,
+     "30.0": -4.612029710343115,
+     "32.5": -4.612029710343115,
+     "35.0": -4.612029710343115,
+     "37.5": -4.612029710343115,
+     "40.0": -4.612029710343115
+    }
+   }
+  },
+  "chain_psi0": {
+   "gap": 18.9,
+   "ws_taken": 261,
+   "lost_vs_lead": [
+    203
+   ],
+   "overhead": 8,
+   "follow": 1.0
+  },
+  "k0_parked": {
+   "gate": 18.9,
+   "plain": 18.3,
+   "near1": 19.39,
+   "near2": 29.45,
+   "ws_taken": 261,
+   "overhead": 8,
+   "follow": 1.0,
+   "shell_min_taken": {
+    "mm": 1.04,
+    "i": 460,
+    "az_rel": 45.8
+   },
+   "shell_under2_taken": 1
+  },
+  "armfixed_all_poses": {
+   "rule": "RED TEAM: the arm-fixed shell is on the arm at every pose; the bench scores metal only on closing poses",
+   "ws_shell_in_skin": 30,
+   "depth_max": -11.91,
+   "poses": [
+    [
+     354,
+     90.0,
+     45.0,
+     -150.0,
+     -3.55,
+     -8.4
+    ],
+    [
+     381,
+     105.0,
+     45.0,
+     -165.0,
+     -8.76,
+     9.2
+    ],
+    [
+     384,
+     105.0,
+     60.0,
+     -150.0,
+     -5.87,
+     -2.0
+    ],
+    [
+     392,
+     105.0,
+     105.0,
+     -150.0,
+     -4.71,
+     -5.2
+    ],
+    [
+     405,
+     120.0,
+     30.0,
+     -180.0,
+     -9.85,
+     25.1
+    ],
+    [
+     408,
+     120.0,
+     45.0,
+     -165.0,
+     -9.55,
+     17.1
+    ],
+    [
+     411,
+     120.0,
+     60.0,
+     -150.0,
+     -9.05,
+     9.2
+    ],
+    [
+     414,
+     120.0,
+     75.0,
+     -135.0,
+     -8.18,
+     1.2
+    ],
+    [
+     416,
+     120.0,
+     90.0,
+     -180.0,
+     -11.02,
+     31.5
+    ],
+    [
+     417,
+     120.0,
+     90.0,
+     -120.0,
+     -1.26,
+     -8.4
+    ],
+    [
+     419,
+     120.0,
+     105.0,
+     -150.0,
+     -7.85,
+     6.0
+    ],
+    [
+     431,
+     135.0,
+     30.0,
+     -150.0,
+     -6.9,
+     -3.6
+    ],
+    [
+     433,
+     135.0,
+     45.0,
+     -165.0,
+     -10.1,
+     28.3
+    ],
+    [
+     436,
+     135.0,
+     60.0,
+     -135.0,
+     -9.46,
+     9.2
+    ],
+    [
+     438,
+     135.0,
+     75.0,
+     -150.0,
+     -10.89,
+     31.5
+    ],
+    [
+     440,
+     135.0,
+     90.0,
+     -165.0,
+     -11.17,
+     31.5
+    ],
+    [
+     441,
+     135.0,
+     90.0,
+     -105.0,
+     -3.46,
+     -8.4
+    ],
+    [
+     443,
+     135.0,
+     105.0,
+     -120.0,
+     -6.86,
+     -6.8
+    ],
+    [
+     454,
+     150.0,
+     30.0,
+     -150.0,
+     -6.71,
+     -6.8
+    ],
+    [
+     456,
+     150.0,
+     45.0,
+     -165.0,
+     -10.43,
+     45.8
+    ],
+    [
+     457,
+     150.0,
+     45.0,
+     -105.0,
+     -0.14,
+     45.8
+    ],
+    [
+     458,
+     150.0,
+     60.0,
+     -180.0,
+     -10.54,
+     31.5
+    ],
+    [
+     459,
+     150.0,
+     60.0,
+     -120.0,
+     -10.82,
+     20.3
+    ],
+    [
+     461,
+     150.0,
+     75.0,
+     -135.0,
+     -11.4,
+     45.8
+    ],
+    [
+     463,
+     150.0,
+     90.0,
+     -150.0,
+     -11.41,
+     29.9
+    ],
+    [
+     464,
+     150.0,
+     90.0,
+     -90.0,
+     -4.61,
+     -8.4
+    ],
+    [
+     465,
+     150.0,
+     105.0,
+     -165.0,
+     -11.68,
+     31.5
+    ],
+    [
+     466,
+     150.0,
+     105.0,
+     -105.0,
+     -7.12,
+     -8.4
+    ],
+    [
+     467,
+     150.0,
+     120.0,
+     -180.0,
+     -11.91,
+     28.3
+    ],
+    [
+     468,
+     150.0,
+     120.0,
+     -120.0,
+     -4.06,
+     -8.4
+    ]
+   ],
+   "clip_shell_in_skin": 0,
+   "gate_if_counted_as_contact": 17.48,
+   "n_evaluated": 400
+  }
+ },
+ "held_out": {
+  "sample": "every held ws pose + every 100th held clip frame (pick 1 held IK table, take-only)",
+  "gap_sample": 15.62,
+  "gate_sample": 15.62,
+  "reach": 0.7847,
+  "ws_taken": 747,
+  "overhead": [
+   32,
+   71
+  ],
+  "mid": [
+   150,
+   229
+  ],
+  "n_contacts": 32,
+  "T5_sum": 181.03,
+  "new_takes": 99,
+  "new_under1": 8,
+  "new_1to2": 10,
+  "new_overhead": 14,
+  "new_overhead_under2": 3,
+  "k0_overhead": 18
+ },
+ "doc": "docs/concepts/ikring-distalshell-knuckle-4r.md",
+ "verdict": "screened (a LABELLED 4-JOINT OPTION, 4 active joints, never the lead): Bench(110,360) exact frozen chain-only gate 10.54 (score 96.17), plain 9.94, reach 0.8056 (290/360), overhead 13/28 (lead 8), elev 90-140 55/85, 2 contacts (T5 14.74 mm), 2 mm reading 23.30 (lead 34.84, pick 1 47.00); pre-registered gates: pass <= 13.75 chain-only yes; connected overhead >= 12/28 yes; ring-added overhead takes under 2 mm <= 2 yes; held overhead >= 25/71 yes. Step 1 (short knee keeps 261/262 lead takes, follow 1.0) and step 2 (distal shell parked costs 0 gate points: 18.90 = chain-only; shell in-band 1.0; 0 shell-torso contacts at delta 0) pass. vs pick 1 (9.75): better in-band (0.894 vs 0.890) and 2 mm (23.30 vs 47.00), worse contacts / reach at the imported IK table. RED TEAM (own, new): the ARM-FIXED shell sits in the torso on 30 of 360 ws poses the chain does not close (plane 90-150, IR -105..-180, to -11.9 mm, along the whole arc), unscored by the bench's closing-pose convention; counted as contacts the gate reads 17.48. The same convention applies to pick 1 / phi40 (unmeasured there).",
+ "limiter": "(1) the fold: the abduction cone stays shut (J1 / J2 seat-level wall, the ring cannot reach it) and the stretched-fold IR overhead poses close at no k in [0, 40]; (2) the ANTERIOR shell end meets the torso at the hanging-IR posture: the measured cap at s 118 is ~+47-49 deg from the pad azimuth (delta 0 puts the end at +46.8, 1.04 mm clear at pose 460; delta 3.5 -> -1.37 mm on 5 ws + 2 clip; delta 12 -> -10.55), so the travel cannot grow anteriorly and the IK rides the slot end; (3) ring-made contacts at k 25-40 on IR poses plane 90-150 (cause: hardware). (4) the arm-fixed shell meets the torso on 30 non-closing across-body IR poses (to -11.9 mm): a round shell at s 118 is too large in radius on the medial-anterior side for deep IR; the measured window between the hanging-IR anterior cap and the across-body posterior contacts is narrower than the 55-deg arc.",
+ "note": "Model docs/concepts/models/ikring-distalshell-knuckle-4r.py imports pick 1 (ikring-thinstack-knuckle-4r) read-only; changes: knee keys overridable in the fit, NO BUMP (zero amounts; the jam rule is the guard), the knee link added to the carriage / bracket jam lists, private verify dir. Knee: 98-config random sweep on Bench(60,160) fast psi 0 chain only (gate: best gained 0.0 score points over the 2nd half and 0.0 over the last third, top-5 spread 0.32 -> converged for the knee; best 13.15 at lE 69.52, movers <= s 106.9; lE 61.81 at <= 99.9 ties on the exact bench 18.88). Hardware cell: 5 parked readings on Bench(110,360) exact (delta 12 / 3.5 / 3.5+rt4 / 0, ds -26; NOT converged - a pre-registered cell plus the anterior-end correction, no envsel sweep of tilt / taz / PHI 35 / liner). IK: pick 1's table + flood imported (lead note), then fixk = this design's own k-table on the mismatched poses. Spec corrections: carriage delta 0 (not 10-15: the binding end is anterior), knee lE 69.5 (not the pin knee's 59.6), knee link jam-checked. Held: pick 1's held IK table worn with this metal (report only, never selected on). Local CPU only (load 25-27). VERIFIER (2026-10-19, skeptic): VERIFIED as a labelled 4-joint option: v_gap 10.54 chain-only gate (plain 9.94, score 96.17) on Bench(110,360) exact frozen, re-worn from the claim's k choice with the IK flood REBUILT for this knee (the claim dir's flood was byte-identical to pick 1's lead-knee flood; rebuilt 1206 connected nodes vs 1214, cmap changes only at 203 / 205, neither taken -> 0 effect); per-pose dump equals the claim at all 470 poses; th margin 5.097. Champion on the same bench and checks 75.94 (risley-turret verifier convention, as the pick-1 / phi40 verifiers). Red team: phi40's X2 bracket-top check reads 302 jams (142.73) but it is the 2-mm-sampling allowance: the exact slab distance knee-to-bracket is 0.741 mm min (adjacent pair, 0.15 limit), non-adjacent >= 6.18 mm -> 0 jams. Shell-aware flood (126 of 1432 envelope nodes have the arm-fixed shell in the skin) keeps all 290 takes connected; but 9 bench ws poses (354 417 431 441 454 457 459 464 466) are kinematically reachable at k 12.5-40 with the shell -0.14..-10.82 mm in the torso - the take-only IK holds psi 0 there; counted as contacts the gate reads ~12.73 (still < 13.75). Issues: R17 (J4 undriven unpowered), T1 139 at 0.072 mm, delta / ds chosen on the claim bench, held not re-run (proposer 15.62, 32 contacts).",
+ "v_contact": 0.005,
+ "verification": {
+  "t": "2026-10-19T04:25:00Z",
+  "bench": "Bench(110,360) exact frozen, claim k choice (ik_bench_fixk_choice.json, take-only), IK flood REBUILT with this knee",
+  "v_gap_gate": 10.54,
+  "v_plain": 9.94,
+  "score": 96.17,
+  "champion_same_bench": 75.94,
+  "perpose": "docs/concepts/verify/ikring-distalshell-knuckle-4r/verifier/v_bench_perpose.json",
+  "perpose_diff_vs_claim": 0,
+  "th_margin_min": 5.097,
+  "dropped_relayed": 0,
+  "flood": {
+   "claim_file": "byte-identical to pick 1 (lead lE 97 knee), not rebuilt",
+   "rebuilt_nodes_conn": 1206,
+   "pick1_nodes_conn": 1214,
+   "cmap_changes": [
+    203,
+    205
+   ],
+   "takes_changed": 0
+  },
+  "x2_bracket": {
+   "phi40_X2_reading": "302 extra jams, gate 142.73 (nearest 2-mm sample minus 1 mm allowance)",
+   "exact_slab_min_mm": {
+    "knee_underside_c29": 0.741,
+    "knee": 0.958,
+    "non_adjacent_min": 6.182
+   },
+   "exact_jams": 0,
+   "verdict": "X2 artefact: the knee link rides 0.74-0.96 mm over the bracket top face (adjacent pair, 0.15 mm limit)"
+  },
+  "shell_aware_flood": {
+   "envelope_nodes_shell_in_skin": 126,
+   "of": 1432,
+   "of_them_kinematically_connected": 35,
+   "claimed_takes_connected": 290,
+   "lost": 0
+  },
+  "strict_contact_reading": {
+   "bench_ws_poses_connected_with_shell_in_torso": [
+    354,
+    417,
+    431,
+    441,
+    454,
+    457,
+    459,
+    464,
+    466
+   ],
+   "depth_mm": [
+    -0.14,
+    -10.82
+   ],
+   "gate_if_counted": 12.73
+  },
+  "issues": [
+   "R17: J4 undriven in an unpowered MVP1 (no coil); the 10.54 needs psi commanded by the IK",
+   "T1: pose 139 taken at 0.072 mm (k 0); 460 at 1.04 mm (shell anterior end)",
+   "carriage delta / ds picked from 5 readings on the claim bench",
+   "held not re-run: proposer held 15.62, 32 contacts (20 at the shell ends, pick 1 held IK table not re-chosen)"
+  ]
+ }
+}

@@ -1,0 +1,72 @@
+[
+ {
+  "key": "dominance",
+  "refuted": false,
+  "evidence": "Upheld: the numbers are right and the comparison is fair. I re-derived both sides from their own frozen exact verifier files, both read by the same PK.audit near-touch: verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json frozen.gap 22.82, audit.gap_near2 44.08 (34 poses < 2 mm, min 0.30, exact true); verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json frozen.gap 19.13, audit.gap_near2 50.14 (44 poses, min 0.65, exact true), which equals remeasure/_bench.json deep.gap_near2 50.14. That gives plain +3.69 and 2 mm -6.06. The wording 'part of the gain is metal moved into the 1-2 mm shell' is loose: the plain gain is in-band 0.8546 -> 0.9049 (a 2-14 mm count, which 1-2 mm metal cannot raise), and at 1 mm this row is better (20.22 vs 24.46; min 0.65 vs 0.30). But 10 more taken poses graze at 1-2 mm (44 vs 34), and docs/ALIGNMENT.md section 1 counts that as metal on a real arm. So it is a trade-off the wearer pays, not a label. The level is report-only (A1 retired)."
+ },
+ {
+  "key": "continuity",
+  "refuted": false,
+  "evidence": "Upheld as coded. The row reads rows/sidecar-parallelogram-knuckle-3r.json continuity.full: static 19.13; connected_full 19.13 (0 of 120 forced-taken dropped, envelope env_forced_connected 490); connected_knn 22.21 (11 dropped, reach 0.6889); connected_bench 45.03. The knn loss is 22.21 - 19.13 = 3.08, above TH conn_gamed 3.0, and c_continuity (tools/alignment_audit.py lines 500-505) turns an ok full flood into a watch in that case. The rule's own flood (full) loses 0.00. The knn graph is proposal A4 (ALIGNMENT.md line 430), not an adopted rule. I have no measurement showing that the 11 knn-dropped poses are reachable without the envelope stepping stones, so the watch stands. Same ruling as on desmo-conecut and lowarm-halfring."
+ },
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "Measured; the number is now on file (remeasure/sidecar-parallelogram-knuckle-3r_msub_rest_bench_skeptic.json:family_reading {min 5.011, lt5 0}). I measured it on the claim's own wear, and the number is now on file. I re-ran tools/alignment_msub_rest_probe_model.py sidecar-parallelogram-knuckle-3r bench myself: model unchanged, row best_params, frozen protocol, CB_EXACT=1, nice, 385 s. It reproduces model_frozen.gap 19.13 (inband14 0.9049, reach 0.7194). Over all 369 taken poses, the family th reading (m_plain on the 222 rest poses, min(m_sub, m_eff) on the 147 K-open poses) gives min 5.011 deg and 0 poses under 5. The plain J1-J3 reading in the effective dyad, m_eff = th's distance from the fold of angle(J1,J2) / angle(J2,J3) as built, is >= 5.011 on every taken pose. The lowest poses are (135,30,-150) 5.011, (150,45,-105) 5.051 and (150,30,-150) 5.132. This matches the auditor's file docs/alignment/remeasure/sidecar-parallelogram-knuckle-3r_msub_rest_bench.json:family_reading {min 5.011, lt5 0}. The documented threshold is TH fold_min 5.0 (gamed below 4.95), so c_fold_margin on this number reads ok. The watch existed only because the tool reads row and verify files, not because the margin is short. Held-out margin: not measured (my held run was stopped at the time box). The claim is the bench v_gap. The 0.011-deg closeness is ruled under NEW-unpriced-stops."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Upheld, read from the raw files. rows/sidecar-parallelogram-knuckle-3r.json has status 'verified' and v_gap 19.13, but its verdict begins 'SCREENED, a candidate for the verifier (self-measured)' and says 'complexity 49' (the row's complexity is 25.5). docs/dashboard/data/morphs.json has the same verdict text, with sweep_gap 10.63 and gap 10.63. That is 8.50 below the verified 19.13, over TH 5 (c_reporting line 752). A reader of the dashboard sees a fast self-measured number as this design's gap."
+ },
+ {
+  "key": "judgement:NEW-catalogue-drive",
+  "refuted": false,
+  "evidence": "Upheld. The O7 socket is the model's (row mechanism.notes 'acetal socket O7'; model ENDS rc ER 3.5). The catalogue KBRM-02 is O9 x 4 (docs/research/sidecar_mechanism_redteam.md finding 2). remeasure/_cap354_bench.json frozen.gap 20.25 (reach 0.7083) and _cap354_held.json 22.66 are as stated. The drive takes K to 37.31 deg on the bench and 37.06 held (held deep.coord_spans dK [-0.6468, 0] rad), so the poses past 35.4 are real. One correction on magnitude: the 35.4 deg pinch was measured on sidecar-longdyad's geometry (red team section 1: La 16.55, beta -86.45). This row runs La 14.90, beta -95.83, s_arm 4.40 (best_params), so the cap that fits its own geometry is not measured. +1.12 / +0.63 is a borrowed estimate. The O9 envelope itself is unsampled either way."
+ },
+ {
+  "key": "judgement:M2",
+  "refuted": false,
+  "evidence": "Upheld. The values come from file. docs/concepts/models/frontload-lobe-stopb-knuckle-3r.py line 45 has stk 4.8534; best_params has no stk; remeasure/_stk6_bench.json stk_claim 4.8534. The kit gives 6.0 for an MR63ZZ pair and 5.0 for an iglidur pin (skin-normal-3r-pin-knee.py lines 19 and 54), so the claim is below both. _stk6_bench.json frozen.gap 19.13, inband14 0.9014; _stk6_held.json frozen.gap 22.09, inband14 0.8994. Held out, in-band then sits under the 0.90 target, which is where the +0.06 comes from. The row still says '2 iglidur pins', against the lead's MR63ZZ rule."
+ },
+ {
+  "key": "judgement:NEW-unpriced-stops",
+  "refuted": false,
+  "evidence": "Upheld (pattern T: sitting on a cutoff). best_params smlo 5.0. Recounted docs/concepts/sweeps/sidecar-parallelogram-knuckle-3r.json: 1341 of 3962 configs have smlo exactly 5.0, so the search bound binds. remeasure/_smlo55_bench.json frozen.gap 19.41 (reach 0.7167). The min th margin over taken poses is 5.011 (see fold_margin): the rule holds by 0.011 deg on the nominal stop. The +0.5 deg pricing is proposal 3 and stays out of the verdict. The watch rests only on the stop sitting at the floor, and that is measured."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Upheld, and reproduced in my own run (tools/alignment_msub_rest_probe_model.py bench, exact, gap 19.13). m_sub_rest: n 222, min 0.000, p10 0.233, p50 4.896, lt5 117, lt2 67, lt1 51. m_sub_moved: min 11.702, lt5 0. These are identical to remeasure/_msub_rest_bench.json. What the wearer feels with the J1-K-J3 sub-chain at its fold, held only by the clock spring and stop A, is not measured. It is family-wide (conecut-h2facet and desmo-conecut 107 / 205 under 5) and open with the user (B1)."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Upheld: the measurement is missing. grep -rl sidecar-parallelogram over judge/ and pipeline/ finds no file. pipeline/full-exo/designs/ has only l1_sidecar-longdyad for this family, so no R17, K-lag or cuff-twist number exists. The row's mechanism has springs_or_flexures 1 (the K clock spring). The K-open count, 147 of 369 taken poses (m_sub_moved n 147 in remeasure/_msub_rest_bench.json), is reproduced in my own run."
+ },
+ {
+  "key": "judgement:S3",
+  "refuted": false,
+  "evidence": "Upheld: the measurement is missing. docs/concepts/sidecar-parallelogram-knuckle-3r.md lines 285-287 say 'the crank's short arm and follower are unmodelled metal, and the lobe sits inside hub 2's O20 housing radius'. remeasure/_bench.json sampling parts (hub1 .. L2, crank, horn, rod, rodends) list no follower, short arm or lobe ring. The red team's real lobe ring stands 3.4 mm outside the O20 hub (finding 3). No bench model of these parts exists."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "Upheld as wearer evidence (report only). remeasure/_bench.json deep: near2_poses 44, near1_poses 2, min_metal_mm 0.651, gap_near2 50.14 - plain 19.13 = 31.01. _held.json deep: near2_poses 96, near1_poses 11 of 859 taken, min 0.275, gap_near2 48.71. _probe.json probe.ws_overhead140: taken 8 of 28, poses_floor_lt2 7 (floor_hist 1-2 mm: 7); clip_overhead140: poses_floor_lt2 8 of 10. Section 1 counts 1-2 mm metal as touching a real arm."
+ },
+ {
+  "key": "judgement:G5",
+  "refuted": false,
+  "evidence": "Upheld, recomputed with tools/simplicity.py VERSION 2.2 score(). This row is 25.5, and sidecar-longdyad-knuckle-3r is 25.5 with a mechanism record identical except notes and source. kneeless-sidecar-knuckle-3r is 28.0 (moving bodies 6 vs 7-2 = 5 after the knee credit, made 14 vs 16-4, bought 12 vs 16-6). So the knee credit removes one body more than the kneeless twin carries, and the design with a knee reads 2.5 simpler than the same core without one. No rank flips (complexity is not in the score)."
+ },
+ {
+  "key": "judgement:S1",
+  "refuted": true,
+  "evidence": "Measured against the documented S1 detector, and it does not fire. ALIGNMENT.md S1 is a skewed pose sample, detected by held_out (watch above +6). remeasure/_held.json frozen.gap 22.03 (exact) against v_gap 19.13 is +2.90, under TH held_watch 6.0 (docs/alignment/sidecar-parallelogram-knuckle-3r.json checks held_out ok). The claim was not picked as the best of its ties: remeasure/_tie_spread.json ties[].frozen.gap 18.54 (k 947) and 19.97 bracket the claim's 19.13, so a tie that wears better was passed over under the pre-declared tie-break. 'The rank is inside noise' is true, and I recount 15 verified rows within 0.85 (morphs.json; this row is now 19th of 38, not 17th). It is a statement about the ranking, with no wearer cost measured."
+ },
+ {
+  "key": "judgement:R1",
+  "refuted": false,
+  "evidence": "Upheld, the same raw reading as reporting. The row verdict says 'SCREENED ... (self-measured)' and 'complexity 49' (row complexity 25.5). morphs.json gap and sweep_gap are 10.63. I searched the row for th_margin, min_th, fold_margin, stk and contact depth with FOLD_KEY-style keys and found none. The fold margin is in an auditor file only (remeasure/_msub_rest_bench.json), not on the row."
+ }
+]

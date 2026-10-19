@@ -1,0 +1,138 @@
+{
+ "id": "lead-relay-wobble-4r",
+ "name": "Wobble J0: O20 hub 0 stacked UNDER hub 1 of the lead conecut-knee-knuckle-3r (hub 1 on a Ti wedge, J1's axis on a cone of half-angle a0; 4 counted joints, the user prefers 3)",
+ "lens": "round103:relay-under-lead (lens 1: the a0 <= 20 'stackable inside J1's footprint' clause)",
+ "family": "base relay 4R, nested tilted stack",
+ "active_dof": 4,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "complexity": 50.75,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-18T03:07:12Z",
+ "reach": 0.6813,
+ "follow": 0.9167,
+ "inband14": 0.8771,
+ "inband10": 0.5566,
+ "contact": 0.0061,
+ "gap": 28.1,
+ "v_reach": 0.6472,
+ "v_follow": 0.9,
+ "v_inband14": 0.8796,
+ "v_inband10": 0.5608,
+ "v_gap": 32.92,
+ "claim_frozen_exact": {
+  "bench": "Bench(110,360) exact, frozen lead, window [0, 21] from the fit bench",
+  "gap": 32.92,
+  "reach": 0.6472,
+  "ws_taken": 233,
+  "follow": 0.9,
+  "inband14": 0.8796,
+  "inband10": 0.5608,
+  "contact": 0.006,
+  "contacts": 2,
+  "lost_to_stack_clashes": 42,
+  "parts_why": {
+   "riser": 35,
+   "hub0:hubK": 7
+  },
+  "overhead": "7/28",
+  "near_touch_min_mm": 0.072,
+  "relayed": 0,
+  "relay_stop": 2,
+  "ghost_gap": 18.28,
+  "lead_same_code": 18.28,
+  "parts_inband": {
+   "chain": [
+    0.909,
+    9.3,
+    2.7,
+    88407
+   ],
+   "hub1": [
+    0.0,
+    21.1,
+    17.8,
+    3267
+   ],
+   "L1a": [
+    0.0,
+    30.4,
+    26.5,
+    792
+   ],
+   "hub0": [
+    1.0,
+    9.3,
+    3.4,
+    8019
+   ]
+  },
+  "geo": {
+   "r0": 49.5,
+   "h_lift": 13.5,
+   "hub0_off": 5.2,
+   "riser_h": 19.1,
+   "hub1_exposed": 33
+  },
+  "file": "docs/concepts/verify/lead-relay-wobble-4r_claim.json"
+ },
+ "best_params": {
+  "a0": 6.0,
+  "azu": 180.0,
+  "r0": 49.5,
+  "h_lift": 13.5,
+  "lo": 0.0,
+  "hi": 21.0,
+  "wedge_min": 1.5,
+  "flip": 7.25,
+  "riser_t": 3.0,
+  "lead": "conecut-knee-knuckle-3r best_params, frozen"
+ },
+ "n_configs": 149,
+ "verdict": "DEAD on the clash count: hub 0 at hub 1's level jams on hub K and on the riser link 1a needs (L1a must ride hub 1's boss and drop 13-24 mm in the 4 mm gap to hub K), losing 11-170 of the lead's poses at every legal seat; where hub 0's lobe points into the chain's free sector the skin is high on overhead poses and hub 0 floats (r0 76-86). Best legal 28.10 fast / 32.92 frozen exact Bench(110,360) vs the 3-joint lead 12.50 / 18.28; the relay buys nothing on the claim bench (2 candidates, both outside the window).",
+ "limiter": "stack clashes (measured, claim bench): riser vs hub 0 35 poses, hub 0 vs hub K 7, incl. 5 frames of the scapular-plane overhead clip (plane 30, elev 124-150: riser 1.7-1.9 mm into hub 0) -> reach 0.647, follow 0.90; hub 1's exposed crescent (33/80) and L1a 0 % in band (median 21 / 30 mm) -> ib14 0.880; relay 0 poses at a0 6.",
+ "note": "Convergence gate (Bench(60,160) fast, 122 legal configs of 149 in order): best gain over the 2nd half 0.14 score pts, last third 0.14, top-5 spread 0.31 -> converged. 27 configs sat on seat-illegal hub-0 axes (a0 >= 10 at azu 150-210) and are nulled in the sweep (numbers kept under measured_seat_illegal). Spec arithmetic (+7.4 dilution) overstates: covered hub-1 samples are not skin-facing, measured +2.0-2.7. Counterfactual with the riser deleted (unbuildable): 19.21 fast vs lead 12.50. Not modelled (generous): hub 0's skin-level ground bracket. Continuity flood not run (connected <= static). Ghost on the fit bench 11.88 (lead 12.50): a0 6-12 relays 1-12 of the 36 lost fit poses. Simplicity record: lead's mechanism + J0 (counted, spring-centred, own-angle dowel stops, MR117 pair in O20 v5) + Ti wedge plate + L1a riser (5-axis from solid).",
+ "doc": "docs/concepts/lead-relay-wobble-4r.md",
+ "model_file": "docs/concepts/models/lead-relay-wobble-4r.py",
+ "audit": {
+  "t": "2026-10-18T03:34:53Z",
+  "verdict": "death stands",
+  "refuted": false,
+  "reproduced": {
+   "bench": "Bench(110,360) exact, frozen lead, a0 6 / azu 180 / r0 49.5, window [0, 21] from the fit bench",
+   "gap": 32.92,
+   "reach": 0.6472,
+   "ws_taken": 233,
+   "follow": 0.9,
+   "inband14": 0.8796,
+   "inband10": 0.5608,
+   "contact": 0.006,
+   "contacts": 2,
+   "lost_to_stack_clashes": 42,
+   "parts_why": {
+    "riser": 35,
+    "hub0:hubK": 7
+   },
+   "overhead": "7/28",
+   "ghost": 18.28,
+   "lead_same_code": 18.28,
+   "near_touch_min_mm": 0.072,
+   "fit_q0_zero": 28.73
+  },
+  "gate": {
+   "gain_second_half_score": 0.14,
+   "gain_last_third_score": 0.14,
+   "top5_spread_score": 0.31,
+   "converged": true
+  },
+  "forgiven_bound": "Every stack clash forgiven (PART_CLR -inf) and the riser deleted, fit bench Bench(60,160) fast, 288 placements (a0 5-20, azu every 15, r0 derived or set 48.5-53; 38 seat-illegal): q0=0 floor per a0 5/6/8/10/12/14/16/20 = 15.60/16.03/16.79/17.79/18.44/19.16/19.71/19.94 (ib14 0.869 -> 0.826) vs the lead's 12.50; with the policy-(ii) relay and an exhaustive window the best is 14.92 (a0 8 / azu 270 / r0 48, window [-51, 0], 3 relayed); also dropping link 1a's lifted samples 14.25. No routing fix of the riser or hub K can reach the lead.",
+  "code_review": "geometry (lift h, cover mask, riser z range vs hub K plate: z_lo 55.1 along u1 is ~1 mm generous), clash bookkeeping (riser and hub 0 non-adjacent, 1 mm), contact sampling and the relay composition checked; no bug that inflates the gap found. Minor: the cover mask is computed at q0 = 0 and reused for relayed poses (1-3 poses, negligible).",
+  "reason": "The stack's unavoidable in-band dilution (hub 1's exposed crescent lifted 13-15 mm onto the wedge, 0 % in band; link 1a on hub 1's boss) costs 3.1-7.4 fit points at every seat-legal a0, more than the best relay returns (ghost gain <= 2.8): with every clash forgiven the cell's floor is 14.92 fast vs the lead's 12.50.",
+  "files": [
+   "docs/concepts/verify/lead-relay-wobble-4r-audit.py",
+   "docs/concepts/verify/lead-relay-wobble-4r-audit.results.json"
+  ],
+  "template_note": "the template's round-3 refutation bar (within 10 of 68.93) is passed trivially; the death is against the 3-joint lead's 12.50 fast / 18.28 exact, and it stands"
+ }
+}

@@ -1,0 +1,261 @@
+{
+ "design": "longdyad",
+ "verifier_frozen": {
+  "gap": 18.91,
+  "reach": 0.725,
+  "follow": 1.0,
+  "inband14": 0.8966,
+  "inband10": 0.5336,
+  "contact": 0.0107
+ },
+ "verifier_audit_near": {
+  "near1": 20.0,
+  "near2": 34.03,
+  "near2_poses": 26,
+  "min_mm": 0.28
+ },
+ "probe": {
+  "n": 470,
+  "mode": "exact",
+  "scored": {
+   "reach": 0.725,
+   "follow": 1.0,
+   "inband14": 0.8966,
+   "inband10": 0.5336,
+   "contact": 0.0107,
+   "mode": "exact",
+   "gap": 18.91
+  },
+  "clip_scored": {
+   "n": 110,
+   "taken": 110,
+   "share_taken": 1.0,
+   "inband14": 0.8966,
+   "inband10": 0.5336,
+   "below2": 0.0007,
+   "over14": 0.1027,
+   "over20": 0.0145,
+   "d_median": 9.71,
+   "d_p95": 16.14,
+   "d_max": 29.93,
+   "pose_p95_median": 13.67,
+   "pose_p95_max": 24.09,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 10,
+   "poses_floor_lt3": 65,
+   "share_floor_lt2": 0.0909,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 10,
+    "2-3": 55,
+    "3-4": 20,
+    "4-6": 12,
+    "6-10": 13,
+    "10-99": 0
+   }
+  },
+  "ws_unscored": {
+   "n": 360,
+   "taken": 261,
+   "share_taken": 0.725,
+   "inband14": 0.8736,
+   "inband10": 0.5536,
+   "below2": 0.0007,
+   "over14": 0.1257,
+   "over20": 0.0278,
+   "d_median": 9.53,
+   "d_p95": 17.73,
+   "d_max": 30.66,
+   "pose_p95_median": 15.26,
+   "pose_p95_max": 27.75,
+   "poses_floor_lt1": 2,
+   "poses_floor_lt2": 16,
+   "poses_floor_lt3": 113,
+   "share_floor_lt2": 0.0613,
+   "floor_hist_mm": {
+    "0-1": 2,
+    "1-2": 14,
+    "2-3": 97,
+    "3-4": 57,
+    "4-6": 67,
+    "6-10": 24,
+    "10-99": 0
+   }
+  },
+  "ws_overhead140": {
+   "n": 28,
+   "taken": 8,
+   "share_taken": 0.2857,
+   "inband14": 0.9256,
+   "inband10": 0.6403,
+   "below2": 0.0062,
+   "over14": 0.0682,
+   "over20": 0.0023,
+   "d_median": 8.59,
+   "d_p95": 14.77,
+   "d_max": 23.38,
+   "pose_p95_median": 12.96,
+   "pose_p95_max": 19.05,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 8,
+   "share_floor_lt2": 0.625,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 4,
+    "2-3": 3,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "clip_overhead140": {
+   "n": 10,
+   "taken": 10,
+   "share_taken": 1.0,
+   "inband14": 0.8188,
+   "inband10": 0.507,
+   "below2": 0.008,
+   "over14": 0.1732,
+   "over20": 0.008,
+   "d_median": 9.86,
+   "d_p95": 17.93,
+   "d_max": 22.96,
+   "pose_p95_median": 18.61,
+   "pose_p95_max": 18.88,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 8,
+   "poses_floor_lt3": 10,
+   "share_floor_lt2": 0.8,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 8,
+    "2-3": 2,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_elev90_140": {
+   "n": 85,
+   "taken": 37,
+   "share_taken": 0.4353,
+   "inband14": 0.8409,
+   "inband10": 0.5516,
+   "below2": 0.0026,
+   "over14": 0.1565,
+   "over20": 0.0384,
+   "d_median": 9.44,
+   "d_p95": 18.78,
+   "d_max": 30.53,
+   "pose_p95_median": 14.86,
+   "pose_p95_max": 27.75,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 4,
+   "poses_floor_lt3": 25,
+   "share_floor_lt2": 0.1081,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 3,
+    "2-3": 21,
+    "3-4": 8,
+    "4-6": 3,
+    "6-10": 1,
+    "10-99": 0
+   }
+  },
+  "ws_below90": {
+   "n": 247,
+   "taken": 216,
+   "share_taken": 0.8745,
+   "inband14": 0.8773,
+   "inband10": 0.5508,
+   "below2": 0.0001,
+   "over14": 0.1225,
+   "over20": 0.0269,
+   "d_median": 9.58,
+   "d_p95": 17.64,
+   "d_max": 30.66,
+   "pose_p95_median": 15.85,
+   "pose_p95_max": 25.94,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 7,
+   "poses_floor_lt3": 80,
+   "share_floor_lt2": 0.0324,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 7,
+    "2-3": 73,
+    "3-4": 49,
+    "4-6": 64,
+    "6-10": 23,
+    "10-99": 0
+   }
+  },
+  "ws_reach_by_elev": {
+   "0-60": [
+    161,
+    172
+   ],
+   "60-90": [
+    55,
+    75
+   ],
+   "90-120": [
+    25,
+    51
+   ],
+   "120-140": [
+    12,
+    34
+   ],
+   "140-160": [
+    5,
+    13
+   ],
+   "160-200": [
+    3,
+    15
+   ]
+  },
+  "contact_poses": [
+   {
+    "mm": -4.61,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -60.0
+   },
+   {
+    "mm": -0.77,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 150.0,
+    "axial": -105.0
+   },
+   {
+    "mm": -0.74,
+    "kind": "ws",
+    "plane": -60.0,
+    "elev": 60.0,
+    "axial": 105.0
+   },
+   {
+    "mm": -0.11,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 135.0,
+    "axial": -60.0
+   }
+  ],
+  "ws_overhead_why_not": {
+   "slide": 4,
+   "contact": 2,
+   "fold": 14
+  }
+ },
+ "secs": 143.2,
+ "exact": true
+}

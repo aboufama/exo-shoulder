@@ -1,0 +1,114 @@
+{
+ "crosscheck_clip_rho": {
+  "scapula": {
+   "n": 6514,
+   "share_ceil_ge_90": 0.449,
+   "share_ceil_ge_50": 0.5017,
+   "mean_ceil": 0.5583,
+   "mean_ceil10": 0.4838,
+   "median_motion_mm": 22.66,
+   "contact_free": 0.8761
+  },
+  "humerus": {
+   "n": 7320,
+   "share_ceil_ge_90": 0.1649,
+   "share_ceil_ge_50": 0.3119,
+   "mean_ceil": 0.3329,
+   "mean_ceil10": 0.2309,
+   "median_motion_mm": 61.82,
+   "contact_free": 0.5463
+  },
+  "reference": {
+   "scapula_share_dirs_ceiling_ge_90": 0.38,
+   "scapula_median_motion_mm": 34.7,
+   "humerus_share_dirs_ceiling_ge_90": 0.275,
+   "humerus_median_motion_mm": 30.0
+  }
+ },
+ "S": {
+  "n": 4715,
+  "share_ceil_ge_90": 0.3251,
+  "share_ceil_ge_50": 0.3451,
+  "mean_ceil": 0.3708,
+  "mean_ceil10": 0.3227,
+  "median_motion_mm": 50.69,
+  "contact_free": 0.6106
+ },
+ "H": {
+  "n": 4823,
+  "share_ceil_ge_90": 0.0137,
+  "share_ceil_ge_50": 0.0641,
+  "mean_ceil": 0.0777,
+  "mean_ceil10": 0.0365,
+  "median_motion_mm": 163.08,
+  "contact_free": 0.1302
+ },
+ "swing0.25": {
+  "n": 4763,
+  "share_ceil_ge_90": 0.161,
+  "share_ceil_ge_50": 0.2305,
+  "mean_ceil": 0.2526,
+  "mean_ceil10": 0.1399,
+  "median_motion_mm": 70.26,
+  "contact_free": 0.6347
+ },
+ "swing0.5": {
+  "n": 4798,
+  "share_ceil_ge_90": 0.0671,
+  "share_ceil_ge_50": 0.1175,
+  "mean_ceil": 0.1535,
+  "mean_ceil10": 0.0796,
+  "median_motion_mm": 117.55,
+  "contact_free": 0.5198
+ },
+ "swing0.75": {
+  "n": 4829,
+  "share_ceil_ge_90": 0.0872,
+  "share_ceil_ge_50": 0.1493,
+  "mean_ceil": 0.1718,
+  "mean_ceil10": 0.0897,
+  "median_motion_mm": 137.58,
+  "contact_free": 0.3918
+ },
+ "geo0.25": {
+  "n": 4723,
+  "share_ceil_ge_90": 0.1747,
+  "share_ceil_ge_50": 0.2505,
+  "mean_ceil": 0.2651,
+  "mean_ceil10": 0.1308,
+  "median_motion_mm": 83.11,
+  "contact_free": 0.5897
+ },
+ "geo0.5": {
+  "n": 4745,
+  "share_ceil_ge_90": 0.0626,
+  "share_ceil_ge_50": 0.1043,
+  "mean_ceil": 0.1356,
+  "mean_ceil10": 0.0749,
+  "median_motion_mm": 133.72,
+  "contact_free": 0.4263
+ },
+ "geo0.75": {
+  "n": 4771,
+  "share_ceil_ge_90": 0.0444,
+  "share_ceil_ge_50": 0.0817,
+  "mean_ceil": 0.1107,
+  "mean_ceil10": 0.0573,
+  "median_motion_mm": 151.94,
+  "contact_free": 0.2719
+ },
+ "best_of_frames": {
+  "share_ceil_ge_90": 0.4861,
+  "mean_ceil": 0.6438,
+  "winner_share": {
+   "S": 0.4471,
+   "H": 0.0573,
+   "swing0.25": 0.1065,
+   "swing0.5": 0.067,
+   "swing0.75": 0.1697,
+   "geo0.25": 0.0772,
+   "geo0.5": 0.0392,
+   "geo0.75": 0.0361
+  }
+ }
+}

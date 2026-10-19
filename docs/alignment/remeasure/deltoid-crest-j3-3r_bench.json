@@ -1,0 +1,466 @@
+{
+ "id": "deltoid-crest-j3-3r",
+ "wear": "bench",
+ "params": {
+  "az": 105.4971,
+  "el": 63.1176,
+  "a1": 38.6879,
+  "a2": 44.1129,
+  "wd": 103.3777,
+  "wa": 4.934599999999989,
+  "sigma": -1,
+  "inv2": 1,
+  "inv3": 1,
+  "q": 0.9419,
+  "end_extra": 2.5478,
+  "margin": 5.0,
+  "width": 12.0,
+  "t_link": 3.0,
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "vm": 0,
+  "near": 0
+ },
+ "fit_fast": {
+  "gap": 36.63,
+  "near": 57.59,
+  "reach": 0.65,
+  "follow": 0.9,
+  "inband14": 0.8644,
+  "inband10": 0.4752,
+  "contact": 0.0307,
+  "honest": true
+ },
+ "frozen": {
+  "gap": 47.86,
+  "near": 64.84,
+  "reach": 0.575,
+  "follow": 0.8909,
+  "inband14": 0.867,
+  "inband10": 0.4791,
+  "contact": 0.0615,
+  "honest": true,
+  "hub_F": {
+   "hub1": 50.77,
+   "hub2": 59.77,
+   "hub3": 62.0
+  },
+  "min_metal_all_faces": 0.05,
+  "top_contact_poses": 1,
+  "inband_member": {
+   "hub1": 0.9858,
+   "hub2": 0.9989,
+   "hub3": 0.9046,
+   "link2": 0.9751,
+   "link1": 0.6738,
+   "neck": 0.8276
+  },
+  "overhead": {
+   "n_ws": 28,
+   "reach": 0.1429,
+   "n_clip": 10,
+   "follow": 0.6,
+   "n_taken": 10,
+   "inband14": 0.8131,
+   "inband10": 0.5073
+  }
+ },
+ "audit": {
+  "gap_near1": 64.84,
+  "near_touch_min_mm": 0.05,
+  "note": "the model's own near-touch (all faces incl. top faces); deep.gap_near* read the bench metal only"
+ },
+ "deep": {
+  "plain": 47.86,
+  "reach": 0.575,
+  "follow": 0.8909,
+  "inband14": 0.867,
+  "contact": 0.0615,
+  "n_poses": 470,
+  "n_taken": 305,
+  "min_metal_mm": 0.047,
+  "gap_near1": 64.84,
+  "near1_poses": 22,
+  "gap_near2": 95.56,
+  "near2_poses": 58,
+  "gap_near3": 122.84,
+  "near3_poses": 101,
+  "clip_metal_hist": {
+   "0-1": 0.0007,
+   "1-2": 0.0047,
+   "2-3": 0.0158,
+   "3-4": 0.0179,
+   "4-6": 0.0905,
+   "6-10": 0.3549,
+   "10-14": 0.3879,
+   ">14": 0.1276
+  },
+  "gap_band3_14": 49.44,
+  "inband3_14": 0.8512,
+  "overhead_min_metal_p10": 0.6,
+  "coord_spans": {}
+ },
+ "probe": {
+  "n": 470,
+  "mode": "exact",
+  "scored": {
+   "reach": 0.575,
+   "follow": 0.8909,
+   "inband14": 0.867,
+   "inband10": 0.4791,
+   "contact": 0.0615,
+   "mode": "exact",
+   "gap": 47.86
+  },
+  "clip_scored": {
+   "n": 110,
+   "taken": 98,
+   "share_taken": 0.8909,
+   "inband14": 0.867,
+   "inband10": 0.4791,
+   "below2": 0.0054,
+   "over14": 0.1276,
+   "over20": 0.0001,
+   "d_median": 10.13,
+   "d_p95": 15.89,
+   "d_max": 20.3,
+   "pose_p95_median": 14.47,
+   "pose_p95_max": 19.27,
+   "poses_floor_lt1": 7,
+   "poses_floor_lt2": 21,
+   "poses_floor_lt3": 24,
+   "share_floor_lt2": 0.2143,
+   "floor_hist_mm": {
+    "0-1": 7,
+    "1-2": 14,
+    "2-3": 3,
+    "3-4": 27,
+    "4-6": 47,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_unscored": {
+   "n": 360,
+   "taken": 207,
+   "share_taken": 0.575,
+   "inband14": 0.8131,
+   "inband10": 0.4503,
+   "below2": 0.0084,
+   "over14": 0.1784,
+   "over20": 0.0097,
+   "d_median": 10.39,
+   "d_p95": 16.8,
+   "d_max": 28.58,
+   "pose_p95_median": 15.3,
+   "pose_p95_max": 26.8,
+   "poses_floor_lt1": 15,
+   "poses_floor_lt2": 37,
+   "poses_floor_lt3": 77,
+   "share_floor_lt2": 0.1787,
+   "floor_hist_mm": {
+    "0-1": 15,
+    "1-2": 22,
+    "2-3": 40,
+    "3-4": 59,
+    "4-6": 59,
+    "6-10": 12,
+    "10-99": 0
+   }
+  },
+  "ws_overhead140": {
+   "n": 28,
+   "taken": 4,
+   "share_taken": 0.1429,
+   "inband14": 0.786,
+   "inband10": 0.5602,
+   "below2": 0.0169,
+   "over14": 0.1971,
+   "over20": 0.0425,
+   "d_median": 9.15,
+   "d_p95": 19.4,
+   "d_max": 26.38,
+   "pose_p95_median": 15.14,
+   "pose_p95_max": 24.73,
+   "poses_floor_lt1": 2,
+   "poses_floor_lt2": 4,
+   "poses_floor_lt3": 4,
+   "share_floor_lt2": 1.0,
+   "floor_hist_mm": {
+    "0-1": 2,
+    "1-2": 2,
+    "2-3": 0,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "clip_overhead140": {
+   "n": 10,
+   "taken": 6,
+   "share_taken": 0.6,
+   "inband14": 0.8311,
+   "inband10": 0.472,
+   "below2": 0.0146,
+   "over14": 0.1543,
+   "over20": 0.0,
+   "d_median": 10.11,
+   "d_p95": 15.71,
+   "d_max": 18.29,
+   "pose_p95_median": 15.74,
+   "pose_p95_max": 15.76,
+   "poses_floor_lt1": 5,
+   "poses_floor_lt2": 6,
+   "poses_floor_lt3": 6,
+   "share_floor_lt2": 1.0,
+   "floor_hist_mm": {
+    "0-1": 5,
+    "1-2": 1,
+    "2-3": 0,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_elev90_140": {
+   "n": 85,
+   "taken": 28,
+   "share_taken": 0.3294,
+   "inband14": 0.7741,
+   "inband10": 0.4785,
+   "below2": 0.0104,
+   "over14": 0.2155,
+   "over20": 0.0519,
+   "d_median": 10.11,
+   "d_p95": 20.13,
+   "d_max": 28.58,
+   "pose_p95_median": 14.84,
+   "pose_p95_max": 26.8,
+   "poses_floor_lt1": 4,
+   "poses_floor_lt2": 11,
+   "poses_floor_lt3": 18,
+   "share_floor_lt2": 0.3929,
+   "floor_hist_mm": {
+    "0-1": 4,
+    "1-2": 7,
+    "2-3": 7,
+    "3-4": 7,
+    "4-6": 3,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_below90": {
+   "n": 247,
+   "taken": 175,
+   "share_taken": 0.7085,
+   "inband14": 0.82,
+   "inband10": 0.4433,
+   "below2": 0.0079,
+   "over14": 0.1721,
+   "over20": 0.0022,
+   "d_median": 10.45,
+   "d_p95": 16.36,
+   "d_max": 23.16,
+   "pose_p95_median": 15.33,
+   "pose_p95_max": 20.0,
+   "poses_floor_lt1": 9,
+   "poses_floor_lt2": 22,
+   "poses_floor_lt3": 55,
+   "share_floor_lt2": 0.1257,
+   "floor_hist_mm": {
+    "0-1": 9,
+    "1-2": 13,
+    "2-3": 33,
+    "3-4": 52,
+    "4-6": 56,
+    "6-10": 12,
+    "10-99": 0
+   }
+  },
+  "ws_reach_by_elev": {
+   "0-60": [
+    145,
+    172
+   ],
+   "60-90": [
+    30,
+    75
+   ],
+   "90-120": [
+    20,
+    51
+   ],
+   "120-140": [
+    8,
+    34
+   ],
+   "140-160": [
+    4,
+    13
+   ],
+   "160-200": [
+    0,
+    15
+   ]
+  },
+  "contact_poses": [
+   {
+    "mm": -3.26,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 150.0,
+    "axial": -30.0
+   },
+   {
+    "mm": -2.74,
+    "kind": "ws",
+    "plane": -15.0,
+    "elev": 75.0,
+    "axial": 30.0
+   },
+   {
+    "mm": -2.61,
+    "kind": "clip",
+    "plane": 78.0999984741211,
+    "elev": 143.10000610351562,
+    "axial": -67.0999984741211
+   },
+   {
+    "mm": -2.54,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 135.0,
+    "axial": -75.0
+   },
+   {
+    "mm": -2.51,
+    "kind": "clip",
+    "plane": 77.99330139160156,
+    "elev": 142.79144287109375,
+    "axial": -67.0177001953125
+   },
+   {
+    "mm": -1.73,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 75.0,
+    "axial": 15.0
+   },
+   {
+    "mm": -1.47,
+    "kind": "ws",
+    "plane": 15.0,
+    "elev": 165.0,
+    "axial": -60.0
+   },
+   {
+    "mm": -1.32,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -15.0
+   },
+   {
+    "mm": -1.14,
+    "kind": "clip",
+    "plane": 80.0465316772461,
+    "elev": 115.39549255371094,
+    "axial": -80.0465316772461
+   },
+   {
+    "mm": -1.13,
+    "kind": "ws",
+    "plane": -90.0,
+    "elev": 60.0,
+    "axial": 75.0
+   },
+   {
+    "mm": -0.84,
+    "kind": "clip",
+    "plane": 73.8067626953125,
+    "elev": 140.18280029296875,
+    "axial": -65.14602661132812
+   },
+   {
+    "mm": -0.84,
+    "kind": "clip",
+    "plane": 73.8067626953125,
+    "elev": 140.18280029296875,
+    "axial": -65.14602661132812
+   },
+   {
+    "mm": -0.83,
+    "kind": "clip",
+    "plane": 79.76934051513672,
+    "elev": 113.71985626220703,
+    "axial": -79.76934051513672
+   },
+   {
+    "mm": -0.78,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 75.0,
+    "axial": 30.0
+   },
+   {
+    "mm": -0.77,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 165.0,
+    "axial": -60.0
+   },
+   {
+    "mm": -0.76,
+    "kind": "clip",
+    "plane": 79.03106689453125,
+    "elev": 114.72621154785156,
+    "axial": -79.03106689453125
+   },
+   {
+    "mm": -0.51,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 135.0,
+    "axial": -75.0
+   },
+   {
+    "mm": -0.37,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 120.0,
+    "axial": -90.0
+   },
+   {
+    "mm": -0.15,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 75.0,
+    "axial": 15.0
+   },
+   {
+    "mm": -0.1,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -75.0
+   }
+  ]
+ },
+ "mode": "exact",
+ "secs": 323.1,
+ "exact": true,
+ "git": "1027be3",
+ "source": "tools/alignment_kit_rewear.py: model deltoid-crest-j3-3r.py unchanged (snap + evaluate), fit Bench(60,160) fast frozen, worn Bench(110,360)",
+ "parts_ib14": {
+  "hub1": 0.9858,
+  "hub2": 0.9989,
+  "hub3": 0.9046,
+  "link2": 0.9751,
+  "link1": 0.6738,
+  "neck": 0.8276
+ }
+}

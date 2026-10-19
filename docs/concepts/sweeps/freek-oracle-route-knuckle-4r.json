@@ -1,0 +1,2357 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-18T05:37:02Z",
+  "params": {},
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8972,
+  "inband10": 0.5386,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 11.19,
+  "extra": {
+   "plain": 11.19,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 48,
+   "why": {
+    "slide": 5,
+    "fold": 17,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.18,
+    "plain": 12.18,
+    "reach": 0.8187,
+    "inband14": 0.8954,
+    "contact": 0.0359
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
+  }
+ },
+ {
+  "k": 1,
+  "t": "2026-10-18T05:37:15Z",
+  "params": {
+   "rA": 8,
+   "rsp": 20,
+   "rsr": 42
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8914,
+  "inband10": 0.5216,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 12.91,
+  "extra": {
+   "plain": 11.77,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.031,
+   "moved": 48,
+   "why": {
+    "slide": 5,
+    "fold": 17,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.65,
+    "plain": 11.51,
+    "reach": 0.825,
+    "inband14": 0.8907,
+    "contact": 0.0308
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
+  }
+ },
+ {
+  "k": 2,
+  "t": "2026-10-18T05:37:26Z",
+  "params": {
+   "rA": 8,
+   "rsp": 20,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8926,
+  "inband10": 0.5224,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 13.92,
+  "extra": {
+   "plain": 11.65,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.031,
+   "moved": 48,
+   "why": {
+    "slide": 5,
+    "fold": 17,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 13.68,
+    "plain": 11.41,
+    "reach": 0.825,
+    "inband14": 0.8917,
+    "contact": 0.0308
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
+  }
+ },
+ {
+  "k": 3,
+  "t": "2026-10-18T05:37:36Z",
+  "params": {
+   "rA": 8,
+   "rsp": 20,
+   "rsr": 55
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8927,
+  "inband10": 0.5225,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 13.91,
+  "extra": {
+   "plain": 11.64,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.031,
+   "moved": 48,
+   "why": {
+    "slide": 5,
+    "fold": 17,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 13.67,
+    "plain": 11.4,
+    "reach": 0.825,
+    "inband14": 0.8918,
+    "contact": 0.0308
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
+  }
+ },
+ {
+  "k": 4,
+  "t": "2026-10-18T05:37:48Z",
+  "params": {
+   "rA": 8,
+   "rsp": 25,
+   "rsr": 42
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8932,
+  "inband10": 0.5237,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 13.86,
+  "extra": {
+   "plain": 11.59,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.074,
+   "moved": 48,
+   "why": {
+    "slide": 5,
+    "fold": 17,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 13.72,
+    "plain": 12.59,
+    "reach": 0.8187,
+    "inband14": 0.8913,
+    "contact": 0.0359
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
+  }
+ },
+ {
+  "k": 5,
+  "t": "2026-10-18T05:37:58Z",
+  "params": {
+   "rA": 8,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8944,
+  "inband10": 0.5243,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 13.74,
+  "extra": {
+   "plain": 11.47,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.074,
+   "moved": 48,
+   "why": {
+    "slide": 5,
+    "fold": 17,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 13.6,
+    "plain": 12.47,
+    "reach": 0.8187,
+    "inband14": 0.8925,
+    "contact": 0.0359
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
+  }
+ },
+ {
+  "k": 6,
+  "t": "2026-10-18T05:38:09Z",
+  "params": {
+   "rA": 8,
+   "rsp": 25,
+   "rsr": 55
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8941,
+  "inband10": 0.5238,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 13.77,
+  "extra": {
+   "plain": 11.5,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.074,
+   "moved": 48,
+   "why": {
+    "slide": 5,
+    "fold": 17,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 13.62,
+    "plain": 12.49,
+    "reach": 0.8187,
+    "inband14": 0.8923,
+    "contact": 0.0359
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
+  }
+ },
+ {
+  "k": 7,
+  "t": "2026-10-18T05:38:20Z",
+  "params": {
+   "rA": 8,
+   "rsp": 35,
+   "rsr": 42
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8945,
+  "inband10": 0.5273,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 13.73,
+  "extra": {
+   "plain": 11.46,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.463,
+   "moved": 48,
+   "why": {
+    "slide": 5,
+    "fold": 17,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 13.59,
+    "plain": 12.46,
+    "reach": 0.8187,
+    "inband14": 0.8926,
+    "contact": 0.0359
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
+  }
+ },
+ {
+  "k": 8,
+  "t": "2026-10-18T05:38:30Z",
+  "params": {
+   "rA": 8,
+   "rsp": 35,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8948,
+  "inband10": 0.5274,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 13.7,
+  "extra": {
+   "plain": 11.43,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.463,
+   "moved": 48,
+   "why": {
+    "slide": 5,
+    "fold": 17,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 13.56,
+    "plain": 12.43,
+    "reach": 0.8187,
+    "inband14": 0.8929,
+    "contact": 0.0359
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
+  }
+ },
+ {
+  "k": 9,
+  "t": "2026-10-18T05:38:41Z",
+  "params": {
+   "rA": 8,
+   "rsp": 35,
+   "rsr": 55
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8932,
+  "inband10": 0.5249,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 13.86,
+  "extra": {
+   "plain": 11.59,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.399,
+   "moved": 48,
+   "why": {
+    "slide": 5,
+    "fold": 17,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 13.71,
+    "plain": 12.58,
+    "reach": 0.8187,
+    "inband14": 0.8914,
+    "contact": 0.0359
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
+  }
+ },
+ {
+  "k": 10,
+  "t": "2026-10-18T05:38:50Z",
+  "params": {
+   "rA": 10,
+   "rsp": 20,
+   "rsr": 42
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8897,
+  "inband10": 0.5176,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 14.21,
+  "extra": {
+   "plain": 11.94,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.159,
+   "moved": 48,
+   "why": {
+    "slide": 5,
+    "fold": 17,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 13.97,
+    "plain": 11.7,
+    "reach": 0.825,
+    "inband14": 0.8888,
+    "contact": 0.0308
+   },
+   "rule": "v1 scan (max-min skin distance of members 1/1b/2 only; superseded)"
+  }
+ },
+ {
+  "k": 11,
+  "t": "2026-10-18T05:39:59Z",
+  "params": {
+   "seed": "k8"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.907,
+  "inband10": 0.5621,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 13.74,
+  "extra": {
+   "plain": 8.02,
+   "ws_taken": 132,
+   "near1_poses": 5,
+   "min_mm": 0.105,
+   "moved": 24,
+   "why": {
+    "slide": 7,
+    "fold": 20,
+    "contact": 1
+   },
+   "kit": {
+    "gap": 15.53,
+    "plain": 12.08,
+    "reach": 0.8,
+    "inband14": 0.9055,
+    "contact": 0.0208
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 12,
+  "t": "2026-10-18T05:40:37Z",
+  "params": {
+   "seed": "k20"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8965,
+  "inband10": 0.5645,
+  "reach": 0.8187,
+  "follow": 1.0,
+  "contact": 0.0104,
+  "gap": 13.63,
+  "extra": {
+   "plain": 9.52,
+   "ws_taken": 131,
+   "near1_poses": 5,
+   "min_mm": 0.053,
+   "moved": 23,
+   "why": {
+    "slide": 7,
+    "fold": 20,
+    "contact": 2
+   },
+   "kit": {
+    "gap": 16.04,
+    "plain": 13.09,
+    "reach": 0.8,
+    "inband14": 0.895,
+    "contact": 0.0259
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 13,
+  "t": "2026-10-18T05:41:17Z",
+  "params": {
+   "seed": "k56"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.9017,
+  "inband10": 0.5624,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.08,
+  "extra": {
+   "plain": 8.93,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.432,
+   "moved": 16,
+   "why": {
+    "slide": 10,
+    "fold": 16,
+    "contact": 4
+   },
+   "kit": {
+    "gap": 13.57,
+    "plain": 12.44,
+    "reach": 0.8125,
+    "inband14": 0.8992,
+    "contact": 0.0361
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 14,
+  "t": "2026-10-18T05:41:57Z",
+  "params": {
+   "seed": "skinnormal_r"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.892,
+  "inband10": 0.5653,
+  "reach": 0.8063,
+  "follow": 1.0,
+  "contact": 0.0105,
+  "gap": 12.37,
+  "extra": {
+   "plain": 11.22,
+   "ws_taken": 129,
+   "near1_poses": 1,
+   "min_mm": 0.527,
+   "moved": 17,
+   "why": {
+    "slide": 4,
+    "fold": 25,
+    "contact": 2
+   },
+   "kit": {
+    "gap": 12.49,
+    "plain": 12.49,
+    "reach": 0.7937,
+    "inband14": 0.892,
+    "contact": 0.0106
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 15,
+  "t": "2026-10-18T05:42:37Z",
+  "params": {
+   "seed": "stopb80"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8974,
+  "inband10": 0.5365,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0308,
+  "gap": 10.84,
+  "extra": {
+   "plain": 10.84,
+   "ws_taken": 132,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "slide": 7,
+    "fold": 18,
+    "contact": 6
+   },
+   "kit": {
+    "gap": 12.83,
+    "plain": 12.83,
+    "reach": 0.8125,
+    "inband14": 0.8953,
+    "contact": 0.0361
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 16,
+  "t": "2026-10-18T05:43:16Z",
+  "params": {
+   "seed": "earlystop"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8926,
+  "inband10": 0.509,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0052,
+  "gap": 14.48,
+  "extra": {
+   "plain": 8.76,
+   "ws_taken": 132,
+   "near1_poses": 5,
+   "min_mm": 0.296,
+   "moved": 16,
+   "why": {
+    "slide": 8,
+    "fold": 19,
+    "contact": 1
+   },
+   "kit": {
+    "gap": 16.14,
+    "plain": 11.58,
+    "reach": 0.8125,
+    "inband14": 0.8923,
+    "contact": 0.0206
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 17,
+  "t": "2026-10-18T05:43:53Z",
+  "params": {
+   "rA": 4,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8976,
+  "inband10": 0.536,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0256,
+  "gap": 9.67,
+  "extra": {
+   "plain": 9.67,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.048,
+   "moved": 14,
+   "why": {
+    "slide": 6,
+    "fold": 19,
+    "contact": 5
+   },
+   "kit": {
+    "gap": 12.16,
+    "plain": 12.16,
+    "reach": 0.8187,
+    "inband14": 0.8956,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 18,
+  "t": "2026-10-18T05:44:31Z",
+  "params": {
+   "rA": 8,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8945,
+  "inband10": 0.5244,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0256,
+  "gap": 12.27,
+  "extra": {
+   "plain": 9.98,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.074,
+   "moved": 16,
+   "why": {
+    "slide": 6,
+    "fold": 19,
+    "contact": 5
+   },
+   "kit": {
+    "gap": 13.6,
+    "plain": 12.47,
+    "reach": 0.8187,
+    "inband14": 0.8925,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 19,
+  "t": "2026-10-18T05:45:11Z",
+  "params": {
+   "rA": 12,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8853,
+  "inband10": 0.515,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 12.69,
+  "extra": {
+   "plain": 10.4,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.166,
+   "moved": 15,
+   "why": {
+    "slide": 7,
+    "fold": 19,
+    "contact": 4
+   },
+   "kit": {
+    "gap": 14.42,
+    "plain": 12.15,
+    "reach": 0.825,
+    "inband14": 0.8843,
+    "contact": 0.0308
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 20,
+  "t": "2026-10-18T05:45:51Z",
+  "params": {
+   "rA": 16,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8665,
+  "inband10": 0.5084,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0258,
+  "gap": 14.57,
+  "extra": {
+   "plain": 13.43,
+   "ws_taken": 132,
+   "near1_poses": 1,
+   "min_mm": 0.348,
+   "moved": 15,
+   "why": {
+    "slide": 7,
+    "fold": 19,
+    "contact": 5
+   },
+   "kit": {
+    "gap": 16.3,
+    "plain": 15.17,
+    "reach": 0.8187,
+    "inband14": 0.8655,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 21,
+  "t": "2026-10-18T05:46:31Z",
+  "params": {
+   "rA": -4,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.9013,
+  "inband10": 0.5615,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.08,
+  "extra": {
+   "plain": 8.93,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.086,
+   "moved": 14,
+   "why": {
+    "slide": 6,
+    "fold": 20,
+    "contact": 4
+   },
+   "kit": {
+    "gap": 12.85,
+    "plain": 11.72,
+    "reach": 0.8187,
+    "inband14": 0.9007,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 22,
+  "t": "2026-10-18T05:47:11Z",
+  "params": {
+   "rA": -8,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8947,
+  "inband10": 0.5491,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.46,
+  "extra": {
+   "plain": 9.46,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "slide": 6,
+    "fold": 20,
+    "contact": 4
+   },
+   "kit": {
+    "gap": 12.31,
+    "plain": 12.31,
+    "reach": 0.8187,
+    "inband14": 0.8941,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 23,
+  "t": "2026-10-18T05:47:50Z",
+  "params": {
+   "rA": 6,
+   "rsp": 20,
+   "rsr": 42
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.895,
+  "inband10": 0.5283,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0256,
+  "gap": 11.08,
+  "extra": {
+   "plain": 9.93,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.16,
+   "moved": 15,
+   "why": {
+    "slide": 6,
+    "fold": 19,
+    "contact": 5
+   },
+   "kit": {
+    "gap": 12.42,
+    "plain": 12.42,
+    "reach": 0.8187,
+    "inband14": 0.893,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 24,
+  "t": "2026-10-18T05:48:30Z",
+  "params": {
+   "rA": 6,
+   "rsp": 35,
+   "rsr": 55
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8971,
+  "inband10": 0.5342,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0256,
+  "gap": 12.01,
+  "extra": {
+   "plain": 9.72,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.609,
+   "moved": 14,
+   "why": {
+    "slide": 6,
+    "fold": 19,
+    "contact": 5
+   },
+   "kit": {
+    "gap": 13.34,
+    "plain": 12.21,
+    "reach": 0.8187,
+    "inband14": 0.8951,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 25,
+  "t": "2026-10-18T05:49:09Z",
+  "params": {
+   "rA": 6,
+   "rsp": 15,
+   "rsr": 30
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8931,
+  "inband10": 0.5259,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0256,
+  "gap": 11.27,
+  "extra": {
+   "plain": 10.12,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.048,
+   "moved": 16,
+   "why": {
+    "slide": 6,
+    "fold": 19,
+    "contact": 5
+   },
+   "kit": {
+    "gap": 12.61,
+    "plain": 12.61,
+    "reach": 0.8187,
+    "inband14": 0.8911,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 26,
+  "t": "2026-10-18T05:49:48Z",
+  "params": {
+   "cap": 1.5
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8954,
+  "inband10": 0.5382,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0256,
+  "gap": 9.89,
+  "extra": {
+   "plain": 9.89,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 4,
+   "why": {
+    "slide": 6,
+    "fold": 19,
+    "contact": 5
+   },
+   "kit": {
+    "gap": 12.18,
+    "plain": 12.18,
+    "reach": 0.8187,
+    "inband14": 0.8954,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 27,
+  "t": "2026-10-18T05:50:21Z",
+  "params": {
+   "cap": 5.0
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.898,
+  "inband10": 0.539,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0256,
+  "gap": 9.63,
+  "extra": {
+   "plain": 9.63,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 24,
+   "why": {
+    "slide": 6,
+    "fold": 19,
+    "contact": 5
+   },
+   "kit": {
+    "gap": 12.18,
+    "plain": 12.18,
+    "reach": 0.8187,
+    "inband14": 0.8954,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 28,
+  "t": "2026-10-18T05:51:44Z",
+  "params": {
+   "seed": "k33",
+   "rA": -8.0,
+   "rsp": 25.0,
+   "rsr": 48.0
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8947,
+  "inband10": 0.5491,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.46,
+  "extra": {
+   "plain": 9.46,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.31,
+    "plain": 12.31,
+    "reach": 0.8187,
+    "inband14": 0.8941,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 29,
+  "t": "2026-10-18T05:52:12Z",
+  "params": {
+   "seed": "k33",
+   "rA": -6.62,
+   "rsp": 29.93,
+   "rsr": 50.31
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8963,
+  "inband10": 0.552,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.45,
+  "extra": {
+   "plain": 9.3,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.615,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 13.28,
+    "plain": 12.15,
+    "reach": 0.8187,
+    "inband14": 0.8957,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 30,
+  "t": "2026-10-18T05:52:38Z",
+  "params": {
+   "seed": "k33",
+   "rA": -13.21,
+   "rsp": 30.43,
+   "rsr": 51.12
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8979,
+  "inband10": 0.5688,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0207,
+  "gap": 10.93,
+  "extra": {
+   "plain": 9.78,
+   "ws_taken": 132,
+   "near1_poses": 1,
+   "min_mm": 0.736,
+   "moved": 15,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 21
+   },
+   "kit": {
+    "gap": 14.29,
+    "plain": 13.15,
+    "reach": 0.8125,
+    "inband14": 0.897,
+    "contact": 0.041
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 31,
+  "t": "2026-10-18T05:53:05Z",
+  "params": {
+   "seed": "k33",
+   "rA": -10.15,
+   "rsp": 28.49,
+   "rsr": 50.55
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8811,
+  "inband10": 0.5405,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.82,
+  "extra": {
+   "plain": 10.82,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 13.66,
+    "plain": 13.66,
+    "reach": 0.8187,
+    "inband14": 0.8806,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 32,
+  "t": "2026-10-18T05:53:32Z",
+  "params": {
+   "seed": "k33",
+   "rA": -6.82,
+   "rsp": 25.17,
+   "rsr": 51.83
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8962,
+  "inband10": 0.5511,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.31,
+  "extra": {
+   "plain": 9.31,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.029,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.16,
+    "plain": 12.16,
+    "reach": 0.8187,
+    "inband14": 0.8956,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 33,
+  "t": "2026-10-18T05:53:59Z",
+  "params": {
+   "seed": "k33",
+   "rA": -10.06,
+   "rsp": 24.1,
+   "rsr": 48.11
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8858,
+  "inband10": 0.543,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.35,
+  "extra": {
+   "plain": 10.35,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 13.21,
+    "plain": 13.21,
+    "reach": 0.8187,
+    "inband14": 0.8851,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 34,
+  "t": "2026-10-18T05:54:27Z",
+  "params": {
+   "seed": "k33",
+   "rA": -4.19,
+   "rsp": 25.43,
+   "rsr": 49.58
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.9009,
+  "inband10": 0.5604,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.08,
+  "extra": {
+   "plain": 8.93,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.125,
+   "moved": 14,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.85,
+    "plain": 11.72,
+    "reach": 0.8187,
+    "inband14": 0.9002,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 35,
+  "t": "2026-10-18T05:55:00Z",
+  "params": {
+   "seed": "k33",
+   "rA": -10.26,
+   "rsp": 23.47,
+   "rsr": 51.89
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8821,
+  "inband10": 0.5397,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.72,
+  "extra": {
+   "plain": 10.72,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 13.57,
+    "plain": 13.57,
+    "reach": 0.8187,
+    "inband14": 0.8815,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 36,
+  "t": "2026-10-18T05:55:33Z",
+  "params": {
+   "seed": "k33",
+   "rA": -8.04,
+   "rsp": 33.71,
+   "rsr": 59.58
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8878,
+  "inband10": 0.5415,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 11.3,
+  "extra": {
+   "plain": 10.15,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.815,
+   "moved": 9,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 14.07,
+    "plain": 12.94,
+    "reach": 0.8187,
+    "inband14": 0.8878,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 37,
+  "t": "2026-10-18T05:56:09Z",
+  "params": {
+   "seed": "k33",
+   "rA": -15.77,
+   "rsp": 15.82,
+   "rsr": 50.82
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8872,
+  "inband10": 0.5483,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0207,
+  "gap": 10.85,
+  "extra": {
+   "plain": 10.85,
+   "ws_taken": 132,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 14,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 21
+   },
+   "kit": {
+    "gap": 14.19,
+    "plain": 14.19,
+    "reach": 0.8125,
+    "inband14": 0.8866,
+    "contact": 0.041
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 38,
+  "t": "2026-10-18T05:56:43Z",
+  "params": {
+   "seed": "k33",
+   "rA": -8.22,
+   "rsp": 26.23,
+   "rsr": 53.08
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8917,
+  "inband10": 0.5456,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.76,
+  "extra": {
+   "plain": 9.76,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.62,
+    "plain": 12.62,
+    "reach": 0.8187,
+    "inband14": 0.891,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 39,
+  "t": "2026-10-18T05:57:18Z",
+  "params": {
+   "seed": "k33",
+   "rA": 0.17,
+   "rsp": 19.67,
+   "rsr": 49.65
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8955,
+  "inband10": 0.5353,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0256,
+  "gap": 9.88,
+  "extra": {
+   "plain": 9.88,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 5,
+    "slide": 6,
+    "fold": 19
+   },
+   "kit": {
+    "gap": 12.36,
+    "plain": 12.36,
+    "reach": 0.8187,
+    "inband14": 0.8936,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 40,
+  "t": "2026-10-18T05:57:43Z",
+  "params": {
+   "seed": "k33",
+   "rA": -0.08,
+   "rsp": 28.37,
+   "rsr": 55.66
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8951,
+  "inband10": 0.5349,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0256,
+  "gap": 9.92,
+  "extra": {
+   "plain": 9.92,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 5,
+    "slide": 6,
+    "fold": 19
+   },
+   "kit": {
+    "gap": 12.4,
+    "plain": 12.4,
+    "reach": 0.8187,
+    "inband14": 0.8932,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 41,
+  "t": "2026-10-18T05:58:09Z",
+  "params": {
+   "seed": "k33",
+   "rA": -8.1,
+   "rsp": 19.05,
+   "rsr": 52.55
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8948,
+  "inband10": 0.547,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.45,
+  "extra": {
+   "plain": 9.45,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.3,
+    "plain": 12.3,
+    "reach": 0.8187,
+    "inband14": 0.8942,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 42,
+  "t": "2026-10-18T05:58:33Z",
+  "params": {
+   "seed": "k33",
+   "rA": -6.55,
+   "rsp": 20.61,
+   "rsr": 48.87
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8986,
+  "inband10": 0.5541,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.07,
+  "extra": {
+   "plain": 9.07,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 11.93,
+    "plain": 11.93,
+    "reach": 0.8187,
+    "inband14": 0.8979,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 43,
+  "t": "2026-10-18T05:58:58Z",
+  "params": {
+   "seed": "k33",
+   "rA": -7.0,
+   "rsp": 21.66,
+   "rsr": 51.4
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8969,
+  "inband10": 0.5513,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.24,
+  "extra": {
+   "plain": 9.24,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.09,
+    "plain": 12.09,
+    "reach": 0.8187,
+    "inband14": 0.8963,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 44,
+  "t": "2026-10-18T05:59:18Z",
+  "params": {
+   "seed": "k33",
+   "rA": -6.59,
+   "rsp": 25.3,
+   "rsr": 49.63
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8971,
+  "inband10": 0.5529,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.37,
+  "extra": {
+   "plain": 9.22,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.93,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 13.2,
+    "plain": 12.07,
+    "reach": 0.8187,
+    "inband14": 0.8965,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 45,
+  "t": "2026-10-18T05:59:38Z",
+  "params": {
+   "seed": "k33",
+   "rA": -4.94,
+   "rsp": 24.25,
+   "rsr": 50.4
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8997,
+  "inband10": 0.5581,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.11,
+  "extra": {
+   "plain": 8.96,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.402,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.95,
+    "plain": 11.82,
+    "reach": 0.8187,
+    "inband14": 0.899,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 46,
+  "t": "2026-10-18T05:59:58Z",
+  "params": {
+   "seed": "k33",
+   "rA": -8.78,
+   "rsp": 23.6,
+   "rsr": 46.48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8934,
+  "inband10": 0.5478,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.59,
+  "extra": {
+   "plain": 9.59,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.44,
+    "plain": 12.44,
+    "reach": 0.8187,
+    "inband14": 0.8928,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 47,
+  "t": "2026-10-18T06:00:17Z",
+  "params": {
+   "seed": "k33",
+   "rA": -4.16,
+   "rsp": 16.24,
+   "rsr": 53.22
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.9011,
+  "inband10": 0.5605,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 10.08,
+  "extra": {
+   "plain": 8.93,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.57,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.85,
+    "plain": 11.72,
+    "reach": 0.8187,
+    "inband14": 0.9004,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 48,
+  "t": "2026-10-18T06:00:35Z",
+  "params": {
+   "seed": "k33",
+   "rA": -6.61,
+   "rsp": 15.51,
+   "rsr": 47.37
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8993,
+  "inband10": 0.5545,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.0,
+  "extra": {
+   "plain": 9.0,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 11.85,
+    "plain": 11.85,
+    "reach": 0.8187,
+    "inband14": 0.8987,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 49,
+  "t": "2026-10-18T06:00:51Z",
+  "params": {
+   "seed": "k33",
+   "rA": -6.45,
+   "rsp": 16.74,
+   "rsr": 42.22
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.9007,
+  "inband10": 0.5565,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 8.93,
+  "extra": {
+   "plain": 8.93,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 11.72,
+    "plain": 11.72,
+    "reach": 0.8187,
+    "inband14": 0.9,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 50,
+  "t": "2026-10-18T06:01:09Z",
+  "params": {
+   "seed": "k33",
+   "rA": -9.92,
+   "rsp": 16.41,
+   "rsr": 44.93
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound), ES k33",
+  "inband14": 0.8938,
+  "inband10": 0.5464,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0206,
+  "gap": 9.55,
+  "extra": {
+   "plain": 9.55,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 13,
+   "why": {
+    "contact": 4,
+    "slide": 6,
+    "fold": 20
+   },
+   "kit": {
+    "gap": 12.41,
+    "plain": 12.41,
+    "reach": 0.8187,
+    "inband14": 0.8931,
+    "contact": 0.0359
+   },
+   "rule": "v2a (refused K allowed to dodge a contact: optimistic, superseded by v2b)"
+  }
+ },
+ {
+  "k": 51,
+  "t": "2026-10-18T06:01:55Z",
+  "params": {},
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8973,
+  "inband10": 0.5387,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 11.18,
+  "extra": {
+   "plain": 11.18,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 14,
+   "why": {
+    "fold": 17,
+    "slide": 5,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.18,
+    "plain": 12.18,
+    "reach": 0.8187,
+    "inband14": 0.8954,
+    "contact": 0.0359
+   },
+   "rule": "v2b (run-based oracle, legal configurations only) - of record"
+  }
+ },
+ {
+  "k": 52,
+  "t": "2026-10-18T06:02:14Z",
+  "params": {
+   "seed": "k56"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.9017,
+  "inband10": 0.5624,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0547,
+  "gap": 13.47,
+  "extra": {
+   "plain": 12.34,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.432,
+   "moved": 20,
+   "why": {
+    "fold": 13,
+    "slide": 6,
+    "contact": 11
+   },
+   "kit": {
+    "gap": 13.57,
+    "plain": 12.44,
+    "reach": 0.8125,
+    "inband14": 0.8992,
+    "contact": 0.0361
+   },
+   "rule": "v2b (run-based oracle, legal configurations only) - of record"
+  }
+ },
+ {
+  "k": 53,
+  "t": "2026-10-18T06:02:32Z",
+  "params": {
+   "seed": "stopb80"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8974,
+  "inband10": 0.5365,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0406,
+  "gap": 11.82,
+  "extra": {
+   "plain": 11.82,
+   "ws_taken": 132,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 14,
+   "why": {
+    "fold": 17,
+    "slide": 6,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.83,
+    "plain": 12.83,
+    "reach": 0.8125,
+    "inband14": 0.8953,
+    "contact": 0.0361
+   },
+   "rule": "v2b (run-based oracle, legal configurations only) - of record"
+  }
+ },
+ {
+  "k": 54,
+  "t": "2026-10-18T06:02:50Z",
+  "params": {
+   "seed": "skinnormal_r"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.892,
+  "inband10": 0.5653,
+  "reach": 0.8063,
+  "follow": 1.0,
+  "contact": 0.0105,
+  "gap": 12.37,
+  "extra": {
+   "plain": 11.22,
+   "ws_taken": 129,
+   "near1_poses": 1,
+   "min_mm": 0.527,
+   "moved": 17,
+   "why": {
+    "fold": 25,
+    "slide": 4,
+    "contact": 2
+   },
+   "kit": {
+    "gap": 12.49,
+    "plain": 12.49,
+    "reach": 0.7937,
+    "inband14": 0.892,
+    "contact": 0.0106
+   },
+   "rule": "v2b (run-based oracle, legal configurations only) - of record"
+  }
+ },
+ {
+  "k": 55,
+  "t": "2026-10-18T06:03:07Z",
+  "params": {
+   "seed": "k8"
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.907,
+  "inband10": 0.5621,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0204,
+  "gap": 15.22,
+  "extra": {
+   "plain": 9.54,
+   "ws_taken": 132,
+   "near1_poses": 5,
+   "min_mm": 0.105,
+   "moved": 26,
+   "why": {
+    "fold": 20,
+    "slide": 4,
+    "contact": 4
+   },
+   "kit": {
+    "gap": 15.53,
+    "plain": 12.08,
+    "reach": 0.8,
+    "inband14": 0.9055,
+    "contact": 0.0208
+   },
+   "rule": "v2b (run-based oracle, legal configurations only) - of record"
+  }
+ },
+ {
+  "k": 56,
+  "t": "2026-10-18T06:03:25Z",
+  "params": {
+   "rA": -8,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8947,
+  "inband10": 0.5491,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 11.44,
+  "extra": {
+   "plain": 11.44,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.089,
+   "moved": 14,
+   "why": {
+    "fold": 17,
+    "slide": 5,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.31,
+    "plain": 12.31,
+    "reach": 0.8187,
+    "inband14": 0.8941,
+    "contact": 0.0359
+   },
+   "rule": "v2b (run-based oracle, legal configurations only) - of record"
+  }
+ },
+ {
+  "k": 57,
+  "t": "2026-10-18T06:03:43Z",
+  "params": {
+   "rA": -4,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.9013,
+  "inband10": 0.5615,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 12.05,
+  "extra": {
+   "plain": 10.91,
+   "ws_taken": 133,
+   "near1_poses": 1,
+   "min_mm": 0.086,
+   "moved": 15,
+   "why": {
+    "fold": 17,
+    "slide": 5,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.85,
+    "plain": 11.72,
+    "reach": 0.8187,
+    "inband14": 0.9007,
+    "contact": 0.0359
+   },
+   "rule": "v2b (run-based oracle, legal configurations only) - of record"
+  }
+ },
+ {
+  "k": 58,
+  "t": "2026-10-18T06:04:01Z",
+  "params": {
+   "rA": 4,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8976,
+  "inband10": 0.536,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 11.15,
+  "extra": {
+   "plain": 11.15,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.048,
+   "moved": 15,
+   "why": {
+    "fold": 17,
+    "slide": 5,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.16,
+    "plain": 12.16,
+    "reach": 0.8187,
+    "inband14": 0.8956,
+    "contact": 0.0359
+   },
+   "rule": "v2b (run-based oracle, legal configurations only) - of record"
+  }
+ },
+ {
+  "k": 59,
+  "t": "2026-10-18T06:04:17Z",
+  "params": {
+   "rA": 8,
+   "rsp": 25,
+   "rsr": 48
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8945,
+  "inband10": 0.5244,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 13.73,
+  "extra": {
+   "plain": 11.46,
+   "ws_taken": 133,
+   "near1_poses": 2,
+   "min_mm": 0.074,
+   "moved": 17,
+   "why": {
+    "fold": 17,
+    "slide": 5,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 13.6,
+    "plain": 12.47,
+    "reach": 0.8187,
+    "inband14": 0.8925,
+    "contact": 0.0359
+   },
+   "rule": "v2b (run-based oracle, legal configurations only) - of record"
+  }
+ },
+ {
+  "k": 60,
+  "t": "2026-10-18T06:04:36Z",
+  "params": {
+   "rA": -6.82,
+   "rsp": 25.17,
+   "rsr": 51.83
+  },
+  "bench": "Bench(60,160) fast, oracle K (bound)",
+  "inband14": 0.8962,
+  "inband10": 0.5511,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0404,
+  "gap": 11.29,
+  "extra": {
+   "plain": 11.29,
+   "ws_taken": 133,
+   "near1_poses": 0,
+   "min_mm": 1.029,
+   "moved": 14,
+   "why": {
+    "fold": 17,
+    "slide": 5,
+    "contact": 8
+   },
+   "kit": {
+    "gap": 12.16,
+    "plain": 12.16,
+    "reach": 0.8187,
+    "inband14": 0.8956,
+    "contact": 0.0359
+   },
+   "rule": "v2b (run-based oracle, legal configurations only) - of record"
+  }
+ },
+ {
+  "k": 61,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 70.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.9082,
+  "inband10": 0.5438,
+  "reach": 0.8125,
+  "follow": 0.9167,
+  "contact": 0.0464,
+  "gap": 16.72,
+  "extra": {
+   "plain": 16.72,
+   "ws_taken": 130,
+   "min_mm": 1.157,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 62,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 74.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.9005,
+  "inband10": 0.5337,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0308,
+  "gap": 11.72,
+  "extra": {
+   "plain": 10.58,
+   "ws_taken": 132,
+   "min_mm": 0.344,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 63,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 77.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8992,
+  "inband10": 0.5346,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0308,
+  "gap": 10.66,
+  "extra": {
+   "plain": 10.66,
+   "ws_taken": 132,
+   "min_mm": 1.411,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 64,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 80.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8983,
+  "inband10": 0.5346,
+  "reach": 0.825,
+  "follow": 0.95,
+  "contact": 0.0308,
+  "gap": 10.75,
+  "extra": {
+   "plain": 10.75,
+   "ws_taken": 132,
+   "min_mm": 1.411,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 65,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 83.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8977,
+  "inband10": 0.5313,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0306,
+  "gap": 10.16,
+  "extra": {
+   "plain": 10.16,
+   "ws_taken": 133,
+   "min_mm": 1.411,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 66,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 86.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8974,
+  "inband10": 0.5385,
+  "reach": 0.8375,
+  "follow": 0.95,
+  "contact": 0.0305,
+  "gap": 9.56,
+  "extra": {
+   "plain": 9.56,
+   "ws_taken": 134,
+   "min_mm": 1.425,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 67,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 90.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8968,
+  "inband10": 0.5386,
+  "reach": 0.8375,
+  "follow": 0.95,
+  "contact": 0.0305,
+  "gap": 10.74,
+  "extra": {
+   "plain": 9.62,
+   "ws_taken": 134,
+   "min_mm": 0.427,
+   "rule": "cell B law, near-touch gap"
+  }
+ },
+ {
+  "k": 68,
+  "t": "2026-10-18T06:16:41Z",
+  "params": {
+   "cell": "B",
+   "q3max": 95.0
+  },
+  "bench": "Bench(60,160) fast, cell B law (J3 own-angle stop at q3max, K opens to keep q3 = q3max; no oracle)",
+  "inband14": 0.8958,
+  "inband10": 0.5343,
+  "reach": 0.8313,
+  "follow": 0.95,
+  "contact": 0.0355,
+  "gap": 10.84,
+  "extra": {
+   "plain": 10.84,
+   "ws_taken": 133,
+   "min_mm": 1.425,
+   "rule": "cell B law, near-touch gap"
+  }
+ }
+]

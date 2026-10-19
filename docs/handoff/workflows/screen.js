@@ -1,0 +1,51 @@
+export const meta = {
+  name: 'exo-morphology-screen',
+  description: 'Screen a slice of the morphology catalogue: per morphology build an idealised model, sweep it on the fast bench, then adversarially verify the promising ones',
+  phases: [
+    { title: 'Model', detail: 'one agent per morphology: idealised model + small sweep on the fast bench' },
+    { title: 'Verify', detail: 'skeptic re-measures promising results on the full bench and checks for cheats' },
+  ],
+}
+
+// args: { slice: 'A', items: [catalogue entries], baseline_gap: number, verify_margin: number }
+const items = args.items
+const BASE_GAP = args.baseline_gap  // provisional until docs/concepts/families.json has the bench baseline row
+const MARGIN = args.verify_margin ?? 10
+
+const CTX = `You are one agent of a swarm screening distinct MORPHOLOGIES for a shoulder exoskeleton (repo /home/user/exo-shoulder, branch claude/exo-shoulder-mechanism-wy35fx; the CLAUDE.md rules apply). Read first: docs/concepts/README.md (this stage), the docstring of tools/concept_bench.py. START MODELLING IMMEDIATELY - do not wait for anything: another agent is right now adding a FAST path to tools/concept_bench.py (precomputed distance fields under .cache/concept_bench/, same public API, backward compatible) and a reference model tools/concept_baseline.py (the current champion, a spherical 3R, on the same bench). Until .cache/concept_bench/ exists, develop and debug on a small Bench(n_clip=20, n_ws=40) (the slow exact path; a few minutes per run); as soon as it exists (check with ls before each sweep batch; re-import the module), run the sweep on Bench(n_clip=60, n_ws=160). When tools/concept_baseline.py appears, copy its conventions (which parts count as metal, how points are sampled, how a pose that cannot be taken is detected) and re-check your numbers against its row in docs/concepts/families.json. Until then: sample every metal surface that faces the skin evenly at ~1 point per 4 mm2 and check contact on all metal, docs/concepts/families.json (the baseline row and other families), REQUIREMENTS.md (skim: R1, R3, R5 and the ACTIVE-DOF rule, R16, R17), docs/HARDWARE.md (the O20 bearing joint: ~20 mm hub, ~12 mm stack).
+THE GOAL of the swarm: find morphologies with exactly 3 ACTIVE DOF (passive elements whose position is set by the chain's closure / the arm, e.g. self-aligning cuff slides, do not count; an undriven spare coordinate that can sag when unpowered is not allowed) whose whole mechanism rides 2-14 mm from the skin (aim 2-10) while following the arm, over the full range of motion. Bench numbers: reach (share of everyday-workspace poses taken with no metal inside the body), follow (share of fit-clip frames taken), inband14 / inband10 (share of metal sample points 2-14 / 2-10 mm from the skin over the frames taken), contact (share of taken poses with metal inside the body - counted as not taken).
+GAP (the ranking number, lower is better, 0 = every bench target met) = 100*(max(0, 0.90-inband14) + max(0, 0.95-follow) + max(0, 0.90-reach)) + 100*contact. The baseline's gap on this bench is ~${BASE_GAP} (provisional estimate from the GPU evaluator: reach ~0.75, follow ~0.97, in-band 14 ~0.40; the measured value will be the baseline row of docs/concepts/families.json - use that one once it exists).
+HONESTY RULES (a verifier will try to refute you): model every part this morphology adds between the scapula handler and the user's upper-arm cuff at its real size (hubs with their real diameter and stack, rails with their section, carriages, ring bearings with their section, links at their real thickness and height over the skin); sample metal surfaces at the same density and the same way as tools/concept_baseline.py; a pose counts as taken only if the mechanism really reaches it: the chain closes (solved, residual < 0.5 mm / 0.5 deg), every joint and passive slide is inside its range, no two non-adjacent parts intersect (>= 1 mm clearance), and along each motion clip the joint values stay continuous between consecutive frames (no branch flips - a flip is a frame not followed). Do not tune against held-out clips (the bench already excludes them). Light CPU: one process, OMP_NUM_THREADS=1, nice -n 5; the 4 cores are shared by a dozen agents and judges.
+FILES (yours only; other agents work in the same tree - git add only these): docs/concepts/models/<id>.py (the model: PARAMS defaults, SWEEP ranges, a function metal(pose, frames, params) -> (k,3) points or None, and a __main__ that runs the bench and the sweep), docs/concepts/sweeps/<id>.json (a list, one entry per configuration evaluated, in order: {k, t (ISO UTC time it finished), params, inband14, inband10, reach, follow, contact}; write it incrementally so the dashboard can show progress), docs/concepts/rows/<id>.json (one object: {id, name, lens, family, active_dof, passive_dof, status, t_ideated: null, t_screened (ISO UTC), reach, follow, inband14, inband10, contact, gap, v_reach: null, v_follow: null, v_inband14: null, v_inband10: null, v_gap: null, n_configs, verdict, note, doc}), docs/concepts/<id>.md (idea, sketch, DOF count with reasoning, best parameters, numbers vs the baseline on the same bench, what limits it, unpowered behaviour, manufacturability, and the parameterisation of a short GPU / CAD sweep), optionally docs/concepts/img/<id>.png (matplotlib sketch of the best configuration at rest and overhead, with the skin). Append one line to docs/concepts/events.jsonl: {"time": ISO UTC, "kind": "milestone", "event": "screened <name>: gap <g> (baseline ${BASE_GAP})"} (append with >>, never rewrite the file). Commit (message ends with the two lines
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01HShoE3xJTcjMWRx4v2yePx
+) and push: git push -u origin claude/exo-shoulder-mechanism-wy35fx (if rejected: git pull --rebase --autostash, then push; retry a few times). Never use pkill -f.`
+
+const RESULT = { type: 'object', properties: {
+  id: { type: 'string' }, status: { type: 'string', enum: ['screened', 'dead'] },
+  reach: { type: 'number' }, follow: { type: 'number' }, inband14: { type: 'number' }, inband10: { type: 'number' }, contact: { type: 'number' },
+  gap: { type: 'number' }, n_configs: { type: 'integer' }, best_params: { type: 'string' },
+  verdict: { type: 'string', description: 'one or two sentences: worth a GPU sweep or not, and why' },
+  limits: { type: 'string', description: 'what limits it, measured' }, model_file: { type: 'string' },
+}, required: ['id', 'status', 'reach', 'follow', 'inband14', 'inband10', 'contact', 'gap', 'n_configs', 'best_params', 'verdict', 'limits', 'model_file'] }
+
+const VERDICT = { type: 'object', properties: {
+  id: { type: 'string' }, refuted: { type: 'boolean' },
+  v_reach: { type: 'number' }, v_follow: { type: 'number' }, v_inband14: { type: 'number' }, v_inband10: { type: 'number' }, v_contact: { type: 'number' }, v_gap: { type: 'number' },
+  issues: { type: 'array', items: { type: 'string' } }, summary: { type: 'string' },
+}, required: ['id', 'refuted', 'v_reach', 'v_follow', 'v_inband14', 'v_inband10', 'v_contact', 'v_gap', 'issues', 'summary'] }
+
+phase('Model')
+const out = await pipeline(items,
+  (m) => agent(`${CTX}\n\nYOUR MORPHOLOGY (from the swarm's catalogue; id = ${m.id}):\n${JSON.stringify(m, null, 1)}\n\nBuild the idealised model faithfully to this spec (improve the spec where it is clearly wrong or vague, and say so), check it visually or numerically on a few poses (rest, overhead, across the body, behind the back), then run a small sweep inside the morphology (about 50-200 configurations of the parameters that matter, coarse first then refine; stop early if it is clearly dead and say why, measured). Use Bench(n_clip=60, n_ws=160) for the sweep. Write the files, commit, push. Return the best configuration's numbers.`,
+    { label: `model:${m.id}`, phase: 'Model', schema: RESULT }),
+  (r, m) => {
+    if (!r) return null
+    if (r.status === 'dead' || r.gap > BASE_GAP + MARGIN) return { result: r, verify: null }
+    return agent(`${CTX}\n\nYou are the VERIFIER (a skeptic) for morphology ${m.id} (${m.name}). Its agent claims: ${JSON.stringify(r)}. Spec: ${JSON.stringify(m)}.\nTry to REFUTE the claim: read docs/concepts/models/${m.id}.py and check (1) the DOF count per the user rule and that no passive coordinate is left undetermined (it would sag unpowered); (2) every part at its real size and sampled like tools/concept_baseline.py (no missing hubs, rails, carriages or thin-looking links; no sampling that only keeps points near the skin); (3) honest pose-taking: chain closure residuals, joint and slide ranges, part-part clearance, and branch continuity along each clip (consecutive frames) - fix the check if it is missing; (4) that the sweep did not exploit a bench artefact. Then re-measure the best configuration on the FULL bench Bench(n_clip=110, n_ws=360) with your corrected checks (light CPU). refuted = true if the corrected gap is worse than the baseline's ${BASE_GAP} or the morphology breaks a hard rule (not 3 active DOF, an undetermined coordinate, contact). Update docs/concepts/rows/${m.id}.json with v_reach, v_follow, v_inband14, v_inband10, v_gap and status 'verified' or 'refuted' (keep the other fields), add a "Verification" section to docs/concepts/${m.id}.md, append an events line {"time", "kind": "milestone", "event": "verified|refuted <name>: gap <v_gap>"} to docs/concepts/events.jsonl, commit and push your changes (only those files).`,
+      { label: `verify:${m.id}`, phase: 'Verify', schema: VERDICT }).then(v => ({ result: r, verify: v }))
+  })
+
+const done = out.filter(Boolean)
+log(`slice ${args.slice}: ${done.length}/${items.length} screened, ${done.filter(d => d.verify).length} verified-or-refuted, ${done.filter(d => d.verify && !d.verify.refuted).length} survived`)
+return done

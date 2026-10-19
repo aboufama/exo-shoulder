@@ -1,0 +1,49 @@
+{
+ "trim": {
+  "r_trim": 21.27,
+  "contact_r_max": 19.77,
+  "back_t": 6.0,
+  "rlift": 0.0,
+  "lift_r0": 17.3,
+  "horn_n": [
+   23,
+   20
+  ],
+  "dense_n": 648,
+  "crank_arc_n": 80
+ },
+ "R0": 61.30823999863101,
+ "dK_lim_deg": 49.75,
+ "nQ_range": [
+  61.31966985347874,
+  61.31966985347965
+ ],
+ "ez_off_uK_deg": 84.7082879361222,
+ "used_bench_45.62": {
+  "k_max": 45.5,
+  "mid": 19.213,
+  "wall_mid": 2.057,
+  "top_radial": 19.683,
+  "wall_top_radial": 1.587,
+  "top_ez": 20.61,
+  "wall_top_ez": 0.66
+ },
+ "used_held_46.27": {
+  "k_max": 46.25,
+  "mid": 19.309,
+  "wall_mid": 1.961,
+  "top_radial": 19.781,
+  "wall_top_radial": 1.489,
+  "top_ez": 20.704,
+  "wall_top_ez": 0.566
+ },
+ "dK_lim": {
+  "k_max": 49.75,
+  "mid": 19.765,
+  "wall_mid": 1.505,
+  "top_radial": 20.249,
+  "wall_top_radial": 1.021,
+  "top_ez": 21.151,
+  "wall_top_ez": 0.119
+ }
+}

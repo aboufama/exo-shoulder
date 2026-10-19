@@ -1,0 +1,108 @@
+{
+ "design": "l1_minarc-pick1",
+ "seconds": 80,
+ "springs": {
+  "K": {
+   "rate_Nm_per_rad": 0.015,
+   "preload_Nm_at_stop_A": 0.04,
+   "preload_source": "design.json build_fixes.spring.preload",
+   "rates_run": [
+    0.015,
+    0.01
+   ]
+  }
+ },
+ "verdict_moves_freely_nominal": true,
+ "cases": {
+  "passive|mu0.005|t0.001|s1|hub": {
+   "summary": {
+    "moment_gh_peak_Nm": 0.061,
+    "moment_gh_rms_max_Nm": 0.046,
+    "force_peak_N": 0.3,
+    "twist_peak_deg": 1.98,
+    "lags_over_10deg": 0,
+    "spare_drift_max_deg": 3.68,
+    "lock_clips": []
+   },
+   "clips": {
+    "Raise overhead": {
+     "drift": 0.02,
+     "twist": 1.06
+    },
+    "Drink from a cup": {
+     "drift": 0.02,
+     "twist": 0.72
+    },
+    "Comb hair": {
+     "drift": 0.02,
+     "twist": 1.04
+    },
+    "Reach a high shelf": {
+     "drift": 3.68,
+     "twist": 1.98
+    },
+    "Wash opposite shoulder": {
+     "drift": 0.73,
+     "twist": 0.87
+    },
+    "Reach back pocket": {
+     "drift": 0.02,
+     "twist": 1.05
+    },
+    "Wave": {
+     "drift": 0.02,
+     "twist": 1.64
+    },
+    "Walking arm swing": {
+     "drift": 0.02,
+     "twist": 0.4
+    }
+   }
+  },
+  "passive|mu0.005|t0.001|s1|hub|krate0.01": {
+   "summary": {
+    "moment_gh_peak_Nm": 0.061,
+    "moment_gh_rms_max_Nm": 0.045,
+    "force_peak_N": 0.3,
+    "twist_peak_deg": 1.91,
+    "lags_over_10deg": 0,
+    "spare_drift_max_deg": 3.61,
+    "lock_clips": []
+   },
+   "clips": {
+    "Raise overhead": {
+     "drift": 0.02,
+     "twist": 1.06
+    },
+    "Drink from a cup": {
+     "drift": 0.02,
+     "twist": 0.72
+    },
+    "Comb hair": {
+     "drift": 0.02,
+     "twist": 1.04
+    },
+    "Reach a high shelf": {
+     "drift": 3.61,
+     "twist": 1.91
+    },
+    "Wash opposite shoulder": {
+     "drift": 0.73,
+     "twist": 0.87
+    },
+    "Reach back pocket": {
+     "drift": 0.02,
+     "twist": 1.05
+    },
+    "Wave": {
+     "drift": 0.02,
+     "twist": 1.64
+    },
+    "Walking arm swing": {
+     "drift": 0.02,
+     "twist": 0.4
+    }
+   }
+  }
+ }
+}

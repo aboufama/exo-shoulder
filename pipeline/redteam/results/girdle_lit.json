@@ -1,0 +1,42 @@
+{
+ "ring": {
+  "params": {
+   "b": [
+    79.85732576367246,
+    5.0530919605503914
+   ],
+   "a1": 90.27702509585939,
+   "a2": 97.10531975759301,
+   "branch": -1,
+   "w": null
+  },
+  "worst_all_mm": 30.27,
+  "p95_mm": 28.87,
+  "worst_held_out_mm": 30.27,
+  "singular_margin_fit": 30.5,
+  "closes": 1.0,
+  "lead_rig_law_optimum_under_literature_refit_x": null
+ },
+ "3R": {
+  "params": {
+   "b": [
+    123.54126659252546,
+    102.13866236776073
+   ],
+   "a1": 74.12041133544072,
+   "a2": 80.21705875076938,
+   "branch": -1,
+   "w": [
+    145.66823725534164,
+    158.89302586312357
+   ]
+  },
+  "worst_all_mm": 24.68,
+  "p95_mm": 18.71,
+  "worst_held_out_mm": 24.68,
+  "singular_margin_fit": 21.6,
+  "closes": 1.0,
+  "lead_rig_law_optimum_under_literature_refit_x": null
+ },
+ "note": "literature law max |GH displacement| on the clips: 64.9 mm"
+}

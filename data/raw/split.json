@@ -1,0 +1,17 @@
+{
+ "_doc": "Held-out split, decided 2026-10-14 before any synthesis uses it (docs/P3_SEARCH_PLAN.md section 5). Never optimise, seed or tune against the held_out entries; report them next to the fitting numbers.",
+ "motions": {
+  "fit": ["Raise overhead", "Drink from a cup", "Comb hair", "Reach a high shelf", "Wash opposite shoulder", "Reach back pocket"],
+  "held_out": ["Wave", "Walking arm swing"],
+  "held_out_future_opencap": ["put on a jacket", "reach for the car seat belt", "lift a box to a shelf", "underarm throw", "scratch the back of the neck"]
+ },
+ "bodies": {
+  "fit": ["rig S x 0.92", "rig S x 1.00", "rig S x 1.08"],
+  "held_out": ["rig S x 0.96"],
+  "future": "SMPL-X shapes (after the user's licence): 8 fit, 2 held out, chosen before registration"
+ },
+ "girdle_laws": {
+  "fit": ["rig (avg/body_pose.py segs)", "literature law (docs/research/gh_translation_literature.md)"],
+  "held_out": ["OpenSim Seth 2016 trajectories (after download approval)", "the user's OpenCap shoulder markers"]
+ }
+}

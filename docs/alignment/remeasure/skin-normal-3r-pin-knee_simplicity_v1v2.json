@@ -1,0 +1,484 @@
+{
+ "what": "tools/simplicity.py v1 (3ceacea^, on the 3ceacea^ row records) vs v2 (HEAD) on every row with a mechanism record; Pareto fronts over verified rows (v_gap, complexity); complexity-order changes of skin-normal-3r-pin-knee",
+ "changed": [
+  {
+   "id": "raglan-knee-3r",
+   "v1": 19.5,
+   "v2": 0.0,
+   "gap": 27.82,
+   "gap_src": "v",
+   "status": "verified"
+  },
+  {
+   "id": "skin-normal-3r-pin-knee",
+   "v1": 19.5,
+   "v2": 0.0,
+   "gap": 27.2,
+   "gap_src": "v",
+   "status": "verified"
+  },
+  {
+   "id": "cam-unfold-4th",
+   "v1": 33.75,
+   "v2": 14.25,
+   "gap": 26.7,
+   "gap_src": "v",
+   "status": "verified"
+  },
+  {
+   "id": "rim-lobe-arm-knuckle-3r",
+   "v1": 35.25,
+   "v2": 16.0,
+   "gap": 20.57,
+   "gap_src": "v",
+   "status": "dead"
+  },
+  {
+   "id": "coupler-path-j1",
+   "v1": 29.0,
+   "v2": 22.0,
+   "gap": 28.98,
+   "gap_src": "v",
+   "status": "dead"
+  },
+  {
+   "id": "roller-longdyad-knuckle-3r",
+   "v1": 43.75,
+   "v2": 24.25,
+   "gap": 18.67,
+   "gap_src": "v",
+   "status": "verified"
+  },
+  {
+   "id": "sidecar-roller-flank-knuckle-3r",
+   "v1": 45.25,
+   "v2": 25.75,
+   "gap": 20.08,
+   "gap_src": "v",
+   "status": "verified"
+  },
+  {
+   "id": "frontload-lobe-stopb-knuckle-3r",
+   "v1": 49.0,
+   "v2": 29.5,
+   "gap": 22.82,
+   "gap_src": "v",
+   "status": "verified"
+  },
+  {
+   "id": "sidecar-longdyad-knuckle-3r",
+   "v1": 49.0,
+   "v2": 29.5,
+   "gap": 18.91,
+   "gap_src": "v",
+   "status": "verified"
+  },
+  {
+   "id": "sidecar-parallelogram-knuckle-3r",
+   "v1": 49.0,
+   "v2": 29.5,
+   "gap": 19.13,
+   "gap_src": "v",
+   "status": "verified"
+  },
+  {
+   "id": "minarc-stop-knuckle-4r",
+   "v1": 52.0,
+   "v2": 32.5,
+   "gap": 19.54,
+   "gap_src": "v",
+   "status": "verified"
+  },
+  {
+   "id": "skinnormal-shortk-knuckle-4r",
+   "v1": 42.0,
+   "v2": 32.5,
+   "gap": 12.49,
+   "gap_src": "s",
+   "status": "screened"
+  },
+  {
+   "id": "split-knuckle-twosided-3r",
+   "v1": 68.5,
+   "v2": 49.0,
+   "gap": 34.18,
+   "gap_src": "v",
+   "status": "dead"
+  },
+  {
+   "id": "twin-k2-sidecar-knuckle-3r",
+   "v1": 75.0,
+   "v2": 55.5,
+   "gap": 67.32,
+   "gap_src": "v",
+   "status": "dead"
+  }
+ ],
+ "n_verified": 51,
+ "front_v1": [
+  {
+   "id": "zc-frontier-3r",
+   "cx": 0,
+   "v_gap": 33.51
+  },
+  {
+   "id": "geneva-tail-knuckle-pinknee-3r",
+   "cx": 12.0,
+   "v_gap": 23.57
+  },
+  {
+   "id": "kneeless-roller-knuckle-3r",
+   "cx": 23.75,
+   "v_gap": 21.07
+  },
+  {
+   "id": "rim-lobe-arm-knuckle-3r",
+   "cx": 35.25,
+   "v_gap": 20.57
+  },
+  {
+   "id": "roller-longdyad-knuckle-3r",
+   "cx": 43.75,
+   "v_gap": 18.67
+  }
+ ],
+ "front_v2": [
+  {
+   "id": "skin-normal-3r-pin-knee",
+   "cx": 0.0,
+   "v_gap": 27.2
+  },
+  {
+   "id": "geneva-tail-knuckle-pinknee-3r",
+   "cx": 12.0,
+   "v_gap": 23.57
+  },
+  {
+   "id": "rim-lobe-arm-knuckle-3r",
+   "cx": 16.0,
+   "v_gap": 20.57
+  },
+  {
+   "id": "roller-longdyad-knuckle-3r",
+   "cx": 24.25,
+   "v_gap": 18.67
+  }
+ ],
+ "pin_knee_order_changes_verified": [
+  {
+   "id": "annular-ring-3r",
+   "cx_v1": 0.5,
+   "cx_v2": 0.5,
+   "v_gap": 77.99,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "back-anchored-ring-3r",
+   "cx_v1": 0.5,
+   "cx_v2": 0.5,
+   "v_gap": 116.31,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "crossed-skin-tracks",
+   "cx_v1": 7.25,
+   "cx_v2": 7.25,
+   "v_gap": 96.04,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "dwell-fourbar-knee-3r",
+   "cx_v1": 16.0,
+   "cx_v2": 16.0,
+   "v_gap": 37.66,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "fivebar-roll",
+   "cx_v1": 14.5,
+   "cx_v2": 14.5,
+   "v_gap": 89.13,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "geneva-tail-knuckle-3r",
+   "cx_v1": 14.0,
+   "cx_v2": 14.0,
+   "v_gap": 39.34,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "geneva-tail-knuckle-pinknee-3r",
+   "cx_v1": 12.0,
+   "cx_v2": 12.0,
+   "v_gap": 23.57,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "j2-arc-sector-3r",
+   "cx_v1": 4.0,
+   "cx_v2": 4.0,
+   "v_gap": 66.3,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "j3-neck-over-3r",
+   "cx_v1": 13.5,
+   "cx_v2": 13.5,
+   "v_gap": 28.46,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "k-rim-lobe-stub-knuckle-3r",
+   "cx_v1": 4.0,
+   "cx_v2": 4.0,
+   "v_gap": 44.79,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "offset-skin-normal-3r",
+   "cx_v1": 17.75,
+   "cx_v2": 17.75,
+   "v_gap": 41.02,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "posterior-max-margin-cardan",
+   "cx_v1": 0,
+   "cx_v2": 0,
+   "v_gap": 87.47,
+   "order_v1": 1,
+   "order_v2": 0
+  },
+  {
+   "id": "rail-elbow",
+   "cx_v1": 12.75,
+   "cx_v2": 12.75,
+   "v_gap": 64.7,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "risley-turret",
+   "cx_v1": 0,
+   "cx_v2": 0,
+   "v_gap": 74.66,
+   "order_v1": 1,
+   "order_v2": 0
+  },
+  {
+   "id": "scapula-halo-track",
+   "cx_v1": 10.25,
+   "cx_v2": 10.25,
+   "v_gap": 87.64,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "seed-2r-cring",
+   "cx_v1": 7.0,
+   "cx_v2": 7.0,
+   "v_gap": 129.98,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "seed-arc-rails",
+   "cx_v1": 11.0,
+   "cx_v2": 11.0,
+   "v_gap": 73.0,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "seed-pauldron-shells",
+   "cx_v1": 9.0,
+   "cx_v2": 9.0,
+   "v_gap": 79.46,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "short-a2-arc-slide-3r",
+   "cx_v1": 14.75,
+   "cx_v2": 14.75,
+   "v_gap": 55.3,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "sliding-rivet-pauldron",
+   "cx_v1": 5.5,
+   "cx_v2": 5.5,
+   "v_gap": 158.26,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "slotted-eccentric-j2-3r",
+   "cx_v1": 11.0,
+   "cx_v2": 11.0,
+   "v_gap": 115.21,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "spine-parked-j2-3r",
+   "cx_v1": 0,
+   "cx_v2": 0,
+   "v_gap": 41.0,
+   "order_v1": 1,
+   "order_v2": 0
+  },
+  {
+   "id": "stop-relay-rocker-3r",
+   "cx_v1": 12.5,
+   "cx_v2": 12.5,
+   "v_gap": 50.36,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "trombone-arc",
+   "cx_v1": 12.75,
+   "cx_v2": 12.75,
+   "v_gap": 88.29,
+   "order_v1": 1,
+   "order_v2": -1
+  },
+  {
+   "id": "zc-frontier-3r",
+   "cx_v1": 0,
+   "cx_v2": 0,
+   "v_gap": 33.51,
+   "order_v1": 1,
+   "order_v2": 0
+  }
+ ],
+ "note": "order = sign(pin knee cx - other cx): 1 pin knee more complex, 0 tie, -1 simpler",
+ "proposal_encoders_only_out": [
+  {
+   "id": "raglan-knee-3r",
+   "v1": 19.5,
+   "encoders_only_out": 9.5,
+   "v2": 0.0,
+   "v_gap": 27.82,
+   "status": "verified"
+  },
+  {
+   "id": "skin-normal-3r-pin-knee",
+   "v1": 19.5,
+   "encoders_only_out": 9.5,
+   "v2": 0.0,
+   "v_gap": 27.2,
+   "status": "verified"
+  },
+  {
+   "id": "cam-unfold-4th",
+   "v1": 33.75,
+   "encoders_only_out": 23.75,
+   "v2": 14.25,
+   "v_gap": 26.7,
+   "status": "verified"
+  },
+  {
+   "id": "rim-lobe-arm-knuckle-3r",
+   "v1": 35.25,
+   "encoders_only_out": 25.25,
+   "v2": 16.0,
+   "v_gap": 20.57,
+   "status": "dead"
+  },
+  {
+   "id": "coupler-path-j1",
+   "v1": 29.0,
+   "encoders_only_out": 29.0,
+   "v2": 22.0,
+   "v_gap": 28.98,
+   "status": "dead"
+  },
+  {
+   "id": "roller-longdyad-knuckle-3r",
+   "v1": 43.75,
+   "encoders_only_out": 33.75,
+   "v2": 24.25,
+   "v_gap": 18.67,
+   "status": "verified"
+  },
+  {
+   "id": "sidecar-roller-flank-knuckle-3r",
+   "v1": 45.25,
+   "encoders_only_out": 35.25,
+   "v2": 25.75,
+   "v_gap": 20.08,
+   "status": "verified"
+  },
+  {
+   "id": "frontload-lobe-stopb-knuckle-3r",
+   "v1": 49.0,
+   "encoders_only_out": 39.0,
+   "v2": 29.5,
+   "v_gap": 22.82,
+   "status": "verified"
+  },
+  {
+   "id": "sidecar-longdyad-knuckle-3r",
+   "v1": 49.0,
+   "encoders_only_out": 39.0,
+   "v2": 29.5,
+   "v_gap": 18.91,
+   "status": "verified"
+  },
+  {
+   "id": "sidecar-parallelogram-knuckle-3r",
+   "v1": 49.0,
+   "encoders_only_out": 39.0,
+   "v2": 29.5,
+   "v_gap": 19.13,
+   "status": "verified"
+  },
+  {
+   "id": "minarc-stop-knuckle-4r",
+   "v1": 52.0,
+   "encoders_only_out": 42.0,
+   "v2": 32.5,
+   "v_gap": 19.54,
+   "status": "verified"
+  },
+  {
+   "id": "skinnormal-shortk-knuckle-4r",
+   "v1": 42.0,
+   "encoders_only_out": 42.0,
+   "v2": 32.5,
+   "v_gap": 12.49,
+   "status": "screened"
+  },
+  {
+   "id": "split-knuckle-twosided-3r",
+   "v1": 68.5,
+   "encoders_only_out": 58.5,
+   "v2": 49.0,
+   "v_gap": 34.18,
+   "status": "dead"
+  },
+  {
+   "id": "twin-k2-sidecar-knuckle-3r",
+   "v1": 75.0,
+   "encoders_only_out": 65.0,
+   "v2": 55.5,
+   "v_gap": 67.32,
+   "status": "dead"
+  }
+ ]
+}

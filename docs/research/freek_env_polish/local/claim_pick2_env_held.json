@@ -1,0 +1,308 @@
+{
+ "id": "freek-oracle-route-knuckle-4r",
+ "fit": "env",
+ "wear": "held",
+ "which": "docs/research/freek_env_polish/picks/pick2.json",
+ "n": 1154,
+ "fold_margin": 5.5,
+ "nominal": {
+  "q3max": 86.2557,
+  "smhi": 7.8756,
+  "smlo": 7.7223,
+  "a1max": 73.45179999999999,
+  "bk1": 29.052,
+  "bk2": 49.9098,
+  "az2": 42.0,
+  "el2": 43.6108,
+  "wd": 67.1339,
+  "wa": -12.8431,
+  "b3": 0.2944
+ },
+ "priced": {
+  "q3max": 86.2557,
+  "smhi": 8.3756,
+  "smlo": 8.2223,
+  "a1max": 72.7965,
+  "bk1": 29.052,
+  "bk2": 49.9098,
+  "az2": 42.0,
+  "el2": 43.6108,
+  "wd": 67.1339,
+  "wa": -12.8431,
+  "b3": 0.2944
+ },
+ "price": {
+  "th_cut": 128.6,
+  "dK_cut": 81.136,
+  "dK_stopB": 83.622,
+  "psiA": -54.856,
+  "a1max_nominal": 73.45179999999999,
+  "a1max_priced": 72.7965
+ },
+ "fit_report": {
+  "gap": 13.21,
+  "reach": 0.8,
+  "follow": 1.0,
+  "inband14": 0.8809,
+  "inband10": 0.5017,
+  "contact": 0.013,
+  "mode": "fast"
+ },
+ "static": {
+  "gap": 22.02,
+  "reach": 0.7363,
+  "follow": 1.0,
+  "inband14": 0.8798,
+  "inband10": 0.506,
+  "contact": 0.0363,
+  "near": 24.43,
+  "near1_poses": 17,
+  "min_mm": 0.468
+ },
+ "recomputed": {
+  "gap": 22.01,
+  "reach": 0.7363,
+  "follow": 1.0,
+  "inband14": 0.8798,
+  "contact": 0.0363,
+  "n_ws": 952,
+  "n_clip": 202,
+  "ws_taken": 701,
+  "contact_poses": 34
+ },
+ "contact_poses": 34,
+ "contact_depth_mm": 197.17,
+ "overhead140_ws": [
+  17,
+  71
+ ],
+ "connected": {
+  "nodes": 1128,
+  "connected": 1128,
+  "islands": 0,
+  "dropped": 0,
+  "dropped_idx": [],
+  "gap": 22.02,
+  "reach": 0.7363,
+  "follow": 1.0,
+  "inband14": 0.8798,
+  "inband10": 0.506,
+  "contact": 0.0363,
+  "near": 24.43,
+  "ws_taken": 701,
+  "edges": {
+   "tested": 996,
+   "passed": 996,
+   "refused_rule": 0,
+   "refused_jump": 0,
+   "refused_branch": 0,
+   "jump_by_joint": {
+    "q1": 0,
+    "q2": 0,
+    "q3'": 0,
+    "pin_a": 0,
+    "pin_b": 0,
+    "dK": 0
+   },
+   "seed_branch": [
+    1.0
+   ]
+  }
+ },
+ "margins": {
+  "one_reading_min": 5.94,
+  "one_lt5": 0,
+  "family_min": 0.29,
+  "family_lt5": 18,
+  "state_counts": {
+   "0": 672,
+   "1": 171,
+   "2": 60
+  }
+ },
+ "j3stop": {
+  "taken": 903,
+  "engaged": 60,
+  "q3_engaged": [
+   86.25,
+   86.26
+  ],
+  "phi_engaged": [
+   7.95,
+   7.95
+  ],
+  "q3own_engaged": [
+   94.21,
+   94.21
+  ],
+  "q3_other_max": 86.16,
+  "q3own_other_max": 94.13,
+  "q3own_all_max": 94.21,
+  "phi_all": [
+   -12.02,
+   10.3
+  ]
+ },
+ "stop_refusal": {
+  "refused": 19,
+  "kit_contacts": 10,
+  "rows": [
+   {
+    "i": 752,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 165.0,
+    "axial": -105.0,
+    "kit_min_mm": -4.07
+   },
+   {
+    "i": 816,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 135.0,
+    "axial": -105.0,
+    "kit_min_mm": -0.15
+   },
+   {
+    "i": 823,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 165.0,
+    "axial": -120.0,
+    "kit_min_mm": null
+   },
+   {
+    "i": 824,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 165.0,
+    "axial": -105.0,
+    "kit_min_mm": null
+   },
+   {
+    "i": 884,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 120.0,
+    "axial": -105.0,
+    "kit_min_mm": 1.55
+   },
+   {
+    "i": 888,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 135.0,
+    "axial": -105.0,
+    "kit_min_mm": -0.13
+   },
+   {
+    "i": 891,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 150.0,
+    "axial": -105.0,
+    "kit_min_mm": null
+   },
+   {
+    "i": 892,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 150.0,
+    "axial": -90.0,
+    "kit_min_mm": -1.91
+   },
+   {
+    "i": 896,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 165.0,
+    "axial": -105.0,
+    "kit_min_mm": null
+   },
+   {
+    "i": 897,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 165.0,
+    "axial": -75.0,
+    "kit_min_mm": -4.26
+   },
+   {
+    "i": 964,
+    "kind": "ws",
+    "plane": 105.0,
+    "elev": 150.0,
+    "axial": -90.0,
+    "kit_min_mm": -3.6
+   },
+   {
+    "i": 965,
+    "kind": "ws",
+    "plane": 105.0,
+    "elev": 150.0,
+    "axial": -75.0,
+    "kit_min_mm": -1.06
+   },
+   {
+    "i": 969,
+    "kind": "ws",
+    "plane": 105.0,
+    "elev": 165.0,
+    "axial": -75.0,
+    "kit_min_mm": null
+   },
+   {
+    "i": 1036,
+    "kind": "ws",
+    "plane": 120.0,
+    "elev": 150.0,
+    "axial": -90.0,
+    "kit_min_mm": null
+   },
+   {
+    "i": 1092,
+    "kind": "ws",
+    "plane": 135.0,
+    "elev": 120.0,
+    "axial": -90.0,
+    "kit_min_mm": -0.17
+   },
+   {
+    "i": 1098,
+    "kind": "ws",
+    "plane": 135.0,
+    "elev": 135.0,
+    "axial": -75.0,
+    "kit_min_mm": -0.98
+   },
+   {
+    "i": 1146,
+    "kind": "ws",
+    "plane": 150.0,
+    "elev": 105.0,
+    "axial": -90.0,
+    "kit_min_mm": 3.11
+   },
+   {
+    "i": 1152,
+    "kind": "ws",
+    "plane": 150.0,
+    "elev": 120.0,
+    "axial": -90.0,
+    "kit_min_mm": -3.93
+   },
+   {
+    "i": 1153,
+    "kind": "ws",
+    "plane": 150.0,
+    "elev": 120.0,
+    "axial": -75.0,
+    "kit_min_mm": 0.84
+   }
+  ],
+  "gap_refusals_as_contacts": 23.04
+ },
+ "gap": 22.02,
+ "near": 24.43,
+ "secs": 339.5
+}

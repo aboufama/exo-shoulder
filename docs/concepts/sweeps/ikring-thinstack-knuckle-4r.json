@@ -1,0 +1,130 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-19T02:10:18Z",
+  "params": {
+   "tag": "k0-parked",
+   "mode": "psi locked at 0 (lead + ring hardware, coil deleted)",
+   "PHI": 40.0,
+   "tilt": 8.5,
+   "taz": 243.0,
+   "delta": 3.5
+  },
+  "inband14": 0.9034,
+  "inband10": 0.5381,
+  "reach": 0.7222,
+  "follow": 1.0,
+  "contact": 0.016,
+  "gap": 20.37,
+  "plain_gap": 19.38,
+  "ib14_chain_only": 0.8901,
+  "near1": 30.21,
+  "near2": 56.49,
+  "ws_taken": 260,
+  "overhead": [
+   8,
+   28
+  ],
+  "bench": "Bench(110,360) exact frozen"
+ },
+ {
+  "k": 1,
+  "t": "2026-10-19T02:10:18Z",
+  "params": {
+   "tag": "ik",
+   "PHI": 40.0,
+   "tilt": 8.5,
+   "taz": 243.0,
+   "delta": 3.5,
+   "ds": 31.0,
+   "tsh": 1.0,
+   "carw": 14.0,
+   "coil": "none",
+   "band": 8.0,
+   "bump": 1.2,
+   "lean": 1,
+   "lbr": 1,
+   "mode": "lead-first max-clearance IK, k grid 2.5"
+  },
+  "inband14": 0.9034,
+  "inband10": 0.5381,
+  "reach": 0.8222,
+  "follow": 1.0,
+  "contact": 0.031,
+  "gap": 11.87,
+  "plain_gap": 10.88,
+  "ib14_chain_only": 0.8901,
+  "near1": 21.66,
+  "near2": 48.75,
+  "ws_taken": 296,
+  "overhead": [
+   13,
+   28
+  ],
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast k=0)"
+ },
+ {
+  "k": 2,
+  "t": "2026-10-19T02:10:18Z",
+  "params": {
+   "tag": "ik-specrule",
+   "mode": "lead-first IK, the ring moves only for a take (the spec); per-pose dump of the ik run re-read",
+   "PHI": 40.0,
+   "tilt": 8.5,
+   "taz": 243.0,
+   "delta": 3.5
+  },
+  "inband14": 0.9034,
+  "inband10": 0.5381,
+  "reach": 0.8222,
+  "follow": 1.0,
+  "contact": 0.0098,
+  "gap": 9.75,
+  "plain_gap": 8.75,
+  "ib14_chain_only": 0.8901,
+  "near1": 19.65,
+  "near2": 47.0,
+  "ws_taken": 296,
+  "overhead": [
+   13,
+   28
+  ],
+  "bench": "Bench(110,360) exact frozen"
+ },
+ {
+  "k": 3,
+  "t": "2026-10-19T02:16:27Z",
+  "params": {
+   "tag": "control-leastphi",
+   "PHI": 40.0,
+   "tilt": 8.5,
+   "taz": 243.0,
+   "delta": 3.5,
+   "ds": 31.0,
+   "tsh": 1.0,
+   "carw": 14.0,
+   "coil": "none",
+   "band": 8.0,
+   "bump": 1.2,
+   "lean": 1,
+   "lbr": 1,
+   "mode": "unpowered least-phi relay (phi40 mode), coil deleted"
+  },
+  "inband14": 0.9034,
+  "inband10": 0.5381,
+  "reach": 0.8083,
+  "follow": 1.0,
+  "contact": 0.043,
+  "gap": 14.46,
+  "plain_gap": 13.47,
+  "ib14_chain_only": 0.8901,
+  "near1": 25.79,
+  "near2": 55.46,
+  "ws_taken": 291,
+  "overhead": [
+   10,
+   28
+  ],
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast k=0)"
+ }
+]

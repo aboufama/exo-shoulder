@@ -1,0 +1,50 @@
+{
+ "leader": "knuckle",
+ "a1": 40.1344669431083,
+ "a2": 72.55705721770289,
+ "a1_relay": 77.0,
+ "n_ws": 360,
+ "A_ws": 0.6333,
+ "AorB_ws": 0.9333,
+ "B_only_ws": 108,
+ "B_only_overhead": 16,
+ "hub2_ray_requirement_mm": {
+  "A_sigma+1": {
+   "n": 334,
+   "med": 44.0,
+   "p10": 40.0,
+   "p90": 72.7,
+   "overhead_med": 90.0,
+   "share_le_60": 0.871,
+   "share_le_75": 0.919
+  },
+  "A_sigma-1": {
+   "n": 334,
+   "med": 54.0,
+   "p10": 52.0,
+   "p90": 57.0,
+   "overhead_med": 54.0,
+   "share_le_60": 0.988,
+   "share_le_75": 0.994
+  },
+  "B_sigma+1": {
+   "n": 112,
+   "med": 77.5,
+   "p10": 50.0,
+   "p90": 400.0,
+   "overhead_med": 149.0,
+   "share_le_60": 0.348,
+   "share_le_75": 0.491
+  },
+  "B_sigma-1": {
+   "n": 112,
+   "med": 70.0,
+   "p10": 56.0,
+   "p90": 188.2,
+   "overhead_med": 73.5,
+   "share_le_60": 0.295,
+   "share_le_75": 0.58
+  }
+ },
+ "secs": 344.7
+}

@@ -1,0 +1,137 @@
+{
+ "id": "pointer-cslide",
+ "status": "screened",
+ "v_gap": null,
+ "complexity": null,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no verified bench gap on the row",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): gap 69.84: bench 8 contact poses, sum 72.56 mm, deepest 15.67 mm at ['ws', 0.0, 150.0, 0.0], 7 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+52.32 mm, x3.58) - CLEARLY DEEPER; held depths not on file",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no verified bench gap on the row"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "no pair"
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "watch",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): gap 69.84: bench 8 contact poses, sum 72.56 mm, deepest 15.67 mm at ['ws', 0.0, 150.0, 0.0], 7 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (+52.32 mm, x3.58) - CLEARLY DEEPER; held depths not on file",
+   "depths": {
+    "gap 69.84": {
+     "bench": {
+      "n": 8,
+      "sum_mm": 72.56,
+      "max_mm": 15.67,
+      "n_deeper3": 7,
+      "overhead140": 1,
+      "deepest": [
+       "ws",
+       0.0,
+       150.0,
+       0.0
+      ],
+      "gap": 69.84,
+      "src": "docs/alignment/remeasure/pointer-cslide_probe_fitfast.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        72.56
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": [
+    {
+     "claim": "gap 69.84",
+     "wear": "bench",
+     "sum": 72.56,
+     "ref_sum": 20.24,
+     "excess": 52.32,
+     "ratio": 3.58,
+     "watch": true
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "no passive coordinate; flood not required"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "no moving drive / joint declared",
+   "spans": [],
+   "declared": [],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 2.75 vs row None",
+   "recomputed": 2.75,
+   "row": null
+  },
+  {
+   "check": "reporting",
+   "level": "ok",
+   "reason": "row, verifier files and dashboard agree"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [],
+ "git": "0c380f8",
+ "tool_version": "2026-10-19.1",
+ "t": "2026-10-19T03:51:45Z"
+}

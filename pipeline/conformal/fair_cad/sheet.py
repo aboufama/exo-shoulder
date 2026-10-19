@@ -123,10 +123,86 @@ def sheet_solid(chart, rho_bot, rho_top, sdf2, extent, e=1.2, n=360, h=0.6, wall
         c2 = pcurve(Q); ed = BRepBuilderAPI_MakeEdge(c2, S).Edge(); BRepLib.BuildCurves3d_s(ed, 1e-6, GeomAbs_C2, 9, 2 * len(Q))
         w = BRepBuilderAPI_MakeWire(ed).Wire(); f = BRepBuilderAPI_MakeFace(S, w, True).Face()
         sf = ShapeFix_Face(f); sf.Perform(); return sf.Face()
-    sew = BRepBuilderAPI_Sewing(5e-3)
-    for f in faces + [trimmed(SB), trimmed(ST)]: sew.Add(f)
-    sew.Perform(); sh = sew.SewedShape(); exs = TopExp_Explorer(sh, TopAbs_SHELL)
-    so = BRepBuilderAPI_MakeSolid(TopoDS.Shell_s(exs.Current())).Solid(); fx = ShapeFix_Solid(so); fx.Perform(); so = fx.Solid()
+    tb_, tt_ = trimmed(SB), trimmed(ST)
+    # sew the five faces into ONE closed shell. The edge rounds are interpolated through the outline stations while the
+    # trimmed skin/outer faces carry the exact outline curve: on steep or strongly curved members the two drift apart by
+    # more than 5 um between stations, the sewing then leaves free edges and several shells, and taking the first shell
+    # gave an open "solid" with 3-4 faces and a meaningless (near zero) volume. Retry with a wider tolerance, then check.
+    for tol in ((5e-3,) if os.environ.get("SEW_V1") == "1" else (5e-3, 2e-2, 5e-2, 0.1)):         # SEW_V1=1: the old single try (reproduction)
+        sew = BRepBuilderAPI_Sewing(tol)
+        for f in faces + [tb_, tt_]: sew.Add(f)
+        sew.Perform(); sh = sew.SewedShape(); shells = []; exs = TopExp_Explorer(sh, TopAbs_SHELL)
+        while exs.More(): shells.append(TopoDS.Shell_s(exs.Current())); exs.Next()
+        if len(shells) == 1 and sew.NbFreeEdges() == 0: break
+    sew_info = dict(tol=tol, shells=len(shells), free_edges=int(sew.NbFreeEdges()))
+    shell = shells[0] if os.environ.get("SEW_V1") == "1" else max(shells, key=lambda s_: sum(1 for _ in _faces_of(s_)))
+    so = BRepBuilderAPI_MakeSolid(shell).Solid(); fx = ShapeFix_Solid(so); fx.Perform(); so = fx.Solid()
     s = cq.Solid(so)
     if s.Volume() < 0: s = cq.Solid(so.Reversed())
-    return s, dict(Q=Q, SB=SB, ST=ST, thickness=(float(np.linalg.norm(Tp - Bp, axis=1).min()), float(np.linalg.norm(Tp - Bp, axis=1).max())))
+    return s, dict(Q=Q, SB=SB, ST=ST, sew=sew_info, thickness=(float(np.linalg.norm(Tp - Bp, axis=1).min()), float(np.linalg.norm(Tp - Bp, axis=1).max())))
+
+def _faces_of(shape):
+    from OCP.TopAbs import TopAbs_FACE
+    ex = TopExp_Explorer(shape, TopAbs_FACE)
+    while ex.More(): yield ex.Current(); ex.Next()
+
+def sheet_solid_v2(chart, rho_bot, rho_top, sdf2, extent, e_bot, e_top, wall_dir, n=480, h=0.6, wall_min=0.2):
+    """sheet_solid with designed walls (strap links, members.Strap): the sketch outline sdf2 = 0 is the wall; the skin-side
+    round has its own size e_bot(x, y) and the outer round e_top(x, y) (per station, smooth fields); the wall runs along
+    wall_dir(P) (unit, per point: the hub axis around a hub pad -> true cylinders, the strap's in-plane normal along it ->
+    a constant rectangular section) instead of radially from the GH centre. The top outline is where that wall line meets
+    the top surface, moved in by e_top; both trimmed faces carry their own exact outline. The default sheet_solid is
+    unchanged."""
+    Q = outline(lambda x, y: sdf2(x, y) + e_bot(x, y), extent, 0.0, n=n)
+    eb = np.asarray(e_bot(Q[:, 0], Q[:, 1]), float); et = np.asarray(e_top(Q[:, 0], Q[:, 1]), float)
+    pad = float(max(eb.max(), et.max())) + 4.0; x0, x1 = Q[:, 0].min() - pad, Q[:, 0].max() + pad; y0, y1 = Q[:, 1].min() - pad, Q[:, 1].max() + pad
+    SB = surface(chart, rho_bot, x0, x1, y0, y1, h); ST = surface(chart, rho_top, x0, x1, y0, y1, h)
+    Bp, NB = [], []
+    for x, y in Q:
+        pb, nb, _ = _eval(SB, x, y); Bp.append(pb); NB.append(nb)
+    Bp, NB = np.array(Bp), np.array(NB); WD0 = unit(wall_dir(Bp))
+    NB = NB * np.sign((NB * WD0).sum(1))[:, None]                                          # bottom normal into the material
+    TB = unit(np.roll(Bp, -1, 0) - np.roll(Bp, 1, 0)); YB = unit(np.cross(TB, NB))
+    xyo = chart.xy(unit(Bp + 0.3 * YB)); s_out = np.sign(sdf2(xyo[:, 0], xyo[:, 1]) - sdf2(Q[:, 0], Q[:, 1])); YB *= s_out[:, None]
+    Wb = Bp + eb[:, None] * YB + eb[:, None] * NB
+    # the wall line from Wb along the wall direction meets the top surface at X (bisection on |L(t)| - rho_top(dir L(t)))
+    def f(t):
+        L = Wb + t[:, None] * WD0; xy = chart.xy(unit(L)); return np.linalg.norm(L, axis=1) - rho_top(xy[:, 0], xy[:, 1])
+    lo = np.zeros(len(Q)); hi = np.full(len(Q), 40.0)
+    if (f(lo) > 0).any(): raise ValueError(f"sheet_solid_v2: the wall starts above the top surface at {int((f(lo) > 0).sum())} stations")
+    for _ in range(50):
+        mid = 0.5 * (lo + hi); up = f(mid) > 0; hi = np.where(up, mid, hi); lo = np.where(up, lo, mid)
+    X = Wb + (0.5 * (lo + hi))[:, None] * WD0
+    def top_pt(P):
+        xy = chart.xy(unit(P)); return np.array([_eval(ST, x, y)[0] for x, y in xy]), xy
+    _, nT = zip(*[_eval(ST, *chart.xy(unit(p[None]))[0])[:2] for p in X]); NT = np.array(nT); NT = NT * np.sign((NT * WD0).sum(1))[:, None]
+    TT = unit(np.roll(X, -1, 0) - np.roll(X, 1, 0)); YT = unit(np.cross(TT, NT)); YT *= np.sign((YT * YB).sum(1))[:, None]
+    Tp, Qt = top_pt(X - et[:, None] * YT)                                                  # top outline: e_top in from the wall
+    NT = np.array([_eval(ST, x, y)[1] for x, y in Qt]); NT = NT * np.sign((NT * WD0).sum(1))[:, None]
+    TT = unit(np.roll(Tp, -1, 0) - np.roll(Tp, 1, 0)); YT = unit(np.cross(TT, NT)); YT *= np.sign((YT * YB).sum(1))[:, None]
+    Wt = Tp + et[:, None] * YT - et[:, None] * NT
+    th = np.linalg.norm(Wt - Wb, axis=1)
+    if ((Wt - Wb) * WD0).sum(1).min() < wall_min: raise ValueError(f"sheet_solid_v2: wall {((Wt - Wb) * WD0).sum(1).min():.2f} mm (rounds too big for the thickness)")
+    WD = unit(Wt - Wb); C1, C2 = [], []
+    for i in range(len(Q)):
+        C1.append(G.g2_blend(Bp[i], YB[i], 0.0, NB[i], Wb[i], WD[i], 0.0, -YB[i]))
+        C2.append(G.g2_blend(Wt[i], WD[i], 0.0, -YT[i], Tp[i], -YT[i], 0.0, -NT[i]))
+    C1, C2 = np.array(C1), np.array(C2); Wl = np.stack([Wb, Wt], 1)
+    faces = [BRepBuilderAPI_MakeFace(G._row_surface([arr[:, k] for k in range(arr.shape[1])], deg), 1e-7).Face() for arr, deg in ((C1, 5), (Wl, 1), (C2, 5))]
+    def trimmed(S, Q2):
+        c2 = pcurve(Q2); ed = BRepBuilderAPI_MakeEdge(c2, S).Edge(); BRepLib.BuildCurves3d_s(ed, 1e-6, GeomAbs_C2, 9, 2 * len(Q2))
+        w = BRepBuilderAPI_MakeWire(ed).Wire(); fc = BRepBuilderAPI_MakeFace(S, w, True).Face()
+        sf = ShapeFix_Face(fc); sf.Perform(); return sf.Face()
+    tb_, tt_ = trimmed(SB, Q), trimmed(ST, Qt)
+    for tol in (5e-3, 2e-2, 5e-2, 0.1):
+        sew = BRepBuilderAPI_Sewing(tol)
+        for fc in faces + [tb_, tt_]: sew.Add(fc)
+        sew.Perform(); sh = sew.SewedShape(); shells = []; exs = TopExp_Explorer(sh, TopAbs_SHELL)
+        while exs.More(): shells.append(TopoDS.Shell_s(exs.Current())); exs.Next()
+        if len(shells) == 1 and sew.NbFreeEdges() == 0: break
+    sew_info = dict(tol=tol, shells=len(shells), free_edges=int(sew.NbFreeEdges()))
+    shell = max(shells, key=lambda s_: sum(1 for _ in _faces_of(s_)))
+    so = BRepBuilderAPI_MakeSolid(shell).Solid(); fx = ShapeFix_Solid(so); fx.Perform(); so = fx.Solid()
+    s = cq.Solid(so)
+    if s.Volume() < 0: s = cq.Solid(so.Reversed())
+    return s, dict(Q=Q, Qt=Qt, SB=SB, ST=ST, sew=sew_info, thickness=(float(th.min()), float(th.max())), wall=float(((Wt - Wb) * WD0).sum(1).min()))

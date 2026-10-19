@@ -1,0 +1,744 @@
+{
+ "step": 6,
+ "tol_mm": 0.5,
+ "frames_checked": 228,
+ "seconds": 87,
+ "jobs": 4,
+ "body_model": "rig",
+ "inside": "integer winding number (grid + segment crossings), depth = exact distance to the nearest surface (judge/sdist.py)",
+ "parts": {
+  "H|M4x6 ISO 10642 countersunk (upper cuff)": {
+   "owner": "user",
+   "max_depth": 17.59,
+   "frames": 8,
+   "worst": [
+    "Wash opposite shoulder",
+    78,
+    [
+     145,
+     46,
+     -70,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": {
+   "owner": "user",
+   "max_depth": 19.83,
+   "frames": 14,
+   "worst": [
+    "Wash opposite shoulder",
+    78,
+    [
+     145,
+     46,
+     -70,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[13]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[17]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[3]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[6]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[1]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[3]": {
+   "owner": "user",
+   "max_depth": 0.51,
+   "frames": 2,
+   "worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_depth": 0.51,
+   "attributable_frames": 2,
+   "attributable_worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|CirPattern1[9]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[2]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve3": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[4]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[10]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[8]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[14]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[12]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[16]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[7]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[1]": {
+   "owner": "user",
+   "max_depth": 0.99,
+   "frames": 132,
+   "worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_depth": 0.99,
+   "attributable_frames": 132,
+   "attributable_worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|CirPattern1[5]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve4": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[11]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|Revolve1[2]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|CirPattern1[15]": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|5mm D, 2.5mm H, N42 MAGNET": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "F|Hex socket head countersunk screw grade C M4x0.7 x 8": {
+   "owner": "user",
+   "max_depth": 8.33,
+   "frames": 228,
+   "worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_depth": 8.33,
+   "attributable_frames": 228,
+   "attributable_worst": [
+    "Wave",
+    42,
+    [
+     15,
+     91,
+     -59,
+     94,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": {
+   "owner": "user",
+   "max_depth": 2.75,
+   "frames": 220,
+   "worst": [
+    "Comb hair",
+    84,
+    [
+     63,
+     133,
+     -60,
+     115,
+     0
+    ]
+   ],
+   "attributable_depth": 2.75,
+   "attributable_frames": 220,
+   "attributable_worst": [
+    "Comb hair",
+    84,
+    [
+     63,
+     133,
+     -60,
+     115,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "F|MIDDLE": {
+   "owner": "user",
+   "max_depth": 5.76,
+   "frames": 228,
+   "worst": [
+    "Comb hair",
+    150,
+    [
+     78,
+     143,
+     -67,
+     118,
+     0
+    ]
+   ],
+   "attributable_depth": 5.76,
+   "attributable_frames": 228,
+   "attributable_worst": [
+    "Comb hair",
+    150,
+    [
+     78,
+     143,
+     -67,
+     118,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "H|TOP": {
+   "owner": "user",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "F|FOREARM CUFF": {
+   "owner": "user",
+   "max_depth": 24.87,
+   "frames": 228,
+   "worst": [
+    "Wash opposite shoulder",
+    150,
+    [
+     138,
+     59,
+     -50,
+     112,
+     0
+    ]
+   ],
+   "attributable_depth": 24.0,
+   "attributable_frames": 228,
+   "attributable_worst": [
+    "Wash opposite shoulder",
+    42,
+    [
+     115,
+     29,
+     -76,
+     114,
+     0
+    ]
+   ],
+   "attributable_kind": "other region, beyond the buried own skin"
+  },
+  "H|BOTTOM (user's bar, cut at s 265, 4x M3 countersunk for the neck tongue)": {
+   "owner": "user",
+   "max_depth": 17.59,
+   "frames": 228,
+   "worst": [
+    "Wash opposite shoulder",
+    126,
+    [
+     145,
+     46,
+     -69,
+     119,
+     0
+    ]
+   ],
+   "attributable_depth": 4.71,
+   "attributable_frames": 228,
+   "attributable_worst": [
+    "Comb hair",
+    162,
+    [
+     76,
+     136,
+     -65,
+     113,
+     0
+    ]
+   ],
+   "attributable_kind": "own limb"
+  },
+  "l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J3 cap O20 G2 dome, threaded (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|J3 ring nut M7x0.5 (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|J3 inner spacer (ground, preload)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J3 outer spacer 17-4PH": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J3 bearing 2 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J3 bearing 1 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "H|D5-04 arm end: J3 pad + pin + neck + lap plate on BOTTOM (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1|J2 ring nut M7x0.5 (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1|J2 inner spacer (ground, preload)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 outer spacer 17-4PH": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 bearing 2 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l2|J2 bearing 1 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "base|J1 cap O20 G2 dome, threaded (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1|J1 ring nut M7x0.5 (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "l1|J1 inner spacer (ground, preload)": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "base|J1 outer spacer 17-4PH": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "base|J1 bearing 2 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "base|J1 bearing 1 MR117-2RS 7x11x3": {
+   "owner": "ours",
+   "max_depth": 0.0,
+   "frames": 0,
+   "worst": null,
+   "attributable_depth": 0.0,
+   "attributable_frames": 0,
+   "attributable_worst": null,
+   "attributable_kind": null
+  },
+  "base|D5-01 scapula base: J1 boss + handler tab, 2x M4 (Ti-6Al-4V)": {
+   "owner": "ours",
+   "max_depth": 6.57,
+   "frames": 23,
+   "worst": [
+    "Raise overhead",
+    78,
+    [
+     30,
+     150,
+     -60,
+     12,
+     0
+    ]
+   ],
+   "attributable_depth": 6.57,
+   "attributable_frames": 23,
+   "attributable_worst": [
+    "Raise overhead",
+    78,
+    [
+     30,
+     150,
+     -60,
+     12,
+     0
+    ]
+   ],
+   "attributable_kind": "plain"
+  }
+ },
+ "worst_part": "F|FOREARM CUFF",
+ "max_depth": 24.87,
+ "max_depth_ours": 6.57,
+ "max_depth_user": 24.87,
+ "attributable": {
+  "rule": "depth beyond the rig's own self-intersection (judge/body_regions.py): in full inside the part's own limb, elsewhere only below its own limb's skin",
+  "max_depth": 24.0,
+  "worst_part": "F|FOREARM CUFF",
+  "max_depth_ours": 6.57,
+  "worst_part_ours": "base|D5-01 scapula base: J1 boss + handler tab, 2x M4 (Ti-6Al-4V)",
+  "max_depth_user": 24.0,
+  "worst_part_user": "F|FOREARM CUFF"
+ }
+}

@@ -1,0 +1,75 @@
+{
+ "design": "user_minarc_pick1",
+ "knee_stop_deg": 149.5,
+ "rows": [
+  {
+   "knee_angle": 95.0,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": 0.5
+  },
+  {
+   "knee_angle": 110.0,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": 0.5
+  },
+  {
+   "knee_angle": 125.0,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": 0.5
+  },
+  {
+   "knee_angle": 135.0,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": 0.5
+  },
+  {
+   "knee_angle": 140.0,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": 0.5
+  },
+  {
+   "knee_angle": 143.6,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": 0.5
+  },
+  {
+   "knee_angle": 145.0,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": 0.5
+  },
+  {
+   "knee_angle": 147.0,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": 0.2928
+  },
+  {
+   "knee_angle": 148.5,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": 0.1181
+  },
+  {
+   "knee_angle": 149.0,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": 0.0592
+  },
+  {
+   "knee_angle": 149.4,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": 0.0119
+  },
+  {
+   "knee_angle": 149.5,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": -0.0
+  },
+  {
+   "knee_angle": 149.6,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": -0.0161
+  },
+  {
+   "knee_angle": 150.0,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": -0.0804
+  },
+  {
+   "knee_angle": 151.0,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": -0.2422
+  },
+  {
+   "knee_angle": 153.0,
+   "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)": -0.5691
+  }
+ ],
+ "pair": "knee link (D8-05, incl. the stop tooth) vs E member 3 (D8-04: E strap + E boss + pins)",
+ "min_clear_below_stop": 0.0119,
+ "tooth_vs_strap_at_stop": -0.0,
+ "knee_link_vs_E_strap_min_over_range": 0.0119,
+ "note": "signed clearance (mm, negative = overlap) of the built knee-side parts vs the built member-3 parts, the knee turned about pin a"
+}

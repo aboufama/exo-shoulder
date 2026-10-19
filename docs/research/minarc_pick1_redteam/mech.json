@@ -1,0 +1,912 @@
+{
+ "BDp": {
+  "config": "BDp",
+  "price": {
+   "th_cut": 108.5,
+   "dK_cut": 34.47,
+   "dK_stopB": 62.827,
+   "psiA": -57.465,
+   "a1max_nominal": 66.1587,
+   "a1max_priced": 54.7481
+  },
+  "q2_stops": [
+   99.704,
+   -23.293
+  ],
+  "th_hi": 91.32,
+  "dK_max_all_ok": 34.23,
+  "dK_max_ws_ok": 34.14,
+  "masses_g": {
+   "1": 10.9,
+   "7": 19.0,
+   "2": 17.7,
+   "3": 17.6,
+   "6": 3.0
+  },
+  "demand": {
+   "stateA": {
+    "n": 1673,
+    "any_dir_2g_Nm": 0.0286,
+    "demand_2g_fric2_Nm": 0.0403,
+    "self_motion_ratio_max": {
+     "J1": 2.71,
+     "J2": 1.43,
+     "J3": 1.46
+    },
+    "at_dK_max": 0.0
+   },
+   "forced": {
+    "n": 369,
+    "any_dir_2g_Nm": 0.0144,
+    "demand_2g_fric2_Nm": 0.0218,
+    "self_motion_ratio_max": {
+     "J1": 0.29,
+     "J2": 1.44,
+     "J3": 1.06
+    },
+    "at_dK_max": 34.23
+   },
+   "clip_frames": {
+    "n": 451,
+    "any_dir_2g_Nm": 0.0224,
+    "demand_2g_fric2_Nm": 0.0311,
+    "self_motion_ratio_max": {
+     "J1": 2.0,
+     "J2": 1.44,
+     "J3": 1.02
+    },
+    "at_dK_max": 3.34
+   },
+   "forced_dK_gt_34": {
+    "n": 0
+   }
+  },
+  "clips": {
+   "Raise overhead": {
+    "frames": 61,
+    "ok": 61,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 62.5,
+    "max_dps": {
+     "J1": 78.5,
+     "J2": 74.8,
+     "J3": 88.5,
+     "K": 0.0,
+     "pin_a": 56.9,
+     "pin_b": 64.6
+    }
+   },
+   "Drink from a cup": {
+    "frames": 60,
+    "ok": 60,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 58.4,
+    "max_dps": {
+     "J1": 50.7,
+     "J2": 46.9,
+     "J3": 33.3,
+     "K": 0.0,
+     "pin_a": 4.8,
+     "pin_b": 10.6
+    }
+   },
+   "Comb hair": {
+    "frames": 68,
+    "ok": 68,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 126.7,
+    "max_dps": {
+     "J1": 66.9,
+     "J2": 107.7,
+     "J3": 137.9,
+     "K": 0.0,
+     "pin_a": 92.1,
+     "pin_b": 99.8
+    }
+   },
+   "Reach a high shelf": {
+    "frames": 53,
+    "ok": 53,
+    "forced": 12,
+    "dK_max": 0.85,
+    "arm_max_dps": 98.0,
+    "max_dps": {
+     "J1": 51.3,
+     "J2": 67.9,
+     "J3": 114.0,
+     "K": 6.9,
+     "pin_a": 95.3,
+     "pin_b": 85.6
+    }
+   },
+   "Wash opposite shoulder": {
+    "frames": 65,
+    "ok": 65,
+    "forced": 9,
+    "dK_max": 3.34,
+    "arm_max_dps": 123.5,
+    "max_dps": {
+     "J1": 125.6,
+     "J2": 90.7,
+     "J3": 76.2,
+     "K": 28.0,
+     "pin_a": 14.9,
+     "pin_b": 31.9
+    }
+   },
+   "Reach back pocket": {
+    "frames": 49,
+    "ok": 49,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 84.2,
+    "max_dps": {
+     "J1": 65.5,
+     "J2": 101.1,
+     "J3": 74.3,
+     "K": 0.0,
+     "pin_a": 49.9,
+     "pin_b": 30.5
+    }
+   },
+   "Wave": {
+    "frames": 58,
+    "ok": 58,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 136.5,
+    "max_dps": {
+     "J1": 111.3,
+     "J2": 206.1,
+     "J3": 83.4,
+     "K": 0.0,
+     "pin_a": 59.4,
+     "pin_b": 62.8
+    }
+   },
+   "Walking arm swing": {
+    "frames": 37,
+    "ok": 37,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 51.1,
+    "max_dps": {
+     "J1": 22.6,
+     "J2": 21.6,
+     "J3": 48.1,
+     "K": 0.0,
+     "pin_a": 3.6,
+     "pin_b": 19.4
+    }
+   }
+  },
+  "clip_arm_max_dps": 136.5,
+  "swing": {
+   "stateA_edges": {
+    "n": 2010,
+    "J1_gain_max": 3.41,
+    "J1_gain_p95": 1.93,
+    "K_gain_max": 0.0,
+    "K_gain_p95": 0.0,
+    "J3_gain_max": 2.73,
+    "J1_dps_at_clip_arm_max": 465.0,
+    "J1_deg_per_frame_at_clip_arm_max": 46.5
+   },
+   "forced_edges": {
+    "n": 589,
+    "J1_gain_max": 2.55,
+    "J1_gain_p95": 2.36,
+    "K_gain_max": 2.16,
+    "K_gain_p95": 2.04,
+    "J3_gain_max": 1.86,
+    "J1_dps_at_clip_arm_max": 348.0,
+    "J1_deg_per_frame_at_clip_arm_max": 34.8
+   },
+   "worst_J1_edges": [
+    {
+     "forced": 0,
+     "J1_gain": 3.41,
+     "K_gain": 0.0,
+     "a": [
+      0.0,
+      75.0,
+      0.0
+     ],
+     "b": [
+      0.0,
+      75.0,
+      15.0
+     ]
+    },
+    {
+     "forced": 0,
+     "J1_gain": 3.22,
+     "K_gain": 0.0,
+     "a": [
+      -15.0,
+      60.0,
+      -30.0
+     ],
+     "b": [
+      -15.0,
+      75.0,
+      -30.0
+     ]
+    },
+    {
+     "forced": 0,
+     "J1_gain": 3.17,
+     "K_gain": 0.0,
+     "a": [
+      30.0,
+      90.0,
+      0.0
+     ],
+     "b": [
+      30.0,
+      90.0,
+      15.0
+     ]
+    },
+    {
+     "forced": 0,
+     "J1_gain": 2.85,
+     "K_gain": 0.0,
+     "a": [
+      15.0,
+      150.0,
+      -60.0
+     ],
+     "b": [
+      30.0,
+      150.0,
+      -60.0
+     ]
+    },
+    {
+     "forced": 0,
+     "J1_gain": 2.77,
+     "K_gain": 0.0,
+     "a": [
+      45.0,
+      90.0,
+      -30.0
+     ],
+     "b": [
+      45.0,
+      105.0,
+      -30.0
+     ]
+    }
+   ]
+  },
+  "feel": {
+   "T_joint_Nm": 0.003,
+   "r_pad_mm": 83.8,
+   "stateA": {
+    "n": 1722,
+    "cuff_force_N_max": 0.32,
+    "cuff_force_N_p95": 0.25,
+    "cuff_force_N_median": 0.15,
+    "transmission_norm_max": 5.34
+   },
+   "forced": {
+    "n": 383,
+    "cuff_force_N_max": 2.35,
+    "cuff_force_N_p95": 2.34,
+    "cuff_force_N_median": 2.24,
+    "transmission_norm_max": 3.13
+   },
+   "stop_impact": {
+    "n_boundary_poses": 24,
+    "arm_speed_dps": 136.5,
+    "energy_mJ_max": 0.308,
+    "energy_mJ_median": 0.308
+   }
+  }
+ },
+ "pick1": {
+  "config": "pick1",
+  "price": {
+   "th_cut": 118.9,
+   "dK_cut": 56.652,
+   "dK_stopB": 60.417,
+   "psiA": -55.839,
+   "a1max_nominal": 68.0047,
+   "a1max_priced": 66.4696
+  },
+  "q2_stops": [
+   97.419,
+   -15.848
+  ],
+  "th_hi": 87.97,
+  "dK_max_all_ok": 56.55,
+  "dK_max_ws_ok": 56.55,
+  "masses_g": {
+   "1": 11.1,
+   "7": 19.0,
+   "2": 16.8,
+   "3": 19.3,
+   "6": 3.0
+  },
+  "demand": {
+   "stateA": {
+    "n": 1594,
+    "any_dir_2g_Nm": 0.0364,
+    "demand_2g_fric2_Nm": 0.0478,
+    "self_motion_ratio_max": {
+     "J1": 2.6,
+     "J2": 1.38,
+     "J3": 1.47
+    },
+    "at_dK_max": 0.0
+   },
+   "forced": {
+    "n": 570,
+    "any_dir_2g_Nm": 0.0149,
+    "demand_2g_fric2_Nm": 0.0222,
+    "self_motion_ratio_max": {
+     "J1": 0.23,
+     "J2": 1.39,
+     "J3": 1.09
+    },
+    "at_dK_max": 56.55
+   },
+   "clip_frames": {
+    "n": 451,
+    "any_dir_2g_Nm": 0.0256,
+    "demand_2g_fric2_Nm": 0.0333,
+    "self_motion_ratio_max": {
+     "J1": 1.71,
+     "J2": 1.38,
+     "J3": 1.01
+    },
+    "at_dK_max": 15.82
+   },
+   "forced_dK_gt_34": {
+    "n": 127,
+    "any_dir_2g_Nm": 0.0149,
+    "demand_2g_fric2_Nm": 0.0222,
+    "self_motion_ratio_max": {
+     "J1": 0.22,
+     "J2": 1.34,
+     "J3": 1.09
+    },
+    "at_dK_max": 56.55
+   }
+  },
+  "clips": {
+   "Raise overhead": {
+    "frames": 61,
+    "ok": 61,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 62.5,
+    "max_dps": {
+     "J1": 71.2,
+     "J2": 71.0,
+     "J3": 81.3,
+     "K": 0.0,
+     "pin_a": 35.0,
+     "pin_b": 36.0
+    }
+   },
+   "Drink from a cup": {
+    "frames": 60,
+    "ok": 60,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 58.4,
+    "max_dps": {
+     "J1": 51.5,
+     "J2": 48.5,
+     "J3": 32.8,
+     "K": 0.0,
+     "pin_a": 2.7,
+     "pin_b": 6.0
+    }
+   },
+   "Comb hair": {
+    "frames": 68,
+    "ok": 68,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 126.7,
+    "max_dps": {
+     "J1": 74.6,
+     "J2": 105.5,
+     "J3": 136.8,
+     "K": 0.0,
+     "pin_a": 70.5,
+     "pin_b": 65.2
+    }
+   },
+   "Reach a high shelf": {
+    "frames": 53,
+    "ok": 53,
+    "forced": 26,
+    "dK_max": 15.82,
+    "arm_max_dps": 98.0,
+    "max_dps": {
+     "J1": 71.3,
+     "J2": 86.7,
+     "J3": 123.6,
+     "K": 52.0,
+     "pin_a": 76.0,
+     "pin_b": 66.6
+    }
+   },
+   "Wash opposite shoulder": {
+    "frames": 65,
+    "ok": 65,
+    "forced": 13,
+    "dK_max": 6.19,
+    "arm_max_dps": 123.5,
+    "max_dps": {
+     "J1": 125.7,
+     "J2": 87.8,
+     "J3": 73.6,
+     "K": 32.1,
+     "pin_a": 7.9,
+     "pin_b": 15.3
+    }
+   },
+   "Reach back pocket": {
+    "frames": 49,
+    "ok": 49,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 84.2,
+    "max_dps": {
+     "J1": 65.5,
+     "J2": 95.5,
+     "J3": 79.2,
+     "K": 0.0,
+     "pin_a": 34.3,
+     "pin_b": 21.6
+    }
+   },
+   "Wave": {
+    "frames": 58,
+    "ok": 58,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 136.5,
+    "max_dps": {
+     "J1": 122.6,
+     "J2": 218.0,
+     "J3": 93.1,
+     "K": 0.0,
+     "pin_a": 46.4,
+     "pin_b": 46.1
+    }
+   },
+   "Walking arm swing": {
+    "frames": 37,
+    "ok": 37,
+    "forced": 0,
+    "dK_max": 0.0,
+    "arm_max_dps": 51.1,
+    "max_dps": {
+     "J1": 26.4,
+     "J2": 26.2,
+     "J3": 51.1,
+     "K": 0.0,
+     "pin_a": 3.5,
+     "pin_b": 11.0
+    }
+   }
+  },
+  "clip_arm_max_dps": 136.5,
+  "swing": {
+   "stateA_edges": {
+    "n": 1902,
+    "J1_gain_max": 3.3,
+    "J1_gain_p95": 1.88,
+    "K_gain_max": 0.0,
+    "K_gain_p95": 0.0,
+    "J3_gain_max": 2.41,
+    "J1_dps_at_clip_arm_max": 451.0,
+    "J1_deg_per_frame_at_clip_arm_max": 45.1
+   },
+   "forced_edges": {
+    "n": 900,
+    "J1_gain_max": 2.29,
+    "J1_gain_p95": 1.99,
+    "K_gain_max": 2.01,
+    "K_gain_p95": 1.86,
+    "J3_gain_max": 1.66,
+    "J1_dps_at_clip_arm_max": 313.0,
+    "J1_deg_per_frame_at_clip_arm_max": 31.3
+   },
+   "worst_J1_edges": [
+    {
+     "forced": 0,
+     "J1_gain": 3.3,
+     "K_gain": 0.0,
+     "a": [
+      -15.0,
+      75.0,
+      15.0
+     ],
+     "b": [
+      -15.0,
+      75.0,
+      30.0
+     ]
+    },
+    {
+     "forced": 0,
+     "J1_gain": 3.08,
+     "K_gain": 0.0,
+     "a": [
+      45.0,
+      165.0,
+      -45.0
+     ],
+     "b": [
+      45.0,
+      165.0,
+      -30.0
+     ]
+    },
+    {
+     "forced": 0,
+     "J1_gain": 2.93,
+     "K_gain": 0.0,
+     "a": [
+      0.0,
+      90.0,
+      15.0
+     ],
+     "b": [
+      0.0,
+      90.0,
+      30.0
+     ]
+    },
+    {
+     "forced": 0,
+     "J1_gain": 2.89,
+     "K_gain": 0.0,
+     "a": [
+      45.0,
+      165.0,
+      -30.0
+     ],
+     "b": [
+      60.0,
+      165.0,
+      -30.0
+     ]
+    },
+    {
+     "forced": 0,
+     "J1_gain": 2.87,
+     "K_gain": 0.0,
+     "a": [
+      15.0,
+      75.0,
+      0.0
+     ],
+     "b": [
+      15.0,
+      75.0,
+      15.0
+     ]
+    }
+   ]
+  },
+  "feel": {
+   "T_joint_Nm": 0.003,
+   "r_pad_mm": 95.0,
+   "stateA": {
+    "n": 1636,
+    "cuff_force_N_max": 0.24,
+    "cuff_force_N_p95": 0.2,
+    "cuff_force_N_median": 0.13,
+    "transmission_norm_max": 4.66
+   },
+   "forced": {
+    "n": 581,
+    "cuff_force_N_max": 1.99,
+    "cuff_force_N_p95": 1.92,
+    "cuff_force_N_median": 1.81,
+    "transmission_norm_max": 2.9
+   },
+   "stop_impact": {
+    "n_boundary_poses": 15,
+    "arm_speed_dps": 136.5,
+    "energy_mJ_max": 0.242,
+    "energy_mJ_median": 0.23
+   }
+  }
+ },
+ "strip": {
+  "t_b_mm": [
+   0.3,
+   5.0
+  ],
+  "EI_Nm2": 0.002171,
+  "limits_MPa": {
+   "+C1700 0.7-0.8 Rm": [
+    1190,
+    1360
+   ],
+   "+C1900 0.7-0.8 Rm": [
+    1330,
+    1520
+   ]
+  },
+  "table": [
+   {
+    "rate": 0.005,
+    "preload": 0.06,
+    "L_mm": 434.0,
+    "turns_preload": 1.91,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.063,
+     "sigma_MPa": 840.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.0649,
+     "sigma_MPa": 866.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.0649,
+     "sigma_MPa": 866.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.0653,
+     "sigma_MPa": 870.0
+    }
+   },
+   {
+    "rate": 0.005,
+    "preload": 0.08,
+    "L_mm": 434.0,
+    "turns_preload": 2.55,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.083,
+     "sigma_MPa": 1107.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.0849,
+     "sigma_MPa": 1132.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.0849,
+     "sigma_MPa": 1133.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.0853,
+     "sigma_MPa": 1137.0
+    }
+   },
+   {
+    "rate": 0.0075,
+    "preload": 0.06,
+    "L_mm": 290.0,
+    "turns_preload": 1.27,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.0645,
+     "sigma_MPa": 860.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.0674,
+     "sigma_MPa": 899.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.0674,
+     "sigma_MPa": 899.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.0679,
+     "sigma_MPa": 905.0
+    }
+   },
+   {
+    "rate": 0.0075,
+    "preload": 0.08,
+    "L_mm": 290.0,
+    "turns_preload": 1.7,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.0845,
+     "sigma_MPa": 1127.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.0874,
+     "sigma_MPa": 1165.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.0874,
+     "sigma_MPa": 1166.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.0879,
+     "sigma_MPa": 1172.0
+    }
+   },
+   {
+    "rate": 0.01,
+    "preload": 0.06,
+    "L_mm": 217.0,
+    "turns_preload": 0.95,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.066,
+     "sigma_MPa": 880.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.0699,
+     "sigma_MPa": 932.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.0699,
+     "sigma_MPa": 932.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.0705,
+     "sigma_MPa": 941.0
+    }
+   },
+   {
+    "rate": 0.01,
+    "preload": 0.08,
+    "L_mm": 217.0,
+    "turns_preload": 1.27,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.086,
+     "sigma_MPa": 1147.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.0899,
+     "sigma_MPa": 1198.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.0899,
+     "sigma_MPa": 1198.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.0905,
+     "sigma_MPa": 1207.0
+    }
+   },
+   {
+    "rate": 0.015,
+    "preload": 0.06,
+    "L_mm": 145.0,
+    "turns_preload": 0.64,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.069,
+     "sigma_MPa": 920.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.0748,
+     "sigma_MPa": 997.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.0748,
+     "sigma_MPa": 998.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.0758,
+     "sigma_MPa": 1011.0
+    }
+   },
+   {
+    "rate": 0.015,
+    "preload": 0.08,
+    "L_mm": 145.0,
+    "turns_preload": 0.85,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.089,
+     "sigma_MPa": 1187.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.0948,
+     "sigma_MPa": 1264.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.0948,
+     "sigma_MPa": 1264.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.0958,
+     "sigma_MPa": 1278.0
+    }
+   },
+   {
+    "rate": 0.02,
+    "preload": 0.06,
+    "L_mm": 109.0,
+    "turns_preload": 0.48,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.072,
+     "sigma_MPa": 960.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.0797,
+     "sigma_MPa": 1063.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.0798,
+     "sigma_MPa": 1064.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.0811,
+     "sigma_MPa": 1081.0
+    }
+   },
+   {
+    "rate": 0.02,
+    "preload": 0.08,
+    "L_mm": 109.0,
+    "turns_preload": 0.64,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.092,
+     "sigma_MPa": 1227.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.0997,
+     "sigma_MPa": 1330.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.0998,
+     "sigma_MPa": 1330.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.1011,
+     "sigma_MPa": 1348.0
+    }
+   },
+   {
+    "rate": 0.03,
+    "preload": 0.06,
+    "L_mm": 72.0,
+    "turns_preload": 0.32,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.078,
+     "sigma_MPa": 1041.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.0896,
+     "sigma_MPa": 1195.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.0897,
+     "sigma_MPa": 1195.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.0916,
+     "sigma_MPa": 1222.0
+    }
+   },
+   {
+    "rate": 0.03,
+    "preload": 0.08,
+    "L_mm": 72.0,
+    "turns_preload": 0.42,
+    "BDp stop B 34.47": {
+     "M_Nm": 0.098,
+     "sigma_MPa": 1307.0
+    },
+    "pick1 max 56.55": {
+     "M_Nm": 0.1096,
+     "sigma_MPa": 1461.0
+    },
+    "pick1 stop B 56.65": {
+     "M_Nm": 0.1097,
+     "sigma_MPa": 1462.0
+    },
+    "pick1 as-designed stop B 60.42": {
+     "M_Nm": 0.1116,
+     "sigma_MPa": 1488.0
+    }
+   }
+  ],
+  "annulus_O16_O5_mm2": 181.4
+ }
+}

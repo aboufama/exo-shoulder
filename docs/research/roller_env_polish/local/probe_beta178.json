@@ -1,0 +1,7 @@
+{
+ "params": {
+  "ang_min": 26.8823,
+  "beta": -178.0
+ },
+ "note": "PA-margin probe from the in-sample flank scan (flank_scan_pa42_fit60.json): beta -173.46 -> -178, everything else the verified config, knee window 26.88; NOT a polish pick"
+}

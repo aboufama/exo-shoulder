@@ -1,0 +1,480 @@
+{
+ "id": "lowarm-halfring-knuckle-3r",
+ "name": "Half-ring desmo knuckle: stage 1's dwell outer wall cut to an 18.9-deg lip, a crank stop pad on link 1b, the crank's free span in link 1b's layer (link-2 root lift as cell B)",
+ "lens": "round14:knuckle-o20-overhead",
+ "family": "slaved-knuckle 3R with an unsensed pin knee",
+ "active_dof": 3,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-18T01:40:26Z",
+ "reach": 0.7278,
+ "follow": 1.0,
+ "inband14": 0.9006,
+ "inband10": 0.5715,
+ "contact": 0.0106,
+ "gap": 18.28,
+ "v_reach": 0.725,
+ "v_follow": 1.0,
+ "v_inband14": 0.9021,
+ "v_inband10": 0.5737,
+ "v_gap": 18.83,
+ "n_configs": 908,
+ "complexity": 16.5,
+ "best_params": "{\"stage2\": \"B\", \"r_c\": 16.176, \"beta\": -177.169, \"nose_r2\": 0.75, \"wall2\": 0.9, \"boss_r\": 2.5, \"glev\": -1.0, \"blend\": 10.0, \"kslot\": 46.0, \"a_s\": 9.2, \"psi\": 149.5, \"mu\": 0.15, \"owd_margin\": 2.0, \"zr\": 2.0}",
+ "cells": {
+  "A": {
+   "frozen_exact": 18.28,
+   "reach": 0.7278,
+   "inband14": 0.9006,
+   "inband10": 0.5715,
+   "contact": 0.0106,
+   "held": 22.64,
+   "held_src": "proposer, same code path"
+  },
+  "B": {
+   "frozen_exact": 17.96,
+   "reach": 0.7306,
+   "inband14": 0.8978,
+   "inband10": 0.5682,
+   "contact": 0.008,
+   "held": 22.7,
+   "held_reach": 0.6912,
+   "held_inband14": 0.8967,
+   "held_contact": 0.0149,
+   "pose316_clear_mm": 0.048,
+   "overhead_taken": "9/28",
+   "near1": 20.14,
+   "near2": 34.84,
+   "ws_inband_e90_140": 0.8283,
+   "params": {
+    "stage2": "B",
+    "r_c": 16.176,
+    "beta": -177.169,
+    "nose_r2": 0.75,
+    "wall2": 0.9,
+    "boss_r": 2.5,
+    "glev": -1.0,
+    "blend": 10.0,
+    "kslot": 46.0,
+    "a_s": 9.2,
+    "psi": 149.5,
+    "mu": 0.15,
+    "owd_margin": 2.0,
+    "zr": 2.0,
+    "l2_lift": 1.5,
+    "l2_rfull": 14.0,
+    "l2_len": 9.836
+   },
+   "note": "verified 2026-10-18 ~02:20 at 17.96 and ledgered GAMED (P1, in-sample graze at pose 316); moved out of the headline by the 07:40 re-verification, which verifies cell A (the re-issued screen claim). Auditor (tools/alignment_lowarm_s1level.py, 07:29): at the plate-clearing stage-1 level F+3.9, pin 9.8/150, cell B reads 18.39."
+  },
+  "B_robust": {
+   "frozen_exact": 18.41,
+   "l2_lift": 1.75,
+   "l2_rfull": 24.0,
+   "l2_len": 12.604,
+   "pose316_clear_mm": 0.299,
+   "inband14": 0.8933
+  }
+ },
+ "dwell_hold": {
+  "K_play_nominal": 0.638,
+  "K_play_tight": 0.292,
+  "gate": 0.25,
+  "pad_lever_mm": 12.29,
+  "K_deg_per_mm_at_pin": 17.58,
+  "ok": false,
+  "parts": {
+   "runout": 0.176,
+   "conc": 0.088,
+   "pad_lap": 0.335,
+   "slot": 0.04
+  }
+ },
+ "verdict": "VERIFIED at v_gap 18.83 (score 93.15), cell A with its hard pad at the true lever (reproduction without the play 18.28, a bench tie with the lead on identical poses). NOT a lead and not a tie: held out 22.64 vs the lead 22.38 (paired +0.26, P(better) 0.005); the hard pad sits at a 6.75 mm lever, its dwell play (0.912 deg, 3.6x the 0.25 gate) puts pose 203 into the skin; the stage-1 layer inside link 1b's J2 plate costs +0.37 more (19.05 with both). Cell B stays GAMED (P1). NO NEW LEAD. Cell B (link-2 root lift h 1.5 on an R15-inner S-bend) reads 17.96 frozen exact Bench(110,360) (score 93.47) vs the lead's 18.28, but pose 316 clears by 0.048 mm: no root lift reaches the pre-registered 0.2 mm (727 configs; the skin lies parallel under ~18 mm of link 2), the robust clear costs in-band 1:1 (18.41), and held out does not transfer (22.70 vs cell A 22.64). Cell A ties the lead (18.28, same 262 takes / 4 contacts) at cx 16.5, but the dwell hold over the two-body stack is 0.638 deg vs the 0.25 gate (0.292 at tight tolerances): it stands only with a preloaded pad (drag unmeasured).",
+ "limiter": "(1) dwell hold: 17.6 deg of K per mm at the stage-1 pin and a pad lever <= 12.3 mm (the only link-1b metal under the crank arm) -> 0.638 deg K play; (2) pose 316: link 2's bar 0.05-0.37 mm over the skin for r_u2 15-34 mm; (3) the fold, unchanged: 88 bench poses lost (stretched 73 / folded 15).",
+ "note": "Frozen protocol (fit Bench(60,160) fast -> frozen -> Bench(110,360) exact), local niced, farm closed. Sweeps (908, in order, stage+bench tagged): 114 Bench(60,160) LHS over the full box - flat (reach 0.7688, contact 0, near-touch objective 19.45 everywhere; plain 13.12-13.59, best = cell A's point); 727 + 67 frozen-exact surrogate configs (link 2's distance segment replaced per pose, Bench.report re-run; reproduces the full model to 0.00). Convergence gate (score pts): fast 0.000/0.000/0.007; frozen scan 0.000/0.000/0.007; extended 0.000/0.000/0.022. Stage-1 built PA at mu 0.17 over 9 corners: pin first fail >= 52.89, cap >= 59.99 (gate 47.27). rc_min 1.0 / ridge 0.243 carried. Bench T5 contact depth: B 14.92 mm over 3 poses (205 hub 2 -4.28, 237 crank -9.47, 264 hub K -1.17); A 16.15 over 4. Not run here (verifier's): blended-IK wear, th margin with K play, connected() flood, alignment_paired dumps, S6, paired held at the lead's K-play rule. | VERIFIED 2026-10-18 ~02:20 UTC by an independent skeptic: v_gap 17.96 (score 93.47) frozen exact Bench(110,360) reproduced (263/360, ib14 0.8978, 3 contacts, overhead 9/28; dump recomputes 17.97); champion 75.94 on the same bench (risley-turret verifier checks; 66.97 via the offset-skin-normal verifier). Added checks pass: own gates (desmo_fail empty), plate-vs-horn solids >= 0.15, th min 5.181 (dwell 5.389), th with the claim's own dwell K play 0.638 (+0.23 forced): min 5.088, 0 poses dropped; flood connected_full 17.96 (kNN 19.64). NOT a lead change: paired vs the lead -0.32 is ONE pose (316 at 0.048 mm, CI90 [-1.55, +0.42]) selected by a 727-config scan on the claim bench itself; held out reproduces 22.70 and is 0.32 WORSE than the lead paired (P(better) 0.26; pooled +0.13); the hard-pad build fails the claim's own 0.25-deg dwell gate (0.638); near-touch pose 139 (0.072 mm) under the 3x larger dwell play is unmeasured; the stop pad is unsampled metal. | RED TEAM (re-issued screen, 2026-10-18 ~06:10 UTC): M5 - the hard pad's dwell K play worn as metal (K law +-0.638 on every dwell pose, chain re-solved): score moves -0.11..+0.10 only (A 18.28-18.32, B 17.85-18.06), 0 takes changed, but pose 203 (abduction 90 / ext rot 45, dwell) closes from 0.263 mm (crown / edge) to 0.008 mm at +0.638 (0.146 at the tight 0.292): a dwell hold on this chain needs one-sided play <= ~0.29 deg; 3 of the 4 shared contacts (205/237/264) are dwell poses whose depth moves +-0.4-0.8 mm with the play. M3 - lifted link 2 vs the crank >= 9.16 mm over 373 taken poses: clear. | RE-VERIFIED (cell A, the re-issued screen claim) 2026-10-18 ~07:40 UTC by an independent skeptic: frozen exact Bench(110,360) cell A reproduces 18.28 (262/360, ib14 0.9006, 4 contacts, T5 16.15 mm; dump 18.29), held 22.64 (reproduced; paired vs the lead +0.26 WORSE held, 0.00 bench with 0 discordant poses, pooled +0.17, P(better) 0.001). Corrected v_gap 18.83: the claim's pad-seat test is lenient; the crank arm is truly over link 1b only out to a 6.75 mm lever (not 12.29), so the claim's own formula gives a 0.912-deg dwell K play (gate 0.25); worn as metal at +0.912 on every dwell pose, pose 203 (abduction 90 / external rotation 45) goes to -0.10 mm: contact 5, reach 261/360, gap 18.83 (-0.912 side 18.35). Auditor's family finding (stage 1 inside link 1b's J2 lower plate) costs a further +0.37 (18.65 at the plate-clearing level F+3.9, pin 9.8/150); both together 19.05. Champion on the same bench and checks: 75.94 (risley-turret verifier checks). Not refuted; not a lead and not a tie: behind the lead on held and, as built, on bench.",
+ "doc": "docs/concepts/lowarm-halfring-knuckle-3r.md",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 4,
+  "moving_bodies": 5,
+  "joints": 8,
+  "closed_loops": 3,
+  "sensed_passive": 0,
+  "custom_parts": 13,
+  "sliding_pairs": 2,
+  "rolling_pairs": 0,
+  "springs_or_flexures": 0,
+  "catalogue_parts": 14,
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1,
+   "rule_loop": "simplicity v2.1 (2026-10-17): the knee's closure loop is free, as on roller-longdyad / groove-desmo / sidecar-*; added by the lead 2026-10-17 14:25 UTC after the alignment audit's NEW-stale-complexity-ruler (this row charged it, the lead's record did not)"
+  },
+  "notes": "desmo-slipper-knuckle-3r's record (spring-free, roller-free K drive: stage 1 crowned O1.5 440C pin in a hub-2 cap-ring groove, sliding pair 1; stage 2 two-walled slot, sliding pair 2) with stage 2 INVERTED (cell B): the O1.5 440C dowel is pressed in a boss machined on link 1a's hub-K member (was on the crank), the 1.52 x 3.7 slot is wire-EDM'd in the crank's long-arm tip (integral tip plate, was a slot in link 1a's lug) - no body, joint, loop or sliding pair added or removed. +1 catalogue part: conecut's ISO 8734 2 m6 440C J3 stop dowel (hub 3 lower plate). +1 made part: the pressed 440C ring insert for the stage-1 groove (default: onset ridge 0.25 mm, ~1.5 GPa line-contact Hertz at 25 N > Ti-6Al-4V p0 ~1.4-1.5 GPa). Knee pins MR63ZZ pairs (conecut / build rule), outside the count.",
+  "source": "desmo-conecut-knuckle-3r screen 2026-10-17",
+  "confidence": "medium"
+ },
+ "mechanism_note": "desmo-conecut's record (the half ring deletes metal, the pad is integral to link 1b: 0 parts); simplicity v2.2 16.5",
+ "champion_same_bench": 75.94,
+ "verification": {
+  "t": "2026-10-18T02:20:00Z",
+  "harness": "docs/concepts/verify/lowarm-halfring-knuckle-3r.py",
+  "bench": {
+   "gap": 17.96,
+   "reach": 0.7306,
+   "follow": 1.0,
+   "inband14": 0.8978,
+   "inband10": 0.5682,
+   "contact": 0.008,
+   "taken_ws": "263/360",
+   "overhead": "9/28",
+   "why": {
+    "fold": 88,
+    "contact": 3,
+    "parts": 0,
+    "closure": 0,
+    "flip": 0
+   },
+   "near1": 20.14,
+   "near2": 34.84,
+   "min_metal_mm": 0.048,
+   "dump": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_bench_perpose.json",
+   "dump_recomputed": 17.97
+  },
+  "v1_own_gates": {
+   "desmo_fail": [],
+   "dK_lim": 46.0,
+   "dK_taken_max": 45.62,
+   "slot_slop": 0.04,
+   "crank_free_deg": 0.18,
+   "crank_free_worst_tol": 0.27
+  },
+  "dwell_hold_gate": {
+   "K_play": 0.638,
+   "gate": 0.25,
+   "ok": false,
+   "note": "the claim's own gate, re-read in the worn fit model"
+  },
+  "v2_plate_horn": {
+   "min_radial_gap_mm": 0.15,
+   "below_running_gap": 0
+  },
+  "v3_th_margin": {
+   "min": 5.181,
+   "dwell_min": 5.389,
+   "lt5": 0
+  },
+  "v4_th_with_K_play": {
+   "nominal": {
+    "play_dwell": 0.638,
+    "play_forced": 0.23,
+    "min": 5.088,
+    "dropped": 0,
+    "gap": 17.96
+   },
+   "tight": {
+    "dropped": 0,
+    "gap": 17.96
+   }
+  },
+  "flood": {
+   "connected_full": 17.96,
+   "knn": 19.64,
+   "bench_only": 49.98
+  },
+  "paired_vs_lead_bench": {
+   "diff": -0.32,
+   "discordant": "316 only (lead contact, here taken at 0.048 mm)",
+   "ci90": [
+    -1.55,
+    0.42
+   ],
+   "p_better": 0.641
+  },
+  "champion_same_bench": 75.94,
+  "held": {
+   "gap": 22.7,
+   "reach": 0.6912,
+   "follow": 1.0,
+   "inband14": 0.8967,
+   "inband10": 0.5672,
+   "contact": 0.0149,
+   "contact_poses": 13,
+   "overhead": "19/71",
+   "th_min": 5.11,
+   "th_with_play_min": 5.017,
+   "dropped": 0,
+   "flood_full": 22.7,
+   "flood_knn": 30.93,
+   "dump": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_held_perpose.json"
+  },
+  "paired_vs_lead_held": {
+   "diff": 0.32,
+   "ci90": [
+    -0.34,
+    0.68
+   ],
+   "p_better": 0.261,
+   "pooled_diff": 0.13,
+   "pooled_p_better": 0.416,
+   "file": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json"
+  }
+ },
+ "redteam_2026_10_18_reissue": {
+  "t": "2026-10-18T06:10:00Z",
+  "why": "screen step re-issued after a container restart; row already screened / verified / ledgered GAMED (P1), so no re-sweep: the auditor's open M5 and M3 were measured on the same frozen shape (frozen exact Bench(110,360), local niced)",
+  "m5_dwell_play_as_metal": {
+   "method": "K = law + delta on every dwell pose (dK = 0), J1/J2/J3 re-solved for the same arm (self-check 4e-10 deg); forced poses keep the law (parent groove play, shared with the lead)",
+   "cellA": {
+    "0": 18.28,
+    "+0.292": 18.28,
+    "+0.638": 18.28,
+    "-0.638": 18.32
+   },
+   "cellB": {
+    "0": 17.96,
+    "+0.638": 17.85,
+    "-0.638": 18.06
+   },
+   "takes_changed": 0,
+   "fold_losses_added": 0,
+   "dwell_poses_moved": "180-185",
+   "surface_shift_mm": [
+    -0.521,
+    0.412
+   ],
+   "p95_abs_shift_mm": 0.2,
+   "contacts_dwell": {
+    "p205": [
+     -3.9,
+     -4.66
+    ],
+    "p237": [
+     -9.4,
+     -9.99
+    ],
+    "p264": [
+     -0.76,
+     -1.58
+    ]
+   },
+   "contact_316": "forced (unchanged)",
+   "T5_depth_cellA": {
+    "0": 16.15,
+    "+0.292": 16.07,
+    "+0.638": 16.18,
+    "-0.638": 16.7
+   },
+   "pose203": {
+    "pose": "plane 0 / elev 90 / axial +45 (dwell)",
+    "crown_edge_mm": {
+     "0": 0.263,
+     "+0.292": 0.146,
+     "+0.638": 0.008,
+     "-0.638": 0.517
+    },
+    "surface_mm": {
+     "0": 0.716,
+     "+0.292": 0.599,
+     "+0.638": 0.46,
+     "-0.638": 0.973
+    },
+    "slope_mm_per_deg": -0.4
+   },
+   "poses_139_316": "forced: not moved by the dwell play",
+   "th_rows_note": "verifier th_margin reads 0.0 under play at 283/311/338 = the K sub-dyad (b1, c) margin (ledger G4) once dK != 0; J1-J3 dyad margin >= 5, no pose dropped",
+   "gate": "one-sided residual dwell K play <= ~0.29 deg keeps pose 203 >= 0.15 mm; the hard pad (0.638) puts it at 0.008 mm"
+  },
+  "m3_lifted_link2_vs_crank": {
+   "l2_check_reproduced": 12.32,
+   "link2_vs_all_crank_min_mm": 9.157,
+   "p5": 14.518,
+   "link2_vs_L1b_min_mm": 9.056,
+   "n_taken": 373,
+   "at_pose": 229,
+   "verdict": "clear"
+  },
+  "correction": "the screen's red-team list gave pose 203 at 0.72 mm (surface sample); its crown / edge sample is 0.26 mm",
+  "data": "docs/concepts/verify/lowarm-halfring-knuckle-3r_redteam_kplay_metal.json",
+  "scripts": [
+   "docs/concepts/models/lowarm-halfring-knuckle-3r-kplay.py",
+   "docs/concepts/models/lowarm-halfring-knuckle-3r-m3.py"
+  ]
+ },
+ "verification_cellA": {
+  "t": "2026-10-18T07:40:00Z",
+  "harness": "docs/concepts/verify/lowarm-halfring-knuckle-3r.py --cell A (frozen exact, linear IK as claimed, --flood, per-pose dumps); docs/concepts/verify/lowarm-halfring-knuckle-3r_padcheck.py; docs/concepts/models/lowarm-halfring-knuckle-3r-kplay.py",
+  "reproduced": {
+   "gap": 18.28,
+   "reach": 0.7278,
+   "ws_taken": "262/360",
+   "follow": 1.0,
+   "inband14": 0.9006,
+   "inband10": 0.5715,
+   "contact": 0.0106,
+   "contacts": {
+    "205": "hub 2 -4.28",
+    "237": "crank -9.47",
+    "264": "hub K -1.17",
+    "316": "link 2 -1.23"
+   },
+   "T5_depth_mm": 16.15,
+   "overhead": "8/28",
+   "why": {
+    "fold": 88,
+    "contact": 4,
+    "parts": 0,
+    "closure": 0,
+    "flip": 0
+   },
+   "near1": 19.92,
+   "near2": 34.84,
+   "min_metal_mm": 0.072,
+   "min_metal_pose": 139,
+   "v1_gates": {
+    "desmo_fail": [],
+    "dK_lim": 46.0,
+    "dK_taken_max": 45.62
+   },
+   "v2_plate_horn_min": 0.15,
+   "v3_th_min": 5.181,
+   "v3_dwell_min": 5.389,
+   "v4_th_with_play_min": 5.088,
+   "v4_dropped": 0,
+   "flood": {
+    "connected_full": 18.28,
+    "knn": 19.97,
+    "bench_only": 50.13
+   },
+   "dump": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_bench_perpose.json",
+   "dump_recomputed": 18.29,
+   "data": "docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_bench_frozen.json"
+  },
+  "held": {
+   "gap": 22.64,
+   "reach": 0.6901,
+   "ws_taken": "657/952",
+   "follow": 1.0,
+   "inband14": 0.8995,
+   "inband10": 0.5706,
+   "contact": 0.016,
+   "contact_poses": 14,
+   "T5_depth_mm": 43.85,
+   "overhead": "18/71",
+   "th_min": 5.11,
+   "th_with_play_min": 5.017,
+   "dropped": 0,
+   "flood": {
+    "connected_full": 22.64,
+    "knn": 30.78
+   },
+   "dump": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_held_perpose.json",
+   "data": "docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_held_frozen.json"
+  },
+  "paired_vs_lead": {
+   "bench": {
+    "diff": 0.0,
+    "discordant": 0,
+    "p_better": 0.026,
+    "ci90": [
+     0.0,
+     0.14
+    ]
+   },
+   "held": {
+    "diff": 0.26,
+    "discordant": "2 ws poses taken by the lead only (reach)",
+    "p_better": 0.005,
+    "ci90": [
+     0.0,
+     0.53
+    ]
+   },
+   "pooled": {
+    "diff": 0.17,
+    "p_better": 0.001
+   },
+   "file": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json (now cell A; the cell-B version is in git history)"
+  },
+  "paired_vs_desmo_conecut_bench": {
+   "diff": -0.76,
+   "split": "in-band only (the half ring)"
+  },
+  "pad_true_lever": {
+   "claim_lever_mm": 12.29,
+   "true_lever_mm": 6.75,
+   "crank_samples_truly_over_L1b": "25/133",
+   "claim_test": "arm point within W_LINK/2 + 1 = 5 mm of ANY link-1b sample counts as over (link 1b is sampled across its 8 mm width, so points up to ~5 mm beside its edge pass)",
+   "pad_lap_K": {
+    "claim": 0.335,
+    "true": 0.609
+   },
+   "dwell_K_play": {
+    "claim": 0.638,
+    "true": 0.912,
+    "gate": 0.25
+   },
+   "pad_block_metal": {
+    "footprint_over_L1b": true,
+    "min_L2_mm": 18.46,
+    "min_L1a_mm": 5.37,
+    "min_crank_forced_mm": 0.479,
+    "hub_axis_r_min_mm": {
+     "hub1": 25.01,
+     "hubK": 15.01,
+     "hub2": 20.13,
+     "hub3": 58.88
+    },
+    "verdict": "clear: on link 1b top face, no skin-facing metal"
+   }
+  },
+  "play_as_metal_true_lever": {
+   "+0.912": {
+    "gap": 18.83,
+    "reach": 0.725,
+    "ws_taken": "261/360",
+    "inband14": 0.9021,
+    "inband10": 0.5737,
+    "contact": 0.0133,
+    "contacts": 5,
+    "pose203_mm": -0.102,
+    "p205": -4.82,
+    "p237": -9.5,
+    "p264": -0.58,
+    "near1": 20.46
+   },
+   "-0.912": {
+    "gap": 18.35,
+    "reach": 0.7278,
+    "inband14": 0.8994,
+    "contact": 0.0106,
+    "contacts": 4,
+    "pose203_mm": 1.083,
+    "p205": -3.73,
+    "p237": -10.22,
+    "p264": -1.75,
+    "near1": 19.98
+   }
+  },
+  "stage1_layer_auditor": {
+   "finding": "stage 1 groove + pin band at F+0.11..1.61 over hub 2 face, inside link 1b J2 lower plate F+0..3.0 (tools/alignment_lowarm_s1level.py geom, docs/alignment/remeasure/lowarm-halfring-knuckle-3r_s1level_geom_fast.json); the model does not check it",
+   "plate_clearing_F39_pin9p8_150": 18.65,
+   "source": "docs/alignment/remeasure/lowarm-halfring-knuckle-3r_s1level3p9_A_bench.json (auditor run, reproduced here as the control 18.65)",
+   "with_true_play_plus0p912": 19.05
+  },
+  "v_gap_rule": "v_* = the claimed config (cell A) with the claimed hardware (integral hard pad on link 1b) at its true lever, worst side of the resulting 0.912-deg dwell play worn as metal: 18.83 (pose 203 becomes a contact at -0.10 mm). Reproduction without the play 18.28; buildable stage-1 level + play 19.05.",
+  "data": "docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_padplay.json"
+ }
+}

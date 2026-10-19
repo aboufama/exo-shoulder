@@ -1,0 +1,75 @@
+<title>Shoulder Exo Drawings</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a drawing register - one row of sheet thumbnails per set, a full-size viewer on click. */
+:root { --bg: #f4f5f6; --card: #ffffff; --ink: #15191e; --ink2: #5a636e; --rule: #d9dde2; --accent: #c4661a;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #121519; --card: #1b2026; --ink: #e8ebef; --ink2: #9aa4b0; --rule: #2d343d; --accent: #ec8b45; color-scheme: dark } }
+:root[data-theme="dark"] { --bg: #121519; --card: #1b2026; --ink: #e8ebef; --ink2: #9aa4b0; --rule: #2d343d; --accent: #ec8b45; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--f-body) }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 56px; display: grid; gap: 34px }
+h1 { font: 600 28px/1.15 var(--f-body); margin: 0 }
+.lede { margin: 6px 0 0; color: var(--ink2); max-width: 72ch }
+section { display: grid; gap: 12px }
+h2 { font: 600 19px/1.2 var(--f-body); margin: 0 }
+.sub { margin: 0; color: var(--ink2); font-size: 14px }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 14px }
+.sheet { background: var(--card); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; cursor: zoom-in; display: grid; text-align: left; padding: 0; color: inherit; font: inherit }
+.sheet:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+.sheet img { display: block; width: 100%; aspect-ratio: 420 / 297; object-fit: contain; background: #fff; border-bottom: 1px solid var(--rule) }
+.sheet span { padding: 8px 11px 10px; font-size: 13.5px; display: flex; gap: 8px; align-items: baseline }
+.sheet b { font: 500 12px var(--f-mono); color: var(--accent); white-space: nowrap }
+#v { position: fixed; inset: 0; z-index: 20; background: #0d1014; display: grid; grid-template-rows: auto 1fr }
+#v[hidden] { display: none }
+#v .bar { display: flex; gap: 8px; align-items: center; padding: max(10px, env(safe-area-inset-top, 0px)) max(14px, env(safe-area-inset-right, 0px)) 10px max(14px, env(safe-area-inset-left, 0px)); color: #e8ebef; font-size: 14px }
+#v .bar .t { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+#v button { font: 600 13px var(--f-body); color: #e8ebef; background: #232a33; border: 1px solid #3a434e; border-radius: 6px; padding: 6px 11px; cursor: pointer }
+#v button:focus-visible { outline: 2px solid #ec8b45 }
+#v .pane { overflow: auto; display: grid; place-items: center; padding: 0 max(10px, env(safe-area-inset-right, 0px)) max(10px, env(safe-area-inset-bottom, 0px)) max(10px, env(safe-area-inset-left, 0px)) }
+#v img { background: #fff; display: block }
+#v.fit img { max-width: 100%; max-height: calc(100vh - 70px); width: auto; height: auto }
+#v:not(.fit) .pane { place-items: start }
+#v:not(.fit) img { width: 2480px; max-width: none }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Shoulder Exo Drawings</h1>
+    <p class="lede">A3 sheets, third-angle projection, mm, generated from the STEP files of the built CAD. Each part sheet gives the end positions, the angles between the axes and the stack along each end's axis, all measured from one datum. The PDFs are sent in the chat.</p>
+  </header>
+  <div id="sets"></div>
+</div>
+
+<div id="v" hidden role="dialog" aria-modal="true" aria-label="Drawing sheet">
+  <div class="bar"><span class="t" id="vt"></span>
+    <button type="button" id="prev" aria-label="Previous sheet">←</button><button type="button" id="next" aria-label="Next sheet">→</button>
+    <button type="button" id="zoom">100 %</button><button type="button" id="close">Close</button></div>
+  <div class="pane"><img id="vi" alt=""></div>
+</div>
+
+<script>
+const SETS = %%DATA%%;
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const all = [];
+document.getElementById('sets').innerHTML = SETS.map((st) => `<section><div><h2>${esc(st.title)}</h2><p class="sub">${esc(st.sub)} ${st.sheets.length} sheets.</p></div><div class="grid">${
+  st.sheets.map((s) => { all.push({ ...s, set: st.key }); const i = all.length - 1;
+    return `<button type="button" class="sheet" data-i="${i}"><img src="${esc(s.src)}" alt="${esc(s.t)}" loading="lazy"><span><b>${st.key}-${String(s.n).padStart(2, '0')}</b>${esc(s.t)}</span></button>`; }).join('')
+}</div></section>`).join('');
+const v = document.getElementById('v'), vi = document.getElementById('vi'), vt = document.getElementById('vt'), zb = document.getElementById('zoom');
+let cur = 0;
+function show(i) { cur = (i + all.length) % all.length; const s = all[cur]; vi.src = s.src; vi.alt = s.t; vt.textContent = `${s.set}-${String(s.n).padStart(2, '0')} · ${s.t}`; }
+function open(i) { show(i); v.classList.add('fit'); zb.textContent = '100 %'; v.hidden = false; }
+document.getElementById('sets').addEventListener('click', (e) => { const b = e.target.closest('.sheet'); if (b) open(+b.dataset.i); });
+document.getElementById('prev').onclick = () => show(cur - 1);
+document.getElementById('next').onclick = () => show(cur + 1);
+document.getElementById('close').onclick = () => { v.hidden = true; };
+zb.onclick = () => { const fit = v.classList.toggle('fit'); zb.textContent = fit ? '100 %' : 'Fit'; };
+document.addEventListener('keydown', (e) => {
+  if (v.hidden) return;
+  if (e.key === 'Escape') v.hidden = true; else if (e.key === 'ArrowRight') show(cur + 1); else if (e.key === 'ArrowLeft') show(cur - 1);
+});
+</script>

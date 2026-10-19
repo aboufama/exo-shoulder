@@ -1,0 +1,439 @@
+{
+ "id": "sidecar-parallelogram-knuckle-3r",
+ "name": "Sidecar parallelogram K drive on the lead chain: hub-2 lobe -> bell crank on link 1b -> strap-level O3 rod on two M2 ball links -> lateral horn of link 1a slaves K (lead dyad unchanged, horn socket floor r_h 15.5)",
+ "lens": "round8:strap-level-drive",
+ "family": "slaved knuckle (frontload rod-drive line), strap-level drive",
+ "active_dof": 3,
+ "passive_dof": 6,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-16T19:59:40Z",
+ "reach": 0.7937,
+ "follow": 1.0,
+ "inband14": 0.9049,
+ "inband10": 0.5198,
+ "contact": 0.0,
+ "gap": 10.63,
+ "v_reach": 0.7194,
+ "v_follow": 1.0,
+ "v_inband14": 0.9049,
+ "v_inband10": 0.5234,
+ "v_gap": 19.13,
+ "n_configs": 3962,
+ "complexity": 25.5,
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 6,
+  "moving_bodies": 7,
+  "joints": 10,
+  "closed_loops": 3,
+  "sliding_pairs": 0,
+  "rolling_pairs": 1,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 16,
+  "catalogue_parts": 16,
+  "notes": "J1/K/J2/J3 O20 MR117-2RS; K slaved (clock-spring cap, stop A; stop B at the drive's range end dK 41), never read; hub-2 rim lobe -> bell crank (MR63ZZ pair, pin in link 1b, boss stacked on link 1b, La 14.9 / s_arm 4.4) -> O3 Ti rod 25.4 + 2 RC-class M2 ball links (O4.8 ball, acetal socket O7) -> lateral horn lug of link 1a at hub K (r_h 15.5, on link 1a's own layer); pin knee (2 iglidur pins, sensed twist as the lead); loops: drive RSSR, K closure, knee closure",
+  "source": "sidecar-parallelogram-knuckle-3r screen 2026-10-16 (same parts as pick 4's sidecar: the drive core is shared)",
+  "confidence": "hand count",
+  "cuff_knee": {
+   "pins": 2,
+   "sensed": false,
+   "passive_rot": 2,
+   "moving_bodies": 2,
+   "joints": 2,
+   "custom_parts": 4,
+   "catalogue_parts": 6,
+   "rule": "user 2026-10-17: no encoders on the knee pins (pose from the hub encoders) -> no added complexity; counts = docs/concepts/skin-normal-3r-pin-knee.md line 584",
+   "closed_loops": 1
+  }
+ },
+ "best_params": {
+  "kK": 1.3487,
+  "r_h": 15.5,
+  "beta": -95.8268,
+  "La": 14.8984,
+  "s_arm": 4.3996,
+  "hl": 3.15,
+  "zr": 0.0,
+  "r_lobe": 7.0578,
+  "smhi": 19.3517,
+  "smlo": 5.0,
+  "az1": 97.8797,
+  "el1": 67.0092,
+  "az2": 40.8897,
+  "el2": 44.7465,
+  "wd": 69.9552,
+  "wa": -10.525,
+  "b3": 0.3702,
+  "ang_min": 24.7893,
+  "lc": 28.8341,
+  "phib": -59.0793,
+  "chain": "lead",
+  "ends": "rc",
+  "law_mode": "lin"
+ },
+ "frozen": {
+  "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast",
+  "gap": 19.13,
+  "score": 93.04,
+  "reach": 0.7194,
+  "follow": 1.0,
+  "inband14": 0.9049,
+  "inband10": 0.5234,
+  "contact": 0.0107,
+  "near_touch_gap": 20.22,
+  "near_touch_2mm": 50.14,
+  "min_metal_mm": 0.65,
+  "near_touch_low": [
+   {
+    "mm": 0.65,
+    "i": 257,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "mm": 0.8,
+    "i": 284,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "mm": 1.12,
+    "i": 291,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 165.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 1.15,
+    "i": 446,
+    "kind": "ws",
+    "plane": 135.0,
+    "elev": 120.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 1.17,
+    "i": 8,
+    "kind": "clip",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -60.0
+   }
+  ],
+  "overhead": {
+   "ws": 28,
+   "reach": 0.2857,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.884,
+   "inband10": 0.5655,
+   "why_not": {
+    "fold": 14,
+    "slide": 4,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 2
+   }
+  },
+  "why": {
+   "fold": 88,
+   "slide": 9,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 0,
+   "contact": 4
+  },
+  "parts_ib14": {
+   "hub1": [
+    0.995,
+    8.4,
+    80
+   ],
+   "hubK": [
+    0.977,
+    8.0,
+    80
+   ],
+   "hub2": [
+    0.992,
+    10.4,
+    80
+   ],
+   "hub3": [
+    0.64,
+    12.7,
+    80
+   ],
+   "E": [
+    0.935,
+    7.5,
+    104
+   ],
+   "boss": [
+    0.982,
+    7.9,
+    32
+   ],
+   "pad": [
+    0.996,
+    9.0,
+    32
+   ],
+   "knee": [
+    0.93,
+    10.5,
+    100
+   ],
+   "crank": [
+    0.892,
+    12.6,
+    53
+   ],
+   "horn": [
+    0.917,
+    7.1,
+    20
+   ],
+   "rod": [
+    0.883,
+    12.3,
+    12
+   ],
+   "rodends": [
+    0.938,
+    11.4,
+    32
+   ],
+   "L1a": [
+    0.976,
+    8.1,
+    16
+   ],
+   "L1b": [
+    0.973,
+    8.8,
+    36
+   ],
+   "L2": [
+    0.794,
+    11.2,
+    124
+   ]
+  },
+  "drive": {
+   "boss_level": 61.5,
+   "lev_L1b": 58.3,
+   "arm_tip_level": 58.3,
+   "rod_len": 25.4,
+   "La": 14.9,
+   "r_h": 15.5,
+   "i_rock": 3.39,
+   "rssr_closed": true,
+   "trans_min_taken": 55.7,
+   "ratio_range": [
+    0.99,
+    1.037
+   ],
+   "ratio_small_angle": 1.04,
+   "phi_max_taken": 36.3,
+   "crest_exact": 9.85,
+   "dK_lim": 41.0,
+   "why_lim": "ROD-hub2"
+  }
+ },
+ "held_out": {
+  "gap": 22.03,
+  "score": 91.99,
+  "near_touch_gap": 24.44,
+  "near_touch_2mm": 48.71,
+  "reach": 0.6901,
+  "inband14": 0.9031,
+  "contact": 0.0104,
+  "min_metal_mm": 0.28,
+  "overhead_taken": "19/71",
+  "why": {
+   "fold": 257,
+   "slide": 23,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 6,
+   "contact": 9
+  },
+  "parts_pairs": {
+   "E-L2": 6
+  },
+  "lead_same_protocol": {
+   "gap": 26.75,
+   "near_touch_gap": 29.39
+  },
+  "pick4_A1": {
+   "gap": 22.67,
+   "near_touch_gap": 25.75
+  }
+ },
+ "continuity": {
+  "full": {
+   "static": {
+    "gap": 19.13,
+    "reach": 0.7194,
+    "follow": 1.0,
+    "inband14": 0.9049,
+    "contact": 0.0107
+   },
+   "connected_bench": {
+    "gap": 45.03,
+    "reach": 0.4639,
+    "dropped": 92,
+    "dropped_forced": 92,
+    "forced_taken": 120,
+    "forced_taken_connected": 28,
+    "dropped_with_no_taken_neighbour": 20
+   },
+   "connected_knn": {
+    "gap": 22.21,
+    "reach": 0.6889,
+    "dropped": 11,
+    "dropped_forced": 11,
+    "forced_taken": 120,
+    "forced_taken_connected": 109
+   },
+   "connected_full": {
+    "gap": 19.13,
+    "reach": 0.7194,
+    "dropped": 0,
+    "dropped_forced": 0,
+    "forced_taken": 120,
+    "forced_taken_connected": 120,
+    "envelope": {
+     "env_ok": 1034,
+     "env_forced_ok": 490,
+     "env_forced_connected": 490
+    }
+   },
+   "secs": 1.6
+  },
+  "frozen": {
+   "gap": 19.13,
+   "reach": 0.7194,
+   "follow": 1.0,
+   "inband14": 0.9049,
+   "inband10": 0.5234,
+   "contact": 0.0107
+  }
+ },
+ "references": {
+  "lead_frozen": {
+   "gap": 22.82,
+   "near1": 24.46,
+   "near2": 44.08,
+   "reach": 0.728,
+   "inband14": 0.855
+  },
+  "pick4_A1_frozen": {
+   "gap": 18.91,
+   "near1": 20.0,
+   "near2": 34.03
+  },
+  "pick4_controlD_frozen": {
+   "gap": 19.97,
+   "near1": 21.61,
+   "near2": 35.91
+  }
+ },
+ "gate": {
+  "gain_2nd_half": 0.0,
+  "gain_last_third": 0.0,
+  "top5_spread": 0.0,
+  "run": "CMA P3 (857 evals) and P1 (841): both 10.63, 209 ties; P2 0.16/0.05/0.00; G1 (GE4E) 0.85/0.43/0.18"
+ },
+ "kill_gate": {
+  "cell": "judge seed at the lead's frozen seats, kK 1.7 (2.0 is pressure-infeasible)",
+  "near_touch": 18.3,
+  "plain": 13.95,
+  "bar": 14.0,
+  "passed": false,
+  "note": "fails untuned; the CMA on the same held dyad reaches 10.63 near = plain"
+ },
+ "ge4e_cell": {
+  "fast_near": 17.45,
+  "note": "all-metal GE4E ends (r_h >= 19.5): +6.8 fast vs the RC ball links"
+ },
+ "verdict": "SCREENED, a candidate for the verifier (self-measured). Pick 1 on the lead's own dyad: frozen exact Bench(110,360) 19.13 plain (score 93.04), near-touch 20.22 / 50.14 at 2 mm, held out 22.03 (near 24.44); verified lead 22.82 / 24.46 / 44.08, held out 26.75 / 29.39; pick 4 A1 18.91 / 20.00 / 34.03, held out 22.67 / 25.75. 0 passive translations, complexity 49. The gain over the lead is the in-band term only (0.855 -> 0.905); reach is the lead's (fold).",
+ "limiter": "REACH (the fold), unchanged from the lead: frozen reach 0.719, overhead 8/28, fold 88 of 360 workspace poses; on the fit bench the 209 CMA ties all sit at reach 127/160 with in-band >= 0.90, contact 0 and metal >= 1 mm - the drive has nothing left to buy. Second: near-touch at 2 mm (50.14 vs the lead's 44.08): the 1-mm near-touch objective lets metal sit 1-2 mm off the skin on 44 frozen poses (sidecar in band: crank 0.89, rod 0.88, horn 0.92, ends 0.94). Third: hub 3 (0.64) and L2 (0.79) in band, the lead's.",
+ "note": "Model = pick 4's sidecar core (per-pose RSSR, honest crank stack, drive-range truncation, part pairs) imported unchanged + chain='lead' (bk1 30.05 / bk2 37.57 / a1max 61.72 held), horn socket floor r_h >= HUB_R + ER + 2 (RC 15.5, GE4E 19.5), RC vs GE4E ends, idle-drive rule (dK taken < 30 -> +100). Gate: judge seed kK 2.0 pressure-infeasible (tan pa 1.15); kK 1.7 18.30 near / 13.95 plain (kill bar 14.0 fails untuned); control D replicated 10.63. Coarse LHS 128 (best 11.25; levers hl -0.67, r_h +0.55); drive-range truncation costs 0 frozen poses (attribution run). CMA x4 (farm, 3828): P1/P3 10.63 (gate 0/0/0), P2 11.25, G1 GE4E 17.45 (gate 0.85/0.43/0.18). Claim = max fit in-band tie (P3 #626), declared before the frozen wear. Drive: transmission >= 55.7, ratio 0.99-1.04, crest 9.85, rod 25.4, dK taken 35.9 of 41.0 (ROD-hub2), K slop 0.18 deg per 0.05 mm play. Fit-bench regions: rest 56/58, overhead 2/12 (fold 7, slide 3), across the body 31/43 (fold 12), behind the back 21/24 (fold 3). | VERIFIED 2026-10-16 ~20:35 UTC (skeptic, docs/concepts/verify/sidecar-parallelogram-knuckle-3r.py, farm): frozen exact Bench(110,360) 19.13 reproduced exactly (score 93.04; reach 0.719, in-band14 0.905, contact 0.011, overhead 8/28; near-touch 20.22 / 50.14 at 1 / 2 mm, min metal 0.65 mm), held out 22.03 (score 91.99). Added checks (world RSSR closure 0.000 mm, M2 ball-link tilt 10.9 / 20.0 deg <= 30, real lobe pressure angle 41.1 <= 45, worn-bench drive carries 37.3 deg of K >= 30) remove 0 poses; full-grid flood fill drops 0 (kNN 22.21). Champion same bench 75.94 (risley-turret table; the added checks do not apply to a rodless 3R). Red team: in-band14 sits 0.005 over the 0.90 target; ball centre 4.0 / 4.5 mm over the lug (claim 3.0) keeps 19.13 (in-band14 0.901 / 0.900, rod 0.61 / 0.53 in band), so the frozen number is at the edge, not over it. Not a new 3-active leader on the frozen metric: sidecar-longdyad-knuckle-3r 18.91 (0.22 better frozen, 0.64 worse held out). Open CAD items inherited from the core: crank short arm + follower unmodelled metal; lobe inside hub 2's O20 housing radius.",
+ "doc": "docs/concepts/sidecar-parallelogram-knuckle-3r.md",
+ "verification": {
+  "t": "2026-10-16T20:35:00Z",
+  "harness": "docs/concepts/verify/sidecar-parallelogram-knuckle-3r.py",
+  "bench": "Bench(110,360) exact, frozen shape fit on Bench(60,160) fast (farm)",
+  "fit_fast": 10.63,
+  "gap": 19.13,
+  "score": 93.04,
+  "reach": 0.7194,
+  "follow": 1.0,
+  "inband14": 0.9049,
+  "inband10": 0.5234,
+  "contact": 0.0107,
+  "near_touch_1mm": 20.22,
+  "near_touch_2mm": 50.14,
+  "min_metal_mm": 0.65,
+  "overhead140": "8/28",
+  "why": {
+   "fold": 88,
+   "slide": 9,
+   "contact": 4
+  },
+  "held_out": {
+   "gap": 22.03,
+   "score": 91.99,
+   "near1": 24.44,
+   "near2": 48.71,
+   "reach": 0.6901,
+   "inband14": 0.9031,
+   "overhead": "19/71"
+  },
+  "added_checks": {
+   "rssr_closure_max_mm": 0.0,
+   "balllink_tilt_max_deg": {
+    "crank": 10.9,
+    "horn": 20.0,
+    "limit": 30
+   },
+   "lobe_pa_real_max_deg": 41.08,
+   "pa_limit": 45,
+   "dK_taken_max_deg": 37.31,
+   "dK_lim_deg": 41.0,
+   "idle_worn": false,
+   "poses_removed": 0
+  },
+  "continuity": {
+   "full_grid": 19.13,
+   "dropped": 0,
+   "knn": 22.21
+  },
+  "zb_sensitivity": {
+   "zb3": 19.13,
+   "zb4": 19.13,
+   "zb45": 19.13,
+   "near1_zb45": 20.77,
+   "rod_inband_zb4": 0.607,
+   "rod_inband_zb45": 0.529,
+   "inband14_zb45": 0.9001
+  },
+  "champion_same_bench": 75.94
+ }
+}

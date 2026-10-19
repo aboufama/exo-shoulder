@@ -1,0 +1,380 @@
+{
+ "id": "crown-ring-3r",
+ "wear": "bench",
+ "params": {
+  "az1": 11.3025,
+  "el1": 74.313,
+  "p1": 37.5102,
+  "a12": 84.1189,
+  "a23": 67.8288,
+  "wd": 95.4289,
+  "wa": 8.7573,
+  "sigma": -1,
+  "margin": 10.0,
+  "width": 14.0,
+  "t_link": 3.0,
+  "w2": 12.0,
+  "q": 0.9969,
+  "h1": 113.0,
+  "lug": 0.0
+ },
+ "fit_fast": {
+  "gap": 82.37,
+  "reach": 0.9,
+  "follow": 0.9167,
+  "inband14": 0.1146,
+  "inband10": 0.0457,
+  "contact": 0.005,
+  "honest": true,
+  "audit": [],
+  "closure": 0.9364,
+  "flips": 3,
+  "collide": 0.0148,
+  "min_margin": 10.66,
+  "residual_deg": 0.0,
+  "inband_member": {
+   "ring1": 0.0092,
+   "hub2": 0.0,
+   "hub3": 0.5829,
+   "link1": 0.0,
+   "link2": 0.0419,
+   "neck": 0.6377
+  },
+  "mass_g": 302.7
+ },
+ "seat": {
+  "bvec": [
+   11.3025,
+   74.313
+  ],
+  "az": 11.3,
+  "el": 74.31,
+  "anterior": -0.2651,
+  "up": 0.9628,
+  "lateral": 0.053,
+  "az_ok": true,
+  "el_ok": true,
+  "ant_ok": true,
+  "seat_ok": true
+ },
+ "git": "3c3c70a",
+ "pose_report": null,
+ "frozen": {
+  "gap": 88.38,
+  "reach": 0.8444,
+  "follow": 0.9182,
+  "inband14": 0.1158,
+  "inband10": 0.046,
+  "contact": 0.0122,
+  "honest": true,
+  "audit": [],
+  "closure": 0.8979,
+  "flips": 5,
+  "collide": 0.0168,
+  "min_margin": 10.58,
+  "residual_deg": 0.0,
+  "inband_member": {
+   "ring1": 0.0091,
+   "hub2": 0.0,
+   "hub3": 0.5942,
+   "link1": 0.0,
+   "link2": 0.0428,
+   "neck": 0.6428
+  },
+  "mass_g": 302.7
+ },
+ "parts_ib14": {
+  "ring1": 0.0091,
+  "hub2": 0.0,
+  "hub3": 0.5942,
+  "link1": 0.0,
+  "link2": 0.0428,
+  "neck": 0.6428
+ },
+ "deep": {
+  "plain": 88.38,
+  "reach": 0.8444,
+  "follow": 0.9182,
+  "inband14": 0.1158,
+  "contact": 0.0122,
+  "n_poses": 470,
+  "n_taken": 405,
+  "min_metal_mm": 0.725,
+  "gap_near1": 88.89,
+  "near1_poses": 1,
+  "gap_near2": 97.18,
+  "near2_poses": 14,
+  "gap_near3": 118.73,
+  "near3_poses": 44,
+  "clip_metal_hist": {
+   "0-1": 0.0,
+   "1-2": 0.0,
+   "2-3": 0.0013,
+   "3-4": 0.0023,
+   "4-6": 0.0083,
+   "6-10": 0.0341,
+   "10-14": 0.0698,
+   ">14": 0.8842
+  },
+  "gap_band3_14": 88.51,
+  "inband3_14": 0.1145,
+  "overhead_min_metal_p10": 1.54,
+  "coord_spans": {}
+ },
+ "probe": {
+  "n": 470,
+  "mode": "exact",
+  "scored": {
+   "reach": 0.8444,
+   "follow": 0.9182,
+   "inband14": 0.1158,
+   "inband10": 0.046,
+   "contact": 0.0122,
+   "mode": "exact",
+   "gap": 88.38
+  },
+  "clip_scored": {
+   "n": 110,
+   "taken": 101,
+   "share_taken": 0.9182,
+   "inband14": 0.1158,
+   "inband10": 0.046,
+   "below2": 0.0,
+   "over14": 0.8842,
+   "over20": 0.8081,
+   "d_median": 52.74,
+   "d_p95": 77.56,
+   "d_max": 91.7,
+   "pose_p95_median": 76.47,
+   "pose_p95_max": 85.68,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 2,
+   "poses_floor_lt3": 10,
+   "share_floor_lt2": 0.0198,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 2,
+    "2-3": 8,
+    "3-4": 3,
+    "4-6": 15,
+    "6-10": 41,
+    "10-99": 32
+   }
+  },
+  "ws_unscored": {
+   "n": 360,
+   "taken": 304,
+   "share_taken": 0.8444,
+   "inband14": 0.1066,
+   "inband10": 0.055,
+   "below2": 0.0002,
+   "over14": 0.8933,
+   "over20": 0.8117,
+   "d_median": 50.51,
+   "d_p95": 77.5,
+   "d_max": 91.81,
+   "pose_p95_median": 76.25,
+   "pose_p95_max": 86.01,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 12,
+   "poses_floor_lt3": 34,
+   "share_floor_lt2": 0.0395,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 11,
+    "2-3": 22,
+    "3-4": 22,
+    "4-6": 59,
+    "6-10": 91,
+    "10-99": 98
+   }
+  },
+  "ws_overhead140": {
+   "n": 28,
+   "taken": 13,
+   "share_taken": 0.4643,
+   "inband14": 0.2348,
+   "inband10": 0.1624,
+   "below2": 0.0028,
+   "over14": 0.7624,
+   "over20": 0.6694,
+   "d_median": 32.42,
+   "d_p95": 69.38,
+   "d_max": 83.25,
+   "pose_p95_median": 67.93,
+   "pose_p95_max": 74.16,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 10,
+   "share_floor_lt2": 0.3846,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 5,
+    "2-3": 5,
+    "3-4": 0,
+    "4-6": 3,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "clip_overhead140": {
+   "n": 10,
+   "taken": 4,
+   "share_taken": 0.4,
+   "inband14": 0.2292,
+   "inband10": 0.1961,
+   "below2": 0.0004,
+   "over14": 0.7704,
+   "over20": 0.7042,
+   "d_median": 39.24,
+   "d_p95": 71.9,
+   "d_max": 75.63,
+   "pose_p95_median": 71.91,
+   "pose_p95_max": 71.93,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 2,
+   "poses_floor_lt3": 4,
+   "share_floor_lt2": 0.5,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 2,
+    "2-3": 2,
+    "3-4": 0,
+    "4-6": 0,
+    "6-10": 0,
+    "10-99": 0
+   }
+  },
+  "ws_elev90_140": {
+   "n": 85,
+   "taken": 55,
+   "share_taken": 0.6471,
+   "inband14": 0.1074,
+   "inband10": 0.0658,
+   "below2": 0.0002,
+   "over14": 0.8925,
+   "over20": 0.8134,
+   "d_median": 42.53,
+   "d_p95": 77.55,
+   "d_max": 90.67,
+   "pose_p95_median": 75.07,
+   "pose_p95_max": 85.17,
+   "poses_floor_lt1": 1,
+   "poses_floor_lt2": 5,
+   "poses_floor_lt3": 11,
+   "share_floor_lt2": 0.0909,
+   "floor_hist_mm": {
+    "0-1": 1,
+    "1-2": 4,
+    "2-3": 6,
+    "3-4": 7,
+    "4-6": 6,
+    "6-10": 12,
+    "10-99": 19
+   }
+  },
+  "ws_below90": {
+   "n": 247,
+   "taken": 236,
+   "share_taken": 0.9555,
+   "inband14": 0.0993,
+   "inband10": 0.0466,
+   "below2": 0.0,
+   "over14": 0.9007,
+   "over20": 0.8192,
+   "d_median": 52.85,
+   "d_p95": 77.69,
+   "d_max": 91.81,
+   "pose_p95_median": 76.41,
+   "pose_p95_max": 86.01,
+   "poses_floor_lt1": 0,
+   "poses_floor_lt2": 2,
+   "poses_floor_lt3": 13,
+   "share_floor_lt2": 0.0085,
+   "floor_hist_mm": {
+    "0-1": 0,
+    "1-2": 2,
+    "2-3": 11,
+    "3-4": 15,
+    "4-6": 50,
+    "6-10": 79,
+    "10-99": 79
+   }
+  },
+  "ws_reach_by_elev": {
+   "0-60": [
+    171,
+    172
+   ],
+   "60-90": [
+    65,
+    75
+   ],
+   "90-120": [
+    38,
+    51
+   ],
+   "120-140": [
+    17,
+    34
+   ],
+   "140-160": [
+    7,
+    13
+   ],
+   "160-200": [
+    6,
+    15
+   ]
+  },
+  "contact_poses": [
+   {
+    "mm": -46.41,
+    "kind": "ws",
+    "plane": 120.0,
+    "elev": 90.0,
+    "axial": -180.0
+   },
+   {
+    "mm": -37.21,
+    "kind": "ws",
+    "plane": 150.0,
+    "elev": 120.0,
+    "axial": -180.0
+   },
+   {
+    "mm": -7.87,
+    "kind": "ws",
+    "plane": 0.0,
+    "elev": 165.0,
+    "axial": 15.0
+   },
+   {
+    "mm": -3.32,
+    "kind": "ws",
+    "plane": -90.0,
+    "elev": 60.0,
+    "axial": 75.0
+   },
+   {
+    "mm": -0.73,
+    "kind": "ws",
+    "plane": -75.0,
+    "elev": 60.0,
+    "axial": 60.0
+   }
+  ]
+ },
+ "th_margin": {
+  "min": 10.578,
+  "p05": 19.529,
+  "n": 405,
+  "lt5": 0,
+  "declared": 10.0
+ },
+ "resample": [],
+ "mode": "exact",
+ "exact": true,
+ "secs": 195.9,
+ "source": "tools/alignment_kitbuild_rewear.py: model crown-ring-3r.py unchanged (K.evaluate, every kit check on); fit Bench(60,160) fast, profiles frozen, worn on Bench(110,360)"
+}

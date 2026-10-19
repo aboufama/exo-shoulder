@@ -1,0 +1,322 @@
+{
+ "id": "trimlug-k165-knuckle-3r",
+ "status": "verified",
+ "v_gap": 18.51,
+ "complexity": 18.25,
+ "verdict": "watch",
+ "reasons": [
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 13.02 (score 95.27) sits 5.49 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 23.47 vs bench 18.51 (+4.96; re-measured (this audit))",
+   "held_gap": 23.47,
+   "v_gap": 18.51,
+   "drop": 4.96,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 13.02 -> verified 18.51 (+5.49)",
+   "fast": 13.02,
+   "verified": 18.51,
+   "drop": 5.49
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 18.51, <1 mm 20.14, <2 mm 33.02, <3 mm 83.17, band read 3-14 mm 18.66, 14.51 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 14.51,
+   "plain": 18.51,
+   "n1": 20.14,
+   "n2": 33.02,
+   "n3": 83.17,
+   "band3": 18.66,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0001,
+    "2-3": 0.0015,
+    "3-4": 0.0089,
+    "4-6": 0.0885,
+    "6-10": 0.4162,
+    "10-14": 0.3803,
+    ">14": 0.1046
+   },
+   "minmm": 0.072,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 18.51: bench 2 contact poses, sum 13.19 mm, deepest 9.01 mm at ['ws', 15.0, 165.0, -60.0], 2 deeper than 3 mm vs slipper-nose-knuckle-3r 14.75 mm over 2 (-1.56 mm, x0.89); held 10 contact poses, sum 40.58 mm, deepest 9.05 mm at ['ws', 30.0, 165.0, -45.0], 7 deeper than 3 mm vs slipper-nose-knuckle-3r 46.12 mm over 10 (-5.54 mm, x0.88)",
+   "depths": {
+    "v_gap 18.51": {
+     "bench": {
+      "n": 2,
+      "sum_mm": 13.19,
+      "max_mm": 9.01,
+      "n_deeper3": 2,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.51,
+      "src": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_bench_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        13.18,
+        13.19
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 10,
+      "sum_mm": 40.58,
+      "max_mm": 9.05,
+      "n_deeper3": 7,
+      "overhead140": 6,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -45.0
+      ],
+      "gap": 23.47,
+      "src": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_held_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        40.58,
+        40.59
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "slipper-nose-knuckle-3r",
+   "compare": [
+    {
+     "claim": "v_gap 18.51",
+     "wear": "bench",
+     "sum": 13.19,
+     "ref_sum": 14.75,
+     "excess": -1.56,
+     "ratio": 0.89,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 18.51",
+     "wear": "held",
+     "sum": 40.58,
+     "ref_sum": 46.12,
+     "excess": -5.54,
+     "ratio": 0.88,
+     "watch": false
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs slipper-nose-knuckle-3r: plain -0.02, 2 mm +0.00",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -0.02,
+   "gain_2mm": 0.0
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.006 deg (docs/concepts/verify/trimlug-k165-knuckle-3r_v_held_frozen.json:extra.th_margin.min; 8 readings)",
+   "min_margin": 5.006,
+   "where": "docs/concepts/verify/trimlug-k165-knuckle-3r_v_held_frozen.json:extra.th_margin.min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 45.61 deg (re-measured dK span); crank moves: smallest recorded span 19.3 deg (docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_edge.json:sidecar.phi_max_taken)",
+   "spans": [
+    [
+     "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_lead.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_lead.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_edge.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_edge.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "docs/concepts/verify/trimlug-k165-knuckle-3r_v_held_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/trimlug-k165-knuckle-3r_v_held_frozen.json:extra.dK_taken_max_deg",
+     46.27
+    ],
+    [
+     "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_frozen.json:fit_fast.extra.dK_taken_max_deg",
+     46.25
+    ],
+    [
+     "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_frozen.json:extra.dK_taken_max_deg",
+     45.62
+    ],
+    [
+     "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_lead.json:sidecar.phi_max_taken",
+     19.3
+    ],
+    [
+     "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_edge.json:sidecar.phi_max_taken",
+     19.3
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.895 vs part-weighted 0.924 (-2.88 points); thinly sampled parts: L1a 8 (re-measured)",
+   "parts": {
+    "hub1": [
+     0.999,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.992,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.953,
+     11.1,
+     80
+    ],
+    "hub3": [
+     0.739,
+     11.5,
+     80
+    ],
+    "E": [
+     0.966,
+     6.5,
+     104
+    ],
+    "boss": [
+     0.988,
+     8.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.1,
+     32
+    ],
+    "knee": [
+     0.941,
+     10.7,
+     85
+    ],
+    "crank": [
+     0.818,
+     11.2,
+     129
+    ],
+    "roller": [
+     0.938,
+     10.0,
+     19
+    ],
+    "horn": [
+     0.955,
+     7.7,
+     20
+    ],
+    "L1a": [
+     0.981,
+     10.1,
+     8
+    ],
+    "L1b": [
+     0.931,
+     8.2,
+     36
+    ],
+    "L2": [
+     0.736,
+     12.0,
+     124
+    ]
+   }
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "over-dense parts roller 4.55x; bench 18.51 -> 18.58 at the kit's density; held 23.47 -> 23.54 at the kit's density",
+   "over": {
+    "roller": 4.549
+   },
+   "src": "remeasure/sample_density_trimlug-k165-knuckle-3r.json"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 18.25 vs row 18.25",
+   "recomputed": 18.25,
+   "row": 18.25
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 13.02 (score 95.27) sits 5.49 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [
+  "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_lead.json",
+  "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_edge.json",
+  "docs/concepts/verify/trimlug-k165-knuckle-3r_v_held_frozen.json",
+  "docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_frozen.json"
+ ],
+ "git": "175622c",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T21:36:34Z"
+}

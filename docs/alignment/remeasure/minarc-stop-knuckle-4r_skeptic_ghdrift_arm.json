@@ -1,0 +1,42 @@
+{
+ "pick1": {
+  "n": 1056,
+  "J3_to_arm_gain": [
+   0.772,
+   0.846,
+   1.498
+  ],
+  "knee_phi_deg_per_mm": [
+   0.777,
+   0.786,
+   1.694
+  ],
+  "arm_est_err_deg_per_mm": [
+   0.654,
+   0.681,
+   2.028
+  ],
+  "overhead140_arm_est_err_max": 1.84,
+  "at_4mm_max_deg": 8.11
+ },
+ "BDp": {
+  "n": 1005,
+  "J3_to_arm_gain": [
+   0.721,
+   0.769,
+   4.007
+  ],
+  "knee_phi_deg_per_mm": [
+   0.886,
+   0.924,
+   1.911
+  ],
+  "arm_est_err_deg_per_mm": [
+   0.685,
+   0.7,
+   7.66
+  ],
+  "overhead140_arm_est_err_max": 6.185,
+  "at_4mm_max_deg": 30.64
+ }
+}

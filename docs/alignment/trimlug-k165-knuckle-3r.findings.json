@@ -1,0 +1,56 @@
+[
+ {
+  "key": "NEW-wall-plane",
+  "level": "watch",
+  "reason": "New this audit. The design's whole value is contact depth, bought by a lug trim at r_trim = farthest flank contact + trim_wall 1.5 mm, with the contact read at the lug's MID-PLANE (model line 86; row name, doc and dashboard say '+ 1.5 mm wall'). The gen-7 CAD check (docs/research/user_slipper_nose_fix_check.md O2, lines 176-187) reads the same contact line at the lug's TOP edge (+1.5 mm along ez): farthest contact 20.22 mm over [0, dK_lim 49.75] and 20.48 mm over the built 51.75-deg stroke, so the wall the built part keeps past the last contact is 1.08 / 0.82 mm, not 1.5. The verifier's trim check T1 reads 2.53 / 1.99 mm on its own construction (rings +-1.25 mm along the GH ruling): the two independent readings disagree. Measured here, model unchanged, only trim_wall varied (tools/alignment_trimlug_edgewall.py): with the 1.5 mm wall kept at the top edge (trim_wall 1.95 -> r_trim 21.72; 2.21 -> 21.98) the frozen exact gap is 18.50 at 2.21 (claim 18.51; score-neutral), but bench T5 rises 13.18 -> 13.44 / 13.70 mm (pose 264: 4.18 -> 4.44 / 4.70; the lead 5.74) and the 10 held-out contacts 40.59 -> 41.85 / 42.89 mm (the lead with the same dense lug 46.35). So 0.26-0.52 of the 1.56 mm bench depth gain (17-33 %) and 1.26-2.30 of the 5.76 mm held gain (22-40 %) is metal cut out of the stated wall at the lug's top edge. Not gamed: the score is blind to depth (it charges +0.02 for the trim), the design ranks behind its parent, no wall rule exists, and the MVP1 nose load (5-15 N) is trivial for 0.8 mm. It is a margin stated on one plane of a 3-D part.",
+  "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_edgewall.json (walls 1.5 / 1.95 / 2.21 / 99: bench k165 pair + the 10 held contacts); docs/alignment/remeasure/trimlug-k165-knuckle-3r_bench_edgewall2.21.json (full frozen exact Bench(110,360) at trim_wall 2.21: 18.50, T5 13.70, near1 20.13); docs/research/user_slipper_nose_fix_check.md O2; docs/concepts/verify/trimlug-k165-knuckle-3r_v_bench_frozen.json trim.T1; docs/concepts/models/trimlug-k165-knuckle-3r.py lines 84-96."
+ },
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "Carried (skeptic 13:18 upheld), reproduced at HEAD 9028dec: the bench re-wear gives 18.51 with 0 of 470 poses changed against the committed dump. Bench 2 contacts, 237 (15, 165, -60) 9.00 mm (crank; lug group 8.35) and 264 (30, 165, -60) 4.18 mm (lug top), sum 13.18 against the lead's 14.74 (dense) / 14.75; held out the lead's same 10 contacts, sum 40.59 mm (lead dense 46.35), deepest 9.06 mm at (30, 165, -45), 7 deeper than 3 mm, 4 of them 0.94-1.72 mm shallower than the lead. The score charges +0.02 for the improvement; part of it depends on the wall reading (NEW-wall-plane). Never gamed by rule (user 2026-10-17).",
+  "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_bench_perpose.json (re-worn this audit, git 9028dec), _held_perpose.json; docs/alignment/remeasure/trimlug-k165-knuckle-3r_edgewall.json wall 99 column (the untrimmed lug, same dense sampling); docs/alignment/trimlug-k165-knuckle-3r.json contact_depth."
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "Carried and now measured (the 13:18 skeptic upheld it because no R17 existed). R17 on the built round-11 CAD (pipeline/full-exo/designs/user_trimlug_k165/judge/dynamics.json, 18:39): PASS nominal (rolling bearings mu 0.005): cuff twist 4.04 deg of the 5.0 gate, cuff force 0.58 N, M_GH 0.129 N.m, K off its law 0.136 deg, follower lift-off 0; identical to user_slipper_nose to 0.005 deg (the drive is shared; the glb differs in link 1a only). The shared drive's forward-stroke bound (user_slipper_nose/judge_m5/forward_bound_mu*.json) reads 4.56 deg at the claim's mu 0.087, 4.68 at 0.105, 4.79 at 0.12 and 5.0008 at 0.15 = FAIL under the unrounded gate (8f69bd6); the pass line is mu <= 0.105, a wear assumption not yet tested. With plain-bearing friction (mu 0.06 at the hubs) it is not free: twist 20.4 deg, force 12.0 N, follower lift-off 25 %. So the spring holds, but the wearer-felt cuff twist (G3) sits 0.44-0.96 deg under its gate and only for rolling bearings and a greased nose. Shared with the parent (its M5 upheld 16:27), not bought by the trim.",
+  "evidence": "pipeline/full-exo/designs/user_trimlug_k165/judge/dynamics.json verdict.per_case; pipeline/full-exo/designs/user_slipper_nose/judge_m5/forward_bound_mu0.087.json / _mu0.105 / _mu0.12 / _mu150.json; docs/alignment/slipper-nose-knuckle-3r.findings.json M5 and .rulings.json."
+ },
+ {
+  "key": "T3",
+  "level": "watch",
+  "reason": "New on this row (the 13:18 skeptic's 'missed' item 1; the parent's T3 upheld 17:15). The claim's held-out fold margin is th 5.006 deg (docs/concepts/verify/trimlug-k165-knuckle-3r_v_held_frozen.json extra.th_margin.min; bench 5.181), 0.006 deg above the user's 5-deg rule, and holds only with K on its law. The CAD check reproduces the lead's 17:20 ruling: at the drawn K-phase low end a linear stack gives -0.12 deg K and held-out th 4.996 (1 held-out pose under 5); the band holds only on an RSS stack, and the drawing does not say RSS (docs/research/user_slipper_nose_fix_check.md lines 94-100, D2). The trimlug CAD carries the same K phase. The margin is read on th (the rule's angle), so this is not the T3 exploit itself; it is a claim living at the rule's edge with the build tolerance deciding it.",
+  "evidence": "docs/concepts/verify/trimlug-k165-knuckle-3r_v_held_frozen.json; docs/alignment/remeasure/trimlug-k165-knuckle-3r_probe_bench.json extras.th_margin_own_state (min 5.181, 2 under 5.5); docs/research/user_slipper_nose_fix_check.md D2; docs/alignment/slipper-nose-knuckle-3r.rulings.json T3."
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "Carried unchanged (geometry unchanged; skeptic upheld). With K at rest on stop A (204 of 371 taken bench poses) the J1-K-J3 sub-chain margin m_sub is under 5 deg on 106 poses and under 1 deg on 50, minimum 0.000 deg at (15, 75, 15); with K moved it is >= 10.8 deg. The claim's fold reading reads m_plain at rest (min 5.389). B1 is still open with the user (docs/HANDOFF.md line 309). The knee peaks at 151.92 deg against its 154.78 stop.",
+  "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_msub_rest_bench.json; docs/alignment/remeasure/trimlug-k165-knuckle-3r_probe_bench.json extras (knee_ang_taken, knee_window)."
+ },
+ {
+  "key": "T1",
+  "level": "watch",
+  "reason": "Carried from the parent (its skeptic upheld T1 at 17:15; this row's numbers are the parent's pose for pose). Re-worn at HEAD: taken bench poses with metal < 1 / 2 / 3 mm 3 / 30 / 100 of 371 (min 0.072 mm), held out 14 / 67 / 200 of 852 (min 0.33 mm); near-touch gaps 20.14 / 33.02 / 83.17 bench, 26.56 / 36.97 / 79.28 held. 14.51 points of the bench gap live in the 0-2 mm shell (the tool's watch line is 15). Overhead (elev >= 140): 4 of the 8 taken bench poses have metal under 2 mm and all 8 under 3 mm (held 10 / 18 of 18). G1 from the wearer's side. Reported only (user 2026-10-17: near-touch is not a gate).",
+  "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_bench.json deep (re-worn this audit), _held.json deep; docs/alignment/remeasure/trimlug-k165-knuckle-3r_probe_bench.json probe.ws_overhead140, _probe_held.json."
+ },
+ {
+  "key": "NEW-ws-inband",
+  "level": "watch",
+  "reason": "Carried unchanged (skeptic upheld). The gap reads in-band on clip frames only. On the taken workspace poses at elev 90-140 (38 of 85 bench) the design holds 0.8002 of its metal in 2-14 mm and 19.9 % above 14 mm (p95 20.16 mm, max 30.8 mm); held out 0.8218 / 17.6 %. All taken workspace poses: 0.8559 in band, 14.2 % above 14 mm. The scored clip in-band is 0.8953. The built CAD reads R1 81.3 % / R1-aim 47.6 % (L1 82.0 / 48.6). The trim does not touch it.",
+  "evidence": "docs/alignment/remeasure/trimlug-k165-knuckle-3r_probe_bench.json probe.ws_elev90_140 / ws_unscored (re-worn this audit), _probe_held.json; pipeline/full-exo/designs/user_trimlug_k165/judge/scorecard.md."
+ },
+ {
+  "key": "S3",
+  "level": "watch",
+  "reason": "New on this row (the 13:18 skeptic's 'missed' item 2; family-wide). The claim's model does not sample parts the build must carry: the drive red team finds the modelled lobe follower (s_arm 4.0 on r 8.27) inside hub 2's O20, so the real follower is an MR63ZZ on a 6.5 mm arm with the lobe ring at r 10.79-12.77, and the real lobe ring, follower plate and 10 mm straddle boss (+4 mm along dR) are unsampled ('the CAD sweep decides them'). The bench gap with them sampled is not on file (no bench model of them exists). The built CAD carries them and is judged as drawn: R6 0.0 mm, R1 81.3 %, R2 (ours) 17.67 mm, R16 64.2 %. Watch: the effect on the claimed number is unmeasured, and every slipper / roller family row shares it.",
+  "evidence": "docs/research/slipper_mechanism_redteam.md lines 53-56 and 183-186; docs/alignment/trimlug-k165-knuckle-3r.md Skeptic, missed item 2; pipeline/full-exo/designs/user_trimlug_k165/judge/scorecard.md."
+ },
+ {
+  "key": "R1",
+  "level": "watch",
+  "reason": "Carried; the row text is unchanged since the skeptic upheld it at 13:18 (only the complexity fields moved, 3d9dc71 / 8f69bd6). The verdict still begins 'screened -' on a verified row and still says the held-out contacts include '5 of them the lug, each 1.2-1.7 mm shallower' (measured: 4, 0.94-1.72 mm); the headline gap 13.02 / reach 0.775 are Bench(60,160) fast, a bench with no contact pose, and the dashboard shows them as gap / reach with contact 0.0 and sweep best 13.02 (score 95.27, above the user's 95 line) against the verified 18.51 (93.27); n_configs 45 in the row against 31 sweep entries; the limiter calls pose 237 hub K's disc plus the crank (the lug group is 8.35 mm in there too). New: the row's name and verdict state a '1.5 mm wall' that the built part keeps only at the lug's mid-plane (0.82 mm at the top edge over the built stroke; NEW-wall-plane). None of it moves the verified number; every record says 'not a lead change'.",
+  "evidence": "docs/concepts/rows/trimlug-k165-knuckle-3r.json verdict / limiter / name / n_configs; docs/dashboard/data/morphs.json (gap 13.02, reach 0.775, contact 0.0, sweep_gap 13.02, n_configs 31); docs/alignment/trimlug-k165-knuckle-3r.json reporting; docs/research/user_slipper_nose_fix_check.md O2."
+ }
+]

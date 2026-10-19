@@ -1,0 +1,51 @@
+{
+ "fast_wear": {
+  "gap": 4.25,
+  "reach": 0.8625,
+  "follow": 1.0,
+  "inband14": 0.9195,
+  "inband10": 0.5495,
+  "contact": 0.005
+ },
+ "gate": 4.65,
+ "parts": {
+  "rigid:E": {
+   "n_bumped": 78,
+   "amt_max": 6.94,
+   "dir_spread_deg_max": 4.49,
+   "dir_spread_deg_p90": 2.7,
+   "err_mm_max": 0.42,
+   "err_mm_p90": 0.21
+  },
+  "rigid:boss": {
+   "n_bumped": 32,
+   "amt_max": 5.69,
+   "dir_spread_deg_max": 2.9,
+   "dir_spread_deg_p90": 2.32,
+   "err_mm_max": 0.2,
+   "err_mm_p90": 0.14
+  },
+  "rigid:knee": {
+   "n_bumped": 50,
+   "amt_max": 3.72,
+   "dir_spread_deg_max": 10.52,
+   "dir_spread_deg_p90": 4.45,
+   "err_mm_max": 0.33,
+   "err_mm_p90": 0.1
+  }
+ },
+ "member_rot_vs_carriage_deg": {
+  "3": {
+   "max": 8.29,
+   "p90": 7.94
+  },
+  "6": {
+   "max": 37.94,
+   "p90": 22.65
+  },
+  "5": {
+   "max": 0.0,
+   "p90": 0.0
+  }
+ }
+}

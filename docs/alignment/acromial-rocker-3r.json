@@ -1,0 +1,111 @@
+{
+ "id": "acromial-rocker-3r",
+ "status": "screened",
+ "v_gap": 125.84,
+ "complexity": null,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "idle: a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 125.84
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 125.84 -> verified 125.84 (+0.00)",
+   "fast": 125.84,
+   "verified": 125.84,
+   "drop": 0.0
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump acromial-rocker-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 125.84": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "watch",
+   "reason": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 31.5 vs row None; info: 3 active + 3 sensed passive coordinates = 6 read coordinates (cuff-side passives are outside the count by the user's ruling)",
+   "recomputed": 31.5,
+   "row": null
+  },
+  {
+   "check": "reporting",
+   "level": "ok",
+   "reason": "row, verifier files and dashboard agree"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [],
+ "git": "9e1b6bb",
+ "tool_version": "2026-10-19.1",
+ "t": "2026-10-19T04:45:21Z"
+}

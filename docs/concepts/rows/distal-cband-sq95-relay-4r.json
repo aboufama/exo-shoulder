@@ -1,0 +1,381 @@
+{
+ "id": "distal-cband-sq95-relay-4r",
+ "name": "Knee-less plain O20 3R with J3 square to the arm (wdir 95, -8.2) + one-sided relay PHI 60 on an arm-fixed C-band at s 0.70 about raxis(2.74, -116.6), ~220 mm strap from hub 3, rolling V-wheel carriage",
+ "lens": "round401:C distal-longaxis-ring-4r at s 0.70 (the highest kinematic ceiling of the round; the 120-mm strap kill re-registered by the judge as the measured quantity it stood for; distal-vroller's rolling J4 merged)",
+ "family": "knee-less rigid-cuff spherical 4R, lever (b) at the distal station, one-sided relay, rolling guide",
+ "active_dof": 4,
+ "passive_dof": 0,
+ "passive_translations": 0,
+ "t_ideated": null,
+ "status": "dead",
+ "t_screened": "2026-10-19T02:56:23Z",
+ "reach": 0.7528,
+ "follow": 0.8727,
+ "inband14": 0.932,
+ "inband10": 0.772,
+ "contact": 0.1303,
+ "gap": 35.48,
+ "gap_near1": 43.84,
+ "v_reach": 0.7812,
+ "v_follow": 0.9,
+ "v_inband14": 0.9291,
+ "v_inband10": 0.7646,
+ "v_gap": 29.56,
+ "n_configs": 39,
+ "best_params": {
+  "PHI": 55.0,
+  "tilt": 1.888,
+  "taz": -90.0,
+  "sgn": 1.0,
+  "hw": 0,
+  "drive": 0,
+  "wd": 95.0,
+  "wa": -8.2,
+  "b3": 0.0,
+  "psi2": -45.0,
+  "j4": 1,
+  "pose_cut": 1,
+  "out_mm": 12,
+  "out_strap": 80,
+  "strap_floor": 1,
+  "q_band": 0.96,
+  "psi0": -40.0,
+  "s_frac": 0.72,
+  "post": 7.5,
+  "car_half": 10.0,
+  "hb": 2.5,
+  "band_lo": -53.0,
+  "band_hi": 28.0
+ },
+ "verdict": "DEAD at the judge's pre-registered gates: the IDEAL bound passes (no J4 metal, lead-quality chain frozen, K welded, knee-less readings, J3 re-aim asserted, PHI 55 about raxis(1.888, -90.0), s 0.72, psi0 -40.0): 13.56 frozen exact Bench(110,360) (score 95.07; reach 0.8278, follow 0.9364, ib14 0.9209, 21 contacts / 113.54 mm, overhead 11/28) <= 14.0; but the HARDWARE (band, race, carriage, 4 wheel blocks, 220 mm strap, every face sampled) reads 35.48 frozen exact Bench(110,360) (reach 0.7528, follow 0.8727, ib14 0.932, contact 0.1303: 55 poses / 634.94 mm) > 17.0, and the strap gate fires (strap own in-band 0.83 < 0.85; strap torso losses 9 ws + 3 clip = 12 > 11 on Bench(60,160), 23 with the band; deflection 0.222 mm at 3 N passes). This is the fast sweep's best hardware cell (29.56 IN-SAMPLE on the metal's fit set, 12.6 over the kill even there); the spec cell (PHI 60, raxis(2.74, -116.6), s 0.70, psi0 -45) reads ideal 12.4 / hardware 41.15 frozen exact.",
+ "limiter": "the torso over the distal arm: at s 0.70-0.75 about 10 % of poses (deep across-body IR, plane 105-150, elev 0-60, axial -45..-165, and the hanging-ER corner at the race's anterior end) put torso / other skin across the WHOLE race arc psi -58..+28 (6-14 mm into the band, up to 43 mm at the strap's carriage end): Bench(110,360) strap 16 ws + 4 clip, band 11 + 3 -> hardware costs 21.92 points over the ideal (contact 8.1, reach 7.5, follow 6.4); no race parameter moves them (psi0, s 0.70-0.82, q_band, hb, out_mm, axis centre swept); the race quantile trades a floating carriage (q 1: race 71-74 mm, carriage 16-20 mm over skin) against underside bulge contacts (q 0.95-0.96: carriage 7-11 mm, in band 1.00); s >= 0.78 adds elbow-flexion band losses (clip 5-17). Ideal: why_ws {'': 298, 'parts': 5, 'contact': 14, 'j3stop': 6, 'fold': 37} (hub-2 burials under the acromion at relayed stretched poses); 7 overhead clip frames are contacts (follow 0.9364).",
+ "note": "Convergence gate (fast hardware cells after the strap march fix, in order; IN-SAMPLE bench, farm closed, <= 2 local processes): n 26, gain over the 2nd half 0.156 pts, over the last third 0.0 pts, top-5 spread 0.156 pts -> PASSED; the kill does not rest on it: the best in-sample hardware cell 29.56 is 12.6 over the 17.0 kill on the metal's own fit set, and the torso losses (about 10 % of poses across the whole arc) floor any arm-fixed race here. Strap gate on the q_band 0.95 build (step 0). Ideal Bench(60,160) 4.65 is in-sample (not a claim). th margin min 5.001 on every taken pose (window 29.79-104.89, 0 below 5). Near-touch: ideal 17.17 (1 mm) / 32.91 (2 mm); hardware 43.84 / 116.55. T5: ideal 21 contacts / 113.54 mm vs the lead's 4 / 20.24. Not run: continuity flood (dead before it matters: the flood can only drop relayed poses), held-out (untouched), per-pose zero-return margin. Modelling fixes (measured): band fitted per POSE (a pose with other skin over any band ray leaves the fit and is lost), strap from hub 3's plate rim, strap march end t1 300 (the kit's default 220 left the strap's distal 20 mm unfitted - every earlier hardware entry is marked SUPERSEDED), strap floor only away from the end ramps. Shoulder slip: standing price (p95 4.83 / max 5.14 mm at 3 mm GH offset; ~6.4/6.9 mm at R10 4 mm; 13-31 N vs 5 N); assumed a 3 mm liner under the saddle.",
+ "doc": "docs/concepts/distal-cband-sq95-relay-4r.md",
+ "complexity": 34.25,
+ "mechanism": {
+  "active_dof": 4,
+  "passive_trans": 0,
+  "crossed_rails": 0,
+  "passive_rot": 0,
+  "moving_bodies": 4,
+  "joints": 4,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 4,
+  "sensed_passive": 0,
+  "springs_or_flexures": 1,
+  "custom_parts": 11,
+  "catalogue_parts": 15,
+  "notes": "J1-J3 O20 v5 stacks on MR117-2RS pairs, K welded (link 1 one bar), J2 own-angle dowel stops, J3 dowel stop; J4 = V-wheel carriage (4 x MR63ZZ in 17-4PH V-sleeves on M3 shoulder studs, eccentric preload) on an arm-fixed 17-4PH 22 x 3 C-band race (psi -58..+28 about raxis(2.74, -116.6), R 60-66) on a 2D-contoured Ti saddle fused into BOTTOM's cut end at s 0.68; 2 N constant-force strip to the zero dowel at psi -45, end dowel at +15; member 3 = hub-3 plate + 220 mm 12 x 3 Ti strap; no knee, no cuff slides",
+  "source": "distal-cband-sq95-relay-4r screen 2026-10-19 (judge's 34.25, tools/simplicity.py v2.2: same mechanism class as insertion-cband-relay-4r)",
+  "confidence": "medium"
+ },
+ "ideal_frozen_exact": {
+  "bench": "Bench(110,360) exact, frozen",
+  "gap": 13.56,
+  "reach": 0.8278,
+  "follow": 0.9364,
+  "inband14": 0.9209,
+  "inband10": 0.5072,
+  "contact": 0.0498,
+  "n_contact": 21,
+  "depth_sum": 113.54,
+  "depth_max": 13.67,
+  "overhead": [
+   11,
+   28
+  ],
+  "near1": 17.17,
+  "near2": 32.91,
+  "min_metal_taken": 0.313,
+  "contact_parts": {
+   "contact-only": 10,
+   "hub2": 9,
+   "hubK": 2
+  },
+  "why_ws": {
+   "": 298,
+   "parts": 5,
+   "contact": 14,
+   "j3stop": 6,
+   "fold": 37
+  },
+  "kin_ws": 317,
+  "relayed_ws": 84,
+  "th": {
+   "min_th_margin_taken": 5.001,
+   "window": [
+    29.79,
+    104.89
+   ],
+   "n_below5": 0
+  },
+  "phi_max": 54.56
+ },
+ "ideal_fast_insample": {
+  "gap": 4.65,
+  "reach": 0.8875,
+  "follow": 0.95,
+  "inband14": 0.9216,
+  "contact": 0.034,
+  "overhead": [
+   5,
+   12
+  ]
+ },
+ "hw_frozen_exact": {
+  "bench": "Bench(110,360) exact, frozen",
+  "gap": 35.48,
+  "reach": 0.7528,
+  "follow": 0.8727,
+  "inband14": 0.932,
+  "inband10": 0.772,
+  "contact": 0.1303,
+  "n_contact": 55,
+  "depth_sum": 634.94,
+  "depth_max": 42.0,
+  "overhead": [
+   11,
+   28
+  ],
+  "near1": 43.84,
+  "near2": 116.55,
+  "contact_parts": {
+   "contact-only": 44,
+   "hub2": 9,
+   "hubK": 2
+  },
+  "relayed_contacts": 16,
+  "ws_taken": 271
+ },
+ "hw_best_fast_insample": {
+  "params": {
+   "PHI": 55.0,
+   "tilt": 1.888,
+   "taz": -90.0,
+   "sgn": 1.0,
+   "hw": 0,
+   "drive": 0,
+   "wd": 95.0,
+   "wa": -8.2,
+   "b3": 0.0,
+   "psi2": -45.0,
+   "j4": 1,
+   "pose_cut": 1,
+   "out_mm": 12,
+   "out_strap": 80,
+   "strap_floor": 1,
+   "q_band": 0.96,
+   "psi0": -40.0,
+   "s_frac": 0.72,
+   "post": 7.5,
+   "car_half": 10.0,
+   "hb": 2.5,
+   "band_lo": -53.0,
+   "band_hi": 28.0
+  },
+  "gap": 29.56,
+  "reach": 0.7812,
+  "follow": 0.9,
+  "inband14": 0.9291,
+  "contact": 0.1268
+ },
+ "strap_gate": {
+  "bench110": {
+   "strap_ib14_taken_clip": 0.83,
+   "strap_ib10_taken_clip": 0.602,
+   "strap_p5_50_95": [
+    3.83,
+    8.94,
+    30.39
+   ],
+   "losses_ws_clip": {
+    "strap": [
+     16,
+     4
+    ],
+    "band": [
+     11,
+     3
+    ],
+    "car_wheels": [
+     0,
+     0
+    ],
+    "jam": [
+     0,
+     0
+    ]
+   },
+   "strap_band_losses": 34,
+   "deflection_3N": {
+    "L": 222.0,
+    "strong_mm": 0.222,
+    "weak_mm": 3.555,
+    "twist_deg": 0.048,
+    "twist_mm_at_car": 0.0042
+   },
+   "kill": true
+  },
+  "fast_q095": {
+   "strap_ib14_taken_clip": 0.828,
+   "losses_ws_clip": {
+    "strap": [
+     9,
+     3
+    ],
+    "band": [
+     9,
+     2
+    ]
+   },
+   "deflection_3N_strong_mm": 0.21,
+   "kill": true
+  }
+ },
+ "J4": {
+  "band": {
+   "min": 0.07,
+   "n_lt0": 0,
+   "n_lt1": 2,
+   "n_lt2": 51,
+   "contact_poses_all": 34,
+   "contact_ws": 27,
+   "depth_max_all": 13.83
+  },
+  "car": {
+   "min": 4.04,
+   "n_lt0": 0,
+   "n_lt1": 0,
+   "n_lt2": 0,
+   "contact_poses_all": 23,
+   "contact_ws": 17,
+   "depth_max_all": 14.28
+  },
+  "wheels": {
+   "min": 0.11,
+   "n_lt0": 0,
+   "n_lt1": 6,
+   "n_lt2": 59,
+   "contact_poses_all": 24,
+   "contact_ws": 18,
+   "depth_max_all": 13.91
+  },
+  "strap": {
+   "min": 1.42,
+   "n_lt0": 0,
+   "n_lt1": 0,
+   "n_lt2": 11,
+   "contact_poses_all": 20,
+   "contact_ws": 16,
+   "depth_max_all": 42.0
+  },
+  "car_ib14": 0.999,
+  "car_p5_50_95": [
+   6.77,
+   8.56,
+   11.1
+  ],
+  "band_ib14": 0.996,
+  "band_p5_50_95": [
+   2.27,
+   3.06,
+   7.51
+  ],
+  "jams": 0,
+  "jams_ws": 0,
+  "geom": {
+   "R_race": [
+    56.5,
+    58.6,
+    61.7
+   ],
+   "s_ax": -234.12,
+   "strap_len_mm": 222.0,
+   "hub3": [
+    -9.6,
+    5.9,
+    66.6
+   ],
+   "n": {
+    "band": 697,
+    "car": 198,
+    "wheels": 280,
+    "strap": 742
+   },
+   "band_th": [
+    1.66,
+    10.66
+   ]
+  },
+  "race_psi": [
+   -58.0,
+   28.0
+  ]
+ },
+ "gate": {
+  "n": 26,
+  "best_gap": 29.56,
+  "gain_2nd_half": 0.156,
+  "gain_last_third": 0.0,
+  "top5_spread": 0.156,
+  "passes": true
+ },
+ "other_b110": {
+  "params": {
+   "PHI": 60.0,
+   "tilt": 2.74,
+   "taz": -116.6,
+   "sgn": 1.0,
+   "hw": 0,
+   "drive": 0,
+   "wd": 95.0,
+   "wa": -8.2,
+   "b3": 0.0,
+   "psi2": -45.0,
+   "j4": 1,
+   "pose_cut": 1,
+   "out_mm": 12,
+   "out_strap": 80,
+   "strap_floor": 1,
+   "q_band": 0.95
+  },
+  "ideal": {
+   "gap": 12.4,
+   "reach": 0.8389,
+   "follow": 0.9364,
+   "inband14": 0.9209,
+   "contact": 0.0493,
+   "n_contact": 21,
+   "overhead": [
+    11,
+    28
+   ]
+  },
+  "hw": {
+   "gap": 41.15,
+   "reach": 0.7389,
+   "follow": 0.8545,
+   "inband14": 0.9316,
+   "contact": 0.1549,
+   "n_contact": 66,
+   "overhead": [
+    11,
+    28
+   ]
+  }
+ },
+ "v_bench": "Bench(60,160) fast, in-sample (audit reproduction of the sweep-best hardware cell, identical to entry k 28); the row's claim bench reading 35.48 (Bench(110,360) exact frozen) was not re-run (box load 12 on 4 cores)",
+ "audit": {
+  "t": "2026-10-19T04:20:00Z",
+  "verdict": "DEATH STANDS",
+  "refuted": false,
+  "gate": "sweep gate re-read from the file: 26 valid cells, gain 2nd half 0.156, last third 0.0, top-5 spread 0.156 -> passes (a coarse grid, not CMA; the kill does not rest on it: best in-sample 29.56 vs kill 17)",
+  "reproduction": "best cell fast 29.56 (reach 0.7812, follow 0.90, ib14 0.9291, ib10 0.7646, contact 0.1268, 26 contacts) reproduced exactly; ideal at the cell 5.29",
+  "selfx": "rig self-intersection test (arm-skin vertex under every penetrating J4 sample, offset 1 mm out, inside another body part = the rig's own overlap): 19 ideal-taken poses lost to J4 metal on the fit bench, 13 mostly self-intersection under the metal, 3 wholly; forgiving every self-intersecting sample (R2 attributable-depth idea, a MEASUREMENT change) moves the hardware 29.56 -> 27.34 (contacts 26 -> 24, reach 0.781 -> 0.794): 17 of 19 poses keep real penetration (strap standing above the arm with torso skin between, hanging-ER anterior end -6.7 mm)",
+  "strap_cut": "strap outlier cut (out_strap 80 -> 12 / 25; the row ran effectively no cut): strap own in-band 0.83 -> 0.94 / 0.93, p95 30 -> 14.5 / 15.1 mm (gate item 1 is a fit artefact and now PASSES), strap losses 11+2 / 10+2 (item 2 still at or over 11), hardware gap 30.67 / 29.56 (unchanged): the float was not what lost the poses",
+  "champion_same_bench": 68.93,
+  "note": "The template's refutation line (within 10 of 68.93 on Bench(60,160)) is out of date: the row is already far better than the old champion; the death is at the round-401 pre-registered hardware kill 17.0, and no correction found brings the hardware below 27.3 in-sample",
+  "files": "scratch dcbaudit/selfx.py, selfx_fast.json, os12.json, os25.json (not committed)"
+ }
+}

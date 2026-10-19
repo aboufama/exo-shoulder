@@ -1,0 +1,26 @@
+[
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py conn fit60 B docs/concepts/verify/minarc-judge/conn_S5_fit60_m5.json '{\"phi_lo\": 20.793, \"phi_hi\": 146.614}' && OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 bench B docs/concepts/verify/minarc-judge/wear_S5_fit60_bench_m5.json '{\"phi_lo\": 20.793, \"phi_hi\": 146.614}' --conn docs/concepts/verify/minarc-judge/conn_S5_fit60_m5.json",
+  "tag": "judge_S5_bench",
+  "out": [
+   "docs/concepts/verify/minarc-judge/conn_S5_fit60_m5.json",
+   "docs/concepts/verify/minarc-judge/wear_S5_fit60_bench_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py conn fit60 B docs/concepts/verify/minarc-judge/connh_S5_fit60_m5.json '{\"phi_lo\": 20.793, \"phi_hi\": 146.614}' && OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 held B docs/concepts/verify/minarc-judge/wear_S5_fit60_held_m5.json '{\"phi_lo\": 20.793, \"phi_hi\": 146.614}' --conn docs/concepts/verify/minarc-judge/connh_S5_fit60_m5.json",
+  "tag": "judge_S5_held",
+  "out": [
+   "docs/concepts/verify/minarc-judge/connh_S5_fit60_m5.json",
+   "docs/concepts/verify/minarc-judge/wear_S5_fit60_held_m5.json"
+  ]
+ },
+ {
+  "cmd": "OMP_NUM_THREADS=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py conn fit60 B docs/concepts/verify/minarc-judge/conn_M1_fit60_m5.json '{\"mstop\": 1}' && OMP_NUM_THREADS=1 CB_EXACT=1 CB_FOLD_MARGIN=5 python3 docs/concepts/verify/minarc-stop-knuckle-4r-remeasure.py wear fit60 held B docs/concepts/verify/minarc-judge/wear_M1_fit60_held_m5.json '{\"mstop\": 1}' --conn docs/concepts/verify/minarc-judge/conn_M1_fit60_m5.json",
+  "tag": "judge_M1_held",
+  "out": [
+   "docs/concepts/verify/minarc-judge/conn_M1_fit60_m5.json",
+   "docs/concepts/verify/minarc-judge/wear_M1_fit60_held_m5.json"
+  ]
+ }
+]

@@ -1,0 +1,95 @@
+{
+ "wear": "bench",
+ "kit": {
+  "gap": 18.61,
+  "reach": 0.7694,
+  "follow": 0.9455,
+  "inband14": 0.8965,
+  "inband10": 0.5433,
+  "contact": 0.0475
+ },
+ "refused": {
+  "343": {
+   "pose": {
+    "plane": 75.0,
+    "elev": 150.0,
+    "axial": -105.0
+   },
+   "kind": "ws",
+   "kit_min_mm": -2.67,
+   "kit_why": "contact"
+  },
+  "372": {
+   "pose": {
+    "plane": 90.0,
+    "elev": 165.0,
+    "axial": -90.0
+   },
+   "kind": "ws",
+   "kit_min_mm": null,
+   "kit_why": "slide"
+  },
+  "399": {
+   "pose": {
+    "plane": 105.0,
+    "elev": 165.0,
+    "axial": -90.0
+   },
+   "kind": "ws",
+   "kit_min_mm": null,
+   "kit_why": "slide"
+  },
+  "423": {
+   "pose": {
+    "plane": 120.0,
+    "elev": 135.0,
+    "axial": -90.0
+   },
+   "kind": "ws",
+   "kit_min_mm": -1.66,
+   "kit_why": "contact"
+  },
+  "426": {
+   "pose": {
+    "plane": 120.0,
+    "elev": 165.0,
+    "axial": -90.0
+   },
+   "kind": "ws",
+   "kit_min_mm": null,
+   "kit_why": "slide"
+  },
+  "448": {
+   "pose": {
+    "plane": 135.0,
+    "elev": 135.0,
+    "axial": -90.0
+   },
+   "kind": "ws",
+   "kit_min_mm": null,
+   "kit_why": "slide"
+  }
+ },
+ "cellB_static": {
+  "gap": 16.21,
+  "reach": 0.7778,
+  "follow": 0.9545,
+  "inband14": 0.8977,
+  "contact": 0.0375,
+  "n_ws": 360,
+  "n_clip": 110,
+  "ws_taken": 280,
+  "contact_poses": 15
+ },
+ "cellB_side_reading": {
+  "gap": 16.68,
+  "reach": 0.7778,
+  "follow": 0.9545,
+  "inband14": 0.8977,
+  "contact": 0.0423,
+  "n_ws": 360,
+  "n_clip": 110,
+  "ws_taken": 280,
+  "contact_poses": 17
+ }
+}

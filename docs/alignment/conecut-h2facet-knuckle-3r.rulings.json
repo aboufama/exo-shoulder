@@ -1,0 +1,77 @@
+[
+ {
+  "key": "continuity",
+  "refuted": false,
+  "evidence": "Upheld on level, text outdated. The floods ARE on file but the check's glob (tools/alignment_audit.py line 470: '<id>_*bench*.json' with contact_aware_verifier / final_verifier keys) cannot see the '+chamferonly' / '+rowconfig' files. Read with the check's own rule (lines 500-507, TH conn_watch 1.0 / conn_gamed 3.0): bench remeasure/conecut-h2facet-knuckle-3r+chamferonly_flood_bench.json connected: static 18.28, full 18.28 (0 dropped), knn 19.97 (+1.69, under 3) -> ok; held ..._flood_held.json connected: static 22.16, full 22.16 (0 of 332 forced dropped), knn 30.39 (+8.23 > conn_gamed 3, 77 of 332 forced takes dropped) -> line 505 sets watch. So the watch stands even when the check reads the files."
+ },
+ {
+  "key": "complexity",
+  "refuted": false,
+  "evidence": "Upheld, re-run. python3 tools/simplicity.py --json: conecut-h2facet-knuckle-3r complexity 0, items [], source 'lead conecut-knee-knuckle-3r' (the row's mechanism {source, record_delta '+0: a milled chamfer and flat on hub 2's existing Ti housing', complexity 18.5} scores as the anchor); conecut-knee-knuckle-3r 18.5 (2 passive rot 2, 2 loops 8, 3 joints beyond 3 3, track pair 1, spring 3, parts 1.5). Row field complexity 18.5; |18.5 - 0| -> MISMATCH."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Upheld. docs/concepts/rows/conecut-h2facet-knuckle-3r.json verdict opens 'SCREENED as a 0-cx ENABLER CELL, never a lead on its own' (tools/alignment_audit.py line 736 fires on startswith SCREENED) under status verified; docs/dashboard/data/morphs.json row 21: gap 12.5, sweep_gap 12.5, v_gap 18.28 -> 12.5 < 18.28 - 5 (line 750), score 95.45 = 100(1 - 12.5/275)."
+ },
+ {
+  "key": "judgement:NEW-tie-order",
+  "refuted": false,
+  "evidence": "Upheld, replicated independently in Python from docs/dashboard/simple/index.html lines 205-255 on docs/dashboard/data/morphs.json: board order (sink, gap; stable) puts conecut-h2facet (index 21) before conecut-knee (22), both v_gap 18.28, Verified, 3 joints; leader with the ruling = conecut-knee-knuckle-3r 18.28 cx 18.5; with the ruling text removed = conecut-h2facet-knuckle-3r 18.28 cx 0. Unflagged ok3 rows within 0.005 of the headline: exactly these 2. tools/dash_build.py line 551 out.sort(key=(not is_baseline, id)). Ruling cites ledger line 125 (2026-10-18T17:06:25Z, skeptic, watch). Incumbency: events.jsonl line 638 (2026-10-17T17:21:00Z lead verified) before line 872 (2026-10-18T15:16:00Z this row). No number moves; the instrument decides a tie by name."
+ },
+ {
+  "key": "judgement:R1",
+  "refuted": false,
+  "evidence": "Upheld, re-derived from the per-pose dumps. remeasure/conecut-h2facet-knuckle-3r+chamferonly_held_perpose.json (frozen 22.16, recomputed 22.16) vs conecut-knee-knuckle-3r_held_perpose.json (22.38): exactly one taken/contact flip, ws 447 (plane 0, elev 90, axial 30): lead contact min_mm/cmin -0.207/-0.207 -> taken 0.882/0.697. Floor min(min_mm, cmin) over all 1154 poses: 45 gain, mean +0.601 mm, 0 lose (43 / +0.602 on poses taken by both). Bench dumps: 0 flips (same 262 takes). So 'buys no take' holds on the bench only. Row verdict still opens 'SCREENED'; morphs gap / sweep_gap 12.5 beside v_gap 18.28; morphs carries no held field for either row (no key containing 'held'), so the board cannot show the held edge."
+ },
+ {
+  "key": "judgement:G5",
+  "refuted": false,
+  "evidence": "Upheld, recounted on docs/dashboard/data/morphs.json: 38 non-baseline rows with status verified, v_gap and complexity (4 of them gamed). This row shown at complexity 0 strictly dominates 33 of the other 37 on (v_gap, complexity); at its real 18.5, 12 of 37. Pareto front on the shown numbers: phi40-thinstack (14.06, 51.25), freek-oracle-route (15.4, 33.25), this row (18.28, 0), conecut-l2jog (18.28, 0, gamed). Simple board drawSimple (index.html lines 307-345): pts = non-fast rows with complexity; the 5 labelled live designs by score are phi40 94.9, offset-shortcar 94.6, freek 94.4, proxtrack 93.7, conecut-h2facet 93.4 at y = 0 (conecut-knee, the headline, is 6th and unlabelled)."
+ },
+ {
+  "key": "judgement:T1",
+  "refuted": false,
+  "evidence": "Upheld with one precision correction. Bench dumps: pose 203 lead min_mm/cmin 0.716/0.263 -> 1.38/1.122 (the only near1 change); taken with floor < 1/2/3 mm: 2/33/99 vs lead 3/33/105. Held: 447 taken at 0.697 (floor), < 1/2/3 mm 14/71/206 vs 13/71/217. Correction: 'the wearer is never worse off at any pose' is not literal on the bench: pose 234 (ws 15/135/-60, taken) floor 1.556 -> 1.506 mm (cmin), 0.05 mm closer, inside the 2 mm shell; the auditor files it under sampling (the denser hub-2 sample), which then means the lead's 234 reading is 0.05 mm optimistic. Held: no floor loss (pose 512's cmin 3.999 -> 3.888 leaves the floor min_mm 3.556 unchanged)."
+ },
+ {
+  "key": "judgement:P1",
+  "refuted": false,
+  "evidence": "Upheld. docs/concepts/sweeps/conecut-h2facet-knuckle-3r.json: 122 entries, gap 12.5 on 122/122, near1 13.66 on 122/122 (Bench(60,160) fast, lead fit frozen); entry k 0 is the anchor itself (c 0, fd 0, dense 0) at the same 12.5. The search could not distinguish any config from no cut; the bench-side gains are from guard-pose sizing on exact claim-bench poses (model GUARD / AZ203)."
+ },
+ {
+  "key": "judgement:NEW-wrong-body-frame",
+  "refuted": false,
+  "evidence": "Upheld. docs/concepts/verify/conecut-h2facet-knuckle-3r_v_sampling.json: mem2 7 (rigid_keys hub2 -> member 7 = link 1b), q2_rel_deg n 184, min -14.2, max 90.9 (J2 relative angle the boss / cap turns through relative to the modelled flat), wall_min_mm 3.1 (to the MR117 bore). fd 0 reproduces the claim: chamfer-only dumps frozen 18.28 bench / 22.16 held = the row config's verify files (_v_bench_frozen 18.28, _v_held_frozen 22.16). Row best_params still fd 0.6 and the name still says '+ planar upper flat'; rows/lowarm-kphase-notch-knuckle-3r.json still cites 'the hub-2 flat (conecut-h2facet measured +0.26..+0.37 there on the kstop cell)'."
+ },
+ {
+  "key": "judgement:T3",
+  "refuted": false,
+  "evidence": "Upheld. verify/conecut-h2facet-knuckle-3r_v_held_frozen_chamferonly.json extra.th_margin min 5.006 (n 862, lt5 0, lowest ws 135/30/-135 forced); _v_bench_frozen.json 5.181. Stop window: remeasure/conecut-knee-knuckle-3r_stopwindow.json held sweep reads the claim 22.38 at every J3MIN from -112.4 to -111.2 (0.1-deg grid) and 22.49 from -111.1; the sweep starts at -112.4, so this file bounds the window's upper edge (-111.2/-111.1) but not its lower one: the stated -112.49 lower edge is not in this file (the measured window is >= 1.2 deg). best_params J3MIN -111.9036 = the lead's. Margin 0.006 deg over the 5 deg line stands."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Upheld. pipeline/full-exo/designs/user_conecut_knee/judge/dynamics.json cases: 'passive|mu0.005|t0.001|s1|hub' (nominal) twist_peak 3.99 deg, force_peak 0.57 N; 'passive|f0.05|s1' 11.73 deg / 5.24 N (over both 5 deg / 5 N gates); vs_l1.json M5_forward_bound {0.087: 4.54, 0.105: 4.67, 0.12: 4.77} -> 0.23 deg under the 5 deg gate. docs/research/conecut_mechanism_redteam.md lines 29-32: J3 raceway s0 0.40 at the silicone-liner 4.57 N.m, 0.22 at the lock line. The chamfer adds no load path; all of it is the lead's."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Upheld. remeasure/conecut-h2facet-knuckle-3r_msub_rest_bench.json (model_frozen gap 18.28): m_sub_rest n 205, min 0.0, p10 0.267, p50 4.753, lt1 50, lt2 65, lt5 107; m_sub_moved min 10.805 (lt5 0); m_plain_rest min 5.389. A near-singular sub-dyad at knee rest on 50 poses; the lead's."
+ },
+ {
+  "key": "judgement:NEW-strap-dilution",
+  "refuted": false,
+  "evidence": "Upheld. verify/conecut-h2facet-knuckle-3r_v_bench_frozen.json c4_inband: plain_from_parts 0.9011, E_pts 164 vs 104.4 at the lead's lE, ib14_equal_strap 0.8961, gap_equal_strap 18.67; _v_held_frozen.json: 0.8999, ib14_equal_strap 0.8948, gap_equal_strap 22.68. Held in-band 0.8999 sits 0.0001 under the 0.90 hinge."
+ },
+ {
+  "key": "judgement:NEW-ws-inband",
+  "refuted": false,
+  "evidence": "Upheld. remeasure/conecut-h2facet-knuckle-3r_probe_held.json probe: ws_unscored 660 of 952 taken, inband14 0.871 (over14 0.1265, d_max 31.46), ws_elev90_140 106 of 229, 0.8469, ws_overhead140 18 of 71, 0.932, why_not fold 36 / j3stop 10 / contact 7, floors < 1/2/3 mm 14/63/164; lead's probe 659 / 0.8712, 105 / 0.8478, 18 / 0.932, 13/63/172. Bench probe 0.868 / 0.832 / 0.936. Skeptic re-run of the held probe (tools/alignment_wear_probe_model.py, CB_EXACT=1, nice 10, OMP_NUM_THREADS=1, 1 process, 577.2 s under machine load 27): model_frozen 22.16 / reach 0.6933 / in-band 0.900, near1 25.23 / near2 36.89, and 0 differing fields against the auditor's probe and extras blocks (bit for bit)."
+ },
+ {
+  "key": "judgement:P2",
+  "refuted": false,
+  "evidence": "Upheld (carried, the lead's). remeasure/conecut-knee-knuckle-3r_heldleak_check.json: the knee-window drift cloud included held poses (held_binds 218 of n 352) and dropping them flips no prefilter verdict (flips []); verified config margin_noheld 28.41 vs margin_all 26.45 deg. This row's best_params differ from the lead's only in the facet keys (c, hw, daz, fd, dazf, z0, dense), so it inherits the knee centring. Measured effect zero."
+ }
+]

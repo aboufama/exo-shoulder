@@ -1,0 +1,135 @@
+[
+ {
+  "tag": "rlp-s1",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py cma --x0 '{\"ang_min\": 26.8823}' --label rlp-s1 --out docs/research/roller_env_polish/farm/cma_rlp-s1.json --sigma 0.3 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1800 --patience 12 --seed 1 > docs/research/roller_env_polish/farm/cma_rlp-s1.log 2>&1; tail -3 docs/research/roller_env_polish/farm/cma_rlp-s1.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/cma_rlp-s1*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2700
+ },
+ {
+  "tag": "rlp-s2",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py cma --x0 '{\"ang_min\": 26.8823}' --label rlp-s2 --out docs/research/roller_env_polish/farm/cma_rlp-s2.json --sigma 0.3 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1800 --patience 12 --seed 2 > docs/research/roller_env_polish/farm/cma_rlp-s2.log 2>&1; tail -3 docs/research/roller_env_polish/farm/cma_rlp-s2.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/cma_rlp-s2*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2700
+ },
+ {
+  "tag": "rlp-s3",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py cma --x0 '{\"ang_min\": 26.8823}' --label rlp-s3 --out docs/research/roller_env_polish/farm/cma_rlp-s3.json --sigma 0.3 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1800 --patience 12 --seed 3 > docs/research/roller_env_polish/farm/cma_rlp-s3.log 2>&1; tail -3 docs/research/roller_env_polish/farm/cma_rlp-s3.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/cma_rlp-s3*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2700
+ },
+ {
+  "tag": "rlp-s4",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py cma --x0 '{\"ang_min\": 26.8823}' --label rlp-s4 --out docs/research/roller_env_polish/farm/cma_rlp-s4.json --sigma 0.3 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1800 --patience 12 --seed 4 > docs/research/roller_env_polish/farm/cma_rlp-s4.log 2>&1; tail -3 docs/research/roller_env_polish/farm/cma_rlp-s4.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/cma_rlp-s4*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2700
+ },
+ {
+  "tag": "rlp-m5",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py cma --x0 '{\"ang_min\": 26.8823}' --label rlp-m5 --out docs/research/roller_env_polish/farm/cma_rlp-m5.json --sigma 0.4 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1800 --patience 12 --seed 5 > docs/research/roller_env_polish/farm/cma_rlp-m5.log 2>&1; tail -3 docs/research/roller_env_polish/farm/cma_rlp-m5.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/cma_rlp-m5*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2700
+ },
+ {
+  "tag": "rlp-m6",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py cma --x0 '{\"ang_min\": 26.8823}' --label rlp-m6 --out docs/research/roller_env_polish/farm/cma_rlp-m6.json --sigma 0.4 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1800 --patience 12 --seed 6 > docs/research/roller_env_polish/farm/cma_rlp-m6.log 2>&1; tail -3 docs/research/roller_env_polish/farm/cma_rlp-m6.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/cma_rlp-m6*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2700
+ },
+ {
+  "tag": "rlp-w7",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py cma --x0 '{\"ang_min\": 26.8823}' --label rlp-w7 --out docs/research/roller_env_polish/farm/cma_rlp-w7.json --sigma 0.5 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1800 --patience 12 --seed 7 > docs/research/roller_env_polish/farm/cma_rlp-w7.log 2>&1; tail -3 docs/research/roller_env_polish/farm/cma_rlp-w7.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/cma_rlp-w7*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2700
+ },
+ {
+  "tag": "rlp-w8",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py cma --x0 '{\"ang_min\": 26.8823}' --label rlp-w8 --out docs/research/roller_env_polish/farm/cma_rlp-w8.json --sigma 0.5 --popsize 8 --jobs 2 --max-evals 640 --budget-s 1800 --patience 12 --seed 8 > docs/research/roller_env_polish/farm/cma_rlp-w8.log 2>&1; tail -3 docs/research/roller_env_polish/farm/cma_rlp-w8.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/cma_rlp-w8*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2700
+ },
+ {
+  "tag": "rlp-rescore-nominal",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py rescore BEST docs/research/roller_env_polish/farm/rescore_nominal.json > docs/research/roller_env_polish/farm/rescore_nominal.log 2>&1; tail -2 docs/research/roller_env_polish/farm/rescore_nominal.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/rescore_nominal*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 2700
+ },
+ {
+  "tag": "rlp-rescore-priced",
+  "cmd": "mkdir -p docs/research/roller_env_polish/farm && eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/roller_env_polish.py rescore BEST_am docs/research/roller_env_polish/farm/rescore_priced.json > docs/research/roller_env_polish/farm/rescore_priced.log 2>&1; tail -2 docs/research/roller_env_polish/farm/rescore_priced.log",
+  "out": [
+   "docs/research/roller_env_polish/farm/rescore_priced*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 2700
+ }
+]

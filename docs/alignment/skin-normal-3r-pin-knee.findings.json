@@ -1,0 +1,50 @@
+[
+ {
+  "key": "G5",
+  "level": "watch",
+  "reason": "Simplicity v2 (commit 3ceacea) takes this row from 19.5 to 0. (1) Faithful for this row: the subtracted knee (2 rot, 2 bodies = knee link + arm pad, 2 joints, 4 made = knee link + arm pad + 2 Ti pins, 6 bought = 2 x (GSM sleeve + 2 GTM washers)) is this row's own knee, item for item, as listed in the row's mechanism notes and the model header (docs/concepts/models/skin-normal-3r-pin-knee.py lines 1-25). (2) Determinacy in the model holds: with only J1, J2, J3 read, every passive coordinate (pins a, b) and the GH rotation are fixed at every taken pose: sigma_min 0.3919 and condition 2.33 at most over the 343 taken poses of Bench(110,360) exact (the verifier's 0.3919 to the digit), and 0.3738 / 2.42 over 832 held-out kinematic poses. (3) The model fixes GH. The pins absorb in-plane GH drift, and the J3 reading moves 1.01 deg per mm (median) to 1.78 / 1.90 deg per mm (max, bench / held) with no arm motion. At R10's confirmed 4 mm that is up to 7.1-7.6 deg of arm twist that the 3 hubs cannot see. SIMPLICITY.md lines 90-93 still require sensing to hold under R10 and still list the pin knee as 2 sensed. The premise is true at a fixed GH, not under R10. The ruling decides, so this is a question for the user, about the complexity number only.",
+  "evidence": "docs/alignment/remeasure/skin-normal-3r-pin-knee_knee_sensing_bench.json, docs/alignment/remeasure/skin-normal-3r-pin-knee_knee_sensing_held.json, docs/research/rebase/verify_pkH1_m5.json (dof.hubs_only_sensing 0.3919 / 2.3), docs/SIMPLICITY.md lines 90-93, REQUIREMENTS.md R10 (4 mm), git show 3ceacea"
+ },
+ {
+  "key": "NEW-caveat-dropped",
+  "level": "watch",
+  "reason": "The change cites docs/concepts/skin-normal-3r-pin-knee.md lines 565-568 for 'the 3 hub encoders fix the pose' (CLAUDE.md rule 5; SIMPLICITY.md change log). Those same lines say 'with GH known' and say the record keeps 2 sensed pins because SIMPLICITY.md requires sensing to hold when GH translates (R10). They give 9.5, not 0, as the count if hub-only sensing is accepted. As implemented, v2 treats the ruling's condition ('if no encoders are needed') as met unconditionally. It also zeroes the knee's bodies, joints and parts: 9.5 points beyond the 10 points of encoders. Reading the ruling as 'the encoders do not count' gives 9.5. Reading it as 'the knee does not count' gives 0. The user must say which. Proposed catalogue entry R5: a premise quoted without its caveat.",
+  "evidence": "docs/concepts/skin-normal-3r-pin-knee.md lines 565-568 (quoted in the report), CLAUDE.md lines 28-31 (added by 3ceacea), docs/SIMPLICITY.md 'Change log' v2; tools/simplicity.py v1 / v2 on the row's own record: 19.5 / 0 (encoders only: 9.5)"
+ },
+ {
+  "key": "NEW-closure-as-cuff",
+  "level": "watch",
+  "reason": "v2 places the knee 'outside the DOF count like the cuff slides'. For this design the knee is its own closure at a fixed GH: J3's line misses GH, so the 3R does not close without the knee. SIMPLICITY.md lines 82-83 count a closure element that the design needs at a fixed shoulder centre, and offset-skin-normal-3r's 2 closure slides, which need no encoder at all, still score 17.75. Measured with tools/simplicity.py v1 against v2 over the 51 verified rows: this row was dominated on (gap, complexity) under v1, by geneva-tail-knuckle-pinknee-3r at 12.0 / 23.57 (a partial record that scores only its 3 loops). Under v2 it is the zero end of the front, replacing zc-frontier-3r (0 / 33.51). It now ties every plain spherical 3R at 0 while carrying 2 more bodies, 2 more joints, 4 more made parts and 6 more bought parts. It now ranks simpler than 21 verified rows that were simpler than it under v1, and level with 4 more (zc-frontier-3r, spine-parked-j2-3r, risley-turret, posterior-max-margin-cardan). No row with a better gap and better near-touch numbers is put behind it on the gap axis, so this is watch.",
+  "evidence": "docs/alignment/remeasure/skin-normal-3r-pin-knee_simplicity_v1v2.json (tools/simplicity.py at 3ceacea^ vs HEAD on every row record), docs/SIMPLICITY.md lines 79-86, docs/concepts/rows/geneva-tail-knuckle-pinknee-3r.json mechanism (counts null), docs/concepts/rows/offset-skin-normal-3r.json"
+ },
+ {
+  "key": "P4",
+  "level": "watch",
+  "reason": "The metric (tools/simplicity.py v1 to v2) and this row's mechanism record (sensed_passive 2 to 0, cuff_knee added) changed in the same commit, 3ceacea, and the row's complexity went from 19.5 to 0. The change is declared: it carries a user ruling, a VERSION bump and a change log, and it applies the same rule to 13 rows. So it is not hidden. But the audit tool's judge_change check reports 'no bench / judge / metric file changed in the 25 commits that touched the row', because it follows only gap moves, not complexity moves. That is a blind spot in the tool (see the proposal).",
+  "evidence": "git show --stat 3ceacea; docs/alignment/skin-normal-3r-pin-knee.json check judge_change"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Metal hugging, report-only by the user's 2026-10-17 ruling. The re-wear reproduces 27.20 to the digit. Of the 343 taken poses, 8 have metal under 1 mm (min 0.086 mm, clip (30, 148, -60)), 27 under 2 mm and 92 under 3 mm. The gap is 27.20 plain, 31.75 with metal under 1 mm counted as contact, 46.85 under 2 mm and 95.88 under 3 mm. On the overhead taken poses the 10th-percentile closest metal is 0.31 mm. Contact: 9 poses, depth sum 8.38 mm, deepest 4.08 mm at ws (15, 90, 30). The sidecar-longdyad reference has 6.23 mm over 4 poses. The wear probe adds the overhead picture: all 5 of the 28 overhead workspace poses (elevation >= 140) that the design takes have metal under 2 mm (3 under 1 mm), and 4 of the 6 taken overhead clip frames have metal under 2 mm. The overhead reach the design has is bought with metal that hugs the skin.",
+  "evidence": "docs/alignment/remeasure/skin-normal-3r-pin-knee_bench.json (deep), docs/alignment/remeasure/skin-normal-3r-pin-knee_bench_perpose.json, docs/alignment/remeasure/skin-normal-3r-pin-knee_probe.json (ws_overhead140.floor_hist_mm, clip_overhead140)"
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "The knee rides its window edge, and the hub-only sensing is weakest exactly there. Held out, the knee reaches 149.48 deg against the stop at 149.54 (0.06 deg). The worst hub-only sigma_min (0.374) is at that pose, ws (60, 165, -45). The correlation of sigma_min with knee angle is -0.72 to -0.76. On the bench the knee margin is at least 2.24 deg (verifier) and 7 overhead poses are lost to the knee window, so the overhead clip follow is 0.60. The window [ang_min, 180 - ang_min] is a model rule. The model has no physical knee stop part. A real knee that passes the rule toward straight goes near-singular, and its pose is then the least observable from the hubs.",
+  "evidence": "docs/alignment/remeasure/skin-normal-3r-pin-knee_knee_sensing_held.json (knee.worst_s8_knee_ang 149.48, corr -0.722), docs/research/rebase/verify_pkH1_m5.json windows.knee_margin_min_taken 2.239, row v_overhead140.why_not"
+ },
+ {
+  "key": "M3",
+  "level": "watch",
+  "reason": "The model's knee stack (stk 5.68) leaves out the top thrust washer and the e-clip: +1.4 mm, outward of the knee bar. The L1 CAD build found this, and the verifier confirmed it from the model (docs/concepts/skin-normal-3r-pin-knee.md, check 3). No skin number moves, because the hardware sits outward. But the part-part clearance over it is not checked in the model; it is left to the built CAD's R16. Under v1 these would have been 2 more bought parts (+0.5); under v2 the knee scores 0 whatever its hardware.",
+  "evidence": "docs/concepts/skin-normal-3r-pin-knee.md 'Components at their envelope' (check 3 of the rebase verification)"
+ },
+ {
+  "key": "R2",
+  "level": "watch",
+  "reason": "Several displayed numbers do not match the verified state:\n- The dashboard row shows sweep_gap 19.72 (score 92.83), 7.48 below the verified 27.20. It is the in-sample best of the massive GPU polish, which was refuted as a replacement (row v_gpuknee_refuted true; held-out gain 0.90).\n- The row's verdict text is still the 03:32 screen (k4598, 30.35), while v_gap 27.20 is H1's.\n- The dashboard shows complexity 0 with the item 'unsensed two-pin cuff knee: 0', with no note that the hub-only sensing assumes a fixed GH.\n- SIMPLICITY.md's worked example (21.5, '2 sensed pins x 5') and its line 93 still describe v1.",
+  "evidence": "docs/dashboard/data/morphs.json (id skin-normal-3r-pin-knee: sweep_gap 19.72, complexity 0.0), row fields verdict / v_gpuknee_refuted, docs/SIMPLICITY.md lines 93 and 170-183"
+ }
+]

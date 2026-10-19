@@ -1,0 +1,69 @@
+{
+ "rule_committed": "2026-10-17T09:40Z, before any cma3 result and before any frozen / held-out number of this row",
+ "primary_claim_rule": "the configuration with the LOWEST 2 mm near-touch objective (gap_near2) on the FIT bench (Bench(60,160) fast, honest report) over every configuration evaluated by the leak-free runs cma3 k-p (law free: no LS_KK_MIN floor, no LS_STROKE_MIN; seeds = the long-stroke row's own fit-bench CMA bests g65d / s65n2d / r75a with the crank moved to its ear); near1 runs' configs enter by their recorded gap_near2. The fit bench decides alone; the claim bench and the held-out poses are worn once, after the pick is committed.",
+ "secondary_rule": "the best fit-bench gap_near2 of cma1 / cma2 (law floor kK >= 2.7 and stroke >= 55, seeded at the hand-picked k30 / k27b law): reported alongside, NOT the claim - its law floor and seed come from the long-stroke law table that counted held-out poses (lead correction 2026-10-17 after the longstroke audit).",
+ "reference": "slipper-nose-knuckle-3r verified 18.49 frozen / 23.45 held",
+ "primary_cma3_p": {
+  "params": {
+   "La": 19.5042,
+   "s_arm": 4.0515,
+   "r_h": 14.6248,
+   "beta": -140.3863,
+   "gam": 7.7146,
+   "hl": 3.15,
+   "zr": 0.0,
+   "kK": 1.7901,
+   "r_lobe": 7.0,
+   "bk1": 26.0,
+   "bk2": 38.0,
+   "a1max": 59.0,
+   "smhi": 19.0991,
+   "eta": -12.4092,
+   "clay": 1,
+   "zc": 0.8032,
+   "bl_c": 2,
+   "bl_h": 0
+  },
+  "fit_bench": {
+   "gap_near2": 16.47,
+   "gap_near1": 13.95,
+   "plain": 12.79,
+   "reach": 0.775,
+   "inband14": 0.8971,
+   "contact": 0.0
+  },
+  "tag": "ib-cma3-p-g91-5"
+ },
+ "secondary_cma1_f": {
+  "params": {
+   "La": 21.1008,
+   "s_arm": 4.0,
+   "r_h": 14.916,
+   "beta": -123.5919,
+   "gam": 20.6508,
+   "hl": 3.15,
+   "zr": 0.0,
+   "kK": 2.7,
+   "r_lobe": 8.5,
+   "bk1": 26.0,
+   "bk2": 38.0,
+   "a1max": 59.0,
+   "smhi": 15.9695,
+   "eta": -1.6444,
+   "clay": 1,
+   "zc": 1.1228,
+   "bl_c": 0,
+   "bl_h": 0
+  },
+  "fit_bench": {
+   "gap_near2": 16.35,
+   "gap_near1": 14.04,
+   "plain": 11.71,
+   "reach": 0.7875,
+   "inband14": 0.8954,
+   "contact": 0.0
+  },
+  "tag": "ib-cma1-f-g89-3"
+ },
+ "committed": "2026-10-17T10:10Z by the rule above, before any frozen / held-out number of either; fit-bench objective of every run: cma3 k 17.47 / l 19.50 / m 17.21 / n 16.58 / o 18.38 (near1 run) / p 16.47 -> p; cma1 a 18.60 / b 19.42 / c 22.17 / d 18.45 / e 22.91 / f 16.35, cma2 g 16.62 / h 18.05 / i 18.28 / j 16.70 -> f. Slipper-nose on the same fit objective: 16.47 (plain 13.00)."
+}

@@ -1,0 +1,2433 @@
+{
+ "poses": 120,
+ "step": 12,
+ "share_passing": 0.6667,
+ "static_fits_left_to_R6": [
+  "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta",
+  "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+  "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6"
+ ],
+ "arm_near_mm": 110.0,
+ "fails": {
+  "chain_does_not_close": 0.0333,
+  "body_contact": 0.125,
+  "part_interference": 0.2667
+ },
+ "evaluator_agreement": 0.858,
+ "skip_groups": [
+  "F"
+ ],
+ "tol_body_mm": 0.5,
+ "tol_parts_mm": 0.15,
+ "seconds": 29,
+ "per_pose": [
+  {
+   "k": 0,
+   "p": [
+    -90.0,
+    0.0,
+    75.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.65,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 1,
+   "p": [
+    -90.0,
+    15.0,
+    135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 2,
+   "p": [
+    -90.0,
+    45.0,
+    75.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 11.1,
+   "body_part": "l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)",
+   "parts_mm": 1.14,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.14,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.14
+  },
+  {
+   "k": 3,
+   "p": [
+    -90.0,
+    60.0,
+    135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 4,
+   "p": [
+    -75.0,
+    15.0,
+    60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.66,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 5,
+   "p": [
+    -75.0,
+    30.0,
+    120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 6,
+   "p": [
+    -75.0,
+    60.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.25,
+   "body_part": "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "parts_mm": 1.2,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.2,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.2
+  },
+  {
+   "k": 7,
+   "p": [
+    -60.0,
+    0.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 8,
+   "p": [
+    -60.0,
+    30.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.03,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.03,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.7,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.03
+  },
+  {
+   "k": 9,
+   "p": [
+    -60.0,
+    45.0,
+    105.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 10,
+   "p": [
+    -45.0,
+    0.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.65,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 11,
+   "p": [
+    -45.0,
+    15.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 12,
+   "p": [
+    -45.0,
+    45.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 1.66,
+   "body_part": "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "parts_mm": 1.15,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.15,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.73,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 1.15
+  },
+  {
+   "k": 13,
+   "p": [
+    -45.0,
+    60.0,
+    90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 14,
+   "p": [
+    -30.0,
+    0.0,
+    90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 15,
+   "p": [
+    -30.0,
+    15.0,
+    105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 16,
+   "p": [
+    -30.0,
+    30.0,
+    120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 17,
+   "p": [
+    -30.0,
+    60.0,
+    -30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 1.87,
+   "body_part": "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "parts_mm": 1.16,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.16,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.79,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 1.16
+  },
+  {
+   "k": 18,
+   "p": [
+    -15.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 19,
+   "p": [
+    -15.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.74,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.74,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 20,
+   "p": [
+    -15.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.76,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 0.51,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.76,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.51
+  },
+  {
+   "k": 21,
+   "p": [
+    -15.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.06,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.06,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.75,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.06
+  },
+  {
+   "k": 22,
+   "p": [
+    -15.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.16,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.16,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.7,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.16
+  },
+  {
+   "k": 23,
+   "p": [
+    -15.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 1.99,
+   "body_part": "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "parts_mm": 1.19,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.19,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 1.19
+  },
+  {
+   "k": 24,
+   "p": [
+    -15.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.18,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.18,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.18
+  },
+  {
+   "k": 25,
+   "p": [
+    0.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 26,
+   "p": [
+    0.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.73,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.73,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 27,
+   "p": [
+    0.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.75,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 0.23,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.75,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.23
+  },
+  {
+   "k": 28,
+   "p": [
+    0.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.03,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.03,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.74,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.03
+  },
+  {
+   "k": 29,
+   "p": [
+    0.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.09,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.09,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.7,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 1.09
+  },
+  {
+   "k": 30,
+   "p": [
+    0.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.13,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.13,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.13
+  },
+  {
+   "k": 31,
+   "p": [
+    0.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.11,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.11,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.11
+  },
+  {
+   "k": 32,
+   "p": [
+    0.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.89,
+   "body_part": "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "parts_mm": 1.48,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.48,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.77,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 1.48
+  },
+  {
+   "k": 33,
+   "p": [
+    0.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.72,
+   "body_part": "l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)",
+   "parts_mm": 1.37,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.37,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.77,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 1.37
+  },
+  {
+   "k": 34,
+   "p": [
+    15.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.65,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 35,
+   "p": [
+    15.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.72,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.72,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 36,
+   "p": [
+    15.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.74,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.74,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 37,
+   "p": [
+    15.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.02,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.02,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.73,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.02
+  },
+  {
+   "k": 38,
+   "p": [
+    15.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.04,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.04,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.7,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.04
+  },
+  {
+   "k": 39,
+   "p": [
+    15.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.07,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.07,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.64,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.07
+  },
+  {
+   "k": 40,
+   "p": [
+    15.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.08,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.08,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.08
+  },
+  {
+   "k": 41,
+   "p": [
+    15.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.39,
+   "body_part": "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "parts_mm": 1.48,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.48,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.76,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.48
+  },
+  {
+   "k": 42,
+   "p": [
+    15.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.87,
+   "body_part": "l2|J2 cap O20 G2 dome, threaded (Ti-6Al-4V)",
+   "parts_mm": 1.38,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.38,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.76,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.38
+  },
+  {
+   "k": 43,
+   "p": [
+    30.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.63,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 44,
+   "p": [
+    30.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.71,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.71,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 45,
+   "p": [
+    30.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.73,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.73,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 46,
+   "p": [
+    30.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.73,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 0.37,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.73,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.37
+  },
+  {
+   "k": 47,
+   "p": [
+    30.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.03,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.03,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.72,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 1.03
+  },
+  {
+   "k": 48,
+   "p": [
+    30.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.05,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.05,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 1.05
+  },
+  {
+   "k": 49,
+   "p": [
+    30.0,
+    90.0,
+    60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.07,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.07,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.07
+  },
+  {
+   "k": 50,
+   "p": [
+    30.0,
+    120.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 18.05,
+   "body_part": "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "parts_mm": 1.23,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.23,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.74,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.23
+  },
+  {
+   "k": 51,
+   "p": [
+    30.0,
+    150.0,
+    0.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 24.81,
+   "body_part": "l2|D5-03 link 2: strap + J2/J3 bosses (Ti-6Al-4V)",
+   "parts_mm": 1.38,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.38,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.72,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.38
+  },
+  {
+   "k": 52,
+   "p": [
+    45.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 53,
+   "p": [
+    45.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.69,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.69,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 54,
+   "p": [
+    45.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.73,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.73,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 55,
+   "p": [
+    45.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.74,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.74,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 56,
+   "p": [
+    45.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.02,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.02,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.73,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.02
+  },
+  {
+   "k": 57,
+   "p": [
+    45.0,
+    75.0,
+    45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 1.03,
+   "parts_pair": "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 1.03,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.71,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 1.03
+  },
+  {
+   "k": 58,
+   "p": [
+    45.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.77,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.77,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 59,
+   "p": [
+    45.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 2.82,
+   "body_part": "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "parts_mm": 0.77,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.77,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 60,
+   "p": [
+    45.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 6.64,
+   "body_part": "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "parts_mm": 0.77,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.77,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 61,
+   "p": [
+    60.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 62,
+   "p": [
+    60.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 63,
+   "p": [
+    60.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.73,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.73,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 64,
+   "p": [
+    60.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.75,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.75,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 65,
+   "p": [
+    60.0,
+    60.0,
+    30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.75,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-03 link 2: strap + J2/J3 bosses (Ti-6 IN D5-04 arm end: J3 pad + pin + neck + lap": 0.51,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.75,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.51
+  },
+  {
+   "k": 66,
+   "p": [
+    60.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 67,
+   "p": [
+    60.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.74,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.74,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 68,
+   "p": [
+    60.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.74,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.74,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 69,
+   "p": [
+    60.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 2.37,
+   "body_part": "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "parts_mm": 0.73,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.73,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 70,
+   "p": [
+    75.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 71,
+   "p": [
+    75.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 72,
+   "p": [
+    75.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.73,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.73,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 73,
+   "p": [
+    75.0,
+    45.0,
+    15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.75,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.75,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 74,
+   "p": [
+    75.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 75,
+   "p": [
+    75.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 76,
+   "p": [
+    75.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.69,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.69,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 77,
+   "p": [
+    75.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 78,
+   "p": [
+    75.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.65,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 79,
+   "p": [
+    90.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 80,
+   "p": [
+    90.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 81,
+   "p": [
+    90.0,
+    30.0,
+    0.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.74,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.74,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 82,
+   "p": [
+    90.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 83,
+   "p": [
+    90.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 84,
+   "p": [
+    90.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 85,
+   "p": [
+    90.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.64,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 86,
+   "p": [
+    90.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 87,
+   "p": [
+    90.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 88,
+   "p": [
+    105.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 89,
+   "p": [
+    105.0,
+    15.0,
+    -15.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 90,
+   "p": [
+    105.0,
+    45.0,
+    -165.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 91,
+   "p": [
+    105.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 92,
+   "p": [
+    105.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 93,
+   "p": [
+    105.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 94,
+   "p": [
+    105.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 95,
+   "p": [
+    105.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 96,
+   "p": [
+    105.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 97,
+   "p": [
+    120.0,
+    0.0,
+    -30.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 98,
+   "p": [
+    120.0,
+    30.0,
+    -180.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 2.32,
+   "body_part": "l1|D5-02 link 1: strap + J1/J2 pads + integral pins (Ti-6Al-4V)",
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 99,
+   "p": [
+    120.0,
+    45.0,
+    -165.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 100,
+   "p": [
+    120.0,
+    60.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 101,
+   "p": [
+    120.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 102,
+   "p": [
+    120.0,
+    90.0,
+    -120.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 103,
+   "p": [
+    120.0,
+    105.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 104,
+   "p": [
+    120.0,
+    135.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 105,
+   "p": [
+    120.0,
+    165.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 106,
+   "p": [
+    135.0,
+    15.0,
+    -135.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 107,
+   "p": [
+    135.0,
+    30.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.63,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 108,
+   "p": [
+    135.0,
+    45.0,
+    -45.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.76,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.76,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 109,
+   "p": [
+    135.0,
+    75.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 110,
+   "p": [
+    135.0,
+    90.0,
+    -90.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 111,
+   "p": [
+    135.0,
+    105.0,
+    -45.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.76,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.76,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 112,
+   "p": [
+    135.0,
+    135.0,
+    -135.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 113,
+   "p": [
+    150.0,
+    0.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 114,
+   "p": [
+    150.0,
+    15.0,
+    -60.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.66,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 115,
+   "p": [
+    150.0,
+    45.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 116,
+   "p": [
+    150.0,
+    60.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.67,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.67
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 117,
+   "p": [
+    150.0,
+    75.0,
+    -60.0
+   ],
+   "eval_feasible": false,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.75,
+   "parts_pair": "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.75,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  },
+  {
+   "k": 118,
+   "p": [
+    150.0,
+    105.0,
+    -150.0
+   ],
+   "eval_feasible": false,
+   "closes": false,
+   "body_mm": null,
+   "body_part": null,
+   "parts_mm": null,
+   "parts_pair": null
+  },
+  {
+   "k": 119,
+   "p": [
+    150.0,
+    120.0,
+    -105.0
+   ],
+   "eval_feasible": true,
+   "closes": true,
+   "body_mm": 0.0,
+   "body_part": null,
+   "parts_mm": 0.68,
+   "parts_pair": "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6",
+   "pairs": {
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.62,
+    "D5-02 link 1: strap + J1/J2 pads + integ IN D5-01 scapula base: J1 boss + handler ta": 0.5,
+    "D5-04 arm end: J3 pad + pin + neck + lap IN D5-03 link 2: strap + J2/J3 bosses (Ti-6": 0.68
+   },
+   "parts_motion_mm": 0.0
+  }
+ ]
+}

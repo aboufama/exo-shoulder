@@ -1,0 +1,866 @@
+{
+ "id": "weldk-crossover-kneeless-3r",
+ "name": "Kneeless welded crossover 3R (cx 0): three O20 hubs on GH rays, lead J1, J3 on the GH ray wdir(~105, ~10), one rigid bracket whose E leg crosses over link 2 to the arm pad (no knee, no K, no drive)",
+ "lens": "round301:drive-free-cone (minimum-parts branch)",
+ "family": "spherical 3R with a rigid cuff bracket (baseline-3r topology) + the inverted J3 stack",
+ "active_dof": 3,
+ "passive_dof": 0,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": "2026-10-19T01:32:54Z",
+ "t_screened": "2026-10-19T03:24:25Z",
+ "reach": 0.7438,
+ "follow": 0.9167,
+ "inband14": 0.8152,
+ "inband10": 0.427,
+ "contact": 0.044,
+ "gap": 31.83,
+ "v_reach": 0.6833,
+ "v_follow": 0.9364,
+ "v_inband14": 0.8129,
+ "v_inband10": 0.4343,
+ "v_gap": 37.42,
+ "n_configs": 114,
+ "verdict": "screened (fails the judge's gate; recommend stop): fast best 31.83 on Bench(60,160) (k82, near-touch 34.18), worn FROZEN on Bench(110,360) exact 37.42 (score 86.4; reach 0.683, follow 0.936, ib14 0.813, contact 0.057) vs pass <= 27.20 / kill > 28.46; held out (osn_polish held_bench, disjoint 110 + 360) 34.59. Overhead 6/28 (lead 8), 5 of the 6 in the 0-2 mm shell; 2 mm reading 63.02 (lead 34.84). cx 0, 0 passive DOF, 0 passive translations, knee rigidity exact (ptp 0, s 0). Sweep 114 configs, gate NOT converged on the plain gap (1.40 / 0.17 / 0.21) -> not called dead; measured ceilings say this cell cannot reach 27.20.",
+ "limiter": "(1) the abduction cone is a METAL wall: all 11 cone poses close kinematically (th margin 6.5-39 deg) and are skin contacts worn frozen (only 263 taken, at 1.23 mm); contact 21 poses, penetration sum 145 mm, max 27.15 (x7 the lead's T5); (2) the fold: kinematic ceiling over 54 seat cells on Bench(110,360) 277/360 ws (0.769), overhead 18-19/28 - frozen best 246/360 with fold 93; (3) b3-0 obliquity: hub 3 0.78, hub 2 0.73 (parked, dg 20.4), E 0.78, L2 0.75 in band; (4) rigid cuff: a 3 mm GH-centre error leaves misfit median 3.40 mm, 38.7 % of poses within the 3 mm liner (a planar knee 71.7 %)",
+ "note": "Model = weldk-overstrap-pinknee-3r.py (H1 underneath) with b3 0 forced, knee window dropped, boss/pad/leg at one 3.0 mm bracket level, knee-E/pad-E dropped (one body), bracket-hub3 and E-over-L2 stacked >= 0.15 kept, J2 seat solved from (a1, a2, br -1) (spec az2 26.90 el2 45.80 reproduced). SPEC CORRECTION (measured): the 60-110 mm pad leg sits 16-32 mm off the arm in hub 3's oblique plane (pad 0.0 in band in all 32 configs with lc >= 12); pad at the end of a long skin-following E leg (lE ~70, lc ~6) took the same seats 50.26 -> 46.36 and the CMA to 31.83. CMA left the spec ray: wd 108.6 / wa 6.1, a1 39.6, a2 52.6; at equal bracket the spec ray (105, 10, 40.5, 57.22) read 47.62 fast vs 46.36. Gate (score points, eval order, n 114): plain 1.40 / 0.17 / 0.21 NOT converged; near1 objective 0.97 / 0.50 / 0.27. Min th margin 5.757 (bench), 5.485 (held). Held read is tools/osn_polish.py held_bench(110,360) (26 overhead ws, 4 taken, all in 1-2 mm), NOT the verifiers' 71-overhead held set (not run). Ghost (dfc2 park_wk) not reproduced (time box; the model's own kinematic scan replaces it: spec cell 273/360 ws, 18/28 overhead kinematic vs the ghost's 255/9 with metal proxy). Local CPU only, farm closed, box load ~25. || VERIFIED 2026-10-19 (independent verifier, local CPU, harness docs/concepts/verify/weldk-crossover-kneeless-3r.py + _el2.py): v_gap 37.42 on Bench(110,360) exact frozen (reproduced to the digit; per-pose dump recomputes 37.42) vs champion 66.97 on the same bench (offset-skin-normal-3r verifier's champbig_frozen, same base checks; not re-run, box load 22-25) -> not refuted, no hard rule broken. Added checks over 349 taken bench / 833 held poses: rigid-cuff closure (members 3/5/6 one body to 0.024 deg / 0.000 mm, knee_rigid ptp 0 / s 0), hub-3 closure 0.000 mm, boss vs hubs 1-2 / L1 >= 7.21 mm, pad / pad leg vs hub-3 lower plate >= 50 mm, th margin 5.757 (held 5.092), levels <= 64 mm, continuity flood 1054/1054 connected (0 islands) -> 0 poses removed. H1's kd E-vs-L2 test removes 13 bench / 15 held poses (41.23 / 40.19 = conservative bound) but the EXACT solid test (E profile extrusion + boss vs link 2's densified shell) finds 0 clashes (min 0.150 = the binding stacked rule). Red team: the E's distal end (x 54 mm) runs 0.150 mm over link 2 at ws 205 / 208 (0.171 at 184 boss): reading E/boss vs L2 > 10 mm past the hub-3 rim as non-adjacent (1 mm) gives 38.29 (held 39.42). Held (verifiers' set, 202 clips + 952 ws, 71 overhead): 38.52, overhead 14/71 (lead 18/71), 2 mm 64.43 (lead 37.11), contact depth max 29.79. Bench overhead 6/28 (lead 8/28), 5 of 6 in the 0-2 mm shell; 2 mm 63.02. Record mismatch: best_params lc 6.28 is clamped to 15.0 by clamp(); all numbers are at lc 15. Fails the round's gates (27.20 kill line, follow 0.95, track bar 18.28); the stop recommendation stands.",
+ "doc": "docs/concepts/weldk-crossover-kneeless-3r.md",
+ "model_file": "docs/concepts/models/weldk-crossover-kneeless-3r.py",
+ "best_params": {
+  "a1": 39.5895,
+  "a2": 52.6183,
+  "wd": 108.587,
+  "wa": 6.1136,
+  "lE": 70.6049,
+  "phiE": -18.6946,
+  "lc": 6.28,
+  "phib": -125.4093,
+  "dg": 20.4018
+ },
+ "best_k": 82,
+ "exact_frozen": {
+  "protocol": "fit Bench(60,160) fast, shape frozen, worn on Bench(110,360) exact (CB_EXACT=1), margin 5, O20, rigid bracket 3.0 mm",
+  "fit_fast": {
+   "gap": 31.83,
+   "reach": 0.7438,
+   "follow": 0.9167,
+   "inband14": 0.8152,
+   "inband10": 0.427,
+   "contact": 0.044
+  },
+  "frozen": {
+   "gap": 37.42,
+   "reach": 0.6833,
+   "follow": 0.9364,
+   "inband14": 0.8129,
+   "inband10": 0.4343,
+   "contact": 0.0568
+  },
+  "why": {
+   "fold": 93,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 7,
+   "contact": 21
+  },
+  "parts_pairs": {
+   "L2-hub1": 7
+  },
+  "parts_ib14": {
+   "hub1": [
+    1.0,
+    8.7,
+    80
+   ],
+   "hub2": [
+    0.728,
+    13.0,
+    80
+   ],
+   "hub3": [
+    0.78,
+    11.4,
+    80
+   ],
+   "E": [
+    0.783,
+    10.3,
+    112
+   ],
+   "boss": [
+    0.825,
+    9.7,
+    32
+   ],
+   "pad": [
+    0.805,
+    10.9,
+    32
+   ],
+   "knee": [
+    0.826,
+    10.1,
+    65
+   ],
+   "L1": [
+    0.851,
+    7.0,
+    36
+   ],
+   "L2": [
+    0.753,
+    10.9,
+    76
+   ]
+  },
+  "near_touch": {
+   "min_mm": 0.13,
+   "gap_near1": 41.96,
+   "gap_near2": 63.02,
+   "near1_poses": 7,
+   "near2_poses": 33,
+   "low": [
+    {
+     "mm": 0.13,
+     "i": 289,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 150.0,
+     "axial": -90.0
+    },
+    {
+     "mm": 0.35,
+     "i": 318,
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 165.0,
+     "axial": -75.0
+    },
+    {
+     "mm": 0.38,
+     "i": 285,
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 105.0,
+     "axial": -60.0
+    },
+    {
+     "mm": 0.42,
+     "i": 202,
+     "kind": "ws",
+     "plane": 0.0,
+     "elev": 90.0,
+     "axial": -15.0
+    },
+    {
+     "mm": 0.61,
+     "i": 12,
+     "kind": "clip",
+     "plane": 30.0,
+     "elev": 142.3291778564453,
+     "axial": -58.43452453613281
+    }
+   ]
+  },
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.2143,
+   "clip": 10,
+   "follow": 0.5,
+   "inband14": 0.8746,
+   "inband10": 0.73,
+   "why_not": {
+    "fold": 11,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 16
+   }
+  },
+  "extras": {
+   "n_poses": 470,
+   "ws_taken": 246,
+   "ws_n": 360,
+   "overhead_ws": {
+    "n": 28,
+    "taken": 6,
+    "shell_lt1": 2,
+    "shell_1_2": 3,
+    "why": {
+     "": 0,
+     "contact": 11,
+     "fold": 11
+    }
+   },
+   "mid_ws_90_140": {
+    "n": 85,
+    "taken": 43
+   },
+   "min_th_margin_taken": 5.757,
+   "contact_poses": 21,
+   "contact_depth_sum_mm": 145.27,
+   "contact_depth_max_mm": 27.15,
+   "overhead_poses": [
+    {
+     "i": 209,
+     "plane": 0.0,
+     "elev": 150.0,
+     "axial": -15.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "contact",
+     "th_margin": 33.86
+    },
+    {
+     "i": 210,
+     "plane": 0.0,
+     "elev": 165.0,
+     "axial": -45.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "contact",
+     "th_margin": 39.23
+    },
+    {
+     "i": 211,
+     "plane": 0.0,
+     "elev": 165.0,
+     "axial": 15.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "contact",
+     "th_margin": 6.46
+    },
+    {
+     "i": 236,
+     "plane": 15.0,
+     "elev": 150.0,
+     "axial": -30.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "contact",
+     "th_margin": 30.7
+    },
+    {
+     "i": 237,
+     "plane": 15.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "contact",
+     "th_margin": 37.49
+    },
+    {
+     "i": 238,
+     "plane": 15.0,
+     "elev": 165.0,
+     "axial": 0.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "contact",
+     "th_margin": 27.77
+    },
+    {
+     "i": 263,
+     "plane": 30.0,
+     "elev": 150.0,
+     "axial": -30.0,
+     "taken": true,
+     "min_mm": 1.23,
+     "why": "",
+     "th_margin": 25.92
+    },
+    {
+     "i": 264,
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "contact",
+     "th_margin": 38.5
+    },
+    {
+     "i": 265,
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": 0.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "contact",
+     "th_margin": 36.79
+    },
+    {
+     "i": 289,
+     "plane": 45.0,
+     "elev": 150.0,
+     "axial": -90.0,
+     "taken": true,
+     "min_mm": 0.13,
+     "why": "",
+     "th_margin": 13.77
+    },
+    {
+     "i": 290,
+     "plane": 45.0,
+     "elev": 150.0,
+     "axial": -45.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "contact",
+     "th_margin": 31.38
+    },
+    {
+     "i": 291,
+     "plane": 45.0,
+     "elev": 165.0,
+     "axial": -75.0,
+     "taken": true,
+     "min_mm": 1.42,
+     "why": "",
+     "th_margin": 21.73
+    },
+    {
+     "i": 292,
+     "plane": 45.0,
+     "elev": 165.0,
+     "axial": -15.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "contact",
+     "th_margin": 32.03
+    },
+    {
+     "i": 316,
+     "plane": 60.0,
+     "elev": 150.0,
+     "axial": -105.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "fold",
+     "th_margin": -8.9
+    },
+    {
+     "i": 317,
+     "plane": 60.0,
+     "elev": 150.0,
+     "axial": -45.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "contact",
+     "th_margin": 37.36
+    },
+    {
+     "i": 318,
+     "plane": 60.0,
+     "elev": 165.0,
+     "axial": -75.0,
+     "taken": true,
+     "min_mm": 0.35,
+     "why": "",
+     "th_margin": 12.13
+    },
+    {
+     "i": 343,
+     "plane": 75.0,
+     "elev": 150.0,
+     "axial": -105.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "fold",
+     "th_margin": -18.87
+    },
+    {
+     "i": 344,
+     "plane": 75.0,
+     "elev": 150.0,
+     "axial": -45.0,
+     "taken": true,
+     "min_mm": 2.82,
+     "why": "",
+     "th_margin": 33.68
+    },
+    {
+     "i": 345,
+     "plane": 75.0,
+     "elev": 165.0,
+     "axial": -75.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "fold",
+     "th_margin": 1.58
+    },
+    {
+     "i": 370,
+     "plane": 90.0,
+     "elev": 150.0,
+     "axial": -120.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "fold",
+     "th_margin": -43.1
+    },
+    {
+     "i": 371,
+     "plane": 90.0,
+     "elev": 150.0,
+     "axial": -60.0,
+     "taken": true,
+     "min_mm": 1.32,
+     "why": "",
+     "th_margin": 11.61
+    },
+    {
+     "i": 372,
+     "plane": 90.0,
+     "elev": 165.0,
+     "axial": -90.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "fold",
+     "th_margin": -22.54
+    },
+    {
+     "i": 397,
+     "plane": 105.0,
+     "elev": 150.0,
+     "axial": -120.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "fold",
+     "th_margin": -53.07
+    },
+    {
+     "i": 398,
+     "plane": 105.0,
+     "elev": 165.0,
+     "axial": -150.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "fold",
+     "th_margin": -76.78
+    },
+    {
+     "i": 399,
+     "plane": 105.0,
+     "elev": 165.0,
+     "axial": -90.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "fold",
+     "th_margin": -33.83
+    },
+    {
+     "i": 424,
+     "plane": 120.0,
+     "elev": 150.0,
+     "axial": -120.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "fold",
+     "th_margin": -61.99
+    },
+    {
+     "i": 425,
+     "plane": 120.0,
+     "elev": 165.0,
+     "axial": -150.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "fold",
+     "th_margin": -69.02
+    },
+    {
+     "i": 426,
+     "plane": 120.0,
+     "elev": 165.0,
+     "axial": -90.0,
+     "taken": false,
+     "min_mm": null,
+     "why": "fold",
+     "th_margin": -44.73
+    }
+   ]
+  },
+  "stacked_min_taken": 0.15,
+  "knee_rigid": {
+   "knee_ptp_deg": 0.0,
+   "s_max_mm": 0.0,
+   "ok": true,
+   "a_deg": [
+    39.59,
+    52.618
+   ],
+   "c_mm": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "seats": {
+   "az2": 26.4889,
+   "el2": 47.0709,
+   "a_deg": [
+    39.59,
+    52.618
+   ]
+  },
+  "f": [
+   50.4,
+   63.68,
+   62.67
+  ],
+  "tr": 53.36,
+  "secs": 272.3
+ },
+ "held_frozen": {
+  "frozen": {
+   "gap": 34.59,
+   "reach": 0.7,
+   "follow": 0.9455,
+   "inband14": 0.8093,
+   "inband10": 0.4219,
+   "contact": 0.0507
+  },
+  "why": {
+   "fold": 92,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "skin": 0,
+   "parts": 3,
+   "contact": 19
+  },
+  "overhead_ws": {
+   "n": 26,
+   "taken": 4,
+   "shell_lt1": 0,
+   "shell_1_2": 4,
+   "why": {
+    "contact": 9,
+    "": 0,
+    "fold": 13
+   }
+  },
+  "mid_ws_90_140": {
+   "n": 86,
+   "taken": 42
+  },
+  "min_th_margin_taken": 5.485,
+  "near_touch": {
+   "min_mm": 0.11,
+   "gap_near1": 37.31,
+   "gap_near2": 60.34
+  },
+  "contact_depth_sum_mm": 126.79,
+  "n_poses": 470
+ },
+ "kinematic_ceiling_bench110_360": {
+  "note": "closure + fold rule (5 deg th) + continuity only, no metal; J1 at the lead seat, br -1",
+  "best_ws": {
+   "a1": 40.5,
+   "a2": 57.22,
+   "wd": 109.0,
+   "wa": 14.0,
+   "az2": 26.8597,
+   "el2": 45.819,
+   "ws": 277,
+   "oh": 18,
+   "mid": 53,
+   "clip": 0.945,
+   "fold_ws": 83,
+   "flip": 0
+  },
+  "best_oh": {
+   "a1": 40.5,
+   "a2": 60.0,
+   "wd": 105.0,
+   "wa": 14.0,
+   "az2": 26.843,
+   "el2": 45.8264,
+   "ws": 277,
+   "oh": 19,
+   "mid": 52,
+   "clip": 0.945,
+   "fold_ws": 83,
+   "flip": 0
+  },
+  "spec": [
+   {
+    "a1": 40.5,
+    "a2": 57.22,
+    "wd": 105.0,
+    "wa": 10.0,
+    "az2": 26.9011,
+    "el2": 45.8005,
+    "ws": 273,
+    "oh": 18,
+    "mid": 49,
+    "clip": 0.973,
+    "fold_ws": 87,
+    "flip": 0
+   }
+  ],
+  "n": 54
+ },
+ "redteam_gh_K1": {
+  "3mm": {
+   "median": 3.4,
+   "p90": 4.83,
+   "max": 5.9,
+   "within_liner": 0.387,
+   "slide_median": 3.31,
+   "slide_within_liner": 0.402,
+   "knee_equiv_median": 2.44,
+   "knee_equiv_within_liner": 0.717
+  },
+  "5mm": {
+   "median": 5.67,
+   "p90": 8.04,
+   "max": 9.84,
+   "within_liner": 0.177,
+   "slide_median": 5.51,
+   "slide_within_liner": 0.189,
+   "knee_equiv_median": 4.06,
+   "knee_equiv_within_liner": 0.349
+  },
+  "10mm": {
+   "median": 11.34,
+   "p90": 16.09,
+   "max": 19.68,
+   "within_liner": 0.079,
+   "slide_median": 11.03,
+   "slide_within_liner": 0.079,
+   "knee_equiv_median": 8.12,
+   "knee_equiv_within_liner": 0.128
+  },
+  "n_poses": 470,
+  "liner_mm": 3.0
+ },
+ "gate": {
+  "plain": {
+   "n": 114,
+   "key": "gap",
+   "best_gap": 31.83,
+   "best_k": 82,
+   "gain_2nd_half": 1.4,
+   "gain_last_third": 0.17,
+   "top5_spread": 0.21,
+   "converged": false
+  },
+  "near1": {
+   "n": 114,
+   "key": "gap_near1",
+   "best_gap": 34.18,
+   "best_k": 82,
+   "gain_2nd_half": 0.97,
+   "gain_last_third": 0.5,
+   "top5_spread": 0.27,
+   "converged": true
+  }
+ },
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 0,
+  "moving_bodies": 3,
+  "joints": 3,
+  "closed_loops": 0,
+  "sliding_pairs": 0,
+  "rolling_pairs": 3,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 7,
+  "catalogue_parts": 6,
+  "notes": "bodies link 1, link 2, member 3 (= the rigid bracket: hub 3 upper member + E leg + pad, bolted to BOTTOM); joints J1-J3 O20 v5 hubs (MR117-2RS pairs); no knee, no cuff_knee block, no K, no drive, no stop dowel. custom: base, 2 links, bracket, 3 hub shafts (7); catalogue: 3 x MR117 pair x2 (6).",
+  "source": "docs/concepts/models/weldk-crossover-kneeless-3r.py:1-30",
+  "confidence": "counted (proposer; checker to confirm)"
+ },
+ "t_verified": "2026-10-19T04:22:05Z",
+ "champion_same_bench": 66.97,
+ "v_note": "VERIFIED 2026-10-19 (independent verifier, local CPU, harness docs/concepts/verify/weldk-crossover-kneeless-3r.py + _el2.py): v_gap 37.42 on Bench(110,360) exact frozen (reproduced to the digit; per-pose dump recomputes 37.42) vs champion 66.97 on the same bench (offset-skin-normal-3r verifier's champbig_frozen, same base checks; not re-run, box load 22-25) -> not refuted, no hard rule broken. Added checks over 349 taken bench / 833 held poses: rigid-cuff closure (members 3/5/6 one body to 0.024 deg / 0.000 mm, knee_rigid ptp 0 / s 0), hub-3 closure 0.000 mm, boss vs hubs 1-2 / L1 >= 7.21 mm, pad / pad leg vs hub-3 lower plate >= 50 mm, th margin 5.757 (held 5.092), levels <= 64 mm, continuity flood 1054/1054 connected (0 islands) -> 0 poses removed. H1's kd E-vs-L2 test removes 13 bench / 15 held poses (41.23 / 40.19 = conservative bound) but the EXACT solid test (E profile extrusion + boss vs link 2's densified shell) finds 0 clashes (min 0.150 = the binding stacked rule). Red team: the E's distal end (x 54 mm) runs 0.150 mm over link 2 at ws 205 / 208 (0.171 at 184 boss): reading E/boss vs L2 > 10 mm past the hub-3 rim as non-adjacent (1 mm) gives 38.29 (held 39.42). Held (verifiers' set, 202 clips + 952 ws, 71 overhead): 38.52, overhead 14/71 (lead 18/71), 2 mm 64.43 (lead 37.11), contact depth max 29.79. Bench overhead 6/28 (lead 8/28), 5 of 6 in the 0-2 mm shell; 2 mm 63.02. Record mismatch: best_params lc 6.28 is clamped to 15.0 by clamp(); all numbers are at lc 15. Fails the round's gates (27.20 kill line, follow 0.95, track bar 18.28); the stop recommendation stands.",
+ "verification": {
+  "harness": [
+   "docs/concepts/verify/weldk-crossover-kneeless-3r.py",
+   "docs/concepts/verify/weldk-crossover-kneeless-3r_el2.py"
+  ],
+  "results": [
+   "docs/concepts/verify/weldk-crossover-kneeless-3r_v_bench_frozen.json",
+   "docs/concepts/verify/weldk-crossover-kneeless-3r_v_held_frozen.json",
+   "docs/concepts/verify/weldk-crossover-kneeless-3r_v_el2_bench.json",
+   "docs/concepts/verify/weldk-crossover-kneeless-3r_v_el2_held.json",
+   "docs/alignment/remeasure/weldk-crossover-kneeless-3r_bench_perpose.json",
+   "docs/alignment/remeasure/weldk-crossover-kneeless-3r_held_perpose.json"
+  ],
+  "bench": {
+   "verified": {
+    "gap": 37.42,
+    "reach": 0.6833,
+    "follow": 0.9364,
+    "inband14": 0.8129,
+    "inband10": 0.4343,
+    "contact": 0.0568
+   },
+   "kd_bound": {
+    "gap": 41.23,
+    "reach": 0.6472,
+    "follow": 0.9364,
+    "inband14": 0.8129,
+    "inband10": 0.4343,
+    "contact": 0.0588
+   },
+   "far_crossover_bound": {
+    "gap": 38.29,
+    "reach": 0.675,
+    "follow": 0.9364,
+    "inband14": 0.8129,
+    "inband10": 0.4343,
+    "contact": 0.0572
+   },
+   "exact_clashes": 0,
+   "kd_removed": [
+    128,
+    138,
+    162,
+    176,
+    182,
+    184,
+    202,
+    205,
+    208,
+    257,
+    259,
+    281,
+    338
+   ],
+   "overhead": {
+    "ws": 28,
+    "taken": 6,
+    "shell_lt1": 2,
+    "shell_1_2": 3,
+    "why": {
+     "": 6,
+     "contact": 11,
+     "fold": 11
+    },
+    "mid_90_140": {
+     "ws": 85,
+     "taken": 43
+    },
+    "contact_poses": 21,
+    "contact_depth_sum_mm": 145.27,
+    "contact_depth_max_mm": 27.15,
+    "near1_taken": 4,
+    "near2_taken": 24,
+    "min_taken_mm": 0.128
+   },
+   "flood": {
+    "grid": 1432,
+    "kin_ok": 1054,
+    "connected": 1054,
+    "islands": 0,
+    "branch_signs": [
+     1.0
+    ]
+   },
+   "closure_max": {
+    "hub3c": 0.0,
+    "rot3_axis": 0.0159,
+    "m3_m5_rot": 0.0214,
+    "m3_m5_tr": 0.0,
+    "m3_m6_rot": 0.0214,
+    "m3_m6_tr": 0.0,
+    "m5_vs_Q": 0.0214,
+    "Q_vs_bench_HG_report_only": 0.0214
+   },
+   "min_th_margin_taken": 5.757,
+   "hub_levels": {
+    "f": [
+     50.4,
+     63.68,
+     62.67
+    ],
+    "tr": 53.36,
+    "zb": 53.36,
+    "zk": 53.36,
+    "cap": 140,
+    "ok": true
+   },
+   "near_touch": {
+    "near_touch_min_mm": 0.13,
+    "gap_near1": 41.96,
+    "gap_near2": 63.02
+   }
+  },
+  "held": {
+   "set": "docs/concepts/verify/skin-normal-3r-pin-knee-polish.py held_bench() (202 clip + 952 ws, 71 overhead)",
+   "verified": {
+    "gap": 38.52,
+    "reach": 0.6754,
+    "follow": 0.9406,
+    "inband14": 0.8086,
+    "inband10": 0.4287,
+    "contact": 0.0598
+   },
+   "kd_bound": {
+    "gap": 40.19,
+    "reach": 0.6597,
+    "follow": 0.9406,
+    "inband14": 0.8086,
+    "inband10": 0.4287,
+    "contact": 0.0608
+   },
+   "far_crossover_bound": {
+    "gap": 39.42,
+    "reach": 0.667,
+    "follow": 0.9406,
+    "inband14": 0.8086,
+    "inband10": 0.4287,
+    "contact": 0.0604
+   },
+   "exact_clashes": 0,
+   "overhead": {
+    "ws": 71,
+    "taken": 14,
+    "shell_lt1": 4,
+    "shell_1_2": 7,
+    "why": {
+     "": 14,
+     "contact": 25,
+     "fold": 32
+    },
+    "mid_90_140": {
+     "ws": 229,
+     "taken": 107
+    },
+    "contact_poses": 53,
+    "contact_depth_sum_mm": 309.46,
+    "contact_depth_max_mm": 29.79,
+    "near1_taken": 11,
+    "near2_taken": 69,
+    "min_taken_mm": 0.412
+   },
+   "min_th_margin_taken": 5.092,
+   "near_touch": {
+    "near_touch_min_mm": 0.06,
+    "gap_near1": 42.45,
+    "gap_near2": 64.43
+   }
+  },
+  "champion_same_bench": 66.97,
+  "refuted": false,
+  "issues": [
+   "best_params lc 6.28 clamped to 15.0 (numbers at lc 15)",
+   "E distal end 0.150 mm over link 2 at x 54 mm (ws 205/208): tolerance-sensitive sliding fit",
+   "overhead 6/28 bench, 14/71 held - below the lead (8/28, 18/71)",
+   "2 mm reading 63.02 / held 64.43 vs lead 34.84 / 37.11",
+   "rigid cuff: 38.7 % of poses within the 3 mm liner at 3 mm GH error (claimant's red team, accepted)"
+  ]
+ }
+}

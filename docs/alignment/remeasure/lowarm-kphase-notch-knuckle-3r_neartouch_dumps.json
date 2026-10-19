@@ -1,0 +1,678 @@
+{
+ "ids": [
+  "lowarm-kphase-notch-knuckle-3r",
+  "lowarm-kstop-knuckle-3r",
+  "conecut-knee-knuckle-3r"
+ ],
+ "rule": "near-touch: a taken pose with min(min_mm, cmin) < N mm counted as contact (report only, user decision 3)",
+ "bench": {
+  "designs": {
+   "lowarm-kphase-notch-knuckle-3r": {
+    "src": "docs/alignment/remeasure/lowarm-kphase-notch-knuckle-3r_bench_perpose.json",
+    "gap": 18.47,
+    "dump_gap": 18.47,
+    "reach": 0.7278,
+    "inband14": 0.8982,
+    "contact": 0.0106,
+    "min_metal": 0.072,
+    "overhead150": [
+     8,
+     28
+    ],
+    "raised90": [
+     47,
+     113
+    ],
+    "gap_near1": 20.64,
+    "near1_poses": 4,
+    "gap_near2": 34.84,
+    "near2_poses": 33,
+    "gap_near3": 85.33,
+    "near3_poses": 104,
+    "overhead140_min_metal_p10": 1.63,
+    "under1": [
+     [
+      139,
+      "ws",
+      -60.0,
+      60.0,
+      105.0,
+      0.072
+     ],
+     [
+      203,
+      "ws",
+      0.0,
+      90.0,
+      45.0,
+      0.158
+     ],
+     [
+      379,
+      "ws",
+      105.0,
+      30.0,
+      -120.0,
+      0.616
+     ],
+     [
+      230,
+      "ws",
+      15.0,
+      90.0,
+      30.0,
+      0.948
+     ]
+    ]
+   },
+   "lowarm-kstop-knuckle-3r": {
+    "src": "docs/alignment/remeasure/lowarm-kstop-knuckle-3r_bench_perpose.json",
+    "gap": 18.69,
+    "dump_gap": 18.69,
+    "reach": 0.7278,
+    "inband14": 0.896,
+    "contact": 0.0106,
+    "min_metal": 0.072,
+    "overhead150": [
+     8,
+     28
+    ],
+    "raised90": [
+     47,
+     113
+    ],
+    "gap_near1": 20.86,
+    "near1_poses": 4,
+    "gap_near2": 34.84,
+    "near2_poses": 33,
+    "gap_near3": 85.66,
+    "near3_poses": 104,
+    "overhead140_min_metal_p10": 1.63,
+    "under1": [
+     [
+      139,
+      "ws",
+      -60.0,
+      60.0,
+      105.0,
+      0.072
+     ],
+     [
+      203,
+      "ws",
+      0.0,
+      90.0,
+      45.0,
+      0.158
+     ],
+     [
+      379,
+      "ws",
+      105.0,
+      30.0,
+      -120.0,
+      0.616
+     ],
+     [
+      230,
+      "ws",
+      15.0,
+      90.0,
+      30.0,
+      0.948
+     ]
+    ]
+   },
+   "conecut-knee-knuckle-3r": {
+    "src": "docs/alignment/remeasure/conecut-knee-knuckle-3r_bench_perpose.json",
+    "gap": 18.29,
+    "dump_gap": 18.29,
+    "reach": 0.7278,
+    "inband14": 0.9012,
+    "contact": 0.0106,
+    "min_metal": 0.072,
+    "overhead150": [
+     8,
+     28
+    ],
+    "raised90": [
+     47,
+     113
+    ],
+    "gap_near1": 19.92,
+    "near1_poses": 3,
+    "gap_near2": 34.84,
+    "near2_poses": 33,
+    "gap_near3": 86.16,
+    "near3_poses": 105,
+    "overhead140_min_metal_p10": 1.83,
+    "under1": [
+     [
+      139,
+      "ws",
+      -60.0,
+      60.0,
+      105.0,
+      0.072
+     ],
+     [
+      203,
+      "ws",
+      0.0,
+      90.0,
+      45.0,
+      0.263
+     ],
+     [
+      379,
+      "ws",
+      105.0,
+      30.0,
+      -120.0,
+      0.616
+     ]
+    ]
+   }
+  },
+  "diffs": {
+   "lowarm-kphase-notch-knuckle-3r_vs_lowarm-kstop-knuckle-3r": {
+    "taken_A_only": [],
+    "taken_B_only": [],
+    "under1_A_only": [],
+    "under1_B_only": [],
+    "contact_A_only": [],
+    "contact_B_only": []
+   },
+   "lowarm-kphase-notch-knuckle-3r_vs_conecut-knee-knuckle-3r": {
+    "taken_A_only": [],
+    "taken_B_only": [],
+    "under1_A_only": [
+     [
+      230,
+      "ws",
+      15.0,
+      90.0,
+      30.0,
+      0.948,
+      1.045
+     ]
+    ],
+    "under1_B_only": [],
+    "contact_A_only": [],
+    "contact_B_only": []
+   }
+  }
+ },
+ "held": {
+  "designs": {
+   "lowarm-kphase-notch-knuckle-3r": {
+    "src": "docs/alignment/remeasure/lowarm-kphase-notch-knuckle-3r_held_perpose.json",
+    "gap": 22.87,
+    "dump_gap": 22.87,
+    "reach": 0.6891,
+    "inband14": 0.8971,
+    "contact": 0.0149,
+    "min_metal": 0.325,
+    "overhead150": [
+     18,
+     71
+    ],
+    "raised90": [
+     123,
+     300
+    ],
+    "gap_near1": 25.73,
+    "near1_poses": 13,
+    "gap_near2": 37.36,
+    "near2_poses": 72,
+    "gap_near3": 82.71,
+    "near3_poses": 217,
+    "overhead140_min_metal_p10": 1.48,
+    "under1": [
+     [
+      1106,
+      "ws",
+      150.0,
+      15.0,
+      -180.0,
+      0.325
+     ],
+     [
+      893,
+      "ws",
+      90.0,
+      150.0,
+      -75.0,
+      0.492
+     ],
+     [
+      1047,
+      "ws",
+      135.0,
+      15.0,
+      -165.0,
+      0.507
+     ],
+     [
+      663,
+      "ws",
+      45.0,
+      90.0,
+      45.0,
+      0.518
+     ],
+     [
+      1107,
+      "ws",
+      150.0,
+      15.0,
+      -165.0,
+      0.642
+     ],
+     [
+      735,
+      "ws",
+      60.0,
+      90.0,
+      30.0,
+      0.666
+     ],
+     [
+      979,
+      "ws",
+      120.0,
+      15.0,
+      -150.0,
+      0.753
+     ],
+     [
+      1099,
+      "ws",
+      135.0,
+      135.0,
+      -60.0,
+      0.758
+     ],
+     [
+      744,
+      "ws",
+      60.0,
+      135.0,
+      -105.0,
+      0.798
+     ],
+     [
+      223,
+      "ws",
+      -90.0,
+      60.0,
+      90.0,
+      0.813
+     ],
+     [
+      1048,
+      "ws",
+      135.0,
+      15.0,
+      -150.0,
+      0.827
+     ],
+     [
+      907,
+      "ws",
+      105.0,
+      15.0,
+      -150.0,
+      0.868
+     ],
+     [
+      843,
+      "ws",
+      90.0,
+      30.0,
+      -120.0,
+      0.872
+     ]
+    ]
+   },
+   "lowarm-kstop-knuckle-3r": {
+    "src": "docs/alignment/remeasure/lowarm-kstop-knuckle-3r_held_perpose.json",
+    "gap": 22.88,
+    "dump_gap": 22.88,
+    "reach": 0.6922,
+    "inband14": 0.895,
+    "contact": 0.016,
+    "min_metal": 0.325,
+    "overhead150": [
+     18,
+     71
+    ],
+    "raised90": [
+     123,
+     300
+    ],
+    "gap_near1": 25.73,
+    "near1_poses": 13,
+    "gap_near2": 37.34,
+    "near2_poses": 73,
+    "gap_near3": 83.14,
+    "near3_poses": 219,
+    "overhead140_min_metal_p10": 1.48,
+    "under1": [
+     [
+      1106,
+      "ws",
+      150.0,
+      15.0,
+      -180.0,
+      0.325
+     ],
+     [
+      893,
+      "ws",
+      90.0,
+      150.0,
+      -75.0,
+      0.492
+     ],
+     [
+      1047,
+      "ws",
+      135.0,
+      15.0,
+      -165.0,
+      0.507
+     ],
+     [
+      663,
+      "ws",
+      45.0,
+      90.0,
+      45.0,
+      0.518
+     ],
+     [
+      1107,
+      "ws",
+      150.0,
+      15.0,
+      -165.0,
+      0.642
+     ],
+     [
+      735,
+      "ws",
+      60.0,
+      90.0,
+      30.0,
+      0.666
+     ],
+     [
+      979,
+      "ws",
+      120.0,
+      15.0,
+      -150.0,
+      0.753
+     ],
+     [
+      1099,
+      "ws",
+      135.0,
+      135.0,
+      -60.0,
+      0.758
+     ],
+     [
+      744,
+      "ws",
+      60.0,
+      135.0,
+      -105.0,
+      0.798
+     ],
+     [
+      223,
+      "ws",
+      -90.0,
+      60.0,
+      90.0,
+      0.813
+     ],
+     [
+      1048,
+      "ws",
+      135.0,
+      15.0,
+      -150.0,
+      0.827
+     ],
+     [
+      907,
+      "ws",
+      105.0,
+      15.0,
+      -150.0,
+      0.868
+     ],
+     [
+      843,
+      "ws",
+      90.0,
+      30.0,
+      -120.0,
+      0.872
+     ]
+    ]
+   },
+   "conecut-knee-knuckle-3r": {
+    "src": "docs/alignment/remeasure/conecut-knee-knuckle-3r_held_perpose.json",
+    "gap": 22.38,
+    "dump_gap": 22.38,
+    "reach": 0.6922,
+    "inband14": 0.9,
+    "contact": 0.016,
+    "min_metal": 0.325,
+    "overhead150": [
+     18,
+     71
+    ],
+    "raised90": [
+     123,
+     300
+    ],
+    "gap_near1": 25.23,
+    "near1_poses": 13,
+    "gap_near2": 37.11,
+    "near2_poses": 71,
+    "gap_near3": 82.52,
+    "near3_poses": 217,
+    "overhead140_min_metal_p10": 1.5,
+    "under1": [
+     [
+      1106,
+      "ws",
+      150.0,
+      15.0,
+      -180.0,
+      0.325
+     ],
+     [
+      893,
+      "ws",
+      90.0,
+      150.0,
+      -75.0,
+      0.492
+     ],
+     [
+      1047,
+      "ws",
+      135.0,
+      15.0,
+      -165.0,
+      0.507
+     ],
+     [
+      663,
+      "ws",
+      45.0,
+      90.0,
+      45.0,
+      0.541
+     ],
+     [
+      1107,
+      "ws",
+      150.0,
+      15.0,
+      -165.0,
+      0.642
+     ],
+     [
+      735,
+      "ws",
+      60.0,
+      90.0,
+      30.0,
+      0.706
+     ],
+     [
+      979,
+      "ws",
+      120.0,
+      15.0,
+      -150.0,
+      0.753
+     ],
+     [
+      1099,
+      "ws",
+      135.0,
+      135.0,
+      -60.0,
+      0.758
+     ],
+     [
+      744,
+      "ws",
+      60.0,
+      135.0,
+      -105.0,
+      0.798
+     ],
+     [
+      223,
+      "ws",
+      -90.0,
+      60.0,
+      90.0,
+      0.819
+     ],
+     [
+      1048,
+      "ws",
+      135.0,
+      15.0,
+      -150.0,
+      0.827
+     ],
+     [
+      907,
+      "ws",
+      105.0,
+      15.0,
+      -150.0,
+      0.868
+     ],
+     [
+      843,
+      "ws",
+      90.0,
+      30.0,
+      -120.0,
+      0.872
+     ]
+    ]
+   }
+  },
+  "diffs": {
+   "lowarm-kphase-notch-knuckle-3r_vs_lowarm-kstop-knuckle-3r": {
+    "taken_A_only": [],
+    "taken_B_only": [
+     [
+      274,
+      "ws",
+      -60.0,
+      45.0,
+      120.0
+     ],
+     [
+      1054,
+      "ws",
+      135.0,
+      30.0,
+      -135.0
+     ],
+     [
+      1068,
+      "ws",
+      135.0,
+      60.0,
+      -90.0
+     ]
+    ],
+    "under1_A_only": [],
+    "under1_B_only": [],
+    "contact_A_only": [],
+    "contact_B_only": [
+     [
+      835,
+      "ws",
+      90.0,
+      15.0,
+      -150.0
+     ]
+    ]
+   },
+   "lowarm-kphase-notch-knuckle-3r_vs_conecut-knee-knuckle-3r": {
+    "taken_A_only": [],
+    "taken_B_only": [
+     [
+      274,
+      "ws",
+      -60.0,
+      45.0,
+      120.0
+     ],
+     [
+      1054,
+      "ws",
+      135.0,
+      30.0,
+      -135.0
+     ],
+     [
+      1068,
+      "ws",
+      135.0,
+      60.0,
+      -90.0
+     ]
+    ],
+    "under1_A_only": [],
+    "under1_B_only": [],
+    "contact_A_only": [],
+    "contact_B_only": [
+     [
+      835,
+      "ws",
+      90.0,
+      15.0,
+      -150.0
+     ]
+    ]
+   }
+  }
+ }
+}

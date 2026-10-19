@@ -1,0 +1,50 @@
+[
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "Carried (skeptic 16:27 upheld). The spring holds on the judged R17 (judge/dynamics.json nominal twist 4.04 deg, PASS), but the gen-7 full CAD's forward-stroke bound at mu 0.15 reads 5.000812 deg raw against the 5.0 gate: FAIL by 0.0008 deg under the unrounded gate of 8f69bd6 (docs/alignment/remeasure/slipper-nose-knuckle-3r_r17_newgate_fb150.json). mu 0.12 reads 4.78 (pass). The built nose is the stock O2.5 (r 1.25), not the claimed r 1.1839; the stored N4 re-wears at r 1.25 read 18.49 bench / 23.45 held (docs/concepts/verify/slipper-nose-knuckle-3r_v_bench_r125.json, _v_held_r125.json), so the bench number does not lean on the non-stock radius.",
+  "evidence": "remeasure/slipper-nose-knuckle-3r_r17_newgate_fb150.json; pipeline/full-exo/designs/user_slipper_nose/judge/dynamics.json; verify/_v_*_r125.json sets ['--set=nose_r=1.25'] params nose_r 1.25"
+ },
+ {
+  "key": "NEW-one-sided-proxy",
+  "level": "watch",
+  "reason": "Carried, still open at HEAD. docs/EVOLUTION.md line 52 (user_slipper_nose) still reads 'forward bound (preload + rate / eta) 4.78 deg at mu 0.12 and **5.00 deg at mu 0.15 = the limit**' while the judge's own unrounded gate reads that bound FAIL by 0.0008 deg. Close it when the row reads 'fails the gate by 0.0008 deg at mu 0.15; pass line mu <= 0.105'.",
+  "evidence": "docs/EVOLUTION.md line 52; remeasure/slipper-nose-knuckle-3r_r17_newgate_fb150.json"
+ },
+ {
+  "key": "T3",
+  "level": "watch",
+  "reason": "Narrowed. The held-out fold margin is 5.006 deg (docs/concepts/verify/slipper-nose-knuckle-3r_v_held_r125.json extra.th_margin.min; bench 5.181) and holds only with K on its law. The 16:29 rebuild (commit 5a74d30) now draws the K phase as +0.75 +0.15 / -0.10 deg (was +-0.3, which the red team's stack did not cover) - the fix this finding asked for - but that build is UNJUDGED (judge/scorecard.json 14:53 is the pre-fix build's, as the commit says). Close when the re-judge of the 16:29 build is on file.",
+  "evidence": "pipeline/full-exo/designs/user_slipper_nose/design.json fits 'K phase at the onset +0.75 +0.15 / -0.10 deg'; judge/ file times 14:37-15:13 vs build 16:29"
+ },
+ {
+  "key": "T1",
+  "level": "watch",
+  "reason": "Carried. Taken bench poses with metal < 2 mm: 30 of 371 (< 1 mm: 3, min 0.072 mm); held out 67 of 852 (< 1 mm: 14, min 0.33 mm) (docs/alignment/remeasure/slipper-nose-knuckle-3r_bench.json / _held.json deep). Near-touch gaps 20.12 (1 mm) / 33.02 (2 mm) against plain 18.49: 14.53 points live in the 1-2 mm shell. Reported only (user ruling 2026-10-17). On the gen-7 CAD the 11 R16 step-1 body contacts are all scored contact poses of the claim (2 bench, 9 held); the build presses 0.06-0.52 mm deeper on 10 of them.",
+  "evidence": "remeasure/slipper-nose-knuckle-3r_{bench,held}.json deep; pipeline/full-exo/designs/user_slipper_nose/judge_r16s1/body_attrib_step1.json"
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "Carried, unchanged. With K at rest on stop A (204 of 371 taken bench poses) m_sub is under 5 deg on 106 and under 1 deg on 50 (min 0.000 deg at ws (15, 75, 15)); the family's th reading (5.181 / 5.006) does not read m_sub at rest. Proposal B1 still with the user.",
+  "evidence": "docs/alignment/remeasure/slipper-nose-knuckle-3r_msub_rest_bench.json"
+ },
+ {
+  "key": "T5",
+  "level": "watch",
+  "reason": "Carried (the tool's contact_depth check is watch too). Bench: 2 overhead contacts, 9.01 mm at ws (15, 165, -60) and 5.74 mm at (30, 165, -60), sum 14.75 mm, against sidecar-longdyad-knuckle-3r's 6.23 mm over 4 (x2.37). Held out: 10 contacts, sum 46.12 mm, deepest 9.06 mm at (30, 165, -45), 7 deeper than 3 mm (sidecar-longdyad 35.66 mm). Mixed for the wearer: sidecar-longdyad is worse plain (18.91) and at 2 / 3 mm, so no 'gamed' ranking proof.",
+  "evidence": "docs/alignment/remeasure/slipper-nose-knuckle-3r_probe_{bench,held}.json probe.contact_poses; docs/alignment/slipper-nose-knuckle-3r.json contact_depth"
+ },
+ {
+  "key": "NEW-ws-inband",
+  "level": "watch",
+  "reason": "Carried. The gap reads in-band on clip frames only. On taken workspace poses at elevation 90-140, 0.800 of the metal is in 2-14 mm and 0.199 is above 14 mm (p95 20.15 mm, max 30.8 mm), held out 0.822 / 0.176; sidecar-longdyad 0.841. The pre-fix full CAD reads R1 81.1 % / R1-aim 47.4 % (L1 82.0 / 48.6).",
+  "evidence": "docs/alignment/remeasure/slipper-nose-knuckle-3r_probe_{bench,held}.json probe.ws_elev90_140; docs/dashboard/data/cad.json user_slipper_nose R1 / R1-aim"
+ },
+ {
+  "key": "NEW-unjudged-rebuild",
+  "level": "watch",
+  "reason": "The gen-7 full CAD was rebuilt in place at 16:29 (commit 5a74d30: link margin 0, stock-part STEPs, knee pin names; the 16:19 run used --no-checks, so R7 was skipped). Its judge/ directory still holds the pre-fix build's files (scorecard.json 14:53, body_contact.json / dynamics.json / workspace.json 14:37, vs_l1.json 15:13; only posed_drive.json is new, 16:37), while docs/EVOLUTION.md line 52 (R1 81.1, R2 24.87, R17 PASS) and docs/dashboard/data/cad.json (user_slipper_nose rows dated 13:28 / 14:57) cite those numbers. The commit says so openly and the re-judges are queued (watchdog 16:58), so this is a timing state, not a claim; but link margin 0 moves link 2 toward the strap, so the displayed R1 / R2 / R16 may not describe the build on disk. Close when judge_all + R16 step 1 + R7 + the M5 bounds have run on the 16:29 files and the 11 body-contact poses are compared.",
+  "evidence": "ls --time-style pipeline/full-exo/designs/user_slipper_nose/{build.json,judge/} (16:29 vs 14:37-15:13); git show 5a74d30; skeptic 16:20-16:35 'missed' item 4"
+ }
+]

@@ -1,0 +1,229 @@
+{
+ "id": "l1_skin-normal-3r-pin-knee-h1",
+ "source": "docs/concepts/skin-normal-3r-pin-knee.md, rows best_params (k H-g107-1), fit on Bench(110,360) fast at fold margin 5.0 = the shape the verifier wore frozen on Bench(110,360) exact",
+ "params": {
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0,
+  "az1": 101.1634,
+  "el1": 63.8986,
+  "az2": 30.153,
+  "el2": 47.0108,
+  "wd": 70.3931,
+  "wa": -8.1248,
+  "b3": 0.2842,
+  "lE": 59.5534,
+  "lc": 28.2401,
+  "phiE": -5.8107,
+  "phib": -54.914,
+  "ang_min": 30.4611,
+  "stk": 5.6815
+ },
+ "n_joints": 3,
+ "sliding_cuff": false,
+ "dof": 3,
+ "passive": {
+  "count": 2,
+  "translations": 0,
+  "rotations": 2,
+  "outside_dof_count": true,
+  "kind": "flat two-pin knee closing the 3R loop at the cuff (planar RRR with J3: pins a, b parallel to J3); set by loop closure, nothing sags",
+  "components": [
+   {
+    "pin": "a",
+    "between": "member 3 (E boss) / knee link",
+    "part": "IGLIDUR-PIN: iglidur GSM sleeve + 2 GTM washers on an integral O4 Ti pin",
+    "stack_mm": 5.6815,
+    "plates_mm": [
+     2.59075,
+     2.59075
+    ]
+   },
+   {
+    "pin": "b",
+    "between": "knee link / arm pad (cuff)",
+    "part": "IGLIDUR-PIN (as pin a)",
+    "stack_mm": 5.6815,
+    "plates_mm": [
+     2.59075,
+     2.59075
+    ]
+   }
+  ]
+ },
+ "joints": [
+  {
+   "joint": "J1",
+   "part": "O20 x 12.25 hub, MR117-2RS pair (O20 v5 hub: MR117-2RS pair, 12.25 mm stack (docs/HARDWARE.md))",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "J2",
+   "part": "O20 x 12.25 hub, MR117-2RS pair (O20 v5 hub: MR117-2RS pair, 12.25 mm stack (docs/HARDWARE.md))",
+   "axis_offset_mm": 0.0
+  },
+  {
+   "joint": "J3",
+   "part": "O20 x 12.25 hub, MR117-2RS pair (O20 v5 hub: MR117-2RS pair, 12.25 mm stack (docs/HARDWARE.md))",
+   "axis_offset_mm": 10.72
+  }
+ ],
+ "kinematics": {
+  "az": 101.1634,
+  "el": 63.89859999988306,
+  "a": [
+   41.018321965540416,
+   68.25891631017193
+  ],
+  "w": [
+   78.54917974555468,
+   -5.342139234994091
+  ],
+  "branch": -1,
+  "order": [
+   0,
+   1,
+   1
+  ],
+  "axis_points_mm": [
+   [
+    0.0,
+    0.0,
+    0.0
+   ],
+   [
+    -0.0,
+    0.0,
+    -0.0
+   ],
+   [
+    -1.793,
+    -10.319,
+    -2.267
+   ]
+  ],
+  "axes": [
+   [
+    0.08518,
+    0.898017,
+    0.431637
+   ],
+   [
+    -0.577607,
+    0.672703,
+    0.462429
+   ],
+   [
+    -0.09125,
+    -0.198527,
+    0.975838
+   ]
+  ],
+  "axis_line_offsets_mm": [
+   0.0,
+   0.0,
+   10.72
+  ],
+  "u2_check_deg": 0.0001,
+  "seats": {
+   "az1": 101.1634,
+   "el1": 63.8986,
+   "az2": 30.153,
+   "el2": 47.0108,
+   "wd": 70.3931,
+   "wa": -8.1248,
+   "b3": 0.2842
+  },
+  "knee": {
+   "lE": 59.5534,
+   "lc": 28.2401,
+   "phiE": -5.8107,
+   "phib": -54.914,
+   "stk": 5.6815,
+   "ang_min": 30.4611
+  },
+  "knee_mid_m_mm": [
+   -10.026,
+   1.995,
+   0.0
+  ],
+  "hub_r_mm": [
+   10.0,
+   10.0,
+   10.0
+  ]
+ },
+ "base": {
+  "mount": "girdle",
+  "chain": "osn3_pinknee",
+  "note": "base rides the scapula on the user's scapula handler"
+ },
+ "built_with": "pipeline/concept_l1/build_pinknee_l1.py (L1 keep-out meshes: declared hub keep-outs, fitted 8 x 3 straps, E strap + boss, knee link, arm pad)",
+ "label": "skin-normal-3r-pin-knee (rows best_params (k H-g107-1); fit Bench(110,360), fold margin 5), L1 keep-out",
+ "fit_bench": [
+  110,
+  360
+ ],
+ "fold_margin": 5.0,
+ "faces_mm": [
+  51.7,
+  61.31,
+  76.3
+ ],
+ "tr": 84.72,
+ "stack_mm": {
+  "pin_stack_mm": 5.6815,
+  "plate_tp": 2.59075,
+  "run": 0.5,
+  "knee_level_tr": 84.721,
+  "f": [
+   51.7,
+   61.308,
+   76.296
+  ],
+  "boss": [
+   84.721,
+   87.311
+  ],
+  "knee": [
+   87.811,
+   90.402
+  ],
+  "E": {
+   "x": [
+    8.0,
+    55.05
+   ],
+   "under": [
+    76.3,
+    84.72
+   ],
+   "thin_from": 53.0,
+   "rim": 53.55
+  },
+  "knee_link_mm": [
+   40.24,
+   10.0,
+   2.59075
+  ],
+  "hubs_r": [
+   10.0,
+   10.0,
+   10.0
+  ],
+  "retainer": [
+   90.902,
+   91.802
+  ],
+  "full_pin_stack_mm": 7.082
+ },
+ "bench": {
+  "gap": 24.57,
+  "reach": 0.6694,
+  "follow": 1.0,
+  "inband14": 0.8934,
+  "inband10": 0.5034,
+  "contact": 0.0085
+ },
+ "note": "R17's dynamics judge models the orientation-equivalent spherical chain (kinematics az/el/a/w); the J3 line offset (10.72 mm) and the knee's 2 passive pins are not in its MuJoCo model"
+}

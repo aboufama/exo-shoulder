@@ -1,0 +1,106 @@
+[
+ {
+  "tag": "VER-x0",
+  "params": {},
+  "obj": 16.965,
+  "xfit": {
+   "price": {
+    "a1max_priced": 76.04407954926171,
+    "why": "cut at stop B / no K opening"
+   },
+   "a": {
+    "gap": 15.54,
+    "near": 15.54,
+    "reach": 0.781,
+    "follow": 0.95,
+    "inband14": 0.8985,
+    "inband10": 0.5396,
+    "contact": 0.0349,
+    "contact_poses": 8,
+    "depth": 17.28,
+    "near1_poses": 0,
+    "min_mm": 1.6,
+    "ws_taken": 164,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_a": {
+    "nodes": 1137,
+    "connected": 1137,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "g60": {
+    "gap": 9.56,
+    "near": 9.56,
+    "reach": 0.8375,
+    "follow": 0.95,
+    "inband14": 0.8974,
+    "inband10": 0.5385,
+    "contact": 0.0305,
+    "contact_poses": 6,
+    "depth": 24.29,
+    "near1_poses": 0,
+    "min_mm": 1.425,
+    "ws_taken": 134,
+    "dropped": 0,
+    "stop_engaged": 20,
+    "overhead": [
+     3,
+     12
+    ]
+   },
+   "b": {
+    "gap": 14.75,
+    "near": 18.39,
+    "reach": 0.7857,
+    "follow": 0.95,
+    "inband14": 0.8974,
+    "inband10": 0.5385,
+    "contact": 0.0306,
+    "contact_poses": 7,
+    "depth": 16.78,
+    "near1_poses": 4,
+    "min_mm": 0.286,
+    "ws_taken": 165,
+    "dropped": 0,
+    "stop_engaged": 17,
+    "overhead": [
+     5,
+     15
+    ]
+   },
+   "conn_b": {
+    "nodes": 1136,
+    "connected": 1136,
+    "islands": 0,
+    "fresh": {
+     "poses": 210,
+     "connected": 169
+    },
+    "refused": {
+     "rule": 0,
+     "jump": 0,
+     "branch": 0
+    }
+   },
+   "claim_pen": 0.0,
+   "depth_pen": 0.0,
+   "obj": 16.965,
+   "secs": 14.2
+  },
+  "secs": 15.4
+ }
+]

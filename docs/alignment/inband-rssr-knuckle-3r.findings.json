@@ -1,0 +1,27 @@
+[
+ {
+  "key": "NEW-stale-tie",
+  "level": "watch",
+  "reason": "The latent case the 13:18 audit described has now happened. The row's leader_ruling still reads 'tie: slipper-nose-knuckle-3r | ledger 2026-10-17T13:18:02Z'. But the headline is now conecut-knee-knuckle-3r at 18.28 (tools/alignment_headline_probe.mjs on docs/dashboard/simple/index.html and public/index.html, run 2026-10-18 21:10 UTC, 'as published'). tools/dash_build.py still accepts the ruling, because it cites a non-gamed skeptic entry. So the pill still prints 'Verified (tie)', while the headline names only conecut-h2facet as tied. Under the new leader's protocol (unpriced, margin 5, same pose sets, tools/alignment_paired.compare_sets) this row is BEHIND the leader on both legs. Bench: +0.03, 90 % CI [-1.95, +1.93]. Held: +1.16, CI [-0.06, +2.38], P(this row better) 0.064. The buildable catalogue config (O9 head, r_h 15.9) is further behind held: +1.24, CI [+0.02, +2.47], P 0.048. So the '(tie)' label overstates this row against today's leader. Nothing is hidden today (18.33 > 18.28). In probe runs A and B (conecut-knee flagged or refuted), the headline goes to lowarm-kphase-notch at 18.47 and this row (18.33) stays out of it unnamed. That rests on a ruling whose basis (a paired comparison with slipper-nose) says nothing about lowarm. Against lowarm, the paired unpriced reading is bench -0.15 (CI [-2.12, +1.71]) and held +0.66 (CI [-0.45, +2.04], P 0.155), so keeping it out happens to be defensible, but only by accident. Watch: a display defect, and no rank changes. [evidence: docs/alignment/remeasure/inband_pick3/pick3_vs_conecut-knee_2026-10-18.json; docs/alignment/remeasure/inband_pick3/headline_probe_{simple,public}_2026-10-18.json; docs/concepts/rows/inband-rssr-knuckle-3r.json leader_ruling]"
+ },
+ {
+  "key": "R3",
+  "level": "watch",
+  "reason": "The board shows a best-of-3 pick without its spread, and that pick alone puts this row above two simpler verified designs. On the board (the page's own calcs, as published 2026-10-18) this row sits at 18.33 (complexity 24.5), above lowarm-kphase-notch-knuckle-3r at 18.47 (complexity 0, estimated) and slipper-nose-knuckle-3r at 18.49 (complexity 18.25). Its bench edge on them is noise: paired unpriced -0.15, CI [-2.12, +1.71] and -0.17, CI [-2.01, +1.69]. Held out it is behind lowarm by +0.66 (P better 0.155) and level with slipper-nose at +0.08 (P 0.366). The 3 committed picks read 19.15 / 19.49 / 18.33 bench (docs/research/inband_env_polish/farm/claim_pick{1,2,3}_fit60_bench.json). The pre-registered pick1 (19.15) would sort below both simpler rows. The board shows no spread and no held-out number. This is not proof of a worse exo at 90 %, so watch. [evidence: docs/alignment/remeasure/inband_pick3/pick3_vs_conecut-knee_2026-10-18.json paired.pick3_unpriced_vs_{lowarm-kphase-notch,slipper-nose}-knuckle-3r; board order from the page calcs]"
+ },
+ {
+  "key": "P2",
+  "level": "watch",
+  "reason": "Carried, unchanged. pick3 was chosen post hoc as the best of 3 committed picks (committed in 28b9bb4 before the claims). The pre-registered envsel rule ranked it LAST (sel_mean_near1 25.905 / 26.225 / 26.295). It is best of the 3 only on the fit60 legs: bench 19.15 / 19.49 / 18.33, held 23.12 / 23.39 / 22.86. On the env-fit held leg it is the WORST: 22.43 / 23.47 / 23.57 (docs/research/inband_env_polish/farm/claim_pick{1,2,3}_env_held.json final.gap). No held-out leak was found, so watch. [evidence: the files named]"
+ },
+ {
+  "key": "NEW-reading-mismatch",
+  "level": "watch",
+  "reason": "Carried and updated for the new leader. The board shows this row PRICED (18.33: smlo +0.5, a1max -0.5, the fold read at 5.5) next to rows read UNPRICED at margin 5: conecut-knee 18.28, lowarm 18.47, slipper-nose 18.49. On the bench the order is unchanged (18.32 unpriced). Held out, the reading decides the comparison. Against conecut-knee: +0.49 priced (P better 0.307) vs +1.16 unpriced (P 0.064). Against lowarm: 22.86 priced is level with lowarm's 22.87, while unpriced is 0.66 behind. The tie ruling uses the unpriced reading, and the board shows only the priced bench. [evidence: docs/alignment/remeasure/inband_pick3/pick3_vs_conecut-knee_2026-10-18.json paired.pick3_priced_vs_conecut-knee-knuckle-3r and pick3_unpriced_vs_*; farm/claim_pick3_fit60_*_perpose.json; remeasure/inband_pick3/claim_O7nominal_unpriced_*_perpose.json]"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "Carried. The asymmetry has grown. This row's spring-held lobe follower and RSSR drive have no dynamics run: there is no pipeline/full-exo/designs/*inband* build and no judge/dynamics.py output for this id. Its only figures are the row's static spring_R17: 0.165 N.m at J2 and 1.1 / 1.37 N at the cuff, with cuff twist unmeasured. The leader family is now dynamics-judged: pipeline/full-exo/designs/user_conecut_knee/judge/dynamics.json and user_slipper_nose/judge/dynamics.json both read moves_freely_nominal true. So the board ranks this row on the bench alone, next to rows whose feel was measured. It changes no ranking today (the row is behind the leader), so watch. [evidence: the files named; docs/concepts/rows/inband-rssr-knuckle-3r.json spring_R17]"
+ }
+]

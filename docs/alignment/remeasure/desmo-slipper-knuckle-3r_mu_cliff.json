@@ -1,0 +1,116 @@
+{
+ "id": "desmo-slipper-knuckle-3r",
+ "what": "friction sweep of the drive gates at the VERIFIED placement (row best_params + a_s 9.5, psi 150), fast Bench(60,160), the model run UNCHANGED in its own 'check' mode with only mu changed; gate = 43 - atan(mu) as the model's own rule (the judge's pass rule is 45 - atan(mu))",
+ "command": "OMP_NUM_THREADS=1 nice -n 10 python3 docs/concepts/models/desmo-slipper-knuckle-3r.py check '<row best_params + a_s 9.5 + psi 150 + mu>'",
+ "rows": [
+  {
+   "mu": 0.12,
+   "plain_fast": 14.21,
+   "reach": 0.7688,
+   "dK_lim": 46.0,
+   "why_lim": "pressure_horn",
+   "pa_cap_max": 35.25,
+   "pa_gate": 36.16
+  },
+  {
+   "mu": 0.13,
+   "plain_fast": 14.84,
+   "reach": 0.7625,
+   "dK_lim": 45.0,
+   "why_lim": "pressure_horn",
+   "pa_cap_max": 35.25,
+   "pa_gate": 35.59
+  },
+  {
+   "mu": 0.135,
+   "plain_fast": 14.84,
+   "reach": 0.7625,
+   "dK_lim": 44.5,
+   "why_lim": "pressure_horn",
+   "pa_cap_max": 35.25,
+   "pa_gate": 35.31
+  },
+  {
+   "mu": 0.14,
+   "plain_fast": 86.71,
+   "reach": 0.3438,
+   "dK_lim": 0.0,
+   "why_lim": "s1-pa-cap",
+   "pa_cap_max": 35.25,
+   "pa_gate": 35.03,
+   "stage2_alone_dK_lim": 44.0
+  },
+  {
+   "mu": 0.15,
+   "plain_fast": 86.71,
+   "reach": 0.3438,
+   "dK_lim": 0.0,
+   "why_lim": "s1-pa-cap",
+   "pa_cap_max": 35.25,
+   "pa_gate": 34.47,
+   "stage2_alone_dK_lim": 43.0
+  }
+ ],
+ "cliff": {
+  "model_rule_mu": 0.1361,
+  "judge45_rule_mu": 0.1718,
+  "where": "stage-1 cap-side pressure angle 35.25 deg at the dwell exit (K 0): every arm motion that leaves rest crosses it",
+  "effect": "dK_lim 0: K never leaves the dwell; fast plain 86.71 (reach 0.344, follow 0.65) against 14.84 at mu 0.135"
+ },
+ "lead_reference": {
+  "file": "docs/alignment/remeasure/slipper-nose-knuckle-3r_bench_r125_mu15.json",
+  "mu": 0.15,
+  "fast": 14.88,
+  "dK_lim": 43.0,
+  "why_lim": "pressure_horn",
+  "note": "the lead's stage 1 ROLLS (MR63ZZ on the lobe): no stage-1 friction cliff; it loses ~1.9 fast points at mu 0.15"
+ },
+ "full_mu015": {
+  "cam": {
+   "dK_lim": 0.0,
+   "why_lim": "s1-pa-cap",
+   "dK_lim_parent": 43.0,
+   "why_lim_parent": "pressure_horn",
+   "nose_r": 1.25,
+   "mu": 0.15,
+   "pa_eff_horn": 42.9,
+   "pa_eff_crank": 38.0
+  },
+  "stage1": {
+   "a_s": 9.5,
+   "psi": 150.0,
+   "pitch": [
+    9.487,
+    9.487
+   ],
+   "r_out": 11.05,
+   "pa_pin_max": 25.0,
+   "pa_cap_max": 35.25,
+   "pa_gate": 34.47,
+   "drift_max": 0.0,
+   "tilt_max_deg": 0.0,
+   "crown_needed": false,
+   "rc_min": 99.0,
+   "rc_onset": 0.99,
+   "blend_K_lead_deg": 2.614,
+   "arm_from_axis": 9.5,
+   "n_ring_rigid": 18,
+   "ring_az_deg": 89.5,
+   "lim_by_gate": {
+    "pitch": 60.25,
+    "pa_pin": 50.25,
+    "pa_cap": 0.0,
+    "drift": null,
+    "radius": 0.5
+   }
+  },
+  "wall2": {
+   "n": 49,
+   "pa_crank_max": 29.5,
+   "pa_horn_max": 31.24,
+   "clear_lowarm": 24.97
+  }
+ },
+ "t": "2026-10-17T17:33:33Z",
+ "by": "alignment auditor (audit:desmo-slipper-knuckle-3r)"
+}

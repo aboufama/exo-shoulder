@@ -1,0 +1,333 @@
+{
+ "id": "isoceles-shortdyad-pinknee-3r",
+ "name": "Isoceles short-dyad pin knee (cx-0 knee-class frontier, seeds A / B / C)",
+ "lens": "round501:cx0-knee-frontier (lens A)",
+ "family": "pin-knee 3R, cx 0",
+ "active_dof": 3,
+ "passive_dof": 2,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-19T03:26:47Z",
+ "reach": 0.7125,
+ "follow": 0.9667,
+ "inband14": 0.8861,
+ "inband10": 0.5105,
+ "contact": 0.0171,
+ "gap": 21.85,
+ "v_reach": 0.6611,
+ "v_follow": 0.9818,
+ "v_inband14": 0.8824,
+ "v_inband10": 0.5138,
+ "v_gap": 27.91,
+ "n_configs": 253,
+ "verdict": "SCREENED (not dead, not converged): cx 0, 0 passive translations, 3 active. Frozen exact Bench(110,360) 27.91 (score 89.85; reach 0.6611, follow 0.9818, ib14 0.8824, contact 0.0226, overhead 9/28), held 30.30; fast fit 21.85 / near-touch 23.05. 0.71 points short of H1's verified 27.20 (pass line), CMA nearly converged (gate 1.34 / 0.19 / 0.32; fast best 22.52 near-touch at ib14 0.871). The descent left the isoceles box (a2 44.9 -> 53.6, lE 97 -> 115 at the clamp). Seeds B / B2b / C measured at step 0 only (54.6 / 81.8 / 93.6 at the coarse knee). | VERIFIED 27.91 (score 89.85), held 30.30; champion 64.93 same bench; not refuted.",
+ "limiter": "the J2 fold: 82 of 470 big-bench poses (50 at |axial| >= 120, 40 across the body; window [12.7, 94.6] vs the stretched poses), then the frozen J3 stop window (29 poses, 8 overhead), E strap 0.776 and link 2 0.846 in band, hub 3 0.857; 7 takes under 1 mm (min 0.28 mm, overhead pose 237)",
+ "note": "Convergence gate over all 253 configs (near-touch objective, score points): 2nd half 1.34, last third 0.19, top-5 spread 0.32 -> NOT converged (2nd half fails by 0.34); plain 1.25 / 0.81 / 0.84. Resume best isoA2-g9-1 near-touch 22.52 / plain 19.63 fast (reach 0.744, ib14 0.871 < the pre-registered 0.88, so not the pick). a1/a2 re-solve at every b3 (J2 seat solved from J1, tilted J3 and the arcs). Conditioning min |u1.(u2 x w)| 0.187 over big-bench takes (9 below H1's 0.233, 3 clip); min th margin 5.07. Search Bench(60,160) fast, local 2 niced processes (farm closed). Pick pre-registered (best near-touch at ib14 >= 0.88); one frozen + one held read. No T5 per-pose dump written (verifier's job, time box). Diagnostic (same shape, no J3 stop): 28.36 - the stop earns 0.45 (17 poses become E-strap vs link-2 hits without it). | VERIFIED 2026-10-19 (independent verifier, local exact, docs/concepts/verify/isoceles-shortdyad-pinknee-3r.py: the claimed params built in the crest-knee verifier's own model instance, CK.JogModel, frozen shape): Bench(110,360) exact 27.91 reproduced to the digit (reach 0.6611, follow 0.9818, ib14 0.8824, ib10 0.5138, contact 0.0226 = 8 poses, depth sum 27.47 mm, deepest -14.35 at the knee + pad across the body); pin-knee extra checks, crest checks (J3 window, knee window, th margin 5.07 / 5.67), joggle checks (bent-bar R15 rise 7.57 >= step 6.29) remove 0 poses; J2 re-solve exact (a1 40.9681 / a2 53.6261), J1 legal (anterior -0.057), O20 x3, MR63ZZ stk 6; continuity flood 982 / 983 connected, 0 bench / held poses dropped. Held out 30.30 (13 contacts, depth sum 51.06 mm). Near-touch 1 mm 31.83 / 31.42. Knee rides the E strap at a constant 0.25 mm stack gap (a 0.1 mm stack error closes it at 145 / 346 taken poses: shim it). CHAMPION same bench and protocol 64.93 (re-run here, fold margin 5): not refuted. Second verified cx-0 design, 0.71 behind H1 27.20; not a leader, not a 95.",
+ "doc": "docs/concepts/isoceles-shortdyad-pinknee-3r.md",
+ "mechanism": {
+  "joints": [
+   {
+    "name": "J1",
+    "kind": "pin",
+    "active": true,
+    "component": "O20 v5 hub, MR117-2RS pair"
+   },
+   {
+    "name": "J2",
+    "kind": "pin",
+    "active": true,
+    "component": "O20 v5 hub, MR117-2RS pair"
+   },
+   {
+    "name": "J3",
+    "kind": "pin",
+    "active": true,
+    "component": "O20 v5 hub, MR117-2RS pair, own-angle dowel stop"
+   }
+  ],
+  "cuff_knee": {
+   "pins": 2,
+   "component": "MR63ZZ pairs",
+   "encoders": 0
+  },
+  "passive_translations": 0,
+  "springs": 0,
+  "loops": 0,
+  "sliding_pairs": 0,
+  "complexity": 0,
+  "joggled_knee": true,
+  "e_strap_mm": 115.0
+ },
+ "gap_near1": 23.05,
+ "best_params": {
+  "a1": 40.9681,
+  "a2": 53.6261,
+  "az1": 83.2135,
+  "el1": 61.0254,
+  "az2": 21.91082,
+  "el2": 41.63477,
+  "wd": 101.9308,
+  "wa": -0.3299,
+  "b3": 0.1216,
+  "lE": 115.0,
+  "lc": 33.0296,
+  "phiE": 0.426,
+  "phib": -70.5798,
+  "kj": 1,
+  "stk": 6.0,
+  "ang_min": 25.22,
+  "fly": 1,
+  "j3stop": 1,
+  "j3stop_margin": 1.0,
+  "br": -1.0,
+  "b1": 0.0,
+  "b2": 0.0,
+  "rad1": 10.0,
+  "rad2": 10.0,
+  "rad3": 10.0
+ },
+ "best_tag": "isoA-g18-0",
+ "frozen_exact": {
+  "bench": "Bench(110,360) exact, frozen search shape",
+  "gap": 27.91,
+  "reach": 0.6611,
+  "follow": 0.9818,
+  "inband14": 0.8824,
+  "inband10": 0.5138,
+  "contact": 0.0226,
+  "gap_near1": 31.83,
+  "near_touch_min_mm": 0.28,
+  "near1_poses": 7,
+  "overhead140": {
+   "ws": 28,
+   "reach": 0.3214,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.9188,
+   "inband10": 0.6753,
+   "why_not": {
+    "fold": 10,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 1
+   }
+  },
+  "why": {
+   "fold": 82,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "j3stop": 29,
+   "skin": 0,
+   "parts": 5,
+   "contact": 8
+  },
+  "parts_ib14": {
+   "hub1": [
+    0.997,
+    9.4,
+    80
+   ],
+   "hub2": [
+    0.96,
+    10.6,
+    80
+   ],
+   "hub3": [
+    0.857,
+    10.6,
+    80
+   ],
+   "E": [
+    0.776,
+    10.0,
+    200
+   ],
+   "boss": [
+    0.958,
+    9.5,
+    32
+   ],
+   "pad": [
+    1.0,
+    8.6,
+    32
+   ],
+   "knee": [
+    0.888,
+    11.1,
+    115
+   ],
+   "L1": [
+    0.971,
+    6.3,
+    52
+   ],
+   "L2": [
+    0.846,
+    8.7,
+    92
+   ]
+  },
+  "cond": {
+   "det_min": 0.1872,
+   "th_margin_min": 5.072,
+   "th_taken": [
+    19.7,
+    89.5
+   ],
+   "window": [
+    12.66,
+    94.59
+   ],
+   "below_h1": 9,
+   "below_h1_clip": 3
+  },
+  "j3win": [
+   269.13,
+   265.13
+  ]
+ },
+ "held_frozen": {
+  "bench": "verifier held_bench, exact, frozen",
+  "gap": 30.3,
+  "reach": 0.6528,
+  "follow": 0.9909,
+  "inband14": 0.8806,
+  "inband10": 0.5082,
+  "contact": 0.0364,
+  "gap_near1": 31.42,
+  "near_touch_min_mm": 0.31,
+  "overhead140": {
+   "ws": 26,
+   "reach": 0.3077,
+   "clip": 10,
+   "follow": 1.0,
+   "inband14": 0.9005,
+   "inband10": 0.6402,
+   "why_not": {
+    "fold": 12,
+    "slide": 0,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 0
+   }
+  },
+  "why": {
+   "fold": 83,
+   "slide": 0,
+   "flip": 0,
+   "closure": 0,
+   "j3stop": 24,
+   "skin": 0,
+   "parts": 6,
+   "contact": 13
+  },
+  "cond": {
+   "det_min": 0.1794,
+   "th_margin_min": 5.667,
+   "th_taken": [
+    19.2,
+    88.9
+   ],
+   "window": [
+    12.66,
+    94.59
+   ],
+   "below_h1": 14,
+   "below_h1_clip": 3
+  }
+ },
+ "score_frozen": 89.85,
+ "complexity": 0,
+ "resume_best": {
+  "tag": "isoA2-g9-1",
+  "gap_near1": 22.52,
+  "gap": 19.63,
+  "reach": 0.7438,
+  "follow": 1.0,
+  "inband14": 0.8709,
+  "inband10": 0.4864,
+  "contact": 0.011,
+  "params": {
+   "a1": 39.8106,
+   "a2": 53.8574,
+   "az1": 84.5803,
+   "el1": 62.8112,
+   "az2": 22.97655,
+   "el2": 43.29797,
+   "wd": 100.2592,
+   "wa": -1.3422,
+   "b3": 0.1171,
+   "lE": 115.0,
+   "lc": 33.1034,
+   "phiE": 1.3854,
+   "phib": -79.8966,
+   "kj": 1
+  }
+ },
+ "t_verified": "2026-10-19T04:34:00Z",
+ "verification": {
+  "harness": "docs/concepts/verify/isoceles-shortdyad-pinknee-3r.py (crest-knee + pin-knee + joggle verifier checks, own model instance)",
+  "bench": {
+   "gap": 27.91,
+   "reach": 0.6611,
+   "follow": 0.9818,
+   "inband14": 0.8824,
+   "inband10": 0.5138,
+   "contact": 0.0226,
+   "contact_poses": 8,
+   "contact_depth_sum_mm": -27.47,
+   "overhead": {
+    "total": 28,
+    "taken": 9
+   },
+   "near1": 31.83
+  },
+  "held": {
+   "gap": 30.3,
+   "reach": 0.6528,
+   "follow": 0.9909,
+   "inband14": 0.8806,
+   "inband10": 0.5082,
+   "contact": 0.0364,
+   "contact_poses": 13,
+   "contact_depth_sum_mm": -51.06,
+   "overhead": {
+    "total": 26,
+    "taken": 8
+   },
+   "near1": 31.42
+  },
+  "removed": {
+   "bench": 0,
+   "held": 0
+  },
+  "flood": {
+   "kin_ok": 983,
+   "connected": 982,
+   "islands": 1,
+   "bench_dropped": 0,
+   "held_dropped": 0
+  },
+  "champion_same_bench": 64.93,
+  "th_margin_min": [
+   5.072,
+   5.667
+  ],
+  "cond_det_min": [
+   0.1872,
+   0.1794
+  ],
+  "dumps": [
+   "docs/alignment/remeasure/isoceles-shortdyad-pinknee-3r_v_bench_perpose.json",
+   "docs/alignment/remeasure/isoceles-shortdyad-pinknee-3r_v_held_perpose.json"
+  ]
+ }
+}

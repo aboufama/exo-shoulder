@@ -1,0 +1,672 @@
+[
+ {
+  "k": 0,
+  "t": "2026-10-18T11:27:30Z",
+  "params": {
+   "cell": "L0",
+   "bk1": 26,
+   "bk2": 55.56,
+   "a1max": 76.044,
+   "seats": "lead"
+  },
+  "bench": "Bench(60,160) fast, kit K law (pre-check)",
+  "inband14": 0.8333,
+  "inband10": null,
+  "reach": 0.2313,
+  "follow": 0.1167,
+  "contact": 0.1852,
+  "gap": 175.39,
+  "extra": {
+   "why": {
+    "parts": 130,
+    "skin": 10,
+    "fold": 31,
+    "slide": 5
+   },
+   "pairs": {
+    "L1b-hub1": 130
+   }
+  }
+ },
+ {
+  "k": 1,
+  "t": "2026-10-18T11:28:40Z",
+  "params": {
+   "cell": "L0b",
+   "bk1": 32,
+   "bk2": 52,
+   "a1max": 76.044,
+   "seats": "lead"
+  },
+  "bench": "Bench(60,160) fast, kit K law (pre-check)",
+  "inband14": 0.8862,
+  "inband10": null,
+  "reach": 0.825,
+  "follow": 1.0,
+  "contact": 0.0254,
+  "gap": 11.42,
+  "extra": {
+   "why": {
+    "skin": 5,
+    "slide": 5,
+    "fold": 18
+   },
+   "pairs": null
+  }
+ },
+ {
+  "k": 2,
+  "t": "2026-10-18T11:29:10Z",
+  "params": {
+   "cell": "C0",
+   "bk1": 26,
+   "bk2": 38.28,
+   "a1max": 58.7678,
+   "seats": "lead"
+  },
+  "bench": "Bench(60,160) fast, kit K law (pre-check)",
+  "inband14": 0.912,
+  "inband10": null,
+  "reach": 0.75,
+  "follow": 1.0,
+  "contact": 0.0,
+  "gap": 15.0,
+  "extra": {
+   "why": {
+    "fold": 35,
+    "slide": 5
+   },
+   "pairs": null
+  }
+ },
+ {
+  "k": 3,
+  "t": "2026-10-18T11:27:50Z",
+  "params": {
+   "cell": "L0",
+   "az1": 95.3929,
+   "el1": 67.8974,
+   "az2": 45.8211,
+   "el2": 41.0855,
+   "wd": 66.8662,
+   "wa": -10.6559,
+   "b3": 0.329,
+   "bk1": 26.0,
+   "bk2": 55.56,
+   "a1max": 76.044
+  },
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast), oracle K connected (bound)",
+  "inband14": 0.8509,
+  "inband10": 0.6445,
+  "reach": 0.0056,
+  "follow": 0.1273,
+  "contact": 0.4483,
+  "gap": 221.45,
+  "extra": {
+   "static": {
+    "gap": 165.18,
+    "reach": 0.2361,
+    "follow": 0.1273,
+    "inband14": 0.8509,
+    "inband10": 0.6445,
+    "contact": 0.1161,
+    "near": 169.86,
+    "near1_poses": 4,
+    "min_mm": 0.006,
+    "ws_taken": 85,
+    "clear02": 98,
+    "clear1": 95,
+    "why": {
+     "parts": 288,
+     "slide": 10,
+     "fold": 60,
+     "contact": 13
+    },
+    "moved": 52,
+    "state_free_taken": 43
+   },
+   "kit": {
+    "gap": 174.65,
+    "reach": 0.1917,
+    "follow": 0.1,
+    "inband14": 0.8607,
+    "inband10": 0.6716,
+    "contact": 0.1489,
+    "near": 178.69,
+    "ws_taken": 69,
+    "why": {
+     "parts": 288,
+     "slide": 10,
+     "fold": 78,
+     "contact": 14
+    }
+   },
+   "near_connected": 225.18,
+   "check": {
+    "a1": 37.552,
+    "a2": 57.218,
+    "a1_ok": true,
+    "a2_ok": true,
+    "k_ok_rule": true,
+    "k_ok_model": true,
+    "stops_ok": true,
+    "k_low_margin": 2.49,
+    "dKB": 99.53
+   },
+   "flood": {
+    "nodes": 1076,
+    "seeds": 98,
+    "connected": 743,
+    "islands": 333,
+    "edges": {
+     "tested": 784,
+     "passed": 645,
+     "refused_rule": 139,
+     "refused_jump": 0,
+     "refused_branch": 0,
+     "jump_by_joint": {
+      "q1": 0,
+      "q2": 0,
+      "q3'": 0,
+      "pin_a": 0,
+      "pin_b": 0,
+      "dK": 0
+     },
+     "seed_branch": [
+      1.0
+     ]
+    },
+    "secs": 2.3
+   },
+   "margins": {
+    "min_th_margin": 4.013,
+    "at_pose": 166,
+    "below_5_5": 13
+   },
+   "overhead140_ws": {
+    "ws": 28,
+    "taken": 2
+   },
+   "n_contacts": 13
+  }
+ },
+ {
+  "k": 4,
+  "t": "2026-10-18T11:32:30Z",
+  "params": {
+   "cell": "S1",
+   "az1": 116.6411,
+   "az2": 53.5141,
+   "el2": 46.478
+  },
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast), oracle K connected (bound)",
+  "inband14": 0.8986,
+  "inband10": 0.51,
+  "reach": 0.7556,
+  "follow": 0.9455,
+  "contact": 0.067,
+  "gap": 21.73,
+  "extra": {
+   "static": {
+    "gap": 21.73,
+    "reach": 0.7556,
+    "follow": 0.9455,
+    "inband14": 0.8986,
+    "inband10": 0.51,
+    "contact": 0.067,
+    "near": 26.47,
+    "near1_poses": 8,
+    "min_mm": 0.469,
+    "ws_taken": 272,
+    "clear02": 376,
+    "clear1": 368,
+    "why": {
+     "contact": 27,
+     "slide": 8,
+     "fold": 59
+    },
+    "moved": 32,
+    "state_free_taken": 19
+   },
+   "kit": {
+    "gap": 22.9,
+    "reach": 0.7472,
+    "follow": 0.9455,
+    "inband14": 0.8958,
+    "inband10": 0.5084,
+    "contact": 0.0675,
+    "near": 27.66,
+    "ws_taken": 269,
+    "why": {
+     "contact": 27,
+     "slide": 11,
+     "fold": 59
+    }
+   },
+   "near_connected": 26.47,
+   "check": {
+    "a1": 37.912,
+    "a2": 58.5,
+    "a1_ok": true,
+    "a2_ok": true,
+    "k_ok_rule": true,
+    "k_ok_model": true,
+    "stops_ok": true,
+    "k_low_margin": 12.41,
+    "dKB": 82.0
+   },
+   "flood": {
+    "nodes": 1142,
+    "seeds": 136,
+    "connected": 1142,
+    "islands": 0,
+    "edges": {
+     "tested": 1006,
+     "passed": 1006,
+     "refused_rule": 0,
+     "refused_jump": 0,
+     "refused_branch": 0,
+     "jump_by_joint": {
+      "q1": 0,
+      "q2": 0,
+      "q3'": 0,
+      "pin_a": 0,
+      "pin_b": 0,
+      "dK": 0
+     },
+     "seed_branch": [
+      1.0
+     ]
+    },
+    "secs": 2.6
+   },
+   "margins": {
+    "min_th_margin": 5.5,
+    "at_pose": 306,
+    "below_5_5": 0
+   },
+   "overhead140_ws": {
+    "ws": 28,
+    "taken": 5
+   },
+   "n_contacts": 27
+  }
+ },
+ {
+  "k": 5,
+  "t": "2026-10-18T11:48:30Z",
+  "params": {
+   "cell": "C0p",
+   "bk1": 32,
+   "bk2": 52,
+   "a1max": 58.7678,
+   "seats": "lead"
+  },
+  "bench": "Bench(60,160) fast, kit K law (pre-check)",
+  "inband14": 0.9088,
+  "inband10": null,
+  "reach": 0.7562,
+  "follow": 1.0,
+  "contact": 0.0109,
+  "gap": 15.47,
+  "extra": {
+   "why": {
+    "skin": 2,
+    "fold": 34,
+    "slide": 3
+   },
+   "pairs": null
+  }
+ },
+ {
+  "k": 6,
+  "t": "2026-10-18T11:49:00Z",
+  "params": {
+   "cell": "L0x",
+   "bk1": 26,
+   "bk2": 55.56,
+   "a1max": 58.7678,
+   "seats": "lead"
+  },
+  "bench": "Bench(60,160) fast, kit K law (pre-check)",
+  "inband14": 0.8607,
+  "inband10": null,
+  "reach": 0.1562,
+  "follow": 0.1167,
+  "contact": 0.1579,
+  "gap": 177.43,
+  "extra": {
+   "why": {
+    "parts": 130,
+    "skin": 6,
+    "fold": 48,
+    "slide": 4
+   },
+   "pairs": {
+    "L1b-hub1": 130
+   }
+  }
+ },
+ {
+  "k": 7,
+  "t": "2026-10-18T11:38:57Z",
+  "params": {
+   "cell": "L0b",
+   "az1": 95.3929,
+   "el1": 67.8974,
+   "az2": 45.8211,
+   "el2": 41.0855,
+   "wd": 66.8662,
+   "wa": -10.6559,
+   "b3": 0.329,
+   "bk1": 32.0,
+   "bk2": 52.0,
+   "a1max": 76.044
+  },
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast), oracle K connected (bound)",
+  "inband14": 0.8862,
+  "inband10": 0.5527,
+  "reach": 0.7694,
+  "follow": 1.0,
+  "contact": 0.0325,
+  "gap": 17.69,
+  "extra": {
+   "static": {
+    "gap": 17.69,
+    "reach": 0.7694,
+    "follow": 1.0,
+    "inband14": 0.8862,
+    "inband10": 0.5527,
+    "contact": 0.0325,
+    "near": 22.11,
+    "near1_poses": 12,
+    "min_mm": 0.052,
+    "ws_taken": 277,
+    "clear02": 385,
+    "clear1": 375,
+    "why": {
+     "contact": 13,
+     "slide": 8,
+     "fold": 60,
+     "parts": 2
+    },
+    "moved": 26,
+    "state_free_taken": 17
+   },
+   "kit": {
+    "gap": 18.26,
+    "reach": 0.7639,
+    "follow": 1.0,
+    "inband14": 0.8862,
+    "inband10": 0.5527,
+    "contact": 0.0327,
+    "near": 22.7,
+    "ws_taken": 275,
+    "why": {
+     "contact": 13,
+     "slide": 10,
+     "fold": 60,
+     "parts": 2
+    }
+   },
+   "near_connected": 22.11,
+   "check": {
+    "a1": 37.552,
+    "a2": 57.218,
+    "a1_ok": true,
+    "a2_ok": true,
+    "k_ok_rule": true,
+    "k_ok_model": true,
+    "stops_ok": true,
+    "k_low_margin": 12.05,
+    "dKB": 82.69
+   },
+   "flood": {
+    "nodes": 1154,
+    "seeds": 98,
+    "connected": 1154,
+    "islands": 0,
+    "edges": {
+     "tested": 1057,
+     "passed": 1056,
+     "refused_rule": 1,
+     "refused_jump": 0,
+     "refused_branch": 0,
+     "jump_by_joint": {
+      "q1": 0,
+      "q2": 0,
+      "q3'": 0,
+      "pin_a": 0,
+      "pin_b": 0,
+      "dK": 0
+     },
+     "seed_branch": [
+      1.0
+     ]
+    },
+    "secs": 3.6
+   },
+   "margins": {
+    "min_th_margin": 5.5,
+    "at_pose": 333,
+    "below_5_5": 0
+   },
+   "overhead140_ws": {
+    "ws": 28,
+    "taken": 9
+   },
+   "n_contacts": 13
+  }
+ },
+ {
+  "k": 8,
+  "t": "2026-10-18T11:41:13Z",
+  "params": {
+   "cell": "S2",
+   "az1": 126.6411,
+   "az2": 61.0385,
+   "el2": 47.5979
+  },
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast), oracle K connected (bound)",
+  "inband14": 0.8816,
+  "inband10": 0.4406,
+  "reach": 0.7583,
+  "follow": 0.9455,
+  "contact": 0.0645,
+  "gap": 22.91,
+  "extra": {
+   "static": {
+    "gap": 22.91,
+    "reach": 0.7583,
+    "follow": 0.9455,
+    "inband14": 0.8816,
+    "inband10": 0.4406,
+    "contact": 0.0645,
+    "near": 28.72,
+    "near1_poses": 10,
+    "min_mm": 0.163,
+    "ws_taken": 273,
+    "clear02": 375,
+    "clear1": 367,
+    "why": {
+     "fold": 55,
+     "contact": 26,
+     "slide": 12
+    },
+    "moved": 34,
+    "state_free_taken": 25
+   },
+   "kit": {
+    "gap": 24.54,
+    "reach": 0.75,
+    "follow": 0.9455,
+    "inband14": 0.8788,
+    "inband10": 0.439,
+    "contact": 0.0697,
+    "near": 29.3,
+    "ws_taken": 270,
+    "why": {
+     "fold": 55,
+     "contact": 28,
+     "slide": 13
+    }
+   },
+   "near_connected": 28.72,
+   "check": {
+    "a1": 37.912,
+    "a2": 58.5,
+    "a1_ok": true,
+    "a2_ok": true,
+    "k_ok_rule": true,
+    "k_ok_model": true,
+    "stops_ok": true,
+    "k_low_margin": 12.41,
+    "dKB": 82.0
+   },
+   "flood": {
+    "nodes": 1149,
+    "seeds": 119,
+    "connected": 1149,
+    "islands": 0,
+    "edges": {
+     "tested": 1030,
+     "passed": 1030,
+     "refused_rule": 0,
+     "refused_jump": 0,
+     "refused_branch": 0,
+     "jump_by_joint": {
+      "q1": 0,
+      "q2": 0,
+      "q3'": 0,
+      "pin_a": 0,
+      "pin_b": 0,
+      "dK": 0
+     },
+     "seed_branch": [
+      1.0
+     ]
+    },
+    "secs": 2.8
+   },
+   "margins": {
+    "min_th_margin": 5.5,
+    "at_pose": 306,
+    "below_5_5": 0
+   },
+   "overhead140_ws": {
+    "ws": 28,
+    "taken": 4
+   },
+   "n_contacts": 26
+  }
+ },
+ {
+  "k": 9,
+  "t": "2026-10-18T11:46:08Z",
+  "params": {
+   "cell": "C0",
+   "az1": 95.3929,
+   "el1": 67.8974,
+   "az2": 45.8211,
+   "el2": 41.0855,
+   "wd": 66.8662,
+   "wa": -10.6559,
+   "b3": 0.329,
+   "bk1": 26.0,
+   "bk2": 38.28,
+   "a1max": 58.7678
+  },
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast), oracle K connected (bound)",
+  "inband14": 0.9128,
+  "inband10": 0.5785,
+  "reach": 0.7083,
+  "follow": 1.0,
+  "contact": 0.0135,
+  "gap": 20.52,
+  "extra": {
+   "static": {
+    "gap": 18.83,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.9128,
+    "inband10": 0.5785,
+    "contact": 0.0133,
+    "near": 21.55,
+    "near1_poses": 5,
+    "min_mm": 0.056,
+    "ws_taken": 261,
+    "clear02": 370,
+    "clear1": 366,
+    "why": {
+     "contact": 5,
+     "fold": 87,
+     "slide": 7
+    },
+    "moved": 39,
+    "state_free_taken": 36
+   },
+   "kit": {
+    "gap": 19.71,
+    "reach": 0.7083,
+    "follow": 1.0,
+    "inband14": 0.9122,
+    "inband10": 0.578,
+    "contact": 0.0054,
+    "near": 22.47,
+    "ws_taken": 255,
+    "why": {
+     "contact": 2,
+     "fold": 95,
+     "slide": 8
+    }
+   },
+   "near_connected": 22.16,
+   "check": {
+    "a1": 37.552,
+    "a2": 57.218,
+    "a1_ok": true,
+    "a2_ok": true,
+    "k_ok_rule": true,
+    "k_ok_model": true,
+    "stops_ok": true,
+    "k_low_margin": 19.77,
+    "dKB": 62.27
+   },
+   "flood": {
+    "nodes": 1003,
+    "seeds": 98,
+    "connected": 1003,
+    "islands": 0,
+    "edges": {
+     "tested": 906,
+     "passed": 905,
+     "refused_rule": 1,
+     "refused_jump": 0,
+     "refused_branch": 0,
+     "jump_by_joint": {
+      "q1": 0,
+      "q2": 0,
+      "q3'": 0,
+      "pin_a": 0,
+      "pin_b": 0,
+      "dK": 0
+     },
+     "seed_branch": [
+      1.0
+     ]
+    },
+    "secs": 1.8
+   },
+   "margins": {
+    "min_th_margin": 5.5,
+    "at_pose": 185,
+    "below_5_5": 0
+   },
+   "overhead140_ws": {
+    "ws": 28,
+    "taken": 8
+   },
+   "n_contacts": 5
+  }
+ }
+]

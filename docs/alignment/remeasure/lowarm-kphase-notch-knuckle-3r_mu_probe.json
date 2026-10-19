@@ -1,0 +1,357 @@
+{
+ "rows": [
+  {
+   "design": "lowarm-kphase-notch-knuckle-3r",
+   "mu": 0.12,
+   "P_mu": 0.12,
+   "fit": {
+    "gap": 95.51,
+    "reach": 0.3438,
+    "inband14": 0.897,
+    "contact": 0.0
+   },
+   "info": {
+    "dK_lim": 0.0,
+    "why_lim": "PLATE-hubK",
+    "pa": [
+     1.7,
+     13.0,
+     19.8
+    ],
+    "arc": 107.1,
+    "arm_len": 49.7,
+    "contact_r": [
+     16.4,
+     24.6
+    ],
+    "plate_len": 3.32,
+    "clear_plate_hubK": 1.0,
+    "clear_plate_hub2": 38.87,
+    "pocket": [
+     0.0,
+     0.0,
+     null
+    ],
+    "slop": 0.0375,
+    "lim_pa_by_mu": {
+     "0.087": 54.0,
+     "0.120": 50.0,
+     "0.135": 48.25,
+     "0.150": 46.5,
+     "0.200": 40.75
+    },
+    "desmo_fail": []
+   },
+   "secs": 3.4
+  },
+  {
+   "design": "lowarm-kphase-notch-knuckle-3r",
+   "mu": 0.15,
+   "P_mu": 0.15,
+   "fit": {
+    "gap": 19.45,
+    "reach": 0.7688,
+    "inband14": 0.8979,
+    "contact": 0.0
+   },
+   "info": {
+    "dK_lim": 46.0,
+    "why_lim": "pocket-pa",
+    "pa": [
+     10.3,
+     34.1,
+     42.6
+    ],
+    "arc": 107.1,
+    "arm_len": 49.7,
+    "contact_r": [
+     16.4,
+     24.6
+    ],
+    "plate_len": 9.67,
+    "clear_plate_hubK": 1.05,
+    "clear_plate_hub2": 37.74,
+    "pocket": [
+     34.7,
+     44.0,
+     46.5
+    ],
+    "slop": 0.045,
+    "lim_pa_by_mu": {
+     "0.087": 54.0,
+     "0.120": 50.0,
+     "0.135": 48.25,
+     "0.150": 46.5,
+     "0.200": 40.75
+    },
+    "desmo_fail": []
+   },
+   "secs": 4.5
+  },
+  {
+   "design": "lowarm-kphase-notch-knuckle-3r",
+   "mu": 0.16,
+   "P_mu": 0.16,
+   "fit": {
+    "gap": 18.92,
+    "reach": 0.7625,
+    "inband14": 0.8979,
+    "contact": 0.0
+   },
+   "info": {
+    "dK_lim": 45.0,
+    "why_lim": "pocket-pa",
+    "pa": [
+     10.1,
+     33.6,
+     42.7
+    ],
+    "arc": 107.1,
+    "arm_len": 49.7,
+    "contact_r": [
+     16.4,
+     24.6
+    ],
+    "plate_len": 9.48,
+    "clear_plate_hubK": 1.07,
+    "clear_plate_hub2": 37.97,
+    "pocket": [
+     34.0,
+     44.0,
+     45.5
+    ],
+    "slop": 0.045,
+    "lim_pa_by_mu": {
+     "0.087": 54.0,
+     "0.120": 50.0,
+     "0.135": 48.25,
+     "0.150": 46.5,
+     "0.200": 40.75
+    },
+    "desmo_fail": []
+   },
+   "secs": 5.1
+  },
+  {
+   "design": "lowarm-kphase-notch-knuckle-3r",
+   "mu": 0.17,
+   "P_mu": 0.17,
+   "fit": {
+    "gap": 18.92,
+    "reach": 0.7625,
+    "inband14": 0.8979,
+    "contact": 0.0
+   },
+   "info": {
+    "dK_lim": 44.25,
+    "why_lim": "wall2B-pa",
+    "pa": [
+     9.9,
+     33.3,
+     42.9
+    ],
+    "arc": 107.1,
+    "arm_len": 49.7,
+    "contact_r": [
+     16.4,
+     24.6
+    ],
+    "plate_len": 9.33,
+    "clear_plate_hubK": 1.07,
+    "clear_plate_hub2": 38.23,
+    "pocket": [
+     33.1,
+     10.0,
+     null
+    ],
+    "slop": 0.0425,
+    "lim_pa_by_mu": {
+     "0.087": 54.0,
+     "0.120": 50.0,
+     "0.135": 48.25,
+     "0.150": 46.5,
+     "0.200": 40.75
+    },
+    "desmo_fail": []
+   },
+   "secs": 4.6
+  },
+  {
+   "design": "lowarm-kphase-notch-knuckle-3r",
+   "mu": 0.2,
+   "P_mu": 0.2,
+   "fit": {
+    "gap": 95.51,
+    "reach": 0.3438,
+    "inband14": 0.8992,
+    "contact": 0.0
+   },
+   "info": {
+    "dK_lim": 0.0,
+    "why_lim": "s1b-pa-pin",
+    "pa": [
+     1.7,
+     13.0,
+     24.3
+    ],
+    "arc": 107.1,
+    "arm_len": 49.7,
+    "contact_r": [
+     16.4,
+     24.6
+    ],
+    "plate_len": 3.32,
+    "clear_plate_hubK": 5.01,
+    "clear_plate_hub2": 45.04,
+    "pocket": [
+     0.0,
+     0.0,
+     null
+    ],
+    "slop": 0.0375,
+    "lim_pa_by_mu": {
+     "0.087": 54.0,
+     "0.120": 50.0,
+     "0.135": 48.25,
+     "0.150": 46.5,
+     "0.200": 40.75
+    },
+    "desmo_fail": []
+   },
+   "secs": 2.7
+  },
+  {
+   "design": "lowarm-kstop-knuckle-3r",
+   "mu": 0.15,
+   "P_mu": 0.15,
+   "fit": {
+    "gap": 18.8,
+    "reach": 0.775,
+    "inband14": 0.896,
+    "contact": 0.0
+   },
+   "info": {
+    "dK_lim": 46.75,
+    "why_lim": "slot-end",
+    "pa": [
+     14.6,
+     24.6,
+     33.1
+    ],
+    "arc": 127.3,
+    "arm_len": 55.4,
+    "contact_r": [
+     16.4,
+     22.2
+    ],
+    "plate_len": 7.08,
+    "clear_plate_hubK": 1.2,
+    "clear_plate_hub2": 41.69,
+    "pocket": [
+     25.5,
+     12.0,
+     null
+    ],
+    "slop": 0.04,
+    "lim_pa_by_mu": {
+     "0.087": 64.5,
+     "0.120": 64.5,
+     "0.135": 64.5,
+     "0.150": 64.5,
+     "0.200": 61.0
+    },
+    "desmo_fail": []
+   },
+   "secs": 4.0
+  },
+  {
+   "design": "lowarm-kstop-knuckle-3r",
+   "mu": 0.17,
+   "P_mu": 0.17,
+   "fit": {
+    "gap": 18.8,
+    "reach": 0.775,
+    "inband14": 0.896,
+    "contact": 0.0
+   },
+   "info": {
+    "dK_lim": 46.75,
+    "why_lim": "slot-end",
+    "pa": [
+     14.6,
+     24.6,
+     34.2
+    ],
+    "arc": 127.3,
+    "arm_len": 55.4,
+    "contact_r": [
+     16.4,
+     22.2
+    ],
+    "plate_len": 7.08,
+    "clear_plate_hubK": 1.2,
+    "clear_plate_hub2": 41.69,
+    "pocket": [
+     25.5,
+     12.0,
+     null
+    ],
+    "slop": 0.04,
+    "lim_pa_by_mu": {
+     "0.087": 64.5,
+     "0.120": 64.5,
+     "0.135": 64.5,
+     "0.150": 64.5,
+     "0.200": 61.0
+    },
+    "desmo_fail": []
+   },
+   "secs": 4.2
+  },
+  {
+   "design": "lowarm-kstop-knuckle-3r",
+   "mu": 0.2,
+   "P_mu": 0.2,
+   "fit": {
+    "gap": 95.51,
+    "reach": 0.3438,
+    "inband14": 0.8978,
+    "contact": 0.0
+   },
+   "info": {
+    "dK_lim": 0.0,
+    "why_lim": "s1b-pa-pin",
+    "pa": [
+     14.6,
+     16.4,
+     27.7
+    ],
+    "arc": 127.3,
+    "arm_len": 55.4,
+    "contact_r": [
+     16.4,
+     22.2
+    ],
+    "plate_len": 3.32,
+    "clear_plate_hubK": 5.01,
+    "clear_plate_hub2": 46.02,
+    "pocket": [
+     0.0,
+     0.0,
+     null
+    ],
+    "slop": 0.0375,
+    "lim_pa_by_mu": {
+     "0.087": 64.5,
+     "0.120": 64.5,
+     "0.135": 64.5,
+     "0.150": 64.5,
+     "0.200": 61.0
+    },
+    "desmo_fail": []
+   },
+   "secs": 2.5
+  }
+ ],
+ "note": "fast fit Bench(60,160), the claim protocol's fit bench; PAC = 43 - atan(mu) (desmo-conecut _desmo_build_B); the model's own default mu is LM.CELL_A's"
+}

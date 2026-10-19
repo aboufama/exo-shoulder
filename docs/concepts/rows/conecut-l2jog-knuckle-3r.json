@@ -1,0 +1,305 @@
+{
+ "id": "conecut-l2jog-knuckle-3r",
+ "name": "Link-2 mid-bar planform waist / jog at pose 139 (the lead's +0.1 / +0.2 mm probe binder) on the lead's frozen chain",
+ "lens": "round15:C conecut-sidestep-metal (tangent-plane metal moves on a frozen chain)",
+ "family": "slaved-knuckle 3R, pin knee (the verified lead's frozen chain)",
+ "active_dof": 3,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-18T15:14:55Z",
+ "reach": 0.775,
+ "follow": 1.0,
+ "inband14": 0.9003,
+ "inband10": 0.5717,
+ "contact": 0.0,
+ "gap": 12.5,
+ "v_reach": 0.7278,
+ "v_follow": 1.0,
+ "v_inband14": 0.9005,
+ "v_inband10": 0.5737,
+ "v_gap": 18.28,
+ "n_configs": 540,
+ "verdict": "SCREENED (measured negative for the hardening role): the link-2 planform WAIST (edge moved 1.6 mm in the bar plane over 20 mm, far edge kept) removes the lead's only +0.1 / +0.2 mm probe flip - frozen exact Bench(110,360) 18.28 tie (score 93.35), +0.2 probe 18.83 -> 18.28, pose 139 0.072 -> 0.602 mm, no new contact, 0 jams - but it pushes clip samples past 14 mm and the lead's held ib14 is exactly 0.9000: held 22.45 vs 22.38 (+0.07; the spec's pure jog 22.49, +0.11). A trade (~-0.0004 ib14 per mm of edge move), not a free hardener.",
+ "limiter": "in-band: every link-2 move that adds clearance at 139 moves samples past 14 mm on the clips (Bench(60,160) ib14 0.9007 -> 0.9003 waist / 0.8995 jog / 0.8961 joggle); the lead sits at held ib14 0.9000 so the cost shows 1:1 on held. 139 itself is the edge of a held link-2 contact cluster (224 / 225 / 252, plane -90..-75, elev 60, axial 105-120).",
+ "note": "540 configs on the lead's frozen chain (scan: worn once per bench, link 2 re-read; Bench(60,160) + envh all-pose fast, envsel / bench exact within 4 mm): 10 direction + 290 coarse + 3 ES (2 starts sigma 0.3 + sigma-0.8 restart, 5 x 16). Search envh near1 + plain - 0.5 min(L2 margin, 1); selection envsel (plain, +0.2 probe, near1) then the search objective; pre-registered 139 >= 0.4 (255 pass). Gate (envh objective, score points): gain 0.008 over the 2nd half, 0.008 over the last third, top-5 spread 0.013 - passed (flat: one envh pose, 150, moves). Direction +w (toward the bar's far rows) only; -w puts 139 into the skin (-0.48 at dl 1). Judge's planform-only reading reproduced (dl 1.0 / 1.5 -> 0.487 / 0.716). Span rule: the moved span stays at stations >= -15 (316's root stretch -22.2..-16.3 untouched) and inside hub 3's rim; without it envsel 458 became a contact. Claims (frozen, exact): waist pick bench 18.28 / ib14 0.9005 / near1 19.92 / probe 0.1, 0.2, 0.35 = 18.28, 18.28, 18.83; held 22.45 / ib14 0.8993 / near1 25.30, 14 contacts (= lead), 252 -1.60 -> -0.71. Spec jog k355: bench 18.28 / ib14 0.9000, held 22.49 / ib14 0.8989 / near1 25.56 (held 898 1.67 -> 0.95: the jog's far side). Kit density L2 0.919x. cx 18.5 (+0: a profile cut). Next: stack only with an in-band source; h2facet (no in-band cost, held -0.22) is the hub-2 half of the hardened cell. VERIFIED 2026-10-18 ~16:00 UTC (independent verifier): the claim's frozen exact Bench(110,360) 18.28 (ib14 0.9005, 262 taken, 4 contacts) and held 22.45 reproduced (per-pose dumps on file, 0 status-discordant poses vs the lead; probes 18.29 / 18.29 / 18.83). Champion same bench and checks: 75.94 (risley-turret verifier reference, as for the lead). RED TEAM (true cut): link 2's skin-fitted underside is not straight across the bar at the binder (edge row 0 is 1.1 mm higher than row 1), and the waist keeps row heights while moving rows in-plane, so its new edge sits up to 0.95 mm above the original underside - a hidden edge-zone radial lift, not a planform cut. Built as the cut the claim describes (each moved sample on the original section), bench 18.28 / ib14 0.9013, pose 139 0.073, +0.1 / +0.2 / +0.35 probes 18.83 / 18.83 / 19.37 = the lead; held cluster 252 -1.37 (not -0.71). The hardening and its in-band cost are both the lift; the spec jog has the same artifact (true-cut 139 0.059). Lessons (3) waists-not-jogs and (4) planform-cheaper-than-radial are mis-attributed. True-cut held frozen 22.38 / ib14 0.9001 = the lead exactly (the cut is a no-op both ways).",
+ "doc": "docs/concepts/conecut-l2jog-knuckle-3r.md",
+ "best_params": {
+  "stk": 6.0,
+  "lE": 97.1443,
+  "lc": 24.3508,
+  "phiE": 0.7526,
+  "phib": -91.8041,
+  "J3MIN": -111.9036,
+  "J3MAX": 122.7417,
+  "dl": 1.6,
+  "Lf": 20.0,
+  "T": 9.6906,
+  "cs": 4.6906,
+  "rot": 3.3949,
+  "sgn": 1,
+  "ff": 0.0,
+  "dz": 0.0
+ },
+ "complexity": 18.5,
+ "frozen_exact": {
+  "gap": 18.28,
+  "reach": 0.7278,
+  "follow": 1.0,
+  "inband14": 0.9005,
+  "inband10": 0.5737,
+  "contact": 0.0106,
+  "ws_taken": 262,
+  "contact_poses": 4,
+  "near1": 19.92,
+  "near2": 34.84,
+  "probe01": 18.28,
+  "probe02": 18.28,
+  "probe035": 18.83,
+  "p139": 0.602,
+  "p316": -1.235,
+  "min_metal_taken": 0.26,
+  "overhead_taken": "8/28",
+  "fit_fast": {
+   "gap": 12.5,
+   "reach": 0.775,
+   "follow": 1.0,
+   "inband14": 0.9003,
+   "inband10": 0.5717,
+   "contact": 0.0
+  }
+ },
+ "spec_jog": {
+  "params": {
+   "dl": 1.6,
+   "Lf": 20.0,
+   "T": 6.2842,
+   "cs": 1.2842,
+   "rot": -2.3611,
+   "sgn": 1,
+   "ff": 1.0,
+   "dz": 0.0
+  },
+  "fit_fast": {
+   "gap": 12.55,
+   "reach": 0.775,
+   "follow": 1.0,
+   "inband14": 0.8995,
+   "inband10": 0.5715,
+   "contact": 0.0
+  },
+  "frozen_exact": {
+   "gap": 18.28,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9,
+   "inband10": 0.5737,
+   "contact": 0.0106,
+   "near1": 19.92,
+   "probe02": 18.28,
+   "probe035": 18.83,
+   "p139": 0.726
+  },
+  "held_frozen": {
+   "gap": 22.49,
+   "reach": 0.6922,
+   "follow": 1.0,
+   "inband14": 0.8989,
+   "inband10": 0.5723,
+   "contact": 0.016,
+   "near1": 25.56,
+   "near2": 37.1,
+   "lead_gap": 22.38,
+   "lead_near1": 25.23
+  }
+ },
+ "lead_same_protocol": {
+  "gap": 18.28,
+  "ib14": 0.9012,
+  "near1": 19.92,
+  "near2": 34.84,
+  "probe01": 18.83,
+  "probe02": 18.83,
+  "probe035": 19.37,
+  "p139": 0.072,
+  "held_gap": 22.38,
+  "held_near1": 25.23
+ },
+ "mechanism": {
+  "source": "lead conecut-knee-knuckle-3r",
+  "record_delta": "+0: a profile change (planform waist) cut into link 2's existing flat Ti profile before bending",
+  "complexity": 18.5
+ },
+ "held_frozen": {
+  "gap": 22.45,
+  "reach": 0.6922,
+  "follow": 1.0,
+  "inband14": 0.8993,
+  "inband10": 0.5723,
+  "contact": 0.016,
+  "ws_taken": 659,
+  "contact_poses": 14,
+  "near1": 25.3,
+  "near2": 37.1,
+  "lead_gap": 22.38,
+  "lead_ib14": 0.9,
+  "lead_near1": 25.23,
+  "diff": 0.07,
+  "paired": {
+   "discordant": 0,
+   "note": "no pose changes status (contact / take / probe) on held; the whole difference is in-band 0.9000 -> 0.8993 over the 202 held clip frames"
+  },
+  "link2_cluster": {
+   "224": [
+    -3.49,
+    -2.43
+   ],
+   "225": [
+    -5.51,
+    -4.57
+   ],
+   "252": [
+    -1.6,
+    -0.71
+   ]
+  }
+ },
+ "kit_density": {
+  "flags": {
+   "roller": 4.549,
+   "L1a": 0.33
+  },
+  "L2_ratio": 0.919,
+  "note": "same flags as the lead; the waist compresses link 2's rows (denser, ratio 0.919 at the kit's 1 / 4 mm2)"
+ },
+ "variants": {
+  "joggle_k333": {
+   "params": {
+    "dl": 1.6,
+    "Lf": 18.2957,
+    "T": 6.709,
+    "cs": 0.8568,
+    "rot": -10.0,
+    "ff": 0.9325,
+    "dz": 0.5442
+   },
+   "p139": 0.752,
+   "fit_ib14": 0.8961,
+   "held_scan_near1": 25.23,
+   "note": "radial joggle pays in-band ~1:1 (fit ib14 0.8961): dead"
+  },
+  "jog_scan_inband_error": "first scan re-read in-band only within 4 mm of link 2 (bench ib14 read 0.9012, true 0.9000); fixed: fast benches re-read every pose"
+ },
+ "verification": {
+  "t": "2026-10-18T16:00:00Z",
+  "by": "independent verifier (round 15)",
+  "harness": "docs/concepts/verify/conecut-l2jog-knuckle-3r.py (true-cut red team) + tools/alignment_paired.py dump/compare on the claim's own frozen()",
+  "champion_same_bench": 75.94,
+  "bench": {
+   "gap": 18.28,
+   "recomputed": 18.29,
+   "reach": 0.7278,
+   "ws_taken": 262,
+   "follow": 1.0,
+   "inband14": 0.9005,
+   "inband10": 0.5737,
+   "contact": 0.0106,
+   "contact_poses": 4,
+   "probe01": 18.29,
+   "probe02": 18.29,
+   "probe035": 18.83,
+   "near1": 19.92,
+   "p139": 0.602,
+   "p203": 0.263,
+   "p316": -1.235,
+   "p345": [
+    1.709,
+    1.606
+   ],
+   "paired_vs_lead": "0 status-discordant poses; diff 0.00 (CI90 0.00..0.09, P(better) 0); clip samples in band -74 of 107910"
+  },
+  "held": {
+   "gap": 22.45,
+   "recomputed": 22.44,
+   "reach": 0.6922,
+   "ws_taken": 659,
+   "inband14": 0.8993,
+   "inband10": 0.5723,
+   "contact": 0.016,
+   "contact_poses": 14,
+   "probe02": 22.44,
+   "near1": 25.3,
+   "lead": 22.38,
+   "paired_vs_lead": "0 discordant; diff +0.06 all in-band (CI90 0.00..0.08, P(better) 0); in band -128 of 198162",
+   "watch": {
+    "224": [
+     -3.487,
+     -2.43
+    ],
+    "225": [
+     -5.51,
+     -4.575
+    ],
+    "252": [
+     -1.6,
+     -0.71
+    ],
+    "898": [
+     1.67,
+     1.528
+    ]
+   }
+  },
+  "dumps": [
+   "docs/alignment/remeasure/conecut-l2jog-knuckle-3r_bench_perpose.json",
+   "docs/alignment/remeasure/conecut-l2jog-knuckle-3r_held_perpose.json",
+   "docs/alignment/remeasure/conecut-l2jog-knuckle-3r+truecut_bench_perpose.json",
+   "docs/alignment/remeasure/conecut-l2jog-knuckle-3r_vs_conecut-knee-knuckle-3r_paired.json",
+   "docs/alignment/remeasure/conecut-l2jog-knuckle-3r+truecut_held_perpose.json"
+  ],
+  "truecut": {
+   "finding": "the waist is not a cut: link 2's skin-fitted underside section at the binder is not straight (rows 0-3 at r 69.55 / 68.43 / 68.86 / 69.20 from GH, edge row 0 highest); the waist keeps each row's height while moving it in the plate plane, so the new edge sits up to +0.95 mm (0.83 at the binder) ABOVE the original underside: a hidden local radial lift of the edge zone",
+   "bench_frozen": {
+    "gap": 18.28,
+    "inband14": 0.9013,
+    "inband10": 0.5739,
+    "p139": 0.073,
+    "probe01": 18.83,
+    "probe02": 18.83,
+    "probe035": 19.37,
+    "near1": 19.92,
+    "why": {
+     "fold": 88,
+     "parts": 0,
+     "contact": 4
+    }
+   },
+   "held_scan": {
+    "224": -3.087,
+    "225": -5.255,
+    "252": -1.374,
+    "898": 1.691
+   },
+   "jog_truecut_bench_p139": 0.059,
+   "meaning": "as a real planform cut (the claim's stated build) the waist buys nothing at 139 (0.073 vs 0.072) and nothing at the probes (18.83 = the lead); its in-band cost also vanishes (0.9013). The claimed hardening (139 0.602, +0.2 probe 18.28) and the in-band cost are the SAME thing: an edge-zone lift of up to 0.95 mm, buildable only as a re-shaped (machined) underside, not a laser cut before bending",
+   "held_frozen": {
+    "gap": 22.38,
+    "inband14": 0.9001,
+    "inband10": 0.5726,
+    "reach": 0.6922,
+    "contact_poses": 14,
+    "near1": 25.23,
+    "why": {
+     "fold": 260,
+     "parts": 0,
+     "contact": 14
+    }
+   }
+  },
+  "other": [
+   "far edge does not stay: y01 is normalised over the whole bar (-0.07..6.94 mm), so the far row moves +0.18..0.26 mm outward in the flat and the narrowing is ~1.33 mm (5.87 -> 4.54 at the binder), not 1.6 (5.9 -> 4.3); held 898 1.67 -> 1.528 under the waist (claimed unchanged)",
+   "sweep entries all carry one timestamp (written at once, not incrementally)"
+  ]
+ }
+}

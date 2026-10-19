@@ -1,0 +1,117 @@
+{
+ "method": "held per-pose dumps: poses whose (plane, elev, axial) equals a CB._select(60,160) pose (the search / frozen-fit bench) counted as leaked; gap recomputed without them (tools/alignment_paired.gap_parts)",
+ "rows": {
+  "conecut-knee-knuckle-3r": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 22.38,
+   "gap_clean": 22.47,
+   "delta": 0.09
+  },
+  "deltoid-crest-j3-3r": {
+   "n": 470,
+   "leaked": 72,
+   "gap_all": 50.05,
+   "gap_clean": 51.08,
+   "delta": 1.03
+  },
+  "desmo-conecut-knuckle-3r+blend": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 23.19,
+   "gap_clean": 23.05,
+   "delta": -0.14
+  },
+  "desmo-conecut-knuckle-3r": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 23.23,
+   "gap_clean": 23.09,
+   "delta": -0.14
+  },
+  "desmo-slipper-knuckle-3r": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 23.91,
+   "gap_clean": 23.69,
+   "delta": -0.22
+  },
+  "dipped-law-groove-knuckle-3r-D0control": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 22.98,
+   "gap_clean": 22.71,
+   "delta": -0.27
+  },
+  "dipped-law-groove-knuckle-3r": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 24.07,
+   "gap_clean": 24.0,
+   "delta": -0.07
+  },
+  "groove-desmo-knuckle-3r": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 28.77,
+   "gap_clean": 28.57,
+   "delta": -0.2
+  },
+  "inband-rssr-knuckle-3r": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 23.21,
+   "gap_clean": 22.84,
+   "delta": -0.37
+  },
+  "kneeless-roller-knuckle-3r": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 24.59,
+   "gap_clean": 24.55,
+   "delta": -0.04
+  },
+  "longstroke-ghost-g65d": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 22.69,
+   "gap_clean": 22.07,
+   "delta": -0.62
+  },
+  "longstroke-ghost-k30": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 21.1,
+   "gap_clean": 20.75,
+   "delta": -0.35
+  },
+  "roller-longdyad-knuckle-3r": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 24.28,
+   "gap_clean": 23.96,
+   "delta": -0.32
+  },
+  "sidecar-longdyad-knuckle-3r": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 23.6,
+   "gap_clean": 22.96,
+   "delta": -0.64
+  },
+  "slipper-nose-knuckle-3r": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 23.45,
+   "gap_clean": 23.1,
+   "delta": -0.35
+  },
+  "trimlug-k165-knuckle-3r": {
+   "n": 1154,
+   "leaked": 30,
+   "gap_all": 23.48,
+   "gap_clean": 23.11,
+   "delta": -0.37
+  }
+ }
+}

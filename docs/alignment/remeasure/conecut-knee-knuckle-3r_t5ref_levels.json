@@ -1,0 +1,1289 @@
+{
+ "method": "auditor 2026-10-17 19:0x UTC, tool 2026-10-17.5 imported read-only: c_contact_depth(row, ref) for every verified row under four references; depths = _claim_depths (n contact poses, summed mm, deepest mm) from files reproducing each claim",
+ "depths": {
+  "arm-parked-knee-4r": {},
+  "cam-unfold-4th": {},
+  "conecut-knee-knuckle-3r": {
+   "bench": [
+    4,
+    20.24,
+    8.93
+   ],
+   "held": [
+    14,
+    60.97,
+    9.86
+   ]
+  },
+  "desmo-slipper-knuckle-3r": {
+   "bench": [
+    2,
+    14.72,
+    9.01
+   ],
+   "held": [
+    10,
+    46.14,
+    9.05
+   ]
+  },
+  "dipped-law-groove-knuckle-3r": {
+   "bench": [
+    4,
+    21.88,
+    10.9
+   ],
+   "held": [
+    17,
+    81.2,
+    10.36
+   ]
+  },
+  "dwell-fourbar-knee-3r": {},
+  "frontload-lobe-stopb-knuckle-3r": {},
+  "geneva-tail-knuckle-pinknee-3r": {
+   "bench": [
+    4,
+    12.51,
+    6.76
+   ]
+  },
+  "groove-desmo-knuckle-3r": {
+   "bench": [
+    2,
+    17.0,
+    10.97
+   ],
+   "held": [
+    8,
+    44.81,
+    9.93
+   ]
+  },
+  "j3-neck-over-3r": {},
+  "k-rim-lobe-stub-knuckle-3r": {},
+  "kneeless-roller-knuckle-3r": {
+   "bench": [
+    10,
+    44.0,
+    12.0
+   ],
+   "held": [
+    26,
+    112.17,
+    11.35
+   ]
+  },
+  "kneeless-sidecar-knuckle-3r": {
+   "bench": [
+    5,
+    27.45,
+    17.6
+   ],
+   "held": [
+    21,
+    76.79,
+    16.47
+   ]
+  },
+  "minarc-stop-knuckle-4r": {
+   "bench": [
+    11,
+    34.43,
+    13.17
+   ],
+   "held": [
+    35,
+    126.1,
+    14.61
+   ]
+  },
+  "offset-skin-normal-3r": {},
+  "raglan-knee-3r": {},
+  "roller-longdyad-knuckle-3r": {
+   "bench": [
+    2,
+    16.46,
+    10.55
+   ],
+   "held": [
+    10,
+    49.88,
+    9.54
+   ]
+  },
+  "seed-offset-3r-slides": {},
+  "sidecar-longdyad-knuckle-3r": {
+   "bench": [
+    4,
+    6.23,
+    4.61
+   ],
+   "held": [
+    10,
+    35.66,
+    8.37
+   ]
+  },
+  "sidecar-parallelogram-knuckle-3r": {},
+  "sidecar-roller-flank-knuckle-3r": {},
+  "skin-normal-3r-knuckle-cufflink": {},
+  "skin-normal-3r-pin-knee": {
+   "bench": [
+    9,
+    8.38,
+    4.08
+   ]
+  },
+  "slipper-nose-knuckle-3r": {
+   "bench": [
+    2,
+    14.75,
+    9.01
+   ],
+   "held": [
+    10,
+    46.12,
+    9.05
+   ]
+  },
+  "spine-parked-j2-3r": {},
+  "trimlug-k165-knuckle-3r": {
+   "bench": [
+    2,
+    13.19,
+    9.01
+   ],
+   "held": [
+    10,
+    40.58,
+    9.05
+   ]
+  },
+  "zc-frontier-3r": {}
+ },
+ "levels": {
+  "arm-parked-knee-4r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "cam-unfold-4th": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "conecut-knee-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.37,
+      5.49
+     ],
+     [
+      "held",
+      1.32,
+      14.85
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      3.25,
+      14.01
+     ],
+     [
+      "held",
+      1.71,
+      25.31
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.23,
+      3.78
+     ],
+     [
+      "held",
+      1.22,
+      11.09
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "desmo-slipper-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.73,
+      -5.52
+     ],
+     [
+      "held",
+      0.76,
+      -14.83
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.0,
+      -0.03
+     ],
+     [
+      "held",
+      1.0,
+      0.02
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      2.36,
+      8.49
+     ],
+     [
+      "held",
+      1.29,
+      10.48
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.89,
+      -1.74
+     ],
+     [
+      "held",
+      0.93,
+      -3.74
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "dipped-law-groove-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.08,
+      1.64
+     ],
+     [
+      "held",
+      1.33,
+      20.23
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.48,
+      7.13
+     ],
+     [
+      "held",
+      1.76,
+      35.08
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      3.51,
+      15.65
+     ],
+     [
+      "held",
+      2.28,
+      45.54
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.33,
+      5.42
+     ],
+     [
+      "held",
+      1.63,
+      31.32
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "dwell-fourbar-knee-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "frontload-lobe-stopb-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "geneva-tail-knuckle-pinknee-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.62,
+      -7.73
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.85,
+      -2.24
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      2.01,
+      6.28
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.76,
+      -3.95
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "groove-desmo-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.84,
+      -3.24
+     ],
+     [
+      "held",
+      0.73,
+      -16.16
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.15,
+      2.25
+     ],
+     [
+      "held",
+      0.97,
+      -1.31
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      2.73,
+      10.77
+     ],
+     [
+      "held",
+      1.26,
+      9.15
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.03,
+      0.54
+     ],
+     [
+      "held",
+      0.9,
+      -5.07
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "j3-neck-over-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "k-rim-lobe-stub-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "kneeless-roller-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      2.17,
+      23.76
+     ],
+     [
+      "held",
+      1.84,
+      51.2
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      2.98,
+      29.25
+     ],
+     [
+      "held",
+      2.43,
+      66.05
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      7.06,
+      37.77
+     ],
+     [
+      "held",
+      3.15,
+      76.51
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      2.67,
+      27.54
+     ],
+     [
+      "held",
+      2.25,
+      62.29
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "kneeless-sidecar-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.36,
+      7.21
+     ],
+     [
+      "held",
+      1.26,
+      15.82
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.86,
+      12.7
+     ],
+     [
+      "held",
+      1.67,
+      30.67
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      4.41,
+      21.22
+     ],
+     [
+      "held",
+      2.15,
+      41.13
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.67,
+      10.99
+     ],
+     [
+      "held",
+      1.54,
+      26.91
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "minarc-stop-knuckle-4r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      1.7,
+      14.19
+     ],
+     [
+      "held",
+      2.07,
+      65.13
+     ],
+     [
+      "bench",
+      0.5,
+      -10.21
+     ],
+     [
+      "held",
+      0.6,
+      -24.57
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      2.33,
+      19.68
+     ],
+     [
+      "held",
+      2.73,
+      79.98
+     ],
+     [
+      "bench",
+      0.68,
+      -4.72
+     ],
+     [
+      "held",
+      0.79,
+      -9.72
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      5.53,
+      28.2
+     ],
+     [
+      "held",
+      3.54,
+      90.44
+     ],
+     [
+      "bench",
+      1.61,
+      3.8
+     ],
+     [
+      "held",
+      1.02,
+      0.74
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      2.09,
+      17.97
+     ],
+     [
+      "held",
+      2.53,
+      76.22
+     ],
+     [
+      "bench",
+      0.61,
+      -6.43
+     ],
+     [
+      "held",
+      0.73,
+      -13.48
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "offset-skin-normal-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "raglan-knee-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "roller-longdyad-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.81,
+      -3.78
+     ],
+     [
+      "held",
+      0.82,
+      -11.09
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.12,
+      1.71
+     ],
+     [
+      "held",
+      1.08,
+      3.76
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      2.64,
+      10.23
+     ],
+     [
+      "held",
+      1.4,
+      14.22
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "seed-offset-3r-slides": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "sidecar-longdyad-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.31,
+      -14.01
+     ],
+     [
+      "held",
+      0.58,
+      -25.31
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.42,
+      -8.52
+     ],
+     [
+      "held",
+      0.77,
+      -10.46
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.38,
+      -10.23
+     ],
+     [
+      "held",
+      0.71,
+      -14.22
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "sidecar-parallelogram-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "sidecar-roller-flank-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "skin-normal-3r-knuckle-cufflink": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "skin-normal-3r-pin-knee": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.41,
+      -11.86
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.57,
+      -6.37
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      1.35,
+      2.15
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.51,
+      -8.08
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "slipper-nose-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.73,
+      -5.49
+     ],
+     [
+      "held",
+      0.76,
+      -14.85
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      2.37,
+      8.52
+     ],
+     [
+      "held",
+      1.29,
+      10.46
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.9,
+      -1.71
+     ],
+     [
+      "held",
+      0.92,
+      -3.76
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "spine-parked-j2-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  },
+  "trimlug-k165-knuckle-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.65,
+      -7.05
+     ],
+     [
+      "held",
+      0.67,
+      -20.39
+     ]
+    ],
+    "ref_used": "conecut-knee-knuckle-3r"
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.89,
+      -1.56
+     ],
+     [
+      "held",
+      0.88,
+      -5.54
+     ]
+    ],
+    "ref_used": "slipper-nose-knuckle-3r"
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "watch",
+    "compare": [
+     [
+      "bench",
+      2.12,
+      6.96
+     ],
+     [
+      "held",
+      1.14,
+      4.92
+     ]
+    ],
+    "ref_used": "sidecar-longdyad-knuckle-3r"
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [
+     [
+      "bench",
+      0.8,
+      -3.27
+     ],
+     [
+      "held",
+      0.81,
+      -9.3
+     ]
+    ],
+    "ref_used": "roller-longdyad-knuckle-3r"
+   }
+  },
+  "zc-frontier-3r": {
+   "conecut-knee-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "slipper-nose-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "sidecar-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   },
+   "roller-longdyad-knuckle-3r": {
+    "level": "ok",
+    "compare": [],
+    "ref_used": null
+   }
+  }
+ }
+}

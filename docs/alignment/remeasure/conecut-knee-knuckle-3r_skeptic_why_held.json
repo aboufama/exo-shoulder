@@ -1,0 +1,153 @@
+{
+ "id": "conecut-knee-knuckle-3r",
+ "by": "skeptic",
+ "tool": "tools/alignment_skeptic_why_labels.py (models unchanged; kinematic labels only, no metal run)",
+ "note": "Which label keeps the 5 held poses that conecut J3 stop cuts out of the score, on the lead and on conecut without its stop. Frozen protocol: fit Bench(60,160) fast (fit gaps 13.0 / 12.5 = the claims), then the fitted m_fix on the held bench.",
+ "lead": {
+  "which": "lead",
+  "protocol": "frozen labels: fit Bench(60,160) fast, m_fix, held bench",
+  "fit_gap": 13.0,
+  "secs": 14.5,
+  "counts": {
+   "": 862,
+   "fold": 260,
+   "slide": 32
+  },
+  "poses": {
+   "392": {
+    "why": "slide",
+    "ws": [
+     -15.0,
+     90.0,
+     30.0
+    ]
+   },
+   "530": {
+    "why": "slide",
+    "ws": [
+     15.0,
+     120.0,
+     15.0
+    ]
+   },
+   "752": {
+    "why": "slide",
+    "ws": [
+     60.0,
+     165.0,
+     -105.0
+    ]
+   },
+   "897": {
+    "why": "slide",
+    "ws": [
+     90.0,
+     165.0,
+     -75.0
+    ]
+   },
+   "965": {
+    "why": "slide",
+    "ws": [
+     105.0,
+     150.0,
+     -75.0
+    ]
+   }
+  }
+ },
+ "conecut_nostop": {
+  "which": "nostop",
+  "protocol": "frozen labels: fit Bench(60,160) fast, m_fix, held bench",
+  "fit_gap": 12.5,
+  "secs": 14.4,
+  "counts": {
+   "": 894,
+   "fold": 260
+  },
+  "poses": {
+   "392": {
+    "why": "",
+    "ws": [
+     -15.0,
+     90.0,
+     30.0
+    ]
+   },
+   "530": {
+    "why": "",
+    "ws": [
+     15.0,
+     120.0,
+     15.0
+    ]
+   },
+   "752": {
+    "why": "",
+    "ws": [
+     60.0,
+     165.0,
+     -105.0
+    ]
+   },
+   "897": {
+    "why": "",
+    "ws": [
+     90.0,
+     165.0,
+     -75.0
+    ]
+   },
+   "965": {
+    "why": "",
+    "ws": [
+     105.0,
+     150.0,
+     -75.0
+    ]
+   }
+  },
+  "q3p": {
+   "392": -112.49,
+   "530": -114.49,
+   "752": 126.64,
+   "897": 123.87,
+   "965": 124.01
+  }
+ },
+ "stops": {
+  "J3MIN": -111.9036,
+  "J3MAX": 122.7417
+ },
+ "verifier_c3": {
+  "src": "docs/concepts/verify/conecut-knee-knuckle-3r_v_held_frozen.json c3_stopped",
+  "poses": {
+   "392": {
+    "part_clear_mm": 1.31,
+    "pair": "E-L2",
+    "metal_min_mm": -1.11
+   },
+   "530": {
+    "part_clear_mm": 1.31,
+    "pair": "E-L2",
+    "metal_min_mm": -9.68
+   },
+   "752": {
+    "part_clear_mm": 4.64,
+    "metal_min_mm": -3.42
+   },
+   "897": {
+    "part_clear_mm": 3.7,
+    "metal_min_mm": -2.68
+   },
+   "965": {
+    "part_clear_mm": 4.86,
+    "metal_min_mm": -2.0
+   }
+  }
+ },
+ "taken_clear_min_mm": {
+  "src": "docs/alignment/remeasure/conecut-knee-knuckle-3r_held.json deep.coord_spans.clear",
+  "value": 1.3146
+ }
+}

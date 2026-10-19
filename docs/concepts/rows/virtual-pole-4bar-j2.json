@@ -1,0 +1,21 @@
+{
+ "id": "virtual-pole-4bar-j2",
+ "mechanism": {
+  "active_dof": 3,
+  "passive_trans": 0,
+  "crossed_rails": false,
+  "passive_rot": 3,
+  "moving_bodies": 5,
+  "joints": 6,
+  "closed_loops": 1,
+  "sliding_pairs": 0,
+  "rolling_pairs": 6,
+  "sensed_passive": 0,
+  "springs_or_flexures": 0,
+  "custom_parts": 12,
+  "catalogue_parts": 12,
+  "notes": "J2 replaced by a spherical four-bar on link 1 whose coupler carries J3 and turns about a virtual pole. bodies: link 1 (carries the ground pins A0, B0), crank A, crank B, coupler (carries the J3 hub), arm-end (hub-3 plate + K7 neck). joints: J1, J3 O20 hubs, A0 (ACTIVE, the J2 drive), B0, A1, B1 (PASSIVE); 1 loop (the four-bar; spherical Grubler 3 (6 - 1) - 2 x 6 = 3). Passives set by the crank angle: not sensed. Default slim = 0 (O20 pins). custom: base, link 1, 2 cranks, coupler, neck, 6 hub shafts (est.); catalogue: 6 x MR117 pair (est.).",
+  "source": "docs/concepts/models/virtual-pole-4bar-j2.py:1-31 (chain at = 2, mobility, closure), 44-49 (PARAMS, slim)",
+  "confidence": "counted"
+ }
+}

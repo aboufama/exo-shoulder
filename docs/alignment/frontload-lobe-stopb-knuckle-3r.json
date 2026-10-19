@@ -1,0 +1,211 @@
+{
+ "id": "frontload-lobe-stopb-knuckle-3r",
+ "status": "verified",
+ "v_gap": 22.82,
+ "complexity": 25.5,
+ "verdict": "watch",
+ "reasons": [
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: sample-weighted in-band 0.855 vs part-weighted 0.798 (+5.63 points); thinly sampled parts: rod 15; mostly out-of-band parts: rod (0.00 in band, median 28.3 mm, 1.8 % of samples); rodends (0.00 in band, median 28.0 mm, 3.8 % of samples) (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json)",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 15.57 (score 94.34) sits 7.25 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 26.65 vs bench 22.82 (+3.83; row held_out)",
+   "held_gap": 26.65,
+   "v_gap": 22.82,
+   "drop": 3.83,
+   "source": "row held_out"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 15.57 -> verified 22.82 (+7.25)",
+   "fast": 15.57,
+   "verified": 22.82,
+   "drop": 7.25
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 22.82, <1 mm 24.46, <2 mm 44.08, 21.26 points live in the 1-2 mm shell (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json)",
+   "shell2": 21.26,
+   "plain": 22.82,
+   "n1": 24.46,
+   "n2": 44.08,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": 0.3,
+   "source": "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump frontload-lobe-stopb-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 22.82": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs slipper-nose-knuckle-3r: plain -4.33, 2 mm -11.06",
+   "ref": "slipper-nose-knuckle-3r",
+   "gain_plain": -4.33,
+   "gain_2mm": -11.06
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 22.82, connected full 22.82, knn 25.63, bench 46.19 (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json)",
+   "static": 22.82,
+   "connected_full": 22.82,
+   "connected_knn": 25.63,
+   "connected_bench": 46.19
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 44.3 deg (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json:drive.dK_taken_max); crank: declared moving, no span on file; knee: declared moving, no span on file",
+   "spans": [
+    [
+     "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json:drive.dK_taken_max",
+     44.3
+    ],
+    [
+     "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json:drive.dK_taken_max",
+     44.3
+    ],
+    [
+     "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_held_frozen.json:drive.dK_taken_max",
+     44.6
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "sample-weighted in-band 0.855 vs part-weighted 0.798 (+5.63 points); thinly sampled parts: rod 15; mostly out-of-band parts: rod (0.00 in band, median 28.3 mm, 1.8 % of samples); rodends (0.00 in band, median 28.0 mm, 3.8 % of samples) (docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json)",
+   "parts": {
+    "hub1": [
+     0.993,
+     7.9,
+     80
+    ],
+    "hubK": [
+     0.976,
+     7.9,
+     80
+    ],
+    "hub2": [
+     0.99,
+     9.8,
+     80
+    ],
+    "hub3": [
+     0.598,
+     12.9,
+     80
+    ],
+    "E": [
+     0.956,
+     7.6,
+     104
+    ],
+    "boss": [
+     1.0,
+     7.3,
+     32
+    ],
+    "pad": [
+     1.0,
+     7.7,
+     32
+    ],
+    "knee": [
+     0.98,
+     9.7,
+     95
+    ],
+    "rocker": [
+     0.942,
+     12.6,
+     21
+    ],
+    "rod": [
+     0.0,
+     28.3,
+     15
+    ],
+    "rodends": [
+     0.0,
+     28.0,
+     32
+    ],
+    "L1a": [
+     0.977,
+     8.0,
+     16
+    ],
+    "L1b": [
+     0.988,
+     8.5,
+     36
+    ],
+    "L2": [
+     0.776,
+     11.2,
+     144
+    ]
+   }
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 25.5 vs row 25.5; hand count (not derived from the model)",
+   "recomputed": 25.5,
+   "row": 25.5
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 15.57 (score 94.34) sits 7.25 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 7 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_bench_frozen.json",
+  "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_claim_bench_frozen.json",
+  "docs/concepts/verify/frontload-lobe-stopb-knuckle-3r_corr_held_frozen.json"
+ ],
+ "git": "06f7b8d",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T08:03:44Z"
+}

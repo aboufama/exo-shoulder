@@ -1,0 +1,270 @@
+{
+ "id": "minarc-stop-knuckle-4r",
+ "status": "verified",
+ "v_gap": 19.54,
+ "complexity": 32.5,
+ "verdict": "watch",
+ "reasons": [
+  "contact_depth: the score counts contact poses, not depth (report only, score unchanged): polished_gap 18.4: bench 11 contact poses, sum 34.43 mm, deepest 13.17 mm at ['ws', 15.0, 165.0, -60.0], 4 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+28.20 mm, x5.53) - CLEARLY DEEPER; held 35 contact poses, sum 126.1 mm, deepest 14.61 mm at ['ws', 45.0, 165.0, -30.0], 15 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+90.44 mm, x3.54) - CLEARLY DEEPER | v_gap 19.54: bench 4 contact poses, sum 10.03 mm, deepest 6.41 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+3.80 mm, x1.61); held 13 contact poses, sum 36.4 mm, deepest 7.27 mm at ['ws', 60.0, 165.0, -30.0], 6 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+0.74 mm, x1.02)",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: dashboard v_gap 18.4 vs verifier 19.54 (-1.14; the dashboard flatters the design); dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 24.18 vs bench 19.54 (+4.64; re-measured (this audit))",
+   "held_gap": 24.18,
+   "v_gap": 19.54,
+   "drop": 4.64,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 6.19 -> verified 19.54 (+13.35)",
+   "fast": 6.19,
+   "verified": 19.54,
+   "drop": 13.35
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 19.54, <1 mm 26.44, <2 mm 41.69, <3 mm 152.61, band read 3-14 mm 20.08, 22.15 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 22.15,
+   "plain": 19.54,
+   "n1": 26.44,
+   "n2": 41.69,
+   "n3": 152.61,
+   "band3": 20.08,
+   "hist": {
+    "0-1": 0.0001,
+    "1-2": 0.0013,
+    "2-3": 0.0053,
+    "3-4": 0.0165,
+    "4-6": 0.1054,
+    "6-10": 0.4668,
+    "10-14": 0.299,
+    ">14": 0.1055
+   },
+   "minmm": 0.05,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "watch",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): polished_gap 18.4: bench 11 contact poses, sum 34.43 mm, deepest 13.17 mm at ['ws', 15.0, 165.0, -60.0], 4 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+28.20 mm, x5.53) - CLEARLY DEEPER; held 35 contact poses, sum 126.1 mm, deepest 14.61 mm at ['ws', 45.0, 165.0, -30.0], 15 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+90.44 mm, x3.54) - CLEARLY DEEPER | v_gap 19.54: bench 4 contact poses, sum 10.03 mm, deepest 6.41 mm at ['ws', 30.0, 165.0, -60.0], 1 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 6.23 mm over 4 (+3.80 mm, x1.61); held 13 contact poses, sum 36.4 mm, deepest 7.27 mm at ['ws', 60.0, 165.0, -30.0], 6 deeper than 3 mm vs sidecar-longdyad-knuckle-3r 35.66 mm over 10 (+0.74 mm, x1.02)",
+   "depths": {
+    "polished_gap 18.4": {
+     "bench": {
+      "n": 11,
+      "sum_mm": 34.43,
+      "max_mm": 13.17,
+      "n_deeper3": 4,
+      "overhead140": 5,
+      "deepest": [
+       "ws",
+       15.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 18.4,
+      "src": "docs/alignment/remeasure/minarc-stop-knuckle-4r_pick1_probe_bench.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        34.43
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 35,
+      "sum_mm": 126.1,
+      "max_mm": 14.61,
+      "n_deeper3": 15,
+      "overhead140": 16,
+      "deepest": [
+       "ws",
+       45.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 22.69,
+      "src": "docs/alignment/remeasure/minarc-stop-knuckle-4r_pick1_probe_held.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        126.1
+       ],
+       "agree": true
+      }
+     }
+    },
+    "v_gap 19.54": {
+     "bench": {
+      "n": 4,
+      "sum_mm": 10.03,
+      "max_mm": 6.41,
+      "n_deeper3": 1,
+      "overhead140": 2,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 19.54,
+      "src": "docs/alignment/remeasure/minarc-stop-knuckle-4r_BDp_probe_bench.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        10.03
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 13,
+      "sum_mm": 36.4,
+      "max_mm": 7.27,
+      "n_deeper3": 6,
+      "overhead140": 7,
+      "deepest": [
+       "ws",
+       60.0,
+       165.0,
+       -30.0
+      ],
+      "gap": 24.18,
+      "src": "docs/alignment/remeasure/minarc-stop-knuckle-4r_BDp_probe_held.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        36.4
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "compare": [
+    {
+     "claim": "polished_gap 18.4",
+     "wear": "bench",
+     "sum": 34.43,
+     "ref_sum": 6.23,
+     "excess": 28.2,
+     "ratio": 5.53,
+     "watch": true
+    },
+    {
+     "claim": "polished_gap 18.4",
+     "wear": "held",
+     "sum": 126.1,
+     "ref_sum": 35.66,
+     "excess": 90.44,
+     "ratio": 3.54,
+     "watch": true
+    },
+    {
+     "claim": "v_gap 19.54",
+     "wear": "bench",
+     "sum": 10.03,
+     "ref_sum": 6.23,
+     "excess": 3.8,
+     "ratio": 1.61,
+     "watch": false
+    },
+    {
+     "claim": "v_gap 19.54",
+     "wear": "held",
+     "sum": 36.4,
+     "ref_sum": 35.66,
+     "excess": 0.74,
+     "ratio": 1.02,
+     "watch": false
+    }
+   ]
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs sidecar-longdyad-knuckle-3r: plain -0.63, 2 mm -7.66",
+   "ref": "sidecar-longdyad-knuckle-3r",
+   "gain_plain": -0.63,
+   "gain_2mm": -7.66
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 19.54, connected 19.54: the flood drops 0 claim poses (dropped_kinematic 0, dropped_contact_aware_extra 0; docs/alignment/remeasure/minarc-stop-knuckle-4r_BDp_probe_bench.json:contact_aware_verifier)",
+   "static": 19.54,
+   "connected_full": 19.54
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.007 deg (v_kitrule_min_th.min; 9 readings)",
+   "min_margin": 5.007,
+   "where": "v_kitrule_min_th.min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 34.04 deg (re-measured dK_deg_abs span); knee: declared moving, no span on file",
+   "spans": [
+    [
+     "re-measured dK_deg_abs span",
+     34.04
+    ]
+   ],
+   "declared": [
+    "K",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "no part sampled > 2x the kit's density; under-dense: L1a 0.42x"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 32.5 vs row 32.5",
+   "recomputed": 32.5,
+   "row": 32.5
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "dashboard v_gap 18.4 vs verifier 19.54 (-1.14; the dashboard flatters the design); dashboard sweep best 6.19 (score 97.75) sits 13.35 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 14 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [],
+ "git": "c7316ce",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-19T01:07:34Z"
+}

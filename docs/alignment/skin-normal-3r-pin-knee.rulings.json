@@ -1,0 +1,62 @@
+[
+ {
+  "key": "held_out",
+  "refuted": true,
+  "evidence": "Measured under the claim's own protocol (new tools/alignment_pinknee_fit60_held.py, harness docs/concepts/verify/skin-normal-3r-pin-knee-polish.py imported unchanged; farm, CB_EXACT=1, CB_FOLD_MARGIN=5, O20, about $0.014). H1 params as claimed. Fit on Bench(60,160) fast reproduces the claim's fit to the digit (23.64). The frozen shape, worn exact on the disjoint held_bench() (1154 poses outside Bench(110,360) and Bench(60,160), Wave / Walking out, verifier extra_checks remove 0), gives 31.39 (reach 0.6197, follow 0.9653, in-band14 0.8937, contact 0.0273). Against v_gap 27.20 the drop is +4.19, under TH held_watch 6.0 (tools/alignment_audit.py line 61), so the check reads ok. It agrees with the polish-protocol held numbers already on file (row v_p5_h1_held_gap 29.12, v_polish2_h1_held_gap 28.55; +4.09 / +4.07 against their own in-sample numbers). File: docs/alignment/remeasure/skin-normal-3r-pin-knee_fit60_held_skeptic.json:corrected.gap."
+ },
+ {
+  "key": "continuity",
+  "refuted": true,
+  "evidence": "The connected numbers are on file for the claim itself. docs/research/rebase/verify_pkH1_cont_taken_m5.json: fit 'fit60', params identical to H1, fold_margin 5. bench110_360: 237 of 237 taken nodes connected, connected_reach 0.6583 = static_reach 0.6583. grid: 913 / 913 connected, islands 0, edges 742 of 742 passed (0 refused for fold / window, jump or branch), knee_branch_signs [1.0]. The kinematic flood (verify_pkH1_cont_kin_m5.json) has 971 / 971 and 0 islands. So connected gap = static gap, d = 0.00, which does not pass TH conn_watch 1.0. The row's v_connected_reach is 0.6583, equal to v_reach 0.6583. The watch came from the tool reading the scalar row field as a note (c_continuity, 'row ' + k branch)."
+ },
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "docs/research/rebase/verify_pkH1_m5.json windows.fold_margin_min_taken 5.49 and fold_margin_lt_rule 0. Its params are identical to the claim (H1), mode exact, fold_margin 5.0, corrected gap 27.2, so this is the claim's own wear. Held out under the claim's protocol (this skeptic) the minimum is redteam.fold_margin_min_taken_deg 5.32 (docs/alignment/remeasure/skin-normal-3r-pin-knee_fit60_held_skeptic.json). Both are >= TH fold_min 5.0. The tool's FOLD_KEY regex does not match 'fold_margin_min_taken', and that file is not in its V list."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Confirmed. docs/dashboard/data/morphs.json, id skin-normal-3r-pin-knee: sweep_gap 19.72, v_gap 27.2, complexity 0.0, gap 20.63. The row's verdict field still begins 'screened: 20.63 (score 92.50) ... worn FROZEN on Bench(110,360) exact 30.35', which is the k4598 screen, not H1's verified 27.20. 19.72 is the in-sample GPU polish (row v_gpuknee_refuted true; held-out gain 0.90). A displayed number 7.48 better than the verified one is a reporting fault. Stands."
+ },
+ {
+  "key": "judgement:G5",
+  "refuted": false,
+  "evidence": "Re-derived from the per-pose rows of docs/alignment/remeasure/skin-normal-3r-pin-knee_knee_sensing_{bench,held}.json. Bench, 343 taken poses: s8 min 0.3919 (knee 147.16, clip (30, 148.1, -59.6)), c8 max 2.33, ok_all true, GH drift max 1.781 / median 1.011 deg per mm. Held, 832 kinematic poses: 0.3738 / 2.42, drift max 1.895. The drift term is phi's in-plane gradient from the model's own knee(). Pins a and b are parallel to u3, so member 3 turns about u3 and only the J3 reading moves. REQUIREMENTS.md line 81 confirms R10 <= 4 mm, so the error is up to 7.6 deg. docs/SIMPLICITY.md lines 90-93 still read 'Sensing must also hold when the shoulder centre translates (R10)' and 'Pins parallel to J3 ... 2. Example: the pin knee'. Recomputed: tools/simplicity.py v1 (3ceacea^) on the v1 record gives 19.5; v2 on the current record gives 0; v2 with cuff_knee removed gives 9.5. One correction: the held minimum 0.3738 is at ws (60, 165, -45), which the claim does NOT take held out (it presses 0.90 mm). The held taken knee range is [103.0, 147.3]. The GH-drift part does not depend on that. Stands."
+ },
+ {
+  "key": "judgement:NEW-caveat-dropped",
+  "refuted": false,
+  "evidence": "docs/concepts/skin-normal-3r-pin-knee.md lines 565-568, verbatim: 'with GH known the knee pins need no encoder. The record keeps 2 sensed pins because SIMPLICITY.md requires sensing to hold when GH translates (R10) ... (9.5 if the user accepts hub-only sensing / a cuff IMU)'. CLAUDE.md lines 28-31 were added in 3ceacea, whose author is the agent, not the user. They cite those lines for '(the 3 hub encoders fix the pose ...)' and drop the 'with GH known' condition. The user's verbatim words are only 'if no encoders are needed, it doesn't count as added complexity'. git show 3ceacea tools/simplicity.py subtracts the knee's rot / bodies / joints / parts as well as its encoders: 0 against 9.5 for encoders only (recomputed). Stands."
+ },
+ {
+  "key": "judgement:NEW-closure-as-cuff",
+  "refuted": false,
+  "evidence": "docs/SIMPLICITY.md lines 79-83 count a slide 'that the design's own closure needs'. offset-skin-normal-3r scores 17.75 under both v1 and v2 (recomputed). Pareto fronts recomputed over rows with status 'verified' and a mechanism record (21 rows). v1: zc-frontier (0, 33.51), geneva-tail-knuckle-pinknee (12.0, 23.57), kneeless-roller (23.75, 21.07), roller-longdyad (43.75, 18.67); this row (19.5, 27.20) is dominated by geneva. v2: this row (0, 27.20) replaces zc-frontier at the zero end. Count correction: on these 21 rows, 5 rows that were simpler under v1 are now more complex than it, and it ties raglan-knee-3r, spine-parked-j2-3r and zc-frontier-3r. The auditor's '21 rows / 4 plain 3Rs' comes from its 51-row set, which is every row carrying a v_gap, dead rows included. The direction is the same. Stands."
+ },
+ {
+  "key": "judgement:P4",
+  "refuted": false,
+  "evidence": "git show --stat 3ceacea: tools/simplicity.py (VERSION 1 -> 2, the cuff_knee subtraction) and docs/concepts/rows/skin-normal-3r-pin-knee.json (sensed_passive 2 -> 0, cuff_knee added) changed in one commit, 19.5 -> 0. The change is declared: there is a change log at docs/SIMPLICITY.md line 223. tools/simplicity.py is in MEASURE_PATHS, but judge_change follows only gap moves. Stands as a declared watch."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "Recomputed from docs/alignment/remeasure/skin-normal-3r-pin-knee_bench_perpose.json, taking min(min_mm, cmin) on taken poses. Taken poses under 1 / 2 / 3 mm: 8 / 27 / 92 of 343; minimum 0.086 at clip (30, 148.1, -59.6). The near-touch gaps reproduce: 27.20 / 31.75 / 46.85 / 95.88. shell2 = 19.65, over TH shell2_watch 15 and under 25. All 5 taken overhead workspace poses are under 2 mm (1.62, 0.56, 0.31, 0.96, 1.04), as are 4 of the 6 taken overhead clips. Contact: 9 poses, depth sum 8.38 mm, deepest 4.08 mm at ws (15, 90, 30). Held out under the claim protocol (this skeptic): 15 / 71 / 196 of 785 taken poses under 1 / 2 / 3 mm; near1 34.66 and near2 55.61, so shell2 24.22, 0.78 under the gamed line; contact 22 poses, sum 20.31 mm, deepest 4.39 mm at ws (-90, 60, 105). Stands."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Stands with two corrections. (1) The 149.48 deg knee is on the held KINEMATIC set. At that pose, ws (60, 165, -45), the claim presses 0.90 mm and does not take it. The held TAKEN range under the claim protocol is [103.0, 147.3] (redteam.knee_ang_taken), a margin of 2.24 deg, the same as the bench. (2) 'so the overhead clip follow is 0.60' is a misattribution. The 4 overhead clip frames lost are contact frames: (30, 150, -60) three times at -0.074 mm and (30, 149.4, -59.9) at -0.024 mm. The 7 knee-window losses are all workspace poses: 28 overhead ws, 6 evaluated, 15 fold + 7 window. Held out, the window costs 17 overhead poses (overhead why_not slide 17). The core stands: the window is a rule in the model with no stop part, sigma falls with knee angle (corr -0.743 bench / -0.722 held), and a real arm drives the knee past the rule."
+ },
+ {
+  "key": "judgement:M3",
+  "refuted": true,
+  "evidence": "The clash is checked in the built CAD, which includes the omitted hardware, and it is clear. The H1 L1 build is pipeline/full-exo/designs/l1_skin-normal-3r-pin-knee-h1. build.json stack.full_pin_stack_mm is 7.082 (= 5.68 + 1.4), with retainer [90.902, 91.802]. The part list includes 'pin a/b retainer keep-out (O8 x 0.9 mm: DIN 6799 RS 3.2 e-clip + pin end, over the 0.5 mm GTM washer)'. judge/part_contact.json (R6): 1337 frames x 1140 pairs, violations {} (0.0 mm <= 0.15, PASS). judge/workspace.json (R16): the part_interference poses (1.12 %) are only strap-strap pairs (link 1 / E strap vs link 2 strap); none involves the retainers. The hardware sits outward, so no skin number moves and no clash is found: no cost to the wearer. Caveat: that L1 uses H1's polish fit (m -10.03) rather than the claim's fit-60 (m -9.21)."
+ },
+ {
+  "key": "judgement:R2",
+  "refuted": false,
+  "evidence": "Confirmed. docs/dashboard/data/morphs.json gives sweep_gap 19.72 and complexity 0.0, with no fixed-GH note. The row verdict text is still the 03:32 k4598 screen (30.35). docs/SIMPLICITY.md lines 90-93 still list the pin knee as 2 sensed, and the v1 worked example stands. Stands."
+ }
+]

@@ -1,0 +1,70 @@
+[
+ {
+  "tag": "xchk-held-H1",
+  "cmd": "eval \"$(python3 tools/bench_cache_farm.py use 110 360)\" && python3 docs/concepts/verify/skin-normal-3r-pin-knee-polish.py held docs/research/crossfit_check/held_H1.json '{\"rad1\": 10.0, \"rad2\": 10.0, \"rad3\": 10.0, \"az1\": 101.1634, \"el1\": 63.8986, \"az2\": 30.153, \"el2\": 47.0108, \"wd\": 70.3931, \"wa\": -8.1248, \"b3\": 0.2842, \"lE\": 59.5534, \"lc\": 28.2401, \"phiE\": -5.8107, \"phib\": -54.914, \"ang_min\": 30.4611, \"stk\": 5.6815}' > docs/research/crossfit_check/held_H1.log 2>&1; tail -c 600 docs/research/crossfit_check/held_H1.log",
+  "out": [
+   "docs/research/crossfit_check/held_H1*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.0"
+  },
+  "timeout": 1800
+ },
+ {
+  "tag": "xchk-held-XP1",
+  "cmd": "eval \"$(python3 tools/bench_cache_farm.py use 110 360)\" && python3 docs/concepts/verify/skin-normal-3r-pin-knee-polish.py held docs/research/crossfit_check/held_XP1.json '{\"az1\": 97.697, \"el1\": 62.9465, \"az2\": 33.4264, \"el2\": 43.8062, \"wd\": 64.5562, \"wa\": -8.8522, \"b3\": 0.3332, \"lE\": 75.6522, \"lc\": 42.0679, \"phiE\": 1.4185, \"phib\": -64.6821, \"ang_min\": 23.7927, \"stk\": 5.8761}' > docs/research/crossfit_check/held_XP1.log 2>&1; tail -c 600 docs/research/crossfit_check/held_XP1.log",
+  "out": [
+   "docs/research/crossfit_check/held_XP1*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.1098"
+  },
+  "timeout": 1800
+ },
+ {
+  "tag": "xchk-held-XP2",
+  "cmd": "eval \"$(python3 tools/bench_cache_farm.py use 110 360)\" && python3 docs/concepts/verify/skin-normal-3r-pin-knee-polish.py held docs/research/crossfit_check/held_XP2.json '{\"az1\": 99.5207, \"el1\": 65.0056, \"az2\": 33.5681, \"el2\": 45.6672, \"wd\": 62.1893, \"wa\": -10.3536, \"b3\": 0.3287, \"lE\": 76.4777, \"lc\": 28.2433, \"phiE\": -0.4455, \"phib\": -68.8163, \"ang_min\": 20.9256, \"stk\": 5.4343}' > docs/research/crossfit_check/held_XP2.log 2>&1; tail -c 600 docs/research/crossfit_check/held_XP2.log",
+  "out": [
+   "docs/research/crossfit_check/held_XP2*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.1312"
+  },
+  "timeout": 1800
+ },
+ {
+  "tag": "xchk-held-XP1m5",
+  "cmd": "eval \"$(python3 tools/bench_cache_farm.py use 110 360)\" && python3 docs/concepts/verify/skin-normal-3r-pin-knee-polish.py held docs/research/crossfit_check/held_XP1_m5.json '{\"az1\": 97.697, \"el1\": 62.9465, \"az2\": 33.4264, \"el2\": 43.8062, \"wd\": 64.5562, \"wa\": -8.8522, \"b3\": 0.3332, \"lE\": 75.6522, \"lc\": 42.0679, \"phiE\": 1.4185, \"phib\": -64.6821, \"ang_min\": 23.7927, \"stk\": 5.8761}' > docs/research/crossfit_check/held_XP1_m5.log 2>&1; tail -c 600 docs/research/crossfit_check/held_XP1_m5.log",
+  "out": [
+   "docs/research/crossfit_check/held_XP1_m5*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5"
+  },
+  "timeout": 1800
+ },
+ {
+  "tag": "xchk-xfit-score",
+  "cmd": "eval \"$(python3 tools/bench_cache_farm.py use 110 360)\" && python3 tools/crossfit_polish.py score knee docs/research/crossfit_check/xfit_score.json docs/research/crossfit_check/score_items.json --jobs 2 > docs/research/crossfit_check/xfit_score.log 2>&1; tail -5 docs/research/crossfit_check/xfit_score.log",
+  "out": [
+   "docs/research/crossfit_check/xfit_score*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2"
+  },
+  "timeout": 1800
+ }
+]

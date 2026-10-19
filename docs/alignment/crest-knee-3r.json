@@ -1,0 +1,251 @@
+{
+ "id": "crest-knee-3r",
+ "status": "verified",
+ "v_gap": 31.5,
+ "complexity": 0.0,
+ "verdict": "watch",
+ "reasons": [
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 22.02 (score 91.99) sits 9.48 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 28.45 vs bench 31.5 (-3.05; re-measured (this audit))",
+   "held_gap": 28.45,
+   "v_gap": 31.5,
+   "drop": -3.05,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 26.34 -> verified 31.5 (+5.16)",
+   "fast": 26.34,
+   "verified": 31.5,
+   "drop": 5.16
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 31.5, <1 mm 34.08, <2 mm 59.56, <3 mm 88.99, band read 3-14 mm 32.91, 28.06 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 28.06,
+   "plain": 31.5,
+   "n1": 34.08,
+   "n2": 59.56,
+   "n3": 88.99,
+   "band3": 32.91,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0012,
+    "2-3": 0.0142,
+    "3-4": 0.0184,
+    "4-6": 0.0602,
+    "6-10": 0.3547,
+    "10-14": 0.4244,
+    ">14": 0.1269
+   },
+   "minmm": 0.653,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 31.5: bench 5 contact poses, sum 5.15 mm, deepest 1.96 mm at ['ws', 30.0, 165.0, -60.0], 0 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 2 contact poses, sum 2.04 mm, deepest 1.42 mm at ['ws', 135.0, 135.0, -45.0], 0 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
+   "depths": {
+    "v_gap 31.5": {
+     "bench": {
+      "n": 5,
+      "sum_mm": 5.15,
+      "max_mm": 1.96,
+      "n_deeper3": 0,
+      "overhead140": 3,
+      "deepest": [
+       "ws",
+       30.0,
+       165.0,
+       -60.0
+      ],
+      "gap": 31.5,
+      "src": "docs/alignment/remeasure/crest-knee-3r_v3jog_bench_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        5.15
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 2,
+      "sum_mm": 2.04,
+      "max_mm": 1.42,
+      "n_deeper3": 0,
+      "overhead140": 0,
+      "deepest": [
+       "ws",
+       135.0,
+       135.0,
+       -45.0
+      ],
+      "gap": 28.45,
+      "src": "docs/alignment/remeasure/crest-knee-3r_v3jog_held_perpose.json",
+      "cross_check": {
+       "files": 2,
+       "sums": [
+        2.04
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "vs conecut-knee-knuckle-3r: plain -13.22, 2 mm -24.72",
+   "ref": "conecut-knee-knuckle-3r",
+   "gain_plain": -13.22,
+   "gain_2mm": -24.72
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.085 deg (redispatch2_2026_10_18.joggle_best.frozen_exact_bench.th_margin_min; 20 readings)",
+   "min_margin": 5.085,
+   "where": "redispatch2_2026_10_18.joggle_best.frozen_exact_bench.th_margin_min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "knee moves: smallest recorded span 29.11 deg (re-measured K.ang span)",
+   "spans": [
+    [
+     "re-measured K.ang span",
+     29.11
+    ],
+    [
+     "re-measured K.qa span",
+     29.11
+    ],
+    [
+     "re-measured K.qb span",
+     29.17
+    ]
+   ],
+   "declared": [
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "ok",
+   "reason": "sample-weighted in-band 0.872 vs part-weighted 0.882 (-1.04 points) (re-measured)",
+   "parts": {
+    "hub1": [
+     0.973,
+     10.4,
+     80
+    ],
+    "hub2": [
+     0.983,
+     10.9,
+     80
+    ],
+    "hub3": [
+     0.887,
+     10.1,
+     80
+    ],
+    "E": [
+     0.846,
+     9.3,
+     112
+    ],
+    "boss": [
+     0.899,
+     9.0,
+     32
+    ],
+    "pad": [
+     0.866,
+     10.8,
+     32
+    ],
+    "knee": [
+     0.656,
+     12.7,
+     95
+    ],
+    "L1": [
+     0.946,
+     9.0,
+     44
+    ],
+    "L2": [
+     0.885,
+     9.2,
+     100
+    ]
+   }
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 0.0 vs row 0.0",
+   "recomputed": 0.0,
+   "row": 0.0
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 22.02 (score 91.99) sits 9.48 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 7 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [
+  "docs/concepts/verify/crest-knee-3r-v3_held.json",
+  "docs/concepts/verify/crest-knee-3r-v3_bench.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_tolprobe_flatcell_bench.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_tolprobe_held.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_tolprobe_bench.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_flood_held.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_flood_bench.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_held_frozen.json",
+  "docs/concepts/verify/crest-knee-3r-joggle_v_bench_frozen.json",
+  "docs/concepts/verify/crest-knee-3r_v_flood_held.json",
+  "docs/concepts/verify/crest-knee-3r_v_flood_bench.json",
+  "docs/concepts/verify/crest-knee-3r_v_held_frozen.json"
+ ],
+ "git": "e6aff2c",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-19T01:49:57Z"
+}

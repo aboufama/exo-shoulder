@@ -1,0 +1,212 @@
+[
+ {
+  "ok": false,
+  "n_fail": 3,
+  "min_dK_lim": 44.5,
+  "dK_need": 49.1,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 48.2,
+    "why": "pressure_horn",
+    "pa_horn": 41.9,
+    "pa_crank": 21.4,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 46.5,
+    "why": "pressure_horn",
+    "pa_horn": 41.9,
+    "pa_crank": 16.8,
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 48.5,
+    "why": "pressure_horn",
+    "pa_horn": 42.0,
+    "pa_crank": 25.4,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 46.5,
+    "why": "pressure_horn",
+    "pa_horn": 42.0,
+    "pa_crank": 11.7,
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 50.3,
+    "why": "pressure_horn",
+    "pa_horn": 41.5,
+    "pa_crank": 32.0,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 44.5,
+    "why": "pressure_horn",
+    "pa_horn": 42.0,
+    "pa_crank": 7.7,
+    "honest": true,
+    "ok": false
+   }
+  ],
+  "which": "docs/research/roller_env_polish/picks/pick1.json",
+  "secs": 24.2
+ },
+ {
+  "ok": false,
+  "n_fail": 4,
+  "min_dK_lim": 0.0,
+  "dK_need": 44.6,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 43.8,
+    "why": "pressure_horn",
+    "pa_horn": 41.9,
+    "pa_crank": 7.9,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 42.0,
+    "why": "pressure_horn",
+    "pa_horn": 41.9,
+    "pa_crank": 7.8,
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 0.0,
+    "why": "CRK-hubK",
+    "pa_horn": 8.9,
+    "pa_crank": 7.4,
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 41.5,
+    "why": "pressure_horn",
+    "pa_horn": 41.9,
+    "pa_crank": 8.7,
+    "honest": true,
+    "ok": false
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 46.0,
+    "why": "pressure_horn",
+    "pa_horn": 41.4,
+    "pa_crank": 14.1,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 0.0,
+    "why": "flank_cusp",
+    "pa_horn": 27.9,
+    "pa_crank": 13.4,
+    "honest": true,
+    "ok": false
+   }
+  ],
+  "which": "docs/research/roller_env_polish/picks/pick2.json",
+  "secs": 23.0
+ },
+ {
+  "ok": true,
+  "n_fail": 0,
+  "min_dK_lim": 46.0,
+  "dK_need": 45.9,
+  "rows": [
+   {
+    "k": "beta",
+    "d": -1.0,
+    "dK_lim": 49.8,
+    "why": "pressure_horn",
+    "pa_horn": 40.1,
+    "pa_crank": 26.9,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "beta",
+    "d": 1.0,
+    "dK_lim": 48.0,
+    "why": "pressure_horn",
+    "pa_horn": 41.0,
+    "pa_crank": 18.1,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": -0.25,
+    "dK_lim": 50.0,
+    "why": "pressure_horn",
+    "pa_horn": 40.0,
+    "pa_crank": 31.2,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "r_c",
+    "d": 0.25,
+    "dK_lim": 47.8,
+    "why": "pressure_horn",
+    "pa_horn": 41.1,
+    "pa_crank": 10.8,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": -0.05,
+    "dK_lim": 51.8,
+    "why": "pressure_horn",
+    "pa_horn": 39.1,
+    "pa_crank": 39.7,
+    "honest": true,
+    "ok": true
+   },
+   {
+    "k": "g",
+    "d": 0.05,
+    "dK_lim": 46.0,
+    "why": "pressure_horn",
+    "pa_horn": 42.0,
+    "pa_crank": 8.1,
+    "honest": true,
+    "ok": true
+   }
+  ],
+  "which": "docs/research/roller_env_polish/picks/pick3.json",
+  "secs": 23.9
+ }
+]

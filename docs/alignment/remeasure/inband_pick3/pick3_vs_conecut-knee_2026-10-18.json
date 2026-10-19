@@ -1,0 +1,922 @@
+{
+ "note": "diff = gap A (inband-rssr pick3 dump) - gap B (conecut-knee-knuckle-3r remeasure dump); negative = inband better; tools/alignment_paired.compare_sets, 4000 draws, seed 0",
+ "wear": {
+  "pick3_priced_bench": {
+   "file": "docs/research/inband_env_polish/farm/claim_pick3_fit60_bench_perpose.json",
+   "frozen": 18.33,
+   "recomputed": 18.33,
+   "reach": 0.7194,
+   "inband14": 0.9071,
+   "contact": 0.0027,
+   "ws_taken": "259/360",
+   "overhead": "9/28",
+   "raised": {
+    "90-120": "25/51",
+    "120-140": "12/34",
+    "140-160": "5/13",
+    "160-999": "4/15"
+   },
+   "taken_lt1_own": 3,
+   "taken_lt2_own": 22,
+   "taken_lt2_walls": 30,
+   "taken_lt3_own": 87,
+   "min_taken": 0.314,
+   "contact_n": 1,
+   "depth_sum": 0.22,
+   "depth_max": 0.22,
+   "deepest": [
+    {
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "mm": -0.217
+    }
+   ],
+   "overhead_contacts": []
+  },
+  "pick3_priced_held": {
+   "file": "docs/research/inband_env_polish/farm/claim_pick3_fit60_held_perpose.json",
+   "frozen": 22.86,
+   "recomputed": 22.87,
+   "reach": 0.6807,
+   "inband14": 0.9056,
+   "contact": 0.0093,
+   "ws_taken": "648/952",
+   "overhead": "19/71",
+   "raised": {
+    "90-120": "68/140",
+    "120-140": "27/89",
+    "140-160": "11/35",
+    "160-999": "8/36"
+   },
+   "taken_lt1_own": 15,
+   "taken_lt2_own": 54,
+   "taken_lt2_walls": 66,
+   "taken_lt3_own": 184,
+   "min_taken": 0.36,
+   "contact_n": 8,
+   "depth_sum": 21.16,
+   "depth_max": 6.09,
+   "deepest": [
+    {
+     "kind": "ws",
+     "plane": -90.0,
+     "elev": 60.0,
+     "axial": 120.0,
+     "mm": -6.09
+    },
+    {
+     "kind": "ws",
+     "plane": -90.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "mm": -4.058
+    },
+    {
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 150.0,
+     "axial": -45.0,
+     "mm": -3.801
+    },
+    {
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 150.0,
+     "axial": -60.0,
+     "mm": -3.698
+    }
+   ],
+   "overhead_contacts": [
+    [
+     150,
+     -3.698
+    ],
+    [
+     150,
+     -3.801
+    ],
+    [
+     165,
+     -0.762
+    ],
+    [
+     150,
+     -0.099
+    ]
+   ]
+  },
+  "pick3_unpriced_bench": {
+   "file": "docs/alignment/remeasure/inband_pick3/claim_O7nominal_unpriced_bench_perpose.json",
+   "frozen": 18.32,
+   "recomputed": 18.32,
+   "reach": 0.7222,
+   "inband14": 0.9026,
+   "contact": 0.0054,
+   "ws_taken": "260/360",
+   "overhead": "9/28",
+   "raised": {
+    "90-120": "25/51",
+    "120-140": "13/34",
+    "140-160": "5/13",
+    "160-999": "4/15"
+   },
+   "taken_lt1_own": 4,
+   "taken_lt2_own": 19,
+   "taken_lt2_walls": 26,
+   "taken_lt3_own": 92,
+   "min_taken": 0.314,
+   "contact_n": 2,
+   "depth_sum": 8.59,
+   "depth_max": 5.85,
+   "deepest": [
+    {
+     "kind": "ws",
+     "plane": -75.0,
+     "elev": 60.0,
+     "axial": 120.0,
+     "mm": -5.847
+    },
+    {
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "mm": -2.738
+    }
+   ],
+   "overhead_contacts": []
+  },
+  "pick3_unpriced_held": {
+   "file": "docs/alignment/remeasure/inband_pick3/claim_O7nominal_unpriced_held_perpose.json",
+   "frozen": 23.54,
+   "recomputed": 23.54,
+   "reach": 0.6786,
+   "inband14": 0.9008,
+   "contact": 0.014,
+   "ws_taken": "646/952",
+   "overhead": "19/71",
+   "raised": {
+    "90-120": "68/140",
+    "120-140": "27/89",
+    "140-160": "11/35",
+    "160-999": "8/36"
+   },
+   "taken_lt1_own": 8,
+   "taken_lt2_own": 52,
+   "taken_lt2_walls": 64,
+   "taken_lt3_own": 189,
+   "min_taken": 0.014,
+   "contact_n": 12,
+   "depth_sum": 33.27,
+   "depth_max": 8.3,
+   "deepest": [
+    {
+     "kind": "ws",
+     "plane": -90.0,
+     "elev": 60.0,
+     "axial": 120.0,
+     "mm": -8.303
+    },
+    {
+     "kind": "ws",
+     "plane": -90.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "mm": -6.637
+    },
+    {
+     "kind": "ws",
+     "plane": -75.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "mm": -4.832
+    },
+    {
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 150.0,
+     "axial": -45.0,
+     "mm": -3.801
+    }
+   ],
+   "overhead_contacts": [
+    [
+     150,
+     -3.698
+    ],
+    [
+     150,
+     -3.801
+    ],
+    [
+     165,
+     -0.762
+    ],
+    [
+     150,
+     -0.1
+    ]
+   ]
+  },
+  "O9cat_unpriced_bench": {
+   "file": "docs/alignment/remeasure/inband_pick3/claim_O9rh15.9_dedup_unpriced_bench_perpose.json",
+   "frozen": 18.32,
+   "recomputed": 18.32,
+   "reach": 0.7222,
+   "inband14": 0.9011,
+   "contact": 0.0054,
+   "ws_taken": "260/360",
+   "overhead": "9/28",
+   "raised": {
+    "90-120": "25/51",
+    "120-140": "13/34",
+    "140-160": "5/13",
+    "160-999": "4/15"
+   },
+   "taken_lt1_own": 7,
+   "taken_lt2_own": 21,
+   "taken_lt2_walls": 28,
+   "taken_lt3_own": 92,
+   "min_taken": 0.17,
+   "contact_n": 2,
+   "depth_sum": 8.59,
+   "depth_max": 5.85,
+   "deepest": [
+    {
+     "kind": "ws",
+     "plane": -75.0,
+     "elev": 60.0,
+     "axial": 120.0,
+     "mm": -5.847
+    },
+    {
+     "kind": "ws",
+     "plane": -60.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "mm": -2.738
+    }
+   ],
+   "overhead_contacts": []
+  },
+  "O9cat_unpriced_held": {
+   "file": "docs/alignment/remeasure/inband_pick3/claim_O9rh15.9_dedup_unpriced_held_perpose.json",
+   "frozen": 23.62,
+   "recomputed": 23.62,
+   "reach": 0.6786,
+   "inband14": 0.8992,
+   "contact": 0.014,
+   "ws_taken": "646/952",
+   "overhead": "19/71",
+   "raised": {
+    "90-120": "68/140",
+    "120-140": "27/89",
+    "140-160": "11/35",
+    "160-999": "8/36"
+   },
+   "taken_lt1_own": 18,
+   "taken_lt2_own": 56,
+   "taken_lt2_walls": 68,
+   "taken_lt3_own": 189,
+   "min_taken": 0.014,
+   "contact_n": 12,
+   "depth_sum": 33.27,
+   "depth_max": 8.3,
+   "deepest": [
+    {
+     "kind": "ws",
+     "plane": -90.0,
+     "elev": 60.0,
+     "axial": 120.0,
+     "mm": -8.303
+    },
+    {
+     "kind": "ws",
+     "plane": -90.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "mm": -6.637
+    },
+    {
+     "kind": "ws",
+     "plane": -75.0,
+     "elev": 60.0,
+     "axial": 105.0,
+     "mm": -4.832
+    },
+    {
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 150.0,
+     "axial": -45.0,
+     "mm": -3.801
+    }
+   ],
+   "overhead_contacts": [
+    [
+     150,
+     -3.698
+    ],
+    [
+     150,
+     -3.801
+    ],
+    [
+     165,
+     -0.762
+    ],
+    [
+     150,
+     -0.1
+    ]
+   ]
+  },
+  "lead_bench": {
+   "file": "docs/alignment/remeasure/conecut-knee-knuckle-3r_bench_perpose.json",
+   "frozen": 18.28,
+   "recomputed": 18.29,
+   "reach": 0.7278,
+   "inband14": 0.9012,
+   "contact": 0.0106,
+   "ws_taken": "262/360",
+   "overhead": "8/28",
+   "raised": {
+    "90-120": "27/51",
+    "120-140": "12/34",
+    "140-160": "5/13",
+    "160-999": "3/15"
+   },
+   "taken_lt1_own": 3,
+   "taken_lt2_own": 23,
+   "taken_lt2_walls": 33,
+   "taken_lt3_own": 97,
+   "min_taken": 0.072,
+   "contact_n": 4,
+   "depth_sum": 20.24,
+   "depth_max": 8.93,
+   "deepest": [
+    {
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "mm": -8.928
+    },
+    {
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -60.0,
+     "mm": -5.797
+    },
+    {
+     "kind": "ws",
+     "plane": 0.0,
+     "elev": 105.0,
+     "axial": 15.0,
+     "mm": -4.28
+    },
+    {
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 150.0,
+     "axial": -105.0,
+     "mm": -1.235
+    }
+   ],
+   "overhead_contacts": [
+    [
+     165,
+     -8.928
+    ],
+    [
+     165,
+     -5.797
+    ],
+    [
+     150,
+     -1.235
+    ]
+   ]
+  },
+  "lead_held": {
+   "file": "docs/alignment/remeasure/conecut-knee-knuckle-3r_held_perpose.json",
+   "frozen": 22.38,
+   "recomputed": 22.38,
+   "reach": 0.6922,
+   "inband14": 0.9,
+   "contact": 0.016,
+   "ws_taken": "659/952",
+   "overhead": "18/71",
+   "raised": {
+    "90-120": "76/140",
+    "120-140": "29/89",
+    "140-160": "11/35",
+    "160-999": "7/36"
+   },
+   "taken_lt1_own": 13,
+   "taken_lt2_own": 57,
+   "taken_lt2_walls": 71,
+   "taken_lt3_own": 199,
+   "min_taken": 0.325,
+   "contact_n": 14,
+   "depth_sum": 60.97,
+   "depth_max": 9.86,
+   "deepest": [
+    {
+     "kind": "ws",
+     "plane": 45.0,
+     "elev": 165.0,
+     "axial": -30.0,
+     "mm": -9.864
+    },
+    {
+     "kind": "ws",
+     "plane": 30.0,
+     "elev": 165.0,
+     "axial": -45.0,
+     "mm": -9.133
+    },
+    {
+     "kind": "ws",
+     "plane": 15.0,
+     "elev": 150.0,
+     "axial": -60.0,
+     "mm": -7.082
+    },
+    {
+     "kind": "ws",
+     "plane": 60.0,
+     "elev": 165.0,
+     "axial": -30.0,
+     "mm": -6.923
+    }
+   ],
+   "overhead_contacts": [
+    [
+     150,
+     -7.082
+    ],
+    [
+     150,
+     -5.389
+    ],
+    [
+     165,
+     -9.133
+    ],
+    [
+     165,
+     -5.853
+    ],
+    [
+     165,
+     -9.864
+    ],
+    [
+     165,
+     -6.923
+    ],
+    [
+     150,
+     -0.177
+    ]
+   ]
+  }
+ },
+ "paired": {
+  "pick3_unpriced_vs_conecut-knee-knuckle-3r": {
+   "bench": {
+    "gap_A": 18.32,
+    "gap_B": 18.29,
+    "diff": 0.03,
+    "split": {
+     "reach": 0.56,
+     "follow": 0.0,
+     "inband": 0.0,
+     "contact": -0.53
+    },
+    "discordant": {
+     "ws_taken_A_only": 3,
+     "ws_taken_B_only": 5,
+     "contact_A_only": 2,
+     "contact_B_only": 4,
+     "contact_both": 0
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -1.95,
+      1.93
+     ],
+     "sd": 1.16,
+     "p_A_better": 0.492
+    }
+   },
+   "held": {
+    "gap_A": 23.54,
+    "gap_B": 22.38,
+    "diff": 1.16,
+    "split": {
+     "reach": 1.37,
+     "follow": 0.0,
+     "inband": -0.0,
+     "contact": -0.2
+    },
+    "discordant": {
+     "ws_taken_A_only": 5,
+     "ws_taken_B_only": 18,
+     "contact_A_only": 4,
+     "contact_B_only": 6,
+     "contact_both": 8
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -0.06,
+      2.38
+     ],
+     "sd": 0.75,
+     "p_A_better": 0.064
+    }
+   },
+   "pooled": {
+    "gap_A": 22.08,
+    "gap_B": 21.24,
+    "diff": 0.84,
+    "split": {
+     "reach": 1.14,
+     "follow": 0.0,
+     "inband": 0.0,
+     "contact": -0.3
+    },
+    "discordant": {
+     "ws_taken_A_only": 8,
+     "ws_taken_B_only": 23,
+     "contact_A_only": 6,
+     "contact_B_only": 10,
+     "contact_both": 8
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -0.23,
+      1.86
+     ],
+     "sd": 0.63,
+     "p_A_better": 0.102
+    }
+   }
+  },
+  "O9cat_unpriced_vs_conecut-knee-knuckle-3r": {
+   "bench": {
+    "gap_A": 18.32,
+    "gap_B": 18.29,
+    "diff": 0.03,
+    "split": {
+     "reach": 0.56,
+     "follow": 0.0,
+     "inband": 0.0,
+     "contact": -0.53
+    },
+    "discordant": {
+     "ws_taken_A_only": 3,
+     "ws_taken_B_only": 5,
+     "contact_A_only": 2,
+     "contact_B_only": 4,
+     "contact_both": 0
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -1.89,
+      1.95
+     ],
+     "sd": 1.16,
+     "p_A_better": 0.468
+    }
+   },
+   "held": {
+    "gap_A": 23.62,
+    "gap_B": 22.38,
+    "diff": 1.24,
+    "split": {
+     "reach": 1.37,
+     "follow": 0.0,
+     "inband": 0.08,
+     "contact": -0.2
+    },
+    "discordant": {
+     "ws_taken_A_only": 5,
+     "ws_taken_B_only": 18,
+     "contact_A_only": 4,
+     "contact_B_only": 6,
+     "contact_both": 8
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      0.02,
+      2.47
+     ],
+     "sd": 0.75,
+     "p_A_better": 0.048
+    }
+   },
+   "pooled": {
+    "gap_A": 22.1,
+    "gap_B": 21.24,
+    "diff": 0.85,
+    "split": {
+     "reach": 1.14,
+     "follow": 0.0,
+     "inband": 0.01,
+     "contact": -0.3
+    },
+    "discordant": {
+     "ws_taken_A_only": 8,
+     "ws_taken_B_only": 23,
+     "contact_A_only": 6,
+     "contact_B_only": 10,
+     "contact_both": 8
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -0.16,
+      1.93
+     ],
+     "sd": 0.63,
+     "p_A_better": 0.08
+    }
+   }
+  },
+  "pick3_priced_vs_conecut-knee-knuckle-3r": {
+   "bench": {
+    "gap_A": 18.33,
+    "gap_B": 18.29,
+    "diff": 0.04,
+    "split": {
+     "reach": 0.83,
+     "follow": 0.0,
+     "inband": 0.0,
+     "contact": -0.79
+    },
+    "discordant": {
+     "ws_taken_A_only": 2,
+     "ws_taken_B_only": 5,
+     "contact_A_only": 1,
+     "contact_B_only": 4,
+     "contact_both": 0
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -1.97,
+      1.68
+     ],
+     "sd": 1.11,
+     "p_A_better": 0.532
+    }
+   },
+   "held": {
+    "gap_A": 22.87,
+    "gap_B": 22.38,
+    "diff": 0.49,
+    "split": {
+     "reach": 1.16,
+     "follow": 0.0,
+     "inband": -0.0,
+     "contact": -0.67
+    },
+    "discordant": {
+     "ws_taken_A_only": 4,
+     "ws_taken_B_only": 15,
+     "contact_A_only": 0,
+     "contact_B_only": 6,
+     "contact_both": 8
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -0.75,
+      1.34
+     ],
+     "sd": 0.64,
+     "p_A_better": 0.307
+    }
+   },
+   "pooled": {
+    "gap_A": 21.6,
+    "gap_B": 21.24,
+    "diff": 0.36,
+    "split": {
+     "reach": 1.07,
+     "follow": 0.0,
+     "inband": 0.0,
+     "contact": -0.71
+    },
+    "discordant": {
+     "ws_taken_A_only": 6,
+     "ws_taken_B_only": 20,
+     "contact_A_only": 1,
+     "contact_B_only": 10,
+     "contact_both": 8
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -0.73,
+      1.14
+     ],
+     "sd": 0.57,
+     "p_A_better": 0.344
+    }
+   }
+  },
+  "pick3_unpriced_vs_lowarm-kphase-notch-knuckle-3r": {
+   "bench": {
+    "gap_A": 18.32,
+    "gap_B": 18.47,
+    "diff": -0.15,
+    "split": {
+     "reach": 0.56,
+     "follow": 0.0,
+     "inband": -0.18,
+     "contact": -0.53
+    },
+    "discordant": {
+     "ws_taken_A_only": 3,
+     "ws_taken_B_only": 5,
+     "contact_A_only": 2,
+     "contact_B_only": 4,
+     "contact_both": 0
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -2.12,
+      1.71
+     ],
+     "sd": 1.17,
+     "p_A_better": 0.545
+    },
+    "model_frozen": {
+     "A": 18.32,
+     "B": 18.47
+    }
+   },
+   "held": {
+    "gap_A": 23.54,
+    "gap_B": 22.87,
+    "diff": 0.66,
+    "split": {
+     "reach": 1.05,
+     "follow": 0.0,
+     "inband": -0.29,
+     "contact": -0.1
+    },
+    "discordant": {
+     "ws_taken_A_only": 8,
+     "ws_taken_B_only": 18,
+     "contact_A_only": 4,
+     "contact_B_only": 5,
+     "contact_both": 8
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -0.45,
+      2.04
+     ],
+     "sd": 0.76,
+     "p_A_better": 0.155
+    },
+    "model_frozen": {
+     "A": 23.54,
+     "B": 22.87
+    }
+   },
+   "pooled": {
+    "gap_A": 22.08,
+    "gap_B": 21.65,
+    "diff": 0.44,
+    "split": {
+     "reach": 0.91,
+     "follow": 0.0,
+     "inband": -0.25,
+     "contact": -0.23
+    },
+    "discordant": {
+     "ws_taken_A_only": 11,
+     "ws_taken_B_only": 23,
+     "contact_A_only": 6,
+     "contact_B_only": 9,
+     "contact_both": 8
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -0.58,
+      1.57
+     ],
+     "sd": 0.65,
+     "p_A_better": 0.232
+    }
+   }
+  },
+  "pick3_unpriced_vs_slipper-nose-knuckle-3r": {
+   "bench": {
+    "gap_A": 18.32,
+    "gap_B": 18.48,
+    "diff": -0.17,
+    "split": {
+     "reach": 0.28,
+     "follow": 0.0,
+     "inband": -0.45,
+     "contact": 0.0
+    },
+    "discordant": {
+     "ws_taken_A_only": 3,
+     "ws_taken_B_only": 4,
+     "contact_A_only": 2,
+     "contact_B_only": 2,
+     "contact_both": 0
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -2.01,
+      1.69
+     ],
+     "sd": 1.13,
+     "p_A_better": 0.543
+    },
+    "model_frozen": {
+     "A": 18.32,
+     "B": 18.49
+    }
+   },
+   "held": {
+    "gap_A": 23.54,
+    "gap_B": 23.45,
+    "diff": 0.08,
+    "split": {
+     "reach": 0.42,
+     "follow": 0.0,
+     "inband": -0.57,
+     "contact": 0.24
+    },
+    "discordant": {
+     "ws_taken_A_only": 3,
+     "ws_taken_B_only": 7,
+     "contact_A_only": 4,
+     "contact_B_only": 2,
+     "contact_both": 8
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -0.83,
+      1.33
+     ],
+     "sd": 0.66,
+     "p_A_better": 0.366
+    },
+    "model_frozen": {
+     "A": 23.54,
+     "B": 23.45
+    }
+   },
+   "pooled": {
+    "gap_A": 22.08,
+    "gap_B": 22.06,
+    "diff": 0.02,
+    "split": {
+     "reach": 0.38,
+     "follow": 0.0,
+     "inband": -0.53,
+     "contact": 0.16
+    },
+    "discordant": {
+     "ws_taken_A_only": 6,
+     "ws_taken_B_only": 11,
+     "contact_A_only": 6,
+     "contact_B_only": 4,
+     "contact_both": 8
+    },
+    "boot": {
+     "n": 4000,
+     "ci90": [
+      -0.83,
+      1.09
+     ],
+     "sd": 0.59,
+     "p_A_better": 0.431
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,291 @@
+{
+ "cell": "lead",
+ "drive": "rssr",
+ "fit_fast": {
+  "gap": 15.51,
+  "reach": 0.7937,
+  "follow": 1.0,
+  "inband14": 0.8512,
+  "inband10": 0.4851,
+  "contact": 0.0
+ },
+ "frozen": {
+  "gap": 27.67,
+  "reach": 0.6891,
+  "follow": 1.0,
+  "inband14": 0.8503,
+  "inband10": 0.4877,
+  "contact": 0.0161
+ },
+ "mode": "exact",
+ "bench": [
+  -1,
+  -1
+ ],
+ "why": {
+  "fold": 249,
+  "slide": 33,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 0,
+  "contact": 14
+ },
+ "parts_pairs": {},
+ "th_margin": {
+  "min": 5.078,
+  "n": 858,
+  "lt5": 0,
+  "forced": 322,
+  "th_max_taken": 109.09,
+  "dK_taken_max": 45.27,
+  "lowest": {
+   "own": 5.078,
+   "forced": true,
+   "kind": "ws",
+   "plane": -15.0,
+   "elev": 60.0,
+   "axial": 105.0
+  }
+ },
+ "parts_ib14": {
+  "hub1": [
+   0.999,
+   8.6,
+   80
+  ],
+  "hubK": [
+   0.982,
+   7.7,
+   80
+  ],
+  "hub2": [
+   0.947,
+   11.1,
+   80
+  ],
+  "hub3": [
+   0.595,
+   13.1,
+   80
+  ],
+  "E": [
+   0.949,
+   7.4,
+   104
+  ],
+  "boss": [
+   0.988,
+   8.5,
+   32
+  ],
+  "pad": [
+   1.0,
+   8.1,
+   32
+  ],
+  "knee": [
+   0.942,
+   10.8,
+   85
+  ],
+  "crank": [
+   0.623,
+   13.5,
+   69
+  ],
+  "horn": [
+   0.954,
+   5.5,
+   20
+  ],
+  "rod": [
+   0.645,
+   12.4,
+   18
+  ],
+  "rodends": [
+   0.621,
+   11.8,
+   32
+  ],
+  "L1a": [
+   0.969,
+   8.9,
+   12
+  ],
+  "L1b": [
+   0.943,
+   7.9,
+   44
+  ],
+  "L2": [
+   0.71,
+   12.2,
+   128
+  ]
+ },
+ "audit": {
+  "near_touch_min_mm": 0.25,
+  "near_touch_low": [
+   {
+    "mm": 0.25,
+    "i": 605,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 150.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 0.59,
+    "i": 663,
+    "kind": "ws",
+    "plane": 45.0,
+    "elev": 90.0,
+    "axial": 45.0
+   },
+   {
+    "mm": 0.62,
+    "i": 893,
+    "kind": "ws",
+    "plane": 90.0,
+    "elev": 150.0,
+    "axial": -75.0
+   },
+   {
+    "mm": 0.7,
+    "i": 735,
+    "kind": "ws",
+    "plane": 60.0,
+    "elev": 90.0,
+    "axial": 30.0
+   },
+   {
+    "mm": 0.75,
+    "i": 592,
+    "kind": "ws",
+    "plane": 30.0,
+    "elev": 90.0,
+    "axial": 60.0
+   }
+  ],
+  "gap_near1": 29.21,
+  "near1_poses": 7,
+  "gap_near2": 59.44,
+  "near2_poses": 106,
+  "overhead140": {
+   "ws": 71,
+   "reach": 0.1972,
+   "clip": 19,
+   "follow": 1.0,
+   "inband14": 0.8782,
+   "inband10": 0.5527,
+   "why_not": {
+    "fold": 35,
+    "slide": 12,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 0,
+    "contact": 10
+   }
+  }
+ },
+ "ws_inband": {
+  "all": [
+   0.8314,
+   0.4884
+  ],
+  "e90_140": [
+   0.8024,
+   0.4703
+  ],
+  "ovh140": [
+   0.9239,
+   0.6146
+  ]
+ },
+ "split": {
+  "n": 14,
+  "by_part": {
+   "rodends": 9,
+   "m8:rod/rodends": 9,
+   "m1:hubK/horn": 5,
+   "horn": 5,
+   "rod": 4,
+   "m2:?": 2,
+   "hub2": 2,
+   "m7:hub2": 2,
+   "hubK": 2
+  }
+ },
+ "overhead": {
+  "ws": 71,
+  "taken": 14
+ },
+ "contact_depth": {
+  "n": 14,
+  "sum_mm": 52.965,
+  "max_mm": 13.655,
+  "per_pose": [
+   2.904,
+   6.058,
+   1.213,
+   1.269,
+   6.986,
+   5.859,
+   1.998,
+   13.655,
+   0.24,
+   2.138,
+   3.672,
+   2.219,
+   4.731,
+   0.023
+  ]
+ },
+ "cam": {
+  "dK_lim": 58.5,
+  "why_lim": "law",
+  "pa_crank_max_taken": null,
+  "pa_horn_max_taken": null,
+  "pa_kin_max": null,
+  "friction_deg": null,
+  "pa_eff_horn": null,
+  "pa_eff_crank": null,
+  "flank_rho_min": null,
+  "clear_hubK_min": null,
+  "clear_roll_hubK_min": null,
+  "clear_lowarm_lug_min": null,
+  "arm_len": null,
+  "contact_r": null,
+  "lug_r_max": null,
+  "nose_r": null,
+  "mu": null,
+  "trans_min_taken": 49.4,
+  "ratio_range": [
+   0.597,
+   0.761
+  ],
+  "rod_len": 37.1,
+  "La": 22.9,
+  "r_h": 15.9,
+  "crest_exact": 10.7
+ },
+ "params": {
+  "La": 22.8723,
+  "s_arm": 4.0,
+  "r_h": 15.9448,
+  "beta": -149.8132,
+  "gam": 29.1695,
+  "hl": 2.27,
+  "zr": 1.5851,
+  "kK": 2.7,
+  "r_lobe": 8.4846,
+  "bk1": 28.7724,
+  "bk2": 41.9799,
+  "a1max": 60.8797,
+  "smhi": 13.4632
+ },
+ "secs": 524.5
+}

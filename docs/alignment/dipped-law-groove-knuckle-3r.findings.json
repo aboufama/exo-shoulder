@@ -1,0 +1,80 @@
+[
+ {
+  "key": "T3",
+  "level": "gamed",
+  "reason": "The gamed flag still holds; nothing about it changed since 2026-10-17 06:48. The claim keeps the 5 deg fold rule only under a reading the design chose for itself. The family reading is the lead verifier's th_margin: min(m_sub, m_eff) wherever K is off its rest. Under it this row fails 84 of 371 taken bench poses (min 0.204 deg) and 202 of 850 held-out poses (min 0.184 deg), and every failing pose is a dipped pose. The model waives m_sub on dipped poses (its docstring: msub 'is NOT required on dipped poses'), and the verifier accepts that with its own coupled reading (5.389 bench, 5.406 held out). CLAUDE.md: 'A different reading is the user's call, not the model's.' B1 is still open: HANDOFF section 7 item 3 and ROUNDS.md line 5462 ('B1 (G4, m_sub at K rest), unchanged'). The same cell without the dip passes the family reading (5.181, 0 under 5) and scores 19.33. The waiver still buys rank. 18.64 sits ahead of roller-longdyad-knuckle-3r (18.67), which passes the family reading (5.181 bench, 5.031 held) and is better held out (23.73 vs 24.07, 10 vs 17 contact poses). It also sits ahead of lowarm-kstop-knuckle-3r (18.69). Context (skeptic, re-read here): under the strictest reading, m_sub on every pose, this row has 107 poses under 5 deg (23 at rest + 84 dipped) against the D=0 control's 106. So the dip does not create the near-fold geometry. It changes what holds K on those poses, a dowel stop for a spring-closed 0.068 mm lobe dip. That is a reason for the user's ruling, not a waiver.",
+  "evidence": "verify/dipped-law-groove-knuckle-3r_v_held_frozen.json extra.th_margin {min 0.184, lt5 202, coupled.min 5.406}; _v_bench_frozen_d0.json th_margin {min 5.181, lt5 0}; alignment/remeasure/dipped-law-groove-knuckle-3r_skeptic_msub_bench.json th_margin {min 0.204, lt5 84, skeptic_msub_all.rest lt5 23, dipped lt5 84}; _D0control_skeptic_msub_bench.json rest lt5 106; rows/roller-longdyad-knuckle-3r.json th_margin_min {bench 5.181, held 5.031}; docs/HANDOFF.md section 7 item 3; docs/concepts/ROUNDS.md line 5462"
+ },
+ {
+  "key": "P1",
+  "level": "gamed",
+  "reason": "The dip's gain is in-sample and does not carry to new poses. Against its own D=0 control (only dipD differs; same harness; per-pose dumps reproduce 18.64 / 24.07 / 19.33 / 22.97): on the bench the dip is 0.70 better (90 % interval [-1.83, +0.36], P 0.80, not significant), and that gain is exactly 2 contact poses. Held out it is 1.10 worse ([+0.56, +1.82], P(dip better) 0.000). It is strictly dominated there: 12 workspace poses are taken only by the control and 0 only by the dip, the 17 contact poses are the same poses, and taken poses under 3 mm rise from 293 to 334. New this audit, paired against lowarm-kstop-knuckle-3r (verified 18.69, ledger watch) on the same poses: the bench is a tie, -0.05 ([-0.64, +0.92], P(this better) 0.36). Held out this row is 1.20 worse ([+0.47, +2.24], P(this better) 0.007): 12 workspace poses are taken only by lowarm-kstop and 1 only here, with 17 vs 14 contact poses. So the bench number ranks this design above two designs that are significantly better for the wearer on unseen poses: its own D=0 control and lowarm-kstop.",
+  "evidence": "alignment/remeasure/dipped-law-groove-knuckle-3r_paired_controls.json (vs_D0control); per-pose dumps dipped-law-groove-knuckle-3r{,-D0control}_{bench,held}_perpose.json; new this audit: tools/alignment_paired.py compare dipped-law-groove-knuckle-3r lowarm-kstop-knuckle-3r -> alignment/remeasure/dipped-law-groove-knuckle-3r_vs_lowarm-kstop-knuckle-3r_paired.json (bench -0.05 [-0.64, 0.92] P 0.361; held +1.20 [0.47, 2.24] P 0.007; ws taken only A/B 1/12; contact only A/B 5/2, both 12)"
+ },
+ {
+  "key": "P4",
+  "level": "watch",
+  "reason": "The fold reading changed together with the design. The m_sub waiver is in the design's own model (5d587f5 / c177c28). The coupled reading that accepts it is in the verifier (code 125be85, outputs 35afc38). No bench, judge or kit file moved the row's number: the judge_change check reads 5 commits. The two newer commits (3d9dc71, 8f69bd6) changed only the complexity record, and 8f69bd6 also changed judge/dynamics.py R17 gates. This row has no R17 run, so that change cannot touch its number.",
+  "evidence": "git log -- docs/concepts/models/dipped-law-groove-knuckle-3r.py docs/concepts/verify/dipped-law-groove-knuckle-3r.py; git show 8f69bd6 -- docs/concepts/rows/dipped-law-groove-knuckle-3r.json (complexity 24.25 -> 20.25 only)"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "The plain-gap edge over roller-longdyad is metal moved toward the skin. Plain, this row is 0.03 ahead (18.64 vs 18.67). At 2 mm near-touch it is 2.59 behind (35.69 over 34 poses vs 33.10 over 30), and overhead 5 of 8 taken poses have metal under 2 mm (lead 4 of 8). Summed contact depth is x1.33 on the bench (21.88 vs 16.46 mm) and x1.63 held out (81.20 vs 49.88 mm), both under the tool's 2x line. Instrument note: the tool's dominance and contact-depth checks now read 'no reference' because their reference moved to the new lead conecut-knee-knuckle-3r (18.28), which this row does not beat. That is a change of reference, not of the design. The comparison with the row it still outranks is kept here, re-measured.",
+  "evidence": "alignment/remeasure/dipped-law-groove-knuckle-3r_bench.json deep (re-worn 2026-10-18 22:08, identical: plain 18.64, near2 35.69 / 34); remeasure/roller-longdyad-knuckle-3r_bench.json deep near2 33.10; alignment/dipped-law-groove-knuckle-3r.json contact_depth depths; previous ledger entry 2026-10-17T06:48:22Z dominance"
+ },
+ {
+  "key": "NEW-contact-for-inband",
+  "level": "watch",
+  "reason": "Against roller-longdyad, the bench edge is an in-band gain paid for with contact. In-band is +0.56 points (0.8993 vs 0.8937) and contact is -0.53 points (4 vs 2 poses: 4.52 mm at (0, 105, 15) and 0.89 mm at (-15, 90, 45)). Held out, this row's contact poses are a strict superset of the lead's: 7 only here, 0 only there, 10 in both. That is 17 vs 10 contact poses, and 10 vs 7 presses deeper than 3 mm. The score prices one contact pose (0.27 points on the bench) the same as 0.27 % of clip metal moved into the band. Watch: the difference sits inside the 1-point tie band, and the weights are the user's.",
+  "evidence": "alignment/remeasure/dipped-law-groove-knuckle-3r_paired_controls.json (vs_lead_claim); remeasure/dipped-law-groove-knuckle-3r_bench_probe.json probe.contact_poses"
+ },
+ {
+  "key": "T1",
+  "level": "watch",
+  "reason": "Report only; near-touch is not a gate. Re-worn this audit, with every number identical to 2026-10-17. Bench: near-1 20.81 (4 poses), near-2 35.69 (34 poses), near-3 118.59 (147 poses), and 17.05 gap points in the 1-2 mm shell. Held out: near-1 26.94 (13), near-2 38.72 (72), near-3 121.67 (334). The minimum metal is 0.072 mm (bench) and 0.331 mm (held). The recovered target pose 203 sits at 0.477 mm, and the 0.07 mm pinch at (-60, 60, 105) is unchanged.",
+  "evidence": "alignment/remeasure/dipped-law-groove-knuckle-3r_bench.json and _held.json deep (re-worn 2026-10-18); _bench_perpose.json pose 203 cmin 0.477"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "The dip is a spring-closed cam with no hold check. One clock spring must close K below the old stop A into a 0.068 mm lobe dip and hold it on the law, while it also force-closes the roller-flank. No spring torque, closure force, friction or R17 number exists for this row: no CAD, no dynamics output, and no file under judge/ or pipeline/full-exo/designs names it. The R17 gate fix in 8f69bd6 (unrounded comparisons) therefore does not reach it. The family's M5 pass line is mu ~0.15 (trimlug skeptic, a1f4d7a); the K-phase tolerance of the gen-7 CAD fix list applies here in sharper form (see NEW-sub-tolerance-feature).",
+  "evidence": "rows/dipped-law-groove-knuckle-3r.json mechanism.notes ('watch: unproven spring-closed cam'), frozen.drive dK_dip_taken -2.37; verification.drive lobe_dip_mm 0.068; grep -rl dipped-law-groove judge/ pipeline/full-exo/designs -> none"
+ },
+ {
+  "key": "NEW-sub-tolerance-feature",
+  "level": "watch",
+  "reason": "The feature that makes the number is smaller than a machining tolerance. The lobe dip is 0.068 mm deep, and 10 um of lobe profile error moves K 0.35 deg, 15 % of the 2.37 deg dip floor. Stop A sits at the dip floor, so K's rest through the whole dwell is set by the drive chain's tolerance stack (lobe -> bell crank -> 3 mm Ti arm -> MR63ZZ roller -> flank), not by a dowel. The model treats the profile as exact.",
+  "evidence": "row verification.issues[0], verification.drive K_deg_per_10um_lobe 0.35; model docstring"
+ },
+ {
+  "key": "G4",
+  "level": "watch",
+  "reason": "The drive runs at its limits (inherited from the lead, tightened by the dip). The horn pressure angle is 43.0 deg against its 43 cap: K is taken to 43.66 of a dK_lim of 43.8, why_lim pressure_horn. The bent arm clears hub K by 1.04 mm at the dip floor, against the 1 mm rule. The dip spends 2.4 deg of stretched stroke (dK_lim 46.2 -> 43.8): the 12 lost held-out poses and bench poses 313 / 316.",
+  "evidence": "row frozen.drive; verification.drive; docs/concepts/dipped-law-groove-knuckle-3r.md"
+ },
+ {
+  "key": "NEW-preview-not-claim",
+  "level": "watch",
+  "reason": "Still unfixed after about 41 h. The motion preview shows no dip at all. docs/concepts/viz/concepts/dipped-law-groove-knuckle-3r.js (last commit 8a524ce, 2026-10-17 04:42) has no dipD / dip_thc / dip_w / dip_ref in const P, so dipOf() returns 0. It also carries law_mode 'seg' where best_params say 'lin', and it lacks g / beta / r_c / s_arm. The dashboard's motion.json is built from it, so the picture under this row's name is the D=0 mechanism, which scores 19.33. Action: regenerate the preview from best_params (dipD 1, dip_thc 53, dip_w 12, dip_ref 1, dip_shape 1, law_mode lin).",
+  "evidence": "grep -o '\"dip[A-Za-z_]*\"' docs/concepts/viz/concepts/dipped-law-groove-knuckle-3r.js -> none; rows/dipped-law-groove-knuckle-3r.json best_params"
+ },
+ {
+  "key": "S5",
+  "level": "watch",
+  "reason": "Continuity depends on the flood graph. The full flood reads 18.64 with 0 dropped. The knn flood reads 20.32 with 6 dropped (+1.68, over the 1-point watch line), and the bench-graph flood 50.2. This is family-wide (the lead reads 18.67 / 20.34 / 50.29), so it does not separate the row from the lead.",
+  "evidence": "verify/dipped-law-groove-knuckle-3r_v_bench_frozen.json flood; alignment/dipped-law-groove-knuckle-3r.json continuity"
+ },
+ {
+  "key": "NEW-contact-cured-by-losing-pose",
+  "level": "watch",
+  "reason": "Half of the dip's bench contact gain over its control is a pose it no longer reaches. Of the 2 contacts it 'removes', pose 203 (0, 90, 45) is cleared to 0.477 mm. Pose 316 (60, 150, -105, overhead) is one the control reaches at -1.237 mm, in contact, and the dip does not evaluate at all (ev false): the spent stroke truncates it. The contact share is taken over evaluated poses only. So failing to reach an overhead pose scores 0.27 points better than reaching it with metal on the arm, and neither is taken. The dip also loses pose 313 (60, 120, -105), which the control takes in band (cmin 3.77 mm). Of the two named targets (182 / 203), 182 stays in contact (-0.89 vs -1.675 mm). Raised by the skeptic as 'missed' on 2026-10-17 and confirmed here from the dumps. Proposed catalogue entry T6 'contact cured by losing the pose'. Detect: paired, poses in contact in the reference and not evaluated in the design; report them next to the contact count.",
+  "evidence": "alignment/remeasure/dipped-law-groove-knuckle-3r_bench_perpose.json and -D0control_bench_perpose.json poses 182, 203, 313, 316 (re-read 2026-10-18)"
+ },
+ {
+  "key": "NEW-flag-not-on-doc",
+  "level": "watch",
+  "reason": "The public board shows this row as 'Flagged' (alignment gamed), and HANDOFF section 3 says gamed, so no board or handoff page shows it as verified or as a leader. Some records outside the board still read as an unflagged verified result. The concept doc, linked from the dashboard row's doc field, says 'Verdict: VERIFIED (not refuted) ... Level with the lead, and not a lead change' and carries no ledger line. The row's own verdict also still says 'Level with the lead'. The 3-joint lead has been conecut-knee-knuckle-3r at 18.28 since its verification on 2026-10-17 17:21 UTC, 0.36 ahead, and this row is now 8th of the verified 3-joint rows by v_gap. HANDOFF section 3 lists complexity 24.25, while the row and the dashboard read 20.25 since the knee-loop record fix (a measurement change, not a design change). The legacy docs/dashboard/index.html (leader.js LIVE, core.js live) does not filter alignment 'gamed' when it gives a 'verified' chip. This row is outside its top 6, so it shows nothing today. Watch: nothing here raises the row's rank, but a reader of the doc gets 'verified, level with the lead' for a gamed number.",
+  "evidence": "docs/concepts/dipped-law-groove-knuckle-3r.md line 166; rows/dipped-law-groove-knuckle-3r.json verdict; docs/dashboard/public/index.html line 278 (Flagged); docs/HANDOFF.md line 124; docs/dashboard/leader.js line 4, core.js line 9"
+ }
+]

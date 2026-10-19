@@ -1,0 +1,172 @@
+{
+ "id": "conecut-h2facet-knuckle-3r",
+ "name": "Hub-2 skin-side facet: 45-deg bottom-edge chamfer at pose 203's binder + planar upper flat at 264's hub-2 binders, on the lead's frozen chain",
+ "lens": "round15:C conecut-sidestep-metal (tangent-plane metal moves on a frozen chain)",
+ "family": "slaved-knuckle 3R, pin knee (the lead's frozen chain)",
+ "active_dof": 3,
+ "passive_dof": 4,
+ "passive_translations": 0,
+ "status": "verified",
+ "t_ideated": null,
+ "t_screened": "2026-10-18T14:15:37Z",
+ "reach": 0.775,
+ "follow": 1.0,
+ "inband14": 0.9007,
+ "inband10": 0.5719,
+ "contact": 0.0,
+ "gap": 12.5,
+ "v_reach": 0.7278,
+ "v_follow": 1.0,
+ "v_inband14": 0.9012,
+ "v_inband10": 0.5739,
+ "v_gap": 18.28,
+ "n_configs": 122,
+ "verdict": "SCREENED as a 0-cx ENABLER CELL, never a lead on its own: on the lead's frozen chain the cut buys no take (frozen exact Bench(110,360) 18.28 = lead, score 93.35), but pose 203 rises 0.263 -> 1.122 mm (0.614 mm per mm of chamfer, solid-sampled), near1 19.92 -> 19.38, the +0.35 mm probe 19.37 -> 18.83 (only link 2 at 139 is left under 1 mm: conecut-l2jog's target), T5 depth 20.25 -> 19.86 (205 -4.28 -> -3.90). On lowarm-kstop's chain (its own harness, exact guard poses) c >= 0.5 lifts 203 at the P5 / P0 worst corners from 0.157 / 0.117 to 0.463 / 0.423 (c 1.4: 1.014 / 0.974), and the planar flat (fd 0.6, z0 4.5) clears 264's hub-2 wall (-0.13..-0.28 -> +0.26..+0.37) while 264's hub-K binder (-0.94..-1.17) remains. HELD: 22.16 vs the lead's 22.38 (pose 447, a hub-2 edge contact, is taken; every changed held pose moved up; P(better) 0.644, CI90 [-0.66, 0]).",
+ "limiter": "The cut can reach only hub-2 metal: of the lead's 98 lost poses (fold 88, J3 stop 6, contact 4) only 205 binds on hub 2 and it needs 4.85 mm of radial cut (into the MR117 bore at r 5.5; wall floor 3.0 caps c at 1.5); 237 / 264 bind on the crank / horn, 316 on link 2. The search benches (Bench(60,160), envh) have no hub-2 binder, so every config reads 12.5 / near1 13.66 there.",
+ "note": "Convergence gate (Bench(60,160) near1, 122 configs incl. 3 CMA starts, one at sigma 0.8): gain over 2nd half 0, over last third 0, top-5 spread 0 - flat by construction. Best params c 1.4 hw 40 daz 0 fd 0.6 dazf 0 z0 4.5 dense 1 (wall 3.1 mm over the MR117 bore, notch clearance 7.8 deg, mass -0.13 g). Tables: docs/concepts/sweeps/conecut-h2facet-knuckle-3r_guard.json (lead chain, 103 configs exact at 139/203/205/237/264/316), _lowarm-kstop-cell.json (kstop chain, 15 configs x deltas 0 / 0.264 / 0.363). Measurement change of the dense solid: 234 -0.05 mm, 205 -0.011, 264 hub-2 -0.038; no take or contact moves. Collisions keep the uncut cylinder (conservative). 0 passive translations, 3 active DOF, cx 18.5 (+0). VERIFIED 2026-10-18 15:15 UTC (independent verifier, the lead's harness worn unchanged): frozen exact Bench(110,360) 18.28 / held 22.16 reproduced bit-identically (dumps on file), all lead checks pass (closure 0, th margin 5.181 / held 5.006, K sense 0 wrong, 0 failing). Champion same bench and checks: 75.94 (risley-turret verifier; the lead's verifier uses the same reference). Issue: the upper flat is modelled in link 1b's frame but sits on link 2's boss/cap (turns with J2, -14..91 deg); it changes nothing on the lead's chain (fd 0 = identical), so the verified, buildable config is the chamfer alone (c 1.4, hw 40, fd 0).",
+ "doc": "docs/concepts/conecut-h2facet-knuckle-3r.md",
+ "best_params": {
+  "stk": 6.0,
+  "lE": 97.1443,
+  "lc": 24.3508,
+  "phiE": 0.7526,
+  "phib": -91.8041,
+  "J3MIN": -111.9036,
+  "J3MAX": 122.7417,
+  "c": 1.4,
+  "hw": 40.0,
+  "daz": 0.0,
+  "fd": 0.6,
+  "dazf": 0.0,
+  "z0": 4.5,
+  "dense": 1
+ },
+ "complexity": 18.5,
+ "frozen_exact": {
+  "gap": 18.28,
+  "reach": 0.7278,
+  "follow": 1.0,
+  "inband14": 0.9012,
+  "inband10": 0.5739,
+  "contact": 0.0106,
+  "ws_taken": 262,
+  "contact_poses": 4,
+  "near1": 19.38,
+  "near2": 34.84,
+  "probe01": 18.83,
+  "probe02": 18.83,
+  "probe035": 18.83,
+  "overhead_taken": "8/28",
+  "t5": {
+   "p205": -3.9,
+   "p237": -8.93,
+   "p264": -5.8,
+   "p316": -1.23,
+   "sum": 19.86
+  },
+  "p203": 1.122,
+  "min_metal_taken": 0.072
+ },
+ "lead_same_protocol": {
+  "gap": 18.28,
+  "near1": 19.92,
+  "near2": 34.84,
+  "probe01": 18.83,
+  "probe02": 18.83,
+  "probe035": 19.37,
+  "p203": 0.263,
+  "t5_sum": 20.25
+ },
+ "mechanism": {
+  "source": "lead conecut-knee-knuckle-3r",
+  "record_delta": "+0: a milled chamfer and flat on hub 2's existing Ti housing",
+  "complexity": 18.5
+ },
+ "held_frozen": {
+  "gap": 22.16,
+  "reach": 0.6933,
+  "follow": 1.0,
+  "inband14": 0.9,
+  "inband10": 0.5726,
+  "contact": 0.0149,
+  "ws_taken": 660,
+  "contact_poses": 13,
+  "lead_gap": 22.38,
+  "paired": {
+   "diff": -0.22,
+   "ci90": [
+    -0.66,
+    0.0
+   ],
+   "p_better": 0.644,
+   "discordant": "held ws 447 (0, 90, 30): lead contact -0.207 -> taken 0.697"
+  },
+  "pooled": {
+   "gap": 21.08,
+   "lead": 21.24,
+   "ci90": [
+    -0.47,
+    0.0
+   ],
+   "p_better": 0.645
+  }
+ },
+ "kit_density": {
+  "flags": {
+   "roller": 4.549,
+   "L1a": 0.33
+  },
+  "hub2_ratio": 1.044,
+  "note": "same flags as the lead; the cut touches neither"
+ },
+ "verification": {
+  "t": "2026-10-18T15:15:00Z",
+  "harness": "docs/concepts/verify/conecut-h2facet-knuckle-3r.py (the lead's verifier harness worn unchanged on the claim model)",
+  "bench": {
+   "gap": 18.28,
+   "reach": 0.7278,
+   "follow": 1.0,
+   "inband14": 0.9012,
+   "inband10": 0.5739,
+   "contact": 0.0106,
+   "ws_taken": 262,
+   "contacts": 4,
+   "near1": 19.38,
+   "overhead": "8/28",
+   "th_margin_min": 5.181,
+   "closure_max_mm": 0.0,
+   "poses_failing": 0
+  },
+  "held": {
+   "gap": 22.16,
+   "reach": 0.6933,
+   "follow": 1.0,
+   "inband14": 0.9,
+   "inband10": 0.5726,
+   "contact": 0.0149,
+   "ws_taken": 660,
+   "contacts": 13,
+   "near1": 25.23,
+   "overhead": "18/71",
+   "th_margin_min": 5.006
+  },
+  "chamfer_only": {
+   "bench": 18.28,
+   "held": 22.16,
+   "note": "fd 0: identical per-pose on bench and held (0 readings changed): the flat buys nothing on the lead's chain"
+  },
+  "dumps": [
+   "docs/alignment/remeasure/conecut-h2facet-knuckle-3r_bench_perpose.json (reproduced bit-identical)",
+   "docs/alignment/remeasure/conecut-h2facet-knuckle-3r_held_perpose.json (reproduced bit-identical)",
+   "docs/alignment/remeasure/conecut-h2facet-knuckle-3r+chamferonly_bench_perpose.json",
+   "docs/alignment/remeasure/conecut-h2facet-knuckle-3r+chamferonly_held_perpose.json"
+  ],
+  "champion_same_bench": 75.94,
+  "issues": [
+   "FLAT MIS-FRAMED: the upper flat (z 3.9-12.25) sits on the O20 v5 boss + threaded cap, which turn with the UPPER member at J2 (link 2, docs/HARDWARE.md R6 groups); the model fixes it in link 1b's frame (member 7). J2's relative angle spans -14..91 deg over the fit poses, so a real flat sweeps ~105 deg of azimuth in link 1b's frame vs the claimed +-5 deg tolerance. No number on the lead's chain depends on it (fd 0 reproduces bench and held bit-identically); the lowarm-kstop / kphase-notch 264 hub-2 table needs re-reading with the flat in link 2's frame (az_L2 = 124 - q2(264)), and the cap's thread lands at an uncontrolled azimuth (index it or machine the flat after assembly).",
+   "Bench tie with the lead (18.28 = 18.28, same 262 takes, same 4 contacts); held -0.22 on ONE pose (447), CI90 [-0.66, 0], P(better) 0.644: not a new leader on the plain verified gap; the CI tie rule stays the user's call.",
+   "The chamfer is on the right body: link 1b's lower plate (F+0..3.0, lower member at J2), wall to the O7 pin collar is solid (the bearing bore sits in link 2's boss above U0 3.15), link 1b's bar exits at az ~355-25 (outside the 102.8-182.8 sector); only hub-2 ring samples were removed (17 of 160, groups c10-c13), no other part's samples."
+  ]
+ },
+ "leader_ruling": "tie: conecut-knee-knuckle-3r | ledger 2026-10-18T17:06:25Z | the lead's frozen chain unchanged plus a hub-2 chamfer that buys no take (frozen exact 18.28 = the lead); its own verdict: an enabler cell, never a lead on its own"
+}

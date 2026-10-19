@@ -1,0 +1,126 @@
+{
+ "parts": [
+  {
+   "file": "l2|link 2 slab keep-out (5.5 mm Ti, 14 wide)",
+   "valid": true,
+   "solids": 1,
+   "faces": 1996,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 15.467,
+   "bbox_mm": [
+    73.9,
+    103.1,
+    166.2
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|link 1 slab keep-out (5.5 mm Ti, 14 wide)",
+   "valid": true,
+   "solids": 1,
+   "faces": 2056,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 10.724,
+   "bbox_mm": [
+    36.3,
+    157.6,
+    132.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J3 upper hub + cap keep-out (O23 x 7.32)",
+   "valid": true,
+   "solids": 1,
+   "faces": 192,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 3.033,
+   "bbox_mm": [
+    18.3,
+    23.4,
+    23.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "cuff|J3 lower plate keep-out (O23 x 3.0)",
+   "valid": true,
+   "solids": 1,
+   "faces": 192,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.243,
+   "bbox_mm": [
+    14.6,
+    21.2,
+    23.1
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l2|J2 upper hub + cap keep-out (O23 x 7.32)",
+   "valid": true,
+   "solids": 1,
+   "faces": 192,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 3.033,
+   "bbox_mm": [
+    23.9,
+    23.2,
+    16.3
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|J2 lower plate keep-out (O23 x 3.0)",
+   "valid": true,
+   "solids": 1,
+   "faces": 192,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.243,
+   "bbox_mm": [
+    22.1,
+    23.1,
+    12.4
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "l1|J1 upper hub + cap keep-out (O23 x 7.32)",
+   "valid": true,
+   "solids": 1,
+   "faces": 192,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 3.033,
+   "bbox_mm": [
+    23.8,
+    17.5,
+    23.8
+   ],
+   "level": "L1 mesh"
+  },
+  {
+   "file": "base|J1 lower plate keep-out (O23 x 3.0)",
+   "valid": true,
+   "solids": 1,
+   "faces": 192,
+   "bad_faces": 0,
+   "watertight": true,
+   "volume_cm3": 1.243,
+   "bbox_mm": [
+    21.8,
+    13.8,
+    23.2
+   ],
+   "level": "L1 mesh"
+  }
+ ],
+ "level": "L1",
+ "all_ok": true
+}

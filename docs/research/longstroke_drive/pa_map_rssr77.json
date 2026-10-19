@@ -1,0 +1,3099 @@
+{
+ "drive": "rssr",
+ "dK_lim": 77.2,
+ "why_lim": "transmission",
+ "gap": 45.06,
+ "plain": 33.62,
+ "reach": 0.75,
+ "dK_taken_max": 55.2,
+ "rows": [
+  {
+   "dK": 0.0,
+   "phi": 0.0,
+   "pa_tip": 33.59,
+   "pa_horn": 34.83,
+   "rod_elev_horn": 2.04,
+   "rod_elev_crank": 32.14
+  },
+  {
+   "dK": 0.25,
+   "phi": 0.16,
+   "pa_tip": 33.52,
+   "pa_horn": 34.61,
+   "rod_elev_horn": 2.08,
+   "rod_elev_crank": 32.1
+  },
+  {
+   "dK": 0.5,
+   "phi": 0.33,
+   "pa_tip": 33.45,
+   "pa_horn": 34.39,
+   "rod_elev_horn": 2.13,
+   "rod_elev_crank": 32.06
+  },
+  {
+   "dK": 0.75,
+   "phi": 0.49,
+   "pa_tip": 33.38,
+   "pa_horn": 34.17,
+   "rod_elev_horn": 2.17,
+   "rod_elev_crank": 32.02
+  },
+  {
+   "dK": 1.0,
+   "phi": 0.66,
+   "pa_tip": 33.3,
+   "pa_horn": 33.95,
+   "rod_elev_horn": 2.22,
+   "rod_elev_crank": 31.98
+  },
+  {
+   "dK": 1.25,
+   "phi": 0.82,
+   "pa_tip": 33.23,
+   "pa_horn": 33.73,
+   "rod_elev_horn": 2.26,
+   "rod_elev_crank": 31.94
+  },
+  {
+   "dK": 1.5,
+   "phi": 0.99,
+   "pa_tip": 33.16,
+   "pa_horn": 33.51,
+   "rod_elev_horn": 2.31,
+   "rod_elev_crank": 31.9
+  },
+  {
+   "dK": 1.75,
+   "phi": 1.16,
+   "pa_tip": 33.09,
+   "pa_horn": 33.29,
+   "rod_elev_horn": 2.36,
+   "rod_elev_crank": 31.85
+  },
+  {
+   "dK": 2.0,
+   "phi": 1.32,
+   "pa_tip": 33.02,
+   "pa_horn": 33.07,
+   "rod_elev_horn": 2.4,
+   "rod_elev_crank": 31.81
+  },
+  {
+   "dK": 2.25,
+   "phi": 1.49,
+   "pa_tip": 32.95,
+   "pa_horn": 32.85,
+   "rod_elev_horn": 2.45,
+   "rod_elev_crank": 31.77
+  },
+  {
+   "dK": 2.5,
+   "phi": 1.66,
+   "pa_tip": 32.87,
+   "pa_horn": 32.63,
+   "rod_elev_horn": 2.5,
+   "rod_elev_crank": 31.73
+  },
+  {
+   "dK": 2.75,
+   "phi": 1.82,
+   "pa_tip": 32.8,
+   "pa_horn": 32.41,
+   "rod_elev_horn": 2.54,
+   "rod_elev_crank": 31.69
+  },
+  {
+   "dK": 3.0,
+   "phi": 1.99,
+   "pa_tip": 32.73,
+   "pa_horn": 32.19,
+   "rod_elev_horn": 2.59,
+   "rod_elev_crank": 31.64
+  },
+  {
+   "dK": 3.25,
+   "phi": 2.16,
+   "pa_tip": 32.66,
+   "pa_horn": 31.97,
+   "rod_elev_horn": 2.64,
+   "rod_elev_crank": 31.6
+  },
+  {
+   "dK": 3.5,
+   "phi": 2.33,
+   "pa_tip": 32.59,
+   "pa_horn": 31.75,
+   "rod_elev_horn": 2.69,
+   "rod_elev_crank": 31.56
+  },
+  {
+   "dK": 3.75,
+   "phi": 2.5,
+   "pa_tip": 32.52,
+   "pa_horn": 31.54,
+   "rod_elev_horn": 2.73,
+   "rod_elev_crank": 31.52
+  },
+  {
+   "dK": 4.0,
+   "phi": 2.66,
+   "pa_tip": 32.44,
+   "pa_horn": 31.32,
+   "rod_elev_horn": 2.78,
+   "rod_elev_crank": 31.47
+  },
+  {
+   "dK": 4.25,
+   "phi": 2.83,
+   "pa_tip": 32.37,
+   "pa_horn": 31.1,
+   "rod_elev_horn": 2.83,
+   "rod_elev_crank": 31.43
+  },
+  {
+   "dK": 4.5,
+   "phi": 3.0,
+   "pa_tip": 32.3,
+   "pa_horn": 30.88,
+   "rod_elev_horn": 2.88,
+   "rod_elev_crank": 31.39
+  },
+  {
+   "dK": 4.75,
+   "phi": 3.17,
+   "pa_tip": 32.23,
+   "pa_horn": 30.66,
+   "rod_elev_horn": 2.93,
+   "rod_elev_crank": 31.34
+  },
+  {
+   "dK": 5.0,
+   "phi": 3.34,
+   "pa_tip": 32.16,
+   "pa_horn": 30.44,
+   "rod_elev_horn": 2.97,
+   "rod_elev_crank": 31.3
+  },
+  {
+   "dK": 5.25,
+   "phi": 3.51,
+   "pa_tip": 32.09,
+   "pa_horn": 30.22,
+   "rod_elev_horn": 3.02,
+   "rod_elev_crank": 31.26
+  },
+  {
+   "dK": 5.5,
+   "phi": 3.68,
+   "pa_tip": 32.02,
+   "pa_horn": 30.0,
+   "rod_elev_horn": 3.07,
+   "rod_elev_crank": 31.21
+  },
+  {
+   "dK": 5.75,
+   "phi": 3.85,
+   "pa_tip": 31.95,
+   "pa_horn": 29.78,
+   "rod_elev_horn": 3.12,
+   "rod_elev_crank": 31.17
+  },
+  {
+   "dK": 6.0,
+   "phi": 4.02,
+   "pa_tip": 31.88,
+   "pa_horn": 29.56,
+   "rod_elev_horn": 3.17,
+   "rod_elev_crank": 31.12
+  },
+  {
+   "dK": 6.25,
+   "phi": 4.19,
+   "pa_tip": 31.81,
+   "pa_horn": 29.35,
+   "rod_elev_horn": 3.22,
+   "rod_elev_crank": 31.08
+  },
+  {
+   "dK": 6.5,
+   "phi": 4.36,
+   "pa_tip": 31.74,
+   "pa_horn": 29.13,
+   "rod_elev_horn": 3.27,
+   "rod_elev_crank": 31.04
+  },
+  {
+   "dK": 6.75,
+   "phi": 4.54,
+   "pa_tip": 31.67,
+   "pa_horn": 28.91,
+   "rod_elev_horn": 3.32,
+   "rod_elev_crank": 30.99
+  },
+  {
+   "dK": 7.0,
+   "phi": 4.71,
+   "pa_tip": 31.6,
+   "pa_horn": 28.69,
+   "rod_elev_horn": 3.36,
+   "rod_elev_crank": 30.95
+  },
+  {
+   "dK": 7.25,
+   "phi": 4.88,
+   "pa_tip": 31.53,
+   "pa_horn": 28.47,
+   "rod_elev_horn": 3.41,
+   "rod_elev_crank": 30.9
+  },
+  {
+   "dK": 7.5,
+   "phi": 5.05,
+   "pa_tip": 31.46,
+   "pa_horn": 28.25,
+   "rod_elev_horn": 3.46,
+   "rod_elev_crank": 30.86
+  },
+  {
+   "dK": 7.75,
+   "phi": 5.22,
+   "pa_tip": 31.39,
+   "pa_horn": 28.04,
+   "rod_elev_horn": 3.51,
+   "rod_elev_crank": 30.81
+  },
+  {
+   "dK": 8.0,
+   "phi": 5.4,
+   "pa_tip": 31.32,
+   "pa_horn": 27.82,
+   "rod_elev_horn": 3.56,
+   "rod_elev_crank": 30.76
+  },
+  {
+   "dK": 8.25,
+   "phi": 5.57,
+   "pa_tip": 31.25,
+   "pa_horn": 27.6,
+   "rod_elev_horn": 3.61,
+   "rod_elev_crank": 30.72
+  },
+  {
+   "dK": 8.5,
+   "phi": 5.74,
+   "pa_tip": 31.18,
+   "pa_horn": 27.38,
+   "rod_elev_horn": 3.66,
+   "rod_elev_crank": 30.67
+  },
+  {
+   "dK": 8.75,
+   "phi": 5.91,
+   "pa_tip": 31.12,
+   "pa_horn": 27.17,
+   "rod_elev_horn": 3.71,
+   "rod_elev_crank": 30.63
+  },
+  {
+   "dK": 9.0,
+   "phi": 6.09,
+   "pa_tip": 31.05,
+   "pa_horn": 26.95,
+   "rod_elev_horn": 3.76,
+   "rod_elev_crank": 30.58
+  },
+  {
+   "dK": 9.25,
+   "phi": 6.26,
+   "pa_tip": 30.98,
+   "pa_horn": 26.73,
+   "rod_elev_horn": 3.81,
+   "rod_elev_crank": 30.53
+  },
+  {
+   "dK": 9.5,
+   "phi": 6.43,
+   "pa_tip": 30.91,
+   "pa_horn": 26.51,
+   "rod_elev_horn": 3.87,
+   "rod_elev_crank": 30.49
+  },
+  {
+   "dK": 9.75,
+   "phi": 6.61,
+   "pa_tip": 30.85,
+   "pa_horn": 26.3,
+   "rod_elev_horn": 3.92,
+   "rod_elev_crank": 30.44
+  },
+  {
+   "dK": 10.0,
+   "phi": 6.78,
+   "pa_tip": 30.78,
+   "pa_horn": 26.08,
+   "rod_elev_horn": 3.97,
+   "rod_elev_crank": 30.4
+  },
+  {
+   "dK": 10.25,
+   "phi": 6.96,
+   "pa_tip": 30.71,
+   "pa_horn": 25.87,
+   "rod_elev_horn": 4.02,
+   "rod_elev_crank": 30.35
+  },
+  {
+   "dK": 10.5,
+   "phi": 7.13,
+   "pa_tip": 30.65,
+   "pa_horn": 25.65,
+   "rod_elev_horn": 4.07,
+   "rod_elev_crank": 30.3
+  },
+  {
+   "dK": 10.75,
+   "phi": 7.31,
+   "pa_tip": 30.58,
+   "pa_horn": 25.43,
+   "rod_elev_horn": 4.12,
+   "rod_elev_crank": 30.25
+  },
+  {
+   "dK": 11.0,
+   "phi": 7.48,
+   "pa_tip": 30.52,
+   "pa_horn": 25.22,
+   "rod_elev_horn": 4.17,
+   "rod_elev_crank": 30.21
+  },
+  {
+   "dK": 11.25,
+   "phi": 7.66,
+   "pa_tip": 30.45,
+   "pa_horn": 25.0,
+   "rod_elev_horn": 4.22,
+   "rod_elev_crank": 30.16
+  },
+  {
+   "dK": 11.5,
+   "phi": 7.83,
+   "pa_tip": 30.38,
+   "pa_horn": 24.79,
+   "rod_elev_horn": 4.27,
+   "rod_elev_crank": 30.11
+  },
+  {
+   "dK": 11.75,
+   "phi": 8.01,
+   "pa_tip": 30.32,
+   "pa_horn": 24.57,
+   "rod_elev_horn": 4.33,
+   "rod_elev_crank": 30.06
+  },
+  {
+   "dK": 12.0,
+   "phi": 8.18,
+   "pa_tip": 30.26,
+   "pa_horn": 24.36,
+   "rod_elev_horn": 4.38,
+   "rod_elev_crank": 30.02
+  },
+  {
+   "dK": 12.25,
+   "phi": 8.36,
+   "pa_tip": 30.19,
+   "pa_horn": 24.14,
+   "rod_elev_horn": 4.43,
+   "rod_elev_crank": 29.97
+  },
+  {
+   "dK": 12.5,
+   "phi": 8.53,
+   "pa_tip": 30.13,
+   "pa_horn": 23.93,
+   "rod_elev_horn": 4.48,
+   "rod_elev_crank": 29.92
+  },
+  {
+   "dK": 12.75,
+   "phi": 8.71,
+   "pa_tip": 30.06,
+   "pa_horn": 23.72,
+   "rod_elev_horn": 4.53,
+   "rod_elev_crank": 29.87
+  },
+  {
+   "dK": 13.0,
+   "phi": 8.89,
+   "pa_tip": 30.0,
+   "pa_horn": 23.5,
+   "rod_elev_horn": 4.59,
+   "rod_elev_crank": 29.82
+  },
+  {
+   "dK": 13.25,
+   "phi": 9.06,
+   "pa_tip": 29.94,
+   "pa_horn": 23.29,
+   "rod_elev_horn": 4.64,
+   "rod_elev_crank": 29.78
+  },
+  {
+   "dK": 13.5,
+   "phi": 9.24,
+   "pa_tip": 29.88,
+   "pa_horn": 23.08,
+   "rod_elev_horn": 4.69,
+   "rod_elev_crank": 29.73
+  },
+  {
+   "dK": 13.75,
+   "phi": 9.42,
+   "pa_tip": 29.82,
+   "pa_horn": 22.87,
+   "rod_elev_horn": 4.74,
+   "rod_elev_crank": 29.68
+  },
+  {
+   "dK": 14.0,
+   "phi": 9.59,
+   "pa_tip": 29.75,
+   "pa_horn": 22.65,
+   "rod_elev_horn": 4.8,
+   "rod_elev_crank": 29.63
+  },
+  {
+   "dK": 14.25,
+   "phi": 9.77,
+   "pa_tip": 29.69,
+   "pa_horn": 22.44,
+   "rod_elev_horn": 4.85,
+   "rod_elev_crank": 29.58
+  },
+  {
+   "dK": 14.5,
+   "phi": 9.95,
+   "pa_tip": 29.63,
+   "pa_horn": 22.23,
+   "rod_elev_horn": 4.9,
+   "rod_elev_crank": 29.53
+  },
+  {
+   "dK": 14.75,
+   "phi": 10.13,
+   "pa_tip": 29.57,
+   "pa_horn": 22.02,
+   "rod_elev_horn": 4.95,
+   "rod_elev_crank": 29.48
+  },
+  {
+   "dK": 15.0,
+   "phi": 10.3,
+   "pa_tip": 29.51,
+   "pa_horn": 21.81,
+   "rod_elev_horn": 5.01,
+   "rod_elev_crank": 29.43
+  },
+  {
+   "dK": 15.25,
+   "phi": 10.48,
+   "pa_tip": 29.45,
+   "pa_horn": 21.6,
+   "rod_elev_horn": 5.06,
+   "rod_elev_crank": 29.38
+  },
+  {
+   "dK": 15.5,
+   "phi": 10.66,
+   "pa_tip": 29.4,
+   "pa_horn": 21.39,
+   "rod_elev_horn": 5.11,
+   "rod_elev_crank": 29.33
+  },
+  {
+   "dK": 15.75,
+   "phi": 10.84,
+   "pa_tip": 29.34,
+   "pa_horn": 21.18,
+   "rod_elev_horn": 5.17,
+   "rod_elev_crank": 29.29
+  },
+  {
+   "dK": 16.0,
+   "phi": 11.02,
+   "pa_tip": 29.28,
+   "pa_horn": 20.97,
+   "rod_elev_horn": 5.22,
+   "rod_elev_crank": 29.24
+  },
+  {
+   "dK": 16.25,
+   "phi": 11.2,
+   "pa_tip": 29.22,
+   "pa_horn": 20.77,
+   "rod_elev_horn": 5.27,
+   "rod_elev_crank": 29.19
+  },
+  {
+   "dK": 16.5,
+   "phi": 11.37,
+   "pa_tip": 29.17,
+   "pa_horn": 20.56,
+   "rod_elev_horn": 5.33,
+   "rod_elev_crank": 29.14
+  },
+  {
+   "dK": 16.75,
+   "phi": 11.55,
+   "pa_tip": 29.11,
+   "pa_horn": 20.35,
+   "rod_elev_horn": 5.38,
+   "rod_elev_crank": 29.09
+  },
+  {
+   "dK": 17.0,
+   "phi": 11.73,
+   "pa_tip": 29.05,
+   "pa_horn": 20.15,
+   "rod_elev_horn": 5.43,
+   "rod_elev_crank": 29.04
+  },
+  {
+   "dK": 17.25,
+   "phi": 11.91,
+   "pa_tip": 29.0,
+   "pa_horn": 19.94,
+   "rod_elev_horn": 5.49,
+   "rod_elev_crank": 28.98
+  },
+  {
+   "dK": 17.5,
+   "phi": 12.09,
+   "pa_tip": 28.95,
+   "pa_horn": 19.74,
+   "rod_elev_horn": 5.54,
+   "rod_elev_crank": 28.93
+  },
+  {
+   "dK": 17.75,
+   "phi": 12.27,
+   "pa_tip": 28.89,
+   "pa_horn": 19.53,
+   "rod_elev_horn": 5.6,
+   "rod_elev_crank": 28.88
+  },
+  {
+   "dK": 18.0,
+   "phi": 12.45,
+   "pa_tip": 28.84,
+   "pa_horn": 19.33,
+   "rod_elev_horn": 5.65,
+   "rod_elev_crank": 28.83
+  },
+  {
+   "dK": 18.25,
+   "phi": 12.63,
+   "pa_tip": 28.78,
+   "pa_horn": 19.12,
+   "rod_elev_horn": 5.71,
+   "rod_elev_crank": 28.78
+  },
+  {
+   "dK": 18.5,
+   "phi": 12.81,
+   "pa_tip": 28.73,
+   "pa_horn": 18.92,
+   "rod_elev_horn": 5.76,
+   "rod_elev_crank": 28.73
+  },
+  {
+   "dK": 18.75,
+   "phi": 12.99,
+   "pa_tip": 28.68,
+   "pa_horn": 18.72,
+   "rod_elev_horn": 5.81,
+   "rod_elev_crank": 28.68
+  },
+  {
+   "dK": 19.0,
+   "phi": 13.17,
+   "pa_tip": 28.63,
+   "pa_horn": 18.52,
+   "rod_elev_horn": 5.87,
+   "rod_elev_crank": 28.63
+  },
+  {
+   "dK": 19.25,
+   "phi": 13.35,
+   "pa_tip": 28.58,
+   "pa_horn": 18.32,
+   "rod_elev_horn": 5.92,
+   "rod_elev_crank": 28.58
+  },
+  {
+   "dK": 19.5,
+   "phi": 13.53,
+   "pa_tip": 28.53,
+   "pa_horn": 18.12,
+   "rod_elev_horn": 5.98,
+   "rod_elev_crank": 28.53
+  },
+  {
+   "dK": 19.75,
+   "phi": 13.71,
+   "pa_tip": 28.48,
+   "pa_horn": 17.92,
+   "rod_elev_horn": 6.03,
+   "rod_elev_crank": 28.48
+  },
+  {
+   "dK": 20.0,
+   "phi": 13.89,
+   "pa_tip": 28.43,
+   "pa_horn": 17.73,
+   "rod_elev_horn": 6.09,
+   "rod_elev_crank": 28.42
+  },
+  {
+   "dK": 20.25,
+   "phi": 14.07,
+   "pa_tip": 28.38,
+   "pa_horn": 17.53,
+   "rod_elev_horn": 6.14,
+   "rod_elev_crank": 28.37
+  },
+  {
+   "dK": 20.5,
+   "phi": 14.25,
+   "pa_tip": 28.34,
+   "pa_horn": 17.33,
+   "rod_elev_horn": 6.2,
+   "rod_elev_crank": 28.32
+  },
+  {
+   "dK": 20.75,
+   "phi": 14.43,
+   "pa_tip": 28.29,
+   "pa_horn": 17.14,
+   "rod_elev_horn": 6.25,
+   "rod_elev_crank": 28.27
+  },
+  {
+   "dK": 21.0,
+   "phi": 14.61,
+   "pa_tip": 28.24,
+   "pa_horn": 16.95,
+   "rod_elev_horn": 6.31,
+   "rod_elev_crank": 28.22
+  },
+  {
+   "dK": 21.25,
+   "phi": 14.79,
+   "pa_tip": 28.2,
+   "pa_horn": 16.75,
+   "rod_elev_horn": 6.36,
+   "rod_elev_crank": 28.17
+  },
+  {
+   "dK": 21.5,
+   "phi": 14.97,
+   "pa_tip": 28.15,
+   "pa_horn": 16.56,
+   "rod_elev_horn": 6.42,
+   "rod_elev_crank": 28.11
+  },
+  {
+   "dK": 21.75,
+   "phi": 15.16,
+   "pa_tip": 28.11,
+   "pa_horn": 16.37,
+   "rod_elev_horn": 6.47,
+   "rod_elev_crank": 28.06
+  },
+  {
+   "dK": 22.0,
+   "phi": 15.34,
+   "pa_tip": 28.07,
+   "pa_horn": 16.18,
+   "rod_elev_horn": 6.53,
+   "rod_elev_crank": 28.01
+  },
+  {
+   "dK": 22.25,
+   "phi": 15.52,
+   "pa_tip": 28.02,
+   "pa_horn": 16.0,
+   "rod_elev_horn": 6.58,
+   "rod_elev_crank": 27.96
+  },
+  {
+   "dK": 22.5,
+   "phi": 15.7,
+   "pa_tip": 27.98,
+   "pa_horn": 15.81,
+   "rod_elev_horn": 6.64,
+   "rod_elev_crank": 27.9
+  },
+  {
+   "dK": 22.75,
+   "phi": 15.88,
+   "pa_tip": 27.94,
+   "pa_horn": 15.63,
+   "rod_elev_horn": 6.7,
+   "rod_elev_crank": 27.85
+  },
+  {
+   "dK": 23.0,
+   "phi": 16.06,
+   "pa_tip": 27.9,
+   "pa_horn": 15.44,
+   "rod_elev_horn": 6.75,
+   "rod_elev_crank": 27.8
+  },
+  {
+   "dK": 23.25,
+   "phi": 16.25,
+   "pa_tip": 27.86,
+   "pa_horn": 15.26,
+   "rod_elev_horn": 6.81,
+   "rod_elev_crank": 27.75
+  },
+  {
+   "dK": 23.5,
+   "phi": 16.43,
+   "pa_tip": 27.82,
+   "pa_horn": 15.08,
+   "rod_elev_horn": 6.86,
+   "rod_elev_crank": 27.69
+  },
+  {
+   "dK": 23.75,
+   "phi": 16.61,
+   "pa_tip": 27.78,
+   "pa_horn": 14.9,
+   "rod_elev_horn": 6.92,
+   "rod_elev_crank": 27.64
+  },
+  {
+   "dK": 24.0,
+   "phi": 16.79,
+   "pa_tip": 27.74,
+   "pa_horn": 14.72,
+   "rod_elev_horn": 6.98,
+   "rod_elev_crank": 27.59
+  },
+  {
+   "dK": 24.25,
+   "phi": 16.97,
+   "pa_tip": 27.71,
+   "pa_horn": 14.55,
+   "rod_elev_horn": 7.03,
+   "rod_elev_crank": 27.53
+  },
+  {
+   "dK": 24.5,
+   "phi": 17.16,
+   "pa_tip": 27.67,
+   "pa_horn": 14.37,
+   "rod_elev_horn": 7.09,
+   "rod_elev_crank": 27.48
+  },
+  {
+   "dK": 24.75,
+   "phi": 17.34,
+   "pa_tip": 27.64,
+   "pa_horn": 14.2,
+   "rod_elev_horn": 7.14,
+   "rod_elev_crank": 27.43
+  },
+  {
+   "dK": 25.0,
+   "phi": 17.52,
+   "pa_tip": 27.6,
+   "pa_horn": 14.03,
+   "rod_elev_horn": 7.2,
+   "rod_elev_crank": 27.38
+  },
+  {
+   "dK": 25.25,
+   "phi": 17.7,
+   "pa_tip": 27.57,
+   "pa_horn": 13.86,
+   "rod_elev_horn": 7.26,
+   "rod_elev_crank": 27.32
+  },
+  {
+   "dK": 25.5,
+   "phi": 17.89,
+   "pa_tip": 27.54,
+   "pa_horn": 13.7,
+   "rod_elev_horn": 7.31,
+   "rod_elev_crank": 27.27
+  },
+  {
+   "dK": 25.75,
+   "phi": 18.07,
+   "pa_tip": 27.5,
+   "pa_horn": 13.53,
+   "rod_elev_horn": 7.37,
+   "rod_elev_crank": 27.21
+  },
+  {
+   "dK": 26.0,
+   "phi": 18.25,
+   "pa_tip": 27.47,
+   "pa_horn": 13.37,
+   "rod_elev_horn": 7.43,
+   "rod_elev_crank": 27.16
+  },
+  {
+   "dK": 26.25,
+   "phi": 18.43,
+   "pa_tip": 27.44,
+   "pa_horn": 13.21,
+   "rod_elev_horn": 7.48,
+   "rod_elev_crank": 27.11
+  },
+  {
+   "dK": 26.5,
+   "phi": 18.62,
+   "pa_tip": 27.41,
+   "pa_horn": 13.06,
+   "rod_elev_horn": 7.54,
+   "rod_elev_crank": 27.05
+  },
+  {
+   "dK": 26.75,
+   "phi": 18.8,
+   "pa_tip": 27.38,
+   "pa_horn": 12.9,
+   "rod_elev_horn": 7.6,
+   "rod_elev_crank": 27.0
+  },
+  {
+   "dK": 27.0,
+   "phi": 18.98,
+   "pa_tip": 27.36,
+   "pa_horn": 12.75,
+   "rod_elev_horn": 7.65,
+   "rod_elev_crank": 26.95
+  },
+  {
+   "dK": 27.25,
+   "phi": 19.17,
+   "pa_tip": 27.33,
+   "pa_horn": 12.6,
+   "rod_elev_horn": 7.71,
+   "rod_elev_crank": 26.89
+  },
+  {
+   "dK": 27.5,
+   "phi": 19.35,
+   "pa_tip": 27.3,
+   "pa_horn": 12.45,
+   "rod_elev_horn": 7.77,
+   "rod_elev_crank": 26.84
+  },
+  {
+   "dK": 27.75,
+   "phi": 19.53,
+   "pa_tip": 27.28,
+   "pa_horn": 12.31,
+   "rod_elev_horn": 7.82,
+   "rod_elev_crank": 26.78
+  },
+  {
+   "dK": 28.0,
+   "phi": 19.71,
+   "pa_tip": 27.25,
+   "pa_horn": 12.17,
+   "rod_elev_horn": 7.88,
+   "rod_elev_crank": 26.73
+  },
+  {
+   "dK": 28.25,
+   "phi": 19.9,
+   "pa_tip": 27.23,
+   "pa_horn": 12.03,
+   "rod_elev_horn": 7.94,
+   "rod_elev_crank": 26.68
+  },
+  {
+   "dK": 28.5,
+   "phi": 20.08,
+   "pa_tip": 27.21,
+   "pa_horn": 11.89,
+   "rod_elev_horn": 7.99,
+   "rod_elev_crank": 26.62
+  },
+  {
+   "dK": 28.75,
+   "phi": 20.26,
+   "pa_tip": 27.19,
+   "pa_horn": 11.76,
+   "rod_elev_horn": 8.05,
+   "rod_elev_crank": 26.57
+  },
+  {
+   "dK": 29.0,
+   "phi": 20.45,
+   "pa_tip": 27.17,
+   "pa_horn": 11.64,
+   "rod_elev_horn": 8.11,
+   "rod_elev_crank": 26.51
+  },
+  {
+   "dK": 29.25,
+   "phi": 20.63,
+   "pa_tip": 27.15,
+   "pa_horn": 11.51,
+   "rod_elev_horn": 8.17,
+   "rod_elev_crank": 26.46
+  },
+  {
+   "dK": 29.5,
+   "phi": 20.82,
+   "pa_tip": 27.13,
+   "pa_horn": 11.39,
+   "rod_elev_horn": 8.22,
+   "rod_elev_crank": 26.4
+  },
+  {
+   "dK": 29.75,
+   "phi": 21.0,
+   "pa_tip": 27.11,
+   "pa_horn": 11.27,
+   "rod_elev_horn": 8.28,
+   "rod_elev_crank": 26.35
+  },
+  {
+   "dK": 30.0,
+   "phi": 21.18,
+   "pa_tip": 27.09,
+   "pa_horn": 11.16,
+   "rod_elev_horn": 8.34,
+   "rod_elev_crank": 26.3
+  },
+  {
+   "dK": 30.25,
+   "phi": 21.37,
+   "pa_tip": 27.08,
+   "pa_horn": 11.05,
+   "rod_elev_horn": 8.39,
+   "rod_elev_crank": 26.24
+  },
+  {
+   "dK": 30.5,
+   "phi": 21.55,
+   "pa_tip": 27.06,
+   "pa_horn": 10.95,
+   "rod_elev_horn": 8.45,
+   "rod_elev_crank": 26.19
+  },
+  {
+   "dK": 30.75,
+   "phi": 21.73,
+   "pa_tip": 27.05,
+   "pa_horn": 10.84,
+   "rod_elev_horn": 8.51,
+   "rod_elev_crank": 26.13
+  },
+  {
+   "dK": 31.0,
+   "phi": 21.92,
+   "pa_tip": 27.03,
+   "pa_horn": 10.75,
+   "rod_elev_horn": 8.57,
+   "rod_elev_crank": 26.08
+  },
+  {
+   "dK": 31.25,
+   "phi": 22.1,
+   "pa_tip": 27.02,
+   "pa_horn": 10.66,
+   "rod_elev_horn": 8.62,
+   "rod_elev_crank": 26.02
+  },
+  {
+   "dK": 31.5,
+   "phi": 22.29,
+   "pa_tip": 27.01,
+   "pa_horn": 10.57,
+   "rod_elev_horn": 8.68,
+   "rod_elev_crank": 25.97
+  },
+  {
+   "dK": 31.75,
+   "phi": 22.47,
+   "pa_tip": 27.0,
+   "pa_horn": 10.49,
+   "rod_elev_horn": 8.74,
+   "rod_elev_crank": 25.91
+  },
+  {
+   "dK": 32.0,
+   "phi": 22.65,
+   "pa_tip": 26.99,
+   "pa_horn": 10.41,
+   "rod_elev_horn": 8.8,
+   "rod_elev_crank": 25.86
+  },
+  {
+   "dK": 32.25,
+   "phi": 22.84,
+   "pa_tip": 26.98,
+   "pa_horn": 10.34,
+   "rod_elev_horn": 8.85,
+   "rod_elev_crank": 25.8
+  },
+  {
+   "dK": 32.5,
+   "phi": 23.02,
+   "pa_tip": 26.97,
+   "pa_horn": 10.27,
+   "rod_elev_horn": 8.91,
+   "rod_elev_crank": 25.75
+  },
+  {
+   "dK": 32.75,
+   "phi": 23.21,
+   "pa_tip": 26.97,
+   "pa_horn": 10.2,
+   "rod_elev_horn": 8.97,
+   "rod_elev_crank": 25.69
+  },
+  {
+   "dK": 33.0,
+   "phi": 23.39,
+   "pa_tip": 26.96,
+   "pa_horn": 10.15,
+   "rod_elev_horn": 9.03,
+   "rod_elev_crank": 25.64
+  },
+  {
+   "dK": 33.25,
+   "phi": 23.57,
+   "pa_tip": 26.96,
+   "pa_horn": 10.1,
+   "rod_elev_horn": 9.09,
+   "rod_elev_crank": 25.58
+  },
+  {
+   "dK": 33.5,
+   "phi": 23.76,
+   "pa_tip": 26.95,
+   "pa_horn": 10.05,
+   "rod_elev_horn": 9.14,
+   "rod_elev_crank": 25.53
+  },
+  {
+   "dK": 33.75,
+   "phi": 23.94,
+   "pa_tip": 26.95,
+   "pa_horn": 10.01,
+   "rod_elev_horn": 9.2,
+   "rod_elev_crank": 25.47
+  },
+  {
+   "dK": 34.0,
+   "phi": 24.13,
+   "pa_tip": 26.95,
+   "pa_horn": 9.97,
+   "rod_elev_horn": 9.26,
+   "rod_elev_crank": 25.41
+  },
+  {
+   "dK": 34.25,
+   "phi": 24.31,
+   "pa_tip": 26.95,
+   "pa_horn": 9.94,
+   "rod_elev_horn": 9.32,
+   "rod_elev_crank": 25.36
+  },
+  {
+   "dK": 34.5,
+   "phi": 24.49,
+   "pa_tip": 26.95,
+   "pa_horn": 9.92,
+   "rod_elev_horn": 9.37,
+   "rod_elev_crank": 25.3
+  },
+  {
+   "dK": 34.75,
+   "phi": 24.68,
+   "pa_tip": 26.95,
+   "pa_horn": 9.9,
+   "rod_elev_horn": 9.43,
+   "rod_elev_crank": 25.25
+  },
+  {
+   "dK": 35.0,
+   "phi": 24.86,
+   "pa_tip": 26.96,
+   "pa_horn": 9.89,
+   "rod_elev_horn": 9.49,
+   "rod_elev_crank": 25.19
+  },
+  {
+   "dK": 35.25,
+   "phi": 25.05,
+   "pa_tip": 26.96,
+   "pa_horn": 9.88,
+   "rod_elev_horn": 9.55,
+   "rod_elev_crank": 25.14
+  },
+  {
+   "dK": 35.5,
+   "phi": 25.23,
+   "pa_tip": 26.96,
+   "pa_horn": 9.88,
+   "rod_elev_horn": 9.61,
+   "rod_elev_crank": 25.08
+  },
+  {
+   "dK": 35.75,
+   "phi": 25.42,
+   "pa_tip": 26.97,
+   "pa_horn": 9.88,
+   "rod_elev_horn": 9.66,
+   "rod_elev_crank": 25.03
+  },
+  {
+   "dK": 36.0,
+   "phi": 25.6,
+   "pa_tip": 26.98,
+   "pa_horn": 9.9,
+   "rod_elev_horn": 9.72,
+   "rod_elev_crank": 24.97
+  },
+  {
+   "dK": 36.25,
+   "phi": 25.78,
+   "pa_tip": 26.98,
+   "pa_horn": 9.91,
+   "rod_elev_horn": 9.78,
+   "rod_elev_crank": 24.91
+  },
+  {
+   "dK": 36.5,
+   "phi": 25.97,
+   "pa_tip": 26.99,
+   "pa_horn": 9.93,
+   "rod_elev_horn": 9.84,
+   "rod_elev_crank": 24.86
+  },
+  {
+   "dK": 36.75,
+   "phi": 26.15,
+   "pa_tip": 27.0,
+   "pa_horn": 9.96,
+   "rod_elev_horn": 9.9,
+   "rod_elev_crank": 24.8
+  },
+  {
+   "dK": 37.0,
+   "phi": 26.34,
+   "pa_tip": 27.01,
+   "pa_horn": 10.0,
+   "rod_elev_horn": 9.95,
+   "rod_elev_crank": 24.75
+  },
+  {
+   "dK": 37.25,
+   "phi": 26.52,
+   "pa_tip": 27.03,
+   "pa_horn": 10.04,
+   "rod_elev_horn": 10.01,
+   "rod_elev_crank": 24.69
+  },
+  {
+   "dK": 37.5,
+   "phi": 26.7,
+   "pa_tip": 27.04,
+   "pa_horn": 10.08,
+   "rod_elev_horn": 10.07,
+   "rod_elev_crank": 24.64
+  },
+  {
+   "dK": 37.75,
+   "phi": 26.89,
+   "pa_tip": 27.05,
+   "pa_horn": 10.13,
+   "rod_elev_horn": 10.13,
+   "rod_elev_crank": 24.58
+  },
+  {
+   "dK": 38.0,
+   "phi": 27.07,
+   "pa_tip": 27.07,
+   "pa_horn": 10.19,
+   "rod_elev_horn": 10.19,
+   "rod_elev_crank": 24.52
+  },
+  {
+   "dK": 38.25,
+   "phi": 27.26,
+   "pa_tip": 27.08,
+   "pa_horn": 10.25,
+   "rod_elev_horn": 10.24,
+   "rod_elev_crank": 24.47
+  },
+  {
+   "dK": 38.5,
+   "phi": 27.44,
+   "pa_tip": 27.1,
+   "pa_horn": 10.31,
+   "rod_elev_horn": 10.3,
+   "rod_elev_crank": 24.41
+  },
+  {
+   "dK": 38.75,
+   "phi": 27.63,
+   "pa_tip": 27.12,
+   "pa_horn": 10.39,
+   "rod_elev_horn": 10.36,
+   "rod_elev_crank": 24.36
+  },
+  {
+   "dK": 39.0,
+   "phi": 27.81,
+   "pa_tip": 27.14,
+   "pa_horn": 10.46,
+   "rod_elev_horn": 10.42,
+   "rod_elev_crank": 24.3
+  },
+  {
+   "dK": 39.25,
+   "phi": 27.99,
+   "pa_tip": 27.16,
+   "pa_horn": 10.54,
+   "rod_elev_horn": 10.48,
+   "rod_elev_crank": 24.24
+  },
+  {
+   "dK": 39.5,
+   "phi": 28.18,
+   "pa_tip": 27.18,
+   "pa_horn": 10.63,
+   "rod_elev_horn": 10.54,
+   "rod_elev_crank": 24.19
+  },
+  {
+   "dK": 39.75,
+   "phi": 28.36,
+   "pa_tip": 27.2,
+   "pa_horn": 10.72,
+   "rod_elev_horn": 10.59,
+   "rod_elev_crank": 24.13
+  },
+  {
+   "dK": 40.0,
+   "phi": 28.55,
+   "pa_tip": 27.23,
+   "pa_horn": 10.82,
+   "rod_elev_horn": 10.65,
+   "rod_elev_crank": 24.08
+  },
+  {
+   "dK": 40.25,
+   "phi": 28.73,
+   "pa_tip": 27.25,
+   "pa_horn": 10.92,
+   "rod_elev_horn": 10.71,
+   "rod_elev_crank": 24.02
+  },
+  {
+   "dK": 40.5,
+   "phi": 28.91,
+   "pa_tip": 27.28,
+   "pa_horn": 11.02,
+   "rod_elev_horn": 10.77,
+   "rod_elev_crank": 23.96
+  },
+  {
+   "dK": 40.75,
+   "phi": 29.1,
+   "pa_tip": 27.3,
+   "pa_horn": 11.13,
+   "rod_elev_horn": 10.83,
+   "rod_elev_crank": 23.91
+  },
+  {
+   "dK": 41.0,
+   "phi": 29.28,
+   "pa_tip": 27.33,
+   "pa_horn": 11.24,
+   "rod_elev_horn": 10.88,
+   "rod_elev_crank": 23.85
+  },
+  {
+   "dK": 41.25,
+   "phi": 29.47,
+   "pa_tip": 27.36,
+   "pa_horn": 11.36,
+   "rod_elev_horn": 10.94,
+   "rod_elev_crank": 23.8
+  },
+  {
+   "dK": 41.5,
+   "phi": 29.65,
+   "pa_tip": 27.39,
+   "pa_horn": 11.48,
+   "rod_elev_horn": 11.0,
+   "rod_elev_crank": 23.74
+  },
+  {
+   "dK": 41.75,
+   "phi": 29.83,
+   "pa_tip": 27.42,
+   "pa_horn": 11.61,
+   "rod_elev_horn": 11.06,
+   "rod_elev_crank": 23.68
+  },
+  {
+   "dK": 42.0,
+   "phi": 30.02,
+   "pa_tip": 27.45,
+   "pa_horn": 11.74,
+   "rod_elev_horn": 11.12,
+   "rod_elev_crank": 23.63
+  },
+  {
+   "dK": 42.25,
+   "phi": 30.2,
+   "pa_tip": 27.49,
+   "pa_horn": 11.87,
+   "rod_elev_horn": 11.17,
+   "rod_elev_crank": 23.57
+  },
+  {
+   "dK": 42.5,
+   "phi": 30.39,
+   "pa_tip": 27.52,
+   "pa_horn": 12.0,
+   "rod_elev_horn": 11.23,
+   "rod_elev_crank": 23.52
+  },
+  {
+   "dK": 42.75,
+   "phi": 30.57,
+   "pa_tip": 27.56,
+   "pa_horn": 12.14,
+   "rod_elev_horn": 11.29,
+   "rod_elev_crank": 23.46
+  },
+  {
+   "dK": 43.0,
+   "phi": 30.75,
+   "pa_tip": 27.59,
+   "pa_horn": 12.28,
+   "rod_elev_horn": 11.35,
+   "rod_elev_crank": 23.4
+  },
+  {
+   "dK": 43.25,
+   "phi": 30.94,
+   "pa_tip": 27.63,
+   "pa_horn": 12.43,
+   "rod_elev_horn": 11.41,
+   "rod_elev_crank": 23.35
+  },
+  {
+   "dK": 43.5,
+   "phi": 31.12,
+   "pa_tip": 27.67,
+   "pa_horn": 12.57,
+   "rod_elev_horn": 11.47,
+   "rod_elev_crank": 23.29
+  },
+  {
+   "dK": 43.75,
+   "phi": 31.3,
+   "pa_tip": 27.71,
+   "pa_horn": 12.73,
+   "rod_elev_horn": 11.52,
+   "rod_elev_crank": 23.24
+  },
+  {
+   "dK": 44.0,
+   "phi": 31.49,
+   "pa_tip": 27.75,
+   "pa_horn": 12.88,
+   "rod_elev_horn": 11.58,
+   "rod_elev_crank": 23.18
+  },
+  {
+   "dK": 44.25,
+   "phi": 31.67,
+   "pa_tip": 27.79,
+   "pa_horn": 13.03,
+   "rod_elev_horn": 11.64,
+   "rod_elev_crank": 23.12
+  },
+  {
+   "dK": 44.5,
+   "phi": 31.86,
+   "pa_tip": 27.83,
+   "pa_horn": 13.19,
+   "rod_elev_horn": 11.7,
+   "rod_elev_crank": 23.07
+  },
+  {
+   "dK": 44.75,
+   "phi": 32.04,
+   "pa_tip": 27.87,
+   "pa_horn": 13.35,
+   "rod_elev_horn": 11.76,
+   "rod_elev_crank": 23.01
+  },
+  {
+   "dK": 45.0,
+   "phi": 32.22,
+   "pa_tip": 27.92,
+   "pa_horn": 13.52,
+   "rod_elev_horn": 11.81,
+   "rod_elev_crank": 22.96
+  },
+  {
+   "dK": 45.25,
+   "phi": 32.41,
+   "pa_tip": 27.96,
+   "pa_horn": 13.68,
+   "rod_elev_horn": 11.87,
+   "rod_elev_crank": 22.9
+  },
+  {
+   "dK": 45.5,
+   "phi": 32.59,
+   "pa_tip": 28.01,
+   "pa_horn": 13.85,
+   "rod_elev_horn": 11.93,
+   "rod_elev_crank": 22.84
+  },
+  {
+   "dK": 45.75,
+   "phi": 32.77,
+   "pa_tip": 28.06,
+   "pa_horn": 14.02,
+   "rod_elev_horn": 11.99,
+   "rod_elev_crank": 22.79
+  },
+  {
+   "dK": 46.0,
+   "phi": 32.96,
+   "pa_tip": 28.11,
+   "pa_horn": 14.19,
+   "rod_elev_horn": 12.04,
+   "rod_elev_crank": 22.73
+  },
+  {
+   "dK": 46.25,
+   "phi": 33.14,
+   "pa_tip": 28.16,
+   "pa_horn": 14.37,
+   "rod_elev_horn": 12.1,
+   "rod_elev_crank": 22.68
+  },
+  {
+   "dK": 46.5,
+   "phi": 33.32,
+   "pa_tip": 28.21,
+   "pa_horn": 14.54,
+   "rod_elev_horn": 12.16,
+   "rod_elev_crank": 22.62
+  },
+  {
+   "dK": 46.75,
+   "phi": 33.5,
+   "pa_tip": 28.26,
+   "pa_horn": 14.72,
+   "rod_elev_horn": 12.22,
+   "rod_elev_crank": 22.56
+  },
+  {
+   "dK": 47.0,
+   "phi": 33.69,
+   "pa_tip": 28.31,
+   "pa_horn": 14.9,
+   "rod_elev_horn": 12.28,
+   "rod_elev_crank": 22.51
+  },
+  {
+   "dK": 47.25,
+   "phi": 33.87,
+   "pa_tip": 28.36,
+   "pa_horn": 15.08,
+   "rod_elev_horn": 12.33,
+   "rod_elev_crank": 22.45
+  },
+  {
+   "dK": 47.5,
+   "phi": 34.05,
+   "pa_tip": 28.42,
+   "pa_horn": 15.27,
+   "rod_elev_horn": 12.39,
+   "rod_elev_crank": 22.4
+  },
+  {
+   "dK": 47.75,
+   "phi": 34.24,
+   "pa_tip": 28.47,
+   "pa_horn": 15.45,
+   "rod_elev_horn": 12.45,
+   "rod_elev_crank": 22.34
+  },
+  {
+   "dK": 48.0,
+   "phi": 34.42,
+   "pa_tip": 28.53,
+   "pa_horn": 15.64,
+   "rod_elev_horn": 12.51,
+   "rod_elev_crank": 22.28
+  },
+  {
+   "dK": 48.25,
+   "phi": 34.6,
+   "pa_tip": 28.59,
+   "pa_horn": 15.83,
+   "rod_elev_horn": 12.56,
+   "rod_elev_crank": 22.23
+  },
+  {
+   "dK": 48.5,
+   "phi": 34.78,
+   "pa_tip": 28.65,
+   "pa_horn": 16.02,
+   "rod_elev_horn": 12.62,
+   "rod_elev_crank": 22.17
+  },
+  {
+   "dK": 48.75,
+   "phi": 34.97,
+   "pa_tip": 28.71,
+   "pa_horn": 16.21,
+   "rod_elev_horn": 12.68,
+   "rod_elev_crank": 22.12
+  },
+  {
+   "dK": 49.0,
+   "phi": 35.15,
+   "pa_tip": 28.77,
+   "pa_horn": 16.4,
+   "rod_elev_horn": 12.74,
+   "rod_elev_crank": 22.06
+  },
+  {
+   "dK": 49.25,
+   "phi": 35.33,
+   "pa_tip": 28.83,
+   "pa_horn": 16.59,
+   "rod_elev_horn": 12.79,
+   "rod_elev_crank": 22.0
+  },
+  {
+   "dK": 49.5,
+   "phi": 35.51,
+   "pa_tip": 28.89,
+   "pa_horn": 16.79,
+   "rod_elev_horn": 12.85,
+   "rod_elev_crank": 21.95
+  },
+  {
+   "dK": 49.75,
+   "phi": 35.7,
+   "pa_tip": 28.95,
+   "pa_horn": 16.98,
+   "rod_elev_horn": 12.91,
+   "rod_elev_crank": 21.89
+  },
+  {
+   "dK": 50.0,
+   "phi": 35.88,
+   "pa_tip": 29.02,
+   "pa_horn": 17.18,
+   "rod_elev_horn": 12.97,
+   "rod_elev_crank": 21.84
+  },
+  {
+   "dK": 50.25,
+   "phi": 36.06,
+   "pa_tip": 29.08,
+   "pa_horn": 17.38,
+   "rod_elev_horn": 13.02,
+   "rod_elev_crank": 21.78
+  },
+  {
+   "dK": 50.5,
+   "phi": 36.24,
+   "pa_tip": 29.15,
+   "pa_horn": 17.58,
+   "rod_elev_horn": 13.08,
+   "rod_elev_crank": 21.73
+  },
+  {
+   "dK": 50.75,
+   "phi": 36.42,
+   "pa_tip": 29.21,
+   "pa_horn": 17.78,
+   "rod_elev_horn": 13.14,
+   "rod_elev_crank": 21.67
+  },
+  {
+   "dK": 51.0,
+   "phi": 36.61,
+   "pa_tip": 29.28,
+   "pa_horn": 17.98,
+   "rod_elev_horn": 13.19,
+   "rod_elev_crank": 21.61
+  },
+  {
+   "dK": 51.25,
+   "phi": 36.79,
+   "pa_tip": 29.35,
+   "pa_horn": 18.18,
+   "rod_elev_horn": 13.25,
+   "rod_elev_crank": 21.56
+  },
+  {
+   "dK": 51.5,
+   "phi": 36.97,
+   "pa_tip": 29.42,
+   "pa_horn": 18.39,
+   "rod_elev_horn": 13.31,
+   "rod_elev_crank": 21.5
+  },
+  {
+   "dK": 51.75,
+   "phi": 37.15,
+   "pa_tip": 29.49,
+   "pa_horn": 18.59,
+   "rod_elev_horn": 13.37,
+   "rod_elev_crank": 21.45
+  },
+  {
+   "dK": 52.0,
+   "phi": 37.33,
+   "pa_tip": 29.56,
+   "pa_horn": 18.8,
+   "rod_elev_horn": 13.42,
+   "rod_elev_crank": 21.39
+  },
+  {
+   "dK": 52.25,
+   "phi": 37.51,
+   "pa_tip": 29.63,
+   "pa_horn": 19.0,
+   "rod_elev_horn": 13.48,
+   "rod_elev_crank": 21.34
+  },
+  {
+   "dK": 52.5,
+   "phi": 37.69,
+   "pa_tip": 29.71,
+   "pa_horn": 19.21,
+   "rod_elev_horn": 13.54,
+   "rod_elev_crank": 21.28
+  },
+  {
+   "dK": 52.75,
+   "phi": 37.88,
+   "pa_tip": 29.78,
+   "pa_horn": 19.42,
+   "rod_elev_horn": 13.59,
+   "rod_elev_crank": 21.23
+  },
+  {
+   "dK": 53.0,
+   "phi": 38.06,
+   "pa_tip": 29.86,
+   "pa_horn": 19.63,
+   "rod_elev_horn": 13.65,
+   "rod_elev_crank": 21.17
+  },
+  {
+   "dK": 53.25,
+   "phi": 38.24,
+   "pa_tip": 29.93,
+   "pa_horn": 19.84,
+   "rod_elev_horn": 13.71,
+   "rod_elev_crank": 21.12
+  },
+  {
+   "dK": 53.5,
+   "phi": 38.42,
+   "pa_tip": 30.01,
+   "pa_horn": 20.05,
+   "rod_elev_horn": 13.76,
+   "rod_elev_crank": 21.06
+  },
+  {
+   "dK": 53.75,
+   "phi": 38.6,
+   "pa_tip": 30.09,
+   "pa_horn": 20.26,
+   "rod_elev_horn": 13.82,
+   "rod_elev_crank": 21.0
+  },
+  {
+   "dK": 54.0,
+   "phi": 38.78,
+   "pa_tip": 30.17,
+   "pa_horn": 20.47,
+   "rod_elev_horn": 13.88,
+   "rod_elev_crank": 20.95
+  },
+  {
+   "dK": 54.25,
+   "phi": 38.96,
+   "pa_tip": 30.24,
+   "pa_horn": 20.68,
+   "rod_elev_horn": 13.93,
+   "rod_elev_crank": 20.89
+  },
+  {
+   "dK": 54.5,
+   "phi": 39.14,
+   "pa_tip": 30.32,
+   "pa_horn": 20.9,
+   "rod_elev_horn": 13.99,
+   "rod_elev_crank": 20.84
+  },
+  {
+   "dK": 54.75,
+   "phi": 39.32,
+   "pa_tip": 30.41,
+   "pa_horn": 21.11,
+   "rod_elev_horn": 14.05,
+   "rod_elev_crank": 20.78
+  },
+  {
+   "dK": 55.0,
+   "phi": 39.5,
+   "pa_tip": 30.49,
+   "pa_horn": 21.33,
+   "rod_elev_horn": 14.1,
+   "rod_elev_crank": 20.73
+  },
+  {
+   "dK": 55.25,
+   "phi": 39.68,
+   "pa_tip": 30.57,
+   "pa_horn": 21.54,
+   "rod_elev_horn": 14.16,
+   "rod_elev_crank": 20.67
+  },
+  {
+   "dK": 55.5,
+   "phi": 39.86,
+   "pa_tip": 30.65,
+   "pa_horn": 21.76,
+   "rod_elev_horn": 14.22,
+   "rod_elev_crank": 20.62
+  },
+  {
+   "dK": 55.75,
+   "phi": 40.04,
+   "pa_tip": 30.74,
+   "pa_horn": 21.97,
+   "rod_elev_horn": 14.27,
+   "rod_elev_crank": 20.56
+  },
+  {
+   "dK": 56.0,
+   "phi": 40.22,
+   "pa_tip": 30.82,
+   "pa_horn": 22.19,
+   "rod_elev_horn": 14.33,
+   "rod_elev_crank": 20.51
+  },
+  {
+   "dK": 56.25,
+   "phi": 40.4,
+   "pa_tip": 30.91,
+   "pa_horn": 22.41,
+   "rod_elev_horn": 14.38,
+   "rod_elev_crank": 20.45
+  },
+  {
+   "dK": 56.5,
+   "phi": 40.58,
+   "pa_tip": 31.0,
+   "pa_horn": 22.63,
+   "rod_elev_horn": 14.44,
+   "rod_elev_crank": 20.4
+  },
+  {
+   "dK": 56.75,
+   "phi": 40.76,
+   "pa_tip": 31.08,
+   "pa_horn": 22.84,
+   "rod_elev_horn": 14.5,
+   "rod_elev_crank": 20.35
+  },
+  {
+   "dK": 57.0,
+   "phi": 40.94,
+   "pa_tip": 31.17,
+   "pa_horn": 23.06,
+   "rod_elev_horn": 14.55,
+   "rod_elev_crank": 20.29
+  },
+  {
+   "dK": 57.25,
+   "phi": 41.12,
+   "pa_tip": 31.26,
+   "pa_horn": 23.28,
+   "rod_elev_horn": 14.61,
+   "rod_elev_crank": 20.24
+  },
+  {
+   "dK": 57.5,
+   "phi": 41.3,
+   "pa_tip": 31.35,
+   "pa_horn": 23.5,
+   "rod_elev_horn": 14.66,
+   "rod_elev_crank": 20.18
+  },
+  {
+   "dK": 57.75,
+   "phi": 41.48,
+   "pa_tip": 31.44,
+   "pa_horn": 23.72,
+   "rod_elev_horn": 14.72,
+   "rod_elev_crank": 20.13
+  },
+  {
+   "dK": 58.0,
+   "phi": 41.65,
+   "pa_tip": 31.53,
+   "pa_horn": 23.94,
+   "rod_elev_horn": 14.77,
+   "rod_elev_crank": 20.07
+  },
+  {
+   "dK": 58.25,
+   "phi": 41.83,
+   "pa_tip": 31.62,
+   "pa_horn": 24.17,
+   "rod_elev_horn": 14.83,
+   "rod_elev_crank": 20.02
+  },
+  {
+   "dK": 58.5,
+   "phi": 42.01,
+   "pa_tip": 31.72,
+   "pa_horn": 24.39,
+   "rod_elev_horn": 14.88,
+   "rod_elev_crank": 19.96
+  },
+  {
+   "dK": 58.75,
+   "phi": 42.19,
+   "pa_tip": 31.81,
+   "pa_horn": 24.61,
+   "rod_elev_horn": 14.94,
+   "rod_elev_crank": 19.91
+  },
+  {
+   "dK": 59.0,
+   "phi": 42.37,
+   "pa_tip": 31.9,
+   "pa_horn": 24.83,
+   "rod_elev_horn": 15.0,
+   "rod_elev_crank": 19.86
+  },
+  {
+   "dK": 59.25,
+   "phi": 42.55,
+   "pa_tip": 32.0,
+   "pa_horn": 25.06,
+   "rod_elev_horn": 15.05,
+   "rod_elev_crank": 19.8
+  },
+  {
+   "dK": 59.5,
+   "phi": 42.72,
+   "pa_tip": 32.09,
+   "pa_horn": 25.28,
+   "rod_elev_horn": 15.11,
+   "rod_elev_crank": 19.75
+  },
+  {
+   "dK": 59.75,
+   "phi": 42.9,
+   "pa_tip": 32.19,
+   "pa_horn": 25.5,
+   "rod_elev_horn": 15.16,
+   "rod_elev_crank": 19.69
+  },
+  {
+   "dK": 60.0,
+   "phi": 43.08,
+   "pa_tip": 32.29,
+   "pa_horn": 25.73,
+   "rod_elev_horn": 15.22,
+   "rod_elev_crank": 19.64
+  },
+  {
+   "dK": 60.25,
+   "phi": 43.26,
+   "pa_tip": 32.38,
+   "pa_horn": 25.95,
+   "rod_elev_horn": 15.27,
+   "rod_elev_crank": 19.59
+  },
+  {
+   "dK": 60.5,
+   "phi": 43.44,
+   "pa_tip": 32.48,
+   "pa_horn": 26.18,
+   "rod_elev_horn": 15.33,
+   "rod_elev_crank": 19.53
+  },
+  {
+   "dK": 60.75,
+   "phi": 43.61,
+   "pa_tip": 32.58,
+   "pa_horn": 26.4,
+   "rod_elev_horn": 15.38,
+   "rod_elev_crank": 19.48
+  },
+  {
+   "dK": 61.0,
+   "phi": 43.79,
+   "pa_tip": 32.68,
+   "pa_horn": 26.63,
+   "rod_elev_horn": 15.43,
+   "rod_elev_crank": 19.42
+  },
+  {
+   "dK": 61.25,
+   "phi": 43.97,
+   "pa_tip": 32.78,
+   "pa_horn": 26.86,
+   "rod_elev_horn": 15.49,
+   "rod_elev_crank": 19.37
+  },
+  {
+   "dK": 61.5,
+   "phi": 44.14,
+   "pa_tip": 32.88,
+   "pa_horn": 27.08,
+   "rod_elev_horn": 15.54,
+   "rod_elev_crank": 19.32
+  },
+  {
+   "dK": 61.75,
+   "phi": 44.32,
+   "pa_tip": 32.98,
+   "pa_horn": 27.31,
+   "rod_elev_horn": 15.6,
+   "rod_elev_crank": 19.26
+  },
+  {
+   "dK": 62.0,
+   "phi": 44.5,
+   "pa_tip": 33.09,
+   "pa_horn": 27.54,
+   "rod_elev_horn": 15.65,
+   "rod_elev_crank": 19.21
+  },
+  {
+   "dK": 62.25,
+   "phi": 44.67,
+   "pa_tip": 33.19,
+   "pa_horn": 27.76,
+   "rod_elev_horn": 15.71,
+   "rod_elev_crank": 19.16
+  },
+  {
+   "dK": 62.5,
+   "phi": 44.85,
+   "pa_tip": 33.29,
+   "pa_horn": 27.99,
+   "rod_elev_horn": 15.76,
+   "rod_elev_crank": 19.1
+  },
+  {
+   "dK": 62.75,
+   "phi": 45.02,
+   "pa_tip": 33.4,
+   "pa_horn": 28.22,
+   "rod_elev_horn": 15.81,
+   "rod_elev_crank": 19.05
+  },
+  {
+   "dK": 63.0,
+   "phi": 45.2,
+   "pa_tip": 33.5,
+   "pa_horn": 28.45,
+   "rod_elev_horn": 15.87,
+   "rod_elev_crank": 19.0
+  },
+  {
+   "dK": 63.25,
+   "phi": 45.38,
+   "pa_tip": 33.61,
+   "pa_horn": 28.68,
+   "rod_elev_horn": 15.92,
+   "rod_elev_crank": 18.94
+  },
+  {
+   "dK": 63.5,
+   "phi": 45.55,
+   "pa_tip": 33.71,
+   "pa_horn": 28.91,
+   "rod_elev_horn": 15.98,
+   "rod_elev_crank": 18.89
+  },
+  {
+   "dK": 63.75,
+   "phi": 45.73,
+   "pa_tip": 33.82,
+   "pa_horn": 29.13,
+   "rod_elev_horn": 16.03,
+   "rod_elev_crank": 18.84
+  },
+  {
+   "dK": 64.0,
+   "phi": 45.9,
+   "pa_tip": 33.93,
+   "pa_horn": 29.36,
+   "rod_elev_horn": 16.08,
+   "rod_elev_crank": 18.79
+  },
+  {
+   "dK": 64.25,
+   "phi": 46.08,
+   "pa_tip": 34.04,
+   "pa_horn": 29.59,
+   "rod_elev_horn": 16.14,
+   "rod_elev_crank": 18.73
+  },
+  {
+   "dK": 64.5,
+   "phi": 46.25,
+   "pa_tip": 34.15,
+   "pa_horn": 29.82,
+   "rod_elev_horn": 16.19,
+   "rod_elev_crank": 18.68
+  },
+  {
+   "dK": 64.75,
+   "phi": 46.43,
+   "pa_tip": 34.25,
+   "pa_horn": 30.06,
+   "rod_elev_horn": 16.24,
+   "rod_elev_crank": 18.63
+  },
+  {
+   "dK": 65.0,
+   "phi": 46.6,
+   "pa_tip": 34.36,
+   "pa_horn": 30.29,
+   "rod_elev_horn": 16.3,
+   "rod_elev_crank": 18.58
+  },
+  {
+   "dK": 65.25,
+   "phi": 46.78,
+   "pa_tip": 34.47,
+   "pa_horn": 30.52,
+   "rod_elev_horn": 16.35,
+   "rod_elev_crank": 18.52
+  },
+  {
+   "dK": 65.5,
+   "phi": 46.95,
+   "pa_tip": 34.58,
+   "pa_horn": 30.75,
+   "rod_elev_horn": 16.4,
+   "rod_elev_crank": 18.47
+  },
+  {
+   "dK": 65.75,
+   "phi": 47.12,
+   "pa_tip": 34.7,
+   "pa_horn": 30.98,
+   "rod_elev_horn": 16.46,
+   "rod_elev_crank": 18.42
+  },
+  {
+   "dK": 66.0,
+   "phi": 47.3,
+   "pa_tip": 34.81,
+   "pa_horn": 31.21,
+   "rod_elev_horn": 16.51,
+   "rod_elev_crank": 18.37
+  },
+  {
+   "dK": 66.25,
+   "phi": 47.47,
+   "pa_tip": 34.92,
+   "pa_horn": 31.44,
+   "rod_elev_horn": 16.56,
+   "rod_elev_crank": 18.31
+  },
+  {
+   "dK": 66.5,
+   "phi": 47.64,
+   "pa_tip": 35.03,
+   "pa_horn": 31.68,
+   "rod_elev_horn": 16.61,
+   "rod_elev_crank": 18.26
+  },
+  {
+   "dK": 66.75,
+   "phi": 47.82,
+   "pa_tip": 35.15,
+   "pa_horn": 31.91,
+   "rod_elev_horn": 16.67,
+   "rod_elev_crank": 18.21
+  },
+  {
+   "dK": 67.0,
+   "phi": 47.99,
+   "pa_tip": 35.26,
+   "pa_horn": 32.14,
+   "rod_elev_horn": 16.72,
+   "rod_elev_crank": 18.16
+  },
+  {
+   "dK": 67.25,
+   "phi": 48.16,
+   "pa_tip": 35.37,
+   "pa_horn": 32.37,
+   "rod_elev_horn": 16.77,
+   "rod_elev_crank": 18.11
+  },
+  {
+   "dK": 67.5,
+   "phi": 48.33,
+   "pa_tip": 35.49,
+   "pa_horn": 32.61,
+   "rod_elev_horn": 16.82,
+   "rod_elev_crank": 18.06
+  },
+  {
+   "dK": 67.75,
+   "phi": 48.51,
+   "pa_tip": 35.61,
+   "pa_horn": 32.84,
+   "rod_elev_horn": 16.87,
+   "rod_elev_crank": 18.0
+  },
+  {
+   "dK": 68.0,
+   "phi": 48.68,
+   "pa_tip": 35.72,
+   "pa_horn": 33.07,
+   "rod_elev_horn": 16.93,
+   "rod_elev_crank": 17.95
+  },
+  {
+   "dK": 68.25,
+   "phi": 48.85,
+   "pa_tip": 35.84,
+   "pa_horn": 33.31,
+   "rod_elev_horn": 16.98,
+   "rod_elev_crank": 17.9
+  },
+  {
+   "dK": 68.5,
+   "phi": 49.02,
+   "pa_tip": 35.95,
+   "pa_horn": 33.54,
+   "rod_elev_horn": 17.03,
+   "rod_elev_crank": 17.85
+  },
+  {
+   "dK": 68.75,
+   "phi": 49.19,
+   "pa_tip": 36.07,
+   "pa_horn": 33.78,
+   "rod_elev_horn": 17.08,
+   "rod_elev_crank": 17.8
+  },
+  {
+   "dK": 69.0,
+   "phi": 49.37,
+   "pa_tip": 36.19,
+   "pa_horn": 34.01,
+   "rod_elev_horn": 17.13,
+   "rod_elev_crank": 17.75
+  },
+  {
+   "dK": 69.25,
+   "phi": 49.54,
+   "pa_tip": 36.31,
+   "pa_horn": 34.24,
+   "rod_elev_horn": 17.18,
+   "rod_elev_crank": 17.7
+  },
+  {
+   "dK": 69.5,
+   "phi": 49.71,
+   "pa_tip": 36.43,
+   "pa_horn": 34.48,
+   "rod_elev_horn": 17.24,
+   "rod_elev_crank": 17.65
+  },
+  {
+   "dK": 69.75,
+   "phi": 49.88,
+   "pa_tip": 36.55,
+   "pa_horn": 34.71,
+   "rod_elev_horn": 17.29,
+   "rod_elev_crank": 17.6
+  },
+  {
+   "dK": 70.0,
+   "phi": 50.05,
+   "pa_tip": 36.67,
+   "pa_horn": 34.95,
+   "rod_elev_horn": 17.34,
+   "rod_elev_crank": 17.55
+  },
+  {
+   "dK": 70.25,
+   "phi": 50.22,
+   "pa_tip": 36.79,
+   "pa_horn": 35.19,
+   "rod_elev_horn": 17.39,
+   "rod_elev_crank": 17.49
+  },
+  {
+   "dK": 70.5,
+   "phi": 50.39,
+   "pa_tip": 36.91,
+   "pa_horn": 35.42,
+   "rod_elev_horn": 17.44,
+   "rod_elev_crank": 17.44
+  },
+  {
+   "dK": 70.75,
+   "phi": 50.56,
+   "pa_tip": 37.03,
+   "pa_horn": 35.66,
+   "rod_elev_horn": 17.49,
+   "rod_elev_crank": 17.39
+  },
+  {
+   "dK": 71.0,
+   "phi": 50.73,
+   "pa_tip": 37.15,
+   "pa_horn": 35.89,
+   "rod_elev_horn": 17.54,
+   "rod_elev_crank": 17.34
+  },
+  {
+   "dK": 71.25,
+   "phi": 50.9,
+   "pa_tip": 37.27,
+   "pa_horn": 36.13,
+   "rod_elev_horn": 17.59,
+   "rod_elev_crank": 17.29
+  },
+  {
+   "dK": 71.5,
+   "phi": 51.07,
+   "pa_tip": 37.39,
+   "pa_horn": 36.37,
+   "rod_elev_horn": 17.64,
+   "rod_elev_crank": 17.24
+  },
+  {
+   "dK": 71.75,
+   "phi": 51.24,
+   "pa_tip": 37.52,
+   "pa_horn": 36.6,
+   "rod_elev_horn": 17.69,
+   "rod_elev_crank": 17.19
+  },
+  {
+   "dK": 72.0,
+   "phi": 51.4,
+   "pa_tip": 37.64,
+   "pa_horn": 36.84,
+   "rod_elev_horn": 17.74,
+   "rod_elev_crank": 17.14
+  },
+  {
+   "dK": 72.25,
+   "phi": 51.57,
+   "pa_tip": 37.76,
+   "pa_horn": 37.08,
+   "rod_elev_horn": 17.79,
+   "rod_elev_crank": 17.09
+  },
+  {
+   "dK": 72.5,
+   "phi": 51.74,
+   "pa_tip": 37.89,
+   "pa_horn": 37.31,
+   "rod_elev_horn": 17.84,
+   "rod_elev_crank": 17.04
+  },
+  {
+   "dK": 72.75,
+   "phi": 51.91,
+   "pa_tip": 38.01,
+   "pa_horn": 37.55,
+   "rod_elev_horn": 17.89,
+   "rod_elev_crank": 16.99
+  },
+  {
+   "dK": 73.0,
+   "phi": 52.08,
+   "pa_tip": 38.14,
+   "pa_horn": 37.79,
+   "rod_elev_horn": 17.94,
+   "rod_elev_crank": 16.95
+  },
+  {
+   "dK": 73.25,
+   "phi": 52.24,
+   "pa_tip": 38.26,
+   "pa_horn": 38.03,
+   "rod_elev_horn": 17.99,
+   "rod_elev_crank": 16.9
+  },
+  {
+   "dK": 73.5,
+   "phi": 52.41,
+   "pa_tip": 38.39,
+   "pa_horn": 38.27,
+   "rod_elev_horn": 18.04,
+   "rod_elev_crank": 16.85
+  },
+  {
+   "dK": 73.75,
+   "phi": 52.58,
+   "pa_tip": 38.51,
+   "pa_horn": 38.5,
+   "rod_elev_horn": 18.09,
+   "rod_elev_crank": 16.8
+  },
+  {
+   "dK": 74.0,
+   "phi": 52.74,
+   "pa_tip": 38.64,
+   "pa_horn": 38.74,
+   "rod_elev_horn": 18.14,
+   "rod_elev_crank": 16.75
+  },
+  {
+   "dK": 74.25,
+   "phi": 52.91,
+   "pa_tip": 38.77,
+   "pa_horn": 38.98,
+   "rod_elev_horn": 18.19,
+   "rod_elev_crank": 16.7
+  },
+  {
+   "dK": 74.5,
+   "phi": 53.08,
+   "pa_tip": 38.89,
+   "pa_horn": 39.22,
+   "rod_elev_horn": 18.24,
+   "rod_elev_crank": 16.65
+  },
+  {
+   "dK": 74.75,
+   "phi": 53.24,
+   "pa_tip": 39.02,
+   "pa_horn": 39.46,
+   "rod_elev_horn": 18.28,
+   "rod_elev_crank": 16.6
+  },
+  {
+   "dK": 75.0,
+   "phi": 53.41,
+   "pa_tip": 39.15,
+   "pa_horn": 39.7,
+   "rod_elev_horn": 18.33,
+   "rod_elev_crank": 16.55
+  },
+  {
+   "dK": 75.25,
+   "phi": 53.57,
+   "pa_tip": 39.27,
+   "pa_horn": 39.94,
+   "rod_elev_horn": 18.38,
+   "rod_elev_crank": 16.51
+  },
+  {
+   "dK": 75.5,
+   "phi": 53.74,
+   "pa_tip": 39.4,
+   "pa_horn": 40.18,
+   "rod_elev_horn": 18.43,
+   "rod_elev_crank": 16.46
+  },
+  {
+   "dK": 75.75,
+   "phi": 53.9,
+   "pa_tip": 39.53,
+   "pa_horn": 40.42,
+   "rod_elev_horn": 18.48,
+   "rod_elev_crank": 16.41
+  },
+  {
+   "dK": 76.0,
+   "phi": 54.07,
+   "pa_tip": 39.66,
+   "pa_horn": 40.66,
+   "rod_elev_horn": 18.52,
+   "rod_elev_crank": 16.36
+  },
+  {
+   "dK": 76.25,
+   "phi": 54.23,
+   "pa_tip": 39.79,
+   "pa_horn": 40.9,
+   "rod_elev_horn": 18.57,
+   "rod_elev_crank": 16.31
+  },
+  {
+   "dK": 76.5,
+   "phi": 54.39,
+   "pa_tip": 39.92,
+   "pa_horn": 41.14,
+   "rod_elev_horn": 18.62,
+   "rod_elev_crank": 16.27
+  },
+  {
+   "dK": 76.75,
+   "phi": 54.56,
+   "pa_tip": 40.05,
+   "pa_horn": 41.38,
+   "rod_elev_horn": 18.67,
+   "rod_elev_crank": 16.22
+  },
+  {
+   "dK": 77.0,
+   "phi": 54.72,
+   "pa_tip": 40.18,
+   "pa_horn": 41.62,
+   "rod_elev_horn": 18.72,
+   "rod_elev_crank": 16.17
+  },
+  {
+   "dK": 77.25,
+   "phi": 54.88,
+   "pa_tip": 40.31,
+   "pa_horn": 41.86,
+   "rod_elev_horn": 18.76,
+   "rod_elev_crank": 16.12
+  },
+  {
+   "dK": 77.5,
+   "phi": 55.05,
+   "pa_tip": 40.44,
+   "pa_horn": 42.1,
+   "rod_elev_horn": 18.81,
+   "rod_elev_crank": 16.08
+  },
+  {
+   "dK": 77.75,
+   "phi": 55.21,
+   "pa_tip": 40.57,
+   "pa_horn": 42.34,
+   "rod_elev_horn": 18.86,
+   "rod_elev_crank": 16.03
+  },
+  {
+   "dK": 78.0,
+   "phi": 55.37,
+   "pa_tip": 40.7,
+   "pa_horn": 42.58,
+   "rod_elev_horn": 18.9,
+   "rod_elev_crank": 15.98
+  },
+  {
+   "dK": 78.25,
+   "phi": 55.53,
+   "pa_tip": 40.83,
+   "pa_horn": 42.82,
+   "rod_elev_horn": 18.95,
+   "rod_elev_crank": 15.93
+  },
+  {
+   "dK": 78.5,
+   "phi": 55.69,
+   "pa_tip": 40.96,
+   "pa_horn": 43.07,
+   "rod_elev_horn": 19.0,
+   "rod_elev_crank": 15.89
+  },
+  {
+   "dK": 78.75,
+   "phi": 55.85,
+   "pa_tip": 41.1,
+   "pa_horn": 43.31,
+   "rod_elev_horn": 19.04,
+   "rod_elev_crank": 15.84
+  },
+  {
+   "dK": 79.0,
+   "phi": 56.02,
+   "pa_tip": 41.23,
+   "pa_horn": 43.55,
+   "rod_elev_horn": 19.09,
+   "rod_elev_crank": 15.79
+  },
+  {
+   "dK": 79.25,
+   "phi": 56.18,
+   "pa_tip": 41.36,
+   "pa_horn": 43.79,
+   "rod_elev_horn": 19.14,
+   "rod_elev_crank": 15.75
+  },
+  {
+   "dK": 79.5,
+   "phi": 56.34,
+   "pa_tip": 41.49,
+   "pa_horn": 44.03,
+   "rod_elev_horn": 19.18,
+   "rod_elev_crank": 15.7
+  },
+  {
+   "dK": 79.75,
+   "phi": 56.5,
+   "pa_tip": 41.63,
+   "pa_horn": 44.28,
+   "rod_elev_horn": 19.23,
+   "rod_elev_crank": 15.66
+  },
+  {
+   "dK": 80.0,
+   "phi": 56.66,
+   "pa_tip": 41.76,
+   "pa_horn": 44.52,
+   "rod_elev_horn": 19.27,
+   "rod_elev_crank": 15.61
+  },
+  {
+   "dK": 80.25,
+   "phi": 56.81,
+   "pa_tip": 41.89,
+   "pa_horn": 44.76,
+   "rod_elev_horn": 19.32,
+   "rod_elev_crank": 15.56
+  },
+  {
+   "dK": 80.5,
+   "phi": 56.97,
+   "pa_tip": 42.03,
+   "pa_horn": 45.01,
+   "rod_elev_horn": 19.36,
+   "rod_elev_crank": 15.52
+  },
+  {
+   "dK": 80.75,
+   "phi": 57.13,
+   "pa_tip": 42.16,
+   "pa_horn": 45.25,
+   "rod_elev_horn": 19.41,
+   "rod_elev_crank": 15.47
+  },
+  {
+   "dK": 81.0,
+   "phi": 57.29,
+   "pa_tip": 42.29,
+   "pa_horn": 45.49,
+   "rod_elev_horn": 19.45,
+   "rod_elev_crank": 15.43
+  },
+  {
+   "dK": 81.25,
+   "phi": 57.45,
+   "pa_tip": 42.43,
+   "pa_horn": 45.74,
+   "rod_elev_horn": 19.5,
+   "rod_elev_crank": 15.38
+  },
+  {
+   "dK": 81.5,
+   "phi": 57.61,
+   "pa_tip": 42.56,
+   "pa_horn": 45.98,
+   "rod_elev_horn": 19.54,
+   "rod_elev_crank": 15.34
+  },
+  {
+   "dK": 81.75,
+   "phi": 57.76,
+   "pa_tip": 42.7,
+   "pa_horn": 46.23,
+   "rod_elev_horn": 19.59,
+   "rod_elev_crank": 15.29
+  },
+  {
+   "dK": 82.0,
+   "phi": 57.92,
+   "pa_tip": 42.83,
+   "pa_horn": 46.47,
+   "rod_elev_horn": 19.63,
+   "rod_elev_crank": 15.25
+  },
+  {
+   "dK": 82.25,
+   "phi": 58.08,
+   "pa_tip": 42.97,
+   "pa_horn": 46.71,
+   "rod_elev_horn": 19.68,
+   "rod_elev_crank": 15.2
+  },
+  {
+   "dK": 82.5,
+   "phi": 58.23,
+   "pa_tip": 43.1,
+   "pa_horn": 46.96,
+   "rod_elev_horn": 19.72,
+   "rod_elev_crank": 15.16
+  },
+  {
+   "dK": 82.75,
+   "phi": 58.39,
+   "pa_tip": 43.24,
+   "pa_horn": 47.2,
+   "rod_elev_horn": 19.76,
+   "rod_elev_crank": 15.11
+  },
+  {
+   "dK": 83.0,
+   "phi": 58.54,
+   "pa_tip": 43.37,
+   "pa_horn": 47.45,
+   "rod_elev_horn": 19.81,
+   "rod_elev_crank": 15.07
+  },
+  {
+   "dK": 83.25,
+   "phi": 58.7,
+   "pa_tip": 43.51,
+   "pa_horn": 47.69,
+   "rod_elev_horn": 19.85,
+   "rod_elev_crank": 15.02
+  },
+  {
+   "dK": 83.5,
+   "phi": 58.85,
+   "pa_tip": 43.64,
+   "pa_horn": 47.94,
+   "rod_elev_horn": 19.89,
+   "rod_elev_crank": 14.98
+  },
+  {
+   "dK": 83.75,
+   "phi": 59.01,
+   "pa_tip": 43.78,
+   "pa_horn": 48.19,
+   "rod_elev_horn": 19.94,
+   "rod_elev_crank": 14.94
+  },
+  {
+   "dK": 84.0,
+   "phi": 59.16,
+   "pa_tip": 43.92,
+   "pa_horn": 48.43,
+   "rod_elev_horn": 19.98,
+   "rod_elev_crank": 14.89
+  },
+  {
+   "dK": 84.25,
+   "phi": 59.31,
+   "pa_tip": 44.05,
+   "pa_horn": 48.68,
+   "rod_elev_horn": 20.02,
+   "rod_elev_crank": 14.85
+  },
+  {
+   "dK": 84.5,
+   "phi": 59.47,
+   "pa_tip": 44.19,
+   "pa_horn": 48.92,
+   "rod_elev_horn": 20.07,
+   "rod_elev_crank": 14.8
+  },
+  {
+   "dK": 84.75,
+   "phi": 59.62,
+   "pa_tip": 44.32,
+   "pa_horn": 49.17,
+   "rod_elev_horn": 20.11,
+   "rod_elev_crank": 14.76
+  },
+  {
+   "dK": 85.0,
+   "phi": 59.77,
+   "pa_tip": 44.46,
+   "pa_horn": 49.42,
+   "rod_elev_horn": 20.15,
+   "rod_elev_crank": 14.72
+  },
+  {
+   "dK": 85.25,
+   "phi": 59.92,
+   "pa_tip": 44.6,
+   "pa_horn": 49.66,
+   "rod_elev_horn": 20.19,
+   "rod_elev_crank": 14.67
+  },
+  {
+   "dK": 85.5,
+   "phi": 60.07,
+   "pa_tip": 44.73,
+   "pa_horn": 49.91,
+   "rod_elev_horn": 20.23,
+   "rod_elev_crank": 14.63
+  },
+  {
+   "dK": 85.75,
+   "phi": 60.22,
+   "pa_tip": 44.87,
+   "pa_horn": 50.16,
+   "rod_elev_horn": 20.28,
+   "rod_elev_crank": 14.59
+  },
+  {
+   "dK": 86.0,
+   "phi": 60.37,
+   "pa_tip": 45.01,
+   "pa_horn": 50.41,
+   "rod_elev_horn": 20.32,
+   "rod_elev_crank": 14.55
+  },
+  {
+   "dK": 86.25,
+   "phi": 60.52,
+   "pa_tip": 45.15,
+   "pa_horn": 50.65,
+   "rod_elev_horn": 20.36,
+   "rod_elev_crank": 14.5
+  },
+  {
+   "dK": 86.5,
+   "phi": 60.67,
+   "pa_tip": 45.28,
+   "pa_horn": 50.9,
+   "rod_elev_horn": 20.4,
+   "rod_elev_crank": 14.46
+  }
+ ],
+ "sph4r": {
+  "dK_lim_pa42": 78.5,
+  "coupler_arc_deg": 36.83,
+  "rows": [
+   {
+    "dK": 0.0,
+    "phi": -0.0,
+    "pa_tip": 20.86,
+    "pa_horn": 33.57
+   },
+   {
+    "dK": 2.0,
+    "phi": 1.32,
+    "pa_tip": 19.84,
+    "pa_horn": 31.72
+   },
+   {
+    "dK": 4.0,
+    "phi": 2.66,
+    "pa_tip": 18.79,
+    "pa_horn": 29.87
+   },
+   {
+    "dK": 6.0,
+    "phi": 4.02,
+    "pa_tip": 17.71,
+    "pa_horn": 28.01
+   },
+   {
+    "dK": 8.0,
+    "phi": 5.4,
+    "pa_tip": 16.6,
+    "pa_horn": 26.14
+   },
+   {
+    "dK": 10.0,
+    "phi": 6.78,
+    "pa_tip": 15.46,
+    "pa_horn": 24.26
+   },
+   {
+    "dK": 12.0,
+    "phi": 8.18,
+    "pa_tip": 14.3,
+    "pa_horn": 22.38
+   },
+   {
+    "dK": 14.0,
+    "phi": 9.59,
+    "pa_tip": 13.11,
+    "pa_horn": 20.49
+   },
+   {
+    "dK": 16.0,
+    "phi": 11.02,
+    "pa_tip": 11.9,
+    "pa_horn": 18.59
+   },
+   {
+    "dK": 18.0,
+    "phi": 12.45,
+    "pa_tip": 10.67,
+    "pa_horn": 16.7
+   },
+   {
+    "dK": 20.0,
+    "phi": 13.89,
+    "pa_tip": 9.42,
+    "pa_horn": 14.79
+   },
+   {
+    "dK": 22.0,
+    "phi": 15.34,
+    "pa_tip": 8.14,
+    "pa_horn": 12.88
+   },
+   {
+    "dK": 24.0,
+    "phi": 16.79,
+    "pa_tip": 6.85,
+    "pa_horn": 10.97
+   },
+   {
+    "dK": 26.0,
+    "phi": 18.25,
+    "pa_tip": 5.54,
+    "pa_horn": 9.06
+   },
+   {
+    "dK": 28.0,
+    "phi": 19.71,
+    "pa_tip": 4.22,
+    "pa_horn": 7.14
+   },
+   {
+    "dK": 30.0,
+    "phi": 21.18,
+    "pa_tip": 2.88,
+    "pa_horn": 5.22
+   },
+   {
+    "dK": 32.0,
+    "phi": 22.65,
+    "pa_tip": 1.52,
+    "pa_horn": 3.29
+   },
+   {
+    "dK": 34.0,
+    "phi": 24.13,
+    "pa_tip": 0.15,
+    "pa_horn": 1.36
+   },
+   {
+    "dK": 36.0,
+    "phi": 25.6,
+    "pa_tip": 1.23,
+    "pa_horn": 0.56
+   },
+   {
+    "dK": 38.0,
+    "phi": 27.07,
+    "pa_tip": 2.62,
+    "pa_horn": 2.5
+   },
+   {
+    "dK": 40.0,
+    "phi": 28.55,
+    "pa_tip": 4.03,
+    "pa_horn": 4.43
+   },
+   {
+    "dK": 42.0,
+    "phi": 30.02,
+    "pa_tip": 5.44,
+    "pa_horn": 6.37
+   },
+   {
+    "dK": 44.0,
+    "phi": 31.49,
+    "pa_tip": 6.86,
+    "pa_horn": 8.3
+   },
+   {
+    "dK": 46.0,
+    "phi": 32.96,
+    "pa_tip": 8.29,
+    "pa_horn": 10.24
+   },
+   {
+    "dK": 48.0,
+    "phi": 34.42,
+    "pa_tip": 9.73,
+    "pa_horn": 12.18
+   },
+   {
+    "dK": 50.0,
+    "phi": 35.88,
+    "pa_tip": 11.18,
+    "pa_horn": 14.13
+   },
+   {
+    "dK": 52.0,
+    "phi": 37.33,
+    "pa_tip": 12.63,
+    "pa_horn": 16.07
+   },
+   {
+    "dK": 54.0,
+    "phi": 38.78,
+    "pa_tip": 14.09,
+    "pa_horn": 18.02
+   },
+   {
+    "dK": 56.0,
+    "phi": 40.22,
+    "pa_tip": 15.55,
+    "pa_horn": 19.97
+   },
+   {
+    "dK": 58.0,
+    "phi": 41.65,
+    "pa_tip": 17.02,
+    "pa_horn": 21.92
+   },
+   {
+    "dK": 60.0,
+    "phi": 43.08,
+    "pa_tip": 18.49,
+    "pa_horn": 23.88
+   },
+   {
+    "dK": 62.0,
+    "phi": 44.5,
+    "pa_tip": 19.96,
+    "pa_horn": 25.83
+   },
+   {
+    "dK": 64.0,
+    "phi": 45.9,
+    "pa_tip": 21.44,
+    "pa_horn": 27.79
+   },
+   {
+    "dK": 66.0,
+    "phi": 47.3,
+    "pa_tip": 22.91,
+    "pa_horn": 29.76
+   },
+   {
+    "dK": 68.0,
+    "phi": 48.68,
+    "pa_tip": 24.39,
+    "pa_horn": 31.72
+   },
+   {
+    "dK": 70.0,
+    "phi": 50.05,
+    "pa_tip": 25.86,
+    "pa_horn": 33.7
+   },
+   {
+    "dK": 72.0,
+    "phi": 51.4,
+    "pa_tip": 27.33,
+    "pa_horn": 35.67
+   },
+   {
+    "dK": 74.0,
+    "phi": 52.74,
+    "pa_tip": 28.81,
+    "pa_horn": 37.65
+   },
+   {
+    "dK": 76.0,
+    "phi": 54.07,
+    "pa_tip": 30.27,
+    "pa_horn": 39.64
+   },
+   {
+    "dK": 78.0,
+    "phi": 55.37,
+    "pa_tip": 31.74,
+    "pa_horn": 41.64
+   },
+   {
+    "dK": 80.0,
+    "phi": 56.66,
+    "pa_tip": 33.19,
+    "pa_horn": 43.64
+   },
+   {
+    "dK": 82.0,
+    "phi": 57.92,
+    "pa_tip": 34.64,
+    "pa_horn": 45.64
+   },
+   {
+    "dK": 84.0,
+    "phi": 59.16,
+    "pa_tip": 36.09,
+    "pa_horn": 47.66
+   },
+   {
+    "dK": 86.0,
+    "phi": 60.37,
+    "pa_tip": 37.52,
+    "pa_horn": 49.69
+   },
+   {
+    "dK": 88.0,
+    "phi": 61.56,
+    "pa_tip": 38.94,
+    "pa_horn": 51.73
+   },
+   {
+    "dK": 90.0,
+    "phi": 62.72,
+    "pa_tip": 40.36,
+    "pa_horn": 53.78
+   },
+   {
+    "dK": 92.0,
+    "phi": 63.85,
+    "pa_tip": 41.75,
+    "pa_horn": 55.84
+   },
+   {
+    "dK": 94.0,
+    "phi": 64.94,
+    "pa_tip": 43.14,
+    "pa_horn": 57.92
+   },
+   {
+    "dK": 96.0,
+    "phi": 65.99,
+    "pa_tip": 44.5,
+    "pa_horn": 60.01
+   },
+   {
+    "dK": 98.0,
+    "phi": 67.0,
+    "pa_tip": 45.85,
+    "pa_horn": 62.13
+   },
+   {
+    "dK": 100.0,
+    "phi": 67.97,
+    "pa_tip": 47.17,
+    "pa_horn": 64.26
+   }
+  ]
+ }
+}

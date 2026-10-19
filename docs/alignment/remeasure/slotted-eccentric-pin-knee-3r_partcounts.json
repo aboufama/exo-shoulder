@@ -1,0 +1,134 @@
+{
+ "id": "slotted-eccentric-pin-knee-3r",
+ "gap": 97.04,
+ "inband14": 0.699,
+ "inband_member": {
+  "hub1": 0.9612,
+  "hub2": 0.8602,
+  "hub3": 0.5519,
+  "pinK": 0.5926,
+  "studG": 0.9737,
+  "link1": 0.9268,
+  "spoke": 0.9228,
+  "trk1": 0.5745,
+  "trk2": 0.9981,
+  "trk3": 1.0,
+  "trk4": 1.0,
+  "trk5": 1.0,
+  "trk6": 1.0,
+  "neck": 0.8173,
+  "crank": 0.3564,
+  "L2b": 0.2261,
+  "armG": 0.7136
+ },
+ "clip_good_poses": 75,
+ "samples_total_cols": 1809,
+ "res_cols": 1809,
+ "parts": {
+  "hub1": {
+   "per_pose": 81,
+   "clip_samples": 6075,
+   "ib14": 0.9612,
+   "median_mm": 10.5
+  },
+  "hub2": {
+   "per_pose": 81,
+   "clip_samples": 6075,
+   "ib14": 0.8602,
+   "median_mm": 11.99
+  },
+  "hub3": {
+   "per_pose": 81,
+   "clip_samples": 6075,
+   "ib14": 0.5519,
+   "median_mm": 13.43
+  },
+  "pinK": {
+   "per_pose": 197,
+   "clip_samples": 14775,
+   "ib14": 0.5926,
+   "median_mm": 13.64
+  },
+  "studG": {
+   "per_pose": 149,
+   "clip_samples": 11175,
+   "ib14": 0.9737,
+   "median_mm": 9.54
+  },
+  "link1": {
+   "per_pose": 217,
+   "clip_samples": 16275,
+   "ib14": 0.9268,
+   "median_mm": 8.84
+  },
+  "spoke": {
+   "per_pose": 105,
+   "clip_samples": 7875,
+   "ib14": 0.9228,
+   "median_mm": 8.2
+  },
+  "trk1": {
+   "per_pose": 35,
+   "clip_samples": 2625,
+   "ib14": 0.5745,
+   "median_mm": 12.34
+  },
+  "trk2": {
+   "per_pose": 35,
+   "clip_samples": 2625,
+   "ib14": 0.9981,
+   "median_mm": 4.08
+  },
+  "trk3": {
+   "per_pose": 35,
+   "clip_samples": 2625,
+   "ib14": 1.0,
+   "median_mm": 5.69
+  },
+  "trk4": {
+   "per_pose": 35,
+   "clip_samples": 2625,
+   "ib14": 1.0,
+   "median_mm": 6.22
+  },
+  "trk5": {
+   "per_pose": 35,
+   "clip_samples": 2625,
+   "ib14": 1.0,
+   "median_mm": 6.01
+  },
+  "trk6": {
+   "per_pose": 35,
+   "clip_samples": 2625,
+   "ib14": 1.0,
+   "median_mm": 6.62
+  },
+  "neck": {
+   "per_pose": 168,
+   "clip_samples": 12600,
+   "ib14": 0.8173,
+   "median_mm": 8.88
+  },
+  "crank": {
+   "per_pose": 105,
+   "clip_samples": 7875,
+   "ib14": 0.3564,
+   "median_mm": 14.77
+  },
+  "L2b": {
+   "per_pose": 315,
+   "clip_samples": 23625,
+   "ib14": 0.2261,
+   "median_mm": 16.63
+  },
+  "armG": {
+   "per_pose": 100,
+   "clip_samples": 7500,
+   "ib14": 0.7136,
+   "median_mm": 12.71
+  }
+ },
+ "sample_weighted": 0.699,
+ "part_weighted": 0.7927,
+ "zero_sample_parts": []
+}

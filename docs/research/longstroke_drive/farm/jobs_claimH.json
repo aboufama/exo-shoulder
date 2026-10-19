@@ -1,0 +1,26 @@
+[
+ {
+  "tag": "ls-claimH-k27b_bench",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm/claimH && python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py claims '[{\"tag\": \"k27b_bench\", \"drive\": \"rssr\", \"mode\": \"frozen\", \"params\": {\"La\": 22.8723, \"s_arm\": 4.0, \"r_h\": 15.9448, \"beta\": -149.8132, \"gam\": 29.1695, \"hl\": 2.27, \"zr\": 1.5851, \"kK\": 2.7, \"r_lobe\": 8.4846, \"bk1\": 28.7724, \"bk2\": 41.9799, \"a1max\": 60.8797, \"smhi\": 13.4632}}]' docs/research/longstroke_drive/farm/claimH > docs/research/longstroke_drive/farm/claimH/k27b_bench.run.log 2>&1; tail -2 docs/research/longstroke_drive/farm/claimH/k27b_bench.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/claimH/k27b_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1"
+  },
+  "timeout": 3600
+ },
+ {
+  "tag": "ls-claimH-k27b_held",
+  "cmd": "mkdir -p docs/research/longstroke_drive/farm/claimH && python3 docs/concepts/models/longstroke-slipper-knuckle-3r.py claims '[{\"tag\": \"k27b_held\", \"drive\": \"rssr\", \"mode\": \"held\", \"params\": {\"La\": 22.8723, \"s_arm\": 4.0, \"r_h\": 15.9448, \"beta\": -149.8132, \"gam\": 29.1695, \"hl\": 2.27, \"zr\": 1.5851, \"kK\": 2.7, \"r_lobe\": 8.4846, \"bk1\": 28.7724, \"bk2\": 41.9799, \"a1max\": 60.8797, \"smhi\": 13.4632}}]' docs/research/longstroke_drive/farm/claimH > docs/research/longstroke_drive/farm/claimH/k27b_held.run.log 2>&1; tail -2 docs/research/longstroke_drive/farm/claimH/k27b_held.log",
+  "out": [
+   "docs/research/longstroke_drive/farm/claimH/k27b_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1"
+  },
+  "timeout": 3600
+ }
+]

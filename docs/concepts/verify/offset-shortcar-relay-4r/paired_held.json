@@ -1,0 +1,94 @@
+{
+ "mine": {
+  "gap": 16.63,
+  "reach": 0.7773,
+  "follow": 1.0,
+  "inband14": 0.9123,
+  "contact": 0.0437,
+  "n_ws": 952,
+  "n_clip": 202,
+  "ws_taken": 740,
+  "contact_poses": 43
+ },
+ "proxtrack-buildable-held": {
+  "gap_A": 16.63,
+  "gap_B": 18.37,
+  "diff": -1.73,
+  "split": {
+   "reach": -0.84,
+   "follow": 0.0,
+   "inband": -0.47,
+   "contact": -0.43
+  },
+  "discordant": {
+   "ws_taken_A_only": 8,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 0,
+   "contact_B_only": 4,
+   "contact_both": 43
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -2.91,
+    -0.81
+   ],
+   "sd": 0.65,
+   "p_A_better": 1.0
+  }
+ },
+ "conecut-knee-knuckle-3r": {
+  "gap_A": 16.63,
+  "gap_B": 22.38,
+  "diff": -5.74,
+  "split": {
+   "reach": -8.51,
+   "follow": 0.0,
+   "inband": -0.0,
+   "contact": 2.77
+  },
+  "discordant": {
+   "ws_taken_A_only": 81,
+   "ws_taken_B_only": 0,
+   "contact_A_only": 29,
+   "contact_B_only": 0,
+   "contact_both": 14
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -7.9,
+    -4.14
+   ],
+   "sd": 1.15,
+   "p_A_better": 1.0
+  }
+ },
+ "freek-oracle-route-knuckle-4r": {
+  "gap_A": 16.63,
+  "gap_B": 21.89,
+  "diff": -5.26,
+  "split": {
+   "reach": -4.2,
+   "follow": 0.0,
+   "inband": -0.43,
+   "contact": -0.63
+  },
+  "discordant": {
+   "ws_taken_A_only": 61,
+   "ws_taken_B_only": 21,
+   "contact_A_only": 29,
+   "contact_B_only": 33,
+   "contact_both": 14
+  },
+  "boot": {
+   "n": 4000,
+   "ci90": [
+    -8.49,
+    -2.96
+   ],
+   "sd": 1.68,
+   "p_A_better": 1.0
+  }
+ }
+}

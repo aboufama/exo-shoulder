@@ -1,0 +1,104 @@
+[
+ {
+  "tag": "sk4r-skinnormal-bench",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py fit60 bench docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_skinnormal.json docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_skinnormal_fit60_bench.json > docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_skinnormal_fit60_bench.log 2>&1; tail -1 docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_skinnormal_fit60_bench.log",
+  "include": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_skinnormal.json"
+  ],
+  "out": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_skinnormal_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3600
+ },
+ {
+  "tag": "sk4r-skinnormal-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py fit60 held docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_skinnormal.json docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_skinnormal_fit60_held.json > docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_skinnormal_fit60_held.log 2>&1; tail -1 docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_skinnormal_fit60_held.log",
+  "include": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_skinnormal.json"
+  ],
+  "out": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_skinnormal_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3600
+ },
+ {
+  "tag": "sk4r-stopb80-bench",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py fit60 bench docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_stopb80.json docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_stopb80_fit60_bench.json > docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_stopb80_fit60_bench.log 2>&1; tail -1 docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_stopb80_fit60_bench.log",
+  "include": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_stopb80.json"
+  ],
+  "out": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_stopb80_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3600
+ },
+ {
+  "tag": "sk4r-stopb80-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py fit60 held docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_stopb80.json docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_stopb80_fit60_held.json > docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_stopb80_fit60_held.log 2>&1; tail -1 docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_stopb80_fit60_held.log",
+  "include": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_stopb80.json"
+  ],
+  "out": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_stopb80_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3600
+ },
+ {
+  "tag": "sk4r-earlystop-bench",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py fit60 bench docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_earlystop.json docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_earlystop_fit60_bench.json > docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_earlystop_fit60_bench.log 2>&1; tail -1 docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_earlystop_fit60_bench.log",
+  "include": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_earlystop.json"
+  ],
+  "out": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_earlystop_fit60_bench*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3600
+ },
+ {
+  "tag": "sk4r-earlystop-held",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && python3 docs/concepts/verify/minarc-final-polish-verify.py fit60 held docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_earlystop.json docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_earlystop_fit60_held.json > docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_earlystop_fit60_held.log 2>&1; tail -1 docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_earlystop_fit60_held.log",
+  "include": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/seed_earlystop.json"
+  ],
+  "out": [
+   "docs/concepts/verify/skinnormal-shortk-knuckle-4r/v_earlystop_fit60_held*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3600
+ }
+]

@@ -1,0 +1,373 @@
+{
+ "step": 3,
+ "tol_mm": 0.15,
+ "frames_checked": 451,
+ "pairs": 3798,
+ "seconds": 214,
+ "setup_seconds": 14,
+ "jobs": 4,
+ "cpu_seconds": 336,
+ "cpu_s_per_frame": 0.714,
+ "violations": {
+  "l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)  IN  l2|drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 116.7 deg, r 6.30..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)": {
+   "max_depth": 0.65,
+   "frames": 451,
+   "worst": [
+    "Raise overhead",
+    36
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|36": 0.65,
+    "Raise overhead|144": 0.65,
+    "Raise overhead|72": 0.57,
+    "Raise overhead|108": 0.57,
+    "Raise overhead|75": 0.56,
+    "Raise overhead|78": 0.56,
+    "Raise overhead|81": 0.56,
+    "Raise overhead|84": 0.56,
+    "Raise overhead|87": 0.56,
+    "Raise overhead|90": 0.56,
+    "Raise overhead|93": 0.56,
+    "Raise overhead|96": 0.56
+   }
+  },
+  "l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)  IN  l2|drive cap-ring roof keep-out (the sector over the groove, F+1.61..F+3.65, one with hub 2's upper boss)": {
+   "max_depth": 0.67,
+   "frames": 451,
+   "worst": [
+    "Raise overhead",
+    0
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 0.67,
+    "Raise overhead|3": 0.67,
+    "Raise overhead|6": 0.67,
+    "Raise overhead|9": 0.67,
+    "Raise overhead|12": 0.67,
+    "Raise overhead|15": 0.67,
+    "Raise overhead|18": 0.67,
+    "Raise overhead|21": 0.67,
+    "Raise overhead|24": 0.67,
+    "Raise overhead|27": 0.67,
+    "Raise overhead|30": 0.67,
+    "Raise overhead|33": 0.67
+   }
+  },
+  "l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)  IN  dk|drive crank short arm keep-out (6.8 x 3 x 1.5 Ti, crank axis -> the stage-1 pin at a_s 9.30, top 0.15 + the 0.29 axial drift under the cap ring)": {
+   "max_depth": 0.58,
+   "frames": 451,
+   "worst": [
+    "Wave",
+    162
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|12": 0.58,
+    "Raise overhead|15": 0.58,
+    "Raise overhead|18": 0.58,
+    "Raise overhead|21": 0.58,
+    "Raise overhead|24": 0.58,
+    "Raise overhead|27": 0.58,
+    "Raise overhead|30": 0.58,
+    "Raise overhead|33": 0.58,
+    "Raise overhead|36": 0.58,
+    "Raise overhead|39": 0.58,
+    "Raise overhead|42": 0.58,
+    "Raise overhead|45": 0.58
+   }
+  },
+  "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 116.4 deg of travel + the dowel; its ends = the stops)  IN  l2|drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 116.7 deg, r 6.30..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)": {
+   "max_depth": 0.64,
+   "frames": 451,
+   "worst": [
+    "Raise overhead",
+    0
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 0.64,
+    "Raise overhead|3": 0.64,
+    "Raise overhead|6": 0.64,
+    "Raise overhead|9": 0.64,
+    "Raise overhead|12": 0.64,
+    "Raise overhead|15": 0.64,
+    "Raise overhead|18": 0.64,
+    "Raise overhead|21": 0.64,
+    "Raise overhead|24": 0.64,
+    "Raise overhead|27": 0.64,
+    "Raise overhead|30": 0.64,
+    "Raise overhead|33": 0.64
+   }
+  },
+  "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 116.4 deg of travel + the dowel; its ends = the stops)  IN  l2|drive cap-ring roof keep-out (the sector over the groove, F+1.61..F+3.65, one with hub 2's upper boss)": {
+   "max_depth": 0.89,
+   "frames": 451,
+   "worst": [
+    "Wave",
+    72
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Wave|72": 0.89,
+    "Wave|75": 0.89,
+    "Wave|78": 0.89,
+    "Wave|96": 0.89,
+    "Wave|99": 0.89,
+    "Wave|102": 0.89,
+    "Raise overhead|0": 0.65,
+    "Raise overhead|3": 0.65,
+    "Raise overhead|6": 0.65,
+    "Raise overhead|9": 0.65,
+    "Raise overhead|12": 0.65,
+    "Raise overhead|15": 0.65
+   }
+  },
+  "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 116.4 deg of travel + the dowel; its ends = the stops)  IN  dk|drive stage-1 pin keep-out (ISO 8734 1.5 m6 440C, crowned, pressed through the short arm along u2, 1.11 into the groove, tip 0.10 + the 0.29 axial drift under the roof)": {
+   "max_depth": 0.7,
+   "frames": 451,
+   "worst": [
+    "Wash opposite shoulder",
+    57
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Wash opposite shoulder|51": 0.7,
+    "Wash opposite shoulder|54": 0.7,
+    "Wash opposite shoulder|57": 0.7,
+    "Wash opposite shoulder|60": 0.69,
+    "Reach a high shelf|42": 0.66,
+    "Wash opposite shoulder|48": 0.66,
+    "Raise overhead|9": 0.65,
+    "Raise overhead|171": 0.65,
+    "Drink from a cup|9": 0.65,
+    "Drink from a cup|171": 0.65,
+    "Comb hair|6": 0.65,
+    "Comb hair|162": 0.65
+   }
+  },
+  "l2|drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 116.7 deg, r 6.30..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)  IN  l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)": {
+   "max_depth": 0.84,
+   "frames": 451,
+   "worst": [
+    "Wave",
+    102
+   ],
+   "worst_point": "sharp edge",
+   "per_frame": {
+    "Wave|72": 0.84,
+    "Wave|78": 0.84,
+    "Wave|96": 0.84,
+    "Wave|102": 0.84,
+    "Raise overhead|51": 0.82,
+    "Raise overhead|54": 0.82,
+    "Raise overhead|57": 0.82,
+    "Raise overhead|123": 0.82,
+    "Raise overhead|126": 0.82,
+    "Raise overhead|129": 0.82,
+    "Raise overhead|48": 0.81,
+    "Raise overhead|60": 0.81
+   }
+  },
+  "l2|drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 116.7 deg, r 6.30..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)  IN  l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 116.4 deg of travel + the dowel; its ends = the stops)": {
+   "max_depth": 1.39,
+   "frames": 451,
+   "worst": [
+    "Raise overhead",
+    0
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 1.39,
+    "Raise overhead|3": 1.39,
+    "Raise overhead|6": 1.39,
+    "Raise overhead|9": 1.39,
+    "Raise overhead|12": 1.39,
+    "Raise overhead|15": 1.39,
+    "Raise overhead|18": 1.39,
+    "Raise overhead|21": 1.39,
+    "Raise overhead|24": 1.39,
+    "Raise overhead|27": 1.39,
+    "Raise overhead|30": 1.39,
+    "Raise overhead|33": 1.39
+   }
+  },
+  "l2|drive cap-ring roof keep-out (the sector over the groove, F+1.61..F+3.65, one with hub 2's upper boss)  IN  l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)": {
+   "max_depth": 0.78,
+   "frames": 451,
+   "worst": [
+    "Walking arm swing",
+    108
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Raise overhead|0": 0.78,
+    "Raise overhead|3": 0.78,
+    "Raise overhead|6": 0.78,
+    "Raise overhead|9": 0.78,
+    "Raise overhead|12": 0.78,
+    "Raise overhead|15": 0.78,
+    "Raise overhead|18": 0.78,
+    "Raise overhead|21": 0.78,
+    "Raise overhead|24": 0.78,
+    "Raise overhead|27": 0.78,
+    "Raise overhead|30": 0.78,
+    "Raise overhead|33": 0.78
+   }
+  },
+  "l2|drive cap-ring roof keep-out (the sector over the groove, F+1.61..F+3.65, one with hub 2's upper boss)  IN  l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 116.4 deg of travel + the dowel; its ends = the stops)": {
+   "max_depth": 1.39,
+   "frames": 451,
+   "worst": [
+    "Raise overhead",
+    0
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Raise overhead|0": 1.39,
+    "Raise overhead|3": 1.39,
+    "Raise overhead|6": 1.39,
+    "Raise overhead|9": 1.39,
+    "Raise overhead|12": 1.39,
+    "Raise overhead|15": 1.39,
+    "Raise overhead|18": 1.39,
+    "Raise overhead|21": 1.39,
+    "Raise overhead|24": 1.39,
+    "Raise overhead|27": 1.39,
+    "Raise overhead|30": 1.39,
+    "Raise overhead|33": 1.39
+   }
+  },
+  "dk|drive crank short arm keep-out (6.8 x 3 x 1.5 Ti, crank axis -> the stage-1 pin at a_s 9.30, top 0.15 + the 0.29 axial drift under the cap ring)  IN  l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)": {
+   "max_depth": 0.8,
+   "frames": 451,
+   "worst": [
+    "Drink from a cup",
+    168
+   ],
+   "worst_point": "face",
+   "per_frame": {
+    "Drink from a cup|168": 0.8,
+    "Comb hair|96": 0.8,
+    "Comb hair|114": 0.8,
+    "Comb hair|144": 0.8,
+    "Reach a high shelf|12": 0.8,
+    "Reach a high shelf|27": 0.8,
+    "Wash opposite shoulder|12": 0.8,
+    "Wash opposite shoulder|33": 0.8,
+    "Wash opposite shoulder|159": 0.8,
+    "Reach back pocket|6": 0.8,
+    "Reach back pocket|138": 0.8,
+    "Wave|6": 0.8
+   }
+  },
+  "dk|drive stage-1 pin keep-out (ISO 8734 1.5 m6 440C, crowned, pressed through the short arm along u2, 1.11 into the groove, tip 0.10 + the 0.29 axial drift under the roof)  IN  l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 116.4 deg of travel + the dowel; its ends = the stops)": {
+   "max_depth": 1.48,
+   "frames": 451,
+   "worst": [
+    "Reach a high shelf",
+    75
+   ],
+   "worst_point": "vertex",
+   "per_frame": {
+    "Reach a high shelf|75": 1.48,
+    "Reach a high shelf|78": 1.48,
+    "Reach a high shelf|81": 1.48,
+    "Reach a high shelf|84": 1.48,
+    "Reach a high shelf|87": 1.48,
+    "Reach a high shelf|90": 1.48,
+    "Reach a high shelf|93": 1.48,
+    "Reach a high shelf|96": 1.48,
+    "Reach a high shelf|99": 1.48,
+    "Reach a high shelf|102": 1.48,
+    "Reach a high shelf|69": 1.47,
+    "Reach a high shelf|72": 1.47
+   }
+  }
+ },
+ "open_parts_not_tested_as_container": [],
+ "open_parts": {},
+ "reoriented_parts": [],
+ "samples": {
+  "h_mm": 1.0,
+  "sharp_deg": 30.0,
+  "total": 1024013,
+  "per_part": {
+   "base|J1 upper boss + cap keep-out (O20, F+3.15..F+12.25; base = J1's upper member, carried directly by the scapula handler at the hub ring)": 10498,
+   "l1a|J1 lower plate keep-out (O20 x 3, link 1a)": 6018,
+   "l1a|link 1a strap keep-out (8 x 3 mm Ti, J1 -> K: the full CAD's line/arc chain, climb from J1's skirt + 0.15 on a 60-deg ramp, R2 bends)": 25021,
+   "l1a|K lower plate keep-out (O20 x 3, link 1a) with the K stop slots (an opposed pair) (r 7.75 mm, 3.1 wide, 62.8 deg of travel + the dowel; its ends = the stops)": 11629,
+   "l1b|K stop dowel 1 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)": 1922,
+   "l1b|K stop dowel 2 of 2 (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the K upper boss)": 1922,
+   "l1b|K upper boss + cap keep-out (O20, F+3.15..F+12.25, link 1b: NO clock spring - K is held both ways by the desmo drive, slaved to q2, never read)": 10498,
+   "l1b|link 1b strap keep-out (8 x 3 mm Ti, fitted underside, K -> J2)": 2727,
+   "l1b|J2 lower plate keep-out (O20 x 3, link 1b) with the J2 stop slot (r 7.75 mm, 3.1 wide, 116.4 deg of travel + the dowel; its ends = the stops)": 11213,
+   "l2|J2 stop dowel (ISO 8734 O3 m6 hardened, r 7.75 mm, F+0.5..F+6.15, pressed in the J2 upper boss)": 1922,
+   "l2|J2 upper boss + cap keep-out (O20, F+3.15..F+12.25, link 2; the rotor that carries the drive lobe)": 10498,
+   "l2|link 2 strap keep-out (8 x 3 mm Ti, fitted underside, J2 -> J3)": 6872,
+   "l2|J3 upper boss + cap keep-out (O20, F+4.15..F+12.25, link 2; above the J3 stop groove ring)": 10498,
+   "l2|J3 upper boss groove ring keep-out (O20 x 1, F+3.15..F+4.15, link 2: the J3 stop's arc groove 2.1 wide at r 7.5 over 250.0 deg; its ends = the stops at q3' -111.90 / 122.74 deg)": 11980,
+   "l3|J3 lower plate keep-out (O20 x 3, member 3)": 6018,
+   "l2|drive cap-ring groove layer keep-out (link 2's cap-ring sector on hub 2, 116.7 deg, r 6.30..10.96 (0.96 past O20), F+0.11..F+1.61: the stage-1 groove 1.52 x 1.5 cut through it on the model's blended law, pressed 440C insert)": 14415,
+   "l2|drive cap-ring roof keep-out (the sector over the groove, F+1.61..F+3.65, one with hub 2's upper boss)": 20474,
+   "dk|drive bell crank boss keep-out (O10 x 6 mm, bore O3.2 on the O3 pivot pin, two MR63ZZ 3x6x2.5 inside; underside 66.84 mm from GH = link 1b's highest top under its footprint + 0.15; the model's 63.29)": 4608,
+   "dk|drive bell crank bent arm keep-out (6 x 3 mm Ti: straight run 19.4 mm, tangent arc r_c 16.18 about hub K's axis at radius 63.16 from GH, ending on the tip plate clear of the slot)": 3722,
+   "dk|drive crank tip plate keep-out (7.04 x 3.32 x 2.5 Ti, R0+1.65: the stage-2 slot 1.52 x 3.72 wire-EDM'd through it on the nose's path; closed end = stop A, far end = stop B at dK 46.5)": 1944,
+   "dk|drive crank short arm keep-out (6.8 x 3 x 1.5 Ti, crank axis -> the stage-1 pin at a_s 9.30, top 0.15 + the 0.29 axial drift under the cap ring)": 283,
+   "dk|drive stage-1 pin keep-out (ISO 8734 1.5 m6 440C, crowned, pressed through the short arm along u2, 1.11 into the groove, tip 0.10 + the 0.29 axial drift under the roof)": 642,
+   "l1a|drive nose boss keep-out (link 1a: O5 x 3 Ti radial at the seat C0, r_c 16.18 from hub K's axis, 3.68 outside hub K's O20)": 1154,
+   "l1a|drive nose boss root keep-out (link 1a: 4 x 3 Ti from hub K's rim to the boss)": 549,
+   "l1a|drive nose dowel keep-out (ISO 8734 1.5 x 5 m6 440C, pressed radially in link 1a's boss, C0-1..C0+4.00: runs in the crank's slot, 0.15 under the plate top)": 1794,
+   "l1b|drive crank pivot pin keep-out (O3 h6 hardened, pressed in link 1b's strap 60.1..63.1, through the boss)": 5378,
+   "l1b|drive crank pin clip keep-out (DIN 6799 RS 2.3, O6 x 0.9 over the boss top + 0.15)": 512,
+   "l3|E strap keep-out (8 x 3 mm Ti, fitted underside, hub 3 plate -> pin a, thins to 2.75 at the boss, top capped at the boss top tr+tp under the knee's reach)": 6528,
+   "l3|E boss = pin a lower plate (O12 x 2.75 mm, tr..tr+tp, member 3)": 2434,
+   "l4|knee link keep-out (flat Ti bar 36.4 x 10 x 2.75 mm, pins a, b 6 mm from its ends, tr+tp+0.5)": 4478,
+   "H|arm pad = pin b lower plate (O12 x 2.75 mm, tr..tr+tp, arm-fixed on the cuff)": 2434,
+   "l4|knee stop tooth keep-out (2.4 x 2 mm, hangs 4.75 mm from the knee link top behind pin a; its face meets the E strap's side at knee angle 154.78 deg)": 252,
+   "l4|knee stop web keep-out (knee link level, 2.75 mm, joins the tooth to the knee link's back edge)": 485,
+   "l4|knee link bearing boss a keep-out (O9 x 5.5 mm on the knee link, z0..z0+5.5: 2 x MR63ZZ 3x6x2.5 in a J6 housing with a 0.5 mm shoulder between them; pin a ISO 8734 O3 m6 440C)": 3458,
+   "l4|knee link bearing boss b keep-out (O9 x 5.5 mm on the knee link, z0..z0+5.5: 2 x MR63ZZ 3x6x2.5 in a J6 housing with a 0.5 mm shoulder between them; pin b ISO 8734 O3 m6 440C)": 3458,
+   "l3|pin a retainer keep-out (O6 x 0.9 mm: DIN 6799 RS 2.3 e-clip + pin end over a 0.1 mm shim on the bearing pair; pin a pressed H7/m6 in the E boss)": 642,
+   "H|pin b retainer keep-out (O6 x 0.9 mm: DIN 6799 RS 2.3 e-clip + pin end over a 0.1 mm shim on the bearing pair; pin b pressed H7/m6 in the arm pad)": 642,
+   "l3|J3 stop dowel (ISO 8734 2 m6 x 5, 440C grade, ground to 3.90; pressed in a reamed O2.000 -0.005/0 hole through hub 3's lower plate at r 7.5, F+0.10..F+4.00: 0.85 mm into link 2's groove, tip 0.15 off its floor; stops J3's own angle q3' at -111.90 / 122.74 deg)": 712,
+   "H|pad mount to BOTTOM (proxy) (2.75 mm slab at the pad level, arm pad -> the BOTTOM bar, routed clear of the knee sweep)": 4597,
+   "H|M4 ULTRA LOW PROFILE SOCKET HEAD SCREW, 6mm L, HS STEEL": 9519,
+   "H|BOTTOM (user's bar, cut at s 255, 2x M3 countersunk for the arm-end tongue) + cut square to the arm 19.8 mm distal of pin b, clear of the knee sweep": 326821,
+   "F|FOREARM CUFF": 264978,
+   "F|Hex socket head countersunk screw grade C M4x0.7 x 8": 12234,
+   "H|TOP": 14699,
+   "H|IGUS THRUST WASHER, 30mm ID, 39mm OD, 1.5mm T, IGLIDE J": 10376,
+   "F|MIDDLE": 78680,
+   "H|5mm D, 2.5mm H, N42 MAGNET": 827,
+   "H|CirPattern1[15]": 282,
+   "H|Revolve1[2]": 1988,
+   "H|CirPattern1[11]": 282,
+   "H|Revolve4": 282,
+   "H|CirPattern1[5]": 282,
+   "H|Revolve1[1]": 6974,
+   "H|CirPattern1[7]": 282,
+   "H|CirPattern1[16]": 282,
+   "H|CirPattern1[12]": 282,
+   "H|CirPattern1[14]": 282,
+   "H|CirPattern1[8]": 282,
+   "H|CirPattern1[10]": 282,
+   "H|CirPattern1[4]": 282,
+   "H|Revolve3": 6014,
+   "H|CirPattern1[2]": 282,
+   "H|CirPattern1[9]": 282,
+   "H|Revolve1[3]": 1988,
+   "H|CirPattern1[1]": 282,
+   "H|CirPattern1[6]": 282,
+   "H|CirPattern1[3]": 282,
+   "H|CirPattern1[17]": 282,
+   "H|CirPattern1[13]": 282,
+   "H|UPPER ARM CUFF (conformal G2 shell, AlSi10Mg bead blasted)": 62921,
+   "H|M4x6 ISO 10642 countersunk (upper cuff)": 6087
+  },
+  "rule": "every vertex + sharp/boundary edges at <= h/2 + longest-edge bisection of every face to edges <= h (midpoints)"
+ },
+ "inside": "dense surface samples of A (vertices, sharp edges, faces), both ways; integer winding number on welded tessellations (judge/sdist.py grid + segment crossings), depth = exact distance to B's closest point (libigl AABB)",
+ "max_depth": 1.48
+}

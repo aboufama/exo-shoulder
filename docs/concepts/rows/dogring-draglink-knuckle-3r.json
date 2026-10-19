@@ -1,0 +1,151 @@
+{
+ "id": "dogring-draglink-knuckle-3r",
+ "name": "Dog-ring drag-link knuckle: link 2's root flank turns a dog sector on hub 2 (skin-face layer), Ti arm up-joggled over link 1b, spherical drag link to a horn on hub K's housing above link 1b",
+ "lens": "round11:coupler-longstroke (lens 1; merged dogring-equidyad-knuckle-3r, the 38/42 cell)",
+ "family": "slaved-knuckle 3R (lead family with the free pin knee), long K dyad, positive linkage drive with a coaxial lost-motion dwell",
+ "active_dof": 3,
+ "passive_dof": 6,
+ "passive_translations": 0,
+ "status": "refuted",
+ "t_ideated": null,
+ "t_screened": "2026-10-17T10:41:52Z",
+ "reach": 0.7875,
+ "follow": 0.95,
+ "inband14": 0.8723,
+ "inband10": 0.5234,
+ "contact": 0.0317,
+ "gap": 17.19,
+ "v_reach": 0.3472,
+ "v_follow": 0.6,
+ "v_inband14": 0.8695,
+ "v_inband10": 0.4992,
+ "v_gap": 97.83,
+ "n_configs": 1448,
+ "self_frozen": {
+  "bench": "Bench(110,360) exact, frozen (fit Bench(60,160) fast)",
+  "gap": 22.64,
+  "score": 91.77,
+  "reach": 0.7333,
+  "follow": 1.0,
+  "inband14": 0.8638,
+  "inband10": 0.5198,
+  "contact": 0.0235,
+  "overhead": "8/28",
+  "held": {
+   "gap": 25.36,
+   "reach": 0.7038,
+   "inband14": 0.8617,
+   "contact": 0.0191,
+   "overhead": "19/71"
+  },
+  "near1": 31.89,
+  "near2": 53.61,
+  "min_metal_mm": 0.06,
+  "contact_depth": {
+   "n": 9,
+   "sum_mm": 26.11,
+   "max_mm": 10.92
+  },
+  "th_margin": {
+   "min": 5.389,
+   "lt5": 0,
+   "n": 374
+  },
+  "ghost_same_law": 18.03,
+  "drive_pooled_ib14_delta_fast": -0.0478,
+  "gate_A_law_only": "273/360, held 687/952 (target 282 / 720)",
+  "gate_B": "fails: pooled drive delta -0.048 vs >= -0.02; hub K clearance 6.6 mm passes"
+ },
+ "best_fast": {
+  "k": 1275,
+  "gap": 16.57,
+  "params": {
+   "dr_a1": 26.446,
+   "dr_t1": 3.235,
+   "dr_a3": 17.823,
+   "dr_t3": -54.554,
+   "bk1": 34.0,
+   "bk2": 46.0,
+   "a1max": 74.5,
+   "smhi": 19.659,
+   "root_off": -70.77,
+   "dl_a": 1,
+   "dl_h": -1,
+   "dl_lift": 0,
+   "dr_hl": 7.46,
+   "ring_layer": 0,
+   "dr_zr": 0.018,
+   "arm_up": 1,
+   "sector_gap": 0.599
+  },
+  "note": "fast-best is not the claim: gen-8 fast 16.87 froze at 24.34"
+ },
+ "best_params": {
+  "dr_a1": 26.324,
+  "dr_t1": 3.687,
+  "dr_a3": 17.707,
+  "dr_t3": -43.936,
+  "bk1": 34.0,
+  "bk2": 46.0,
+  "a1max": 74.5,
+  "smhi": 20.132,
+  "root_off": -59.3,
+  "dl_a": 1,
+  "dl_h": -1,
+  "dl_lift": 0,
+  "dr_hl": 7.715,
+  "ring_layer": 0,
+  "dr_zr": 0,
+  "arm_up": 1
+ },
+ "verdict": "REFUTED: v_gap 97.83 vs champion 75.94 (score) on Bench(110,360) exact. The claimed 22.64 holds only because the dog arm is never checked against link 1b: it overlaps link 1b's root ramp (-0.18 mm) on every K-open pose. Before that: screened - does not beat the lead (frozen exact 22.64 vs 18.49, held 25.36 vs 23.45): the coaxial dog drive works (PA <= 42, no lobe / follower / sliding pair, 0 passive translations, strict fold margin >= 5 on every taken pose) and its law alone is worth 18.03 (ghost), but its metal costs +4.61 gap - pooled in-band -0.035..-0.048 (gate B needs >= -0.02), +2 contacts",
+ "limiter": "drive metal layering, measured by the bench itself: the horn must ride above link 1b's root on hub K's housing (4R with PA <= 42 to K >= 60 exists only with the horn at t3 in [-110, +35] deg from link 1b, so K's swing crosses link 1b's root band; horn 0.227 in band at 16.8 mm), drag link 0.68, sector 0.90 in band but in 5 of 9 frozen contacts; reach wall = 4R table end (PA) + m3e: law-only 273/360, high-gain arms (279) turn stretched poses into contacts (29.84 frozen, 26 contacts)",
+ "note": "gate: gain over 2nd half 1.21 pts, last third 1.12 pts, top-5 spread 0.11 pts -> NOT converged (screened, not dead). 4R synthesised per cell on the fitted u2/uK (judge's seeds fail PA at K=0 on this fit). Spec corrections: the spec's ring at link 1b top + 0.15 is link 2's root layer at hub 2 (honest stacked control: f2 + 6.3, -0.0665 pooled); link 2's root flank is the dog; arm up-joggle ahead of the lug face. Simplicity record (docs/SIMPLICITY.md): prot 6, bodies 6, joints 9, loops 3, sliding 0, rolling 0, springs 1, custom 3 (sector, arm, drag link) + horn lug, catalogue 2 x MR117 per hub + 4 x MR63ZZ, cuff_knee as the lead. | REFUTED 2026-10-17T11:39:34Z (independent verifier, Bench(110,360) exact frozen, harness docs/concepts/verify/dogring-draglink-knuckle-3r.py): the claim reproduces (22.64, held 25.36), but its Ti arm is never checked against link 1b per pose (the parent's collide has no CRK-L1b pair, and the design-stage 'stacked over link 1b' level is read at phi 0 at the link-1b point nearest the arm's centreline). As the dog turns the ring (phi up to -31.5 deg), the arm sweeps over link 1b's root ramp at r 15.2 mm from J2's axis: plate clearance -0.18 mm (overlap) on every K-open pose with K >= 3.2 deg (183 of 374 bench taken, 442 of 872 held out); at rest it is 0.5 mm, under the 1 mm rule the model applies to the horn vs link 1b. Dropping the 183 poses gives v_gap 97.83 (score 64.43; reach 0.3472, follow 0.60, ib14 0.8695, contact 0.045, overhead 4/28), held 101.1. Champion same bench 75.94 (risley-turret verifier; the added checks touch only the K drive, which the plain 3R does not have). Passed: dog closure 0.000 mm, drag-link closure 0.0001 mm, the claim's own RING-L2 re-instated (Frozen.fit did not copy _dogg / _L2ring, so it was silently skipped on every frozen bench; 0 poses lost once on), arm root vs link 2 clear, fold margin >= 5.19. The morphology is not dead: lifting the arm >= 1 mm above link 1b's root ramp over the whole swing (or routing it beside link 1b) is the repair, at an in-band cost that is not yet measured.",
+ "doc": "docs/concepts/dogring-draglink-knuckle-3r.md",
+ "model_file": "docs/concepts/models/dogring-draglink-knuckle-3r.py",
+ "v_contact": 0.045,
+ "champion_same_bench": 75.94,
+ "verification": {
+  "t": "2026-10-17T11:39:34Z",
+  "harness": "docs/concepts/verify/dogring-draglink-knuckle-3r.py",
+  "bench": "Bench(110,360) exact, frozen (fit Bench(60,160) fast), local CPU",
+  "reproduced": {
+   "bench": 22.64,
+   "held": 25.36
+  },
+  "corrected": {
+   "gap": 97.83,
+   "score": 64.43,
+   "reach": 0.3472,
+   "follow": 0.6,
+   "inband14": 0.8695,
+   "inband10": 0.4992,
+   "contact": 0.045,
+   "overhead": "4/28"
+  },
+  "corrected_held": {
+   "gap": 101.1,
+   "reach": 0.3277,
+   "follow": 0.5842,
+   "inband14": 0.8651,
+   "contact": 0.038,
+   "overhead": "13/71"
+  },
+  "failing": {
+   "bench": "183 of 374 taken (every K-open pose with K 3.2-44.0 deg)",
+   "held": "442 of 872 (K 3.1-45.7)",
+   "reason": "arm (member 9) vs link 1b < 0.15 mm, min -0.18 mm (overlap) at r 15.2 mm from J2's axis"
+  },
+  "strict_1mm": "374 of 374 bench taken poses under 1 mm (rest 0.5 mm): the family's collide() holds the horn-link 1b pair (also adjacent, through K) to 1 mm",
+  "passed": [
+   "dog closure 0.000 mm on 200 K-open poses; link 2 never inside the sector at rest (max -0.06 mm)",
+   "drag-link closure 0.0001 mm",
+   "RING-L2 re-instated in the worn bench: 0 poses lost",
+   "arm root vs link 2: never within 8 mm",
+   "sector vs link 1b >= 2.54 mm (plate rule)",
+   "own-state fold margin min 5.389 (held 5.189), none < 5",
+   "3 active DOF, 0 passive translations, no undetermined coordinate"
+  ],
+  "champion_same_bench": 75.94
+ }
+}

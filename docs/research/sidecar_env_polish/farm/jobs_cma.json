@@ -1,0 +1,135 @@
+[
+ {
+  "tag": "scp-s1",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py cma --x0 '{}' --label scp-s1 --out docs/research/sidecar_env_polish/farm/cma_scp-s1.json --sigma 0.3 --popsize 8 --jobs 2 --max-evals 640 --budget-s 2400 --patience 12 --seed 1 > docs/research/sidecar_env_polish/farm/cma_scp-s1.log 2>&1; tail -3 docs/research/sidecar_env_polish/farm/cma_scp-s1.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/cma_scp-s1*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scp-s2",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py cma --x0 '{}' --label scp-s2 --out docs/research/sidecar_env_polish/farm/cma_scp-s2.json --sigma 0.3 --popsize 8 --jobs 2 --max-evals 640 --budget-s 2400 --patience 12 --seed 2 > docs/research/sidecar_env_polish/farm/cma_scp-s2.log 2>&1; tail -3 docs/research/sidecar_env_polish/farm/cma_scp-s2.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/cma_scp-s2*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scp-s3",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py cma --x0 '{}' --label scp-s3 --out docs/research/sidecar_env_polish/farm/cma_scp-s3.json --sigma 0.3 --popsize 8 --jobs 2 --max-evals 640 --budget-s 2400 --patience 12 --seed 3 > docs/research/sidecar_env_polish/farm/cma_scp-s3.log 2>&1; tail -3 docs/research/sidecar_env_polish/farm/cma_scp-s3.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/cma_scp-s3*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scp-s4",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py cma --x0 '{}' --label scp-s4 --out docs/research/sidecar_env_polish/farm/cma_scp-s4.json --sigma 0.3 --popsize 8 --jobs 2 --max-evals 640 --budget-s 2400 --patience 12 --seed 4 > docs/research/sidecar_env_polish/farm/cma_scp-s4.log 2>&1; tail -3 docs/research/sidecar_env_polish/farm/cma_scp-s4.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/cma_scp-s4*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scp-w5",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py cma --x0 '{}' --label scp-w5 --out docs/research/sidecar_env_polish/farm/cma_scp-w5.json --sigma 0.5 --popsize 8 --jobs 2 --max-evals 640 --budget-s 2400 --patience 12 --seed 5 > docs/research/sidecar_env_polish/farm/cma_scp-w5.log 2>&1; tail -3 docs/research/sidecar_env_polish/farm/cma_scp-w5.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/cma_scp-w5*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scp-w6",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py cma --x0 '{}' --label scp-w6 --out docs/research/sidecar_env_polish/farm/cma_scp-w6.json --sigma 0.5 --popsize 8 --jobs 2 --max-evals 640 --budget-s 2400 --patience 12 --seed 6 > docs/research/sidecar_env_polish/farm/cma_scp-w6.log 2>&1; tail -3 docs/research/sidecar_env_polish/farm/cma_scp-w6.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/cma_scp-w6*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scp-w7",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py cma --x0 '{}' --label scp-w7 --out docs/research/sidecar_env_polish/farm/cma_scp-w7.json --sigma 0.5 --popsize 8 --jobs 2 --max-evals 640 --budget-s 2400 --patience 12 --seed 7 > docs/research/sidecar_env_polish/farm/cma_scp-w7.log 2>&1; tail -3 docs/research/sidecar_env_polish/farm/cma_scp-w7.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/cma_scp-w7*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scp-w8",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py cma --x0 '{}' --label scp-w8 --out docs/research/sidecar_env_polish/farm/cma_scp-w8.json --sigma 0.6 --popsize 8 --jobs 2 --max-evals 640 --budget-s 2400 --patience 12 --seed 8 > docs/research/sidecar_env_polish/farm/cma_scp-w8.log 2>&1; tail -3 docs/research/sidecar_env_polish/farm/cma_scp-w8.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/cma_scp-w8*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scp-rescore-priced",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py rescore BEST docs/research/sidecar_env_polish/farm/rescore_BEST_priced.json > docs/research/sidecar_env_polish/farm/rescore_BEST_priced.log 2>&1; tail -2 docs/research/sidecar_env_polish/farm/rescore_BEST_priced.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/rescore_BEST_priced*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5.5"
+  },
+  "timeout": 3300
+ },
+ {
+  "tag": "scp-rescore-nominal",
+  "cmd": "eval \"$(python3 tools/env_bench.py use env)\" && eval \"$(python3 tools/env_bench.py use envsel)\" && python3 tools/sidecar_env_polish.py rescore BEST docs/research/sidecar_env_polish/farm/rescore_BEST_nominal.json > docs/research/sidecar_env_polish/farm/rescore_BEST_nominal.log 2>&1; tail -2 docs/research/sidecar_env_polish/farm/rescore_BEST_nominal.log",
+  "out": [
+   "docs/research/sidecar_env_polish/farm/rescore_BEST_nominal*"
+  ],
+  "env": {
+   "OMP_NUM_THREADS": "1",
+   "IGL_NUM_THREADS": "2",
+   "CB_EXACT": "1",
+   "CB_FOLD_MARGIN": "5",
+   "ENVP_NOPRICE": "1"
+  },
+  "timeout": 3300
+ }
+]

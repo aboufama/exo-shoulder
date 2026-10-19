@@ -1,0 +1,47 @@
+[
+ {
+  "key": "continuity",
+  "refuted": false,
+  "evidence": "Re-read docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_held_frozen.json:connected: static 22.64, connected_full 22.64 (0 dropped), connected_knn 30.78 (76 dropped), connected_bench 23.81. Bench file _vA_bench_frozen.json:connected: full 18.28, knn 19.97 (6 dropped), bench graph 50.13. The tool's rule (tools/alignment_audit.py c_continuity lines 500-505: rule flood connected_full, loss 0 -> ok; then watch when the knn loss > TH conn_gamed 3) is applied to the right numbers: knn loss 30.78 - 22.64 = 8.14. Context, not a refutation: the lead reads the same on the bench (docs/concepts/verify/conecut-knee-knuckle-3r_v_bench_frozen.json:connected: knn 19.97, bench 50.13, full 18.28), so the pattern is shared, not specific to this row. No measurement shows the knn drops are a sampling artefact. Upheld."
+ },
+ {
+  "key": "judgement:M3",
+  "refuted": false,
+  "evidence": "Measurement re-run, model unchanged: tools/alignment_lowarm_s1level.py geom --cell A (4.7 s, scratch output) gives glev -1.0, groove_layer_over_face_mm [0.111, 1.611], pin_band [0.111, 1.611] at pin radius 9.602 mm, lower_plate_over_face_mm [0.0, 3.0], link2 member from 3.15; the O20 hub is radius 10 with link 1b's lower member at [F, F+3] (tools/concept_kit.py line 24). The clash is on the claimed cell A, identical to the auditor's file. The verifier's own buildable numbers are on file: docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_padplay.json:kplay_true_lever_stage1_F39 recomputed 18.66 (play 0) and 19.05 (+0.912), and rows:verification_cellA.v_gap_rule states them while v_gap stays 18.83. The rank clause is right at the current measurement: sidecar-longdyad 18.91 (docs/alignment/sample_density.md table, no flagged parts). ATTEMPTED REFUTATION, not sufficient: the layer cost is mostly ring2, which is sampled at 3.957x the kit density. My re-weight of the two cell-A claim_frozen_out.parts_ib14 records (vA_bench_frozen.json and remeasure/..._s1level3p9_A_bench.json; horn /2.519, ring2 /3.957) gives no play: clashing 0.90044 -> 0.89974 (gap ~18.31), buildable 0.89617 -> 0.89864 (gap ~18.42), so the layer costs +0.11 at kit density, not +0.37. With the play the per-part counts are not on file; transferring the same deltas puts buildable+play at in-band ~0.9002, i.e. ~18.83, which would remove the rank flip over sidecar-longdyad (18.91 at kit). But the density re-weight never changes the gap (docs/ALIGNMENT.md S6: 'It never gives gamed and never changes the gap'), and the play-side number is an estimate, not a wear. The hard-rule fact (two real envelopes in one volume in the verified config) stands, so M3 is not refuted. The lead's family ruling (this row gamed, desmo-slipper / desmo-conecut watch on the same layer) is still owed."
+ },
+ {
+  "key": "judgement:NEW-one-sided-play",
+  "refuted": true,
+  "evidence": "The measurement is right and the reason is not a documented rule. I recomputed the per-pose worst from docs/alignment/remeasure/lowarm-halfring-knuckle-3r_kplay_perpose_A.json:sides with tools/alignment_paired.py gap_parts three ways: the auditor's composite, the per-clip-pose minimum in-band fraction, and a coherent pick of one side per pose (contact > not taken > lower in-band). All three read 18.89 (reach 261/360, ib14 0.8994, 5 contacts), and the sides reproduce 18.83 / 18.35. There is no documented threshold. docs/ALIGNMENT.md has no T6 entry and no play-reading rule (grep 'T6', 'one side': no hit). The auditor's own .md lists T6 under 'Proposals (not applied; none feeds the verdict)'. The audit brief says a proposed tightening is a measurement change and is never an input to the verdict. The row's rule (rows:verification_cellA.v_gap_rule, 'worst side ... worn as metal') was applied as the worse of the two uniform sides (18.83 > 18.35), which is a valid reading under the current protocol. Effect +0.06, no rank change (sidecar-longdyad 18.91). Moved to the proposal T6, with its number."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Re-read docs/concepts/verify/lowarm-halfring-knuckle-3r_vA_padplay.json:padcheck.P1_pad_seat: n_crank_truly_over_L1b 25 of 133, true_pad_lever_mm 6.75 vs claim 12.29, k_pad_at_true_lever 0.609, total_play_at_true_lever 0.912. Against padcheck.lowarm_gate.dwell_K_play.gate 0.25, that is 3.65x, and the gate reads ok false. Priced as metal in v_gap: kplay_true_lever.+0.912.named.203.min_mm -0.102. The gate failure is the row's own gate. The drag of the named fix (a preloaded or adjusted pad) is not on file: rows have no R17 or drag field, and the complexity check recomputes 16.5 with no adjuster. The missing measurement stands. Upheld."
+ },
+ {
+  "key": "judgement:P1",
+  "refuted": true,
+  "evidence": "The P1 pattern (in-sample tuning in the claim) does not apply to the current claim. The claim is cell A, v_gap 18.83 (rows:v_gap; docs/dashboard/data/morphs.json lowarm row v_gap 18.83, alignment_claim 18.83). The held_out check reads ok at the documented threshold: docs/alignment/lowarm-halfring-knuckle-3r.json:checks.held_out drop +3.81 vs watch > 6 (ALIGNMENT.md section 5). Cell A's parameters equal cell B's minus the l2_lift picked by the 794-config claim-bench scan (rows:cells.A vs cells.B.params). The leftover is a record label: the top-level 'verification' block (t 02:20) has no superseded key. But the row marks it superseded in rows:cells.B.note ('moved out of the headline by the 07:40 re-verification'), and the dashboard verdict reads 'Cell B stays GAMED (P1)'. The tool's own check reads ok: checks.reporting 'row, verifier files and dashboard agree'. A stale block with a superseded note elsewhere in the row costs the wearer nothing. The flag fix stays as proposal 3."
+ },
+ {
+  "key": "judgement:NEW-inherited-stack",
+  "refuted": false,
+  "evidence": "Read docs/concepts/models/lowarm-halfring-knuckle-3r.py lines 43-48: it execs desmo-conecut's _desmo_build_B source with exactly one line replaced (the half-ring 'used' mask). The level formula is unchanged, and my cell-A geom re-run confirms glev -1.0 puts the groove at F+0.111..1.611. Read docs/concepts/ROUNDS.md 3644-3660: lens B's pass bar is 'frozen exact <= 18.28', introduced as 'Lowarm cell A's 18.28 at cx 16.5'. Neither cell (A0L, A-adj) names a stage-1 level check, and A0L's reference is desmo-conecut's 18.37 'with the cap-ring sector inside hub 2's O20', on the same layer. Nuance: 18.28 is also the lead's number, so the bar's value is not set by the layer alone. What passes on is the layer. Upheld as watch."
+ },
+ {
+  "key": "judgement:T1",
+  "refuted": true,
+  "evidence": "The numbers reproduce on file: docs/alignment/lowarm-halfring-knuckle-3r.json:checks.near_touch reads plain 18.28, n1 19.92, n2 34.84, n3 86.16, band3 18.42, shell2 16.56, minmm 0.072. The documented level for near-touch is report only. User decision 3 (CLAUDE.md: 'Near-touch (2 mm) is not a gate ... the auditor reports it only'), and tools/alignment_audit.py c_near_touch lines 279-281 keep the level ok. The comparison with the reference shows no relative gain: checks.dominance vs conecut-knee 'plain +0.00, 2 mm +0.00', and the lead's near-touch is identical (19.92 / 34.84 / 86.16). The one play-driven shift (pose 203, 0.263 -> -0.102 mm) is already priced as a contact in v_gap (vA_padplay.json:kplay_true_lever.+0.912.recomputed.contact_poses 5). The numbers stay in the report, not in the verdict."
+ },
+ {
+  "key": "judgement:S5",
+  "refuted": false,
+  "evidence": "Same records as 'continuity': _vA_bench_frozen.json:connected (full 18.28, knn 19.97, bench graph 50.13) and _vA_held_frozen.json:connected (full 22.64, knn 30.78, bench 23.81). The pattern is measured, and the tool's knn watch (alignment_audit.py line 505) applies. The lead shares it on the bench (knn 19.97 / bench 50.13), so it is not row-specific, but nothing on file shows the knn drops reachable without the envelope stepping stones. Upheld."
+ },
+ {
+  "key": "judgement:G4",
+  "refuted": false,
+  "evidence": "Re-read docs/alignment/remeasure/lowarm-halfring-knuckle-3r_msub_rest_bench.json. At K rest: m_sub n 205, min 0.0, p10 0.267, lt1 50. With K moved: m_sub_moved min 10.805, and m_plain_rest (the documented th) min 5.389. The probe ran on cell B (params_source CELL_B, l2_lift 1.5). The 'same K law in cell A' claim is an inference: r_c / beta / a_s / psi / glev are identical (vA_padplay.json:padcheck.params), and l2_lift only reshapes link 2's root. It was not re-measured on cell A, which would be a 9-min exact wear (secs 539.6) outside this time box. Whether a sub-dyad at its fold while K is in dwell is felt has no measurement either way. Not refuted."
+ }
+]

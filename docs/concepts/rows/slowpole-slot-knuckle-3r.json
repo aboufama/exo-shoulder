@@ -1,0 +1,134 @@
+{
+ "id": "slowpole-slot-knuckle-3r",
+ "name": "Slow-pole cam-slot knuckle: the lead's chain with a re-seated K dyad (spec 40/40; best 32/38), a slow law and one crowned pin on hub 2's rotor in a form-closed dwell-and-rise slot on link 1a (no spring, no crank)",
+ "lens": "round501:rod-dwell-lowcx (lens B)",
+ "family": "slaved-knuckle 3R with a pin knee (the lead family), one-loop form-closed drive",
+ "active_dof": 3,
+ "passive_dof": 3,
+ "passive_translations": 0,
+ "complexity": 10.75,
+ "status": "dead",
+ "t_ideated": null,
+ "t_screened": "2026-10-19T04:44:00Z",
+ "reach": 0.7688,
+ "follow": 1.0,
+ "inband14": 0.9079,
+ "inband10": 0.6102,
+ "contact": 0.0,
+ "gap": 13.12,
+ "gap_near1": 13.12,
+ "gap_near2": 23.87,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 5,
+ "best_params": {
+  "bk1": 32.0,
+  "bk2": 38.0,
+  "rho": 0.84,
+  "cell": "ghost (drive metal deleted)",
+  "WALL": "slot (DKLIM = law end K + 0.7 = 38.10)",
+  "th_on": 65.77,
+  "slot_pin": "r 18 mm / phase 5 deg off the u2-uK arc at the stroke end, variable-ratio law rho 0.62-0.94 (PA <= 38), dwell lock <= 36.3 deg",
+  "seats_knee_J3stop": "conecut-knee-knuckle-3r best_params unchanged"
+ },
+ "frozen": {
+  "bench110_360_exact": {
+   "40/40_rho0.5_spec": {
+    "gap": 40.17,
+    "ws_taken": 254,
+    "contacts": 17,
+    "inband14": 0.7379,
+    "overhead": "4/28",
+    "hubK_ib14": 0.033,
+    "hubK_median_mm": 45.7,
+    "fit_fast": 33.4
+   },
+   "34/40_rho0.67": {
+    "gap": 19.38,
+    "ws_taken": 260,
+    "contacts": 6,
+    "inband14": 0.9175,
+    "overhead": "7/28"
+   },
+   "32/38_rho0.67": {
+    "gap": 18.83,
+    "ws_taken": 261,
+    "contacts": 5,
+    "inband14": 0.9202,
+    "overhead": "8/28"
+   },
+   "32/38_rho0.84": {
+    "gap": 18.83,
+    "reach": 0.725,
+    "follow": 1.0,
+    "inband14": 0.9076,
+    "inband10": 0.614,
+    "contact": 0.0133,
+    "ws_taken": 261,
+    "near1": 19.92,
+    "near2": 34.64,
+    "min_metal": 0.07,
+    "overhead": "8/28",
+    "contact_poses": [
+     [
+      139,
+      -0.38
+     ],
+     [
+      205,
+      -4.41
+     ],
+     [
+      237,
+      -5.45
+     ],
+     [
+      264,
+      -0.09
+     ],
+     [
+      316,
+      -1.27
+     ]
+    ]
+   },
+   "32/38_rho1.04": {
+    "gap": 18.83,
+    "ws_taken": 261,
+    "contacts": 5,
+    "inband14": 0.9179,
+    "overhead": "8/28"
+   },
+   "lead_control": {
+    "gap": 18.28,
+    "ws_taken": 262,
+    "note": "onetooth-slowlaw paired control = the verified lead"
+   }
+  }
+ },
+ "slot": {
+  "constant_ratio_best_PA_run_q2": {
+   "40/40 rho0.5": "49.5 of 60.5 (r <= 20: 46.4)",
+   "32/38 rho0.67": "39.8 of 55.8"
+  },
+  "variable_ratio": {
+   "40/40 r13.5 ph-60": "rho 0.38-0.56, onset 57.49, msub 6.24, dwell lock max 89.1 (unlocked)",
+   "32/38 r18 ph5": "rho 0.62-0.94, onset 65.9, lock <= 36.3; PA gate 35 -> onset 64.4, 32 -> 62.5"
+  },
+  "metal_proxy_32/38_r18": {
+   "lug_hubface": "31 contacts (-8.3)",
+   "lug_top": "20 (-10.6)",
+   "pin": "16-19 (-7 to -9)",
+   "plate": "23-30 (-10 to -12)",
+   "r13.5_top": "lug 14 (-5.6), pin 12 (-3.9), plate 15 (-6.3)",
+   "worst_poses": "clip frames 7-12 (30/142-150/-60), ws 287 (45/120/-30), 290 (45/150/-45)"
+  }
+ },
+ "verdict": "DEAD (two pre-registered kills). (1) Spec cell 40/40 rho 0.5: law-only ghost 40.17 frozen exact Bench(110,360), 254 ws takes, 17 contacts (gate 19.0 / 258): hub K 45.7 mm off the skin (in band 0.033) because the long symmetric dyad moves uK 14.6 deg. (2) Limiter variant 32/38 (uK 6.4 deg): ghost bound 18.83 at rho 0.67-1.04 (261 takes, 5 contacts, ib14 0.91-0.92, overhead 8/28; lead 18.28 / 262) passes step 0, but the slot drive fails step 1: a constant-ratio slot cannot hold PA <= 38 at any pin placement; a variable-ratio slot can (pin r 18, rho 0.62-0.94, dwell lock <= 36) but its pin lug and slot plate sit 4-12 mm inside the skin on 12-31 overhead poses (kill > 4). Ghost cannot pass the lead; free-K oracle 17.69.",
+ "limiter": "spec: hub K placement (40/40 uK 14.6 deg off the lead: hub K 45.7 mm median off the skin, 17 contacts overhead IR). Variant 32/38: the drive element on link 2 outside hub 2's rim (r >= 13.5 mm) dips 4-12 mm into the arm's bulk at overhead IR (plane 30-45, elev 142-150, axial -45..-60); constant-ratio slots fail PA (fixed relative pole)",
+ "note": "Ghost numbers are BOUNDS (drive metal deleted), never claims. Fit Bench(60,160) fast shown in the top-level columns (32/38 rho 0.84); frozen exact numbers in 'frozen'. Convergence gate (stated, not passed): 5 ghost configs, best gain over the 2nd half 0.0 and last third 0.0 score points, top-5 spread 7.75 points (0.20 over the 4 limiter variants); the death rests on pre-registered kills + exhaustive closed-form slot scans (12,672 constant-ratio + 576 variable-ratio placements). Spec corrections: exact onset th 56.82 (not 57.2: the end th is 106.30, not 106.5). cx 10.75 (judge's count).",
+ "doc": "docs/concepts/slowpole-slot-knuckle-3r.md"
+}

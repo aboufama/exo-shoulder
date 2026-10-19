@@ -1,0 +1,349 @@
+{
+ "id": "sidecar-parallelogram-knuckle-3r",
+ "tool": "tools/sample_density.py",
+ "version": "2026-10-18.1",
+ "kit_cell_mm2": 4.0,
+ "flag": [
+  0.5,
+  2.0
+ ],
+ "model": "docs/concepts/models/sidecar-parallelogram-knuckle-3r.py",
+ "params": {
+  "kK": 1.3487,
+  "r_h": 15.5,
+  "beta": -95.8268,
+  "La": 14.8984,
+  "s_arm": 4.3996,
+  "hl": 3.15,
+  "zr": 0.0,
+  "r_lobe": 7.0578,
+  "smhi": 19.3517,
+  "smlo": 5.0,
+  "az1": 97.8797,
+  "el1": 67.0092,
+  "az2": 40.8897,
+  "el2": 44.7465,
+  "wd": 69.9552,
+  "wa": -10.525,
+  "b3": 0.3702,
+  "ang_min": 24.7893,
+  "lc": 28.8341,
+  "phib": -59.0793,
+  "chain": "lead",
+  "ends": "rc",
+  "law_mode": "lin"
+ },
+ "fit_secs": 3.9,
+ "row_v_gap": 19.13,
+ "row_status": "verified",
+ "parts": {
+  "hub1": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.1,
+   "cell_median": 3.985,
+   "d1": 1.994,
+   "d2": 1.999,
+   "one_row_share": 0.0,
+   "ratio": 1.003,
+   "hull_area_mm2": 339.5,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hubK": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.6,
+   "cell_median": 4.001,
+   "d1": 2.0,
+   "d2": 2.002,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 339.7,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hub2": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.4,
+   "cell_median": 3.99,
+   "d1": 1.995,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.002,
+   "hull_area_mm2": 339.6,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "hub3": {
+   "n": 80,
+   "n_unique": 80,
+   "area_mm2": 319.0,
+   "cell_median": 3.984,
+   "d1": 1.996,
+   "d2": 1.996,
+   "one_row_share": 0.0,
+   "ratio": 1.003,
+   "hull_area_mm2": 339.6,
+   "ratio_hull": 0.942,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "E": {
+   "n": 104,
+   "n_unique": 104,
+   "area_mm2": 417.8,
+   "cell_median": 4.008,
+   "d1": 1.997,
+   "d2": 2.007,
+   "one_row_share": 0.0,
+   "ratio": 0.996,
+   "hull_area_mm2": 417.8,
+   "ratio_hull": 0.996,
+   "flatness": 0.033,
+   "masked_lattice": false
+  },
+  "boss": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 127.8,
+   "cell_median": 3.99,
+   "d1": 1.997,
+   "d2": 1.998,
+   "one_row_share": 0.0,
+   "ratio": 1.002,
+   "hull_area_mm2": 131.3,
+   "ratio_hull": 0.975,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "pad": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 127.7,
+   "cell_median": 3.984,
+   "d1": 1.996,
+   "d2": 1.996,
+   "one_row_share": 0.0,
+   "ratio": 1.003,
+   "hull_area_mm2": 131.2,
+   "ratio_hull": 0.975,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "knee": {
+   "n": 100,
+   "n_unique": 100,
+   "area_mm2": 399.1,
+   "cell_median": 3.993,
+   "d1": 1.995,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.002,
+   "hull_area_mm2": 400.1,
+   "ratio_hull": 1.0,
+   "flatness": 0.0,
+   "masked_lattice": false
+  },
+  "crank": {
+   "n": 53,
+   "n_unique": 53,
+   "area_mm2": 145.9,
+   "cell_median": 3.255,
+   "d1": 1.633,
+   "d2": 1.998,
+   "one_row_share": 0.0,
+   "ratio": 1.453,
+   "hull_area_mm2": 176.5,
+   "ratio_hull": 1.201,
+   "flatness": 0.149,
+   "masked_lattice": false
+  },
+  "horn": {
+   "n": 20,
+   "n_unique": 20,
+   "area_mm2": 79.9,
+   "cell_median": 3.997,
+   "d1": 1.999,
+   "d2": 2.0,
+   "one_row_share": 0.0,
+   "ratio": 1.001,
+   "hull_area_mm2": 80.0,
+   "ratio_hull": 1.0,
+   "flatness": 0.001,
+   "masked_lattice": false
+  },
+  "rod": {
+   "n": 12,
+   "n_unique": 12,
+   "area_mm2": 54.0,
+   "cell_median": 4.502,
+   "d1": 2.251,
+   "d2": 2.0,
+   "one_row_share": 1.0,
+   "ratio": 0.888,
+   "hull_area_mm2": 61.4,
+   "ratio_hull": 0.782,
+   "flatness": 0.0,
+   "masked_lattice": false
+  },
+  "rodends": {
+   "n": 32,
+   "n_unique": 32,
+   "area_mm2": 253.8,
+   "cell_median": 7.932,
+   "d1": 1.363,
+   "d2": 5.822,
+   "one_row_share": 0.0,
+   "ratio": 0.504,
+   "hull_area_mm2": 255.7,
+   "ratio_hull": 0.501,
+   "flatness": 0.039,
+   "masked_lattice": false
+  },
+  "L1a": {
+   "n": 16,
+   "n_unique": 16,
+   "area_mm2": 134.2,
+   "cell_median": 7.032,
+   "d1": 2.161,
+   "d2": 3.137,
+   "one_row_share": 0.0,
+   "ratio": 0.477,
+   "hull_area_mm2": 102.5,
+   "ratio_hull": 0.624,
+   "flatness": 0.335,
+   "masked_lattice": true
+  },
+  "L1b": {
+   "n": 36,
+   "n_unique": 36,
+   "area_mm2": 188.1,
+   "cell_median": 4.034,
+   "d1": 1.964,
+   "d2": 2.071,
+   "one_row_share": 0.0,
+   "ratio": 0.766,
+   "hull_area_mm2": 172.7,
+   "ratio_hull": 0.834,
+   "flatness": 0.333,
+   "masked_lattice": false
+  },
+  "L2": {
+   "n": 124,
+   "n_unique": 124,
+   "area_mm2": 581.3,
+   "cell_median": 4.146,
+   "d1": 1.991,
+   "d2": 2.067,
+   "one_row_share": 0.0,
+   "ratio": 0.853,
+   "hull_area_mm2": 627.1,
+   "ratio_hull": 0.791,
+   "flatness": 0.119,
+   "masked_lattice": false
+  }
+ },
+ "flagged": {
+  "L1a": 0.477
+ },
+ "over_dense": [],
+ "masked_lattice": [
+  "L1a"
+ ],
+ "note": "ratio = samples / mm2 over the kit's 1 / 4 mm2 (cell = d1 x d2, the grid's two pitches; a one-row part is credited 2 mm across). Re-weight: each flagged part's count set to n / ratio in the saved per-part in-band; exact for the counts, assumes the part's in-band share is uniform over its samples.",
+ "bench": {
+  "file": "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_bench_frozen.json",
+  "path": "/",
+  "frozen": {
+   "gap": 19.13,
+   "reach": 0.7194,
+   "follow": 1.0,
+   "inband14": 0.9049,
+   "inband10": 0.5234,
+   "contact": 0.0107
+  },
+  "recomputed_ib14": 0.9049,
+  "variants": {
+   "over_at_kit": {
+    "ib14": 0.9049,
+    "gap": 19.13,
+    "n": {}
+   },
+   "over_at_kit_hull": {
+    "ib14": 0.9049,
+    "gap": 19.13,
+    "n": {}
+   },
+   "flagged_at_kit": {
+    "ib14": 0.9063,
+    "gap": 19.13,
+    "n": {
+     "L1a": 33.54
+    }
+   },
+   "per_part": {
+    "L1a": 19.13
+   },
+   "all_parts_at_kit": {
+    "ib14": 0.9058,
+    "gap": 19.13
+   },
+   "as_sampled": {
+    "ib14": 0.9049,
+    "gap": 19.13
+   }
+  },
+  "count_mismatch": {}
+ },
+ "held": {
+  "file": "docs/concepts/verify/sidecar-parallelogram-knuckle-3r_v_held_frozen.json",
+  "path": "/",
+  "frozen": {
+   "gap": 22.03,
+   "reach": 0.6901,
+   "follow": 1.0,
+   "inband14": 0.9031,
+   "inband10": 0.5221,
+   "contact": 0.0104
+  },
+  "recomputed_ib14": 0.9032,
+  "variants": {
+   "over_at_kit": {
+    "ib14": 0.9031,
+    "gap": 22.03,
+    "n": {}
+   },
+   "over_at_kit_hull": {
+    "ib14": 0.9031,
+    "gap": 22.03,
+    "n": {}
+   },
+   "flagged_at_kit": {
+    "ib14": 0.9045,
+    "gap": 22.03,
+    "n": {
+     "L1a": 33.54
+    }
+   },
+   "per_part": {
+    "L1a": 22.03
+   },
+   "all_parts_at_kit": {
+    "ib14": 0.904,
+    "gap": 22.03
+   },
+   "as_sampled": {
+    "ib14": 0.9031,
+    "gap": 22.03
+   }
+  },
+  "count_mismatch": {}
+ },
+ "exact_rewear_cmd": "CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/sample_density.py rewear sidecar-parallelogram-knuckle-3r bench|held",
+ "secs": 4.1
+}

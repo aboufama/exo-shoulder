@@ -1,0 +1,66 @@
+{
+ "claim": {
+  "n": 470,
+  "closable": 409,
+  "phi0": 376,
+  "multi_component": 3,
+  "multi_ws": 3,
+  "multi_with_phi0": 3,
+  "rows": [
+   {
+    "i": 178,
+    "kind": "ws",
+    "least": 0.0,
+    "comps": 2,
+    "comp_starts": [
+     32.0
+    ],
+    "feasible_frac": 0.34,
+    "pose": [
+     -15.0,
+     75.0,
+     -30.0
+    ]
+   },
+   {
+    "i": 205,
+    "kind": "ws",
+    "least": 0.0,
+    "comps": 2,
+    "comp_starts": [
+     32.75
+    ],
+    "feasible_frac": 0.113,
+    "pose": [
+     0.0,
+     105.0,
+     15.0
+    ]
+   },
+   {
+    "i": 229,
+    "kind": "ws",
+    "least": 0.0,
+    "comps": 2,
+    "comp_starts": [
+     28.25
+    ],
+    "feasible_frac": 0.22,
+    "pose": [
+     15.0,
+     90.0,
+     -30.0
+    ]
+   }
+  ]
+ },
+ "fit": {
+  "n": 220,
+  "closable": 200,
+  "phi0": 184,
+  "multi_component": 0,
+  "multi_ws": 0,
+  "multi_with_phi0": 0,
+  "rows": []
+ }
+}

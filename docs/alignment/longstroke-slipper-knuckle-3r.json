@@ -1,0 +1,244 @@
+{
+ "id": "longstroke-slipper-knuckle-3r",
+ "status": "screened",
+ "v_gap": null,
+ "complexity": 26.5,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no verified bench gap on the row",
+  "sampling: sample-weighted in-band 0.873 vs part-weighted 0.878 (-0.48 points); thinly sampled parts: L1a 8; mostly out-of-band parts: crank (0.50 in band, median 14.0 mm, 6.9 % of samples) (re-measured)"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no verified bench gap on the row"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "no pair"
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 21.27, <1 mm 25.2, <2 mm 41.58, <3 mm 154.83, band read 3-14 mm 21.76, 20.31 points live in the 1-2 mm shell (re-measured (this audit))",
+   "shell2": 20.31,
+   "plain": 21.27,
+   "n1": 25.2,
+   "n2": 41.58,
+   "n3": 154.83,
+   "band3": 21.76,
+   "hist": {
+    "0-1": 0.0,
+    "1-2": 0.0003,
+    "2-3": 0.0049,
+    "3-4": 0.0182,
+    "4-6": 0.108,
+    "6-10": 0.3988,
+    "10-14": 0.3432,
+    ">14": 0.1266
+   },
+   "minmm": 0.275,
+   "source": "re-measured (this audit)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump longstroke-slipper-knuckle-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "gap 19.37": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "ok",
+   "reason": "static 21.27, connected full 21.27, knn 24.08, bench 43.43 (row flood)",
+   "static": 21.27,
+   "connected_full": 21.27,
+   "connected_knn": 24.08,
+   "connected_bench": 43.43
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.003 deg (claims.ghost_g65d_ATTRIBUTION_ONLY.held.th_margin_min; 9 readings)",
+   "min_margin": 5.003,
+   "where": "claims.ghost_g65d_ATTRIBUTION_ONLY.held.th_margin_min"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 41.52 deg (row:held_out.claim_detail.dK_taken_max); crank: declared moving, no span on file",
+   "spans": [
+    [
+     "row:claim.dK_taken_max",
+     41.62
+    ],
+    [
+     "row:held_out.claim_detail.dK_taken_max",
+     41.52
+    ],
+    [
+     "row:frozen.th_margin.dK_taken_max",
+     41.62
+    ],
+    [
+     "row:claims.alt_s65n1a.bench.dK_taken_max",
+     47.14
+    ],
+    [
+     "row:claims.ghost_g65d_ATTRIBUTION_ONLY.bench.dK_taken_max",
+     42.11
+    ],
+    [
+     "row:claims.ghost_g65d_ATTRIBUTION_ONLY.held.dK_taken_max",
+     43.33
+    ],
+    [
+     "row:claims.steep_law_k30.ghost_ATTRIBUTION_ONLY.bench.dK_taken_max",
+     51.75
+    ],
+    [
+     "row:claims.steep_law_k30.ghost_ATTRIBUTION_ONLY.held.dK_taken_max",
+     53.97
+    ],
+    [
+     "row:claims.steep_law_k30.real_rod_drive_not_researched.bench.dK_taken_max",
+     51.75
+    ],
+    [
+     "row:claims.steep_law_cma5_k27b.dK_taken_max",
+     44.37
+    ]
+   ],
+   "declared": [
+    "K",
+    "crank"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "sample-weighted in-band 0.873 vs part-weighted 0.878 (-0.48 points); thinly sampled parts: L1a 8; mostly out-of-band parts: crank (0.50 in band, median 14.0 mm, 6.9 % of samples) (re-measured)",
+   "parts": {
+    "hub1": [
+     0.999,
+     8.6,
+     80
+    ],
+    "hubK": [
+     0.985,
+     7.2,
+     80
+    ],
+    "hub2": [
+     0.946,
+     11.1,
+     80
+    ],
+    "hub3": [
+     0.739,
+     11.5,
+     80
+    ],
+    "E": [
+     0.965,
+     6.5,
+     104
+    ],
+    "boss": [
+     0.987,
+     8.5,
+     32
+    ],
+    "pad": [
+     1.0,
+     8.1,
+     32
+    ],
+    "knee": [
+     0.941,
+     10.7,
+     85
+    ],
+    "crank": [
+     0.499,
+     14.0,
+     61
+    ],
+    "horn": [
+     0.965,
+     5.5,
+     20
+    ],
+    "rod": [
+     0.769,
+     11.7,
+     19
+    ],
+    "rodends": [
+     0.677,
+     11.5,
+     32
+    ],
+    "L1a": [
+     0.982,
+     9.7,
+     8
+    ],
+    "L1b": [
+     0.94,
+     7.4,
+     52
+    ],
+    "L2": [
+     0.774,
+     11.0,
+     124
+    ]
+   }
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 26.5 vs row 26.5; hand count (not derived from the model)",
+   "recomputed": 26.5,
+   "row": 26.5
+  },
+  {
+   "check": "reporting",
+   "level": "ok",
+   "reason": "row, verifier files and dashboard agree"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": true,
+  "held": true
+ },
+ "verifier_files": [],
+ "git": "8558ad3",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-19T01:04:03Z"
+}

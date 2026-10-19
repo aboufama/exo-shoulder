@@ -1,0 +1,191 @@
+{
+ "rule": "the full CAD must not lose R1 / R6 / R16 against its own L1 (same judges, same steps: judge_all fast - R1 step 3, R2 6, R6 3, R16 12, R17 full; FEA skipped as the L1)",
+ "R1": {
+  "L1": 81.9,
+  "full": 80.9,
+  "delta": -1.0,
+  "status": "LOSES 1.0"
+ },
+ "R1_aim": {
+  "L1": 48.5,
+  "full": 47.5,
+  "delta": -1.0
+ },
+ "R4": {
+  "L1": 74.4,
+  "full": 72.9,
+  "delta": -1.5
+ },
+ "R6": {
+  "L1": "FAIL 0.98 mm (link 1a strap in the base's J1 upper boss)",
+  "full": "PASS 0.0 mm (link 1a's ramp starts at the J1 skirt + 0.2)"
+ },
+ "R16": {
+  "L1": 64.2,
+  "full": 64.2,
+  "delta": 0.0
+ },
+ "R17": {
+  "L1": "PASS (M_GH 0.13, cuff 0.59 N, twist 4.07, K vs law 0.119)",
+  "full": "PASS (M_GH 0.11, cuff 0.49 N, twist 3.33, K vs law 0.115, lift-off 0.18 % of frames)"
+ },
+ "R7": {
+  "L1": "PASS",
+  "full": "FAIL: link 1b's STEP (USM 4-strip bar, unchanged builder) re-imports with 3 faces failing BRepCheck; valid in memory; ShapeFix / no-pcurve exports fail the same"
+ },
+ "R2": {
+  "L1": "FAIL 24.87 (user's forearm cuff); ours 0.0",
+  "full": "FAIL 24.87 (user's forearm cuff); ours attributable 4.71 mm = the D8-06 BOTTOM + pad mount part (user_style_pinknee.arm_side, unchanged)"
+ },
+ "R8": {
+  "L1": 109.2,
+  "full": 243.8
+ },
+ "R11": {
+  "L1": 0.39,
+  "full": 0.249
+ },
+ "passing": {
+  "L1": 7,
+  "full": 7
+ },
+ "R1_by_clip": {
+  "Raise overhead": [
+   74.4,
+   72.9
+  ],
+  "Drink from a cup": [
+   87.0,
+   84.9
+  ],
+  "Comb hair": [
+   91.2,
+   90.6
+  ],
+  "Reach a high shelf": [
+   90.2,
+   90.2
+  ],
+  "Wash opposite shoulder": [
+   60.0,
+   59.1
+  ],
+  "Reach back pocket": [
+   95.7,
+   95.0
+  ],
+  "Wave": [
+   69.3,
+   67.7
+  ],
+  "Walking arm swing": [
+   97.6,
+   97.2
+  ]
+ },
+ "R1_cause": "group-swap attribution (score_design's metric, same skin samples, step 12, followed frames): full 81.52 / L1 82.51 (-0.99, = the judge's -1.0); swapping ONE group's metal back to the L1's: l2 -> 82.16 (+0.64), dk -> 81.83 (+0.31), base / l1a / l1b / l3 / l4 within +-0.06. l2: +19.1k skin samples covered beyond 14 mm (the lobe ring at r 10.9..13.3 on hub 2's top, F2 + 9.8..12.8, new metal far from the skin); dk: -15.6k samples in band (the crank raised 3.97 mm and the arm's straight run on the chord, where the L1 kept the model's arm dipping to 60.3 mm). Fix for the next step: the straight run as a line/arc chain through the model's arm stations (dk), and the lobe band lower on hub 2 (needs the follower lower: a shorter boss or the straddle layout, red team finding 2)",
+ "drive_skin": {
+  "min_mm": 1.836,
+  "where": "D9-02 drive lobe ring: 17-4PH H900, wire: Raise overhead frame 78",
+  "passes": true,
+  "frames": 1337
+ },
+ "kinematics": {
+  "poses": 9,
+  "all_within_0p5": true,
+  "max_frame_dev_mm": 0.000116,
+  "max_joint_feature_mm": 0.1444,
+  "dowels_in_slots": true
+ },
+ "drive_posed": {
+  "drive lobe follower roller | D9-02": [
+   -0.039,
+   -1.17
+  ],
+  "drive flank roller MR63ZZ | D8-02a": [
+   -0.015,
+   -2.36
+  ],
+  "drive flank roller pin | D8-02a": [
+   0.495,
+   -22.02
+  ],
+  "D9-01 | D8-02a": [
+   0.108,
+   -23.23
+  ],
+  "D9-01 | D9-02": [
+   0.435,
+   -10.03
+  ],
+  "D9-01 | D8-02b": [
+   0.15,
+   0.0
+  ],
+  "D9-01 | D8-03": [
+   1.734,
+   0.0
+  ],
+  "D9-01 | J2 cap": [
+   1.228,
+   0.0
+  ],
+  "D9-01 | K clock-spring cap": [
+   2.634,
+   0.0
+  ],
+  "drive lobe follower roller | J2 cap": [
+   1.253,
+   0.0
+  ],
+  "drive follower pin clip | D9-02": [
+   0.218,
+   -29.31
+  ],
+  "drive follower pin clip | D8-03": [
+   4.525,
+   0.0
+  ],
+  "drive flank roller MR63ZZ | K clock-spring cap": [
+   3.402,
+   0.0
+  ],
+  "D8-02a | D8-02b": [
+   0.15,
+   -29.31
+  ],
+  "D8-02a | K clock-spring cap": [
+   0.2,
+   -29.31
+  ],
+  "D8-02a | D8-01": [
+   0.15,
+   -29.31
+  ],
+  "drive crank pivot pin clip | D9-01": [
+   0.52,
+   -29.31
+  ],
+  "contact drive lobe follower roller | D9-02 (driven frames: min, max of the per-frame min)": [
+   42,
+   -0.041,
+   0.001
+  ],
+  "contact drive flank roller MR63ZZ | D8-02a (driven frames: min, max of the per-frame min)": [
+   42,
+   -0.015,
+   -0.001
+  ]
+ },
+ "R1_swap_step12": {
+  "full": 81.52,
+  "L1": 82.51,
+  "base<-L1": 81.51,
+  "l4<-L1": 81.5,
+  "l3<-L1": 81.56,
+  "l1b<-L1": 81.47,
+  "dk<-L1": 81.83,
+  "l2<-L1": 82.16,
+  "l1a<-L1": 81.58
+ }
+}

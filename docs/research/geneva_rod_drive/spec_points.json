@@ -1,0 +1,86 @@
+{
+ "frame": "design reference frame (link 1b at q=0, K on stop A), mm from GH; polar frame of the lobe: x = rocker-axis direction from u2, y = u2 x x",
+ "u2": [
+  -0.476,
+  0.643,
+  0.6
+ ],
+ "uK": [
+  -0.375,
+  0.927,
+  0.023
+ ],
+ "lobe_polar_x": [
+  -0.001,
+  0.682,
+  -0.731
+ ],
+ "lobe_polar_y": [
+  -0.88,
+  -0.348,
+  -0.324
+ ],
+ "rocker_axis_point_lobe_level": [
+  -32.216,
+  54.416,
+  28.932
+ ],
+ "rocker_axis_dir": [
+  -0.476,
+  0.643,
+  0.6
+ ],
+ "rocker_base_on_link1b": [
+  -27.923,
+  48.614,
+  23.52
+ ],
+ "roller_centre_onset": [
+  -38.71,
+  48.337,
+  30.299
+ ],
+ "crank_pin_onset": [
+  -46.386,
+  61.244,
+  32.842
+ ],
+ "horn_pin_onset": [
+  -28.498,
+  74.995,
+  3.588
+ ],
+ "horn_pin_end": [
+  -27.843,
+  75.312,
+  1.469
+ ],
+ "horn_axis_point": [
+  -30.129,
+  74.378,
+  1.807
+ ],
+ "rod_dir_mid": [
+  0.491,
+  0.353,
+  -0.797
+ ],
+ "crank_pin_axis_tilted": [
+  -0.272,
+  0.931,
+  0.244
+ ],
+ "crank_pin_tilt_from_u2_deg": 29.0,
+ "rod_centre_distance": 36.94,
+ "lobe_band_from_F2": [
+  6.2,
+  8.7
+ ],
+ "F2": 60.236,
+ "fK": 58.019,
+ "cap_top": 76.269,
+ "horn_plate_top": 77.769,
+ "q2_onset_deg": -5.011,
+ "q2_stopB_deg": -21.811,
+ "kK": 3.1796
+}

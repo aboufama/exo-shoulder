@@ -1,0 +1,175 @@
+{
+ "id": "proxtrack-relay-knuckle-4r",
+ "status": "screened",
+ "v_gap": 17.46,
+ "complexity": 52.5,
+ "verdict": "watch",
+ "reasons": [
+  "near_touch: no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)",
+  "continuity: passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)",
+  "idle: a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: dashboard sweep best 4.25 (score 98.45) sits 13.21 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "ok",
+   "reason": "held out 21.46 vs bench 17.46 (+4.00; row held_out_gap)",
+   "held_gap": 21.46,
+   "v_gap": 17.46,
+   "drop": 4.0,
+   "source": "row held_out_gap"
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 4.15 -> verified 17.46 (+13.31)",
+   "fast": 4.15,
+   "verified": 17.46,
+   "drop": 13.31
+  },
+  {
+   "check": "near_touch",
+   "level": "watch",
+   "reason": "no near-touch measurement on file (rule since 2026-10-16: claims report plain and near-touch)"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 17.46: bench 13 contact poses, sum 50.36 mm, deepest 9.79 mm at ['ws', 30.0, 135.0, 0.0], 6 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 47 contact poses, sum 189.82 mm, deepest 12.23 mm at ['ws', 15.0, 135.0, -15.0], 23 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
+   "depths": {
+    "v_gap 17.46": {
+     "bench": {
+      "n": 13,
+      "sum_mm": 50.36,
+      "max_mm": 9.79,
+      "n_deeper3": 6,
+      "overhead140": 5,
+      "deepest": [
+       "ws",
+       30.0,
+       135.0,
+       0.0
+      ],
+      "gap": 17.46,
+      "src": "docs/alignment/remeasure/proxtrack-relay-knuckle-4r_bench_stackfix_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        50.36
+       ],
+       "agree": true
+      }
+     },
+     "held": {
+      "n": 47,
+      "sum_mm": 189.82,
+      "max_mm": 12.23,
+      "n_deeper3": 23,
+      "overhead140": 15,
+      "deepest": [
+       "ws",
+       15.0,
+       135.0,
+       -15.0
+      ],
+      "gap": 21.46,
+      "src": "docs/alignment/remeasure/proxtrack-relay-knuckle-4r_held_stackfix_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        189.82
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": []
+  },
+  {
+   "check": "dominance",
+   "level": "ok",
+   "reason": "no reference"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "passive / sprung / sensed coordinates but no continuity flood on file (rule 2026-10-16)"
+  },
+  {
+   "check": "fold_margin",
+   "level": "ok",
+   "reason": "min fold margin on file 5.0 deg (v_min_th; 3 readings)",
+   "min_margin": 5.0,
+   "where": "v_min_th"
+  },
+  {
+   "check": "idle",
+   "level": "watch",
+   "reason": "a drive is declared but no range of it over the taken poses is on file; K: declared moving, no span on file; crank: declared moving, no span on file; knee: declared moving, no span on file",
+   "spans": [],
+   "declared": [
+    "K",
+    "crank",
+    "knee"
+   ],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 52.5 vs row 52.5",
+   "recomputed": 52.5,
+   "row": 52.5
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "dashboard sweep best 4.25 (score 98.45) sits 13.21 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 5 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/held_stackfix.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/price_flange.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/price_base.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/price_R.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_held.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/coil.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/price_stackfix.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_flood.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_bench.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_bumpcheck.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-buildability/stack.json",
+  "docs/concepts/verify/proxtrack-relay-knuckle-4r-remeasure_edges.json"
+ ],
+ "git": "9028dec",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-18T21:29:26Z"
+}

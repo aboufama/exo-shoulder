@@ -1,0 +1,82 @@
+{
+ "(iii) crank 13, horn r 2.0": {
+  "min_sd_mm": 0.959,
+  "where": [
+   "Raise overhead 78",
+   8.07,
+   11.52,
+   59.2
+  ],
+  "frames_under_2mm": 57,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 1.233,
+  "raise_overhead_dwell_min_mm": 2.17,
+  "lobe": {
+   "profile_r": [
+    10.352,
+    11.533
+   ],
+   "profile_az": [
+    45.26,
+    59.35
+   ],
+   "past_skirt": 1.533,
+   "flank_to_roller_at_stopB": 0.047,
+   "band": [
+    6.15,
+    8.75
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.35,
+   "lobe_r_end": 11.53,
+   "pa_deg": [
+    6.2,
+    21.4
+   ],
+   "lift_mm": 1.325,
+   "rocker_turn_deg": 8.46,
+   "rod_cap_clear_min": 1.52
+  }
+ },
+ "(iii) crank 14, horn r 2.493": {
+  "min_sd_mm": 0.759,
+  "where": [
+   "Raise overhead 78",
+   7.71,
+   11.74,
+   59.5
+  ],
+  "frames_under_2mm": 61,
+  "frames": 375,
+  "raise_overhead_flank_min_mm": 1.063,
+  "raise_overhead_dwell_min_mm": 2.223,
+  "lobe": {
+   "profile_r": [
+    10.428,
+    11.75
+   ],
+   "profile_az": [
+    46.03,
+    59.56
+   ],
+   "past_skirt": 1.75,
+   "flank_to_roller_at_stopB": 0.053,
+   "band": [
+    6.15,
+    8.75
+   ]
+  },
+  "drive": {
+   "lobe_r_onset": 10.43,
+   "lobe_r_end": 11.75,
+   "pa_deg": [
+    6.6,
+    24.4
+   ],
+   "lift_mm": 1.516,
+   "rocker_turn_deg": 9.69,
+   "rod_cap_clear_min": 1.66
+  }
+ }
+}

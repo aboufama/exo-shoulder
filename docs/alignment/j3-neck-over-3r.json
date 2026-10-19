@@ -1,0 +1,115 @@
+{
+ "id": "j3-neck-over-3r",
+ "status": "verified",
+ "v_gap": 28.46,
+ "complexity": 8.5,
+ "verdict": "watch",
+ "reasons": [
+  "held_out: no held-out measurement on file: the claim has never been worn off its own bench",
+  "dominance: cannot compare with slipper-nose-knuckle-3r at 2 mm",
+  "continuity: continuity record without the connected numbers (docs/concepts/verify/j3-neck-over-3r_nw14_big_frozen.json)",
+  "fold_margin: no min-th margin over taken poses on file (rule: each claim reports it)",
+  "sampling: no per-part in-band record: unsampled bodies cannot be ruled out",
+  "reporting: verdict text still reads as a self-measured screen; dashboard sweep best 22.87 (score 91.68) sits 5.59 below the verified number"
+ ],
+ "checks": [
+  {
+   "check": "held_out",
+   "level": "watch",
+   "reason": "no held-out measurement on file: the claim has never been worn off its own bench",
+   "v_gap": 28.46
+  },
+  {
+   "check": "fast_frozen",
+   "level": "ok",
+   "reason": "self/fast 22.87 -> verified 28.46 (+5.59)",
+   "fast": 22.87,
+   "verified": 28.46,
+   "drop": 5.59
+  },
+  {
+   "check": "near_touch",
+   "level": "ok",
+   "reason": "plain 28.46, <1 mm 35.44, 2 mm near-touch not measured (not required since 2026-10-17) (row exact_frozen.best_C6.gap_near1)",
+   "shell2": null,
+   "plain": 28.46,
+   "n1": 35.44,
+   "n2": null,
+   "n3": null,
+   "band3": null,
+   "hist": null,
+   "minmm": null,
+   "source": "row exact_frozen.best_C6.gap_near1"
+  },
+  {
+   "check": "contact_depth",
+   "level": "ok",
+   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump j3-neck-over-3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "depths": {
+    "v_gap 28.46": {}
+   }
+  },
+  {
+   "check": "dominance",
+   "level": "watch",
+   "reason": "cannot compare with slipper-nose-knuckle-3r at 2 mm"
+  },
+  {
+   "check": "continuity",
+   "level": "watch",
+   "reason": "continuity record without the connected numbers (docs/concepts/verify/j3-neck-over-3r_nw14_big_frozen.json)",
+   "record": "{'gap': 28.86, 'reach': 0.7389, 'follow': 0.9636, 'inband14': 0.8307, 'inband10': 0.4696, 'contact': 0.0582, 'gap_near1': 35.83, 'min_metal_skin': 0.0, 'overhead': {'n_ws': 28, 'reach': 0.1786, 'n_clip': 10, 'follow': 0.6, 'n_taken': 11, 'inband14': 0.8945, 'inband10': 0.6449}, 'forced': {'ws_stretc"
+  },
+  {
+   "check": "fold_margin",
+   "level": "watch",
+   "reason": "no min-th margin over taken poses on file (rule: each claim reports it)"
+  },
+  {
+   "check": "idle",
+   "level": "ok",
+   "reason": "no moving drive / joint declared",
+   "spans": [],
+   "declared": [],
+   "rigid": []
+  },
+  {
+   "check": "sampling",
+   "level": "watch",
+   "reason": "no per-part in-band record: unsampled bodies cannot be ruled out"
+  },
+  {
+   "check": "complexity",
+   "level": "ok",
+   "reason": "recomputed 8.5 vs row 8.5",
+   "recomputed": 8.5,
+   "row": 8.5
+  },
+  {
+   "check": "reporting",
+   "level": "watch",
+   "reason": "verdict text still reads as a self-measured screen; dashboard sweep best 22.87 (score 91.68) sits 5.59 below the verified number"
+  },
+  {
+   "check": "judge_change",
+   "level": "ok",
+   "reason": "no bench / judge / metric file changed in the 3 commits that touched the row"
+  },
+  {
+   "check": "rules",
+   "level": "ok",
+   "reason": "O20, margin >= 5, translations <= 2 as recorded"
+  }
+ ],
+ "remeasured": {
+  "bench": false,
+  "held": false
+ },
+ "verifier_files": [
+  "docs/concepts/verify/j3-neck-over-3r_nw14_big_frozen.json",
+  "docs/concepts/verify/j3-neck-over-3r_claim_big_frozen.json"
+ ],
+ "git": "06f7b8d",
+ "tool_version": "2026-10-17.2",
+ "t": "2026-10-17T08:03:46Z"
+}
