@@ -85,7 +85,7 @@ ol.steps b { font-weight: 600 }
 </div>
 
 <div class="panel" id="key"><h1>Finishes</h1><div id="keyrows"></div>
-  <p class="note">The mannequin is the judges' body model, posed frame by frame, matte black.</p></div>
+  <p class="note">The body is the judges' body model, posed frame by frame: its skin in matte black, or its muscles and bones. Anatomy: BodyParts3D, © The Database Center for Life Science, CC BY-SA 2.1 Japan.</p></div>
 
 <div class="panel" id="bar">
   <div class="seg" role="group" aria-label="Design">
@@ -97,7 +97,7 @@ ol.steps b { font-weight: 600 }
   <input type="range" id="scrub" min="0" max="100" value="0" aria-label="Frame">
   <label class="ck"><input type="checkbox" id="cAxes" checked> axes</label>
   <label class="ck"><input type="checkbox" id="cLab" checked> labels</label>
-  <label class="ck hide-sm"><input type="checkbox" id="cMan" checked> mannequin</label>
+  <select id="body" aria-label="Body"><option value="skin">Body: skin</option><option value="muscles">Body: muscles</option><option value="off">Body: off</option></select>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -261,6 +261,58 @@ function poseSkin(cl, i, lift) {
   SK.mesh.geometry.attributes.position.needsUpdate = true; SK.mesh.geometry.computeVertexNormals();
 }
 
+
+// ---------------- muscles: the same rig's muscles and bones (docs/viz3d/build_muscles.py). Rigid parts ride their
+// segment; the moving muscles are keyframed in their bone's frame, so bone motion is exact and only their shape is interpolated
+const MU = { cache: {}, pending: {}, ready: null, groups: [], root: new THREE.Group() }; MU.root.visible = false; world.add(MU.root);
+const MUMAT = { muscle: new THREE.MeshStandardMaterial({ color: 0x5e1d16, roughness: 0.55, metalness: 0, envMapIntensity: 0.45 }),
+  bone: new THREE.MeshStandardMaterial({ color: 0xdcd4c0, roughness: 0.62, metalness: 0, envMapIntensity: 0.6 }),
+  cartilage: new THREE.MeshStandardMaterial({ color: 0xc5ccc6, roughness: 0.5, metalness: 0, envMapIntensity: 0.6 }) };
+function loadMuscles() {
+  if (MU.ready) return MU.ready;
+  MU.ready = Promise.all([fetch('muscles/static.json').then((r) => r.json()), fetchBin('muscles/static.txt'), fetch('muscles/dyn.json').then((r) => r.json()), fetchBin('muscles/dyn.txt')])
+    .then(([sj, sb, dj, db]) => {
+      let off = 0;
+      for (const g of sj.groups) {                                   // int16 xyz block (padded to 4 bytes), then uint32 faces
+        const p16 = new Int16Array(sb, off, g.nv * 3); off += (g.nv * 6 + 3) & ~3;
+        const idx = new Uint32Array(sb, off, g.nf * 3); off += g.nf * 12;
+        const P = new Float32Array(g.nv * 3); for (let i = 0; i < P.length; i++) P[i] = p16[i] * sj.q;
+        const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(P, 3)); geo.setIndex(new THREE.BufferAttribute(idx, 1)); geo.computeVertexNormals();
+        const m = new THREE.Mesh(geo, MUMAT[g.cls] || MUMAT.muscle); m.matrixAutoUpdate = false; m.castShadow = m.receiveShadow = true; m.userData.seg = g.seg;
+        MU.root.add(m); MU.groups.push(m);
+      }
+      MU.dyn = { n: dj.nv, step: dj.step, q: dj.q, seg: new Uint8Array(db, dj.nf * 12, dj.nv) };
+      const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(dj.nv * 3), 3));
+      geo.setIndex(new THREE.BufferAttribute(new Uint32Array(db, 0, dj.nf * 3), 1));
+      MU.mesh = new THREE.Mesh(geo, MUMAT.muscle); MU.mesh.frustumCulled = false; MU.mesh.castShadow = MU.mesh.receiveShadow = true; MU.root.add(MU.mesh);
+      if (focus) MU.root.traverse((m) => m.isMesh && ghost(m, true, 0.06));
+    });
+  return MU.ready;
+}
+function musFor(name) {
+  if (MU.cache[name] || MU.pending[name]) return MU.cache[name];
+  MU.pending[name] = fetchBin('muscles/' + name).then((b) => { MU.cache[name] = b; render(true); });
+  return null;
+}
+function poseMuscles(cl, i, lift) {
+  if (!MU.mesh || !cl.musc) return;
+  const buf = musFor(cl.musc); if (!buf) return;
+  const D_ = MU.dyn, n = cl.frames.length, st = D_.step, nk = Math.ceil(n / st) + ((n - 1) % st ? 1 : 0), m = D_.n;
+  const X = new Int16Array(buf, 0, nk * m * 3), T = new Float32Array(buf.slice(nk * m * 6, nk * m * 6 + n * 48 * 4));
+  const seg = [[1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -lift, 0]];          // trunk, then the rig's scapula / humerus / forearm / hand
+  for (let k = 0; k < 4; k++) seg.push(Array.from(T.subarray(i * 48 + k * 12, i * 48 + k * 12 + 12)));
+  for (const g of MU.groups) { g.matrix.copy(mat4(seg[g.userData.seg] || seg[0])); g.matrixWorldNeedsUpdate = true; }
+  const keyF = (j) => Math.min(j * st, n - 1), k0 = Math.min(Math.floor(i / st), nk - 1), k1 = Math.min(k0 + 1, nk - 1), f0 = keyF(k0), f1 = keyF(k1);
+  const a = f1 > f0 ? (i - f0) / (f1 - f0) : 0, b = 1 - a, o0 = k0 * m * 3, o1 = k1 * m * 3, q = D_.q, P = MU.mesh.geometry.attributes.position.array;
+  for (let v = 0; v < m; v++) {
+    const s0 = o0 + v * 3, s1 = o1 + v * 3, x = q * (b * X[s0] + a * X[s1]), y = q * (b * X[s0 + 1] + a * X[s1 + 1]), z = q * (b * X[s0 + 2] + a * X[s1 + 2]), A = seg[D_.seg[v]];
+    P[v * 3] = A[0] * x + A[1] * y + A[2] * z + A[9]; P[v * 3 + 1] = A[3] * x + A[4] * y + A[5] * z + A[10]; P[v * 3 + 2] = A[6] * x + A[7] * y + A[8] * z + A[11];
+  }
+  MU.mesh.geometry.attributes.position.needsUpdate = true; MU.mesh.geometry.computeVertexNormals();
+}
+let bodyMode = 'skin';
+function applyBody() { if (SK.mesh) SK.mesh.visible = bodyMode === 'skin'; MU.root.visible = bodyMode === 'muscles'; }
+
 // ---------------- vanilla zc-frontier: its verified model dressed in real hardware (B's Ø20 hub stack, Ti straps)
 const ZC = window.KIN && KIN.concepts['zc-frontier-3r'];
 const VAN = { root: new THREE.Group(), parts: [], sol: {}, built: false, axisLines: [] }; VAN.root.visible = false; world.add(VAN.root);
@@ -394,6 +446,7 @@ async function setFocus(on) {
   for (const [g, grp] of Object.entries(D.A.groups)) grp.traverse((m) => { if (m.isMesh) ghost(m, on && !FX.keep.has(g), 0.1); });
   if (FX.cap) ghost(FX.cap.m, on, 0.2);
   if (SK.mesh) ghost(SK.mesh, on, 0.05);
+  MU.root.traverse((m) => m.isMesh && ghost(m, on, 0.06));
   tint(on && $('cTint').checked);
   world.matrix.identity(); world.matrixWorldNeedsUpdate = true; hold0 = null;
   if (on) {
@@ -454,7 +507,11 @@ $('spark').addEventListener('click', (e) => {                     // click the g
 $('scrub').oninput = (e) => { playing = false; $('play').textContent = 'Play'; t = +e.target.value / mot().clips[clipI].fps; render(true); };
 $('cAxes').onchange = (e) => { for (const d of Object.values(D)) d.axisLines.forEach((l) => (l.visible = e.target.checked)); VAN.axisLines.forEach((l) => (l.visible = e.target.checked)); };
 $('cLab').onchange = (e) => { labRoot.style.display = leaders.style.display = e.target.checked ? '' : 'none'; };
-$('cMan').onchange = (e) => { if (SK.mesh) SK.mesh.visible = e.target.checked; };
+$('body').onchange = async (e) => {
+  bodyMode = e.target.value;
+  if (bodyMode === 'muscles' && !MU.mesh) { $('loading').style.display = ''; $('loading').textContent = 'Loading the muscles…'; try { await loadMuscles(); } finally { $('loading').style.display = 'none'; } }
+  applyBody(); render(true);
+};
 
 const fmt = (x, d) => (x >= 0 ? '+' : '−') + Math.abs(x).toFixed(d == null ? 1 : d) + '°';
 function render(force) {
@@ -462,7 +519,7 @@ function render(force) {
   const cl = M.clips[clipI], n = cl.frames.length, i = Math.min(n - 1, Math.floor(t * cl.fps));
   if (!force && i === lastI) return; lastI = i;
   const f = cl.frames[i];
-  poseSkin(cl, i, f.lift);
+  if (bodyMode === 'skin') poseSkin(cl, i, f.lift); else if (bodyMode === 'muscles') poseMuscles(cl, i, f.lift);
   $('scrub').value = i;
   const rows = [['Motion', `${cl.name} · ${(i / cl.fps).toFixed(1)} s`], ['Arm', `plane ${f.p[0].toFixed(0)}°, elevation ${f.p[1].toFixed(0)}°, twist ${f.p[2].toFixed(0)}°`]];
   const st = $('st');

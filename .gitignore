@@ -72,3 +72,4 @@ docs/alignment/remeasure/.*tmp*.json
 docs/viz3d/*/exo.txt
 docs/viz3d/*/motion.json
 docs/viz3d/skin/
+docs/viz3d/muscles/

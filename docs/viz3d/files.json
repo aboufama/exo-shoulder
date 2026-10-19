@@ -15,5 +15,18 @@
  "skin/dbb167c3fa61.txt": "docs/viz3d/skin/dbb167c3fa61.txt",
  "skin/e2233d38377c.txt": "docs/viz3d/skin/e2233d38377c.txt",
  "skin/mesh.json": "docs/viz3d/skin/mesh.json",
- "skin/mesh.txt": "docs/viz3d/skin/mesh.txt"
+ "skin/mesh.txt": "docs/viz3d/skin/mesh.txt",
+ "muscles/1ee0cb5c98ab.txt": "docs/viz3d/muscles/1ee0cb5c98ab.txt",
+ "muscles/3ffac764881d.txt": "docs/viz3d/muscles/3ffac764881d.txt",
+ "muscles/504b47170d93.txt": "docs/viz3d/muscles/504b47170d93.txt",
+ "muscles/608d4ba2253c.txt": "docs/viz3d/muscles/608d4ba2253c.txt",
+ "muscles/8673d30c3e40.txt": "docs/viz3d/muscles/8673d30c3e40.txt",
+ "muscles/88e9537f119e.txt": "docs/viz3d/muscles/88e9537f119e.txt",
+ "muscles/8e2eb5a6433e.txt": "docs/viz3d/muscles/8e2eb5a6433e.txt",
+ "muscles/dbb167c3fa61.txt": "docs/viz3d/muscles/dbb167c3fa61.txt",
+ "muscles/dyn.json": "docs/viz3d/muscles/dyn.json",
+ "muscles/dyn.txt": "docs/viz3d/muscles/dyn.txt",
+ "muscles/e2233d38377c.txt": "docs/viz3d/muscles/e2233d38377c.txt",
+ "muscles/static.json": "docs/viz3d/muscles/static.json",
+ "muscles/static.txt": "docs/viz3d/muscles/static.txt"
 }
