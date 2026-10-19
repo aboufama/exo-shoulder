@@ -1,0 +1,93 @@
+{
+"cell": {
+"J1": {
+"kind": "roll",
+"ga": 11.427,
+"gb": 5.901,
+"beta": 18.843,
+"sign": 1
+},
+"J2": {
+"kind": "roll",
+"ga": 8.733,
+"gb": 14.229,
+"beta": 42.029,
+"sign": 1
+}
+},
+"taken": 196,
+"members": [
+{
+"member": "J1 sun band (proximal)",
+"R_lo": 51.0,
+"off_body_rays": 0.0,
+"contact_poses": 0,
+"n_poses": 196,
+"inband14": 1.0,
+"inband10": 0.526,
+"min_mm": 1.72,
+"p95_mm": 11.2,
+"n_samples": 22
+},
+{
+"member": "J1 planet band (distal)",
+"R_lo": 51.0,
+"off_body_rays": 0.0,
+"contact_poses": 2,
+"n_poses": 196,
+"inband14": 1.0,
+"inband10": 0.783,
+"min_mm": 2.38,
+"p95_mm": 10.8,
+"n_samples": 22
+},
+{
+"member": "J1 O20 disc control (one level)",
+"R_lo": 51.2,
+"off_body_rays": 0.0,
+"contact_poses": 0,
+"n_poses": 196,
+"inband14": 0.998,
+"inband10": 0.601,
+"min_mm": 1.07,
+"p95_mm": 11.9,
+"n_samples": 81
+},
+{
+"member": "J2 sun band (proximal)",
+"R_lo": 62.0,
+"off_body_rays": 0.0051,
+"contact_poses": 5,
+"n_poses": 196,
+"inband14": 0.994,
+"inband10": 0.381,
+"min_mm": 2.61,
+"p95_mm": 12.7,
+"n_samples": 18
+},
+{
+"member": "J2 planet band (distal)",
+"R_lo": 132.0,
+"off_body_rays": 0.0068,
+"contact_poses": 6,
+"n_poses": 196,
+"inband14": 0.011,
+"inband10": 0.008,
+"min_mm": 1.7,
+"p95_mm": 31.8,
+"n_samples": 18
+},
+{
+"member": "J2 O20 disc control (one level)",
+"R_lo": 122.7,
+"off_body_rays": 0.006,
+"contact_poses": 9,
+"n_poses": 196,
+"inband14": 0.003,
+"inband10": 0.001,
+"min_mm": 0.1,
+"p95_mm": 31.8,
+"n_samples": 81
+}
+]
+}

@@ -115,3 +115,23 @@ plane 90-150, IR -90..-150) - exactly the 5 poses where pick 1's table says "tak
 contact (ik.mismatch lists them with 139 and 182). They are an artefact of importing a table chosen on another
 design's metal: the take-only rule would never pick a contacting k. The fix (this design's own k-table on the
 mismatched poses, then one final wear) is the `fixk` mode; its reading follows.
+
+## Red team (own)
+
+- **The pose that pinches: the anterior shell end vs the torso.** At delta 0 the anterior end (+46.8 deg from the pad
+  azimuth) clears the hanging-IR pose 460 by 1.04 mm; 3.5 deg further (delta 3.5) it is -1.37..-1.58 mm on 5 ws poses and
+  2 clip frames; 12 deg further -10.55. The cap is steep (about 2.5 mm per deg), so a wider wearer or a deeper IR hang
+  lands on it. Shell-end bins over the taken poses: anterior +44: 1.04 mm (460), +42: 3.13, +40: 4.12; posterior
+  -10: 1.67 (330), -8: 2.28. The bench counts the elev-0 hanging pose up to 4x (plane + axial = 90 at elev 0 is one
+  physical pose: 214, 241, 402, 451), so a shell that pokes there pays 4 ws poses + 4 contacts - the auditor should
+  know that this single posture weighs 4 on the score.
+- **The pose that jams:** none (0 jams in every reading, with the knee link added to the carriage / bracket jam lists).
+- **The optimistic numbers.** (1) The continuity flood is pick 1's (the lead's knee): this knee loses 1 lead take (203)
+  at psi 0, so a flood re-built on this knee could drop at most a few relayed nodes. (2) The IK table is pick 1's: it
+  was chosen on another design's metal; it is pessimistic where it picks a contacting k (5 ring-made contacts, cause
+  'hardware') and may miss takes this metal allows - the `fixk` reading re-chooses the mismatched poses only, not the
+  whole table. (3) J4 is an ACTIVE self-motion set by a proximity IK, held by nothing in an unpowered MVP1
+  (determinacy caveat as pick 1 / freek): a labelled 4-joint option. (4) The IK rides the slot end (11 of 31 new takes at
+  k 40). (5) psi*(pose) jumps between neighbouring poses (pick 1 measured > 20 deg on 3 of 176 adjacent pairs); the skin
+  along a J4 sweep is not checked. (6) J4 holding torque, slot friction and the bracket / carriage moment on a 14 mm
+  T-nut are not modelled.

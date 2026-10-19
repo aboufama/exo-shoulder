@@ -147,6 +147,24 @@ def fixk(base, prev_path, outp):
     o = IK.ik_run(base, "bench", outp, choice_from=tf); o["ik"]["fixk"] = fixed; json.dump(o, open(outp, "w"), default=float); return o
 
 
+def shellall(base, outp):
+    """RED TEAM: the arm-fixed shell is on the arm at EVERY pose, whether the chain closes or not; the bench only scores
+    metal on closing poses. Min shell (underside + top) skin distance at every Bench(110,360) pose (exact)."""
+    F = fit(base); rp = dict(F["rp"]); rp.update({k: base[k] for k in base if k in PT.DEF}); os.environ["CB_EXACT"] = "1"
+    G = PT.geometry(F["M1"], F["B1"], F["ax"], rp); arm, car = PT.relay_points(G, F["ax"])
+    Bf = CB.Bench(110, 360); Bf = IK.subbench(Bf, np.arange(len(Bf.idx))); Z = AA.Z0
+    RS = Z["RS"][Bf.idx].astype(float); Q0 = Z["HG"][Bf.idx].astype(float); out = []
+    for i in range(len(Bf.idx)):
+        wa = (arm @ Q0[i].T) @ RS[i].T; d = Bf.dist(i, wa); k = int(np.argmin(d))
+        out.append(dict(i=i, kind=Bf.kind[i], pose=[Bf.poses[i][q] for q in ("plane", "elev", "axial")], shell_mm=round(float(d[k]), 2),
+                        az_rel=round(float(G["arm_az"][k] - G["th0_pad"]), 1) if "arm_az" in G else None))
+    ws = [o for o in out if o["kind"] == "ws"]; cl = [o for o in out if o["kind"] == "clip"]
+    rep = dict(ws_in_skin=[o for o in ws if o["shell_mm"] < 0], ws_under1=sum(1 for o in ws if o["shell_mm"] < 1), clip_in_skin=[o for o in cl if o["shell_mm"] < 0],
+               arc=[G["lo"], G["hi"]], th0_pad=G["th0_pad"], R_t=G["R_t"])
+    json.dump(dict(report=rep, poses=out), open(outp, "w"), default=float)
+    print(json.dumps(dict(ws_in_skin=[(o["i"], o["pose"], o["shell_mm"], o["az_rel"]) for o in rep["ws_in_skin"]], clip_in_skin=len(rep["clip_in_skin"]), ws_under1=rep["ws_under1"])), flush=True)
+
+
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "help"
     par = dict(CLAIM, **(json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}))
@@ -158,6 +176,7 @@ if __name__ == "__main__":
     if mode == "rechoose":                                   # pick 1's IK table (its k per pose, take-only rule) worn with THIS knee + distal metal
         IK.ik_run(par, sys.argv[3], sys.argv[4], choice_from=sys.argv[5] if len(sys.argv) > 5 else PICK1_TABLE); sys.exit(0)
     if mode == "fixk": fixk(par, sys.argv[3], sys.argv[4]); sys.exit(0)        # fixk '<json>' prev_ik_bench.json out.json
+    if mode == "shellall": shellall(par, sys.argv[3]); sys.exit(0)
     if mode == "viz":                                        # the lead's viz export with the short knee (motion preview P / G)
         v = CC.viz_export({**LEAD, **{k: par[k] for k in KNEE_KEYS}}); json.dump(v, open(sys.argv[3], "w"), default=float); print(list(v)); sys.exit(0)
     print(__doc__)

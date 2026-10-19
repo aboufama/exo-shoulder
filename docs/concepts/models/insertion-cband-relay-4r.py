@@ -78,6 +78,14 @@ def readings(M, B, phi_b, extra=None, jam=None, kc=0):
     also drops the member-3 contact entries OWNED by knee-side parts (E strap top, O12 boss ring: contact_owner), which
     the members-5/6 filter keeps"""
     own = contact_owner(M); keepC = [not (kc and o[1] in KNEE_PARTS) for o in own]
+    extraC = []
+    if kc >= 2:                                                       # AUDIT kc 2: K WELDED AS ONE BAR (the row's mechanism: link 1
+        keepC = [k_ and o[1] != "hubK" for k_, o in zip(keepC, own)]  # one bar): hub K's O20 walls / crowns deleted; its skin-facing
+        mK, XK = M.rigid["hubK"]; XK = np.asarray(XK); cK = XK.mean(0)  # underside disc (O20, at the fitted stack bottom) kept as the
+        w_, V_ = np.linalg.eigh(np.cov((XK - cK).T)); nK = V_[:, 0] * (1.0 if V_[:, 0] @ cK >= 0 else -1.0)   # bar's joint pad,
+        extraC.append((mK, XK + 3.0 * nK))                             # with a 3 mm top face (T_LINK) and its rim ring as contact-only
+        rr = np.linalg.norm((XK - cK) - ((XK - cK) @ nK)[:, None] * nK, axis=1); rim = XK[rr >= rr.max() - 1.5]
+        for z in (0.0, 1.5, 3.0): extraC.append((mK, rim + z * nK))
     names = list(M.rigid) + list(M.link_pts); sizes = [len(X) for _, X in M.rigid.values()] + [len(X) for _, X in M.link_pts.values()]
     cut = np.cumsum([0] + sizes); keep = np.ones(cut[-1], bool); keepK = np.ones(cut[-1], bool)
     for k, n in enumerate(names):
@@ -92,7 +100,8 @@ def readings(M, B, phi_b, extra=None, jam=None, kc=0):
             if d is None: R.append(None); continue
             if mask is not None:
                 if len(d) == len(mask) + 1:
-                    Wc = [M.world(m, j, Pc) for (m, Pc), kp in zip(M.contact, keepC) if kp and m not in (5, 6)]; Wc = [w for w in Wc if len(w)]
+                    Wc = [M.world(m, j, Pc) for (m, Pc), kp in zip(M.contact, keepC) if kp and m not in (5, 6)] + [M.world(m, j, Pc) for m, Pc in extraC]
+                    Wc = [w for w in Wc if len(w)]
                     dck = float(B.dist(j, np.concatenate(Wc)).min()) if Wc else 1e9
                     d = np.r_[d[:-1][mask], dck] if dck < 0 else d[:-1][mask]
                 elif len(d) != len(mask): raise SystemExit(f"layout mismatch {len(d)} vs {len(mask)}")

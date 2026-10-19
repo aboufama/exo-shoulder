@@ -104,6 +104,24 @@ disc at in-band 0.964 (control).
   judge's "bands 0.960" included the planet side is for the pick's modeller to check. The internal J2 cells
   that read best kinematically (289 vs 285) are worse in metal (sun band 0.56 vs 0.96).
 
+## Metal-aware J2 search (the hand-off, measured): a band-legal rolling J2 exists
+
+`docs/research/rolling_cone_3r/rc_metal_j2.py`: on H1's knee chain, a ws pose counts only if it is a kinematic take
+AND both J2 bands are clear of the skin at their one level (q 0.97); objective = those takes + 20 x each band's in-band
+shortfall below 0.90; 150 random + 2 x 200 CMA-ES = 551 cells on Bench(60,160) fast (gate: 0.00 / 0.00 / 0.00).
+
+| J2 cell (knee chain, H1 seats) | sun / planet in-band 14 (one level) | R sun / planet | metal takes / 160 | kin Bench(110,360) ws / clip / overhead |
+|---|---|---|---|---|
+| judge's 25/10/30 (pick #2 as ideated) | 0.962 / **0.007** | 63 / 135 mm | 129 | 285 / 110 / 17 |
+| **8.73 / 14.23, beta 42.0, external** | **0.989 / 0.988** | 61 / 62 mm | **130** | **279 / 110 / 16** |
+| 8.06 / 16.79, beta 40.4, external | 0.989 / 0.989 | 61 / 63 mm | 130 | 279 / 110 / 16 |
+
+297 of the 399 valid cells hold BOTH bands >= 0.90. The legal cells put the SMALL cone on link 1 (sun 8-12 deg) and the
+larger one on link 2 (planet 13-17 deg), beta ~42 - the swap the red team proposed: the planet band no longer runs
+under the arm root. The price is 6 kinematic takes on the 360 (279 vs 285); the gain over H1 is +16 (263 -> 279), 0
+lost, full clip continuity, min th margin 5.67-5.9 deg. Arcs: sun 86-94 deg on a 8.4-9.1 mm pitch radius, planet
+46-53 deg on 14.7-17.3 mm, contact walk 13.7-13.8 mm.
+
 ## Verdict
 
 **Dead as specified (three hubless pairs, rigid cuff); the lever it contains lives on in pick #2.**
@@ -116,8 +134,9 @@ disc at in-band 0.964 (control).
    the last third, top-5 spread 0.23; J1 0 / 0 / 0; J3 0.23 / 0 / 0.23; J2 0.23 / 0.23 / 0.23 - converged.
 
 Hand-offs:
-- **To pick #2:** measure the planet band at one level on the overhead poses before any claim; try the planet on the
-  J1 side (swap which member carries the small cone, beta + 180) so the arm root never passes under it.
+- **To pick #2:** measure the planet band at one level on the overhead poses before any claim, and start from the
+  band-legal cell 8.73 / 14.23 / beta 42.0 (both bands 0.99 at one level, 279 / 110 / 16 kinematic) instead of
+  25/10/30 (planet band 0.007).
 - **J1 rolling on top of the J2 pair** (+6 kinematic on the 360, 0 lost, full continuity, both J1 bands in band at
   R 51) is the only extra pair worth a cell; it is another hubless joint for the user's rule question.
 - **Rule questions for the user** (unchanged from the judge's list): hubless rolling joints vs "O20 v5 at every joint";

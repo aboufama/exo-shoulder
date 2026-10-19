@@ -8,7 +8,7 @@
  "passive_translations": 0,
  "status": "screened",
  "t_ideated": null,
- "t_screened": "2026-10-19T03:20:44Z",
+ "t_screened": "2026-10-19T03:23:04Z",
  "reach": 0.8056,
  "follow": 1.0,
  "inband14": 0.894,
@@ -219,6 +219,28 @@
   },
   "jams": 0,
   "perpose": "docs/concepts/verify/ikring-distalshell-knuckle-4r/ik_bench_perpose.json",
+  "source": "ik_bench.json",
+  "table_import": {
+   "gate": 11.76,
+   "plain": 11.16,
+   "near2": 24.43,
+   "ws_taken": 290,
+   "overhead": [
+    13,
+    28
+   ],
+   "contacts": 7,
+   "mismatch": [
+    139,
+    182,
+    354,
+    417,
+    431,
+    441,
+    464
+   ]
+  },
+  "fixk": null,
   "chain_psi0": {
    "gap": 18.9,
    "ws_taken": 261,
@@ -245,5 +267,8 @@
   }
  },
  "held_out": null,
- "doc": "docs/concepts/ikring-distalshell-knuckle-4r.md"
+ "doc": "docs/concepts/ikring-distalshell-knuckle-4r.md",
+ "verdict": "screened (a LABELLED 4-JOINT OPTION, 4 active joints, never the lead): Bench(110,360) exact frozen chain-only gate 11.76 (score 95.72), plain 11.16, reach 0.8056 (290/360), overhead 13/28 (lead 8), elev 90-140 55/85, 7 contacts (T5 34.52 mm), 2 mm reading 24.43 (lead 34.84, pick 1 47.00); pre-registered gates: pass <= 13.75 chain-only yes; connected overhead >= 12/28 yes; ring-added overhead takes under 2 mm <= 2 yes; held overhead: pending. Step 1 (short knee keeps 261/262 lead takes, follow 1.0) and step 2 (distal shell parked costs 0 gate points: 18.90 = chain-only; shell in-band 1.0; 0 shell-torso contacts at delta 0) pass. vs pick 1 (9.75): better in-band (0.894 vs 0.890) and 2 mm (24.43 vs 47.00), worse contacts / reach at the imported IK table.",
+ "limiter": "(1) the fold: the abduction cone stays shut (J1 / J2 seat-level wall, the ring cannot reach it) and the stretched-fold IR overhead poses close at no k in [0, 40]; (2) the ANTERIOR shell end meets the torso at the hanging-IR posture: the measured cap at s 118 is ~+47-49 deg from the pad azimuth (delta 0 puts the end at +46.8, 1.04 mm clear at pose 460; delta 3.5 -> -1.37 mm on 5 ws + 2 clip; delta 12 -> -10.55), so the travel cannot grow anteriorly and the IK rides the slot end; (3) ring-made contacts at k 25-40 on IR poses plane 90-150 (cause: hardware).",
+ "note": "Model docs/concepts/models/ikring-distalshell-knuckle-4r.py imports pick 1 (ikring-thinstack-knuckle-4r) read-only; changes: knee keys overridable in the fit, NO BUMP (zero amounts; the jam rule is the guard), the knee link added to the carriage / bracket jam lists, private verify dir. Knee: 98-config random sweep on Bench(60,160) fast psi 0 chain only (gate: best gained 0.0 score points over the 2nd half and 0.0 over the last third, top-5 spread 0.32 -> converged for the knee; best 13.15 at lE 69.52, movers <= s 106.9; lE 61.81 at <= 99.9 ties on the exact bench 18.88). Hardware cell: 5 parked readings on Bench(110,360) exact (delta 12 / 3.5 / 3.5+rt4 / 0, ds -26; NOT converged - a pre-registered cell plus the anterior-end correction, no envsel sweep of tilt / taz / PHI 35 / liner). IK: pick 1's table + flood imported (lead note), then fixk = this design's own k-table on the mismatched poses. Spec corrections: carriage delta 0 (not 10-15: the binding end is anterior), knee lE 69.5 (not the pin knee's 59.6), knee link jam-checked. Held: pick 1's held IK table worn with this metal (report only, never selected on). Local CPU only (load 25-27)."
 }
