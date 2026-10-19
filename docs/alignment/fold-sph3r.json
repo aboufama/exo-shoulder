@@ -29,10 +29,45 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "no per-pose contact depths on file that reproduce the claim (tools/alignment_paired.py dump fold-sph3r bench|held, or tools/alignment_wear_probe*.py); not measured",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): gap 44.72: bench 1 contact poses, sum 1.38 mm, deepest 1.38 mm at ['ws', 105.0, 45.0, -165.0], 0 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (-18.86 mm, x0.07); held depths not on file",
    "depths": {
-    "gap 44.72": {}
-   }
+    "gap 44.72": {
+     "bench": {
+      "n": 1,
+      "sum_mm": 1.38,
+      "max_mm": 1.38,
+      "n_deeper3": 0,
+      "overhead140": 0,
+      "deepest": [
+       "ws",
+       105.0,
+       45.0,
+       -165.0
+      ],
+      "gap": 44.72,
+      "src": "docs/alignment/remeasure/fold-sph3r_claim_bench_perpose.json",
+      "cross_check": {
+       "files": 1,
+       "sums": [
+        1.38
+       ],
+       "agree": true
+      }
+     }
+    }
+   },
+   "ref": "conecut-knee-knuckle-3r",
+   "compare": [
+    {
+     "claim": "gap 44.72",
+     "wear": "bench",
+     "sum": 1.38,
+     "ref_sum": 20.24,
+     "excess": -18.86,
+     "ratio": 0.07,
+     "watch": false
+    }
+   ]
   },
   {
    "check": "dominance",
@@ -95,7 +130,7 @@
   "held": false
  },
  "verifier_files": [],
- "git": "e4a9a92",
+ "git": "2a12ec4",
  "tool_version": "2026-10-19.1",
- "t": "2026-10-19T02:46:56Z"
+ "t": "2026-10-19T03:01:14Z"
 }
