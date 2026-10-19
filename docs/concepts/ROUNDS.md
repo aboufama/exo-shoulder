@@ -6184,3 +6184,12 @@ seats.
 The shoulder-slip price of a rigid cuff (liner taking ~6.4 mm p95 at R10 4 mm); whether a switch from the knee needs
 <= ~10.25 (vs the IK option) or <= 13.75 (vs every unpowered 4-joint row). The 1 cm rule, DOF cap, 5-deg fold margin, J1
 seats, O20 hubs and transmission guard stay.
+
+**Lead note 2026-10-19 ~04:40 UTC (from the ikring-thinstack-knuckle-4r audit, ledger 04:35:27Z, skeptic pending):** the
+9.75 / 10.54 of the two ikring rows is ORACLE-COMMANDED - J4's psi is picked per pose as the best of 17 by the scored
+bench's own exact skin distance (P1), the held reading re-runs that pick on the held skin (P2), nothing holds psi in the
+unpowered MVP1 (M5), and the whole plain-gap lead sits in the 0-1 mm shell (T1: 19.65 vs the lead's 19.92 at the 1 mm
+reading). It is not an MVP1-determinate number, so it is NOT the K2 kill bar (NEW-oracle-bar). Until the user rules on
+the question above, K2 compares determinate with determinate: the goal is a determinate plain verified gap <= 13.75
+(score 95, the user's target), the kill stays the plan's hardware kill, and every claim also reports its standing against
+the ikring IK options and their unpowered control (14.46) as context only.
