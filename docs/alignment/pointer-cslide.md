@@ -19,7 +19,8 @@ before this one). Row: `docs/concepts/rows/pointer-cslide.json`, status **screen
     wears it on Bench(110,360) exact and on the held-out bench.
   - **Those two exact wears did not finish in the time box.** The box ran at load ~25 on 4 cores and each process got
     25-35 % of a core. I stopped the held wear twice to free a slot for the counterfactual and clash runs (the 2-process
-    limit). The bench wear passed 7.7 CPU-min without finishing.
+    limit). The bench wear reached its own 1500 s wall timeout after about 8 CPU-min and wrote nothing.
+    The farm was not used: the CPU-farm approval is spent (CLAUDE.md rule 7, exo-cpu1 workersMax 0).
   - So the exact-bench gap, the held-out gap and the true standoff of the parts above the fast grid's 31.75 mm clamp are
     **not measured**.
 
