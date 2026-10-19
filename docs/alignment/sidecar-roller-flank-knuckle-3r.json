@@ -299,7 +299,7 @@
   "docs/concepts/verify/sidecar-roller-flank-knuckle-3r_v_bench_frozen_env.json",
   "docs/concepts/verify/sidecar-roller-flank-knuckle-3r_v_held_frozen.json"
  ],
- "git": "c136a8c",
+ "git": "b3a9a60",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-19T01:26:06Z"
+ "t": "2026-10-19T01:31:23Z"
 }
