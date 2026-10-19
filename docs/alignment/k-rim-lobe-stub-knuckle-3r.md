@@ -1,7 +1,7 @@
 # Alignment audit: k-rim-lobe-stub-knuckle-3r (verified, round 7 pick 2)
 
-Hourly audit of 2026-10-19, 02:46-03:20 UTC. Ledger entry LEDGER_TIME (`by auditor`, run
-`audit:k-rim-lobe-stub-knuckle-3r`, git LEDGER_GIT).
+Hourly audit of 2026-10-19, 02:46-03:13 UTC. Ledger entry 2026-10-19T03:11:19Z (`by auditor`, run
+`audit:k-rim-lobe-stub-knuckle-3r`, git 6d558f1).
 
 - **Why it was due:** commit ec77d25 (simplicity v2.1, 2026-10-17 04:55) touched the row after the last ledger entry
   (skeptic, 2026-10-16 20:55, watch). That commit changed one field: `complexity` 34.0 -> 4.0.
@@ -10,8 +10,8 @@ Hourly audit of 2026-10-19, 02:46-03:20 UTC. Ledger entry LEDGER_TIME (`by audit
   (16:42), the pin-knee polish held bench (06:18), the minarc mechanism flood (09:23), `tools/concept_bench.py` (04:07)
   and `tools/concept_kit.py` (06:05).
 - **Instrument note (tools/alignment_audit.py 2026-10-19.1, 702373b):** the type guard changes T5 only for readings
-  from `*_paired*.json` files. This design is in no paired file, so T5 reads the same under 2026-10-19.1 as under
-  2026-10-19.0: before this audit, "no per-pose contact depths on file". After this audit T5 reads the new wear-probe
+  from `*_paired*.json` files. This design is in no paired file, so T5 reads the same under 2026-10-19.1 as it did before
+  702373b: before this audit, "no per-pose contact depths on file". After this audit T5 reads the new wear-probe
   files. That change comes from new data, not from the instrument.
 - **What this audit touched:** no bench, judge, kit, model, row, dashboard page or CLAUDE.md, and no score. It added
   one tool, `tools/alignment_wear_probe_krim.py`. That adapter wears the claim through the verifier's own harness
@@ -21,21 +21,29 @@ Hourly audit of 2026-10-19, 02:46-03:20 UTC. Ledger entry LEDGER_TIME (`by audit
 - **Compute:** local only (nice, OMP_NUM_THREADS=1, at most 2 processes) on a box at load 23-31 from other agents. No
   farm was used, because the CPU budget line is spent. Cost $0.
 
-## Verdict: VERDICT_UPPER (ledger)
+## Verdict: WATCH (ledger)
 
 - **Claim:** verified v_gap **44.79** (score 83.71), frozen exact Bench(110,360). This audit's re-wear reproduces it to
   the digit (`remeasure/k-rim-lobe-stub-knuckle-3r_bench.json`).
-- **Held out (new):** **51.47** (score 81.28), +6.68 over the bench claim. The fit bench is unchanged (30.79) and the frozen shape is worn on the held-out set, 1154 poses (`remeasure/k-rim-lobe-stub-knuckle-3r_held.json`). It is over the tool's 6-point watch line and under its 10-point gamed line. The lead loses +4.10 on the same protocol (18.28 -> 22.38).
+- **Held out (new):** **51.47** (score 81.28), +6.68 over the bench claim. The fit bench is unchanged (30.79), and the
+  frozen shape is worn on the 1154-pose held-out set (`remeasure/k-rim-lobe-stub-knuckle-3r_held.json`). That is over
+  the tool's 6-point watch line and under its 10-point gamed line. The lead loses +4.10 on the same protocol
+  (18.28 -> 22.38).
 - **Rank:** 36th of 37 verified rows and 31st of 32 verified 3-active rows on the plain gap. It sits 26.51 points
   behind the 3-joint lead conecut-knee-knuckle-3r (18.28). Nobody calls it a contender, and its own record says so.
 - **Complexity:** the row says 4.0. A schema-correct count gives **14.25** (finding G5).
-- **Ledger reasons:** REASONS_LINE
+- **Ledger reasons:** 10, all watch.
+  - From the tool (4): `held_out` (+6.68), `fold_margin` (not on file in the files the tool reads), `sampling`,
+    `reporting`.
+  - From this judgement pass (6): G5, M2, R1, NEW-ff-mixed-metric, G1, M5.
+  - Changes since the last entry (skeptic 2026-10-16, watch): `complexity` left the list because the row now equals
+    the counter, which is finding G5. `held_out` changed from 'never worn off its bench' to a measured +6.68.
 - **Why none is gamed:** no finding shows the number ranking this design above one that is better for the wearer
   under the same harness, and no hard rule is broken:
   - The fold margin in th holds: 7.64 deg minimum on the bench, with no taken pose under 5 (held out 5.59 deg, 0 under 5, 3 under 6).
   - It has 3 active DOF, 0 passive translations and O20 hubs.
   - K is slaved by the roller-lobe pair, not read or free, and it moves (24.47 deg).
-  - The full continuity flood keeps all 131 law poses.
+  - The full continuity flood keeps every taken pose, bench (131 of 131 law poses) and held out (0 dropped).
   - The understated complexity does not move it past a better design on the score, the only ranking in force below
     score 95.
 
@@ -60,7 +68,7 @@ Hourly audit of 2026-10-19, 02:46-03:20 UTC. Ledger entry LEDGER_TIME (`by audit
 | roller-lobe transmission | pressure angle max 35.3 deg (gate 45), convex pitch radius >= rr + 1, undercut -0.001 mm | | row note, verify drive |
 | knee window | [27.85, 152.15]; taken 80.10-148.67 deg (3.48 deg spare) | taken 80.10-149.02 deg (3.13 deg spare) | `_bench.json` coord_spans K.ang |
 | part-part clearance | min 1.03 mm over taken poses (rule >= 1 mm non-adjacent) | | `_bench.json` min_clear_taken |
-| knee hardware | stk 4.8534 mm, below the iglidur 5.0 and the MR63ZZ 6.0 | stk 6.0 (MR63ZZ pair), everything else unchanged: bench **44.94 (+0.15)**; in-band14 0.8241, in-band10 0.5526; reach, follow, contact and every why-count unchanged; 1 mm 53.67, 2 mm 71.85; held at stk 6.0 not measured (time box) | `_stk6_bench.json` |
+| knee hardware | stk 4.8534 mm, below the iglidur 5.0 and the MR63ZZ 6.0 | stk 6.0 (MR63ZZ pair), everything else unchanged: bench **44.94 (+0.15)**; in-band14 0.8241, in-band10 0.5526; reach, follow, contact and every why-count unchanged; 1 mm 53.67, 2 mm 71.85; held out 51.63 (+0.16), in-band14 0.8195 | `_stk6_bench.json` |
 | springs / cuff twist | one clock spring (6 mm cap) holds K and closes the pair; no preload on file; R17 never run (no CAD) | | finding M5 |
 
 For the wearer, this is the round-6 winner's chain with a cam-slaved K. The drive itself is honest:
@@ -97,7 +105,7 @@ watch.
    - Evidence: stk 4.8534 mm, from the round-6 winner's seats (model line 56). The kit's own figures are 5.0 for an
      iglidur pin and 6.0 for an MR63ZZ pair, and the lead's 2026-10-17 build rule requires MR63ZZ pairs. The row still
      lists the knee as "iglidur pin, sensed".
-   - Measured AS BUILT (stk 6.0 only, the same harness): STK6_FINDING.
+   - Measured AS BUILT (stk 6.0 only, the same harness): bench **44.94 (+0.15)**, held out **51.63 (+0.16)**; in-band14 0.8241 / 0.8195; reach, follow, contact and every why-count unchanged.
    - Why not better: the claimed knee is 0.15-1.15 mm thinner than any hardware the build may use. The cost is small and
      the claim's ranking does not change.
    - Action: re-state the claim at stk 6.0.
@@ -159,7 +167,9 @@ it.
   the tool's watch.
 - **S5 static islands:** connected_full = static (131 of 131 law poses connected, 0 dropped). The knn flood loses
   1.69 (46.48). The bench-graph flood is 81.25, but that is a sparsity artefact of the 470-pose graph (127 dropped,
-  24 with no taken neighbour), and the rule's flood is the full one. Not present.
+  24 with no taken neighbour), and the rule's flood is the full one. Held out the full flood also drops 0 (51.47).
+  The knn flood there drops 98 poses (62.16), against 6 on the bench: the held set's denser pose graph exposes more
+  thin bridges. That is a reading for the lead, not a rule breach. Not present.
 - **M1 / M2 slim parts:** O20 hubs everywhere, MR52ZZ roller at O5 x 2.5 (+0.5 shim), boss O6. The knee stack is the
   exception: finding M2.
 - **M3 unchecked clashes:** the claim checks the lobe against hub 2, hub 3, L1b, L2, LT, knee, pad and E, and the
@@ -201,7 +211,7 @@ it.
    verifier files.
    That would clear the `fold_margin` watch on this row: 7.64 bench, 5.59 held.
 4. **Re-state the row (for the lead, not done here):** complexity 14.25 with a schema-correct mechanism record; the
-   verdict text as verified; the knee pins as unsensed MR63ZZ pairs at stk 6.0 (bench 44.94 at stk 6.0, +0.15).
+   verdict text as verified; the knee pins as unsensed MR63ZZ pairs at stk 6.0 (bench 44.94, +0.15; held out 51.63, +0.16 at stk 6.0).
 
 ## What happens next
 

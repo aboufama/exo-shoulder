@@ -288,7 +288,7 @@
  "verifier_files": [
   "docs/concepts/verify/k-rim-lobe-stub-knuckle-3r_corr_bench_frozen.json"
  ],
- "git": "d42ed86",
+ "git": "6d558f1",
  "tool_version": "2026-10-19.1",
- "t": "2026-10-19T03:02:35Z"
+ "t": "2026-10-19T03:11:13Z"
 }

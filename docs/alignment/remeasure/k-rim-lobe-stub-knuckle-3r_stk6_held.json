@@ -1,0 +1,358 @@
+{
+ "id": "k-rim-lobe-stub-knuckle-3r",
+ "wear": "held",
+ "params": {
+  "L_stub": 24.487,
+  "a0": 146.225,
+  "kK": 0.825,
+  "smhi": 22.126,
+  "a1max": 48.0,
+  "bk1": 33.191,
+  "bk2": 39.926,
+  "tip_tol": 3.087,
+  "lobe_w": 3.493,
+  "lobe_lev": 0,
+  "rr": 2.5,
+  "emb_mode": "kstub"
+ },
+ "frozen": {
+  "gap": 51.63,
+  "reach": 0.5893,
+  "follow": 0.8515,
+  "inband14": 0.8195,
+  "inband10": 0.5494,
+  "contact": 0.0266
+ },
+ "fit_fast": {
+  "gap": 30.96,
+  "reach": 0.6937,
+  "follow": 0.9333,
+  "inband14": 0.8252,
+  "inband10": 0.5532,
+  "contact": 0.0118,
+  "gap_near1": 37.0,
+  "why": {
+   "fold": 38,
+   "slide": 4,
+   "flip": 0,
+   "closure": 0,
+   "skin": 2,
+   "parts": 9,
+   "contact": 0
+  },
+  "pairs": {
+   "ROL-LOBE": 9
+  }
+ },
+ "why": {
+  "fold": 311,
+  "slide": 25,
+  "flip": 0,
+  "closure": 0,
+  "skin": 0,
+  "parts": 65,
+  "contact": 20
+ },
+ "parts_ib14": {
+  "hub1": [
+   0.986,
+   7.2,
+   80
+  ],
+  "hubK": [
+   0.937,
+   8.8,
+   80
+  ],
+  "hub2": [
+   0.993,
+   9.7,
+   80
+  ],
+  "hub3": [
+   0.654,
+   12.2,
+   80
+  ],
+  "E": [
+   0.968,
+   6.8,
+   104
+  ],
+  "boss": [
+   1.0,
+   7.1,
+   32
+  ],
+  "pad": [
+   1.0,
+   7.6,
+   32
+  ],
+  "knee": [
+   0.966,
+   10.2,
+   95
+  ],
+  "roller": [
+   0.187,
+   19.6,
+   9
+  ],
+  "lobe": [
+   0.0,
+   19.6,
+   45
+  ],
+  "L1a": [
+   0.961,
+   7.5,
+   20
+  ],
+  "L1b": [
+   0.953,
+   8.3,
+   40
+  ],
+  "L2": [
+   0.765,
+   10.9,
+   140
+  ],
+  "LT": [
+   0.122,
+   21.3,
+   32
+  ]
+ },
+ "parts_pairs": {
+  "E-L2": 3,
+  "ROL-LOBE": 62
+ },
+ "audit": {
+  "near_touch_min_mm": 0.05,
+  "near_touch_low": [
+   {
+    "mm": 0.05,
+    "i": 820,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 150.0,
+    "axial": -90.0
+   },
+   {
+    "mm": 0.18,
+    "i": 1106,
+    "kind": "ws",
+    "plane": 150.0,
+    "elev": 15.0,
+    "axial": -180.0
+   },
+   {
+    "mm": 0.32,
+    "i": 1047,
+    "kind": "ws",
+    "plane": 135.0,
+    "elev": 15.0,
+    "axial": -165.0
+   },
+   {
+    "mm": 0.53,
+    "i": 826,
+    "kind": "ws",
+    "plane": 75.0,
+    "elev": 165.0,
+    "axial": -45.0
+   },
+   {
+    "mm": 0.53,
+    "i": 979,
+    "kind": "ws",
+    "plane": 120.0,
+    "elev": 15.0,
+    "axial": -150.0
+   }
+  ],
+  "gap_near1": 61.69,
+  "near1_poses": 28,
+  "gap_near2": 78.0,
+  "near2_poses": 79,
+  "overhead140": {
+   "ws": 71,
+   "reach": 0.169,
+   "clip": 19,
+   "follow": 0.9474,
+   "inband14": 0.7875,
+   "inband10": 0.5408,
+   "why_not": {
+    "fold": 41,
+    "slide": 9,
+    "flip": 0,
+    "closure": 0,
+    "skin": 0,
+    "parts": 3,
+    "contact": 7
+   }
+  }
+ },
+ "deep": {
+  "plain": 51.63,
+  "reach": 0.5893,
+  "follow": 0.8515,
+  "inband14": 0.8195,
+  "contact": 0.0266,
+  "n_poses": 1154,
+  "n_taken": 733,
+  "min_metal_mm": 0.053,
+  "gap_near1": 61.69,
+  "near1_poses": 28,
+  "gap_near2": 78.0,
+  "near2_poses": 79,
+  "gap_near3": 182.03,
+  "near3_poses": 343,
+  "clip_metal_hist": {
+   "0-1": 0.0002,
+   "1-2": 0.0012,
+   "2-3": 0.0052,
+   "3-4": 0.0178,
+   "4-6": 0.1094,
+   "6-10": 0.417,
+   "10-14": 0.27,
+   ">14": 0.1791
+  },
+  "gap_band3_14": 52.15,
+  "inband3_14": 0.8143,
+  "overhead_min_metal_p10": 0.53,
+  "coord_spans": {
+   "dK": [
+    -0.4268,
+    0.0
+   ],
+   "kstate": [
+    0.0,
+    1.0
+   ],
+   "a1e": [
+    35.6361,
+    47.9059
+   ],
+   "msub": [
+    8.8181,
+    99.0
+   ],
+   "kin_ok": [
+    1.0,
+    1.0
+   ],
+   "res_deg": [
+    0.0,
+    0.0154
+   ],
+   "clear": [
+    1.0176,
+    4.9453
+   ],
+   "K.phi": [
+    -0.3179,
+    0.2586
+   ],
+   "K.th": [
+    -0.3665,
+    0.2099
+   ],
+   "K.psi": [
+    -1.7183,
+    -0.5121
+   ],
+   "K.ang": [
+    80.0967,
+    149.0196
+   ],
+   "K.ok": [
+    1.0,
+    1.0
+   ],
+   "K.qa": [
+    -1.7436,
+    -0.5407
+   ],
+   "K.qb": [
+    -0.5721,
+    0.6341
+   ]
+  }
+ },
+ "mode": "exact",
+ "n": 1154,
+ "secs": 544.6,
+ "exact": true,
+ "git": "6d558f1",
+ "harness": "docs/concepts/verify/k-rim-lobe-stub-knuckle-3r.py frozen_wear(CorrModel, PARAMS + BEST, wear, flood=True), unchanged",
+ "drive": {
+  "stretched_kin": 420,
+  "folded_kin": 0,
+  "dK_taken_max": 24.5,
+  "res_max_deg": 0.0166,
+  "stub": {
+   "lev": "over",
+   "post_mm": 0.0,
+   "R_lobe": 66.4,
+   "roller_mid": 68.9,
+   "stub_len_mm": 28.1,
+   "hubK_axis_min_mm": 19.62,
+   "hubK_rim_gap_boss_mm": 6.62,
+   "lobe_extent_mm": 32.5,
+   "n_lobe": 45
+  },
+  "undercut_mm": -0.001,
+  "law": {
+   "ok": true,
+   "why_end": "stopB",
+   "dK_max": 24.59,
+   "t_max": 29.8,
+   "th_max": 101.5
+  }
+ },
+ "connected": {
+  "static": {
+   "gap": 51.63,
+   "reach": 0.5893,
+   "follow": 0.8515,
+   "inband14": 0.8195,
+   "contact": 0.0266
+  },
+  "connected_bench": {
+   "gap": 54.45,
+   "reach": 0.562,
+   "dropped": 26,
+   "dropped_forced": 26,
+   "forced_taken": 321,
+   "forced_taken_connected": 295,
+   "dropped_with_no_taken_neighbour": 11
+  },
+  "connected_knn": {
+   "gap": 62.32,
+   "reach": 0.4863,
+   "dropped": 98,
+   "dropped_forced": 98,
+   "forced_taken": 321,
+   "forced_taken_connected": 223
+  },
+  "connected_full": {
+   "gap": 51.63,
+   "reach": 0.5893,
+   "dropped": 0,
+   "dropped_forced": 0,
+   "forced_taken": 321,
+   "forced_taken_connected": 321,
+   "envelope": {
+    "env_ok": 954,
+    "env_forced_ok": 515,
+    "env_forced_connected": 515
+   }
+  },
+  "secs": 4.1
+ },
+ "min_clear_taken": 1.02,
+ "stk": 6.0
+}
