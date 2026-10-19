@@ -50,6 +50,9 @@ replaced design B, docs/drawings/B, which stays as the simpler reference; the zc
 setup that scores way higher without a knee, I'd honestly prefer that" (track K1, round 401+: rigid cuff, no knee, no
 cuff slides, <= 4 counted joints; with a rigid cuff every axis must pass through GH, so it is a spherical 4R with a
 sprung / slaved redundant joint). Relay tuning (jump track, all relay designs carry the knee) is paused for these.
+User 2026-10-19 ~01:00 UTC: (11) "Keep pushing, I want something better than 95 with very low complexity" -> track G1
+(golden, round 501+): verified gap <= 13.75 at complexity <= 6 (tools/simplicity.py v2.2; 3 active joints, every
+coordinate determined in MVP1), running beside O1 and K1.
 The user wants the design's evolution recorded for a final time-lapse visual: add every judged design to
 docs/EVOLUTION.md (and its snapshot to pipeline/evolution/) as part of the judge loop.
 
