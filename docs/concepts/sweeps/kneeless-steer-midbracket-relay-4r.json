@@ -1161,98 +1161,6 @@
 },
 {
 "k": 50,
-"t": "2026-10-19T01:31:21Z",
-"params": {
-"PHI": 58,
-"wd": 80,
-"wa": -15,
-"q2max": 100,
-"J3MIN": -100,
-"J3MAX": 115,
-"reading": "step0 bracket-honest proxy (ideal relay, E cut at the carriage lug)",
-"s0": -55.0
-},
-"inband14": 0.8788,
-"inband10": 0.5057,
-"reach": 0.8028,
-"follow": 1.0,
-"contact": 0.0409,
-"gap": 15.93,
-"near1": 23.11,
-"near2": 34.75,
-"bench": "envsel"
-},
-{
-"k": 51,
-"t": "2026-10-19T01:31:21Z",
-"params": {
-"PHI": 58,
-"wd": 80,
-"wa": -15,
-"q2max": 100,
-"J3MIN": -100,
-"J3MAX": 115,
-"reading": "step0 bracket-honest proxy (ideal relay, E cut at the carriage ctr)",
-"s0": -55.0
-},
-"inband14": 0.8794,
-"inband10": 0.5096,
-"reach": 0.8028,
-"follow": 1.0,
-"contact": 0.0409,
-"gap": 15.87,
-"near1": 23.05,
-"near2": 35.2,
-"bench": "envsel"
-},
-{
-"k": 52,
-"t": "2026-10-19T01:31:21Z",
-"params": {
-"PHI": 58,
-"wd": 80,
-"wa": -15,
-"q2max": 100,
-"J3MIN": -100,
-"J3MAX": 115,
-"reading": "step0 bracket-honest proxy (ideal relay, E cut at the carriage lug)",
-"s0": -80.0
-},
-"inband14": 0.8821,
-"inband10": 0.5198,
-"reach": 0.8028,
-"follow": 1.0,
-"contact": 0.0409,
-"gap": 15.6,
-"near1": 22.78,
-"near2": 34.93,
-"bench": "envsel"
-},
-{
-"k": 53,
-"t": "2026-10-19T01:31:21Z",
-"params": {
-"PHI": 58,
-"wd": 80,
-"wa": -15,
-"q2max": 100,
-"J3MIN": -100,
-"J3MAX": 115,
-"reading": "step0 bracket-honest proxy (ideal relay, E cut at the carriage ctr)",
-"s0": -80.0
-},
-"inband14": 0.8842,
-"inband10": 0.5261,
-"reach": 0.8028,
-"follow": 1.0,
-"contact": 0.0409,
-"gap": 15.39,
-"near1": 22.57,
-"near2": 34.72,
-"bench": "envsel"
-},
-{
-"k": 54,
 "t": "2026-10-19T01:35:48Z",
 "params": {
 "PHI": 58,
@@ -1277,7 +1185,7 @@
 "bench": "envsel"
 },
 {
-"k": 55,
+"k": 51,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1300,7 +1208,7 @@
 "bench": "envsel"
 },
 {
-"k": 56,
+"k": 52,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1323,7 +1231,7 @@
 "bench": "envsel"
 },
 {
-"k": 57,
+"k": 53,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1346,7 +1254,7 @@
 "bench": "envsel"
 },
 {
-"k": 58,
+"k": 54,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1369,7 +1277,7 @@
 "bench": "envsel"
 },
 {
-"k": 59,
+"k": 55,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1392,7 +1300,7 @@
 "bench": "envsel"
 },
 {
-"k": 60,
+"k": 56,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1415,7 +1323,7 @@
 "bench": "envsel"
 },
 {
-"k": 61,
+"k": 57,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1438,7 +1346,7 @@
 "bench": "envsel"
 },
 {
-"k": 62,
+"k": 58,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1461,7 +1369,7 @@
 "bench": "envsel"
 },
 {
-"k": 63,
+"k": 59,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1484,7 +1392,7 @@
 "bench": "envsel"
 },
 {
-"k": 64,
+"k": 60,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1507,7 +1415,7 @@
 "bench": "envsel"
 },
 {
-"k": 65,
+"k": 61,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1530,7 +1438,7 @@
 "bench": "envsel"
 },
 {
-"k": 66,
+"k": 62,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1553,7 +1461,7 @@
 "bench": "envsel"
 },
 {
-"k": 67,
+"k": 63,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1576,7 +1484,7 @@
 "bench": "envsel"
 },
 {
-"k": 68,
+"k": 64,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1599,7 +1507,7 @@
 "bench": "envsel"
 },
 {
-"k": 69,
+"k": 65,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1622,7 +1530,7 @@
 "bench": "envsel"
 },
 {
-"k": 70,
+"k": 66,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1645,7 +1553,7 @@
 "bench": "envsel"
 },
 {
-"k": 71,
+"k": 67,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1668,7 +1576,7 @@
 "bench": "envsel"
 },
 {
-"k": 72,
+"k": 68,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1691,7 +1599,7 @@
 "bench": "envsel"
 },
 {
-"k": 73,
+"k": 69,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1714,7 +1622,7 @@
 "bench": "envsel"
 },
 {
-"k": 74,
+"k": 70,
 "t": "2026-10-19T01:37:42Z",
 "params": {
 "PHI": 58,
@@ -1737,99 +1645,7 @@
 "bench": "envsel"
 },
 {
-"k": 75,
-"t": "2026-10-19T01:42:24Z",
-"params": {
-"PHI": 58,
-"wd": 80,
-"wa": -15,
-"q2max": 100,
-"J3MIN": -100,
-"J3MAX": 115,
-"reading": "step0 bracket-honest proxy (ideal relay, E cut at the carriage lug)",
-"s0": -55.0
-},
-"inband14": 0.8788,
-"inband10": 0.5057,
-"reach": 0.8028,
-"follow": 1.0,
-"contact": 0.0409,
-"gap": 15.93,
-"near1": 23.11,
-"near2": 34.75,
-"bench": "envsel"
-},
-{
-"k": 76,
-"t": "2026-10-19T01:42:24Z",
-"params": {
-"PHI": 58,
-"wd": 80,
-"wa": -15,
-"q2max": 100,
-"J3MIN": -100,
-"J3MAX": 115,
-"reading": "step0 bracket-honest proxy (ideal relay, E cut at the carriage ctr)",
-"s0": -55.0
-},
-"inband14": 0.8794,
-"inband10": 0.5096,
-"reach": 0.8028,
-"follow": 1.0,
-"contact": 0.0409,
-"gap": 15.87,
-"near1": 23.05,
-"near2": 35.2,
-"bench": "envsel"
-},
-{
-"k": 77,
-"t": "2026-10-19T01:42:24Z",
-"params": {
-"PHI": 58,
-"wd": 80,
-"wa": -15,
-"q2max": 100,
-"J3MIN": -100,
-"J3MAX": 115,
-"reading": "step0 bracket-honest proxy (ideal relay, E cut at the carriage lug)",
-"s0": -80.0
-},
-"inband14": 0.8821,
-"inband10": 0.5198,
-"reach": 0.8028,
-"follow": 1.0,
-"contact": 0.0409,
-"gap": 15.6,
-"near1": 22.78,
-"near2": 34.93,
-"bench": "envsel"
-},
-{
-"k": 78,
-"t": "2026-10-19T01:42:24Z",
-"params": {
-"PHI": 58,
-"wd": 80,
-"wa": -15,
-"q2max": 100,
-"J3MIN": -100,
-"J3MAX": 115,
-"reading": "step0 bracket-honest proxy (ideal relay, E cut at the carriage ctr)",
-"s0": -80.0
-},
-"inband14": 0.8842,
-"inband10": 0.5261,
-"reach": 0.8028,
-"follow": 1.0,
-"contact": 0.0409,
-"gap": 15.39,
-"near1": 22.57,
-"near2": 34.72,
-"bench": "envsel"
-},
-{
-"k": 79,
+"k": 71,
 "t": "2026-10-19T01:44:49Z",
 "params": {
 "PHI": 58,
@@ -1852,7 +1668,7 @@
 "bench": "envsel"
 },
 {
-"k": 80,
+"k": 72,
 "t": "2026-10-19T01:44:49Z",
 "params": {
 "PHI": 58,
@@ -1875,7 +1691,7 @@
 "bench": "envsel"
 },
 {
-"k": 81,
+"k": 73,
 "t": "2026-10-19T01:44:49Z",
 "params": {
 "PHI": 58,
@@ -1898,7 +1714,7 @@
 "bench": "envsel"
 },
 {
-"k": 82,
+"k": 74,
 "t": "2026-10-19T01:44:49Z",
 "params": {
 "PHI": 58,
@@ -1921,7 +1737,7 @@
 "bench": "envsel"
 },
 {
-"k": 83,
+"k": 75,
 "t": "2026-10-19T01:44:49Z",
 "params": {
 "PHI": 58,
@@ -1944,7 +1760,7 @@
 "bench": "envsel"
 },
 {
-"k": 84,
+"k": 76,
 "t": "2026-10-19T01:44:49Z",
 "params": {
 "PHI": 58,
@@ -1967,7 +1783,7 @@
 "bench": "envsel"
 },
 {
-"k": 85,
+"k": 77,
 "t": "2026-10-19T01:44:49Z",
 "params": {
 "PHI": 58,
@@ -1990,7 +1806,7 @@
 "bench": "envsel"
 },
 {
-"k": 86,
+"k": 78,
 "t": "2026-10-19T01:44:49Z",
 "params": {
 "PHI": 58,
@@ -2013,7 +1829,7 @@
 "bench": "envsel"
 },
 {
-"k": 87,
+"k": 79,
 "t": "2026-10-19T01:44:49Z",
 "params": {
 "PHI": 58,
@@ -2036,7 +1852,7 @@
 "bench": "envsel"
 },
 {
-"k": 88,
+"k": 80,
 "t": "2026-10-19T01:44:49Z",
 "params": {
 "PHI": 58,
@@ -2056,6 +1872,31 @@
 "gap": 17.01,
 "near1": 20.63,
 "near2": 34.27,
+"bench": "envsel"
+},
+{
+"k": 81,
+"t": "2026-10-19T01:50:35Z",
+"params": {
+"PHI": 58,
+"wd": 80,
+"wa": -15,
+"q2max": 100,
+"J3MIN": -100,
+"J3MAX": 115,
+"reading": "metal (envsel exact, knee-less member 3 + shell + carriage + lug coil + flange)",
+"s0": -80,
+"delta": 3.5,
+"ds": 27.06
+},
+"inband14": 0.8815,
+"inband10": 0.5534,
+"reach": 0.7667,
+"follow": 1.0,
+"contact": 0.0721,
+"gap": 22.39,
+"near1_gate": 31.13,
+"near2": 45.92,
 "bench": "envsel"
 }
 ]
