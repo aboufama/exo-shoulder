@@ -1,0 +1,42 @@
+[
+ {
+  "key": "held_out",
+  "refuted": true,
+  "evidence": "Measured, not missing. c_held_out (tools/alignment_audit.py line 222) fires watch only because the screened row's v_gap is null. The drop it guards is on file: remeasure/clavicular-front-route_bench.json frozen.gap 75.92 (Bench(110,360) exact, profiles frozen) and _held.json frozen.gap 77.24 (disjoint held bench, exact), drop +1.32. I re-derived both from the per-pose dumps (_bench_perpose.json, _held_perpose.json; contact over the 449 / 447 evaluated poses): 75.92 and 77.24. My own re-wear, with my own script and the model unchanged (fit Bench(60,160) fast through K.evaluate reproduced 68.26, profiles frozen by patching K.fit_profiles, 0 strap size mismatches, exact), gives 75.92 bench and 77.24 held, +1.32. That is below TH held_watch 6.0. The fast-to-exact drop (+7.66) is the separate fast_frozen check (ff_watch 14) and is also below its line."
+ },
+ {
+  "key": "contact_depth",
+  "refuted": false,
+  "evidence": "Upheld. The measurement is right. My own fast re-run (K.evaluate, row best_params) has 14 poses with res < 0, summing 123.42 mm, deepest 21.08 mm, which matches _fit60_perpose.json (10 deeper than 3 mm). The tool line is not apples to apples: it pairs the 220-pose fast dump with the lead's 470-pose exact dump. The like-for-like pairing makes the watch stronger. remeasure/conecut-knee-knuckle-3r_bench_perpose.json (Bench(110,360) exact, 470 poses) has 4 contact poses, 20.24 mm, deepest 8.93. This design on the same frozen exact bench has 40 poses and 401.84 mm (my own re-wear and _bench_perpose.json), 26 deeper than 3 mm. That is x19.9 and +381.6 mm, so both TH depth_ratio 2 and depth_floor_mm 5 are met. 'held depths not on file' is wrong: _held_perpose.json has 43 poses, 444.43 mm. But the lead's held dump is a different bench (1154 poses), so there is no paired held reading. The wearer cost is real: metal 21-48 mm into the head and neck overhead."
+ },
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "The margin is on file, I re-measured it, and it holds by construction. K.closure (tools/concept_kit.py lines 88-96) computes th = angle(J1, J3) and margin = min(th - |a1 - a2|, a1 + a2 - th, 360 - a1 - a2 - th). That is the lines 25-30 reading. ok requires margin >= margin_deg, and the model passes p['margin'] = 7.3 (rows/clavicular-front-route.json best_params.margin), so every taken pose is at >= 7.3 > TH fold_min 5.0. On file: remeasure/_fit60.json fit_fast.min_margin 11.04 (the kit's own K.evaluate output) and th_margin {min 11.04, n 197, lt5 0}; _bench.json th_margin {min 10.757, n 409, lt5 0}; _held.json th_margin {min 12.824, n 404, lt5 0}. My own runs, with th from the built chain's joints over the taken poses: fast 11.040 (197 taken, 0 < 5), exact 10.757 (409, 0 < 5), held 12.824 (404, 0 < 5). Over all closing poses the kit's min_margin is 7.46 exact and 8.69 held."
+ },
+ {
+  "key": "sampling",
+  "refuted": false,
+  "evidence": "Upheld on c_sampling's own rule. The 'counts not on file' half is wrong: remeasure/clavicular-front-route_fit60_bridgeshare.json sizes / per.n has hub1-3 at 81 each, bridge_b 216, bridge_a 208, link1 357, link2 322 and neck 232 (1578 total). None is under part_min_samples 16 and none is zero. Applying c_sampling's arithmetic with those counts: sample-weighted 0.3088 against part-weighted 0.3004 (+0.84, under part_weight_watch 3), and 5 non-hub groups against 3 declared moving bodies. But the 'mostly out-of-band parts' list is non-empty, and that alone sets watch (alignment_audit.py line 669, `or hi`): hub1 0.073, hub2 0.000, hub3 0.198, link1 0.017, link2 0.007. My exact re-wear gives the same: hub1 0.056, hub2 0, hub3 0.194, link1 0.014, link2 0.007. The wearer cost is real: the exact-bench clip metal p95 is 98.7 mm off the skin (_bench.json probe.clip_scored.d_p95)."
+ },
+ {
+  "key": "judgement:NEW-seat-rule",
+  "refuted": false,
+  "evidence": "Upheld on all four tests. (a) Measurement: the model's own sdir (clavicular-front-route.py lines 6 and 32-34, x anterior) at best_params j1lat 66.3 / j1lon -105.5 gives (0.3873, 0.9157, -0.1074) in my own fast run. az = atan2(cos lon, sin lon) = -164.5, and K.bvec(-164.5, 66.3) returns the same vector. (b) Threshold: anterior <= 0.20 is the project-wide encoding of ruling 4: ANT_MAX 0.20 in zc-frontier-3r.py 56-62, tools/gpu_bench.py 45/66 and tools/gpu_bench_knee.py 38/485, plus legal_j1 in isoceles-shortdyad-pinknee-3r.py 105 and skin-normal-3r-pin-knee.md 573. 0.387 is 1.94x the line, and az -164.5 is outside -110..135. (c) Apples to apples: the champion baseline (rows/baseline-3r.json gap 68.93) is on the same Bench(60,160) fast per its note, and its J1 bvec(2.43, 80.68) has anterior -0.162 (docs/alignment/baseline-3r.md 53-54), inside the rule. (d) Wearer cost: the handler cannot carry a front seat (CLAUDE.md 'The golden solution' (4)), so the design needs the bridge, and the row's own limiter records the across-body forearm on the seat (hub 1 -5.2 mm, bridge -6.5 mm). CLAUDE.md applies the same treatment to slim-hub numbers ('do not stand under this rule'). The number is not evidence of an exo the user's handler can carry. No intent, since the row predates the ruling."
+ },
+ {
+  "key": "judgement:NEW-static-padding",
+  "refuted": false,
+  "evidence": "Upheld; the arithmetic re-derives from the bridgeshare counts. Without the bridges: sum n*ib = 167.2 over 1154 samples = 0.1449. Mechanism only: 30.4 / 922 = 0.033. All parts: 487.2 / 1578 = 0.3088. The gap without the bridge is 100(0.90 - 0.1449) + 2.5 (reach) + 6.64 (contact) = 84.65, a counterfactual with reach and contact held, as stated. The documented part-weighted check reads only +0.84 here, so no existing check catches this. It is a new pattern, and watch is the right level. The wearer cost: the moving members stay out of band (exact in-band link1 0.014, link2 0.007, hub2 0). One correction to the .md, which does not change the ruling: 'stay 113-155 mm off the skin' gives GH radii. The exact-bench metal-to-skin max is 107.83 mm and the p95 is 98 mm (_bench.json probe.ws_unscored). The fast-bench 'med 31.75' values are the SDF cache clamp (tools/concept_bench.py lines 23 and 49), not medians."
+ },
+ {
+  "key": "judgement:R2",
+  "refuted": false,
+  "evidence": "Upheld. docs/dashboard/data/morphs.json has clavicular-front-route sweep_gap 65.53, sweep_t 2026-10-15T22:33:10Z. In docs/concepts/sweeps/clavicular-front-route.json (440 entries), k414 is cmaC-g1 with gap 65.53 and honest false, and k434 is cmaC-g2 with gap 65.71 and honest true. tools/dash_build.py line 523 filters only gap None and passed_over, and passed_over (lines 281-296) is a test of claim time and gap with no honest test. k414 is 26 min after the 22:07 claim, so it is not passed over and is shown. It is a reporting watch: 0.18 points, in an unreviewed column."
+ },
+ {
+  "key": "judgement:T5",
+  "refuted": false,
+  "evidence": "Upheld and reproduced by my own re-wear (own script, model unchanged, profiles frozen, exact). Bench(110,360): 40 contact poses, 401.84 mm, 26 deeper than 3 mm, deepest 47.62 mm at plane 30, elev 165, axial -60. Held: 43 poses, 444.42 mm, 30 deeper than 3 mm, deepest 36.03 at plane 30, elev 165, axial -75. The per-pose dumps give the same. The reference is the same bench and the same 470 poses: conecut-knee-knuckle-3r_bench_perpose.json has 4 poses and 20.24 mm (x19.9). q = 0.98 is the row's best_params.q. It is report-only by rule, so watch."
+ }
+]

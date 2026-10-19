@@ -170,3 +170,61 @@ Not measured, and why:
   not measured on the verified rows in this audit.
 - **C. Pair T5 readings by bench, not only by wear label.** Today a fast-bench dump is compared with the reference's
   exact-bench dump.
+
+## Skeptic (2026-10-19 04:20 UTC)
+
+The skeptic re-measured every reason and did not trust the auditor's numbers. The model file was unchanged throughout.
+
+**What was re-run.** The skeptic used its own scripts, not `tools/alignment_kitbuild_rewear.py`.
+- **Fit:** the fit on Bench(60,160) fast through `K.evaluate` reproduced 68.26 (reach 0.875, follow 0.95, in-band 0.3088, contact 0.0664).
+- **Frozen wears:** the fit's profiles were frozen by patching `K.fit_profiles`, with 0 strap size mismatches.
+  - On Bench(110,360) exact: **75.92**.
+  - On the disjoint held bench (a copy of `tools/osn_polish.py held_bench`), exact: **77.24**.
+- **Fold margin:** `th` was computed from the built chain's own J1 and J3 over the taken poses.
+  - Fast: 11.040 (197 taken).
+  - Exact: 10.757 (409 taken).
+  - Held: 12.824 (404 taken).
+  - No pose is under 5 on any bench.
+- **Contact depth:**
+  - Exact: 40 poses, 401.84 mm, deepest 47.62 mm.
+  - Held: 43 poses, 444.42 mm, deepest 36.03 mm.
+- **Compute:** local only, 2 niced processes, no farm spend.
+
+### Rulings
+
+| key | level | refuted | evidence (short) |
+|---|---|---|---|
+| held_out | watch | **yes** | Fires only because `v_gap` is null (`alignment_audit.py` line 222). The drop it guards is on file: `_bench.json` frozen.gap 75.92, `_held.json` 77.24, +1.32. Reproduced from the per-pose dumps and by the skeptic's own re-wear (75.92 / 77.24). That is below TH held_watch 6.0. |
+| contact_depth | watch | no | Measurement right: the fast re-run has 14 poses, 123.42 mm, deepest 21.08. The tool's line pairs the 220-pose fast dump with the lead's 470-pose exact dump. The same-bench pairing is stronger: 401.84 mm over 40 poses against the lead's 20.24 mm over 4 (`conecut-knee-knuckle-3r_bench_perpose.json`), x19.9. "Held depths not on file" is wrong (`_held_perpose.json`: 43 poses, 444.43 mm), but the lead's held dump is a different bench (1154 poses), so there is no paired held reading. |
+| fold_margin | watch | **yes** | `K.closure` (`concept_kit.py` 88-96) keeps a pose only at a `th` margin >= `margin_deg` = 7.3 (best_params.margin), so 7.3 > 5 holds by construction. On file: `_fit60.json` fit_fast.min_margin 11.04 and th_margin 11.04; `_bench.json` th_margin 10.757; `_held.json` th_margin 12.824; lt5 0 everywhere. Re-measured identically. |
+| sampling | watch | no | The counts are on file (`_fit60_bridgeshare.json` sizes: hub 81 each, bridge_b 216, bridge_a 208, link1 357, link2 322, neck 232). Sample-weighted against part-weighted is +0.84, under 3. But c_sampling's out-of-band list is non-empty (hub1 0.07, hub2 0, hub3 0.20, link1 0.02, link2 0.01), and that alone sets watch (line 669). |
+| judgement:NEW-seat-rule | **gamed** | no | (a) Measurement: the model's own sdir(66.3, -105.5) = (0.3873, 0.9157, -0.1074), equal to bvec(-164.5, 66.3). (b) Threshold: anterior <= 0.20 is the project-wide ruling-4 encoding (ANT_MAX in `zc-frontier-3r.py`, `gpu_bench.py`, `gpu_bench_knee.py`; legal_j1 in `isoceles-shortdyad-pinknee-3r.py`); this seat is 1.94x the line. (c) Comparison: the champion baseline (68.93) is on the same fast bench and its seat passes (anterior -0.162). (d) Wearer cost: the handler cannot carry the seat, the design needs a bridge, and the forearm lies on the seat across the body. CLAUDE.md treats slim-hub numbers the same way ("do not stand under this rule"). |
+| judgement:NEW-static-padding | watch | no | Re-derived from the bridgeshare counts: 0.1449 without the bridge, 0.033 mechanism only, 0.3088 all, gap 84.65 without the bridge. The documented part-weighted check reads only +0.84, so this is a new pattern and watch is right. |
+| judgement:R2 | watch | no | `morphs.json` sweep_gap 65.53 = k414, honest false; the best honest entry is k434 at 65.71. `dash_build.py` line 523 has no honest filter. |
+| judgement:T5 | watch | no | Reproduced on the same bench and the same 470 poses as the lead: x19.9. Report-only by rule. |
+
+### Missed by the auditor
+
+These do not change this verdict. They are for the next audit.
+
+1. **pointer-cslide breaks the same ruling-4 test, and its audit did not flag it.**
+   - Its best_params az 120.431, el 35.415 is the J1 seat (`docs/concepts/models/pointer-cslide.py` line 103: `a1 = F.S(K.bvec(p["az"], p["el"]))`).
+   - That seat has anterior 0.4128 > 0.20; az is inside -110..135.
+   - Its audit at 2026-10-19T03:57Z (verdict watch, 17 reasons) has no seat reason, and `docs/alignment/pointer-cslide.md` does not mention the seat.
+   - The two audits ran 31 min apart and ruled the same rule differently. This audit's proposal A even names pointer-cslide as failing.
+2. **A reporting error in Finding 2.** "The parts that move with the arm stay 113-155 mm off the skin" gives GH radii (the row's limiter), not skin clearance.
+   - The exact-bench metal-to-skin distance tops out at 107.83 mm, with p95 98 mm (`_bench.json` probe.ws_unscored).
+   - The fast-bench per-part "med 31.75" values in `_fit60_bridgeshare.json` are the SDF cache clamp (`tools/concept_bench.py` lines 23 and 49: +-31.75 mm). They are lower bounds, not medians.
+3. **The tool's sampling and contact_depth readers miss files that exist.**
+   - c_sampling says "per-part sample counts not on file", but `_fit60_bridgeshare.json` carries them.
+   - c_contact_depth says "held depths not on file", but `_held_perpose.json` exists.
+   - The tool reads neither file. With the counts, sampling still reads watch, on the out-of-band parts.
+4. **The held_out and fold_margin checks fire on missing fields when the numbers exist in the re-wear files.**
+   - The held drop (+1.32) and `th` (min 10.757) are in `remeasure/_bench.json` and `_held.json`, but c_held_out keys on `v_gap` and c_fold_margin does not read remeasure `th_margin`.
+   - Both are tool false positives on screened rows (compare the inband-rssr and longstroke-slipper rulings).
+
+**T5 instrument note (2026-10-19.1, 702373b):** the skeptic confirms no change here. No paired file names this design, and the reference dump `conecut-knee-knuckle-3r_bench_perpose.json` reads 4 poses, 20.24 mm as before.
+
+### Final verdict (ledger, skeptic entry 2026-10-19T04:20:02Z): **GAMED**
+
+`judgement:NEW-seat-rule` is upheld. Refuted: held_out and fold_margin. Upheld: contact_depth, sampling, NEW-seat-rule, NEW-static-padding, R2 and T5.
