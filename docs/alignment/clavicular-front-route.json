@@ -155,10 +155,10 @@
  ],
  "remeasured": {
   "bench": true,
-  "held": false
+  "held": true
  },
  "verifier_files": [],
- "git": "a947760",
+ "git": "926cd18",
  "tool_version": "2026-10-19.1",
- "t": "2026-10-19T03:23:05Z"
+ "t": "2026-10-19T03:26:27Z"
 }
