@@ -179,3 +179,73 @@ This design has neither, so the declared-drive parser read names from another fa
 
 The design stays not a contender. A re-claim reports 65.73 frozen exact, the connected reach and a held-out wear, and
 needs the user's ruling on T3.
+
+## Skeptic (2026-10-19 04:07 UTC): final verdict GAMED
+
+The skeptic re-measured the claim, with the model unchanged, on Bench(60,160) fast, the row's claim bench (50.67
+reproduced: reach 0.90, follow 0.95, in-band14 0.4032, contact 0.0099, honest). It added three controls to the flood:
+kNN-16, every edge allowed, and no jump test. It also counted the samples on each part, re-scored k 2432, and read the
+auditor's frozen exact files. Raw output: `docs/alignment/remeasure/cam-coupled-4r_skeptic_fast.json`. Rulings:
+`docs/alignment/cam-coupled-4r.rulings.json`. Ledger: `python3 tools/alignment_ledger.py get cam-coupled-4r`.
+
+**Refuted (1):**
+
+- **idle**: a parser false positive. `_declared_joints` (tools/alignment_audit.py line 575) declares a K and a crank
+  when the name matches 'cam'. This design has neither. Its one slaved coordinate, J2, moves:
+  - over the 203 taken poses (mod 360) it runs from 159.7 to 289.4 deg, a span of 129.8 deg (p05-p95: 99.5 deg);
+  - J1 spans 324.6 deg;
+  - TH idle_deg is 2.0.
+
+  The probe's J2_span 359.6 is a wrap artefact.
+
+**Upheld (13):**
+
+- **held_out**: nothing is on file.
+- **continuity**, **fold_margin**: the measurements are now on file, and they are worse than the missing record (see
+  S5 and T3).
+- **sampling**: the missing counts are now measured.
+  - Samples per part: hubs 81 each, slot 776, link1 140, tail 161, link2 245, link3 203, neck 224.
+  - Sample-weighted in-band is 0.403 against 0.334 part-weighted: +6.93 points, over TH part_weight_watch 3 and under
+    gamed 8.
+- **T3**, independent re-measure. th margin is min 0.000 and median 0.193, with 186 of 203 taken poses under 5.
+  - J2 sits a median 7.0 deg from straight and passes through it (min 0.015).
+  - The J2-J3-J4 dyad has min 0.796, with 3 poses under 5, so neither dyad keeps the 5 deg.
+  - The verified 4R reads every dyad (freek-oracle polish-verify member_margins, 5.59 on file).
+  - The model's own reading holds (sing min 8.04). With J2 cam-held, the J1-J2-J3 fold is not a singularity of the
+    actuated map, so no cost to the wearer is shown. The reading is still the user's call (CLAUDE.md).
+- **S5**: kNN-8 and kNN-16 both connect 129 of 146 poses.
+  - It is not a graph artefact: with every edge allowed, 146 of 146 connect; with no jump test, 145.
+  - The loss is branch switches. Example: (-15,45,15) to (0,30,0), where in one 2 deg step J1 jumps 99.5 deg, the
+    passive J2 jumps 58.8 deg and the J3-dyad branch changes.
+  - The lost island at elev 90-105, planes 0-75, is smooth inside (jumps <= 3.5 deg) but cut off from the seeds.
+  - Connected ws reach is 0.806 against 0.9125 static: +9.4 to +10.6, over conn_gamed 3.
+- **T5**, with a correction. 6.23 mm is sidecar-longdyad's depth (RULINGS_DEPTH_REF), not the lead's.
+  - The current lead, conecut-knee-knuckle-3r, reads 20.24 mm over 4 poses on the same bench (tool 2026-10-19.1).
+  - Corrected: 116.84 against 20.24 mm, x5.77 and +96.6 mm. That is still a watch.
+  - Instrument: at 2026-10-19.1 this row's contact_depth still reads "not measured", so T5 reads the same here. Only
+    the reference's reading changed (it is no longer vacuous).
+- **G1**: the numbers reproduce. Near-touch is report-only, so it stays a watch.
+- **NEW-hinge**: 24 of the 26 lowest honest gaps sit at exactly reach 0.900 / follow 0.950 (2 at reach 0.906). Of the
+  38 verified / cad rows, 0 sit on both hinges, so the pattern belongs to this row. It overlaps P1.
+- **NEW-cam-pressure**: the pressure angle reaches 54.1 deg at most, and its 95th percentile is 47.9 deg. The 45 deg
+  limit is not in TH, so this is a watch and a proposal, not a gate.
+- **R2**: re-scored k 2432 under the unchanged model: 196.65 (groove inner edge -3.7 mm).
+- **P1**: the frozen exact wear adds +15.06, over ff_watch 14.
+- **G6**: the facts hold: 4 O20 hubs, and track K1 counts a slaved spherical 4R as 4 joints.
+  - Context: the 3-joint lead is also active_dof 3, with a slaved knuckle (8 joints, 3 loops, complexity 18.5).
+  - Which count applies to a slaved, GH-centred serial joint is the user's call.
+
+**Missed by the audit** (for the next audit; it does not change this verdict):
+
+1. **The S-fixed groove flange carries the in-band.** The slot plate is 776 of 2073 samples (37 %), at 0.63 in band.
+   - Without it, the design's in-band14 is 0.266, not 0.403: the plate buys 13.7 points of the claim.
+   - The moving chain sits 0.00-0.15 in band: hubs 2-3, links 1-3 and the tail (911 samples, 44 %). The arm-side
+     links ride mostly over 14 mm.
+   - The plate is real metal, so this is not dishonest. But the headline in-band describes the scapula flange, not the
+     linkage the wearer moves. Proposal: report in-band split into the moving chain and the S-fixed parts.
+2. **The T5 reference was mis-cited** (6.23 mm is sidecar-longdyad's). The corrected comparison is above.
+3. **The model docstring overstates its continuity guard.** It says K2 dense continuity "drops any frame where this rule
+   would switch roots". That holds for clip frames only. The workspace poses, which carry reach, have no guard, and
+   that is where S5's ~100 deg root switches sit.
+
+**Final verdict (ledger): GAMED** (T3, S5 upheld).
