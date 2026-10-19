@@ -102,7 +102,7 @@
 ],
 "n_contact": 7
 },
-"note": "strap ramps to hub-3 plate centre underside; band outlier cut per ray (+15 mm); q_band 1"
+"note": "strap ramps to hub-3 plate centre underside; band outlier cut per ray (+15 mm); q_band 1; SUPERSEDED: strap distal ~20 mm unfitted (K.requirement t1 220 < strap end radius 239 mm)"
 },
 {
 "k": 1,
@@ -210,7 +210,7 @@
 ],
 "n_contact": 7
 },
-"note": "band outlier cut per POSE (+12 mm), strap cut +15"
+"note": "band outlier cut per POSE (+12 mm), strap cut +15; SUPERSEDED: strap distal ~20 mm unfitted (K.requirement t1 220 < strap end radius 239 mm)"
 },
 {
 "k": 2,
@@ -318,7 +318,7 @@
 ],
 "n_contact": 7
 },
-"note": "band per-pose cut, strap no cut (+80)"
+"note": "band per-pose cut, strap no cut (+80); SUPERSEDED: strap distal ~20 mm unfitted (K.requirement t1 220 < strap end radius 239 mm)"
 },
 {
 "k": 3,
@@ -427,7 +427,7 @@
 ],
 "n_contact": 7
 },
-"note": "+ strap starts at hub 3's rim (10 mm) and never below its fitted requirement"
+"note": "+ strap starts at hub 3's rim (10 mm) and never below its fitted requirement; SUPERSEDED: strap distal ~20 mm unfitted (K.requirement t1 220 < strap end radius 239 mm)"
 },
 {
 "k": 4,
@@ -537,7 +537,7 @@
 ],
 "n_contact": 7
 },
-"note": "q_band 0.95"
+"note": "q_band 0.95; SUPERSEDED: strap distal ~20 mm unfitted (K.requirement t1 220 < strap end radius 239 mm)"
 },
 {
 "k": 5,
@@ -647,7 +647,7 @@
 ],
 "n_contact": 7
 },
-"note": "q_band 0.9: strap geometry degenerate (every pose a strap contact) - discarded"
+"note": "q_band 0.9: strap geometry degenerate (every pose a strap contact) - discarded; SUPERSEDED: strap distal ~20 mm unfitted (K.requirement t1 220 < strap end radius 239 mm)"
 },
 {
 "k": 6,
@@ -782,6 +782,582 @@
 "wheels": 14,
 "strap": 12
 }
+},
+"note": "SUPERSEDED: strap distal ~20 mm unfitted (K.requirement t1 220 < strap end radius 239 mm)"
+},
+{
+"k": 7,
+"t": "2026-10-19T02:20:16Z",
+"params": {
+"PHI": 60.0,
+"tilt": 2.74,
+"taz": -116.6,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -45.0,
+"j4": 1,
+"pose_cut": 1,
+"out_mm": 12,
+"out_strap": 80,
+"strap_floor": 1,
+"q_band": 0.97
+},
+"bench": "fast",
+"mode": "fast",
+"step": "hardware (every J4 part sampled)",
+"inband14": 0.9542,
+"inband10": 0.7567,
+"reach": 0.775,
+"follow": 0.8667,
+"contact": 0.1456,
+"gap": 35.39,
+"gap_near1": 39.83,
+"gap_near2": 113.4,
+"overhead": [
+5,
+12
+],
+"n_contact": 30,
+"depth_sum": 308.33,
+"min_metal_taken": 0.82,
+"a1a2": [
+37.552,
+67.341
+],
+"why_ws": {
+"": 142,
+"contact": 4,
+"fold": 10,
+"j3stop": 1,
+"parts": 3
+},
+"th": {
+"min_th_margin_taken": 5.001,
+"window": [
+29.79,
+104.89
+],
+"n_below5": 0
+},
+"ideal": {
+"gap": 4.65,
+"reach": 0.8875,
+"follow": 0.95,
+"inband14": 0.9216,
+"inband10": 0.4996,
+"contact": 0.034,
+"near1": 7.97,
+"overhead": [
+5,
+12
+],
+"n_contact": 7
+},
+"strap_gate": {
+"strap_ib14_taken_clip": 0.894,
+"strap_ib10_taken_clip": 0.634,
+"strap_p5_50_95": [
+3.77,
+8.83,
+19.06
+],
+"losses_ws_clip": {
+"strap": [
+9,
+3
+],
+"band": [
+9,
+2
+],
+"car_wheels": [
+0,
+0
+],
+"jam": [
+0,
+0
+]
+},
+"strap_band_losses": 23,
+"deflection_3N": {
+"L": 220.3,
+"strong_mm": 0.217,
+"weak_mm": 3.474,
+"twist_deg": 0.047,
+"twist_mm_at_car": 0.0041
+},
+"kill": true
+},
+"J4": {
+"car_ib14": 0.999,
+"car_p5_50_95": [
+7.47,
+9.3,
+11.84
+],
+"band_ib14": 0.997,
+"band_p5_50_95": [
+2.32,
+3.26,
+8.47
+],
+"jams": 0,
+"R_race": [
+61.0,
+63.0,
+66.0
+],
+"contact_poses": {
+"band": 22,
+"car": 14,
+"wheels": 14,
+"strap": 12
+}
+},
+"note": "SUPERSEDED: strap distal ~20 mm unfitted (K.requirement t1 220 < strap end radius 239 mm)"
+},
+{
+"k": 8,
+"t": "2026-10-19T02:20:55Z",
+"params": {
+"PHI": 55,
+"tilt": 2.814,
+"taz": -116.57,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -45,
+"j4": 1,
+"pose_cut": 1,
+"out_mm": 12,
+"out_strap": 80,
+"strap_floor": 1,
+"q_band": 0.98,
+"psi0": -50,
+"s_frac": 0.72,
+"post": 11.18,
+"car_half": 12,
+"hb": 3.0,
+"band_lo": -65,
+"band_hi": 20
+},
+"bench": "fast",
+"mode": "fast",
+"step": "hardware (every J4 part sampled)",
+"inband14": 0.9491,
+"inband10": 0.6942,
+"reach": 0.6125,
+"follow": 0.75,
+"contact": 0.3024,
+"gap": 78.99,
+"gap_near1": 267.62,
+"gap_near2": 285.0,
+"overhead": [
+2,
+12
+],
+"n_contact": 62,
+"depth_sum": 300.88,
+"min_metal_taken": 0.055,
+"a1a2": [
+37.552,
+67.341
+],
+"why_ws": {
+"": 141,
+"contact": 4,
+"fold": 11,
+"j3stop": 2,
+"parts": 2
+},
+"th": {
+"min_th_margin_taken": 5.001,
+"window": [
+29.79,
+104.89
+],
+"n_below5": 0
+},
+"ideal": {
+"gap": 5.29,
+"reach": 0.8812,
+"follow": 0.95,
+"inband14": 0.9216,
+"inband10": 0.4996,
+"contact": 0.0341,
+"near1": 8.63,
+"overhead": [
+5,
+12
+],
+"n_contact": 7
+},
+"strap_gate": {
+"strap_ib14_taken_clip": 0.883,
+"strap_ib10_taken_clip": 0.597,
+"strap_p5_50_95": [
+3.88,
+9.14,
+21.43
+],
+"losses_ws_clip": {
+"strap": [
+39,
+10
+],
+"band": [
+4,
+2
+],
+"car_wheels": [
+0,
+0
+],
+"jam": [
+0,
+0
+]
+},
+"strap_band_losses": 55,
+"deflection_3N": {
+"L": 228.4,
+"strong_mm": 0.242,
+"weak_mm": 3.871,
+"twist_deg": 0.049,
+"twist_mm_at_car": 0.0043
+},
+"kill": true
+},
+"J4": {
+"car_ib14": 0.982,
+"car_p5_50_95": [
+8.02,
+10.06,
+13.01
+],
+"band_ib14": 0.998,
+"band_p5_50_95": [
+2.48,
+3.77,
+8.71
+],
+"jams": 0,
+"R_race": [
+61.0,
+62.0,
+64.2
+],
+"contact_poses": {
+"band": 20,
+"car": 15,
+"wheels": 15,
+"strap": 49
+}
+},
+"note": "SUPERSEDED: strap distal ~20 mm unfitted (K.requirement t1 220 < strap end radius 239 mm)"
+},
+{
+"k": 9,
+"t": "2026-10-19T02:21:14Z",
+"params": {
+"PHI": 50,
+"tilt": 3.145,
+"taz": -90.0,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -36.5,
+"j4": 1,
+"pose_cut": 1,
+"out_mm": 12,
+"out_strap": 80,
+"strap_floor": 1,
+"q_band": 0.97,
+"psi0": -40,
+"s_frac": 0.72,
+"post": 12.5,
+"car_half": 10,
+"hb": 3.0,
+"band_lo": -53,
+"band_hi": 23
+},
+"bench": "fast",
+"mode": "fast",
+"step": "hardware (every J4 part sampled)",
+"inband14": 0.948,
+"inband10": 0.7514,
+"reach": 0.7188,
+"follow": 0.9,
+"contact": 0.0963,
+"gap": 32.75,
+"gap_near1": 43.87,
+"gap_near2": 74.48,
+"overhead": [
+4,
+12
+],
+"n_contact": 18,
+"depth_sum": 172.2,
+"min_metal_taken": 0.143,
+"a1a2": [
+37.552,
+62.208
+],
+"why_ws": {
+"": 125,
+"contact": 2,
+"fold": 15,
+"j3stop": 3,
+"parts": 15
+},
+"th": {
+"min_th_margin_taken": 5.001,
+"window": [
+24.66,
+99.76
+],
+"n_below5": 0
+},
+"ideal": {
+"gap": 14.55,
+"reach": 0.7812,
+"follow": 0.95,
+"inband14": 0.9223,
+"inband10": 0.559,
+"contact": 0.0267,
+"near1": 18.95,
+"overhead": [
+4,
+12
+],
+"n_contact": 5
+},
+"strap_gate": {
+"strap_ib14_taken_clip": 0.884,
+"strap_ib10_taken_clip": 0.635,
+"strap_p5_50_95": [
+3.63,
+8.69,
+19.68
+],
+"losses_ws_clip": {
+"strap": [
+6,
+2
+],
+"band": [
+4,
+1
+],
+"car_wheels": [
+0,
+0
+],
+"jam": [
+0,
+0
+]
+},
+"strap_band_losses": 13,
+"deflection_3N": {
+"L": 222.2,
+"strong_mm": 0.223,
+"weak_mm": 3.564,
+"twist_deg": 0.048,
+"twist_mm_at_car": 0.0042
+},
+"kill": true
+},
+"J4": {
+"car_ib14": 1.0,
+"car_p5_50_95": [
+7.67,
+9.49,
+11.43
+],
+"band_ib14": 0.996,
+"band_p5_50_95": [
+2.36,
+3.13,
+6.31
+],
+"jams": 0,
+"R_race": [
+56.0,
+56.0,
+60.0
+],
+"contact_poses": {
+"band": 13,
+"car": 9,
+"wheels": 9,
+"strap": 8
+}
+},
+"note": "SUPERSEDED: strap distal ~20 mm unfitted (K.requirement t1 220 < strap end radius 239 mm)"
+},
+{
+"k": 10,
+"t": "2026-10-19T02:23:28Z",
+"params": {
+"PHI": 60.0,
+"tilt": 2.74,
+"taz": -116.6,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -45.0,
+"j4": 1,
+"pose_cut": 1,
+"out_mm": 12,
+"out_strap": 80,
+"strap_floor": 1
+},
+"bench": "b110",
+"mode": "exact",
+"step": "ideal (no J4 metal, knee-less readings)",
+"inband14": 0.9209,
+"inband10": 0.5072,
+"reach": 0.8389,
+"follow": 0.9364,
+"contact": 0.0493,
+"gap": 12.4,
+"gap_near1": 15.99,
+"gap_near2": 32.2,
+"overhead": [
+11,
+28
+],
+"n_contact": 21,
+"depth_sum": 121.2,
+"min_metal_taken": 0.234,
+"a1a2": [
+37.552,
+67.341
+],
+"why_ws": {
+"": 302,
+"fold": 33,
+"contact": 14,
+"parts": 6,
+"j3stop": 5
+},
+"th": {
+"min_th_margin_taken": 5.001,
+"window": [
+29.79,
+104.89
+],
+"n_below5": 0
+},
+"strap_gate": null
+},
+{
+"k": 11,
+"t": "2026-10-19T02:23:28Z",
+"params": {
+"PHI": 60.0,
+"tilt": 2.74,
+"taz": -116.6,
+"sgn": 1.0,
+"hw": 0,
+"drive": 0,
+"wd": 95.0,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -45.0,
+"j4": 1,
+"pose_cut": 1,
+"out_mm": 12,
+"out_strap": 80,
+"strap_floor": 1
+},
+"bench": "b110",
+"mode": "exact",
+"step": "hardware (every J4 part sampled)",
+"inband14": 0.6992,
+"inband10": 0.3924,
+"reach": 0.7361,
+"follow": 0.8727,
+"contact": 0.1526,
+"gap": 59.46,
+"gap_near1": 63.04,
+"gap_near2": 81.41,
+"overhead": [
+11,
+28
+],
+"n_contact": 65,
+"depth_sum": 802.73,
+"min_metal_taken": 0.234,
+"a1a2": [
+37.552,
+67.341
+],
+"why_ws": {
+"": 302,
+"fold": 33,
+"contact": 14,
+"parts": 6,
+"j3stop": 5
+},
+"th": {
+"min_th_margin_taken": 5.001,
+"window": [
+29.79,
+104.89
+],
+"n_below5": 0
+},
+"strap_gate": {
+"strap_ib14_taken_clip": 0.86,
+"strap_ib10_taken_clip": 0.59,
+"strap_p5_50_95": [
+4.05,
+9.2,
+25.04
+],
+"losses_ws_clip": {
+"strap": [
+21,
+6
+],
+"band": [
+16,
+1
+],
+"car_wheels": [
+0,
+0
+],
+"jam": [
+0,
+0
+]
+},
+"strap_band_losses": 44,
+"deflection_3N": {
+"L": 217.8,
+"strong_mm": 0.21,
+"weak_mm": 3.357,
+"twist_deg": 0.047,
+"twist_mm_at_car": 0.0041
+},
+"kill": true
 }
 }
 ]

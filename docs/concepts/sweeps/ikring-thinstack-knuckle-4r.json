@@ -90,5 +90,41 @@
    28
   ],
   "bench": "Bench(110,360) exact frozen"
+ },
+ {
+  "k": 3,
+  "t": "2026-10-19T02:16:27Z",
+  "params": {
+   "tag": "control-leastphi",
+   "PHI": 40.0,
+   "tilt": 8.5,
+   "taz": 243.0,
+   "delta": 3.5,
+   "ds": 31.0,
+   "tsh": 1.0,
+   "carw": 14.0,
+   "coil": "none",
+   "band": 8.0,
+   "bump": 1.2,
+   "lean": 1,
+   "lbr": 1,
+   "mode": "unpowered least-phi relay (phi40 mode), coil deleted"
+  },
+  "inband14": 0.9034,
+  "inband10": 0.5381,
+  "reach": 0.8083,
+  "follow": 1.0,
+  "contact": 0.043,
+  "gap": 14.46,
+  "plain_gap": 13.47,
+  "ib14_chain_only": 0.8901,
+  "near1": 25.79,
+  "near2": 55.46,
+  "ws_taken": 291,
+  "overhead": [
+   10,
+   28
+  ],
+  "bench": "Bench(110,360) exact frozen (fit Bench(60,160) fast k=0)"
  }
 ]

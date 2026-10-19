@@ -116,5 +116,125 @@
 26
 ],
 "relayed_ws": 30
+},
+{
+"k": 2,
+"t": "2026-10-19T02:22:35Z",
+"params": {
+"PHI": 75.0,
+"tilt": 55.0,
+"taz": 45.0,
+"sgn": 1.0,
+"hw": 1,
+"drive": 0,
+"wd": 84.0,
+"wa": -15.0,
+"b3": 0.0,
+"psi2": -14.0
+},
+"bench": "envsel",
+"mode": "exact",
+"step": "ideal (no R4 metal, knee-less readings)",
+"inband14": 0.9142,
+"inband10": 0.5657,
+"reach": 0.7889,
+"follow": 1.0,
+"contact": 0.0125,
+"gap": 12.36,
+"gap_near1": 16.01,
+"gap_near2": 27.2,
+"overhead": [
+8,
+26
+],
+"n_contact": 5,
+"depth_sum": 25.16,
+"min_metal_taken": 0.323,
+"ideal_gap": 12.36,
+"a1a2": [
+37.552,
+55.781
+],
+"why_ws": {
+"": 284,
+"contact": 5,
+"j3stop": 6,
+"fold": 65
+},
+"th": {
+"min_th_margin_taken": 5.0,
+"window": [
+18.23,
+93.33
+],
+"n_below5": 0
+},
+"kin_ws": 289,
+"kin_overhead": [
+12,
+26
+],
+"relayed_ws": 83,
+"note": "ideal reading only: this run's hardware pass sampled the lug's first 12 mm inside BOTTOM's own boss (lug contact on 339 poses, hw gap 295.91) - superseded by the fixed lug"
+},
+{
+"k": 3,
+"t": "2026-10-19T02:22:35Z",
+"params": {
+"PHI": 75.0,
+"tilt": 55.0,
+"taz": 45.0,
+"sgn": 1.0,
+"hw": 1,
+"drive": 0,
+"wd": 77.25,
+"wa": -8.2,
+"b3": 0.0,
+"psi2": -14.0
+},
+"bench": "b110",
+"mode": "exact",
+"step": "ideal (no R4 metal, knee-less readings)",
+"inband14": 0.8441,
+"inband10": 0.5349,
+"reach": 0.8056,
+"follow": 0.9545,
+"contact": 0.0319,
+"gap": 18.22,
+"gap_near1": 18.74,
+"gap_near2": 31.7,
+"overhead": [
+10,
+28
+],
+"n_contact": 13,
+"depth_sum": 41.24,
+"min_metal_taken": 0.632,
+"ideal_gap": 18.22,
+"a1a2": [
+37.552,
+64.556
+],
+"why_ws": {
+"": 290,
+"j3stop": 4,
+"fold": 58,
+"contact": 8
+},
+"th": {
+"min_th_margin_taken": 5.0,
+"window": [
+27.0,
+102.11
+],
+"n_below5": 0
+},
+"kin_ws": 298,
+"kin_overhead": [
+13,
+28
+],
+"relayed_ws": 59,
+"note": "ideal reading only: this run's hardware pass sampled the lug's first 12 mm inside BOTTOM's own boss (lug contact on 355 poses, hw gap 300.89) - superseded by the fixed lug"
 }
 ]

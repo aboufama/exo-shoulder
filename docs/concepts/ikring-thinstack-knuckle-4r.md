@@ -65,3 +65,55 @@ leaves those poses at psi 0, i.e. lost exactly as the lead loses them; it is now
 9 are lost at k = 0: none is in the k = 0 contact list) - ik_bench_specrule.json / ik_bench_specrule_perpose.json -
 exact because every ws pose is worn independently and clip frames are at psi 0 in both. The model's `rechoose` mode
 re-wears it in one pass for the verifier.
+
+## Results - Bench(110,360) exact, frozen lead (fit Bench(60,160) fast at k = 0 = 12.50, the lead's own)
+
+| reading | gate (chain-only ib) | plain | 1 mm | 2 mm | reach (ws /360) | overhead /28 | elev 90-140 /85 | contacts (T5 mm) |
+|---|---|---|---|---|---|---|---|---|
+| verified lead conecut-knee-knuckle-3r (reference) | - | 18.28 | - | 34.84 | 0.7278 (262) | 8 | 39 | 4 (20.24) |
+| this row, ring PARKED at psi 0 (ring metal on) | 20.37 | 19.38 | 30.21 | 56.49 | 0.7222 (260) | 8 | 39 | 6 (2 shell / bracket: 127 -0.15, 139 -0.48) |
+| unpowered CONTROL: least-phi relay, coil deleted, same axis / hardware | 14.46 | 13.47 | 25.79 | 55.46 | 0.8083 (291) | 10 | - | 18 (77.49; 263 -14.94, 459 -14.47) |
+| IK, first-run rule (no-take poses closed at the least-deep contact k) | 11.87 | 10.88 | 21.66 | 48.75 | 0.8222 (296) | 13 | 60 | 13 (76.2; 263 -15.36 at k 40) |
+| **IK, spec rule (ring moves only for a take) - the claim** | **9.75** (score 96.45) | **8.75** | 19.65 | 47.00 | **0.8222 (296)** | **13 connected** | **60** | **4 (19.48; max 8.93: 139, 205, 237, 264)** |
+
+Claim details (spec rule): follow 1.000, ib14 pooled 0.9034 / chain-only 0.8901 (the lead 0.9012: the 1.2 mm bump of
+the E strap and knee link over band 8 costs 0.011), ib10 0.5381; min th margin 5.083 deg over 406 taken poses (0 under
+5); no jams; continuity: 0 relayed takes dropped (the IK flood connects 1214 of 1215 feasible envelope nodes and 179 of
+the 180 nodes only the ring makes feasible, under both seed sets; the least-phi flood at this axis: 179 of 181).
+
+**The lead note's test, answered:** with ring metal at PHI 40, connected overhead is **13/28** (>= 12) and the ring adds
+**1** overhead take under 2 mm (370 at 1.70 mm, chain metal; the other four: 316 3.50, 343 3.70, 372 3.27, 399 3.14) -
+inside the "no more than 2" clause. Pre-registered gates: pass <= 13.75 chain-only (9.75) with connected overhead
+>= 12/28 (13) - and held overhead >= 25/71 (below).
+
+**The 36 new takes** (over the parked 260): 5 overhead, 21 at elev 90-140, 10 lower (IR / behind-the-back flexion with
+the posterior shell end, 306-464); clearance: 1 under 1 mm (127 at 0.10 mm, the BRACKET at k 2.5 - a single-k take),
+4 at 1-2 mm (182 1.31, 354 1.71, 370 1.70, 448 1.78), median 3.59 mm. k chosen: 14 of 36 at the travel end k = 40, 3 at
+37.5, 6 at 32.5 (the IK wants the end of the slot, as the proposer saw: 27 of 39 at k >= 40 with PHI 45 in the chain-only
+table). The anterior shell end is NOT the near-touch: its 2-deg bins clear >= 4.89 mm on every taken pose (+36..+48 deg).
+The POSTERIOR shell end (az -4.3 rel the pad) is: 127 shell 1.15 / bracket 0.10, 139 contact (bracket -0.48, flange
+-0.07), and 306 / 330 / 354 / 357 take with the shell at 1.71-2.75 mm.
+
+**What actuation buys over the unpowered relay (control):** 14.46 -> 9.75 gate, +5 takes, +3 overhead, -14 contacts
+(T5 77.49 -> 19.48): the least-phi relay closes poses wherever the gates pass, including 12 ring-made contacts (263 and
+459 at ~-14.5 mm); the proximity IK only moves the ring for a take.
+
+### Red team (my own best config)
+
+* **The IK is an oracle.** psi is chosen on the exact posed skin per pose. A real controller needs psi*(arm pose): over the
+  176 pairs of grid-adjacent taken bench poses (15 deg apart) psi* jumps > 10 deg on 4 and > 20 deg on 3 (max 32.5). The
+  flood shows a kinematic path exists (the ring sweeps inside one feasible run), but the skin along that sweep is not
+  checked - the near-touch of the intermediate psi is unmeasured.
+* **Fragile takes:** 2 of the 36 new takes are taken at ONE k only (127 at 2.5, 354 at 40); 12 have a taking-k run
+  narrower than 10 deg (median width 15 deg). A 2.5-deg controller error loses them.
+* **Travel end:** 14 of 36 new takes sit on the k = 40 slot-end stop; PHI 45 would move the shell's anterior end onto the
+  behind-back ER cliff (phi40's held 211) - not tried (envsel only, never Bench(110,360)).
+* **Near-touch (reported, not a gate):** the 2 mm reading is 47.00 vs the lead's 34.84 (phi40 47.16). The parked ring
+  alone puts metal within 2 mm of the skin on 9 of 110 fit-clip frames (7 under 1 mm; the lead: 0) and on 63 of 296 ws
+  takes (the lead: 23 of 262) - the bracket / flange at the pad azimuth and the posterior shell end. At this axis the
+  shell sits 3.35 mm LOWER than at 12 / 235 (R_t 76.75 vs 80.1) and the bracket ramps 28.9 deg (24.1): spec risk (d)
+  showed up as near-touch, not as contact.
+* **Unmodelled:** J4's holding torque into the cuff (shoulder slip), the drive of J4 itself (MVP1 is kinematic: no motor
+  model), the skin along the J4 self-motion between psi values, iglidur friction in the slot.
+* **Determinacy (R17):** J4 is a counted active joint whose value the IK sets: in an unpowered MVP1 it is a self-motion
+  nothing holds (a brake or the motor holds it) - a labelled 4-joint option, never the lead.

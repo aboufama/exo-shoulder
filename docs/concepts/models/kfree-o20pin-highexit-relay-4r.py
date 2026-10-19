@@ -38,7 +38,7 @@ ID = "kfree-o20pin-highexit-relay-4r"
 NAME = "O20 axis-exit pin relay at the high anterolateral exit: knee-less O20 3R + R4 on the GH-through line wdir(55, 45)"
 BASE = dict(PHI=75.0, tilt=55.0, taz=45.0, sgn=1.0, hw=0, drive=0, wd=77.25, wa=-8.2, b3=0.0, psi2=-14.0)
 HW = dict(standoff=2.0, q_boss=1.0, boss_r=10.0, stack=12.25, bar_w=10.0, bar_t=3.0, q_bar=1.0, lug_w=10.0, lug_t=3.0, q_lug=1.0,
-          clr=2.0, step=2.0, out_mm=15.0)
+          clr=2.0, step=2.0, out_mm=15.0, bar_low=0)
 D2R = math.pi / 180
 
 
@@ -87,7 +87,8 @@ def r4_geometry(AR, M1, B1, phi, ax, h):
     # bar: hub 3 -> the line, member-3 frame
     D, S, L = _arc(K.unit(h3), ax, float(h["bar_w"]), st, 0.5 * (np.linalg.norm(h3) + rB))
     rq = _fitted(B1, np.einsum("pij,pjk->pik", F1.RHG[fit], R1[fit]), fit, D, float(h["clr"]), float(h["q_bar"]), float(h["out_mm"]))
-    r0, r1 = float(np.linalg.norm(h3)) - 6.125, rB + float(h["stack"]) - float(h["bar_t"])
+    lowbar = int(h.get("bar_low", 0))           # 1: the bar joins R4's LOWER plate (underside at F = rB) and the lug its crown plate
+    r0, r1 = float(np.linalg.norm(h3)) - 6.125, (rB if lowbar else rB + float(h["stack"]) - float(h["bar_t"]))
     bl = np.clip(np.minimum(S * L, (1 - S) * L) / 10.0, 0, 1); rl = r0 + (r1 - r0) * S
     rS = np.where(np.isfinite(rq), bl * np.maximum(rq, 0) + (1 - bl) * rl, rl); bar = D * rS[:, None]
     # lug: BOTTOM's bar top (H frame BAR0_H, per pose C = RHG^T RH) -> the line, arm frame (unrelayed)
@@ -95,9 +96,10 @@ def r4_geometry(AR, M1, B1, phi, ax, h):
     rc = float(np.linalg.norm(K.BAR0_H))
     Dl, Sl, Ll = _arc(c0, ax, float(h["lug_w"]), st, 0.5 * (rc + rB))
     rql = _fitted(B1, F1.RHG[fit], fit, Dl, float(h["clr"]), float(h["q_lug"]), float(h["out_mm"]))
-    l0, l1 = rc + 1.5, rB + 1.5
-    bll = np.clip(np.minimum(Sl * Ll, (1 - Sl) * Ll) / 10.0, 0, 1); rll = l0 + (l1 - l0) * Sl
-    rL = np.where(np.isfinite(rql), bll * np.maximum(rql, 0) + (1 - bll) * rll, rll); lug = Dl * rL[:, None]
+    l1 = rB + float(h["stack"]) - 3.0 if lowbar else rB   # lug underside at R4's other plate; the first 12 mm from BOTTOM's bar top are BOTTOM's own boss (dropped, not
+    bll = np.clip((1 - Sl) * Ll / 10.0, 0, 1)    # lug metal); the rest sits at its fitted requirement, ramping into R4's lower plate
+    rqf = np.where(np.isfinite(rql), np.maximum(rql, 0), np.nanmax(rql)); rL = bll * rqf + (1 - bll) * np.maximum(l1, rqf)
+    keep = Sl * Ll >= 12.0; lug = (Dl * rL[:, None])[keep]; rL = rL[keep]
     exf = exit_axis[np.isfinite(exit_axis)]
     return dict(boss=boss, bar=bar, lug=lug, rB=round(rB, 2), exit_axis_min_p50_max=[round(float(np.min(exf)), 1), round(float(np.median(exf)), 1), round(float(np.max(exf)), 1)],
                 bar_len_mm=round(L, 1), lug_len_mm=round(Ll, 1), hub3=[round(float(x), 1) for x in h3], hub3_r=round(float(np.linalg.norm(h3)), 1),
@@ -235,6 +237,7 @@ def append_sweep(o, path=None):
              min_metal_taken=w["min_metal_taken"], ideal_gap=o["kneeless"]["gap"], a1a2=o["a1a2"], why_ws=o["why_ws"], th=o["th"],
              kin_ws=o["kin_ws"], kin_overhead=o["kin_overhead"], relayed_ws=o["relayed_ws"])
     if "R4" in o: e["R4"] = {k: v for k, v in o["R4"].items() if k != "geom"}; e["R4_geom"] = o["R4"]["geom"]
+    if o.get("note"): e["note"] = o["note"]
     S_.append(e); json.dump(S_, open(path, "w"), indent=0, default=float)
 
 

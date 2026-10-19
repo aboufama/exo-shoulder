@@ -39,6 +39,11 @@ assert _src.count(_olds) == 1                               # strap_floor 1: the
 _src = _src.replace(_olds, _olds + "; rS = np.where(np.isfinite(rq) & bool(h.get('strap_floor', 0)), np.maximum(rS, rq), rS)")  # requirement:
 # the hub-3 end is a joggle onto the OUTER face of hub 3's lower plate where the deltoid stands above the plate's underside
 # (the insertion row's 10-mm ramp to the plate underside put 27 of 38 Bench(60,160) strap contacts at t = 0, 0.1-1.6 mm)
+_oldt = 't = K.requirement(B1, I, np.einsum("pij,nj->pni", Rw_, sdir).reshape(-1, 3), clr=float(h["clr"]))'
+assert _src.count(_oldt) == 1                               # t1_strap: the strap's GH rays reach 240 mm at s 0.70; the kit's
+_src = _src.replace(_oldt, _oldt[:-1] + ', t1=float(h.get("t1_strap", 220.0)))')   # default march end (220) left its distal ~20 mm
+# UNFITTED (inf -> the straight radius interpolation, through or above the arm by luck: the first sweep's strap losses
+# jumped 12 -> 49 between neighbouring cells; q_band 0.9 put the strap in every pose)
 ICB = type(sys)("icb_for_dcb"); ICB.__file__ = os.path.join(HERE, "insertion-cband-relay-4r.py")
 exec(compile(_src, ICB.__file__, "exec"), ICB.__dict__)
 K, KF, CB, EB = ICB.K, ICB.KF, ICB.CB, ICB.EB
@@ -48,7 +53,7 @@ NAME = ("Knee-less O20 3R, J3 square to the arm wdir(95, -8.2), one-sided relay 
         "about raxis(2.74, -116.6), ~220 mm strap, V-wheel carriage")
 BASE = dict(PHI=60.0, tilt=2.74, taz=-116.6, sgn=1.0, hw=0, drive=0, wd=95.0, wa=-8.2, b3=0.0, psi2=-45.0)
 HW = dict(ICB.HW, s_frac=0.70, L_arm=325.0, post=math.hypot(10.0, 5.0), psi0=-45.0, band_lo=-58.0, band_hi=28.0,
-          car_half=10.0, wheel_psi=7.0, q_band=1.0, q_strap=1.0, r_ref=60.0)
+          car_half=10.0, wheel_psi=7.0, q_band=1.0, q_strap=1.0, r_ref=60.0, t1_strap=300.0)
 ICB.ID, ICB.BASE, ICB.HW = ID, BASE, HW
 D2R = math.pi / 180
 
