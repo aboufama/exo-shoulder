@@ -115,3 +115,57 @@ is to stop here rather than spend the farm on it.
   The K-free ghost's cone clearances (2.0-7.9 mm) are not reproduced once hub 3 carries one fitted level.
 - The E-strap crossover (inverted J3 stack) is free where the E points into link 2's free sector (H1's seats: 23.64 ->
   23.43 fast); it needs the inverted knee stack (knee link under the boss) to stay buildable when the E arrives high.
+
+## Verification (2026-10-19, independent verifier, local CPU)
+
+Harness: `docs/concepts/verify/weldk-overstrap-pinknee-3r.py` (the model's own `frozen()` unchanged, then added checks)
+and `docs/concepts/verify/weldk-overstrap-pinknee-3r_el2.py` (per-pose bench dump + a sharp E vs link-2 edge test).
+Results: `docs/concepts/verify/weldk-overstrap-pinknee-3r_v_bench_frozen.json`, `..._v_el2.json`,
+`docs/alignment/remeasure/weldk-overstrap-pinknee-3r_bench_perpose.json`. The bench is Bench(110,360) exact
+(CB_EXACT=1), with the shape fitted on Bench(60,160) fast and then frozen.
+
+**v_gap 45.96 (score 83.3)** reproduces the claim to the digit: reach 0.6306, follow 0.9273, ib14 0.7415, ib10 0.4473,
+contact 0.009. The per-pose dump recomputes 45.97. Champion on the same bench with the same base checks: 66.97 (the
+offset-skin-normal-3r verifier's champbig_frozen, the number H1's verification used; not re-run, because the box was at
+load 22-27). **Not refuted**: no hard rule is broken and the design beats the champion. It still fails the round's gates:
+the kill line 27.20, follow 0.95, and the step-0 E in-band (0.48).
+
+Checks added, each over every taken pose (329). None removed a pose:
+
+- **ACTIVE DOF**: 3 (J1, J2, J3). Knee pins a and b are the cuff knee, outside the count. They are fixed by the
+  two-circle closure, so no coordinate is left undetermined.
+- **Independent 3D closure**: hub-3 centre, pin a and pin b agree to 0.000 mm between the bodies that share them. The J3
+  and pin axes agree to within 0.022 deg.
+- **Inverted J3 stack**: hub 3's LOWER plate now rides with link 2, so the knee link and the arm pad are not adjacent to
+  it and need >= 1 mm. The model scores the whole hub-3 cylinder as member 3. The minimum is 12.53 mm (knee link) and
+  12.26 mm (pad), so this has no effect.
+- **E boss vs hubs 1-2 and link 1**: these pairs are not in the model's collide. Minimum 6.29 mm (ws 314).
+- **Margins and levels**: min th margin 5.262 deg in the kit metric. The knee window margin is 23.0 deg (taken
+  59.9-125.8 inside [31.2, 148.8]). Hub levels are 49.6 / 61.8 / 61.4, under the 140 cap.
+- **Continuity flood**: full 1432-pose grid, 2-deg slerp edges, 10-deg joint jumps, knee branch sign. All 1034 / 1034
+  kinematic nodes are connected, with 0 islands and one knee branch. Static reach = connected reach.
+- **E strap beside link 2**: the model's stacked test only looks inside the E's plan footprint (|y| <= 5). At its root
+  the E dips to F3 + 0.5, level with link 2, so a link 2 running beside it is untested.
+  - The sharp edge test (link 2's true edge vs the E footprint where their heights overlap) gives 0.333 mm at ws 232
+    (plane 15, elev 105, axial 0) and 0.761 mm at ws 290 (45 / 150 / -45). Both pass the 0.15 mm running gap, but both
+    are tolerance-sensitive.
+  - H1's 1.5 mm-sphere kd test reads -0.29 / -0.12 mm there. That gives **46.53** (reach 0.625, overhead 6/28) as a
+    conservative bound.
+
+Red-team findings (none changes the number):
+
+1. **The crossover is never used.** Link 2 never passes under the E on any of the 329 taken poses. The stacked
+   clearance is "no overlap" everywhere, and all 18 E-L2stack poses are jams. The E leaves the hub at its 64.52 rim
+   and then ramps down to 61.87 at x = 13 mm. So the best config buys nothing from the E-over-link-2 stack, and the
+   3.15 mm rim lift is pure cost. The design is H1's stack with the E ramped down and kept out of link 2's sector.
+2. **The arm pad has no modelled leg (kinv 1).** The inverted knee stack puts the arm pad ABOVE the knee link at pin b,
+   so the pad's leg to the cuff must clear the knee link's sweep about pin b. The free sector over the taken poses is
+   46 deg at 9 mm from pin b, 230 deg at 11 mm and 242 deg at 13 mm. A pad bracket reaching about 11 mm out is
+   buildable. That leg is unmodelled metal, as H1's pad-to-cuff connection is.
+3. **Near touch and overhead are unchanged by the checks.** Metal at 0.07 mm on ws 345; near1 53.04, near2 90.67.
+   Overhead 7/28 (6/28 under the kd bound), and every take sits in the 0-2.6 mm shell.
+4. **Held out was not run.** The model has no `frozen_held()`, so a held dump is not possible without new code. The
+   bench claim already fails, so held cannot change the verdict.
+
+Verdict: verified at 45.96. The verdict to stop stands. The limiter the claimant measured is hub 3 inside the bunched
+deltoid at the abduction cone, and nothing here moves it.

@@ -1,0 +1,70 @@
+{
+ "low": [
+  {
+   "gap_mm": 0.333,
+   "i": 232,
+   "kind": "ws",
+   "plane": 15.0,
+   "elev": 105.0,
+   "axial": 0.0
+  },
+  {
+   "gap_mm": 0.761,
+   "i": 290,
+   "kind": "ws",
+   "plane": 45.0,
+   "elev": 150.0,
+   "axial": -45.0
+  },
+  {
+   "gap_mm": 1.254,
+   "i": 8,
+   "kind": "clip",
+   "plane": 30.0,
+   "elev": 150.0,
+   "axial": -60.0
+  },
+  {
+   "gap_mm": 1.254,
+   "i": 9,
+   "kind": "clip",
+   "plane": 30.0,
+   "elev": 150.0,
+   "axial": -60.0
+  },
+  {
+   "gap_mm": 1.254,
+   "i": 10,
+   "kind": "clip",
+   "plane": 30.0,
+   "elev": 150.0,
+   "axial": -60.0
+  },
+  {
+   "gap_mm": 1.278,
+   "i": 11,
+   "kind": "clip",
+   "plane": 30.0,
+   "elev": 149.40573120117188,
+   "axial": -59.878719329833984
+  },
+  {
+   "gap_mm": 1.33,
+   "i": 7,
+   "kind": "clip",
+   "plane": 30.0,
+   "elev": 148.11460876464844,
+   "axial": -59.61522674560547
+  },
+  {
+   "gap_mm": 1.406,
+   "i": 184,
+   "kind": "ws",
+   "plane": -15.0,
+   "elev": 105.0,
+   "axial": 15.0
+  }
+ ],
+ "clash": [],
+ "note": "plan gap from link 2's true edge to the E footprint where heights overlap; 0 = overlapping in plan with heights overlapping"
+}

@@ -3747,7 +3747,7 @@
   "name": "Welded-K crossover pin-knee 3R (cx 0): the lead's J1, a straight 40.5-deg link 1 (no knuckle, no K drive), J3 re-aimed to eff (104.4, 11.7) via the hub-3 station (95, 8) b3 0.6, link 2 on hub 3's LOWER plate and the E strap crossing OVER link 2, two-pin MR63ZZ knee, no J3 stop",
   "family": "plain spherical 3R + two-pin cuff knee (H1 family, skin-normal-3r-pin-knee) with lens A's J3 re-aim and j3-neck-over-3r's inverted J3 stack (the E-strap crossover)",
   "lens": "round301:drive-free-cone (taken to its limit: the whole K and its drive deleted, since the J3 re-aim does most of the K's job at the cone)",
-  "status": "screened",
+  "status": "verified",
   "t_ideated": "2026-10-19T01:32:54Z",
   "source": "round 301 (O1, track overhead) judge (docs/concepts/round301_ideation.md)",
   "merged_from": [],
