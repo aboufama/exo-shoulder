@@ -142,3 +142,73 @@ Not measured, and why:
   Then copy the result to `docs/alignment/remeasure/pointer-cslide_probe_{bench,held}.json` and re-run the audit.
 - Whoever continues the design's CMA (the row's `farmcma`) should claim with the saddle off as well as on, and report
   both.
+
+## Skeptic (2026-10-19 04:20-04:34 UTC): final verdict WATCH
+
+Re-measured with the model unchanged and the row's best_params, on the claim's own Bench(60,160) fast with its own
+shape. The probe re-fit reproduces every number in `remeasure/pointer-cslide_probe_fitfast.json`, all identical:
+
+| quantity | value |
+|---|---|
+| gap | 69.84 |
+| near-touch at 1 / 2 / 3 mm | 76.34 / 106.17 / 185.41 |
+| min th margin over taken poses | 38.55 |
+| contact | 8 poses, 72.56 mm summed |
+| sample counts | identical |
+| per-part in-band | identical |
+
+The saddle counterfactual re-run is file-identical to `remeasure/pointer-cslide_saddle_counterfactual.json`. New
+measurements are in `remeasure/pointer-cslide_skeptic_extra.json` (`tools/alignment_skeptic_extra_pointer_cslide.py`).
+The exact Bench(110,360) and held-out frozen wears again did not finish. They ran as 2 niced processes at load 14-17 on
+4 cores, 3.6 CPU-min each, and I stopped them at the time box. No farm (the approval is spent).
+
+### Rulings (`docs/alignment/pointer-cslide.rulings.json`)
+
+| key | refuted | evidence (short) |
+|---|---|---|
+| held_out | no | Not measured. No v_gap and no held-out number on file. My frozen exact wears did not finish (above). |
+| near_touch | **yes** | On file: `probe_fitfast.json` near_touch gives 76.34 / 106.17 / 185.41, re-measured identically. With the numbers on file the documented level is ok (report-only since 2026-10-17; `c_near_touch`). The shell size is carried by T1. |
+| contact_depth | no | 8 poses, 72.56 mm, deepest 15.67 (hub1 / link1 at ws 0/150/0), re-measured. The pairing is cross-bench: a 220-pose fast fit against the lead's 470-pose exact dump (4 poses, 20.24 mm). It understates the excess: 0.330 vs 0.043 mm per pose (x7.7), and +52.3 mm is 10x the 5 mm floor. Held depths: not on file, true. |
+| fold_margin | **yes** | `K.closure` (`concept_kit.py` 88-97) margin is the line 25-30 `th` reading. Min over the 136 taken poses is 38.55 deg (p05 41.64; `probe_fitfast` singular_margin_min_taken), re-measured, > 5. |
+| sampling | no | The per-part record exists (`probe_fitfast` sample_counts + inband_member). Through c_sampling's own arithmetic it reads +26.0 points sample- vs part-weighted, past TH part_weight_gamed 8. S3's riser is an unsampled body, and it is now measured. |
+| NEW-inband-padding | no | Re-run identical: 69.84 vs 120.30, an in-band term of 49.17 points, 48.3 of them from the band's underside. The outer face stays 29.4 mm off. New: 741 g is past R8 (<= 500 g); the 275 g twin is under it. |
+| S2 | no | 0.6739 sample-weighted vs 0.4136 part-weighted, re-derived. |
+| NEW-oob-standoff | no | over14 0.3239, over20 0.1908; shoe 29.4 mm, hub1 >= 31.7 mm (clamp). |
+| T1 | no | 29.83 points in the 1-2 mm shell (36.33 between 0 and 2 mm), over the documented 15. 19 of 136 taken poses are < 2 mm. |
+| T2 | no | Clip floor histogram 1 / 8 / 28 / 19: all 56 taken clip frames have a floor < 4 mm. in-band10 0.521. The 2 mm march is kit-wide (KIT.md K3), but the cost is the wearer's. |
+| G1 | no | Below 3 mm: neck 44, band 34. Below 2 mm: band 9, neck 8, link1 6, link2 3. |
+| T5 | no | As contact_depth. The instrument statement is right: under 2026-10-18.1 the lead's reference raised and T5 read ok. It now fires watch. This needs both the type guard and the new probe file. |
+| P1 | no | design() fits the window and all quantile radii on the scored poses. Best of 479, gate not converged, window edge -0.0 deg. Off-bench still unmeasured. |
+| M2 | **yes** | "For any cage length" is false. Use a cage longer than the shoe: Lc = Ls + T/2 = 39.46 + 48.97 = 88.43 deg keeps the shoe over cage-held balls through the stroke. Over the stroke the cage spans Lc + T/2 = T + Ls = 137.41 deg. That is the band arc 141.51 (`angles()`: T + Ls + 2 x 2.05 stop) less its stops, and the cage meets the stop face together with the shoe. The declared caged-ball J3 (custom cage, anti-creep: row mechanism.notes) fits the band unchanged. |
+| S3 | no | **Measured lower bound +1.18.** The shoe at rho 81.83 drops to the neck's first row at radius 54.2-54.7 over 4 mm: a 27.45 mm step at 81.7 deg, past K5's 60 deg. A K5-consistent riser (neck rows raised to the 60-deg line, no new wall samples) lifts 7 rows. Neck in-band goes 0.9945 -> 0.8419 and the gap 69.84 -> ~71.02. Wall samples would add to that. |
+| NEW-ws-inband | no | ws in-band 0.5446, over14 0.4462. Overhead ws 0 / 12; raised 34 / 67. |
+| NEW-skin-wrapped-body | no | Not steeper than a kit strap: max step 46.3 deg axial and 38.7 deg circumferential, 0 % past 60. It is a doubly-curved 26 mm x 141 deg underside on a 6.0-31.4 mm body carrying ~48 in-band points, which a constant-section strap is not. No buildable line/arc version has been worn. |
+
+### Missed by the audit (not counted in this verdict; for the next audit)
+
+1. **The J1 seat breaks user ruling 4, and no reason says so.**
+   - best_params give a J1 of az 120.431, el 35.415, so `K.bvec` = (0.4128, 0.5795, 0.7027).
+   - The anterior component is 0.4128, over ANT_MAX 0.20. `seat_ok` (`docs/concepts/models/zc-frontier-3r.py` lines 56-62) fails it.
+   - The model's docstring puts J1 "over the anterior acromion". Ruling 4 allows back of the shoulder and acromion top only, with no front seats.
+   - The row predates the ruling: t_screened 2026-10-15T22:36, the ruling 2026-10-16 ~05:50.
+   - Its `farmcma` loop searches az +-25 and el +-20 about this seat with no `seat_ok`, so continuing the loop as the audit's Next suggests keeps searching forbidden seats.
+   - The clavicular-front-route skeptic (90129e8) found the same gap in this audit, and ruled the same test gamed on that row.
+2. **The saddle is past R8.** 741.2 g against REQUIREMENTS.md R8's <= 500 g custom-part budget; the saddle=0 twin is 274.7 g. So the 49 in-band points are bought with a requirement, not only with mass.
+3. **The shoe-to-neck step breaks the K5 60-deg climb rule** (81.7 deg over 4 mm). S3 called it unsampled. It is also unbuildable as modelled. The kit-consistent fix costs >= 1.18 points (above).
+4. **The near_touch, fold_margin and sampling checks fire on missing fields when the numbers are on file in the probe.**
+   - `probe_fitfast` carries near_touch, singular_margin_min_taken and sample_counts + inband_member.
+   - The tool reads none of them (FOLD_KEY does not match `singular_margin_min_taken`; c_sampling wants `parts_ib14`).
+   - Read correctly, sampling would be **gamed** by the tool's own +8 threshold (+26.0), which the auditor held at watch on judgement (area weighting at kit density).
+
+### Final verdict (ledger, skeptic entry 2026-10-19T04:33:33Z): **WATCH**
+
+Refuted: near_touch, fold_margin and judgement:M2. Upheld (14): held_out, contact_depth, sampling, NEW-inband-padding,
+S2, NEW-oob-standoff, T1, T2, G1, T5, P1, S3, NEW-ws-inband and NEW-skin-wrapped-body. The worst upheld level is watch.
+
+**T5 now reads differently** (instrument 2026-10-19.1 + the new probe file): ok, "no depth of the lead on file", before;
+watch, x3.58 the lead's summed depth, now.
+
+Next: run the frozen exact and held wears when the box is below load ~6. Each needs > 8 CPU-min:
+`CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_wear_probe_pointer_cslide.py bench|held <dir>`.
+Then pair T5 on Bench(110,360) with the lead's `_bench_perpose.json`. Decide the seat (missed 1) before any more of
+this design's CMA runs.
