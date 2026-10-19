@@ -122,6 +122,13 @@ under the arm root. The price is 6 kinematic takes on the 360 (279 vs 285); the 
 lost, full clip continuity, min th margin 5.67-5.9 deg. Arcs: sun 86-94 deg on a 8.4-9.1 mm pitch radius, planet
 46-53 deg on 14.7-17.3 mm, contact walk 13.7-13.8 mm.
 
+Stacking a rolling J1 on the band-legal J2 (`rc_metal.py J12`, seeded CMA 501 cells + random/CMA 650, gate 0.23 /
+0.23 / 0.00): best **J1 6.79 / 5.61 / beta 18.0 + J2 7.34 / 11.28 / beta 40.2 (both external)**, all four bands in band at
+one level (0.999 / 1.000 / 0.995 / 0.987), 131 metal takes / 160 (J2 alone 130), **287 / 110 / 17 kinematic on
+Bench(110,360)** (J2 alone 279, H1 263), min th margin 5.35; J1 sun arc 125 deg on a 7.1 mm pitch radius, planet 152
+deg on 5.9 mm, walk 15.5 mm. J1's +8 shows only on the 360, not on the search sample (+1): it is a read on unseen
+poses, not a fitted gain, and small either way.
+
 ## Verdict
 
 **Dead as specified (three hubless pairs, rigid cuff); the lever it contains lives on in pick #2.**
@@ -137,8 +144,8 @@ Hand-offs:
 - **To pick #2:** measure the planet band at one level on the overhead poses before any claim, and start from the
   band-legal cell 8.73 / 14.23 / beta 42.0 (both bands 0.99 at one level, 279 / 110 / 16 kinematic) instead of
   25/10/30 (planet band 0.007).
-- **J1 rolling on top of the J2 pair** (+6 kinematic on the 360, 0 lost, full continuity, both J1 bands in band at
-  R 51) is the only extra pair worth a cell; it is another hubless joint for the user's rule question.
+- **J1 rolling on top of the J2 pair** (band-legal J12 cell: 287 vs 279 kinematic on the 360, all four bands >= 0.987
+  in band at one level) is the only extra pair worth a cell; it is another hubless joint for the user's rule question.
 - **Rule questions for the user** (unchanged from the judge's list): hubless rolling joints vs "O20 v5 at every joint";
   strap-held cones vs "no gears, pulleys or cables"; strap pricing (pick #2: cx 6.5 with 2 straps; this chain's 3 pairs,
   rigid cuff: tools/simplicity.py v2.2 --score 19.5 with the 6 straps as flexures x 3, 1.5 if straps are not flexures).
