@@ -197,7 +197,9 @@ Then **the hardware**: strap contacts, a carriage out of band (0.34) and band-to
    face the torso (ray requirement 110-170 mm). An arm-fixed band there must give up those poses.
 3. **The re-aim is real but its J2 re-placement buries hub 2.** With J3 at wdir(95, -8.2) the relay at this axis reads
    19.70 envsel, against 36.15 with the lead's J3. But the psi2 -45 re-placement that makes a2 67 buries hub 2 under the
-   acromion at abduction 105-150 (6-11 contacts, up to 14.4 mm deep). The next lever is hub 2's metal re-fitted to the
-   re-placed seat, or a J1 / a1 change that reaches a2 67 without moving J2 45 deg.
+   acromion at abduction 105-150 (6-11 contacts, up to 14.4 mm deep). Hub 2's metal is already fitted to the re-placed
+   seat on Bench(60,160), so it buries on poses outside its fit set: the seat itself sits under the acromion's swing.
+   The next levers are a J1 / a1 change that reaches a2 67 without turning J2 45 deg round J1, or fitting the metal on
+   the envelope sample (env) instead of Bench(60,160).
 4. **Lead-quality ideal bounds must be read off the fit bench.** The in-sample Bench(60,160) reads 7-10 points better
    than envsel or frozen Bench(110,360).

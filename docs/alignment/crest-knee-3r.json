@@ -52,7 +52,7 @@
   {
    "check": "contact_depth",
    "level": "ok",
-   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 31.5: bench 5 contact poses, sum 5.15 mm, deepest 1.96 mm at ['ws', 30.0, 165.0, -60.0], 0 deeper than 3 mm vs conecut-knee-knuckle-3r 20.24 mm over 4 (-15.09 mm, x0.25); held 2 contact poses, sum 2.04 mm, deepest 1.42 mm at ['ws', 135.0, 135.0, -45.0], 0 deeper than 3 mm vs conecut-knee-knuckle-3r 60.97 mm over 14 (-58.93 mm, x0.03)",
+   "reason": "the score counts contact poses, not depth (report only, score unchanged): v_gap 31.5: bench 5 contact poses, sum 5.15 mm, deepest 1.96 mm at ['ws', 30.0, 165.0, -60.0], 0 deeper than 3 mm (no bench depth of conecut-knee-knuckle-3r on file); held 2 contact poses, sum 2.04 mm, deepest 1.42 mm at ['ws', 135.0, 135.0, -45.0], 0 deeper than 3 mm (no held depth of conecut-knee-knuckle-3r on file)",
    "depths": {
     "v_gap 31.5": {
      "bench": {
@@ -102,34 +102,12 @@
     }
    },
    "ref": "conecut-knee-knuckle-3r",
-   "compare": [
-    {
-     "claim": "v_gap 31.5",
-     "wear": "bench",
-     "sum": 5.15,
-     "ref_sum": 20.24,
-     "excess": -15.09,
-     "ratio": 0.25,
-     "watch": false
-    },
-    {
-     "claim": "v_gap 31.5",
-     "wear": "held",
-     "sum": 2.04,
-     "ref_sum": 60.97,
-     "excess": -58.93,
-     "ratio": 0.03,
-     "watch": false
-    }
-   ]
+   "compare": []
   },
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs conecut-knee-knuckle-3r: plain -13.22, 2 mm -24.72",
-   "ref": "conecut-knee-knuckle-3r",
-   "gain_plain": -13.22,
-   "gain_2mm": -24.72
+   "reason": "no reference"
   },
   {
    "check": "continuity",
@@ -139,7 +117,7 @@
   {
    "check": "fold_margin",
    "level": "ok",
-   "reason": "min fold margin on file 5.085 deg (redispatch2_2026_10_18.joggle_best.frozen_exact_bench.th_margin_min; 15 readings)",
+   "reason": "min fold margin on file 5.085 deg (redispatch2_2026_10_18.joggle_best.frozen_exact_bench.th_margin_min; 20 readings)",
    "min_margin": 5.085,
    "where": "redispatch2_2026_10_18.joggle_best.frozen_exact_bench.th_margin_min"
   },
@@ -238,7 +216,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 7 commits that touched the row"
   },
   {
    "check": "rules",
@@ -251,6 +229,8 @@
   "held": true
  },
  "verifier_files": [
+  "docs/concepts/verify/crest-knee-3r-v3_held.json",
+  "docs/concepts/verify/crest-knee-3r-v3_bench.json",
   "docs/concepts/verify/crest-knee-3r-joggle_v_tolprobe_flatcell_bench.json",
   "docs/concepts/verify/crest-knee-3r-joggle_v_tolprobe_held.json",
   "docs/concepts/verify/crest-knee-3r-joggle_v_tolprobe_bench.json",
@@ -260,10 +240,9 @@
   "docs/concepts/verify/crest-knee-3r-joggle_v_bench_frozen.json",
   "docs/concepts/verify/crest-knee-3r_v_flood_held.json",
   "docs/concepts/verify/crest-knee-3r_v_flood_bench.json",
-  "docs/concepts/verify/crest-knee-3r_v_held_frozen.json",
-  "docs/concepts/verify/crest-knee-3r_v_bench_frozen.json"
+  "docs/concepts/verify/crest-knee-3r_v_held_frozen.json"
  ],
- "git": "05eab63",
+ "git": "0e9df59",
  "tool_version": "2026-10-18.1",
- "t": "2026-10-18T09:02:33Z"
+ "t": "2026-10-19T01:34:53Z"
 }
