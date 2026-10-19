@@ -252,13 +252,35 @@ contact on Bench(110,360).
   - 54 fold and 6 J3-stop poses.
 - On envsel, 11 of the 13 contacts are hub 2: the burial is the limiter there.
 
-**Caveat on kc 2 (how far the bar can be trusted).**
-- Hub K's stack carries link 1a and link 1b at different plate levels, so a real one-bar link 1 climbs between those
-  levels near hub K. A 20 mm pad with a 3 mm top does not model that climb.
-- If the phantom crown contacts sit below the top link's level, part of the 4.12-point correction is optimistic.
-- The diagnostic (scratch icb_audit/hubk_levels.py) prints the height of each hub-K contact entry above the underside,
-  and the link levels near hub K, at every contact pose. It was still running at commit time; its result is appended
-  below when it lands.
+**Level diagnostic (landed 04:01 UTC; it corrects the attribution above).** Scratch icb_audit/hubk_levels.py, frozen
+exact Bench(110,360), cell 0, kc 0. At all 13 poses where a "hubK"-owned contact entry is in the skin, hub K's own
+walls and crowns are CLEAR:
+
+| hub K entry | distance at the hub-K contact poses |
+|---|---|
+| ring at 4.08 mm | +1.7 to +8.1 mm |
+| ring at 8.17 mm | +3.9 to +10.9 mm |
+| ring at 12.25 mm and the crowns (12.25-18.25 mm) | +5.8 to +18.6 mm |
+| level-0 rim ring (at the underside) | -0.08 to -2.16 mm, as deep as the underside itself (kept in kc 2) |
+
+**The deep entry is a different one.** Every deep reading (-1.35 to -9.41 mm, including the 7 overhead fit-clip frames)
+comes from contact entry 31:
+- 24 points on member 1, a median 5.09 mm above hub K's underside, 8.16 mm from hub K's samples (so outside the hub's
+  footprint);
+- appended right after the base contact-only list.
+
+That is the drive horn's contact top. The chain's base appends `(1, horn + T_LINK * uK)` after `_contact_only`
+(coupler-longdyad-knuckle-3r.py line 276). kfree-armarc-relay-4r.py `_strip_drive` deletes the rigid horn, but it only
+strips a contact entry whose median distance to the horn is < 0.5 mm. The top sits T_LINK = 3 mm off, so it survives.
+`contact_owner` then gave it to the nearest remaining part, hub K. So the over-strict metal is the **stripped drive's
+horn top** (drive 0), not hub K's stack. kc 2 removed it along with hub K's upper stack, which was clear anyway.
+
+What this means:
+- **The 12.74 / 16.59 readings stand as the drive-stripped, K-welded chain.** Hub K's walls at 4-18 mm are clear at
+  every one of those poses, so a one-bar link 1 climbing between plate levels inside hub K's footprint would not touch
+  either. The caveat that kc 2 might be optimistic about the bar's climb is resolved.
+- **The bug is in the shared helper**, kfree-armarc-relay-4r.py `_strip_drive`: a 0.5 mm match tolerance against a
+  3 mm-offset contact top.
 
 ### Levers tried (none reverses the ruling)
 
@@ -287,11 +309,12 @@ The sibling distal-cband-sq95-relay-4r (s 0.72, swept) died at the same hardware
 
 ### Consequences beyond this row (for the judge and the alignment auditor)
 
-- **Every knee-less row whose ideal is read through this file's `readings`, or a copy of it, should be re-read.**
-  - The "noK" reading never deleted hub K.
-  - The "kneeless" reading keeps a hub K stack that a welded-K design does not have: up to 9 contact poses, the
-    follow term of an overhead clip, and ~4 gap points here.
-  - The judge's 14.0 bars, read through this reading, were all over-strict by that much.
+- **Every drive-stripped (drive 0) row read through kfree-armarc-relay-4r.py `lead_eval` / `_strip_drive`, or a copy of
+  it, keeps the deleted horn's contact top.** That includes kfree-armarc-relay-4r, kfree-o20pin-highexit-relay-4r,
+  distal-cband-sq95-relay-4r and this row.
+  - Here it cost 9 contact poses (the overhead fit clip's 7 follow frames) and 4.12 gap points on the claim bench.
+  - The "noK" reading also never deleted hub K's contact entries.
+  - Fix: strip contact entries of member 1 that lie within T_LINK + 0.5 of the horn.
 - **The correction can also cut the other way:** it deletes metal. A row that claims a gain from `kc 2` must show its
   link 1 really is one bar at a buildable height, in its CAD and its viz.
 
