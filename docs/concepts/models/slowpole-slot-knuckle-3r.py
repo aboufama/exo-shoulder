@@ -183,6 +183,29 @@ def slot_varlaw(P=None, r_p=13.5, ph=-60.0, R_mm=61.0, dq=0.25, mu=0.087, rhos=n
                 law=[[round(float(x), 3) for x in r] + [round(float(th), 2)] for r, th in zip(A[::-step][::1], ths[::-step])])
 
 
+def dwell_lock(P=None, r_p=13.5, ph=-60.0, q2_travel=None, dwell=60.0, R_mm=61.0, dq=0.5):
+    """the dwell arc's K lock over `dwell` deg of q2 before the onset (onset = the end state minus q2_travel of the law the
+    slot carries): the arc is concentric with u2, its wall normal at the pin is n ~ u2 - (u2 . C) C; a K torque is reacted
+    with lock angle angle(n, uK x C) (90 = the plate slides along its own dwell arc: K unlocked; the pin then sits on the
+    u2-uK great circle). Returns [min, max] deg and the K play per 0.05 mm of slot clearance at the worst point."""
+    P = _clamp(dict(PARAMS, **(P or {}))); b1, b2 = P["bk1"], P["bk2"]
+    L = SK.law_for(dict(P, WALL="lead")); G = SK._geo(b1, b2); an = SK.anchor(); D = G["D"]
+    u2, uK = D.u[1], D.uK; s_q = an["s_q"]
+    e = S.unit(np.cross(u2, np.cross(uK, u2))); f = np.cross(u2, e); t = r_p / R_mm
+    q2e = math.radians(L["q2_end"]); trav = (L["k_end"] / P["rho"]) if q2_travel is None else q2_travel
+    q2on = q2e - s_q * math.radians(trav)
+    pe = math.cos(t) * u2 + math.sin(t) * (math.cos(math.radians(ph)) * e + math.sin(math.radians(ph)) * f)
+    p0 = S.rotm(u2, -q2e)[0] @ pe
+    q2s = q2on - s_q * np.radians(np.arange(0.0, dwell + 1e-9, dq))
+    C = np.einsum("nij,j->ni", S.rotm(u2, q2s), p0)
+    n = u2[None, :] - (C @ u2)[:, None] * C; n /= np.maximum(np.linalg.norm(n, axis=1), 1e-15)[:, None]
+    v = np.cross(uK, C); vn = np.linalg.norm(v, axis=1)
+    lam = np.degrees(np.arccos(np.clip(np.abs(np.einsum("ij,ij->i", n, v)) / np.maximum(vn, 1e-15), 0, 1)))
+    j = int(np.argmax(lam)); cosl = max(math.cos(math.radians(lam[j])), 1e-6)
+    play = math.degrees(0.05 / (cosl * vn[j] * R_mm))
+    return dict(lock=[round(float(lam.min()), 1), round(float(lam.max()), 1)], worst_at_q2_before_onset=round(float(j * dq), 1), play_deg_per_0p05mm=round(play, 2))
+
+
 def wear(P, bench="envsel"):
     out, M, B = SK.wear(dict(PARAMS, **P), bench)
     out["id"] = ID; out["law_slowpole"] = law_report(P)
@@ -227,6 +250,9 @@ if __name__ == "__main__":
     if mode == "varlaw":
         kw = json.loads(sys.argv[3]) if len(sys.argv) > 3 else {}
         print(json.dumps(slot_varlaw(par, **kw), default=float)); sys.exit()
+    if mode == "dwell":
+        kw = json.loads(sys.argv[3]) if len(sys.argv) > 3 else {}
+        print(json.dumps(dwell_lock(par, **kw), default=float)); sys.exit()
     if mode == "slotgeo":
         kw = json.loads(sys.argv[3]) if len(sys.argv) > 3 else {}
         print(json.dumps(slot_geo(par, **kw), default=float)); sys.exit()
