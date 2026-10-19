@@ -74,6 +74,12 @@ def nobump(M1, G, ax):
 
 
 PT.bump_amounts = nobump
+# the knee link is no longer bumped over the carriage, so it joins the carriage / bracket jam lists (E, boss, hub 3, link 2)
+_rr = P4._rr
+for _a, _b in (('for n in ("E", "boss"):', 'for n in ("E", "boss", "knee"):'),
+               ('for n in ("E", "boss", "hub3", "L2") if n in per}', 'for n in ("E", "boss", "hub3", "L2", "knee") if n in per}')):
+    assert _a in _rr, f"parent rerecord changed: {_a}"; _rr = _rr.replace(_a, _b)
+exec(compile(_rr, "rerecord_distal", "exec"), PT.__dict__); PT.rerecord = PT.rerecord_offset
 
 
 def stations(M, B, names=("E", "boss", "knee", "pad", "hub3")):
