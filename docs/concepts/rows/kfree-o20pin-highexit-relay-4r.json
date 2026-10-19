@@ -16,11 +16,11 @@
  "contact": 0.1117,
  "gap": 56.42,
  "gap_near1": 70.38,
- "v_reach": null,
- "v_follow": null,
- "v_inband14": null,
- "v_inband10": null,
- "v_gap": null,
+ "v_reach": 0.7556,
+ "v_follow": 0.8545,
+ "v_inband14": 0.6874,
+ "v_inband10": 0.396,
+ "v_gap": 56.42,
  "n_configs": 6,
  "best_params": {
   "PHI": 75.0,
@@ -37,7 +37,7 @@
  "bench": "Bench(110,360) exact, frozen (fit Bench(60,160) fast at phi 0, the lead's own protocol); envsel for picks; held-out untouched",
  "verdict": "DEAD at the judge's pre-registered HARDWARE kill (> 17.0): with the R4 O20 stack at the line's max skin exit (rB 86 mm), the member-3 bar (10 x 3, 86 mm) and BOTTOM's lug as sampled metal the design reads 56.42 frozen exact Bench(110,360) (reach 0.756, follow 0.855, ib14 0.687, 46 contacts; envsel steered best-case 52.20). The IDEAL bound PASSES its gate: 10.27 frozen exact Bench(110,360) at the lens-A J3 seat wdir(84, -15) (a2 55.78; reach 0.817, follow 1.0, ib14 0.914, 8 contacts / 30.1 mm, overhead 10/28; envsel 12.36) - the relay crown (10.22) reproduced at b3 0; at the spec's champion seat (77.25, -8.2) the ideal is 18.22 (hub 3 in band 0.44). Even a weightless perfect bar with a disc-only boss bounds the hardware at ~18.8 (> 17.0): the boss alone is the kill.",
  "limiter": "the R4 boss's height: an O20 stack coaxial with an arm-fixed GH-through line must clear the line's MAXIMUM skin exit over every pose, and the exit along wdir(55, 45) spans 48-78 mm (p5 59 / p50 68 on the fit set) as the deltoid moves under a humerus-fixed line, so the boss floats a median 18.8 mm (in band 0.19, 145 samples); the 86-mm bar from hub 3 (r 72) climbs to R4 and swings up to 75 deg with member 3, so at q 1 it floats (in band 0.60, median 12.4 mm) and still meets the bunched anterolateral deltoid on 39 poses of Bench(110,360) (plane 45-80, elev 100-145, axial -58..-90, depth <= 2.3 mm; fit-set generalisation). Ideal-side: reach 0.817 = fold 50 + J3 stop 8 + contact 8 of 360.",
- "note": "Gate (sweep in order [21.99, 45.87, 12.36, 18.22, 56.42, 52.2], mixed ideal / hardware and envsel / b110 cells, local only: farm closed): NOT converged in the gate's sense (6 configurations); the dead verdict rests on the judge's pre-registered hardware kill (> 17.0) at 3.3x the line, made robust by a measured lower bound: chain parts (452 samples, ib 0.914) + the measured boss (145 at 0.19) with a weightless perfect bar = 26.4; with a disc-only boss at the line scan's centre in-band 0.26 = 18.8 (> 17.0). LINE SCAN (scratch linescan.py, 120 GH-through lines de 25-80 x ae -45..105 on Bench(60,160)): the disc's max-exit float is a median 14-20 mm on EVERY line (exit spread p5 -> max 20-25 mm); the best boss centre in-band is 0.60 at wdir(35, 0) (lateral, rB 122 mm), 0.51 at (40, 0), 0.26 at 55/45 - so no line in the sweep range (de 45-58, ae 40-50) rescues the boss. Lug: fixed after a first pass sampled its first 12 mm inside BOTTOM's own boss (339-355 false contacts; those runs' ideal readings are kept, their hardware superseded); lug min 0.98 mm, 0 contacts, 0 jams. Jams (bar / boss vs hubs 1, 2, K, links 1, 2; lug vs those + hub 3; lug vs bar outside the stack): 0. th margin min 5.001 on every taken pose (ideal and hw). Near-touch: ideal 11.77 (1 mm) / 27.01 (2 mm); hardware 70.38 / 94.08. T5: ideal 8 contacts / 30.14 mm (lead 4 / 20.24); hardware 46 / 65.09 mm. Relayed taken ws: ideal 82, hardware 74 (relay p90 60.8 deg, max 74.9). Sign: sgn +1 (kin 294/360 envsel vs 253 at sgn -1). Steered cell (PHI 60, Q2MAX 100, J3 [-100, 115], envsel): ideal 14.92 (reach 0.761, near2 21.03), hardware with the bar on R4's lower plate at q 0.97 52.20 (bar in band 0.76 but 29 contact poses). Spring preload vs gravity: not modelled (the spec's 0.05-0.08 vs 0.02-0.03 N m is the proposer's estimate). Shoulder slip: the standing price of every rigid-cuff spherical chain (p95 4.83 / max 5.14 mm at 3 mm GH offset; 13-31 N vs the R17 5 N cap), this build assumes a 3 mm liner. Flood (ideal, claim params): static 1173 / 1432 envelope nodes, connected 1172 (relayed 312, connected 311; 5 phi-jump edges, 1 open of 2995) - the continuity rule costs nothing here. Chest-cliff partners (boss worn on every Bench(110,360) pose, closing or not): ae 45 / 46.5 / 50 / 55 -> 3 / 4 / 4 / 29 poses in the skin, worst across-body (150, 120, -180) at -21.96 / -21.82 / -21.38 / -65.24 mm - the boss meets the chest at extreme across-body rotation on every partner line, and at ae 55 the line's max exit jumps to 170 mm (rB 170: the line meets the chest on fit poses) - the az 50-55 cliff, 5-10 deg from the spec's line.",
+ "note": "Gate (sweep in order [21.99, 45.87, 12.36, 18.22, 56.42, 52.2], mixed ideal / hardware and envsel / b110 cells, local only: farm closed): NOT converged in the gate's sense (6 configurations); the dead verdict rests on the judge's pre-registered hardware kill (> 17.0) at 3.3x the line, made robust by a measured lower bound: chain parts (452 samples, ib 0.914) + the measured boss (145 at 0.19) with a weightless perfect bar = 26.4; with a disc-only boss at the line scan's centre in-band 0.26 = 18.8 (> 17.0). LINE SCAN (scratch linescan.py, 120 GH-through lines de 25-80 x ae -45..105 on Bench(60,160)): the disc's max-exit float is a median 14-20 mm on EVERY line (exit spread p5 -> max 20-25 mm); the best boss centre in-band is 0.60 at wdir(35, 0) (lateral, rB 122 mm), 0.51 at (40, 0), 0.26 at 55/45 - so no line in the sweep range (de 45-58, ae 40-50) rescues the boss. Lug: fixed after a first pass sampled its first 12 mm inside BOTTOM's own boss (339-355 false contacts; those runs' ideal readings are kept, their hardware superseded); lug min 0.98 mm, 0 contacts, 0 jams. Jams (bar / boss vs hubs 1, 2, K, links 1, 2; lug vs those + hub 3; lug vs bar outside the stack): 0. th margin min 5.001 on every taken pose (ideal and hw). Near-touch: ideal 11.77 (1 mm) / 27.01 (2 mm); hardware 70.38 / 94.08. T5: ideal 8 contacts / 30.14 mm (lead 4 / 20.24); hardware 46 / 65.09 mm. Relayed taken ws: ideal 82, hardware 74 (relay p90 60.8 deg, max 74.9). Sign: sgn +1 (kin 294/360 envsel vs 253 at sgn -1). Steered cell (PHI 60, Q2MAX 100, J3 [-100, 115], envsel): ideal 14.92 (reach 0.761, near2 21.03), hardware with the bar on R4's lower plate at q 0.97 52.20 (bar in band 0.76 but 29 contact poses). Spring preload vs gravity: not modelled (the spec's 0.05-0.08 vs 0.02-0.03 N m is the proposer's estimate). Shoulder slip: the standing price of every rigid-cuff spherical chain (p95 4.83 / max 5.14 mm at 3 mm GH offset; 13-31 N vs the R17 5 N cap), this build assumes a 3 mm liner. Flood (ideal, claim params): static 1173 / 1432 envelope nodes, connected 1172 (relayed 312, connected 311; 5 phi-jump edges, 1 open of 2995) - the continuity rule costs nothing here. Chest-cliff partners (boss worn on every Bench(110,360) pose, closing or not): ae 45 / 46.5 / 50 / 55 -> 3 / 4 / 4 / 29 poses in the skin, worst across-body (150, 120, -180) at -21.96 / -21.82 / -21.38 / -65.24 mm - the boss meets the chest at extreme across-body rotation on every partner line, and at ae 55 the line's max exit jumps to 170 mm (rB 170: the line meets the chest on fit poses) - the az 50-55 cliff, 5-10 deg from the spec's line. AUDIT 2026-10-19: death stands; hardware reproduced 56.42 exactly; the boss-wall in-band convention is stricter than the kit's (disc only), which makes the 'boss alone kills' bound invalid (kit convention + perfect bar 12.35-13.48), but the bar's measured float keeps every honest bound >= 20.8 (> 17.0).",
  "doc": "docs/concepts/kfree-o20pin-highexit-relay-4r.md",
  "complexity": 31.75,
  "mechanism": {
@@ -1083,5 +1083,35 @@
     ]
    }
   ]
+ },
+ "audit": {
+  "t": "2026-10-19T04:20:00Z",
+  "verdict": "death STANDS (not refuted)",
+  "reproduced": {
+   "bench": "Bench(110,360) exact frozen",
+   "gap": 56.42,
+   "reach": 0.7556,
+   "follow": 0.8545,
+   "inband14": 0.6874,
+   "contact": 0.1117,
+   "n_contact": 46,
+   "ideal_gap": 10.27,
+   "harness": "docs/concepts/verify/kfree-o20pin-highexit-relay-4r_audit.py (wraps the row's run(), no sweep append); ib10 0.396 from the identical code path (all printed readings match to 4 decimals)"
+  },
+  "gate": "not converged (6 mixed cells; 0 / 0 gain, top-5 spread 14.5); CMA not run: farm closed, one frozen exact wear = 33 min wall at load ~25; the death rests on the structural bound",
+  "finding_1": "boss side-wall samples (64) are in the in-band pool; the kit's hubs score only the 81-sample disc (walls contact-only). The claim's 'weightless bar' bound (26.4 / 18.8) is not a lower bound - a sampled in-band bar raises pooled in-band. Kit convention + perfect contact-free bar: 12.35-13.48 (< 17.0), so 'the boss alone is the kill' is over-stated; the kill is boss + bar",
+  "bounds": {
+   "walls_in_pool_perfect_bar": 18.54,
+   "disc_only_perfect_bar": [
+    12.35,
+    13.48
+   ],
+   "disc_only_bar_as_measured_no_contacts": 25.85,
+   "disc_only_best_bar_0p756_no_contacts": 20.82,
+   "bar_ib14_needed_for_17": 0.873
+  },
+  "reason": "R4 must stand at its arm-fixed line's max skin exit (rB 86 vs exit p50 65): the boss floats ~19 mm and the member-3 bar climbs ~20 mm from hub 3 to R4's plate; with walls contact-only and every bar contact deleted the bound is 25.85 > 17.0; passing needs the bar >= 0.873 in band with 0 contacts (best measured 0.756 with 29)",
+  "stale_criterion": "the template's 'within 10 of 68.93 on Bench(60,160)' is a round-3 number the 56.42 trivially meets; the binding round-401 lines are the kill 17.0 and the lead 18.28",
+  "not_run": "measured disc-only and q_boss 0.95/0.9 variants (harness stopped after 42 min with only BASE done, box at load ~25)"
  }
 }

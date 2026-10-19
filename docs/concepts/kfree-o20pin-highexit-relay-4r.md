@@ -104,3 +104,66 @@ The ideal at (84, -15) is a free lesson for every knee-less relay: J3 at lens A'
 band and follow 1.0 while the relay takes 82 poses. Carry the seat to a relay guide whose metal does not stand at a
 line's max exit: the distal lateral station (line de 35-40, ae 0, boss centre in band 0.51-0.60) or a carriage riding on
 the arm's moving envelope with a liner.
+
+## Audit (2026-10-19, death auditor): the death STANDS; one sub-claim corrected
+
+**Verdict: dead, kept.** The hardware number reproduces exactly and no modelling bug or convention fix brings it near the
+pre-registered kill (> 17.0) or the lead (18.28). Measured reason in one line: R4 must stand at its arm-fixed line's
+maximum skin exit (rB 86 mm against an exit p50 of 65 mm), so the boss floats ~19 mm and the member-3 bar has to climb
+~20 mm from hub 3 (r 66) to R4's plate. Even with the boss walls moved to contact-only and every bar contact deleted,
+the bound is 25.85. Passing 17.0 would need the bar >= 0.873 in band with zero contacts; the best bar measured is 0.756
+with 29 contacts.
+
+- **Reproduction.** The audit harness, docs/concepts/verify/kfree-o20pin-highexit-relay-4r_audit.py, wraps the row's
+  own `run()` and does not append to the sweep. On Bench(110,360) exact frozen it re-measures the hardware at gap
+  **56.42** (reach 0.7556, follow 0.8545, ib14 0.6874, contact 0.1117, 46 contacts) and the ideal at 10.27. Both match
+  the claim to 4 decimals.
+- **Convergence gate.** The gate is not met. The sweep has 6 cells in order: 21.99, 45.87, 12.36, 18.22, 56.42, 52.20.
+  That gives 0 score points gained over the second half, 0 over the last third, and a top-5 spread of 14.5 points. Only
+  2 of the cells are hardware cells, and they mix ideal and hardware readings and two benches. CMA was not run: the farm
+  is closed (balance past the budget line), and one frozen exact wear takes 33 min of wall time on this box at load
+  ~25. The death therefore rests on the structural bound below, not on convergence. The free parameters CMA would tune
+  (seat, PHI, stops) are already at the ideal 10.27. The hardware price sits on top of that, and only the line choice
+  moves it; the agent's 120-line scan covers the line choice (best boss in band anywhere is 0.60).
+- **Model read.**
+  - The frames are consistent: RHG and RH differ by the constant C, so R4 is rigidly arm-fixed.
+  - The relay rotation and its sign match `Zr`.
+  - The bar is in the member-3 frame and the boss is coaxial, so it is invariant under the relay.
+  - The lug is contact-only, like BOTTOM.
+  - The jam rule matches the spec, and the fit uses Bench(60,160) only (frozen protocol; held-out untouched).
+  - I found no bug that flatters or penalises the claim beyond the item below.
+- **Finding 1 (strictness, corrects a sub-claim).** The boss puts its 64 side-wall samples into the in-band pool with
+  its 81 disc samples. The kit's hubs (`K.hub_member`: an 81-sample disc) and the lead score only the disc in band;
+  their walls and crowns are contact-only. Under the agent's convention the "weightless perfect bar" bound is 26.4 /
+  18.8. That bound is not a lower bound: a sampled bar that sat in band would RAISE the pooled in-band. Read with walls
+  in the pool and a perfect bar, the bound is 18.54. Read with the kit's convention (disc-only boss at 0.19-0.30 in band)
+  and a perfect, contact-free bar, it is **12.35-13.48 (< 17.0)**. So the claim's "the boss alone is the kill" is
+  over-stated. The kill is the boss together with the bar. Arithmetic from the row's own per-part numbers: chain 452
+  samples at 0.914, ideal reach 0.8167, contact 0.0194, bar 258 samples:
+
+  | bound (Bench(110,360) exact frozen, ideal taken set) | pooled ib14 | gap |
+  |---|---|---|
+  | claim: walls in pool, weightless bar | 0.738 | 26.43 |
+  | claim: disc 0.26, weightless bar | 0.815 | 18.81 |
+  | walls in pool, bar 100 % in band, no bar contact | 0.817 | 18.54 |
+  | kit convention (disc only 0.19 / 0.30), bar 100 % in band, no bar contact | 0.868 / 0.879 | **13.48 / 12.35** |
+  | kit convention, bar as measured (0.602), every bar contact deleted | 0.744 | **25.85** |
+  | kit convention, best bar measured (0.756, lower plate, q 0.97), every bar contact deleted | 0.795 | **20.82** |
+  | kill line 17.0 requires: bar in band >= **0.873** with 0 contacts | 0.833 | 17.0 |
+
+- **Why the bar cannot reach 0.873.** The bar runs from hub 3's lower plate (underside r ~66) to R4's lower or crown
+  plate (r 86 or 95). The skin under its R4 end sits at the line's exit (p50 65, spread 48-78), so that end floats
+  14-30 mm on most poses. At q 1 the bar is still under-fit on 39 Bench(110,360) poses. The `_fitted` out_mm 15 filter
+  drops rays more than 15 mm above the median: that is the bunched deltoid at plane 57-78 / elev 107-143. If those rays
+  were kept, the bar would sit higher and float more, not less.
+- **Stale criterion, stated.** The template's refutation test (gap within 10 of 68.93 on Bench(60,160)) is a round-3
+  number. Read literally, the 56.42 hardware already "beats" it. It is superseded by round 401's pre-registered kill
+  (17.0) and the lead (18.28), which are the lines this audit rules on. refuted = false.
+- **Not run.** The measured disc-only and q_boss 0.95 / 0.9 variants were not run: the harness was stopped after 42 min
+  with only its BASE pass done, because the box was at load ~25. The bounds above are arithmetic on measured per-part
+  numbers. The variants can be run with `python3 docs/concepts/verify/kfree-o20pin-highexit-relay-4r_audit.py b110
+  walls,perfectbar,nobarcontact,q:0.95 <out.json>` once the box or farm frees up.
+- **What carries forward.** The ideal 10.27 at lens A's J3 seat (84, -15) with a2 ~56 stands as the agent measured it
+  (flood 1172 / 1173). It is the seat every knee-less relay should start from. The pin's metal belongs where the exit
+  barely moves (de 35-40, ae 0: boss 0.51-0.60), with a short bar. Lowering the lowest-complexity guide's bar float
+  matters more than its line.
