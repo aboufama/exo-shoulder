@@ -1528,5 +1528,179 @@
 "honest": true,
 "error": null,
 "secs": 42.5
+},
+{
+"k": 27,
+"t": "2026-10-19T02:54:15Z",
+"params": {
+"a1": 39.5453,
+"a2": 54.5368,
+"wd": 109.1851,
+"wa": 3.719,
+"lE": 83.2259,
+"phiE": -31.6216,
+"lc": 25.6191,
+"phib": -111.9428,
+"dg": 14.563
+},
+"inband14": 0.7354,
+"inband10": 0.3721,
+"reach": 0.6813,
+"follow": 0.8833,
+"contact": 0.0526,
+"gap": 50.26,
+"gap_near1": 53.9,
+"gap_near2": 67.2,
+"min_mm": 0.45,
+"overhead_reach": 0.0833,
+"why": {
+"fold": 31,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 9,
+"parts": 18,
+"contact": 0
+},
+"parts_pairs": {
+"L1-L2": 18
+},
+"parts_ib14": {
+"hub1": 1.0,
+"hub2": 0.754,
+"hub3": 0.836,
+"E": 0.885,
+"boss": 0.708,
+"pad": 0.0,
+"knee": 0.271,
+"L1": 0.864,
+"L2": 0.906
+},
+"f": [
+50.4,
+63.4,
+62.5
+],
+"honest": true,
+"error": null,
+"secs": 31.6
+},
+{
+"k": 28,
+"t": "2026-10-19T02:58:27Z",
+"params": {
+"a1": 40.666,
+"a2": 54.2721,
+"wd": 108.8506,
+"wa": 5.8784,
+"lE": 77.7474,
+"phiE": -61.818,
+"lc": 31.5093,
+"phib": -128.8843,
+"dg": 12.5406
+},
+"inband14": 0.7397,
+"inband10": 0.4829,
+"reach": 0.4625,
+"follow": 0.6833,
+"contact": 0.2945,
+"gap": 115.9,
+"gap_near1": 124.38,
+"gap_near2": 133.04,
+"min_mm": 0.04,
+"overhead_reach": 0.0,
+"why": {
+"fold": 31,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 48,
+"parts": 26,
+"contact": 0
+},
+"parts_pairs": {
+"L2-hub1": 2,
+"E-hub2": 8,
+"L1-L2": 9,
+"E-hub1": 2,
+"E-L2stack": 5
+},
+"parts_ib14": {
+"hub1": 1.0,
+"hub2": 0.75,
+"hub3": 0.996,
+"E": 0.921,
+"boss": 0.668,
+"pad": 0.0,
+"knee": 0.224,
+"L1": 0.884,
+"L2": 0.91
+},
+"f": [
+49.9,
+63.5,
+58.1
+],
+"honest": true,
+"error": null,
+"secs": 280.8
+},
+{
+"k": 29,
+"t": "2026-10-19T02:59:10Z",
+"params": {
+"a1": 39.8423,
+"a2": 52.3787,
+"wd": 108.6171,
+"wa": 6.2604,
+"lE": 74.8877,
+"phiE": -70.0,
+"lc": 27.3186,
+"phib": -93.9126,
+"dg": 3.002
+},
+"inband14": 0.802,
+"inband10": 0.7087,
+"reach": 0.325,
+"follow": 0.45,
+"contact": 0.5407,
+"gap": 171.37,
+"gap_near1": 195.95,
+"gap_near2": 208.03,
+"min_mm": 0.0,
+"overhead_reach": 0.0,
+"why": {
+"fold": 33,
+"slide": 0,
+"flip": 0,
+"closure": 0,
+"skin": 93,
+"parts": 15,
+"contact": 0
+},
+"parts_pairs": {
+"E-hub2": 9,
+"L1-L2": 5,
+"E-L2stack": 1
+},
+"parts_ib14": {
+"hub1": 1.0,
+"hub2": 1.0,
+"hub3": 1.0,
+"E": 0.899,
+"boss": 0.794,
+"pad": 0.0,
+"knee": 0.28,
+"L1": 1.0,
+"L2": 0.999
+},
+"f": [
+47.9,
+57.4,
+56.6
+],
+"honest": true,
+"error": null,
+"secs": 294.9
 }
 ]
