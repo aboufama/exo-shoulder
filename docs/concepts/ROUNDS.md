@@ -5959,7 +5959,8 @@ design whose number an independent verifier reproduced on the verification proto
 row's own reading re-tallied, not re-run; kneeless-steer's 19.50 is envsel, distal-cband's 29.56 is the in-sample fast
 bench). The best number any verifier confirmed on any bench is kneeless-steer-midbracket-relay-4r's 19.50 envsel, which
 is not on the protocol and whose Bench(110,360) and held-out were never run. **No design beats the previous verified
-lead 18.28 (conecut-knee-knuckle-3r)**: the winner trails it by 38.14; kneeless-steer trails it on envsel by 1.22 at best.
+lead 18.28 (conecut-knee-knuckle-3r)**: the winner trails it by 38.14, and kneeless-steer's 19.50 envsel sits 1.22 above the lead's 18.28 (different benches;
+its own ideal at PHI 40, 18.38 envsel, already bounds it above the lead).
 All four rows are dead at their pre-registered kills, so none is a build candidate: no generation CAD for K1, the
 generation CAD of record stays the lead's, no judge_all run, no EVOLUTION row. Passed over as gamed: none. The K1 goal
 (a knee-less 4-joint design "way higher" than the knee designs) is not met; on the knuckle chain it is measured out of

@@ -3910,3 +3910,55 @@ at cx 51.25; freek 94.40 / 20.50 at cx 33.25); the 3-joint lead stays conecut-kn
 docs/concepts/{phi40-thinstack-relay-4r,underpass-bridge-relay-4r,onetooth-slowlaw-knuckle-3r,shortk-onetooth-knuckle-3r}.md,
 their rows, models and verifiers under docs/concepts/verify/, audits docs/alignment/{phi40-thinstack-relay-4r,
 underpass-bridge-relay-4r}.md, judge docs/concepts/round107_ideation.md, docs/research/shortk_onetooth/.
+
+## Round K1 (round 401, track kneeless): no lead change, no knee-less design beats the knee - three knee-less ideal bounds pass 95 on frozen exact Bench(110,360) (10.27 / 12.40 / 12.74) but every J4 guide's metal costs 6.8-60 points; all four picks dead at their pre-registered kills, verifiers upheld every death (2026-10-19, discovery round 401, closer)
+
+**What was measured** (bar 18.28 = conecut-knee-knuckle-3r, 3 joints; complexity tools/simplicity.py v2.2; farm
+closed, all local; no bench, judge or kit change; held-out never used; ledger: no entry for any of the four, exit 2):
+
+| design | ideal bound (no J4 metal) | metal reading | verifier | joints / P / cx | verdict |
+|---|---|---|---|---|---|
+| kneeless-steer-midbracket-relay-4r (phi40 relay hardware, knee deleted, E cut at the lug) | proxy 15.60 envsel (PHI 58); 18.38 envsel at PHI 40 | 22.39 envsel (PHI 58) | 19.50 envsel at PHI 40 (claim pessimistic by 2.9) | 4 / 0 / 51.75 | dead, step-0 kill (> 15.4) |
+| insertion-cband-relay-4r (arm-fixed C-band at s 0.30) | 16.86 frozen exact / 19.70 envsel; corrected 12.74 / 16.59 | 74.53 frozen exact (one cell) | death stands, re-based (horn-top phantom 4.12) | 4 / 0 / 34.25 | dead (hardware kill; envsel ideal kill) |
+| kfree-o20pin-highexit-relay-4r (R4 O20 pin on wdir(55,45), 86 mm bar) | 10.27 frozen exact (flood 1172/1173) | 56.42 frozen exact | reproduced 56.42; kill = boss + bar (bar bound 20.8-25.9) | 4 / 0 / 31.75 | dead (hardware kill > 17.0); round winner by the rule |
+| distal-cband-sq95-relay-4r (C-band at s 0.70-0.75, 220 mm strap) | 12.40 frozen exact (spec cell) | 35.48 frozen exact (best cell) | 29.56 fast in-sample reproduced; self-intersection forgiven 27.34 | 4 / 0 / 34.25 | dead (hardware kill, strap gate) |
+
+1. **Kinematics are not the knee-less problem; the 4th joint's guide is.** The plain O20 3R with K welded and J3 at seat
+   (84,-15), a2 55.78, plus an ideal one-sided relay (PHI 75 about raxis(55,45)) reads 10.27 frozen exact Bench(110,360)
+   (score 96.27; reach 0.817, follow 1.0, ib14 0.914, 8 contacts / 30.1 mm, overhead 10/28, min th 5.001), and the
+   continuity flood keeps 1172 of 1173 static envelope nodes connected. The distal (12.40) and insertion (12.74,
+   verifier-corrected) ideals also pass 95. No J4 metal built this round reads under 19.50.
+2. **Arm-fixed guides fail for station-specific, measured reasons.** (a) Knuckle relay shell: an arm-fixed shell end
+   is clean only to +48 deg rel the pad over ALL poses (taken-pose bins said +68: a contact pose is not a lost pose);
+   PHI 58 costs 6.8 points of shell-end contacts (to 11.9 mm). (b) s 0.30: the skin moves 6-12 mm against the bone; a
+   race is a surface of revolution, so its carriage floats 10-22 mm (in band 0.34). (c) s 0.70-0.75: the torso lies over
+   the whole race arc on ~10 % of poses (deep across-body IR, hanging ER), 6-43 mm deep; s >= 0.78 adds elbow flexion. (d)
+   Axis-exit pin: on 120 GH lines a disc at the exit max + 2 mm floats 14-20 mm median (exit spread 20-25 mm); best
+   boss in-band 0.60 at wdir(35,0); the 86 mm bar to it reads 0.60 in band with 39 deltoid contacts.
+3. **The knee's value on the relay was the carriage's 31 mm offset from the chain**: deleting it costs 6.8-7.3 metal
+   points on the knuckle relay against 0.8-1.4 the step-0 proxies suggested (proxies that keep knee-side samples read
+   1.4-3.5 points optimistic). The knuckle relay's reach saturates at PHI 58; 54 poses have no stop-legal relay angle.
+4. **J3 seat (84,-15) with a2 ~56 is worth ~8 points** on the knee-less ideal (18.22 -> 10.27) against (77.25,-8.2);
+   a2 67 via psi2 -45 buries hub 2 under the acromion at abduction 105-150.
+5. **Measurement faults found by the verifiers (not applied; any fix is a measurement change to report separately):**
+   `_strip_drive` keeps the stripped horn's contact top (3 mm off vs a 0.5 mm match; up to ~4 points on every drive-0
+   lead_eval row: kfree-armarc-relay-4r, kfree-o20pin-highexit, insertion-cband, distal-cband); the concept bench's
+   winding sign counts the rig's arm-in-chest self-intersection as contact (~2.2 points on distal arm metal; R2 forgives
+   it); K.requirement's default t1 220 mm silently leaves distal parts unfitted; boss walls scored in band where the
+   kit's hubs score the disc only.
+6. **Watch reasons carried (verifier findings; no auditor verdict on file):** kneeless-steer's claim read past its own
+   shell cliff (22.39 vs 19.50) and misattributed its s0 -55 loss (plain 0.825 vs chain ~0.877); insertion-cband's noK
+   reading deleted nothing and its hardware is one unswept cell; kfree-o20pin's gate is not converged (top-5 spread 14.5)
+   and its bar is under-fit; distal-cband's claim bench was not re-run (29.56 fast in-sample) and its strap fit used no
+   outlier cut. T5 depths vs the lead's 4 / 20.24 mm: ideal 8 / 30.1 (o20pin), 10 / 30.9 (insertion corrected), 21 /
+   121.2 (distal); metal 46 / 65.1 (o20pin), 55 / 635 (distal). Shoulder slip (standing, not re-measured): ~6.4 / 6.9 mm
+   misfit at the R10 4 mm slip, 13-31 N on skin vs the R17 5 N cap; a ~3 mm compliant liner is assumed.
+
+**What failed and why:** the K1 target (a knee-less 4-joint design "way higher" than the knee) is not met. On the
+knuckle chain it is measured out of reach (ideal at the shell-legal PHI 40 = 18.38 envsel > the lead). On the plain O20
+3R it is open only through a J4 guide that does not ride the arm surface; the verifier's bound says the pin relay
+passes 17.0 only with a bar >= 0.873 in band and 0 contacts. Next (round K2): fix the horn-top helper and re-read the
+drive-0 rows as a measurement change; scan relay lines (de 30-60, ae -10..50) on the (84,-15) seat pricing ideal take +
+boss in-band + bar length together; build the bar into member 3. Files: docs/concepts/{kneeless-steer-midbracket-relay-4r,
+insertion-cband-relay-4r,kfree-o20pin-highexit-relay-4r,distal-cband-sq95-relay-4r}.md, their rows, models, sweeps and
+docs/concepts/verify/ readings, judge docs/concepts/round401_ideation.md, ROUNDS "Round 401 results".
