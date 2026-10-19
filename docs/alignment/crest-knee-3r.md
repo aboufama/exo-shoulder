@@ -378,3 +378,83 @@ These are measurement and reporting slips. None of them moves a rank.
 4. **The joggle's real worth depends on the build.** The row's lesson says the joggle is worth about 1.07 against the
    flat + stack-rule control (32.50). Built as a bent bar (32.02) it is worth 0.48. With a 0.3 mm strap error it is
    worth less than nothing against the flat cell.
+
+---
+
+## Skeptic of the 2026-10-19 audit (2026-10-19 ~02:20-02:30 UTC, claim 31.50)
+
+Re-measured with the model and both verifiers unchanged (imported; local, nice 10, 1 thread, 2 processes, box at
+load ~22):
+
+- an independent exact re-wear of the joggle claim through the joggle verifier's own `fit_fast` / `worn` /
+  `extra_checks` / `joggle_checks` (`remeasure/crest-knee-3r_skeptic_joggle_wear.py`, unchanged, no dump written,
+  206 s). It gives 31.50 again (fit_fast 22.02), with the knee-to-strap clearance of every taken pose;
+- the strict one-seed continuity flood (`remeasure/crest-knee-3r_skeptic_joggle_flood.py`, unchanged);
+- a re-derivation of overhead, near-touch and contact from the per-pose dumps. The auditor's new
+  `_v3jog_{bench,held}_perpose.json` and the joggle verifier's `-joggle_v_{bench,held}_perpose.json` agree on every
+  field of all 470 + 470 poses.
+
+Rulings: `docs/alignment/crest-knee-3r.rulings.json`. Numbers: `docs/alignment/remeasure/crest-knee-3r_skeptic_2026-10-19.json`.
+
+**Final verdict (ledger): WATCH.** 5 reasons upheld (reporting, NEW-tolcliff, G1, NEW-ws-inband, R2), 1 refuted with
+a measurement (continuity).
+
+- **continuity: refuted (third time).** The flood is on file: row `verification_joggle.continuity` has 974 / 974
+  connected, 0 islands, 803 / 803 edges, 0 bench and 0 held poses dropped. `verify/crest-knee-3r-joggle_v_flood_*.json`
+  give connected = static (31.49 / 28.45). Re-run this pass from ONE rest seed with every edge tested: 974 / 974,
+  0 islands, all 171 elevation-0 nodes on one knee branch, 0 / 0 dropped. The watch comes from `c_continuity`
+  (lines 461-487), which does not read `verification_joggle.continuity` or a flood file's nested `bench.connected`.
+- **reporting: upheld.** `morphs.json` shows sweep_gap 22.02 (score 91.99) against v_gap 31.50: 9.48 apart, past the
+  documented 5-point trigger. The row verdict opens "SCREENED". The re-wear confirms 22.02 is the same shape's
+  in-sample fast number. The leader card does not show it (22.02 > the 18.28 lead), but the table's "Sweep best gap"
+  column does.
+- **NEW-tolcliff: upheld, comparison corrected.**
+  - The re-wear reproduces the clearance: min 0.200 mm, 1 pose under 0.25, 25 under 0.35, 46 under 0.45.
+  - Running-gap reading: 31.78 / 34.31 / 39.90 / 51.64 at +0.1 / 0.15 / 0.2 / 0.3 mm.
+  - Metal-touch reading: 31.50 up to +0.15 mm, then 31.78 (1 pose) at +0.2 and 34.31 (13 poses) at +0.3.
+  - Correction: on the running-gap reading the flat cell is not a tolerant fallback. At +0.3 mm it jams 77 poses and
+    reads 63.24, against the joggle's 46 poses and 51.64 (`verify/crest-knee-3r-joggle_v_tolprobe_flatcell_bench.json`).
+    The flat cell's minimum clearance is 0.334 mm. The "1.47 deficit on either reading" holds on the touch reading
+    only. Both cells sit on a strap-tolerance cliff; the joggle's starts 0.134 mm earlier.
+- **G1: upheld.** Re-derived from both dumps and from the re-wear:
+  - Near-touch: 34.08 / 59.56 / 88.99 at 1 / 2 / 3 mm (held 33.28 / 55.91 / 88.99).
+  - Overhead workspace: 7 / 28 taken, at 0.71, 1.06, 1.18, 1.28, 1.36, 2.17 and 2.57 mm. The 21 lost poses are fold
+    10, J3 stop 8 and contact 3.
+  - Overhead clips: 10 / 10 taken, 4 under 1 mm and all 10 under 2 mm.
+  - Contact: 5 poses, 5.15 mm summed, deepest 1.96 mm.
+  - Shell (near2 - plain): 28.06, above shell2_watch 15. Near-touch is report-only, so the level is watch.
+  - Label note: 2.58 of those 28.06 points come from the 0-1 mm shell. The 1-2 mm shell alone is 25.48.
+- **NEW-ws-inband: upheld.** The re-wear gives a workspace in-band of 0.8174 against 0.8719 on the clips, a
+  5.45-point shortfall (held 7.73). Over all 34 probe files on file, the four crest cells have the four largest
+  shortfalls (5.45-7.75). Next is groove-desmo at 4.92, then the lead at 3.36 and H1 at 2.88.
+- **R2: upheld.**
+  - `morphs.json` shows gap 26.34 (the flat cell's fast number) and sweep_gap 22.02 next to v_gap 31.50.
+  - The row verdict opens "SCREENED ... 32.84" and still calls the joggle "claimed, UNVERIFIED".
+  - The alignment fields are fixed (31.5, not stale).
+  - No rank effect.
+
+### Missed (for the next audit; not counted in this verdict)
+
+1. **The tolerance comparison flips with the reading.** The audit and both earlier skeptics wrote that at a 0.3 mm
+   strap error the joggle trails its flat cell "on either reading", and that the design's rank "is held by its own
+   flat cell under any error up to 0.3 mm". On the verifier's own running-gap reading (clearance < 0.15 + d) the flat
+   cell jams 77 bench poses and reads 63.24 at +0.3 mm, worse than the joggle's 51.64
+   (`verify/crest-knee-3r-joggle_v_tolprobe_flatcell_bench.json` rows[4]). The fallback holds on the metal-touch
+   reading only. This cuts against the design, not for it: on the running-gap reading neither cell keeps its number at
+   +0.3 mm. Proposal M6 should require the tolerance column for both cells on both readings, plus the held flat cell,
+   which is not on file.
+2. **The J3 stop's contact-to-stop trade was not re-measured on the joggle cell.**
+   - The 02:28 audit measured on the flat cell that the J3 window buys 1.14 points (33.97 without it, 32.83 with it)
+     by turning 4 contact presses into stops; on the search bench those presses were up to 7.21 mm deep
+     (`remeasure/crest-knee-3r_bench_noj3win.json`).
+   - The joggle claim stops 24 bench and 28 held poses, including 8 of its 21 lost overhead poses. In the dumps these
+     poses are `ev` False, so they sit outside the contact term, as do the 18 bench part-clash poses.
+   - No no-window wear of the joggle cell is on file, so how much of 31.50 the stop buys this way is unknown.
+   - The window is fitted as the kept poses' q3' set minus its largest gap, shrunk by j3stop_margin 1.32
+     (`models/crest-knee-3r.py` lines 11-12, 90-100). It spans 335.9 deg, and its dowel or slot is not sampled as
+     metal.
+3. **The shell label.** `c_near_touch` reports near2 - plain as "points in the 1-2 mm shell". Since contact became
+   metal < 0 mm, that difference also holds the 0-1 mm shell: here 2.58 of the 28.06 points. No threshold changes on
+   this row (25.48 > 15).
+
+**Final verdict (ledger): WATCH.**

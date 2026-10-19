@@ -1,0 +1,729 @@
+{
+ "what": "skeptic 2026-10-19 of the crest-knee-3r joggle audit (claim v_gap 31.50, best_params_joggle kj=1): independent exact re-wear through the joggle verifier's own fit/wear/checks (crest-knee-3r_skeptic_joggle_wear.py, unchanged, no dump), strict one-seed continuity flood (crest-knee-3r_skeptic_joggle_flood.py, unchanged), and a re-derivation of overhead / near-touch / contact from both per-pose dumps (v3jog and joggle verifier; 0 field differences over 470 + 470 poses). Local, nice 10, 1 thread, 2 processes, box at load ~22.",
+ "wear_bench": {
+  "wear": "bench",
+  "jog_max": null,
+  "mode": "exact",
+  "exact": true,
+  "fit_fast": {
+   "gap": 22.02,
+   "reach": 0.7125,
+   "follow": 1.0,
+   "inband14": 0.873,
+   "inband10": 0.4409,
+   "contact": 0.0057,
+   "mode": "fast"
+  },
+  "report": {
+   "gap": 31.5,
+   "reach": 0.6278,
+   "follow": 1.0,
+   "inband14": 0.8719,
+   "contact": 0.0147
+  },
+  "removed": 0,
+  "ADJ": 0.15,
+  "near": {
+   "1": {
+    "gap": 34.08,
+    "poses": 6
+   },
+   "2": {
+    "gap": 59.56,
+    "poses": 34
+   },
+   "3": {
+    "gap": 88.99,
+    "poses": 75
+   }
+  },
+  "ws": {
+   "n_taken": 226,
+   "ib14": 0.8174,
+   "over14": 0.1817,
+   "over20": 0.0183,
+   "dmax": 29.95,
+   "floor_lt1": 2,
+   "floor_lt2": 15,
+   "floors_sorted": [
+    0.71,
+    0.89,
+    1.06,
+    1.18,
+    1.23,
+    1.28,
+    1.36,
+    1.61,
+    1.72,
+    1.73,
+    1.83,
+    1.9
+   ]
+  },
+  "clip": {
+   "n_taken": 110,
+   "ib14": 0.8719,
+   "over14": 0.1269,
+   "over20": 0.0108,
+   "dmax": 27.54,
+   "floor_lt1": 4,
+   "floor_lt2": 19,
+   "floors_sorted": [
+    0.65,
+    0.65,
+    0.65,
+    0.77,
+    1.01,
+    1.76,
+    1.79,
+    1.79,
+    1.8,
+    1.8,
+    1.8,
+    1.8
+   ]
+  },
+  "ws_over140": {
+   "total": 28,
+   "n_taken": 7,
+   "ib14": 0.9439,
+   "over14": 0.0318,
+   "over20": 0.0007,
+   "dmax": 22.4,
+   "floor_lt1": 1,
+   "floor_lt2": 5,
+   "floors_sorted": [
+    0.71,
+    1.06,
+    1.18,
+    1.28,
+    1.36,
+    2.17,
+    2.57
+   ]
+  },
+  "clip_over140": {
+   "total": 10,
+   "n_taken": 10,
+   "ib14": 0.9537,
+   "over14": 0.0429,
+   "over20": 0.0027,
+   "dmax": 22.43,
+   "floor_lt1": 4,
+   "floor_lt2": 10,
+   "floors_sorted": [
+    0.65,
+    0.65,
+    0.65,
+    0.77,
+    1.01,
+    1.79,
+    1.79,
+    1.81,
+    1.85,
+    1.87
+   ]
+  },
+  "ws_over90": {
+   "total": 113,
+   "n_taken": 34
+  },
+  "kneeE": {
+   "n": 336,
+   "min": 0.2,
+   "lt_0_25": 1,
+   "lt_0_35": 25,
+   "lt_0_45": 46,
+   "p10": 0.379
+  },
+  "tolerance": [
+   {
+    "err_mm": 0.0,
+    "rule": {
+     "jam": 0,
+     "gap": 31.5,
+     "reach": 0.6278,
+     "follow": 1.0
+    },
+    "touch": {
+     "jam": 0,
+     "gap": 31.5,
+     "reach": 0.6278,
+     "follow": 1.0
+    }
+   },
+   {
+    "err_mm": 0.05,
+    "rule": {
+     "jam": 1,
+     "gap": 31.78,
+     "reach": 0.625,
+     "follow": 1.0
+    },
+    "touch": {
+     "jam": 0,
+     "gap": 31.5,
+     "reach": 0.6278,
+     "follow": 1.0
+    }
+   },
+   {
+    "err_mm": 0.1,
+    "rule": {
+     "jam": 1,
+     "gap": 31.78,
+     "reach": 0.625,
+     "follow": 1.0
+    },
+    "touch": {
+     "jam": 0,
+     "gap": 31.5,
+     "reach": 0.6278,
+     "follow": 1.0
+    }
+   },
+   {
+    "err_mm": 0.15,
+    "rule": {
+     "jam": 13,
+     "gap": 34.31,
+     "reach": 0.6028,
+     "follow": 0.9636
+    },
+    "touch": {
+     "jam": 0,
+     "gap": 31.5,
+     "reach": 0.6278,
+     "follow": 1.0
+    }
+   },
+   {
+    "err_mm": 0.2,
+    "rule": {
+     "jam": 25,
+     "gap": 39.9,
+     "reach": 0.5833,
+     "follow": 0.9182
+    },
+    "touch": {
+     "jam": 1,
+     "gap": 31.78,
+     "reach": 0.625,
+     "follow": 1.0
+    }
+   },
+   {
+    "err_mm": 0.3,
+    "rule": {
+     "jam": 46,
+     "gap": 51.64,
+     "reach": 0.5472,
+     "follow": 0.8455
+    },
+    "touch": {
+     "jam": 13,
+     "gap": 34.31,
+     "reach": 0.6028,
+     "follow": 0.9636
+    }
+   }
+  ],
+  "joggle": {
+   "tr_a": 66.075,
+   "tr_b": 62.89,
+   "step_mm": 3.186,
+   "ramp_run_mm": 13.26,
+   "ramp_deg": 13.51,
+   "bent_bar_R15_max_rise_mm": 2.78,
+   "bent_bar_ok": false
+  },
+  "secs": 206.5
+ },
+ "strict_flood": {
+  "n_grid": 1432,
+  "kin_ok": 974,
+  "elev0_nodes": 171,
+  "elev0_ok": 171,
+  "elev0_sgn": [
+   1
+  ],
+  "elev0_sgn_counts": {
+   "1.0": 171
+  },
+  "elev0_not_ok": [],
+  "strict_seed": {
+   "plane": -90.0,
+   "elev": 0.0,
+   "axial": 90.0,
+   "sgn": 1
+  },
+  "verifier_seeding": {
+   "connected": 974,
+   "islands": 0
+  },
+  "strict_one_seed": {
+   "connected": 974,
+   "islands": 0,
+   "lost": []
+  },
+  "bench": {
+   "static": {
+    "gap": 31.49,
+    "reach": 0.6278,
+    "follow": 1.0,
+    "inband14": 0.8719,
+    "contact": 0.0147,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 226,
+    "contact_poses": 5
+   },
+   "strict_connected": {
+    "gap": 31.49,
+    "reach": 0.6278,
+    "follow": 1.0,
+    "inband14": 0.8719,
+    "contact": 0.0147,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 226,
+    "contact_poses": 5
+   },
+   "dropped": 0,
+   "dropped_poses": []
+  },
+  "held": {
+   "static": {
+    "gap": 28.45,
+    "reach": 0.65,
+    "follow": 1.0,
+    "inband14": 0.8713,
+    "contact": 0.0058,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 234,
+    "contact_poses": 2
+   },
+   "strict_connected": {
+    "gap": 28.45,
+    "reach": 0.65,
+    "follow": 1.0,
+    "inband14": 0.8713,
+    "contact": 0.0058,
+    "n_ws": 360,
+    "n_clip": 110,
+    "ws_taken": 234,
+    "contact_poses": 2
+   },
+   "dropped": 0,
+   "dropped_poses": []
+  }
+ },
+ "dump_rederived": {
+  "crest-knee-3r_v3jog_bench": {
+   "plain": {
+    "gap": 31.5,
+    "reach": 0.6278,
+    "follow": 1.0,
+    "ib14": 0.8719,
+    "contact": 0.0147
+   },
+   "near1": 34.08,
+   "near2": 59.56,
+   "near3": 88.99,
+   "ws_taken": 226,
+   "clip_inband": 0.8719,
+   "ws_over140": {
+    "total": 28,
+    "taken": 7,
+    "floors": [
+     0.71,
+     1.06,
+     1.18,
+     1.28,
+     1.36,
+     2.17,
+     2.57
+    ],
+    "lost_why": {
+     "j3stop": 8,
+     "contact": 3,
+     "fold": 10
+    }
+   },
+   "ws_over90": {
+    "total": 113,
+    "taken": 34
+   },
+   "clip_over140": {
+    "total": 10,
+    "taken": 10,
+    "floors": [
+     0.65,
+     0.65,
+     0.65,
+     0.77,
+     1.01,
+     1.79,
+     1.79,
+     1.81,
+     1.85,
+     1.87
+    ]
+   },
+   "taken_lt": {
+    "1": 6,
+    "2": 34,
+    "3": 75
+   },
+   "contact": [
+    [
+     "ws",
+     15.0,
+     165.0,
+     -60.0,
+     -0.34
+    ],
+    [
+     "ws",
+     30.0,
+     75.0,
+     15.0,
+     -1.68
+    ],
+    [
+     "ws",
+     30.0,
+     165.0,
+     -60.0,
+     -1.96
+    ],
+    [
+     "ws",
+     45.0,
+     75.0,
+     15.0,
+     -0.36
+    ],
+    [
+     "ws",
+     75.0,
+     165.0,
+     -75.0,
+     -0.81
+    ]
+   ],
+   "contact_depth_sum": 5.15,
+   "th_margin_min": 5.085,
+   "knee_range": [
+    85.05,
+    114.16
+   ],
+   "why": {
+    "fold": 87,
+    "parts": 18,
+    "j3stop": 24,
+    "contact": 5
+   }
+  },
+  "crest-knee-3r_v3jog_held": {
+   "plain": {
+    "gap": 28.45,
+    "reach": 0.65,
+    "follow": 1.0,
+    "ib14": 0.8713,
+    "contact": 0.0058
+   },
+   "near1": 33.28,
+   "near2": 55.91,
+   "near3": 88.99,
+   "ws_taken": 234,
+   "clip_inband": 0.8713,
+   "ws_over140": {
+    "total": 26,
+    "taken": 8,
+    "floors": [
+     0.55,
+     0.7,
+     0.84,
+     0.98,
+     1.3,
+     1.34,
+     1.37,
+     1.72
+    ],
+    "lost_why": {
+     "j3stop": 7,
+     "fold": 11
+    }
+   },
+   "ws_over90": {
+    "total": 112,
+    "taken": 37
+   },
+   "clip_over140": {
+    "total": 10,
+    "taken": 10,
+    "floors": [
+     0.65,
+     0.65,
+     0.65,
+     0.77,
+     1.01,
+     1.79,
+     1.81,
+     1.88,
+     2.01,
+     2.01
+    ]
+   },
+   "taken_lt": {
+    "1": 10,
+    "2": 37,
+    "3": 81
+   },
+   "contact": [
+    [
+     "ws",
+     -90.0,
+     60.0,
+     90.0,
+     -0.62
+    ],
+    [
+     "ws",
+     135.0,
+     135.0,
+     -45.0,
+     -1.42
+    ]
+   ],
+   "contact_depth_sum": 2.04,
+   "th_margin_min": 5.502,
+   "knee_range": [
+    85.05,
+    111.0
+   ],
+   "why": {
+    "fold": 83,
+    "contact": 2,
+    "parts": 13,
+    "j3stop": 28
+   }
+  },
+  "crest-knee-3r-joggle_v_bench": {
+   "plain": {
+    "gap": 31.5,
+    "reach": 0.6278,
+    "follow": 1.0,
+    "ib14": 0.8719,
+    "contact": 0.0147
+   },
+   "near1": 34.08,
+   "near2": 59.56,
+   "near3": 88.99,
+   "ws_taken": 226,
+   "clip_inband": 0.8719,
+   "ws_over140": {
+    "total": 28,
+    "taken": 7,
+    "floors": [
+     0.71,
+     1.06,
+     1.18,
+     1.28,
+     1.36,
+     2.17,
+     2.57
+    ],
+    "lost_why": {
+     "j3stop": 8,
+     "contact": 3,
+     "fold": 10
+    }
+   },
+   "ws_over90": {
+    "total": 113,
+    "taken": 34
+   },
+   "clip_over140": {
+    "total": 10,
+    "taken": 10,
+    "floors": [
+     0.65,
+     0.65,
+     0.65,
+     0.77,
+     1.01,
+     1.79,
+     1.79,
+     1.81,
+     1.85,
+     1.87
+    ]
+   },
+   "taken_lt": {
+    "1": 6,
+    "2": 34,
+    "3": 75
+   },
+   "contact": [
+    [
+     "ws",
+     15.0,
+     165.0,
+     -60.0,
+     -0.34
+    ],
+    [
+     "ws",
+     30.0,
+     75.0,
+     15.0,
+     -1.68
+    ],
+    [
+     "ws",
+     30.0,
+     165.0,
+     -60.0,
+     -1.96
+    ],
+    [
+     "ws",
+     45.0,
+     75.0,
+     15.0,
+     -0.36
+    ],
+    [
+     "ws",
+     75.0,
+     165.0,
+     -75.0,
+     -0.81
+    ]
+   ],
+   "contact_depth_sum": 5.15,
+   "th_margin_min": 5.085,
+   "knee_range": [
+    85.05,
+    114.16
+   ],
+   "why": {
+    "fold": 87,
+    "parts": 18,
+    "j3stop": 24,
+    "contact": 5
+   }
+  },
+  "crest-knee-3r-joggle_v_held": {
+   "plain": {
+    "gap": 28.45,
+    "reach": 0.65,
+    "follow": 1.0,
+    "ib14": 0.8713,
+    "contact": 0.0058
+   },
+   "near1": 33.28,
+   "near2": 55.91,
+   "near3": 88.99,
+   "ws_taken": 234,
+   "clip_inband": 0.8713,
+   "ws_over140": {
+    "total": 26,
+    "taken": 8,
+    "floors": [
+     0.55,
+     0.7,
+     0.84,
+     0.98,
+     1.3,
+     1.34,
+     1.37,
+     1.72
+    ],
+    "lost_why": {
+     "j3stop": 7,
+     "fold": 11
+    }
+   },
+   "ws_over90": {
+    "total": 112,
+    "taken": 37
+   },
+   "clip_over140": {
+    "total": 10,
+    "taken": 10,
+    "floors": [
+     0.65,
+     0.65,
+     0.65,
+     0.77,
+     1.01,
+     1.79,
+     1.81,
+     1.88,
+     2.01,
+     2.01
+    ]
+   },
+   "taken_lt": {
+    "1": 10,
+    "2": 37,
+    "3": 81
+   },
+   "contact": [
+    [
+     "ws",
+     -90.0,
+     60.0,
+     90.0,
+     -0.62
+    ],
+    [
+     "ws",
+     135.0,
+     135.0,
+     -45.0,
+     -1.42
+    ]
+   ],
+   "contact_depth_sum": 2.04,
+   "th_margin_min": 5.502,
+   "knee_range": [
+    85.05,
+    111.0
+   ],
+   "why": {
+    "fold": 83,
+    "contact": 2,
+    "parts": 13,
+    "j3stop": 28
+   }
+  }
+ },
+ "tolerance_flat_vs_joggle_bench": {
+  "source": "docs/concepts/verify/crest-knee-3r-joggle_v_tolprobe_{bench,flatcell_bench}.json rows (running-gap reading, clearance < 0.15 + d)",
+  "d_0_2": {
+   "joggle": 39.9,
+   "joggle_jam": 25,
+   "flat": 33.11,
+   "flat_jam": 1
+  },
+  "d_0_3": {
+   "joggle": 51.64,
+   "joggle_jam": 46,
+   "flat": 63.24,
+   "flat_jam": 77
+  },
+  "touch_reading_d_0_3": {
+   "joggle": 34.31,
+   "joggle_jam": 13,
+   "flat": 32.84,
+   "flat_jam": 0,
+   "flat_min_clearance": 0.334
+  }
+ },
+ "ws_inband_shortfall_probes": "docs/alignment/remeasure/*probe*.json (34 files): crest cells 5.45-7.75 points (4 largest); next groove-desmo 4.92; lead conecut-knee 3.36; H1 2.88"
+}
