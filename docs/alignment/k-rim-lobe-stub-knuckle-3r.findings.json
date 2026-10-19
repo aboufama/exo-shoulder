@@ -1,0 +1,38 @@
+[
+ {
+  "key": "G5",
+  "level": "watch",
+  "reason": "The row's complexity 4.0 is a parse artefact, not a count. The row's mechanism record is in a schema tools/simplicity.py cannot read ('joints' is a list of 7 joint dicts, no moving_bodies / passive_rot / springs_or_flexures / custom_parts fields), so the counter keeps only '1 closed loop x 4' and drops K's passive rotation, the clock spring, the extra body, the extra joints and the parts; it flags the record itself ('topology: closed_loops 1 != joints 3 - moving_bodies 3', Kutzbach M -6). The same mechanism in the counter's schema (K 1 passive rot + 2 knee pins, 6 bodies, 7 joints, 2 loops incl. the free knee loop, 1 clock spring, 14 made / 19 bought incl. the knee) scores 14.25 under v2.2 (1 rot + 4 loop + 1 body + 2 joints + 3 spring + 1.5 made + 1.75 bought; cuff knee 0); geneva-tail-knuckle-3r, the same topology (roller on a link-2 tail pushing a lug on link 1a, K on a clock spring), is counted 14.0. ec77d25 (2026-10-17 04:55) set the row from 34.0 to 4.0 = the parse result, which turned the tool's complexity check from MISMATCH to ok (recomputed 4.0 vs row 4.0) and the dashboard shows 4.0 with the single item '1 closed loop x 4' (docs/dashboard/data/morphs.json). The row's own mechanism note still says 'complexity by the catalogue's count 34.0; not recomputed by tools/simplicity.py'.",
+  "evidence": "python3 tools/simplicity.py --json (k-rim 4.0, one item, topology flag); python3 tools/simplicity.py --score '<schema record>' -> 14.25; rows/geneva-tail-knuckle-3r.json mechanism (14.0); git show ec77d25 -- docs/concepts/rows/k-rim-lobe-stub-knuckle-3r.json"
+ },
+ {
+  "key": "M2",
+  "level": "watch",
+  "reason": "The knee is claimed on a pin stack thinner than any knee hardware the build may use: stk 4.8534 mm (best_params has no stk; the model's PARAMS take it from the round-6 winner's seats, docs/concepts/models/k-rim-lobe-stub-knuckle-3r.py line 52, W['stk']). The kit's figures are 5.0 = iglidur pin over two plates and 6.0 = MR63ZZ pair (docs/concepts/models/skin-normal-3r-pin-knee.py lines 19, 54), and the lead's build rule of 2026-10-17 requires MR63ZZ pairs (plain iglidur pins fail R17: ~10 deg cuff twist, ~10 N). The row's mechanism record still lists 'knee a / knee b: iglidur pin, sensed: true'. Measured this audit: re-worn UNCHANGED except stk 6.0 (tools/alignment_wear_probe_krim.py bench stk=6.0, CB_EXACT=1): bench 44.94 (+0.15); reach 0.6222, follow 0.8727, in-band14 0.8241, contact 0.0184; near-touch 1 mm 53.67 (claim 53.51), 2 mm 71.85 (claim 71.68); why-counts unchanged {'fold': 105, 'slide': 7, 'flip': 0, 'closure': 0, 'skin': 0, 'parts': 32, 'contact': 6} (docs/alignment/remeasure/k-rim-lobe-stub-knuckle-3r_stk6_bench.json); held out at stk 6.0 not measured (did not finish inside the time box).",
+  "evidence": "docs/concepts/models/k-rim-lobe-stub-knuckle-3r.py W; docs/concepts/models/skin-normal-3r-pin-knee.py lines 19, 54; CLAUDE.md user decision 5 + lead's build rule"
+ },
+ {
+  "key": "R1",
+  "level": "watch",
+  "reason": "Stale records on a verified row. The row verdict (and the dashboard row) still opens 'SCREENED, FAILS ITS KILL GATE ... no frozen / verify run spent on it' although the verifier ran and the status is verified; the row's 'gap' 36.82 is the fast NEAR-TOUCH fit number while the dashboard row's 'gap' is the fast PLAIN 30.79 and its sweep_gap 36.82 (score 86.61); n_configs 524 on the row vs 512 on the dashboard; the mechanism note says complexity 34.0 'not recomputed' next to complexity 4.0; the knee pins are recorded as sensed iglidur pins, against user decisions 5 and 6 (no knee encoders; MR63ZZ pairs). The verified 44.79 itself is shown correctly (dashboard v_gap 44.79).",
+  "evidence": "docs/concepts/rows/k-rim-lobe-stub-knuckle-3r.json verdict / gap / mechanism; docs/dashboard/data/morphs.json"
+ },
+ {
+  "key": "NEW-ff-mixed-metric",
+  "level": "watch",
+  "reason": "The fast_frozen check reads +7.97 (self/fast 36.82 -> verified 44.79), but it compares the row's 'gap' (the fast near-touch number on this row) with v_gap (the plain frozen number). Like for like the fast-to-frozen loss is 14.00 plain (30.79 -> 44.79) and 16.69 near-touch (36.82 -> 53.51), the latter above the check's own 14-point watch line; the round-6 winner loses 6.8 on the same protocol. The loss is follow 0.933 -> 0.873: ROL-LOBE part losses 9 on the fit bench -> 32 on Bench(110,360) (the stub swinging back across the lobe in state A on clip frames the fit bench did not sample). The verified number already carries this, so the claim is honest; the self-measured 36.82 on the dashboard's sweep line is the number the design does not hold.",
+  "evidence": "docs/alignment/remeasure/k-rim-lobe-stub-knuckle-3r_bench.json fit_fast (30.79 / 36.82) and frozen (44.79), deep.gap_near1 53.51; tools/alignment_audit.py c_fast_frozen"
+ },
+ {
+  "key": "G1",
+  "level": "watch",
+  "reason": "Metal hugging at 1-3 mm (report only: near-touch is not a gate, user 2026-10-17). Bench(110,360) exact, frozen claim: 35 of 320 taken poses have metal < 2 mm and 10 < 1 mm (min 0.45 mm at (15, 90, 30)); 157 < 3 mm. Near-touch gap 53.51 at 1 mm, 71.68 at 2 mm, 180.55 at 3 mm (26.89 points live in the 1-2 mm shell, above the 25-point shell line the instrument used before the ruling). Overhead: 3 of the 5 taken overhead workspace poses are < 2 mm (1 < 1 mm), and 6 of the 8 taken overhead CLIP frames are < 1 mm (0.53 mm at (30, 150, -60)). Clip metal histogram: 0.14 % below 2 mm, 0.50 % at 2-3 mm, 17.3 % over 14 mm. Held out (same harness, 1154 poses): 79 of 733 taken poses < 2 mm, 28 < 1 mm (min 0.05 mm), 343 < 3 mm; near-touch 61.52 at 1 mm, 77.81 at 2 mm; 11 of the 12 taken overhead workspace poses < 2 mm (6 < 1 mm) and 11 of the 18 taken overhead clip frames < 1 mm.",
+  "evidence": "docs/alignment/remeasure/k-rim-lobe-stub-knuckle-3r_bench.json / _held.json deep; docs/alignment/remeasure/k-rim-lobe-stub-knuckle-3r_probe_bench.json / _probe_held.json probe.ws_overhead140 / clip_overhead140"
+ },
+ {
+  "key": "M5",
+  "level": "watch",
+  "reason": "A spring that has never been asked to hold. K is a passive O20 hub whose state is set by ONE clock spring in a 6 mm cap: it holds K on stop A in state A (138 of 320 taken bench poses) and keeps the unilateral roller-lobe pair closed through the law (182 taken poses, K up to 24.47 deg off stop A). Nothing on file gives its preload, its torque against K's gravity and friction load in every posture, or R17 / cuff twist: there is no CAD (pipeline/full-exo/designs has none for this id), so judge/dynamics.py has never run. A spring-closed cam that lifts off is a lag of K, i.e. link 1b and everything distal off its planned pose (pick1's 0.08 N.m K lagged 9.28 deg, FINDINGS).",
+  "evidence": "docs/alignment/remeasure/k-rim-lobe-stub-knuckle-3r_probe_bench.json fold_margin.taken_by_state, k_slave; row mechanism K component"
+ }
+]

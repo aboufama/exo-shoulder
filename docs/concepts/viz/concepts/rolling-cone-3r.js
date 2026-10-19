@@ -1,75 +1,73 @@
-/* rolling-cone-3r - hubless spherical rolling-contact joints: three conical Rolamite / CORE rim pairs with their apex
- * at GH (catalogue rolling-cone-3r; ideated, no bench model yet: the model_spec). Joint k = two Ti cone-sector RIMS
- * standing on edge (radially from skin + 2 to skin + 10 mm), like toothless bevel wheels, held by crossed flexure
- * straps: fixed-cone axis c_k in the lower member, moving-cone axis m_k0 2g from it (equal cones), relative rotation
- * T_k(phi) = R(c_k, phi) R(m_k0, phi); the contact generator R(c_k, phi) m_k (a ray from GH) is the joint's moving
- * axis and walks along both rims. FK M3 = T1 T2 T3 (POE about the reference), arm = M3 Q0. Reference (the spec leaves
- * it open): the champion 3R at each joint's mid-range over the loop, m_k = its axes there, c_k / m_k0 split m_k by
- * +-g along the chain. 3 ACTIVE (phi1..3), 0 passive; numeric IK (LM) from the 3R seed phi = (q - q_mid) / 2. Rims
- * span the seed's phi range +-8 deg on both members; radii schematic. */
+/* rolling-cone-3r - hubless spherical rolling-contact joints: three strap-held conical rolling pairs with their apex
+ * at GH, rigid cuff (catalogue rolling-cone-3r; model docs/concepts/models/rolling-cone-3r.py, step-0 law-only ghost).
+ * Joint k: a SUN cone band (axis c_k, half-angle ga, fixed in the proximal member) and a PLANET cone band (axis m0_k,
+ * half-angle gb, fixed in the distal member) touching along the contact generator w_k; crossed flexure straps make it
+ * roll without slip: relative rotation T_k(t) = R(c_k, t / (1 + r)) R(m0_k, t r / (1 + r)), r = +-sin ga / sin gb
+ * (J2 is an INTERNAL pair: the planet rolls inside a concave sun ring, r < 0). The instantaneous joint axis is the
+ * contact line R(c_k, x) w_k: it walks along both bands as the joint turns. FK: M3 = T1 T2 T3 (reference Q = I), the
+ * arm = M3. 3 ACTIVE (t1..t3), 0 passive. Seats: H1 (skin-normal-3r-pin-knee H-g107-1) with J3 on its GH ray (b3 0),
+ * the best all-rolling cell of the step-0 search (seeded CMA on Bench(60,160) ws, read on Bench(110,360): 292 ws /
+ * 104 clip / 14 overhead kinematic, vs 265 / 110 / 12 for the same seats with three pins). Rim arcs = the joint
+ * values over the taken Bench(110,360) poses (+-5 deg); band radii are the schematic one-level R of the step-0 band
+ * check. Red = the instantaneous-dyad fold (contact lines w1, w2, w3 within 5 deg of coplanar, or the other branch)
+ * or a contact rolled off its band. */
 (function () {
   const K = (typeof window !== 'undefined' ? window : globalThis).KIN, V = K.V, M = K.M;
-  const CH = { az: 2.4305071427308924, el: 80.67633718429899, a: [76.90180446920043, 66.74921235407174],
-               w: [86.32769021001913, 21.829657347343378], branch: -1 };
-  const P = { g: [14, 14, 14], R: [56, 70, 64], rim_h: 8, rim_pad: 8, sing_deg: 10, neck_deg: 25, cuff_at: 165 };
-  const C = K.sph3r(K.bvec(CH.az, CH.el), K.wdir(CH.w[0], CH.w[1]), CH.a[0], CH.a[1], CH.branch);
-  const qs = K.motion(240).map(f => K.makeCtx(f.pose, f.t)).filter(c => C.margin(c) >= P.sing_deg).map(c => C.solve(c));
-  const qm = [0, 1, 2].map(k => {                                    // mid-range (largest-gap rule on the circle)
-    const s = qs.map(q => K.wrap180(q[k])).sort((a, b) => a - b); let g = -1, at = 0;
-    s.forEach((x, i) => { const d = (i + 1 < s.length ? s[i + 1] : s[0] + 360) - x; if (d > g) { g = d; at = i; } });
-    return K.wrap180(s[(at + 1) % s.length] + (360 - g) / 2);
+  // exported by `python3 docs/concepts/models/rolling-cone-3r.py viz '<cell>'` (scapula frame at the reference Q = I)
+  const G = {"J": [{"kind": "roll", "c": [0.08665, 0.98976, 0.11344], "m0": [0.08432, 0.87921, 0.46891], "w": [0.08518, 0.89802, 0.43164], "r": 7.82187, "ga": 19.062, "gb": 2.393},
+                   {"kind": "roll", "c": [-0.92657, 0.25697, 0.27466], "m0": [-0.66129, 0.61576, 0.4284], "w": [-0.58009, 0.67877, 0.4503], "r": -5.23458, "ga": 33.322, "gb": 6.024},
+                   {"kind": "roll", "c": [-0.0222, -0.18886, 0.98175], "m0": [-0.1759, -0.39051, 0.90364], "w": [-0.13314, -0.33557, 0.93256], "r": 2.51544, "ga": 10.925, "gb": 4.321}],
+             "branch": -1.0, "t_rest_deg": [-10.661, -4.292, 6.99]};
+  const P = { R: [58, 60, 60], rim_h: 8, margin: 5, pad: 5, range: [[-103.6, 142.7], [-67.1, 87.6], [-146.0, 150.5]], neck_deg: 25, cuff_at: 165,
+              cell: { J1: [19.062, 2.393, 78.869, 1], J2: [33.322, 6.024, -129.74, -1], J3: [10.925, 4.321, 51.966, 1] } };
+  const J = G.J.map((j, k) => {
+    const lo = P.range[k][0] - P.pad, hi = P.range[k][1] + P.pad, f = 1 / (1 + j.r), xs = [lo * f, hi * f], ys = [lo * j.r * f, hi * j.r * f];
+    return Object.assign({}, j, { f, lo, hi, x: [Math.min(...xs), Math.max(...xs)], y: [Math.min(...ys), Math.max(...ys)] });
   });
-  const T1 = M.rot(C.u1, qm[0]), T2 = M.mul(T1, M.rot(C.u2, qm[1]));
-  const m = [C.u1, M.mulv(T1, C.u2), M.mulv(T2, C.u3)], Q0 = M.mul(T2, M.rot(C.u3, qm[2]));
-  const tang = (a, v) => V.unit(V.reject(v, a)), h0 = M.mulv(Q0, [0, -1, 0]);
-  const nd = [tang(m[0], m[1]), V.unit(V.sub(tang(m[1], m[2]), tang(m[1], m[0]))), V.unit(V.sub(tang(m[2], h0), tang(m[2], m[1])))];
-  const J = [0, 1, 2].map(k => {
-    const g = P.g[k] * K.D2R, ph = qs.map(q => K.wrap180(q[k] - qm[k]) / 2);
-    return { c: V.sub(V.scale(m[k], Math.cos(g)), V.scale(nd[k], Math.sin(g))), m0: V.add(V.scale(m[k], Math.cos(g)), V.scale(nd[k], Math.sin(g))),
-             lo: Math.min(...ph) - P.rim_pad, hi: Math.max(...ph) + P.rim_pad };
-  });
-  function bodies(q) {
-    const B = [M.I3()]; let T = B[0];
-    for (let k = 0; k < 3; k++) { T = M.mul(M.mul(T, M.rot(J[k].c, q[k])), M.rot(J[k].m0, q[k])); B.push(T); }
-    return B;
+  const Tk = (j, t) => M.mul(M.rot(j.c, t * j.f), M.rot(j.m0, t * j.r * j.f));
+  const wk = (j, t) => M.mulv(M.rot(j.c, t * j.f), j.w);            // contact line, proximal frame
+  function bodies(q) { const B = [M.I3()]; let T = B[0]; for (let k = 0; k < 3; k++) { T = M.mul(T, Tk(J[k], q[k])); B.push(T); } return B; }
+  function margin(q) {
+    const B = bodies(q), w = [0, 1, 2].map(k => V.unit(M.mulv(B[k], wk(J[k], q[k]))));
+    const th = V.angle(w[0], w[2]), a1 = V.angle(w[0], w[1]), a2 = V.angle(w[1], w[2]);
+    return { m: Math.min(th - Math.abs(a1 - a2), a1 + a2 - th, 360 - a1 - a2 - th), br: Math.sign(V.dot(w[1], V.cross(w[0], w[2]))) };
   }
-  const rim = (S, B, ax, ref, k, a0, a1, name) => {
-    const R = P.R[k] + P.rim_h / 2, g = P.g[k] * K.D2R, axis = M.mulv(S, M.mulv(B, ax));
-    return { kind: 'rail', role: 'active', name, c: V.scale(axis, R * Math.cos(g)), axis, ref: M.mulv(S, M.mulv(B, ref)),
-             rho: R * Math.sin(g), a0, a1, r: 2.2 };
+  const rimPart = (S, B, ax, w, R, g, a0, a1, name) => {
+    const axis = M.mulv(S, M.mulv(B, ax)), ref = M.mulv(S, M.mulv(B, V.unit(V.reject(w, ax))));
+    return { kind: 'rail', role: 'active', name, c: V.scale(axis, (R + P.rim_h / 2) * Math.cos(g * K.D2R)), axis, ref,
+             rho: (R + P.rim_h / 2) * Math.sin(g * K.D2R), a0, a1, r: 1.6 };
   };
-
   K.register({
     id: 'rolling-cone-3r',
-    name: 'Rolling-cone 3R (rims, no hubs)',
+    name: 'Rolling-cone 3R: three strap-held cone pairs, apex GH, no hubs (rigid cuff)',
     dof: { active: 3, passive: 0 },
     params: P,
-    q0: ctx => C.solve(ctx).map((x, k) => K.wrap180(x - qm[k]) / 2),
-    qNames: ['phi1 (roll J1)', 'phi2 (roll J2)', 'phi3 (roll J3)'], qUnits: ['deg', 'deg', 'deg'], resUnits: ['deg', 'deg', 'deg'],
-    residual: (q, ctx) => M.rotErrDeg(M.mul(bodies(q)[3], Q0), M.mul(M.T(ctx.S), ctx.H)),
-    check: (q, ctx) => {
-      for (let k = 0; k < 3; k++) if (q[k] < J[k].lo || q[k] > J[k].hi) return `contact ${k + 1} rolled off its rims (${q[k].toFixed(0)} deg)`;
-      const mg = C.margin(ctx); return mg < P.sing_deg ? `within ${Math.max(0, mg).toFixed(0)} deg of the chain's fold` : null;
+    q0: () => G.t_rest_deg.slice(),
+    qNames: ['t1 (roll J1)', 't2 (roll J2, internal)', 't3 (roll J3)'], qUnits: ['deg', 'deg', 'deg'], resUnits: ['deg', 'deg', 'deg'],
+    residual: (q, ctx) => M.rotErrDeg(bodies(q)[3], M.mul(M.T(ctx.S), ctx.H)),
+    check: (q) => {
+      for (let k = 0; k < 3; k++) if (q[k] < J[k].lo || q[k] > J[k].hi) return `contact ${k + 1} rolled off its bands (${q[k].toFixed(0)} deg)`;
+      const mg = margin(q);
+      if (mg.br !== G.branch) return 'contact lines crossed to the other branch';
+      return mg.m < P.margin ? `contact lines within ${Math.max(0, mg.m).toFixed(1)} deg of the fold (>= ${P.margin})` : null;
     },
     parts: (q, ctx) => {
       const B = bodies(q), S = ctx.S, Wd = (b, d) => M.mulv(S, M.mulv(B[b], d)), out = [];
-      const mid = (k, b, ax, az) => M.mulv(M.rot(ax, az), m[k]);      // rim mid-arc point (body coords)
-      out.push({ kind: 'plate', role: 'fixed-scapula', name: 'base pad (handler)', c: V.scale(Wd(0, J[0].c), P.R[0] - 3), z: Wd(0, J[0].c),
-                 x: Wd(0, nd[0]), size: [34, 24], t: 3 });
+      const sunMid = k => M.mulv(M.rot(J[k].c, (J[k].x[0] + J[k].x[1]) / 2), J[k].w);       // body k
+      const plMid = k => M.mulv(M.rot(J[k].m0, -(J[k].y[0] + J[k].y[1]) / 2), J[k].w);      // body k + 1
+      out.push({ kind: 'plate', role: 'fixed-scapula', name: 'base pad (scapula handler)', c: V.scale(Wd(0, sunMid(0)), P.R[0] - 2),
+                 z: Wd(0, sunMid(0)), x: ctx.attach.scapDir([1, 0, 0]), size: [30, 22], t: 3 });
       for (let k = 0; k < 3; k++) {
-        const ct = Wd(k, M.mulv(M.rot(J[k].c, q[k]), m[k]));       // contact generator = the moving joint axis
-        out.push(rim(S, B[k], J[k].c, m[k], k, J[k].lo, J[k].hi, `J${k + 1} fixed rim (cone about c${k + 1})`));
-        out.push(rim(S, B[k + 1], J[k].m0, m[k], k, -J[k].hi, -J[k].lo, `J${k + 1} rolling rim (cone about m${k + 1})`));
-        out.push({ kind: 'link', role: 'active', name: `J${k + 1} contact line (flexure straps)`, a: V.scale(ct, P.R[k] - 1), b: V.scale(ct, P.R[k] + P.rim_h + 1), r: 1.3 });
-        if (k < 2) {
-          const u = Wd(k + 1, mid(k, k + 1, J[k].m0, -(J[k].lo + J[k].hi) / 2)), v = Wd(k + 1, mid(k + 1, k + 1, J[k + 1].c, (J[k + 1].lo + J[k + 1].hi) / 2));
-          out.push({ kind: 'arc', role: 'link', name: `link ${k + 1} (strap)`, u, v, r0: P.R[k] + 2, r1: P.R[k + 1] + 2, r: 2.5 });
-        }
+        const j = J[k], ct = Wd(k, wk(j, q[k]));
+        out.push(rimPart(S, B[k], j.c, j.w, P.R[k], j.ga, j.x[0], j.x[1], `J${k + 1} sun band (cone ${j.ga.toFixed(0)} deg about c${k + 1})`));
+        out.push(rimPart(S, B[k + 1], j.m0, j.w, P.R[k], j.gb, -j.y[1], -j.y[0], `J${k + 1} planet band (cone ${j.gb.toFixed(0)} deg about m${k + 1})`));
+        out.push({ kind: 'link', role: 'active', name: `J${k + 1} contact line = instantaneous axis (crossed straps)`, a: V.scale(ct, P.R[k] - 1), b: V.scale(ct, P.R[k] + P.rim_h + 1), r: 1.2 });
+        if (k < 2) out.push({ kind: 'arc', role: 'link', name: `link ${k + 1} (strap)`, u: Wd(k + 1, plMid(k)), v: Wd(k + 1, sunMid(k + 1)), r0: P.R[k] + 2, r1: P.R[k + 1] + 2, r: 2.5 });
       }
-      const harm = ctx.armAxis, rb = Wd(3, mid(2, 3, J[2].m0, -(J[2].lo + J[2].hi) / 2)), ng = P.neck_deg * K.D2R;
+      const harm = ctx.armAxis, rb = V.unit(Wd(3, plMid(2))), ng = P.neck_deg * K.D2R;
       const nk = V.unit(V.add(V.scale(rb, Math.cos(ng)), V.scale(V.unit(V.reject(harm, rb)), Math.sin(ng)))), neckEnd = V.scale(nk, P.R[2] + 2);
       const cuffC = V.scale(harm, P.cuff_at);
-      out.push({ kind: 'arc', role: 'fixed-arm', name: 'arm saddle', u: rb, v: nk, r0: P.R[2] + 2, r1: P.R[2] + 2, r: 2.5 });
+      out.push({ kind: 'arc', role: 'fixed-arm', name: 'arm saddle (member 3)', u: rb, v: nk, r0: P.R[2] + 2, r1: P.R[2] + 2, r: 2.5 });
       out.push({ kind: 'link', role: 'fixed-arm', name: 'saddle to cuff', a: neckEnd, b: V.madd(cuffC, V.unit(V.reject(neckEnd, harm)), 47), r: 3 });
       out.push({ kind: 'strap', role: 'fixed-arm', name: 'arm cuff', c: cuffC, axis: harm, r: 47, w: 26 });
       out.push({ kind: 'point', role: 'link', name: 'GH centre', p: [0, 0, 0], r: 4 });

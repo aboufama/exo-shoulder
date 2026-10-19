@@ -298,8 +298,7 @@ def ideal(params, which="envsel", flood=False):
         B.res[i] = None
         if why[i] in ("", "contact", "skin"): why[i] = "kfold"
     M.why = why
-    rd = readings(M, B, phi_b, kc=int(prm.get("kc", 0))); ws = np.array(B.kind) == "ws"
-    rd["contact_owner"] = contact_owner(M)
+    rd = readings(M, B, phi_b, kc=int(prm.get("kc", 0))); ws = np.array(B.kind) == "ws"; c_own = contact_owner(M)
     if int(prm.get("j4", 0)):
         G = j4_geometry(AR, M1, B1, phi, ax, dict(HW, **{k: prm[k] for k in HW if k in prm}))
         ex, jam = j4_wear(AR, M, B, G, phi_b, ax)
@@ -325,7 +324,7 @@ def ideal(params, which="envsel", flood=False):
                why_ws={str(k): int(((why == k) & ws).sum()) for k in set(why.tolist())},
                relayed_ws=int((ws & np.isfinite(phi_b) & (phi_b != 0)).sum()), kin_ws=int((ws & np.isfinite(phi_b)).sum()),
                phi_max=round(float(np.nanmax(np.abs(phi_b))), 2) if np.isfinite(phi_b).any() else 0.0,
-               th=th_margin(M1, B, phi_b, ax, tk), **rd)
+               th=th_margin(M1, B, phi_b, ax, tk), contact_owner=c_own, **rd)
     if flood:
         fr = AR.flood_relay(M1, rp); out["flood"] = {k: v for k, v in fr.items() if k not in ("conn", "phi")} if isinstance(fr, dict) else str(fr)[:300]
     out["secs"] = round(time.time() - t0, 1)
