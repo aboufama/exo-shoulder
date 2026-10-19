@@ -311,5 +311,87 @@
    "J2": "0.00 / 0.00 / 0.00 (551 cells)",
    "J12_seeded": "0.23 / 0.23 / 0.00 (501 cells)"
   }
+ },
+ "audit": {
+  "t": "2026-10-19T04:15:47Z",
+  "verdict": "death STANDS as specified (not refuted); the grounds are narrower than written",
+  "reproduced": "all-three rigid cell at H1 seats re-read with the row model: 297/110/15 on Bench(110,360) kinematic (matches the claim); gate.json re-read: kinematic gates 1 take (0.23 score pt) resolution, converged",
+  "missed_region": "the rigid all-rolling chain was searched only at H1 seats (chosen for the tilted-J3 knee chain, re-used with b3 = 0); never at rigid-chain seats",
+  "zc_seats_probe": {
+   "harness": "docs/research/rolling_cone_3r/audit/zc_ghost.py + zc_metal.py (row Ghost at zc-frontier-3r seats: J1 bvec(109.36, 65.94), J3 wdir(85.74, -16.19), a1 36.72, a2 69.06, sigma -1, reference Q = I, margin 31 deg there)",
+   "pins_control_360": [
+    239,
+    105,
+    10
+   ],
+   "pins_control_note": "reproduces zc-frontier-3r doc exactly: 360 - 121 fold losses = 239 ws, follow 105/110",
+   "J2_internal_28.75_6.12_-140.65_360": [
+    269,
+    110,
+    17
+   ],
+   "J2_internal_bands_one_level_60_160": [
+    0.979,
+    0.985
+   ],
+   "J2_bandlegal_8.73_14.23_42_360": [
+    254,
+    106,
+    15
+   ],
+   "J2_metal_search_best": {
+    "cell": {
+     "ga": 15.383,
+     "gb": 13.315,
+     "beta": 55.484,
+     "sign": 1
+    },
+    "bands": [
+     0.979,
+     0.979
+    ],
+    "metal_ws_160": 123,
+    "kin_360": [
+     260,
+     110,
+     15
+    ],
+    "n": 402,
+    "gate": "0.23 / 0.23 / 0.00 score pts"
+   },
+   "all_three_H1_cell_at_zc_360": [
+    266,
+    110,
+    12
+   ],
+   "J123_metal_random_best_bands": {
+    "J1": [
+     0.374,
+     0.951
+    ],
+    "J2": [
+     0.995,
+     0.996
+    ],
+    "J3": [
+     0.451,
+     0.616
+    ],
+    "n": 21,
+    "note": "stopped early (time box); J3 bands through GH stay out of band at one level at a second seat set"
+   },
+   "J3_disc_one_level": {
+    "zc": 0.52,
+    "H1_b3_0": 0.36,
+    "kit_hub3_at_zc_full_model": 0.82,
+    "note": "the one-level spherical-cap disc control reads 0.52-0.54 where the kit K4 flat hub-3 member reads 0.82 at the same seats (zc-frontier-3r.md line 76): the control is stricter than the kit; unresolved in the time box"
+   }
+  },
+  "issues": [
+   "new_knowledge (3) \"a rigid-cuff J3 through GH cannot sit in the band\" is seat- and rule-specific: zc-frontier-3r is a rigid-cuff J3 through GH whose kit hub 3 reads 0.82 and whole chain 0.89",
+   "reason (b) (J2 planet band at 135 mm) is cell-specific: band-legal J2 cells exist at H1 (author) and at zc seats (this audit, incl. an INTERNAL cell at 0.98/0.99)",
+   "the convergence gate was met on the kinematic objective at fixed seats, not on a metal objective of the rigid all-rolling chain (0 metal cells for R123 at its own seats)"
+  ],
+  "hand_off": "kneeless rigid-cuff rolling-J2 3R at zc-frontier seats (J1/J3 O20 pins, cx ~6.5 with 2 straps, 0 passive joints, no knee): kinematic 269/110/17 vs 239/105/10 pins (+30 ws, +5 clip, +7 overhead), both J2 bands 0.98 at one level; needs a full metal model (zc kit model with J2 replaced) and a frozen exact read - the kneeless sibling of rollcone-hubspot-pinknee-3r (22.16 frozen, cx 6.5)"
  }
 }

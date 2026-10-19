@@ -152,3 +152,37 @@ Hand-offs:
 
 No bench gap is claimed: this row is a law-only ghost plus a part-level band check; reach / follow are kinematic upper
 bounds and are NOT bench numbers.
+
+## Audit (2026-10-19, death auditor)
+
+**Verdict: the death stands as specified (three hubless pairs, rigid cuff), on narrower grounds than written.**
+Harness: `docs/research/rolling_cone_3r/audit/` (`zc_ghost.py`: this row's Ghost at other seats; `zc_metal.py`: the
+row's one-level band rule, q 0.97, on a rigid chain; raw logs `zc_J2.jsonl`, `zc_J123.jsonl`).
+
+- **Reproduced.** The all-three rigid cell re-read with the row model: 297 / 110 / 15 on Bench(110,360) kinematic, as
+  claimed. The kinematic gates in `gate.json` have a resolution of 1 take (0.23 score pt) and are converged.
+- **Region the search missed.** The rigid all-rolling chain was searched only at H1's seats, which were chosen for the
+  tilted-J3 knee chain and re-used with b3 = 0. Re-seated at the converged cx-0 rigid 3R (zc-frontier-3r: J1
+  bvec(109.36, 65.94), J3 wdir(85.74, -16.19), a1 36.72, a2 69.06, sigma -1):
+  - pins control 239 ws / 105 clip / 10 overhead, which reproduces zc-frontier's own 121 fold losses and 105/110 follow
+    exactly;
+  - internal J2 28.75 / 6.12 / beta -140.65: **269 / 110 / 17**, with both J2 bands at 0.979 / 0.985 at one level (at H1
+    seats the internal cells failed the sun band at 0.56);
+  - metal-aware J2 search at zc seats (402 cells, gate 0.23 / 0.23 / 0.00): best 15.38 / 13.32 / beta 55.5, bands
+    0.979 / 0.979, 260 / 110 / 15;
+  - the H1 all-three cell worn at zc seats: 266 / 110 / 12. A short J1+J2+J3 metal search (21 cells, stopped at the time
+    box) keeps the J3 bands at 0.45 / 0.62 and the J1 sun band at 0.37. So the J3 pair through GH stays out of band at
+    one level at a second seat set as well.
+- **What this changes in the write-up.**
+  - Death reason (b), the J2 planet band at 135 mm, belongs to one cell, not to the morphology: band-legal J2 cells
+    exist at both seat sets.
+  - New-knowledge (3), "a rigid-cuff J3 through GH cannot sit in the band", applies to this rule and these seats only.
+    zc-frontier-3r is a rigid-cuff J3 through GH whose kit K4 flat hub 3 reads 0.82, and its whole chain 0.89. The
+    one-level spherical-cap disc control at the same seats reads 0.52, so the control is stricter than the kit; the
+    reason was not resolved in the time box.
+  - What does stand is the J3 *rolling pair* (bands at one level) through GH: 0.43-0.62 at both seat sets.
+- **Hand-off (not a claim): a kneeless rigid-cuff rolling-J2 3R at zc seats.** J1 / J3 are O20 pins, J2 is one strap-held
+  pair, with no knee and 0 passive joints (cx ~6.5 with the straps priced as flexures). Kinematically it reads 269 / 110 /
+  17 against 239 / 105 / 10 for pins: +30 ws, +5 clip, +7 overhead. It is the kneeless sibling of
+  rollcone-hubspot-pinknee-3r (22.16 frozen at cx 6.5). Next step: the zc kit model with J2 replaced by the pair, then a
+  frozen exact read on Bench(110,360). Expect metal to cost takes at the fold edges, as it does in zc (239 -> 224).
