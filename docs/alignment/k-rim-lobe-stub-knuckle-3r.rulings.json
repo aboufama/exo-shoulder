@@ -1,37 +1,52 @@
-{
- "id": "k-rim-lobe-stub-knuckle-3r",
- "by": "skeptic review 2026-10-16",
- "review": "docs/alignment/review_2026-10-16.md",
- "rulings": [
-  {
-   "key": "near_touch",
-   "refuted": true,
-   "evidence": "2 mm shell 26.89 as 'gamed': the 1-2 mm shell is a proposed tightening, not a rule (user ruling + CLAUDE.md: near-touch = metal < 1 mm; REQUIREMENTS R1: 2-14 mm is a share >= 90 %); a tightening is a proposal for the lead / user with its measured effect, so the reading stands as 'watch' evidence, not a gamed verdict (docs/alignment/review_2026-10-16.md). At 3 mm every design scores 150-165, so the 2 mm line sits on a cliff where one clip pose = 1.18 points. Note the ADOPTED 1 mm rule already costs it 8.72 points (44.79 -> 53.51), which the remaining reasons and the row's own near-touch report carry; the row is far from the lead (44.79)."
-  },
-  {
-   "key": "held_out",
-   "refuted": false,
-   "evidence": ""
-  },
-  {
-   "key": "fold_margin",
-   "refuted": false,
-   "evidence": ""
-  },
-  {
-   "key": "sampling",
-   "refuted": false,
-   "evidence": ""
-  },
-  {
-   "key": "complexity",
-   "refuted": false,
-   "evidence": ""
-  },
-  {
-   "key": "reporting",
-   "refuted": false,
-   "evidence": ""
-  }
- ]
-}
+[
+ {
+  "key": "held_out",
+  "refuted": false,
+  "evidence": "Upheld, re-derived. remeasure/k-rim-lobe-stub-knuckle-3r_held.json frozen {inband14 0.8211, follow 0.8515, reach 0.5893, contact 0.0266} gives 7.89 + 9.85 + 31.07 + 2.66 = 51.47; _bench.json frozen 44.79 = row v_gap. Drop +6.68 > TH held_watch 6.0 (tools/alignment_audit.py line 63; docs/ALIGNMENT.md section 5 'watch > 6, gamed > 10'), < held_gamed 10. Same harness: the verifier's frozen_wear (docs/concepts/verify/k-rim-lobe-stub-knuckle-3r.py lines 99-100) with held = skin-normal-3r-pin-knee-polish.held_bench() (every fit-clip and workspace pose in neither Bench(110,360) nor Bench(60,160)), the same set the lead's 18.28 -> 22.38 (+4.10, remeasure/conecut-knee-knuckle-3r_held.json frozen) is worn on. Wearer cost: reach 0.622 -> 0.589 and follow 0.873 -> 0.852 (held why: fold 311, parts 65, slide 25, contact 20)."
+ },
+ {
+  "key": "fold_margin",
+  "refuted": true,
+  "evidence": "The number is on file, and I checked how it was derived. remeasure/k-rim-lobe-stub-knuckle-3r_probe_bench.json fold_margin: th_margin_min 7.638, lt5 0, lt6 0 (n_taken 320, by_state A 7.638 / stretched 8.167). _probe_held.json: th_margin_min 5.585, lt5 0, lt6 3 (n_taken 733). Both wears reproduce the claim (44.79 / 51.47). Derivation: tools/alignment_wear_probe_krim.py lines 56-63 reads M.D._m3e after D.ik(M.Q). _m3e = KR.dyad_margin(th, a1e, a2) (docs/concepts/models/geneva-tail-knuckle-pinknee-3r.py line 198; KSDesign inherits that ik and overrides only law()), which is the kit's th reading (tools/concept_kit.py lines 25-30) on the effective dyad. The model also gates every pose on it: line 200, ok &= m3e >= FOLD_MARGIN - 1e-6, with PARAMS m3e 1 (line 67). So the minimum is >= 5 deg on both wears. The tool's watch says 'not on file' only because c_fold_margin never reads docs/alignment/remeasure/ (proposal 3). The measurement is not missing."
+ },
+ {
+  "key": "sampling",
+  "refuted": false,
+  "evidence": "Upheld, re-derived. _bench.json parts_ib14 (14 groups, 869 samples): sample-weighted 0.8257 vs part-weighted 0.7531, +7.25. That is > part_weight_watch 3.0 and < gamed 8.0 (TH line 64). lobe [0.000, 19.6 mm, 45], LT [0.116, 21.4 mm, 32], roller [0.184, 19.7 mm, 9 < part_min_samples 16]. Held (_held.json) is the same: lobe 0.000, LT 0.122, roller 0.187. Without the 86 drive samples the in-band would be 0.9095, so the out-of-band metal is the drive: a 19-22 mm bump over K, a wearer cost under the ~1 cm goal. Per-part density is not measured (tool density check: 'not measured')."
+ },
+ {
+  "key": "reporting",
+  "refuted": false,
+  "evidence": "Upheld, confirmed on file. docs/concepts/rows/k-rim-lobe-stub-knuckle-3r.json: status 'verified', but the verdict opens 'SCREENED, FAILS ITS KILL GATE ... no frozen / verify run spent on it', which is c_reporting's startswith('SCREENED') test. docs/dashboard/data/morphs.json: sweep_gap 36.82 (score 86.61) vs v_gap 44.79 = 7.97, over the check's 5-point line."
+ },
+ {
+  "key": "judgement:G5",
+  "refuted": false,
+  "evidence": "Upheld, re-run. tools/simplicity.py score(row.mechanism) = 4.0, items ['1 closed loop in the mechanism x 4'], flag 'topology: closed_loops 1 != joints 3 - moving_bodies 3', kutzbach_M -6, parts estimated. The record's 'joints' is a list of 7 dicts, with no passive_rot / moving_bodies / springs_or_flexures / custom_parts fields. geneva-tail-knuckle-3r (the same roller-on-tail with a clock-spring K, in the counter's schema) scores 14.0 'counted' (1 passive rot, 1 loop, 1 extra body, 2 extra joints, 1 spring, parts). The row's mechanism.note still reads 'complexity by the catalogue's count 34.0; not recomputed by tools/simplicity.py'. I did not re-derive the auditor's 14.25: its schema record is not on file. The parse artefact is confirmed."
+ },
+ {
+  "key": "judgement:M2",
+  "refuted": false,
+  "evidence": "Upheld, confirmed. docs/concepts/models/k-rim-lobe-stub-knuckle-3r.py line 56: W stk 4.8534, taken into PARAMS (line 57) and absent from BEST. The kit figures are 5.0 for an iglidur pin and 6.0 for an MR63ZZ pair (docs/concepts/models/skin-normal-3r-pin-knee.py lines 19, 54). The stk 6.0 re-wear is on file: remeasure/k-rim-lobe-stub-knuckle-3r_stk6_bench.json frozen 44.94 (inband14 0.8241; reach, follow, contact and why identical), _stk6_held.json 51.63. The cost is small (+0.15 / +0.16), but the claim stands on a knee thinner than the MR63ZZ pair the build rule requires."
+ },
+ {
+  "key": "judgement:R1",
+  "refuted": false,
+  "evidence": "Upheld, confirmed field by field. Row verdict 'SCREENED, FAILS ITS KILL GATE ...' on a verified row. Row gap 36.82 (= _bench.json fit_fast.gap_near1) and gap_plain 30.79, vs dashboard gap 30.79 and sweep_gap 36.82. n_configs 524 (row) vs 512 (dashboard). mechanism.note 'complexity by the catalogue's count 34.0; not recomputed' next to complexity 4.0. joints 'knee a' / 'knee b' {component 'iglidur pin', sensed true}, against CLAUDE.md decisions 5 and 6."
+ },
+ {
+  "key": "judgement:NEW-ff-mixed-metric",
+  "refuted": false,
+  "evidence": "Upheld, re-derived. Tool output fast_frozen: 'self/fast 36.82 -> verified 44.79 (+7.97)', ok. The row's gap 36.82 = _bench.json fit_fast.gap_near1 36.82; the plain fit_fast.gap 30.79 = row gap_plain. Like for like: plain 44.79 - 30.79 = 14.00, exactly at ff_watch 14.0 and not over it (c_fast_frozen uses d > 14). Near-touch deep.gap_near1 53.51 - 36.82 = 16.69 > 14. The row's headline 'gap' is the near-touch number, so its like-for-like reading is the near-touch one, and that is a watch. Cause confirmed: follow 0.9333 -> 0.8727, and ROL-LOBE pair losses 9 (fit_fast.pairs) -> 32 (parts_pairs). Correction: the round-6 winner's row reads 16.53 -> 23.57 = 7.04, not the 6.8 stated (immaterial)."
+ },
+ {
+  "key": "judgement:G1",
+  "refuted": false,
+  "evidence": "Upheld, counts reproduced. _bench.json deep: near1_poses 10, near2_poses 35 of n_taken 320, min 0.452 mm. _held.json: 28 / 79 of 733, min 0.053 mm. _probe_bench.json clip_overhead140 floor_hist 0-1 mm 6 of 8 taken; _probe_held.json ws_overhead140 poses_floor_lt2 11 of 12. The cost is specific to this design. On the same probes the lead (remeasure/conecut-knee-knuckle-3r_bench.json deep) has near1 3 / near2 33 of 372, its overhead clip frames < 1 mm are 0 of 10 (bench) and 0 of 19 (held), and its held overhead ws poses < 1 mm are 1 of 18. The 1 mm near-touch costs this design +8.72 (44.79 -> 53.51) against the lead's +1.64 (18.28 -> 19.92). Level question for the lead: near_touch is report-only (docs/ALIGNMENT.md section 6, 2026-10-17.2; tool near_touch level ok), and the in-band gain from the 2-3 mm shell is only +0.50 (gap_band3_14 45.29). I keep it as the auditor labelled it (report only, watch) because the wearer cost is measured (ALIGNMENT.md section 1)."
+ },
+ {
+  "key": "judgement:M5",
+  "refuted": false,
+  "evidence": "Upheld: the measurement is missing and not on file. A grep of the row, docs/concepts/k-rim-lobe-stub-knuckle-3r.md and docs/concepts/verify/k-rim-lobe-stub-knuckle-3r.py for preload / torque / N.m / R17 / dynamics finds nothing; 'clock spring' appears only as a component. The parameter kK 0.825 is the law ratio (dK = sp kK t, model lines 5 and 78), not a spring rate. No pipeline/full-exo/designs entry exists for this id, so judge/dynamics.py never ran. The states are confirmed: _probe_bench.json taken_by_state A 138 / stretched 182 and k_slave.dK_taken_max 24.47; held A 320 / stretched 413."
+ }
+]

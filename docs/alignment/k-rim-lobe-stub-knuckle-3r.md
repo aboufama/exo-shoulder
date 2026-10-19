@@ -220,3 +220,52 @@ it.
 - No action is needed on the claim.
 - The two instrument proposals (1, 2) apply to every row and are the useful output.
 - The lead's G5 re-count should be done for geneva-tail-knuckle-pinknee-3r too, the same schema.
+
+## Skeptic (2026-10-19, 03:50-04:10 UTC)
+
+Ledger entry 2026-10-19T04:05:12Z (`by skeptic`, run `skeptic:k-rim-lobe-stub-knuckle-3r`). Rulings are in
+`docs/alignment/k-rim-lobe-stub-knuckle-3r.rulings.json`. This file replaces the 2026-10-16 rulings file, whose one
+refuted key (`near_touch`) has read ok since tool 2026-10-17.2.
+
+- **Method:** I re-derived every number from the auditor's re-wear files (`docs/alignment/remeasure/k-rim-lobe-stub-knuckle-3r_{bench,held,probe_bench,probe_held,stk6_bench,stk6_held}.json`), the row, the dashboard, `tools/simplicity.py` (re-run) and the model / verifier source.
+- **Instrument check:** I loaded `tools/alignment_audit.py` at 702373b^ and at HEAD and ran `_depth_sources` on both versions (missed item 1).
+- **What I did not do:** no new wear (the files reproduce the claim to the digit, 44.79 / 51.47). Local only, $0. Nothing edited except this section, the rulings file and the ledger line.
+
+### Rulings
+
+| key | ruling | evidence |
+|---|---|---|
+| held_out | upheld | 51.47 re-derived from `_held.json` frozen (7.89 + 9.85 + 31.07 + 2.66). +6.68 > TH held_watch 6.0 (< 10). Same harness as the lead: the verifier's frozen_wear with `held_bench()` = every pose in neither bench. The lead reads +4.10 on that set. Reach 0.622 -> 0.589 and follow 0.873 -> 0.852 are real losses for the wearer. |
+| fold_margin | **refuted** | On file: `_probe_bench.json` fold_margin.th_margin_min 7.638, lt5 0; `_probe_held.json` 5.585, lt5 0 (3 < 6). The adapter reads the model's own `_m3e` = `dyad_margin(th, a1e, a2)`, the kit's th reading on the effective dyad (geneva-pinknee line 198, inherited unchanged). The model gates every pose on m3e >= 5 (line 200, PARAMS m3e 1). The watch is a reading-path gap (proposal 3), not a missing measurement. |
+| sampling | upheld | `parts_ib14`: 0.8257 sample-weighted vs 0.7531 part-weighted (+7.25, between 3 and 8). lobe 0.00 / LT 0.12 / roller 0.18 in band at 19-22 mm, roller 9 samples. Without the 86 drive samples in-band is 0.9095: the out-of-band metal is the drive bump. Density not measured. |
+| reporting | upheld | Row verdict opens "SCREENED, FAILS ITS KILL GATE" on a verified row; dashboard sweep_gap 36.82 vs v_gap 44.79 (7.97 > 5). |
+| G5 | upheld | `simplicity.py` re-run gives 4.0, one item, a topology flag, Kutzbach -6, `joints` a list of 7 dicts. geneva-tail-knuckle-3r, the same drive, counts 14.0. The auditor's 14.25 record is not on file, so I did not re-derive it. |
+| M2 | upheld | stk 4.8534 (model W, line 56), below 5.0 / 6.0 (pin-knee lines 19 / 54). At stk 6.0: 44.94 / 51.63 (`_stk6_*.json`). |
+| R1 | upheld | Every field confirmed: verdict text, gap 36.82 vs 30.79, n_configs 524 vs 512, the "34.0 not recomputed" note, the knee recorded as sensed iglidur pins. |
+| NEW-ff-mixed-metric | upheld | Row gap 36.82 = fit_fast.gap_near1. Plain like for like: 14.00, exactly at the 14.0 line, not over it. Near-touch like for like: 16.69 > 14, and the row's headline is the near-touch number. Cause: ROL-LOBE 9 -> 32, follow 0.933 -> 0.873. Correction: the round-6 winner's row reads 16.53 -> 23.57 = 7.04, not 6.8. |
+| G1 | upheld | Counts reproduced: bench 10 / 35 of 320 taken poses < 1 / 2 mm, min 0.452 mm; held 28 / 79 of 733, min 0.053 mm; overhead clip frames < 1 mm on 6 of 8. The lead on the same probes: 3 / 33 of 372, overhead clip frames < 1 mm on 0 of 10 (bench) and 0 of 19 (held), 1 mm near-touch cost +1.64 against this design's +8.72. Level question for the lead: near_touch is report-only (2026-10-17.2), and the band read 3-14 costs only +0.50. |
+| M5 | upheld | No preload, torque, R17 or dynamics on file (row, concept doc, verifier). kK is the law ratio, not a spring rate. No CAD for this id. |
+
+### Missed (for the next audit; no effect on this verdict)
+
+1. **The audit's T5 instrument note is wrong on the reference side.**
+   - Measured: under 2026-10-18.1 (702373b^), `_depth_sources('conecut-knee-knuckle-3r')` raises AttributeError ('str' object has no attribute 'get', the desmo-geom paired file's `held: "missing dump"`). Under 2026-10-19.1 it returns the lead's per-pose dumps (bench 20.24 mm, held 60.97 mm).
+   - This design's own depth sources (`_probe_bench/held.json`: 15.38 / 56.10 mm) read the same under both versions.
+   - So T5 does read differently now. Before 702373b this design's contact_depth would have had no reference, which makes it vacuous. Now it compares x0.76 / x0.92 against the lead.
+   - The note "T5 reads the same under 2026-10-19.1 ... the change comes from new data, not from the instrument" holds for the design's side only. The level is ok either way.
+2. **The near-touch hugging is specific to this design, and the audit did not compare it with the lead.**
+   - Taken poses under 1 mm: 3.1 % on the bench (10 / 320) against the lead's 0.8 % (3 / 372); 3.8 % held out (28 / 733) against 1.5 % (13 / 861).
+   - Taken overhead clip frames under 1 mm: 6 / 8 against 0 / 10 on the bench, 11 / 18 against 0 / 19 held out.
+   - Taken held overhead workspace poses under 1 mm: 6 / 12 against 1 / 18.
+   - The 1 mm near-touch costs +8.72 here and +1.64 on the lead, so a larger share of this design's reach sits on sub-millimetre poses.
+   - Sources: `remeasure/conecut-knee-knuckle-3r_{bench,held}.json` deep and `_probe_{bench,held}.json`.
+3. **The held knn flood loses more than the family figure.**
+   - It loses 10.69 points (51.47 -> 62.16, 98 dropped). docs/FINDINGS.md line 3816 gives the family as ~8.0-8.24.
+   - The full flood, the reading in force, drops 0, so there is no breach. The number belongs to the open flood question (ALIGNMENT.md item 8).
+4. **The selftest will catch the fold_margin ruling.**
+   - With `fold_margin` refuted here, `tools/alignment_audit.py selftest` expects that check to read ok on this row. It cannot until `c_fold_margin` reads the remeasure probe files (proposal 3), the same situation as fold-sph3r.
+   - This is the tool's reading path. The design is not affected.
+
+### Final verdict (ledger): WATCH
+
+1 of 10 reasons refuted (`fold_margin`). The other 9 stand at watch.
