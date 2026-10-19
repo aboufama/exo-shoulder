@@ -196,3 +196,76 @@ in the forms `alignment_audit.py audit` reads: `deep`, `parts_ib14` and `frozen.
    "if counted, +2 passive_trans, crossed". This is allowed by the user's 2026-10-15 scope (passive self-aligning
    slides at the cuff, outside the count). It is recorded here only because it is the one place where a plain 3R's
    "0 passive DOF" relies on hardware the model does not carry.
+
+## Skeptic (2026-10-19 ~02:20-02:35 UTC)
+
+**Final verdict: WATCH.** This is the verdict `python3 tools/alignment_ledger.py skeptic raglan-routed-3r` printed (ledger
+entry 2026-10-19T02:33:36Z).
+- **Refuted, with evidence (2):** near_touch and fold_margin.
+- **Upheld (6):** held_out, sampling, R4, T1, S2 and NEW-oob-standoff.
+- **Files:** rulings in `raglan-routed-3r.rulings.json`; my measurements in `raglan-routed-3r.skeptic.json`.
+
+**What I ran.** The model was unchanged, with the row's best_params (k3484), at OMP_NUM_THREADS=1, nice 10.
+- **Fold margin:** `axes()` on Bench(60,160) and Bench(110,360), frames and closure only.
+- **Fast-bench re-evaluation:** `evaluate()` on Bench(60,160) with the fast grid. It reproduces the claim exactly: gap
+  42.72, near1 43.85, min 0.98 mm, and the same inband_member. On top of it I ran `alignment_audit.deep_audit` (with the
+  model's crown points), per-part counts and standoffs, and four attribution variants.
+- **Not run:** the exact held wear. It needs the exact Bench(60,160) fit first, which did not finish in the audit's
+  11.5 CPU minutes.
+
+### Rulings
+
+| key | ruling | evidence |
+|---|---|---|
+| held_out | upheld | v_gap and every v_* are null, there are no verifier files and no held remeasure. `c_held_out` returns watch when v_gap is None. Not measured here. |
+| near_touch | **refuted** | On file in `rows/raglan-routed-3r.json`: `near_touch.gap_metal_lt1_as_contact` 43.85 (plain 42.72, min 0.98 mm) and `frozen_big.gap_near1` 52.16 (plain 50.06, min 0.64 mm). Re-measured on fast: plain 42.72, < 1 mm 43.85 (1 pose), < 2 mm 44.99 (2 poses), so the 1-2 mm shell holds 1.14 points; band read as 3-14 mm 43.34. With a record, `c_near_touch` reads ok (report only since 2026-10-17). |
+| fold_margin | **refuted** | Measured min th margin over closing poses: 10.136 deg on Bench(60,160) (202 closing, taken 199) and 10.031 deg on Bench(110,360) (410 closing). 0 closing poses are under 10 deg. `ok` needs margin >= margin_deg (`concept_kit.py` line 96), so taken is a subset of closing and its min is >= 10.03 deg. That is >= 5, so the check reads ok. |
+| sampling | upheld | Measured per part (samples / in-band): hub1 81 / 1.00, hub2 81 / 0.00, hub3 81 / 0.674, link1 340 / 0.602, link2 185 / 0.051, neck 248 / 0.655. Every body is sampled and none is under 16 samples. Sample-weighted vs part-weighted is +0.70 points, under 3. But `c_sampling` reads watch when any part is < 0.5 in band (hub2, link2), so the level stands on the record. |
+| judgement:R4 | upheld | morphs.json has gap 42.72 and frozen_gap null. The builder's cands (`dash_build.py` lines 505-507) have no frozen_big or exact_frozen_summary. The fast basis is in sink 2 (`index.html` line 238). best_params are e = +1 +1 +1 with J1 at el 81.6, so the name describes the seed. Of the 8 rows that mention these keys, only this row's display would change. |
+| judgement:T1 | upheld | Sweep: 4154 / 4396 entries have obj == gap, 242 are +100 penalties, 0 are in between. b85eb07 is 07:18:01; the screen ended 03:11:01. Fast near1 +1.13 and near2 +2.27. New: the routing turn is what brings metal under 1 mm. The straight link at the same axes has min 2.00 mm and near1 = plain (49.89). |
+| judgement:S2 | upheld, corrected | link1 has 340 samples routed vs 245 straight. Part-weighted is 0.4969 vs 0.5039. Re-derived from measured counts and fractions, with link1 at 245: **43.73, so dilution is 1.01 points**, not the design doc's 1.25 / 43.97. Either is under 3. |
+| judgement:NEW-oob-standoff | upheld | Hub 2 over taken clip poses: min 19.74 mm metal-skin, median 31.75 mm, which is the fast grid's read clamp (`concept_bench.py` line 49, +-31.75 mm). Hub 2 is therefore more than 31 mm off the skin in at least half the clip poses. Link 2 is > 14 mm on 94.9 % of its samples. The "about 60 mm" is the radial need difference (F 128 vs a median need of 68), not a metal-skin reading. |
+
+### Missed (for the next audit; not counted in this verdict)
+
+1. **Routing gets credit for the strap width and an axis move (attribution, not apples to apples).**
+   - The row's verdict compares "50.06 ... vs 57.99 for the straight-link 3R at k2221's axes, same protocol", and the
+     design doc says "-7.9 gap points against the straight-link 3R".
+   - That reference is k2221 at **12 mm** straps. The claim is k3484's axes at **8 mm**, the clamp floor in `clean()`.
+   - Measured on Bench(60,160) fast at k3484's axes:
+
+     | strap width | routed | straight |
+     |---|---|---|
+     | 8 mm | 42.72 | 49.89 |
+     | 12 mm | 47.09 | 53.06 |
+
+   - So the width alone is worth **4.37 points** routed and 3.17 straight. Routing itself is worth 7.17 at 8 mm and
+     5.97 at 12 mm, or 6.04 when read at near1 at 8 mm.
+   - The model's docstring still says "a constant 12 x 3 section", while the claim uses 8 x 3.
+   - No frozen straight-link wear at k3484 is on file, so the frozen "-7.9 from routing" mixes three things: routing,
+     the 12 -> 8 mm width change and the axis move.
+   - The score is not inflated; the story told about the lever is.
+2. **The routing is what puts metal under 1 mm.** Straight links at the same axes have min metal 2.00 mm and
+   near1 = plain. Routed, the min is 0.98 mm at 8 mm and 0.74 mm at 12 mm (+2.28 near1).
+3. **Instrument blind spot in `_near_numbers`.** It accepts a row's gap_near1 record only when that record's plain gap
+   is within 0.5 of v_gap, and a null v_gap reads as 0. So every screened row with a near-touch record reads "no
+   near-touch measurement on file".
+   - The cause is the null v_gap, not that the tool cannot parse the keys.
+   - Proposal (a tool change, measured on this row only): when v_gap is null, compare against the row's gap or its
+     self-measured frozen claim. This row then reads ok, from frozen_big 50.06 / 52.16.
+4. **Limit of the S7 standoff proposal.** The fast grid clamps distances at +-31.75 mm. A per-part standoff read from
+   `Bench.res` saturates: hub 2 and link 2 both have their median at the clamp. A standoff report needs the exact path,
+   or the ray-need difference F - need.
+5. **The 3 mm near-touch shell tells nothing on kit rows.** The kit's per-cell q = 1.0 underside puts some cell at its
+   own worst pose's 2 mm floor in every pose. As a result, 199 of 199 taken fast poses have metal < 3 mm
+   (gap_near3 375.0), while only 0.6 % of clip samples lie at 2-3 mm. This is not gaming, since 2 mm is the band floor.
+   Read the band as 3-14 mm instead (43.34, +0.62).
+6. **Correction to "Fold margin" above.** A re-wear at 5 deg can win back at most **8 poses**, not 60:
+   - Only 8 of 470 big-bench poses, and 1 of 220 fast poses, have a th margin in [5, 10) deg.
+   - The other 52 of the 60 fold losses do not close at 5 deg either.
+   - So the 10 deg wear is conservative by at most 8 poses (1.7 %).
+
+**Next:** the exact held wear is still the open measurement:
+`CB_EXACT=1 OMP_NUM_THREADS=1 nice -n 10 python3 tools/alignment_raglan_rewear.py raglan-routed-3r held`. Run it on a
+quiet box, or on the farm once the user renews the budget. Until then, held_out stays a watch, because the row has no
+verifier.

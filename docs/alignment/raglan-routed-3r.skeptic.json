@@ -1,0 +1,216 @@
+{
+ "id": "raglan-routed-3r",
+ "by": "skeptic",
+ "t": "2026-10-19T02:33Z",
+ "models_unchanged": true,
+ "note": "skeptic re-measure, model docs/concepts/models/raglan-routed-3r.py unchanged, row best_params (k3484); OMP_NUM_THREADS=1 nice 10",
+ "fold_margin_th": {
+  "60,160": {
+   "n": 220,
+   "n_ok": 202,
+   "n_not_ok": 18,
+   "min_margin_ok": 10.136,
+   "min_margin_ok_recomputed_from_th": 10.136,
+   "n_ok_margin_lt5": 0,
+   "n_ok_margin_lt10": 0,
+   "n_all_margin_5_10": 1,
+   "n_ws_ok": 142,
+   "n_clip_ok": 60,
+   "secs": 0.2
+  },
+  "110,360": {
+   "n": 470,
+   "n_ok": 410,
+   "n_not_ok": 60,
+   "min_margin_ok": 10.031,
+   "min_margin_ok_recomputed_from_th": 10.031,
+   "n_ok_margin_lt5": 0,
+   "n_ok_margin_lt10": 0,
+   "n_all_margin_5_10": 8,
+   "n_ws_ok": 300,
+   "n_clip_ok": 110,
+   "secs": 0.0
+  }
+ },
+ "fast_bench_claim": {
+  "eval": 1.5,
+  "report": {
+   "gap": 42.72,
+   "reach": 0.8688,
+   "follow": 1.0,
+   "inband14": 0.504,
+   "contact": 0.0,
+   "gap_near1": 43.85,
+   "min_metal_skin": 0.98
+  },
+  "deep": {
+   "plain": 42.72,
+   "reach": 0.8688,
+   "follow": 1.0,
+   "inband14": 0.504,
+   "contact": 0.0,
+   "n_poses": 220,
+   "n_taken": 199,
+   "min_metal_mm": 0.977,
+   "gap_near1": 43.85,
+   "near1_poses": 1,
+   "gap_near2": 44.99,
+   "near2_poses": 2,
+   "gap_near3": 375.0,
+   "near3_poses": 199,
+   "clip_metal_hist": {
+    "0-1": 0.0,
+    "1-2": 0.0,
+    "2-3": 0.0062,
+    "3-4": 0.0173,
+    "4-6": 0.0602,
+    "6-10": 0.2095,
+    "10-14": 0.2108,
+    ">14": 0.496
+   },
+   "gap_band3_14": 43.34,
+   "inband3_14": 0.4978,
+   "overhead_min_metal_p10": 2.01
+  },
+  "parts": {
+   "hub1": {
+    "samples": 81,
+    "ib14": 1.0,
+    "median": 6.47,
+    "p95": 9.98,
+    "over14": 0.0,
+    "under2": 0.0,
+    "min": 2.28
+   },
+   "hub2": {
+    "samples": 81,
+    "ib14": 0.0,
+    "median": 31.75,
+    "p95": 31.75,
+    "over14": 1.0,
+    "under2": 0.0,
+    "min": 19.74
+   },
+   "hub3": {
+    "samples": 81,
+    "ib14": 0.6741,
+    "median": 12.79,
+    "p95": 19.79,
+    "over14": 0.3259,
+    "under2": 0.0,
+    "min": 2.42
+   },
+   "link1": {
+    "samples": 340,
+    "ib14": 0.6017,
+    "median": 11.33,
+    "p95": 31.75,
+    "over14": 0.3983,
+    "under2": 0.0,
+    "min": 2.18
+   },
+   "link2": {
+    "samples": 185,
+    "ib14": 0.0509,
+    "median": 31.75,
+    "p95": 31.75,
+    "over14": 0.9491,
+    "under2": 0.0,
+    "min": 7.36
+   },
+   "neck": {
+    "samples": 248,
+    "ib14": 0.6549,
+    "median": 12.21,
+    "p95": 21.3,
+    "over14": 0.3451,
+    "under2": 0.0,
+    "min": 2.01
+   }
+  },
+  "sample_weighted": 0.5039,
+  "part_weighted": 0.4969,
+  "straight_link_samples": {
+   "hub1": 81,
+   "hub2": 81,
+   "hub3": 81,
+   "link1": 245,
+   "link2": 185,
+   "neck": 248
+  },
+  "res_len": 1016,
+  "member_total": 1016
+ },
+ "attribution_fast": {
+  "claim": {
+   "gap": 42.72,
+   "reach": 0.8688,
+   "inband14": 0.504,
+   "contact": 0.0,
+   "gap_near1": 43.85,
+   "min_metal_skin": 0.98,
+   "inband_member": {
+    "hub1": 1.0,
+    "hub2": 0.0,
+    "hub3": 0.6741,
+    "link1": 0.6017,
+    "link2": 0.0509,
+    "neck": 0.6549
+   }
+  },
+  "straight_link1_same_axes_8mm": {
+   "gap": 49.89,
+   "reach": 0.875,
+   "inband14": 0.4261,
+   "contact": 0.0,
+   "gap_near1": 49.89,
+   "min_metal_skin": 2.0,
+   "inband_member": {
+    "hub1": 1.0,
+    "hub2": 0.0,
+    "hub3": 0.6741,
+    "link1": 0.3561,
+    "link2": 0.0488,
+    "neck": 0.6549
+   }
+  },
+  "routed_12mm": {
+   "gap": 47.09,
+   "reach": 0.8438,
+   "inband14": 0.4853,
+   "contact": 0.0,
+   "gap_near1": 49.37,
+   "min_metal_skin": 0.74,
+   "inband_member": {
+    "hub1": 1.0,
+    "hub2": 0.0,
+    "hub3": 0.6741,
+    "link1": 0.5971,
+    "link2": 0.0493,
+    "neck": 0.6549
+   }
+  },
+  "straight_12mm_same_axes": {
+   "gap": 53.06,
+   "reach": 0.875,
+   "inband14": 0.3944,
+   "contact": 0.0,
+   "gap_near1": 53.06,
+   "min_metal_skin": 2.0,
+   "inband_member": {
+    "hub1": 1.0,
+    "hub2": 0.0,
+    "hub3": 0.6741,
+    "link1": 0.3569,
+    "link2": 0.0504,
+    "neck": 0.6549
+   }
+  },
+  "dilution": {
+   "ib_sample": 0.50395,
+   "ib_link1_at_245": 0.49387,
+   "gap_at_245": 43.73,
+   "points": 1.01
+  }
+ }
+}
