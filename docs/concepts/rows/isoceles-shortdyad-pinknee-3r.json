@@ -1,0 +1,60 @@
+{
+ "id": "isoceles-shortdyad-pinknee-3r",
+ "name": "Isoceles short-dyad pin knee (cx-0 knee-class frontier, seeds A / B / C)",
+ "lens": "round501:cx0-knee-frontier (lens A)",
+ "family": "pin-knee 3R, cx 0",
+ "active_dof": 3,
+ "passive_dof": 2,
+ "passive_translations": 0,
+ "status": "screened",
+ "t_ideated": null,
+ "t_screened": "2026-10-19T02:51:33Z",
+ "reach": 0.6375,
+ "follow": 0.95,
+ "inband14": 0.8189,
+ "inband10": null,
+ "contact": 0.0124,
+ "gap": 35.6,
+ "v_reach": null,
+ "v_follow": null,
+ "v_inband14": null,
+ "v_inband10": null,
+ "v_gap": null,
+ "n_configs": 19,
+ "verdict": "IN PROGRESS: first measured configs (seed A at the proposer's knee, kj=1: 35.6 plain / 36.85 near-touch fast; B 54.6-56.7, B2b 81.8+, C 93.6+ at the coarse knee). CMA running.",
+ "limiter": "fold 40 of 220 fast poses at every b3 (window [9.4, 80.3]); overhead 1/12 fast",
+ "note": "preliminary",
+ "doc": "docs/concepts/isoceles-shortdyad-pinknee-3r.md",
+ "mechanism": {
+  "joints": [
+   {
+    "name": "J1",
+    "kind": "pin",
+    "active": true,
+    "component": "O20 v5 hub, MR117-2RS pair"
+   },
+   {
+    "name": "J2",
+    "kind": "pin",
+    "active": true,
+    "component": "O20 v5 hub, MR117-2RS pair"
+   },
+   {
+    "name": "J3",
+    "kind": "pin",
+    "active": true,
+    "component": "O20 v5 hub, MR117-2RS pair, own-angle dowel stop"
+   }
+  ],
+  "cuff_knee": {
+   "pins": 2,
+   "component": "MR63ZZ pairs",
+   "encoders": 0
+  },
+  "passive_translations": 0,
+  "springs": 0,
+  "loops": 0,
+  "sliding_pairs": 0,
+  "complexity": 0
+ }
+}
