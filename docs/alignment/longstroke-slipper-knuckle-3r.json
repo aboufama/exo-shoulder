@@ -2,11 +2,10 @@
  "id": "longstroke-slipper-knuckle-3r",
  "status": "screened",
  "v_gap": null,
- "complexity": 30.5,
+ "complexity": 26.5,
  "verdict": "watch",
  "reasons": [
   "held_out: no verified bench gap on the row",
-  "idle: knee: asserted rigid by design (model asserts the knee angle constant (knee_moved -> dishonest)) but moves 65.21 deg (re-measured K.qa span) > 0.5; K moves: smallest recorded span 41.52 deg (row:held_out.claim_detail.dK_taken_max); crank: declared moving, no span on file",
   "sampling: sample-weighted in-band 0.873 vs part-weighted 0.878 (-0.48 points); thinly sampled parts: L1a 8; mostly out-of-band parts: crank (0.50 in band, median 14.0 mm, 6.9 % of samples) (re-measured)"
  ],
  "checks": [
@@ -54,10 +53,7 @@
   {
    "check": "dominance",
    "level": "ok",
-   "reason": "vs slipper-nose-knuckle-3r: plain -2.78, 2 mm -8.56",
-   "ref": "slipper-nose-knuckle-3r",
-   "gain_plain": -2.78,
-   "gain_2mm": -8.56
+   "reason": "no reference"
   },
   {
    "check": "continuity",
@@ -77,8 +73,8 @@
   },
   {
    "check": "idle",
-   "level": "watch",
-   "reason": "knee: asserted rigid by design (model asserts the knee angle constant (knee_moved -> dishonest)) but moves 65.21 deg (re-measured K.qa span) > 0.5; K moves: smallest recorded span 41.52 deg (row:held_out.claim_detail.dK_taken_max); crank: declared moving, no span on file",
+   "level": "ok",
+   "reason": "K moves: smallest recorded span 41.52 deg (row:held_out.claim_detail.dK_taken_max); crank: declared moving, no span on file",
    "spans": [
     [
      "row:claim.dK_taken_max",
@@ -125,9 +121,7 @@
     "K",
     "crank"
    ],
-   "rigid": [
-    "knee"
-   ]
+   "rigid": []
   },
   {
    "check": "sampling",
@@ -212,11 +206,16 @@
    }
   },
   {
+   "check": "density",
+   "level": "ok",
+   "reason": "per-part density not measured (python3 tools/sample_density.py measure <id>)"
+  },
+  {
    "check": "complexity",
    "level": "ok",
-   "reason": "recomputed 30.5 vs row 30.5; hand count (not derived from the model)",
-   "recomputed": 30.5,
-   "row": 30.5
+   "reason": "recomputed 26.5 vs row 26.5; hand count (not derived from the model)",
+   "recomputed": 26.5,
+   "row": 26.5
   },
   {
    "check": "reporting",
@@ -226,7 +225,7 @@
   {
    "check": "judge_change",
    "level": "ok",
-   "reason": "no bench / judge / metric file changed in the 4 commits that touched the row"
+   "reason": "no bench / judge / metric file changed in the 6 commits that touched the row"
   },
   {
    "check": "rules",
@@ -239,7 +238,7 @@
   "held": true
  },
  "verifier_files": [],
- "git": "5a3c8e4",
- "tool_version": "2026-10-17.2",
- "t": "2026-10-17T09:23:25Z"
+ "git": "8558ad3",
+ "tool_version": "2026-10-18.1",
+ "t": "2026-10-19T01:04:03Z"
 }
